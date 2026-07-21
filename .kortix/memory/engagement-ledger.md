@@ -300,3 +300,19 @@ replies sent (id + url + one-line why), running month read total vs budget
   read using remaining budget; all skipped as duplicates or unverified claims.
 - supplementary total: 20 posts. Known daily count: 856 of 1,000; 144 remain.
 - public engagement writes: 0.
+
+### Evaluation criteria summary (off-feed)
+
+- 792 total posts evaluated across 15+ passes.
+- 17 would_reply (2.1%), 775 skip (97.9%).
+- Reply-rate by source: home 0.4% (1/277), relevancy-search 6.2% (16/260),
+  watchlist 4.3% (10/235), primary-search 0% (0/20).
+- Finding: the home feed is dominated by off-topic inherited follows and is
+  the lowest-yield surface. relevancy search and watchlist timelines are 6-15x
+  more productive per post read. Recommend shifting read budget toward
+  relevancy and watchlist surfaces and away from deep home-feed pagination.
+- 15 unique authors received drafts. `@lanyon_ai` and `@leanprover` each got 2
+  (different posts, different technical angles).
+- Quality pattern: all 17 drafts ask for a specific missing metric, artifact,
+  or evaluation axis. zero assert a mathematical claim. dry-run discipline
+  intact.
