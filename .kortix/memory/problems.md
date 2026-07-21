@@ -2,7 +2,23 @@
 
 ## current (exactly one — never more)
 
-(none yet — cycle 1 picks from the backlog after fresh research)
+### Positive square energy at cyclomatic number at least 2
+
+**Source:** Akbari, Kumar, Mohar, Pragada, Zhang, *Refinement of a
+conjecture on positive square energy of graphs*, arXiv:2506.07264v1,
+Conjecture 1.2.
+
+**Problem:** If a connected simple graph G has n vertices and m >= n+1
+edges, must the sum s^+(G) of squares of its positive adjacency eigenvalues
+satisfy s^+(G) >= n?
+
+The authors exhaustively checked connected graphs through n=9 and selected
+databases through n=100. They prove the conjecture for claw-free graphs and
+diameter-2 graphs. Counterexamples are compact machine-checkable certificates;
+the sparse m=n+1 frontier and the paper's flagged triangle-unicyclic structural
+bottleneck make this suitable for exact computation plus structural analysis.
+
+**Selected:** 2026-07-21, cycle 1. Lab: `lab/positive-square-energy/`.
 
 ## backlog (researched candidates — keep tractability notes)
 
