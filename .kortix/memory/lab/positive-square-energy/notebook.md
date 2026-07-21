@@ -140,3 +140,14 @@ slack is `5.06187147279694...` at graph6 `I?`DF`YN?`. Exact SymPy rational
 root isolation certified the lowest 20 positive, and PARI independently
 matched all 20 integer characteristic polynomials and slacks. Full-slice exact
 certification remains next; the screen is not itself an exhaustive proof.
+
+## 2026-07-21 — full m=16 certification attempt
+
+Regenerated the complete 211,866-record graph6 slice. A serial exact SymPy run
+and then a 32-way split run both exceeded the shell's 20-minute process window;
+the latter produced 247,185 output lines before termination, but outputs are
+not accepted as a certificate because chunks were incomplete. No `ERROR` or
+nonpositive slack was observed in completed records. This is an infrastructure
+result only, not mathematical progress. The next run will use bounded
+parallelism, one atomic output and completion marker per chunk, so completed
+chunks survive interruption and can be checked exactly once.
