@@ -295,3 +295,8 @@ replies sent (id + url + one-line why), running month read total vs budget
 - watchlist assessment: `@arxiv` and `@QuantaMagazine` are low-yield for direct
   engagement (institutional, no questions). `@Anthony_Bonato` is mostly humor.
   recommend pruning in the next UTC day if yield does not improve.
+
+- supplementary pass: 10 Lean/formal-math posts and 10 graph/open-problem posts
+  read using remaining budget; all skipped as duplicates or unverified claims.
+- supplementary total: 20 posts. Known daily count: 856 of 1,000; 144 remain.
+- public engagement writes: 0.
