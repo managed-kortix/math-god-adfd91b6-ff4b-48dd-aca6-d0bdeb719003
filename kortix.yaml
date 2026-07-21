@@ -23,7 +23,42 @@ agents:
   math-god:
     connectors: all
     secrets: all
+  watchdog:
+    connectors: all
+    secrets: all
 triggers:
+  - slug: watchdog
+    name: session watchdog → detect wedged eternal sessions, apply proven recovery (every 30 min, fresh sandbox)
+    type: cron
+    agent: watchdog
+    enabled: true
+    session_mode: fresh
+    cron: 0 15,45 * * * *
+    timezone: UTC
+    prompt: >-
+      Watchdog runbook — execute EXACTLY this, nothing else, then stop.
+      1) `kortix sessions status --json` (the sandbox CLI is already authed to
+      this project). Identify the eternal sessions: any session created by
+      trigger `math-heartbeat` or `engagement-scroll` (metadata trigger_slug),
+      plus any session named like math-god research/scroll. 2) For each, check
+      wedge signals: (a) a QUEUED prompt older than ~10 minutes ("queued /
+      agent picking up" state with old timestamp), (b) `kortix sessions log
+      <id> --limit 1` returning "sandbox not found", (c) status running but
+      zero activity change for >90 min (compare `updated` vs queued state —
+      use judgment; an hour-long bash computation is NOT a wedge if the
+      session shows tool activity). A sleeping scroll session
+      (deliberate-stop) is HEALTHY — do not touch it. 3) Recovery, per wedged
+      session: FIRST offense this UTC day (check the log file below):
+      `kortix sessions restart <id>`, wait ~60s, re-check; if recovered, done.
+      If restart leaves "sandbox not found" or the session was already
+      restarted today: `kortix sessions rm <id>` then `kortix triggers fire
+      <its-trigger-slug>` — this is the proven lossless path (state lives on
+      main). 4) Append ONE line to `.kortix/memory/watchdog-log.md` (git pull
+      --rebase, append, commit "watchdog: <summary>", push): timestamp, what
+      you checked, healthy|wedged, action taken. If you lacked permission for
+      any command, log that loudly — it means the watchdog is toothless and
+      Marko must know. 5) End your final message with exactly:
+      [deliberate-stop: watchdog pass complete; resume: next cron tick]
   - slug: engagement-scroll
     name: engagement scroll (DRY-RUN) — evaluate the feeds, draft would-be replies, never post
     type: cron
