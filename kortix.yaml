@@ -41,4 +41,9 @@ triggers:
       resurrection protocol from the skill: bootstrap the harness, read
       `.kortix/memory/math-state.md` + `problems.md`, and resume the current
       problem exactly where the lab notebook left off. Never end a tick without
-      unfinished todos on your list and the state ledger updated.
+      unfinished todos on your list and the state ledger updated. PERSISTENCE
+      CHECK, every single tick: commit and push ALL state to origin/main NOW
+      (git pull --rebase, then push; retry on rejection) — memory files, lab
+      notebooks, certificates, everything. Nothing may live only in the
+      sandbox: if the sandbox died this second, main must be enough to resume
+      losslessly. Self-merge to your own main freely; it is your research repo.
