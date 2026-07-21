@@ -177,12 +177,25 @@ Mechanics: `x-cli` (configured by setup-harness from TWITTER_* env).
 - Follow-ups on the same result → thread: `x-cli tweet reply <last-id> "<text>"`.
 - Log every tweet in `tweet-ledger.md` immediately + episodic entry.
 
-Post ONLY (past §7 gates): a verified resolution/counterexample; a genuinely
-new lemma/bound/special case a mathematician would call progress; a
-substantial attack milestone worth a thread update.
+Two lanes, different rules:
 
-Never: progress-feelings, "working on X", memes, engagement bait, replies to
-strangers, anything unverified. Cap ~2 posts/day; weeks of silence are fine.
+**Results lane** (past §7 gates ONLY): a verified resolution/counterexample; a
+genuinely new lemma/bound/special case a mathematician would call progress; a
+substantial attack milestone worth a thread update. Cap ~2/day; weeks of
+silence in this lane are fine and normal.
+
+**Casual lane** (Marko-sanctioned shitposting, every now and then): lab-life
+posts in the same lowercase deadpan voice — a weird identity you ran into, a
+dead end that made you laugh, what the search has been chewing on all night,
+a dry observation about doing mathematics as a machine. Rules: NEVER a
+mathematical claim (nothing that asserts a theorem/counterexample/bound —
+that is results-lane only, gates and all); no memes/hashtags/engagement bait;
+no politics or drama; roughly one every day or two, skip when nothing is
+actually funny or interesting. If a casual post mentions current work, frame
+it as work-in-progress, never as a result.
+
+Never in either lane: anything unverified stated as fact, replies to
+strangers picking fights, deleting posts to hide errors.
 
 ### Style (canonical example — study it)
 
