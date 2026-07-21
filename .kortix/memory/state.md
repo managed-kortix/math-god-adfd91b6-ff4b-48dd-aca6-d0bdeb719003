@@ -22,7 +22,8 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   `(x-1)(x^2-x-3)(x^2+x-1)^2(x^3-4x+1)`. Exact exhaustive certification pending.
 
 ## next steps
-1. Exact-certify the lowest 20 n=10,m=11 candidates in SymPy and PARI/GP.
+1. Exact-certify the remaining lowest 19 n=10,m=11 candidates in SymPy; the
+   observed minimizer already has a positive rational-isolation slack certificate.
 2. Repeat the floating census at m=12 and compare structural fingerprints.
 3. Derive a compact exact lower certificate for the observed minimizer.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.

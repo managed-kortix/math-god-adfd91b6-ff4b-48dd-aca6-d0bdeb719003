@@ -34,3 +34,13 @@ decoder. SymPy factors its exact adjacency characteristic polynomial as
 certified exhaustive bound: exact root-isolation certificates for the low
 candidates and a second-engine pass remain required. The factorized minimizer
 is highly structured and is the first object for exact analysis.
+
+**First exact check.** `exact_certify.py` was run in a fresh Python process on
+graph6 `I?`D@POd?`. SymPy exact rational root isolation (width < 10^-30)
+certified five positive roots counting multiplicity and
+
+`0.593873751236949402 < s^+(G)-10 < 0.593873751236949403`.
+
+Thus this particular observed minimizer rigorously satisfies the conjectured
+bound. This is only the first-engine certificate for one graph; exact checks
+of the remaining low tail and PARI independence are still queued.
