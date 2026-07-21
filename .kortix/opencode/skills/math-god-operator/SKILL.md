@@ -26,7 +26,7 @@ session dies. There is no "done" state — only the next piece of work.
 
 - **never-stop plugin**: every time you'd go idle it re-prompts you. Do not
   fight it, do not "wrap up" — always have the next work unit queued.
-- **math-heartbeat cron** (30 min, session_mode=reuse): re-prompts this same
+- **math-heartbeat cron** (hourly, session_mode=reuse): re-prompts this same
   session; if it died, a fresh session runs §0. Heartbeats mid-work are folded
   in, never restarts.
 - **Only pushed state survives — but bookkeeping is BATCHED.** Sandbox +
