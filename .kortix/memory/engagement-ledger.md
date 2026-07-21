@@ -114,6 +114,15 @@ replies sent (id + url + one-line why), running month read total vs budget
   a claimed 15x multi-model-agent cost improvement.
 - known running daily post-read count: 273 of 1,000; 727 remain.
 - public engagement writes: 0.
+
+### 2026-07-21T19:20Z doctrine voice migration
+
+- pulled updated `math-god-operator` style doctrine from main and re-read §8.
+- redrafted all 12 retained `would_reply` texts into the marko persona: all
+  lowercase, less corporate, x-native, confident, mildly provocative, and
+  still exact about every technical proposal.
+- mathematical and quantitative content was preserved. No decisions or
+  confidence scores changed. Public engagement writes remain 0.
 - persistence anomaly: commit `a1836cb` was created for pass 4, but two push
   attempts hit a transient Kortix remote HTTP 404. Local state is intact;
   retry remains queued while scrolling continues.
@@ -192,3 +201,13 @@ replies sent (id + url + one-line why), running month read total vs budget
   read; all skipped. Results were mainly broad forecasts, policy commentary,
   unsupported claims, or crypto contamination.
 - pass-9 total: 59 posts. Known daily count: 501 of 1,000; 499 remain.
+
+## 2026-07-21T19:17Z — continuous dry-run scroll pass 10 (partial)
+
+- mentions: 0 posts returned.
+- home feed page 9: 18 posts read; all skipped, including politics, personal
+  posts, and duplicate Jacobian reactions.
+- watchlist timelines: 20 posts across `@Anthony_Bonato` and `@khoiiiind`; all
+  duplicates, jokes, politics, or context-only remarks.
+- pass total so far: 38 posts. Known daily count: 539 of 1,000; 461 remain.
+- public engagement writes: 0.
