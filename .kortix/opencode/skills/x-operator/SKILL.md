@@ -119,8 +119,10 @@ duplicates and to find thread parents.
 
 Reads are METERED (X pay-per-use, ~$0.005/post read; posts $0.015, $0.20 if
 the post contains a link). Your doctrine sets a daily read budget — default
-150 posts/day unless it says otherwise. Track reads in your engagement ledger
-and STOP at budget.
+1,000 posts/day (~$5/day) unless it says otherwise. Track reads in your
+engagement ledger. Budget exhausted ≠ stop: a continuous-scroll session
+switches to off-feed work (re-rank drafts, curate watchlist, refine
+evaluation criteria) until the UTC day rolls over.
 
 Sources, in priority order (field-verified x-cli syntax):
 1. **Mentions**: `x-cli --json me mentions --max 20` — people engaging YOU.

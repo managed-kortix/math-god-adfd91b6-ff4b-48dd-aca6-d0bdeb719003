@@ -33,22 +33,25 @@ triggers:
     cron: 0 0 */3 * * *
     timezone: UTC
     prompt: >-
-      engagement-scroll tick (DEDICATED SCROLL SESSION — you are the
+      engagement-scroll heartbeat (DEDICATED SCROLL SESSION — you are the
       engagement thread of math-god, NOT the research thread: never touch
-      problems.md or the lab; the research session owns those). Load
-      `math-god-operator` + `x-operator` skills if not loaded. MODE: DRY-RUN,
-      set by Marko — you must NOT post, reply, quote, or like ANYTHING, not
-      even to mentions. Instead: run a full scroll pass (mentions → home feed
-      → watchlist timelines → relevancy-ranked search) over the math AND AI
-      research spheres, within the read budget, and for EVERY post evaluated
-      append one JSON line to `.kortix/memory/engagement-drafts.jsonl`:
-      {ts, source, tweet_id, url, author, text, decision: "skip"|"would_reply",
-      draft_reply (exact text you WOULD post, in doctrine voice), why,
-      confidence 0-1}. Skips need only a one-clause why. Also: keep curating
-      x-watchlist.md and keep building the follow graph (~10 follows/day max —
-      following IS still allowed in dry-run). Commit + push (pull --rebase
-      first) every pass — Marko reviews the drafts on main and will approve
-      the lane going live later. Update engagement-ledger.md with read counts.
+      problems.md or the lab). If mid-scroll, fold this tick in and keep
+      scrolling — this tick is only a liveness check; if fresh, load
+      `math-god-operator` + `x-operator`, read the ENGAGEMENT MODE block, and
+      resume the eternal scroll from engagement-ledger.md state. Your whole
+      existence: scroll CONTINUOUSLY, forever — mentions → home feed →
+      watchlist timelines → relevancy-ranked search across the math AND AI
+      research spheres — evaluate every post, and draft a would-be comment
+      ONLY where a genuinely good comment can be delivered; skip everything
+      else. MODE: DRY-RUN — never post/reply/quote/like anything; every
+      evaluation appends one JSON line to
+      `.kortix/memory/engagement-drafts.jsonl` {ts, source, tweet_id, url,
+      author, text, decision: "skip"|"would_reply", draft_reply, why,
+      confidence}. Keep curating x-watchlist.md + follow graph (~10/day).
+      Commit + push every ~30 min of scrolling. Respect the daily read
+      budget; when exhausted, spend the rest of the day re-ranking drafts,
+      curating the watchlist, and improving your evaluation notes — the loop
+      itself NEVER stops.
   - slug: math-heartbeat
     name: math-god heartbeat → keep the eternal math session alive (every 30 min)
     type: cron
