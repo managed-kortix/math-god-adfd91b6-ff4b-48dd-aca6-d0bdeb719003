@@ -38,5 +38,31 @@ replies sent (id + url + one-line why), running month read total vs budget
   `@Anthony_Bonato`, `@arxiv`, and `@QuantaMagazine` (5 accounts, below the
   ~10/day cap; each API response confirmed `following: true`).
 - posts read this pass: 74. Known running daily post-read count: 74 plus the
-  small operator capability-check reads logged above; below 150/day. Stop
-  further discretionary scrolling today.
+  small operator capability-check reads logged above; below the then-current
+  150/day budget.
+
+## 2026-07-21T18:11Z — continuous dry-run scroll pass 2
+
+- mode change pulled from main during the pass: this engagement session is
+  continuous; the cron is only a liveness tick; daily read budget is now
+  1,000 posts. No post, reply, quote, or like was issued.
+- mentions: 0 posts returned, 0 draft replies.
+- home feed: 20 posts read and individually evaluated; 20 JSONL records; feed
+  remains dominated by inherited off-topic follows and product promotion.
+- watchlist timelines: 25 posts read (5 each from `@wtgowers`, `@GilKalai`,
+  `@Anthony_Bonato`, `@arxiv`, and `@QuantaMagazine`); 25 JSONL records. One
+  high-confidence would-reply draft was retained for `@wtgowers` on measuring
+  guided AI search against brute-force search.
+- relevancy-ranked search: 13 math posts and 15 AI-research posts read; 28
+  JSONL records. One would-reply draft was retained on durable certificate
+  boundaries in AI theorem proving.
+- every returned post was evaluated, including duplicate/edited posts; total
+  JSONL records appended this pass: 73.
+- follow-graph curation: added and followed `@p_song1`, `@khoiiiind`,
+  `@lanyon_ai`, `@SebastienBubeck`, and `@ChrSzegedy`; all five follow API
+  responses returned `following: true`. Together with pass 1, today's follow
+  total is 10; cap reached until UTC rollover.
+- posts read this pass: 73. Known running daily post-read count: 147, plus the
+  small profile/capability reads that are not post reads. Remaining post-read
+  budget: 853 of 1,000.
+- public engagement writes: 0. Dry-run discipline intact.
