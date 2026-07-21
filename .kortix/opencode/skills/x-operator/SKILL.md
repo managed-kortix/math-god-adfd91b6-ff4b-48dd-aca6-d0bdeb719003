@@ -142,6 +142,17 @@ Sources, in priority order (field-verified x-cli syntax):
    watchlist is the interim scroll.
 4. **Targeted search**: `x-cli --json tweet search "<query>" --max 20` on
    your doctrine's topics/queries — catches what the follow graph misses.
+5. **Recommended-posts pass** (the closest sanctioned thing to "For You"):
+   relevancy-ranked search — X's own ranking algorithm applied to your topics:
+   ```
+   GET https://api.twitter.com/2/tweets/search/recent
+       ?query=<topic>&sort_order=relevancy&max_results=25
+       &tweet.fields=author_id,created_at,public_metrics
+   ```
+   (OAuth1/bearer-signed raw call; x-cli's search doesn't expose sort_order.)
+   Run it over your doctrine's topic queries — what comes back is what X's
+   algorithm considers the posts worth seeing on those topics right now.
+   Treat exactly like feed posts: evaluate each, mostly scroll past.
 
 Note: the algorithmic "For You" feed has NO public API and scraping it from
 the web app violates X ToS and endangers the account — never do that. The
