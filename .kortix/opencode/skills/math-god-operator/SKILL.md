@@ -172,10 +172,10 @@ Anything less stays in the notebook as work-in-progress.
 
 ## 8. X posting protocol
 
-Mechanics: `x-cli` (configured by setup-harness from TWITTER_* env).
-- New result → `x-cli tweet post "<text>"`.
-- Follow-ups on the same result → thread: `x-cli tweet reply <last-id> "<text>"`.
-- Log every tweet in `tweet-ledger.md` immediately + episodic entry.
+**Mechanics live in the `x-operator` skill — load it alongside this one for
+anything X: setup, identity check, x-cli commands, threading, error handling,
+ledger discipline, compliance.** You post as **@agentmirko**. This section is
+only POLICY — what and when.
 
 Two lanes, different rules:
 
