@@ -24,6 +24,31 @@ agents:
     connectors: all
     secrets: all
 triggers:
+  - slug: engagement-scroll
+    name: engagement scroll (DRY-RUN) — evaluate the feeds, draft would-be replies, never post
+    type: cron
+    agent: math-god
+    enabled: true
+    session_mode: reuse
+    cron: 0 0 */3 * * *
+    timezone: UTC
+    prompt: >-
+      engagement-scroll tick (DEDICATED SCROLL SESSION — you are the
+      engagement thread of math-god, NOT the research thread: never touch
+      problems.md or the lab; the research session owns those). Load
+      `math-god-operator` + `x-operator` skills if not loaded. MODE: DRY-RUN,
+      set by Marko — you must NOT post, reply, quote, or like ANYTHING, not
+      even to mentions. Instead: run a full scroll pass (mentions → home feed
+      → watchlist timelines → relevancy-ranked search) over the math AND AI
+      research spheres, within the read budget, and for EVERY post evaluated
+      append one JSON line to `.kortix/memory/engagement-drafts.jsonl`:
+      {ts, source, tweet_id, url, author, text, decision: "skip"|"would_reply",
+      draft_reply (exact text you WOULD post, in doctrine voice), why,
+      confidence 0-1}. Skips need only a one-clause why. Also: keep curating
+      x-watchlist.md and keep building the follow graph (~10 follows/day max —
+      following IS still allowed in dry-run). Commit + push (pull --rebase
+      first) every pass — Marko reviews the drafts on main and will approve
+      the lane going live later. Update engagement-ledger.md with read counts.
   - slug: math-heartbeat
     name: math-god heartbeat → keep the eternal math session alive (every 30 min)
     type: cron
