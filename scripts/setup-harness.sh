@@ -37,6 +37,11 @@ if ! command -v x-cli >/dev/null 2>&1 && ! "$HOME/.local/bin/x-cli" --help >/dev
     || log "WARN: x-cli install failed"
 fi
 
+# make sure uv tools (x-cli) are on PATH in every future shell
+export PATH="$HOME/.local/bin:$PATH"
+grep -qs 'HOME/.local/bin' "$HOME/.bashrc" 2>/dev/null \
+  || echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
+
 # x-cli config from the Kortix-injected TWITTER_* secrets
 mkdir -p "$HOME/.config/x-cli"
 if [ -n "${TWITTER_CONSUMER_KEY:-}" ]; then

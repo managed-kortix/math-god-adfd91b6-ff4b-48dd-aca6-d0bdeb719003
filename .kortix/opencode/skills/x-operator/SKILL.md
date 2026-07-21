@@ -42,10 +42,9 @@ current env (re-run the harness script) — a stale config is the usual cause.
 
 ## 3. Identity check (do this before your first post of a session)
 
-```
-x-cli user me            # or:
-curl (OAuth1-signed) https://api.twitter.com/2/users/me
-```
+x-cli has NO identity subcommand — verify with an OAuth1-signed
+`GET https://api.twitter.com/2/users/me` (python `requests_oauthlib`
+one-liner using the TWITTER_* env).
 
 Confirm the handle matches the account your doctrine says you operate. On
 401: credentials are dead/rotated — stop all X work, surface it to the
@@ -53,18 +52,23 @@ operator in your state/ledger, continue non-X work.
 
 ## 4. Posting, threading, deleting (x-cli reference)
 
+Field-verified syntax (2026-07-21): the binary lands at `~/.local/bin/x-cli`
+(ensure it's on PATH — the harness script handles this), and `--json` is a
+GLOBAL flag that goes BEFORE the subcommand.
+
 ```
-x-cli tweet post "text"                  # new post → returns tweet id
-x-cli tweet reply <id> "text"            # reply — THIS is how threads work
-x-cli tweet quote <id> "text"            # quote-post
-x-cli tweet delete <id>                  # remove a post
-x-cli tweet show <id>                    # read one post back
-x-cli search "query"                     # recent search
-x-cli user lookup <handle>               # user info
-x-cli timeline [<handle>]                # timelines
+x-cli --json tweet post "text"           # new post → returns tweet id
+x-cli --json tweet reply <id> "text"     # reply — THIS is how threads work
+x-cli --json tweet quote <id> "text"     # quote-post
+x-cli --json tweet delete <id>           # remove a post
+x-cli --json tweet get <id>              # read one post back (NOT "show")
+x-cli --json search "query"              # recent search
+x-cli --json user get <handle>           # user info (NOT "lookup")
+x-cli --json timeline [<handle>]         # timelines
 ```
 
-- Prefer `--json` output and parse ids programmatically; never eyeball-copy.
+- Always `--json` and parse ids programmatically; never eyeball-copy.
+- Unsure of syntax? `x-cli --help` / `x-cli tweet --help` before guessing.
 - **Threading protocol**: a thread is a chain of replies to your own last
   post. Keep the chain: reply to the LATEST id in the thread, not the root.
   Record every id in your ledger immediately (see §6).
