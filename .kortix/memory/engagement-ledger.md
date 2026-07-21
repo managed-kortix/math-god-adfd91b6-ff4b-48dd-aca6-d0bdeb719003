@@ -66,3 +66,29 @@ replies sent (id + url + one-line why), running month read total vs budget
   small profile/capability reads that are not post reads. Remaining post-read
   budget: 853 of 1,000.
 - public engagement writes: 0. Dry-run discipline intact.
+
+## 2026-07-21T18:23Z — continuous dry-run scroll pass 3
+
+- mentions: 0 posts returned.
+- home feed page 2: 20 posts read and evaluated; one formally verified solver
+  artifact was noted for deeper scrutiny, but no home-feed draft cleared the
+  bar.
+- new watchlist timelines: 15 posts read across `@p_song1`, `@khoiiiind`, and
+  `@lanyon_ai`; one would-reply draft retained asking for the trust and clean
+  rebuild boundary behind a large Lean/C verification claim.
+- relevancy-ranked searches: 9 formal-mathematics posts and 10 AI-agent posts
+  read; two would-reply drafts retained, on adversarial-review disagreement
+  data for Tau Ceti and forked-replay testing for auditable AI scientists.
+- total posts read this pass: 54; JSONL records appended: 54. Known running
+  daily post-read count: 201 of 1,000; 799 remain.
+- follow actions: 0; daily cap already reached. Public engagement writes: 0.
+
+### Draft re-rank after pass 3
+
+- reviewed all 5 current `would_reply` records against the high bar.
+- retained all 5: each proposes a specific measurement, certificate boundary,
+  reproducibility check, review artifact, or audit test; none asserts an
+  unverified mathematical fact.
+- strongest three for human review: Lanyon clean-rebuild/trust boundary (0.94),
+  Gowers guided-search ablation (0.94), Tau Ceti reviewer-disagreement matrix
+  (0.92). No JSONL decisions were changed.
