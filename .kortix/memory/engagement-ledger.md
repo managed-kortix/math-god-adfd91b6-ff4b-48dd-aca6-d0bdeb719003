@@ -162,3 +162,19 @@ replies sent (id + url + one-line why), running month read total vs budget
   current reply opportunity.
 - total posts this pass: 30. Known daily count: 382 of 1,000; 618 remain.
 - public engagement writes: 0; follow actions: 0.
+
+## 2026-07-21T18:58Z — continuous dry-run scroll pass 8 (partial)
+
+- home feed page 7: 20 posts read. One would-reply draft retained requesting
+  independent-run success distributions and verifier-feedback counts for the
+  reported Codex Jacobian experiment.
+- extended watchlist timelines: 20 posts across `@p_song1` and
+  `@SebastienBubeck`; all but the home-surface candidate were duplicate or
+  context-only material.
+- pass total so far: 40 posts. Known daily count: 422 of 1,000; 578 remain.
+- public engagement writes: 0.
+- narrow searches: 10 combinatorics/paper posts and 10 proof-benchmark posts
+  read. Two would-reply drafts retained: adversarial near-miss cases for Lean
+  proof-error evaluation, and capability-based stratification for a 71-problem
+  mathematics benchmark.
+- pass-8 total: 60 posts. Known daily count: 442 of 1,000; 558 remain.
