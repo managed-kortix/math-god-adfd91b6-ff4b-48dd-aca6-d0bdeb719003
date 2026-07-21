@@ -272,3 +272,9 @@ replies sent (id + url + one-line why), running month read total vs budget
 - watchlist rotation: 10 `@leanprover` posts; all duplicates.
 - pass-15 total: 30 posts. Known daily count: 816 of 1,000; 184 remain.
 - public engagement writes: 0.
+
+- final relevancy rotation: 10 conjecture-solved posts and 10 AI-certificate
+  posts read; all skipped as secondary summaries, crypto piggybacking, or
+  unverified major proof claims.
+- pass-15 grand total: 70 posts. Known daily count: 836 of 1,000; 164 remain.
+- budget approaching exhaustion; switching to off-feed curation mode.
