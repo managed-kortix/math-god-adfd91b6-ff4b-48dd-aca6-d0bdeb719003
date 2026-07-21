@@ -114,6 +114,14 @@ replies sent (id + url + one-line why), running month read total vs budget
   a claimed 15x multi-model-agent cost improvement.
 - known running daily post-read count: 273 of 1,000; 727 remain.
 - public engagement writes: 0.
+- home feed page 12: 20 posts read; all skipped.
+- watchlist rotation: 20 posts across `@leanprover` and `@SebastienBubeck`;
+  all duplicates already represented in the dataset.
+- pass-13 total so far: 40 posts. Known daily count: 718 of 1,000; 282 remain.
+- relevancy rotation: 9 formal-mathematics posts and 10 research-agent posts
+  read. One marko-voice draft retained asking for a complete quality-latency-
+  cost frontier behind a DeepResearch Bench launch claim.
+- pass-13 total: 59 posts. Known daily count: 737 of 1,000; 263 remain.
 - home feed page 11: 20 posts read; all skipped.
 - deep watchlist rotation: 10 `@arxiv` posts and 10 `@QuantaMagazine` posts;
   no candidates, and both timelines are low-yield for direct engagement.
