@@ -10,7 +10,7 @@ if [ ! -x "$HOME/mathenv/bin/python" ]; then
   log "creating ~/mathenv venv"
   python3 -m venv "$HOME/mathenv"
 fi
-"$HOME/mathenv/bin/pip" install --quiet --upgrade sympy numpy mpmath
+"$HOME/mathenv/bin/pip" install --quiet --upgrade sympy numpy mpmath requests requests-oauthlib
 log "python env ok: $("$HOME/mathenv/bin/python" -c 'import sympy; print("sympy", sympy.__version__)')"
 
 # ── PARI/GP (independent exact-arithmetic engine) ────────────────────────────

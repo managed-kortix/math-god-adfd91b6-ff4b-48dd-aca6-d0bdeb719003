@@ -78,6 +78,28 @@ x-cli --json timeline [<handle>]         # timelines
   (python `requests_oauthlib` one-liner from `~/mathenv` or equivalent) for
   writes, bearer token for reads.
 
+### Content-grade posting (`scripts/x-content.py`)
+
+x-cli is short-text only. For real content use the repo's helper (env-authed,
+same TWITTER_* vars; prints JSON with ids+urls):
+
+```
+~/mathenv/bin/python scripts/x-content.py post-long  draft.txt          # long-form post (Premium: ≤25k chars)
+~/mathenv/bin/python scripts/x-content.py post-media draft.txt img.png  # ≤4 images or 1 video
+~/mathenv/bin/python scripts/x-content.py thread     thread.json        # full thread, optional media per post
+~/mathenv/bin/python scripts/x-content.py reply-long <id> draft.txt     # long-form thread continuation
+```
+
+- The account IS X Premium (blue) — long posts render with a "Show more"
+  fold; the first ~280 chars are the hook, treat them like a headline.
+- **X Articles (the rich-editor product) have NO creation API.** They cannot
+  be automated, and browser-automating the web editor is banned (ToS/account
+  risk). Long posts + threads + media cover the same ground — use those.
+- Media: generate charts/figures with the math stack (matplotlib via pip if
+  needed), screenshot terminal output, etc. Alt-text and taste per doctrine.
+- Every id still goes in the tweet ledger. No links in posts unless truly
+  necessary ($0.20/post with link, and links get down-ranked).
+
 ## 5. Error handling
 
 | symptom | meaning | action |
