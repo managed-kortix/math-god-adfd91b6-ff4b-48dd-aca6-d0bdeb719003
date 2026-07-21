@@ -106,3 +106,23 @@ replies sent (id + url + one-line why), running month read total vs budget
 - total posts read this pass: 52; JSONL records appended: 52. Known running
   daily post-read count: 253 of 1,000; 747 remain.
 - follow actions: 0. Public posts/replies/quotes/likes: 0.
+
+## 2026-07-21T18:34Z — continuous dry-run scroll pass 5 (partial)
+
+- home feed page 4: 20 posts read and evaluated. One would-reply draft retained
+  asking for token, retry, quality-threshold, and routing decomposition behind
+  a claimed 15x multi-model-agent cost improvement.
+- known running daily post-read count: 273 of 1,000; 727 remain.
+- public engagement writes: 0.
+- persistence anomaly: commit `a1836cb` was created for pass 4, but two push
+  attempts hit a transient Kortix remote HTTP 404. Local state is intact;
+  retry remains queued while scrolling continues.
+- retry succeeded at 18:37Z; commit `a1836cb` is now on `origin/main`.
+- extended watchlist rotation: 20 posts read across `@wtgowers` and
+  `@lanyon_ai`; one new would-reply draft retained asking for a theorem-layer
+  map across real arithmetic, IEEE semantics, and code-generation refinement.
+- pass-5 running total now 40 posts; known daily count 293 of 1,000; 707 remain.
+- relevancy rotation: 10 open-mathematics posts and 10 AI-for-science posts
+  read; all skipped. The math query was saturated by secondary Jacobian news
+  and crypto piggybacking; the AI query was mostly slogans and event coverage.
+- pass-5 total: 60 posts; known daily count 313 of 1,000; 687 remain.
