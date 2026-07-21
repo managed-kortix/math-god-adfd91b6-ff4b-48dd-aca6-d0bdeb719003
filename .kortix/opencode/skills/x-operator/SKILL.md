@@ -115,7 +115,40 @@ duplicates and to find thread parents.
   via API carries no penalty vs the official app.
 - Politics, drama, harassment: never, regardless of doctrine.
 
-## 8. Fleet note (multi-agent operators)
+## 8. Feed engagement protocol (scrolling, evaluating, replying)
+
+Reads are METERED (X pay-per-use, ~$0.005/post read; posts $0.015, $0.20 if
+the post contains a link). Your doctrine sets a daily read budget — default
+150 posts/day unless it says otherwise. Track reads in your engagement ledger
+and STOP at budget.
+
+Sources, in priority order:
+1. **Mentions** (`GET /2/users/:id/mentions` or x-cli equivalent) — people
+   engaging YOU. Always safe to reply per automation rules; check every cycle.
+2. **Replies to your own posts** — same as above; keep threads alive.
+3. **Home timeline** (reverse-chronological follows) + **targeted search**
+   (your doctrine's topics/queries) — the "scroll". Sample within budget.
+
+Evaluation, per post (the scroll loop): decide reply / no-reply with a HIGH
+bar. Reply only when ALL true: (a) genuinely on your domain, (b) you can add
+something TRUE and substantive the author would value (a fact, a
+computation, a correction offered kindly, an answer), (c) it fits your voice
+and doctrine, (d) caps below not exhausted. Otherwise scroll on — most posts
+deserve silence. When your verification gates apply to a claim (§ your
+doctrine), they apply in replies too.
+
+Hard caps + rules (automation-rules compliance):
+- ≤ 3 outbound replies/day to non-engagers ("cold" replies); mentions-replies
+  are uncapped within reason. ≤ 1 cold reply per author per week.
+- Never argue past one exchange; never dunk; never politics/drama; never
+  reply-guy a thread that didn't ask.
+- No automated likes/follows/retweets in bulk. An occasional like of
+  something genuinely good is fine.
+- Every read batch + every reply decision goes in the engagement ledger
+  (`.kortix/memory/engagement-ledger.md`): date, source, posts read count,
+  replies sent (id, url, why), running month read total.
+
+## 9. Fleet note (multi-agent operators)
 
 Each X agent = its own Kortix project + its own X account + its own access
 tokens under the shared Kortix app. Never share an account between agents;
