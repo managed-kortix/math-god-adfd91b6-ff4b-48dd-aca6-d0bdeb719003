@@ -152,3 +152,13 @@ replies sent (id + url + one-line why), running month read total vs budget
   durable certificate boundary (0.91).
 - no decision changes; duplicate surfaces continue to be logged as skips rather
   than generating repeated drafts.
+
+## 2026-07-21T18:52Z — continuous dry-run scroll pass 7
+
+- mentions: 0 posts returned.
+- home feed page 6: 20 posts read; all skipped as platform/product material or
+  duplicate AI-math coverage.
+- extended `@GilKalai` timeline: 10 posts read; all old or duplicate, with no
+  current reply opportunity.
+- total posts this pass: 30. Known daily count: 382 of 1,000; 618 remain.
+- public engagement writes: 0; follow actions: 0.
