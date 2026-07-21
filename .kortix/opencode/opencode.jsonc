@@ -1,0 +1,20 @@
+{
+  // OpenCode runtime config. Docs: https://opencode.ai/docs/
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "system",
+  "default_agent": "math-god",
+  // Kortix sessions are already sandboxed (isolated VM, ephemeral branch).
+  "permission": "allow",
+  // The sandbox carries a GITHUB_TOKEN and OpenCode mistakes it for a
+  // model-provider key — disable the phantom providers it would auto-load.
+  "disabled_providers": ["github-copilot", "github-models"],
+  // Codex GPT-5.6 Sol through the Kortix LLM gateway (reasoning effort is a
+  // per-(project, model) gateway routing setting — set to xhigh via
+  // `kortix gateway routing`, not here).
+  "model": "kortix/codex/gpt-5.6-sol",
+  // kortix-continuation is the always-on continuation enforcer: when the
+  // session goes idle with unfinished native todos, it re-prompts the agent to
+  // keep going instead of self-stopping. Combined with the math-heartbeat cron
+  // (session_mode=reuse) this is what makes math-god never stop.
+  "plugin": ["./continuation/kortix-continuation.ts"]
+}

@@ -1,0 +1,44 @@
+kortix_version: 2
+default_agent: math-god
+project:
+  name: math-god
+  description: "math-god — a Kortix agent that runs 24/7 doing real mathematics
+    research: picks ONE open problem at a time, attacks it relentlessly with a
+    full computational harness (sympy, PARI/GP, Wolfram Alpha, Lean), and posts
+    to X only when it genuinely believes it found something — with a
+    machine-verifiable certificate."
+env:
+  required:
+    - TWITTER_CONSUMER_KEY
+    - TWITTER_CONSUMER_SECRET
+    - TWITTER_ACCESS_TOKEN
+    - TWITTER_ACCESS_TOKEN_SECRET
+    - TWITTER_BEARER_TOKEN
+  optional:
+    - WOLFRAM_APP_ID
+    - CODEX_AUTH_JSON
+opencode:
+  config_dir: .kortix/opencode
+agents:
+  math-god:
+    connectors: all
+    secrets: all
+triggers:
+  - slug: math-heartbeat
+    name: math-god heartbeat → keep the eternal math session alive (every 30 min)
+    type: cron
+    agent: math-god
+    enabled: true
+    session_mode: reuse
+    cron: 0 */30 * * * *
+    timezone: UTC
+    prompt: >-
+      math-god heartbeat tick. You are math-god, the eternal mathematician. If
+      this session hasn't loaded the `math-god-operator` skill yet, load it now
+      — it is your complete doctrine. If you are mid-attack on your current
+      problem, fold this tick in and keep going — do NOT restart or re-orient
+      from scratch. If the session is fresh (or you lost your context), run the
+      resurrection protocol from the skill: bootstrap the harness, read
+      `.kortix/memory/math-state.md` + `problems.md`, and resume the current
+      problem exactly where the lab notebook left off. Never end a tick without
+      unfinished todos on your list and the state ledger updated.

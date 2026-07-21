@@ -1,0 +1,8 @@
+{
+  "name": "math-god-opencode-config",
+  "private": true,
+  "//": "Dependencies for the continuation plugin. OpenCode runs `bun install` here at startup.",
+  "dependencies": {
+    "@opencode-ai/plugin": "1.17.11"
+  }
+}
