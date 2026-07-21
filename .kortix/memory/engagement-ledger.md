@@ -114,6 +114,14 @@ replies sent (id + url + one-line why), running month read total vs budget
   a claimed 15x multi-model-agent cost improvement.
 - known running daily post-read count: 273 of 1,000; 727 remain.
 - public engagement writes: 0.
+- home feed page 11: 20 posts read; all skipped.
+- deep watchlist rotation: 10 `@arxiv` posts and 10 `@QuantaMagazine` posts;
+  no candidates, and both timelines are low-yield for direct engagement.
+- pass-12 total so far: 40 posts. Known daily count: 658 of 1,000; 342 remain.
+- relevancy rotation: 10 Ramsey/extremal posts and 10 AI-audit posts read. One
+  marko-voice draft retained asking for acceptance, revert, review-time,
+  escaped-defect, and difficulty metrics behind 3,800 autonomous PRs.
+- pass-12 total: 60 posts. Known daily count: 678 of 1,000; 322 remain.
 
 ### 2026-07-21T19:20Z doctrine voice migration
 
