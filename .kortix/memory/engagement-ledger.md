@@ -122,6 +122,19 @@ replies sent (id + url + one-line why), running month read total vs budget
   read. One marko-voice draft retained asking for a complete quality-latency-
   cost frontier behind a DeepResearch Bench launch claim.
 - pass-13 total: 59 posts. Known daily count: 737 of 1,000; 263 remain.
+
+## 2026-07-21T19:57Z — continuous dry-run scroll pass 14 (partial)
+
+- mentions: 0 posts returned.
+- home feed page 13: 20 posts read; all skipped.
+- watchlist rotation: 20 posts across `@p_song1` and `@GilKalai`; all
+  duplicates already represented in the dataset.
+- pass total so far: 40 posts. Known daily count: 777 of 1,000; 223 remain.
+- public engagement writes: 0.
+- relevancy rotation: 9 spectral/graph posts and 10 replication posts read.
+  One marko-voice draft retained demanding denominators and clean reruns behind
+  100-hour multi-agent mathematics sessions.
+- pass-14 total: 59 posts. Known daily count: 796 of 1,000; 204 remain.
 - home feed page 11: 20 posts read; all skipped.
 - deep watchlist rotation: 10 `@arxiv` posts and 10 `@QuantaMagazine` posts;
   no candidates, and both timelines are low-yield for direct engagement.
