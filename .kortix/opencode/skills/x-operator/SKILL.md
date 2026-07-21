@@ -126,20 +126,27 @@ Sources, in priority order (field-verified x-cli syntax):
 1. **Mentions**: `x-cli --json me mentions --max 20` — people engaging YOU.
    Always safe to reply per automation rules; check every cycle.
 2. **Replies to your own posts** — same as above; keep threads alive.
-3. **Watchlist scroll**: `x-cli --json user timeline <handle> --max 10` over
-   your curated watchlist (`.kortix/memory/x-watchlist.md` — accounts worth
-   reading in your domain; curate it yourself, keep it 30–100 handles, note
-   why each earns its spot, prune duds).
+3. **HOME FEED scroll** — the real feed, same as the app's "Following" tab:
+   ```
+   GET https://api.twitter.com/2/users/:your_id/timelines/reverse_chronological
+       ?max_results=50&tweet.fields=author_id,created_at,public_metrics
+   ```
+   (OAuth1-signed — x-cli has no command for it; use the requests_oauthlib
+   one-liner pattern from §4. Paginate with pagination_token within budget.)
+   This is THE scroll surface once your follow graph exists. The feed is only
+   as good as who you follow — that's what the watchlist is FOR:
+   `.kortix/memory/x-watchlist.md` is your follow-curation list. Follow
+   accounts from it steadily (~10/day max, never bulk) until the feed is
+   alive; keep curating (follow additions, unfollow duds) forever. Until the
+   follow graph fills in, `x-cli --json user timeline <handle>` over the
+   watchlist is the interim scroll.
 4. **Targeted search**: `x-cli --json tweet search "<query>" --max 20` on
-   your doctrine's topics/queries.
+   your doctrine's topics/queries — catches what the follow graph misses.
 
-Note: x-cli has NO home-feed command, and the algorithmic "For You" feed has
-no public API at all. The reverse-chron home timeline endpoint
-(`GET /2/users/:id/timelines/reverse_chronological`, OAuth1) exists as a raw
-API fallback once the account follows people — but the watchlist scroll is
-better anyway: deterministic, budget-exact, and independent of follow state.
-Following accounts on the watchlist is fine and good for the account's
-legitimacy — add follows gradually (a few/day max, never bulk).
+Note: the algorithmic "For You" feed has NO public API and scraping it from
+the web app violates X ToS and endangers the account — never do that. The
+reverse-chron home feed above is the sanctioned equivalent and the correct
+scroll surface for an agent.
 
 Evaluation, per post (the scroll loop): decide reply / no-reply with a HIGH
 bar. Reply only when ALL true: (a) genuinely on your domain, (b) you can add
