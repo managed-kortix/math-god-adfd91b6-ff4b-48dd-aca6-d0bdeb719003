@@ -12,9 +12,9 @@
   // per-(project, model) gateway routing setting — set to xhigh via
   // `kortix gateway routing`, not here).
   "model": "kortix/codex/gpt-5.6-sol",
-  // kortix-continuation is the always-on continuation enforcer: when the
-  // session goes idle with unfinished native todos, it re-prompts the agent to
-  // keep going instead of self-stopping. Combined with the math-heartbeat cron
-  // (session_mode=reuse) this is what makes math-god never stop.
-  "plugin": ["./continuation/kortix-continuation.ts"]
+  // never-stop: a root session is never allowed to go idle — every idle event
+  // re-prompts the agent to keep going and maintain the memory filesystem.
+  // Combined with the math-heartbeat cron (session_mode=reuse) this is what
+  // makes math-god eternal. KORTIX_NEVER_STOP_DISABLED=1 is the kill switch.
+  "plugin": ["./plugins/never-stop.ts"]
 }

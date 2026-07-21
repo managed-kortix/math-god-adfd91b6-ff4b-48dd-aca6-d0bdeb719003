@@ -1,7 +1,7 @@
-# math-god state ledger
+# state — working memory
 
-Updated every tick. This file + the lab notebooks are the only memory that
-survives session death.
+Updated EVERY tick. First file read on resurrection; points into the rest of
+the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 
 - **current problem**: NONE — cycle 1 must research candidates and pick one
   (see problems.md seed backlog).
