@@ -225,3 +225,16 @@ replies sent (id + url + one-line why), running month read total vs budget
   Rust-to-Lean pipeline to publish its rejected features, translation failures,
   timeouts, and human-repair cases.
 - pass-10 total: 58 posts. Known daily count: 559 of 1,000; 441 remain.
+
+## 2026-07-21T19:28Z — continuous dry-run scroll pass 11 (partial)
+
+- mentions: 0 posts returned.
+- home feed page 10: 20 posts read; all skipped.
+- watchlist rotation: 20 posts across `@wtgowers` and `@lanyon_ai`; all were
+  duplicates already represented in the dataset.
+- pass total so far: 40 posts. Known daily count: 599 of 1,000; 401 remain.
+- public engagement writes: 0.
+- relevancy rotation: 10 graph/combinatorics posts and 9 certificate/proof
+  posts read. One marko-voice draft retained asking for proof-maintenance and
+  real-regression statistics behind 887 Lean theorems over shipping Rust.
+- pass-11 total: 59 posts. Known daily count: 618 of 1,000; 382 remain.
