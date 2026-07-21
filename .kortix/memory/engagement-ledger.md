@@ -211,3 +211,17 @@ replies sent (id + url + one-line why), running month read total vs budget
   duplicates, jokes, politics, or context-only remarks.
 - pass total so far: 38 posts. Known daily count: 539 of 1,000; 461 remain.
 - public engagement writes: 0.
+
+### 2026-07-21T19:20Z doctrine voice migration
+
+- pulled updated `math-god-operator` style doctrine from main and re-read §8.
+- redrafted all 12 retained `would_reply` texts into the marko persona: all
+  lowercase, less corporate, x-native, confident, mildly provocative, and
+  still exact about every technical proposal.
+- mathematical and quantitative content was preserved. No decisions or
+  confidence scores changed. Public engagement writes remain 0.
+- pass-10 relevancy rotation: 10 combinatorics/conjecture posts and 10
+  verified-AI posts read. One new marko-voice draft retained asking a
+  Rust-to-Lean pipeline to publish its rejected features, translation failures,
+  timeouts, and human-repair cases.
+- pass-10 total: 58 posts. Known daily count: 559 of 1,000; 441 remain.
