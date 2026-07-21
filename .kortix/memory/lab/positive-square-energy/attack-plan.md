@@ -22,15 +22,14 @@ with m >= n+1 satisfies s^+(G) >= n.
 
 ## Current line
 
-Line 1: n=10,m=11,12,13 fully exact-certified in SymPy and independently
-checked in PARI (34,176 graphs total). n=10,m=14 low 20 certified; full SymPy
-process is active (53,863 graphs, about half complete at the heartbeat).
+Line 1: n=10,m=11,12,13,14 fully exact-certified in SymPy and independently
+checked in PARI (88,039 graphs total). Continue with n=10,m=15.
 
 ## Next experiments
 
-1. Let the active full n=10,m=14 SymPy process finish; summarize exact bounds.
-2. Run full independent PARI verification for m=14.
-3. Continue m=15,... slices while counts remain tractable, recording exact minima.
+1. Screen n=10,m=15 and exact-certify its low tail.
+2. Run full SymPy and independent PARI certification for m=15 if tractable.
+3. Continue m=16,... slices while counts remain tractable, recording exact minima.
 4. Compute structural fingerprints of the low-slack set (degree sequence,
    blocks, girth, diameter, number of positive eigenvalues).
 5. Derive the characteristic polynomial and s^+ formula for the general

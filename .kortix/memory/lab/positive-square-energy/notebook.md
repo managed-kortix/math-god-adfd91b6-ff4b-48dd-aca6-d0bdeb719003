@@ -93,3 +93,33 @@ The n=10,m=14 slice contains 53,863 graphs. Floating screening found minimum
 slack `3.258887081526075...` at graph6 `I?`acgwg_`; exact SymPy and independent
 PARI checks certify the low 20. Full exact certification was launched and is
 still running across a heartbeat boundary; do not launch a duplicate process.
+
+## 2026-07-21 — complete exact n=10,m=14 certificate
+
+**Experiment.** Regenerated all 53,863 connected nonisomorphic graphs with
+`nauty-geng -cq 10 14:14` in a fresh sandbox process. `exact_certify.py`
+computed each integer adjacency characteristic polynomial, exactly isolated
+all real roots in rational intervals of width below `10^-30`, and obtained a
+strictly positive lower bound for `s^+(G)-10` in all 53,863 cases. There were
+no errors or nonpositive lower endpoints.
+
+**Independent engine.** `pari_verify.py` independently reconstructed all
+53,863 matrices. PARI's exact `charpoly` agreed coefficient-for-coefficient
+with SymPy in every case, and 80-digit `polrootsreal` evaluation gave positive
+slack in every case.
+
+**Certified result.** The minimum is attained at graph6 `I?`acgwg_`, with
+`s^+(G)-10 = 3.2588870815260757547073475364...`. Thus every connected simple
+graph with 10 vertices and 14 edges satisfies the conjectured inequality.
+Together with the previous slices, all 88,039 connected n=10 graphs with
+11 through 14 edges are now exact-certified. This remains a finite census,
+not a proof of Conjecture 1.2.
+
+## 2026-07-21 — n=10,m=15 screen and low-tail certificate
+
+Screened all 112,618 connected nonisomorphic graphs. The observed minimum is
+exactly `s^+(G)-10=4` at graph6 `ICOf@pSb?`; its six positive adjacency
+eigenvalues are numerically `1,1,1,1,1,3`, so `s^+=14`. Exact SymPy rational
+root isolation certified the lowest 20, and PARI independently matched all 20
+integer characteristic polynomials and gave positive slack. Full-slice exact
+certification remains next; the floating screen alone is not exhaustive proof.

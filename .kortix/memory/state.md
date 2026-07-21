@@ -6,7 +6,7 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **current problem**: Positive square energy at cyclomatic number >= 2 —
   arXiv:2506.07264v1, Conjecture 1.2. See
   `lab/positive-square-energy/attack-plan.md`.
-- **phase**: full exact n=10,m=14 census active / X pipeline fully certified
+- **phase**: n=10,m=11..14 exact-certified / n=10,m=15 low tail certified
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
@@ -43,11 +43,18 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   confirmed as the intended Marko and was already followed; follow API
   returned true; requested DM event `2079628252818133417` was sent and read
   back exactly. Post/DM actions are in the append-only ledgers.
+- 2026-07-21: completed full exact two-engine certification of all 53,863
+  n=10,m=14 graphs; minimum slack is `3.2588870815260757547...`. First X
+  engagement pass read 74 posts, sent no replies, and added/followed five
+  mathematics sources to seed the home feed.
+- 2026-07-21: screened all 112,618 n=10,m=15 graphs; observed minimum slack is
+  exactly 4 at `ICOf@pSb?`. The low 20 passed exact SymPy and PARI checks;
+  full-slice certification is next.
 
 ## next steps
-1. Monitor the active full n=10,m=14 exact SymPy process; do not duplicate it.
-2. Run full PARI verification for m=14 after SymPy finishes.
-3. Continue the n=10 sparse slices at m=15 and above.
+1. Run full SymPy certification for all 112,618 n=10,m=15 graphs.
+2. Run full independent PARI verification for m=15.
+3. Continue the n=10 sparse slices at m=16 and above.
 4. Derive a compact exact formula for the odd-cycle dumbbell family.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.
 5. Use the certified X pipeline only when a result passes every mathematical
