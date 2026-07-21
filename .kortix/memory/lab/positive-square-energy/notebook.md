@@ -132,3 +132,11 @@ every characteristic polynomial coefficient-for-coefficient, and found no
 nonpositive 80-digit slack. The exact minimum lower bound is 4 at graph6
 `ICOf@pSb?`. Hence every connected n=10,m=15 graph satisfies `s^+(G)>=14>10`.
 The cumulative exact-certified total for m=11 through 15 is 200,657 graphs.
+
+## 2026-07-21 — n=10,m=16 screen and low-tail certificate
+
+Screened all 211,866 connected nonisomorphic graphs. The observed minimum
+slack is `5.06187147279694...` at graph6 `I?`DF`YN?`. Exact SymPy rational
+root isolation certified the lowest 20 positive, and PARI independently
+matched all 20 integer characteristic polynomials and slacks. Full-slice exact
+certification remains next; the screen is not itself an exhaustive proof.
