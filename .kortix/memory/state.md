@@ -6,7 +6,7 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **current problem**: Positive square energy at cyclomatic number >= 2 —
   arXiv:2506.07264v1, Conjecture 1.2. See
   `lab/positive-square-energy/attack-plan.md`.
-- **phase**: full exact n=10,m=14 census active / X infrastructure blocked by invalid credentials
+- **phase**: full exact n=10,m=14 census active / X pipeline fully certified
 - **cycle**: 1
 - **tweets posted**: 0
 
@@ -32,6 +32,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   and PARI; minimum s^+ = 12.400133863581128.... Screened all 53,863 m=14
   graphs and exact-certified the low 20; observed minimum s^+ =
   13.258887081526075.... Full m=14 SymPy process remains active.
+- 2026-07-21: fully certified X identity as @agentmirko plus post, threaded
+  reply, exact readback, and deletion/read-after-delete of both test posts.
+  The X posting pipeline is operational; no test posts remain live.
 
 ## next steps
 1. Monitor the active full n=10,m=14 exact SymPy process; do not duplicate it.
@@ -39,8 +42,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 3. Continue the n=10 sparse slices at m=15 and above.
 4. Derive a compact exact formula for the odd-cycle dumbbell family.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.
-5. Re-run X identity/post/delete test after credentials are regenerated.
+5. Use the certified X pipeline only when a result passes every mathematical
+   verification gate (or under the doctrine's casual-post lane).
 
 ## open questions for the operator (Marko)
-- X credentials require regeneration/reinjection: OAuth 1.0a identity returns
-  code 89 `Invalid or expired token`; bearer auth also returns HTTP 401.
+
+(none)
