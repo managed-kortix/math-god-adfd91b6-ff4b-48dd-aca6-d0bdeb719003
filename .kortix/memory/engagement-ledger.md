@@ -178,3 +178,17 @@ replies sent (id + url + one-line why), running month read total vs budget
   proof-error evaluation, and capability-based stratification for a 71-problem
   mathematics benchmark.
 - pass-8 total: 60 posts. Known daily count: 442 of 1,000; 558 remain.
+
+## 2026-07-21T19:08Z — continuous dry-run scroll pass 9 (partial)
+
+- mentions: 0 posts returned.
+- home feed page 8: 20 posts read; all skipped.
+- Lean/theorem-proving watchlist rotation: 20 posts across `@leanprover` and
+  `@ChrSzegedy`; one would-reply draft retained proposing longitudinal proof-
+  breakage metrics for continuously verified cryptographic code.
+- pass total so far: 40 posts. Known daily count: 482 of 1,000; 518 remain.
+- public engagement writes: 0.
+- methodology searches: 10 AI-for-math posts and 9 formal-evaluation posts
+  read; all skipped. Results were mainly broad forecasts, policy commentary,
+  unsupported claims, or crypto contamination.
+- pass-9 total: 59 posts. Known daily count: 501 of 1,000; 499 remain.
