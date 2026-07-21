@@ -151,3 +151,16 @@ nonpositive slack was observed in completed records. This is an infrastructure
 result only, not mathematical progress. The next run will use bounded
 parallelism, one atomic output and completion marker per chunk, so completed
 chunks survive interruption and can be checked exactly once.
+
+**Successful compact certificate.** `batch_exact_certify.py` used 16 bounded
+workers and completed exact rational root isolation for all 211,866 records.
+Every lower bound for `s^+-10` was strictly positive. The least exact lower
+endpoint was attained at `I?`DF`YN?` and equals
+
+`14734185568792384654654323644651704256129128122371442382501185586836113407590319046813515369840747272878357699092186381 / 2910817796930549421169163740037535324261740806692831225688955715483886074316306918159490034385198707635063716544264100`,
+
+approximately `5.0618714727969403`. The ordered graph6 input SHA-256 was
+`b51f7340afeb301878dc93ba894d89ac85572d23a8b5a39096a21930ecf0efe0`.
+A first persistent-worker PARI pass exceeded one hour before producing an
+atomic aggregate output, so it is rejected as incomplete. Independent PARI
+verification remains required before the slice is fully certified.

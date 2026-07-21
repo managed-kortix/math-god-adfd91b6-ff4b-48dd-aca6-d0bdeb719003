@@ -6,7 +6,7 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **current problem**: Positive square energy at cyclomatic number >= 2 —
   arXiv:2506.07264v1, Conjecture 1.2. See
   `lab/positive-square-energy/attack-plan.md`.
-- **phase**: n=10,m=11..15 exact-certified / n=10,m=16 full certificate in progress
+- **phase**: n=10,m=11..15 exact-certified / n=10,m=16 SymPy complete, PARI in progress
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
@@ -61,11 +61,16 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   run hit process time limits before completion; no failure or nonpositive
   record appeared in the completed prefix. Resume with bounded parallelism and
   atomic per-chunk outputs rather than restarting a single monolithic stream.
+- 2026-07-21: a compact fresh-process 16-worker SymPy certificate completed
+  all 211,866 m=16 graphs: strict positive rational lower bounds throughout,
+  minimum lower bound `5.0618714727969403...` at `I?`DF`YN?`, input SHA-256
+  `b51f7340afeb301878dc93ba894d89ac85572d23a8b5a39096a21930ecf0efe0`.
+  The first persistent-worker PARI implementation exceeded one hour without an
+  atomic result and is not accepted; make its chunks independently resumable.
 
 ## next steps
-1. Complete full SymPy certification for all 211,866 n=10,m=16 graphs using
-   bounded parallel chunks with atomic completion markers.
-2. Run full independent PARI verification for m=16.
+1. Complete full independent PARI verification for m=16 using resumable chunks.
+2. Fresh-process reproduce the compact SymPy summary and preserve its output.
 3. Continue the n=10 slices at m=17 and above.
 4. Derive a compact exact formula for the odd-cycle dumbbell family.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.

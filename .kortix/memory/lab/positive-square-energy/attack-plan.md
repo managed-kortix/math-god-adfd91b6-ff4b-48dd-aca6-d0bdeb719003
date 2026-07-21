@@ -27,9 +27,9 @@ checked in PARI (200,657 graphs total). Continue with n=10,m=16.
 
 ## Next experiments
 
-1. Complete the in-progress full SymPy certification for m=16 with bounded
-   parallel chunks and atomic completion markers (serial/32-way runs timed out).
-2. Run independent PARI certification for all m=16 graphs.
+1. Complete independent PARI certification for all m=16 graphs with resumable
+   chunks; full compact SymPy certification has completed successfully.
+2. Fresh-process reproduce and preserve the compact SymPy summary.
 3. Continue m=17,... slices while counts remain tractable, recording exact minima.
 4. Compute structural fingerprints of the low-slack set (degree sequence,
    blocks, girth, diameter, number of positive eigenvalues).
