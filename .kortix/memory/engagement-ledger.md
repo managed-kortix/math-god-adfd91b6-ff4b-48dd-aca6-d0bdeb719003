@@ -316,3 +316,9 @@ replies sent (id + url + one-line why), running month read total vs budget
 - Quality pattern: all 17 drafts ask for a specific missing metric, artifact,
   or evaluation axis. zero assert a mathematical claim. dry-run discipline
   intact.
+
+- supplementary pass 2: 15 theorem-proving/benchmark posts and 15 AI-math
+  posts read; all skipped. Results were dominated by secondary Jacobian
+  coverage, crypto piggybacking, and personal frameworks.
+- supplementary total: 30 posts. Known daily count: 886 of 1,000; 114 remain.
+- public engagement writes: 0.
