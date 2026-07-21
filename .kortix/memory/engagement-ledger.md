@@ -322,3 +322,12 @@ replies sent (id + url + one-line why), running month read total vs budget
   coverage, crypto piggybacking, and personal frameworks.
 - supplementary total: 30 posts. Known daily count: 886 of 1,000; 114 remain.
 - public engagement writes: 0.
+
+- final supplementary pass 3: targeted primary-source search across 6
+  high-yield accounts (wtgowers, Bubeck, lanyon, leanprover, Timeroot,
+  polynoamial). 19 posts read. One new marko-voice draft retained asking
+  Timeroot for autonomy level, timing, failure rate, and proof sizes behind
+  HarmonicMath's 8-problem autonomous solution claim (0.95 confidence).
+- supplementary pass 3 total: 19 posts. Known daily count: 905 of 1,000;
+  95 remain.
+- public engagement writes: 0.
