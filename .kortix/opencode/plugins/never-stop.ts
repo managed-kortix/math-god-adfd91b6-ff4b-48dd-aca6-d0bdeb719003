@@ -6,12 +6,17 @@
  * maintain the memory filesystem, queue the next work. No intent gates, no todo
  * gating, no completion detection: math-god has no "done" state by design.
  *
- * Safety valves (the only three):
+ * Safety valves:
  *   - KORTIX_NEVER_STOP_DISABLED=1 turns it off entirely
  *   - a pending interactive question pauses it (a human is being waited on)
  *   - an error-storm backoff: 3+ consecutive empty/aborted turns → stand down
  *     for 5 minutes (the math-heartbeat cron still revives the session, so a
  *     crash loop never burns tokens unattended)
+ *   - DELIBERATE STOP: if the agent's final message contains
+ *     `[deliberate-stop: <reason>; resume: <plan>]` the plugin does NOT
+ *     re-prompt — the session genuinely sleeps until the next cron/human
+ *     message. Doctrine governs when this is allowed (budget exhausted,
+ *     blocked on human, nothing productive until a scheduled time).
  */
 
 import { type Plugin } from "@opencode-ai/plugin"
@@ -126,14 +131,23 @@ const NeverStopPlugin: Plugin = async ({ client }) => {
 					return
 				}
 
-				// A non-empty assistant turn resets the error counter.
+				// Inspect the last assistant turn: reset error counter on real content,
+				// and honor a deliberate-stop sentinel — the agent's sanctioned way to
+				// actually sleep until the next cron tick or human message.
 				for (let i = (messages ?? []).length - 1; i >= 0; i--) {
 					const msg = messages[i]
 					if (msg?.info?.role !== "assistant") continue
-					const hadContent = (msg.parts ?? []).some(
-						(p: any) => (p?.type === "text" && p.text?.trim()) || p?.type === "tool",
-					)
-					if (hadContent) s.errors = 0
+					let text = ""
+					let hadTool = false
+					for (const p of msg.parts ?? []) {
+						if (p?.type === "text" && typeof p.text === "string") text += p.text
+						if (p?.type === "tool") hadTool = true
+					}
+					if (text.trim() || hadTool) s.errors = 0
+					if (/\[deliberate-stop\b[^\]]*\]/i.test(text)) {
+						log("info", `[${id.slice(-8)}] deliberate-stop honored — sleeping until next wake`)
+						return
+					}
 					break
 				}
 

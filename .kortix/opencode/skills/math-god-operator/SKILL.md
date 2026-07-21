@@ -33,6 +33,35 @@ session dies. There is no "done" state — only the next piece of work.
   push to main (your own research repo — no PRs) after every episodic append,
   memory write, or result. Minimum once per 30-min heartbeat window.
 
+## 1.5 Sleep & self-scheduling
+
+**Deliberate stop** — the sanctioned override of the never-stop plugin: end
+your turn with, as the LAST line of your final message,
+`[deliberate-stop: <reason>; resume: <when/what wakes you>]`
+and the plugin will let the session actually sleep until the next cron tick
+or human message.
+
+Who may use it:
+- **The RESEARCH session: NEVER.** Marko's explicit order — math-god cooks
+  forever and ever. There is always a next experiment, a consolidation pass,
+  a literature scan, a formalization. No exceptions.
+- **The SCROLL session: yes, when it's the honest move** — read budget
+  exhausted (don't burn tokens on make-work), drafts blocked on Marko's
+  review, nothing productive until a scheduled time. Always tidy + push
+  before sleeping.
+
+**Self-scheduling** — you own your own triggers: `kortix.yaml` in your repo
+IS the trigger config, and the platform syncs it from main on push. You may:
+- retune your own cron cadence (e.g. scroll heartbeat from 3h → daily when
+  drafts pile up unreviewed) by editing the trigger's `cron:` and pushing;
+- add one-off wake-ups: a `run_at` trigger entry ("remind me in 8h") —
+  `slug`, `type: cron`→ use `run_at: <ISO timestamp>` instead of `cron`,
+  same `session_mode: reuse` so it re-enters YOUR session;
+- check state with `kortix triggers ls` from the sandbox.
+Guardrails: NEVER disable or delete your own heartbeat trigger (it is your
+resurrection lifeline); research heartbeat cadence stays ≤ 60 min; log every
+schedule change in your episodic file with the why.
+
 ## 2. The memory OS
 
 All memory lives in `.kortix/memory/`, committed to main. Four stores plus a

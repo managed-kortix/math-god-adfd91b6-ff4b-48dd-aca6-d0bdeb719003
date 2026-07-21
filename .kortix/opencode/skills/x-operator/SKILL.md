@@ -120,9 +120,10 @@ duplicates and to find thread parents.
 Reads are METERED (X pay-per-use, ~$0.005/post read; posts $0.015, $0.20 if
 the post contains a link). Your doctrine sets a daily read budget — default
 1,000 posts/day (~$5/day) unless it says otherwise. Track reads in your
-engagement ledger. Budget exhausted ≠ stop: a continuous-scroll session
-switches to off-feed work (re-rank drafts, curate watchlist, refine
-evaluation criteria) until the UTC day rolls over.
+engagement ledger. Budget exhausted: do ONE brief tidy pass (re-rank drafts,
+curate watchlist), push, then deliberate-stop until the UTC day rolls over
+(sentinel per your doctrine's sleep section) — don't burn tokens on
+make-work.
 
 Sources, in priority order (field-verified x-cli syntax):
 1. **Mentions**: `x-cli --json me mentions --max 20` — people engaging YOU.

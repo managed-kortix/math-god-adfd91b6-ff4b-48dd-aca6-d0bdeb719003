@@ -48,10 +48,12 @@ triggers:
       `.kortix/memory/engagement-drafts.jsonl` {ts, source, tweet_id, url,
       author, text, decision: "skip"|"would_reply", draft_reply, why,
       confidence}. Keep curating x-watchlist.md + follow graph (~10/day).
-      Commit + push every ~30 min of scrolling. Respect the daily read
-      budget; when exhausted, spend the rest of the day re-ranking drafts,
-      curating the watchlist, and improving your evaluation notes — the loop
-      itself NEVER stops.
+      Commit + push every ~30 min of scrolling. FIRST, each tick: if
+      origin/main moved since your last tick, re-read both skills — doctrine
+      changes arrive via main, not via chat. Respect the daily read budget;
+      when exhausted: one brief tidy pass, push, then sleep via
+      `[deliberate-stop: budget exhausted; resume: next tick]` — you may also
+      retune your own cadence per the doctrine's self-scheduling section.
   - slug: math-heartbeat
     name: math-god heartbeat → keep the eternal math session alive (every 30 min)
     type: cron
@@ -69,9 +71,12 @@ triggers:
       resurrection protocol from the skill: bootstrap the harness, read
       `.kortix/memory/math-state.md` + `problems.md`, and resume the current
       problem exactly where the lab notebook left off. Never end a tick without
-      unfinished todos on your list and the state ledger updated. PERSISTENCE
-      CHECK, every single tick: commit and push ALL state to origin/main NOW
-      (git pull --rebase, then push; retry on rejection) — memory files, lab
-      notebooks, certificates, everything. Nothing may live only in the
-      sandbox: if the sandbox died this second, main must be enough to resume
-      losslessly. Self-merge to your own main freely; it is your research repo.
+      unfinished todos on your list and the state ledger updated. If
+      origin/main moved since your last tick, re-read both skills — doctrine
+      changes arrive via main, not via chat. You NEVER deliberate-stop: the
+      research thread cooks forever and ever (Marko's order) — there is always
+      a next experiment. PERSISTENCE CHECK, every single tick: commit and push
+      ALL state to origin/main NOW (git pull --rebase, then push; retry on
+      rejection) — memory files, lab notebooks, certificates, everything.
+      Nothing may live only in the sandbox: if the sandbox died this second,
+      main must be enough to resume losslessly. Self-merge freely.
