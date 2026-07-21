@@ -34,4 +34,4 @@ certificate-backed progress — in deadpan lowercase.
 - Harness bootstrap: `scripts/setup-harness.sh`
 
 Model: `kortix/codex/gpt-5.6-sol` at max reasoning effort (gateway routing),
-fallback claude-opus-4.8 → glm-5.2.
+no fallbacks — Codex only, by design.

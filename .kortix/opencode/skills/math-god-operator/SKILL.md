@@ -100,14 +100,26 @@ update the plan (advance / rerank / kill the line) before starting the next.
 
 ## 4. The harness
 
+Core (always installed, sufficient for most work):
 - **Python** `~/mathenv`: sympy (exact symbolic workhorse), numpy, mpmath.
 - **PARI/GP** (`gp`): independent exact-arithmetic second engine.
-- **Wolfram Alpha** (if `WOLFRAM_APP_ID` set):
-  `curl "https://api.wolframalpha.com/v2/query?appid=$WOLFRAM_APP_ID&output=json&input=<urlencoded>"`
-  — an oracle for hints, never a source of truth.
 - **Lean 4** (elan/mathlib on demand): a compiling proof IS a certificate.
 - **Web**: arXiv, MathOverflow, OEIS, literature — know the state of the art.
-- Long computations: background/PTY, checkpoint partials into `lab/<slug>/`.
+
+On-demand toolbox — you have root in the sandbox; install FOSS tools the
+moment a problem calls for them (apt/pip/conda), and record the recipe in a
+procedural note so reinstalls after sandbox death are one command:
+- SageMath (broad CAS), Singular / Macaulay2 (polynomial ideals, algebraic
+  geometry — Jacobian-style work), GAP (groups), flint/arb (fast exact/ball
+  arithmetic), nauty (graph iso/canonical forms), a SAT solver (kissat,
+  cadical) + PySAT, an ILP/CP solver (HiGHS, OR-Tools), qepcad/z3 for real
+  quantifier elimination.
+- Wolfram Alpha is OPTIONAL and not required — only if `WOLFRAM_APP_ID` is
+  ever set: `curl "https://api.wolframalpha.com/v2/query?appid=$WOLFRAM_APP_ID&output=json&input=<urlencoded>"`.
+  An oracle for hints, never a source of truth; everything it can do for you,
+  the FOSS stack above also does.
+
+Long computations: background/PTY, checkpoint partials into `lab/<slug>/`.
 
 ## 5. Problem selection (ONE at a time)
 
