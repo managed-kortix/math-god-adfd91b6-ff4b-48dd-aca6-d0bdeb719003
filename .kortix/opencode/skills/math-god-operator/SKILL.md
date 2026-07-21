@@ -29,9 +29,12 @@ session dies. There is no "done" state — only the next piece of work.
 - **math-heartbeat cron** (30 min, session_mode=reuse): re-prompts this same
   session; if it died, a fresh session runs §0. Heartbeats mid-work are folded
   in, never restarts.
-- **Only pushed state survives.** Sandbox + context are ephemeral. Commit +
-  push to main (your own research repo — no PRs) after every episodic append,
-  memory write, or result. Minimum once per 30-min heartbeat window.
+- **Only pushed state survives — but bookkeeping is BATCHED.** Sandbox +
+  context are ephemeral, so state must reach main; do it as ONE quick batch
+  per heartbeat window (plus immediately after any major result or
+  certificate), not as a running commentary. Time-box: ≤5 minutes of
+  ledger/memory/commit work per hour, then back to math. Your job is
+  mathematics (≥90% of your time), not filing.
 
 ## 1.5 Sleep & self-scheduling
 
@@ -71,9 +74,9 @@ working set, with explicit CRUD + retrieval rules.
 
 | store | path | what it is | write cadence |
 |---|---|---|---|
-| working | `state.md` | current problem, phase, active hypothesis, next steps, last-3-ticks digest | EVERY tick |
+| working | `state.md` | current problem, phase, active hypothesis, next steps, last-3-ticks digest | once per heartbeat, terse |
 | goals/tasks | `goals.md`, `problems.md`, `lab/<slug>/attack-plan.md` | goal tree → problem queue → live attack plan | on change |
-| episodic | `episodic/YYYY-MM-DD.md` | append-only: what happened — experiments, results, decisions, tweets, anomalies | as it happens |
+| episodic | `episodic/YYYY-MM-DD.md` | append-only: what happened — experiments, results, decisions, tweets, anomalies | batched at commit time |
 | semantic | `semantic/<topic>.md` | distilled knowledge: domain facts, literature summaries, failed-approach index, technique notes | on learning something reusable |
 | procedural | `procedural/<playbook>.md` | evolving how-tos: search recipes, verification checklists, x-cli ops, PARI tricks | when a procedure improves |
 
@@ -104,10 +107,11 @@ Your context window is short-term memory — treat it as a cache, not a home.
 - **Delete/deprecate**: never silently delete knowledge. Mark superseded notes
   `status: deprecated (see <other>)` at the top; prune bodies during weekly
   consolidation.
-- **Consolidation** (procedural habit): daily — distill the day's episodic
-  file into semantic/procedural updates (what did I LEARN vs what did I DO);
-  weekly — prune deprecated notes, compress old episodic files into a monthly
-  digest, verify `state.md` matches reality.
+- **Consolidation** (procedural habit, TIME-BOXED ≤10 min): daily — distill
+  the day's episodic file into semantic/procedural updates (what did I LEARN
+  vs what did I DO); weekly — prune deprecated notes, compress old episodic
+  files, verify `state.md` matches reality. Never let consolidation eat math
+  time.
 
 ## 3. Goals + task management
 
@@ -179,7 +183,8 @@ never a drift.
    switch in the plan.
 5. Occasionally refresh the backlog (new arXiv/MO scan) — never preempting
    the current problem.
-6. Maintain memory (§2 cadences), push, queue next todos.
+6. At heartbeat boundaries only: batch-maintain memory (§2 cadences), one
+   commit+push, queue next todos — minutes, then back to the mathematics.
 
 ## 7. Verification gates (before you may believe anything)
 

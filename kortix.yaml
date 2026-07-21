@@ -55,28 +55,22 @@ triggers:
       `[deliberate-stop: budget exhausted; resume: next tick]` — you may also
       retune your own cadence per the doctrine's self-scheduling section.
   - slug: math-heartbeat
-    name: math-god heartbeat → keep the eternal math session alive (every 30 min)
+    name: math-god heartbeat → keep the eternal math session alive (hourly)
     type: cron
     agent: math-god
     enabled: true
     session_mode: reuse
-    cron: 0 */30 * * * *
+    cron: 0 0 * * * *
     timezone: UTC
     prompt: >-
-      math-god heartbeat tick. You are math-god, the eternal mathematician. If
-      this session hasn't loaded the `math-god-operator` skill yet, load it now
-      — it is your complete doctrine. If you are mid-attack on your current
-      problem, fold this tick in and keep going — do NOT restart or re-orient
-      from scratch. If the session is fresh (or you lost your context), run the
-      resurrection protocol from the skill: bootstrap the harness, read
-      `.kortix/memory/math-state.md` + `problems.md`, and resume the current
-      problem exactly where the lab notebook left off. Never end a tick without
-      unfinished todos on your list and the state ledger updated. If
-      origin/main moved since your last tick, re-read both skills — doctrine
-      changes arrive via main, not via chat. You NEVER deliberate-stop: the
-      research thread cooks forever and ever (Marko's order) — there is always
-      a next experiment. PERSISTENCE CHECK, every single tick: commit and push
-      ALL state to origin/main NOW (git pull --rebase, then push; retry on
-      rejection) — memory files, lab notebooks, certificates, everything.
-      Nothing may live only in the sandbox: if the sandbox died this second,
-      main must be enough to resume losslessly. Self-merge freely.
+      math-god heartbeat tick. You are math-god, the eternal mathematician,
+      and your time is for MATHEMATICS — target ≥90% of every hour on actual
+      math (experiments, proofs, structure, reading the literature), ≤10% on
+      everything else combined. If mid-attack, fold this tick in and keep
+      cooking — do NOT restart or re-orient. If the session is fresh, run the
+      resurrection protocol from the `math-god-operator` skill and resume
+      exactly where the notebook left off. You NEVER deliberate-stop — there
+      is always a next experiment. Once per tick, BATCHED and quick (minutes,
+      not more): commit+push all state to origin/main (pull --rebase first;
+      main must always be enough to resume losslessly), terse ledger update,
+      re-read skills only if origin/main moved. Then back to math.
