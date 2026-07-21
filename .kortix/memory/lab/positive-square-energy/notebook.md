@@ -44,3 +44,40 @@ certified five positive roots counting multiplicity and
 Thus this particular observed minimizer rigorously satisfies the conjectured
 bound. This is only the first-engine certificate for one graph; exact checks
 of the remaining low tail and PARI independence are still queued.
+
+## 2026-07-21 — complete exact n=10,m=11 certificate
+
+**Experiment.** Ran `exact_certify.py` on all 2,678 graph6 records from
+`nauty-geng -cq 10 11:11`. Every characteristic polynomial was computed over
+the integers and every real root was enclosed in a disjoint rational interval
+of width below 10^-30. Summing squared positive-root interval bounds gave a
+strictly positive lower bound for every graph.
+
+**Independent engine.** `pari_verify.py` reconstructed every adjacency matrix,
+computed `charpoly(A,x)` and `polrootsreal` in PARI/GP at 80-digit precision.
+All 2,678 PARI characteristic polynomials exactly matched SymPy coefficient by
+coefficient, and all PARI slacks were positive.
+
+**Certified result.** Every connected simple graph with n=10 and m=11 satisfies
+`s^+(G) >= 10.593873751236949401... > 10`. Equality in this finite census is
+attained by graph6 `I?`D@POd?`, which is two disjoint 5-cycles joined by a
+single bridge (the `(5,5)` dumbbell). The exact lower endpoint from rational
+root isolation is positive; the displayed decimal is only a readable summary.
+
+This extends the conjecture's exact computational frontier specifically on the
+minimum-edge slice m=n+1 from the paper's n<=9 census to n=10. Novelty and a
+compact stranger-verifiable aggregate certificate remain necessary before any
+public claim.
+
+## 2026-07-21 — n=10,m=12 screen
+
+Screened all 8,548 connected nonisomorphic graphs. The observed minimum slack
+was `1.498439554674811...` at graph6 `I?`DA_wIO`. The lowest 20 were certified
+positive by exact SymPy root isolation, and PARI exactly matched all 20
+characteristic polynomials and numerical slacks.
+
+**Full exact follow-up.** All 8,548 graphs were subsequently certified by
+exact SymPy rational root isolation. PARI independently produced an exactly
+matching characteristic polynomial for every graph and positive 80-digit
+slack. Hence every connected n=10,m=12 graph has
+`s^+(G) >= 11.498439554674811... > 10`.

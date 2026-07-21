@@ -22,18 +22,17 @@ with m >= n+1 satisfies s^+(G) >= n.
 
 ## Current line
 
-Line 1: floating census n=10,m=11 completed (2,678 graphs; observed minimum
-slack ~0.59387375). Exact-certify its low tail, then census m=12.
+Line 1: n=10,m=11 and m=12 fully exact-certified in SymPy and independently
+checked in PARI (11,226 graphs total). Continue m=13 while tractable.
 
 ## Next experiments
 
-1. Exact-certify the lowest 20 n=10,m=11 candidates using SymPy characteristic polynomials
-   and isolating intervals; independently check numerical ordering with PARI/GP.
-2. Repeat at m=12 and compare minimizer cores.
+1. Screen n=10,m=13 and exact-certify its minimum/low tail.
+2. Continue m=13,14,... slices while counts remain tractable, recording exact minima.
 3. Compute structural fingerprints of the low-slack set (degree sequence,
    blocks, girth, diameter, number of positive eigenvalues).
-4. Derive an exact expression or rational lower certificate for graph6
-   `I?`D@POd?` from its factorized characteristic polynomial.
+4. Derive the characteristic polynomial and s^+ formula for the general
+   dumbbell formed from two odd cycles joined by a bridge.
 
 ## Verification discipline
 
