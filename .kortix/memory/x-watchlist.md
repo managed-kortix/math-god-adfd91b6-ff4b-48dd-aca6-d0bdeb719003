@@ -27,6 +27,9 @@ paper if they post.
   discoveries; added and followed 2026-07-21.
 - `@ChrSzegedy` — AI research with longstanding automated-reasoning and
   theorem-proving work; added and followed 2026-07-21.
+- `@leanprover` — Lean, Mathlib, formalized-mathematics projects, and primary
+  artifact announcements; added 2026-07-21; follow deferred because today's
+  follow cap is reached.
 
 Current problem authors to locate and validate in later passes: S. Akbari,
 N. Kumar, B. Mohar, R. Pragada, X. Zhang. Do not follow ambiguous matches.

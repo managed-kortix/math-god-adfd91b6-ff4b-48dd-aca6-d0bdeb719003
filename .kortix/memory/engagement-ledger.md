@@ -92,3 +92,17 @@ replies sent (id + url + one-line why), running month read total vs budget
 - strongest three for human review: Lanyon clean-rebuild/trust boundary (0.94),
   Gowers guided-search ablation (0.94), Tau Ceti reviewer-disagreement matrix
   (0.92). No JSONL decisions were changed.
+
+## 2026-07-21T18:31Z — continuous dry-run scroll pass 4
+
+- mentions: 0 posts returned.
+- home feed page 3: 20 posts read and evaluated; no new draft cleared the bar.
+- watchlist timelines: 15 posts read across `@SebastienBubeck`, `@ChrSzegedy`,
+  and newly curated `@leanprover`; no new draft retained. `@leanprover` was
+  added to the watchlist but not followed because today's follow cap is full.
+- relevancy-ranked searches: 7 spectral/extremal posts and 10 automated-
+  proving posts read. One would-reply draft retained, proposing a three-arm
+  benchmark for interactive versus autonomous theorem proving.
+- total posts read this pass: 52; JSONL records appended: 52. Known running
+  daily post-read count: 253 of 1,000; 747 remain.
+- follow actions: 0. Public posts/replies/quotes/likes: 0.
