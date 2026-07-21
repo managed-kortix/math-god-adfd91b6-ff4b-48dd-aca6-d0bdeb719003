@@ -22,16 +22,18 @@ with m >= n+1 satisfies s^+(G) >= n.
 
 ## Current line
 
-Line 1: n=10,m=11 and m=12 fully exact-certified in SymPy and independently
-checked in PARI (11,226 graphs total). Continue m=13 while tractable.
+Line 1: n=10,m=11,12,13 fully exact-certified in SymPy and independently
+checked in PARI (34,176 graphs total). n=10,m=14 low 20 certified; full SymPy
+process is active (53,863 graphs, about half complete at the heartbeat).
 
 ## Next experiments
 
-1. Screen n=10,m=13 and exact-certify its minimum/low tail.
-2. Continue m=13,14,... slices while counts remain tractable, recording exact minima.
-3. Compute structural fingerprints of the low-slack set (degree sequence,
+1. Let the active full n=10,m=14 SymPy process finish; summarize exact bounds.
+2. Run full independent PARI verification for m=14.
+3. Continue m=15,... slices while counts remain tractable, recording exact minima.
+4. Compute structural fingerprints of the low-slack set (degree sequence,
    blocks, girth, diameter, number of positive eigenvalues).
-4. Derive the characteristic polynomial and s^+ formula for the general
+5. Derive the characteristic polynomial and s^+ formula for the general
    dumbbell formed from two odd cycles joined by a bridge.
 
 ## Verification discipline

@@ -81,3 +81,15 @@ exact SymPy rational root isolation. PARI independently produced an exactly
 matching characteristic polynomial for every graph and positive 80-digit
 slack. Hence every connected n=10,m=12 graph has
 `s^+(G) >= 11.498439554674811... > 10`.
+
+## 2026-07-21 — n=10,m=13 and m=14
+
+All 22,950 connected n=10,m=13 graphs were certified using exact rational
+SymPy root isolation, with exact PARI characteristic-polynomial agreement for
+all 22,950. The finite-slice minimum is
+`s^+(G)=12.400133863581128... > 10`, at graph6 `I?`DA`gJO`.
+
+The n=10,m=14 slice contains 53,863 graphs. Floating screening found minimum
+slack `3.258887081526075...` at graph6 `I?`acgwg_`; exact SymPy and independent
+PARI checks certify the low 20. Full exact certification was launched and is
+still running across a heartbeat boundary; do not launch a duplicate process.

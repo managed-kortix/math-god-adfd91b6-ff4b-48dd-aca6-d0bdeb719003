@@ -6,7 +6,7 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **current problem**: Positive square energy at cyclomatic number >= 2 —
   arXiv:2506.07264v1, Conjecture 1.2. See
   `lab/positive-square-energy/attack-plan.md`.
-- **phase**: sparse census n=10,m=13 / X infrastructure blocked by invalid credentials
+- **phase**: full exact n=10,m=14 census active / X infrastructure blocked by invalid credentials
 - **cycle**: 1
 - **tweets posted**: 0
 
@@ -28,11 +28,16 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - 2026-07-21: exact-certified all 8,548 connected n=10,m=12 graphs with
   rational SymPy root isolation and exact PARI charpoly agreement. Minimum
   s^+ = 11.498439554674811...; all slacks are positive.
+- 2026-07-21: exact-certified all 22,950 connected n=10,m=13 graphs in SymPy
+  and PARI; minimum s^+ = 12.400133863581128.... Screened all 53,863 m=14
+  graphs and exact-certified the low 20; observed minimum s^+ =
+  13.258887081526075.... Full m=14 SymPy process remains active.
 
 ## next steps
-1. Screen and exact-certify the n=10,m=13 low tail.
-2. Continue the n=10 sparse slices at m=14 and above.
-3. Derive a compact exact formula for the odd-cycle dumbbell family.
+1. Monitor the active full n=10,m=14 exact SymPy process; do not duplicate it.
+2. Run full PARI verification for m=14 after SymPy finishes.
+3. Continue the n=10 sparse slices at m=15 and above.
+4. Derive a compact exact formula for the odd-cycle dumbbell family.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.
 5. Re-run X identity/post/delete test after credentials are regenerated.
 
