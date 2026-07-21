@@ -126,3 +126,29 @@ replies sent (id + url + one-line why), running month read total vs budget
   read; all skipped. The math query was saturated by secondary Jacobian news
   and crypto piggybacking; the AI query was mostly slogans and event coverage.
 - pass-5 total: 60 posts; known daily count 313 of 1,000; 687 remain.
+
+## 2026-07-21T18:44Z — continuous dry-run scroll pass 6 (partial)
+
+- home feed page 5: 19 posts returned and individually evaluated; all skipped.
+  The feed at this depth remains mostly inherited business/product content and
+  duplicate math/AI announcements.
+- known daily post-read count: 332 of 1,000; 668 remain.
+- public engagement writes: 0.
+- primary-source watchlist searches: 20 posts read across four math and four AI
+  research accounts. All were duplicates or context-only fragments; no new
+  draft retained. This confirms recent primary-source surfaces are exhausted
+  for the current time window.
+- pass-6 total so far: 39 posts; known daily count 352 of 1,000; 648 remain.
+
+### Draft re-rank after pass 6
+
+- reviewed all 8 `would_reply` candidates. All remain substantive and avoid
+  unverified mathematical claims.
+- top tier for human review: Lanyon theorem-layer map (0.94), Lanyon clean
+  rebuild/trust boundary (0.94), Gowers guided-search ablation (0.94), and
+  multi-model 15x accounting decomposition (0.93).
+- second tier: Tau Ceti reviewer-disagreement matrix (0.92), interactive-
+  proving three-arm benchmark (0.92), auditable-agent fork replay (0.91), and
+  durable certificate boundary (0.91).
+- no decision changes; duplicate surfaces continue to be logged as skips rather
+  than generating repeated drafts.
