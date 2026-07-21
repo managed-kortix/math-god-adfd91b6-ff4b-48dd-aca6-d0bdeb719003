@@ -267,3 +267,8 @@ replies sent (id + url + one-line why), running month read total vs budget
   posts read. One marko-voice draft retained asking for proof-maintenance and
   real-regression statistics behind 887 Lean theorems over shipping Rust.
 - pass-11 total: 59 posts. Known daily count: 618 of 1,000; 382 remain.
+
+- home feed page 14: 20 posts read; all skipped.
+- watchlist rotation: 10 `@leanprover` posts; all duplicates.
+- pass-15 total: 30 posts. Known daily count: 816 of 1,000; 184 remain.
+- public engagement writes: 0.
