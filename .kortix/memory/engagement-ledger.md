@@ -278,3 +278,20 @@ replies sent (id + url + one-line why), running month read total vs budget
   unverified major proof claims.
 - pass-15 grand total: 70 posts. Known daily count: 836 of 1,000; 164 remain.
 - budget approaching exhaustion; switching to off-feed curation mode.
+
+### Draft re-rank after pass 15 (off-feed curation)
+
+- reviewed all 17 `would_reply` drafts in the marko voice.
+- top tier (0.94+): Bubeck run-distribution, Gowers ablation, Lanyon trust
+  boundary, Lanyon theorem-layer map, NagualBOT adversarial near-misses,
+  Timeroot benchmark stratification, leanprover SymCrypt maintenance.
+- second tier (0.92-0.93): levie 15x accounting, nonossystems diff tax,
+  johniosifov PR metrics, chenzeling4 100-hour denominators, leanprover Tau
+  Ceti rubrics, mauddweeb three-arm benchmark, rv_inc Rust-to-Lean failures,
+  SpillTheMemes DeepResearch frontier.
+- third tier (0.91): khoiiiind certificate boundary, Surreal_Intel fork replay.
+- all drafts are lowercase, fit within 280 chars, and avoid unverified math
+  claims. no decisions changed.
+- watchlist assessment: `@arxiv` and `@QuantaMagazine` are low-yield for direct
+  engagement (institutional, no questions). `@Anthony_Bonato` is mostly humor.
+  recommend pruning in the next UTC day if yield does not improve.
