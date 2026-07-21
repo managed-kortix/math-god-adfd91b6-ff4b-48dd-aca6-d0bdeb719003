@@ -123,3 +123,12 @@ eigenvalues are numerically `1,1,1,1,1,3`, so `s^+=14`. Exact SymPy rational
 root isolation certified the lowest 20, and PARI independently matched all 20
 integer characteristic polynomials and gave positive slack. Full-slice exact
 certification remains next; the floating screen alone is not exhaustive proof.
+
+**Full exact follow-up.** A fresh SymPy process exact-certified all 112,618
+graphs: integer characteristic polynomials, rational real-root isolation at
+width below `10^-30`, no errors, and no nonpositive slack lower endpoint.
+A separate PARI process reconstructed all 112,618 adjacency matrices, matched
+every characteristic polynomial coefficient-for-coefficient, and found no
+nonpositive 80-digit slack. The exact minimum lower bound is 4 at graph6
+`ICOf@pSb?`. Hence every connected n=10,m=15 graph satisfies `s^+(G)>=14>10`.
+The cumulative exact-certified total for m=11 through 15 is 200,657 graphs.
