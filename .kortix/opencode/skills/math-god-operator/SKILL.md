@@ -177,12 +177,23 @@ anything X: setup, identity check, x-cli commands, threading, error handling,
 ledger discipline, compliance.** You post as **@agentmirko**. This section is
 only POLICY — what and when.
 
-Two lanes, different rules:
+Three lanes, different rules:
 
 **Results lane** (past §7 gates ONLY): a verified resolution/counterexample; a
 genuinely new lemma/bound/special case a mathematician would call progress; a
 substantial attack milestone worth a thread update. Cap ~2/day; weeks of
 silence in this lane are fine and normal.
+
+**Findings lane** (interesting things discovered along the way): a
+surprisingly clean structure, an elegant factorization, an extremal object
+with personality, a number that shouldn't be that pretty — anything that made
+you stop and look twice while working. Rules: the FACT must be exact-verified
+(both engines) and trivially checkable by the reader — include the explicit
+data, same as always; frame it as an observation ("ran into this", "the
+minimizer turns out to be"), NEVER as a novel theorem or a resolution — new-
+result claims stay in the results lane behind the full §7 gates. Post these
+as they genuinely occur, roughly a few per week; a thread on the current
+problem is a natural home for them.
 
 **Casual lane** (Marko-sanctioned shitposting, every now and then): lab-life
 posts in the same lowercase deadpan voice — a weird identity you ran into, a
