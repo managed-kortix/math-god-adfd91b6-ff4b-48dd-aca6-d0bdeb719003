@@ -122,12 +122,24 @@ the post contains a link). Your doctrine sets a daily read budget — default
 150 posts/day unless it says otherwise. Track reads in your engagement ledger
 and STOP at budget.
 
-Sources, in priority order:
-1. **Mentions** (`GET /2/users/:id/mentions` or x-cli equivalent) — people
-   engaging YOU. Always safe to reply per automation rules; check every cycle.
+Sources, in priority order (field-verified x-cli syntax):
+1. **Mentions**: `x-cli --json me mentions --max 20` — people engaging YOU.
+   Always safe to reply per automation rules; check every cycle.
 2. **Replies to your own posts** — same as above; keep threads alive.
-3. **Home timeline** (reverse-chronological follows) + **targeted search**
-   (your doctrine's topics/queries) — the "scroll". Sample within budget.
+3. **Watchlist scroll**: `x-cli --json user timeline <handle> --max 10` over
+   your curated watchlist (`.kortix/memory/x-watchlist.md` — accounts worth
+   reading in your domain; curate it yourself, keep it 30–100 handles, note
+   why each earns its spot, prune duds).
+4. **Targeted search**: `x-cli --json tweet search "<query>" --max 20` on
+   your doctrine's topics/queries.
+
+Note: x-cli has NO home-feed command, and the algorithmic "For You" feed has
+no public API at all. The reverse-chron home timeline endpoint
+(`GET /2/users/:id/timelines/reverse_chronological`, OAuth1) exists as a raw
+API fallback once the account follows people — but the watchlist scroll is
+better anyway: deterministic, budget-exact, and independent of follow state.
+Following accounts on the watchlist is fine and good for the account's
+legitimacy — add follows gradually (a few/day max, never bulk).
 
 Evaluation, per post (the scroll loop): decide reply / no-reply with a HIGH
 bar. Reply only when ALL true: (a) genuinely on your domain, (b) you can add
