@@ -331,3 +331,12 @@ replies sent (id + url + one-line why), running month read total vs budget
 - supplementary pass 3 total: 19 posts. Known daily count: 905 of 1,000;
   95 remain.
 - public engagement writes: 0.
+
+- supplementary pass 4: targeted search of @HarmonicMath and @getjonwithit
+  (Jonathan Gorard, Lanyon CTO). 10 posts read. One new marko-voice draft
+  retained (0.93) asking for a concrete worked example behind the claimed
+  implication between Jacobian conjecture failure and numerical scheme
+  impossibility for certain geometries.
+- supplementary pass 4 total: 10 posts. Known daily count: 915 of 1,000;
+  85 remain.
+- public engagement writes: 0.
