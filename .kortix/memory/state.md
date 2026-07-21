@@ -8,7 +8,7 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   `lab/positive-square-energy/attack-plan.md`.
 - **phase**: full exact n=10,m=14 census active / X pipeline fully certified
 - **cycle**: 1
-- **tweets posted**: 1 permanent findings post
+- **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
 - 2026-07-21: bootstrapped full harness; X OAuth identity, bearer read, and
@@ -38,6 +38,11 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - 2026-07-21: first permanent findings post published, id
   `2079625826924990582`, giving the exact n=10,m=11 minimizer and its clean
   characteristic-polynomial factorization.
+- 2026-07-21: operator-requested X exercise succeeded end to end: sample post
+  `2079628089525461454` is live and read back exactly; `@markokraemer` was
+  confirmed as the intended Marko and was already followed; follow API
+  returned true; requested DM event `2079628252818133417` was sent and read
+  back exactly. Post/DM actions are in the append-only ledgers.
 
 ## next steps
 1. Monitor the active full n=10,m=14 exact SymPy process; do not duplicate it.
