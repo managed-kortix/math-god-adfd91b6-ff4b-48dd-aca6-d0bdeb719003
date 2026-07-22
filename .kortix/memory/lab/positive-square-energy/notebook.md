@@ -796,3 +796,11 @@ Numerically this signed-square imbalance tends to about 3.837925. This is a
 much cleaner statement than the positive-energy target and aligns with the
 constant odd moments `p1=2,p3=8,p5=37,...`; a direct inequality between
 `sum lambda|lambda|` and the first few odd moments may finish the proof.
+
+A naive global odd-polynomial minorant cannot work: near zero,
+`x|x|` has opposite quadratic signs on the two sides, while any nonzero odd
+polynomial has a linear or odd leading term and violates one side. Numerical
+LPs correctly report infeasibility even through degree seven. Any moment proof
+must therefore include an even polynomial component (the earlier positive-part
+minorant), exclude a certified zero-free gap, or split positive and negative
+supports using the inertia/interlacing information.
