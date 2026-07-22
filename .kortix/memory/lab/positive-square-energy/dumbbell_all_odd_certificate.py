@@ -46,7 +46,7 @@ def main() -> None:
         print(f"PASS D_{n} exact SymPy certificate")
         print("charpoly=" + str(factorization))
         print(f"slack_lower={lower.p}/{lower.q}")
-    print("PASS rational tail inequality n>=13")
+    print("PASS rational tail inequalities: d<2/3 and 2(sec(pi/n)-1)<1/9 for n>=13")
 
 
 if __name__ == "__main__":

@@ -65,6 +65,13 @@ The gluing lemma gives
 
 `s^+(D_n)>=2[n+1-sec(pi/n)]+(1-d)^2>2n`.
 
+In fact the argument records the explicit lower bound
+
+`s^+(D_n)-2n >= (1-csc(pi/(2n))/n)^2-2(sec(pi/n)-1)`
+
+for `n=1 (mod 4)`. No approximation enters this bound; the rational estimates
+above are used only to prove its right side positive uniformly for n>=13.
+
 The only remaining n=1 mod 4 cases, n=5 and n=9, pass the standalone exact
 SymPy certificate and independent PARI verification in
 `dumbbell_all_odd_certificate.py` and `dumbbell-all-odd-pari.txt`.
