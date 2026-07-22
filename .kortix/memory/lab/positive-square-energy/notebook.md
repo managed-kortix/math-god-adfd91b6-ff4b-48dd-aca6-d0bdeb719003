@@ -418,3 +418,10 @@ size 320, diameter two, girth four, and no triangles. Its positive eigenvalues
 are `4` and `sqrt(5)-1` with multiplicity two, so exactly
 `s^+=16+2(sqrt(5)-1)^2=28-4sqrt(5)` and slack `18-4sqrt(5)`.
 This low-tail result is exact in both engines, but the full m=20 slice remains.
+
+Across the exact slice minimizers, the m=11 through m=17 graphs all have
+inertia `(6,0,4)`, followed by `(5,2,3)` at m=18,19 and `(3,5,2)` at m=20.
+The m=20 circulant is 4-regular, diameter two, triangle-free of girth four,
+biconnected, and contains an induced claw. Thus it is covered by the paper's
+diameter-two theorem despite not being claw-free. This is a structural
+fingerprint only, not evidence about the uncaught remainder of the slice.

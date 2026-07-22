@@ -14,7 +14,8 @@ from search_geng import graph6_adjacency
 MINIMIZERS = {
     11: "I?`D@POd?", 12: "I?`DA_wIO", 13: "I?`DA`gJO",
     14: "I?`acgwg_", 15: "ICOf@pSb?", 16: "I?`DF`YN?",
-    17: "I?`FBqsF_", 18: "I?q`qjo{?",
+    17: "I?`FBqsF_", 18: "I?q`qjo{?", 19: "I?bF`xw{?",
+    20: "I?rFf_{N?",
 }
 
 
