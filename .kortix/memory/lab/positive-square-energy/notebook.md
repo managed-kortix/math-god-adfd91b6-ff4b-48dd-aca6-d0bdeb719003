@@ -872,6 +872,20 @@ the phase integral on rational-angle subintervals. In particular, on
 weighted contribution; analogous coarse bounds on [2pi/5,pi/2] may dominate
 the negative [0,pi/5] part.
 
+The phase integral sign is now exact-certified by a different route. A
+rational degree-10 polynomial P(c) satisfies `P(c)>=delta'(theta)` for
+c=cos(theta) in [0,1], certified after clearing the strictly negative phase
+denominator and Sturm-counting roots. Integration by parts gives
+
+`I_phase=-2-(1/pi) integral_0^(pi/2)4cos^2(theta)delta'(theta)dtheta`.
+
+Exact integration of P gives
+`J+2pi=7623356367059/433125-(1434244074019/256000)pi<0`,
+with the final sign already following from `pi<355/113`. Hence
+`I_phase>0` rigorously. Together with r>5/3 this proves the limiting defect is
+greater than 7.1377, comfortably above the uniform target. Only finite-q
+convergence to this limit remains for q>=727.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.

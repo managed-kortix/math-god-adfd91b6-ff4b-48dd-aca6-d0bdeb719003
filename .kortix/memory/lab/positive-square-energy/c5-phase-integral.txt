@@ -1,0 +1,3 @@
+PASS polynomial majorant delta'<=P and phase integral I=-2-J/pi>0
+J+2pi=7623356367059/433125 - 1434244074019*pi/256000
+upper_using_pi_355/113=-155458659409/100235520000
