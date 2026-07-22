@@ -855,3 +855,11 @@ no zeros and is negative on [-11/5,0]; P-x^2 has no zeros and is negative on
 approximately `0.4994779365q+7.1153018`. This rigorously proves the uniform
 defect target through q=725 once the support bounds and moment formulas are
 formalized in the same certificate; those two hypotheses remain to package.
+
+The support hypothesis can be made trivial: every dumbbell has maximum degree
+3, so its adjacency spectrum lies in [-3,3]; all roots of every factor,
+including S_q, lie there. Re-optimizing on [-3,3] barely changes the degree-16
+dual and still covers q through roughly 700 after rational safety shifts. This
+removes all dependence on separately proving sharp outlier bounds. A second
+rational minorant on [-3,3] is preferable for the final certificate despite a
+slightly shorter finite range.
