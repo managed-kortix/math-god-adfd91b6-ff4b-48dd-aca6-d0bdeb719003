@@ -1075,3 +1075,15 @@ numerical constants have nearly 0.397 certified spare margin. The remaining
 proof obligation is not an estimate but a fully explicit Euler-summation
 identity matching the finite band roots, integral, and endpoint correction to
 `D_q`; adversarially verify that correspondence before claiming the theorem.
+
+The endpoint geometry has now been written without asymptotic shorthand. The
+elementary bounds `1/13<beta=atan(1/4)/pi<1/12` show that the midpoint-cell
+union differs from the exact phase endpoint by less than 1/3 in both residue
+classes. Since the spectral test function and its first derivative vanish at
+that endpoint, the leftover integral costs at most `M/(6*3^3)`, already
+included in the exact error above. Also `B(1+t)` in the finite outlier equation
+has all positive coefficients, proving the finite outlier lies beyond the
+limiting pole once the equation orientation is derived. A complete proof draft
+is in `c5-tail-proof.md`; the sole remaining gate is deriving the phase and
+outlier equations directly from the Laurent form and certifying exhaustive
+root correspondence/multiplicities.
