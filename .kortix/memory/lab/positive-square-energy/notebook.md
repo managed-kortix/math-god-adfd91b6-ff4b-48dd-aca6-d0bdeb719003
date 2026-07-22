@@ -483,3 +483,12 @@ The complete m=20 theorem-coverage count confirms this at full scale. Of all
 the union has 53,414 graphs, leaving 979,340 outside both classes. The overlap
 is four graphs. Thus 94.83% of this slice is not covered by either of the two
 headline sufficient conditions in the target paper.
+
+**Unequal odd-cycle probe.** Float-screened every bridge `C_p--C_q` for odd
+`3<=p,q<=101`; the least slack was still the equal `(5,5)` case at
+`0.5938737512...`, and no counterexample appeared. The same gluing setup has
+correction equal to the square of the positive eigenvalue of
+`[[-d_p,1],[1,-d_q]]`, where `d_r=csc(pi/(2r))/r`. Crude rational bounds prove
+the unequal family whenever both p,q>=13: each d is below 2/3, so correction
+exceeds 1/9, while the sum of both possible cycle deficits is below 1/9.
+Small-fixed/large-variable pairs remain; do not claim the unequal extension.
