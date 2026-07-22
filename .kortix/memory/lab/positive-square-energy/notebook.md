@@ -882,3 +882,12 @@ evaluated at x/2.
 This exact closed form makes the all-q moment proof straightforward: for any
 fixed moment order 16, only the top 16 monomial coefficients matter, and once
 d>16 the nine-term pattern has a stable contribution governed by the U recurrence.
+
+A formal proof of the nine-term identity can avoid symbolic q entirely. Under
+`x=z+z^{-1}`, use
+`U_n(x/2)=(z^{n+1}-z^{-n-1})/(z-z^{-1})` and
+`2(T_n(x/2)-1)=z^n+z^{-n}-2`. Substitute q=2d-7 into the bridge quotient;
+clearing powers of z reduces both sides to the same Laurent polynomial. This
+is a finite algebraic identity in z and z^d, and checking the coefficients of
+z^{+d},z^{-d},1 proves it for every d. Implement this as a symbolic two-
+variable certificate next.
