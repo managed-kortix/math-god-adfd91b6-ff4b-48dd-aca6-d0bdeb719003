@@ -934,6 +934,14 @@ for q=9,11,13 reproduces integers to 1e-11. Therefore the finite sum is a
 standard left-endpoint integer quadrature over one explicitly truncated
 interval; no hidden roots cross phase poles.
 
+Comparing the finite band sum with its density integral confirms the endpoint
+Euler remainder alternates by q mod 4 and is O(q^-2): at q=101,103 it is
+-2.31e-4,+1.80e-4; at q=201,203, -5.95e-5,+4.74e-5; at q=727,729,
++3.75e-6,-4.60e-6. The generic curvature bound (<0.011) is conservative but
+already far inside the 0.40 margin. A formal trapezoid lemma on u=0..m plus
+the two fractional endpoint cells will finish the tail without tracking the
+alternating leading coefficient.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
