@@ -10,7 +10,7 @@ if [ ! -x "$HOME/mathenv/bin/python" ]; then
   log "creating ~/mathenv venv"
   python3 -m venv "$HOME/mathenv"
 fi
-"$HOME/mathenv/bin/pip" install --quiet --upgrade sympy numpy mpmath requests requests-oauthlib
+"$HOME/mathenv/bin/pip" install --quiet --upgrade sympy numpy mpmath requests requests-oauthlib matplotlib networkx pillow playwright
 log "python env ok: $("$HOME/mathenv/bin/python" -c 'import sympy; print("sympy", sympy.__version__)')"
 
 # ── PARI/GP (independent exact-arithmetic engine) ────────────────────────────
@@ -64,5 +64,8 @@ if [ ! -x "$HOME/.elan/bin/lean" ]; then
   curl -sSf https://elan.lean-lang.org/elan-init.sh | sh -s -- -y --default-toolchain none >/dev/null 2>&1 \
     || log "WARN: elan install failed — install later if a formalization is needed"
 fi
+
+# Chromium for HTML->image artifact rendering (best-effort; matplotlib path needs none)
+"$HOME/mathenv/bin/python" -m playwright install chromium >/dev/null 2>&1 || log "WARN: playwright chromium install failed — matplotlib rendering still works"
 
 log "harness ready"

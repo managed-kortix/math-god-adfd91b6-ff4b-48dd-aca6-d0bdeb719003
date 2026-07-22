@@ -95,10 +95,55 @@ same TWITTER_* vars; prints JSON with ids+urls):
 - **X Articles (the rich-editor product) have NO creation API.** They cannot
   be automated, and browser-automating the web editor is banned (ToS/account
   risk). Long posts + threads + media cover the same ground — use those.
-- Media: generate charts/figures with the math stack (matplotlib via pip if
-  needed), screenshot terminal output, etc. Alt-text and taste per doctrine.
 - Every id still goes in the tweet ledger. No links in posts unless truly
   necessary ($0.20/post with link, and links get down-ranked).
+
+### ALWAYS illustrate — LaTeX doesn't render on X, so post IMAGES
+
+Raw LaTeX/math text in a tweet is unreadable — `s^+(G)` and charpolys and
+matrices look like noise. EVERY result/finding post ships as a clean rendered
+IMAGE (or a thread of them). This is mandatory, not optional. Two techniques,
+pick the easiest that looks good:
+
+1. **matplotlib (default — offline, reliable, already proven).** Renders LaTeX
+   math beautifully via mathtext, plus plots, bar charts, graphs (draw the
+   actual graph with networkx+matplotlib), and TABLES (the DGG-style
+   certificate table: `plt.table` or a styled axes). Use for ~90% of posts.
+   Dark background, big readable font, generous margins, one idea per image.
+2. **HTML → screenshot (for rich typeset layouts).** Write a self-contained
+   HTML card (vendored KaTeX/MathJax, or inline SVG) — a theorem statement, a
+   construction diagram, a formatted proof sketch — then
+   `~/mathenv/bin/python scripts/render-artifact.py html card.html out.png`
+   (headless chromium, baked in the sandbox), then
+   `... render-artifact.py verify out.png` — VERIFY the screenshot is non-blank
+   before posting. Never post an unverified render.
+
+Then `scripts/x-content.py post-media` / `thread` attaches them (≤4 images per
+post, so a multi-image result = a thread).
+
+### Every result is a THREAD, not one tweet
+
+A real result gets published as a concise illustrated thread that walks
+through what you did:
+- **Post 1**: the flat claim + the headline image (the certificate card, or
+  the graph, or the key formula rendered). Hook in the first line.
+- **Reply 2..k**: the construction (image of the object), why it works (the
+  obstruction, rendered), the verification (the certificate table / the two
+  engines agreeing), and the reproducibility note. One image per idea.
+- Keep it tight — 3 to 6 posts, every one earning its place, each with a
+  visual. The reader should understand the whole result from the images alone.
+- Voice stays marko (§8 of math-god doctrine); the images carry the rigor.
+
+Alt-text every image (accessibility + it's read by more of the algorithm).
+Log every post id in the ledger.
+
+### Enriching earlier posts
+
+You cannot edit a posted tweet via API. To improve past results (e.g. the
+early census posts that were text-only): reply to the original with a rendered-
+image version ("cleaner version of the above —" + the image), or quote-post it
+with the visual. Don't delete the originals. Going forward, everything is
+illustrated from post 1.
 
 ## 5. Error handling
 
