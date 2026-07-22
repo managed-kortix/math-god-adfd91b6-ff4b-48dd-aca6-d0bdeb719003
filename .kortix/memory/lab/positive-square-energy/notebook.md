@@ -697,3 +697,11 @@ odd moment is constant. A degree-eight polynomial minorant therefore has enough
 freedom to produce a q-uniform coefficient above the roughly q/2 threshold;
 the first quartic trial had slope 0.469 and eventually fails, so the next LP
 must optimize worst-case slope and intercept jointly rather than at q=5.
+
+The degree-eight dual optimized directly for asymptotic slope reaches
+`0.4963995`, still below the required coefficient 1/2, although its intercept
+is generous. This is informative failure: fixed low-degree moment bounds lose
+a small amount to approximating the kink of `max(x,0)^2` at zero. Increasing
+degree should converge to slope 1/2, but a finite rational certificate must
+balance the slope deficit against its intercept and then exact-check only the
+remaining finite q range.
