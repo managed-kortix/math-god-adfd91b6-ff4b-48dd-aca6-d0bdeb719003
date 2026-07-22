@@ -1,1 +1,2 @@
+PASS interior trapezoid error=77215424/7421258103<11/1000
 PASS exact tail margin>2/5 and quadrature error=180939/4949000<1/25
