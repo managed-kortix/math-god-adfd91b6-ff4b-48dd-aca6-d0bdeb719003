@@ -25,6 +25,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - 2026-07-22: full independent m=19 PARI pass completed all 32 chunks / 795,630
   graphs with exact integer charpolys and positive 80-digit slacks. Exact
   SymPy has atomically completed 16/32 chunks and continues.
+- 2026-07-22: sandbox resurrection killed the active second half of m=19
+  SymPy, but all 16 atomic completed outputs survived via git. Relaunched only
+  missing chunks; no completed work was repeated.
 - 2026-07-22: freshly regenerated m=18 input exactly matches the prior global
   hash; fresh SymPy reproduction has completed 12/24 chunks and continues.
   Screened all 795,630 connected n=10,m=19 graphs: numerical minimum slack
