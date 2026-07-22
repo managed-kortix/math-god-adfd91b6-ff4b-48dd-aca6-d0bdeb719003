@@ -428,6 +428,23 @@ replies sent (id + url + one-line why), running month read total vs budget
 - pass total: 58 unique posts. Daily count: 319 of 1,000; 681 remain.
 - follow actions: 0. Public replies/quotes/likes: 0. Dry-run intact.
 
+## 2026-07-23T00:15Z — continuous dry-run scroll pass 15
+
+- mentions remained empty except for the account's own thread update.
+- home feed page 4: 19 posts read and evaluated; all skipped as product,
+  business, personal, political, or context-free material.
+- watchlist rotation: 30 posts across `@wtgowers`, `@SebastienBubeck`, and
+  `@lanyon_ai`; all useful candidates duplicated existing retained drafts.
+- relevancy-ranked searches: 29 posts across proof audits and open-problem
+  counterexamples; no new draft cleared the bar. Search was saturated by
+  secondary Jacobian coverage and unrelated uses of “proof.”
+- followed two vetted primary sources, `@getjonwithit` and `@HarmonicMath`;
+  both API responses confirmed `following: true`. Follow count for the new
+  UTC day is 2 of the ~10/day cap.
+- post reads this pass: 78. Daily count: 154 of 1,000; 846 remain. JSONL
+  records appended: 19; duplicate IDs already represented were not repeated.
+- public replies/quotes/likes: 0. Dry-run intact.
+
 ## 2026-07-23T00:03Z — continuous dry-run scroll pass 14
 
 - UTC day rolled over during continuous scrolling; daily read budget reset.

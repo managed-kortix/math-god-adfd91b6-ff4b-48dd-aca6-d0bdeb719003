@@ -42,9 +42,9 @@ paper if they post.
   reasoning; MATH-AI workshop organizer; added 2026-07-21; follow queued
   for next UTC day.
 - `@getjonwithit` (Jonathan Gorard) — Lanyon cofounder posting technical
-  benchmark and verification details; added 2026-07-22; not followed yet.
+  benchmark and verification details; added 2026-07-22; followed 2026-07-23.
 - `@HarmonicMath` — primary-source autonomous formal-mathematics results and
-  artifacts; added 2026-07-22; not followed yet.
+  artifacts; added 2026-07-22; followed 2026-07-23.
 - `@AIMathematics` — American Institute of Mathematics account, not an active
   AI-mathematics project; latest API-visible post is from 2024. Prune candidate;
   added 2026-07-22, identity corrected 2026-07-22; do not follow.
@@ -63,3 +63,5 @@ humor). Reassess after next UTC day.
 Pass-12 curation: keep `@getjonwithit` and `@HarmonicMath` as high-value
 primary sources. Do not follow `@AIMathematics`; the handle was misclassified
 and is stale. Follow count remains 6 for 2026-07-22.
+
+2026-07-23 follow count: 2 (`@getjonwithit`, `@HarmonicMath`).
