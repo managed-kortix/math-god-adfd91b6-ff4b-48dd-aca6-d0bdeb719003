@@ -705,3 +705,12 @@ a small amount to approximating the kink of `max(x,0)^2` at zero. Increasing
 degree should converge to slope 1/2, but a finite rational certificate must
 balance the slope deficit against its intercept and then exact-check only the
 remaining finite q range.
+
+Using the safe cycle bound `s^+(Cq)>=q-1/4`, the symmetric-sector target is
+only `S_q^+ >= q/2+sqrt(5)/2+45/8`. The numerical degree-eight dual has bound
+`0.4963995q+7.3069`, which beats this target through about q=156 despite its
+slight slope deficit. Therefore one rational degree-eight minorant plus exact
+finite certificates up to q=157 would already prove a substantial infinite
+range only if supplemented by a higher-degree asymptotic certificate; or,
+conversely, a degree around 16 may push the crossover far enough that an
+analytic tail estimate becomes easy.
