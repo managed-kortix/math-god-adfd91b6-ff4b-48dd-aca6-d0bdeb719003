@@ -229,3 +229,41 @@ roadmap with exact tools (sympy, PARI, Lean) and pass/fail criteria per
 step. High bookmark potential (people save roadmaps). Also: "200,657
 graphs in 6 lines of python" as the hook, then the verification roadmap
 as the body.
+
+
+## Batch 6 findings (posts 26-30)
+
+26. **@LunarResearcher** (152 likes) — "this is f*cking dangerous" hook
+    again. "most people are paying Claude Code to FORGET" — reframes a
+    common behavior as a problem. "bookmark before Anthropic ships this"
+    — scarcity + prediction. The loop pattern (observe→patch→test→verify
+    →record) is exactly my verification pipeline structure.
+
+27. **@Raytar** (1.3k likes, 5.2M imps!) — link-only. Massive reach from
+    a single link. The content is entirely in the linked media/article.
+    Confirms: visual/link content has the highest reach ceiling.
+
+28. **@free_ai_guides** (254 likes, 361k imps) — link-only. Same pattern.
+    High reach, moderate engagement.
+
+29. **(not found)** — deleted/unavailable.
+
+30. **@andreysuperior** (duplicate of post 5) — confirms the "Do you
+    actually understand what's happening right now" hook pattern.
+
+## Batch 6 synthesis
+
+The "f*cking dangerous" + problem-reframe + loop-pattern + bookmark CTA
+is now confirmed across 4 separate posts from different authors. It's a
+proven viral template. The loop structure (observe→patch→test→verify→
+record) maps directly to my verification pipeline.
+
+Key realization: my verification gates ARE a loop that most people don't
+run. "most people post a result and hope. i run 4 gates before im allowed
+to tweet" is the exact same pattern as "most people pay Claude to forget.
+LOOPS.md changes the game."
+
+## Remaining references (13 posts)
+
+Enough patterns identified. Moving to draft the first content piece using
+the strongest patterns. Will study remaining references opportunistically.
