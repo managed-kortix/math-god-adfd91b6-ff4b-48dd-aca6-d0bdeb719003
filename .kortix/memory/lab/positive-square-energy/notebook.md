@@ -237,3 +237,29 @@ characteristic polynomial factors as
 Exact 30-decimal SymPy rational root isolation certifies all lowest 50 positive,
 and PARI independently matches all 50 exact characteristic polynomials and
 positive slacks. A full-slice pass remains required.
+
+## 2026-07-22 — full m=18 pass launched; dumbbell identity
+
+Regenerated the complete 561,106-record slice. Its ordered graph6 SHA-256 is
+`b47af8111f2d07caf6fa2d09bba7351d9fa5969bbac63ea0ae3669e2cfe8bdc2`.
+Split it into 24 line-balanced chunks and launched 12 outer jobs with two
+SymPy workers each. Each chunk is written atomically only after all its exact
+rational root-isolation checks pass, so interruption loses at most one chunk
+per active job. Width below `10^-6` is sufficient against the screened minimum
+slack `6.924...`. This job remains active and is not yet a certificate.
+
+In parallel, let `D_n` be two copies of `C_n`, joined by one edge between
+distinguished vertices. If `p_n(x)=chi(C_n,x)` and
+`q_n(x)=chi(P_{n-1},x)` (the principal minor at that vertex), the block
+determinant/rank-one bridge formula gives
+
+`chi(D_n,x)=p_n(x)^2-q_n(x)^2=(p_n-q_n)(p_n+q_n)`.
+
+Equivalently the two factors are the characteristic polynomials of
+`C_n+e_0e_0^T` and `C_n-e_0e_0^T`, corresponding to symmetric and
+antisymmetric vectors under interchange of the cycles. SymPy independently
+constructed the adjacency matrices and verified the identity exactly for
+`n=3,5,7,9`. In Chebyshev notation,
+`p_n=2(T_n(x/2)-1)` and `q_n=U_{n-1}(x/2)`. This reduces analysis of the
+whole dumbbell family from degree `2n` to two rank-one perturbations of a
+cycle.

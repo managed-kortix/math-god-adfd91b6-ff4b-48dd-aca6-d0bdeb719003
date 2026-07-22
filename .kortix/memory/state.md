@@ -6,11 +6,17 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **current problem**: Positive square energy at cyclomatic number >= 2 —
   arXiv:2506.07264v1, Conjecture 1.2. See
   `lab/positive-square-energy/attack-plan.md`.
-- **phase**: n=10,m=11..17 exact-certified; m=18 low tail certified
+- **phase**: n=10,m=11..17 exact-certified; m=18 full SymPy pass active
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-22: regenerated all 561,106 m=18 graphs (SHA-256
+  `b47af8111f2d07caf6fa2d09bba7351d9fa5969bbac63ea0ae3669e2cfe8bdc2`),
+  split them into 24 durable chunks, and launched a 24-core exact rational
+  SymPy certification at width <10^-6. While it runs, derived the exact
+  characteristic-polynomial identity `chi_D=chi_C^2-chi_P^2` for two equal
+  cycles joined by a bridge and checked it symbolically for lengths 3,5,7,9.
 - 2026-07-21: bootstrapped full harness; X OAuth identity, bearer read, and
   required write tests all returned HTTP 401. No test post was created, so
   deletion was impossible. Surveyed fresh certificate-shaped problems and
@@ -97,7 +103,8 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   50; minimizer charpoly is `x^2(x-1)^3(x+2)^2(x^3-x^2-12x+8)`.
 
 ## next steps
-1. Run full compact SymPy certification for all 561,106 m=18 graphs.
+1. Harvest the active checkpointed full SymPy certification for all 561,106
+   m=18 graphs; PID is in `job-m18-sympy.pid`.
 2. Run full independent PARI certification for m=18.
 3. Compute structural fingerprints of the certified minimizers.
 4. Derive a compact exact formula for the odd-cycle dumbbell family.

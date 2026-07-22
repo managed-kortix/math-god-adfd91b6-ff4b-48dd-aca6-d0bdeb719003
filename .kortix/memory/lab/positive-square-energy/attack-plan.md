@@ -28,13 +28,20 @@ slice next.
 
 ## Next experiments
 
-1. Run full compact SymPy certification for all 561,106 m=18 graphs.
+1. Harvest the active 24-chunk compact SymPy certification for all 561,106
+   m=18 graphs; rerun only missing atomic chunks after interruption.
 2. Run full independent PARI certification for m=18.
 3. Continue m=17,... slices while counts remain tractable, recording exact minima.
 4. Compute structural fingerprints of the low-slack set (degree sequence,
    blocks, girth, diameter, number of positive eigenvalues).
 5. Derive the characteristic polynomial and s^+ formula for the general
    dumbbell formed from two odd cycles joined by a bridge.
+
+## Running jobs
+
+- `job-m18-sympy.pid`: 24 atomic input chunks, 12 outer jobs x 2 SymPy
+  workers, exact rational isolation width <10^-6. Input SHA-256
+  `b47af8111f2d07caf6fa2d09bba7351d9fa5969bbac63ea0ae3669e2cfe8bdc2`.
 
 ## Verification discipline
 
