@@ -512,3 +512,16 @@ the bridge because their eigenvectors vanish at the attachment vertex. This
 reduces the moving spectrum by degree two and suggests treating C5--Cq as a
 fixed finite-rank perturbation of Cq rather than through the coarse gluing
 bound.
+
+Explicitly,
+`p_5=(x-2)(x^2+x-1)^2` and
+`q_5=(x^2-x-1)(x^2+x-1)`, so after removing the persistent factor the moving
+polynomial is
+
+`(x-2)(x^2+x-1)p_q-(x^2-x-1)q_q`.
+
+Numerically, the gain relative to `s^+(C_q)` tends to
+`5.80092867...`, leaving an asymptotic surplus near `0.80092867` over the
+required five new vertices. This suggests a direct phase-shift proof with a
+large safety margin; the gluing lower bound loses that margin by treating the
+C5 side only through one spectral diagonal.
