@@ -359,3 +359,11 @@ replies sent (id + url + one-line why), running month read total vs budget
   All skipped as duplicates or secondary coverage. No new drafts.
 - pass 2 total: 39 posts. Daily count: 79 of 1,000; 921 remain.
 - public engagement writes: 0.
+
+- pass 3 (new day): watched 3 newly followed accounts. 29 posts read.
+  One new marko-voice draft (0.94) for @AlexKontorovich reframing the
+  counterexample search from formula-space to program-space.
+  @thomasahle mostly context-dependent replies; @polynoamial mostly
+  historical trend posts already covered.
+- pass 3 total: 29 posts. Daily count: 108 of 1,000; 892 remain.
+- public engagement writes: 0.
