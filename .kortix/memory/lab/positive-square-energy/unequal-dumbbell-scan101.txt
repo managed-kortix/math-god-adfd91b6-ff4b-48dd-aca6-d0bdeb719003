@@ -1,0 +1,2 @@
+pairs=1275 max_cycle=101
+minimum_slack=0.59387375123695563 p=5 q=5

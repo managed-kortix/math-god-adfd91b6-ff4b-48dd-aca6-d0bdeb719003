@@ -492,3 +492,11 @@ correction equal to the square of the positive eigenvalue of
 the unequal family whenever both p,q>=13: each d is below 2/3, so correction
 exceeds 1/9, while the sum of both possible cycle deficits is below 1/9.
 Small-fixed/large-variable pairs remain; do not claim the unequal extension.
+
+The exact gluing lower bound was then mapped for odd p,q through 100,001.
+Its only persistent failure mechanism is a `C_5` side: for `(5,q)` with
+q>=9 the bound remains negative and tends to about `-0.1078342693`, although
+the actual spectral slack stays positive in the direct q<=101 scan. Outside
+the C5 pairs, the gluing bound's isolated small failure is `(5,5)` itself.
+Thus extending the lemma to unequal cycles reduces naturally to proving the
+one-parameter family `C_5--C_q`; brute force alone will not close it.
