@@ -211,3 +211,12 @@ All 361,342 graphs were exact-certified. The least rigorous lower endpoint is
 The ordered input SHA-256 is
 `179562801fb7a60d29da2c6a6ed03909c27660ef57fe6ddaf94490005ce4729e`.
 Independent full PARI verification remains next.
+
+**Full PARI pass.** Independent GP workers completed all 361,342 records,
+produced and parsed exact integer characteristic polynomials throughout, and
+found every 80-digit slack positive. The input hash matched SymPy exactly.
+PARI reproduced minimizer `I?`FBqsF_` with
+`s^+-10 = 5.9112811655315422682710710157956986343169838260335...`.
+Thus m=17 is certified by both engines; the cumulative exact two-engine census
+for m=11 through 17 contains 773,865 connected graphs. Fresh reproduction is
+the remaining aggregate verification gate.
