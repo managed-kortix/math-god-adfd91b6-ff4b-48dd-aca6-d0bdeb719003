@@ -32,7 +32,9 @@ passed. Full m=19 now passes both engines on 795,630 graphs; cumulative total
 
 1. Fresh-reproduce the paired m=19 aggregate from regenerated input.
 2. Screen m=20 and exact-certify its low tail.
-3. Package the cumulative n=10 census and compare precisely with what the paper
+3. Run full paired certification for m=20 if the 1,032,754-graph count remains
+   tractable under the compact chunk pipeline.
+4. Package the cumulative n=10 census and compare precisely with what the paper
    already proves via diameter two or claw-free hypotheses.
 4. Extend structural fingerprints from each minimizer to the low 50, especially
    testing triangle-free, claw, inertia, and diameter-two frequencies.

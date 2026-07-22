@@ -11,6 +11,10 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-22: screened all 1,032,754 connected n=10,m=20 graphs. Observed
+  minimum is exact-form `9.055728090000841...` at the circulant
+  `Cay(Z_10,{+/-1,+/-4})`, graph6 `I?rFf_{N?`, with charpoly
+  `x^5(x-4)(x^2+2x-4)^2`. Exact SymPy and PARI certify the low 50.
 - 2026-07-22: m=19 SymPy finished all 32 chunks. Paired aggregate validates
   both engines over 795,630 graphs and reproduces global SHA-256
   `2178cc8ac8ce524cc43ab6671573c0830e2b57df387b8b95c7d275e93d62e041`,
@@ -151,6 +155,7 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 ## next steps
 1. Fresh-reproduce m=19 after paired aggregation.
 2. Screen n=10,m=20 and exact-certify its low tail.
+3. Run full checkpointed m=20 certification if tractable.
 3. Compute structural fingerprints of the certified minimizers.
 4. Derive a compact exact formula for the odd-cycle dumbbell family.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.

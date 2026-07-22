@@ -402,3 +402,19 @@ approximately `8.0627654`, and PARI gives
 `8.062769428154473509087996169435736543...`. Thus m=19 is two-engine
 certified, bringing the cumulative m=11..19 census to 2,130,601 graphs.
 Fresh reproduction remains.
+
+## 2026-07-22 — m=20 screen and low-tail certificate
+
+Screened all 1,032,754 connected n=10,m=20 graphs. The observed minimizer is
+graph6 `I?rFf_{N?`, with slack
+`9.055728090000841214363305325074895058...`. Exact SymPy rational isolation
+certifies the lowest 50 and PARI independently matches all their integer
+characteristic polynomials and slacks. The minimizer factors especially cleanly:
+
+`chi(x)=x^5(x-4)(x^2+2x-4)^2`.
+
+It is the 4-regular circulant `Cay(Z_10,{+/-1,+/-4})`, has automorphism group
+size 320, diameter two, girth four, and no triangles. Its positive eigenvalues
+are `4` and `sqrt(5)-1` with multiplicity two, so exactly
+`s^+=16+2(sqrt(5)-1)^2=28-4sqrt(5)` and slack `18-4sqrt(5)`.
+This low-tail result is exact in both engines, but the full m=20 slice remains.
