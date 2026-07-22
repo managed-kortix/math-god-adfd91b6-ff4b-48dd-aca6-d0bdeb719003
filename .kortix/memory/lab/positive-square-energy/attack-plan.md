@@ -23,8 +23,8 @@ with m >= n+1 satisfies s^+(G) >= n.
 ## Current line
 
 Line 1: n=10,m=11 through 17 fully exact-certified in SymPy and independently
-checked in PARI (773,865 graphs total). The m=18 low 50 are certified; full
-slice next.
+checked in PARI (773,865 graphs total). Full m=18 PARI has passed all 561,106
+graphs; exact SymPy has completed 12/24 atomic chunks and continues.
 
 ## Next experiments
 
@@ -42,6 +42,8 @@ slice next.
 - `job-m18-sympy.pid`: 24 atomic input chunks, 12 outer jobs x 2 SymPy
   workers, exact rational isolation width <10^-6. Input SHA-256
   `b47af8111f2d07caf6fa2d09bba7351d9fa5969bbac63ea0ae3669e2cfe8bdc2`.
+- `job-m18-pari.pid`: COMPLETE, 24/24 atomic chunks, 561,106 total graphs,
+  every exact charpoly parsed and every 80-digit slack positive.
 
 ## Verification discipline
 

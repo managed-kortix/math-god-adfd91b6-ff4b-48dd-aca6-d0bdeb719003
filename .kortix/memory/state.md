@@ -6,11 +6,17 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **current problem**: Positive square energy at cyclomatic number >= 2 —
   arXiv:2506.07264v1, Conjecture 1.2. See
   `lab/positive-square-energy/attack-plan.md`.
-- **phase**: n=10,m=11..17 exact-certified; m=18 full SymPy pass active
+- **phase**: n=10,m=11..17 exact-certified; m=18 PARI complete, SymPy 12/24 chunks
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-22: independent full PARI certification completed all 24 m=18
+  chunks (561,106 graphs), with exact integer characteristic polynomials and
+  strictly positive 80-digit slacks. Global minimum is `I?q`qjo{?` at
+  `6.9242077361381927285...`. The exact SymPy pass has atomically completed
+  12/24 chunks and continues. A low-50 structural scan found 36 diameter-three
+  graphs, all 50 with induced claws, and 40 triangle-free members.
 - 2026-07-22: regenerated all 561,106 m=18 graphs (SHA-256
   `b47af8111f2d07caf6fa2d09bba7351d9fa5969bbac63ea0ae3669e2cfe8bdc2`),
   split them into 24 durable chunks, and launched a 24-core exact rational
@@ -105,7 +111,8 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 ## next steps
 1. Harvest the active checkpointed full SymPy certification for all 561,106
    m=18 graphs; PID is in `job-m18-sympy.pid`.
-2. Run full independent PARI certification for m=18.
+2. Aggregate and fresh-reproduce the completed independent PARI certificate
+   after SymPy finishes.
 3. Compute structural fingerprints of the certified minimizers.
 4. Derive a compact exact formula for the odd-cycle dumbbell family.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.

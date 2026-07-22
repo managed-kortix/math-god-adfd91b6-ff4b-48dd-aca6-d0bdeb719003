@@ -285,3 +285,32 @@ The m=11..17 minimizers all have inertia `(6,0,4)`; m=18 changes to `(5,2,3)`.
 Bridges disappear at m=14, and diameter drops to two at m=15,17,18 (so those
 slices are already covered by the paper's diameter-two theorem, despite being
 useful verifier checks).
+
+For later comparison with the bridge perturbation, the positive square-energy
+of the underlying odd cycle itself has a closed trigonometric form. Writing
+`a=pi/(2n)` and summing the positive eigenvalues `2 cos(2 pi j/n)` gives
+
+- if `n=4l+1`, `s^+(C_n)-n = 3-4 cos(a) sin(3a)/sin(4a)`;
+- if `n=4l+3`, `s^+(C_n)-n = 1-4 cos(3a) sin(a)/sin(4a)`.
+
+These identities follow directly from the finite cosine sum after replacing
+`cos^2(theta)` by `(1+cos(2theta))/2`. They explain the alternating sign of
+the odd-cycle slack and provide an explicit baseline for proving that the
+rank-one symmetric/antisymmetric bridge perturbations together contribute
+enough to make the dumbbell slack positive.
+
+The m=18 low-50 structural scan found 14 diameter-two and 36 diameter-three
+graphs; 40 are triangle-free of girth four and 10 have one triangle; all 50
+contain an induced claw. Their inertia is not constant (seven distinct
+triples), with `(4,3,3)` most frequent (18/50). Therefore the exact exhaustive
+slice adds genuinely uncovered diameter-three cases, while the extremal graph
+itself has diameter two and lies in a previously proved class.
+
+**Independent full m=18 PARI pass.** The 24 checkpointed GP chunks completed
+all 561,106 graphs. Each graph's exact integer characteristic polynomial was
+generated and parsed, and every 80-digit real-root slack was strictly positive.
+PARI's global minimum is graph6 `I?q`qjo{?`, with
+`s^+-10 = 6.9242077361381927285404716806637992814001351189309953...`,
+agreeing with the earlier low-tail result. The exact SymPy pass has completed
+12 of 24 atomic chunks; no full two-engine claim is made until the remainder
+finishes and aggregate hashes/counts are checked.
