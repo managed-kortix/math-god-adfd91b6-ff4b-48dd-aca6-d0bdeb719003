@@ -582,3 +582,10 @@ strictly negative for r>1 wherever the denominator is nonzero. Thus the right
 side decreases while r^q increases, proving uniqueness of the positive bound
 state on each admissible branch. This should make comparison with the limiting
 root r=3^(1/5) a sign check rather than a root-isolation problem.
+
+Correction to that last comparison target: the limiting r is the pole of the
+rational function, i.e. the >1 zero of A(r), not `3^(1/5)`. Exact signs
+`A(5/3)<0<A(17/10)` bracket it in `(5/3,17/10)`. For finite q the solution is
+to the right of this pole and decreases toward it, matching q=3,5,... data.
+The monotonicity calculation remains valid; only the mistakenly identified
+limit was replaced.
