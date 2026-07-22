@@ -12,6 +12,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-22: the fresh m=19 process ended after completing atomic SymPy
+  chunks 16..28; chunks 0..15 had only stale temporary files and 29..31 were
+  untouched. Removed only `.tmp` files and resumed from the 13 valid outputs.
 - 2026-07-22: launched a newly scripted, checkpointed fresh reproduction of
   the full m=19 slice from regenerated nauty input. It runs 32 atomic SymPy
   chunks, then independent PARI chunks and standalone aggregation.
