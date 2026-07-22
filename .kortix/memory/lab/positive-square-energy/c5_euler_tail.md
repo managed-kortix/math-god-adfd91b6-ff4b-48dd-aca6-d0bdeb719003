@@ -23,3 +23,20 @@ It remains to combine the two fractional endpoint integrals
 their total is the congruence-dependent O(q^-2) term seen numerically. A crude
 absolute bound below 0.38 is enough. This endpoint lemma is the sole remaining
 gap in the C5--Cq proof.
+
+This gap closes by Lipschitz bounds. Since `|f'|<=4` and
+`theta'<=pi/(q/2-10)`,
+
+`L:=sup|F'|<=4pi/(q/2-10)<0.03555` at q>=727.
+
+On the left half-cell, the difference between `F(0)/2` and the integral over
+`[-1/2,0]` has magnitude at most `L/4<0.00889`. On the right, write
+`rho=u(pi/2)-m`. We have `0<rho<3/4` in both congruence classes and
+`F(u(pi/2))=0`; hence `F(m)<=rho L` and
+
+`|F(m)/2-int_m^(m+rho)F| <= rho L/2+rho^2 L/2 <15L/32<0.01667`.
+
+Together with the interior error <0.011, the complete finite-band quadrature
+error is <0.037. This is below the available defect margin
+`2+(34/15)^2-(sqrt(5)+9/2)>0.401`. The q>=727 tail is therefore proved once
+the limiting density identity is stated with these endpoint orientations.

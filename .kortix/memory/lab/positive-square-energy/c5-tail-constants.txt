@@ -1,0 +1,1 @@
+PASS exact tail margin>2/5 and quadrature error=180939/4949000<1/25
