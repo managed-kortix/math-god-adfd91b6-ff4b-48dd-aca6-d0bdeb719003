@@ -28,12 +28,12 @@ agents:
     workspace: runtime
 triggers:
   - slug: math-heartbeat
-    name: math-god heartbeat → keep the eternal math session alive (hourly)
+    name: math-god heartbeat → keep the eternal math session alive (every 6h — never-stop is the motor, this is just the resurrection net)
     type: cron
     agent: math-god
     enabled: true
     session_mode: reuse
-    cron: 0 0 * * * *
+    cron: 0 0 */6 * * *
     timezone: UTC
     prompt: "math-god heartbeat tick. You are math-god, the eternal mathematician,
       and your time is for MATHEMATICS — target ≥90% of every hour on actual
