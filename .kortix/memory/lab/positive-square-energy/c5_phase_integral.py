@@ -11,6 +11,16 @@ COEFF=[s.Rational(v,1000) for v in
         -4738265457,6012185972,-4728030260,2094110383,-398872274]]
 P=sum(v*c**k for k,v in enumerate(COEFF))
 
+def atan_lower(x: s.Rational, terms: int) -> s.Rational:
+    # Alternating series truncated after a positive term is a lower bound.
+    assert terms%2==1
+    return sum((-1)**k*x**(2*k+1)/s.Rational(2*k+1) for k in range(terms))
+
+def atan_upper(x: s.Rational, terms: int) -> s.Rational:
+    # Truncated after a negative term is an upper bound.
+    assert terms%2==0
+    return sum((-1)**k*x**(2*k+1)/s.Rational(2*k+1) for k in range(terms))
+
 def main():
     # D<0.  E=PD-N<0 implies P>N/D=delta'. Endpoint c=1 is equality.
     E=s.Poly(s.expand(P*D-N),c)
@@ -20,6 +30,8 @@ def main():
     # J upper-bounds integral 4 cos^2(theta) delta'(theta). Prove J<-2pi
     # with the classical continued-fraction lower bound pi>103993/33102.
     residual=s.simplify(J+2*s.pi)
+    pi_lower=4*(4*atan_lower(s.Rational(1,5),9)-atan_upper(s.Rational(1,239),2))
+    assert pi_lower>s.Rational(103993,33102)  # Machin formula + alternating bounds
     upper=residual.subs(s.pi,s.Rational(103993,33102))
     assert upper<0
     print("PASS polynomial majorant delta'<=P and phase integral I=-2-J/pi>0")
