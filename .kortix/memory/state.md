@@ -72,6 +72,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   generated and parsed every exact integer characteristic polynomial, found all
   80-digit slacks positive, and agreed on the minimizer `I?`DF`YN?` with slack
   `5.0618714727969400821989576329...`. Thus m=16 passes both engines.
+- 2026-07-22: launched the final fresh-process reproduction from a newly
+  generated 211,866-line graph6 file; the bounded SymPy stage remains active
+  across the heartbeat. Do not duplicate or kill it; PARI is chained after it.
 
 ## next steps
 1. Fresh-process reproduce both compact m=16 certificates and preserve outputs.
