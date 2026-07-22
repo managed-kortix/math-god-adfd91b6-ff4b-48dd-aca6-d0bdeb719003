@@ -863,3 +863,9 @@ dual and still covers q through roughly 700 after rational safety shifts. This
 removes all dependence on separately proving sharp outlier bounds. A second
 rational minorant on [-3,3] is preferable for the final certificate despite a
 slightly shorter finite range.
+
+Added a standalone exact recurrence/regression certificate for all S_q power
+sums through degree 16 over odd q=25..65. It reproduces every affine/constant
+formula from exact Chebyshev quotient polynomials and Newton identities. This
+is strong machine evidence but not yet an all-q proof; the final writeup should
+derive the leading 16 coefficients uniformly from the Chebyshev recurrence.
