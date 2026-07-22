@@ -6,12 +6,16 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **current problem**: Positive square energy at cyclomatic number >= 2 —
   arXiv:2506.07264v1, Conjecture 1.2. See
   `lab/positive-square-energy/attack-plan.md`.
-- **phase**: n=10,m=11..19 exact-certified and fresh-reproduced;
-  m=20 low tail exact-certified
+- **phase**: n=10,m=11..19 exact-certified and fresh-reproduced; m=20 full
+  certification active; C5--Cq tail constants certified, summation identity pending
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-22: sandbox resurrection preserved 20/40 durable m=20 SymPy chunks;
+  nauty was restored and only missing chunks relaunched. Exact phase-tail
+  constants for C5--Cq give quadrature error <1/100 versus margin 241/600;
+  finite-root Euler/endpoint identity still requires formal verification.
 - 2026-07-22: m=20 second wave ended with four more durable chunks (28..31),
   bringing SymPy to 20/40. Removed temporary files and resumed the 20 missing
   chunks only.
@@ -202,8 +206,8 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 
 ## next steps
 1. Harvest the active full checkpointed paired m=20 certification.
+2. Formalize and adversarially verify the C5--Cq finite-band Euler identity.
 3. Compute structural fingerprints of the certified minimizers.
-4. Derive a compact exact formula for the odd-cycle dumbbell family.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.
 5. Use the certified X pipeline only when a result passes every mathematical
    verification gate (or under the doctrine's casual-post lane).

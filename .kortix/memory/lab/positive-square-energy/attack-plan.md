@@ -39,6 +39,9 @@ m=20 slice has been float-screened and its low 50 certified in both engines.
    testing triangle-free, claw, inertia, and diameter-two frequencies.
 5. Package the completed gluing-lemma proof for all equal odd-cycle dumbbells
    and adversarially check every inequality and hypothesis against the paper.
+6. Formalize the exact Euler-summation identity for the C5--Cq band. The tail
+   constants pass with error <1/100, but endpoint/sign correspondence must be
+   explicit before accepting this unequal-family result.
 
 ## Running jobs
 
@@ -61,7 +64,8 @@ m=20 slice has been float-screened and its low 50 certified in both engines.
 - `job-m20-known-classes.pid`: COMPLETE, 1,032,754 graphs; 979,340 outside
   both diameter-two and claw-free classes.
 - `job-m20-full.pid`: ACTIVE, 40 atomic chunks over 1,032,754 regenerated
-  graphs; paired SymPy/PARI stages and whole-file aggregation.
+  graphs; 20 prior durable SymPy chunks survived sandbox resurrection and only
+  missing chunks were relaunched; paired PARI and aggregation are chained.
 
 ## Verification discipline
 

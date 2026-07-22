@@ -1059,3 +1059,19 @@ The symbolic Newton machinery also extends cheaply to degree 32; moments
 p18=24310q+3827396, ..., p31=78461383317,
 p32=300540195q+330927764929). A degree-32 minorant may move the exact finite
 frontier by orders of magnitude, buying room for a very crude analytic tail.
+
+The first exact tail-constant certificate now passes. From the already
+Sturm-certified bounds `|delta'|<10`, `|delta''|<60`, inverse differentiation
+gives, for `F(u)=4cos^2(theta(u))`,
+
+`|F''| <= 8pi^2/a^2+240pi^2/a^3`, `a=q/2-10`.
+
+Applying midpoint error on at most `(q+7)/4` unit cells and a conservative
+terminal interval of length below `1/3` gives total error at q=727 below
+`7362936152/1402617781467 < 1/100`; the bound decreases thereafter. Meanwhile
+the outlier bracket `r>5/3` gives `2+x_+^2 > 2+(34/15)^2`, whose margin over
+the target, even replacing `sqrt(5)` by `161/72`, is `241/600`. Thus the
+numerical constants have nearly 0.397 certified spare margin. The remaining
+proof obligation is not an estimate but a fully explicit Euler-summation
+identity matching the finite band roots, integral, and endpoint correction to
+`D_q`; adversarially verify that correspondence before claiming the theorem.
