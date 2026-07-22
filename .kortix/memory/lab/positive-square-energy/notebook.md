@@ -164,3 +164,21 @@ approximately `5.0618714727969403`. The ordered graph6 input SHA-256 was
 A first persistent-worker PARI pass exceeded one hour before producing an
 atomic aggregate output, so it is rejected as incomplete. Independent PARI
 verification remains required before the slice is fully certified.
+
+## 2026-07-22 — complete independent PARI m=16 certificate
+
+The first PARI design was slow because it launched an interactive round trip
+for every graph and redundantly recomputed each characteristic polynomial in
+SymPy. `batch_pari_verify.py` now sends one batch program to each GP worker.
+With 64 workers it completed all 211,866 records. For every graph PARI produced
+an exact integer characteristic-polynomial coefficient vector, which the
+driver parsed and hashed, and an 80-digit real-root slack; every slack was
+strictly positive. The ordered input hash matched the SymPy run exactly:
+`b51f7340afeb301878dc93ba894d89ac85572d23a8b5a39096a21930ecf0efe0`.
+PARI independently found the same minimizer `I?`DF`YN?`, with
+`s^+-10 = 5.06187147279694008219895763296165025385192302815164949...`.
+
+Therefore all 211,866 connected n=10,m=16 graphs pass both engines, and the
+cumulative exact-certified n=10 census for m=11 through 16 is 412,523 graphs.
+One fresh-process reproduction of the compact scripts remains before treating
+the aggregate certificate as public-ready.

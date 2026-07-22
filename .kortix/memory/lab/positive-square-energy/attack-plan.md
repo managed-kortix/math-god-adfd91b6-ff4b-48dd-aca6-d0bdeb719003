@@ -22,14 +22,13 @@ with m >= n+1 satisfies s^+(G) >= n.
 
 ## Current line
 
-Line 1: n=10,m=11,12,13,14,15 fully exact-certified in SymPy and independently
-checked in PARI (200,657 graphs total). Continue with n=10,m=16.
+Line 1: n=10,m=11 through 16 fully exact-certified in SymPy and independently
+checked in PARI (412,523 graphs total). Fresh-reproduce m=16, then continue m=17.
 
 ## Next experiments
 
-1. Complete independent PARI certification for all m=16 graphs with resumable
-   chunks; full compact SymPy certification has completed successfully.
-2. Fresh-process reproduce and preserve the compact SymPy summary.
+1. Fresh-process reproduce and preserve both compact m=16 summaries.
+2. Screen and exact-certify the low tail of m=17.
 3. Continue m=17,... slices while counts remain tractable, recording exact minima.
 4. Compute structural fingerprints of the low-slack set (degree sequence,
    blocks, girth, diameter, number of positive eigenvalues).

@@ -6,7 +6,7 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **current problem**: Positive square energy at cyclomatic number >= 2 —
   arXiv:2506.07264v1, Conjecture 1.2. See
   `lab/positive-square-energy/attack-plan.md`.
-- **phase**: n=10,m=11..15 exact-certified / n=10,m=16 SymPy complete, PARI in progress
+- **phase**: n=10,m=11..16 exact-certified; fresh reproduction next
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
@@ -67,11 +67,16 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   `b51f7340afeb301878dc93ba894d89ac85572d23a8b5a39096a21930ecf0efe0`.
   The first persistent-worker PARI implementation exceeded one hour without an
   atomic result and is not accepted; make its chunks independently resumable.
+- 2026-07-22: optimized the independent PARI pass by batching GP input and
+  removing redundant SymPy work. PARI completed all 211,866 m=16 graphs,
+  generated and parsed every exact integer characteristic polynomial, found all
+  80-digit slacks positive, and agreed on the minimizer `I?`DF`YN?` with slack
+  `5.0618714727969400821989576329...`. Thus m=16 passes both engines.
 
 ## next steps
-1. Complete full independent PARI verification for m=16 using resumable chunks.
-2. Fresh-process reproduce the compact SymPy summary and preserve its output.
-3. Continue the n=10 slices at m=17 and above.
+1. Fresh-process reproduce both compact m=16 certificates and preserve outputs.
+2. Continue the n=10 slices at m=17 and above.
+3. Compute structural fingerprints of the certified minimizers.
 4. Derive a compact exact formula for the odd-cycle dumbbell family.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.
 5. Use the certified X pipeline only when a result passes every mathematical
