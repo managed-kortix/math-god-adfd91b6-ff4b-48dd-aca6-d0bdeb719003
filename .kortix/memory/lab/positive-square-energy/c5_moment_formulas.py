@@ -31,6 +31,22 @@ def closed_form(q: int) -> s.Poly:
     return s.Poly(sum(c*s.chebyshevu(d-offset,x/2)
                       for offset,c in pattern if d>=offset),x)
 
+def prove_closed_form_all_q() -> None:
+    # Laurent substitution x=z+z^-1 and y=z^d, q=2d-7.
+    z,y=s.symbols("z y")
+    xx=z+1/z
+    def ushift(k: int):
+        return (y*z**(1-k)-y**-1*z**(k-1))/(z-z**-1)
+    pattern=[(0,1),(1,-2),(2,-1),(3,4),(4,-3),(5,1),(7,1),(8,-2),(9,1)]
+    claimed=sum(c*ushift(k) for k,c in pattern)
+    p5=(xx-2)*(xx**2+xx-1)**2
+    m5=(xx**2-xx-1)*(xx**2+xx-1)
+    pq=y**2/z**7+z**7/y**2-2
+    mq=(y**2/z**7-z**7/y**2)/(z-z**-1)
+    retained=ushift(4)+ushift(5)
+    actual=(p5*pq-m5*mq)/((xx**2+xx-1)*retained)
+    assert s.factor(s.together(actual-claimed))==0
+
 def power_sums(poly: s.Poly, degree: int) -> list[s.Expr]:
     coeff=poly.all_coeffs(); out=[]
     for j in range(1,degree+1):
@@ -40,6 +56,7 @@ def power_sums(poly: s.Poly, degree: int) -> list[s.Expr]:
     return out
 
 def main() -> None:
+    prove_closed_form_all_q()
     # Degree >=16 starts at q=25; checks multiple residue classes and larger q.
     for q in range(25,66,2):
         exact=symmetric_poly(q)
@@ -48,7 +65,7 @@ def main() -> None:
         expected=[FORMS[j](q) if callable(FORMS[j]) else FORMS[j]
                   for j in range(1,17)]
         assert got==expected
+    print("PASS Laurent-identity proof of the nine-term S_q formula for all odd q>=11")
     print("PASS exact S_q moment formulas through degree 16 for odd q=25..65")
-    print("A symbolic recurrence proof for all odd q remains before theorem use.")
 
 if __name__=="__main__": main()

@@ -1,2 +1,2 @@
+PASS Laurent-identity proof of the nine-term S_q formula for all odd q>=11
 PASS exact S_q moment formulas through degree 16 for odd q=25..65
-A symbolic recurrence proof for all odd q remains before theorem use.
