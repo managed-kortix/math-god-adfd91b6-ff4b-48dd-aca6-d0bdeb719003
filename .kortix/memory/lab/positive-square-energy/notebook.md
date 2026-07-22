@@ -886,6 +886,16 @@ with the final sign already following from `pi<355/113`. Hence
 greater than 7.1377, comfortably above the uniform target. Only finite-q
 convergence to this limit remains for q>=727.
 
+Direct q=727 evaluation gives `D_727=7.4189664113`, margin 0.682898 over the
+target; the finite-limit discrepancy is only about 3.75e-6. Hence the tail
+proof does not need a sharp Euler-Maclaurin constant: any uniform bound
+`|D_q-D_inf|<0.4` suffices. From `|delta'|<10`, the inverse quantization map is
+a contraction with derivative at most `20/q<0.028`; bounding delta itself by
+`pi/2+10pi<33` gives root shifts below `66/q<0.091`. A crude first-order sum
+still risks O(1), but midpoint cancellation plus `|delta''|<60` should readily
+put the remainder below 0.4. This is now a constants-only exercise, not an
+asymptotic precision problem.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
