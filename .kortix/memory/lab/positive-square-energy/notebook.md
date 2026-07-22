@@ -804,3 +804,12 @@ LPs correctly report infeasibility even through degree seven. Any moment proof
 must therefore include an even polynomial component (the earlier positive-part
 minorant), exclude a certified zero-free gap, or split positive and negative
 supports using the inertia/interlacing information.
+
+There is no q-uniform spectral gap at zero: the smallest absolute S_q root is
+positive and about `2/q` for q=1 mod 4, while for q=3 mod 4 it is negative and
+about `4/q`. Exact constant/linear coefficients show the local Newton estimate:
+S_q(0) cycles through `3,5,-3,-5`, and for q=1 mod 4 the tangent root estimate
+is exactly `3/(q+10)` (examples 3/14,3/18,3/22,... after indexing), matching
+the observed O(1/q) root. Therefore a gap-based polynomial certificate cannot
+be uniform; the near-zero root must be treated explicitly or absorbed into an
+O(q^-2) tail remainder.
