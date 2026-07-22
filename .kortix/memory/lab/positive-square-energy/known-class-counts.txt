@@ -1,0 +1,1 @@
+n10m18.g6 count 561106 diameter2 3418 clawfree 807 union 4225 uncovered 556881

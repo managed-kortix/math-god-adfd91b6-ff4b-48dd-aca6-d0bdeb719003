@@ -14,6 +14,11 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - 2026-07-22: fresh m=18 reproduction completed end-to-end in both engines.
   Standalone aggregate exactly reproduced 24 chunks, 561,106 graphs, global
   input hash, minimizer, rational lower bound, and 80-digit PARI slack.
+- 2026-07-22: regenerated all 795,630 m=19 graphs with SHA-256
+  `2178cc8ac8ce524cc43ab6671573c0830e2b57df387b8b95c7d275e93d62e041`,
+  split into 32 durable chunks, and launched the full exact SymPy pass at
+  width <10^-6. A separate exact structural counter is measuring how many
+  m=18,19 graphs evade the paper's diameter-two/claw-free theorems.
 - 2026-07-22: freshly regenerated m=18 input exactly matches the prior global
   hash; fresh SymPy reproduction has completed 12/24 chunks and continues.
   Screened all 795,630 connected n=10,m=19 graphs: numerical minimum slack

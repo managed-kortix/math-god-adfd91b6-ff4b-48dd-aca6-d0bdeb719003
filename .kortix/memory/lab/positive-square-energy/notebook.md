@@ -373,3 +373,11 @@ and PARI gives slack
 `8.0627694281544735090879961694357365431607856405603...`. This remains a
 low-tail certificate, not a full-slice proof. The fresh m=18 input meanwhile
 reproduced the previous SHA-256 exactly; 12/24 fresh SymPy chunks have passed.
+
+**Full m=19 pass launched.** Regenerated all 795,630 records, ordered SHA-256
+`2178cc8ac8ce524cc43ab6671573c0830e2b57df387b8b95c7d275e93d62e041`,
+and split them into 32 atomic chunks. The full exact SymPy pass uses width
+below `10^-6`, ample against the screened slack above 8, and remains active.
+`count_known_classes.py` is separately counting exact diameter-two and induced-
+claw predicates over m=18,19 so the genuinely new portion of the computation
+can be stated rather than conflated with classes already proved in the paper.

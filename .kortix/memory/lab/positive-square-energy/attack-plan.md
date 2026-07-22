@@ -47,6 +47,11 @@ is the remaining gate.
   every exact charpoly parsed and every 80-digit slack positive.
 - `job-m18-fresh.pid`: COMPLETE. Final standalone aggregate exactly reproduced
   both engines, all counts/hashes, minimizer, and bounds.
+- `job-m19-sympy.pid`: active, 32 atomic chunks, 16 outer x 2 workers,
+  exact rational isolation width <10^-6; input hash
+  `2178cc8ac8ce524cc43ab6671573c0830e2b57df387b8b95c7d275e93d62e041`.
+- `job-known-classes.pid`: active count of diameter-two/claw-free theorem
+  coverage for the complete m=18,19 slices.
 
 ## Verification discipline
 
