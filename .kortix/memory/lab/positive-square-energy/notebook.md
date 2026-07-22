@@ -821,6 +821,14 @@ only the one quintic root changes monotonicity. This removes the C5 poles from
 the analytic remainder problem and is the right phase variable for Euler-
 Maclaurin.
 
+Numerically `delta'` lies in approximately [-9.094,1.6], and
+`|delta''|<52.8`. For q>=727, the root quantization map
+`theta -> q theta/2-delta(theta)` therefore has derivative at least
+`q/2-1.6>361`, giving uniform one-root-per-cell inversion and shifts of order
+1/q. Even very coarse rational bounds `|delta'|<10`, `|delta''|<60` would be
+ample. These can be certified by polynomial positivity on c in [-1,1] and
+should yield an explicit O(q^-2) quadrature remainder.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
