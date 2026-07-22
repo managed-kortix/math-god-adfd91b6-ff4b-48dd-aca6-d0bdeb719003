@@ -1,0 +1,1 @@
+stdin count 1032754 diameter2 52476 clawfree 942 union 53414 uncovered 979340

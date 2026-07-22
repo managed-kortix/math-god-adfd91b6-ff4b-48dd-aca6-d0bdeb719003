@@ -477,3 +477,9 @@ There are 26 triangle-free members and 24 with triangles (13 with one, nine
 with two, two with three), and ten distinct inertia triples. The low tail is
 therefore structurally heterogeneous and mostly not explained by those two
 published sufficient conditions, even though its exact minimizer is.
+
+The complete m=20 theorem-coverage count confirms this at full scale. Of all
+1,032,754 connected graphs, 52,476 have diameter two and 942 are claw-free;
+the union has 53,414 graphs, leaving 979,340 outside both classes. The overlap
+is four graphs. Thus 94.83% of this slice is not covered by either of the two
+headline sufficient conditions in the target paper.

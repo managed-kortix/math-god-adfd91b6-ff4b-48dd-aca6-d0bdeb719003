@@ -28,6 +28,8 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - 2026-07-22: adversarial review repaired the gluing diagonal calculation via
   `d=csc(pi/(2n))/n` and exact rational Taylor bounds; the corrected proof is
   recorded in `equal-odd-dumbbell-proof.md`.
+- 2026-07-22: full m=20 coverage census found 979,340/1,032,754 graphs outside
+  both diameter-two and claw-free classes (94.83%); union coverage is 53,414.
 - 2026-07-22: screened all 1,032,754 connected n=10,m=20 graphs. Observed
   minimum is exact-form `9.055728090000841...` at the circulant
   `Cay(Z_10,{+/-1,+/-4})`, graph6 `I?rFf_{N?`, with charpoly

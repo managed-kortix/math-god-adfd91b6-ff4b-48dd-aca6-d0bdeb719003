@@ -59,6 +59,8 @@ m=20 slice has been float-screened and its low 50 certified in both engines.
   SymPy stage precedes fresh PARI and standalone aggregation.
 - `job-known-classes.pid`: active count of diameter-two/claw-free theorem
   coverage for the complete m=18,19 slices.
+- `job-m20-known-classes.pid`: COMPLETE, 1,032,754 graphs; 979,340 outside
+  both diameter-two and claw-free classes.
 
 ## Verification discipline
 
