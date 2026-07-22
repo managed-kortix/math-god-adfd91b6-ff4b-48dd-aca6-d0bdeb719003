@@ -631,3 +631,9 @@ more positive root than Cq after the persistent positive root is removed.
 That extra root explains why coordinatewise interlacing is the wrong target;
 a majorization or phase-sum inequality should use the additional positive
 degree of freedom.
+
+At x=0 the reduced polynomial is exactly -3 for q=1 mod 4 and -5 for
+q=3 mod 4 (verified symbolically through q=21 and immediate from the
+Chebyshev values at zero). Combined with the one-positive/one-negative
+outliers and simple-root interlacing in the band, this gives a promising
+elementary route to formalizing the inertia pattern without full Sturm chains.
