@@ -6,11 +6,17 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **current problem**: Positive square energy at cyclomatic number >= 2 —
   arXiv:2506.07264v1, Conjecture 1.2. See
   `lab/positive-square-energy/attack-plan.md`.
-- **phase**: n=10,m=11..17 exact-certified; m=18 PARI complete, SymPy 12/24 chunks
+- **phase**: n=10,m=11..18 exact-certified; m=18 fresh reproduction pending
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-22: full m=18 SymPy completed all 24 chunks. The standalone
+  aggregator validated every per-chunk count/hash in both engines, all 561,106
+  records, global SHA-256 `b47af8111f2d07caf6fa2d09bba7351d9fa5969bbac63ea0ae3669e2cfe8bdc2`,
+  common minimizer `I?q`qjo{?`, and exact SymPy lower bound
+  `17510320956417/2528856896644 > 6.9242039`. Also exact-certified equal
+  odd-cycle dumbbells through cycle length 101; minimum remains n=5.
 - 2026-07-22: independent full PARI certification completed all 24 m=18
   chunks (561,106 graphs), with exact integer characteristic polynomials and
   strictly positive 80-digit slacks. Global minimum is `I?q`qjo{?` at
@@ -109,10 +115,8 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   50; minimizer charpoly is `x^2(x-1)^3(x+2)^2(x^3-x^2-12x+8)`.
 
 ## next steps
-1. Harvest the active checkpointed full SymPy certification for all 561,106
-   m=18 graphs; PID is in `job-m18-sympy.pid`.
-2. Aggregate and fresh-reproduce the completed independent PARI certificate
-   after SymPy finishes.
+1. Fresh-reproduce the complete m=18 input and both aggregate certificates.
+2. Continue the n=10 edge slices while counts remain tractable.
 3. Compute structural fingerprints of the certified minimizers.
 4. Derive a compact exact formula for the odd-cycle dumbbell family.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.

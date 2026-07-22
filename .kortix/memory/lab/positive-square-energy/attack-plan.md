@@ -23,15 +23,16 @@ with m >= n+1 satisfies s^+(G) >= n.
 ## Current line
 
 Line 1: n=10,m=11 through 17 fully exact-certified in SymPy and independently
-checked in PARI (773,865 graphs total). Full m=18 PARI has passed all 561,106
-graphs; exact SymPy has completed 12/24 atomic chunks and continues.
+checked in PARI. Full m=18 passed both engines on all 561,106 graphs, with all
+chunk hashes/counts aggregated; cumulative total 1,334,971. Fresh reproduction
+is the remaining gate.
 
 ## Next experiments
 
-1. Harvest the active 24-chunk compact SymPy certification for all 561,106
-   m=18 graphs; rerun only missing atomic chunks after interruption.
-2. Run full independent PARI certification for m=18.
-3. Continue m=17,... slices while counts remain tractable, recording exact minima.
+1. Fresh-reproduce m=18 from a newly generated input in both engines.
+2. Continue m=19,... slices while counts remain tractable, recording exact minima.
+3. Package the cumulative n=10 census and compare precisely with what the paper
+   already proves via diameter two or claw-free hypotheses.
 4. Extend structural fingerprints from each minimizer to the low 50, especially
    testing triangle-free, claw, inertia, and diameter-two frequencies.
 5. Use the proved Chebyshev factorization of the equal odd-cycle dumbbell to
@@ -40,7 +41,7 @@ graphs; exact SymPy has completed 12/24 atomic chunks and continues.
 ## Running jobs
 
 - `job-m18-sympy.pid`: 24 atomic input chunks, 12 outer jobs x 2 SymPy
-  workers, exact rational isolation width <10^-6. Input SHA-256
+  workers, COMPLETE, exact rational isolation width <10^-6. Input SHA-256
   `b47af8111f2d07caf6fa2d09bba7351d9fa5969bbac63ea0ae3669e2cfe8bdc2`.
 - `job-m18-pari.pid`: COMPLETE, 24/24 atomic chunks, 561,106 total graphs,
   every exact charpoly parsed and every 80-digit slack positive.

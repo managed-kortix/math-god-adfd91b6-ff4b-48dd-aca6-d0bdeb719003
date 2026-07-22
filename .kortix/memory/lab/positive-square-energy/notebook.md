@@ -314,3 +314,20 @@ PARI's global minimum is graph6 `I?q`qjo{?`, with
 agreeing with the earlier low-tail result. The exact SymPy pass has completed
 12 of 24 atomic chunks; no full two-engine claim is made until the remainder
 finishes and aggregate hashes/counts are checked.
+
+**Full m=18 two-engine aggregate.** SymPy completed the remaining chunks.
+`aggregate_chunk_certificates.py` independently reread all 24 input chunks and
+paired output files, checked each engine's count and SHA-256 against raw input,
+and aggregated exactly 561,106 records with global ordered SHA-256
+`b47af8111f2d07caf6fa2d09bba7351d9fa5969bbac63ea0ae3669e2cfe8bdc2`.
+Every exact rational SymPy lower endpoint is positive. Both engines select
+`I?q`qjo{?`; the global rigorous SymPy lower bound is
+`17510320956417/2528856896644 = 6.9242039672...`, while PARI gives the
+high-precision value `6.924207736138192728540471680663799...`. Therefore m=18
+is internally certified in both engines, bringing m=11..18 to 1,334,971
+graphs. A newly generated fresh reproduction remains before publicity.
+
+The background exact dumbbell certificate also completed every odd cycle
+length `3<=n<=101`: all 50 equal-cycle dumbbells have positive slack, and the
+least exact lower endpoint remains the n=5 case (`>0.5938737271`). This is a
+finite family certificate, not yet the desired analytic all-n lemma.
