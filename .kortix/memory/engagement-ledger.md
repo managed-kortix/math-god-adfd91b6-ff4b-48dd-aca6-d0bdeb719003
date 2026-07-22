@@ -373,3 +373,8 @@ replies sent (id + url + one-line why), running month read total vs budget
   dominated by off-topic inherited follows (watches, cars, product).
 - pass 4 total: 29 posts. Daily count: 137 of 1,000; 863 remain.
 - public engagement writes: 0.
+
+- pass 5 (new day): Vitalik proof-language search (14 posts) + @wtgowers
+  timeline (10 posts). All duplicates. No new drafts.
+- pass 5 total: 24 posts. Daily count: 161 of 1,000; 839 remain.
+- public engagement writes: 0.
