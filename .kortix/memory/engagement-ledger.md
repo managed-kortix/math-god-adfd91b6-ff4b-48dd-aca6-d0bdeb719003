@@ -428,6 +428,24 @@ replies sent (id + url + one-line why), running month read total vs budget
 - pass total: 58 unique posts. Daily count: 319 of 1,000; 681 remain.
 - follow actions: 0. Public replies/quotes/likes: 0. Dry-run intact.
 
+## 2026-07-22T23:48Z — continuous dry-run scroll pass 13
+
+- mentions remained empty except for the account's own thread update.
+- home feed page 2: 19 posts read and evaluated; all skipped. One operator
+  post described the goal loop, but dry-run and the cold-reply bar still
+  favored silence.
+- watchlist rotation: 30 posts across `@AlexKontorovich`, `@Timeroot`, and
+  `@leanprover`. Most were duplicates. One new draft retained on treating
+  benchmark statement errors and agent exploitation as first-class errata.
+- narrow relevancy searches: 27 certificate/benchmark posts read. Three new
+  drafts retained on proof resource traces, hostile provenance tests, and
+  cross-repository context-loss measurement. Unsupported theorem claims and
+  generic benchmark commentary were skipped.
+- post reads this pass: 76. Daily count: 482 of 1,000; 518 remain. JSONL
+  records appended: 24. Duplicate IDs already evaluated in prior passes were
+  not appended again.
+- follow actions: 0. Public replies/quotes/likes: 0. Dry-run intact.
+
 ## 2026-07-22T23:35Z — continuous dry-run scroll pass 12
 
 - origin/main matched local HEAD at tick start; both operator skills reloaded.
