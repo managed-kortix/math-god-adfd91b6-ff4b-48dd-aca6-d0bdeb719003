@@ -68,3 +68,12 @@ The gluing lemma gives
 The only remaining n=1 mod 4 cases, n=5 and n=9, pass the standalone exact
 SymPy certificate and independent PARI verification in
 `dumbbell_all_odd_certificate.py` and `dumbbell-all-odd-pari.txt`.
+
+## Novelty check
+
+On 2026-07-22, exact-phrase/topic searches in arXiv and OpenAlex for positive
+square energy together with dumbbell graphs returned no records. The target
+paper itself contains no dumbbell or two-cycles-by-a-bridge discussion. This
+is evidence, not a guarantee, that the lemma is absent from the immediate
+literature. Broader spectral-graph literature still needs checking before a
+novelty claim.
