@@ -18,12 +18,12 @@ def main():
     J=s.simplify(sum(4*v*s.integrate(s.cos(t)**(k+2),(t,0,s.pi/2))
                      for k,v in enumerate(COEFF)))
     # J upper-bounds integral 4 cos^2(theta) delta'(theta). Prove J<-2pi
-    # with the classical upper bound pi<355/113.
+    # with the classical continued-fraction lower bound pi>103993/33102.
     residual=s.simplify(J+2*s.pi)
-    upper=residual.subs(s.pi,s.Rational(355,113))
+    upper=residual.subs(s.pi,s.Rational(103993,33102))
     assert upper<0
     print("PASS polynomial majorant delta'<=P and phase integral I=-2-J/pi>0")
     print(f"J+2pi={residual}")
-    print(f"upper_using_pi_355/113={upper}")
+    print(f"upper_using_pi_gt_103993/33102={upper}")
 
 if __name__=="__main__": main()

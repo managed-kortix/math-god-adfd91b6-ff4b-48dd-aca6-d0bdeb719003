@@ -881,7 +881,8 @@ denominator and Sturm-counting roots. Integration by parts gives
 
 Exact integration of P gives
 `J+2pi=7623356367059/433125-(1434244074019/256000)pi<0`,
-with the final sign already following from `pi<355/113`. Hence
+with the final sign following from the classical continued-fraction lower
+bound `pi>103993/33102`. Hence
 `I_phase>0` rigorously. Together with r>5/3 this proves the limiting defect is
 greater than 7.1377, comfortably above the uniform target. Only finite-q
 convergence to this limit remains for q>=727.

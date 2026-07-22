@@ -30,6 +30,10 @@ polynomial majorant in `c5_phase_integral.py`. The positive outlier has
 `r>5/3`, so the limiting defect exceeds `2+(34/15)^2`, with margin >2/5 over
 the target.
 
+Adversarial note: the phase-integral sign requires a *lower* rational bound on
+pi because its coefficient is negative; the certificate uses
+`pi>103993/33102`.
+
 For q>=727, counting coordinates put the positive band roots at consecutive
 integers. The composite trapezoid error and both fractional endpoint cells are
 bounded in `c5_euler_tail.md`; exact constants in `c5_tail_constants.py` give
