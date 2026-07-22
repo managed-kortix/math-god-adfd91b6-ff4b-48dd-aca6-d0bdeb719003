@@ -924,6 +924,16 @@ At q=727 this is below 0.000686. Even multiplying the trapezoid error by q/4
 intervals gives under 0.011. Endpoint/branch bookkeeping is now the only
 potential source larger than the available 0.40 margin.
 
+The endpoint bookkeeping is now explicit. The continuous branch has
+`delta(0)=pi/2` and `delta(pi/2)=-pi+atan(1/4)`. Hence
+`u(0)=-1/2`, while
+`u(pi/2)=q/4+1-atan(1/4)/pi`. The positive band roots correspond exactly to
+integers `u=0,...,floor(u(pi/2))`: for q=4l+1 this is 0..l+1 (l+2 roots),
+and for q=4l+3 it is 0..l+1 (also l+2 roots). Exact numerical substitution
+for q=9,11,13 reproduces integers to 1e-11. Therefore the finite sum is a
+standard left-endpoint integer quadrature over one explicitly truncated
+interval; no hidden roots cross phase poles.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
