@@ -1,7 +1,7 @@
 # Equal odd-cycle dumbbells
 
 Let `D_n` be formed from two disjoint copies of `C_n` by adding one edge
-between distinguished vertices. For every odd `n>=5`,
+between distinguished vertices. For every odd `n>=3`,
 
 `s^+(D_n)>2n`.
 
