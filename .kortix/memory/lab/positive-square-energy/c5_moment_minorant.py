@@ -27,9 +27,10 @@ def nonpositive_on(poly: s.Poly, left: s.Rational, right: s.Rational) -> bool:
 
 
 def main() -> None:
-    # Spectral support is conservatively contained in [-11/5, 231/100].
-    assert nonpositive_on(P, s.Rational(-11,5), s.Rational(0))
-    assert nonpositive_on(P-s.Poly(x**2,x), s.Rational(0), s.Rational(231,100))
+    # S_q divides the characteristic polynomial of the subcubic dumbbell, so
+    # every root lies in [-3,3] by the adjacency spectral-radius bound.
+    assert nonpositive_on(P, s.Rational(-3), s.Rational(0))
+    assert nonpositive_on(P-s.Poly(x**2,x), s.Rational(0), s.Rational(3))
     slopes = [s.Rational(1,2),0,1,0,3,0,10,0,35,0,126,0,462,0,1716,0,6435]
     intercepts = [s.Rational(7,2),2,11,8,49,37,236,177,1169,872,5861,4413,
                   29548,22817,149349,119788,755809]

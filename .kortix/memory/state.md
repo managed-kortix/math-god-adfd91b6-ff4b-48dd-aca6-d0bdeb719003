@@ -7,11 +7,15 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   arXiv:2506.07264v1, Conjecture 1.2. See
   `lab/positive-square-energy/attack-plan.md`.
 - **phase**: n=10,m=11..19 exact-certified and fresh-reproduced; m=20 full
-  certification active; all odd C5--Cq internally proved, novelty audit pending
+  certification active; all odd C5--Cq internally proved and adversarially audited
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-22: three adversarial C5--Cq audits found no theorem flaw. Repaired
+  the finite certificate's missing sharp-support gate by exact Sturm checks on
+  `[-3,3]`, using maximum degree three; fresh SymPy/PARI master passes. No exact
+  prior theorem found, but this remains a narrow special case and was not posted.
 - 2026-07-22: completed the C5--Cq odd-dumbbell proof. Exact moment minorant
   handles q<=725; phase integral, Euler curvature, and endpoint certificates
   give error <1/25 versus margin >2/5 for q>=727.
@@ -220,8 +224,8 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 
 ## next steps
 1. Harvest the active full checkpointed paired m=20 certification.
-2. Conduct adversarial literature/novelty review and polish the complete
-   C5--Cq proof; only then consider results-lane publication.
+2. Polish the complete C5--Cq proof and seek a broader odd-dumbbell extension;
+   the novelty audit passed but the current family is narrow.
 3. Compute structural fingerprints of the certified minimizers.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.
 5. Use the certified X pipeline only when a result passes every mathematical

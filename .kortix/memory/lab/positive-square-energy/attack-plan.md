@@ -70,6 +70,21 @@ m=20 slice has been float-screened and its low 50 certified in both engines.
   graphs; 20 prior durable SymPy chunks survived sandbox resurrection and only
   missing chunks were relaunched; paired PARI and aggregation are chained.
 
+## Adversarial C5--Cq audit
+
+- Three independent audits reproduced the graph definition, bridge determinant,
+  characteristic factorization, energy translation, finite moment gate, phase
+  root count, outlier, and tail constants. No mathematical counterexample was
+  found.
+- They exposed one certificate-packaging gap: the finite minorant script merely
+  asserted a sharp root interval. Replaced it by exact Sturm checks on `[-3,3]`,
+  justified immediately because `S_q` is a characteristic factor of a graph of
+  maximum degree three. The fresh master certificate passes after this repair.
+- Literature search found no prior C5--Cq positive-square-energy theorem or
+  stronger applicable result. The q=3 case alone already follows from induced-
+  subgraph superadditivity. Current framing: a new narrow bicyclic special case
+  of Conjecture 1.2, not yet strong enough for public results-lane publication.
+
 ## Verification discipline
 
 Numerical eigenvalues are search heuristics only. Any claimed inequality,

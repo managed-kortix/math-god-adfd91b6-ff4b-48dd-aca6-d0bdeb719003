@@ -1154,3 +1154,21 @@ tail certificate, ending with:
 This is now an internally verified family lemma, not merely work-in-progress.
 Do not post yet: adversarial novelty/literature review and polished proof audit
 are the remaining publicity gates.
+
+Three adversarial reviews independently reconstructed the bridge determinant,
+factorization, target translation, finite moment proof, phase enumeration,
+outlier, and exact tail margin. They found no theorem-level flaw, but correctly
+identified that `c5_moment_minorant.py` checked only a sharp spectral interval
+whose proof was absent from the master certificate. The same rational minorant
+is in fact valid on all of `[-3,3]`: exact Sturm root counts show `P<0` on
+`[-3,0]` and `P-x^2<0` on `[0,3]`. Since the dumbbell has maximum degree three
+and `S_q` divides its characteristic polynomial, this closes spectral support
+without a separate root-location lemma. The repaired fresh master script passes.
+
+The novelty audit found no prior theorem on positive square energy of cycle
+dumbbells, and no stronger known theorem implying this family. It did find that
+q=3 follows already from induced-cycle superadditivity, and that July 2026 work
+settled only the original universal `n-1` square-energy conjecture, not the
+`m>=n+1 => s+>=n` refinement. Thus C5--Cq is apparently a new but narrow
+bicyclic special case. Keep it private until either the exposition is polished
+and significance judged adequate or it extends to a broader dumbbell class.
