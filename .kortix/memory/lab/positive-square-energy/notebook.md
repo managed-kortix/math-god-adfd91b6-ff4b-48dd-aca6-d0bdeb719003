@@ -374,6 +374,37 @@ Consequently the analytic family problem is now rigorously reduced to
 `n=1 mod 4`, where superadditivity misses by only
 `2(sec(pi/n)-1)=O(n^-2)` and the bridge perturbation must repay that deficit.
 
+The remaining congruence class also yields to the paper's gluing lemma. View
+`D_n` as base `K_2`, with one rooted `C_n` glued to each endpoint. Vertex-
+transitivity gives the negative spectral diagonal
+`d=sqrt(s^-(C_n))/n`. The gluing correction is the positive square energy of
+`Gamma=[[-d,1],[1,-d]]`, namely `(1-d)^2`. For an odd cycle,
+`s^-(C_n)=2n-s^+(C_n)<n+1`, hence for every `n>=9`,
+`d<sqrt(n+1)/n<=sqrt(10)/9<2/3`, so `(1-d)^2>1/9`. Meanwhile
+`cos x >= 1-x^2/2` and `pi<22/7` give
+`sec(pi/n)-1 < 1/9` for `n>=9`. Therefore, when `n=1 mod 4` and `n>=9`,
+
+`s^+(D_n) >= 2s^+(C_n)+(1-d)^2 > 2n-2/9+1/9` alone is insufficient.
+
+The factor of two means the crude correction must exceed
+`2(sec(pi/n)-1)`. It does for every `n>=13`: monotonicity reduces the check to
+n=13, and `cos x>=1-x^2/2`, `pi<22/7` give the rational certificate
+`sec(pi/13)-1<1/18`. The only remaining lengths n=5,9 were exact-isolated by
+the standalone certificate. D_5 has slack `0.5938737512369494019...`; D_9 is
+also strictly positive. Together with the n=3 mod 4 argument, this proves the
+equal odd-cycle dumbbell lemma for every odd n>=5 (and D_3 is likewise easy,
+though not needed for the n=10 extremizer family). Fresh PARI verification of
+D_9 remains before treating this as fully gated progress.
+
+Fresh PARI independently reproduced the exact integer characteristic
+polynomials for D_5 and D_9 and found 80-digit positive slacks
+`0.5938737512369494019308...` and `0.8926085469026702207213...`. Thus the
+all-odd lemma is now two-engine checked. Full proof statement: if D_n is formed
+from two C_n's by a bridge and odd n>=5, then `s^+(D_n)>2n`. For n=3 mod 4,
+induced-subgraph superadditivity and `s^+(C_n)-n=sec(pi/n)-1` suffice. For
+n=1 mod 4, n>=13, the gluing lemma gives correction `(1-d)^2>1/9`, whereas
+the two-cycle deficit is `<1/9`; D_5,D_9 are the exact finite exceptions.
+
 ## 2026-07-22 — m=19 screen and exact low tail
 
 Screened all 795,630 connected n=10,m=19 graphs. The numerical minimum is

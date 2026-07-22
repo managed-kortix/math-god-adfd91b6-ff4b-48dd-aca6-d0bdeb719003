@@ -21,6 +21,10 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - 2026-07-22: exact trigonometric simplification plus square-energy
   superadditivity proves the equal odd-cycle dumbbell inequality for all cycle
   lengths n=3 mod 4. The analytic family problem is reduced to n=1 mod 4.
+- 2026-07-22: completed the analytic family proof. The gluing lemma settles
+  n=1 mod 4, n>=13 by a rational 1/9 comparison; fresh exact SymPy and PARI
+  certificates settle D_5,D_9. Thus every equal odd-cycle dumbbell with cycle
+  length n>=5 satisfies s^+>2n.
 - 2026-07-22: screened all 1,032,754 connected n=10,m=20 graphs. Observed
   minimum is exact-form `9.055728090000841...` at the circulant
   `Cay(Z_10,{+/-1,+/-4})`, graph6 `I?rFf_{N?`, with charpoly

@@ -38,8 +38,8 @@ m=20 slice has been float-screened and its low 50 certified in both engines.
    already proves via diameter two or claw-free hypotheses.
 4. Extend structural fingerprints from each minimizer to the low 50, especially
    testing triangle-free, claw, inertia, and diameter-two frequencies.
-5. Use the proved Chebyshev factorization of the equal odd-cycle dumbbell to
-   seek an analytic lower bound for the two moving spectral branches.
+5. Package the completed gluing-lemma proof for all equal odd-cycle dumbbells
+   and adversarially check every inequality and hypothesis against the paper.
 
 ## Running jobs
 
