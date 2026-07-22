@@ -546,19 +546,20 @@ Cq, represented by the eigenvector vanishing at its bridge vertex. Hence much
 of both cycles' spectra persists unchanged; only the rooted symmetric sector
 obeys this phase shift. This equation is now the analytic target for C5--Cq.
 
-The positive outlier has a clean infinite-q limit. Put `x=r+r^{-1}` with
-`r>1`; replacing the long-cycle rooted Green function by its decaying limit
-reduces the bound-state equation exactly to
+The positive outlier has a clean infinite-q algebraic limit. Put
+`x=r+r^{-1}` with r>1. The exact finite equation below shows the limit is the
+unique real root r>1 of
 
-`(r-1)(r^5-3)=0`.
+`r^8-r^7-2r^6+2r^5-r^4+r-1=0`,
 
-Thus the limiting positive outlier is
-`3^(1/5)+3^(-1/5)=2.27240376078769...`, whose square is
-`5.163818852042...`. Direct finite-q data approach this value rapidly from
-above. The full C5--Cq slack tends to `0.80092867...`, so the remaining band
-phase shift contributes about `-4.36289018...` relative to q vertices after
-the outlier is separated; a proof needs a global phase-sum estimate, not just
-control of the bound state.
+namely `r=1.67560406152636...`, giving
+`x=2.27240376078769...` and square `5.163818852042...`. Eliminating r gives
+the degree-eight equation
+`x^8-2x^7-9x^6+18x^5+24x^4-50x^3-15x^2+46x-17=0`.
+An earlier scratch simplification to `r^5=3` was false despite producing the
+same displayed x to available digits; adversarial substitution exposed it.
+The full C5--Cq slack tends to `0.80092867...`, so a proof still needs a
+global phase-sum estimate, not just control of the bound state.
 
 For finite odd q, the positive outlier equation also becomes algebraic after
 `x=r+r^{-1}`. Removing the trivial `r^q-1` factor gives a relation linear in
