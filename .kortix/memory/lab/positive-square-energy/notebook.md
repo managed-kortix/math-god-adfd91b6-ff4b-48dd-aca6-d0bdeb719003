@@ -681,3 +681,11 @@ fixed C5 defect attached to the rooted symmetric cycle sector. The constant
 odd moments quantify spectral asymmetry and may bound the positive/negative
 square split through a moment optimization problem with support constraints
 [-x_-,x_+].
+
+A discretized linear program for a quartic polynomial minorant of
+`max(x,0)^2` on the certified spectral support gives strong bounds using only
+these four moments: for q=5 the optimized moment lower bound is 9.608 versus
+the actual symmetric-sector s+ of 9.830, and for q=101 it gives 55.027. This
+is enough in scale to prove the desired family if converted to a rational
+polynomial whose two nonnegativity conditions factor or admit Sturm
+certificates. This moment-dual route avoids summing phase shifts root by root.
