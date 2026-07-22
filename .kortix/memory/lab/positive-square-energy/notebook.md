@@ -869,3 +869,15 @@ sums through degree 16 over odd q=25..65. It reproduces every affine/constant
 formula from exact Chebyshev quotient polynomials and Newton identities. This
 is strong machine evidence but not yet an all-q proof; the final writeup should
 derive the leading 16 coefficients uniformly from the Chebyshev recurrence.
+
+The symmetric polynomial itself has a uniform Chebyshev-U expansion. Writing
+`d=(q+7)/2`, for q>=9 its coefficients from U_d downward are
+
+`1,-2,-1,4,-3,1,1,-1,-1,-1,...,-1`.
+
+That is,
+`S_q=U_d-2U_{d-1}-U_{d-2}+4U_{d-3}-3U_{d-4}+U_{d-5}+U_{d-6}`
+`-sum_{j=0}^{d-7}U_j`, with all U evaluated at x/2.
+This exact closed form makes the all-q moment proof straightforward: for any
+fixed moment order 16, only the top 16 monomial coefficients matter, and once
+d>16 the trailing sum has a stable contribution governed by the U recurrence.
