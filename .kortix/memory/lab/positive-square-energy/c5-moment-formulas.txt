@@ -1,0 +1,2 @@
+PASS exact S_q moment formulas through degree 16 for odd q=25..65
+A symbolic recurrence proof for all odd q remains before theorem use.
