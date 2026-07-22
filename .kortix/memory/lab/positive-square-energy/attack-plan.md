@@ -42,6 +42,9 @@ m=20 slice has been float-screened and its low 50 certified in both engines.
 6. Formalize the exact Euler-summation identity for the C5--Cq band. The tail
    constants pass with error <1/100, but endpoint/sign correspondence must be
    explicit before accepting this unequal-family result.
+7. C5--Cq is now internally proved for every odd q>=3 by a fresh-process
+   master certificate with independent PARI tail reproduction. Run adversarial
+   literature/novelty review and proof exposition before publicizing.
 
 ## Running jobs
 

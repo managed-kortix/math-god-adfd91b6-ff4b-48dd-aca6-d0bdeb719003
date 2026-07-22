@@ -1134,3 +1134,22 @@ q=727 quadrature/error margin. The same remaining rational values are
 energy margin. This clears the second-engine gate for the analytic tail. Audit
 the factor decomposition from the original dumbbell characteristic polynomial
 before upgrading C5--Cq from work-in-progress to a proved family lemma.
+
+The characteristic-factor audit now passes. Direct adjacency determinants for
+odd q=9..41 agree with
+
+`chi(C5--Cq)=(x^2+x-1)R_qS_q`,
+
+including the bridge-cofactor sign; the Laurent certificate proves the stable
+identity generally, while q=3..23 are independently root-isolated. It also
+checks `p_q=(x-2)R_q^2`, so the retained sector contributes exactly
+`(s^+(C_q)-4)/2`, and the persistent positive root contributes
+`(3-sqrt(5))/2`. A fresh-process master script reran the factor audit, small
+cases, finite moment certificate, all phase certificates, and independent GP
+tail certificate, ending with:
+
+`PASS MASTER: for every odd q>=3, the bridge C5--Cq has s+>q+5`.
+
+This is now an internally verified family lemma, not merely work-in-progress.
+Do not post yet: adversarial novelty/literature review and polished proof audit
+are the remaining publicity gates.

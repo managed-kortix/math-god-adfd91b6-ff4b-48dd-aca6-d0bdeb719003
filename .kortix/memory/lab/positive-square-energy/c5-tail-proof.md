@@ -69,3 +69,15 @@ identities, Sturm bounds, phase-integral sign, outlier bracket, and rational
 tail constants in PARI/GP. The remaining publication gate is a final
 statement-level audit of the original characteristic-polynomial factor
 decomposition.
+
+## Verified conclusion
+
+The fresh-process master certificate now runs every component and ends with
+
+`PASS MASTER: for every odd q>=3, the bridge C5--Cq has s+>q+5`.
+
+The finite range `q<=725` is covered by exact rational root isolation for the
+small cases and the exact degree-16 moment minorant thereafter. The analytic
+argument above covers every odd `q>=727`. SymPy and PARI independently certify
+the tail algebra and inequalities. This establishes the family result
+internally; novelty and literature checks remain before any public claim.

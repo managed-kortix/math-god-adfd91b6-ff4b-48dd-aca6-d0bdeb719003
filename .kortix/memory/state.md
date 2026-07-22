@@ -7,7 +7,7 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   arXiv:2506.07264v1, Conjecture 1.2. See
   `lab/positive-square-energy/attack-plan.md`.
 - **phase**: n=10,m=11..19 exact-certified and fresh-reproduced; m=20 full
-  certification active; C5--Cq tail constants certified, summation identity pending
+  certification active; all odd C5--Cq internally proved, novelty audit pending
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
@@ -25,6 +25,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - 2026-07-22: independent PARI/GP now reproduces the complete C5--Cq tail
   algebra, Sturm bounds, integral sign, outlier bracket, and exact constants.
   Only original characteristic-polynomial factor audit remains.
+- 2026-07-22: factor audit and fresh master certificate pass. For every odd
+  q>=3, the bridge C5--Cq has s+>q+5. Both engines cover the analytic tail;
+  no public claim pending adversarial novelty and polished-proof audits.
 - 2026-07-22: m=20 second wave ended with four more durable chunks (28..31),
   bringing SymPy to 20/40. Removed temporary files and resumed the 20 missing
   chunks only.
@@ -215,8 +218,8 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 
 ## next steps
 1. Harvest the active full checkpointed paired m=20 certification.
-2. Audit the original C5--Cq characteristic-polynomial factor decomposition;
-   if exact, package the unequal-family lemma and run fresh certificates.
+2. Conduct adversarial literature/novelty review and polish the complete
+   C5--Cq proof; only then consider results-lane publication.
 3. Compute structural fingerprints of the certified minimizers.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.
 5. Use the certified X pipeline only when a result passes every mathematical
