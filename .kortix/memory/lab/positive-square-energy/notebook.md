@@ -657,3 +657,16 @@ square energy is already explicit; proving the positive-sector comparison is
 equivalent to an upper bound on the negative square energy of S_q. Since S_q
 has one positive outlier and one negative outlier, the problem may be cleaner
 on the negative side via the analogous monotone bound-state equation.
+
+That negative bound state increases in magnitude with q and tends to
+`-2.189273...`. Writing the limiting eigenvalue as `x=-(r+r^{-1})`, r>1,
+its exact equation is
+
+`r^8+r^7-2r^6-2r^5-r^4-r-1=0`.
+
+The positive and negative outliers therefore move in opposite monotone
+directions. Since the symmetric sector has fixed total square sum q+11, an
+upper bound on its negative band plus this negative outlier is exactly a lower
+bound on the desired positive band plus positive outlier. The next step is to
+derive the negative-band phase equation and compare it to the retained Cq
+negative roots.
