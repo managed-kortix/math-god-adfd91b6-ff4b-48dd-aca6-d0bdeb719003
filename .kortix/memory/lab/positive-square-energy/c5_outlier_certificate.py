@@ -21,11 +21,14 @@ def main() -> None:
     intervals = s.Poly(A, r).intervals(eps=s.Rational(1, 10**20))
     positive = [(i, m) for i, m in intervals if i[0] > 1]
     assert len(positive) == 1 and positive[0][1] == 1
+    assert A.subs(r, s.Rational(5, 3)) < 0
+    assert A.subs(r, s.Rational(17, 10)) > 0
     print("PASS exact C5 outlier identities")
     print("A(r)=" + str(A))
     print("d(B/A)/dr numerator=" + str(expected))
     print("elimination polynomial=" + str(-expected_resultant))
     print("unique_r_gt_1_interval=" + str(positive[0][0]))
+    print("PASS pole bracket 5/3 < r_infinity < 17/10")
 
 
 if __name__ == "__main__":

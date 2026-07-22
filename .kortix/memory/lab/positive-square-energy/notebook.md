@@ -589,3 +589,10 @@ rational function, i.e. the >1 zero of A(r), not `3^(1/5)`. Exact signs
 to the right of this pole and decreases toward it, matching q=3,5,... data.
 The monotonicity calculation remains valid; only the mistakenly identified
 limit was replaced.
+
+Moreover the finite positive outliers decrease strictly with odd q. On the
+right of the pole, `R(r)=B(r)/A(r)` decreases from infinity while `r^q`
+increases. If `r_q^q=R(r_q)`, then
+`r_q^(q+2)>R(r_q)`, whereas immediately right of the pole R dominates;
+uniqueness forces `r_{q+2}<r_q`. Therefore their eigenvalues
+`r_q+r_q^{-1}` also decrease to the certified algebraic limit.
