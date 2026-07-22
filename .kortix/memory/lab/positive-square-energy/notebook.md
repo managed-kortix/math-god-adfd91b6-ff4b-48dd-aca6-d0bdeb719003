@@ -942,6 +942,16 @@ already far inside the 0.40 margin. A formal trapezoid lemma on u=0..m plus
 the two fractional endpoint cells will finish the tail without tracking the
 alternating leading coefficient.
 
+The fractional endpoint lemma is closed. The counting-coordinate test function
+has Lipschitz constant `L<4pi/(q/2-10)`. The left half-cell error is at most
+L/4. On the right, the fractional length rho is below 3/4 and F vanishes at
+the spectral endpoint, giving error at most `rho L/2+rho^2L/2<15L/32`.
+With q>=727 and pi<22/7, endpoints plus the interior trapezoid error total
+`180939/4949000<1/25`. The exact limiting margin exceeds 2/5. Therefore the
+q>=727 tail clears the target by more than 9/25, conditional only on the
+standard composite trapezoid inequality already stated. Combined with the
+degree-16 finite gate, this completes a proof of C5--Cq for every odd q>=3.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
