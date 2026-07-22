@@ -891,3 +891,10 @@ clearing powers of z reduces both sides to the same Laurent polynomial. This
 is a finite algebraic identity in z and z^d, and checking the coefficients of
 z^{+d},z^{-d},1 proves it for every d. Implement this as a symbolic two-
 variable certificate next.
+
+That certificate now passes. The Laurent substitution proves the nine-term
+formula identically for symbolic y=z^d, and the coefficient identity
+`[x^(n-2j)]U_n(x/2)=(-1)^j binomial(n-j,j)` plus symbolic Newton recurrence
+proves all 16 moment formulas for every odd q in the stable range. Thus the
+degree-16 minorant is no longer conditional on empirical moment interpolation;
+only small q below the stable range and the q>725 analytic tail remain.
