@@ -6,7 +6,7 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **current problem**: Positive square energy at cyclomatic number >= 2 —
   arXiv:2506.07264v1, Conjecture 1.2. See
   `lab/positive-square-energy/attack-plan.md`.
-- **phase**: n=10,m=11..16 exact-certified; fresh reproduction next
+- **phase**: n=10,m=11..16 exact-certified; m=17 low tail certified
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
@@ -75,10 +75,14 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - 2026-07-22: launched the final fresh-process reproduction from a newly
   generated 211,866-line graph6 file; the bounded SymPy stage remains active
   across the heartbeat. Do not duplicate or kill it; PARI is chained after it.
+- 2026-07-22: fresh end-to-end m=16 reproduction completed identically in both
+  engines. Screened all 361,342 n=10,m=17 graphs; observed minimum slack
+  `5.911281165531542...` at `I?`FBqsF_`. The low 50 pass exact SymPy rational
+  isolation and independent PARI exact-characteristic-polynomial checks.
 
 ## next steps
-1. Fresh-process reproduce both compact m=16 certificates and preserve outputs.
-2. Continue the n=10 slices at m=17 and above.
+1. Run full compact SymPy certification for all 361,342 n=10,m=17 graphs.
+2. Run full independent PARI certification for m=17.
 3. Compute structural fingerprints of the certified minimizers.
 4. Derive a compact exact formula for the odd-cycle dumbbell family.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.

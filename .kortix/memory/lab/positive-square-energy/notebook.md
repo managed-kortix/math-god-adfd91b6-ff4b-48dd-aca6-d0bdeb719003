@@ -182,3 +182,23 @@ Therefore all 211,866 connected n=10,m=16 graphs pass both engines, and the
 cumulative exact-certified n=10 census for m=11 through 16 is 412,523 graphs.
 One fresh-process reproduction of the compact scripts remains before treating
 the aggregate certificate as public-ready.
+
+**Fresh reproduction completed.** A newly generated graph6 file had the same
+211,866 records and SHA-256. Fresh SymPy and PARI processes reproduced the
+exact same pass counts, minimizer, rational lower endpoint, 80-digit slack, and
+PARI worker characteristic-polynomial hashes. The m=16 aggregate certificate
+has therefore passed the fresh-process gate.
+
+## 2026-07-22 — n=10,m=17 screen and low-tail certificate
+
+Screened all 361,342 connected nonisomorphic graphs. The observed minimum is
+at graph6 `I?`FBqsF_`, with slack `5.911281165531542...`. Its characteristic
+polynomial factors as
+
+`(x-1)^4 (x+2) (x^2+3x+1) (x^3-x^2-9x+2)`.
+
+Exact SymPy rational root isolation certifies positive slack for the lowest 50
+screened graphs. PARI independently matched every one of their exact integer
+characteristic polynomials and gives minimizer slack
+`5.9112811655315422682710710157956986343169838260335...`. This certifies only
+the low tail; a full-slice exact pass remains required.
