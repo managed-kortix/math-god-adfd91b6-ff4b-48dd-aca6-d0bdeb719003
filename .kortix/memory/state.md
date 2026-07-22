@@ -6,7 +6,7 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **current problem**: Positive square energy at cyclomatic number >= 2 —
   arXiv:2506.07264v1, Conjecture 1.2. See
   `lab/positive-square-energy/attack-plan.md`.
-- **phase**: n=10,m=11..17 exact-certified; m=17 fresh reproduction next
+- **phase**: n=10,m=11..17 exact-certified; m=18 low tail certified
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
@@ -91,10 +91,14 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   parsing exact integer characteristic polynomials and finding all 80-digit
   slacks positive. It reproduced minimizer `I?`FBqsF_` and slack
   `5.9112811655315422682710710158...`. Cumulative two-engine census: 773,865.
+- 2026-07-22: fresh m=17 reproduction matched both certificates exactly.
+  Screened all 561,106 n=10,m=18 graphs; observed minimum slack
+  `6.9242077361381927...` at `I?q`qjo{?`. Exact SymPy and PARI certify the low
+  50; minimizer charpoly is `x^2(x-1)^3(x+2)^2(x^3-x^2-12x+8)`.
 
 ## next steps
-1. Fresh-process reproduce both compact m=17 certificates.
-2. Screen and certify the low tail for n=10,m=18.
+1. Run full compact SymPy certification for all 561,106 m=18 graphs.
+2. Run full independent PARI certification for m=18.
 3. Compute structural fingerprints of the certified minimizers.
 4. Derive a compact exact formula for the odd-cycle dumbbell family.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.

@@ -220,3 +220,20 @@ PARI reproduced minimizer `I?`FBqsF_` with
 Thus m=17 is certified by both engines; the cumulative exact two-engine census
 for m=11 through 17 contains 773,865 connected graphs. Fresh reproduction is
 the remaining aggregate verification gate.
+
+**Fresh reproduction completed.** Newly generated m=17 input and fresh SymPy
+and PARI processes reproduced the same input hash, pass count, minimizer,
+rational lower endpoint, 80-digit slack, and PARI exact-charpoly worker hashes.
+
+## 2026-07-22 — n=10,m=18 screen and low-tail certificate
+
+Screened all 561,106 connected nonisomorphic graphs. The observed minimum is
+at graph6 `I?q`qjo{?`, with slack
+`6.9242077361381927285404716806637992814001351189310...`. Its exact
+characteristic polynomial factors as
+
+`x^2 (x-1)^3 (x+2)^2 (x^3-x^2-12x+8)`.
+
+Exact 30-decimal SymPy rational root isolation certifies all lowest 50 positive,
+and PARI independently matches all 50 exact characteristic polynomials and
+positive slacks. A full-slice pass remains required.
