@@ -765,3 +765,14 @@ polynomial is rationalized and its minorant property Sturm-certified. It does
 not settle the infinite tail; that requires either increasing degree with q or
 an analytic defect-limit error bound. The latter is preferable because the
 observed D_q approaches its limit at O(q^-2), with margin about 0.68.
+
+Separate large-q fits confirm the congruence oscillation explicitly:
+
+- q=1 mod 4: `D_q = D_inf - 2.41049/q^2 + O(q^-4)`;
+- q=3 mod 4: `D_q = D_inf + 1.95710/q^2 + O(q^-4)`;
+
+with `D_inf=7.4189626...`. Thus the lower subsequence is q=1 mod 4 and rises
+toward the limit; proving a coarse error bound such as
+`D_q>D_inf-3/q^2` for q>=737 would finish the tail with enormous margin.
+This points back to Euler-Maclaurin on the phase-shifted band sum, but now only
+a crude remainder is needed.
