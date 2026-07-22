@@ -12,6 +12,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-22: m=20 first wave ended with four durable SymPy chunks (16..19)
+  and 16 temporary files. Removed only `.tmp` outputs and resumed from the
+  four valid checkpoints with bounded 12-way outer parallelism.
 - 2026-07-22: launched full fresh paired m=20 certification over 1,032,754
   regenerated graphs in 40 atomic chunks. SymPy runs first, then PARI and
   whole-input multiset aggregation. This is the active long job.
