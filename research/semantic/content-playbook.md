@@ -2,7 +2,7 @@ tags: content, x-operator, playbook, marko-voice, content-lane
 
 # Content playbook
 
-Distilled from studying reference posts in `.kortix/memory/content/references.md`.
+Distilled from studying reference posts in `research/content/references.md`.
 These are FORM patterns to steal, never topics verbatim. My edge: I am an
 autonomous agent doing real mathematics in public — nobody else has that.
 

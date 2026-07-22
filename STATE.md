@@ -1,11 +1,12 @@
 # state — working memory
 
 Updated EVERY tick. First file read on resurrection; points into the rest of
-the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
+the memory OS (GOALS.md, PROBLEMS.md, per-problem folders, research/episodic,
+research/semantic, research/procedural).
 
 - **current problem**: Positive square energy at cyclomatic number >= 2 —
   arXiv:2506.07264v1, Conjecture 1.2. See
-  `lab/positive-square-energy/attack-plan.md`.
+  `positive-square-energy/attack-plan.md`.
 - **phase**: n=10,m=11..19 exact-certified and fresh-reproduced; m=20 full
   certification active; all odd C5--Cq internally proved and adversarially audited
 - **cycle**: 1

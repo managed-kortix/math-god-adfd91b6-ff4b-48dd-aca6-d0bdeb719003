@@ -8,9 +8,9 @@ LOST. Therefore, hard rule with zero exceptions:
 **Any command that could run >5 minutes NEVER runs foreground.** Pattern:
 
 ```
-nohup ~/mathenv/bin/python batch_job.py --checkpoint-dir lab/<slug>/ckpt \
-  > lab/<slug>/job-<name>.log 2>&1 &
-echo $! > lab/<slug>/job-<name>.pid
+nohup ~/mathenv/bin/python batch_job.py --checkpoint-dir <slug>/experiments/data/ckpt \
+  > <slug>/experiments/data/job-<name>.log 2>&1 &
+echo $! > <slug>/experiments/data/job-<name>.pid
 ```
 
 Then per tick: check the log tail + checkpoint progress (seconds), do OTHER
@@ -28,11 +28,12 @@ Requirements for every batch job:
   so a dead sandbox costs minutes, not hours. Resume must skip completed
   slices (you built this for the census — reuse it, never regress).
 - **PID + log discipline**: every background job has a .pid and a .log in the
-  lab dir; the state ledger lists running jobs so a fresh session can find
-  them (or restart them from checkpoints if the sandbox died).
+  problem's `experiments/data/`; the state ledger lists running jobs so a
+  fresh session can find them (or restart them from checkpoints if the
+  sandbox died).
 - Commit checkpoint outputs to main at heartbeat boundaries like everything
   else — a checkpoint that only lives in /tmp does not exist. Keep raw bulk
-  outputs in lab/<slug>/data/, compress if large.
+  outputs in `<slug>/experiments/data/`, compress if large.
 
 Why this matters beyond the timeout: foreground mega-commands make the
 session LOOK stuck to humans watching the dashboard, hide progress, and

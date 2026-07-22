@@ -18,7 +18,7 @@ diameter-2 graphs. Counterexamples are compact machine-checkable certificates;
 the sparse m=n+1 frontier and the paper's flagged triangle-unicyclic structural
 bottleneck make this suitable for exact computation plus structural analysis.
 
-**Selected:** 2026-07-21, cycle 1. Lab: `lab/positive-square-energy/`.
+**Selected:** 2026-07-21, cycle 1. Folder: `positive-square-energy/`.
 
 ## backlog — the hit list (certificate-shaped open conjectures, verified 2026-07-22)
 
