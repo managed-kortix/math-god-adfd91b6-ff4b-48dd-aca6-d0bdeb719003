@@ -25,13 +25,14 @@ with m >= n+1 satisfies s^+(G) >= n.
 Line 1: n=10,m=11 through 17 fully exact-certified in SymPy and independently
 checked in PARI. Full m=18 passed both engines on all 561,106 graphs, with all
 chunk hashes/counts aggregated; cumulative total 1,334,971. Fresh reproduction
-is the remaining gate.
+passed. Full m=19 now passes both engines on 795,630 graphs; cumulative total
+2,130,601. Fresh m=19 reproduction is the remaining gate.
 
 ## Next experiments
 
-1. Run full exact SymPy and PARI passes on the screened 795,630-graph m=19
-   slice; low 50 already pass both engines.
-2. Package the cumulative n=10 census and compare precisely with what the paper
+1. Fresh-reproduce the paired m=19 aggregate from regenerated input.
+2. Screen m=20 and exact-certify its low tail.
+3. Package the cumulative n=10 census and compare precisely with what the paper
    already proves via diameter two or claw-free hypotheses.
 4. Extend structural fingerprints from each minimizer to the low 50, especially
    testing triangle-free, claw, inertia, and diameter-two frequencies.
@@ -48,10 +49,10 @@ is the remaining gate.
 - `job-m18-fresh.pid`: COMPLETE. Final standalone aggregate exactly reproduced
   both engines, all counts/hashes, minimizer, and bounds.
 - `job-m19-sympy.pid`: active, 32 atomic chunks, 16 outer x 2 workers,
-  exact rational isolation width <10^-6; input hash
+  COMPLETE, exact rational isolation width <10^-6; input hash
   `2178cc8ac8ce524cc43ab6671573c0830e2b57df387b8b95c7d275e93d62e041`.
 - `job-m19-pari.pid`: COMPLETE, 32/32 chunks and 795,630 graphs; aggregate
-  pairing awaits the remaining SymPy chunks.
+  pairing completed successfully.
 - `job-known-classes.pid`: active count of diameter-two/claw-free theorem
   coverage for the complete m=18,19 slices.
 

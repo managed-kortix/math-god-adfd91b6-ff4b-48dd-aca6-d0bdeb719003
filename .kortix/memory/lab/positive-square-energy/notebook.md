@@ -390,3 +390,15 @@ the union of the diameter-two (3,418) and claw-free (807) classes, leaving
 over 98% of each of these slices lies beyond those two published sufficient
 conditions. `count_known_classes.py` computes diameter two from exact Boolean
 walk existence and claw-freeness by enumerating triples in every neighborhood.
+
+**Full m=19 paired certificate.** SymPy completed all 32 chunks. The standalone
+aggregator validated each raw chunk's count and SHA-256 against both engine
+outputs and obtained exactly 795,630 graphs, global hash
+`2178cc8ac8ce524cc43ab6671573c0830e2b57df387b8b95c7d275e93d62e041`.
+Every exact SymPy slack lower endpoint is positive. Both engines select
+`I?bF`xw{?`; the least rigorous lower endpoint is
+`1480358217260351809395815033389/183604253579963139078852096400`,
+approximately `8.0627654`, and PARI gives
+`8.062769428154473509087996169435736543...`. Thus m=19 is two-engine
+certified, bringing the cumulative m=11..19 census to 2,130,601 graphs.
+Fresh reproduction remains.
