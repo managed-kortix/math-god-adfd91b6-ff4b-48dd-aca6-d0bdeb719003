@@ -1087,3 +1087,22 @@ limiting pole once the equation orientation is derived. A complete proof draft
 is in `c5-tail-proof.md`; the sole remaining gate is deriving the phase and
 outlier equations directly from the Laurent form and certifying exhaustive
 root correspondence/multiplicities.
+
+The Laurent derivation now passes symbolically. For the nine-term moving
+factor, its numerator is `yP-y^-1Q`, where
+
+`P=(z-1)A/z^8`, `Q=(z-1)B/z`,
+
+so with `q=2d-7` the root equation is exactly `z^q=B/A`. On the unit circle,
+`B=-z^8A(1/z)`, and tangent half-angle reduction gives
+
+`H=-(4c^2-2c-1)/(4 sin(theta)(c-1)(4c^2+2c-1))`.
+
+Differentiating `atan(H)` reproduces the exact rational `N/D` used in all
+Sturm bounds. Exact values at the zero and pole (`theta=pi/5,2pi/5`), at
+`pi/3`, and at `pi/2` fix the continuous branch and endpoints. Since
+`u'=q/2-delta'>0`, the integer phase roots are simple and exhaustive; endpoint
+bounds give exactly `l+2` positive band roots in both q residue classes.
+Together with strict monotonicity of `B/A` beyond the unique pole of A, this
+closes the SymPy-side phase/root gate. Independent PARI reproduction and a
+factor-decomposition audit remain before accepting the unequal-family lemma.

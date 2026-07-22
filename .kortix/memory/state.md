@@ -16,6 +16,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   nauty was restored and only missing chunks relaunched. Exact phase-tail
   constants for C5--Cq give quadrature error <1/100 versus margin 241/600;
   finite-root Euler/endpoint identity still requires formal verification.
+- 2026-07-22: exact Laurent algebra now derives the C5--Cq phase equation,
+  rational phase derivative, branch endpoints, simple/exhaustive positive-band
+  integer roots, and unique outlier. Independent PARI reproduction remains.
 - 2026-07-22: m=20 second wave ended with four more durable chunks (28..31),
   bringing SymPy to 20/40. Removed temporary files and resumed the 20 missing
   chunks only.
@@ -206,7 +209,8 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 
 ## next steps
 1. Harvest the active full checkpointed paired m=20 certification.
-2. Formalize and adversarially verify the C5--Cq finite-band Euler identity.
+2. Reproduce the complete C5--Cq tail algebra and constants in PARI/GP, then
+   audit the original characteristic-polynomial factor decomposition.
 3. Compute structural fingerprints of the certified minimizers.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.
 5. Use the certified X pipeline only when a result passes every mathematical

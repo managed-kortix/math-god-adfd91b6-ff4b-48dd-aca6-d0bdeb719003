@@ -60,8 +60,9 @@ Using `sqrt(5)<161/72`, the right side exceeds the required
 
 ## Remaining adversarial gate
 
-Derive from the explicit Laurent form of `S_q` that (i) every positive root
-is exactly either the one outlier or one of the stated integer-phase band
-roots, with multiplicity one, and (ii) the finite outlier equation has the
-stated sign orientation. Then encode those algebraic identities and root
-counts in a fresh standalone script and reproduce in a second engine.
+`c5_phase_equation.py` now derives `z^q=B/A`, the trigonometric phase equation,
+the exact rational derivative used by the bounds, the continuous branch
+endpoints, the integer count in each residue class, and uniqueness/sign of the
+positive outlier. Since `u'>0`, all band roots are simple and exhausted by the
+integer count. The remaining publication gate is independent reproduction in
+PARI/GP and a final statement-level audit of the factor decomposition.
