@@ -40,6 +40,12 @@ On the left half-cell, the difference between `F(0)/2` and the integral over
 
 `|F(m)/2-int_m^(m+rho)F| <= rho L/2+rho^2 L/2 <15L/32<0.01667`.
 
+Explicitly, `rho=1/4-atan(1/4)/pi` for q=1 mod 4 and
+`rho=3/4-atan(1/4)/pi` for q=3 mod 4, confirming `0<rho<3/4`.
+The orientations are correct because the full density integral is over
+`[-1/2,u(pi/2)]`: adding the trapezoid correction on `[0,m]` leaves exactly
+`F(0)/2-int_{-1/2}^0F` and `F(m)/2-int_m^{m+rho}F`.
+
 Together with the interior error <0.011, the complete finite-band quadrature
 error is <0.037. This is below the available defect margin
 `2+(34/15)^2-(sqrt(5)+9/2)>0.401`. The q>=727 tail is therefore proved once
