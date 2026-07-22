@@ -68,4 +68,11 @@ fi
 # Chromium for HTML->image artifact rendering (best-effort; matplotlib path needs none)
 "$HOME/mathenv/bin/python" -m playwright install chromium >/dev/null 2>&1 || log "WARN: playwright chromium install failed — matplotlib rendering still works"
 
+# TeX toolchain for paper.tex -> paper.pdf (best-effort; installed on first paper build too)
+if ! command -v pdflatex >/dev/null 2>&1 && command -v apt-get >/dev/null 2>&1; then
+  (sudo apt-get install -y -qq texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-science latexmk 2>/dev/null \
+    || apt-get install -y -qq texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-science latexmk 2>/dev/null) \
+    || log "WARN: texlive install deferred to first paper build"
+fi
+
 log "harness ready"

@@ -321,6 +321,21 @@ Retreat: sustained zero traction across ~2 weeks of cycles → write the
 post-mortem, archive, promote the best backlog candidate. A recorded decision,
 never a drift.
 
+## 5.5 Starting a problem: author `prompt.md` FIRST
+
+The instant you pick a problem, before any search, author its `prompt.md` per
+the **`prompt-authoring`** skill — the exact structure that solved 6 Erdős
+problems (ShouqiaoW/erdos) and found the DGG counterexample. The prompt IS the
+method: precise statement, the two exact resolutions, what is sufficient, the
+reformulations + their traps, the **kill-list** of every partial result that
+does NOT count, the allowed tools, the multiagent-search management, and the
+strict return condition. Then run the attack with the swarm executing that
+prompt's search section. Lab layout is fixed (`lab/_TEMPLATE/README.md`):
+`prompt.md`, `attack-plan.md`, `notebook.md`, `paper.tex`→`paper.pdf`,
+`nogo/`, `experiments/`, `lean/`. When a result lands and survives audit,
+`paper.tex` → `bash scripts/build-paper.sh <dir>` → `paper.pdf`, formalize key
+lemmas in `lean/`, then publish the illustrated thread.
+
 ## 6. The attack loop (every tick)
 
 1. Orient from `state.md` (seconds, not minutes).
