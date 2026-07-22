@@ -843,3 +843,15 @@ single finite-degree polynomial can prove a q-uniform constant defect directly.
 The viable hybrid is now sharply defined: use the degree-16 minorant for the
 finite range q<=735, then prove the tail by a separate phase/Euler-Maclaurin
 estimate.
+
+The degree-16 LP candidate has now been rationalized and exact Sturm-checked.
+On the conservative spectral interval [-11/5,231/100], its polynomial P has
+no zeros and is negative on [-11/5,0]; P-x^2 has no zeros and is negative on
+[0,231/100]. Thus `P(x)<=max(x,0)^2` exactly. The moment evaluation is
+
+`S_q^+ >= (56964135041899/114047350000000)q`
+` + 81148131195031/11404735000000`,
+
+approximately `0.4994779365q+7.1153018`. This rigorously proves the uniform
+defect target through q=725 once the support bounds and moment formulas are
+formalized in the same certificate; those two hypotheses remain to package.
