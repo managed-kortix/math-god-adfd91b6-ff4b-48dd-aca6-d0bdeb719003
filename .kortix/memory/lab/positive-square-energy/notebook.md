@@ -864,6 +864,14 @@ defect intercept (about 3.67). Attempts to optimize at large target q remain
 numerically unstable. This confirms that the phase-tail proof is more robust
 than pushing polynomial degree: the exact degree-16 finite gate is sufficient.
 
+Several continuous phase values are exact and useful for comparison:
+`delta(pi/5)=0`, `delta(pi/3)=-pi/6`, and `delta(2pi/5)=-pi/2` (the latter as
+the continuous branch through an atan pole). These anchor the positive part of
+the phase integral on rational-angle subintervals. In particular, on
+[pi/3,2pi/5] monotonicity gives delta<=-pi/6, producing an explicit positive
+weighted contribution; analogous coarse bounds on [2pi/5,pi/2] may dominate
+the negative [0,pi/5] part.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
