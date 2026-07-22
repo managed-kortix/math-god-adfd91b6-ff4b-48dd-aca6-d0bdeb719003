@@ -670,3 +670,14 @@ upper bound on its negative band plus this negative outlier is exactly a lower
 bound on the desired positive band plus positive outlier. The next step is to
 derive the negative-band phase equation and compare it to the retained Cq
 negative roots.
+
+Two more exact Newton sums emerge from the leading coefficients of S_q:
+
+`sum lambda^3=8`, and `sum lambda^4=3q+49`.
+
+So the first four spectral moments of the moving symmetric sector are affine
+or constant in q: `(2, q+11, 8, 3q+49)`. These equal closed-walk counts of a
+fixed C5 defect attached to the rooted symmetric cycle sector. The constant
+odd moments quantify spectral asymmetry and may bound the positive/negative
+square split through a moment optimization problem with support constraints
+[-x_-,x_+].
