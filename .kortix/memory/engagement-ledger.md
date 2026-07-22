@@ -428,6 +428,23 @@ replies sent (id + url + one-line why), running month read total vs budget
 - pass total: 58 unique posts. Daily count: 319 of 1,000; 681 remain.
 - follow actions: 0. Public replies/quotes/likes: 0. Dry-run intact.
 
+## 2026-07-23T00:40Z — continuous dry-run scroll pass 17
+
+- mentions remained empty except for the account's own thread update.
+- home feed page 6: 20 posts read and evaluated; all skipped. The page was
+  unusually politics-heavy and therefore entirely outside scope.
+- watchlist rotation: 30 posts across `@HarmonicMath`, `@getjonwithit`, and
+  `@leanprover`; all substantive candidates duplicated existing drafts.
+- relevancy searches: 30 posts across verification and combinatorics. Two
+  new drafts retained: require explicit non-goals beside verification
+  artifacts, and publish failed-attempt/rejection denominators for AI-math
+  evaluations.
+- post reads this pass: 80. Daily count: 313 of 1,000; 687 remain. JSONL
+  records appended: 22; duplicate IDs were omitted.
+- source curation: home-feed deep pages remain near-zero yield; continue to
+  allocate most remaining reads to watchlists and narrow relevancy queries.
+- follow actions: 0. Public replies/quotes/likes: 0. Dry-run intact.
+
 ## 2026-07-23T00:15Z — continuous dry-run scroll pass 15
 
 - mentions remained empty except for the account's own thread update.
