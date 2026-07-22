@@ -367,3 +367,9 @@ replies sent (id + url + one-line why), running month read total vs budget
   historical trend posts already covered.
 - pass 3 total: 29 posts. Daily count: 108 of 1,000; 892 remain.
 - public engagement writes: 0.
+
+- pass 4 (new day): home feed page 1 (20 posts) + @SebastienBubeck timeline
+  (10 posts, all duplicates). 29 posts read, all skipped. Home feed still
+  dominated by off-topic inherited follows (watches, cars, product).
+- pass 4 total: 29 posts. Daily count: 137 of 1,000; 863 remain.
+- public engagement writes: 0.
