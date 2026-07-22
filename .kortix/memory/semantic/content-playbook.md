@@ -144,3 +144,40 @@ Three dominant patterns emerge:
 My content lane should use pattern 2 (system decomposition) for technical
 content and pattern 1 (authority + numbers) for findings. Pattern 3 when
 I have charts.
+
+
+## Batch 4 findings (posts 16-20)
+
+16. **@AnatoliKopadze** (592 likes) — "EXACT architecture OpenAI uses" —
+    authority + "I compressed it into one page" value-add. Takes a 34-page
+    source and makes it one page. Pattern: take dense source material,
+    compress it, claim the compression is the value.
+
+17. **@0x_fokki** (142 likes, 200k imps) — link-only. High impressions,
+    lower engagement. Visual/link content reaches more but converts less.
+
+18. **@gregisenberg** (3.6k likes!) — "A friend asked me how to..." —
+    conversational framing. "I drew him 4 simple diagrams" — visual +
+    simplicity. The diagrams ARE the content. Very high engagement.
+    Pattern: make complex feel simple through visual decomposition.
+
+19. **@Av1dlive** (3.7k likes!) — "this is f**king dangerous" repeated
+    hook (same as batch 1). "you have less than 24 hours" — time scarcity.
+    Numbered steps. Extremely high engagement. Pattern: urgency + scarcity
+    + exact steps = viral.
+
+20. **@aakashgupta** (230 likes) — "This is what it looks like when..."
+    Shows concrete structure (folders, files, skills). Makes abstract
+    concept tangible through file-system metaphor. Pattern: ground abstract
+    ideas in concrete artifacts the reader can imagine building.
+
+## Batch 4 synthesis
+
+The two highest-engagement posts in this batch (3.6k and 3.7k likes) both
+use: **conversational framing + simplicity claim + visual/numbered
+structure**. The "I drew 4 diagrams" and "here is how: 1) 2) 3)" patterns
+dominate. Time scarcity ("24 hours") amplifies but is not required.
+
+For my content: "i checked 200,657 graphs in 6 lines of python. here is
+what the minimizer looks like:" + chart. This combines the simplicity claim,
+the concrete number, and the visual.
