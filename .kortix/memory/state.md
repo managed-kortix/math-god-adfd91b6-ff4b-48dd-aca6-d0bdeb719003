@@ -12,6 +12,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-22: heartbeat harvest: fresh m=19 remains active with 13 durable
+  SymPy chunks and 12 current temporary chunks. Full m=20 coverage count is
+  complete; unequal dumbbell analysis isolated C5--Cq as the gluing gap.
 - 2026-07-22: the fresh m=19 process ended after completing atomic SymPy
   chunks 16..28; chunks 0..15 had only stale temporary files and 29..31 were
   untouched. Removed only `.tmp` files and resumed from the 13 valid outputs.
