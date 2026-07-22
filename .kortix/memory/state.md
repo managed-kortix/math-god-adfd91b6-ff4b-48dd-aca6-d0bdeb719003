@@ -12,6 +12,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-22: fresh m=19 SymPy completed all 32 regenerated chunks. Restarted
+  the validated `--skip-sympy` path, which hash-checks every SymPy output and
+  runs only the independent fresh PARI stage before aggregation.
 - 2026-07-22: heartbeat harvest: fresh m=19 remains active with 13 durable
   SymPy chunks and 12 current temporary chunks. Full m=20 coverage count is
   complete; unequal dumbbell analysis isolated C5--Cq as the gluing gap.
