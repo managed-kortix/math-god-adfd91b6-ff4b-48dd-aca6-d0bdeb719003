@@ -404,3 +404,8 @@ replies sent (id + url + one-line why), running month read total vs budget
 - pass 9 total: 5 posts. Daily count: 256 of 1,000; 744 remain.
 - public engagement writes: 0 (dry-run intact).
 - content writes: 2 posts live (content lane, LIVE).
+
+- pass 10 (new day): recency math search (5 posts). All off-domain or
+  crypto/noise. Content posts starting to get impressions (post3: 1 like).
+- pass 10 total: 5 posts. Daily count: 261 of 1,000; 739 remain.
+- public engagement writes: 0 (dry-run intact).
