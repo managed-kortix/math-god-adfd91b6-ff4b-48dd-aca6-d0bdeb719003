@@ -25,6 +25,12 @@ def symmetric_poly(q: int) -> s.Poly:
     assert remainder.is_zero
     return quotient
 
+def closed_form(q: int) -> s.Poly:
+    d=(q+7)//2
+    pattern=[(0,1),(1,-2),(2,-1),(3,4),(4,-3),(5,1),(7,1),(8,-2),(9,1)]
+    return s.Poly(sum(c*s.chebyshevu(d-offset,x/2)
+                      for offset,c in pattern if d>=offset),x)
+
 def power_sums(poly: s.Poly, degree: int) -> list[s.Expr]:
     coeff=poly.all_coeffs(); out=[]
     for j in range(1,degree+1):
@@ -36,7 +42,9 @@ def power_sums(poly: s.Poly, degree: int) -> list[s.Expr]:
 def main() -> None:
     # Degree >=16 starts at q=25; checks multiple residue classes and larger q.
     for q in range(25,66,2):
-        got=power_sums(symmetric_poly(q),16)
+        exact=symmetric_poly(q)
+        assert exact==closed_form(q)
+        got=power_sums(exact,16)
         expected=[FORMS[j](q) if callable(FORMS[j]) else FORMS[j]
                   for j in range(1,17)]
         assert got==expected
