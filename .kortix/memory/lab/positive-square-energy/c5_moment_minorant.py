@@ -35,9 +35,13 @@ def main() -> None:
                   29548,22817,149349,119788,755809]
     slope = sum(c*m for c,m in zip(COEFFS,slopes))
     intercept = sum(c*m for c,m in zip(COEFFS,intercepts))
+    target=s.sqrt(5)+s.Rational(9,2)
+    assert intercept-(s.Rational(1,2)-slope)*725 > target
+    assert intercept-(s.Rational(1,2)-slope)*727 < target
     print("PASS exact candidate minorant")
     print(f"slope={slope} decimal={s.N(slope,18)}")
     print(f"intercept={intercept} decimal={s.N(intercept,18)}")
+    print("PASS exact defect target for all odd q<=725; q=727 is first not covered")
 
 
 if __name__ == "__main__":
