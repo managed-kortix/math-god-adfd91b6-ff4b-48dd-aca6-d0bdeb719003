@@ -1,0 +1,8 @@
+# transient compute junk — never persisted (doctrine: only harvest completed, atomically-renamed outputs)
+__pycache__/
+*.pyc
+*.tmp
+*.out.tmp
+*.partial
+mathenv/
+.DS_Store
