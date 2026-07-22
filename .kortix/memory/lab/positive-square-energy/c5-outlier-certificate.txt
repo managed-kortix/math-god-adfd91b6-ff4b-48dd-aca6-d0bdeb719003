@@ -1,0 +1,5 @@
+PASS exact C5 outlier identities
+A(r)=r**8 - r**7 - 2*r**6 + 2*r**5 - r**4 + r - 1
+d(B/A)/dr numerator=-4*r*(r - 1)**2*(r**10 + 2*r**8 + 2*r**6 + 5*r**5 + 2*r**4 + 2*r**2 + 1)
+elimination polynomial=x**8 - 2*x**7 - 9*x**6 + 18*x**5 + 24*x**4 - 50*x**3 - 15*x**2 + 46*x - 17
+unique_r_gt_1_interval=(9044530300/5397772963, 42286127227/25236348012)
