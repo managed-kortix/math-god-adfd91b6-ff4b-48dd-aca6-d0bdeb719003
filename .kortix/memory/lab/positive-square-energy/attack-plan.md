@@ -29,10 +29,9 @@ is the remaining gate.
 
 ## Next experiments
 
-1. Fresh-reproduce m=18 from a newly generated input in both engines.
-2. Run full exact SymPy and PARI passes on the screened 795,630-graph m=19
+1. Run full exact SymPy and PARI passes on the screened 795,630-graph m=19
    slice; low 50 already pass both engines.
-3. Package the cumulative n=10 census and compare precisely with what the paper
+2. Package the cumulative n=10 census and compare precisely with what the paper
    already proves via diameter two or claw-free hypotheses.
 4. Extend structural fingerprints from each minimizer to the low 50, especially
    testing triangle-free, claw, inertia, and diameter-two frequencies.
@@ -46,8 +45,8 @@ is the remaining gate.
   `b47af8111f2d07caf6fa2d09bba7351d9fa5969bbac63ea0ae3669e2cfe8bdc2`.
 - `job-m18-pari.pid`: COMPLETE, 24/24 atomic chunks, 561,106 total graphs,
   every exact charpoly parsed and every 80-digit slack positive.
-- `job-m18-fresh.pid`: active fresh reproduction; accept only the final
-  standalone aggregate, not individual non-atomically-written fresh outputs.
+- `job-m18-fresh.pid`: COMPLETE. Final standalone aggregate exactly reproduced
+  both engines, all counts/hashes, minimizer, and bounds.
 
 ## Verification discipline
 

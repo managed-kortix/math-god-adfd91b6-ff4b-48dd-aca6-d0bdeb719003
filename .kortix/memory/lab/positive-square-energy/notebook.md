@@ -327,6 +327,14 @@ high-precision value `6.924207736138192728540471680663799...`. Therefore m=18
 is internally certified in both engines, bringing m=11..18 to 1,334,971
 graphs. A newly generated fresh reproduction remains before publicity.
 
+**Fresh m=18 reproduction completed.** From a newly generated graph6 stream,
+fresh SymPy and GP processes completed all 24 chunks. The standalone aggregate
+reproduced count 561,106, global SHA-256
+`b47af8111f2d07caf6fa2d09bba7351d9fa5969bbac63ea0ae3669e2cfe8bdc2`,
+minimizer `I?q`qjo{?`, exact lower endpoint
+`17510320956417/2528856896644`, and the prior 80-digit PARI slack. The finite
+m=18 slice has now passed the fresh-process gate in both engines.
+
 The background exact dumbbell certificate also completed every odd cycle
 length `3<=n<=101`: all 50 equal-cycle dumbbells have positive slack, and the
 least exact lower endpoint remains the n=5 case (`>0.5938737271`). This is a
