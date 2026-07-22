@@ -803,6 +803,11 @@ Consequently the whole spectral band splits into just four smooth phase cells.
 This low complexity makes a rigorous cellwise summation realistic; no growing
 number of exceptional intervals appears with q.
 
+The attempted degree-32 LP is numerically ill-conditioned in the monomial
+basis and returned no feasible solution; it is discarded. If revisited, use a
+Chebyshev basis and scale constraints. The exact degree-16 certificate remains
+the trusted finite-range result.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
