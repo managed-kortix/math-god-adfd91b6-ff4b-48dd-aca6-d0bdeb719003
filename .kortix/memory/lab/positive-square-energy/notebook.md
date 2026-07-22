@@ -813,3 +813,11 @@ is exactly `3/(q+10)` (examples 3/14,3/18,3/22,... after indexing), matching
 the observed O(1/q) root. Therefore a gap-based polynomial certificate cannot
 be uniform; the near-zero root must be treated explicitly or absorbed into an
 O(q^-2) tail remainder.
+
+More precisely the local coefficients split by q mod 8. For q=1 mod 8,
+`S(0)=-3, S'(0)=(5q-7)/4`; for q=5 mod 8,
+`S(0)=3, S'(0)=-(5q+31)/4`. The other two classes have S(0)=+/-5 and
+linear derivatives of smaller magnitude. These exact formulas provide the
+leading near-zero root and explain the two different q^-2 defect corrections.
+They are also the data needed to subtract one explicit local root before using
+a gap-based polynomial minorant on the remainder.
