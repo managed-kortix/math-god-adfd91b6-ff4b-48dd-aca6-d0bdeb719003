@@ -38,6 +38,7 @@ total error <1/25. Thus the finite defect remains above target.
 ## Verification status
 
 All algebraic identities, Sturm sign checks, moment inequalities, and rational
-constants have standalone SymPy certificates. Independent PARI reproduction
-of representative finite cases and a line-by-line adversarial review remain
-before any novelty/public result claim.
+constants have standalone SymPy certificates. Independent PARI reproduced
+every odd q=3..23 finite exception with exact integer characteristic
+polynomials and positive 80-digit slacks. A line-by-line adversarial review
+remains before any novelty/public result claim.
