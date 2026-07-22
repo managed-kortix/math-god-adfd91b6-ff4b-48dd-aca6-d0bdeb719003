@@ -194,6 +194,11 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   Screened all 561,106 n=10,m=18 graphs; observed minimum slack
   `6.9242077361381927...` at `I?q`qjo{?`. Exact SymPy and PARI certify the low
   50; minimizer charpoly is `x^2(x-1)^3(x+2)^2(x^3-x^2-12x+8)`.
+- 2026-07-22: full m=18 SymPy exact rational isolation and independent PARI
+  verification completed all 561,106 graphs. Least rigorous SymPy lower bound
+  is `17510320956417/2528856896644 > 6.9242039`; PARI gives slack
+  `6.9242077361381927285404716807...` at the same minimizer. Cumulative
+  two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
 1. Harvest the active full checkpointed paired m=20 certification.
