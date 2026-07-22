@@ -263,3 +263,25 @@ constructed the adjacency matrices and verified the identity exactly for
 `p_n=2(T_n(x/2)-1)` and `q_n=U_{n-1}(x/2)`. This reduces analysis of the
 whole dumbbell family from degree `2n` to two rank-one perturbations of a
 cycle.
+
+The further Chebyshev identity
+`p_n=(x-2)(U_k+U_{k-1})` and
+`q_n=U_k-U_{k-1}` for `n=2k+1` shows that
+
+`chi(D_n)=(U_k+U_{k-1})^2 ((x-2)(U_k+U_{k-1})-(U_k-U_{k-1}))
+((x-2)(U_k+U_{k-1})+(U_k-U_{k-1}))`.
+
+Thus all nontrivial spectral movement is confined to two degree-`k+1`
+polynomials; the other `k` cycle eigenvalues retain multiplicity two. The
+standalone `dumbbell_family.py` exactly isolates these factors and certifies
+strict positive slack for every odd `n<=31`; the least certified lower bound
+in that range occurs at `n=5` and exceeds `0.5938737271`. The attempted
+`n<=101` run exceeded the short foreground window and is not counted.
+
+`minimizer_fingerprints.py` reproduced the structural census for m=11..18.
+All eight minimizers are triangle-free and contain an induced claw, so neither
+the paper's claw-free theorem nor triangle-specific mechanisms explain them.
+The m=11..17 minimizers all have inertia `(6,0,4)`; m=18 changes to `(5,2,3)`.
+Bridges disappear at m=14, and diameter drops to two at m=15,17,18 (so those
+slices are already covered by the paper's diameter-two theorem, despite being
+useful verifier checks).

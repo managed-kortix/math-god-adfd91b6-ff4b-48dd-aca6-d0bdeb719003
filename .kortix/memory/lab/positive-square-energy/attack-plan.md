@@ -32,10 +32,10 @@ slice next.
    m=18 graphs; rerun only missing atomic chunks after interruption.
 2. Run full independent PARI certification for m=18.
 3. Continue m=17,... slices while counts remain tractable, recording exact minima.
-4. Compute structural fingerprints of the low-slack set (degree sequence,
-   blocks, girth, diameter, number of positive eigenvalues).
-5. Derive the characteristic polynomial and s^+ formula for the general
-   dumbbell formed from two odd cycles joined by a bridge.
+4. Extend structural fingerprints from each minimizer to the low 50, especially
+   testing triangle-free, claw, inertia, and diameter-two frequencies.
+5. Use the proved Chebyshev factorization of the equal odd-cycle dumbbell to
+   seek an analytic lower bound for the two moving spectral branches.
 
 ## Running jobs
 
