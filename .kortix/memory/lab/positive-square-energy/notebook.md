@@ -783,3 +783,16 @@ The uniform target itself is exact: for q=1 mod 4,
 Thus no slack was lost in replacing the cycle term by
 `D_q>=sqrt(5)+9/2`. Any valid defect lower bound above 6.737 closes all q at
 once.
+
+Since `p2(S_q)=q+11`, the defect has the exact imbalance form
+
+`D_q=11/2 + (1/2) sum_{lambda in S_q} lambda|lambda|`.
+
+Therefore the entire C5--Cq theorem reduces to the q-independent inequality
+
+`sum lambda|lambda| >= 2sqrt(5)-2 = 2.4721359...`.
+
+Numerically this signed-square imbalance tends to about 3.837925. This is a
+much cleaner statement than the positive-energy target and aligns with the
+constant odd moments `p1=2,p3=8,p5=37,...`; a direct inequality between
+`sum lambda|lambda|` and the first few odd moments may finish the proof.
