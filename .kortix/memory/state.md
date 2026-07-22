@@ -19,6 +19,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   split into 32 durable chunks, and launched the full exact SymPy pass at
   width <10^-6. A separate exact structural counter is measuring how many
   m=18,19 graphs evade the paper's diameter-two/claw-free theorems.
+- 2026-07-22: known-class count completed: m=18 has 556,881/561,106 and m=19
+  has 779,945/795,630 graphs outside the union of diameter-two and claw-free
+  classes. Hence over 98% of both exact slices is not covered by those results.
 - 2026-07-22: freshly regenerated m=18 input exactly matches the prior global
   hash; fresh SymPy reproduction has completed 12/24 chunks and continues.
   Screened all 795,630 connected n=10,m=19 graphs: numerical minimum slack

@@ -381,3 +381,12 @@ below `10^-6`, ample against the screened slack above 8, and remains active.
 `count_known_classes.py` is separately counting exact diameter-two and induced-
 claw predicates over m=18,19 so the genuinely new portion of the computation
 can be stated rather than conflated with classes already proved in the paper.
+
+The exact class count completed. At m=18, only 4,225 of 561,106 graphs lie in
+the union of the diameter-two (3,418) and claw-free (807) classes, leaving
+556,881 not covered by either theorem. At m=19, the union contains 15,685 of
+795,630 (14,794 diameter-two, 892 claw-free; one graph lies in both), leaving
+779,945 uncovered. Thus the exhaustive certificates are not mostly redundant:
+over 98% of each of these slices lies beyond those two published sufficient
+conditions. `count_known_classes.py` computes diameter two from exact Boolean
+walk existence and claw-freeness by enumerating triples in every neighborhood.
