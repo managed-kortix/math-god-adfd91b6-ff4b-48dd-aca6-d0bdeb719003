@@ -734,3 +734,12 @@ whole C5--Cq problem is a finite defect term. A cleaner proof should subtract
 the cycle bulk measure first and bound only the q-independent moment intercepts,
 rather than approximate the kink uniformly with a polynomial whose slope is
 necessarily below 1/2.
+
+An extraction pass initially subtracted the Cq Perron root as retained, but
+the retained factor R has `p_q=(x-2)R^2` and does not contain x=2. Correcting
+that exact factor-of-four error gives the symmetric-sector defect
+`D_q=S_q^+-q/2` as 7.41421, 7.41764, 7.41861, 7.41887, 7.41894,
+7.41896 for q=21,41,81,161,321,641. It converges from below to about
+7.418962..., safely above the required constant
+`sqrt(5)/2+45/8=6.743...`. The target formula is therefore consistent; the
+moment route has asymptotic margin about 0.676.
