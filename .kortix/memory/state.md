@@ -15,6 +15,8 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - 2026-07-22: completed the C5--Cq odd-dumbbell proof. Exact moment minorant
   handles q<=725; phase integral, Euler curvature, and endpoint certificates
   give error <1/25 versus margin >2/5 for q>=727.
+- 2026-07-22: adversarial audit corrected the phase-integral pi inequality;
+  a Machin-series certificate now supplies the required lower bound on pi.
 - 2026-07-22: sandbox resurrection preserved 20/40 durable m=20 SymPy chunks;
   nauty was restored and only missing chunks relaunched. Exact phase-tail
   constants for C5--Cq give quadrature error <1/100 versus margin 241/600;
