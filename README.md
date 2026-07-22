@@ -1,37 +1,37 @@
 # math-god
 
-A Kortix agent that runs 24/7 doing real mathematics research. One open
-problem at a time, attacked relentlessly with a full computational harness
-(sympy, PARI/GP, Wolfram Alpha, Lean). Posts to X only on genuine,
-certificate-backed progress — in deadpan lowercase.
+Proofs and counterexamples found by **math-god** — an autonomous agent that
+does mathematics research continuously, attacking open problems until they
+fall. It runs itself: picks a problem, dissects it into a rigorous attack
+prompt, hunts with a swarm of subagents, and publishes only what survives
+independent adversarial audit.
 
-## AGI-ready architecture
+Everything it claims ships with a machine-checkable certificate. Follow the
+work at [@agentmirko](https://x.com/agentmirko).
 
-- **Never stops** — two layers:
-  - `never-stop` plugin (`.kortix/opencode/plugins/never-stop.ts`): a root
-    session is never allowed to go idle; every idle event re-prompts the agent.
-    Kill switch: `KORTIX_NEVER_STOP_DISABLED=1`.
-  - `math-heartbeat` cron (30 min, `session_mode: reuse`): re-prompts the same
-    session; resurrects a fresh one from repo state if it died.
-- **Memory OS** (`.kortix/memory/`, all committed — only pushed state
-  survives):
-  - `state.md` — working memory, read first every tick
-  - `goals.md` — goal tree (G-n human-owned, O-n agent-derived)
-  - `problems.md` — problem queue: current (exactly one) / backlog / archive
-  - `lab/<slug>/` — attack plan, notebook, scripts, certificates
-  - `episodic/` — append-only per-day event logs
-  - `semantic/` — distilled knowledge notes (tagged, grep-retrieved)
-  - `procedural/` — evolving playbooks
-  - `tweet-ledger.md` — append-only post log
-  - CRUD + retrieval + daily/weekly consolidation rules in the skill.
-- **Task planning**: goals → problem queue → attack plan → native todos
-  (3+ queued at all times).
+## Layout
 
-## Where the truth lives
+Each resolved problem is a top-level folder, assembled once the result passes
+audit:
 
-- Doctrine: `.kortix/opencode/skills/math-god-operator/SKILL.md`
-- Agent: `.kortix/opencode/agents/math-god.md`
-- Harness bootstrap: `scripts/setup-harness.sh`
+```
+<problem>/
+  prompt.md     the exact attack prompt — precise statement, what counts as a
+                solution, what does not, the traps, the multiagent search plan
+  paper.tex     the proof / construction, in full
+  paper.pdf     compiled
+  lean/         Lean formalization (where done)
+  experiments/  computational scripts + exact certificates
+```
 
-Model: `kortix/codex/gpt-5.6-sol` at max reasoning effort (gateway routing),
-no fallbacks — Codex only, by design.
+The agent's own architecture and working memory live in `.kortix/` — its
+doctrine, the attack loop, and the running lab notebooks. Nothing here is
+hand-written by a human; it is maintained by the agent.
+
+## Method
+
+Problem selection → author `prompt.md` (define victory, close every escape
+hatch) → diverse multiagent search, incompatible routes kept alive → every
+candidate attacked by independent adversarial agents → a result is a result
+only when it is complete, exact, and reproducible by a stranger in minutes.
+Lineage: the OpenAI cycle-double-cover prompt and the ShouqiaoW/erdos workflow.

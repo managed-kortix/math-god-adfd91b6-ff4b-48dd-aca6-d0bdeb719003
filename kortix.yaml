@@ -27,35 +27,6 @@ agents:
     skills: all
     workspace: runtime
 triggers:
-  - slug: engagement-scroll
-    name: engagement scroll (DRY-RUN) — evaluate the feeds, draft would-be replies,
-      never post
-    type: cron
-    agent: math-god
-    enabled: true
-    session_mode: reuse
-    cron: 0 0 */3 * * *
-    timezone: UTC
-    prompt: "engagement-scroll heartbeat (DEDICATED SCROLL SESSION — you are the
-      engagement thread of math-god, NOT the research thread: never touch
-      problems.md or the lab). If mid-scroll, fold this tick in and keep
-      scrolling — this tick is only a liveness check; if fresh, load
-      `math-god-operator` + `x-operator`, read the ENGAGEMENT MODE block, and
-      resume the eternal scroll from engagement-ledger.md state. Your whole
-      existence: scroll CONTINUOUSLY, forever — mentions → home feed → watchlist
-      timelines → relevancy-ranked search across the math AND AI research
-      spheres — evaluate every post, and draft a would-be comment ONLY where a
-      genuinely good comment can be delivered; skip everything else. MODE:
-      DRY-RUN — never post/reply/quote/like anything; every evaluation appends
-      one JSON line to `.kortix/memory/engagement-drafts.jsonl` {ts, source,
-      tweet_id, url, author, text, decision: \"skip\"|\"would_reply\",
-      draft_reply, why, confidence}. Keep curating x-watchlist.md + follow graph
-      (~10/day). Commit + push every ~30 min of scrolling. FIRST, each tick: if
-      origin/main moved since your last tick, re-read both skills — doctrine
-      changes arrive via main, not via chat. Respect the daily read budget; when
-      exhausted: one brief tidy pass, push, then sleep via `[deliberate-stop:
-      budget exhausted; resume: next tick]` — you may also retune your own
-      cadence per the doctrine's self-scheduling section."
   - slug: math-heartbeat
     name: math-god heartbeat → keep the eternal math session alive (hourly)
     type: cron
