@@ -359,6 +359,21 @@ congruence class is `n=1 mod 4`, where the minimum observed value is the n=5
 case `-0.81225249...`, already well above -2. The phase equations are the next
 route to a uniform bound rather than further polynomial root isolation.
 
+The cycle baseline simplifies much further. Since
+`sin(4a)=4 sin(a) cos(a) cos(2a)` and
+`cos(3a)=cos(a)(2cos(2a)-1)`, the formulas above reduce exactly to
+
+- `s^+(C_n)-n = 1-sec(pi/n)` for `n=1 mod 4`;
+- `s^+(C_n)-n = sec(pi/n)-1` for `n=3 mod 4`.
+
+This immediately proves the equal-cycle dumbbell inequality for every odd
+`n=3 mod 4`: its two vertex-disjoint cycles are induced subgraphs, so square-
+energy superadditivity gives
+`s^+(D_n) >= 2s^+(C_n) = 2n+2(sec(pi/n)-1) > 2n`.
+Consequently the analytic family problem is now rigorously reduced to
+`n=1 mod 4`, where superadditivity misses by only
+`2(sec(pi/n)-1)=O(n^-2)` and the bridge perturbation must repay that deficit.
+
 ## 2026-07-22 — m=19 screen and exact low tail
 
 Screened all 795,630 connected n=10,m=19 graphs. The numerical minimum is

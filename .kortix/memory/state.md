@@ -18,6 +18,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - 2026-07-22: structural census of the m=20 low 50 found all have induced
   claws and 31 have diameter >2, so 31/50 evade both cited theorem classes;
   there are ten inertia types and 26 triangle-free members.
+- 2026-07-22: exact trigonometric simplification plus square-energy
+  superadditivity proves the equal odd-cycle dumbbell inequality for all cycle
+  lengths n=3 mod 4. The analytic family problem is reduced to n=1 mod 4.
 - 2026-07-22: screened all 1,032,754 connected n=10,m=20 graphs. Observed
   minimum is exact-form `9.055728090000841...` at the circulant
   `Cay(Z_10,{+/-1,+/-4})`, graph6 `I?rFf_{N?`, with charpoly
