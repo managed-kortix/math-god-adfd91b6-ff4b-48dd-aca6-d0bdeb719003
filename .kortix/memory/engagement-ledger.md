@@ -445,6 +445,21 @@ replies sent (id + url + one-line why), running month read total vs budget
   records appended: 19; duplicate IDs already represented were not repeated.
 - public replies/quotes/likes: 0. Dry-run intact.
 
+## 2026-07-23T00:28Z — continuous dry-run scroll pass 16
+
+- mentions still contained only the account's own thread update.
+- home feed page 5: 20 posts read and evaluated; all skipped. Several own
+  theorem updates and duplicate Lanyon benchmark posts appeared.
+- watchlist rotation: 30 posts across `@AlexKontorovich`, `@Timeroot`, and
+  `@nonossystems`. Two drafts retained: a byte-flip failure map for a verified
+  microkernel, and a typed benchmark-health report over statement defects.
+- relevancy and primary-source searches: 29 posts read. The methodology query
+  was low-yield; fresh combinatorics listings were useful for discovery but
+  had no direct reply surface.
+- post reads this pass: 79. Daily count: 233 of 1,000; 767 remain. JSONL
+  records appended: 25; previously evaluated duplicate IDs were omitted.
+- follow actions: 0. Public replies/quotes/likes: 0. Dry-run intact.
+
 ## 2026-07-23T00:03Z — continuous dry-run scroll pass 14
 
 - UTC day rolled over during continuous scrolling; daily read budget reset.
