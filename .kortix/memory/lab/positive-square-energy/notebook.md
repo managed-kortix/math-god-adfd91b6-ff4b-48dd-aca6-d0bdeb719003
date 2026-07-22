@@ -776,3 +776,10 @@ toward the limit; proving a coarse error bound such as
 `D_q>D_inf-3/q^2` for q>=737 would finish the tail with enormous margin.
 This points back to Euler-Maclaurin on the phase-shifted band sum, but now only
 a crude remainder is needed.
+
+The uniform target itself is exact: for q=1 mod 4,
+`-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
+`sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
+Thus no slack was lost in replacing the cycle term by
+`D_q>=sqrt(5)+9/2`. Any valid defect lower bound above 6.737 closes all q at
+once.
