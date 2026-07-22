@@ -12,6 +12,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-22: launched full fresh paired m=20 certification over 1,032,754
+  regenerated graphs in 40 atomic chunks. SymPy runs first, then PARI and
+  whole-input multiset aggregation. This is the active long job.
 - 2026-07-22: fresh m=19 completed both engines and standalone aggregation:
   32 chunks, 795,630 graphs, regenerated whole-input SHA-256 `2178cc8a...`,
   common minimizer and exact bounds all match the original certificate.
@@ -184,7 +187,7 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   50; minimizer charpoly is `x^2(x-1)^3(x+2)^2(x^3-x^2-12x+8)`.
 
 ## next steps
-1. Run full checkpointed paired m=20 certification.
+1. Harvest the active full checkpointed paired m=20 certification.
 3. Compute structural fingerprints of the certified minimizers.
 4. Derive a compact exact formula for the odd-cycle dumbbell family.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.

@@ -60,6 +60,8 @@ m=20 slice has been float-screened and its low 50 certified in both engines.
   coverage for the complete m=18,19 slices.
 - `job-m20-known-classes.pid`: COMPLETE, 1,032,754 graphs; 979,340 outside
   both diameter-two and claw-free classes.
+- `job-m20-full.pid`: ACTIVE, 40 atomic chunks over 1,032,754 regenerated
+  graphs; paired SymPy/PARI stages and whole-file aggregation.
 
 ## Verification discipline
 
