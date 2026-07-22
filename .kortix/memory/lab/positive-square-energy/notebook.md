@@ -808,6 +808,19 @@ basis and returned no feasible solution; it is discarded. If revisited, use a
 Chebyshev basis and scale constraints. The exact degree-16 certificate remains
 the trusted finite-range result.
 
+Let `delta(theta)=atan(H(theta))` on each continuous phase cell. Its derivative
+simplifies to the rational function
+
+`delta'=-4(c-1)(32c^5-24c^3+2c+5)/`
+`(256c^8-256c^7-576c^6+576c^5+384c^4-400c^3-60c^2+92c-17)`,
+
+with c=cos(theta). Exact root counts show the denominator has no zero for
+c in [-1,1] (its two real roots lie outside). Therefore delta' is smooth and
+bounded across the apparent H poles after choosing the correct atan branch;
+only the one quintic root changes monotonicity. This removes the C5 poles from
+the analytic remainder problem and is the right phase variable for Euler-
+Maclaurin.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
