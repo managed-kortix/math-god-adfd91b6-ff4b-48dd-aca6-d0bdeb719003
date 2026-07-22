@@ -383,3 +383,9 @@ replies sent (id + url + one-line why), running month read total vs budget
   timeline (10 posts, all duplicates). No new drafts.
 - pass 6 total: 31 posts. Daily count: 192 of 1,000; 808 remain.
 - public engagement writes: 0.
+
+- pass 7 (new day): spectral/graph search (14 posts) + @ChrSzegedy
+  timeline (10 posts). All duplicates. One new post from ChrSzegedy about
+  automating mathematical reasoning — broad excitement, no specifics.
+- pass 7 total: 25 posts. Daily count: 217 of 1,000; 783 remain.
+- public engagement writes: 0.
