@@ -689,3 +689,11 @@ the actual symmetric-sector s+ of 9.830, and for q=101 it gives 55.027. This
 is enough in scale to prove the desired family if converted to a rational
 polynomial whose two nonnegativity conditions factor or admit Sturm
 certificates. This moment-dual route avoids summing phase shifts root by root.
+
+Higher Newton sums continue the pattern through degree eight:
+`p5=37`, `p6=10q+236`, `p7=177`, `p8=35q+1169` (here pk means the kth
+power sum, not a cycle polynomial). Every even moment is affine in q and every
+odd moment is constant. A degree-eight polynomial minorant therefore has enough
+freedom to produce a q-uniform coefficient above the roughly q/2 threshold;
+the first quartic trial had slope 0.469 and eventually fails, so the next LP
+must optimize worst-case slope and intercept jointly rather than at q=5.
