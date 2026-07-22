@@ -55,8 +55,30 @@ def power_sums(poly: s.Poly, degree: int) -> list[s.Expr]:
         out.append(s.expand(-value))
     return out
 
+def prove_moments_symbolically() -> None:
+    d,q=s.symbols("d q")
+    pattern=[(0,1),(1,-2),(2,-1),(3,4),(4,-3),(5,1),(7,1),(8,-2),(9,1)]
+    coeff=[]
+    for k in range(17):
+        value=0
+        for offset,c in pattern:
+            if k>=offset and (k-offset)%2==0:
+                j=(k-offset)//2
+                # [x^(n-2j)] U_n(x/2)=(-1)^j binomial(n-j,j).
+                falling=s.prod(d-offset-j-h for h in range(j))/s.factorial(j)
+                value += c*(-1)**j*falling
+        coeff.append(s.cancel(value))
+    sums=[]
+    for k in range(1,17):
+        sums.append(s.factor(-(sum(coeff[i]*sums[k-i-1] for i in range(1,k))
+                              + k*coeff[k])))
+    expected=[FORMS[j](q) if callable(FORMS[j]) else FORMS[j] for j in range(1,17)]
+    assert all(s.simplify(got.subs(d,(q+7)/2)-want)==0
+               for got,want in zip(sums,expected))
+
 def main() -> None:
     prove_closed_form_all_q()
+    prove_moments_symbolically()
     # Degree >=16 starts at q=25; checks multiple residue classes and larger q.
     for q in range(25,66,2):
         exact=symmetric_poly(q)
@@ -66,6 +88,7 @@ def main() -> None:
                   for j in range(1,17)]
         assert got==expected
     print("PASS Laurent-identity proof of the nine-term S_q formula for all odd q>=11")
+    print("PASS symbolic Newton proof of all 16 moment formulas")
     print("PASS exact S_q moment formulas through degree 16 for odd q=25..65")
 
 if __name__=="__main__": main()
