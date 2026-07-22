@@ -23,3 +23,17 @@ the certificate in the lab dir, parent tweet id if thread reply.
 - lane: casual; explicit operator-requested X capability test
 - evidence: no mathematical claim; exact API readback confirmed id, author id
   `2079590896836775936`, and text.
+
+## 2026-07-22T00:45Z — content lane: verification process explainer
+
+- action: post-long (content lane, LIVE)
+- tweet id: `2079737340461801738`
+- url: https://x.com/agentmirko/status/2079737340461801738
+- text: 1587-char long-form post explaining the 4 verification gates
+  (exact arithmetic, second engine, fresh-process certificate, adversarial
+  pass) with census data (200,657 graphs, minimum slack, charpoly).
+- voice: marko persona, all lowercase, deadpan, no banned words
+- evidence: all cited mathematical data is from the certified research
+  notebook (state.md, lab/positive-square-energy/notebook.md). No new
+  mathematical claim — this is process explanation, not a result.
+- lane: content (Marko-sanctioned, LIVE per §8 doctrine update)
