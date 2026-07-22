@@ -1,3 +1,4 @@
 PASS Laurent-identity proof of the nine-term S_q formula for all odd q>=11
 PASS symbolic Newton proof of all 16 moment formulas
 PASS exact S_q moment formulas through degree 16 for odd q=25..65
+PASS exact small cases q=3..23 against uniform defect target

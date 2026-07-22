@@ -87,8 +87,16 @@ def main() -> None:
         expected=[FORMS[j](q) if callable(FORMS[j]) else FORMS[j]
                   for j in range(1,17)]
         assert got==expected
+    target=s.sqrt(5)+s.Rational(9,2)
+    for q in range(3,25,2):
+        poly=symmetric_poly(q)
+        defect_lower=-s.Rational(q,2)
+        for (left,right),multiplicity in poly.intervals(eps=s.Rational(1,10**20)):
+            if left>0: defect_lower += multiplicity*left**2
+        assert defect_lower>target
     print("PASS Laurent-identity proof of the nine-term S_q formula for all odd q>=11")
     print("PASS symbolic Newton proof of all 16 moment formulas")
     print("PASS exact S_q moment formulas through degree 16 for odd q=25..65")
+    print("PASS exact small cases q=3..23 against uniform defect target")
 
 if __name__=="__main__": main()
