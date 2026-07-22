@@ -896,6 +896,13 @@ still risks O(1), but midpoint cancellation plus `|delta''|<60` should readily
 put the remainder below 0.4. This is now a constants-only exercise, not an
 asymptotic precision problem.
 
+The positive outlier convergence is exponentially negligible. Its equation is
+`r_q^q A(r_q)=B(r_q)`, while the limit alpha is the zero of A in
+(5/3,17/10). On that interval A' is positive (its largest positive critical
+point is 1.463<5/3), with A'(5/3)>41, and B<34. Thus the mean-value theorem
+gives `0<r_q-alpha<34/[41(5/3)^q]`. For q>=727 this is astronomically below
+any needed tolerance. All finite-tail error comes from the band quadrature.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
