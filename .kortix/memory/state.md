@@ -79,6 +79,10 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   engines. Screened all 361,342 n=10,m=17 graphs; observed minimum slack
   `5.911281165531542...` at `I?`FBqsF_`. The low 50 pass exact SymPy rational
   isolation and independent PARI exact-characteristic-polynomial checks.
+- 2026-07-22: full m=17 SymPy attempts at 16 and 64 workers each exceeded one
+  hour because every root was isolated to 30 decimals. No output was accepted.
+  Next use coarse exact rational isolation sufficient merely to prove slack >0,
+  retaining the 30-decimal low-tail certificate for the minimum.
 
 ## next steps
 1. Run full compact SymPy certification for all 361,342 n=10,m=17 graphs.
