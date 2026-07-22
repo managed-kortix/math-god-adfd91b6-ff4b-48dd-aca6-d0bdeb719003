@@ -37,6 +37,7 @@ def main() -> None:
     parser.add_argument("--parallel", type=int, default=16)
     parser.add_argument("--inner-workers", type=int, default=2)
     parser.add_argument("--digits", type=int, default=6)
+    parser.add_argument("--skip-sympy", action="store_true")
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
@@ -66,8 +67,15 @@ def main() -> None:
             "--workers", str(args.inner_workers), "--digits", str(args.digits),
         ], path.with_suffix(".sympy.out"), digest)
 
-    with ThreadPoolExecutor(max_workers=args.parallel) as pool:
-        list(pool.map(sympy_job, chunks))
+    if not args.skip_sympy:
+        with ThreadPoolExecutor(max_workers=args.parallel) as pool:
+            list(pool.map(sympy_job, chunks))
+    else:
+        missing = [path for path in chunks if not valid_output(
+            path.with_suffix(".sympy.out"), hashlib.sha256(path.read_bytes()).hexdigest()
+        )]
+        if missing:
+            raise RuntimeError(f"cannot skip SymPy: {len(missing)} chunk outputs missing")
 
     def pari_job(path: Path) -> None:
         digest = hashlib.sha256(path.read_bytes()).hexdigest()
