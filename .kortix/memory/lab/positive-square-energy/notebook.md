@@ -603,3 +603,11 @@ it decreases from q=7 toward it. The global minimum in q<=33 is q=5. This
 mirrors the alternating cycle baseline exactly and suggests proving two
 separate monotone subsequences after subtracting the explicit
 `+/- (sec(pi/q)-1)` cycle term.
+
+After subtracting that cycle term, define the bridge gain
+`g_q=s^+(C5--Cq)-s^+(Cq)-5`. Numerically `g_q` still alternates but is already
+bounded between 0.7822 and 0.8300 for q=5..33 and converges to 0.80092867.
+Thus a considerably weaker uniform estimate `g_q>0` proves the family; exact
+monotonicity is unnecessary. A possible route is to lower-bound the positive
+outlier by its algebraic limit and show the positive band sector contributes
+more than `5-x_infinity^2`, about -0.16382 relative to its retained roots.
