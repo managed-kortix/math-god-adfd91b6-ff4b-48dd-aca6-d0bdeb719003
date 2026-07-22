@@ -1106,3 +1106,13 @@ bounds give exactly `l+2` positive band roots in both q residue classes.
 Together with strict monotonicity of `B/A` beyond the unique pole of A, this
 closes the SymPy-side phase/root gate. Independent PARI reproduction and a
 factor-decomposition audit remain before accepting the unequal-family lemma.
+
+Independent PARI/GP reproduction now passes end to end for the tail machinery:
+Laurent reciprocal identities, unique outlier pole and bracket, both phase
+derivative Sturm bounds, the degree-10 phase-integral majorant, and the exact
+q=727 quadrature/error margin. The same remaining rational values are
+`7362936152/1402617781467` for the error and
+`111204374547449/280523556293400` after subtracting it from the conservative
+energy margin. This clears the second-engine gate for the analytic tail. Audit
+the factor decomposition from the original dumbbell characteristic polynomial
+before upgrading C5--Cq from work-in-progress to a proved family lemma.

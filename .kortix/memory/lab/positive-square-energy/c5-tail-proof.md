@@ -64,5 +64,8 @@ Using `sqrt(5)<161/72`, the right side exceeds the required
 the exact rational derivative used by the bounds, the continuous branch
 endpoints, the integer count in each residue class, and uniqueness/sign of the
 positive outlier. Since `u'>0`, all band roots are simple and exhausted by the
-integer count. The remaining publication gate is independent reproduction in
-PARI/GP and a final statement-level audit of the factor decomposition.
+integer count. `c5_tail_pari.gp` now independently reproduces the Laurent
+identities, Sturm bounds, phase-integral sign, outlier bracket, and rational
+tail constants in PARI/GP. The remaining publication gate is a final
+statement-level audit of the original characteristic-polynomial factor
+decomposition.

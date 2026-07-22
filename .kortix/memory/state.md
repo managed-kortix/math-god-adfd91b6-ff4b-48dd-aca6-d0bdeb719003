@@ -19,6 +19,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - 2026-07-22: exact Laurent algebra now derives the C5--Cq phase equation,
   rational phase derivative, branch endpoints, simple/exhaustive positive-band
   integer roots, and unique outlier. Independent PARI reproduction remains.
+- 2026-07-22: independent PARI/GP now reproduces the complete C5--Cq tail
+  algebra, Sturm bounds, integral sign, outlier bracket, and exact constants.
+  Only original characteristic-polynomial factor audit remains.
 - 2026-07-22: m=20 second wave ended with four more durable chunks (28..31),
   bringing SymPy to 20/40. Removed temporary files and resumed the 20 missing
   chunks only.
@@ -209,8 +212,8 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 
 ## next steps
 1. Harvest the active full checkpointed paired m=20 certification.
-2. Reproduce the complete C5--Cq tail algebra and constants in PARI/GP, then
-   audit the original characteristic-polynomial factor decomposition.
+2. Audit the original C5--Cq characteristic-polynomial factor decomposition;
+   if exact, package the unequal-family lemma and run fresh certificates.
 3. Compute structural fingerprints of the certified minimizers.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.
 5. Use the certified X pipeline only when a result passes every mathematical
