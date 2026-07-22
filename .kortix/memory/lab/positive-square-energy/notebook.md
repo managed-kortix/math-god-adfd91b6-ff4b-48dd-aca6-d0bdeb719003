@@ -596,3 +596,10 @@ increases. If `r_q^q=R(r_q)`, then
 `r_q^(q+2)>R(r_q)`, whereas immediately right of the pole R dominates;
 uniqueness forces `r_{q+2}<r_q`. Therefore their eigenvalues
 `r_q+r_q^{-1}` also decrease to the certified algebraic limit.
+
+The total C5--Cq slack itself is not monotone: it oscillates by q mod 4 around
+its limit. For q=1 mod 4 it increases from q=5 toward the limit; for q=3 mod 4
+it decreases from q=7 toward it. The global minimum in q<=33 is q=5. This
+mirrors the alternating cycle baseline exactly and suggests proving two
+separate monotone subsequences after subtracting the explicit
+`+/- (sec(pi/q)-1)` cycle term.
