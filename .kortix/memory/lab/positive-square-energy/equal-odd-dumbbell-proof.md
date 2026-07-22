@@ -13,6 +13,14 @@ Put `a=pi/(2n)`. A finite cosine-square sum gives
 
 `s^+(C_n)-n = sec(pi/n)-1` if `n=3 (mod 4)`.
 
+Indeed the positive eigenvalues are `2cos(2pi j/n)` over `|j|<n/4`.
+Substitute `cos^2(u)=(1+cos(2u))/2` and use the Dirichlet-kernel identity
+
+`1+2 sum_{j=1}^r cos(jx)=sin((r+1/2)x)/sin(x/2)`.
+
+For `r=(n-1)/4` or `(n-3)/4`, elementary angle identities reduce the result
+to the two displayed formulas.
+
 For `n=3 (mod 4)`, the two cycles are vertex-disjoint induced subgraphs of
 `D_n`. Superadditivity therefore yields
 
@@ -26,10 +34,6 @@ diagonal entry of its negative spectral part is
 
 `d=tr(A^-(C_n))/n`.
 
-By Cauchy-Schwarz,
-
-`d^2 <= tr((A^-(C_n))^2)/n = s^-(C_n)/n`.
-
 The correction matrix in the gluing lemma is
 
 `Gamma=[[-d,1],[1,-d]]`,
@@ -37,12 +41,13 @@ The correction matrix in the gluing lemma is
 whose positive square energy is `(1-d)^2` whenever `d<1`. For
 `n=1 (mod 4)`, the cycle formula and `s^++s^-=2n` give
 
-`s^-(C_n)=n-1+sec(pi/n)<n+1`.
-
 The useful estimate comes from the trace norm. For every odd n, the exact
 odd-cycle energy formula is
 
 `E(C_n)=2 csc(pi/(2n))`.
+
+This is the corresponding Dirichlet-kernel sum of
+`sum_j |2cos(2pi j/n)|` for odd n.
 
 Hence `d=E(C_n)/(2n)=csc(pi/(2n))/n`. Put `t=pi/(2n)`. Since
 `sin(t)>t-t^3/6`, the inequality `d<2/3` follows from
