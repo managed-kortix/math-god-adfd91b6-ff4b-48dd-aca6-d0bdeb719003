@@ -784,6 +784,18 @@ toward the limit; proving a coarse error bound such as
 This points back to Euler-Maclaurin on the phase-shifted band sum, but now only
 a crude remainder is needed.
 
+For the tail phase equation, writing c=cos(theta), the right side H(theta)
+has derivative whose numerator simplifies dramatically to
+
+`(c-1)(32c^5-24c^3+2c+5)`.
+
+All other factors in the denominator are squares apart from the known poles.
+Thus monotonicity intervals of the phase shift are controlled by one fixed
+quintic, independent of q. Isolating its roots once partitions (0,pi) into a
+fixed number of smooth cells; Euler-Maclaurin bounds can then be applied cell
+by cell with explicit derivative bounds. This is the concrete analytic-tail
+route for q>=727.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
