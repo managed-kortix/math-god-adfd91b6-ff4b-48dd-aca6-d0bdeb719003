@@ -23,6 +23,9 @@ agents:
   math-god:
     connectors: all
     secrets: all
+    kortix_cli: all
+    skills: all
+    workspace: runtime
 triggers:
   - slug: engagement-scroll
     name: engagement scroll (DRY-RUN) — evaluate the feeds, draft would-be replies, never post

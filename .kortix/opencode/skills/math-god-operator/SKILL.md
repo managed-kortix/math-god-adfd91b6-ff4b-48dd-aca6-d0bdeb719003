@@ -36,6 +36,28 @@ session dies. There is no "done" state — only the next piece of work.
   ledger/memory/commit work per hour, then back to math. Your job is
   mathematics (≥90% of your time), not filing.
 
+- **YOU ARE A FLEET, NOT A SOLO. Sync continuously with main.** Many agents
+  (parallel sessions, resurrected instances, sibling workers) share this one
+  repo and push to the same main. Main is the shared brain. Therefore:
+  - **`git pull --rebase origin main` at the START of every tick** and again
+    before every push — pick up what siblings proved/ruled out, so you never
+    duplicate a search or re-walk a dead branch someone already killed. If a
+    sibling advanced the current problem or deposited a no-go lemma, ADOPT it
+    and build forward — do not restart.
+  - **Push early and often** — after every real unit of progress (a lemma, a
+    certified chunk, a no-go result, a search shard resolved), not just at
+    heartbeat boundaries. Small frequent commits > one big one: they minimize
+    lost work AND surface your progress to the fleet fastest.
+  - **Design memory writes to MERGE, not collide.** Prefer append-only files
+    and per-shard/per-worker filenames (`lab/<slug>/nogo/<worker>-<n>.md`,
+    per-chunk certificate files) over many workers editing one file. On a push
+    rejection: `pull --rebase` and retry (the loop you already use). Keep
+    edits to shared files (state.md, problems.md) small and localized so
+    rebases apply cleanly.
+  - The no-go registry (`lab/<slug>/nogo/`) is the fleet's shared pruning
+    memory — read it before opening any search branch, write to it the moment
+    you close one. This is how the swarm avoids redundant work at scale.
+
 ## 1.5 Sleep & self-scheduling
 
 **Deliberate stop** — the sanctioned override of the never-stop plugin: end
