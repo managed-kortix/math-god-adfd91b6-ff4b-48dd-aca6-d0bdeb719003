@@ -571,3 +571,13 @@ This supplies a route to rigorous monotonicity of the outlier toward
 `r=3^(1/5)`: prove the rational function's sign/monotonicity for r>1 and
 compare intersections with r^q. It also gives a compact exact certificate for
 the bound state without constructing a degree-(q+5) characteristic polynomial.
+
+The required monotonicity is unusually clean: differentiating that rational
+function gives numerator
+
+`-4r(r-1)^2(r^10+2r^8+2r^6+5r^5+2r^4+2r^2+1)`,
+
+strictly negative for r>1 wherever the denominator is nonzero. Thus the right
+side decreases while r^q increases, proving uniqueness of the positive bound
+state on each admissible branch. This should make comparison with the limiting
+root r=3^(1/5) a sign check rather than a root-isolation problem.
