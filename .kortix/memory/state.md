@@ -17,6 +17,11 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   `8.06276942815447...` at `I?bF`xw{?`; exact SymPy and PARI certify the low
   50 and agree on minimizer charpoly
   `x^2(x^4-3x^3-7x^2+16x-6)(x^4+3x^3-3x^2-4x+2)`.
+- 2026-07-22: fresh m=18 reproduction remains active. Twelve prior-output
+  chunks exist; the resumed process is recomputing the first wave because its
+  interrupted predecessor left output files before atomic renaming was added
+  to this fresh-run wrapper. No partial fresh output is accepted; harvest only
+  after all 24 paired files pass `aggregate_chunk_certificates.py`.
 - 2026-07-22: full m=18 SymPy completed all 24 chunks. The standalone
   aggregator validated every per-chunk count/hash in both engines, all 561,106
   records, global SHA-256 `b47af8111f2d07caf6fa2d09bba7351d9fa5969bbac63ea0ae3669e2cfe8bdc2`,

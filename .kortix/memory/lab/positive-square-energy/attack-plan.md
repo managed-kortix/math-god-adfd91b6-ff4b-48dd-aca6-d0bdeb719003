@@ -46,6 +46,8 @@ is the remaining gate.
   `b47af8111f2d07caf6fa2d09bba7351d9fa5969bbac63ea0ae3669e2cfe8bdc2`.
 - `job-m18-pari.pid`: COMPLETE, 24/24 atomic chunks, 561,106 total graphs,
   every exact charpoly parsed and every 80-digit slack positive.
+- `job-m18-fresh.pid`: active fresh reproduction; accept only the final
+  standalone aggregate, not individual non-atomically-written fresh outputs.
 
 ## Verification discipline
 
