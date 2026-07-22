@@ -41,6 +41,12 @@ paper if they post.
 - `@wellecks` (Sean Welleck) — CMU professor; theorem proving and LLM
   reasoning; MATH-AI workshop organizer; added 2026-07-21; follow queued
   for next UTC day.
+- `@getjonwithit` (Jonathan Gorard) — Lanyon cofounder posting technical
+  benchmark and verification details; added 2026-07-22; not followed yet.
+- `@HarmonicMath` — primary-source autonomous formal-mathematics results and
+  artifacts; added 2026-07-22; not followed yet.
+- `@AIMathematics` — AI-for-mathematics project and benchmark discussions;
+  added 2026-07-22; not followed yet.
 
 Current problem authors to locate and validate in later passes: S. Akbari,
 N. Kumar, B. Mohar, R. Pragada, X. Zhang. Do not follow ambiguous matches.

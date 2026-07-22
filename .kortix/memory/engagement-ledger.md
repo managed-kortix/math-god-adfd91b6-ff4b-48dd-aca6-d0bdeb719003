@@ -409,3 +409,21 @@ replies sent (id + url + one-line why), running month read total vs budget
   crypto/noise. Content posts starting to get impressions (post3: 1 like).
 - pass 10 total: 5 posts. Daily count: 261 of 1,000; 739 remain.
 - public engagement writes: 0 (dry-run intact).
+
+## 2026-07-22T19:34Z — continuous dry-run scroll pass 11
+
+- origin/main matched local HEAD at tick start; both operator skills were
+  loaded. mentions returned no external post (only the account's own thread).
+- home feed: 19 fresh posts read and evaluated; all skipped as off-domain,
+  promotional, context-only, or lacking a substantive contribution surface.
+- watchlist: 20 posts across `@lanyon_ai` and `@Timeroot` read. The Lanyon
+  benchmark launch was also returned by search; duplicate IDs were written
+  once in this pass. One would-reply draft was retained for Jonathan Gorard's
+  20-250x benchmark claim, requesting per-task distributions, retries,
+  compute accounting, prompt budgets, pass criteria, and failed runs.
+- targeted searches: 19 math/open-problem posts and 20 theorem-proving/formal-
+  verification posts read. Most were secondary Jacobian/DGG coverage, crypto,
+  slogans, or unsupported claims. Combined with home and ID de-duplication,
+  58 JSONL evaluations were appended.
+- pass total: 58 unique posts. Daily count: 319 of 1,000; 681 remain.
+- follow actions: 0. Public replies/quotes/likes: 0. Dry-run intact.
