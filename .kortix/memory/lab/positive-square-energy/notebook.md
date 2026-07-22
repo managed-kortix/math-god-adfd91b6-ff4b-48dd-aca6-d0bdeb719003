@@ -331,3 +331,18 @@ The background exact dumbbell certificate also completed every odd cycle
 length `3<=n<=101`: all 50 equal-cycle dumbbells have positive slack, and the
 least exact lower endpoint remains the n=5 case (`>0.5938737271`). This is a
 finite family certificate, not yet the desired analytic all-n lemma.
+
+## 2026-07-22 — m=19 screen and exact low tail
+
+Screened all 795,630 connected n=10,m=19 graphs. The numerical minimum is
+`8.0627694281544735...` at graph6 `I?bF`xw{?`. Fresh exact SymPy rational
+root isolation certifies each of the lowest 50 positive; PARI independently
+matches all 50 exact integer characteristic polynomials and slacks. For the
+minimizer,
+
+`chi(x)=x^2(x^4-3x^3-7x^2+16x-6)(x^4+3x^3-3x^2-4x+2)`
+
+and PARI gives slack
+`8.0627694281544735090879961694357365431607856405603...`. This remains a
+low-tail certificate, not a full-slice proof. The fresh m=18 input meanwhile
+reproduced the previous SHA-256 exactly; 12/24 fresh SymPy chunks have passed.

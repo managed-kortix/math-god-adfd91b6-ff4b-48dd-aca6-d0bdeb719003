@@ -30,7 +30,8 @@ is the remaining gate.
 ## Next experiments
 
 1. Fresh-reproduce m=18 from a newly generated input in both engines.
-2. Continue m=19,... slices while counts remain tractable, recording exact minima.
+2. Run full exact SymPy and PARI passes on the screened 795,630-graph m=19
+   slice; low 50 already pass both engines.
 3. Package the cumulative n=10 census and compare precisely with what the paper
    already proves via diameter two or claw-free hypotheses.
 4. Extend structural fingerprints from each minimizer to the low 50, especially

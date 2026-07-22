@@ -11,6 +11,12 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-22: freshly regenerated m=18 input exactly matches the prior global
+  hash; fresh SymPy reproduction has completed 12/24 chunks and continues.
+  Screened all 795,630 connected n=10,m=19 graphs: numerical minimum slack
+  `8.06276942815447...` at `I?bF`xw{?`; exact SymPy and PARI certify the low
+  50 and agree on minimizer charpoly
+  `x^2(x^4-3x^3-7x^2+16x-6)(x^4+3x^3-3x^2-4x+2)`.
 - 2026-07-22: full m=18 SymPy completed all 24 chunks. The standalone
   aggregator validated every per-chunk count/hash in both engines, all 561,106
   records, global SHA-256 `b47af8111f2d07caf6fa2d09bba7351d9fa5969bbac63ea0ae3669e2cfe8bdc2`,
@@ -116,7 +122,7 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 
 ## next steps
 1. Fresh-reproduce the complete m=18 input and both aggregate certificates.
-2. Continue the n=10 edge slices while counts remain tractable.
+2. Run full exact SymPy and PARI certifications for m=19.
 3. Compute structural fingerprints of the certified minimizers.
 4. Derive a compact exact formula for the odd-cycle dumbbell family.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.
