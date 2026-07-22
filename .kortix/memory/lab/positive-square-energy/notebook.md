@@ -836,6 +836,20 @@ degree-32 polynomial being negative on [-1,1], again certified by zero root
 count plus a sign evaluation. The tail now has fully rigorous regularity and
 invertibility constants; only the quadrature bookkeeping remains.
 
+The limiting defect now has a clean spectral-shift formula. Choose the
+continuous phase with delta(0)=pi/2 and integrate the certified rational
+delta'. Numerically,
+
+`D_inf = 2 + x_+^2 + (1/pi) integral_0^(pi/2)`
+`[-8cos(theta)sin(theta)] delta(theta) dtheta`,
+
+where x_+=2.2724037607... is the positive bound state. The integral is
+0.2551438073..., x_+^2=5.1638188520..., giving
+`D_inf=7.418962659...`. The exact residual after subtracting outlier and
+integral is numerically 2 to 6e-8, strongly identifying the endpoint term.
+This is the analytic quantity to bound below; even crude bounds need only show
+it exceeds 6.736.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
