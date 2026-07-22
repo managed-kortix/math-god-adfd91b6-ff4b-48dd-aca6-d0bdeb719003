@@ -850,6 +850,14 @@ integral is numerically 2 to 6e-8, strongly identifying the endpoint term.
 This is the analytic quantity to bound below; even crude bounds need only show
 it exceeds 6.736.
 
+A very coarse tail strategy emerges. The positive outlier has r>5/3, hence
+`x_+=r+r^-1>34/15` and `2+x_+^2>7.1377`, already above the 6.736 target. It
+would therefore suffice to prove the phase integral is nonnegative. The
+continuous delta crosses zero exactly at theta=pi/5 numerically; splitting the
+weighted integral there gives negative part -0.32449 and positive part
+0.57963. A direct comparison under a trigonometric involution may prove the
+net sign without estimating the integral sharply.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
