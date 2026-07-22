@@ -637,3 +637,14 @@ q=3 mod 4 (verified symbolically through q=21 and immediate from the
 Chebyshev values at zero). Combined with the one-positive/one-negative
 outliers and simple-root interlacing in the band, this gives a promising
 elementary route to formalizing the inertia pattern without full Sturm chains.
+
+Root-by-root comparison reveals a stronger persistence pattern. Besides the
+C5 golden root, one copy of every double Cq eigenvalue survives unchanged
+(the antisymmetric eigenvector vanishing at the root). After removing those,
+the moving positive sector has one extra root and interlaces the retained Cq
+positive roots. Examples show the perturbation losses occur only near the top
+of each interlacing interval, while inserted roots repay them. The natural
+unit is therefore each adjacent pair, not global majorization: prove that the
+sum of squares of the inserted root and shifted root exceeds the two copies of
+the corresponding Cq root. Direct values support this except that endpoint
+pairs must be grouped with their neighbor.
