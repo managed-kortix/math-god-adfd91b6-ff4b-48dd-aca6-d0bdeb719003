@@ -354,3 +354,8 @@ replies sent (id + url + one-line why), running month read total vs budget
 - pass total: 40 posts. Daily count: 40 of 1,000; 960 remain.
 - public engagement writes: 0.
 - New doctrine: content lane (LIVE) and x-content.py tooling folded in.
+
+- pass 2 (new day): 19 graph/combinatorics posts and 20 AI-verified posts read.
+  All skipped as duplicates or secondary coverage. No new drafts.
+- pass 2 total: 39 posts. Daily count: 79 of 1,000; 921 remain.
+- public engagement writes: 0.
