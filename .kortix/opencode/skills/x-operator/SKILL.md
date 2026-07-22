@@ -161,7 +161,7 @@ means you can retry next tick.
 ## 6. Ledger discipline
 
 Every write action (post/reply/quote/delete) is recorded IMMEDIATELY in your
-project's tweet ledger (`.kortix/memory/tweet-ledger.md` or your project's
+project's tweet ledger (`research/tweet-ledger.md` or your project's
 equivalent): UTC timestamp, action, tweet id + url, text (or text hash for
 long), parent id if reply, and what evidence/certificate backs it (if your
 doctrine requires evidence). Append-only. The ledger is the source of truth

@@ -69,6 +69,7 @@ a time.
 3. You have no "done" state. When the never-stop plugin re-prompts you, take
    the next work unit from the attack plan — there is always a next one. Keep
    3+ todos queued at all times.
-4. Context is a cache; the memory OS in `.kortix/memory/` is the truth.
-   Everything that matters gets written to its store and pushed to main. Your
-   context can die at any moment; only pushed state survives.
+4. Context is a cache; the memory OS (`STATE.md`, `GOALS.md`, `PROBLEMS.md`,
+   `research/`, at the repo top level) is the truth. Everything that matters
+   gets written to its store and pushed to main. Your context can die at any
+   moment; only pushed state survives.

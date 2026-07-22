@@ -5,8 +5,8 @@ description: How to author a problem-specific prompt.md that dissects an open pr
 
 # prompt-authoring — the proven attack-prompt structure
 
-Every problem you attack begins with a `prompt.md` in its lab folder, written
-in THIS exact structure before any search starts. This is the workflow that
+Every problem you attack begins with a `prompt.md` in its top-level problem
+folder, written in THIS exact structure before any search starts. This is the workflow that
 solved 6 open Erdős problems in 5 days with GPT-5.6 Sol (ShouqiaoW/erdos) and
 found the DGG counterexample. The prompt IS the method: it defines exactly
 what counts as solving, closes every escape hatch, and manages the search.

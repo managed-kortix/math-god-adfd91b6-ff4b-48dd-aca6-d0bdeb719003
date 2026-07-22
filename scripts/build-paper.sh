@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # build-paper — compile a problem's paper.tex → paper.pdf (the ShouqiaoW/erdos
 # layout). Installs a minimal TeX toolchain on first run. Verifies the PDF.
-#   usage: bash scripts/build-paper.sh .kortix/memory/lab/<slug>
+#   usage: bash scripts/build-paper.sh <slug>
 set -euo pipefail
-dir="${1:?usage: build-paper.sh <problem-lab-dir>}"
+dir="${1:?usage: build-paper.sh <problem-folder>}"
 tex="$dir/paper.tex"
 [ -f "$tex" ] || { echo "no paper.tex in $dir"; exit 1; }
 
