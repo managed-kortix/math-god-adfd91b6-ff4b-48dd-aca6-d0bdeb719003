@@ -835,3 +835,11 @@ remain above it. Since the exact uniform target is 6.7361, even proving the
 coarse universal bound `D_q>=7` would suffice. This suggests simplifying the
 moment dual objective to a constant defect 7 rather than approximating the
 optimal 7.42 limit.
+
+Imposing exact bulk slope 1/2 on any fixed degree-16 global polynomial
+minorant is infeasible, as expected from the kink: equality with the arcsine
+integral would force equality almost everywhere on the bulk support. Thus no
+single finite-degree polynomial can prove a q-uniform constant defect directly.
+The viable hybrid is now sharply defined: use the degree-16 minorant for the
+finite range q<=735, then prove the tail by a separate phase/Euler-Maclaurin
+estimate.
