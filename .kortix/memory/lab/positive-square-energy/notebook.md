@@ -756,3 +756,12 @@ The worst cycle deficit occurs at q=5, giving the uniform sufficient target
 `D_q >= sqrt(5)+9/2 = 6.7360679...`. Numerically D_5 itself is about 7.32994
 and the limit is 7.41896, leaving a robust margin. This is the correct defect
 constant for rational moment certification.
+
+The degree-16 dual has the form
+`S_q^+ >= 0.49949017 q+7.11173`, so after subtracting q/2 its defect bound
+stays above the uniform target through approximately q=736. This is already a
+finite exact-certification strategy for every odd q<=735 once the numerical
+polynomial is rationalized and its minorant property Sturm-certified. It does
+not settle the infinite tail; that requires either increasing degree with q or
+an analytic defect-limit error bound. The latter is preferable because the
+observed D_q approaches its limit at O(q^-2), with margin about 0.68.
