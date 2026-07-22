@@ -525,3 +525,11 @@ Numerically, the gain relative to `s^+(C_q)` tends to
 required five new vertices. This suggests a direct phase-shift proof with a
 large safety margin; the gluing lower bound loses that margin by treating the
 C5 side only through one spectral diagonal.
+
+Exact Sturm counts for q=5,7,...,29 show the reduced degree-(q+3) moving
+polynomial has exactly q+1 roots in [-2,2] and precisely two simple outliers,
+one below -2 and one above 2. Together with the persistent golden-ratio pair,
+the entire C5--Cq spectrum is therefore a band phase shift plus two bound
+states. This is the right decomposition for an analytic energy comparison:
+control the squared positive bound state and the displacement of the positive
+band roots against Cq.
