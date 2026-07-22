@@ -500,3 +500,13 @@ the actual spectral slack stays positive in the direct q<=101 scan. Outside
 the C5 pairs, the gluing bound's isolated small failure is `(5,5)` itself.
 Thus extending the lemma to unequal cycles reduces naturally to proving the
 one-parameter family `C_5--C_q`; brute force alone will not close it.
+
+The C5-fixed characteristic polynomial has an exact uniform factor. The
+rank-one bridge identity for unequal cycles is
+`chi(C_5--C_q)=p_5 p_q-q_5 q_q`, and symbolic division shows
+`x^2+x-1` divides it for every odd q (checked by the Chebyshev recurrence and
+symbolically for q<=29). These are the two C5 eigenvalues that persist under
+the bridge because their eigenvectors vanish at the attachment vertex. This
+reduces the moving spectrum by degree two and suggests treating C5--Cq as a
+fixed finite-rank perturbation of Cq rather than through the coarse gluing
+bound.

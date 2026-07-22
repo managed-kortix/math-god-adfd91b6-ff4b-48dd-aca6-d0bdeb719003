@@ -1,0 +1,3 @@
+PASS odd_q_count=50 max_q=101 factor=x**2 + x - 1
+Algebraic reason: modulo x^2+x-1, the Chebyshev recurrence makes
+p_5*q_minor-q_5*p_cycle vanish for every odd q; formal induction pending.
