@@ -611,3 +611,14 @@ Thus a considerably weaker uniform estimate `g_q>0` proves the family; exact
 monotonicity is unnecessary. A possible route is to lower-bound the positive
 outlier by its algebraic limit and show the positive band sector contributes
 more than `5-x_infinity^2`, about -0.16382 relative to its retained roots.
+
+Recomputing this decomposition carefully gives something stronger. Remove the
+persistent positive golden-ratio root from the band spectrum. Relative to all
+positive roots of Cq, the remaining positive band roots contribute a *positive*
+square gain: 0.1452 at q=5 and between 0.185 and 0.256 through q=33. The
+positive outlier alone contributes `x_q^2-5>0.1638188`. Thus the bridge gain
+above was understated because the second persistent golden root also supplies
+`((sqrt(5)-1)/2)^2=(3-sqrt(5))/2=0.381966...`. A proof can aim at the simpler
+statement that the moving positive band square sum does not decrease relative
+to Cq; together with the persistent root and outlier this gives a margin over
+five immediately.
