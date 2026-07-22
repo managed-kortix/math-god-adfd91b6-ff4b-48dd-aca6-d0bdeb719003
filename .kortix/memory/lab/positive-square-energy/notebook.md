@@ -559,3 +559,15 @@ above. The full C5--Cq slack tends to `0.80092867...`, so the remaining band
 phase shift contributes about `-4.36289018...` relative to q vertices after
 the outlier is separated; a proof needs a global phase-sum estimate, not just
 control of the bound state.
+
+For finite odd q, the positive outlier equation also becomes algebraic after
+`x=r+r^{-1}`. Removing the trivial `r^q-1` factor gives a relation linear in
+`r^q`, equivalently
+
+`r^q=(r^8-r^7+r^4-2r^3+2r^2+r-1)/`
+`(r^8-r^7-2r^6+2r^5-r^4+r-1)`.
+
+This supplies a route to rigorous monotonicity of the outlier toward
+`r=3^(1/5)`: prove the rational function's sign/monotonicity for r>1 and
+compare intersections with r^q. It also gives a compact exact certificate for
+the bound state without constructing a degree-(q+5) characteristic polynomial.
