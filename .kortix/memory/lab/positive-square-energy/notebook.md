@@ -622,3 +622,12 @@ above was understated because the second persistent golden root also supplies
 statement that the moving positive band square sum does not decrease relative
 to Cq; together with the persistent root and outlier this gives a margin over
 five immediately.
+
+Exact inertia of the reduced polynomial follows a stable pattern: for
+q=1 mod 4 it is `(q+5)/2` positive and `(q+1)/2` negative; for q=3 mod 4 the
+counts are equal `(q+3)/2`. Restoring the persistent factor adds one positive
+and one negative root. In particular, the moving band contains exactly one
+more positive root than Cq after the persistent positive root is removed.
+That extra root explains why coordinatewise interlacing is the wrong target;
+a majorization or phase-sum inequality should use the additional positive
+degree of freedom.
