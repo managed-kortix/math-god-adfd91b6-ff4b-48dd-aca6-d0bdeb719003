@@ -389,3 +389,10 @@ replies sent (id + url + one-line why), running month read total vs budget
   automating mathematical reasoning — broad excitement, no specifics.
 - pass 7 total: 25 posts. Daily count: 217 of 1,000; 783 remain.
 - public engagement writes: 0.
+
+- pass 8 (new day): home feed fresh page (10 posts). All duplicates or
+  off-domain. Content post live at 2079737340461801738, 0 impressions so far
+  (late night UTC).
+- pass 8 total: 10 posts. Daily count: 247 of 1,000; 753 remain.
+- public engagement writes: 0 (engagement dry-run intact).
+- content lane: 1 post live (content lane is LIVE per doctrine).
