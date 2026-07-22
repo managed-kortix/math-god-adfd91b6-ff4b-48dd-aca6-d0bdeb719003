@@ -25,6 +25,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   n=1 mod 4, n>=13 by a rational 1/9 comparison; fresh exact SymPy and PARI
   certificates settle D_5,D_9. Thus every equal odd-cycle dumbbell with cycle
   length n>=5 satisfies s^+>2n.
+- 2026-07-22: adversarial review repaired the gluing diagonal calculation via
+  `d=csc(pi/(2n))/n` and exact rational Taylor bounds; the corrected proof is
+  recorded in `equal-odd-dumbbell-proof.md`.
 - 2026-07-22: screened all 1,032,754 connected n=10,m=20 graphs. Observed
   minimum is exact-form `9.055728090000841...` at the circulant
   `Cay(Z_10,{+/-1,+/-4})`, graph6 `I?rFf_{N?`, with charpoly

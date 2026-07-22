@@ -377,14 +377,13 @@ Consequently the analytic family problem is now rigorously reduced to
 The remaining congruence class also yields to the paper's gluing lemma. View
 `D_n` as base `K_2`, with one rooted `C_n` glued to each endpoint. Vertex-
 transitivity gives the negative spectral diagonal
-`d=sqrt(s^-(C_n))/n`. The gluing correction is the positive square energy of
-`Gamma=[[-d,1],[1,-d]]`, namely `(1-d)^2`. For an odd cycle,
-`s^-(C_n)=2n-s^+(C_n)<n+1`, hence for every `n>=9`,
-`d<sqrt(n+1)/n<=sqrt(10)/9<2/3`, so `(1-d)^2>1/9`. Meanwhile
+`d=tr(A^-(C_n))/n=E(C_n)/(2n)=csc(pi/(2n))/n`. The sine Taylor bound together
+with `333/106<pi<22/7` gives `d<2/3` for n>=13, so the gluing correction
+`s^+([[-d,1],[1,-d]])=(1-d)^2>1/9`. Meanwhile
 `cos x >= 1-x^2/2` and `pi<22/7` give
-`sec(pi/n)-1 < 1/9` for `n>=9`. Therefore, when `n=1 mod 4` and `n>=9`,
+`sec(pi/n)-1 < 1/9` for `n>=9`. The preliminary comparison
 
-`s^+(D_n) >= 2s^+(C_n)+(1-d)^2 > 2n-2/9+1/9` alone is insufficient.
+`s^+(D_n) >= 2s^+(C_n)+(1-d)^2 > 2n-2/9+1/9` is insufficient.
 
 The factor of two means the crude correction must exceed
 `2(sec(pi/n)-1)`. It does for every `n>=13`: monotonicity reduces the check to

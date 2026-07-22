@@ -38,6 +38,10 @@ def main() -> None:
         return z / (2 - z)
 
     assert Fraction(1, 18) > sec_deficit_upper(13)
+    # pi(1-pi^2/(24*13^2))>3 using 333/106<pi<22/7.
+    assert Fraction(333, 106) * (
+        1 - Fraction(22, 7) ** 2 / (24 * 13**2)
+    ) > 3
     for n, factorization, lower in results:
         print(f"PASS D_{n} exact SymPy certificate")
         print("charpoly=" + str(factorization))
