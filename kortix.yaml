@@ -23,55 +23,7 @@ agents:
   math-god:
     connectors: all
     secrets: all
-  watchdog:
-    connectors: all
-    secrets: all
-    kortix_cli:
-      - project.read
-      - project.session.read
-      - project.session.start
-      - project.session.stop
-      - project.trigger.read
-      - project.trigger.fire
-      - project.gitops.read
-      - project.gitops.push
 triggers:
-  - slug: watchdog
-    name: session watchdog → detect wedged eternal sessions, apply proven recovery (every 30 min, fresh sandbox)
-    type: cron
-    agent: watchdog
-    enabled: true
-    session_mode: fresh
-    cron: 0 15,45 * * * *
-    timezone: UTC
-    prompt: >-
-      Watchdog runbook — execute EXACTLY this, nothing else, then stop.
-      0) Capability self-test: `kortix sessions status --json` must return
-      data. If it errors with permission/auth problems, log WATCHDOG IS
-      TOOTHLESS + the exact error, push, stop — never diagnose sessions with
-      broken tooling. 1) Identify the eternal sessions from that JSON: any
-      session created by trigger `math-heartbeat` or `engagement-scroll`
-      (metadata trigger_slug). 2) Wedge determination — PRIMARY signal is the
-      status JSON, not log access: a session is WEDGED only if (a) it shows a
-      queued/pending prompt whose timestamp is >10 minutes old, OR (b) status
-      is running but `updated` is stale >90 minutes with no queued work. A
-      long bash computation with recent activity is HEALTHY. A scroll session
-      sleeping after a deliberate-stop is HEALTHY. IMPORTANT: an error from
-      `kortix sessions log` (e.g. "Not found") is NOT a wedge signal by
-      itself — CLI errors and permission gaps are your problems, not the
-      session's; only treat "sandbox not found" as corroboration when the
-      status JSON also shows a wedge signal. When in doubt: HEALTHY — a false
-      restart is worse than a 30-min-late recovery. 3) Recovery, per wedged
-      session: first offense this UTC day (check watchdog-log.md):
-      `kortix sessions restart <id>`, wait ~60s, re-check status JSON; if
-      recovered, done. If it left "sandbox not found" or it's a repeat
-      offense: `kortix sessions rm <id>` then `kortix triggers fire
-      <its-trigger-slug>` — proven lossless (state lives on main). 4) Append
-      ONE line to `.kortix/memory/watchdog-log.md` (git pull --rebase,
-      append, commit "watchdog: <summary>", push): timestamp, sessions
-      checked, healthy|wedged + evidence, action taken. 5) End your final
-      message with exactly:
-      [deliberate-stop: watchdog pass complete; resume: next cron tick]
   - slug: engagement-scroll
     name: engagement scroll (DRY-RUN) — evaluate the feeds, draft would-be replies, never post
     type: cron

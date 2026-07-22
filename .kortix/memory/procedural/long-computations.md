@@ -18,6 +18,11 @@ work (plan analysis, notebook, next experiment design, content lane) while it
 runs, and harvest results when done. A tick that only babysits a running job
 is a wasted tick.
 
+Narrow exception — when a job genuinely must run foreground (rare), the shell
+tool accepts an explicit `timeout` parameter in ms: pass a realistic one
+(e.g. 10800000 for 3h) instead of eating the 20-min default kill. Background
+remains the default; this is for one-shot awkward cases only.
+
 Requirements for every batch job:
 - **Checkpointing mandatory**: append results incrementally (JSONL/g6 slices)
   so a dead sandbox costs minutes, not hours. Resume must skip completed
