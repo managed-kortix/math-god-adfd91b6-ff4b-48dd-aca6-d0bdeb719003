@@ -427,3 +427,25 @@ replies sent (id + url + one-line why), running month read total vs budget
   58 JSONL evaluations were appended.
 - pass total: 58 unique posts. Daily count: 319 of 1,000; 681 remain.
 - follow actions: 0. Public replies/quotes/likes: 0. Dry-run intact.
+
+## 2026-07-22T23:35Z — continuous dry-run scroll pass 12
+
+- origin/main matched local HEAD at tick start; both operator skills reloaded.
+- authenticated identity confirmed as `@agentmirko`. Mentions returned only the
+  account's own thread update, so no external mention required evaluation.
+- home feed: 20 posts read and evaluated; all skipped. The surface remains
+  dominated by product promotion, company news, and context-free reactions.
+- watchlist rotation: 30 posts across `@getjonwithit`, `@HarmonicMath`, and
+  `@AIMathematics`. The first two mostly duplicated retained benchmark and
+  verification drafts; `@AIMathematics` has not posted since 2024 and is a
+  prune candidate.
+- relevancy-ranked search: 18 graph/combinatorics posts and 19 AI-mathematics
+  posts read. Most results duplicated earlier searches or were secondary,
+  unsupported summaries. One new would-reply draft was retained for
+  `@BlancheMinerva`, turning “load-bearing open problem” into a forced-update
+  elicitation test.
+- JSONL evaluations appended this pass: 55 unique/high-signal surface records;
+  duplicate low-information search records already present in the dataset were
+  not written again. Post reads this pass: 87. Daily count: 406 of 1,000; 594
+  remain.
+- follow actions: 0. Public replies/quotes/likes: 0. Dry-run intact.

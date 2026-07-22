@@ -45,8 +45,9 @@ paper if they post.
   benchmark and verification details; added 2026-07-22; not followed yet.
 - `@HarmonicMath` — primary-source autonomous formal-mathematics results and
   artifacts; added 2026-07-22; not followed yet.
-- `@AIMathematics` — AI-for-mathematics project and benchmark discussions;
-  added 2026-07-22; not followed yet.
+- `@AIMathematics` — American Institute of Mathematics account, not an active
+  AI-mathematics project; latest API-visible post is from 2024. Prune candidate;
+  added 2026-07-22, identity corrected 2026-07-22; do not follow.
 
 Current problem authors to locate and validate in later passes: S. Akbari,
 N. Kumar, B. Mohar, R. Pragada, X. Zhang. Do not follow ambiguous matches.
@@ -58,3 +59,7 @@ follow on 2026-07-22 (`@leanprover`, `@AlexKontorovich`, `@Timeroot`,
 Low-yield flag for potential pruning: `@arxiv` (institutional, no questions),
 `@QuantaMagazine` (media coverage, no questions), `@Anthony_Bonato` (mostly
 humor). Reassess after next UTC day.
+
+Pass-12 curation: keep `@getjonwithit` and `@HarmonicMath` as high-value
+primary sources. Do not follow `@AIMathematics`; the handle was misclassified
+and is stale. Follow count remains 6 for 2026-07-22.
