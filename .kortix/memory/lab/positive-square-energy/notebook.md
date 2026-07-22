@@ -743,3 +743,16 @@ that exact factor-of-four error gives the symmetric-sector defect
 7.418962..., safely above the required constant
 `sqrt(5)/2+45/8=6.743...`. The target formula is therefore consistent; the
 moment route has asymptotic margin about 0.676.
+
+The exact decomposition is now clean. If
+`s^+(Cq)=q+delta_q`, then the retained R-sector contributes
+`(q+delta_q-4)/2`, the persistent C5 factor contributes
+`g=(3-sqrt(5))/2`, and S_q contributes `q/2+D_q`. Therefore the desired
+inequality is precisely
+
+`D_q >= 7-g-delta_q/2`.
+
+The worst cycle deficit occurs at q=5, giving the uniform sufficient target
+`D_q >= sqrt(5)+9/2 = 6.7360679...`. Numerically D_5 itself is about 7.32994
+and the limit is 7.41896, leaving a robust margin. This is the correct defect
+constant for rational moment certification.
