@@ -913,6 +913,17 @@ rounding determined by q mod 4. Bounding `F''` from theta'<=pi/(q/2-10) and
 the certified delta'' should produce O(1/q), already enough (<0.4 at q=727)
 with constants far below 290. This is the clean formal setup for the last gate.
 
+The constants are indeed tiny. With `a=q/2-delta'>=q/2-10`, inverse
+differentiation gives `|theta'|<=pi/a` and
+`|theta''|<=60pi^2/a^3`. For `f(theta)=4cos^2(theta)` on the positive band,
+`|f'|<=4`, `|f''|<=8`, hence
+
+`|F''(u)|<=8pi^2/a^2+240pi^2/a^3`.
+
+At q=727 this is below 0.000686. Even multiplying the trapezoid error by q/4
+intervals gives under 0.011. Endpoint/branch bookkeeping is now the only
+potential source larger than the available 0.40 margin.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
