@@ -796,6 +796,13 @@ fixed number of smooth cells; Euler-Maclaurin bounds can then be applied cell
 by cell with explicit derivative bounds. This is the concrete analytic-tail
 route for q>=727.
 
+Exact Sturm isolation shows that quintic has only one real root,
+`c=-0.933042475461...`. The phase function's other interior singularities are
+the two explicit roots `c=(-1+/-sqrt(5))/4` of the persistent C5 factor.
+Consequently the whole spectral band splits into just four smooth phase cells.
+This low complexity makes a rigorous cellwise summation realistic; no growing
+number of exceptional intervals appears with q.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
