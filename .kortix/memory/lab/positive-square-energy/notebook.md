@@ -484,6 +484,13 @@ the union has 53,414 graphs, leaving 979,340 outside both classes. The overlap
 is four graphs. Thus 94.83% of this slice is not covered by either of the two
 headline sufficient conditions in the target paper.
 
+**Fresh m=19 gate completed.** All 32 regenerated chunks passed exact SymPy
+and independent PARI verification. The strengthened aggregator also checked
+that the chunks form exactly the same graph6 multiset as the regenerated whole
+file. It reproduced 795,630 graphs, whole SHA-256 `2178cc8a...`, minimizer
+`I?bF`xw{?`, rational lower bound, and 80-digit PARI slack. The m=19 finite
+slice has now passed every computational verification gate.
+
 **Unequal odd-cycle probe.** Float-screened every bridge `C_p--C_q` for odd
 `3<=p,q<=101`; the least slack was still the equal `(5,5)` case at
 `0.5938737512...`, and no counterexample appeared. The same gluing setup has

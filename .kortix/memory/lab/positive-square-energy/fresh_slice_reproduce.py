@@ -92,6 +92,7 @@ def main() -> None:
         str(Path.home() / "mathenv/bin/python"),
         str(here / "aggregate_chunk_certificates.py"),
         "--data-dir", str(args.output_dir), "--prefix", prefix,
+        "--whole-file", str(whole),
     ], check=True)
 
 

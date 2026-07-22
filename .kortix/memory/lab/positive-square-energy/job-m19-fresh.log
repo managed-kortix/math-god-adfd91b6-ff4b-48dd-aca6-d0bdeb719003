@@ -1,0 +1,36 @@
+Traceback (most recent call last):
+  File "/workspace/.kortix/memory/lab/positive-square-energy/fresh_slice_reproduce.py", line 91, in <module>
+    subprocess.run([
+    ^^^^^^
+  File "/workspace/.kortix/memory/lab/positive-square-energy/fresh_slice_reproduce.py", line 70, in main
+    if not args.skip_sympy:
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/.kortix/memory/lab/positive-square-energy/fresh_slice_reproduce.py", line 63, in sympy_job
+    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+  File "/workspace/.kortix/memory/lab/positive-square-energy/fresh_slice_reproduce.py", line 28, in run_atomic
+    raise RuntimeError(f"invalid certificate output: {temporary}")
+RuntimeError: invalid certificate output: .kortix/memory/lab/positive-square-energy/fresh-m19/n10m19-chunk-00.sympy.out.tmp
+Traceback (most recent call last):
+  File "/workspace/.kortix/memory/lab/positive-square-energy/fresh_slice_reproduce.py", line 99, in <module>
+    main()
+  File "/workspace/.kortix/memory/lab/positive-square-energy/fresh_slice_reproduce.py", line 78, in main
+    raise RuntimeError(f"cannot skip SymPy: {len(missing)} chunk outputs missing")
+RuntimeError: cannot skip SymPy: 12 chunk outputs missing
+PASS chunks=32 count=795630 sha256=d0f82a677dda9592fe7d001008b13cbefd76ed120900c5d7d42e689711caac92
+minimum_graph6=I?bF`xw{?
+sympy_minimum_exact_lower=1480358217260351809395815033389/183604253579963139078852096400
+pari_minimum_slack_80d=8.0627694281544735090879961694357365431607856405603201713169395863645817876364248
