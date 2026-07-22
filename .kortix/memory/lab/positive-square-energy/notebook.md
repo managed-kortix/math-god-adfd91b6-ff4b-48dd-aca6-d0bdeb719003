@@ -898,3 +898,14 @@ formula identically for symbolic y=z^d, and the coefficient identity
 proves all 16 moment formulas for every odd q in the stable range. Thus the
 degree-16 minorant is no longer conditional on empirical moment interpolation;
 only small q below the stable range and the q>725 analytic tail remain.
+
+The exact small-case gate now passes q=3..23 by rational root isolation, and
+the rational degree-16 minorant proves every odd q<=725 exactly (q=727 is the
+first missed value, with q=725 margin about 7.38e-4). Thus C5--Cq is reduced
+to the single infinite tail q>=727.
+
+The symbolic Newton machinery also extends cheaply to degree 32; moments
+17..32 remain constant/affine in q (for example p17=635105,
+p18=24310q+3827396, ..., p31=78461383317,
+p32=300540195q+330927764929). A degree-32 minorant may move the exact finite
+frontier by orders of magnitude, buying room for a very crude analytic tail.
