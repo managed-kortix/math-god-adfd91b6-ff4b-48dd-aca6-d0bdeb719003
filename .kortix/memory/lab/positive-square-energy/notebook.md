@@ -725,3 +725,12 @@ degree 8,10,12,14,16 give 0.4963995, 0.4978230, 0.4988487, 0.4991809,
 0.4994902. This confirms the moment measure's bulk limit and makes a
 high-degree finite-range certificate practical, though exact rationalization
 and interval nonnegativity remain.
+
+The slope sequence is exactly half the central binomial coefficient:
+`binomial(2k,k)/2`. These are the positive-half moments of the arcsine spectral
+measure of the infinite path. Hence the coefficient 1/2 is not merely an LP
+limit: it is exactly the bulk positive square energy per cycle vertex. The
+whole C5--Cq problem is a finite defect term. A cleaner proof should subtract
+the cycle bulk measure first and bound only the q-independent moment intercepts,
+rather than approximate the kink uniformly with a polynomial whose slope is
+necessarily below 1/2.
