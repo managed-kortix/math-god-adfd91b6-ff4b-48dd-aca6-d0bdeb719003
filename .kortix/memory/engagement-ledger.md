@@ -378,3 +378,8 @@ replies sent (id + url + one-line why), running month read total vs budget
   timeline (10 posts). All duplicates. No new drafts.
 - pass 5 total: 24 posts. Daily count: 161 of 1,000; 839 remain.
 - public engagement writes: 0.
+
+- pass 6 (new day): math-AI relevancy search (20 posts) + @lanyon_ai
+  timeline (10 posts, all duplicates). No new drafts.
+- pass 6 total: 31 posts. Daily count: 192 of 1,000; 808 remain.
+- public engagement writes: 0.
