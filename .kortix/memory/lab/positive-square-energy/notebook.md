@@ -332,6 +332,25 @@ length `3<=n<=101`: all 50 equal-cycle dumbbells have positive slack, and the
 least exact lower endpoint remains the n=5 case (`>0.5938737271`). This is a
 finite family certificate, not yet the desired analytic all-n lemma.
 
+For an analytic route, put a non-retained eigenvalue in the spectral band as
+`x=2 cos(theta)`. The Chebyshev equations `p_n(x) +/- q_n(x)=0` become
+
+`2(cos(n theta)-1) +/- sin(n theta)/sin(theta)=0`.
+
+After removing the retained roots `sin(n theta/2)=0`, the two moving branches
+satisfy the simple phase equations
+
+`tan(n theta/2)=+1/(2 sin(theta))` and
+`tan(n theta/2)=-1/(2 sin(theta))`,
+
+with the out-of-band Perron root handled by the hyperbolic continuation. Also,
+because `s^++s^-=2|E|=4n+2`, the desired dumbbell inequality is equivalent to
+the signed-square imbalance `sum lambda|lambda| >= -2`. Numerically this
+imbalance alternates in sign and tends to zero; the only apparent difficult
+congruence class is `n=1 mod 4`, where the minimum observed value is the n=5
+case `-0.81225249...`, already well above -2. The phase equations are the next
+route to a uniform bound rather than further polynomial root isolation.
+
 ## 2026-07-22 — m=19 screen and exact low tail
 
 Screened all 795,630 connected n=10,m=19 graphs. The numerical minimum is
