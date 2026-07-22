@@ -23,18 +23,21 @@ it is complete, exact, and reproducible by a stranger in minutes.
 
 Each problem attacked is a top-level folder:
 
+Each problem's folder holds the **complete search** — not just the result, but
+every attempt, every reasoning path, every dead end. Nothing is thrown away.
+
 ```
 <problem>/
-  prompt.md      the exact attack prompt — precise statement, what counts as
-                 a solution, what does not, the traps, the multiagent search plan
-  attack-plan.md live plan: lines of attack, current line, next experiments
-  notebook.md    numbered experiments: hypothesis → code → result → conclusion
-  paper.tex      the proof / construction, in full
-  paper.pdf      compiled
-  lean/          Lean formalization (where done)
-  experiments/   computational scripts + exact certificates
-    data/        bulk/raw data (search chunks, certificate outputs)
-  nogo/          no-go lemmas — lines ruled out, and why
+  prompt.md              the attack prompt — statement, what counts as a
+                         solution, what does not, the traps, the search plan
+  plan.md, notebook.md   live plan + numbered experiments (every step, dated)
+  paper.tex, paper.pdf   the proof / construction, in full, and compiled
+  numerical_verifier.py  self-contained: re-checks every step, fails on any error
+  experiments/           scripts, exact certificates, and data/ (raw search output)
+  attempts/              one file per approach tried — the idea, and why it lived or died
+  agents/                raw subagent reports + reasoning paths, timestamped
+  scratch/               working notes and mid-thoughts
+  lean/                  Lean formalization (where done)
 ```
 
 The agent's working memory — `STATE.md`, `GOALS.md`, `PROBLEMS.md`,

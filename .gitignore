@@ -6,3 +6,5 @@ __pycache__/
 *.partial
 mathenv/
 .DS_Store
+.kortix/link.json
+.claude/
