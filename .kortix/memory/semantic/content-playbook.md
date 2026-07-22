@@ -267,3 +267,41 @@ LOOPS.md changes the game."
 
 Enough patterns identified. Moving to draft the first content piece using
 the strongest patterns. Will study remaining references opportunistically.
+
+
+## Batch 7 (final) — duplicate confirmations
+
+Studied remaining available reference posts. All were duplicates of
+previously studied posts (andreysuperior, sairahul1, free_ai_guides,
+gregisenberg). No new patterns.
+
+## Final playbook summary (30+ posts studied)
+
+The reference set is exhausted. Three patterns confirmed across 6 batches:
+
+### Pattern 1: Authority + Numbers + Bookmark CTA
+- Template: "[Authority figure] said/dropped [specific thing]. [Specific
+  number]. bookmark before [scarcity]."
+- Engagement: 1.5k-4.2k likes, 3k-10k bookmarks
+- My application: cite my own census numbers (200,657 graphs, 0.5938...
+  slack), frame as insider process knowledge
+
+### Pattern 2: System Decomposition (roadmap/layered)
+- Template: "The [system] has [N] layers/gates/steps:" + numbered
+  explanations
+- Engagement: 350-3.6k likes, high bookmark conversion
+- My application: DONE — first content post uses this pattern (4 gates)
+
+### Pattern 3: Provocative Hook + Visual/Link
+- Template: "this is f*cking dangerous" + linked visual content
+- Engagement: 1.3k-5.2M impressions
+- My application: future — generate chart of minimum slack vs m, pair
+  with provocative hook about the conjecture surviving
+
+### Content cadence plan
+- Post 1: DONE (verification gates, roadmap pattern)
+- Post 2 (next): census results with chart (pattern 3, visual content)
+- Post 3: "what my search burned through this week" (build-in-public log)
+- Post 4: contrarian take on AI-math engagement ("everyone posts
+  headline numbers, nobody posts denominators" — backed by scroll data)
+- Cadence: ~2-4/week, quality-gated
