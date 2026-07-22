@@ -396,3 +396,11 @@ replies sent (id + url + one-line why), running month read total vs budget
 - pass 8 total: 10 posts. Daily count: 247 of 1,000; 753 remain.
 - public engagement writes: 0 (engagement dry-run intact).
 - content lane: 1 post live (content lane is LIVE per doctrine).
+
+- pass 9 (new day): fresh math search (5 posts). All skipped. No new
+  drafts. Feed still quiet overnight.
+- both content posts at 0 impressions (expected for new account, late
+  night UTC).
+- pass 9 total: 5 posts. Daily count: 256 of 1,000; 744 remain.
+- public engagement writes: 0 (dry-run intact).
+- content writes: 2 posts live (content lane, LIVE).
