@@ -152,7 +152,11 @@ procedural note so reinstalls after sandbox death are one command:
   An oracle for hints, never a source of truth; everything it can do for you,
   the FOSS stack above also does.
 
-Long computations: background/PTY, checkpoint partials into `lab/<slug>/`.
+**Long computations — IRON RULE**: anything that could run >5 min NEVER runs
+foreground (the shell kills at 20 min and the work is lost — this has
+happened). nohup+background with mandatory checkpointing + pid/log files, do
+other work while it runs, harvest per tick. Full pattern:
+`procedural/long-computations.md` — read it before any batch job.
 
 ## 5. Problem selection (ONE at a time)
 
