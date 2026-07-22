@@ -15,11 +15,21 @@ from fractions import Fraction
 
 import sympy as s
 
-from exact_certify import s_plus_bounds
+from search_geng import graph6_adjacency
 
 
-def certify(g6: str) -> tuple[str, int, int]:
-    _, lower, _, _ = s_plus_bounds(g6)
+def certify(item: tuple[str, int]) -> tuple[str, int, int]:
+    g6, digits = item
+    a = s.Matrix(graph6_adjacency(g6.encode()).astype(int))
+    x = s.symbols("x")
+    poly = s.Poly(a.charpoly(x).as_expr(), x)
+    lower = s.Rational(-a.rows)
+    for (left, right), multiplicity in poly.intervals(eps=s.Rational(1, 10**digits)):
+        if right <= 0:
+            continue
+        if left <= 0:
+            raise RuntimeError(f"root interval {(left, right)} straddles zero for {g6}")
+        lower += multiplicity * left**2
     if lower <= 0:
         raise RuntimeError(f"NONPOSITIVE {g6} {lower}")
     return g6, int(lower.p), int(lower.q)
@@ -30,6 +40,8 @@ def main() -> None:
     ap.add_argument("--from-file", "-f", required=True)
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--chunksize", type=int, default=32)
+    ap.add_argument("--digits", type=int, default=30,
+                    help="decimal root-isolation width exponent")
     args = ap.parse_args()
 
     with open(args.from_file, "rb") as fh:
@@ -39,7 +51,8 @@ def main() -> None:
 
     minimum: tuple[Fraction, str] | None = None
     with ProcessPoolExecutor(max_workers=args.workers) as pool:
-        for g6, p, q in pool.map(certify, graphs, chunksize=args.chunksize):
+        items = ((g, args.digits) for g in graphs)
+        for g6, p, q in pool.map(certify, items, chunksize=args.chunksize):
             value = Fraction(p, q)
             if minimum is None or value < minimum[0]:
                 minimum = value, g6

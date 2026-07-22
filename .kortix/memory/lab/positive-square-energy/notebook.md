@@ -202,3 +202,12 @@ screened graphs. PARI independently matched every one of their exact integer
 characteristic polynomials and gives minimizer slack
 `5.9112811655315422682710710157956986343169838260335...`. This certifies only
 the low tail; a full-slice exact pass remains required.
+
+**Full SymPy pass.** The compact verifier was generalized to accept a rational
+root-isolation precision. Width below `10^-6` is ample because the numerical
+minimum is nearly 6, while avoiding unnecessary 30-decimal algebraic work.
+All 361,342 graphs were exact-certified. The least rigorous lower endpoint is
+`20940707161630/3542499915409 = 5.911279509293167... > 0` at the same minimizer.
+The ordered input SHA-256 is
+`179562801fb7a60d29da2c6a6ed03909c27660ef57fe6ddaf94490005ce4729e`.
+Independent full PARI verification remains next.

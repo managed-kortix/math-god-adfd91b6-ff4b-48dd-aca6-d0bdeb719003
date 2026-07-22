@@ -6,7 +6,7 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **current problem**: Positive square energy at cyclomatic number >= 2 —
   arXiv:2506.07264v1, Conjecture 1.2. See
   `lab/positive-square-energy/attack-plan.md`.
-- **phase**: n=10,m=11..16 exact-certified; m=17 low tail certified
+- **phase**: n=10,m=11..16 exact-certified; m=17 SymPy complete, PARI next
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
@@ -83,10 +83,14 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
   hour because every root was isolated to 30 decimals. No output was accepted.
   Next use coarse exact rational isolation sufficient merely to prove slack >0,
   retaining the 30-decimal low-tail certificate for the minimum.
+- 2026-07-22: completed all 361,342 m=17 graphs with exact SymPy rational root
+  isolation at width <10^-6; every rigorous slack lower bound is positive and
+  the least is `20940707161630/3542499915409 > 5.9112795` at `I?`FBqsF_`.
+  Input SHA-256: `179562801fb7a60d29da2c6a6ed03909c27660ef57fe6ddaf94490005ce4729e`.
 
 ## next steps
-1. Run full compact SymPy certification for all 361,342 n=10,m=17 graphs.
-2. Run full independent PARI certification for m=17.
+1. Run full independent PARI certification for m=17.
+2. Fresh-process reproduce the compact m=17 SymPy certificate.
 3. Compute structural fingerprints of the certified minimizers.
 4. Derive a compact exact formula for the odd-cycle dumbbell family.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.
