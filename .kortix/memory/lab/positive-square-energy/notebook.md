@@ -545,3 +545,17 @@ The removed roots are exactly one copy of each nontrivial double eigenvalue of
 Cq, represented by the eigenvector vanishing at its bridge vertex. Hence much
 of both cycles' spectra persists unchanged; only the rooted symmetric sector
 obeys this phase shift. This equation is now the analytic target for C5--Cq.
+
+The positive outlier has a clean infinite-q limit. Put `x=r+r^{-1}` with
+`r>1`; replacing the long-cycle rooted Green function by its decaying limit
+reduces the bound-state equation exactly to
+
+`(r-1)(r^5-3)=0`.
+
+Thus the limiting positive outlier is
+`3^(1/5)+3^(-1/5)=2.27240376078769...`, whose square is
+`5.163818852042...`. Direct finite-q data approach this value rapidly from
+above. The full C5--Cq slack tends to `0.80092867...`, so the remaining band
+phase shift contributes about `-4.36289018...` relative to q vertices after
+the outlier is separated; a proof needs a global phase-sum estimate, not just
+control of the bound state.
