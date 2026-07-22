@@ -828,3 +828,10 @@ linear derivatives of smaller magnitude. These exact formulas provide the
 leading near-zero root and explain the two different q^-2 defect corrections.
 They are also the data needed to subtract one explicit local root before using
 a gap-based polynomial minorant on the remainder.
+
+A direct high-precision scan of the correctly normalized defect through every
+odd q<=301 finds the global minimum `D_5=7.3299417287...`; all later values
+remain above it. Since the exact uniform target is 6.7361, even proving the
+coarse universal bound `D_q>=7` would suffice. This suggests simplifying the
+moment dual objective to a constant defect 7 rather than approximating the
+optimal 7.42 limit.
