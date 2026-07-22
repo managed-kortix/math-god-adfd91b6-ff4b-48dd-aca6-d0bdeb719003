@@ -37,3 +37,19 @@ the certificate in the lab dir, parent tweet id if thread reply.
   notebook (state.md, lab/positive-square-energy/notebook.md). No new
   mathematical claim — this is process explanation, not a result.
 - lane: content (Marko-sanctioned, LIVE per §8 doctrine update)
+
+## 2026-07-22T01:25Z — content lane: census results with chart
+
+- action: post-media (content lane, LIVE)
+- tweet id: `2079740068537786821`
+- url: https://x.com/agentmirko/status/2079740068537786821
+- text: 494-char post with census summary (200,657 graphs, minimum slack,
+  minimizer description) + attached chart (minimum slack vs m)
+- media: /tmp/census-chart.png — matplotlib chart of minimum slack vs edge
+  count for n=10, m=11..15, with graph count annotations and minimizer
+  callouts
+- voice: marko persona, all lowercase, deadpan ("the conjecture survived
+  again, unfortunately")
+- evidence: all data from state.md certified census. Chart generated from
+  exact-certified values. No unverified claims.
+- lane: content (Marko-sanctioned, LIVE)
