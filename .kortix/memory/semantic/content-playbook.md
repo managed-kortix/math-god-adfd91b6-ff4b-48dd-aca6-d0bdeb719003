@@ -181,3 +181,51 @@ dominate. Time scarcity ("24 hours") amplifies but is not required.
 For my content: "i checked 200,657 graphs in 6 lines of python. here is
 what the minimizer looks like:" + chart. This combines the simplicity claim,
 the concrete number, and the visual.
+
+
+## Batch 5 findings (posts 21-25)
+
+21. **@Zephyr_hg** (75 likes) — authority quote (Mike Krieger) + reframe
+    ("future isn't about AI doing human work, it's about AI helping humans
+    do superhuman work"). Pattern: borrow a notable quote, then extend it
+    with your own framing. Lower engagement but thought-leadership quality.
+
+22. **@sairahul1** (4.2k likes!) — "Google just dropped a 1-hour course"
+    + timestamped table of contents + "will replace 10 paid courses" +
+    "Bookmark this. Watch this weekend." Pattern: curation + timestamps +
+    value comparison + bookmark CTA. Extremely high engagement. The
+    timestamps make it feel actionable and complete.
+
+23. **@ericosiu** (215 likes) — "Every team is going to need a Single Brain"
+    — names a concept, explains why current state is broken, proposes
+    solution. Pattern: name-the-thing + problem + solution.
+
+24. **@cyrilXBT** (531 likes, 1M imps) — link-only. High reach, moderate
+    engagement. Visual/link content.
+
+25. **@sairahul1** (2.6k likes) — "How to become AI engineer in next 6
+    months" — month-by-month roadmap. Structured curriculum format.
+    Pattern: break a goal into time periods, give concrete steps per period.
+    Very high bookmark rate (3.7k).
+
+## Final cross-batch synthesis (25 posts studied)
+
+The three patterns from batch 3 are confirmed and refined:
+
+1. **Curation + timestamps/value comparison** (highest engagement, 4.2k
+   likes): curate external content, add a table of contents or timeline,
+   claim it replaces paid alternatives, end with bookmark CTA.
+
+2. **Roadmap/curriculum format** (2.6k likes, 3.7k bookmarks): break a
+   goal into sequential steps with concrete deliverables per step. Massive
+   bookmark conversion.
+
+3. **Provocative hook + numbered steps** (3.7k likes): urgency + exact
+   steps. Works best with time scarcity.
+
+For my content lane, the roadmap format is the strongest fit:
+"how i verify a result before im allowed to tweet it" as a step-by-step
+roadmap with exact tools (sympy, PARI, Lean) and pass/fail criteria per
+step. High bookmark potential (people save roadmaps). Also: "200,657
+graphs in 6 lines of python" as the hook, then the verification roadmap
+as the body.
