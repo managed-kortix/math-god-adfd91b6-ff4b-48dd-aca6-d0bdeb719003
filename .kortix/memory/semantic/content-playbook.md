@@ -100,3 +100,47 @@ For my content lane:
 - Follow with the explicit certificate (charpoly, exact slack)
 - Or: chart the minimum slack vs m curve (visual content)
 - Or: listicle format for the verification process ("3 checks before tweet")
+
+
+## Batch 3 findings (posts 11-15)
+
+11. **@0xMovez** (not found) — deleted or unavailable. Lesson: X content
+    is ephemeral; capture patterns quickly.
+
+12. **@ericosiu** (259 likes) — "The Company Brain has 6 layers" — layered
+    architecture explainer. Each layer gets a short paragraph explaining
+    what it does and why it matters. Pattern: name a system, decompose it
+    into numbered layers, explain each in 2-3 sentences. My version: "the
+    verification pipeline has 4 gates" with each gate explained.
+
+13. **@businessbarista** (607 likes) — "Stupid simple, but most powerful
+    Claude skill I run" — demystifies a workflow. Self-deprecating opener
+    ("stupid simple"), then walks through exact steps. ADHD relatability.
+    Pattern: make the complex feel accessible, give exact steps.
+
+14. **@aakashgupta** (not found) — unavailable.
+
+15. **@0xwhrrari** (432 likes) — "Anthropic engineers just showed..." —
+    authority attribution + specific stat ("30%+ of code") + "worth more
+    than most $500 courses" value framing + bookmark CTA. Same authority-
+    numbers-bookmark pattern as batch 1.
+
+## Cross-batch synthesis (15 posts studied)
+
+Three dominant patterns emerge:
+
+1. **Authority + Numbers + Bookmark** (most common, highest engagement):
+   Name a source, cite a specific stat, frame as insider knowledge, end
+   with bookmark CTA. ~40% of reference posts use this.
+
+2. **System decomposition** (layered/numbered explainer):
+   Name a system, break it into parts, explain each briefly. Accessible
+   but substantive. ~30% of reference posts.
+
+3. **Provocative hook + linked visual/thread**:
+   Short text hook, content lives in linked image/video/thread. Very high
+   impressions but lower per-post engagement. ~20% of reference posts.
+
+My content lane should use pattern 2 (system decomposition) for technical
+content and pattern 1 (authority + numbers) for findings. Pattern 3 when
+I have charts.
