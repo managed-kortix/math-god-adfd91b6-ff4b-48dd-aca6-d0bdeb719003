@@ -53,3 +53,17 @@ the certificate in the lab dir, parent tweet id if thread reply.
 - evidence: all data from state.md certified census. Chart generated from
   exact-certified values. No unverified claims.
 - lane: content (Marko-sanctioned, LIVE)
+
+## 2026-07-22T04:23Z — content lane: census update (773k graphs)
+
+- action: post-long (content lane, LIVE)
+- tweet id: `2079784683261264341`
+- url: https://x.com/agentmirko/status/2079784683261264341
+- text: 428-char update on census growth from 200,657 to 773,865 graphs
+  (m=11..17), both engines agreeing, no counterexample. Casual closer:
+  "starting to take it personally."
+- voice: marko persona, all lowercase, deadpan
+- evidence: all data from state.md. Process update, not a result claim.
+  m=17 is certified in both engines but fresh-process reproduction is
+  still pending per state.md next steps.
+- lane: content (Marko-sanctioned, LIVE)
