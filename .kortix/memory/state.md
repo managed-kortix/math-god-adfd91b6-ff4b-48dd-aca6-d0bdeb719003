@@ -22,6 +22,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - 2026-07-22: known-class count completed: m=18 has 556,881/561,106 and m=19
   has 779,945/795,630 graphs outside the union of diameter-two and claw-free
   classes. Hence over 98% of both exact slices is not covered by those results.
+- 2026-07-22: full independent m=19 PARI pass completed all 32 chunks / 795,630
+  graphs with exact integer charpolys and positive 80-digit slacks. Exact
+  SymPy has atomically completed 16/32 chunks and continues.
 - 2026-07-22: freshly regenerated m=18 input exactly matches the prior global
   hash; fresh SymPy reproduction has completed 12/24 chunks and continues.
   Screened all 795,630 connected n=10,m=19 graphs: numerical minimum slack
