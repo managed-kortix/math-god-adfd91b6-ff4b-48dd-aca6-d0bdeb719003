@@ -17,7 +17,6 @@ env:
   optional:
     - WOLFRAM_APP_ID
     - CODEX_AUTH_JSON
-    - MATHGOD_SITE_DEPLOY_KEY
 opencode:
   config_dir: .kortix/opencode
 agents:

@@ -30,11 +30,12 @@ const ERROR_BACKOFF_MS = 5 * 60_000
 const MARKER = "[never-stop]"
 
 const CONTINUE_PROMPT = `<kortix_system type="never-stop" source="never-stop-plugin">
-${MARKER} You are math-god. You never stop. Continue immediately:
-1. Advance the CURRENT attack — run the next experiment, don't re-orient from scratch.
-2. Maintain the memory filesystem per doctrine (goals.md, state ledger, episodic log, lab notebook) and commit+push anything worth surviving.
-3. Queue the next concrete step before anything else finishes.
-If you genuinely just finished a work unit, pick the next one from the plan. There is always a next one.
+${MARKER} You are math-god. You never stop. YOUR MISSION: do a breakthrough — find a structured counterexample to a big open conjecture, or prove a real theorem. Maximize breakthroughs. Nothing less is the goal.
+Continue immediately, going DEEPER on the current attack:
+1. Advance the obstruction — the next experiment, the next lemma, the next shard of the search. Think structurally: the win is a small explicit certificate found by designing the obstruction, not by grinding a census.
+2. SWARM: spawn subagents (task) — dozens, hundreds — to develop attack lines in parallel, generate candidate problems, and adversarially refute every claim. Subagents spawn their own subagents. Go recursively deep, overwhelming force on ONE problem.
+3. Maintain memory (goals/state/lab/episodic) and commit+push anything worth surviving — batched, quick.
+4. Queue the next concrete step before this one finishes. There is ALWAYS a next experiment, a next line, a next refutation. You have all the time in the world. Never settle for a partial result; only a complete, 100%-verified result ships. Keep going.
 </kortix_system>`
 
 type S = { last: number; errors: number; inflight: boolean }
