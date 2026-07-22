@@ -425,3 +425,11 @@ The m=20 circulant is 4-regular, diameter two, triangle-free of girth four,
 biconnected, and contains an induced claw. Thus it is covered by the paper's
 diameter-two theorem despite not being claw-free. This is a structural
 fingerprint only, not evidence about the uncaught remainder of the slice.
+
+The m=20 low-50 structural census sharpens this. All 50 contain induced claws;
+only 19 have diameter two, while 30 have diameter three and one has diameter
+four. Hence 31/50 are outside both the diameter-two and claw-free theorems.
+There are 26 triangle-free members and 24 with triangles (13 with one, nine
+with two, two with three), and ten distinct inertia triples. The low tail is
+therefore structurally heterogeneous and mostly not explained by those two
+published sufficient conditions, even though its exact minimizer is.
