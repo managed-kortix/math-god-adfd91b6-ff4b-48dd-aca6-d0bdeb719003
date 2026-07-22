@@ -18,6 +18,10 @@ The composite trapezoid inequality on `[0,m]` gives
 `|sum_{k=0}^m F(k)-int_0^m F(u)du-(F(0)+F(m))/2|`
 `<=m sup|F''|/12 <0.011`.
 
+For uniformity in q, use `m<=(q+3)/4`. After inserting `pi<22/7`, the
+derivative of this upper envelope is exactly
+`-968(q^2+126q+1220)/(147(q-20)^4)<0`; hence q=727 is the worst tail case.
+
 It remains to combine the two fractional endpoint integrals
 `[-1/2,0]` and `[m,u(pi/2)]` with `(F(0)+F(m))/2`. Direct expansion shows
 their total is the congruence-dependent O(q^-2) term seen numerically. A crude

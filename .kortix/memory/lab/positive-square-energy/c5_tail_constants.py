@@ -18,6 +18,12 @@ def main():
     curvature=8*pi_upper**2/a**2+240*pi_upper**2/a**3
     interior_exact=s.Rational(728,4)*curvature/12
     assert interior_exact<s.Rational(11,1000)
+    # Worst-case expression decreases for q>20:
+    q=s.symbols("q", positive=True)
+    aq=q/2-10
+    envelope=(q+3)/4*(8*pi_upper**2/aq**2+240*pi_upper**2/aq**3)/12
+    claimed=-s.Rational(968,147)*(q**2+126*q+1220)/(q-20)**4
+    assert s.simplify(s.diff(envelope,q)-claimed)==0
     interior=s.Rational(11,1000)
     total=endpoint+interior
     assert total<s.Rational(1,25)
