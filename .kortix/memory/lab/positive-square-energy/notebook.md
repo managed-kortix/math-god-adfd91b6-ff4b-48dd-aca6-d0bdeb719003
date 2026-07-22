@@ -903,6 +903,16 @@ point is 1.463<5/3), with A'(5/3)>41, and B<34. Thus the mean-value theorem
 gives `0<r_q-alpha<34/[41(5/3)^q]`. For q>=727 this is astronomically below
 any needed tolerance. All finite-tail error comes from the band quadrature.
 
+For the band, use counting coordinate
+`u=(q theta/2-delta(theta))/pi`; roots occur at consecutive integers u. Its
+density is `du/dtheta=(q/2-delta')/pi`. Therefore the integral of the spectral
+test function against this density gives exactly the bulk q/2 term plus the
+phase integral after integration by parts. The finite-limit discrepancy is
+just the Euler summation error for `F(u)=4cos^2(theta(u))_+`, plus endpoint
+rounding determined by q mod 4. Bounding `F''` from theta'<=pi/(q/2-10) and
+the certified delta'' should produce O(1/q), already enough (<0.4 at q=727)
+with constants far below 290. This is the clean formal setup for the last gate.
+
 The uniform target itself is exact: for q=1 mod 4,
 `-delta_q=sec(pi/q)-1` decreases with q and is maximized at q=5, where it is
 `sqrt(5)-2`; for q=3 mod 4, delta_q is positive and only lowers the target.
