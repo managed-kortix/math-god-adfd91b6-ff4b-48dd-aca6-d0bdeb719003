@@ -12,6 +12,9 @@ the memory OS (goals.md, problems.md, lab/, episodic/, semantic/, procedural/).
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-22: heartbeat m=20 harvest: 16/40 durable SymPy chunks now complete
+  (00..11,16..19); 12 temporary chunks remain active. Degree-32 LP attempt
+  timed out and yielded no accepted result; degree-16 exact certificate stands.
 - 2026-07-22: m=20 first wave ended with four durable SymPy chunks (16..19)
   and 16 temporary files. Removed only `.tmp` outputs and resumed from the
   four valid checkpoints with bounded 12-way outer parallelism.
