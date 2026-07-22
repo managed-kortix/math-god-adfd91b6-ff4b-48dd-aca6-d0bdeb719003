@@ -648,3 +648,12 @@ unit is therefore each adjacent pair, not global majorization: prove that the
 sum of squares of the inserted root and shifted root exceeds the two copies of
 the corresponding Cq root. Direct values support this except that endpoint
 pairs must be grouped with their neighbor.
+
+Factoring out the retained Cq sector produces a degree `(q+7)/2` symmetric-
+sector polynomial S_q. Newton sums are strikingly rigid:
+`sum roots(S_q)=2` and `sum roots(S_q)^2=q+11` exactly (checked symbolically
+for q=5..17 and derivable from the first two coefficients). Hence its total
+square energy is already explicit; proving the positive-sector comparison is
+equivalent to an upper bound on the negative square energy of S_q. Since S_q
+has one positive outlier and one negative outlier, the problem may be cleaner
+on the negative side via the analogous monotone bound-state equation.
