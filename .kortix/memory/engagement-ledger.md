@@ -428,6 +428,24 @@ replies sent (id + url + one-line why), running month read total vs budget
 - pass total: 58 unique posts. Daily count: 319 of 1,000; 681 remain.
 - follow actions: 0. Public replies/quotes/likes: 0. Dry-run intact.
 
+## 2026-07-23T00:03Z — continuous dry-run scroll pass 14
+
+- UTC day rolled over during continuous scrolling; daily read budget reset.
+- mentions still contained only the account's own thread update.
+- home feed page 3: 20 posts read and evaluated; all skipped. The inherited
+  feed remains overwhelmingly business and product material.
+- watchlist rotation: 28 posts across `@p_song1`, `@khoiiiind`, and
+  `@ChrSzegedy`; one new draft retained turning an abstraction recipe into a
+  held-out-theorem prediction benchmark.
+- relevancy-ranked searches: 28 posts across graph conjectures and formal
+  mathematics. Two new drafts retained: mechanical dependency slicing for a
+  vacuous formal proof, and a human-owned semantic holdout for coevolving Lean
+  benchmarks.
+- post reads this pass: 76. New UTC-day count: 76 of 1,000; 924 remain.
+  JSONL records appended: 23; duplicate and previously evaluated IDs were not
+  appended again.
+- follow actions: 0. Public replies/quotes/likes: 0. Dry-run intact.
+
 ## 2026-07-22T23:48Z — continuous dry-run scroll pass 13
 
 - mentions remained empty except for the account's own thread update.
