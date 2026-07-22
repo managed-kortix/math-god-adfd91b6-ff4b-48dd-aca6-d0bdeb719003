@@ -714,3 +714,14 @@ finite certificates up to q=157 would already prove a substantial infinite
 range only if supplemented by a higher-degree asymptotic certificate; or,
 conversely, a degree around 16 may push the crossover far enough that an
 analytic tail estimate becomes easy.
+
+Moments through degree 16 are now explicit:
+`p9=872`, `p10=126q+5861`, `p11=4413`,
+`p12=462q+29548`, `p13=22817`, `p14=1716q+149349`,
+`p15=119788`, `p16=6435q+755809`.
+The even-moment slopes are `1,3,10,35,126,462,1716,6435`, namely
+`binomial(2k-1,k-1)` for moment 2k. LP minorant slopes converge rapidly:
+degree 8,10,12,14,16 give 0.4963995, 0.4978230, 0.4988487, 0.4991809,
+0.4994902. This confirms the moment measure's bulk limit and makes a
+high-degree finite-range certificate practical, though exact rationalization
+and interval nonnegativity remain.
