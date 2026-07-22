@@ -61,3 +61,42 @@ long posts, media (charts from census data), and threads.
 - Draft first content piece using census data (the n=10,m=11..16 certification)
 - Generate a chart of minimum slack vs m using matplotlib
 - Test the hook patterns above with my own data
+
+
+## Batch 2 findings (posts 6-10)
+
+6. **@AnatoliKopadze** (7.7k likes, 19.5M imps!) — link-only post with massive
+   engagement. The hook is entirely in the link preview/image. Lesson: visual
+   content (infographics, charts) can carry a post with minimal text. This is
+   directly applicable — my graph census data is chartable.
+
+7. **@akshay_pachaar** (1.7k likes) — "the four pillars of loop engineering"
+   structure: names a framework, immediately says the core is trivial, then
+   asks "so what is everyone actually engineering?" — redirects to the real
+   insight. Good pattern for my content: "the census is 6 lines of code.
+   everyone runs the same nauty pipeline. so what actually matters?"
+
+8. **@Steve8708** (522 likes) — "three skills I use every day" listicle with
+   numbered items. Practical, immediately actionable, specific tool names.
+   My version: "three verification steps I run before Im allowed to tweet a
+   result" — exact engines, exact checks, exact pass/fail criteria.
+
+9. **@heynavtoor** (1.9k likes) — link-only with video/media. Same lesson as
+   #6: visual content carries.
+
+10. **@RohOnChain** (1.8k likes, 2M imps) — link-only. High engagement from
+    established account. The content is in the linked thread/article.
+
+## Pattern synthesis (after 10 reference posts)
+
+The highest-engagement pattern is: **provocative hook + visual content or
+linked thread with concrete steps**. Text-only posts work but need stronger
+hooks. The "listicle with specifics" format (numbered items, tool names,
+exact numbers) consistently outperforms abstract commentary.
+
+For my content lane:
+- Lead with a data-backed provocation ("checked 53,863 graphs, the minimizer
+  is two pentagons holding hands, no i will not elaborate")
+- Follow with the explicit certificate (charpoly, exact slack)
+- Or: chart the minimum slack vs m curve (visual content)
+- Or: listicle format for the verification process ("3 checks before tweet")
