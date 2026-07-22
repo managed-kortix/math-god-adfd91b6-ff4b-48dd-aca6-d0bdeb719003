@@ -533,3 +533,15 @@ the entire C5--Cq spectrum is therefore a band phase shift plus two bound
 states. This is the right decomposition for an analytic energy comparison:
 control the squared positive bound state and the displacement of the positive
 band roots against Cq.
+
+For a band root `x=2cos(theta)`, substituting
+`p_q=2(cos(q theta)-1)` and `q_q=sin(q theta)/sin(theta)` into the reduced
+polynomial yields, after removing the roots with `sin(q theta/2)=0`, the phase
+equation
+
+`tan(q theta/2)=-(x^2-x-1)/(2(x-2)(x^2+x-1)sin(theta))`.
+
+The removed roots are exactly one copy of each nontrivial double eigenvalue of
+Cq, represented by the eigenvector vanishing at its bridge vertex. Hence much
+of both cycles' spectra persists unchanged; only the rooted symmetric sector
+obeys this phase shift. This equation is now the analytic target for C5--Cq.
