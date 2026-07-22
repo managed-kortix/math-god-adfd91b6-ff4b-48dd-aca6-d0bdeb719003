@@ -29,8 +29,9 @@ def main() -> None:
         assert s.rem(bridge, factor).is_zero
         count += 1
     print(f"PASS odd_q_count={count} max_q={args.max_q} factor={factor.as_expr()}")
-    print("Algebraic reason: modulo x^2+x-1, the Chebyshev recurrence makes")
-    print("p_5*q_minor-q_5*p_cycle vanish for every odd q; formal induction pending.")
+    assert s.rem(p5, factor).is_zero and s.rem(q5, factor).is_zero
+    print("Algebraic reason: x^2+x-1 divides both p_5 and q_5, hence it")
+    print("divides p_5*p_q-q_5*q_q for every q, without any parity restriction.")
 
 
 if __name__ == "__main__":

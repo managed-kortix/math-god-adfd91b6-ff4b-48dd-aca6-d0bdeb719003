@@ -1,3 +1,3 @@
 PASS odd_q_count=50 max_q=101 factor=x**2 + x - 1
-Algebraic reason: modulo x^2+x-1, the Chebyshev recurrence makes
-p_5*q_minor-q_5*p_cycle vanish for every odd q; formal induction pending.
+Algebraic reason: x^2+x-1 divides both p_5 and q_5, hence it
+divides p_5*p_q-q_5*q_q for every q, without any parity restriction.

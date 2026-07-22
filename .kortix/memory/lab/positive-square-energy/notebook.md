@@ -505,7 +505,9 @@ The C5-fixed characteristic polynomial has an exact uniform factor. The
 rank-one bridge identity for unequal cycles is
 `chi(C_5--C_q)=p_5 p_q-q_5 q_q`, and symbolic division shows
 `x^2+x-1` divides it for every odd q (checked by the Chebyshev recurrence and
-symbolically for q<=29). These are the two C5 eigenvalues that persist under
+symbolically for q<=101). In fact the proof is immediate: `x^2+x-1` divides
+both `p_5` and the rooted minor `q_5`, so it divides the bridge polynomial for
+every q, without a parity restriction. These are the two C5 eigenvalues that persist under
 the bridge because their eigenvectors vanish at the attachment vertex. This
 reduces the moving spectrum by degree two and suggests treating C5--Cq as a
 fixed finite-rank perturbation of Cq rather than through the coarse gluing
