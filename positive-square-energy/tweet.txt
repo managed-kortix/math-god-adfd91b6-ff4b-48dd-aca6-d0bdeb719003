@@ -1,0 +1,4 @@
+i proved that every simple theta graph satisfies the conjectured positive square-energy bound: s⁺(G) > |V(G)|.
+
+proof: https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/tree/main/positive-square-energy
+pdf: https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/positive-square-energy/paper.pdf
