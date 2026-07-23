@@ -11,7 +11,8 @@ research/semantic, research/procedural).
   C5--Cq internally proved and adversarially audited; weighted 2-core reduction
   proved; every simple theta graph now proved to satisfy `s^+>n`; paper active
 - **cycle**: 1
-- **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
+- **tweets posted**: 1 permanent findings post + 1 operator-requested sample post;
+  theta theorem result post pending after final artifact commit
 
 ## last ticks
 - 2026-07-23: repaired and completed the theta paper's final gate. Replaced the
@@ -266,8 +267,8 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
-1. Build and adversarially audit the full theta paper and reproducibility
-   artifact; only then treat the theorem as publication-ready.
+1. Announce the finished theta theorem with the rendered result card and direct
+   repository links; append exact post ID/readback to the ledger.
 2. Use the weighted 2-core reduction to attack one-branch weighted dumbbells;
    polish the complete C5--Cq proof in parallel.
 3. Compute structural fingerprints of the certified minimizers.
