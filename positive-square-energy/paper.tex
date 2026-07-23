@@ -1,0 +1,310 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\spen}{s^{+}}
+\title{Positive Square Energy of Theta Graphs}
+\author{math-god}
+\date{23 July 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For a graph $G$ with adjacency eigenvalues $\lambda_i$, let
+$s^+(G)=\sum_{\lambda_i>0}\lambda_i^2$.  We prove that every simple theta
+graph $G$ satisfies
+$s^+(G)>|V(G)|$.  This verifies the theta-graph case of the conjecture
+of Akbari, Kumar, Mohar, Pragada, and Zhang~\cite{AKMPZ} that every connected $n$-vertex
+graph with at least $n+1$ edges has $s^+\ge n$.  The proof combines bipartite
+spectral symmetry, an improved induced-$P_3$ removal lemma, and explicit
+positive-semidefinite variational witnesses for the three short exceptional
+parity families.
+\end{abstract}
+
+\section{Introduction}
+A simple theta graph $\Theta(a,b,c)$ consists of three internally
+vertex-disjoint paths of positive integer edge lengths $a,b,c$ between the same pair of branch
+vertices; at most one of $a,b,c$ is one.  It has
+\[
+ n=a+b+c-1,\qquad m=a+b+c=n+1.
+\]
+Our result is the following.
+
+\begin{theorem}\label{thm:main}
+Every simple theta graph $G$ satisfies $s^+(G)>|V(G)|$.
+\end{theorem}
+
+We use two standard facts.  If $G$ is bipartite, its adjacency spectrum is
+symmetric; together with $\operatorname{tr}(A(G)^2)=2|E(G)|$, this gives
+\begin{equation}\label{eq:bip}
+ s^+(G)=|E(G)|.
+\end{equation}
+For a real symmetric matrix $M$, define $s^+(M)$ analogously.  Then
+\begin{equation}\label{eq:var}
+ s^+(M)=\max_{X\succeq0}\{2\operatorname{tr}(MX)-\operatorname{tr}(X^2)\}.
+\end{equation}
+The latter follows by diagonalizing $M$.
+
+We require the following rigorous form of the improved $P_3$-removal lemma of
+Akbari et al.~\cite[Lemma~2.4]{AKMPZ}.  Their proof reduces the improvement to a scalar inequality
+checked numerically; we include an exact verification.
+
+\begin{lemma}[Improved $P_3$ removal]\label{lem:p3}
+If three vertices $U$ of a graph $G$ induce a $P_3$, then some $v\in U$
+satisfies
+\begin{equation}\label{eq:p3}
+ s^+(G)\ge s^+(G-v)+\frac{17}{16}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Put $C=17/16$ and
+\[
+B=\begin{pmatrix}0&1&0\\1&0&1\\0&1&0\end{pmatrix}.
+\]
+For a symmetric matrix $Z$, let
+$r_i(Z)=Z_{ii}^2+2\sum_{j\ne i}Z_{ij}^2$, the Frobenius contribution removed
+when row and column $i$ are deleted.  We show that for every
+$3\times3$ matrix $M\succeq0$, some $i$ has $r_i(B+M)>C$.
+
+Conjugating by $\operatorname{diag}(1,-1,1)$ reduces this to $B-M$.  Write
+\[
+M=\begin{pmatrix}a&b&d\\b&c&e\\d&e&f\end{pmatrix}\succeq0
+\]
+and suppose all three row/column sums are at most $C$.  Explicitly,
+\begin{align*}
+a^2+2(1-b)^2+2d^2&\le C,\\
+c^2+2(1-b)^2+2(1-e)^2&\le C,\\
+f^2+2d^2+2(1-e)^2&\le C.
+\end{align*}
+With $x=(b+e)/2$, convexity and Cauchy--Schwarz give
+\begin{align}
+c^2&\le C-4(1-x)^2,\label{eq:p3a}\\
+(a+f+2d)^2&\le6\bigl(C-2(1-x)^2\bigr).\label{eq:p3b}
+\end{align}
+Moreover $M\succeq0$ gives
+\begin{equation}\label{eq:p3c}
+c(a+f+2d)\ge(b+e)^2=4x^2.
+\end{equation}
+The initial inequalities imply $15/32\le x\le17/16$: the lower bound follows
+from $|1-x|\le\sqrt C/2$ and $\sqrt C\le C$, while $b^2\le ac$,
+$e^2\le cf$, and $a,c,f\le\sqrt C$ give $x\le C$.
+Equations \eqref{eq:p3a}--\eqref{eq:p3c} would imply
+\[
+16x^4\le6\bigl(C-4(1-x)^2\bigr)\bigl(C-2(1-x)^2\bigr).
+\]
+The reverse inequality holds exactly.  Its left side minus right side is
+\[
+F(x)=-32x^4+192x^3-\frac{999}{4}x^2
++\frac{231}{2}x-\frac{2115}{128}.
+\]
+Under affine parametrization of $[15/32,2/3]$, its degree-four Bernstein
+coefficients are
+\[
+\frac{31815}{32768},\frac{5821}{8192},\frac{2515}{8192},
+\frac{37}{2304},\frac{461}{10368};
+\]
+on $[2/3,17/16]$ they are
+\[
+\frac{461}{10368},\frac{175}{1728},\frac{26459}{18432},
+\frac{35027}{6144},\frac{28193}{2048}.
+\]
+All are positive, while Bernstein basis functions are nonnegative.  This
+proves the local matrix assertion.
+
+Finally,
+\[
+s^+(H)=\min_{R\succeq0}\|A(H)+R\|_F^2.
+\]
+Take a minimizer for $G$ and restrict it to the principal block on $U$.  The
+local assertion supplies a vertex whose full row/column contribution exceeds
+$17/16$; deleting it and using the remaining principal submatrix as a
+competitor for $G-v$ proves \eqref{eq:p3}.
+\end{proof}
+
+\section{The parity reduction}
+A theta graph is bipartite exactly when $a,b,c$ have the same parity; then
+\eqref{eq:bip} gives $s^+=m=n+1$.
+
+Suppose it is nonbipartite.  Relabel so that $a\equiv b\pmod2$ and $c$ has the
+opposite parity.  If $c\ge4$, choose three consecutive internal vertices on
+the $c$-path.  They induce a $P_3$.  Deleting any of the three breaks the
+$c$-path and leaves a connected bipartite unicyclic graph: its unique cycle
+has length $a+b$, which is even.  Every possible deletion has $n-1$ edges, so
+\eqref{eq:bip} and Lemma~\ref{lem:p3} give
+\begin{equation}\label{eq:long}
+ s^+(G)\ge n-1+\frac{17}{16}=n+\frac1{16}.
+\end{equation}
+It remains to treat
+\[
+ \Theta(2r,2s,1)\ (r,s\ge1),\quad
+ \Theta(2r+1,2s+1,2)\ (r,s\ge0,\ r+s\ge1),
+\]
+and $\Theta(2r,2s,3)$ with $r,s\ge1$.
+
+\section{A bordered-cycle witness}
+We first settle the middle family.  Let $A$ be the adjacency matrix of an
+even cycle $C_N$, let $u,v$ lie in different bipartition classes, and put
+$b=e_u+e_v$.  Adding a common neighbor gives
+\[
+ M=\begin{pmatrix}A&b\\b^T&0\end{pmatrix}.
+\]
+Write $P=A_+$ for the positive spectral part, and put $p=b^TPb$ and
+$q=b^TP^2b$.  The matrix
+\[
+ X=\begin{pmatrix}P&Pb/2\\b^TP/2&p/4\end{pmatrix}\succeq0
+\]
+has a Gram factorization with block rows $P^{1/2}$ and
+$b^TP^{1/2}/2$.  Substitution in \eqref{eq:var} gives
+\[
+ s^+(M)\ge N+2p-\frac q2-\frac{p^2}{16}
+ \ge N+p-\frac{p^2}{16},
+\]
+because $0\preceq P\preceq2I$ implies $q\le2p$.
+
+For $N\ge6$, the second and fourth cycle spectral moments are $2$ and $6$;
+the latter counts the six closed four-step walks from a cycle vertex.
+H\"older interpolation gives
+\[
+ \frac1N\operatorname{tr}|A|\ge\frac2{\sqrt3}.
+\]
+Since $u,v$ are in opposite classes, $|A|_{uv}=0$, and
+\[
+p=\frac1N\operatorname{tr}|A|+\mathbf1_{\{u\sim v\}}\ge\frac2{\sqrt3}.
+\]
+Cauchy--Schwarz gives $N^{-1}\operatorname{tr}|A|\le\sqrt2$, so $p<3$.
+As $x-x^2/16$ increases on $[0,3]$,
+\[
+ p-\frac{p^2}{16}\ge\frac2{\sqrt3}-\frac1{12}>1.
+\]
+In $C_4$ every opposite-class pair is adjacent, so $p=2$ and the estimate is
+stronger.  Therefore
+\begin{equation}\label{eq:oddodd2}
+ s^+(\Theta(2r+1,2s+1,2))>|V|.
+\end{equation}
+
+\section{The chord family}
+Write $\Theta(2r,2s,1)$ as an even cycle $C_N$ plus a chord between
+same-class vertices $u,v$.  Put
+\[
+ a=\frac{e_u+e_v}{\sqrt2},\quad b=\frac{e_u-e_v}{\sqrt2},\quad
+ E=aa^T-bb^T,
+\]
+and, for $P=A_+$,
+\[
+ x=a^TPa,\quad y=b^TPb,\quad q=b^TP^2b.
+\]
+The dihedral reflection interchanging $u,v$ commutes with $P$, fixes $a$, and
+negates $b$; hence $a^TPb=0$.  With
+\[
+ T=I-\frac13bb^T,\qquad \alpha=(1-x)_+,
+\]
+the matrix $X=TPT+\alpha aa^T$ is positive semidefinite.  Exact expansion in
+\eqref{eq:var} yields
+\begin{equation}\label{eq:chordgain}
+ s^+(A+E)-N\ge
+ 2x-\frac89y-\frac29q-\frac{25}{81}y^2+(1-x)_+^2.
+\end{equation}
+
+Bipartite symmetry and spectral Cauchy--Schwarz give $y^2\le q/2$.  Indeed,
+if $\Pi_+$ is the positive spectral projector, then
+\[
+y^2\le(b^T\Pi_+b)(b^TP^2b),\qquad b^T\Pi_+b\le\frac12,
+\]
+because the bipartition involution exchanges positive and negative spectral
+subspaces.  On one bipartition class $P^2$ has quadratic form $A^2/2$, so
+\[
+q=\frac12b^TA^2b=1-\frac{(A^2)_{uv}}2\le1.
+\]
+Finally $a^TAa=0$ and $|A|\succeq A^2/2$ give
+\[
+x=\frac12a^T|A|a\ge\frac14a^TA^2a
+=\frac{2+(A^2)_{uv}}4\ge\frac12.
+\]
+Thus $y\le1/\sqrt2$, $y^2\le1/2$, and
+$2x+(1-x)_+^2\ge5/4$.  Hence the right side of
+\eqref{eq:chordgain} is at least
+\[
+ \frac54-\frac8{9\sqrt2}-\frac29-\frac{25}{162}
+ =\frac{283}{324}-\frac{4\sqrt2}{9}>0.
+\]
+Thus
+\begin{equation}\label{eq:eveneven1}
+ s^+(\Theta(2r,2s,1))>|V|.
+\end{equation}
+
+\section{The length-three ear}
+Let $A_0=A(C_N)\oplus A(K_2)$, and let $B$ be the symmetric adjacency matrix
+of the two matching edges joining the endpoints of $K_2$ to same-class cycle
+vertices $u,v$.  The theta adjacency matrix is $A=A_0+B$.
+Put $X_0=(A_0)_+$ and $S=\operatorname{tr}(X_0^2)=N+1$.  For $t\ge0$ let
+\[
+ X_t=(I+tB)X_0(I+tB)\succeq0.
+\]
+Scaling a fixed witness in \eqref{eq:var} gives, provided
+$\operatorname{tr}(AX_t)>0$,
+\begin{equation}\label{eq:ratio}
+ s^+(A)\ge\frac{\operatorname{tr}(AX_t)^2}{\operatorname{tr}(X_t^2)}.
+\end{equation}
+By vertex transitivity write
+$a=(A(C_N)_+)_{uu}=(A(C_N)_+)_{vv}$ and
+$b=(A(C_N)_+)_{uv}$.  Block multiplication gives
+\begin{align}
+ \operatorname{tr}(AX_t)&=S+(2+4a)t+2bt^2,\label{eq:num}\\
+ \operatorname{tr}(X_t^2)&=S+(6+8a+8b)t^2
+ +(1+2a^2+2b^2)t^4.\label{eq:den}
+\end{align}
+We have $1/2\le a\le1/\sqrt2$ and $|b|\le a$: use
+$a=|A(C_N)|_{uu}/2$, the inequalities
+$A(C_N)^2/2\preceq|A(C_N)|$ and
+$|A(C_N)|_{uu}\le\sqrt{(A(C_N)^2)_{uu}}=\sqrt2$, and the
+$\{u,v\}$ principal minor of $P\succeq0$.
+
+Take $t=1/3$; positivity of $\operatorname{tr}(AX_t)$ follows from
+\eqref{eq:num} and $|b|\le a$.  Let $U,D$ denote the quantities in
+\eqref{eq:num}--\eqref{eq:den}.  Direct expansion of
+$E=U^2-(S+1)D$ gives
+\begin{align*}
+81E={}&-2Sa^2+144Sa-2Sb^2-36Sb-28S\\
+&+142a^2+48ab+72a+2b^2-48b-19.
+\end{align*}
+The coefficient of $S$ is at least $-4a^2+108a-28\ge25$, so this increases
+with $S\ge5$.  At $S=5$ it is at least
+\[
+132a^2+48ab+792a-8b^2-228b-159.
+\]
+Its derivative in $b$ is $48a-16b-228<0$, so it decreases on $[-a,a]$.
+At $b=a$ it is
+$172a^2+564a-159\ge166$.  Thus $E>0$, and \eqref{eq:ratio} proves
+\begin{equation}\label{eq:eveneven3}
+ s^+(\Theta(2r,2s,3))>N+2=|V|.
+\end{equation}
+
+Equations \eqref{eq:long}, \eqref{eq:oddodd2},
+\eqref{eq:eveneven1}, and \eqref{eq:eveneven3}, together with the bipartite
+case, prove Theorem~\ref{thm:main}.
+
+\section{Verification}
+The source repository contains the complete attack notebook, detailed proof
+notes, and the exact script \texttt{experiments/theta\_paper\_certificate.py}
+checking the Bernstein coefficients and displayed trace identities.  These
+computations are supplementary; the proofs above do not depend on finite
+numerical verification.
+
+\begin{thebibliography}{9}
+\bibitem{AKMPZ}
+S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and S.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264v1, 2025.
+\bibitem{EFGW}
+C.~Elphick, M.~Farber, F.~Goldberg, and P.~Wocjan,
+\emph{Conjectured bounds for the sum of squares of positive eigenvalues of a
+graph}, Discrete Math. 339 (2016), 2215--2223.
+\bibitem{AbiadEtAl}
+A.~Abiad, L.~de Lima, D.~N.~Desai, K.~Guo, L.~Hogben, and J.~Madrid,
+\emph{Positive and negative square energies of graphs}, Electron. J. Linear
+Algebra 39 (2023), 307--326.
+\end{thebibliography}
+\end{document}

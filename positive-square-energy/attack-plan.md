@@ -60,6 +60,9 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
 12. `even-even-one-theta-proof.md` settles the chord family. For the final
     length-three ear family, combine symmetric and antisymmetric square-energy
     channels; do not substitute a positive-first-energy Ky Fan bound.
+13. `even-even-three-theta-proof.md` settles the final family via a congruence
+    witness around `C_N disjoint K2`. The full simple-theta theorem is proved;
+    compile and hostile-audit `paper.tex` and its exact displayed algebra.
 
 ## Running jobs
 

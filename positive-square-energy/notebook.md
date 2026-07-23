@@ -1277,3 +1277,25 @@ square-energy bound.  A valid symmetric-channel square-energy witness alone
 also falls short (gain `3/2` at `Theta(4,4,3)` versus the required `2`).  The
 final family therefore remains open within this attack and needs both ear
 channels or another exact argument.
+
+The final family is now closed by a different valid square-energy witness.
+Take the baseline disjoint union of the even cycle and the internal ear edge
+`K2`, whose positive square energy is `N+1`, and let `B` be the attachment
+matching.  The PSD congruence witness `X_t=(I+tB)(A_0)_+(I+tB)` at `t=1/3`,
+combined with the optimized scaling ratio
+`s^+(A)>=tr(AX)^2/tr(X^2)`, proves a gain beyond the remaining unit.  Exact
+block traces depend only on `a=P_uu` and `b=P_uv`; the universal bounds
+`1/2<=a<=1/sqrt(2)`, `|b|<=a` reduce the cleared ratio margin to at least
+`166/81>0`.  Four independent audits and exact matrix checks through C10
+passed.  See `even-even-three-theta-proof.md`.
+
+Combining bipartite symmetry, the long singleton-parity P3 theorem, and the
+three residual PSD-witness proofs establishes the full theorem: every simple
+theta graph has `s^+>|V|`.  A complete paper draft is now in `paper.tex`.
+
+The paper's external P3 dependency was made self-contained.  The local PSD
+argument reduces to positivity of a rational quartic on `[15/32,17/16]`; two
+exact Bernstein coefficient lists certify it without the source paper's
+Desmos step.  The final manuscript now includes this proof, all omitted
+spectral-mass and monotonicity details, an exact symbolic certificate script,
+and a compiled PDF.  Two final independent referees found no mathematical gap.

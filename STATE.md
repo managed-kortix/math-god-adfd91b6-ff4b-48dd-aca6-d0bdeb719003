@@ -9,11 +9,21 @@ research/semantic, research/procedural).
   `positive-square-energy/attack-plan.md`.
 - **phase**: n=10,m=11..20 exact-certified and fresh-reproduced; all odd
   C5--Cq internally proved and adversarially audited; weighted 2-core reduction
-  proved; nonbipartite theta reduced to the single family `Theta(even,even,3)`
+  proved; every simple theta graph now proved to satisfy `s^+>n`; paper active
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-23: repaired and completed the theta paper's final gate. Replaced the
+  source P3 lemma's numerical Desmos step by exact positive Bernstein
+  coefficients on two rational intervals; added all referee-requested details.
+  `theta_paper_certificate.py` passes and `paper.pdf` builds. Final independent
+  mathematical audits approve after one duplicated abstract line was removed.
+- 2026-07-23: completed the full theta theorem. For the final
+  `Theta(even,even,3)` family, a congruence witness based on `C_N disjoint K2`
+  and the attachment matching gives an exact cleared ratio margin at least
+  `166/81>0`. Four independent audits and exact C4--C10 checks passed.
+  Assembled `positive-square-energy/paper.tex`; PDF/final paper audit active.
 - 2026-07-23: proved every `Theta(even,even,1)` has `s^+>n` with a PSD chord
   witness. Exact gain is bounded below by
   `283/324-4sqrt(2)/9>0`; two hostile audits reproduced the trace algebra and
@@ -256,8 +266,8 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
-1. Attack the final nonbipartite theta family `(even,even,3)` with a valid
-   two-channel square-energy witness; the symmetric channel alone is short.
+1. Build and adversarially audit the full theta paper and reproducibility
+   artifact; only then treat the theorem as publication-ready.
 2. Use the weighted 2-core reduction to attack one-branch weighted dumbbells;
    polish the complete C5--Cq proof in parallel.
 3. Compute structural fingerprints of the certified minimizers.
