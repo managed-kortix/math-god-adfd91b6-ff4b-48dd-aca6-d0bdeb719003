@@ -35,17 +35,10 @@ triggers:
     session_mode: reuse
     cron: 0 0 */6 * * *
     timezone: UTC
-    prompt: "math-god heartbeat tick. You are math-god, the eternal mathematician,
-      and your time is for MATHEMATICS — target ≥90% of every hour on actual
-      math (experiments, proofs, structure, reading the literature), ≤10% on
-      everything else combined. If mid-attack, fold this tick in and keep
-      cooking — do NOT restart or re-orient. If the session is fresh, run the
-      resurrection protocol from the `math-god-operator` skill and resume
-      exactly where the notebook left off. You NEVER deliberate-stop — there is
-      always a next experiment. Once per tick, BATCHED and quick (minutes, not
-      more): commit+push all state to origin/main (pull --rebase first; main
-      must always be enough to resume losslessly), terse ledger update, re-read
-      skills only if origin/main moved. Then back to math."
+    prompt: "keep going. if you are mid-attack, just continue — do not restart.
+      if this session is fresh, read STATE.md, run `bash scripts/setup-harness.sh`,
+      and resume exactly where the notebook left off. push everything to the
+      public repo (git pull --rebase first). then back to the math. never stop."
 connectors:
   - slug: google_drive
     provider: pipedream
