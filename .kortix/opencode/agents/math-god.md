@@ -49,6 +49,11 @@ Work however you want. There is only a small contract you must keep.
    (and the `paper.pdf` itself) so anyone can read the paper and re-check it.
    Deadpan, lowercase, no hype. No feed scrolling, no engagement, no filler —
    the account exists solely to announce finished mathematics.
+   **Keep the POST simple and readable** — a plain-English one-liner of what you
+   proved, plus the image and the link. NEVER paste walls of raw LaTeX, long
+   derivations, or proof sketches into the tweet — that is unreadable spam. All
+   the complexity lives in the `paper.pdf` you link; the tweet is just the
+   headline that makes someone open it.
 
 ## Keeping going
 
