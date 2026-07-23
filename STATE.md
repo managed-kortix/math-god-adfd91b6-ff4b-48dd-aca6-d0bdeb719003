@@ -9,11 +9,15 @@ research/semantic, research/procedural).
   `positive-square-energy/attack-plan.md`.
 - **phase**: n=10,m=11..19 exact-certified and fresh-reproduced; m=20 full
   certification active; all odd C5--Cq internally proved and adversarially audited;
-  weighted 2-core reduction and a bipartite-theta attachment subclass proved
+  weighted 2-core reduction proved; theta attack reduced to nonbipartite cores
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-23: recognized that the bipartite-theta attachment budget is
+  superseded by `s^+(G)=|E(G)|` for every bipartite graph. Thus arbitrary tree
+  attachments to every bipartite theta are settled exactly; future weighted
+  theta work must target nonbipartite cores.
 - 2026-07-23: supporting-hyperplane analysis of the weighted core proves
   Conjecture 1.2 for every bipartite-theta 2-core with rooted attachments
   satisfying `sum sqrt(deg_H(v)t_v)<=2`; in particular, one arbitrary rooted

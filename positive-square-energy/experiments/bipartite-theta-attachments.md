@@ -1,8 +1,36 @@
-# A rooted-attachment theorem for bipartite theta cores
+# Bipartite graphs and a weighted-theta calculation
 
-This is a proved subclass of the sparse bicyclic case of Conjecture 1.2.
+The elementary bipartite identity below completely supersedes the attachment
+budget initially derived later in this note.  The budget calculation is kept
+because its supporting-plane method remains relevant for nonbipartite cores.
 
-## Theorem
+## Bipartite identity
+
+For every bipartite graph `G`,
+
+`s^+(G)=s^-(G)=|E(G)|`.
+
+Indeed, in a bipartition ordering its adjacency matrix is
+
+`A=[[0,B],[B^T,0]]`.
+
+Its nonzero eigenvalues are the pairs `+sigma_i,-sigma_i`, where the `sigma_i`
+are the nonzero singular values of `B`.  Hence
+
+`s^+(G)=sum_i sigma_i^2=tr(BB^T)=|E(G)|`.
+
+Consequently every bipartite graph in Conjecture 1.2 satisfies its conclusion:
+if `m>=n+1`, then `s^+(G)=m>=n+1>n`.  In particular, a bipartite theta core
+with **arbitrary** rooted-tree attachments has cyclomatic number two, remains
+bipartite, and satisfies the exact identity
+
+`s^+(G)=|E(G)|=|V(G)|+1`.
+
+Thus no attachment budget is needed in the bipartite case.  The remainder of
+this note records a weaker weighted-core argument that was found first and
+illustrates what may transfer when the theta core is nonbipartite.
+
+## Supporting-plane weighted-core theorem
 
 Let `H=Theta(l_1,l_2,l_3)` consist of two branch vertices joined by three
 internally vertex-disjoint paths.  Assume `l_1,l_2,l_3` have the same parity,

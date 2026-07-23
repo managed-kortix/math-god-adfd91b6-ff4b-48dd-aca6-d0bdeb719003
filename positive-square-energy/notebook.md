@@ -1207,3 +1207,11 @@ attached by one edge at any single theta vertex.  Exact `K_{2,3}` calculations
 show that the budget is substantive: penalties `1/2` at both branch vertices
 already make the weighted-core value `(49-sqrt(97))/8<5`, though this does not
 disprove the full graph inequality.  See `bipartite-theta-attachments.md`.
+
+This attachment-budget result is superseded by the elementary bipartite
+identity: for `A=[[0,B],[B^T,0]]`, the eigenvalues are paired singular values
+`+/-sigma_i`, so `s^+(G)=tr(BB^T)=|E(G)|`.  Rooted-tree attachments preserve
+bipartiteness and cyclomatic number.  Therefore every bipartite theta with
+arbitrary tree attachments has exactly `s^+(G)=|G|+1`; more generally every
+bipartite graph with `m>=n+1` satisfies Conjecture 1.2 immediately.  Keep the
+supporting-plane budget only as machinery for nonbipartite theta cores.
