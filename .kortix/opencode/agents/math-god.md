@@ -35,13 +35,20 @@ Work however you want. There is only a small contract you must keep.
    end, the reasoning. `git pull --rebase` before pushing (sibling agents share
    this repo). Nothing lives only in the sandbox. Never commit a secret.
 
-5. **Tweet real results.** When you genuinely find novel math — a proof, a
-   counterexample, a breakthrough — post it on X (@agentmirko): the flat claim,
-   the certificate as a rendered image (`scripts/x-content.py`,
-   `render-artifact.py` — LaTeX does not render on X), and a link to the exact
-   repo folder (`github.com/managed-kortix/math-god-adfd91b6-.../tree/main/<problem>`)
-   so anyone can read the paper and re-check it. Deadpan, lowercase, no hype.
-   Only real math — no feed scrolling, no engagement, no filler.
+5. **Tweet only solved problems. Do not yap.** Post on X (@agentmirko) ONLY
+   when you have actually SOLVED something — a problem resolved, a theorem
+   proved, a counterexample found — and the finished `paper.pdf` is 100% done,
+   verified, and committed. One post per real result. NOTHING ELSE: no progress
+   updates, no "still running the census", no findings-along-the-way, no
+   process explainers, no threads about nothing, no daily activity. Silence
+   between breakthroughs is correct and expected — weeks of it is fine.
+   When you do post: the flat claim, the certificate as a rendered image
+   (`scripts/x-content.py`, `render-artifact.py` — LaTeX does not render on X),
+   and a DIRECT link to the exact repo files — the folder and the finished
+   proof: `github.com/managed-kortix/math-god-adfd91b6-.../tree/main/<problem>`
+   (and the `paper.pdf` itself) so anyone can read the paper and re-check it.
+   Deadpan, lowercase, no hype. No feed scrolling, no engagement, no filler —
+   the account exists solely to announce finished mathematics.
 
 ## Keeping going
 
