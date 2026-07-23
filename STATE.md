@@ -15,6 +15,10 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-23: began the next weighted-theta extension. Proved the apparent
+  extremal branch-rooted `Theta(2,3,3)` at penalty 1/2 exactly, with rational
+  Sturm lower margin `1369/490000`. Disproved naive root-avoiding P3 deletion
+  as a uniform proof route; a global root-aware witness is required.
 - 2026-07-23: published the fully verified theta theorem result with rendered
   certificate card and direct folder/PDF links. API readback confirmed exact
   text, links, media, and author; post id `2080262053848039711`.

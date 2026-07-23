@@ -1299,3 +1299,13 @@ exact Bernstein coefficient lists certify it without the source paper's
 Desmos step.  The final manuscript now includes this proof, all omitted
 spectral-mass and monotonicity details, an exact symbolic certificate script,
 and a compiled PDF.  Two final independent referees found no mathematical gap.
+
+Post-theorem extension work isolates the one-tree attachment bottleneck.  The
+weighted-core reduction asks for
+`s^+(A(Theta)-E_vv/2)>=|Theta|`.  A root-avoiding P3 deletion does not close it:
+the residual diagonally penalized bipartite unicyclic graph can lose much more
+than `1/16`.  Screening indicates the unique extremum is branch-rooted
+`Theta(2,3,3)`.  This finite case is now exact-certified: rational Sturm
+intervals for its three positive quintic roots give
+`s^+>7+1369/490000`.  See `weighted-theta-bottleneck.md`.  Uniform reduction
+to this finite gate remains open.
