@@ -45,6 +45,9 @@ m=20 slice has been float-screened and its low 50 certified in both engines.
 7. C5--Cq is now internally proved for every odd q>=3 by a fresh-process
    master certificate with independent PARI tail reproduction. Run adversarial
    literature/novelty review and proof exposition before publicizing.
+8. Exploit `weighted-core-reduction.md`: first settle core vertices with one
+   pendant branch, whose gluing penalty is sharply at most 1/2, then formulate
+   the constrained weighted-theta inequality for the bridgeless bicyclic case.
 
 ## Running jobs
 
@@ -66,9 +69,10 @@ m=20 slice has been float-screened and its low 50 certified in both engines.
   coverage for the complete m=18,19 slices.
 - `job-m20-known-classes.pid`: COMPLETE, 1,032,754 graphs; 979,340 outside
   both diameter-two and claw-free classes.
-- `job-m20-full.pid`: ACTIVE, 40 atomic chunks over 1,032,754 regenerated
-  graphs; 20 prior durable SymPy chunks survived sandbox resurrection and only
-  missing chunks were relaunched; paired PARI and aggregation are chained.
+- `job-m20-full.pid`: ACTIVE after 2026-07-23 resurrection, 40 atomic chunks
+  over 1,032,754 regenerated graphs; 20 prior durable SymPy chunks survived
+  and only missing chunks were relaunched; paired PARI and aggregation are
+  chained.
 
 ## Adversarial C5--Cq audit
 

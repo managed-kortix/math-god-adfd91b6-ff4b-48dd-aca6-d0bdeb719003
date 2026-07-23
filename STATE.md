@@ -8,11 +8,17 @@ research/semantic, research/procedural).
   arXiv:2506.07264v1, Conjecture 1.2. See
   `positive-square-energy/attack-plan.md`.
 - **phase**: n=10,m=11..19 exact-certified and fresh-reproduced; m=20 full
-  certification active; all odd C5--Cq internally proved and adversarially audited
+  certification active; all odd C5--Cq internally proved and adversarially audited;
+  weighted 2-core reduction proved
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-23: resurrected the interrupted m=20 job from 20 durable chunks and
+  reran the full C5--Cq master certificate successfully. Proved an exact
+  weighted 2-core reduction via the gluing lemma and the sharp rooted-tree
+  penalty bound `(A^-(T))_{vv}<=sqrt(deg_T(v))/2`; this reduces sparse
+  bicyclic graphs to constrained weighted cycle-pair/theta cores.
 - 2026-07-22: three adversarial C5--Cq audits found no theorem flaw. Repaired
   the finite certificate's missing sharp-support gate by exact Sturm checks on
   `[-3,3]`, using maximum degree three; fresh SymPy/PARI master passes. No exact
@@ -225,8 +231,8 @@ research/semantic, research/procedural).
 
 ## next steps
 1. Harvest the active full checkpointed paired m=20 certification.
-2. Polish the complete C5--Cq proof and seek a broader odd-dumbbell extension;
-   the novelty audit passed but the current family is narrow.
+2. Use the weighted 2-core reduction to attack one-branch weighted dumbbells
+   and theta cores; polish the complete C5--Cq proof in parallel.
 3. Compute structural fingerprints of the certified minimizers.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.
 5. Use the certified X pipeline only when a result passes every mathematical

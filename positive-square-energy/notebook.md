@@ -1172,3 +1172,24 @@ settled only the original universal `n-1` square-energy conjecture, not the
 `m>=n+1 => s+>=n` refinement. Thus C5--Cq is apparently a new but narrow
 bicyclic special case. Keep it private until either the exposition is polished
 and significance judged adequate or it extends to a broader dumbbell class.
+
+## 2026-07-23 — weighted 2-core reduction
+
+The gluing lemma gives a clean exact reduction for every connected graph with
+tree attachments to its 2-core `C`.  If `T_v` is the rooted tree hanging from
+`v in C` and `d_v=(A^-(T_v))_{vv}`, then
+
+`s^+(G) >= |G|-|C|+s^+(A(C)-diag(d_v))`.
+
+Thus the sparse bicyclic frontier reduces to weighted cycle-pair and theta
+cores.  The penalty has the sharp rooted-degree bound
+`d_v<=sqrt(deg_{T_v}(v))/2`: use `A^-=(|A|-A)/2` and Jensen on the spectral
+measure of `A^2` at `e_v`.  Equality holds for a star rooted at its center.
+This both supplies useful control for one-branch attachments (`d_v<=1/2`) and
+rules out any argument assuming a universal `d_v<1` under unrestricted
+branching.  Full proof and cautions are in `weighted-core-reduction.md`.
+
+The fresh C5--Cq master certificate was rerun after environment resurrection
+and again passed every symbolic, Sturm, finite-range, phase, quadrature, and
+independent PARI gate.  The interrupted m=20 full certification was relaunched
+from its 20 durable checkpoints; only missing SymPy chunks are active.
