@@ -48,6 +48,9 @@ m=20 slice has been float-screened and its low 50 certified in both engines.
 8. Exploit `weighted-core-reduction.md`: first settle core vertices with one
    pendant branch, whose gluing penalty is sharply at most 1/2, then formulate
    the constrained weighted-theta inequality for the bridgeless bicyclic case.
+9. Extend `bipartite-theta-attachments.md` beyond its sharp supporting-plane
+   budget, either by retaining the gluing lemma's positive remainder or by
+   decomposing multiple attachment sites into induced path/tree pieces.
 
 ## Running jobs
 

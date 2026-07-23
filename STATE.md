@@ -9,11 +9,16 @@ research/semantic, research/procedural).
   `positive-square-energy/attack-plan.md`.
 - **phase**: n=10,m=11..19 exact-certified and fresh-reproduced; m=20 full
   certification active; all odd C5--Cq internally proved and adversarially audited;
-  weighted 2-core reduction proved
+  weighted 2-core reduction and a bipartite-theta attachment subclass proved
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-23: supporting-hyperplane analysis of the weighted core proves
+  Conjecture 1.2 for every bipartite-theta 2-core with rooted attachments
+  satisfying `sum sqrt(deg_H(v)t_v)<=2`; in particular, one arbitrary rooted
+  tree may be attached at any single core vertex. Exact K2,3 endpoint examples
+  show the budget cannot simply be replaced by pointwise half-penalties.
 - 2026-07-23: resurrected the interrupted m=20 job from 20 durable chunks and
   reran the full C5--Cq master certificate successfully. Proved an exact
   weighted 2-core reduction via the gluing lemma and the sharp rooted-tree

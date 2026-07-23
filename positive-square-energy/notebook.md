@@ -1193,3 +1193,17 @@ The fresh C5--Cq master certificate was rerun after environment resurrection
 and again passed every symbolic, Sturm, finite-range, phase, quadrature, and
 independent PARI gate.  The interrupted m=20 full certification was relaunched
 from its 20 durable checkpoints; only missing SymPy chunks are active.
+
+The weighted reduction immediately yields a new infinite attached-core
+subclass.  If the bicyclic 2-core is a bipartite theta graph and `t_v` is the
+number of off-core neighbors at `v`, then
+
+`sum_v sqrt(deg_H(v)t_v)<=2`
+
+implies `s^+(G)>=|G|`.  The proof uses the exact supporting plane
+`s^+(A-D)>=s^+(A)-2tr(A_+D)`, bipartiteness (`s^+(A)=|E|=|H|+1`), and
+`|A|_{vv}<=sqrt(deg_H(v))`.  In particular an arbitrary rooted tree may be
+attached by one edge at any single theta vertex.  Exact `K_{2,3}` calculations
+show that the budget is substantive: penalties `1/2` at both branch vertices
+already make the weighted-core value `(49-sqrt(97))/8<5`, though this does not
+disprove the full graph inequality.  See `bipartite-theta-attachments.md`.
