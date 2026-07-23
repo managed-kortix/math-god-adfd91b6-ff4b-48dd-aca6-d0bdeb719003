@@ -9,11 +9,16 @@ research/semantic, research/procedural).
   `positive-square-energy/attack-plan.md`.
 - **phase**: n=10,m=11..20 exact-certified and fresh-reproduced; all odd
   C5--Cq internally proved and adversarially audited; weighted 2-core reduction
-  proved; nonbipartite theta reduced to two short singleton-parity families
+  proved; nonbipartite theta reduced to the single family `Theta(even,even,3)`
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-23: proved every `Theta(even,even,1)` has `s^+>n` with a PSD chord
+  witness. Exact gain is bounded below by
+  `283/324-4sqrt(2)/9>0`; two hostile audits reproduced the trace algebra and
+  all spectral inequalities. Rejected a category-error first-energy proof for
+  the final `(even,even,3)` family.
 - 2026-07-23: proved every `Theta(odd,odd,2)` has `s^+>n`. An explicit PSD
   bordered witness reduces the gain over the underlying even cycle to
   `p-p^2/16`; exact cycle moments give `p>=2/sqrt(3)` and hence gain
@@ -251,8 +256,8 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
-1. Attack the two residual nonbipartite theta families `(even,even,1)` and
-   `(even,even,3)` through bordered-cycle witnesses and exact sectors.
+1. Attack the final nonbipartite theta family `(even,even,3)` with a valid
+   two-channel square-energy witness; the symmetric channel alone is short.
 2. Use the weighted 2-core reduction to attack one-branch weighted dumbbells;
    polish the complete C5--Cq proof in parallel.
 3. Compute structural fingerprints of the certified minimizers.

@@ -1253,3 +1253,27 @@ give `p>=tr|A|/N>=2/sqrt(3)`; also `p<3`.  Hence the gain is at least
 `2/sqrt(3)-1/12>1`.  The `C4` case has `p=2` and gain bound `7/4`.
 Therefore every odd--odd--two theta has `s^+>|G|`.  Three independent audits
 reproduced all factors; see `odd-odd-two-theta-proof.md`.
+
+The second residual family `Theta(2r,2s,1)` is now proved by a different PSD
+witness.  View it as an even cycle plus a same-color chord
+`E=aa^T-bb^T`, with normalized symmetric/antisymmetric chord vectors.  For
+`P=A_+`, `x=a^TPa`, `y=b^TPb`, `q=b^TP^2b`, the witness
+
+`Y=(I-bb^T/3)P(I-bb^T/3)+(1-x)_+aa^T`
+
+has exact gain
+
+`2x-(8/9)y-(2/9)q-(25/81)y^2+(1-x)_+^2`.
+
+Bipartite spectral symmetry and spectral Cauchy--Schwarz give `y^2<=q/2`;
+cycle two-walk counts give `q<=1`; and `sqrt(A^2)>=A^2/2` gives `x>=1/2`.
+The gain is therefore at least
+`283/324-4sqrt(2)/9>0`.  Two hostile audits and exact small-cycle symbolic
+checks reproduced the formula.  See `even-even-one-theta-proof.md`.
+
+One proposed proof for the final `Theta(even,even,3)` family was rejected: it
+bounded positive first energy `tr(A_+)` and incorrectly inferred a positive
+square-energy bound.  A valid symmetric-channel square-energy witness alone
+also falls short (gain `3/2` at `Theta(4,4,3)` versus the required `2`).  The
+final family therefore remains open within this attack and needs both ear
+channels or another exact argument.

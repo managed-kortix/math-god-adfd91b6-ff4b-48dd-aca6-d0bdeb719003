@@ -57,6 +57,9 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
 11. `odd-odd-two-theta-proof.md` settles the middle family via an explicit PSD
     bordered-cycle witness. Transfer that witness to the chord family
     `(even,even,1)` and the length-three ear family `(even,even,3)`.
+12. `even-even-one-theta-proof.md` settles the chord family. For the final
+    length-three ear family, combine symmetric and antisymmetric square-energy
+    channels; do not substitute a positive-first-energy Ky Fan bound.
 
 ## Running jobs
 
