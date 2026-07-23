@@ -27,7 +27,7 @@ checked in PARI. Full m=18 passed both engines on all 561,106 graphs, with all
 chunk hashes/counts aggregated; cumulative total 1,334,971. Fresh reproduction
 passed. Full m=19 now passes both engines on 795,630 graphs; cumulative total
 2,130,601. Fresh m=19 reproduction passed in 32 checkpointed chunks. The
-m=20 slice has been float-screened and its low 50 certified in both engines.
+m=20 full paired fresh certification is complete on all 1,032,754 graphs.
 
 ## Next experiments
 
@@ -51,6 +51,9 @@ m=20 slice has been float-screened and its low 50 certified in both engines.
 9. Extend `bipartite-theta-attachments.md` beyond its sharp supporting-plane
    method to nonbipartite theta cores. Bipartite theta cores need no budget:
    arbitrary tree attachments remain bipartite and have `s^+=m=n+1` exactly.
+10. Use `nonbipartite-theta-p3.md`: the improved P3 lemma settles singleton-
+    parity path length at least four. Prove the three residual Chebyshev
+    families `(even,even,1)`, `(odd,odd,2)`, `(even,even,3)`.
 
 ## Running jobs
 
@@ -72,10 +75,10 @@ m=20 slice has been float-screened and its low 50 certified in both engines.
   coverage for the complete m=18,19 slices.
 - `job-m20-known-classes.pid`: COMPLETE, 1,032,754 graphs; 979,340 outside
   both diameter-two and claw-free classes.
-- `job-m20-full.pid`: ACTIVE after 2026-07-23 resurrection, 40 atomic chunks
-  over 1,032,754 regenerated graphs; 20 prior durable SymPy chunks survived
-  and only missing chunks were relaunched; paired PARI and aggregation are
-  chained.
+- `job-m20-full.pid`: COMPLETE after 2026-07-23 resurrection. All 40 paired
+  chunks / 1,032,754 graphs passed; global input SHA-256
+  `ed8bf95b309ef084a785ab93040a137a2f5f1767338855b81089f53965e42d21`;
+  minimizer `I?rFf_{N?`; exact lower slack `23095806/2550409`.
 
 ## Adversarial C5--Cq audit
 

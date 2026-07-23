@@ -1215,3 +1215,27 @@ bipartiteness and cyclomatic number.  Therefore every bipartite theta with
 arbitrary tree attachments has exactly `s^+(G)=|G|+1`; more generally every
 bipartite graph with `m>=n+1` satisfies Conjecture 1.2 immediately.  Keep the
 supporting-plane budget only as machinery for nonbipartite theta cores.
+
+## 2026-07-23 — P3 removal settles the long exceptional theta path
+
+For a nonbipartite theta, relabel path lengths so `a=b mod 2` and `c` has the
+opposite parity.  If `c>=4`, three consecutive internal vertices on the
+`c`-path induce a `P3`.  Whichever vertex the improved removal lemma selects,
+deletion breaks that path and leaves a connected bipartite unicyclic graph on
+`n-1` vertices, with `s^+=n-1`.  Lemma 2.4 therefore gives the strict bound
+
+`s^+(Theta(a,b,c)) >= n-1+17/16=n+1/16`.
+
+The existential deletion quantifier was checked for all three vertices; this
+is the key point.  The unresolved bare-theta cases reduce exactly to
+`Theta(2r,2s,1)`, `Theta(2r+1,2s+1,2)`, and `Theta(2r,2s,3)`.  Independently,
+every theta containing a triangle is settled by partitioning into the induced
+triangle (`s^+=4`) and the connected complementary path (`s^+=|P|-1`).  Full
+proof and failure cautions are in `nonbipartite-theta-p3.md`.
+
+The fresh full m=20 certificate completed both engines and standalone
+aggregation over all 1,032,754 connected graphs.  It reproduced global input
+SHA-256 `ed8bf95b309ef084a785ab93040a137a2f5f1767338855b81089f53965e42d21`,
+minimizer `I?rFf_{N?`, exact SymPy lower slack
+`23095806/2550409`, and PARI slack
+`9.0557280900008412143633053250748950582375265615538971...`.

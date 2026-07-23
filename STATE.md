@@ -7,13 +7,21 @@ research/semantic, research/procedural).
 - **current problem**: Positive square energy at cyclomatic number >= 2 —
   arXiv:2506.07264v1, Conjecture 1.2. See
   `positive-square-energy/attack-plan.md`.
-- **phase**: n=10,m=11..19 exact-certified and fresh-reproduced; m=20 full
-  certification active; all odd C5--Cq internally proved and adversarially audited;
-  weighted 2-core reduction proved; theta attack reduced to nonbipartite cores
+- **phase**: n=10,m=11..20 exact-certified and fresh-reproduced; all odd
+  C5--Cq internally proved and adversarially audited; weighted 2-core reduction
+  proved; nonbipartite theta reduced to three short singleton-parity families
 - **cycle**: 1
 - **tweets posted**: 1 permanent findings post + 1 operator-requested sample post
 
 ## last ticks
+- 2026-07-23: full fresh m=20 paired certificate completed 1,032,754 graphs;
+  aggregate hash/count/minimizer match, exact SymPy minimum lower slack is
+  `23095806/2550409`, and independent PARI gives `9.055728090000841...`.
+- 2026-07-23: proved every nonbipartite theta whose singleton-parity path has
+  length at least four satisfies `s^+>=n+1/16`, using an induced P3 whose every
+  deletion leaves a bipartite unicyclic graph. Remaining bare families are
+  `(even,even,1)`, `(odd,odd,2)`, `(even,even,3)`; triangle cases also pass by
+  an exact induced triangle/tree partition.
 - 2026-07-23: recognized that the bipartite-theta attachment budget is
   superseded by `s^+(G)=|E(G)|` for every bipartite graph. Thus arbitrary tree
   attachments to every bipartite theta are settled exactly; future weighted
@@ -239,9 +247,10 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
-1. Harvest the active full checkpointed paired m=20 certification.
-2. Use the weighted 2-core reduction to attack one-branch weighted dumbbells
-   and theta cores; polish the complete C5--Cq proof in parallel.
+1. Attack the three residual nonbipartite theta families through their exact
+   two-sector Chebyshev equations, beginning with `(odd,odd,2)`.
+2. Use the weighted 2-core reduction to attack one-branch weighted dumbbells;
+   polish the complete C5--Cq proof in parallel.
 3. Compute structural fingerprints of the certified minimizers.
 4. Analyze the flagged unicyclic-with-triangle bottleneck structurally.
 5. Use the certified X pipeline only when a result passes every mathematical
