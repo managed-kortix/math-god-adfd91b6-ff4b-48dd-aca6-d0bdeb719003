@@ -1239,3 +1239,17 @@ SHA-256 `ed8bf95b309ef084a785ab93040a137a2f5f1767338855b81089f53965e42d21`,
 minimizer `I?rFf_{N?`, exact SymPy lower slack
 `23095806/2550409`, and PARI slack
 `9.0557280900008412143633053250748950582375265615538971...`.
+
+The residual family `Theta(2r+1,2s+1,2)` is now proved.  Regard it as an even
+cycle `A` plus a new common neighbor with incidence vector `b=e_u+e_v`, where
+`u,v` are in different bipartition classes.  With `P=A_+`, `p=b^TPb`, and
+`q=b^TP^2b`, the explicit PSD variational witness
+
+`[[P,Pb/2],[b^TP/2,p/4]]`
+
+gives energy gain at least `2p-q/2-p^2/16 >= p-p^2/16`.  For an even cycle of
+length at least six, spectral moments `E lambda^2=2`, `E lambda^4=6` and Holder
+give `p>=tr|A|/N>=2/sqrt(3)`; also `p<3`.  Hence the gain is at least
+`2/sqrt(3)-1/12>1`.  The `C4` case has `p=2` and gain bound `7/4`.
+Therefore every odd--odd--two theta has `s^+>|G|`.  Three independent audits
+reproduced all factors; see `odd-odd-two-theta-proof.md`.

@@ -54,6 +54,9 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
 10. Use `nonbipartite-theta-p3.md`: the improved P3 lemma settles singleton-
     parity path length at least four. Prove the three residual Chebyshev
     families `(even,even,1)`, `(odd,odd,2)`, `(even,even,3)`.
+11. `odd-odd-two-theta-proof.md` settles the middle family via an explicit PSD
+    bordered-cycle witness. Transfer that witness to the chord family
+    `(even,even,1)` and the length-three ear family `(even,even,3)`.
 
 ## Running jobs
 
