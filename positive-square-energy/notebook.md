@@ -1309,3 +1309,34 @@ than `1/16`.  Screening indicates the unique extremum is branch-rooted
 intervals for its three positive quintic roots give
 `s^+>7+1369/490000`.  See `weighted-theta-bottleneck.md`.  Uniform reduction
 to this finite gate remains open.
+
+The first uniform weighted-theta swarm did not close the theorem and exposed
+several reusable obstructions.  The endpoint penalty `d=1/2` occurs exactly
+for a single attached leaf; every larger rooted tree has `d<1/2`, but there is
+no uniform gap (a broom family approaches `1/2`).  Exact spectral-measure
+identity:
+
+`1/2-d=(1/4) integral (sqrt(x)-1)^2 d mu_v(x)`.
+
+The original long-path P3 proof cannot simply carry the root penalty: the
+residual penalized bipartite unicyclic graph can lose far more than `1/16`.
+Likewise the original chord, bordered-cycle, and ear witnesses all have exact
+small or asymptotic configurations where their penalized adaptations miss the
+target, despite the actual weighted inequality remaining positive.  These
+are witness counterexamples, not theorem counterexamples.
+
+An exhaustive endpoint screen through path length 100 (12,794,100 rooted
+orbits) found no weighted counterexample.  The unique observed minimum remains
+branch-rooted `Theta(2,3,3)`.  The simple scaled-full-positive-part baseline
+covers every tested orbit except exactly three branch-rooted graphs:
+`Theta(2,3,3)`, `Theta(1,4,4)`, and `Theta(2,2,3)`.  All three are now
+independently exact-certified by direct weighted characteristic polynomials;
+the latter two rational lower margins are respectively `1149/490000` and
+`2073/226576`.  Proving that this baseline has no other exceptions is now the
+sharp uniform problem; numerical census alone is not accepted as that proof.
+
+Direct pruning inside an arbitrary attached tree also fails with the current
+P3 constant.  For the component-normalized surplus, deleting a rooted-tree
+vertex with `c` children guarantees only `1/16-c`; a star center can create
+arbitrarily many components.  Thus the next proof must be global/root-aware,
+not an existential leaf-pruning induction.

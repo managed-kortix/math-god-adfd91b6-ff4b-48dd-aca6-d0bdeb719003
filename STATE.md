@@ -15,6 +15,12 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-23: weighted-theta swarm screened 12,794,100 rooted theta orbits
+  through path length 100 with no counterexample. The scaled-positive-part
+  baseline has exactly three observed branch-root exceptions; all three now
+  have rational Sturm certificates. Audits killed naive penalized P3, inherited
+  witness, subdivision-monotonicity, and tree-pruning routes. Uniform proof
+  that no further baseline exceptions exist is the active obstruction.
 - 2026-07-23: began the next weighted-theta extension. Proved the apparent
   extremal branch-rooted `Theta(2,3,3)` at penalty 1/2 exactly, with rational
   Sturm lower margin `1369/490000`. Disproved naive root-avoiding P3 deletion

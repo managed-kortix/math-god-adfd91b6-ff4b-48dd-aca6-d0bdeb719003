@@ -63,6 +63,11 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
 13. `even-even-three-theta-proof.md` settles the final family via a congruence
     witness around `C_N disjoint K2`. The full simple-theta theorem is proved;
     compile and hostile-audit `paper.tex` and its exact displayed algebra.
+14. Weighted one-tree extension: prove the scaled-positive-part baseline for
+    every rooted theta outside the three exact-certified branch exceptions
+    `(2,3,3),(1,4,4),(2,2,3)`. Do not reuse penalized P3 deletion or the bare
+    family witnesses without a new root-aware term; exact counterexamples show
+    those proof strategies fail.
 
 ## Running jobs
 
