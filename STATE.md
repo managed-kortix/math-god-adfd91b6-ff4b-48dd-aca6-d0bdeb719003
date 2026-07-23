@@ -15,11 +15,18 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+<<<<<<< Updated upstream
 - 2026-07-23: found and independently audited a root-aware congruence witness
   `C_k A_+ C_k`.  At `k=6/7` it repairs all three scaled-baseline exceptions
   and passes 225,185 rooted cases through length 30 plus 828,894 long-path
   rooted cases through length 1021.  Exact symbolic trace certificate passes.
   Uniform proof reduces to a sharp theta-specific inequality in `S,a,q`.
+=======
+- 2026-07-23: proved every bridge dumbbell `C_p--C_q`, all cycle lengths,
+  satisfies `s^+>p+q`. Mixed parity uses exact P3 removal; odd pairs use the
+  gluing correction plus the existing equal/C5 theorems. Bare bicyclic graphs
+  are reduced to all-odd long handcuffs (connector length at least two).
+>>>>>>> Stashed changes
 - 2026-07-23: weighted-theta swarm screened 12,794,100 rooted theta orbits
   through path length 100 with no counterexample. The scaled-positive-part
   baseline has exactly three observed branch-root exceptions; all three now
@@ -285,8 +292,13 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
+<<<<<<< Updated upstream
 1. Prove the root-congruence `k=6/7` moment inequality uniformly; split exact
    short rooted thetas from Chebyshev/phase tails and local walk bounds.
+=======
+1. Attack all-odd long handcuffs, beginning with `C5--P_l--C5`; in parallel,
+   continue the weighted-theta baseline tail proof.
+>>>>>>> Stashed changes
 2. Use the weighted 2-core reduction to attack one-branch weighted dumbbells;
    polish the complete C5--Cq proof in parallel.
 3. Compute structural fingerprints of the certified minimizers.

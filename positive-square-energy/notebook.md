@@ -1341,6 +1341,7 @@ vertex with `c` children guarantees only `1/16-c`; a star center can create
 arbitrarily many components.  Thus the next proof must be global/root-aware,
 not an existential leaf-pruning induction.
 
+<<<<<<< Updated upstream
 A new global/root-aware witness repairs every observed failure of the scaled
 positive-part baseline.  For `P=A_+`, root moments `a=P_vv`,
 `q=(P^2)_vv`, and `C_k=I-(1-k)E_vv`, use the PSD congruence
@@ -1364,3 +1365,18 @@ correlation.  A pure pointwise polynomial minorant cannot retain exact
 infinite-path bulk, so the planned proof is hybrid: direct exact short cases,
 local polynomial/walk bounds for `a,q`, and Chebyshev/phase control of `S-n`.
 See `root-congruence-witness.md` and its exact symbolic certificate.
+=======
+In parallel, the bare bicyclic frontier advanced.  Combining the theta paper,
+mixed-parity P3 deletion, and audited odd-cycle gluing proves every bridge
+dumbbell `C_p--C_q`, with arbitrary `p,q>=3`, has `s^+>p+q`.  Exact odd-tail
+constants are `d_n<2/3`, gluing correction `>1/9`, and unequal double deficits
+bounded by `242/3727+242/8039<1/9`; equal and C5 pairs use the existing gated
+theorems.  See `all-bridge-dumbbells.md`.
+
+Consequently every bare bicyclic graph is now settled except possibly two odd
+cycles joined by a connector path of length at least two.  Figure-eights are
+already covered by induced-cycle superadditivity (their order is one less than
+the sum of cycle orders), and any handcuff with an even cycle is covered by
+bipartiteness or mixed-parity P3 removal.  The next unweighted obstruction is
+therefore the all-odd long handcuff, beginning with `C5--P_l--C5`.
+>>>>>>> Stashed changes
