@@ -68,6 +68,11 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     `(2,3,3),(1,4,4),(2,2,3)`. Do not reuse penalized P3 deletion or the bare
     family witnesses without a new root-aware term; exact counterexamples show
     those proof strategies fail.
+15. Replace item 14's scaled baseline by the stronger root-congruence witness
+    in `experiments/root-congruence-witness.md`.  Prove its `k=6/7` moment
+    inequality uniformly.  Use exact short cases plus local walk-polynomial
+    bounds and a Chebyshev/phase tail; a pointwise global minorant cannot keep
+    the exact infinite-path bulk.
 
 ## Running jobs
 

@@ -1340,3 +1340,27 @@ P3 constant.  For the component-normalized surplus, deleting a rooted-tree
 vertex with `c` children guarantees only `1/16-c`; a star center can create
 arbitrarily many components.  Thus the next proof must be global/root-aware,
 not an existential leaf-pruning induction.
+
+A new global/root-aware witness repairs every observed failure of the scaled
+positive-part baseline.  For `P=A_+`, root moments `a=P_vv`,
+`q=(P^2)_vv`, and `C_k=I-(1-k)E_vv`, use the PSD congruence
+`X_k=C_k P C_k`.  Exact expansion at penalty `1/2` gives
+
+`s^+(A-E_vv/2) >= S-2(1-k)^2q-k^2a-(1-k^2)^2a^2`,
+
+where `S=s^+(A)`.  The rational choice `k=6/7` passes all rooted thetas
+screened through path length 30 (225,185 rooted cases) and a long nonuniform
+scan of 828,894 rooted vertices with path lengths through 1021.  Its unique
+observed minimum is branch-rooted `Theta(2,3,3)`, with witness margin about
+`0.0013140591`; `k=43/50` improves this slightly.  The trace algebra is exact
+and independently audited, but the scans are not a proof.  The uniform target
+is now the theta-specific moment inequality
+
+`S-n >= 2q/49+36a/49+169a^2/2401`.
+
+Generic degree bounds are too weak.  The identity
+`S-n=1+sum_v(q_v-deg(v)/2)` isolates the needed global/local signed-square
+correlation.  A pure pointwise polynomial minorant cannot retain exact
+infinite-path bulk, so the planned proof is hybrid: direct exact short cases,
+local polynomial/walk bounds for `a,q`, and Chebyshev/phase control of `S-n`.
+See `root-congruence-witness.md` and its exact symbolic certificate.

@@ -9,12 +9,17 @@ research/semantic, research/procedural).
   `positive-square-energy/attack-plan.md`.
 - **phase**: n=10,m=11..20 exact-certified and fresh-reproduced; all odd
   C5--Cq internally proved and adversarially audited; weighted 2-core reduction
-  proved; every simple theta graph now proved to satisfy `s^+>n`; paper active
+  proved; every simple theta graph proved; root-congruence weighted extension active
 - **cycle**: 1
 - **tweets posted**: theta theorem result post `2080262053848039711` plus prior
   ledgered posts
 
 ## last ticks
+- 2026-07-23: found and independently audited a root-aware congruence witness
+  `C_k A_+ C_k`.  At `k=6/7` it repairs all three scaled-baseline exceptions
+  and passes 225,185 rooted cases through length 30 plus 828,894 long-path
+  rooted cases through length 1021.  Exact symbolic trace certificate passes.
+  Uniform proof reduces to a sharp theta-specific inequality in `S,a,q`.
 - 2026-07-23: weighted-theta swarm screened 12,794,100 rooted theta orbits
   through path length 100 with no counterexample. The scaled-positive-part
   baseline has exactly three observed branch-root exceptions; all three now
@@ -280,8 +285,8 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
-1. Extend the weighted-core method to one arbitrary rooted-tree attachment;
-   branch-rooted `Theta(2,3,3)` is the exact apparent bottleneck.
+1. Prove the root-congruence `k=6/7` moment inequality uniformly; split exact
+   short rooted thetas from Chebyshev/phase tails and local walk bounds.
 2. Use the weighted 2-core reduction to attack one-branch weighted dumbbells;
    polish the complete C5--Cq proof in parallel.
 3. Compute structural fingerprints of the certified minimizers.
