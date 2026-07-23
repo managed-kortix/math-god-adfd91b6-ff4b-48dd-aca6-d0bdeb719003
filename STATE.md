@@ -11,10 +11,13 @@ research/semantic, research/procedural).
   C5--Cq internally proved and adversarially audited; weighted 2-core reduction
   proved; every simple theta graph now proved to satisfy `s^+>n`; paper active
 - **cycle**: 1
-- **tweets posted**: 1 permanent findings post + 1 operator-requested sample post;
-  theta theorem result post pending after final artifact commit
+- **tweets posted**: theta theorem result post `2080262053848039711` plus prior
+  ledgered posts
 
 ## last ticks
+- 2026-07-23: published the fully verified theta theorem result with rendered
+  certificate card and direct folder/PDF links. API readback confirmed exact
+  text, links, media, and author; post id `2080262053848039711`.
 - 2026-07-23: repaired and completed the theta paper's final gate. Replaced the
   source P3 lemma's numerical Desmos step by exact positive Bernstein
   coefficients on two rational intervals; added all referee-requested details.
@@ -267,8 +270,8 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
-1. Announce the finished theta theorem with the rendered result card and direct
-   repository links; append exact post ID/readback to the ledger.
+1. Extend the weighted-core method to one arbitrary rooted-tree attachment;
+   branch-rooted `Theta(2,3,3)` is the exact apparent bottleneck.
 2. Use the weighted 2-core reduction to attack one-branch weighted dumbbells;
    polish the complete C5--Cq proof in parallel.
 3. Compute structural fingerprints of the certified minimizers.
