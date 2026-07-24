@@ -1594,3 +1594,28 @@ The exact edge-addition curvature decomposition is:
 s+(A+H) = s+(A) + 4*(A_+)_{uv} + ||(A+H)_+ - A_+||^2 + 2*<A_+, (-A-H)_+>
 Both curvature terms are nonneg.  This is strictly stronger than the tangent
 bound but requires a quantitative lower bound on the curvature terms.
+
+The edge-positivity claim `(A_+)_{uv} >= 0` for edges is FALSE: a 20-vertex
+graph has `(A_+)_{16,17} = -0.0385 < 0` for an edge.  It holds through n=9
+(273,192 graphs checked).  The curvature bound `s+ >= S + 4c + 2c^2` is
+therefore conditional on Q_{uv} >= 0.
+
+The sharp degree bound is `|P_{uv}| <= (d(u)*d(v))^{1/4} / 2`, giving
+`|c| <= sqrt(3)/2 ≈ 0.866` for degree-3 vertices and `|c| <= 1/sqrt(2)
+≈ 0.707` for degree-2 vertices.
+
+For the n=10,m=11 minimizer (two C5s + bridge), max |P_{uv}| over nonedges
+is 0.2089, far below the degree bound.  The local lemma
+`4|P_{uv}| <= s+ - n` holds with ratio max ~0.65 through n=11.
+
+The exact curvature decomposition is:
+`s+(A+H) = S + 4c + ||Q-P||^2 + 2<P,N>`
+Both curvature terms are nonneg.  Conditional on Q_{uv} >= 0:
+`s+(A+H) >= S - 2` (since max loss 4t - 2t^2 <= 2).
+This settles threshold preservation when `s+ >= n+2`.
+
+The bicyclic local lemma `-4P_{uv} <= delta = s+ - n` would settle it
+without curvature.  It holds numerically through n=13 with max ratio
+4|c|/delta ≈ 0.65.  The sharp degree bound shows |c| < 1 for bicyclic
+graphs with max degree 3, so 4|c| < 4, and the lemma needs only
+delta >= 4|c| which is delta >= ~3.5 in the worst observed case.
