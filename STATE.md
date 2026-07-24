@@ -357,6 +357,11 @@ research/semantic, research/procedural).
    with pendant stars.  Tricyclic bare theorem reduces to threshold
    preservation on spanning bicyclic subgraph.
    K4 subdivision theorem PROVED via MaxCut: `s+ >= MaxCut >= m-2 = n`.
+   CORRECTION: `s+ >= MaxCut` is FALSE (15-vertex counterexample).  K4
+   proof via MaxCut is INVALID.  K4 theorem still computationally supported
+   (15,625 subdivisions pass, min surplus 1.461).  Pendant cycle surplus
+   `Delta(s+) >= Delta(n)` does NOT hold universally (K30+C5 gives 3.999<4).
+   Exact pendant cycle formula: `chi_G = U_{2r}(x/2)*chi_H - 2*(U_{2r-1}(x/2)+1)*chi_{H-v}`.
    n=11,m=12 census: 8,833 graphs, min surplus 0.652.  n=11,m=13: 33,851
    graphs, min surplus 1.487.  All 379,819 m=12->13 additions pass.
    Congruence witness reduces to 5-local-moment inequality.  Perron
