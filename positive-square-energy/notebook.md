@@ -1415,3 +1415,21 @@ weight has infinite mass at zero; the proof must exploit the vanishing order
 and path exponents.  See `theta-imaginary-phase.md`.  A hostile audit also
 corrected the cubic-majorant prose: the negative-side critical points use
 `sqrt(3)`, not `sqrt(6)`; the certificate already checked the correct roots.
+
+The phase signs admit a complete exact classification.  Normalized odd-path
+terms `A_l=z^((l-1)/2)/(1+z^l)` and even-path terms
+`B_l=z^(l/2-1)/(1-z^l)` strictly decrease with path length; exact difference
+factorizations show that each parity sum has the sign of its shortest path.
+Consequently `tr(A|A|)<0` exactly when the shortest odd cycle has length
+`1 mod 4`, and it is positive when that cycle has length `3 mod 4`.
+The `4/5` theorem is therefore automatic outside the former class.  See
+`theta-phase-sign-theorem.md`.
+
+The two dangerous short-base channels also have exact, residue-independent
+long-path limits.  Their phases are
+`atan(2z^(5/2)/(1+2z-z^2))` and
+`atan(2z^(5/2)/(1+2z-z^2+z^3-z^4))`.  Both limiting phase areas are `<8/15`
+and hence `<pi/5` by a one-line rational majorant.  Exact external algebra
+finds pointwise mod-four monotonicity toward these limits; packaging its
+Bernstein certificate is now the sharp next gate.  See
+`theta-short-base-limits.md`.

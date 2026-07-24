@@ -85,6 +85,11 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     `H=R+i sqrt(z)S` has `R>=0`, and `tr(A|A|)` is a weighted principal-phase
     area.  Bound that area by `pi/5` using its `O(z^(3/2))` origin behavior and
     the path exponents; do not use a finite-mass `Arg<=pi/2` shortcut.
+19. `theta-phase-sign-theorem.md` removes every theta whose shortest odd cycle
+    is `3 mod 4`; only the `1 mod 4` negative-trace class remains.  Package and
+    verify the mod-four pointwise monotonicity certificate for `(2,3,c)` and
+    `(1,4,c)`, then combine it with the safe exact limits in
+    `theta-short-base-limits.md` and finite Sturm endpoint gates.
 
 ## Running jobs
 

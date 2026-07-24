@@ -15,6 +15,11 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-24: proved a complete theta phase-sign theorem: `tr(A|A|)` is
+  negative exactly when the shortest odd cycle is `1 mod 4`, positive when it
+  is `3 mod 4`, and zero exactly in the bipartite case.  Also derived exact
+  long-path phases for `(2,3,c)` and `(1,4,c)` and proved both limiting areas
+  `<8/15<pi/5`.  Packaging the exact mod-four monotonicity certificate is next.
 - 2026-07-24: derived and hostile-audited an exact parity-uniform imaginary-axis
   theta determinant.  Its phase carrier `H=R+i sqrt(z)S` has `R>=0`, and
   `tr(A|A|)=-(2/pi) int_0^1 (z^-2-1)Arg(H) dz`, with all endpoint terms proved
