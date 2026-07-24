@@ -1572,3 +1572,25 @@ The pendant odd cycle join formula is exact:
 The pendant triangle reduction gives `s+(G) = s+(B(H,v))` where B is a
 bordered matrix.  The pendant cycle surplus `Delta(s+) >= Delta(n)` does
 NOT hold universally: `K_30` with pendant `C_5` gives `Delta(s+) ≈ 3.999 < 4`.
+
+The K4-subdivision minimizer (4 unsubdivided edges + 2 opposite length-3
+paths) is now exactly certified by the variational witness.  The congruence
+witness X_t = (I+tB)P(I+tB) with a dihedrally symmetric bipartite baseline
+(4 disjoint K2 edges) gives gain Phi(1/3) = 44/9 > 4 at t=1/3, proving
+s+ >= 80/9 > 8 = n.  Optimized: s+ >= 8.966.  Actual: s+ = 27/2 - sqrt(5)
+- sqrt(13)/2 ≈ 9.461.  The exact spectrum factors as
+(x^2+x-1)^2(x^2-3x+1)(x^2+x-3).
+
+The equal-length K4 subdivision has exact spectrum factoring through S4:
+trivial sector F_3 = D_l - 2*D_{l-2} - 3, standard sector F_{-1} = D_l -
+2*D_{l-2} + 1 (multiplicity 3), plus dark eigenvalues from D_{l-1}^2.
+For even l the graph is bipartite with s+ = 6l = n+2 exactly.
+
+The n=12,m=13 census is complete: 28,908 graphs, minimum surplus
+0.585594415 at K?AAD?cS?cX? (two C5s + 2-edge path + pendant leaf).
+No counterexample.  PARI independently confirms.
+
+The exact edge-addition curvature decomposition is:
+s+(A+H) = s+(A) + 4*(A_+)_{uv} + ||(A+H)_+ - A_+||^2 + 2*<A_+, (-A-H)_+>
+Both curvature terms are nonneg.  This is strictly stronger than the tangent
+bound but requires a quantitative lower bound on the curvature terms.
