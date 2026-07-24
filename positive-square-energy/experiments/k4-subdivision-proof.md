@@ -1,5 +1,14 @@
 # K4 subdivisions satisfy the conjecture
 
+**CORRECTION**: The MaxCut-based proof below is INVALID.  The claim
+`s+(G) >= MaxCut(G)` is false in general — an explicit 15-vertex
+counterexample exists with `s+ ≈ 39.94 < 40 = MaxCut`.  The K4-
+subdivision theorem itself remains computationally supported (all
+15,625 subdivisions with path lengths 1-5 pass, min surplus 1.461)
+but requires a new proof.  The combinatorial bound `MaxCut >= m-2 = n`
+for K4 subdivisions is correct; only the spectral bridge `s+ >= MaxCut`
+fails.
+
 ## Theorem
 
 Every subdivision of K_4 satisfies `s^+(G) >= |V(G)|`.
@@ -32,6 +41,10 @@ assign branch signs satisfying at least 4 of 6 parity constraints
 `MaxCut(G) >= m - 2 = n`.
 
 Therefore `s^+(G) >= n`.
+
+**NOTE**: This spectral step is INCORRECT.  The identity `<C, C_+> = 0`
+does not hold; the cross-term `tr(R, C_+) = tr(R, |C|/2)` can be
+negative.  See correction above.
 
 ## Remark
 

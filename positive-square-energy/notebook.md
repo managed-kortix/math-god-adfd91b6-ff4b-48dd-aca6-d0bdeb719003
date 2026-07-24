@@ -1558,3 +1558,17 @@ gives an exact 5-local-moment objective.  The linear congruence gain
 cubic term `-8c(a+b)r^3` is also favorable for `c < 0`.  This reduces
 threshold preservation to a compact local inequality in `a, b, c, q_u, q_v`
 that held in all computational tests through n=13.
+
+CORRECTION: The claim `s+ >= MaxCut(G)` is FALSE.  An explicit 15-vertex
+counterexample has `s+ ≈ 39.938 < 40 = MaxCut`.  The K4-subdivision proof
+via MaxCut is therefore INVALID.  The combinatorial bound `MaxCut >= m-2 = n`
+for K4 subdivisions is correct, but the spectral bridge fails.  The K4-
+subdivision theorem itself remains computationally supported (15,625
+subdivisions with path lengths 1-5 all pass, min surplus 1.461) but needs
+a new proof.  See `k4-subdivision-proof.md` for the correction.
+
+The pendant odd cycle join formula is exact:
+`chi_G = U_{2r}(x/2) * chi_H - 2*(U_{2r-1}(x/2)+1) * chi_{H-v}`.
+The pendant triangle reduction gives `s+(G) = s+(B(H,v))` where B is a
+bordered matrix.  The pendant cycle surplus `Delta(s+) >= Delta(n)` does
+NOT hold universally: `K_30` with pendant `C_5` gives `Delta(s+) ≈ 3.999 < 4`.
