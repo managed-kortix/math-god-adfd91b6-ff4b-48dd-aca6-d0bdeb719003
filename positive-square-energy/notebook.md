@@ -1628,3 +1628,43 @@ worst negative ratio 0.228.  For theta graphs, `(A_+)_{uv} >= -1/8`
 appears to hold uniformly (max observed -0.125), which combined with
 delta >= 4/5 gives a clean proof.  The resolvent reduction to 2x2 core
 Schur complement is exact but needs tree self-energy control.
+
+The theta `-1/8` target has now been reduced exactly to four pair types
+(terminal-terminal, terminal-interior, same-path, different-path) and at
+most 17 parity schemas.  Eliminating path interiors gives the terminal
+Schur complement
+`S(z)=[[p,-q],[-q,p]]`, with path continuants
+`alpha_l=U_{l-2}/U_{l-1}`, `beta_l=1/U_{l-1}`,
+`p=z-sum alpha_l`, and `q=sum beta_l`.  Every two-rooted resolvent entry
+is an explicit sum of the symmetric channel `1/(p-q)` and antisymmetric
+channel `1/(p+q)`.  In bipartite theta graphs, opposite-color entries of
+`|A|` vanish exactly.
+
+For `Theta(2,2,L)`, twin reduction gives `A = B_L direct-sum [0]` and
+the exact denominator
+`D_L(z)=z K_{L+1}(z)-4(K_L(z)+1)`, where
+`K_0=1, K_1=z, K_{r+1}=zK_r-K_{r-1}`.  Exact resolvent formulas are
+`R_ij=K_i K_{L-j}/K_{L+1}+2 Phi_i Phi_j/(K_{L+1}D_L)` and
+`R_ci=sqrt(2) Phi_i/D_L`, with `Phi_i=K_i+K_{L-i}`.
+The apparent global extremal pair is exactly certified in
+`Theta(2,2,6)`: the long-path vertices at positions 1 and 5 have
+`(A_+)_{uv}=-0.124603366933497... > -1/8`.  Its characteristic
+polynomial is `x^3(x^2-2)(x^4-8x^2+14)`.  An exhaustive floating search
+over all theta lengths at most 80 and extensive unbalanced tests through
+length 3201 found no violation, but the uniform continuant-integral
+comparison remains unproved.
+
+Important scope correction: even a proof of the theta `-1/8` bound gives
+only ONE edge addition from a bare nonexceptional theta.  Convexity gives
+`s+(G+uv)>=s+(G)+4(A_+)uv`, hence theta surplus `4/5` leaves `3/10` after
+one worst-case addition.  The same absolute bound cannot be iterated: a
+second tangent step could fall below `n`.  Full promotion requires the
+adaptive inequality `(A(F)_+)uv >= -(s+(F)-n)/4` at every intermediate
+supergraph, or a separate curvature theorem.  Also a spanning bicyclic
+graph need not have a bare theta core and can have tree attachments.
+
+A reproducible random threshold-crossing search was added as
+`experiments/search_threshold_crossing.py`.  In 100,000 connected sparse
+random trials through n=60 (m between n+1 and n+10), no crossing and no
+decrease were observed; dense graphs do exhibit decreases (largest found
+about 0.75) but with enormous surplus.  This is discovery evidence only.

@@ -346,8 +346,15 @@ research/semantic, research/procedural).
    Exhaustive n=10 m=11,12,13 edge-addition search: 1,107,536 additions,
    all pass, s+ never even decreases.  Congruence witness X=(I+rH)P(I+rH)
    with independent r reduces to 5-local-moment inequality.  Bicyclic-
-   specific local lemma `(A_-)_{uv} >= -delta/4` holds numerically through
-   n=13.  Tricyclic bare census through n=13: min surplus 1.461.
+    specific local lemma `(A_-)_{uv} >= -delta/4` holds numerically through
+    n=13.  Tricyclic bare census through n=13: min surplus 1.461.
+    The bare-theta bound `(A_+)uv >= -1/8` is strongly supported and exactly
+    reduced to four two-rooted continuant-resolvent schemas; the apparent
+    extremal `Theta(2,2,6)` value is exactly `-0.1246033669... > -1/8`.
+    WARNING: this proves at most one edge-addition step from a bare theta;
+    it does not iterate, because the guaranteed surplus falls from 4/5 to
+    3/10.  Universal promotion still needs the adaptive local inequality at
+    every intermediate graph or a quantitative curvature theorem.
 2. Multi-root and handcuff weighted endpoints fail; full graphs still
    satisfy the conjecture.  The 2-core reduction is too lossy.
 3. Exhaustive n=10 census m=11..15: 200,657 graphs, no counterexample.
