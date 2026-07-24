@@ -1475,3 +1475,20 @@ Combined with the proved `R>0`, `S>0`, and the sign theorem, this gives
 theorem for the entire negative-trace class.  The bare theta theorem
 `s^+(Theta)-|Theta|>=4/5` now holds for every simple theta outside
 `(2,2,3)`, `(2,3,3)`, `(1,4,4)`.
+
+The bare handcuff theorem is proved.  The variational witness
+`X_t=(I+tB)P(I+tB)` gives gain `G_r > 2*sqrt(5)-3 >= 1-delta_p-delta_q`
+for all odd `p,q` and `L>=2`.  Case `r=1` (L=2): limiting gain `1.518027`
+exceeds threshold `1.472136`.  Case `r=3` (least favorable): trial point
+`t=7/20` gives `G_3 >= 18613/38400 + 7*sqrt(2)/10 = 1.474663 > threshold`,
+certified by exact radical arithmetic.  All `r>=2` reduce to `r=3` by
+path resolvent bounds.  Combined with bipartite (s+=n+1), figure-eight
+(superadditivity), bridge dumbbell (existing), and mixed-parity P3
+removal, this completes the bare bicyclic frontier `m=n+1`.
+
+The bare Conjecture 1.2 for `m=n+1` is now proved for ALL bicyclic graphs.
+The remaining targets are: (1) edge-addition threshold preservation
+`s+>=n => s+(G+e)>=n` -- no counterexample through all graphs of order 9,
+but `s+` itself is not monotone (exact counterexample at n=9); (2)
+multi-root tree attachments on nonbipartite cores -- theta one-tree is
+done, but dumbbell weighted endpoint fails (exact obstruction at C5-C5).
