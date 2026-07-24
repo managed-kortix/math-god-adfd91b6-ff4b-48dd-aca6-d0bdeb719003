@@ -8,3 +8,6 @@ mathenv/
 .DS_Store
 .kortix/link.json
 .claude/
+positive-square-energy/weighted-paper.aux
+positive-square-energy/weighted-paper.log
+positive-square-energy/weighted-paper.out
