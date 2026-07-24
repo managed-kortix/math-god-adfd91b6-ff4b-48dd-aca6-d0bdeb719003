@@ -15,6 +15,11 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-24: 16-case signed parameterized certificate passes exact tensor
+  Bernstein on all cases with zero subdivisions.  Combined with the sign
+  theorem and R>0, this completes the bare `4/5` theorem for every simple
+  theta outside the three exceptions.  The weighted one-tree extension
+  follows from the local four-fifths reduction.
 - 2026-07-24: eight `g=9` cap rectangles certified by exact Bernstein
   coefficients; area budget `<pi/5`.  Hostile audit found the unsigned
   rectangle reduction does not bound opposite-residue signed carriers;
@@ -315,8 +320,8 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
-1. Prove `tr(A|A|)>=-2/5` for the remaining negative-trace thetas whose
-   shortest odd cycle has length at least 9; the entire `C5` class is settled.
+1. Assemble the complete weighted-theta theorem paper from the signed-square
+   bare theorem, local four-fifths reduction, and direct exception gates.
 2. Attack all-odd long handcuffs, beginning with `C5--P_l--C5`.
 3. Use the weighted 2-core reduction to attack one-branch weighted dumbbells;
    polish the complete C5--Cq proof in parallel.

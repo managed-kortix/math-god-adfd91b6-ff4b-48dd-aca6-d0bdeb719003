@@ -1457,3 +1457,12 @@ arbitrary paths requires a 16-case parameterized certificate preserving
 sign correlations.  No counterexample was found in exhaustive exact
 searches through path length 100 and targeted searches through 4000.
 See `theta-g9-phase-bound.md`.
+
+The 16-case parameterized certificate `theta_g9_signed_certificate.py`
+now completes the proof: all 16 signed opposite-residue cases pass exact
+tensor Bernstein certification on `[0,3/4]x[0,1]^3` with zero subdivisions.
+Combined with the proved `R>0`, `S>0`, and the sign theorem, this gives
+`K=4z^4R-S>=0` for every actual `g>=9` theta, completing the bare `4/5`
+theorem for the entire negative-trace class.  The bare theta theorem
+`s^+(Theta)-|Theta|>=4/5` now holds for every simple theta outside
+`(2,2,3)`, `(2,3,3)`, `(1,4,4)`.

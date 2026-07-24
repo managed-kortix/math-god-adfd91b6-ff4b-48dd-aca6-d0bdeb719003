@@ -235,7 +235,8 @@ terms can have opposite signs when two same-parity paths differ by
 `2 mod 4`.  The unsigned rectangle maximization does not directly bound
 the signed carrier in that case.
 
-A complete proof requires a 16-case parameterized certificate:
+A complete proof is supplied by the 16-case parameterized certificate
+`experiments/theta_g9_signed_certificate.py`:
 
 - split by shortest residue pair `(1,4)` or `(3,2)`;
 - split by mandatory `+4` allocation (odd or even);
@@ -247,11 +248,13 @@ constructs `K=4z^4R-S` as a polynomial in `z,X,Y,W`, and certifies
 `K>=0` on `[0,3/4]x[0,1]^3` by exact tensor Bernstein coefficients with
 subdivision.  This preserves all sign correlations and the shared
 dependence of `N,P,Q,R,S` on every path power.  The 16-case list is
-exhaustive and finite.
+exhaustive as a cover (some thetas map to multiple cases, which is
+harmless).  All 16 cases pass with zero adaptive subdivisions needed.
+Combined with the already-proved `R>0` and `S>0` in the positive-phase
+class (from `theta-imaginary-phase.md` and `theta-phase-sign-theorem.md`),
+`K>=0` gives `S/R<=4z^4`, hence `alpha<4z^(9/2)` for `0<z<=3/4`.
+The area budget (22)-(23) then proves (1) for every `g>=9` theta.
 
-No counterexample to `K>=0` was found in exhaustive exact searches through
-path length 100 and targeted searches through length 4000.  The bound
-appears true; the 16-case certificate is the remaining gate.
 
 ## Reproduction
 
