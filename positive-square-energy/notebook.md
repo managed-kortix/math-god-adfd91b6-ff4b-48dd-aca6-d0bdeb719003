@@ -1364,3 +1364,24 @@ correlation.  A pure pointwise polynomial minorant cannot retain exact
 infinite-path bulk, so the planned proof is hybrid: direct exact short cases,
 local polynomial/walk bounds for `a,q`, and Chebyshev/phase control of `S-n`.
 See `root-congruence-witness.md` and its exact symbolic certificate.
+
+The root-moment side has now collapsed to a clean conditional theorem.  The
+global quadratic majorant
+`V_t(x)=t/4+x/2+x^2/(4t)>=x_+` and the exact cubic majorant
+`1/5+x/2+x^2/2+x^3/9>=x_+^2` on `[-3,3]` imply, for every possible rooted
+theta local state,
+
+`2q/49+36a/49+169a^2/2401 < 4/5`.
+
+The least certified local margin is the exact rational
+`31684811/1355316480`, at a branch root on two triangles.  Therefore it now
+suffices to prove the unrooted theorem `s^+(Theta)-n>=4/5` outside
+`Theta(2,2,3)`, `Theta(2,3,3)`, and `Theta(1,4,4)`; those three weighted
+endpoints are already exact-certified directly.  Equivalently, prove the
+signed-square bound `tr(A|A|)>=-2/5`.  Searches through path length 60 and
+targeted ears through 1500 find no further exception; the first observed
+nonexception is `Theta(2,3,6)` at surplus about `0.8175697325`.  The remaining
+step is a global phase theorem, not local spectral control.  See
+`local-four-fifths-reduction.md` and its exact certificate.  A proposed cubic
+majorant `1/2+x/2+x^3/9` was adversarially rejected because it equals `-4` at
+`x=-3`; it is not used.

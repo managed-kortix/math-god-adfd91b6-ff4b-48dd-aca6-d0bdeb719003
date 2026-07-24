@@ -73,6 +73,11 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     inequality uniformly.  Use exact short cases plus local walk-polynomial
     bounds and a Chebyshev/phase tail; a pointwise global minorant cannot keep
     the exact infinite-path bulk.
+16. `experiments/local-four-fifths-reduction.md` settles the local moments:
+    the witness loss is uniformly `<4/5`.  Prove the bare signed-square theorem
+    `tr(A|A|)>=-2/5` outside the three already certified exceptions.  Focus the
+    phase attack on the `(2,3,c)` and `(1,4,c)` short-base channels; census
+    indicates every nonexceptional theta below `0.9` lies there.
 
 ## Running jobs
 
