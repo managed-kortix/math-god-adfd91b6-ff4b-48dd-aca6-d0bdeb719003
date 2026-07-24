@@ -1399,3 +1399,19 @@ step is a global phase theorem, not local spectral control.  See
 `local-four-fifths-reduction.md` and its exact certificate.  A proposed cubic
 majorant `1/2+x/2+x^3/9` was adversarially rejected because it equals `-4` at
 `x=-3`; it is not used.
+
+The global signed-square obstruction now has an exact parity-uniform
+imaginary-axis formulation.  With `z=e^(-2u)`, path factors
+`f_l=1-(-z)^l`, and explicit polynomials `N,P,Q`, the varying phase is carried
+by `H=R+i sqrt(z)S`.  The exact inequality `N>=z(1+z)|Q|` gives `R>=0`, so
+the principal phase is globally continuous.  The signed square trace is
+
+`tr(A|A|)=-(2/pi) integral_0^1 (z^-2-1) Arg(H(z)) dz`.
+
+All endpoint terms vanish because `Arg H=O(z^(3/2))` at zero.  Thus the
+remaining theorem is exactly the phase-area bound
+`integral (z^-2-1)Arg H <= pi/5`.  A naive half-plane bound fails because the
+weight has infinite mass at zero; the proof must exploit the vanishing order
+and path exponents.  See `theta-imaginary-phase.md`.  A hostile audit also
+corrected the cubic-majorant prose: the negative-side critical points use
+`sqrt(3)`, not `sqrt(6)`; the certificate already checked the correct roots.

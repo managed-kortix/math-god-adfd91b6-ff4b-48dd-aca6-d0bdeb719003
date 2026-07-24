@@ -15,6 +15,11 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-24: derived and hostile-audited an exact parity-uniform imaginary-axis
+  theta determinant.  Its phase carrier `H=R+i sqrt(z)S` has `R>=0`, and
+  `tr(A|A|)=-(2/pi) int_0^1 (z^-2-1)Arg(H) dz`, with all endpoint terms proved
+  zero.  The remaining `-2/5` theorem is now one explicit phase-area bound.
+  Corrected a prose-only `sqrt(6)` typo in the local cubic proof to `sqrt(3)`.
 - 2026-07-24: exact polynomial majorants now bound the `k=6/7` rooted loss
   strictly below `4/5` for every theta local state, with worst rational margin
   `31684811/1355316480`.  The weighted extension is reduced to the bare theorem

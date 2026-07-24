@@ -37,11 +37,11 @@ On `[-3,3]`,
 
 `U(x)=1/5+x/2+x^2/2+x^3/9 >= x_+^2`.                           (3)
 
-This is checked exactly by splitting at zero.  On `[-3,0]`, `U` is positive;
-its critical points are `(-3+-sqrt(6))/2`, where its values reduce to positive
-radicals.  On `[0,3]`, the critical points of `U-x^2` are
-`(3+-sqrt(3))/2`, and the values are positive.  The accompanying exact script
-uses Sturm/root isolation rather than decimals.
+This is checked exactly by splitting at zero.  On `[-3,0]`, the critical
+points of `U` are `(-3+-sqrt(3))/2`; on `[0,3]`, the critical points of
+`U-x^2` are `(3+-sqrt(3))/2`.  In both intervals the minimum gap is
+`1/5-sqrt(3)/12>0`, while every endpoint gap is `1/5`.  The accompanying
+exact script solves and checks the derivative roots symbolically.
 
 Every theta has spectrum in `[-3,3]`, so functional calculus gives
 

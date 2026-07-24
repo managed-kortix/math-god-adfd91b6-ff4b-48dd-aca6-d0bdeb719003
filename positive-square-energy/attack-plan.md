@@ -81,6 +81,10 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     `tr(A|A|)>=-2/5` outside the three already certified exceptions.  Focus the
     phase attack on the `(2,3,c)` and `(1,4,c)` short-base channels; census
     indicates every nonexceptional theta below `0.9` lies there.
+18. Use `experiments/theta-imaginary-phase.md`: the exact phase carrier
+    `H=R+i sqrt(z)S` has `R>=0`, and `tr(A|A|)` is a weighted principal-phase
+    area.  Bound that area by `pi/5` using its `O(z^(3/2))` origin behavior and
+    the path exponents; do not use a finite-mass `Arg<=pi/2` shortcut.
 
 ## Running jobs
 
