@@ -94,7 +94,10 @@ interval.  Every interval is checked by an exact Sturm count, exact rational
 roots and multiplicities are checked separately, the intervals are checked
 disjoint and separated from zero, and total multiplicity is checked against
 the characteristic-polynomial degree.  Hence no root can be omitted or
-assigned the wrong sign.
+assigned the wrong sign.  In addition, for each of the three exceptional
+graphs, the script constructs `A-E_vv/2` for every automorphism orbit of
+root vertices, isolates all positive roots by exact Sturm counts, and
+verifies `s^+(A-E_vv/2)>n` with exact rational lower bounds.
 
 If a positive root lies in the checked rational interval `(l,u)`, then
 `l^2<lambda^2<u^2`.  Summing these exact rational bounds with multiplicity
@@ -103,11 +106,12 @@ The certificate obtains:
 
 | graph | `n` | role | rigorous conclusion | decimal enclosure for orientation only |
 |---|---:|---|---|---|
+| `Theta(1,4,3)` | 7 | safe gate, residue 3 | `s^+>7+4/5` | `[7.91685278951,7.91747464052]` |
 | `Theta(2,3,6)` | 10 | safe gate, residue 2 | `s^+>10+4/5` | `[10.8172499868,10.8178015704]` |
 | `Theta(2,3,7)` | 11 | safe gate, residue 3 | `s^+>11+4/5` | `[11.8189138338,11.8197679841]` |
 | `Theta(1,4,5)` | 9 | safe gate, residue 1 | `s^+>9+4/5` | `[9.82436211901,9.82506523130]` |
 | `Theta(1,4,8)` | 12 | safe gate, residue 0 after the exception | `s^+>12+4/5` | `[12.8222738314,12.8232470859]` |
-| `Theta(2,3,2)` | 6 | exception | `s^+<6+4/5` | `[6.69754738619,6.69810540506]` |
+| `Theta(2,2,3)` | 6 | exception | `s^+<6+4/5` | `[6.69754738619,6.69810540506]` |
 | `Theta(2,3,3)` | 7 | exception | `s^+<7+4/5` | `[7.71043287903,7.71091144567]` |
 | `Theta(1,4,4)` | 8 | exception | `s^+<8+4/5` | `[8.71039786625,8.71111552731]` |
 
@@ -136,14 +140,18 @@ safe gate, and monotonicity propagates safety to `c=10,14,...`.  In residue 3,
 `c=3` is an exception, `c=7` is the safe gate, and monotonicity propagates
 safety to `c=11,15,...`.
 
-For `Theta(1,4,c)`, residues 2 and 3 are safe directly from the increasing
+For `Theta(1,4,c)`, residue 3 is safe from `c=3` via the exact gate
+`Theta(1,4,3)`.  Residues 2 and 3 are also safe directly from the increasing
 phase and the safe limit.  In residue 0, `c=4` is an exception, `c=8` is the
 safe gate, and all later members are safer.  In residue 1, the first simple
 member is `c=5`: `c=1` would repeat the direct endpoint edge and is not a
 simple theta under the definition used here.  The `c=5` safe gate therefore
 propagates to `c=9,13,...`.
 
-These eight residue-class arguments exhaust the two channels and prove the
+In addition, all 9 weighted root orbits of the three exceptions are
+exact-certified by Sturm isolation in the same script.
+
+These residue-class arguments exhaust the two channels and prove the
 theorem.
 
 ## Reproduction

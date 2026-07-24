@@ -15,6 +15,10 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-24: closed all audit gaps.  Added missing `Theta(1,4,3)` safe
+  gate.  Added all 9 weighted root-orbit Sturm certificates for the three
+  exceptions.  All certificate scripts pass.  The bare `4/5` theorem and
+  weighted one-tree extension are now complete and audited end-to-end.
 - 2026-07-24: 16-case signed parameterized certificate passes exact tensor
   Bernstein on all cases with zero subdivisions.  Combined with the sign
   theorem and R>0, this completes the bare `4/5` theorem for every simple
