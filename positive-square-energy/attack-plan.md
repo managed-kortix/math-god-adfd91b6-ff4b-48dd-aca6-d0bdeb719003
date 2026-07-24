@@ -95,6 +95,10 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     it has exact counterexamples.  For the remaining negative-trace class the
     shortest odd cycle is at least 9; prove its phase area `<pi/5` from the
     normalized denominator bound and finite `g=9` exponent/multiplicity cases.
+    The eight-cap certificate is exact for same-residue carriers.  Complete
+    the 16-case parameterized certificate for opposite-residue companions,
+    preserving sign correlations via power variables `X,Y,W` and tensor
+    Bernstein subdivision on `[0,3/4]x[0,1]^3`.
 
 ## Running jobs
 

@@ -15,6 +15,11 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-24: eight `g=9` cap rectangles certified by exact Bernstein
+  coefficients; area budget `<pi/5`.  Hostile audit found the unsigned
+  rectangle reduction does not bound opposite-residue signed carriers;
+  16-case parameterized certificate is the remaining gate.  No
+  counterexample found through path length 4000.
 - 2026-07-24: completed the exact bare `4/5` theorem for both `C5` short-base
   channels.  Mod-four phase monotonicity passes tensor Bernstein certificates;
   safe limits plus exact Sturm gates settle every `(2,3,c)` and `(1,4,c)` case,

@@ -1445,3 +1445,15 @@ all negative-trace thetas to these channels by path shortening was rejected by
 the exact counterexample `Theta(1,3,8)->Theta(1,3,4)` at `z=5/6`.  The global
 obstruction is now the class whose shortest odd cycle has length at least 9;
 the `C5` class is fully settled.  See `theta-short-base-four-fifths.md`.
+
+The odd-girth-at-least-nine phase bound is reduced to eight `g=9` cap
+rectangles with exact Bernstein certificates: `alpha(z)<4z^(9/2)` for
+`0<z<=3/4`, giving area `<3051sqrt(3)/19712+pi/24<pi/5`.  However, a
+hostile audit found that the unsigned rectangle maximization does not
+directly bound signed carriers when two same-parity paths differ by
+`2 mod 4`.  The eight-cap certificate is valid for its stated scope
+(repeated-length and same-residue carriers).  A complete proof for
+arbitrary paths requires a 16-case parameterized certificate preserving
+sign correlations.  No counterexample was found in exhaustive exact
+searches through path length 100 and targeted searches through 4000.
+See `theta-g9-phase-bound.md`.
