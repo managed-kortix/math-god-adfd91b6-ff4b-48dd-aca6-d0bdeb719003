@@ -68,3 +68,34 @@ The friendship graph `F_{k+1}` (k+1 triangles sharing one vertex)
 has `m = n + k`, `tau = k + 1`, `MaxCut = n - 1`.  But direct
 computation shows `s+ > n` for all tested cases, so the spectral
 surplus beyond MaxCut is always positive.
+## Odd cactus approach
+
+For odd cacti (no even cycle), `tau = m-n+1` and `MaxCut = n-1`.  The
+MaxCut bound gives `s+ >= n-1`, one unit short.  The missing unit must
+come from spectral surplus beyond MaxCut.
+
+### P3 removal for long cycles
+
+If the cactus has a terminal cycle of length `>= 5` with three
+consecutive degree-2 non-cut vertices, the improved P3 removal lemma
+gives `s+ >= s+(G-v) + 17/16 >= (n-1) + 17/16 > n` by induction.
+Base case: two odd cycles (bicyclic, already proved).
+
+### Triangle cacti
+
+The friendship graph `F_r` (r triangles sharing one vertex) has exact
+spectrum with `s+(F_r) = (6r-1+sqrt(8r+1))/2 > 2r+1 = n`, surplus ~r.
+Triangles are spectrally generous.  But P3 removal fails because every
+induced P3 contains the cut vertex.
+
+### Remaining obstruction
+
+The general odd cactus case with triangle blocks needs either:
+- a direct spectral argument for triangle cacti (friendship formula
+  suggests it should be easy)
+- a strengthened removal lemma guaranteeing a safe endpoint
+- a congruence witness exploiting the star structure
+
+For friendship graphs the exact formula already proves the result.
+The general triangle cactus reduces to friendship-type cores by
+block-cut tree decomposition.
