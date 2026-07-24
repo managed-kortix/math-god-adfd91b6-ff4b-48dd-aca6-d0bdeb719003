@@ -1492,3 +1492,21 @@ The remaining targets are: (1) edge-addition threshold preservation
 but `s+` itself is not monotone (exact counterexample at n=9); (2)
 multi-root tree attachments on nonbipartite cores -- theta one-tree is
 done, but dumbbell weighted endpoint fails (exact obstruction at C5-C5).
+
+The weighted endpoint also fails for handcuffs: `C5--P2--C5` and
+`C5--P3--C5` both fail at connector endpoints, with exact Sturm
+certificates.  The obstruction is theta-specific: only theta cores with
+one-tree attachment pass the weighted endpoint.  Multi-root attachment
+also fails: `Theta(2,2,3)` with penalties 1/2 at both branch vertices
+gives `s+ ≈ 5.40 < 6`.  However, the full graphs (with leaves attached)
+all satisfy `s+ >= n`, so the weighted 2-core reduction is simply too
+lossy, not a counterexample to Conjecture 1.2.
+
+The key target for promoting from `m=n+1` to `m>=n+2` is the signed-square
+asymmetry `D=tr(A|A|)`.  The conjecture is `D >= -2(m-n)`.  A maximum-cut
+decomposition gives `s+ >= MaxCut` immediately.  The proposed refinement
+`tr(A|A|) >= -tau(G)` (where `tau` is the edge-bipartization number)
+would settle all graphs with `tau <= 2(m-n)`, covering a large class.
+Combined with Edwards-Erdos bounds, this would leave only a narrow sparse
+strip.  No counterexample to threshold preservation was found in the
+exhaustive n=10,m=11 census (91,052 edge additions, all pass).

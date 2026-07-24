@@ -338,6 +338,10 @@ research/semantic, research/procedural).
    bare theorem, local four-fifths reduction, and direct exception gates.
 1. Prove edge-addition threshold preservation or find counterexample:
    `s+(G)>=n => s+(G+e)>=n`.  No counterexample through order 9.
+   Exhaustive n=10,m=11 search: all 91,052 additions pass.  The key
+   target is `tr(A|A|) >= -tau(G)` (edge-bipartization bound).
+2. Multi-root and handcuff weighted endpoints fail; full graphs still
+   satisfy the conjecture.  The 2-core reduction is too lossy.
 2. Handle multi-root tree attachments on nonbipartite bicyclic cores.
 2. Attack all-odd long handcuffs, beginning with `C5--P_l--C5`.
 3. Use the weighted 2-core reduction to attack one-branch weighted dumbbells;
