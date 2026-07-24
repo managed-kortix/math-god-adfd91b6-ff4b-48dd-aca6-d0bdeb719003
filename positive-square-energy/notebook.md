@@ -1534,3 +1534,27 @@ would settle all graphs with `tau <= 2(m-n)`, covering a large class.
 Combined with Edwards-Erdos bounds, this would leave only a narrow sparse
 strip.  No counterexample to threshold preservation was found in the
 exhaustive n=10,m=11 census (91,052 edge additions, all pass).
+
+The K4-subdivision theorem is PROVED via MaxCut: `s^+(G) >= MaxCut(G)
+>= m - 2 = n` for every K4 subdivision, because the signed K4 frustration
+index is at most 2.  This settles the tricyclic kernel that contained the
+computational minimizers.  More generally, `s^+ >= MaxCut >= m - tau`
+whenever `tau <= m - n`.  See `k4-subdivision-proof.md`.
+
+The exhaustive n=11,m=12 census is complete: 8,833 graphs, minimum surplus
+0.652249 at `J?AAD@OJ?s?` (two C5s joined by a 2-edge path).  All 379,819
+edge additions from m=12 to m=13 preserve the threshold, and s+ never
+even decreases.  The complete n=11,m=13 census (33,851 graphs) also passes
+with minimum surplus 1.487.
+
+The Perron-vector approach to threshold preservation fails: there exist
+connected graphs with `s+ = n` exactly and nonedges where `x_u * x_v` is
+exponentially small (pendant paths on a star).  Hoffman-Wielandt is too
+coarse to bound the squared-energy loss.
+
+The congruence witness `X = (I+rH)P(I+rH)` with `K=H` (the edge matrix)
+gives an exact 5-local-moment objective.  The linear congruence gain
+`4(a+b)r` is always nonnegative and helps when `c = P_{uv} < 0`.  The
+cubic term `-8c(a+b)r^3` is also favorable for `c < 0`.  This reduces
+threshold preservation to a compact local inequality in `a, b, c, q_u, q_v`
+that held in all computational tests through n=13.

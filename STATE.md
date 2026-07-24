@@ -356,6 +356,11 @@ research/semantic, research/procedural).
    triangle, K4 subdivision, doubled C4).  Minimizer is K4 subdivision
    with pendant stars.  Tricyclic bare theorem reduces to threshold
    preservation on spanning bicyclic subgraph.
+   K4 subdivision theorem PROVED via MaxCut: `s+ >= MaxCut >= m-2 = n`.
+   n=11,m=12 census: 8,833 graphs, min surplus 0.652.  n=11,m=13: 33,851
+   graphs, min surplus 1.487.  All 379,819 m=12->13 additions pass.
+   Congruence witness reduces to 5-local-moment inequality.  Perron
+   approach fails (exponential localization obstruction).
 2. Handle multi-root tree attachments on nonbipartite bicyclic cores.
 2. Attack all-odd long handcuffs, beginning with `C5--P_l--C5`.
 3. Use the weighted 2-core reduction to attack one-branch weighted dumbbells;
