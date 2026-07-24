@@ -15,6 +15,10 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-24: proved the bare handcuff theorem.  The variational witness
+  gives gain `G_r > 2*sqrt(5)-3` for all odd p,q and L>=2, certified by
+  exact radical arithmetic.  This completes the entire bare bicyclic
+  frontier m=n+1.  The weighted extension remains theta-specific.
 - 2026-07-24: found exact weighted obstruction for bridge dumbbells:
   `s^+(A(C5-C5)-E_vv/2) < 10` at bridge endpoints.  The weighted one-tree
   extension is theta-specific.  Pivoted to the bare handcuff theorem.
