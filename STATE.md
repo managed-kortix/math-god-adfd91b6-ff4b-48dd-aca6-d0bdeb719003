@@ -15,6 +15,11 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-24: found exact weighted obstruction for bridge dumbbells:
+  `s^+(A(C5-C5)-E_vv/2) < 10` at bridge endpoints.  The weighted one-tree
+  extension is theta-specific.  Pivoted to the bare handcuff theorem.
+  Derived exact characteristic polynomial, variational witness, and phase
+  equation for odd handcuffs.  Minimum surplus `≈0.615` at `C5-P3-C5`.
 - 2026-07-24: closed all audit gaps.  Added missing `Theta(1,4,3)` safe
   gate.  Added all 9 weighted root-orbit Sturm certificates for the three
   exceptions.  All certificate scripts pass.  The bare `4/5` theorem and

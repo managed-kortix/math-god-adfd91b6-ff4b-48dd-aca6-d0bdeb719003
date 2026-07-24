@@ -1458,6 +1458,15 @@ sign correlations.  No counterexample was found in exhaustive exact
 searches through path length 100 and targeted searches through 4000.
 See `theta-g9-phase-bound.md`.
 
+The weighted extension does NOT generalize to dumbbell cores.  For
+`C5--C5` at a bridge endpoint, `s^+(A-E_vv/2) ≈ 9.93 < 10`.  The bare
+dumbbell surplus `≈0.594` does not reach `4/5`, so the local four-fifths
+reduction cannot close it.  This is a genuine obstruction, not a witness
+failure.  The theta case is special.  The active target is now the bare
+handcuff theorem `s^+(C_p--P_L--C_q) >= n` for odd `p,q` and `L>=2`,
+using the exact characteristic polynomial and variational witness.
+See `handcuff-obstruction.md`.
+
 The 16-case parameterized certificate `theta_g9_signed_certificate.py`
 now completes the proof: all 16 signed opposite-residue cases pass exact
 tensor Bernstein certification on `[0,3/4]x[0,1]^3` with zero subdivisions.
