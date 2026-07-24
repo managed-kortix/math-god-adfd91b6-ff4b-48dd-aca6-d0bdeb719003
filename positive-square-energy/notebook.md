@@ -1619,3 +1619,12 @@ without curvature.  It holds numerically through n=13 with max ratio
 4|c|/delta ≈ 0.65.  The sharp degree bound shows |c| < 1 for bicyclic
 graphs with max degree 3, so 4|c| < 4, and the lemma needs only
 delta >= 4|c| which is delta >= ~3.5 in the worst observed case.
+
+The one-sided bicyclic local lemma `-4(A_+)_{uv} <= delta` (for negative
+entries only) holds through n=14 with max ratio 0.679 (exact Sturm
+certified).  The absolute-value version is FALSE (K_{2,3} has ratio 2.45).
+For C5-C5 bridge, exact algebraic formulas for all 34 nonedges give
+worst negative ratio 0.228.  For theta graphs, `(A_+)_{uv} >= -1/8`
+appears to hold uniformly (max observed -0.125), which combined with
+delta >= 4/5 gives a clean proof.  The resolvent reduction to 2x2 core
+Schur complement is exact but needs tree self-energy control.
