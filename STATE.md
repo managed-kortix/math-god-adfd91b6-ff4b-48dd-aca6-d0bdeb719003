@@ -343,10 +343,19 @@ research/semantic, research/procedural).
    counterexample at n=8).  The weaker `tr(A|A|) >= -2*tau` holds
    through n=9.  A spanning bicyclic subgraph + threshold preservation
    would settle the full conjecture.
+   Exhaustive n=10 m=11,12,13 edge-addition search: 1,107,536 additions,
+   all pass, s+ never even decreases.  Congruence witness X=(I+rH)P(I+rH)
+   with independent r reduces to 5-local-moment inequality.  Bicyclic-
+   specific local lemma `(A_-)_{uv} >= -delta/4` holds numerically through
+   n=13.  Tricyclic bare census through n=13: min surplus 1.461.
 2. Multi-root and handcuff weighted endpoints fail; full graphs still
    satisfy the conjecture.  The 2-core reduction is too lossy.
 3. Exhaustive n=10 census m=11..15: 200,657 graphs, no counterexample.
    Petersen graph at m=15 has s+=14 exactly.
+4. Tricyclic 2-core classification: 4 kernel types (4-path theta, doubled
+   triangle, K4 subdivision, doubled C4).  Minimizer is K4 subdivision
+   with pendant stars.  Tricyclic bare theorem reduces to threshold
+   preservation on spanning bicyclic subgraph.
 2. Handle multi-root tree attachments on nonbipartite bicyclic cores.
 2. Attack all-odd long handcuffs, beginning with `C5--P_l--C5`.
 3. Use the weighted 2-core reduction to attack one-branch weighted dumbbells;
