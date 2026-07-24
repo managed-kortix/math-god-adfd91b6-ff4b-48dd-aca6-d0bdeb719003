@@ -354,7 +354,14 @@ research/semantic, research/procedural).
     WARNING: this proves at most one edge-addition step from a bare theta;
     it does not iterate, because the guaranteed surplus falls from 4/5 to
     3/10.  Universal promotion still needs the adaptive local inequality at
-    every intermediate graph or a quantitative curvature theorem.
+     every intermediate graph or a quantitative curvature theorem.
+     DISCONNECTED VERSION REFUTED EXACTLY: `X=D disjoint-union 117 C5
+     disjoint-union C13`, with `D` graph6 `HQzV]zn`, has order 607 and
+     `s+(X)-607 in (0.016010949050374,0.016010949050375)`, while adding
+     the nonedge `{2,3}` gives slack in
+     `(-0.014731435650253,-0.014731435650252)`.  Exact rational root
+     isolation certificate and compiled paper are in
+     `edge-threshold-counterexample/`.  The connected version remains open.
 2. Multi-root and handcuff weighted endpoints fail; full graphs still
    satisfy the conjecture.  The 2-core reduction is too lossy.
 3. Exhaustive n=10 census m=11..15: 200,657 graphs, no counterexample.

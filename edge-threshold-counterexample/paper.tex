@@ -1,0 +1,140 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newcommand{\spen}{s^{+}}
+\title{A Disconnected Counterexample to Edge-Addition\\Threshold Preservation for Positive Square Energy}
+\author{math-god}
+\date{24 July 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For a graph $G$, let $\spen(G)$ be the sum of the squares of its positive
+adjacency eigenvalues.  We give an exactly certified graph $X$ and a nonedge
+$e$ such that $\spen(X)>|V(X)|$ but $\spen(X+e)<|V(X)|$.  Thus the natural
+edge-addition threshold-preservation statement is false without a
+connectedness hypothesis.  The graph has order $607$ and is a disjoint union
+of one nine-vertex graph and odd cycles.  A short exact-arithmetic script
+certifies both strict inequalities by rational root isolation.
+\end{abstract}
+
+\section{The counterexample}
+For a graph $G$ with adjacency eigenvalues $\lambda_i$, put
+\[
+ \spen(G)=\sum_{\lambda_i>0}\lambda_i^2.
+\]
+
+\begin{theorem}
+There is a graph $X$ of order $607$ and a nonedge $e$ such that
+\[
+ \spen(X)>607>\spen(X+e).
+\]
+In particular, the implication
+\[
+ \spen(G)\ge |V(G)|\quad\Longrightarrow\quad
+ \spen(G+e)\ge |V(G)|
+\]
+is false for disconnected graphs.
+\end{theorem}
+
+\begin{proof}
+Let $D$ be the nine-vertex graph with graph6 encoding
+\[
+ \texttt{HQzV]zn},
+\]
+using zero-based graph6 labels, and let $e=\{2,3\}$.  Direct decoding shows
+that $e$ is a nonedge.  Exact determinant calculation gives
+\[
+ \chi_D(x)=x^2(x+1)(x+2)^3(x^3-7x^2+6x+6)
+\]
+and
+\[
+ \chi_{D+e}(x)=x^2(x+2)^2
+ (x^5-4x^4-14x^3+14x^2+18x-6).
+\]
+Exact rational root isolation, followed by squaring and summing only the
+positive root intervals, gives
+\[
+ 36.665892147475496<\spen(D)<36.665892147475498
+\]
+and
+\[
+ 36.635149762774868<\spen(D+e)<36.635149762774870.
+\]
+
+For $r\equiv1\pmod4$, the cycle eigenvalues
+$2\cos(2\pi j/r)$ and the finite cosine-sum identity give
+\[
+ \spen(C_r)-r=1-\sec(\pi/r).
+\]
+In particular,
+\[
+ \spen(C_5)-5=2-\sqrt5,
+ \qquad
+ \spen(C_{13})-13=1-\sec(\pi/13).
+\]
+Define
+\[
+ X=D\sqcup117C_5\sqcup C_{13}.
+\]
+Then $|V(X)|=9+117\cdot5+13=607$.  Since positive square energy is
+additive over disjoint unions,
+\begin{align*}
+ \spen(X)-607
+ &=\spen(D)-9+117(2-\sqrt5)+1-\sec(\pi/13),\\
+ \spen(X+e)-607
+ &=\spen(D+e)-9+117(2-\sqrt5)+1-\sec(\pi/13).
+\end{align*}
+Exact outward rational interval arithmetic yields
+\[
+ 0.016010949050374<\spen(X)-607<0.016010949050375
+\]
+and
+\[
+ -0.014731435650253<\spen(X+e)-607
+ <-0.014731435650252.
+\]
+Both required inequalities are strict.
+\end{proof}
+
+\section{Exact certification}
+The accompanying script
+\texttt{disconnected\_threshold\_counterexample.py} performs the complete
+certificate.  SymPy isolates every real root of the two integer
+characteristic polynomials in exact rational intervals of width below
+$10^{-35}$.  The bound on $\sqrt5$ is checked by rational squaring.
+To handle $\sec(\pi/13)$, the script eliminates
+$z=e^{i\pi/13}$ from
+\[
+ \Phi_{26}(z)=0,
+ \qquad y(z^2+1)-2z=0,
+\]
+obtaining
+\[
+ y^6+6y^5-24y^4-32y^3+80y^2+32y-64=0.
+\]
+The root $y=\sec(\pi/13)$ is the unique root in $(1,11/10)$; its inclusion
+there follows from the elementary bound $\cos x>1-x^2/2$ together with
+$\pi<22/7$, which gives $\cos(\pi/13)>10/11$.
+The script then evaluates both slacks using outward
+rational interval arithmetic and terminates only if the first lower bound
+is positive and the second upper bound is negative.
+
+From the repository root, reproduce the certificate with
+\begin{verbatim}
+python positive-square-energy/experiments/\
+  disconnected_threshold_counterexample.py
+\end{verbatim}
+No floating-point value is used to establish either sign.
+
+\section{Scope}
+The graph $X$ is disconnected.  Therefore this result does not settle the
+connected edge-addition question and does not provide a counterexample to
+the connected positive-square-energy conjecture.  It does show that any
+promotion argument from spanning bicyclic subgraphs must use connectedness
+or additional structure; threshold preservation is not a purely spectral
+statement valid for arbitrary disjoint unions.
+
+\end{document}

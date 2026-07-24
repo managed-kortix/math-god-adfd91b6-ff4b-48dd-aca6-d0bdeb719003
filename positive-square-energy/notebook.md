@@ -1668,3 +1668,17 @@ A reproducible random threshold-crossing search was added as
 random trials through n=60 (m between n+1 and n+10), no crossing and no
 decrease were observed; dense graphs do exhibit decreases (largest found
 about 0.75) but with enormous surplus.  This is discovery evidence only.
+
+The unrestricted (possibly disconnected) edge-threshold preservation claim
+is FALSE, exactly.  Let D be graph6 `HQzV]zn` (9 vertices), and add its
+nonedge {2,3}.  Its characteristic polynomials are
+`x^2(x+1)(x+2)^3(x^3-7x^2+6x+6)` and
+`x^2(x+2)^2(x^5-4x^4-14x^3+14x^2+18x-6)`.
+Set `X = D disjoint-union 117 C5 disjoint-union C13`, of order 607.
+Exact rational root isolation gives
+`s+(X)-607 in (0.016010949050374,0.016010949050375)` but
+`s+(X+{2,3})-607 in (-0.014731435650253,-0.014731435650252)`.
+Thus one edge crosses the threshold.  The exact certificate is
+`experiments/disconnected_threshold_counterexample.py`, and the paper is
+in top-level `edge-threshold-counterexample/`.  This does NOT refute the
+connected preservation statement; disjoint-union tuning is the mechanism.
