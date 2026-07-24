@@ -1493,6 +1493,30 @@ but `s+` itself is not monotone (exact counterexample at n=9); (2)
 multi-root tree attachments on nonbipartite cores -- theta one-tree is
 done, but dumbbell weighted endpoint fails (exact obstruction at C5-C5).
 
+The proposed asymmetry bound `tr(A|A|) >= -tau(G)` is FALSE.  An exact
+8-vertex counterexample (`G?o~f_`) has `tr(A|A|) = -1.0205... < -1 = -tau`.
+Six more violations exist at n=9.  The weaker bound `tr(A|A|) >= -2*tau`
+has NO counterexample through n=9 (273,193 graphs).  An infinite family
+with `tau=1` but `tr(A|A|) -> -infty` shows no universal `C*tau` bound
+exists.
+
+The `s+ >= MaxCut` bound is also not directly from `X=C_+`; the cross-term
+`<R,C_+> = <R,|C|/2>` can be negative.  The corrected PSD witness is
+`X = C_+ + (R - |C|/2)_+`, giving gain `2<R,C_+> + ||(R-|C|/2)_+||^2`.
+For C5 this recovers only ~0.37 of the needed 0.5; a congruence deformation
+`X=(I+K)C_+(I+K)` may be needed.
+
+The exhaustive n=10 census is now complete for m=11 through m=15
+(200,657 graphs total).  No counterexample to Conjecture 1.2 exists.
+Minimum surplus at m=12 is 1.498.  The Petersen graph at m=15 has
+`s+ = 14` exactly.
+
+A spanning bicyclic subgraph B of any connected G with `m>=n+1` has
+`s+(B) >= n` by the bare bicyclic theorem.  The full conjecture follows
+from threshold preservation `s+(G)>=n => s+(G+e)>=n`, which has no
+counterexample through n=9 or in the exhaustive n=10,m=11 edge-addition
+census (91,052 additions, all pass).
+
 The weighted endpoint also fails for handcuffs: `C5--P2--C5` and
 `C5--P3--C5` both fail at connector endpoints, with exact Sturm
 certificates.  The obstruction is theta-specific: only theta cores with

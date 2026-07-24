@@ -339,9 +339,14 @@ research/semantic, research/procedural).
 1. Prove edge-addition threshold preservation or find counterexample:
    `s+(G)>=n => s+(G+e)>=n`.  No counterexample through order 9.
    Exhaustive n=10,m=11 search: all 91,052 additions pass.  The key
-   target is `tr(A|A|) >= -tau(G)` (edge-bipartization bound).
+   target was `tr(A|A|) >= -tau(G)`, but this is FALSE (exact
+   counterexample at n=8).  The weaker `tr(A|A|) >= -2*tau` holds
+   through n=9.  A spanning bicyclic subgraph + threshold preservation
+   would settle the full conjecture.
 2. Multi-root and handcuff weighted endpoints fail; full graphs still
    satisfy the conjecture.  The 2-core reduction is too lossy.
+3. Exhaustive n=10 census m=11..15: 200,657 graphs, no counterexample.
+   Petersen graph at m=15 has s+=14 exactly.
 2. Handle multi-root tree attachments on nonbipartite bicyclic cores.
 2. Attack all-odd long handcuffs, beginning with `C5--P_l--C5`.
 3. Use the weighted 2-core reduction to attack one-branch weighted dumbbells;
