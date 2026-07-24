@@ -1,0 +1,148 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\spen}{s^{+}}
+\title{Positive Square Energy of Theta Graphs with One Tree Attachment}
+\author{math-god}
+\date{24 July 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove that if $G$ is a connected graph whose 2-core is a simple theta
+graph $\Theta(a,b,c)$ and one arbitrary rooted tree is attached to a single
+core vertex through one bridge edge, then $s^+(G)>|V(G)|$.
+This extends the bare theta theorem of our companion paper to the
+weighted-core setting of Conjecture~1.2 of Akbari et al.\ (arXiv:2506.07264).
+The proof combines an exact root-congruence PSD witness, a local
+four-fifths reduction via polynomial majorants, and a complete phase-area
+classification of the signed square trace by odd-girth residue class.
+\end{abstract}
+
+\section{Introduction}
+For a graph $G$ with adjacency eigenvalues $\lambda_i$, let
+$s^+(G)=\sum_{\lambda_i>0}\lambda_i^2$.
+The companion paper proves that every simple theta graph $G$ satisfies
+$s^+(G)>|V(G)|$.
+Here we extend this to one arbitrary rooted-tree attachment.
+
+\begin{theorem}\label{thm:weighted}
+Let $H$ be a simple theta graph and let $v\in V(H)$.
+Let $T$ be a rooted tree with root $r$ of degree one in $T-r$,
+and let $G$ be obtained by identifying $r$ with $v$ and adding one
+bridge edge from $r$ to a new vertex.
+Then
+\[ s^+(G)>|V(G)|. \]
+More precisely, for every root $v$ of $H$,
+\[ s^+\!\left(A(H)-\tfrac12 E_{vv}\right)>|V(H)|. \]
+\end{theorem}
+
+The weighted 2-core reduction of Akbari et al.\ reduces the attachment
+problem to the endpoint $d=1/2$ because $s^+(A-dE_{vv})$ is nonincreasing
+in $d$ and the rooted-tree penalty $d=(A^-(T))_{vv}\le 1/2$.
+
+\section{The root-congruence witness}
+Let $A$ be the adjacency matrix of $H$, $P=A_+$, and fix a root $v$.
+Put $S=\operatorname{tr}(P^2)=s^+(H)$, $a=P_{vv}$, $q=(P^2)_{vv}$.
+For $0\le k\le 1$, set $C_k=I-(1-k)E_{vv}$ and $X_k=C_kPC_k\succeq0$.
+
+\begin{lemma}\label{lem:witness}
+\[ s^+\!\left(A-\tfrac12E_{vv}\right)\ge
+S-\frac{2(1-k)^2q}{1}-k^2a-(1-k^2)^2a^2. \]
+At $k=6/7$, this gives
+\[ s^+\!\left(A-\tfrac12E_{vv}\right)\ge S-L, \quad
+L=\frac{2q}{49}+\frac{36a}{49}+\frac{169a^2}{2401}. \]
+\end{lemma}
+
+The proof is direct trace expansion using $AP=P^2$ and $A_{vv}=0$.
+The exact certificate is in \texttt{root\_congruence\_certificate.py}.
+
+\section{Local four-fifths reduction}
+
+\begin{lemma}\label{lem:local}
+For every rooted simple theta, $L<4/5$.
+More precisely, $4/5-L\ge 31684811/1355316480>0$.
+\end{lemma}
+
+\begin{proof}
+The quadratic $V_t(x)=t/4+x/2+x^2/(4t)\ge x_+$ for all $x$, giving
+$a\le t/4+\deg(v)/(4t)$.
+The cubic $U(x)=1/5+x/2+x^2/2+x^3/9\ge x_+^2$ on $[-3,3]$,
+giving $q\le 1/5+\deg(v)/2+\tau/9$, where $\tau=(A^3)_{vv}=2T_v$.
+The five possible $(\deg(v),\tau)$ states are
+$(3,0),(3,2),(3,4),(2,0),(2,2)$.
+Substituting the sharp bounds gives strict rational margins below $4/5$
+in all five cases.
+\end{proof}
+
+The exact certificate is in \texttt{local\_four\_fifths\_certificate.py}.
+Together, Lemmas~\ref{lem:witness}--\ref{lem:local} prove:
+
+\begin{corollary}\label{cor:conditional}
+If $s^+(H)-|V(H)|\ge 4/5$, then
+$s^+(A(H)-E_{vv}/2)>|V(H)|$ for every root $v$.
+\end{corollary}
+
+\section{The bare four-fifths theorem}
+
+\begin{theorem}\label{thm:bare}
+Every simple theta graph $H$ satisfies $s^+(H)-|V(H)|\ge 4/5$,
+except exactly $\Theta(2,2,3)$, $\Theta(2,3,3)$, and $\Theta(1,4,4)$.
+\end{theorem}
+
+The proof uses the imaginary-axis phase representation.
+For $z=e^{-2u}\in(0,1)$ and $x=2i\sinh u$, the theta characteristic
+polynomial factors through a phase carrier
+\[ H(z)=R(z)+i\sqrt z\,S(z), \]
+where $R\ge0$ (in fact $R>0$ for nonbipartite thetas) and
+\[ \operatorname{tr}(A|A|)=-\frac2\pi\int_0^1(z^{-2}-1)\operatorname{Arg} H(z)\,dz. \]
+Since $s^+-n=1+\operatorname{tr}(A|A|)/2$, the target $4/5$ is equivalent to
+\[ \int_0^1(z^{-2}-1)\alpha(z)\,dz\le\frac\pi5. \]
+
+\subsection*{Phase sign classification}
+The shortest odd and even path lengths $o,e$ determine
+$\operatorname{sign}(PQ)=(-1)^{(o+e-1)/2}$.
+If the shortest odd cycle $g=o+e\equiv3\pmod4$, then
+$\operatorname{tr}(A|A|)>0$ and $s^+-n>1$.
+Bipartite thetas have $s^+-n=1$.
+Thus only $g\equiv1\pmod4$ requires quantitative control.
+
+\subsection*{The $\tilde C_5$ class}
+When $g=5$, the only residue pairs are $(1,4)$ and $(2,3)$.
+Exact mod-four phase monotonicity (\texttt{theta\_phase\_monotonicity\_certificate.py}),
+safe common limits ($I_\infty<8/15<\pi/5$), and exact Sturm gates
+(\texttt{theta\_short\_base\_gates.py}) settle both channels
+outside $\Theta(2,2,3)$, $\Theta(2,3,3)$, $\Theta(1,4,4)$.
+
+\subsection*{Odd girth at least nine}
+When $g\ge9$, a 16-case parameterized certificate
+(\texttt{theta\_g9\_signed\_certificate.py}) proves
+$K=4z^4R-S\ge0$ on $[0,3/4]\times[0,1]^3$ by exact tensor Bernstein
+coefficients, giving $\alpha(z)<4z^{9/2}$ on $[0,3/4]$.
+On $[3/4,1]$, $\alpha\le\pi/2$ and the tail weight has mass $1/12$.
+Thus $I<3051\sqrt3/19712+\pi/24<\pi/5$.
+
+\section{Exceptional weighted endpoints}
+For the three bare exceptions, direct Sturm isolation of
+$\chi(A-E_{vv}/2)$ at every root orbit proves
+$s^+(A-E_{vv}/2)>|V(H)|$ with exact rational margins.
+The complete certificate covering all 9 root orbits is in
+\texttt{theta\_short\_base\_gates.py}.
+
+\section{Conclusion}
+Theorem~\ref{thm:bare} plus Corollary~\ref{cor:conditional} prove
+Theorem~\ref{thm:weighted} for every nonexceptional theta.
+The three exceptions are covered by their direct weighted certificates.
+This completes the one-tree weighted-theta extension.
+
+\begin{thebibliography}{9}
+\bibitem{AKMPZ}
+S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and S.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264v1, 2025.
+\end{thebibliography}
+\end{document}
