@@ -76,6 +76,11 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
 16. Bare bicyclic classification now leaves only two odd cycles joined by a
     connector path of length at least two. Develop a connector-aware phase or
     PSD witness, starting with the symmetric `C5--P_l--C5` family.
+17. `experiments/local-four-fifths-reduction.md` settles the local moments:
+    the witness loss is uniformly `<4/5`.  Prove the bare signed-square theorem
+    `tr(A|A|)>=-2/5` outside the three already certified exceptions.  Focus the
+    phase attack on the `(2,3,c)` and `(1,4,c)` short-base channels; census
+    indicates every nonexceptional theta below `0.9` lies there.
 
 ## Running jobs
 

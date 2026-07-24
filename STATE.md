@@ -15,6 +15,11 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-24: exact polynomial majorants now bound the `k=6/7` rooted loss
+  strictly below `4/5` for every theta local state, with worst rational margin
+  `31684811/1355316480`.  The weighted extension is reduced to the bare theorem
+  `tr(A|A|)>=-2/5` outside three already weighted-certified short exceptions.
+  Exact certificate passes; a tempting false cubic majorant was rejected.
 - 2026-07-23: found and independently audited a root-aware congruence witness
   `C_k A_+ C_k`.  At `k=6/7` it repairs all three scaled-baseline exceptions
   and passes 225,185 rooted cases through length 30 plus 828,894 long-path
@@ -289,8 +294,8 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
-1. Prove the root-congruence `k=6/7` moment inequality uniformly; split exact
-   short rooted thetas from Chebyshev/phase tails and local walk bounds.
+1. Prove `tr(A|A|)>=-2/5` for every simple theta outside `(2,2,3)`,
+   `(2,3,3)`, `(1,4,4)` via the two-channel Chebyshev phase formula.
 2. Attack all-odd long handcuffs, beginning with `C5--P_l--C5`.
 3. Use the weighted 2-core reduction to attack one-branch weighted dumbbells;
    polish the complete C5--Cq proof in parallel.
