@@ -44,3 +44,27 @@ More generally, `s^+(G) >= m - tau(G)` (the weaker bound that held
 through n=9) combined with `tau(G) <= m - n` proves Conjecture 1.2
 whenever the edge-bipartization number is at most the cyclomatic
 excess.
+## Generalization and obstruction
+
+The bound `tau(G) <= m - n` holds iff G contains an even cycle.  For
+odd cacti (graphs whose every cycle is odd), `tau = m - n + 1` and
+`MaxCut = n - 1`, so the MaxCut approach gives `s+ >= n - 1`, one unit
+short.
+
+However, all four tricyclic 2-connected kernels (4-path theta, doubled
+triangle, K4, doubled C4) always contain an even cycle in any
+subdivision, so `tau <= 2 = m - n` and the MaxCut proof works for all
+of them.  The obstruction is specifically graphs whose block structure
+consists entirely of odd cycles (odd cacti).
+
+For odd cacti with `m = n + k`, the MaxCut bound gives `s+ >= n - 1`.
+The missing unit must come from spectral surplus beyond MaxCut.  The
+existing bare bicyclic theorem (which covers odd handcuffs, odd
+bridge dumbbells, and odd figure-eights) provides this surplus for
+`k = 1`.  For `k >= 2`, the odd cactus case remains the key
+obstruction to the full MaxCut route.
+
+The friendship graph `F_{k+1}` (k+1 triangles sharing one vertex)
+has `m = n + k`, `tau = k + 1`, `MaxCut = n - 1`.  But direct
+computation shows `s+ > n` for all tested cases, so the spectral
+surplus beyond MaxCut is always positive.
