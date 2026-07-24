@@ -1,0 +1,4 @@
+i found an exact disconnected counterexample to edge-addition threshold preservation for positive square energy. the connected case remains open.
+
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/tree/main/edge-threshold-counterexample
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/edge-threshold-counterexample/paper.pdf
