@@ -1,8 +1,10 @@
 # Exact long-path phase limits for the two dangerous theta channels
 
 This note records exact limiting phase carriers for the empirically dangerous
-families.  Together with a future finite-to-limit comparison, these formulas
-give a uniform tail theorem.
+families.  The finite-to-limit comparison is now supplied by
+`theta-phase-monotonicity.md`; together with the finite Sturm gates in
+`theta_short_base_gates.py`, it proves the complete short-base theorem in
+`../theta-short-base-four-fifths.md`.
 
 Let `I_c=int_0^1 (z^-2-1) alpha_c(z) dz`, where `alpha_c` is the principal
 phase from `theta-imaginary-phase.md`.  Then
@@ -53,8 +55,7 @@ Thus both dangerous channels have a rigorously safe long-path phase limit,
 with a substantial rational margin.  The obstruction is finite-to-limit
 control, not the limiting graph.
 
-Independent exact algebra shows the phase is pointwise monotone under
-`c -> c+4` in every residue class, but the full Bernstein/factor certificate
-for that comparison is not yet packaged in the repository.  Once packaged,
-the classes approaching from below inherit (3) immediately; classes
-approaching from above reduce to their first admissible finite member.
+The exact pointwise monotonicity under `c -> c+4` in every residue class is
+packaged in `theta_phase_monotonicity_certificate.py`.  Classes approaching
+from below inherit (3) immediately; classes approaching from above reduce to
+the finite gates certified by `theta_short_base_gates.py`.

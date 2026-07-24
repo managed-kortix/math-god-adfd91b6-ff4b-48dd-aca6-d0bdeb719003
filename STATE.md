@@ -15,6 +15,12 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-24: completed the exact bare `4/5` theorem for both `C5` short-base
+  channels.  Mod-four phase monotonicity passes tensor Bernstein certificates;
+  safe limits plus exact Sturm gates settle every `(2,3,c)` and `(1,4,c)` case,
+  with only `232,233,144` failing.  Exact structural path shortening to these
+  bases is false (`Theta(1,3,8)->Theta(1,3,4)` at `z=5/6`).  The remaining
+  global class has shortest odd cycle at least 9.
 - 2026-07-24: proved a complete theta phase-sign theorem: `tr(A|A|)` is
   negative exactly when the shortest odd cycle is `1 mod 4`, positive when it
   is `3 mod 4`, and zero exactly in the bipartite case.  Also derived exact
@@ -304,8 +310,8 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
-1. Prove `tr(A|A|)>=-2/5` for every simple theta outside `(2,2,3)`,
-   `(2,3,3)`, `(1,4,4)` via the two-channel Chebyshev phase formula.
+1. Prove `tr(A|A|)>=-2/5` for the remaining negative-trace thetas whose
+   shortest odd cycle has length at least 9; the entire `C5` class is settled.
 2. Attack all-odd long handcuffs, beginning with `C5--P_l--C5`.
 3. Use the weighted 2-core reduction to attack one-branch weighted dumbbells;
    polish the complete C5--Cq proof in parallel.

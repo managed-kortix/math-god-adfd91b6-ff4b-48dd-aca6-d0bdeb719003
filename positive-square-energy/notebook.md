@@ -1433,3 +1433,15 @@ and hence `<pi/5` by a one-line rational majorant.  Exact external algebra
 finds pointwise mod-four monotonicity toward these limits; packaging its
 Bernstein certificate is now the sharp next gate.  See
 `theta-short-base-limits.md`.
+
+The short-base phase theorem is now complete and exact.  Tensor Bernstein
+certificates prove pointwise `c -> c+4` monotonicity in all eight residue
+classes of `Theta(2,3,c)` and `Theta(1,4,c)`.  Their common limits are safely
+below `pi/5`; exact Sturm isolation certifies the only four passing endpoint
+gates `236,237,145,148` and the three failing parameter triples `232,233,144`.
+Thus every member of those two channels has bare surplus `>4/5` except exactly
+`Theta(2,2,3)`, `Theta(2,3,3)`, and `Theta(1,4,4)`.  A proposed reduction of
+all negative-trace thetas to these channels by path shortening was rejected by
+the exact counterexample `Theta(1,3,8)->Theta(1,3,4)` at `z=5/6`.  The global
+obstruction is now the class whose shortest odd cycle has length at least 9;
+the `C5` class is fully settled.  See `theta-short-base-four-fifths.md`.

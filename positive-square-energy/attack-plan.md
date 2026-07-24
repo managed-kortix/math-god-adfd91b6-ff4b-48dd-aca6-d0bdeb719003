@@ -90,6 +90,11 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     verify the mod-four pointwise monotonicity certificate for `(2,3,c)` and
     `(1,4,c)`, then combine it with the safe exact limits in
     `theta-short-base-limits.md` and finite Sturm endpoint gates.
+20. The two `C5` short-base channels are now fully proved by
+    `theta-short-base-four-fifths.md`.  Do not use structural path shortening:
+    it has exact counterexamples.  For the remaining negative-trace class the
+    shortest odd cycle is at least 9; prove its phase area `<pi/5` from the
+    normalized denominator bound and finite `g=9` exponent/multiplicity cases.
 
 ## Running jobs
 
