@@ -1880,3 +1880,30 @@ with the packing-two common-phase theorem proves AKMPZ for every bicyclic
 cactus except possibly `{5,5}` and `{3,4k+1}`.  Those are the exact remaining
 families for these methods.  Two independent audits and a final manuscript
 gate passed.  Paper: `sharp-cactus-dnn/`.
+# 2026-07-25: two C5 blocks sharing a vertex, arbitrary trees
+
+Closed one of the two-C5 residual incidence types.  If the only cyclic blocks
+are two copies of `C5` sharing one vertex, arbitrary rooted trees may be
+attached anywhere and
+
+`s+(G) >= n+1-4/(3sqrt(13)) > n`.
+
+Matching BP compresses each tree branch to an effective activity `a_v=t+y_v`
+with `y_v>=0`.  For a lobe minus the common root,
+
+`A=x1x2x3x4+x3x4+x1x4+x1x2+1`,
+
+and the contribution when the common root is matched into that lobe is
+
+`B=x2x3x4+x2+x4+x1x2x3+x1+x3`.
+
+Thus `R=a0A1A2+B1A2+A1B2` and
+`Psi=K[R+2i(A1+A2)]`.  Exact expansion proves
+
+`2R >= t(t^4+7t^2+9)(A1+A2)`.
+
+The expansion has 1290 positive integer terms (coefficients 1 through 22),
+verified by `c5_bouquet_matching_certificate.py`.  Hence
+`integral t Theta <= 2pi/(3sqrt13)`, yielding the stated bound.  Two hostile
+audits independently checked BP factors, Sachs factor 2, the exact sparse
+certificate, integral, and Coulson constants.  Paper: `two-c5-bouquet-trees/`.

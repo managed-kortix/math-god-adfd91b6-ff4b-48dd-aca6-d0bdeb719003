@@ -1,0 +1,384 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Arg}{\operatorname{arg}}
+
+\title{Positive Square Energy for a Two-$C_5$ Bouquet with Arbitrary Trees}
+\author{}
+\date{25 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $G$ be a connected cactus whose only cyclic blocks are two copies of
+$C_5$ having exactly one common vertex.  Arbitrary trees may be attached at
+every vertex of this nine-vertex core.  We prove the explicit strict bound
+\[
+ s^+(G)\geq |V(G)|+1-\frac{4}{3\sqrt{13}}>|V(G)|.
+\]
+The proof eliminates the attached trees by exact matching belief propagation,
+uses a coefficientwise integer-polynomial certificate on the resulting
+weighted core, and integrates the phase of the normalized characteristic
+polynomial.  The polynomial certificate is reproducible and is recorded by a
+canonical SHA-256 digest.
+\end{abstract}
+
+\section{Introduction}
+
+All graphs are finite, simple, and undirected.  If the adjacency eigenvalues
+of $G$ are $\lambda_1,\ldots,\lambda_n$, put
+\[
+ s^+(G)=\sum_{\lambda_j>0}\lambda_j^2,
+ \qquad
+ s^-(G)=\sum_{\lambda_j<0}\lambda_j^2.
+\]
+Liu, Tang, and Zhang proved the positive and negative square-energy
+conjecture for connected graphs~\cite{LTZ}.  Akbari, Kumar, Mohar, Pragada,
+and Zhang proposed the stronger assertion $s^+(G)\geq n$ when a connected
+$n$-vertex graph has at least $n+1$ edges~\cite{AKMPZ}.  Optimizing the
+Liu--Tang--Zhang doubly nonnegative certificate block by block settles most
+bicyclic cacti but leaves, in particular, the pair of cyclic block lengths
+$\{5,5\}$.  The argument here resolves the shared-vertex member of that
+family.
+
+\begin{theorem}\label{thm:main}
+Let $G$ be a connected cactus whose only cyclic blocks are two copies of
+$C_5$, and suppose that these cycles share exactly one vertex $v_0$.
+Every edge outside the cycles may belong to an arbitrary tree attached at any
+vertex of the two-cycle core.  If $n=|V(G)|$, then
+\begin{equation}\label{eq:main}
+ s^+(G)\geq n+1-\frac{4}{3\sqrt{13}}>n.
+\end{equation}
+\end{theorem}
+
+The hypothesis means a one-vertex bouquet: the two $C_5$ blocks intersect in
+the single vertex $v_0$.  It does not cover vertex-disjoint cycles joined by a
+bridge or a path, and it does not assert a result for arbitrary bicyclic
+cacti.
+
+The coefficient inequality used below is an equality when there are no
+nontrivial tree messages.  The later analytic inequality
+$\arctan u\leq u$ is strict for $u>0$, however, so we do not claim that the
+constant in~\eqref{eq:main} is the best possible spectral lower bound.
+
+\section{Signless matchings and grouped Sachs expansion}
+
+For a forest $F$, define its signless matching partition by
+\begin{equation}\label{eq:ZF}
+ Z_F(t)=\sum_{M}t^{|V(F)|-2|M|},
+\end{equation}
+where the sum runs over all matchings of $F$.  More generally, for positive
+vertex activities $a=(a_v)_{v\in V(H)}$, write
+\begin{equation}\label{eq:weighted-Z}
+ Z_H(a)=\sum_M\prod_{v\text{ unmatched by }M}a_v.
+\end{equation}
+All edge activities are one.  Thus~\eqref{eq:ZF} is the specialization of
+\eqref{eq:weighted-Z} in which every vertex activity is $t$.
+
+Let $\phi_G(z)=\det(zI-A(G))$ and normalize it on the imaginary axis by
+\begin{equation}\label{eq:Psi}
+ \Psi_G(t)=i^{-n}\phi_G(it)=\prod_{j=1}^n(t+i\lambda_j),
+ \qquad t>0.
+\end{equation}
+Grouping the Sachs expansion by its collection $\mathcal C$ of
+vertex-disjoint cycle components gives
+\begin{equation}\label{eq:Sachs}
+ \Psi_G(t)=
+ \sum_{\mathcal C}
+ \prod_{C\in\mathcal C}\bigl(-2i^{-|C|}\bigr)
+ Z_{G-V(\mathcal C)}(t).
+\end{equation}
+The empty collection contributes $Z_G(t)$.  A $5$-cycle contributes the
+multiplier $-2i^{-5}=2i$.  Since the two cycles under consideration share
+$v_0$, they are not vertex-disjoint and cannot occur together in a Sachs
+subgraph.  In particular, there is no double-cycle term in~\eqref{eq:Sachs}.
+
+\section{Exact elimination of attached trees}
+
+Orient every tree branch toward its core vertex.  For an oriented noncore
+edge $u\to p$, let $T_{u\to p}$ be the component below $u$, including $u$,
+and define
+\begin{equation}\label{eq:q-definition}
+ q_{u\to p}(t)=
+ \frac{Z_{T_{u\to p}}(t)}{Z_{T_{u\to p}-u}(t)}.
+\end{equation}
+The denominator is a product of child-subtree partitions and is positive for
+$t>0$.
+
+\begin{lemma}[Rooted-tree matching recursion]\label{lem:BP}
+For every oriented branch edge,
+\begin{equation}\label{eq:BP}
+ q_{u\to p}(t)=t+\sum_{w\text{ child of }u}\frac1{q_{w\to u}(t)}
+ \geq t>0.
+\end{equation}
+After all noncore vertices are eliminated, the effective activity at a core
+vertex $v$ is
+\begin{equation}\label{eq:activity}
+ a_v(t)=t+\sum_{u\text{ attached at }v}\frac1{q_{u\to v}(t)}
+       =t+y_v(t),
+ \qquad y_v(t)\geq0.
+\end{equation}
+Moreover, all terms of the grouped Sachs expansion have the same positive
+prefactor
+\begin{equation}\label{eq:K}
+ K(t)=\prod_{u\text{ adjacent to the core}}Z_{T_{u\to v}}(t)>0.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Split a matching of $T_{u\to p}$ according to whether $u$ is unmatched or is
+matched to one of its children.  After the child-subtree partitions are
+factored out, this gives~\eqref{eq:BP}.  A leaf has message $t$, so induction
+also proves $q_{u\to p}\geq t>0$.
+
+For a branch $T=T_{u\to v}$ rooted next to a core vertex $v$, a matching not
+using $uv$ contributes $Z_T$.  A matching using $uv$ contributes $Z_{T-u}$.
+Extracting $Z_T$ changes the latter choice into the weight
+\[
+ \frac{Z_{T-u}}{Z_T}=\frac1{q_{u\to v}}.
+\]
+The incident branch choices are mutually exclusive, so their sum adds exactly
+the terms in~\eqref{eq:activity}.  Independence among branches yields the
+factor~\eqref{eq:K}.
+
+It remains important to check cycle deletion, rather than silently canceling
+an unjustified ratio.  If a Sachs cycle deletes a core vertex $v$, every
+branch formerly attached at $v$ becomes a disconnected full tree and
+contributes $Z_T$, exactly its factor in $K(t)$.  At each retained core
+vertex, the branch is absorbed into the same effective activity as before.
+Thus deleting all five vertices of either cycle preserves the full common
+factor $K(t)$.  No quotient of tree partitions remains.
+\end{proof}
+
+The same argument covers a rooted tree described as being identified with a
+core vertex: remove that core root and treat each resulting component as one
+of the branches above.
+
+\section{The weighted two-$C_5$ core}
+
+Label the common vertex $0$.  On each lobe $j\in\{1,2\}$, label the other
+vertices consecutively $1,2,3,4$, with activities $x_1,x_2,x_3,x_4$ when one
+lobe is under discussion.  Deleting vertex $0$ leaves a path $P_4$.  Its
+weighted matching partition is
+\begin{equation}\label{eq:A}
+ A(x_1,x_2,x_3,x_4)
+ =x_1x_2x_3x_4+x_3x_4+x_1x_4+x_1x_2+1.
+\end{equation}
+These are respectively the empty matching, the three one-edge matchings, and
+the unique two-edge matching of $P_4$.
+
+If vertex $0$ is matched along this lobe, the sum over the two possible
+incident cycle edges is
+\begin{equation}\label{eq:B}
+ B(x_1,x_2,x_3,x_4)
+ =x_2x_3x_4+x_2+x_4+x_1x_2x_3+x_1+x_3.
+\end{equation}
+Indeed, either edge from $0$ leaves a $P_3$.  The two displayed groups in
+\eqref{eq:B} correspond to the two distinct choices of incident edge, so no
+additional factor of two is present.
+
+Let $A_j,B_j$ denote~\eqref{eq:A}--\eqref{eq:B} on lobe $j$, and let $a_0$
+be the activity at the common vertex.  Splitting core matchings according to
+the status of vertex $0$ gives
+\begin{equation}\label{eq:R}
+ R=a_0A_1A_2+B_1A_2+A_1B_2.
+\end{equation}
+The first term leaves $0$ unmatched; the other terms match it into exactly
+one of the two lobes.  These cases are disjoint and exhaustive.
+
+Deleting one whole $C_5$ from the core leaves the $P_4$ in the other lobe.
+Lemma~\ref{lem:BP}, the $2i$ cycle multiplier, and the absence of a
+double-cycle term therefore give the exact identity
+\begin{equation}\label{eq:Psi-factor}
+ \boxed{\ \Psi_G(t)=K(t)\bigl[R+2i(A_1+A_2)\bigr].\ }
+\end{equation}
+All quantities in brackets are positive for $t>0$.  Since $K(t)$ is positive
+and real, it does not affect the continuous argument.  Consequently
+\begin{equation}\label{eq:Theta-exact}
+ \Theta_G(t):=\Arg\Psi_G(t)
+ =\arctan\frac{2(A_1+A_2)}R,
+ \qquad 0<\Theta_G(t)<\frac\pi2.
+\end{equation}
+
+\section{The coefficientwise certificate}
+
+Put
+\begin{equation}\label{eq:D}
+ D(t)=t^4+7t^2+9.
+\end{equation}
+The algebraic heart of the proof is the following finite exact statement.
+
+\begin{proposition}\label{prop:certificate}
+Whenever all nine core activities are at least $t>0$,
+\begin{equation}\label{eq:core-inequality}
+ 2R\geq tD(t)(A_1+A_2).
+\end{equation}
+Equality holds in~\eqref{eq:core-inequality} when every activity is $t$.
+\end{proposition}
+
+\begin{proof}
+Write
+\[
+ a_0=t+y_0,
+ \qquad x_{j,k}=t+y_{j,k}
+ \quad(j=1,2,\ k=1,2,3,4),
+\]
+where every $y$ is nonnegative.  Substitute these expressions into
+\eqref{eq:A}--\eqref{eq:R} and form
+\begin{equation}\label{eq:P}
+ P=2(a_0A_1A_2+B_1A_2+A_1B_2)
+   -t(t^4+7t^2+9)(A_1+A_2).
+\end{equation}
+Appendix~\ref{app:certificate} gives an exact, exhaustive coefficient
+verification over $\mathbb Z$.  The expansion has $1290$ nonzero monomials;
+all coefficients are positive integers between $1$ and $22$, and every
+monomial contains at least one $y$ variable.  Representative terms include
+\[
+ 2t^8y_0,
+ \qquad t^8y_{1,1},
+ \qquad 2y_{2,1},
+ \qquad 2y_{2,2}y_{2,3}y_{2,4}.
+\]
+Thus $P\geq0$ on the nonnegative orthant, proving
+\eqref{eq:core-inequality}.  Since the part independent of all $y$ variables
+is identically zero, equality holds when all $y$ vanish.
+\end{proof}
+
+Combining~\eqref{eq:Theta-exact} and~\eqref{eq:core-inequality}, and using
+monotonicity of the arctangent, yields
+\begin{equation}\label{eq:phase-bound}
+ 0<\Theta_G(t)
+ \leq\arctan\frac{4}{tD(t)}.
+\end{equation}
+The factor $4$ is forced: the imaginary part in~\eqref{eq:Psi-factor} is
+$2(A_1+A_2)$, while~\eqref{eq:core-inequality} bounds
+$(A_1+A_2)/R$ by $2/(tD(t))$.
+
+\section{Coulson integral and square energy}
+
+For the continuous argument fixed in~\eqref{eq:Psi}, the signed
+square-energy Coulson identity is
+\begin{equation}\label{eq:Coulson}
+ s^+(G)-s^-(G)
+ =-\frac4\pi\int_0^\infty t\Theta_G(t)\,dt.
+\end{equation}
+For completeness, it follows by summing the scalar identity for the factors
+$t+i\lambda_j$ and integrating; the trace relation
+$\sum_j\lambda_j=0$ cancels the nonintegrable first-order term at infinity.
+The first-quadrant location in~\eqref{eq:Theta-exact} fixes the branch and
+precludes winding.
+
+By~\eqref{eq:phase-bound} and $\arctan u\leq u$ for $u\geq0$,
+\begin{equation}\label{eq:integral-bound}
+ \int_0^\infty t\Theta_G(t)\,dt
+ \leq\int_0^\infty\frac{4}{t^4+7t^2+9}\,dt.
+\end{equation}
+Set $t=\sqrt3u$.  The reciprocal-quartic formula
+\[
+ \int_0^\infty\frac{du}{u^4+bu^2+1}
+ =\frac{\pi}{2\sqrt{2+b}}
+ \qquad(b>-2)
+\]
+then gives the exact value
+\begin{equation}\label{eq:rational-integral}
+ \int_0^\infty\frac{4}{t^4+7t^2+9}\,dt
+ =\frac{2\pi}{3\sqrt{13}}<\frac\pi2.
+\end{equation}
+Equations~\eqref{eq:Coulson}--\eqref{eq:rational-integral} imply
+\begin{equation}\label{eq:difference}
+ s^+(G)-s^-(G)\geq-\frac{8}{3\sqrt{13}}.
+\end{equation}
+
+The graph has exactly two independent cycles, hence $|E(G)|=n+1$.  Therefore
+\begin{equation}\label{eq:sum}
+ s^+(G)+s^-(G)=\tr A(G)^2=2|E(G)|=2n+2.
+\end{equation}
+Averaging~\eqref{eq:difference} and~\eqref{eq:sum} proves
+\[
+ s^+(G)\geq n+1-\frac{4}{3\sqrt{13}}>n,
+\]
+because $4<3\sqrt{13}$.  This proves Theorem~\ref{thm:main}.
+
+\begin{remark}[Equality nuance]
+The coefficientwise inequality~\eqref{eq:core-inequality} is exact at the bare
+core, where every activity equals $t$.  Nevertheless,
+$\arctan u<u$ for every $u>0$, and the phase in
+\eqref{eq:Theta-exact} is positive.  Thus the displayed spectral bound is not
+an equality even for the bare core, and no optimality claim for its constant
+is made.
+\end{remark}
+
+\appendix
+\section{Exact certificate and reproducibility}\label{app:certificate}
+
+The certificate script is
+\begin{center}
+\texttt{positive-square-energy/experiments/\allowbreak
+c5\_bouquet\_matching\_certificate.py}.
+\end{center}
+Run it from the repository root with
+\begin{verbatim}
+python positive-square-energy/experiments/c5_bouquet_matching_certificate.py
+\end{verbatim}
+It uses SymPy to construct~\eqref{eq:P} as a polynomial over $\mathbb Z$ in
+the ordered variables
+\[
+ (t,y_0,y_{1,1},y_{1,2},y_{1,3},y_{1,4},
+ y_{2,1},y_{2,2},y_{2,3},y_{2,4}).
+\]
+It then asserts all of the following:
+\begin{enumerate}
+\item the expanded polynomial has exactly $1290$ nonzero terms;
+\item every coefficient is nonnegative (in fact the minimum is $1$ and the
+      maximum is $22$);
+\item substitution of zero for all nine $y$ variables gives zero;
+\item every exponent vector has a nonzero $y$ coordinate; and
+\item the SHA-256 digest of the canonical stream
+      \texttt{monomial:coefficient}, one term per line in SymPy's ordered
+      term order, is
+\end{enumerate}
+\begin{center}
+\texttt{4c436cac772395d2a8edfdd81408ffe426759d3e94d66df2e4ab0235a3343110}.
+\end{center}
+The script prints
+\begin{verbatim}
+PASS two-C5 bouquet matching coefficient certificate
+terms=1290 min_coefficient=1 max_coefficient=22
+y_constant=0 all_coefficients_nonnegative=True
+sha256=4c436cac772395d2a8edfdd81408ffe426759d3e94d66df2e4ab0235a3343110
+\end{verbatim}
+This is an exhaustive symbolic verification, not a numerical sampling of the
+nonnegative orthant.  Since coefficientwise nonnegativity is itself the proof
+of Proposition~\ref{prop:certificate}, the script is part of the exact proof.
+For file-level provenance, the script file used for this manuscript has
+SHA-256 digest
+\begin{center}
+\texttt{b3936c0d08ae252bdc11689ab55eb60331f0c54481f4544e442a98e5002fe6cf}.
+\end{center}
+
+\begin{thebibliography}{9}
+
+\bibitem{AKMPZ}
+S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and S.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264, 2025.
+
+\bibitem{LTZ}
+Y.~Liu, Q.~Tang, and S.~Zhang,
+\emph{The positive and negative square-energy conjecture},
+arXiv:2607.18031, 2026.
+
+\end{thebibliography}
+
+\end{document}

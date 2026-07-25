@@ -349,6 +349,14 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
+0. NEW VERIFIED RESULT (2026-07-25): every connected cactus whose only cyclic
+   blocks are two `C5`s sharing one cut vertex, with arbitrary rooted trees
+   attached at every core vertex, satisfies the uniform strict bound
+   `s+(G) >= n+1-4/(3 sqrt(13)) > n`.  Exact matching BP compresses all trees
+   to activities `a_v>=t`; a 1290-term coefficientwise integer certificate
+   proves the pointwise phase majorant `4/(t^4+7t^2+9)`.  Two independent
+   hostile audits passed and the paper builds.  Paper: `two-c5-bouquet-trees/`;
+   certificate: `positive-square-energy/experiments/c5_bouquet_matching_certificate.py`.
 0. NEW VERIFIED RESULT (2026-07-25): exact optimized LTZ DNN constant for
    every connected cactus.  If `b` is the number of bridge blocks and the
    cycle blocks have lengths `ell_j`, then
