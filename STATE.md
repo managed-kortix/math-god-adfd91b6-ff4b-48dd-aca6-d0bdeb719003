@@ -16,6 +16,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-25: sharpened the tetracyclic no-go frontier with two exact
+  certificates. A single pendant leaf on the pentagon-middle `C3-C5-C3` core
+  makes the natural bare-`C5` pointwise phase cross-product certificate negative at
+  `t=1/7`, exactly `-51170666676/13841287201`; thus that phase route is false
+  on an actual finite cactus. The mixed `3 mod 4`/`1 mod 4` actual-lobe
+  connector correction likewise has both signs under legitimate leaf
+  attachments. Conversely, an exact 512-subset rational-Sturm census for each
+  pentagon attachment distance proves every simultaneous multi-root massive-
+  star limit is at least `4-sqrt(5)`, uniquely approached by diverging stars on
+  all four private triangle vertices; every other subset exceeds `9/5`.
+  Scripts: `c3_c5_c3_phase_no_go.py` and `c3_c5_c3_star_limit_census.py`.
+  This closes two tempting proof routes but leaves arbitrary finite-tree
+  control open.
 - 2026-07-25: hostile-audited the tetracyclic cactus extension. The sharp DNN
   residual families are exactly `{3,3,3,q}` (odd `q`) and `{3,3,5,5}`, but a
   proposed induced-partition proof fails on three precise bridge packet budgets:

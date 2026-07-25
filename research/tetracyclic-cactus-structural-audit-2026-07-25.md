@@ -144,3 +144,88 @@ The cleanest remaining targets are:
    using substitutions/Bernstein certificates rather than raw coefficients;
 4. a genuine multi-root tree-allocation theorem, if one exists, stated weakly
    enough to survive the exact relocation obstruction above.
+
+## Further exact no-go: the natural hostile-cycle phase comparison fails
+
+Consider the pentagon-middle tricyclic core with pentagon `(0,1,2,3,4)`,
+triangles `(0,5,6)` and `(1,7,8)`, and one pendant leaf `9` at pentagon vertex
+`2`. This is a finite simple 10-vertex tricyclic cactus. Its exact
+characteristic polynomial is
+
+`(x+1)^2 (x^3+x^2-3x-1) (x^5-3x^4-3x^3+11x^2-x-3)`.
+
+Writing `Psi(t)=R(t)+iI(t)` and `Z5=t^5+5t^3+5t`, direct expansion gives
+
+`2R-Z5 I = 2(2t^12+24t^10+110t^8+233t^6+212t^4+52t^2-3)`.
+
+At `t=1/7` this equals exactly
+
+`-51170666676/13841287201 < 0`.
+
+Thus the natural oriented-cross-product certificate for pointwise comparison
+with the bare pentagon is false even for a single finite pendant leaf, not
+merely on an abstract activity orthant. Because the real part is negative here,
+this sign alone is not asserted to settle every possible continuous-argument
+branch comparison. The
+exact reproducer is
+
+```bash
+uv run --with sympy python positive-square-energy/experiments/c3_c5_c3_phase_no_go.py
+```
+
+The actual-lobe connector factorization also has no fixed sign for one
+`3 mod 4` and one `1 mod 4` lobe. If their root-deletion ratios are
+`r_-=x+iy` and `r_+=u-iv`, a connector with `m>=2` internal vertices has
+
+`F=A+B r_-+C r_+ + D r_- r_+`,
+
+with positive continuant coefficients, and
+
+`Im F = By-Cv+D(yu-xv)`.
+
+Attaching many leaves at a non-root cycle vertex of either lobe suppresses that
+lobe's imaginary ratio while preserving a positive real limit. Suppressing the
+triangle lobe makes `Im F<0`; suppressing the hostile lobe makes `Im F>0`.
+The endpoint formulas are `yu-xv` for a single bridge and `y-v` for one
+internal connector vertex. Hence the same-phase two-pentagon connector proof
+cannot be transferred pointwise to mixed-phase lobes.
+
+## Exact massive-star boundary for the pentagon-middle core
+
+For a fixed core `H`, attach `t_v` leaves at each vertex in a nonempty set `S`
+and let every `t_v` tend to infinity. Compress each star to its normalized leaf
+sum. The nonzero spectrum is that of
+
+`B_t = [[A(H),D_t],[D_t^T,0]]`,
+
+where `D_t` has the entries `sqrt(t_v)` at the selected roots. Schur-complement
+convergence gives `|S|` positive and `|S|` negative divergent eigenvalues and
+the bounded spectrum converges, with multiplicity, to that of `H-S`. Pairing
+the positive and negative branches in the resolvent expansion shows that their
+positive square sum is
+
+`sum_v t_v + |E(H)\E(H-S)| + o(1)`;
+
+the possible odd `sqrt(t_v)` contributions cancel because `A(H)` has zero
+diagonal. Combining this with the bounded positive square energy gives
+
+`lim (s+(G_t)-|G_t|) = |E(H)\E(H-S)| + s+(H-S)-|H|`.
+
+This statement is uniform in unequal divergence rates; internal edges of `S`
+are counted once. For each of the two nine-vertex
+pentagon-middle cores, exact rational Sturm isolation over all `2^9=512`
+subsets proves that the unique minimizing subset is the four private triangle
+vertices `{5,6,7,8}`. Deleting them leaves `C5`, and six core edges are
+incident to them, so the limit is
+
+`6+(7-sqrt(5))-9 = 4-sqrt(5)`.
+
+Every other subset has limit strictly greater than `9/5`, while
+`4-sqrt(5)<9/5`. Reproduce the complete exact census with
+
+```bash
+uv run --with sympy python positive-square-energy/experiments/c3_c5_c3_star_limit_census.py
+```
+
+This strongly separates massive-star degenerations from the required
+`sqrt(5)-2` packet bound, but does not yet control arbitrary finite trees.
