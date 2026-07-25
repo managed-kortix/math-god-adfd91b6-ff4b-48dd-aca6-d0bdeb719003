@@ -1931,3 +1931,25 @@ bad-cycle phase `atan(2/Z_Cq(t))`.  Integrating and using
 `s+(C_q)=q+1-sec(pi/q)` proves the result.  This avoids the already-refuted
 pointwise ordering between the two deletion carriers.  Two final hostile
 audits passed.  Paper: `triangle-one-mod-four-cactus/`.
+# 2026-07-25: two C5 blocks joined by one bridge, arbitrary trees
+
+For the core `H=C5--C5` joined by a single bridge,
+
+`phi_H=(x-1)(x^2-x-3)(x^2+x-1)^2(x^3-4x+1)`.
+
+If `rho in (2,sqrt5)` is the magnitude of the cubic's negative root, then
+`rho^3-4rho-1=0` and
+
+`s+(H)=(31+sqrt13)/2-sqrt5-rho^2=10.593873751236...`.
+
+With arbitrary rooted trees at all ten core vertices, exact BP gives
+`Psi/K=(qr+ps-4)+2i(q+r)`.  A coefficientwise cross-product certificate with
+4891 positive nonconstant terms proves the phase is at most the bare-core
+upper-half-plane `atan2` phase.  Hence
+
+`s+(G)>=n+s+(H)-10>n`.
+
+The ordinary one-argument arctangent is unsafe because the bare real part is
+negative near zero.  Two final hostile audits checked the cubic sign, exact
+factorization, cross-product orientation, branch tracking, and Coulson
+constants.  Paper: `two-c5-bridge-trees/`.

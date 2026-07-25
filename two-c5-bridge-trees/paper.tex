@@ -1,0 +1,358 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Arg}{\operatorname{Arg}}
+\newcommand{\tr}{\operatorname{tr}}
+
+\title{Positive Square Energy for Two $C_5$ Blocks Joined by a Bridge}
+\author{}
+\date{25 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $H$ be the ten-vertex graph formed from two disjoint copies of $C_5$ by
+joining one vertex of each copy with a bridge.  We prove that attaching
+arbitrary trees at any vertices of this core produces a graph $G$ satisfying
+\[
+ s^+(G)\geq |V(G)|+s^+(H)-10>|V(G)|.
+\]
+The proof eliminates the trees by matching belief propagation and compares
+the continuous Coulson phase with that of $H$.  The angular comparison is an
+exact coefficientwise certificate with $4891$ positive nonconstant terms.
+We also factor the characteristic polynomial of $H$ and evaluate $s^+(H)$
+exactly.
+\end{abstract}
+
+\section{Statement and notation}
+
+All graphs are finite, simple, and undirected.  For adjacency eigenvalues
+$\lambda_1,\ldots,\lambda_n$, write
+\[
+ s^+(G)=\sum_{\lambda_j>0}\lambda_j^2,
+ \qquad
+ s^-(G)=\sum_{\lambda_j<0}\lambda_j^2.
+\]
+Let $H$ consist of two vertex-disjoint $5$-cycles and exactly one edge joining
+one vertex of the first cycle to one vertex of the second.  Thus $H$ has ten
+vertices and eleven edges.
+
+\begin{theorem}\label{thm:main}
+Suppose that $G$ is obtained from $H$ by attaching arbitrary rooted trees at
+arbitrary core vertices (identifying each tree root with its chosen core
+vertex).  If $n=|V(G)|$, then
+\begin{equation}\label{eq:main}
+ s^+(G)\geq n+s^+(H)-10>n.
+\end{equation}
+More precisely,
+\begin{equation}\label{eq:bare-energy}
+ s^+(H)=\frac{31+\sqrt{13}}2-\sqrt5-\rho^2,
+\end{equation}
+where $\rho$ is the unique root in $(2,\sqrt5)$ of
+\begin{equation}\label{eq:rho}
+ \rho^3-4\rho-1=0.
+\end{equation}
+\end{theorem}
+
+The sign in~\eqref{eq:rho} is worth emphasizing.  The characteristic
+polynomial has the factor $x^3-4x+1$.  Its negative root is $-\rho$, and
+substitution of $x=-\rho$ gives $\rho^3-4\rho-1=0$.  In particular,
+$x^3-4x+1$ has no root in $(2,\sqrt5)$; its largest positive root is less
+than $2$.  Confusing that positive root with the magnitude of the negative
+root changes the sign in~\eqref{eq:rho} and makes the interval assertion
+false.
+
+\section{Tree elimination by matching messages}
+
+For a forest $F$, define its signless matching partition
+\begin{equation}\label{eq:forest-Z}
+ Z_F(t)=\sum_M t^{|V(F)|-2|M|},
+\end{equation}
+where the sum is over all matchings.  For a graph with positive vertex
+activities $a=(a_v)$, use the weighted version
+\begin{equation}\label{eq:weighted-Z}
+ Z_F(a)=\sum_M\prod_{v\text{ unmatched by }M}a_v.
+\end{equation}
+All edge activities are one.
+
+Orient every branch outside the core toward the core.  If $u\to v$ is an
+oriented branch edge, let $T_{u\to v}$ be the component below $u$, including
+$u$, and put
+\begin{equation}\label{eq:message-definition}
+ m_{u\to v}(t)=
+ \frac{Z_{T_{u\to v}}(t)}{Z_{T_{u\to v}-u}(t)}.
+\end{equation}
+
+\begin{lemma}[Matching belief propagation]\label{lem:BP}
+The messages satisfy
+\begin{equation}\label{eq:BP}
+ m_{u\to v}(t)=t+\sum_{w\text{ child of }u}
+                    \frac1{m_{w\to u}(t)}\geq t>0.
+\end{equation}
+After all branches are eliminated, each core vertex has activity
+\begin{equation}\label{eq:activity}
+ a_v(t)=t+\sum_{u\text{ attached at }v}\frac1{m_{u\to v}(t)}
+       =t+y_v(t),
+ \qquad y_v(t)\geq0.
+\end{equation}
+Every term in the grouped Sachs expansion has the same positive real factor
+\begin{equation}\label{eq:K}
+ K(t)=\prod_{u\text{ adjacent to the core}}Z_{T_{u\to v}}(t)>0.
+\end{equation}
+This remains true for a Sachs term in which either entire pentagon is
+deleted.
+\end{lemma}
+
+\begin{proof}
+Split a matching below $u$ according to whether $u$ is unmatched or is
+matched to one of its children, and factor the child-subtree partitions.
+This proves~\eqref{eq:BP}; induction from a leaf gives the inequality.
+For a branch rooted next to a core vertex, extracting its full partition
+changes the weight of using the edge into the branch to
+$Z_{T-u}/Z_T=1/m_{u\to v}$.  The mutually exclusive choices over incident
+branches give~\eqref{eq:activity}, while independence gives~\eqref{eq:K}.
+
+If a core vertex is deleted as part of a Sachs cycle, every branch attached
+there becomes a disconnected full tree and still contributes its factor
+$Z_T$ to $K(t)$.  Retained core vertices have the same effective activities
+as before.  Hence deleting a whole pentagon does not leave an additional
+ratio of branch partitions.
+\end{proof}
+
+\section{The weighted bridge core}
+
+Let
+\[
+ \phi_G(z)=\det(zI-A(G)),
+ \qquad
+ \Psi_G(t)=i^{-n}\phi_G(it)=\prod_{j=1}^n(t+i\lambda_j),
+ \quad t>0.
+\]
+In the grouped Sachs expansion, a $5$-cycle has multiplier
+$-2i^{-5}=2i$.  The two cycles are disjoint, so their joint selection has
+multiplier $(2i)^2=-4$.
+
+Root one weighted pentagon at its bridge endpoint and list its other
+activities consecutively as $x_1,x_2,x_3,x_4$.  Define
+\begin{align}
+ P(x_1,x_2,x_3,x_4)
+ &=x_1x_2x_3x_4+x_3x_4+x_1x_4+x_1x_2+1,\label{eq:P}\\
+ B(x_1,x_2,x_3,x_4)
+ &=x_2x_3x_4+x_2+x_4+x_1x_2x_3+x_1+x_3.\label{eq:B}
+\end{align}
+Here $P$ is the matching partition after deleting the root.  If the root
+activity is $a_0$, the full pentagon partition is
+\begin{equation}\label{eq:Q}
+ Q=a_0P+B.
+\end{equation}
+For the left pentagon denote the deleted-root and full partitions by $p,q$;
+for the right one denote them by $s,r$, respectively.
+
+\begin{proposition}[Exact bridge formula]\label{prop:bridge}
+With the activities~\eqref{eq:activity},
+\begin{equation}\label{eq:bridge-formula}
+ \boxed{\quad
+ \frac{\Psi_G(t)}{K(t)}=(qr+ps-4)+2i(q+r).
+ \quad}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Splitting matchings according to whether the bridge is unused or used gives
+$qr+ps$: in the second case both bridge endpoints are deleted.  Selecting
+the left Sachs cycle leaves the full right pentagon and contributes $2ir$;
+selecting the right one contributes $2iq$.  Selecting both contributes
+$-4$.  Lemma~\ref{lem:BP} supplies the common factor $K(t)$.
+\end{proof}
+
+For bare activities, set
+\begin{equation}\label{eq:bare-PQ}
+ P_0=t^4+3t^2+1,
+ \qquad Q_0=t^5+5t^3+5t.
+\end{equation}
+Introduce the real and imaginary coordinates
+\begin{align*}
+ X&=qr+ps-4,&Y&=2(q+r),\\
+ X_0&=Q_0^2+P_0^2-4,&Y_0&=4Q_0.
+\end{align*}
+Both $Y$ and $Y_0$ are positive for $t>0$.  We therefore use the
+upper-half-plane branch
+\begin{equation}\label{eq:phases}
+ \Theta_G(t)=\operatorname{atan2}(Y,X),
+ \qquad
+ \Theta_H(t)=\operatorname{atan2}(Y_0,X_0),
+ \qquad 0<\Theta_G,\Theta_H<\pi.
+\end{equation}
+In particular,
+\begin{equation}\label{eq:bare-phase}
+ \Theta_H(t)=\operatorname{atan2}
+ \bigl(4Q_0,Q_0^2+P_0^2-4\bigr).
+\end{equation}
+An ordinary one-argument arctangent cannot replace this expression globally:
+\[
+ X_0=t^{10}+11t^8+41t^6+61t^4+31t^2-3
+\]
+is negative for all sufficiently small positive $t$.
+
+\section{Coefficientwise angular certificate}
+
+\begin{proposition}\label{prop:certificate}
+For all activities $a_v=t+y_v$ with $t>0$ and $y_v\geq0$,
+\begin{equation}\label{eq:cross-product}
+ Y_0X-YX_0\geq0.
+\end{equation}
+Consequently,
+\begin{equation}\label{eq:phase-comparison}
+ 0<\Theta_G(t)\leq\Theta_H(t)<\pi.
+\end{equation}
+The cross-product inequality is an equality at the bare specialization
+$y_0=\cdots=y_9=0$.
+\end{proposition}
+
+\begin{proof}
+After canceling a positive factor $2$, inequality~\eqref{eq:cross-product}
+is
+\begin{equation}\label{eq:certificate-polynomial}
+ 2Q_0(qr+ps-4)-(q+r)(Q_0^2+P_0^2-4)\geq0.
+\end{equation}
+Substitute $a_v=t+y_v$ at the ten core vertices, use
+\eqref{eq:P}--\eqref{eq:Q}, and expand over $\mathbb Z$ in the ordered
+variables $(t,y_0,\ldots,y_9)$.  The exact expansion has $4891$ nonzero
+monomials.  Every coefficient is positive, the minimum is $1$, the maximum is
+$289$, and every monomial contains at least one $y_v$.  Thus the polynomial
+is nonnegative on the nonnegative orthant and has zero bare specialization.
+The exhaustive symbolic verification and its canonical digest are recorded
+in Appendix~\ref{app:certificate}.
+
+It remains to translate the cross product without losing the quadrant.  From
+\eqref{eq:phases}, the difference
+$\Theta_G-\Theta_H$ belongs to $(-\pi,\pi)$, and
+\[
+ \sin(\Theta_G-\Theta_H)
+ =\frac{YX_0-XY_0}{\sqrt{X^2+Y^2}\sqrt{X_0^2+Y_0^2}}
+ \leq0.
+\]
+On $(-\pi,\pi)$ this implies $\Theta_G-\Theta_H\leq0$.  No sign assumption
+on $X$ or $X_0$ and no ordinary-arctangent division is used.
+\end{proof}
+
+\section{Phase integration and the bare spectrum}
+
+For the continuous argument in~\eqref{eq:phases}, the signed square-energy
+Coulson identity is
+\begin{equation}\label{eq:Coulson}
+ s^+(F)-s^-(F)
+ =-\frac4\pi\int_0^\infty t\Theta_F(t)\,dt.
+\end{equation}
+It follows by applying the scalar identity to the factors
+$t+i\lambda_j$; the trace relation $\sum_j\lambda_j=0$ cancels the
+nonintegrable first-order term at infinity.  Proposition~\ref{prop:certificate}
+and~\eqref{eq:Coulson} give
+\begin{equation}\label{eq:difference-comparison}
+ s^+(G)-s^-(G)\geq s^+(H)-s^-(H).
+\end{equation}
+
+We now evaluate the right side exactly.  A direct determinant calculation
+gives
+\begin{equation}\label{eq:charpoly}
+ \phi_H(x)=(x-1)(x^2-x-3)(x^2+x-1)^2(x^3-4x+1).
+\end{equation}
+The cubic has two positive roots $\alpha,\beta$ and one negative root
+$-\rho$.  Indeed, $f(x)=x^3-4x+1$ has one root in each of
+$(-3,-2)$, $(0,1)$, and $(1,2)$.  Vieta's relations give
+\[
+ \alpha+\beta=\rho,
+ \qquad
+ \alpha\beta=\rho^2-4,
+ \qquad
+ \alpha^2+\beta^2=8-\rho^2.
+\]
+The other positive eigenvalues read from~\eqref{eq:charpoly} are
+\[
+ 1,
+ \qquad \frac{1+\sqrt{13}}2,
+ \qquad \frac{-1+\sqrt5}2\quad\text{with multiplicity two}.
+\]
+Squaring and summing proves~\eqref{eq:bare-energy}.
+
+For completeness, the definition of $\rho$ and the strict slack can be
+verified without decimals.  Let $g(x)=x^3-4x-1$.  Then
+\[
+ g(2)=-1<0,
+ \qquad
+ g(\sqrt5)=\sqrt5-1>0,
+ \qquad
+ g'(x)=3x^2-4>0\quad(x>2).
+\]
+Hence $g$ has exactly one root $\rho$ in $(2,\sqrt5)$, and $\rho^2<5$.
+Therefore
+\begin{align}
+ s^+(H)
+ &>\frac{21+\sqrt{13}}2-\sqrt5>10.\label{eq:slack}
+\end{align}
+The last inequality is exact: it is equivalent to
+$(1+\sqrt{13})/2>\sqrt5$, and both sides are positive; after moving $1$ and
+squaring it reduces to $13>(2\sqrt5-1)^2=21-4\sqrt5$, equivalently
+$\sqrt5>2$.
+
+Finally, $G$ is connected and bicyclic, so it has $n+1$ edges.  Thus
+\begin{equation}\label{eq:trace}
+ s^+(G)+s^-(G)=\tr A(G)^2=2n+2,
+ \qquad
+ s^+(H)+s^-(H)=22.
+\end{equation}
+Averaging~\eqref{eq:difference-comparison} with~\eqref{eq:trace} yields
+\[
+ s^+(G)\geq n+1+\frac{s^+(H)-s^-(H)}2
+          =n+s^+(H)-10.
+\]
+The strict inequality in~\eqref{eq:main} follows from~\eqref{eq:slack}.
+Equivalently, the exact bare phase integral is
+\[
+ \int_0^\infty t\Theta_H(t)\,dt
+ =\frac\pi2\bigl(11-s^+(H)\bigr)
+ =\frac\pi2\left(
+ \rho^2+\sqrt5-\frac{9+\sqrt{13}}2\right)<\frac\pi2.
+\]
+
+\appendix
+\section{Exact certificate and reproducibility}\label{app:certificate}
+
+The certificate script is
+\begin{center}
+\texttt{positive-square-energy/experiments/\allowbreak
+c5\_bridge\_phase\_certificate.py}.
+\end{center}
+Run it from the repository root with
+\begin{verbatim}
+python positive-square-energy/experiments/c5_bridge_phase_certificate.py
+\end{verbatim}
+It constructs~\eqref{eq:certificate-polynomial} over $\mathbb Z$, checks the
+bare characteristic-polynomial factorization~\eqref{eq:charpoly}, and asserts
+all of the following for the coefficient expansion:
+\begin{enumerate}
+\item there are exactly $4891$ nonzero monomials;
+\item every nonzero coefficient is positive, with minimum $1$ and maximum
+      $289$;
+\item every monomial contains at least one of $y_0,\ldots,y_9$;
+\item the bare specialization is zero; and
+\item the SHA-256 digest of the canonical ordered stream
+      \texttt{monomial:coefficient}, one term per line, is
+\end{enumerate}
+\begin{center}
+\texttt{365e18dedf9032fbcdb88af83d033f0651f02412c796b4f1dfde04152a478af1}.
+\end{center}
+The digest commits to the complete coefficient list rather than to a
+numerical sampling of activities.
+
+\end{document}

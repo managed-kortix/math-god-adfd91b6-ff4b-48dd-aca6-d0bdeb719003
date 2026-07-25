@@ -349,6 +349,14 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
+0. NEW VERIFIED RESULT (2026-07-25): if two vertex-disjoint `C5` blocks are
+   joined by exactly one bridge edge, with arbitrary rooted trees attached at
+   every core vertex, then `s+(G)>=n+s+(H)-10>n`, where the bare bridge core
+   has `s+(H)=10.593873751236...`.  Exact BP reduction plus a 4891-term
+   positive integer cross-product certificate proves pointwise upper-half-plane
+   phase domination by the bare core.  Two independent final audits passed.
+   Paper: `two-c5-bridge-trees/`; certificate:
+   `positive-square-energy/experiments/c5_bridge_phase_certificate.py`.
 0. NEW VERIFIED RESULT (2026-07-25): the entire mixed residual family is
    closed.  If a connected bicyclic cactus has cyclic blocks `C3` and
    `C_q`, `q=4k+1>=5`, then for arbitrary shared-cut or connector-path

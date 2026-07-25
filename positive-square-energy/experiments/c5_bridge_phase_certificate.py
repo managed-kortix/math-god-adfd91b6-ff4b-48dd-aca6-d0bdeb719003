@@ -16,7 +16,27 @@ def rooted_cycle(a0, x1, x2, x3, x4):
     return deleted_root, s.expand(a0*deleted_root + root_matched)
 
 
+def verify_bare_core_spectrum() -> None:
+    x = s.symbols("x")
+    adjacency = s.zeros(10)
+    edges = [(offset + vertex, offset + (vertex + 1) % 5)
+             for offset in (0, 5) for vertex in range(5)]
+    edges.append((0, 5))
+    for left, right in edges:
+        adjacency[left, right] = 1
+        adjacency[right, left] = 1
+
+    expected = ((x - 1)*(x**2 - x - 3)*(x**2 + x - 1)**2
+                *(x**3 - 4*x + 1))
+    assert s.expand(adjacency.charpoly(x).as_expr() - expected) == 0
+
+    rho_polynomial = x**3 - 4*x - 1
+    assert rho_polynomial.subs(x, 2) == -1
+    assert s.simplify(rho_polynomial.subs(x, s.sqrt(5))) == s.sqrt(5) - 1
+
+
 def main() -> None:
+    verify_bare_core_spectrum()
     t = s.symbols("t")
     y = s.symbols("y0:10")
     variables = (t, *y)
