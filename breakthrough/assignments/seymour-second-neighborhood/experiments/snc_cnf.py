@@ -39,7 +39,9 @@ def threshold(c, inputs, tag):
     return prev
 
 
-def generate(n, bsize, missing):
+def generate(n, bsize, missing, robust_witness=False):
+    if bsize not in (6, 7):
+        raise ValueError("bsize must be 6 or 7")
     if n < 9 + bsize:
         raise ValueError("n must be at least 9+bsize for the rooted layers")
     if not 0 <= missing <= n * (n - 1) // 2:
@@ -47,6 +49,7 @@ def generate(n, bsize, missing):
     c = CNF()
     a = [[c.var(f"a_{i}_{j}") for j in range(n)] for i in range(n)]
     q = [[c.var(f"q_{i}_{j}") for j in range(n)] for i in range(n)]
+    pvar = {}
     for i in range(n): c.add(-a[i][i]); c.add(-q[i][i])
     for i in range(n):
         for j in range(i + 1, n): c.add(-a[i][j], -a[j][i])
@@ -57,15 +60,18 @@ def generate(n, bsize, missing):
             for k in range(n):
                 if k in (i, j): continue
                 p = c.var(f"p_{i}_{k}_{j}"); paths.append(p)
+                pvar[i,k,j] = p
                 equiv_and(c, p, a[i][k], a[k][j])
             r = c.var(f"r_{i}_{j}")
             for p in paths: c.add(-p, r)
             c.add(-r, *paths)
             c.add(-q[i][j], r); c.add(-q[i][j], -a[i][j])
             c.add(q[i][j], -r, a[i][j])
+    out_thresholds, sec_thresholds, mu2 = [], [], []
     for i in range(n):
         outs = threshold(c, [a[i][j] for j in range(n) if j != i], f"d1_{i}")
         secs = threshold(c, [q[i][j] for j in range(n) if j != i], f"d2_{i}")
+        out_thresholds.append(outs); sec_thresholds.append(secs)
         c.add(outs[7])                         # d1 >= 8
         upper = (n + 1) // 2
         if upper < n - 1: c.add(-outs[upper]) # d1 <= upper
@@ -75,6 +81,14 @@ def generate(n, bsize, missing):
         c.add(-secs[n-2])                     # d2 cannot be n-1
         for t in range(3, n):                 # d1>=t => d2>=t-2
             c.add(-outs[t-1], secs[t-3])
+        z = c.var(f"mu2_{i}"); mu2.append(z)
+        # z=false forces deficit one; z=true forces deficit at least two.
+        # Together with the base deficit-in-{1,2} clauses, z is exact.
+        for t in range(2, n):
+            c.add(z, -outs[t-1], secs[t-2])
+        for t in range(1, n-2):
+            c.add(-z, -secs[t-1], outs[t+1])
+        c.add(-z, -secs[n-3]); c.add(-z, -secs[n-2])
     hs = []
     for i in range(n):
         for j in range(i + 1, n):
@@ -90,6 +104,21 @@ def generate(n, bsize, missing):
     for b in B: c.add(*[a[x][b] for x in sorted(A)])
     for x in A:
         for r in range(9+bsize, n): c.add(-a[x][r])
+    if robust_witness:
+        # For every deleted vertex u select a tight in-neighbor w such that no
+        # old exact second neighbor of w loses all two-walks when u is removed.
+        for u in range(n):
+            witnesses=[]
+            for w in range(n):
+                if w == u: continue
+                z=c.var(f"wit_{w}_{u}"); witnesses.append(z)
+                c.add(-z, a[w][u]); c.add(-z, -mu2[w])
+                for b in range(n):
+                    if b in (w,u): continue
+                    alternatives=[pvar[w,k,b] for k in range(n)
+                                  if k not in (w,u,b)]
+                    c.add(-z, -q[w][b], *alternatives)
+            c.add(*witnesses)
     return c
 
 
@@ -97,7 +126,8 @@ def main():
     p=argparse.ArgumentParser(); p.add_argument('--n',type=int,required=True)
     p.add_argument('--b-size',type=int,choices=(6,7),required=True)
     p.add_argument('--missing',type=int,required=True); p.add_argument('--output',required=True)
-    x=p.parse_args(); c=generate(x.n,x.b_size,x.missing)
+    p.add_argument('--robust-witness',action='store_true')
+    x=p.parse_args(); c=generate(x.n,x.b_size,x.missing,x.robust_witness)
     with open(x.output,'w',encoding='ascii',newline='\n') as f:
         for name,num in c.names.items(): f.write(f"c var {num} {name}\n")
         f.write(f"p cnf {len(c.names)} {len(c.clauses)}\n")

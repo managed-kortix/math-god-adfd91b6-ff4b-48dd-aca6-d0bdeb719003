@@ -45,3 +45,10 @@ This exhaustively checks every threshold output through width eight and every
 exact-second membership bit for all 760 labelled oriented graphs through order
 four. It does not yet validate theorem-specific rooted/minimality clauses or
 replace an independent proof checker.
+
+The optional `--robust-witness` mode adds the exact necessary vertex-minimality
+condition that every deleted vertex has a selected deficit-one in-neighbor and
+that none of the witness's old exact second neighbors loses all two-walks after
+the deletion. This mode has been clause-audited, but its selector and deficit
+families still require dedicated exhaustive semantic tests before certificate
+use.

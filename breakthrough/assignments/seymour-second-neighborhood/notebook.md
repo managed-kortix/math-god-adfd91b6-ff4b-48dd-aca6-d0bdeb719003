@@ -243,3 +243,28 @@ No audits yet.
   for the 71 B6 ledgers, including full arc-minimal gain/loss constraints. Any
   UNSAT shard must emit and independently verify DRAT/LRAT; any SAT projection
   must pass both graph verifiers.
+
+## 2026-07-25 — ticks 8--10
+
+- Corrected the five-edge classification: there are five uncovered missing
+  graph types, not only `P6`. B6 reduces to 170 canonical local ledgers across
+  these types; B7 has 21 canonical remainder placements for the four
+  disconnected types. See `attempts/tick8-five-edge-census.md`.
+- Hostile analysis confirmed that local ledger degree excess is not the same as
+  badness deficit; using one as the other would unsoundly eliminate ledgers.
+  Full gain/loss constraints require unresolved incidence data.
+- Proved the `m=9` perfect-matching branch impossible by uncovered-set double
+  counting and contraction. Any residual `m=9` graph must have an isolated
+  vertex and compensating missing degree at least two. Derived a robust-witness
+  residual around an isolated vertex, but its equality cases survive local
+  tests. See `attempts/tick9-high-missing-structure.md`.
+- Derived a robust deletion-witness normal form for `m=8` around the unique
+  degree-nine vertex, reducing it to five aggregate C rows plus exact incidence
+  redundancy constraints.
+- Added an optional robust vertex-deletion witness family to `snc_cnf.py` and
+  had its clauses independently audited. It correctly links selected witnesses
+  to deficit one and preserves every old exact second endpoint via an alternate
+  midpoint.
+- **Next queued attack:** add dedicated exhaustive tests for the new deficit and
+  witness selector CNF families, then encode the exact `m=8` five-row normal
+  form and the `m=9` isolated-vertex residual as separate certified shards.
