@@ -8,7 +8,7 @@ commands, artifacts, and commits.
 ## Status
 
 - Assignment frozen: 2026-07-25
-- Worker session: pending dispatch
+- Worker session: `e973f064-cda3-4154-b6cc-1df9e400b99f`
 - Result status: no claim
 - Announcement status: prohibited until every publication gate passes
 
