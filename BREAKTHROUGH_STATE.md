@@ -31,4 +31,5 @@ independent worker. It does not belong to `STATE.md` or `MILLENNIUM_STATE.md`.
 On the next selector tick, inspect live sessions. If worker
 `e973f064-cda3-4154-b6cc-1df9e400b99f` is healthy and still pinned to
 `breakthrough-god`, do not dispatch another worker and do not select a new
-problem.
+problem. The worker owns the frozen assignment and must continue the exact
+frontier in its notebook; ordinary difficulty does not authorize reassignment.
