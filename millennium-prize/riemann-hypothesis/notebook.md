@@ -843,3 +843,140 @@ moderate `N` for sign failures using certified Gram entries. In parallel,
 investigate logarithmic averaging of `P_X`: an unconditional averaged value
 tending to zero would imply `liminf P_N=0` and hence RH, while any argument
 that imports critical-line Möbius cancellation must be rejected as circular.
+
+## Tick 8 — sharp decrement scale and logarithmic averaging
+
+Put
+
+\[
+Q_N=-\langle F_N,D_N\rangle,\qquad R_N=\|D_N\|^2,
+\qquad h_N=1/\log N-1/\log(N+1).
+\]
+
+The exact recurrence is
+
+\[
+\boxed{P_N-P_{N+1}=2h_NE_N,\qquad
+E_N:=Q_N-\frac{h_N}{2}R_N.}
+\]
+
+This identifies the correct quantity: a lower bound for `Q_N` alone is
+incomplete because the quadratic cost can erase it.
+
+### Lemma 5 (sufficient effective decrement)
+
+If there are constants `kappa>0,N_0` such that
+
+\[
+\boxed{E_N\ge\kappa P_N\log N\qquad(N\ge N_0),}
+\]
+
+then `P_N->0`, hence RH.
+
+### Proof
+
+The recurrence gives
+
+\[
+P_{N+1}\le P_N(1-2\kappa h_N\log N).
+\]
+
+Now `h_N log N ~ 1/(N log N)`, whose sum diverges, while its square is
+summable. The standard infinite-product argument forces `P_N->0`. QED.
+
+The scale is sharp. If the expected law `P_N~C/log N` is locally regular, then
+
+\[
+E_N\sim C/2\sim P_N\log N/2.
+\]
+
+Thus an eventual coefficient above `1/2` would conflict with the expected
+law, while any fixed positive coefficient suffices for RH. By contrast,
+`Q_N >= c P_N` is strategically useless because `sum h_N<infinity`.
+
+At `N=2`, exact formulas disprove an all-`N` coefficient `1/2`. A separate
+rigorous Arb search certified
+
+\[
+\langle F_N,D_N\rangle<0,\qquad P_{N+1}<P_N
+\]
+
+for every `2<=N<=250`; the closest correlation occurred at `N=221`. This is
+only a bounded certificate and supplies no asymptotic inference.
+
+### Exact logarithmic averages
+
+For `L_n=log n`, and on `L_n<=t<=L_(n+1)`, write
+
+\[
+F_{e^t}=U_n-D_n/t,
+\quad A_n=\|U_n\|^2,
+\quad B_n=\langle U_n,D_n\rangle,
+\quad C_n=\|D_n\|^2.
+\]
+
+Then the exact cell integral is
+
+\[
+\boxed{
+\begin{aligned}
+I_n:=\int_{L_n}^{L_{n+1}}P_{e^t}dt
+={}&(L_{n+1}-L_n)A_n
+-2\log(L_{n+1}/L_n)B_n\\
+&+(L_n^{-1}-L_{n+1}^{-1})C_n.
+\end{aligned}}
+\]
+
+Summing the cells gives the complete logarithmic average with only an explicit
+incomplete final cell. Integration by parts telescopes endpoints but leaves
+the same mixed correlation:
+
+\[
+\boxed{
+\int_{\log2}^{T}P_{e^t}dt
+=TP_{e^T}-(\log2)P_2
+-2\int_{\log2}^{T}\frac{\langle F_{e^t},D_{\lfloor e^t\rfloor}\rangle}{t}dt.}
+\]
+
+Thus averaging does not algebraically remove the obstruction.
+
+There is also the exact Cesaro identity
+
+\[
+\boxed{F_X=\frac1{\log X}\int_1^XU_y\frac{dy}{y}.}
+\]
+
+Jensen yields
+
+\[
+P_X\le\frac1{\log X}\int_1^X\|U_y\|^2\frac{dy}{y},
+\]
+
+with exact nonnegative defect equal to half the weighted double average of
+`||U_s-U_t||^2`. This is not contraction toward the latest approximant:
+already `P_3>||U_2||^2`. Hence Cesaro smoothing merely moves the missing
+Möbius cancellation into averaged sharp-truncation energies.
+
+Finally, any normalized positive logarithmic average of `P_X` tending to zero
+forces `liminf P_N=0`: within each logarithmic cell,
+`||F_X-F_n||=o(1)` uniformly by the elementary bound on `h_n||D_n||`.
+But the critical-line Mellin expansion of the average contains a nonnegative
+covariance term and remains a fixed-mollifier reciprocal-zeta estimate. Its
+decay is RH-implying, not elementary smoothing.
+
+## Next queued main-funnel step
+
+The active exact lemma is now the effective decrement inequality for `E_N`.
+Decompose `E_N` into its finite mixed Vasyunin term and elementary Möbius
+moments, and seek an averaged inequality
+
+\[
+\sum_{N\le n<2N}h_nE_n\ge
+\kappa\sum_{N\le n<2N}h_nP_n\log n
+\]
+
+for some absolute `kappa>0`. This dyadic/logarithmic version is sufficient if
+iterated and may tolerate the observed local oscillations. Simultaneously seek
+a certified sign failure beyond `N=250`; either outcome is structurally
+decisive. Any proof replacing finite Möbius polynomials by `1/zeta` on the
+critical line is circular.
