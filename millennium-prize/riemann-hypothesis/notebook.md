@@ -296,10 +296,13 @@ state a quantitatively sufficient cancellation bound. It must not replace
 that signed sum by pairwise absolute values or claim that the constant Fourier
 mode dominates.
 
-## Tick 4 — exact full Gram reduction, with truncation correction
+## Tick 4 — exact full Gram reduction and domain audit
 
-The rational autocorrelation formula supplies a cutoff-free finite expression,
-but a hostile audit found an essential domain correction that must be retained.
+The rational autocorrelation formula supplies a cutoff-free finite expression.
+An initial audit incorrectly appended the correction appropriate to a
+restricted `(0,1)` Gram matrix. A second independent domain audit caught this:
+the route uses the full Hilbert space `L^2((0,infinity),dx)`, so no subtraction
+is present. The corrected full-space derivation follows.
 Set
 
 \[
@@ -320,17 +323,16 @@ autocorrelation formula and the change of variables `t=1/x` give
 \boxed{
 \langle\rho_a,\rho_b\rangle=
 \frac{(q-p)\log(p/q)+(p+q)C_0
--\pi[V(p,q)+V(q,p)]}{2l}-\frac1{ab}.}
+-\pi[V(p,q)+V(q,p)]}{2l}.}
 \]
 
-The final term is mandatory. The autocorrelation
-`A(a/b)=integral_0^infty {t/a}{t/b}dt/t^2` includes `0<t<1`, where the
-integrand is exactly `1/(ab)`, whereas `x in (0,1)` transforms to `t>1`.
-This correction was missed in the first scout derivation and caught before
-publication. Checks include
+Indeed `t=1/x` maps the complete half-line to itself and gives exactly the
+published autocorrelation. The restricted Gram entry over `x in (0,1)` is the
+one equal to the displayed full entry minus `1/(ab)`, because its omitted
+`x>1` tail is `integral_1^infinity dx/(abx^2)=1/(ab)`. Checks include
 
 \[
-\langle\rho_a,\rho_a\rangle=C_0/a-1/a^2
+\langle\rho_a,\rho_a\rangle=C_0/a
 \]
 
 and
@@ -339,10 +341,11 @@ and
 \langle\chi,\rho_a\rangle=(\log a+1-\gamma)/a.
 \]
 
-Primary source: Báez-Duarte--Balazard--Landreau--Saias,
-arXiv:math/0306251, especially the rational formula for the multiplicative
-fractional-part autocorrelation. The subtraction `-1/(ab)` is our domain
-conversion, not an amendment to their formula.
+Primary sources: Báez-Duarte, arXiv:math/0202141, for the raw functions on
+`L^2(0,infinity)`; and Báez-Duarte--Balazard--Landreau--Saias,
+arXiv:math/0306251, for the rational multiplicative autocorrelation formula.
+Raw functions restricted to `(0,1)` require the rank-one subtraction, but that
+is not this route's Hilbert space.
 
 ### Exact route identity
 
@@ -378,7 +381,7 @@ Finite expansion of the Gram form gives the exact identity
 \begin{aligned}
 \|F_N\|_2^2={}&1+\frac2L[L_1+(1-\gamma)M_1]\\
 &+\frac1{L^2}[C_0M_0M_1+M_0L_1-M_1L_0
--\mathcal V_N-M_1^2].
+-\mathcal V_N].
 \end{aligned}}
 \]
 
@@ -392,13 +395,12 @@ Here the elementary kernel factorizations are
 \sum_{a,b}w_aw_b\frac{b-a}{2ab}\log(a/b)=M_0L_1-M_1L_0,
 \]
 
-and the truncation correction contributes `-M_1^2`. All sums are finite, so
-no convergence interchange occurs.
+All sums are finite, so no convergence interchange occurs.
 
 Define the combined signed quantity
 
 \[
-\mathcal W_N=\mathcal V_N-M_0L_1+M_1L_0+M_1^2.
+\mathcal W_N=\mathcal V_N-M_0L_1+M_1L_0.
 \]
 
 Then, for any fixed `C*>0`, the desired estimate at this `N` is exactly
@@ -416,6 +418,20 @@ Cotangent reciprocity does not annihilate the symmetric Vasyunin sum, and
 termwise bounds `|V(p,q)| << q log q` are far too large after absolute
 summation.
 
+### Audit incident and invariant
+
+The erroneous `-1/(ab)` survived one adversarial pass because that pass
+silently changed the inner-product domain to `(0,1)`. It was committed briefly
+and is corrected here explicitly. Future Gram audits must begin by writing the
+integration domain before applying `t=1/x`. The invariant is
+
+\[
+G^{(0,\infty)}_{ab}=G^{(0,1)}_{ab}+1/(ab),
+\]
+
+a positive rank-one tail correction. The target cross term is unchanged
+because `chi` vanishes for `x>1`.
+
 ## Next queued main-funnel step
 
 Derive exact small-`N` values of `mathcal W_N` in a symbolic field generated
@@ -426,3 +442,126 @@ and Bettin--Conrey reciprocity and seek a signed bilinear transform that
 preserves the Möbius coefficients. The next candidate lemma must give the
 displayed lower bound for `mathcal W_N` uniformly; any use of RH-level Mertens
 cancellation or unqualified cotangent cancellation is circular or false.
+
+## Tick 5 — exact small cases and the Estermann operator obstruction
+
+The script `verify_small_gram.py` checks the following identities symbolically.
+For `N=2`, the endpoint coefficient at `a=2` vanishes and
+
+\[
+\boxed{\|F_2\|_2^2=3+\log(2\pi)-3\gamma.}
+\]
+
+For `N=3`, put
+
+\[
+r=\frac{\log(3/2)}{\log3},\qquad a=1-r/2.
+\]
+
+Then `F_3=chi+rho_1-r rho_2` and
+
+\[
+\boxed{
+\|F_3\|_2^2=1-\log2+a(2-\log\pi-\gamma)
++2a^2(\log(2\pi)-\gamma).}
+\]
+
+These follow both from the full Gram entries
+
+\[
+G_{11}=C_0,\quad G_{22}=C_0/2,\quad
+G_{12}=(3C_0-\log2)/4
+\]
+
+and from splitting the transformed integral into alternating unit intervals.
+In the latter computation the interval `0<t<1` contributes the full-space
+tail and independently detects the forbidden restricted-domain subtraction.
+
+### Exact Estermann reindexing
+
+Let
+
+\[
+D_{\sin}(s,x)=\sum_{n\ge1}\tau(n)\sin(2\pi nx)n^{-s}
+\]
+
+by analytic continuation (or Abel limiting) at `s=1`. With our convention,
+
+\[
+V(p,q)=-\frac{2q}{\pi^2}D_{\sin}(1,p/q).
+\]
+
+Writing `a=dp`, `b=dq`, `(p,q)=1`, gives the sign-preserving identity
+
+\[
+\boxed{
+\mathcal V_N=-\frac2\pi\sum_{d\le N}\frac1d
+\sum_{\substack{p,q\le N/d\\(p,q)=1}}
+\frac{w_{dp}w_{dq}}pD_{\sin}(1,p/q).}
+\]
+
+The Abel limit is essential if the defining sine series is inserted; an
+unqualified interchange with the finite arithmetic sums is not permitted.
+
+Combining the elementary logarithmic kernel, define for `1<=p,q<=X`
+
+\[
+\begin{aligned}
+\mathsf H_X(p,q)=1_{(p,q)=1}\bigg[&-\frac1\pi\left(
+\frac{D_{\sin}(1,p/q)}p+\frac{D_{\sin}(1,q/p)}q\right)\\
+&+\frac{p-q}{2pq}\log(p/q)\bigg].
+\end{aligned}
+\]
+
+Then, with `w^(d)_p=w_(dp)`,
+
+\[
+\boxed{
+\mathcal W_N=\sum_{d\le N}\frac1d
+\langle w^{(d)},\mathsf H_{\lfloor N/d\rfloor}w^{(d)}\rangle.}
+\]
+
+This is exact and preserves every Möbius sign.
+
+### Decisive positivity failure
+
+The operator is indefinite already on indices `{1,2}`. Since the relevant
+Estermann sine values vanish there,
+
+\[
+\mathsf H_2|_{\{1,2\}}=
+\begin{pmatrix}0&\log2/4\\\log2/4&0\end{pmatrix},
+\]
+
+whose eigenvalues are `+-log(2)/4`. Thus no generic PSD argument can prove the
+required lower bound. More intrinsically, the symmetric Vasyunin kernel is an
+elementary rank-four kernel minus a positive fractional-part Gram kernel; it
+is nonpositive only after imposing two moment constraints, neither of which
+the route vectors satisfy identically.
+
+Sign-blind large-sieve bounds naturally lose a factor of order `N` and control
+absolute size rather than the required positive lower main term. Bettin--Conrey
+reciprocity also does not telescope after Möbius reindexing: the descendant
+pair is governed by a modular inverse, changing the Möbius factors, logarithmic
+weights, cutoff, and leaving a nonzero period-function remainder.
+
+### Candidate-strength audit
+
+The coarse `O(1/log N)` estimate for these particular approximants implies RH,
+but is not known to follow from RH alone. The sharp asymptotic is known under
+RH plus a reciprocal-derivative moment. Multiple zeros create higher
+principal parts in the contour formula, but current lower bounds do not prove
+that the coarse big-O estimate forces simplicity. The route must therefore
+describe its candidate honestly as an RH-implying explicit-rate conjecture,
+not as a theorem known equivalent to RH.
+
+## Next queued main-funnel step
+
+The exact operator reformulation is now complete and generic positivity is
+falsified. The next target is a **Möbius-vector-specific** identity: apply the
+Mellin representation of `w_(dp)` before Estermann reciprocity and derive a
+double-contour formula for `mathcal W_N` in which all poles and diagonal terms
+are explicit. Simultaneously seek a frequency-isolating lower bound for the
+multiple-zero residue contribution. A useful result must either (i) reveal a
+new positive main term for these exact vectors, or (ii) prove that the chosen
+`O(1/log N)` approximant conjecture is strictly stronger than RH.
