@@ -34,3 +34,14 @@ Tseitin equivalences and exact bidirectional unary counters. It is provisional
 until its auxiliary semantics are exhaustively tested against the independent
 small-graph oracles. Solver output is not a certificate before that gate and an
 independent DRAT/LRAT check both pass.
+
+Semantic regression commands now include:
+
+```sh
+python3 test_cnf_semantics.py
+```
+
+This exhaustively checks every threshold output through width eight and every
+exact-second membership bit for all 760 labelled oriented graphs through order
+four. It does not yet validate theorem-specific rooted/minimality clauses or
+replace an independent proof checker.

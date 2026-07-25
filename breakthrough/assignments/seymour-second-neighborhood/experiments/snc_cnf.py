@@ -40,6 +40,10 @@ def threshold(c, inputs, tag):
 
 
 def generate(n, bsize, missing):
+    if n < 9 + bsize:
+        raise ValueError("n must be at least 9+bsize for the rooted layers")
+    if not 0 <= missing <= n * (n - 1) // 2:
+        raise ValueError("missing count outside [0,C(n,2)]")
     c = CNF()
     a = [[c.var(f"a_{i}_{j}") for j in range(n)] for i in range(n)]
     q = [[c.var(f"q_{i}_{j}") for j in range(n)] for i in range(n)]
@@ -66,8 +70,9 @@ def generate(n, bsize, missing):
         upper = (n + 1) // 2
         if upper < n - 1: c.add(-outs[upper]) # d1 <= upper
         c.add(outs[0])
-        for t in range(1, n):                 # d2>=t => d1>=t+1
-            c.add(-secs[t-1], outs[t] if t < n-1 else -secs[t-1])
+        for t in range(1, n-1):               # d2>=t => d1>=t+1
+            c.add(-secs[t-1], outs[t])
+        c.add(-secs[n-2])                     # d2 cannot be n-1
         for t in range(3, n):                 # d1>=t => d2>=t-2
             c.add(-outs[t-1], secs[t-3])
     hs = []

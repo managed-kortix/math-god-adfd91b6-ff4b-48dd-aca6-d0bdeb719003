@@ -224,3 +224,22 @@ No audits yet.
 - **Immediate next experiment:** implement the semantic CNF test harness on all
   oriented graphs through order four, then add exact remainder-budget shards
   before further long runs.
+
+## 2026-07-25 — tick 7
+
+- Hostile clause audit found the core CNF semantics sound but identified missing
+  parameter validation and an opaque duplicated final strictness literal. Both
+  were repaired.
+- Added pure exhaustive CNF semantic tests. Exact bidirectional thresholds pass
+  every input through width eight; exact two-walk and exact-second clauses pass
+  every membership mutation on all 760 labelled oriented graphs through order
+  four. Existing independent graph verifiers still pass their 59,809-graph
+  order-five differential census.
+- Derived complete scalar frontiers for both five-missing-pair root branches.
+  In the B6 branch, `P6` reduces to 18 placement rows and 71 local ledgers after
+  immediate arc-minimality filters; B7 has exact individual two-vertex remainder
+  equations but still broad incidence freedom. See `attempts/tick7-order18-m5.md`.
+- **Next queued attack:** implement a canonical `P6`-placement shard generator
+  for the 71 B6 ledgers, including full arc-minimal gain/loss constraints. Any
+  UNSAT shard must emit and independently verify DRAT/LRAT; any SAT projection
+  must pass both graph verifiers.
