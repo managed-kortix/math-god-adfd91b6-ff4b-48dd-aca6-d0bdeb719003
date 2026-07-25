@@ -437,6 +437,45 @@ These oriented branch-correlation identities, together with PSD, are the
 current exact frontier.  Diagonal equations alone reproduce only the folded
 atom model.
 
+### Audited triangular-cactus routes
+
+Ning--Zeng's one-cycle phase proof strongly suggests the extension
+`s+>s-` for every block graph with only `K_2/K_3` blocks and at least one
+triangle.  Equivalently, after rooting the block tree and deleting one sibling
+edge from each triangle, the graph is a tree plus a matching of sibling pairs.
+Exhaustive tests through order 11 and broad random tests through order 100 found
+no counterexample.  The one-pair case is exactly Ning--Zeng's weighted Sachs
+argument.  The multipair statement remains unproved: the normalized
+characteristic polynomial can wind through several quadrants, so its principal
+argument does not control the continuous Coulson phase.  A proposed cavity
+proof was rejected in hostile audit because it did not state or prove an
+admissible-domain/lifted-angle invariant closed under multiple child blocks.
+The natural multivariate triangle-activity polynomial is not real stable, so
+Heilmann--Lieb stability cannot simply fill this gap.
+
+Induced partitions do rigorously remove every candidate having a pendant
+one-triangle lobe `U` with connected nonempty complement: Ning--Zeng gives
+`s+(U)>|U|`, and LTZ gives `s+(G-U)>=|G-U|-1`.  The exact residual has a
+branching triangular core: every terminal triangle is supported at a cut node
+of core degree at least three.  Domination-one results settle friendship-type
+bouquets, but currently known partition credits do not settle all branching
+cores.
+
+Several tempting local arguments have also been falsified exactly:
+
+* the diagonal PSD constraints are feasible (for example, a triangle with six
+  pendant leaves at each vertex admits `a_triangle=4/3` and
+  `a_leaf=3/16`);
+* bridge-tree Dirichlet response is unbounded near its poles, even under the
+  exact bridge inner product `-1/2`;
+* a claimed local `2/9` defect from `C=|A|`, `AC=CA`, and `C^2=A^2` holds only
+  for an isolated seven-vertex configuration.  External dense entries of
+  `|A|` add commutator and square terms and can cancel that defect.
+
+Thus the live choices are (i) prove the sibling-matching/continuous-phase
+theorem with a complete winding invariant, or (ii) exploit the oriented
+off-diagonal `PB=0` equations globally across the branching cyclic core.
+
 ## Research protocol
 
 This is now the sole primary proof object.  New agents, if used, receive this

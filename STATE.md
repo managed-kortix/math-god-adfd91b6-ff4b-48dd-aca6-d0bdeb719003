@@ -358,7 +358,15 @@ research/semantic, research/procedural).
    least two triangle blocks.  Applying LTZ to `A_+ o A_+` does not finish:
    its exact slack is `qT-4S^2`, and using `n-1` instead of `q` is circular.
    The current exact frontier is the off-diagonal branch-correlation system
-   from `A_+A_-=0`.  Shared proof object:
+   from `A_+A_-=0`.  Ning--Zeng suggests the stronger triangular-cactus sign
+   theorem `s+>s-`; exhaustive tests through order 11 and random tests through
+   order 100 support it, but a claimed cavity proof failed hostile audit because
+   its lifted-angle invariant was unstated.  Equivalent matrix target: a tree
+   plus a nonempty matching of sibling pairs has positive signed square energy.
+   The one-pair case is proved by weighted Sachs/Coulson; the multipair winding
+   problem is open.  Diagonal PSD, scalar tree-response, generic stability, and
+   a purported local `2/9` square defect were all exactly shown insufficient.
+   Shared proof object:
    `positive-square-energy/equality-pivot.md`.
 1. Assemble the complete weighted-theta theorem paper from the signed-square
    bare theorem, local four-fifths reduction, and direct exception gates.
