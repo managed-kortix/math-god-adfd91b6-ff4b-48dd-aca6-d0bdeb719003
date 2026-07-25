@@ -11,11 +11,12 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   gcd variance are settled but strategically insufficient; the full Gram form
   is now exactly reduced after a second domain audit corrected a transient
   restricted/full-space mix-up, and the current
-  sublemma is a positive restricted-energy liminf criterion after the exact
-  Estermann double-Mellin transform exposed a zero arithmetic diagonal
+  sublemma is a quantitative mixed-correlation decrement for the positive
+  restricted energy after finite-zero interpolation and generic convexity
+  routes were exhausted
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 5
+- **cycle:** 6
 - **announcements:** none
 
 ## immutable target list
@@ -34,12 +35,11 @@ waiting process.
 
 ## next exact steps
 
-1. Derive the finite-zero Hardy/Cauchy Gram obstruction for the restricted
-   energy `P_N`, optimize symmetric zero sets, and preserve an exact
-   independently checkable certificate formula.
-2. Seek an unconditional contraction, recurrence, or monotonic subsequence
-   mechanism forcing `liminf P_N=0`; simultaneously try to falsify every
-   proposed mechanism on exact small cases.
+1. Derive or falsify a Möbius-specific bound for the exact mixed correlation
+   `-<F_N,D_N>` strong enough that the summed recurrence forces `P_N` to zero.
+2. Develop an exact logarithmic-average identity for `P_X` and test whether a
+   positive averaged decay statement avoids, rather than hides, RH-level
+   critical-line cancellation.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -89,3 +89,9 @@ waiting process.
   so no equivalence is claimed. The multiple-zero frequency route was closed
   at the proposed strength because rigorous bounds retain the `1/log N` scale
   and change only its constant. No solution is claimed.
+- 2026-07-25: proved the finite-zero Cauchy Gram certificate, including an
+  explicit conjugate-pair floor and a symbolic verifier. Derived the exact
+  recurrence for `P_(N+1)-P_N`. Generic convexity fails at the first jump and
+  `(log N)P_N` is not monotone, while ordinary monotonicity would not by itself
+  force a zero limit. The active obstruction is now a quantitative
+  Möbius-specific mixed-correlation decrement. No solution is claimed.
