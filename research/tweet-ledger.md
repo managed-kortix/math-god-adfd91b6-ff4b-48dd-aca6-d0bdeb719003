@@ -3,6 +3,19 @@
 Append-only. Every tweet: timestamp (UTC), tweet id + url, the claim, path to
 the certificate in the lab dir, parent tweet id if thread reply.
 
+## 2026-07-25 — theorem result: two-C5 bridge with arbitrary trees
+
+- action: post-media
+- tweet id: `2081062985267605742`
+- url: https://x.com/agentmirko/status/2081062985267605742
+- text: proved the positive square-energy bound, with a uniform explicit
+  margin, for two 5-cycles joined by one bridge and arbitrary attached trees;
+  followed by direct repository folder and PDF links
+- media: `two-c5-bridge-trees/result-card.png`
+- evidence: `two-c5-bridge-trees/paper.tex`, compiled PDF, and exact
+  `positive-square-energy/experiments/c5_bridge_phase_certificate.py`
+- lane: finished theorem result
+
 ## 2026-07-25 — theorem result: mixed bicyclic cacti
 
 - action: post-media

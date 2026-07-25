@@ -357,6 +357,7 @@ research/semantic, research/procedural).
    phase domination by the bare core.  Two independent final audits passed.
    Paper: `two-c5-bridge-trees/`; certificate:
    `positive-square-energy/experiments/c5_bridge_phase_certificate.py`.
+   Announcement: X post `2081062985267605742`.
 0. NEW VERIFIED RESULT (2026-07-25): the entire mixed residual family is
    closed.  If a connected bicyclic cactus has cyclic blocks `C3` and
    `C_q`, `q=4k+1>=5`, then for arbitrary shared-cut or connector-path
