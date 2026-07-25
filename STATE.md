@@ -334,6 +334,22 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
+0. LITERATURE PIVOT (2026-07-24): Liu--Tang--Zhang, arXiv:2607.18031,
+   submitted 2026-07-20, proves the original EFGW theorem
+   `min{s+,s-}>=n-1` for every connected graph.  The proof and Lean 4
+   formalization were independently checked; see
+   `research/literature-audit-2026-07-24.md`.  This does not settle AKMPZ
+   Conjecture 1.2 (`m>=n+1 => s+>=n`) or subsume our stronger theta results.
+   Immediate primary target: characterize equality in the new DNN proof,
+   beginning with AKMPZ Conjecture 9.2 (`s+=n-1` iff tree).  Work in a
+   sequential shared-proof funnel; use only a small proof/audit team unless
+   a task is genuinely separable.
+   Equality trace completed to one missing structural lemma: if `B=A_-` and
+   `s+=n-1`, then every edge in a block `H` has
+   `B_uv=-(2|E(H)|-|V(H)|+1)/(2|E(H)|)`.  Bridges give `-1/2`; cyclic blocks
+   would give a constant strictly below `-1/2` on every block edge.  Prove
+   this cannot occur using `A=P-B`, `PB=0`.  Shared proof object:
+   `positive-square-energy/equality-pivot.md`.
 1. Assemble the complete weighted-theta theorem paper from the signed-square
    bare theorem, local four-fifths reduction, and direct exception gates.
 1. Prove edge-addition threshold preservation or find counterexample:
