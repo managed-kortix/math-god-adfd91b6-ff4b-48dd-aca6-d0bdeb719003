@@ -16,6 +16,22 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-25: advanced the connected promotion frontier with an exact
+  positive-subspace compression theorem. For symmetric `A,C`, with `P=A_+`,
+  positive projector `Pi`, and `K=Pi C Pi`, the PSD witness `Y=P+K_+` gives
+  `s+(A+C)>=s+(A)+2tr(CP)+s+(K)`. Thus for any spanning connected
+  bicyclic `H` of `G`, all omitted edges can be promoted collectively:
+  `s+(G)>=s+(H)+4 sum_omitted (A(H)_+)uv+s+(Pi_H C Pi_H)`.
+  A hostile audit verified every cross term and noncommuting low-dimensional
+  cases. Also recorded convexity along an edge path,
+  `f'(t)=4(A+tE)_+,uv`, and an exact negative-part correction from the
+  witness `A_+ + s yy^T`. Convexity does not imply monotonicity. Proof object:
+  `research/spanning-bicyclic-compression-2026-07-25.md`.
+  Hostile audit simultaneously rejected a tempting safe-P3 finite reduction:
+  deleting a safe vertex can leave pendant pieces on a bicyclic core, outside
+  the proved bare theorem. The conditional combinatorics were retained but
+  prominently marked unproved in
+  `positive-square-energy/experiments/one-edge-bicyclic-reduction.md`.
 - 2026-07-25: completed the universal block-graph manuscript proof. Every
   connected non-tree block graph satisfies `s+>n`. A maximum cycle packing
   gives induced packing-one territories; each territory's cyclic blocks are
@@ -507,8 +523,15 @@ research/semantic, research/procedural).
     extremal `Theta(2,2,6)` value is exactly `-0.1246033669... > -1/8`.
     WARNING: this proves at most one edge-addition step from a bare theta;
     it does not iterate, because the guaranteed surplus falls from 4/5 to
-    3/10.  Universal promotion still needs the adaptive local inequality at
-     every intermediate graph or a quantitative curvature theorem.
+     3/10.  Universal promotion still needs the adaptive local inequality at
+      every intermediate graph or a quantitative curvature theorem.
+     A new collective alternative avoids iteration: for a spanning connected
+     bicyclic `H`, put `C=A(G)-A(H)` and let `Pi_H` be its positive spectral
+     projector. The exact certificate
+     `s+(G)>=s+(H)+4 sum_omitted (A(H)_+)uv+s+(Pi_H C Pi_H)`
+     reduces promotion to finding one favorable bicyclic basis. Next run an
+     exact basis search on low-surplus graphs and seek a cycle-matroid exchange
+     theorem; see `research/spanning-bicyclic-compression-2026-07-25.md`.
      DISCONNECTED VERSION REFUTED EXACTLY: `X=D disjoint-union 117 C5
      disjoint-union C13`, with `D` graph6 `HQzV]zn`, has order 607 and
      `s+(X)-607 in (0.016010949050374,0.016010949050375)`, while adding
