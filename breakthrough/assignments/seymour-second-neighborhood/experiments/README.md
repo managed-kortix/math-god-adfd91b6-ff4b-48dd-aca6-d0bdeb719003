@@ -53,3 +53,8 @@ the deletion. This mode has been clause-audited, but its selector and deficit
 families still require dedicated exhaustive semantic tests before certificate
 use. Those tests now cover exact `mu2` linkage through width eight and 3,003
 graph/deletion witness cases through order four.
+
+Order-18 normal-form options include `--high` for the exact comma-separated
+degree-nine labels and `--force-witness w,u` for a distinguished robust
+selector. An empty `--high ''` means every vertex has degree eight. These are
+shard constraints, not consequences valid at arbitrary order.

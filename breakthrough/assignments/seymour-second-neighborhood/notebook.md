@@ -287,3 +287,23 @@ No audits yet.
 - **Next queued attack:** add simultaneous robust-witness constraints for both
   high vertices to the `m=7` shards, and encode missing-degree shape shards for
   `m=9` (perfect matching already eliminated, isolated-vertex shapes remain).
+
+## 2026-07-25 — tick 12
+
+- Added exact degree-nine label and distinguished robust-selector options to the
+  deterministic CNF generator. The production helpers retain all exhaustive
+  semantic test passes.
+- Ran the first fully robust, witness-rooted `m=8` B7 shard with the unique
+  degree-nine vertex fixed. CaDiCaL remained `UNKNOWN` after 900 seconds; no
+  proof artifact or mathematical conclusion was retained. This confirms that
+  missing-degree/C-row sharding is required before further long runs.
+- Intersected simultaneous robust-witness zones for the two high vertices in
+  `m=7`, producing explicit common-missing-edge and high-high support gadgets;
+  see `attempts/tick12-simultaneous-witnesses.md`.
+- Parameterized all residual `m=9` missing graphs with isolates by excess-degree
+  partitions and high-vertex cores. The perfect matching and one-high-vertex
+  (star-plus-matching) families are eliminated; core families remain.
+- **Next queued attack:** implement exact cellwise missing-degree sequence
+  constraints, beginning with the five `m=8` C rows. Generate standalone CNFs
+  per sequence and require DRAT/LRAT verification rather than another baseline
+  timeout.

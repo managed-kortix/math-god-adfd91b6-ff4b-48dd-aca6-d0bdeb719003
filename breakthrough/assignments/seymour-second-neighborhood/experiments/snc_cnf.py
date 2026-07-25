@@ -64,13 +64,21 @@ def add_witness_for_deleted(c, n, u, a, q, pvar, mu2):
     c.add(*witnesses)
 
 
-def generate(n, bsize, missing, robust_witness=False):
+def generate(n, bsize, missing, robust_witness=False, high_vertices=None,
+             forced_witness=None):
     if bsize not in (6, 7):
         raise ValueError("bsize must be 6 or 7")
     if n < 9 + bsize:
         raise ValueError("n must be at least 9+bsize for the rooted layers")
     if not 0 <= missing <= n * (n - 1) // 2:
         raise ValueError("missing count outside [0,C(n,2)]")
+    high_vertices=None if high_vertices is None else set(high_vertices)
+    if high_vertices is not None and any(v < 0 or v >= n for v in high_vertices):
+        raise ValueError("high vertex outside range")
+    if forced_witness is not None:
+        w,u=forced_witness
+        if not robust_witness or w==u or min(w,u)<0 or max(w,u)>=n:
+            raise ValueError("invalid forced witness")
     c = CNF()
     a = [[c.var(f"a_{i}_{j}") for j in range(n)] for i in range(n)]
     q = [[c.var(f"q_{i}_{j}") for j in range(n)] for i in range(n)]
@@ -110,6 +118,9 @@ def generate(n, bsize, missing, robust_witness=False):
         # z=false forces deficit one; z=true forces deficit at least two.
         # Together with the base deficit-in-{1,2} clauses, z is exact.
         add_mu2_link(c, outs, secs, z)
+        # In order-18 normal-form shards all degrees are exactly eight or nine.
+        if high_vertices is not None:
+            c.add(outs[8] if i in high_vertices else -outs[8])
     hs = []
     for i in range(n):
         for j in range(i + 1, n):
@@ -130,6 +141,8 @@ def generate(n, bsize, missing, robust_witness=False):
         # old exact second neighbor of w loses all two-walks when u is removed.
         for u in range(n):
             add_witness_for_deleted(c,n,u,a,q,pvar,mu2)
+        if forced_witness is not None:
+            c.add(c.var(f"wit_{forced_witness[0]}_{forced_witness[1]}"))
     return c
 
 
@@ -138,7 +151,12 @@ def main():
     p.add_argument('--b-size',type=int,choices=(6,7),required=True)
     p.add_argument('--missing',type=int,required=True); p.add_argument('--output',required=True)
     p.add_argument('--robust-witness',action='store_true')
-    x=p.parse_args(); c=generate(x.n,x.b_size,x.missing,x.robust_witness)
+    p.add_argument('--high',help='comma-separated exact degree-nine vertices; empty string means none')
+    p.add_argument('--force-witness',help='w,u selector to force')
+    x=p.parse_args()
+    high=None if x.high is None else tuple(int(v) for v in x.high.split(',') if v!='')
+    fw=tuple(map(int,x.force_witness.split(','))) if x.force_witness else None
+    c=generate(x.n,x.b_size,x.missing,x.robust_witness,high,fw)
     with open(x.output,'w',encoding='ascii',newline='\n') as f:
         for name,num in c.names.items(): f.write(f"c var {num} {name}\n")
         f.write(f"p cnf {len(c.names)} {len(c.clauses)}\n")
