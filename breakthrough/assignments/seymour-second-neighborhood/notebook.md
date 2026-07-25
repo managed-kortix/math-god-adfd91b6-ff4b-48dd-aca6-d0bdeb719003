@@ -191,3 +191,36 @@ No audits yet.
 - **Next queued attack:** focus order 18 on `m=3,...,9`, encode exact B6/B7
   remainder budgets, and begin a deterministic CNF/LRAT pipeline so any
   computational elimination is independently checkable.
+
+## 2026-07-25 — tick 6
+
+- Proved a complete human contradiction for the order-18 `|B|=6,m=3` shard.
+  Exact budget forces the three remainder vertices to form a directed triangle,
+  and deleting a triangle arc has no gain but loses its unique second endpoint,
+  contradicting arc minimality. See `attempts/tick6-n18-b6-m3.md`.
+- Literature classification extends blanket near-tournament coverage through
+  four missing pairs: every three-edge missing graph is matching plus a star;
+  every four-edge graph is covered by that theorem except `C4`, handled
+  separately. No arbitrary-forest theorem exists in the verified sources, and
+  `P6` shows why `m=5` is a new structural threshold. See
+  `agents/tick6-missing-classes.md`.
+- Consequently all order-18 shards `m<=4` are eliminated. Remaining order-18
+  search is exactly `m=5,6,7,8,9` in both root branches.
+- **Next queued attack:** classify the possible missing graphs at `m=5` under
+  the exact B6/B7 budgets, first trying to force a known missing-graph class;
+  in parallel implement the deterministic CNF generator and DRAT checker path
+  for residual shapes.
+
+### CNF scout
+
+- Added an initial deterministic plain-CNF generator with exact adjacency,
+  two-walk, exact-second, degree, deficit, missing-count, and rooted-layer
+  semantics. CaDiCaL scouts on both `m=5` root branches remained `UNKNOWN` after
+  900 seconds, confirming that unsharded baseline search is too weak.
+- No proof or model was retained from those interrupted runs. The generator is
+  provisional until exhaustive semantic mutation tests validate its
+  bidirectional counters and every SAT projection is decoded by both graph
+  verifiers.
+- **Immediate next experiment:** implement the semantic CNF test harness on all
+  oriented graphs through order four, then add exact remainder-budget shards
+  before further long runs.

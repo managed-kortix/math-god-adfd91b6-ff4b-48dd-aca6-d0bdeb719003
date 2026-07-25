@@ -28,3 +28,9 @@ external verifiers pass. An `unknown` result has no mathematical force, and an
 then arc-minimal counterexample: every vertex has a tight in-neighbor witness,
 and every present arc satisfies the exact gain/lost-second-endpoint deletion
 inequality. These are not part of an unrestricted fixed-order model.
+
+`snc_cnf.py` is an initial deterministic plain-CNF implementation using full
+Tseitin equivalences and exact bidirectional unary counters. It is provisional
+until its auxiliary semantics are exhaustively tested against the independent
+small-graph oracles. Solver output is not a certificate before that gate and an
+independent DRAT/LRAT check both pass.
