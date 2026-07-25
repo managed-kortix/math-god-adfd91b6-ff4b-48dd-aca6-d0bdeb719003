@@ -1953,3 +1953,32 @@ The ordinary one-argument arctangent is unsafe because the bare real part is
 negative near zero.  Two final hostile audits checked the cubic sign, exact
 factorization, cross-product orientation, branch tracking, and Coulson
 constants.  Paper: `two-c5-bridge-trees/`.
+# 2026-07-25: all positive-length connectors between two C5 blocks
+
+Closed the final disjoint-two-pentagon frontier.  Let two vertex-disjoint
+`C5` blocks be joined by any positive-length path and allow arbitrary attached
+trees.  Then
+
+`s+(G)>n+5-2sqrt5>n`.
+
+Trees at cycle vertices are retained in actual unicyclic lobes `X1,X2`, rooted
+on their cycles.  Their normalized carriers `z_i` lie in the first quadrant,
+while `w_i=Psi_(Xi-root)>0`, so `r_i=w_i/z_i` lies strictly in the fourth
+quadrant.  Internal connector trees become positive activities `a_j`.
+
+The exact factorization is `Psi_G=positive*z1*z2*F`, where, with `m` internal
+connector vertices,
+
+- `F=1+r1r2` for `m=0`;
+- `F=a1+r1+r2` for `m=1`;
+- `F=K(a1+r1,a2,...,am+r2)` for `m>=2`.
+
+Multiaffinity gives `F=A+B r1+C r2+D r1r2` with positive real coefficients,
+so `Im F<0`.  The grouped Sachs expansion gives `Im Psi_G>0`, fixing the
+branch and proving `0<Theta_G<Theta_X1+Theta_X2`.  Thus
+`D(G)>D(X1)+D(X2)>=2D(C5)=8-4sqrt5`, which yields the stated bound.
+
+This does not compare to the bare connector core; that pointwise comparison
+is false under internal attachments.  It compares to the two actual lobe
+phases.  Two independent final audits and 70 exact symbolic/random connector
+factor checks passed.  Paper: `two-c5-all-connectors/`.

@@ -1,0 +1,371 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Arg}{\operatorname{Arg}}
+\newcommand{\tr}{\operatorname{tr}}
+
+\title{Positive Square Energy for Two Pentagons Joined by an Arbitrary Path}
+\author{}
+\date{25 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove a uniform positive-square-energy bound for every connected cactus
+whose only cyclic blocks are two vertex-disjoint pentagons.  The pentagons may
+be joined by a path of any positive length, and arbitrary trees may be attached
+anywhere.  If the graph has order $n$, then
+\[
+ s^+(G)>n+5-2\sqrt5>n.
+\]
+The proof does not compare the graph with its bare bicyclic core: attached
+trees can increase that core's pointwise Coulson phase.  Instead, the joining
+path is factored exactly, and the phase of the joined graph is compared with
+the sum of the phases of the two actual unicyclic lobes.
+\end{abstract}
+
+\section{Statement and notation}
+
+All graphs are finite, simple, and undirected.  If the adjacency eigenvalues
+of a graph $H$ are $\lambda_1,\ldots,\lambda_h$, put
+\[
+ s^+(H)=\sum_{\lambda_j>0}\lambda_j^2,
+ \qquad
+ s^-(H)=\sum_{\lambda_j<0}\lambda_j^2,
+ \qquad
+ D(H)=s^+(H)-s^-(H).
+\]
+
+\begin{theorem}\label{thm:main}
+Let $G$ be a connected cactus whose only cyclic blocks are two copies of
+$C_5$.  Suppose that the two cycles are vertex-disjoint and that the unique
+path joining them has positive length.  Arbitrary trees may be attached at
+any vertices of the cycles or the joining path.  If $n=|V(G)|$, then
+\begin{equation}\label{eq:main}
+ s^+(G)>n+5-2\sqrt5>n.
+\end{equation}
+\end{theorem}
+
+Thus the theorem includes a single bridge between the cycles and every longer
+joining path.  It does not include the bouquet in which the two pentagons
+share a vertex; that graph has no positive-length path with distinct cycle
+endpoints and requires a separate theorem.
+
+\section{Normalized characteristic polynomials}
+
+For a graph $F$, define its signless matching partition by
+\begin{equation}\label{eq:Z-unweighted}
+ Z_F(t)=\sum_M t^{|V(F)|-2|M|},
+\end{equation}
+where the sum is over all matchings.  More generally, for positive vertex
+activities $a=(a_v)$, write
+\begin{equation}\label{eq:Z-weighted}
+ Z_F(a)=\sum_M\prod_{v\text{ unmatched by }M}a_v.
+\end{equation}
+All edge activities are one.  Every such partition is positive.
+
+For a graph $H$ of order $h$, let
+\begin{equation}\label{eq:Psi}
+ \Psi_H(t)=i^{-h}\det(itI-A(H))
+          =\prod_{j=1}^h(t+i\lambda_j),
+ \qquad t>0.
+\end{equation}
+Grouping Sachs' expansion by its collection $\mathcal C$ of pairwise
+vertex-disjoint cycle components gives
+\begin{equation}\label{eq:Sachs}
+ \Psi_H(t)=\sum_{\mathcal C}
+ \prod_{C\in\mathcal C}(-2i^{-|C|})
+ Z_{H-V(\mathcal C)}(t).
+\end{equation}
+Indeed, after the cycles are fixed, the remaining elementary components are
+a matching; substitution of $it$ changes its alternating matching polynomial
+into~\eqref{eq:Z-unweighted}.  In particular, a pentagon has multiplier
+\begin{equation}\label{eq:C5-multiplier}
+ -2i^{-5}=2i.
+\end{equation}
+
+We use the continuous argument
+\begin{equation}\label{eq:continuous-argument}
+ \Theta_H(t)=\sum_{j=1}^h\arctan\frac{\lambda_j}{t},
+ \qquad -\frac\pi2<\arctan x<\frac\pi2.
+\end{equation}
+It is the continuous argument of~\eqref{eq:Psi} that tends to zero as
+$t\to\infty$.
+
+\begin{lemma}[Signed Coulson identity]\label{lem:coulson}
+For every graph $H$,
+\begin{equation}\label{eq:Coulson}
+ D(H)=-\frac4\pi\int_0^\infty t\Theta_H(t)\,dt.
+\end{equation}
+The integral is absolutely convergent.
+\end{lemma}
+
+\begin{proof}
+For every real $\lambda$,
+\[
+ \lambda|\lambda|=\frac2\pi\int_0^\infty
+ \frac{\lambda^3}{\lambda^2+t^2}\,dt.
+\]
+Also
+\[
+ \Theta_H'(t)=-\sum_j\frac{\lambda_j}{\lambda_j^2+t^2},
+ \qquad
+ \sum_j\frac{\lambda_j^3}{\lambda_j^2+t^2}
+ =-t^2\sum_j\frac{\lambda_j}{\lambda_j^2+t^2},
+\]
+where $\sum_j\lambda_j=\tr A(H)=0$ was used in the second identity.
+Summing the scalar formula and integrating by parts therefore gives
+\eqref{eq:Coulson}.  At zero, $t^2\Theta_H(t)\to0$.  At infinity,
+$\sum_j\lambda_j=0$ and the arctangent expansion give
+$\Theta_H(t)=O(t^{-3})$.  These estimates also prove absolute convergence.
+\end{proof}
+
+\section{Tree splitting and the two actual lobes}
+
+Let the joining path have endpoints $u_1$ and $u_2$ on the two pentagons and
+let it have $m\geq0$ internal vertices.  Thus $m=0$ is the bridge case.  Put
+into $X_i$ the $i$th pentagon together with every tree branch attached at its
+cycle vertices, and root $X_i$ at $u_i$.  The graphs $X_1,X_2$ are the
+\emph{actual} pentagonal unicyclic lobes; no cycle attachment is discarded.
+Only tree branches attached to internal vertices of the joining path remain
+to be eliminated.
+
+We record the elementary matching belief-propagation split.  Orient a rooted
+tree branch toward the path.  If $x\to p$ is an oriented edge and $T_{x\to p}$
+is the component below $x$, including $x$, set
+\begin{equation}\label{eq:message}
+ q_{x\to p}(t)=\frac{Z_{T_{x\to p}}(t)}{Z_{T_{x\to p}-x}(t)}.
+\end{equation}
+Splitting a matching according to the status of $x$ gives
+\begin{equation}\label{eq:BP}
+ q_{x\to p}(t)=t+
+ \sum_{y\text{ child of }x}\frac1{q_{y\to x}(t)}\geq t>0.
+\end{equation}
+After all path-internal branches are split off, the $j$th internal path
+vertex has a positive effective activity
+\begin{equation}\label{eq:activity}
+ a_j(t)=t+\sum_{x\text{ attached at }j}\frac1{q_{x\to j}(t)}>0,
+\end{equation}
+and all terms have a common positive real prefactor
+\begin{equation}\label{eq:B0}
+ B_0(t)=\prod_{x\to j\text{ at an internal path vertex}}
+ Z_{T_{x\to j}}(t)>0.
+\end{equation}
+To verify the common factor even when a vertex is removed by a matching edge,
+note that extracting $Z_T$ gives the edge into a branch the weight
+$Z_{T-x}/Z_T=1/q_{x\to j}$.  If the path vertex is not retained, the detached
+branch contributes its full factor $Z_T$.  Thus no hidden quotient remains.
+
+Define
+\begin{equation}\label{eq:zwr}
+ z_i=\Psi_{X_i}(t),
+ \qquad
+ w_i=\Psi_{X_i-u_i}(t),
+ \qquad
+ r_i=\frac{w_i}{z_i}.
+\end{equation}
+The graph $X_i-u_i$ is a forest, so $w_i=Z_{X_i-u_i}(t)>0$.  Formula
+\eqref{eq:Sachs} applied to the unique pentagon of $X_i$ gives
+\begin{equation}\label{eq:lobe-quadrant}
+ z_i=Z_{X_i}(t)+2iZ_{X_i-V(C_5)}(t).
+\end{equation}
+Both displayed matching partitions are positive.  Hence $z_i$ is in the
+open first quadrant.  Writing
+\begin{equation}\label{eq:r-coordinates}
+ r_i=x_i-iy_i
+\end{equation}
+therefore gives $x_i>0$ and $y_i>0$: each $r_i$ is in the open fourth
+quadrant.  Put $\theta_i=\Arg z_i\in(0,\pi/2)$.
+
+\section{The exact connector factor}
+
+For a list of variables define the continuant by
+\begin{equation}\label{eq:continuant}
+ K()=1,\qquad K(b_1)=b_1,\qquad
+ K(b_1,\ldots,b_k)=b_kK(b_1,\ldots,b_{k-1})
+                    +K(b_1,\ldots,b_{k-2}).
+\end{equation}
+
+\begin{proposition}[Connector factor]\label{prop:connector}
+With the preceding notation,
+\begin{equation}\label{eq:factorization}
+ \Psi_G(t)=B_0(t)z_1z_2F(t),
+\end{equation}
+where
+\begin{equation}\label{eq:F-cases}
+ F=\begin{cases}
+ 1+r_1r_2,&m=0,\\
+ a_1+r_1+r_2,&m=1,\\
+ K(a_1+r_1,a_2,\ldots,a_{m-1},a_m+r_2),&m\geq2.
+ \end{cases}
+\end{equation}
+Moreover, $\operatorname{Im}F<0$.
+\end{proposition}
+
+\begin{proof}
+First ignore the already extracted factor $B_0$.  In each grouped Sachs term,
+split matchings along the joining path.  Summing over the two possible Sachs
+states inside a lobe gives $z_i$ when its boundary edge is unused; using that
+edge deletes the root and gives $w_i$.  Thus $w_i/z_i=r_i$ records use of the
+boundary edge at the $i$th lobe.  For $m=0$, the bridge is either unused or used, giving
+$1+r_1r_2$.  For $m=1$, the internal vertex is unmatched, or is matched to
+exactly one boundary, giving $a_1+r_1+r_2$.  For $m\geq2$, the usual last-edge
+split for path matchings is exactly recurrence~\eqref{eq:continuant}, with
+the two boundary contributions added to the first and last activities.  This
+proves~\eqref{eq:factorization}--\eqref{eq:F-cases}.
+
+For the sign of the imaginary part, expand
+\begin{equation}\label{eq:ABCD}
+ F=A+Br_1+Cr_2+Dr_1r_2.
+\end{equation}
+Here $B$ is the coefficient of $r_1$ and $C$ is the coefficient of $r_2$.
+For $m=0$ one has $(A,B,C,D)=(1,0,0,1)$, while for $m=1$ one has
+$(A,B,C,D)=(a_1,1,1,0)$.  If $m\geq2$, the matching expansion of the
+continuant shows that all four coefficients are positive: $A,B,C,D$ are the
+positive partition sums obtained by prescribing neither, only the left,
+only the right, or both boundary edges, respectively.  These four classes
+are nonempty for every $m\geq2$.
+
+Using~\eqref{eq:r-coordinates},
+\begin{equation}\label{eq:ImF}
+ \operatorname{Im}F
+ =-By_1-Cy_2-D(x_1y_2+x_2y_1)<0.
+\end{equation}
+For $m=0$ the last term is strictly negative; for $m=1$ the middle two terms
+are strictly negative; and for $m\geq2$ all three displayed contributions
+are negative.  This proves the assertion in every case.
+\end{proof}
+
+The identities in Proposition~\ref{prop:connector} are independently
+corroborated by the exact symbolic and random-cactus audit script
+\begin{center}
+\texttt{positive-square-energy/experiments/connector\_factor\_audit.py}.
+\end{center}
+The script is not needed for the proof.
+
+\section{Strict phase comparison}
+
+\begin{proposition}\label{prop:phase}
+For every $t>0$,
+\begin{equation}\label{eq:phase-bound}
+ 0<\Theta_G(t)<\theta_1(t)+\theta_2(t).
+\end{equation}
+Consequently,
+\begin{equation}\label{eq:D-split}
+ D(G)>D(X_1)+D(X_2).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Because the only cycles of $G$ are its two pentagons, the imaginary part of
+the grouped Sachs expansion~\eqref{eq:Sachs} is exactly
+\begin{equation}\label{eq:whole-upper}
+ \operatorname{Im}\Psi_G(t)
+ =2Z_{G-V(C_5^{(1)})}(t)+2Z_{G-V(C_5^{(2)})}(t)>0.
+\end{equation}
+The empty-cycle and double-cycle terms are real.  Thus $\Psi_G(t)$ lies in
+the open upper half-plane, and its continuous argument satisfies
+$0<\Theta_G(t)<\pi$.
+
+By Proposition~\ref{prop:connector}, the principal argument
+$\varphi=\Arg F$ belongs to $(-\pi,0)$.  Since
+$\theta_1+\theta_2\in(0,\pi)$, the number
+$\theta_1+\theta_2+\varphi$ lies in $(-\pi,\pi)$ and is congruent modulo
+$2\pi$ to $\Theta_G$.  It cannot be nonpositive: adding $2\pi$ would then
+put the corresponding argument in $(\pi,2\pi)$, contradicting
+$0<\Theta_G<\pi$.  Therefore
+\begin{equation}\label{eq:branch-identity}
+ \Theta_G=\theta_1+\theta_2+\Arg F,
+\end{equation}
+and~\eqref{eq:phase-bound} follows strictly from $\Arg F<0$.
+
+Apply the Coulson identity to $G,X_1,X_2$.  All three phase integrals converge,
+and the integrand
+$t(\theta_1+\theta_2-\Theta_G)$ is continuous and strictly positive on
+$(0,\infty)$.  Hence
+\[
+ D(G)-D(X_1)-D(X_2)
+ =\frac4\pi\int_0^\infty
+ t(\theta_1+\theta_2-\Theta_G)\,dt>0,
+\]
+which is~\eqref{eq:D-split}.
+\end{proof}
+
+This is deliberately not a comparison with the phase of the bare two-cycle
+core.  Such a comparison is false in general: attachments may increase the
+bare-core phase pointwise.  The valid comparison is with the sum of the
+phases of the actual lobes $X_1$ and $X_2$, after which the connector supplies
+the strictly negative phase $\Arg F$.
+
+\section{The pentagonal lobe bound}
+
+\begin{lemma}\label{lem:lobe}
+If $X$ is a unicyclic graph whose unique cycle is $C_5$, then
+\begin{equation}\label{eq:lobe-D}
+ D(X)\geq D(C_5)=4-2\sqrt5.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Apply the same branch split~\eqref{eq:message}--\eqref{eq:BP} to all trees
+attached to the five cycle vertices.  It gives a common positive factor and
+effective cycle activities $b_v=t+y_v\geq t$.  Formula~\eqref{eq:Sachs}
+becomes
+\begin{equation}\label{eq:weighted-cycle}
+ \Psi_X(t)=K_0(t)\bigl(Z_{C_5}(b)+2i\bigr),
+ \qquad K_0(t)>0.
+\end{equation}
+The weighted matching partition has nonnegative coefficients in all vertex
+activities, so
+\begin{equation}\label{eq:subpartition}
+ Z_{C_5}(b)\geq Z_{C_5}(t).
+\end{equation}
+Both quantities in~\eqref{eq:weighted-cycle} lie in the first quadrant.
+Consequently
+\[
+ 0<\Theta_X(t)=\arctan\frac2{Z_{C_5}(b)}
+ \leq\arctan\frac2{Z_{C_5}(t)}=\Theta_{C_5}(t).
+\]
+The Coulson identity yields $D(X)\geq D(C_5)$.
+
+For completeness, the eigenvalues of $C_5$ are
+$2\cos(2\pi j/5)$ for $0\leq j<5$.  Its positive eigenvalues are $2$ and
+$(\sqrt5-1)/2$ with multiplicity two; hence
+\[
+ s^+(C_5)=4+2\left(\frac{\sqrt5-1}{2}\right)^2
+          =7-\sqrt5.
+\]
+Since $C_5$ has five edges,
+$s^+(C_5)+s^-(C_5)=\tr A(C_5)^2=10$, and therefore
+$D(C_5)=2s^+(C_5)-10=4-2\sqrt5$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Proposition~\ref{prop:phase} and Lemma~\ref{lem:lobe} give
+\begin{equation}\label{eq:final-D}
+ D(G)>2(4-2\sqrt5)=8-4\sqrt5.
+\end{equation}
+The connected graph $G$ has cycle rank two, so if $e=|E(G)|$, then
+$e=n+1$.  Therefore
+\[
+ s^+(G)+s^-(G)=\tr A(G)^2=2e=2n+2.
+\]
+Averaging this identity with~\eqref{eq:final-D} proves
+\[
+ s^+(G)=n+1+\frac{D(G)}2
+ >n+1+4-2\sqrt5=n+5-2\sqrt5.
+\]
+Finally, $5-2\sqrt5>0$ because $25>20$, completing the proof.
+\end{proof}
+
+\end{document}

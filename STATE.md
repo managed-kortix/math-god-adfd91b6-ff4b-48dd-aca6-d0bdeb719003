@@ -349,6 +349,17 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
+0. NEW VERIFIED RESULT (2026-07-25): the final disjoint-two-pentagon frontier
+   is closed.  If a connected cactus has two vertex-disjoint `C5` cyclic
+   blocks joined by any positive-length path, with arbitrary trees attached
+   anywhere, then `s+(G)>n+5-2sqrt(5)>n`.  Writing the two actual unicyclic
+   lobe carriers as `z_i` and their rooted deletion ratios `r_i` (strictly
+   fourth-quadrant), the connector factor is an exact positive continuant
+   `F`; its imaginary part is strictly negative.  The whole graph remains in
+   the upper half-plane by Sachs, so its phase is strictly below the sum of
+   the actual lobe phases.  Two independent final audits passed.  Paper:
+   `two-c5-all-connectors/`; audit script:
+   `positive-square-energy/experiments/connector_factor_audit.py`.
 0. NEW VERIFIED RESULT (2026-07-25): if two vertex-disjoint `C5` blocks are
    joined by exactly one bridge edge, with arbitrary rooted trees attached at
    every core vertex, then `s+(G)>=n+s+(H)-10>n`, where the bare bridge core
