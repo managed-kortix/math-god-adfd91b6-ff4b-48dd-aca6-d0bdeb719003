@@ -16,6 +16,15 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-25: added a third, isolated breakthrough-maxing architecture without
+  disturbing the existing main and Millennium lanes. A control-plane
+  `breakthrough-selector` checks live sessions, freezes one exact
+  certificate-shaped assignment, pushes it, and launches one independent
+  `breakthrough-god` Kortix root session. The worker's never-stop prompt and
+  doctrine prohibit problem switching and keep all recursive proof/breaker
+  force on the frozen target. State and protocol live in
+  `BREAKTHROUGH_STATE.md` and `breakthrough/PROGRAM.md`; the first selection is
+  intentionally not performed in the main research session.
 - 2026-07-25: advanced the connected promotion frontier with an exact
   positive-subspace compression theorem. For symmetric `A,C`, with `P=A_+`,
   positive projector `Pi`, and `K=Pi C Pi`, the PSD witness `Y=P+K_+` gives

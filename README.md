@@ -55,7 +55,10 @@ Lineage: the OpenAI cycle-double-cover prompt and the ShouqiaoW/erdos workflow.
 
 ## Built on Kortix
 
-math-god runs as a [Kortix](https://kortix.com) agent — Kortix is a platform
-for autonomous AI agents. math-god is one, running 24/7 with persistent
-memory, a heartbeat, and a subagent swarm, maintaining this very repository
-itself.
+math-god runs on [Kortix](https://kortix.com) with persistent memory,
+heartbeats, and subagent swarms. The repository now has three isolated lanes:
+the main trajectory, the six-problem Millennium program, and a two-agent
+breakthrough-maxing lane. In the last lane a selector freezes one
+certificate-shaped problem and launches a separate never-stop Kortix session
+that works on that problem—and nothing else—until resolution or a formal
+retirement review.

@@ -2,6 +2,7 @@
   // OpenCode runtime config. Docs: https://opencode.ai/docs/
   "$schema": "https://opencode.ai/config.json",
   "theme": "system",
+  "autoupdate": true,
   "default_agent": "math-god",
   // Kortix sessions are already sandboxed (isolated VM, ephemeral branch).
   "permission": "allow",

@@ -2,10 +2,11 @@ kortix_version: 2
 default_agent: math-god
 project:
   name: math-god
-  description: "Two eternal mathematics lanes: math-god continues the current
-    research trajectory, while millennium-god works exclusively on the six
-    unsolved Clay Millennium Prize Problems. Both require exact, adversarially
-    audited, publicly reproducible results before any announcement."
+  description: "Three independent mathematics lanes: math-god continues the
+    current trajectory; millennium-god works on the six unsolved Clay problems;
+    and breakthrough-selector launches one isolated breakthrough-god session on
+    one certificate-shaped core problem. Every lane requires exact,
+    adversarially audited, publicly reproducible results before announcement."
 env:
   required:
     - TWITTER_CONSUMER_KEY
@@ -26,6 +27,18 @@ agents:
     skills: all
     workspace: runtime
   millennium-god:
+    connectors: all
+    secrets: all
+    kortix_cli: all
+    skills: all
+    workspace: runtime
+  breakthrough-selector:
+    connectors: all
+    secrets: all
+    kortix_cli: all
+    skills: all
+    workspace: runtime
+  breakthrough-god:
     connectors: all
     secrets: all
     kortix_cli: all
@@ -63,6 +76,24 @@ triggers:
       durable work. announce nothing unless a complete solution has survived
       hostile verification and has a finished paper.pdf. always queue the next
       concrete mathematical step. never stop."
+  - slug: breakthrough-selector
+    name: breakthrough selector → choose one certificate-shaped problem and maintain one isolated worker
+    type: cron
+    agent: breakthrough-selector
+    enabled: true
+    session_mode: keyed
+    session_key: breakthrough-selector-eternal
+    cron: 0 0 1 * * *
+    timezone: UTC
+    prompt: "run the breakthrough control loop. read BREAKTHROUGH_STATE.md and
+      breakthrough/PROGRAM.md. inspect live sessions before acting. if exactly
+      one healthy breakthrough-god session owns the active assignment, do not
+      duplicate it. if the lane is vacant or its last assignment is formally
+      closed, select exactly one high-value certificate-shaped open problem,
+      freeze a complete attack prompt, commit and push that assignment, and
+      launch a fresh independent Kortix session pinned to breakthrough-god.
+      record the worker session id. never research the selected problem in the
+      selector session and never run two workers at once."
 connectors:
   - slug: google_drive
     provider: pipedream
