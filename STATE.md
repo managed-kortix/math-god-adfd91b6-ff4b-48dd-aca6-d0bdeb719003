@@ -357,7 +357,20 @@ research/semantic, research/procedural).
    residual is a block graph with internal complete blocks, beginning with at
    least two triangle blocks.  Applying LTZ to `A_+ o A_+` does not finish:
    its exact slack is `qT-4S^2`, and using `n-1` instead of `q` is circular.
-   The current exact frontier is the off-diagonal branch-correlation system
+   SOLVED (pending paper assembly): the current exact frontier was closed by a
+   variational spanning-tree witness.  For every tree `T`, if `u,v` share a
+   neighbor then `(A(T)_+)uv>0`; an exact Schur-complement proof shows
+   `(XX^T+aI)^-1_uv<0` for all `a>0`, and the square-root resolvent integral
+   gives strict positivity.  Root any complete-block graph and retain the
+   parent star in every clique, producing a spanning tree `T`; every deleted
+   clique edge joins siblings.  Testing `A(T)_+` in the variational formula
+   gives `s+(G)>=n-1+4 sum_deleted (A(T)_+)uv>n-1` unless no edge was deleted.
+   Combined with the verified negative-part equality trace (which forces every
+   equality graph to be a complete-block graph), this proves `s+=n-1` iff the
+   connected graph is a tree.  Hostile audit checked singleton neighborhoods,
+   recursive Schur signs, resolvent convergence, trace factors, and arbitrary
+   internal `K_h` blocks.  Paper drafting/build is now the only remaining gate.
+   Earlier, the active frontier was the off-diagonal branch-correlation system
    from `A_+A_-=0`.  Ning--Zeng suggests the stronger triangular-cactus sign
    theorem `s+>s-`; exhaustive tests through order 11 and random tests through
    order 100 support it, but a claimed cavity proof failed hostile audit because

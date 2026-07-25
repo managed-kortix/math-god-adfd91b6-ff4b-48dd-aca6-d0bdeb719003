@@ -1,0 +1,587 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\ip}[2]{\langle #1,#2\rangle}
+
+\title{Equality in the Positive Square-Energy Bound}
+\author{}
+\date{25 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $s^+(G)$ be the sum of the squares of the positive adjacency
+eigenvalues of a graph $G$.  Liu, Tang, and Zhang recently proved the
+Elphick--Farber--Goldberg--Wocjan lower bound $s^+(G)\geq |V(G)|-1$ for
+connected graphs.  We determine its equality case: a connected graph $G$ of
+order $n$ satisfies $s^+(G)=n-1$ if and only if $G$ is a tree.  We first
+trace equality through the doubly nonnegative inequality of Liu--Tang--Zhang.
+Their folding and cut-vertex induction, supplemented by their averaged
+vertex-deletion estimate, forces every block of an equality graph to be
+complete.  We then prove that the positive spectral part of a tree is
+strictly positive between vertices having a common neighbor.  A spanning-tree
+variational argument excludes every non-tree block graph.
+\end{abstract}
+
+\section{Introduction}
+
+All graphs are finite, simple, and undirected.  Let $A=A(G)$ have eigenvalues
+$\lambda_1,\ldots,\lambda_n$, and define
+\[
+ s^+(G)=\sum_{\lambda_i>0}\lambda_i^2,
+ \qquad
+ s^-(G)=\sum_{\lambda_i<0}\lambda_i^2.
+\]
+Writing the positive and negative spectral parts of $A$ as
+\[
+ A=P-B,\qquad P=A_+\succeq0,\quad B=A_-\succeq0,\quad PB=0,
+\]
+we have $s^+(G)=\tr P^2$, $s^-(G)=\tr B^2$, and
+\begin{equation}\label{eq:sum-energy}
+ s^+(G)+s^-(G)=\tr A^2=2|E(G)|.
+\end{equation}
+
+Elphick, Farber, Goldberg, and Wocjan conjectured that
+$\min\{s^+(G),s^-(G)\}\geq n-1$ for every connected graph~\cite{EFGW}.
+Liu, Tang, and Zhang recently proved this theorem by means of a sharp
+inequality over the doubly nonnegative cone~\cite{LTZ}.  Akbari, Kumar,
+Mohar, Pragada, and Zhang asked for the equality cases and, in particular,
+conjectured that equality for $s^+$ characterizes trees
+\cite[Conjecture~9.2(i)]{AKMPZ}.  We prove that conjecture.
+
+\begin{theorem}\label{thm:main}
+Let $G$ be a connected graph on $n$ vertices.  Then
+\[
+ s^+(G)=n-1
+ \quad\Longleftrightarrow\quad
+ G\text{ is a tree}.
+\]
+\end{theorem}
+
+The equality trace in Section~\ref{sec:equality} uses the ingredients of the
+proof of the Liu--Tang--Zhang doubly nonnegative inequality, together with an
+equality comparison not needed for their theorem.  We include the details,
+both to fix the direction of the inequality and to make clear how the
+complete-block conclusion follows.
+
+\section{The doubly nonnegative inequality}\label{sec:dnn}
+
+A real symmetric matrix $M$ is \emph{doubly nonnegative} if $M\succeq0$ and
+$M$ is entrywise nonnegative.  For a connected graph $H$, put
+\[
+ q(H)=2|E(H)|-|V(H)|+1,
+ \quad
+ S(H,M)=\sum_{uv\in E(H)}\sqrt{M_{uv}},
+ \quad
+ T(M)=\one^TM\one.
+\]
+The orientation of the central inequality is important.
+
+\begin{theorem}[Liu--Tang--Zhang \cite{LTZ}]\label{thm:ltz}
+If $H$ is connected and $M$ is a doubly nonnegative matrix indexed by
+$V(H)$, then
+\begin{equation}\label{eq:ltz}
+ 4S(H,M)^2\leq q(H)T(M).
+\end{equation}
+\end{theorem}
+
+We recall the parts of its proof used below.  First, every nonedge entry can
+be folded onto the diagonal:
+\begin{equation}\label{eq:fold}
+ \mathcal F_H(M)=M+
+ \sum_{\substack{\{u,v\}\notin E(H)\\u\ne v}}
+ M_{uv}(e_u-e_v)(e_u-e_v)^T.
+\end{equation}
+The sum takes each unordered nonedge once.  The folded matrix is doubly
+nonnegative, vanishes on nonedges, has the same edge entries as $M$, and has
+the same value of $T$, since $(e_u-e_v)^T\one=0$.
+
+Suppose next that an edge-supported pair $(H,M)$ is split at a cut vertex
+into connected induced graphs $H_1,H_2$.  A Gram representation of $M$ and
+orthogonal projection of the cut-vertex vector produce doubly nonnegative
+matrices $M_1,M_2$ such that
+\begin{equation}\label{eq:cut-add}
+ q(H)=q(H_1)+q(H_2),\quad
+ S(H,M)=S(H_1,M_1)+S(H_2,M_2),\quad
+ T(M)=T(M_1)+T(M_2).
+\end{equation}
+The induction bounds for the two pairs are combined by scalar
+Cauchy--Schwarz.
+
+Finally, suppose $H$ has $h\geq3$ vertices and no cut vertex.  Then $H-v$ is
+connected for every $v$.  For an edge-supported $M$, write
+\[
+ d_0=\tr M,
+ \qquad w=\sum_{uv\in E(H)}M_{uv},
+ \qquad T=d_0+2w,
+ \qquad q=q(H).
+\]
+Averaging the induction hypothesis over the $h$ vertex deletions gives
+\begin{equation}\label{eq:averaged}
+ 4S(H,M)^2\leq(q-1)T+\frac{q-1}{h-2}d_0.
+\end{equation}
+Independently, Cauchy--Schwarz on the $\ell=|E(H)|$ edges gives the flat
+estimate
+\begin{equation}\label{eq:flat}
+ 4S(H,M)^2\leq4\ell w.
+\end{equation}
+The proof of Theorem~\ref{thm:ltz} divides according as
+\begin{equation}\label{eq:threshold}
+ 2(h-1)w\leq qd_0
+\end{equation}
+or the reverse strict inequality holds.  In the first case
+\eqref{eq:flat} and $4\ell=2q+2(h-1)$ prove \eqref{eq:ltz}.  In the second
+case, put $\beta=\ell-h+1$.  Then $q-1=(h-2)+2\beta$, and simplicity gives
+\[
+ q(h-2)-2\beta(h-1)=(h-1)(h-2)-2\beta\geq0.
+\]
+Multiplying the strict case hypothesis $qd_0<2(h-1)w$ by $h-2$ therefore
+gives
+\[
+ 2\beta(h-1)d_0\leq q(h-2)d_0
+ <2(h-1)(h-2)w,
+\]
+and hence $\beta d_0<(h-2)w$, or equivalently
+$(q-1)d_0/(h-2)<T$.  Thus \eqref{eq:averaged} gives the strict inequality
+$4S^2<qT$.  These are precisely the folding, cut, averaged, and flat
+ingredients from the proof in~\cite{LTZ}.
+
+\section{Equality through folding and cuts}\label{sec:equality}
+
+We now record the equality consequence needed later.  A \emph{block} is a
+maximal subgraph with no cut vertex; thus a bridge is a block isomorphic to
+$K_2$, while every block of order at least three is 2-connected.
+
+\begin{proposition}[Equality trace]\label{prop:trace}
+Let $H$ be a connected graph with at least one edge, let $M$ be doubly
+nonnegative, and suppose
+\begin{equation}\label{eq:tight}
+ 4S(H,M)^2=q(H)T(M)>0.
+\end{equation}
+Set $N=\mathcal F_H(M)$ and $\lambda=T(M)/q(H)$.  Then every block $C$ of
+$H$ is either a bridge or a complete graph, and
+\begin{equation}\label{eq:block-atoms}
+ N=\lambda\sum_C\frac{q(C)}{|V(C)|^2}J_{V(C)},
+\end{equation}
+where each all-ones matrix is embedded on $V(C)$.  In particular, for every
+edge $uv$ in a block $C$,
+\begin{equation}\label{eq:edge-root}
+ \sqrt{M_{uv}}=\sqrt{\lambda}\,
+ \frac{q(C)}{2|E(C)|}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Folding preserves $S$ and $T$, so $(H,N)$ is again tight and is supported on
+the diagonal and edges.  We trace the induction proving
+Theorem~\ref{thm:ltz}.
+
+At a cut vertex, use \eqref{eq:cut-add} and abbreviate
+$q_i=q(H_i)$ and $T_i=T(N_i)$.  The induction and scalar
+Cauchy--Schwarz give
+\[
+ 2S(H,N)
+ \leq \sqrt{q_1T_1}+\sqrt{q_2T_2}
+ \leq \sqrt{(q_1+q_2)(T_1+T_2)}.
+\]
+Equality at the two ends forces equality in both descendant induction
+bounds and equality in scalar Cauchy--Schwarz.  Hence
+\begin{equation}\label{eq:ratio}
+ \frac{T_1}{q_1}=\frac{T_2}{q_2}
+ =\frac{T(N)}{q(H)}=\lambda.
+\end{equation}
+Repeating the split therefore leaves tight descendant pairs with the same
+normalization $T_C=\lambda q(C)$.  The terminal descendants are bridges or
+graphs of order at least three with no cut vertex.
+
+We will also use the entrywise content of the cut construction.  Let $z$ be
+the cut vertex, let $U$ and $W$ be the two sides away from $z$, and represent
+$N$ by Gram vectors $g_x$.  Since $N$ is edge-supported, the spans
+\[
+ \mathcal U=\operatorname{span}\{g_u:u\in U\},\qquad
+ \mathcal W=\operatorname{span}\{g_w:w\in W\}
+\]
+are orthogonal.  Decompose
+\[
+ g_z=p_U+p_W+p_0,
+ \quad p_U\in\mathcal U,
+ \quad p_W\in\mathcal W,
+ \quad p_0\perp\mathcal U+\mathcal W.
+\]
+Use $p_U+p_0$ as the cut vector on the $U$-side and $p_W$ on the
+$W$-side.  Inner products from $z$ to either side are unchanged, all entries
+inside a side are unchanged, and
+\[
+ \|p_U+p_0\|^2+\|p_W\|^2=\|g_z\|^2.
+\]
+Consequently the two descendant matrices, embedded back into $V(H)$, add
+entrywise to $N$.  In particular, every edge entry is preserved in its unique
+descendant.  Repeating this construction terminates precisely at the blocks
+of $H$, independently of the order in which cut vertices are split.
+
+Consider such a no-cut descendant $(C,X)$, and write $h=|V(C)|$,
+$\ell=|E(C)|$, $q=q(C)$, $d_0=\tr X$, and
+$w=\sum_{uv\in E(C)}X_{uv}$.  Equality cannot pass through the strict second
+case of the Liu--Tang--Zhang argument recalled after
+\eqref{eq:threshold}.  It therefore lies in the first case, and equality in
+the final bound forces equality both in the flat edge Cauchy--Schwarz
+estimate and at the threshold:
+\begin{equation}\label{eq:no-cut-equalities}
+ X_{uv}=r\quad(uv\in E(C)),
+ \qquad 2(h-1)w=qd_0.
+\end{equation}
+Here $r>0$: the tight terminal descendant has $T=\lambda q>0$, and hence
+$S>0$.  Since
+$w=\ell r$, equality in \eqref{eq:flat} is explicit.
+
+The averaged estimate \eqref{eq:averaged} remains valid independently of
+which case proves the theorem.  Comparing it with $4S^2=qT$ gives
+\begin{equation}\label{eq:d0-lower}
+ d_0\geq\frac{h-2}{q-1}T.
+\end{equation}
+On the other hand, the threshold equality in
+\eqref{eq:no-cut-equalities}, together with $T=d_0+2w$, gives
+\begin{equation}\label{eq:d0-exact}
+ d_0=\frac{h-1}{q+h-1}T.
+\end{equation}
+Comparing \eqref{eq:d0-lower} and \eqref{eq:d0-exact} and
+cross-multiplying yields
+\[
+ (h-1)(q-1)\geq(h-2)(q+h-1),
+ \qquad\text{hence}\qquad q\geq(h-1)^2.
+\]
+Simplicity supplies the reverse bound
+\[
+ q=2\ell-h+1\leq h(h-1)-h+1=(h-1)^2.
+\]
+Thus $\ell=\binom h2$ and $C=K_h$.  This is the crucial complete-block
+conclusion; it comes from retaining the averaged estimate even though the
+flat estimate is the one used in the first case.
+
+It remains to identify the terminal matrix rather than only its edge
+entries.  For $C=K_h$, we have $q=(h-1)^2$, and equality in the flat estimate
+gives
+\[
+ qT=4\binom h2^2r,
+ \qquad T=h^2r.
+\]
+Equation \eqref{eq:d0-exact} gives $d_0=hr$.  Write the diagonal entries of
+$X$ as $rb_1,\ldots,rb_h$.  Every $2\times2$ principal minor is
+nonnegative, so $b_ib_j\geq1$ for $i\ne j$, while
+$\sum_i b_i=h$.  These conditions force $b_i=1$ for every $i$: if some
+$b_i<1$, every other $b_j\geq b_i^{-1}$ and the sum exceeds $h$; if no
+$b_i<1$, the sum condition is decisive.  Consequently $X=rJ_h$.  Since
+$T=\lambda q$, we obtain
+\begin{equation}\label{eq:complete-atom}
+ X=\lambda\frac{(h-1)^2}{h^2}J_h
+   =\lambda\frac{q(C)}{|V(C)|^2}J_{V(C)}.
+\end{equation}
+
+For a bridge $C=K_2$, the base case is the same conclusion.  Indeed, if
+$X=\bigl(\begin{smallmatrix}a&c\\c&b\end{smallmatrix}\bigr)$ is tight,
+then
+\[
+ 4c=a+b+2c,
+ \]
+whereas positive semidefiniteness gives
+$2c\leq2\sqrt{ab}\leq a+b$.  Equality follows throughout, so
+$a=b=c$, and $X=(\lambda/4)J_2$ because $q(K_2)=1$ and $T=\lambda$.
+
+The entrywise cut identity proved above recombines the terminal matrices by
+adding their embedded block contributions; the only overlap is on cut-vertex
+diagonal entries, where the contributions add to the parent diagonal.
+Induction on the number of cut splits now gives \eqref{eq:block-atoms}.
+Finally, an edge belongs to a unique block.
+For a bridge,
+$\sqrt{q(C)}/|V(C)|=1/2=q(C)/(2|E(C)|)$; for $C=K_h$, both quantities equal
+$(h-1)/h$.  Taking the square root of its coefficient in
+\eqref{eq:block-atoms} proves \eqref{eq:edge-root}.
+\end{proof}
+
+We apply the proposition to the negative spectral part.  This also explains
+why signs and absolute values cannot be omitted from the initial reduction.
+
+\begin{corollary}\label{cor:block-graph}
+Suppose $G$ is connected, has $n\geq2$ vertices and $m$ edges, and satisfies
+$s^+(G)=n-1$.  Then every block of $G$ is complete.  More precisely, if an
+edge $uv$ lies in a block $C$, then
+\begin{equation}\label{eq:B-edge}
+ B_{uv}=-\frac{q(C)}{2|E(C)|}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Put $q=2m-n+1$.  By \eqref{eq:sum-energy}, $s^-(G)=q$.  The Schur product
+theorem~\cite[Theorem~7.5.3]{HornJohnson} makes $M=B\circ B$ doubly
+nonnegative.  Moreover
+\[
+ \tr(AB)=\tr((P-B)B)=-\tr B^2=-s^-(G),
+\]
+and $A$ has two symmetric unit entries for each edge.  Therefore
+\[
+ \frac{s^-(G)}2=-\sum_{uv\in E(G)}B_{uv}
+ \leq\sum_{uv\in E(G)}|B_{uv}|.
+\]
+Theorem~\ref{thm:ltz}, applied to $B\circ B$, now gives the requested
+starting chain
+\begin{equation}\label{eq:starting-chain}
+ s^-(G)^2
+ \leq4\left(\sum_{uv\in E(G)}|B_{uv}|\right)^2
+ \leq q\,\one^T(B\circ B)\one
+ =q\,s^-(G).
+\end{equation}
+The first inequality follows exactly from the displayed trace identity and
+the triangle inequality on the edge entries.  Since $s^-(G)=q>0$, both
+inequalities in \eqref{eq:starting-chain} are equalities.  Equality in the
+triangle inequality gives
+\begin{equation}\label{eq:sign}
+ B_{uv}\leq0\qquad(uv\in E(G)),
+\end{equation}
+and $B\circ B$ is an equality matrix for Theorem~\ref{thm:ltz}.  Its
+normalization in Proposition~\ref{prop:trace} is
+$\lambda=T(B\circ B)/q=s^-(G)/q=1$.  The proposition makes every block a
+bridge or a complete graph and, because folding preserves edge entries,
+gives $|B_{uv}|=q(C)/(2|E(C)|)$.  Equation \eqref{eq:sign} proves
+\eqref{eq:B-edge}.
+\end{proof}
+
+Thus a putative equality graph is a \emph{block graph}: its blocks are
+complete.  Notice that this conclusion does not assert, falsely, that a leaf
+partition turns all cyclic blocks into triangles.  Blocks of arbitrary order
+remain possible at this stage and will all be excluded at once.
+
+\section{Strict positivity between siblings}\label{sec:siblings}
+
+For a symmetric matrix $K$, let $K_+$ denote its positive spectral part.
+The next lemma is the strict input for the final variational argument.
+
+\begin{lemma}[Sibling positivity]\label{lem:siblings}
+Let $T$ be a tree.  If distinct vertices $u,v$ have a common neighbor in
+$T$, then
+\[
+ (A(T)_+)_{uv}>0.
+\]
+\end{lemma}
+
+\begin{proof}
+Choose a bipartition $L\sqcup R$ of $T$ with $u,v\in L$, and write
+\begin{equation}\label{eq:bip-block}
+ A(T)=\begin{pmatrix}0&X\\X^T&0\end{pmatrix},
+ \qquad Q=XX^T.
+\end{equation}
+For $r\in R$, let $j_r\in\R^L$ be the indicator of $N_T(r)$.  For every
+$a>0$,
+\begin{equation}\label{eq:Q-hypergraph}
+ Q+aI=aI+\sum_{r\in R}j_rj_r^T.
+\end{equation}
+We prove
+\begin{equation}\label{eq:inverse-negative}
+ (Q+aI)^{-1}_{uv}<0.
+\end{equation}
+
+Regard $T$ itself as the incidence graph between the variable vertices $L$
+and the neighborhood hyperedges $N_T(r)$, $r\in R$.  It is a tree.  Root it
+at a common neighbor $r_0$ of $u$ and $v$, and eliminate branches in
+postorder.  We spell out the Schur calculation, including singleton
+neighborhoods.
+
+Consider a nonroot neighborhood node $r$ whose parent variable is $p\in L$.
+After all branches below it have been eliminated, its child variables
+$C=N_T(r)\setminus\{p\}$ carry a positive diagonal matrix
+$D_C$: positivity starts with the term $aI$, and the calculation below shows
+that every eliminated child neighborhood adds a positive number to its
+articulation diagonal.  On $\{p\}\cup C$, the contribution of $r$ together
+with those effective child diagonals has the form $J+D_C$ on the child
+coordinates, with the $p$ diagonal of $J$ kept at this step.  Eliminating
+$C$ changes the $p$ diagonal by
+\begin{align}
+ 1-\one_C^T(D_C+J_C)^{-1}\one_C
+ &=1-\frac{\one_C^TD_C^{-1}\one_C}
+ {1+\one_C^TD_C^{-1}\one_C} \notag\\
+ &=\frac{1}{1+\one_C^TD_C^{-1}\one_C}>0,
+ \label{eq:branch-response}
+\end{align}
+where Sherman--Morrison was used.  If $C=\varnothing$, so that $r$ is a
+singleton leaf neighborhood, the value in \eqref{eq:branch-response} is
+understood as $1$; thus such leaves are retained rather than silently
+discarded.  This proves inductively both the asserted diagonal form and its
+strict positivity.
+
+After every branch below $r_0$ is eliminated, the Schur complement on the
+root neighborhood $N_T(r_0)$ is
+\[
+ D_0+J,
+ \qquad D_0=\operatorname{diag}(d_x:x\in N_T(r_0)),
+ \qquad d_x>0.
+\]
+Schur complementation preserves the corresponding entries of the inverse.
+Another application of Sherman--Morrison gives, for distinct
+$x,y\in N_T(r_0)$,
+\begin{equation}\label{eq:root-inverse}
+ (D_0+J)^{-1}_{xy}
+ =-\frac{d_x^{-1}d_y^{-1}}
+ {1+\sum_{z\in N_T(r_0)}d_z^{-1}}<0.
+\end{equation}
+Taking $x=u$ and $y=v$ proves \eqref{eq:inverse-negative}.  This argument is
+valid without any rank assumption on $X$ because $a>0$ makes every matrix
+being eliminated positive definite.
+
+The scalar identity
+\[
+ \sqrt t=\frac1\pi\int_0^\infty
+ \frac{t}{t+a}\,a^{-1/2}\,da\qquad(t\geq0)
+\]
+and spectral functional calculus~\cite[Chapter~V]{Bhatia} give, for
+$u\ne v$,
+\begin{equation}\label{eq:resolvent}
+ (Q^{1/2})_{uv}
+ =-\frac1\pi\int_0^\infty
+ a^{1/2}(Q+aI)^{-1}_{uv}\,da.
+\end{equation}
+The integral converges entrywise.  As $a\downarrow0$,
+$(Q+aI)^{-1}=a^{-1}\Pi_{\ker Q}+O(1)$, so after multiplication by
+$a^{1/2}$ the possible singularity is $O(a^{-1/2})$.  As $a\to\infty$, an
+off-diagonal resolvent entry is $O(a^{-2})$, and the integrand is
+$O(a^{-3/2})$.  By
+\eqref{eq:inverse-negative}, the integrand after the minus sign is strictly
+positive for every $a>0$.  Hence $(Q^{1/2})_{uv}>0$.
+
+Finally, standard functional calculus applied to \eqref{eq:bip-block} gives
+\[
+ |A(T)|=
+ \begin{pmatrix}Q^{1/2}&0\\0&(X^TX)^{1/2}\end{pmatrix},
+ \qquad
+ A(T)_+=\frac12
+ \begin{pmatrix}Q^{1/2}&X\\X^T&(X^TX)^{1/2}\end{pmatrix}.
+\]
+Thus $(A(T)_+)_{uv}=\tfrac12(Q^{1/2})_{uv}>0$, as claimed.
+\end{proof}
+
+\section{The variational finish}
+
+We use the following standard identity, included for completeness.
+
+\begin{lemma}\label{lem:variational}
+For every real symmetric matrix $K$,
+\begin{equation}\label{eq:variational}
+ \tr(K_+^2)=\max_{Y\succeq0}
+ \bigl\{2\tr(KY)-\tr(Y^2)\bigr\}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Since $K=K_+-K_-$ and $K_-,Y\succeq0$,
+$\tr(K_-Y)\geq0$.  Therefore
+\[
+ 2\tr(KY)-\tr(Y^2)
+ \leq2\tr(K_+Y)-\tr(Y^2)
+ =\tr(K_+^2)-\|Y-K_+\|_F^2.
+\]
+Equality is attained at $Y=K_+$.
+\end{proof}
+
+\begin{proposition}\label{prop:block-strict}
+Every connected block graph $G$ on $n$ vertices that is not a tree satisfies
+\[
+ s^+(G)>n-1.
+\]
+\end{proposition}
+
+\begin{proof}
+Consider the augmented incidence graph whose nodes are all vertices and all
+blocks of $G$, with a vertex joined to each block containing it.  For a block
+graph this incidence graph is a tree.  Root it at an arbitrary graph vertex.
+In each complete block $C$, let $p_C$ be its unique vertex nearest the root.
+Retain only the star edges $p_Cx$ for
+$x\in V(C)\setminus\{p_C\}$.  For a bridge this retains its sole edge.  The
+union of all retained stars is connected and has
+\[
+ \sum_C(|V(C)|-1)=n-1
+\]
+edges, so it is a spanning tree $T$ of $G$.
+
+Every deleted edge $uv$ belongs to a complete block and joins two distinct
+vertices of $V(C)\setminus\{p_C\}$.  Thus $u$ and $v$ have the common
+neighbor $p_C$ in $T$.  Write
+\[
+ A(G)=A(T)+M,
+ \qquad P=A(T)_+,
+\]
+where $M$ is the adjacency matrix of the deleted edges.  Testing $Y=P$ in
+\eqref{eq:variational} gives
+\begin{align}
+ s^+(G)
+ &\geq2\tr((A(T)+M)P)-\tr(P^2)\notag\\
+ &=s^+(T)+2\tr(MP)\notag\\
+ &=n-1+4\sum_{uv\in E(G)\setminus E(T)}P_{uv}.
+ \label{eq:strict-variational}
+\end{align}
+Here $s^+(T)=|E(T)|=n-1$, because the spectrum of the bipartite graph $T$
+is symmetric and $s^+(T)+s^-(T)=2|E(T)|$.  Every summand in
+\eqref{eq:strict-variational} is strictly positive by
+Lemma~\ref{lem:siblings}.  Since a non-tree block graph has at least one
+deleted edge, the inequality is strict.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+First let $n=1$.  The unique connected graph is $K_1$, which is a tree, and
+$s^+(K_1)=0=n-1$.
+
+Now let $n\geq2$ and suppose $s^+(G)=n-1$.  Corollary~\ref{cor:block-graph}
+shows that every block of $G$ is complete, so $G$ is a block graph.  If it
+were not a tree, Proposition~\ref{prop:block-strict} would give
+$s^+(G)>n-1$, a contradiction.  Hence $G$ is a tree.
+
+Conversely, if $G$ is a tree, then it is bipartite, so its nonzero adjacency
+eigenvalues occur in opposite pairs.  Therefore
+\[
+ s^+(G)=\frac12\tr A(G)^2=|E(G)|=n-1.
+\]
+This also covers $K_1$ directly, and completes the proof.
+\end{proof}
+
+\begin{thebibliography}{9}
+
+\bibitem{AKMPZ}
+S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and S.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264, 2025.
+
+\bibitem{Bhatia}
+R.~Bhatia,
+\emph{Matrix Analysis},
+Graduate Texts in Mathematics 169, Springer, New York, 1997.
+
+\bibitem{EFGW}
+C.~Elphick, M.~Farber, F.~Goldberg, and P.~Wocjan,
+\emph{Conjectured bounds for the sum of squares of positive eigenvalues of a
+graph},
+Discrete Math. 339 (2016), 2215--2223.
+
+\bibitem{HornJohnson}
+R.~A.~Horn and C.~R.~Johnson,
+\emph{Matrix Analysis}, 2nd ed.,
+Cambridge University Press, Cambridge, 2013.
+
+\bibitem{LTZ}
+Y.~Liu, Q.~Tang, and S.~Zhang,
+\emph{The positive and negative square-energy conjecture},
+arXiv:2607.18031, 2026.
+
+\end{thebibliography}
+
+\end{document}

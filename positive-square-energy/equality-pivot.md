@@ -476,6 +476,72 @@ Thus the live choices are (i) prove the sibling-matching/continuous-phase
 theorem with a complete winding invariant, or (ii) exploit the oriented
 off-diagonal `PB=0` equations globally across the branching cyclic core.
 
+## Final variational obstruction for every non-tree block graph
+
+The missing obstruction has a shorter proof that bypasses the multiphase
+problem.  If `T` is a tree and distinct vertices `u,v` have a common neighbor,
+then
+
+`(A(T)_+)_{uv}>0`.                                                (24)
+
+To prove this, bipartition `T` and write
+
+`A(T)=[[0,X],[X^T,0]]`, `Q=XX^T`.
+
+Assume `u,v` lie in the first part and share a vertex of the second part.
+For every `a>0`,
+
+`Q+aI=aI+sum_r 1_{N(r)}1_{N(r)}^T`.
+
+Root the incidence tree at a common neighborhood containing `u,v` and
+eliminate hanging neighborhoods in postorder.  A hanging neighborhood has,
+after its descendants are eliminated, matrix `D+J` with `D>0` diagonal.  If
+its private vertices have diagonal matrix `D_C`, their elimination contributes
+
+`1/(1+1^T D_C^{-1}1)>0`
+
+to the articulation diagonal.  Thus the final Schur complement on the root
+neighborhood is `D_0+J`, `D_0>0`.  Sherman--Morrison gives
+
+`(Q+aI)^{-1}_{uv}=-d_u^{-1}d_v^{-1}/(1+sum_x d_x^{-1})<0`.       (25)
+
+The square-root resolvent formula now yields, for `u!=v`,
+
+`Q^{1/2}_{uv}=-(1/pi) integral_0^infty a^{1/2}(Q+aI)^{-1}_{uv} da>0`.
+
+Since
+
+`A(T)_+=(1/2)[[Q^{1/2},X],[X^T,(X^TX)^{1/2}]]`,
+
+(24) follows.  This proof, including singleton neighborhoods and singular
+`X`, passed a separate hostile audit.
+
+Now let `G` be any connected block graph.  Root its block-incidence tree at a
+vertex.  In each complete block `C`, retain only the star from its parent
+vertex to all other vertices of `C`; retain every bridge.  The retained graph
+`T` is a spanning tree.  Every deleted edge joins two vertices with their
+parent as a common neighbor in `T`.  Write
+
+`A(G)=A(T)+M`, `P=A(T)_+`.
+
+The variational identity
+
+`s+(A)=max_{Y>=0}(2 tr(AY)-tr(Y^2))`
+
+with witness `Y=P` gives
+
+`s+(G)>=s+(T)+2tr(MP)=n-1+4 sum_{uv deleted}P_uv`.                (26)
+
+Every summand is strictly positive by (24).  Therefore every non-tree block
+graph satisfies
+
+`s+(G)>n-1`.                                                     (27)
+
+This finally closes the equality proof.  The negative-part equality trace
+already showed that any connected graph with `s+=n-1` is a block graph whose
+blocks are complete.  Equation (27) excludes every cyclic block, leaving a
+tree.  Conversely a tree is bipartite and has `s+=|E|=n-1`.
+
 ## Research protocol
 
 This is now the sole primary proof object.  New agents, if used, receive this
