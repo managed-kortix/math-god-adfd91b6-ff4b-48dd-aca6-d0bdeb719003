@@ -11,12 +11,11 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   gcd variance are settled but strategically insufficient; the full Gram form
   is now exactly reduced after a second domain audit corrected a transient
   restricted/full-space mix-up, and the current
-  sublemma is a stronger dyadic endpoint contraction for the positive
-  restricted energy after the averaged decrement was shown to telescope and
-  imply only the already-sufficient zero-liminf criterion
+  sublemma is control of the transverse Schur-complement loss in the exact
+  dyadic endpoint decomposition; generic convexity has the wrong residual sign
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 8
+- **cycle:** 9
 - **announcements:** none
 
 ## immutable target list
@@ -35,11 +34,11 @@ waiting process.
 
 ## next exact steps
 
-1. Compare the restricted Gram vectors at `N` and `2N` and derive or falsify a
-   positive-square decomposition proving
-   `P_N-P_(2N) >= 2 kappa W_N P_N` for some fixed `kappa>0`.
-2. Certify dyadic endpoint ratios beyond `N=1024` and targeted weak jumps beyond
-   `N=2000`, preserving any failure as an interval certificate.
+1. Express the dyadic transverse ratio as a restricted-Gram Schur complement
+   and derive or falsify a Möbius-specific upper bound strong enough for fixed
+   endpoint contraction.
+2. Certify the parallel and transverse factors separately on weak dyadic
+   blocks, especially the inconclusive `8192 -> 16384` endpoint.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -110,3 +109,10 @@ waiting process.
   `1024`, and targeted breakpoint certificates at `592` and `1418` remain
   decreasing; reconnaissance found no failure through `2000`. The active target
   is now the dyadic endpoint contraction. No solution is claimed.
+- 2026-07-25: derived the exact affine relation between `F_N`, the normalized
+  fresh block, and `F_(2N)`. Polarization gives a positive variance square, but
+  orthogonal projection shows the transverse remainder enters contraction with
+  a negative sign. Generic Hilbert convexity is therefore decisively
+  insufficient. Endpoint ratios are certified positive through `4096 -> 8192`;
+  the next block is inconclusive, not negative. All five bounded Millennium
+  scouts also advanced one exact checkpoint. No solution is claimed.

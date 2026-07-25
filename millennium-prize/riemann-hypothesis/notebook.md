@@ -1081,3 +1081,105 @@ vectors in the restricted Gram space; seek a positive-square decomposition of
 their difference plus one signed remainder. In parallel, certify endpoint
 ratios on larger dyadic blocks. Any uniform `kappa>0` proves RH; generic Hilbert
 convexity alone cannot establish it.
+
+## Tick 10 — exact endpoint geometry and the transverse obstruction
+
+Put
+
+\[
+\alpha_N=\frac{\log2}{\log(2N)},
+\]
+
+and define the normalized fresh-block vector
+
+\[
+H_N=\chi+\sum_{a\le N}\mu(a)\rho_a
++\sum_{N<a\le2N}\mu(a)\frac{\log(2N/a)}{\log2}\rho_a.
+\]
+
+Coefficient comparison gives the exact affine relation
+
+\[
+\boxed{F_{2N}=(1-\alpha_N)F_N+\alpha_NH_N.}
+\]
+
+The shell in `H_N` is essential; replacing `H_N` by the sharp truncation at
+`N` makes the formula false.
+
+### Lemma 7 (endpoint polarization)
+
+For every `N>=2`,
+
+\[
+\boxed{
+P_N-P_{2N}=\alpha_N(P_N-\|H_N\|^2)
++\alpha_N(1-\alpha_N)\|F_N-H_N\|^2.}
+\]
+
+Equivalently, put `Delta_N=F_N-H_N` and decompose
+
+\[
+\Delta_N=q_NF_N+Z_N,
+\qquad Z_N\perp F_N.
+\]
+
+Then
+
+\[
+\boxed{
+P_N-P_{2N}=(2\alpha_Nq_N-\alpha_N^2q_N^2)P_N
+-\alpha_N^2\|Z_N\|^2.}
+\]
+
+### Proof
+
+The first identity is the Hilbert-space variance identity for a convex
+combination. The second follows from
+`F_(2N)=(1-alpha_N q_N)F_N-alpha_N Z_N` and orthogonality. QED.
+
+This hostile sign audit is decisive: the convexity formula contains a positive
+square, but after projection the transverse remainder enters the endpoint
+drop with a **negative** coefficient. Generic Hilbert geometry cannot prove
+contraction. The exact endpoint target is equivalent to
+
+\[
+\boxed{
+q_N-\frac{\alpha_N}{2}
+\left(q_N^2+\frac{\|Z_N\|^2}{P_N}\right)
+\ge\frac{\kappa W_N}{\alpha_N}.}
+\]
+
+Thus both sufficiently positive parallel correlation and control of the
+transverse shell are required.
+
+The same comparison in coefficient coordinates cancels the common old--old
+quadratic form. All elementary pieces factor into finite Möbius moments; the
+only non-elementary remainder is one signed old/new Vasyunin bilinear sum.
+The new-index part has the exact gcd decomposition over coprime `p,q` with
+`max(p,q)>N/d`. It has no known sign.
+
+An abstract one-dimensional dictionary respecting the exact taper
+coefficients can make `||F_(2N)||>||F_N||`; hence no coefficient-only convexity
+argument is possible. The arithmetic fractional-part dictionary is essential.
+
+### Extended finite endpoint certificates
+
+Rigorous breakpoint/Arb enclosures certify positive endpoint contraction
+ratios through the block `4096 -> 8192`. The conservative enclosure for
+`8192 -> 16384` overlaps zero and is inconclusive, not a counterexample.
+Reconnaissance centers remain positive. These are finite audits only.
+
+## Next queued main-funnel step
+
+The active exact obstruction is the transverse ratio
+
+\[
+\Theta_N=\alpha_N\|Z_N\|^2/(P_Nq_N)
+\]
+
+when `q_N>0`. Derive it directly as a Schur complement of the restricted Gram
+matrix for the old vector and fresh block. Seek a Möbius-specific upper bound
+`Theta_N<=2-delta` together with `q_N >> W_N/alpha_N`; these two statements
+yield endpoint contraction. Simultaneously compute certified enclosures for
+`q_N` and `Theta_N` on weak dyadic blocks to identify which factor actually
+degenerates. Any argument dropping `Z_N` is invalid.
