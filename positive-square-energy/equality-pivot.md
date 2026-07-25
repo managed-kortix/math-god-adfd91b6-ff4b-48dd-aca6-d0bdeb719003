@@ -370,6 +370,73 @@ cannot support the proposed convex-cone argument.  Any continuation must
 use an additional condition specific to complete cyclic blocks; it cannot
 deduce that condition from the global projection geometry alone.
 
+## Reduction to at least two triangle blocks
+
+The complete-block conclusion can be sharpened without any further equality
+analysis.  Let `K_h` be a leaf cyclic block with cut vertex `t`.  Its noncut
+vertices induce `K_{h-1}`, while the remaining vertices induce a connected
+graph `R` of order `n-h+1`.  Square-energy superadditivity and the LTZ theorem
+give
+
+`s+(G) >= s+(K_{h-1})+s+(R) >= (h-2)^2+n-h`.
+
+For `h>=4`, the right side exceeds `n-1` by `(h-1)(h-3)`.  Since every
+finite block-cut tree has a leaf block and cyclic leaf blocks were already
+excluded by the tensor argument above, this estimate is mainly useful as a
+local simplification: any cyclic block that becomes a leaf after pruning
+bridge-only branches cannot have order at least four.  In particular, the
+remaining equality-sensitive obstruction should first be attacked in the
+class whose blocks are `K_2` and `K_3`; a proof that pruning preserves the
+needed spectral equality data is still required before asserting that all
+internal complete blocks have order three.
+
+The one-triangle case is independently excluded by Ning--Zeng,
+arXiv:2605.24668v1 (submitted 2026-05-23), Theorem 1.2(ii): every unicyclic
+graph whose unique cycle has length `3 mod 4` satisfies `s+(G)>n`.  The paper's
+proof was checked at the statement and argument level: Sachs expansion gives
+`phi_G=mu_G-2mu_{G-V(C)}`, the normalized matching polynomials are positive on
+the positive imaginary axis, and their Coulson-type identity fixes the sign
+of `s+-s-`.  Thus a triangular block graph satisfying the putative equality
+must contain at least two triangles.
+
+For a `K_2/K_3` equality graph with `r` bridge blocks and `t` triangle blocks,
+
+`n-1=r+2t`, `q=r+4t`,
+
+and the equality-forced edge pairs are
+
+`(B_uv,P_uv)=(-1/2,1/2)` on bridges and `(-2/3,1/3)` on triangles.
+
+Applying the LTZ fold to `P o P` supplies no contradiction.  If `N_-` and
+`N_+` are the folds of `B o B` and `P o P`, respectively, then exactly
+
+`N_-=(1/4)sum_bridges J_e+(4/9)sum_triangles J_T`,
+
+`N_+=(1/4)sum_bridges J_e+sum_triangles((1/3)I_T+(1/9)J_T)`.
+
+Thus `N_+` is manifestly PSD and its full LTZ slack is
+
+`q T_+-4S_+^2=2t(n-1)`.
+
+This records and closes the tempting but circular second-LTZ route: the LTZ
+coefficient is `q`, not `n-1`, so `P o P` is an equality matrix only after
+one has already proved `q=n-1`, equivalently that the graph is a tree.
+
+The genuinely unused information is therefore the off-diagonal part of
+`PB=0`.  If `a_v=B_vv`, and `T=abc` is a triangle, define
+
+`E^T_uv=sum_{w notin T} P_uw B_wv`.
+
+Then direct expansion gives
+
+`E^T_aa=4/9-a_a^2`,
+
+`E^T_ab=(2a_a-a_b)/3+2/9` for distinct `a,b in T`.
+
+These oriented branch-correlation identities, together with PSD, are the
+current exact frontier.  Diagonal equations alone reproduce only the folded
+atom model.
+
 ## Research protocol
 
 This is now the sole primary proof object.  New agents, if used, receive this

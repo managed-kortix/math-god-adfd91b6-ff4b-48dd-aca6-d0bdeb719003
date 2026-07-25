@@ -348,7 +348,17 @@ research/semantic, research/procedural).
    `s+=n-1`, then every edge in a block `H` has
    `B_uv=-(2|E(H)|-|V(H)|+1)/(2|E(H)|)`.  Bridges give `-1/2`; cyclic blocks
    would give a constant strictly below `-1/2` on every block edge.  Prove
-   this cannot occur using `A=P-B`, `PB=0`.  Shared proof object:
+   this cannot occur using `A=P-B`, `PB=0`.  The unused deletion estimate now
+   proves every cyclic equality block is complete, and a tensor argument
+   excludes cyclic leaf blocks.  A leaf-block partition excludes `K_h`,
+   `h>=4`, whenever it is exposed after bridge pruning.  Ning--Zeng,
+   arXiv:2605.24668v1, independently excludes the one-triangle case by proving
+   `s+>n` for every unicyclic graph with cycle length `3 mod 4`.  The active
+   residual is a block graph with internal complete blocks, beginning with at
+   least two triangle blocks.  Applying LTZ to `A_+ o A_+` does not finish:
+   its exact slack is `qT-4S^2`, and using `n-1` instead of `q` is circular.
+   The current exact frontier is the off-diagonal branch-correlation system
+   from `A_+A_-=0`.  Shared proof object:
    `positive-square-energy/equality-pivot.md`.
 1. Assemble the complete weighted-theta theorem paper from the signed-square
    bare theorem, local four-fifths reduction, and direct exception gates.
