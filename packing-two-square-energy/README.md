@@ -2,7 +2,8 @@
 
 This directory contains a self-contained LaTeX manuscript proving a
 square-energy sign theorem for graphs whose maximum collection of pairwise
-vertex-disjoint cycles has size at most two.
+vertex-disjoint cycles has size at most two, together with applications
+through tetracyclic block graphs.
 
 ## Main result
 
@@ -31,6 +32,12 @@ continuous argument and a Coulson identity then determine the sign of
   block structures are one `K4`, or three triangles; the packing-three case
   is split into three induced triangular unicyclic pieces by deleting two
   bridges.
+- Every connected tetracyclic block graph satisfies `s+(G) > n`. For a
+  `K4` plus a triangle, the proof either splits vertex-disjoint blocks at a
+  bridge or handles a shared cut vertex directly by Sachs phases. For four
+  triangles, the packing-three obstruction is classified as a single
+  `K1,3` cyclic cluster and resolved by explicit matching injections that
+  force the normalized characteristic polynomial into the lower half-plane.
 - Triangular cacti whose triangles are covered by at most two bouquets have
   `s+ > s-`, including friendship and double friendship constructions.
 - The manuscript proves the structural theta-obstruction lemma rather than

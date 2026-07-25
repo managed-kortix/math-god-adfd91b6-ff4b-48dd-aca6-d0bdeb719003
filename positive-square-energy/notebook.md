@@ -1717,3 +1717,21 @@ the bridge tree, cut two bridges to isolate one mark per component, and apply
 Ning--Zeng to all three induced triangular unicyclic components.  Positive
 square-energy superadditivity gives `s+(G)>n`.  Thus AKMPZ Conjecture 1.2 also
 holds strictly for every tricyclic block graph.
+
+Cyclomatic rank four is also settled.  Block additivity leaves `K4+K3` or
+four triangles.  Vertex-disjoint `K4,K3` split over a bridge; a shared cut
+admits direct Sachs phase control because the only disjoint two-cycle term is
+two triangles and therefore real.  Four triangles with packing at most two
+use the packing theorem, and packing four splits into unicyclic pieces.  For
+packing three, bridge-separated cyclic clusters reduce to ranks at most three.
+The sole one-cluster obstruction is a central triangle `T0` meeting three
+pairwise disjoint petal triangles `T1,T2,T3` at distinct vertices.  With
+`U=union V(Ti)` and `F=G-U`,
+
+`Im Psi=-2 sum_{j=0}^3 Z_{G-V(Tj)}+8 Z_F`.
+
+Deleting `T0` leaves three disjoint edges, giving
+`Z_{G-V(T0)}>=(1+t^2)^3 Z_F`.  Deleting a petal leaves a six-vertex core with
+a perfect matching, giving `Z_{G-V(Ti)}>Z_F`.  Thus the singleton sum is
+strictly greater than `4Z_F`, so `Im Psi<0`, `s+>s-`, and in particular
+`s+>n`.  The result passed two structural audits and a final manuscript gate.

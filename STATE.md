@@ -350,7 +350,14 @@ research/semantic, research/procedural).
    three triangles plus bridges.  The `K4` case has fixed negative Sachs
    imaginary part; three non-disjoint triangles use packing-two; three
    disjoint triangles split across two bridges into three induced triangular
-   unicyclic graphs.  Paper: `packing-two-square-energy/`.
+   unicyclic graphs.  The paper now also settles every connected tetracyclic
+   block graph: cyclic blocks are `K4+K3` or four triangles.  Mixed clique
+   cases use bridge decomposition or direct Sachs phase; four-triangle
+   packing-three has one exceptional central-triangle/three-petal cluster,
+   where explicit injections between matching families force the negative
+   singleton Sachs terms to dominate the positive triple term pointwise.
+   Hence `s+>n` for cyclomatic ranks 2, 3, and 4 in block graphs.
+   Paper: `packing-two-square-energy/`.
    The packing threshold is sharp for the fixed-imaginary-sign mechanism: a
    chain of three disjoint triangles has positive imaginary part near zero,
    although its lifted phase remains negative.

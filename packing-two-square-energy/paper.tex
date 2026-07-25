@@ -35,7 +35,8 @@ vertex-disjoint cycles is at most two.  If every cycle has length $1$ modulo $4$
 is reversed.  The proof groups the Sachs expansion by collections of
 vertex-disjoint cycles.  On the imaginary axis each cycle contributes the
 phase $-2\ii^{-\ell}$, while the remaining factor is a signless matching
-polynomial with positive coefficients.  Packing number at most two then
+polynomial with nonnegative coefficients and positive value on the positive
+axis.  Packing number at most two then
 puts the normalized characteristic polynomial strictly in one open
 half-plane.  A Coulson identity converts this fixed argument sign into the
 claimed square-energy inequality.  Applications include a strict form of
@@ -402,6 +403,152 @@ Applying \eqref{eq:superadditivity} to this induced vertex partition gives
  >\sum_{j=1}^3|V(G_j)|=n.
 \]
 This completes all cases.
+\end{proof}
+
+The tetracyclic case requires one additional configuration.  In that
+configuration three disjoint triangle blocks meet a fourth triangle block,
+and the one-cycle and three-cycle terms in the Sachs expansion must be
+compared quantitatively.
+
+\begin{proposition}[Tetracyclic block graphs]\label{prop:tetracyclic-block}
+Let $G$ be a connected block graph with $n$ vertices and cyclomatic number
+$4$.  Then
+\[
+ s^+(G)>n.
+\]
+Thus Conjecture~1.2 of Akbari--Kumar--Mohar--Pragada--Zhang holds strictly
+for every tetracyclic block graph.
+\end{proposition}
+
+\begin{proof}
+The contribution of a clique block $K_r$ to the cyclomatic number is
+$(r-1)(r-2)/2$.  Consequently, the cyclic blocks of $G$ are either one
+$K_4$ and one $K_3$, or four copies of $K_3$; all remaining blocks are
+bridges.  Also
+\begin{equation}\label{eq:tetracyclic-edges}
+ |E(G)|=n-1+\beta(G)=n+3.
+\end{equation}
+
+First suppose that the cyclic blocks are a $K_4$ and a $K_3$.  If they are
+vertex-disjoint, the path between them in the block--cut tree contains a
+bridge block.  Deleting the corresponding bridge partitions $V(G)$ into
+two sets inducing connected block graphs $G_1,G_2$, one containing the
+$K_4$ and the other the $K_3$.  Proposition~\ref{prop:tricyclic-block} and
+the odd-unicyclic result of Ning and Zeng give
+\[
+ s^+(G)\ge s^+(G_1)+s^+(G_2)
+ >|V(G_1)|+|V(G_2)|=n.
+\]
+Here and below we use induced-subgraph superadditivity
+\eqref{eq:superadditivity} for the vertex partition produced by deleting
+bridges.
+
+Otherwise the two clique blocks share their unique possible common vertex,
+which is a cut vertex.  We apply the grouped Sachs expansion directly.
+Every triangle has phase $-2\ii$, while every $4$-cycle has the real phase
+$-2$.  The triangle of the $K_4$ avoiding the common cut vertex is
+vertex-disjoint from the external $K_3$, but that two-triangle term is real.
+Every $4$-cycle of the $K_4$ contains the cut vertex, so no $4$-cycle is
+disjoint from the external triangle.  There are no other collections that
+can contribute to the imaginary part.  Hence
+\[
+ \operatorname{Im}\Psi_G(t)
+ =-2\sum_{T\text{ a triangle of }G}Z_{G-V(T)}(t)<0
+ \qquad(t>0).
+\]
+The continuous-argument and Coulson steps in the proof of
+Theorem~\ref{thm:main} yield $s^+(G)>s^-(G)$, and then
+\eqref{eq:sum} and \eqref{eq:tetracyclic-edges} give
+$s^+(G)>|E(G)|=n+3>n$.
+
+It remains to consider four triangle blocks.  Write $p$ for their maximum
+vertex-disjoint packing size.  If $p\le2$, Theorem~\ref{thm:main}(i) gives
+$s^+(G)>s^-(G)$ and hence $s^+(G)>n+3$.  If $p=4$, contract the four
+pairwise disjoint triangle blocks to four marked vertices.  The remaining
+blocks are bridges, so the resulting graph is a tree.  Deleting three
+appropriate bridge edges separates the four marked vertices into four
+components.  Thus $V(G)$ is partitioned into four induced triangular
+unicyclic graphs $G_1,\ldots,G_4$, and
+\[
+ s^+(G)\ge\sum_{j=1}^4s^+(G_j)
+ >\sum_{j=1}^4|V(G_j)|=n.
+\]
+
+Suppose finally that $p=3$.  Define the \emph{intersection graph} of the
+triangle blocks to have one vertex for each triangle and an edge when two
+triangles share a vertex.  A \emph{cyclic cluster} is a connected component
+of this intersection graph.  If there is more than one cyclic cluster,
+then paths between clusters in the block--cut tree contain bridge blocks.
+Deleting suitable such bridges partitions $V(G)$ into induced connected
+block graphs, one for each cluster (with any pendant bridge-only branches
+assigned to the adjacent piece).  Each piece has at most three triangle
+blocks and therefore cycle rank at most three.  The odd-unicyclic result,
+Corollary~\ref{cor:block}, and
+Proposition~\ref{prop:tricyclic-block}, according to the rank of the piece,
+show that its positive square energy is strictly larger than its order.
+Superadditivity then gives $s^+(G)>n$.
+
+We are left with one cyclic cluster.  The packing number is the independence
+number of the triangle intersection graph.  Choose three independent
+vertices, corresponding to pairwise vertex-disjoint triangles
+$T_1,T_2,T_3$.  The fourth triangle $T_0$ must meet each $T_i$, since the
+intersection graph is connected and there are no edges among the $T_i$.
+Thus the intersection graph is $K_{1,3}$.  Moreover, the three intersection
+vertices
+\[
+ x_i=V(T_0)\cap V(T_i)\qquad(1\le i\le3)
+\]
+are distinct: if two were equal, the corresponding petals would intersect.
+This proves the required one-cluster classification; $T_0$ is the central
+triangle and the $T_i$ are its pairwise disjoint petals.
+
+Put
+\[
+ U=V(T_1)\cup V(T_2)\cup V(T_3),\qquad F=G-U.
+\]
+The only odd-cardinality collections of pairwise disjoint cycles are the
+four singleton triangles and the collection of all three petals.  Since
+$(-2\ii)^3=8\ii$, the exact Sachs identity for the imaginary part is
+\begin{equation}\label{eq:tetracyclic-imaginary}
+ \operatorname{Im}\Psi_G(t)
+ =-2\sum_{j=0}^3Z_{G-V(T_j)}(t)+8Z_F(t).
+\end{equation}
+We show that the negative terms dominate pointwise for every $t>0$.
+
+After deleting $T_0$, each petal leaves one edge, and these three edges are
+pairwise disjoint and disjoint from $F$.  Given a matching of $F$, adjoin
+an arbitrary subset of these three edges.  This is a weight-preserving
+injection into the matchings of $G-V(T_0)$ and gives
+\begin{equation}\label{eq:central-deletion-bound}
+ Z_{G-V(T_0)}(t)\ge(1+t^2)^3Z_F(t)>Z_F(t).
+\end{equation}
+Indeed, relative to a monomial of $Z_F$, choosing $r$ of the three edges
+contributes $t^{6-2r}$, whose sum over all choices is $(1+t^2)^3$.
+
+For $i\in\{1,2,3\}$, let $H_i$ be the subgraph induced by
+$U\setminus V(T_i)$.  It has a perfect matching: use the edge
+$x_jx_k$ of $T_0$, where $\{i,j,k\}=\{1,2,3\}$, together with the edge
+joining the two noncentral vertices in each of $T_j$ and $T_k$.  Therefore
+$Z_{H_i}(t)>1$: the perfect matching supplies a constant term, and the
+empty matching supplies the positive term $t^6$.  Taking the union of a
+matching of $H_i$ and a matching of $F$ gives a weight-preserving product
+injection into the matchings of $G-V(T_i)$, so
+\begin{equation}\label{eq:petal-deletion-bound}
+ Z_{G-V(T_i)}(t)\ge Z_{H_i}(t)Z_F(t)>Z_F(t).
+\end{equation}
+In both injections, any additional edges from the displayed subgraphs to
+the arbitrary forest $F$ are simply ignored; their presence cannot destroy
+the injected matchings.
+
+Equations \eqref{eq:central-deletion-bound} and
+\eqref{eq:petal-deletion-bound} imply
+\[
+ \sum_{j=0}^3Z_{G-V(T_j)}(t)>4Z_F(t).
+\]
+Thus \eqref{eq:tetracyclic-imaginary} is strictly negative for every
+$t>0$.  The same phase and Coulson argument again yields
+$s^+(G)>s^-(G)$, and consequently
+$s^+(G)>|E(G)|=n+3>n$.
 \end{proof}
 
 We next state a convenient cactus family.  A triangular cactus is a
