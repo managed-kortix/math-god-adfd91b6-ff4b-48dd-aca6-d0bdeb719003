@@ -5,13 +5,14 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** program bootstrap; establish exact statement dossiers and choose
-  the first main proof funnel by a documented tractability/transfer audit
-- **active main funnel:** selection audit (temporary, must resolve to one named
-  problem and one concrete lemma before broad literature work expands)
+- **phase:** first exact proof funnel, with six statement dossiers established
+- **active main funnel:** Riemann hypothesis — logarithmically smoothed
+  discrete Nyman--Beurling norm bound; the exact period-average tail lemma is
+  proved, and the current sublemma is a polynomial-length incomplete-period
+  discrepancy bound for the squared sawtooth sum
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 1
+- **cycle:** 2
 - **announcements:** none
 
 ## immutable target list
@@ -30,18 +31,16 @@ waiting process.
 
 ## next exact steps
 
-1. Freeze the verbatim official statement and victory/non-victory tests for
-   each target in six dossiers, with sources and dates.
-2. Run six independent route audits plus six adversarial "why this route
-   cannot solve the official statement" audits. Require concrete mathematical
-   outputs, not motivational surveys.
-3. Score candidate first bottlenecks by exactness, falsifiability, transfer to
-   other targets, available formal infrastructure, and probability of a
-   genuinely new lemma. Select one main funnel explicitly.
-4. Start that funnel with a minimal exact claim and a simultaneous
-   counterexample search. Record failed claims immediately.
-5. Update this file every tick and always leave the next executable proof or
-   computation queued.
+1. Expand the short-block integral of the squared sawtooth sum and prove or
+   falsify a polynomial incomplete-period discrepancy bound that avoids
+   `lcm(1,...,N)` and the coefficient `l1` norm.
+2. Run `exact_norm_enclosure.sage` when Sage is available and preserve ball
+   endpoints; independently audit the discrete criterion's normalization.
+3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
+   Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
+   P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
+4. Rotate only at a proved checkpoint, decisive falsification, or documented
+   strategic review.
 
 ## last ticks
 
@@ -49,3 +48,13 @@ waiting process.
   on all six unsolved Millennium Prize Problems. Added a dedicated agent,
   keyed heartbeat, isolated memory, and anti-overclaim victory criteria while
   preserving the existing positive-square-energy trajectory in Lane A.
+- 2026-07-25: ran six independent route/breaker audits, froze all six statement
+  dossiers, scored concrete bottlenecks, and selected RH as the first main
+  funnel. Proved the finite breakpoint enclosure lemma for the explicit
+  Nyman--Beurling approximants and added a Sage/Arb certificate script. No
+  Millennium problem is claimed solved.
+- 2026-07-25: proved a second exact RH-route lemma: the omitted-origin tail is
+  enclosed by its explicit gcd-kernel period average with relative loss
+  controlled by `lcm(1,...,N)/Q`. This also falsified periodicity alone as an
+  efficient large-`N` certificate and queued the short-block discrepancy
+  problem.

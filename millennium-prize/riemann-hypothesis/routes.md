@@ -1,0 +1,25 @@
+# Routes
+
+## Active route: explicit discrete Nyman--Beurling approximants
+
+For `N >= 3`, put
+
+\[
+c_a=\mu(a)\frac{\log(N/a)}{\log N},\qquad
+F_N(x)=1_{(0,1)}(x)+\sum_{a\le N}c_a\{1/(ax)\}.
+\]
+
+Candidate lemma: there are absolute `C,N0` such that
+
+\[
+ \|F_N\|_{L^2(0,\infty)}^2\le C/\log N\quad(N\ge N_0).
+\]
+
+By Báez-Duarte's discrete Nyman--Beurling criterion this implies RH. The route
+is knowingly RH-strength. The proof may not use critical-line convergence of
+`sum mu(n)n^-s`, an RH-level Mertens bound, or an RH-conditional mollifier
+estimate.
+
+Primary route references: Báez-Duarte, arXiv:math/0202141 and
+arXiv:math/0205003; Burnol, arXiv:math/0103058; Bettin--Conrey--Farmer,
+arXiv:1211.5191.
