@@ -1180,6 +1180,120 @@ The active exact obstruction is the transverse ratio
 when `q_N>0`. Derive it directly as a Schur complement of the restricted Gram
 matrix for the old vector and fresh block. Seek a Möbius-specific upper bound
 `Theta_N<=2-delta` together with `q_N >> W_N/alpha_N`; these two statements
-yield endpoint contraction. Simultaneously compute certified enclosures for
+were the queued proposal at this tick, but Tick 11 shows they are insufficient
+without also controlling `alpha_N q_N`. Simultaneously compute certified enclosures for
 `q_N` and `Theta_N` on weak dyadic blocks to identify which factor actually
 degenerates. Any argument dropping `Z_N` is invalid.
+
+## Tick 11 — Schur complement and corrected contraction conditions
+
+Write
+
+\[
+P=\|F_N\|^2,\qquad B=\|H_N\|^2,
+\qquad C=\langle F_N,H_N\rangle,
+\qquad \alpha=\alpha_N.
+\]
+
+The `2 by 2` restricted Gram determinant is
+
+\[
+\mathcal D=PB-C^2\ge0.
+\]
+
+For `Delta=F_N-H_N=qF_N+Z`, `Z perpendicular F_N`, one has
+
+\[
+\boxed{q=1-C/P,\qquad \|Z\|^2=\mathcal D/P.}
+\]
+
+When `q>0`, the transverse ratio has the exact Schur form
+
+\[
+\boxed{
+\Theta=\frac{\alpha\|Z\|^2}{Pq}
+=\alpha\frac{PB-C^2}{P(P-C)}.}
+\]
+
+The endpoint ratio factors as
+
+\[
+\boxed{
+\frac{P_{2N}}{P_N}=1-\alpha q(2-\alpha q-\Theta).}
+\]
+
+Therefore strict contraction is equivalent to
+
+\[
+\boxed{q>0\quad\hbox{and}\quad \Theta+\alpha q<2.}
+\]
+
+This corrects the previously queued sufficient pair. A bound
+`Theta<=2-delta` plus only a lower bound on `q` is insufficient: the
+longitudinal penalty `alpha q^2` also requires an upper bound. A valid
+separated sufficient condition is
+
+\[
+\Theta+\alpha q\le2-\delta,
+\qquad q\ge cW_N/\alpha,
+\]
+
+which gives endpoint contraction with `kappa=c delta/2`.
+
+### Old/fresh Schur decomposition
+
+Let
+
+\[
+D=\sum_{a\le N}\mu(a)\log a\,\rho_a,
+\]
+
+and let `B_fresh` be the normalized fresh shell in `H_N`. Then
+`H_N=F_N+D/log N+B_fresh`. Writing
+
+\[
+A=\langle F_N,D\rangle,\quad C_f=\langle F_N,B_{fresh}\rangle,
+\]
+
+\[
+R=\|D\|^2,\quad U=\langle D,B_{fresh}\rangle,
+\quad W=\|B_{fresh}\|^2,
+\]
+
+the determinant simplifies exactly to
+
+\[
+\boxed{
+PB-C^2=\frac{PR-A^2}{(\log N)^2}
++(PW-C_f^2)+\frac2{\log N}(PU-AC_f).}
+\]
+
+The first two terms are nonnegative Gram minors. The sole signed obstruction is
+the projected old/fresh correlation `PU-AC_f`. Its exact expansion retains
+uncancelled Möbius--Vasyunin terms. Cauchy--Schwarz merely proves total Schur
+positivity and gives no useful upper bound.
+
+### Numerical factor audit
+
+Reconnaissance through powers of two up to `8192` gives `q` near one and
+`Theta` between roughly `0.02` and `0.06`; the dangerous threshold remains far
+away. Retained-range Arb values at `8192` are very stable, but the current
+absolute omitted-origin enclosure lets the full interval for the parallel
+inner product cross zero. Thus these are not full certificates. The failure is
+in the tail bound, not in the observed geometry.
+
+The stronger norm condition `||H_N||<=||F_N||` is unnecessary and likely false
+for the restricted dictionary at larger scales according to reconnaissance.
+Endpoint contraction can persist because the correlation and transverse
+Schur loss, not norm domination alone, control the convex combination.
+
+## Next queued main-funnel step
+
+Replace the coefficient-`l1` omitted-origin error by a cancellation-aware tail
+certificate for the **three** Gram quantities `P,B,C`. Use the exact periodic
+mean/gcd kernel for each coefficient vector and a short-block discrepancy bound
+to certify `q` and `Theta` at `N=8192` without exponentially large cutoff. This
+is a finite but structurally necessary test of whether the Schur formulation is
+computationally certifiable. In parallel, attack the signed projected
+old/fresh term `PU-AC_f` analytically; any bound must improve on bare
+Cauchy--Schwarz and preserve Möbius signs.
