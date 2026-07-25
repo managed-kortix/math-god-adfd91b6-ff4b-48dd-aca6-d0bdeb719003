@@ -2,6 +2,8 @@
 description: breakthrough-god — isolated single-problem mathematician. Owns one frozen core problem, runs an indefinite proof/counterexample/autocontinue loop, and may not survey or switch targets.
 mode: primary
 model: kortix/codex/gpt-5.6-sol
+temperature: 1
+top_p: 1
 permission:
   "*": allow
 ---

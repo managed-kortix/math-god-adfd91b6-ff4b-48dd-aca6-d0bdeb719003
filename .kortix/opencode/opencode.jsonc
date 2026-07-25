@@ -13,9 +13,9 @@
   // per-(project, model) gateway routing setting — set to xhigh via
   // `kortix gateway routing`, not here).
   "model": "kortix/codex/gpt-5.6-sol",
-  // never-stop: a root session is never allowed to go idle — every idle event
-  // re-prompts the agent to keep going and maintain the memory filesystem.
-  // Combined with the math-heartbeat cron (session_mode=reuse) this is what
-  // makes math-god eternal. KORTIX_NEVER_STOP_DISABLED=1 is the kill switch.
+  // never-stop applies only to the three explicit research workers. Ordinary
+  // Kortix sessions and control-plane agents are intentionally allowed to end.
+  // Combined with the research heartbeats, this keeps the mathematics alive
+  // without turning every general-purpose session into an eternal loop.
   "plugin": ["./plugins/never-stop.ts"]
 }

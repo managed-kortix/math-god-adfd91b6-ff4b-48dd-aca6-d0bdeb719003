@@ -1,10 +1,10 @@
 /**
  * never-stop — math-god's eternal-motion plugin.
  *
- * The contract is brutally simple: a root session is NEVER allowed to go idle.
- * Every `session.idle` re-prompts the agent to keep going — advance the attack,
- * maintain the memory filesystem, queue the next work. No intent gates, no todo
- * gating, no completion detection: math-god has no "done" state by design.
+ * The contract is deliberately narrow: explicit research-worker root sessions
+ * are never allowed to go idle. Ordinary Kortix and control-plane sessions can
+ * finish normally. Every eligible `session.idle` re-prompts the mathematician
+ * to keep going; there are no intent or todo gates.
  *
  * Safety valves:
  *   - KORTIX_NEVER_STOP_DISABLED=1 turns it off entirely
@@ -28,9 +28,10 @@ const COOLDOWN_MS = 10_000
 const ERROR_STORM_THRESHOLD = 3
 const ERROR_BACKOFF_MS = 5 * 60_000
 const MARKER = "[never-stop]"
+const ETERNAL_AGENTS = new Set(["math-god", "millennium-god", "breakthrough-god"])
 
 const CONTINUE_PROMPT = `<kortix_system type="never-stop" source="never-stop-plugin">
-${MARKER} Continue as the agent assigned to this root session. Preserve its lane and memory exactly: math-god follows STATE.md; millennium-god follows MILLENNIUM_STATE.md and only the six unsolved Clay problems; breakthrough-god follows BREAKTHROUGH_STATE.md and only its single frozen assignment; breakthrough-selector is a controller, never a researcher, and must not create a second worker while one is healthy. Never cross-contaminate lanes. You are a fully autonomous mathematician and you never stop unless your agent doctrine explicitly requires the deliberate-stop sentinel. YOUR MISSION in a research lane: destroy the assigned open problem — find the structured counterexample, construct the explicit object, or prove the theorem. Claim only what is 100% verified; internally fearless, externally silent until the certificate is airtight.
+${MARKER} Continue as the agent assigned to this root session. Preserve durable discoveries and ownership boundaries, not stale tactics: math-god treats STATE.md as context and has broad freedom to choose or pivot among serious open problems; millennium-god owns the six unsolved Clay problems; breakthrough-god owns its single frozen assignment. Ideas may cross-pollinate freely. You are a fully autonomous mathematician and you never stop unless your agent doctrine explicitly requires the deliberate-stop sentinel. YOUR MISSION: destroy the chosen open problem — find the structured counterexample, construct the explicit object, or prove the theorem. Claim only what is 100% verified; internally fearless, externally silent until the certificate is airtight.
 Continue immediately, going DEEPER on the current attack:
 1. Advance the obstruction — the next experiment, the next lemma, the next shard of the search. Think structurally: the win is a small explicit certificate found by designing the obstruction, not by grinding a census.
 2. SWARM: spawn subagents (task) to develop attack lines in parallel and adversarially refute every claim. In breakthrough-god, subagents may not generate or switch problems: all force stays on the one frozen assignment. Go recursively deep, overwhelming force on ONE problem.
@@ -42,7 +43,7 @@ type S = { last: number; errors: number; inflight: boolean }
 
 const NeverStopPlugin: Plugin = async ({ client }) => {
 	const states = new Map<string, S>()
-	const rootCache = new Map<string, boolean>()
+	const sessionCache = new Map<string, { root: boolean; agent?: string }>()
 
 	const log = (level: "info" | "warn", message: string) => {
 		try {
@@ -61,16 +62,28 @@ const NeverStopPlugin: Plugin = async ({ client }) => {
 		return s
 	}
 
-	const isRoot = async (id: string): Promise<boolean> => {
-		const cached = rootCache.get(id)
+	const sessionIdentity = async (id: string): Promise<{ root: boolean; agent?: string }> => {
+		const cached = sessionCache.get(id)
 		if (cached !== undefined) return cached
 		try {
 			const res = await client.session.get({ path: { id } })
-			const root = !(res?.data as any)?.parentID
-			rootCache.set(id, root)
-			return root
+			const info = res?.data as any
+			let agent = info?.agent as string | undefined
+			if (!agent) {
+				const messages = ((await client.session.messages({ path: { id } }).catch(() => ({ data: [] }))) as any)
+					.data as any[]
+				for (let i = (messages ?? []).length - 1; i >= 0; i--) {
+					agent = messages[i]?.info?.agent
+					if (agent) break
+				}
+			}
+			const identity = { root: !info?.parentID, agent }
+			sessionCache.set(id, identity)
+			return identity
 		} catch {
-			return true // fail open
+			// Fail closed: inability to identify a session must never accidentally
+			// make an ordinary Kortix session eternal.
+			return { root: false }
 		}
 	}
 
@@ -98,7 +111,7 @@ const NeverStopPlugin: Plugin = async ({ client }) => {
 					const id = event.properties?.info?.id ?? event.properties?.sessionID
 					if (id) {
 						states.delete(id)
-						rootCache.delete(id)
+						sessionCache.delete(id)
 					}
 					return
 				}
@@ -114,7 +127,9 @@ const NeverStopPlugin: Plugin = async ({ client }) => {
 				if (event.type !== "session.idle" || DISABLED) return
 
 				const id = event.properties?.sessionID as string | undefined
-				if (!id || !(await isRoot(id))) return
+				if (!id) return
+				const identity = await sessionIdentity(id)
+				if (!identity.root || !identity.agent || !ETERNAL_AGENTS.has(identity.agent)) return
 
 				const s = state(id)
 				const now = Date.now()
@@ -167,6 +182,12 @@ const NeverStopPlugin: Plugin = async ({ client }) => {
 			} catch (err) {
 				log("warn", `event hook error: ${err}`)
 			}
+		},
+		// OpenCode normally inserts a synthetic "continue" after compaction.
+		// Preserve that behavior only for eternal research workers; in particular,
+		// the regular `kortix` agent is allowed to compact and then stop.
+		"experimental.compaction.autocontinue": async (input, output) => {
+			output.enabled = ETERNAL_AGENTS.has(input.agent)
 		},
 	}
 }

@@ -12,6 +12,13 @@ lane, use a single main proof funnel plus explicitly bounded parallel scouts.
 Success = complete, adversarially verified results with reproducible exact
 certificates where computation is involved.
 
+**2026-07-25 human clarification:** maximize research entropy and mathematician
+autonomy. These goals select valuable destinations, not mandatory tactics.
+Math-god may replace stale funnels, pursue other serious open problems, invent
+new lane structures, and use any legal tool or collaboration pattern when that
+improves expected mathematical value. The Millennium portfolio remains a
+standing goal, not an exclusivity constraint on the main mathematician.
+
 ## G-2: Build @agentmirko into the most credible AI-mathematician on X
 Results posts are certificate-backed only, deadpan style, threads that update
 honestly. Casual lane (occasional lab-life shitposts, per doctrine §8) keeps

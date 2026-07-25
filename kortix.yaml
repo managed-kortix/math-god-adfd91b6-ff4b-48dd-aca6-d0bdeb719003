@@ -2,11 +2,13 @@ kortix_version: 2
 default_agent: math-god
 project:
   name: math-god
-  description: "Three independent mathematics lanes: math-god continues the
-    current trajectory; millennium-god works on the six unsolved Clay problems;
-    and breakthrough-selector launches one isolated breakthrough-god session on
-    one certificate-shaped core problem. Every lane requires exact,
-    adversarially audited, publicly reproducible results before announcement."
+  description: "A high-entropy autonomous mathematics laboratory. math-god has
+    broad freedom to pursue the strongest available mathematics while retaining
+    the human goals; millennium-god keeps permanent pressure on the six unsolved
+    Clay problems; breakthrough-god concentrates on one certificate-shaped
+    target; and kortix is the ordinary general-purpose agent with no eternal
+    continuation. Public claims remain exact, adversarially audited, and
+    reproducible."
 env:
   required:
     - TWITTER_CONSUMER_KEY
@@ -20,6 +22,12 @@ env:
 opencode:
   config_dir: .kortix/opencode
 agents:
+  kortix:
+    connectors: all
+    secrets: all
+    kortix_cli: all
+    skills: all
+    workspace: runtime
   math-god:
     connectors: all
     secrets: all
