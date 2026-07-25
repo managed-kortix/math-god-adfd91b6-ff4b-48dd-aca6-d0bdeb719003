@@ -77,7 +77,7 @@ g_N(t)=1+\sum_{a\le N}c_a\{t/a\},\qquad
 \mathcal A_N=\frac1L\int_0^L g_N(t)^2dt.
 \]
 
-For every integer `Q >= 1`,
+For every real `Q > 0`,
 
 \[
 \boxed{
@@ -136,7 +136,8 @@ For the closed form, over any common period,
 The second identity follows by reducing to the common period
 `lcm(a,b)` and summing the elementary integrals between its integer
 breakpoints (equivalently, the first periodic Bernoulli polynomial
-correlation). Expanding `g_N^2` yields the formula. QED.
+correlation). The convention for the centered sawtooth at its jump points is
+irrelevant to these integrals. Expanding `g_N^2` yields the formula. QED.
 
 ### Assessment
 
@@ -147,17 +148,281 @@ certificate. The lemma is nevertheless an exact theorem and a useful audit:
 it exposes that bare periodicity alone cannot supply a polynomial-cost tail
 bound.
 
-### Next queued main-funnel step
+## Tick 3 — pair-period discrepancy and strategic falsification
 
-Derive a **short-block** tail estimate that does not pay the full period `L`.
-The concrete target is to bound, uniformly in real `T >= Q`,
+The queued request for merely *some* polynomial incomplete-period discrepancy
+bound is too weak: pairwise expansion gives one immediately.
+
+Put
 
 \[
-\int_T^{T+H}g_N(t)^2dt
+\beta_a(t)=\{t/a\}-\tfrac12,\qquad
+C_N=1+\tfrac12\sum_{a\le N}c_a,
 \]
 
-for a polynomial block length `H=N^k`, by expanding the gcd kernel plus an
-explicit discrepancy term for incomplete sawtooth periods. Determine whether
-the discrepancy can be bounded by `O(N^A log^B N)` rather than by `L` or the
-coefficient `l1` norm; simultaneously search exact small `N,T,H` values for a
-counterexample to any proposed uniform discrepancy exponent.
+so that `g_N=C_N+sum c_a beta_a` almost everywhere. For `d=(a,b)`, put
+
+\[
+\mu_{a,b}=\frac{d^2}{12ab},\qquad
+L_{a,b}=\operatorname{lcm}(a,b)=\frac{ab}{d}.
+\]
+
+### Lemma 3 (elementary pair-period discrepancy)
+
+For all real `T` and `H >= 0`,
+
+\[
+\left|\int_T^{T+H}\beta_a(t)dt\right|\le \frac a8
+\]
+
+and
+
+\[
+\left|\int_T^{T+H}
+[\beta_a(t)\beta_b(t)-\mu_{a,b}]dt\right|
+\le \frac{L_{a,b}}3.
+\]
+
+Consequently, if
+
+\[
+\mathcal A_N=C_N^2+\sum_{a,b\le N}c_ac_b\mu_{a,b},
+\]
+
+then
+
+\[
+\boxed{
+\left|\int_T^{T+H}g_N(t)^2dt-H\mathcal A_N\right|
+\le \frac{|C_N|}{4}\sum_{a\le N}a|c_a|
++\frac13\sum_{a,b\le N}|c_ac_b|L_{a,b}.}
+\]
+
+For the route coefficients `|c_a| <= 1`, this is `O(N^4)` uniformly in
+`T,H`, with an absolute effective constant.
+
+### Proof
+
+The periodic primitive
+
+\[
+\frac a2 B_2(\{t/a\}),\qquad B_2(x)=x^2-x+\tfrac16,
+\]
+
+has derivative `beta_a` away from jumps. The oscillation of `B_2` on
+`[0,1]` is `1/4`, proving the first bound. The function
+`beta_a beta_b-mu_(a,b)` has period `L_(a,b)` and mean zero by Lemma 2.
+Delete all complete pair periods from `[T,T+H]`. The remaining interval has
+length below `L_(a,b)`, while
+
+\[
+|\beta_a\beta_b-\mu_{a,b}|\le\tfrac14+\tfrac1{12}=\tfrac13.
+\]
+
+This proves the pair bound. Expanding `g_N^2`, subtracting its mean, and
+applying the triangle inequality gives the boxed estimate. Finally,
+`L_(a,b)<=ab`, `|C_N|<=1+N/2`, and elementary sums give `O(N^4)`. QED.
+
+### Strategic consequence
+
+This proves the literal polynomial-discrepancy target but does **not** advance
+the RH-strength estimate. Indeed the even simpler pointwise bound
+`|g_N|<=N+1` already makes the weighted tail below `O(1/log N)` by taking a
+polynomial cutoff `Q >> N^2 log N`. The hard part is the norm on the retained
+range, not certification of the far tail. Pairwise absolute values erase the
+Möbius cancellation.
+
+This is a decisive falsification of the short-block route *at the strength
+previously queued*. No rotation of the main RH funnel is warranted; the
+bottleneck is sharpened instead.
+
+## Tick 3 arithmetic audit — the period variance is elementary
+
+The gcd quadratic form in `A_N` has the exact positive decomposition
+
+\[
+E_N:=\sum_{a,b\le N}c_ac_b\frac{(a,b)^2}{ab}
+=\sum_{d\le N}\rho(d)
+\left(\sum_{m\le N/d}\frac{c_{dm}}m\right)^2,
+\quad
+\rho(d)=\frac{J_2(d)}{d^2}\in(0,1].
+\]
+
+This follows from `(a,b)^2=sum_(d|a,d|b) J_2(d)` and finite rearrangement.
+For the route coefficients, an absolute estimate already gives
+
+\[
+\boxed{0\le E_N\le\frac{14N}{(\log N)^2}\qquad(N\ge2).}
+\]
+
+To verify the constant, set `X=N/d`. Squareful `d` contribute zero. For
+squarefree `d`, `mu(dm)=mu(d)mu(m)` when `(d,m)=1` and is zero otherwise, so
+
+\[
+\left|\sum_{m\le X}\frac{c_{dm}}m\right|
+\le\frac{\log X+\frac12\log^2X}{\log N}.
+\]
+
+The summand is bounded by
+`Phi(log(N/d))/log^2 N`, where
+`Phi(t)=(t+t^2/2)^2`. Monotone integral comparison and `x=N exp(-t)` give
+
+\[
+\sum_{d\le N}\Phi(\log(N/d))
+\le N\int_0^\infty(t^2+t^3+t^4/4)e^{-t}dt=14N.
+\]
+
+Thus neither the gcd variance nor the far tail is, by itself, the hidden
+RH obstruction. At cutoff `Q=N`, however, a Fourier-tail argument does not
+show that the constant mode dominates: distinct reduced frequencies can be
+only `1/N^2` apart, so their products are effectively nonoscillatory on a
+length-`N` scale.
+
+## Next queued main-funnel step
+
+Replace cutoff analysis by the known exact rational autocorrelation formula
+for the complete Gram entry
+
+\[
+\langle\rho_a,\rho_b\rangle
+=\int_0^\infty\{t/a\}\{t/b\}\,dt/t^2,
+\]
+
+which is expressible for rational `a/b` through finite Vasyunin cotangent
+sums (Báez-Duarte--Balazard--Landreau--Saias, arXiv:math/0306251). Independently
+derive and verify every normalization, then expand the route coefficients.
+The next exact lemma must isolate the signed Möbius--Vasyunin bilinear sum and
+state a quantitatively sufficient cancellation bound. It must not replace
+that signed sum by pairwise absolute values or claim that the constant Fourier
+mode dominates.
+
+## Tick 4 — exact full Gram reduction, with truncation correction
+
+The rational autocorrelation formula supplies a cutoff-free finite expression,
+but a hostile audit found an essential domain correction that must be retained.
+Set
+
+\[
+\rho_a(x)=\{1/(ax)\},\quad \chi=1_{(0,1)},\quad
+C_0=\log(2\pi)-\gamma.
+\]
+
+For coprime positive integers `p,q`, use the convention
+
+\[
+V(p,q)=\sum_{k=1}^{q-1}\{kp/q\}\cot(\pi k/q),\qquad V(p,1)=0.
+\]
+
+For `d=(a,b)`, `p=a/d`, `q=b/d`, and `l=lcm(a,b)`, the published rational
+autocorrelation formula and the change of variables `t=1/x` give
+
+\[
+\boxed{
+\langle\rho_a,\rho_b\rangle=
+\frac{(q-p)\log(p/q)+(p+q)C_0
+-\pi[V(p,q)+V(q,p)]}{2l}-\frac1{ab}.}
+\]
+
+The final term is mandatory. The autocorrelation
+`A(a/b)=integral_0^infty {t/a}{t/b}dt/t^2` includes `0<t<1`, where the
+integrand is exactly `1/(ab)`, whereas `x in (0,1)` transforms to `t>1`.
+This correction was missed in the first scout derivation and caught before
+publication. Checks include
+
+\[
+\langle\rho_a,\rho_a\rangle=C_0/a-1/a^2
+\]
+
+and
+
+\[
+\langle\chi,\rho_a\rangle=(\log a+1-\gamma)/a.
+\]
+
+Primary source: Báez-Duarte--Balazard--Landreau--Saias,
+arXiv:math/0306251, especially the rational formula for the multiplicative
+fractional-part autocorrelation. The subtraction `-1/(ab)` is our domain
+conversion, not an amendment to their formula.
+
+### Exact route identity
+
+Write `L=log N`,
+
+\[
+w_a=\mu(a)(L-\log a),\qquad c_a=w_a/L,
+\]
+
+and define
+
+\[
+M_0=\sum_{a\le N}w_a,\quad M_1=\sum_{a\le N}w_a/a,
+\]
+
+\[
+L_0=\sum_{a\le N}w_a\log a,\quad
+L_1=\sum_{a\le N}w_a\log a/a.
+\]
+
+Finally put
+
+\[
+\mathcal V_N=\frac\pi2\sum_{a,b\le N}w_aw_b\frac{(a,b)}{ab}
+\left[V\left(\frac a{(a,b)},\frac b{(a,b)}\right)
++V\left(\frac b{(a,b)},\frac a{(a,b)}\right)\right].
+\]
+
+Finite expansion of the Gram form gives the exact identity
+
+\[
+\boxed{
+\begin{aligned}
+\|F_N\|_2^2={}&1+\frac2L[L_1+(1-\gamma)M_1]\\
+&+\frac1{L^2}[C_0M_0M_1+M_0L_1-M_1L_0
+-\mathcal V_N-M_1^2].
+\end{aligned}}
+\]
+
+Here the elementary kernel factorizations are
+
+\[
+\sum_{a,b}w_aw_b\frac{a+b}{2ab}=M_0M_1,
+\]
+
+\[
+\sum_{a,b}w_aw_b\frac{b-a}{2ab}\log(a/b)=M_0L_1-M_1L_0,
+\]
+
+and the truncation correction contributes `-M_1^2`. All sums are finite, so
+no convergence interchange occurs.
+
+Define the combined signed quantity
+
+\[
+\mathcal W_N=\mathcal V_N-M_0L_1+M_1L_0+M_1^2.
+\]
+
+Then, for any fixed `C*>0`, the desired estimate at this `N` is exactly
+
+\[
+\boxed{
+\|F_N\|_2^2\le C_*/L
+\iff
+\mathcal W_N\ge
+L^2+2L[L_1+(1-\gamma)M_1]+C_0M_0M_1-C_*L.}
+\]
+
+This is an equivalent finite reformulation, not progress on the inequality.
+Cotangent reciprocity does not annihilate the symmetric Vasyunin sum, and
+termwise bounds `|V(p,q)| << q log q` are far too large after absolute
+summation.
+
+## Next queued main-funnel step
+
+Derive exact small-`N` values of `mathcal W_N` in a symbolic field generated
+by logarithms, `pi`, cotangents, and `gamma`, independently checking the Gram
+identity against breakpoint integration. Use the data only to test structural
+decompositions. In parallel, rewrite `mathcal V_N` through Estermann values
+and Bettin--Conrey reciprocity and seek a signed bilinear transform that
+preserves the Möbius coefficients. The next candidate lemma must give the
+displayed lower bound for `mathcal W_N` uniformly; any use of RH-level Mertens
+cancellation or unqualified cotangent cancellation is circular or false.

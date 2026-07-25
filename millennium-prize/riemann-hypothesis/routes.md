@@ -23,3 +23,13 @@ estimate.
 Primary route references: Báez-Duarte, arXiv:math/0202141 and
 arXiv:math/0205003; Burnol, arXiv:math/0103058; Bettin--Conrey--Farmer,
 arXiv:1211.5191.
+
+## Current sharpened bottleneck
+
+Elementary pair-period estimates give polynomial-cost rigorous tail
+certification, and the periodic gcd variance admits an unconditional
+`14N/log^2 N` bound. These do not produce the required cancellation in the
+full weighted Gram form. The active next step is the exact rational
+fractional-part autocorrelation formula and its finite Vasyunin cotangent sum;
+the target is a sufficient signed Möbius--Vasyunin cancellation lemma, not an
+absolute pairwise estimate.

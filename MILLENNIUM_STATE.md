@@ -7,12 +7,13 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   Prize Problems without confusing partial advances with official solutions
 - **phase:** first exact proof funnel, with six statement dossiers established
 - **active main funnel:** Riemann hypothesis — logarithmically smoothed
-  discrete Nyman--Beurling norm bound; the exact period-average tail lemma is
-  proved, and the current sublemma is a polynomial-length incomplete-period
-  discrepancy bound for the squared sawtooth sum
+  discrete Nyman--Beurling norm bound; polynomial short-block control and the
+  gcd variance are settled but strategically insufficient; the full Gram form
+  is now exactly reduced, including a hostile-audit correction, and the current
+  sublemma is a signed Estermann/Vasyunin transform of its Möbius bilinear sum
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 2
+- **cycle:** 3
 - **announcements:** none
 
 ## immutable target list
@@ -31,11 +32,12 @@ waiting process.
 
 ## next exact steps
 
-1. Expand the short-block integral of the squared sawtooth sum and prove or
-   falsify a polynomial incomplete-period discrepancy bound that avoids
-   `lcm(1,...,N)` and the coefficient `l1` norm.
-2. Run `exact_norm_enclosure.sage` when Sage is available and preserve ball
-   endpoints; independently audit the discrete criterion's normalization.
+1. Compute exact small-`N` Gram identities two ways (Vasyunin formula and
+   breakpoint integration), preserving symbolic constants and using them only
+   to test structural decompositions.
+2. Rewrite the signed Möbius--Vasyunin bilinear sum via Estermann values and
+   reciprocity, seeking a transform that preserves signs and reaches the exact
+   sufficient lower bound recorded in the RH notebook.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -58,3 +60,14 @@ waiting process.
   controlled by `lcm(1,...,N)/Q`. This also falsified periodicity alone as an
   efficient large-`N` certificate and queued the short-block discrepancy
   problem.
+- 2026-07-25: proved a uniform pair-period `O(N^4)` short-block discrepancy
+  theorem and the exact positive gcd-energy decomposition with explicit bound
+  `E_N <= 14N/log^2 N`. This decisively showed that the previously queued
+  polynomial-discrepancy target and far-tail certification are too weak. The
+  RH funnel now targets the exact full Gram form and its signed
+  Möbius--Vasyunin cotangent cancellation. No solution is claimed.
+- 2026-07-25: completed the exact finite Gram reduction. Hostile verification
+  caught a missing `-1/(ab)` caused by confusing the full autocorrelation
+  integral with the `x in (0,1)` Gram domain; the corrected norm identity and
+  exact sufficient Möbius--Vasyunin lower bound are now recorded. Reciprocity
+  does not provide an easy cancellation. No solution is claimed.
