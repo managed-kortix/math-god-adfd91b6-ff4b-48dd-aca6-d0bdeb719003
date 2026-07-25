@@ -16,6 +16,20 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-25: hostile-audited the tetracyclic cactus extension. The sharp DNN
+  residual families are exactly `{3,3,3,q}` (odd `q`) and `{3,3,5,5}`, but a
+  proposed induced-partition proof fails on three precise bridge packet budgets:
+  fully separated `{3}|{3}|{3}|{q}`, fully separated
+  `{3}|{3}|{5}|{5}`, and pentagon-middle shared `{3,3,5}` plus a remote
+  `C5`. Triangle packet surplus can tend to zero and cannot pay a fixed hostile
+  cycle deficit. The reconnaissance driver also does not enumerate every
+  relative cut position on internal cycles. Finally, exact rational Sturm
+  isolation gives a 19-vertex tetracyclic counterexample to connector-middle
+  leaf concentration: split leaves have smaller `s+` than both leaves at the
+  middle by more than `0.00551`. Reproducer and audit:
+  `positive-square-energy/experiments/tetracyclic_relocation_obstruction.py`
+  and `research/tetracyclic-cactus-structural-audit-2026-07-25.md`. This is a
+  no-go theorem for a proof strategy, not a graph counterexample to AKMPZ.
 - 2026-07-25: added a Tier-1 solved-result escalation policy to all three
   research lanes. A genuinely major resolution is announced immediately once
   the complete paper, exact artifacts, hostile audits, independent
