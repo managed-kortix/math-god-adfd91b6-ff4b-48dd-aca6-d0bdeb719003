@@ -565,3 +565,127 @@ are explicit. Simultaneously seek a frequency-isolating lower bound for the
 multiple-zero residue contribution. A useful result must either (i) reveal a
 new positive main term for these exact vectors, or (ii) prove that the chosen
 `O(1/log N)` approximant conjecture is strictly stronger than RH.
+
+## Tick 6 — double Mellin formula and a weaker positive RH certificate
+
+For `w_N(n)=mu(n) log(N/n) 1_(n<=N)` and every `c>0`,
+
+\[
+\boxed{w_N(n)=\frac{\mu(n)}{2\pi i}\int_{(c)}
+\left(\frac Nn\right)^u\frac{du}{u^2}.}
+\]
+
+The integral is absolute and the endpoint `n=N` is exactly zero. Let
+
+\[
+H(p,q)=\frac{(p-q)\log(p/q)+\pi[V(p,q)+V(q,p)]}{2pq}
+\quad((p,q)=1).
+\]
+
+The full Gram identity gives `H(p,q)=C_0(p^-1+q^-1)/2-G(p,q)`, where
+
+\[
+G(p,q)=\frac1{2\pi i}\int_{(c)}
+\frac{\zeta(s)\zeta(1-s)}{s(1-s)}p^{-s}q^{s-1}ds,
+\quad 0<c<1.
+\]
+
+For `Re(u),Re(v)>1`, define
+
+\[
+\begin{aligned}
+\Phi(u,v)={}&\frac{C_0}{2}\left[
+\frac1{\zeta(u+1)\zeta(v)}+
+\frac1{\zeta(u)\zeta(v+1)}\right]\\
+&-\frac1{2\pi i}\int_{(c)}
+\frac{\zeta(s)\zeta(1-s)}
+{s(1-s)\zeta(u+s)\zeta(v+1-s)}ds.
+\end{aligned}
+\]
+
+Then
+
+\[
+\boxed{\mathcal W_N=\frac1{(2\pi i)^2}\int_{(c_u)}\int_{(c_v)}
+\Phi(u,v)\frac{N^{u+v}}{u^2v^2}\,dv\,du,
+\qquad c_u,c_v>1.}
+\]
+
+All operations are absolute initially. The Euler-product collapse uses
+`1-l^-A-l^-B+l^-(A+B)=(1-l^-A)(1-l^-B)` and depends on including the gcd
+variable. The coprime diagonal is only `p=q=1`, and `H(1,1)=0`; hence there is
+no positive diagonal main term. Contour shifts meet reciprocal-zeta poles from
+the complete zero set, and diagonal vanishing does not imply axis vanishing of
+`Phi`.
+
+### A weaker positive certificate
+
+Put
+
+\[
+A_N=V_N(1)=\sum_{a\le N}c_a/a,
+\qquad P_N=\int_0^1|F_N(x)|^2dx.
+\]
+
+Since `F_N(x)=A_N/x` for `x>1`,
+
+\[
+\boxed{\|F_N\|_{L^2(0,\infty)}^2=P_N+A_N^2.}
+\]
+
+The Vinogradov--Korobov zero-free region gives unconditionally
+
+\[
+\boxed{A_N=\frac1{\log N}+O\left(\frac{e^{-c(\log N)^{3/5}
+(\log\log N)^{-1/5}}}{\log N}\right)}
+\]
+
+for some `c>0`; the sign check is `sum mu(n)log(n)/n=-1`.
+
+If `rho=sigma+i gamma` is a nontrivial zero with `1/2<sigma<1`, then
+
+\[
+\int_0^1F_N(x)x^{\rho-1}dx=\frac1\rho-\frac{A_N}{1-\rho}.
+\]
+
+Cauchy--Schwarz and minimization over real `A` prove
+
+\[
+\boxed{P_N\ge
+\frac{(2\sigma-1)\gamma^2}{|\rho|^4|1-\rho|^2}>0.}
+\]
+
+The Hilbert-space test vector is `x^(conjugate(rho)-1)`. A left-half zero is
+first reflected to a right-half zero. Therefore
+
+\[
+\boxed{\liminf_{N\to\infty}P_N=0\quad\Longrightarrow\quad RH.}
+\]
+
+Because `A_N->0`, this supplies a convergent subsequence in the full criterion.
+The converse is **not known for this fixed logarithmic taper**: RH gives
+existence of approximants and convergence of a differently damped explicit
+family, but the cited literature does not prove convergence of this exact
+family under RH alone.
+
+For finitely many right-half zeros, projection onto their power functions
+gives a stronger positive floor through the Cauchy Gram matrix
+`G_ij=1/(rho_i+conjugate(rho_j)-1)`.
+
+### Multiple-zero route closed at the proposed strength
+
+A formally large residue assigned to a multiple zero has no norm lower bound
+until its remainder is controlled. Burnol's rigorous bound puts multiplicity
+into the constant `sum m(rho)^2/|rho|^2` while retaining the `1/log N` scale.
+Thus an unspecified `O(1/log N)` upper constant is compatible with multiple
+zeros. Frequency isolation cannot prove strict strength over RH from
+multiplicity alone and is abandoned at that strength.
+
+## Next queued main-funnel step
+
+Pivot to the positive restricted energy `P_N`. Derive its finite-zero
+Hardy/Cauchy Gram obstruction for symmetric hypothetical zero sets and optimize
+the determinant to obtain the strongest explicit certificate. In parallel,
+seek an unconditional contraction, recurrence, or monotonic subsequence
+mechanism forcing `liminf P_N=0`; any such result would prove RH. Do not claim
+that RH implies convergence of this fixed taper.

@@ -11,10 +11,11 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   gcd variance are settled but strategically insufficient; the full Gram form
   is now exactly reduced after a second domain audit corrected a transient
   restricted/full-space mix-up, and the current
-  sublemma is a signed Estermann/Vasyunin transform of its Möbius bilinear sum
+  sublemma is a positive restricted-energy liminf criterion after the exact
+  Estermann double-Mellin transform exposed a zero arithmetic diagonal
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 4
+- **cycle:** 5
 - **announcements:** none
 
 ## immutable target list
@@ -33,12 +34,12 @@ waiting process.
 
 ## next exact steps
 
-1. Insert the Mellin representation of the Möbius-log weights into the exact
-   Estermann operator and derive a double-contour formula with all poles,
-   diagonal terms, and interchange hypotheses explicit.
-2. Develop a frequency-isolating lower bound for multiple-zero residue terms,
-   to determine rigorously whether the chosen `O(1/log N)` approximant rate is
-   strictly stronger than RH.
+1. Derive the finite-zero Hardy/Cauchy Gram obstruction for the restricted
+   energy `P_N`, optimize symmetric zero sets, and preserve an exact
+   independently checkable certificate formula.
+2. Seek an unconditional contraction, recurrence, or monotonic subsequence
+   mechanism forcing `liminf P_N=0`; simultaneously try to falsify every
+   proposed mechanism on exact small cases.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -79,3 +80,12 @@ waiting process.
   and naive reciprocity telescoping are thereby ruled out. The next attack is
   Möbius-vector-specific Mellin/Estermann structure and multiple-zero frequency
   isolation. No solution is claimed.
+- 2026-07-25: derived a rigorous double Perron formula for the signed
+  Estermann operator; its coprime diagonal vanishes, so no positive diagonal
+  main term exists. Proved the unconditional tail asymptotic `A_N~1/log N`
+  and an explicit positive restricted-energy floor from any right-half
+  off-line zero. Thus `liminf P_N=0` is a clean sufficient RH criterion.
+  Literature audit found no RH-alone convergence theorem for this fixed taper,
+  so no equivalence is claimed. The multiple-zero frequency route was closed
+  at the proposed strength because rigorous bounds retain the `1/log N` scale
+  and change only its constant. No solution is claimed.

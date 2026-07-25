@@ -33,3 +33,11 @@ full weighted Gram form. The active next step is the exact rational
 fractional-part autocorrelation formula and its finite Vasyunin cotangent sum;
 the target is a sufficient signed Möbius--Vasyunin cancellation lemma, not an
 absolute pairwise estimate.
+
+The Estermann operator has now been converted to an exact double Perron
+integral, but its arithmetic diagonal vanishes and contour shifts meet the full
+reciprocal-zeta zero set. A weaker positive target is also active: prove
+`liminf P_N=0`, where `P_N` is the restricted `(0,1)` energy of the same fixed
+approximants. Any off-critical zero gives an explicit uniform positive floor
+for every `P_N`, so this condition implies RH. It is not known to follow from
+RH for this exact logarithmic taper.
