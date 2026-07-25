@@ -17,6 +17,13 @@ Choose a counterexample first minimizing vertices and then arcs.
    or 2. If it is 2 then `g_xy=1,L_xy=empty` for every outgoing arc; if it is 1
    then `|L_xy|<=g_xy`.
 
+   **Tick-2 audit clarification.** Deleting `x->y` may delete `y` from the exact
+   second neighborhood of a non-tail vertex, so those neighborhoods are not
+   literally unchanged. Their first neighborhoods are unchanged and their
+   exact second neighborhoods can only shrink. Thus no non-tail bad vertex can
+   become Seymour; the tail must be the Seymour vertex guaranteed by arc
+   minimality. This monotonicity step is required for the displayed inequality.
+
 The gain term is essential: deleting `x->y` can make `y` a new exact second
 neighbor via `x->z->y`.
 

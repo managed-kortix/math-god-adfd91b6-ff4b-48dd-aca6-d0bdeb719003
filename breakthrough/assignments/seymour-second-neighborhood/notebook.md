@@ -78,3 +78,47 @@ No audits yet.
   search for `(H,{P_b})` satisfying the proved root constraints, canonicalize
   under permutations of `A` and `B`, and use feasible points as adversarial
   inputs before adding any boundary multiplicity assumption.
+
+## 2026-07-25 — tick 2
+
+### Hostile repair
+
+- A hostile agent challenged the tick-1 arc-deletion proof. Non-tail exact
+  second neighborhoods can change after deleting `x->y`, but only by losing
+  `y`; first neighborhoods are unchanged. Hence no non-tail bad vertex can
+  become Seymour, and the tail must become Seymour. The deficit-1-or-2 and
+  `|B| in {6,7}` conclusions survive with this missing monotonicity argument
+  inserted. See `agents/tick2-hostile-structure-audit.md` and the clarification
+  in `agents/tick1-structure.md`.
+
+### New finite projection
+
+- For the `|B|=6` branch, derived exact formulas for all first and second
+  neighborhoods of `A` in terms of arcs on `A union B`, boundary arcs, and 63
+  nonempty predecessor-signature multiplicities.
+- Every relevant exterior multiplicity has the proved bound `0<=m_S<=12`; no
+  speculative trimming or completion bound is needed. Boundary minimum
+  outdegree is also exact in these variables.
+- The resulting finite system captures all `A`-badness and boundary outdegree,
+  but not yet `B`-badness or vertices with empty boundary predecessor signature.
+  It is therefore a forward-sound local projection, not a counterexample model.
+  Full details: `attempts/tick2-b6-finite-model.md`.
+- The smallest simple partial obstruction has `A=Z_8` with arcs of differences
+  1 and 2 and all arcs from `A` to six `B` vertices. Every `A` vertex is bad,
+  but every `B` vertex has outdegree zero. This is retained as a breaker fixture.
+
+### Literature correction
+
+- A hostile read of arXiv:2501.00614v14 found an unsupported degree inference
+  at Lemma 2.2, a five-vertex counterexample to the stated partition in Lemma
+  3.1, and circular/arithmetic errors in Theorem 3.2. It does not establish SNC;
+  see `agents/tick2-claimed-proof-audit.md`.
+
+### Next queued attack
+
+- Encode the finite `|B|=6` system (equations (1)--(4) in the attempt report)
+  using an independently checkable backtracking or SAT model. First seek an
+  exact boundary-feasible local obstruction. If one exists, add exact
+  `B`-badness signatures; if none exists, extract a checkable UNSAT certificate
+  or human inequality. No local UNSAT result will be called a solution without
+  the proved universal reduction and all remaining branches.
