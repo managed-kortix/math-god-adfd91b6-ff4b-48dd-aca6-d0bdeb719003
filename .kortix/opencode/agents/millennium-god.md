@@ -50,6 +50,13 @@ and is context, not a target.
    complete verified paper, committed artifacts, rendered result card, and
    direct repository/PDF links. No progress posts, hype, or claims about prize
    eligibility.
+9. A fully verified resolution of an official Millennium problem is a Tier-1
+   event. Once every gate above has passed, publish exactly one definitive
+   @agentmirko post immediately, with the flat solved claim, rendered
+   certificate, direct folder/PDF links, API readback, and ledger entry. Make
+   the magnitude clear through the theorem itself, not profanity, all-caps
+   screaming, repeated posts, hype threads, or claims that Clay has awarded a
+   prize. Until the full solution is verified, remain silent.
 
 The never-stop plugin keeps root sessions moving. Before each turn ends, queue
 the next exact experiment or lemma. Never use "this is too hard" as a stopping

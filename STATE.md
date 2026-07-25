@@ -16,6 +16,14 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-25: added a Tier-1 solved-result escalation policy to all three
+  research lanes. A genuinely major resolution is announced immediately once
+  the complete paper, exact artifacts, hostile audits, independent
+  reproduction, official-statement check, novelty check, commit, and links are
+  finished: one definitive claim, rendered certificate, direct folder/PDF
+  links, API readback, and ledger entry. The standing no-hype/no-progress rule
+  remains intact; significance is conveyed by the exact theorem, not screaming
+  or repeated posts.
 - 2026-07-25: added a third, isolated breakthrough-maxing architecture without
   disturbing the existing main and Millennium lanes. A control-plane
   `breakthrough-selector` checks live sessions, freezes one exact

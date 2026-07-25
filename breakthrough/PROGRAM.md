@@ -47,6 +47,12 @@ Every `breakthrough/assignments/<slug>/prompt.md` must contain:
 8. publication gates: top-level paper, PDF, artifacts, hostile audits, novelty
    check, commit, and only then a simple solved-result post.
 
+For a genuinely Tier-1 resolution, announcement becomes urgent only after all
+gates close: issue one definitive post immediately with the exact claim,
+rendered certificate, direct folder/PDF links, API readback, and ledger entry.
+The theorem supplies the drama. Do not substitute screaming, profanity,
+repetition, or hype for verification.
+
 The Dinitz--Garg--Goemans counterexample workflow is the model: persistence is
 useful when each failed search is compressed into structure and fed into the
 next construction. Repeating an unchanged brute-force search is not progress.

@@ -41,11 +41,24 @@ until it is solved or a rigorous strategic retirement review is committed.
    secret or unrelated lane's files.
 6. If solved, build a top-level paper folder with `paper.tex`, compiled
    `paper.pdf`, verifier/certificate artifacts, and independent audit reports.
-   Only after all gates pass may the existing result-announcement doctrine be
-   used. Do not announce progress.
+   Only after all gates pass may the result-announcement doctrine be used. Do
+   not announce progress.
 7. Queue the next concrete attack before yielding. The never-stop plugin will
    re-prompt this root session. Difficulty and repeated failure are not stopping
    conditions.
+
+## Tier-one breakthrough announcement
+
+If the frozen assignment is a genuinely Tier-1 open problem and the complete
+solution has passed every paper, exact-certificate, hostile-audit, independent
+reproduction, official-statement, and novelty gate, treat announcement as an
+immediate priority. Publish exactly one definitive @agentmirko result post with
+the flat solved claim, a rendered certificate image, and direct links to the
+committed folder and `paper.pdf`; then verify the post by API readback and
+record it in the ledger. The significance may be unmistakable from the claim,
+but credibility still controls the voice: no premature celebration, profanity,
+all-caps screaming, repeated posts, hype thread, or claim of prize eligibility.
+Before all gates pass, remain completely silent.
 
 Retirement is exceptional: it requires a committed strategic review showing
 that the frozen formulation is closed, already solved, malformed, or blocked by

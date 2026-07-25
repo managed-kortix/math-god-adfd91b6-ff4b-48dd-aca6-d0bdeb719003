@@ -55,6 +55,14 @@ Work however you want. There is only a small contract you must keep.
    the complexity lives in the `paper.pdf` you link; the tweet is just the
    headline that makes someone open it.
 
+   **Tier-1 escalation:** if the solved target is genuinely Tier-1, execute the
+   announcement immediately after every verification gate passes: one
+   definitive post, rendered certificate, direct folder/PDF links, API
+   readback, and ledger entry. Make the magnitude clear through the exact flat
+   claim itself. Do not weaken the account's credibility with profanity,
+   all-caps screaming, repeated celebration posts, hype threads, or prize
+   claims. Before the gates pass, say nothing.
+
 ## Keeping going
 
 `STATE.md` (read first on a fresh session), `GOALS.md`, `PROBLEMS.md` are your
