@@ -46,19 +46,21 @@ agents:
     workspace: runtime
 triggers:
   - slug: math-heartbeat
-    name: math-god heartbeat → keep the eternal math session alive (every 6h — never-stop is the motor, this is just the resurrection net)
+    name: math-god heartbeat → keep the eternal math session alive (every 6h —
+      never-stop is the motor, this is just the resurrection net)
     type: cron
     agent: math-god
     enabled: true
     session_mode: reuse
     cron: 0 0 */6 * * *
     timezone: UTC
-    prompt: "keep going. if you are mid-attack, just continue — do not restart.
-      if this session is fresh, read STATE.md, run `bash scripts/setup-harness.sh`,
+    prompt: keep going. if you are mid-attack, just continue — do not restart. if
+      this session is fresh, read STATE.md, run `bash scripts/setup-harness.sh`,
       and resume exactly where the notebook left off. push everything to the
-      public repo (git pull --rebase first). then back to the math. never stop."
+      public repo (git pull --rebase first). then back to the math. never stop.
   - slug: millennium-heartbeat
-    name: millennium-god heartbeat → keep the dedicated Millennium Prize session alive (offset every 6h)
+    name: millennium-god heartbeat → keep the dedicated Millennium Prize session
+      alive (offset every 6h)
     type: cron
     agent: millennium-god
     enabled: true
@@ -66,18 +68,19 @@ triggers:
     session_key: millennium-prize-eternal
     cron: 0 0 3/6 * * *
     timezone: UTC
-    prompt: "continue the dedicated Millennium Prize program indefinitely. do
-      not work on non-Millennium problems. if mid-attack, preserve continuity;
-      do not restart or merely resurvey. if fresh, read MILLENNIUM_STATE.md,
+    prompt: continue the dedicated Millennium Prize program indefinitely. do not
+      work on non-Millennium problems. if mid-attack, preserve continuity; do
+      not restart or merely resurvey. if fresh, read MILLENNIUM_STATE.md,
       millennium-prize/PROGRAM.md, and millennium-prize/prompt.md, then run
       `bash scripts/setup-harness.sh`. advance the active exact lemma while
       maintaining parallel proof and counterexample routes across all six
       unsolved problems. record every attempt, pull --rebase, commit, and push
       durable work. announce nothing unless a complete solution has survived
       hostile verification and has a finished paper.pdf. always queue the next
-      concrete mathematical step. never stop."
+      concrete mathematical step. never stop.
   - slug: breakthrough-selector
-    name: breakthrough selector → choose one certificate-shaped problem and maintain one isolated worker
+    name: breakthrough selector → choose one certificate-shaped problem and maintain
+      one isolated worker
     type: cron
     agent: breakthrough-selector
     enabled: true
@@ -85,7 +88,7 @@ triggers:
     session_key: breakthrough-selector-eternal
     cron: 0 0 1 * * *
     timezone: UTC
-    prompt: "run the breakthrough control loop. read BREAKTHROUGH_STATE.md and
+    prompt: run the breakthrough control loop. read BREAKTHROUGH_STATE.md and
       breakthrough/PROGRAM.md. inspect live sessions before acting. if exactly
       one healthy breakthrough-god session owns the active assignment, do not
       duplicate it. if the lane is vacant or its last assignment is formally
@@ -93,9 +96,13 @@ triggers:
       freeze a complete attack prompt, commit and push that assignment, and
       launch a fresh independent Kortix session pinned to breakthrough-god.
       record the worker session id. never research the selected problem in the
-      selector session and never run two workers at once."
+      selector session and never run two workers at once.
 connectors:
   - slug: google_drive
     provider: pipedream
     app: google_drive
+    account: default
+  - slug: gmail
+    provider: pipedream
+    app: gmail
     account: default
