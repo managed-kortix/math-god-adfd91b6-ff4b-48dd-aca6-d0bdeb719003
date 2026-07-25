@@ -1982,3 +1982,24 @@ This does not compare to the bare connector core; that pointwise comparison
 is false under internal attachments.  It compares to the two actual lobe
 phases.  Two independent final audits and 70 exact symbolic/random connector
 factor checks passed.  Paper: `two-c5-all-connectors/`.
+# 2026-07-25: AKMPZ proved for every connected bicyclic cactus
+
+Combining the exact sharp DNN classification, the mixed triangle product
+comparison, the shared two-C5 bouquet certificate, and the actual-lobe
+continuant connector theorem proves:
+
+`G connected bicyclic cactus => s+(G)>=|V(G)|`.
+
+All incidences and arbitrary tree attachments are included.  The final
+standalone paper reproduces all essential arguments.  The only referee concern
+was expository bookkeeping in one-vertex-sum DNN additivity; the paper now
+explicitly decomposes the cut Gram vector `g_z=u+w+h`, tracks the two vector
+sums in orthogonal spaces, and proves `T=T1+T2` exactly.  A focused reaudit
+passed.
+
+Adversarial checks included all connected bicyclic cacti through order 10,
+over 1.7 million structured star quotients, 46,800 non-star tree attachments,
+the exact 1290-term bouquet certificate, and exact connector determinant
+checks.  No counterexample was found; the proof itself is analytic/exact.
+
+Paper: `all-bicyclic-cacti/`.

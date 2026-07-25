@@ -365,6 +365,17 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
+0. MAIN THEOREM VERIFIED (2026-07-25): every connected bicyclic cactus `G`
+   on `n` vertices satisfies `s+(G)>=n`.  The proof is exhaustive: the exact
+   sharp cactus DNN constant handles all length pairs except `{5,5}` and
+   `{3,4k+1}`; a product-subpartition phase comparison closes the mixed
+   triangle family; exact matching/BP certificates close the shared two-C5
+   bouquet; and an actual-lobe continuant phase factor closes two disjoint C5
+   blocks over every positive connector path with arbitrary trees.  The
+   standalone omnibus manuscript passed a hostile full audit, independent
+   referee checks, a focused repair audit of the DNN cut-vector bookkeeping,
+   exact certificates, and a large adversarial census.  Paper:
+   `all-bicyclic-cacti/`.
 0. NEW VERIFIED RESULT (2026-07-25): the final disjoint-two-pentagon frontier
    is closed.  If a connected cactus has two vertex-disjoint `C5` cyclic
    blocks joined by any positive-length path, with arbitrary trees attached

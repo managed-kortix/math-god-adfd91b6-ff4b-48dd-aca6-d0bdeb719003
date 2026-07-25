@@ -1,0 +1,527 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Arg}{\operatorname{Arg}}
+\newcommand{\one}{\mathbf 1}
+
+\title{Positive Square Energy of Every Bicyclic Cactus}
+\author{}
+\date{25 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For every connected bicyclic cactus $G$ on $n$ vertices we prove
+$s^+(G)\geq n$.  The statement permits the two cyclic blocks to share a cut
+vertex or to be joined by a path of arbitrary length, and permits arbitrary
+trees at every vertex.  An exact block-additive doubly nonnegative certificate
+reduces the problem to cycle-length pairs $\{5,5\}$ and $\{3,4k+1\}$.
+A product-subpartition phase comparison settles the latter.  For two
+pentagons, a coefficient certificate handles the shared-vertex bouquet, while
+an actual-lobe continuant factorization handles every nontrivial connector.
+The residual bounds are strict; the omnibus conclusion is stated weakly.
+\end{abstract}
+
+\section{Preliminaries}
+
+All graphs are finite, simple, and undirected.  For the adjacency eigenvalues
+$\lambda_1,\ldots,\lambda_n$ of $G$, put
+\[
+ s^+(G)=\sum_{\lambda_j>0}\lambda_j^2,
+ \qquad s^-(G)=\sum_{\lambda_j<0}\lambda_j^2,
+ \qquad D(G)=s^+(G)-s^-(G).
+\]
+The elementary energy identity is
+\begin{equation}\label{eq:energy}
+ s^+(G)+s^-(G)=\tr A(G)^2=2|E(G)|.
+\end{equation}
+A connected bicyclic graph has $|E(G)|=n+1$, so
+\begin{equation}\label{eq:bicyclic-average}
+ s^+(G)=n+1+\frac12D(G).
+\end{equation}
+Liu--Tang--Zhang proved the positive and negative square-energy conjecture
+using a doubly nonnegative matrix inequality~\cite{LTZ}.
+Akbari--Kumar--Mohar--Pragada--Zhang (AKMPZ) conjecture that
+\eqref{eq:bicyclic-average} is at least $n$ for every connected graph with at
+least $n+1$ edges~\cite{AKMPZ}.  We prove that assertion here only for
+bicyclic cacti, not for all bicyclic graphs.
+
+For positive vertex activities $a=(a_v)$ define the signless matching
+partition
+\begin{equation}\label{eq:Z}
+ Z_F(a)=\sum_{M\text{ matching of }F}\prod_{v\text{ unmatched by }M}a_v,
+ \qquad Z_F(t)=Z_F((t)_v).
+\end{equation}
+Set
+\begin{equation}\label{eq:Psi}
+ \Psi_G(t)=i^{-n}\det(itI-A(G))
+ =\prod_{j=1}^n(t+i\lambda_j),\qquad t>0.
+\end{equation}
+Grouping Sachs' expansion by its collection $\mathcal C$ of pairwise
+vertex-disjoint cycle components gives the normalized Sachs formula
+\begin{equation}\label{eq:Sachs}
+ \Psi_G(t)=\sum_{\mathcal C}
+ \prod_{C\in\mathcal C}(-2i^{-|C|})
+ Z_{G-V(\mathcal C)}(t).
+\end{equation}
+Let
+\[
+ \Theta_G(t)=\sum_j\arctan(\lambda_j/t)
+\]
+be the continuous argument of $\Psi_G(t)$ tending to zero at infinity.  The
+signed Coulson identity is
+\begin{equation}\label{eq:Coulson}
+ D(G)=-\frac4\pi\int_0^\infty t\Theta_G(t)\,dt.
+\end{equation}
+Indeed, $\lambda|\lambda|=(2/\pi)\int_0^\infty
+\lambda^3/(\lambda^2+t^2)\,dt$; summing, using $\sum_j\lambda_j=0$, and
+integrating by parts proves~\eqref{eq:Coulson}.  The same cancellation gives
+$\Theta_G(t)=O(t^{-3})$, so the integral converges.
+
+We repeatedly remove trees exactly.  If a branch is oriented toward its
+attachment and $T_{u\to p}$ is the subtree below $u$, then
+\begin{equation}\label{eq:BP}
+ Q_{u\to p}=\frac{Z_{T_{u\to p}}(t)}{Z_{T_{u\to p}-u}(t)}
+ =t+\sum_{w\text{ child of }u}\frac1{Q_{w\to u}}\geq t.
+\end{equation}
+Thus a retained spine vertex $v$ receives activity
+\begin{equation}\label{eq:activity}
+ a_v=t+\sum_{u\text{ attached at }v}Q_{u\to v}^{-1}=t+y_v,
+ \qquad y_v\geq0,
+\end{equation}
+and all Sachs terms have the same positive factor $K(t)=\prod Z_{T_{u\to
+v}}(t)$.  This remains true when a Sachs cycle deletes $v$: its detached
+branches contribute their full $Z_T$ factors.  Equations
+\eqref{eq:BP}--\eqref{eq:activity} follow by splitting a matching according
+as its root is unmatched or matched to one child.
+
+\section{The sharp cactus DNN reduction}
+
+For a connected edge-containing graph define
+\begin{equation}\label{eq:kappa}
+ \kappa(G)=\sup_{\substack{M\succeq0,\ M\geq0\\\one^TM\one>0}}
+ \frac{4\bigl(\sum_{uv\in E(G)}\sqrt{M_{uv}}\bigr)^2}
+ {\one^TM\one}.
+\end{equation}
+
+\begin{theorem}[Sharp cactus DNN lemma]\label{thm:dnn}
+If a cactus $G$ has $b$ bridge blocks and cyclic blocks of lengths
+$\ell_1,\ldots,\ell_r$, then
+\begin{equation}\label{eq:block-kappa}
+ \kappa(G)=b+\sum_{j=1}^r\kappa(C_{\ell_j}),\qquad
+ \kappa(C_\ell)=\begin{cases}
+ \ell,&\ell\text{ even},\\
+ \ell\sec^2(\pi/(2\ell)),&\ell\text{ odd}.
+ \end{cases}
+\end{equation}
+Moreover $s^-(G)\leq\kappa(G)$.
+\end{theorem}
+
+\begin{proof}
+We include the sharp ingredients; full bookkeeping appears in the companion
+manuscript~\cite{SharpDNN}.  Fold every nonedge entry $M_{uv}$ into the two
+diagonal entries by adding $M_{uv}(e_u-e_v)(e_u-e_v)^T$.  This preserves the
+denominator and edge entries and leaves an edge-supported DNN matrix.
+
+On $C_\ell$, rotational averaging and concavity of $\sqrt{\cdot}$ do not
+decrease the objective.  If $t$ is the common edge entry and $r$ the row sum,
+the objective is $4\ell t/r$.  A Fourier eigenvalue gives $r\geq4t$ for even
+$\ell$, and $r\geq2(1+\cos(\pi/\ell))t$ for odd $\ell$.  Equality is attained
+by $x(2cI+A(C_\ell))$, where $c=1$ in the even case and
+$c=\cos(\pi/\ell)$ in the odd case.  This proves the cycle constants;
+$\kappa(K_2)=1$ follows from $a+d\geq2c$ for a DNN
+$\left(\begin{smallmatrix}a&c\\c&d\end{smallmatrix}\right)$.
+
+If $G=G_1\vee_zG_2$, let $g_v$ be Gram vectors after folding, and put
+\[
+ U=\operatorname{span}\{g_v:v\in V(G_1)-z\},\qquad
+ W=\operatorname{span}\{g_v:v\in V(G_2)-z\}.
+\]
+All cross-side pairs are nonedges, so $U\perp W$.  Decompose the cut vector
+orthogonally as $g_z=u+w+h$, with $u\in U$, $w\in W$, and
+$h\perp U+W$.  On $G_1$ use $u+h$ as its cut vector and on $G_2$ use $w$;
+all other vectors remain unchanged.  This preserves every edge inner product
+and gives DNN Gram matrices.  If
+\[
+ a=\sum_{v\in V(G_1)-z}g_v,\qquad
+ b=\sum_{v\in V(G_2)-z}g_v,
+\]
+then $a+u\in U$, $b+w\in W$, and these vectors are orthogonal to each other
+and to $h$.  Consequently
+\[
+ \begin{aligned}
+ T(G)&=\|a+b+u+w+h\|^2\\
+ &=\|a+u+h\|^2+\|b+w\|^2=T_1+T_2.
+ \end{aligned}
+\]
+Also $S=S_1+S_2$.  Hence
+\[
+ 2(S_1+S_2)\leq\sqrt{\kappa_1T_1}+\sqrt{\kappa_2T_2}
+ \leq\sqrt{(\kappa_1+\kappa_2)(T_1+T_2)}.
+\]
+Conversely glue near-optimal Gram systems orthogonally at $z$ and scale them
+so that $T_1/\kappa_1=T_2/\kappa_2$.  Thus
+$\kappa(G_1\vee_zG_2)=\kappa_1+\kappa_2$, proving block additivity.
+
+Finally write $A=P-B$ for the positive and negative spectral parts.  The
+Schur product theorem makes $M=B\circ B$ DNN, while
+\[
+ s^-/2=-\sum_{uv\in E}B_{uv}\leq\sum_{uv\in E}|B_{uv}|,
+ \qquad \one^TM\one=\tr B^2=s^-.
+\]
+Substitution in~\eqref{eq:kappa} gives $(s^-)^2\leq\kappa(G)s^-$ and hence
+$s^-\leq\kappa(G)$.
+\end{proof}
+
+Define
+\begin{equation}\label{eq:epsilon}
+ \epsilon_\ell=\begin{cases}0,&\ell\text{ even},\\
+ \ell\tan^2(\pi/(2\ell)),&\ell\text{ odd}.
+ \end{cases}
+\end{equation}
+Thus $\kappa(C_\ell)=\ell+\epsilon_\ell$.  Through odd integers
+$\ell\geq3$, $\epsilon_\ell$ is strictly decreasing: with
+$u=\pi/(2x)$ this is equivalent to monotonicity of $\tan^2u/u$, whose
+derivative is positive because $2u>\sin u\cos u$.  Moreover
+\begin{equation}\label{eq:eps-values}
+ \epsilon_3=1,
+ \qquad \epsilon_5=5-2\sqrt5,
+ \qquad \epsilon_5+\epsilon_7<1.
+\end{equation}
+For the last strict inequality, $\cos(\pi/7)>7/8$ gives
+$\epsilon_7<7/15<2\sqrt5-4=1-\epsilon_5$.
+
+If the two cycle lengths are $p,q$, then the number of bridge blocks satisfies
+$b+p+q=n+1$, and Theorem~\ref{thm:dnn} gives
+\begin{equation}\label{eq:dnn-bound}
+ s^+(G)=2n+2-s^-(G)\geq n+1-\epsilon_p-\epsilon_q.
+\end{equation}
+Consequently DNN settles every pair containing an even length and every pair
+of odd lengths at least five except $\{5,5\}$.  For two cycle lengths both
+$3\pmod4$, formula~\eqref{eq:Sachs} has strictly negative imaginary part:
+each singleton cycle has multiplier $-2i$, whereas the empty and possible
+double-cycle terms are real.  Hence $\Theta_G(t)<0$ and
+\begin{equation}\label{eq:common-phase}
+ D(G)>0,\qquad s^+(G)>n+1.
+\end{equation}
+After these arguments exactly $\{5,5\}$ and $\{3,4k+1\}$ remain.
+
+\section{A triangle and a \texorpdfstring{$1\pmod4$}{1 mod 4} cycle}
+
+\begin{theorem}\label{thm:mixed}
+Suppose the cyclic blocks of $G$ have lengths $3$ and $q=4k+1\geq5$.
+With arbitrary incidence and arbitrary attached trees,
+\[
+ s^+(G)>n+2-\sec(\pi/q)>n.
+\]
+\end{theorem}
+
+\begin{proof}
+Let $H$ be the union of the cycles and, when they are disjoint, their unique
+joining path.  Eliminate every off-spine tree by
+\eqref{eq:BP}--\eqref{eq:activity}.  With all partitions below using the
+effective activities, put
+\[
+ A=Z_{H-V(C_3)}(a),\qquad B=Z_{H-V(C_q)}(a),
+\]
+and in the disjoint case put
+$D_0=Z_{H-(V(C_3)\cup V(C_q))}(a)$.  The cycle multipliers are $-2i$ and
+$2i$.  Thus
+\begin{equation}\label{eq:mixed-core}
+ \Psi_G/K=R+2i(B-A),\qquad
+ R=\begin{cases}Z_H(a),&\text{shared vertex},\\
+ Z_H(a)+4D_0,&\text{disjoint}.
+ \end{cases}
+\end{equation}
+In particular $R>0$ and
+$\Theta_G=\arctan(2(B-A)/R)$.
+
+Let $Z_q(t)=Z_{C_q}(t)$.  Partition matchings counted by $Z_H(a)$ according
+as they use a boundary edge between $S=V(C_q)$ and its complement.  The class
+using none factors, also in the shared case, and therefore
+\begin{equation}\label{eq:subpartition}
+ Z_H(a)=Z_{C_q}(a|_S)B+E,
+ \qquad E\geq0.
+\end{equation}
+Since every activity is $t+y_v$ and matching partitions have nonnegative
+coefficients, write $Z_{C_q}(a|_S)=Z_q(t)+L$ with $L\geq0$.  Equations
+\eqref{eq:mixed-core}--\eqref{eq:subpartition} give the full
+product-subpartition comparison
+\begin{equation}\label{eq:mixed-positive}
+ R-Z_q(t)(B-A)=E+LB+Z_q(t)A\ (+4D_0)>0,
+\end{equation}
+where the parenthesized term occurs only when the cycles are disjoint.  If
+$B-A\leq0$ the desired phase comparison is immediate; otherwise divide
+\eqref{eq:mixed-positive} by $RZ_q(t)$.  In both cases
+\begin{equation}\label{eq:mixed-phase}
+ \Theta_G(t)<\arctan\frac2{Z_q(t)}=\Theta_{C_q}(t).
+\end{equation}
+
+The eigenvalues $2\cos(2\pi j/q)$ and the finite cosine sum give, for
+$q=4k+1$,
+\[
+ s^+(C_q)=q+1-\sec(\pi/q),\qquad
+ D(C_q)=-2(\sec(\pi/q)-1).
+\]
+Integrating the strict pointwise inequality~\eqref{eq:mixed-phase} in
+\eqref{eq:Coulson} yields $D(G)>D(C_q)$.  Equation
+\eqref{eq:bicyclic-average} now gives
+$s^+(G)>n+2-\sec(\pi/q)>n$, since $q\geq5$ and
+$\sec(\pi/q)<2$.
+\end{proof}
+
+This proof is the product-subpartition argument of the companion manuscript
+\emph{The Triangle--$C_{4k+1}$ Residual Family for Bicyclic Cacti}
+\cite{MixedCompanion}; no restriction is placed on the connector or trees.
+
+\section{Two pentagons}
+
+\subsection{The shared-vertex bouquet}
+
+\begin{theorem}\label{thm:bouquet}
+If the two $C_5$ blocks share one vertex and arbitrary trees are attached,
+then
+\[
+ s^+(G)\geq n+1-\frac4{3\sqrt{13}}>n.
+\]
+\end{theorem}
+
+\begin{proof}
+We give the exact finite certificate behind the proof in
+\cite{BouquetCompanion}.  After tree elimination, label the common activity
+$a_0$ and the four activities on lobe $j$ by $x_{j,1},\ldots,x_{j,4}$.
+For one lobe define
+\begin{align*}
+ A(x)&=x_1x_2x_3x_4+x_3x_4+x_1x_4+x_1x_2+1,\\
+ B(x)&=x_2x_3x_4+x_2+x_4+x_1x_2x_3+x_1+x_3.
+\end{align*}
+Here $A$ is the partition after deleting the common vertex, while $B$ sums
+the two states matching that vertex into the lobe.  Writing $A_j,B_j$ for the
+two lobes,
+\begin{equation}\label{eq:bouquet-core}
+ \Psi_G/K=R+2i(A_1+A_2),\qquad
+ R=a_0A_1A_2+B_1A_2+A_1B_2.
+\end{equation}
+
+The exact coefficient certificate is
+\begin{equation}\label{eq:certificate}
+ 2R\geq t(t^4+7t^2+9)(A_1+A_2)
+ \quad\text{whenever all nine activities are at least }t.
+\end{equation}
+For reproducibility, substitute $a_0=t+y_0$ and
+$x_{j,k}=t+y_{j,k}$ into the difference between the two sides.  Its expansion
+over $\mathbb Z$ has exactly $1290$ nonzero monomials, every coefficient lies
+in $\{1,\ldots,22\}$, and every monomial contains a $y$ variable.  The
+canonical coefficient stream has SHA-256 digest
+\begin{center}
+\texttt{4c436cac772395d2a8edfdd81408ffe426759d3e94d66df2e4ab0235a3343110}.
+\end{center}
+Appendix~\ref{app:certificates} records the exact script and command.  This
+coefficientwise statement proves~\eqref{eq:certificate} on the entire
+nonnegative orthant, rather than by sampling.
+
+From~\eqref{eq:bouquet-core}--\eqref{eq:certificate},
+\[
+ 0<\Theta_G(t)\leq\arctan\frac4{t(t^4+7t^2+9)}.
+\]
+Using $\arctan u\leq u$ and the reciprocal-quartic integral gives
+\[
+ \int_0^\infty t\Theta_G(t)\,dt
+ \leq\int_0^\infty\frac4{t^4+7t^2+9}\,dt
+ =\frac{2\pi}{3\sqrt{13}}.
+\]
+Thus $D(G)\geq-8/(3\sqrt{13})$ by~\eqref{eq:Coulson}, and
+\eqref{eq:bicyclic-average} proves the theorem.
+\end{proof}
+
+\subsection{Every nontrivial connector}
+
+\begin{theorem}\label{thm:disjoint}
+If the two $C_5$ blocks are vertex-disjoint, joined by their unique path of
+arbitrary positive length, and arbitrary trees are attached anywhere, then
+\[
+ s^+(G)>n+5-2\sqrt5>n.
+\]
+\end{theorem}
+
+\begin{proof}
+Let the joining path have endpoints $u_i$ on the pentagons and $m\geq0$
+internal vertices.  Let $X_i$ be the \emph{actual lobe}: the $i$th pentagon
+together with every tree attached at its cycle vertices, rooted at $u_i$.
+Eliminate only branches at internal path vertices, obtaining positive
+activities $a_1,\ldots,a_m$ and a positive factor $B_0$.  Put
+\[
+ z_i=\Psi_{X_i}(t),\qquad w_i=\Psi_{X_i-u_i}(t),\qquad r_i=w_i/z_i.
+\]
+The graph $X_i-u_i$ is a forest, and Sachs gives
+\[
+ z_i=Z_{X_i}(t)+2iZ_{X_i-V(C_5)}(t).
+\]
+Hence $z_i$ is in the open first quadrant and
+$r_i=x_i-iy_i$ with $x_i,y_i>0$.
+
+For the continuant
+\[
+ K()=1,\quad K(b_1)=b_1,\quad
+ K(b_1,\ldots,b_k)=b_kK(b_1,\ldots,b_{k-1})+K(b_1,\ldots,b_{k-2}),
+\]
+the last-edge split of path matchings gives the exact actual-lobe
+factorization
+\begin{equation}\label{eq:connector}
+ \Psi_G=B_0z_1z_2F,
+ \qquad F=\begin{cases}
+ 1+r_1r_2,&m=0,\\
+ a_1+r_1+r_2,&m=1,\\
+ K(a_1+r_1,a_2,\ldots,a_{m-1},a_m+r_2),&m\geq2.
+ \end{cases}
+\end{equation}
+To see both exactness and the phase sign, expand
+\begin{equation}\label{eq:Fexpand}
+ F=A+Br_1+Cr_2+Dr_1r_2.
+\end{equation}
+The four coefficients are the path matching partitions obtained by
+prescribing neither, only the left, only the right, or both boundary edges.
+For $m=0$, $(A,B,C,D)=(1,0,0,1)$; for $m=1$ it is
+$(a_1,1,1,0)$; for $m\geq2$ all four are positive.  Therefore
+\begin{equation}\label{eq:ImF}
+ \operatorname{Im}F=-By_1-Cy_2-D(x_1y_2+x_2y_1)<0.
+\end{equation}
+
+Let $\theta_i=\Arg z_i\in(0,\pi/2)$.  Formula~\eqref{eq:Sachs} for $G$
+has positive imaginary part (the two singleton pentagon terms), so
+$0<\Theta_G<\pi$.  Equations~\eqref{eq:connector}--\eqref{eq:ImF}, with the
+continuous branch, imply
+\begin{equation}\label{eq:lobe-phase}
+ 0<\Theta_G=\theta_1+\theta_2+\Arg F<\theta_1+\theta_2.
+\end{equation}
+Indeed $\Arg F\in(-\pi,0)$, and the alternative branch contradicts
+$0<\Theta_G<\pi$.  Coulson integration now yields
+\begin{equation}\label{eq:Dsplit}
+ D(G)>D(X_1)+D(X_2).
+\end{equation}
+
+It remains to bound an actual lobe $X$.  Eliminate all its attached trees.
+Then
+\[
+ \Psi_X=K_0\bigl(Z_{C_5}(b)+2i\bigr),\qquad b_v\geq t.
+\]
+Coefficientwise monotonicity gives $Z_{C_5}(b)\geq Z_{C_5}(t)$, hence
+$0<\Theta_X(t)\leq\Theta_{C_5}(t)$ and
+\begin{equation}\label{eq:lobe-bound}
+ D(X)\geq D(C_5)=4-2\sqrt5.
+\end{equation}
+For the last equality use the eigenvalues $2\cos(2\pi j/5)$, which give
+$s^+(C_5)=7-\sqrt5$.  Combining
+\eqref{eq:Dsplit}--\eqref{eq:lobe-bound} gives
+$D(G)>8-4\sqrt5$; equation~\eqref{eq:bicyclic-average} proves the result.
+\end{proof}
+
+This is the actual-lobe continuant proof of
+\cite{AllConnectors}; it includes the single-bridge case treated separately
+in \emph{Positive Square Energy for Two Pentagons Joined by a Bridge with
+Arbitrary Trees}~\cite{BridgeCompanion}.  Comparing with bare lobes would be
+invalid: attachments can increase their pointwise phase.
+
+\section{Exhaustive classification}
+
+\begin{theorem}\label{thm:main}
+Every connected bicyclic cactus $G$ on $n$ vertices satisfies
+\[
+ \boxed{s^+(G)\geq n}.
+\]
+The cycles may share a cut vertex or be disjoint with an arbitrary connector,
+and arbitrary trees may occur throughout the block incidence structure.
+\end{theorem}
+
+\begin{proof}
+Let $p,q$ be the two cyclic block lengths.  If one is even, or if both are odd
+and at least five but not both five,~\eqref{eq:dnn-bound} and
+\eqref{eq:eps-values} apply.  If both are $3\pmod4$, the common-phase argument
+\eqref{eq:common-phase} applies.  A remaining pair containing a triangle is
+exactly $\{3,4k+1\}$ and is settled by Theorem~\ref{thm:mixed}.  The sole
+remaining pair $\{5,5\}$ is settled by Theorem~\ref{thm:bouquet} when the
+cycles share a vertex and by Theorem~\ref{thm:disjoint} when they are
+disjoint.  These exhaust the two possible incidences of cyclic blocks in a
+cactus and all unordered length pairs.
+\end{proof}
+
+The mixed and two-pentagon residual estimates are strict.  The weak form in
+Theorem~\ref{thm:main} is the uniform conclusion needed for the AKMPZ bound.
+Nothing here claims the same theorem for non-cactus bicyclic graphs.
+
+\appendix
+\section{Certificate paths and reproduction}\label{app:certificates}
+
+All paths below are relative to the repository root.  The bouquet coefficient
+certificate is checked exactly with
+\begin{verbatim}
+python positive-square-energy/experiments/c5_bouquet_matching_certificate.py
+\end{verbatim}
+The expected summary is
+\begin{verbatim}
+PASS two-C5 bouquet matching coefficient certificate
+terms=1290 min_coefficient=1 max_coefficient=22
+y_constant=0 all_coefficients_nonnegative=True
+sha256=4c436cac772395d2a8edfdd81408ffe426759d3e94d66df2e4ab0235a3343110
+\end{verbatim}
+The connector factorization has an independent, nonessential audit at
+\begin{verbatim}
+python positive-square-energy/experiments/connector_factor_audit.py
+\end{verbatim}
+The source manuscripts used to assemble this proof are
+\begin{verbatim}
+sharp-cactus-dnn/paper.tex
+triangle-one-mod-four-cactus/paper.tex
+two-c5-bouquet-trees/paper.tex
+two-c5-all-connectors/paper.tex
+two-c5-bridge-trees/paper.tex
+\end{verbatim}
+
+\begin{thebibliography}{99}
+\bibitem{AKMPZ}
+S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and S.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264, 2025.
+
+\bibitem{LTZ}
+Y.~Liu, Q.~Tang, and S.~Zhang,
+\emph{The positive and negative square-energy conjecture},
+arXiv:2607.18031, 2026.
+
+\bibitem{SharpDNN}
+Companion manuscript, \emph{The Optimized Liu--Tang--Zhang Constant for
+Cactus Graphs}, 2026; repository path \texttt{sharp-cactus-dnn/paper.tex}.
+
+\bibitem{MixedCompanion}
+Companion manuscript, \emph{The Triangle--$C_{4k+1}$ Residual Family for
+Bicyclic Cacti}, 2026; repository path
+\texttt{triangle-one-mod-four-cactus/paper.tex}.
+
+\bibitem{BouquetCompanion}
+Companion manuscript, \emph{Positive Square Energy for a Two-$C_5$ Bouquet
+with Arbitrary Trees}, 2026; repository path
+\texttt{two-c5-bouquet-trees/paper.tex}.
+
+\bibitem{AllConnectors}
+Companion manuscript, \emph{Positive Square Energy for Two Pentagons Joined
+by an Arbitrary Path}, 2026; repository path
+\texttt{two-c5-all-connectors/paper.tex}.
+
+\bibitem{BridgeCompanion}
+Companion manuscript, \emph{Positive Square Energy for Two Pentagons Joined
+by a Bridge with Arbitrary Trees}, 2026; repository path
+\texttt{two-c5-bridge-trees/paper.tex}.
+\end{thebibliography}
+
+\end{document}
