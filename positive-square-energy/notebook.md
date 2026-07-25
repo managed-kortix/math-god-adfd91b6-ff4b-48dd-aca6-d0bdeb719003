@@ -1,5 +1,73 @@
 # notebook — positive square energy
 
+## 2026-07-25 — universal block graphs, corrected packet proof
+
+**Theorem.** Every connected non-tree block graph `G` of order `n` satisfies
+`s+(G)>n`. Consequently AKMPZ Conjecture 1.2 holds for every connected block
+graph with `m>=n+1`; the theorem is stronger because it also covers the
+unicyclic block-graph case `m=n`. It does not claim `s+(G)>m(G)` globally.
+
+**Territory reduction.** Fix a maximum collection of pairwise vertex-disjoint
+cycles and use the lexicographically prioritized nearest-cycle partition. The
+existing integer-distance proof shows each territory is connected and induced,
+contains its selected cycle, and has packing number exactly one. Induced
+subgraphs of block graphs are block graphs: equivalently, block graphs are
+chordal and diamond-free, and both conditions are hereditary. Thus it is enough
+to prove `s+>|V|` in each packing-one block-graph territory and sum by induced
+superadditivity.
+
+**Packing-one bouquet classification.** A cyclic clique block has order at
+most five, because `K_r`, `r>=6`, contains two disjoint triangles. Hence cyclic
+blocks are exactly among `K3,K4,K5`. Any two must meet or triangles chosen in
+them would be disjoint. Distinct blocks meet in one cut vertex. If there are at
+least two cyclic blocks, all contain the same cut vertex `c`: a third block
+meeting the first two away from their common cut would create a cycle in the
+block-cut tree. This is the formal bouquet classification required by the
+hostile audit.
+
+**Branch uniqueness.** Let `B` be the union of the cyclic blocks. Every
+component off `B` has a neighbor in `B` and has exactly one root there. Two
+roots, joined through that component and through the connected bouquet, would
+produce a cycle using an off-bouquet vertex, hence another cyclic block,
+contradiction. The component is acyclic for the same reason. Therefore each
+root supports a unique induced tree branch. The off-bouquet components are
+disjoint, so assigning the branch at a root to the packet containing that root
+partitions all vertices exactly once. This closes the previously informal
+packet bookkeeping.
+
+**Standalone packets (the missing lemma).** If a connected graph has a unique
+`K4` cyclic block and otherwise rooted trees, every cycle lies in the `K4` and
+the packing number is one. In the grouped Sachs expansion, triangles contribute
+phase `-2i` and 4-cycles contribute the real phase `-2`; hence
+`Im Psi(t)=-2 sum_T Z_{H-V(T)}(t)<0`. The continuous-argument/Coulson proof
+gives `s+>s-`, and since `m=n+2`, it gives `s+>m=n+2`. This statement now
+appears independently before any `K5` or universal argument.
+
+For a unique `K5` with rooted trees, choose one core vertex `x`. Its rooted
+tree is one induced piece with `s+=|T|-1`; the other four core vertices and
+their rooted trees induce a unique `K4` packet with `s+>|R|+2`. Induced
+superadditivity gives `s+>|T|-1+|R|+2=n+1`. No arbitrary `K_r` packet is used
+or needed, since packing one already bounds core order by five.
+
+**Territory packet cases.** With one cyclic block, use the triangular theorem,
+the `K4` packet, or the `K5` packet. With multiple cyclic blocks and at least
+one triangle, put `c`, all triangle blocks, and their rooted branches into one
+triangular packet. Every remaining `K4` yields `K4-c=K3`, routed to the
+triangular theorem; every remaining `K5` yields `K5-c=K4`, routed to the
+standalone `K4` lemma. With multiple blocks and no triangles, a central `K4`
+packet is used if available, with all other blocks treated as above. If all
+blocks are `K5`, the central branch at `c` is a tree losing one unit, while at
+least two `K4` remainders each gain more than two, so the total is still
+strictly above territory order. There is no circular citation: triangular,
+`K4`, and `K5` packet results precede the universal theorem.
+
+**Audit disposition.** The skeptical-referee objection was correct that the
+packet lemma was absent from the manuscript even though related rank arguments
+were present. The paper now states and proves both packet lemmas, bouquet
+classification, unique roots, exact branch assignment, all territory cases,
+and the universal theorem. Cyclomatic-rank two through five propositions are
+retained only as quantitative illustrations.
+
 ## 2026-07-21 — selection
 
 **Hypothesis.** The sparse frontier m=n+1 is the highest-yield place to test

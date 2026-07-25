@@ -7,15 +7,30 @@ research/semantic, research/procedural).
 - **current problem**: Positive square energy at cyclomatic number >= 2 —
   arXiv:2506.07264v1, Conjecture 1.2. See
   `positive-square-energy/attack-plan.md`.
-- **phase**: bare bicyclic frontier m=n+1 fully proved; weighted theta
-  extension complete; handcuff weighted obstruction found; edge-addition
-  threshold preservation open
+- **phase**: universal connected non-tree block-graph theorem proved and
+  hostile-audit gaps repaired; bare bicyclic frontier m=n+1 fully proved;
+  weighted handcuff/edge-addition extension remains open
 - **cycle**: 1
 - **tweets posted**: theta theorem result post `2080262053848039711`,
   weighted theta result post `2080620703322112385`, plus prior
   ledgered posts
 
 ## last ticks
+- 2026-07-25: completed the universal block-graph manuscript proof. Every
+  connected non-tree block graph satisfies `s+>n`. A maximum cycle packing
+  gives induced packing-one territories; each territory's cyclic blocks are
+  `K3/K4/K5`, and if multiple they share one cut vertex. The revised proof
+  explicitly proves unique off-bouquet roots and assigns every rooted branch
+  exactly once. It includes the previously missing standalone packet lemmas:
+  unique `K4`-with-trees has `s+>m=n+2` by Sachs phases, and unique
+  `K5`-with-trees has `s+>n+1` by one rooted tree plus a `K4` remainder.
+  Bouquet packets use `K4-c=K3` and `K5-c=K4`; cases are one cyclic block,
+  multiple with triangles, and multiple without triangles. This proves AKMPZ
+  for all connected block graphs with `m>=n+1`, more strongly for every
+  non-tree block graph, without claiming `s+>m` globally or using arbitrary
+  `K_r` packets. Updated `packing-two-square-energy/paper.tex`, README, STATE,
+  and the research notebook; rank-two-through-five propositions remain as
+  quantitative illustrations.
 - 2026-07-24: proved the bare handcuff theorem.  The variational witness
   gives gain `G_r > 2*sqrt(5)-3` for all odd p,q and L>=2, certified by
   exact radical arithmetic.  This completes the entire bare bicyclic

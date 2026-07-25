@@ -19,7 +19,7 @@
 \newcommand{\vp}{\nu_{\circ}}
 \newcommand{\cC}{\mathcal C}
 
-\title{Square-Energy Asymmetry from Packing at Most Two Cycles}
+\title{Square Energy from Cycle Packing and Block-Graph Territories}
 \author{}
 \date{}
 
@@ -39,9 +39,14 @@ polynomial with nonnegative coefficients and positive value on the positive
 axis.  Packing number at most two then
 puts the normalized characteristic polynomial strictly in one open
 half-plane.  A Coulson identity converts this fixed argument sign into the
-claimed square-energy inequality.  Applications include a strict form of
-the positive square-energy conjecture for every triangular block graph and
-for block graphs of cyclomatic numbers two through five.
+claimed square-energy inequality.  As an application, we prove the universal
+block-graph statement that every connected non-tree block graph of order $n$
+satisfies $s^+(G)>n$.  The proof uses induced cycle territories of packing
+number one, classifies each such territory as a bouquet of $K_3$, $K_4$, and
+$K_5$ blocks, and partitions the bouquet into explicit spectral packets.
+This proves the conjecture of Akbari--Kumar--Mohar--Pragada--Zhang for every
+connected block graph with at least $n+1$ edges, and in fact gives the same
+strict bound for every connected non-tree block graph.
 \end{abstract}
 
 \section{Introduction}
@@ -69,7 +74,7 @@ satisfies $s^+(G)\ge n$ \cite[Conjecture 1.2]{AKMPZ}.
 
 For a graph $G$, write $\vp(G)$ for the maximum cardinality of a
 collection of pairwise vertex-disjoint cycles.  Our main result is the
-following sign theorem.  Connectivity is not required.
+following foundational sign theorem.  Connectivity is not required.
 
 \begin{theorem}\label{thm:main}
 Let $G$ be a finite simple graph that contains a cycle and satisfies
@@ -81,6 +86,18 @@ $\vp(G)\le2$.
       $s^+(G)<s^-(G)$.
 \end{enumerate}
 \end{theorem}
+
+The principal application removes both packing and rank restrictions for
+block graphs: Theorem~\ref{thm:universal-block} below proves
+\[
+ s^+(G)>|V(G)|
+\]
+for every connected non-tree block graph.  Thus the AKMPZ conclusion holds
+for all connected block graphs with at least $n+1$ edges.  The proof does
+not claim the generally false-looking stronger comparison $s^+(G)>|E(G)|$;
+instead it partitions packing-one territories into $K_3$ and $K_4$ spectral
+packets, using a standalone Sachs estimate for a unique $K_4$ core and a
+tree--$K_4$ induced partition for a unique $K_5$ core.
 
 Ning and Zeng proved the corresponding statement for an
 odd unicyclic graph \cite{NingZeng}.  Their argument also uses a matching
@@ -99,9 +116,10 @@ priority claim on the basis of a negative literature search.
 Section~\ref{sec:proof} gives a self-contained proof, including the
 required Coulson identity and a careful continuous-argument step.
 Section~\ref{sec:structure} records the cactus structure forced by the
-cycle congruence, and Section~\ref{sec:applications} gives applications,
-including a cycle-territory decomposition and block graphs through
-cyclomatic number five.
+cycle congruence, and Section~\ref{sec:applications} gives applications.  Its
+principal one is a cycle-territory decomposition proving $s^+(G)>|V(G)|$ for
+every connected non-tree block graph.  The quantitative results for
+cyclomatic numbers two through five are retained as illustrations.
 We also use the induced-subgraph superadditivity theorem of Akbari, Kumar,
 Mohar, and Pragada~\cite{AKMP}: if $H_1,\ldots,H_r$ are pairwise disjoint
 induced subgraphs of $G$, then
@@ -401,6 +419,193 @@ The territories are pairwise disjoint induced subgraphs, so
  >\sum_{i=1}^k n_i=n.
 \]
 Notice that this argument does not assert $s^+(G)>|E(G)|$.
+\end{proof}
+
+We now make the packet argument for general block graphs explicit.  This is
+needed because a packing-one territory need not be triangular.
+
+\begin{lemma}[$K_4$ packet]\label{lem:K4-packet}
+Let $H$ be a connected graph of order $h$ whose unique cyclic block is a
+copy of $K_4$; equivalently, $H$ is obtained from $K_4$ by attaching rooted
+trees at its vertices.  Then
+\[
+ s^+(H)>|E(H)|=h+2.
+\]
+\end{lemma}
+
+\begin{proof}
+Every cycle of $H$ lies in the $K_4$, and no two cycles are vertex-disjoint.
+In the grouped Sachs expansion \eqref{eq:Psi-expansion}, the triangles have
+phase $q_3=-2\ii$, whereas the $4$-cycles have the real phase $q_4=-2$.
+There are no terms containing two cycles.  Consequently
+\[
+ \operatorname{Im}\Psi_H(t)
+ =-2\sum_{T\subseteq K_4,\ T\cong K_3}Z_{H-V(T)}(t)<0
+ \qquad(t>0).
+\]
+The continuous-argument step in the proof of Theorem~\ref{thm:main}, followed
+by Lemma~\ref{lem:coulson}, gives $s^+(H)>s^-(H)$.  The unique $K_4$ block
+contributes cyclomatic number three, so $|E(H)|=h-1+3=h+2$; now
+\eqref{eq:sum} gives the assertion.
+\end{proof}
+
+\begin{lemma}[$K_5$ packet]\label{lem:K5-packet}
+Let $H$ be a connected graph of order $h$ whose unique cyclic block is a
+copy of $K_5$; equivalently, $H$ is obtained from $K_5$ by attaching rooted
+trees at its vertices.  Then
+\[
+ s^+(H)>h+1.
+\]
+\end{lemma}
+
+\begin{proof}
+Choose $x\in V(K_5)$.  Let $T$ consist of $x$ and the entire tree attached
+at $x$, and let $R$ be induced by the other four vertices of $K_5$ together
+with their attached trees.  These sets partition $V(H)$.  The graph $T$ is
+a tree, so $s^+(T)=|T|-1$ (also when $T$ is the one-vertex tree), while $R$
+has a unique $K_4$ block.  Lemma~\ref{lem:K4-packet} and induced-subgraph
+superadditivity give
+\[
+ s^+(H)\ge s^+(T)+s^+(R)
+ >(|T|-1)+(|R|+2)=h+1.
+\]
+\end{proof}
+
+The next two lemmas supply the structural and bookkeeping facts behind the
+territory proof.  Recall that the block--cut graph of a connected graph is a
+tree, with one class of nodes representing blocks and the other cut vertices.
+
+\begin{lemma}[Packing-one bouquets]\label{lem:packing-one-bouquet}
+Let $H$ be a connected block graph containing a cycle and satisfying
+$\vp(H)=1$.  Every cyclic block of $H$ is one of $K_3,K_4,K_5$.  If there are
+at least two cyclic blocks, then they all contain one common cut vertex.
+\end{lemma}
+
+\begin{proof}
+A clique $K_r$ with $r\ge6$ contains two vertex-disjoint triangles, so every
+cyclic block has order at most five.  Thus the cyclic blocks are $K_3,K_4$, or
+$K_5$.  Any two cyclic blocks must meet, since otherwise one may choose a
+triangle in each to obtain two vertex-disjoint cycles.  Distinct blocks meet
+in at most one vertex, necessarily a cut vertex.
+
+Fix two cyclic blocks $B_1,B_2$ and write $c$ for their common vertex.  If a
+third cyclic block $B$ did not contain $c$, then its intersections with
+$B_1$ and $B_2$ would give a closed walk through three distinct block nodes
+in the block--cut graph (and hence a cycle there), impossible because that
+graph is a tree.  Therefore every cyclic block contains $c$.
+\end{proof}
+
+\begin{lemma}[Unique branches and packet partitions]
+\label{lem:bouquet-partition}
+Let $H$ satisfy Lemma~\ref{lem:packing-one-bouquet}, suppose it has at least
+two cyclic blocks, let $c$ be their common cut vertex, and let $\mathcal B$
+be their union.  Every component $D$ of $H-V(\mathcal B)$ has neighbors in
+exactly one vertex $r(D)$ of $\mathcal B$.  For $x\in V(\mathcal B)$, define
+the branch at $x$ by
+\[
+ A_x=\{x\}\cup\bigcup_{r(D)=x}V(D).
+\]
+Then every $H[A_x]$ is a tree, the sets $A_x\setminus\{x\}$ are pairwise
+disjoint, and
+\[
+ V(H)=V(\mathcal B)\mathbin{\dot\cup}
+       \bigcup_{x\in V(\mathcal B)}(A_x\setminus\{x\}).
+\]
+Consequently, assigning each branch $A_x- x$ to the unique packet containing
+its root $x$ makes any partition of $V(\mathcal B)$ into a partition of
+$V(H)$ by induced subgraphs.
+\end{lemma}
+
+\begin{proof}
+Existence of a neighbor in $\mathcal B$ follows from connectivity.  If one
+component $D$ attached at two distinct vertices $x,y$ of $\mathcal B$, a
+shortest $x$--$y$ path with interior in $D$, together with an $x$--$y$ path
+inside the connected bouquet $\mathcal B$, would contain a cycle using a
+vertex outside $\mathcal B$.  Its cyclic block would not be one of the cyclic
+blocks whose union defines $\mathcal B$, a contradiction.  Thus the root is
+unique.  No component $D$ contains a cycle, since every cyclic block of $H$
+already belongs to $\mathcal B$.
+More generally, a cycle in $H[A_x]$ could not lie in $\mathcal B$ and would
+again supply an unlisted cyclic block.  Hence $H[A_x]$ is connected and
+acyclic, and therefore is a tree.
+The remaining assertions now follow directly from the component partition.
+In particular, each off-bouquet vertex and each root branch is assigned
+exactly once; taking induced subgraphs retains every edge internal to a
+packet and ignores only edges between packets.
+\end{proof}
+
+We use these facts to obtain the promised result without a bound on
+cyclomatic number or on the number of cyclic blocks.
+
+\begin{theorem}[Main theorem: universal block graphs]
+\label{thm:universal-block}
+Every connected non-tree block graph $G$ of order $n$ satisfies
+\[
+ s^+(G)>n.
+\]
+\end{theorem}
+
+\begin{proof}
+Choose a maximum collection of vertex-disjoint cycles and form the induced
+territories $G_1,\ldots,G_k$ of Lemma~\ref{lem:cycle-territories}.  An induced
+subgraph of a block graph is again a block graph: for example, block graphs
+are exactly the chordal diamond-free graphs, and both properties are
+hereditary.  Each connected $G_i$ is therefore a cyclic block graph with
+$\vp(G_i)=1$.  It suffices to prove
+\begin{equation}\label{eq:territory-target}
+ s^+(G_i)>|V(G_i)|
+\end{equation}
+for every territory, since superadditivity then sums these strict inequalities
+to $s^+(G)>n$.  Fix one territory $H$.
+
+If $H$ has one cyclic block, Lemma~\ref{lem:packing-one-bouquet} says that it
+is $K_3,K_4$, or $K_5$.  The $K_3$ case is
+Corollary~\ref{cor:triangular-block}, the $K_4$ case is
+Lemma~\ref{lem:K4-packet}, and the $K_5$ case is
+Lemma~\ref{lem:K5-packet}.  Thus \eqref{eq:territory-target} holds.
+
+Suppose now that $H$ has at least two cyclic blocks.  They form a bouquet
+with common cut vertex $c$ by Lemma~\ref{lem:packing-one-bouquet}; use the
+unique branches from Lemma~\ref{lem:bouquet-partition} in every packet below.
+
+First suppose that at least one cyclic block is a triangle.  Make one central
+packet from $c$, all $K_3$ blocks, and the branches rooted at their vertices
+(including the branch at $c$).  This is a connected triangular block graph,
+so Corollary~\ref{cor:triangular-block} gives $s^+$ strictly larger than its
+order.  For every $K_4$ block $Q$, make a packet from $Q-c$ and the branches
+at those three vertices.  Its unique cyclic block is $K_3$, because
+$K_4-c=K_3$, so the same corollary applies.  For every $K_5$ block $Q$, the
+analogous packet has unique cyclic block $K_4$, because $K_5-c=K_4$, and
+Lemma~\ref{lem:K4-packet} applies.  These induced packets partition $V(H)$,
+and each has positive square energy strictly larger than its order.
+Superadditivity proves \eqref{eq:territory-target}.
+
+It remains that every cyclic block is $K_4$ or $K_5$.  If a $K_4$ block
+$Q_0$ exists, take as the central packet the whole of $Q_0$, the branch at
+$c$, and the branches at the other vertices of $Q_0$.  It is a unique
+$K_4$-with-trees packet, hence its positive square energy exceeds its order
+by more than two.  Every other $K_4$ contributes the triangular packet
+$Q-c$ just described, and every $K_5$ contributes a $K_4$ packet $Q-c$;
+all of these have positive square energy strictly larger than their order.
+They partition $V(H)$ and prove \eqref{eq:territory-target}.
+
+Finally suppose all cyclic blocks are $K_5$.  Take the central packet to be
+$A_c$, a tree, and for each $K_5$ block $Q$ take $Q-c$ with the branches at
+its four vertices.  If the central tree has order $a$, it contributes
+$a-1$, while each of the at least two $K_4$ packets contributes more than
+its order plus two by Lemma~\ref{lem:K4-packet}.  Hence superadditivity gives
+in fact $s^+(H)>|V(H)|+3$, and completes the proof.
+\end{proof}
+
+\begin{corollary}[AKMPZ for block graphs]\label{cor:AKMPZ-block}
+If $G$ is a connected block graph of order $n$ with $|E(G)|\ge n+1$, then
+$s^+(G)>n$.  More strongly, the same conclusion holds for every connected
+non-tree block graph, including the unicyclic case $|E(G)|=n$.
+\end{corollary}
+
+\begin{proof}
+The edge hypothesis makes $G$ non-tree, so Theorem~\ref{thm:universal-block}
+applies.  Its statement gives the stronger assertion directly.
 \end{proof}
 
 \begin{corollary}[Bicyclic block graphs]\label{cor:block}

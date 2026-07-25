@@ -3,7 +3,7 @@
 This directory contains a self-contained LaTeX manuscript proving a
 square-energy sign theorem for graphs whose maximum collection of pairwise
 vertex-disjoint cycles has size at most two, together with a cycle-territory
-decomposition and applications through cyclomatic-rank-five block graphs.
+and packet proof for all connected non-tree block graphs.
 
 ## Main result
 
@@ -33,6 +33,25 @@ continuous argument and a Coulson identity then determine the sign of
   `s+(G) > n`, with no bound on the number or packing of its triangles. This
   follows territory by territory from `s+ > s-`, `s+ > m_i >= n_i`, and
   induced-subgraph superadditivity; it does not claim `s+(G) > m(G)`.
+- Every connected non-tree block graph satisfies `s+(G) > n`, with no bound
+  on cyclomatic number, clique size globally, or cycle packing number. This
+  is the manuscript's principal block-graph theorem and supersedes the
+  rank-two-through-five results as a qualitative statement.
+- Each induced cycle territory has packing number one. Its cyclic blocks are
+  necessarily `K3`, `K4`, or `K5`; if there are at least two, they share one
+  common cut vertex. Components off the cyclic bouquet have a unique root,
+  so their tree branches can be assigned exactly once to induced packets.
+- The packet estimates are explicit: a unique `K4` with rooted trees has
+  `s+ > m = n+2` by the grouped Sachs expansion, and a unique `K5` with
+  rooted trees has `s+ > n+1` by splitting one rooted tree from the remaining
+  `K4` packet. No arbitrary `K_r` packet lemma is assumed.
+- Bouquet territories split by deleting the common cut vertex from noncentral
+  blocks: `K4-c=K3` routes to the triangular theorem and `K5-c=K4` routes to
+  the standalone `K4` packet lemma. The proof separately treats one cyclic
+  block, multiple blocks with a triangle, and multiple blocks without one.
+- Consequently AKMPZ Conjecture 1.2 holds for every connected block graph with
+  `m >= n+1`; the stronger theorem applies to every connected non-tree block
+  graph, including `m=n`. It does not assert `s+(G) > m(G)` globally.
 - Every connected bicyclic block graph has exactly two triangular blocks
   and satisfies `s+(G) > |E(G)| = n + 1 > s-(G)`. This settles AKMPZ
   Conjecture 1.2 strictly for this class.
