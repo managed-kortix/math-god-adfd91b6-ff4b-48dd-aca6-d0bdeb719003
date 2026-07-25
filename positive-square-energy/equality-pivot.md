@@ -32,6 +32,27 @@ descendant equality pair by `T=q_H`.  In a 2-connected descendant, Case 2
 of the LTZ proof is strictly incompatible with equality; Case 1 forces the
 edge entries to be uniform and gives the displayed constant.
 
+More explicitly, first fold every nonedge entry of `M=B o B` onto the
+diagonal as in LTZ.  Folding preserves the edge entries, `S`, and
+`T=1^T M 1`, but its diagonal is no longer simply `B_vv^2`; subsequent
+diagonal quantities in this equality trace refer to the folded matrix.  At a
+cut vertex, LTZ constructs two Gram matrices satisfying
+
+`q=q_1+q_2`, `S=S_1+S_2`, and `T=T_1+T_2`.
+
+Equality in both induction bounds and scalar Cauchy--Schwarz forces
+`T_1/q_1=T_2/q_2=T/q=1`, so each descendant remains normalized by
+`T_i=q_i`.  A no-cut descendant of order at least three is 2-connected and
+has positive cyclomatic number.  LTZ Case 2 uses a strict hypothesis and
+therefore yields a strict final inequality, so equality must lie in Case 1.
+Equality in the flat edge Cauchy--Schwarz estimate makes every edge entry of
+the folded matrix equal to `r`.  Since
+
+`4(l sqrt(r))^2=q_H T_H=q_H^2`,
+
+we have `sqrt(r)=q_H/(2l)`.  Folding preserved edge entries, while equality
+in the preceding absolute-value step gave `B_uv<=0`; this proves (27).
+
 Thus the conjecture is reduced to one structural lemma:
 
 > If the negative spectral part `B=A_-` has the displayed blockwise-constant
