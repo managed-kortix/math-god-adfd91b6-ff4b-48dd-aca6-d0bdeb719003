@@ -7,6 +7,7 @@ python3 test_verifiers.py
 python3 exhaustive_crosscheck.py --max-n 5
 python3 verify_set.py certificate.txt
 node verify_matrix.js certificate.txt
+~/mathenv/bin/python direct_smt.py --n 17 --b-size 6 --timeout-ms 300000
 ```
 
 Exit status is 0 only for a valid counterexample, 1 for a valid oriented graph
@@ -15,3 +16,9 @@ adjacency sets; `verify_matrix.js` has an independent parser and directly scans
 a Boolean matrix. The exhaustive oracle compares every neighborhood set, not
 only the final decision. Exhaustion is a regression test and is not claimed as
 progress toward proving the universal conjecture.
+
+`direct_smt.py` is a baseline exact SMT search. It fixes a minimum-degree-eight
+root with six or seven exact second neighbors and imposes deficit exactly one or
+two at every vertex. A `sat` adjacency projection is not trusted until both
+external verifiers pass. An `unknown` result has no mathematical force, and an
+`unsat` result is not a proof artifact unless independently certified.

@@ -122,3 +122,52 @@ No audits yet.
   `B`-badness signatures; if none exists, extract a checkable UNSAT certificate
   or human inequality. No local UNSAT result will be called a solution without
   the proved universal reduction and all remaining branches.
+
+## 2026-07-25 — tick 3
+
+- Proved that universal incidence `A->B` cannot occur in the `|B|=6` branch;
+  see `attempts/tick3-universal-incidence-nogo.md`. Any viable obstruction must
+  use non-universal predecessor signatures and some reverse `B->A` arcs.
+- Derived a Hall expansion theorem for the six root predecessor signatures and
+  exact transport bounds `M>=E_BR>=P-21>=15`. Sharp examples show aggregate
+  transport alone cannot contradict badness; overlap structure inside
+  `X_A,X_B` is the next human target. See `attempts/tick3-b6-transport.md`.
+- Extended the finite signature framework through exact `B`-badness. Local
+  iteration has no proved depth bound, but Seacrest's `n<=36` reduction makes a
+  complete finite direct model valid for a globally vertex-minimal degree-eight
+  counterexample. See `attempts/tick3-b-badness.md`.
+- Added `experiments/direct_smt.py`, an exact Z3 adjacency model with the rooted
+  six/seven-vertex second layer and deficit exactly one or two at every vertex.
+  Orders `n<=16` are rigorously impossible already by edge capacity
+  `C(n,2)<8n`. The initial baseline searches at `n=17` for both root branches
+  timed out after 600 seconds, but a subsequent exact argument eliminates that
+  order: minimum outdegree eight forces all 136 possible arcs and every
+  outdegree to equal eight, hence a regular tournament. For any `x->v`, if no
+  `v->y->x` existed then `x` would dominate `v` and all eight outneighbors of
+  `v`, contradicting `d+(x)=8`; thus every in-neighbor of `v` is in `N++(v)`
+  and every vertex has `d++=d+=8`. The direct script now records this presolve.
+- **Next queued attack:** encode the proved Hall/root-signature constraints and
+  staged rooted symmetry into the direct model, then seek a model at `n=17`
+  while independently deriving overlap lower bounds for `L-e`. Any SAT graph
+  must pass both external verifiers; any UNSAT status needs a certificate.
+
+## 2026-07-25 — tick 4
+
+- Derived the exact near-tournament budget `X+m=9` at order 18 and a sharper
+  root remainder identity forcing two or three vertices outside
+  `{s} union N+(s) union N++(s)`. The deficit-two branch has only three units of
+  residual arc/excess/missing-pair budget; see `attempts/tick4-order18.md`.
+- Strengthened `direct_smt.py` with the universal outdegree upper bound,
+  exact deficits, root layer implications, degree-18 missing-pair branching,
+  and proved root signature constraints. Experimental results: both root
+  branches are Z3-UNSAT at zero missing pairs; the six-vertex second-layer
+  branch is also Z3-UNSAT at one and two missing pairs. These are not yet
+  independently certified and carry no theorem status. The seven-vertex branch
+  timed out at one and two missing pairs.
+- A breaker destroyed naive lower bounds on internal transport: one reversed
+  `A-B` pair can satisfy all root/Hall constraints with `L-e=-10` due to exact
+  second-neighborhood overlap. Preserved in `attempts/tick4-overlap-breaker.md`.
+- **Next queued attack:** translate the order-18 exact budget (2) into the SMT
+  model, add arc-deletion minimality constraints, and rerun each missing-pair
+  shard. In parallel, derive a human contradiction for the zero-missing-pair
+  tournament branch so solver UNSAT is replaced by proof.
