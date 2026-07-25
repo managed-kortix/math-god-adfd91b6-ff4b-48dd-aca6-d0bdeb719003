@@ -2003,3 +2003,28 @@ the exact 1290-term bouquet certificate, and exact connector determinant
 checks.  No counterexample was found; the proof itself is analytic/exact.
 
 Paper: `all-bicyclic-cacti/`.
+# 2026-07-25: AKMPZ proved for every connected tricyclic cactus
+
+For a tricyclic cactus with cycle lengths `l1,l2,l3`, the sharp DNN estimate is
+
+`s+(G)>=n+2-(epsilon_l1+epsilon_l2+epsilon_l3)`.
+
+Exact monotonicity leaves only `{3,3,q}` for odd `q` and `{3,5,5}`.  The
+`{3,3,q}` family is closed by common-phase packing when possible, induced
+territories in the packing-three configurations, and an isolated-`C_q`
+product-subpartition phase comparison in the shared-triangle residual.
+
+For `{3,5,5}`, any disconnected shared-cut cluster graph has a bridge isolating
+a singleton cycle packet; the verified unicyclic and all-bicyclic bounds pay
+the two sides.  A connected shared-cut cluster has exactly four incidence
+types.  For each, exact weighted Sachs matching partitions satisfy
+
+`Phi=2R(p+q)-I(pq-4)>0`.
+
+The coefficient certificates have respectively 2547, 2192, 2925, and 2895
+positive terms, minimum coefficient 2.  Lifted phase tracking then compares
+the graph with the two weighted pentagon factors and yields a strict margin.
+
+The final paper passed all audits and exact verification.  An adversarial
+enumeration checked all 151,696 connected tricyclic cacti through order 14;
+no counterexample occurred.  Paper: `all-tricyclic-cacti/`.

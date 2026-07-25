@@ -382,6 +382,17 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
+0. MAIN THEOREM VERIFIED (2026-07-25): every connected tricyclic cactus `G`
+   on `n` vertices satisfies `s+(G)>=n`.  The sharp cactus DNN constant leaves
+   only cycle triples `{3,3,q}` (odd `q`) and `{3,5,5}`.  The first is closed
+   by packing/territory/product-subpartition arguments.  Bridge-separable
+   `{3,5,5}` cacti reduce to verified unicyclic and bicyclic packets; the four
+   shared-cut cluster incidences are closed by exact positive weighted-core
+   certificates (2192--2925 terms).  The standalone paper passed hostile and
+   independent audits, exact certificate reproduction, a last mathematical
+   gate, and an exhaustive census of 151,696 tricyclic cacti through order 14.
+   Paper: `all-tricyclic-cacti/`; certificate:
+   `positive-square-energy/experiments/c3_c5_c5_shared_cluster_certificate.py`.
 0. MAIN THEOREM VERIFIED (2026-07-25): every connected bicyclic cactus `G`
    on `n` vertices satisfies `s+(G)>=n`.  The proof is exhaustive: the exact
    sharp cactus DNN constant handles all length pairs except `{5,5}` and

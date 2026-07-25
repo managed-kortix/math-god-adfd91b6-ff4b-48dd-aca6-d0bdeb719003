@@ -1,0 +1,434 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Arg}{\operatorname{Arg}}
+\newcommand{\one}{\mathbf 1}
+
+\title{Positive Square Energy of Every Tricyclic Cactus}
+\author{}
+\date{25 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove that every connected tricyclic cactus $G$ of order $n$ satisfies
+$s^+(G)\geq n$.  The exact block-additive doubly nonnegative bound leaves
+only the cycle triples $\{3,3,q\}$ with $q$ odd and $\{3,5,5\}$.  The first
+family is settled by packing-two phase, induced cyclic territories, and a
+product-subpartition comparison.  For $\{3,5,5\}$, a bridge separates a
+one-cycle packet unless all cycles form one shared-cut cluster; the latter has
+four cores, handled by an exact positive-coefficient phase certificate.
+Arbitrary bridge blocks and arbitrary attached trees are allowed.
+\end{abstract}
+
+\section{Spectral and matching preliminaries}
+
+All graphs are finite, simple, and undirected.  For the adjacency eigenvalues
+$\lambda_1,\ldots,\lambda_n$, put
+\[
+ s^+(G)=\sum_{\lambda_j>0}\lambda_j^2,\quad
+ s^-(G)=\sum_{\lambda_j<0}\lambda_j^2,\quad D(G)=s^+(G)-s^-(G).
+\]
+Since a connected tricyclic graph has $|E(G)|=n+2$,
+\begin{equation}\label{eq:average}
+ s^+(G)+s^-(G)=2n+4,\qquad s^+(G)=n+2+\frac12D(G).
+\end{equation}
+These square energies originate in spectral coloring bounds
+\cite{AbiadEtAl}.  Liu--Tang--Zhang proved the general $n-1$ conjecture
+\cite{LTZ}; the stronger edge-surplus conjecture of
+Akbari--Kumar--Mohar--Pragada--Zhang asks for $s^+(G)\geq n$ when
+$|E(G)|\geq n+1$ \cite{AKMPZ}.  Ning--Zeng proved the odd-unicyclic sign
+theorem used below in its one-cycle form \cite{NingZeng}.
+
+For positive activities $a=(a_v)$ define
+\[
+ Z_F(a)=\sum_{M\text{ matching of }F}\prod_{v\text{ unmatched by }M}a_v,
+ \qquad Z_F(t)=Z_F((t)_v),
+\]
+and normalize the characteristic polynomial by
+\[
+ \Psi_G(t)=i^{-n}\det(itI-A(G))=\prod_j(t+i\lambda_j).
+\]
+Sachs' formula, grouped by collections $\mathcal C$ of pairwise
+vertex-disjoint cycles, is
+\begin{equation}\label{eq:sachs}
+ \Psi_G(t)=\sum_{\mathcal C}\prod_{C\in\mathcal C}(-2i^{-|C|})
+ Z_{G-V(\mathcal C)}(t).
+\end{equation}
+Thus a $3\pmod4$ cycle has multiplier $-2i$, and a $1\pmod4$ cycle has
+multiplier $2i$.  If $\Theta_G(t)$ is the continuous argument of $\Psi_G(t)$
+tending to zero at infinity, then
+\begin{equation}\label{eq:coulson}
+ D(G)=-\frac4\pi\int_0^\infty t\Theta_G(t)\,dt.
+\end{equation}
+Indeed, integrate
+$\lambda|\lambda|=(2/\pi)\int_0^\infty
+\lambda^3/(\lambda^2+t^2)\,dt$, sum over the spectrum, use
+$\sum\lambda_j=0$, and integrate by parts.  This also fixes the sign and
+branch in \eqref{eq:coulson}.
+
+We use two standard exact reductions.  First, for every vertex partition
+$(V_j)$, induced-subgraph superadditivity gives
+\begin{equation}\label{eq:super}
+ s^+(G)\geq\sum_j s^+(G[V_j])
+\end{equation}
+\cite{AKMP}.  Second, a tree branch oriented toward its attachment satisfies
+\begin{equation}\label{eq:BP}
+ Q_{u\to p}=\frac{Z_{T_{u\to p}}(t)}{Z_{T_{u\to p}-u}(t)}
+ =t+\sum_{w\text{ child of }u}Q_{w\to u}^{-1}\geq t.
+\end{equation}
+Eliminating all branches therefore gives a common positive factor $K(t)$ and
+activity $a_v=t+y_v$, $y_v\geq0$, at every retained vertex, in every Sachs
+term.  This follows by splitting a matching according as its root is unmatched
+or matched to one child.
+
+\begin{lemma}[Phase and packet bounds]\label{lem:packets}
+The following hold, with arbitrary tree attachments.
+\begin{enumerate}
+\item If the graph contains a cycle, every cycle is $3\pmod4$, and at most two are pairwise
+vertex-disjoint, then $D>0$.
+\item A unicyclic $C_q$ cactus with $q=1\pmod4$ satisfies
+$s^+\geq h-\delta_q$, where $\delta_q=\sec(\pi/q)-1$.
+\item A bicyclic cactus with blocks $C_3,C_q$, $q=1\pmod4$, satisfies
+$s^+>h+1-\delta_q$.  Every bicyclic cactus satisfies $s^+\geq h$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+In (1), \eqref{eq:sachs} has strictly negative imaginary part: singleton
+cycle terms are negative imaginary, while empty and two-cycle terms are real.
+Thus $\Theta<0$, and \eqref{eq:coulson} gives $D>0$.  This is the
+packing-two theorem, including the unicyclic result of Ning--Zeng.
+
+For (2), \eqref{eq:BP} gives
+$\Psi/K=Z_{C_q}(a)+2i$.  Since $a_v\geq t$, coefficientwise monotonicity of
+$Z$ bounds its phase by that of the bare cycle.  The eigenvalues
+$2\cos(2\pi j/q)$ give
+\begin{equation}\label{eq:cycleformula}
+ s^+(C_q)=q+1-\sec(\pi/q),\qquad D(C_q)=-2\delta_q.
+\end{equation}
+Coulson integration proves (2).
+
+For the mixed packet, retain the two cycles and their joining path.  Put
+$A=Z_{H-V(C_3)}(a)$, $B=Z_{H-V(C_q)}(a)$, and let $D_0$ be the partition
+after deleting both cycles when they are disjoint.  Sachs gives
+\[
+ \Psi/K=R+2i(B-A),\quad
+ R=Z_H(a)\quad\hbox{or}\quad Z_H(a)+4D_0.
+\]
+Partitioning matchings by whether they use a boundary edge of $C_q$ gives
+$Z_H=Z_{C_q}(a|_{C_q})B+E$, $E\geq0$.  Write
+$Z_{C_q}(a|_{C_q})=Z_{C_q}(t)+L$, $L\geq0$.  Then
+\[
+ R-Z_{C_q}(t)(B-A)=E+LB+Z_{C_q}(t)A\ (+4D_0)>0.
+\]
+Hence $\Theta<\Arg(Z_{C_q}(t)+2i)$, so
+$D>D(C_q)$ and \eqref{eq:average} in the bicyclic form proves (3)'s mixed
+bound.  The final assertion is the established bicyclic-cactus theorem
+\cite{AllBicyclic}; it follows there from the same sharp DNN reduction and
+the two residual phase arguments.  These proofs use neither triangle-ear nor
+edge-monotonicity.
+\end{proof}
+
+\section{The exact DNN reduction}
+
+For a connected edge-containing graph define
+\[
+ \kappa(G)=\sup_{\substack{M\succeq0,\ M\geq0\\\one^TM\one>0}}
+ \frac{4(\sum_{uv\in E(G)}\sqrt{M_{uv}})^2}{\one^TM\one}.
+\]
+
+\begin{lemma}[Sharp cactus DNN constant]\label{lem:dnn}
+If a cactus has $b$ bridge blocks and cyclic blocks of lengths
+$\ell_1,\ldots,\ell_r$, then
+\[
+ \kappa(G)=b+\sum_j\kappa(C_{\ell_j}),\qquad
+ \kappa(C_\ell)=\begin{cases}\ell,&\ell\text{ even},\\
+ \ell\sec^2(\pi/(2\ell)),&\ell\text{ odd},\end{cases}
+\]
+and $s^-(G)\leq\kappa(G)$.
+\end{lemma}
+
+\begin{proof}
+Fold every nonedge entry $M_{uv}$ into the two diagonals by adding
+$M_{uv}(e_u-e_v)(e_u-e_v)^T$.  The denominator and edge entries are
+unchanged.  On $C_\ell$, rotational averaging and concavity of the square
+root reduce to common edge entry $x$ and row sum $r$.  A Fourier eigenvalue
+gives $r\geq4x$ for even $\ell$ and
+$r\geq2(1+\cos(\pi/\ell))x$ for odd $\ell$.  Equality is attained by
+$x(2cI+A(C_\ell))$, with $c=1$ or $c=\cos(\pi/\ell)$, proving the formula.
+Also $\kappa(K_2)=1$.
+
+For explicit cut-vector bookkeeping, suppose $G=G_1\vee_zG_2$.  In a folded
+Gram system write $g_z=u+w+h$, where $u$ lies in the span $U$ of side 1,
+$w$ lies in the orthogonal span $W$ of side 2, and $h\perp U+W$.  Use $u+h$
+as the cut vector on side 1 and $w$ on side 2.  Edge inner products remain
+unchanged and, if $a,b$ are the sums of the noncut vectors on the two sides,
+\[
+ \|a+b+u+w+h\|^2=\|a+u+h\|^2+\|b+w\|^2.
+\]
+Thus both the edge numerator sum and the denominator split.  Cauchy--Schwarz
+gives $\kappa(G)\leq\kappa(G_1)+\kappa(G_2)$.  Conversely, glue near-optimal
+Gram systems orthogonally and scale them so
+$T_1/\kappa(G_1)=T_2/\kappa(G_2)$; this gives equality.  Iteration proves
+block additivity.
+
+Finally write $A=P-B$ for the positive and negative spectral parts.  The
+Schur product theorem makes $M=B\circ B$ DNN, while
+$s^-/2=-\sum_{uv\in E}B_{uv}\leq\sum_{uv\in E}|B_{uv}|$ and
+$\one^TM\one=\tr B^2=s^-$.  The definition of $\kappa$ gives
+$(s^-)^2\leq\kappa(G)s^-$, proving the spectral bound.
+\end{proof}
+
+Put $\epsilon_\ell=0$ for even $\ell$ and
+$\epsilon_\ell=\ell\tan^2(\pi/(2\ell))$ for odd $\ell$.  Then
+\begin{equation}\label{eq:eps}
+ \epsilon_3=1,\quad \epsilon_5=5-2\sqrt5,\quad
+ \epsilon_5+\epsilon_7<1,
+\end{equation}
+and $\epsilon_\ell$ strictly decreases through odd integers: after setting
+$u=\pi/(2x)$ this is the monotonicity of $\tan^2u/u$, whose derivative is
+positive because $2u>\sin u\cos u$.  The last inequality follows, for example,
+from $\cos(\pi/7)>7/8$.
+
+If the tricyclic cycle lengths are $p,q,r$, then
+$b+p+q+r=n+2$.  Lemma~\ref{lem:dnn} yields
+\begin{equation}\label{eq:dnn-bound}
+ s^+(G)\geq n+2-\epsilon_p-\epsilon_q-\epsilon_r.
+\end{equation}
+Thus DNN proves $s^+\geq n$ unless the excess sum exceeds $2$.
+Using \eqref{eq:eps} and monotonicity, this happens for exactly
+\begin{equation}\label{eq:residual}
+ \{3,3,q\}\ (q\geq3\text{ odd}),\qquad \{3,5,5\}.
+\end{equation}
+Indeed an even length contributes zero; without two triangles the only
+possible maximum is $\epsilon_3+2\epsilon_5>2$, while replacing either five
+by at least seven makes the sum $<2$.
+
+\section{Two triangles and one odd cycle}
+
+\begin{proposition}\label{prop:33q}
+A cactus whose cyclic blocks are $C_3,C_3,C_q$, $q$ odd, satisfies $s^+>n$.
+\end{proposition}
+
+\begin{proof}
+First let $q\equiv3\pmod4$; this includes the all-triangular case $q=3$.
+If the cycle-packing number is at most two, Lemma~\ref{lem:packets}(1) gives
+$D>0$ and hence $s^+>n+2$.  If the packing number is three, the cycles are
+vertex-disjoint.  Cut bridge edges in the minimal block tree joining them and
+assign every hanging tree to its attachment.  This partitions $V(G)$ into
+three connected induced unicyclic territories.  Each has $D>0$, hence
+$s^+$ greater than its order; \eqref{eq:super} gives $s^+(G)>n$.
+
+Now let $q\equiv1\pmod4$ and $\delta_q=\sec(\pi/q)-1<1$.  If all cycles are
+disjoint, choose an adjacent pair in the reduced three-node cycle tree.  Two
+triangles form a packet with $s^+>h+1$, leaving a $C_q$ packet with
+$s^+\geq h-\delta_q$; or a mixed pair has
+$s^+>h+1-\delta_q$ and leaves a triangular packet with $s^+>h$.
+Thus \eqref{eq:super} gives $s^+>n+1-\delta_q>n$.  The same bridge cut works
+when one triangle is disjoint from the other triangle and $C_q$.
+
+Suppose next that the triangles are disjoint and $C_q$ meets both, at distinct
+cut vertices $x_1,x_2$.  Give $x_1$, its triangle, and branches off the
+long-cycle side to one induced territory.  The complement is connected because
+$C_q-x_1$ is a path.  Both territories are triangular unicyclic cacti, so
+again $s^+>n$ by \eqref{eq:super}.
+
+It remains that the triangles $T_1,T_2$ share a cut vertex.  Retain the cyclic
+core and joining block paths and apply \eqref{eq:BP}.  For a cycle collection
+$J$, put $D_J=Z_{H-V(J)}(a)$ when its cycles are disjoint and $D_J=0$
+otherwise.  With $B=D_Q$ and $A_j=D_{T_j}$, Sachs gives
+\[
+ \Psi_G/K=R+iI,\quad
+ R=Z_H+4D_{T_1,Q}+4D_{T_2,Q},\quad I=2(B-A_1-A_2).
+\]
+There is neither a double-triangle nor a triple term because the triangles
+meet.  Partition matchings by boundary edges of $Q=C_q$:
+\[
+ Z_H=Z_Q(a|_Q)B+E,\quad E\geq0,\qquad
+ Z_Q(a|_Q)=Z_q(t)+L,\quad L\geq0.
+\]
+Consequently
+\[
+ R-\frac{Z_q(t)I}{2}
+ =E+LB+4D_{T_1,Q}+4D_{T_2,Q}+Z_q(t)(A_1+A_2)>0.
+\]
+Equivalently,
+$\operatorname{Im}((\Psi_G/K)\overline{(Z_q+2i)})<0$.
+The continuous arguments tend to zero at infinity, so they cannot cross and
+$\Theta_G<\Arg(Z_q+2i)$.  Equations \eqref{eq:coulson}, \eqref{eq:cycleformula},
+and \eqref{eq:average} give
+$s^+(G)>n+2-\delta_q>n$.
+
+For exhaustion: either the triangles meet, or they do not.  In the latter
+case $Q$ meets both, at most one, or neither; these are respectively the
+two-territory case, the separating-bridge case, and the reduced-tree case.
+Thus every block incidence has been covered.
+\end{proof}
+
+\section{A triangle and two pentagons}
+
+Join two cycle blocks in the \emph{shared-cut graph} when they share a cut
+vertex.  If this graph is disconnected, contract each shared-cut component
+and all acyclic paths between components.  The resulting cluster incidence is
+a tree.  With three cycles, it has a leaf cluster consisting of exactly one
+cycle: for a $2+1$ split the singleton is a leaf, and for a $1+1+1$ split any
+leaf is.  Cutting the first bridge toward the rest partitions $G$ into two
+connected induced territories, one containing exactly that cycle.
+
+\begin{proposition}[Bridge-separable case]\label{prop:bridge}
+If the shared-cut graph for cycle lengths $\{3,5,5\}$ is disconnected, then
+$s^+(G)>n$.
+\end{proposition}
+
+\begin{proof}
+Use the leaf-cluster cut above.  If the isolated packet is triangular, its
+$s^+$ exceeds its order, while the remaining $\{5,5\}$ bicyclic packet has
+$s^+$ at least its order by Lemma~\ref{lem:packets}(3).
+
+If the isolated packet is pentagonal, put
+$\delta_5=\sec(\pi/5)-1=\sqrt5-2$.  Lemma~\ref{lem:packets} gives
+$s^+(U_5)\geq u-\delta_5$ and
+$s^+(B_{3,5})>b+1-\delta_5$.  Superadditivity therefore gives
+\[
+ s^+(G)>n+1-2\delta_5=n+5-2\sqrt5>n.
+\]
+This includes three separate cyclic clusters; the cut is an actual bridge and
+the two territories are induced, so no edge-monotonicity is invoked.
+\end{proof}
+
+\begin{proposition}[One shared-cut cluster]\label{prop:shared}
+If the three blocks $C_3,C_5,C_5$ form one connected shared-cut cluster, then
+\[
+ s^+(G)>n+6-2\sqrt5>n.
+\]
+\end{proposition}
+
+\begin{proof}
+There are exactly four incidences up to isomorphism: a three-cycle bouquet;
+the triangle as middle block with distinct cut vertices; or a pentagon as
+middle block with its two cut vertices at cyclic distance one or two.  These
+exhaust a connected three-node block tree, including coincident incidences.
+All bridges are now branches off the cyclic core $H$, so \eqref{eq:BP} gives
+independent positive core activities $a_v\geq t$ and a common positive factor.
+
+Let $T,P,Q$ denote the triangle and pentagons and put
+$D_J=Z_{H-V(J)}(a)$, interpreted as zero when the cycles in $J$ meet.  Sachs
+gives $\Psi_G/K=R+iI$, where
+\begin{align*}
+ R&=Z_H+4D_{T,P}+4D_{T,Q}-4D_{P,Q},\\
+ I&=-2D_T+2D_P+2D_Q.
+\end{align*}
+There is no triple term.  Let
+$p=Z_P(a|_P)$ and $q=Z_Q(a|_Q)$ be the actual weighted isolated-pentagon
+partitions.  Exact expansion over $\mathbb Z[a_v]$ gives the certificate
+\begin{equation}\label{eq:phi}
+ \Phi=2R(p+q)-I(pq-4)>0
+\end{equation}
+for every positive activity vector.  Table~\ref{tab:cert} records the complete
+coefficient audit; the script constructs all matching partitions recursively,
+checks the cores, and checks every coefficient.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lrrr}
+core & terms & min & max\\\hline
+bouquet &2547&2&32\\
+\multicolumn{4}{l}{\texttt{8112f2944f9823177afd48deccfb958ac960548e09d9d838e4965c33eb39e979}}\\[1mm]
+triangle middle &2192&2&32\\
+\multicolumn{4}{l}{\texttt{4fdb04cee38f0c0e2ac2de6dff7e641c2e190a3c018af8308a5c69e378de2ba2}}\\[1mm]
+pentagon middle, distance 1&2925&2&36\\
+\multicolumn{4}{l}{\texttt{bfa73346f169f28ec6109418ce22fe44daaae6b081ade30074932b139f0828f4}}\\[1mm]
+pentagon middle, distance 2&2895&2&36\\
+\multicolumn{4}{l}{\texttt{5c6c213471a856cb743afda8e62407d7d27de5984b612c70ab411499011db437}}\\
+\end{tabular}
+\caption{Exact coefficient certificates for $\Phi$.}\label{tab:cert}
+\end{table}
+
+Now $(p+2i)(q+2i)=(pq-4)+2i(p+q)$, and \eqref{eq:phi} is precisely
+\[
+ \operatorname{Im}((p+2i)(q+2i)\overline{(R+iI)})>0.
+\]
+The continuous arguments all tend to zero at infinity.  Strict positivity
+prevents a branch crossing, hence
+\[
+ \Theta_G(t)<\Arg(p+2i)+\Arg(q+2i).
+\]
+Because $a_v\geq t$, each weighted isolated-pentagon phase is at most the bare
+$C_5$ phase.  Coulson integration and
+$D(C_5)=4-2\sqrt5$ therefore give
+$D(G)>2D(C_5)=8-4\sqrt5$.  Equation \eqref{eq:average} proves the claim.
+\end{proof}
+
+\section{Conclusion}
+
+\begin{theorem}\label{thm:main}
+Every connected tricyclic cactus $G$ on $n$ vertices satisfies
+\[
+ \boxed{s^+(G)\geq n}.
+\]
+\end{theorem}
+
+\begin{proof}
+The sharp DNN bound \eqref{eq:dnn-bound} proves the assertion unless the cycle
+length triple is one of \eqref{eq:residual}.  Proposition~\ref{prop:33q}
+settles every $\{3,3,q\}$.  For $\{3,5,5\}$ the shared-cut graph is either
+disconnected, covered by Proposition~\ref{prop:bridge}, or connected, covered
+by Proposition~\ref{prop:shared}.  These alternatives exhaust all cycle
+lengths, all block-cut incidences, all bridges, and all attached trees.
+\end{proof}
+
+\appendix
+\section{Exact reproduction and local proof objects}
+
+From the repository root run
+\begin{verbatim}
+python positive-square-energy/experiments/c3_c5_c5_shared_cluster_certificate.py
+\end{verbatim}
+to reproduce Table~\ref{tab:cert}.  The public local manuscripts used for the
+packet lemmas and audited assembly are
+\begin{verbatim}
+all-bicyclic-cacti/paper.tex
+packing-two-square-energy/paper.tex
+research/c3-c3-cq-tricyclic-cactus-2026-07-25.md
+research/c3-c5-c5-shared-cluster-2026-07-25.md
+\end{verbatim}
+
+\begin{thebibliography}{99}
+\bibitem{AbiadEtAl}
+A.~Abiad, L.~de Lima, D.~N.~Desai, K.~Guo, L.~Hogben, and J.~Madrid,
+\emph{Positive and negative square energies of graphs},
+Electron. J. Linear Algebra 39 (2023), 307--326.
+
+\bibitem{AKMP}
+S.~Akbari, H.~Kumar, B.~Mohar, and S.~Pragada,
+\emph{A linear lower bound for the square energy of graphs},
+Electron. J. Combin. 32(3) (2025), Paper No. P3.53.
+
+\bibitem{AKMPZ}
+S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and S.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264, 2025.
+
+\bibitem{LTZ}
+Y.~Liu, Q.~Tang, and S.~Zhang,
+\emph{The positive and negative square-energy conjecture},
+arXiv:2607.18031, 2026.
+
+\bibitem{NingZeng}
+B.~Ning and J.~Zeng,
+\emph{A proof of a conjecture on positive and negative square energies of
+unicyclic graphs}, arXiv:2605.24668, 2026.
+
+\bibitem{AllBicyclic}
+Companion manuscript, \emph{Positive Square Energy of Every Bicyclic Cactus},
+2026; repository path \texttt{all-bicyclic-cacti/paper.tex}.
+\end{thebibliography}
+\end{document}
