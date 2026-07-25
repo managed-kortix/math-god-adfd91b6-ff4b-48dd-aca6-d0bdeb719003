@@ -196,6 +196,104 @@ The genuinely additional restrictions are the unused deletion estimate
 (17), which forces completeness, and then PSD equality (19), which forces
 the complete-block descendant to have rank one.
 
+## The global atom projection and its exact limitation
+
+There is a useful global formulation, but it does not put the individual
+block atoms in the PSD cone.  For each block `C`, set
+
+`a_C=c_C e_C`,
+
+where the `e_C` are orthonormal, `c_C=1/2` for a bridge, and
+`c_C=(h-1)/h` for a complete block of order `h`.  Thus
+
+`eta_v=sum_{C containing v}a_C`,
+
+and the globally folded Gram matrix is
+
+`N=sum_C c_C^2 J_{V(C)}`.
+
+Identify `span{eta_v}` isometrically with the span of the explicit folded
+vectors `y_v=z_v direct-sum f_v`, where `z_v=x_v tensor x_v`, and let `Q`
+be orthogonal projection onto the original symmetric-tensor coordinates.
+Put
+
+`p_C=Q a_C`, `r_C=(I-Q)a_C`.
+
+Then
+
+`Z_v:=x_v tensor x_v=sum_{C containing v}p_C`.                 (20)
+
+The total canonical vector is
+
+`g=sum_v eta_v=sum_C |C|a_C`.
+
+For a bridge, `|C|^2 c_C^2=1=q_C`; for `C=K_h`,
+`|C|^2c_C^2=(h-1)^2=q_C`.  Hence `||g||^2=sum_C q_C=q`.  Its
+projection is
+
+`Qg=sum_v Z_v=sum_v x_v tensor x_v=S=X^T X`.
+
+Since `||S||_F^2=tr(S^2)=tr(B^2)=s-=q`, equality in the contraction
+`||Qg||<=||g||` gives exactly
+
+`g in ran Q`, equivalently `sum_C |C|r_C=0`.                   (21)
+
+Consequently
+
+`<p_C,S>=<a_C,g>=|C|c_C^2`.                                  (22)
+
+More generally, orthogonality of the two projection components gives the
+complete pairwise bookkeeping identity
+
+`<p_C,p_D>=delta_{CD}c_C^2-<r_C,r_D>`,                        (23)
+
+with `sum_C |C|r_C=0`.  Thus (22) is the weighted row sum of (23).  Norm
+preservation of `g` supplies no assertion that any one `r_C` vanishes and
+no pairwise orthogonality of distinct `p_C`'s.
+
+In fact, `p_C>=0` is false even for the exact equality geometry.  The path
+`P_4` is a counterexample.  Its negative spectral part is
+
+```
+B = [ sqrt(5)/5,   -1/2,       sqrt(5)/10,  0;
+      -1/2,         3sqrt(5)/10,-1/2,       sqrt(5)/10;
+       sqrt(5)/10, -1/2,        3sqrt(5)/10,-1/2;
+       0,            sqrt(5)/10,-1/2,       sqrt(5)/5 ].
+```
+
+Here every edge entry is `-1/2`.  Folding the nonedges of `B o B` gives
+
+`N=(1/4)(J_{12}+J_{23}+J_{34})`,
+
+because its diagonal is `(1/4,1/2,1/2,1/4)` and its edge entries are all
+`1/4`.  Thus this is precisely the global block-atom model with three
+bridge atoms.  Let `B=XX^T` and `Z_i=x_i tensor x_i`.  The endpoint
+incidence equations and (20) force
+
+`p_{12}=Z_1`, `p_{23}=Z_2-Z_1`, `p_{34}=Z_4`.
+
+The vectors `x_1,x_2` are linearly independent, since their Gram
+determinant is
+
+`B_11 B_22-B_12^2=1/20>0`.
+
+Therefore `p_{23}=x_2 x_2^T-x_1 x_1^T` is indefinite: on
+`span{x_1,x_2}` the difference of the two independent rank-one PSD forms
+has one positive and one negative eigenvalue.  Nevertheless `S=X^T X` is
+positive definite on this span, (21) holds, and (22) gives
+
+`<p_{23},S>=1/2>0`.
+
+This also pinpoints the failure of leaf peeling.  A leaf bridge atom is
+indeed `Z_leaf` and is PSD, but deleting it replaces the rank-one tensor at
+its neighbor by `Z_neighbor-Z_leaf`; in `P_4` this is exactly the
+indefinite middle atom.  Hence neither positivity nor rank one is preserved
+by the peeling operation.  The norm equality for `g`, even together with
+all rank-one PSD incidence sums (20) and a positive-definite total `S`,
+cannot support the proposed convex-cone argument.  Any continuation must
+use an additional condition specific to complete cyclic blocks; it cannot
+deduce that condition from the global projection geometry alone.
+
 ## Research protocol
 
 This is now the sole primary proof object.  New agents, if used, receive this
