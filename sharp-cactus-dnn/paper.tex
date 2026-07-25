@@ -1,0 +1,516 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\one}{\mathbf 1}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\DNN}{\mathrm{DNN}}
+
+\title{The Optimized Liu--Tang--Zhang Constant for Cactus Graphs}
+\author{}
+\date{25 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For a connected graph $G$, we optimize the doubly nonnegative functional
+underlying the square-energy theorem of Liu, Tang, and Zhang.  If $G$ is a
+cactus with $b$ bridge blocks and cyclic blocks of lengths
+$\ell_1,\ldots,\ell_r$, then its exact optimized constant is
+\[
+ \kappa(G)=b+\sum_{j=1}^r\kappa(C_{\ell_j}),
+ \qquad
+ \kappa(C_\ell)=
+ \begin{cases}
+  \ell,&\ell\text{ even},\\
+  \ell\sec^2(\pi/(2\ell)),&\ell\text{ odd}.
+ \end{cases}
+\]
+ The proof combines a direct Fourier optimization of the
+ Liu--Tang--Zhang functional on a cycle with exact additivity under a
+ one-vertex sum.
+The latter requires both directions: folding and a Gram split give the upper
+bound, while orthogonal Gram gluing with the correct relative scaling gives
+the lower bound.  Applied to the negative spectral part of the adjacency
+matrix, the result yields $s^-(G)\leq\kappa(G)$.  For bicyclic cacti this
+settles the positive square-energy conjecture of
+Akbari--Kumar--Mohar--Pragada--Zhang except possibly when the unordered pair
+of cyclic block lengths is $\{5,5\}$ or $\{3,4k+1\}$, $k\geq1$.  These are
+unresolved families here, not asserted exceptions or counterexamples.
+\end{abstract}
+
+\section{Introduction}
+
+All graphs are finite, simple, and undirected.  If the adjacency eigenvalues
+of $G$ are $\lambda_1,\ldots,\lambda_n$, write
+\[
+ s^+(G)=\sum_{\lambda_i>0}\lambda_i^2,
+ \qquad
+ s^-(G)=\sum_{\lambda_i<0}\lambda_i^2.
+\]
+These quantities were introduced in connection with spectral bounds for the
+chromatic number by Elphick, Farber, Goldberg, and Wocjan~\cite{EFGW}.  Their
+conjecture $\min\{s^+,s^-\}\geq n-1$ for connected graphs was recently proved
+by Liu, Tang, and Zhang~\cite{LTZ}.  The central device in their proof is an
+inequality for doubly nonnegative matrices, meaning real symmetric matrices
+that are both positive semidefinite and entrywise nonnegative.
+
+We optimize that device graph by graph.  For a connected graph with at least
+one edge, set
+\begin{equation}\label{eq:kappa-definition}
+ \kappa(G)=
+ \sup_{\substack{M\succeq0,\ M\geq0\\T(M)>0}}
+ \frac{4S_G(M)^2}{T(M)},
+ \qquad
+ S_G(M)=\sum_{uv\in E(G)}\sqrt{M_{uv}},
+ \quad T(M)=\one^TM\one.
+\end{equation}
+Thus $M$ ranges over the doubly nonnegative cone.  The universal
+Liu--Tang--Zhang inequality says
+\[
+ \kappa(G)\leq 2|E(G)|-|V(G)|+1.
+\]
+Our purpose is not to replace their framework but to compute its sharp
+constant on cacti.
+
+A \emph{cactus} is a connected graph in which every block is a bridge or a
+cycle.  Equivalently, any two cycles have at most one vertex in common.  Our
+main theorem is the following.
+
+\begin{theorem}\label{thm:main}
+Let $G$ be a connected cactus with $b$ bridge blocks and cyclic blocks
+$C_{\ell_1},\ldots,C_{\ell_r}$.  Then
+\begin{equation}\label{eq:main}
+ \kappa(G)=b+\sum_{j=1}^r\kappa(C_{\ell_j}),
+\end{equation}
+where
+\begin{equation}\label{eq:cycle-value}
+ \kappa(C_\ell)=
+ \begin{cases}
+  \ell,&\ell\text{ is even},\\[2mm]
+  \ell\sec^2\!\left(\dfrac{\pi}{2\ell}\right),
+       &\ell\text{ is odd}.
+ \end{cases}
+\end{equation}
+\end{theorem}
+
+The word ``sharp'' in Theorem~\ref{thm:main} refers to the optimized DNN
+certificate~\eqref{eq:kappa-definition}.  It does not say that the spectral
+bound $s^-(G)\leq\kappa(G)$ is always an equality.
+
+Akbari, Kumar, Mohar, Pragada, and Zhang conjectured that every connected
+$n$-vertex graph with at least $n+1$ edges satisfies $s^+(G)\geq n$
+\cite[Conjecture~1.2]{AKMPZ}.  The exact cactus constant proves this for a
+large class of bicyclic cacti.  The remaining common-phase cases are supplied
+by a direct packing-two Sachs argument: $s^+>s^-$ when every cycle has length
+$3\pmod4$ and at most two cycles can be pairwise vertex-disjoint.  Combining
+the two methods gives an exact account of what is proved in this class; see
+Theorem~\ref{thm:classification}.
+
+\section{The exact cyclic certificate}
+
+We evaluate the cyclic instance of the Liu--Tang--Zhang functional directly.
+Given a DNN matrix $M$, fold each
+nonedge entry onto the corresponding two diagonal entries:
+\begin{equation}\label{eq:folding}
+ \mathcal F_G(M)=M+
+ \sum_{\substack{\{u,v\}\notin E(G)\\u\ne v}}
+ M_{uv}(e_u-e_v)(e_u-e_v)^T.
+\end{equation}
+Each summand is positive semidefinite and entrywise nonnegative off the two
+cancelled positions.  Consequently $\mathcal F_G(M)$ is DNN, vanishes on
+nonedges, has the same edge entries as $M$, and has the same value of $T$.
+This is the folding step in the LTZ argument.
+
+\begin{proposition}\label{prop:cycle}
+For every $\ell\geq3$,
+\[
+ \kappa(C_\ell)=
+ \begin{cases}
+  \ell,&\ell\text{ even},\\[1mm]
+  \ell\sec^2(\pi/(2\ell)),&\ell\text{ odd}.
+ \end{cases}
+\]
+\end{proposition}
+
+\begin{proof}
+ Fold $M$ by~\eqref{eq:folding}, and then average it over all cyclic
+ rotations.  The resulting matrix $\overline M$ is circulant and DNN, while
+ $T(\overline M)=T(M)$.  If $t$ is its common cycle-edge entry, concavity of
+ the square root gives
+ \[
+  S_{C_\ell}(\overline M)
+  =\ell\sqrt{\frac1\ell\sum_{e\in E(C_\ell)}M_e}
+  \geq S_{C_\ell}(M).
+ \]
+ Write $r$ for the common row sum of $\overline M$.  Then
+ \[
+  T(\overline M)=\ell r,
+  \qquad
+  \frac{4S(\overline M)^2}{T(\overline M)}=\frac{4\ell t}{r}.
+ \]
+
+ Suppose first that $\ell=2m$.  Let $x_d\geq0$ be the circulant entry at
+ cyclic distance $d$, so $x_1=t$.  The Fourier eigenvalue belonging to the
+ alternating vector is
+ \[
+  \lambda_m=x_0+2\sum_{d=1}^{m-1}(-1)^d x_d+(-1)^m x_m\geq0.
+ \]
+ Comparing it with the row sum gives
+ \[
+  r-\lambda_m
+  =4\sum_{\substack{1\leq d<m\\d\text{ odd}}}x_d
+   +2\mathbf1_{\{m\text{ odd}\}}x_m
+  \geq4t.
+ \]
+ Hence $r\geq4t$ and the objective is at most $\ell$.
+
+ Now let $\ell=2m+1$ and put $c=\cos(\pi/\ell)$.  The Fourier eigenvalue at
+ frequency $m$ is nonnegative.  Therefore
+ \begin{align*}
+  r-\lambda_m
+  &=2\sum_{d=1}^{m}
+    \left(1-\cos\frac{2\pi md}{\ell}\right)x_d\\
+  &\geq2(1+c)x_1=2(1+c)t,
+ \end{align*}
+ where only the $d=1$ term was retained and all other terms are
+ nonnegative.  Thus $r\geq2(1+c)t$, and the objective is at most
+ \[
+  \frac{2\ell}{1+c}=\ell\sec^2\!\left(\frac{\pi}{2\ell}\right).
+ \]
+
+For the reverse inequality let $A=A(C_\ell)$, choose $x>0$, and put
+\begin{equation}\label{eq:cycle-primal}
+ M=x(2cI+A),
+ \qquad
+ c=
+ \begin{cases}
+  1,&\ell\text{ even},\\
+  \cos(\pi/\ell),&\ell\text{ odd}.
+ \end{cases}
+\end{equation}
+The least eigenvalue of $A(C_\ell)$ is $-2$ for even $\ell$ and
+$-2\cos(\pi/\ell)$ for odd $\ell$, so $M$ is positive semidefinite.  It is
+also entrywise nonnegative.  Every edge entry is $x$, and
+\[
+ S=\ell\sqrt{x},
+ \qquad T=2x\ell(c+1).
+\]
+Thus the objective is $2\ell/(c+1)$, which equals $\ell$ in the even case and
+$\ell\sec^2(\pi/(2\ell))$ in the odd case.  This matches the certificate.
+\end{proof}
+
+\section{Exact one-vertex-sum additivity}
+
+Write $G=G_1\vee_zG_2$ when $G_1$ and $G_2$ are connected edge-containing
+graphs whose intersection is exactly the vertex $z$, with no edges between
+$V(G_1)\setminus\{z\}$ and $V(G_2)\setminus\{z\}$.
+
+\begin{theorem}[One-vertex-sum additivity]\label{thm:additivity}
+For $G=G_1\vee_zG_2$,
+\[
+ \kappa(G)=\kappa(G_1)+\kappa(G_2).
+\]
+\end{theorem}
+
+\begin{proof}
+Put $\kappa_i=\kappa(G_i)$.  For the upper bound, first fold a feasible $M$
+on $G$.  Let $g_v$ be Gram vectors for the resulting edge-supported matrix,
+and set
+\[
+ \mathcal U=\operatorname{span}\{g_u:u\in V(G_1)\setminus\{z\}\},
+ \qquad
+ \mathcal W=\operatorname{span}\{g_w:w\in V(G_2)\setminus\{z\}\}.
+\]
+The nonedge zeroes imply $\mathcal U\perp\mathcal W$.  Decompose
+$g_z=p_U+p_W+p_0$, where $p_U\in\mathcal U$, $p_W\in\mathcal W$, and
+$p_0\perp\mathcal U+\mathcal W$.  On $G_1$ use the original vectors away
+from $z$ and the cut vector $p_U+p_0$ at $z$; on $G_2$ use the original
+vectors away from $z$ and $p_W$ at $z$.  Their Gram matrices $M_1,M_2$ are
+DNN, all edge inner products are preserved, and orthogonality gives
+\begin{equation}\label{eq:split-identities}
+ S_G(M)=S_{G_1}(M_1)+S_{G_2}(M_2),
+ \qquad T(M)=T(M_1)+T(M_2).
+\end{equation}
+Writing $S_i=S_{G_i}(M_i)$ and $T_i=T(M_i)$, we obtain
+\[
+ 2(S_1+S_2)
+ \leq\sqrt{\kappa_1T_1}+\sqrt{\kappa_2T_2}
+ \leq\sqrt{(\kappa_1+\kappa_2)(T_1+T_2)}.
+\]
+This proves $\kappa(G)\leq\kappa_1+\kappa_2$.
+
+For the lower bound, choose folded, edge-supported near-optimizers on the two
+graphs and represent them in orthogonal Euclidean spaces.  Glue them by
+replacing the two vectors at $z$ by their orthogonal direct sum; keep every
+other vector in its own summand.  The resulting Gram matrix is DNN on $G$,
+has no cross-side entries, and again satisfies~\eqref{eq:split-identities}.
+Scale the two input matrices so that
+\begin{equation}\label{eq:correct-scaling}
+ \frac{T_1}{\kappa_1}=\frac{T_2}{\kappa_2}.
+\end{equation}
+For exact optimizers this makes both Cauchy--Schwarz inequalities above
+equalities and gives objective value $\kappa_1+\kappa_2$.  Applying the same
+scaling to arbitrarily close near-optimizers and taking a limit proves the
+claim without assuming that either supremum is attained.
+\end{proof}
+
+\begin{proposition}\label{prop:bridge}
+$\kappa(K_2)=1$.
+\end{proposition}
+
+\begin{proof}
+For a DNN matrix $\left(\begin{smallmatrix}a&c\\c&d\end{smallmatrix}\right)$,
+positive semidefiniteness gives $a+d\geq2c$, and hence
+$T=a+d+2c\geq4c$.  Therefore the objective is at most one.  Equality holds
+for any positive multiple of the all-ones matrix $J_2$.
+\end{proof}
+
+Every cactus is obtained by iterated one-vertex sums of its blocks.  Applying
+Theorem~\ref{thm:additivity}, Proposition~\ref{prop:bridge}, and
+Proposition~\ref{prop:cycle} proves Theorem~\ref{thm:main}.
+
+\section{The spectral consequence}
+
+Let $A=A(G)$ and write its positive and negative spectral parts as
+\[
+ A=P-B,
+ \qquad P=A_+\succeq0,
+ \quad B=A_-\succeq0,
+ \quad PB=0.
+\]
+Thus $s^-(G)=\tr B^2$.  The next consequence is valid for every connected
+graph, with its own optimized constant.
+
+\begin{theorem}\label{thm:spectral}
+If $G$ is connected and has at least one edge, then
+\[
+ s^-(G)\leq\kappa(G).
+\]
+\end{theorem}
+
+\begin{proof}
+The Schur product theorem makes $M=B\circ B$ doubly nonnegative.  Since
+$A$ has two unit entries for every edge and $PB=0$,
+\[
+ \tr(AB)=\tr((P-B)B)=-\tr B^2=-s^-(G),
+\]
+and therefore
+\[
+ \frac{s^-(G)}2=-\sum_{uv\in E(G)}B_{uv}
+ \leq\sum_{uv\in E(G)}|B_{uv}|.
+\]
+Moreover,
+$T(B\circ B)=\sum_{u,v}B_{uv}^2=\tr B^2=s^-(G)$.  The defining DNN
+inequality for $\kappa(G)$ gives the chain
+\begin{equation}\label{eq:spectral-chain}
+ s^-(G)^2
+ \leq4\left(\sum_{uv\in E(G)}|B_{uv}|\right)^2
+ \leq\kappa(G)\,\one^T(B\circ B)\one
+ =\kappa(G)s^-(G).
+\end{equation}
+Since $G$ has an edge, $s^-(G)>0$, and division proves the result.
+\end{proof}
+
+\begin{remark}
+Even when the cactus formula for $\kappa(G)$ is attained by a DNN matrix,
+equality need not hold in the first inequality of~\eqref{eq:spectral-chain},
+nor must $B\circ B$ optimize the DNN functional.  This is why DNN sharpness
+must not be interpreted as spectral equality.
+\end{remark}
+
+\section{Bicyclic cacti}
+
+Define the odd-cycle excess
+\begin{equation}\label{eq:epsilon}
+ \epsilon_\ell=
+ \begin{cases}
+  0,&\ell\text{ even},\\
+  \ell\tan^2(\pi/(2\ell)),&\ell\text{ odd}.
+ \end{cases}
+\end{equation}
+Then $\kappa(C_\ell)=\ell+\epsilon_\ell$.
+
+\begin{lemma}[Exact trigonometric comparison]\label{lem:trig}
+The sequence $\epsilon_\ell$ is strictly decreasing through odd integers
+$\ell\geq3$, and
+\[
+ \epsilon_3=1,
+ \qquad
+ \epsilon_5=5-2\sqrt5,
+ \qquad
+ \epsilon_5+\epsilon_7<1.
+\]
+\end{lemma}
+
+\begin{proof}
+Put $t=\pi/(2x)$.  Apart from the positive constant $\pi/2$,
+$x\tan^2(\pi/(2x))$ is $\tan^2t/t$.  Its derivative with respect to $t$ is
+positive because
+\[
+ 2t\tan t\sec^2t-\tan^2t>0
+ \quad\Longleftrightarrow\quad
+ 2t>\sin t\cos t,
+\]
+ which holds on the relevant interval $0<t\leq\pi/6$.  Since $t$ decreases with $x$, the required
+monotonicity follows.  The first identity is immediate, and
+$\tan^2(\pi/10)=1-2\sqrt5/5$ gives the second.
+
+For a fully strict comparison in the last assertion, $\pi<22/7$ and
+$\cos x>1-x^2/2$ give
+\[
+ \cos(\pi/7)>1-\frac12\left(\frac{22}{49}\right)^2>\frac78.
+\]
+Hence
+\[
+ \epsilon_7
+ =7\frac{1-\cos(\pi/7)}{1+\cos(\pi/7)}
+ <\frac7{15}<2\sqrt5-4=1-\epsilon_5.
+\]
+For the middle strict inequality, $7/15<2\sqrt5-4$ is equivalent to
+$67/30<\sqrt5$, whose square follows from $4489<4500$.
+\end{proof}
+
+Let $G$ now be a connected bicyclic cactus, and let $p,q$ be the lengths of
+its two cyclic blocks.  Since $|E(G)|=|V(G)|+1$, if $n=|V(G)|$ and $b$ is
+the number of bridges, then $b+p+q=n+1$.  Theorem~\ref{thm:main} and
+Theorem~\ref{thm:spectral} therefore give
+\begin{equation}\label{eq:bicyclic-negative}
+ s^-(G)\leq n+1+\epsilon_p+\epsilon_q.
+\end{equation}
+Since $s^+(G)+s^-(G)=\tr A^2=2|E(G)|=2n+2$, we obtain the following direct
+criterion.
+
+\begin{corollary}\label{cor:dnn-bicyclic}
+If $\epsilon_p+\epsilon_q\leq1$, then $s^+(G)\geq n$.  In particular, this
+holds whenever at least one of $p,q$ is even, and also whenever $p,q$ are odd
+with $\min\{p,q\}\geq5$ and $\{p,q\}\ne\{5,5\}$.
+\end{corollary}
+
+\begin{proof}
+Equation~\eqref{eq:bicyclic-negative} gives
+$s^+(G)\geq n+1-\epsilon_p-\epsilon_q\geq n$.  Even lengths have zero
+excess, while every odd excess is at most $\epsilon_3=1$, proving all cases
+with an even length.  For two odd lengths at least five, the only pair not
+bounded by $\epsilon_5+\epsilon_7<1$ and monotonicity is $\{5,5\}$.
+\end{proof}
+
+The DNN estimate does not settle pairs containing a triangle and another odd
+cycle, because $\epsilon_3=1$ and the second excess is positive.  When the
+second cycle also has length $3\pmod4$, the independent phase method does
+more than is needed.
+
+\begin{proposition}[Packing-two consequence]
+\label{prop:packing}
+If $p\equiv q\equiv3\pmod4$, then
+\[
+ s^+(G)>s^-(G),
+ \qquad\text{and consequently}\qquad
+ s^+(G)>|E(G)|=n+1.
+\]
+\end{proposition}
+
+\begin{proof}
+ Let
+ \[
+  Z_H(t)=\sum_jm_j(H)t^{|V(H)|-2j}>0\qquad(t>0)
+ \]
+ be the signless matching polynomial.  Grouping the Sachs expansion by its
+ collection $\mathcal C$ of vertex-disjoint cycle components gives
+ \[
+  i^{-|V(G)|}\phi_G(it)
+  =\sum_{\mathcal C}
+   \prod_{C\in\mathcal C}(-2i^{-|C|})
+   Z_{G-V(\mathcal C)}(t).
+ \]
+ A bicyclic cactus has only two cyclic blocks, so $|\mathcal C|\leq2$.  If
+ both lengths are $3\pmod4$, every singleton cycle has phase $-2i$, while
+ the empty and two-cycle terms are real.  Hence the normalized characteristic
+ polynomial lies strictly in the open lower half-plane for every $t>0$.
+ Its continuous argument
+ \[
+  \Theta_G(t)=\sum_j\arctan(\lambda_j/t)
+ \]
+ is therefore negative.  The signed Coulson identity
+ \[
+  s^+(G)-s^-(G)=-\frac4\pi\int_0^\infty t\Theta_G(t)\,dt
+ \]
+ yields $s^+>s^-$.  The energy identity then turns this into
+ $s^+>|E(G)|$.
+\end{proof}
+
+We can now state the broad classification supplied by the two methods.
+
+\begin{theorem}[Bicyclic cactus classification]\label{thm:classification}
+Let $G$ be a connected bicyclic cactus on $n$ vertices, with unordered pair
+of cyclic block lengths $\{p,q\}$.  Then $s^+(G)\geq n$ in all cases except
+possibly
+\begin{equation}\label{eq:unresolved}
+ \{p,q\}=\{5,5\}
+ \qquad\text{or}\qquad
+ \{p,q\}=\{3,4k+1\}\quad(k\geq1).
+\end{equation}
+More explicitly:
+\begin{enumerate}
+\item if at least one length is even, the optimized DNN bound proves the
+      conjecture;
+\item if both lengths are odd and at least five, the optimized DNN bound
+      proves it unless both are five;
+\item if both lengths are $3\pmod4$, the packing-two Sachs argument proves the
+      stronger inequality $s^+(G)>|E(G)|=n+1$;
+\item after these cases, exactly the pairs in~\eqref{eq:unresolved} remain.
+\end{enumerate}
+In particular, the conjecture of
+Akbari--Kumar--Mohar--Pragada--Zhang holds for every bicyclic cactus outside
+the two displayed families.
+\end{theorem}
+
+\begin{proof}
+Corollary~\ref{cor:dnn-bicyclic} handles all even cases and all odd pairs with
+both lengths at least five except $\{5,5\}$.  It remains to inspect pairs
+containing a triangle.  If the other odd length is $3\pmod4$, including
+another triangle, Proposition~\ref{prop:packing} applies.  The only untreated
+odd partner is therefore $4k+1$ with $k\geq1$.  This gives precisely
+\eqref{eq:unresolved}.
+\end{proof}
+
+\begin{remark}[Status of the residual families]
+The word ``possibly'' is essential.  Neither $\{5,5\}$ nor
+$\{3,4k+1\}$ is claimed to be an exception to the AKMPZ conjecture, and no
+counterexample is asserted.  They are exactly the families not resolved by
+the optimized cactus DNN certificate together with the cited packing-two
+theorem.  Arbitrary bridge paths, shared cut vertices, and attached trees are
+already included in this statement.
+\end{remark}
+
+\begin{thebibliography}{99}
+
+\bibitem{AKMPZ}
+S. Akbari, H. Kumar, B. Mohar, S. Pragada, and S. Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264, 2025.
+
+\bibitem{EFGW}
+C. Elphick, M. Farber, F. Goldberg, and P. Wocjan,
+\emph{Conjectured bounds for the sum of squares of positive eigenvalues of a
+graph},
+Discrete Math. 339 (2016), 2215--2223.
+
+\bibitem{LTZ}
+Y. Liu, Q. Tang, and S. Zhang,
+\emph{The positive and negative square-energy conjecture},
+arXiv:2607.18031, 2026.
+
+\end{thebibliography}
+
+\end{document}

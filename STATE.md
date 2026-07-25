@@ -349,6 +349,17 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
+0. NEW VERIFIED RESULT (2026-07-25): exact optimized LTZ DNN constant for
+   every connected cactus.  If `b` is the number of bridge blocks and the
+   cycle blocks have lengths `ell_j`, then
+   `kappa(G)=b+sum kappa(C_ell_j)`, where `kappa(C_ell)=ell` for even `ell`
+   and `ell sec^2(pi/(2ell))` for odd `ell`.  The cycle proof is a direct
+   rotation/Fourier optimization with matching primal matrix
+   `x(2cI+A(C_ell))`; exact one-vertex-sum additivity follows from folding,
+   cut Gram splitting, and orthogonal gluing with correct relative scaling.
+   Spectrally, `s-(G)<=kappa(G)`.  For bicyclic cacti this proves AKMPZ except
+   possibly cycle-length pairs `{5,5}` and `{3,4k+1}`; these remain unresolved,
+   not counterexamples.  Paper: `sharp-cactus-dnn/`.
 0. NEW VERIFIED RESULT (2026-07-25): packing-two Sachs phase theorem.  If a
    finite graph contains a cycle, every cycle length is `3 mod 4`, and its
    maximum collection of vertex-disjoint cycles has size at most two, then

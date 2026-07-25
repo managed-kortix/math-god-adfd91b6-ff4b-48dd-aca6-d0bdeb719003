@@ -1849,3 +1849,34 @@ triangle, so their packing is at most two. Therefore
 `s+(G)>=(|U|-1)+s+(R)>n+1>n`. The manuscript and README now record the
 territory lemma, triangular corollary, tetracyclic subsumption note, and the
 beta-five proposition. Per instruction, the manuscript was not rebuilt.
+# 2026-07-25: sharp cactus DNN constant
+
+For the optimized Liu--Tang--Zhang functional
+
+`kappa(G)=sup_M 4(sum_edges sqrt(M_uv))^2/(1^T M 1)`, `M` DNN,
+
+the exact cycle values are
+
+`kappa(C_l)=l` for even `l`, and
+`kappa(C_l)=l sec^2(pi/(2l))` for odd `l`.
+
+The upper bound follows by folding, rotation averaging, and one Fourier
+eigenvalue of the resulting circulant DNN matrix.  The lower bound is attained
+by `M=x(2cI+A(C_l))`, where `c=1` in the even case and `cos(pi/l)` in the odd
+case.  The optimized constant is exactly additive under one-vertex sums, so a
+cactus with `b` bridges and cyclic block lengths `l_j` has
+
+`kappa(G)=b+sum_j kappa(C_l_j)`.
+
+Applying this to `A_- o A_-` gives `s-(G)<=kappa(G)`.  For a bicyclic cactus
+with cycle lengths `p,q`, define `epsilon_l=0` for even `l` and
+`l tan^2(pi/(2l))` for odd `l`.  Then
+
+`s+(G)>=n+1-epsilon_p-epsilon_q`.
+
+The excesses decrease strictly, with `epsilon_3=1`,
+`epsilon_5=5-2sqrt(5)`, and `epsilon_5+epsilon_7<1`.  Combining the DNN bound
+with the packing-two common-phase theorem proves AKMPZ for every bicyclic
+cactus except possibly `{5,5}` and `{3,4k+1}`.  Those are the exact remaining
+families for these methods.  Two independent audits and a final manuscript
+gate passed.  Paper: `sharp-cactus-dnn/`.
