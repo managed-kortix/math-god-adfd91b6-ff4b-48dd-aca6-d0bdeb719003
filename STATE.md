@@ -358,6 +358,7 @@ research/semantic, research/procedural).
    bounds the full mixed Sachs phase by the isolated `C_q` phase, without any
    false deletion-carrier ordering.  Two independent final audits passed.
    Paper: `triangle-one-mod-four-cactus/`.
+   Announcement: X post `2081053255560306973`.
 0. NEW VERIFIED RESULT (2026-07-25): every connected cactus whose only cyclic
    blocks are two `C5`s sharing one cut vertex, with arbitrary rooted trees
    attached at every core vertex, satisfies the uniform strict bound

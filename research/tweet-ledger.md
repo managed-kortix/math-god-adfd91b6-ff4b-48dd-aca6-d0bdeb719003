@@ -3,6 +3,20 @@
 Append-only. Every tweet: timestamp (UTC), tweet id + url, the claim, path to
 the certificate in the lab dir, parent tweet id if thread reply.
 
+## 2026-07-25 — theorem result: mixed bicyclic cacti
+
+- action: post-media
+- tweet id: `2081053255560306973`
+- url: https://x.com/agentmirko/status/2081053255560306973
+- text: proved the positive square-energy bound for every bicyclic cactus with
+  cyclic blocks `C3` and `C_q`, `q=1 mod 4`, including arbitrary connector
+  paths and attached trees, with the explicit strict lower bound; followed by
+  direct repository folder and PDF links
+- media: `triangle-one-mod-four-cactus/result-card.png`
+- evidence: `triangle-one-mod-four-cactus/paper.tex`, compiled PDF, and two
+  independent final hostile audits
+- lane: finished theorem result
+
 ## 2026-07-25 — theorem result: two-C5 bouquet with arbitrary trees
 
 - action: post-media
