@@ -980,3 +980,104 @@ iterated and may tolerate the observed local oscillations. Simultaneously seek
 a certified sign failure beyond `N=250`; either outcome is structurally
 decisive. Any proof replacing finite Möbius polynomials by `1/zeta` on the
 critical line is circular.
+
+## Tick 9 — dyadic telescope, quantifier correction, and extended certificates
+
+The proposed dyadic numerator contains no new interior structure. Exactly,
+
+\[
+\boxed{\sum_{N\le n<2N}h_nE_n=\frac{P_N-P_{2N}}2.}
+\]
+
+Hence the dyadic target is equivalent to
+
+\[
+\boxed{P_N-P_{2N}\ge
+2\kappa\sum_{N\le n<2N}w_nP_n,
+\qquad w_n=h_n\log n.}
+\]
+
+The block weight satisfies
+
+\[
+\frac{\log2}{\log(2N)}\le
+W_N:=\sum_{N\le n<2N}w_n
+\le\frac{\log2}{\log N}.
+\]
+
+### Lemma 6 (correct dyadic implication)
+
+If one fixed `kappa>0` satisfies the boxed block inequality on every block in
+an eventual dyadic partition `[N_j,2N_j)`, `N_(j+1)=2N_j`, then
+
+\[
+\boxed{\liminf_{n\to\infty}P_n=0,}
+\]
+
+and therefore RH.
+
+### Proof
+
+Summing block inequalities telescopes the endpoints and gives
+
+\[
+2\kappa\sum_{n\ge N_0}w_nP_n\le P_{N_0}<\infty.
+\]
+
+But `sum w_n=infinity`. If `liminf P_n>0`, the left side diverges. QED.
+
+This does **not** prove `P_n->0` or even decay of dyadic endpoints. An abstract
+sequence can put small values in block interiors while retaining positive
+endpoint values. The stronger endpoint condition
+
+\[
+\sum_{N\le n<2N}h_nE_n\ge\kappa W_NP_N
+\]
+
+does force dyadic endpoint decay, since `sum_j W_(2^jN_0)=infinity`. The
+weaker weighted-interior condition is nevertheless sufficient for RH because
+our established criterion needs only a zero liminf.
+
+Expanding the weighted denominator gives an exact positive variance kernel,
+but no comparison with the endpoint drop. Its only genuinely non-elementary
+term remains a Möbius-weighted Vasyunin sum with an explicit max-tail
+coefficient. Thus dyadic averaging reorganizes but does not remove the same
+arithmetic obstruction.
+
+### Finite certificates
+
+Arb calculations certify positive dyadic ratios through `[512,1024)`; the
+tested power-of-two block ratios range from about `0.444` to `0.997`. These are
+finite facts only. A separate reconnaissance through `N=2000` found no sign
+failure. Rigorous breakpoint certificates for the structurally weak candidates
+give
+
+\[
+\langle F_{592},D_{592}\rangle<0,\quad P_{593}-P_{592}<0,
+\]
+
+and
+
+\[
+\langle F_{1418},D_{1418}\rangle<0,\quad P_{1419}-P_{1418}<0.
+\]
+
+The reproducible script `certify_restricted_jump.py` performs this exact
+breakpoint/Arb certification with a conservative omitted-origin enclosure.
+No finite range supports an asymptotic claim.
+
+## Next queued main-funnel step
+
+The dyadic inequality is now known to be exactly an endpoint-drop comparison.
+Attack the stronger endpoint form
+
+\[
+P_N-P_{2N}\ge2\kappa W_NP_N,
+\]
+
+which has a clean multiplicative consequence and avoids uncontrolled interior
+spikes. Derive `P_(2N)` directly from `P_N` by comparing the two coefficient
+vectors in the restricted Gram space; seek a positive-square decomposition of
+their difference plus one signed remainder. In parallel, certify endpoint
+ratios on larger dyadic blocks. Any uniform `kappa>0` proves RH; generic Hilbert
+convexity alone cannot establish it.

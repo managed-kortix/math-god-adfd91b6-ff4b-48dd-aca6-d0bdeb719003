@@ -11,12 +11,12 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   gcd variance are settled but strategically insufficient; the full Gram form
   is now exactly reduced after a second domain audit corrected a transient
   restricted/full-space mix-up, and the current
-  sublemma is a dyadic averaged effective-decrement inequality for the positive
-  restricted energy after exact logarithmic averaging failed to remove the
-  mixed Möbius correlation
+  sublemma is a stronger dyadic endpoint contraction for the positive
+  restricted energy after the averaged decrement was shown to telescope and
+  imply only the already-sufficient zero-liminf criterion
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 7
+- **cycle:** 8
 - **announcements:** none
 
 ## immutable target list
@@ -35,11 +35,11 @@ waiting process.
 
 ## next exact steps
 
-1. Derive or falsify a dyadic averaged lower bound for the effective decrement
-   `E_N=-<F_N,D_N>-h_N||D_N||^2/2` at the sharp `P_N log N` scale.
-2. Extend the certified sign search beyond `N=250`, targeting squarefree jumps
-   where the mixed correlation is weakest, and preserve any counterexample as
-   an exact interval certificate.
+1. Compare the restricted Gram vectors at `N` and `2N` and derive or falsify a
+   positive-square decomposition proving
+   `P_N-P_(2N) >= 2 kappa W_N P_N` for some fixed `kappa>0`.
+2. Certify dyadic endpoint ratios beyond `N=1024` and targeted weak jumps beyond
+   `N=2000`, preserving any failure as an interval certificate.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -103,3 +103,10 @@ waiting process.
   correlation and decreasing `P_N` through `N=250`, without asymptotic force.
   The next target is a dyadic averaged decrement or a certified sign failure.
   No solution is claimed.
+- 2026-07-25: proved the exact dyadic telescope and corrected its logical
+  conclusion: the weighted block inequality forces `liminf P_N=0`, sufficient
+  for RH, but not full convergence. A stronger endpoint comparison forces
+  dyadic decay. Certified power-of-two block ratios remain positive through
+  `1024`, and targeted breakpoint certificates at `592` and `1418` remain
+  decreasing; reconnaissance found no failure through `2000`. The active target
+  is now the dyadic endpoint contraction. No solution is claimed.
