@@ -376,6 +376,7 @@ research/semantic, research/procedural).
    referee checks, a focused repair audit of the DNN cut-vector bookkeeping,
    exact certificates, and a large adversarial census.  Paper:
    `all-bicyclic-cacti/`.
+   Announcement: X post `2081075611544539584`.
 0. NEW VERIFIED RESULT (2026-07-25): the final disjoint-two-pentagon frontier
    is closed.  If a connected cactus has two vertex-disjoint `C5` cyclic
    blocks joined by any positive-length path, with arbitrary trees attached
