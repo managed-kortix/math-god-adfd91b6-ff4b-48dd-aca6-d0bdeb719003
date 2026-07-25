@@ -1,0 +1,460 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\Arg}{\operatorname{Arg}}
+\newcommand{\vp}{\nu_{\circ}}
+\newcommand{\cC}{\mathcal C}
+
+\title{Square-Energy Asymmetry from Packing at Most Two Cycles}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For a finite simple graph $G$, let $s^+(G)$ and $s^-(G)$ be the sums of
+the squares of its positive and negative adjacency eigenvalues.  We prove
+that $s^+(G)>s^-(G)$ whenever $G$ contains a cycle, every cycle of $G$ has
+length $3$ modulo $4$, and the maximum size of a collection of pairwise
+vertex-disjoint cycles is at most two.  If every cycle has length $1$ modulo $4$, the inequality
+is reversed.  The proof groups the Sachs expansion by collections of
+vertex-disjoint cycles.  On the imaginary axis each cycle contributes the
+phase $-2\ii^{-\ell}$, while the remaining factor is a signless matching
+polynomial with positive coefficients.  Packing number at most two then
+puts the normalized characteristic polynomial strictly in one open
+half-plane.  A Coulson identity converts this fixed argument sign into the
+claimed square-energy inequality.  Applications include a strict form of
+the positive square-energy conjecture for bicyclic block graphs and broad
+families of triangular cacti.
+\end{abstract}
+
+\section{Introduction}
+
+Let $G$ be a finite simple graph with adjacency eigenvalues
+$\lambda_1,\ldots,\lambda_n$.  Its positive and negative square energies
+are
+\[
+ s^+(G)=\sum_{\lambda_j>0}\lambda_j^2,
+ \qquad
+ s^-(G)=\sum_{\lambda_j<0}\lambda_j^2.
+\]
+Since $\operatorname{tr}A(G)^2=2|E(G)|$,
+\begin{equation}\label{eq:sum}
+ s^+(G)+s^-(G)=2|E(G)|.
+\end{equation}
+These quantities were introduced in connection with spectral bounds for
+the chromatic number by Elphick, Farber, Goldberg, and Wocjan
+\cite{EFGW}; subsequent structural and asymmetry results appear in
+\cite{AbiadEtAl,ElphickLinz,Zhang}.  The conjecture that every connected $n$-vertex graph
+satisfies $\min\{s^+,s^-\}\ge n-1$ has recently been proved by Liu, Tang,
+and Zhang \cite{LTZ}.  Akbari, Kumar, Mohar, Pragada, and Zhang proposed
+the stronger conjecture that a connected graph with at least $n+1$ edges
+satisfies $s^+(G)\ge n$ \cite[Conjecture 1.2]{AKMPZ}.
+
+For a graph $G$, write $\vp(G)$ for the maximum cardinality of a
+collection of pairwise vertex-disjoint cycles.  Our main result is the
+following sign theorem.  Connectivity is not required.
+
+\begin{theorem}\label{thm:main}
+Let $G$ be a finite simple graph that contains a cycle and satisfies
+$\vp(G)\le2$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item If every cycle of $G$ has length congruent to $3\pmod4$, then
+      $s^+(G)>s^-(G)$.
+\item If every cycle of $G$ has length congruent to $1\pmod4$, then
+      $s^+(G)<s^-(G)$.
+\end{enumerate}
+\end{theorem}
+
+Ning and Zeng proved the corresponding statement for an
+odd unicyclic graph \cite{NingZeng}.  Their argument also uses a matching
+polynomial and a Coulson-type identity.  Their result is the one-cycle case
+of the sign assertion above; the new issue here is that two-cycle terms can
+make the real part of the normalized characteristic polynomial negative.
+They remain real, however, so the open-half-plane argument survives.  Here
+the full Sachs expansion is
+grouped by vertex-disjoint cycle collections; the terms with two cycles
+are real, whereas the terms with one cycle have a common nonzero
+imaginary sign.  This is exactly where the hypothesis $\vp(G)\le2$
+enters.  The reverse assertion in Theorem~\ref{thm:main}(ii) is included
+as the phase-reversed companion statement.  We do not make a novelty or
+priority claim on the basis of a negative literature search.
+
+Section~\ref{sec:proof} gives a self-contained proof, including the
+required Coulson identity and a careful continuous-argument step.
+Section~\ref{sec:structure} records the cactus structure forced by the
+cycle congruence, and Section~\ref{sec:applications} gives applications.
+
+\section{Sachs expansion on the imaginary axis}\label{sec:proof}
+
+For a graph $H$ of order $h$, let $m_j(H)$ denote its number of
+$j$-edge matchings and define the following normalization of the matching
+polynomial; see Godsil and Gutman \cite{GodsilGutman}:
+\begin{equation}\label{eq:Z}
+ Z_H(t)=\sum_{j=0}^{\lfloor h/2\rfloor}m_j(H)t^{h-2j}.
+\end{equation}
+We use $Z_{\varnothing}(t)=1$.  Thus $Z_H(t)>0$ for every $t>0$.
+Equivalently, if
+\[
+ \mu_H(x)=\sum_j(-1)^jm_j(H)x^{h-2j}
+\]
+is the matching polynomial, then
+\begin{equation}\label{eq:matching-normalization}
+ \ii^{-h}\mu_H(\ii t)=Z_H(t).
+\end{equation}
+
+Let $\mathfrak C(G)$ be the set of all collections $\cC$ of pairwise
+vertex-disjoint cycles of $G$, including the empty collection.  Put
+$V(\cC)=\bigcup_{C\in\cC}V(C)$.
+
+\begin{lemma}[Sachs expansion grouped by cycles]\label{lem:sachs}
+If $G$ has order $n$ and characteristic polynomial
+$\phi_G(x)=\det(xI-A(G))$, then
+\begin{equation}\label{eq:grouped-sachs}
+ \phi_G(x)=
+ \sum_{\cC\in\mathfrak C(G)}(-2)^{|\cC|}
+ \mu_{G-V(\cC)}(x).
+\end{equation}
+Consequently, for $t>0$,
+\begin{equation}\label{eq:Psi-expansion}
+ \Psi_G(t):=\ii^{-n}\phi_G(\ii t)
+ =\sum_{\cC\in\mathfrak C(G)}
+   \left(\prod_{C\in\cC}q_{|C|}\right)
+   Z_{G-V(\cC)}(t),
+ \qquad q_\ell=-2\ii^{-\ell}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Sachs' formula \cite{Sachs} sums over elementary subgraphs $S$, whose
+components are edges and cycles:
+\[
+ \phi_G(x)=\sum_S(-1)^{c(S)}2^{c_\circ(S)}x^{n-|V(S)|},
+\]
+where $c(S)$ and $c_\circ(S)$ are the numbers of components and cycle
+components of $S$.  Fix its cycle components as a collection $\cC$.
+The other components form a matching of some size $j$ in
+$G-V(\cC)$.  The corresponding sign and weight are
+$(-1)^{|\cC|+j}2^{|\cC|}$.  Summing over those matchings gives
+$(-2)^{|\cC|}\mu_{G-V(\cC)}(x)$, proving
+\eqref{eq:grouped-sachs}.
+
+For a fixed $\cC$, set $L=\sum_{C\in\cC}|C|$.  Substitution of $\ii t$
+and \eqref{eq:matching-normalization} give
+\[
+ \ii^{-n}(-2)^{|\cC|}\mu_{G-V(\cC)}(\ii t)
+ =(-2)^{|\cC|}\ii^{-L}Z_{G-V(\cC)}(t),
+\]
+which factors into one $q_{|C|}$ for each $C\in\cC$.
+\end{proof}
+
+The next identity is a signed square-energy version of the classical
+Coulson integral formula.  We include the derivation to fix both the sign
+and the branch convention; compare \cite{Coulson,NingZeng}.
+
+\begin{lemma}[Coulson identity]\label{lem:coulson}
+For $t>0$, define
+\begin{equation}\label{eq:Theta}
+ \Theta_G(t)=\sum_{j=1}^n\arctan\!\left(\frac{\lambda_j}{t}\right),
+ \qquad -\frac\pi2<\arctan x<\frac\pi2.
+\end{equation}
+Then the integral below is absolutely convergent and
+\begin{equation}\label{eq:coulson}
+ s^+(G)-s^-(G)=-\frac4\pi\int_0^\infty t\Theta_G(t)\,dt.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For every real $\lambda$,
+\[
+ \lambda|\lambda|=\frac2\pi\int_0^\infty
+       \frac{\lambda^3}{\lambda^2+t^2}\,dt.
+\]
+The scalar integral is absolutely convergent.  Since there are finitely
+many eigenvalues and $\sum_j\lambda_j=\operatorname{tr}A(G)=0$,
+\[
+ s^+-s^-=\frac2\pi\int_0^\infty
+ \sum_j\frac{\lambda_j^3}{\lambda_j^2+t^2}\,dt
+ =\frac2\pi\int_0^\infty t^2\Theta_G'(t)\,dt.
+\]
+Indeed,
+$\Theta_G'(t)=-\sum_j\lambda_j/(\lambda_j^2+t^2)$ and
+$\sum_j\lambda_j^3/(\lambda_j^2+t^2)
+=-t^2\sum_j\lambda_j/(\lambda_j^2+t^2)$.
+
+Integrate by parts first on $[\varepsilon,R]$.  At zero,
+$|\Theta_G(t)|\le n\pi/2$, so $t^2\Theta_G(t)\to0$.  At infinity,
+Taylor expansion and $\sum_j\lambda_j=0$ give
+$\Theta_G(t)=O(t^{-3})$, so again $t^2\Theta_G(t)\to0$.
+The same estimates show that $t\Theta_G(t)$ is absolutely integrable:
+it is $O(t)$ at zero and $O(t^{-2})$ at infinity.  Letting
+$\varepsilon\downarrow0$ and $R\to\infty$ yields
+\eqref{eq:coulson}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Suppose first that every cycle length is $3\pmod4$.  For such a length,
+\[
+ q_\ell=-2\ii^{-\ell}=-2\ii.
+\]
+Because $\vp(G)\le2$, expansion \eqref{eq:Psi-expansion} contains only
+collections of zero, one, or two cycles.  The zero-cycle term is real;
+each two-cycle term is real because $(-2\ii)^2=-4$; and every one-cycle
+term has imaginary part
+$-2Z_{G-V(C)}(t)<0$.  Since $G$ contains a cycle, it follows that
+\begin{equation}\label{eq:lower}
+ \operatorname{Im}\Psi_G(t)
+ =-2\sum_{C\text{ a cycle of }G}Z_{G-V(C)}(t)<0
+ \qquad(t>0).
+\end{equation}
+
+We now justify the argument without an implicit branch choice.  Directly
+from the eigenvalue factorization,
+\begin{equation}\label{eq:factor}
+ \Psi_G(t)=\ii^{-n}\prod_j(\ii t-\lambda_j)
+ =\prod_j(t+\ii\lambda_j).
+\end{equation}
+Thus $\Theta_G(t)$ is a continuous argument of $\Psi_G(t)$.  By
+\eqref{eq:lower}, the curve $\Psi_G((0,\infty))$ lies strictly in the
+open lower half-plane.  Its principal argument
+$\alpha(t)=\Arg\Psi_G(t)\in(-\pi,0)$ is therefore continuous.  Moreover,
+$\Theta_G(t)\to0$ as $t\to\infty$, while
+$\Psi_G(t)=t^n(1+o(1))$ and \eqref{eq:lower} imply
+$\alpha(t)\to0$ from below.  The continuous function
+$\Theta_G(t)-\alpha(t)$ takes values in $2\pi\mathbb Z$, hence is
+constant; its limit at infinity is zero.  Therefore
+$\Theta_G(t)=\alpha(t)<0$ for every $t>0$.  In particular the integral in
+\eqref{eq:coulson} is strictly negative, and
+$s^+(G)-s^-(G)>0$.
+
+If every cycle length is $1\pmod4$, then $q_\ell=2\ii$.  The two-cycle
+terms are again real, while
+\[
+ \operatorname{Im}\Psi_G(t)
+ =2\sum_{C\text{ a cycle of }G}Z_{G-V(C)}(t)>0.
+\]
+The same argument in the open upper half-plane shows that
+$\Theta_G(t)\in(0,\pi)$ for every $t>0$.  Lemma~\ref{lem:coulson} now
+gives $s^+(G)-s^-(G)<0$.
+\end{proof}
+
+\begin{remark}\label{rem:disconnected}
+The proof applies verbatim to disconnected graphs.  Equivalently,
+$\phi_G$ and $\Psi_G$ factor over components and the square energies are
+additive.  Forest components contribute zero asymmetry, while the common
+cycle phase controls all cyclic components under the global packing
+hypothesis.
+\end{remark}
+
+\section{The structure forced by one cycle phase}\label{sec:structure}
+
+We recall that a cactus is a graph in which every block is either a
+single edge or a cycle.  Isolated vertices are allowed here.
+
+\begin{lemma}\label{lem:cactus}
+If every cycle of a finite simple graph $G$ has length congruent to
+$3\pmod4$, then every cyclic block of $G$ is one of those cycles.  In
+particular, $G$ is a cactus.  The same conclusion holds with
+$3\pmod4$ replaced by $1\pmod4$.
+\end{lemma}
+
+\begin{proof}
+A theta graph consists of three internally vertex-disjoint paths between
+the same two distinct vertices.  If their lengths are $a,b,c$, its three
+cycles have lengths $a+b$, $a+c$, and $b+c$.  These three lengths cannot
+all be congruent to the same odd residue $r\pmod4$, since
+\[
+ 2a=(a+b)+(a+c)-(b+c)\equiv r\pmod4,
+\]
+whose left side is even and right side is odd.
+
+It remains to recall why a block that is neither an edge nor a cycle
+contains a theta subdivision.  Let $B$ be such a block.  It is
+2-connected, and it contains a cycle $C$.  If $B$ has an edge not on
+$C$, take a component $K$ of $B-V(C)$ incident with $C$, or a chord of
+$C$ if there is no such component.  In the former case $K$ has at least
+two distinct attachment vertices $u,v$ on $C$: a unique attachment would
+be a cut vertex of the 2-connected graph $B$.  Since $K$ is connected, a
+path in $K$ between neighbors of two such attachments, together with its
+two attachment edges, gives a $u$--$v$ path internally disjoint from $C$.
+In the chord case the chord
+is such a path.  Together with the two $u$--$v$ arcs of $C$, this is a
+theta subdivision, a contradiction.  Hence every nontrivial block is an
+edge or a cycle.
+\end{proof}
+
+The lemma also avoids any need for an unproved classification of how
+triangles can intersect: under the cycle-congruence hypothesis the full
+block structure follows from the elementary theta obstruction.
+
+\section{Applications}\label{sec:applications}
+
+For a graph $G$ with $\kappa(G)$ components, its cyclomatic number is
+\[
+ \beta(G)=|E(G)|-|V(G)|+\kappa(G).
+\]
+A block graph is a graph every block of which is a clique.
+
+\begin{corollary}[Bicyclic block graphs]\label{cor:block}
+Let $G$ be a connected block graph with $n$ vertices and cyclomatic
+number $2$.  Then $G$ has exactly two blocks isomorphic to $K_3$, all its
+other blocks are copies of $K_2$, and
+\[
+ s^+(G)>s^-(G),
+ \qquad
+ s^+(G)>|E(G)|=n+1>s^-(G).
+\]
+In particular, Conjecture~1.2 of Akbari--Kumar--Mohar--Pragada--Zhang
+\cite{AKMPZ} holds strictly, and in the stronger form $s^+(G)>n+1$, for
+every bicyclic block graph.
+\end{corollary}
+
+\begin{proof}
+Cyclomatic number is additive over the blocks of a connected graph.  A
+clique block $K_r$ contributes
+\[
+ |E(K_r)|-|V(K_r)|+1
+ =\binom r2-r+1=\frac{(r-1)(r-2)}2.
+\]
+This contribution is $0$ for $r=2$, $1$ for $r=3$, and at least $3$ for
+$r\ge4$.  Since the total is $2$, there are exactly two $K_3$ blocks and
+all other blocks are $K_2$'s.  Thus the only cycles are the two triangles,
+so their vertex-disjoint packing number is at most two.  Theorem
+\ref{thm:main}(i) gives $s^+>s^-$.  Finally $|E(G)|=n-1+\beta(G)=n+1$,
+and \eqref{eq:sum} says that the average of $s^+$ and $s^-$ is $|E(G)|$.
+The displayed strict inequalities follow.
+\end{proof}
+
+We next state a convenient cactus family.  A triangular cactus is a
+cactus whose cyclic blocks are triangles.  A bouquet of triangles is a
+set of triangle blocks having a common vertex.  We say that the triangles
+of a triangular cactus form at most two bouquets if its set of triangle
+blocks can be partitioned into at most two subfamilies, each subfamily
+having a common vertex.  Empty subfamilies are permitted.
+
+\begin{corollary}[One and two bouquets]\label{cor:bouquet}
+Let $G$ be a triangular cactus containing at least one triangle.  If its
+triangles form at most two bouquets, then
+\[
+ s^+(G)>s^-(G).
+\]
+This includes friendship graphs and double friendship graphs, with
+arbitrary trees attached at their vertices and with arbitrary forest
+components added.
+\end{corollary}
+
+\begin{proof}
+All cycles are triangle blocks.  A pairwise vertex-disjoint collection
+contains at most one triangle from each bouquet, and hence has size at
+most two.  Apply Theorem~\ref{thm:main}(i).  Tree attachments and forest
+components create no cycles and do not affect this verification.
+\end{proof}
+
+Here a friendship graph means a bouquet of triangles with one common
+center.  A double friendship graph means any triangular cactus whose
+triangle blocks are the union of two specified bouquets; the two centers
+may be joined by a path or may coincide.  This definition states exactly
+the property used in Corollary~\ref{cor:bouquet}, rather than relying on a
+stronger triangle-intersection classification.
+
+The phase-reversed version is equally immediate.
+
+\begin{corollary}\label{cor:one-mod-four-cactus}
+Let $G$ contain a cycle, and suppose every cyclic block is a cycle of
+length $1\pmod4$.  If these cycle blocks can be partitioned into at most
+two bouquets (each subfamily has a common vertex), then
+$s^+(G)<s^-(G)$.
+\end{corollary}
+
+\begin{proof}
+Every cycle is a cyclic block and has length $1\pmod4$, while at most one
+cycle from each bouquet can occur in a vertex-disjoint collection.  Thus
+$\vp(G)\le2$, and Theorem~\ref{thm:main}(ii) applies.
+\end{proof}
+
+\begin{remark}[Why the packing threshold appears]
+For three vertex-disjoint cycles of the common odd phase, the
+three-cycle terms in \eqref{eq:Psi-expansion} are imaginary and have the
+opposite sign from the one-cycle terms: $(-2\ii)^3=8\ii$ in the
+$3\pmod4$ case and $(2\ii)^3=-8\ii$ in the $1\pmod4$ case.  Positivity of
+the signless matching factors alone therefore no longer fixes the
+imaginary sign.  The argument proves the packing-two theorem sharply as
+a phase-counting mechanism; it does not assert that every graph with
+packing number three violates the conclusion.
+\end{remark}
+
+\begin{thebibliography}{99}
+
+\bibitem{AKMPZ}
+S. Akbari, H. Kumar, B. Mohar, S. Pragada, and S. Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264, 2025.
+
+\bibitem{AbiadEtAl}
+A. Abiad, L. de Lima, D. N. Desai, K. Guo, L. Hogben, and J. Madrid,
+\emph{Positive and negative square energies of graphs},
+Electron. J. Linear Algebra 39 (2023), 307--326.
+
+\bibitem{Coulson}
+C. A. Coulson,
+\emph{On the calculation of the energy in unsaturated hydrocarbon
+molecules},
+Proc. Cambridge Philos. Soc. 36 (1940), 201--203.
+
+\bibitem{EFGW}
+C. Elphick, M. Farber, F. Goldberg, and P. Wocjan,
+\emph{Conjectured bounds for the sum of squares of positive eigenvalues
+of a graph},
+Discrete Math. 339 (2016), 2215--2223.
+
+\bibitem{ElphickLinz}
+C. Elphick and W. Linz,
+\emph{Symmetry and asymmetry between positive and negative square energies
+of graphs},
+Electron. J. Linear Algebra 40 (2024), 418--432.
+
+\bibitem{GodsilGutman}
+C. D. Godsil and I. Gutman,
+\emph{On the theory of the matching polynomial},
+J. Graph Theory 5 (1981), 137--144.
+
+\bibitem{LTZ}
+Y. Liu, Q. Tang, and S. Zhang,
+\emph{The positive and negative square-energy conjecture},
+arXiv:2607.18031, 2026.
+
+\bibitem{NingZeng}
+B. Ning and J. Zeng,
+\emph{A proof of a conjecture on positive and negative square energies
+of unicyclic graphs},
+arXiv:2605.24668, 2026.
+
+\bibitem{Sachs}
+H. Sachs,
+\emph{Beziehungen zwischen den in einem Graphen enthaltenen Kreisen und
+seinem charakteristischen Polynom},
+Publ. Math. Debrecen 11 (1964), 119--134.
+
+\bibitem{Zhang}
+S. Zhang,
+\emph{Extremal values for the square energies of graphs},
+arXiv:2409.15504, 2024.
+
+\end{thebibliography}
+
+\end{document}

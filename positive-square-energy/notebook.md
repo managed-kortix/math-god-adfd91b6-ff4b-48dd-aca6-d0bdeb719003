@@ -1682,3 +1682,27 @@ Thus one edge crosses the threshold.  The exact certificate is
 `experiments/disconnected_threshold_counterexample.py`, and the paper is
 in top-level `edge-threshold-counterexample/`.  This does NOT refute the
 connected preservation statement; disjoint-union tuning is the mechanism.
+# 2026-07-25: packing-two Sachs phase theorem
+
+For a graph `G`, let `nu_circ(G)` be the maximum number of pairwise
+vertex-disjoint cycles.  Grouping the Sachs expansion by the selected cycle
+collection `C` gives, on the positive imaginary axis,
+
+`Psi_G(t)=i^{-n}phi_G(it)=sum_C prod_{D in C}(-2i^{-|D|}) Z_{G-V(C)}(t)`,
+
+where `Z_H(t)=sum_j m_j(H)t^{|H|-2j}>0` is the signless matching
+polynomial.  If every cycle is `3 mod 4` and `nu_circ<=2`, only collection
+sizes zero, one, and two occur.  The zero- and two-cycle terms are real, while
+every singleton contributes `-2i Z_{G-V(C)}(t)`.  Hence `Im Psi_G(t)<0` for
+all `t>0`.  The continuous spectral phase therefore lies in `(-pi,0)`, and
+the signed Coulson identity yields `s+>s-`.  For all cycles `1 mod 4`, the
+same proof reverses the sign.
+
+For a connected block graph of cyclomatic number two, block additivity forces
+exactly two `K3` blocks and all remaining blocks `K2`.  Thus the theorem gives
+
+`s+(G)>m(G)=n+1>s-(G)`.
+
+This strictly proves AKMPZ Conjecture 1.2 for bicyclic block graphs with
+arbitrary tree attachments.  Two independent hostile audits and a final paper
+gate passed.  Source and compiled manuscript: `packing-two-square-energy/`.

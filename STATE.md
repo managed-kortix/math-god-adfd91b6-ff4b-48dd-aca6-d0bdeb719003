@@ -334,6 +334,21 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
+0. NEW VERIFIED RESULT (2026-07-25): packing-two Sachs phase theorem.  If a
+   finite graph contains a cycle, every cycle length is `3 mod 4`, and its
+   maximum collection of vertex-disjoint cycles has size at most two, then
+   `s+>s-`; for cycle lengths `1 mod 4` the inequality reverses.  Grouping
+   Sachs terms by vertex-disjoint cycle collections gives per-cycle phase
+   `-2 i^{-ell}` and positive signless matching carriers.  Collections of
+   size zero or two are real, while singleton cycles have one strict imaginary
+   sign, so the normalized characteristic polynomial remains in one open
+   half-plane and cannot wind.  Coulson then fixes the square-energy sign.
+   Consequence: every connected bicyclic block graph has exactly two triangle
+   blocks and satisfies `s+>m=n+1>s-`, strictly settling AKMPZ Conjecture 1.2
+   for this class.  Paper: `packing-two-square-energy/`.
+   The packing threshold is sharp for the fixed-imaginary-sign mechanism: a
+   chain of three disjoint triangles has positive imaginary part near zero,
+   although its lifted phase remains negative.
 0. LITERATURE PIVOT (2026-07-24): Liu--Tang--Zhang, arXiv:2607.18031,
    submitted 2026-07-20, proves the original EFGW theorem
    `min{s+,s-}>=n-1` for every connected graph.  The proof and Lean 4
