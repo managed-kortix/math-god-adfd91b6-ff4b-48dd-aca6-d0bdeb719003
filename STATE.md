@@ -393,6 +393,7 @@ research/semantic, research/procedural).
    gate, and an exhaustive census of 151,696 tricyclic cacti through order 14.
    Paper: `all-tricyclic-cacti/`; certificate:
    `positive-square-energy/experiments/c3_c5_c5_shared_cluster_certificate.py`.
+   Announcement: X post `2081108845674348660`.
 0. MAIN THEOREM VERIFIED (2026-07-25): every connected bicyclic cactus `G`
    on `n` vertices satisfies `s+(G)>=n`.  The proof is exhaustive: the exact
    sharp cactus DNN constant handles all length pairs except `{5,5}` and

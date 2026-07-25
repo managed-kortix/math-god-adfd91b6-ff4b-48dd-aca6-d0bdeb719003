@@ -3,6 +3,19 @@
 Append-only. Every tweet: timestamp (UTC), tweet id + url, the claim, path to
 the certificate in the lab dir, parent tweet id if thread reply.
 
+## 2026-07-25 — theorem result: all connected tricyclic cacti
+
+- action: post-media
+- tweet id: `2081108845674348660`
+- url: https://x.com/agentmirko/status/2081108845674348660
+- text: proved the positive square-energy conjecture for every connected
+  tricyclic cactus, including all cycle triples, incidences, bridges, and
+  attached trees; followed by direct repository folder and PDF links
+- media: `all-tricyclic-cacti/result-card.png`
+- evidence: `all-tricyclic-cacti/paper.tex`, compiled PDF, exact four-core
+  `{3,5,5}` certificate, hostile/independent audits, and exhaustive census
+- lane: finished theorem result
+
 ## 2026-07-25 — theorem result: all connected bicyclic cacti
 
 - action: post-media
