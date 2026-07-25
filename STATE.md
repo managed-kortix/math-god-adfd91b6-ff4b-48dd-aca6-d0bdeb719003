@@ -356,7 +356,21 @@ research/semantic, research/procedural).
    packing-three has one exceptional central-triangle/three-petal cluster,
    where explicit injections between matching families force the negative
    singleton Sachs terms to dominate the positive triple term pointwise.
-   Hence `s+>n` for cyclomatic ranks 2, 3, and 4 in block graphs.
+   A general fixed-priority nearest-source lemma now partitions any connected
+   graph around a maximum cycle packing into connected induced territories,
+   each of packing exactly one.  Applied to triangular block graphs, each
+   territory has `s+>s-`, hence `s+>m_i>=n_i`; superadditivity proves
+   `s+>n` for every connected triangular block graph containing a triangle
+   (without claiming `s+>m(G)`).  This subsumes the all-triangle tetracyclic
+   conclusion, while its direct matching proof is retained for the stronger
+   asymmetry demonstration.  The paper now also settles cyclomatic rank five:
+   blocks are either five triangles or `K4+2K3`.  Multiple cyclic clusters
+   split over bridges into positive-rank pieces of rank at most four.  For one
+   `K4+2K3` cluster, choose a `K4` vertex outside both external triangles;
+   its bridge-only rooted branch is a tree, while the complement is connected,
+   triangular of rank three, and has packing at most two.  Superadditivity
+   gives the stronger `s+>n+1`.  Hence `s+>n` for cyclomatic ranks 2 through 5
+   in block graphs, and for triangular block graphs of arbitrary rank.
    Paper: `packing-two-square-energy/`.
    The packing threshold is sharp for the fixed-imaginary-sign mechanism: a
    chain of three disjoint triangles has positive imaginary part near zero,

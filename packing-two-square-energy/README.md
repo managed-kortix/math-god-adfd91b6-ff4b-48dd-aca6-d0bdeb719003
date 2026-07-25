@@ -2,8 +2,8 @@
 
 This directory contains a self-contained LaTeX manuscript proving a
 square-energy sign theorem for graphs whose maximum collection of pairwise
-vertex-disjoint cycles has size at most two, together with applications
-through tetracyclic block graphs.
+vertex-disjoint cycles has size at most two, together with a cycle-territory
+decomposition and applications through cyclomatic-rank-five block graphs.
 
 ## Main result
 
@@ -25,6 +25,14 @@ continuous argument and a Coulson identity then determine the sign of
 
 ## Consequences
 
+- A fixed-priority nearest-cycle partition around any maximum cycle packing
+  produces connected induced territories, each containing its chosen cycle
+  and having cycle packing number exactly one. The proof tracks integer
+  distances separately for earlier and later priority indices.
+- Every connected triangular block graph containing a triangle satisfies
+  `s+(G) > n`, with no bound on the number or packing of its triangles. This
+  follows territory by territory from `s+ > s-`, `s+ > m_i >= n_i`, and
+  induced-subgraph superadditivity; it does not claim `s+(G) > m(G)`.
 - Every connected bicyclic block graph has exactly two triangular blocks
   and satisfies `s+(G) > |E(G)| = n + 1 > s-(G)`. This settles AKMPZ
   Conjecture 1.2 strictly for this class.
@@ -38,6 +46,14 @@ continuous argument and a Coulson identity then determine the sign of
   triangles, the packing-three obstruction is classified as a single
   `K1,3` cyclic cluster and resolved by explicit matching injections that
   force the normalized characteristic polynomial into the lower half-plane.
+  The triangular-block corollary now subsumes the all-triangle conclusion,
+  while the matching argument retains the stronger asymmetry statement.
+- Every connected block graph of cyclomatic number five satisfies `s+(G)>n`.
+  Its cyclic blocks are either five triangles, handled by the triangular
+  corollary, or `K4+2K3`. Multiple cyclic clusters split over bridges into
+  cyclic pieces of ranks at most four. In one cluster, deleting a private
+  `K4` vertex and its bridge-only branches leaves a connected triangular
+  rank-three piece with packing at most two, yielding the stronger `s+>n+1`.
 - Triangular cacti whose triangles are covered by at most two bouquets have
   `s+ > s-`, including friendship and double friendship constructions.
 - The manuscript proves the structural theta-obstruction lemma rather than
@@ -46,6 +62,8 @@ continuous argument and a Coulson identity then determine the sign of
 ## Files
 
 - `paper.tex` - manuscript and bibliography
+- `../STATE.md` - current research-state summary
+- `../positive-square-energy/notebook.md` - detailed research notebook
 
 Build from the repository root with:
 

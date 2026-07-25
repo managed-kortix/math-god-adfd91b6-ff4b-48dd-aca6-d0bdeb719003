@@ -1735,3 +1735,49 @@ Deleting `T0` leaves three disjoint edges, giving
 a perfect matching, giving `Z_{G-V(Ti)}>Z_F`.  Thus the singleton sum is
 strictly greater than `4Z_F`, so `Im Psi<0`, `s+>s-`, and in particular
 `s+>n`.  The result passed two structural audits and a final manuscript gate.
+
+## 2026-07-25: cycle territories, triangular block graphs, and beta five
+
+Let `C1,...,Ck` be a maximum-cardinality packing of vertex-disjoint cycles in
+a connected graph, with `k>=1`. Assign `v` to the lexicographically least
+pair `(d(v,Ci),i)`. The resulting nearest-source territories are induced and
+connected. For `v` assigned to `i`, take a predecessor `u` on a shortest path
+to `Ci` and write `a=d(v,Ci)`. If `j<i`, assignment to `i` forces the strict
+integer inequality `a<d(v,Cj)`, so
+`d(u,Cj)>=d(v,Cj)-1>=a>a-1=d(u,Ci)`. If `j>i`, it gives
+`a<=d(v,Cj)`, hence `d(u,Cj)>=a-1=d(u,Ci)`; equality still favors `i`.
+Thus every predecessor remains in the same territory and iteration reaches
+`Ci`. Each territory has packing exactly one: two cycles in one territory,
+together with the selected cycles in all other territories, would enlarge the
+chosen maximum packing. Maximum, not merely maximal, is essential.
+
+For a connected triangular block graph containing a triangle, apply this
+partition to a maximum cycle packing. Every territory is connected, induced,
+cyclic, all its cycles are triangles, and its packing is one. The packing-two
+theorem gives `s+(Gi)>s-(Gi)`, hence `s+(Gi)>m_i>=n_i`. Induced-subgraph
+superadditivity yields `s+(G)>sum n_i=n`. This does not imply or claim the
+stronger global inequality `s+(G)>m(G)`. In particular, this general
+corollary subsumes the all-triangle conclusion in the tetracyclic theorem;
+the existing direct matching proof remains useful because it proves
+`s+>s-` for the exceptional packing-three cluster.
+
+Cyclomatic rank five is now settled for connected block graphs. Block
+additivity leaves either five triangles or `K4+2K3`. Five triangles are
+covered by the triangular corollary. If `K4+2K3` has multiple cyclic clusters,
+cut intervening bridge edges and assign bridge-only branches to adjacent
+pieces. The induced connected pieces have positive ranks summing to five, so
+each has rank at most four; the existing rank-one through rank-four results
+give `s+>order` on every piece, and superadditivity gives `s+>n`.
+
+For one cyclic cluster, each external triangle meets the `K4` through at most
+one `K4` vertex, possibly via the other triangle, so at most two `K4` vertices
+belong to their union. Choose a private vertex `z`. Let `U` be `z` and all
+bridge-only branches rooted there, and let `R` be the complement. Then `U` is
+a tree, including the case `U={z}`, where `s+(U)=0=|U|-1`. The graph `R` is
+connected and its cyclic blocks are `K4-z,T1,T2`, all triangles. Their
+intersection graph remains connected because `z` lies in neither external
+triangle, so their packing is at most two. Therefore
+`s+(R)>m_R=|R|+2`, and
+`s+(G)>=(|U|-1)+s+(R)>n+1>n`. The manuscript and README now record the
+territory lemma, triangular corollary, tetracyclic subsumption note, and the
+beta-five proposition. Per instruction, the manuscript was not rebuilt.

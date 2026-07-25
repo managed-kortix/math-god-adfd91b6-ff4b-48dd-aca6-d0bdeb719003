@@ -40,8 +40,8 @@ axis.  Packing number at most two then
 puts the normalized characteristic polynomial strictly in one open
 half-plane.  A Coulson identity converts this fixed argument sign into the
 claimed square-energy inequality.  Applications include a strict form of
-the positive square-energy conjecture for bicyclic block graphs and broad
-families of triangular cacti.
+the positive square-energy conjecture for every triangular block graph and
+for block graphs of cyclomatic numbers two through five.
 \end{abstract}
 
 \section{Introduction}
@@ -99,7 +99,9 @@ priority claim on the basis of a negative literature search.
 Section~\ref{sec:proof} gives a self-contained proof, including the
 required Coulson identity and a careful continuous-argument step.
 Section~\ref{sec:structure} records the cactus structure forced by the
-cycle congruence, and Section~\ref{sec:applications} gives applications.
+cycle congruence, and Section~\ref{sec:applications} gives applications,
+including a cycle-territory decomposition and block graphs through
+cyclomatic number five.
 We also use the induced-subgraph superadditivity theorem of Akbari, Kumar,
 Mohar, and Pragada~\cite{AKMP}: if $H_1,\ldots,H_r$ are pairwise disjoint
 induced subgraphs of $G$, then
@@ -316,6 +318,90 @@ For a graph $G$ with $\kappa(G)$ components, its cyclomatic number is
  \beta(G)=|E(G)|-|V(G)|+\kappa(G).
 \]
 A block graph is a graph every block of which is a clique.
+
+We first record a decomposition that will also remove any global bound on
+the number of triangles in a triangular block graph.  The priority order in
+the next lemma is fixed once and for all.
+
+\begin{lemma}[Cycle territories]\label{lem:cycle-territories}
+Let $G$ be a connected graph, and let $C_1,\ldots,C_k$, where $k\ge1$, be a
+maximum-cardinality collection of pairwise vertex-disjoint cycles.  Assign
+each vertex $v$ to the index $i$ for which
+\[
+ \bigl(d_G(v,V(C_i)),i\bigr)
+\]
+is lexicographically least, and let $G_i$ be the subgraph induced by the
+vertices assigned to $i$.  Then the sets $V(G_1),\ldots,V(G_k)$ partition
+$V(G)$, and every $G_i$ is connected, contains $C_i$, and has cycle packing
+number exactly one.
+\end{lemma}
+
+\begin{proof}
+The assignment plainly gives a partition.  Since the cycles in the chosen
+packing are vertex-disjoint, every vertex of $C_i$ has distance zero from
+$C_i$ and positive distance from every $C_j$ with $j\ne i$.  Hence
+$C_i\subseteq G_i$.
+
+We prove connectivity with the integer distances and the tie-breaking rule
+made explicit.  Let $v\in V(G_i)\setminus V(C_i)$, put
+$a=d_G(v,V(C_i))$, and choose a neighbor $u$ of $v$ on a shortest
+$v$--$C_i$ path.  Thus $d_G(u,V(C_i))=a-1$.  If $j<i$, then priority would
+favor $j$ in a tie, so the assignment of $v$ to $i$ implies
+\[
+ a<d_G(v,V(C_j)).
+\]
+Both quantities are integers, and the distance function changes by at most
+one across an edge.  Consequently
+\[
+ d_G(u,V(C_j))\ge d_G(v,V(C_j))-1\ge a
+ >a-1=d_G(u,V(C_i)).
+\]
+If instead $j>i$, assignment of $v$ to $i$ gives
+$a\le d_G(v,V(C_j))$, and hence
+\[
+ d_G(u,V(C_j))\ge d_G(v,V(C_j))-1\ge a-1
+ =d_G(u,V(C_i)).
+\]
+In this case equality still assigns $u$ to $i$, because $i<j$.  Thus the
+chosen predecessor $u$ belongs to $G_i$.  Iterating reaches $C_i$ entirely
+inside $G_i$, proving that $G_i$ is connected.
+
+Finally, $G_i$ contains a cycle, so $\vp(G_i)\ge1$.  If some $G_i$ contained
+two vertex-disjoint cycles, those two cycles together with $C_j$ for every
+$j\ne i$ would be $k+1$ pairwise vertex-disjoint cycles in $G$, because the
+territories are disjoint.  This contradicts the \emph{maximum} cardinality
+of the chosen packing.  Therefore $\vp(G_i)=1$.
+\end{proof}
+
+\begin{corollary}[Triangular block graphs]\label{cor:triangular-block}
+Every connected triangular block graph $G$ of order $n$ that contains a
+triangle satisfies
+\[
+ s^+(G)>n.
+\]
+Here triangular means that every cyclic block is a triangle; bridge blocks
+and arbitrary attached trees are allowed.
+\end{corollary}
+
+\begin{proof}
+Apply Lemma~\ref{lem:cycle-territories} to a maximum, not merely maximal,
+cycle packing and write $n_i=|V(G_i)|$ and $m_i=|E(G_i)|$.  Each connected
+induced territory contains a triangle, all of its cycles are triangles, and
+its cycle packing number is one.  Theorem~\ref{thm:main}(i) therefore gives
+$s^+(G_i)>s^-(G_i)$.  Since
+$s^+(G_i)+s^-(G_i)=2m_i$, it follows that
+\[
+ s^+(G_i)>m_i\ge n_i,
+\]
+where the last inequality holds because $G_i$ is connected and cyclic.
+The territories are pairwise disjoint induced subgraphs, so
+\eqref{eq:superadditivity} yields
+\[
+ s^+(G)\ge\sum_{i=1}^k s^+(G_i)
+ >\sum_{i=1}^k n_i=n.
+\]
+Notice that this argument does not assert $s^+(G)>|E(G)|$.
+\end{proof}
 
 \begin{corollary}[Bicyclic block graphs]\label{cor:block}
 Let $G$ be a connected block graph with $n$ vertices and cyclomatic
@@ -549,6 +635,82 @@ Thus \eqref{eq:tetracyclic-imaginary} is strictly negative for every
 $t>0$.  The same phase and Coulson argument again yields
 $s^+(G)>s^-(G)$, and consequently
 $s^+(G)>|E(G)|=n+3>n$.
+\end{proof}
+
+The all-triangle conclusion in Proposition~\ref{prop:tetracyclic-block} is
+also an immediate instance of Corollary~\ref{cor:triangular-block}.  The
+direct matching proof above is retained because it proves the stronger
+asymmetry $s^+(G)>s^-(G)$ in the exceptional packing-three cluster and
+illustrates how opposite three-cycle phases can nevertheless be dominated.
+
+\begin{proposition}[Block graphs of cyclomatic number five]
+\label{prop:beta-five-block}
+Let $G$ be a connected block graph with $n$ vertices and cyclomatic number
+$5$.  Then
+\[
+ s^+(G)>n.
+\]
+Thus Conjecture~1.2 of Akbari--Kumar--Mohar--Pragada--Zhang holds strictly
+for every such block graph.
+\end{proposition}
+
+\begin{proof}
+The positive clique-block contributions to the cyclomatic number are
+$1,3,6,\ldots$.  Hence the cyclic blocks are either five copies of $K_3$, or
+one copy $Q$ of $K_4$ and two copies $T_1,T_2$ of $K_3$; all other blocks
+are bridges.  In the first case Corollary~\ref{cor:triangular-block} applies
+directly.
+
+Consider the second case.  Call two cyclic blocks adjacent when they share a
+cut vertex, and call the connected components under this adjacency
+\emph{cyclic clusters}.  Equivalently, blocks in distinct clusters are
+separated in the block--cut tree by at least one bridge block.  If there is
+more than one cluster, delete bridge edges on the paths between clusters.
+This partitions $V(G)$ into vertex sets inducing connected block graphs,
+one for each cluster, with every bridge-only component assigned to an
+adjacent piece.  Every piece is cyclic, their positive cyclomatic ranks sum
+to $5$, and, because there is more than one piece, each rank is at most
+$4$.  The odd-unicyclic theorem, Corollary~\ref{cor:block}, and
+Propositions~\ref{prop:tricyclic-block} and
+\ref{prop:tetracyclic-block}, according to the rank, show that the positive
+square energy of each piece is strictly larger than its order.
+Superadditivity then gives $s^+(G)>n$.
+
+It remains that $Q,T_1,T_2$ form one cyclic cluster.  Each external triangle
+meets $Q$ either at one cut vertex or through a chain containing the other
+external triangle.  In particular, each $T_i$ uses at most one vertex of
+$Q$, so at most two vertices of $Q$ lie in $V(T_1)\cup V(T_2)$.  Choose
+\[
+ z\in V(Q)\setminus\bigl(V(T_1)\cup V(T_2)\bigr).
+\]
+Let $U$ consist of $z$ together with all bridge-only branches rooted at $z$,
+and put $R=V(G)\setminus U$.  Here a bridge-only branch rooted at $z$ is a
+component attached to the cyclic-block union only at $z$ and containing no
+cyclic block.
+
+The induced graph $G[U]$ is a tree.  This includes the possibility
+$U=\{z\}$, in which case $s^+(G[U])=0=|U|-1$.  The graph $G[R]$ is connected:
+$Q-z$ is connected, and the one-cluster incidence among $Q,T_1,T_2$ remains
+connected after deleting $z$, since $z$ lies in neither external triangle;
+all retained bridge-only branches stay joined at their roots.  Its cyclic
+blocks are precisely the three triangles $Q-z,T_1,T_2$.
+
+Their triangle intersection graph is connected.  Indeed, the original
+one-cluster incidence is connected, and replacing $Q$ by $Q-z$ preserves
+every incidence with an external triangle because those triangles avoid
+$z$.  A connected graph on three vertices has independence number at most
+two, so $\vp(G[R])\le2$.  Theorem~\ref{thm:main}(i) and
+\eqref{eq:sum} therefore give
+\[
+ s^+(G[R])>|E(G[R])|=|R|+2,
+\]
+the equality following because $G[R]$ is connected of cyclomatic number
+three.  Since a tree has equal positive and negative square energies,
+$s^+(G[U])=|E(G[U])|=|U|-1$.  Finally,
+\[
+ s^+(G)\ge s^+(G[U])+s^+(G[R])
+ >(|U|-1)+(|R|+2)=n+1>n.
+\]
 \end{proof}
 
 We next state a convenient cactus family.  A triangular cactus is a
