@@ -148,6 +148,99 @@ condition omitted by the individual `2 by 2` Schur complements); no
 edgewise PSD-minor argument of the form (1)--(2) alone can prove the missing
 lemma.
 
+## Negative spectral Gram reduction for one 2-connected block
+
+Assume now that the whole graph is 2-connected. Thus every edge has the
+same value
+
+`B_uv=-c`, where `c=(2m-n+1)/(2m)` and `c>1/2`.                 (5)
+
+Factor `B=XX^T` with `X` of full column rank, denote its row vectors by
+`x_v`, and put `S=X^T X`. The matrix `S` is positive definite. The identity
+`AB=-B^2` does not merely give scalar quadratic constraints: it gives the
+exact vector equations
+
+`S x_v=-sum_{u~v}x_u` for every `v`.                           (6)
+
+Indeed, `AB=-B^2` says `(AX+XS)X^T=0`; multiplication on the right by
+`X S^{-1}` gives `AX=-XS`. Moreover,
+
+`x_v^T S x_v=(B^2)_vv=c d(v)`,                                (7)
+
+`sum_v x_v x_v^T=S`, and `tr(S^2)=2mc=2m-n+1`.                (8)
+
+These identities expose exactly what the elementary incidence argument can
+and cannot prove. Let `R` be the unsigned vertex-edge incidence matrix,
+let `D` be any oriented incidence matrix, and set
+
+`H=sum_v d(v)x_v x_v^T=X^T Deg X`.
+
+Using (6), hence `X^TAX=-S^2`, gives the matrix identities
+
+`sum_{uv in E}(x_u+x_v)(x_u+x_v)^T=X^T RR^T X=H-S^2>=0`,      (9)
+
+`sum_{uv in E}(x_u-x_v)(x_u-x_v)^T=X^T DD^T X=H+S^2>=0`.     (10)
+
+Writing `a_v=||x_v||^2` and `T=sum_v d(v)a_v`, their traces are
+
+`sum_{uv in E}||x_u+x_v||^2=T-2mc=T-(2m-n+1)`,               (11)
+
+`sum_{uv in E}||x_u-x_v||^2=T+2mc=T+(2m-n+1)`.               (12)
+
+Thus incidence positivity supplies only `T>=2mc`. Equality in this bound
+has a precise characterization: `x_u=-x_v` on every edge. Since the graph
+is connected and every edge inner product is nonzero, this forces a
+bipartition. In the present nonbipartite case the inequality is strict, not
+reversed. Consequently (9)--(12) do **not** yield the hoped-for upper bound
+`2mc<=m`, or `c<=1/2`.
+
+There is a second exact constraint, obtained by retaining all coordinates in
+the row norm of `B`. From (7),
+
+`sum_{w notin N(v), w!=v} B_vw^2=c(1-c)d(v)-a_v^2`.           (13)
+
+In particular,
+
+`a_v^2<=c(1-c)d(v)`, and `a_u a_v>=c^2` on every edge.        (14)
+
+The second inequality is the edge principal minor of `B`. Around a cycle
+`v_1...v_kv_1`, (14) gives the necessary condition
+
+`(c/(1-c))^k<=product_i d(v_i)`.                              (15)
+
+This is too weak even for a bare cycle: its right side is `2^k`, whereas
+`c/(1-c)=(n+1)/(n-1)<=2` (with equality for the triangle). Nor can a cycle
+Gram determinant using only the
+fixed edge entries prove `c<=1/2`. For example, on a triangle the partial
+Gram data with diagonal `2c` and off-diagonal `-c` form the PSD matrix
+`c(3I-J)` for every `c>0`. This example does not satisfy (6) unless
+`3c=1`: here the nonzero eigenvalue of its Gram matrix is `3c`, while the
+sum of the other two vectors is `-x_v`. Hence it rigorously isolates (6),
+rather than cyclewise Gram positivity, as the indispensable constraint.
+
+Finally, summing the squared equations (6) gives a coupled identity that
+does use this constraint. If `t_uw=|N(u) intersect N(w)|` and `tau` is the
+number of triangles, then
+
+`tr(S^3)=sum_v d(v)a_v-6c tau`
+`          +2 sum_{uw notin E, u<w} t_uw B_uw`.               (16)
+
+Indeed, the left side is `sum_v||Sx_v||^2`; expanding the neighbor sums on
+the right counts each pair `u,w` exactly `t_uw` times, and
+`sum_{uw in E}t_uw=3 tau`. Formula (13) controls the unweighted square sum
+of the unknown terms in (16):
+
+`sum_{uw notin E, u<w}B_uw^2`
+` = (1/2)sum_v(c(1-c)d(v)-a_v^2)`.                            (17)
+
+The exact remaining gap in the 2-connected case is to combine the sign and
+weight pattern in (16) with (9), (13), and the spectral moments in (8) so as
+to contradict `c>1/2`. A direct Cauchy--Schwarz estimate on the last sum in
+(16) loses the common-neighbor weights and has no universal sign, while
+(11) has the wrong direction. Thus the negative Gram attack reduces the
+problem to the weighted nonedge correlation in (16); no claimed
+`c<=1/2` inequality follows from incidence traces or cycle minors alone.
+
 ## Research protocol
 
 This is now the sole primary proof object.  New agents, if used, receive this
