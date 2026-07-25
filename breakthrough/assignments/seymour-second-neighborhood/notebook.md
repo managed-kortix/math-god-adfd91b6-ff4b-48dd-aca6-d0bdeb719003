@@ -171,3 +171,23 @@ No audits yet.
   model, add arc-deletion minimality constraints, and rerun each missing-pair
   shard. In parallel, derive a human contradiction for the zero-missing-pair
   tournament branch so solver UNSAT is replaced by proof.
+
+## 2026-07-25 — tick 5
+
+- Near-tournament literature eliminates all oriented graphs with at most two
+  missing pairs. A hostile audit found flaws in a proposed shortcut proof, so
+  the theorem is recorded with Fidler--Yuster/Ghazal provenance; see
+  `agents/tick5-near-tournament.md`.
+- Independently eliminated the order-18, `|B|=7`, `m=1` shard by a short
+  arc-minimality argument and reduced `m=2` to two templates. The known theorem
+  supersedes those templates; see `attempts/tick5-n18-b7.md`.
+- Hostile-audited the triangular `n<=36` reduction. The cited paper's printed
+  set-distance convention has a gap; a corrected proof using external set
+  neighborhoods and asymmetric prefixes is valid. See
+  `agents/tick5-order-bound-audit.md`.
+- Added exact necessary arc-minimality constraints and tight vertex-deletion
+  witness relaxations to `direct_smt.py`. The `n=18,|B|=6,m=3` minimal shard
+  returned provisional Z3-UNSAT; this is not a proof certificate.
+- **Next queued attack:** focus order 18 on `m=3,...,9`, encode exact B6/B7
+  remainder budgets, and begin a deterministic CNF/LRAT pipeline so any
+  computational elimination is independently checkable.

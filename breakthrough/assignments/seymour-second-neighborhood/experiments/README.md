@@ -8,6 +8,7 @@ python3 exhaustive_crosscheck.py --max-n 5
 python3 verify_set.py certificate.txt
 node verify_matrix.js certificate.txt
 ~/mathenv/bin/python direct_smt.py --n 17 --b-size 6 --timeout-ms 300000
+~/mathenv/bin/python direct_smt.py --n 18 --b-size 6 --missing 3 --minimality --timeout-ms 900000
 ```
 
 Exit status is 0 only for a valid counterexample, 1 for a valid oriented graph
@@ -22,3 +23,8 @@ root with six or seven exact second neighbors and imposes deficit exactly one or
 two at every vertex. A `sat` adjacency projection is not trusted until both
 external verifiers pass. An `unknown` result has no mathematical force, and an
 `unsat` result is not a proof artifact unless independently certified.
+
+`--minimality` adds proved necessary conditions for a globally vertex-minimal,
+then arc-minimal counterexample: every vertex has a tight in-neighbor witness,
+and every present arc satisfies the exact gain/lost-second-endpoint deletion
+inequality. These are not part of an unrestricted fixed-order model.

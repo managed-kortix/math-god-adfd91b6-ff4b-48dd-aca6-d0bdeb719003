@@ -5,7 +5,7 @@ import hashlib
 import z3
 
 
-def build(n, bsize, timeout_ms, missing):
+def build(n, bsize, timeout_ms, missing, minimality):
     s, A = 0, range(1, 9)
     B = range(9, 9 + bsize)
     a = [[z3.Bool(f"a_{i}_{j}") for j in range(n)] for i in range(n)]
@@ -32,6 +32,34 @@ def build(n, bsize, timeout_ms, missing):
         solver.add(d1 >= 8, d1 <= (n + 1) // 2,
                    d2 == d1 - 1 - z3.If(mu2, 1, 0))
         degrees.append(d1); deficits.append(mu2)
+    if minimality:
+        # Necessary vertex-minimality condition: every deleted vertex u has a
+        # tight in-neighbor witness. This is the cheap relaxation of the full
+        # deletion-robust second-neighborhood identity.
+        for u in range(n):
+            solver.add(z3.Or([z3.And(a[w][u], z3.Not(deficits[w]))
+                              for w in range(n) if w != u]))
+        # Exact necessary arc-minimality inequality.  For e=i->j, g says j is
+        # demoted to exact distance two after deletion; lost endpoints are old
+        # exact second neighbors whose every two-walk uses j as midpoint.
+        for i in range(n):
+            for j in range(n):
+                if i == j:
+                    continue
+                g = z3.Or([z3.And(a[i][k], a[k][j])
+                           for k in range(n) if k != j])
+                lost = []
+                for t in range(n):
+                    if t == i:
+                        continue
+                    alternate = z3.Or([z3.And(a[i][k], a[k][t])
+                                       for k in range(n) if k != j])
+                    lost.append(z3.And(q[i][t], a[j][t], z3.Not(alternate)))
+                loss_count = z3.Sum([z3.If(x, 1, 0) for x in lost])
+                solver.add(z3.Implies(a[i][j],
+                    z3.If(deficits[i],
+                          z3.And(g, loss_count == 0),
+                          loss_count <= z3.If(g, 1, 0))))
     # Redundant global edge lower bound materially strengthens propagation.
     solver.add(z3.Sum([z3.If(a[i][j], 1, 0)
                        for i in range(n) for j in range(n)]) >= 8 * n)
@@ -74,6 +102,7 @@ def main():
     p.add_argument("--timeout-ms", type=int, default=300000)
     p.add_argument("--output")
     p.add_argument("--missing", type=int)
+    p.add_argument("--minimality", action="store_true")
     args = p.parse_args()
     if args.n < 9 + args.b_size:
         p.error("n too small for fixed layers")
@@ -87,7 +116,8 @@ def main():
         return
     if args.missing is not None and (args.n != 18 or not 0 <= args.missing <= 9):
         p.error("--missing is currently an n=18 branch in [0,9]")
-    solver, a = build(args.n, args.b_size, args.timeout_ms, args.missing)
+    solver, a = build(args.n, args.b_size, args.timeout_ms, args.missing,
+                      args.minimality)
     result = solver.check()
     print(result)
     if result == z3.sat:
