@@ -1,0 +1,366 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Arg}{\operatorname{Arg}}
+
+\title{The Triangle--$C_{4k+1}$ Residual Family for Bicyclic Cacti}
+\author{}
+\date{25 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $G$ be a connected bicyclic cactus whose cyclic blocks are $C_3$ and
+$C_q$, where $q=4k+1\geq5$.  The cycles may meet in one cut vertex, or they
+may be vertex-disjoint and joined by a path of arbitrary length; arbitrary
+trees may be attached throughout.  If $n=|V(G)|$, we prove the strict bound
+\[
+ s^+(G)>n+2-\sec\frac{\pi}{q}>n.
+\]
+The proof eliminates all off-spine trees exactly, separates the shared-vertex
+and disjoint Sachs expansions, and compares the resulting phase pointwise
+with the phase of the isolated $q$-cycle.  A product-subpartition argument
+makes the comparison uniform in the joining path and in every tree message.
+This closes the full mixed residual family left by the sharp cactus doubly
+nonnegative bound.
+\end{abstract}
+
+\section{Statement and setup}
+
+All graphs are finite, simple, and undirected.  For the adjacency eigenvalues
+$\lambda_1,\ldots,\lambda_n$ of a graph $G$, put
+\[
+ s^+(G)=\sum_{\lambda_j>0}\lambda_j^2,
+ \qquad
+ s^-(G)=\sum_{\lambda_j<0}\lambda_j^2.
+\]
+The positive and negative square-energy conjecture was proved by Liu, Tang,
+and Zhang~\cite{LTZ}.  Akbari, Kumar, Mohar, Pragada, and Zhang proposed the
+stronger assertion that $s^+(G)\geq n$ whenever a connected $n$-vertex graph
+has at least $n+1$ edges~\cite{AKMPZ}.  The sharp blockwise doubly
+nonnegative argument leaves, among bicyclic cacti, a mixed residual pair
+$\{3,4k+1\}$.  We settle every realization of that pair.
+
+\begin{theorem}\label{thm:main}
+Let $G$ be a connected bicyclic cactus whose only cyclic blocks are $C_3$ and
+$C_q$, with $q=4k+1\geq5$.  The two cyclic blocks may have one common cut
+vertex, chosen arbitrarily on each cycle, or may be vertex-disjoint and joined
+by their unique path, of arbitrary length.  Allow arbitrary trees to be
+attached at arbitrary vertices.  If $n=|V(G)|$, then
+\begin{equation}\label{eq:main}
+ s^+(G)>n+2-\sec\frac{\pi}{q}>n.
+\end{equation}
+\end{theorem}
+
+Let $H$ be the \emph{spine}: in the shared case it is the union of the two
+cycles, and in the disjoint case it is the union of the cycles and their
+unique joining path.  Every component off $H$ is a tree attached to exactly
+one spine vertex; otherwise the cactus property or the choice of the joining
+path would be violated.
+
+For a graph $F$ with positive vertex activities $a=(a_v)$, write
+\begin{equation}\label{eq:weighted-Z}
+ Z_F(a)=\sum_{M\text{ a matching of }F}
+          \prod_{v\text{ unmatched by }M}a_v.
+\end{equation}
+When all activities equal $t$, abbreviate this to
+\[
+ Z_F(t)=\sum_M t^{|V(F)|-2|M|}.
+\]
+The empty graph has partition $1$.  In particular, every partition appearing
+below is strictly positive for $t>0$.
+
+\section{Exact removal of attached trees}
+
+Orient each off-spine branch toward its attachment vertex.  If $u\to p$ is
+an oriented branch edge and $T_{u\to p}$ is the subtree below $u$, including
+$u$, define
+\[
+ Q_{u\to p}(t)=
+ \frac{Z_{T_{u\to p}}(t)}{Z_{T_{u\to p}-u}(t)}.
+\]
+Splitting a matching according to the status of $u$ gives the exact recursion
+\begin{equation}\label{eq:BP}
+ Q_{u\to p}(t)=t+\sum_{w\text{ child of }u}
+                         \frac{1}{Q_{w\to u}(t)}\geq t>0.
+\end{equation}
+Indeed, after the child-subtree partitions are extracted, leaving $u$
+unmatched contributes $t$, while matching $u$ to a chosen child $w$
+contributes $Z_{T_{w\to u}-w}/Z_{T_{w\to u}}=1/Q_{w\to u}$.
+
+Consequently the exact effective activity at a spine vertex $v$ is
+\begin{equation}\label{eq:activity}
+ a_v(t)=t+\sum_{u\text{ in a branch at }v}
+                    \frac{1}{Q_{u\to v}(t)}=t+y_v(t),
+ \qquad y_v(t)\geq0.
+\end{equation}
+All branch eliminations also produce the common positive factor
+\begin{equation}\label{eq:K}
+ K(t)=\prod_{u\to v,\ v\in V(H)} Z_{T_{u\to v}}(t)>0,
+\end{equation}
+where the product has one factor for each branch rooted next to the spine.
+
+We record explicitly why this factor remains common after vertices of a
+cyclic block are deleted.  If a retained spine vertex $v$ is not incident to
+a branch edge used by a matching, that branch contributes its full
+$Z_T$; if the edge is used, extraction of the same $Z_T$ leaves the activity
+$1/Q$.  This is exactly~\eqref{eq:activity}.  If $v$ itself is deleted by a
+Sachs cycle, no branch edge to $v$ remains and the former branch is now a
+disconnected full tree, again contributing exactly $Z_T$.  Thus deletion of
+one or both cycle vertex sets leaves every factor in~\eqref{eq:K}, with no
+hidden quotient.  A tree described by identifying its root with $v$ is
+handled by deleting that root and treating the resulting components as these
+branches.
+
+From now on every matching partition on a subgraph of $H$ uses the effective
+activities~\eqref{eq:activity}.  Set
+\begin{equation}\label{eq:ABD}
+ A=Z_{H-V(C_3)}(a),
+ \qquad
+ B=Z_{H-V(C_q)}(a),
+\end{equation}
+and, only when the cycles are vertex-disjoint, set
+\begin{equation}\label{eq:D}
+ D=Z_{H-(V(C_3)\cup V(C_q))}(a).
+\end{equation}
+
+\section{The two Sachs expansions}
+
+Let $\phi_G(z)=\det(zI-A(G))$ and normalize on the positive imaginary axis by
+\begin{equation}\label{eq:Psi}
+ \Psi_G(t)=i^{-n}\phi_G(it)=\prod_{j=1}^n(t+i\lambda_j),
+ \qquad t>0.
+\end{equation}
+Grouping the Sachs expansion by its collection $\mathcal C$ of
+vertex-disjoint cycle components gives
+\begin{equation}\label{eq:Sachs}
+ \Psi_G(t)=\sum_{\mathcal C}
+  \prod_{C\in\mathcal C}(-2i^{-|C|})
+  Z_{G-V(\mathcal C)}(t).
+\end{equation}
+Here a triangle has multiplier $-2i^{-3}=-2i$, while, because
+$q\equiv1\pmod4$, the $q$-cycle has multiplier
+$-2i^{-q}=2i$.
+
+After applying the exact tree factorization, the shared-cut-vertex case is
+therefore
+\begin{equation}\label{eq:shared}
+ \boxed{\ \frac{\Psi_G(t)}{K(t)}=Z_H(a)+2i(B-A).\ }
+\end{equation}
+There is no double-cycle term: the two cycles have a common vertex, so they
+cannot both occur in a vertex-disjoint Sachs collection.
+
+In the vertex-disjoint case both cycles may occur, and their multiplier is
+\[
+ (-2i)(2i)=+4.
+\]
+Thus in this case, and only in this case,
+\begin{equation}\label{eq:disjoint}
+ \boxed{\ \frac{\Psi_G(t)}{K(t)}=Z_H(a)+4D+2i(B-A).\ }
+\end{equation}
+Accordingly define
+\begin{equation}\label{eq:R}
+ R=\begin{cases}
+ Z_H(a),&\text{if the cycles share a cut vertex},\\
+ Z_H(a)+4D,&\text{if the cycles are vertex-disjoint}.
+ \end{cases}
+\end{equation}
+In both cases $R>0$, and~\eqref{eq:shared}--\eqref{eq:disjoint} say simply
+\begin{equation}\label{eq:normalized-core}
+ \frac{\Psi_G(t)}{K(t)}=R+2i(B-A).
+\end{equation}
+Since the real part is positive, the continuous argument tending to zero at
+infinity is
+\begin{equation}\label{eq:Theta}
+ \Theta_G(t)=\Arg\Psi_G(t)
+ =\arctan\frac{2(B-A)}{R}\in(-\pi/2,\pi/2).
+\end{equation}
+
+\section{Uniform product-subpartition comparison}
+
+Let
+\begin{equation}\label{eq:Zq}
+ Z_q(t)=Z_{C_q}(t)
+\end{equation}
+be the bare signless matching partition of the $q$-cycle.  The following
+strict comparison is the core of the proof.
+
+\begin{lemma}\label{lem:product}
+For every $t>0$,
+\begin{equation}\label{eq:key}
+ R>Z_q(t)(B-A).
+\end{equation}
+Consequently
+\begin{equation}\label{eq:phase-comparison}
+ \Theta_G(t)<\arctan\frac{2}{Z_q(t)}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Put $S=V(C_q)$.  Partition the matchings counted by $Z_H(a)$ according to
+whether they use an edge between $S$ and $V(H)\setminus S$.  The matchings
+using no such boundary edge factor exactly as
+\[
+ Z_{C_q}(a|_S)\,Z_{H-S}(a)=Z_{C_q}(a|_S)B.
+\]
+This remains true in the shared case: the common cut vertex lies in $S$, and
+the two triangle edges from that vertex to the remaining triangle vertices
+are precisely boundary edges.  Let $E\geq0$ be the total contribution from
+matchings using at least one boundary edge.  Then
+\begin{equation}\label{eq:partition}
+ Z_H(a)=Z_{C_q}(a|_S)B+E.
+\end{equation}
+
+Every activity on $S$ has the form $t+y_v$ with $y_v\geq0$.  Since the
+matching partition has nonnegative coefficients in its vertex activities,
+\[
+ Z_{C_q}(a|_S)\geq Z_q(t).
+\]
+Write $L=Z_{C_q}(a|_S)-Z_q(t)\geq0$.  Equations
+\eqref{eq:R} and~\eqref{eq:partition} now give, with the last term present
+only in the disjoint case,
+\begin{equation}\label{eq:positive-difference}
+ R-Z_q(t)(B-A)=E+LB+Z_q(t)A\ (+4D)>0.
+\end{equation}
+The inequality is strict because $Z_q(t)A>0$.  This proves~\eqref{eq:key}.
+
+If $B-A\leq0$, then~\eqref{eq:Theta} is nonpositive whereas the right side
+of~\eqref{eq:phase-comparison} is positive.  If $B-A>0$, divide
+\eqref{eq:key} by the positive quantity $RZ_q(t)$ to obtain
+\[
+ \frac{2(B-A)}R<\frac2{Z_q(t)},
+\]
+and use strict monotonicity of the arctangent.  Thus
+\eqref{eq:phase-comparison} holds without any assumption on the sign of
+$B-A$.
+\end{proof}
+
+This argument uses neither a continuant estimate nor a bounded connector: all
+joining-path and attached-tree dependence is absorbed into positive matching
+partitions.  In particular, symbolic checks for the smallest $C_3$--$C_5$
+cores may corroborate the inequality but are not certificates needed by the
+proof.
+
+\section{The isolated-cycle phase and Coulson integral}
+
+For the isolated $C_q$, formula~\eqref{eq:Sachs} reads
+\begin{equation}\label{eq:cycle-Psi}
+ i^{-q}\phi_{C_q}(it)=Z_q(t)+2i.
+\end{equation}
+Its continuous phase is therefore
+\begin{equation}\label{eq:theta-q}
+ \theta_q(t)=\arctan\frac2{Z_q(t)}.
+\end{equation}
+We next evaluate its weighted phase integral exactly.
+
+\begin{lemma}\label{lem:cycle}
+If $q=4k+1$, then
+\begin{equation}\label{eq:cycle-difference}
+ s^+(C_q)-s^-(C_q)=-2\left(\sec\frac\pi q-1\right)
+\end{equation}
+and
+\begin{equation}\label{eq:cycle-integral}
+ \int_0^\infty t\theta_q(t)\,dt
+ =\frac\pi2\left(\sec\frac\pi q-1\right).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The eigenvalues of $C_q$ are $2\cos(2\pi j/q)$ for $0\leq j<q$.  For
+$q=4k+1$, the positive ones correspond to $j=0,1,\ldots,k$ and
+$j=q-k,\ldots,q-1$.  Hence
+\begin{align*}
+ s^+(C_q)
+ &=4\left(1+2\sum_{j=1}^k\cos^2\frac{2\pi j}{q}\right)\\
+ &=4\left(1+k+\sum_{j=1}^k\cos\frac{4\pi j}{q}\right).
+\end{align*}
+The finite cosine-sum identity
+\[
+ \sum_{j=1}^k\cos(jx)
+ =\frac{\sin(kx/2)\cos((k+1)x/2)}{\sin(x/2)},
+\]
+with $x=4\pi/q$ and $q=4k+1$, simplifies to
+\[
+ \sum_{j=1}^k\cos\frac{4\pi j}{q}
+ =-\frac12-\frac14\sec\frac\pi q.
+\]
+Therefore
+\[
+ s^+(C_q)=q+1-\sec\frac\pi q.
+\]
+Since $C_q$ has $q$ edges,
+$s^+(C_q)+s^-(C_q)=\operatorname{tr}A(C_q)^2=2q$, which proves
+\eqref{eq:cycle-difference}.
+
+For any graph, with the continuous argument specified in~\eqref{eq:Psi}, the
+signed Coulson identity is
+\begin{equation}\label{eq:Coulson}
+ s^+(G)-s^-(G)
+ =-\frac4\pi\int_0^\infty t\Theta_G(t)\,dt.
+\end{equation}
+It follows by summing the scalar identity for the factors
+$t+i\lambda_j$; the relation $\sum_j\lambda_j=0$ cancels the first-order
+term at infinity.  Applying~\eqref{eq:Coulson} to~\eqref{eq:theta-q} and
+using~\eqref{eq:cycle-difference} gives~\eqref{eq:cycle-integral}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Lemma~\ref{lem:product} gives the strict pointwise inequality
+$\Theta_G(t)<\theta_q(t)$ for every $t>0$.  The phase integrals in
+\eqref{eq:Coulson} converge, so integration and
+Lemma~\ref{lem:cycle} yield
+\begin{equation}\label{eq:strict-difference}
+ s^+(G)-s^-(G)
+ >-2\left(\sec\frac\pi q-1\right).
+\end{equation}
+The strictness is genuine: the continuous positive difference
+$\theta_q(t)-\Theta_G(t)$ is nonzero at every $t>0$.
+
+A connected bicyclic graph has $|E(G)|=n+1$.  Consequently
+\[
+ s^+(G)+s^-(G)=\operatorname{tr}A(G)^2=2n+2.
+\]
+Averaging this identity with~\eqref{eq:strict-difference} gives
+\[
+ s^+(G)>n+1-\left(\sec\frac\pi q-1\right)
+        =n+2-\sec\frac\pi q.
+\]
+Finally, $q\geq5$ implies
+$1<\sec(\pi/q)\leq\sec(\pi/5)<2$, so the last quantity is strictly larger
+than $n$.  This proves both inequalities in~\eqref{eq:main}.
+\end{proof}
+
+\begin{remark}[Residual family]
+The sharp cactus doubly nonnegative estimate and the independent Sachs-phase
+argument settle all other mixed congruence cases but leave cyclic block
+lengths $\{3,4k+1\}$.  Theorem~\ref{thm:main} closes that entire mixed
+residual, including a shared cut vertex, every joining-path length, and all
+tree attachments.  Its conclusion is strict and is stronger than the AKMPZ
+target $s^+(G)\geq n$.
+\end{remark}
+
+\begin{thebibliography}{9}
+
+\bibitem{AKMPZ}
+S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and S.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264, 2025.
+
+\bibitem{LTZ}
+Y.~Liu, Q.~Tang, and S.~Zhang,
+\emph{The positive and negative square-energy conjecture},
+arXiv:2607.18031, 2026.
+
+\end{thebibliography}
+
+\end{document}

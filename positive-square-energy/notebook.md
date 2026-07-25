@@ -1907,3 +1907,27 @@ verified by `c5_bouquet_matching_certificate.py`.  Hence
 `integral t Theta <= 2pi/(3sqrt13)`, yielding the stated bound.  Two hostile
 audits independently checked BP factors, Sachs factor 2, the exact sparse
 certificate, integral, and Coulson constants.  Paper: `two-c5-bouquet-trees/`.
+# 2026-07-25: full C3 plus C_(1 mod 4) bicyclic cactus theorem
+
+Closed the infinite mixed residue left by the sharp cactus DNN theorem.  Let
+the cyclic blocks be `C3` and `C_q`, `q=4k+1>=5`, with a common cut vertex or
+an arbitrary connector path, and arbitrary trees attached.  Then
+
+`s+(G)>n+2-sec(pi/q)>n`.
+
+After exact tree BP on the cyclic spine `H`, define
+`A=Z_{H-V(C3)}`, `B=Z_{H-V(Cq)}`.  The Sachs formula is
+
+`Psi/K=Z_H+2i(B-A)` in the shared case,
+
+and `Psi/K=Z_H+4D+2i(B-A)` in the disjoint case.  The real part is positive.
+The decisive observation is the product subpartition obtained by forbidding
+all boundary edges of `C_q`:
+
+`Z_H(a)>=Z_Cq(a|Cq) B>=Z_Cq(t) B`.
+
+Hence `R-Z_Cq(t)(B-A)>0`, so the full phase is strictly below the isolated
+bad-cycle phase `atan(2/Z_Cq(t))`.  Integrating and using
+`s+(C_q)=q+1-sec(pi/q)` proves the result.  This avoids the already-refuted
+pointwise ordering between the two deletion carriers.  Two final hostile
+audits passed.  Paper: `triangle-one-mod-four-cactus/`.

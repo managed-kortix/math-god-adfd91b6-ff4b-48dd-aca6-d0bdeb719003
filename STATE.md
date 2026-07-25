@@ -349,6 +349,15 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
+0. NEW VERIFIED RESULT (2026-07-25): the entire mixed residual family is
+   closed.  If a connected bicyclic cactus has cyclic blocks `C3` and
+   `C_q`, `q=4k+1>=5`, then for arbitrary shared-cut or connector-path
+   incidence and arbitrary attached trees,
+   `s+(G)>n+2-sec(pi/q)>n`.  Tree BP gives weighted spine activities.  The
+   key product-subpartition inequality `Z_H(a)>=Z_Cq(a) Z_{H-V(Cq)}(a)`
+   bounds the full mixed Sachs phase by the isolated `C_q` phase, without any
+   false deletion-carrier ordering.  Two independent final audits passed.
+   Paper: `triangle-one-mod-four-cactus/`.
 0. NEW VERIFIED RESULT (2026-07-25): every connected cactus whose only cyclic
    blocks are two `C5`s sharing one cut vertex, with arbitrary rooted trees
    attached at every core vertex, satisfies the uniform strict bound
