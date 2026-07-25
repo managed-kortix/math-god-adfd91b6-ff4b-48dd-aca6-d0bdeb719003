@@ -51,4 +51,5 @@ condition that every deleted vertex has a selected deficit-one in-neighbor and
 that none of the witness's old exact second neighbors loses all two-walks after
 the deletion. This mode has been clause-audited, but its selector and deficit
 families still require dedicated exhaustive semantic tests before certificate
-use.
+use. Those tests now cover exact `mu2` linkage through width eight and 3,003
+graph/deletion witness cases through order four.

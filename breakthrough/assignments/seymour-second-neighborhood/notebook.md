@@ -268,3 +268,22 @@ No audits yet.
 - **Next queued attack:** add dedicated exhaustive tests for the new deficit and
   witness selector CNF families, then encode the exact `m=8` five-row normal
   form and the `m=9` isolated-vertex residual as separate certified shards.
+
+## 2026-07-25 — tick 11
+
+- Refactored the production CNF deficit/witness clauses into directly testable
+  helpers. Exhaustive tests now verify exact deficit-bit polarity through unary
+  width eight and the full robust-witness selector semantics on 3,003
+  graph/deletion cases through order four. A low-degree ambiguity in the
+  isolated helper was removed by explicitly requiring degree at least two for
+  deficit two; production graphs already have degree at least eight.
+- Pushed the `m=9` isolated-missing-vertex route through all immediate local
+  gain/loss equations. The equality residual remains incidence-feasible; the
+  missing step is coupling its root predecessor supports to badness of the
+  isolated vertex and the two remainder vertices.
+- Derived the order-18 `m=7` robust-witness normal form with two degree-nine
+  vertices and exact C/missing/incidence budgets; see
+  `attempts/tick11-m7-normal-form.md`.
+- **Next queued attack:** add simultaneous robust-witness constraints for both
+  high vertices to the `m=7` shards, and encode missing-degree shape shards for
+  `m=9` (perfect matching already eliminated, isolated-vertex shapes remain).

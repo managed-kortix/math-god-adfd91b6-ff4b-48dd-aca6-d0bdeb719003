@@ -39,6 +39,31 @@ def threshold(c, inputs, tag):
     return prev
 
 
+def add_mu2_link(c, outs, secs, z):
+    """Link z exactly to deficit two, assuming positive deficit at most two."""
+    n = len(outs) + 1
+    for t in range(2, n):
+        c.add(z, -outs[t-1], secs[t-2])
+    c.add(-z, outs[1])  # intrinsic exactness: deficit two needs d1>=2
+    for t in range(1, n-2):
+        c.add(-z, -secs[t-1], outs[t+1])
+    c.add(-z, -secs[n-3]); c.add(-z, -secs[n-2])
+
+
+def add_witness_for_deleted(c, n, u, a, q, pvar, mu2):
+    witnesses=[]
+    for w in range(n):
+        if w == u: continue
+        z=c.var(f"wit_{w}_{u}"); witnesses.append(z)
+        c.add(-z, a[w][u]); c.add(-z, -mu2[w])
+        for b in range(n):
+            if b in (w,u): continue
+            alternatives=[pvar[w,k,b] for k in range(n)
+                          if k not in (w,u,b)]
+            c.add(-z, -q[w][b], *alternatives)
+    c.add(*witnesses)
+
+
 def generate(n, bsize, missing, robust_witness=False):
     if bsize not in (6, 7):
         raise ValueError("bsize must be 6 or 7")
@@ -84,11 +109,7 @@ def generate(n, bsize, missing, robust_witness=False):
         z = c.var(f"mu2_{i}"); mu2.append(z)
         # z=false forces deficit one; z=true forces deficit at least two.
         # Together with the base deficit-in-{1,2} clauses, z is exact.
-        for t in range(2, n):
-            c.add(z, -outs[t-1], secs[t-2])
-        for t in range(1, n-2):
-            c.add(-z, -secs[t-1], outs[t+1])
-        c.add(-z, -secs[n-3]); c.add(-z, -secs[n-2])
+        add_mu2_link(c, outs, secs, z)
     hs = []
     for i in range(n):
         for j in range(i + 1, n):
@@ -108,17 +129,7 @@ def generate(n, bsize, missing, robust_witness=False):
         # For every deleted vertex u select a tight in-neighbor w such that no
         # old exact second neighbor of w loses all two-walks when u is removed.
         for u in range(n):
-            witnesses=[]
-            for w in range(n):
-                if w == u: continue
-                z=c.var(f"wit_{w}_{u}"); witnesses.append(z)
-                c.add(-z, a[w][u]); c.add(-z, -mu2[w])
-                for b in range(n):
-                    if b in (w,u): continue
-                    alternatives=[pvar[w,k,b] for k in range(n)
-                                  if k not in (w,u,b)]
-                    c.add(-z, -q[w][b], *alternatives)
-            c.add(*witnesses)
+            add_witness_for_deleted(c,n,u,a,q,pvar,mu2)
     return c
 
 
