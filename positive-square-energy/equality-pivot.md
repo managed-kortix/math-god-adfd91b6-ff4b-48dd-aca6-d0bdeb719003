@@ -196,6 +196,82 @@ The genuinely additional restrictions are the unused deletion estimate
 (17), which forces completeness, and then PSD equality (19), which forces
 the complete-block descendant to have rank one.
 
+## Recursive deletion equality gives no contradiction
+
+The equality in the averaged estimate is indeed forced once a 2-connected
+descendant has been shown to be complete, but all of its deletion pairs are
+again equality pairs.  Let the descendant be `K_h` and write its matrix as
+
+`X=c^2 J_h`, where `c=(h-1)/h`.
+
+Then
+
+`S=binom(h,2)c`, `T=h^2c^2`, and `q=(h-1)^2`,
+
+so
+
+`4S^2=h^2(h-1)^2c^2=qT`.
+
+Also `d0=hc^2`, `q-1=h(h-2)`, and the right-hand side of the
+averaged estimate is exactly
+
+```
+(q-1)T+(q-1)d0/(h-2)
+=h(h-2)h^2c^2+h^2c^2
+=h^2(h-1)^2c^2
+=qT.
+```
+
+Thus every inequality used to derive the averaged estimate is tight.  For
+each vertex deletion, put `r=h-1`.  The deletion pair is
+
+`(K_r,c^2J_r)`,
+
+with the same scalar `c`, not the canonical normalization `(r-1)/r`.
+Homogeneity is essential here.  Directly,
+
+`S'=binom(r,2)c`, `T'=r^2c^2`, and `q'=(r-1)^2`,
+
+and hence
+
+`4(S')^2=r^2(r-1)^2c^2=q'T'`.
+
+This recurses down to `K_2`; every nonzero scalar multiple of `J_2` is an
+equality matrix in the base case.  Consequently, recursive equality in all
+deletions supplies no contradiction and no condition beyond the rank-one
+complete-block form already obtained in (19).
+
+In fact, for a connected graph with at least one edge, this calculation
+completes the abstract equality classification for the folded LTZ
+inequality.  For each block `C`, let
+
+`q_C=2|E(C)|-|V(C)|+1`.
+
+Apart from the zero matrix, equality holds precisely when the folded matrix
+has the form
+
+`N=lambda sum_C (q_C/|C|^2) J_{V(C)}`, with `lambda>0`,              (19a)
+
+and every block is either a bridge or a complete graph.  Necessity follows
+recursively: cut-vertex Cauchy equality gives the common ratio
+`T_C/q_C=lambda`; a terminal no-cut descendant must be complete; and its
+flat, threshold, and PSD equalities give
+`N_C=(lambda q_C/|C|^2)J_C`.  Recombining the orthogonal cut decomposition
+adds these embedded block matrices.  Conversely, (19a) is doubly
+nonnegative and
+
+`2S=sqrt(lambda) sum_C q_C=sqrt(lambda)q`,
+
+`T=lambda sum_C q_C=lambda q`,
+
+so `4S^2=qT`.  For a bridge its coefficient is `lambda/4`; for
+`C=K_h` it is `lambda(h-1)^2/h^2`.  The original, not necessarily
+edge-supported matrix `M` is an equality matrix exactly when its LTZ fold
+has this form.  In the spectral normalization used here `lambda=1`, so
+(19a) is exactly the already known global block-atom matrix.  The full
+recursive deletion equality therefore yields no further spectral
+information.
+
 ## The global atom projection and its exact limitation
 
 There is a useful global formulation, but it does not put the individual
