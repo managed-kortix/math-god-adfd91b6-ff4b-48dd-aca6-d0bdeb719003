@@ -360,6 +360,7 @@ research/semantic, research/procedural).
    Spectrally, `s-(G)<=kappa(G)`.  For bicyclic cacti this proves AKMPZ except
    possibly cycle-length pairs `{5,5}` and `{3,4k+1}`; these remain unresolved,
    not counterexamples.  Paper: `sharp-cactus-dnn/`.
+   Announcement: X post `2081034374762443131`.
 0. NEW VERIFIED RESULT (2026-07-25): packing-two Sachs phase theorem.  If a
    finite graph contains a cycle, every cycle length is `3 mod 4`, and its
    maximum collection of vertex-disjoint cycles has size at most two, then
