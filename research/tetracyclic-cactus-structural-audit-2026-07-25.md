@@ -229,3 +229,36 @@ uv run --with sympy python positive-square-energy/experiments/c3_c5_c3_star_limi
 
 This strongly separates massive-star degenerations from the required
 `sqrt(5)-2` packet bound, but does not yet control arbitrary finite trees.
+
+## Exact finite-tree no-go for same-root star replacement
+
+Arbitrary rooted trees cannot be replaced monotonically by stars at the same
+core root, even on these two nine-vertex cores. Compare two added vertices as
+either a rooted path `v-a-b` or two leaves at `v`. Rational Sturm isolation
+certifies:
+
+- distance-one core, root `4`: path `s+=14.58654233221757...`, star
+  `s+=14.66042038302985...`; the path is smaller;
+- distance-two core, root `1`: path `s+=14.53043395747664...`, star
+  `s+=14.63415988640101...`; the path is smaller;
+- at private triangle root `7`, the direction reverses for both cores: the
+  two-leaf star has smaller `s+` than the rooted path.
+
+Thus neither paths nor stars dominate uniformly, and a local Kelmans/flattening
+induction cannot reduce arbitrary trees to stars without retaining root- and
+spectral-scale data. Exact reproduction:
+
+```bash
+uv run --with sympy python positive-square-energy/experiments/c3_c5_c3_tree_shape_no_go.py
+```
+
+At the rooted-message level this is structural. If elimination at root `v`
+writes the core factor as `P_v(t)a+Q_v(t)`, then
+
+`d Arg(a+Q_v/P_v)/da = -Im(Q_v/P_v)/|a+Q_v/P_v|^2`.
+
+The sign of `Im(Q_v/P_v)` depends on the root and can even change with `t`.
+Therefore scalar continued-fraction order alone cannot provide the missing
+finite-tree reduction. A viable proof must use a global integral constraint,
+joint rooted moments, or a PSD witness retaining the discarded tree-core
+correlation.

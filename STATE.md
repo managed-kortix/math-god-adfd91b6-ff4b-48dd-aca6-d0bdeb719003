@@ -16,6 +16,15 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-25: exact same-root tree-shape audit killed a further reduction.
+  On each pentagon-middle `C3-C5-C3` core there are roots where a two-vertex
+  rooted path has smaller `s+` than the same-order two-leaf star, while at a
+  private triangle root the inequality reverses. Rational Sturm intervals
+  certify all four comparisons in `c3_c5_c3_tree_shape_no_go.py`. Hence no
+  fixed-direction, target-monotone same-root star-flattening/Kelmans step
+  controls arbitrary finite trees; the core rooted-message phase orientation depends on both root and
+  spectral scale. The exact massive-star boundary `4-sqrt(5)` remains strong
+  evidence but is not a finite-tree reduction.
 - 2026-07-25: sharpened the tetracyclic no-go frontier with two exact
   certificates. A single pendant leaf on the pentagon-middle `C3-C5-C3` core
   makes the natural bare-`C5` pointwise phase cross-product certificate negative at
