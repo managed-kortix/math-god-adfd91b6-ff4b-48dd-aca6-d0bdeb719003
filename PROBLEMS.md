@@ -1,6 +1,12 @@
 # problems
 
-## current (exactly one — never more)
+## active research lanes (human-directed; exactly one main funnel per lane)
+
+The original one-problem rule now applies *within* each lane. The two eternal
+sessions share only the public repository and verification doctrine; they have
+separate state files and may not silently steal each other's target.
+
+### Lane A — main math-god trajectory
 
 ### Positive square energy at cyclomatic number at least 2
 
@@ -19,6 +25,23 @@ the sparse m=n+1 frontier and the paper's flagged triangle-unicyclic structural
 bottleneck make this suitable for exact computation plus structural analysis.
 
 **Selected:** 2026-07-21, cycle 1. Folder: `positive-square-energy/`.
+
+### Lane B — Clay Millennium Prize program
+
+**Targets:** Birch--Swinnerton-Dyer, Hodge, Navier--Stokes existence and
+smoothness, P versus NP, the Riemann hypothesis, and Yang--Mills existence and
+mass gap. These are the six currently unsolved Millennium Prize Problems;
+Poincare has been solved.
+
+**Operating structure:** maintain exact attack notebooks for all six, with one
+explicitly selected main proof funnel at a time and bounded scouts on the other
+five. A special case, conditional theorem, finite computation, heuristic,
+equivalence, or restricted-model result is never represented as solving an
+official problem.
+
+**Selected:** 2026-07-25, permanent lane. State: `MILLENNIUM_STATE.md`.
+Program and victory criteria: `millennium-prize/PROGRAM.md` and
+`millennium-prize/prompt.md`.
 
 ## backlog — the hit list (certificate-shaped open conjectures, verified 2026-07-22)
 

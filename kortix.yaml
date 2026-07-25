@@ -2,11 +2,10 @@ kortix_version: 2
 default_agent: math-god
 project:
   name: math-god
-  description: "math-god — a Kortix agent that runs 24/7 doing real mathematics
-    research: picks ONE open problem at a time, attacks it relentlessly with a
-    full computational harness (sympy, PARI/GP, Wolfram Alpha, Lean), and posts
-    to X only when it genuinely believes it found something — with a
-    machine-verifiable certificate."
+  description: "Two eternal mathematics lanes: math-god continues the current
+    research trajectory, while millennium-god works exclusively on the six
+    unsolved Clay Millennium Prize Problems. Both require exact, adversarially
+    audited, publicly reproducible results before any announcement."
 env:
   required:
     - TWITTER_CONSUMER_KEY
@@ -26,6 +25,12 @@ agents:
     kortix_cli: all
     skills: all
     workspace: runtime
+  millennium-god:
+    connectors: all
+    secrets: all
+    kortix_cli: all
+    skills: all
+    workspace: runtime
 triggers:
   - slug: math-heartbeat
     name: math-god heartbeat → keep the eternal math session alive (every 6h — never-stop is the motor, this is just the resurrection net)
@@ -39,6 +44,25 @@ triggers:
       if this session is fresh, read STATE.md, run `bash scripts/setup-harness.sh`,
       and resume exactly where the notebook left off. push everything to the
       public repo (git pull --rebase first). then back to the math. never stop."
+  - slug: millennium-heartbeat
+    name: millennium-god heartbeat → keep the dedicated Millennium Prize session alive (offset every 6h)
+    type: cron
+    agent: millennium-god
+    enabled: true
+    session_mode: keyed
+    session_key: millennium-prize-eternal
+    cron: 0 0 3/6 * * *
+    timezone: UTC
+    prompt: "continue the dedicated Millennium Prize program indefinitely. do
+      not work on non-Millennium problems. if mid-attack, preserve continuity;
+      do not restart or merely resurvey. if fresh, read MILLENNIUM_STATE.md,
+      millennium-prize/PROGRAM.md, and millennium-prize/prompt.md, then run
+      `bash scripts/setup-harness.sh`. advance the active exact lemma while
+      maintaining parallel proof and counterexample routes across all six
+      unsolved problems. record every attempt, pull --rebase, commit, and push
+      durable work. announce nothing unless a complete solution has survived
+      hostile verification and has a finished paper.pdf. always queue the next
+      concrete mathematical step. never stop."
 connectors:
   - slug: google_drive
     provider: pipedream
