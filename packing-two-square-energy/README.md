@@ -27,6 +27,10 @@ continuous argument and a Coulson identity then determine the sign of
 - Every connected bicyclic block graph has exactly two triangular blocks
   and satisfies `s+(G) > |E(G)| = n + 1 > s-(G)`. This settles AKMPZ
   Conjecture 1.2 strictly for this class.
+- Every connected tricyclic block graph satisfies `s+(G) > n`.  The only
+  block structures are one `K4`, or three triangles; the packing-three case
+  is split into three induced triangular unicyclic pieces by deleting two
+  bridges.
 - Triangular cacti whose triangles are covered by at most two bouquets have
   `s+ > s-`, including friendship and double friendship constructions.
 - The manuscript proves the structural theta-obstruction lemma rather than

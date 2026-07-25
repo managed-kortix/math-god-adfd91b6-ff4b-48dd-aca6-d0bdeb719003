@@ -345,7 +345,12 @@ research/semantic, research/procedural).
    half-plane and cannot wind.  Coulson then fixes the square-energy sign.
    Consequence: every connected bicyclic block graph has exactly two triangle
    blocks and satisfies `s+>m=n+1>s-`, strictly settling AKMPZ Conjecture 1.2
-   for this class.  Paper: `packing-two-square-energy/`.
+   for this class.  The same paper now proves every connected tricyclic block
+   graph satisfies `s+>n`: its blocks are either one `K4` plus bridges, or
+   three triangles plus bridges.  The `K4` case has fixed negative Sachs
+   imaginary part; three non-disjoint triangles use packing-two; three
+   disjoint triangles split across two bridges into three induced triangular
+   unicyclic graphs.  Paper: `packing-two-square-energy/`.
    The packing threshold is sharp for the fixed-imaginary-sign mechanism: a
    chain of three disjoint triangles has positive imaginary part near zero,
    although its lifted phase remains negative.

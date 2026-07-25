@@ -1706,3 +1706,14 @@ exactly two `K3` blocks and all remaining blocks `K2`.  Thus the theorem gives
 This strictly proves AKMPZ Conjecture 1.2 for bicyclic block graphs with
 arbitrary tree attachments.  Two independent hostile audits and a final paper
 gate passed.  Source and compiled manuscript: `packing-two-square-energy/`.
+
+The same block-cyclomatic classification settles rank three.  A tricyclic
+block graph has either one `K4` block or three `K3` blocks.  For `K4` plus
+trees, singleton cyclic Sachs terms have triangle phase `-2i` and real
+4-cycle phase `-2`, so `Im Psi<0` and `s+>s-`, hence `s+>n+2`.  Three
+triangles with packing at most two are covered by the packing theorem.  If
+the triangles are vertex-disjoint, contract them to three marked vertices in
+the bridge tree, cut two bridges to isolate one mark per component, and apply
+Ning--Zeng to all three induced triangular unicyclic components.  Positive
+square-energy superadditivity gives `s+(G)>n`.  Thus AKMPZ Conjecture 1.2 also
+holds strictly for every tricyclic block graph.

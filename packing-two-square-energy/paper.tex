@@ -99,6 +99,12 @@ Section~\ref{sec:proof} gives a self-contained proof, including the
 required Coulson identity and a careful continuous-argument step.
 Section~\ref{sec:structure} records the cactus structure forced by the
 cycle congruence, and Section~\ref{sec:applications} gives applications.
+We also use the induced-subgraph superadditivity theorem of Akbari, Kumar,
+Mohar, and Pragada~\cite{AKMP}: if $H_1,\ldots,H_r$ are pairwise disjoint
+induced subgraphs of $G$, then
+\begin{equation}\label{eq:superadditivity}
+ s^+(G)\ge\sum_{j=1}^r s^+(H_j).
+\end{equation}
 
 \section{Sachs expansion on the imaginary axis}\label{sec:proof}
 
@@ -340,6 +346,64 @@ and \eqref{eq:sum} says that the average of $s^+$ and $s^-$ is $|E(G)|$.
 The displayed strict inequalities follow.
 \end{proof}
 
+The next application goes one cycle rank farther.  Its packing-three case is
+handled by cutting bridges rather than by extending the half-plane argument:
+three-cycle Sachs terms have the opposite imaginary sign.
+
+\begin{proposition}[Tricyclic block graphs]\label{prop:tricyclic-block}
+Let $G$ be a connected block graph with $n$ vertices and cyclomatic number
+$3$.  Then
+\[
+ s^+(G)>n.
+\]
+Thus Conjecture~1.2 of Akbari--Kumar--Mohar--Pragada--Zhang holds strictly
+for every tricyclic block graph.
+\end{proposition}
+
+\begin{proof}
+As in the proof of Corollary~\ref{cor:block}, the positive contributions of
+clique blocks to the cyclomatic number are $1,3,6,\ldots$.  Hence either $G$
+has one $K_4$ block and all other blocks are bridges, or it has three $K_3$
+blocks and all other blocks are bridges.
+
+Suppose first that the unique cyclic block is $K_4$.  Every cycle lies in
+this block, and no two cycles are vertex-disjoint.  In the normalized Sachs
+expansion, a triangle has phase $q_3=-2\ii$, while a $4$-cycle has real phase
+$q_4=-2$.  Therefore
+\[
+ \operatorname{Im}\Psi_G(t)
+ =-2\sum_{C\subseteq K_4,\ C\cong C_3}Z_{G-V(C)}(t)<0
+ \qquad(t>0).
+\]
+The continuous-argument proof of Theorem~\ref{thm:main} applies verbatim and
+gives $s^+(G)>s^-(G)$.  Since $|E(G)|=n+2$, this yields
+$s^+(G)>n+2$.
+
+Now suppose that the cyclic blocks are three triangles.  If their
+vertex-disjoint packing number is at most two, Theorem~\ref{thm:main}(i)
+again gives $s^+(G)>s^-(G)$ and hence $s^+(G)>n+2$.
+
+It remains that the three triangle blocks are pairwise vertex-disjoint.
+Contract each triangle block to one marked vertex.  Since every remaining
+block is a bridge, the resulting graph is a tree with three distinct marked
+vertices.  Two edges of the minimal subtree joining the marks can be deleted
+so that the resulting three components contain one mark each.  Each selected
+tree edge corresponds to an actual bridge of $G$.  Deleting those two bridges
+therefore partitions $V(G)$ into three sets inducing connected graphs
+$G_1,G_2,G_3$, each with exactly one triangle and otherwise only bridge
+blocks.  Thus each $G_j$ is a triangular unicyclic graph.  Ning and
+Zeng~\cite{NingZeng} give
+\[
+ s^+(G_j)>|V(G_j)|.
+\]
+Applying \eqref{eq:superadditivity} to this induced vertex partition gives
+\[
+ s^+(G)\ge\sum_{j=1}^3s^+(G_j)
+ >\sum_{j=1}^3|V(G_j)|=n.
+\]
+This completes all cases.
+\end{proof}
+
 We next state a convenient cactus family.  A triangular cactus is a
 cactus whose cyclic blocks are triangles.  A bouquet of triangles is a
 set of triangle blocks having a common vertex.  We say that the triangles
@@ -404,6 +468,11 @@ packing number three violates the conclusion.
 S. Akbari, H. Kumar, B. Mohar, S. Pragada, and S. Zhang,
 \emph{Refinement of a conjecture on positive square energy of graphs},
 arXiv:2506.07264, 2025.
+
+\bibitem{AKMP}
+S. Akbari, H. Kumar, B. Mohar, and S. Pragada,
+\emph{A linear lower bound for the square energy of graphs},
+Electron. J. Combin. 32(3) (2025), Paper No. P3.53.
 
 \bibitem{AbiadEtAl}
 A. Abiad, L. de Lima, D. N. Desai, K. Guo, L. Hogben, and J. Madrid,
