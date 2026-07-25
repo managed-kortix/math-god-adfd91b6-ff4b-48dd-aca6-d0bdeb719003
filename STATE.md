@@ -357,6 +357,7 @@ research/semantic, research/procedural).
    proves the pointwise phase majorant `4/(t^4+7t^2+9)`.  Two independent
    hostile audits passed and the paper builds.  Paper: `two-c5-bouquet-trees/`;
    certificate: `positive-square-energy/experiments/c5_bouquet_matching_certificate.py`.
+   Announcement: X post `2081044481143443662`.
 0. NEW VERIFIED RESULT (2026-07-25): exact optimized LTZ DNN constant for
    every connected cactus.  If `b` is the number of bridge blocks and the
    cycle blocks have lengths `ell_j`, then
