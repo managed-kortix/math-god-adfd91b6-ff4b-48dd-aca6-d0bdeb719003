@@ -725,3 +725,24 @@ No audits yet.
   cover with the repaired CLI. On any remaining hard child, split by membership
   of the unique degree-three/four hub in K and by the exact inaccessible
   three-hole packet type, rather than repeating an unchanged timeout.
+
+## 2026-07-26 — tick 36
+
+- Replaced the unreproducible scout-parent bookkeeping with a complete 2,925-key
+  hierarchy for every `rho`, four-hole shape, rooted placement, `kappa`, `eta`,
+  and valid `lambda` value in the entire isolated-root `m=9,k=4` normal form.
+- An exact four-color support enumeration proves 1,785 terminal cells
+  structurally empty at the missing-graph level and leaves 1,140 feasible CNF
+  jobs. The converse construction fills unused cells with hole-isolated
+  vertices, so this filter is complete for missing-graph compatibility.
+- Production and separately implemented subset-based cross-checkers agree
+  byte-for-byte on `experiments/m9-k4-cover.tsv`; this is not an independent
+  derivation of the hierarchy. The key-stream SHA-256 is
+  `51700d5b...b61195`; the ledger SHA-256 is `9e8ebba3...9f1cae`. See
+  `attempts/tick36-k4-cover.md` for the proof and commands.
+- No prior scout UNSAT status is imported. The 1,140 survivors are all `UNRUN`
+  until regenerated with the repaired CLI and independently LRAT-checked.
+- **Next queued attack:** rank the 1,140 surviving cells by shape and
+  `eta/lambda`, rebuild the pinned CaDiCaL 1.7.3 and `lrat-check` toolchain, and
+  run a small certificate-producing pilot across every shape before scheduling
+  the complete content-addressed campaign.
