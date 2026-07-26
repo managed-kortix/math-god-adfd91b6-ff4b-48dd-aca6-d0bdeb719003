@@ -476,3 +476,29 @@ No audits yet.
   compression leaves an exact three-predecessor pattern (when neither hole
   meets `r`) and a hole-supported-r template. Synchronize the two hole endpoint
   identities across the common C-dominators, using arc deletion at `a->b`.
+
+## 2026-07-26 — tick 22
+
+- Human-eliminated the `rho=3,k=2` subcase in which neither T-hole meets `r`;
+  see `attempts/tick22-rho3-two-hole-partial.md`. The surviving human template
+  has a hole incident with `r`; the checked CNF already eliminates it.
+- Rejected an attractive but invalid aggregate inaccessible-incidence proof:
+  with two holes, one target/hole-endpoint mark does not determine the source's
+  closed outneighborhood. This failed route is now recorded explicitly.
+- Began `rho=2`. Its row is `(p,rho,e)=(5,2,3)`, partitioned exactly by
+  `k=0,1,2,3` T-holes. Human lifting eliminates `k=0,1`; the remaining profiles
+  have respectively at least four and five common C-dominators.
+- Added deterministic `experiments/rho2_shards.py` to test the four exact
+  aggregate placements. **Next queued step:** solve and independently check all
+  four shards, then mine the smallest obstruction in `k=2,3` while retaining
+  the human lifting proof for `k=0,1`.
+
+### Rho-2 certification result
+
+- All four exact `rho=2` shards are UNSAT and independently LRAT-verified.
+  Deterministic identities and hashes are recorded in
+  `experiments/rho2-certificates.md`. Thus the entire `rho=2` row is eliminated
+  in the exact minimal-counterexample normal form.
+- **Next queued attack:** emit and check `rho=1` and `rho=0` aggregate shards.
+  In parallel, continue mining compact human obstructions from the high-k
+  rho-2 certificates rather than relying on bulk proofs.
