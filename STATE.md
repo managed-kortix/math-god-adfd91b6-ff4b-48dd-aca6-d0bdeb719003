@@ -16,6 +16,21 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-26: began the pentacyclic cactus extension. The sharp DNN reduction
+  leaves exactly `{3,3,3,3,q}` for every `q>=3` and `{3,3,3,5,5}`. Fully
+  shared residuals are now proved. For `TTTTQ`, either four disjoint triangles
+  are petals on `Q` and `Q` splits into four triangular territories, or a
+  triangle intersection leaves at most three shared cuts on `Q`; opening a
+  private `Q` vertex costs one while a four-triangle packet supplies more than
+  one. For fully shared `TTTPP`, an exact colored incidence-tree census gives
+  40 types (`1,7,18,14` by cut count); ordinary cycle splitting closes 36,
+  two leaf-pentagon openings close three exceptions, and a pentagon-hub interval
+  split closes the fourth. Hostile audits approved both proofs and the exact
+  census. The disconnected residual audit found two coarse gaps, `TTTP|P` and
+  median `TTP|T|P`; entry-sensitive cycle splitting now closes both, and a
+  complete 11/15-partition synthesis reports no remaining mathematical blocker.
+  Research proofs and census are in `research/pentacyclic-*2026-07-26.md` and
+  `research/pentacyclic-tttpp-incidence-census.py`; manuscript assembly is next.
 - 2026-07-25: completed the full tetracyclic cactus theorem: every connected
   tetracyclic cactus satisfies `s+>n`, with arbitrary bridge blocks and
   arbitrary attached trees. After the bridge-separated theorem, the fully
