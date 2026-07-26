@@ -2,7 +2,16 @@
 
 **Date:** 2026-07-26
 
-## Verdict
+## Superseded status
+
+This frontier note is superseded by
+`research/rank-ten-disconnected-structural-cases-2026-07-26.md`. The missing
+`A_9|Q` and entry-locked `T^8P|P` censuses have been built; all 15
+`P|A_8|P` marked residuals and all nine fully shared `T^8PP` residuals have
+exact repairs. The completed census totals are `3624=3618+6`,
+`11689=11586+100+3`, `11689=11674+15`, and `30386=30377+9`.
+
+## Historical verdict
 
 Write
 
@@ -13,7 +22,10 @@ delta=sqrt(5)-2<1/4.
 
 The rank-nine theorem and the rank-uniform router/interface machinery reduce
 the connected rank-ten problem to a finite list, but they do not yet prove the
-rank-ten theorem.
+rank-ten theorem. A subsequent exact marked census now closes the entire
+`T^9Q` residual family, including the disconnected `A_9|Q` endpoint and all
+three hostile fully shared exceptions; see
+`research/rank-ten-t9q-template-closure-proof-2026-07-26.md`.
 
 The exact sharp-DNN residuals are
 
@@ -29,19 +41,21 @@ T^8P_0 | P_1,
 P_0 | A_8 | P_1.                                      (2)
 ```
 
-The third kernel has now been enumerated exactly at the abstract marked-
-incidence level. Its rank-nine router automaton accepts `11674` of `11689`
+The first kernel is now closed by the exact `3624=3618+6` marked-entry
+certificate and explicit repairs. The third kernel has been enumerated exactly
+at the abstract marked-incidence level. Its rank-nine router automaton accepts `11674` of `11689`
 canonical marked classes and leaves `15` new interface residuals. Promoting
 those accepted rows to graph certificates uses the proved local interface
-theorem and still requires a final connector/owner audit. The first two
-kernels have not yet received their
-required marked-interface censuses. On the fully shared side, the ordinary
+theorem and still requires a final connector/owner audit. The required marked-
+interface census remains missing only for the second kernel. On the fully
+shared side, the ordinary
 split census leaves at most three `T^9Q` types, all of which close by existing
 one-pivot machinery, and nine `T^8PP` types, of which two immediate scalar
 repairs are recorded below. Seven fully shared two-pentagon replacement rows
 remain to be certified.
 
-Thus the exact status is **reduced, finite, and still open**. No rank-ten
+Thus the exact status is **reduced, finite, and still open**, but `T^9Q` is
+complete and all remaining obligations lie in `T^8PP`. No rank-ten
 theorem is claimed in this note.
 
 ## 1. DNN reduction
@@ -98,11 +112,13 @@ cannot pay a hostile unicyclic deficit. This is a genuine one-interface
 kernel, not a gap that the rank-nine theorem alone removes.
 
 Its cyclic-hull entry may be a shared cut or an actual private triangle
-vertex. The required next certificate is therefore a marked one-interface
-census on all nine-triangle incidence trees, followed by router repairs of its
-locked rows. The common-cut bouquet is already analytically harmless by the
-packing-one hostile-cycle theorem, but the nonbouquet marked rows have not yet
-been exhaustively certified.
+vertex. The exact marked one-interface census now has 3624 canonical rows:
+3618 close by verified triangle routers and six close explicitly. The latter
+are two common-cut bouquet entry orbits and four entry orbits on one two-cut
+saturated extension. They close by packing one, one `TQ+A_8` split, and three
+leaf openings followed by packing one with margin `>7-delta_q`. Thus
+`(D10-Q)` is complete for arbitrary hostile `Q`, connector
+lengths, entries, and tree attachments.
 
 ### `T^8PP`
 
@@ -175,9 +191,13 @@ two-cut shape:
   private/private profiles 4+1.
 ```
 
-This is the first genuinely new rank-ten interface kernel. The fifteen rows
-need explicit connector ownership and packet repairs; a zero router score is
-not evidence of a nonpositive graph.
+This is the first genuinely new rank-ten interface kernel. The fifteen rows now
+have explicit connector ownership and packet repairs in
+`research/rank-ten-a8-two-interface-residuals-2026-07-26.md`. They use direct
+`TP`/`PP` packetizations, common-cut and packing-one terminals, and opening
+repairs; the smallest radical lower bound is `2-2delta>0` (with one strict-zero
+`A_7+PP` ledger). This resolves only this
+finite residual table and is not a rank-ten theorem claim.
 
 The reproducer is `research/rank-ten-a8-two-interface-census.py`. Its frozen
 digests are
@@ -301,17 +321,17 @@ The connected rank-ten theorem will follow from the established lower-rank and
 analytic inputs once all of the following finite obligations are discharged:
 
 ```text
-R10-1  marked one-interface A_9|Q census and all residual repairs;
+R10-1  CLOSED: marked one-interface A_9|Q census and all residual repairs;
 R10-2  marked entry-locked T^8P|P census and all residual repairs;
-R10-3  explicit repairs for the 15 P|A_8|P marked residuals;
+R10-3  explicit repairs for the 15 P|A_8|P marked residuals [complete];
 R10-4  exact replacement certificates for the seven unrepaired fully
        shared T^8PP rows;
 R10-5  final graph-level exhaustion and ownership audit.
 ```
 
-`T^9Q` is complete on the fully shared side. `T^8PP` is not. The disconnected
-side is reduced to (2), but none of its three endpoint families should be
-called complete until `R10-1`--`R10-3` are certified. In particular, the open
+`T^9Q` is complete on both the fully shared and disconnected sides. `T^8PP` is
+not. Its disconnected side is reduced to the last two families in (2), which
+should not be called complete until `R10-2`--`R10-3` are certified. In particular, the open
 two-pivot winding theorem is neither proved nor needed by the present plan;
 every proposed closure must use finite routers, scalar common-cut packets,
 packing one, or an explicit cycle opening with its exact tree cost.

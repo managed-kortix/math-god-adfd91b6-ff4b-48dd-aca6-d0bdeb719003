@@ -289,3 +289,12 @@ already fails at rank one because its terminal list omits the proved connected
 defect, but the amended all-rank pruning assertion remains open. The finite
 state theorem therefore abstracts and verifies the existing resolutions but
 does not replace the two exhaustive censuses.
+
+**Further correction.** Adding `TP`, `PP`, and `TPP` terminals alone still
+does not close the induction. A rank-two marked obstruction consists of two
+triangles sharing one cut, with both distinct private interfaces on one of the
+triangles. The only standard split separates the two demands and leaves state
+`(2,2,0,1)`; the unsplit profile is `TTPP`. A nonstandard two-interval split
+would coalesce the demands into `PP+T`, exposing the missing local transition.
+The exact proof and minimality argument are in
+`research/bounded-demand-separator-next-obstruction-2026-07-26.md`.

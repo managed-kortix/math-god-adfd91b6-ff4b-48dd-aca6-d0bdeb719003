@@ -16,6 +16,30 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+
+- 2026-07-26: completed every rank-ten cactus structural residual. New exact
+  marked censuses close `A_9|Q` as `3624=3618+6` and entry-locked `T^8P|P` as
+  `11689=11586+100+3`; the existing `P|A_8|P` census now has graph-level
+  closure `11689=11674+15`. All nine fully shared `T^8PP` rows close, giving
+  `30386=30377+9`; fully shared `T^9Q` was already complete. Final-owner,
+  exact-ledger, arbitrary-connector, and arbitrary-tree audits pass. With the
+  rank-nine theorem and established scalar/packing-one inputs, every connected
+  rank-ten cactus has positive square energy. See
+  `research/rank-ten-disconnected-structural-cases-2026-07-26.md`. The complete
+  theorem synthesis and exact colored partition audit are
+  `research/rank-ten-cactus-complete-synthesis-2026-07-26.md` and
+  `research/rank-ten-cactus-residual-partition-audit.py`.
+- 2026-07-26: closed every rank-ten `T^9Q` residual template. The exact marked
+  `A_9|Q` census has 355 unmarked incidences, 6745 raw entries, and 3624
+  canonical rows: 3618 finite-router certificates plus six explicit repairs
+  (two bouquet entry orbits and four orbits on one saturated extension). An
+  independent hostile fully shared audit reproduces 8011/8049 universes and
+  closes all three exceptions by common cut, packing one, and leaf opening.
+  The proof is uniform over arbitrary hostile `Q`, connectors, and tree
+  attachments. Verifier and proof note:
+  `research/rank-ten-t9q-template-closure-verifier.py` and
+  `research/rank-ten-t9q-template-closure-proof-2026-07-26.md`. Rank ten remains
+  open only on `T^8PP` obligations.
 - 2026-07-26: attacked connected rank-ten cacti using the rank-nine theorem
   and rank-uniform router/interface machinery. Sharp DNN leaves exactly
   `T^9Q` and `T^8PP`; lower-rank pruning reduces disconnected cases to
