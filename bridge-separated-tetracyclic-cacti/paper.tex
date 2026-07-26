@@ -1,0 +1,344 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\spE}{s^+}
+\newcommand{\sig}{\sigma}
+
+\title{Positive Square Energy of Bridge-Separated Tetracyclic Cacti}
+\author{}
+\date{25 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $G$ be a connected tetracyclic cactus of order $n$.  We prove
+$s^+(G)>n$ whenever its four cyclic blocks do not all belong to one connected
+shared-cut cluster.  The sharp block-additive doubly nonnegative bound reduces
+the problem to cycle multisets $\{3,3,3,q\}$ and
+$\{3,3,5,5\}$.  We settle every bridge-separated incidence by adaptive
+induced packetization.  Two apparent obstructions disappear only after one
+allows a hostile cycle to be sacrificed into path fragments: a shared
+$C_3-C_5-C_3$ cluster plus a remote pentagon, and a shared three-triangle
+cluster plus a remote $1\pmod4$ cycle.  Arbitrary connector trees and arbitrary
+trees attached at arbitrary vertices are allowed.  The case in which all four
+cycles form one shared-cut cluster is not asserted here.
+\end{abstract}
+
+\section{Preliminaries}
+
+All graphs are finite, simple, and undirected.  If the adjacency eigenvalues
+are $\lambda_1,\ldots,\lambda_n$, put
+\[
+ \spE(G)=\sum_{\lambda_j>0}\lambda_j^2,
+ \qquad \sig(G)=\spE(G)-|V(G)|.
+\]
+We use induced-subgraph superadditivity~\cite{AKMP}: for every vertex partition
+$V(G)=V_1\dot\cup\cdots\dot\cup V_k$,
+\begin{equation}\label{eq:super}
+ \spE(G)\geq\sum_{j=1}^k\spE(G[V_j]).
+\end{equation}
+
+Join two cyclic blocks in the \emph{shared-cut graph} when they share a cut
+vertex, and call its connected components shared-cut clusters.  In the
+block-cut tree, contract the incidence subtree belonging to each shared-cut
+cluster to one marked node; every cluster, including every singleton cyclic
+block, is marked.  Take the minimal subtree spanning these marked nodes and
+suppress only unmarked degree-two nodes.  No marked node is ever suppressed.
+The resulting tree is the reduced cluster tree.  Consequently the interior of
+every reduced edge contains only bridge blocks and unmarked cut nodes, never an
+unassigned cyclic block.
+
+\begin{lemma}[Connector territories]\label{lem:territories}
+Let $S_1,\ldots,S_k$ be pairwise vertex-disjoint connected subtrees of the
+reduced cluster tree such that every marked cluster node belongs to exactly one
+$S_i$.  Then there is a vertex partition into connected induced territories
+such that the territory corresponding to $S_i$ retains exactly the cyclic
+blocks in the clusters marked in $S_i$.
+\end{lemma}
+
+\begin{proof}
+Every reduced edge represents a path whose block nodes are all bridge blocks in
+the block-cut tree; this follows from the preceding convention that every
+shared-cut cluster, including a singleton cycle, is a nonsuppressed marked
+node.
+Assign the internal vertices of each selected connector path to its selected
+subtree.  Between two selected subtrees, cut one actual bridge on their joining
+path and assign the two remnants to their respective sides.  At an unmarked
+Steiner node, assign the node and its initial path segments to one selected
+subtree and cut one bridge on every other incident segment.  Every component
+outside the minimal cyclic hull meets it at a unique vertex, since two
+attachments would create a cycle in the block-cut tree; assign that entire
+hanging tree to the territory containing its attachment.  The resulting sets
+are connected.  Their induced subgraphs retain precisely the assigned cycles.
+\end{proof}
+
+We will also split a cyclic block by assigning a proper path of it to each of
+two territories.  Crossing edges are harmless in \eqref{eq:super}.
+
+We quote the following previously proved packet estimates
+\cite{Bicyclic,Tricyclic}.  Each permits
+arbitrary tree attachments; the mixed bound permits arbitrary incidence and
+connectors, while \eqref{eq:pack4} and \eqref{eq:pack5} have their displayed
+shared-cut hypotheses.  Write $T=C_3$,
+$P=C_5$, and, for $q\equiv1\pmod4$,
+\[
+ \delta_q=\sec(\pi/q)-1<1,
+ \qquad \delta_5=\sqrt5-2.
+\]
+Then
+\begin{align}
+ \sig(T)&>0, & \sig(C_q)&\geq-\delta_q,\label{eq:pack1}\\
+ \sig(TT)&>1, & \sig(TC_q)&>1-\delta_q,\label{eq:pack2}\\
+ \sig(H)&\geq0 &&\text{for every bicyclic or tricyclic cactus }H,\label{eq:pack3}\\
+ \sig(TTC_q)&>2-\delta_q
+ &&\text{if the two triangles share a cut vertex},\label{eq:pack4}\\
+ \sig(TPP)&>6-2\sqrt5
+ &&\text{if the three cycles form one shared-cut cluster}.\label{eq:pack5}
+\end{align}
+If every cycle is $3\pmod4$ and the cycle-packing number is at most two,
+the Sachs half-plane theorem~\cite{PackingTwo} gives $D=s^+-s^->0$.  Thus a connected
+$r$-cyclic such cactus has
+\begin{equation}\label{eq:favorable}
+ \sig(G)>r-1.
+\end{equation}
+These results are proved in the companion manuscripts on all bicyclic and all
+tricyclic cacti.
+
+\section{The exact residual reduction}
+
+For a cactus with bridge-block count $b$ and cycle lengths
+$\ell_1,\ldots,\ell_4$, block counting gives
+\[
+ b+\sum_{j=1}^4\ell_j=n+3.
+\]
+The sharp cactus DNN constant~\cite{DNN,LTZ} implies
+\begin{equation}\label{eq:dnn}
+ \spE(G)-n\geq3-\sum_{j=1}^4\epsilon_{\ell_j},
+\end{equation}
+where $\epsilon_\ell=0$ for even $\ell$ and
+$\epsilon_\ell=\ell\tan^2(\pi/(2\ell))$ for odd $\ell$.  Moreover
+\[
+ \epsilon_3=1,\qquad \epsilon_5=5-2\sqrt5,
+ \qquad \epsilon_5+\epsilon_7<1,
+\]
+and $\epsilon_\ell$ strictly decreases through odd lengths.  Hence
+\eqref{eq:dnn} proves the theorem unless the cycle multiset is
+\begin{equation}\label{eq:residual}
+ \{3,3,3,q\}\quad(q\geq3),
+ \qquad\text{or}\qquad \{3,3,5,5\}.
+\end{equation}
+
+\section{Three triangles and one further cycle}
+
+\begin{proposition}\label{prop:333q}
+Let the cyclic blocks of $G$ have lengths $3,3,3,q$, where $q\geq3$.  If
+the shared-cut graph is disconnected, then $\spE(G)>n$.
+\end{proposition}
+
+\begin{proof}
+If $q$ is even, take the shared-cut clusters as induced territories using
+Lemma~\ref{lem:territories}.  The territory containing the even cycle is at
+most tricyclic and has nonnegative surplus by \eqref{eq:pack3} (and is
+bipartite with zero surplus if it contains no triangle).  Since the shared-cut
+graph is disconnected, another territory contains one, two, or three
+triangles.  Its cycle-packing number is at most two, so its surplus is strictly
+positive by \eqref{eq:favorable}.  Every remaining territory has nonnegative
+surplus.  Equation~\eqref{eq:super} proves the claim.
+
+If $q\equiv3\pmod4$, partition along the bridge connectors between shared-cut
+clusters.  Every territory contains only favorable cycles and has cycle
+packing at most two within each nontrivial cluster; singleton territories are
+favorable unicyclic cacti.  Equations \eqref{eq:favorable} and
+\eqref{eq:super} give the result.
+
+Suppose $q\equiv1\pmod4$, and denote its block by $Q$.  Up to permutation of
+the triangles, the shared-cut component partitions are
+\[
+ T|T|T|Q,\quad TT|T|Q,\quad TQ|T|T,
+ \quad TTT|Q,\quad TT|TQ,\quad TTQ|T.
+\]
+We treat them in turn.
+
+For $T|T|T|Q$, choose a triangle whose marked node has minimum distance from
+$Q$ in the reduced cluster tree.  The unique $Q$--$T$ path then contains no
+other marked node.  Use this path as one connected subtree and the other two
+triangle nodes as singleton subtrees; Lemma~\ref{lem:territories} realizes the
+territories even when the path passes through an unmarked Steiner node.  By
+\eqref{eq:pack1}--\eqref{eq:pack2}, the total surplus is
+strictly greater than $1-\delta_q>0$.  The same direct accounting settles
+$TQ|T|T$.  The partition $TT|TQ$ has surplus greater than
+$1+(1-\delta_q)>0$.
+
+For $TT|T|Q$, call the three marked nodes $A=TT$, $B=T$, and $C=Q$.  If the
+$B$--$C$ path avoids $A$, Lemma~\ref{lem:territories} gives a $TQ$ packet and
+a separate $TT$ packet.  Otherwise $A$ lies on that path; the connected
+$A$--$C$ subtree gives a $TTQ$ packet separated from $B$.  The resulting
+$TTQ$ territory retains the shared pair of triangles, so
+\eqref{eq:pack4}, together with the remaining triangular packet, gives total
+surplus greater than $2-\delta_q>0$.
+
+For $TTQ|T$, the tricyclic territory has nonnegative surplus by
+\eqref{eq:pack3}, and the singleton triangle has strictly positive surplus.
+
+It remains to treat $TTT|Q$.  Let $w\in V(Q)$ be the vertex through which the
+block-tree route from $Q$ to the triangular cluster leaves $Q$.  Choose
+$v\in V(Q)\setminus\{w\}$.  Let $F$ consist of $v$ together with every
+component of $G-E(Q)$ attached to $Q$ only at $v$, and put all other vertices
+into $H$.  The graph $Q-v$ is a path containing $w$, so $H$ is
+connected; its only cycles are the three triangles in one shared-cut cluster.
+Thus its cycle-packing number is at most two and
+\[
+ \spE(H)>|H|+2
+\]
+by \eqref{eq:favorable}.  Since $F$ is a tree,
+$\spE(F)=|F|-1$.  Therefore
+\[
+ \spE(G)\geq\spE(H)+\spE(F)>|H|+2+|F|-1=n+1.
+\]
+All component partitions have now been covered.
+\end{proof}
+
+\section{Two triangles and two pentagons}
+
+The only delicate packetization is recorded separately.
+
+\begin{lemma}[Middle-pentagon sacrifice]\label{lem:sacrifice}
+Suppose one shared-cut cluster consists of a pentagon $P$ and two disjoint
+triangles $T_1,T_2$ meeting $P$ at distinct vertices $x_1,x_2$.  Suppose a
+second pentagon $Q$ is bridge-separated from this cluster.  Then the vertices
+can be partitioned into connected induced territories which are either
+\begin{enumerate}
+\item a $TT$ bicyclic cactus and a pentagonal unicyclic cactus, or
+\item a triangular unicyclic cactus and a $TP$ bicyclic cactus.
+\end{enumerate}
+In either case $\spE(G)>n$.
+\end{lemma}
+
+\begin{proof}
+Let $z$ be the first vertex of the shared cluster met by the unique block-tree
+route from $Q$.  Include $Q$, its entire connector, and all branches hanging
+from that connector on the $Q$ side.
+
+If $z\in V(P)\setminus\{x_1,x_2\}$, put $z$ with $Q$ and put
+$P-z$ together with both triangles on the other side.  The latter is connected
+because $P-z$ is a path containing $x_1,x_2$.  The two induced territories
+have cycle multisets $\{Q\}$ and $\{T_1,T_2\}$, respectively.  Hence their surplus sum is
+strictly greater than $-\delta_5+1=3-\sqrt5>0$.
+
+Otherwise $z$ lies on one triangle, say $T_1$; this includes $z=x_1$ (which
+also lies on $P$) and a
+connector entering through any branch rooted on $T_1$.  Put all of $T_1$, the
+connector, and $Q$ on one side.  Put $P-x_1$ and $T_2$ on
+the other side.  The first induced territory is a mixed $TP$ bicyclic cactus;
+the second is triangular unicyclic because $P-x_1$ is a path containing
+$x_2$.  Their surplus sum is strictly greater than $1-\delta_5>0$.  The case
+in which the route enters through $T_2$ is symmetric.
+
+Every remaining bridge-tree component meets this retained skeleton at only one
+vertex; otherwise the block-cut graph would contain a cycle.  Assign it wholly
+to the territory containing that attachment.  Thus both territories remain
+connected and induced.  In all cases the middle pentagon is deliberately
+split into proper path fragments, so it creates no uncounted cycle.
+\end{proof}
+
+\begin{proposition}\label{prop:3355}
+Let the cyclic blocks of $G$ have lengths $3,3,5,5$.  If the shared-cut graph
+is disconnected, then $\spE(G)>n$.
+\end{proposition}
+
+\begin{proof}
+Write again $T=C_3$ and $P=C_5$.  Up to equal-cycle permutation, the possible
+shared-cut component partitions are
+\[
+ TTP|P,\quad TPP|T,\quad TT|PP,\quad TP|TP,
+ \quad TT|P|P,\quad PP|T|T,\quad TP|T|P,
+ \quad T|T|P|P.
+\]
+
+For $TPP|T$, use \eqref{eq:pack5} and the strict triangular surplus.  For
+$TT|PP$ and $TP|TP$, the packet sums are respectively greater than $1$ and
+$2(1-\delta_5)$.  For the three-cluster partitions, direct cluster territories
+give
+\begin{align*}
+ TT|P|P &: &\sig(G)&>1-2\delta_5=5-2\sqrt5>0,\\
+ PP|T|T &: &\sig(G)&>0,\\
+ TP|T|P &: &\sig(G)&>1-2\delta_5>0.
+\end{align*}
+
+For $T|T|P|P$, consider the reduced tree spanning the four cycle nodes.  If a
+triangle is a leaf, cut its first bridge: the triangular packet has positive
+surplus and the remaining tricyclic cactus has nonnegative surplus.  If neither
+triangle is a leaf, the only leaves are the two pentagons.  A finite tree with
+exactly two leaves is a path, so the cycle order is $P-T-T-P$.  Cut between the
+triangles to obtain two induced $TP$ bicyclic territories, whose total surplus
+is greater than $2(1-\delta_5)>0$.
+
+Finally consider $TTP|P$.  If the two triangles in the triple cluster share a
+cut vertex, \eqref{eq:pack4} gives total surplus greater than
+$2-2\delta_5>0$.  Otherwise the shared-cut incidence tree is necessarily
+$T-P-T$, with the pentagon in the middle and distinct triangle cuts.  This is
+exactly Lemma~\ref{lem:sacrifice}.  The enumeration is exhaustive.
+\end{proof}
+
+\section{Main theorem}
+
+\begin{theorem}\label{thm:main}
+Let $G$ be a connected tetracyclic cactus on $n$ vertices.  If its four cyclic
+blocks do not all belong to one connected shared-cut cluster, then
+\[
+ \boxed{\spE(G)>n}.
+\]
+\end{theorem}
+
+\begin{proof}
+The DNN estimate \eqref{eq:dnn} settles every cycle multiset except
+\eqref{eq:residual}.  Proposition~\ref{prop:333q} settles the first residual
+family and Proposition~\ref{prop:3355} settles the second.  Every construction
+uses vertex-disjoint induced territories, so arbitrary crossing bridge edges
+are discarded only through the valid superadditivity inequality
+\eqref{eq:super}; no edge-monotonicity is used.
+\end{proof}
+
+\section{Scope}
+
+The theorem does not cover a tetracyclic cactus in which all four cycles form
+one connected shared-cut cluster.  In particular, it does not claim the full
+tetracyclic-cactus case.  An exact repository census finds twenty
+quotient-isomorphism types for the shared $\{3,3,5,5\}$ residual, and the
+direct coefficientwise two-pentagon phase certificate succeeds for only one;
+see \texttt{research/c3-c3-c5-c5-shared-cluster-census-2026-07-25.md}.
+The other cases remain unresolved by that certificate.
+
+\begin{thebibliography}{9}
+\bibitem{AKMP}
+S.~Akbari, H.~Kumar, B.~Mohar, and S.~Pragada,
+\emph{A linear lower bound for the square energy of graphs},
+Electron. J. Combin. 32(3) (2025), P3.53.
+\bibitem{AKMPZ}
+S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and S.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264, 2025.
+\bibitem{Bicyclic}
+Companion manuscript, \emph{Positive Square Energy of Every Bicyclic Cactus},
+repository path \texttt{all-bicyclic-cacti/paper.tex}.
+\bibitem{Tricyclic}
+Companion manuscript, \emph{Positive Square Energy of Every Tricyclic Cactus},
+repository path \texttt{all-tricyclic-cacti/paper.tex}.
+\bibitem{DNN}
+Companion manuscript, \emph{The Optimized Liu--Tang--Zhang Constant for Cactus
+Graphs}, repository path \texttt{sharp-cactus-dnn/paper.tex}.
+\bibitem{PackingTwo}
+Companion manuscript, \emph{Square Energy from Cycle Packing and Block-Graph
+Territories}, repository path \texttt{packing-two-square-energy/paper.tex}.
+\bibitem{LTZ}
+Y.~Liu, Q.~Tang, and S.~Zhang,
+\emph{The positive and negative square-energy conjecture},
+arXiv:2607.18031, 2026.
+\end{thebibliography}
+\end{document}

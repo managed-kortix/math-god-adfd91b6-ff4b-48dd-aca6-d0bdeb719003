@@ -63,20 +63,25 @@ These combinatorial classifications are valid, but they do not by themselves
 produce vertex-disjoint induced cyclic packets: two blocks sharing a cut vertex
 cannot both retain that vertex in a vertex partition.
 
-## What bridge packet accounting leaves open
+## Bridge packet accounting: later resolution
 
-Bridge cuts do yield genuine induced territories. Most cluster-tree splits are
-settled by the surplus ledger, but the following cannot be certified from the
-existing quantitative bounds alone:
+The initial audit identified the following apparent gaps when one insists on
+using the shared-cut clusters themselves as packets:
 
 1. fully bridge-separated `{3}|{3}|{3}|{q}` for `q=1 mod 4`;
 2. fully bridge-separated `{3}|{3}|{5}|{5}`;
 3. a connected shared `{3,3,5}` cluster in which the pentagon meets two
    disjoint triangles at distinct cuts, plus a bridge-separated `C5` packet.
 
-In (1) and (2), singleton triangle surpluses can tend to zero while singleton
-hostile cycles retain fixed deficits. In (3), the all-tricyclic theorem supplies
-only `sigma({3,3,5})>0`, not the needed uniform `sqrt(5)-2`.
+These are now closed by adaptive induced packetization in
+`bridge-separated-tetracyclic-cacti/paper.tex`. In (1), merge the hostile
+`q`-cycle with a neighboring triangle, except for `TTT|Q`, where deleting one
+non-connector vertex of `Q` leaves a favorable tricyclic packet plus a tree and
+gains one unit. In (2), a leaf-triangle cut or the forced reduced-tree order
+`P-T-T-P` closes the case. In (3), split the middle pentagon at an appropriate
+vertex: the resulting territories are either `TT` plus `P`, or `T` plus `TP`.
+Thus every disconnected shared-cut residual is proved. The remaining
+tetracyclic frontier consists only of one connected shared-cut cluster.
 
 The fully shared `{3,3,5,5}` phase route also remains open: there are 20
 quotient-isomorphism types, and the naive two-pentagon comparison polynomial is

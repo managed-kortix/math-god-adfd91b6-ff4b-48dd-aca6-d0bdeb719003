@@ -16,6 +16,18 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-25: proved every connected tetracyclic cactus whose four cyclic
+  blocks do not all lie in one shared-cut cluster satisfies `s+>n`. The sharp
+  DNN reduction leaves `{3,3,3,q}` and `{3,3,5,5}`. Adaptive induced
+  packetization closes all disconnected-cluster incidences: hostile singleton
+  cycles are paired with favorable triangles, while the two genuine-looking
+  obstructions are resolved by sacrificing a cycle into path fragments.
+  For `TTT|Q`, remove a non-connector vertex of `Q`, leaving a favorable
+  tricyclic packet plus a tree; for pentagon-middle `TTP|P`, split the middle
+  pentagon to obtain either `TT+P` or `T+TP`. Multiple hostile audits checked
+  arbitrary connector entries, hanging trees, inducedness, and all cluster
+  partitions. Manuscript: `bridge-separated-tetracyclic-cacti/paper.tex`.
+  Only fully shared four-cycle clusters remain.
 - 2026-07-25: exact same-root tree-shape audit killed a further reduction.
   On each pentagon-middle `C3-C5-C3` core there are roots where a two-vertex
   rooted path has smaller `s+` than the same-order two-leaf star, while at a
