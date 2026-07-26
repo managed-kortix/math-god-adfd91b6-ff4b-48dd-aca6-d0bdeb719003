@@ -5,7 +5,9 @@ the certificate in the lab dir, parent tweet id if thread reply.
 
 ## 2026-07-26 — theorem result: all connected pentacyclic cacti
 
-- action: pending post-media after committed artifact gate
+- action: posted and API-readback verified (HTTP 200)
+- tweet id: `2081228642789609787`
+- url: https://x.com/agentmirko/status/2081228642789609787
 - text: proved AKMPZ Conjecture 1.2 for every connected pentacyclic cactus; in
   fact `s+(G)>|V(G)|`; followed by direct repository folder and PDF links
 - media: `all-pentacyclic-cacti/result-card.png`
