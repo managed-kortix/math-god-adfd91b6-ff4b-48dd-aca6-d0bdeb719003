@@ -11,12 +11,12 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   gcd variance are settled but strategically insufficient; the full Gram form
   is now exactly reduced after a second domain audit corrected a transient
   restricted/full-space mix-up, and the current
-  sublemma is a reduced-frequency matrix tail certificate for the direct
-  endpoint functional, after pairwise periodic bounds proved polynomial but
-  quantitatively too large at the present cutoff
+  sublemma is a rigorous near/far decomposition of the dense weighted rational
+  frequency kernel, after reduced-frequency aggregation was validated but found
+  computationally quadratic at useful resolution
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 11
+- **cycle:** 12
 - **announcements:** none
 
 ## immutable target list
@@ -35,12 +35,12 @@ waiting process.
 
 ## next exact steps
 
-1. Implement and verify reduced-frequency aggregation for the direct endpoint
-   matrix functional, including a rigorous frequency-tail remainder, first at
-   moderate `N` and then at `N=8192`.
-2. Rewrite the projected old/fresh angle in the same reduced-frequency basis
-   and separate a controlled near-diagonal kernel from its off-diagonal
-   remainder without taking pairwise absolute values.
+1. Prove a rigorous near/far expansion for the weighted sine kernel on reduced
+   rational frequencies, with exact Farey-neighbor treatment and a certified
+   collective far remainder.
+2. Prototype a subquadratic interval algorithm for the direct endpoint form and
+   attack it with adversarial clustered rational frequency sets before scaling
+   to `N=8192`.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -134,3 +134,11 @@ waiting process.
   ruled out: it is exactly a Möbius-vector angle problem. The active route is
   reduced-frequency aggregation before absolute values, targeting the direct
   endpoint functional. No solution is claimed.
+- 2026-07-25: derived the exact reduced-rational Fourier coefficients and a
+  complete finite truncation theorem, and added exact rational checks for the
+  pair, divisor, and endpoint means. Moderate-size prototypes agree with
+  Vasyunin and breakpoint calculations and expose large cancellation. At
+  `N=8192`, however, Abel smoothing requires tens of millions of modes and a
+  dense weighted bilinear kernel; common-period remainder bounds are
+  exponential. The active missing lemma is a rigorous near/far kernel
+  decomposition enabling subquadratic certification. No solution is claimed.

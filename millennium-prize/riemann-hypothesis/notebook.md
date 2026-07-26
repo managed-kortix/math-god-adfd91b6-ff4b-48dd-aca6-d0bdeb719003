@@ -1418,3 +1418,109 @@ which equals `(P_N-P_(2N))/alpha` and avoids separately dividing to form
 `q,Theta`. Once validated, scale the certificate to `N=8192`. In parallel,
 formulate the projected old/fresh angle as a reduced-frequency bilinear form
 and isolate the near-diagonal positive kernel from the off-diagonal remainder.
+
+## Tick 13 — reduced-frequency theorem, validation, and scalability obstruction
+
+For
+
+\[
+g_u(t)=m_u+\sum_{a\le M}u_a\beta_a(t),
+\qquad U_q=\sum_{j\le M/q}u_{qj}/j,
+\]
+
+the Fourier coefficient at a nonzero reduced rational frequency `p/q` is
+
+\[
+\boxed{\widehat g_u(p/q)=-U_q/(2\pi i p).}
+\]
+
+This is the exact aggregation point: all divisibility representations of one
+rational frequency are combined before any absolute value. If `L` is a common
+period and `c_u(k)` are the coefficients on `k/L`, then the product coefficient
+
+\[
+\boxed{H(k)=\sum_jc_u(j)c_v(k-j)}
+\]
+
+is absolutely convergent for each fixed output `k` by `ell^2` Cauchy--Schwarz.
+The zero output is removed as the exact gcd/divisor mean. For nonzero outputs,
+the mean-zero product primitive has coefficients `L H(k)/(2 pi i k)`.
+
+The script `verify_reduced_mean.py` checks with exact rational arithmetic:
+
+1. the pair correlation `(a,b)^2/(12ab)` by direct piecewise integration;
+2. equality of the gcd and Jordan-totient divisor forms for arbitrary rational
+   coefficient vectors;
+3. the direct endpoint-functional mean
+   `2mn-alpha n^2 + (1/12) sum rho(s)(2U_sD_s-alpha D_s^2)`.
+
+### Rigorous finite truncation
+
+For a periodic product of bounded variation, output coefficients satisfy
+`|H(k)|<=Var/(2 pi |k|)`. Hence the primitive output tail after `K` is at most
+
+\[
+\boxed{L\,Var/(2\pi^2K).}
+\]
+
+Finite input convolution can also be enclosed: for retained outputs
+`|k|<=K`, truncate the input index at `J>K` and bound the omitted Diophantine
+fiber using the `1/|j|` variation bounds. This is a mathematically complete
+certificate after duplicate-frequency aggregation. It correctly handles the
+fact that arbitrarily high input harmonics contribute to a fixed low output.
+
+However, its common-period factor `L=lcm(1,...,M)` is exponential and destroys
+scalability. The theorem validates the method but does not yield the desired
+polynomial `N=8192` certificate.
+
+### Direct endpoint cancellation
+
+The direct endpoint integrand is
+
+\[
+q_N(t)=2f(t)d(t)-\alpha d(t)^2,
+\qquad d=f-h.
+\]
+
+Its quadratic coefficient matrix in the sawtooth coefficients is rank at most
+two, and its exact reduced-frequency mean is
+
+\[
+\boxed{\mathcal A_N=2mn-\alpha n^2+
+\frac1{12}\sum_s\frac{J_2(s)}{s^2}
+[2U_sD_s-\alpha D_s^2].}
+\]
+
+There is no `U_s^2` term: the large common endpoint mass cancels before
+certification. A moderate-`N` prototype independently matched exact Vasyunin,
+breakpoint, and periodic-tail evaluations and showed growing cancellation over
+pairwise primitive bounds. This validates the algebraic direction.
+
+### Decisive computational obstruction
+
+An Abel-smoothed finite realization has controlled smoothing error of order
+approximately `(log K)^2/K`, but at `N=8192` a useful harmonic cutoff produces
+tens of millions of reduced modes. The finite weighted-tail kernel couples
+essentially every pair of modes, leading to an infeasible dense bilinear sum.
+Ordinary FFT binning is unsafe because near-diagonal rational spacings can be
+`1/M^2`, precisely where the kernel is largest.
+
+Thus reduced-frequency aggregation is mathematically sound and validated at
+moderate `N`, but it is not yet a practical `8192` certificate. The missing
+ingredient is a rigorous fast treatment of the weighted near-diagonal kernel,
+not a Fourier convergence theorem.
+
+## Next queued main-funnel step
+
+Derive a near/far decomposition of the exact weighted kernel
+
+\[
+C_Q(2\pi|\lambda-\mu|)-C_Q(2\pi(\lambda+\mu))
+\]
+
+for reduced rational frequencies. Treat near pairs exactly by Farey-neighbor
+enumeration and bound far pairs collectively by summation by parts or a
+certified low-rank expansion. The goal is a subquadratic interval algorithm for
+the direct endpoint bilinear form. Simultaneously construct hostile rational
+frequency sets to test every proposed far-kernel low-rank bound. Without this
+kernel theorem, scaling the validated Fourier route is computationally blocked.
