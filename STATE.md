@@ -66,7 +66,7 @@ research/semantic, research/procedural).
   missing disconnected topology proof, conservative q=7 wording, and weak
   residual ownership checks. All strengthened scripts pass normally and under
   `python -O`, final hostile gates and PDF build passed. Paper:
-  `all-decacyclic-cacti/`. Publication is next. The apparent `3621+3` versus
+  `all-decacyclic-cacti/`. Published at X post `2081336465229832290`. The apparent `3621+3` versus
   `3618+6` split reflects two valid certificate ledgers on the same 3624 marked
   universe; the standalone paper uses the strengthened three-repair ledger.
 - 2026-07-26: completed `all-nonacyclic-cacti`: every connected cactus of
