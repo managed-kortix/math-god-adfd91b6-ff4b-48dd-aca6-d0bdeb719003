@@ -530,3 +530,27 @@ No audits yet.
   graphs by degree sequence and robust-witness overlap; prioritize an isolated
   missing-graph vertex, which yields a tournament deletion and should admit the
   same inaccessible-inneighbor lifting argument.
+
+## 2026-07-26 — tick 24
+
+- Recast the complete residual `m=9` branch as a 28-shard aggregate campaign.
+  Every non-perfect-matching nine-edge missing graph has an isolate; rooting at
+  its robust witness yields seven rho rows and `0<=k<=6-rho` T-hole counts.
+  See `attempts/tick24-m9-aggregate.md` and `experiments/m9_isolate_shards.py`.
+- The direct deletion `D-z` is not a tournament (all nine holes remain); this
+  tempting route was rejected. The robust B7 root is obtained instead from
+  exact degree tightness.
+- Pilot aggregate low-k shards are tractable, but high-k unshaped shards time
+  out and have no certified status. **Next queued attack:** certify the complete
+  `k=0,1` strip, then subdivide `k>=2` by the exact colored high-degree core of
+  the missing graph and exploit simultaneous zones of multiple isolates.
+
+### Certified m=9 strip
+
+- Completed all thirteen `k=0,1` aggregate shards: every one is UNSAT and
+  independently LRAT-verified. Hashes are in
+  `experiments/m9-lowk-certificates.md`.
+- The residual campaign is exactly the fifteen pairs `(rho,k)` with
+  `2<=k<=6-rho`. **Next queued step:** split these by missing-graph high-core
+  type, starting with the 28 two-center cores; repeated isolate zones must use
+  one of the two centers, giving a small support-signature model.
