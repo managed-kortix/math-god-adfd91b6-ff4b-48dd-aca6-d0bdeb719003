@@ -1297,3 +1297,124 @@ is a finite but structurally necessary test of whether the Schur formulation is
 computationally certifiable. In parallel, attack the signed projected
 old/fresh term `PU-AC_f` analytically; any bound must improve on bare
 Cauchy--Schwarz and preserve Möbius signs.
+
+## Tick 12 — cancellation-aware tail theorem and certification frontier
+
+Let
+
+\[
+g_u(t)=m_u+\sum_a u_a\beta_a(t),
+\qquad \beta_a(t)=\{t/a\}-\tfrac12,
+\]
+
+and similarly `g_v`. Their exact period mean is
+
+\[
+\boxed{\mathcal A(u,v)=m_um_v+\frac1{12}
+\sum_{a,b}u_av_b\frac{(a,b)^2}{ab}.}
+\]
+
+Using `(a,b)^2=sum_(d|a,d|b)J_2(d)`, this is computable in
+`O(M log M)` divisor-transform operations:
+
+\[
+\sum_{a,b}u_av_b\frac{(a,b)^2}{ab}
+=\sum_{d\le M}\frac{J_2(d)}{d^2}
+\left(\sum_{j\le M/d}\frac{u_{dj}}j\right)
+\left(\sum_{j\le M/d}\frac{v_{dj}}j\right).
+\]
+
+### Lemma 8 (signed periodic tail enclosure)
+
+Suppose `K` is a bounded primitive of
+`g_u g_v-mathcal A(u,v)` and `||K||_infinity<=D`. Then, for every `Q>0`,
+
+\[
+\boxed{
+\int_Q^\infty\frac{g_u(t)g_v(t)}{t^2}dt
+=\frac{\mathcal A(u,v)}Q-\frac{K(Q)}{Q^2}+\varepsilon_Q,
+\qquad |\varepsilon_Q|\le D/Q^2.}
+\]
+
+### Proof
+
+Integrate `K'(t)/t^2` by parts. Boundedness kills the endpoint at infinity,
+and `2 int_Q^infinity |K(t)|t^-3 dt<=D/Q^2`. QED.
+
+This handles signed cross-Gram entries and gains one power of `Q` over a
+pointwise coefficient-`l1` tail. A rigorous pairwise primitive certificate is
+polynomial-cost because every pair period is `lcm(a,b)<=M^2`; exact pair
+extrema or the cheaper oscillation bound can be used. Symmetrizing the two
+orientations preserves some coefficient cancellation before absolute values.
+
+For the two-vector endpoint field, the nonnegative periodic-tail lemma also
+has a matrix form. If `M` is the exact period-mean Gram matrix and `T_Q` the
+tail Gram matrix, then
+
+\[
+\boxed{\frac1{Q+L}M\preceq T_Q\preceq
+\left(\frac1Q+\frac L{Q^2}\right)M.}
+\]
+
+This couples all three entry errors in Loewner order, but its common period
+`L=lcm(1,...,2N)` is exponential. It is structurally correct and
+computationally useless at `N=8192` unless replaced by a matrix short-block
+discrepancy.
+
+### Quantitative verdict at `N=8192`
+
+The exact gcd means for `(F,H)` are moderate, but the absolute pair-lcm
+primitive bound is dominated by the `H,H` entry. It improves the old `l1`
+enclosure by roughly one order of magnitude for `H,H` and much more for
+`F,F`, yet at cutoff near `64` million its `H,H` uncertainty remains around
+`10^-1`. A cutoff of several hundred million is predicted to give a useful
+full Schur certificate. This is polynomial and reproducible, but still a large
+finite computation, not an asymptotic advance.
+
+Reduced-frequency Fourier aggregation is the only identified route likely to
+close the remaining orders of magnitude at the existing cutoff: combine the
+divisor sums
+
+\[
+U_s=\sum_{j\le M/s}u_{sj}/j
+\]
+
+at each reduced rational frequency before taking absolute values. A rigorous
+implementation needs a finite-frequency truncation and an analytic remainder;
+gcd grouping alone does not align primitive phases and is not a certificate.
+
+An alternative exact finite certificate is a streamed Vasyunin Gram
+contraction through index `2N=16384`. Direct cotangent summation per pair is
+infeasible; a certified continued-fraction/period-function reciprocity engine
+or multiplicative-unit-group transform is required. Such an artifact would
+settle only the finite `8192 -> 16384` endpoint.
+
+### Analytic projected-correlation audit
+
+The signed term satisfies exactly
+
+\[
+PU-AC_f=P\langle D^\perp,B_{fresh}^\perp\rangle.
+\]
+
+Thus improving Cauchy is literally a nontrivial angle theorem for these two
+specific Möbius vectors. Generic support separation, gcd sign, conditional
+negative type, and Fourier orthogonality all fail. Even individual projected
+old/fresh dictionary entries have both signs. Any valid improvement must use
+the full Möbius logarithmic vectors and cannot be a dictionary-wide kernel
+inequality.
+
+## Next queued main-funnel step
+
+Implement the reduced-frequency primitive certificate first on moderate `N`
+and compare it against exact Vasyunin Gram values and breakpoint tails. The
+exact target is a certified bound for the matrix functional
+
+\[
+2(P-C)-\alpha(P+B-2C),
+\]
+
+which equals `(P_N-P_(2N))/alpha` and avoids separately dividing to form
+`q,Theta`. Once validated, scale the certificate to `N=8192`. In parallel,
+formulate the projected old/fresh angle as a reduced-frequency bilinear form
+and isolate the near-diagonal positive kernel from the off-diagonal remainder.

@@ -11,12 +11,12 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   gcd variance are settled but strategically insufficient; the full Gram form
   is now exactly reduced after a second domain audit corrected a transient
   restricted/full-space mix-up, and the current
-  sublemma is a cancellation-aware tail certificate for the parallel and
-  transverse Schur factors, together with analytic control of the signed
-  projected old/fresh correlation
+  sublemma is a reduced-frequency matrix tail certificate for the direct
+  endpoint functional, after pairwise periodic bounds proved polynomial but
+  quantitatively too large at the present cutoff
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 10
+- **cycle:** 11
 - **announcements:** none
 
 ## immutable target list
@@ -35,12 +35,12 @@ waiting process.
 
 ## next exact steps
 
-1. Replace absolute omitted-origin bounds by periodic-mean/short-block
-   certificates for the three endpoint Gram quantities and certify `q,Theta`
-   at `N=8192`.
-2. Bound or falsify a bound for the projected old/fresh correlation
-   `P<U_D,U_B>-<F,U_D><F,U_B>` that improves on Cauchy--Schwarz while retaining
-   Möbius signs.
+1. Implement and verify reduced-frequency aggregation for the direct endpoint
+   matrix functional, including a rigorous frequency-tail remainder, first at
+   moderate `N` and then at `N=8192`.
+2. Rewrite the projected old/fresh angle in the same reduced-frequency basis
+   and separate a controlled near-diagonal kernel from its off-diagonal
+   remainder without taking pairwise absolute values.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -126,3 +126,11 @@ waiting process.
   `8192`, but the absolute tail certificate is too weak. The next target is a
   cancellation-aware finite certificate and analytic control of that signed
   projected term. No solution is claimed.
+- 2026-07-25: proved a signed periodic tail formula with exact gcd-kernel mean
+  and `D/Q^2` primitive error, plus its correlated matrix version. Pairwise
+  lcm bounds are polynomial and greatly improve coefficient-`l1` tails, but
+  remain too large for a practical `8192` Schur certificate at the current
+  cutoff. Generic improvements of the projected old/fresh correlation were
+  ruled out: it is exactly a Möbius-vector angle problem. The active route is
+  reduced-frequency aggregation before absolute values, targeting the direct
+  endpoint functional. No solution is claimed.
