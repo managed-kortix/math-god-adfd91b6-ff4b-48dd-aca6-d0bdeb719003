@@ -4254,6 +4254,30 @@ correlation. Chebyshev bounds and termwise absolute values cannot control that
 tail. Details are in `cycle-47-quantitative-anchor-reserve.md`. No RH result is
 claimed.
 
+## Cycle 49: recombination returns the original terminal kernel
+
+Combining packet surplus and coherent deficit before estimating gives
+
+\[
+Q_{M,B}=(1-W)P_M-2\sum_rh_rT_r\langle F_M,D_r\rangle
+-\sum_{r,s}h_rh_sT_{\max(r,s)}\langle D_r,D_s\rangle.
+\]
+
+The max kernel factors through the lower-triangular future-incidence matrix and
+is positive definite. The augmented form has one positive anchor direction and
+full negative future rank. Completing the square reconstructs the original
+weighted endpoint energies, while telescoping reconstructs
+`Q_(M,B)=P_(B+1)+sum beta_n H_n`. Thus no independent favorable cross-channel
+is hidden in the Cycle 47--48 split.
+
+At cell level, the fully combined initial range `k<=M` has a Chebyshev square
+with strictly positive quadratic coefficient, but its scalar remainder is
+unsigned. Shifted cell coordinates make every channel absolutely summable;
+beyond `M`, infinitely many indices `p^2q` have nonzero truncated Mobius jumps
+despite `Lambda(p^2q)=0`. The obstruction remains the complete two-cutoff
+divisor-floor/Vasyunin correlation. Details are in
+`cycle-49-recombined-terminal-kernel.md`. No RH result is claimed.
+
 ## Cycle 48: coherent mean must be compensated, not split off
 
 The exact finite budget is

@@ -95,10 +95,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   finite terminal budget now splits exactly into packet surplus plus a coherent
   mean channel, and the latter is negative on 486 certified blocks through
   512 but is compensated in every case, so any viable theorem must couple the
-  two channels rather than impose separate positivity
+  two channels rather than impose separate positivity; recombining them before
+  estimation now returns exactly the original full-rank indefinite terminal
+  kernel and weighted-`H` recurrence, while shifted cell coordinates remove
+  artificial divergence but expose infinitely many non-Chebyshev `p^2q`
+  truncated divisor impulses
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 48
+- **cycle:** 49
 - **announcements:** none
 
 ## immutable target list
@@ -117,10 +121,9 @@ waiting process.
 
 ## next exact steps
 
-1. Expand the compensated quantity
-   `(S-V)+<F_M,bar F>-W||bar F||^2` directly in Mobius--Vasyunin or unit-cell
-   coordinates and seek cancellation between its packet and coherent channels;
-   separate coherent positivity is certifiably false.
+1. Prove a genuinely weaker compensated two-cutoff cell estimate at summable
+   `kappa/log M` strength, or decisively falsify it on certified complete
+   blocks; exact recombination at full strength is now known to be tautological.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -135,6 +138,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 49 recombined the packet and coherent channels before any
+  estimate. The resulting increment max kernel has an exact triangular
+  factorization, and its augmented inertia is one positive anchor direction
+  against full negative future rank. Square completion recovers the original
+  terminal budget; the alternate telescope recovers `P_(B+1)+sum beta_nH_n`.
+  In reciprocal cells the initial Chebyshev quadratic coefficient is positive,
+  but its remainder is unsigned; summable shifted coordinates expose infinitely
+  many non-Chebyshev `p^2q` impulses beyond the cutoff. This closes the hope for
+  a hidden algebraic cross-channel and leaves the two-cutoff arithmetic estimate
+  as the active bottleneck. No RH or Millennium solution is claimed.
 
 - 2026-07-26: Cycle 48 isolated the coherent weighted-mean deficit left after
   packet square-payment. A complete 192-bit verifier checks six exact identities
