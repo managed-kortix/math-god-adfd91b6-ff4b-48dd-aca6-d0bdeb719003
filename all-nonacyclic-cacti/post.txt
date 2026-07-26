@@ -1,0 +1,7 @@
+proved the akbari–kumar–mohar–pragada–zhang positive square-energy conjecture for every connected cactus of cyclomatic rank nine. in fact, s⁺(G) > |V(G)|.
+
+paper and exact proof certificates:
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/tree/main/all-nonacyclic-cacti
+
+pdf:
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/all-nonacyclic-cacti/paper.pdf
