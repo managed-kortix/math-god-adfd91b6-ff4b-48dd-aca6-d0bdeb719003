@@ -10,18 +10,31 @@ Let `0<w_1<...<w_N`, let `Q>0`, `alpha>0`, and put
  \qquad K_{ij}=\frac\pi2\min(w_i,w_j)-G_{ij}.
 \]
 
-Partition `[0,Q]` into `M` intervals of length `h=Q/M`, and let `P` be the
-orthogonal projection in `L^2(0,Q)` onto functions constant on each cell.  The
-projected Gram matrix is
+Partition `[0,Q]` into `M` intervals of length `h=Q/M`. For `p=0,1,2,3`, let
+`P_p` be the orthogonal projection in `L^2(0,Q)` onto polynomials of degree at
+most `p` on each cell. With
 
 \[
- (G_0)_{ij}=\langle Pf_i,Pf_j\rangle,
- \qquad
- \overline f_{i,[a,b]}
- =\frac{\operatorname{Si}(w_i b)-\operatorname{Si}(w_i a)}h.
+ L_{n,[a,b]}(t)=P_n\left(2(t-a)/h-1\right),\qquad
+ \int_a^b L_nL_m={h\over 2n+1}\delta_{nm},
 \]
 
-Thus `E=G-G_0` is the Gram matrix of `(I-P)f_i` and is positive semidefinite.
+the projected Gram matrix is
+
+\[
+ (G_p)_{ij}=\langle P_pf_i,P_pf_j\rangle
+ =\sum_{[a,b]}\sum_{n=0}^p{2n+1\over h}m_{i,n}m_{j,n},
+ \qquad
+ m_{i,n}=\int_a^b f_i(t)L_{n,[a,b]}(t)\,dt.
+\]
+
+The moments through degree three are finite linear combinations of
+`Si(wb)-Si(wa)` and sine/cosine endpoint terms obtained by integration by
+parts. Arb evaluates these formulas with outward rounding. In the first cell,
+`Si(0)=0`; no value of `sin(wt)/t` or division by `t` is used.
+
+Thus `E_p=G-G_p` is the Gram matrix of `(I-P_p)f_i` and is positive
+semidefinite.
 For rational vectors `u,d`, set `z=d-u/alpha` and
 
 \[
@@ -31,15 +44,15 @@ For rational vectors `u,d`, set `z=d-u/alpha` and
 Completing the square in the positive semidefinite form gives
 
 \[
- \mathcal L_E=\alpha^{-1}u^TEu-\alpha z^TEz,
+ \mathcal L_{E_p}=\alpha^{-1}u^TE_pu-\alpha z^TE_pz,
 \]
 
 and consequently the certified one-sided inequality
 
 \[
  \boxed{\mathcal L_K\le
- \mathcal L_{\pi\min/2}-\mathcal L_{G_0}
- +\alpha z^TEz.}
+ \mathcal L_{\pi\min/2}-\mathcal L_{G_p}
+ +\alpha z^TE_pz.}
 \tag{1}
 \]
 
@@ -92,6 +105,50 @@ so `|f_w'(t)|<=w^2/2` for `t>0`, continuously extending to `f_w'(0)=0`.
 No division by a small interval or point sampling near zero is used.  Arb
 evaluates the first cell mean as `Si(w h)/h`, with `Si(0)=0` exactly.
 
+## Higher-degree residual theorem
+
+For `p=1,2,3`, put `r=p+1`. Since the best polynomial projection is no worse
+than the Taylor polynomial of degree `r-1` about a cell midpoint, Taylor's
+integral remainder gives
+
+\[
+ \|(I-P_p)F_z\|_2^2\le
+ {Qh^{2r}\over (r!)^2 2^{2r}(2r+1)}B_r^2,
+ \qquad
+ B_r=\int_0^{w_N}s^r|A_z(s)|\,ds.
+\tag{5}
+\]
+
+Indeed, `F_z(t)=int_0^{w_N} A_z(s) cos(st) ds`, so every derivative satisfies
+`|F_z^(r)(t)|<=B_r`, including at the origin. For sorted rational frequencies
+and rational channels, `B_r` is an exact rational suffix sum. For Arb endpoint
+surrogates it is an outward-rounded Arb suffix sum. Formula (5) scales as
+`h^(2p+2)`. Degree zero retains the sharper Neumann Poincare constant in (2).
+
+An alternative weighted Legendre theorem is
+
+\[
+\|(I-P_p)F\|_{L^2(I)}^2
+\le \frac1{\Lambda_{p,m}}
+\int_I[(t-a)(b-t)]^m|F^{(m)}(t)|^2\,dt,
+\]
+
+where `1<=m<=p+1` and
+
+\[
+\Lambda_{p,m}=\frac{(p+1+m)!}{(p+1-m)!}.
+\]
+
+The factorial ratio belongs in the denominator. Under the normalized reference
+weight, affine cell scaling contributes the corresponding factor `2^(-2m)`.
+The implementation presently uses the simpler midpoint-Taylor theorem (5),
+whose constants and origin behavior are transparent; the weighted theorem is a
+strictly sharper queued backend.
+
+At fixed total rank `R=M(p+1)`, the verifier compares all four degrees using
+`M=R/(p+1)` and independently checks every one-sided upper bound against the
+dense Arb `K_Q` form.
+
 ## Exact cusp evaluation
 
 For sorted frequencies, define suffixes `X_k=sum_{i>=k}x_i` and
@@ -107,15 +164,24 @@ All quantities in (4) are exact rationals.  Hence the cusp costs `O(N)` after
 sorting, while forming the `M` projected means and forms costs `O(MN)` and
 stores `O(MN)` Arb balls in this prototype.
 
+## Harmonic-first Mobius surrogate
+
+`mobius_endpoint_surrogate.py` constructs the exact finite `N=4 -> 8`, `R=3`
+surrogate. It applies the harmonic cutoff before reducing duplicate frequencies,
+then converts each reduced `p/q` to angular frequency `2*pi*p/q`. The endpoint
+parameter is exactly `alpha=1/3`. There are 18 raw nonzero source-harmonic modes
+and 14 reduced active modes. All logarithms and amplitudes are Arb balls with
+outward rounding.
+
 ## Scope
 
-`verify_cusp_projection.py` certifies a supplied finite rational-frequency,
+`verify_cusp_projection.py` certifies a supplied finite rational/Arb-frequency,
 two-channel realization and compares (1) with an independent dense Arb
-endpoint `Si` evaluation of `K_Q`.  It does not certify an omitted frequency tail,
+endpoint `Si` evaluation of `K_Q`. It does not certify an omitted frequency tail,
 the harmonic aggregation leading to a finite vector, an endpoint decrement,
 or RH. Bound (3) preserves suffix cancellation but can still be loose because
 it discards oscillation in `t`; cellwise derivative Gram bounds or higher-order
-projections are natural refinements. A hostile pair whose coefficients grow as
+projections reduce this loss but do not remove it. A hostile pair whose coefficients grow as
 the inverse frequency gap shows that narrow bandwidth and zero total mass alone
 do not force the suffix profile small. Piecewise constants can still require a
 cell count proportional to time times carrier frequency.

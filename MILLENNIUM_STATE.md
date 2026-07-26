@@ -17,13 +17,15 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   audits, but fixed-order absolute radii grow rapidly; the current sublemma is
   a certified PSD cusp/projection bound now replaces entrywise near-field
   radii by a residual depending only on the endpoint cancellation vector; the
-  current sublemma is higher-order Legendre projection reducing the observed
-  time-carrier cost, after
+  higher-order Legendre projection now certifies a negative exact finite
+  `N=4 -> 8`, `R=3` Mobius oscillatory surrogate; the current sublemma is a
+  weighted Legendre/shadow-shell refinement retaining the favorable PSD
+  residual at lower rank, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 17
+- **cycle:** 18
 - **announcements:** none
 
 ## immutable target list
@@ -42,10 +44,10 @@ waiting process.
 
 ## next exact steps
 
-1. Implement certified piecewise Legendre projection and compare degrees at
-   equal rank, including an origin-safe Taylor remainder.
-2. Test the exact harmonic-first `N=4 -> 8`, `R=3` Mobius endpoint surrogate;
-   then integrate projection near fields with adaptive far-block orders.
+1. Implement the weighted Legendre residual and signed shadow-shell completion,
+   retaining a certified lower bound for the favorable `u` residual.
+2. Complete the finite `N=4 -> 8`, `R=3` tail with exact constant and linear
+   modes, then isolate the harmonic truncation remainder.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -194,3 +196,10 @@ waiting process.
   need time-times-carrier many cells. The next route is certified higher-order
   Legendre projection and an exact small Mobius surrogate test. No solution is
   claimed.
+- 2026-07-26: implemented degrees `0--3` piecewise Legendre projection with an
+  origin-safe Taylor residual and exact harmonic-first `N=4 -> 8`, `R=3`
+  Mobius aggregation. At `Q=8`, rank-768 degree three certifies the finite
+  oscillatory form is negative: dense value `-0.00406283656`, upper bound
+  `-0.00406225097`. This is only a finite surrogate. Audits proved a sharper
+  weighted Legendre constant and a shadow-shell lower bound recovering the
+  favorable PSD residual; these are next. No solution is claimed.

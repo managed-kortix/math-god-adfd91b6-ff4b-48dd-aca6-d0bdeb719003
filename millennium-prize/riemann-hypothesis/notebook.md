@@ -1919,3 +1919,68 @@ origin-safe Taylor--Legendre remainder. Test the harmonic-first `N=4 -> 8`,
 `R=3` Möbius endpoint surrogate with `alpha=1/3`, then compare degrees `0--3`
 at equal total rank. Retain the favorable `-u^TEu/alpha` term whenever a lower
 bound can be certified; otherwise record exactly the loss from dropping it.
+
+## Tick 20 — higher-order projection and exact small Mobius surrogate
+
+Extended the PSD projection certificate to piecewise Legendre degrees `0--3`.
+Projection features are exact finite combinations of Arb `Si`, sine, and cosine
+endpoint values; the origin cell never evaluates `sin(omega t)/t`. For degree
+`p`, comparison with the midpoint Taylor polynomial and the exact suffix bound
+
+\[
+B_{p+1}(z)=\int s^{p+1}|A_z(s)|\,ds
+\]
+
+gives a residual of order `h^(2p+2)`. All four degrees are compared at equal
+total projection rank.
+
+On the synthetic finite test, equal rank `192` gave certified gaps
+
+\[
+8.12\cdot10^{-6},\quad2.26\cdot10^{-9},\quad
+1.46\cdot10^{-12},\quad1.23\cdot10^{-15}
+\]
+
+for degrees `0,1,2,3`. This confirms that the time-carrier obstruction of
+piecewise constants is not intrinsic to the PSD projection route.
+
+Added `mobius_endpoint_surrogate.py`. It constructs the harmonic-first
+`N=4 -> 8`, `R=3` endpoint channels, aggregates duplicates only after applying
+the original harmonic cutoff, and obtains 14 active reduced angular
+frequencies with exact `alpha=1/3`. At `Q=8`, the dense Arb oscillatory form is
+
+\[
+-0.0040628365567544479045\ldots.
+\]
+
+At equal rank `768`, the degree-three certificate has adverse residual
+`1.75677e-6`, upper bound `-0.0040622509662`, and gap `5.85591e-7`. It therefore
+certifies that this finite oscillatory surrogate is negative. This is not the
+full endpoint decrement: omitted harmonics, constant and linear pieces, and the
+retained interval remain outside this finite claim.
+
+An audit of the sharper weighted Legendre inequality confirms
+
+\[
+\|(I-P_p)F\|^2\le\Lambda_{p,m}^{-1}
+\int_I[(t-a)(b-t)]^m|F^{(m)}|^2,
+\quad \Lambda_{p,m}=\frac{(p+1+m)!}{(p+1-m)!}.
+\]
+
+The reciprocal, admissible range `1<=m<=p+1`, and affine scaling are essential.
+The current code uses the simpler valid Taylor constant; weighted Legendre can
+improve degree three by about a factor `19` at the same derivative order.
+
+The favorable residual `-u^TE_pu/alpha` can also be recovered without a matrix
+eigenvalue bound. Extra Legendre shadow modes give a Bessel lower bound on
+`u^TE_pu`; equivalently, the shell from degree `p+1` through `r` can be retained
+with its exact two-channel sign before bounding only the residual beyond `r`.
+
+## Next queued main-funnel step
+
+Implement the weighted Legendre residual and signed shadow-shell completion.
+Measure how much of the favorable `u` residual is recovered on the `N=4 -> 8`
+surrogate and whether the certified negative oscillatory margin persists at
+substantially lower rank. Then include the exact constant--constant and
+constant--sine terms of the same finite surrogate before confronting the
+harmonic truncation remainder.

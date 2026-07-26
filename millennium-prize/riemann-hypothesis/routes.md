@@ -42,8 +42,10 @@ extracts the `min(omega,nu)` cusp exactly and approximates the remaining Gram
 kernel by an orthogonal projection whose PSD residual is charged only to
 `d-u/alpha`. This is now certified for piecewise constants and shows quadratic
 mesh convergence, but hostile carriers impose a time-frequency cell cost. The
-active refinement is higher-order Legendre projection, followed by integration
-with adaptive far-block orders. The ultimate positive target remains
+active refinement is higher-order Legendre projection. Degrees through three
+now certify a negative finite `N=4 -> 8`, `R=3` Mobius oscillatory surrogate;
+the next step is weighted Legendre error and signed shadow shells, followed by
+the remaining finite tail terms and harmonic truncation. The ultimate positive target remains
 `liminf P_N=0`, where `P_N` is the restricted `(0,1)` energy. Any off-critical
 zero gives an explicit uniform positive floor for every `P_N`, so that target
 implies RH. It is not known to follow from RH for this exact logarithmic taper.
