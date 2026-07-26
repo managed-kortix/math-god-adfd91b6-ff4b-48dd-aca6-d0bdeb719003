@@ -1,0 +1,695 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{array,booktabs}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\spE}{s^+}
+\newcommand{\smE}{s^-}
+\newcommand{\sig}{\sigma}
+\newcommand{\one}{\mathbf 1}
+
+\title{Positive Square Energy of Every Rank-Ten Cactus}
+\author{}
+\date{26 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $G$ be a connected cactus of cyclomatic rank ten on $n$ vertices.  We
+prove $s^+(G)>n$.  The sharp block-additive doubly nonnegative estimate leaves
+exactly $T^9Q$ and $T^8PP$, where $T=C_3$, $P=C_5$, and $Q$ is an arbitrary
+cycle.  In the disconnected shared-cut case, exact colored-partition audits
+give $96=92+4$ and $180=170+10$ proper rows.  The only endpoint kernels have
+the exact closures $A_9\mid Q$: $3624=3618+6$, entry-locked
+$T^8P\mid P$: $11689=11586+100+3$, and $P\mid A_8\mid P$:
+$11689=11674+15$.  In the fully shared case the complete stabilized $T^9Q$
+census has $8049$ types and three hostile exceptions.  The complete $T^8PP$
+census is $30386=30377+9$; all nine replacements are verified, including all
+$5\cdot4\cdot3=60$ cyclic placements in the pentagon-router case N4.  Global
+cuts are actual bridges, local cuts are proper cycle intervals, later cuts
+refine one owner, and arbitrary attached trees follow their unique final hull
+owner.  The proof uses neither a separator theorem nor a two-pivot phase or
+winding assertion.
+\end{abstract}
+
+\section{Definitions, inputs, and proof firewall}
+
+All graphs are finite, simple, and undirected.  A cactus is a connected graph
+whose blocks are bridges or cycles; its cyclomatic rank is the number of cyclic
+blocks.  If the adjacency eigenvalues of $G$ are
+$\lambda_1,\ldots,\lambda_n$, put
+\[
+ \spE(G)=\sum_{\lambda_i>0}\lambda_i^2,
+ \qquad \smE(G)=\sum_{\lambda_i<0}\lambda_i^2,
+ \qquad \sig(G)=\spE(G)-|V(G)|.
+\]
+For an induced vertex partition
+$V(G)=V_1\mathbin{\dot\cup}\cdots\mathbin{\dot\cup}V_r$, positive square
+energy is superadditive~\cite{AKMP}:
+\begin{equation}\label{eq:super}
+ \spE(G)\geq\sum_i\spE(G[V_i]),
+ \qquad \sig(G)\geq\sum_i\sig(G[V_i]).
+\end{equation}
+A connected rank-ten graph has $|E|=n+9$, so the main theorem proves strictly
+the conjectured lower bound of~\cite{AKMPZ} for this class.
+
+Write $T=C_3$, $P=C_5$, and
+\[
+ \delta=\sec(\pi/5)-1=\sqrt5-2<\frac14,
+ \qquad \delta_q=\sec(\pi/q)-1<1.
+\]
+A cycle $Q=C_q$ is \emph{hostile} when $q\equiv1\pmod4$.
+
+The dependency boundary is the corrected synthesis~\cite{Synthesis}, accepted
+by the hostile audit~\cite{HostileAudit}.  We use the authoritative corrected
+octacyclic infrastructure~\cite{Octacyclic}, the proved rank-nine
+theorem~\cite{Nonacyclic}, the exact sharp-DNN frontier~\cite{DNNResidual}, and
+the finite certificates cited at each census.  Those references are proof
+packets, not numerical evidence: they supply the analytic inequalities or
+finite exhaustive checks stated here.
+
+Two statements are expressly outside the proof.  We do not use the open
+two-pivot Schur--Sachs phase/winding assertion~\cite{TwoPivot}; its exact
+two-terminal determinant state does not imply the required integrated phase
+bound.  We do not use candidate separator Lemma S or any census-free
+``good-router'' assertion~\cite{CandidateSeparator}.  No connector is
+contracted, no edge-monotonicity or principal-$\arctan$ shortcut is used, and
+no two-interface row is inferred from an unproved Voronoi rule.
+
+\section{Packet bounds, intervals, and ownership}
+
+The rank-two through rank-nine cactus theorems and the corrected octacyclic
+packet infrastructure give, uniformly over arbitrary finite trees attached at
+arbitrary packet vertices,
+\begin{align}
+ \sig(H)&\geq0 &&\text{for connected ranks two and three},\label{eq:low0}\\
+ \sig(H)&>0 &&\text{for connected ranks four through nine},\label{eq:lowpos}\\
+ \sig(P)&\geq-\delta,& \sig(Q)&\geq-\delta_q
+   &&\text{for hostile $Q$},\label{eq:hostile}\\
+ \sig(TP)&>\frac34,& \sig(TQ)&>0,\label{eq:mixed}\\
+ \sig(PP)&>0,& \sig(TPP)&>\frac32
+   &&\text{for one shared-cut cluster}.\label{eq:pp}
+\end{align}
+The strict $PP$ estimate in~\eqref{eq:pp} has precisely the displayed scope:
+the two pentagons belong to one connected shared-cut cluster, with arbitrary
+finite trees attached at its vertices.  This is the corrected packet theorem
+of~\cite[Eq.~(2.5)]{Octacyclic}; no claim is made here for an arbitrary
+two-pentagon cactus joined by a positive-length bridge.
+Here and below a packet name permits arbitrary joining paths and rooted trees
+within the scope of the cited packet theorem.  For one connected shared-cut
+cluster $A_r$ of $r$ triangles,
+\begin{equation}\label{eq:triangle}
+ \sig(A_r)>b_r,
+ \qquad (b_1,\ldots,b_9)=(0,1,2,3,2,1,0,0,0).
+\end{equation}
+The entries through $r=8$ are the corrected triangular-cluster bounds in
+\cite{Octacyclic}; $r=9$ uses~\cite{Nonacyclic}.  Only strict positivity is
+used at $r=8,9$.
+
+Two analytic packets close the locked one-pivot rows.
+
+\begin{lemma}[Rooted packing one]\label{lem:packing}
+Let a connected cactus $H$ contain one hostile cycle $Q=C_q$ and $a\geq1$
+triangles, no two vertex-disjoint.  The cycle $Q$ may meet their common root or
+be joined to it by an arbitrary path.  Arbitrary trees may be attached to the
+cycles, joining path, and its vertices.  Then
+\[
+ \spE(H)-\smE(H)>-2\delta_q,
+ \qquad \sig(H)>a-\delta_q.
+\]
+The same statement with $Q=P$ gives $\sig(H)>a-\delta$.
+\end{lemma}
+
+\begin{proof}
+This is the rooted packing-one theorem of~\cite{PackingOne}.  Briefly, exact
+tree elimination replaces each spine activity by a positive matching message
+$\alpha_v\geq t$.  Grouping the Sachs expansion by the unique hostile cycle
+gives $\Psi_H(t)=R+2i(B-A)$ with $R>0$.  Packing one excludes products of two
+triangle terms, and splitting matchings by boundary use gives
+\[
+ R-Z_q(t)(B-A)=E+LB+Z_q(t)A+
+ 4\sum_{T\cap Q=\varnothing}Z_{H-(V(Q)\cup V(T))}(\alpha)>0.
+\]
+Thus the continuous argument is strictly smaller than the isolated hostile
+cycle argument.  The signed Coulson identity gives the first inequality, and
+$\spE+\smE=2|E|=2(|V|+a)$ gives the second.  The message proof already includes
+arbitrary rooted trees and arbitrary joining-path length.
+\end{proof}
+
+\begin{lemma}[Common-cut Schur--Sachs packets]\label{lem:common}
+If all named cycles share one actual cut vertex, uniformly over arbitrary
+attached trees,
+\begin{align}
+ \sig(T^kQ)&>k-\delta_q &&(q\equiv1\pmod4),\label{eq:ccq}\\
+ \sig(T^kQ)&>k &&(q\text{ even or }q\equiv3\pmod4),\label{eq:ccgood}\\
+ \sig(T^kP)&>k-\delta,\label{eq:ccp}\\
+ \sig(T^kPP)&>k+1-\frac4{3\sqrt{13}}.\label{eq:ccpp}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+After exact tree elimination, the normalized determinant is the scalar state
+\[
+ W(t)=a_x+\sum_j\frac{B_j+\omega_{\ell_j}}{A_j},
+ \qquad \omega_\ell=-2i^{-\ell},
+\]
+with $A_j,B_j,a_x>0$.  The one-hostile-cycle phase is bounded strictly by the
+isolated-cycle phase.  For two pentagons the exact coefficient inequality
+$2R\geq t(t^4+7t^2+9)(A_1+A_2)$ and
+$\int_0^\infty4/(t^4+7t^2+9)\,dt=2\pi/(3\sqrt{13})$ give the final line.
+The full argument and its 1290-term exact coefficient certificate are
+\cite{CommonCut,Coefficient}.  This scalar lemma is invoked only at one real
+common pivot; it is not a two-pivot estimate.
+\end{proof}
+
+We now state explicitly the graph-realization facts that connect the finite
+incidence certificates to induced partitions.
+
+\begin{lemma}[Proper cycle intervals]\label{lem:interval}
+Let $C$ be a cyclic block carrying two or three distinct marked vertices.  For
+two marks, one mark and the complementary two-vertex interval on a triangle,
+or either nonempty proper consecutive arc on a longer cycle, are connected
+induced intervals.  Three marks on a triangle give three singleton intervals.
+For the N4 pentagon router, isolating one marked vertex leaves a four-vertex
+induced path containing the other two marks, for every injection of the three
+marks into the five cycle vertices.  Incidence branches attached at a mark may
+be assigned to that mark's interval.  If a later router lies in one interval,
+splitting it refines only that interval and preserves an induced partition.
+\end{lemma}
+
+\begin{proof}
+Deleting the boundary edges between consecutive arcs of a chordless cycle
+leaves induced paths (or singletons).  Distinct triangle marks have cyclic gaps
+$1+2$ or $1+1+1$.  On $C_5$, deleting the isolated marked vertex leaves the
+unique complementary four-vertex path, independent of the cyclic placement of
+the other two marks.  Attached cactus branches meet the cycle at only their
+marked cut, so adjoining a branch preserves connectedness and inducedness.
+Refinement replaces one part by an induced partition of that part.
+\end{proof}
+
+\begin{lemma}[Final-owner realization]\label{lem:ownership}
+Contract maximal shared-cut cyclic clusters while retaining every actual
+bridge and every internal connector vertex.  The resulting cluster graph is a
+tree.  A partition of it into connected subtrees, together with legal interval
+splits from Lemma~\ref{lem:interval}, realizes connected, induced, disjoint,
+exhaustive territories in $G$.  Every shared cut, connector remnant, incidence
+branch, cycle interval, and off-hull tree has exactly one final owner.  A later
+split replaces the provisional owner of one active territory; no provisional
+owner may survive.  A private interval containing no retained cycle is a
+nonempty tree and has exact surplus $-1$.
+\end{lemma}
+
+\begin{proof}
+The block-cut graph of a cactus is a tree.  Contracting connected subtrees of
+cyclic blocks cannot create a cycle, and retaining bridge paths preserves all
+vertices.  Cutting an actual bridge separates two connected induced vertex
+sets.  At a cyclic router, Lemma~\ref{lem:interval} assigns each vertex and
+each attached incidence branch once.  Induct on the sequence of refinements;
+the active territory being split is replaced by disjoint exhaustive induced
+subterritories, while all other owners remain unchanged.  An off-hull tree has
+a unique first hull attachment and follows its final owner.  Finally, for a
+nonempty tree $E$, bipartite spectral symmetry and $|E(E)|=|V(E)|-1$ give
+$\spE(E)=|V(E)|-1$ and hence $\sig(E)=-1$.
+\end{proof}
+
+These lemmas are the formal ownership and interval interface of the corrected
+octacyclic infrastructure~\cite{Octacyclic}.  They cover arbitrary connector
+lengths, branching connector trees, coincident interfaces, and arbitrary
+finite trees at every core or connector vertex.
+
+\section{Exact sharp-DNN reduction}
+
+For an edge-containing graph define
+\[
+ \kappa(G)=\sup_{\substack{M\succeq0,\ M\geq0\\\one^TM\one>0}}
+ \frac{4(\sum_{uv\in E(G)}\sqrt{M_{uv}})^2}{\one^TM\one}.
+\]
+The sharp cactus DNN theorem~\cite{DNN,LTZ} says
+\[
+ \kappa(G)=b+\sum_i\kappa(C_{\ell_i}),\qquad
+ \kappa(C_\ell)=\begin{cases}
+ \ell,&\ell\text{ even},\\
+ \ell\sec^2(\pi/(2\ell)),&\ell\text{ odd},
+ \end{cases}
+ \qquad \smE(G)\leq\kappa(G).
+\]
+Put $\epsilon_\ell=0$ for even $\ell$ and
+$\epsilon_\ell=\ell\tan^2(\pi/(2\ell))$ for odd $\ell$.  If the ten cyclic
+blocks have lengths $\ell_1,\ldots,\ell_{10}$, block counting and $|E|=n+9$
+give the exact bound
+\begin{equation}\label{eq:dnn}
+ \sig(G)\geq9-\sum_{i=1}^{10}\epsilon_{\ell_i}.
+\end{equation}
+The odd sequence decreases strictly.  With
+$a=\epsilon_5=5-2\sqrt5$,
+\[
+ \epsilon_3=1,\qquad 3a<2,\qquad2a>1,
+ \qquad\epsilon_5+\epsilon_7<1.
+\]
+The first two comparisons reduce after squaring positive sides to $169<180$
+and $80<81$; the last follows from
+$\epsilon_7<7/15<2\sqrt5-4$, with $4489<4500$.  These exact certificates and
+monotonicity are recorded in~\cite{DNNResidual}.
+
+If at most seven cycles are triangles, then
+$\sum\epsilon_i\leq7+3a<9$.  With exactly eight triangles, the two remaining
+cycles contribute at least one only when both are pentagons: an even cycle
+contributes zero, and every other odd pair contributes at most
+$\epsilon_5+\epsilon_7<1$.  At least nine triangles has the form $T^9Q$,
+including $Q=T$.  Consequently the exact, disjoint DNN residual frontier is
+\begin{equation}\label{eq:residuals}
+ T^9Q=\{3,3,3,3,3,3,3,3,3,q\},\ q\geq3,
+ \qquad T^8PP=\{3,3,3,3,3,3,3,3,5,5\}.
+\end{equation}
+Every other rank-ten cycle multiset is strict directly from~\eqref{eq:dnn}.
+
+\section{Disconnected shared-cut clusters}
+
+For a residual graph the reduced shared-cut cluster tree either has one node
+or more than one.  In the latter case the exact colored integer-partition audit
+\cite{PartitionCode} is
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+residual&all partitions&proper&direct packet rows&structural rows\\
+\midrule
+$T^9Q$&97&96&92&4\\
+$T^8PP$&181&180&170&10\\
+\bottomrule
+\end{tabular}
+\end{center}
+The one-cluster partition is excluded.  Every direct row has a positive exact
+sum of~\eqref{eq:low0}--\eqref{eq:triangle}, or a zero sum containing a strict
+packet.
+
+For $T^9Q$ the four frozen structural rows are
+\[
+ Q+T+\cdots+T,\quad Q+T+T+A_7,\quad Q+T+A_8,
+ \quad Q+A_9.
+\]
+A singleton-triangle leaf leaves a strict rank-nine complement.  If no such
+leaf exists in $Q+T+T+A_7$, the four nodes form a path with $Q,A_7$ at its
+ends; the singleton next to $Q$ forms strict $TQ$, and the other with $A_7$
+is a strict rank-eight cactus.  In $Q+T+A_8$, either $T$ is a leaf or the
+middle node and forms $TQ$, leaving strict $A_8$.  The unique endpoint is
+\begin{equation}\label{eq:dq} A_9\mid Q.\end{equation}
+
+For $T^8PP$ the ten rows are
+\[
+ P+P+T+\cdots+T,\quad P+P+T+A_7,\quad P+P+A_8,
+\]
+and the seven rows $P+T+\cdots+T+(T^kP)$, $2\leq k\leq8$, with the singleton
+count completing eight triangles.  Remove any singleton-triangle leaf.  If
+none exists in the first row, the pentagons are the leaves of a path; a terminal
+$TP$ leaves a strict rank-eight complement.  In $P+P+T+A_7$, a leaf $A_7$
+leaves strict $TPP$, and otherwise a terminal $TP$ leaves strict rank-eight
+$A_7P$.  In $P+P+A_8$, a middle pentagon gives $PP+A_8$; only
+$P\mid A_8\mid P$ remains.  For $P+T+\cdots+T+(T^kP)$ with $k<8$, the bare
+pentagon and nearest singleton give $TP$ and a strict rank-eight remainder.
+At $k=8$ there is no singleton.  Thus the only endpoints are
+\begin{equation}\label{eq:dp}
+ T^8P_0\mid P_1,\qquad P_0\mid A_8\mid P_1.
+\end{equation}
+Every move here is a leaf/path move in the actual reduced tree; no separator
+claim is being made.
+
+\subsection{The endpoint \texorpdfstring{$A_9\mid Q$}{A9 | Q}:
+\texorpdfstring{$3624=3618+6$}{3624 = 3618 + 6}}
+
+Mark the first cyclic-hull entry of the actual connector from $Q$ into $A_9$.
+An entry is a shared cut or an actual private triangle vertex; an off-hull entry
+projects to its unique hull attachment.  The exact census~\cite{T9QProof,T9QCode}
+contains
+\[
+ \begin{array}{lr}
+ \text{unmarked $A_9$ incidence trees}&355\\
+ \text{marked placements before automorphisms}&6745\\
+ \text{canonical marked rows}&3624\\
+ \text{accepted finite-router rows}&3618\\
+ \text{explicit repairs}&6.
+ \end{array}
+\]
+For an accepted row the checker verifies proper intervals, disjoint exhaustive
+branches, and one final connector owner.  If the $Q$ territory retains $k$
+triangles, then $k=1$ uses strict $TQ$; $k=2$ uses nonnegative $TTQ$ plus a
+strict branch; $3\leq k\leq8$ uses the lower-rank theorem; and for $k=0$ the
+other eight triangles occupy at most two branches, one of size at least four
+and margin $>3$, absorbing $Q>-1$.
+
+The six exceptions are the hub/private entry orbits of the common-cut bouquet
+and four entry orbits on one two-cut saturated extension.  The bouquets have
+packing one and margin $>9-\delta_q$.  In one extension orbit the leaf triangle
+and $Q$ form strict $TQ$, leaving strict common-cut $A_8$.  In the other three,
+open the leaf triangle: its private territory is a nonempty tree of surplus
+$-1$, while the eight retained hub triangles and actual path to $Q$ satisfy
+Lemma~\ref{lem:packing}.  Hence
+\[
+ \sig(G)>(8-\delta_q)-1=7-\delta_q>0.
+\]
+This closes exactly $3624=3618+6$ rows.  Nonhostile $Q$, including $Q=T$, has
+the same or stronger ledger.
+
+\subsection{Entry-locked \texorpdfstring{$T^8P\mid P$}{T8P | P}:
+\texorpdfstring{$11689=11586+100+3$}{11689 = 11586 + 100 + 3}}
+
+An internal clustered pentagon and a privately entered incidence-leaf
+pentagon are handled directly by proper pentagon intervals.  The remaining
+entry-locked family~\cite{T8PCode} has 2392 colored $T^8P$ incidence trees,
+1105 with clustered $P$ an incidence leaf, and 11689 canonical marked-entry
+rows.  Exact final-owner certificates close 11586 directly and 100 by finite
+replacement sequences.  Those replacements use zero, one, two, and three
+routers in respectively $2,9,73,16$ rows.  The verifier checks every split
+order, interval, active territory, retained component, packet hypothesis,
+radical ledger, connector/root/attachment owner, and rejects every completed
+state with a provisional \texttt{territory:*} owner.
+
+The remaining three marked orbits lie on one two-cut shape: a router triangle
+joins the clustered leaf pentagon to a common-hub fan of eight triangles.  Open
+the remote $P_1$.  Its four private vertices and all trees rooted there form a
+nonempty tree of surplus $-1$; the retained packet owns all eight hub
+triangles, $P_0$, both actual connector remnants, and their trees.  Packing one
+gives $>8-\delta$, and therefore
+\[
+ \sig(G)>(8-\delta)-1=7-\delta>0.
+\]
+Thus the exact closure is $11689=11586+100+3$.
+
+\subsection{The endpoint \texorpdfstring{$P\mid A_8\mid P$}{P | A8 | P}:
+\texorpdfstring{$11689=11674+15$}{11689 = 11674 + 15}}
+
+The two labelled entries range independently over every shared cut and actual
+private triangle vertex, including coincidence.  The exact census
+\cite{A8Proof,A8Code} has 126 unmarked incidence trees, 36414 ordered labelled
+placements, 11689 canonical rows, 11674 accepted router rows, and 15 explicit
+repairs.  Every accepted row has integer credit at least one after private
+interval charges, so its two pentagonal deficits leave
+$>1-2\delta=5-2\sqrt5>0$.  The checker assigns both connectors and both remote
+pentagons once and prevents a destroyed router triangle from reappearing.
+
+Six exceptions are bouquet mark orbits.  Their repairs are: hub--hub or the
+suitable private profiles, open one remote pentagon and retain packing-one
+$T^8P$, giving $>7-\delta$; hub--private, split to
+$P+$ common-cut $T^7P$, giving $>7-2\delta$; coincident private entries, strict
+$A_7+PP$; and the remaining private profiles, the same opening or proper
+triangle intervals.  The other nine lie on a saturated router between a
+singleton triangle and a six-triangle common-cut branch.  Its three singleton
+ports give, according to orbit,
+\[
+ A_6+T+PP>1,\quad A_6+TP+P>2-2\delta,
+\]
+or $T^6P+T+P>6-2\delta$, using respectively a real common cut or packing one.
+The materialized repairs distinguish $TP$ and $PP$ terminals and check all
+final owners.  Hence all $11689=11674+15$ rows close.
+
+\section{One fully shared cluster}
+
+\subsection{Complete \texorpdfstring{$T^9Q$}{T9Q} census and exceptions}
+
+The exact color-preserving incidence census~\cite{SharedCensus,T9QCode}, by
+shared-cut number $c$, is
+\begin{center}
+\small
+\begin{tabular}{lrrrrrrrrr|r}
+\toprule
+$Q$ capacity&1&2&3&4&5&6&7&8&9&total\\
+\midrule
+$q=3$&1&12&91&406&1178&2115&2250&1246&275&7574\\
+$q=4$&1&12&91&412&1203&2187&2361&1340&306&7913\\
+$q=5$&1&12&91&412&1208&2201&2393&1372&321&8011\\
+$q=6$&1&12&91&412&1208&2204&2400&1383&327&8038\\
+$q=7$&1&12&91&412&1208&2204&2402&1386&330&8046\\
+$q=8$&1&12&91&412&1208&2204&2402&1387&331&8048\\
+$q=9$&1&12&91&412&1208&2204&2402&1387&332&8049\\
+$q\geq10$&1&12&91&412&1208&2204&2402&1387&332&8049\\
+\bottomrule
+\end{tabular}
+\end{center}
+The universe stabilizes because $Q$ can meet at most nine other cycle nodes.
+Ordinary exact splits close every nonhostile row except the common-cut bouquet.
+In each hostile ledger regime they leave exactly three rows:
+\begin{enumerate}
+\item all nine triangles and $Q$ share one cut; Lemma~\ref{lem:common} gives
+      $>9-\delta_q$;
+\item all nine triangles contain one hub and $Q$ joins through a router
+      triangle; Lemma~\ref{lem:packing} gives $>9-\delta_q$ along the actual
+      joining segment;
+\item a unique leaf triangle lies opposite an eight-triangle common-hub lobe;
+      opening it costs $-1$, and packing one on the retained lobe and complete
+      path to $Q$ gives $>7-\delta_q$ in total.
+\end{enumerate}
+At $q=5$ there are 8011 types and at saturated capacity nine there are 8049;
+the closure verifier reruns every ordinary split in both hostile regimes,
+matches all three frozen signatures, and checks cycle coverage, router
+intervals, and unique retained-cut ownership.  Nonhostile ledgers are stronger
+and leave only the first row.  This is the complete fully shared $T^9Q$
+census, not a stabilized extrapolation.
+
+\subsection{Complete \texorpdfstring{$T^8PP$}{T8PP} census:
+\texorpdfstring{$30386=30377+9$}{30386 = 30377 + 9}}
+
+The exact census is
+\begin{center}
+\begin{tabular}{lrrrrrrrrr|r}
+\toprule
+shared cuts $c$&1&2&3&4&5&6&7&8&9&total\\
+\midrule
+all&1&19&204&1155&3990&8135&9615&5843&1424&30386\\
+ordinary safe&0&17&200&1154&3989&8135&9615&5843&1424&30377\\
+exceptions&1&2&4&1&1&0&0&0&0&9\\
+\bottomrule
+\end{tabular}
+\end{center}
+Every ordinary-safe row has a checked proper-interval split, positive exact
+packet ledger, and complete final-owner assignment.  The nine exceptions and
+their exact replacements~\cite{Nine,NineCode} are
+\begin{center}
+\small
+\begin{tabular}{cll}
+\toprule
+code&replacement&margin\\
+\midrule
+N1&common-cut $T^8PP$&$>9-4/(3\sqrt{13})$\\
+N2&open leaf $P$; retain common-cut $T^8P$&$>7-\delta$\\
+N3&$P+$ common-cut $T^7P$ through one router&$>7-2\delta$\\
+N4&$A_7+TP$ through a pentagon router&$>3/4$\\
+N5&open one $P$; retain packing-one $T^8P$&$>7-\delta$\\
+N6&$P+T+$ common-cut $T^6P$&$>6-2\delta$\\
+N7&$P+P+A_6$ through two routers&$>1-2\delta$\\
+N8&$P+P+T+A_5$ through two routers&$>2-2\delta$\\
+N9&$P+P+T+T+A_4$ through two routers&$>3-2\delta$\\
+\bottomrule
+\end{tabular}
+\end{center}
+For exact identification their canonical signatures are
+\begin{description}
+\small
+\item[N1] \path{X(P()P()T()T()T()T()T()T()T()T())}
+\item[N2] \path{P(X(P())X(T()T()T()T()T()T()T()T()))}
+\item[N3] \path{T(X(P())X(P()T()T()T()T()T()T()T()))}
+\item[N4] \path{P(X(P())X(T())X(T()T()T()T()T()T()T()))}
+\item[N5] \path{T(X(P())X(P())X(T()T()T()T()T()T()T()))}
+\item[N6] \path{T(X(P())X(P()T()T()T()T()T()T())X(T()))}
+\item[N7] \path{X(T()T()T()T()T()T()T(X(P()))T(X(P())))}
+\item[N8] \path{X(T()T()T()T()T()T(X(P()))T(X(P())X(T())))}
+\item[N9] \path{X(T()T()T()T()T(X(P())X(T()))T(X(P())X(T())))}
+\end{description}
+
+N4 is a genuine pentagon interval argument, not a cyclic-order assumption.
+The verifier materializes all $5\cdot4\cdot3=60$ injections of its three actual
+marks into the router pentagon.  The vertex carrying the $A_7$ cut is isolated;
+the complementary four-vertex path contains the other two marks and owns the
+$TP$ connector packet.  It checks the actual connector edges and both packet
+owners in every placement.  In N7--N9 the second triangle split refines one
+active territory created by the first.  In N2 and N5 exactly the four private
+vertices of the opened pentagon and trees rooted there incur the $-1$ charge;
+the entry cut and connector remnants remain with the retained packet.
+
+The replacement verifier regenerates all 30386 incidence types and the exact
+nine exceptions.  It checks frozen signatures and labelled edges, router
+activity and nesting, proper interval sizes, all N4 cyclic placements, packet
+connectivity, common-cut or packing-one hypotheses, cycle coverage, connector
+edges, unique cut/cycle-vertex/attachment ownership, and exact radical signs.
+Thus $30386=30377+9$ is a complete closure.
+
+\section{Main theorem and exhaustion}
+
+\begin{theorem}\label{thm:main}
+Every connected cactus $G$ of cyclomatic rank ten, on $n$ vertices, satisfies
+\[
+ \boxed{\spE(G)>n}.
+\]
+\end{theorem}
+
+\begin{proof}
+The exact DNN inequality~\eqref{eq:dnn} proves every cycle multiset except the
+two disjoint residual families~\eqref{eq:residuals}.  For a residual cactus,
+the reduced shared-cut cluster tree has one node or more than one.
+
+With more than one node, the exact audits contain 96 proper $T^9Q$ rows,
+partitioned as $96=92+4$, and 180 proper $T^8PP$ rows, partitioned as
+$180=170+10$.  The direct rows have valid packet ledgers.  Actual reduced-tree
+leaf/path moves reduce the structural rows exactly to
+$A_9\mid Q$, $T^8P\mid P$, and $P\mid A_8\mid P$.  Their exhaustive marked
+closures are respectively $3624=3618+6$, $11689=11586+100+3$, and
+$11689=11674+15$.
+
+With one node, the complete capacity-dependent $T^9Q$ census and its three
+hostile replacements close every incidence.  The complete $T^8PP$ census has
+$30386=30377+9$ rows, and the nine listed replacements close every exception,
+including all N4 placements.
+
+Lemma~\ref{lem:ownership} upgrades each incidence certificate to connected
+induced territories.  Every global cut is an actual bridge; every local split
+is a nonempty proper cycle interval; every later split refines one owner; and
+every shared cut, connector remnant, incidence branch, interval, opened vertex,
+and attached tree is assigned once.  Common-cut bounds are used only at one
+actual pivot and packing one only when all retained triangles contain the
+displayed hub.  Each opening records its exact nonempty-tree cost.  No
+separator or two-pivot assertion occurs.  Equation~\eqref{eq:super} therefore
+gives $\sig(G)>0$ in every case.
+\end{proof}
+
+\appendix
+\section{Exact reproduction and fail-closed boundary}\label{app:reproduction}
+
+The census and closure programs require Python 3.10 or newer and use only the
+standard library.  The separate coefficient certificate uses
+\texttt{sympy==1.14.0}.  From the repository root, create a self-contained
+environment and run:
+\begin{verbatim}
+python3 -m venv .venv-rank-ten
+. .venv-rank-ten/bin/activate
+python -m pip install --upgrade pip
+python -m pip install sympy==1.14.0
+python -c 'import sys; sys.exit("Python 3.10+ required") \
+  if sys.version_info < (3, 10) else None'
+python research/rank-ten-cactus-residual-partition-audit.py
+python -O research/rank-ten-cactus-residual-partition-audit.py
+python research/rank-ten-a9-one-interface-census.py
+python -O research/rank-ten-a9-one-interface-census.py
+python research/rank-ten-t9q-template-closure-verifier.py
+python -O research/rank-ten-t9q-template-closure-verifier.py
+python research/rank-ten-t8p-entry-locked-census.py
+python -O research/rank-ten-t8p-entry-locked-census.py
+python research/rank-ten-a8-two-interface-census.py
+python -O research/rank-ten-a8-two-interface-census.py
+python research/rank-ten-fully-shared-incidence-census.py
+python research/rank-ten-t8pp-nine-exceptions-resolution.py
+python -O research/rank-ten-t8pp-nine-exceptions-resolution.py
+python positive-square-energy/experiments/\
+  c5_bouquet_matching_certificate.py
+\end{verbatim}
+The partition audit verifies $97/96/92/4$ and $181/180/170/10$ and freezes all
+structural rows.  The hardened endpoint and replacement verifiers reproduce
+$3624=3618+6$, both hostile $T^9Q$ universes and their three exceptions,
+$11689=11586+100+3$, $11689=11674+15$, and $30386=30377+9$.  They use explicit
+exception-raising checks and pass under \texttt{python -O}; classifications use
+integers or \texttt{Fraction}, and radical signs use exact squared comparisons.
+The standalone compressed shared-incidence generator still contains Python
+\texttt{assert} statements and is therefore run only without \texttt{-O}.
+The dedicated closure verifiers recheck their stated totals, signatures,
+ownership conditions, and replacements, but they import census modules and
+reuse recurrence code.  They therefore are not an independent all-row
+implementation.  Pending such a verifier, the computational claim is limited
+to reproducible, fail-closed checks within this shared code base.  The programs
+certify finite classifications and routing; the analytic packet inequalities
+are Lemmas~\ref{lem:packing} and~\ref{lem:common} and the cited lower-rank
+manuscripts.
+
+Build the paper with
+\begin{verbatim}
+bash scripts/build-paper.sh all-rank-ten-cacti
+\end{verbatim}
+or directly with
+\begin{verbatim}
+latexmk -pdf -interaction=nonstopmode -halt-on-error \
+  -cd all-rank-ten-cacti/paper.tex
+\end{verbatim}
+
+\begin{thebibliography}{99}
+\bibitem{AKMP} S.~Akbari, H.~Kumar, B.~Mohar, and S.~Pragada,
+\emph{A linear lower bound for the square energy of graphs}, Electron. J.
+Combin. 32(3) (2025), Paper P3.53.
+
+\bibitem{AKMPZ} S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and S.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264, 2025.
+
+\bibitem{LTZ} Y.~Liu, Q.~Tang, and S.~Zhang,
+\emph{The positive and negative square-energy conjecture}, arXiv:2607.18031,
+2026.
+
+\bibitem{DNN} Companion manuscript, \emph{The Optimized Liu--Tang--Zhang
+Constant for Cactus Graphs}, 2026; \path{sharp-cactus-dnn/paper.tex}.
+
+\bibitem{Octacyclic} Companion manuscript, \emph{Positive Square Energy of
+Every Octacyclic Cactus}, authoritative corrected infrastructure, 26 July
+2026; \path{all-octacyclic-cacti/paper.tex}.
+
+\bibitem{Nonacyclic} Companion manuscript, \emph{Positive Square Energy of
+Every Nonacyclic Cactus}, 26 July 2026;
+\path{all-nonacyclic-cacti/paper.tex}.
+
+\bibitem{Synthesis} \emph{Positive square energy of every connected rank-ten
+cactus}, corrected synthesis, 26 July 2026;
+\path{research/rank-ten-cactus-complete-synthesis-2026-07-26.md}.
+
+\bibitem{HostileAudit} \emph{Hostile audit verdict: connected rank-ten cacti},
+26 July 2026;
+\path{research/rank-ten-cacti-hostile-audit-verdict-2026-07-26.md}.
+
+\bibitem{DNNResidual} \emph{Exact rank-10 cactus DNN residual frontier},
+26 July 2026;
+\path{research/rank-ten-cactus-dnn-residual-frontier-2026-07-26.md}.
+
+\bibitem{PartitionCode} Exact fail-closed colored-partition audit,
+\path{research/rank-ten-cactus-residual-partition-audit.py}.
+
+\bibitem{T9QProof} \emph{Rank-ten $T^9Q$ template closure: fully shared and
+disconnected}, 26 July 2026;
+\path{research/rank-ten-t9q-template-closure-proof-2026-07-26.md}.
+\bibitem{T9QCode} Exact fail-closed verifier,
+\path{research/rank-ten-t9q-template-closure-verifier.py}.
+
+\bibitem{T8PCode} Exact entry-locked census and final-owner verifier,
+\path{research/rank-ten-t8p-entry-locked-census.py}.
+
+\bibitem{A8Proof} \emph{Marked $A_8$ two-interface residual certificates},
+26 July 2026;
+\path{research/rank-ten-a8-two-interface-residuals-2026-07-26.md}.
+\bibitem{A8Code} Exact two-interface census and repair verifier,
+\path{research/rank-ten-a8-two-interface-census.py}.
+
+\bibitem{SharedCensus} \emph{Rank-ten compressed incidence experiments:
+$T^9Q$, $T^8PP$, and marked $A_8$}, 26 July 2026;
+\path{research/rank-ten-fully-shared-incidence-census-2026-07-26.md}.
+
+\bibitem{Nine} \emph{Exact packet audit of the nine fully shared $T^8PP$
+exceptions}, 26 July 2026;
+\path{research/rank-ten-t8pp-nine-exceptions-resolution-2026-07-26.md}.
+\bibitem{NineCode} Exact nine-row fail-closed verifier,
+\path{research/rank-ten-t8pp-nine-exceptions-resolution.py}.
+
+\bibitem{PackingOne} \emph{Rooted packing-one hostile-cycle lemma for
+octacyclic provenance}, 26 July 2026;
+\path{research/octacyclic-packing-one-hostile-cycle-lemma-2026-07-26.md}.
+\bibitem{CommonCut} \emph{Common-cut residual bouquets: an exact rooted
+Schur--Sachs inequality}, 26 July 2026;
+\path{research/common-cut-bouquet-rooted-schur-2026-07-26.md}.
+\bibitem{Coefficient} Exact common-cut coefficient verifier,
+\path{positive-square-energy/experiments/c5_bouquet_matching_certificate.py}.
+
+\bibitem{TwoPivot} \emph{Two-pivot Schur--Sachs triangular cactus reduction},
+open winding boundary, 26 July 2026;
+\path{research/two-pivot-schur-sachs-triangular-cactus-2026-07-26.md}.
+\bibitem{CandidateSeparator} \emph{Rank-uniform triangular router interface
+theorem}, candidate separator explicitly excluded, 26 July 2026;
+\path{research/rank-uniform-triangular-router-interface-theorem-2026-07-26.md}.
+\end{thebibliography}
+\end{document}

@@ -145,16 +145,41 @@ Run from the repository root:
 
 ```bash
 python3 research/rank-ten-t8pp-nine-exceptions-resolution.py
+python3 -O research/rank-ten-t8pp-nine-exceptions-resolution.py
 ```
 
-The standard-library verifier regenerates all `30386` classes and the exact
-nine exceptions. It checks signatures and labelled edge representatives;
+The standard-library verifier uses the recurrence only to emit candidate rows;
+it does not trust or invoke the dependency's census, SAFE classification,
+split certificates, component profiles, bounds, or assertions. For every one
+of the `30386` emitted rows it independently rebuilds the incidence graph and
+checks bipartiteness, labels, colors, capacities, cut degrees, tree size,
+connectivity, uniqueness, center-rooted canonical signature, sorted order, and
+the complete cut-count distribution. The frozen canonical signature stream is
+
+```text
+sha256 9aa6813cb87e1db0748faf441b8941145fbedb5af55386404bd9cfcbe10a6e3b
+```
+
+For each of the `30377` ordinary-safe rows, the verifier independently tries
+all ten sacrificed cycles and chooses the first legal one. It materializes the
+nonempty proper cyclic intervals, component packets, packet hypotheses, cycle
+owners, cut owners, and every final cut/cycle-vertex owner. It then recomputes
+the exact `Fraction` ledger and strictness and accepts only a positive ledger,
+or a zero ledger with a strict packet. The canonical-order stream of these
+fully materialized selected witnesses is frozen as
+
+```text
+sha256 1c54195dd78960ab03645f152ded55e0b35aaf898aefda9dbbd1237ea6822958
+```
+
+Exactly nine rows have no such independently accepted witness. Their signatures
+must equal the nine recipes in this note. The replacement audit then checks
 router activity, nesting, interval sizes, actual branch owners, and components;
 all cyclic placements (including the 60 pentagon placements in R4); packet
 connectivity and common-cut or packing-one hypotheses; exhaustive unique cut,
 cycle-vertex, connector, and attachment ownership; and exact radical ledgers.
-All certificate invariants use the fail-closed `require` helper, so the same
-audit runs under `python3 -O` rather than disappearing with assertions.
+Every invariant uses the fail-closed `require` helper, so normal and `-O` runs
+perform the same checks rather than losing checks to optimized assertions.
 
 This is a case-level fully shared `T^8PP` packet audit only. No global rank-ten
 claim is made.

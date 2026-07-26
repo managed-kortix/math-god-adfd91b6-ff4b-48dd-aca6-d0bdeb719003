@@ -6,6 +6,7 @@ from __future__ import annotations
 from collections import Counter
 from dataclasses import dataclass
 from fractions import Fraction
+from hashlib import sha256
 from importlib.util import module_from_spec, spec_from_file_location
 from itertools import permutations, product
 from pathlib import Path
@@ -22,6 +23,11 @@ if SPEC.loader is None:
 sys.modules[SPEC.name] = CENSUS
 SPEC.loader.exec_module(CENSUS)
 BASE = CENSUS.BASE
+
+EXPECTED_CLASS_DIGEST = "9aa6813cb87e1db0748faf441b8941145fbedb5af55386404bd9cfcbe10a6e3b"
+EXPECTED_WITNESS_DIGEST = "1c54195dd78960ab03645f152ded55e0b35aaf898aefda9dbbd1237ea6822958"
+EXPECTED_ALL_BY_CUT = Counter({1: 1, 2: 19, 3: 204, 4: 1155, 5: 3990, 6: 8135, 7: 9615, 8: 5843, 9: 1424})
+EXPECTED_SAFE_BY_CUT = Counter({2: 17, 3: 200, 4: 1154, 5: 3989, 6: 8135, 7: 9615, 8: 5843, 9: 1424})
 
 
 def require(condition, message):
@@ -57,6 +63,270 @@ class GraphCertificate:
     attachments: tuple[tuple[tuple[object, ...], int], ...]
 
 
+@dataclass(frozen=True)
+class PacketHypothesis:
+    value: Fraction
+    strict: bool
+    source: str
+
+
+@dataclass(frozen=True)
+class OrdinaryOwner:
+    port: int
+    interval: tuple[int, ...]
+    cycles: tuple[int, ...]
+    cuts: tuple[int, ...]
+    hypothesis: PacketHypothesis
+
+
+@dataclass(frozen=True)
+class OrdinaryWitness:
+    signature: str
+    sacrificed: int
+    owners: tuple[OrdinaryOwner, ...]
+    cycle_owners: tuple[tuple[int, int], ...]
+    cut_owners: tuple[tuple[int, int], ...]
+    final_owners: tuple[tuple[tuple[object, ...], int], ...]
+    ledger: Fraction
+    strict: bool
+
+
+def stream_digest(lines):
+    return sha256(("\n".join(lines) + "\n").encode("ascii")).hexdigest()
+
+
+def local_adjacency(tree):
+    cycle_count = len(tree.colors)
+    cut_count = len(tree.edges) + 1 - cycle_count
+    require(cut_count >= 1, "canonical row has no cut")
+    adjacency = [[] for _ in range(cycle_count + cut_count)]
+    for edge in tree.edges:
+        require(len(edge) == 2, "canonical row has a malformed edge")
+        cycle, cut = edge
+        require(0 <= cycle < cycle_count <= cut < len(adjacency),
+                "canonical row has a non-incidence edge")
+        adjacency[cycle].append(cut)
+        adjacency[cut].append(cycle)
+    return tuple(tuple(sorted(neighbors)) for neighbors in adjacency)
+
+
+def local_signature(tree, adjacency):
+    degrees = [len(neighbors) for neighbors in adjacency]
+    leaves = [vertex for vertex, degree in enumerate(degrees) if degree <= 1]
+    remaining = len(adjacency)
+    while remaining > 2:
+        require(leaves, "canonical center search stalled")
+        remaining -= len(leaves)
+        new_leaves = []
+        for leaf in leaves:
+            for neighbor in adjacency[leaf]:
+                degrees[neighbor] -= 1
+                if degrees[neighbor] == 1:
+                    new_leaves.append(neighbor)
+        leaves = new_leaves
+
+    def rooted(vertex, parent):
+        label = tree.colors[vertex] if vertex < len(tree.colors) else "X"
+        children = sorted(rooted(child, vertex) for child in adjacency[vertex]
+                          if child != parent)
+        return label + "(" + "".join(children) + ")"
+
+    require(leaves, "canonical row has no center")
+    return min(rooted(center, -1) for center in leaves)
+
+
+def validate_canonical_rows(classes):
+    require(len(classes) == 30386, "canonical class total changed")
+    signatures = tuple(signature for signature, _ in classes)
+    require(signatures == tuple(sorted(signatures)), "canonical rows are not sorted")
+    require(len(set(signatures)) == len(signatures), "canonical signatures repeat")
+    counts = Counter()
+    for stored_signature, tree in classes:
+        require(Counter(tree.colors) == Counter(T=8, P=2),
+                "canonical row has incorrect colors")
+        require(len(set(tree.edges)) == len(tree.edges), "canonical row repeats an edge")
+        adjacency = local_adjacency(tree)
+        require(len(tree.edges) == len(adjacency) - 1,
+                "canonical incidence representative is not a tree")
+        require(all(len(adjacency[cut]) >= 2 for cut in range(10, len(adjacency))),
+                "canonical row has a redundant cut leaf")
+        require(all(1 <= len(adjacency[cycle]) <= (3 if color == "T" else 5)
+                    for cycle, color in enumerate(tree.colors)),
+                "canonical row violates cycle capacity")
+        seen = {0}
+        stack = [0]
+        while stack:
+            vertex = stack.pop()
+            for neighbor in adjacency[vertex]:
+                if neighbor not in seen:
+                    seen.add(neighbor)
+                    stack.append(neighbor)
+        require(len(seen) == len(adjacency), "canonical row is disconnected")
+        require(stored_signature == local_signature(tree, adjacency),
+                "stored signature is not independently canonical")
+        counts[len(adjacency) - 10] += 1
+    require(counts == EXPECTED_ALL_BY_CUT, "canonical cut-count stream changed")
+    digest = stream_digest(signatures)
+    require(digest == EXPECTED_CLASS_DIGEST, "canonical class digest changed")
+    return digest
+
+
+def split_components(tree, sacrificed, adjacency):
+    components = []
+    seen = {sacrificed}
+    for port in adjacency[sacrificed]:
+        require(port not in seen, "two sacrificed-cycle ports enter one component")
+        stack = [port]
+        seen.add(port)
+        vertices = set()
+        cycles = set()
+        while stack:
+            vertex = stack.pop()
+            vertices.add(vertex)
+            if vertex < 10:
+                cycles.add(vertex)
+            for neighbor in adjacency[vertex]:
+                if neighbor not in seen:
+                    seen.add(neighbor)
+                    stack.append(neighbor)
+        components.append((port, tuple(sorted(cycles)), tuple(sorted(
+            vertex for vertex in vertices if vertex >= 10
+        ))))
+    return tuple(components)
+
+
+def packet_hypothesis(tree, cycles, cuts, adjacency):
+    triangle_set = {cycle for cycle in cycles if tree.colors[cycle] == "T"}
+    triangles = len(triangle_set)
+    pentagons = len(cycles) - triangles
+    rank = len(cycles)
+    margins = {1: 0, 2: 1, 3: 2, 4: 3, 5: 2, 6: 1, 7: 0, 8: 0}
+    internal_cuts = tuple(cut for cut in cuts
+                          if sum(cycle in cycles for cycle in adjacency[cut]) >= 2)
+    if pentagons == 0:
+        require(triangles in margins, "all-triangle packet has unsupported rank")
+        return PacketHypothesis(Fraction(margins[triangles]), True, f"A_{triangles}")
+    if rank == 1:
+        require((triangles, pentagons) == (0, 1), "singleton packet is not P")
+        return PacketHypothesis(Fraction(-1, 4), True, "P>-1/4")
+    if (triangles, pentagons) == (1, 1):
+        return PacketHypothesis(Fraction(3, 4), True, "TP>3/4")
+    if (triangles, pentagons) == (0, 2):
+        return PacketHypothesis(Fraction(0), True, "PP>0")
+    if (triangles, pentagons) == (2, 1) and any(
+            triangle_set <= set(adjacency[cut]) for cut in internal_cuts):
+        return PacketHypothesis(Fraction(7, 4), True, "common-cut-TTP>7/4")
+    if (triangles, pentagons) == (1, 2):
+        return PacketHypothesis(Fraction(3, 2), True, "TPP>3/2")
+    if rank == 3:
+        return PacketHypothesis(Fraction(0), False, "generic-rank-3>=0")
+    if (triangles, pentagons) == (3, 1) and any(
+            len(triangle_set & set(adjacency[cut])) >= 2 for cut in internal_cuts):
+        return PacketHypothesis(Fraction(1), True, "shared-pair-TTTP>1")
+    require(4 <= rank <= 8, f"unrecognized retained packet rank {rank}")
+    return PacketHypothesis(Fraction(0), True, f"generic-rank-{rank}>0")
+
+
+def ordinary_witness(signature, tree, sacrificed):
+    adjacency = local_adjacency(tree)
+    components = split_components(tree, sacrificed, adjacency)
+    if len(components) < 2:
+        return None
+    cycle_length = 3 if tree.colors[sacrificed] == "T" else 5
+    require(len(components) <= cycle_length, "split has too many occupied ports")
+    sizes = (1,) * (len(components) - 1) + (cycle_length - len(components) + 1,)
+    require(all(0 < size < cycle_length for size in sizes),
+            "split does not use proper nonempty intervals")
+    owners = []
+    cycle_owners = {}
+    cut_owners = {}
+    final_owners = {}
+    cursor = 0
+    for owner, ((port, cycles, cuts), size) in enumerate(zip(components, sizes)):
+        hypothesis = packet_hypothesis(tree, cycles, cuts, adjacency)
+        interval = tuple(range(cursor, cursor + size))
+        cursor += size
+        owners.append(OrdinaryOwner(port, interval, cycles, cuts, hypothesis))
+        for cycle in cycles:
+            require(cycle not in cycle_owners, "retained cycle has two owners")
+            cycle_owners[cycle] = owner
+            for slot in range(3 if tree.colors[cycle] == "T" else 5):
+                final_owners[("cycle", cycle, slot)] = owner
+        for cut in cuts:
+            require(cut not in cut_owners, "cut has two final owners")
+            cut_owners[cut] = owner
+            final_owners[("cut", cut)] = owner
+        for slot in interval:
+            final_owners[("cycle", sacrificed, slot)] = owner
+    require(cursor == cycle_length, "split intervals do not exhaust sacrificed cycle")
+    require(set(cycle_owners) == set(range(10)) - {sacrificed},
+            "split does not own every retained cycle")
+    require(set(cut_owners) == set(range(10, len(adjacency))),
+            "split does not own every cut")
+    expected_sites = len(adjacency) - 10 + sum(3 if color == "T" else 5
+                                               for color in tree.colors)
+    require(len(final_owners) == expected_sites, "split final ownership is not exhaustive")
+    for owner, item in enumerate(owners):
+        require(final_owners[("cycle", sacrificed, item.interval[0])] == owner,
+                "split port interval has wrong owner")
+        require(cut_owners[item.port] == owner, "split port cut has wrong owner")
+        for cycle in item.cycles:
+            for cut in adjacency[cycle]:
+                require(cut_owners[cut] == owner, "retained connector crosses owners")
+    ledger = sum((item.hypothesis.value for item in owners), Fraction(0))
+    strict = any(item.hypothesis.strict for item in owners)
+    if not (ledger > 0 or (ledger == 0 and strict)):
+        return None
+    return OrdinaryWitness(
+        signature, sacrificed, tuple(owners), tuple(sorted(cycle_owners.items())),
+        tuple(sorted(cut_owners.items())), tuple(sorted(final_owners.items())),
+        ledger, strict,
+    )
+
+
+def witness_line(witness):
+    owners = ";".join(
+        f"{item.port}:{','.join(map(str, item.interval))}:"
+        f"{','.join(map(str, item.cycles))}:{','.join(map(str, item.cuts))}:"
+        f"{item.hypothesis.value.numerator}/{item.hypothesis.value.denominator}:"
+        f"{int(item.hypothesis.strict)}:{item.hypothesis.source}"
+        for item in witness.owners
+    )
+    cycle_owners = ",".join(f"{cycle}:{owner}"
+                            for cycle, owner in witness.cycle_owners)
+    cut_owners = ",".join(f"{cut}:{owner}" for cut, owner in witness.cut_owners)
+    final_owners = ",".join(
+        f"{':'.join(map(str, site))}:{owner}"
+        for site, owner in witness.final_owners
+    )
+    return (f"{witness.signature}|s={witness.sacrificed}|{owners}|"
+            f"cycles={cycle_owners}|cuts={cut_owners}|final={final_owners}|"
+            f"ledger={witness.ledger.numerator}/{witness.ledger.denominator}|"
+            f"strict={int(witness.strict)}")
+
+
+def validate_ordinary_stream(classes):
+    witnesses = []
+    residuals = []
+    safe_by_cut = Counter()
+    for signature, tree in classes:
+        candidates = tuple(filter(None, (
+            ordinary_witness(signature, tree, cycle) for cycle in range(10)
+        )))
+        if candidates:
+            witness = candidates[0]
+            witnesses.append(witness)
+            safe_by_cut[len(local_adjacency(tree)) - 10] += 1
+        else:
+            residuals.append((signature, tree))
+    require(len(witnesses) == 30377, "ordinary-safe witness total changed")
+    require(len(residuals) == 9, "ordinary residual total changed")
+    require(safe_by_cut == EXPECTED_SAFE_BY_CUT, "ordinary-safe cut counts changed")
+    digest = stream_digest(witness_line(witness) for witness in witnesses)
+    require(digest == EXPECTED_WITNESS_DIGEST, "ordinary witness digest changed")
+    return tuple(witnesses), tuple(residuals), digest
+
+
 RECIPES = (
     Recipe("N1", "X(P()P()T()T()T()T()T()T()T()T())", (), (), (("common_tpp", tuple(range(10))),), 1, 0),
     Recipe("N2", "P(X(P())X(T()T()T()T()T()T()T()T()))", (), (9,), (("common_tp", tuple(range(9))),), 7, 1),
@@ -73,7 +343,7 @@ RECIPES = (
 def connected(tree, cycles):
     if len(cycles) <= 1:
         return True
-    adj = BASE.adjacency(tree)
+    adj = local_adjacency(tree)
     allowed = set(cycles)
     seen = {cycles[0]}
     todo = [cycles[0]]
@@ -88,7 +358,7 @@ def connected(tree, cycles):
 
 
 def shared_cut(tree, cycles):
-    adj = BASE.adjacency(tree)
+    adj = local_adjacency(tree)
     return any(all(cut in adj[cycle] for cycle in cycles) for cut in adj[cycles[0]])
 
 
@@ -105,7 +375,7 @@ def common_tpp_positive(tree, cycles):
 
 
 def components_after_router_deletion(tree, routers, opened):
-    adj = BASE.adjacency(tree)
+    adj = local_adjacency(tree)
     blocked = set(routers) | set(opened)
     seen = set(blocked)
     components = []
@@ -129,7 +399,7 @@ def components_after_router_deletion(tree, routers, opened):
 
 
 def branch_cycles(tree, active, removed, ports):
-    adj = BASE.adjacency(tree)
+    adj = local_adjacency(tree)
     allowed = set(active) - set(removed)
     seen = set(ports)
     todo = list(ports)
@@ -148,7 +418,7 @@ def branch_cycles(tree, active, removed, ports):
 
 
 def step_placements(tree, step):
-    marks = tuple(BASE.adjacency(tree)[step.router])
+    marks = local_adjacency(tree)[step.router]
     size = 3 if tree.colors[step.router] == "T" else 5
     return tuple(
         tuple(zip(marks, slots))
@@ -184,7 +454,7 @@ def interval_slot_owners(recipe, step, placement):
 
 
 def materialize_graph_certificates(tree, recipe):
-    adj = BASE.adjacency(tree)
+    adj = local_adjacency(tree)
     packet_of = {
         cycle: index
         for index, (_, cycles) in enumerate(recipe.packets)
@@ -280,12 +550,12 @@ def packet_ledger(tree, recipe):
 
 
 def verify(recipe, tree):
-    require(BASE.signature(tree) == recipe.signature, f"{recipe.code} signature mismatch")
+    adj = local_adjacency(tree)
+    require(local_signature(tree, adj) == recipe.signature, f"{recipe.code} signature mismatch")
     removed = set(recipe.routers) | set(recipe.opened)
     retained = set().union(*(set(cycles) for _, cycles in recipe.packets))
     require(retained == set(range(10)) - removed, f"{recipe.code} cycle coverage mismatch")
     require(sum(len(cycles) for _, cycles in recipe.packets) == len(retained), f"{recipe.code} packets overlap")
-    adj = BASE.adjacency(tree)
 
     for router in recipe.routers:
         color = tree.colors[router]
@@ -369,16 +639,14 @@ def verify(recipe, tree):
 
 
 def main():
-    result = BASE.census(("T",) * 8 + ("P",) * 2, 0, CENSUS.tpp_bound)
-    require(sum(result[0].values()) == 30386, "full census total changed")
-    require(sum(result[1].values()) == 30377, "ordinary accepted total changed")
-    require(len(result[-1]) == 9, "ordinary residual total changed")
-    unresolved = {signature: edges for _, signature, _, edges in result[-1]}
-    require(set(unresolved) == {recipe.signature for recipe in RECIPES}, "recipe signatures do not exhaust residuals")
-    trees = dict(BASE.enumerate_colors(("P", "P") + ("T",) * 8, 0))
+    classes = BASE.enumerate_colors(("P", "P") + ("T",) * 8, 0)
+    class_digest = validate_canonical_rows(classes)
+    witnesses, residual_rows, witness_digest = validate_ordinary_stream(classes)
+    unresolved = {signature: tree for signature, tree in residual_rows}
+    require(set(unresolved) == {recipe.signature for recipe in RECIPES},
+            "recipe signatures do not exhaust residuals")
     for recipe in RECIPES:
-        require(trees[recipe.signature].edges == unresolved[recipe.signature], f"{recipe.code} representative mismatch")
-        certificates = verify(recipe, trees[recipe.signature])
+        certificates = verify(recipe, unresolved[recipe.signature])
         if recipe.code == "N1":
             ledger = ">9-4/(3sqrt(13))"
         elif recipe.deficits == 0:
@@ -386,6 +654,8 @@ def main():
         else:
             ledger = f">{recipe.credit}-{recipe.deficits}delta"
         print(f"{recipe.code} CLOSED: routers={recipe.routers or 'none'} opened={recipe.opened or 'none'} placements={len(certificates)} ledger={ledger}")
+    print(f"independent canonical stream: {len(classes)} sha256={class_digest}")
+    print(f"materialized ordinary witnesses: {len(witnesses)} sha256={witness_digest}")
     print("verified exact canonical exceptions: 9/9")
     print("all 30386 fully shared T^8PP incidence types close")
 
