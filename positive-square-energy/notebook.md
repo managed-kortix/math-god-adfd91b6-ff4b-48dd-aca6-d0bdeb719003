@@ -1,5 +1,17 @@
 # notebook — positive square energy
 
+## 2026-07-26 — rank-eleven fully shared ladder closure
+
+Closed Gap G3 in the rank-eleven cactus induction. All ten fully shared
+`T^9PP` signatures left by the ordinary one-cycle split ledger have uniform
+positive packetizations with exact final owners. A hostile audit caught that
+literal N7 inheritance gives only `P+P+A_7>-2delta`, not positivity. The
+correct `U7` split sacrifices one router and leaves `P +` packing-one `T^8P`,
+giving `>8-2delta`. Nested owners, cyclic order, and arbitrary-tree assignments
+are explicit in
+`research/rank-eleven-t9pp-ladder-inheritance-2026-07-26.md`. This does not
+prove rank eleven: global marked router reachability R11 remains open.
+
 ## 2026-07-25 — universal block graphs, corrected packet proof
 
 **Theorem.** Every connected non-tree block graph `G` of order `n` satisfies
