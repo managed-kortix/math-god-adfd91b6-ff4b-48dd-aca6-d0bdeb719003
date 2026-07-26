@@ -106,10 +106,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   funnel has returned to the fixed half-strength additive-12 target, now exactly
   reduced to a twelve-prefix triangular drift/impulse budget and certified with
   complete Arb cells through `3071`, but CRT and Gram-sign audits rule out any
-  proof from local squarefree/prime occurrence alone
+  proof from local squarefree/prime occurrence alone; the sharp projection onto
+  the incoming `U` plus twelve new vectors fails on `[219,231)` because recovery
+  lies in an orthogonal old-`D` reserve, while the near-diagonal Vasyunin kernel
+  has a logarithmic cusp and leaves twelve uncontrolled incoming projections;
+  an explicit hostile nonsquarefree window begins at `47,255,689,915`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 51
+- **cycle:** 52
 - **announcements:** none
 
 ## immutable target list
@@ -128,8 +132,9 @@ waiting process.
 
 ## next exact steps
 
-1. Attack the exact additive-12 triangular impulse budget with quantitative
-   Vasyunin correlations; local squarefree gaps and signs are insufficient.
+1. Control the old-`D` orthogonal reserve in the twelve-window projection, or
+   couple it directly to the negative `U` packet; local new-vector projection
+   and smooth near-diagonal expansion are now ruled out.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -144,6 +149,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 52 derived the sharp at-most-thirteen-probe projection for
+  a twelve-window and falsified its sign on `[219,231)`: the discarded old-`D`
+  orthogonal square is `0.0008054...`, while the final surplus is only
+  `0.000004476...`. The near-diagonal restricted Vasyunin kernel has an
+  `epsilon log(1/epsilon)` cusp, preventing a smooth local Taylor reduction and
+  leaving twelve old-state projections. Möbius-pattern classification is
+  decisively nonunique, and the first known twelve-nonsquarefree hostile window
+  starts at `47,255,689,915`, beyond current physical Gram reach. No RH or
+  Millennium solution is claimed.
 
 - 2026-07-26: Cycle 51 formulated the exact fixed half-strength additive-12
   target as nonnegativity of one of twelve weighted `H` prefixes and derived

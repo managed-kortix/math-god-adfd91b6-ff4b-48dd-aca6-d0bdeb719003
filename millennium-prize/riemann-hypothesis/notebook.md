@@ -4319,6 +4319,25 @@ through `3071` have singleton success only. Certificates, summaries, hashes,
 and resume checkpoints are in `cycle51-scan-3072/`; the exact theorem and index
 audit are in `cycle-51-additive-12-frontier.md`. No RH result is claimed.
 
+## Cycle 52: finite-window projection and local-cusp obstructions
+
+Projecting the twelve-window weighted `D` packet onto the incoming `U` plus at
+most twelve new fractional-part vectors gives an exact Schur lower bound, but
+it is negative on `[219,231)` while the physical budget is positive. The
+missing old-`D` orthogonal square contains essentially the whole recovery;
+including it as a probe makes the formula tautological.
+
+Near the diagonal, the restricted Vasyunin kernel has a logarithmic cusp:
+`G_(M+k,M+j)=c_0/M-(j-k)log(M/(j-k))/(2M^2)+O(M^-2)`. Thus no smooth local
+Taylor model exists. Newly generated rows reduce to local Möbius moments, but
+twelve distinct incoming global projections remain uncontrolled.
+
+Finite pattern classification confirms that Möbius symbols and event signs do
+not determine recovery. The explicit first known twelve-nonsquarefree window
+starts at `47,255,689,915`; there additive-12 fails exactly if `H_M<0`, a sign
+far beyond current Gram computation. Details and an exact integer verifier are
+in `cycle-52-twelve-window-projection-and-cusp.md`. No RH result is claimed.
+
 ## Cycle 48: coherent mean must be compensated, not split off
 
 The exact finite budget is
