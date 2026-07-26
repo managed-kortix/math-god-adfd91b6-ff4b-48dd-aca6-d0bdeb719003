@@ -63,8 +63,11 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
    equivalent to shell contraction, while known/smoothed pair correlation
    misses the weights and unsmoothing scale; exact smooth averaging of the
    complete endpoint decrement now gives correlation-preserving coefficient
-   kernels and continuous Mellin decay only in total pair frequency, while the
-   anti-diagonal correlation and discrete lattice aliases survive; the exact
+   kernels and continuous Mellin decay only in total pair frequency; the exact
+   anti-diagonal restriction is eventually a negative conjugate-zero diagonal
+   for nonnegative smoothing, and Mellin denominators, the dyadic derivative,
+   affine completion, and zero symmetry do not cancel it; discrete lattice
+   aliases also survive; the exact
    variable-block theorem now proves that consecutive complete blocks with
    fixed fractional dissipation force zero liminf, so the current sublemma is a
    Möbius-specific adaptive renewal inequality for complete blocks, after
@@ -72,7 +75,7 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 37
+- **cycle:** 38
 - **announcements:** none
 
 ## immutable target list
@@ -91,18 +94,30 @@ waiting process.
 
 ## next exact steps
 
-1. Derive a Möbius-specific adaptive renewal inequality for complete endpoint
-   blocks, permitting signed one-step decrements.
-2. Compute scale-covariant smooth kernels only for the complete partitioned
-   functional and track divergent effective mass after all losses.
-3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
+1. Test the exact residual budgets
+   `P_a-2 kappa sum_(n>=a) w_n P_n`; every-start renewal is equivalent to their
+   nonnegativity plus recurrence at equality.
+2. Attack the compensated Mobius--Chebyshev cell inequality first at the
+   summable `kappa/log a` block strength, then determine the strongest factor
+   available after every loss and whether its effective mass diverges.
+3. Fold the full completed smoothed zero expansion to positive ordinates and
+   compare its negative diagonal with the same-sign, affine, and endpoint
+   channels under one finite cutoff and signed error.
+4. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
-4. Rotate only at a proved checkpoint, decisive falsification, or documented
+5. Rotate only at a proved checkpoint, decisive falsification, or documented
    strategic review.
 
 ## last ticks
 
+- 2026-07-26: characterized adaptive renewal from every start exactly. For
+  arbitrary nonnegative sequences with RH weights it is strictly stronger than
+  zero liminf: it is equivalent to finite weighted energy, the reverse tail
+  Hardy inequalities `P_a >= 2 kappa sum_(n>=a) w_n P_n`, and recurrence of
+  every equality index. A positive sequence tending to zero with finite
+  weighted energy can violate one tail inequality, so zero liminf does not
+  recover adaptive stops. No solution is claimed.
 - 2026-07-25: operator created a permanent second research lane focused solely
   on all six unsolved Millennium Prize Problems. Added a dedicated agent,
   keyed heartbeat, isolated memory, and anti-overclaim victory criteria while
@@ -399,3 +414,56 @@ waiting process.
   all insufficient.  Earlier dyadic and fixed-length claims survive with their
   exact quantifiers, but imply only a zero liminf unless endpoint dissipation is
   added.  No RH result is claimed.
+- 2026-07-26: implemented cutoff-free 192-bit Arb enclosures of the complete
+  restricted `P_N` from the exact Vasyunin Gram formula, with the required
+  rank-one full/restricted correction and symbolic `N=2,3` audits. Adaptive
+  first-passage block diagnostics reach `N=256` for `kappa=0.4,0.5` (maximum
+  observed ratios `b/a=2,3`) but fail immediately at `kappa=0.6`. These are
+  finite certificates only; eventual stopping, divergent tail weight, and RH
+  remain unproved.
+- 2026-07-26: audited Hardy/Poincare coercivity for the exact complete endpoint
+  path.  The derivative in `log X` and its cell energy are explicit, while
+  `log log X` is the scale matching the divergent weight
+  `h_n(log n)`.  Poincare misses the constant scale mode, and derivative energy
+  misses the radial orientation in the signed endpoint decrement.  A constant
+  path and an explicit continuous reciprocal-log path alternating orthogonal
+  unit endpoints show respectively zero-energy and positive-energy failure:
+  both keep `P_n=1`, and the latter has positive path energy on every cell but
+  zero decrement on every endpoint block.  Generic functional analysis cannot
+  imply block dissipation without Mobius-specific alignment.  No RH result is
+  claimed.
+- 2026-07-26: derived the exact Cycle 38 coefficient and fractional-part Gram
+  kernels for a complete consecutive block and its weighted dissipation side.
+  The endpoint decrement telescopes to an indefinite difference of two rank-one
+  scale kernels, while the weighted side retains the common-scale quadratic
+  correlation.  After summing the scale, the latter splits exactly into a
+  positive weighted mean square and a positive coefficient-covariance square.
+  Subtracting it cannot make the endpoint kernel algebraically positive, so any
+  block dissipation estimate must use arithmetic interaction with the fixed
+  fractional-part Gram matrix rather than a missing sum-of-squares completion.
+  No RH result is claimed.
+- 2026-07-26: restricted the complete smoothed quadratic kernel exactly to a
+  conjugate zero pair.  On RH it equals `C_X(1)/(1/4+gamma^2)^2`, where for
+  nonnegative smoothing `C_X(1)<0` at every integer `X>=6` and
+  `C_X(1)~-int yW(y)dy/log^2 X`.  Mellin denominators only damp, the dyadic zero
+  is at total exponent zero rather than one, affine terms cannot change the
+  quadratic Hessian, and conjugation doubles the diagonal.  Off-diagonal and
+  completed-channel cancellation remains necessary; no RH result is claimed.
+- 2026-07-26: compared complete unit endpoint blocks with anchored dyadic
+  blocks. Exact unit multiplicities govern both decrements and weighted
+  interiors, but Abel summation exposes restart terms for general adaptive
+  covers. Proved that the only nonnegative multiplicity-one tail cover by
+  `[N,2N)` is the rigid chain `[2^j a,2^(j+1)a)`. Grouping consecutive members
+  of that chain gives complete integer blocks and preserves the full divergent
+  weight exactly; sparse representatives can have summable weight. No Mobius
+  lower bound or RH result is claimed.
+- 2026-07-26: rewrote the adaptive complete-block surplus through exact unit
+  cells using only finite Mobius coefficients, Chebyshev values, divisor-floor
+  impulses, and elementary endpoint weights. The fixed-strength stopping
+  theorem is RH-sufficient, so it is not honestly a theorem weaker than RH.
+  Isolated a pilot correlation target with factor `kappa/log a` and polynomial
+  stopping range; its effective mass is summable, placing it below the
+  RH-sufficient renewal threshold. A hostile audit rejects assumed stopping,
+  incomplete shells, dropped quadratic cost, reciprocal-zeta or Mertens input,
+  out-of-range Chebyshev substitution, correlation factorization, and nominal
+  pre-loss weight divergence. No RH result is claimed.

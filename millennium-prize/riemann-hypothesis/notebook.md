@@ -3639,3 +3639,251 @@ Formulate and attack an adaptive renewal inequality for complete endpoint
 blocks. Compute scale-covariant kernels for the complete physical partition and
 identify which windows retain enough divergent effective mass after all
 boundary and smoothing losses.
+
+## Cycle 38: log-scale Hardy/Poincare coercivity audit
+
+On `L_n=log n<=t<=L_(n+1)`, the complete interpolation and its logarithmic
+derivative are exactly
+
+\[
+ F_{e^t}=F_n+(L_n^{-1}-t^{-1})D_n,
+ \qquad {dF_{e^t}\over dt}={D_n\over t^2}.
+\]
+
+Its cell path energy is
+
+\[
+ \int_{L_n}^{L_{n+1}}\|F'(t)\|^2dt
+ ={\|D_n\|^2\over3}(L_n^{-3}-L_{n+1}^{-3}).
+\]
+
+The natural mass scale is `s=log log X`, because for
+`Delta s_n=log(L_(n+1)/L_n)` one has
+
+\[
+ w_n=h_nL_n=1-e^{-\Delta s_n}\sim\Delta s_n.
+\]
+
+Neumann Poincare controls only `F` minus its scale average. Hardy controls the
+full path only after a zero boundary condition, which is unavailable and would
+be RH-strength at infinity. More decisively, path energy contains only
+`||D_n||^2`, while the signed decrement also contains the orientation term:
+
+\[
+ P_n-P_{n+1}=-2h_n\langle F_n,D_n\rangle-h_n^2\|D_n\|^2.
+\]
+
+Two exact abstract counterexamples close the generic route. A nonzero constant
+path has positive `P_n` and zero derivative energy. For a nonconstant example,
+take `H=R^2`, alternate unit endpoint vectors `v_n=e_1,e_2`, and set
+`D_n=(v_(n+1)-v_n)/h_n`, `U_n=v_n+D_n/L_n`. The resulting reciprocal-log path
+has the exact complete interpolation, continuous endpoints, and strictly
+positive path energy on every cell, but `P_n=1` and every block endpoint
+decrement is zero while `sum w_nP_n` diverges.
+
+Thus complete endpoint interpolation alone admits no Hardy/Poincare coercivity
+implying block dissipation. Any successful inequality must use Mobius-specific
+information to force compensated radial alignment, which is exactly the
+existing `E_n` block target. Details are in
+`cycle-38-log-scale-coercivity-audit.md`.
+
+### Next queued main-funnel step
+
+Return to the arithmetic path. Seek a complete-block estimate for the signed
+alignment `-<F_n,D_n>-h_n||D_n||^2/2`, rather than an unsigned derivative-energy
+bound. Any proposed scale Sobolev estimate must explicitly remove the constant
+mode and prove, not assume, a favorable radial orientation.
+
+## Cycle 38: consecutive-block Gram kernels and completion
+
+For `rho_n=h_n log n`, the complete block sum has the exact kernels
+
+\[
+ \sum_{n=a}^{b-1}(P_n-P_{n+1})=P_a-P_b,
+\]
+
+\[
+ D(q)=c_q(a)-c_q(b),\qquad
+ K(q,r)=c_q(a)c_r(a)-c_q(b)c_r(b).
+\]
+
+The pre-telescoping products retain their common scale:
+`K(q,r)=sum_n[c_q(n)c_r(n)-c_q(n+1)c_r(n+1)]`; they must not be
+factorized into separate averages.  The weighted RHS has kernels
+
+\[
+ W=\sum_n\rho_n,\qquad L(q)=\sum_n\rho_nc_q(n),\qquad
+ Q(q,r)=\sum_n\rho_nc_q(n)c_r(n).
+\]
+
+Writing `bar c=L/W` gives the exact positive completion
+
+\[
+ \sum_n\rho_nP_n
+ =W\left\|1+\sum_q\bar c_q\{t/q\}\right\|^2
+ +\sum_n\rho_n\left\|\sum_q(c_q(n)-\bar c_q)\{t/q\}\right\|^2.
+\]
+
+Thus `Q-LL^T/W` is the positive scale-covariance kernel.  In contrast, the
+decrement has augmented coefficient kernel `u_a u_a^T-u_b u_b^T`, which is
+indefinite when the endpoints differ.  Subtracting the positive weighted RHS
+cannot create coefficient-space positivity.  The exact formulas, thresholded
+logarithmic moments, and local first-difference kernel are recorded in
+`cycle-38-consecutive-block-gram-kernels.md`.  The remaining sign problem must
+use arithmetic interaction with the fixed fractional-part Gram matrix; there
+is no purely algebraic completion after summing the scale.
+
+### Next queued main-funnel step
+
+Estimate the contraction of the indefinite endpoint kernel with the explicit
+fractional-part Gram matrix against both terms of the RHS covariance
+completion.  Preserve the same-scale quadratic kernel in any averaging or
+Mellin transform.
+
+## Cycle 38: unit blocks versus adaptive dyadic blocks
+
+Every dyadic decrement is exactly the sum of its unit endpoint decrements. For
+a weighted family `[N,2N)`, the unit multiplicity
+`c_n=sum_(N<=n<2N)lambda_N` gives exact identities on both sides of the desired
+dissipation inequality. Discrete Abel summation, however, introduces restart
+terms `sum (c_n-c_(n-1))P_n`; coverage and bounded overlap do not bound them.
+
+A nonnegative multiplicity-one cover of every integer `n>=a` is rigid: only
+`lambda_(2^j a)=1` can occur. Thus arbitrary adaptive dyadic starts do not
+convert into complete consecutive blocks. The valid adaptive construction
+groups consecutive members of this geometric chain; then both endpoint
+decrements and weighted interiors combine with multiplicity one into the exact
+integer block between stopping endpoints.
+
+The full weight is retained exactly:
+
+\[
+\sum_{j<J}W_{2^ja}=\sum_{a\le n<2^Ja}w_n,
+\qquad w_n\ge{1\over(n+1)\log(n+1)}.
+\]
+
+After a group-dependent loss `kappa_j`, the effective mass is exactly
+`sum_j kappa_j sum_(n in I_j)w_n` and this, not nominal weight, must diverge.
+Sparse representatives can fail: `W_N<=1/log N`, so scales
+`N_j=2^(2^j)a` carry summable sampled weight. Details are in
+`cycle-38-unit-versus-dyadic-blocks.md`.
+
+### Next queued main-funnel step
+
+Seek a Mobius-specific stopped inequality retaining every constituent dyadic
+packet in each grouped block. Track the stopping-dependent constant and every
+boundary or smoothing loss in the effective mass before claiming divergence.
+
+## Cycle 38: exact anti-diagonal restriction
+
+Writing the Cycle 37 quadratic kernel as
+
+\[
+ \widetilde{\mathcal Q}_X(z,w)={\mathcal C_X(z+w)\over z^2w^2},
+ \qquad
+ \mathcal C_X(s)=\int W(y)y^s\left
+ [\log(Xy)]^{-2}-{2^s\over[\log(2Xy)]^2}\right)dy,
+\]
+
+gives, for `z=beta+i gamma` and `w=bar z`,
+
+\[
+ \widetilde{\mathcal Q}_X(z,\bar z)
+ ={\mathcal C_X(2\beta)\over(\beta^2+\gamma^2)^2}.
+\]
+
+On RH the scalar numerator is
+
+\[
+ \mathcal C_X(1)=\int W(y)y\,
+ {a^2+2aL_y-L_y^2\over L_y^2(L_y+a)^2}dy,
+ \qquad a=\log2,\quad L_y=\log(Xy).
+\]
+
+For nonnegative nonzero `W`, it is strictly negative once
+`X>=2^(1+sqrt 2)`, hence for integer `X>=6`, and is asymptotic to
+`-int yW(y)dy/log^2 X`. The Mellin denominators become the positive factor
+`(1/4+gamma^2)^(-2)`; the dyadic zero lies at total exponent zero rather than
+the RH value one; affine completion cannot change the quadratic Hessian; and
+the two conjugate ordered pairs double rather than cancel the diagonal. Thus
+the surviving anti-diagonal is an eventual negative diagonal obstruction for
+standard smoothing. Any favorable complete-block theorem needs genuine
+off-diagonal/affine/endpoint cancellation. Details are in
+`cycle-38-antidiagonal-complete-kernel.md`.
+
+### Next queued main-funnel step
+
+Fold the full completed zero expansion to positive ordinates and compare the
+negative diagonal mass from (38.4) with the same-sign oscillatory pairs and the
+exact affine channel, retaining a common finite cutoff and its signed error.
+
+## Cycle 38: exact adaptive-renewal characterization
+
+For `c=2kappa`, finite renewals from every possible start are strictly stronger
+than `liminf P_n=0`. With `T_a=sum_(n>=a)w_nP_n`, they hold exactly when
+`sum w_nP_n<infinity`, the reverse Hardy inequalities `P_a>=cT_a` hold for
+every `a`, and the equality set `{a:P_a=cT_a}` has no largest member.
+
+Necessity follows by iterating and telescoping renewals from each start.
+Sufficiency uses `sum w_n=infinity`: weighted summability gives
+`liminf P_n=0`, hence `liminf(P_n-cT_n)=0`; a positive residual budget has a
+later smaller value, while a zero uses recurrence of the equality set. That
+residual comparison is exactly the block inequality.
+
+The converse fails even for positive sequences tending to zero with finite
+weighted energy. Take `P_n=1/n` except at one `N`, where
+`P_N=(c/2)sum_(n>N)w_n/n`. Then `P_N-cT_N<0`, so no stop starts at `N`.
+The useful endpoint-free arithmetic target is therefore the uniform tail Hardy
+inequality, not zero liminf itself. Full details and sharp equality-boundary
+examples are in `cycle-38-adaptive-renewal-characterization.md`.
+
+### Next queued main-funnel step
+
+Test the Mobius restricted energies against `P_a-2kappa T_a` to determine
+whether any fixed `kappa>0` survives. If not, weaken the demand from every
+possible start to one recursively generated endpoint chain.
+
+## Cycle 38: adaptive renewal in exact Mobius--Chebyshev cells
+
+The complete one-step surplus is now expanded in
+`cycle-38-adaptive-renewal-arithmetic.md`. In reciprocal variables,
+
+\[
+ G_n(t)=1+\sum_{a\le n}\mu(a){\log(n/a)\over\log n}\{t/a\},
+ \qquad D_n(t)=\sum_{a\le n}\mu(a)\log a\{t/a\},
+\]
+
+and `G_(n+1)=G_n+h_nD_n`. With `d_n=-D_n`, every unit cell has the exact form
+
+\[
+ \int_k^{k+1}(2G_nd_n-h_nd_n^2){dt\over t^2}
+ =C_n+Z_{n,k}\log(1+1/k)+{H_{n,k}\over k(k+1)},
+\]
+
+where `C,Z,H` are finite Mobius floor sums. On `k<=n`, their intercepts reduce
+exactly to `-psi(k)/log n` and `-psi(k)`; after `k=n`, the truncated Mobius
+endpoint transform remains explicit and must not be replaced by that initial
+Chebyshev formula. The analogous cell formula for `P_n` makes both sides of the
+adaptive inequality literal Mobius--Chebyshev arithmetic.
+
+The fixed-strength stopping rule is not a theorem weaker than RH: if every stop
+is finite for one fixed `kappa>0`, the exact endpoint telescope and divergent
+`sum h_n log(n)` force `liminf P_n=0`, hence RH. The pilot target instead asks
+for coefficient `kappa/log a` and a stop `a<b<=a^C`. Its effective mass is at
+most a constant times `sum h_n`, hence summable. It is quantitatively below the
+RH-sufficient renewal threshold and tests the same compensated correlation
+without obtaining RH from the variable-block theorem.
+
+The adversarial audit rules out assuming stopping-time finiteness, replacing
+the complete functional by shells or prefixes, discarding
+`h_n||D_n||^2/2`, substituting `1/zeta` across its zeros, importing an
+RH-equivalent Mertens estimate, extending the Chebyshev identity beyond its
+endpoint, factorizing common-scale products, or counting weight before all
+block losses. No RH result is claimed.
+
+### Next queued main-funnel step
+
+Attack the `kappa/log a` compensated cell correlation directly and identify the
+first loss that prevents a larger block factor. In parallel, compare this
+physical-cell obstruction with the completed anti-diagonal zero contribution
+under one common finite cutoff.
