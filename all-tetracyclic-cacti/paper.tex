@@ -9,7 +9,7 @@
 \newcommand{\spE}{s^+}
 \newcommand{\sig}{\sigma}
 
-\title{Positive Square Energy of Bridge-Separated Tetracyclic Cacti}
+\title{Positive Square Energy of Every Tetracyclic Cactus}
 \author{}
 \date{25 July 2026}
 
@@ -18,16 +18,16 @@
 
 \begin{abstract}
 Let $G$ be a connected tetracyclic cactus of order $n$.  We prove
-$s^+(G)>n$ whenever its four cyclic blocks do not all belong to one connected
-shared-cut cluster.  The sharp block-additive doubly nonnegative bound reduces
+$s^+(G)>n$.  The sharp block-additive doubly nonnegative bound reduces
 the problem to cycle multisets $\{3,3,3,q\}$ and
 $\{3,3,5,5\}$.  We settle every bridge-separated incidence by adaptive
 induced packetization.  Two apparent obstructions disappear only after one
 allows a hostile cycle to be sacrificed into path fragments: a shared
 $C_3-C_5-C_3$ cluster plus a remote pentagon, and a shared three-triangle
 cluster plus a remote $1\pmod4$ cycle.  Arbitrary connector trees and arbitrary
-trees attached at arbitrary vertices are allowed.  The case in which all four
-cycles form one shared-cut cluster is not asserted here.
+trees attached at arbitrary vertices are allowed.  Fully shared residuals are
+closed by deleting a private cyclic vertex or by partitioning a hostile central
+cycle into three triangular unicyclic territories.
 \end{abstract}
 
 \section{Preliminaries}
@@ -228,13 +228,15 @@ from that connector on the $Q$ side.
 If $z\in V(P)\setminus\{x_1,x_2\}$, put $z$ with $Q$ and put
 $P-z$ together with both triangles on the other side.  The latter is connected
 because $P-z$ is a path containing $x_1,x_2$.  The two induced territories
-have cycle multisets $\{Q\}$ and $\{T_1,T_2\}$, respectively.  Hence their surplus sum is
+have cycle multisets $\{Q\}$ and $\{T_1,T_2\}$, respectively.  Every off-core
+branch rooted at $z$ goes with the $Q$ side.  Hence their surplus sum is
 strictly greater than $-\delta_5+1=3-\sqrt5>0$.
 
 Otherwise $z$ lies on one triangle, say $T_1$; this includes $z=x_1$ (which
 also lies on $P$) and a
 connector entering through any branch rooted on $T_1$.  Put all of $T_1$, the
-connector, and $Q$ on one side.  Put $P-x_1$ and $T_2$ on
+connector, and $Q$ on one side, together with every off-core branch rooted at
+$x_1$.  Put $P-x_1$ and $T_2$ on
 the other side.  The first induced territory is a mixed $TP$ bicyclic cactus;
 the second is triangular unicyclic because $P-x_1$ is a path containing
 $x_2$.  Their surplus sum is strictly greater than $1-\delta_5>0$.  The case
@@ -286,11 +288,102 @@ $T-P-T$, with the pentagon in the middle and distinct triangle cuts.  This is
 exactly Lemma~\ref{lem:sacrifice}.  The enumeration is exhaustive.
 \end{proof}
 
+\section{Fully shared residuals}
+
+Let $I$ denote the bipartite incidence tree whose nodes are the four cyclic
+blocks and the cut vertices belonging to at least two of them.  If $c$ is the
+number of cut nodes, then $|E(I)|=c+3$ and
+\begin{equation}\label{eq:incidence-excess}
+ \sum_{x\text{ cut node}}(\deg_I(x)-1)=3.
+\end{equation}
+
+\begin{proposition}[Fully shared $\{3,3,5,5\}$]\label{prop:shared3355}
+If the four cyclic blocks have lengths $3,3,5,5$ and form one shared-cut
+cluster, then $\spE(G)>n$.
+\end{proposition}
+
+\begin{proof}
+Suppose first that a triangle is a leaf cycle node of $I$, with unique shared
+cut $x$.  Choose a private vertex $v$ of that triangle, let $F$ consist of $v$
+and every off-cycle tree branch rooted there, and put the remaining vertices in
+$H$.  Then $F$ is a tree, so $\sig(F)=-1$.  The broken triangle leaves an edge
+at $x$, while the other triangle and two pentagons remain connected in one
+shared-cut cluster.  Thus \eqref{eq:pack5} gives
+\[
+ \sig(G)\geq\sig(F)+\sig(H)>-1+6-2\sqrt5=5-2\sqrt5>0.
+\]
+
+Suppose neither triangle is a leaf.  Every cut node has degree at least two,
+the two triangle nodes have degree at least two, and the pentagon nodes have
+degree at least one.  Since $|E(I)|=c+3$, degree counting gives
+$c+3\geq2c$ and $c+3\geq6$, hence $c=3$.  Equality holds throughout: every
+cut node has degree two, both triangles have degree two, and both pentagons are
+leaves.  Therefore $I$ is the alternating path
+\[
+ P_1-x-T_1-y-T_2-z-P_2.
+\]
+Choose a private vertex $v$ of $P_1$ and define the tree $F$ as above.  The
+remainder $H$ is connected, has cycles $T_1,T_2,P_2$, and its triangles share
+$y$.  Equation~\eqref{eq:pack4} gives
+\[
+ \sig(G)>-1+(2-\delta_5)=1-\delta_5=3-\sqrt5>0.
+\]
+The two incidence alternatives are exhaustive.
+\end{proof}
+
+\begin{lemma}[Three-petal partition]\label{lem:petals}
+Suppose a cycle $Q=C_q$ carries three pairwise disjoint triangular blocks at
+three distinct vertices.  Then the vertices can be partitioned into three
+connected induced triangular unicyclic cacti.
+\end{lemma}
+
+\begin{proof}
+List the three attachment vertices in cyclic order.  Partition $V(Q)$ into
+three nonempty consecutive cyclic intervals, each containing exactly one
+attachment vertex; equivalently, choose the three boundary edges between
+successive intervals.  If two attachments are adjacent, their common edge may
+be a boundary edge, and for $q=3$ all intervals are singletons.  Every interval induces
+a proper path, never the whole cycle.  Add to each interval its attached
+triangle.  Every component outside the four-cycle core is a tree with a unique
+core attachment, since all four cyclic blocks have already been listed;
+assign it wholly to the part containing that attachment.  Each resulting
+induced graph is connected and its unique cycle is its triangle.
+\end{proof}
+
+\begin{proposition}[Fully shared $\{3,3,3,q\}$]\label{prop:shared333q}
+If the four cyclic blocks have lengths $3,3,3,q$, $q\geq3$, and form one
+shared-cut cluster, then $\spE(G)>n$.
+\end{proposition}
+
+\begin{proof}
+When $q=3$, all four blocks are interchangeable; label them so that any chosen
+intersecting pair is among the three designated triangles.  Suppose first that
+two designated triangles share a cut.  Let $k$ be the number of shared cut
+vertices on $Q$.  The $k$ cuts contribute at least $k$ to
+\eqref{eq:incidence-excess}; the intersecting pair contributes one further
+unit, whether its cut lies off $Q$ or is a degree-at-least-three cut on $Q$.
+Hence $k+1\leq3$, so $k\leq2$.  Choose a private vertex $v$ of $Q$, let $F$
+be $v$ with all off-$Q$ branches rooted there, and let $H$ be the complement.
+Then $F$ is a tree and $Q-v$ is a path containing every shared cut of $Q$, so
+$H$ is connected.  Its only cycles are three triangles, including an
+intersecting pair, and therefore its cycle packing number is at most two.
+Equation~\eqref{eq:favorable} gives $\sig(H)>2$, whence
+\[
+ \sig(G)\geq\sig(F)+\sig(H)>-1+2=1.
+\]
+
+If no two designated triangles meet, connectedness of $I$ forces every
+triangle to meet $Q$.  No triangle can meet $Q$ twice, since that would create
+a cycle in $I$, and no two can use the same cut.  Thus they are exactly the
+three petals of Lemma~\ref{lem:petals}.  Each resulting triangular unicyclic
+territory has strictly positive surplus by \eqref{eq:pack1}; summing with
+\eqref{eq:super} proves $\sig(G)>0$.
+\end{proof}
+
 \section{Main theorem}
 
 \begin{theorem}\label{thm:main}
-Let $G$ be a connected tetracyclic cactus on $n$ vertices.  If its four cyclic
-blocks do not all belong to one connected shared-cut cluster, then
+Let $G$ be a connected tetracyclic cactus on $n$ vertices.  Then
 \[
  \boxed{\spE(G)>n}.
 \]
@@ -298,22 +391,23 @@ blocks do not all belong to one connected shared-cut cluster, then
 
 \begin{proof}
 The DNN estimate \eqref{eq:dnn} settles every cycle multiset except
-\eqref{eq:residual}.  Proposition~\ref{prop:333q} settles the first residual
-family and Proposition~\ref{prop:3355} settles the second.  Every construction
-uses vertex-disjoint induced territories, so arbitrary crossing bridge edges
-are discarded only through the valid superadditivity inequality
-\eqref{eq:super}; no edge-monotonicity is used.
+\eqref{eq:residual}.  If the shared-cut graph is disconnected,
+Propositions~\ref{prop:333q} and \ref{prop:3355} settle the two residual
+families.  If it is connected, Propositions~\ref{prop:shared333q} and
+\ref{prop:shared3355} settle them.  These alternatives exhaust every cactus
+incidence.  Every construction uses vertex-disjoint induced territories, so
+crossing edges are discarded only through \eqref{eq:super}; no edge
+monotonicity or tree relocation is used.
 \end{proof}
 
-\section{Scope}
+\section{Conclusion}
 
-The theorem does not cover a tetracyclic cactus in which all four cycles form
-one connected shared-cut cluster.  In particular, it does not claim the full
-tetracyclic-cactus case.  An exact repository census finds twenty
-quotient-isomorphism types for the shared $\{3,3,5,5\}$ residual, and the
-direct coefficientwise two-pentagon phase certificate succeeds for only one;
-see \texttt{research/c3-c3-c5-c5-shared-cluster-census-2026-07-25.md}.
-The other cases remain unresolved by that certificate.
+Since a connected tetracyclic graph has $m=n+3$, the strict theorem proves the
+conclusion of the Akbari--Kumar--Mohar--Pragada--Zhang conjecture
+\cite[Conjecture~1.2]{AKMPZ} for every tetracyclic cactus, with arbitrary bridge
+blocks and arbitrary attached trees.  A previously attempted coefficientwise
+phase certificate is unnecessary: the incidence-tree sacrifice proof above
+bypasses the fully shared core calculation entirely.
 
 \begin{thebibliography}{9}
 \bibitem{AKMP}

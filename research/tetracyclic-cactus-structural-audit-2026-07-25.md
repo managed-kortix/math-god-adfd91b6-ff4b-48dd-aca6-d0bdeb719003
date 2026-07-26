@@ -83,6 +83,13 @@ vertex: the resulting territories are either `TT` plus `P`, or `T` plus `TP`.
 Thus every disconnected shared-cut residual is proved. The remaining
 tetracyclic frontier consists only of one connected shared-cut cluster.
 
+That remaining frontier was subsequently closed in
+`all-tetracyclic-cacti/paper.tex`. The key point is that the 20 shared
+`{3,3,5,5}` quotient types reduce to a two-case incidence-tree degree argument,
+while the only difficult shared `{3,3,3,q}` incidence partitions its central
+cycle into three triangular unicyclic territories. Therefore this audit's
+earlier “remaining frontier” language is historical, not current status.
+
 The fully shared `{3,3,5,5}` phase route also remains open: there are 20
 quotient-isomorphism types, and the naive two-pentagon comparison polynomial is
 coefficientwise positive for only one. Negative coefficients do not disprove

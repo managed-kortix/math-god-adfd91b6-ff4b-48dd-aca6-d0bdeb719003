@@ -16,6 +16,20 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-25: completed the full tetracyclic cactus theorem: every connected
+  tetracyclic cactus satisfies `s+>n`, with arbitrary bridge blocks and
+  arbitrary attached trees. After the bridge-separated theorem, the fully
+  shared residuals collapse by incidence-tree sacrifice. For `{3,3,5,5}`, a
+  leaf triangle can be opened at cost one into the proved shared `TPP` packet;
+  if neither triangle is a leaf, degree counting forces `P-T-T-P`, and opening
+  a leaf pentagon leaves a shared-triangle `TTP` packet. For `{3,3,3,q}`, an
+  intersecting triangle pair forces at most two shared cuts on `Q`, so opening
+  a private `Q` vertex leaves a packing-two triangular tricyclic packet; if the
+  triangles are disjoint, `Q` is central with three petals and splits into
+  three induced triangular unicyclic territories. Three independent hostile
+  audits approved the incidence classifications, multiway cuts, `q=3`,
+  arbitrary trees, inducedness, and strict budgets. Full manuscript moved to
+  `all-tetracyclic-cacti/paper.tex`; final paper audit active.
 - 2026-07-25: proved every connected tetracyclic cactus whose four cyclic
   blocks do not all lie in one shared-cut cluster satisfies `s+>n`. The sharp
   DNN reduction leaves `{3,3,3,q}` and `{3,3,5,5}`. Adaptive induced
