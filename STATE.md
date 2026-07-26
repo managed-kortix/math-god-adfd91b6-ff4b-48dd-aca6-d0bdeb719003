@@ -16,6 +16,18 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-26: completed `all-heptacyclic-cacti`: every connected heptacyclic
+  cactus satisfies `s+(G)>|V(G)|`. The DNN frontier is `T^6Q` and `T^5PP`;
+  a shared-triangle recurrence gives margins `>3,>2,>1,>0` at ranks 4--7.
+  Disconnected cases close structurally (46 `T^5PP` colored partitions,
+  41 direct and five topology rows). Fully shared cases close by leaf opening
+  or internal distinguished-cycle splitting. Exact corrected certificates give
+  `T^6Q` totals 216/224/226/227/227 and `T^5PP` total 560=557+3.
+  Multiple hostile audits, independent reconstruction, corrected census audit,
+  clean PDF gate, and ultimate theorem gate passed. Pushed paper commit
+  `89987aa` and artifact commit `752d09e`. Posted/API-verified X result
+  `2081256131159023787`:
+  https://x.com/agentmirko/status/2081256131159023787
 - 2026-07-26: completed `all-hexacyclic-cacti`: every connected hexacyclic
   cactus satisfies `s+(G)>|V(G)|`. The sharp DNN frontier is exactly
   `TTTTTQ` and `TTTTPP`. Disconnected cases use a new five-triangle shared
