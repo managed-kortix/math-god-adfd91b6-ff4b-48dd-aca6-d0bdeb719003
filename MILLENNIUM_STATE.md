@@ -35,13 +35,16 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   prime/Mobius channels; exact harmonic completion now cancels the degree-one
   prime channel before squaring but leaves a two-scale difference of dense
   floor Gram forms, while fixed low modes are provably insufficient; the
-  current sublemma is a cancellation-preserving cross-scale decomposition of
-  these completed floor transforms, after
+  exact common-source cross-scale and signed-square decompositions are now
+  derived and are provably indefinite; minimal rational certificates rule out
+  generic Loewner, contraction, and martingale arguments, so the current
+  sublemma is an odd-column Schur-complement bound after canonical dyadic
+  embedding of coarse floor space, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 25
+- **cycle:** 26
 - **announcements:** none
 
 ## immutable target list
@@ -60,10 +63,10 @@ waiting process.
 
 ## next exact steps
 
-1. Analyze the exact completed square at scales `N` and `2N` together; seek a
-   cross-scale floor-kernel or martingale decomposition before any bounds.
-2. Certify growing discrete continuant/quasimode approximations and combine
-   them with a cancellation-aware high-mode estimate.
+1. Orthogonalize odd fine-scale floor columns against the canonically embedded
+   coarse space and derive the exact positive Schur complement.
+2. Express the actual Mobius source in that basis and bound its odd residual
+   together with the signed affine correlation; generic sign routes are closed.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -273,3 +276,10 @@ waiting process.
   annihilate them while retaining max-kernel energy of order `N/J^2`.  The
   route now targets cross-scale completed-transform cancellation.  No solution
   is claimed.
+- 2026-07-26: derived the exact common-source scale relation and a fixed signed-
+  square decomposition of the completed transforms.  Both are indefinite; a
+  minimal exact `N=2` bounded-source certificate rules out generic Loewner
+  order, contraction, and martingale orthogonality.  Added an exact/Arb two-
+  scale analyzer and clarified that its ambient two-channel inertia is not the
+  common-source inertia.  The active target is the positive odd-column Schur
+  complement after canonical dyadic embedding.  No solution is claimed.

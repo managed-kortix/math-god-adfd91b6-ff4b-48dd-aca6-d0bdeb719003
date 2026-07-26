@@ -63,7 +63,11 @@ completion cancels the explicit degree-one von Mangoldt channel before
 squaring, but leaves a two-scale difference of dense floor Gram forms; degree
 two has an explicit generalized-von-Mangoldt residual. The active route now
 targets cancellation between these two completed scale transforms, together
-with a cumulative-sum bound for their high-mode residual. The ultimate positive target remains
+with a cumulative-sum bound for their high-mode residual. The exact common-
+source kernel and fixed signed-square decomposition are indefinite. A minimal
+rational `N=2` source certificate rules out generic Loewner order, contraction,
+and martingale orthogonality. Any favorable inequality must use the actual
+Mobius coefficients. The ultimate positive target remains
 `liminf P_N=0`, where `P_N` is the restricted `(0,1)` energy. Any off-critical
 zero gives an explicit uniform positive floor for every `P_N`, so that target
 implies RH. It is not known to follow from RH for this exact logarithmic taper.

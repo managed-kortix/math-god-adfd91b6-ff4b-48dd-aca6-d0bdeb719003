@@ -2420,3 +2420,90 @@ martingale decomposition whose high-frequency remainder is charged to the
 difference of transforms rather than either raw source.  In parallel, derive
 and certify the continuant/quasimode comparison for growing `J` so any proposed
 arithmetic moment estimate has a rigorous discrete tail.
+
+## Cycle 26: common-source cross-scale geometry
+
+The two completed scales admit the exact common-source relation
+
+\[
+\eta=(1-\alpha)\lambda+\alpha\rho,
+\]
+
+where `lambda` and `eta` are the normalized scale-`N` and scale-`2N` tapers,
+and `rho_d=1` for `d<=N`, while
+`rho_d=log(2N/d)/log2` on the fresh block.  If
+
+\[
+P_k=kA+1-Z_N(k)/\log N,
+\]
+
+\[
+Q_k=k(A-D)+1-(Z_{2N}(k)-Z_N(k))/\log2,
+\]
+
+then the second center is
+
+\[
+\widetilde P_k=(1-\alpha)P_k+\alpha Q_k.
+\]
+
+Thus
+
+\[
+P_k^2-\widetilde P_k^2
+=\alpha(2-\alpha)
+\left(P_k-{1-\alpha\over2-\alpha}Q_k\right)^2
+-{\alpha\over2-\alpha}Q_k^2.
+\]
+
+The `2 by 2` determinant is `-alpha^2`, so this compression is exactly
+indefinite.  On the common Mobius source the quadratic kernel is
+
+\[
+\mathcal H_N=D_\lambda K_ND_\lambda-D_\eta K_ND_\eta,
+\qquad K_N=F^TWF.
+\]
+
+It is indefinite at every scale: its `1,1` entry is zero and every active
+`1,e` entry is negative, producing a negative `2 by 2` principal determinant.
+The correction has rank of order `N`, not fixed rank.
+
+The normalized weight `2N/[k(k+1)]` is the exact reciprocal-integer law on the
+dyadic shell.  The fresh transform is adapted under this law but is neither
+mean zero nor orthogonal to the old transform.  Variance differences have both
+signs, closing the natural martingale-contraction route.
+
+A minimal exact arbitrary-source certificate occurs at `N=2`:
+
+\[
+w=(1/6,1/12),\quad b=(2,3),\quad c=(1/2,1/2),
+\]
+
+with old-minus-fine homogeneous matrix
+
+\[
+\begin{pmatrix}0&-7/24\\-7/24&-1/16\end{pmatrix},
+\qquad \det=-49/576.
+\]
+
+The source vectors `(1,1)` and `(1,-1)` give opposite signs.  Hence floor
+geometry alone supplies no Loewner order, contraction, sign, or martingale
+orthogonality.
+
+Added an exact/Arb two-scale analyzer.  It verifies the actual completed-square
+identity cellwise against the independent drift-free implementation and
+certifies ambient two-channel floor ranks and nullspaces through `N=32`.  Its
+ambient signed-Gram inertia is explicitly distinguished from the linked
+common-source restriction.
+
+Parity gives `mu(2d)=-1_(d odd)mu(d)`, so even fine-scale coefficients
+anti-dilate odd coarse coefficients.  At floor level the residual is the full
+odd-multiple transform, not a sparse boundary term.
+
+### Next queued main-funnel step
+
+Use the canonical dyadic embedding of coarse floor columns into even fine-scale
+columns.  Compute the exact positive Schur complement of odd fine columns after
+projection onto the embedded coarse space, then express the actual Mobius
+coefficient pair in this orthogonalized basis.  Target an arithmetic estimate
+for the odd residual and its signed affine correlation.
