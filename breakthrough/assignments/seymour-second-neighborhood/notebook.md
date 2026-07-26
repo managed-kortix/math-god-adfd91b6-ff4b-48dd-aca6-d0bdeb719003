@@ -664,3 +664,34 @@ No audits yet.
   C-dominators (`5` or `6`) and holes internal to that dynamically defined set.
   This directly exposes the B-degree pressure rather than adding generic root
   degree counters.
+
+## 2026-07-26 — tick 33
+
+- Extended `m9_k4_placements.py` with exact dynamic predicates for the common
+  C-dominator set K and exact internal-K hole count eta. All equivalences are
+  bidirectional.
+- A 580-cell scout (`58 placement leaves x 2 kappa x 5 eta`) independently
+  verified 281 cells; 299 remain UNKNOWN and no placement parent is fully
+  closed. Eight parents have only the hard `(kappa,eta)=(5,0)` cell left.
+- Audited placement coverage: the permissive alpha/beta/epsilon partition is
+  exhaustive (with nine harmless empty tuples). Earlier hand-pruned feasibility
+  lists would have omitted three valid root-plus-A' placements and must not be
+  used for cover claims.
+- **Next queued attack:** isolate the eight `(5,0)` singleton residuals first;
+  derive their complete predecessor-incidence equality template or split by
+  whether the degree-three shape hub lies in K. Then process the other B-rich
+  cells by high-degree-in-K count.
+
+## 2026-07-26 — tick 34
+
+- Added exact `lambda=|K intersect {hole-degree>=2 vertices}|` support to the
+  dynamic placement emitter. A temporary exhaustive lambda/hub split closed all
+  eight placement parents whose only residual was `(kappa,eta)=(5,0)`; all 15
+  child cells were independently LRAT-verified.
+- The broad scalar identity alone does not close `(5,0)`; tournament-king
+  lifting leaves sharp equality templates. The successful lambda split confirms
+  that location of the marked hole vertices inside K is the decisive next
+  coordinate.
+- **Next queued attack:** apply lambda to the remaining 50 placement parents,
+  beginning with beta<=2 where lambda has at most three values. Refine unique
+  degree-three hubs only after lambda leaves time out.
