@@ -1777,3 +1777,85 @@ include the constant and linear terms. Measure leaf count, selected orders,
 signed center, and accumulated radius at increasing moderate cutoffs. The next
 decisive test is whether far-field radii, rather than dense-neighbor count,
 destroy the endpoint contraction margin.
+
+## Tick 18 — full finite cluster tree and radius-growth obstruction
+
+Added `verify_cluster_tree.py` and `test_cluster_tree.py`. The implementation
+builds a binary tree on sorted rational frequencies, stores only canonical
+upper-triangle leaves, evaluates near leaves by direct Arb `Si`/`Ci`, and uses
+the certified phase-extracted expansion on admissible far leaves. It checks
+that leaf multiplicities cover exactly all `N^2` ordered entries and encloses an
+independent dense Arb evaluation.
+
+The two-channel path certifies the shared-kernel expression
+
+\[
+2u^TKd-\alpha d^TKd
+\]
+
+without splitting its three terms. On a block its unstructured residual weight
+is the exact finite sum of
+
+\[
+|u_i d_j+d_i u_j-\alpha d_i d_j|,
+\]
+
+which is never worse than separate local-`l1` products. Hand-computed
+multiplicity, mixed dense/compressed, all-dense, rational-input, and exact
+isotropic-null tests pass. In particular `alpha=2,u=d` is detected before tree
+construction and has exactly zero center, radius, and rank.
+
+For the deterministic scalar surrogate at `Q=64`, fixed rank bound `12`, the
+certified results were:
+
+| modes | dense leaves | compressed leaves | theorem radius | dense value |
+|---:|---:|---:|---:|---:|
+| 48 | 31 | 22 | 0.0001541 | 0.0122698 |
+| 96 | 63 | 52 | 0.0008010 | 0.0231688 |
+| 192 | 127 | 114 | 0.0064671 | 0.0141767 |
+
+These are synthetic rational coefficients, not the Möbius endpoint channels,
+so they imply no RH behavior. They do expose a decisive certification danger:
+fixed per-block orders plus absolute unstructured radii can become comparable
+to the signed center even while leaf count is nearly linear. Global adaptive
+tolerance allocation and stronger residual structure are necessary.
+
+The exact finite-realization audit also fixes the scope. A harmonic-first cutoff
+must retain its weight inside each duplicate-frequency aggregate. The cluster
+tree currently certifies exactly the supplied finite surrogate; it does not yet
+certify the omitted harmonic limit, the retained interval `[1,Q]`, or the full
+endpoint decrement.
+
+### Stronger near-field route
+
+The identity
+
+\[
+K_Q(\omega,\nu)=\frac\pi2\min(\omega,\nu)-G_Q(\omega,\nu),
+\quad
+G_Q=\int_0^Q\frac{\sin(\omega t)}t\frac{\sin(\nu t)}t\,dt
+\]
+
+suggests a one-sided replacement for dense cusp leaves. The cusp form is
+evaluated in linear time by suffix sums. If `G_0` is the Gram matrix of an
+orthogonal projection and `E=G_Q-G_0` is positive semidefinite, then with
+`z=d-u/alpha`,
+
+\[
+2u^TK_Qd-\alpha d^TK_Qd
+\le \mathcal L_{\pi\min/2}-\mathcal L_{G_0}+\alpha z^TEz.
+\]
+
+Only the projection error of the cancellation vector remains adverse; the
+large `u` residual has favorable sign. This is structurally stronger than any
+entrywise residual norm and is the next near-field attack.
+
+## Next queued main-funnel step
+
+Implement exact cusp suffix sums and a piecewise-polynomial orthogonal
+projection certificate for `G_Q`, with a Poincare or Legendre remainder on
+`z=d-u/alpha`. Compare its one-sided radius against dense leaves and the
+existing local-`l1` hierarchy on hostile finite-difference clusters and actual
+small Möbius endpoint channels. In parallel, add adaptive far-block order
+allocation. The decisive question is whether PSD residual structure prevents
+the observed radius blow-up.

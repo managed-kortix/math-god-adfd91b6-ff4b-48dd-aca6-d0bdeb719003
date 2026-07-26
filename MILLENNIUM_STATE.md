@@ -13,13 +13,15 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   restricted/full-space mix-up; coefficient-aware symmetric hierarchical error
   propagation and a phase-extracted analytic separated-block theorem are
   proved and an outward-rounded block verifier passes hostile finite tests; the
-  current sublemma is a full cluster-tree implementation with affordable
-  theorem-weighted local radii, after
+  full finite cluster-tree implementation now passes dense and two-channel
+  audits, but fixed-order absolute radii grow rapidly; the current sublemma is
+  a PSD cusp/projection residual bound depending only on the endpoint
+  cancellation vector, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 15
+- **cycle:** 16
 - **announcements:** none
 
 ## immutable target list
@@ -38,10 +40,10 @@ waiting process.
 
 ## next exact steps
 
-1. Build a finite reduced-frequency cluster tree with exact local Mobius masses,
-   certified far leaves, dense near leaves, and completed constant modes.
-2. Measure its global center/radius on increasing moderate cutoffs and identify
-   whether leaf count, rank, or accumulated radius is decisive at `N=8192`.
+1. Implement exact cusp suffix sums and an orthogonal-projection Gram bound for
+   near leaves, with residual depending on `d-u/alpha`.
+2. Add adaptive far-block order allocation and compare global radii on hostile
+   clusters and actual small Mobius endpoint channels before scaling.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -173,3 +175,12 @@ waiting process.
   formulas. A spacing audit rules out quadratic forced-near work at the large
   harmonic cutoff for fixed threshold, but the global far-leaf radius remains
   unresolved. No solution is claimed.
+- 2026-07-26: implemented a certified finite rational cluster tree with exact
+  symmetry coverage, dense Arb leaves, certified far leaves, and shared
+  two-channel error accounting. All dense comparisons and hostile accounting
+  tests pass. On a synthetic fixed-order sequence, the radius grew from
+  `0.000154` at 48 modes to `0.00647` at 192 modes, becoming comparable to the
+  signed value despite near-linear leaf counts. This falsifies fixed-order
+  absolute-radius scaling as a sufficient strategy. The next route extracts
+  the cusp exactly and uses a PSD projection residual controlled only by the
+  endpoint cancellation vector. No solution is claimed.

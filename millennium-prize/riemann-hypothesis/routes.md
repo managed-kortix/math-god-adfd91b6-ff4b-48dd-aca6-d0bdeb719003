@@ -35,9 +35,12 @@ have explicit factorial-over-power/Taylor radii and rank independent of the
 cutoff after phase extraction, while overlapping cusp blocks must remain dense.
 
 The active next step is an outward-rounded hierarchy implementation preserving
-the direct two-channel endpoint cancellation. It must survive two-point cusp,
-alternating Farey-cluster, and rational-grid adversaries and yield an affordable
-global radius at useful scales. The ultimate positive target remains
+the direct two-channel endpoint cancellation. A finite implementation survives
+dense, Farey-cluster, rational-grid, and exact multiplicity audits, but
+fixed-order absolute radii grow rapidly with mode count. The next refinement
+extracts the `min(omega,nu)` cusp exactly and approximates the remaining Gram
+kernel by an orthogonal projection whose PSD residual is charged only to
+`d-u/alpha`; adaptive far-block orders are also required. The ultimate positive target remains
 `liminf P_N=0`, where `P_N` is the restricted `(0,1)` energy. Any off-critical
 zero gives an explicit uniform positive floor for every `P_N`, so that target
 implies RH. It is not known to follow from RH for this exact logarithmic taper.
