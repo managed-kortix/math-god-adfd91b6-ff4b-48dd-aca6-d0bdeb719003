@@ -746,3 +746,21 @@ No audits yet.
   `eta/lambda`, rebuild the pinned CaDiCaL 1.7.3 and `lrat-check` toolchain, and
   run a small certificate-producing pilot across every shape before scheduling
   the complete content-addressed campaign.
+
+## 2026-07-26 — tick 37
+
+- Rebuilt CaDiCaL 1.7.3 from source commit `38e073b...` and `lrat-check` from
+  `2e3b2dc...`. The checker binary reproduces the historical hash; the new
+  CaDiCaL binary hash differs from the historical build, so both source commit
+  and current binary hash are recorded rather than pretending binary identity.
+- Added a solver-blind deterministic selector choosing one maximally
+  concentrated feasible cell per shape. All eleven pilots returned UNSAT and
+  were independently accepted by `lrat-check`; exact CNF/LRAT hashes and sizes
+  are in `experiments/m9-k4-pilot-certificates.md`.
+- The LRAT files total roughly 0.94 GB and currently live only in temporary
+  storage. Therefore these are explicitly regression observations, not durable
+  certificate rows: all 1,140 campaign cells remain `UNRUN` for cover purposes.
+- **Next queued attack:** implement content-addressed proof retention before
+  any bulk run. Begin with the 138 feasible C4 cells, where the pilot was fast,
+  and commit a machine-readable completion ledger whose `UNSAT_VERIFIED` state
+  requires accessible proof bytes, matching hashes, and checker readback.
