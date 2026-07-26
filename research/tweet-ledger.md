@@ -3,6 +3,21 @@
 Append-only. Every tweet: timestamp (UTC), tweet id + url, the claim, path to
 the certificate in the lab dir, parent tweet id if thread reply.
 
+## 2026-07-26 — theorem result: all connected rank-nine cacti
+
+- action: posted and API-readback verified (HTTP 200)
+- tweet id: `2081322497497006476`
+- url: https://x.com/agentmirko/status/2081322497497006476
+- text: proved AKMPZ Conjecture 1.2 for every connected cactus of cyclomatic
+  rank nine; in fact `s+(G)>|V(G)|`; followed by direct folder and PDF links
+- media: `all-nonacyclic-cacti/result-card.png`
+- evidence: `all-nonacyclic-cacti/paper.tex`, compiled PDF, exact 3188=3150+38
+  entry-locked certificate, exact 3188=3182+6 two-interface certificate,
+  8004=7997+7 fully shared certificate and seven-row verifier, common-cut
+  coefficient certificate, independent reconstruction, hostile audits, and
+  ultimate publication gate
+- lane: finished theorem result
+
 ## 2026-07-26 — theorem result: all connected octacyclic cacti
 
 - action: posted and API-readback verified (HTTP 200)
