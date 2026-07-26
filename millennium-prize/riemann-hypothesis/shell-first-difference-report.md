@@ -209,6 +209,58 @@ This is the invariant image-space comparison.  Contraction is equivalent to
 \le-{1\over2}(\|\delta\|_{W_-}^2+R_{\rm jump}).
 \]
 
+The analyzer now decomposes the mixed correlation before summing it.  With
+`L_N=log N`, `L=log(2N)`, and
+
+\[
+ u_k=kA_N-{\psi(k)\over L_N},
+\]
+
+the four exact named components of `delta_k=z_k-u_k` are
+
+\[
+\begin{aligned}
+ \delta_k^{A\text{-slopes}}
+   &=k(2A_{2N}-A_N)+{k\over2k+1}A_{2N},\\
+ \delta_k^{\psi\text{-cross}}&={\psi(k)\over L_N},\\
+ \delta_k^{\text{doubled-}\psi}&=-{\psi(2k)\over L},\\
+ \delta_k^{\text{odd-}\Lambda\text{-endpoint}}
+   &=-{k\over2k+1}{\Lambda(2k+1)\over L}.
+\end{aligned}
+\]
+
+Thus, without approximation,
+
+\[
+ \boxed{\langle u,\delta\rangle_{W_-}
+ =C_A+C_{\psi\times}+C_{\psi(2\cdot)}+C_{\Lambda,\rm odd},}
+ \qquad
+ C_*=\langle u,\delta^*\rangle_{W_-}.
+\]
+
+The implementation obtains the two `psi` vectors independently from exact
+Mobius--log divisor convolutions and the endpoint vector from the odd divisor
+sum.  Arb then certifies both entrywise recombination of `delta` and scalar
+recombination of the weighted correlation for every dyadic `2<=N<=8192`.
+
+At the standard audited scales, the normalized correlations are:
+
+| N | A slopes | psi cross | doubled psi | odd Lambda endpoint | recombined | `log(2N)` x recombined |
+|---:|---:|---:|---:|---:|---:|---:|
+| 32 | +1.644579313 | +2.166611843 | -3.867068671 | -0.073985375 | -0.129862891 | -0.540084579 |
+| 128 | +3.476838796 | +4.326848811 | -8.069333617 | -0.042183518 | -0.307829529 | -1.706969359 |
+| 512 | +3.491282712 | +4.001557349 | -8.016376405 | -0.013310000 | -0.536846345 | -3.721135307 |
+| 2048 | +11.461590280 | +12.430775502 | -26.307068705 | -0.003109643 | -2.417812565 | -20.110799553 |
+| 8192 | +39.869990188 | +44.105126034 | -87.359931776 | -0.008113990 | -3.392929545 | -32.925193669 |
+
+The sign pattern is stable on these five scales: the `A` slopes and `psi`
+cross terms are positive, while doubled `psi`, the odd endpoint, and the final
+sum are negative.  The individual bulk pieces increase to size tens in this
+normalization but cancel to a remainder of size units; even multiplication by
+`log(2N)` does not stabilize the displayed finite values.  This table reports
+finite scaling rather than claiming an asymptotic law.  In the original
+unscaled Gram convention every entry in the table is divided by `2N`.
+
 At 192-bit Arb precision the principal values are:
 
 | N | preceding completed | effective coarse | `||delta||^2` | affine jump | complete fine | decrement |
@@ -250,3 +302,101 @@ mixed image-space correlation.
 uv run --with python-flint python analyze_effective_shell.py
 uv run --with python-flint python -m unittest -v test_effective_shell.py
 ```
+
+## Centered correlation decomposition
+
+Put `L=log N`, `L_2=log(2N)`,
+
+\[
+a=A_N-1/L,
+\qquad b=2(A_{2N}-1/L_2)-a,
+\]
+
+and
+
+\[
+E_k=\psi(k)-k,
+\qquad
+F_k=\psi(2k)+{k\over2k+1}\Lambda(2k+1)-2k.
+\]
+
+Then, exactly,
+
+\[
+u_k=ka-E_k/L,
+\qquad
+\delta_k=kb+{k\over2k+1}A_{2N}+E_k/L-F_k/L_2.
+\]
+
+Thus the deterministic PNT slope cancels before any estimate. If `n=N/2`,
+`m=N-1`, the invariant correlation divided by `N` is
+
+\[
+\begin{aligned}
+abS_0+aA_{2N}S_1
+&+{a-b\over L}\mathcal E_1
+-{A_{2N}\over L}\mathcal E_2
+-{a\over L_2}\mathcal F_1\\
+&-{1\over L^2}\mathcal E_{2,0}
++{1\over LL_2}\mathcal {EF}_0,
+\end{aligned}
+\]
+
+where `S_0,S_1` are elementary harmonic sums,
+
+\[
+\mathcal E_1=\sum {E_k\over k+1},\quad
+\mathcal E_2=\sum {E_k\over(2k+1)(k+1)},\quad
+\mathcal F_1=\sum {F_k\over k+1},
+\]
+
+and
+
+\[
+\mathcal E_{2,0}=\sum {E_k^2\over k(k+1)},\qquad
+\mathcal {EF}_0=\sum {E_kF_k\over k(k+1)}.
+\]
+
+The linear terms have endpoint-preserving Abel forms in `Lambda`. The final two
+quadratic centered-Chebyshev terms retain the unresolved signed arithmetic
+correlation.
+
+Parity does not reduce the two scales to one odd Mertens block. Exactly,
+
+\[
+\log X\,A_X=\mathcal L_o(X)-{1\over2}\mathcal L_o(X/2),
+\]
+
+so `A_N,A_(2N)` retain odd blocks at `N/2,N,2N`; the quadratic `EF` channel is
+independent of this linear reduction.
+
+At `N=8192`, the analyzer's four exact uncentered correlation channels are
+approximately
+
+\[
++39.8699901875,
+\quad +44.1051260336,
+\quad -87.3599317760,
+\quad -0.00811398993,
+\]
+
+recombining to `-3.39292954478`. This displays large cancellation but no stable
+asymptotic law is inferred.
+
+Finally pair averaging and the jump square combine as
+
+\[
+\boxed{E_{2N}=\sum_{k=n}^m\left[
+{N\over k(2k+1)}v_k^2
++{N\over(2k+1)(k+1)}(v_k+j_k)^2\right],}
+\]
+
+where
+
+\[
+v_k=2kA_{2N}-\psi(2k)/L_2,
+\qquad j_k=A_{2N}-\Lambda(2k+1)/L_2.
+\]
+
+The two prime diagonals therefore reinforce rather than cancel, contributing a
+combined main term of order `1/log N` to the fine energy.

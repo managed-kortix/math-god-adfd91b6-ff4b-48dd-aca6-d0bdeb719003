@@ -3048,3 +3048,83 @@ explicit two-scale Chebyshev formula for `delta_k`.  Sum before bounding and
 separate the deterministic PNT cancellation from the single remaining odd
 logarithmically weighted Mertens transform.  Audit whether any useful sign
 would be equivalent to an RH-strength Mertens correlation.
+
+## Cycle 32: centered Chebyshev correlation
+
+Put
+
+\[
+a=A_N-1/\log N,
+\qquad b=2(A_{2N}-1/\log(2N))-a,
+\]
+
+\[
+E_k=\psi(k)-k,
+\qquad
+F_k=\psi(2k)+{k\over2k+1}\Lambda(2k+1)-2k.
+\]
+
+Then exactly
+
+\[
+u_k=ka-E_k/\log N,
+\]
+
+\[
+\delta_k=kb+{k\over2k+1}A_{2N}
++E_k/\log N-F_k/\log(2N).
+\]
+
+The complete deterministic PNT slope has canceled. The weighted correlation
+expands into two elementary slope sums, three linear centered-Chebyshev sums,
+and the quadratic channel
+
+\[
+-{1\over\log^2N}\sum{E_k^2\over k(k+1)}
++{1\over\log N\log(2N)}
+\sum{E_kF_k\over k(k+1)}.
+\]
+
+Endpoint-preserving Abel formulas reduce each linear term to finite weighted
+Lambda sums. The mixed quadratic term remains the decisive signed channel.
+
+Parity does not isolate one odd Mertens block. The exact identity
+
+\[
+\log X A_X=\mathcal L_o(X)-\tfrac12\mathcal L_o(X/2)
+\]
+
+leaves centered odd blocks at `N/2,N,2N`, while the quadratic Chebyshev product
+is independent of that linear reduction. RH-strength odd-Mertens magnitude
+bounds make the slope defects small but do not provide the required sign.
+
+Pair averaging and the jump square combine exactly into
+
+\[
+E_{2N}=\sum_k\left[
+{N\over k(2k+1)}v_k^2
++{N\over(2k+1)(k+1)}(v_k+j_k)^2\right],
+\]
+
+where `v_k=2kA_(2N)-psi(2k)/log(2N)` and
+`j_k=A_(2N)-Lambda(2k+1)/log(2N)`. Their prime diagonals reinforce rather than
+cancel, producing order `1/log N` in the fine energy.
+
+At `N=8192`, the analyzer's four exact uncentered correlation components are
+approximately `+39.86999,+44.10513,-87.35993,-0.008114`, summing to
+`-3.39293`. This is large finite cancellation, not evidence for an asymptotic
+sign law.
+
+A hostile aggregate audit confirms structurally that PNT-sized linear
+information cannot determine this quadratic local sign. The identity
+`mu*1=epsilon` is indispensable for the local collapse; retaining only
+`Lambda=-mu*log` leaves arbitrary surrogate freedom. Numerical perturbation
+examples are recorded only as diagnostics, not rigorous certificates.
+
+### Next queued main-funnel step
+
+Rewrite the joint quadratic expression in `E_k,F_k` as a finite bilinear form
+in Lambda increments. Separate diagonal, fixed-shift, and genuinely
+off-diagonal pieces. Determine whether its needed favorable contribution is a
+known sieve-scale estimate, an RH consequence, or a stronger prime-pair/Mobius
+statement.

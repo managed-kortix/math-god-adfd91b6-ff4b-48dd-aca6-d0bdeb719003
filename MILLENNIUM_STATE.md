@@ -49,13 +49,16 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
    coefficient comparison is gauge-dependent, while the invariant pair-average
    recurrence leaves an unsigned mixed correlation and an affine prime jump of
    asymptotic size `1/(2 log(2N))`; finite shell decrements change sign, so the
-   current sublemma is a summed two-scale Chebyshev/odd-Mertens formula for that
-   invariant correlation, after
+   the invariant correlation is now exactly centered into slope defects,
+   linear Chebyshev errors, and two quadratic Chebyshev channels; parity leaves
+   three odd-Mertens blocks rather than one, while pair-average and jump prime
+   diagonals reinforce to order `1/log N`, so the current sublemma is a
+   cancellation theorem for the centered `E_k F_k` channel, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 31
+- **cycle:** 32
 - **announcements:** none
 
 ## immutable target list
@@ -74,10 +77,10 @@ waiting process.
 
 ## next exact steps
 
-1. Expand and sum the invariant correlation `<u,z-u>` using the exact two-scale
-   Chebyshev formula, before applying any bounds.
-2. Isolate its odd logarithmically weighted Mertens component and determine
-   whether the needed sign is equivalent to RH-strength cancellation.
+1. Analyze the centered quadratic channel
+   `sum E_k F_k/[k(k+1)]` jointly with `sum E_k^2/[k(k+1)]`.
+2. Determine whether their required signed difference has an exact
+   prime-pair/off-diagonal formulation or demands new RH-strength information.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -331,3 +334,10 @@ waiting process.
   coarse plus affine jump throughout.  Large preceding/discrepancy image norms
   nearly cancel, so separate norm bounds give no contraction.  No solution is
   claimed.
+- 2026-07-26: decomposed the invariant mixed term `<u,delta>` exactly into
+  `A` slopes, the `psi(k)` cross term, doubled `psi(2k)`, and the odd
+  `Lambda(2k+1)` endpoint.  Entrywise and scalar Arb recombination is certified
+  at every dyadic scale through `N=8192`.  At the five standard scales the
+  first two terms are positive, the latter two and total are negative; large
+  bulk terms cancel, and no stable finite logarithmic scaling is visible.  No
+  asymptotic sign theorem or solution is claimed.

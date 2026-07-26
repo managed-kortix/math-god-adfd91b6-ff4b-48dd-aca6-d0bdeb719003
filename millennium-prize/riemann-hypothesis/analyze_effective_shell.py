@@ -49,6 +49,16 @@ class EffectiveShellAnalysis:
     preceding_completed_energy: object
     pair_average_discrepancy_energy: object
     preceding_discrepancy_correlation: object
+    delta_A_slopes: tuple
+    delta_psi_cross: tuple
+    delta_doubled_psi: tuple
+    delta_odd_lambda_endpoint: tuple
+    correlation_A_slopes: object
+    correlation_psi_cross: object
+    correlation_doubled_psi: object
+    correlation_odd_lambda_endpoint: object
+    decomposed_correlation: object
+    correlation_decomposition_verified: bool
     coarse_minus_fine: object
     polarized_coarse_minus_fine: object
     polarization_verified: bool
@@ -109,6 +119,19 @@ def _floor_transform_from_divisor_sums(divisor_sums):
 def _weighted_energy(values, start, scale):
     return sum((ball(Fraction(scale, k * (k + 1))) * value * value
                 for k, value in enumerate(values, start)), arb(0))
+
+
+def _weighted_inner(left, right, start, scale):
+    return sum((ball(Fraction(scale, k * (k + 1))) * a * b
+                for k, (a, b) in enumerate(zip(left, right), start)), arb(0))
+
+
+def _certified_sign(value):
+    if value > 0:
+        return "+"
+    if value < 0:
+        return "-"
+    return "?"
 
 
 def analyze_effective_shell(N):
@@ -191,11 +214,40 @@ def analyze_effective_shell(N):
     decomposed_energy = coarse_energy + jump_energy
     preceding_completed_energy = _weighted_energy(preceding_completed, half, N)
     pair_discrepancy_energy = _weighted_energy(pair_discrepancy, half, N)
-    correlation = sum((
-        ball(Fraction(N, k * (k + 1))) * u * delta
-        for k, u, delta in zip(range(half, N), preceding_completed,
-                               pair_discrepancy)
-    ), arb(0))
+    correlation = _weighted_inner(preceding_completed, pair_discrepancy,
+                                  half, N)
+
+    # In the exact Chebyshev form, delta=z-u is the sum of these four
+    # arithmetically distinct vectors.  The divisor-sum prefixes equal
+    # psi(k)/log(N) and psi(2k)/log(2N), while the odd divisor sum is
+    # Lambda(2k+1)/log(2N).
+    delta_A_slopes = tuple(
+        k * (2 * A - preceding_A)
+        + ball(Fraction(k, 2 * k + 1)) * A
+        for k in range(half, N)
+    )
+    delta_psi_cross = tuple(preceding_transform[k] - 1
+                            for k in range(half, N))
+    delta_doubled_psi = tuple(-(fine_transform[2 * k] - 1)
+                              for k in range(half, N))
+    delta_odd_lambda_endpoint = tuple(
+        -ball(Fraction(k, 2 * k + 1)) * fine_divisor_sums[2 * k + 1]
+        for k in range(half, N)
+    )
+    component_vectors = (delta_A_slopes, delta_psi_cross,
+                         delta_doubled_psi, delta_odd_lambda_endpoint)
+    component_correlations = tuple(
+        _weighted_inner(preceding_completed, component, half, N)
+        for component in component_vectors
+    )
+    decomposed_correlation = sum(component_correlations, arb(0))
+    delta_recombined = tuple(sum(values, arb(0))
+                             for values in zip(*component_vectors))
+    correlation_decomposition_verified = (
+        all(delta.overlaps(recombined) for delta, recombined in
+            zip(pair_discrepancy, delta_recombined))
+        and correlation.overlaps(decomposed_correlation)
+    )
     coarse_minus_fine = preceding_completed_energy - fine_energy
     polarized = -2 * correlation - pair_discrepancy_energy - jump_energy
     reconstructed_from_differences = _prefix(shell_differences)
@@ -212,6 +264,9 @@ def analyze_effective_shell(N):
         fine_energy.overlaps(decomposed_energy),
         preceding_A, preceding_completed, pair_discrepancy,
         preceding_completed_energy, pair_discrepancy_energy, correlation,
+        delta_A_slopes, delta_psi_cross, delta_doubled_psi,
+        delta_odd_lambda_endpoint, *component_correlations,
+        decomposed_correlation, correlation_decomposition_verified,
         coarse_minus_fine, polarized, coarse_minus_fine.overlaps(polarized),
     )
 
@@ -241,10 +296,24 @@ def main():
             f"decrement={result.coarse_minus_fine.str(14)}; "
             f"verified={result.pair_average_verified and result.first_difference_verified and result.fine_energy_verified and result.polarization_verified}"
         )
+        print(
+            "  <u,delta>: "
+            f"A-slopes={result.correlation_A_slopes.str(12)}; "
+            f"psi-cross={result.correlation_psi_cross.str(12)}; "
+            f"doubled-psi={result.correlation_doubled_psi.str(12)}; "
+            f"odd-Lambda-endpoint={result.correlation_odd_lambda_endpoint.str(12)}"
+        )
+        print(
+            f"  recombined={result.decomposed_correlation.str(12)}; "
+            f"sign={_certified_sign(result.decomposed_correlation)}; "
+            f"log(2N)-scaled={(ball(2 * N).log() * result.decomposed_correlation).str(12)}; "
+            f"component-verified={result.correlation_decomposition_verified}"
+        )
         failed |= not all((result.pair_average_verified,
                            result.first_difference_verified,
                            result.fine_energy_verified,
-                           result.polarization_verified))
+                           result.polarization_verified,
+                           result.correlation_decomposition_verified))
     if failed:
         raise SystemExit("an effective-shell certificate failed")
 

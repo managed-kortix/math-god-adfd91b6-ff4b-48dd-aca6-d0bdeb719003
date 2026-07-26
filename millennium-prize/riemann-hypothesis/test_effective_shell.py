@@ -88,6 +88,34 @@ class EffectiveShellTests(unittest.TestCase):
                     result.pair_average_discrepancy):
                 self.assertTrue(pair.overlaps(old + delta))
 
+    def test_named_correlation_decomposition_through_8192(self):
+        for N in (2 ** exponent for exponent in range(1, 14)):
+            result = analyze_effective_shell(N)
+            self.assertTrue(result.correlation_decomposition_verified)
+            for delta, components in zip(
+                    result.pair_average_discrepancy,
+                    zip(result.delta_A_slopes,
+                        result.delta_psi_cross,
+                        result.delta_doubled_psi,
+                        result.delta_odd_lambda_endpoint)):
+                recombined = sum(components, components[0] * 0)
+                self.assertTrue(delta.overlaps(recombined))
+            self.assertTrue(result.preceding_discrepancy_correlation.overlaps(
+                result.correlation_A_slopes
+                + result.correlation_psi_cross
+                + result.correlation_doubled_psi
+                + result.correlation_odd_lambda_endpoint
+            ))
+
+    def test_reported_component_signs_at_audited_scales(self):
+        for N in (32, 128, 512, 2048, 8192):
+            result = analyze_effective_shell(N)
+            self.assertGreater(result.correlation_A_slopes, 0)
+            self.assertGreater(result.correlation_psi_cross, 0)
+            self.assertLess(result.correlation_doubled_psi, 0)
+            self.assertLess(result.correlation_odd_lambda_endpoint, 0)
+            self.assertLess(result.decomposed_correlation, 0)
+
     def test_input_validation(self):
         for N in (1, 3, 16384):
             with self.assertRaises(ValueError):
