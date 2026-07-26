@@ -1,0 +1,745 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\spE}{s^+}
+\newcommand{\smE}{s^-}
+\newcommand{\sig}{\sigma}
+\newcommand{\one}{\mathbf 1}
+
+\title{Positive Square Energy of Every Hexacyclic Cactus}
+\author{}
+\date{26 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $G$ be a connected hexacyclic cactus of order $n$.  We prove
+$s^+(G)>n$.  Exact block-additive doubly nonnegative optimization leaves only
+the cycle multisets $\{3,3,3,3,3,q\}$ and $\{3,3,3,3,5,5\}$.
+For disconnected shared-cut graphs we prove a leaf-cluster theorem for the
+first family and audit all twenty-eight colored cluster partitions for the
+second.  The two entry-sensitive rows are closed by a six-row component
+classification and by an exact census of eight incidences and twenty-six
+ordered entry orbits.  For one shared-cut cluster, exact color-preserving
+incidence censuses contain respectively $68,70,71$ trees in the three
+$q$-capacity regimes and $150$ trees in the four-triangle--two-pentagon
+family.  All ordinary splits are certified; the bouquets and the unique
+saturated pentagon hub are handled directly.  Every construction permits
+arbitrary bridge connectors and arbitrary trees attached at arbitrary
+vertices.
+\end{abstract}
+
+\section{Preliminaries and dependencies}
+
+All graphs are finite, simple, and undirected.  A cactus is a connected graph
+whose blocks are bridges or cycles.  Its cyclomatic number is the number of
+cyclic blocks.  If the adjacency eigenvalues of $G$ are
+$\lambda_1,\ldots,\lambda_n$, put
+\[
+ \spE(G)=\sum_{\lambda_j>0}\lambda_j^2,
+ \qquad \smE(G)=\sum_{\lambda_j<0}\lambda_j^2,
+ \qquad \sig(G)=\spE(G)-|V(G)|.
+\]
+For every vertex partition $V(G)=V_1\mathbin{\dot\cup}\cdots
+\mathbin{\dot\cup}V_k$, induced-subgraph superadditivity gives
+\begin{equation}\label{eq:super}
+ \spE(G)\geq\sum_{i=1}^k\spE(G[V_i]).
+\end{equation}
+This is the theorem of Akbari, Kumar, Mohar, and Pragada~\cite{AKMP}.
+
+Write $T=C_3$, $P=C_5$, and
+\[
+ \delta=\sec(\pi/5)-1=\sqrt5-2<\frac12,
+ \qquad \delta_q=\sec(\pi/q)-1<1\quad(q\equiv1\pmod4).
+\]
+We use the following packet bounds.  All allow arbitrary trees attached at
+arbitrary vertices, and mixed two-cycle packets allow arbitrary bridge
+connectors:
+\begin{align}
+ \sig(T)&>0,&\sig(P)&\geq-\delta,&
+ \sig(C_q)&\geq-\delta_q,\label{eq:one}\\
+ \sig(TT)&>1,&\sig(TP)&>1-\delta,&
+ \sig(TC_q)&>1-\delta_q.\label{eq:two}
+\end{align}
+Moreover,
+\begin{align}
+ \sig(H)&\geq0 &&\text{for every bicyclic or tricyclic cactus }H,
+ \label{eq:small}\\
+ \sig(H)&>0 &&\text{for every tetracyclic or pentacyclic cactus }H.
+ \label{eq:lower-rank}
+\end{align}
+For the indicated shared-cut clusters we use
+\begin{align}
+ \sig(TTT)&>2,&\sig(TTTT)&>3,\label{eq:tri-clusters}\\
+ \sig(TTP)&>2-\delta
+ &&\text{when its two triangles share a cut},\label{eq:ttp}\\
+ \sig(TPP)&>6-2\sqrt5,\label{eq:tpp}\\
+ \sig(PP)&\geq1-\frac4{3\sqrt{13}}.\label{eq:pp}
+\end{align}
+Bounds \eqref{eq:one}--\eqref{eq:tpp} and the lower-rank theorems are proved
+in the bicyclic, tricyclic, tetracyclic, and pentacyclic companion
+manuscripts~\cite{Bicyclic,Tricyclic,Tetracyclic,Pentacyclic};
+\eqref{eq:pp} is \cite[Theorem~5.1]{Bicyclic}.
+If every cycle is $3\pmod4$ and the cycle-packing number is at most two, the
+Sachs half-plane theorem~\cite{PackingTwo} gives, for an $r$-cyclic cactus,
+\begin{equation}\label{eq:favorable}
+ \sig(H)>r-1.
+\end{equation}
+This gives the shared $TTT$ estimate.  For four triangles it also applies
+unless the incidence is a central triangle with three disjoint triangular
+petals.  In that sole case the exact grouped-Sachs matching injection in
+\cite[Proposition~4.11]{PackingTwo} gives $s^+>s^-$ and hence
+$\sig(TTTT)>3$.  These are the only external packet dependencies.
+
+\section{Connector territories, intervals, and openings}
+
+Join two cyclic blocks in the \emph{shared-cut graph} when they share a cut
+vertex, and call its connected components shared-cut clusters.  In the
+block-cut tree contract the incidence subtree of each cluster to one marked
+node.  Every cluster, including a singleton cyclic block, is marked.  Take the
+minimal subtree spanning the marked nodes and suppress only unmarked
+degree-two nodes.  The result is the \emph{reduced cluster tree}.
+
+\begin{lemma}[Arbitrary connector territories]\label{lem:territories}
+Let $S_1,\ldots,S_k$ be pairwise vertex-disjoint connected subtrees of the
+reduced cluster tree, and suppose every marked node belongs to exactly one
+$S_i$.  Then $V(G)$ has a partition into connected induced territories
+$G_1,\ldots,G_k$ such that $G_i$ retains exactly the cycles assigned to $S_i$.
+Cuts occur on actual bridges, and every attached tree is assigned whole to one
+territory.
+\end{lemma}
+
+\begin{proof}
+Assign every remaining reduced-tree vertex to a nearest labelled subtree,
+breaking ties by a fixed order.  In a tree each label class is connected.
+Every edge between classes expands to a path consisting only of bridge blocks;
+cut one actual bridge on it and assign the two remnants to their labels.  At a
+Steiner branch, assign the branch vertex and one initial segment to one class
+and cut an actual bridge on every other incident segment.  A component outside
+the cyclic hull has a unique attachment to it, for two attachments would make
+a cycle in the block-cut tree; assign that entire component to the owner of
+the attachment.  The resulting sets are connected, induced, disjoint, and
+retain exactly the asserted cycles.
+\end{proof}
+
+\begin{lemma}[Intervals and private openings]\label{lem:intervals}
+Let $C$ be a cycle node of a cycle--cut incidence tree.
+\begin{enumerate}
+\item If the branches of $I-C$ are assigned to nonempty consecutive intervals
+of $C$, one interval per nonempty group of cyclically consecutive marks, these
+intervals and their branches form connected induced territories.  Every mark
+has one owner and $C$ is retained by none.
+\item If $v$ is a private vertex of $C$, put $v$ and all off-cycle branches
+rooted there in $F$.  Then $F$ is a nonempty tree with $\sig(F)=-1$.  If
+$C-v$ contains all shared cyclic cuts needed by the other cycles, its
+complement is a connected induced territory.
+\end{enumerate}
+Both statements remain true with arbitrary hanging trees.
+\end{lemma}
+
+\begin{proof}
+Cut the cycle edges between consecutive intervals.  Every interval is a proper
+path, and every incidence branch follows its unique mark.  For an opening,
+$C-v$ is a path and all branches rooted at $v$ form a tree with it.  Every
+nonempty tree $F$ has $s^+(F)=|F|-1$, so $\sig(F)=-1$.  Unique attachment of
+hanging trees proves the remaining assertions.  Crossing edges are discarded
+only through \eqref{eq:super}; no edge monotonicity is used.
+\end{proof}
+
+\section{The exact DNN residual classification}
+
+For a connected edge-containing graph define
+\[
+ \kappa(G)=\sup_{\substack{M\succeq0,\ M\geq0\\\one^TM\one>0}}
+ \frac{4\bigl(\sum_{uv\in E(G)}\sqrt{M_{uv}}\bigr)^2}{\one^TM\one}.
+\]
+The sharp cactus DNN theorem~\cite{DNN,LTZ} gives, for bridge-block count $b$
+and cycle lengths $\ell_1,\ldots,\ell_r$,
+\begin{equation}\label{eq:kappa}
+ \kappa(G)=b+\sum_j\kappa(C_{\ell_j}),\qquad
+ \kappa(C_\ell)=
+ \begin{cases}
+  \ell,&\ell\text{ even},\\
+  \ell\sec^2(\pi/(2\ell)),&\ell\text{ odd},
+ \end{cases}
+ \qquad \smE(G)\leq\kappa(G).
+\end{equation}
+For completeness, fold each nonedge entry of a DNN matrix into its two
+diagonal entries by adding $M_{uv}(e_u-e_v)(e_u-e_v)^T$.  Rotational averaging
+on a cycle and its least Fourier eigenvalue give the displayed cycle constants.
+Orthogonal gluing of folded Gram systems at a one-vertex sum, followed by
+Cauchy--Schwarz, proves block additivity.  Finally, writing $A=A_+-B$, the
+Schur product theorem makes $B\circ B$ DNN and gives
+\[
+ \smE/2=-\sum_{uv\in E(G)}B_{uv}\leq\sum_{uv\in E(G)}|B_{uv}|,
+ \qquad \one^T(B\circ B)\one=\smE;
+\]
+the definition of $\kappa$ yields $(\smE)^2\leq\kappa(G)\smE$.
+
+Put
+\[
+ \epsilon_\ell=\begin{cases}0,&\ell\text{ even},\\
+ \ell\tan^2(\pi/(2\ell)),&\ell\text{ odd}.
+ \end{cases}
+\]
+Then
+\begin{equation}\label{eq:epsilon}
+ \epsilon_3=1,
+ \quad \epsilon_5=5-2\sqrt5=:a,
+ \quad 3a<2,
+ \quad 2a>1,
+ \quad \epsilon_5+\epsilon_7<1.
+\end{equation}
+These are exact: $3a<2$ is $169<180$, and $2a>1$ is $80<81$ after
+squaring positive sides.  Also
+$\cos(\pi/7)>1-\tfrac12(22/49)^2>7/8$, whence
+$\epsilon_7<7/15<2\sqrt5-4=1-\epsilon_5$; the middle inequality squares to
+$4489<4500$.  The odd sequence decreases because, with
+$u=\pi/(2x)$, the derivative of $\tan^2u/u$ is positive exactly when
+$2u>\sin u\cos u$.
+
+For a hexacyclic cactus, block counting and \eqref{eq:kappa} give
+\[
+ b+\sum_{i=1}^6\ell_i=n+5,
+ \qquad
+ \sig(G)\geq5-\sum_{i=1}^6\epsilon_{\ell_i}.
+ \tag{3.1}\label{eq:dnn}
+\]
+If at most three cycles are triangles, the sum is at most
+$3+3a<5$.  With exactly four triangles, an even remaining length contributes
+zero; otherwise every pair except $5,5$ contributes at most
+$\epsilon_5+\epsilon_7<1$.  The pair $5,5$ survives because $2a>1$.
+With at least five triangles the multiset is $\{3,3,3,3,3,q\}$, $q\geq3$.
+Thus \eqref{eq:dnn} is strict outside exactly
+\begin{equation}\label{eq:residual}
+ TTTTTQ=\{3,3,3,3,3,q\}\quad(q\geq3),
+ \qquad TTTTPP=\{3,3,3,3,5,5\}.
+\end{equation}
+
+\section{A five-triangle shared cluster}
+
+\begin{lemma}[An intersecting-triangle $TTTP$ packet]\label{lem:tttp-margin}
+If $T_1,T_2,T_3,P$ form one shared-cut cluster and two of the triangles share
+a cut, then $\sig(TTTP)>1$.
+\end{lemma}
+
+\begin{proof}
+Let $k$ be the number of shared cyclic cuts on $P$.  The incidence excess for
+four cycle nodes is three.  The $k$ cuts on $P$ consume at least $k$ units,
+and the intersecting triangle pair consumes another unit, either at a cut off
+$P$ or as extra degree at a cut on $P$.  Hence $k\leq2$.  Choose a private
+vertex $v$ of $P$ and open it as in Lemma~\ref{lem:intervals}.  The path
+$P-v$ retains every cut on $P$, so the induced remainder $H$ is connected and
+has exactly the three triangular cycles.  The intersecting pair shows that
+their cycle-packing number is at most two.  Hence the favorable-cycle theorem
+\eqref{eq:favorable}, which does not require one shared-cut cluster, gives
+$\sig(H)>2$.  The opened tree has surplus $-1$, and therefore
+$\sig(TTTP)>2-1=1$.
+\end{proof}
+
+\begin{lemma}\label{lem:five-triangles}
+If five triangular blocks form one shared-cut cluster $A$, then
+$\sig(A)>2$, including the cycle-packing-three case.
+\end{lemma}
+
+\begin{proof}
+The bipartite incidence tree has a leaf triangle.  It has one shared cyclic cut,
+so open one of its two private vertices by Lemma~\ref{lem:intervals}.  The tree
+territory costs one and the remaining four triangles stay connected in one
+shared-cut cluster.  Their surplus is greater than three by
+\eqref{eq:tri-clusters}; this includes the central-triangle/three-petal
+incidence through the exact Sachs matching injection recalled above.  Hence
+$\sig(A)>3-1=2$.  In particular no packing-at-most-two assumption is hidden in
+the estimate.
+\end{proof}
+
+\section{Disconnected shared-cut graph: the $TTTTTQ$ family}
+
+\begin{proposition}\label{prop:disconnected-tttttq}
+If the cycles are $TTTTTQ$ and the shared-cut graph is disconnected, then
+$\spE(G)>|V(G)|$.
+\end{proposition}
+
+\begin{proof}
+If $q=3$, the triangular block-graph theorem~\cite{PackingTwo} applies.  Assume
+$q\ne3$.  The minimal reduced cluster tree has at least two marked leaves, and
+at most one contains $Q$.  Choose a $Q$-free leaf cluster $A$, containing $r$
+triangles, and cut the first actual bridge toward the rest.
+
+For $r=1,2$, the remainder is respectively penta- or tetracyclic and is
+strictly positive by \eqref{eq:lower-rank}; for $r=3,4$ it is respectively
+tri- or bicyclic and is nonnegative by \eqref{eq:small}.  The all-triangle side
+is strict, so all these sums are positive.  If $r=5$, Lemma
+\ref{lem:five-triangles} gives $\sig(A)>2$.  The remote $Q$ side is
+nonnegative unless $q\equiv1\pmod4$, and in that case it is at least
+$-\delta_q$ with $\delta_q<1$.  Thus the total is $>2-\delta_q>1$.
+Lemma~\ref{lem:territories} makes this proof independent of connector shape and
+entry position.
+\end{proof}
+
+\section{Disconnected shared-cut graph: all $28$ $TTTTPP$ partitions}
+
+Up to permutations of the four triangles and two pentagons, there are exactly
+$29$ colored set partitions of $(4,2)$: recursively choose the first nonzero
+pair $(t,p)$ and require the remaining pairs to be lexicographically
+nondecreasing.  Removing the one-cluster partition leaves the following
+$28$ proper partitions.  The table is both the complete list and the direct
+packet audit; the five named rows are proved immediately afterward.
+\begin{center}
+\renewcommand{\arraystretch}{1.09}
+\begin{tabular}{>{\ttfamily}l l}
+partition & certificate\\ \hline
+T|T|T|T|P|P & Lemma~\ref{lem:all-singletons}\\
+TT|T|T|P|P & $>1-2\delta$ plus strict $T$'s\\
+TTT|T|P|P & $>2-2\delta$ plus a strict $T$\\
+TT|TT|P|P & $>2-2\delta$\\
+TTTT|P|P & $>3-2\delta$\\
+TP|T|T|T|P & $>1-2\delta$ plus strict $T$'s\\
+TTP|T|T|P & Lemma~\ref{lem:ttp-ttp}\\
+TT|TP|T|P & $>2-2\delta$ plus a strict $T$\\
+TTTP|T|P & Lemma~\ref{lem:e2}\\
+TTT|TP|P & $>3-2\delta$\\
+TTP|TT|P & $>1-\delta$\\
+TTTTP|P & Lemma~\ref{lem:e1}\\
+PP|T|T|T|T & shared $PP\geq0$ plus strict $T$'s\\
+TT|PP|T|T & $>1$ plus nonnegative $PP$ and strict $T$'s\\
+TTT|PP|T & $>2$ plus nonnegative $PP$ and a strict $T$\\
+TT|TT|PP & $>2$ plus nonnegative $PP$\\
+TTTT|PP & $>3$ plus nonnegative $PP$\\
+TPP|T|T|T & $>6-2\sqrt5$ plus strict $T$'s\\
+TP|TP|T|T & $>2(1-\delta)$ plus strict $T$'s\\
+TTPP|T|T & positive tetracyclic packet plus strict $T$'s\\
+TTP|TP|T & $>1-\delta$ plus a strict $T$\\
+TPP|TT|T & $>7-2\sqrt5$ plus a strict $T$\\
+TTTPP|T & positive pentacyclic packet plus a strict $T$\\
+TT|TP|TP & $>3-2\delta$\\
+TTTP|TP & $>1-\delta$\\
+TTT|TPP & $>8-2\sqrt5$\\
+TTPP|TT & positive tetracyclic packet plus $>1$\\
+TTP|TTP & Lemma~\ref{lem:double-ttp}
+\end{tabular}
+\end{center}
+Every direct quantity is positive because $\delta<1/2$ and
+$6-2\sqrt5>0$.  Whole cluster territories are supplied by
+Lemma~\ref{lem:territories}.
+
+\begin{lemma}[All singletons]\label{lem:all-singletons}
+The partition $T|T|T|T|P|P$ has positive surplus for every reduced cluster
+tree.
+\end{lemma}
+\begin{proof}
+A triangular leaf gives a strict triangle and a positive pentacyclic
+remainder.  Otherwise the two pentagons are all the leaves, so the finite tree
+has exactly two leaves and is a path.  In path order form $TP+TT+TP$; its
+surplus is $>2(1-\delta)+1>0$.
+\end{proof}
+
+\begin{lemma}[The double $TTP$ row]\label{lem:double-ttp}
+The partition $TTP|TTP$ has positive surplus.
+\end{lemma}
+\begin{proof}
+If the triangles in either cluster meet, \eqref{eq:ttp} plus nonnegativity of
+the other tricyclic cluster gives a positive total.  Otherwise each cluster is
+the distinct-cut chain $T-P-T$.  Split each central pentagon into two proper
+intervals, assigning the bridge connector to the interval containing its
+actual entry.  Join those selected intervals through the connector.  The exact
+territories are $TT+T+T$, with surplus $>1$ plus two strict terms.  This
+coordinated split gives every connector vertex and shared cut one owner.
+\end{proof}
+
+\begin{lemma}[The $TTP|T|T|P$ row]\label{lem:ttp-ttp}
+Every cactus with cluster partition $TTP|T|T|P$ has positive surplus.
+\end{lemma}
+\begin{proof}
+An intersecting pair in $TTP$ gives $>2-\delta$, which with the remote
+pentagon gives $>2-2\delta>0$.  A singleton triangular leaf gives a triangle
+and a positive pentacyclic remainder.  Assume neither and write the cluster as
+the chain $T-P_0-T$.  If a reduced edge separates $TP$ from a tetracyclic
+side, or $TT$ from $TPP$, the corresponding packet sum is positive.  If no
+such edge exists, the $TTP$ cluster and remote pentagon are the only leaves;
+the two singleton triangles are internal on their path.  Split $P_0$ according
+to its actual connector entry and form
+\[
+ TT+T+TP,
+ \qquad \sig>1+0+(1-\delta)>0.
+\]
+This also covers entries through a triangle, at its attachment cut, or at a
+private vertex of $P_0$.
+\end{proof}
+
+\begin{lemma}[E1: the six-row $TTTTP|P$ proof]\label{lem:e1}
+The partition $TTTTP_0|P_1$ has positive surplus for every connector entry.
+\end{lemma}
+\begin{proof}
+If the four triangles are pairwise disjoint, incidence acyclicity makes $P_0$
+a four-petal hub.  An entry through a petal travels with that petal; an entry at
+a private hub vertex is paired with an adjacent petal mark.  Splitting $P_0$
+gives $TP+TTT$, hence $>1-\delta$.
+
+Suppose two triangles meet.  Delete $P_0$ from the five-cycle incidence tree.
+Every resulting component contains triangles, meets $P_0$ at one distinct cut,
+and is one component of the triangle shared-cut graph.  At least one has size
+at least two, so the component-size partition and the size of the component containing
+the connector entry are exactly
+\begin{center}
+\begin{tabular}{c c c}
+sizes & entry size & certificate\\ \hline
+$(4)$&$4$&two-pentagon opening\\
+$(3,1)$&$3$&$TTTP+T$\\
+$(3,1)$&$1$&$TP+TTT$\\
+$(2,2)$&$2$&$TTP+TT$\\
+$(2,1,1)$&$2$&$TTP+T+T$\\
+$(2,1,1)$&$1$&$TP+TT+T$
+\end{tabular}
+\end{center}
+This is exhaustive even for a multiway cut: all triangles at that cut lie in
+one component.  For two or three components, cut $P_0$ in one gap between each
+consecutive pair of component marks.  Give $P_1$ and its entire connector to
+the interval owning the marked entry component.  The five displayed packet
+sums are positive by \eqref{eq:one}--\eqref{eq:lower-rank}; in particular
+$TTTP+T$ and $TTP+T+T$ are strict although their first term need only be
+qualitatively positive or nonnegative.
+
+If instead the connector enters a private vertex $z$ of $P_0$, open $P_0$ at
+$z$ and assign the connector and remote pentagon $P_1$ to the rooted territory
+at $z$.  This territory is a pentagonal unicyclic cactus and has surplus at
+least $-\delta$.  The complementary induced territory contains all four
+triangles; the path $P_0-z$ retains every shared cut, and an intersecting pair
+ensures that its shared-cut cluster packet sum is greater than one.  The total
+is therefore $>1-\delta>0$.
+
+For $(4)$, open private vertices of both pentagons away from the connector
+route.  Their tree territories cost two.  The four triangles remain one
+shared-cut cluster with surplus $>3$, so the total is $>3-2=1$.  Entries on a
+triangle, at an off-$P_0$ triangle cut, at a multiway attachment cut, or through
+a rooted branch all belong to one of the six rows and have one owner.
+\end{proof}
+
+\begin{lemma}[E2: eight incidences and twenty-six entries]\label{lem:e2}
+The partition $TTTP_0|T_4|P_1$ has positive surplus for every reduced-tree
+topology and every pair of labelled connector entries.
+\end{lemma}
+\begin{proof}
+If the $T_4$--$P_1$ path avoids the $TTTP_0$ cluster, use $TP$ plus a positive
+tetracyclic territory.  Otherwise its two arms enter that cluster.  The exact
+colored incidence trees, by cut count $c=1,2,3$, number
+\[
+ 1,\ 3,\ 4.
+\]
+With triangle nodes $0,1,2$, pentagon node $3$, and cut nodes starting at $4$,
+their canonical edge sets are
+\begin{align*}
+c=1:\quad&((0,4),(1,4),(2,4),(3,4));\\
+c=2:\quad&((0,4),(0,5),(1,4),(2,4),(3,5)),\\
+&((0,4),(0,5),(1,4),(2,5),(3,4)),\\
+&((0,4),(1,4),(2,5),(3,4),(3,5));\\
+c=3:\quad&((0,4),(0,5),(0,6),(1,4),(2,5),(3,6)),\\
+&((0,4),(0,5),(1,4),(1,6),(2,5),(3,6)),\\
+&((0,4),(0,5),(1,4),(2,6),(3,5),(3,6)),\\
+&((0,4),(1,5),(2,6),(3,4),(3,5),(3,6)).
+\end{align*}
+Seven contain a cut incident with two triangles; Lemma~\ref{lem:tttp-margin} gives
+$\sig(TTTP_0)>1$, which absorbs $\sig(P_1)\geq-\delta$ independently of both
+entries.  The eighth is the pentagon hub with three disjoint triangular petals.
+
+Project an entry through a petal to its hub mark and force it to travel with
+that petal; project every other entry to its actual hub vertex.  Thus three
+unlabelled distinct petal marks and ordered roots $b$ (for $T_4$) and $p$ (for
+$P_1$) lie on five hub vertices, with coincidences allowed.  Modulo the
+dihedral group there are exactly $26$ configurations.  Exact enumeration of
+all nonempty proper cyclic intervals finds in every configuration an interval
+containing $p$ which, after assigning $T_4$ according as $b$ lies in it, owns
+one or two triangles.  The certificate count is
+\[
+ 20:\ TP+TTT,
+ \qquad 6:\ TTP+TT.
+\]
+The totals are respectively $>(1-\delta)+0$ and $>0+1$.  Both interval and
+complement are nonempty consecutive sets; each petal mark and labelled arm has
+one owner.  The executable certificate and its canonical incidences are
+specified in Appendix~\ref{app:reproduction}.
+\end{proof}
+
+\begin{proposition}\label{prop:disconnected-ttttpp}
+If the cycles are $TTTTPP$ and the shared-cut graph is disconnected, then
+$\spE(G)>|V(G)|$.
+\end{proposition}
+\begin{proof}
+The twenty-eight-row table is the complete colored cluster partition list.
+Twenty-three rows follow directly from the packet ledger; the remaining five
+are Lemmas~\ref{lem:all-singletons}--\ref{lem:e2}.  Thus every reduced-tree
+topology, connector entry, and colored partition is covered.
+\end{proof}
+
+\section{Fully shared $TTTTTQ$: exact census}
+
+For one shared-cut cluster let $I$ be its bipartite cycle--cut incidence tree.
+With six cycle nodes and $c$ cut nodes,
+\begin{equation}\label{eq:incidence}
+ |E(I)|=c+5,
+ \qquad \sum_{x\text{ cut node}}(\deg_I(x)-1)=5,
+ \qquad 1\leq c\leq5.
+\end{equation}
+Triangle degrees are at most three; a $q$-cycle degree is at most $q$.
+
+\begin{lemma}[The $TTTTTQ$ census]\label{lem:q-census}
+Fix $Q$ and quotient by permutations of the five triangles and cut nodes.  The
+numbers of admissible incidence trees are
+\begin{center}
+\begin{tabular}{c|rrrrr|r}
+$Q$ capacity&$c=1$&$c=2$&$c=3$&$c=4$&$c=5$&total\\ \hline
+$q=3$&1&6&20&27&14&68\\
+$q=4$&1&6&20&28&15&70\\
+$q\geq5$&1&6&20&28&16&71
+\end{tabular}
+\end{center}
+Every nonbouquet tree admits a positive ordinary one-cycle interval split:
+respectively $67,69,70$ trees.  The sole exception in every regime is
+\begin{equation}\label{eq:q-bouquet}
+ ((0,6),(1,6),(2,6),(3,6),(4,6),(5,6)),
+\end{equation}
+where $0,\ldots,4$ are triangles, $5=Q$, and $6$ is the common cut.
+\end{lemma}
+
+\begin{proof}
+Enumerate cut neighborhoods with $c+5$ incidences, reject zero cycle degree,
+cut degree below two, excess capacity, and every non-tree, and canonicalize by
+color-preserving permutations.  This gives the displayed counts.  For every
+cycle of incidence degree at least two, delete its node and inspect the branch
+multisets.  Splitting $Q$ leaves strict all-triangle branches.  Splitting a
+triangle leaves one $Q$-branch: $TQ$ is positive; generic $TTQ$ is nonnegative
+and another triangle branch is strict; larger $T^kQ$ branches are lower-rank
+positive.  If $Q$ is singleton, the other four triangles occupy at most two
+branches, so one contains $TT$ and its surplus $>1$ absorbs the hostile loss
+$\delta_q<1$.  These tests certify every nonbouquet tree.  The executable
+enumeration and asserted canonical exception reproduce the finite step exactly.
+\end{proof}
+
+\begin{proposition}\label{prop:shared-tttttq}
+If all six $TTTTTQ$ cycles form one shared-cut cluster, then
+$\spE(G)>|V(G)|$.
+\end{proposition}
+\begin{proof}
+Realize each split certified by Lemma~\ref{lem:q-census} with consecutive
+intervals as in Lemma~\ref{lem:intervals}; the branch packet sum is positive.
+For the bouquet, open a private vertex of $Q$ and a private vertex of one
+designated triangle.  The path remnants retain the common cut, and the other
+four triangles remain one shared-cut cluster.  Thus
+\[
+ \sig(G)>3-1-1=1.
+\]
+This also covers $Q=T$: the designation is arbitrary.  The regimes $q=3$,
+$q=4$, and $q\geq5$ are exhaustive by \eqref{eq:incidence}.
+\end{proof}
+
+\section{Fully shared $TTTTPP$: exact $150$-tree census}
+
+\begin{lemma}[The SAFE incidence census]\label{lem:pp-census}
+Modulo permutations of four triangles, two pentagons, and cut nodes, the exact
+counts are
+\begin{center}
+\begin{tabular}{c|rrrrr|r}
+$c$&1&2&3&4&5&total\\ \hline
+incidence trees&1&9&40&62&38&150\\
+SAFE ordinary split&0&9&40&62&37&148
+\end{tabular}
+\end{center}
+The two canonical exceptions, with $0,1,2,3=T$, $4,5=P$, and cuts beginning
+at $6$, are
+\begin{align}
+ &((0,6),(1,6),(2,6),(3,6),(4,6),(5,6));
+ \label{eq:pp-bouquet}\\
+ &((0,6),(4,6),(1,7),(4,7),(2,8),(4,8),
+   (3,9),(4,9),(4,10),(5,10)).
+ \label{eq:saturated-hub}
+\end{align}
+They are respectively the six-cycle bouquet and a saturated pentagon hub with
+four triangular petals and one pentagonal petal.
+\end{lemma}
+
+\begin{proof}
+Equation \eqref{eq:incidence}, cut degree at least two, and cycle capacities
+define the finite enumeration.  Canonicalization uses
+$S_4\times S_2\times S_c$.  For each of all $6\cdot150=900$ cycle choices,
+delete the cycle node and compute the retained incidence components.  The SAFE
+ledger is exactly
+\begin{center}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabular}{c l c}
+branch&checked retained hypothesis&bound\\ \hline
+$T$&none&$>0$\\
+$P$&none&$\geq-\delta$\\
+$TT$&none&$>1$\\
+$TP$&none&$>1-\delta$\\
+$PP$&one shared-cut component&$\geq1-4/(3\sqrt{13})$\\
+$TTT$&one shared-cut cluster&$>2$\\
+$TPP$&one shared-cut cluster&$>6-2\sqrt5$\\
+$TTP$&the triangles retain a common cut&$>2-\delta$\\
+other rank three&none&$\geq0$\\
+$TTTT$&one shared-cut cluster&$>3$\\
+$TTTP$&an intersecting triangle pair&$>1$ by Lemma~\ref{lem:tttp-margin}\\
+other rank four&none&$>0$\\
+rank five&none&$>0$
+\end{tabular}
+\end{center}
+A split is accepted only if the corresponding exact symbolic bound is positive, or equals zero
+with a strict summand.  In particular, qualitative lower-rank positivity is
+never used to cancel a negative singleton pentagon, and concentrated estimates
+are applied only after checking their retained cuts.  The asserted totals are
+$1,9,40,62,38$, the accepted totals are $0,9,40,62,37$, and exhaustive
+canonicalization leaves exactly \eqref{eq:pp-bouquet} and
+\eqref{eq:saturated-hub}.  Appendix~\ref{app:reproduction} gives the executable
+certificate.
+\end{proof}
+
+\begin{proposition}\label{prop:shared-ttttpp}
+If all six $TTTTPP$ cycles form one shared-cut cluster, then
+$\spE(G)>|V(G)|$.
+\end{proposition}
+\begin{proof}
+For each of the $148$ SAFE trees, realize the certified split by proper
+consecutive intervals and apply its positive packet sum.  In the bouquet,
+open private vertices on both pentagons.  Their path remnants retain the common
+cut, the four triangles remain one shared-cut bouquet, and
+\[
+ \sig(G)>3-1-1=1.
+\]
+In the saturated hub, the hub pentagon uses all five vertices.  In cyclic
+order, merge the pentagonal-petal mark with either neighboring mark; both
+neighbors are triangular.  Give the remaining three triangular marks separate
+proper intervals.  This produces
+\[
+ TP+T+T+T,
+ \qquad \sig(G)>(1-\delta)+0+0+0>0,
+\]
+with every strict triangle retained.  Thus both exact exceptions are covered.
+\end{proof}
+
+\section{Main theorem}
+
+\begin{theorem}\label{thm:main}
+Every connected hexacyclic cactus $G$ on $n$ vertices satisfies
+\[
+ \boxed{\spE(G)>n}.
+\]
+\end{theorem}
+
+\begin{proof}
+The exact DNN estimate \eqref{eq:dnn} is strict unless the cycle multiset is
+$TTTTTQ$ or $TTTTPP$.  If the shared-cut graph is disconnected, Propositions
+\ref{prop:disconnected-tttttq} and \ref{prop:disconnected-ttttpp} apply.  If it
+is connected, all cycles form one incidence-tree cluster and Propositions
+\ref{prop:shared-tttttq} and \ref{prop:shared-ttttpp} apply.  These alternatives
+exhaust every cycle multiset and every incidence.  Lemmas
+\ref{lem:territories} and \ref{lem:intervals} include arbitrary connectors,
+Steiner branches, entry vertices, and attached trees.  Every comparison is on
+a vertex partition into induced subgraphs; no edge monotonicity or tree
+relocation is used.
+\end{proof}
+
+Since a connected hexacyclic graph has $|E(G)|=n+5$, this proves the strict
+conclusion of the Akbari--Kumar--Mohar--Pragada--Zhang conjecture
+\cite[Conjecture~1.2]{AKMPZ} for every hexacyclic cactus.
+
+\appendix
+\section{Exact reproduction and canonical proof objects}\label{app:reproduction}
+
+From the repository root run, using only the Python standard library,
+\begin{verbatim}
+python research/hexacyclic-e2-tttp-entry-census.py
+python research/hexacyclic-tttttq-incidence-census.py
+python research/hexacyclic-ttttpp-incidence-census.py
+\end{verbatim}
+The first script asserts the $TTTP$ incidence counts
+\verb|{1: 1, 2: 3, 3: 4}|, seven intersecting-pair trees, the unique
+three-petal hub, and exactly
+\[
+ 26=20\ (TP+TTT)+6\ (TTP+TT)
+\]
+ordered labelled-entry orbits.  It prints a canonical incidence, interval, and
+packet certificate for each orbit.
+
+The second script asserts
+\begin{verbatim}
+q=3:  {1: 1, 2: 6, 3: 20, 4: 27, 5: 14}  total 68
+q=4:  {1: 1, 2: 6, 3: 20, 4: 28, 5: 15}  total 70
+q>=5: {1: 1, 2: 6, 3: 20, 4: 28, 5: 16}  total 71
+\end{verbatim}
+and the sole canonical exception \eqref{eq:q-bouquet} in each regime.  The
+third asserts
+\begin{verbatim}
+colored trees by cut count: {1: 1, 2: 9, 3: 40, 4: 62, 5: 38}
+SAFE one-cycle packet resolutions: {2: 9, 3: 40, 4: 62, 5: 37}
+\end{verbatim}
+together with all $900$ cycle choices, the exact retained-incidence ledger,
+and the two canonical exceptions \eqref{eq:pp-bouquet} and
+\eqref{eq:saturated-hub}.  The scripts enumerate finite incidence objects;
+the spectral implications are the symbolic packet lemmas proved or cited in
+the manuscript.  The last executable uses only exact \texttt{Fraction}
+arithmetic.  It replaces radical margins by the rational consequences
+$\delta<1/4$, $1-\delta>3/4$, $2-\delta>7/4$,
+$6-2\sqrt5>3/2$, and $1-4/(3\sqrt{13})>0$, each certified by squaring positive
+rational bounds.  Thus no numerical approximation is a mathematical premise.
+
+The source proof objects integrated into this manuscript are
+\begin{verbatim}
+research/hexacyclic-dnn-residuals-2026-07-26.md
+research/five-triangle-shared-cluster-surplus-2026-07-26.md
+research/hexacyclic-tttttq-disconnected-2026-07-26.md
+research/hexacyclic-ttttpp-disconnected-audit-2026-07-26.md
+research/hexacyclic-ttttpp-e1-resolution-2026-07-26.md
+research/hexacyclic-e2-tttp-two-entry-resolution-2026-07-26.md
+research/hexacyclic-tttttq-incidence-census.py
+research/hexacyclic-ttttpp-incidence-census.py
+research/hexacyclic-e2-tttp-entry-census.py
+\end{verbatim}
+
+\begin{thebibliography}{99}
+\bibitem{AKMP}
+S.~Akbari, H.~Kumar, B.~Mohar, and S.~Pragada,
+\emph{A linear lower bound for the square energy of graphs},
+Electron. J. Combin. 32(3) (2025), Paper No. P3.53.
+
+\bibitem{AKMPZ}
+S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and S.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264, 2025.
+
+\bibitem{Bicyclic}
+Companion manuscript, \emph{Positive Square Energy of Every Bicyclic Cactus},
+2026; repository path \texttt{all-bicyclic-cacti/paper.tex}.
+
+\bibitem{Tricyclic}
+Companion manuscript, \emph{Positive Square Energy of Every Tricyclic Cactus},
+2026; repository path \texttt{all-tricyclic-cacti/paper.tex}.
+
+\bibitem{Tetracyclic}
+Companion manuscript, \emph{Positive Square Energy of Every Tetracyclic
+Cactus}, 2026; repository path \texttt{all-tetracyclic-cacti/paper.tex}.
+
+\bibitem{Pentacyclic}
+Companion manuscript, \emph{Positive Square Energy of Every Pentacyclic
+Cactus}, 2026; repository path \texttt{all-pentacyclic-cacti/paper.tex}.
+
+\bibitem{DNN}
+Companion manuscript, \emph{The Optimized Liu--Tang--Zhang Constant for Cactus
+Graphs}, 2026; repository path \texttt{sharp-cactus-dnn/paper.tex}.
+
+\bibitem{PackingTwo}
+Companion manuscript, \emph{Square Energy from Cycle Packing and Block-Graph
+Territories}, 2026; repository path
+\texttt{packing-two-square-energy/paper.tex}.
+
+\bibitem{LTZ}
+Y.~Liu, Q.~Tang, and S.~Zhang,
+\emph{The positive and negative square-energy conjecture},
+arXiv:2607.18031, 2026.
+\end{thebibliography}
+\end{document}

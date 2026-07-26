@@ -8,22 +8,16 @@ tetracyclic or pentacyclic packet is never charged against a negative pentagon.
 
 from collections import Counter
 from dataclasses import dataclass
-from decimal import Decimal, getcontext
+from fractions import Fraction
 from itertools import combinations, combinations_with_replacement, permutations
 
 TRIANGLES = range(4)
 PENTAGONS = range(4, 6)
 CYCLE_COUNT = 6
 
-getcontext().prec = 40
-SQRT5 = Decimal(5).sqrt()
-SQRT13 = Decimal(13).sqrt()
-DELTA = SQRT5 - 2
-
-
 @dataclass(frozen=True)
 class Bound:
-    value: Decimal
+    value: Fraction
     strict: bool
     source: str
 
@@ -151,40 +145,39 @@ def packet_bound(component):
 
     if rank == 1:
         if triangles:
-            return Bound(Decimal(0), True, "T > 0")
-        return Bound(-DELTA, False, "P >= -delta")
+            return Bound(Fraction(0), True, "T > 0")
+        return Bound(Fraction(-1, 4), True, "P >= -delta > -1/4")
     if (triangles, pentagons) == (2, 0):
-        return Bound(Decimal(1), True, "TT > 1")
+        return Bound(Fraction(1), True, "TT > 1")
     if (triangles, pentagons) == (1, 1):
-        return Bound(Decimal(1) - DELTA, True, "TP > 1-delta")
+        return Bound(Fraction(3, 4), True, "TP > 1-delta > 3/4")
     if (triangles, pentagons) == (0, 2):
-        value = Decimal(1) - Decimal(4) / (Decimal(3) * SQRT13)
-        return Bound(value, False, "shared PP >= 1-4/(3sqrt(13))")
+        return Bound(Fraction(0), True, "shared PP >= 1-4/(3sqrt(13)) > 0")
     if (triangles, pentagons) == (3, 0):
-        return Bound(Decimal(2), True, "shared TTT > 2")
+        return Bound(Fraction(2), True, "shared TTT > 2")
     if (triangles, pentagons) == (1, 2):
-        return Bound(Decimal(6) - 2 * SQRT5, True, "shared TPP > 6-2sqrt(5)")
+        return Bound(Fraction(3, 2), True, "shared TPP > 6-2sqrt(5) > 3/2")
     if (triangles, pentagons) == (2, 1):
         triangle_set = {cycle for cycle in cycles if cycle < 4}
         share_cut = any(triangle_set <= set(adjacency[cut]) for cut in internal_cuts)
         if share_cut:
-            return Bound(Decimal(2) - DELTA, True, "shared-triangle TTP > 2-delta")
-        return Bound(Decimal(0), False, "generic tricyclic >= 0")
+            return Bound(Fraction(7, 4), True, "shared-triangle TTP > 2-delta > 7/4")
+        return Bound(Fraction(0), False, "generic tricyclic >= 0")
     if rank == 3:
-        return Bound(Decimal(0), False, "generic tricyclic >= 0")
+        return Bound(Fraction(0), False, "generic tricyclic >= 0")
     if (triangles, pentagons) == (4, 0):
-        return Bound(Decimal(3), True, "shared TTTT > 3")
+        return Bound(Fraction(3), True, "shared TTTT > 3")
     if (triangles, pentagons) == (3, 1):
         triangle_set = {cycle for cycle in cycles if cycle < 4}
         share_pair = any(
             len(triangle_set & set(adjacency[cut])) >= 2 for cut in internal_cuts
         )
         if share_pair:
-            return Bound(Decimal(1), True, "fully shared TTTP with a shared T pair > 1")
+            return Bound(Fraction(1), True, "fully shared TTTP with a shared T pair > 1")
     if rank == 4:
-        return Bound(Decimal(0), True, "generic tetracyclic > 0")
+        return Bound(Fraction(0), True, "generic tetracyclic > 0")
     if rank == 5:
-        return Bound(Decimal(0), True, "generic pentacyclic > 0")
+        return Bound(Fraction(0), True, "generic pentacyclic > 0")
     raise AssertionError((triangles, pentagons))
 
 
@@ -193,7 +186,7 @@ def split_certificate(edges, cut_count, cycle):
     if len(components) < 2:
         return None
     bounds = tuple(packet_bound(component) for component in components)
-    total = sum((bound.value for bound in bounds), Decimal(0))
+    total = sum((bound.value for bound in bounds), Fraction(0))
     if total > 0 or (total == 0 and any(bound.strict for bound in bounds)):
         branches = tuple(
             sorted(
