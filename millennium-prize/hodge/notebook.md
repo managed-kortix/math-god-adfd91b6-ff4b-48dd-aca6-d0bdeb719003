@@ -82,3 +82,15 @@ First-order data cannot distinguish the tangent branches `(y)` and
 identification plus equal dimension inside a specified irreducible Hodge
 component. This is a local logical obstruction, not a claim about the actual
 cubic Hodge locus or a Hodge result.
+
+## Bounded scout cycle 46
+
+The branch obstruction persists through arbitrary fixed jet order. In
+`C[[x,y]]`, the smooth branches `W=V(y)` and `V=V(y-x^3)` have identical
+quadratic jets, reduced points, and injective tangent maps, but
+`C[[x,y]]/(y,y-x^3)=C[[x]]/(x^3)`: they meet only at the origin with contact
+length three and first differ at the cubic jet. Replacing `x^3` by
+`x^(N+1)` defeats every prescribed finite jet order. Thus component dominance
+needs formal ideal containment/equality or an independent finite-determinacy
+theorem, not a bounded deformation jet. This is a local obstruction only and
+proves no Hodge statement.

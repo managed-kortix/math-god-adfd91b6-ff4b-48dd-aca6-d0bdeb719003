@@ -83,10 +83,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   online increments are now positive squares of cumulative `D_r` packets, but
   translation proves increments alone cannot control the physical anchor, and
   a positive reciprocal-log power mixture is certifiably nonconvex already on
-  the post-negative-episode triple `228,229,230`
+  the post-negative-episode triple `228,229,230`; collective Schur projection
+  now isolates the anchor reserve but rank-one Loewner routes fail, while the
+  correctly restricted atomic correlations `<F_M,D_r>` are all certified
+  negative for `2<=M<=r<=512`, suggesting an antialignment theorem that still
+  leaves the positive future-dispersion square uncontrolled
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 45
+- **cycle:** 46
 - **announcements:** none
 
 ## immutable target list
@@ -105,10 +109,9 @@ waiting process.
 
 ## next exact steps
 
-1. Seek an anchored physical inequality coupling `F_M` to the cumulative
-   `D_r` squares in Cycle 45, or a squarefree-impulse lower bound controlling
-   the same terminal residual; increment-only PSD and positive-mixture routes
-   are now ruled out.
+1. Attack the restricted atomic antialignment formula and quantify whether its
+   negative anchor row can pay any fixed fraction of the cumulative `D_r`
+   dispersion; sign alone is known to be insufficient.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -123,6 +126,18 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 46 isolated the collective packet-space Schur reserve and
+  ruled out rank-one coefficient Loewner and separate-projection arguments.
+  With the restricted/full domain correction audited, a 192-bit exhaustive
+  scan certifies all `130816` atomic correlations `<F_M,D_r>` strictly negative
+  for `2<=M<=r<=512`. This suggests anchor--increment antialignment but does not
+  control the positive displacement or future dispersion. The five bounded
+  scouts advanced once: an all-level Mazur--Tate tangent criterion and symmetry
+  obstruction for BSD; arbitrary finite-jet branch ambiguity for Hodge;
+  positive instantaneous Navier--Stokes `L^3` growth after amplitude scaling;
+  additive rather than multiplicative XOR sample hardness; and norm-resolvent
+  spectral-edge stability for Yang--Mills. No Millennium solution is claimed.
 
 - 2026-07-26: Cycle 45 decomposed the finite future-path dispersion into exact
   positive online squares of cumulative physical `D_r` packets. A translation

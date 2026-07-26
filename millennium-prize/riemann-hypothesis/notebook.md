@@ -4207,3 +4207,25 @@ on `(228,229,230)`, whereas a positive Laplace mixture requires convexity.
 Details and a 256-bit Arb verifier are in
 `cycle-45-dispersion-increments-and-mixture-obstruction.md`. This is a finite
 route obstruction, not an RH result.
+
+## Cycle 46: anchored geometry and atomic antialignment
+
+For the cumulative packets `X_b` of Cycle 45, packet Gram matrix `K`, anchor
+correlation vector `c`, and diagonal packet weights `A`, projection gives
+
+\[
+P_M-V_{M,B}=\|(I-\Pi)F_M\|^2+c^*K^+c-\operatorname{tr}(AK).
+\]
+
+This identifies the collective anchor reserve but gives no sign. Rank-one
+coefficient Loewner domination and separate anchor projections fail already on
+the first nonparallel physical packet.
+
+A stronger finite pattern does survive: with the correct restricted Gram
+`G^0=G^infinity-1/(aq)` but unchanged affine row
+`g_q=(log q+1-gamma)/q`, all `130816` physical correlations
+`<F_M,D_r>` for `2<=M<=r<=512` are certified strictly negative. This suggests
+an exact anchor--increment antialignment theorem. Even if proved, it controls
+only the anchor row and not the positive future displacement/dispersion square.
+Details and a 192-bit verifier are in
+`cycle-46-anchored-dispersion-geometry.md`. No RH result is claimed.

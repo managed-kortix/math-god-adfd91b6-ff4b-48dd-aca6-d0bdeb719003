@@ -93,3 +93,22 @@ increase gate count. Thus exponential sample replication, padding, or
 irrelevant coordinates create no new circuit hardness. An all-exponents
 amplifier must create genuinely new label dependencies. This does not prove a
 quadratic antichecker, a lower bound, or `P!=NP`.
+
+## Bounded scout cycle 46
+
+Direct-product composition does not multiply fitting hardness. For labeled
+samples `A_i` and a Boolean connective `g`, running fitting circuits on
+disjoint blocks gives
+`c(g(A_1,...,A_t))<=sum c(A_i)+s_DM(g)`. In particular,
+`c(A xor B)<=c(A)+c(B)+4`. Restricting one factor shows only polarity-insensitive
+preservation:
+
+\[
+\max(c_\pm(A),c_\pm(B))\le c(A\mathbin{\mathrm{xor}}B)
+\le c(A)+c(B)+4.
+\]
+
+Thus the `t`-fold XOR product has multiplied sample cardinality but at most
+`t c(A)+4(t-1)` fitting complexity. Black-box XOR/direct-product replication
+cannot amplify one fixed circuit exponent to all exponents. This gives no
+antichecker, lower bound, or P-versus-NP result.

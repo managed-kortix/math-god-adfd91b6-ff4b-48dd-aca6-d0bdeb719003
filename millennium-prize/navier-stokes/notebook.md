@@ -111,3 +111,16 @@ form `-int |u_c|u_c.grad p_c`, since `z -> |z|z` is `C^1` even at zero.
 This proves a signed pressure interaction outside the two-shear parity family,
 but gives no viscous comparison, growth theorem, regularity result, or
 Navier--Stokes solution.
+
+## Bounded scout cycle 46
+
+For the Cycle 43 perturbation, the viscous functional
+`D(c)=int |u_c|(|grad u_c|^2+|grad|u_c||^2)` is exactly even in `c`. The
+measure-preserving involution `(x,y)->(pi-x,pi-y)` sends `u_c` to `u_(-c)` and
+preserves every norm in the integrand, so `D'(0)=0`. Meanwhile
+`sgn I'(0)=sgn(ab(a^2-b^2))`. Choosing `a>b>0` and sufficiently small `c>0`
+therefore gives `I(c)>0`. Under amplitude scaling, pressure and viscosity scale
+as `I(lambda u)=lambda^4I(u)` and `D(lambda u)=lambda^3D(u)`, so
+`lambda>nu D(c)/I(c)` gives positive instantaneous `L^3` growth. This is only
+an initial derivative for smooth periodic data; it implies neither blowup nor
+failure of global regularity.

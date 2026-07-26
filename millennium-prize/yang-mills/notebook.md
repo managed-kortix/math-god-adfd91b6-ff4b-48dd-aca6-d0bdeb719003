@@ -89,3 +89,20 @@ and zero transfer-Hamiltonian gap. Hence even convergence of all fixed bounded
 Borel spectral observables misses a moving edge state; cutoff-uniform norm
 control is indispensable. This abstract no-go neither constructs Yang--Mills
 theory nor proves a mass gap.
+
+## Bounded scout cycle 46
+
+Norm-resolvent convergence is strong enough to exclude the escaping-edge
+example. If nonnegative self-adjoint vacuum-complement Hamiltonians satisfy
+`||(H_n+1)^(-1)-(H+1)^(-1)||->0`, then
+
+\[
+{1\over1+\inf\sigma(H_n)}=\|(H_n+1)^{-1}\|
+\longrightarrow\|(H+1)^{-1}\|={1\over1+\inf\sigma(H)},
+\]
+
+so their spectral edges converge. A limiting bound `H>=mI` therefore gives
+`H_n>=(m-epsilon)I` eventually, and fixed-time transfer norms converge. The
+vacuum sectors must first be consistently removed and identified. This is only
+an abstract sufficient topology; no Yang--Mills construction, convergence, or
+mass gap is proved.

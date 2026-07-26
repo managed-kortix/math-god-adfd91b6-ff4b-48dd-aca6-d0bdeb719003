@@ -83,3 +83,15 @@ This follows from the exponential generating function for `(exp x-1)^n` and
 Stirling inversion. Consequently `T^r|F` is equivalent to exact vanishing of
 the first `r` weight derivatives. This is only a formal certification
 criterion; it supplies no modular-symbol vanishing or BSD result.
+
+## Bounded scout cycle 46
+
+At finite Mazur--Tate level `n`, reduction modulo `T^2` gives an augmentation
+moment `A_n=sum c_n(a)` and a tangent moment
+`B_n=sum c_n(a) ell_n(a) mod 5^n`, where
+`<a>=gamma^(ell_n(a))`. Compatibility identifies these with `a_0` and
+`a_1 mod 5^n` for the limiting Iwasawa series. Hence `T^2|F` is equivalent to
+`A_n=0` and `B_n=0 mod 5^n` at every level. The even symmetry does not kill
+the tangent moment: `<-a>=<a>` and paired plus-symbol terms double rather than
+cancel. Exact linear vanishing therefore needs an all-level symbolic argument,
+not symmetry or any finite precision. This proves no vanishing and no BSD case.
