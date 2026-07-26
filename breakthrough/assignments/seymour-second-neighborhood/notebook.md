@@ -573,3 +573,28 @@ No audits yet.
 - **Next queued attack:** split `k=3` by the five unlabeled T-hole shapes
   (matching plus four nonmatching shapes), certify the four nonmatching shapes,
   and seek a uniform dirty-endpoint synchronization lemma.
+
+## 2026-07-26 — tick 26
+
+- Added an exact five-way `k=3` shape split using only the number of T vertices
+  of hole-degree at least two and at least three. Under exact three-hole
+  cardinality these profiles uniquely distinguish matching, path-plus-edge,
+  four-path, claw, and triangle. The independent K6 census passes all 455 edge
+  triples (`experiments/test_m9_k3_shapes.py`).
+- Rejected a proposed uniform nonmatching human proof: clean endpoint marks
+  control predecessor classes, but not their repeated incidence into several B
+  columns. The claimed column-sum bound was unsupported.
+- **Next queued step:** certify the ten shape shards for rho 0 and 1 using
+  `experiments/m9_k3_shapes.py`; rho 2 and 3 already have aggregate checked
+  proofs. Retain only independently checked outcomes.
+
+### Completion of m=9 k=3
+
+- All ten rho-0/1 shape shards are independently LRAT-verified; hashes are in
+  `experiments/m9-k3-shape-certificates.md`. Together with the checked aggregate
+  rho-2/3 runs, the entire `k=3` strip is eliminated.
+- The residual `m=9` aggregate campaign is now six pairs:
+  `(rho,k)=(0,4),(1,4),(2,4),(0,5),(1,5),(0,6)`.
+- **Next queued attack:** classify four-edge T-hole graphs by degree/cycle
+  profile and target the `k=4` rows, where five or six B vertices dominate both
+  C vertices and exact degree pressure forces at least four predecessor classes.
