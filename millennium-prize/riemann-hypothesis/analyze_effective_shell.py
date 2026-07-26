@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Exact/Arb first-difference audit of the effective coarse shell.
+"""Exact/Arb first-difference and Abel audit of the effective coarse shell.
 
 The shell columns N/2 <= d < N form a unit lower-triangular matrix.  This
 analyzer inverts that block by first differences, without constructing a dense
 floor matrix, and evaluates the actual scale-N and scale-2N Mobius tapers.
 All arithmetic geometry is exact; logarithms, coefficients, and energies are
-Arb balls.  The implementation uses divisor sieves and is O(N log N).
+Arb balls.  It also Abel-decomposes the complete shell decrement into boundary,
+diagonal-increment, and cumulative-increment cells.  The implementation uses
+divisor sieves and is O(N log N).
 """
 
 import argparse
@@ -69,6 +71,16 @@ class EffectiveShellAnalysis:
     coarse_minus_fine: object
     polarized_coarse_minus_fine: object
     polarization_verified: bool
+    abel_direct_cells: tuple
+    abel_boundary_cells: tuple
+    diagonal_increment_cells: tuple
+    cumulative_increment_cells: tuple
+    abel_boundary_total: object
+    diagonal_increment_total: object
+    cumulative_increment_total: object
+    abel_recombined_total: object
+    abel_cell_recombination_verified: bool
+    abel_total_recombination_verified: bool
 
 
 def exact_shell_first_differences(values):
@@ -89,6 +101,62 @@ def exact_shell_reconstruction(coefficients):
         running += value
         result.append(running)
     return tuple(result)
+
+
+def exact_abel_square_decrement(left, right, jumps=(), scale=1, start=1):
+    """Abel-decompose a weighted difference of cumulative squares over Q.
+
+    ``left`` and ``right`` contain values at consecutive indices beginning at
+    ``start``.  ``jumps`` contains the local costs at those indices.  The
+    returned cell tuples include a separate right-boundary cell, so their
+    length is ``len(left) + 1``.
+    """
+    left = tuple(Fraction(value) for value in left)
+    right = tuple(Fraction(value) for value in right)
+    jumps = tuple(Fraction(value) for value in jumps)
+    scale = Fraction(scale)
+    if len(left) != len(right) or not left:
+        raise ValueError("need equally sized nonempty cumulative vectors")
+    if not isinstance(start, int) or start < 1:
+        raise ValueError("start must be a positive integer")
+    if jumps and len(jumps) != len(left):
+        raise ValueError("jumps must be empty or have one value per shell index")
+    if not jumps:
+        jumps = (Fraction(0),) * len(left)
+
+    boundary = [scale * (left[0] ** 2 - right[0] ** 2) / start]
+    diagonal = [-jumps[0]]
+    cumulative = [Fraction(0)]
+    direct = [boundary[0] + diagonal[0]]
+    for offset in range(1, len(left)):
+        index = start + offset
+        left_increment = left[offset] - left[offset - 1]
+        right_increment = right[offset] - right[offset - 1]
+        boundary.append(Fraction(0))
+        diagonal.append(
+            scale * (left_increment ** 2 - right_increment ** 2) / index
+            - jumps[offset]
+        )
+        cumulative.append(
+            2 * scale * (
+                left[offset - 1] * left_increment
+                - right[offset - 1] * right_increment
+            ) / index
+        )
+        direct.append(
+            scale * (
+                left[offset] ** 2 - right[offset] ** 2
+                - left[offset - 1] ** 2 + right[offset - 1] ** 2
+            ) / index - jumps[offset]
+        )
+    boundary.append(
+        -scale * (left[-1] ** 2 - right[-1] ** 2)
+        / (start + len(left))
+    )
+    diagonal.append(Fraction(0))
+    cumulative.append(Fraction(0))
+    direct.append(boundary[-1])
+    return tuple(direct), tuple(boundary), tuple(diagonal), tuple(cumulative)
 
 
 def _arb_first_differences(values):
@@ -131,6 +199,45 @@ def _weighted_energy(values, start, scale):
 def _weighted_inner(left, right, start, scale):
     return sum((ball(Fraction(scale, k * (k + 1))) * a * b
                 for k, (a, b) in enumerate(zip(left, right), start)), arb(0))
+
+
+def _abel_square_decrement(left, right, jumps, start, scale):
+    """Arb version of ``exact_abel_square_decrement`` with explicit cells."""
+    boundary = [ball(Fraction(scale, start))
+                * (left[0] ** 2 - right[0] ** 2)]
+    diagonal = [-jumps[0]]
+    cumulative = [arb(0)]
+    direct = [boundary[0] + diagonal[0]]
+    for offset in range(1, len(left)):
+        index = start + offset
+        left_increment = left[offset] - left[offset - 1]
+        right_increment = right[offset] - right[offset - 1]
+        factor = ball(Fraction(scale, index))
+        boundary.append(arb(0))
+        diagonal.append(
+            factor * (left_increment ** 2 - right_increment ** 2)
+            - jumps[offset]
+        )
+        cumulative.append(
+            2 * factor * (
+                left[offset - 1] * left_increment
+                - right[offset - 1] * right_increment
+            )
+        )
+        direct.append(
+            factor * (
+                left[offset] ** 2 - right[offset] ** 2
+                - left[offset - 1] ** 2 + right[offset - 1] ** 2
+            ) - jumps[offset]
+        )
+    boundary.append(
+        -ball(Fraction(scale, start + len(left)))
+        * (left[-1] ** 2 - right[-1] ** 2)
+    )
+    diagonal.append(arb(0))
+    cumulative.append(arb(0))
+    direct.append(boundary[-1])
+    return tuple(direct), tuple(boundary), tuple(diagonal), tuple(cumulative)
 
 
 def _certified_sign(value):
@@ -309,6 +416,34 @@ def analyze_effective_shell(N):
     quadratic_verified = quadratic_direct.overlaps(quadratic_recombined)
     coarse_minus_fine = preceding_completed_energy - fine_energy
     polarized = -2 * correlation - pair_discrepancy_energy - jump_energy
+    jump_cells = tuple(
+        ball(Fraction(N, (2 * k + 1) ** 2)) * jump ** 2
+        for k, jump in zip(range(half, N), pair_jumps)
+    )
+    (abel_direct_cells, abel_boundary_cells, diagonal_increment_cells,
+     cumulative_increment_cells) = _abel_square_decrement(
+        preceding_completed, pair_average, jump_cells, half, N
+    )
+    abel_boundary_total = sum(abel_boundary_cells, arb(0))
+    diagonal_increment_total = sum(diagonal_increment_cells, arb(0))
+    cumulative_increment_total = sum(cumulative_increment_cells, arb(0))
+    abel_recombined_total = (
+        abel_boundary_total + diagonal_increment_total
+        + cumulative_increment_total
+    )
+    abel_cells_verified = all(
+        direct.overlaps(boundary + diagonal + cumulative)
+        for direct, boundary, diagonal, cumulative in zip(
+            abel_direct_cells, abel_boundary_cells,
+            diagonal_increment_cells, cumulative_increment_cells
+        )
+    )
+    abel_direct_total = sum(abel_direct_cells, arb(0))
+    abel_total_verified = (
+        abel_direct_total.overlaps(abel_recombined_total)
+        and abel_direct_total.overlaps(coarse_minus_fine)
+        and abel_recombined_total.overlaps(coarse_minus_fine)
+    )
     reconstructed_from_differences = _prefix(shell_differences)
 
     return EffectiveShellAnalysis(
@@ -330,6 +465,10 @@ def analyze_effective_shell(N):
         quadratic_dilation, quadratic_generic, quadratic_recombined,
         quadratic_verified,
         coarse_minus_fine, polarized, coarse_minus_fine.overlaps(polarized),
+        abel_direct_cells, abel_boundary_cells, diagonal_increment_cells,
+        cumulative_increment_cells, abel_boundary_total,
+        diagonal_increment_total, cumulative_increment_total,
+        abel_recombined_total, abel_cells_verified, abel_total_verified,
     )
 
 
@@ -383,12 +522,25 @@ def main():
             f"recombined={result.centered_quadratic_recombined.str(12)}; "
             f"verified={result.centered_quadratic_recombination_verified}"
         )
+        print(
+            "  full decrement Abel split: "
+            f"boundary={result.abel_boundary_total.str(12)}; "
+            f"diagonal-increment={result.diagonal_increment_total.str(12)}; "
+            f"cumulative-increment={result.cumulative_increment_total.str(12)}"
+        )
+        print(
+            f"  Abel-recombined={result.abel_recombined_total.str(12)}; "
+            f"cell-verified={result.abel_cell_recombination_verified}; "
+            f"total-verified={result.abel_total_recombination_verified}"
+        )
         failed |= not all((result.pair_average_verified,
                            result.first_difference_verified,
                            result.fine_energy_verified,
                            result.polarization_verified,
                            result.correlation_decomposition_verified,
-                           result.centered_quadratic_recombination_verified))
+                           result.centered_quadratic_recombination_verified,
+                           result.abel_cell_recombination_verified,
+                           result.abel_total_recombination_verified))
     if failed:
         raise SystemExit("an effective-shell certificate failed")
 

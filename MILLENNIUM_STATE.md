@@ -54,15 +54,15 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
    three odd-Mertens blocks rather than one, while pair-average and jump prime
    diagonals reinforce to order `1/log N`, so the current sublemma is a
    cancellation theorem for the centered cumulative-square difference; an
-   endpoint-safe increment split shows near cancellation of diagonal and
-   fixed-shift pieces with a generic off-diagonal residual, but the mixed
-   `E_k F_k` term cancels entirely when recombined with the discrepancy square,
-   after
+   endpoint-safe Abel formula now reduces the full decrement to four boundary
+   squares and sparse Lambda-increment/cumulative packets, while a finite-zero
+   Gram form isolates a lag-`log 2` ordinate phase but has no sign under RH
+   location and density alone, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 33
+- **cycle:** 34
 - **announcements:** none
 
 ## immutable target list
@@ -81,11 +81,11 @@ waiting process.
 
 ## next exact steps
 
-1. Work with the recombined difference of cumulative-square energies, not the
-   noncanonical diagonal/fixed-shift split.
-2. Derive a cancellation-preserving Abel or zero-Gram representation for that
-   square difference and test whether RH controls its sign (currently it does
-   not by pointwise bounds).
+1. Analyze the complete Abel packets jointly across adjacent dyadic scales;
+   seek telescoping of boundary and increment terms before taking signs.
+2. Determine whether the finite zero-Gram lag kernel has an Euler-product or
+   Landau-explicit-formula constraint beyond RH location/density that controls
+   the required weighted off-diagonal phase.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -353,3 +353,19 @@ waiting process.
   dyadic scale through `N=8192`.  At the endpoint the diagonal and fixed-shift
   terms nearly cancel and the generic off-diagonal term dominates the finite
   residual.  No asymptotic estimate or solution is claimed.
+- 2026-07-26: added an exact rational/192-bit Arb Abel verifier for the full
+  effective-shell decrement.  It separates the two endpoint boundaries, the
+  literal diagonal increments including odd-pair jump squares, and all
+  cumulative-prefix/increment cross terms.  Direct and decomposed cells and
+  their totals recombine at every dyadic scale through `N=8192`; the large
+  diagonal and cumulative terms nearly cancel.  This is bookkeeping, not a
+  sign estimate or solution.
+- 2026-07-26: derived the Cycle 34 endpoint-safe Abel formula for the full shell
+  decrement.  Replacing pair average plus jump by the two complete fine squares
+  turns every interior first difference into the one-point sparse increment
+  `A_X-Lambda(r)/log X`; the exact result consists of four boundary squares and
+  increment-times-adjacent-cumulative packets.  An equivalent pair-average
+  form keeps the negative jump squares explicit and symmetrically preserves the
+  small cross-scale cumulative difference.  Signs are localized packetwise,
+  but the boundary and cumulative factors remain indefinite, so no contraction
+  theorem or RH result is claimed.

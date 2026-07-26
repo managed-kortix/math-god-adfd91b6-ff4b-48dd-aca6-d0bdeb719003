@@ -467,3 +467,67 @@ evaluated independently and certified to overlap for every dyadic
 displayed larger scales; the residual is controlled numerically by the generic
 off-diagonal piece.  This identifies the remaining arithmetic obstruction but
 is not an asymptotic estimate or an RH result.
+
+## Abel decomposition of the full shell decrement
+
+The isolated correlation and centered quadratic splits above are diagnostic.
+The analyzer now also keeps the invariant full decrement intact and performs
+summation by parts only on its two complete cumulative squares.  Write
+
+\[
+ D_k=u_k^2-z_k^2,\qquad
+ q_k={N\over(2k+1)^2}j_k^2,
+ \qquad n=N/2,\quad m=N-1.
+\]
+
+Thus
+
+\[
+ E_N-E_{2N}=\sum_{k=n}^m {N D_k\over k(k+1)}-\sum_{k=n}^m q_k.
+\]
+
+For `Delta u_k=u_k-u_(k-1)` and similarly for `z`, exact finite Abel
+summation gives
+
+\[
+ \boxed{E_N-E_{2N}=B_N+I_N+C_N,}
+\]
+
+where
+
+\[
+\begin{aligned}
+ B_N&={N\over n}D_n-{N\over m+1}D_m,\\
+ I_N&=-\sum_{k=n}^m q_k
+ +\sum_{k=n+1}^m {N\over k}
+ \left((\Delta u_k)^2-(\Delta z_k)^2\right),\\
+ C_N&=2\sum_{k=n+1}^m {N\over k}
+ \left(u_{k-1}\Delta u_k-z_{k-1}\Delta z_k\right).
+\end{aligned}
+\]
+
+Here `B_N` is the two-cell Abel boundary, `I_N` is the literal diagonal
+increment difference together with the local odd-pair jump squares, and `C_N`
+contains every cumulative-prefix/increment cross term.  No cross term is
+discarded or estimated separately.
+
+The implementation has a rational `exact_abel_square_decrement` kernel used by
+the unit tests and an independent Arb path for the actual Mobius--log vectors.
+For each shell index it compares the direct first difference of `D_k` with its
+diagonal-plus-cumulative expansion.  It then compares both the sum of the
+direct cells and `B_N+I_N+C_N` with the independently evaluated full decrement.
+All cell and total overlaps certify at 192 bits for every dyadic
+`2<=N<=8192`.
+
+| N | Abel boundary `B_N` | diagonal increment `I_N` | cumulative increment `C_N` | recombined decrement |
+|---:|---:|---:|---:|---:|
+| 32 | +1.02408699296 | +2.12926886182 | -3.13776902537 | +0.015586829405 |
+| 128 | +0.512789704700 | +4.37242633583 | -4.97195533267 | -0.086739292141 |
+| 512 | +0.528402828540 | +17.9205643034 | -18.8204419105 | -0.371474778561 |
+| 2048 | -0.624204558887 | +41.3298751961 | -41.7286536791 | -1.02298304183 |
+| 8192 | +2.17136021372 | +133.173825870 | -139.206371610 | -3.86118552583 |
+
+The large positive diagonal-increment and negative cumulative-increment terms
+nearly cancel.  Consequently this Abel split is an exact bookkeeping
+certificate, not a license to bound its pieces independently and not an
+asymptotic sign result.

@@ -3226,3 +3226,168 @@ Analyze the generic cross-window form
 `sum_k w_k sum_(r<=k<s<=2k) h_r h_s`.  Determine whether its required bound or
 sign follows from a known Selberg/sieve variance estimate, requires a uniform
 prime-pair estimate over the moving ratio window, or is stronger than RH.
+
+## Cycle 34: abstract lag-`log 2` zero-wave audit
+
+The finite zero-wave statistic
+
+\[
+ \mathcal C_h={\sum_j a_j^2\cos(h\gamma_j)\over\sum_j a_j^2},
+ \qquad h=\log2,
+\]
+
+is the long-average correlation of conjugate-paired waves sampled at lag `h`.
+Critical-line pairs at ordinates `2pi/h` and `pi/h` give signs `+1` and `-1`,
+respectively.  This freedom survives rough zeta-zero density: concentrate a
+continuous density `3M'(t)dt` in the one-third phase arcs where `cos(ht)>=1/2`,
+or in the opposite arcs where `cos(ht)<=-1/2`, and quantize cumulative mass to
+simple ordinates.  Both constructions satisfy
+
+\[
+ N(T)=M(T)+O(\log T),
+ \qquad M(T)={T\over2\pi}\log{T\over2\pi}-{T\over2\pi},
+\]
+
+after an arbitrary finite initial completion, while every positive weighted
+truncation has the selected strict sign.  Reflection gives exact conjugation
+and all abstract zeros lie on `Re s=1/2`.
+
+Therefore RH location plus rough density cannot by themselves determine the
+lag sign.  This is not a model of zeta's Euler product or full explicit formula,
+so it does not show that RH together with those extra structures is
+insufficient.  The full construction and scope are recorded in
+`lag-log2-zero-model-audit.md`.
+
+## Cycle 34: endpoint-safe Abel formula for the recombined decrement
+
+Put `n=N/2`, `m=N-1` and define the complete cumulative vectors
+
+\[
+ U_k=kA_N-\psi(k)/\log N,
+ \qquad
+ Y_r=rA_{2N}-\psi(r)/\log(2N).
+\]
+
+The exact increments are sparse:
+
+\[
+ U_k-U_{k-1}=A_N-\Lambda(k)/\log N,
+ \qquad
+ Y_r-Y_{r-1}=A_{2N}-\Lambda(r)/\log(2N).
+\]
+
+The two members of each fine pair are `Y_(2k)=v_k` and
+`Y_(2k+1)=v_k+j_k`.  Hence the pair-average identity
+`||Y||^2=||z||^2+R_jump` converts the full decrement into a difference of two
+complete cumulative-square energies.  Applying
+
+\[
+ \sum_{r=a}^b{C T_r^2\over r(r+1)}
+ ={C\over a}T_a^2-{C\over b+1}T_b^2
+ +C\sum_{r=a+1}^b{(T_r-T_{r-1})(T_r+T_{r-1})\over r}
+\]
+
+at the two scales gives
+
+\[
+\boxed{\begin{aligned}
+ E_N-E_{2N}={}&2(U_n^2-Y_N^2)+(Y_{2N-1}^2-U_m^2)\\
+ &+N\sum_{k=n+1}^m {A_N-\Lambda(k)/\log N\over k}
+ (U_k+U_{k-1})\\
+ &-2N\sum_{r=N+1}^{2N-1}
+ {A_{2N}-\Lambda(r)/\log(2N)\over r}(Y_r+Y_{r-1}).
+\end{aligned}}
+\]
+
+This is endpoint-safe: it retains both left squares, both right squares, and
+all lower-shell history through the cumulative vectors.  It is also
+cancellation-preserving: no `E_kF_k` or raw prime-pair channel is opened.  The
+odd jump is absorbed as the ordinary increment
+`Y_(2k+1)-Y_(2k)=A_(2N)-Lambda(2k+1)/log(2N)`.
+
+Equivalently, with `q_k=U_k^2-z_k^2`,
+
+\[
+ E_N-E_{2N}=2q_n-q_m+N\sum_{k=n+1}^m{q_k-q_{k-1}\over k}-R_{\rm jump}.
+\]
+
+Writing `a_k=Delta U_k`, `b_k=Delta z_k`, its interior packet is exactly
+
+\[
+ q_k-q_{k-1}={1\over2}(a_k-b_k)(U_k+U_{k-1}+z_k+z_{k-1})
+ +{1\over2}(a_k+b_k)(U_k+U_{k-1}-z_k-z_{k-1}),
+\]
+
+which preserves the cross-scale cancellation.  The first difference `b_k` is
+local and uses only `Lambda(2k-1),Lambda(2k),Lambda(2k+1)` with the exact
+rational endpoint weights.  Every interior sign is therefore localized to one
+increment-times-adjacent-cumulative packet; the four-square boundary remains
+indefinite, and no global sign follows from positivity alone.  Full details are
+in `cycle-34-endpoint-safe-abel-shell.md`.
+
+The Arb analyzer independently verifies this Abel decomposition through
+`N=8192`. At that endpoint its boundary, diagonal-increment, and
+cumulative-increment packets are approximately
+
+\[
++2.17136021372,
+\qquad +133.173825870,
+\qquad -139.206371610,
+\]
+
+recombining to the shell decrement `-3.86118552583`. The packet sizes again
+show that separate absolute estimates are unusable.
+
+## Cycle 34: finite-zero shell Gram
+
+An endpoint-correct finite explicit formula gives a finite affine Gram
+representation of the recombined shell-square difference. For a symmetric,
+complete finite zero multiset `Z(T)`, counted with multiplicity, define
+
+\[
+S_N(s)=\sum_{k=N/2}^{N-1}{Nk^s\over k(k+1)}.
+\]
+
+The zero-by-zero block is
+
+\[
+\boxed{K^{(N)}_{\rho\sigma}=
+{S_N(\bar\rho+\sigma)\over\bar\rho\sigma}
+\left({1\over\log^2N}-{2^{\bar\rho+\sigma}\over\log^2(2N)}\right).}
+\]
+
+The affine row and constant retain the trivial-zero term, the half-`Lambda`
+correction converting symmetric `psi_0` to right-continuous `psi`, the odd
+interpolation endpoint, and the complete jump square. The matrix is a
+difference of two PSD Gram matrices, not a PSD matrix.
+
+Under RH, its off-diagonal entries contain the exact phase
+
+\[
+e^{i(\eta-\gamma)\log2}
+\]
+
+times the finite Mellin shell factor `S_N(1+i(eta-gamma))`. The diagonal is
+explicit but does not determine the sign of the full Gram difference.
+
+The representation includes an exact truncation correction in terms of the
+finite explicit-formula remainders at every shell integer. A valid certificate
+must use one common cutoff, exact half-jumps, zero completeness and
+multiplicities, directed rounding, and a cancellation-preserving remainder
+bound. Finite-zero computation alone proves only bounded-`N` statements unless
+supplemented by a uniform tail and phase theorem.
+
+Abstract critical-line zero models with conjugation and
+`N(T)=M(T)+O(log T)` can force either sign of the lag statistic by placing
+ordinates in opposite phase arcs. Hence RH location and rough zero density do
+not control the sign; additional zeta-specific Euler-product or explicit-formula
+phase information is indispensable. See `finite-zero-shell-gram.md` and
+`lag-log2-zero-model-audit.md`.
+
+### Next queued main-funnel step
+
+Sum the endpoint-safe Abel packets over consecutive dyadic scales and inspect
+whether their four-square boundaries telescope against the next shell. In
+parallel, apply Landau-type explicit formulas to the **weighted** lag kernel to
+test whether the Euler product supplies a sign-sensitive main term absent from
+abstract zero-density models.

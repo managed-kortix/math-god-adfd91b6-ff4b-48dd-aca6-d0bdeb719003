@@ -8,6 +8,7 @@ from flint import arb, ctx
 
 from analyze_effective_shell import (
     analyze_effective_shell,
+    exact_abel_square_decrement,
     exact_shell_first_differences,
     exact_shell_reconstruction,
 )
@@ -25,6 +26,31 @@ class EffectiveShellTests(unittest.TestCase):
             Fraction(2, 3), Fraction(-13, 15), Fraction(39, 20)
         ))
         self.assertEqual(exact_shell_reconstruction(coefficients), values)
+
+    def test_exact_abel_square_decrement_cells_and_total(self):
+        left = (Fraction(2, 3), Fraction(5, 4), Fraction(-1, 2))
+        right = (Fraction(1, 5), Fraction(-2, 7), Fraction(3, 8))
+        jumps = (Fraction(1, 11), Fraction(2, 13), Fraction(3, 17))
+        direct, boundary, diagonal, cumulative = (
+            exact_abel_square_decrement(left, right, jumps, scale=6, start=4)
+        )
+        self.assertEqual(len(direct), 4)
+        self.assertEqual(tuple(
+            boundary_cell + diagonal_cell + cumulative_cell
+            for boundary_cell, diagonal_cell, cumulative_cell in
+            zip(boundary, diagonal, cumulative)
+        ), direct)
+        expected = sum((
+            Fraction(6, k * (k + 1)) * (a * a - b * b) - jump
+            for k, a, b, jump in zip(range(4, 7), left, right, jumps)
+        ), Fraction(0))
+        self.assertEqual(sum(direct, Fraction(0)), expected)
+        self.assertEqual(
+            sum(boundary, Fraction(0))
+            + sum(diagonal, Fraction(0))
+            + sum(cumulative, Fraction(0)),
+            expected,
+        )
 
     def test_effective_coefficients_reconstruct_pair_average(self):
         for N in (2, 4, 8, 32, 128):
@@ -139,12 +165,39 @@ class EffectiveShellTests(unittest.TestCase):
             result.centered_quadratic_direct
         ))
 
+    def test_full_decrement_abel_recombination_through_8192(self):
+        for N in (2 ** exponent for exponent in range(1, 14)):
+            result = analyze_effective_shell(N)
+            self.assertTrue(result.abel_cell_recombination_verified)
+            self.assertTrue(result.abel_total_recombination_verified)
+            for direct, boundary, diagonal, cumulative in zip(
+                    result.abel_direct_cells,
+                    result.abel_boundary_cells,
+                    result.diagonal_increment_cells,
+                    result.cumulative_increment_cells):
+                self.assertTrue(direct.overlaps(
+                    boundary + diagonal + cumulative
+                ))
+            self.assertTrue(result.coarse_minus_fine.overlaps(
+                result.abel_boundary_total
+                + result.diagonal_increment_total
+                + result.cumulative_increment_total
+            ))
+
     def test_input_validation(self):
         for N in (1, 3, 16384):
             with self.assertRaises(ValueError):
                 analyze_effective_shell(N)
         with self.assertRaises(ValueError):
             exact_shell_first_differences(())
+        with self.assertRaises(ValueError):
+            exact_abel_square_decrement((), ())
+        with self.assertRaises(ValueError):
+            exact_abel_square_decrement((1,), (1, 2))
+        with self.assertRaises(ValueError):
+            exact_abel_square_decrement((1,), (1,), (0, 0))
+        with self.assertRaises(ValueError):
+            exact_abel_square_decrement((1,), (1,), start=0)
 
 
 if __name__ == "__main__":
