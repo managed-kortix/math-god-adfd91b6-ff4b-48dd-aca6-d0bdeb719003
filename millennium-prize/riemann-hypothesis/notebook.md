@@ -2201,3 +2201,76 @@ Expand the drift-free `g_k` tail through `T_N(k)` and sum over `k` before taking
 absolute values. Seek a positive gcd/divisor kernel or a cancellation-aware
 bilinear identity at the required `1/log^2 N` scale. Uniform endpoint bounds
 cannot attain this scale.
+
+## Tick 25 — exact weighted Mobius kernel
+
+`drift-free-mobius-kernel.md` carries out the requested expansion before any
+bounding. On `N<k<=2N`, with `p_k=kA-psi(k)/log N`, the exact cancellation is
+
+\[
+g_k=g_k^{(0)}+\alpha^{-1}(2p_kT_N(k)+T_N(k)^2).
+\]
+
+After summing with `w_k=1/[k(k+1)]`, the quadratic kernel telescopes to
+
+\[
+K(n,m)={1\over\max(n,m)}-{1\over2N+1}.
+\]
+
+It is positive definite, since its form is the weighted sum of squares of
+cumulative sums. The linear kernel is also exact and can be written using a
+harmonic term and a single von Mangoldt sum. Its sign is uncontrolled; this is
+the entire fresh-transform obstruction on the first dyadic block. The max
+kernel has no gcd dependence, and splitting it into gcd classes destroys its
+Gram structure.
+
+Beyond `2N`, exact floor transforms at scales `N` and `2N` give a difference of
+two PSD floor Gram forms, not a positive gcd form. The separate floor pieces
+must be recombined before an infinite-horizon bound, because each contains
+large growth canceled only in the endpoint difference.
+
+Added `analyze_weighted_g_tail.py` and exact tests. Through `N=8192`, the fresh
+linear term is certified negative and the quadratic max-kernel term nonnegative,
+but the complete first post-reserve block is usually negative and highly
+nonmonotone. At `N=8192`, on `[N,2N)`,
+
+\[
+\text{baseline}=0.0008528322,
+\quad \text{linear}=-0.0024768828,
+\quad \text{quadratic}=0.0004437379,
+\]
+
+so the total is `-0.0011803128`. The baseline itself is another cancellation of
+three terms near `194,-389,195`; componentwise estimates are unusable.
+
+Completing the square gives a sharper interpretation:
+
+\[
+g_k=\alpha^{-1}(T_N(k)-\tau_k)^2-\alpha^{-1}\Delta_k^2,
+\]
+
+where `tau_k=psi(k)/log N-kA` and
+`Delta_k=k(A-alpha D)-(1-alpha)psi(k)/log N`. Thus the problem is weighted
+tracking of a deterministic center by the cumulative Möbius transform. The
+actual transform correlates enough with the center to make this shell negative,
+but no unconditional tracking theorem is known.
+
+The positive max kernel alone cannot yield the required scale. An
+`O(1/log^2 N)` estimate for its Möbius quadratic form is equivalent to an
+average square-root cancellation statement for partial Möbius sums on the
+dyadic block. Generic PSD, spectral, random-sign, or gcd arguments would hide
+an RH-strength input. The leading eigenvalues remain bounded away from zero.
+
+## Next queued main-funnel step
+
+Target the complete tracking difference, not the positive quadratic term.
+Derive a Perron/Mellin or Dirichlet-polynomial representation for
+
+\[
+\sum_{N\le k<2N}w_k[(T_N(k)-\tau_k)^2-\Delta_k^2]
+\]
+
+that keeps the linear--quadratic cancellation. Identify whether its main term
+vanishes or has a favorable sign before any contour shift encounters
+`1/zeta(s)`. In parallel, test low-eigenmode projections of the exact Möbius
+vector to isolate the minimum finite family of smooth moments that must cancel.

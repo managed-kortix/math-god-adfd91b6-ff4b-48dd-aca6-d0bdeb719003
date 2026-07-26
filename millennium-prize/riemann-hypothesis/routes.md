@@ -54,7 +54,10 @@ exact Abel form is now known, but fixed windows and local pairings are
 falsified. The exact initial Chebyshev reserve also cancels at leading order
 against slope terms. Drift-free cells isolate the remaining signed truncated
 Möbius endpoint correlation; the active route seeks to sum that correlation
-into a cancellation-aware gcd/divisor form before bounding it. The ultimate positive target remains
+before bounding it. The exact first-block kernel is a positive max kernel, not
+a gcd kernel, and controlling it alone is square-root-cancellation strength.
+The active route is now a Perron/Mellin and low-eigenmode analysis of the full
+linear--quadratic tracking difference. The ultimate positive target remains
 `liminf P_N=0`, where `P_N` is the restricted `(0,1)` energy. Any off-critical
 zero gives an explicit uniform positive floor for every `P_N`, so that target
 implies RH. It is not known to follow from RH for this exact logarithmic taper.

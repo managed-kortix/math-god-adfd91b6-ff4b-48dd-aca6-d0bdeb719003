@@ -26,12 +26,15 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   the apparent initial Chebyshev reserve is proved to cancel at leading order;
   drift-free cells remove artificial Abel drift but absolute tail bounds remain
   enormous, so the current sublemma is a correlation identity for the truncated
-  Möbius endpoint transform weighted by `1/[k(k+1)]`, after
+  Möbius endpoint transform weighted by `1/[k(k+1)]`; its positive max kernel
+  is exact but useful bounds are square-root-cancellation strength, so the
+  current sublemma is a cancellation-preserving Perron/low-mode representation
+  of the complete tracking difference, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 22
+- **cycle:** 23
 - **announcements:** none
 
 ## immutable target list
@@ -50,10 +53,10 @@ waiting process.
 
 ## next exact steps
 
-1. Expand the drift-free `g_k` tail through the exact truncated Möbius transform
-   `T_N(k)` and sum over `k` before applying bounds.
-2. Seek a positive gcd/divisor kernel or cancellation-aware bilinear form at the
-   required `1/log^2 N` scale; audit it against finite `N<=8192` data.
+1. Derive a Perron/Mellin representation for the complete weighted tracking
+   difference, preserving its linear--quadratic cancellation.
+2. Compute exact low-eigenmode projections of the Möbius block vector and
+   isolate the finite smooth moments responsible for the observed sign.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -202,6 +205,13 @@ waiting process.
   need time-times-carrier many cells. The next route is certified higher-order
   Legendre projection and an exact small Mobius surrogate test. No solution is
   claimed.
+- 2026-07-26: expanded the first post-reserve shell exactly. Its fresh quadratic
+  term is a positive-definite max kernel, but the linear term is signed and
+  dominates frequently; at `N=8192` the shell is `-0.0011803`. A standalone
+  `O(1/log^2 N)` max-kernel bound is average Möbius square-root cancellation and
+  cannot follow from positivity or spectrum. The route now targets the complete
+  tracking difference via Perron/Mellin and low-mode cancellation. No solution
+  is claimed.
 - 2026-07-26: implemented degrees `0--3` piecewise Legendre projection with an
   origin-safe Taylor residual and exact harmonic-first `N=4 -> 8`, `R=3`
   Mobius aggregation. At `Q=8`, rank-768 degree three certifies the finite
