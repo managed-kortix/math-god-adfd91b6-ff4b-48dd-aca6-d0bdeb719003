@@ -30,7 +30,7 @@ if SPEC.loader is None:
     raise RuntimeError("certificate dependency has no import loader")
 SPEC.loader.exec_module(BASE)
 
-TRIANGLE_MARGIN = {1: 0, 2: 1, 3: 2, 4: 3, 5: 2, 6: 1, 7: 0}
+TRIANGLE_MARGIN = {1: 0, 2: 1, 3: 2, 4: 3, 5: 2, 6: 1, 7: 0, 8: 0}
 LABELS = ("A", "B")
 
 
@@ -166,8 +166,8 @@ def marked_signature(tree, positions):
     return min(code(center, -1) for center in BASE.tree_centers(adj))
 
 
-def enumerate_rows():
-    classes = BASE.enumerate_colors(("T",) * 7, 0)
+def enumerate_rows(triangle_count=7):
+    classes = BASE.enumerate_colors(("T",) * triangle_count, 0)
     rows = {}
     labelled_positions = 0
     for incidence_signature, tree in classes:

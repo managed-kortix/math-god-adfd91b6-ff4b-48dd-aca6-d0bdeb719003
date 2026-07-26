@@ -16,7 +16,6 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
-
 - 2026-07-26: completed every rank-ten cactus structural residual. New exact
   marked censuses close `A_9|Q` as `3624=3618+6` and entry-locked `T^8P|P` as
   `11689=11586+100+3`; the existing `P|A_8|P` census now has graph-level
@@ -55,6 +54,21 @@ research/semantic, research/procedural).
   orbit counts grow. Exact frontier and obligations are recorded in
   `research/rank-ten-cactus-router-interface-status-2026-07-26.md`; no
   rank-ten theorem is claimed.
+- 2026-07-26: completed `all-decacyclic-cacti`: every connected cactus of
+  cyclomatic rank ten satisfies `s+(G)>|V(G)|`. Sharp DNN leaves `T^9Q` and
+  `T^8PP`. The disconnected structural rows are now rigorously reduced by a
+  graph-level pruning lemma and an exhaustive reduced-tree audit of 156263
+  colored topologies (`156253+8+1+1`), leaving only the certified endpoints.
+  Exact marked certificates close `A9|Q` as `3624=3621+3`, `T^8P|P` as
+  `11689=11586+100+3`, and `P|A8|P` as `11689=11674+15`. Fully shared
+  `T^9Q` closes through the stabilized 8049-class universe; fully shared
+  `T^8PP` closes as `30386=30377+9`. Hostile audits caught and repaired the
+  missing disconnected topology proof, conservative q=7 wording, and weak
+  residual ownership checks. All strengthened scripts pass normally and under
+  `python -O`, final hostile gates and PDF build passed. Paper:
+  `all-decacyclic-cacti/`. Publication is next. The apparent `3621+3` versus
+  `3618+6` split reflects two valid certificate ledgers on the same 3624 marked
+  universe; the standalone paper uses the strengthened three-repair ledger.
 - 2026-07-26: completed `all-nonacyclic-cacti`: every connected cactus of
   cyclomatic rank nine satisfies `s+(G)>|V(G)|`. DNN leaves `T^8Q` and
   `T^7PP`. Disconnected partition audits give 66=63+3 and 117=109+8.

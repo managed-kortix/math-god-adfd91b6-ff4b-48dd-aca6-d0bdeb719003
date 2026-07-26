@@ -27,7 +27,7 @@ class Bound:
 
 
 CAPACITY = {"T": 3, "P": 5}
-TRIANGLE_MARGIN = {1: 0, 2: 1, 3: 2, 4: 3, 5: 2, 6: 1, 7: 0}
+TRIANGLE_MARGIN = {1: 0, 2: 1, 3: 2, 4: 3, 5: 2, 6: 1, 7: 0, 8: 0}
 
 
 def adjacency(tree):
@@ -211,7 +211,7 @@ def tpp_bound(tree, component):
     if (triangles, pentagons) == (3, 1):
         if any(len(triangle_set & set(adj[cut])) >= 2 for cut in internal_cuts):
             return Bound(Fraction(1), True, "shared-pair TTTP > 1")
-    assert 4 <= rank <= 7
+    assert 4 <= rank <= 8
     return Bound(Fraction(0), True, f"established generic rank-{rank} > 0")
 
 
