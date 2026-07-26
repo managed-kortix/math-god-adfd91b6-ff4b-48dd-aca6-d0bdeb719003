@@ -862,3 +862,26 @@ No audits yet.
   k4 strip, then inspect whether all other k strips were already closed by the
   k<=3 and final-row arguments. If so, promote the full m=9 branch only after a
   hostile coverage audit; otherwise isolate the exact remaining cells.
+
+## 2026-07-26 — tick 45
+
+- A durability audit found that the historical LRATs for all four `k=3` rows
+  and the three final `k=5,6` rows are absent; hashes alone are not currently
+  checkable certificates. Thus the complete m=9 branch cannot yet be promoted
+  from those ledgers.
+- Replaced the full `k=3` certificate dependence by a human proof; see
+  `attempts/tick45-k3-human-proof.md`. The three-hole B-row count requires at
+  least three predecessor sources. Matching, P3-plus-edge, P4, and claw admit
+  at most 0, 2, 2, and 0 sources. Triangle admits three packet labels, but the
+  tight all-label case synchronizes the triangle outneighborhoods, forces the
+  three sources to be the triangle vertices, and makes four common dominators
+  have at most four internal B-arcs against the required six.
+- Therefore the entire isolated-root `m=9,k=3` strip is now human-eliminated,
+  uniformly in rho. Together with ticks 25 and 30--44, all `k=0,...,4` rows
+  are durable human theorems.
+- The exact durable residual for m=9 is now only `(rho,k)=(0,5),(1,5),(0,6)`.
+  Historical checked-LRAT claims cover their 25 final shards, but no proof bytes
+  are retained. **Next queued attack:** derive a human final-row contradiction,
+  starting with k=6 where all six residual holes lie in T and the source lower
+  bound is strongest; use saturated packet compatibility rather than regenerate
+  bulk certificates.
