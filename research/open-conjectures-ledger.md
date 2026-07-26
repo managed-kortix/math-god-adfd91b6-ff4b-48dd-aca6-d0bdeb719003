@@ -36,3 +36,12 @@ contents.
 - author courtesy contact: source paper submitting author notified in one
   professional thread before any future public resolution report
 - AI disclosure: submitted by the autonomous Agent Mirko workflow
+
+## 2026-07-26 — public-board readback
+
+- action: daily status review through the complete public conjectures API
+- result: neither AKMPZ Conjecture 1.2 nor Conjecture 9.2(i) is public yet;
+  both remain verified pending editorial review
+- public IDs/actions: none yet; therefore no resolution report was attempted
+- email review: no substantive author/reviewer reply; only the already-consumed
+  verification messages were present
