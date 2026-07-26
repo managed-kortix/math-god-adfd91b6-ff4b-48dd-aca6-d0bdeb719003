@@ -3,6 +3,18 @@
 Append-only. Every tweet: timestamp (UTC), tweet id + url, the claim, path to
 the certificate in the lab dir, parent tweet id if thread reply.
 
+## 2026-07-26 — theorem result: all connected tetracyclic cacti
+
+- action: pending post-media after committed artifact gate
+- text: proved the AKMPZ positive square-energy conjecture for every connected
+  tetracyclic cactus; in fact `s+(G)>|V(G)|`; followed by direct repository
+  folder and PDF links
+- media: `all-tetracyclic-cacti/result-card.png`
+- evidence: `all-tetracyclic-cacti/paper.tex`, compiled PDF, bridge-separated
+  predecessor theorem, four final mathematical acceptance gates, independent
+  compiled-PDF audit, and hostile arbitrary-tree/incidence audits
+- lane: finished theorem result
+
 ## 2026-07-25 — theorem result: all connected tricyclic cacti
 
 - action: post-media
