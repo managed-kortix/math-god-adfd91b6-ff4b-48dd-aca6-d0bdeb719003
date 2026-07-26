@@ -4301,6 +4301,25 @@ The critical shortfall is `1.5131e-5`. The Cycle 54 cellwise bound remains true
 but is nonoptimal. Details are in
 `cycle-55-optimal-below-M-witness-correction.md`. No RH result is claimed.
 
+## Cycle 56: residual beyond the optimal staircase witness
+
+With `D_+=D_(M-1)-g_M`, the full old-state Schur reserve splits orthogonally as
+
+\[
+\|(I-\Pi_Z)D_{M-1}\|^2=W_M+\|(I-\Pi_Z)D_+\|^2.
+\]
+
+The residual still has one linear trace below `M`; it is not literally
+post-cutoff supported. On the critical window its normalized value is
+`0.0584054...`, while only `0.0450715...` is needed after the Cycle 55 payment.
+
+Matched first-shell cells are blocked by a unit triangular floor matrix, and
+fourteen-cell determinant witnesses are negligible in scale. One residualized
+global lagged state `D_(M-3)` repairs each of the three historical failures with
+certified positive margins, but imports almost the complete old prefix and
+gives no uniform theorem. Details are in
+`cycle-56-residual-beyond-optimal-witness.md`. No RH result is claimed.
+
 ## Cycle 49: recombination returns the original terminal kernel
 
 Combining packet surplus and coherent deficit before estimating gives

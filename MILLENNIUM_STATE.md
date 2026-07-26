@@ -122,10 +122,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   inversion makes the `U` slope global below `M`; the corrected optimal
   staircase witness captures `94.3%--97.6%` of historical old-`D` reserves and
   certifies eight of eleven delayed windows, but misses the critical
-  `[219,231)` repair by `1.5131e-5`
+  `[219,231)` repair by `1.5131e-5`; subtracting the optimal witness gives an
+  exact orthogonal residual of normalized size `0.0584054...`, while matched
+  first-shell witnesses are annihilated by a triangular floor block and larger
+  finite-cell witnesses are negligible; one residualized `D_(M-3)` probe
+  repairs the three historical failures but imports the global old prefix
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 55
+- **cycle:** 56
 - **announcements:** none
 
 ## immutable target list
@@ -144,9 +148,9 @@ waiting process.
 
 ## next exact steps
 
-1. Isolate the residual beyond the optimal below-`M` staircase witness, focusing
-   on the three failed historical windows and post-`M` Vasyunin correlations;
-   no stronger below-`M` witness exists.
+1. Control the specific orthogonal residual `||(I-Pi_Z)(D_(M-1)-g_M)||^2`
+   through arithmetic structure of the physical Möbius vector; fixed local
+   witnesses and fixed-rank post-cutoff probes are now ruled out.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -161,6 +165,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 56 split the old-state reserve exactly into the optimal
+  below-`M` staircase payment plus an orthogonal residual. The latter has
+  normalized size `0.0584054...` on `[219,231)`, exceeding the needed
+  `0.0450715...`. A unit triangular floor block annihilates all detectable
+  witnesses on the matched first shell, and explicit surplus-cell determinant
+  witnesses are negligible. One residualized lagged state `D_(M-3)` repairs all
+  three historical failures with certified positive margins, but this imports
+  almost the entire old prefix and supplies no uniform theorem. No RH or
+  Millennium solution is claimed.
 
 - 2026-07-26: Cycle 55 corrected Cycle 54: `U_(M-1)(t)` has one global slope on
   `1<t<M`, so the global Chebyshev staircase minus its best linear fit is
