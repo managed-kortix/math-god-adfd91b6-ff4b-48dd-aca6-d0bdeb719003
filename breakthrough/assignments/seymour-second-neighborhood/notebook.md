@@ -836,3 +836,29 @@ No audits yet.
   table. Its disconnected spare edge admits the sharp `(2,1)` packet from the
   tick-35 barrier, so the next lemma must synchronize multiple sources rather
   than rely on a single-source cut count.
+
+## 2026-07-26 — ticks 43--44
+
+- Eliminated the three disconnected residual shapes P4-plus-edge, two-P3, and
+  P3-plus-two-edges by saturated packet compatibility; see
+  `attempts/tick43-disconnected-shapes.md`. The sharp source caps are 3, 2, and
+  2, below the shape-independent lower bound 4.
+- Added `experiments/check_disconnected_packets.py`, which independently
+  enumerates 2,048, 2,048, and 131,072 support orientations and verifies the
+  three caps and cut multiplicity one. Hostile audit caught and repaired two
+  polarity errors in the displayed P4 formulas; the checker-derived caps were
+  unaffected.
+- A coverage audit found that K1,4 and claw-plus-edge had only notebook
+  assertions, not reconstructible proof files. Added both proofs in
+  `attempts/tick44-star-shapes.md`: K1,4 admits no inaccessible pair, while
+  claw-plus-edge has only two packet labels and therefore at most two sources.
+- The independent 20,475-graph shape census confirms these eleven profiles are
+  disjoint and exhaustive. All eleven now have written human contradictions,
+  so the complete isolated-root `m=9,k=4` strip is human-eliminated uniformly
+  over rho, placements, kappa, eta, and lambda.
+- This is not an order-18 elimination: other missing counts `m=5,6,7` remain,
+  while `m=8` and `m=9` residual bookkeeping must be reconciled carefully.
+- **Next queued attack:** update the m=9 campaign ledger to remove the entire
+  k4 strip, then inspect whether all other k strips were already closed by the
+  k<=3 and final-row arguments. If so, promote the full m=9 branch only after a
+  hostile coverage audit; otherwise isolate the exact remaining cells.
