@@ -26,18 +26,18 @@ arXiv:1211.5191.
 
 ## Current sharpened bottleneck
 
-Elementary pair-period estimates give polynomial-cost rigorous tail
-certification, and the periodic gcd variance admits an unconditional
-`14N/log^2 N` bound. These do not produce the required cancellation in the
-full weighted Gram form. The active next step is the exact rational
-fractional-part autocorrelation formula and its finite Vasyunin cotangent sum;
-the target is a sufficient signed Möbius--Vasyunin cancellation lemma, not an
-absolute pairwise estimate.
+The exact reduced-rational Fourier representation exposes the needed signed
+Möbius cancellation but creates a dense weighted sine kernel. Global low rank,
+common-period bounds, and Farey-neighbor-only near fields have been falsified.
+Coefficient-aware hierarchical error propagation and a phase-extracted
+separated-block theorem are now proved: geometrically admissible far blocks
+have explicit factorial-over-power/Taylor radii and rank independent of the
+cutoff after phase extraction, while overlapping cusp blocks must remain dense.
 
-The Estermann operator has now been converted to an exact double Perron
-integral, but its arithmetic diagonal vanishes and contour shifts meet the full
-reciprocal-zeta zero set. A weaker positive target is also active: prove
-`liminf P_N=0`, where `P_N` is the restricted `(0,1)` energy of the same fixed
-approximants. Any off-critical zero gives an explicit uniform positive floor
-for every `P_N`, so this condition implies RH. It is not known to follow from
-RH for this exact logarithmic taper.
+The active next step is an outward-rounded hierarchy implementation preserving
+the direct two-channel endpoint cancellation. It must survive two-point cusp,
+alternating Farey-cluster, and rational-grid adversaries and yield an affordable
+global radius at useful scales. The ultimate positive target remains
+`liminf P_N=0`, where `P_N` is the restricted `(0,1)` energy. Any off-critical
+zero gives an explicit uniform positive floor for every `P_N`, so that target
+implies RH. It is not known to follow from RH for this exact logarithmic taper.

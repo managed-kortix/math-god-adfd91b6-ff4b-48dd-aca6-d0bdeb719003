@@ -1627,3 +1627,104 @@ using local coefficient norms rather than global `l1` mass. Then validate the
 certified hierarchy against dense moderate-size kernels and the hostile
 rational clusters before scaling. The unresolved theorem is now certification
 of hierarchical compression, not identification of kernel structure.
+
+## Tick 15 — coefficient-aware hierarchical error theorem
+
+The rigorous error propagation for a symmetric H-matrix leaf partition is now
+formulated in `hierarchical-error-propagation.md`. If `P_+` stores each
+off-diagonal block once and `E_AB=K_AB-Ktilde_AB`, then exactly
+
+\[
+Q-\widetilde Q=\sum_{(A,B)\in P_+}\kappa_{AB}c_A^TE_{AB}c_B,
+\qquad \kappa_{AA}=1,\quad\kappa_{AB}=2\ (A<B).
+\]
+
+For a residual with certified entrywise and spectral errors, the local bound is
+
+\[
+|c_A^TR_{AB}c_B|\le
+\min\{\epsilon_{AB}^{(\infty)}\|c_A\|_1\|c_B\|_1,
+\epsilon_{AB}^{(2)}\|c_A\|_2\|c_B\|_2\}.
+\]
+
+Certified maximum row-`l2` and column-`l2` errors additionally give the mixed
+local alternatives `epsilon^(1,2)||c_A||_1||c_B||_2` and
+`epsilon^(2,1)||c_A||_2||c_B||_1`; the minimum of all available enclosures is
+valid.
+
+Certified separated error terms are evaluated through signed local moments
+before taking absolute values. If a block enclosure is
+`[m_AB-r_AB,m_AB+r_AB]`, the global error is enclosed by
+
+\[
+M\pm R,
+\qquad M=\sum\kappa_{AB}m_{AB},
+\quad R=\sum\kappa_{AB}r_{AB}.
+\]
+
+Thus known centers cancel globally, while unknown radii do not. This also
+settles the symmetry bookkeeping: diagonal blocks occur once, their internal
+off-diagonal entries are already doubled by the quadratic form, and stored
+off-diagonal rectangles occur twice.
+
+For reduced frequencies `p/q`, the local coefficient masses are computed from
+the aggregates
+
+\[
+U_q=\sum_{j\le N/q}u_{qj}/j,
+\qquad a_{p,q}=-w_{p,q}U_q/(\pi p).
+\]
+
+For the logarithmic Mobius taper, `U_q=0` for nonsquarefree `q`, while for
+squarefree `q` it is the finite coprime Mobius sum displayed in the dedicated
+note. The direct endpoint functional is treated as one two-channel symmetric
+quadratic form, so its `2UD-alpha D^2` cancellation is retained rather than
+bounded term by term.
+
+This proves the certification theorem but not an affordable rank bound for all
+separated blocks at `N=8192`. The remaining task is to instantiate each far
+block with a certified analytic separated expansion and measure its
+theorem-weighted local radius on dense and hostile rational data.
+
+## Tick 16 — certified phase-extracted separated-block theorem
+
+The analytic instantiation is proved in `certified-separated-kernel.md`.
+Repeated integration by parts gives a complex endpoint expansion with the
+sharp uniform residual
+
+\[
+|R_n(d)|\le (n+1)!/(Q^{n+2}|d|^{n+1})
+\]
+
+after `n+1` retained terms. Centering the residual at half the next asymptotic
+term gives a disk of half that next term's magnitude. A hostile indexing audit
+caught the important distinction: this is not uniformly half the preceding
+uncentered bound.
+
+On a separated block with difference center `d_0`, sum center `s_0`, and total
+half-width `H<d_0`, Taylor compression of every inverse power has the explicit
+remainder (3.1) of that note. After exact extraction of the phases
+`exp(iQ(a-b))` and `exp(iQ(a+b))`, the combined difference/sum kernel has real
+separated rank at most `2(p+1)`, independent of `Q` and the number of retained
+inverse powers. Explicit absolute block radii are given by (4.2)--(4.3).
+
+The qualification is essential: affordable rank requires fixed geometric
+admissibility and a useful lower bound on `Q(d_0-H)`. Overlapping blocks retain
+the Brownian `min(a,b)` cusp and cannot be uniformly compressed. Positive
+global quadrature is certifiable but costs rank proportional to inverse target
+accuracy near this cusp, so it does not replace the hierarchy.
+
+An audit of the coefficient note also corrected two scope errors. A multiplier
+can be pulled through `U_q` only if it depends on the reduced mode rather than
+the original harmonic, and the sine-kernel quadratic form covers only the
+oscillatory--oscillatory tail; constant-mode pieces must be certified
+separately. No asymptotic Mobius cancellation or RH conclusion is asserted.
+
+## Next queued main-funnel step
+
+Implement the theorem as an outward-rounded block certificate and measure the
+global theorem-weighted radius on moderate exact rational frequency sets.
+Dense near leaves must use exact kernel intervals, while admissible leaves use
+the phase-extracted expansion and signed local moments. Test first against the
+two-point cusp adversary, alternating Farey clusters, and rational grids before
+assessing `N=8192` complexity.

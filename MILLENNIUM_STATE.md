@@ -10,13 +10,15 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   discrete Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
   is now exactly reduced after a second domain audit corrected a transient
-  restricted/full-space mix-up, and the current
-  sublemma is certified hierarchical compression of the weighted rational
-  frequency kernel, after global low rank and Farey-neighbor-only splits were
-  falsified but blockwise geometric low rank was numerically validated
+  restricted/full-space mix-up; coefficient-aware symmetric hierarchical error
+  propagation and a phase-extracted analytic separated-block theorem are
+  proved, and the current sublemma is an outward-rounded implementation with
+  affordable theorem-weighted local radii, after
+  global low rank and Farey-neighbor-only splits were falsified but blockwise
+  geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 13
+- **cycle:** 14
 - **announcements:** none
 
 ## immutable target list
@@ -35,9 +37,9 @@ waiting process.
 
 ## next exact steps
 
-1. Replace numerical H-matrix SVD blocks by certified analytic separated-block
-   expansions with local coefficient-norm error propagation.
-2. Validate the certified hierarchy on dense moderate-size kernels and hostile
+1. Implement the proved analytic separated-block theorem with outward-rounded
+   Mobius moments and explicit local radii.
+2. Validate the implementation on dense moderate-size kernels and hostile
    rational clusters, then assess realistic scaling to `N=8192`.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
@@ -147,3 +149,18 @@ waiting process.
   H-matrix blocks have low rank, whereas one global low-rank far field fails.
   The active task is a certified analytic hierarchical expansion with local
   error control. No solution is claimed.
+- 2026-07-26: proved coefficient-aware symmetric hierarchical error
+  propagation and a certified phase-extracted separated-block expansion. The
+  latter has explicit factorial-over-power and Taylor radii and real rank at
+  most `2(p+1)` on admissible blocks, independent of `Q` after phase extraction.
+  Audits corrected the half-next-term interpretation and the scope of reduced
+  harmonic multipliers and constant modes. Overlapping cusp blocks remain
+  dense. The next task is outward-rounded implementation and hostile-cluster
+  validation. No solution is claimed.
+- 2026-07-26: proved a certifiable symmetric hierarchical error-propagation
+  theorem with exact off-diagonal multiplicity, block-local `l1`/`l2` bounds,
+  signed separated-moment enclosures, and global center-radius accumulation.
+  Specialized it to reduced-rational Mobius aggregates, including the
+  vanishing of nonsquarefree denominator coefficients and the two-channel
+  direct endpoint functional. Affordable certified ranks at `N=8192` remain
+  open. No solution is claimed.
