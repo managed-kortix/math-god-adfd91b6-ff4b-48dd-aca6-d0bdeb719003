@@ -625,3 +625,16 @@ No audits yet.
   two human-eliminated shapes as semantic regressions, and retain only checked
   LRAT completions. For k5/k6, first split by root-C hole count `g`, then by
   internal-B-hole count only on `g=0`.
+
+## 2026-07-26 — tick 30
+
+- Human-eliminated the four-matching `k=4` shape by a one-predecessor argument;
+  see `attempts/tick30-m9-k4-matching-proof.md`. Two inaccessible vertices
+  would have to be nonadjacent, contradicting that each already uses its unique
+  matching hole into the predecessor's closed outneighborhood.
+- Of the 33 k4 shape shards, 18 are independently LRAT-verified and 15 remain
+  UNKNOWN at the current cap. The checked set includes all rho values for C4,
+  four-matching, and the four-star; no claim is made for timed-out shards.
+- **Next queued attack:** preserve the checked k4 ledger, rerun the 15 unresolved
+  shapes with a rooted-cell incidence split. Implement the 25-shard final-row
+  cover `(rho,k,g,hB)` and first certify all `g=1,2` strips.
