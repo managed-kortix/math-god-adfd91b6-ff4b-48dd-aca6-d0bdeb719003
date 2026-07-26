@@ -2901,7 +2901,150 @@ The full affine residual is therefore exactly
 
 Use the explicit triangular representation of the pair-average to write the
 effective coarse coefficient `gamma` by first differences.  Compare that exact
-coefficient vector with the preceding-scale Mobius taper, retaining the affine
-prime jump square.  Determine whether the discrepancy has a convolution
-collapse or whether its control is again equivalent to a Mertens-strength
-correlation.
+ coefficient vector with the preceding-scale Mobius taper, retaining the affine
+ prime jump square.  Determine whether the discrepancy has a convolution
+ collapse or whether its control is again equivalent to a Mertens-strength
+ correlation.
+
+## Cycle 30: exact shell first differences and local convolution collapse
+
+Write `n=N/2`, `L=log(2N)`, and let
+
+\[
+ \chi(m)=\sum_{\substack{q\mid m\\q\text{ odd}}}
+ \mu(q)\log(2N/q).
+\]
+
+If `m_o` is the odd part of `m`, divisor convolution gives
+
+\[
+ \chi(m)=L\mathbf1_{m_o=1}+\Lambda(m_o)\mathbf1_{m_o>1}.
+\]
+
+For `z=bar c-Hx`, the unique shell-supported coefficient `gamma^sh` with
+`z_k=sum_(d=n)^k gamma_d^sh` has the essential boundary value
+
+\[
+ \gamma_n^{\rm sh}=1+A\left(2n+{n\over2n+1}\right)
+ -{1\over L}\left(\sum_{m\le2n}\chi(m)
+ +{n\over2n+1}\Lambda(2n+1)\right),
+\]
+
+and, for `n<d<N`, the exact local formula
+
+\[
+ \boxed{\gamma_d^{\rm sh}=A\left(2+{1\over(2d-1)(2d+1)}\right)
+ -{\chi(2d)+{d\over2d-1}\Lambda(2d-1)
+ +{d\over2d+1}\Lambda(2d+1)\over L}.}
+\]
+
+Thus the interior first differences collapse to the odd part of `d` and its
+two adjacent odd integers; only the single boundary coordinate retains a
+cumulative convolution.
+
+With the preceding taper
+
+\[
+ a_d=\mu(d){\log(N/d)\over\log N}.
+\]
+
+its exact discrepancy `Delta=gamma^sh-a` is
+
+\[
+ \boxed{\Delta_d=\gamma_d^{\rm sh}
+ -\mu(d){\log(N/d)\over\log N}.}
+\]
+
+The full energy identity is
+
+\[
+ \boxed{\|\widetilde y\|_{W_+}^2=\|U(a+\Delta)\|_{W_-}^2
+ +\sum_{k=n}^{N-1}{N\over(2k+1)^2}
+ \left(A-{\Lambda(2k+1)\over L}\right)^2,}
+\]
+
+for the odd-source vector `tilde y=c-Ox`, where `U_(k,d)=1_(d<=k)`.
+Expanding the first square leaves the mixed term
+`2< Ua,U Delta >`; the local convolution collapse gives no sign for this
+correlation.  For the actual completed vector `y=tilde y-Ee`, the shell
+coefficient is `gamma^sh-p`, where
+
+\[
+ p_n=-{1\over L}\sum_{m\le n}\xi(m),\quad
+ p_d=-{\xi(d)\over L}\ (d>n),\quad
+ \xi(m)=\log N\mathbf1_{m_o=1}+\Lambda(m_o)\mathbf1_{m_o>1}.
+\]
+
+Hence its first energy term is `||U(a+Delta-p)||^2`; the affine odd
+prime-power square remains intact.  Full details are in
+`shell-first-difference-report.md`.
+
+The accompanying `analyze_effective_shell.py` implements the actual
+coefficient `gamma^sh-p` with divisor-sum prefixes and no dense matrices.  At
+192-bit Arb precision it certifies pair-average reconstruction and
+`E_fine=E_effective+E_jump` through `N=8192`.  At that endpoint the normalized
+energies are respectively `6.260278071359`, `6.218714150019`, and
+`0.041563921340`.  The preceding taper image and discrepancy image energies are
+`414295.614215` and `414235.669294`; their large cancellation shows why
+separate norm bounds do not control the effective term.
+
+The preceding raw taper image in that sentence is not the preceding completed
+vector and is not the invariant contraction comparator.  The corrected direct
+recurrence uses
+
+\[
+u_k=kA_N-\psi(k)/\log N
+\]
+
+and the exact pair average
+
+\[
+z_k=2kA_{2N}-\psi(2k)/\log(2N)
++{k\over2k+1}\left(A_{2N}-{
+\Lambda(2k+1)\over\log(2N)}\right).
+\]
+
+Putting `delta=z-u`, polarization gives
+
+\[
+\boxed{E_N-E_{2N}
+=-2\langle u,\delta\rangle_{W_-}
+-\|\delta\|_{W_-}^2-R_{\rm jump}.}
+\]
+
+Thus the exact necessary and sufficient nonexpansion condition is
+
+\[
+\boxed{\langle u,\delta\rangle_{W_-}
+\le-{1\over2}(\|\delta\|_{W_-}^2+R_{\rm jump}).}
+\]
+
+The analyzer now checks this identity independently.  The normalized shell
+decrements at `N=32,128,512,2048,8192` are respectively
+`+0.0155868,-0.0867393,-0.371475,-1.02298,-3.86119`.  Hence this shell
+recurrence is not generically or empirically monotone at the tested larger
+scales.  This does not decide the complete endpoint functional, which includes
+the other ranges.
+
+The first-difference coefficient is only a shell-supported gauge: the full
+coarse dictionary has a right kernel.  Coefficient signs, Euclidean norms, and
+coefficientwise correlations are not invariant.  Only the image-space vectors
+`u,z,delta` and their weighted energies may be used for contraction claims.
+
+The jump term has the unconditional asymptotic
+
+\[
+R_{\rm jump}={1\over2\log(2N)}
+-{1/4+\log2\over\log^2(2N)}+o(\log^{-2}N).
+\]
+
+The affine terms affect only the secondary coefficient; they do not remove the
+leading prime-square mass.
+
+### Next queued main-funnel step
+
+Analyze the invariant correlation `sum w_k u_k delta_k` directly using the
+explicit two-scale Chebyshev formula for `delta_k`.  Sum before bounding and
+separate the deterministic PNT cancellation from the single remaining odd
+logarithmically weighted Mertens transform.  Audit whether any useful sign
+would be equivalent to an RH-strength Mertens correlation.

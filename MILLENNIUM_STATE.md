@@ -43,14 +43,19 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   residual; that Schur residual now collapses exactly to an odd prime-power
   diagonal of asymptotic size `1/(4N log N)`; the anticipated pair-constant
   left-null residual vanishes identically because shell columns form a unit
-  lower-triangular block, so the current sublemma is an exact first-difference
-  comparison of the effective coarse coefficient with the preceding Mobius
-  taper while retaining the affine prime jump square, after
+   lower-triangular block; the effective coefficient's exact first differences
+   now collapse in the interior to the odd part of the index and its two
+   adjacent odd von Mangoldt values, with one cumulative boundary coordinate;
+   coefficient comparison is gauge-dependent, while the invariant pair-average
+   recurrence leaves an unsigned mixed correlation and an affine prime jump of
+   asymptotic size `1/(2 log(2N))`; finite shell decrements change sign, so the
+   current sublemma is a summed two-scale Chebyshev/odd-Mertens formula for that
+   invariant correlation, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 29
+- **cycle:** 31
 - **announcements:** none
 
 ## immutable target list
@@ -69,10 +74,10 @@ waiting process.
 
 ## next exact steps
 
-1. Write the effective embedded-coarse coefficient by exact first differences
-   through the unit triangular shell block.
-2. Compare it with the preceding Mobius taper and classify the discrepancy by
-   divisor convolution, retaining the affine prime jump square.
+1. Expand and sum the invariant correlation `<u,z-u>` using the exact two-scale
+   Chebyshev formula, before applying any bounds.
+2. Isolate its odd logarithmically weighted Mertens component and determine
+   whether the needed sign is equivalent to RH-strength cancellation.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -319,3 +324,10 @@ waiting process.
   implementation is tested separately.  The odd prime-power diagonal remains
   strictly positive, so this correction neither cancels nor reinforces it.
   No contraction or solution is claimed.
+- 2026-07-26: implemented the exact/Arb effective-shell analyzer in
+  `O(N log N)` time.  It certifies first-difference reconstruction, comparison
+  with the preceding taper, discrepancy image energy, the full affine jump,
+  and complete fine energy through `N=8192`; the fine energy equals effective
+  coarse plus affine jump throughout.  Large preceding/discrepancy image norms
+  nearly cancel, so separate norm bounds give no contraction.  No solution is
+  claimed.
