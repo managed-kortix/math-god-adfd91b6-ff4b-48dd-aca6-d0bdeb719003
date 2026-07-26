@@ -69,3 +69,16 @@ The cubic calibration gives an exact local counterexample to treating
 Nakayama gives `m=0`. Hence the plane is a reduced isolated Hilbert point even
 though its standard obstruction space is nonzero. No conclusion follows for
 other Hodge-locus components.
+
+## Bounded scout cycle 43
+
+Reduced isolated fibers and tangent equality still do not prove component
+dominance. In `S=Spec C[x,y]`, let `W=V(y)`, `V=V(y-x^2)`, and immerse
+`Z=W` into `S`. The fiber over the origin is one reduced point, the
+differential is injective, and `T_0 W=T_0 V=V(y)`. Nevertheless the image is
+`W`, not `V`; indeed `W intersect V=V(y,x^2)` is supported only at the origin.
+First-order data cannot distinguish the tangent branches `(y)` and
+`(y-x^2)`. Thus the Fermat cubic plane calibration still needs branch
+identification plus equal dimension inside a specified irreducible Hodge
+component. This is a local logical obstruction, not a claim about the actual
+cubic Hodge locus or a Hodge result.

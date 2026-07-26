@@ -75,3 +75,21 @@ Integer inversion of the memorization bound is piecewise exact. In the regime
 
 The threshold remains quadratic, so this exact rounding does not supply
 all-exponents amplification.
+
+## Bounded scout cycle 43
+
+Cartesian padding cannot amplify empirical hardness. For any labeled sample
+`A subset {0,1}^N`, let `c(A)` be the minimum binary De Morgan circuit size
+fitting it, and define the cylinder `A^(up r)=A times {0,1}^r` with labels
+independent of the new coordinates. Then
+
+\[
+c(A^{\uparrow r})=c(A),\qquad |A^{\uparrow r}|=2^r|A|.
+\]
+
+One inequality follows by ignoring the tag variables. For the other, restrict
+any fitting circuit to one fixed tag and simplify constants, which cannot
+increase gate count. Thus exponential sample replication, padding, or
+irrelevant coordinates create no new circuit hardness. An all-exponents
+amplifier must create genuinely new label dependencies. This does not prove a
+quadratic antichecker, a lower bound, or `P!=NP`.

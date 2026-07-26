@@ -72,10 +72,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
    fixed fractional dissipation force zero liminf, so the current sublemma is a
    Möbius-specific adaptive renewal inequality for complete blocks, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
-  geometric low rank was numerically validated
+  geometric low rank was numerically validated; the exact finite impulse
+  identity now exposes an unavoidable terminal residual `Q_M`, and abstract
+  scalar continuations prove that monotonicity plus finite weighted energy
+  cannot determine its sign, so the active target is a genuinely physical
+  Mobius--Vasyunin terminal-tail or squarefree-impulse estimate
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 42
+- **cycle:** 43
 - **announcements:** none
 
 ## immutable target list
@@ -94,9 +98,9 @@ waiting process.
 
 ## next exact steps
 
-1. Test the exact residual budgets
-   `P_a-2 kappa sum_(n>=a) w_n P_n`; every-start renewal is equivalent to their
-   nonnegativity plus recurrence at equality.
+1. Seek a genuinely physical estimate for the terminal residual
+   `Q_M=P_M-sum_(n>=M)w_nP_n`, or a squarefree-impulse lower bound that controls
+   it; generic scalar monotonicity and finite energy are now ruled out.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -111,6 +115,19 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 43 isolated the exact terminal term in the half-strength
+  renewal identity. A finite drift/impulse packet equals `Q_a-Q_M`; faster
+  reciprocal-log scalar tails and long plateaus give opposite signs of `Q_M`
+  under nonnegativity, monotonicity, finite weighted energy, and the scalar
+  recurrence. These are not physical Mobius--Vasyunin continuations and show
+  only that generic scalar closure is impossible. The five bounded scouts
+  advanced once: all-order Stirling inversion for BSD weight moments; a
+  second-order branch obstruction for Hodge dominance; a strictly signed first
+  pressure variation for the Navier--Stokes diagonal perturbation; cylinder
+  invariance obstructing P-vs-NP padding amplification; and a bounded-Borel
+  escaping-edge obstruction for Yang--Mills. No Millennium solution is
+  claimed.
 
 - 2026-07-26: Cycle 42 advanced each non-RH bounded scout exactly once. BSD:
   extended the weight/cyclotomic conversion through degree three and exposed

@@ -71,3 +71,21 @@ strongly. Yet every `T_n` retains eigenvalue one, norm one, and zero
 transfer-Hamiltonian gap. Thus even strong convergence of all fixed continuous
 spectral observables cannot replace cutoff-uniform control of the moving
 spectral edge.
+
+## Bounded scout cycle 43
+
+The same example defeats the entire fixed bounded Borel calculus. For
+`T_n=qI+(1-q)P_(e_n)` and any fixed bounded Borel function `phi` on `[0,1]`,
+
+\[
+\phi(T_n)=\phi(q)I+(\phi(1)-\phi(q))P_{e_n}
+\longrightarrow \phi(q)I
+\]
+
+strongly, because the `n`th coordinate of every fixed `ell^2` vector tends to
+zero. This includes the endpoint projection
+`1_{\{1\}}(T_n)=P_(e_n)->0` strongly. Yet every `T_n` retains eigenvalue one
+and zero transfer-Hamiltonian gap. Hence even convergence of all fixed bounded
+Borel spectral observables misses a moving edge state; cutoff-uniform norm
+control is indispensable. This abstract no-go neither constructs Yang--Mills
+theory nor proves a mass gap.

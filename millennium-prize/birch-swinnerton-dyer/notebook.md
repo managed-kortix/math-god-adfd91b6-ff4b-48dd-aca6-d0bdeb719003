@@ -66,3 +66,20 @@ moment:
 
 Higher weight derivatives therefore cannot be read coefficientwise. This is
 only normalization and gives no complex-derivative transfer.
+
+## Bounded scout cycle 43
+
+The triangular conversion has an exact all-order inverse. If
+`F(T)=sum_(n>=0)a_nT^n`, `T=exp(Ls)-1`, and `G(s)=F(T(s))`, then
+
+\[
+{G^{(k)}(0)\over L^k}=\sum_{n=0}^k n!S(k,n)a_n,
+\qquad
+a_n={1\over n!}\sum_{k=0}^n s(n,k){G^{(k)}(0)\over L^k},
+\]
+
+where `S` and `s` are Stirling numbers of the second and signed first kinds.
+This follows from the exponential generating function for `(exp x-1)^n` and
+Stirling inversion. Consequently `T^r|F` is equivalent to exact vanishing of
+the first `r` weight derivatives. This is only a formal certification
+criterion; it supplies no modular-symbol vanishing or BSD result.

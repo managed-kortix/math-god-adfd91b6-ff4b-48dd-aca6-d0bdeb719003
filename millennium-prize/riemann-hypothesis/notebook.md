@@ -4143,3 +4143,27 @@ is formally weaker, although every-start stopping is itself RH-sufficient.
 Using the RH diagonal or Cycle 40's RH-conditional coefficient assumptions to
 prove RH through this stopping theorem is circular. Details are in
 `cycle-42-affine-cancellation-and-circularity-audit.md`.
+
+## Cycle 43: the terminal residual cannot be closed scalarly
+
+For `Q_a=P_a-sum_(n>=a)w_nP_n`, the half-strength recurrence gives the exact
+finite identity
+
+\[
+Q_a=Q_M+B_{a,M}H_a-\sum_{a<q<M}B_{q,M}A_q
++\sum_{a<q<M}B_{q,M}J_q,
+\qquad B_{q,M}=\sum_{n=q}^{M-1}\beta_n.
+\]
+
+In the physical path, the last sum is squarefree-supported, but the terminal
+`Q_M` remains. Generic scalar data cannot control its sign. From any prefix
+ending at `P_M>0`, the faster profile
+`P_n=P_M(log M/log n)^s`, `s>1`, gives `Q_M>0`, whereas a sufficiently long
+constant plateau followed by zero gives `Q_M<0`; both are nonnegative,
+nonincreasing, and have finite weighted energy. The exact reciprocal-log
+profile has `Q_M=0`, not positive budget.
+
+These hostile tails are not Mobius--Vasyunin continuations. They prove only
+that a finite impulse certificate needs an additional physical terminal-tail
+estimate; scalar monotonicity and finite energy cannot supply one. Details are
+in `cycle-43-terminal-residual-obstruction.md`. No RH result is claimed.

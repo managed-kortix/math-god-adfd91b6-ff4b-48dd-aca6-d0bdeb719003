@@ -83,3 +83,31 @@ The mixed pressure frequencies `(2,1),(1,2)` and the corresponding cross terms
 in `|u_c|^2` destroy both coordinate-odd factorizations used for two shears.
 This is a structural checkpoint, not a growth certificate: the exact signed
 unprojected pressure integral and viscous comparison are next.
+
+## Bounded scout cycle 43
+
+The unprojected pressure integral has a genuinely signed first variation. On
+`T^2=[0,2pi]^2`, let `I(c)=int p_c u_c.grad|u_c|`. Periodic integration by
+parts, exact differentiation at `c=0`, parity, and one further integration by
+parts give
+
+\[
+I'(0)={2ab\over5}\int_{\mathbb T^2}
+\sqrt{a^2\sin^2y+b^2\sin^2x}\,(\sin^2y-\sin^2x)\,dx\,dy.
+\]
+
+Symmetrizing under `x<->y` yields
+
+\[
+I'(0)={ab(a^2-b^2)\over5}\int_{\mathbb T^2}
+{(\sin^2y-\sin^2x)^2\over
+\sqrt{a^2\sin^2y+b^2\sin^2x}+
+\sqrt{a^2\sin^2x+b^2\sin^2y}}\,dx\,dy.
+\]
+
+For `ab!=0` the remaining integral is finite and strictly positive, so
+`sgn I'(0)=sgn(ab(a^2-b^2))`. Differentiation is rigorous in the integrated
+form `-int |u_c|u_c.grad p_c`, since `z -> |z|z` is `C^1` even at zero.
+This proves a signed pressure interaction outside the two-shear parity family,
+but gives no viscous comparison, growth theorem, regularity result, or
+Navier--Stokes solution.
