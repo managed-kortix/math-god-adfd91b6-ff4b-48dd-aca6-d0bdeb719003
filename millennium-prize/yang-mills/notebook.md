@@ -90,6 +90,16 @@ Borel spectral observables misses a moving edge state; cutoff-uniform norm
 control is indispensable. This abstract no-go neither constructs Yang--Mills
 theory nor proves a mass gap.
 
+## Bounded scout cycle 50
+
+If resolvents `(H_n+1)^(-1)` converge strongly and form a collectively compact
+family, self-adjointness upgrades convergence to operator norm. Norm-resolvent
+convergence is equivalent, for nonnegative self-adjoint operators, to norm
+convergence of `exp(-tH_n)` at any one fixed `t>0`, and transfers the lower
+spectral edge. Collective compactness is sufficient but not necessary. No
+Yang--Mills cutoff is shown to satisfy these hypotheses, so no mass gap is
+proved.
+
 ## Bounded scout cycle 46
 
 Norm-resolvent convergence is strong enough to exclude the escaping-edge

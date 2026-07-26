@@ -4278,6 +4278,24 @@ despite `Lambda(p^2q)=0`. The obstruction remains the complete two-cutoff
 divisor-floor/Vasyunin correlation. Details are in
 `cycle-49-recombined-terminal-kernel.md`. No RH result is claimed.
 
+## Cycle 50: logarithmically weak blocks have finite mass
+
+For consecutive polynomial-range blocks, an estimate
+`P_M-P_B >= (2 kappa/log M) sum_[M,B) w_nP_n` has total effective coefficient
+mass between `2 kappa/log M_0` and `2C kappa/log M_0`, hence finite. A singleton
+equality model converges to a positive limit, proving that infinitely many
+blocks do not restore zero liminf.
+
+All `2094081` complete blocks through `2048` were scanned at 192 bits. For
+`C(M,B)=log(M)(P_M-P_B)/sum w_nP_n`, the unique minimum is
+`C(2,3)=0.500216...`; coefficient `0.75` already fails on nine small blocks,
+and coefficient `1` fails throughout the tested `M=2` row.
+
+Analytically, separated absorption on the first shell requires RMS cancellation
+`sum |R_M(k)|^2 << M^2/log M`, while unconditional zero-free-region bounds miss
+by a divergent factor. Details are in
+`cycle-50-summable-weak-block-obstruction.md`. No RH result is claimed.
+
 ## Cycle 48: coherent mean must be compensated, not split off
 
 The exact finite budget is

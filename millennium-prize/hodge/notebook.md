@@ -83,6 +83,16 @@ identification plus equal dimension inside a specified irreducible Hodge
 component. This is a local logical obstruction, not a claim about the actual
 cubic Hodge locus or a Hodge result.
 
+## Bounded scout cycle 50
+
+In a complete Noetherian local ring, equality of two branch ideals modulo
+`m^(n+1)` for every `n` implies equality because ideals are `m`-adically
+closed. Faithful flatness then identifies the local algebraic germs. A bounded
+jet suffices only with an independent finite-determinacy theorem; Noetherianity
+alone provides no uniform order. The Fermat calibration still lacks equality
+of completed incidence and Hodge-branch ideals, or an applicable determinacy
+bound. This proves no Hodge case.
+
 ## Bounded scout cycle 46
 
 The branch obstruction persists through arbitrary fixed jet order. In

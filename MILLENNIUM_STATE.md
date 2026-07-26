@@ -99,10 +99,13 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   estimation now returns exactly the original full-rank indefinite terminal
   kernel and weighted-`H` recurrence, while shifted cell coordinates remove
   artificial divergence but expose infinitely many non-Chebyshev `p^2q`
-  truncated divisor impulses
+  truncated divisor impulses; weakening the complete-block estimate to
+  `kappa/log M` is now proved summable on every consecutive polynomial-range
+  chain and admits positive-limit equality models, while separated cell bounds
+  still require square-root weighted-Mertens mean-square cancellation
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 49
+- **cycle:** 50
 - **announcements:** none
 
 ## immutable target list
@@ -121,9 +124,9 @@ waiting process.
 
 ## next exact steps
 
-1. Prove a genuinely weaker compensated two-cutoff cell estimate at summable
-   `kappa/log M` strength, or decisively falsify it on certified complete
-   blocks; exact recombination at full strength is now known to be tautological.
+1. Decide whether to continue only with a cancellation-preserving proof of the
+   summable `kappa/log M` checkpoint or return to the fixed-strength additive-12
+   candidate; separated magnitude estimates are now quantitatively closed.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -138,6 +141,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 50 proved that a `kappa/log M` compensated block estimate,
+  even from every start on consecutive polynomial-range blocks, has finite
+  effective mass and admits scalar equality paths with positive limit. An
+  exhaustive 192-bit scan through `2048` finds finite normalized constant
+  `0.500216...`, but no asymptotic conclusion follows. The shifted-cell route
+  requires weighted-Mertens RMS cancellation of square-root strength and is not
+  reached by unconditional PNT bounds. Five bounded scouts advanced once. No
+  Millennium solution is claimed.
 
 - 2026-07-26: Cycle 49 recombined the packet and coherent channels before any
   estimate. The resulting increment max kernel has an exact triangular

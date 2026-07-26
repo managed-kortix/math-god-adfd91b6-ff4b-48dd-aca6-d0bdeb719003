@@ -94,6 +94,20 @@ irrelevant coordinates create no new circuit hardness. An all-exponents
 amplifier must create genuinely new label dependencies. This does not prove a
 quadratic antichecker, a lower bound, or `P!=NP`.
 
+## Bounded scout cycle 50
+
+A factor in a Boolean gadget composition is recoverable by restriction exactly
+when the gadget has an attainable nonconstant unary section in that coordinate.
+Iterating a fixed `r`-ary gadget on a depth-`d` tree gives
+
+\[
+c(T_d(A))\le r^d c(A)+s_{DM}(g){r^d-1\over r-1}.
+\]
+
+Since input length is `r^dN`, fixed-arity composition adds leaf fitting costs
+and cannot increase a fixed hardness exponent. This is a black-box
+amplification no-go, not a circuit lower bound or P-versus-NP result.
+
 ## Bounded scout cycle 46
 
 Direct-product composition does not multiply fitting hardness. For labeled

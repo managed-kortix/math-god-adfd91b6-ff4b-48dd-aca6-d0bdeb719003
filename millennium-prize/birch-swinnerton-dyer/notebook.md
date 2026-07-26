@@ -84,6 +84,16 @@ Stirling inversion. Consequently `T^r|F` is equivalent to exact vanishing of
 the first `r` weight derivatives. This is only a formal certification
 criterion; it supplies no modular-symbol vanishing or BSD result.
 
+## Bounded scout cycle 50
+
+Normalized ordinary Mazur--Tate norm compatibility gives the tangent recurrence
+`B~_(n+1)=B~_n mod 5^n`; before unit-root normalization it is
+`B_(n+1)=alpha B_n mod 5^n`. The unstabilized distribution gives
+`B_(n+1)=a_5B_n-5B_(n-1) mod 5^n`. These propagate information downward only.
+The compatible series `5^N T` vanishes in every tangent quotient through level
+`N` but not level `N+1`, so finite generation and Nakayama cannot turn bounded
+level computations into exact tangent vanishing. This proves no BSD case.
+
 ## Bounded scout cycle 46
 
 At finite Mazur--Tate level `n`, reduction modulo `T^2` gives an augmentation

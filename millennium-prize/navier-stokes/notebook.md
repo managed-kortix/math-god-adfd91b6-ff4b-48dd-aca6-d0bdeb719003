@@ -112,6 +112,22 @@ This proves a signed pressure interaction outside the two-shear parity family,
 but gives no viscous comparison, growth theorem, regularity result, or
 Navier--Stokes solution.
 
+## Bounded scout cycle 50
+
+Amplitude scaling `u(t)=lambda w(lambda t)` converts viscosity to
+`mu=nu/lambda`. The exact relative finite-time identity is
+
+\[
+{\|u(T/\lambda)\|_3^3-\|u(0)\|_3^3\over\|u(0)\|_3^3}
+={3\over\|v\|_3^3}\int_0^T[I(w)-\mu D(w)]\,d\tau.
+\]
+
+Thus the apparent `O(lambda)` physical-time growth rate is paired with an
+`O(1/lambda)` time scale; amplitude cancels except through effective viscosity
+and the rescaled trajectory. Instantaneous positivity gives no uniform
+persistence interval or arbitrarily large amplification. This is not a blowup
+or regularity result.
+
 ## Bounded scout cycle 46
 
 For the Cycle 43 perturbation, the viscous functional
