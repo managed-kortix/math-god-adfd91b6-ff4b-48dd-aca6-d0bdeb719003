@@ -437,3 +437,24 @@ No audits yet.
   16-vertex graph has one missing edge, at least three common C-dominators, and
   a rigid residual in which one `a* in A\{r}` is the sole predecessor of all
   common dominators and `N_T+(r)={a*} union N_T+(a*)`.
+
+## 2026-07-26 — tick 20
+
+- Eliminated the entire `m=8,rho=4` row by a human proof; see
+  `attempts/tick20-rho4-human-proof.md`.
+- The near-tournament equality case forces every common C-dominator to have the
+  same sole predecessor `a*` in `A\{r}`. At least three common dominators exist.
+  Any one not incident with the unique hole then dominates both C vertices,
+  `v`, and all six other low A vertices, giving nine outneighbors although its
+  degree is eight.
+- Hostile audit identified and repaired the only quantifier hazard: the proof
+  needs pointwise singleton predecessor sets, not merely one common predecessor.
+  This follows because every possible predecessor obeys the same rigid
+  outneighborhood identity with `r`.
+- **Next queued attack:** `rho=3`. The placement of both residual holes in B-C
+  is already eliminated. For one internal T-hole, all robust predecessors of
+  common C-dominators satisfy a one-hole equality template. Couple these
+  predecessor classes using the badness of the common dominators or
+  arc-minimality at their incoming arcs; the target lemma is that at most two
+  low-A vertices can occur as such predecessors, enabling the same forced
+  degree count.
