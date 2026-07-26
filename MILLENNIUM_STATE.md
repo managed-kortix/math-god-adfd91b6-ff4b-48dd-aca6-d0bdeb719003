@@ -53,12 +53,16 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
    linear Chebyshev errors, and two quadratic Chebyshev channels; parity leaves
    three odd-Mertens blocks rather than one, while pair-average and jump prime
    diagonals reinforce to order `1/log N`, so the current sublemma is a
-   cancellation theorem for the centered `E_k F_k` channel, after
+   cancellation theorem for the centered cumulative-square difference; an
+   endpoint-safe increment split shows near cancellation of diagonal and
+   fixed-shift pieces with a generic off-diagonal residual, but the mixed
+   `E_k F_k` term cancels entirely when recombined with the discrepancy square,
+   after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 32
+- **cycle:** 33
 - **announcements:** none
 
 ## immutable target list
@@ -77,10 +81,11 @@ waiting process.
 
 ## next exact steps
 
-1. Analyze the centered quadratic channel
-   `sum E_k F_k/[k(k+1)]` jointly with `sum E_k^2/[k(k+1)]`.
-2. Determine whether their required signed difference has an exact
-   prime-pair/off-diagonal formulation or demands new RH-strength information.
+1. Work with the recombined difference of cumulative-square energies, not the
+   noncanonical diagonal/fixed-shift split.
+2. Derive a cancellation-preserving Abel or zero-Gram representation for that
+   square difference and test whether RH controls its sign (currently it does
+   not by pointwise bounds).
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -341,3 +346,10 @@ waiting process.
   first two terms are positive, the latter two and total are negative; large
   bulk terms cancel, and no stable finite logarithmic scaling is visible.  No
   asymptotic sign theorem or solution is claimed.
+- 2026-07-26: expanded the remaining centered quadratic channel into an exact
+  Arb `Lambda(r)-1` square diagonal, a same-prefix fixed-shift family, the
+  structured odd dilation endpoint, and a generic cross-window off-diagonal
+  rectangle.  Independent direct and decomposed evaluations recombine at every
+  dyadic scale through `N=8192`.  At the endpoint the diagonal and fixed-shift
+  terms nearly cancel and the generic off-diagonal term dominates the finite
+  residual.  No asymptotic estimate or solution is claimed.

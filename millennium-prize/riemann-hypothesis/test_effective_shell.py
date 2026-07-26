@@ -4,7 +4,7 @@
 import unittest
 from fractions import Fraction
 
-from flint import ctx
+from flint import arb, ctx
 
 from analyze_effective_shell import (
     analyze_effective_shell,
@@ -115,6 +115,29 @@ class EffectiveShellTests(unittest.TestCase):
             self.assertLess(result.correlation_doubled_psi, 0)
             self.assertLess(result.correlation_odd_lambda_endpoint, 0)
             self.assertLess(result.decomposed_correlation, 0)
+
+    def test_centered_quadratic_recombination_through_8192(self):
+        for N in (2 ** exponent for exponent in range(1, 14)):
+            result = analyze_effective_shell(N)
+            self.assertTrue(
+                result.centered_quadratic_recombination_verified
+            )
+            self.assertTrue(result.centered_quadratic_direct.overlaps(
+                result.centered_quadratic_diagonal
+                + result.centered_quadratic_fixed_shift
+                + result.centered_quadratic_dilation
+                + result.centered_quadratic_generic_off_diagonal
+            ))
+
+    def test_centered_quadratic_diagonal_is_exact_increment_square_sum(self):
+        result = analyze_effective_shell(2)
+        log_N = arb(2).log()
+        log_2N = arb(4).log()
+        expected = (1 / (log_N * log_2N) - 1 / log_N ** 2) / 2
+        self.assertTrue(result.centered_quadratic_diagonal.overlaps(expected))
+        self.assertTrue(result.centered_quadratic_recombined.overlaps(
+            result.centered_quadratic_direct
+        ))
 
     def test_input_validation(self):
         for N in (1, 3, 16384):

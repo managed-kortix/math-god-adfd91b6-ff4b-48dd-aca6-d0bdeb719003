@@ -59,6 +59,13 @@ class EffectiveShellAnalysis:
     correlation_odd_lambda_endpoint: object
     decomposed_correlation: object
     correlation_decomposition_verified: bool
+    centered_quadratic_direct: object
+    centered_quadratic_diagonal: object
+    centered_quadratic_fixed_shift: object
+    centered_quadratic_dilation: object
+    centered_quadratic_generic_off_diagonal: object
+    centered_quadratic_recombined: object
+    centered_quadratic_recombination_verified: bool
     coarse_minus_fine: object
     polarized_coarse_minus_fine: object
     polarization_verified: bool
@@ -248,6 +255,58 @@ def analyze_effective_shell(N):
             zip(pair_discrepancy, delta_recombined))
         and correlation.overlaps(decomposed_correlation)
     )
+
+    # Let h(r)=Lambda(r)-1, E(k)=sum_{r<=k} h(r), and
+    # G(k)=sum_{r<=2k} h(r).  The centered quadratic channel divided by N is
+    #   -sum w E^2/log(N)^2
+    #   +sum w E(G+k Lambda(2k+1)/(2k+1))/(log(N)log(2N)).
+    # Splitting G=E+(G-E) isolates the exact h(r)^2 diagonal, the remaining
+    # same-prefix (fixed-shift) pairs, the odd dilation endpoint, and the
+    # genuinely cross-window off-diagonal rectangle r<=k<s<=2k.
+    lambda_values = tuple(
+        arb(0) if r <= 1 else fine_divisor_sums[r] * log_2N
+        for r in range(2 * N + 1)
+    )
+    centered_increments = tuple(value - 1 for value in lambda_values)
+    centered_square_prefix = [arb(0)] * (N + 1)
+    for r in range(1, N + 1):
+        centered_square_prefix[r] = (
+            centered_square_prefix[r - 1] + centered_increments[r] ** 2
+        )
+
+    quadratic_direct = arb(0)
+    quadratic_diagonal_raw = arb(0)
+    quadratic_fixed_shift_raw = arb(0)
+    quadratic_dilation_raw = arb(0)
+    quadratic_generic_raw = arb(0)
+    for k in range(half, N):
+        weight = ball(Fraction(1, k * (k + 1)))
+        E = log_N * (preceding_transform[k] - 1) - k
+        G = log_2N * (fine_transform[2 * k] - 1) - 2 * k
+        endpoint = ball(Fraction(k, 2 * k + 1)) * lambda_values[2 * k + 1]
+        diagonal_at_k = centered_square_prefix[k]
+        quadratic_direct += weight * E * (
+            -E / (log_N ** 2) + (G + endpoint) / (log_N * log_2N)
+        )
+        quadratic_diagonal_raw += weight * diagonal_at_k
+        quadratic_fixed_shift_raw += weight * (E ** 2 - diagonal_at_k)
+        quadratic_generic_raw += weight * E * (G - E)
+        quadratic_dilation_raw += weight * E * endpoint
+
+    same_prefix_coefficient = (
+        -1 / (log_N ** 2) + 1 / (log_N * log_2N)
+    )
+    quadratic_diagonal = same_prefix_coefficient * quadratic_diagonal_raw
+    quadratic_fixed_shift = (
+        same_prefix_coefficient * quadratic_fixed_shift_raw
+    )
+    quadratic_dilation = quadratic_dilation_raw / (log_N * log_2N)
+    quadratic_generic = quadratic_generic_raw / (log_N * log_2N)
+    quadratic_recombined = (
+        quadratic_diagonal + quadratic_fixed_shift + quadratic_dilation
+        + quadratic_generic
+    )
+    quadratic_verified = quadratic_direct.overlaps(quadratic_recombined)
     coarse_minus_fine = preceding_completed_energy - fine_energy
     polarized = -2 * correlation - pair_discrepancy_energy - jump_energy
     reconstructed_from_differences = _prefix(shell_differences)
@@ -267,6 +326,9 @@ def analyze_effective_shell(N):
         delta_A_slopes, delta_psi_cross, delta_doubled_psi,
         delta_odd_lambda_endpoint, *component_correlations,
         decomposed_correlation, correlation_decomposition_verified,
+        quadratic_direct, quadratic_diagonal, quadratic_fixed_shift,
+        quadratic_dilation, quadratic_generic, quadratic_recombined,
+        quadratic_verified,
         coarse_minus_fine, polarized, coarse_minus_fine.overlaps(polarized),
     )
 
@@ -309,11 +371,24 @@ def main():
             f"log(2N)-scaled={(ball(2 * N).log() * result.decomposed_correlation).str(12)}; "
             f"component-verified={result.correlation_decomposition_verified}"
         )
+        print(
+            "  centered quadratic / N: "
+            f"diagonal={result.centered_quadratic_diagonal.str(12)}; "
+            f"fixed-shift={result.centered_quadratic_fixed_shift.str(12)}; "
+            f"dilation={result.centered_quadratic_dilation.str(12)}; "
+            f"generic-off-diagonal={result.centered_quadratic_generic_off_diagonal.str(12)}"
+        )
+        print(
+            f"  quadratic-direct={result.centered_quadratic_direct.str(12)}; "
+            f"recombined={result.centered_quadratic_recombined.str(12)}; "
+            f"verified={result.centered_quadratic_recombination_verified}"
+        )
         failed |= not all((result.pair_average_verified,
                            result.first_difference_verified,
                            result.fine_energy_verified,
                            result.polarization_verified,
-                           result.correlation_decomposition_verified))
+                           result.correlation_decomposition_verified,
+                           result.centered_quadratic_recombination_verified))
     if failed:
         raise SystemExit("an effective-shell certificate failed")
 

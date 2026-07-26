@@ -400,3 +400,70 @@ v_k=2kA_{2N}-\psi(2k)/L_2,
 
 The two prime diagonals therefore reinforce rather than cancel, contributing a
 combined main term of order `1/log N` to the fine energy.
+
+## Lambda-pair decomposition of the centered quadratic channel
+
+The analyzer also expands the last two terms of the centered correlation all
+the way to von Mangoldt increments.  Set
+
+\[
+ h_r=\Lambda(r)-1,
+ \qquad E_k=\sum_{r\leq k}h_r,
+ \qquad G_k=\sum_{r\leq2k}h_r.
+\]
+
+The quadratic channel, in the report's correlation-divided-by-`N`
+normalization, is
+
+\[
+ Q_N=-{1\over L^2}\sum_k{E_k^2\over k(k+1)}
+ +{1\over LL_2}\sum_k{E_k\over k(k+1)}
+ \left(G_k+{k\over2k+1}\Lambda(2k+1)\right).
+\]
+
+Writing `c=1/(LL_2)-1/L^2`, this separates exactly as
+
+\[
+ \boxed{Q_N=Q_{\rm diag}+Q_{\rm shift}+Q_{\rm dil}+Q_{\rm off},}
+\]
+
+where
+
+\[
+\begin{aligned}
+ Q_{\rm diag}
+ &=c\sum_k{1\over k(k+1)}\sum_{r\leq k}h_r^2,\\
+ Q_{\rm shift}
+ &=c\sum_k{1\over k(k+1)}
+   \sum_{\substack{r,s\leq k\\r\ne s}}h_rh_s,\\
+ Q_{\rm dil}
+ &={1\over LL_2}\sum_k
+   {E_k\Lambda(2k+1)\over(k+1)(2k+1)},\\
+ Q_{\rm off}
+ &={1\over LL_2}\sum_k{1\over k(k+1)}
+   \sum_{r\leq k<s\leq2k}h_rh_s.
+\end{aligned}
+\]
+
+The first piece is an exact Arb diagonal of centered Lambda squares.  The
+second is the same-prefix fixed-shift family (equivalently, group by the fixed
+nonzero shift `s-r`).  The third is the structured odd dilation endpoint
+`s=2k+1`.  Only the fourth is the generic off-diagonal cross-window rectangle.
+No sign is assigned to the last three pieces.
+
+At 192-bit Arb precision the decomposition is:
+
+| N | exact diagonal | fixed shift | odd dilation | generic off diagonal | recombined `Q_N` |
+|---:|---:|---:|---:|---:|---:|
+| 32 | -0.0101503539321 | +0.00895117181617 | -0.00231081444127 | -0.00200430486044 | -0.00551430141766 |
+| 128 | -0.00856485803335 | +0.00830050477663 | -0.000342966483685 | -0.00204212370335 | -0.00264944344375 |
+| 512 | -0.00664568049524 | +0.00657718875549 | -0.0000362747191164 | -0.000957994448463 | -0.00106276090733 |
+| 2048 | -0.00514768527517 | +0.00509401282380 | -0.00000299296644722 | -0.00112668449283 | -0.00118334991065 |
+| 8192 | -0.00402562513630 | +0.00400463793787 | -0.00000151317961104 | -0.000393061613528 | -0.000415561991575 |
+
+The direct centered-Chebyshev formula and these four Lambda-pair pieces are
+evaluated independently and certified to overlap for every dyadic
+`2<=N<=8192`.  The exact diagonal and fixed-shift family nearly cancel at the
+displayed larger scales; the residual is controlled numerically by the generic
+off-diagonal piece.  This identifies the remaining arithmetic obstruction but
+is not an asymptotic estimate or an RH result.

@@ -3128,3 +3128,101 @@ in Lambda increments. Separate diagonal, fixed-shift, and genuinely
 off-diagonal pieces. Determine whether its needed favorable contribution is a
 known sieve-scale estimate, an RH consequence, or a stronger prime-pair/Mobius
 statement.
+
+## Cycle 33: increment audit and recombination
+
+The centered increment expansion is exact but not canonical.  With
+`x_r=Lambda(r)-1`, the `E^2` kernel is the usual max/prefix kernel, while the
+`EF` kernel has a dyadic prefix rectangle and a separate odd endpoint fan.
+Endpoints below `N/2`, the bulk endpoint `2N-2`, and the odd endpoint `2N-1`
+must all be retained.
+
+An Arb analyzer decomposes the isolated quadratic channel into literal
+diagonal, same-prefix fixed-shift, structured odd-dilation endpoint, and generic
+off-diagonal rectangle.  At `N=8192` the pieces are approximately
+
+\[
+-0.0040256251,
+\quad +0.0040046379,
+\quad -0.0000015132,
+\quad -0.0003930616,
+\]
+
+recombining to `-0.0004155620`.  This split diagnoses cancellation but cannot
+support separate estimates: bounded nonnegative surrogate increments with
+summatory function `x+O(1)` can force either sign, and even a PSD prefix energy
+can have diagonal and one fixed shift individually of order `N` while their
+complete sum is bounded.
+
+More importantly, the apparent `E_kF_k` prime-pair channel cancels exactly when
+the correlation is recombined with the discrepancy square.  If
+
+\[
+x_k=E_k/\log N,
+\qquad y_k=F_k/\log(2N),
+\]
+
+then
+
+\[
+\langle x,y-x\rangle
+=\tfrac12(\|y\|^2-\|x\|^2-\|y-x\|^2).
+\]
+
+In the full decrement, writing `u=p-x` and `u+delta=p+h-y`, one gets
+
+\[
+\boxed{-2\langle u,\delta\rangle-\|\delta\|^2
+=\|p-x\|^2-\|p+h-y\|^2.}
+\]
+
+Thus a separate Hardy--Littlewood estimate for the mixed `EF` term is not
+intrinsically required; expanding it prematurely manufactures prime-pair
+subproblems.  The safe obstruction is again a signed comparison of two complete
+cumulative-square energies plus the negative jump square.  There is no generic
+Loewner or martingale order between them.
+
+Under RH, the explicit formula turns `E_k` and `F_k` into oscillatory zero waves
+sampled a logarithmic distance `log 2` apart.  RH fixes their amplitudes but not
+the phase of this lagged correlation.  Therefore RH alone is not presently a
+known source of the required sign.
+
+### Next queued main-funnel step
+
+Derive an endpoint-safe Abel decomposition of the recombined square difference
+`||p-x||^2-||p+h-y||^2-R_jump` without opening it into raw prime pairs.  Search
+for a finite zero-Gram or dyadic-transfer representation whose only indefinite
+part is a sharply identified lag-`log 2` zero phase statistic.
+
+## Cycle 33: exact Lambda-pair split of the quadratic channel
+
+Put `h_r=Lambda(r)-1`, so `E_k=sum_(r<=k) h_r` and
+`psi(2k)-2k=sum_(r<=2k)h_r`.  The centered quadratic channel divided by `N`
+now splits exactly into four pieces: the `h_r^2` diagonal; the remaining
+same-prefix pairs, grouped as a fixed-shift family; the structured endpoint
+pairing with `Lambda(2k+1)`; and the generic rectangle `r<=k<s<=2k`.
+
+`analyze_effective_shell.py` computes the direct centered-Chebyshev expression
+and the four Lambda-pair pieces independently with Arb.  Entrywise divisor
+convolutions supply exact Lambda balls, and recombination is certified for
+every dyadic `2<=N<=8192`.  At `N=8192`, in the correlation-divided-by-`N`
+normalization, the pieces are
+
+\[
+-0.00402562513630,
+\quad +0.00400463793787,
+\quad -0.00000151317961104,
+\quad -0.000393061613528,
+\]
+
+which recombine to `-0.000415561991575`.  The exact centered diagonal and the
+fixed-shift family nearly cancel; the generic off-diagonal rectangle is the
+largest residual piece at this endpoint.  This is a finite exact/Arb
+classification, not a sign theorem.
+
+### Next queued main-funnel step
+
+Analyze the generic cross-window form
+`sum_k w_k sum_(r<=k<s<=2k) h_r h_s`.  Determine whether its required bound or
+sign follows from a known Selberg/sieve variance estimate, requires a uniform
+prime-pair estimate over the moving ratio window, or is stronger than RH.
