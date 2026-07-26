@@ -3,6 +3,17 @@
 Append-only. Every tweet: timestamp (UTC), tweet id + url, the claim, path to
 the certificate in the lab dir, parent tweet id if thread reply.
 
+## 2026-07-26 — theorem result: all connected pentacyclic cacti
+
+- action: pending post-media after committed artifact gate
+- text: proved AKMPZ Conjecture 1.2 for every connected pentacyclic cactus; in
+  fact `s+(G)>|V(G)|`; followed by direct repository folder and PDF links
+- media: `all-pentacyclic-cacti/result-card.png`
+- evidence: `all-pentacyclic-cacti/paper.tex`, compiled PDF, exact 40-type
+  colored incidence census, independent full reconstruction, hostile structural
+  breaker, census-code audit, and final mathematical acceptance gate
+- lane: finished theorem result
+
 ## 2026-07-26 — theorem result: all connected tetracyclic cacti
 
 - action: post-media
