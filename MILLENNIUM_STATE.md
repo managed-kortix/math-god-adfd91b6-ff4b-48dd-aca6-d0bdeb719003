@@ -79,10 +79,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   Mobius--Vasyunin terminal-tail or squarefree-impulse estimate; the terminal
   residual is now exactly identified, conditional on tail finiteness, as the
   endpoint energy minus the limiting normalized pair dispersion of the entire
-  future physical path, with no sign supplied by Gram positivity
+  future physical path, with no sign supplied by Gram positivity; its exact
+  online increments are now positive squares of cumulative `D_r` packets, but
+  translation proves increments alone cannot control the physical anchor, and
+  a positive reciprocal-log power mixture is certifiably nonconvex already on
+  the post-negative-episode triple `228,229,230`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 44
+- **cycle:** 45
 - **announcements:** none
 
 ## immutable target list
@@ -101,10 +105,10 @@ waiting process.
 
 ## next exact steps
 
-1. Seek a genuinely physical upper bound for the normalized future-path
-   dispersion in Cycle 44, or a squarefree-impulse lower bound that controls
-   the same terminal residual; generic scalar and Gram-positivity routes are
-   now ruled out.
+1. Seek an anchored physical inequality coupling `F_M` to the cumulative
+   `D_r` squares in Cycle 45, or a squarefree-impulse lower bound controlling
+   the same terminal residual; increment-only PSD and positive-mixture routes
+   are now ruled out.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -119,6 +123,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 45 decomposed the finite future-path dispersion into exact
+  positive online squares of cumulative physical `D_r` packets. A translation
+  no-go proves that their Gram correlations alone cannot dominate the endpoint
+  energy; the distinguished affine anchor must enter. A 256-bit complete-Gram
+  certificate then falsified the proposed positive reciprocal-log power
+  mixture after the last observed negative singleton: the second divided
+  difference of `log(n)P_n` in `log log n` is strictly negative on
+  `(228,229,230)`. This closes one anchor geometry but supplies no tail bound or
+  RH result. No Millennium solution is claimed.
 
 - 2026-07-26: Cycle 44 rewrote every finite physical terminal budget as endpoint
   energy minus a coherent mean square and a normalized pair-dispersion square.

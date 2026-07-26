@@ -4185,3 +4185,25 @@ Gram positivity controls only the lower bound zero. Moreover, finite weighted
 energy already forces zero liminf and is therefore an RH-sufficient global
 hypothesis here. Details and the domain audit are in
 `cycle-44-physical-terminal-dispersion.md`. No RH result is claimed.
+
+## Cycle 45: dispersion increments and power-mixture failure
+
+The Cycle 44 dispersion has the exact online decomposition
+
+\[
+V_{M,B}=\sum_{b=M+1}^B{w_b\over W_{M,b}W_{M,b-1}}
+\left\|\sum_{r=M}^{b-1}W_{M,r}h_rD_r\right\|^2.
+\]
+
+It is a complete finite Mobius--Vasyunin Gram contraction. Translation of the
+whole path leaves every term unchanged while changing `||F_M||^2`, proving
+that no increment-only PSD or Bessel argument can establish the required
+anchored comparison.
+
+The proposed positive power-mixture anchor is also physically falsified:
+although all adjacent slopes of `A_n=log(n)P_n` are negative from `227` through
+`2048`, its second divided difference in `y_n=log log n` is certified negative
+on `(228,229,230)`, whereas a positive Laplace mixture requires convexity.
+Details and a 256-bit Arb verifier are in
+`cycle-45-dispersion-increments-and-mixture-obstruction.md`. This is a finite
+route obstruction, not an RH result.
