@@ -502,3 +502,31 @@ No audits yet.
 - **Next queued attack:** emit and check `rho=1` and `rho=0` aggregate shards.
   In parallel, continue mining compact human obstructions from the high-k
   rho-2 certificates rather than relying on bulk proofs.
+
+## 2026-07-26 — tick 23
+
+- Derived the final two row partitions. `rho=1` has five shards with
+  `k=0,...,4` T-holes; `rho=0` has six with `k=0,...,5`. In both rows the
+  common-C-dominator bound is `|K|>=k+2`, and the human tournament/one-hole
+  argument eliminates `k=0,1`.
+- Added `experiments/rho_low_shards.py`, a deterministic emitter for all eleven
+  remaining aggregate shards.
+- **Next queued step:** independently solve/check these eleven shards. Any SAT
+  result is decoded immediately; UNSAT shards receive hashes and a frozen
+  certificate ledger. The high-k human target is a support-synchronization
+  lemma coupling the many common C-dominators to the few T-hole endpoints.
+
+### Completion of the m=8 row campaign
+
+- All eleven low-rho shards returned UNSAT and independently checked
+  `c VERIFIED`; exact hashes are in `experiments/rho-low-certificates.md`.
+- Therefore all six rows `rho=0,...,5` are eliminated in the rooted
+  order-18, `m=8`, vertex-minimal then arc-minimal normal form. Rows 4 and 5
+  have human proofs; rows 0--3 have deterministic checked aggregate certificates
+  (with additional human subcases).
+- This is not an order-18 elimination: the separate `m=5,6,7,9` families remain.
+- **Next queued attack:** return to `m=9`, where the perfect-matching missing
+  graph is already human-eliminated. Split the remaining nine-edge missing
+  graphs by degree sequence and robust-witness overlap; prioritize an isolated
+  missing-graph vertex, which yields a tournament deletion and should admit the
+  same inaccessible-inneighbor lifting argument.
