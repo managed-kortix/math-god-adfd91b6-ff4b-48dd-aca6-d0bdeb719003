@@ -1,0 +1,13 @@
+shard: n18-m8-b7-sixth-row-rho-0-5-leaf
+generator: python3 m8_pilot_shard.py --output m8pilot.cnf
+solver: cadical 1.7.3 --lrat --no-binary m8pilot.cnf m8pilot.lrat
+checker-source: drat-trim commit 2e3b2dc0ecf938addbd779d42877b6ed69d9a985
+checker: lrat-check
+checker-sha256: e9e71c96b68dc9ed22db35d7581e613e6b161ffbc82c20cba5699f8320a065b8
+cnf-uncompressed-sha256: 9ff35826d5d05b655f3f5c56f5f6ab80d34284a1043fffb411dc7c1853f08c9a
+lrat-uncompressed-sha256: 183d5fdad6ff3bda7bbe5676e1f6b9afe88dee29226c3a46de0554b857f8323d
+cnf-bytes: 10378027
+lrat-bytes: 7219568
+solver-exit: 20
+checker-result: c VERIFIED
+scope: one genuine colored missing-graph/orientation leaf, not the full m=8 row

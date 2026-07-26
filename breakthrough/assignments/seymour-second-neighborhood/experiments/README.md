@@ -63,3 +63,9 @@ shard constraints, not consequences valid at arbitrary order.
 every present arc, with no additional variables. Exhaustive mutation testing
 compares 7,860 small graph/arc cases directly against recomputation after arc
 deletion.
+
+`m8_rows.py` deterministically enumerates the 762 corrected coarse C-margin
+rows. `m8_pilot_shard.py` emits one genuine sixth-row terminal leaf. Its
+compressed CNF/LRAT, logs, hashes, and manifest are committed as the first
+end-to-end independently checked certificate. It proves only that one leaf is
+UNSAT, not that the sixth row or the `m=8` branch is eliminated.

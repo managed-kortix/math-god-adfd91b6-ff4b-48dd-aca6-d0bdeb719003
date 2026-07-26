@@ -326,3 +326,22 @@ No audits yet.
 - **Next queued attack:** implement the 762-row generator including the sixth
   row, canonical colored missing-graph realizations, and circulation filtering;
   then run small standalone arc-minimal shards with checked LRAT output.
+
+## 2026-07-25 — tick 14
+
+- Implemented and independently count-checked the exact 762-row coarse `m=8`
+  C-margin enumeration, including all 36 rows with `rho=5`.
+- Derived an exact max-flow orientation feasibility filter for fixed colored
+  missing graphs, degree targets, root arcs, `A->C` prohibition, and B-column
+  coverage. This will precede expensive SAT shards.
+- Completed the first full certificate pipeline on one genuine corrected-sixth-
+  row leaf: deterministic CNF, CaDiCaL textual LRAT, and independent
+  `lrat-check` verification (`c VERIFIED`). The uncompressed CNF/LRAT hashes and
+  compressed artifacts are in `experiments/m8pilot.*`. This eliminates exactly
+  one leaf and is not a branch-level theorem.
+- The sixth row itself reduces to nine C-margin states and two regimes for the
+  unique degree-nine vertex; tournament equalities alone do not close it.
+- **Next queued attack:** generate all colored missing-graph leaves beneath the
+  36 `rho=5` coarse rows, filter them by max-flow orientation feasibility, and
+  issue checked LRAT jobs for every surviving canonical leaf. Maintain a cover
+  hash so no leaf is omitted or duplicated.
