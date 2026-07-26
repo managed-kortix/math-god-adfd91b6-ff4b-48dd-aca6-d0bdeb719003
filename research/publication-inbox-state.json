@@ -2,7 +2,7 @@
   "schema_version": 1,
   "owner": "main",
   "cadence": "at most once per UTC day unless a known urgent reply is pending",
-  "last_checked_at": "2026-07-26T14:15:00Z",
+  "last_checked_at": "2026-07-26T14:16:00Z",
   "gmail": {
     "tracked_threads": [
       "19f9eb42c3b5a084",
