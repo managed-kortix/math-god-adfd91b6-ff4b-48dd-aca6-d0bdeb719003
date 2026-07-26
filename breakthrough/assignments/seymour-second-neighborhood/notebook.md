@@ -407,3 +407,33 @@ No audits yet.
   freeze grouped campaign hashes, then certify all 136 groups with a generated
   immutable completion ledger. Any SAT group stops the campaign for graph
   decoding and dual verification.
+
+## 2026-07-25 — tick 18
+
+- Replaced the entire 136-group `rho=5` campaign by a short human contradiction;
+  see `attempts/tick18-rho5-human-proof.md`. The key is that nine B-to-C arcs
+  force one B vertex to dominate both C vertices, robustness supplies a common
+  degree-eight A predecessor, and the 16-vertex tournament degree census gives
+  six additional exact second neighbors.
+- Three adversarial proof routes checked the exact argument. Generic lifting
+  counterexamples without the common dominator/robust predecessor hypotheses
+  were correctly rejected as irrelevant.
+- The independently verified 735-leaf cover, grouped campaign, and LRAT pilots
+  remain committed as regression/audit artifacts, but bulk certification is
+  cancelled because the human proof is stronger.
+- **Next queued attack:** apply the generalized two-C lifting criterion to the
+  remaining `m=8` rows `rho=0,1,2,3,4`. First target `rho=4`, where the induced
+  16-vertex graph has one missing pair and at least three B vertices dominate
+  both C vertices. Seek control of the near-tournament Seymour vertex's B-degree
+  or prove one C vertex Seymour from inaccessible-inneighbor bounds.
+
+### Publication status of the rho=5 result
+
+- The human proof now supersedes the uncompleted bulk campaign and eliminates
+  the entire corrected sixth row, not merely the audited leaves. It is a
+  restricted order-18 branch theorem and not a solution of SNC.
+- The next proof frontier is `rho=4`: the sole B-C missing-pair placement is
+  eliminated immediately by the same tournament argument. Otherwise the
+  16-vertex graph has one missing edge, at least three common C-dominators, and
+  a rigid residual in which one `a* in A\{r}` is the sole predecessor of all
+  common dominators and `N_T+(r)={a*} union N_T+(a*)`.
