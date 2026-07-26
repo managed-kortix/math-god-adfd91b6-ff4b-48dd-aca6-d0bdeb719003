@@ -40,7 +40,10 @@ dense, Farey-cluster, rational-grid, and exact multiplicity audits, but
 fixed-order absolute radii grow rapidly with mode count. The next refinement
 extracts the `min(omega,nu)` cusp exactly and approximates the remaining Gram
 kernel by an orthogonal projection whose PSD residual is charged only to
-`d-u/alpha`; adaptive far-block orders are also required. The ultimate positive target remains
+`d-u/alpha`. This is now certified for piecewise constants and shows quadratic
+mesh convergence, but hostile carriers impose a time-frequency cell cost. The
+active refinement is higher-order Legendre projection, followed by integration
+with adaptive far-block orders. The ultimate positive target remains
 `liminf P_N=0`, where `P_N` is the restricted `(0,1)` energy. Any off-critical
 zero gives an explicit uniform positive floor for every `P_N`, so that target
 implies RH. It is not known to follow from RH for this exact logarithmic taper.

@@ -15,13 +15,15 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   proved and an outward-rounded block verifier passes hostile finite tests; the
   full finite cluster-tree implementation now passes dense and two-channel
   audits, but fixed-order absolute radii grow rapidly; the current sublemma is
-  a PSD cusp/projection residual bound depending only on the endpoint
-  cancellation vector, after
+  a certified PSD cusp/projection bound now replaces entrywise near-field
+  radii by a residual depending only on the endpoint cancellation vector; the
+  current sublemma is higher-order Legendre projection reducing the observed
+  time-carrier cost, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 16
+- **cycle:** 17
 - **announcements:** none
 
 ## immutable target list
@@ -40,10 +42,10 @@ waiting process.
 
 ## next exact steps
 
-1. Implement exact cusp suffix sums and an orthogonal-projection Gram bound for
-   near leaves, with residual depending on `d-u/alpha`.
-2. Add adaptive far-block order allocation and compare global radii on hostile
-   clusters and actual small Mobius endpoint channels before scaling.
+1. Implement certified piecewise Legendre projection and compare degrees at
+   equal rank, including an origin-safe Taylor remainder.
+2. Test the exact harmonic-first `N=4 -> 8`, `R=3` Mobius endpoint surrogate;
+   then integrate projection near fields with adaptive far-block orders.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -184,3 +186,11 @@ waiting process.
   absolute-radius scaling as a sufficient strategy. The next route extracts
   the cusp exactly and uses a PSD projection residual controlled only by the
   endpoint cancellation vector. No solution is claimed.
+- 2026-07-26: proved and implemented a one-sided PSD cusp/projection theorem.
+  Exact cusp suffix sums plus cellwise orthogonal projection charge the adverse
+  residual only to `d-u/alpha`; a cancellation-aware frequency-suffix profile
+  reduced the 32-mode test gap to `8.1e-6` at 128 cells with quadratic
+  refinement. A hostile carrier family proves piecewise constants may still
+  need time-times-carrier many cells. The next route is certified higher-order
+  Legendre projection and an exact small Mobius surrogate test. No solution is
+  claimed.

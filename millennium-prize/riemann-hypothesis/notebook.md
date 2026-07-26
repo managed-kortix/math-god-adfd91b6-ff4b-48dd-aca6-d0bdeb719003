@@ -1859,3 +1859,63 @@ existing local-`l1` hierarchy on hostile finite-difference clusters and actual
 small Möbius endpoint channels. In parallel, add adaptive far-block order
 allocation. The decisive question is whether PSD residual structure prevents
 the observed radius blow-up.
+
+## Tick 19 — certified PSD cusp/projection bound
+
+Added `certified-cusp-projection.md`, `verify_cusp_projection.py`, and tests.
+For `alpha>0`, one common orthogonal projection gives `G_Q=G_0+E` with
+`E` positive semidefinite. With `z=d-u/alpha`, the exact completion is
+
+\[
+\mathcal L_{K_Q}=\mathcal L_{\pi\min/2}-\mathcal L_{G_0}
++\alpha z^TEz-\alpha^{-1}u^TEu.
+\]
+
+Dropping only the final favorable term yields a rigorous one-sided bound. The
+assumption `alpha>0` and use of one common projection are essential.
+
+The cusp form is evaluated exactly in one suffix pass. The prototype projects
+onto constants on uniform cells, uses Arb `Si` cell means, and bounds the
+residual by the sharp Neumann Poincare inequality. Defining
+
+\[
+A_z(s)=\sum_{\omega_i\ge s}z_i,
+\qquad \mathfrak C(z)=\int s|A_z(s)|\,ds,
+\]
+
+one has `||Phi_z'||_infinity <= mathfrak C(z)`. For rational frequencies this
+is an exact suffix sum and is much tighter than taking coefficientwise absolute
+values first.
+
+At `N=32,Q=8,alpha=3/2`, the certified results were:
+
+| cells | adverse residual | upper-bound gap |
+|---:|---:|---:|
+| 16 | `3.32e-4` | `5.19e-4` |
+| 32 | `8.29e-5` | `1.30e-4` |
+| 64 | `2.07e-5` | `3.25e-5` |
+| 128 | `5.18e-6` | `8.11e-6` |
+
+Both decay by four under cell doubling, as proved. These are finite synthetic
+tests only.
+
+A hostile narrow pair with coefficients proportional to inverse gap converges
+to a carrier cosine. Thus zero total mass and shrinking bandwidth do not force
+a small residual; piecewise constants can require `Omega(Q times carrier)`
+cells. The correct complexity parameter is the suffix profile or derivative
+energy, not bandwidth alone.
+
+Higher-order piecewise Legendre projection preserves the PSD completion and
+has explicit weighted derivative constant
+
+\[
+\Lambda_{p,m}=(p+1+m)!/(p+1-m)!.
+\]
+
+## Next queued main-funnel step
+
+Implement piecewise Legendre projection with exact feature moments and an
+origin-safe Taylor--Legendre remainder. Test the harmonic-first `N=4 -> 8`,
+`R=3` Möbius endpoint surrogate with `alpha=1/3`, then compare degrees `0--3`
+at equal total rank. Retain the favorable `-u^TEu/alpha` term whenever a lower
+bound can be certified; otherwise record exactly the loss from dropping it.
