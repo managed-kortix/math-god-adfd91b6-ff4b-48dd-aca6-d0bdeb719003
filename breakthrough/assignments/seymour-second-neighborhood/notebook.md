@@ -613,3 +613,15 @@ No audits yet.
   shape shards, beginning with the clean matching and star-like shapes. In
   parallel, attack the final k5/k6 rows via the C-to-root endpoint reserve and
   internal-B-hole split.
+
+### k4 emitter
+
+- Added `experiments/m9_k4_shapes.py`, encoding the eleven exact invariant
+  profiles with bidirectional degree, triangle, and core-edge semantics.
+- Human endpoint packing eliminates the pure four-star and claw-plus-edge
+  shapes; the matching shape compresses to exactly four predecessor classes
+  with near-complete incidence but still needs synchronization.
+- **Next queued experiment:** run the 33 `(rho,shape)` shards, prioritize the
+  two human-eliminated shapes as semantic regressions, and retain only checked
+  LRAT completions. For k5/k6, first split by root-C hole count `g`, then by
+  internal-B-hole count only on `g=0`.
