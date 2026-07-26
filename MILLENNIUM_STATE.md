@@ -102,10 +102,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   truncated divisor impulses; weakening the complete-block estimate to
   `kappa/log M` is now proved summable on every consecutive polynomial-range
   chain and admits positive-limit equality models, while separated cell bounds
-  still require square-root weighted-Mertens mean-square cancellation
+  still require square-root weighted-Mertens mean-square cancellation; the
+  funnel has returned to the fixed half-strength additive-12 target, now exactly
+  reduced to a twelve-prefix triangular drift/impulse budget and certified with
+  complete Arb cells through `3071`, but CRT and Gram-sign audits rule out any
+  proof from local squarefree/prime occurrence alone
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 50
+- **cycle:** 51
 - **announcements:** none
 
 ## immutable target list
@@ -124,9 +128,8 @@ waiting process.
 
 ## next exact steps
 
-1. Decide whether to continue only with a cancellation-preserving proof of the
-   summable `kappa/log M` checkpoint or return to the fixed-strength additive-12
-   candidate; separated magnitude estimates are now quantitatively closed.
+1. Attack the exact additive-12 triangular impulse budget with quantitative
+   Vasyunin correlations; local squarefree gaps and signs are insufficient.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -141,6 +144,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 51 formulated the exact fixed half-strength additive-12
+  target as nonnegativity of one of twelve weighted `H` prefixes and derived
+  both correctly indexed triangular impulse budgets. A proof would be
+  RH-sufficient by consecutive full-strength renewal. CRT gives arbitrarily
+  long nonsquarefree windows, and favorable-event gaps already exceed twelve,
+  so occurrence/sign arguments are decisively insufficient. The complete
+  192-bit scan was extended: cells through `3071` and energies through `3072`
+  are certified, with no new negative `H` after `226`; the full twelve-window
+  frontier is start `3060`. Durable certificates and checkpoints are included.
+  No RH or Millennium solution is claimed.
 
 - 2026-07-26: Cycle 50 proved that a `kappa/log M` compensated block estimate,
   even from every start on consecutive polynomial-range blocks, has finite

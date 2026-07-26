@@ -4296,6 +4296,29 @@ Analytically, separated absorption on the first shell requires RMS cancellation
 by a divergent factor. Details are in
 `cycle-50-summable-weak-block-obstruction.md`. No RH result is claimed.
 
+## Cycle 51: additive-12 fixed-strength frontier
+
+The live fixed-strength target is exactly
+
+\[
+\forall M\ge3\ \exists M<B\le M+12:\quad
+\sum_{n=M}^{B-1}\beta_nH_n\ge0,
+\]
+
+equivalently `P_M-P_B>=sum_[M,B)w_nP_n`. Its drift/impulse form has decreasing
+triangular weights and must pay the incoming `H` level, every radial drift, and
+all adverse squarefree events. CRT gives arbitrarily long nonsquarefree runs,
+so local event density or sign patterns cannot prove it. A uniform proof would
+be RH-sufficient through consecutive full-strength renewal and is not a partial
+RH theorem.
+
+The 192-bit complete scan now certifies cell signs through `3071`. No new
+negative `H` cell appears after `226`; all new cells succeed immediately. The
+full additive-12 window property is tested through start `3060`, while starts
+through `3071` have singleton success only. Certificates, summaries, hashes,
+and resume checkpoints are in `cycle51-scan-3072/`; the exact theorem and index
+audit are in `cycle-51-additive-12-frontier.md`. No RH result is claimed.
+
 ## Cycle 48: coherent mean must be compensated, not split off
 
 The exact finite budget is

@@ -1,0 +1,30 @@
+{
+  "scope": "certified finite extension only; no asymptotic theorem or RH claim",
+  "local_range": [
+    2304,
+    2367
+  ],
+  "arb_precision_bits": 192,
+  "parallel_jobs": 2,
+  "unit_count": 64,
+  "certified_negative_H_count": 0,
+  "certified_negative_H_runs": [],
+  "H_sign_unresolved_count": 0,
+  "certified_negative_unit_count": 0,
+  "certified_negative_unit_runs": [],
+  "unit_sign_unresolved_count": 0,
+  "first_failure_of_local_half_positivity": null,
+  "weakest_local_kappa": {
+    "n": 2329,
+    "interval": "[0.809363046891037298555737707293483438167483 +/- 3.99e-43]"
+  },
+  "closest_local_kappa_to_half": {
+    "n": 2329,
+    "interval": "[0.809363046891037298555737707293483438167483 +/- 3.99e-43]"
+  },
+  "certificate": {
+    "path": "local-arb-certificate.jsonl.gz",
+    "format": "gzip JSON Lines; one Arb interval row per n",
+    "uncompressed_sha256": "31d7174dfba2335582b3937ffaf5926ecebad4a927c84e9337d7656c4db39c73"
+  }
+}
