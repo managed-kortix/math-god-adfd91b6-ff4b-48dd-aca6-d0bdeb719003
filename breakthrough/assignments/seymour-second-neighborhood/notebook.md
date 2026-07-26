@@ -458,3 +458,21 @@ No audits yet.
   arc-minimality at their incoming arcs; the target lemma is that at most two
   low-A vertices can occur as such predecessors, enabling the same forced
   degree count.
+
+## 2026-07-26 — tick 21
+
+- Human-eliminated the `rho=3` branch with one internal T-hole; see
+  `attempts/tick21-rho3-one-hole-proof.md`. The same rigid predecessor identity
+  used for `rho=4` applies unchanged.
+- The branch with both residual holes in B-C was already eliminated because T
+  is a tournament. Only the two-internal-hole branch remains for a fully human
+  elimination.
+- Added deterministic `experiments/rho3_shards.py`. Three exact shards (`k=0,1,2`)
+  were independently LRAT-checked and all returned `c VERIFIED`; hashes and
+  reproduction commands are in `experiments/rho3-certificates.md`. This
+  computational theorem relies on the combined robust-witness and arc-minimal
+  model and is retained as regression evidence while the human proof is pursued.
+- **Next queued attack:** close the two-internal-hole human residual. Current
+  compression leaves an exact three-predecessor pattern (when neither hole
+  meets `r`) and a hole-supported-r template. Synchronize the two hole endpoint
+  identities across the common C-dominators, using arc deletion at `a->b`.
