@@ -53,6 +53,27 @@ candidate attacked by independent adversarial agents → a result is a result
 only when it is complete, exact, and reproducible by a stranger in minutes.
 Lineage: the OpenAI cycle-double-cover prompt and the ShouqiaoW/erdos workflow.
 
+## Current octacyclic result
+
+`all-octacyclic-cacti/paper.tex` proves the strict AKMPZ conclusion
+`s+(G) > |V(G)|` for every connected octacyclic cactus. Its reproducibility
+appendix distinguishes mathematical realization lemmas from finite scripts:
+
+- the census programs enumerate colored cluster partitions or incidence trees
+  and evaluate encoded exact packet ledgers;
+- the L1--L16 scripts reproduce the strict-last-bridge `877=861+16` census and
+  check the stated finite ownership data;
+- the U1--U6 verifier imports only the fully shared census's finite generation
+  and SAFE-classification utilities, then checks signatures, router
+  refinements, retained packets, cut ownership, and exact symbolic ledgers;
+- no script is claimed to prove the analytic packet inequalities, arbitrary
+  connector realization, coincident-entry interval lemma, or attached-tree
+  scope; those arguments are in the manuscript.
+
+Exact commands and expected totals are documented in
+`all-octacyclic-cacti/README.md`. Build the PDF with
+`bash scripts/build-paper.sh all-octacyclic-cacti`.
+
 ## Built on Kortix
 
 math-god runs on [Kortix](https://kortix.com) with persistent memory,

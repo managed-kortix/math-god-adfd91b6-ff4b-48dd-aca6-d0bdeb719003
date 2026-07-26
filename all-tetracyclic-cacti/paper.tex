@@ -21,7 +21,7 @@
 
 \begin{abstract}
 We prove that every connected tetracyclic cactus $G$ of order $n$ satisfies
-$s^+(G)\geq n$.  The sharp block-additive doubly nonnegative estimate reduces
+$s^+(G)>n$.  The sharp block-additive doubly nonnegative estimate reduces
 the theorem exactly to the cycle multisets
 $\{3,3,3,q\}$, with $q$ odd, and $\{3,3,5,5\}$.  For the first family we use
 maximum-cycle-packing territories when $q\equiv3\pmod4$ and a shared-cut
@@ -262,6 +262,48 @@ unordered length multisets.
 The list is a classification of what the sharp DNN relaxation leaves, not a
 list of counterexamples and not a claim that the spectral inequality in the
 DNN proof is sharp.
+
+The only nonresidual case in which \eqref{eq:dnn-bound} is not already strict
+has three triangles and one even cycle.  We record the strict argument needed
+for that boundary case.
+
+\begin{proposition}[Three triangles and one even cycle]\label{prop:333even}
+If the cyclic blocks of $G$ are $C_3,C_3,C_3,C_q$ with $q$ even, then
+$s^+(G)>n$.
+\end{proposition}
+
+\begin{proof}
+Suppose first that the shared-cut graph is disconnected.  In the reduced
+cluster tree choose a leaf cluster not containing $C_q$ and cut its first
+actual bridge toward the rest.  This leaf is a connected shared-cut cluster of
+$r\in\{1,2,3\}$ triangles.  By Lemma~\ref{lem:packets}(1), its surplus is
+strictly greater than $r-1$.  Its connected complement has rank $4-r$ and is
+nonnegative by the unicyclic even-cycle bound when $r=3$ and by
+Lemma~\ref{lem:packets}(4) or the complete tricyclic theorem when $r=2$ or
+$r=1$.  Induced-subgraph superadditivity therefore gives strict positive total
+surplus.
+
+Now suppose all four cycles form one shared-cut cluster, and inspect the
+$C_q$ node in its cycle--cut incidence tree.  If it is a leaf, open a vertex
+of $C_q$ private with respect to cyclic blocks.  The opened territory is a
+nonempty tree of surplus $-1$, while deleting the leaf cycle node leaves the
+three triangles in one connected shared-cut cluster.  Their packing number is
+at most two, so Lemma~\ref{lem:packets}(1) gives surplus greater than $2$;
+the total is greater than $1$.
+
+If the $C_q$ node has degree $d\geq2$, split it into $d$ nonempty proper
+consecutive intervals, one for each component of the incidence tree after
+deleting that node.  Every component contains at least one triangle.  If their
+triangle counts are $r_1,\ldots,r_d$, the resulting induced territories have
+surplus strictly greater than $r_i-1$, and hence their total surplus is
+strictly greater than
+\[
+ \sum_i(r_i-1)=3-d\geq0.
+\]
+All connector remnants and hanging trees follow their unique attachment, as in
+Lemma~\ref{lem:333qterritory}.  Thus every incidence has strict positive
+surplus.
+\end{proof}
 
 \section{Three triangles and one odd cycle}
 
@@ -605,13 +647,18 @@ connector and every attached tree.
 \begin{theorem}\label{thm:main}
 Every connected tetracyclic cactus $G$ on $n$ vertices satisfies
 \[
- \boxed{s^+(G)\geq n}.
+ \boxed{s^+(G)>n}.
 \]
 \end{theorem}
 
 \begin{proof}
 Proposition~\ref{prop:residual} shows that the sharp DNN bound proves the
-theorem for every cycle-length multiset except
+theorem strictly whenever its excess sum is less than three.  Equality in the
+DNN bound can occur only for three triangles and one even cycle: with at most
+one triangle the excess sum is at most $1+3\epsilon_5<3$, while with two
+triangles the only pair exceeding one is $5,5$ and every other pair is less
+than one.  Proposition~\ref{prop:333even} settles this equality case.  The
+remaining residual multisets are
 $\{3,3,3,q\}$ with $q$ odd and $\{3,3,5,5\}$.  The first complete family is
 settled by Proposition~\ref{prop:333q}; the second is settled by
 Proposition~\ref{prop:3355}.  The residual proofs exhaust the shared-cut

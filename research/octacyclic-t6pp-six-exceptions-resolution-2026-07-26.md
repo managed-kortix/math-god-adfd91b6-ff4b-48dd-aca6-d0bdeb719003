@@ -211,3 +211,25 @@ each type. Consequently all six canonical ordinary-split exceptions are
 closed without the rooted hostile-cycle guard theorem. This remains a local
 fully shared `T^6PP` result; it does not by itself resolve any disconnected or
 entry-locked octacyclic family.
+
+## 5. Exact reproduction
+
+Run from the repository root with Python 3.10 or newer:
+
+```bash
+python3 research/octacyclic-t6pp-six-exceptions-resolution.py
+```
+
+The verifier uses only the Python standard library. It imports the authoritative
+fully shared census, regenerates all `2116` color-preserving incidence trees,
+and asserts that its six unresolved canonical signatures and edge sets are
+exactly U1--U6. For every row it checks the router mark intervals, sequential
+territory refinement, retained cycle packets, common-cut or shared-cluster
+hypothesis, and unique ownership of every cyclic cut. It then adds the packet
+ledgers using `fractions.Fraction`, verifies all six strict bounds, and confirms
+that the weakest is U6:
+
+```text
+verified canonical exceptions: 6/6
+weakest strict margin: 1-2delta = 5-2sqrt(5) > 0
+```
