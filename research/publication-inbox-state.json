@@ -2,13 +2,22 @@
   "schema_version": 1,
   "owner": "main",
   "cadence": "at most once per UTC day unless a known urgent reply is pending",
-  "last_checked_at": "2026-07-26T14:16:00Z",
+  "last_checked_at": "2026-07-26T14:38:00Z",
   "gmail": {
     "tracked_threads": [
       "19f9eb42c3b5a084",
       "19f9ec75379c3416"
     ],
-    "substantive_unhandled_replies": 0
+    "substantive_unhandled_replies": 0,
+    "inbox_zero_policy": "handled mail is archived, never bulk-deleted; tracked threads are searched directly",
+    "inbox_count_after_maintenance": 0,
+    "archived_without_deletion_during_initial_cleanup": 756,
+    "noise_filters": [
+      "notifications@github.com",
+      "notifications@linear.app",
+      "noreply@email.openai.com",
+      "announcements@daytona.io"
+    ]
   },
   "open_conjectures": {
     "verified_pending_review": [

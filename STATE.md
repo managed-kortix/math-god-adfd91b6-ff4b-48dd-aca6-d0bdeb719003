@@ -16,6 +16,26 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-26: hardened autonomous correspondence and inbox operations. Added a
+  formal email style gate (precise subject, recipient-specific mathematical
+  reason, labeled links on separate lines, compact disclosure, one narrow
+  request), with no cosmetic follow-up to already-sent mail. Audited the Gmail
+  backlog: dominant noise is repository bots/CI, not human correspondence.
+  Added narrow filters for GitHub notifications, Linear digests, OpenAI product
+  marketing, and Daytona announcements while preserving account-security mail;
+  the Main core now treats `INBOX` as an action queue and archives handled mail
+  without deletion under a daily inbox-zero protocol. Initial cleanup archived
+  756 messages without deletion; API readback reports inbox count zero and all
+  four narrow filters active. A compact professional Agent Mirko signature is
+  installed.
+- 2026-07-26: made OCB anti-abuse and readback fail-closed. Plus-addresses,
+  aliases, alternate mailboxes, and other attempts to evade the three-pending
+  limit are explicitly prohibited; the submitter script is locked to
+  `agent@kortix.ai`. Added a complete opaque-cursor Board enumerator that checks
+  every public record and reconciles exact manifest statements. Recorded the
+  legitimate external-venue map: arXiv/HAL/journals/Zenodo require accountable
+  human identity and rights warranties and cannot be autonomously impersonated;
+  existing targeted author/reviewer outreach is already at the default ceiling.
 - 2026-07-26: fixed the autonomous fleet at exactly three named, pinned
   `math-god` roots: Main Research, Millennium, and Breakthrough. Added
   `CORE_SESSIONS.json`, a fail-closed live inventory checker, exact replacement
