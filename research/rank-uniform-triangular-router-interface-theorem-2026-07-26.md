@@ -20,16 +20,17 @@ There are two conclusions.
    numerical interface has finitely many states, independent of the number of
    triangles. The sixteen L-types and six U-types use the same transition
    system.
-2. This does not by itself replace either incidence census. The missing step is
-   one purely structural separator assertion, stated as Lemma S below. The
-   smallest obstruction to proving Lemma S by separator moves alone is exact:
+2. This does not by itself replace either incidence census. The proposed next
+   step was one purely structural separator assertion, stated as Lemma S below.
+   The smallest obstruction to proving Lemma S by separator moves alone is exact:
    cycles retained through one common cut cannot be assigned to different
    induced territories. Thus a terminal analytic packet at a locked cut is
    necessary, not an artifact of the octacyclic census.
 
 The local router theorem, finite-state ledger, and obstruction theorem below
-are proved. Lemma S is isolated as the sole unproved global step needed for a
-census-free induction.
+are proved. Lemma S is not: a later quantifier audit found a minimal rank-one
+counterexample to its terminal list. See
+`research/candidate-lemma-s-rigorous-verdict-2026-07-26.md`.
 
 ## 2. Incidence objects and interfaces
 
@@ -215,6 +216,16 @@ external interfaces. Then repeated labelled router separations produce either
 All other resulting cyclic territories are triangular. No operation creates
 more naked interface territories than the number of labelled interfaces.
 
+**Status correction.** This candidate is false as written. With one triangle,
+two pentagons attached at two distinct triangle cuts, the incidence tree is
+`P-x-T-y-P`. Splitting its only router has state `(2,0,0,0)` and leaves no
+retained triangular cycle. The unsplit graph is covered by the proved
+rank-three connected `TPP` theorem, but that bounded-rank packet is neither an
+accepting state, a `PP` territory plus a strict triangular territory, nor one
+of the common-cut/rooted terminals named in item 3. This is the minimal
+counterexample to the literal statement; details and minimality are proved in
+`research/candidate-lemma-s-rigorous-verdict-2026-07-26.md`.
+
 If Lemma S is proved, induction on the number of triangle nodes replaces both
 the marked-root and fully shared incidence censuses: split a router, apply the
 lemma recursively to the unique descendant territory carrying each demand,
@@ -272,8 +283,9 @@ induction would have all of the following properties:
    cut.
 
 The octacyclic L and U tables show that no such failed kernel occurs with six
-triangles. They do not prove its absence at arbitrary rank. Establishing that
-absence by pruning the incidence tree, or producing the first kernel satisfying
-conditions 1-4, is the exact next step. Until Lemma S is proved, the finite
-state theorem abstracts and verifies the existing resolutions but does not
-replace the two exhaustive censuses.
+triangles. They do not prove its absence at arbitrary rank. The literal Lemma S
+already fails at rank one because its terminal list omits the proved connected
+`TPP` base. Enlarging item 3 to include proved bounded-rank packets repairs that
+defect, but the amended all-rank pruning assertion remains open. The finite
+state theorem therefore abstracts and verifies the existing resolutions but
+does not replace the two exhaustive censuses.

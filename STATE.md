@@ -16,6 +16,21 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-26: attacked connected rank-ten cacti using the rank-nine theorem
+  and rank-uniform router/interface machinery. Sharp DNN leaves exactly
+  `T^9Q` and `T^8PP`; lower-rank pruning reduces disconnected cases to
+  `A_9|Q`, `T^8P|P`, and `P|A_8|P`. The exact `A_8` two-interface census has
+  11689 abstract marked classes, 11674 accepted by the fixed router ledger,
+  and 15 new residuals on only two incidence shapes; a final graph-owner audit
+  is still required for accepted rows. Fully shared censuses give 8049
+  `T^9Q` types (at stabilized capacity) and 30386 `T^8PP` types. Existing
+  common-cut, packing-one, and one leaf-triangle opening close all fully shared
+  `T^9Q`; the ordinary `T^8PP` ledger leaves nine rows, two immediately
+  repaired and seven still requiring exact replacement certificates. The
+  arithmetic automaton remains rank-independent with at most 72 states, while
+  orbit counts grow. Exact frontier and obligations are recorded in
+  `research/rank-ten-cactus-router-interface-status-2026-07-26.md`; no
+  rank-ten theorem is claimed.
 - 2026-07-26: completed `all-nonacyclic-cacti`: every connected cactus of
   cyclomatic rank nine satisfies `s+(G)>|V(G)|`. DNN leaves `T^8Q` and
   `T^7PP`. Disconnected partition audits give 66=63+3 and 117=109+8.
