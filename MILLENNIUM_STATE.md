@@ -21,13 +21,15 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   the constant modes and a direct untruncated sawtooth certificate prove the
   `N=4 -> 8` tail is positive and full dyadic decrements are independently
   certified through `N=16`; cellwise positivity is explicitly false, so the
-  current sublemma is a grouped cumulative-divisor-impulse inequality for the
-  complete functional, after
+  exact Abel identities reduce grouped cells to cumulative signed primitives,
+  while finite audits falsify every fixed local-window/pairing strategy; the
+  current sublemma is an anchored initial-range Chebyshev reserve dominating
+  the later cumulative-primitive defect, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 20
+- **cycle:** 21
 - **announcements:** none
 
 ## immutable target list
@@ -46,10 +48,10 @@ waiting process.
 
 ## next exact steps
 
-1. Derive summation-by-parts identities for grouped unit-cell contributions in
-   terms of cumulative divisor impulses, preserving cross-scale cancellation.
-2. Search for a short pairing/block lower bound through moderate dyadic `N` and
-   formulate the weakest fixed-length contraction pattern it supports.
+1. Quantify the exact initial reserve from `b_k=e_k=-psi(k)/log N` on `k<=N`
+   against later Abel-primitive losses using unconditional bounds.
+2. Aggregate these primitives across a fixed number of dyadic scales and test
+   whether reserve/defect ratios improve without local window assumptions.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -220,3 +222,10 @@ waiting process.
   positivity. The active target is a grouped cumulative divisor-impulse or
   fixed-length dyadic block inequality for the complete functional. No solution
   is claimed.
+- 2026-07-26: derived exact boundary-impulse and cumulative Abel formulas for
+  complete unit-cell sums. A certified analyzer and deeper audit found negative
+  windows of lengths 512 and 4096 and failures of fixed-lag and greedy pairings,
+  decisively ruling out local absorption. Classical convolution gives the exact
+  favorable reserve `b_k=e_k=-psi(k)/log N` for `k<=N`; the active target is an
+  anchored reserve bound dominating later cumulative defects. No solution is
+  claimed.

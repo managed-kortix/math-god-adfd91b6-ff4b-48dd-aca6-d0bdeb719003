@@ -2107,3 +2107,52 @@ Abel/summation-by-parts identities for grouped cell sums before any absolute
 value. Search for a short deterministic pairing or block lower bound absorbing
 every negative cell through moderate `N`; state the weakest pattern that would
 imply fixed-length block contraction.
+
+## Tick 23 — exact Abel primitives and failure of local pairings
+
+The grouped unit-cell sum is now reduced exactly in
+`abel-divisor-impulses.md`. Abel summation writes it as `c_2(T-K)` plus positive
+weights applied to two cumulative primitives `Z_m,H_m`. The latter retains the
+signed quadratic correlation
+
+\[
+H_m=\sum_{k=K}^m(2b_ke_k-\alpha e_k^2).
+\]
+
+Thus a lower-envelope theorem for aggregated `Z_m,H_m` is precisely sufficient;
+termwise absolute bounds are precisely the wrong operation.
+
+Added `analyze_unit_cells.py` and tests. At horizon `1024`, the first universally
+nonnegative sliding-window lengths are `3` for `N=8` and `12` for `N=16`, but
+no length through `256` works for `N=32,64`. A deeper hostile audit finds a
+negative length-512 block for `N=32` and a negative length-4096 block for
+`N=64`. Fixed nearby pairings fail by `N=16`, and a greedy divisor-event pairing
+fails by `N=128`. Therefore fixed spatial windows and local pairings are
+decisively abandoned.
+
+The natural cross-scale alpha weights telescope pointwise to
+`F_N^2-F_(2^LN)^2`; this removes intermediate scales but gives no new positivity.
+General weights leave mixed-sign intermediate energy squares. The useful target
+remains a lower envelope for cross-scale aggregated Abel primitives, not a
+longer telescope.
+
+One exact favorable initial-range identity was found. For `1<=k<=N`, classical
+Möbius convolution gives
+
+\[
+b_k=e_k=-\psi(k)/\log N,
+\]
+
+so the quadratic primitive summand is nonnegative there. Beyond `N`, the
+truncated Möbius tail reappears. Existing Farey and Franel--Landau identities do
+not bound the required mixed logarithmic floor correlation without importing
+RH-strength cancellation.
+
+## Next queued main-funnel step
+
+Exploit the exact `b_k=e_k=-psi(k)/log N` reserve on `[1,N]`. Quantify it
+against the worst possible loss on `[N,T]` using the cumulative Abel weights,
+first with exact finite optimization and then with unconditional Chebyshev-type
+bounds. Search for an anchored reserve inequality rather than translated-window
+positivity; test whether a fixed number of dyadic scales improves the reserve
+to defect ratio after aggregating primitives.
