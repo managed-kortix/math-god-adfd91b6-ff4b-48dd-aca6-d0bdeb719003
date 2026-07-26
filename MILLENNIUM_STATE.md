@@ -55,14 +55,16 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
    diagonals reinforce to order `1/log N`, so the current sublemma is a
    cancellation theorem for the centered cumulative-square difference; an
    endpoint-safe Abel formula now reduces the full decrement to four boundary
-   squares and sparse Lambda-increment/cumulative packets, while a finite-zero
+   squares and sparse Lambda-increment/cumulative packets; summing these over
+   dyadic scales cancels every intermediate boundary and increment packet but
+   tautologically leaves the two outer endpoint energies, while a finite-zero
    Gram form isolates a lag-`log 2` ordinate phase but has no sign under RH
    location and density alone, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 34
+- **cycle:** 35
 - **announcements:** none
 
 ## immutable target list
@@ -81,11 +83,11 @@ waiting process.
 
 ## next exact steps
 
-1. Analyze the complete Abel packets jointly across adjacent dyadic scales;
-   seek telescoping of boundary and increment terms before taking signs.
-2. Determine whether the finite zero-Gram lag kernel has an Euler-product or
-   Landau-explicit-formula constraint beyond RH location/density that controls
-   the required weighted off-diagonal phase.
+1. Determine whether a uniform one-sided weighted pair-correlation estimate for
+   the full finite Mellin kernel can beat the shell cancellation residual while
+   retaining affine, endpoint, jump, and truncation terms.
+2. Seek additional zeta-specific cross-scale arithmetic input; exact dyadic
+   Abel telescoping alone leaves only the original outer endpoint energies.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -369,3 +371,16 @@ waiting process.
   small cross-scale cumulative difference.  Signs are localized packetwise,
   but the boundary and cumulative factors remain indefinite, so no contraction
   theorem or RH result is claimed.
+- 2026-07-26: summed the exact endpoint-safe Abel decompositions over the scales
+  `N,2N,...,2^J N` with every normalized shell weight retained.  The two-square
+  boundary packets telescope separately from the complete sparse increment
+  packets, cancelling all intermediate scales exactly and leaving
+  `E_N-E_(2^(J+1)N)`.  The surviving outer boundaries and increment packets are
+  still indefinite, so this is the endpoint-energy tautology in refined
+  bookkeeping form, not a favorable residual, contraction, or RH result.
+- 2026-07-26: implemented a 192-bit Arb consecutive-scale Abel analyzer with
+  configurable dyadic base and depth and a hard maximum shell scale of `8192`.
+  It certifies separate boundary/cumulative telescoping, direct/packet/endpoint
+  recombination, and sign runs.  From base `2` through depth `13`, decrement
+  signs are `+++++--+-----`; boundary and cumulative packets change sign even
+  more often.  Tests certify the complete run.  No monotonicity is inferred.

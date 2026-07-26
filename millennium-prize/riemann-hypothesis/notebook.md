@@ -3384,10 +3384,82 @@ not control the sign; additional zeta-specific Euler-product or explicit-formula
 phase information is indispensable. See `finite-zero-shell-gram.md` and
 `lag-log2-zero-model-audit.md`.
 
-### Next queued main-funnel step
+## Cycle 35: exact dyadic Abel telescoping
 
-Sum the endpoint-safe Abel packets over consecutive dyadic scales and inspect
-whether their four-square boundaries telescope against the next shell. In
-parallel, apply Landau-type explicit formulas to the **weighted** lag kernel to
-test whether the Euler product supplies a sign-sensitive main term absent from
-abstract zero-density models.
+For each even scale `X`, write
+
+\[
+ T_r^{(X)}=rA_X-\psi(r)/\log X,
+ \qquad
+ E_X=\sum_{r=X/2}^{X-1}{X(T_r^{(X)})^2\over r(r+1)}.
+\]
+
+Endpoint-safe Abel summation, with the normalized shell weight retained, is
+
+\[
+ E_X=H_X+P_X,
+\]
+
+where
+
+\[
+ H_X=2(T_{X/2}^{(X)})^2-(T_{X-1}^{(X)})^2
+\]
+
+and
+
+\[
+ P_X=X\sum_{r=X/2+1}^{X-1}{1\over r}
+ \left(A_X-{\Lambda(r)\over\log X}\right)
+ (T_r^{(X)}+T_{r-1}^{(X)}).
+\]
+
+Therefore, for `X_j=2^jN`, both classes of complete packets telescope
+separately:
+
+\[
+\boxed{\sum_{j=0}^{J}(E_{X_j}-E_{X_{j+1}})
+=(H_N-H_{X_{J+1}})+(P_N-P_{X_{J+1}})
+=E_N-E_{2^{J+1}N}.}
+\]
+
+All four boundary squares and all increments at every intermediate scale
+cancel because the same complete Abel decomposition occurs once as a fine
+energy and once as a coarse energy.  There is no new cross-endpoint pairing:
+the surviving outer boundary still has opposite-signed squares, and the two
+outer increment packets still have unsigned increment-times-cumulative
+factors.  Thus the sum reduces tautologically to endpoint energies.  Taking
+absolute values loses the cancellation, while controlling the terminal energy
+as the number of scales grows is the original RH-strength problem.  Full
+formulas and the obstruction are in
+`cycle-35-dyadic-abel-telescoping.md`.
+
+## Cycle 35: adversarial Euler-product lag audit
+
+Landau's formula does supply zeta-specific phase information at the exact
+dyadic lag:
+
+\[
+ \sum_{0<\gamma\leq T}e^{i\gamma\log2}
+ =-{T\log2\over2\pi\sqrt2}+O(\log T)
+\]
+
+under RH.  Thus the phase-concentrated abstract models cannot model the actual
+zeta one-zero Fourier coefficient.  This does not settle the shell Gram sign.
+Landau's identity is a linear, one-zero statistic, while the shell zero block
+is a weighted two-zero statistic with kernel
+`S_N(bar(rho)+sigma)/(bar(rho)sigma)`, followed by subtraction of two Gram
+energies and by affine, endpoint, jump, and truncation corrections.
+
+For separable weights a pure pair phase factors as a modulus square, but this
+only proves positivity of each individual Gram norm.  Applying the explicit
+formula to those norms reconstructs the original `psi(k)` and `psi(2k)` shell
+square difference; it supplies no ordering and is circular if the required
+prime cross-window bound is then assumed.
+
+The missing result is a uniform one-sided weighted pair-correlation theorem for
+the full finite Mellin kernel, with an error below the cancellation residual
+and with all affine and truncation terms retained.  Montgomery's proved pair
+correlation theorem, and even the usual conjectural limiting pair law, do not
+directly provide this finite all-scale sign.  The detailed hostile audit is in
+`euler-product-lag-log2-adversarial-audit.md`.
