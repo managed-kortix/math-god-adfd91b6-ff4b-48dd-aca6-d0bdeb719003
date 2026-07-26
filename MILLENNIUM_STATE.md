@@ -37,14 +37,18 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   floor Gram forms, while fixed low modes are provably insufficient; the
   exact common-source cross-scale and signed-square decompositions are now
   derived and are provably indefinite; minimal rational certificates rule out
-  generic Loewner, contraction, and martingale arguments, so the current
-  sublemma is an odd-column Schur-complement bound after canonical dyadic
-  embedding of coarse floor space, after
+  generic Loewner, contraction, and martingale arguments; the exact odd-column
+  projection and positive Schur complement under canonical dyadic embedding
+  are now derived, including the actual Mobius coefficients and affine
+  residual; that Schur residual now collapses exactly to an odd prime-power
+  diagonal of asymptotic size `1/(4N log N)`, so the current sublemma is a
+  sparse left-null/divisor-incidence formula for the remaining pair-constant
+  affine residual, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 26
+- **cycle:** 28
 - **announcements:** none
 
 ## immutable target list
@@ -63,10 +67,10 @@ waiting process.
 
 ## next exact steps
 
-1. Orthogonalize odd fine-scale floor columns against the canonically embedded
-   coarse space and derive the exact positive Schur complement.
-2. Express the actual Mobius source in that basis and bound its odd residual
-   together with the signed affine correlation; generic sign routes are closed.
+1. Express `(I-P_C)(bar c-Hx)` in a sparse left-null basis of the coarse floor
+   matrix, using collisions of divisor-incidence rows.
+2. Derive its exact Lambda-valued collision coordinates and compare their
+   energy with the explicit odd prime diagonal; positivity has the wrong sign.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -283,3 +287,18 @@ waiting process.
   scale analyzer and clarified that its ambient two-channel inertia is not the
   common-source inertia.  The active target is the positive odd-column Schur
   complement after canonical dyadic embedding.  No solution is claimed.
+- 2026-07-26: derived the exact odd-divisor incidence formula for the Schur
+  complement.  On the actual Mobius-log source it collapses to
+  `sum Lambda(r)^2/(2 r^2 log^2(2N))` over odd shell integers and is asymptotic
+  to `1/(4N log N)`.  Thus orthogonalization removes Mobius cancellation and
+  exposes a nonzero prime diagonal.  Exact rational and Arb checks pass through
+  `N=64`.  The next target is the sparse pair-constant left-null residual.  No
+  solution is claimed.
+- 2026-07-26: derived the exact weighted dyadic isometry, orthogonal projection
+  of every odd fine floor column, and generalized positive Schur complement.
+  Inserted the actual normalized scale-`2N` Mobius coefficients, with
+  `mu(2d)=-1_(d odd)mu(d)`, and decomposed the full affine completed energy into
+  an effective embedded-coarse energy plus an explicit centered odd residual.
+  The signed completion shows that this positive residual is subtracted in the
+  desired cross-scale difference, so geometry alone still gives no
+  contraction.  No solution is claimed.

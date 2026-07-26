@@ -2507,3 +2507,334 @@ columns.  Compute the exact positive Schur complement of odd fine columns after
 projection onto the embedded coarse space, then express the actual Mobius
 coefficient pair in this orthogonalized basis.  Target an arithmetic estimate
 for the odd residual and its signed affine correlation.
+
+### Weighted parity Schur audit through N=64
+
+Implemented the queued finite audit in `analyze_parity_schur.py`, with details
+in `parity-schur-report.md`.  Under the exact weights `1/(k(k+1))`, the embedded
+even/coarse rank is `N/2`, the odd and full fine ranks are `N`, and the exact
+odd-against-coarse Schur rank is `N/2` for every dyadic `2 <= N <= 64`.
+
+The analyzer applies this exact rational projection to the actual Arb Mobius-log
+coefficient pair.  The projected/residual cross terms rigorously contain zero,
+and the Schur energy agrees with an independent direct fine-image energy
+calculation.  At `N=64`, the direct normalized fine energy is approximately
+`2.9043992041`, while the orthogonal odd residual contributes approximately
+`0.00071103223`.  The even/odd cross term is approximately `-5.7631556664`, so
+the arithmetic cancellation is large even though the positive Schur residual
+is small in these finite cases.
+
+## Cycle 27: exact odd-column projection and affine Schur residual
+
+The canonical embedding is most transparent with normalized shell weights.  On
+the coarse and fine shells put
+
+\[
+ w_k^-={N\over k(k+1)}\quad(N/2\le k<N),\qquad
+ w_j^+={2N\over j(j+1)}\quad(N\le j<2N),
+\]
+
+and define
+
+\[
+ (Ju)_{2k}=(Ju)_{2k+1}=u_k.
+\]
+
+The telescoping identity
+
+\[
+ w_{2k}^++w_{2k+1}^+=w_k^-
+\]
+
+makes `J` an exact isometry.  If
+
+\[
+ C_{kd}=\left\lfloor{k\over d}\right\rfloor,
+ \qquad E_{j d}=\left\lfloor{j\over 2d}\right\rfloor,
+\]
+
+then `E=JC`: the even fine columns are exactly the embedded coarse columns,
+including on the odd fine rows.  This is the canonical dyadic embedding; no
+interpolation or asymptotic approximation is involved.
+
+These weights are `2N` times the ordinary fine-shell matrix
+`diag(1/[j(j+1)])`; thus every formula below converts to the original completed
+energy by division by `2N`.  The normalization changes no projection or sign.
+
+Let the odd fine indices be `q=1,3,...,2N-1`, and write
+
+\[
+ O_{jq}=\left\lfloor{j\over q}\right\rfloor,
+ \qquad G=C^TW_-C,
+ \qquad P_C=CG^+C^TW_-.
+\]
+
+Here `G^+` is the Moore--Penrose inverse on `ran(G)`.  It is essential because
+the coarse floor columns need not be independent.  For `m_k=2k+1`, define
+
+\[
+ H_{kq}=\left\lfloor{2k\over q}\right\rfloor
+       +{k\over2k+1}\mathbf1_{q\mid 2k+1},
+ \qquad D_{kq}=\mathbf1_{q\mid2k+1}.
+\]
+
+The weighted adjoint of `J` gives the exact pair average
+
+\[
+ J^*O=H.
+\]
+
+Consequently the orthogonal projection and residual of every odd column are
+
+\[
+ \boxed{\Pi_EO=JP_CH,\qquad R_O=(I-\Pi_E)O=O-JP_CH,}
+\]
+
+where `Pi_E=JP_CJ^*`.  Equivalently, for a single odd `q`, its projected
+coarse coefficient vector can be chosen canonically as
+
+\[
+ \boxed{\gamma_q=G^+C^TW_-h_q,\qquad \Pi_Eo_q=JC\gamma_q.}
+\]
+
+There is also a useful orthogonal splitting of the residual.  The pairwise
+fluctuation `O-JH` is perpendicular to the whole range of `J`, while
+`J(I-P_C)H` is pair-constant.  Therefore
+
+\[
+ R_O=(O-JH)+J(I-P_C)H
+\]
+
+is an orthogonal sum.  Its Gram matrix, the positive odd-column Schur
+complement, is
+
+\[
+ \boxed{
+ S=O^TW_+(I-\Pi_E)O
+  =H^TW_-(I-P_C)H+T,}
+\]
+
+with the completely explicit arithmetic matrix
+
+\[
+ \boxed{
+ T_{qr}=\sum_{k=N/2}^{N-1}{N\over(2k+1)^2}
+       \mathbf1_{q\mid2k+1}\mathbf1_{r\mid2k+1}.}
+\]
+
+Thus `S` is positive semidefinite without any assumption on the source.  In
+ordinary unnormalized weights `1/[j(j+1)]`, the coefficient in `T` is
+`1/[2(2k+1)^2]`.  The formula is exactly the generalized Schur complement
+
+\[
+ S=O^TW_+O-(E^TW_+O)^T(E^TW_+E)^+(E^TW_+O),
+\]
+
+so it remains valid across every coarse rank defect.
+
+Now insert the actual normalized scale-`2N` Mobius source.  Put
+
+\[
+ e_d={\mu(2d)\log(N/d)\over\log(2N)},\qquad
+ x_q={\mu(q)\log(2N/q)\over\log(2N)},
+\]
+
+for `1<=d<=N` and odd `q<2N`.  The exact parity formula is
+
+\[
+ \boxed{\mu(2d)=-\mathbf1_{\{d\text{ odd}\}}\mu(d),}
+\]
+
+and hence, if `a_d=mu(d)log(N/d)/log N` and
+`alpha=log 2/log(2N)`, then
+
+\[
+ \boxed{e_d=-(1-\alpha)\mathbf1_{\{d\text{ odd}\}}a_d.}
+\]
+
+This is the exact even-source coefficient formula; in particular, it is not a
+copy of the full coarse Mobius source.
+
+To retain the affine center rather than silently homogenizing it, set
+
+\[
+ A=A_{2N}=\sum_{n\le2N}{\mu(n)\over n}
+                 {\log(2N/n)\over\log(2N)},
+ \qquad c_j=jA+1,
+\]
+
+and let `y=c-Ee-Ox` be the actual completed scale-`2N` vector on the fine
+shell.  Its weighted pair average and pair jump are
+
+\[
+ \bar c_k=1+A\left(2k+{k\over2k+1}\right),
+ \qquad y_{2k+1}-y_{2k}=A-(Dx)_k,
+\]
+
+so
+
+\[
+ J^*y=\bar c-Ce-Hx.
+\]
+
+Define the canonical effective coarse coefficient
+
+\[
+ \boxed{
+ \gamma=G^+C^TW_-(\bar c-Hx)-e.}
+\]
+
+Then the exact orthogonal decomposition of the actual normalized fine energy is
+
+\[
+ \boxed{
+ \|y\|_{W_+}^2
+ =\|C\gamma\|_{W_-}^2+\mathcal R_{\rm odd},}
+\]
+
+(The original unscaled scale-`2N` completed energy is the right-hand side
+divided by `2N`.)
+
+where
+
+\[
+ \boxed{
+ \mathcal R_{\rm odd}
+ =\|(I-P_C)(\bar c-Hx)\|_{W_-}^2
+  +\sum_{k=N/2}^{N-1}{N\over(2k+1)^2}
+       \left(A-\sum_{q\mid2k+1}x_q\right)^2.}
+\]
+
+Both terms are positive, but the second displays the arithmetic cancellation
+that an absolute-value argument would destroy.  Notice also that the affine
+center contributes to both residual terms.  Calling `x^TSx` the whole residual
+would be incorrect for the actual completed vector.
+
+For the signed completed-square needed in the endpoint comparison, define
+
+\[
+ r_0=(I-P_C)\bar c,\qquad
+ \ell=H^TW_-r_0+D^TV(A\mathbf1),\qquad
+ V=\operatorname{diag}\left({N\over(2k+1)^2}\right).
+\]
+
+Then the affine residual has the exact signed expansion
+
+\[
+ \boxed{
+ \mathcal R_{\rm odd}=x^TSx-2\ell^Tx+C_0,\qquad
+ C_0=\|r_0\|_{W_-}^2+A^2\mathbf1^TV\mathbf1.}
+\]
+
+Because `ell` lies in `ran(S)`, its completed-square form is
+
+\[
+ \boxed{
+ \mathcal R_{\rm odd}
+ =(x-S^+\ell)^TS(x-S^+\ell)
+  +C_0-\ell^TS^+\ell.}
+\]
+
+The last constant is nonnegative, since it is the squared distance of the
+affine residual from the odd residual range.  If `u` denotes the corresponding
+coarse completed vector on `N/2<=k<N`, the signed shell-energy comparison is
+therefore
+
+\[
+ \boxed{
+ \|u\|_{W_-}^2-\|y\|_{W_+}^2
+ =\|u\|_{W_-}^2-\|C\gamma\|_{W_-}^2
+  -(x-S^+\ell)^TS(x-S^+\ell)
+  -(C_0-\ell^TS^+\ell).}
+\]
+
+This preserves the affine centers and the sign of every completed square.  It
+also shows the limitation of the geometric step: the Schur residual is
+positive, but it is subtracted in the desired coarse-minus-fine comparison.
+The remaining arithmetic target is a joint estimate for the effective coarse
+term and the centered odd divisor-incidence residual; positivity of `S` alone
+cannot prove contraction.
+
+### Next queued main-funnel step
+
+Exploit the explicit odd incidence form.  First rewrite
+`A-(Dx)_k` using `mu(2d)` and divisor convolution at the odd integer `2k+1`;
+then test whether its affine correlation with `(I-P_C)(bar c-Hx)` has an exact
+von-Mangoldt completion.  Any bound must retain the signed center `ell`: a
+source-only estimate for `x^TSx` does not control the actual residual.
+
+## Cycle 28: odd Schur complement collapses to the prime diagonal
+
+The even fine columns span the full pair-constant space.  Consequently the odd
+Schur complement has the exact incidence formula
+
+\[
+\boxed{S_{d,e}=\sum_{\substack{N<r<2N\\r\text{ odd}\\d\mid r,\ e\mid r}}
+{1\over2r^2}.}
+\]
+
+This is stronger than the earlier abstract projection formula.  The residual
+of an odd column `d` is a sum over its odd multiples `r` in the shell, supported
+on the pair `(r-1,r)`.  On that pair its values are
+
+\[
+-{r-1\over2r},\qquad {r+1\over2r},
+\]
+
+and its exact weighted energy is `1/(2r^2)`.  Hence the Schur rank is exactly
+`N/2`: the shell columns `d=r` give an identity incidence block.  The complement
+is not low rank.
+
+For the actual normalized odd source
+
+\[
+x_d=\mu(d){\log(2N/d)\over\log(2N)},
+\]
+
+divisor convolution gives, for every odd shell integer `r>1`,
+
+\[
+\sum_{d\mid r}x_d={\Lambda(r)\over\log(2N)}.
+\]
+
+Therefore
+
+\[
+\boxed{x^TSx={1\over2\log^2(2N)}
+\sum_{\substack{N<r<2N\\r\text{ odd}}}{\Lambda(r)^2\over r^2}.}
+\]
+
+The Mobius signs disappear completely after orthogonalization.  Weighted PNT
+asymptotics yield
+
+\[
+x^TSx\sim {1\over4N\log N}.
+\]
+
+Thus the positive odd residual shrinks, but only at its natural prime-diagonal
+rate.  At the critical normalization `N log N x^TSx -> 1/4`; it is not an
+unexpected cancellation and cannot simply be discarded.
+
+The affine jump in the actual completed vector is
+
+\[
+A-{\Lambda(r)\over\log(2N)}.
+\]
+
+For prime `r` this is order one, not order `1/log N`; earlier speculation that
+the affine correction might be uniformly lower order is false.  The exact
+affine square must remain intact.  Schur positivity enters the desired
+coarse-minus-fine comparison with a minus sign and still does not imply
+contraction.
+
+The analyzer now verifies the incidence formula entrywise over the rationals
+and independently certifies the prime-power energy identity with Arb through
+`N=64`.
+
+### Next queued main-funnel step
+
+Compute the pair-constant null correction `(I-P_C)(bar c-Hx)` in the sparse
+left-null basis of the coarse floor matrix.  Its basis vectors arise from
+collisions of truncated divisor-incidence rows.  Derive the exact Lambda-valued
+coordinates of the affine vector on these collisions, and determine whether
+their energy cancels or reinforces the explicit odd prime diagonal.
