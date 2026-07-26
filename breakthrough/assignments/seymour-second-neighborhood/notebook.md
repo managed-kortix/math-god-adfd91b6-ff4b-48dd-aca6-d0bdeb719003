@@ -598,3 +598,18 @@ No audits yet.
 - **Next queued attack:** classify four-edge T-hole graphs by degree/cycle
   profile and target the `k=4` rows, where five or six B vertices dominate both
   C vertices and exact degree pressure forces at least four predecessor classes.
+
+## 2026-07-26 — tick 27
+
+- Classified the eleven four-edge T-hole shapes by the exact local invariant
+  `(number degree>=2, >=3, >=4, triangles, core edges)`. The independent K8
+  census checks all `C(28,4)=20475` edge sets; see
+  `experiments/test_m9_k4_shapes.py`.
+- Aggregate `k=4` rho 0--2 remains solver-hard and returned only UNKNOWN under
+  the current cap. Human degree pressure forces five or six common C-dominators
+  and at least four low-A predecessor classes, sharply isolating dirty endpoint
+  reuse as the obstruction.
+- **Next queued step:** implement the eleven-way k4 classifier in CNF and certify
+  shape shards, beginning with the clean matching and star-like shapes. In
+  parallel, attack the final k5/k6 rows via the C-to-root endpoint reserve and
+  internal-B-hole split.
