@@ -114,10 +114,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   missing recovery square is now exactly the Schur residual of the entire old
   `D_(M-1)` prefix against `U_(M-1)` and the new rows, with a Pythagorean probe
   telescope but no generic lower bound; one older `D_(M-2)` probe certifies the
-  historical windows only partly nontrivially and supplies no uniform theorem
+  historical windows only partly nontrivially and supplies no uniform theorem;
+  exact reciprocal-cell witnesses orthogonal to the full probe span give a
+  positive Chebyshev-staircase reserve, but it is of size `1/(M log^3 M)` and
+  captures under one percent of the historical reserve, while a tempting larger
+  global variance is invalid because the `U` slope varies cellwise
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 53
+- **cycle:** 54
 - **announcements:** none
 
 ## immutable target list
@@ -136,9 +140,9 @@ waiting process.
 
 ## next exact steps
 
-1. Bound the physical old-prefix Schur capture by exploiting complete Vasyunin
-   arithmetic, or couple its terminal residual directly to `N_U-V_D`; generic
-   probe hierarchies and scalar incoming data are now ruled out.
+1. Isolate and control the missing between-cell/global old-prefix reserve beyond
+   the explicit Chebyshev cell witnesses; only complete Vasyunin correlations
+   can supply the required two logarithms of additional scale.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -153,6 +157,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 54 constructed explicit reciprocal-cell witnesses
+  orthogonal to `U_(M-1)` and every new row, proving a universal positive lower
+  bound for the old-`D` Schur residual. A hostile audit corrected a larger but
+  invalid global staircase witness: `U_(M-1)` has a cell-dependent slope. The
+  valid cellwise reserve tends to a positive constant before multiplication by
+  `A`, but captures only `0.64%--0.85%` of historical old-`D` reserves and is
+  two logarithms below the fixed-strength deficit scale. It certifies no
+  delayed window and no RH result. No Millennium solution is claimed.
 
 - 2026-07-26: Cycle 53 identified the Cycle 52 missing square exactly as
   `A||(I-Pi_Z)D_(M-1)||^2=A log^2(M)||(I-Pi_Z)F_M||^2`, derived its generalized

@@ -4113,6 +4113,29 @@ numerators; generic Gram positivity controls only the denominator/frame side.
 Details are in `cycle-42-correlation-preserving-packet-lower-bound.md`. No RH
 result is claimed.
 
+## Cycle 54: explicit cell witnesses capture only a small reserve component
+
+On each reciprocal cell `k<t<k+1<M`, every new row and `U_(M-1)` is a multiple
+of `t`, while `D_(M-1)` has the additional constant `psi(k)`. Therefore
+
+\[
+h_k=\psi(k)[1-\log(1+1/k)t]\mathbf1_{(k,k+1)}
+\]
+
+is orthogonal to the complete Cycle 53 probe span and gives
+
+\[
+\|(I-\Pi_Z)D_{M-1}\|^2\ge
+\sum_{k<M}\psi(k)^2[1/(k(k+1))-\log^2(1+1/k)].
+\]
+
+The sum tends to a positive finite constant and has an explicit `k=2` lower
+bound. A larger global staircase variance is invalid because the coefficient
+of `t` in `U_(M-1)` varies by cell. Numerically the valid witnesses capture
+only about `0.64%--0.85%` of the historical old-`D` reserve and repair none of
+the failed local projections. Details and the correction are in
+`cycle-54-explicit-cell-witness.md`. No RH result is claimed.
+
 ## Cycle 42: exact affine cancellation and circularity audit
 
 Let `g_(T,k)=(0,sum_(rho in Z(T))k^rho/rho)` and let
