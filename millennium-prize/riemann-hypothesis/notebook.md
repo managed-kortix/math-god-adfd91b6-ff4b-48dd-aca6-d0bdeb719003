@@ -3463,3 +3463,61 @@ and with all affine and truncation terms retained.  Montgomery's proved pair
 correlation theorem, and even the usual conjectural limiting pair law, do not
 directly provide this finite all-scale sign.  The detailed hostile audit is in
 `euler-product-lag-log2-adversarial-audit.md`.
+
+## Cycle 36: weighted-pair route closure
+
+For one common finite zero cutoff, the shell decrement has the exact form
+
+\[
+D_N=A_{N,T}+Q_{N,T}+\Delta_{N,T}.
+\]
+
+The weakest complete weighted-pair statement sufficient for shell contraction
+is `Q_(N,T)>=-A_(N,T)-Delta_(N,T)`. Endpoint-correct explicit-formula
+substitution reduces it term by term to `D_N>=0`. It is therefore exactly the
+original shell target in zero coordinates. Using an absolute cutoff-error
+majorant makes the condition strictly stronger, while controlling the
+zero-zero block alone is insufficient.
+
+Montgomery's proved pair theorem reaches individual shell frequencies only
+after height localization, translation-invariant weighting, and Fourier-support
+restriction. The exact kernel has separate `1/(bar(rho)sigma)` weights, both
+signs and cross-height pairs, an atomic Mellin test, a signed Gram difference,
+and a required cancellation-scale one-sided error. Neither the proved theorem
+nor standard conjectural pair correlation supplies this finite augmented claim.
+
+Physical smoothing gives access to a two-level explicit-formula framework for
+fixed smoothness, but unsmoothing a transition of width `delta` costs the energy
+in `O(delta N+1)` boundary lattice points. Existing RH and local mean-square
+estimates cannot shrink `delta` to the required effective sub-lattice scale
+while retaining useful two-level errors. The missing theorem would have to be
+uniform for a shrinking Mellin test family and preserve the combined dyadic
+multiplier.
+
+A genuinely weaker intermediate statement uses
+
+\[
+G_N=-\langle u,\delta\rangle-{1\over2}R_{\rm jump},
+\qquad D_N=2G_N-\|\delta\|^2.
+\]
+
+For `c<1/2`, `G_N>=c||delta||^2` asserts favorable compensated alignment
+without contraction. The finite audited ratios exceed `0.3` at the five
+standard scales, including scales where contraction fails, but no asymptotic
+claim is made.
+
+The pointwise restricted-shell pair route is therefore closed as a reduction.
+Moreover, averaging restricted-shell decrements cannot imply the full
+Nyman--Beurling liminf criterion because the complete endpoint difference has
+other ranges. The active target returns to complete weighted block dissipation,
+where negative individual decrements are allowed and divergent accumulated
+weight forces `liminf P_N=0`. Details are in
+`cycle-36-weighted-pair-route-closure.md` and
+`weighted-pair-theorem-adversarial-audit.md`.
+
+### Next queued main-funnel step
+
+Derive the exact complete variable-block dissipation theorem, including the
+minimal covering and divergent-weight hypotheses. Then identify a smooth
+partition of the complete endpoint functional—not the restricted shell—on
+which cancellation-aware averaging could plausibly be applied.

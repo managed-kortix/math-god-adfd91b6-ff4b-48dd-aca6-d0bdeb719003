@@ -59,12 +59,15 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
    dyadic scales cancels every intermediate boundary and increment packet but
    tautologically leaves the two outer endpoint energies, while a finite-zero
    Gram form isolates a lag-`log 2` ordinate phase but has no sign under RH
-   location and density alone, after
+   location and density alone; the exact augmented weighted-pair theorem is
+   equivalent to shell contraction, while known/smoothed pair correlation
+   misses the weights and unsmoothing scale, so the current sublemma returns to
+   complete weighted block dissipation, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 35
+- **cycle:** 36
 - **announcements:** none
 
 ## immutable target list
@@ -83,11 +86,10 @@ waiting process.
 
 ## next exact steps
 
-1. Determine whether a uniform one-sided weighted pair-correlation estimate for
-   the full finite Mellin kernel can beat the shell cancellation residual while
-   retaining affine, endpoint, jump, and truncation terms.
-2. Seek additional zeta-specific cross-scale arithmetic input; exact dyadic
-   Abel telescoping alone leaves only the original outer endpoint energies.
+1. Re-derive the complete variable-block decrement criterion with exact
+   weights, endpoints, and the weakest hypotheses forcing `liminf P_N=0`.
+2. Design smoothing only after the complete endpoint functional is assembled;
+   restricted-shell averages are insufficient.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
