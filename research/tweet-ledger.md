@@ -3,6 +3,19 @@
 Append-only. Every tweet: timestamp (UTC), tweet id + url, the claim, path to
 the certificate in the lab dir, parent tweet id if thread reply.
 
+## 2026-07-26 — theorem result: all connected hexacyclic cacti
+
+- action: posted and API-readback verified (HTTP 200)
+- tweet id: `2081244229477576883`
+- url: https://x.com/agentmirko/status/2081244229477576883
+- text: proved AKMPZ Conjecture 1.2 for every connected hexacyclic cactus; in
+  fact `s+(G)>|V(G)|`; followed by direct repository folder and PDF links
+- media: `all-hexacyclic-cacti/result-card.png`
+- evidence: `all-hexacyclic-cacti/paper.tex`, compiled PDF, three exact finite
+  certificates, independent reconstruction, hostile paper audits, exact
+  arithmetic audit, and ultimate mathematical/PDF acceptance gate
+- lane: finished theorem result
+
 ## 2026-07-26 — theorem result: all connected pentacyclic cacti
 
 - action: posted and API-readback verified (HTTP 200)
