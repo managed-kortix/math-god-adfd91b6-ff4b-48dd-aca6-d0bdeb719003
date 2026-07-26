@@ -16,7 +16,7 @@ def exact(c,o,v):
 def and3(c,y,a,b,d):
     c.add(-y,a);c.add(-y,b);c.add(-y,d);c.add(y,-a,-b,-d)
 
-def emit(rho,shape,out):
+def build(rho,shape):
     c=generate(18,7,9,True,(),(0,1),True)
     for j in range(18):
         if j!=1:c.add(-c.var(f"h_{min(1,j)}_{max(1,j)}"))
@@ -47,6 +47,10 @@ def emit(rho,shape,out):
         y=c.var(f"k4core_{u}_{v}_{rho}_{shape}");core.append(y)
         and3(c,y,c.var(f"h_{u}_{v}"),ge2[u],ge2[v])
     exact(c,threshold(c,core,f"k4q{rho}{shape}"),nq)
+    return c,ge2,ge3
+
+def emit(rho,shape,out):
+    c,_,_=build(rho,shape)
     with open(out,"w",encoding="ascii",newline="\n") as f:
       for name,num in c.names.items():f.write(f"c var {num} {name}\n")
       f.write(f"p cnf {len(c.names)} {len(c.clauses)}\n")

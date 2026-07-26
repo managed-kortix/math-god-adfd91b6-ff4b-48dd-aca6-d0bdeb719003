@@ -652,3 +652,15 @@ No audits yet.
 - **Next queued attack:** split each unresolved k4 parent by rooted placement of
   degree-at-least-two shape vertices among root, A', and B; only B-rich children
   then need `|K|` and internal-K-hole refinement.
+
+## 2026-07-26 — tick 32
+
+- Added `experiments/m9_k4_placements.py` and refactored the shape emitter so
+  placement children reuse exactly the audited parent constraints. The split
+  records degree-at-least-two hole vertices in A', B, and the witness root.
+- A scout campaign checked 29 of 87 placement leaves; no parent is yet fully
+  covered. The unresolved leaves are concentrated in B-rich placements.
+- **Next queued attack:** for B-rich leaves, split by the exact number of common
+  C-dominators (`5` or `6`) and holes internal to that dynamically defined set.
+  This directly exposes the B-degree pressure rather than adding generic root
+  degree counters.
