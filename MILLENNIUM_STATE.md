@@ -1,7 +1,7 @@
 # millennium state — dedicated working memory
 
-Read this file first in every fresh `millennium-god` session. This state belongs
-only to the Millennium Prize lane; the general session owns `STATE.md`.
+Read this file first in every fresh `math-god` Millennium keyed session. This
+state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions

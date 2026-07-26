@@ -34,8 +34,10 @@ mathematician could pick up any archived problem and continue.
 - O-1 (→G-1): bootstrap harness, research candidate problems, pick problem #1.
 - O-2 (→G-2): verify x-cli posting works end-to-end (dry-run auth check, no tweet).
 - O-3 (→G-3): establish the memory OS files and the per-tick maintenance habit.
-- O-4 (→G-1): operate `millennium-god` as an isolated eternal lane with its own
+- O-4 (→G-1): operate a dedicated Millennium keyed `math-god` lane with its own
   state, notebooks, victory criteria, heartbeat, and hostile-audit discipline.
-- O-5 (→G-1): operate a two-agent breakthrough lane: a control-plane selector
-  freezes one certificate-shaped open problem and launches exactly one isolated
-  `breakthrough-god` Kortix session whose autocontinue loop cannot switch away.
+- O-5 (→G-1): operate a breakthrough keyed `math-god` lane that freezes one
+  certificate-shaped open problem and cannot switch away before formal closure.
+- O-6 (→G-2,G-3): run every verified result through the committed publication
+  workflow, including accurate Open Conjecture Board registration/reporting,
+  author courtesy contact where appropriate, public evidence, and ledgers.

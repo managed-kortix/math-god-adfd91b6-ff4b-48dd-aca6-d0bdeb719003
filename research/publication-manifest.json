@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "updated": "2026-07-26",
+  "results": [
+    {
+      "id": "akmpz-conjecture-1-2",
+      "kind": "open_conjecture",
+      "statement": "Every connected simple graph G with n vertices and m >= n+1 edges satisfies s^+(G) >= n.",
+      "source_url": "https://arxiv.org/abs/2506.07264v1",
+      "source_label": "Akbari--Kumar--Mohar--Pragada--Zhang, Conjecture 1.2",
+      "year": 2025,
+      "area": "Spectral graph theory",
+      "scope_status": "open_general_problem",
+      "ocb": {
+        "eligibility": "submit_open_conjecture",
+        "status": "verified_pending_review",
+        "public_id": null,
+        "submitted_at": "2026-07-26T13:48:00Z"
+      },
+      "evidence_folders": [
+        "positive-square-energy",
+        "weighted-theta",
+        "packing-two-square-energy",
+        "all-bicyclic-cacti",
+        "all-tricyclic-cacti",
+        "all-tetracyclic-cacti",
+        "all-pentacyclic-cacti",
+        "all-hexacyclic-cacti",
+        "all-heptacyclic-cacti",
+        "all-octacyclic-cacti",
+        "all-nonacyclic-cacti",
+        "all-decacyclic-cacti"
+      ],
+      "notes": "All listed papers are partial class results; none resolves the general conjecture."
+    },
+    {
+      "id": "akmpz-conjecture-9-2-i",
+      "kind": "claimed_resolution",
+      "statement": "For every connected graph G on n vertices, s^+(G)=n-1 if and only if G is a tree.",
+      "source_url": "https://arxiv.org/abs/2506.07264v1",
+      "source_label": "Akbari--Kumar--Mohar--Pragada--Zhang, Conjecture 9.2(i)",
+      "year": 2025,
+      "area": "Spectral graph theory",
+      "scope_status": "claimed_full_proof",
+      "paper_folder": "tree-equality-square-energy",
+      "evidence_url": "https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/tree-equality-square-energy/paper.pdf",
+      "ocb": {
+        "eligibility": "submit_open_conjecture_then_report_proof",
+        "status": "verified_pending_review_then_report_proof",
+        "public_id": null,
+        "submitted_at": "2026-07-26T13:54:00Z"
+      },
+      "author_contact": {
+        "status": "sent_2026-07-26",
+        "thread_id": "19f9eb42c3b5a084",
+        "recipient_role": "source paper submitting author"
+      },
+      "notes": "Do not report against Conjecture 1.2. Requires its own exact Board entry and public resolution action."
+    }
+  ],
+  "withheld_groups": [
+    {
+      "reason": "partial results are evidence for AKMPZ Conjecture 1.2, not standalone OCB conjectures or kills",
+      "folders": [
+        "positive-square-energy",
+        "weighted-theta",
+        "packing-two-square-energy",
+        "sharp-cactus-dnn",
+        "all-bicyclic-cacti",
+        "all-tricyclic-cacti",
+        "all-tetracyclic-cacti",
+        "all-pentacyclic-cacti",
+        "all-hexacyclic-cacti",
+        "all-heptacyclic-cacti",
+        "all-octacyclic-cacti",
+        "all-nonacyclic-cacti",
+        "all-decacyclic-cacti"
+      ]
+    },
+    {
+      "reason": "superseded or duplicate external packaging",
+      "folders": [
+        "all-rank-ten-cacti",
+        "triangle-one-mod-four-cactus",
+        "two-c5-bouquet-trees",
+        "two-c5-bridge-trees",
+        "two-c5-all-connectors"
+      ]
+    }
+  ]
+}

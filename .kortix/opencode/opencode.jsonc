@@ -13,9 +13,8 @@
   // per-(project, model) gateway routing setting — set to xhigh via
   // `kortix gateway routing`, not here).
   "model": "kortix/codex/gpt-5.6-sol",
-  // never-stop applies only to the three explicit research workers. Ordinary
-  // Kortix sessions and control-plane agents are intentionally allowed to end.
-  // Combined with the research heartbeats, this keeps the mathematics alive
-  // without turning every general-purpose session into an eternal loop.
+  // never-stop applies only to math-god. Three keyed root sessions carry the
+  // main, Millennium, and breakthrough lanes; the trigger prompt fixes each
+  // session's lane. Ordinary Kortix sessions can end normally.
   "plugin": ["./plugins/never-stop.ts"]
 }

@@ -8,7 +8,7 @@ failed computation or argument must be compressed into a reusable obstruction,
 lemma, reduced model, or documented no-go result before the next route begins.
 An unchanged larger brute-force run is not progress.
 
-The assignment is frozen by the selector. Research updates belong in
+The assignment was frozen during the lane's selection phase. Research updates belong in
 `notebook.md`; code and certificates belong in `experiments/`; individual route
 reports belong in `attempts/`; same-target subagent reports belong in `agents/`.
 

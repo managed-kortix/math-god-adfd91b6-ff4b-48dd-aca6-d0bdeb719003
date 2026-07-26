@@ -2,13 +2,12 @@ kortix_version: 2
 default_agent: math-god
 project:
   name: math-god
-  description: "A high-entropy autonomous mathematics laboratory. math-god has
-    broad freedom to pursue the strongest available mathematics while retaining
-    the human goals; millennium-god keeps permanent pressure on the six unsolved
-    Clay problems; breakthrough-god concentrates on one certificate-shaped
-    target; and kortix is the ordinary general-purpose agent with no eternal
-    continuation. Public claims remain exact, adversarially audited, and
-    reproducible."
+  description: "A high-entropy autonomous mathematics laboratory. One math-god
+    agent runs three isolated keyed lanes: the main trajectory, the six unsolved
+    Clay problems, and one frozen certificate-shaped breakthrough target. Kortix
+    remains the ordinary finite-purpose agent. Public claims are exact,
+    adversarially audited, reproducible, and distributed through the committed
+    publication workflow."
 env:
   required:
     - TWITTER_CONSUMER_KEY
@@ -34,77 +33,56 @@ agents:
     kortix_cli: all
     skills: all
     workspace: runtime
-  millennium-god:
-    connectors: all
-    secrets: all
-    kortix_cli: all
-    skills: all
-    workspace: runtime
-  breakthrough-selector:
-    connectors: all
-    secrets: all
-    kortix_cli: all
-    skills: all
-    workspace: runtime
-  breakthrough-god:
-    connectors: all
-    secrets: all
-    kortix_cli: all
-    skills: all
-    workspace: runtime
 triggers:
   - slug: math-heartbeat
-    name: math-god heartbeat → keep the eternal math session alive (every 6h —
-      never-stop is the motor, this is just the resurrection net)
+    name: math-god main lane heartbeat
     type: cron
     agent: math-god
     enabled: true
-    session_mode: reuse
+    session_mode: keyed
+    session_key: math-main-v2
     cron: 0 0 */6 * * *
     timezone: UTC
-    prompt: keep going. if you are mid-attack, just continue — do not restart. if
-      this session is fresh, read STATE.md, run `bash scripts/setup-harness.sh`,
-      and resume exactly where the notebook left off. push everything to the
-      public repo (git pull --rebase first). then back to the math. never stop.
+    prompt: "LANE=main. This root session permanently owns only the main lane.
+      Read STATE.md first; do not adopt MILLENNIUM_STATE.md or BREAKTHROUGH_STATE.md
+      as working memory. Continue the exact frontier rather than restarting. Run
+      `bash scripts/setup-harness.sh` when fresh. Pull --rebase, commit, and push
+      durable work. Apply the complete publication workflow in
+      research/procedural/PUBLICATION.md to every verified result. Never stop."
   - slug: millennium-heartbeat
-    name: millennium-god heartbeat → keep the dedicated Millennium Prize session
-      alive (offset every 6h)
+    name: math-god Millennium lane heartbeat
     type: cron
-    agent: millennium-god
+    agent: math-god
     enabled: true
     session_mode: keyed
-    session_key: millennium-prize-eternal
+    session_key: millennium-v2
     cron: 0 0 3/6 * * *
     timezone: UTC
-    prompt: continue the dedicated Millennium Prize program indefinitely. do not
-      work on non-Millennium problems. if mid-attack, preserve continuity; do
-      not restart or merely resurvey. if fresh, read MILLENNIUM_STATE.md,
-      millennium-prize/PROGRAM.md, and millennium-prize/prompt.md, then run
-      `bash scripts/setup-harness.sh`. advance the active exact lemma while
-      maintaining parallel proof and counterexample routes across all six
-      unsolved problems. record every attempt, pull --rebase, commit, and push
-      durable work. announce nothing unless a complete solution has survived
-      hostile verification and has a finished paper.pdf. always queue the next
-      concrete mathematical step. never stop.
-  - slug: breakthrough-selector
-    name: breakthrough selector → choose one certificate-shaped problem and maintain
-      one isolated worker
+    prompt: "LANE=millennium. This root session permanently owns only the six
+      unsolved Clay problems. Read MILLENNIUM_STATE.md and
+      millennium-prize/PROGRAM.md first; do not adopt STATE.md or
+      BREAKTHROUGH_STATE.md as working memory. Continue the active exact frontier,
+      maintain bounded scouts, and never call a partial result a solution. Pull
+      --rebase, commit, and push durable work. Apply
+      research/procedural/PUBLICATION.md only after every official-resolution
+      gate passes. Never stop."
+  - slug: breakthrough-heartbeat
+    name: math-god breakthrough lane heartbeat
     type: cron
-    agent: breakthrough-selector
+    agent: math-god
     enabled: true
     session_mode: keyed
-    session_key: breakthrough-selector-eternal
+    session_key: breakthrough-v2
     cron: 0 0 1 * * *
     timezone: UTC
-    prompt: run the breakthrough control loop. read BREAKTHROUGH_STATE.md and
-      breakthrough/PROGRAM.md. inspect live sessions before acting. if exactly
-      one healthy breakthrough-god session owns the active assignment, do not
-      duplicate it. if the lane is vacant or its last assignment is formally
-      closed, select exactly one high-value certificate-shaped open problem,
-      freeze a complete attack prompt, commit and push that assignment, and
-      launch a fresh independent Kortix session pinned to breakthrough-god.
-      record the worker session id. never research the selected problem in the
-      selector session and never run two workers at once.
+    prompt: "LANE=breakthrough. This root session permanently owns only the
+      frozen assignment in BREAKTHROUGH_STATE.md. Read that file,
+      breakthrough/PROGRAM.md, and the assignment prompt first; do not adopt
+      STATE.md or MILLENNIUM_STATE.md as working memory. If status is active,
+      never resurvey or switch targets. Select a new target only after a solved
+      or formally retired assignment has completed its publication/state closeout.
+      Pull --rebase, commit, and push durable work. Apply
+      research/procedural/PUBLICATION.md to a verified result. Never stop."
 connectors:
   - slug: google_drive
     provider: pipedream

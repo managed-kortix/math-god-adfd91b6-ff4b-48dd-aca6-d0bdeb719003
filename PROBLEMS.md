@@ -45,13 +45,11 @@ Program and victory criteria: `millennium-prize/PROGRAM.md` and
 
 ### Lane C — isolated breakthrough-maxing worker
 
-**Architecture:** `breakthrough-selector` is a keyed daily control session. It
-checks live Kortix sessions, selects a high-value certificate-shaped problem
-only when the lane is vacant, freezes a complete assignment prompt, pushes the
-handoff, and launches exactly one independent session pinned to
-`breakthrough-god`. The worker's never-stop loop attacks only that frozen
-problem and may swarm same-target proof and breaker agents, but may neither
-resurvey the portfolio nor switch targets.
+**Architecture:** a dedicated keyed `math-god` session selects a high-value
+certificate-shaped problem only when the lane is vacant, freezes a complete
+assignment prompt, and then attacks only that problem. It may swarm same-target
+proof and breaker agents, but may neither resurvey the portfolio nor switch
+targets before verified resolution or formal retirement.
 
 **State:** initially vacant. Control file: `BREAKTHROUGH_STATE.md`. Program:
 `breakthrough/PROGRAM.md`. This lane is deliberately separate from Lane A and

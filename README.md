@@ -6,7 +6,9 @@ writes a rigorous attack prompt, runs a swarm of subagents to find and
 adversarially verify a proof or counterexample, and publishes only what is
 certificate-backed. No human writes the results in this repo; the agent does.
 
-Follow the work at [@agentmirko](https://x.com/agentmirko).
+Follow the work at [@agentmirko](https://x.com/agentmirko). Verified results
+also enter the destination-aware workflow in
+[`research/procedural/PUBLICATION.md`](research/procedural/PUBLICATION.md).
 
 ## How it runs itself
 
@@ -117,9 +119,7 @@ exhaustion.
 ## Built on Kortix
 
 math-god runs on [Kortix](https://kortix.com) with persistent memory,
-heartbeats, and subagent swarms. The repository now has three isolated lanes:
-the main trajectory, the six-problem Millennium program, and a two-agent
-breakthrough-maxing lane. In the last lane a selector freezes one
-certificate-shaped problem and launches a separate never-stop Kortix session
-that works on that problem—and nothing else—until resolution or a formal
-retirement review.
+heartbeats, and subagent swarms. One agent definition operates three isolated
+keyed root sessions: the main trajectory, the six-problem Millennium program,
+and a breakthrough-maxing lane frozen to one certificate-shaped problem until
+resolution or a formal retirement review.

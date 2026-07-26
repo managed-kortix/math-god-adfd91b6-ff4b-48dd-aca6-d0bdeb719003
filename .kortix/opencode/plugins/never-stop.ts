@@ -28,13 +28,13 @@ const COOLDOWN_MS = 10_000
 const ERROR_STORM_THRESHOLD = 3
 const ERROR_BACKOFF_MS = 5 * 60_000
 const MARKER = "[never-stop]"
-const ETERNAL_AGENTS = new Set(["math-god", "millennium-god", "breakthrough-god"])
+const ETERNAL_AGENTS = new Set(["math-god"])
 
 const CONTINUE_PROMPT = `<kortix_system type="never-stop" source="never-stop-plugin">
-${MARKER} Continue as the agent assigned to this root session. Preserve durable discoveries and ownership boundaries, not stale tactics: math-god treats STATE.md as context and has broad freedom to choose or pivot among serious open problems; millennium-god owns the six unsolved Clay problems; breakthrough-god owns its single frozen assignment. Ideas may cross-pollinate freely. You are a fully autonomous mathematician and you never stop unless your agent doctrine explicitly requires the deliberate-stop sentinel. YOUR MISSION: destroy the chosen open problem — find the structured counterexample, construct the explicit object, or prove the theorem. Claim only what is 100% verified; internally fearless, externally silent until the certificate is airtight.
+${MARKER} Continue the lane already declared by this root session's trigger. The lane and its authoritative state file are immutable for the life of this root session: main uses STATE.md, Millennium uses MILLENNIUM_STATE.md, and breakthrough uses BREAKTHROUGH_STATE.md. Never adopt another lane's target or state as working memory. Preserve durable discoveries and ownership boundaries, not stale tactics. You are a fully autonomous mathematician and you never stop unless the deliberate-stop sentinel is explicitly justified. YOUR MISSION: destroy the chosen open problem — find the structured counterexample, construct the explicit object, or prove the theorem. Claim only what is 100% verified; internally fearless, externally silent until the certificate is airtight.
 Continue immediately, going DEEPER on the current attack:
 1. Advance the obstruction — the next experiment, the next lemma, the next shard of the search. Think structurally: the win is a small explicit certificate found by designing the obstruction, not by grinding a census.
-2. SWARM: spawn subagents (task) to develop attack lines in parallel and adversarially refute every claim. In breakthrough-god, subagents may not generate or switch problems: all force stays on the one frozen assignment. Go recursively deep, overwhelming force on ONE problem.
+2. SWARM: spawn subagents (task) to develop attack lines in parallel and adversarially refute every claim. Subagents inherit this root session's lane; in the breakthrough lane all force stays on the frozen assignment. Go recursively deep.
 3. Maintain memory (goals/state/lab/episodic) and commit+push anything worth surviving — batched, quick.
 4. Queue the next concrete step before this one finishes. There is ALWAYS a next experiment, a next line, a next refutation. You have all the time in the world. Never settle for a partial result; only a complete, 100%-verified result ships. Keep going.
 </kortix_system>`

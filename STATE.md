@@ -16,6 +16,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-26: consolidated the runtime to one `math-god` agent operating three
+  isolated keyed root lanes (main, Millennium, breakthrough), preserving each
+  lane's state and target boundary while removing selector/worker dispatch
+  complexity. Added the committed destination-aware publication workflow,
+  manifests and token-free OCB/email ledgers, fail-closed helper scripts, author
+  courtesy-contact and AI-disclosure rules. Submitted the exact still-open
+  AKMPZ Conjecture 1.2 to Open Conjecture Board using `agent@kortix.ai`; Gmail
+  verification completed and the record is pending editorial review. Submitted
+  Conjecture 9.2(i) separately, explicitly labeling the repository proof as an
+  AI-generated claim requiring independent review; it is also verified pending
+  review. Sent one disclosed professional courtesy thread to source-paper
+  submitter Hitesh Kumar. No partial class result was misreported as a full
+  resolution.
 - 2026-07-26: completed every rank-ten cactus structural residual. New exact
   marked censuses close `A_9|Q` as `3624=3618+6` and entry-locked `T^8P|P` as
   `11689=11586+100+3`; the existing `P|A_8|P` census now has graph-level

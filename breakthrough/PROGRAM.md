@@ -2,19 +2,11 @@
 
 ## Architecture
 
-This lane has two agents and one-way ownership.
-
-1. `breakthrough-selector` is the control plane. On a scheduled keyed session it
-   checks worker health, selects a problem only when the lane is vacant, writes
-   a complete frozen attack prompt, pushes it, and launches an independent
-   Kortix session pinned to `breakthrough-god`.
-2. `breakthrough-god` is the data plane. Its root session runs the never-stop
-   autocontinue loop and focuses exclusively on that assignment. It can swarm
-   same-target subagents but cannot select or switch problems.
-
-The selector sleeps after dispatch. The worker continues. This prevents the
-common failure mode in which one context continually rescores exciting problems
-instead of carrying one hard proof through repeated failed attacks.
+One `math-god` keyed root session owns this lane end to end. It selects only
+when `BREAKTHROUGH_STATE.md` is `vacant`, `solved`, or `retired`, freezes one
+assignment, and then remains on that assignment until verified resolution or a
+committed strategic retirement. This avoids selector/worker dispatch races while
+preventing continual rescoring of exciting problems.
 
 ## Selection scorecard
 
@@ -30,7 +22,7 @@ candidate from 1 to 5 on:
 - probability that a decisive obstruction can be reached in repeated sessions.
 
 Reject targets whose apparent victory is only a finite check, restricted model,
-conditional statement, numerical observation, or reformulation. The selector
+conditional statement, numerical observation, or reformulation. The lane
 records the shortlist and reasons but freezes exactly one winner.
 
 ## Assignment contract
@@ -45,7 +37,7 @@ Every `breakthrough/assignments/<slug>/prompt.md` must contain:
 6. adversarial/breaker routes;
 7. a first exact experiment and a next-lemma funnel;
 8. publication gates: top-level paper, PDF, artifacts, hostile audits, novelty
-   check, commit, and only then a simple solved-result post.
+   check, commit, and the complete `research/procedural/PUBLICATION.md` workflow.
 
 For a genuinely Tier-1 resolution, announcement becomes urgent only after all
 gates close: issue one definitive post immediately with the exact claim,
@@ -59,12 +51,9 @@ next construction. Repeating an unchanged brute-force search is not progress.
 
 ## Concurrency and recovery
 
-- At most one `breakthrough-god` root session may be active.
-- Before dispatch, the selector runs `kortix sessions status --all --json` and
-  reconciles it with `BREAKTHROUGH_STATE.md`.
-- Every durable handoff is committed and pushed before a new sandbox consumes
-  it. Sibling sessions pull with rebase before push.
-- If the worker crashes, the selector restarts or replaces that same assignment;
-  it does not choose a more fashionable problem.
-- The never-stop plugin handles ordinary idle events. Daily selector ticks are
-  a watchdog and dispatch mechanism, not a second research loop.
+- Exactly one keyed breakthrough root lane is configured.
+- Every durable update is committed and pushed; sibling lanes pull with rebase.
+- If the session crashes, the keyed trigger resumes the same assignment; it
+  does not choose a more fashionable problem.
+- The never-stop plugin handles ordinary idle events and the daily heartbeat is
+  only a resurrection net.
