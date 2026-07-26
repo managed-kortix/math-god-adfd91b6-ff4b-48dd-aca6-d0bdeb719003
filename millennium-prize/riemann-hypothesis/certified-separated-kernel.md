@@ -73,7 +73,7 @@ made.
 ## 3. Certified amplitude compression
 
 For integer `m>=1`, let `d=d_0+h`, where `|h|<=H<|d_0|`. The degree-`p`
-Taylor polynomial of `d^{-m}` has the exact uniform remainder bound
+Taylor polynomial of `d^{-m}` has the elementary integral-remainder bound
 
 \[
 \boxed{
@@ -86,6 +86,17 @@ Taylor polynomial of `d^{-m}` has the exact uniform remainder bound
 
 This follows directly from the integral Taylor remainder and is valid for
 either sign of `d_0`.
+
+For a positive center `z_0`, the absolutely convergent negative-binomial series
+gives the stronger bound
+
+\[
+\boxed{|R_{m,p}|\le \binom{m+p}{p+1}
+\frac{H^{p+1}}{z_0^{p+1}(z_0-H)^m}.}
+\tag{3.2}
+\]
+
+Unlike (3.1), this tends to zero for every fixed `H/z_0<1`.
 
 ## 4. Separated-block theorem
 
@@ -126,9 +137,15 @@ and
 E_{\rm amp}=\sum_{k=0}^{n}
 \frac{(k+1)!}{Q^{k+2}}
 \binom{k+p+1}{p+1}H^{p+1}
-\left[(d_0-H)^{-k-p-2}+(s_0-H)^{-k-p-2}\right].
+\left[\frac1{d_0^{p+1}(d_0-H)^{k+1}}
++\frac1{s_0^{p+1}(s_0-H)^{k+1}}\right].
 \tag{4.3}
 \]
+
+The direct Lagrange radius obtained by replacing the bracket with
+`(d_0-H)^(-k-p-2)+(s_0-H)^(-k-p-2)` is also valid, but can fail to decrease
+with `p` on a wide block. Formula (4.3) is smaller termwise and converges
+throughout `H<d_0`.
 
 These are absolute entrywise bounds. A degree-`p` polynomial in either `a-b`
 or `a+b`, after phase extraction, has complex separated rank at most `p+1`.
@@ -143,6 +160,11 @@ The rank does not contain `Q` or `n`; summing the inverse-power amplitudes first
 still produces one degree-`p` polynomial in each channel. However, useful error
 requires both fixed geometric admissibility `H/d_0<1` and a lower threshold on
 `Q(d_0-H)`. There is no geometry-free uniform-rank theorem.
+
+For selecting orders, evaluate the factorial far radius recursively through
+its first minimum and reject a block if that minimum exceeds its allocated
+radius. Then increase `p` until (4.3) meets the remaining budget. Every
+implementation comparison must use upper interval endpoints.
 
 For the sine kernel
 

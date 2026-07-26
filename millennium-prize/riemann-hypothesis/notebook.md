@@ -1728,3 +1728,52 @@ Dense near leaves must use exact kernel intervals, while admissible leaves use
 the phase-extracted expansion and signed local moments. Test first against the
 two-point cusp adversary, alternating Farey clusters, and rational grids before
 assessing `N=8192` complexity.
+
+## Tick 17 — outward-rounded block certificate and full tail completion
+
+Added `verify_separated_kernel.py`, an Arb verifier independent of the endpoint
+expansion through direct `Si`/`Ci` evaluation. It certifies the complex endpoint
+remainder, half-next-term disk, inverse-power Taylor bound, every entry of a
+compressed rational block, and the corresponding local-`l1` bilinear radius.
+At 192 bits, deterministic `19 by 19` alternating Farey and `7 by 7` rational
+grid blocks pass; an overlapping two-point cusp is correctly rejected. These
+are finite implementation tests, not asymptotic evidence.
+
+A second audit improved the amplitude theorem. The direct Lagrange radius was
+valid but could grow with degree on wide admissible blocks. Summing the
+negative-binomial absolute tail proves
+
+\[
+|R_{m,p}|\le \binom{m+p}{p+1}
+H^{p+1}/[z_0^{p+1}(z_0-H)^m],
+\]
+
+which decreases to zero for every fixed `H/z_0<1`. The separated-block radius
+and verifier now use this strictly stronger formula.
+
+The missing constant modes are completed exactly. The full endpoint tail is
+the constant term `(2mn-alpha n^2)/Q`, a linear constant--sine sum with
+
+\[
+S_Q(\omega)=\sin(Q\omega)/Q-\omega\operatorname{Ci}(Q\omega),
+\]
+
+and the existing two-channel sine-kernel quadratic form. This recovers the
+exact period mean and closes a scope gap in the prospective finite certificate.
+
+A cluster-tree complexity audit found that rationality alone permits quadratic
+hostile near clusters. With denominator cap `M`, however, distinct reduced
+fractions are separated by at least `1/[M(M-1)]`. At the approximately
+64-million harmonic cutoff and fixed order-one far threshold, this gives only
+`O(1)` forced-dense neighbors per frequency for `M<=16384`. It rules out that
+specific quadratic near-field obstruction but not excessive far-leaf count,
+rank, or accumulated radius.
+
+## Next queued main-funnel step
+
+Build the full one-dimensional cluster tree for a finite reduced-frequency
+realization, allocate a global radius using exact local coefficient masses, and
+include the constant and linear terms. Measure leaf count, selected orders,
+signed center, and accumulated radius at increasing moderate cutoffs. The next
+decisive test is whether far-field radii, rather than dense-neighbor count,
+destroy the endpoint contraction margin.

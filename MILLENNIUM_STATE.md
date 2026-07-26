@@ -12,13 +12,14 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   is now exactly reduced after a second domain audit corrected a transient
   restricted/full-space mix-up; coefficient-aware symmetric hierarchical error
   propagation and a phase-extracted analytic separated-block theorem are
-  proved, and the current sublemma is an outward-rounded implementation with
-  affordable theorem-weighted local radii, after
+  proved and an outward-rounded block verifier passes hostile finite tests; the
+  current sublemma is a full cluster-tree implementation with affordable
+  theorem-weighted local radii, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 14
+- **cycle:** 15
 - **announcements:** none
 
 ## immutable target list
@@ -37,10 +38,10 @@ waiting process.
 
 ## next exact steps
 
-1. Implement the proved analytic separated-block theorem with outward-rounded
-   Mobius moments and explicit local radii.
-2. Validate the implementation on dense moderate-size kernels and hostile
-   rational clusters, then assess realistic scaling to `N=8192`.
+1. Build a finite reduced-frequency cluster tree with exact local Mobius masses,
+   certified far leaves, dense near leaves, and completed constant modes.
+2. Measure its global center/radius on increasing moderate cutoffs and identify
+   whether leaf count, rank, or accumulated radius is decisive at `N=8192`.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -164,3 +165,11 @@ waiting process.
   vanishing of nonsquarefree denominator coefficients and the two-channel
   direct endpoint functional. Affordable certified ranks at `N=8192` remain
   open. No solution is claimed.
+- 2026-07-26: implemented and passed a 192-bit Arb separated-block verifier on
+  endpoint, Taylor, alternating Farey, rational-grid, and cusp-rejection tests.
+  Improved the valid but pessimistic amplitude radius by summing the exact
+  negative-binomial tail, restoring convergence for every geometrically
+  admissible block. Completed the constant--constant and constant--sine tail
+  formulas. A spacing audit rules out quadratic forced-near work at the large
+  harmonic cutoff for fixed threshold, but the global far-leaf radius remains
+  unresolved. No solution is claimed.

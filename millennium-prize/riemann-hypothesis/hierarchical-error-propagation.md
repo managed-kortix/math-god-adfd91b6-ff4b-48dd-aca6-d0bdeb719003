@@ -475,6 +475,40 @@ The constant--constant and constant--oscillatory terms of the full endpoint
 tail are separate finite expressions and must also be included in a complete
 certificate; (7.1) is not by itself the entire tail functional.
 
+Write the constant terms of the two fields as `m,n` and their sine amplitudes
+as `A_lambda,B_lambda`. The complete tail is
+
+\[
+\begin{aligned}
+\mathcal T_Q={}&\frac{2mn-\alpha n^2}{Q}\\
+&+2\sum_\lambda[nA_\lambda+(m-\alpha n)B_\lambda]S_Q(\omega_\lambda)\\
+&+2\sum_{\lambda,\mu}A_\lambda B_\mu K_Q(\omega_\lambda,\omega_\mu)
+-\alpha\sum_{\lambda,\mu}B_\lambda B_\mu K_Q(\omega_\lambda,\omega_\mu),
+\end{aligned}
+\tag{7.3}
+\]
+
+where
+
+\[
+S_Q(\omega)=\int_Q^\infty\sin(\omega t)t^{-2}\,dt
+=\frac{\sin(Q\omega)}Q-\omega\operatorname{Ci}(Q\omega).
+\tag{7.4}
+\]
+
+Thus the constant--sine term is a linear reduced-frequency sum. With
+unweighted aggregates it is exactly
+
+\[
+-\frac2\pi\sum_q\sum_{\substack{p\ge1\\(p,q)=1}}
+\frac{nU_q+(m-\alpha n)D_q}{p}S_Q(2\pi p/q).
+\tag{7.5}
+\]
+
+It can be enclosed using `Ci` or the imaginary projection of the endpoint
+expansion. The constant--sine period mean is zero, while equal-frequency sine
+products have mean `1/2`; hence (7.3) recovers the exact reduced period mean.
+
 ## 8. Minimal certificate payload
 
 A reproducible hierarchy certificate should record:
