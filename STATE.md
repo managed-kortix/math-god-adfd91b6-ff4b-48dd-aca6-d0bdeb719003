@@ -491,6 +491,16 @@ research/semantic, research/procedural).
   two-engine census m=11..18: 1,334,971 connected graphs.
 
 ## next steps
+0. MAIN THEOREM VERIFIED (2026-07-26): every connected tetracyclic cactus `G`
+   on `n` vertices satisfies `s+(G)>=n`.  Sharp DNN leaves only
+   `{3,3,3,q}` for odd `q` and `{3,3,5,5}`.  The first is closed by an exact
+   shared-cut-cluster territory construction (the earlier global `Phi` claim
+   was false and is explicitly not used).  The second is closed by bridge
+   packet arguments, an exact 20-core induced-packet audit for shared clusters,
+   and a separate common-root bouquet phase theorem.  The repaired standalone
+   manuscript passed two final hostile mathematical gates.  Paper:
+   `all-tetracyclic-cacti/`; exact packet audit:
+   `positive-square-energy/experiments/c3_c3_c5_c5_induced_packet_partitions.py`.
 0. MAIN THEOREM VERIFIED (2026-07-25): every connected tricyclic cactus `G`
    on `n` vertices satisfies `s+(G)>=n`.  The sharp cactus DNN constant leaves
    only cycle triples `{3,3,q}` (odd `q`) and `{3,5,5}`.  The first is closed

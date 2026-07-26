@@ -2028,3 +2028,35 @@ the graph with the two weighted pentagon factors and yields a strict margin.
 The final paper passed all audits and exact verification.  An adversarial
 enumeration checked all 151,696 connected tricyclic cacti through order 14;
 no counterexample occurred.  Paper: `all-tricyclic-cacti/`.
+# 2026-07-26: AKMPZ proved for every connected tetracyclic cactus
+
+For rank four, sharp cactus DNN reduces exactly to cycle multisets
+`{3,3,3,q}` with odd `q` and `{3,3,5,5}`.
+
+The `C333q` proof is territory-based.  For disconnected shared-cut clusters,
+verified lower-rank packets pay the bad-cycle deficit.  In one shared cluster,
+remove the `C_q` block and group triangle components by their distinct
+attachment vertices on `C_q`.  If there are `d>=2` attachment vertices,
+removing them splits `C_q` into path arcs; assign each arc interior to one
+adjacent triangular group.  The resulting connected induced triangular
+packets have credits summing strictly above `3-d>=0`.  If `d=1`, the
+three-triangle packet has credit `>2` and `C_q-v` is one tree packet of credit
+`-1`.  This replaces the false global `2R-Z_q I>0` claim, for which exact
+tree-realizable counterexamples were found.
+
+For `C3355`, disconnected clusters reduce to packet splits.  In the hostile
+`{335}|{5}` split, meeting internal triangles use the shared-triangle phase
+bound; disjoint triangles force the internal pentagon to meet both at distinct
+vertices, and breaking that pentagon at one attachment partitions into two
+triangular packets.  The external pentagon and connector join whichever packet
+owns the connector root, giving one mixed `C3,C5` packet and one triangular
+packet.
+
+For one connected shared-cut cluster, an exact census has 20 types.  Exhaustive
+induced-packet DP proves types 2--20; type 1, the common-root bouquet, follows
+from the general common-root lobe-state phase theorem.  The packet audit reports
+`exact_positive=18/20`, `strict_target=19/20`; the missing type is intentionally
+handled analytically.
+
+Two final hostile gates passed after repairing both proof details.  Paper:
+`all-tetracyclic-cacti/`.
