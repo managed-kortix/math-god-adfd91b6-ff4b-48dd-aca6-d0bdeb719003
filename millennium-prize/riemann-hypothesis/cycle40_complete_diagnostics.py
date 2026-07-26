@@ -75,7 +75,7 @@ def interval_text(value, digits=40):
 def write_csv(path, rows, interval_fields):
     fieldnames = list(rows[0])
     with path.open("w", newline="", encoding="ascii") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         for row in rows:
             writer.writerow({

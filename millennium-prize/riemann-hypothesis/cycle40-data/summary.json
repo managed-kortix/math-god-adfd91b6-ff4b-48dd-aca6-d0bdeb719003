@@ -1,0 +1,120 @@
+{
+  "scope": "certified finite diagnostic only; no theorem or RH claim",
+  "max_N": 2048,
+  "arb_precision_bits": 192,
+  "interval_format": "python-flint Arb balls",
+  "unit_count": 2046,
+  "certified_negative_unit_count": 12,
+  "sign_unresolved_unit_count": 0,
+  "weakest_local_kappa": {
+    "n": 96,
+    "interval": "[0.3547986979999973846627614434598728203480 +/- 2.58e-41]"
+  },
+  "strongest_local_kappa": {
+    "n": 199,
+    "interval": "[1.526154189086237307702703833126310589510 +/- 1.18e-40]"
+  },
+  "closest_local_kappa_to_half": {
+    "n": 98,
+    "interval": "[0.5007487496837444359577992296403639407211 +/- 1.95e-41]"
+  },
+  "weakest_local_kappa_from_227": {
+    "n": 592,
+    "interval": "[0.5069675703460458997180736973132578536017 +/- 1.94e-41]"
+  },
+  "deepest_cumulative_excursion": {
+    "start": 2,
+    "stop": 3,
+    "interval": "[-0.2163669852151686212562080999600917448073 +/- 4.51e-41]"
+  },
+  "longest_first_recovery": {
+    "start": 219,
+    "stop": 231,
+    "length": 12
+  },
+  "starts_without_recovery_by_boundary": [],
+  "certified_negative_unit_indices": [
+    2,
+    39,
+    40,
+    95,
+    96,
+    99,
+    100,
+    219,
+    220,
+    221,
+    222,
+    226
+  ],
+  "certified_negative_unit_runs": [
+    [
+      2,
+      2
+    ],
+    [
+      39,
+      40
+    ],
+    [
+      95,
+      96
+    ],
+    [
+      99,
+      100
+    ],
+    [
+      219,
+      222
+    ],
+    [
+      226,
+      226
+    ]
+  ],
+  "starts_with_negative_cumulative_excursion": [
+    2,
+    39,
+    40,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    217,
+    218,
+    219,
+    220,
+    221,
+    222,
+    224,
+    225,
+    226
+  ],
+  "negative_cumulative_start_runs": [
+    [
+      2,
+      2
+    ],
+    [
+      39,
+      40
+    ],
+    [
+      93,
+      100
+    ],
+    [
+      217,
+      222
+    ],
+    [
+      224,
+      226
+    ]
+  ]
+}
