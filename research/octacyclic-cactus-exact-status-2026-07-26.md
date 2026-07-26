@@ -2,6 +2,17 @@
 
 **Date:** 2026-07-26
 
+**Later analytic update.** The fully shared common-cut bouquets `(F7Q)` and
+the common-cut `T^6PP` bouquet are now proved, with arbitrary attached trees,
+by the exact rooted Schur-Sachs inequality in
+`research/common-cut-bouquet-rooted-schur-2026-07-26.md`. Its quantitative
+bounds are `sigma(T^7Q)>7-delta_q>6` in the hostile case (and `>7`
+otherwise), and `sigma(T^6PP)>7-4/(3sqrt(13))>6`. Statements below that list
+these two bouquets as open describe the status before that update. The rooted
+guard theorem in `research/rooted-hostile-cycle-guard-absorption-2026-07-26.md`
+also proves every bridge-separated `T^7|Q` case. The two-pentagon endpoint and
+short-router problems remain open.
+
 ## 1. Scope and verdict
 
 Write
@@ -24,20 +35,24 @@ T^6 PP = {3,3,3,3,3,3,5,5}.
 All nonresidual cycle multisets are proved. Large structural portions of both
 residual families are also proved without an incidence census:
 
-- every disconnected `T^7Q` configuration having a `Q`-free leaf cluster of
-  at most six triangles;
-- every disconnected `T^6PP` configuration having an all-triangle leaf
-  cluster, and every nonconcentrated pentagon-ended reduced path;
-- every fully shared `T^7Q` configuration except the eight-cycle bouquet;
+- every disconnected `T^7Q` configuration;
+- every disconnected `T^6PP` configuration except the exact entry-locked
+  leaf-pentagon class (G6PP) inside `T^6P|P`;
+- every fully shared `T^7Q` configuration, using the later rooted Schur-Sachs
+  theorem for the eight-cycle bouquet;
 - every fully shared `T^6PP` configuration with an internal pentagon;
 - every fully shared `T^6PP` configuration with both pentagons as leaves and a
-  safe internal-triangle split.
+  safe internal-triangle split, together with the common-cut bouquet by the
+  later rooted Schur-Sachs theorem.
 
-The remaining obstruction set is structural, not enumerative. Its definite
-members are concentrated common-cut bouquets; likely additional members are
-short one- or two-triangle router spines whose endpoint hubs carry the two
-hostile leaves. A complete endpoint-entry lemma has not yet been proved, so the
-word "likely" is essential. The present packet bounds do not close these cores.
+The remaining obstruction set is structural, not enumerative. The fully shared
+`T^6PP` ordinary-split census has five nonbouquet router types still requiring
+a quantitative or nonadditive argument. In the
+disconnected case the sole remaining locked-entry class is (G6PP) of
+`research/octacyclic-disconnected-exact-reduction-2026-07-26.md`, stated by an
+exact incidence degree and entry condition and not reduced to a conjectural
+short-router list. The rooted guard theorem closes the former (G7Q) endpoint.
+The present two-pentagon packet bounds do not close (G6PP).
 In particular, the proved heptacyclic theorem is qualitative and cannot pay a
 tree-opening cost or a pentagon deficit.
 
@@ -151,16 +166,18 @@ A_7+Q > 0-delta_q
 
 is not validly positive. This is the first genuinely new rank-eight issue.
 
-There are two useful sufficient repairs. If an incidence-leaf triangle has its
-cyclic mark distinct from the projected connector-entry mark, split that
-triangle at the two marks; the resulting `A_6+Q` ledger is
-`>1-delta_q>0`. More generally, an interval-compatible internal-triangle split
-closes whenever the `Q` territory contains a triangular guard, or when an
-isolated `Q` is opposed by an `A_r`, `r>=2`, packet. These tests settle many
-nonbouquet incidences.
-
-They do not yet constitute an exhaustive endpoint-entry lemma. In particular,
-the definite obstruction is:
+An exact internal-incidence argument now closes every nonbouquet `A_7|Q`
+cluster. A nonbouquet triangle incidence tree has an internal triangle. Split
+it at its cyclic marks, adding a private external entry as a mark when needed.
+If the `Q` territory retains at least one triangle, the heptacyclic and
+lower-rank packet bounds close the split, with another strict triangular branch
+in the sole weak tricyclic case. If it retains none, the entry consumes one of
+the triangle's at most three marks, so the other six triangles occupy at most
+two branches; one has at least three triangles and surplus `>2`, absorbing
+`Q>=-delta_q`. If no triangle is internal, all triangle nodes are leaves and
+the incidence tree has one cut node, so the cluster is a bouquet. A private
+entry on one bouquet triangle gives a two-mark split and the positive ledger
+`A_6+Q>1-delta_q`. Thus the exact obstruction is:
 
 ```text
 seven triangles form one common-cut bouquet at x,
@@ -170,10 +187,10 @@ and the connector to Q enters that bouquet at x.                 (D7Q)
 The connector may have arbitrary positive length and arbitrary attached trees.
 Abstractly this is an `A_7|Q` bridge-bouquet, not a fully shared bouquet.
 Opening `Q` costs one and leaves only the qualitative margin `A_7>0`; opening
-triangles makes the ledger worse. Thus (D7Q) is a real gap in the present
-method, not an omitted easy leaf case. Other `A_7|Q` entry incidences are not
-claimed proved until the cyclic-order and coincident-mark cases of the endpoint
-split are established.
+triangles makes the ledger worse. Thus (D7Q) is a real gap in the additive
+packet method, not an omitted easy leaf case. The later rooted hostile-cycle
+guard theorem closes it uniformly over the connector and attached trees. All
+`A_7|Q` incidences are therefore proved.
 
 ## 5. Disconnected shared-cut graph: `T^6PP`
 
@@ -192,43 +209,25 @@ the endpoint packet is itself strict. Thus every such row closes. The value
 If both endpoint clusters are singleton pentagons and there are at least two
 intervening triangle clusters, take one endpoint pentagon together with the
 nearest triangle cluster as one terminal territory. The same `T^rP` ledger,
-together with the nonempty remainder, closes the row. Hence the cluster-level
-reduction leaves two concentrated rows:
+together with the nonempty remainder, closes the row. An exact colored
+partition census, followed by the same reduced-tree leaf/path argument, leaves
+only one concentrated row:
 
 ```text
-T^6P | P,   and   P | T^6 | P.                           (D6PP)
+T^6P | P.                                                (D6PP)
 ```
 
-This reduction is structural and does not enumerate set partitions or reduced
-tree topologies. In `T^6P|P`, splitting the clustered pentagon closes every
-case in which it is internal: if the remote pentagon is isolated, six triangles
-in at most four other branches force an `A_2` margin greater than one. The
-unresolved subcase has that pentagon as an incidence leaf and an external entry
-whose ownership cannot yet be released by the available interval lemma.
+The exact census has 77 colored partitions, 76 proper partitions, 70 direct
+rows, and six ledger exceptions; five exceptions are discharged by the
+reduced-tree argument. In `T^6P|P`, splitting the clustered pentagon closes
+every case in which it is internal. If it is an incidence leaf and the entry is
+private on that pentagon, a two-mark split gives `A_6+P>1-delta>0`. The exact
+unresolved class has pentagon incidence degree one and entry at its unique cut
+or through the triangular component at that cut.
 
-Inside the second row of (D6PP), regard the two external connector entries as
-distinguished endpoint marks on the central six-triangle incidence tree.
-Splitting an internal triangle is safe whenever both pentagon sides retain a
-triangle, when both pentagons lie in one branch, or when a third all-triangle
-branch supplies the quantitative margin. If a three-way split produces an
-isolated pentagon and a singleton-triangle branch, merge the two adjacent marks into one interval
-to form a positive `TP` territory.
-
-The natural pruning conjecture is that every still-unresolved (D6PP) object has
-the following reduced form:
-
-- every internal triangle lies on the path between the two connector entries;
-- each such split has a singleton-pentagon side containing no other triangle;
-- the connector-to-connector spine has at most two internal triangle nodes;
-- all remaining triangles are petals at the one or two endpoint cut hubs.
-
-The heuristic is that an off-spine internal triangle has both pentagons in one
-branch, while three internal triangles on the spine give a middle split with a
-triangle on both pentagon sides. Turning this into a theorem requires checking
-cyclic interval order, coincident connector entries, and ownership at saturated
-triangles. Thus the common-cut central bouquet is a proved obstruction, while
-the one-triangle two-hub router and two-triangle router chain are the likely
-exceptional forms, not an exhaustive proved list.
+The former second row is now closed directly. Cutting the two bridge interfaces
+gives `A_6+P+P`, with total surplus
+`>1-2(sqrt(5)-2)=5-2sqrt(5)>0`. Thus `P|T^6|P` is not an octacyclic gap.
 
 ## 6. One fully shared `T^7Q` cluster
 
@@ -291,18 +290,14 @@ P | T^5P,
 
 obtained after destroying the router triangle. The `T^5P` side is qualitatively
 positive but has no known uniform margin to absorb the isolated pentagon's
-deficit. Requiring every internal-triangle split to have this extreme form
-suggests the same short-spine geometry as in Section 5:
-
-- the common-cut `T^6PP` bouquet (no internal cycle node);
-- a one-triangle router between two endpoint cut hubs;
-- a two-triangle router chain;
-- all other triangles are leaf petals on the endpoint hubs.
-
-These include the likely exceptional bouquets and two-hub configurations. They
-are not counterexamples. The bouquet is a definite stopped case; proving that
-the routers exhaust all other stopped incidences is the missing structural
-leaf-leaf lemma.
+deficit. The exact color-preserving incidence census in
+`research/octacyclic-fully-shared-incidence-census-2026-07-26.md` finds six and
+only six ordinary-split exceptions: the common-cut bouquet and five
+nonbouquet common-cut/router decorations. The rooted Schur-Sachs theorem closes
+the bouquet. The other five are not counterexamples, but they remain outside
+the current packet and common-pivot arguments. The census does not enumerate
+cyclic mark order, so it is an exact abstract-incidence boundary rather than a
+spectral proof of those five classes.
 
 ## 8. Why the heptacyclic theorem does not finish the cores
 
@@ -314,13 +309,14 @@ positive constant. Consequently none of the following deductions is valid:
 (heptacyclic strict packet) + (isolated P of surplus at least -delta) > 0.
 ```
 
-This blocks the tempting operations on every remaining core:
+This blocks the tempting operations on the remaining two-pentagon endpoint and
+router cores:
 
-- open `Q` in (F7Q), leaving an `A_7` packet;
-- cut (D7Q) as `A_7+Q`;
 - split a terminal router triangle as `P+T^5P`;
-- open both pentagons in a `T^6PP` bouquet, leaving `A_6-2`, whose certified
-  ledger is only `>1-2`.
+
+The analogous common-cut bouquet openings are no longer gaps: the later rooted
+Schur-Sachs theorem closes both fully shared bouquets without opening cycles,
+and the rooted guard theorem closes the bridge-separated (D7Q) endpoint.
 
 A complete proof therefore needs one genuinely new quantitative or
 non-additive ingredient. Plausible targets are a root-aware positive margin for
@@ -330,28 +326,28 @@ charge one full tree unit per opened cycle.
 
 ## 9. Exact status
 
-Proved without census:
+Proved by the structural reductions and exact census:
 
 1. the complete DNN residual classification `T^7Q` and `T^6PP`;
 2. every nonresidual connected octacyclic cactus;
-3. all fully shared `T^7Q` incidences except the common-cut bouquet;
+3. all fully shared `T^7Q` incidences, including the common-cut bouquet by the
+   rooted Schur-Sachs theorem;
 4. all fully shared `T^6PP` incidences with an internal pentagon;
 5. all other fully shared `T^6PP` incidences admitting a nonextreme
-   internal-triangle split;
-6. every disconnected `T^7Q` configuration with a `Q`-free triangle leaf of
-   size at most six, plus the stated safe entry splits in `A_7|Q`;
+   internal-triangle split, plus the common-cut bouquet;
+6. every disconnected `T^7Q` configuration, including the locked
+   bridge-bouquet (G7Q) by rooted guard absorption;
 7. every disconnected `T^6PP` configuration with an all-triangle leaf and
-   every nonconcentrated pentagon-ended reduced path; the only cluster-level
-   residual rows are (D6PP).
+   every singleton-triangle partition row; `P|T^6|P` completely; and
+   `T^6P|P` outside the exact locked-entry class (G6PP).
 
 Not proved:
 
-1. the unresolved endpoint-entry incidences of `A_7|Q`, including the definite
-   bridge-bouquet (D7Q);
-2. the fully shared bouquet (F7Q);
-3. the leaf-pentagon `T^6P|P` entry core and the common-cut `T^6PP` cores;
-4. the endpoint-entry lemma needed either to prove or enlarge the likely
-   one-/two-router exceptional list in fully shared and disconnected settings.
+1. the exact entry-locked leaf-pentagon class (G6PP) inside `T^6P|P`;
+2. the five nonbouquet fully shared `T^6PP` abstract incidence types left by
+   the exact ordinary-split census;
+3. a quantitative two-interface or matrix-valued phase lemma capable of
+   closing those pentagonal endpoint and multi-pivot classes.
 
 Accordingly, the statement
 
