@@ -11,12 +11,12 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   gcd variance are settled but strategically insufficient; the full Gram form
   is now exactly reduced after a second domain audit corrected a transient
   restricted/full-space mix-up, and the current
-  sublemma is a rigorous near/far decomposition of the dense weighted rational
-  frequency kernel, after reduced-frequency aggregation was validated but found
-  computationally quadratic at useful resolution
+  sublemma is certified hierarchical compression of the weighted rational
+  frequency kernel, after global low rank and Farey-neighbor-only splits were
+  falsified but blockwise geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 12
+- **cycle:** 13
 - **announcements:** none
 
 ## immutable target list
@@ -35,12 +35,10 @@ waiting process.
 
 ## next exact steps
 
-1. Prove a rigorous near/far expansion for the weighted sine kernel on reduced
-   rational frequencies, with exact Farey-neighbor treatment and a certified
-   collective far remainder.
-2. Prototype a subquadratic interval algorithm for the direct endpoint form and
-   attack it with adversarial clustered rational frequency sets before scaling
-   to `N=8192`.
+1. Replace numerical H-matrix SVD blocks by certified analytic separated-block
+   expansions with local coefficient-norm error propagation.
+2. Validate the certified hierarchy on dense moderate-size kernels and hostile
+   rational clusters, then assess realistic scaling to `N=8192`.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -142,3 +140,10 @@ waiting process.
   dense weighted bilinear kernel; common-period remainder bounds are
   exponential. The active missing lemma is a rigorous near/far kernel
   decomposition enabling subquadratic certification. No solution is claimed.
+- 2026-07-25: proved interval-ready near and far expansions for the weighted
+  cosine/sine kernel. Hostile clustered rational sets falsified the proposed
+  Farey-neighbor-only near field: quadratically many non-neighbor near pairs
+  can control the signed answer. Numerical prototypes show that geometric
+  H-matrix blocks have low rank, whereas one global low-rank far field fails.
+  The active task is a certified analytic hierarchical expansion with local
+  error control. No solution is claimed.

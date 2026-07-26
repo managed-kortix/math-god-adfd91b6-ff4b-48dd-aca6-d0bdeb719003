@@ -1524,3 +1524,106 @@ certified low-rank expansion. The goal is a subquadratic interval algorithm for
 the direct endpoint bilinear form. Simultaneously construct hostile rational
 frequency sets to test every proposed far-kernel low-rank bound. Without this
 kernel theorem, scaling the validated Fourier route is computationally blocked.
+
+## Tick 14 — interval-ready kernel theorem and failure of neighbor-only splitting
+
+Define
+
+\[
+C_Q(\omega)=\int_Q^\infty\cos(\omega t)t^{-2}dt
+=Q^{-1}F(Q|\omega|),
+\]
+
+where
+
+\[
+F(x)=\cos x-\frac{\pi x}{2}+x\operatorname{Si}(x).
+\]
+
+### Lemma 9 (certified near/far expansions)
+
+For `x>=0`,
+
+\[
+\boxed{F(x)=1-\frac{\pi x}{2}+
+\sum_{m\ge1}\frac{(-1)^{m+1}x^{2m}}{(2m-1)(2m)!}.}
+\]
+
+On a bounded near interval, truncation is enclosed by the first omitted term
+once successive magnitudes decrease. For every far `x>0` and integer `M>=1`,
+
+\[
+\boxed{F(x)=-\sum_{k=1}^M
+\frac{k!\cos(x-k\pi/2)}{x^k}+R_M(x),
+\qquad |R_M(x)|\le\frac{2(M+1)!}{x^{M+1}}.}
+\]
+
+### Proof
+
+The near series follows from the Taylor series for cosine and sine integral.
+Repeated integration by parts in `int_x^infinity sin(u)/u du` gives the far
+series and Dirichlet remainder. QED.
+
+For sine frequencies `a,b>=0`,
+
+\[
+\boxed{K_Q(a,b)=\int_Q^\infty\sin(at)\sin(bt)t^{-2}dt
+=\tfrac12[C_Q(a-b)-C_Q(a+b)].}
+\]
+
+The direct near expansion begins
+
+\[
+K_Q(a,b)=\frac\pi2\min(a,b)-Qab+
+\frac{Q^3ab(a^2+b^2)}{18}+\cdots,
+\]
+
+with an explicit sum of first-omitted-term remainders. The cusp at `a=b` is
+real: `C_Q` is not differentiable at zero. Away from the diagonal, integration
+by parts factors the oscillation `exp(iQ(a-b))` exactly and leaves inverse
+powers of `a-b`, which admit certified Chebyshev or exponential-sum
+approximations. This yields blockwise low rank independent of `Q times range`
+once `Q times separation` is sufficiently large.
+
+### Hostile cluster obstruction
+
+Exact Farey neighbors are not the full near field. There are `K` reduced
+fractions of denominator at most `M`, clustered in an interval of diameter
+`O(K/M^2)`, with `Theta(K^2)` mutually near pairs but only `K-1` Farey-neighbor
+edges. Signed coefficients can make those `Theta(K^2)` terms cancel to
+`Theta(K)`. A neighbor-only exact treatment plus fixed-accuracy far
+approximation can therefore give the wrong leading value. The approximation
+error must scale with the signed cluster, not merely entrywise kernel accuracy.
+
+Thus geometric cluster separation, not Farey adjacency, is the valid notion of
+near/far.
+
+### Prototype verdict
+
+A moderate-size hierarchical prototype sorted the reduced rational frequencies,
+kept overlapping blocks dense, and compressed separated blocks. Ranks `4--8`
+gave high numerical accuracy, while a single global low-rank approximation and
+an exact Farey-neighbor band plus one global far approximation both failed.
+This identifies an H-matrix-type structure, but the prototype used ordinary
+floating point and SVD and is not a certificate.
+
+A positive quadrature representation also gives a global Gram factorization
+
+\[
+K_Q(\omega,\nu)\approx\sum_{j=1}^r w_j
+\sin(\omega t_j)\sin(\nu t_j),\qquad w_j>0,
+\]
+
+with explicit uniform error. Its rank scales with time-bandwidth, so it is
+useful for blocks but not as one global approximation at the required accuracy.
+
+## Next queued main-funnel step
+
+Replace empirical SVD blocks by a certified analytic H-matrix expansion. For
+each separated pair of frequency intervals, use the integration-by-parts
+oscillatory factor and a Chebyshev or exponential-sum approximation to inverse
+powers, with outward-rounded remainder. Prove a blockwise bilinear error bound
+using local coefficient norms rather than global `l1` mass. Then validate the
+certified hierarchy against dense moderate-size kernels and the hostile
+rational clusters before scaling. The unresolved theorem is now certification
+of hierarchical compression, not identification of kernel structure.
