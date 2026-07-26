@@ -49,3 +49,21 @@ is genuinely nonconstant.  However, writing
 `p(a sin y partial_x|u|+b sin x partial_y|u|)` is odd in one coordinate, so its
 torus integral is exactly zero.  The two-shear reverse-pair family is therefore
 another decisive symmetry obstruction.
+
+## Bounded scout cycle 41
+
+Frequency and phase changes do not rescue the two-shear ansatz.  For
+
+`u=(a sin(my+alpha),b sin(nx+beta),0)`
+
+the mean-zero pressure is
+
+`p=2abmn cos(my+alpha)cos(nx+beta)/(m^2+n^2)`.
+
+In `int p u.grad|u|`, the first summand is odd in the phase-centered `x`
+variable: its `x` dependence contains
+`sin(nx+beta)cos(nx+beta)^2` divided by a function even in the sine.  The
+second summand is likewise odd in the centered `y` variable.  Therefore the
+pressure contribution is exactly zero for every pair of integer frequencies,
+phases, and amplitudes.  A viable pressure-growth candidate must introduce a
+genuinely nonseparable interaction rather than detune this family.

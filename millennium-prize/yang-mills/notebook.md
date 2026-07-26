@@ -45,3 +45,17 @@ forms.  Nevertheless `T_n e_n=e_n` and `||T_n||=1` for every `n`, so every
 cutoff transfer Hamiltonian still has zero gap.  A strongly convergent,
 strictly contractive continuum transfer operator does not by itself yield the
 uniform full-complement estimate required before taking the limit.
+
+## Bounded scout cycle 41
+
+Escaping states survive convergence at every fixed integer Euclidean time, not
+only at one transfer step.  For `T_n=qI+(1-q)P_(e_n)` and every `k>=1`,
+
+`T_n^k=q^kI+(1-q^k)P_(e_n)`.
+
+Thus `T_n^k -> q^kI` strongly for each fixed `k`, so all fixed-state
+integer-time correlators converge with exponential factor `q^k`.  Yet
+`T_n^k e_n=e_n` and `||T_n^k||=1` for every cutoff and every `k`; the cutoff
+transfer Hamiltonian still has zero gap.  Simultaneous strong convergence of
+all fixed transfer powers is therefore insufficient without a uniform
+full-vacuum-complement bound.

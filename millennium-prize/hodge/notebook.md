@@ -42,3 +42,20 @@ class `P-h^2/d` has square `d^2-3d+3-1/d`.  At `d=3` this is `8/3`, so
 `3[P]-h^2` has square `24` as before.  This fixes the entire normal-sequence
 lattice calculation; it supplies no dominance statement for other Hodge
 components.
+
+## Bounded scout cycle 41
+
+For the Fermat-type degree-`d` plane calibration, `d>=3`, the map on global
+sections induced by the normal sequence is
+
+`H^0(O_P(1)^3) -> H^0(O_P(d))`,
+`(l_1,l_2,l_3) |-> l_1u^(d-1)+l_2v^(d-1)+l_3w^(d-1)`.
+
+Its nine monomials are distinct, so it is injective and
+`h^0(N_(P/X_d))=0`, while
+`h^1(N_(P/X_d))=binom(d+2,2)-9`.  The latter is exactly the expected
+codimension of the plane-incidence image: a fixed plane imposes
+`binom(d+2,2)` conditions and `Gr(3,6)` has dimension nine.  At `d=3` this
+recovers a one-dimensional obstruction space beside a reduced isolated plane
+and a smooth incidence divisor.  Nonzero `H^1(N)` therefore cannot by itself
+be used as a failure-of-dominance certificate.

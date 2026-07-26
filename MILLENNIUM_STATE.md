@@ -75,7 +75,7 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 40
+- **cycle:** 41
 - **announcements:** none
 
 ## immutable target list
@@ -111,6 +111,30 @@ waiting process.
 
 ## last ticks
 
+- 2026-07-26: expressed the Cycle 40 singleton defect `H_n` in exact finite
+  symmetric zero coordinates with one full affine coordinate retaining the
+  constant, trivial-zero logarithm, half-Lambda jump, finite Mobius tail
+  endpoints, and cutoff remainder. The pure zero kernel is
+  `K_(rho,sigma)=sum k^(bar rho+sigma)/[bar rho sigma k(k+1)]`; half-strength
+  cancellation does not simplify it, because the negative `U` norm remains in
+  the affine entry. On RH the conjugate-zero/Hermitian diagonal is positive,
+  `(H_(K+1)-1)/(1/4+gamma^2)`, while the Hermitian anti-diagonal is oscillatory.
+  Under a difference-stable two-term energy expansion,
+  `H_n=D_restricted+o(1)=D_full-1+o(1)`, so the affine/endpoints must cancel the
+  positive zero block to exactly the critical second coefficient. No sign
+  theorem or RH result is claimed.
+
+- 2026-07-26: Cycle 41 advanced each non-RH bounded scout exactly once. BSD:
+  fixed the exact weight/cyclotomic second-derivative normalization and exposed
+  its linear-moment contamination. Hodge: computed the full Fermat-type plane
+  normal obstruction dimension `binom(d+2,2)-9` and matched it to incidence
+  codimension. Navier--Stokes: proved all phase-shifted unequal-frequency pure
+  two-shears retain zero pressure contribution. P versus NP: obtained the exact
+  necessary antichecker inequality
+  `3(h-1)+min(N,h-1)>s`. Yang--Mills: extended the escaping-state obstruction
+  to simultaneous strong convergence of every fixed transfer power. The RH
+  funnel was not rotated or altered, and no solution is claimed.
+
 - 2026-07-26: completed a primary-source and forward-citation audit of
   second-order asymptotics for the fixed logarithmic Nyman--Beurling polynomial.
   Bettin--Conrey--Farmer assume RH plus
@@ -137,6 +161,16 @@ waiting process.
   reciprocal-zero hypothesis does not prove their convergence or the target
   sign. No new convergence theorem or RH result is claimed.
 
+- 2026-07-26: Cycle 41 tested the 12 certified negative `H_n` cells through
+  `n=2047` against exact-integer prime-gap, Mobius/Mertens, prime-power psi-jump,
+  and squarefree-run features. Every simple scalar threshold is falsified.
+  Blocked classification detects weak-to-moderate ranking signal but misses six
+  negatives at threshold, and leave-one-band-out fitting entirely misses the
+  largest `219-222` band. The post-selected finite necessary screen
+  `M(n)>=0`, quiet backward prime-power mass, and bounded local mass curvature
+  contains every observed negative but has 221 positive counterexamples, so it
+  is not sufficient. No deterministic law, asymptotic claim, or RH result is
+  claimed.
 - 2026-07-26: defined the exact singleton norm defect
   `H_n=||D_n||^2-log(n)log(n+1)||U_n||^2`. Its natural sum telescopes as
   `sum_[X,2X) h_n H_n=(log X)P_X-(log(2X))P_(2X)`, while the actual critical
@@ -147,6 +181,16 @@ waiting process.
   mass condition is `sum c_j W_j=infinity`, where `W_j~1/j`, equivalently
   `sum c_j/j=infinity`. Thus `c_j~1/log X_j` remains summable and insufficient.
   No defect-positivity theorem or RH result is claimed.
+
+- 2026-07-26: Cycle 41 derived the exact index recurrence for the singleton
+  defect. With `C_n=log(n)log(n+1)` and `q=n+1`, it is
+  `H_q-H_(q-1)=-(C_q-C_(q-1))||U_(q-1)||^2+J_q`, where `J_q` is the new
+  Gram-row impulse and vanishes when `mu(q)=0`. Thus nonsquarefree indices
+  still carry radial coefficient drift even though the vectors do not move.
+  Compensating the cumulative drift leaves a process supported only on
+  squarefree indices; summing gives an exact drift-plus-impulse telescope with
+  all constant, diagonal, and off-diagonal Gram channels. This is bookkeeping,
+  not a sign theorem or RH result.
 
 - 2026-07-26: Cycle 40 derived the exact `kappa=1/2` complete-block residual
   directly as `sum beta_n mathcal H_n`, where
@@ -159,6 +203,26 @@ waiting process.
   stopping is equivalent to nonnegative limsup for every start plus attainment
   at zero. This is an RH-sufficient reformulation, not a sign proof, and no RH
   result is claimed.
+- 2026-07-26: Cycle 41 formulated a deterministic sparse-negative-band
+  recovery theorem for the exact residual `sum beta_n H_n`. A negative band is
+  recoverable if a finite negative-free window pays every weighted suffix debt;
+  the checkable aggregate condition is `g_j >= (beta_(p_j)/beta_(r_j-1)) d_j`.
+  For the physical `beta_n asymp 1/(n log^3 n)`, bounded endpoint ratio makes
+  this distortion bounded. Iterated every-start recoveries form consecutive
+  blocks and retain the full divergent `w`-mass; isolated sparse successful
+  blocks need not. Counterexamples show that unweighted compensation at remote
+  scales, compensation attained only at infinity, and summable sparse block
+  sampling are insufficient. The required Mobius band localization and
+  complete weighted debt/gain estimates remain open; no RH result is claimed.
+- 2026-07-26: derived the exact Cycle 41 event recurrence for `H_(n+1)-H_n`.
+  Its scale drift is always negative; nonsquarefree `n+1` gives exactly this
+  pure drift, while squarefree events add one negative diagonal cost and one
+  signed linear correlation. Certified complete-Gram checks show that the
+  `39-40`, `95-100`, and `219-226` episodes are triggered by `mu=+1`
+  semiprimes `39,95,219` (with recrossings at `221,226`), and terminated by
+  `mu=-1` prime/odd-parity events. The actual negative runs and weighted first
+  recoveries are certified, including `[219,231)`. This explains only the
+  observed finite bands; it is not an asymptotic theorem or RH result.
 - 2026-07-26: audited known and conditional asymptotics of the logarithmic
   Nyman--Beurling energy against the every-start tail inequality. The weight
   sends `C/log N` to the same leading term, so `kappa=1/2` is critical and
@@ -190,6 +254,17 @@ waiting process.
   positive weighted sum of the `H_n`. Arb evaluation through `n=512` finds 12
   negative indices but a compensating block from every tested start. This is a
   finite diagnostic only; no asymptotic sign theorem or RH result is claimed.
+- 2026-07-26: Cycle 41 aggregated the exact weighted block
+  `sum_[A,B) beta_n H_n` before estimating its Vasyunin expansion. Writing
+  `a=dp,b=dq` with `(p,q)=1`, every nonzero common-gcd contribution has the
+  same Mobius sign, and its reduced-denominator bracket is an exact positive
+  weighted sum `2pq sum_d R_(dp,dq)G_(dp,dq)`. Hence each off-diagonal packet
+  has sign `-mu(p)mu(q)`: opposite-Mobius pairs compensate, equal-sign pairs
+  do not. The diagonal packet is nonpositive. Splitting the packet into
+  cotangent and elementary/rank-one parts destroys the fixed sign; cotangent
+  reflection also fails to pair the symmetric kernel because its reciprocal
+  companion and arithmetic weight change. This is an exact packet and hostile
+  sign audit, not a block-positivity theorem or RH result.
 - 2026-07-26: derived the exact Cycle 39 one-step recurrence from the
   reciprocal-log coefficient update. Its compensated radial scalar gives
   `P_(n+1)=(1-2 kappa_n w_n)P_n`. At `kappa_n=1/2`, logarithmic scaling cancels
@@ -600,3 +675,13 @@ waiting process.
   the Mobius coefficients to the fixed fractional-part/Vasyunin Gram kernel,
   or imply its compensated radial alignment; Mobius signs alone are
   insufficient. This does not test or refute the actual Vasyunin Gram case.
+- 2026-07-26: completed the Cycle 41 weighted-H unit-cell packet audit. Every
+  cell splits exactly as a positive D packet minus a positive U packet using
+  `q_k=1/(k(k+1))-log(1+1/k)^2>0`; on `k<=n` this is the Chebyshev square
+  `beta_n[(ell_n+lambda_k psi(k))^2+q_k psi(k)^2]-w_n m_n^2`.
+  Derived an all-cell finite divisor formula and the exact adjacent-scale
+  divisor impulse, so signed old/new-divisor correlations can be summed before
+  any bound. Combining it with the positive-coefficient Abel formula explains
+  the certified compensation of all negative bands through 512, but gives no
+  asymptotic packet comparison: the complete divisor-floor tail remains the
+  unresolved arithmetic inequality. No RH result is claimed.

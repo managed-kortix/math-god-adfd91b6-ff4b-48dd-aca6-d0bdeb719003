@@ -4037,3 +4037,43 @@ average is nonnegative. Under finite weighted energy it equals `Q_a-Q_(m+1)`,
 and `Q_a` is its limsup. Every-start stopping is therefore equivalent to
 nonnegative limsup for every start plus finite attainment when that limsup is
 zero. Details are in `cycle-40-half-strength-H-abel-stopping.md`.
+
+## Cycle 41: finite-zero coordinates for the H defect
+
+The complete all-cell endpoint formula is
+
+\[
+ u_{n,k}=M_{n,k},\qquad v_{n,k}=\psi(k)+Q_{n,k},
+\]
+
+where `M_(n,k),Q_(n,k)` are explicit finite sums over divisors `a>n` and vanish
+on `k<=n`. Substituting the finite symmetric explicit formula
+
+\[
+ \psi(k)=k+B(k)-\sum_{\rho\in Z(T)}k^\rho/\rho+r_T(k)
+\]
+
+and retaining `B`, the half-Lambda endpoint, the Mobius tail endpoints, and
+`r_T` in one affine coordinate gives an exact augmented Hermitian Gram form.
+Its zero-zero block is
+
+\[
+ K_{\rho\sigma}^{(K)}={1\over\bar\rho\sigma}
+ \sum_{k\le K}{k^{\bar\rho+\sigma}\over k(k+1)}.
+\]
+
+Half-strength cancellation does not reduce this kernel: all `-LL_+||U_n||^2`
+mass remains affine, while the zero block comes positively from `||D_n||^2`.
+On RH the conjugate-zero/Hermitian diagonal is
+
+\[
+ K_{\gamma\gamma}^{(K)}={H_{K+1}-1\over1/4+\gamma^2}>0.
+\]
+
+The Hermitian anti-diagonal is oscillatory and corresponds to same-sign pairs
+in the original bilinear expansion. Finally, if
+`P_n=C_0/log n+D_restricted/log^2 n+o(log^-2 n)` with a difference-stable
+remainder, the exact recurrence gives `H_n=D_restricted+o(1)=D_full-1+o(1)`.
+Thus the affine/endpoints must cancel the positive zero diagonal down to the
+same second coefficient governing the critical tail sign. Details are in
+`cycle-41-finite-zero-H-affine-gram.md`. No sign theorem or RH result is claimed.

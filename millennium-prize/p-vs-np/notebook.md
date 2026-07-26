@@ -45,3 +45,20 @@ cover the whole family.  The exact minimum is therefore
 This generalizes `S(6,3)=90` and shows that the finite witness-mask DNF itself
 has exponential irredundancy, without implying an unrestricted circuit lower
 bound.
+
+## Bounded scout cycle 41
+
+The memorization obstruction extends quantitatively to every target size.  A
+binary decision tree separating `h` distinct `N`-bit examples has at most
+`h-1` internal nodes.  Implementing each node as
+`(x and A) or ((not x) and B)` takes three binary De Morgan gates, with at most
+`min(N,h-1)` shared input negations.  Hence every labeling is fit by a circuit
+of size at most
+
+`3(h-1)+min(N,h-1)`.
+
+An antichecker against size `s` must satisfy
+`3(h-1)+min(N,h-1)>s`; when `h>=N+1`, necessarily
+`h>(s-N)/3+1`.  In particular, direct anticheckers for size `N^k` require
+order-`N^k` samples.  This exact obstruction still gives no mechanism for
+amplifying a fixed exponent into a superpolynomial lower bound.

@@ -48,13 +48,13 @@ its sign, and direct sawtooth integration proves the untruncated `N=4 -> 8`
 tail is positive. Oscillatory-only sign is therefore abandoned. The active
 refinement is a scalable inequality for the complete endpoint functional,
 including constants and the retained interval. Direct unit-cell certificates
-are sparse, but explicit negative cells rule out local positivity. The active
-form is a grouped divisor-impulse or fixed-length dyadic block inequality. The
-exact Abel form is now known, but fixed windows and local pairings are
-falsified. The exact initial Chebyshev reserve also cancels at leading order
-against slope terms. Drift-free cells isolate the remaining signed truncated
-Möbius endpoint correlation; the active route seeks to sum that correlation
-before bounding it. The exact first-block kernel is a positive max kernel, not
+are sparse, but explicit negative cells rule out local positivity. The weighted
+H cell now has an exact positive-D-minus-positive-U packet split, and an
+all-cell divisor formula preserves adjacent-scale correlations. Fixed windows
+and local pairings remain falsified; the viable search is to sum signed divisor
+impulses across the scale index and only then apply the exact positive-
+coefficient Abel average. The exact initial Chebyshev reserve also cancels at
+leading order against slope terms. The exact first-block kernel is a positive max kernel, not
 a gcd kernel, and controlling it alone is square-root-cancellation strength.
 The finite Perron and exact continuum low-eigenmode representations are now
 derived. Routine contour shifting is blocked by reciprocal-zeta poles, and a

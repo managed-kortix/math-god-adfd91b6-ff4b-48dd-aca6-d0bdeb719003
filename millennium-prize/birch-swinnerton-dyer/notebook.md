@@ -38,3 +38,16 @@ same reduction modulo `5^M`; both have `mu=0, lambda=2`, but their orders at
 the Iwasawa invariants can replace exact modular-symbol identities for the
 constant and linear moments.  This is a decisive obstruction to a
 precision-only rank-two transfer calibration.
+
+## Bounded scout cycle 41
+
+The weight/cyclotomic normalization can be fixed without identifying the two
+derivatives.  Write `F(T)=a_0+a_1T+a_2T^2+O(T^3)`, put
+`T=exp(Ls)-1` with `L=log_5(6)`, and set `G(s)=F(T(s))`.  Then
+
+`G(0)=a_0`, `G'(0)=La_1`, `G''(0)=L^2(a_1+2a_2)`.
+
+Thus exact identities `a_0=a_1=0` imply
+`a_2=G''(0)/(2L^2)`.  Without the linear zero, the second weight derivative
+mixes `a_1` into the quadratic cyclotomic coefficient.  This settles only the
+rank-two normalization; it creates no relation to a complex `L`-derivative.

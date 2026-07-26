@@ -1,0 +1,593 @@
+{
+  "scope": "finite adversarial diagnostic; no deterministic law or RH claim",
+  "range": [
+    2,
+    2047
+  ],
+  "sample_count": 2046,
+  "negative_count": 12,
+  "negative_bands": [
+    [
+      2,
+      2
+    ],
+    [
+      39,
+      40
+    ],
+    [
+      95,
+      96
+    ],
+    [
+      99,
+      100
+    ],
+    [
+      219,
+      222
+    ],
+    [
+      226,
+      226
+    ]
+  ],
+  "integer_features": [
+    "mu",
+    "mertens",
+    "abs_mertens",
+    "mertens_d1",
+    "mertens_back4",
+    "mertens_forward4",
+    "mertens_back8",
+    "mertens_forward8",
+    "is_prime",
+    "omega",
+    "bigomega",
+    "is_squarefree",
+    "is_prime_power",
+    "prime_power_exponent",
+    "prime_gap",
+    "distance_prev_prime",
+    "distance_next_prime",
+    "squarefree_run_left",
+    "squarefree_run_right",
+    "squarefree_count_5",
+    "squarefree_count_9",
+    "prime_power_count_9",
+    "psi_bit_mass_d1",
+    "psi_bit_mass_back4",
+    "psi_bit_mass_forward4",
+    "psi_bit_curvature4"
+  ],
+  "blocked_classification": {
+    "logistic": {
+      "blocked_cv_average_precision": 0.19782173135223205,
+      "blocked_cv_roc_auc": 0.950753851196329,
+      "blocked_cv_balanced_accuracy_at_half": 0.6551130776794494,
+      "confusion_at_half": {
+        "tp": 4,
+        "fp": 47,
+        "tn": 1987,
+        "fn": 8
+      }
+    },
+    "extra_trees": {
+      "blocked_cv_average_precision": 0.04526653132399762,
+      "blocked_cv_roc_auc": 0.8213290724352672,
+      "blocked_cv_balanced_accuracy_at_half": 0.724188790560472,
+      "confusion_at_half": {
+        "tp": 6,
+        "fp": 105,
+        "tn": 1929,
+        "fn": 6
+      }
+    }
+  },
+  "leave_one_negative_band_out": [
+    {
+      "band": [
+        2,
+        2
+      ],
+      "scores": [
+        0.16226756110285354
+      ],
+      "recalled_at_half": 0,
+      "size": 1
+    },
+    {
+      "band": [
+        39,
+        40
+      ],
+      "scores": [
+        0.5255655769853795,
+        0.6418650229701026
+      ],
+      "recalled_at_half": 2,
+      "size": 2
+    },
+    {
+      "band": [
+        95,
+        96
+      ],
+      "scores": [
+        0.5440246586781207,
+        0.5466309168196579
+      ],
+      "recalled_at_half": 2,
+      "size": 2
+    },
+    {
+      "band": [
+        99,
+        100
+      ],
+      "scores": [
+        0.4166741367152747,
+        0.5429697094442102
+      ],
+      "recalled_at_half": 1,
+      "size": 2
+    },
+    {
+      "band": [
+        219,
+        222
+      ],
+      "scores": [
+        0.2926778930204657,
+        0.355939634888822,
+        0.4032328608351271,
+        0.31900080024372374
+      ],
+      "recalled_at_half": 0,
+      "size": 4
+    },
+    {
+      "band": [
+        226,
+        226
+      ],
+      "scores": [
+        0.4879613893995763
+      ],
+      "recalled_at_half": 0,
+      "size": 1
+    }
+  ],
+  "simple_hypothesis_audit": {
+    "prime_gaps": {
+      "feature": "prime_gap",
+      "direction": "<=",
+      "threshold": 4,
+      "confusion": {
+        "tp": 6,
+        "fp": 251,
+        "tn": 1783,
+        "fn": 6
+      },
+      "balanced_accuracy": 0.688298918387414,
+      "error_count": 257,
+      "counterexample_indices": [
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        12,
+        14,
+        15,
+        16,
+        18
+      ]
+    },
+    "Mertens_jumps": {
+      "feature": "mertens_d1",
+      "direction": ">",
+      "threshold": -1,
+      "confusion": {
+        "tp": 10,
+        "fp": 1417,
+        "tn": 617,
+        "fn": 2
+      },
+      "balanced_accuracy": 0.5683382497541789,
+      "error_count": 1419,
+      "counterexample_indices": [
+        2,
+        4,
+        6,
+        8,
+        9,
+        10,
+        12,
+        14,
+        15,
+        16,
+        18,
+        20
+      ]
+    },
+    "psi_prime_power_jumps": {
+      "feature": "psi_bit_mass_d1",
+      "direction": "<=",
+      "threshold": 2,
+      "confusion": {
+        "tp": 12,
+        "fp": 1711,
+        "tn": 323,
+        "fn": 0
+      },
+      "balanced_accuracy": 0.5794001966568338,
+      "error_count": 1711,
+      "counterexample_indices": [
+        3,
+        4,
+        6,
+        8,
+        9,
+        10,
+        12,
+        14,
+        15,
+        16,
+        18,
+        20
+      ]
+    },
+    "squarefree_runs": {
+      "feature": "squarefree_run_left",
+      "direction": ">",
+      "threshold": 2,
+      "confusion": {
+        "tp": 3,
+        "fp": 254,
+        "tn": 1780,
+        "fn": 9
+      },
+      "balanced_accuracy": 0.5625614552605703,
+      "error_count": 263,
+      "counterexample_indices": [
+        2,
+        3,
+        7,
+        15,
+        23,
+        31,
+        35,
+        40,
+        43,
+        59,
+        67,
+        71
+      ]
+    }
+  },
+  "best_single_thresholds": [
+    {
+      "feature": "mertens",
+      "direction": ">",
+      "threshold": -1,
+      "confusion": {
+        "tp": 12,
+        "fp": 708,
+        "tn": 1326,
+        "fn": 0
+      },
+      "balanced_accuracy": 0.8259587020648967,
+      "error_count": 708,
+      "counterexample_indices": [
+        58,
+        65,
+        93,
+        94,
+        97,
+        98,
+        101,
+        145,
+        146,
+        147,
+        148,
+        149
+      ]
+    },
+    {
+      "feature": "mertens_back8",
+      "direction": ">",
+      "threshold": 1,
+      "confusion": {
+        "tp": 10,
+        "fp": 473,
+        "tn": 1561,
+        "fn": 2
+      },
+      "balanced_accuracy": 0.80039331366765,
+      "error_count": 475,
+      "counterexample_indices": [
+        2,
+        27,
+        28,
+        38,
+        41,
+        57,
+        58,
+        62,
+        87,
+        88,
+        89,
+        91
+      ]
+    },
+    {
+      "feature": "mertens_forward8",
+      "direction": "<=",
+      "threshold": -1,
+      "confusion": {
+        "tp": 11,
+        "fp": 854,
+        "tn": 1180,
+        "fn": 1
+      },
+      "balanced_accuracy": 0.7484021632251721,
+      "error_count": 855,
+      "counterexample_indices": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        11,
+        12,
+        13,
+        16,
+        17,
+        23,
+        24
+      ]
+    },
+    {
+      "feature": "psi_bit_curvature4",
+      "direction": ">",
+      "threshold": 5,
+      "confusion": {
+        "tp": 9,
+        "fp": 526,
+        "tn": 1508,
+        "fn": 3
+      },
+      "balanced_accuracy": 0.7456981317600786,
+      "error_count": 529,
+      "counterexample_indices": [
+        16,
+        36,
+        39,
+        41,
+        57,
+        58,
+        59,
+        70,
+        71,
+        77,
+        78,
+        87
+      ]
+    },
+    {
+      "feature": "psi_bit_mass_back4",
+      "direction": "<=",
+      "threshold": 8,
+      "confusion": {
+        "tp": 12,
+        "fp": 1059,
+        "tn": 975,
+        "fn": 0
+      },
+      "balanced_accuracy": 0.7396755162241888,
+      "error_count": 1059,
+      "counterexample_indices": [
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "feature": "mertens_forward4",
+      "direction": "<=",
+      "threshold": -1,
+      "confusion": {
+        "tp": 10,
+        "fp": 774,
+        "tn": 1260,
+        "fn": 2
+      },
+      "balanced_accuracy": 0.726401179941003,
+      "error_count": 776,
+      "counterexample_indices": [
+        3,
+        4,
+        5,
+        10,
+        11,
+        16,
+        17,
+        27,
+        28,
+        29,
+        30,
+        41
+      ]
+    },
+    {
+      "feature": "distance_next_prime",
+      "direction": "<=",
+      "threshold": 2,
+      "confusion": {
+        "tp": 10,
+        "fp": 851,
+        "tn": 1183,
+        "fn": 2
+      },
+      "balanced_accuracy": 0.7074729596853491,
+      "error_count": 853,
+      "counterexample_indices": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        15,
+        16
+      ]
+    },
+    {
+      "feature": "prime_power_count_9",
+      "direction": ">",
+      "threshold": 2,
+      "confusion": {
+        "tp": 6,
+        "fp": 248,
+        "tn": 1786,
+        "fn": 6
+      },
+      "balanced_accuracy": 0.6890363815142576,
+      "error_count": 254,
+      "counterexample_indices": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "feature": "psi_bit_mass_forward4",
+      "direction": ">",
+      "threshold": 5,
+      "confusion": {
+        "tp": 11,
+        "fp": 1098,
+        "tn": 936,
+        "fn": 1
+      },
+      "balanced_accuracy": 0.6884218289085546,
+      "error_count": 1099,
+      "counterexample_indices": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "feature": "prime_gap",
+      "direction": "<=",
+      "threshold": 4,
+      "confusion": {
+        "tp": 6,
+        "fp": 251,
+        "tn": 1783,
+        "fn": 6
+      },
+      "balanced_accuracy": 0.688298918387414,
+      "error_count": 257,
+      "counterexample_indices": [
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        12,
+        14,
+        15,
+        16,
+        18
+      ]
+    }
+  ],
+  "candidate_deterministic_necessary_screen": {
+    "condition": "mertens >= 0 and psi_bit_mass_back4 <= 8 and psi_bit_curvature4 <= 8",
+    "confusion": {
+      "tp": 12,
+      "fp": 221,
+      "tn": 1813,
+      "fn": 0
+    },
+    "status": "finite necessary screen only; sufficiency is falsified by false positives",
+    "false_positive_indices": [
+      65,
+      93,
+      94,
+      97,
+      98,
+      101,
+      145,
+      146,
+      147,
+      149,
+      150,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      166,
+      214,
+      215,
+      216,
+      217,
+      218,
+      223,
+      224,
+      225,
+      227,
+      228,
+      231,
+      232
+    ]
+  },
+  "candidate_depth3_tree": "|--- mertens <= -0.5\n|   |--- class: 0\n|--- mertens >  -0.5\n|   |--- psi_bit_mass_back4 <= 8.5\n|   |   |--- psi_bit_curvature4 <= 8.5\n|   |   |   |--- class: 1\n|   |   |--- psi_bit_curvature4 >  8.5\n|   |   |   |--- class: 0\n|   |--- psi_bit_mass_back4 >  8.5\n|   |   |--- class: 0\n",
+  "candidate_depth3_training_confusion": {
+    "tp": 12,
+    "fp": 221,
+    "tn": 1813,
+    "fn": 0
+  },
+  "warning": "The candidate tree is post-selected in-sample and is not a theorem."
+}
