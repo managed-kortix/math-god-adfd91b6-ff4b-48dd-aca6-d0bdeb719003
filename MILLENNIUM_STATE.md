@@ -32,13 +32,16 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   representations of the complete tracking difference are now derived;
   ordinary contour shifting is decisively blocked by reciprocal-zeta poles,
   while a nonzero positive Mobius diagonal must cancel against the mixed
-  prime/Mobius channels; the current sublemma is an exact harmonic completion
-  of the low Mellin modes, after
+  prime/Mobius channels; exact harmonic completion now cancels the degree-one
+  prime channel before squaring but leaves a two-scale difference of dense
+  floor Gram forms, while fixed low modes are provably insufficient; the
+  current sublemma is a cancellation-preserving cross-scale decomposition of
+  these completed floor transforms, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 24
+- **cycle:** 25
 - **announcements:** none
 
 ## immutable target list
@@ -57,10 +60,10 @@ waiting process.
 
 ## next exact steps
 
-1. Construct exact harmonic completions of the first low Mellin moments and
-   test cancellation with the deterministic prime channel before estimation.
-2. Derive a cancellation-aware high-mode remainder; fixed low moments alone
-   cannot control the growing raw Möbius source norm.
+1. Analyze the exact completed square at scales `N` and `2N` together; seek a
+   cross-scale floor-kernel or martingale decomposition before any bounds.
+2. Certify growing discrete continuant/quasimode approximations and combine
+   them with a cancellation-aware high-mode estimate.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -260,3 +263,13 @@ waiting process.
   channels.  Derived the exact continuum max-kernel spectrum and implemented a
   tridiagonal low-mode analyzer with small Arb certificates; finite data show a
   low-mode sign mechanism but no asymptotic theorem.  No solution is claimed.
+- 2026-07-26: derived an exact entire harmonic completion for the low Mellin
+  modes and a stronger cumulative two-scale square formula in which the fresh
+  Mobius and explicit von Mangoldt channels cancel before squaring.  The result
+  remains a difference of dense floor Gram forms, not boundary terms.  Degree
+  two has an explicit generalized-von-Mangoldt mismatch, already nonzero at a
+  prime.  Added an exact formal-log verifier through degree three.  A hostile
+  spectral audit proved fixed low moments insufficient: bounded vectors can
+  annihilate them while retaining max-kernel energy of order `N/J^2`.  The
+  route now targets cross-scale completed-transform cancellation.  No solution
+  is claimed.

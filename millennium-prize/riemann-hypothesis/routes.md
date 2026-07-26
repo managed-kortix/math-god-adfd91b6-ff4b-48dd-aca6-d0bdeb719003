@@ -56,8 +56,14 @@ against slope terms. Drift-free cells isolate the remaining signed truncated
 Möbius endpoint correlation; the active route seeks to sum that correlation
 before bounding it. The exact first-block kernel is a positive max kernel, not
 a gcd kernel, and controlling it alone is square-root-cancellation strength.
-The active route is now a Perron/Mellin and low-eigenmode analysis of the full
-linear--quadratic tracking difference. The ultimate positive target remains
+The finite Perron and exact continuum low-eigenmode representations are now
+derived. Routine contour shifting is blocked by reciprocal-zeta poles, and a
+fixed number of low moments is decisively insufficient. Exact harmonic
+completion cancels the explicit degree-one von Mangoldt channel before
+squaring, but leaves a two-scale difference of dense floor Gram forms; degree
+two has an explicit generalized-von-Mangoldt residual. The active route now
+targets cancellation between these two completed scale transforms, together
+with a cumulative-sum bound for their high-mode residual. The ultimate positive target remains
 `liminf P_N=0`, where `P_N` is the restricted `(0,1)` energy. Any off-critical
 zero gives an explicit uniform positive floor for every `P_N`, so that target
 implies RH. It is not known to follow from RH for this exact logarithmic taper.

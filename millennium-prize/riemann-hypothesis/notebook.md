@@ -2339,3 +2339,84 @@ Test whether the prime residual already present in the deterministic center
 cancels these completed modes before estimation.  In parallel, seek a
 cancellation-aware high-mode bound; a fixed number of moments alone is
 insufficient because the raw Mobius source norm grows with `N`.
+
+## Cycle 25: exact harmonic completion and fixed-mode obstruction
+
+For every complex `z`, divisor convolution gives the entire identity
+
+\[
+\sum_{N<r\le2N}\mu(r)(r/N)^z
+=-\sum_{d\le N}\mu(d)(d/N)^z
+\sum_{N/d<m\le2N/d}m^z.
+\]
+
+This is an exact completion of the continuum Mellin weights, including
+`z=-1/2+i beta_j`.  Differentiation yields all polynomial logarithmic moments.
+The degree-one divisor-side residual is exactly
+`-(psi(2N)-psi(N))`; it includes prime powers and all endpoints.
+
+More importantly, opening the floor transform
+
+\[
+Z_X(k)=\sum_{d\le X}\mu(d)\log(X/d)\lfloor k/d\rfloor
+\]
+
+cancels the explicit von Mangoldt channel before squaring.  On the first block,
+the complete tracking difference becomes exactly
+
+\[
+\sum_{k=N}^{2N-1}{1\over k(k+1)}\left[
+\left(kA+1-{Z_N(k)\over\log N}\right)^2-
+\left(k(A-\alpha D)+1-{Z_{2N}(k)\over\log(2N)}\right)^2
+\right].
+\]
+
+This is the strongest algebraic completion found.  It does not collapse to
+boundary terms: expansion leaves a difference of dense floor Gram forms at the
+two scales.  Composite squarefree fresh indices also show that the positive
+Mobius diagonal cannot cancel locally against a same-index Lambda term; any
+cancellation is global.
+
+Degree two is not completed by the existing Lambda channel.  Its exact source
+mismatch is
+
+\[
+(\mu*\log^2)(n)-2\log(n)\Lambda(n),
+\]
+
+whose jump at a prime `p` is `-log^2 p`.  This is an explicit certificate
+against a naive quadratic extension of the degree-one cancellation.
+
+Added `verify_harmonic_completions.py`, exact formal-prime-log tests through
+degree three, and a separate noncertifying comparison with discrete and
+continuum low modes.  The exact layer uses rational sparse polynomials only.
+
+A hostile spectral audit also rules out fixed-mode closure.  For the first `J`
+eigenmodes removed, completed-square projection gives only
+
+\[
+|\mathcal T_{>J}|\le\lambda_{J+1}
+(\|u-v\|_2^2+\|v\|_2^2),
+\]
+
+and generic bounded source size yields `O(N/J^2)`.  A bounded rescaling of the
+`(J+1)`-st eigenvector annihilates all first `J` modal moments but retains this
+order of energy.  Hence fixed `J`, bounded increments, and smoothness alone are
+insufficient.  Without new arithmetic cancellation, even `o(1)` requires
+roughly `J` larger than `sqrt(N)`.
+
+The finite Jacobi problem is exact: inverse eigenvalues are roots of an integer
+continuant for the tridiagonal conductances `n(n+1)`.  A direct kernel comparison
+gives operator error less than `5/(4N)`, enough for continuum eigenvalue control
+through `J=o(sqrt(N))` and individual eigenvector control through
+`J=o(N^(1/3))`.  This helps certify growing-mode approximations but supplies no
+Mobius cancellation.
+
+### Next queued main-funnel step
+
+Analyze the exact two-scale completed square `Z_N` versus `Z_(2N)` without
+expanding the scales separately.  Seek a cross-scale floor-kernel identity or
+martingale decomposition whose high-frequency remainder is charged to the
+difference of transforms rather than either raw source.  In parallel, derive
+and certify the continuant/quasimode comparison for growing `J` so any proposed
+arithmetic moment estimate has a rigorous discrete tail.
