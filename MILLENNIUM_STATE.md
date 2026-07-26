@@ -76,10 +76,13 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   identity now exposes an unavoidable terminal residual `Q_M`, and abstract
   scalar continuations prove that monotonicity plus finite weighted energy
   cannot determine its sign, so the active target is a genuinely physical
-  Mobius--Vasyunin terminal-tail or squarefree-impulse estimate
+  Mobius--Vasyunin terminal-tail or squarefree-impulse estimate; the terminal
+  residual is now exactly identified, conditional on tail finiteness, as the
+  endpoint energy minus the limiting normalized pair dispersion of the entire
+  future physical path, with no sign supplied by Gram positivity
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 43
+- **cycle:** 44
 - **announcements:** none
 
 ## immutable target list
@@ -98,9 +101,10 @@ waiting process.
 
 ## next exact steps
 
-1. Seek a genuinely physical estimate for the terminal residual
-   `Q_M=P_M-sum_(n>=M)w_nP_n`, or a squarefree-impulse lower bound that controls
-   it; generic scalar monotonicity and finite energy are now ruled out.
+1. Seek a genuinely physical upper bound for the normalized future-path
+   dispersion in Cycle 44, or a squarefree-impulse lower bound that controls
+   the same terminal residual; generic scalar and Gram-positivity routes are
+   now ruled out.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -115,6 +119,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 44 rewrote every finite physical terminal budget as endpoint
+  energy minus a coherent mean square and a normalized pair-dispersion square.
+  Under finite weighted energy the coherent term vanishes, leaving terminal
+  positivity exactly equivalent to bounding the full future Mobius--Vasyunin
+  path dispersion by the endpoint energy. The finiteness hypothesis already
+  forces zero liminf, and Gram positivity supplies no upper bound, so this is a
+  cancellation-preserving identification of the missing arithmetic rather than
+  an RH advance. Finite endpoint-2048 positivity was independently audited but
+  supplies no infinite-tail bound. No Millennium solution is claimed.
 
 - 2026-07-26: Cycle 43 isolated the exact terminal term in the half-strength
   renewal identity. A finite drift/impulse packet equals `Q_a-Q_M`; faster

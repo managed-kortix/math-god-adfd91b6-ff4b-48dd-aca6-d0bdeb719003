@@ -4167,3 +4167,21 @@ These hostile tails are not Mobius--Vasyunin continuations. They prove only
 that a finite impulse certificate needs an additional physical terminal-tail
 estimate; scalar monotonicity and finite energy cannot supply one. Details are
 in `cycle-43-terminal-residual-obstruction.md`. No RH result is claimed.
+
+## Cycle 44: the physical terminal term is future-path dispersion
+
+For a finite physical tail, weighted variance gives
+
+\[
+P_M-\sum_{n=M}^Bw_nP_n=P_M-W\|\bar F\|^2
+-{1\over2W}\sum_{m,n=M}^Bw_mw_n\|F_m-F_n\|^2.
+\]
+
+If the infinite weighted energy is finite, the coherent term
+`W||bar F||^2` tends to zero, so `Q_M>=0` is exactly the assertion that the
+limiting normalized pair dispersion of the entire future physical path is at
+most `P_M`. This preserves all Mobius--Vasyunin cancellation but gives no sign:
+Gram positivity controls only the lower bound zero. Moreover, finite weighted
+energy already forces zero liminf and is therefore an RH-sufficient global
+hypothesis here. Details and the domain audit are in
+`cycle-44-physical-terminal-dispersion.md`. No RH result is claimed.
