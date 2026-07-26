@@ -7,10 +7,12 @@ from fractions import Fraction
 from flint import arb, ctx
 
 from certify_endpoint_tail import (
-    affine_cell, certify_endpoint_tail, elementary_remainder_constant,
-    finite_endpoint_prefix, integrate_affine_cell,
+    affine_cell, certify_endpoint_tail, certify_energy_difference,
+    compare_endpoint_to_energy_difference, elementary_remainder_constant,
+    finite_endpoint_prefix, finite_energy_difference_prefix,
+    integrate_affine_cell,
 )
-from mobius_endpoint_surrogate import endpoint_channels
+from mobius_endpoint_surrogate import endpoint_alpha, endpoint_channels
 from verify_separated_kernel import ball
 
 
@@ -73,6 +75,27 @@ class EndpointTailTests(unittest.TestCase):
         self.assertTrue(certificate.is_positive)
         self.assertGreater(certificate.lower_bound, 0)
         self.assertLess(certificate.lower_bound, certificate.upper_bound)
+
+    def test_independent_finite_difference_has_alpha_factor(self):
+        for N in (2, 4, 8, 16):
+            u, d = endpoint_channels(N)
+            endpoint = finite_endpoint_prefix(
+                1, 64, u, d, endpoint_alpha(N)
+            )
+            direct = finite_energy_difference_prefix(N, 1, 64)
+            self.assertTrue((ball(endpoint_alpha(N)) * endpoint).overlaps(direct))
+
+    def test_small_dyadic_complete_functionals_are_positive(self):
+        for N in (2, 4, 8, 16):
+            comparison = compare_endpoint_to_energy_difference(N, 1, 4096)
+            self.assertTrue(comparison.endpoint.is_positive)
+            self.assertTrue(comparison.direct_difference.is_positive)
+            self.assertTrue(comparison.agrees)
+
+    def test_direct_difference_is_complete_not_just_a_prefix(self):
+        certificate = certify_energy_difference(4, 1, 1024)
+        self.assertGreater(certificate.remainder_radius, 0)
+        self.assertTrue(certificate.is_positive)
 
 
 if __name__ == "__main__":

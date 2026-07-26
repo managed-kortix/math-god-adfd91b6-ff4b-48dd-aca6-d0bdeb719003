@@ -2046,3 +2046,64 @@ new tail certificate beyond `Q`. Compare its sign with the already certified
 `P_N-P_(2N)` breakpoint calculations as an independent normalization audit.
 Then search for a complete-functional block or averaged inequality that scales
 with `N`; abandon oscillatory-only sign targets.
+
+## Tick 22 — complete small dyadic decrements and local-positivity failure
+
+Generalized `certify_endpoint_tail.py` to arbitrary dyadic `N`. It independently
+constructs `F_N` and `F_(2N)` and checks
+
+\[
+P_N-P_{2N}=\alpha_N\mathcal E_N,
+\qquad
+\mathcal E_N=\int_1^\infty(2f_Nd_N-\alpha_Nd_N^2)t^{-2}dt.
+\]
+
+At cutoff `4096`, both independent enclosures are strictly positive for
+`N=2,4,8,16`; the endpoint-functional intervals are respectively
+
+\[
+[1.9491,1.9524],\ [1.5987,1.6066],\ [0.9896,1.0113],\ [0.5702,0.6344].
+\]
+
+The two normalizations overlap after multiplication by `alpha_N`. These are
+finite certificates only.
+
+The unit-cell structure is recorded in `unit-cell-endpoint-bounds.md`. Each
+cell integral has one logarithm, while floor intercepts update by sparse divisor
+impulses, giving an `O(T log N)` certificate. Three Bernstein products of
+one-sided endpoint values provide elementary bounds. However, cellwise
+positivity is false: for `N=8 -> 16`, cell `k=35` contributes
+
+\[
+-0.0001179347729698\ldots.
+\]
+
+The cell discriminant is always the exact square `4(Db_k-e_kA)^2`; it gives
+root geometry but no Möbius positivity. A successful elementary proof must
+group cells or control cumulative divisor impulses.
+
+The scalable candidate is complete-functional contraction
+
+\[
+\mathcal E_N\ge\eta P_N,
+\]
+
+equivalently `P_(2N)<=(1-eta alpha_N)P_N`. A weaker fixed-length dyadic block
+inequality permits individual increases:
+
+\[
+P_N-P_{2^LN}\ge
+2\kappa\sum_{r=0}^{L-1}W_{2^rN}P_{2^rN}.
+\]
+
+Either target forces `liminf P_N=0` and hence RH in this funnel. The missing
+lemma is a cancellation-aware bound for the aggregated complete numerator or
+its cumulative divisor-impulse primitive.
+
+## Next queued main-funnel step
+
+Form exact divisor-impulse sequences for a fixed dyadic scale block and derive
+Abel/summation-by-parts identities for grouped cell sums before any absolute
+value. Search for a short deterministic pairing or block lower bound absorbing
+every negative cell through moderate `N`; state the weakest pattern that would
+imply fixed-length block contraction.

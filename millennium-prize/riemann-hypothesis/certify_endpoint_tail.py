@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Arb certificate for the untruncated N=4 -> 8 endpoint tail.
+"""Arb certificates for complete dyadic endpoint functionals.
 
 The calculation stays in the sawtooth representation.  On every open unit
-interval all {t/a}, a <= 8, are affine, so the endpoint integrand is a
-quadratic divided by t^2 and has an elementary exact antiderivative.  No
-Fourier expansion or common period is used.
+interval all {t/a}, a <= 2N, are affine, so the endpoint integrand is a
+quadratic divided by t^2 and has an elementary exact antiderivative.  An
+independent calculation constructs F_N and F_2N separately and encloses
+P_N-P_2N.  No Fourier expansion or common period is used.
 """
 
 import argparse
@@ -14,7 +15,7 @@ from fractions import Fraction
 
 from flint import arb, ctx
 
-from mobius_endpoint_surrogate import endpoint_channels
+from mobius_endpoint_surrogate import endpoint_alpha, endpoint_channels, mobius
 from verify_separated_kernel import ball
 
 
@@ -30,6 +31,8 @@ class AffineCell:
 
 @dataclass(frozen=True)
 class EndpointTailCertificate:
+    N: int
+    alpha: Fraction
     start: int
     cutoff: int
     finite_prefix: object
@@ -42,6 +45,28 @@ class EndpointTailCertificate:
     @property
     def is_positive(self):
         return self.lower_bound > 0
+
+    @property
+    def sign(self):
+        if self.lower_bound > 0:
+            return "positive"
+        if self.upper_bound < 0:
+            return "negative"
+        return "indeterminate"
+
+
+@dataclass(frozen=True)
+class EndpointComparison:
+    endpoint: EndpointTailCertificate
+    direct_difference: EndpointTailCertificate
+    scaled_endpoint: object
+
+    @property
+    def agrees(self):
+        direct = self.direct_difference.finite_prefix + arb(
+            0, self.direct_difference.remainder_radius.upper()
+        )
+        return self.scaled_endpoint.overlaps(direct)
 
 
 def _validate_source_channels(u, d):
@@ -109,6 +134,52 @@ def finite_endpoint_prefix(start, cutoff, u=None, d=None,
     )
 
 
+def restricted_channels(N):
+    """Construct F_N sawtooth coefficients independently of endpoint channels."""
+    if not isinstance(N, int) or N < 2:
+        raise ValueError("N must be an integer at least 2")
+    log_N = ball(N).log()
+    coefficients = []
+    for a in range(1, N + 1):
+        mu = mobius(a)
+        coefficient = arb(0)
+        if mu:
+            coefficient = ball(mu) * (1 - ball(a).log() / log_N)
+        coefficients.append(coefficient)
+    return tuple(coefficients)
+
+
+def _affine_sawtooth(k, coefficients):
+    slope = sum(
+        (value / a for a, value in enumerate(coefficients, 1)), arb(0)
+    )
+    intercept = ball(1) - sum(
+        (value * (k // a) for a, value in enumerate(coefficients, 1)), arb(0)
+    )
+    return slope, intercept
+
+
+def finite_energy_difference_prefix(N, start, cutoff):
+    """Directly integrate F_N^2-F_2N^2 over [start, cutoff]."""
+    if (not isinstance(start, int) or not isinstance(cutoff, int)
+            or start < 1 or cutoff < start):
+        raise ValueError("start and cutoff must be integers with 1 <= start <= cutoff")
+    old = restricted_channels(N)
+    new = restricted_channels(2 * N)
+    total = arb(0)
+    for k in range(start, cutoff):
+        a1, b1 = _affine_sawtooth(k, old)
+        a2, b2 = _affine_sawtooth(k, new)
+        cell = AffineCell(
+            k, a1, b1, a2, b2,
+            (a1 * a1 - a2 * a2,
+             2 * (a1 * b1 - a2 * b2),
+             b1 * b1 - b2 * b2),
+        )
+        total += integrate_affine_cell(cell)
+    return total
+
+
 def elementary_remainder_constant(u, d, alpha=Fraction(1, 3)):
     """Return C with |2*f*d-alpha*d^2| <= C pointwise."""
     _validate_source_channels(u, d)
@@ -117,43 +188,87 @@ def elementary_remainder_constant(u, d, alpha=Fraction(1, 3)):
     return 2 * f_bound * d_bound + ball(alpha) * d_bound * d_bound
 
 
-def certify_endpoint_tail(start=8, cutoff=1024):
-    """Enclose the complete untruncated endpoint tail on [start,infinity)."""
+def certify_endpoint_tail(start=1, cutoff=4096, N=4):
+    """Enclose the complete N -> 2N endpoint functional on [start,infinity)."""
     if not isinstance(cutoff, int) or cutoff <= start:
         raise ValueError("cutoff must be an integer larger than start")
     started = time.perf_counter()
-    u, d = endpoint_channels(4)
-    prefix = finite_endpoint_prefix(start, cutoff, u, d)
-    constant = elementary_remainder_constant(u, d)
+    alpha = endpoint_alpha(N)
+    u, d = endpoint_channels(N)
+    prefix = finite_endpoint_prefix(start, cutoff, u, d, alpha)
+    constant = elementary_remainder_constant(u, d, alpha)
     radius = constant / cutoff
     enclosure = prefix + arb(0, radius.upper())
     lower = enclosure.lower()
     upper = enclosure.upper()
     elapsed = time.perf_counter() - started
     return EndpointTailCertificate(
-        start, cutoff, prefix, radius, lower, upper, constant, elapsed
+        N, alpha, start, cutoff, prefix, radius, lower, upper, constant, elapsed
     )
+
+
+def certify_energy_difference(N=4, start=1, cutoff=4096):
+    """Independently enclose P_N-P_2N by constructing both energies."""
+    if not isinstance(cutoff, int) or cutoff <= start:
+        raise ValueError("cutoff must be an integer larger than start")
+    started = time.perf_counter()
+    old = restricted_channels(N)
+    new = restricted_channels(2 * N)
+    prefix = finite_energy_difference_prefix(N, start, cutoff)
+    old_bound = ball(1) + sum((abs(value) for value in old), arb(0))
+    new_bound = ball(1) + sum((abs(value) for value in new), arb(0))
+    constant = old_bound * old_bound + new_bound * new_bound
+    radius = constant / cutoff
+    enclosure = prefix + arb(0, radius.upper())
+    elapsed = time.perf_counter() - started
+    return EndpointTailCertificate(
+        N, endpoint_alpha(N), start, cutoff, prefix, radius,
+        enclosure.lower(), enclosure.upper(), constant, elapsed,
+    )
+
+
+def compare_endpoint_to_energy_difference(N=4, start=1, cutoff=4096):
+    """Compare alpha times the endpoint functional with direct P_N-P_2N."""
+    endpoint = certify_endpoint_tail(start, cutoff, N)
+    difference = certify_energy_difference(N, start, cutoff)
+    endpoint_enclosure = endpoint.finite_prefix + arb(
+        0, endpoint.remainder_radius.upper()
+    )
+    scaled = ball(endpoint.alpha) * endpoint_enclosure
+    return EndpointComparison(endpoint, difference, scaled)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--bits", type=int, default=192)
-    parser.add_argument("--start", type=int, default=8)
-    parser.add_argument("--cutoff", type=int, default=1024)
+    parser.add_argument("--N", type=int, nargs="+", default=[2, 4, 8, 16])
+    parser.add_argument("--start", type=int, default=1)
+    parser.add_argument("--cutoff", type=int, default=4096)
     args = parser.parse_args()
     if args.bits < 80 or args.start < 1 or args.cutoff <= args.start:
         parser.error("need bits>=80 and 1<=start<cutoff")
     ctx.prec = args.bits
-    certificate = certify_endpoint_tail(args.start, args.cutoff)
-    print("direct unit-breakpoint N=4->8 endpoint-tail certificate")
     print(f"precision={args.bits} bits; interval=[{args.start}, infinity)")
-    print(f"finite prefix [{args.start},{args.cutoff}]={certificate.finite_prefix}")
-    print(f"elementary remainder radius={certificate.remainder_radius}")
-    print(f"certified interval=[{certificate.lower_bound}, {certificate.upper_bound}]")
-    print(f"strictly positive={certificate.is_positive}")
-    print(f"runtime={certificate.elapsed:.6f} seconds")
-    if not certificate.is_positive:
-        raise SystemExit("positivity was not certified")
+    failed = False
+    for N in args.N:
+        comparison = compare_endpoint_to_energy_difference(
+            N, args.start, args.cutoff
+        )
+        endpoint = comparison.endpoint
+        difference = comparison.direct_difference
+        print(f"N={N}->2N={2 * N}; alpha={endpoint.alpha}")
+        print(f"  endpoint=[{endpoint.lower_bound}, {endpoint.upper_bound}] ({endpoint.sign})")
+        print(
+            "  alpha*endpoint="
+            f"[{comparison.scaled_endpoint.lower()}, "
+            f"{comparison.scaled_endpoint.upper()}]"
+        )
+        print(f"  direct P_N-P_2N=[{difference.lower_bound}, {difference.upper_bound}] ({difference.sign})")
+        print(f"  independent intervals overlap={comparison.agrees}")
+        print(f"  runtime={endpoint.elapsed + difference.elapsed:.6f} seconds")
+        failed |= not comparison.agrees
+    if failed:
+        raise SystemExit("an independent comparison failed")
 
 
 if __name__ == "__main__":

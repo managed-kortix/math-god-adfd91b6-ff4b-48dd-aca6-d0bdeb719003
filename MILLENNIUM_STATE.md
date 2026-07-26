@@ -19,14 +19,15 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   radii by a residual depending only on the endpoint cancellation vector; the
   weighted Legendre/shadow-shell projection is certified, but completion of
   the constant modes and a direct untruncated sawtooth certificate prove the
-  `N=4 -> 8` tail is positive; the current sublemma is a complete-functional
-  breakpoint/averaging inequality rather than an oscillatory-only sign target,
-  after
+  `N=4 -> 8` tail is positive and full dyadic decrements are independently
+  certified through `N=16`; cellwise positivity is explicitly false, so the
+  current sublemma is a grouped cumulative-divisor-impulse inequality for the
+  complete functional, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 19
+- **cycle:** 20
 - **announcements:** none
 
 ## immutable target list
@@ -45,10 +46,10 @@ waiting process.
 
 ## next exact steps
 
-1. Certify the complete `[1,infinity)` endpoint decrement for small dyadic `N`
-   by exact breakpoint integration plus the direct tail enclosure.
-2. Search for a scalable complete-functional block or averaged inequality;
-   reject oscillatory-only sign targets as strategically misleading.
+1. Derive summation-by-parts identities for grouped unit-cell contributions in
+   terms of cumulative divisor impulses, preserving cross-scale cancellation.
+2. Search for a short pairing/block lower bound through moderate dyadic `N` and
+   formulate the weakest fixed-length contraction pattern it supports.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -212,3 +213,10 @@ waiting process.
   oscillatory-only negativity is decisively misleading. The route now targets
   the complete endpoint functional and its scalable averages. No solution is
   claimed.
+- 2026-07-26: generalized direct breakpoint certificates to complete dyadic
+  decrements and independently verified `P_N-P_(2N)=alpha_N E_N` through
+  `N=16`. Derived sparse `O(T log N)` unit-cell formulas and Bernstein bounds,
+  but found an exact negative cell already for `N=8`, disproving cellwise
+  positivity. The active target is a grouped cumulative divisor-impulse or
+  fixed-length dyadic block inequality for the complete functional. No solution
+  is claimed.

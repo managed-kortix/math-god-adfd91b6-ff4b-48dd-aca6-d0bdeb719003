@@ -47,7 +47,10 @@ piece efficiently. Completing the constant and linear terms, however, reverses
 its sign, and direct sawtooth integration proves the untruncated `N=4 -> 8`
 tail is positive. Oscillatory-only sign is therefore abandoned. The active
 refinement is a scalable inequality for the complete endpoint functional,
-including constants and the retained interval. The ultimate positive target remains
+including constants and the retained interval. Direct unit-cell certificates
+are sparse, but explicit negative cells rule out local positivity. The active
+form is a grouped divisor-impulse or fixed-length dyadic block inequality. The
+ultimate positive target remains
 `liminf P_N=0`, where `P_N` is the restricted `(0,1)` energy. Any off-critical
 zero gives an explicit uniform positive floor for every `P_N`, so that target
 implies RH. It is not known to follow from RH for this exact logarithmic taper.
