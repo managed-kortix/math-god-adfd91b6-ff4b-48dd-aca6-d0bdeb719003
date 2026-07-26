@@ -1,0 +1,26 @@
+{
+  "cover": {
+    "group_count": 136,
+    "group_sha256": "cd8ff2b4ae155e696e4ead024add6216b04ba82482c5e3ee3f0add86a0bc54f4",
+    "independent_group_checker_sha256": "5889f6361e6465869dd7d6964dc5f8104c02f886f742359e5c0db9ec65a525cb",
+    "leaf_count": 735,
+    "leaf_sha256": "0e4aa2220d8e87a67d5152130c5e26ebc16655a53b7fae6735a249cc0606171e",
+    "labeled_count": 63517608
+  },
+  "generator": {
+    "base_sha256": "adab04953d3697ec004e28ad145dda5b0f04d07ee8dd20d95655f6e32877d68e",
+    "groups_sha256": "6176ab7d266b34704fcd180bb852e97adcf0aaad00e9a1b055cddd93baf7053a",
+    "shard_sha256": "1bd9ff23d50b18685f617d08ac27c7b7a09bc96eca8594d0ec40ccf5873b2441"
+  },
+  "problem": "Seymour second-neighborhood conjecture",
+  "schema": "snc-rho5-group-campaign-v1",
+  "scope": "n=18,m=8,witness-rooted B7 corrected rho=5 row grouped by 136 exact margins",
+  "solver": {
+    "sha256": "7b73df0a6d9cf3c751a1948300e5baff8e82c4d39bcd88f0c063b5f5cfb8b33e",
+    "version": "1.7.3"
+  },
+  "unsat_checker": {
+    "commit": "2e3b2dc0ecf938addbd779d42877b6ed69d9a985",
+    "sha256": "e9e71c96b68dc9ed22db35d7581e613e6b161ffbc82c20cba5699f8320a065b8"
+  }
+}

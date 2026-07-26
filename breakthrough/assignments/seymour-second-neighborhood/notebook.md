@@ -388,3 +388,22 @@ No audits yet.
   verified cover, implement the content-addressed batch runner, and certify
   leaves (or audited grouped margins) with immutable per-index LRAT evidence and
   a generated completion ledger.
+
+## 2026-07-25 — tick 17
+
+- Implemented the representative-free 136-margin grouping of all 735 certified
+  leaves. Each group fixes C state, rho split, root/high missing indicators, and
+  exact A-hole/B-outneighbor cardinalities while leaving both intersections
+  existential. An independent weighted checker reproduces group hash
+  `cd8ff2b4...54f4`, leaf cover hash `0e4aa222...171e`, and all 63,517,608
+  labelled configurations.
+- Hostile audit caught a reversed missing-variable name for C-B units in the
+  initial grouped emitter. Global `m=8` made it accidentally redundant, but the
+  variables were disconnected; the names are now corrected to ascending pair
+  order.
+- A pilot grouped CNF returned CaDiCaL UNSAT and independently checked LRAT
+  `c VERIFIED`, establishing the grouped proof path operationally.
+- **Next queued attack:** rerun the pilot after the C-B variable-name repair,
+  freeze grouped campaign hashes, then certify all 136 groups with a generated
+  immutable completion ledger. Any SAT group stops the campaign for graph
+  decoding and dual verification.

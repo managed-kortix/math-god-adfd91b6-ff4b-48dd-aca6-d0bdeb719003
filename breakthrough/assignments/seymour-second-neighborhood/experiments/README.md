@@ -84,3 +84,8 @@ reproduces the production cover hash without importing production cover code.
 leaf `I` in that cover. Leaf 0 has also completed the LRAT pipeline during
 development; bulk artifacts are not committed until the independent cover
 checker and completion ledger are in place.
+
+`m8_rho5_groups.py` and `m8_rho5_group_shard.py` form the audited 136-margin
+grouping: intersection parameters remain existential while all six margins and
+the C state remain exact. `check_m8_rho5_groups.py` independently verifies the
+weighted partition back to all 735 leaves and 63,517,608 labelled objects.
