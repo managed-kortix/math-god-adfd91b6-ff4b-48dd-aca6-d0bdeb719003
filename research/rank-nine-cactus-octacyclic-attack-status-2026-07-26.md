@@ -11,6 +11,16 @@ sigma(G)=s+(G)-|V(G)|,  T=C3,  P=C5,
 delta=sqrt(5)-2<1/4.
 ```
 
+> **Update.** Sections 4.2, 7, and 8 record the frontier before the exact
+> marked-interface censuses in
+> `research/nonacyclic-disconnected-t7pp-marked-interface-status-2026-07-26.md`.
+> The entry-locked family `(D9b)` is now proved, and all 3188 canonical labelled
+> two-entry classes of `(D9a)` close: 3182 by the uniform router ledger and six
+> bouquet orbits by explicit replacements, including opening one remote
+> pentagon in `(B9)` and applying the packing-one theorem to the other arm.  The
+> fully shared `(F9)` row closes independently by opening its leaf pentagon.
+> These updates remove all kernels listed in this original note.
+
 This note attacks connected cacti of cyclomatic rank nine using the proved
 octacyclic cactus theorem. It does **not** claim the rank-nine theorem. The
 sharp-DNN reduction, the disconnected color-partition census, and the fully
@@ -176,7 +186,9 @@ triangles and does not imply this case. In particular, invoking the qualitative
 octacyclic theorem on the marked `T^7P_0` side and adding `P_1>=-delta` would be
 invalid.
 
-No proof of `(D9a)` or `(D9b)` is asserted here.
+No proof of `(D9a)` or `(D9b)` is asserted in this original attack.  The later
+marked census proves `(D9b)` and all of `(D9a)` except `(B9)`; see the update at
+the start of this note.
 
 ## 5. Fully shared `T^8Q`
 
@@ -256,7 +268,8 @@ pentagons; and the octacyclic theorem supplies no uniform margin on the marked
 
 ## 7. Exact new marked-interface obstacle
 
-The three open families `(D9a)`, `(D9b)`, and `(F9)` have one common feature:
+At the time of this attack, the three open families `(D9a)`, `(D9b)`, and
+`(F9)` had one common feature:
 an octacyclic triangular/mixed core must control **two marked pentagonal
 interfaces**. One-interface octacyclic tools scale:
 
@@ -293,7 +306,7 @@ Proved in this attack:
 6. six of the seven remaining fully shared types by scaled octacyclic router
    packetizations.
 
-Not proved:
+Not proved in this original attack:
 
 ```text
 (D9a)  P|A_7|P with two arbitrary marked bridge interfaces,
@@ -304,3 +317,6 @@ Not proved:
 Accordingly, the octacyclic packet architecture scales through all `T^8Q` and
 through all but these exact two-interface `T^7PP` kernels. The theorem
 `s+(G)>|V(G)|` for every connected rank-nine cactus is not claimed.
+
+The authoritative later artifacts close `(B9)` and `(F9)`; the three-item list
+above is historical rather than the current frontier.
