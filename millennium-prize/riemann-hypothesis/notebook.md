@@ -4229,3 +4229,27 @@ an exact anchor--increment antialignment theorem. Even if proved, it controls
 only the anchor row and not the positive future displacement/dispersion square.
 Details and a 192-bit verifier are in
 `cycle-46-anchored-dispersion-geometry.md`. No RH result is claimed.
+
+## Cycle 47: quantitative anchor reserve and cell obstruction
+
+Summing the online anchor correlations with their physical packet weights gives
+the exact reserve
+
+\[
+S_{M,B}=\sum_{r=M}^{B-1}h_r[-\langle F_M,D_r\rangle]
+\left(1-{W_{M,r}\over W_{M,B}}\right)
+=P_M-\langle F_M,\bar F_{M,B}\rangle.
+\]
+
+Finite 192-bit diagnostics through `512` give minimum atomic, packet, and
+aggregate reserve ratios `5.91424...`, `1.25580...`, and `2.58341...`; the
+extremizers occur at the smallest anchor and drift to the endpoint. Atomic
+negativity is independently certified over the full triangle through `1024`.
+Even the conjectural packet bound `-<F_M,X_b>>=||X_b||^2` would leave the
+coherent mean channel sign-indefinite and would not prove terminal positivity.
+
+An exact unit-cell expansion reduces `k<=M` to a negative Chebyshev-square
+packet, but beyond `M` it retains a two-cutoff signed Mobius divisor-floor
+correlation. Chebyshev bounds and termwise absolute values cannot control that
+tail. Details are in `cycle-47-quantitative-anchor-reserve.md`. No RH result is
+claimed.

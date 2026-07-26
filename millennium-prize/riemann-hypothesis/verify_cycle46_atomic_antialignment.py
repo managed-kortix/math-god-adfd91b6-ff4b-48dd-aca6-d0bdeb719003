@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Certified finite audit of Cycle 46 restricted atomic antialignment."""
 
+import argparse
+
 from flint import arb, ctx
 
 from certify_complete_gram import RestrictedGram, mobius_sieve
@@ -49,4 +51,8 @@ def main(max_n: int = 512, bits: int = 192) -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--max-n", type=int, default=512)
+    parser.add_argument("--bits", type=int, default=192)
+    args = parser.parse_args()
+    main(args.max_n, args.bits)

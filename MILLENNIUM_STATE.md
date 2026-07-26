@@ -87,10 +87,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   now isolates the anchor reserve but rank-one Loewner routes fail, while the
   correctly restricted atomic correlations `<F_M,D_r>` are all certified
   negative for `2<=M<=r<=512`, suggesting an antialignment theorem that still
-  leaves the positive future-dispersion square uncontrolled
+  leaves the positive future-dispersion square uncontrolled; the weighted
+  anchor reserve now has an exact telescoping formula and strong finite packet
+  margins, but even packet square-payment leaves a sign-indefinite coherent
+  mean channel, while cell expansion isolates the unresolved two-cutoff signed
+  Mobius divisor-floor correlation beyond the initial Chebyshev packet
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 46
+- **cycle:** 47
 - **announcements:** none
 
 ## immutable target list
@@ -109,9 +113,9 @@ waiting process.
 
 ## next exact steps
 
-1. Attack the restricted atomic antialignment formula and quantify whether its
-   negative anchor row can pay any fixed fraction of the cumulative `D_r`
-   dispersion; sign alone is known to be insufficient.
+1. Couple the exact Cycle 47 anchor reserve simultaneously to the packet-square
+   dispersion and coherent weighted-mean channel; packet payment alone is now
+   proved insufficient for terminal positivity.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -126,6 +130,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 47 derived the exact weighted anchor-reserve telescope and
+  quantified its scale against atomic and cumulative packet squares. Certified
+  finite minima through `512` are favorable, and atomic negativity extends over
+  the full triangle through `1024`, but even termwise packet square-payment
+  leaves the coherent mean channel sign-indefinite. The exact reciprocal-cell
+  expansion reduces only `k<=M` to a Chebyshev-square packet; the remaining
+  two-cutoff Mobius divisor-floor correlation cannot be signed by elementary
+  Chebyshev or absolute-value estimates. No RH or Millennium solution is
+  claimed.
 
 - 2026-07-26: Cycle 46 isolated the collective packet-space Schur reserve and
   ruled out rank-one coefficient Loewner and separate-projection arguments.
