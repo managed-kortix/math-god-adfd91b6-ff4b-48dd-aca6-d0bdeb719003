@@ -110,6 +110,24 @@ Counts by shared-cut number are
 | 9 | 1 | 14 | 116 | 624 | 2215 | 5197 | 7822 | 7153 | 3540 | 729 | 27411 |
 | `>=10` | 1 | 14 | 116 | 624 | 2215 | 5197 | 7822 | 7153 | 3540 | 730 | 27412 |
 
+Applying the existing exact ordinary-split SAFE ledger gives:
+
+| `Q` ledger | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | SAFE total |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `q=3` | 0 | 14 | 116 | 615 | 2167 | 5018 | 7431 | 6614 | 3141 | 598 | 25714 |
+| `q=4` | 0 | 14 | 116 | 624 | 2208 | 5166 | 7732 | 7000 | 3398 | 672 | 26930 |
+| `q=5` | 0 | 13 | 115 | 624 | 2215 | 5192 | 7805 | 7112 | 3493 | 704 | 27273 |
+| `q=6` | 0 | 14 | 116 | 624 | 2215 | 5197 | 7819 | 7144 | 3525 | 719 | 27373 |
+| `q=7` | 0 | 13 | 115 | 624 | 2215 | 5197 | 7822 | 7151 | 3536 | 725 | 27398 |
+| `q=8` | 0 | 14 | 116 | 624 | 2215 | 5197 | 7822 | 7153 | 3539 | 728 | 27408 |
+| `q=9` | 0 | 13 | 115 | 624 | 2215 | 5197 | 7822 | 7153 | 3540 | 729 | 27408 |
+| `q=10` | 0 | 14 | 116 | 624 | 2215 | 5197 | 7822 | 7153 | 3540 | 730 | 27411 |
+| hostile `q>=11` | 0 | 13 | 115 | 624 | 2215 | 5197 | 7822 | 7153 | 3540 | 730 | 27409 |
+
+Here the canonical universe stabilizes once the `Q` incidence capacity reaches
+ten. The separate last two rows apply the even-cycle and hostile odd-cycle
+ledger entries to that same stabilized universe.
+
 For `Q=T` and the entered even-cycle ledger, ordinary splits leave only the
 common bouquet. Under the conservative hostile odd-cycle ledger they leave
 three signatures, at one, two, and three cuts:
@@ -120,8 +138,9 @@ T(X(Q())X(T()T()T()T()T()T()T()T()T()))
 T(X(Q())X(T())X(T()T()T()T()T()T()T()T()))
 ```
 
-Thus the saturated hostile census is `27412=27409+3`. These rows are only
-ordinary-split exceptions; no closure is asserted.
+Thus the saturated hostile census is `27412=27409+3`; for `q=10` it is
+`27412=27411+1`. These rows are only ordinary-split exceptions; no closure is
+asserted.
 
 ## 4. Fully shared `T^9PP`
 
@@ -162,9 +181,10 @@ legal replacement remain unchecked.
 
 The executable independently checks canonical signatures, color multisets,
 tree connectivity, all cycle and cut capacities, frozen partition totals,
-every cut-count total, complete exception-signature sets, and the new router's
-unique degree-four pentagon and exact branch profiles. Any mismatch raises
-`RuntimeError`.
+every cut-count total, complete exception-signature sets, SHA-256 digests of
+every canonical universe and residual list, exact SAFE complements, and the
+new router's unique degree-four pentagon and exact branch profiles. Any
+mismatch raises `RuntimeError`.
 
 The executable does not check global cactus synthesis, bridge remnants,
 off-core attached trees, cyclic order at a shared cut, sequential router

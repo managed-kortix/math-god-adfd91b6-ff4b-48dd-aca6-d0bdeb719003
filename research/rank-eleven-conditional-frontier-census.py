@@ -9,6 +9,7 @@ trees for the sharp-DNN residuals T^10Q and T^9PP.
 
 from collections import Counter
 from fractions import Fraction
+from hashlib import sha256
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
 import sys
@@ -73,6 +74,24 @@ EXPECTED_T9PP = {
     10: 3497,
 }
 
+EXPECTED_CLASS_DIGESTS = {
+    ("TQ", 3): "43e52041bcf83b695a781fc079a2d23118ba812851e15216e8d0dd9b64d9c684",
+    ("TQ", 4): "776c6cb6c04c824522d2c8de4789e26a2538bbcf04a39fb1543629c94747db5b",
+    ("TQ", 5): "1a8055ce4afc004641ab2ec12244d5e0d0d1c929360fe2cc3858872bd3135c1e",
+    ("TQ", 6): "d61711031f88e89295654302926dbb0de7149e63c7fbf4c608085ba8ac207e8a",
+    ("TQ", 7): "ff40e19b970ce298f47a8acf8e0ca0eaf23295fb3e7d770c8bfbd4d21fb5b955",
+    ("TQ", 8): "f019d6c94d8cc3e0f83271a9252abf7a1c8ac833639098460ef06aac39b94800",
+    ("TQ", 9): "803c2cb33ec2368d7eb8557f782d6a3ad458af295d7633e7f28dec5a50da0a4f",
+    ("TQ", 10): "18c7664d93d56d7bc16970bf951a3d0acf740c3206609a50c4172e1be994e467",
+    ("TPP", 0): "65f4d845ff0ef17ce7880992810de149fd2108927e2ef03b8fac57032ac72ce2",
+}
+
+EXPECTED_RESIDUAL_DIGESTS = {
+    "common": "a05009b2d94240464412b26915b203925b874685ff0a3286f753da3363f7f853",
+    "hostile": "328bf92b88e9d14060effd1bd5b6ccbe8398e55849351b89ff025a6ab3fbb1e9",
+    "TPP": "a0da0cf78b0dc0a11a86151a985fefddcd425b6743814877e7caf8d00ff5a56e",
+}
+
 T10Q_COMMON = "X(Q()T()T()T()T()T()T()T()T()T()T())"
 T10Q_HOSTILE = {
     T10Q_COMMON,
@@ -93,6 +112,10 @@ T9PP_EXCEPTIONS = {
     "X(T()T()T()T()T()T(X(P())X(T()))T(X(P())X(T())))",
 }
 NEW_ROUTER = "P(X(P())X(T())X(T())X(T()T()T()T()T()T()T()))"
+
+
+def signature_digest(signatures):
+    return sha256(("\n".join(signatures) + "\n").encode("ascii")).hexdigest()
 
 
 def partitions(triangles, distinguished, minimum=(0, 0)):
@@ -219,9 +242,15 @@ def tpp_component_bound(tree, component):
     return BASE.Bound(Fraction(0), True, f"conditional rank-{rank}>0")
 
 
-def validate_classes(classes, colors, q_cap):
+def validate_classes(classes, colors, q_cap, expected_digest):
     signatures = set()
     expected_colors = Counter(colors)
+    require(classes, "canonical generator returned no classes")
+    require(
+        tuple(signature for signature, _ in classes)
+        == tuple(sorted(signature for signature, _ in classes)),
+        "canonical classes are not signature-sorted",
+    )
     for signature, tree in classes:
         require(signature not in signatures, f"duplicate signature {signature}")
         signatures.add(signature)
@@ -246,12 +275,16 @@ def validate_classes(classes, colors, q_cap):
             capacity = q_cap if color == "Q" else BASE.CAPACITY[color]
             require(1 <= len(adjacency[cycle]) <= capacity, "cycle capacity violation")
             require(all(cut >= cycle_count for cut in adjacency[cycle]), "cycle-cycle edge")
+    require(
+        signature_digest(signature for signature, _ in classes) == expected_digest,
+        "canonical signature digest changed",
+    )
 
 
-def exact_census(colors, q_cap, bound_function):
+def exact_census(colors, q_cap, bound_function, expected_digest):
     colors = tuple(sorted(colors))
     classes = BASE.enumerate_colors(colors, q_cap)
-    validate_classes(classes, colors, q_cap)
+    validate_classes(classes, colors, q_cap, expected_digest)
     totals = Counter()
     safe = Counter()
     unresolved = []
@@ -322,6 +355,23 @@ def display_census(name, result):
         print(f"  c={cuts} signature={signature}")
 
 
+def validate_residuals(result, expected_signatures, digest_key):
+    totals, safe, unresolved = result
+    signatures = tuple(row[1] for row in unresolved)
+    require(
+        set(signatures) == expected_signatures,
+        "residual canonical signature set changed",
+    )
+    require(
+        signature_digest(signatures) == EXPECTED_RESIDUAL_DIGESTS[digest_key],
+        "residual canonical signature digest changed",
+    )
+    expected_safe = Counter(totals)
+    expected_safe.subtract(Counter(row[0] for row in unresolved))
+    expected_safe += Counter()
+    require(safe == expected_safe, "SAFE cut-count ledger is incomplete")
+
+
 def main():
     print("CONDITIONAL INPUT: rank-ten cactus theorem; this is not a theorem checker")
     print("Sharp-DNN rank-eleven residuals: T^10Q and T^9PP")
@@ -355,15 +405,25 @@ def main():
             ("T",) * 10 + ("Q",),
             capacity,
             lambda tree, component, label=label: tq_component_bound(label, tree, component),
+            EXPECTED_CLASS_DIGESTS[("TQ", capacity)],
         )
         check_equal(result[0], Counter(EXPECTED_T10Q[label]), f"T^10Q {label} totals")
         expected = {T10Q_COMMON} if label in {"q=3", "q=4", "q=6", "q=8", "q=10"} else T10Q_HOSTILE
-        check_equal({row[1] for row in result[2]}, expected, f"T^10Q {label} exceptions")
+        validate_residuals(
+            result,
+            expected,
+            "common" if len(expected) == 1 else "hostile",
+        )
         display_census(f"T^10Q {label}", result)
 
-    tpp_result = exact_census(("T",) * 9 + ("P",) * 2, 0, tpp_component_bound)
+    tpp_result = exact_census(
+        ("T",) * 9 + ("P",) * 2,
+        0,
+        tpp_component_bound,
+        EXPECTED_CLASS_DIGESTS[("TPP", 0)],
+    )
     check_equal(tpp_result[0], Counter(EXPECTED_T9PP), "T^9PP totals")
-    check_equal({row[1] for row in tpp_result[2]}, T9PP_EXCEPTIONS, "T^9PP exceptions")
+    validate_residuals(tpp_result, T9PP_EXCEPTIONS, "TPP")
     check_equal(
         Counter(row[0] for row in tpp_result[2]),
         Counter({1: 1, 2: 2, 3: 4, 4: 2, 5: 1}),
