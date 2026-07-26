@@ -62,3 +62,16 @@ An antichecker against size `s` must satisfy
 `h>(s-N)/3+1`.  In particular, direct anticheckers for size `N^k` require
 order-`N^k` samples.  This exact obstruction still gives no mechanism for
 amplifying a fixed exponent into a superpolynomial lower bound.
+
+## Bounded scout cycle 42
+
+Integer inversion of the memorization bound is piecewise exact. In the regime
+`h<=N+1`, an antichecker must satisfy `4(h-1)>s`, hence
+`h>=floor(s/4)+2`. In the regime `h>=N+1`, it must satisfy
+`3(h-1)+N>s`, hence `h>=floor((s-N)/3)+2`. For the quadratic target and
+`N>=4`, this forces
+
+`h>=floor((N^2-N)/3)+2`.
+
+The threshold remains quadratic, so this exact rounding does not supply
+all-exponents amplification.

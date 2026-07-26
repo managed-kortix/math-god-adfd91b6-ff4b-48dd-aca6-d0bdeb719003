@@ -4077,3 +4077,69 @@ remainder, the exact recurrence gives `H_n=D_restricted+o(1)=D_full-1+o(1)`.
 Thus the affine/endpoints must cancel the positive zero diagonal down to the
 same second coefficient governing the critical tail sign. Details are in
 `cycle-41-finite-zero-H-affine-gram.md`. No sign theorem or RH result is claimed.
+
+## Cycle 42: correlation-preserving packet projection
+
+On a complete `[A,B)` block, collect the weighted completed-square coordinates
+as `X=(sqrt(beta_n)d_(n,k))` and `Y=(sqrt(w_n)u_(n,k))`. Then the residual is
+`||X||^2-||Y||^2`, while the mixed contraction
+
+\[
+ J=\sum_n\beta_n\sqrt{C_n}\sum_k\langle d_{n,k},u_{n,k}\rangle
+\]
+
+retains the full signed old/new-divisor expansion. Scalar Cauchy gives
+
+\[
+ \|X\|^2-\|Y\|^2\ge |J|^2/\|Y\|^2-\|Y\|^2,
+\]
+
+but the exact loss is `||X-(J/||Y||^2)Y||^2`. Certified evaluation shows this
+bound is negative on all six Cycle 41 first-recovery blocks: their compensation
+is predominantly orthogonal to the aggregate U direction.
+
+For probes `z_j`, Gram matrix `G`, and correlations
+`b_j=<X,z_j>`, orthogonal projection gives the stronger exact lower bound
+
+\[
+ \|X\|^2-\|Y\|^2\ge b^*G^+b-\|Y\|^2.
+\]
+
+Using divisor-admission columns as probes preserves each old/new contraction.
+An upper frame bound `||sum c_jz_j||^2<=Delta sum|c_j|^2` yields the dual
+large-sieve lower bound `||X||^2>=Delta^{-1}sum|<X,z_j>|^2`. The open task is
+therefore a Mobius-specific lower bound for these signed correlation
+numerators; generic Gram positivity controls only the denominator/frame side.
+Details are in `cycle-42-correlation-preserving-packet-lower-bound.md`. No RH
+result is claimed.
+
+## Cycle 42: exact affine cancellation and circularity audit
+
+Let `g_(T,k)=(0,sum_(rho in Z(T))k^rho/rho)` and let
+`G_(T,K)=sum_(k<=K) I_k(g_(T,k),g_(T,k))>=0`. Since the affine coordinate in
+Cycle 41 satisfies `X_(n,T,k)-g_(T,k)=(ell_n,v_(n,k))`, the affine row and
+affine-zero cross terms obey the exact identity
+
+\[
+ K_{\star\star}+2\Re\sum_\rho K_{\star\rho}=H_{n,K}-G_{T,K}.
+\]
+
+Consequently, on a block `[A,B)`,
+
+\[
+ \mathfrak R_{1/2}(A,B;K)=A_{A,B;T,K}
+ +\left(\sum_{n=A}^{B-1}\beta_n\right)G_{T,K}.
+\]
+
+The affine estimate needed for positivity is therefore exactly
+`A_(A,B;T,K)>=-(sum beta_n)G_(T,K)`; it is a reformulation of the target, not a
+consequence of zero-Gram positivity. The two terms generally diverge and only
+their contracted sum has a safe `K->infinity` limit.
+
+A positive difference-stable scalar second coefficient gives
+`H_n=D_full-1+o(1)` and hence the stronger eventual singleton sign. Adaptive
+weighted block positivity allows oscillation and no scalar coefficient, so it
+is formally weaker, although every-start stopping is itself RH-sufficient.
+Using the RH diagonal or Cycle 40's RH-conditional coefficient assumptions to
+prove RH through this stopping theorem is circular. Details are in
+`cycle-42-affine-cancellation-and-circularity-audit.md`.

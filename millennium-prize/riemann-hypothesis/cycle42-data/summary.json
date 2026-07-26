@@ -1,0 +1,118 @@
+{
+  "scope": "certified finite diagnostic only; no asymptotic theorem or RH claim",
+  "max_N": 2304,
+  "arb_precision_bits": 192,
+  "parallel_jobs": 32,
+  "unit_count": 2302,
+  "certified_negative_H_count": 12,
+  "certified_negative_H_runs": [
+    [
+      2,
+      2
+    ],
+    [
+      39,
+      40
+    ],
+    [
+      95,
+      96
+    ],
+    [
+      99,
+      100
+    ],
+    [
+      219,
+      222
+    ],
+    [
+      226,
+      226
+    ]
+  ],
+  "H_sign_unresolved_count": 0,
+  "certified_negative_unit_count": 12,
+  "certified_negative_unit_runs": [
+    [
+      2,
+      2
+    ],
+    [
+      39,
+      40
+    ],
+    [
+      95,
+      96
+    ],
+    [
+      99,
+      100
+    ],
+    [
+      219,
+      222
+    ],
+    [
+      226,
+      226
+    ]
+  ],
+  "unit_sign_unresolved_count": 0,
+  "weakest_local_kappa": {
+    "n": 96,
+    "interval": "[0.354798697999997384662761443459872820347974213731 +/- 6.55e-49]"
+  },
+  "strongest_local_kappa": {
+    "n": 199,
+    "interval": "[1.52615418908623730770270383312631058951011765581 +/- 4.25e-48]"
+  },
+  "closest_local_kappa_to_half": {
+    "n": 98,
+    "interval": "[0.500748749683744435957799229640363940721080562569 +/- 2.63e-49]"
+  },
+  "last_negative_unit": 226,
+  "weakest_kappa_after_last_negative": {
+    "n": 592,
+    "interval": "[0.506967570346045899718073697313257853601719394 +/- 4.78e-46]"
+  },
+  "negative_cumulative_start_runs": [
+    [
+      2,
+      2
+    ],
+    [
+      39,
+      40
+    ],
+    [
+      93,
+      100
+    ],
+    [
+      217,
+      222
+    ],
+    [
+      224,
+      226
+    ]
+  ],
+  "deepest_cumulative_excursion": {
+    "start": 2,
+    "stop": 3,
+    "interval": "[-0.21636698521516862125620809996009174480734505626133 +/- 3.92e-51]"
+  },
+  "longest_first_recovery": {
+    "length": 12,
+    "start": 219,
+    "stop": 231
+  },
+  "starts_without_recovery_by_boundary": [],
+  "certificate": {
+    "path": "local-arb-certificate.jsonl.gz",
+    "format": "gzip JSON Lines; one Arb interval row per n",
+    "uncompressed_sha256": "25ea8a6d71c7202d0a9ddc7e098c90daf61a694b74271eabfbe26434512aee7e"
+  }
+}

@@ -6,57 +6,88 @@ import gzip
 import hashlib
 import json
 import multiprocessing as mp
+import time
 from pathlib import Path
 
-from flint import arb, ctx
+from flint import arb, arb_mat, ctx
 
 from certify_complete_gram import RestrictedGram, mobius_sieve
 
 
-def contraction_chunk(task):
-    """Compute one independent range of new-row Gram contractions."""
-    start, stop, limit, bits, mu, log_text = task
+def contraction_row(task):
+    """Compute one new-row Gram contraction using Arb matrix dot products."""
+    n, bits, active, u_coeff_text, d_coeff_text = task
     ctx.prec = bits
-    logs = [arb(value) for value in log_text]
     gram = RestrictedGram()
-    rows = []
-    for n in range(start, stop):
-        if not mu[n]:
-            continue
-        row_u = gram.chi_cross(n)
-        row_d = arb(0)
-        for a in range(1, n):
-            if mu[a]:
-                entry = gram.entry(a, n)
-                row_u += mu[a] * entry
-                row_d += mu[a] * logs[a] * entry
-        rows.append((n, row_u.str(80), row_d.str(80), gram.entry(n, n).str(80)))
-    return rows
+    entries = [gram.entry(a, n) for a in active]
+    row = arb_mat(1, len(active), entries)
+    u_coeff = arb_mat(len(active), 1, [arb(value) for value in u_coeff_text])
+    d_coeff = arb_mat(len(active), 1, [arb(value) for value in d_coeff_text])
+    row_u = gram.chi_cross(n) + (row * u_coeff)[0, 0]
+    row_d = (row * d_coeff)[0, 0]
+    return n, row_u.str(80), row_d.str(80), gram.entry(n, n).str(80)
 
 
-def parallel_contractions(limit, bits, jobs, chunk_size):
+def parallel_contractions(limit, bits, jobs, chunk_size, start=2):
     """Return independent Gram rows, parallelized and ordered by index."""
     mu = mobius_sieve(limit)
     logs = [arb(0)] + [arb(n).log() for n in range(1, limit + 2)]
-    log_text = tuple(value.str(80) for value in logs)
-    tasks = [
-        (start, min(start + chunk_size, limit + 1), limit, bits, mu, log_text)
-        for start in range(2, limit + 1, chunk_size)
-    ]
+    targets = [n for n in range(start, limit + 1) if mu[n]]
+    tasks = []
+    for n in targets:
+        active = tuple(a for a in range(1, n) if mu[a])
+        tasks.append((
+            n,
+            bits,
+            active,
+            tuple(str(mu[a]) for a in active),
+            tuple((mu[a] * logs[a]).str(80) for a in active),
+        ))
     if jobs == 1:
-        chunks = map(contraction_chunk, tasks)
+        results = map(contraction_row, tasks)
     else:
         with mp.Pool(jobs) as pool:
-            chunks = pool.imap_unordered(contraction_chunk, tasks)
-            chunks = list(chunks)
+            results = pool.imap_unordered(contraction_row, tasks, chunksize=chunk_size)
+            results = list(results)
     rows = {}
-    for chunk in chunks:
-        for n, row_u, row_d, diagonal in chunk:
-            rows[n] = (arb(row_u), arb(row_d), arb(diagonal))
+    for n, row_u, row_d, diagonal in results:
+        rows[n] = (arb(row_u), arb(row_d), arb(diagonal))
     return mu, logs, rows
 
 
-def scan_values(limit, bits=192, jobs=1, chunk_size=128):
+def load_checkpoint(path, bits):
+    if path is None or not path.exists():
+        return None
+    with path.open(encoding="ascii") as handle:
+        data = json.load(handle)
+    if data["arb_precision_bits"] != bits:
+        raise ValueError("checkpoint precision does not match --bits")
+    return {
+        "n": data["n"],
+        "u2": arb(data["u2"]),
+        "ud": arb(data["ud"]),
+        "d2": arb(data["d2"]),
+        "energy_n": arb(data["energy_n"]),
+    }
+
+
+def write_checkpoint(path, bits, n, u2, ud, d2, energy_n):
+    if path is None:
+        return
+    data = {
+        "arb_precision_bits": bits,
+        "n": n,
+        "u2": u2.str(80),
+        "ud": ud.str(80),
+        "d2": d2.str(80),
+        "energy_n": energy_n.str(80),
+    }
+    with path.open("w", encoding="ascii") as handle:
+        json.dump(data, handle, separators=(",", ":"))
+        handle.write("\n")
+
+
+def scan_values(limit, bits=192, jobs=1, chunk_size=128, checkpoint_path=None):
     """Compute rigorous P_N, H_n, kappa_n, and half-surplus balls."""
     if limit < 3:
         raise ValueError("limit must be at least 3")
@@ -81,6 +112,8 @@ def scan_values(limit, bits=192, jobs=1, chunk_size=128):
             d2 = old_d2 + 2 * m * log_n * row_d + log_n ** 2 * diagonal
         h_values[n] = d2 - log_n * logs[n + 1] * u2
 
+    write_checkpoint(checkpoint_path, bits, limit, u2, ud, d2, energies[limit])
+
     local = []
     prefix = {2: arb(0)}
     total = arb(0)
@@ -93,6 +126,43 @@ def scan_values(limit, bits=192, jobs=1, chunk_size=128):
         total += surplus
         prefix[n + 1] = total
     return energies, local, prefix
+
+
+def scan_extension(limit, checkpoint, bits=192, jobs=1, chunk_size=1,
+                   checkpoint_path=None):
+    """Continue a certified local scan from a saved post-update state."""
+    start = checkpoint["n"]
+    if limit <= start:
+        raise ValueError("extension limit must exceed checkpoint n")
+    ctx.prec = bits
+    mu, logs, rows = parallel_contractions(
+        limit, bits, jobs, chunk_size, start=start + 1
+    )
+    u2, ud, d2 = checkpoint["u2"], checkpoint["ud"], checkpoint["d2"]
+    energies = {start: checkpoint["energy_n"]}
+    h_values = {start: d2 - logs[start] * logs[start + 1] * u2}
+    for n in range(start + 1, limit + 1):
+        log_n = logs[n]
+        energies[n] = u2 - 2 * ud / log_n + d2 / log_n ** 2
+        if mu[n]:
+            row_u, row_d, diagonal = rows[n]
+            m = mu[n]
+            old_u2, old_ud, old_d2 = u2, ud, d2
+            u2 = old_u2 + 2 * m * row_u + diagonal
+            ud = (old_ud + m * row_d + m * log_n * row_u
+                  + log_n * diagonal)
+            d2 = old_d2 + 2 * m * log_n * row_d + log_n ** 2 * diagonal
+        h_values[n] = d2 - log_n * logs[n + 1] * u2
+    write_checkpoint(checkpoint_path, bits, limit, u2, ud, d2, energies[limit])
+
+    local = []
+    for n in range(start, limit):
+        weight = 1 - logs[n] / logs[n + 1]
+        decrement = energies[n] - energies[n + 1]
+        surplus = decrement - weight * energies[n]
+        kappa = decrement / (2 * weight * energies[n])
+        local.append((n, h_values[n], kappa, surplus))
+    return energies, local
 
 
 def consecutive_runs(indices):
@@ -235,6 +305,42 @@ def build_summary(limit, bits, jobs, local, cumulative, certificate, sha256):
     }
 
 
+def build_extension_summary(start, limit, bits, jobs, local, certificate, sha256):
+    negative_h = [row[0] for row in local if row[1] < 0]
+    negative_units = [row[0] for row in local if row[3] < 0]
+    unresolved_h = [row[0] for row in local if not (row[1] < 0 or row[1] > 0)]
+    unresolved_units = [row[0] for row in local if not (row[3] < 0 or row[3] > 0)]
+    weakest = certified_witness(local, "kappa")
+    closest = min(local, key=lambda row: abs(float((row[2] - arb(1) / 2).mid())))
+    return {
+        "scope": "certified finite extension only; no asymptotic theorem or RH claim",
+        "local_range": [start, limit - 1],
+        "arb_precision_bits": bits,
+        "parallel_jobs": jobs,
+        "unit_count": len(local),
+        "certified_negative_H_count": len(negative_h),
+        "certified_negative_H_runs": consecutive_runs(negative_h),
+        "H_sign_unresolved_count": len(unresolved_h),
+        "certified_negative_unit_count": len(negative_units),
+        "certified_negative_unit_runs": consecutive_runs(negative_units),
+        "unit_sign_unresolved_count": len(unresolved_units),
+        "first_failure_of_local_half_positivity": (
+            negative_units[0] if negative_units else None
+        ),
+        "weakest_local_kappa": {
+            "n": weakest[0], "interval": ball_text(weakest[2])
+        },
+        "closest_local_kappa_to_half": {
+            "n": closest[0], "interval": ball_text(closest[2])
+        },
+        "certificate": {
+            "path": certificate.name,
+            "format": "gzip JSON Lines; one Arb interval row per n",
+            "uncompressed_sha256": sha256,
+        },
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--max-N", type=int, default=8192)
@@ -242,16 +348,35 @@ def main():
     parser.add_argument("--jobs", type=int, default=max(1, mp.cpu_count() // 2))
     parser.add_argument("--chunk-size", type=int, default=128)
     parser.add_argument("--output-dir", type=Path, default=Path("cycle41-data"))
+    parser.add_argument("--checkpoint", type=Path)
+    parser.add_argument("--resume-from", type=Path)
     args = parser.parse_args()
     ctx.prec = args.bits
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    _, local, _ = scan_values(args.max_N, args.bits, args.jobs, args.chunk_size)
-    cumulative = cumulative_scan(local)
+    if args.resume_from:
+        checkpoint = load_checkpoint(args.resume_from, args.bits)
+        if checkpoint is None:
+            raise FileNotFoundError(args.resume_from)
+        _, local = scan_extension(
+            args.max_N, checkpoint, args.bits, args.jobs, args.chunk_size,
+            args.checkpoint,
+        )
+    else:
+        _, local, _ = scan_values(
+            args.max_N, args.bits, args.jobs, args.chunk_size, args.checkpoint
+        )
     certificate = args.output_dir / "local-arb-certificate.jsonl.gz"
     sha256 = write_certificate(certificate, local)
-    summary = build_summary(
-        args.max_N, args.bits, args.jobs, local, cumulative, certificate, sha256
-    )
+    if args.resume_from:
+        summary = build_extension_summary(
+            checkpoint["n"], args.max_N, args.bits, args.jobs, local,
+            certificate, sha256,
+        )
+    else:
+        cumulative = cumulative_scan(local)
+        summary = build_summary(
+            args.max_N, args.bits, args.jobs, local, cumulative, certificate, sha256
+        )
     with (args.output_dir / "summary.json").open("w", encoding="ascii") as handle:
         json.dump(summary, handle, indent=2)
         handle.write("\n")

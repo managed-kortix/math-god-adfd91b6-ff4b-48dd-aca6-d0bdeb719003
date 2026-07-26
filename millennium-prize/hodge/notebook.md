@@ -59,3 +59,13 @@ codimension of the plane-incidence image: a fixed plane imposes
 recovers a one-dimensional obstruction space beside a reduced isolated plane
 and a smooth incidence divisor.  Nonzero `H^1(N)` therefore cannot by itself
 be used as a failure-of-dominance certificate.
+
+## Bounded scout cycle 42
+
+The cubic calibration gives an exact local counterexample to treating
+`H^1(N)` as a nonreducedness test. The normal map has cokernel `C[uvw]`, so
+`H^1(N_(P/X))` is one-dimensional, but the Hilbert tangent space is
+`H^0(N_(P/X))=0`. For the local Hilbert ring `(A,m)` this says `m/m^2=0`;
+Nakayama gives `m=0`. Hence the plane is a reduced isolated Hilbert point even
+though its standard obstruction space is nonzero. No conclusion follows for
+other Hodge-locus components.

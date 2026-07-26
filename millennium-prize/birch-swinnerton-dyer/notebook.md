@@ -51,3 +51,18 @@ Thus exact identities `a_0=a_1=0` imply
 `a_2=G''(0)/(2L^2)`.  Without the linear zero, the second weight derivative
 mixes `a_1` into the quadratic cyclotomic coefficient.  This settles only the
 rank-two normalization; it creates no relation to a complex `L`-derivative.
+
+## Bounded scout cycle 42
+
+The conversion remains triangular at the next order. If
+`F(T)=a_0+a_1T+a_2T^2+a_3T^3+O(T^4)`, `T=exp(Ls)-1`, and `G(s)=F(T(s))`, then
+
+`G'''(0)=L^3(a_1+6a_2+6a_3)`.
+
+After exact vanishing of `a_0,a_1`, one must still subtract the quadratic
+moment:
+
+`a_3=G'''(0)/(6L^3)-G''(0)/(2L^2)`.
+
+Higher weight derivatives therefore cannot be read coefficientwise. This is
+only normalization and gives no complex-derivative transfer.

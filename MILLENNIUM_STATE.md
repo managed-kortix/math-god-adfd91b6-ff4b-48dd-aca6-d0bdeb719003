@@ -75,7 +75,7 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 41
+- **cycle:** 42
 - **announcements:** none
 
 ## immutable target list
@@ -103,13 +103,26 @@ waiting process.
 3. Fold the full completed smoothed zero expansion to positive ordinates and
    compare its negative diagonal with the same-sign, affine, and endpoint
    channels under one finite cutoff and signed error.
-4. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
-   Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
-   P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
+4. Keep bounded scouts live: BSD exact modular-symbol moment certification;
+   Hodge component-dominance obstruction; Navier--Stokes diagonal-mode signed
+   integral; P-vs-NP all-exponents amplification obstruction; Yang--Mills
+   cutoff-uniform spectral-edge control.
 5. Rotate only at a proved checkpoint, decisive falsification, or documented
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 42 advanced each non-RH bounded scout exactly once. BSD:
+  extended the weight/cyclotomic conversion through degree three and exposed
+  the required triangular subtraction. Hodge: proved the Fermat cubic plane is
+  a reduced isolated Hilbert point despite its one-dimensional standard
+  obstruction space. Navier--Stokes: computed the exact pressure for the first
+  diagonal-mode perturbation not covered by the two-shear parity theorem.
+  P versus NP: inverted the memorization inequality with exact integer
+  thresholds, giving `floor((N^2-N)/3)+2` at the quadratic target for `N>=4`.
+  Yang--Mills: extended the escaping-state obstruction to the full fixed
+  continuous functional calculus. RH remains active and unchanged; no solution
+  is claimed.
 
 - 2026-07-26: expressed the Cycle 40 singleton defect `H_n` in exact finite
   symmetric zero coordinates with one full affine coordinate retaining the
@@ -214,6 +227,26 @@ waiting process.
   scales, compensation attained only at infinity, and summable sparse block
   sampling are insufficient. The required Mobius band localization and
   complete weighted debt/gain estimates remain open; no RH result is claimed.
+- 2026-07-26: Cycle 42 applied sparse-band recovery to the certified finite
+  complete-Gram H data. Merging unpaid neighboring runs gives four episodes
+  `[2,3)`, `[39,41)`, `[95,101)`, `[219,227)`, paid at `6,42,103,231`.
+  The exact minimal common-window debt is the maximum signed weighted suffix,
+  not the larger sum of negative parts. All post-initial episodes have payment
+  radius at most 12, negative-free window at most 4, and beta distortion below
+  1.124. Abelizing the exact recurrence expresses each residual as initial H
+  charge plus deterministic drift plus squarefree-supported impulses, yielding
+  a necessary-and-sufficient impulse budget. These are finite certificates;
+  the uniform arithmetic impulse bound remains open and no RH result is claimed.
+- 2026-07-26: Cycle 42 derived the exact two-impulse formula for pairing a
+  `mu=+1` event with a later `mu=-1` event and the triangular beta-weighted
+  recurrence needed for actual `H` recovery. The least-prime map
+  `q -> 2q/p` is algebraically invalid: it preserves `mu=+1`, moves backward
+  or fixes `q`, and is not an involution. A certified chronological LIFO audit
+  reproduces five visible positive trigger/compensator pairs but finds 43
+  negative pair sums among 66 pairs through 240. Positive unweighted impulse
+  pairs are therefore insufficient: weighted recovery must also pay every
+  radial drift and retain intervening impulses, the incoming level, and beta
+  distortion. No asymptotic pairing theorem or RH result is claimed.
 - 2026-07-26: derived the exact Cycle 41 event recurrence for `H_(n+1)-H_n`.
   Its scale drift is always negative; nonsquarefree `n+1` gives exactly this
   pure drift, while squarefree events add one negative diagonal cost and one
@@ -685,3 +718,31 @@ waiting process.
   the certified compensation of all negative bands through 512, but gives no
   asymptotic packet comparison: the complete divisor-floor tail remains the
   unresolved arithmetic inequality. No RH result is claimed.
+- 2026-07-26: tested a Cycle 42 correlation-preserving Cauchy lower bound for
+  complete positive D packets versus negative U packets. The scalar projection
+  retains all signed old/new-divisor contractions, but fails on every observed
+  negative-band first-recovery block: the positive recovery lies mainly in the
+  D component orthogonal to the aggregate U packet. Derived an exact multiprobe
+  Gram/pseudoinverse lemma and its dual large-sieve form; divisor-admission
+  probes recover the missing orthogonal square one signed correlation at a
+  time. The remaining obstruction is a Mobius-specific lower bound for those
+  correlation numerators, not Gram positivity or an upper frame bound. No RH
+  result is claimed.
+- 2026-07-26: Cycle 42 tested direct injection of the unfavorable equal-Mobius
+  reduced Vasyunin packets and diagonal into favorable opposite-Mobius packets.
+  Exact-formula 192-bit Arb censuses already give a cardinality obstruction on
+  `[2,8)` (13 sources, 6 targets). On `[2,16)` there is a stronger capacity
+  obstruction: unfavorable mass is `2.086492...` versus favorable mass
+  `1.952033...`, so even fractional reuse cannot dominate it. This rules out a
+  universal packet-only sign pairing, not full block positivity: the linear
+  contraction in (41.4) remains available. No RH result is claimed.
+- 2026-07-26: derived the exact Cycle 42 affine cancellation identity for the
+  finite-zero H Gram. On every finite cell prefix the affine row plus its zero
+  cross terms equals the arithmetic H prefix minus the positive zero Gram; on
+  a scale block the latter is multiplied by `sum beta_n`. Thus the affine bound
+  needed for block positivity is exactly equivalent to the desired residual
+  sign, while the separate affine and zero terms generally diverge. A positive
+  difference-stable second coefficient would give the stronger eventual
+  singleton sign; adaptive weighted stopping is formally weaker but already
+  RH-sufficient. RH diagonalization or the RH-conditional coefficient route
+  cannot be used to prove RH without circularity. No sign theorem is claimed.

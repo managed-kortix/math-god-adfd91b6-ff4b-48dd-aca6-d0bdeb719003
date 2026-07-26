@@ -59,3 +59,15 @@ integer-time correlators converge with exponential factor `q^k`.  Yet
 transfer Hamiltonian still has zero gap.  Simultaneous strong convergence of
 all fixed transfer powers is therefore insufficient without a uniform
 full-vacuum-complement bound.
+
+## Bounded scout cycle 42
+
+The escaping-state example survives the whole fixed continuous functional
+calculus. For every bounded continuous `f:[0,1]->C`,
+
+`f(T_n)=f(q)I+(f(1)-f(q))P_(e_n) -> f(q)I`
+
+strongly. Yet every `T_n` retains eigenvalue one, norm one, and zero
+transfer-Hamiltonian gap. Thus even strong convergence of all fixed continuous
+spectral observables cannot replace cutoff-uniform control of the moving
+spectral edge.

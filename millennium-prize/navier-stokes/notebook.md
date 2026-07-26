@@ -67,3 +67,19 @@ second summand is likewise odd in the centered `y` variable.  Therefore the
 pressure contribution is exactly zero for every pair of integer frequencies,
 phases, and amplitudes.  A viable pressure-growth candidate must introduce a
 genuinely nonseparable interaction rather than detune this family.
+
+## Bounded scout cycle 42
+
+The next exact ansatz outside that zero theorem is
+
+`u_c=(a sin y+c sin(x+y),b sin x-c sin(x+y),0)`.
+
+It is divergence-free, and direct solution of the pressure Poisson equation
+gives
+
+`p_c=ab cos x cos y+c[b cos y+b cos(2x+y)/5-a cos x-a cos(x+2y)/5]`.
+
+The mixed pressure frequencies `(2,1),(1,2)` and the corresponding cross terms
+in `|u_c|^2` destroy both coordinate-odd factorizations used for two shears.
+This is a structural checkpoint, not a growth certificate: the exact signed
+unprojected pressure integral and viscous comparison are next.
