@@ -69,3 +69,13 @@ rows. `m8_pilot_shard.py` emits one genuine sixth-row terminal leaf. Its
 compressed CNF/LRAT, logs, hashes, and manifest are committed as the first
 end-to-end independently checked certificate. It proves only that one leaf is
 UNSAT, not that the sixth row or the `m=8` branch is eliminated.
+
+`m8_rho5_leaves.py` emits the 735 canonical colored missing-graph/C-to-B
+orientation leaves under all 36 `rho=5` rows and hashes their deterministic
+stream. This is the production cover generator; an independent labelled-orbit
+checker remains required before the cover gate closes.
+
+`m8_rho5_shard.py --index I` reconstructs and emits the exact CNF for canonical
+leaf `I` in that cover. Leaf 0 has also completed the LRAT pipeline during
+development; bulk artifacts are not committed until the independent cover
+checker and completion ledger are in place.

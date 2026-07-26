@@ -10,4 +10,4 @@ cnf-bytes: 10378027
 lrat-bytes: 7219568
 solver-exit: 20
 checker-result: c VERIFIED
-scope: one genuine colored missing-graph/orientation leaf, not the full m=8 row
+scope: one rooted robust-witness colored missing-graph/C-B-orientation orbit modulo S7(A-without-r) x S7(B), within the vertex-minimal then arc-minimal n=18 m=8 B7 model; not the full m=8 row

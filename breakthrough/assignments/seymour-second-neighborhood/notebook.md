@@ -345,3 +345,28 @@ No audits yet.
   36 `rho=5` coarse rows, filter them by max-flow orientation feasibility, and
   issue checked LRAT jobs for every surviving canonical leaf. Maintain a cover
   hash so no leaf is omitted or duplicated.
+
+## 2026-07-25 — tick 15
+
+- Derived and implemented the complete corrected-sixth-row cover: 323 canonical
+  colored missing graphs and 735 leaves after C-to-B orientation orbits. The
+  leaf key is `(C-state,rho0,rho1,n0,n1,epsilon0,epsilon1,k,t)` and fully
+  reconstructs the eight holes and C-B directions.
+- Tightened the pilot manifest after hostile audit: its LRAT eliminates exactly
+  one rooted robust-witness orbit modulo `S7(A\{r}) x S7(B)`, not a broader
+  missing-graph class.
+- No whole C-margin state or `mu_r` regime in the sixth row is eliminated by
+  current human inequalities. The nine states remain incidence-feasible; the
+  pilot is a strict subleaf.
+- **Next queued attack:** implement an independent labelled-orbit cover checker
+  for the 735 leaves, then add a generic leaf-to-CNF emitter and max-flow filter.
+  Schedule checked LRAT runs by leaf complexity and preserve a completion
+  ledger keyed by the cover hash.
+
+### First generic leaf run
+
+- Added a generic canonical leaf-to-CNF emitter. Leaf 0, key
+  `('M',0,5,0,0,0,0,0,0)`, returned CaDiCaL UNSAT and independently checked
+  LRAT `c VERIFIED`. This is a second certified leaf observation, but its bulk
+  artifact is deferred until the cover checker/ledger prevents bookkeeping
+  omissions.
