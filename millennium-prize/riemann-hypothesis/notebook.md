@@ -2838,3 +2838,70 @@ left-null basis of the coarse floor matrix.  Its basis vectors arise from
 collisions of truncated divisor-incidence rows.  Derive the exact Lambda-valued
 coordinates of the affine vector on these collisions, and determine whether
 their energy cancels or reinforces the explicit odd prime diagonal.
+
+## Cycle 29: the pair-constant left-null residual vanishes
+
+The exact analyzer `analyze_pair_constant_residual.py` computes the left kernel
+of the coarse matrix
+
+\[
+ C_{k,d}=\lfloor k/d\rfloor,
+ \qquad N/2\leq k<N,\quad 1\leq d\leq N,
+\]
+
+over the rationals.  Contrary to the anticipated sparse collision correction,
+`C` has full row rank `N/2` for every dyadic `2<=N<=128`.  Hence its columns
+span the entire pair-constant space and
+
+\[
+ \boxed{(I-P_C)(\bar c-Hx)=0}
+\]
+
+for the actual affine vector, indeed for every vector.  The exact left-null
+basis is empty, so its Arb coordinate tuple, coordinate supports, residual
+support, and weighted projection energy are all empty or zero.  A general
+exact implementation using the Gram `L^T W_-^{-1}L` was retained and tested on
+a nontrivial sparse left kernel.
+
+At 192-bit precision the independently evaluated scaled odd prime-power
+diagonal
+
+\[
+ {N\over\log^2(2N)}
+ \sum_{\substack{N<r<2N\\r\text{ odd}}}{\Lambda(r)^2\over r^2}
+\]
+
+is respectively `0.139561452, 0.167331409, 0.105472584, 0.135777594,
+0.089908252, 0.091012125, 0.080296855` for
+`N=2,4,8,16,32,64,128`.  Thus the pair-constant residual neither cancels nor
+reinforces the odd diagonal; only the separate affine jump square remains.
+This is a finite exact/Arb audit, not a contraction result.
+
+The rank statement is in fact exact for every even `N`, not merely the tested
+range.  The columns `N/2<=d<N` form the unit lower-triangular block
+
+\[
+C_{k,d}=\mathbf1_{d\le k}\qquad(N/2\le k,d<N),
+\]
+
+because `k<2d`.  Hence `P_C=I` for every positive shell weight and the queued
+collision premise is decisively false.  Four-row relations belong only to a
+column-deleted surrogate and cannot contribute to the actual decomposition.
+
+The full affine residual is therefore exactly
+
+\[
+\boxed{
+\mathcal R_{\rm odd}
+=\sum_{k=N/2}^{N-1}{N\over(2k+1)^2}
+\left(A-{\Lambda(2k+1)\over\log(2N)}\right)^2.}
+\]
+
+### Next queued main-funnel step
+
+Use the explicit triangular representation of the pair-average to write the
+effective coarse coefficient `gamma` by first differences.  Compare that exact
+coefficient vector with the preceding-scale Mobius taper, retaining the affine
+prime jump square.  Determine whether the discrepancy has a convolution
+collapse or whether its control is again equivalent to a Mertens-strength
+correlation.

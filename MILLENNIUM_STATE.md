@@ -41,14 +41,16 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   projection and positive Schur complement under canonical dyadic embedding
   are now derived, including the actual Mobius coefficients and affine
   residual; that Schur residual now collapses exactly to an odd prime-power
-  diagonal of asymptotic size `1/(4N log N)`, so the current sublemma is a
-  sparse left-null/divisor-incidence formula for the remaining pair-constant
-  affine residual, after
+  diagonal of asymptotic size `1/(4N log N)`; the anticipated pair-constant
+  left-null residual vanishes identically because shell columns form a unit
+  lower-triangular block, so the current sublemma is an exact first-difference
+  comparison of the effective coarse coefficient with the preceding Mobius
+  taper while retaining the affine prime jump square, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 28
+- **cycle:** 29
 - **announcements:** none
 
 ## immutable target list
@@ -67,10 +69,10 @@ waiting process.
 
 ## next exact steps
 
-1. Express `(I-P_C)(bar c-Hx)` in a sparse left-null basis of the coarse floor
-   matrix, using collisions of divisor-incidence rows.
-2. Derive its exact Lambda-valued collision coordinates and compare their
-   energy with the explicit odd prime diagonal; positivity has the wrong sign.
+1. Write the effective embedded-coarse coefficient by exact first differences
+   through the unit triangular shell block.
+2. Compare it with the preceding Mobius taper and classify the discrepancy by
+   divisor convolution, retaining the affine prime jump square.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -294,6 +296,13 @@ waiting process.
   exposes a nonzero prime diagonal.  Exact rational and Arb checks pass through
   `N=64`.  The next target is the sparse pair-constant left-null residual.  No
   solution is claimed.
+- 2026-07-26: the queued sparse left-null premise was falsified exactly.  For
+  every even `N`, shell columns `N/2<=d<N` form a unit lower-triangular block,
+  so the coarse floor matrix has full row rank and the pair-constant residual
+  vanishes identically.  The full odd affine residual is only the explicit
+  square of `A-Lambda(r)/log(2N)`.  Exact/Arb checks pass through `N=128`; the
+  route now compares the effective coarse coefficient by first differences.
+  No solution is claimed.
 - 2026-07-26: derived the exact weighted dyadic isometry, orthogonal projection
   of every odd fine floor column, and generalized positive Schur complement.
   Inserted the actual normalized scale-`2N` Mobius coefficients, with
@@ -302,3 +311,11 @@ waiting process.
   The signed completion shows that this positive residual is subtracted in the
   desired cross-scale difference, so geometry alone still gives no
   contraction.  No solution is claimed.
+- 2026-07-26: implemented the queued exact rational left-null audit of the
+  coarse pair-constant floor matrix and evaluated the actual affine
+  `bar c-Hx` vector with 192-bit Arb.  The matrix has full row rank, so its
+  left-null basis, residual coordinates, sparse supports, and weighted
+  projection energy all vanish through `N=128`; a general weighted left-kernel
+  implementation is tested separately.  The odd prime-power diagonal remains
+  strictly positive, so this correction neither cancels nor reinforces it.
+  No contraction or solution is claimed.
