@@ -25,6 +25,8 @@ class MobiusEndpointSurrogate:
     alpha: Fraction
     reduced_frequencies: tuple
     frequencies: tuple
+    m: object
+    n: object
     u: tuple
     d: tuple
     raw_modes: tuple
@@ -108,6 +110,7 @@ def aggregate_modes(modes):
 
 def generate_mobius_endpoint_surrogate(N=4, harmonics=3):
     """Build the N -> 2N endpoint surrogate; N=4 gives alpha=1/3."""
+    u_source, d_source = endpoint_channels(N)
     raw = harmonic_modes(N, harmonics)
     aggregated = aggregate_modes(raw)
     reduced = tuple(item[0] for item in aggregated)
@@ -119,6 +122,8 @@ def generate_mobius_endpoint_surrogate(N=4, harmonics=3):
         alpha=endpoint_alpha(N),
         reduced_frequencies=reduced,
         frequencies=angular,
+        m=ball(1) + sum(u_source, arb(0)) / 2,
+        n=sum(d_source, arb(0)) / 2,
         u=tuple(item[1] for item in aggregated),
         d=tuple(item[2] for item in aggregated),
         raw_modes=raw,
@@ -146,6 +151,8 @@ def generate_exact_4_to_8_surrogate(harmonics=3):
         alpha=Fraction(1, 3),
         reduced_frequencies=surrogate.reduced_frequencies,
         frequencies=surrogate.frequencies,
+        m=surrogate.m,
+        n=surrogate.n,
         u=surrogate.u,
         d=surrogate.d,
         raw_modes=surrogate.raw_modes,

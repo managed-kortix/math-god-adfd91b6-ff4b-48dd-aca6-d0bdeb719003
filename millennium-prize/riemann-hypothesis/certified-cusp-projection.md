@@ -125,7 +125,7 @@ and rational channels, `B_r` is an exact rational suffix sum. For Arb endpoint
 surrogates it is an outward-rounded Arb suffix sum. Formula (5) scales as
 `h^(2p+2)`. Degree zero retains the sharper Neumann Poincare constant in (2).
 
-An alternative weighted Legendre theorem is
+The residual backend uses the weighted Legendre theorem
 
 \[
 \|(I-P_p)F\|_{L^2(I)}^2
@@ -139,11 +139,48 @@ where `1<=m<=p+1` and
 \Lambda_{p,m}=\frac{(p+1+m)!}{(p+1-m)!}.
 \]
 
-The factorial ratio belongs in the denominator. Under the normalized reference
-weight, affine cell scaling contributes the corresponding factor `2^(-2m)`.
-The implementation presently uses the simpler midpoint-Taylor theorem (5),
-whose constants and origin behavior are transparent; the weighted theorem is a
-strictly sharper queued backend.
+The factorial ratio belongs in the denominator. On a cell of length `h`, using
+the derivative supremum and integrating the weight exactly gives
+
+\[
+ \|(I-P_p)F\|_{L^2(I)}^2
+ \le C_{p,m}h^{2m+1}\|F^{(m)}\|_\infty^2,
+ \qquad
+ C_{p,m}={m!^2(p+1-m)!\over(2m+1)!(p+1+m)!}.
+\]
+
+Indeed, the affine map contributes `h^(2m)` and
+`int_0^1 x^m(1-x)^m dx=m!^2/(2m+1)!`. Summing uniform cells replaces the final
+`h` by `Q`. The implementation computes these constants as exact `Fraction`s,
+certifies every admissible `m`, and selects the candidate with the smallest Arb
+upper endpoint. For `p=3,m=4`, the constant is `1/25401600`, improving the
+midpoint-Taylor constant by the exact factor `1225/64`.
+
+## Signed shadow-shell completion
+
+The primary projection degree remains `p<=3`. An optional practical shadow
+degree `r>=p` evaluates additional exact Legendre moments. Writing `S_(p,r)`
+for the shell projection and `z=d-u/alpha`, its exact signed contribution is
+
+\[
+ \mathcal L_{S_{p,r}}
+ ={1\over\alpha}\|S_{p,r}F_u\|_2^2
+ -\alpha\|S_{p,r}F_z\|_2^2.
+\]
+
+Consequently the completed upper bound is
+
+\[
+ \mathcal L_K\le \mathcal L_{\pi\min/2}-\mathcal L_{G_p}
+ -\mathcal L_{S_{p,r}}+\alpha\|(I-P_r)F_z\|_2^2.
+\]
+
+Both shell squares are accumulated separately from orthogonal Arb moments; no
+sign is inferred from an interval difference. The final residual uses the
+weighted theorem at degree `r`. The general three-term Legendre recurrence now
+supports shadow degrees beyond three, while the advertised primary interface
+remains restricted to degrees zero through three. Taking `r=p` recovers the
+ordinary weighted certificate exactly.
 
 At fixed total rank `R=M(p+1)`, the verifier compares all four degrees using
 `M=R/(p+1)` and independently checks every one-sided upper bound against the

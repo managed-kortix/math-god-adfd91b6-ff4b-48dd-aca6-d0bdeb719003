@@ -17,15 +17,16 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   audits, but fixed-order absolute radii grow rapidly; the current sublemma is
   a certified PSD cusp/projection bound now replaces entrywise near-field
   radii by a residual depending only on the endpoint cancellation vector; the
-  higher-order Legendre projection now certifies a negative exact finite
-  `N=4 -> 8`, `R=3` Mobius oscillatory surrogate; the current sublemma is a
-  weighted Legendre/shadow-shell refinement retaining the favorable PSD
-  residual at lower rank, after
+  weighted Legendre/shadow-shell projection is certified, but completion of
+  the constant modes and a direct untruncated sawtooth certificate prove the
+  `N=4 -> 8` tail is positive; the current sublemma is a complete-functional
+  breakpoint/averaging inequality rather than an oscillatory-only sign target,
+  after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 18
+- **cycle:** 19
 - **announcements:** none
 
 ## immutable target list
@@ -44,10 +45,10 @@ waiting process.
 
 ## next exact steps
 
-1. Implement the weighted Legendre residual and signed shadow-shell completion,
-   retaining a certified lower bound for the favorable `u` residual.
-2. Complete the finite `N=4 -> 8`, `R=3` tail with exact constant and linear
-   modes, then isolate the harmonic truncation remainder.
+1. Certify the complete `[1,infinity)` endpoint decrement for small dyadic `N`
+   by exact breakpoint integration plus the direct tail enclosure.
+2. Search for a scalable complete-functional block or averaged inequality;
+   reject oscillatory-only sign targets as strategically misleading.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -203,3 +204,11 @@ waiting process.
   `-0.00406225097`. This is only a finite surrogate. Audits proved a sharper
   weighted Legendre constant and a shadow-shell lower bound recovering the
   favorable PSD residual; these are next. No solution is claimed.
+- 2026-07-26: implemented exact weighted Legendre constants and signed shadow
+  shells, reducing the finite oscillatory negative-certificate rank to 104.
+  Completing constants reversed the sign: the `R=3` full tail is
+  `+0.2153171`. A direct unit-breakpoint Arb certificate then proved the full
+  untruncated `N=4 -> 8` tail lies in `[0.2004969,0.2320927]`. Thus
+  oscillatory-only negativity is decisively misleading. The route now targets
+  the complete endpoint functional and its scalable averages. No solution is
+  claimed.

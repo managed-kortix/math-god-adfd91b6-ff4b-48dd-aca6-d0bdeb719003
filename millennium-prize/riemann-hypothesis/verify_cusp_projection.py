@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Certified piecewise Legendre cusp/projection bounds for a finite RH form.
 
-Degrees 0 through 3 are supported. Projection features are evaluated from
-Arb Si/sine/cosine endpoint formulas, without evaluating sin(w*t)/t at zero.
-The projection residual is bounded by an origin-safe derivative theorem.
-This is a finite prototype; it does not certify a frequency or harmonic tail.
+Primary degrees 0 through 3 are supported, with optional higher shadow modes.
+Projection features are evaluated from Arb Si/sine/cosine endpoint formulas,
+without evaluating sin(w*t)/t at zero. The residual uses the sharp weighted
+Legendre factorial constant and exact affine scaling. This is a finite
+prototype; it does not certify a frequency or harmonic tail.
 """
 
 import argparse
@@ -28,6 +29,12 @@ class ProjectionCertificate:
     upper_bound: object
     cells: int
     degree: int = 0
+    shadow_degree: int = 0
+    shadow_shell_form: object = None
+    shadow_u_energy: object = None
+    shadow_z_energy: object = None
+    residual_order: int = 0
+    residual_backend: str = "weighted"
 
     @property
     def residual_bound(self):
@@ -37,8 +44,22 @@ class ProjectionCertificate:
     def total_rank(self):
         return self.cells * (self.degree + 1)
 
+    @property
+    def completed_rank(self):
+        return self.cells * (self.shadow_degree + 1)
 
-def _validate(frequencies, u, d, alpha, Q, cells, degree=0):
+
+@dataclass(frozen=True)
+class FiniteTailCertificate:
+    constant_constant: object
+    constant_sine: object
+    oscillatory: ProjectionCertificate
+    expression: object
+    upper_bound: object
+
+
+def _validate(frequencies, u, d, alpha, Q, cells, degree=0,
+              shadow_degree=None):
     if not frequencies or len(frequencies) != len(u) or len(u) != len(d):
         raise ValueError("frequency and channel lengths must agree and be nonempty")
     if any(not frequencies[i] < frequencies[i + 1]
@@ -54,6 +75,10 @@ def _validate(frequencies, u, d, alpha, Q, cells, degree=0):
         raise ValueError("Q must be a positive Fraction and cells must be positive")
     if not isinstance(degree, int) or not 0 <= degree <= 3:
         raise ValueError("degree must be one of 0, 1, 2, 3")
+    if shadow_degree is None:
+        shadow_degree = degree
+    if not isinstance(shadow_degree, int) or shadow_degree < degree:
+        raise ValueError("shadow_degree must be an integer at least degree")
 
 
 def cusp_bilinear(frequencies, x, y):
@@ -123,30 +148,33 @@ def _poly_multiply(left, right):
 
 def shifted_legendre_coefficients(a, h, degree):
     """Exact monomial coefficients of P_degree(2(t-a)/h-1)."""
+    if not isinstance(degree, int) or degree < 0:
+        raise ValueError("degree must be a nonnegative integer")
     x = [-(2 * a / h + 1), 2 / h]
-    powers = [[Fraction(1)]]
-    for _ in range(3):
-        powers.append(_poly_multiply(powers[-1], x))
     if degree == 0:
         return (Fraction(1),)
     if degree == 1:
         return tuple(x)
-    if degree == 2:
-        result = [value * Fraction(3, 2) for value in powers[2]]
-        result[0] -= Fraction(1, 2)
-        return tuple(result)
-    result = [value * Fraction(5, 2) for value in powers[3]]
-    for k, value in enumerate(x):
-        result[k] -= Fraction(3, 2) * value
-    return tuple(result)
+    previous = [Fraction(1)]
+    current = list(x)
+    for n in range(1, degree):
+        multiplied = _poly_multiply(x, current)
+        size = max(len(multiplied), len(previous))
+        following = [Fraction(0)] * size
+        for k, value in enumerate(multiplied):
+            following[k] += Fraction(2 * n + 1, n + 1) * value
+        for k, value in enumerate(previous):
+            following[k] -= Fraction(n, n + 1) * value
+        previous, current = current, following
+    return tuple(current)
 
 
 def legendre_feature_moments(Q, frequencies, cells, degree):
     """Arb integrals of f_w against shifted P_0,...,P_degree per cell."""
     if not isinstance(Q, Fraction) or Q <= 0 or cells < 1:
         raise ValueError("Q must be a positive Fraction and cells must be positive")
-    if degree not in range(4):
-        raise ValueError("degree must be one of 0, 1, 2, 3")
+    if not isinstance(degree, int) or degree < 0:
+        raise ValueError("degree must be a nonnegative integer")
     h = Q / cells
     result = []
     for cell in range(cells):
@@ -191,6 +219,22 @@ def projected_legendre_two_channel_form(Q, features, u, d, alpha, degree):
     return total
 
 
+def legendre_shell_energies(Q, features, u, z, first_degree, last_degree):
+    """Return the separate u and z energies in an orthogonal shadow shell."""
+    if first_degree > last_degree:
+        return arb(0), arb(0)
+    h = ball(Q / len(features))
+    u_energy, z_energy = arb(0), arb(0)
+    for row in features:
+        for n in range(first_degree, last_degree + 1):
+            um = sum((ball(x) * item[n] for x, item in zip(u, row)), arb(0))
+            zm = sum((ball(x) * item[n] for x, item in zip(z, row)), arb(0))
+            scale = ball(2 * n + 1) / h
+            u_energy += scale * um * um
+            z_energy += scale * zm * zm
+    return u_energy, z_energy
+
+
 def projected_two_channel_form(Q, means, u, d, alpha):
     """Backward-compatible form evaluation from piecewise-constant means."""
     h = ball(Q / len(means))
@@ -216,7 +260,7 @@ def derivative_linf_bound(frequencies, z, order):
     return bound
 
 
-def legendre_residual_bound(Q, frequencies, z, cells, degree):
+def taylor_legendre_residual_bound(Q, frequencies, z, cells, degree):
     """Certify ||(I-P_degree) sum z_i f_i||_2^2.
 
     For r=degree+1, projection is no worse than the degree-r-1 Taylor
@@ -235,7 +279,66 @@ def legendre_residual_bound(Q, frequencies, z, cells, degree):
     h = ball(Q / cells)
     denominator = math.factorial(order) ** 2 * 2 ** (2 * order) * (2 * order + 1)
     residual = h ** (2 * order) * derivative_energy / denominator
-    return derivative_energy, residual
+    return derivative_energy, residual, order
+
+
+def weighted_legendre_constant(degree, order):
+    """Return the exact cell constant after affine scaling and beta integration.
+
+    For h=b-a, the bound is
+
+      C[p,m] h^(2m) ||F^(m)||_Linf^2 per unit interval length,
+      C[p,m] = (m!)^2 (p+1-m)! / ((2m+1)! (p+1+m)!).
+    """
+    if (not isinstance(degree, int) or not isinstance(order, int)
+            or degree < 0 or not 1 <= order <= degree + 1):
+        raise ValueError("need degree>=0 and 1<=order<=degree+1")
+    return Fraction(
+        math.factorial(order) ** 2 * math.factorial(degree + 1 - order),
+        math.factorial(2 * order + 1) * math.factorial(degree + 1 + order),
+    )
+
+
+def weighted_legendre_residual_bound(Q, frequencies, z, cells, degree,
+                                     order=None):
+    """Certify a projection residual with the weighted Legendre theorem.
+
+    If order is omitted, all admissible derivative orders are certified and
+    the ball with the smallest upper endpoint is selected.
+    """
+    if order is not None and not 1 <= order <= degree + 1:
+        raise ValueError("order must lie between 1 and degree+1")
+    h = ball(Q / cells)
+    candidates = []
+    for derivative_order in ([order] if order is not None
+                             else range(1, degree + 2)):
+        derivative_linf = derivative_linf_bound(
+            frequencies, z, derivative_order
+        )
+        derivative_energy = (
+            ball(Q) * ball(derivative_linf) * ball(derivative_linf)
+        )
+        residual = (ball(weighted_legendre_constant(
+            degree, derivative_order
+        )) * h ** (2 * derivative_order) * derivative_energy)
+        candidates.append((derivative_energy, residual, derivative_order))
+    return min(candidates, key=lambda item: item[1].upper())
+
+
+def legendre_residual_bound(Q, frequencies, z, cells, degree,
+                            backend="weighted", order=None):
+    """Dispatch to a rigorous weighted or midpoint-Taylor residual backend."""
+    if backend == "weighted":
+        return weighted_legendre_residual_bound(
+            Q, frequencies, z, cells, degree, order
+        )
+    if backend == "taylor":
+        if order not in (None, degree + 1):
+            raise ValueError("Taylor backend requires order=degree+1")
+        return taylor_legendre_residual_bound(
+            Q, frequencies, z, cells, degree
+        )
+    raise ValueError("backend must be 'weighted' or 'taylor'")
 
 
 def poincare_derivative_bound(Q, frequencies, z, cells):
@@ -246,25 +349,42 @@ def poincare_derivative_bound(Q, frequencies, z, cells):
     return derivative_energy, h * h / (arb.pi() * arb.pi()) * derivative_energy
 
 
-def certify_one_sided(Q, frequencies, u, d, alpha, cells, degree=0):
+def certify_one_sided(Q, frequencies, u, d, alpha, cells, degree=0,
+                      shadow_degree=None, residual_backend="weighted",
+                      residual_order=None):
     """Certify an upper bound for 2 u^T K_Q d-alpha d^T K_Q d."""
-    _validate(frequencies, u, d, alpha, Q, cells, degree)
+    if shadow_degree is None:
+        shadow_degree = degree
+    _validate(frequencies, u, d, alpha, Q, cells, degree, shadow_degree)
     scale = alpha if all(isinstance(x, Fraction) for x in tuple(u) + tuple(d)) else ball(alpha)
     z = tuple(di - ui / scale for ui, di in zip(u, d))
-    features = legendre_feature_moments(Q, frequencies, cells, degree)
+    features = legendre_feature_moments(
+        Q, frequencies, cells, shadow_degree
+    )
     cusp = cusp_two_channel_form(frequencies, u, d, alpha)
     projected = projected_legendre_two_channel_form(Q, features, u, d, alpha, degree)
-    derivative_energy, residual = legendre_residual_bound(
-        Q, frequencies, z, cells, degree
+    shadow_u, shadow_z = legendre_shell_energies(
+        Q, features, u, z, degree + 1, shadow_degree
     )
-    if degree == 0:
+    shadow_shell = shadow_u / ball(alpha) - ball(alpha) * shadow_z
+    if (degree == 0 and shadow_degree == 0
+            and residual_backend == "poincare"):
         derivative_energy, residual = poincare_derivative_bound(
             Q, frequencies, z, cells
         )
-    expression = cusp - projected + ball(alpha) * residual
+        selected_order = 1
+    elif residual_backend == "poincare":
+        raise ValueError("Poincare backend requires degree=shadow_degree=0")
+    else:
+        derivative_energy, residual, selected_order = legendre_residual_bound(
+            Q, frequencies, z, cells, shadow_degree,
+            residual_backend, residual_order
+        )
+    expression = cusp - projected - shadow_shell + ball(alpha) * residual
     return ProjectionCertificate(
         cusp, projected, derivative_energy, residual, expression,
-        expression.upper(), cells, degree
+        expression.upper(), cells, degree, shadow_degree, shadow_shell,
+        shadow_u, shadow_z, selected_order, residual_backend
     )
 
 
@@ -289,6 +409,86 @@ def dense_kernel_form(Q, frequencies, u, d, alpha):
     return total
 
 
+def constant_sine_kernel(Q, frequency):
+    """Return integral_Q^infinity sin(frequency*t)/t^2 dt using Arb Ci."""
+    q, w = ball(Q), ball(frequency)
+    x = q * w
+    return x.sin() / q - w * x.ci()
+
+
+def finite_constant_terms(Q, frequencies, u, d, alpha, m, n):
+    """Evaluate the exact finite constant--constant and constant--sine terms."""
+    q = ball(Q)
+    scale = ball(alpha)
+    mb, nb = ball(m), ball(n)
+    constant_constant = (2 * mb * nb - scale * nb * nb) / q
+    constant_sine = arb(0)
+    for w, ui, di in zip(frequencies, u, d):
+        weight = nb * ball(ui) + (mb - scale * nb) * ball(di)
+        constant_sine += 2 * weight * constant_sine_kernel(Q, w)
+    return constant_constant, constant_sine
+
+
+def certify_full_finite_tail(Q, frequencies, u, d, alpha, m, n, cells,
+                             degree=0, **oscillatory_options):
+    """Certify the full supplied finite tail, including both constant pieces."""
+    oscillatory = certify_one_sided(
+        Q, frequencies, u, d, alpha, cells, degree, **oscillatory_options
+    )
+    constant_constant, constant_sine = finite_constant_terms(
+        Q, frequencies, u, d, alpha, m, n
+    )
+    expression = constant_constant + constant_sine + oscillatory.expression
+    return FiniteTailCertificate(
+        constant_constant, constant_sine, oscillatory, expression,
+        expression.upper()
+    )
+
+
+def dense_finite_tail_form(Q, frequencies, u, d, alpha, m, n):
+    """Independent dense Arb evaluation of the complete finite expansion."""
+    q = ball(Q)
+    scale = ball(alpha)
+
+    def basis_kernel(i, j):
+        if i == 0 and j == 0:
+            return 1 / q
+        if i == 0:
+            w = ball(frequencies[j - 1])
+            x = q * w
+            return x.sin() / q - w * x.ci()
+        if j == 0:
+            w = ball(frequencies[i - 1])
+            x = q * w
+            return x.sin() / q - w * x.ci()
+        wi, wj = frequencies[i - 1], frequencies[j - 1]
+
+        def cosine_tail(delta, diagonal=False):
+            if diagonal:
+                return 1 / q
+            db = abs(ball(delta))
+            x = q * db
+            return x.cos() / q - db * (arb.pi() / 2 - x.si())
+
+        return (
+            cosine_tail(wi - wj, i == j) - cosine_tail(wi + wj)
+        ) / 2
+
+    left = (ball(m),) + tuple(ball(value) for value in u)
+    right = (ball(n),) + tuple(ball(value) for value in d)
+    total = sum(
+        (2 * xi * yj * basis_kernel(i, j)
+         for i, xi in enumerate(left) for j, yj in enumerate(right)),
+        arb(0),
+    )
+    dd = sum(
+        (xi * yj * basis_kernel(i, j)
+         for i, xi in enumerate(right) for j, yj in enumerate(right)),
+        arb(0),
+    )
+    return total - scale * dd
+
+
 def diagnostic_vectors(size):
     frequencies = tuple(Fraction(i + 1, size + 3) for i in range(size))
     u = tuple(Fraction((-1) ** i * (i % 5 + 1), i + 3) for i in range(size))
@@ -296,15 +496,26 @@ def diagnostic_vectors(size):
     return frequencies, u, d
 
 
-def compare_equal_rank(Q, frequencies, u, d, alpha, total_rank, degrees=range(4)):
+def compare_equal_rank(Q, frequencies, u, d, alpha, total_rank,
+                       degrees=range(4), shadow_degrees=None,
+                       residual_backend="weighted"):
     """Return dense value and certificates having the same total local rank."""
+    degrees = tuple(degrees)
+    if shadow_degrees is None:
+        shadow_degrees = degrees
+    shadow_degrees = tuple(shadow_degrees)
+    if len(shadow_degrees) != len(degrees):
+        raise ValueError("degrees and shadow_degrees must have equal lengths")
     certificates = []
-    for degree in degrees:
+    for degree, shadow_degree in zip(degrees, shadow_degrees):
         width = degree + 1
         if total_rank % width:
             raise ValueError("total rank must be divisible by every degree+1")
         certificates.append(
-            certify_one_sided(Q, frequencies, u, d, alpha, total_rank // width, degree)
+            certify_one_sided(
+                Q, frequencies, u, d, alpha, total_rank // width, degree,
+                shadow_degree, residual_backend
+            )
         )
     dense = dense_kernel_form(Q, frequencies, u, d, alpha)
     for certificate in certificates:
@@ -318,7 +529,7 @@ def run_diagnostics(Q, size, total_ranks, alpha):
     dense = dense_kernel_form(Q, frequencies, u, d, alpha)
     print(f"rational two-channel realization: N={size}, Q={Q}, alpha={alpha}")
     print(f"dense K_Q form={dense}")
-    print("rank deg cells residual_upper       upper_bound          gap_to_dense        seconds")
+    print("rank deg/sh cells ord residual_upper       upper_bound          gap_to_dense        seconds")
     for rank in total_ranks:
         compared_dense, certificates = compare_equal_rank(
             Q, frequencies, u, d, alpha, rank
@@ -331,7 +542,8 @@ def run_diagnostics(Q, size, total_ranks, alpha):
             )
             elapsed = time.perf_counter() - started
             gap = certificate.upper_bound - compared_dense.upper()
-            print(f"{rank:4d} {certificate.degree:3d} {certificate.cells:5d} "
+            print(f"{rank:4d} {certificate.degree:1d}/{certificate.shadow_degree:<1d} "
+                  f"{certificate.cells:5d} {certificate.residual_order:3d} "
                   f"{float(certificate.residual_bound.upper()): .10e}  "
                   f"{float(certificate.upper_bound): .10e}  {float(gap): .10e}  {elapsed:.4f}")
     return dense
@@ -345,26 +557,43 @@ def run_mobius_endpoint(Q, total_ranks):
     dense = dense_kernel_form(
         Q, surrogate.frequencies, surrogate.u, surrogate.d, surrogate.alpha
     )
+    dense_full = dense_finite_tail_form(
+        Q, surrogate.frequencies, surrogate.u, surrogate.d, surrogate.alpha,
+        surrogate.m, surrogate.n
+    )
+    constant_constant, constant_sine = finite_constant_terms(
+        Q, surrogate.frequencies, surrogate.u, surrogate.d, surrogate.alpha,
+        surrogate.m, surrogate.n
+    )
     print(
         "Mobius endpoint surrogate: N=4->8, R=3, alpha=1/3, "
         f"raw={len(surrogate.raw_modes)}, reduced={len(surrogate.frequencies)}"
     )
     print("angular frequencies omega=2*pi*p/q after harmonic-first aggregation")
+    print(f"constants m={surrogate.m}, n={surrogate.n}")
+    print(f"constant-constant={constant_constant}; constant-sine={constant_sine}")
     print(f"dense oscillatory K_Q form={dense}")
-    print("rank deg cells cusp_form            projected_form       residual_upper       upper_bound          gap")
+    print(f"dense full finite tail={dense_full}")
+    print("rank deg/sh cells ord cusp_form            projected_form       shadow_form          residual_upper       full_upper          gap")
     for rank in total_ranks:
         _, certificates = compare_equal_rank(
             Q, surrogate.frequencies, surrogate.u, surrogate.d,
             surrogate.alpha, rank
         )
         for certificate in certificates:
-            gap = certificate.upper_bound - dense.upper()
+            full_expression = (
+                constant_constant + constant_sine + certificate.expression
+            )
+            full_upper = full_expression.upper()
+            gap = full_upper - dense_full.upper()
             print(
-                f"{rank:4d} {certificate.degree:3d} {certificate.cells:5d} "
+                f"{rank:4d} {certificate.degree:1d}/{certificate.shadow_degree:<1d} "
+                f"{certificate.cells:5d} {certificate.residual_order:3d} "
                 f"{float(certificate.cusp_form): .10e}  "
                 f"{float(certificate.projected_form): .10e}  "
+                f"{float(certificate.shadow_shell_form): .10e}  "
                 f"{float(certificate.residual_bound.upper()): .10e}  "
-                f"{float(certificate.upper_bound): .10e}  {float(gap): .10e}"
+                f"{float(full_upper): .10e}  {float(gap): .10e}"
             )
     return surrogate, dense
 

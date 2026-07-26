@@ -7,9 +7,12 @@ from fractions import Fraction
 from flint import arb, ctx
 
 from verify_cusp_projection import (
-    cell_means, certify_one_sided, compare_equal_rank, cusp_bilinear,
-    dense_kernel_form, diagnostic_vectors, legendre_feature_moments,
-    poincare_derivative_bound,
+    cell_means, certify_full_finite_tail, certify_one_sided,
+    compare_equal_rank, constant_sine_kernel, cusp_bilinear,
+    dense_finite_tail_form, dense_kernel_form, diagnostic_vectors,
+    finite_constant_terms, legendre_feature_moments, poincare_derivative_bound,
+    shifted_legendre_coefficients,
+    weighted_legendre_constant, weighted_legendre_residual_bound,
 )
 from mobius_endpoint_surrogate import (
     aggregate_modes, endpoint_channels, generate_exact_4_to_8_surrogate,
@@ -121,6 +124,64 @@ class CuspProjectionTests(unittest.TestCase):
             ratio = coarse.residual_bound / fine.residual_bound
             self.assertTrue(ratio.contains(arb(2 ** (2 * (degree + 1)))))
 
+    def test_weighted_legendre_constants_include_exact_affine_scaling(self):
+        expected = (
+            (Fraction(1, 12),),
+            (Fraction(1, 36), Fraction(1, 720)),
+            (Fraction(1, 72), Fraction(1, 3600), Fraction(1, 100800)),
+            (Fraction(1, 120), Fraction(1, 10800),
+             Fraction(1, 705600), Fraction(1, 25401600)),
+        )
+        for degree, row in enumerate(expected):
+            self.assertEqual(tuple(
+                weighted_legendre_constant(degree, order)
+                for order in range(1, degree + 2)
+            ), row)
+
+    def test_weighted_degree_three_improves_taylor_constant_exactly(self):
+        frequencies, u, d = diagnostic_vectors(5)
+        z = tuple(di - Fraction(3, 4) * ui for ui, di in zip(u, d))
+        _, weighted, order = weighted_legendre_residual_bound(
+            Fraction(7), frequencies, z, 9, 3, 4
+        )
+        taylor = certify_one_sided(
+            Fraction(7), frequencies, u, d, Fraction(4, 3), 9, 3,
+            residual_backend="taylor"
+        ).residual_bound
+        self.assertEqual(order, 4)
+        self.assertTrue((taylor / weighted).contains(ball(Fraction(1225, 64))))
+
+    def test_shadow_shell_is_exact_signed_projection_completion(self):
+        frequencies, u, d = diagnostic_vectors(7)
+        args = (Fraction(6), frequencies, u, d, Fraction(5, 4), 12)
+        completed = certify_one_sided(*args, 1, shadow_degree=3)
+        direct = certify_one_sided(*args, 3)
+        self.assertTrue((completed.expression - direct.expression).contains(arb(0)))
+        self.assertTrue(completed.shadow_u_energy.lower() >= 0)
+        self.assertTrue(completed.shadow_z_energy.lower() >= 0)
+        dense = dense_kernel_form(
+            Fraction(6), frequencies, u, d, Fraction(5, 4)
+        )
+        self.assertLessEqual(dense.upper(), completed.upper_bound)
+
+    def test_practical_high_shadow_degree_is_origin_safe_and_dense_rigorous(self):
+        frequencies, u, d = diagnostic_vectors(6)
+        certificate = certify_one_sided(
+            Fraction(5), frequencies, u, d, Fraction(4, 3), 8, 2,
+            shadow_degree=7
+        )
+        self.assertEqual(certificate.completed_rank, 64)
+        self.assertIn(certificate.residual_order, range(1, 9))
+        for coefficients in (
+                shifted_legendre_coefficients(Fraction(0), Fraction(5, 8), n)
+                for n in range(8)):
+            self.assertTrue(all(isinstance(value, Fraction)
+                                for value in coefficients))
+        dense = dense_kernel_form(
+            Fraction(5), frequencies, u, d, Fraction(4, 3)
+        )
+        self.assertLessEqual(dense.upper(), certificate.upper_bound)
+
     def test_harmonic_first_duplicate_aggregation_is_exact(self):
         raw = harmonic_modes(4, 3)
         aggregated = aggregate_modes(raw)
@@ -169,6 +230,49 @@ class CuspProjectionTests(unittest.TestCase):
             surrogate.alpha, 64
         )
         self.assertLessEqual(dense.upper(), certificate.upper_bound)
+
+    def test_exact_mobius_constants_are_source_channel_means(self):
+        surrogate = generate_exact_4_to_8_surrogate()
+        u_source, d_source = endpoint_channels(4)
+        expected_m = ball(1) + sum(u_source, arb(0)) / 2
+        expected_n = sum(d_source, arb(0)) / 2
+        self.assertTrue(surrogate.m.contains(expected_m))
+        self.assertTrue(expected_m.contains(surrogate.m))
+        self.assertTrue(surrogate.n.contains(expected_n))
+        self.assertTrue(expected_n.contains(surrogate.n))
+
+    def test_arb_ci_constant_sine_formula_at_q8(self):
+        Q, w = Fraction(8), Fraction(7, 5)
+        x = ball(Q * w)
+        expected = x.sin() / ball(Q) - ball(w) * x.ci()
+        actual = constant_sine_kernel(Q, w)
+        self.assertTrue(actual.overlaps(expected))
+
+    def test_dense_full_finite_tail_matches_term_decomposition_at_q8(self):
+        surrogate = generate_exact_4_to_8_surrogate()
+        args = (
+            Fraction(8), surrogate.frequencies, surrogate.u, surrogate.d,
+            surrogate.alpha, surrogate.m, surrogate.n,
+        )
+        dense_full = dense_finite_tail_form(*args)
+        constant_constant, constant_sine = finite_constant_terms(*args)
+        decomposed = constant_constant + constant_sine + dense_kernel_form(
+            Fraction(8), surrogate.frequencies, surrogate.u, surrogate.d,
+            surrogate.alpha,
+        )
+        self.assertTrue(dense_full.overlaps(decomposed))
+
+    def test_full_finite_tail_upper_bound_at_q8(self):
+        surrogate = generate_exact_4_to_8_surrogate()
+        args = (
+            Fraction(8), surrogate.frequencies, surrogate.u, surrogate.d,
+            surrogate.alpha, surrogate.m, surrogate.n,
+        )
+        dense_full = dense_finite_tail_form(*args)
+        certificate = certify_full_finite_tail(*args, 64, 0)
+        self.assertLessEqual(dense_full.upper(), certificate.upper_bound)
+        self.assertTrue(certificate.constant_constant.is_finite())
+        self.assertTrue(certificate.constant_sine.is_finite())
 
 
 if __name__ == "__main__":

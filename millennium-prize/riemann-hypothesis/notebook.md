@@ -1984,3 +1984,65 @@ surrogate and whether the certified negative oscillatory margin persists at
 substantially lower rank. Then include the exact constant--constant and
 constant--sine terms of the same finite surrogate before confronting the
 harmonic truncation remainder.
+
+## Tick 21 — weighted shells and the full-tail sign obstruction
+
+Implemented the weighted Legendre backend and signed shadow-shell completion.
+For degree `p` and derivative order `m`, the exact uniform-cell constant is
+
+\[
+C_{p,m}=\frac{m!^2(p+1-m)!}{(2m+1)!(p+1+m)!}.
+\]
+
+The implementation checks every `1<=m<=p+1` and selects the smallest certified
+radius. It also evaluates shell modes `p+1,...,r` with their exact signed
+endpoint contribution, bounding only the PSD residual beyond `r`. On the finite
+Möbius oscillatory surrogate, weighted degree three lowers the first negative
+certificate from rank `256` to `176`; a degree-three primary projection with
+shadow degree `12` certifies negativity at completed rank `104`.
+
+The full finite `R=3` tail was then completed. At `Q=8`, its certified pieces
+are
+
+\[
+\begin{array}{lr}
+\text{constant--constant}&+0.2186425862643,\\
+\text{constant--sine}&+0.0007373649329,\\
+\text{oscillatory--oscillatory}&-0.0040628365568.
+\end{array}
+\]
+
+Hence the complete finite tail is
+
+\[
+\boxed{0.21531711464047\ldots>0.}
+\]
+
+The negative oscillatory certificate was therefore not the sign of the direct
+endpoint functional; the constant mode dominates it by more than a factor of
+fifty. This is a decisive route correction.
+
+The harmonic truncation issue is also eliminated for this fixed checkpoint by
+`certify_endpoint_tail.py`. On each unit interval, every original sawtooth is
+affine, so the direct integrand is a quadratic divided by `t^2` and integrates
+exactly using one logarithm. A finite prefix to `T=1024` plus the elementary
+`1/T` pointwise remainder gives
+
+\[
+\boxed{0.2004969520996<\mathcal T_8<0.2320926742316.}
+\]
+
+Thus the full untruncated `N=4 -> 8` tail on `[8,infinity)` is rigorously
+positive without Fourier truncation or a common period. This is a finite
+checkpoint, not an RH implication. It shows that the next useful target cannot
+be oscillatory-tail negativity; it must control the complete endpoint
+functional, including constants and the retained interval.
+
+## Next queued main-funnel step
+
+Certify the direct complete endpoint decrement on `[1,infinity)` for small
+dyadic `N`, splitting `[1,Q]` exactly at all sawtooth breakpoints and using the
+new tail certificate beyond `Q`. Compare its sign with the already certified
+`P_N-P_(2N)` breakpoint calculations as an independent normalization audit.
+Then search for a complete-functional block or averaged inequality that scales
+with `N`; abandon oscillatory-only sign targets.
