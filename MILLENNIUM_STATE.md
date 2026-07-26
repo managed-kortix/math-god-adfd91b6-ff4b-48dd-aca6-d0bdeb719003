@@ -75,7 +75,7 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 39
+- **cycle:** 40
 - **announcements:** none
 
 ## immutable target list
@@ -111,6 +111,54 @@ waiting process.
 
 ## last ticks
 
+- 2026-07-26: completed a primary-source and forward-citation audit of
+  second-order asymptotics for the fixed logarithmic Nyman--Beurling polynomial.
+  Bettin--Conrey--Farmer assume RH plus
+  `sum_(|Im rho|<=T)|zeta'(rho)|^-2 << T^(3/2-delta)`, implicitly including
+  simplicity, and prove only
+  `mathcal P_N~(2+gamma-log(4pi))/log N`. Their proof bounds several residue,
+  zero--zero, mixed, and contour channels at `O(log^-2 N)` but does not
+  evaluate a coefficient or prove convergence after `log^2 N` rescaling.
+  Burnol gives only the optimal-distance liminf constant. No theorem determining
+  `D_full` was located, conditionally or unconditionally; the restricted
+  coefficient is exactly `D_full-1`, so the critical tail-surplus sign remains
+  unknown. Exact assumptions and DOI/arXiv links are in the Cycle 40 literature
+  note.
+
+- 2026-07-26: derived a conditional Cycle 40 second-order expansion directly
+  from the exact Bettin--Conrey--Farmer Mellin/zero identity. With symmetric
+  finite zero cutoffs and explicit additional hypotheses permitting contour,
+  pair-sum, combined finite-part, and endpoint limits, the full coefficient is
+  the combined finite part of the pole zero sum, affine--zero channels,
+  zero--zero double sum, and entire endpoint packet. The restricted rank-one
+  subtraction shifts `D_full` to `D_restricted=D_full-1`; hence the critical
+  tail sign target is `D_full>1`. Persistent `N^{i(gamma_1+gamma_2)}` modes can
+  obstruct existence of a scalar second coefficient, and the published
+  reciprocal-zero hypothesis does not prove their convergence or the target
+  sign. No new convergence theorem or RH result is claimed.
+
+- 2026-07-26: defined the exact singleton norm defect
+  `H_n=||D_n||^2-log(n)log(n+1)||U_n||^2`. Its natural sum telescopes as
+  `sum_[X,2X) h_n H_n=(log X)P_X-(log(2X))P_(2X)`, while the actual critical
+  renewal residual is the differently weighted average
+  `sum h_n H_n/log(n+1)`. Nonnegativity of that latter average on one
+  consecutive dyadic chain already forces zero liminf; every-start positivity
+  is unnecessary. With surviving block strengths `c_j`, the sharp abstract
+  mass condition is `sum c_j W_j=infinity`, where `W_j~1/j`, equivalently
+  `sum c_j/j=infinity`. Thus `c_j~1/log X_j` remains summable and insufficient.
+  No defect-positivity theorem or RH result is claimed.
+
+- 2026-07-26: Cycle 40 derived the exact `kappa=1/2` complete-block residual
+  directly as `sum beta_n mathcal H_n`, where
+  `mathcal H_n=||D_n||^2-log(n)log(n+1)||U_n||^2` and
+  `beta_n=log(1+1/n)/(log(n)log(n+1)^2)`. The mixed term cancels, the `D` sign
+  is positive, the `U` sign negative, and no factor `1/2` occurs in the full
+  residual. Abel summation rewrites it as a positive weighted average of the
+  cumulative `mathcal H` gaps. The exact H-stopping theorem is first
+  nonnegativity of this Abel average; under finite weighted energy, every-start
+  stopping is equivalent to nonnegative limsup for every start plus attainment
+  at zero. This is an RH-sufficient reformulation, not a sign proof, and no RH
+  result is claimed.
 - 2026-07-26: audited known and conditional asymptotics of the logarithmic
   Nyman--Beurling energy against the every-start tail inequality. The weight
   sends `C/log N` to the same leading term, so `kappa=1/2` is critical and
@@ -131,6 +179,17 @@ waiting process.
   comparison of two norms. Scalar spikes and generic positive Gram models
   falsify universal positivity; the Mobius-specific reverse Hardy target
   remains open and RH-sufficient. No RH result is claimed.
+- 2026-07-26: expanded the Cycle 40 singleton scalar
+  `H_n=||D_n||^2-log(n)log(n+1)||U_n||^2` using the complete restricted
+  Vasyunin Gram matrix, including separate diagonal and off-diagonal terms.
+  The cancellation-preserving form, with
+  `R_n=sqrt(log(n)log(n+1))`, is
+  `H_n=<D_n-R_nU_n,D_n+R_nU_n>`; its divisor-floor cell expansion
+  specializes to exact Chebyshev cells only for `k<=n`. Pointwise positivity
+  is false (`H_2<0`), while a half-strength block is exactly equivalent to a
+  positive weighted sum of the `H_n`. Arb evaluation through `n=512` finds 12
+  negative indices but a compensating block from every tested start. This is a
+  finite diagnostic only; no asymptotic sign theorem or RH result is claimed.
 - 2026-07-26: derived the exact Cycle 39 one-step recurrence from the
   reciprocal-log coefficient update. Its compensated radial scalar gives
   `P_(n+1)=(1-2 kappa_n w_n)P_n`. At `kappa_n=1/2`, logarithmic scaling cancels

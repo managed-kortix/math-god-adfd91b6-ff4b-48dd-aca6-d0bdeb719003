@@ -3956,3 +3956,84 @@ falsify universal stopping or automatic `Q>=0`; the infinite coefficient
 kernel also cannot be formed entrywise. Only a Mobius-specific contraction
 with the fixed fractional-part Gram matrix could prove the RH-lane target.
 Details are in `cycle-39-half-strength-tail-budget.md`.
+
+## Cycle 40: dyadic norm-defect averages and divergent mass
+
+Define
+
+\[
+ H_n=\|D_n\|^2-\log n\log(n+1)\|U_n\|^2,
+ \qquad h_n={1\over\log n}-{1\over\log(n+1)}.
+\]
+
+The Cycle 39 mixed-term cancellation is exactly
+
+\[
+ h_nH_n=(\log n)P_n-(\log(n+1))P_{n+1}.
+\]
+
+Hence the natural dyadic sum has no interior remainder:
+
+\[
+ \sum_{X\le n<2X}h_nH_n
+ = (\log X)P_X-(\log(2X))P_{2X}.
+\]
+
+This endpoint monotonicity is not yet renewal. The critical block residual is
+the more heavily left-weighted average
+
+\[
+ P_a-P_b-\sum_{a\le n<b}w_nP_n
+ =\sum_{a\le n<b}{h_n\over\log(n+1)}H_n.
+\]
+
+Thus the weakest complete averaged positivity on a prescribed consecutive
+dyadic chain is nonnegativity of this latter sum on each block. It is exactly
+the block-renewal inequality and, after telescoping the blocks, forces zero
+liminf because `sum w_n` diverges. Every-start tail-Hardy positivity is not
+needed for this implication.
+
+More sharply, if block `j` retains strength `c_j`, the necessary and sufficient
+mass condition for this abstract telescope to force zero liminf is
+`sum_j c_jW_j=infinity`, where
+`W_j=sum_[X_j,X_(j+1))w_n` and `X_j=2^jX_0`. Exact endpoint bounds give
+`W_j~log(2)/log(X_j)~1/j`, so the threshold is `sum_j c_j/j=infinity`.
+In particular `c_j~1/log X_j` leaves `sum 1/j^2` and cannot suffice by this
+argument. Full details are in `cycle-40-dyadic-H-averages.md`. No positivity or
+RH theorem is claimed.
+
+## Cycle 40: half-strength H residual and Abel stopping form
+
+For the complete reciprocal-log cell, define
+
+\[
+ \mathcal H_n=\|D_n\|^2-(\log n)(\log(n+1))\|U_n\|^2,
+ \qquad
+ \beta_n={\log(1+1/n)\over(\log n)(\log(n+1))^2}.
+\]
+
+A direct endpoint expansion checks all coefficients and signs:
+
+\[
+ P_a-P_b-\sum_{a\le n<b}w_nP_n
+ =\sum_{a\le n<b}\beta_n\mathcal H_n.
+\]
+
+There is no factor `1/2` unless the Cycle 38 convention divides the whole
+residual by two. The mixed `2<U_n,D_n>` term cancels; `||D_n||^2` has positive
+coefficient and `||U_n||^2` negative coefficient.
+
+Writing `mathcal C_a(m)=sum_(a<=n<=m)mathcal H_n`, decreasing positivity of
+`beta_n` gives the exact Abel form
+
+\[
+ \sum_{n=a}^m\beta_n\mathcal H_n
+ =\beta_m\mathcal C_a(m)
+ +\sum_{j=a}^{m-1}(\beta_j-\beta_{j+1})\mathcal C_a(j).
+\]
+
+Thus the first stop is one plus the first `m` at which this positive Abel
+average is nonnegative. Under finite weighted energy it equals `Q_a-Q_(m+1)`,
+and `Q_a` is its limsup. Every-start stopping is therefore equivalent to
+nonnegative limsup for every start plus finite attainment when that limsup is
+zero. Details are in `cycle-40-half-strength-H-abel-stopping.md`.

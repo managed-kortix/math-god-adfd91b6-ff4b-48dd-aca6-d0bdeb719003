@@ -12,6 +12,7 @@ from certify_complete_gram import (
     maximal_ratios,
     weighted_prefixes,
 )
+from analyze_cycle40_h import first_nonnegative_blocks, h_values
 
 
 class CompleteGramTests(unittest.TestCase):
@@ -87,6 +88,22 @@ class CompleteGramTests(unittest.TestCase):
                 arb(0),
             )
             self.assertTrue(energies[N].overlaps(dense))
+
+    def test_cycle40_h_matches_normalized_energy_difference(self):
+        energies = complete_energies(12)
+        values = h_values(11)
+        for n, value in values.items():
+            log_n = arb(n).log()
+            log_next = arb(n + 1).log()
+            expected = -(log_n * log_next / (log_next - log_n)) * (
+                log_next * energies[n + 1] - log_n * energies[n]
+            )
+            self.assertTrue(value.overlaps(expected))
+
+    def test_cycle40_small_weighted_blocks(self):
+        blocks = first_nonnegative_blocks(h_values(8))
+        self.assertEqual(blocks[2][0], 6)
+        self.assertTrue(all(endpoint is not None for endpoint, _ in blocks.values()))
 
 
 if __name__ == "__main__":
