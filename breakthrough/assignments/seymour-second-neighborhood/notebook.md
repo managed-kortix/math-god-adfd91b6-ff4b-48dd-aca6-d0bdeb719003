@@ -785,3 +785,27 @@ No audits yet.
   and triangle-plus-edge. Classify inaccessible packets by the four-hole support
   and seek a compatibility cap below four; preserve a sharp local breaker if
   either shape admits four source templates.
+
+## 2026-07-26 — ticks 39--40
+
+- Human-eliminated the paw and triangle-plus-disjoint-edge T-hole shapes; see
+  `attempts/tick39-paw-human-proof.md` and
+  `attempts/tick40-triangle-edge-human-proof.md`.
+- In both shapes, the shape-independent B-row count requires at least four A'
+  predecessor sources. Exact inaccessible-packet classification and saturated
+  outneighborhood rows allow at most three sources. For the paw, five packet
+  types reduce through the two present orientations incident with the pendant
+  vertex. For triangle-plus-edge, packets are either two triangle vertices or
+  one triangle vertex plus one isolated-edge endpoint; two distinct triangle
+  packets exclude every mixed packet.
+- Hostile finite analysis exposed why saturation matters: a weaker census that
+  records only forced positive arcs reports spurious four-source paw and
+  triangle-edge templates. Recording the complete degree-eight rows destroys
+  them. Both final proofs received independent line-by-line audits.
+- Together with C4 and the previously human-eliminated matching and star-like
+  shapes, five of the eleven four-edge shapes now have human contradictions in
+  this normal form. No claim is made for the six remaining shapes.
+- **Next queued attack:** rigorously audit the proposed common cut/template
+  argument for P5 and fork. It currently claims the same source cap but lacks a
+  written packet table; first demand either a complete table with saturated
+  negative orientations or an explicit four-source breaker.
