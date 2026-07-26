@@ -75,6 +75,11 @@ orientation leaves under all 36 `rho=5` rows and hashes their deterministic
 stream. This is the production cover generator; an independent labelled-orbit
 checker remains required before the cover gate closes.
 
+`check_m8_rho5_cover.py` is that independent checker. It separately enumerates
+all ordered pairs of labelled seven-bit masks for the A and B subset systems,
+computes orbit multiplicities, audits 63,517,608 labelled configurations, and
+reproduces the production cover hash without importing production cover code.
+
 `m8_rho5_shard.py --index I` reconstructs and emits the exact CNF for canonical
 leaf `I` in that cover. Leaf 0 has also completed the LRAT pipeline during
 development; bulk artifacts are not committed until the independent cover

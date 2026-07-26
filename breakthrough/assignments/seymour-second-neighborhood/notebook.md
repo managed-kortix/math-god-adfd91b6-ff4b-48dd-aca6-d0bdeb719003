@@ -370,3 +370,21 @@ No audits yet.
   LRAT `c VERIFIED`. This is a second certified leaf observation, but its bulk
   artifact is deferred until the cover checker/ledger prevents bookkeeping
   omissions.
+
+## 2026-07-25 — tick 16
+
+- Added an independent labelled-mask orbit checker for the complete `rho=5`
+  cover. It does not import production cover/reconstruction code, audits
+  63,517,608 labelled configurations through exact orbit multiplicities, and
+  reproduces 36 rows, 323 colored missing graphs, 735 leaves, and cover hash
+  `0e4aa222...6171e`.
+- Hostile audit tested all 735 production representatives and found no subset,
+  overlap, `state=10`, missing-count, or orbit-reconstruction error.
+- An external triage census reports all 735 current leaf CNFs solver-UNSAT, but
+  only checked LRATs count. The safest grouping can reduce certification to 136
+  margin CNFs by leaving both intersection parameters symbolic; this grouping
+  still needs its own cover proof and emitter.
+- **Next queued attack:** freeze the campaign manifest against the independently
+  verified cover, implement the content-addressed batch runner, and certify
+  leaves (or audited grouped margins) with immutable per-index LRAT evidence and
+  a generated completion ledger.

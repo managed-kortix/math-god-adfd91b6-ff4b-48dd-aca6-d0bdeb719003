@@ -1,0 +1,27 @@
+{
+  "cover": {
+    "count": 735,
+    "group": "S7AxS7BxC2",
+    "independent_checker_sha256": "8a4ea3d72ccf6c83befbdaa8f97bc2542e7ad4a4fa8bd45115e5cd8bc91a2775",
+    "rows": 36,
+    "sha256": "0e4aa2220d8e87a67d5152130c5e26ebc16655a53b7fae6735a249cc0606171e"
+  },
+  "generator": {
+    "base_sha256": "adab04953d3697ec004e28ad145dda5b0f04d07ee8dd20d95655f6e32877d68e",
+    "cover_sha256": "ae919ba27c25bde4fb2310b483ec8c27124e2c669ae9c4a4d7e0133b8cd4b05b",
+    "shard_sha256": "d00b1d926817cdded25285d09ce6925c896c001910219558bced069b97d3ae4b"
+  },
+  "problem": "Seymour second-neighborhood conjecture",
+  "schema": "snc-rho5-campaign-v1",
+  "scope": "n=18,m=8,witness-rooted B7 corrected rho=5 row",
+  "solver": {
+    "name": "cadical",
+    "sha256": "7b73df0a6d9cf3c751a1948300e5baff8e82c4d39bcd88f0c063b5f5cfb8b33e",
+    "version": "1.7.3"
+  },
+  "unsat_checker": {
+    "commit": "2e3b2dc0ecf938addbd779d42877b6ed69d9a985",
+    "name": "lrat-check",
+    "sha256": "e9e71c96b68dc9ed22db35d7581e613e6b161ffbc82c20cba5699f8320a065b8"
+  }
+}
