@@ -110,10 +110,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the incoming `U` plus twelve new vectors fails on `[219,231)` because recovery
   lies in an orthogonal old-`D` reserve, while the near-diagonal Vasyunin kernel
   has a logarithmic cusp and leaves twelve uncontrolled incoming projections;
-  an explicit hostile nonsquarefree window begins at `47,255,689,915`
+  an explicit hostile nonsquarefree window begins at `47,255,689,915`; the
+  missing recovery square is now exactly the Schur residual of the entire old
+  `D_(M-1)` prefix against `U_(M-1)` and the new rows, with a Pythagorean probe
+  telescope but no generic lower bound; one older `D_(M-2)` probe certifies the
+  historical windows only partly nontrivially and supplies no uniform theorem
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 52
+- **cycle:** 53
 - **announcements:** none
 
 ## immutable target list
@@ -132,9 +136,9 @@ waiting process.
 
 ## next exact steps
 
-1. Control the old-`D` orthogonal reserve in the twelve-window projection, or
-   couple it directly to the negative `U` packet; local new-vector projection
-   and smooth near-diagonal expansion are now ruled out.
+1. Bound the physical old-prefix Schur capture by exploiting complete Vasyunin
+   arithmetic, or couple its terminal residual directly to `N_U-V_D`; generic
+   probe hierarchies and scalar incoming data are now ruled out.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -149,6 +153,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 53 identified the Cycle 52 missing square exactly as
+  `A||(I-Pi_Z)D_(M-1)||^2=A log^2(M)||(I-Pi_Z)F_M||^2`, derived its generalized
+  Schur formula and rank-one projection telescope, and corrected the projected
+  `U` coefficient. Adding `D_(M-2)` certifies all eleven historical delayed
+  windows, but four are tautological and seven remain finite global-state
+  certificates. Exact rational nested-update models make reserve/budget ratios
+  arbitrarily small or large, proving that only the fixed old/new Vasyunin
+  coupling can close the estimate. No RH or Millennium solution is claimed.
 
 - 2026-07-26: Cycle 52 derived the sharp at-most-thirteen-probe projection for
   a twelve-window and falsified its sign on `[219,231)`: the discarded old-`D`

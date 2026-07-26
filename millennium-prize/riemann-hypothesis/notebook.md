@@ -4338,6 +4338,28 @@ starts at `47,255,689,915`; there additive-12 fails exactly if `H_M<0`, a sign
 far beyond current Gram computation. Details and an exact integer verifier are
 in `cycle-52-twelve-window-projection-and-cusp.md`. No RH result is claimed.
 
+## Cycle 53: recovery is an old-state Schur residual
+
+The square omitted by the twelve-new-vector projection is exactly
+
+\[
+A\|(I-\Pi_Z)D_{M-1}\|^2
+=A\log^2(M)\|(I-\Pi_Z)F_M\|^2.
+\]
+
+It has an exact generalized Schur formula and a rank-one Pythagorean telescope
+as new rows are adjoined, but Gram positivity gives only the lower bound zero.
+The residual depends on the complete old-prefix/new-window Vasyunin
+correlations.
+
+Adding `D_(M-2)` certifies all eleven historical delayed windows, but four cases
+are tautological because `mu(M-1)=0`, and the other seven merely import almost
+the entire global old state. Exact rational nested-update models make the
+reserve relative to the budget arbitrarily small or large, so no generic
+finite-depth probe theorem exists. Details and the corrected projection
+coefficients are in `cycle-53-old-D-reserve-and-probe-hierarchy.md`. No RH
+result is claimed.
+
 ## Cycle 48: coherent mean must be compensated, not split off
 
 The exact finite budget is
