@@ -554,3 +554,22 @@ No audits yet.
   `2<=k<=6-rho`. **Next queued step:** split these by missing-graph high-core
   type, starting with the 28 two-center cores; repeated isolate zones must use
   one of the two centers, giving a small support-signature model.
+
+## 2026-07-26 — tick 25
+
+- Human-eliminated the entire `m=9` isolated-root strip `k=0,1,2`; see
+  `attempts/tick25-m9-k012-human-proof.md`. The key simplification over `m=8`
+  is that every vertex has degree eight, so every inaccessible vertex must
+  consume a T-hole. At `k=2`, each hole singly supports one inaccessible
+  endpoint, forcing at most two predecessor classes and then a B-degree
+  contradiction.
+- Independently LRAT-verified all five `k=2` aggregate shards; hashes are in
+  `experiments/m9-k2-certificates.md`.
+- The residual aggregate campaign now has ten pairs with `3<=k<=6-rho`.
+  For `k=3`, the matching-hole shape has a human contradiction; nonmatching
+  shapes reduce to four three-edge hole graphs. Two aggregate shards
+  `(rho,k)=(2,3),(3,3)` have checked LRAT proofs from pilot runs; rho 0 and 1
+  remain computationally hard without shape splitting.
+- **Next queued attack:** split `k=3` by the five unlabeled T-hole shapes
+  (matching plus four nonmatching shapes), certify the four nonmatching shapes,
+  and seek a uniform dirty-endpoint synchronization lemma.
