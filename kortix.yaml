@@ -52,8 +52,9 @@ triggers:
       `bash scripts/setup-harness.sh` when fresh. Pull --rebase, commit, and push
       durable work. Once per UTC day, run the publication inbox/OCB review in
       research/procedural/PUBLICATION.md: process relevant replies in their
-      existing threads, check pending Board records, and update token-free
-      ledgers without spamming. Apply the complete publication workflow in
+      existing threads, check pending Board records, maintain inbox zero under
+      research/procedural/EMAIL.md, and update token-free ledgers without
+      spamming. Apply the complete publication workflow in
       research/procedural/PUBLICATION.md to every verified result. Never stop."
   - slug: millennium-heartbeat
     name: math-god Millennium lane heartbeat

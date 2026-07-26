@@ -77,7 +77,11 @@ idle turn—it checks the publication inbox and pending Open Conjecture Board
 records. It replies only in existing threads unless a newly verified major
 result justifies one carefully selected new recipient. Never manufacture
 activity: no reply is required when there is no substantive message or status
-change.
+change. It maintains inbox zero under `research/procedural/EMAIL.md`: the inbox
+is an action queue, handled mail is archived rather than deleted, narrow filters
+remove predictable bot noise, and tracked mathematical threads are searched
+directly even after archival. Every outgoing message must pass the professional
+style gate in `research/procedural/PUBLICATION.md`.
 
 ## The contract
 

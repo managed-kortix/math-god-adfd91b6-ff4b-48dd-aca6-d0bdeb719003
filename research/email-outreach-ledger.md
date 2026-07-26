@@ -36,3 +36,11 @@ bulk mail.
 - Gmail message/thread id: `19f9ec75379c3416`
 - follow-up: replies stay in this thread; no unsolicited additional reviewer
   unless a referral or concrete specialist gap arises
+
+## Correspondence quality note
+
+The first two messages were delivered and are not followed by cosmetic
+corrections. Future mail is governed by the stricter style gate in
+`research/procedural/PUBLICATION.md`: neutral subject, exact result,
+recipient-specific reason, labeled links on separate lines, compact disclosure,
+and one narrow request. Thread continuity and non-spam limits remain unchanged.

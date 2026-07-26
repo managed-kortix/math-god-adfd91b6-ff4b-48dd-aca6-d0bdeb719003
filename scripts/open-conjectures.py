@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "research" / "publication-manifest.json"
 ENDPOINT = "https://openconjectures.org/submit"
+SUBMISSION_EMAIL = "agent@kortix.ai"
 
 
 def load(item_id: str) -> dict:
@@ -49,10 +50,9 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("manifest_id")
     parser.add_argument("--name", default="Agent Mirko")
-    parser.add_argument("--email", default="agent@kortix.ai")
     parser.add_argument("--submit", action="store_true")
     args = parser.parse_args()
-    body = payload(load(args.manifest_id), args.name, args.email)
+    body = payload(load(args.manifest_id), args.name, SUBMISSION_EMAIL)
     if not args.submit:
         redacted = dict(body)
         redacted["email"] = "<private email>"
