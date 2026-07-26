@@ -501,6 +501,7 @@ research/semantic, research/procedural).
    manuscript passed two final hostile mathematical gates.  Paper:
    `all-tetracyclic-cacti/`; exact packet audit:
    `positive-square-energy/experiments/c3_c3_c5_c5_induced_packet_partitions.py`.
+   Announcement: X post `2081283348371014020`.
 0. MAIN THEOREM VERIFIED (2026-07-25): every connected tricyclic cactus `G`
    on `n` vertices satisfies `s+(G)>=n`.  The sharp cactus DNN constant leaves
    only cycle triples `{3,3,q}` (odd `q`) and `{3,5,5}`.  The first is closed
