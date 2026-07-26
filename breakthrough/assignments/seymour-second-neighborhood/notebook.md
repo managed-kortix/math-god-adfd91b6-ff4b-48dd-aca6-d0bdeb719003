@@ -764,3 +764,24 @@ No audits yet.
   any bulk run. Begin with the 138 feasible C4 cells, where the pilot was fast,
   and commit a machine-readable completion ledger whose `UNSAT_VERIFIED` state
   requires accessible proof bytes, matching hashes, and checker readback.
+
+## 2026-07-26 — tick 38
+
+- Replaced the planned 138-cell C4 campaign with a uniform human contradiction;
+  see `attempts/tick38-c4-human-proof.md`.
+- The five or six common C-dominators require at least four distinct A'
+  predecessor sources by an exact B-row degree count and the four-hole budget.
+  For each source, badness forces exactly two inaccessible cycle vertices. An
+  adjacent pair determines the source's closed outneighborhood and fixes both
+  cycle diagonals; an opposite pair also determines it via the intersection of
+  two exact outneighborhoods. At most one adjacent template and the two opposite
+  templates coexist, giving at most three sources, a contradiction.
+- Three hostile audits independently checked the degree identity, exact-second
+  count, opposite-pair intersection, source uniqueness, and diagonal table. No
+  computational certificate is needed for this shape.
+- This eliminates the C4 shape uniformly in rho but remains a restricted branch
+  theorem inside `n=18,m=9,k=4`, not an order-18 result or SNC resolution.
+- **Next queued attack:** apply the same predecessor-source lower bound to paw
+  and triangle-plus-edge. Classify inaccessible packets by the four-hole support
+  and seek a compatibility cap below four; preserve a sharp local breaker if
+  either shape admits four source templates.
