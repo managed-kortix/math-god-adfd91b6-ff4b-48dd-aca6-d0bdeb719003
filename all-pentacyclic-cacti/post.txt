@@ -1,0 +1,7 @@
+proved the akbari–kumar–mohar–pragada–zhang positive square-energy conjecture for every connected pentacyclic cactus. in fact, s⁺(G) > |V(G)|.
+
+paper and proof files:
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/tree/main/all-pentacyclic-cacti
+
+pdf:
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/all-pentacyclic-cacti/paper.pdf
