@@ -24,11 +24,15 @@ T^6P_0 | P_1.                    (R6PP)
 ```
 
 The apparent third row `P_0 | T^6 | P_1` is completely solved: it has surplus
-strictly greater than `1-2(sqrt(5)-2)>0`. The later exact rooted hostile-cycle
-guard theorem proves all of (R7Q), including its formerly locked bridge-bouquet.
-In (R6PP), all cases in which `P_0` is internal, and all incidence-leaf cases
-entered at a private vertex of `P_0`, are solved. The exact remaining scope is
-stated in Section 6; no positivity claim is made there.
+strictly greater than `1-2(sqrt(5)-2)>0`. The standalone packing-one lemma closes the
+formerly locked `T^7|Q` bouquet without the invalid all-rank Voronoi step.
+In (R6PP), the interval argument solves all cases in which `P_0` is internal
+and all incidence-leaf cases entered at a private vertex of `P_0`. The remaining
+entry-locked incidence-leaf class is closed globally by the strict-last-bridge
+`877=861+16` marked-entry census and its 16 replacement packetizations in
+`research/octacyclic-t6p-last-bridge-conservative-resolution-2026-07-26.md`.
+The older uncut `877=868+9` construction is not used. No rooted guard is used.
+Thus the disconnected residual families have no remaining obstruction.
 
 ## 2. Inputs and territory convention
 
@@ -160,16 +164,22 @@ seven triangles share x, and the arbitrary bridge connector to Q enters at x.
 
 The connector and all attached trees are unrestricted. The additive cut
 `A_7+Q` gives only `>0-delta_q`, and opening `Q` or a triangle incurs a unit
-cost not paid by the triangle recurrence. Nevertheless (G7Q) is now solved by
-Theorem 1 of `research/rooted-hostile-cycle-guard-absorption-2026-07-26.md`.
-That theorem applies to an arbitrary connected triangular cactus rooted at the
-connector entry and joined by an arbitrary positive path to a hostile
-`Q=C_(4k+1)`; it gives an induced partition with one coupled territory of
-surplus `>1-delta_q` and all other territories strict positive. If `Q` is even
-or `3 mod 4`, its unicyclic territory is already nonnegative, while `A_7` is
-strict positive. The case `Q=T` is also nonhostile. Hence every `T^7|Q`
-configuration is proved. The formerly locked bouquet is a gap only for the
-additive packet ledger, not for the exact rooted phase method.
+cost not paid by the triangle recurrence. Nevertheless (G7Q) is covered
+directly by the standalone theorem in
+`research/octacyclic-packing-one-hostile-cycle-lemma-2026-07-26.md`. The
+seven bouquet triangles all contain `x`, so no two are vertex-disjoint. Lemma 2
+allows an arbitrary joining path and arbitrary attached trees and gives, for
+hostile `Q=C_(4k+1)`,
+
+```text
+sigma(G)>7-delta_q>0.
+```
+
+No Voronoi decomposition is used. If `Q` is even or `3 mod 4`, its unicyclic
+territory is nonnegative, while `A_7` is strict positive. The case `Q=T` is
+also nonhostile. Hence every `T^7|Q` configuration is proved. The formerly
+locked bouquet is a gap only for the additive packet ledger, not for the exact
+packing-one phase lemma.
 
 ## 6. The row `T^6P_0 | P_1`
 
@@ -201,13 +211,35 @@ deg_I(P_0)=1, and the external connector enters at the unique P_0 cut or
 through the triangular incidence component attached at that cut.             (G6PP)
 ```
 
-This description includes the common-cut `T^6P_0` bouquet, but it may include
-nonbouquet router incidences. No assertion that one- and two-router pictures
-exhaust (G6PP) is made. Opening both pentagons gives only
-`sigma(A_6)-2>1-2`, and opening only `P_0` leaves a heptacyclic packet whose
-known strict surplus has no uniform unit margin. These invalid ledgers are not
-used. Resolving (G6PP) requires an entry-sensitive incidence census with a new
-quantitative packet, or a nonadditive rooted estimate.
+This description includes the common-cut `T^6P_0` bouquet and every nonbouquet
+router incidence; no finite router list is needed.
+
+The former rooted-guard proof of this class is retracted. Its valid replacement
+is global and entry-sensitive. Cut the last actual bridge before `P_1`; the
+remote packet contributes at least `-delta`, while the connector remnant marks
+one cyclic-hull position of `T^6P_0`. The exact colored incidence census gives
+877 marked classes. Its conservative legal ledger closes 861, and the remaining
+16 close by verified common-cut or shared-cut packets and at most two successive
+triangle-router splits. The weakest final packetization is
+
+```text
+T+T+P_0+A_2+P_1,
+```
+
+and hence
+
+```text
+sigma(G)>0+0-delta+1-delta
+        =1-2delta
+        =5-2sqrt(5)>0.                                  (6.1)
+```
+
+The exact proof and verifiers are recorded in
+`research/octacyclic-t6p-last-bridge-conservative-resolution-2026-07-26.md` and
+`research/octacyclic-t6p-last-bridge-sixteen-resolution.py`. They cover entry at
+the common cut, every other cyclic-hull root, entries through rooted trees,
+arbitrary connector length, and arbitrary attached trees. No rooted guard is
+used.
 
 ## 7. The row `P_0 | T^6 | P_1`
 
@@ -233,20 +265,17 @@ Proved here:
 1. all 42 direct `T^7Q` and all 70 direct `T^6PP` proper color partitions;
 2. every singleton-triangle exceptional row by the heptacyclic theorem and
    reduced-tree leaf/path analysis;
-3. every `T^7|Q` incidence, using rooted hostile-cycle guard absorption for
+3. every `T^7|Q` incidence, using the exact packing-one hostile-cycle lemma for
    the unique interval-locked bouquet;
-4. every `T^6P|P` incidence with `deg_I(P_0)>=2`, and every `deg_I(P_0)=1`
-   incidence whose entry is private on `P_0`;
+4. every `T^6P|P` incidence, including `(G6PP)` by the exact strict-last-bridge
+   `877=861+16` census and its 16/16 common-cut/shared-cut repairs;
 5. every `P|T^6|P` configuration.
 
 Not proved here:
 
-1. the entry-locked leaf-pentagon class (G6PP), without claiming a finite
-   router list;
-2. the corresponding fully shared octacyclic residuals, which are outside the
+1. the corresponding fully shared octacyclic residuals, which are outside the
    disconnected hypothesis.
 
-Accordingly this note does not prove the octacyclic cactus theorem. It reduces
-the disconnected part to the single explicitly quantified locked-entry class
-(G6PP), proves all disconnected `T^7Q`, and removes `P|T^6|P` from the gap
-list.
+Accordingly the disconnected `T^7Q` and `T^6PP` residual families are proved.
+The rooted four-kernel residual belongs only to the stronger standalone rooted
+packet target and is not needed by the global `(G6PP)` partition.

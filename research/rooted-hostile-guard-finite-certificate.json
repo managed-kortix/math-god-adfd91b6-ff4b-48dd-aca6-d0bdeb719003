@@ -1,0 +1,8946 @@
+{
+  "arithmetic": "integer characteristic polynomials; Fraction Sturm isolation; multiplicities restored by squarefree layers",
+  "census": [
+    {
+      "bare": true,
+      "bridge_length": 0,
+      "count": 1,
+      "triangles": 1
+    },
+    {
+      "bare": true,
+      "bridge_length": 1,
+      "count": 1,
+      "triangles": 1
+    },
+    {
+      "bare": true,
+      "bridge_length": 2,
+      "count": 1,
+      "triangles": 1
+    },
+    {
+      "bare": true,
+      "bridge_length": 3,
+      "count": 1,
+      "triangles": 1
+    },
+    {
+      "bare": true,
+      "bridge_length": 4,
+      "count": 1,
+      "triangles": 1
+    },
+    {
+      "bare": true,
+      "bridge_length": 0,
+      "count": 2,
+      "triangles": 2
+    },
+    {
+      "bare": true,
+      "bridge_length": 1,
+      "count": 2,
+      "triangles": 2
+    },
+    {
+      "bare": true,
+      "bridge_length": 2,
+      "count": 2,
+      "triangles": 2
+    },
+    {
+      "bare": true,
+      "bridge_length": 3,
+      "count": 2,
+      "triangles": 2
+    },
+    {
+      "bare": true,
+      "bridge_length": 4,
+      "count": 2,
+      "triangles": 2
+    },
+    {
+      "bare": true,
+      "bridge_length": 0,
+      "count": 5,
+      "triangles": 3
+    },
+    {
+      "bare": true,
+      "bridge_length": 1,
+      "count": 5,
+      "triangles": 3
+    },
+    {
+      "bare": true,
+      "bridge_length": 2,
+      "count": 5,
+      "triangles": 3
+    },
+    {
+      "bare": true,
+      "bridge_length": 3,
+      "count": 5,
+      "triangles": 3
+    },
+    {
+      "bare": true,
+      "bridge_length": 4,
+      "count": 5,
+      "triangles": 3
+    },
+    {
+      "bare": true,
+      "bridge_length": 0,
+      "count": 13,
+      "triangles": 4
+    },
+    {
+      "bare": true,
+      "bridge_length": 1,
+      "count": 13,
+      "triangles": 4
+    },
+    {
+      "bare": true,
+      "bridge_length": 2,
+      "count": 13,
+      "triangles": 4
+    },
+    {
+      "bare": true,
+      "bridge_length": 3,
+      "count": 13,
+      "triangles": 4
+    },
+    {
+      "bare": true,
+      "bridge_length": 4,
+      "count": 13,
+      "triangles": 4
+    },
+    {
+      "bare": true,
+      "bridge_length": 0,
+      "count": 37,
+      "triangles": 5
+    },
+    {
+      "bare": true,
+      "bridge_length": 1,
+      "count": 37,
+      "triangles": 5
+    },
+    {
+      "bare": true,
+      "bridge_length": 2,
+      "count": 37,
+      "triangles": 5
+    },
+    {
+      "bare": true,
+      "bridge_length": 3,
+      "count": 37,
+      "triangles": 5
+    },
+    {
+      "bare": true,
+      "bridge_length": 4,
+      "count": 37,
+      "triangles": 5
+    },
+    {
+      "bare": true,
+      "bridge_length": 0,
+      "count": 111,
+      "triangles": 6
+    },
+    {
+      "bare": true,
+      "bridge_length": 1,
+      "count": 111,
+      "triangles": 6
+    },
+    {
+      "bare": true,
+      "bridge_length": 2,
+      "count": 111,
+      "triangles": 6
+    },
+    {
+      "bare": true,
+      "bridge_length": 3,
+      "count": 111,
+      "triangles": 6
+    },
+    {
+      "bare": true,
+      "bridge_length": 4,
+      "count": 111,
+      "triangles": 6
+    }
+  ],
+  "core_counts": {
+    "1": 1,
+    "2": 1,
+    "3": 2,
+    "4": 4,
+    "5": 8,
+    "6": 19
+  },
+  "counterexamples": [],
+  "rooted_tree_count_by_order": {
+    "1": 1
+  },
+  "scope": {
+    "c5_bridge_lengths": [
+      0,
+      4
+    ],
+    "root": "one representative of every automorphism orbit",
+    "rooted_tree_order": null,
+    "tree_attachments": "none",
+    "triangular_blocks": "all nonisomorphic vertex-coalesced triangular cacti with 1..6 blocks"
+  },
+  "tested_graphs": 845,
+  "threshold_interval_3_minus_sqrt5": [
+    "25633305/33554432",
+    "205066441/268435456"
+  ],
+  "verdict_counts": {
+    "certified_strict": 845
+  },
+  "worst_by_triangle_count": {
+    "1": [
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 0,
+        "c5_root": 0,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -8,
+            -2,
+            16,
+            4,
+            -7,
+            0
+          ],
+          "edges": 8,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "20737773/33554432",
+                "10368895/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "24538327/16777216",
+                "49076671/33554432"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "82974535/33554432",
+                "10371819/4194304"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "921023653701551/562949953421312",
+            "1842052502228677/1125899906842624"
+          ],
+          "vertices": 7
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          1,
+          1,
+          1
+        ],
+        "triangles": 1
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 2,
+        "c5_root": 4,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -10,
+            -2,
+            32,
+            10,
+            -35,
+            -8,
+            12,
+            0
+          ],
+          "edges": 10,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "5184441/8388608",
+                "10368891/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "16777215/16777216",
+                "2097153/2097152"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "16777215/8388608",
+                "33554439/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "9658539/4194304",
+                "38634165/16777216"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "474211649147481/281474976710656",
+            "474213437172099/281474976710656"
+          ],
+          "vertices": 9
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          1,
+          1,
+          1
+        ],
+        "triangles": 1
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 4,
+        "c5_root": 6,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -12,
+            -2,
+            51,
+            14,
+            -91,
+            -26,
+            66,
+            12,
+            -17,
+            0
+          ],
+          "edges": 12,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "10368883/16777216",
+                "20737789/33554432"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "3314415/4194304",
+                "26515343/33554432"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "48070529/33554432",
+                "6008819/4194304"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "8946931/4194304",
+                "71575471/33554432"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "75625495/33554432",
+                "37812759/16777216"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "950627083419931/562949953421312",
+            "1901265322972175/1125899906842624"
+          ],
+          "vertices": 11
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            6,
+            10
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            9,
+            10
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          1,
+          1,
+          1
+        ],
+        "triangles": 1
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 3,
+        "c5_root": 5,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -11,
+            -2,
+            41,
+            12,
+            -59,
+            -16,
+            31,
+            4,
+            -5
+          ],
+          "edges": 11,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "8306985/16777216",
+                "1038375/2097152"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "10368885/16777216",
+                "2592225/4194304"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "20824155/16777216",
+                "10412085/8388608"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "17524635/8388608",
+                "35049285/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "38110035/16777216",
+                "19055025/8388608"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "29765095970315/17592186044416",
+            "476244915306065/281474976710656"
+          ],
+          "vertices": 10
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            5,
+            9
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            8,
+            9
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          1,
+          1,
+          1
+        ],
+        "triangles": 1
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 1,
+        "c5_root": 3,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -9,
+            -2,
+            24,
+            8,
+            -19,
+            -4,
+            5
+          ],
+          "edges": 9,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "20737775/33554432",
+                "2592225/4194304"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "2837625/4194304",
+                "22701025/33554432"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "952025/524288",
+                "60929625/33554432"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "39577925/16777216",
+                "79155875/33554432"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "1916256203592133/1125899906842624",
+            "1916265379805883/1125899906842624"
+          ],
+          "vertices": 8
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            7
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          1,
+          1,
+          1
+        ],
+        "triangles": 1
+      }
+    ],
+    "2": [
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 1,
+        "c5_root": 5,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -12,
+            -4,
+            45,
+            22,
+            -63,
+            -28,
+            38,
+            10,
+            -9
+          ],
+          "edges": 12,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "41475525/67108864",
+                "10368891/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "21848073/33554432",
+                "43696185/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "16777215/16777216",
+                "67108899/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "32354985/16777216",
+                "129419979/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "186551859/67108864",
+                "93275949/33554432"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "7324146066016531/2251799813685248",
+            "14648328655722407/4503599627370496"
+          ],
+          "vertices": 10
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            5,
+            9
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            8,
+            9
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          2,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 2
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 3,
+        "c5_root": 7,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -14,
+            -4,
+            68,
+            30,
+            -140,
+            -64,
+            132,
+            50,
+            -56,
+            -12,
+            9
+          ],
+          "edges": 14,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "31047653/67108864",
+                "62095397/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "41475525/67108864",
+                "82951141/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "16777215/16777216",
+                "134217811/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "168394681/134217728",
+                "42098693/33554432"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "287296555/134217728",
+                "143648323/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "183795339/67108864",
+                "367590769/134217728"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "29298651814005099/9007199254740992",
+            "3662344018214379/1125899906842624"
+          ],
+          "vertices": 12
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            7,
+            11
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            10,
+            11
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          2,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 2
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 0,
+        "c5_root": 0,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -11,
+            -4,
+            32,
+            14,
+            -31,
+            -12,
+            9,
+            2
+          ],
+          "edges": 11,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "20737775/33554432",
+                "2592225/4194304"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "33554425/33554432",
+                "16777225/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "51490675/33554432",
+                "12872675/8388608"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "97938525/33554432",
+                "48969275/16777216"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "916524969644721/281474976710656",
+            "458263758081423/140737488355328"
+          ],
+          "vertices": 9
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            8
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          2,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 2
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 4,
+        "c5_root": 8,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -15,
+            -4,
+            81,
+            34,
+            -196,
+            -90,
+            227,
+            92,
+            -125,
+            -34,
+            27,
+            2
+          ],
+          "edges": 15,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "165902165/268435456",
+                "41475577/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "104751647/134217728",
+                "209503437/268435456"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "268435453/268435456",
+                "67108899/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "390331799/268435456",
+                "195165971/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "579960667/268435456",
+                "289980405/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "367402607/134217728",
+                "734805357/268435456"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "58844004895509197/18014398509481984",
+            "117688345689298397/36028797018963968"
+          ],
+          "vertices": 13
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            8,
+            12
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            10,
+            11
+          ],
+          [
+            11,
+            12
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          2,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 2
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 2,
+        "c5_root": 6,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -13,
+            -4,
+            56,
+            26,
+            -95,
+            -42,
+            69,
+            22,
+            -18,
+            -2
+          ],
+          "edges": 13,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "20737773/33554432",
+                "10368895/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 2
+            },
+            {
+              "interval": [
+                "34993905/16777216",
+                "69987827/33554432"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "92138589/33554432",
+                "46069303/16777216"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "1842382451978843/562949953421312",
+            "3684775416305649/1125899906842624"
+          ],
+          "vertices": 11
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            7
+          ],
+          [
+            6,
+            10
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            9,
+            10
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          2,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 2
+      }
+    ],
+    "3": [
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 1,
+        "c5_root": 7,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -15,
+            -6,
+            71,
+            40,
+            -140,
+            -78,
+            135,
+            60,
+            -65,
+            -16,
+            13
+          ],
+          "edges": 15,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "41475525/67108864",
+                "10368891/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "43024527/67108864",
+                "21512283/33554432"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 2
+            },
+            {
+              "interval": [
+                "131373177/67108864",
+                "4105413/2097152"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "106450851/33554432",
+                "212901741/67108864"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "21121361993603535/4503599627370496",
+            "21121412617915229/4503599627370496"
+          ],
+          "vertices": 12
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            7,
+            11
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            10,
+            11
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 3
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 3,
+        "c5_root": 9,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -17,
+            -6,
+            100,
+            52,
+            -264,
+            -146,
+            354,
+            180,
+            -250,
+            -100,
+            89,
+            20,
+            -13
+          ],
+          "edges": 17,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "60379137/134217728",
+                "15094807/33554432"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "41475525/67108864",
+                "82951141/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 2
+            },
+            {
+              "interval": [
+                "169009477/134217728",
+                "5281549/4194304"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "71998017/33554432",
+                "287992159/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "422778083/134217728",
+                "211389087/67108864"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "84598608059624535/18014398509481984",
+            "42299431492548119/9007199254740992"
+          ],
+          "vertices": 14
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            9,
+            13
+          ],
+          [
+            10,
+            11
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            12,
+            13
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 3
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 4,
+        "c5_root": 10,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -18,
+            -6,
+            116,
+            58,
+            -349,
+            -192,
+            547,
+            286,
+            -464,
+            -202,
+            204,
+            60,
+            -37,
+            -4
+          ],
+          "edges": 18,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "41475525/67108864",
+                "5184445/8388608"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "3258465/4194304",
+                "52135475/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 2
+            },
+            {
+              "interval": [
+                "98040705/67108864",
+                "24510185/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "18140955/8388608",
+                "145127675/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "211365805/67108864",
+                "13210365/4194304"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "21241026194506435/4503599627370496",
+            "10620540872265801/2251799813685248"
+          ],
+          "vertices": 15
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            10,
+            11
+          ],
+          [
+            10,
+            14
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            12,
+            13
+          ],
+          [
+            13,
+            14
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 3
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 2,
+        "c5_root": 8,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -16,
+            -6,
+            85,
+            46,
+            -193,
+            -106,
+            214,
+            102,
+            -115,
+            -40,
+            24,
+            4
+          ],
+          "edges": 16,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "5184443/8388608",
+                "10368897/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 3
+            },
+            {
+              "interval": [
+                "35216379/16777216",
+                "17608195/8388608"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "52892081/16777216",
+                "13223023/4194304"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "665264000772335/140737488355328",
+            "1330531778658613/281474976710656"
+          ],
+          "vertices": 13
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            8,
+            12
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            10,
+            11
+          ],
+          [
+            11,
+            12
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 3
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 0,
+        "c5_root": 0,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -14,
+            -6,
+            53,
+            28,
+            -79,
+            -42,
+            50,
+            24,
+            -11,
+            -4
+          ],
+          "edges": 14,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "1296111/2097152",
+                "2592225/4194304"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 2
+            },
+            {
+              "interval": [
+                "6549627/4194304",
+                "3274815/2097152"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "13852845/4194304",
+                "865803/262144"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "41594400910931/8796093022208",
+            "83189006898885/17592186044416"
+          ],
+          "vertices": 11
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            8,
+            9
+          ],
+          [
+            9,
+            10
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          3,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 3
+      }
+    ],
+    "4": [
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 1,
+        "c5_root": 9,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -18,
+            -8,
+            102,
+            62,
+            -257,
+            -160,
+            341,
+            188,
+            -252,
+            -104,
+            100,
+            22,
+            -17
+          ],
+          "edges": 18,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "41475511/67108864",
+                "5184445/8388608"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "21332493/33554432",
+                "42665035/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 3
+            },
+            {
+              "interval": [
+                "33052411/16777216",
+                "132209693/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "236275305/67108864",
+                "118137677/33554432"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "13653153545837067/2251799813685248",
+            "13653188609384467/2251799813685248"
+          ],
+          "vertices": 14
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            9,
+            13
+          ],
+          [
+            10,
+            11
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            12,
+            13
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          4,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 4
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 3,
+        "c5_root": 11,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -20,
+            -8,
+            137,
+            78,
+            -438,
+            -268,
+            756,
+            444,
+            -748,
+            -384,
+            425,
+            166,
+            -130,
+            -28,
+            17
+          ],
+          "edges": 20,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "59463027/134217728",
+                "7432893/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "82951011/134217728",
+                "10368891/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 3
+            },
+            {
+              "interval": [
+                "169318773/134217728",
+                "84659445/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "144121653/67108864",
+                "288243423/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "470561481/134217728",
+                "235280799/67108864"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "3419081120263801/562949953421312",
+            "109410949433473961/18014398509481984"
+          ],
+          "vertices": 16
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            10,
+            11
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            11,
+            15
+          ],
+          [
+            12,
+            13
+          ],
+          [
+            13,
+            14
+          ],
+          [
+            14,
+            15
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          4,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 4
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 4,
+        "c5_root": 12,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -21,
+            -8,
+            156,
+            86,
+            -557,
+            -338,
+            1092,
+            650,
+            -1247,
+            -668,
+            832,
+            362,
+            -303,
+            -90,
+            47,
+            6
+          ],
+          "edges": 21,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "82951115/134217728",
+                "20737801/33554432"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "104021153/134217728",
+                "52010621/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 3
+            },
+            {
+              "interval": [
+                "98264099/67108864",
+                "196528287/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "290353511/134217728",
+                "4536775/2097152"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "235271767/67108864",
+                "470543623/134217728"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "109839316887642387/18014398509481984",
+            "54919811834802451/9007199254740992"
+          ],
+          "vertices": 17
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            10,
+            11
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            12,
+            13
+          ],
+          [
+            12,
+            16
+          ],
+          [
+            13,
+            14
+          ],
+          [
+            14,
+            15
+          ],
+          [
+            15,
+            16
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          4,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 4
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 2,
+        "c5_root": 10,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -19,
+            -8,
+            119,
+            70,
+            -336,
+            -206,
+            499,
+            284,
+            -407,
+            -196,
+            173,
+            62,
+            -30,
+            -6
+          ],
+          "edges": 19,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "20737755/33554432",
+                "10368891/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 4
+            },
+            {
+              "interval": [
+                "70600653/33554432",
+                "8825085/4194304"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "58842909/16777216",
+                "117685845/33554432"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "3439775439798099/562949953421312",
+            "6879570756837085/1125899906842624"
+          ],
+          "vertices": 15
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            10,
+            11
+          ],
+          [
+            10,
+            14
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            12,
+            13
+          ],
+          [
+            13,
+            14
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          4,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 4
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 0,
+        "c5_root": 0,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -17,
+            -8,
+            79,
+            46,
+            -158,
+            -96,
+            155,
+            92,
+            -73,
+            -40,
+            13,
+            6
+          ],
+          "edges": 17,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "10368885/16777216",
+                "2592225/4194304"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 3
+            },
+            {
+              "interval": [
+                "26431935/16777216",
+                "13215975/8388608"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "30547215/8388608",
+                "61094445/16777216"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "861969481646911/140737488355328",
+            "1723943510763965/281474976710656"
+          ],
+          "vertices": 13
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            0,
+            12
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            10,
+            11
+          ],
+          [
+            11,
+            12
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          4,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 4
+      }
+    ],
+    "5": [
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 1,
+        "c5_root": 11,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -21,
+            -10,
+            138,
+            88,
+            -421,
+            -280,
+            710,
+            440,
+            -711,
+            -370,
+            426,
+            160,
+            -143,
+            -28,
+            21
+          ],
+          "edges": 21,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "41475525/67108864",
+                "81007/131072"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "21220471/33554432",
+                "42441001/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 4
+            },
+            {
+              "interval": [
+                "132668757/67108864",
+                "8291801/4194304"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "64333659/16777216",
+                "257334695/67108864"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "16650168406441299/2251799813685248",
+            "16650213547580993/2251799813685248"
+          ],
+          "vertices": 16
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            0,
+            10
+          ],
+          [
+            0,
+            11
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            11,
+            15
+          ],
+          [
+            12,
+            13
+          ],
+          [
+            13,
+            14
+          ],
+          [
+            14,
+            15
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          5,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 5
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 3,
+        "c5_root": 13,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -23,
+            -10,
+            179,
+            108,
+            -669,
+            -436,
+            1406,
+            900,
+            -1786,
+            -1050,
+            1403,
+            700,
+            -669,
+            -248,
+            179,
+            36,
+            -21
+          ],
+          "edges": 23,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "58893549/134217728",
+                "117787241/268435456"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "165902165/268435456",
+                "41475577/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 4
+            },
+            {
+              "interval": [
+                "339009957/268435456",
+                "84752525/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "576745169/268435456",
+                "18023291/8388608"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1026450711/268435456",
+                "513225427/134217728"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "66719283192848989/9007199254740992",
+            "533755451904444501/72057594037927936"
+          ],
+          "vertices": 18
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            0,
+            10
+          ],
+          [
+            0,
+            11
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            12,
+            13
+          ],
+          [
+            13,
+            14
+          ],
+          [
+            13,
+            17
+          ],
+          [
+            14,
+            15
+          ],
+          [
+            15,
+            16
+          ],
+          [
+            16,
+            17
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          5,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 5
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 4,
+        "c5_root": 14,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -24,
+            -10,
+            201,
+            118,
+            -827,
+            -534,
+            1937,
+            1248,
+            -2771,
+            -1670,
+            2479,
+            1310,
+            -1361,
+            -578,
+            422,
+            124,
+            -57,
+            -8
+          ],
+          "edges": 24,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "20737755/33554432",
+                "10368891/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "25967061/33554432",
+                "1622943/2097152"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 4
+            },
+            {
+              "interval": [
+                "6149763/4194304",
+                "49198131/33554432"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "72600975/33554432",
+                "36300501/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "64152081/16777216",
+                "128304189/33554432"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "8369148541515575/1125899906842624",
+            "4184586579542397/562949953421312"
+          ],
+          "vertices": 19
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            0,
+            10
+          ],
+          [
+            0,
+            11
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            12,
+            13
+          ],
+          [
+            13,
+            14
+          ],
+          [
+            14,
+            15
+          ],
+          [
+            14,
+            18
+          ],
+          [
+            15,
+            16
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            17,
+            18
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          5,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 5
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 2,
+        "c5_root": 12,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -22,
+            -10,
+            158,
+            98,
+            -531,
+            -348,
+            985,
+            620,
+            -1076,
+            -610,
+            692,
+            330,
+            -243,
+            -88,
+            36,
+            8
+          ],
+          "edges": 22,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "648055/1048576",
+                "81007/131072"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 5
+            },
+            {
+              "interval": [
+                "1104503/524288",
+                "2209007/1048576"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "2005209/524288",
+                "4010419/1048576"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "4094492653359/549755813888",
+            "4094504763717/549755813888"
+          ],
+          "vertices": 17
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            0,
+            10
+          ],
+          [
+            0,
+            11
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            12,
+            13
+          ],
+          [
+            12,
+            16
+          ],
+          [
+            13,
+            14
+          ],
+          [
+            14,
+            15
+          ],
+          [
+            15,
+            16
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          5,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 5
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 1,
+        "c5_root": 11,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -21,
+            -10,
+            146,
+            96,
+            -469,
+            -328,
+            814,
+            544,
+            -815,
+            -474,
+            474,
+            208,
+            -151,
+            -36,
+            21
+          ],
+          "edges": 21,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "7726719/16777216",
+                "30906909/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "41475555/67108864",
+                "10368897/16777216"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 3
+            },
+            {
+              "interval": [
+                "10370613/8388608",
+                "82964937/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "142260129/67108864",
+                "71130081/33554432"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "249761193/67108864",
+                "124880613/33554432"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "33630408848638571/4503599627370496",
+            "16815235372383433/2251799813685248"
+          ],
+          "vertices": 16
+        },
+        "core_index": 0,
+        "core_root": 1,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            0,
+            10
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            11
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            11,
+            15
+          ],
+          [
+            12,
+            13
+          ],
+          [
+            13,
+            14
+          ],
+          [
+            14,
+            15
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          5,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 5
+      }
+    ],
+    "6": [
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 1,
+        "c5_root": 13,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -24,
+            -12,
+            179,
+            118,
+            -639,
+            -444,
+            1305,
+            870,
+            -1651,
+            -980,
+            1329,
+            642,
+            -669,
+            -228,
+            194,
+            34,
+            -25
+          ],
+          "edges": 24,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "41475555/67108864",
+                "82951179/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "84575853/134217728",
+                "42287961/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 5
+            },
+            {
+              "interval": [
+                "265915581/134217728",
+                "132957825/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "138308223/33554432",
+                "553232961/134217728"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "78312169074142611/9007199254740992",
+            "78312323054062177/9007199254740992"
+          ],
+          "vertices": 18
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            0,
+            10
+          ],
+          [
+            0,
+            11
+          ],
+          [
+            0,
+            12
+          ],
+          [
+            0,
+            13
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            13,
+            14
+          ],
+          [
+            13,
+            17
+          ],
+          [
+            14,
+            15
+          ],
+          [
+            15,
+            16
+          ],
+          [
+            16,
+            17
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          6,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 6
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 3,
+        "c5_root": 15,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -26,
+            -12,
+            226,
+            142,
+            -964,
+            -656,
+            2381,
+            1614,
+            -3686,
+            -2360,
+            3701,
+            2122,
+            -2416,
+            -1152,
+            994,
+            346,
+            -236,
+            -44,
+            25
+          ],
+          "edges": 26,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "117010699/268435456",
+                "29252717/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "82951115/134217728",
+                "165902399/268435456"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 5
+            },
+            {
+              "interval": [
+                "169629187/134217728",
+                "339258543/268435456"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "576902625/268435456",
+                "288451397/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1104237043/268435456",
+                "276059303/67108864"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "627602786030481131/72057594037927936",
+            "313802125872085907/36028797018963968"
+          ],
+          "vertices": 20
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            0,
+            10
+          ],
+          [
+            0,
+            11
+          ],
+          [
+            0,
+            12
+          ],
+          [
+            0,
+            13
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            13,
+            14
+          ],
+          [
+            14,
+            15
+          ],
+          [
+            15,
+            16
+          ],
+          [
+            15,
+            19
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            17,
+            18
+          ],
+          [
+            18,
+            19
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          6,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 6
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 4,
+        "c5_root": 16,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -27,
+            -12,
+            251,
+            154,
+            -1166,
+            -786,
+            3166,
+            2152,
+            -5428,
+            -3530,
+            6082,
+            3612,
+            -4466,
+            -2294,
+            2081,
+            856,
+            -561,
+            -162,
+            67,
+            10
+          ],
+          "edges": 27,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "41475533/67108864",
+                "82951193/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "51882421/67108864",
+                "103764969/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 5
+            },
+            {
+              "interval": [
+                "196966967/134217728",
+                "98483547/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "145217261/67108864",
+                "290434649/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "69014213/16777216",
+                "552113831/134217728"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "157395213638646845/18014398509481984",
+            "19674462112504633/2251799813685248"
+          ],
+          "vertices": 21
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            0,
+            10
+          ],
+          [
+            0,
+            11
+          ],
+          [
+            0,
+            12
+          ],
+          [
+            0,
+            13
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            13,
+            14
+          ],
+          [
+            14,
+            15
+          ],
+          [
+            15,
+            16
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            16,
+            20
+          ],
+          [
+            17,
+            18
+          ],
+          [
+            18,
+            19
+          ],
+          [
+            19,
+            20
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          6,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 6
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 2,
+        "c5_root": 14,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -25,
+            -12,
+            202,
+            130,
+            -785,
+            -538,
+            1742,
+            1170,
+            -2381,
+            -1490,
+            2050,
+            1142,
+            -1087,
+            -510,
+            325,
+            118,
+            -42,
+            -10
+          ],
+          "edges": 25,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "41475557/67108864",
+                "20737797/33554432"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 6
+            },
+            {
+              "interval": [
+                "35370927/16777216",
+                "141483745/67108864"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "276094777/67108864",
+                "138047407/33554432"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "19709670324584909/2251799813685248",
+            "39419426158756009/4503599627370496"
+          ],
+          "vertices": 19
+        },
+        "core_index": 0,
+        "core_root": 0,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            0,
+            10
+          ],
+          [
+            0,
+            11
+          ],
+          [
+            0,
+            12
+          ],
+          [
+            0,
+            13
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            13,
+            14
+          ],
+          [
+            14,
+            15
+          ],
+          [
+            14,
+            18
+          ],
+          [
+            15,
+            16
+          ],
+          [
+            16,
+            17
+          ],
+          [
+            17,
+            18
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          6,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 6
+      },
+      {
+        "attachment": "none",
+        "attachment_site": -1,
+        "bridge_length": 1,
+        "c5_root": 13,
+        "certificate": {
+          "characteristic_polynomial_desc": [
+            1,
+            0,
+            -24,
+            -12,
+            189,
+            128,
+            -709,
+            -514,
+            1495,
+            1060,
+            -1911,
+            -1240,
+            1519,
+            832,
+            -739,
+            -298,
+            204,
+            44,
+            -25
+          ],
+          "edges": 24,
+          "positive_root_intervals": [
+            {
+              "interval": [
+                "3805983/8388608",
+                "60895807/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "41475553/67108864",
+                "82951185/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "1048575/1048576",
+                "1"
+              ],
+              "multiplicity": 4
+            },
+            {
+              "interval": [
+                "83359615/67108864",
+                "166719309/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "142694777/67108864",
+                "285389633/134217728"
+              ],
+              "multiplicity": 1
+            },
+            {
+              "interval": [
+                "538850389/134217728",
+                "134712617/33554432"
+              ],
+              "multiplicity": 1
+            }
+          ],
+          "surplus_interval": [
+            "157989700013200645/18014398509481984",
+            "39497504187867223/4503599627370496"
+          ],
+          "vertices": 18
+        },
+        "core_index": 0,
+        "core_root": 1,
+        "core_type": "common-cut bouquet",
+        "edges": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            6
+          ],
+          [
+            0,
+            7
+          ],
+          [
+            0,
+            8
+          ],
+          [
+            0,
+            9
+          ],
+          [
+            0,
+            10
+          ],
+          [
+            0,
+            11
+          ],
+          [
+            0,
+            12
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            13
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            7,
+            8
+          ],
+          [
+            9,
+            10
+          ],
+          [
+            11,
+            12
+          ],
+          [
+            13,
+            14
+          ],
+          [
+            13,
+            17
+          ],
+          [
+            14,
+            15
+          ],
+          [
+            15,
+            16
+          ],
+          [
+            16,
+            17
+          ]
+        ],
+        "triangle_vertex_memberships_desc": [
+          6,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "triangles": 6
+      }
+    ]
+  },
+  "worst_cases": [
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 0,
+      "c5_root": 0,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -8,
+          -2,
+          16,
+          4,
+          -7,
+          0
+        ],
+        "edges": 8,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "20737773/33554432",
+              "10368895/16777216"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "24538327/16777216",
+              "49076671/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "82974535/33554432",
+              "10371819/4194304"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "921023653701551/562949953421312",
+          "1842052502228677/1125899906842624"
+        ],
+        "vertices": 7
+      },
+      "core_index": 0,
+      "core_root": 0,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        1,
+        1,
+        1
+      ],
+      "triangles": 1
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 2,
+      "c5_root": 4,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -10,
+          -2,
+          32,
+          10,
+          -35,
+          -8,
+          12,
+          0
+        ],
+        "edges": 10,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "5184441/8388608",
+              "10368891/16777216"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "16777215/16777216",
+              "2097153/2097152"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "16777215/8388608",
+              "33554439/16777216"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "9658539/4194304",
+              "38634165/16777216"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "474211649147481/281474976710656",
+          "474213437172099/281474976710656"
+        ],
+        "vertices": 9
+      },
+      "core_index": 0,
+      "core_root": 0,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        1,
+        1,
+        1
+      ],
+      "triangles": 1
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 4,
+      "c5_root": 6,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -12,
+          -2,
+          51,
+          14,
+          -91,
+          -26,
+          66,
+          12,
+          -17,
+          0
+        ],
+        "edges": 12,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "10368883/16777216",
+              "20737789/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "3314415/4194304",
+              "26515343/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "48070529/33554432",
+              "6008819/4194304"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "8946931/4194304",
+              "71575471/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "75625495/33554432",
+              "37812759/16777216"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "950627083419931/562949953421312",
+          "1901265322972175/1125899906842624"
+        ],
+        "vertices": 11
+      },
+      "core_index": 0,
+      "core_root": 0,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        1,
+        1,
+        1
+      ],
+      "triangles": 1
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 3,
+      "c5_root": 5,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -11,
+          -2,
+          41,
+          12,
+          -59,
+          -16,
+          31,
+          4,
+          -5
+        ],
+        "edges": 11,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "8306985/16777216",
+              "1038375/2097152"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "10368885/16777216",
+              "2592225/4194304"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "20824155/16777216",
+              "10412085/8388608"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "17524635/8388608",
+              "35049285/16777216"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "38110035/16777216",
+              "19055025/8388608"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "29765095970315/17592186044416",
+          "476244915306065/281474976710656"
+        ],
+        "vertices": 10
+      },
+      "core_index": 0,
+      "core_root": 0,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        1,
+        1,
+        1
+      ],
+      "triangles": 1
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 1,
+      "c5_root": 3,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -9,
+          -2,
+          24,
+          8,
+          -19,
+          -4,
+          5
+        ],
+        "edges": 9,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "20737775/33554432",
+              "2592225/4194304"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "2837625/4194304",
+              "22701025/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "952025/524288",
+              "60929625/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "39577925/16777216",
+              "79155875/33554432"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "1916256203592133/1125899906842624",
+          "1916265379805883/1125899906842624"
+        ],
+        "vertices": 8
+      },
+      "core_index": 0,
+      "core_root": 0,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        1,
+        1,
+        1
+      ],
+      "triangles": 1
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 1,
+      "c5_root": 5,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -12,
+          -4,
+          45,
+          22,
+          -63,
+          -28,
+          38,
+          10,
+          -9
+        ],
+        "edges": 12,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "41475525/67108864",
+              "10368891/16777216"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "21848073/33554432",
+              "43696185/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "16777215/16777216",
+              "67108899/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "32354985/16777216",
+              "129419979/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "186551859/67108864",
+              "93275949/33554432"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "7324146066016531/2251799813685248",
+          "14648328655722407/4503599627370496"
+        ],
+        "vertices": 10
+      },
+      "core_index": 0,
+      "core_root": 0,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 2
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 3,
+      "c5_root": 7,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -14,
+          -4,
+          68,
+          30,
+          -140,
+          -64,
+          132,
+          50,
+          -56,
+          -12,
+          9
+        ],
+        "edges": 14,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "31047653/67108864",
+              "62095397/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "41475525/67108864",
+              "82951141/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "16777215/16777216",
+              "134217811/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "168394681/134217728",
+              "42098693/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "287296555/134217728",
+              "143648323/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "183795339/67108864",
+              "367590769/134217728"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "29298651814005099/9007199254740992",
+          "3662344018214379/1125899906842624"
+        ],
+        "vertices": 12
+      },
+      "core_index": 0,
+      "core_root": 0,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 2
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 0,
+      "c5_root": 0,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -11,
+          -4,
+          32,
+          14,
+          -31,
+          -12,
+          9,
+          2
+        ],
+        "edges": 11,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "20737775/33554432",
+              "2592225/4194304"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "33554425/33554432",
+              "16777225/16777216"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "51490675/33554432",
+              "12872675/8388608"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "97938525/33554432",
+              "48969275/16777216"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "916524969644721/281474976710656",
+          "458263758081423/140737488355328"
+        ],
+        "vertices": 9
+      },
+      "core_index": 0,
+      "core_root": 0,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 2
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 4,
+      "c5_root": 8,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -15,
+          -4,
+          81,
+          34,
+          -196,
+          -90,
+          227,
+          92,
+          -125,
+          -34,
+          27,
+          2
+        ],
+        "edges": 15,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "165902165/268435456",
+              "41475577/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "104751647/134217728",
+              "209503437/268435456"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "268435453/268435456",
+              "67108899/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "390331799/268435456",
+              "195165971/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "579960667/268435456",
+              "289980405/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "367402607/134217728",
+              "734805357/268435456"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "58844004895509197/18014398509481984",
+          "117688345689298397/36028797018963968"
+        ],
+        "vertices": 13
+      },
+      "core_index": 0,
+      "core_root": 0,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 2
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 2,
+      "c5_root": 6,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -13,
+          -4,
+          56,
+          26,
+          -95,
+          -42,
+          69,
+          22,
+          -18,
+          -2
+        ],
+        "edges": 13,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "20737773/33554432",
+              "10368895/16777216"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "1048575/1048576",
+              "1"
+            ],
+            "multiplicity": 2
+          },
+          {
+            "interval": [
+              "34993905/16777216",
+              "69987827/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "92138589/33554432",
+              "46069303/16777216"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "1842382451978843/562949953421312",
+          "3684775416305649/1125899906842624"
+        ],
+        "vertices": 11
+      },
+      "core_index": 0,
+      "core_root": 0,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 2
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 0,
+      "c5_root": 1,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -11,
+          -4,
+          36,
+          18,
+          -39,
+          -16,
+          13,
+          2
+        ],
+        "edges": 11,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "648055/1048576",
+              "5184445/8388608"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "8388605/8388608",
+              "4194305/4194304"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "15269355/8388608",
+              "954335/524288"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "5781005/2097152",
+              "23124025/8388608"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "115900958718537/35184372088832",
+          "115901218550687/35184372088832"
+        ],
+        "vertices": 9
+      },
+      "core_index": 0,
+      "core_root": 1,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 2
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 3,
+      "c5_root": 7,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -14,
+          -4,
+          70,
+          32,
+          -152,
+          -76,
+          148,
+          62,
+          -62,
+          -14,
+          9
+        ],
+        "edges": 14,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "106022727/268435456",
+              "3313215/8388608"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "20737773/33554432",
+              "165902337/268435456"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "16777215/16777216",
+              "268435593/268435456"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "391450041/268435456",
+              "195725097/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "144418995/67108864",
+              "577676133/268435456"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "355103667/134217728",
+              "710207487/268435456"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "118733970012297195/36028797018963968",
+          "14841788703188055/4503599627370496"
+        ],
+        "vertices": 12
+      },
+      "core_index": 0,
+      "core_root": 1,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 2
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 1,
+      "c5_root": 5,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -12,
+          -4,
+          47,
+          24,
+          -69,
+          -34,
+          40,
+          12,
+          -9
+        ],
+        "edges": 12,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "8833685/16777216",
+              "35334775/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "41475525/67108864",
+              "5184445/8388608"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "78670865/67108864",
+              "19667725/16777216"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "136234175/67108864",
+              "68117105/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "179345845/67108864",
+              "22418235/8388608"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "3711638576932785/1125899906842624",
+          "14846587282017765/4503599627370496"
+        ],
+        "vertices": 10
+      },
+      "core_index": 0,
+      "core_root": 1,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 2
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 4,
+      "c5_root": 8,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -15,
+          -4,
+          83,
+          36,
+          -210,
+          -104,
+          253,
+          114,
+          -141,
+          -42,
+          31,
+          2
+        ],
+        "edges": 15,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "41475533/67108864",
+              "82951193/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "90827225/134217728",
+              "11353419/16777216"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "152186259/134217728",
+              "76093193/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "212171661/134217728",
+              "53042947/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "72641841/33554432",
+              "290567491/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "177479833/67108864",
+              "354959793/134217728"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "59546512197125243/18014398509481984",
+          "59546812847685231/18014398509481984"
+        ],
+        "vertices": 13
+      },
+      "core_index": 0,
+      "core_root": 1,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 2
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 2,
+      "c5_root": 6,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -13,
+          -4,
+          58,
+          28,
+          -105,
+          -52,
+          79,
+          28,
+          -22,
+          -2
+        ],
+        "edges": 13,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "41475521/67108864",
+              "20737787/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "54999213/67108864",
+              "27499633/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "88534539/67108864",
+              "1383353/1048576"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "71088953/33554432",
+              "142177959/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "177886391/67108864",
+              "44471611/16777216"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "1862753253157199/562949953421312",
+          "14902079563070057/4503599627370496"
+        ],
+        "vertices": 11
+      },
+      "core_index": 0,
+      "core_root": 1,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 2
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 1,
+      "c5_root": 7,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -15,
+          -6,
+          71,
+          40,
+          -140,
+          -78,
+          135,
+          60,
+          -65,
+          -16,
+          13
+        ],
+        "edges": 15,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "41475525/67108864",
+              "10368891/16777216"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "43024527/67108864",
+              "21512283/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "1048575/1048576",
+              "1"
+            ],
+            "multiplicity": 2
+          },
+          {
+            "interval": [
+              "131373177/67108864",
+              "4105413/2097152"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "106450851/33554432",
+              "212901741/67108864"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "21121361993603535/4503599627370496",
+          "21121412617915229/4503599627370496"
+        ],
+        "vertices": 12
+      },
+      "core_index": 0,
+      "core_root": 0,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 3
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 3,
+      "c5_root": 9,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -17,
+          -6,
+          100,
+          52,
+          -264,
+          -146,
+          354,
+          180,
+          -250,
+          -100,
+          89,
+          20,
+          -13
+        ],
+        "edges": 17,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "60379137/134217728",
+              "15094807/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "41475525/67108864",
+              "82951141/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "1048575/1048576",
+              "1"
+            ],
+            "multiplicity": 2
+          },
+          {
+            "interval": [
+              "169009477/134217728",
+              "5281549/4194304"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "71998017/33554432",
+              "287992159/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "422778083/134217728",
+              "211389087/67108864"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "84598608059624535/18014398509481984",
+          "42299431492548119/9007199254740992"
+        ],
+        "vertices": 14
+      },
+      "core_index": 0,
+      "core_root": 0,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          13
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 3
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 4,
+      "c5_root": 10,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -18,
+          -6,
+          116,
+          58,
+          -349,
+          -192,
+          547,
+          286,
+          -464,
+          -202,
+          204,
+          60,
+          -37,
+          -4
+        ],
+        "edges": 18,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "41475525/67108864",
+              "5184445/8388608"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "3258465/4194304",
+              "52135475/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "1048575/1048576",
+              "1"
+            ],
+            "multiplicity": 2
+          },
+          {
+            "interval": [
+              "98040705/67108864",
+              "24510185/16777216"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "18140955/8388608",
+              "145127675/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "211365805/67108864",
+              "13210365/4194304"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "21241026194506435/4503599627370496",
+          "10620540872265801/2251799813685248"
+        ],
+        "vertices": 15
+      },
+      "core_index": 0,
+      "core_root": 0,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          10,
+          14
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          13,
+          14
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 3
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 2,
+      "c5_root": 8,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -16,
+          -6,
+          85,
+          46,
+          -193,
+          -106,
+          214,
+          102,
+          -115,
+          -40,
+          24,
+          4
+        ],
+        "edges": 16,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "5184443/8388608",
+              "10368897/16777216"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "1048575/1048576",
+              "1"
+            ],
+            "multiplicity": 3
+          },
+          {
+            "interval": [
+              "35216379/16777216",
+              "17608195/8388608"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "52892081/16777216",
+              "13223023/4194304"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "665264000772335/140737488355328",
+          "1330531778658613/281474976710656"
+        ],
+        "vertices": 13
+      },
+      "core_index": 0,
+      "core_root": 0,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 3
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 0,
+      "c5_root": 0,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -14,
+          -6,
+          53,
+          28,
+          -79,
+          -42,
+          50,
+          24,
+          -11,
+          -4
+        ],
+        "edges": 14,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "1296111/2097152",
+              "2592225/4194304"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "1048575/1048576",
+              "1"
+            ],
+            "multiplicity": 2
+          },
+          {
+            "interval": [
+              "6549627/4194304",
+              "3274815/2097152"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "13852845/4194304",
+              "865803/262144"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "41594400910931/8796093022208",
+          "83189006898885/17592186044416"
+        ],
+        "vertices": 11
+      },
+      "core_index": 0,
+      "core_root": 0,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 3
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 1,
+      "c5_root": 7,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -15,
+          -6,
+          75,
+          44,
+          -156,
+          -94,
+          151,
+          76,
+          -69,
+          -20,
+          13
+        ],
+        "edges": 15,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "65603893/134217728",
+              "16400999/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "41475525/67108864",
+              "82951153/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "33554413/33554432",
+              "134217755/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "162461385/134217728",
+              "10153843/8388608"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "280181527/134217728",
+              "140090815/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "204730937/67108864",
+              "409461977/134217728"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "85580759415229075/18014398509481984",
+          "85580993200033215/18014398509481984"
+        ],
+        "vertices": 12
+      },
+      "core_index": 0,
+      "core_root": 1,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 3
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 3,
+      "c5_root": 9,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -17,
+          -6,
+          104,
+          56,
+          -292,
+          -174,
+          410,
+          228,
+          -294,
+          -128,
+          101,
+          24,
+          -13
+        ],
+        "edges": 17,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "12266199/33554432",
+              "24532431/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "41475555/67108864",
+              "10368897/16777216"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "1048575/1048576",
+              "1"
+            ],
+            "multiplicity": 2
+          },
+          {
+            "interval": [
+              "102061113/67108864",
+              "51030573/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "144994377/67108864",
+              "72497205/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "204173013/67108864",
+              "102086523/33554432"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "2675663361474569/562949953421312",
+          "21405358209269085/4503599627370496"
+        ],
+        "vertices": 14
+      },
+      "core_index": 0,
+      "core_root": 1,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          13
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 3
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 4,
+      "c5_root": 10,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -18,
+          -6,
+          120,
+          62,
+          -381,
+          -224,
+          627,
+          358,
+          -548,
+          -262,
+          244,
+          76,
+          -45,
+          -4
+        ],
+        "edges": 18,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "331804143/536870912",
+              "165902253/268435456"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "175606695/268435456",
+              "351213753/536870912"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "536870829/536870912",
+              "67108899/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "38752065/33554432",
+              "620033403/536870912"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "109566831/67108864",
+              "876535011/536870912"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "291029805/134217728",
+              "1164119583/536870912"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "1633305069/536870912",
+              "204163179/67108864"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "1373832446013356295/288230376151711744",
+          "171729556136425599/36028797018963968"
+        ],
+        "vertices": 15
+      },
+      "core_index": 0,
+      "core_root": 1,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          10,
+          14
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          13,
+          14
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 3
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 0,
+      "c5_root": 1,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -14,
+          -6,
+          61,
+          36,
+          -103,
+          -58,
+          74,
+          32,
+          -19,
+          -4
+        ],
+        "edges": 14,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "41475557/67108864",
+              "20737797/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "1048575/1048576",
+              "1"
+            ],
+            "multiplicity": 2
+          },
+          {
+            "interval": [
+              "130578661/67108864",
+              "65289349/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "207925607/67108864",
+              "51981411/16777216"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "21471652757136163/4503599627370496",
+          "2683962256938539/562949953421312"
+        ],
+        "vertices": 11
+      },
+      "core_index": 0,
+      "core_root": 1,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 3
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 2,
+      "c5_root": 8,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -16,
+          -6,
+          89,
+          50,
+          -217,
+          -130,
+          254,
+          134,
+          -143,
+          -52,
+          32,
+          4
+        ],
+        "edges": 16,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "82951107/134217728",
+              "165902371/268435456"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "214581477/268435456",
+              "107290817/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "268435303/268435456",
+              "67108865/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "185251051/134217728",
+              "370502259/268435456"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "574663175/268435456",
+              "143665833/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "816971951/268435456",
+              "204243027/67108864"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "85957571323371849/18014398509481984",
+          "171915521182644499/36028797018963968"
+        ],
+        "vertices": 13
+      },
+      "core_index": 0,
+      "core_root": 1,
+      "core_type": "common-cut bouquet",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        3,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 3
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 1,
+      "c5_root": 7,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -15,
+          -6,
+          77,
+          50,
+          -164,
+          -126,
+          143,
+          100,
+          -63,
+          -26,
+          13
+        ],
+        "edges": 15,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "62833787/134217728",
+              "15708471/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "41475551/67108864",
+              "82951199/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "46942277/67108864",
+              "93884651/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "28694443/16777216",
+              "229555641/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "273664839/134217728",
+              "34208117/16777216"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "99138947/33554432",
+              "396555885/134217728"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "44157591180051841/9007199254740992",
+          "22078850853152313/4503599627370496"
+        ],
+        "vertices": 12
+      },
+      "core_index": 1,
+      "core_root": 0,
+      "core_type": "distributed chain/tree incidence",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 3
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 3,
+      "c5_root": 9,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -17,
+          -6,
+          106,
+          62,
+          -302,
+          -216,
+          406,
+          300,
+          -260,
+          -162,
+          87,
+          30,
+          -13
+        ],
+        "edges": 17,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "104528055/268435456",
+              "52264135/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "158816845/268435456",
+              "39704265/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "82951085/134217728",
+              "165902385/268435456"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "333503915/268435456",
+              "166752065/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "242240715/134217728",
+              "484481645/268435456"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "72210115/33554432",
+              "577681135/268435456"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "786751005/268435456",
+              "196687805/67108864"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "88376406138320849/18014398509481984",
+          "353506747569273171/72057594037927936"
+        ],
+        "vertices": 14
+      },
+      "core_index": 1,
+      "core_root": 0,
+      "core_type": "distributed chain/tree incidence",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          13
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 3
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 4,
+      "c5_root": 10,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -18,
+          -6,
+          122,
+          68,
+          -393,
+          -272,
+          631,
+          466,
+          -502,
+          -336,
+          204,
+          92,
+          -37,
+          -4
+        ],
+        "edges": 18,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "278810125/536870912",
+              "139405233/268435456"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "331804253/536870912",
+              "165902297/268435456"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "426411293/536870912",
+              "213205817/268435456"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "768908965/536870912",
+              "384454653/268435456"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "977579823/536870912",
+              "244395041/134217728"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "1162269515/536870912",
+              "36320933/16777216"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "1573218845/536870912",
+              "786609593/268435456"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "1418971363189211127/288230376151711744",
+          "354743781787486913/72057594037927936"
+        ],
+        "vertices": 15
+      },
+      "core_index": 1,
+      "core_root": 0,
+      "core_type": "distributed chain/tree incidence",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          10,
+          14
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          13,
+          14
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 3
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 0,
+      "c5_root": 3,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -14,
+          -6,
+          65,
+          44,
+          -115,
+          -86,
+          74,
+          44,
+          -19,
+          -4
+        ],
+        "edges": 14,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "648055/1048576",
+              "81007/131072"
+            ],
+            "multiplicity": 2
+          },
+          {
+            "interval": [
+              "3042263/2097152",
+              "12169059/8388608"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "17936387/8388608",
+              "8968197/4194304"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "190883/65536",
+              "24433031/8388608"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "346473117249945/70368744177664",
+          "173237023345391/35184372088832"
+        ],
+        "vertices": 11
+      },
+      "core_index": 1,
+      "core_root": 3,
+      "core_type": "distributed chain/tree incidence",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 3
+    },
+    {
+      "attachment": "none",
+      "attachment_site": -1,
+      "bridge_length": 0,
+      "c5_root": 0,
+      "certificate": {
+        "characteristic_polynomial_desc": [
+          1,
+          0,
+          -14,
+          -6,
+          61,
+          40,
+          -99,
+          -74,
+          54,
+          36,
+          -11,
+          -4
+        ],
+        "edges": 14,
+        "positive_root_intervals": [
+          {
+            "interval": [
+              "37003611/67108864",
+              "18501831/33554432"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "20737773/33554432",
+              "41475597/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "48967293/33554432",
+              "97934637/67108864"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "129401229/67108864",
+              "2021895/1048576"
+            ],
+            "multiplicity": 1
+          },
+          {
+            "interval": [
+              "51413253/16777216",
+              "205653063/67108864"
+            ],
+            "multiplicity": 1
+          }
+        ],
+        "surplus_interval": [
+          "11089457394167981/2251799813685248",
+          "22178966958083335/4503599627370496"
+        ],
+        "vertices": 11
+      },
+      "core_index": 1,
+      "core_root": 0,
+      "core_type": "distributed chain/tree incidence",
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          9,
+          10
+        ]
+      ],
+      "triangle_vertex_memberships_desc": [
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "triangles": 3
+    }
+  ]
+}

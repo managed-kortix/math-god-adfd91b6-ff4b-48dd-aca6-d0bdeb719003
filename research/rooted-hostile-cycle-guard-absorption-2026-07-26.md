@@ -1,5 +1,14 @@
 # Rooted hostile-cycle guard absorption at every rank
 
+> **Retracted on 2026-07-26.** Section 4 is invalid: two disjoint unselected
+> triangles in one Voronoi territory need not replace the selected triangle,
+> because either may intersect it. Thus maximum packing does not imply that
+> every territory has packing number one. Lemma 2 remains a packing-one result,
+> but Theorem 1 and every all-rank consequence drawn from Section 4 must not be
+> used. For the six-triangle statement needed at rank eight, see the rigorous
+> 107/111 marked-root certificate and four exact residual kernels in
+> `research/octacyclic-rooted-six-triangle-finite-reduction-2026-07-26.md`.
+
 ## 1. Result
 
 For a graph `G`, write

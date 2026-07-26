@@ -2,6 +2,17 @@
 
 **Date:** 2026-07-26
 
+**Later resolution.** The six canonical `T^6PP` ordinary-split exceptions
+listed here are closed, uniformly over arbitrary attached trees, in
+`research/octacyclic-t6pp-six-exceptions-resolution-2026-07-26.md`. The
+replacement audit does not use the rooted hostile-cycle guard theorem. The
+common-cut bouquet uses the common-cut Schur--Sachs theorem; the five router
+types use direct successive interval splits into common-cut mixed packets or
+`P`, `T`, and `A_r` packets. The weakest ledger is
+`1-2(sqrt(5)-2)=5-2sqrt(5)>0`. The qualifications below describe what this
+census executable alone certifies and remain relevant; the later local
+resolution is not a complete octacyclic theorem.
+
 ## Scope and status
 
 This note records complete color-preserving incidence-tree censuses for the two
