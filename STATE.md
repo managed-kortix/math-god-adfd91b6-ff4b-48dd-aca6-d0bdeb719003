@@ -105,6 +105,21 @@ research/semantic, research/procedural).
   review. Sent one disclosed professional courtesy thread to source-paper
   submitter Hitesh Kumar. No partial class result was misreported as a full
   resolution.
+- 2026-07-26: advanced the rank-eleven cactus frontier. Sharp DNN leaves only
+  `T^10Q` and `T^9PP`; actual-bridge pruning leaves marked disconnected
+  endpoints `A_10|Q`, `T^9P|P`, and `P|A_9|P`, plus two fully shared families.
+  A new exact `A_10|Q` census gives 1037 unmarked incidence trees, 21777
+  placements, and `12099=12089+10` canonical rows. A refinement-tree resolver
+  now gives one terminal owner to every cut, private hull site, router interval,
+  and connector mark in all 12089 ordinary rows. The ten residuals have cut
+  distribution `{1:2,2:5,3:3}` and close by six invariant repair terminals:
+  common-hub packing one, `TQ+A8`, `A8Q+T`, one opening plus `A9Q`,
+  `A7+TQ+T`, and two openings plus `A8Q`. Hostile audits corrected two tempting
+  over-broad opening descriptions. The script freezes incidence, row, residual,
+  final-owner, and repair digests and passes normally and under `python -O`.
+  Thus the disconnected rank-eleven endpoint `A_10|Q` is exactly closed; no
+  full rank-eleven theorem is claimed. See
+  `research/rank-eleven-a10-one-interface-frontier-2026-07-26.md`.
 - 2026-07-26: completed every rank-ten cactus structural residual. New exact
   marked censuses close `A_9|Q` as `3624=3618+6` and entry-locked `T^8P|P` as
   `11689=11586+100+3`; the existing `P|A_8|P` census now has graph-level
