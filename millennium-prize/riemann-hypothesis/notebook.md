@@ -4277,6 +4277,30 @@ correlation. Chebyshev bounds and termwise absolute values cannot control that
 tail. Details are in `cycle-47-quantitative-anchor-reserve.md`. No RH result is
 claimed.
 
+## Cycle 55: correction — the global below-M witness is valid
+
+Cycle 54 incorrectly stated that the slope of `U_(M-1)` varies by complete
+cell. Möbius inversion instead gives the exact global formula
+`U_(M-1)(t)=m_(M-1)t` on all `1<t<M`. Therefore
+
+\[
+g_M=\mathbf1_{(1,M)}[\psi(\lfloor t\rfloor)-c_Mt]
+\]
+
+is orthogonal to `U_(M-1)` and every new row and is the optimal witness among
+all functions supported below `M`. Its payment is the exact Chebyshev variance
+
+\[
+W_M=\sum_{k<M}\psi(k)^2/[k(k+1)]
+-(M-1)^{-1}(\sum_{k<M}\psi(k)\log(1+1/k))^2.
+\]
+
+It captures `94.3%--97.6%` of historical old-`D` reserves and certifies eight
+of eleven delayed windows, but misses `[219,231)`, `[220,231)`, and `[222,226)`.
+The critical shortfall is `1.5131e-5`. The Cycle 54 cellwise bound remains true
+but is nonoptimal. Details are in
+`cycle-55-optimal-below-M-witness-correction.md`. No RH result is claimed.
+
 ## Cycle 49: recombination returns the original terminal kernel
 
 Combining packet surplus and coherent deficit before estimating gives

@@ -118,10 +118,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   exact reciprocal-cell witnesses orthogonal to the full probe span give a
   positive Chebyshev-staircase reserve, but it is of size `1/(M log^3 M)` and
   captures under one percent of the historical reserve, while a tempting larger
-  global variance is invalid because the `U` slope varies cellwise
+  global variance was initially rejected due to an error: exact Möbius
+  inversion makes the `U` slope global below `M`; the corrected optimal
+  staircase witness captures `94.3%--97.6%` of historical old-`D` reserves and
+  certifies eight of eleven delayed windows, but misses the critical
+  `[219,231)` repair by `1.5131e-5`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 54
+- **cycle:** 55
 - **announcements:** none
 
 ## immutable target list
@@ -140,9 +144,9 @@ waiting process.
 
 ## next exact steps
 
-1. Isolate and control the missing between-cell/global old-prefix reserve beyond
-   the explicit Chebyshev cell witnesses; only complete Vasyunin correlations
-   can supply the required two logarithms of additional scale.
+1. Isolate the residual beyond the optimal below-`M` staircase witness, focusing
+   on the three failed historical windows and post-`M` Vasyunin correlations;
+   no stronger below-`M` witness exists.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -157,6 +161,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 55 corrected Cycle 54: `U_(M-1)(t)` has one global slope on
+  `1<t<M`, so the global Chebyshev staircase minus its best linear fit is
+  orthogonal to the complete probe span and is optimal among all below-`M`
+  witnesses. It captures `94.3%--97.6%` of historical reserves and repairs
+  eight delayed windows, but misses `[219,231)`, `[220,231)`, and `[222,226)`;
+  the critical shortfall is `1.5131e-5`. The weaker Cycle 54 cellwise theorem
+  remains valid, but its claimed optimality and scale interpretation are
+  superseded. No RH or Millennium solution is claimed.
 
 - 2026-07-26: Cycle 54 constructed explicit reciprocal-cell witnesses
   orthogonal to `U_(M-1)` and every new row, proving a universal positive lower

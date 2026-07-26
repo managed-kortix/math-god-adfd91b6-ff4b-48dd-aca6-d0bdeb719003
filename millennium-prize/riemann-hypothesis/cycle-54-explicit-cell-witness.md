@@ -1,4 +1,11 @@
-# Cycle 54: an explicit full-span reserve witness
+# Cycle 54: cellwise reserve witnesses (superseded optimization)
+
+> **Cycle 55 correction.** The cellwise bound below is valid, but it is not
+> optimal. The claim below that the larger global staircase witness is invalid
+> is false: on every complete cell below `M`, Möbius inversion makes
+> `U_(M-1)(t)=m_(M-1)t` with one global slope. Therefore the global witness is
+> orthogonal to the full probe span and captures roughly 94--98% of the
+> historical reserve. See `cycle-55-optimal-below-M-witness-correction.md`.
 
 ## Exact cell witnesses
 
@@ -68,7 +75,7 @@ The `k=1` term vanishes. For every `M>=3`, the `k=2` term gives
 
 There is no factor `1/2` in this contribution.
 
-## Essential correction: the larger global variance is invalid
+## Superseded claim: the larger global variance
 
 It is tempting to project the complete staircase `psi(floor t)` on `(1,M)`
 away from one global copy of `t`, obtaining
@@ -78,10 +85,10 @@ W_M=\sum_{k<M}{\psi(k)^2\over k(k+1)}
 -{1\over M-1}\left(\sum_{k<M}\psi(k)\lambda_k\right)^2.
 \]
 
-This is **not** a lower bound for the full-`Z` residual. Although all new rows
-restrict to global multiples of `t`, the coefficient `u_k` in (54.1) varies
-from cell to cell. The global staircase witness is generally not orthogonal to
-`U_(M-1)`. The unsupported difference is the nonnegative between-cell variance
+Cycle 55 found that this paragraph's conclusion is false. The coefficient in
+`U_(M-1)` does **not** vary from cell to cell: the floor contribution cancels
+identically. The difference below is the valid nonnegative between-cell
+variance captured by the optimal global witness:
 
 \[
 W_M-\widetilde W_M
@@ -89,8 +96,7 @@ W_M-\widetilde W_M
 -{1\over M-1}\left(\sum_{k<M}\psi(k)\lambda_k\right)^2.
 \]
 
-Thus only the cellwise bound (54.3) is valid after projection away from the
-complete probe span.
+Thus (54.3) remains valid, but is unnecessarily weak.
 
 ## Scale and finite payment
 
@@ -132,10 +138,8 @@ whereas the needed repair is
 0.0008009403417390\ldots.
 \]
 
-Hence the explicit universal witness is rigorous but quantitatively two
-logarithms too small for the fixed-strength budget. The missing reserve is the
-between-cell/global old-prefix component controlled by complete Vasyunin
-correlations.
+Hence the cellwise witnesses are rigorous but quantitatively weak. Cycle 55
+restores the between-cell component with an exact globally orthogonal witness.
 
 ## Scope
 
