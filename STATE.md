@@ -16,6 +16,14 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-26: advanced the rank-eleven cactus frontier by closing G3, the full
+  `T^9PP` ladder inheritance problem. All ten fully shared ordinary-ledger
+  exceptions now have positive graph-level packetizations with final owners.
+  A hostile audit caught a false shortcut at `U7`: literal N7 extension gives
+  only `P+P+A_7>-2delta`; the correct one-router split gives `P +`
+  packing-one `T^8P > 8-2delta`. The remaining rank-eleven obstruction is
+  global existential router reachability R11 over marked cyclic realizations.
+  See `research/rank-eleven-t9pp-ladder-inheritance-2026-07-26.md`.
 - 2026-07-26: hardened autonomous correspondence and inbox operations. Added a
   formal email style gate (precise subject, recipient-specific mathematical
   reason, labeled links on separate lines, compact disclosure, one narrow

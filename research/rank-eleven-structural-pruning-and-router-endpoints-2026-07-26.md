@@ -20,9 +20,11 @@ proved rank-ten theorem. The intended replacement for a large marked census is:
    operations and one-pivot analytic packets.
 
 The bridge-pruning step is proved below. It gives an exact finite endpoint list,
-not a census. Candidate repairs are analyzed, and the genuinely new four-port
-shape is repaired. The remaining router assertion is isolated explicitly and
-is open. Therefore this note does **not** prove the rank-eleven theorem.
+not a census. The genuinely new four-port shape and all nine inherited ladder
+shapes are repaired with final owners; see
+`research/rank-eleven-t9pp-ladder-inheritance-2026-07-26.md`. The remaining
+global router assertion is isolated explicitly and is open. Therefore this
+note does **not** prove the rank-eleven theorem.
 
 The inputs used as theorems are:
 
@@ -359,13 +361,11 @@ U10 X(T()T()T()T()T()T(X(P())X(T()))T(X(P())X(T())))
 ```
 
 Their cut-count distribution is `1,2,4,2,1` at one through five cuts. `U8` is
-the new degree-four pentagon shape (7.1). For `U1`--`U7`,`U9`,`U10`, the exact
-candidate repair family is respectively the rank-ten N1--N9 recipe after one
-triangle extension: common-cut packet; leaf-pentagon opening; one triangle
-router; pentagon-router split; packing-one opening; one triangle router; and
-the two-router ladder with zero, one, or two singleton triangular terminals.
-This correspondence is a candidate until the inheritance assertion in
-Candidate Repair 7.2 is proved with final owners.
+the new degree-four pentagon shape (7.1). For `U1`--`U7`,`U9`,`U10`, the
+rank-ten N1--N9 owner templates identify the repairs, but every numerical
+ledger must be recomputed after extension. The companion G3 proof does this:
+eight rows extend directly, while `U7` instead uses one router to leave `P`
+plus a packing-one `T^8P` packet.
 
 ### Proposition 7.1 (repair of the new degree-four pentagon router)
 
@@ -389,23 +389,33 @@ Both packets are strict by the rank-ten theorem. The interval-owner argument
 proves connectivity, inducedness, disjointness, exhaustion, and ownership of
 arbitrary attached trees. QED.
 
-### Candidate Repair 7.2 (rank-ten ladder inheritance)
+### Proposition 7.2 (rank-ten ladder inheritance, corrected)
 
-For each of the other nine fully shared `T^9PP` ordinary-split exceptions, the
-rank-ten recipe N1--N9 suggests putting the extra triangle into one existing
-retained packet, or opening it when it is the new leaf. This is valid whenever:
+Every realization of `U1`--`U7`,`U9`,`U10`, with arbitrary attached trees, has
+positive surplus and an exhaustive final-owner packetization. Their exact
+packet ledgers are
 
-1. deleting a leaf triangle recovers the corresponding rank-ten exception and
-   its three private vertices form the exact `-1` tree territory; or
-2. the extra triangle lies in a retained packet of rank at most nine, so the
-   packet remains strict by the rank-ten theorem; or
-3. it augments a common-cut or packing-one arm, strengthening the integer
-   credit.
+```text
+U1  common-cut T^9PP                         >10-4/(3sqrt(13)),
+U2  common-cut T^9P + opened tree            >8-delta,
+U3  P + common-cut T^8P                      >8-2delta,
+U4  A_8 + TP                                 >3/4,
+U5  packing-one T^9P + opened tree           >8-delta,
+U6  P + T + common-cut T^7P                  >7-2delta,
+U7  P + packing-one T^8P                     >8-2delta,
+U9  P + P + T + A_6                          >1-2delta,
+U10 P + P + T + T + A_5                      >2-2delta.
+```
 
-These are finite repair templates, not individual marked rows. What is not yet
-proved is the structural inheritance statement that every realization of each
-of the nine signatures falls into one of (1)--(3) with compatible final
-ownership. That is Gap G3 below.
+The proof, including the owner-preserving leaf extension and every router
+interval, is
+`research/rank-eleven-t9pp-ladder-inheritance-2026-07-26.md`.
+
+The correction at `U7` is essential. Literal N7 extension gives `P+P+A_7`,
+whose available ledger is only `>-2delta`; qualitative strictness cannot pay
+the deficits. Sacrificing just one router leaves the other router and seven fan
+triangles as a packing-one `T^8P` packet. Also, a leaf triangle has two private
+vertices, not three.
 
 ### Candidate Repair 7.3 (`T^10Q` ladder)
 
@@ -479,9 +489,10 @@ The proof status is exactly as follows.
 structural row to the finite endpoint families (3.2) and (4.2). The unresolved
 disconnected core list is exactly `A_10|Q`, `T^9P|P`, and `P|A_9|P`.
 
-**G3 -- open:** Rank-ten N1--N9 repairs have not been proved to inherit all
-rank-eleven realizations by a structural leaf-extension argument with final
-ownership. Matching unmarked signatures is insufficient.
+**G3 -- proved, with one corrected recipe:** All nine inherited signatures
+have graph-level final-owner repairs. Eight extend a rank-ten owner template
+with a recomputed ledger. `U7` instead uses one router and a retained
+packing-one `T^8P` packet. See the companion G3 proof.
 
 **G4 -- open:** Lemma R11, the global reachability of a good local router or a
 certified terminal, is unproved. The finite `144`-state ledger proves only that
@@ -522,7 +533,7 @@ has at most two hostile demands, and the exact arithmetic automaton has at most
 `144` states after adding demand coalescence. The genuinely new four-port
 pentagon shape has the uniform repair `T +` strict rank-nine.
 
-What remains is not numerical census work but one structural theorem: prove
-Lemma R11, including final ownership and the finite ladder inheritance. Until
+What remains is not the finite ladder inheritance, which is now proved, but the
+global existential router reachability theorem R11 with final ownership. Until
 that theorem or an equivalent bounded local verification is supplied, no
 rank-eleven conclusion is claimed.

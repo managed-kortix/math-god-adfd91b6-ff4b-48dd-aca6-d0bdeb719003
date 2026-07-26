@@ -97,8 +97,15 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     normalized denominator bound and finite `g=9` exponent/multiplicity cases.
     The eight-cap certificate is exact for same-residue carriers.  Complete
     the 16-case parameterized certificate for opposite-residue companions,
-    preserving sign correlations via power variables `X,Y,W` and tensor
-    Bernstein subdivision on `[0,3/4]x[0,1]^3`.
+     preserving sign correlations via power variables `X,Y,W` and tensor
+     Bernstein subdivision on `[0,3/4]x[0,1]^3`.
+21. Rank-eleven cactus induction: sharp DNN and actual-bridge pruning leave
+    five marked/shared endpoint families. All ten fully shared `T^9PP`
+    ordinary-ledger exceptions now have final-owner repairs. The naive N7
+    extension fails numerically, but a one-router packing-one `T^8P` repair
+    closes `U7`. The remaining obstacle is existential router reachability R11.
+    Build a port-aware verifier over cyclic realizations and concrete owner
+    refinements; never quotient by the 144-state arithmetic ledger alone.
 
 ## Running jobs
 
