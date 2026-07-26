@@ -3521,3 +3521,121 @@ Derive the exact complete variable-block dissipation theorem, including the
 minimal covering and divergent-weight hypotheses. Then identify a smooth
 partition of the complete endpoint functional—not the restricted shell—on
 which cancellation-aware averaging could plausibly be applied.
+
+## Cycle 37: smooth complete-endpoint averaging
+
+For `W in C_c^infinity((1,2))`, the exact integer average of
+`P_N-P_(2N)` was interchanged with the complete endpoint integral. Its linear
+coefficient kernel is the weighted average of `c_a(N)-c_a(2N)`, while its
+quadratic kernel is the weighted average of
+`c_a(N)c_b(N)-c_a(2N)c_b(2N)`. Replacing the latter by a product of averages
+would destroy the common-scale correlation. All interchanges are absolute and
+finite before the endpoint integral.
+
+Exact scale reindexing retains a parity comb:
+
+\[
+ \sum_NW(N/X)(P_N-P_{2N})
+ =\sum_M[W(M/X)-{\bf1}_{2\mid M}W(M/(2X))]P_M.
+\]
+
+In the continuous scale model, double Mellin transformation of the quadratic
+coefficient kernel gives
+
+\[
+ {1\over z^2w^2}\int W(y)\left[
+ {y^{z+w}\over\log^2(Xy)}-{(2y)^{z+w}\over\log^2(2Xy)}\right]dy.
+\]
+
+Thus smooth averaging gives rapid decay in the total pair frequency
+`Im(z+w)`, but not independent decay on the anti-diagonal `Im(z+w)=0`; the
+pair correlation survives exactly. Exact integer smoothing has no global
+Schwartz decay because of lattice-scale Poisson aliases. Unlike a restricted-
+shell average, the complete average includes every endpoint range and directly
+reweights the `P_M` sequence, but it still needs a separate variable-block
+dissipation theorem. Details are in
+`cycle-37-smoothed-complete-endpoint-average.md`.
+
+## Tick 37 — variable-block liminf theorem and hostile quantifier audit
+
+The complete abstract implication is recorded in
+`variable-block-liminf-adversarial-audit.md`.  For nonnegative `P_n`, a chained
+family
+
+\[
+P_{N_j}-P_{N_{j+1}}\ge\sum_nq_{j,n}P_n-\epsilon_j
+\]
+
+forces `liminf P_n=0` provided the cumulative signed leakage is bounded above
+and the nonnegative effective coefficient measure `sum_j q_(j,n)` has infinite
+mass in every tail.  Summable positive leakage is a convenient
+special case.  No interior covering or bounded block ratio is needed.  The
+actual coefficient must include every block-dependent constant and
+normalization.
+
+The audit verifies the earlier dyadic weighted-interior theorem and the
+fixed-length multiscale claim with their stated quantifiers.  It also supplies
+explicit counterexamples to endpoint boundedness, convergence, summable
+contraction, divergence before a shrinking block constant, unchained drops,
+mass trapped at bounded indices, nonsummable leakage, and any upgrade from
+liminf to full convergence.  Restricted-shell dissipation remains insufficient
+unless omitted ranges are restored as a complete endpoint difference with
+summable one-sided error.
+
+### Next queued main-funnel step
+
+Seek a complete-functional inequality in the theorem's effective-measure form.
+Track the actual coefficient mass after smoothing and boundary losses; reject
+any surrogate whose mass is summable or whose decrements do not telescope.
+
+## Cycle 37: exact RH normalization and complete partition
+
+The concrete block theorem uses
+
+\[
+h_n={1\over\log n}-{1\over\log(n+1)},
+\qquad w_n=h_n\log n
+={\log(1+1/n)\over\log(n+1)}\sim{1\over n\log n}.
+\]
+
+Since `P_n-P_(n+1)=2h_nE_n`, the complete arithmetic target on `[a,b)` is
+
+\[
+\boxed{
+\sum_{a\le n<b}h_nE_n
+\ge\kappa\sum_{a\le n<b}h_n(\log n)P_n.}
+\]
+
+For consecutive blocks with fixed `kappa>0`, exact telescoping and divergence
+of `sum w_n` force `liminf P_n=0`. Negative individual `E_n`, variable and
+unbounded block ratios, and arbitrary interior sign changes are allowed. Gaps
+need summable positive endpoint resets. An adaptive stopping rule is useful only
+if every stop is proved finite; that finiteness is itself the missing
+Möbius-specific renewal theorem.
+
+The complete endpoint functional also admits a smooth dyadic partition in the
+physical variable `t`, while retaining `[1,Q]` exactly. Every localized piece
+remains
+
+\[
+\int w(t)(G_N(t)^2-G_{2N}(t)^2){dt\over t^2},
+\]
+
+so constants and the two signed channels remain combined. Averaging after this
+partition is exact, but endpoint reindexing shows
+
+\[
+\sum_N\lambda_N(P_N-P_{2N})
+=\sum_m(\lambda_m-\mathbf1_{2\mid m}\lambda_{m/2})P_m.
+\]
+
+Thus broad smoothing produces a signed dyadic derivative rather than automatic
+dissipation. The safe order is: partition the complete functional, average,
+then estimate the combined channels.
+
+### Next queued main-funnel step
+
+Formulate and attack an adaptive renewal inequality for complete endpoint
+blocks. Compute scale-covariant kernels for the complete physical partition and
+identify which windows retain enough divergent effective mass after all
+boundary and smoothing losses.

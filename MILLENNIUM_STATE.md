@@ -61,13 +61,18 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
    Gram form isolates a lag-`log 2` ordinate phase but has no sign under RH
    location and density alone; the exact augmented weighted-pair theorem is
    equivalent to shell contraction, while known/smoothed pair correlation
-   misses the weights and unsmoothing scale, so the current sublemma returns to
-   complete weighted block dissipation, after
+   misses the weights and unsmoothing scale; exact smooth averaging of the
+   complete endpoint decrement now gives correlation-preserving coefficient
+   kernels and continuous Mellin decay only in total pair frequency, while the
+   anti-diagonal correlation and discrete lattice aliases survive; the exact
+   variable-block theorem now proves that consecutive complete blocks with
+   fixed fractional dissipation force zero liminf, so the current sublemma is a
+   Möbius-specific adaptive renewal inequality for complete blocks, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 36
+- **cycle:** 37
 - **announcements:** none
 
 ## immutable target list
@@ -86,10 +91,10 @@ waiting process.
 
 ## next exact steps
 
-1. Re-derive the complete variable-block decrement criterion with exact
-   weights, endpoints, and the weakest hypotheses forcing `liminf P_N=0`.
-2. Design smoothing only after the complete endpoint functional is assembled;
-   restricted-shell averages are insufficient.
+1. Derive a Möbius-specific adaptive renewal inequality for complete endpoint
+   blocks, permitting signed one-step decrements.
+2. Compute scale-covariant smooth kernels only for the complete partitioned
+   functional and track divergent effective mass after all losses.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -386,3 +391,11 @@ waiting process.
   recombination, and sign runs.  From base `2` through depth `13`, decrement
   signs are `+++++--+-----`; boundary and cumulative packets change sign even
   more often.  Tests certify the complete run.  No monotonicity is inferred.
+- 2026-07-26: proved the abstract variable-block liminf criterion with chained
+  complete endpoint differences, bounded-above cumulative leakage, and infinite
+  effective coefficient mass in every tail.  Hostile examples show that
+  bounded or convergent subsequences, summable contractions, pre-normalization weight
+  divergence, unchained drops, bounded-index mass, and nonsummable errors are
+  all insufficient.  Earlier dyadic and fixed-length claims survive with their
+  exact quantifiers, but imply only a zero liminf unless endpoint dissipation is
+  added.  No RH result is claimed.

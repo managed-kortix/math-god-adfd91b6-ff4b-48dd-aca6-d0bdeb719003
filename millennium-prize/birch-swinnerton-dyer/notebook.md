@@ -14,3 +14,17 @@ observed valuation two in the second derivative includes two factors of
 `log_5(6)`. The next exact test is modular-symbol certification of zero
 constant and linear cyclotomic moments, plus a replayable 2-Selmer rank upper
 bound independent of analytic rank.
+
+## Bounded scout cycle 36
+
+The Iwasawa invariants alone cannot certify cyclotomic vanishing.  In
+`Z_5[[T]]`, the series
+
+`F(T)=T^2+5`
+
+has `mu(F)=0` and `lambda(F)=2`: it is already a distinguished polynomial of
+degree two.  Nevertheless `ord_(T=0) F=0`, since `F(0)=5`.  Thus the recorded
+pair `[lambda,mu]=[2,0]`, even when exact, does not imply divisibility by `T`,
+let alone by `T^2`.  The missing checkpoint remains exact vanishing of the
+constant and linear modular-symbol moments; finite valuations cannot replace
+those identities.

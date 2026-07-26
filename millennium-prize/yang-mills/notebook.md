@@ -13,3 +13,22 @@ spectral theorem give a finite-cutoff gap
 requires convergence of these rounded-time quadratic forms on a dense set of
 vacuum-orthogonal states. Fixed-time correlator convergence, finite trial-space
 contraction, or a merely nontrivial OS limit does not suffice.
+
+## Bounded scout cycle 36
+
+Escaping spectral states give an exact obstruction to trial-space or
+pointwise-correlator evidence.  Let the vacuum complement be `ell^2(N)`, fix
+`0<q<1`, and define positive contractions
+
+`T_n=q I+(1-q) P_(e_n)`.
+
+For every fixed finite coordinate trial space, `T_n` eventually restricts to
+`q I`.  For every fixed `f in ell^2`,
+
+`<f,T_n f>=q||f||^2+(1-q)|f_n|^2 -> q||f||^2`.
+
+Nevertheless `T_n e_n=e_n`, so every cutoff has spectral radius one on the
+vacuum complement and zero transfer-Hamiltonian gap.  Pointwise convergence of
+all fixed correlators, even with eventual contraction on every fixed trial
+space, cannot replace a uniform full-complement estimate controlling states
+that escape with the cutoff.
