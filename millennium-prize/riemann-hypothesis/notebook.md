@@ -4253,3 +4253,29 @@ packet, but beyond `M` it retains a two-cutoff signed Mobius divisor-floor
 correlation. Chebyshev bounds and termwise absolute values cannot control that
 tail. Details are in `cycle-47-quantitative-anchor-reserve.md`. No RH result is
 claimed.
+
+## Cycle 48: coherent mean must be compensated, not split off
+
+The exact finite budget is
+
+\[
+Q_{M,B}=(S_{M,B}-V_{M,B})+
+\langle F_M,\bar F_{M,B}\rangle
+-W_{M,B}\|\bar F_{M,B}\|^2.
+\]
+
+Thus packet square-payment alone cannot close the argument. The clean coherent
+ball condition `<F_M,bar F>>=W||bar F||^2` is sufficient together with
+`S>=V`, but it is physically false on exactly 486 certified blocks through
+`512`, all on the row `M=2`, while every complete terminal budget remains
+positive. On `(2,512)` the coherent ratio is `0.860852...`, but the exact
+packet surplus compensates the deficit; the compensated deficit/surplus ratio
+is only `0.337647...`.
+
+A sharp distinguished-member variance identity and fixed-affine-coordinate
+countermodels prove that generic Hilbert or Schur geometry cannot supply the
+missing lower bound. The next target must estimate packet surplus and coherent
+deficit jointly using the prescribed Mobius--Vasyunin path. A standalone
+192-bit verifier checks all `130305` blocks and six identities per block.
+Details are in `cycle-48-coherent-mean-compensation.md`. No RH result is
+claimed.

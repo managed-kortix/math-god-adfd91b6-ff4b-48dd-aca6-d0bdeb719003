@@ -91,10 +91,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   anchor reserve now has an exact telescoping formula and strong finite packet
   margins, but even packet square-payment leaves a sign-indefinite coherent
   mean channel, while cell expansion isolates the unresolved two-cutoff signed
-  Mobius divisor-floor correlation beyond the initial Chebyshev packet
+  Mobius divisor-floor correlation beyond the initial Chebyshev packet; the
+  finite terminal budget now splits exactly into packet surplus plus a coherent
+  mean channel, and the latter is negative on 486 certified blocks through
+  512 but is compensated in every case, so any viable theorem must couple the
+  two channels rather than impose separate positivity
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 47
+- **cycle:** 48
 - **announcements:** none
 
 ## immutable target list
@@ -113,9 +117,10 @@ waiting process.
 
 ## next exact steps
 
-1. Couple the exact Cycle 47 anchor reserve simultaneously to the packet-square
-   dispersion and coherent weighted-mean channel; packet payment alone is now
-   proved insufficient for terminal positivity.
+1. Expand the compensated quantity
+   `(S-V)+<F_M,bar F>-W||bar F||^2` directly in Mobius--Vasyunin or unit-cell
+   coordinates and seek cancellation between its packet and coherent channels;
+   separate coherent positivity is certifiably false.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -130,6 +135,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 48 isolated the coherent weighted-mean deficit left after
+  packet square-payment. A complete 192-bit verifier checks six exact identities
+  on all `130305` blocks through `512`: every finite terminal budget and packet
+  surplus is positive, but the standalone coherent condition fails on exactly
+  486 blocks `(2,B)`, `27<=B<=512`. At the weakest block its deficit is only
+  `0.337647...` of the available packet surplus. Sharp Hilbert variance and
+  fixed-affine-coordinate countermodels show generic geometry cannot force the
+  coherent sign. The active target is joint arithmetic compensation, not two
+  separately positive channels. No RH or Millennium solution is claimed.
 
 - 2026-07-26: Cycle 47 derived the exact weighted anchor-reserve telescope and
   quantified its scale against atomic and cumulative packet squares. Certified
