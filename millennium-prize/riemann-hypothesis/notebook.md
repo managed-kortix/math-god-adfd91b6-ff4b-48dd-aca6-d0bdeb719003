@@ -2274,3 +2274,68 @@ that keeps the linear--quadratic cancellation. Identify whether its main term
 vanishes or has a favorable sign before any contour shift encounters
 `1/zeta(s)`. In parallel, test low-eigenmode projections of the exact Möbius
 vector to isolate the minimum finite family of smooth moments that must cancel.
+
+## Cycle 24: complete tracking representation and low modes
+
+The first-block completed square admits a cancellation-preserving cumulative
+coefficient representation.  In the half-open convention `M=2N-1`, set
+
+\[
+c_n=A-\Lambda(n)/\log N+
+\mathbf1_{N<n\le M}\mu(n)\log(N/n)/\log N,
+\]
+
+\[
+e_n=A-\alpha D-(1-\alpha)\Lambda(n)/\log N.
+\]
+
+Then the complete tracking difference is exactly
+
+\[
+\sum_{k=N}^M{(\sum_{n\le k}c_n)^2-(\sum_{n\le k}e_n)^2\over k(k+1)}.
+\]
+
+This yields both an exact finite max-kernel form and a double Perron formula in
+finite entire Dirichlet polynomials.  The finite formula has only the two
+Perron poles.  Replacing its Mobius polynomial by `1/zeta` creates poles at all
+zeta zeros; the maximal standard unconditional shift stays in the classical
+zero-free region and gives only PNT-strength control, far above the required
+scale.  Thus routine contour shifting is now ruled out as the missing lemma.
+
+The formal deterministic continuum profile vanishes: replacing `psi(k)` by
+`k`, `log(N)A` by `1`, and `A-D` by `0` makes both completed-square centers
+zero.  The positive Mobius diagonal nevertheless has the nonzero limit
+
+\[
+{6\over\pi^2}\left({\log^3 2\over3}-\log^2 2+2\log2-1\right).
+\]
+
+Hence an improved complete estimate requires constant-precision cancellation
+of this diagonal by the off-diagonal, mixed Mobius--von-Mangoldt, and
+deterministic error channels.
+
+The continuum max-kernel operator has exact eigenfunctions
+
+\[
+x^{-1/2}\left(\cos(\beta\log x)+{\sin(\beta\log x)\over2\beta}\right),
+\quad \tan(\beta\log2)=-2\beta,
+\]
+
+and eigenvalues `1/(beta^2+1/4)`.  Thus the low modes are localized Mellin
+moments near the critical exponent `1/2-i beta`; their eigenvalues do not
+vanish with `N`.  Added a tridiagonal inverse eigensolver and small Arb modal
+certificates.  Reconnaissance through `N=8192` shows the observed tracking sign
+is often fixed by the first few modes, although accurate magnitude recovery
+needs a growing spectral tail.  This is diagnostic, not an asymptotic theorem.
+
+An exact inverse audit corrected the max-kernel energy boundary: it lies at the
+terminal index `M`, as forced by `max(n,m)`, rather than at the initial index.
+
+### Next queued main-funnel step
+
+Construct the explicit finite harmonic completion of the first few low Mellin
+modes using `mu*1=epsilon`, `mu*log=Lambda`, and their quadratic analogues.
+Test whether the prime residual already present in the deterministic center
+cancels these completed modes before estimation.  In parallel, seek a
+cancellation-aware high-mode bound; a fixed number of moments alone is
+insufficient because the raw Mobius source norm grows with `N`.

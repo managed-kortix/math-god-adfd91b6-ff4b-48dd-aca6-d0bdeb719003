@@ -28,13 +28,17 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   enormous, so the current sublemma is a correlation identity for the truncated
   Möbius endpoint transform weighted by `1/[k(k+1)]`; its positive max kernel
   is exact but useful bounds are square-root-cancellation strength, so the
-  current sublemma is a cancellation-preserving Perron/low-mode representation
-  of the complete tracking difference, after
+  cancellation-preserving finite Perron and exact continuum low-mode
+  representations of the complete tracking difference are now derived;
+  ordinary contour shifting is decisively blocked by reciprocal-zeta poles,
+  while a nonzero positive Mobius diagonal must cancel against the mixed
+  prime/Mobius channels; the current sublemma is an exact harmonic completion
+  of the low Mellin modes, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 23
+- **cycle:** 24
 - **announcements:** none
 
 ## immutable target list
@@ -53,10 +57,10 @@ waiting process.
 
 ## next exact steps
 
-1. Derive a Perron/Mellin representation for the complete weighted tracking
-   difference, preserving its linear--quadratic cancellation.
-2. Compute exact low-eigenmode projections of the Möbius block vector and
-   isolate the finite smooth moments responsible for the observed sign.
+1. Construct exact harmonic completions of the first low Mellin moments and
+   test cancellation with the deterministic prime channel before estimation.
+2. Derive a cancellation-aware high-mode remainder; fixed low moments alone
+   cannot control the growing raw Möbius source norm.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -247,3 +251,12 @@ waiting process.
   favorable reserve `b_k=e_k=-psi(k)/log N` for `k<=N`; the active target is an
   anchored reserve bound dominating later cumulative defects. No solution is
   claimed.
+- 2026-07-26: derived the complete cumulative-coefficient and finite double
+  Perron forms of the first-block tracking difference.  A hostile contour audit
+  showed that replacing the finite polynomial by reciprocal zeta immediately
+  restores poles at zeta zeros and only PNT-strength unconditional bounds.
+  The deterministic continuum main profile vanishes, but the positive Mobius
+  diagonal tends to an explicit nonzero constant and must cancel with mixed
+  channels.  Derived the exact continuum max-kernel spectrum and implemented a
+  tridiagonal low-mode analyzer with small Arb certificates; finite data show a
+  low-mode sign mechanism but no asymptotic theorem.  No solution is claimed.

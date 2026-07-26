@@ -135,12 +135,58 @@ K_M=B^T\operatorname{diag}(w_{N+1},\ldots,w_M)B.
 \]
 
 The triangular cumulative-sum matrix `B` is invertible and every `w_k` is
-positive. Its inverse form is correspondingly tridiagonal: if
-`y_N=0` and indices run through `N<n<=M`, then
+positive. Its inverse form is correspondingly tridiagonal: if indices run
+through `N<n<=M`, then
 
 \[
-y^TK_M^{-1}y=\sum_{n=N+1}^M { (y_n-y_{n-1})^2\over w_n}.
+y^TK_M^{-1}y={y_M^2\over w_M}
++\sum_{n=N+1}^{M-1}{(y_n-y_{n+1})^2\over w_n}.
 \]
+
+The terminal boundary is forced by the `max(n,m)` orientation. The analogous
+`min(n,m)` kernel has the boundary at the initial end instead.
+
+### Exact continuum spectrum
+
+Under `n=Nx`, `m=Ny`, with `1<x,y<=2`, the kernel has the continuum limit
+
+\[
+ N K_{2N}(n,m)\longrightarrow
+ \kappa(x,y)={1\over\max(x,y)}-{1\over2}.
+\]
+
+The associated compact operator on `L^2([1,2],dx)` factors as
+
+\[
+ \langle f,\mathcal Kf\rangle
+ =\int_1^2\left(\int_1^x f(y)\,dy\right)^2{dx\over x^2}.
+\]
+
+If `mathcal K phi=lambda phi`, differentiation gives
+
+\[
+ \phi''+{2\over x}\phi'+{1\over\lambda x^2}\phi=0,
+ \qquad \phi'(1)=0,\quad \phi(2)=0.
+\]
+
+Consequently its eigenvalues and eigenfunctions are exactly
+
+\[
+ \lambda_j={1\over\beta_j^2+1/4},\qquad
+ \phi_j(x)=c_jx^{-1/2}\left(
+ \cos(\beta_j\log x)+{\sin(\beta_j\log x)\over2\beta_j}
+ \right),
+\]
+
+where the positive `beta_j` are the roots of
+
+\[
+ \tan(\beta\log2)=-2\beta.
+\]
+
+In particular the leading eigenvalues have nonzero limits.  The low-mode
+projections of the Mobius vector are localized Mellin moments at
+`1/2-i beta_j`; positivity plus spectral decay cannot make them small.
 
 Taking `x_n=mu(n)ell_n` proves
 
@@ -235,11 +281,126 @@ loses the endpoint cancellations. The safe exact statement beyond `2N` is
 therefore the finite-horizon identity above, followed by recombination, and
 only then any limiting argument or bound.
 
+## 5. Cancellation-preserving finite Perron form
+
+The completed square can be represented without separating its Mobius, prime,
+and slope terms.  For the half-open endpoint convention put `M=2N-1` and
+
+\[
+ u_n=\mathbf1_{N<n\le M}\mu(n)\log(N/n),
+\]
+
+\[
+ c_n=A-{\Lambda(n)\over L}+{u_n\over L},\qquad
+ e_n=A-\alpha D-{1-\alpha\over L}\Lambda(n).
+\]
+
+Then, exactly,
+
+\[
+ \sum_{n\le k}c_n=T_k-\tau_k,
+ \qquad
+ \sum_{n\le k}e_n=\Delta_k,
+\]
+
+and therefore
+
+\[
+ \boxed{
+ \mathcal S_N=\sum_{k=N}^{M}{1\over k(k+1)}
+ \left[\left(\sum_{n\le k}c_n\right)^2
+ -\left(\sum_{n\le k}e_n\right)^2\right].}
+\]
+
+Equivalently,
+
+\[
+ \mathcal S_N=\sum_{a,b\le M}(c_ac_b-e_ae_b)
+ \left({1\over\max(N,a,b)}-{1\over2N}\right).
+\]
+
+The rank-one terminal term `-1/(2N)` is part of the identity and cannot be
+dropped.
+
+For an exact Perron version define the finite Dirichlet polynomials
+
+\[
+ C_M(s)=\sum_{n\le M}c_nn^{-s},\qquad
+ E_M(s)=\sum_{n\le M}e_nn^{-s},
+\]
+
+and, for fixed `0<theta<1`,
+
+\[
+ \Phi_{N,M,\theta}(z)=\sum_{k=N}^M{(k+\theta)^z\over k(k+1)}.
+\]
+
+For `sigma,eta>0`, Perron inversion applied first to finite partial sums gives
+the iterated-limit identity
+
+\[
+ \boxed{
+ \mathcal S_N=\lim_{T\to\infty}\lim_{U\to\infty}
+ {1\over(2\pi i)^2}
+ \int_{\sigma-iT}^{\sigma+iT}\int_{\eta-iU}^{\eta+iU}
+ {C_M(s)C_M(t)-E_M(s)E_M(t)\over st}
+ \Phi_{N,M,\theta}(s+t)\,dt\,ds.}
+\]
+
+All three functions in the numerator and weight are finite and entire.  Thus
+the only singularities in this safe finite formula are the Perron poles at
+`s=0` and `t=0`; there is no `s+t=0` pole.
+
+Replacing the finite Mobius polynomial by its infinite Dirichlet series gives,
+only initially for `Re(s)>1`,
+
+\[
+ \sum_{n\ge1}\mu(n)\log(N/n)n^{-s}
+ ={L\over\zeta(s)}+\left({1\over\zeta(s)}\right)'.
+\]
+
+Any shift of this rewritten expression to the left encounters poles at zeros
+of `zeta`.  A fixed shift toward the critical line without all corresponding
+residues would assume the cancellation being sought.  The classical
+zero-free-region shift supplies only PNT-strength pointwise control and leaves
+an essentially linear factor in the max-kernel energy.  Hence the finite
+formula is an exact representation, but ordinary Perron shifting does not
+solve the tracking estimate.
+
+## 6. Diagonal and vanishing deterministic profile
+
+At the formal continuum level `psi(k)=k`, `LA=1`, and `A-D=0`, both `tau_k`
+and `Delta_k` vanish identically.  Thus there is no nonzero deterministic
+continuum main term.  This does not remove the Mobius diagonal.  In the
+half-open convention its unscaled diagonal is
+
+\[
+ \mathcal D_N=\sum_{N<n<2N}\mu(n)^2\log^2(n/N)
+ \left({1\over n}-{1\over2N}\right).
+\]
+
+Weighted squarefree density and partial summation give
+
+\[
+ \mathcal D_N\longrightarrow C_{\rm diag}
+ ={6\over\pi^2}\left(
+ {\log^3 2\over3}-\log^2 2+2\log2-1\right)>0.
+\]
+
+Therefore the normalized diagonal contributes `C_diag/L^2+o(L^-2)` to the
+tracking difference.  Any smaller complete estimate must come from the
+combined off-diagonal Mobius term, the mixed Mobius--von-Mangoldt term, and the
+deterministic arithmetic residual.  Calling the positive diagonal a favorable
+main term loses the necessary cancellation.
+
 ## Conclusion
 
 The first dyadic block has one genuinely favorable structure: its fresh
-quadratic Mobius kernel is an exact positive-definite max kernel. The remaining
-obstruction is sharply localized in the linear functional with coefficients
-`R_n^(2N)`. There is no gcd dependence to exploit at this stage. Beyond `2N`,
-each scale still supplies a PSD floor Gram form, but the cross-scale endpoint
-telescope subtracts the `2N` form and restores indefiniteness.
+quadratic Mobius kernel is an exact positive-definite max kernel.  Its continuum
+spectrum and exact finite Perron form expose rather than remove the obstacle:
+the leading modes persist, the positive diagonal has a nonzero main term, and
+ordinary contour shifts meet reciprocal-zeta poles.  The complete linear,
+quadratic, and deterministic channels must be controlled together. There is no
+gcd dependence to exploit at this stage. Beyond `2N`, each scale still supplies
+a PSD floor Gram form, but the cross-scale endpoint telescope subtracts the
+`2N` form and restores indefiniteness.
