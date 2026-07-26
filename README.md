@@ -74,6 +74,46 @@ Exact commands and expected totals are documented in
 `all-octacyclic-cacti/README.md`. Build the PDF with
 `bash scripts/build-paper.sh all-octacyclic-cacti`.
 
+## Current nonacyclic result
+
+`all-nonacyclic-cacti/paper.tex` proves `s+(G) > |V(G)|` for every connected
+cactus of cyclomatic rank nine. The sharp-DNN reduction leaves exactly `T^8Q`
+and `T^7PP`; the disconnected audits are `66=63+3` and `117=109+8`, and the
+fully shared `T^7PP` audit is `8004=7997+7`.
+
+The two-interface `P|A_7|P` census has 3188 canonical classes. Its exact
+best-plan router count is 2 zero-router, 3134 one-router, and 52 two-router
+classes. The ordinary automaton accepts 3182 (3131 one-router and 51
+two-router); the 2 zero-router and 4 routed exceptions are the six explicit
+residual repairs.
+
+Reproduce from the repository root with Python 3.10 or newer. This creates its
+own repository-local environment and assumes no pre-existing `/tmp` directory:
+
+```bash
+python3 -c 'import sys; sys.exit("Python 3.10+ required") if sys.version_info < (3, 10) else None'
+python3 -m venv .venv-nonacyclic
+.venv-nonacyclic/bin/python -m pip install sympy==1.14.0
+.venv-nonacyclic/bin/python research/rank-nine-cactus-residual-census.py
+.venv-nonacyclic/bin/python research/nonacyclic-fully-shared-incidence-census.py
+.venv-nonacyclic/bin/python research/nonacyclic-t7p-last-bridge-conservative.py
+.venv-nonacyclic/bin/python research/nonacyclic-t7-two-interface-census.py
+.venv-nonacyclic/bin/python research/nonacyclic-t7pp-seven-exceptions-resolution.py
+.venv-nonacyclic/bin/python positive-square-energy/experiments/c5_bouquet_matching_certificate.py
+bash scripts/build-paper.sh all-nonacyclic-cacti
+```
+
+The hardened `nonacyclic-t7-two-interface-census.py`,
+`nonacyclic-t7pp-seven-exceptions-resolution.py`, and
+`c5_bouquet_matching_certificate.py` use explicit checks and fail closed even
+under `python -O`. Their optimization-safe scope covers expected totals and
+digests, structural partitions and router intervals, packet and connector
+ownership, exact ledgers and positivity, and integer coefficient properties.
+Other listed executables still use Python `assert`; run those without `-O`, as
+shown, so failed checks terminate. The scripts verify finite certificates; the
+manuscript supplies the analytic packet inequalities and global graph-theoretic
+exhaustion.
+
 ## Built on Kortix
 
 math-god runs on [Kortix](https://kortix.com) with persistent memory,

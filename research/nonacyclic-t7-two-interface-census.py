@@ -26,11 +26,21 @@ SPEC = spec_from_file_location(
     "rank9_incidence", HERE / "nonacyclic-fully-shared-incidence-census.py"
 )
 BASE = module_from_spec(SPEC)
-assert SPEC.loader is not None
+if SPEC.loader is None:
+    raise RuntimeError("certificate dependency has no import loader")
 SPEC.loader.exec_module(BASE)
 
 TRIANGLE_MARGIN = {1: 0, 2: 1, 3: 2, 4: 3, 5: 2, 6: 1, 7: 0}
 LABELS = ("A", "B")
+
+
+class CertificateError(RuntimeError):
+    """Raised when an exact certificate invariant fails."""
+
+
+def require(condition, message):
+    if not condition:
+        raise CertificateError(message)
 
 
 @dataclass(frozen=True, order=True)
@@ -174,7 +184,7 @@ def enumerate_rows():
                 else:
                     local[signature] = pair, 1
         for signature, (pair, multiplicity) in local.items():
-            assert signature not in rows
+            require(signature not in rows, f"duplicate canonical row: {signature}")
             rows[signature] = Row(
                 signature, incidence_signature, tree, pair, multiplicity
             )
@@ -209,7 +219,7 @@ def component_cycle_sets(tree, retained, router):
             continue
         seen_cycles.update(branch)
         answer.append((cut, frozenset(branch)))
-    assert seen_cycles == allowed
+    require(seen_cycles == allowed, "router branches do not partition retained cycles")
     return tuple(answer)
 
 
@@ -291,7 +301,10 @@ def best_plan(row):
             best_key = (best.score, best.credit, -len(best.routers))
             if key > best_key:
                 best = candidate
-        assert best.score == best.credit - best.naked
+        require(
+            best.score == best.credit - best.naked,
+            "plan ledger does not satisfy score = credit - naked",
+        )
         return best
 
     return solve(frozenset(range(len(tree.colors))), row.positions)
@@ -304,9 +317,9 @@ def verify_interval_realization(row, plan):
     cycle_count = len(tree.colors)
     removed = set(plan.routers)
     retained = set().union(*(set(packet) for packet in plan.packet_cycles))
-    assert retained == set(range(cycle_count)) - removed
-    assert sum(map(len, plan.packet_cycles)) == len(retained)
-    assert tuple(map(len, plan.packet_cycles)) == plan.packets
+    require(retained == set(range(cycle_count)) - removed, "retained packets do not cover exactly the unsplit cycles")
+    require(sum(map(len, plan.packet_cycles)) == len(retained), "retained packet cycle sets overlap")
+    require(tuple(map(len, plan.packet_cycles)) == plan.packets, "packet profile disagrees with packet cycle sets")
 
     packet_of = {
         cycle: index
@@ -315,33 +328,36 @@ def verify_interval_realization(row, plan):
     }
     for cut in range(cycle_count, len(adj)):
         owners = {packet_of[cycle] for cycle in adj[cut] if cycle in packet_of}
-        assert len(owners) <= 1
+        require(len(owners) <= 1, f"cut {cut} has multiple retained-packet owners")
 
     earlier_branches = []
     for step in plan.steps:
-        assert step.router in step.active
-        assert step.router in removed
-        assert len(step.owners) in (2, 3)
-        assert sorted(step.interval_sizes) == ([1, 2] if len(step.owners) == 2 else [1, 1, 1])
-        assert sum(step.interval_sizes) == 3
+        require(step.router in step.active, "split router is not active")
+        require(step.router in removed, "split router is not recorded as removed")
+        require(len(step.owners) in (2, 3), "triangle split has invalid owner count")
+        require(sorted(step.interval_sizes) == ([1, 2] if len(step.owners) == 2 else [1, 1, 1]), "triangle split has invalid interval structure")
+        require(sum(step.interval_sizes) == 3, "triangle split intervals do not total three")
         if earlier_branches:
-            assert step.active == tuple(range(cycle_count)) or any(
-                set(step.active) <= branch for branch in earlier_branches
+            require(
+                step.active == tuple(range(cycle_count)) or any(
+                    set(step.active) <= branch for branch in earlier_branches
+                ),
+                "nested split is not contained in an earlier branch",
             )
 
         owner_positions = tuple(position for position, _ in step.owners)
-        assert len(owner_positions) == len(set(owner_positions))
+        require(len(owner_positions) == len(set(owner_positions)), "split positions have duplicate owners")
         owner_cycles = set()
         for position, cycles in step.owners:
             if position.kind == "cut":
-                assert position.vertex in adj[step.router]
+                require(position.vertex in adj[step.router], "cut owner is not incident with its router")
             else:
-                assert position.vertex == step.router
-                assert 0 <= position.slot < 3 - len(adj[step.router])
-            assert owner_cycles.isdisjoint(cycles)
+                require(position.vertex == step.router, "private owner belongs to another triangle")
+                require(0 <= position.slot < 3 - len(adj[step.router]), "private owner slot is invalid")
+            require(owner_cycles.isdisjoint(cycles), "split owner cycle branches overlap")
             owner_cycles.update(cycles)
             earlier_branches.append(set(cycles))
-        assert owner_cycles == set(step.active) - {step.router}
+        require(owner_cycles == set(step.active) - {step.router}, "split owners do not cover active non-router cycles")
 
     # A mark is an actual hull vertex. The interval owning that vertex also owns
     # its connector remnant and every off-hull tree attached along it; Theorem
@@ -350,11 +366,14 @@ def verify_interval_realization(row, plan):
     realized_marks = {
         position for step in plan.steps for position, _ in step.owners
     }
-    assert active_marks - realized_marks <= {
-        position
-        for position in active_marks
-        if position.kind == "cut" or position.vertex not in removed
-    }
+    require(
+        active_marks - realized_marks <= {
+            position
+            for position in active_marks
+            if position.kind == "cut" or position.vertex not in removed
+        },
+        "removed private interface mark has no realized owner",
+    )
 
 
 def classify(rows):
@@ -402,8 +421,8 @@ def residual_recipes(residuals):
     for index, row in enumerate(residuals, 1):
         tree = row.tree
         adj = BASE.adjacency(tree)
-        assert len(adj) == 8
-        assert all(adj[cycle] == [7] for cycle in range(7))
+        require(len(adj) == 8, "residual is not the eight-vertex incidence star")
+        require(all(adj[cycle] == [7] for cycle in range(7)), "residual cycles do not share one common cut")
         first, second = row.positions
         cut = Position("cut", 7)
         all_cycles = tuple(range(7))
@@ -465,7 +484,7 @@ def residual_recipes(residuals):
                 "A_6", Margin(1, 2),
             ))
         else:
-            assert index == 6
+            require(index == 6, f"unexpected residual recipe index {index}")
             remainder1 = tuple(range(2, 7))
             recipes.append(ResidualRecipe(
                 "R6",
@@ -484,52 +503,52 @@ def residual_recipes(residuals):
 
 
 def verify_residual_recipe(row, recipe):
-    assert tuple(connector.entry for connector in sorted(recipe.connectors, key=lambda item: item.interface)) == row.positions
-    assert {connector.interface for connector in recipe.connectors} == set(LABELS)
-    assert {connector.pentagon for connector in recipe.connectors} == {"PA", "PB"}
-    assert all(connector.path == (connector.interface, "connector", connector.pentagon) for connector in recipe.connectors)
+    require(tuple(connector.entry for connector in sorted(recipe.connectors, key=lambda item: item.interface)) == row.positions, "connector entries disagree with marked interfaces")
+    require({connector.interface for connector in recipe.connectors} == set(LABELS), "connector interface labels are incomplete")
+    require({connector.pentagon for connector in recipe.connectors} == {"PA", "PB"}, "connector pentagon labels are incomplete")
+    require(all(connector.path == (connector.interface, "connector", connector.pentagon) for connector in recipe.connectors), "connector path has invalid structure")
     packet_names = {name for name, _, _ in recipe.packets}
-    assert all(connector.owner in packet_names for connector in recipe.connectors)
-    assert recipe.cut_owner in packet_names
+    require(all(connector.owner in packet_names for connector in recipe.connectors), "connector owner is not a packet")
+    require(recipe.cut_owner in packet_names, "common-cut owner is not a packet")
 
     removed = set()
     previous_branches = []
     for step in recipe.splits:
-        assert step.router in step.active and step.router not in removed
+        require(step.router in step.active and step.router not in removed, "recipe router is inactive or repeated")
         if previous_branches:
-            assert set(step.active) in previous_branches
-        assert len(step.owners) == len(step.interval_sizes) in (2, 3)
-        assert sorted(step.interval_sizes) == ([1, 2] if len(step.owners) == 2 else [1, 1, 1])
-        assert sum(step.interval_sizes) == 3
-        assert len({position for position, _ in step.owners}) == len(step.owners)
+            require(set(step.active) in previous_branches, "recipe split is not nested in a prior branch")
+        require(len(step.owners) == len(step.interval_sizes) and len(step.owners) in (2, 3), "recipe owner and interval counts disagree")
+        require(sorted(step.interval_sizes) == ([1, 2] if len(step.owners) == 2 else [1, 1, 1]), "recipe has invalid triangle interval structure")
+        require(sum(step.interval_sizes) == 3, "recipe intervals do not total three")
+        require(len({position for position, _ in step.owners}) == len(step.owners), "recipe has duplicate owner positions")
         branch_sets = [set(cycles) for _, cycles in step.owners]
-        assert set().union(*branch_sets) == set(step.active) - {step.router}
-        assert sum(map(len, branch_sets)) == len(set().union(*branch_sets))
+        require(set().union(*branch_sets) == set(step.active) - {step.router}, "recipe branches do not cover active non-router cycles")
+        require(sum(map(len, branch_sets)) == len(set().union(*branch_sets)), "recipe branches overlap")
         removed.add(step.router)
         previous_branches = branch_sets
 
     retained = set().union(*(set(cycles) for _, cycles, _ in recipe.packets))
-    assert retained == set(range(7)) - removed
-    assert sum(len(cycles) for _, cycles, _ in recipe.packets) == len(retained)
+    require(retained == set(range(7)) - removed, "recipe packets do not cover exactly retained cycles")
+    require(sum(len(cycles) for _, cycles, _ in recipe.packets) == len(retained), "recipe packet cycle sets overlap")
     packet_of = {cycle: name for name, cycles, _ in recipe.packets for cycle in cycles}
     owners = {packet_of[cycle] for cycle in range(7) if cycle in packet_of}
-    assert owners == {recipe.cut_owner}
-    assert recipe.margin.positive()
+    require(owners == {recipe.cut_owner}, "retained common-cut cycles do not have the declared owner")
+    require(recipe.margin.positive(), "recipe exact margin is not positive")
 
     if recipe.code == "R1":
-        assert recipe.opened_pentagon == "PA"
-        assert recipe.margin == Margin(6, 1)  # (>7-delta) + exact opened-tree -1
+        require(recipe.opened_pentagon == "PA", "R1 opens the wrong pentagon")
+        require(recipe.margin == Margin(6, 1), "R1 ledger mismatch")  # (>7-delta) + exact opened-tree -1
     elif recipe.code in ("R2", "R3"):
-        assert recipe.margin == Margin(6, 2)
+        require(recipe.margin == Margin(6, 2), f"{recipe.code} ledger mismatch")
     elif recipe.code == "R4":
-        assert row.positions[0] == row.positions[1]
-        assert recipe.margin == Margin(1, 0)
+        require(row.positions[0] == row.positions[1], "R4 interfaces are not coincident")
+        require(recipe.margin == Margin(1, 0), "R4 ledger mismatch")
     elif recipe.code == "R5":
-        assert row.positions[0] != row.positions[1]
-        assert recipe.margin == Margin(1, 2)
+        require(row.positions[0] != row.positions[1], "R5 interfaces are coincident")
+        require(recipe.margin == Margin(1, 2), "R5 ledger mismatch")
     else:
-        assert recipe.code == "R6" and len(recipe.splits) == 2
-        assert recipe.margin == Margin(2, 2)
+        require(recipe.code == "R6" and len(recipe.splits) == 2, "final recipe is not the two-split R6 case")
+        require(recipe.margin == Margin(2, 2), "R6 ledger mismatch")
 
 
 def residual_repairs(residuals):
@@ -578,23 +597,23 @@ def main():
     print("canonical-row sha256:", row_digest)
     print("canonical-residual sha256:", residual_digest)
 
-    # Internal exact-ledger and completeness checks.
-    assert sum(score_counts.values()) == len(rows)
-    assert sum(state_counts.values()) == len(rows)
-    assert sum(router_counts.values()) == len(rows)
-    assert incidence_count == 48
-    assert labelled_positions == 10800
-    assert len(rows) == 3188
-    assert score_counts == Counter({4: 2044, 3: 1037, 2: 91, 1: 10, 0: 6})
-    assert router_counts == Counter({1: 3134, 2: 52, 0: 2})
-    assert len(residuals) == 6
-    assert row_digest == "c317bf471f41debbdce7c09c3eb3d22359797bfb7a270bbd04c9fde3a41008ec"
-    assert residual_digest == "93769a588fcbcd24c1a1ce54b820c047b2929c30c838828b6d972e1d2e0d76b3"
-    assert all(plans[row.signature].score < 1 for row in residuals)
-    assert all(
-        plans[row.signature].score >= 1
-        for row in rows
-        if row not in residuals
+    # Internal exact-ledger and completeness checks. These must survive python -O.
+    require(sum(score_counts.values()) == len(rows), "score totals do not cover all rows")
+    require(sum(state_counts.values()) == len(rows), "state totals do not cover all rows")
+    require(sum(router_counts.values()) == len(rows), "router totals do not cover all rows")
+    require(sum(packet_counts.values()) == len(rows), "packet totals do not cover all rows")
+    require(incidence_count == 48, f"expected 48 incidence trees, got {incidence_count}")
+    require(labelled_positions == 10800, f"expected 10800 labelled placements, got {labelled_positions}")
+    require(len(rows) == 3188, f"expected 3188 canonical rows, got {len(rows)}")
+    require(score_counts == Counter({4: 2044, 3: 1037, 2: 91, 1: 10, 0: 6}), "score census mismatch")
+    require(router_counts == Counter({1: 3134, 2: 52, 0: 2}), "router census mismatch")
+    require(len(residuals) == 6, f"expected 6 residuals, got {len(residuals)}")
+    require(row_digest == "c317bf471f41debbdce7c09c3eb3d22359797bfb7a270bbd04c9fde3a41008ec", "canonical-row digest mismatch")
+    require(residual_digest == "93769a588fcbcd24c1a1ce54b820c047b2929c30c838828b6d972e1d2e0d76b3", "canonical-residual digest mismatch")
+    require(all(plans[row.signature].score < 1 for row in residuals), "residual set contains an accepting score")
+    require(
+        all(plans[row.signature].score >= 1 for row in rows if row not in residuals),
+        "accepting set contains a residual score",
     )
 
     if args.list_residuals:

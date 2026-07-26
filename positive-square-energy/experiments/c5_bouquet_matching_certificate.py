@@ -10,6 +10,15 @@ EXPECTED_TERMS = 1290
 EXPECTED_SHA256 = "4c436cac772395d2a8edfdd81408ffe426759d3e94d66df2e4ab0235a3343110"
 
 
+class CertificateError(RuntimeError):
+    """Raised when an exact coefficient certificate invariant fails."""
+
+
+def require(condition, message):
+    if not condition:
+        raise CertificateError(message)
+
+
 def path_and_root_matched(x1, x2, x3, x4):
     A = x1*x2*x3*x4 + x3*x4 + x1*x4 + x1*x2 + 1
     B = x2*x3*x4 + x2 + x4 + x1*x2*x3 + x1 + x3
@@ -37,17 +46,28 @@ def main() -> None:
 
     terms = P.terms()
     coefficients = [coefficient for _, coefficient in terms]
-    assert len(terms) == EXPECTED_TERMS
-    assert all(coefficient >= 0 for coefficient in coefficients)
-    assert P.as_expr().subs(dict.fromkeys((y0, *y), 0)) == 0
-    assert all(any(exponent != 0 for exponent in monomial[1:])
-               for monomial, _ in terms)
+    require(P.domain == s.ZZ, f"coefficient domain is {P.domain}, not ZZ")
+    require(len(terms) == EXPECTED_TERMS,
+            f"expected {EXPECTED_TERMS} terms, got {len(terms)}")
+    require(bool(coefficients), "coefficient stream is empty")
+    require(all(coefficient.is_Integer for coefficient in coefficients),
+            "coefficient stream contains a non-integer")
+    require(all(coefficient >= 0 for coefficient in coefficients),
+            "coefficient stream contains a negative coefficient")
+    require(all(coefficient > 0 for coefficient in coefficients),
+            "canonical sparse term stream contains a nonpositive coefficient")
+    require(P.as_expr().subs(dict.fromkeys((y0, *y), 0)) == 0,
+            "polynomial has a nonzero y-constant part")
+    require(all(any(exponent != 0 for exponent in monomial[1:])
+                for monomial, _ in terms),
+            "a canonical term is independent of every y variable")
 
     payload = "\n".join(
         f"{monomial}:{coefficient}" for monomial, coefficient in terms
     ).encode("ascii")
     digest = hashlib.sha256(payload).hexdigest()
-    assert digest == EXPECTED_SHA256
+    require(digest == EXPECTED_SHA256,
+            f"coefficient digest mismatch: expected {EXPECTED_SHA256}, got {digest}")
 
     print("PASS two-C5 bouquet matching coefficient certificate")
     print(f"terms={len(terms)} min_coefficient={min(coefficients)} "

@@ -17,13 +17,23 @@ import sys
 HERE = Path(__file__).resolve().parent
 
 
+class CertificateError(RuntimeError):
+    """Raised when an exact certificate invariant fails."""
+
+
+def require(condition, message):
+    if not condition:
+        raise CertificateError(message)
+
+
 def load_census():
     name = "nonacyclic_fully_shared_incidence_census"
     spec = spec_from_file_location(
         name, HERE / "nonacyclic-fully-shared-incidence-census.py"
     )
     module = module_from_spec(spec)
-    assert spec.loader is not None
+    if spec.loader is None:
+        raise CertificateError("certificate dependency has no import loader")
     sys.modules[name] = module
     spec.loader.exec_module(module)
     return module
@@ -55,6 +65,21 @@ class Exact:
             factor = "" if magnitude == 1 else f"{magnitude}*"
             terms.append(f"{sign}{factor}{radical}")
         return "".join(terms) or "0"
+
+    def positive(self):
+        radical_terms = tuple(
+            (coefficient, radicand)
+            for coefficient, radicand in ((self.sqrt5, 5), (self.sqrt13, 13))
+            if coefficient
+        )
+        if not radical_terms:
+            return self.rational > 0
+        if len(radical_terms) != 1:
+            raise CertificateError("positivity checker received mixed radicals")
+        coefficient, radicand = radical_terms[0]
+        if coefficient > 0:
+            return self.rational >= 0 or coefficient**2 * radicand > self.rational**2
+        return self.rational > 0 and self.rational**2 > coefficient**2 * radicand
 
 
 @dataclass(frozen=True)
@@ -203,60 +228,60 @@ def shared_cut(tree, cycles):
 
 def packet_bound(tree, packet):
     colors = tuple(tree.colors[cycle] for cycle in packet.cycles)
-    assert connected(tree, packet.cycles)
+    require(connected(tree, packet.cycles), f"packet {packet.name} is disconnected")
     if packet.kind == "P":
-        assert colors == ("P",)
+        require(colors == ("P",), f"packet {packet.name} is not one pentagon")
         return Exact(Fraction(2), sqrt5=Fraction(-1)), False, "P>=-delta"
     if packet.kind == "opened_leaf":
-        assert colors == ("P",)
-        assert len(CENSUS.adjacency(tree)[packet.cycles[0]]) == 1
+        require(colors == ("P",), f"opened packet {packet.name} is not one pentagon")
+        require(len(CENSUS.adjacency(tree)[packet.cycles[0]]) == 1, f"opened pentagon {packet.name} is not a leaf")
         return Exact(Fraction(-1)), False, "opened leaf P-y tree=-1"
     if packet.kind == "A":
         margins = {1: 0, 2: 1, 3: 2, 4: 3, 5: 2, 6: 1, 7: 0}
-        assert colors and set(colors) == {"T"}
-        assert shared_cut(tree, packet.cycles) is not None
+        require(bool(colors) and set(colors) == {"T"}, f"packet {packet.name} is not a nonempty triangle packet")
+        require(shared_cut(tree, packet.cycles) is not None, f"packet {packet.name} has no common cut")
         margin = margins[len(colors)]
         return Exact(Fraction(margin)), True, f"A_{len(colors)}>{margin}"
     if packet.kind == "common_tp":
-        assert colors.count("P") == 1 and colors.count("T") == len(colors) - 1
-        assert shared_cut(tree, packet.cycles) is not None
+        require(colors.count("P") == 1 and colors.count("T") == len(colors) - 1, f"packet {packet.name} is not T^kP")
+        require(shared_cut(tree, packet.cycles) is not None, f"packet {packet.name} has no common cut")
         triangles = colors.count("T")
         return Exact(Fraction(triangles + 2), sqrt5=Fraction(-1)), True, f"common-cut T^{triangles}P>{triangles}-delta"
-    assert packet.kind == "common_tpp"
-    assert colors.count("P") == 2 and colors.count("T") == 7
-    assert shared_cut(tree, packet.cycles) is not None
+    require(packet.kind == "common_tpp", f"unknown packet kind {packet.kind}")
+    require(colors.count("P") == 2 and colors.count("T") == 7, f"packet {packet.name} is not T^7PP")
+    require(shared_cut(tree, packet.cycles) is not None, f"packet {packet.name} has no common cut")
     return Exact(Fraction(8), sqrt13=Fraction(-4, 39)), True, "common-cut T^7PP>8-4/(3sqrt(13))"
 
 
 def verify_recipe(recipe, tree):
-    assert tree.edges == recipe.edges
-    assert CENSUS.signature(tree) == recipe.signature
+    require(tree.edges == recipe.edges, f"{recipe.code} edge representative mismatch")
+    require(CENSUS.signature(tree) == recipe.signature, f"{recipe.code} signature mismatch")
     adj = CENSUS.adjacency(tree)
     split = tuple(step.router for step in recipe.steps)
-    assert len(split) == len(set(split))
+    require(len(split) == len(set(split)), f"{recipe.code} repeats a split router")
     previous_branches = None
     removed = set()
     for step in recipe.steps:
-        assert step.router in step.active and step.router not in removed
+        require(step.router in step.active and step.router not in removed, f"{recipe.code} router is inactive or repeated")
         if previous_branches is not None:
-            assert step.active in previous_branches
+            require(step.active in previous_branches, f"{recipe.code} split is not nested in a prior branch")
         marks = tuple(adj[step.router])
         intervals = dict(step.intervals)
         branches = dict(step.branches)
-        assert set(intervals) == set(marks) == set(branches)
+        require(set(intervals) == set(marks) == set(branches), f"{recipe.code} marks, intervals, and branches disagree")
         cycle_size = 3 if tree.colors[step.router] == "T" else 5
-        assert all(0 < size < cycle_size for size in intervals.values())
-        assert sum(intervals.values()) == cycle_size
+        require(all(0 < size < cycle_size for size in intervals.values()), f"{recipe.code} has an invalid interval size")
+        require(sum(intervals.values()) == cycle_size, f"{recipe.code} intervals do not total the router cycle")
         if tree.colors[step.router] == "T":
-            assert sorted(intervals.values()) == ([1, 2] if len(marks) == 2 else [1, 1, 1])
+            require(sorted(intervals.values()) == ([1, 2] if len(marks) == 2 else [1, 1, 1]), f"{recipe.code} triangle interval structure is invalid")
         else:
-            assert recipe.code == "F9" and sorted(intervals.values()) == [1, 4]
+            require(recipe.code == "F9" and sorted(intervals.values()) == [1, 4], f"{recipe.code} pentagon interval structure is invalid")
         removed.add(step.router)
         for cut in marks:
-            assert component_cycles(tree, step.active, removed, cut) == branches[cut]
+            require(component_cycles(tree, step.active, removed, cut) == branches[cut], f"{recipe.code} branch at cut {cut} is incorrect")
         branch_union = set().union(*(set(cycles) for cycles in branches.values()))
-        assert branch_union == set(step.active) - {step.router}
-        assert sum(map(len, branches.values())) == len(branch_union)
+        require(branch_union == set(step.active) - {step.router}, f"{recipe.code} branches do not cover active non-router cycles")
+        require(sum(map(len, branches.values())) == len(branch_union), f"{recipe.code} branches overlap")
         previous_branches = tuple(branches.values())
 
     retained = set().union(
@@ -268,8 +293,9 @@ def verify_recipe(recipe, tree):
         if packet.kind == "opened_leaf"
         for cycle in packet.cycles
     }
-    assert retained | opened == set(range(9)) - set(split)
-    assert retained.isdisjoint(opened)
+    require(retained | opened == set(range(9)) - set(split), f"{recipe.code} packets do not cover exactly unsplit cycles")
+    require(retained.isdisjoint(opened), f"{recipe.code} retained and opened packets overlap")
+    require(sum(len(packet.cycles) for packet in recipe.packets) == len(retained | opened), f"{recipe.code} packet cycle sets overlap")
     packet_of = {
         cycle: index
         for index, packet in enumerate(recipe.packets)
@@ -282,37 +308,40 @@ def verify_recipe(recipe, tree):
             for cycle in adj[cut]
             if cycle in packet_of and cycle not in opened
         }
-        assert len(owners) == 1
+        require(len(owners) == 1, f"{recipe.code} cut {cut} does not have exactly one retained owner")
         cut_owner[cut] = owners.pop()
     for step in recipe.steps:
-        assert len({cut_owner[cut] for cut, _ in step.intervals}) == len(step.intervals)
+        require(len({cut_owner[cut] for cut, _ in step.intervals}) == len(step.intervals), f"{recipe.code} router intervals do not have distinct packet owners")
 
     bounds = tuple(packet_bound(tree, packet) for packet in recipe.packets)
     ledger = sum((bound[0] for bound in bounds), Exact())
-    assert ledger == recipe.expected and any(bound[1] for bound in bounds)
+    require(ledger == recipe.expected, f"{recipe.code} ledger mismatch: expected {recipe.expected}, got {ledger}")
+    require(any(bound[1] for bound in bounds), f"{recipe.code} ledger has no strict packet bound")
+    require(ledger.positive(), f"{recipe.code} exact ledger is not positive: {ledger}")
     return ledger, tuple(bound[2] for bound in bounds)
 
 
 def main():
     result = CENSUS.census(("T",) * 7 + ("P",) * 2, 0, CENSUS.tpp_bound)
-    assert sum(result[0].values()) == 8004
-    assert sum(result[1].values()) == 7997
-    assert len(result[-1]) == 7
+    require(sum(result[0].values()) == 8004, "full census total is not 8004")
+    require(sum(result[1].values()) == 7997, "accepted census total is not 7997")
+    require(len(result[-1]) == 7, "unresolved census does not contain seven rows")
     unresolved = {signature: edges for _, signature, _, edges in result[-1]}
-    assert set(unresolved) == {recipe.signature for recipe in RECIPES}
+    require(len(unresolved) == len(result[-1]), "unresolved census contains duplicate signatures")
+    require(set(unresolved) == {recipe.signature for recipe in RECIPES}, "unresolved signatures do not match recipes")
     trees = dict(CENSUS.enumerate_colors(("P", "P") + ("T",) * 7, 0))
 
     closed = 0
     for recipe in RECIPES:
-        assert unresolved[recipe.signature] == recipe.edges
+        require(unresolved[recipe.signature] == recipe.edges, f"{recipe.code} unresolved edge representative mismatch")
         ledger, sources = verify_recipe(recipe, trees[recipe.signature])
         status = "CLOSED" if recipe.closed else "OPEN"
         print(f"{recipe.code} {status}: {' + '.join(sources)}; ledger={ledger}")
         closed += recipe.closed
 
-    assert closed == 7
-    assert RECIPES[1].expected == Exact(Fraction(8), sqrt5=Fraction(-1))
-    assert Fraction(3) ** 2 > 5
+    require(closed == 7, f"expected seven closed recipes, got {closed}")
+    require(RECIPES[1].expected == Exact(Fraction(8), sqrt5=Fraction(-1)), "F9 expected ledger changed")
+    require(RECIPES[1].expected.positive(), "F9 ledger 8-sqrt(5) is not positive")
     print("verified exact canonical exceptions: 7/7")
     print("replacement closures: 7/7")
     print("F9 leaf opening: 6-delta = 8-sqrt(5) > 0")

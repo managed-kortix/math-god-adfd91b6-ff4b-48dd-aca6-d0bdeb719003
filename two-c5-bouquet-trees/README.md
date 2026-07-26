@@ -45,6 +45,7 @@ Run the certificate from `/workspace`:
 
 ```bash
 python positive-square-energy/experiments/c5_bouquet_matching_certificate.py
+python -O positive-square-energy/experiments/c5_bouquet_matching_certificate.py
 ```
 
 Expected summary:
@@ -56,8 +57,11 @@ y_constant=0 all_coefficients_nonnegative=True
 sha256=4c436cac772395d2a8edfdd81408ffe426759d3e94d66df2e4ab0235a3343110
 ```
 
-The digest is for the canonical ordered coefficient stream. The certificate
-script used by the manuscript has file SHA-256
-`b3936c0d08ae252bdc11689ab55eb60331f0c54481f4544e442a98e5002fe6cf`.
+The digest is for the canonical ordered coefficient stream. Explicit
+fail-closed checks, preserved under `python -O`, verify its term total and
+digest, integer coefficient domain, strict coefficient positivity, and absence
+of a term independent of every `y` variable. The certificate script has file
+SHA-256
+`53e5ede12064953fe3d19aa173247e63ea3ab17d95ca2901d8f5707dae2e9f92`.
 
 No build artifacts are included.
