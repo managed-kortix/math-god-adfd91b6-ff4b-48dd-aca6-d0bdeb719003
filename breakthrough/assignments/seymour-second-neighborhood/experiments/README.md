@@ -58,3 +58,8 @@ Order-18 normal-form options include `--high` for the exact comma-separated
 degree-nine labels and `--force-witness w,u` for a distinguished robust
 selector. An empty `--high ''` means every vertex has degree eight. These are
 shard constraints, not consequences valid at arbitrary order.
+
+`--arc-minimal` adds the exact gain/lost-endpoint condition for deletion of
+every present arc, with no additional variables. Exhaustive mutation testing
+compares 7,860 small graph/arc cases directly against recomputation after arc
+deletion.

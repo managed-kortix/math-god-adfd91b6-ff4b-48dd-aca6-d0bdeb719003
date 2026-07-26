@@ -64,8 +64,27 @@ def add_witness_for_deleted(c, n, u, a, q, pvar, mu2):
     c.add(*witnesses)
 
 
+def add_arc_minimality(c, n, i, j, a, q, pvar, mu2):
+    """Exact necessary condition that deleting present arc i->j repairs i."""
+    arc=a[i][j]
+    gain=tuple(pvar[i,k,j] for k in range(n) if k not in (i,j))
+    c.add(-arc,-mu2[i],*gain)
+    no_loss={}
+    for t in range(n):
+        if t in (i,j): continue
+        alternatives=tuple(pvar[i,k,t] for k in range(n) if k not in (i,j,t))
+        block=(-q[i][t],-a[j][t],*alternatives)
+        no_loss[t]=block
+        c.add(-arc,*block,-mu2[i])
+        c.add(-arc,*block,*gain)
+    endpoints=tuple(no_loss)
+    for x in range(len(endpoints)):
+        for y in range(x+1,len(endpoints)):
+            c.add(-arc,*no_loss[endpoints[x]],*no_loss[endpoints[y]])
+
+
 def generate(n, bsize, missing, robust_witness=False, high_vertices=None,
-             forced_witness=None):
+             forced_witness=None, arc_minimal=False):
     if bsize not in (6, 7):
         raise ValueError("bsize must be 6 or 7")
     if n < 9 + bsize:
@@ -143,6 +162,10 @@ def generate(n, bsize, missing, robust_witness=False, high_vertices=None,
             add_witness_for_deleted(c,n,u,a,q,pvar,mu2)
         if forced_witness is not None:
             c.add(c.var(f"wit_{forced_witness[0]}_{forced_witness[1]}"))
+    if arc_minimal:
+        for i in range(n):
+            for j in range(n):
+                if i != j: add_arc_minimality(c,n,i,j,a,q,pvar,mu2)
     return c
 
 
@@ -153,10 +176,11 @@ def main():
     p.add_argument('--robust-witness',action='store_true')
     p.add_argument('--high',help='comma-separated exact degree-nine vertices; empty string means none')
     p.add_argument('--force-witness',help='w,u selector to force')
+    p.add_argument('--arc-minimal',action='store_true')
     x=p.parse_args()
     high=None if x.high is None else tuple(int(v) for v in x.high.split(',') if v!='')
     fw=tuple(map(int,x.force_witness.split(','))) if x.force_witness else None
-    c=generate(x.n,x.b_size,x.missing,x.robust_witness,high,fw)
+    c=generate(x.n,x.b_size,x.missing,x.robust_witness,high,fw,x.arc_minimal)
     with open(x.output,'w',encoding='ascii',newline='\n') as f:
         for name,num in c.names.items(): f.write(f"c var {num} {name}\n")
         f.write(f"p cnf {len(c.names)} {len(c.clauses)}\n")

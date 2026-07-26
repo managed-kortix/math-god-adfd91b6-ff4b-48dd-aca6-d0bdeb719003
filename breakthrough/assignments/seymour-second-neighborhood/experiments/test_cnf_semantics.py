@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Pure exhaustive mutation tests for the CNF gate/counter semantics."""
 import itertools
-from snc_cnf import CNF, equiv_and, threshold, add_mu2_link, add_witness_for_deleted
+from snc_cnf import (CNF, equiv_and, threshold, add_mu2_link,
+                     add_witness_for_deleted, add_arc_minimality)
 
 
 def satisfied(clauses, values):
@@ -153,5 +154,46 @@ def test_witness_semantics(limit=4):
     print(f"PASS robust witness semantics cases={checked}")
 
 
+def test_arc_minimality(limit=4):
+    checked=0
+    for n in range(2,limit+1):
+        c,a,q,pvars,rvars=semantic_cnf(n)
+        mu2=[c.var(f"mu2_{i}") for i in range(n)]
+        pairs=list(itertools.combinations(range(n),2))
+        for states in itertools.product(range(3),repeat=len(pairs)):
+            arcs=set()
+            for state,(i,j) in zip(states,pairs):
+                if state==1: arcs.add((i,j))
+                elif state==2: arcs.add((j,i))
+            n1=[{j for j in range(n) if (i,j) in arcs} for i in range(n)]
+            n2=[]
+            for i in range(n):
+                reach={b for k in n1[i] for b in n1[k]}; n2.append(reach-n1[i]-{i})
+            base={a[i][j]:(i,j) in arcs for i in range(n) for j in range(n)}
+            for (i,k,j),var in pvars.items(): base[var]=(i,k) in arcs and (k,j) in arcs
+            for (i,j),var in rvars.items(): base[var]=any((i,k) in arcs and (k,j) in arcs for k in range(n))
+            for i in range(n):
+                base[mu2[i]]=len(n1[i])-len(n2[i])==2
+                for j in range(n): base[q[i][j]]=j in n2[i]
+            for i in range(n):
+                deficit=len(n1[i])-len(n2[i])
+                for j in range(n):
+                    if i==j: continue
+                    ac=CNF(); ac.names=dict(c.names); ac.clauses=[]
+                    add_arc_minimality(ac,n,i,j,a,q,pvars,mu2)
+                    actual=satisfied(ac.clauses,base)
+                    if (i,j) not in arcs: expected=True
+                    elif deficit not in (1,2): continue
+                    else:
+                        arcs2=arcs-{(i,j)}
+                        one={x for x in range(n) if (i,x) in arcs2}
+                        reach={b for k in one for b in range(n) if (k,b) in arcs2}
+                        two=reach-one-{i}; expected=len(two)>=len(one)
+                    assert actual==expected,(n,arcs,i,j,deficit,actual,expected)
+                    checked+=1
+    print(f"PASS arc-minimal deletion semantics cases={checked}")
+
+
 if __name__=='__main__':
     test_threshold(); test_mu2(); test_graph_semantics(); test_witness_semantics()
+    test_arc_minimality()

@@ -307,3 +307,22 @@ No audits yet.
   constraints, beginning with the five `m=8` C rows. Generate standalone CNFs
   per sequence and require DRAT/LRAT verification rather than another baseline
   timeout.
+
+## 2026-07-25 — tick 13
+
+- Hostile audit found and repaired a completeness error: the `m=8` normal form
+  has six aggregate C rows, including `(p,rho,e)=(8,5,0)`. An explicit local
+  realization proves robustness/root incidence do not eliminate it. See
+  `attempts/tick13-m8-sharding.md`.
+- Added full exact arc-minimality clauses to `snc_cnf.py`. They use existing
+  exact path/second/deficit bits and no new variables. Exhaustive deletion
+  mutation tests pass 7,860 graph/arc cases through order four.
+- Determined that cellwise missing-degree sharding is too coarse (about 1.6
+  million sequences). The revised cover uses 762 coarse C margins followed by
+  canonical colored eight-edge missing graphs and orientation-circulation
+  filtering.
+- Built and validated pinned `drat-trim`/`lrat-check` from upstream commit
+  `2e3b2dc0ecf938addbd779d42877b6ed69d9a985`; all bundled examples verify.
+- **Next queued attack:** implement the 762-row generator including the sixth
+  row, canonical colored missing-graph realizations, and circulation filtering;
+  then run small standalone arc-minimal shards with checked LRAT output.
