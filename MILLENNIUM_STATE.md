@@ -75,7 +75,7 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 38
+- **cycle:** 39
 - **announcements:** none
 
 ## immutable target list
@@ -111,6 +111,60 @@ waiting process.
 
 ## last ticks
 
+- 2026-07-26: audited known and conditional asymptotics of the logarithmic
+  Nyman--Beurling energy against the every-start tail inequality. The weight
+  sends `C/log N` to the same leading term, so `kappa=1/2` is critical and
+  first-order saturated. Burnol's constant `sum m(rho)^2/|rho|^2` changes only
+  the amplitude and creates no contradiction or simplicity consequence. The
+  tail inequality would prove RH plus weighted fixed-approximant regularity;
+  deciding its sign requires a second-order term. If
+  `P_N=C/log N+D/log^2 N+o(log^-2 N)`, its surplus is
+  `D/(2 log^2 N)+o(log^-2 N)`, with the full/restricted rank-one correction
+  shifting `D` by `-1`. No cited theorem supplies this signed second term.
+
+- 2026-07-26: derived the exact `kappa=1/2` complete-block equivalence:
+  the surplus is weighted signed variation of `(log n)P_n`, and, when the tail
+  is finite, equals `Q_a-Q_b` for
+  `Q_a=P_a-sum_(n>=a)w_nP_n`. The profile `C/log n` is the unique
+  every-singleton equality profile. The actual reciprocal-log coefficient path
+  has an additional mixed-term cancellation reducing singleton success to a
+  comparison of two norms. Scalar spikes and generic positive Gram models
+  falsify universal positivity; the Mobius-specific reverse Hardy target
+  remains open and RH-sufficient. No RH result is claimed.
+- 2026-07-26: derived the exact Cycle 39 one-step recurrence from the
+  reciprocal-log coefficient update. Its compensated radial scalar gives
+  `P_(n+1)=(1-2 kappa_n w_n)P_n`. At `kappa_n=1/2`, logarithmic scaling cancels
+  the mixed term exactly, reducing equality to
+  `||D_n||^2=log(n)log(n+1)||U_n||^2`; complete unit cells have an exact finite
+  Mobius form and simplify to explicit Chebyshev cells for `k<=n`. No sign
+  theorem or RH result is claimed.
+
+- 2026-07-26: rewrote the `kappa=1/2` reverse-tail Hardy residual by
+  interchanging finite complete Gram sums. Its exact scale kernel is
+  `u_a u_a^T-sum_(n=a)^B w_n u_n u_n^T`, with closed scalar, linear, and
+  quadratic entries. The infinite matrix does not exist entrywise because its
+  unbalanced modes carry divergent negative mass. On the balanced domain the
+  limit has an exact endpoint-square-minus-positive-integral representation,
+  but two squarefree coordinates above `a` give a strict finite negative
+  direction. Generic PSD and positive-integral routes are therefore closed;
+  only Mobius-specific contraction with the physical fractional-part Gram
+  matrix remains possible. No reverse-tail inequality or RH result is claimed.
+- 2026-07-26: derived the exact residual-budget recurrence
+  `Q_a-Q_(a+1)=P_a-P_(a+1)-c w_a P_a` and characterized sign crossings by
+  finite cumulative surplus. Formulated finite-horizon enclosures with explicit
+  tail-majorant bounds. The plausible invariant is `H_a=cT_a/P_a<=theta_a`,
+  propagated backward over complete blocks; pointwise propagation collapses to
+  the overly strong unit decrement. A rigorous terminal bound remains the main
+  obstruction. No RH result is claimed.
+- 2026-07-26: Cycle 39 advanced each non-RH bounded scout exactly once. BSD:
+  finite `5`-adic precision was proved unable to distinguish cyclotomic order
+  two from zero even with `[lambda,mu]=[2,0]`. Hodge: the plane normal-sequence
+  intersection calculation was extended to degree `d`. Navier--Stokes: an
+  exact reverse-pair shear was shown to have nonconstant pressure but zero
+  pressure contribution by parity. P versus NP: the minimum partition-mask
+  cover was proved to be `S(n,3)` for every `n>=3`. Yang--Mills: escaping
+  eigenvectors were shown compatible even with strong operator convergence to
+  `qI`. The RH funnel was not altered, and no solution is claimed.
 - 2026-07-26: characterized adaptive renewal from every start exactly. For
   arbitrary nonnegative sequences with RH weights it is strictly stronger than
   zero liminf: it is equivalent to finite weighted energy, the reverse tail
@@ -421,6 +475,15 @@ waiting process.
   observed ratios `b/a=2,3`) but fail immediately at `kappa=0.6`. These are
   finite certificates only; eventual stopping, divergent tail weight, and RH
   remain unproved.
+- 2026-07-26: optimized the complete restricted Gram evaluator by caching full
+  cotangent rows, reflecting Vasyunin numerators, and prefixing exact block
+  weights. Added a rigorous every-start scan of the finite maxima
+  `max_(a<b<=B) R(a,b)`. At 192 bits through `B=2048`, the `kappa=1/2`
+  first-passage chain reaches the boundary in 2023 blocks (longest length 12),
+  and every start `a=2,...,2047` has a certified endpoint. The finite common
+  maximal threshold is enclosed near `0.58975733076014293927`, with weakest
+  start `a=2`. Thus no `1/2` failure occurs in this finite scan; no asymptotic
+  stopping theorem or RH result is claimed.
 - 2026-07-26: audited Hardy/Poincare coercivity for the exact complete endpoint
   path.  The derivative in `log X` and its cell energy are explicit, while
   `log log X` is the scale matching the divergent weight
@@ -467,3 +530,14 @@ waiting process.
   incomplete shells, dropped quadratic cost, reciprocal-zeta or Mertens input,
   out-of-range Chebyshev substitution, correlation factorization, and nominal
   pre-loss weight divergence. No RH result is claimed.
+- 2026-07-26: built exact rational finite-dimensional adversarial models for
+  `kappa=1/2`. They preserve the reciprocal-log affine coefficient law,
+  zero-at-entry nested prefix updates, the actual Mobius pattern through four,
+  positive definite Gram realization, decreasing energy at every step, and a
+  strictly positive scale-covariance square, yet the one- and two-step block
+  inequalities fail (the latter by exactly `14/81`). A one-parameter positive
+  Gram family passes through equality at `kappa=1/2`, so that constant is not
+  selected by abstract positivity. The minimum missing arithmetic must couple
+  the Mobius coefficients to the fixed fractional-part/Vasyunin Gram kernel,
+  or imply its compensated radial alignment; Mobius signs alone are
+  insufficient. This does not test or refute the actual Vasyunin Gram case.

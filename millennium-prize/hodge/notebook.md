@@ -28,3 +28,17 @@ Therefore the integral primitive class `gamma=3[P]-h^2` satisfies
 `([P]-h^2/3)^2=8/3`.  This identifies the exact lattice vector carried by the
 plane-incidence divisor; tangent-space dominance alone still says nothing
 about Hodge components carrying other primitive lattices.
+
+## Bounded scout cycle 39
+
+The plane self-intersection calibration extends exactly to every smooth
+degree-`d` hypersurface fourfold `X_d` in `P^5` containing a plane.  The normal
+sequence gives
+
+`c(N_(P/X_d))=(1+h)^3/(1+d h)`
+
+and hence `P^2=d^2-3d+3`.  Because `h^4=d` and `P.h^2=1`, the primitive rational
+class `P-h^2/d` has square `d^2-3d+3-1/d`.  At `d=3` this is `8/3`, so
+`3[P]-h^2` has square `24` as before.  This fixes the entire normal-sequence
+lattice calculation; it supplies no dominance statement for other Hodge
+components.

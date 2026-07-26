@@ -9,6 +9,8 @@ from certify_complete_gram import (
     adaptive_chain,
     block_ratio,
     complete_energies,
+    maximal_ratios,
+    weighted_prefixes,
 )
 
 
@@ -21,6 +23,10 @@ class CompleteGramTests(unittest.TestCase):
         gram = RestrictedGram()
         expected = gram.c0 / 2 - arb(1) / 4
         self.assertTrue(gram.entry(2, 2).contains(expected))
+
+    def test_vasyunin_reflection(self):
+        gram = RestrictedGram()
+        self.assertTrue(gram.v(2, 7).overlaps(-gram.v(5, 7)))
 
     def test_small_exact_norms(self):
         energies = complete_energies(3)
@@ -41,11 +47,22 @@ class CompleteGramTests(unittest.TestCase):
     def test_block_ratio_and_first_passage(self):
         energies = complete_energies(8)
         ratio = block_ratio(energies, 2, 4)
+        fast_ratio = block_ratio(energies, 2, 4, weighted_prefixes(energies))
+        self.assertTrue(ratio.overlaps(fast_ratio))
         self.assertTrue(ratio > arb("0.1"))
         blocks, failure = adaptive_chain(energies, 2, 8, "0.1")
         self.assertIsNone(failure)
         self.assertEqual(blocks[0].start, 2)
         self.assertEqual(blocks[-1].stop, 8)
+
+    def test_maximal_ratios_match_exhaustive_scan(self):
+        energies = complete_energies(12)
+        maxima = maximal_ratios(energies, 2, 12)
+        self.assertEqual([item.start for item in maxima], list(range(2, 12)))
+        for item in maxima:
+            for b in range(item.start + 1, 13):
+                candidate = block_ratio(energies, item.start, b)
+                self.assertTrue(item.ratio.upper() >= candidate.upper())
 
     def test_recurrence_matches_dense_gram(self):
         energies = complete_energies(8)

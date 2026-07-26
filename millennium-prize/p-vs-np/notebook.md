@@ -29,3 +29,19 @@ proper three-block masks.  Conversely those masks cover every six-vertex
 3-colorable graph, since a coloring using fewer than three colors can split a
 color class.  Thus witness-mask deletion stops exactly at `90`; this is a
 finite monotone-DNF obstruction and gives no unrestricted circuit lower bound.
+
+## Bounded scout cycle 39
+
+The mask-cover computation has an exact all-`n` form.  For every `n>=3`, any
+cover of all labeled `n`-vertex 3-colorable graphs by coloring-partition masks
+must contain every partition into exactly three nonempty blocks: the complete
+tripartite graph associated with such a partition has no other proper
+three-block coloring.  Conversely, every coloring with fewer than three
+nonempty classes can be refined by splitting a class, so the three-block masks
+cover the whole family.  The exact minimum is therefore
+
+`S(n,3)=(3^n-3*2^n+3)/6`.
+
+This generalizes `S(6,3)=90` and shows that the finite witness-mask DNF itself
+has exponential irredundancy, without implying an unrestricted circuit lower
+bound.

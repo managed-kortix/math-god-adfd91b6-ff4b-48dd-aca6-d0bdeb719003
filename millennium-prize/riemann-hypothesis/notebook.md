@@ -3887,3 +3887,72 @@ Attack the `kappa/log a` compensated cell correlation directly and identify the
 first loss that prevents a larger block factor. In parallel, compare this
 physical-cell obstruction with the completed anti-diagonal zero contribution
 under one common finite cutoff.
+
+## Cycle 39: reverse-tail Hardy complete-Gram kernel
+
+At `kappa=1/2`, truncate the target as
+
+\[
+ P_a-\sum_{n=a}^B w_nP_n,
+ \qquad M_{a,B}=u_au_a^T-\sum_{n=a}^Bw_nu_nu_n^T.
+\]
+
+Interchanging the finite complete Gram sums gives exact scalar, linear, and
+quadratic entries in terms of
+`S_j(m)=sum_(n=max(a,m))^B w_n/(log n)^j`. The `S_0` terms diverge as
+`B->infinity`, so the infinite coefficient matrix does not exist entrywise.
+For a finitely supported test vector, write
+
+\[
+ A(z)=z_0+\sum_q\mu(q)z_q,
+ \qquad B(z)=\sum_q\mu(q)(\log q)z_q.
+\]
+
+Its tail pairing is exactly `A(z)-B(z)/log n`. Unbalanced vectors therefore
+have quadratic form tending to `-infinity`; balanced vectors `A(z)=0` have a
+finite limiting form. Positivity still fails there. For squarefree `q,r` with
+`a<q<r`, take `z_q=mu(q)` and `z_r=-mu(r)`. The endpoint square vanishes and
+the limiting value is
+
+\[
+-\sum_{n=q}^{r-1}w_n(1-\log q/\log n)^2
+-(\log(r/q))^2\sum_{n=r}^{\infty}{w_n\over(\log n)^2}<0.
+\]
+
+Thus no generic coefficient-space PSD or positive-integral representation can
+prove the reverse-tail target. The exact signed representation is one endpoint
+rank-one square minus a positive scale integral. Any favorable sign for the
+fixed Mobius approximants must arise only after contraction with the specific
+fractional-part Gram matrix. Full derivation:
+`cycle-39-reverse-tail-complete-gram.md`.
+
+### Next queued main-funnel step
+
+Determine whether contraction of the negative scale kernel with the complete
+fractional-part Gram matrix admits a Mobius-specific cancellation unavailable
+to generic coefficient vectors; do not take the divergent coefficient entries
+to infinity separately.
+
+## Cycle 39: exact half-strength block equivalence
+
+At `kappa=1/2`, setting `A_n=(log n)P_n` gives the exact finite identity
+
+\[
+ P_a-P_b-\sum_{a\le n<b}w_nP_n
+ =\sum_{a\le n<b}{A_n-A_{n+1}\over\log(n+1)}.
+\]
+
+When the weighted tail is finite, this is also `Q_a-Q_b` for
+`Q_a=P_a-sum_(n>=a)w_nP_n`; hence a block endpoint is exactly a later
+non-increase of the residual budget. The reciprocal-log profile
+`P_n=C/log n` has `Q_n=0` and is the unique every-singleton equality profile.
+For the actual coefficient path, the mixed term cancels and the singleton
+condition is exactly
+`||D_n||^2>=log(n)log(n+1)||U_n||^2`.
+
+Neither identity supplies positivity. Constant sequences, finite-support
+spikes, generic Gram vectors, and rational positive-definite realizations
+falsify universal stopping or automatic `Q>=0`; the infinite coefficient
+kernel also cannot be formed entrywise. Only a Mobius-specific contraction
+with the fixed fractional-part Gram matrix could prove the RH-lane target.
+Details are in `cycle-39-half-strength-tail-budget.md`.

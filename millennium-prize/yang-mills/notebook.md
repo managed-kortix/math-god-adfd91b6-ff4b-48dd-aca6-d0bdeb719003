@@ -32,3 +32,16 @@ vacuum complement and zero transfer-Hamiltonian gap.  Pointwise convergence of
 all fixed correlators, even with eventual contraction on every fixed trial
 space, cannot replace a uniform full-complement estimate controlling states
 that escape with the cutoff.
+
+## Bounded scout cycle 39
+
+The same escaping-state example defeats even strong operator convergence.  For
+`T_n=qI+(1-q)P_(e_n)` and every fixed `f in ell^2(N)`,
+
+`||(T_n-qI)f||=(1-q)|f_n| -> 0`.
+
+Thus `T_n -> qI` in the strong operator topology, not merely through quadratic
+forms.  Nevertheless `T_n e_n=e_n` and `||T_n||=1` for every `n`, so every
+cutoff transfer Hamiltonian still has zero gap.  A strongly convergent,
+strictly contractive continuum transfer operator does not by itself yield the
+uniform full-complement estimate required before taking the limit.

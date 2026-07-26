@@ -33,3 +33,19 @@ normalization, `p=0` identically.  Its initial `L^3` derivative contains only
 the nonpositive viscous term.  No amplitude choice within this ansatz can test
 pressure-driven critical-norm growth, so the next search must include at least
 one reverse derivative interaction.
+
+## Bounded scout cycle 39
+
+A reverse derivative interaction alone still does not produce pressure-driven
+critical-norm growth.  On the periodic torus let
+
+`u=(a sin y,b sin x,0)`.
+
+Then `div u=0`,
+`sum_(i,j) partial_i u_j partial_j u_i=2ab cos x cos y`, and the mean-zero
+solution of `Delta p=-2ab cos x cos y` is `p=ab cos x cos y`.  Thus the pressure
+is genuinely nonconstant.  However, writing
+`|u|=(a^2 sin^2 y+b^2 sin^2 x)^(1/2)`, each term of
+`p(a sin y partial_x|u|+b sin x partial_y|u|)` is odd in one coordinate, so its
+torus integral is exactly zero.  The two-shear reverse-pair family is therefore
+another decisive symmetry obstruction.

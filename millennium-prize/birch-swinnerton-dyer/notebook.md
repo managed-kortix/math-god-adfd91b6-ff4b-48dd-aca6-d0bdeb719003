@@ -28,3 +28,13 @@ pair `[lambda,mu]=[2,0]`, even when exact, does not imply divisibility by `T`,
 let alone by `T^2`.  The missing checkpoint remains exact vanishing of the
 constant and linear modular-symbol moments; finite valuations cannot replace
 those identities.
+
+## Bounded scout cycle 39
+
+No computation at fixed `5`-adic precision can certify the required exact
+cyclotomic zeros.  For every `M>=1`, the series `T^2` and `T^2+5^M` have the
+same reduction modulo `5^M`; both have `mu=0, lambda=2`, but their orders at
+`T=0` are two and zero.  Therefore neither finite coefficient valuations nor
+the Iwasawa invariants can replace exact modular-symbol identities for the
+constant and linear moments.  This is a decisive obstruction to a
+precision-only rank-two transfer calibration.
