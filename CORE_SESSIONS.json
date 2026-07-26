@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "policy": "Exactly three autonomous pinned math-god root sessions. Parallel research uses Task subagents, never additional Kortix roots.",
+  "cores": [
+    {
+      "lane": "main",
+      "name": "Math-God — Main Research",
+      "session_id": "e5dcbc87-2c7c-4f1d-9f1d-8c9b7423dfff",
+      "trigger": "math-heartbeat",
+      "state_file": "STATE.md"
+    },
+    {
+      "lane": "millennium",
+      "name": "Math-God — Millennium",
+      "session_id": "a10f0b25-6c8a-488e-b880-c54c9f7aaa98",
+      "trigger": "millennium-heartbeat",
+      "state_file": "MILLENNIUM_STATE.md"
+    },
+    {
+      "lane": "breakthrough",
+      "name": "Math-God — Breakthrough",
+      "session_id": "45a63659-bb8c-4524-86d8-c52dde0362b5",
+      "trigger": "breakthrough-heartbeat",
+      "state_file": "BREAKTHROUGH_STATE.md"
+    }
+  ],
+  "replacement_protocol": [
+    "Confirm the registered session is irrecoverably dead rather than idle or temporarily failed.",
+    "Fetch and preserve every unique commit from its branch.",
+    "Create exactly one replacement pinned to math-god with the same lane prompt.",
+    "Rename it, update this registry and the matching trigger session_id in one commit, and push.",
+    "Fire the trigger twice and verify both deliveries target the replacement before retiring the old session."
+  ]
+}

@@ -3,7 +3,7 @@ default_agent: math-god
 project:
   name: math-god
   description: "A high-entropy autonomous mathematics laboratory. One math-god
-    agent runs three isolated keyed lanes: the main trajectory, the six unsolved
+    agent runs exactly three isolated pinned lanes: the main trajectory, the six unsolved
     Clay problems, and one frozen certificate-shaped breakthrough target. Kortix
     remains the ordinary finite-purpose agent. Public claims are exact,
     adversarially audited, reproducible, and distributed through the committed
@@ -39,29 +39,36 @@ triggers:
     type: cron
     agent: math-god
     enabled: true
-    session_mode: keyed
-    session_key: math-main-v2
+    session_mode: pinned
+    session_id: e5dcbc87-2c7c-4f1d-9f1d-8c9b7423dfff
     cron: 0 0 */6 * * *
     timezone: UTC
-    prompt: "LANE=main. This root session permanently owns only the main lane.
+    prompt: "LANE=main. CORE=math-god-main. This exact pinned root session permanently owns only the main lane.
       Read STATE.md first; do not adopt MILLENNIUM_STATE.md or BREAKTHROUGH_STATE.md
-      as working memory. Continue the exact frontier rather than restarting. Run
+      as working memory. Run `python3 scripts/check-core-sessions.py`; reconcile
+      any extra autonomous math-god root before research, but never create a new
+      root unless a registered core is irrecoverably dead and the registry plus
+      pinned trigger are atomically replaced. Continue the exact frontier. Run
       `bash scripts/setup-harness.sh` when fresh. Pull --rebase, commit, and push
-      durable work. Apply the complete publication workflow in
+      durable work. Once per UTC day, run the publication inbox/OCB review in
+      research/procedural/PUBLICATION.md: process relevant replies in their
+      existing threads, check pending Board records, and update token-free
+      ledgers without spamming. Apply the complete publication workflow in
       research/procedural/PUBLICATION.md to every verified result. Never stop."
   - slug: millennium-heartbeat
     name: math-god Millennium lane heartbeat
     type: cron
     agent: math-god
     enabled: true
-    session_mode: keyed
-    session_key: millennium-v2
+    session_mode: pinned
+    session_id: a10f0b25-6c8a-488e-b880-c54c9f7aaa98
     cron: 0 0 3/6 * * *
     timezone: UTC
-    prompt: "LANE=millennium. This root session permanently owns only the six
+    prompt: "LANE=millennium. CORE=math-god-millennium. This exact pinned root session permanently owns only the six
       unsolved Clay problems. Read MILLENNIUM_STATE.md and
       millennium-prize/PROGRAM.md first; do not adopt STATE.md or
-      BREAKTHROUGH_STATE.md as working memory. Continue the active exact frontier,
+      BREAKTHROUGH_STATE.md as working memory. Do not spawn Kortix root sessions;
+      maximize entropy with Task subagents inside this core. Continue the active exact frontier,
       maintain bounded scouts, and never call a partial result a solution. Pull
       --rebase, commit, and push durable work. Apply
       research/procedural/PUBLICATION.md only after every official-resolution
@@ -71,14 +78,15 @@ triggers:
     type: cron
     agent: math-god
     enabled: true
-    session_mode: keyed
-    session_key: breakthrough-v2
+    session_mode: pinned
+    session_id: 45a63659-bb8c-4524-86d8-c52dde0362b5
     cron: 0 0 1 * * *
     timezone: UTC
-    prompt: "LANE=breakthrough. This root session permanently owns only the
+    prompt: "LANE=breakthrough. CORE=math-god-breakthrough. This exact pinned root session permanently owns only the
       frozen assignment in BREAKTHROUGH_STATE.md. Read that file,
       breakthrough/PROGRAM.md, and the assignment prompt first; do not adopt
-      STATE.md or MILLENNIUM_STATE.md as working memory. If status is active,
+      STATE.md or MILLENNIUM_STATE.md as working memory. Do not spawn Kortix root
+      sessions; maximize entropy with Task subagents on the frozen target. If status is active,
       never resurvey or switch targets. Select a new target only after a solved
       or formally retired assignment has completed its publication/state closeout.
       Pull --rebase, commit, and push durable work. Apply

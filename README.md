@@ -120,6 +120,8 @@ exhaustion.
 
 math-god runs on [Kortix](https://kortix.com) with persistent memory,
 heartbeats, and subagent swarms. One agent definition operates three isolated
-keyed root sessions: the main trajectory, the six-problem Millennium program,
+exactly pinned root sessions: the main trajectory, the six-problem Millennium program,
 and a breakthrough-maxing lane frozen to one certificate-shaped problem until
-resolution or a formal retirement review.
+resolution or a formal retirement review. Their stable identities are recorded
+in [`CORE_SESSIONS.json`](CORE_SESSIONS.json). Research scale comes from diverse
+Task-subagent waves within those roots, never from proliferating Kortix sessions.

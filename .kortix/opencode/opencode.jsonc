@@ -13,7 +13,7 @@
   // per-(project, model) gateway routing setting — set to xhigh via
   // `kortix gateway routing`, not here).
   "model": "kortix/codex/gpt-5.6-sol",
-  // never-stop applies only to math-god. Three keyed root sessions carry the
+  // never-stop applies only to math-god. Three pinned root sessions carry the
   // main, Millennium, and breakthrough lanes; the trigger prompt fixes each
   // session's lane. Ordinary Kortix sessions can end normally.
   "plugin": ["./plugins/never-stop.ts"]

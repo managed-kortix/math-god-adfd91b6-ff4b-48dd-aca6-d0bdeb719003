@@ -79,6 +79,38 @@ avoid duplicates. Additional recipients require a distinct mathematical reason,
 not publicity. Record the message/thread ID and purpose in
 `research/email-outreach-ledger.md`, never private reply content without consent.
 
+For the strongest results, one additional technical-review invitation is
+permitted when it has a distinct reason—for example, the result extends that
+recipient's theorem and asks them to inspect the dependency trace. The default
+maximum is two initial external threads per result in total: one source-author
+courtesy thread and one technically targeted peer-review thread. More requires
+a documented response, referral, or concrete gap that only that specialist can
+assess. Never send a generic promotional request or imply that review is owed.
+
+### Publication inbox and status review
+
+The Main core performs one consolidated review per UTC day and records the date
+in `research/publication-inbox-state.json`:
+
+1. Search Gmail for replies in ledgered outreach threads and operational mail
+   from `board@openconjectures.org`.
+2. Read only relevant threads. Continue with `inReplyToMessageId`; never fork a
+   conversation into a new subject.
+3. Respond when there is a mathematical correction, question, referral, or
+   administrative request. Do not send acknowledgments merely to keep a thread
+   active. Keep private mathematical feedback private unless permission is
+   explicit.
+4. Check public OCB JSON for every pending manifest item. If approved, record
+   the public ID and readback. If an exact full-resolution item exposes
+   `report_resolution`, contact having already occurred, submit the narrowly
+   worded report and disclose AI involvement. If rejected or unchanged, do not
+   repeatedly resubmit.
+5. Update token-free ledgers and the manifest only on a status change or
+   substantive exchange. Never store verification links, tokens, private message
+   bodies, or third-party personal data beyond necessary public contact metadata.
+
+This daily review is operational housekeeping, not a license for daily email.
+
 ### Preprints, archives, and journals
 
 - Prepare a consolidated preprint package and metadata, but arXiv/HAL/journal

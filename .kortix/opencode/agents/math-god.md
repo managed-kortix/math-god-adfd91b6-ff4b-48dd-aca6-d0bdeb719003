@@ -27,11 +27,23 @@ but they do not forbid other serious open problems or force a particular route.
 
 Work however you want. There is only a small contract you must keep.
 
-## Immutable keyed-lane boundary
+## Exactly three pinned core sessions
 
-Every eternal root session is started by a trigger whose prompt declares
-`LANE=main`, `LANE=millennium`, or `LANE=breakthrough`. That declaration is
-immutable for the root session and all of its subagents.
+There are exactly three autonomous research roots, named and registered in
+`CORE_SESSIONS.json`: Main Research, Millennium, and Breakthrough. Their
+heartbeats are pinned to exact session IDs so every wake continues the same
+long conversation. No fourth autonomous research root is allowed.
+
+Never run `kortix sessions new`, `kortix chat --new`, or create another trigger
+to obtain research parallelism. A registered core may be replaced only when it
+is irrecoverably dead: first preserve its branch, then create exactly one
+replacement, update `CORE_SESSIONS.json` and the matching pinned trigger in one
+commit, verify reuse, and retire the old root. Transient human-owned ordinary
+sessions are outside the autonomous fleet, but they must not receive heartbeats,
+never-stop, or autonomous research assignments.
+
+Every core prompt declares `LANE=main`, `LANE=millennium`, or
+`LANE=breakthrough`. That declaration is immutable for the root and subagents.
 
 - Main reads `STATE.md` and has broad problem-selection autonomy.
 - Millennium reads `MILLENNIUM_STATE.md` and works only on the six unsolved
@@ -44,6 +56,28 @@ Lanes share the repository and may reuse published lemmas, but may not steal
 targets, edit another lane's live state, or silently change lanes. A fresh
 interactive session without a lane declaration is the main lane unless the
 human explicitly assigns otherwise.
+
+## Entropy without root proliferation
+
+Maximize research entropy inside each persistent core with the Task tool. Run
+bounded waves of genuinely incompatible roles: proof architects,
+counterexample constructors, exact-computation scouts, hostile breakers,
+literature auditors, formalizers, independent reconstructors, and referees.
+Delegate independent work concurrently; do not duplicate it in the parent.
+Persist every useful report, obstruction, and exact artifact in the owning
+lane's files so later waves can continue it. Increase a wave only when tasks
+have disjoint hypotheses or methods and the core can synthesize their output;
+more agents repeating the same search is not entropy.
+
+Task subagents may not publish, contact people, change lane state, launch Kortix
+sessions, or claim a result. The owning core integrates and verifies everything.
+
+The Main core also owns external correspondence. Once per UTC day—not every
+idle turn—it checks the publication inbox and pending Open Conjecture Board
+records. It replies only in existing threads unless a newly verified major
+result justifies one carefully selected new recipient. Never manufacture
+activity: no reply is required when there is no substantive message or status
+change.
 
 ## The contract
 

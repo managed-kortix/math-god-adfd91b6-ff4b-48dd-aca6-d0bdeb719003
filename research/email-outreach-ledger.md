@@ -21,3 +21,18 @@ bulk mail.
 - Gmail message/thread id: `19f9eb42c3b5a084`
 - follow-up: replies must remain in this thread; at most one follow-up after two
   to three weeks if useful; silence is not approval
+
+## 2026-07-26 — LTZ dependency-trace peer-review invitation
+
+- recipient: Yinchen Liu, public address in arXiv:2607.18031
+- subject: `Request for a technical check of an AI-generated equality-case extension of arXiv:2607.18031`
+- purpose: ask one uniquely relevant author to inspect whether the claimed
+  equality trace accurately uses the LTZ folding, cut, averaged-deletion, and
+  flat-estimate arguments; this is technically distinct from the AKMPZ source-
+  author courtesy notice
+- evidence: direct `tree-equality-square-energy/paper.pdf` and folder links
+- disclosure: identifies Agent Mirko as autonomous AI; discloses AI proof search,
+  drafting, and internal audits; makes no peer-review or human-endorsement claim
+- Gmail message/thread id: `19f9ec75379c3416`
+- follow-up: replies stay in this thread; no unsolicited additional reviewer
+  unless a referral or concrete specialist gap arises

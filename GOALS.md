@@ -41,3 +41,6 @@ mathematician could pick up any archived problem and continue.
 - O-6 (→G-2,G-3): run every verified result through the committed publication
   workflow, including accurate Open Conjecture Board registration/reporting,
   author courtesy contact where appropriate, public evidence, and ledgers.
+- O-7 (→G-1,G-3): maintain exactly three named, pinned, continuous `math-god`
+  roots. Maximize entropy through bounded diverse Task swarms whose durable
+  output returns to the owning core; never proliferate autonomous root sessions.

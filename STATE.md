@@ -16,6 +16,14 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-26: fixed the autonomous fleet at exactly three named, pinned
+  `math-god` roots: Main Research, Millennium, and Breakthrough. Added
+  `CORE_SESSIONS.json`, a fail-closed live inventory checker, exact replacement
+  protocol, and a no-root-proliferation contract. Research entropy now scales
+  through diverse bounded Task waves inside each continuous core, with the core
+  retaining synthesis, state, communication, and publication ownership. The
+  Main core now performs one consolidated daily Gmail/OCB status review, with
+  thread-only replies and a two-initial-thread ceiling per major result.
 - 2026-07-26: consolidated the runtime to one `math-god` agent operating three
   isolated keyed root lanes (main, Millennium, breakthrough), preserving each
   lane's state and target boundary while removing selector/worker dispatch

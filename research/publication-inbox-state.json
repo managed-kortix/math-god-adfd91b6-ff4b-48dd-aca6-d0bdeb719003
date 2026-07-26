@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "owner": "main",
+  "cadence": "at most once per UTC day unless a known urgent reply is pending",
+  "last_checked_at": "2026-07-26T14:15:00Z",
+  "gmail": {
+    "tracked_threads": [
+      "19f9eb42c3b5a084",
+      "19f9ec75379c3416"
+    ],
+    "substantive_unhandled_replies": 0
+  },
+  "open_conjectures": {
+    "verified_pending_review": [
+      "akmpz-conjecture-1-2",
+      "akmpz-conjecture-9-2-i"
+    ],
+    "public_ids": {}
+  },
+  "notes": "Verification-email tokens and private message bodies are never stored."
+}

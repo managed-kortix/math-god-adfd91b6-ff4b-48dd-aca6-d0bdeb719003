@@ -55,6 +55,11 @@
         "thread_id": "19f9eb42c3b5a084",
         "recipient_role": "source paper submitting author"
       },
+      "technical_review_contact": {
+        "status": "sent_2026-07-26",
+        "thread_id": "19f9ec75379c3416",
+        "recipient_role": "author of foundational LTZ theorem"
+      },
       "notes": "Do not report against Conjecture 1.2. Requires its own exact Board entry and public resolution action."
     }
   ],
