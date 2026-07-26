@@ -18,6 +18,8 @@ def emit(rho,shape,alpha,beta,epsilon,out,kappa=None,eta=None,lam=None):
     c,ge2,_=build(rho,shape); tag=f"pl{rho}{shape}{alpha}{beta}{epsilon}"
     for cell,value,name in ((A,alpha,"a"),(B,beta,"b"),(R,epsilon,"r")):
         exact(c,threshold(c,[ge2[v] for v in cell],tag+name),value)
+    if lam is not None and (kappa is None or eta is None):
+        raise ValueError("lambda requires kappa and eta")
     if (kappa is None)!=(eta is None):raise ValueError("kappa and eta must be supplied together")
     if kappa is not None:
         if kappa not in (5,6) or not 0<=eta<=4:raise ValueError("bad kappa/eta")
@@ -34,6 +36,9 @@ def emit(rho,shape,alpha,beta,epsilon,out,kappa=None,eta=None,lam=None):
                 and3(c,y,K[i],K[j],c.var(f"h_{i}_{j}"))
         exact(c,threshold(c,inside,tag+"eta"),eta)
         if lam is not None:
+            lo=max(0,beta-(7-kappa));hi=min(beta,kappa)
+            if not lo<=lam<=hi:
+                raise ValueError(f"lambda must lie in [{lo},{hi}] for this placement")
             marked=[]
             for b in B:
                 y=c.var(f"LK_{b}_{tag}");marked.append(y);and2(c,y,K[b],ge2[b])
@@ -42,7 +47,9 @@ def emit(rho,shape,alpha,beta,epsilon,out,kappa=None,eta=None,lam=None):
         for name,num in c.names.items():f.write(f"c var {num} {name}\n")
         f.write(f"p cnf {len(c.names)} {len(c.clauses)}\n")
         for cl in c.clauses:f.write(" ".join(map(str,cl))+" 0\n")
-    print(f"rho={rho} shape={shape} alpha={alpha} beta={beta} epsilon={epsilon} vars={len(c.names)} clauses={len(c.clauses)}")
+    split="" if kappa is None else f" kappa={kappa} eta={eta}"
+    if lam is not None:split+=f" lambda={lam}"
+    print(f"rho={rho} shape={shape} alpha={alpha} beta={beta} epsilon={epsilon}{split} vars={len(c.names)} clauses={len(c.clauses)}")
 
 if __name__=="__main__":
  p=argparse.ArgumentParser();p.add_argument("rho",type=int,choices=range(3));p.add_argument("shape",choices=P);p.add_argument("alpha",type=int);p.add_argument("beta",type=int);p.add_argument("epsilon",type=int);p.add_argument("output");p.add_argument("--kappa",type=int);p.add_argument("--eta",type=int);p.add_argument("--lambda-k",dest="lam",type=int);a=p.parse_args();emit(a.rho,a.shape,a.alpha,a.beta,a.epsilon,a.output,a.kappa,a.eta,a.lam)

@@ -695,3 +695,33 @@ No audits yet.
 - **Next queued attack:** apply lambda to the remaining 50 placement parents,
   beginning with beta<=2 where lambda has at most three values. Refine unique
   degree-three hubs only after lambda leaves time out.
+
+## 2026-07-26 — tick 35
+
+- A hostile audit found that `--lambda-k` was silently ignored when supplied
+  without `--kappa/--eta`, and that negative lambda values reached Python's
+  negative indexing. The emitter now rejects incomplete refinement coordinates,
+  enforces the sharp placement-dependent range
+  `max(0,beta-(7-kappa)) <= lambda <= min(beta,kappa)`, and prints every active
+  split coordinate in its deterministic log line.
+- Added an independent finite partition audit. It reproduces all 165 permissive
+  placement leaves over 33 shape parents and checks 21,450,240 direct
+  `(K,four B-holes,marked-set)` coordinate evaluations. The independent
+  coordinate census passes, and the generic threshold-counter semantics pass
+  the existing exhaustive tests; this does not by itself test the emitted
+  placement-specific `K/HK/LK` gates.
+- Proved the exact endpoint-packing inequality
+  `q(t)+q(u)+1[tu hole]>=3` for two vertices inaccessible from one robust
+  predecessor. It recovers the four-matching proof but is sharp for the
+  `P3+2K2` shape; a three-hole local counterconfiguration shows that packing
+  alone cannot synchronize predecessor sets. See
+  `attempts/tick35-k4-packing-barrier.md`.
+- The earlier 87-leaf and 580-cell scout totals are not independently
+  reproducible from a committed parent/child manifest. They remain exploratory
+  timing observations, not a cover theorem. Before any branch-level claim, the
+  unresolved-parent list, every child key, CNF/LRAT hashes, and a complete
+  independently checked ledger must be committed.
+- **Next queued attack:** freeze that manifest and rerun the residual lambda
+  cover with the repaired CLI. On any remaining hard child, split by membership
+  of the unique degree-three/four hub in K and by the exact inaccessible
+  three-hole packet type, rather than repeating an unchanged timeout.
