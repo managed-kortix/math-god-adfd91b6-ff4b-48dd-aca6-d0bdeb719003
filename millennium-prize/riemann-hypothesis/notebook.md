@@ -2156,3 +2156,48 @@ first with exact finite optimization and then with unconditional Chebyshev-type
 bounds. Search for an anchored reserve inequality rather than translated-window
 positivity; test whether a fixed number of dyadic scales improves the reserve
 to defect ratio after aggregating primitives.
+
+## Tick 24 — reserve cancellation and drift-free cells
+
+Added `analyze_endpoint_prefix.py` and certified tests. The exact Chebyshev
+identity produces a large positive `psi^2` term, but
+`drift-free-endpoint-cells.md` proves that this is mostly bookkeeping drift. The
+complete initial reserve is
+
+\[
+(2-\alpha)[V_N+N(D-m_N)(G-m_N)],
+\]
+
+where `V_N>=0` is a weighted variance. Constant, logarithmic, and quadratic
+pieces each have size `N/log^2 N` and cancel at leading order. Coarse explicit
+Chebyshev bounds cannot control the slope-position term. The large-reserve
+domination strategy is therefore abandoned.
+
+Recentring each cell gives
+
+\[
+J_k=c_2R_k+\widehat z_kV_k+g_kw_k
+\]
+
+with three positive `O(k^-2)` weights. A certified run through
+`N=8192,T=16N` found initial reserve `0.0691463`, later loss `0.0035216`, and
+complete prefix `0.0656248`. All three drift-free component sums were positive
+on that finite prefix. However, the absolute tail radius was about `80`, over a
+thousand times the prefix, and grows with `N` at fixed `T/N`.
+
+The later contribution stabilizes numerically near a negative few `10^-3`,
+dominated by `g_kw_k`, while the positive `c_2R_k` channel decays. No
+componentwise late-tail inequality survives. Exact endpoint formulas identify
+the obstruction after `k=N` as a truncated Möbius transform `T_N(k)` entering
+`r_k,s_k` with different scaling.
+
+Cross-scale aggregation gives only modest, nonuniform finite improvement, and
+`W` weights behave almost identically to alpha weights. Separate primitive
+bounds remain unusable because large drifts cancel only in the complete form.
+
+## Next queued main-funnel step
+
+Expand the drift-free `g_k` tail through `T_N(k)` and sum over `k` before taking
+absolute values. Seek a positive gcd/divisor kernel or a cancellation-aware
+bilinear identity at the required `1/log^2 N` scale. Uniform endpoint bounds
+cannot attain this scale.

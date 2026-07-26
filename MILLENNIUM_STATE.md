@@ -23,13 +23,15 @@ only to the Millennium Prize lane; the general session owns `STATE.md`.
   certified through `N=16`; cellwise positivity is explicitly false, so the
   exact Abel identities reduce grouped cells to cumulative signed primitives,
   while finite audits falsify every fixed local-window/pairing strategy; the
-  current sublemma is an anchored initial-range Chebyshev reserve dominating
-  the later cumulative-primitive defect, after
+  the apparent initial Chebyshev reserve is proved to cancel at leading order;
+  drift-free cells remove artificial Abel drift but absolute tail bounds remain
+  enormous, so the current sublemma is a correlation identity for the truncated
+  Möbius endpoint transform weighted by `1/[k(k+1)]`, after
   global low rank and Farey-neighbor-only splits were falsified but blockwise
   geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 21
+- **cycle:** 22
 - **announcements:** none
 
 ## immutable target list
@@ -48,10 +50,10 @@ waiting process.
 
 ## next exact steps
 
-1. Quantify the exact initial reserve from `b_k=e_k=-psi(k)/log N` on `k<=N`
-   against later Abel-primitive losses using unconditional bounds.
-2. Aggregate these primitives across a fixed number of dyadic scales and test
-   whether reserve/defect ratios improve without local window assumptions.
+1. Expand the drift-free `g_k` tail through the exact truncated Möbius transform
+   `T_N(k)` and sum over `k` before applying bounds.
+2. Seek a positive gcd/divisor kernel or cancellation-aware bilinear form at the
+   required `1/log^2 N` scale; audit it against finite `N<=8192` data.
 3. Keep bounded scouts live: BSD rank-two transfer normalization; Hodge
    Hilbert obstruction calculation; Navier--Stokes exact triad derivative;
    P-vs-NP antichecker memorization bound; Yang--Mills spectral-limit audit.
@@ -222,6 +224,12 @@ waiting process.
   positivity. The active target is a grouped cumulative divisor-impulse or
   fixed-length dyadic block inequality for the complete functional. No solution
   is claimed.
+- 2026-07-26: certified reserve/defect and drift-free decompositions through
+  `N=8192`. The large initial `psi^2` reserve cancels with slope terms at leading
+  order, so elementary Chebyshev bounds cannot dominate later defects.
+  Drift-free cells yield stable finite components, but all absolute tail bounds
+  grow and are enormous. The active obstruction is the signed truncated Möbius
+  correlation in the `g_k/[k(k+1)]` tail. No solution is claimed.
 - 2026-07-26: derived exact boundary-impulse and cumulative Abel formulas for
   complete unit-cell sums. A certified analyzer and deeper audit found negative
   windows of lengths 512 and 4096 and failures of fixed-lag and greedy pairings,
