@@ -809,3 +809,30 @@ No audits yet.
   argument for P5 and fork. It currently claims the same source cap but lacks a
   written packet table; first demand either a complete table with saturated
   negative orientations or an explicit four-source breaker.
+
+## 2026-07-26 — ticks 41--42
+
+- Human-eliminated the fork and P5 T-hole shapes; see
+  `attempts/tick41-fork-human-proof.md` and
+  `attempts/tick42-p5-human-proof.md`.
+- Fork has exactly four saturated packet types. Each reconstructs the source's
+  closed outneighborhood, and all four cannot coexist; hence at most three
+  predecessor sources, contradicting the universal lower bound four.
+- P5 has seven packet labels. Their complete compatibility depends only on the
+  six orientations of present pairs on the five-vertex support. The exact
+  Boolean table has maximum two compatible labels; the 64-case transparent
+  checker is `experiments/check_p5_packets.py`. A hostile audit separately
+  reconstructed the table from crossing-hole capacities.
+- A competing exploratory claim that P5 had compatibility maximum one was
+  false; an exact two-source local witness exists. The audited theorem uses the
+  sharp maximum two and does not inherit that overclaim.
+- Eight of the eleven four-edge shapes now have human contradictions in this
+  normal form: C4, paw, triangle-plus-edge, fork, P5, four-matching, and the two
+  previously handled star-like shapes (`K1,4` and claw-plus-edge, counted there
+  as separate profiles). The remaining human frontier is P4-plus-edge,
+  two-P3, and P3-plus-two-edges; checked CNF evidence exists but does not replace
+  proofs.
+- **Next queued attack:** start P4-plus-edge with a complete saturated packet
+  table. Its disconnected spare edge admits the sharp `(2,1)` packet from the
+  tick-35 barrier, so the next lemma must synchronize multiple sources rather
+  than rely on a single-source cut count.
