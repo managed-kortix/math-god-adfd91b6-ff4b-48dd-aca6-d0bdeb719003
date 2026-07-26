@@ -4,14 +4,17 @@ import argparse
 from snc_cnf import generate, threshold
 ROWS={(0,6),(0,5),(1,5)}
 def exact(c,o,v):
+    if not 0 <= v <= len(o): raise ValueError("exact count out of range")
     if v==0:c.add(-o[0])
     elif v==len(o):c.add(o[-1])
     else:c.add(o[v-1]);c.add(-o[v])
 def H(c,u,v):return c.var(f"h_{min(u,v)}_{max(u,v)}")
 def emit(r,k,g,hb,out):
     if (r,k) not in ROWS:raise ValueError("bad row")
+    if g not in (0,1,2):raise ValueError("g must be 0, 1, or 2")
     if g and hb is not None:raise ValueError("hB only when g=0")
     if not g and hb is None:raise ValueError("g=0 requires hB")
+    if hb is not None and not 0 <= hb <= k:raise ValueError("hB out of range")
     c=generate(18,7,9,True,(),(0,1),True)
     for j in range(18):
         if j!=1:c.add(-H(c,1,j))

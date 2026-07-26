@@ -638,3 +638,17 @@ No audits yet.
 - **Next queued attack:** preserve the checked k4 ledger, rerun the 15 unresolved
   shapes with a rooted-cell incidence split. Implement the 25-shard final-row
   cover `(rho,k,g,hB)` and first certify all `g=1,2` strips.
+
+## 2026-07-26 — tick 31
+
+- Completed the entire 25-shard cover of the three final `m=9` aggregate rows:
+  every `g=1,2` cell and every `g=0,hB` cell is independently LRAT-verified.
+  See `experiments/m9-final-certificates.md`.
+- Therefore the only unfinished part of the `m=9` isolated-root campaign is
+  the fifteen unresolved `k=4` shape parents. Eighteen of 33 are checked; all
+  fifteen unresolved were further split, but no parent yet has a complete leaf
+  cover.
+- Hardened `m9-final-shards.py` against invalid exact counts and hB/g arguments.
+- **Next queued attack:** split each unresolved k4 parent by rooted placement of
+  degree-at-least-two shape vertices among root, A', and B; only B-rich children
+  then need `|K|` and internal-K-hole refinement.
