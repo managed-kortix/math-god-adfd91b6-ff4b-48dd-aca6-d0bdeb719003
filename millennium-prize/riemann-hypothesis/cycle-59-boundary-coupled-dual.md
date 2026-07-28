@@ -1,6 +1,6 @@
 # Cycle 59: boundary-coupled dual for the missing residual
 
-Work in `H=L^2((1,infinity),dt/t^2)`. Fix `M<B` and put
+Work in the real Hilbert space `H=L^2((1,infinity),dt/t^2)`. Fix `M<B` and put
 
 \[
 D=D_{M-1},\quad Z=\operatorname{span}\{U_{M-1},\rho_M,\ldots,\rho_{B-1}\}.
@@ -84,8 +84,13 @@ equation reduce exactly to
 \boxed{m_{B-1}A=0,\qquad m_{B-1}=\sum_{a<B}\mu(a)/a.}              \tag{59.5}
 \]
 
-If `m_(B-1)!=0`, triangular back-substitution forces `A=0` and every `B_k=0`,
-so `Omega_K=0`. Cycle 56's unconditional wording omitted this nondegeneracy.
+In fact `m_n!=0` for every positive integer `n`. If
+`L_n=lcm(1,...,n)` and Bertrand's postulate supplies `n/2<p<=n`, then modulo
+`p` the integer `L_n m_n` has only the surviving term
+`-L_n/p`, which is nonzero because `p^2>n`. Thus triangular back-substitution
+unconditionally forces `A=0` and every `B_k=0`, so `Omega_K=0`. Cycle 56's
+original conclusion was correct, but its argument omitted this boundary
+nonvanishing step.
 Moment-null functions remain possible but correlate with no affine old-state
 trace. Surplus or remote cells can create feasible directions, but rank alone
 does not make the numerator in (59.4) nonzero; remote cells are strongly

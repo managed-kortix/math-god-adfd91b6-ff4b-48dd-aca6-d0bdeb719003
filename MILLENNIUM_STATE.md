@@ -137,7 +137,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 59
+- **cycle:** 60
 - **announcements:** none
 
 ## immutable target list
@@ -156,10 +156,9 @@ waiting process.
 
 ## next exact steps
 
-1. Optimize the Cycle 59 boundary-coupled finite-cell quotient on deliberately
-   chosen surplus shells and seek a symbolic Möbius divisor-floor correlation
-   lower bound that pays `beta_2+delta`; equivalently bound complete Gram
-   capture in the exact energy partition.
+1. Search sparse surplus cells at floor-signature jumps `j=nq`, using the Cycle
+   60 reduced Schur score, and determine whether any bounded sparse pattern can
+   pay `beta_2+delta` or whether a global-tail theorem is forced.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -174,6 +173,14 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-28: Cycle 60 proved unconditionally that
+  `sum_(a<=n)mu(a)/a` never vanishes, completing the corrected matched-shell
+  no-go. It eliminated cell-linear moments exactly and optimized the full
+  boundary quotient over 1--24 consecutive surplus cells on four critical
+  windows. The best certificates pay only `2.26%--5.81%` of the required
+  residual. Local consecutive surplus is quantitatively inadequate; sparse
+  floor-signature jumps or global correlations remain. No RH result is claimed.
 
 - 2026-07-28: Cycle 59 derived the exact boundary-coupled finite-cell dual for
   the post-staircase residual. It reduces explicit witnesses to two cell

@@ -4277,6 +4277,20 @@ correlation. Chebyshev bounds and termwise absolute values cannot control that
 tail. Details are in `cycle-47-quantitative-anchor-reserve.md`. No RH result is
 claimed.
 
+## Cycle 60: matched boundary nonvanishing and surplus-shell no-go
+
+Bertrand's postulate proves `sum_(a<=n)mu(a)/a` is never zero: after multiplying
+by `lcm(1,...,n)`, a prime in `(n/2,n]` leaves exactly one nonzero term modulo
+that prime. Hence the matched-shell annihilation is unconditional.
+
+Eliminating individual cell-linear moments gives a compact positive quadratic
+form for surplus optimization. Exact rational nullspaces plus 256-bit Arb
+optimization over up to 24 consecutive surplus cells pay at most `5.81%` of
+the required residual on the four critical windows. Consecutive local surplus
+is therefore quantitatively too weak; sparse floor-signature jumps or global
+arithmetic correlations are next. See `cycle-60-surplus-shell-no-go.md`. No RH
+result is claimed.
+
 ## Cycle 55: correction — the global below-M witness is valid
 
 Cycle 54 incorrectly stated that the slope of `U_(M-1)` varies by complete
