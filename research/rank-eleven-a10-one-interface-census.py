@@ -11,6 +11,7 @@ from __future__ import annotations
 
 from collections import Counter
 from dataclasses import dataclass
+from fractions import Fraction
 from hashlib import sha256
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
@@ -105,6 +106,18 @@ class FinalOwnership:
     interval_owners: tuple[tuple[tuple[int, int], TerminalOwner], ...]
     private_owners: tuple[tuple[tuple[int, int], TerminalOwner], ...]
     mark_owner: TerminalOwner
+
+
+@dataclass(frozen=True)
+class OrdinaryLedger:
+    integer_credit: Fraction
+    hostile_deficits: int
+    strict: bool
+    q_packet_rank: int | None
+
+    def positive(self):
+        floor = self.integer_credit - self.hostile_deficits
+        return floor > 0 or floor == 0 and self.strict
 
 
 @dataclass(frozen=True)
@@ -259,6 +272,34 @@ def ownership_text(row, plan, ownership):
     return "|".join(fields)
 
 
+def ordinary_ledger(plan, ownership):
+    """Replace the pure A_k bound of Q's owner by the correct mixed theorem."""
+    q_owner = ownership.mark_owner
+    margins = [BASE.BASE.TRIANGLE_MARGIN[len(packet)] for packet in plan.packet_cycles]
+    if q_owner.kind == "hostile-Q":
+        return OrdinaryLedger(Fraction(sum(margins)), 1,
+                              bool(plan.packet_cycles), None)
+    require(q_owner.kind == "packet", "ordinary Q owner has unknown kind")
+    require(0 <= q_owner.index < len(plan.packet_cycles), "ordinary Q packet index is invalid")
+    q_triangles = len(plan.packet_cycles[q_owner.index])
+    require(1 <= q_triangles <= 9,
+            "ordinary mixed Q packet is not a proved rank-at-most-ten packet")
+    # TQ is strict; TTQ is nonnegative; mixed ranks four through ten are strict.
+    mixed_strict = q_triangles != 2
+    other_credit = sum(
+        margin for index, margin in enumerate(margins) if index != q_owner.index
+    )
+    other_strict = len(plan.packet_cycles) >= 2
+    return OrdinaryLedger(Fraction(other_credit), 0,
+                          mixed_strict or other_strict, q_triangles + 1)
+
+
+def ordinary_ledger_text(row, ledger):
+    return (f"{row.signature}|credit={ledger.integer_credit}|"
+            f"deficits={ledger.hostile_deficits}|strict={int(ledger.strict)}|"
+            f"qrank={ledger.q_packet_rank}")
+
+
 def classify_residual_geometry(row):
     adjacency = BASE.BASE.BASE.adjacency(row.tree)
     cuts = tuple(range(10, len(adjacency)))
@@ -370,6 +411,15 @@ def verify_residual_repair(row, repair):
     require(len(cut_owner) == len(repair.cut_owners) and set(cut_owner) == set(range(10, len(adjacency))),
             "repair cut-owner ledger is not exact")
     require(set(cut_owner.values()) <= set(packets), "repair cut has no packet owner")
+    cycle_owner = {cycle: owner for owner, cycles in packets.items() for cycle in cycles}
+    require(len(cycle_owner) == sum(map(len, packets.values())),
+            "repair retained cycle has two packet owners")
+    for cut in range(10, len(adjacency)):
+        incident = {cycle_owner[cycle] for cycle in adjacency[cut] if cycle in cycle_owner}
+        require(len(incident) <= 1, "repair cut meets two retained packet owners")
+        if incident:
+            require(incident == {cut_owner[cut]},
+                    "repair cut owner disagrees with its incident retained packet")
     if mark.kind == "cut":
         require(cut_owner[mark.vertex] == repair.mark_owner, "marked cut has wrong final owner")
     elif mark.vertex not in repair.opened and mark.vertex not in repair.destroyed:
@@ -395,6 +445,13 @@ def verify_residual_repair(row, repair):
     if repair.terminal == "A7+TQ+T":
         require((len(packets["A7"]), len(packets["TQ"]), len(packets["T"])) == (7, 1, 1),
                 "A7+TQ+T profile mismatch")
+    expected_strict = repair.terminal in {
+        "packing-one-A10Q", "TQ+A8", "A8Q+T",
+        "open-leaf+packing-one-A9Q", "A7+TQ+T",
+        "open-two-leaves+packing-one-A8Q",
+    }
+    require(repair.strict == expected_strict,
+            "repair strictness is not derived from a certified terminal")
     require(repair.credit - repair.deficits - repair.tree_costs >= 0,
             "repair ledger cannot beat delta<1")
     require(repair.strict, "repair ledger lacks strict packet")
@@ -440,6 +497,7 @@ def main():
     routers = Counter()
     residuals = []
     owner_records = []
+    ordinary_ledgers = []
     for row in rows:
         plan = BASE.BASE.best_plan(row)
         scores[plan.credit] += 1
@@ -449,11 +507,15 @@ def main():
         else:
             verify_owner(row, plan)
             ownership = materialize_final_owners(row, plan)
+            ledger = ordinary_ledger(plan, ownership)
+            require(ledger.positive(), "ordinary theorem-aware mixed-Q ledger is not positive")
             owner_records.append(ownership_text(row, plan, ownership))
+            ordinary_ledgers.append(ordinary_ledger_text(row, ledger))
 
     row_digest = digest(row.signature for row in rows)
     residual_digest = digest(row.signature for row in residuals)
     owner_digest = digest(owner_records)
+    ordinary_ledger_digest = digest(ordinary_ledgers)
     repairs = tuple(make_residual_repair(row) for row in residuals)
     for row, repair in zip(residuals, repairs):
         verify_residual_repair(row, repair)
@@ -471,6 +533,7 @@ def main():
     print("canonical-row sha256:", row_digest)
     print("canonical-residual sha256:", residual_digest)
     print("final-owner sha256:", owner_digest)
+    print("theorem-aware ordinary-ledger sha256:", ordinary_ledger_digest)
     print("repair types:", dict(sorted(Counter(repair.terminal for repair in repairs).items())))
     print("repair sha256:", repair_digest)
     for index, row in enumerate(residuals, 1):
@@ -490,6 +553,7 @@ def main():
     require(row_digest == "8db6255acb0e663ea2d2c16ec4ffc0c329dae1cc8d7bb396eebd69aaa6b50402", "canonical row digest changed")
     require(residual_digest == "cb3daea744bf96c12f60b0a2028c4353c4b239a5cd36029cb75b7d16dff6d325", "canonical residual digest changed")
     require(owner_digest == "9600bb00f1f1fbf6e4cc74141fa2a4a27be9c781b785076492dff35021077479", "final-owner digest changed")
+    require(ordinary_ledger_digest == "c54266b5b9607875408e9b04702efc97198476b6429d832591006fa2acea93eb", "ordinary theorem-ledger digest changed")
     require(Counter(repair.terminal for repair in repairs) == Counter({"packing-one-A10Q": 2, "TQ+A8": 2, "A8Q+T": 2, "open-leaf+packing-one-A9Q": 1, "A7+TQ+T": 2, "open-two-leaves+packing-one-A8Q": 1}), "repair type census changed")
     require(repair_digest == "5c0f91e0d8953425521030928b282e64f2e91be7140344613e30e67b236e7df3", "repair digest changed")
     print("exact endpoint closure: 12099 = 12089 + 10")

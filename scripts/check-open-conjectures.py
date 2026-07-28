@@ -11,6 +11,7 @@ import json
 import re
 import urllib.parse
 import urllib.request
+import urllib.error
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -31,15 +32,27 @@ def fetch_all() -> tuple[list[dict], list[dict]]:
     cursor: str | None = None
     seen: set[str] = set()
     while True:
-        query = {"per_page": "100"}
+        # Use the Board's default page size. Its current deployment rejects the
+        # otherwise documented per_page query parameter with HTTP 400.
+        query = {}
         if cursor:
             if cursor in seen:
                 raise SystemExit("cursor loop detected")
             seen.add(cursor)
             query["cursor"] = cursor
-        url = API + "?" + urllib.parse.urlencode(query)
-        with urllib.request.urlopen(url, timeout=30) as response:
-            payload = json.load(response)
+        encoded = urllib.parse.urlencode(query)
+        url = API + (("?" + encoded) if encoded else "")
+        try:
+            with urllib.request.urlopen(url, timeout=30) as response:
+                payload = json.load(response)
+        except urllib.error.HTTPError as error:
+            if cursor and error.code == 400:
+                # Current Board deployment emits an opaque next_cursor that it
+                # then rejects. Preserve the public first-page readback rather
+                # than pretending the inventory is complete.
+                pages.append({"cursor_error": 400, "inventory_complete": False})
+                break
+            raise
         data = payload.get("data")
         pagination = payload.get("pagination")
         if not isinstance(data, list) or not isinstance(pagination, dict):
@@ -49,6 +62,7 @@ def fetch_all() -> tuple[list[dict], list[dict]]:
             "page": pagination.get("page"),
             "count": len(data),
             "reported_total": pagination.get("total"),
+            "inventory_complete": not bool(pagination.get("next_cursor")),
         })
         cursor = pagination.get("next_cursor")
         if not cursor:

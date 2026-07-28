@@ -106,6 +106,14 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     closes `U7`. The remaining obstacle is existential router reachability R11.
     Build a port-aware verifier over cyclic realizations and concrete owner
     refinements; never quotient by the 144-state arithmetic ledger alone.
+22. `A_10|Q` is now exact-closed as `12099=12089+10` with a theorem-aware
+    post-ownership ledger. For `P|A_9|P`, retain the exact provisional frontier
+    `43151=43116+35` but do not call the 43116 rows positive from the old score:
+    41863 put a pentagon inside a credited triangular packet. Reclassify every
+    final packet after attaching its zero, one, or two demands, using only
+    proved mixed lower-rank/common-cut/packing-one bounds. Then revisit the
+    `6+28+1` residual templates with theorem-derived ledgers and recursive
+    adhesion owners.
 
 ## Running jobs
 
