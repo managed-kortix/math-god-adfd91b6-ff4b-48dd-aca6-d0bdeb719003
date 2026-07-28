@@ -4320,6 +4320,29 @@ certified positive margins, but imports almost the complete old prefix and
 gives no uniform theorem. Details are in
 `cycle-56-residual-beyond-optimal-witness.md`. No RH result is claimed.
 
+## Cycle 57: lagged prefixes capture all but a finite suffix defect
+
+After projecting beyond the local span and `g_M`, write
+`D_(M-1)=D_(M-ell)+T_ell`. The gain from the residualized lagged prefix has the
+exact formula
+
+\[
+G_\ell={|R-\langle r,ET_\ell\rangle|^2\over
+R-2\Re\langle r,ET_\ell\rangle+\|ET_\ell\|^2},
+\]
+
+and misses at most `||ET_ell||^2`. This explains why short lags are strong, but
+the suffix-to-global-residual correlation remains uncontrolled and fixed lags
+are generically defeatable.
+
+At each of the eleven negative-singleton starts through `3060`, the optimal
+staircase plus one residualized `D_(M-3)` certifies the first physical recovery
+endpoint; the weakest margin is `8.8536e-7` at `[219,231)`. This is only a
+finite global-state certificate. The positive singleton `[98,99)` defeats every
+single lag through the whole available prefix, although endpoint `102` is
+certified, proving that witness success is endpoint-dependent. Details are in
+`cycle-57-lagged-prefix-projection.md`. No RH result is claimed.
+
 ## Cycle 49: recombination returns the original terminal kernel
 
 Combining packet surplus and coherent deficit before estimating gives

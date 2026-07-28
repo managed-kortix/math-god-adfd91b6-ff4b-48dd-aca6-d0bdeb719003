@@ -126,10 +126,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   exact orthogonal residual of normalized size `0.0584054...`, while matched
   first-shell witnesses are annihilated by a triangular floor block and larger
   finite-cell witnesses are negligible; one residualized `D_(M-3)` probe
-  repairs the three historical failures but imports the global old prefix
+  repairs the three historical failures but imports the global old prefix; the
+  exact lagged-prefix identity now shows that one old state captures all but a
+  projection of its finite omitted suffix, and `D_(M-3)` certifies all eleven
+  negative-singleton starts through `3060`, yet the positive `[98,99)` window
+  defeats every single lag and demonstrates essential endpoint dependence
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 56
+- **cycle:** 57
 - **announcements:** none
 
 ## immutable target list
@@ -148,9 +152,9 @@ waiting process.
 
 ## next exact steps
 
-1. Control the specific orthogonal residual `||(I-Pi_Z)(D_(M-1)-g_M)||^2`
-   through arithmetic structure of the physical Möbius vector; fixed local
-   witnesses and fixed-rank post-cutoff probes are now ruled out.
+1. Replace the global lagged-prefix certificate by a quantitative arithmetic
+   bound on the finite recent-suffix defect in (57.2), retaining endpoint
+   dependence; fixed-lag geometry alone is generically insufficient.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -165,6 +169,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 57 derived the exact gain and uncaptured-energy formulas for
+  a lagged old-prefix probe: it misses only a projection of the finitely many
+  omitted recent rows. A residualized `D_(M-3)` certifies the first recovery at
+  all eleven negative-singleton starts through `3060`, with weakest margin
+  `8.8536e-7`. This is finite and global-state dependent. The physically
+  positive singleton `[98,99)` is not certified by any one lag through the
+  available prefix, although endpoint `102` is, proving that endpoint-specific
+  recomputation is essential. Fixed lag families remain generically
+  defeatable. No RH or Millennium solution is claimed.
 
 - 2026-07-26: Cycle 56 split the old-state reserve exactly into the optimal
   below-`M` staircase payment plus an orthogonal residual. The latter has
