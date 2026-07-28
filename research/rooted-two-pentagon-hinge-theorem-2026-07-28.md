@@ -5,8 +5,8 @@
 ## Theorem
 
 Let `A` be a nonempty connected triangular cactus rooted at `y`. Let
-`P1,P2` be pentagons sharing one cut `x`, and let `y` be a distinct vertex of
-`P1`. Attach `A` to `y` through exactly one interface, either by identifying
+`P1,P2` be pentagons sharing one cut `x`, and let `y` be either `x` or another
+vertex of `P1`. Attach `A` to `y` through exactly one interface, either by identifying
 the roots or by one internally disjoint connector path. Allow arbitrary finite
 trees everywhere. Then the resulting cactus `G` satisfies
 
@@ -23,7 +23,9 @@ sigma(G)>a+1-4/(3 sqrt(13))>0.                         (1)
 ```
 
 The arbitrary-rank conclusion follows from rooted maximum-packing Voronoi
-territories.
+territories. The case `y=x` uses the symmetric deletion identities in Section
+1.1; this distinction matters because deleting either pentagon then deletes
+the triangular root.
 
 ## 1. Triangle-packing-one packet
 
@@ -127,6 +129,43 @@ s+(G)-s-(G)>-8/(3 sqrt(13)).                            (8)
 
 Since a cactus with `a` triangles and two pentagons has
 `|E|=|V|+a+1`, equation (1) follows.
+
+### 1.1 Common-root case `y=x`
+
+The weighted bouquet comparison also applies when the triangular root is the
+common pentagon cut. This is not obtained by repeating the asymmetric deletion
+sentence above. Write the private paths `P_j-x` as matching states `A_j`, and
+let `B_j` denote the contribution in which the common root is matched into
+that path. With
+
+```text
+L=Z_(A-x),   alpha=Z_A/Z_(A-x)>=t,
+```
+
+rooted matching coalescence gives
+
+```text
+Z_G=L[alpha A1 A2+B1 A2+A1 B2]=L R.                    (9)
+```
+
+Deleting either pentagon deletes `x` and hence the triangular root, so the two
+singleton-cycle carriers are symmetrically
+
+```text
+Z_(G-V(P1))=L A2,       Z_(G-V(P2))=L A1.              (10)
+```
+
+Thus the empty and singleton-pentagon Sachs terms are exactly
+
+```text
+K L [R+2i(A1+A2)].                                      (11)
+```
+
+The 1290-term certificate uses an arbitrary common-cut activity
+`a_0=t+y_0>=t`; set `a_0=alpha`. Therefore (7) applies without modification.
+Because the pentagons share `x`, simultaneous-pentagon terms are still absent.
+Every remaining packing-one triangular term again moves the normalized
+polynomial right or down, so (5)--(8) and the bound (1) follow verbatim.
 
 ## 2. Arbitrary triangular root
 

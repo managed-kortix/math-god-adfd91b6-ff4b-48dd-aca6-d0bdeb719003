@@ -4,10 +4,11 @@
 
 ## Status
 
-This is a rigorously reproduced research frontier, **not** an endpoint closure.
-An attempted closure verifier was adversarially rejected and is deliberately
-not retained as a certificate. The rejection identified the same general
-firewall that arose in `A_10|Q`: a pure triangular margin cannot also be used
+This note records the historical frontier and the audit failure that forced a
+theorem-aware redesign. The completed fail-closed endpoint certificate is now
+`research/rank-eleven-a9-two-interface-verifier.py`, documented in
+`research/rank-eleven-a9-two-interface-fail-closed-note-2026-07-28.md`. The
+rejection below remains important: a pure triangular margin cannot also be used
 after a remote hostile cycle has entered that packet unless a theorem for the
 resulting mixed packet is supplied.
 
@@ -115,3 +116,52 @@ pure triangular credit. Every repair must carry concrete proper intervals,
 unique cut and connector owners, recursive adhesion ownership, packet
 hypotheses, and a theorem-derived exact ledger. This theorem-aware
 reclassification of all 43151 rows is the next endpoint task.
+
+## Theorem-aware search refinement
+
+After this frontier was written, the rooted shared-cut two-pentagon hinge
+theorem was proved. It is a valid terminal only when the two pentagons
+themselves share a cut and the triangular packet has one complete interface to
+their lobe. A pair of labelled connector demands on `A_9` does not imply those
+hypotheses, so the hinge theorem closes **zero** marked rows merely by profile
+recognition.
+
+An exhaustive theorem-aware search using only bounded-rank connected packets,
+`P,TP,PP,TPP`, one-hostile packets, and complete-profile demand coalescence
+finds coverage for every marked row through eight triangles. At nine triangles
+it finds plans for `43145` of `43151` rows. The six conservative residuals are:
+
+```text
+4 common-cut A_9 bouquet mark types:
+  both marks at the locked hub;
+  hub/private, in both label orders;
+  private marks on two distinct petals;
+
+2 saturated two-cut extensions:
+  one private-router mark and one mark locked on the A_7 fan cut.
+```
+
+The smallest is the double-locked bouquet
+
+```text
+X[AB](T()^9).
+```
+
+Both remote pentagons enter through connectors at the triangular hub; they are
+not cyclic blocks sharing that hub. Hence neither the common-cut `T^9PP`
+theorem nor the rooted hinge theorem applies. The committed theorem-aware
+verifier now reproduces this `43145+6` refinement and closes the six rows by two
+explicit router repairs and four pentagon openings. Thus the finite
+`P|A_9|P` endpoint is proved; the separated-pentagon analytic obstruction below
+remains relevant only to broader all-rank targets.
+
+The six rows identify the true analytic target: a packing-one triangular cactus
+with two separated rooted pentagons. Its grouped Sachs polynomial contains the
+joint-cycle package
+
+```text
+-4D+8iE,
+```
+
+absent from the shared-cut hinge. This second-quadrant correction prevents the
+coefficientwise phase comparison used in the hinge proof.

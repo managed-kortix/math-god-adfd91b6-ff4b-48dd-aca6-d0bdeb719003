@@ -114,6 +114,20 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     proved mixed lower-rank/common-cut/packing-one bounds. Then revisit the
     `6+28+1` residual templates with theorem-derived ledgers and recursive
     adhesion owners.
+23. The shared-cut hinge extends to triangular root `y=x`, but does not apply
+    to remote pentagons merely sharing an entry mark. A theorem-aware search
+    leaves six of 43151 `P|A_9|P` rows, with smallest
+    `X[AB](T()^9)`. Attack the packing-one separated two-interface polynomial
+    `(Z+4C-4D)+i(2(B-A)+8E)`. The joint-cycle homotopy is phase-increasing on
+    the smallest fan, so do not delete it. Develop a winding-sensitive two-
+    pivot Schur/message inequality or a direct integrated estimate retaining
+    `D-2iE`.
+24. The six rank-eleven `P|A_9|P` rows do not require that analytic theorem:
+    two split as `TP +` packing-one `A_7P`, and four open one pentagon while
+    retaining packing-one `A_9P`. The completed fail-closed census is
+    `43151=43145+6`. Integrate this endpoint with `A_10|Q`, `T^9P|P`, and the
+    fully shared families; identify the exact remaining rank-eleven marked
+    endpoint. Do not infer an all-rank `T^rPP` theorem.
 
 ## Running jobs
 
