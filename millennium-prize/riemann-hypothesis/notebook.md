@@ -4113,6 +4113,22 @@ numerators; generic Gram positivity controls only the denominator/frame side.
 Details are in `cycle-42-correlation-preserving-packet-lower-bound.md`. No RH
 result is claimed.
 
+## Cycle 62: a historical tail crossing and exact completion
+
+Exact rational constraints and 320-bit Arb certify
+`Omega_[220,880]-(beta_2+delta)>0.00127571527` on `[220,231)`; the first found
+integer crossing is `N=742`. This yields a compact finite physical certificate
+for that historical block only. Three other positive-target stress windows do
+not cross through `16M`.
+
+The complete pure tail is itself a finite Vasyunin Schur complement, while
+finite constrained supports are dense when constraints are defined through
+actual `L^2` rows rather than divergent split moments. Adding the unique
+below-`M` boundary scalar gives an exact rank-one Schur formula for the full
+post-staircase residual `R`. Details and reproduction are in
+`cycle-62-certified-tail-innovations.md` and
+`verify_cycle62_tail_innovations.py`. No RH result is claimed.
+
 ## Cycle 61: sparse jumps remain weak; global innovations survive
 
 Exact rational/Arb optimization at cells `nq+e` found better scores per cell,

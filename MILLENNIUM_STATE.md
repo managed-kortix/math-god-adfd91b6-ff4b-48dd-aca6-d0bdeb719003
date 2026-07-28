@@ -137,7 +137,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 61
+- **cycle:** 62
 - **announcements:** none
 
 ## immutable target list
@@ -156,10 +156,10 @@ waiting process.
 
 ## next exact steps
 
-1. Compute the nested global-tail innovation increments and seek a blockwise
-   arithmetic lower bound for their sum, equivalently a positive angle between
-   the Möbius score and the closed divisor-floor row space; bounded sparse
-   patterns are now empirically inadequate.
+1. Compute or tightly enclose complete-tail and boundary Schur terms for the
+   three remaining positive-target stress windows, then search for a dyadic
+   innovation inequality that is stable under scaling rather than extrapolating
+   finite ratios.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -174,6 +174,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-28: Cycle 62 produced a durable exact-rational/Arb verifier and
+  certified that the finite tail through cell 880 pays the full lag-two target
+  for historical window `[220,231)`, with strict normalized margin
+  `0.00127571527`; the first found endpoint is 742. Three other positive-target
+  windows remain unpaid through `16M`. The pure infinite tail reduces to a
+  finite Vasyunin Schur complement, and adding one rigorously normalized
+  boundary scalar recovers the full residual exactly. This is finite evidence
+  and operator bookkeeping, not a uniform theorem. No RH result is claimed.
 
 - 2026-07-28: Cycle 61 optimized sparse surplus cells at floor-signature jumps.
   Strong singles and pairs exist, but sixteen greedy sparse cells pay only
