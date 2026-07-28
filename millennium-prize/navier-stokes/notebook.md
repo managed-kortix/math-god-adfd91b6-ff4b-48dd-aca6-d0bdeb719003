@@ -148,3 +148,13 @@ derivative to positive finite-time relative `L^3` growth at large amplitude.
 On bounded rescaled intervals amplification converges to a finite Euler factor,
 so amplitude alone cannot make it unbounded. This smooth two-dimensional family
 gives no blowup or regularity result.
+
+## Bounded scout cycle 63
+
+The invariant two-dimensional ansatz has uniformly bounded long-time `L^3`
+amplification for each fixed datum and every effective viscosity. Vorticity
+`L^(6/5)` is conserved for Euler and nonincreasing for Navier--Stokes, while
+periodic Biot--Savart maps it to velocity `L^3`. Hence neither amplitude nor
+arbitrarily long rescaled time can make the Cycle 43 profile amplify without
+bound. The estimate is data-dependent, and vorticity rearrangement alone gives
+no universal factor. This closes this ansatz, not Navier--Stokes.

@@ -112,3 +112,13 @@ For sign `+1`, the Mazur--Tate functional equation modulo the augmentation
 square gives `2B_n=-c_nA_n mod 5^n`. Thus exact all-level augmentation
 vanishing forces tangent vanishing for `389a1`; bare Manin relations do not
 prove the needed constant moment. No BSD case is proved.
+
+## Bounded scout cycle 63
+
+Ordinary interpolation gives `F_E(0)=(1-alpha^-1)^2 L(E,1)/Omega_E^+` up to a
+fixed nonzero normalization. For `389a1` at `p=5`, `alpha!=1`, so exact
+all-level augmentation vanishing is equivalent to `L(E,1)=0`. Root number `+1`
+alone does not force this. A certified non-torsion rational point would imply
+the vanishing noncircularly by the contrapositive of the rank-zero Gross--
+Zagier--Kolyvagin theorem; interpolation and Cycle 59 would then kill both
+constant and tangent moments. This is no BSD proof.

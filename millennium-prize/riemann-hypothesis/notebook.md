@@ -4129,6 +4129,21 @@ post-staircase residual `R`. Details and reproduction are in
 `cycle-62-certified-tail-innovations.md` and
 `verify_cycle62_tail_innovations.py`. No RH result is claimed.
 
+## Cycle 63: exact complete-tail split
+
+The complete tail and unique boundary scalar were evaluated independently from
+the restricted Vasyunin Gram. The exact decomposition reproduces the full
+post-staircase residual on four stress windows. Completed `R` pays the lag-two
+sufficient target on `[219,231)`, `[220,231)`, and `[222,226)`, but not on the
+positive singleton `[98,99)`. Pure tail alone pays only `[220,231)`.
+
+Dyadic dilation supplies no generic innovation ratio because odd rows can erase
+the transported even innovation; any ratio theorem must bound an explicit odd-
+Möbius covariance remainder. A bounded two-cell jump witness proves only the
+weak unconditional scale `Omega_infinity >> M^-2`, insufficient for fixed-
+strength renewal. Durable values and tests are in
+`cycle-63-complete-tail-certificate.md`. No RH result is claimed.
+
 ## Cycle 61: sparse jumps remain weak; global innovations survive
 
 Exact rational/Arb optimization at cells `nq+e` found better scores per cell,

@@ -124,3 +124,13 @@ converge. Collective compactness or positive trace convergence suffices;
 individual compactness and a uniform trace bound do not, by an escaping
 eigenvalue counterexample. No Yang--Mills cutoff is shown to satisfy the
 sufficient hypotheses, so no mass gap is proved.
+
+## Bounded scout cycle 63
+
+Collective compactness of cutoff resolvents is equivalent to uniform spatial
+tightness of every bounded-energy spectral projector relative to one fixed
+finite-rank exhaustion. Under a uniform high-energy heat-tail bound, this is
+equivalent to spatial heat-trace tightness. Scalar heat-trace bounds alone fail:
+an escaping zero-energy eigenvector preserves uniform traces and strong
+resolvent convergence while destroying collective compactness. No Yang--Mills
+cutoff is shown to satisfy spatial tightness, so no mass gap is proved.

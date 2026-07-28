@@ -137,7 +137,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 62
+- **cycle:** 63
 - **announcements:** none
 
 ## immutable target list
@@ -156,10 +156,10 @@ waiting process.
 
 ## next exact steps
 
-1. Compute or tightly enclose complete-tail and boundary Schur terms for the
-   three remaining positive-target stress windows, then search for a dyadic
-   innovation inequality that is stable under scaling rather than extrapolating
-   finite ratios.
+1. Attack the explicit odd-row/odd-Möbius dilation remainder controlling
+   consecutive dyadic innovations; generic dilation and interlacing are now
+   proved insufficient, while complete-tail values are exactly known on four
+   stress windows.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -174,6 +174,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-28: Cycle 63 evaluated the exact complete-tail and boundary Schur
+  split on four stress windows and independently reproduced full `R`. Completed
+  `R` pays the lag-two sufficient target on `[219,231)`, `[220,231)`, and
+  `[222,226)`, but not on endpoint-sensitive `[98,99)`; pure tail alone pays
+  only `[220,231)`. A Cycle 62 target decimal was corrected by `1.07e-8`
+  without changing its crossing. Generic dyadic ratios were refuted by odd-row
+  dilation countermodels, while a bounded jump witness proves only the weak
+  unconditional scale `Omega_infinity >> M^-2`. All five bounded scouts
+  advanced. No RH result is claimed.
 
 - 2026-07-28: Cycle 62 produced a durable exact-rational/Arb verifier and
   certified that the finite tail through cell 880 pays the full lag-two target

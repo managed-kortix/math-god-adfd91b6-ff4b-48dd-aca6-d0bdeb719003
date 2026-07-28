@@ -15,18 +15,18 @@ For `[M,B)=[220,231)`, at 320-bit precision,
 =0.0199129219732127171093129916316\ldots,
 \]
 
-while the exact physical target is
+while the corrected exact physical target is
 
 \[
 \beta_2+\delta_{220,231}
-=0.0186372067026351066091997\ldots.
+=0.0186371960000083830592811401588\ldots.
 \]
 
 Arb certifies
 
 \[
 \boxed{\Omega_{[220,880]}-(\beta_2+\delta)
->0.0012757152705776105001133369.}                  \tag{62.1}
+>0.0012757259732043340500318514.}                  \tag{62.1}
 \]
 
 The first integer endpoint found by the same nested computation is `N=742`.
@@ -131,10 +131,11 @@ orthogonal decomposition of feasible vectors gives
 {\delta_M^2\over(M-1)^{-1}+\|u_M\|^2}.}            \tag{62.5}
 \]
 
-Equality is exact because components below `M` orthogonal to both `phi_M` and
-`g_M` pair with neither the physical score nor any constraint and only increase
-the norm. Formula (62.5) closes the topology/bookkeeping gap, but supplies no
-lower bound for either term.
+Equality is exact because, after extracting `g_M`, the physical score and every
+constraint row restrict below `M` to the `phi_M` line. Components orthogonal to
+both `phi_M` and `g_M` therefore pair with neither and only increase the norm.
+Formula (62.5) closes the topology/bookkeeping gap, but supplies no lower bound
+for either term.
 
 The remaining problem is quantitative: prove that the finite-tail innovations
 or the compensated boundary channel pay every additive-12 deficit uniformly.

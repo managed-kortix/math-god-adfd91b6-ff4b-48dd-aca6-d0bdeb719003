@@ -133,3 +133,13 @@ Any nonuniform gadget tree with `L` sample copies, total input length `M=LN`,
 and total gadget complexity `S` obeys `c(T(A_N))<=L c(A_N)+S`. Growing arity
 cannot amplify exponent `a` beyond `max(a,b)` when `S<=M^(b+o(1))`; the gadgets
 must already import the larger hardness. This proves no circuit lower bound.
+
+## Bounded scout cycle 63
+
+For an acyclic composition DAG, substituting one fitting circuit per distinct
+call node gives `c(B_D)<=S(D)+sum_u c(A_u)`. Free fanout and DAG sharing only
+improve this bound. With direct external calls and maximum coordinate overlap
+`Delta`, base exponent `a` becomes at most `a+log_M Delta`; subpolynomial
+overlap cannot amplify it. Polynomially many heavily overlapping or nested
+calls remain the only black-box escape and would require a new direct-sum lower
+bound robust to cross-instance sharing. No P-versus-NP result follows.

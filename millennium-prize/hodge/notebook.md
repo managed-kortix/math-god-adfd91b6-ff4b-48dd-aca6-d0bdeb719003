@@ -112,3 +112,15 @@ formal equality: a nonzero quotient ideal in the regular local domain strictly
 lowers dimension. Reduced equidimensionality alone fails for a component of
 `Spf C[[x,y]]/(xy)`. The Hodge route still lacks the required branch inclusion
 and dimension equality. No Hodge case is proved.
+
+## Bounded scout cycle 63
+
+For the cubic-fourfold plane class, the universal relative plane gives a
+scheme-theoretic inclusion of the incidence branch into its Hodge germ. Since
+the incidence branch is a smooth divisor, equality is equivalent to nonzero
+normal infinitesimal-period functional
+`v -> Q(gamma,theta_v(omega))`. The Jacobian-ring multiplication and perfect
+Macaulay pairing make this functional nonzero for every nonzero primitive
+class; `gamma=3[P]-h^2` has square `24`. Thus the selected formal plane branch
+equals its selected Hodge germ. This says nothing about arbitrary Hodge
+components and proves no Hodge-conjecture case.

@@ -31,6 +31,12 @@ class Cycle62TailInnovationTests(unittest.TestCase):
         omega = cumulative_omega(220, 231, 254, 192)
         self.assertTrue(agrees_with_published_k24(omega), omega)
 
+    def test_corrected_exact_physical_target(self):
+        self.assertEqual(
+            PUBLISHED_CROSSING_THRESHOLD,
+            "0.0186371960000083830592811401588",
+        )
+
     def test_reduced_first_crossing_is_certified(self):
         before = cumulative_omega(220, 231, 741, 192)
         crossing = cumulative_omega(220, 231, 742, 192)
