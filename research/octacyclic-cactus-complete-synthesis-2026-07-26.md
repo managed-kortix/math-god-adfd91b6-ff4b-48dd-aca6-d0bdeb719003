@@ -18,9 +18,10 @@ T=C3, P=C5, delta=sqrt(5)-2<1/4.
 s+(G)>|V(G)|.
 ```
 
-This proof does not use the retracted all-rank rooted hostile-cycle guard. In
-particular, it does not use the false assertion that maximum triangle packing
-forces every nearest-cycle Voronoi territory to have packing number one. The
+This proof does not use the then-retracted, now restored, all-rank rooted
+hostile-cycle guard. In particular, it does not depend on the now-verified
+assertion that maximum triangle packing forces every nearest-cycle Voronoi
+territory to have packing number one. The
 only hostile-cycle packet used below is the standalone packing-one Sachs packet, and
 its packing-one hypothesis is checked directly for a common-cut triangle
 bouquet. The disconnected two-pentagon family is proved instead by the global
@@ -31,7 +32,7 @@ resolutions.
 ### Theorem-source locator
 
 The publication proof uses the following four provenance packages. The old
-uncut `877=868+9` / E1--E9 artifacts and the retracted all-rank guard are not
+uncut `877=868+9` / E1--E9 artifacts and the all-rank guard are not
 dependencies.
 
 | proof role | authoritative source | scope used here |
@@ -214,7 +215,7 @@ packing-one hostile packet directly, with `a=7`. It gives
 sigma(G7Q)>7-delta_q>0.                              (4.3)
 ```
 
-This is not an application of the retracted all-rank theorem: the hypothesis of
+This is not an application of the all-rank theorem: the hypothesis of
 the retained packing-one lemma is verified on the packet itself, and that lemma
 already allows the arbitrary joining path and all attached trees. If `Q` is
 even or `3 mod 4` (including `Q=T`), its unicyclic packet is nonnegative and

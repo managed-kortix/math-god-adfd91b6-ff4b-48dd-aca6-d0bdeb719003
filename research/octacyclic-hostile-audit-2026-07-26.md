@@ -11,7 +11,8 @@ satisfies
 s+(G)>|V(G)|.
 ```
 
-The proof does not use the retracted all-rank rooted hostile-cycle guard. Its
+The proof does not use the then-retracted, now restored, all-rank rooted
+hostile-cycle guard. Its
 hostile packing-one input is the standalone theorem in
 `research/octacyclic-packing-one-hostile-cycle-lemma-2026-07-26.md`. In its sole
 application, the seven retained triangles form a common-cut bouquet, so their

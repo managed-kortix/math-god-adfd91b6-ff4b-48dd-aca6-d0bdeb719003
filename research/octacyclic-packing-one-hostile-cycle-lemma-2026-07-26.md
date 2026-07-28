@@ -39,8 +39,10 @@ the triangles. The hypothesis is automatic for a common-cut triangle bouquet,
 but the lemma is not restricted to bouquets. It makes no assertion for a
 triangular lobe containing two vertex-disjoint triangles, for two hostile
 cycles, or for an arbitrary-rank decomposition into packing-one territories.
-In particular, this theorem is independent of the retracted Voronoi argument in
-`research/rooted-hostile-cycle-guard-absorption-2026-07-26.md`.
+In particular, this theorem is independent of the all-rank Voronoi argument in
+`research/rooted-hostile-cycle-guard-absorption-2026-07-26.md`.  That argument
+was temporarily retracted on 2026-07-26 and restored after hostile audit on
+2026-07-28; no part of the present proof depends on either status.
 
 ## Proof
 
@@ -182,4 +184,4 @@ For the octacyclic proof this lemma is used only for the bridge-separated
 `G7Q` packet: seven triangles share one cut and an arbitrary joining path leads
 to one hostile `Q`. The common-cut `T^kQ` theorem used for fully shared
 configurations is a different theorem with a different hypothesis. No claim
-from the retracted all-rank extension is needed or inherited here.
+from the all-rank extension is needed or inherited here.
