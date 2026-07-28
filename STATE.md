@@ -56,6 +56,29 @@ research/semantic, research/procedural).
   split is `PP +` a strict triangular territory.  See
   `research/rooted-hostile-cycle-retraction-correction-2026-07-28.md` and
   `research/incidence-demand-coalescence-scope-2026-07-28.md`.
+- 2026-07-28: reconciled an unauthorized extra `math-god` root. Its committed
+  `A_10|Q` work was preserved by cherry-pick before the root was deleted; the
+  registered three-core fleet is again exact. A hostile audit found that the
+  recovered endpoint verifier's provisional pure-triangle score could double
+  count the packet carrying `Q`. Added a theorem-aware post-ownership ledger:
+  `TQ` strict, `TTQ` nonnegative, and mixed ranks 4--10 strict. All 12089
+  ordinary rows remain positive; normal and `-O` reproduce the new frozen
+  ledger digest. Residual cut-owner and strictness checks were strengthened.
+  The endpoint remains `12099=12089+10` and is now audit-hardened.
+- 2026-07-28: exactly reproduced the next `P|A_9|P` provisional frontier
+  `43151=43116+35`, with residual shapes `6+28+1`, but rejected an attempted
+  endpoint closure after a hostile audit: 41863 provisionally accepted rows put
+  a pentagon into a credited triangular packet, so the pure `A_k` score is not
+  itself a mixed-packet theorem. Preserved the exact counts, obstruction, and
+  corrected certificate specification in
+  `research/rank-eleven-a9-two-interface-frontier-2026-07-28.md`; no endpoint
+  theorem is claimed.
+- 2026-07-28: completed the daily publication review. Neither tracked expert
+  thread has a reply; one OpenAI sign-in alert was reviewed and archived
+  without deletion, restoring inbox zero. OCB's first 25-record page is
+  reachable and contains neither pending AKMPZ statement, but its generated
+  next cursor currently returns HTTP 400, so no complete-public-inventory claim
+  is made. No outgoing mail.
 - 2026-07-26: advanced the rank-eleven cactus frontier by closing G3, the full
   `T^9PP` ladder inheritance problem. All ten fully shared ordinary-ledger
   exceptions now have positive graph-level packetizations with final owners.

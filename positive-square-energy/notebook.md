@@ -1,5 +1,23 @@
 # notebook — positive square energy
 
+## 2026-07-28 — theorem-aware endpoint ledgers
+
+Recovered and hardened the rank-eleven `A_10|Q` endpoint certificate. The
+original provisional router credit was unsafe when the marked `Q` entered the
+same packet supplying pure `A_k` credit. Final owners are now materialized
+first; the `Q` packet is then evaluated as `TQ` (strict), `TTQ`
+(nonnegative), or a connected mixed rank 4--10 packet (strict), while a
+separate `Q` is charged once. All `12099=12089+10` rows still close and the new
+ordinary theorem-ledger digest is frozen.
+
+The same audit was applied before accepting `P|A_9|P`. Its exact provisional
+census is `43151=43116+35`, with 35 rows on bouquet, saturated-extension, and
+double-leaf shapes. But 41863 of the 43116 scored rows attach at least one
+pentagon to a positively credited triangular packet. Thus `credit-2delta` is
+not yet a theorem for those mixed packets. The attempted closure verifier was
+deleted; the exact obstruction and fail-closed redesign are preserved in
+`research/rank-eleven-a9-two-interface-frontier-2026-07-28.md`.
+
 ## 2026-07-26 — rank-eleven fully shared ladder closure
 
 Closed Gap G3 in the rank-eleven cactus induction. All ten fully shared

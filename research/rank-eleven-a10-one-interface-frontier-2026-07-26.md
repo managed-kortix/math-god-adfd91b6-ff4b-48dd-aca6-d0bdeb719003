@@ -90,8 +90,22 @@ connector has exactly one terminal owner. The complete owner ledger has digest
 9600bb00f1f1fbf6e4cc74141fa2a4a27be9c781b785076492dff35021077479.
 ```
 
-Since the hostile unicyclic deficit is strictly less than one, the `12089`
-ordinary rows have strict positive surplus.
+The ordinary audit does not add a pure triangular margin and a hostile deficit
+when `Q` belongs to that same packet. After final ownership is known, it
+replaces the `Q`-owner's pure `A_k` margin by the applicable mixed theorem:
+`TQ` is strict, `TTQ` is nonnegative, and a connected mixed packet with three
+through nine triangles has rank four through ten and is strict. If `Q` is a
+separate interval, its deficit is charged once and all triangular packet credit
+remains available. This theorem-aware ledger is checked row by row and has
+digest
+
+```text
+c54266b5b9607875408e9b04702efc97198476b6429d832591006fa2acea93eb.
+```
+
+This repairs a genuine audit vulnerability in the first certificate, whose
+provisional pure-triangle score could otherwise double count the packet carrying
+`Q`. Every one of the `12089` ordinary rows still has strict positive surplus.
 
 ## Residual geometry and proof firewall
 
@@ -116,8 +130,12 @@ The hostile ledgers are respectively `>10-delta_q`, strict zero sums,
 strict zero sums, and `>6-delta_q` after two exact tree costs. Here
 `0<delta_q<1`. Each opened leaf contributes exactly one nonempty induced tree
 of surplus `-1`; each router split uses proper triangle intervals. The verifier
-checks exact cycle coverage, every cut owner, the unique Q/connector owner,
-common-hub packing-one hypotheses, terminal profiles, and symbolic ledgers. The
+checks exact cycle coverage, verifies that each retained cut owner agrees with
+its unique incident retained packet, and checks the unique Q/connector owner,
+common-hub packing-one hypotheses, terminal profiles, and symbolic ledgers.
+Residual interval geometry is supplied by the invariant one-, two-, and
+three-cut templates and the proper-interval router theorem; the finite script
+does not claim to enumerate arbitrary off-hull trees. The
 repair digest is
 
 ```text
