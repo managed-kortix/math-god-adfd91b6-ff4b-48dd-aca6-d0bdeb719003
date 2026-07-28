@@ -137,7 +137,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 66
+- **cycle:** 67
 - **announcements:** none
 
 ## immutable target list
@@ -156,10 +156,9 @@ waiting process.
 
 ## next exact steps
 
-1. Compare the exact nested rank-one losses of the physical Schur residual
-   `R_(M,r)` against changes in the independently computed demand
-   `Theta_(M,r)`, or construct demand-aware finite tail-plus-boundary witnesses;
-   auxiliary covariance may guide witnesses but is not reserve bookkeeping.
+1. Bound the exact physical demand increment (67.1), cumulatively if necessary,
+   against the rank-one reserve payments; target the payment-adjusted demand
+   barrier rather than false convexity or endpoint monotonicity.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -174,6 +173,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-28: Cycle 67 derived the exact endpoint demand increment and showed
+  how its new projection square cancels the standalone rank-one reserve loss,
+  leaving a signed physical correlation. It also proved the sharp twelve-step
+  payment-adjusted demand barrier. A durable independent Vasyunin/Arb verifier
+  reconstructs reserve, demand, and stored budgets for all eleven hard starts
+  and checks every Schur payment. Demand drops dominate reserve losses in all
+  120 observed favorable transitions, but twelve setbacks and nonmonotone
+  success at `M=222` rule out naive monotone stopping. No RH result is claimed.
 
 - 2026-07-28: Cycle 66 corrected the attempted transfer from dyadic covariance
   to short adaptive windows. The exact physical identity is

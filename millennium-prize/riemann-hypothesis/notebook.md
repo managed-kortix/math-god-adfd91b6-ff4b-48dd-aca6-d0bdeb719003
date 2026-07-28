@@ -4177,6 +4177,21 @@ sign, so negativity is favorable. The next target is the exact adaptive
 packets. Details are in `cycle-65-centered-covariance-sign.md`. No RH result is
 claimed.
 
+## Cycle 67: exact reserve-demand barrier
+
+The endpoint demand now has an exact online increment formula. Combining it
+with the rank-one reserve loss cancels the standalone old-`D` square and leaves
+a signed new-row correlation plus variance, center-shift, normalization, and
+`U`-cost terms. Over a finite horizon, success is exactly comparison with the
+minimum payment-adjusted demand `Theta_r+sum p_j`.
+
+A durable independent Vasyunin/Arb verifier reconstructs both `R` and `Theta`
+for all eleven hard starts, checks `S=A(R-Theta)`, and certifies every rank-one
+payment. Demand drops dominate reserve losses on all 120 observed decreasing-
+demand transitions, but twelve adverse moves and the nonmonotone `M=222` path
+rule out naive stopping rules. Details are in
+`cycle-67-reserve-demand-barrier.md`. No RH result is claimed.
+
 ## Cycle 66: return to the physical adaptive threshold
 
 The dyadic centered covariance does not canonically become the short cutoff
