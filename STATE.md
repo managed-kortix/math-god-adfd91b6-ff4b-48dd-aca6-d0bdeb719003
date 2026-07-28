@@ -29,7 +29,9 @@ research/semantic, research/procedural).
   expansion, exact cycle value, and full support contraction explicitly.  Fresh
   spectral, topology, and ultimate theorem gates all approved; PDF builds.
   Paper: `all-rank-triangle-hostile-cacti/`.  The remaining all-rank cactus
-  obstruction is the two-pentagon family `T^rPP`.
+  obstruction is the two-pentagon family `T^rPP`.  Published and API-readback
+  verified at X post `2082056394417569823`; direct folder and PDF links both
+  return HTTP 200 on public `main`.
 - 2026-07-28: restored the all-rank one-root hostile-cycle guard theorem after
   two independent hostile audits exposed that its 2026-07-26 retraction was
   itself wrong.  In a maximum-packing Voronoi territory, two disjoint cycles
