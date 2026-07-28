@@ -21,8 +21,10 @@ For `n>1`, Bertrand's postulate gives a prime `n/2<p<=n`. In the integer
 L_nm_n=\sum_{a\le n}\mu(a)L_n/a,
 \]
 
-every term except `a=p` is divisible by `p`: no other `a<=n` is divisible by
-`p`. The surviving term is `-L_n/p`, nonzero modulo `p` because `p^2>n`.
+Because `p>n/2`, the only multiple of `p` among `1,...,n` is `p`; because
+`p^2>n`, the `p`-adic valuation of `L_n` is exactly one. Hence `p` divides
+`L_n/a` for every `a!=p`, while it does not divide `L_n/p`. The surviving term
+is therefore `-L_n/p`, nonzero modulo `p`.
 The case `n=1` is immediate.
 
 Consequently the Cycle 59 matched-shell equation `m_(B-1)A=0` always forces

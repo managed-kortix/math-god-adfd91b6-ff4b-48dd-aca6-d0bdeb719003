@@ -137,7 +137,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 60
+- **cycle:** 61
 - **announcements:** none
 
 ## immutable target list
@@ -156,9 +156,10 @@ waiting process.
 
 ## next exact steps
 
-1. Search sparse surplus cells at floor-signature jumps `j=nq`, using the Cycle
-   60 reduced Schur score, and determine whether any bounded sparse pattern can
-   pay `beta_2+delta` or whether a global-tail theorem is forced.
+1. Compute the nested global-tail innovation increments and seek a blockwise
+   arithmetic lower bound for their sum, equivalently a positive angle between
+   the Möbius score and the closed divisor-floor row space; bounded sparse
+   patterns are now empirically inadequate.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -173,6 +174,14 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-28: Cycle 61 optimized sparse surplus cells at floor-signature jumps.
+  Strong singles and pairs exist, but sixteen greedy sparse cells pay only
+  `1.31%--3.48%` of the four critical targets and underperform consecutive
+  shells. A fixed-sparse theorem isolates compensated Möbius correlations as
+  the only possible source of decay. The full infinite tail admits an exact
+  constrained-operator dual and orthogonal innovation Parseval sum, preserving
+  a possible constant-scale global accumulation route. No RH result is claimed.
 
 - 2026-07-28: Cycle 60 proved unconditionally that
   `sum_(a<=n)mu(a)/a` never vanishes, completing the corrected matched-shell

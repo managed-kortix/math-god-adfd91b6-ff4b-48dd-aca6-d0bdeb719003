@@ -4113,6 +4113,21 @@ numerators; generic Gram positivity controls only the denominator/frame side.
 Details are in `cycle-42-correlation-preserving-packet-lower-bound.md`. No RH
 result is claimed.
 
+## Cycle 61: sparse jumps remain weak; global innovations survive
+
+Exact rational/Arb optimization at cells `nq+e` found better scores per cell,
+but sixteen greedily selected sparse jumps pay only `1.31%--3.48%` of the four
+critical targets, less than 24 consecutive surplus cells. A fixed-sparse upper
+bound shows that decay requires cancellation in explicit compensated Möbius
+divisor-floor coefficients; floor geometry alone is insufficient.
+
+Passing to all affine tail cells gives an exact operator dual and a Parseval
+decomposition into orthogonal constrained innovations. Infinitely many weak
+innovations can still accumulate to constant scale, so finite sparse failure
+does not kill the global-tail route. The missing input is a global arithmetic
+angle estimate against the closed floor-row span. Details are in
+`cycle-61-sparse-jumps-and-global-tail.md`. No RH result is claimed.
+
 ## Cycle 54: explicit cell witnesses capture only a small reserve component
 
 On each reciprocal cell `k<t<k+1<M`, every new row and `U_(M-1)` is a multiple
