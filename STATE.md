@@ -16,6 +16,18 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-28: after the all-rank `T^rQ` theorem, attacked the remaining
+  `T^rPP` frontier.  A proposed complete path/endpoint splitting proof was
+  rejected by four hostile audits.  The exact infinite obstruction is the
+  two-cut hinge `A-y-P1-x-P2`, `x!=y`, with arbitrary nonempty triangular
+  cactus `A`.  Splitting `P1`, opening either pentagon, maximum-packing
+  Voronoi, and the rooted one-hostile theorem all close only to `>-delta`,
+  `delta=sqrt(5)-2`; qualitative triangular strictness cannot pay it.  The
+  remaining target is a rooted two-pentagon hinge packet.  Its packing-one
+  Sachs expansion contains a negative `PP` real term and positive triple-cycle
+  imaginary term, blocking the coefficientwise one-hostile argument.  See
+  `research/all-rank-tpp-obstruction-2026-07-28.md`; no all-rank `T^rPP`
+  theorem is claimed.
 - 2026-07-28: proved the all-rank one-hostile cactus theorem.  Every connected
   cactus whose cyclic blocks are `r>=1` triangles and one
   `Q=C_(4k+1)`, `q>=5`, with arbitrary shared-cut incidence, bridge connectors,
