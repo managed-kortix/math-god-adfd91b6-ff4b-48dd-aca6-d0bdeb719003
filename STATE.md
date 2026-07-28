@@ -16,6 +16,20 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-28: proved the all-rank one-hostile cactus theorem.  Every connected
+  cactus whose cyclic blocks are `r>=1` triangles and one
+  `Q=C_(4k+1)`, `q>=5`, with arbitrary shared-cut incidence, bridge connectors,
+  and attached trees, satisfies `s+(G)>|V(G)|`.  Multiple shared-cut clusters
+  are handled by actual-bridge leaf induction, with the singleton-`Q` endpoint
+  closed by the restored rooted guard theorem.  In one cluster, one `Q` cut is
+  rooted; two or more cuts permit consecutive-interval destruction of `Q`,
+  leaving strict triangular territories.  The first manuscript was rejected
+  for compressed analytic and cluster-support definitions; the revision proves
+  the signed Coulson identity, matching-message elimination, weighted Sachs
+  expansion, exact cycle value, and full support contraction explicitly.  Fresh
+  spectral, topology, and ultimate theorem gates all approved; PDF builds.
+  Paper: `all-rank-triangle-hostile-cacti/`.  The remaining all-rank cactus
+  obstruction is the two-pentagon family `T^rPP`.
 - 2026-07-28: restored the all-rank one-root hostile-cycle guard theorem after
   two independent hostile audits exposed that its 2026-07-26 retraction was
   itself wrong.  In a maximum-packing Voronoi territory, two disjoint cycles

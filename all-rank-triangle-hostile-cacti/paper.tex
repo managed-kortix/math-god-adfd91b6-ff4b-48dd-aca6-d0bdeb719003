@@ -1,0 +1,482 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\splus}{s^+}
+\newcommand{\sminus}{s^-}
+\newcommand{\sig}{\sigma}
+\newcommand{\Arg}{\operatorname{Arg}}
+
+\title{Cacti with Arbitrarily Many Triangles and One Hostile Cycle}
+\author{}
+\date{28 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $G$ be a connected cactus whose cyclic blocks are $r\geq1$ triangles and
+one cycle $C_q$, where $q=4k+1\geq5$.  The cyclic blocks may share cut
+vertices in arbitrary incidence topology, bridge paths may have arbitrary
+length, and arbitrary finite trees may be attached throughout.  We prove
+\[
+ \splus(G)>|V(G)|.
+\]
+The proof is rank-uniform.  A maximum-packing Voronoi partition proves strict
+positivity for every triangular cactus and yields a rooted guard theorem for
+one hostile cycle.  At the global level, actual bridges remove triangular leaf
+clusters inductively.  In the remaining shared-cut cluster, one interface is
+handled by the rooted theorem, while two or more interfaces allow the hostile
+cycle itself to be split into consecutive intervals, leaving only strict
+triangular induced territories.  Every cut, connector remnant, and attached
+tree receives exactly one owner.
+\end{abstract}
+
+\section{Statement and basic facts}
+
+All graphs are finite, simple, and undirected.  For the adjacency eigenvalues
+$\lambda_1,\ldots,\lambda_n$ of a graph $H$, put
+\[
+ \splus(H)=\sum_{\lambda_i>0}\lambda_i^2,
+ \qquad
+ \sminus(H)=\sum_{\lambda_i<0}\lambda_i^2,
+ \qquad
+ \sig(H)=\splus(H)-|V(H)|.
+\]
+A cactus is a graph whose blocks are bridges, isolated vertices, or cycles.
+Its cyclomatic number is the number of cyclic blocks.
+
+\begin{theorem}\label{thm:main}
+Let $G$ be a connected cactus whose cyclic blocks are $r\geq1$ copies of
+$C_3$ and one copy of $Q=C_q$, where $q=4k+1\geq5$.  Allow arbitrary bridge
+connectors and arbitrary finite trees attached at arbitrary vertices.  Then
+\[
+ \boxed{\splus(G)>|V(G)|}.
+\]
+\end{theorem}
+
+We use square-energy superadditivity on induced vertex partitions.
+
+\begin{lemma}[Induced-partition superadditivity]\label{lem:super}
+If $V(H)=V_1\dot\cup\cdots\dot\cup V_t$, then
+\[
+ \splus(H)\geq\sum_{j=1}^t\splus(H[V_j]),
+ \qquad
+ \sig(H)\geq\sum_{j=1}^t\sig(H[V_j]).
+\]
+\end{lemma}
+
+\begin{proof}
+For a real symmetric matrix $A$, its positive spectral part satisfies
+\[
+ \operatorname{tr}(A_+^2)
+ =\max_{X\succeq0}\bigl(2\operatorname{tr}(AX)-\operatorname{tr}(X^2)\bigr).
+\]
+This follows by diagonalizing $A$: deleting the off-diagonal entries of the
+positive semidefinite test matrix preserves positive semidefiniteness and only
+increases the objective, after which the scalar maximizers are
+$x_i=\max(\lambda_i,0)$.
+
+Order the vertices by the partition, let $A=A(H)$, and put
+$B=\operatorname{diag}(A(H[V_1]),\ldots,A(H[V_t]))$.  Testing the variational
+formula with $X=B_+$ gives
+\[
+ \splus(H)\geq2\operatorname{tr}(AB_+)-\operatorname{tr}(B_+^2)
+ =\operatorname{tr}(B_+^2)=\sum_j\splus(H[V_j]),
+\]
+because $B_+$ is block diagonal and the off-block entries of $A$ do not
+contribute to the trace.  Subtracting the partitioned vertex count proves the
+second inequality.
+\end{proof}
+
+\section{Triangular territories}
+
+For a graph $F$ of order $n$, put
+\[
+ \Psi_F(t)=i^{-n}\det(itI-A(F))
+ =\prod_{j=1}^n(t+i\lambda_j),\qquad t>0,
+\]
+and define its continuous phase, tending to zero at infinity, by
+\[
+ \Theta_F(t)=\sum_{j=1}^n\arctan\frac{\lambda_j}{t}.
+\]
+
+\begin{lemma}[Signed Coulson identity]\label{lem:coulson}
+For every graph $F$,
+\[
+ \splus(F)-\sminus(F)
+ =-\frac4\pi\int_0^\infty t\Theta_F(t)\,dt.
+\]
+\end{lemma}
+
+\begin{proof}
+For real $\lambda$,
+\[
+ \lambda|\lambda|=\frac2\pi\int_0^\infty
+       \frac{\lambda^3}{\lambda^2+t^2}\,dt.
+\]
+Also $\Theta_F'(t)=-\sum_j\lambda_j/(\lambda_j^2+t^2)$.  Since
+$\sum_j\lambda_j=\operatorname{tr}A(F)=0$,
+\[
+ \sum_j\frac{\lambda_j^3}{\lambda_j^2+t^2}=t^2\Theta_F'(t).
+\]
+Sum the scalar identity and integrate by parts.  The boundary term vanishes:
+$t^2\Theta_F(t)\to0$ at zero, while the arctangent expansion gives
+$\Theta_F(t)=O(t^{-3})$ at infinity.  These estimates also give convergence.
+\end{proof}
+
+The cycle-packing number $\nu(H)$ is the maximum number of pairwise
+vertex-disjoint cycles in $H$.
+
+\begin{lemma}[Packing-one triangular packet]\label{lem:packing-one}
+Let $H$ be a connected cactus whose $b\geq1$ cyclic blocks are triangles and
+whose cycle-packing number is one.  Arbitrary trees may be attached.  Then
+\[
+ \splus(H)>\sminus(H),\qquad \sig(H)>b-1\geq0.
+\]
+\end{lemma}
+
+\begin{proof}
+For $t>0$, let
+\[
+ Z_F(t)=\sum_M t^{|V(F)|-2|M|},
+ \qquad
+ \Psi_H(t)=i^{-|V(H)|}\det(itI-A(H)),
+\]
+where $M$ ranges over matchings.  Grouping the Sachs expansion by collections
+of vertex-disjoint cycles, a triangle has multiplier $-2i$.  Because no two
+triangles are disjoint,
+\[
+ \Psi_H(t)=Z_H(t)-2i\sum_T Z_{H-V(T)}(t).
+\]
+Every displayed matching partition is positive.  Hence the continuous
+argument $\Theta_H(t)$ of $\Psi_H(t)$, tending to zero at infinity, lies
+strictly in $(-\pi/2,0)$.  Lemma~\ref{lem:coulson}
+\[
+ \splus(H)-\sminus(H)
+ =-\frac4\pi\int_0^\infty t\Theta_H(t)\,dt
+\]
+therefore gives strict positivity.  Since
+$|E(H)|=|V(H)|-1+b$ and
+$\splus(H)+\sminus(H)=2|E(H)|$, the surplus exceeds $b-1$.
+\end{proof}
+
+\begin{lemma}[Maximum-packing territories]\label{lem:voronoi}
+Let $A$ be a connected cactus all of whose cyclic blocks are triangles.  Let
+$T_0,\ldots,T_{m-1}$ be a maximum-cardinality collection of pairwise
+vertex-disjoint triangles.  Assign each vertex $v$ to the lexicographically
+least pair
+\[
+ \bigl(d_A(v,V(T_j)),j\bigr),
+\]
+and let $A_j$ be the induced graph on the vertices assigned to $j$.  Then each
+$A_j$ is connected, contains $T_j$, and has cycle-packing number one.
+If a root $z$ is prescribed and $T_0$ is chosen nearest $z$, then $z\in A_0$.
+\end{lemma}
+
+\begin{proof}
+A predecessor of an assigned vertex on a shortest path to its selected cycle
+has the same owner: distances are one-Lipschitz, and the priority rule resolves
+ties consistently.  Thus every territory is connected and contains its
+selected cycle.  If $A_j$ contained two disjoint cycles $D,E$, then
+\[
+ D,E,\{T_h:h\ne j\}
+\]
+would be a packing larger by one.  Notice that $D,E$ replace $T_j$; they need
+not also be disjoint from it.  The root assertion follows from choosing $T_0$
+with minimum root distance and giving it first priority.
+\end{proof}
+
+\begin{corollary}[All triangular cacti]\label{cor:triangular}
+Every connected cactus containing at least one cyclic block, all cyclic blocks
+being triangles, satisfies $\sig(A)>0$, with arbitrary attached trees.
+\end{corollary}
+
+\begin{proof}
+Apply Lemma~\ref{lem:voronoi}.  Every territory is a packing-one triangular
+cactus retaining at least one triangle, so Lemma~\ref{lem:packing-one} gives
+strictly positive surplus to every territory.  Sum by
+Lemma~\ref{lem:super}.
+\end{proof}
+
+\section{One rooted hostile cycle}
+
+Put
+\[
+ \delta_q=\sec\frac{\pi}{q}-1.
+\]
+For $q\geq5$, $0<\delta_q<1$.
+
+\begin{lemma}[Packing-one hostile packet]\label{lem:hostile-packet}
+Let $H$ be a connected cactus whose cyclic blocks are $Q=C_q$ and $a\geq1$
+triangles, where $q=1\pmod4$.  Suppose no two triangles are vertex-disjoint.
+The cycle $Q$ may meet the triangular part at one cut vertex or be joined to a
+distinguished root of that part by one path.  Arbitrary trees may be attached
+anywhere.  Then
+\[
+ \splus(H)-\sminus(H)>-2\delta_q,
+ \qquad
+ \sig(H)>a-\delta_q\geq1-\delta_q>0.
+\]
+\end{lemma}
+
+\begin{proof}
+Let the \emph{spine} be the subgraph consisting of all cyclic blocks and the
+unique minimal paths joining them.  Every component outside it is a tree with
+one spine attachment; two attachments would create another cycle.  Orient each
+off-spine branch toward the spine.  If $u\to v$ is an oriented branch edge,
+let $T_{u\to v}$ be the component below $u$, including $u$, and define
+\[
+ M_{u\to v}(t)=\frac{Z_{T_{u\to v}}(t)}
+                       {Z_{T_{u\to v}-u}(t)}.
+\]
+Splitting matchings according to whether $u$ is unmatched or matched to one
+child proves the exact recursion
+\[
+ M_{u\to v}(t)=t+\sum_{w\text{ child of }u}
+                   \frac1{M_{w\to u}(t)}\geq t.                 \tag{1}
+\]
+The leaf case is $M=t$.  Extracting all denominators recursively gives a
+common positive factor $K(t)$ and replaces the unmatched-vertex activity at a
+spine vertex by
+\[
+ \alpha_v(t)=t+\sum_{u\text{ branch child of }v}
+                    \frac1{M_{u\to v}(t)}=t+y_v(t),
+ \qquad y_v(t)\geq0.                                           \tag{2}
+\]
+This is an exact matching decomposition.
+
+For positive activities $\alpha=(\alpha_v)$, define
+\[
+ Z_F(\alpha)=\sum_{M\text{ matching of }F}
+                  \prod_{v\text{ unmatched by }M}\alpha_v.
+\]
+It is positive and coordinatewise nondecreasing.  Tree elimination says that
+each Sachs matching carrier is $K(t)$ times the corresponding weighted spine
+carrier.  Let $S=V(Q)$.
+The grouped Sachs expansion has the form
+\[
+ \frac{\Psi_H(t)}{K(t)}=R+2i(B-A),
+\]
+where
+\[
+ B=Z_{\mathrm{spine}-S}(\alpha)>0,
+ \quad
+ A=\sum_T Z_{\mathrm{spine}-V(T)}(\alpha)>0,
+\]
+and
+\[
+ R=Z_{\mathrm{spine}}(\alpha)
+   +4\sum_{T\cap Q=\varnothing}
+       Z_{\mathrm{spine}-(S\cup V(T))}(\alpha)>0.
+\]
+The normalized Sachs multiplier of $C_\ell$ is $-2i^{-\ell}$.  Thus a triangle
+contributes $-2i$, while $q=1\pmod4$ makes $Q$ contribute $+2i$.  A Sachs
+collection uses vertex-disjoint cycles, so it contains at most one triangle.
+The empty collection gives $Z_{\mathrm{spine}}(\alpha)$, singleton $Q$ and
+triangle collections give $2iB$ and $-2iA$, and a disjoint $Q$--triangle pair
+gives $(2i)(-2i)=4$.  These exhaust the expansion and prove the displayed
+formulas.
+
+Let $Z_q(t)$ denote the unweighted matching partition of $C_q$.  Partition
+spine matchings according to whether they use an edge between $S$ and its
+complement.  Those using no such edge factor into a matching on $Q$ and one on
+the vertex-deleted remainder; all remaining matchings have nonnegative weight.
+Thus
+\[
+ Z_{\mathrm{spine}}(\alpha)=Z_Q(\alpha|S)B+E,
+ \qquad E\geq0.
+\]
+Coefficient positivity and $\alpha_v\geq t$ give
+$Z_Q(\alpha|S)=Z_q(t)+L$ with $L\geq0$.  Therefore
+\[
+ R-Z_q(t)(B-A)
+ =E+LB+Z_q(t)A
+ +4\sum_{T\cap Q=\varnothing}
+   Z_{\mathrm{spine}-(S\cup V(T))}(\alpha)>0.             \tag{1}
+\]
+Since $K(t)>0$ it changes no phase.  Since $R>0$, the continuous phase is the
+principal value
+\[
+ \Theta_H(t)=\arctan\frac{2(B-A)}R.
+\]
+The isolated hostile cycle has
+$\Psi_Q(t)=Z_q(t)+2i$ and phase
+$\theta_q(t)=\arctan(2/Z_q(t))$.  If $B-A\leq0$, then
+$\Theta_H\leq0<\theta_q$; if $B-A>0$, inequality (1) gives the same strict
+comparison.  Thus $\Theta_H(t)<\theta_q(t)$ for all $t>0$.
+
+Lemma~\ref{lem:coulson} and the exact cycle value
+\[
+ \splus(C_q)-\sminus(C_q)=-2\left(\sec\frac\pi q-1\right)
+\]
+give the first displayed inequality.  Finally
+$|E(H)|=|V(H)|+a$ and
+$\splus(H)+\sminus(H)=2|E(H)|$, proving the surplus bound.
+\end{proof}
+
+\begin{lemma}[Exact hostile-cycle value]\label{lem:qvalue}
+For $q=4k+1\geq5$,
+\[
+ \splus(C_q)-\sminus(C_q)
+ =-2\left(\sec\frac\pi q-1\right).
+\]
+\end{lemma}
+
+\begin{proof}
+The eigenvalues are $2\cos(2\pi j/q)$, $0\leq j<q$.  The positive ones have
+$j=0,1,\ldots,k$ and $j=q-k,\ldots,q-1$, so
+\[
+ \splus(C_q)=4\left(1+2\sum_{j=1}^k
+                   \cos^2\frac{2\pi j}{q}\right).
+\]
+Using $\cos^2x=(1+\cos2x)/2$ and
+\[
+ \sum_{j=1}^k\cos(jx)
+ =\frac{\sin(kx/2)\cos((k+1)x/2)}{\sin(x/2)}
+\]
+at $x=4\pi/q$ gives
+$\splus(C_q)=q+1-\sec(\pi/q)$.  Since
+$\splus(C_q)+\sminus(C_q)=2q$, the claimed difference follows.
+\end{proof}
+
+\begin{theorem}[Rooted all-rank guard]\label{thm:rooted}
+Let $A$ be an arbitrary connected triangular cactus with at least one triangle,
+rooted at $z$.  Attach $Q=C_q$, $q=1\pmod4$, to $z$ through exactly one
+interface: identify a vertex of $Q$ with $z$, or join them by one path.
+Allow arbitrary attached trees.  Then
+\[
+ \sig(G)>1-\delta_q>0.
+\]
+\end{theorem}
+
+\begin{proof}
+Apply Lemma~\ref{lem:voronoi} to a maximum triangle packing of $A$, choosing
+the root territory first.  Add $Q$, the whole connector, and all trees rooted
+there to the root territory.  Its retained triangles have packing one and
+include the selected root triangle, so Lemma~\ref{lem:hostile-packet} gives
+surplus $>1-\delta_q$.  Every other induced territory is a packing-one
+triangular cactus and has positive surplus by Lemma~\ref{lem:packing-one}.
+The unique-interface hypothesis ensures that no connector vertex must have two
+owners.  Sum by Lemma~\ref{lem:super}.
+\end{proof}
+
+\section{Shared-cut clusters and ownership}
+
+Two cyclic blocks are adjacent when they share a cut vertex.  A
+\emph{shared-cut cluster} is a maximal connected component under this
+adjacency.  In the cactus block--cut tree, the \emph{support} of a cluster is
+the connected subtree consisting of its cyclic-block nodes and every
+cut-vertex node joining adjacent cyclic blocks in the cluster.  Distinct
+supports are disjoint, since a cut belonging to both would join the clusters.
+Contract each full support to one cluster node.  In the resulting tree take
+the minimal subtree spanning all cluster nodes and suppress each noncluster
+vertex of degree two.  This is the \emph{reduced cluster tree}.  Every leaf is
+a cluster node, and every reduced edge contains a nonempty chain of actual
+bridge blocks; otherwise its endpoint cycles would lie in one cluster.
+
+When one actual bridge in such a chain is cut, its two endpoint components give
+a vertex partition into connected induced cacti.  Every remaining connector
+segment and every off-hull tree follows the side containing its unique
+attachment.  An off-hull component cannot have two hull attachments: together
+with the hull path they would create another cycle.  This is the ownership rule
+used below.
+
+For one shared-cut cluster, form its bipartite cycle--cut incidence graph $I$:
+cycle nodes are cyclic blocks, cut nodes are vertices belonging to at least two
+cyclic blocks, and containment gives incidence.  This graph is a tree.  Indeed,
+an incidence cycle would realize either a cycle using several blocks or two
+blocks meeting in more than one vertex, both impossible in a cactus.
+
+\begin{lemma}[Splitting the distinguished cycle]\label{lem:qsplit}
+Suppose one shared-cut cluster consists of $Q$ and triangles.  If $Q$ is
+incident in $I$ with $d\geq2$ distinct cut nodes, then the graph has an induced
+vertex partition into $d$ connected nonempty triangular cacti.
+\end{lemma}
+
+\begin{proof}
+Let $x_1,\ldots,x_d$ be the distinct occupied vertices of $Q$ in cyclic order.
+Partition $V(Q)$ into $d$ nonempty proper consecutive intervals $J_i$, each
+containing $x_i$ and no other occupied vertex.  Consecutive occupied vertices
+may receive singleton intervals; the construction also works when all vertices
+of $Q$ are occupied.
+
+Deleting the $Q$ node from $I$ gives exactly $d$ components $K_i$, with $x_i$
+in $K_i$.  The \emph{realization} of $K_i$ consists of all private vertices of
+its cycle blocks and all its cut vertices.  Give one territory the interval
+$J_i$, the complete realization of $K_i$, and every tree whose unique
+attachment it owns.  Since $x_i$ is a
+shared cyclic cut, $K_i$ contains at least one triangle.  Each territory is
+connected through $x_i$.  The intervals partition $Q$, the components $K_i$
+partition the remaining incidence tree, and all multiway branches at one cut
+remain with one owner.  Thus the territories are induced, disjoint, and
+exhaustive.  Every $J_i$ is a proper path, so $Q$ is retained nowhere; all
+retained cycles are triangles.
+\end{proof}
+
+\section{Proof of the main theorem}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Induct on the number $N$ of shared-cut clusters.
+
+Suppose first that $N>1$.  Only one cluster contains $Q$.  The reduced cluster
+tree has at least two leaves, so it has a leaf cluster $L$ not containing $Q$.
+Cut the first actual bridge away from $L$, using the ownership rule above.  One
+induced side $A$ is a connected triangular cactus, hence
+$\sig(A)>0$ by Corollary~\ref{cor:triangular}.  The other side $B$ contains
+$Q$ and all remaining clusters.
+
+If $B$ retains at least one triangle, it is a smaller instance of the theorem,
+so induction and Lemma~\ref{lem:super} give strict positivity.  If $B$ retains
+no triangle, there is no other triangular cluster, so $N=2$, $L$ contains all
+triangles, and the original graph consists of a connected triangular cactus
+joined to $Q$ through exactly one bridge
+interface.  Theorem~\ref{thm:rooted} closes this endpoint directly.  This avoids
+the invalid step of asking qualitative triangular strictness to pay the
+negative surplus of an isolated hostile cycle.
+
+It remains to treat $N=1$.  Let $d$ be the degree of the $Q$ node in the
+cycle--cut incidence tree.  Since at least one triangle is present and the
+cluster is connected, $d\ne0$.
+
+If $d=1$, deleting the $Q$ node leaves one connected triangular cactus rooted
+at the unique shared cut.  The cycles need not all contain that root, so a
+common-cut bouquet theorem would be insufficient; Theorem~\ref{thm:rooted}
+applies exactly and gives strict positivity.
+
+If $d\geq2$, Lemma~\ref{lem:qsplit} partitions $G$ into connected nonempty
+triangular cacti.  Every part has positive surplus by
+Corollary~\ref{cor:triangular}, and Lemma~\ref{lem:super} completes the proof.
+\end{proof}
+
+\section{Scope}
+
+The proof is uniform in the number of triangular blocks and does not enumerate
+incidence trees.  It depends essentially on there being one distinguished
+hostile cycle.  With two pentagons, a maximum-packing partition can retain the
+two hostile cycles while splitting every triangular guard; already the
+incidence path $C_5-x-C_3-y-C_5$ exhibits this ownership obstruction.  Thus the
+present theorem does not claim the arbitrary $T^rC_5C_5$ family.
+
+\begin{thebibliography}{9}
+\bibitem{AKMPZ}
+S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and X.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264v1, 2025.
+
+\bibitem{Coulson}
+C.~A. Coulson,
+\emph{On the calculation of the energy in unsaturated hydrocarbon molecules},
+Proc. Cambridge Philos. Soc. 36 (1940), 201--203.
+\end{thebibliography}
+
+\end{document}
