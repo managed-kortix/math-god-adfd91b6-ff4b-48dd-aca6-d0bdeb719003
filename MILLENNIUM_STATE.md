@@ -137,7 +137,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 65
+- **cycle:** 66
 - **announcements:** none
 
 ## immutable target list
@@ -156,10 +156,10 @@ waiting process.
 
 ## next exact steps
 
-1. Derive the exact endpoint-adaptive decomposition
-   `S_M(r)=R_(M,r)-kappa_(M,r)T_(M,r)` for every `1<=r<=12`, retaining boundary,
-   rectangle, and odd endpoint together, then seek an upper threshold for at
-   least one endpoint; covariance positivity is false and was the wrong sign.
+1. Compare the exact nested rank-one losses of the physical Schur residual
+   `R_(M,r)` against changes in the independently computed demand
+   `Theta_(M,r)`, or construct demand-aware finite tail-plus-boundary witnesses;
+   auxiliary covariance may guide witnesses but is not reserve bookkeeping.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -174,6 +174,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-28: Cycle 66 corrected the attempted transfer from dyadic covariance
+  to short adaptive windows. The exact physical identity is
+  `S=A(R-Theta)`, with `R` the complete post-staircase Schur residual and
+  `Theta` the independent Cycle 52 demand; tail plus boundary realizes `R`
+  exactly. Endpoint growth subtracts explicit rank-one Schur payments. A
+  normalized-budget selector was exposed as tautological and rejected before
+  commit. Finite diagnostics favor minimum physical demand, but a theorem must
+  compare demand changes to reserve losses or exhibit demand-aware dual
+  witnesses. No RH result is claimed.
 
 - 2026-07-28: Cycle 65 derived endpoint-safe Abel and indefinite square
   identities for the complete centered two-scale covariance. A durable Arb

@@ -4177,6 +4177,25 @@ sign, so negativity is favorable. The next target is the exact adaptive
 packets. Details are in `cycle-65-centered-covariance-sign.md`. No RH result is
 claimed.
 
+## Cycle 66: return to the physical adaptive threshold
+
+The dyadic centered covariance does not canonically become the short cutoff
+budget. The exact endpoint factorization is
+
+`S_M(r)=A_(M,r)(R_(M,r)-Theta_(M,r))`,
+
+where `R` is the complete post-staircase physical Schur residual and `Theta` is
+the independently computed Cycle 52 endpoint demand. Complete tail plus the
+boundary scalar realizes `R` exactly. As the endpoint grows, `R` loses one
+explicit rank-one Schur payment at a time.
+
+A normalized-budget “selector” that defined `Theta=1-S/A` was identified as
+tautological and rejected before commit. Physical demand minimization has
+zero finite failures in current diagnostics but is not generically valid; a
+constructive theorem must maximize certified finite reserve slack against the
+same endpoint demand. Details are in
+`cycle-66-physical-adaptive-threshold.md`. No RH result is claimed.
+
 ## Cycle 61: sparse jumps remain weak; global innovations survive
 
 Exact rational/Arb optimization at cells `nq+e` found better scores per cell,
