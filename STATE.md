@@ -16,6 +16,18 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-28: restored the all-rank one-root hostile-cycle guard theorem after
+  two independent hostile audits exposed that its 2026-07-26 retraction was
+  itself wrong.  In a maximum-packing Voronoi territory, two disjoint cycles
+  replace the selected center; they need not also be disjoint from it.  Hence an
+  arbitrary connected triangular cactus joined through exactly one interface
+  to `Q=C_(4k+1)` satisfies `sigma>1-(sec(pi/q)-1)>0`.  This does not cover
+  multi-interface `Q` or `T^rPP`.  A proposed incidence-demand coalescence was
+  also audited: it is valid only when the active territory wholly owns both
+  hostile branches and each has complete profile exactly one pentagon; then the
+  split is `PP +` a strict triangular territory.  See
+  `research/rooted-hostile-cycle-retraction-correction-2026-07-28.md` and
+  `research/incidence-demand-coalescence-scope-2026-07-28.md`.
 - 2026-07-26: advanced the rank-eleven cactus frontier by closing G3, the full
   `T^9PP` ladder inheritance problem. All ten fully shared ordinary-ledger
   exceptions now have positive graph-level packetizations with final owners.

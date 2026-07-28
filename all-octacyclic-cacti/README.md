@@ -23,8 +23,8 @@ The corrected proof contains:
 - an induced-territory audit assigning every connector remnant, shared cut,
   router interval, incidence branch, and hanging tree exactly once.
 
-The proof explicitly does **not** use the retracted all-rank rooted
-hostile-cycle guard, including its false Voronoi packing assertion. It also does
+The proof explicitly does **not** use the then-retracted, now restored, all-rank
+rooted hostile-cycle guard, including its valid Voronoi packing assertion. It also does
 not use the superseded uncut `877=868+9` / E1--E9 certificate. The authoritative
 proof boundary is
 `research/octacyclic-cactus-complete-synthesis-2026-07-26.md`.
