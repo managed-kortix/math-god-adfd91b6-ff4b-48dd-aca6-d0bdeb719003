@@ -124,6 +124,22 @@ hence the two selected formal germs agree. An exact rational verifier preserves
 the rank certificates. This is a local branch theorem for an already algebraic
 class, not a Hodge-conjecture case.
 
+## Main-funnel cycle 71
+
+A proper irreducible relative cycle component dominates a reduced irreducible
+marked Hodge component once the cycle gives scheme-theoretic inclusion and the
+incidence differential has full rank at one pair of smooth points. Bloch's
+factorization `beta=sigma alpha` identifies the exact normal-space discrepancy
+as `im(alpha) intersect ker(sigma)`. Injectivity on the actual relative
+obstruction image gives tangent equality; a complete Artin lifting argument is
+still required in singular settings.
+
+For Fermat degree-`d` plane families, the normal obstruction space has dimension
+`binom(d+2,2)-9`, and pair multigrading proves the semiregularity multiplication
+map injective for every `d>=3`. This propagates the supplied plane cycle but
+does not create cycles for arbitrary Hodge components. Details are in
+`cycle-71-component-domination-criterion.md`. No full Hodge result is claimed.
+
 ## Bounded scout cycle 63
 
 For the cubic-fourfold plane class, the universal relative plane gives a

@@ -142,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 70
+- **cycle:** 71
 - **announcements:** none
 
 ## immutable target list
@@ -161,10 +161,10 @@ waiting process.
 
 ## next exact steps
 
-1. Formulate and attack a generic formal component-domination lemma: a relative
-   Hilbert/Chow component carrying a fixed marked class must dominate the
-   specified Hodge component when scheme inclusion, generic IVHS dimension,
-   and obstruction lifting are all verified.
+1. Find a component-independent seed mechanism producing a relative cycle
+   component for a marked Hodge component, or prove a broad semiregularity/
+   obstruction-lifting theorem beyond supplied complete-intersection cycles;
+   the generic domination criterion itself is now settled.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -179,6 +179,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-28: Cycle 71 proved the generic component-domination criterion:
+  proper cycle-class inclusion plus full differential rank at smooth points
+  forces the relative cycle component to equal the marked Hodge component.
+  Bloch semiregularity identifies the precise normal discrepancy as
+  `im(alpha) intersect ker(sigma)`. For Fermat degree-`d` planes, the obstruction
+  space has dimension `binom(d+2,2)-9` and the semiregularity multiplication is
+  injective for every `d>=3`. The unresolved obstacle is now cycle seeding on
+  arbitrary Hodge components, not branch comparison. No Hodge solution is
+  claimed.
 
 - 2026-07-28: Cycle 70 completed the portfolio rotation and selected Hodge
   component-domination as the new main funnel. For a correctly rooted plane on
