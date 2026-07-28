@@ -130,10 +130,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   exact lagged-prefix identity now shows that one old state captures all but a
   projection of its finite omitted suffix, and `D_(M-3)` certifies all eleven
   negative-singleton starts through `3060`, yet the positive `[98,99)` window
-  defeats every single lag and demonstrates essential endpoint dependence
+  defeats every single lag and demonstrates essential endpoint dependence; the
+  one-row omitted suffix now has an exact adjacent-Vasyunin cusp bound of scale
+  `log^3(M)/M^2`, and a rho-only two-row Schur estimate certifies all eleven
+  historical delayed windows, but uniform closure still lacks a lower bound for
+  the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 57
+- **cycle:** 58
 - **announcements:** none
 
 ## immutable target list
@@ -152,9 +156,9 @@ waiting process.
 
 ## next exact steps
 
-1. Replace the global lagged-prefix certificate by a quantitative arithmetic
-   bound on the finite recent-suffix defect in (57.2), retaining endpoint
-   dependence; fixed-lag geometry alone is generically insufficient.
+1. Prove an arithmetic lower bound for the post-staircase residual `R` strong
+   enough to combine with the adjacent-row cusp error, or estimate the exact
+   residual/suffix orientation directly; suffix size is now controlled.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -169,6 +173,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-26: Cycle 58 bounded the lag-two omitted suffix by an exact adjacent-
+  row restricted Vasyunin Schur complement and proved the sharp scale
+  `O(log^3 M/M^2)`. Combining this with the physical residual gives a compact
+  rho-only certificate for all eleven historical delayed windows, with weakest
+  margin `2.4606e-6`. This removes the need to import a full lagged prefix in
+  those finite cases. It does not provide the missing uniform lower bound for
+  the post-staircase residual, and the positive `[98,99)` endpoint remains a
+  warning against endpoint-independent lag logic. No RH result is claimed.
 
 - 2026-07-26: Cycle 57 derived the exact gain and uncaptured-energy formulas for
   a lagged old-prefix probe: it misses only a projection of the finitely many

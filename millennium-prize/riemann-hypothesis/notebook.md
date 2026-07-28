@@ -4343,6 +4343,26 @@ single lag through the whole available prefix, although endpoint `102` is
 certified, proving that witness success is endpoint-dependent. Details are in
 `cycle-57-lagged-prefix-projection.md`. No RH result is claimed.
 
+## Cycle 58: the adjacent suffix has cusp scale
+
+For the one-row suffix omitted by `D_(M-2)`, projection against `rho_M` gives
+the exact two-row Vasyunin bound
+
+\[
+\beta_2\le\mu(M-1)^2\log^2(M-1)
+\inf_a\|\rho_{M-1}-a\rho_M\|^2
+=O(\log^3M/M^2).
+\]
+
+Together with `G_2>=R-beta_2`, even the simpler rho-only Schur bound certifies
+all eleven historical delayed windows; its weakest margin is `2.4606e-6`.
+This is a compact finite replacement for importing the entire lagged prefix.
+
+The route still lacks a uniform lower bound for the post-staircase residual
+`R`: suffix smallness alone cannot imply `R-beta_2` pays the block deficit, and
+`W_M` is already spent. Details and explicit constants are in
+`cycle-58-adjacent-row-cusp-bound.md`. No RH result is claimed.
+
 ## Cycle 49: recombination returns the original terminal kernel
 
 Combining packet surplus and coherent deficit before estimating gives
