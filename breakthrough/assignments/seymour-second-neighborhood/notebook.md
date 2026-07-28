@@ -885,3 +885,25 @@ No audits yet.
   starting with k=6 where all six residual holes lie in T and the source lower
   bound is strongest; use saturated packet compatibility rather than regenerate
   bulk certificates.
+
+## 2026-07-26 — tick 46
+
+- Compressed the k=6 final row to seven simultaneous bad A' source rows. Layer
+  capacity forces `P=A'`, and exact row sums require
+  `e(A',B)=29+h(A')+Q>=29`.
+- Temporary tests reject a solver-inspired lemma claiming every bad source has
+  at most four B-outneighbors: a relaxed one-source model reportedly has five
+  B-outneighbors and a sharp three-hole packet. No witness artifact was retained,
+  so this remains an unverified breaker observation. Likewise, reported
+  six-of-seven badness tests are exploratory rather than durable conclusions.
+- Derived the exact packet pressure: inaccessible triples avoid B and consume
+  all six holes; inaccessible pairs contain at most one B vertex and consume at
+  least three holes, or at least five when they contain B. Hole loads cannot be
+  summed without controlling reuse.
+- A tentative arc-minimal charging route appears vulnerable to gain cycles but
+  has no retained exact breaker. See `attempts/tick46-k6-frontier.md`.
+- **Next queued attack:** classify the maximal six-bad relaxations. Test whether
+  their six-hole graph is necessarily `2K3` and whether the omitted Seymour
+  source is forced by a triangle-row synchronization theorem. If false,
+  enumerate the exact finite family of hole-support cores rather than all
+  six-edge graphs.
