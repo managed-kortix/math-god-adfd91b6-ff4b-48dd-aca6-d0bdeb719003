@@ -137,7 +137,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 63
+- **cycle:** 64
 - **announcements:** none
 
 ## immutable target list
@@ -156,10 +156,9 @@ waiting process.
 
 ## next exact steps
 
-1. Attack the explicit odd-row/odd-Möbius dilation remainder controlling
-   consecutive dyadic innovations; generic dilation and interlacing are now
-   proved insufficient, while complete-tail values are exactly known on four
-   stress windows.
+1. Attack the exact signed centered-Chebyshev covariance in Cycle 64, retaining
+   the cross-window rectangle and odd von Mangoldt endpoint together; separate
+   norm bounds and PNT-level diagonal estimates are proved insufficient.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -174,6 +173,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-28: Cycle 64 derived the exact three-level odd-Möbius dilation
+  completion and the nested Schur identity measuring how new odd rows erase
+  transported innovation. Symbolic audits verified all coefficients and signs.
+  Finite Arb diagnostics show norm-only remainder bounds are vacuous on stress
+  windows and the frontier. Square-wave polarization recovers the positive odd
+  prime-power diagonal, but the complete obstruction is a signed two-scale
+  centered Chebyshev covariance with a cross-window rectangle not controlled by
+  PNT or absolute RH-scale pointwise errors. No RH result is claimed.
 
 - 2026-07-28: Cycle 63 evaluated the exact complete-tail and boundary Schur
   split on four stress windows and independently reproduced full `R`. Completed

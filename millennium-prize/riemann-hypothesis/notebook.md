@@ -4144,6 +4144,22 @@ weak unconditional scale `Omega_infinity >> M^-2`, insufficient for fixed-
 strength renewal. Durable values and tests are in
 `cycle-63-complete-tail-certificate.md`. No RH result is claimed.
 
+## Cycle 64: odd dilation is a signed covariance problem
+
+The physical dilation defects of `U` and `D` have exact three-level expansions
+over `rho_r,rho_(2r),rho_(4r)` for odd `r`. Adding the genuinely new odd rows
+then subtracts exactly one positive Schur payment from the affine-completed
+transported innovation. A fixed-fraction theorem is therefore an arithmetic
+angle bound, not a consequence of interlacing.
+
+Finite diagnostics show separate score-remainder norms exceed the innovation
+scale on the stress windows and frontier, making triangle estimates vacuous.
+Square-wave reduction identifies the positive odd prime-power diagonal, but the
+full obstruction remains a signed two-scale centered Chebyshev covariance with
+a cross-window rectangle. PNT and absolute RH-scale pointwise bounds do not
+control it. Details are in `cycle-64-odd-dilation-obstruction.md`. No RH result
+is claimed.
+
 ## Cycle 61: sparse jumps remain weak; global innovations survive
 
 Exact rational/Arb optimization at cells `nq+e` found better scores per cell,
