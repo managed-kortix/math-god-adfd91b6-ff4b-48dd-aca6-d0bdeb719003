@@ -16,6 +16,29 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-28: completed the finite rank-eleven `P|A_9|P` endpoint. A
+  fail-closed verifier independently generates 355 incidence trees, 128155
+  labelled placements, and 43151 canonical rows; theorem-aware recursive
+  routing closes 43145 and leaves exactly six signatures. Fifteen missing
+  two-arm plans are explicit nested `(2,1)` refinements. The six residuals close
+  as two `TP +` packing-one `A_7P` splits and four one-pentagon openings
+  retaining packing-one `A_9P`. Hostile mutation audits forced rederivation of
+  every theorem packet, concrete cyclic intervals, recursive adhesion owners,
+  exact five-vertex opening maps, and duplicate-key guards; the ultimate gate
+  accepted. Normal and `-O` outputs are byte-identical. This closes only the
+  marked endpoint, not all rank eleven.
+- 2026-07-28: audited the proposed use of the rooted two-pentagon hinge. Proved
+  its common-root extension (`y=x`) with the correct symmetric matching
+  deletion identities; the weighted certificate truly parametrizes the common
+  cut activity. The theorem still does not cover separated pentagons. A
+  theorem-aware marked search covers `43145/43151` `P|A_9|P` rows and leaves six
+  exact conservative residuals, led by the double-locked bouquet
+  `X[AB](T()^9)`. These demand a packing-one two-interface theorem. Its exact
+  polynomial is `(Z+4C-4D)+i(2(B-A)+8E)`; the joint carrier has an exact
+  homotopy derivative with adverse phase orientation, confirmed on the smallest
+  fan by the integer value 7064. See
+  `research/separated-two-pentagon-phase-homotopy-2026-07-28.md`. No full
+  `T^rPP` or `P|A_9|P` theorem is claimed.
 - 2026-07-28: after the all-rank `T^rQ` theorem, attacked the remaining
   `T^rPP` frontier.  A proposed complete path/endpoint splitting proof was
   rejected by four hostile audits.  The exact infinite obstruction is the

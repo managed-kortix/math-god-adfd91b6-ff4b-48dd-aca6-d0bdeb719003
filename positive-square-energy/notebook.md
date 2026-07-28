@@ -1,5 +1,40 @@
 # notebook — positive square energy
 
+## 2026-07-28 — exact `P|A_9|P` endpoint closure
+
+Completed the theorem-aware marked endpoint census: 43151 canonical rows split
+as 43145 recursive router certificates plus six explicit repairs. Fifteen
+two-arm common-hub rows required concrete nested plans of profile
+`A_aP_A+A_bP_B+A_(7-a-b)`, with positive `a,b` and `a+b<=6`; the minimum
+ledger is `TP+TP+A_5>2-2delta`. The six final rows split into two
+`TP+A_7P` repairs and four one-pentagon openings retaining `A_9P`.
+
+Repeated hostile audits exposed and repaired mutable theorem labels, unordered
+interval sizes, manufactured refinement owners, symbolic rather than concrete
+pentagon openings, and duplicate owner-map keys. The final verifier rederives
+all packet theorems, realizes every triangle interval and five pentagon
+vertices, follows cuts/connectors recursively, runs mutation self-tests, and
+passes byte-identically under normal and optimized Python. This is a finite
+rank-eleven endpoint theorem only.
+
+## 2026-07-28 — six-row separated-pentagon core
+
+The new rooted two-pentagon hinge theorem was audited and extended to a
+triangular root at the common pentagon cut. The correct common-root identities
+are symmetric: deleting either pentagon deletes the triangular root, while the
+empty matching carrier replaces the common-cut activity by
+`alpha=Z_A/Z_(A-x)>=t`. The 1290-term weighted certificate applies directly.
+
+This does not close generic `P|A_9|P`: remote connector demands do not force
+the pentagons to share a cut. The theorem-aware search covers 43145 of 43151
+marked rows and leaves six separated-interface residuals. For a packing-one
+triangular packet with separated pentagons, simultaneous pentagon Sachs states
+contribute `-4D+8iE`. The exact homotopy derivative is
+`8[D(B-A)+E(Z+4C)]/|Psi|^2`; on the smallest fan at `t=1` its numerator before
+the factor 8 is 7064, proving the correction raises phase there. The next
+analytic target is therefore full two-pivot/winding control, not another
+coefficientwise common-cut comparison.
+
 ## 2026-07-28 — theorem-aware endpoint ledgers
 
 Recovered and hardened the rank-eleven `A_10|Q` endpoint certificate. The
