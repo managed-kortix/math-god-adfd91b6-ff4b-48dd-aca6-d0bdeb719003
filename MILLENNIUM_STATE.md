@@ -137,7 +137,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 64
+- **cycle:** 65
 - **announcements:** none
 
 ## immutable target list
@@ -156,9 +156,10 @@ waiting process.
 
 ## next exact steps
 
-1. Attack the exact signed centered-Chebyshev covariance in Cycle 64, retaining
-   the cross-window rectangle and odd von Mangoldt endpoint together; separate
-   norm bounds and PNT-level diagonal estimates are proved insufficient.
+1. Derive the exact endpoint-adaptive decomposition
+   `S_M(r)=R_(M,r)-kappa_(M,r)T_(M,r)` for every `1<=r<=12`, retaining boundary,
+   rectangle, and odd endpoint together, then seek an upper threshold for at
+   least one endpoint; covariance positivity is false and was the wrong sign.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -173,6 +174,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-28: Cycle 65 derived endpoint-safe Abel and indefinite square
+  identities for the complete centered two-scale covariance. A durable Arb
+  verifier certifies negativity at selected scales, while a broader diagnostic
+  finds it negative at every dyadic scale through `2^21`, eventually dominated
+  by the cross-window rectangle. This kills positivity and near-diagonal
+  dominance, but the sign is favorable in the full shell decrement. The funnel
+  now targets an adaptive twelve-endpoint upper-threshold decomposition rather
+  than a covariance lower bound. No RH result is claimed.
 
 - 2026-07-28: Cycle 64 derived the exact three-level odd-Möbius dilation
   completion and the nested Schur identity measuring how new odd rows erase

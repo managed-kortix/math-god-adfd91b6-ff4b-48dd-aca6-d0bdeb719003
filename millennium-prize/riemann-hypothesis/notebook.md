@@ -4160,6 +4160,23 @@ a cross-window rectangle. PNT and absolute RH-scale pointwise bounds do not
 control it. Details are in `cycle-64-odd-dilation-obstruction.md`. No RH result
 is claimed.
 
+## Cycle 65: covariance is negative and favorably signed
+
+An endpoint-safe Abel identity keeps the cross-window rectangle and odd
+von-Mangoldt endpoint inside one complete doubled error. The exact square form
+is one positive energy minus one positive discrepancy, with no structural
+boundary cancellation. A durable Arb verifier certifies the centered covariance
+negative at `N=4,64,220,8192`; a broader diagnostic certifies negativity at all
+dyadic scales through `2^21`, eventually dominated by the cross-window
+rectangle.
+
+This falsifies covariance positivity and near-diagonal dominance, but does not
+falsify renewal: the covariance enters the shell decrement with the opposite
+sign, so negativity is favorable. The next target is the exact adaptive
+`r<=12` decomposition retaining covariance jointly with all compensating
+packets. Details are in `cycle-65-centered-covariance-sign.md`. No RH result is
+claimed.
+
 ## Cycle 61: sparse jumps remain weak; global innovations survive
 
 Exact rational/Arb optimization at cells `nq+e` found better scores per cell,
