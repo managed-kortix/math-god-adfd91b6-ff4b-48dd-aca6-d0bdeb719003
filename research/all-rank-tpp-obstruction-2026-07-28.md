@@ -2,7 +2,21 @@
 
 **Date:** 2026-07-28
 
-## Verdict
+## Status correction (2026-07-28)
+
+The hinge isolated below has now been proved. The earlier generic packing-one
+formula included a negative `PP` term and positive triple-cycle term, but those
+terms are impossible in the hinge because the two pentagons share `x`. Exact
+matching compression at `y` gives a weighted common-cut `PP` baseline; every
+triangle correction is negative imaginary or positive real. The phase
+comparison and maximum-packing upgrade are proved in
+`research/rooted-two-pentagon-hinge-theorem-2026-07-28.md`.
+
+This note remains the record of why the structural moves alone failed. The
+global all-rank `T^rPP` synthesis is still under final audit and is not claimed
+here.
+
+## Former verdict
 
 The all-rank one-hostile theorem removes the complete `T^rQ` frontier, but the
 same structural packetization does not close `T^rPP`.  A proposed path proof
@@ -77,4 +91,4 @@ with isolated `PP` would suffice, but its naive cross product has negative
 coefficients on independent activities.  Connector/actual-tree message
 structure or a rooted Schur correction is required.
 
-No all-rank `T^rPP` theorem is claimed.
+No all-rank `T^rPP` theorem was claimed at the time of this obstruction note.
