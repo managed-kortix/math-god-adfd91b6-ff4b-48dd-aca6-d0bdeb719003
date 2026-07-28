@@ -5,8 +5,13 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** first exact proof funnel, with six statement dossiers established
-- **active main funnel:** Riemann hypothesis — logarithmically smoothed
+- **phase:** second exact proof funnel after strategic rotation
+- **active main funnel:** Hodge conjecture — componentwise relative-cycle
+  domination for marked Hodge components of hypersurface fourfolds; the first
+  higher-codimension calibration now proves equality of the selected Fermat
+  quartic plane-incidence and Hodge formal germs by an exact rank-six IVHS
+  computation, while the active bottleneck is generic obstruction-controlled
+  dominance rather than another special branch
   discrete Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
   is now exactly reduced after a second domain audit corrected a transient
@@ -137,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 67
+- **cycle:** 70
 - **announcements:** none
 
 ## immutable target list
@@ -156,9 +161,10 @@ waiting process.
 
 ## next exact steps
 
-1. Bound the exact physical demand increment (67.1), cumulatively if necessary,
-   against the rank-one reserve payments; target the payment-adjusted demand
-   barrier rather than false convexity or endpoint monotonicity.
+1. Formulate and attack a generic formal component-domination lemma: a relative
+   Hilbert/Chow component carrying a fixed marked class must dominate the
+   specified Hodge component when scheme inclusion, generic IVHS dimension,
+   and obstruction lifting are all verified.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -173,6 +179,26 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-28: Cycle 70 completed the portfolio rotation and selected Hodge
+  component-domination as the new main funnel. For a correctly rooted plane on
+  the Fermat quartic fourfold, exact rational computation proves
+  `rank(R_4 -> R_10)=6`; the incidence normal map has rank nine. Relative-cycle
+  inclusion plus equal smooth codimension six identifies the selected formal
+  incidence and Hodge germs. This is a calibration for one already algebraic
+  class, not a new Hodge-conjecture case. The active target is generic
+  component domination with obstruction control. No Millennium result is
+  claimed.
+
+- 2026-07-28: Cycles 68--69 met the rotation gate for the RH logarithmic-taper
+  tactic. The payment-adjusted barrier telescopes exactly to the normalized
+  target budget, proving it non-coercive. A conditional/literature audit found
+  no theorem that RH alone makes the exact logarithmic taper converge; the
+  Bettin--Conrey--Farmer `C_0/log N` asymptotic assumes a strong reciprocal-
+  `zeta'` moment and simplicity. The additive-12 statement remains unfalsified
+  finite evidence and may be stronger than RH, but this tactic is formally
+  retired. The next action is a portfolio rotation review. No RH result is
+  claimed.
 
 - 2026-07-28: Cycle 67 derived the exact endpoint demand increment and showed
   how its new projection square cancels the standalone rank-one reserve loss,

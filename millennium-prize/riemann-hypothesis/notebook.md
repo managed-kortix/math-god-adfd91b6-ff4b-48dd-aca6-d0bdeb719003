@@ -4177,6 +4177,21 @@ sign, so negativity is favorable. The next target is the exact adaptive
 packets. Details are in `cycle-65-centered-covariance-sign.md`. No RH result is
 claimed.
 
+## Cycles 68--69: tactic retirement and RH-conditional audit
+
+The payment-adjusted demand barrier telescopes exactly to
+`R_anchor-S_M(r)/A_(M,r)`. It is therefore an affine reformulation of the
+normalized budget, not an independent coercive estimate. This completes the
+structural exhaustion of the additive-12 reserve/demand tactic.
+
+A literature and Mellin audit then tested the weaker calibration “RH implies
+convergence of this exact logarithmic taper.” No such RH-alone theorem is known.
+Bettin--Conrey--Farmer prove `P_N~C_0/log N` only under RH plus a strong negative
+moment bound for `zeta'(rho)`, which implies simplicity. Reciprocal-zeta poles
+make that extra input explicit. The taper funnel is therefore retired pending a
+new zero-derivative or fixed-family theorem. See Cycles 68 and 69. No RH result
+is claimed.
+
 ## Cycle 67: exact reserve-demand barrier
 
 The endpoint demand now has an exact online increment formula. Combining it

@@ -113,6 +113,17 @@ lowers dimension. Reduced equidimensionality alone fails for a component of
 `Spf C[[x,y]]/(xy)`. The Hodge route still lacks the required branch inclusion
 and dimension equality. No Hodge case is proved.
 
+## Bounded scout cycle 70; promoted calibration
+
+For the Fermat quartic fourfold and a correctly rooted contained plane, the
+Jacobian-ring multiplication `R_4 -> R_10` by the primitive plane class has
+exact rank six. The plane-incidence normal map has rank nine, so its image is a
+smooth codimension-six germ. The relative plane gives scheme-theoretic inclusion
+in the selected Hodge germ, whose period Jacobian also has codimension six;
+hence the two selected formal germs agree. An exact rational verifier preserves
+the rank certificates. This is a local branch theorem for an already algebraic
+class, not a Hodge-conjecture case.
+
 ## Bounded scout cycle 63
 
 For the cubic-fourfold plane class, the universal relative plane gives a
