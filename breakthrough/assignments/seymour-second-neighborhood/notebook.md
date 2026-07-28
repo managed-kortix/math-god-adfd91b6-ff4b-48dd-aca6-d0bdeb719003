@@ -695,3 +695,215 @@ No audits yet.
 - **Next queued attack:** apply lambda to the remaining 50 placement parents,
   beginning with beta<=2 where lambda has at most three values. Refine unique
   degree-three hubs only after lambda leaves time out.
+
+## 2026-07-26 — tick 35
+
+- A hostile audit found that `--lambda-k` was silently ignored when supplied
+  without `--kappa/--eta`, and that negative lambda values reached Python's
+  negative indexing. The emitter now rejects incomplete refinement coordinates,
+  enforces the sharp placement-dependent range
+  `max(0,beta-(7-kappa)) <= lambda <= min(beta,kappa)`, and prints every active
+  split coordinate in its deterministic log line.
+- Added an independent finite partition audit. It reproduces all 165 permissive
+  placement leaves over 33 shape parents and checks 21,450,240 direct
+  `(K,four B-holes,marked-set)` coordinate evaluations. The independent
+  coordinate census passes, and the generic threshold-counter semantics pass
+  the existing exhaustive tests; this does not by itself test the emitted
+  placement-specific `K/HK/LK` gates.
+- Proved the exact endpoint-packing inequality
+  `q(t)+q(u)+1[tu hole]>=3` for two vertices inaccessible from one robust
+  predecessor. It recovers the four-matching proof but is sharp for the
+  `P3+2K2` shape; a three-hole local counterconfiguration shows that packing
+  alone cannot synchronize predecessor sets. See
+  `attempts/tick35-k4-packing-barrier.md`.
+- The earlier 87-leaf and 580-cell scout totals are not independently
+  reproducible from a committed parent/child manifest. They remain exploratory
+  timing observations, not a cover theorem. Before any branch-level claim, the
+  unresolved-parent list, every child key, CNF/LRAT hashes, and a complete
+  independently checked ledger must be committed.
+- **Next queued attack:** freeze that manifest and rerun the residual lambda
+  cover with the repaired CLI. On any remaining hard child, split by membership
+  of the unique degree-three/four hub in K and by the exact inaccessible
+  three-hole packet type, rather than repeating an unchanged timeout.
+
+## 2026-07-26 — tick 36
+
+- Replaced the unreproducible scout-parent bookkeeping with a complete 2,925-key
+  hierarchy for every `rho`, four-hole shape, rooted placement, `kappa`, `eta`,
+  and valid `lambda` value in the entire isolated-root `m=9,k=4` normal form.
+- An exact four-color support enumeration proves 1,785 terminal cells
+  structurally empty at the missing-graph level and leaves 1,140 feasible CNF
+  jobs. The converse construction fills unused cells with hole-isolated
+  vertices, so this filter is complete for missing-graph compatibility.
+- Production and separately implemented subset-based cross-checkers agree
+  byte-for-byte on `experiments/m9-k4-cover.tsv`; this is not an independent
+  derivation of the hierarchy. The key-stream SHA-256 is
+  `51700d5b...b61195`; the ledger SHA-256 is `9e8ebba3...9f1cae`. See
+  `attempts/tick36-k4-cover.md` for the proof and commands.
+- No prior scout UNSAT status is imported. The 1,140 survivors are all `UNRUN`
+  until regenerated with the repaired CLI and independently LRAT-checked.
+- **Next queued attack:** rank the 1,140 surviving cells by shape and
+  `eta/lambda`, rebuild the pinned CaDiCaL 1.7.3 and `lrat-check` toolchain, and
+  run a small certificate-producing pilot across every shape before scheduling
+  the complete content-addressed campaign.
+
+## 2026-07-26 — tick 37
+
+- Rebuilt CaDiCaL 1.7.3 from source commit `38e073b...` and `lrat-check` from
+  `2e3b2dc...`. The checker binary reproduces the historical hash; the new
+  CaDiCaL binary hash differs from the historical build, so both source commit
+  and current binary hash are recorded rather than pretending binary identity.
+- Added a solver-blind deterministic selector choosing one maximally
+  concentrated feasible cell per shape. All eleven pilots returned UNSAT and
+  were independently accepted by `lrat-check`; exact CNF/LRAT hashes and sizes
+  are in `experiments/m9-k4-pilot-certificates.md`.
+- The LRAT files total roughly 0.94 GB and currently live only in temporary
+  storage. Therefore these are explicitly regression observations, not durable
+  certificate rows: all 1,140 campaign cells remain `UNRUN` for cover purposes.
+- **Next queued attack:** implement content-addressed proof retention before
+  any bulk run. Begin with the 138 feasible C4 cells, where the pilot was fast,
+  and commit a machine-readable completion ledger whose `UNSAT_VERIFIED` state
+  requires accessible proof bytes, matching hashes, and checker readback.
+
+## 2026-07-26 — tick 38
+
+- Replaced the planned 138-cell C4 campaign with a uniform human contradiction;
+  see `attempts/tick38-c4-human-proof.md`.
+- The five or six common C-dominators require at least four distinct A'
+  predecessor sources by an exact B-row degree count and the four-hole budget.
+  For each source, badness forces exactly two inaccessible cycle vertices. An
+  adjacent pair determines the source's closed outneighborhood and fixes both
+  cycle diagonals; an opposite pair also determines it via the intersection of
+  two exact outneighborhoods. At most one adjacent template and the two opposite
+  templates coexist, giving at most three sources, a contradiction.
+- Three hostile audits independently checked the degree identity, exact-second
+  count, opposite-pair intersection, source uniqueness, and diagonal table. No
+  computational certificate is needed for this shape.
+- This eliminates the C4 shape uniformly in rho but remains a restricted branch
+  theorem inside `n=18,m=9,k=4`, not an order-18 result or SNC resolution.
+- **Next queued attack:** apply the same predecessor-source lower bound to paw
+  and triangle-plus-edge. Classify inaccessible packets by the four-hole support
+  and seek a compatibility cap below four; preserve a sharp local breaker if
+  either shape admits four source templates.
+
+## 2026-07-26 — ticks 39--40
+
+- Human-eliminated the paw and triangle-plus-disjoint-edge T-hole shapes; see
+  `attempts/tick39-paw-human-proof.md` and
+  `attempts/tick40-triangle-edge-human-proof.md`.
+- In both shapes, the shape-independent B-row count requires at least four A'
+  predecessor sources. Exact inaccessible-packet classification and saturated
+  outneighborhood rows allow at most three sources. For the paw, five packet
+  types reduce through the two present orientations incident with the pendant
+  vertex. For triangle-plus-edge, packets are either two triangle vertices or
+  one triangle vertex plus one isolated-edge endpoint; two distinct triangle
+  packets exclude every mixed packet.
+- Hostile finite analysis exposed why saturation matters: a weaker census that
+  records only forced positive arcs reports spurious four-source paw and
+  triangle-edge templates. Recording the complete degree-eight rows destroys
+  them. Both final proofs received independent line-by-line audits.
+- Together with C4 and the previously human-eliminated matching and star-like
+  shapes, five of the eleven four-edge shapes now have human contradictions in
+  this normal form. No claim is made for the six remaining shapes.
+- **Next queued attack:** rigorously audit the proposed common cut/template
+  argument for P5 and fork. It currently claims the same source cap but lacks a
+  written packet table; first demand either a complete table with saturated
+  negative orientations or an explicit four-source breaker.
+
+## 2026-07-26 — ticks 41--42
+
+- Human-eliminated the fork and P5 T-hole shapes; see
+  `attempts/tick41-fork-human-proof.md` and
+  `attempts/tick42-p5-human-proof.md`.
+- Fork has exactly four saturated packet types. Each reconstructs the source's
+  closed outneighborhood, and all four cannot coexist; hence at most three
+  predecessor sources, contradicting the universal lower bound four.
+- P5 has seven packet labels. Their complete compatibility depends only on the
+  six orientations of present pairs on the five-vertex support. The exact
+  Boolean table has maximum two compatible labels; the 64-case transparent
+  checker is `experiments/check_p5_packets.py`. A hostile audit separately
+  reconstructed the table from crossing-hole capacities.
+- A competing exploratory claim that P5 had compatibility maximum one was
+  false; an exact two-source local witness exists. The audited theorem uses the
+  sharp maximum two and does not inherit that overclaim.
+- Eight of the eleven four-edge shapes now have human contradictions in this
+  normal form: C4, paw, triangle-plus-edge, fork, P5, four-matching, and the two
+  previously handled star-like shapes (`K1,4` and claw-plus-edge, counted there
+  as separate profiles). The remaining human frontier is P4-plus-edge,
+  two-P3, and P3-plus-two-edges; checked CNF evidence exists but does not replace
+  proofs.
+- **Next queued attack:** start P4-plus-edge with a complete saturated packet
+  table. Its disconnected spare edge admits the sharp `(2,1)` packet from the
+  tick-35 barrier, so the next lemma must synchronize multiple sources rather
+  than rely on a single-source cut count.
+
+## 2026-07-26 — ticks 43--44
+
+- Eliminated the three disconnected residual shapes P4-plus-edge, two-P3, and
+  P3-plus-two-edges by saturated packet compatibility; see
+  `attempts/tick43-disconnected-shapes.md`. The sharp source caps are 3, 2, and
+  2, below the shape-independent lower bound 4.
+- Added `experiments/check_disconnected_packets.py`, which independently
+  enumerates 2,048, 2,048, and 131,072 support orientations and verifies the
+  three caps and cut multiplicity one. Hostile audit caught and repaired two
+  polarity errors in the displayed P4 formulas; the checker-derived caps were
+  unaffected.
+- A coverage audit found that K1,4 and claw-plus-edge had only notebook
+  assertions, not reconstructible proof files. Added both proofs in
+  `attempts/tick44-star-shapes.md`: K1,4 admits no inaccessible pair, while
+  claw-plus-edge has only two packet labels and therefore at most two sources.
+- The independent 20,475-graph shape census confirms these eleven profiles are
+  disjoint and exhaustive. All eleven now have written human contradictions,
+  so the complete isolated-root `m=9,k=4` strip is human-eliminated uniformly
+  over rho, placements, kappa, eta, and lambda.
+- This is not an order-18 elimination: other missing counts `m=5,6,7` remain,
+  while `m=8` and `m=9` residual bookkeeping must be reconciled carefully.
+- **Next queued attack:** update the m=9 campaign ledger to remove the entire
+  k4 strip, then inspect whether all other k strips were already closed by the
+  k<=3 and final-row arguments. If so, promote the full m=9 branch only after a
+  hostile coverage audit; otherwise isolate the exact remaining cells.
+
+## 2026-07-26 — tick 45
+
+- A durability audit found that the historical LRATs for all four `k=3` rows
+  and the three final `k=5,6` rows are absent; hashes alone are not currently
+  checkable certificates. Thus the complete m=9 branch cannot yet be promoted
+  from those ledgers.
+- Replaced the full `k=3` certificate dependence by a human proof; see
+  `attempts/tick45-k3-human-proof.md`. The three-hole B-row count requires at
+  least three predecessor sources. Matching, P3-plus-edge, P4, and claw admit
+  at most 0, 2, 2, and 0 sources. Triangle admits three packet labels, but the
+  tight all-label case synchronizes the triangle outneighborhoods, forces the
+  three sources to be the triangle vertices, and makes four common dominators
+  have at most four internal B-arcs against the required six.
+- Therefore the entire isolated-root `m=9,k=3` strip is now human-eliminated,
+  uniformly in rho. Together with ticks 25 and 30--44, all `k=0,...,4` rows
+  are durable human theorems.
+- The exact durable residual for m=9 is now only `(rho,k)=(0,5),(1,5),(0,6)`.
+  Historical checked-LRAT claims cover their 25 final shards, but no proof bytes
+  are retained. **Next queued attack:** derive a human final-row contradiction,
+  starting with k=6 where all six residual holes lie in T and the source lower
+  bound is strongest; use saturated packet compatibility rather than regenerate
+  bulk certificates.
+
+## 2026-07-26 — tick 46
+
+- Compressed the k=6 final row to seven simultaneous bad A' source rows. Layer
+  capacity forces `P=A'`, and exact row sums require
+  `e(A',B)=29+h(A')+Q>=29`.
+- Temporary tests reject a solver-inspired lemma claiming every bad source has
+  at most four B-outneighbors: a relaxed one-source model reportedly has five
+  B-outneighbors and a sharp three-hole packet. No witness artifact was retained,
+  so this remains an unverified breaker observation. Likewise, reported
+  six-of-seven badness tests are exploratory rather than durable conclusions.
+- Derived the exact packet pressure: inaccessible triples avoid B and consume
+  all six holes; inaccessible pairs contain at most one B vertex and consume at
+  least three holes, or at least five when they contain B. Hole loads cannot be
+  summed without controlling reuse.
+- A tentative arc-minimal charging route appears vulnerable to gain cycles but
+  has no retained exact breaker. See `attempts/tick46-k6-frontier.md`.
+- **Next queued attack:** classify the maximal six-bad relaxations. Test whether
+  their six-hole graph is necessarily `2K3` and whether the omitted Seymour
+  source is forced by a triangle-row synchronization theorem. If false,
+  enumerate the exact finite family of hole-support cores rather than all
+  six-edge graphs.
