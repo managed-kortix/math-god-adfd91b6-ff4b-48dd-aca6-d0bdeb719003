@@ -97,12 +97,14 @@ consecutive new rows, the floor matrix contains the unit triangular block
 \left(\mathbf1_{j\ge i}\right)_{0\le i,j<r}.
 \]
 
-After the common linear moment is removed, orthogonality to all `r` rows forces
+Keeping the common linear moment gives the exact remaining equation
+`m_(B-1) A=0`. Thus, when `m_(B-1)!=0`, orthogonality to all `r` rows forces
 all `r` detectable cell masses to vanish. Since the old state is affine on each
-cell, every witness supported on exactly those matched cells has zero
-correlation with `D`. More generally, `s` cells leave at most `s-r` detectable
-mass directions. Hence a nontrivial post-cutoff witness requires surplus cells
-or global-tail structure.
+cell, every witness supported on exactly those matched cells then has zero
+correlation with `D`. The unconditional formulation originally written here
+omitted that nondegeneracy condition; Cycle 59 gives the corrected boundary-
+coupled dual. A nontrivial witness requires surplus cells, an exceptional
+boundary equation, or global-tail structure.
 
 Using fourteen consecutive cells gives an exact determinant witness, but its
 gain is only `O(log^2(M)/M^4)`. After multiplication by the block weight it is

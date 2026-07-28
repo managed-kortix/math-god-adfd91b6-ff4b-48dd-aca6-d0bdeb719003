@@ -137,7 +137,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 58
+- **cycle:** 59
 - **announcements:** none
 
 ## immutable target list
@@ -156,9 +156,10 @@ waiting process.
 
 ## next exact steps
 
-1. Prove an arithmetic lower bound for the post-staircase residual `R` strong
-   enough to combine with the adjacent-row cusp error, or estimate the exact
-   residual/suffix orientation directly; suffix size is now controlled.
+1. Optimize the Cycle 59 boundary-coupled finite-cell quotient on deliberately
+   chosen surplus shells and seek a symbolic Möbius divisor-floor correlation
+   lower bound that pays `beta_2+delta`; equivalently bound complete Gram
+   capture in the exact energy partition.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -173,6 +174,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-28: Cycle 59 derived the exact boundary-coupled finite-cell dual for
+  the post-staircase residual. It reduces explicit witnesses to two cell
+  moments with an inverse-Gram metric and a Möbius divisor-floor numerator. The
+  audit corrected Cycle 56: matched-shell annihilation ends in `m_(B-1)A=0`
+  and requires `m_(B-1)!=0`. The exact energy partition shows a lower bound for
+  `R` is a second-order complete-Gram capture estimate. Finite data suggest
+  constant-scale `R`, but geometry alone supplies no positive bound. No RH
+  result is claimed.
 
 - 2026-07-26: Cycle 58 bounded the lag-two omitted suffix by an exact adjacent-
   row restricted Vasyunin Schur complement and proved the sharp scale

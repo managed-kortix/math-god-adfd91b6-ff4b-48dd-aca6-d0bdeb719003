@@ -105,3 +105,10 @@ moment `A_n=sum c_n(a)` and a tangent moment
 the tangent moment: `<-a>=<a>` and paired plus-symbol terms double rather than
 cancel. Exact linear vanishing therefore needs an all-level symbolic argument,
 not symmetry or any finite precision. This proves no vanishing and no BSD case.
+
+## Bounded scout cycle 59
+
+For sign `+1`, the Mazur--Tate functional equation modulo the augmentation
+square gives `2B_n=-c_nA_n mod 5^n`. Thus exact all-level augmentation
+vanishing forces tangent vanishing for `389a1`; bare Manin relations do not
+prove the needed constant moment. No BSD case is proved.

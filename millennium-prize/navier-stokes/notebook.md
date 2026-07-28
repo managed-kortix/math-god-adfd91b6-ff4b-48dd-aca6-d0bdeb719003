@@ -140,3 +140,11 @@ as `I(lambda u)=lambda^4I(u)` and `D(lambda u)=lambda^3D(u)`, so
 `lambda>nu D(c)/I(c)` gives positive instantaneous `L^3` growth. This is only
 an initial derivative for smooth periodic data; it implies neither blowup nor
 failure of global regularity.
+
+## Bounded scout cycle 59
+
+Fixed-interval inviscid-limit continuity upgrades the Cycle 43 positive initial
+derivative to positive finite-time relative `L^3` growth at large amplitude.
+On bounded rescaled intervals amplification converges to a finite Euler factor,
+so amplitude alone cannot make it unbounded. This smooth two-dimensional family
+gives no blowup or regularity result.

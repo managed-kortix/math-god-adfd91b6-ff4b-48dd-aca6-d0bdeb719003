@@ -4363,6 +4363,17 @@ The route still lacks a uniform lower bound for the post-staircase residual
 `W_M` is already spent. Details and explicit constants are in
 `cycle-58-adjacent-row-cusp-bound.md`. No RH result is claimed.
 
+## Cycle 59: exact boundary-coupled residual dual
+
+The post-staircase residual has an exact finite-cell dual in the moments
+`A_k=int h/t` and `B_k=int h/t^2`, with an explicit inverse-Gram metric and a
+Möbius divisor-floor numerator. This audit corrects Cycle 56: matched-shell
+annihilation ends in `m_(B-1)A=0` and requires `m_(B-1)!=0`. The energy
+partition `(log M)^2P_M=W_M+K_(M,B)+R` identifies a lower bound for `R` with a
+second-order upper bound on complete old/new Gram capture. Finite data suggest
+constant-scale `R`, but no uniform correlation estimate is known. Details are
+in `cycle-59-boundary-coupled-dual.md`. No RH result is claimed.
+
 ## Cycle 49: recombination returns the original terminal kernel
 
 Combining packet surplus and coherent deficit before estimating gives

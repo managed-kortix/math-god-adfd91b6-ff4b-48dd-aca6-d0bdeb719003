@@ -116,3 +116,11 @@ so their spectral edges converge. A limiting bound `H>=mI` therefore gives
 vacuum sectors must first be consistently removed and identified. This is only
 an abstract sufficient topology; no Yang--Mills construction, convergence, or
 mass gap is proved.
+
+## Bounded scout cycle 59
+
+Strong resolvent convergence transfers the gap exactly when resolvent norms
+converge. Collective compactness or positive trace convergence suffices;
+individual compactness and a uniform trace bound do not, by an escaping
+eigenvalue counterexample. No Yang--Mills cutoff is shown to satisfy the
+sufficient hypotheses, so no mass gap is proved.

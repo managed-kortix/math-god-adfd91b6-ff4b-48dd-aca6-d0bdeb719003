@@ -126,3 +126,10 @@ Thus the `t`-fold XOR product has multiplied sample cardinality but at most
 `t c(A)+4(t-1)` fitting complexity. Black-box XOR/direct-product replication
 cannot amplify one fixed circuit exponent to all exponents. This gives no
 antichecker, lower bound, or P-versus-NP result.
+
+## Bounded scout cycle 59
+
+Any nonuniform gadget tree with `L` sample copies, total input length `M=LN`,
+and total gadget complexity `S` obeys `c(T(A_N))<=L c(A_N)+S`. Growing arity
+cannot amplify exponent `a` beyond `max(a,b)` when `S<=M^(b+o(1))`; the gadgets
+must already import the larger hardness. This proves no circuit lower bound.

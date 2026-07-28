@@ -104,3 +104,11 @@ length three and first differ at the cubic jet. Replacing `x^3` by
 needs formal ideal containment/equality or an independent finite-determinacy
 theorem, not a bounded deformation jet. This is a local obstruction only and
 proves no Hodge statement.
+
+## Bounded scout cycle 59
+
+Formal inclusion in a smooth irreducible germ plus equal Krull dimension forces
+formal equality: a nonzero quotient ideal in the regular local domain strictly
+lowers dimension. Reduced equidimensionality alone fails for a component of
+`Spf C[[x,y]]/(xy)`. The Hodge route still lacks the required branch inclusion
+and dimension equality. No Hodge case is proved.
