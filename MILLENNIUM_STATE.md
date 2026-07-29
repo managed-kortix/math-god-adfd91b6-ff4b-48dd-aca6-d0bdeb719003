@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 97
+- **cycle:** 98
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,14 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 98 audited adelic BSD determinant lines, coniveau Hodge
+  induction, pressure-Hessian Navier depletion, general Circuit-SAT speedups,
+  and Yang--Mills loop equations.  Each route reorganizes a missing target-level
+  input: ETNC compatibility, geometric support, nonlocal pressure cancellation,
+  a lower bound compatible with `P=NP`, or uniform vacuum-sector clustering.
+  The RH prime-matrix scout returned no report.  All returned routes met
+  rotation gates.
 
 - 2026-07-29: Cycle 97 attacked the average-case MCSP one-sided rejector by
   gate elimination, certificates, anchored restrictions, and explicit upper
