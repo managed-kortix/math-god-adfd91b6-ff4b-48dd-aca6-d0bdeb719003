@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 95
+- **cycle:** 96
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 96 verified Oliveira--Santhanam average-case MCSP
+  magnification from the primary source and corrected the formal model to
+  never-wrong ternary solvers with `1-1/n` coverage.  The proof's one-sided
+  rejector has `1-2^-n` coverage; constant-density one-sided hardness is
+  sufficient but not equivalent to arbitrary zero-error hardness.  Exact MUX-
+  tree fitting blocks local and restriction methods, leaving computation-
+  sensitive sample fitting.  Parallel scouts found only rotation gates for RH
+  Fredholm determinants, BSD primitivity, Hodge normal functions, and Navier
+  backward uniqueness; the Yang--Mills scout returned no report.
 
 - 2026-07-29: Cycle 95 audited canonical systems, derived BSD heights,
   finite-field Hodge lifting, suitable-solution rigidity, Kolmogorov refuters,

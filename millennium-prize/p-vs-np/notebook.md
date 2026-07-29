@@ -1,5 +1,17 @@
 # Notebook
 
+## Cycle 96
+
+Oliveira--Santhanam average-case MCSP magnification is valid: a fixed-power
+lower bound for formal zero-error average-case `MCSP[n^c]` against unrestricted
+circuits implies `P!=NP`.  The formal solver must be decisive on `1-1/n` of
+uniform truth tables, not merely one half.  Their proof constructs a one-sided
+rejector with coverage `1-2^-n`.  Ruling out constant-density one-sided
+rejectors is sufficient but not equivalent to ruling out arbitrary ternary
+solvers.  Compressed MUX decision trees fit every short labeled sample, so local
+query/restriction methods cannot charge the global circuit-fitting predicate.
+The theorem is preserved, but the route is not promoted.
+
 ## Cycle 93
 
 For permutation-invariant randomized query algorithms, hypergeometric
