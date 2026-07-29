@@ -942,3 +942,35 @@ No audits yet.
 - **Next queued experiment:** scout all 65 leaves under a fixed cap. Refine only
   hard leaves by the incoming-versus-hole status of the seven non-outneighbors,
   yielding at most 1,110 complete-cut orbits rather than a raw six-hole census.
+
+### Primary cube scout
+
+- Ran all 65 canonical leaves with CaDiCaL 1.7.3 under a deterministic 20-second
+  cap. Twenty-nine returned UNSAT and 36 timed out; no SAT leaf appeared. The
+  unresolved leaves represent labelled multiplicity 39,339 of 63,063.
+- Results are frozen in `experiments/k6-reduced-scout-20s.json`. They are timing
+  observations only: no LRAT was retained and no leaf is mathematically closed
+  by this scout.
+- Easy UNSAT is strongly concentrated when z is one of source 2's selected
+  inaccessible witnesses, or when source 2 has very high A'-outdegree. The hard
+  set includes every low-A/high-B profile and most witnesses involving w.
+- **Next queued attack:** implement the 1,110 complete-cut orbit enumerator and
+  restrict it to the 36 hard parents. Distinguishing incoming arcs from holes is
+  the missing propagation in those leaves; preserve the independent labelled
+  orbit-multiplicity audit before any certification campaign.
+
+### Complete-cut refinement
+
+- Added the full incoming-versus-hole refinement of the source-2 cube cover.
+  There are exactly 1,110 semantic orbits representing 3,171,168 labelled
+  complete source cuts with two selected witnesses.
+- Production and independently implemented labelled enumeration agree on every
+  key, orbit multiplicity, and canonical representative; manifest SHA-256 is
+  `3979f9dc...abbb970`.
+- Each complete cube fixes outgoing, incoming, and hole status for all fifteen
+  source pairs, plus the two witness selectors. This is the frozen secondary
+  split for the 36 hard primary leaves.
+- **Next queued experiment:** map complete-cut children to their primary parent,
+  run short scouts only below the 36 hard parents, and retain the first LRAT
+  pilots to measure whether per-leaf proofs are small enough for durable Git or
+  require external content-addressed storage.
