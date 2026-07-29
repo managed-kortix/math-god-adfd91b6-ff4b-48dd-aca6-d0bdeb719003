@@ -160,3 +160,14 @@ The promoted bottleneck is an update-time-sensitive, non-localizable lower
 bound for one exact `Stream-Merge` operation. The current canonical circuit
 already summarizes every preceding block, so there is no independent
 many-block consistency burden. No lower bound or separation is claimed.
+
+## Main funnel cycle 77
+
+Quantifier normalization confirms that canonical merge is a higher-PH local
+optimization predicate, but supplies no bounded-update lower bound. The block
+process is Markovian; proof-complexity needs a missing correctness-to-proof
+compiler; and pseudorandom anticheckers presuppose nonempty error sets. More
+decisively, canonical merge belongs to the MMW upper-bound construction, while
+the magnification hypothesis attacks relational search-MCSP, whose solver may
+emit any witness. Hardness of the canonicalized problem does not transfer. The
+Stream-Merge tactic is retired. No separation is claimed.

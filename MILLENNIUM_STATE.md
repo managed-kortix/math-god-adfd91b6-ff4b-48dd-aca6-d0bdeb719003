@@ -5,12 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** exact P-vs-NP resource-bounded-compression funnel
-- **active main funnel:** McKay--Murray--Williams search-MCSP magnification at
-  `s(n)=2^(n/log^* n)`; ordinary communication and counting are retired at an
-  exact `O(s log(n+s))` residual ceiling. The live target is an update-time-
-  sensitive, non-localizable lower bound for exact `Stream-Merge` canonical
-  minimization and universal agreement.
+- **phase:** rotation review after exact P-vs-NP compression audit
+- **active main funnel:** selection of a new full-reach mechanism. The MMW
+  implication remains valid, but the Stream-Merge tactic is retired: canonical
+  merge is only an upper-bound implementation, while the target search relation
+  permits any witness; residual counting, invented global consistency,
+  proof-compilation, and PRG hitting all fail their implication gates.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 76
+- **cycle:** 77
 - **announcements:** none
 
 ## immutable target list
@@ -161,13 +161,14 @@ waiting process.
 
 ## next exact steps
 
-1. Pin the exact `Stream-Merge^SAT` canonical-output decision predicate and its
-   quantifier normal form, encoding, oracle semantics, and update accounting.
-2. Seek a lower bound for that local semantic predicate which fails under
-   arbitrary local-oracle replacement; reject an invented many-block burden,
-   because the current circuit makes the block process Markovian.
-3. Seek a uniform time--space tradeoff for exact canonical merge. Communication
-   may be used only with computationally bounded parties and transcript charges.
+1. Complete a written portfolio rotation. Do not promote MMW again without a
+   lower-bound lemma for the original noncanonical search relation.
+2. Audit the RH Weil-spline refinement Schur complement for any structural sign
+   theorem stronger than Weil positivity itself; rotate immediately if only
+   recombined positivity remains.
+3. Audit a Yang--Mills physical-slab cone theorem only as an RG component: the
+   main lemma must force entry of the weak-coupling trajectory into its basin,
+   not merely reprove fixed strong-coupling clustering.
 4. Keep bounded scouts live: BSD derived Kato rank-two primitivity; RH Weil
    spline calibration; Hodge generic-seed obstruction; Navier phase-sensitive
    backscatter depletion; Yang--Mills common-cone physical-slab contraction.
@@ -175,6 +176,14 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 77 normalized the Stream-Merge feasibility, minimization,
+  and lexicographic predicates and then met the rotation gate. The process is
+  Markovian; proof-complexity and PRG proposals import missing correctness; and
+  canonical merge is an implementation of the MMW upper bound rather than the
+  original relational search target. Its hardness therefore would not establish
+  the required search-MCSP lower bound. The tactic is retired. No P-vs-NP result
+  is claimed.
 
 - 2026-07-29: Cycles 75--76 completed the rotation review. Exact opposing-wave,
   endpoint-kernel, and three-family packet audits retired the Navier Duhamel
