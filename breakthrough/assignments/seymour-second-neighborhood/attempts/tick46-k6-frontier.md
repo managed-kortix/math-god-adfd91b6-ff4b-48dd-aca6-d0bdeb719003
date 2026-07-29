@@ -54,3 +54,24 @@ several sources. A tentative arc-minimal charging route also appears vulnerable
 to gain cycles, but this has not been preserved as a reproducible theorem or
 breaker. Any proof must control shared packet compatibility. This note records
 a structural frontier, not an elimination of k=6.
+
+## Reduced exact-computation route
+
+The two C vertices can be forgotten soundly. On the remaining sixteen vertices
+`T={w,z} union A' union B`, exact T-outdegrees are 8 on `w,z,A'` and 6 on B;
+their sum automatically leaves six holes. Every genuine bad A' row has at least
+two vertices inaccessible by a T-two-walk. The deterministic generator
+`experiments/k6_reduced_cnf.py` encodes this sound relaxation using selected
+inaccessible witnesses and no path auxiliaries from the full model.
+
+The relaxation is sharply satisfiable when any one A' badness row is omitted.
+The committed witness `k6-reduced-six-witness.txt`, verified directly by
+`verify_k6_reduced.py`, has hole graph `2K3`; its six selected rows have exactly
+the complementary triangle pairs inaccessible, while the omitted row has none.
+This fixture blocks any proof that only six source rows suffice.
+
+The all-seven reduced CNF has 3,105 variables and 12,128 clauses, but current
+direct CaDiCaL runs time out. No UNSAT claim is made. If eventually certified,
+reduced UNSAT would eliminate k=6 because every genuine final-row counterexample
+projects to this relaxation. Reduced SAT would only be a structural breaker and
+need not extend through the omitted C rows or minimality constraints.
