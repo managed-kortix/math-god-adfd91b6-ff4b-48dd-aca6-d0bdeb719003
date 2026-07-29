@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 98
+- **cycle:** 99
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,13 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 99 audited RH Sonine spaces, rank-one BSD closure, Hodge
+  monodromy fixed parts, and finite-subgroup Yang--Mills approximation.  Burnol
+  completeness includes off-line zeros; rank-one strong BSD retains finitely
+  many integral primary cases; monodromy splits cohomology without producing a
+  horizontal Chow cycle; and Jordan's theorem forbids finite subgroups becoming
+  dense in `SU(N)`.  Navier logarithmic and MKTP scouts returned no reports.
 
 - 2026-07-29: Cycle 98 audited adelic BSD determinant lines, coniveau Hodge
   induction, pressure-Hessian Navier depletion, general Circuit-SAT speedups,
