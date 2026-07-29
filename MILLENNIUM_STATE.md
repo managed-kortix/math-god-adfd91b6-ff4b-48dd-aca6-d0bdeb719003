@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 99
+- **cycle:** 100
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 100 ranked the portfolio and hostilely audited the apparent
+  BSD lead.  Kim's published `389a1`, `p=5`, `41*61` Kurihara certificate does
+  imply nonzero residual derived Kato component and primitivity of the ordinary
+  core-rank-one Kolyvagin system, with a rank-two Selmer conclusion.  It does
+  not construct a rank-two Kolyvagin system; that terminology was corrected.
+  The certificate and consequences are prior work and remain calibration only.
+  Parallel reviews retired localized RH zero tests, Navier minimal-orbit
+  compactness, standard-conjecture Hodge generation, coupling interpolation in
+  Yang--Mills, and further P-vs-NP magnification mechanisms.
 
 - 2026-07-29: Cycle 99 audited RH Sonine spaces, rank-one BSD closure, Hodge
   monodromy fixed parts, and finite-subgroup Yang--Mills approximation.  Burnol
