@@ -5,11 +5,11 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after Hermitian lifting gate
-- **active main funnel:** selection review.  An explicit characteristic-two
-  Hermitian plane has nonzero exceptional-alpha projection, but componentwise
-  `W_2` obstruction cancellation has no canonical relative-Chow meaning and
-  all-orders lifting would import the missing variational Hodge statement.
+- **phase:** Yang--Mills temporal-annulus contraction gate
+- **active main funnel:** prove a cutoff/volume/sector-uniform full-kernel
+  temporal-annulus `L^2` SDPI after exact superselection quotient, together with
+  the OS physical-transfer completeness bridge, or construct an explicit
+  gauge-invariant observable sequence whose contraction ratios tend to one.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 118
+- **cycle:** 119
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 119 rotated to the Yang--Mills temporal-annulus gate.  The
+  exact central `SU(2)` convolution model has singular values
+  `I_(2j+1)(beta)/I_1(beta)` and no high-spin escape after center quotient, but
+  it does not represent the interacting four-dimensional physical slab.  A
+  four-state tensor channel proves fixed-observable SDPI cannot control hidden
+  cutoff-dependent sectors.  Full-algebra temporal SDPI plus OS completeness
+  is essentially physical-slab contraction; without the bridge it proves only
+  screening.  Navier first-passage tax, native-MCSP local fitting, RH symmetry
+  branching, and all-prime BSD modular-symbol scouts failed their first gates.
 
 - 2026-07-29: Cycle 118 constructed an exact sparse connected Hermitian plane
   over `F_32` with `A^tA=I` and nonzero exceptional-character coefficient
