@@ -5,12 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after transcript-orbit selector audit
+- **phase:** portfolio rotation after Fermat candidate obstruction
 - **active main funnel:** select a genuinely new structural production target.
-  Transcript-conditioned GapMaj orbit extraction is retired at an exact
-  transported-seed LP obstruction; the proposed degree-12 Fermat Hodge orbit is
-  already covered by Shioda 1979.  The next bounded search tests exceptional
-  Fermat Hodge orbits beyond known degree families before cycle construction.
+  The degree-33 exceptional Fermat character remains open, but da Silva's
+  proposed elementary-symmetric surface is exactly an ambient complete
+  intersection and has zero primitive projection.  Search must use a genuinely
+  nonambient cycle outside power-map and standard join closures.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 114
+- **cycle:** 115
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +175,18 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 115 answered the proposed Fermat candidate question
+  negatively.  Newton's identity proves
+  `W_d=V_X(e1(x^d),e2(x^d))` scheme-theoretically, hence
+  `[W_d]=2d^2 H^2` and every primitive projection vanishes.  Independently,
+  `W_11` is invariant under `(mu_11)^5`, so only coordinatewise-11-divisible
+  characters can occur; the exceptional
+  `(7,10,13,19,22,28)` projection is zero.  Exact checks confirm all unit Hodge
+  weights and indecomposability.  Degree-22 fourfold candidates are all Shioda
+  quasi-decomposable despite strong subset indecomposability, while regular
+  sparse monomial maps to degree 33 reduce to power maps and cannot reach the
+  primitive conductor-33 orbit.
 
 - 2026-07-29: Cycle 114 retired transcript-conditioned GapMaj orbit extraction.
   A valid execution-cylinder identity preserves the whole private-coin
