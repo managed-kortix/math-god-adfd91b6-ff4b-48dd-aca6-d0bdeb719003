@@ -5,12 +5,11 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** degree-33 Fermat exceptional-cycle production
-- **active main funnel:** lift or replace characteristic-two Hermitian-plane
-  representatives of the exceptional character.  A concrete noncoordinate
-  plane has a nonzero exact obstruction already modulo `4`; projector-weighted
-  combinations may cancel this, so the next gate is the character-resolved
-  obstruction matrix for the Hermitian plane span.
+- **phase:** portfolio rotation after Hermitian lifting gate
+- **active main funnel:** selection review.  An explicit characteristic-two
+  Hermitian plane has nonzero exceptional-alpha projection, but componentwise
+  `W_2` obstruction cancellation has no canonical relative-Chow meaning and
+  all-orders lifting would import the missing variational Hodge statement.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 117
+- **cycle:** 118
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +174,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 118 constructed an exact sparse connected Hermitian plane
+  over `F_32` with `A^tA=I` and nonzero exceptional-character coefficient
+  `t^3+t^2+t=t^12`, inverse `t^2+t`.  Thus the finite-field alpha Tate
+  representative is explicit.  The earlier block plane is alpha-invisible,
+  and its projected obstruction vanishes by stabilizer mismatch.  General
+  plane obstructions also include `(16,16,1)` multinomial terms.  Since
+  component Hilbert obstructions are not additive obstructions of a projector
+  Chow cycle and all-orders lifting is circular, the Hermitian route is retired
+  as main; only the nonlinear relative-`CH^2/W_2` gate remains a bounded scout.
 
 - 2026-07-29: Cycle 117 moved the exceptional degree-33 character to its exact
   finite-field lifting gate.  Modulo `2`, the Fermat fourfold is Hermitian and
