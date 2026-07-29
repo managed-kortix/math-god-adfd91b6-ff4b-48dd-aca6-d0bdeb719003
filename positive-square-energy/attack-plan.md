@@ -155,6 +155,13 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     theorem after final ownership, and combine with the ten already proved
     U1--U10 repairs. Then synthesize the rank-eleven theorem and run fresh
     hostile topology/certificate gates.
+29. The 115502 ordinary fully shared `T^9PP` rows are now physically certified;
+    every one of 517923 abstract SAFE choices passes post-ownership theorem
+    reclassification. The new C5 router handles 2--5 ports. Implement U1--U10
+    physical repairs through the same graph/owner/theorem pipeline, including
+    corrected U7 and degree-four U8. Then combine DNN, bridge pruning, all
+    marked endpoints, all-rank `T^rQ`, and fully shared closure into the complete
+    rank-eleven theorem.
 
 ## Running jobs
 
