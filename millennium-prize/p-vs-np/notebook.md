@@ -181,3 +181,14 @@ implication and the barrier. The full matrix reduces to an `m^o(1)`-bit kernel,
 so generic probes/local oracles collapse; the proof must charge computation on
 that kernel. The route is eligible as a full-reach target but has no promoted
 lower-bound mechanism yet. No separation is claimed.
+
+## Main-funnel cycle 88
+
+Post-Buss self-reduction costs only `k+O(log k)` calls, an `m^o(1)` multiplier,
+and does not force adaptivity on arbitrary RAMs. The complete kernel fits in the
+allowed workspace, defeating query, hidden-location, communication, and
+read-limited extraction. Restricted branching-program/proof lower bounds lack a
+reverse simulation; syntax-sensitive extractors also fail a junk-computation
+robustness test. Standard SAT reductions have fatal adjacency-matrix and
+parameter blowups. The proof mechanism is retired while the magnification
+implication remains valid. No separation is claimed.

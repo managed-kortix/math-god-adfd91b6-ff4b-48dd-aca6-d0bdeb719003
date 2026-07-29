@@ -5,12 +5,11 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** P-vs-NP small-Vertex-Cover time--space magnification
-- **active main funnel:** Oliveira--Santhanam adjacency-matrix
-  `k(n)=2^sqrt(log n)` Vertex Cover. The exact full-reach target is exclusion of
-  simultaneous `m^1.01` time and `m^o(1)` workspace. Probe/communication
-  mechanisms are retired by Buss kernelization; the live search is for a
-  computation-sensitive, non-localizable extraction lemma on the exact language.
+- **phase:** portfolio rotation after small-Vertex-Cover mechanism audit
+- **active main funnel:** selection review. Oliveira--Santhanam's full-reach
+  target remains correct, but computation-sensitive extraction is retired:
+  the complete Buss kernel fits in allowed space, restricted-model reverse
+  simulations fail, and syntax-sensitive extractors are not junk robust.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 87
+- **cycle:** 88
 - **announcements:** none
 
 ## immutable target list
@@ -161,14 +160,13 @@ waiting process.
 
 ## next exact steps
 
-1. Pin the exact random-access machine model and formulate the post-Buss kernel
-   computation as a uniform branching program/RAM problem with charged work.
-2. Seek a non-localizable extraction theorem from every fast small-space solver
-   to a model with a known time--space lower bound; reject read-k, resolution,
-   or pebbling surrogates without a reverse simulation.
-3. Build exact Buss-saturated finite gadgets only to falsify proposed extraction
-   invariants; finite hardness or ordinary NP reductions are not progress toward
-   the required RAM lower bound.
+1. Rotate only to a candidate with a concrete structural production lemma, not
+   another equivalent positivity, explicit hard output, or unrestricted lower
+   bound repackaging.
+2. Preserve exact bounded theorems and no-go certificates; advance them only
+   when novelty and implication gates are explicit.
+3. Continue bounded scouts across all six problems while searching for a route
+   whose first lemma survives hostile countermodels before promotion.
 4. Keep bounded scouts live: BSD derived Kato rank-two primitivity; RH Weil
    spline calibration; Hodge generic-seed obstruction; Navier phase-sensitive
    backscatter depletion; Yang--Mills common-cone physical-slab contraction.
@@ -176,6 +174,14 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 88 met the small-Vertex-Cover mechanism rotation gate.
+  Self-reduction adds only an `m^o(1)` factor; the stored Buss kernel permits
+  arbitrary computation invisible to query methods; and no read-limited,
+  resolution, pebbling, or SAT-transfer normalization survives exact model and
+  parameter audits. A junk-robustness lemma now rejects syntax-sensitive
+  extractors. The magnification theorem remains valid, but no RAM lower bound or
+  P-vs-NP result is claimed.
 
 - 2026-07-29: Cycles 86--87 identified a distinct full-reach P-vs-NP target.
   Oliveira--Santhanam proves that a barely superlinear-time/subpolynomial-space
