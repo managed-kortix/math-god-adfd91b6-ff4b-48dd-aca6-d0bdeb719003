@@ -5,11 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after small-Vertex-Cover mechanism audit
-- **active main funnel:** portfolio rotation after exact falsification of
-  Navier full-Fourier phase escape.  Support leakage does not imply departure
-  from gauge-invariant maximizing interaction phases, and qualitative escape
-  has no uniform scale-critical modulus near invariant triad faces.
+- **phase:** portfolio rotation after transcript-orbit selector audit
+- **active main funnel:** select a genuinely new structural production target.
+  Transcript-conditioned GapMaj orbit extraction is retired at an exact
+  transported-seed LP obstruction; the proposed degree-12 Fermat Hodge orbit is
+  already covered by Shioda 1979.  The next bounded search tests exceptional
+  Fermat Hodge orbits beyond known degree families before cycle construction.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -141,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 113
+- **cycle:** 114
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +175,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 114 retired transcript-conditioned GapMaj orbit extraction.
+  A valid execution-cylinder identity preserves the whole private-coin
+  distribution, but wrong mass can be dispersed among many transcripts.  On
+  three-bit random-coordinate majority, preserving the transported uniform
+  seed law fixes orbit-conditioned error exactly at `1/3`; the rational dual is
+  `(1,0,0)`.  Conditional descent otherwise requires semantic randomized-error
+  evaluation.  The candidate Fermat dodecic orbit `(1,1,8,8,9,9)` passed its
+  character checks but failed novelty: Shioda 1979 covers all degrees at most
+  `20`.  BSD, RH, sparse-NP padding, and fixed-cutoff Yang--Mills scouts also
+  failed their full-reach or noncircularity gates.
 
 - 2026-07-29: Cycle 113 retired full-Fourier phase escape.  An exact packet has
   positive stretching `4`, maximizing physical interaction phase, and leakage
