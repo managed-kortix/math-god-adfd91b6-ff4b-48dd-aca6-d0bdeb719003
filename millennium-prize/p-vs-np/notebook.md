@@ -141,5 +141,22 @@ call node gives `c(B_D)<=S(D)+sum_u c(A_u)`. Free fanout and DAG sharing only
 improve this bound. With direct external calls and maximum coordinate overlap
 `Delta`, base exponent `a` becomes at most `a+log_M Delta`; subpolynomial
 overlap cannot amplify it. Polynomially many heavily overlapping or nested
-calls remain the only black-box escape and would require a new direct-sum lower
-bound robust to cross-instance sharing. No P-versus-NP result follows.
+ calls remain the only black-box escape and would require a new direct-sum lower
+ bound robust to cross-instance sharing. No P-versus-NP result follows.
+
+## Main funnel cycles 75--76
+
+McKay--Murray--Williams supplies a full-target implication. For
+`s(n)=2^(n/log^* n)`, proving that exact `search-MCSP^SAT[s]` has no
+deterministic one-pass solver with both `N^epsilon` space and `N^epsilon`
+update time for one fixed `epsilon>0` implies `P!=NP`. This corrects the prior
+all-exponents diagnosis, which belonged only to the antichecker funnel.
+
+Ordinary continuation signatures cannot reach the threshold. At any stream
+cut, their number is at most the number of size-`s` circuit functions plus one,
+giving only `O(s log(n+s))=N^o(1)` bits. Emitted output must also be charged,
+and pure fixed-power space lower bounds are false with unbounded update time.
+The promoted bottleneck is an update-time-sensitive, non-localizable lower
+bound for one exact `Stream-Merge` operation. The current canonical circuit
+already summarizes every preceding block, so there is no independent
+many-block consistency burden. No lower bound or separation is claimed.

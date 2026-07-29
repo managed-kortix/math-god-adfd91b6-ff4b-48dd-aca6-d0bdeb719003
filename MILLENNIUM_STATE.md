@@ -5,13 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** strategic review after exact retirement of the second proof funnel
-- **active main funnel:** rotation review — Hodge component-domination is
-  formally retired because universal cycle seeding is equivalent to generic
-  algebraicity; a three-dimensional Navier--Stokes enstrophy-excursion candidate
-  was also decisively falsified by scaling and summable cascade times. The next
-  funnel must use a genuinely scaling-critical mechanism rather than promote
-  either retired tactic.
+- **phase:** exact P-vs-NP resource-bounded-compression funnel
+- **active main funnel:** McKay--Murray--Williams search-MCSP magnification at
+  `s(n)=2^(n/log^* n)`; ordinary communication and counting are retired at an
+  exact `O(s log(n+s))` residual ceiling. The live target is an update-time-
+  sensitive, non-localizable lower bound for exact `Stream-Merge` canonical
+  minimization and universal agreement.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -143,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 74
+- **cycle:** 76
 - **announcements:** none
 
 ## immutable target list
@@ -162,24 +161,32 @@ waiting process.
 
 ## next exact steps
 
-1. Complete a portfolio review for the next genuinely distinct main funnel.
-   Hodge seeding, Navier enstrophy excursions, and the naive critical `L^3`
-   envelope are retired. Any Navier promotion requires a new depletion theorem
-   for coherent high--high backscatter, not another norm majorant.
-2. Attack the compensated Mobius--Chebyshev cell inequality first at the
-   summable `kappa/log a` block strength, then determine the strongest factor
-   available after every loss and whether its effective mass diverges.
-3. Fold the full completed smoothed zero expansion to positive ordinates and
-   compare its negative diagonal with the same-sign, affine, and endpoint
-   channels under one finite cutoff and signed error.
-4. Keep bounded scouts live: BSD exact modular-symbol moment certification;
-   Hodge component-dominance obstruction; Navier--Stokes diagonal-mode signed
-   integral; P-vs-NP all-exponents amplification obstruction; Yang--Mills
-   cutoff-uniform spectral-edge control.
+1. Pin the exact `Stream-Merge^SAT` canonical-output decision predicate and its
+   quantifier normal form, encoding, oracle semantics, and update accounting.
+2. Seek a lower bound for that local semantic predicate which fails under
+   arbitrary local-oracle replacement; reject an invented many-block burden,
+   because the current circuit makes the block process Markovian.
+3. Seek a uniform time--space tradeoff for exact canonical merge. Communication
+   may be used only with computationally bounded parties and transcript charges.
+4. Keep bounded scouts live: BSD derived Kato rank-two primitivity; RH Weil
+   spline calibration; Hodge generic-seed obstruction; Navier phase-sensitive
+   backscatter depletion; Yang--Mills common-cone physical-slab contraction.
 5. Rotate only at a proved checkpoint, decisive falsification, or documented
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycles 75--76 completed the rotation review. Exact opposing-wave,
+  endpoint-kernel, and three-family packet audits retired the Navier Duhamel
+  contraction and quadrupole-depletion variants. The MMW resource-bounded
+  compression theorem gives a distinct full-reach P-vs-NP funnel at
+  `s=2^(n/log^* n)`. An exact residual-count theorem ruled out ordinary
+  communication/counting: every stream-cut signature family has only
+  `O(s log(n+s))=N^o(1)` information, and output transcripts must be charged.
+  The promoted bottleneck is update-time-sensitive exact canonical merge; the
+  current circuit already summarizes prior blocks, so no extra global game is
+  assumed. No
+  lower bound, regularity theorem, or Millennium solution is claimed.
 
 - 2026-07-28: Cycle 74 audited the scaling-critical Navier `L^3` frequency
   envelope. The only high--high-to-low symbol gain is sharp and fully consumed

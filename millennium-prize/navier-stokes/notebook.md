@@ -159,6 +159,16 @@ cancellation leaves a Leray commutator rather than pressure cancellation. The
 specific envelope tactic is retired at this exact backscatter obstruction. No
 regularity result is claimed.
 
+## Main-funnel audit cycle 75
+
+The proposed high--high Duhamel contraction is either false with a perturbative
+data remainder or vacuous with an unrestricted quadratic remainder. Even if
+assumed, it leaves a low--high quadratic recurrence with a large branch and no
+uniform short-time factor. Dissipation repairs the infrared shell sum but leaves
+an ultraviolet cutoff. Exact orthogonal packet examples also show that zero
+orientation quadrupole does not control phase-sensitive low backscatter. Both
+depletion variants are retired. No Navier result is claimed.
+
 ## Bounded scout cycle 73
 
 The exact helical triad formula exposes indefinite genuinely three-dimensional
