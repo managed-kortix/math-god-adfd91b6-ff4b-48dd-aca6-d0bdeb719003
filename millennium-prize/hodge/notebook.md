@@ -1,5 +1,15 @@
 # Notebook
 
+## Cycle 104
+
+Primary-source audit confirms a clean bounded open target: the rank-two Weil
+space of a very general `Q(i)` abelian sixfold of signature `(3,3)` and nonsplit
+Hermitian determinant class `-3`.  Split-discriminant secant/Prym constructions
+do not cross the norm-class boundary.  An exact eigenspace projector tests any
+candidate cycle; one nonzero Weil projection suffices after applying `1+i`.
+Promotion requires a nonzero seed on a formally unobstructed relative Chow
+component dominating the nine-dimensional Shimura base.  None was found.
+
 ## Bounded calibration cycle 84
 
 The all-degree Fermat-plane semiregularity multiplication has a symbolic private-

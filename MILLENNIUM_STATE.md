@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 103
+- **cycle:** 104
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 104 primary-source-audited the nonsplit `Q(i)` Weil
+  sixfold target.  The generic discriminant-`-3` component remains open, while
+  split `-1` is covered by Markman's 2025 preprint.  Exact determinant
+  projectors reduce production to one codimension-three cycle with nonzero pure
+  `W^6` coefficient.  Smooth degeneration, principally polarized Pryms,
+  intermediate Jacobians, ordinary Abel--Prym products, and existing secant
+  sheaves remain in the split or contraction-generated sector.  No seed on a
+  formally unobstructed rank-nine relative Chow component was found, so the
+  target remains a bounded scout rather than the main funnel.
 
 - 2026-07-29: Cycle 103 audited reciprocal mollifiers, local-mixing gap
   criteria, phase-hypergraph compatibility, nonsplit Weil sixfolds, and TFNP
