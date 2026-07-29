@@ -16,6 +16,18 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-29: hardened the bulk fully shared rank-eleven `T^9PP` frontier. An
+  independent verifier regenerates 115512 incidence rows and physically checks
+  all 517923 abstract SAFE cycle choices, proving exactly 115502 ordinary rows
+  and isolating U1--U10. A hostile audit exposed 6714 selected degree-4/5
+  pentagon routers and an exact degree-5 case beyond the old at-most-four-mark
+  lemma. Added and independently refereed the physical C5 interval-router
+  theorem for 2--5 occupied ports, with forced `1+1+1+2` and five-singleton
+  partitions. Interval vertices, shared cuts, independently reconstructed
+  forest remnants/attachments, owner-induced cactus profiles, and theorem
+  ledgers are now exact. Eight built-in and twelve extra hostile mutations
+  reject; ultimate audit accepted the 115502 ordinary rows only. The ten
+  physical U1--U10 repairs remain the final fully shared endpoint task.
 - 2026-07-29: completed the exact rank-eleven `T^9P|P` endpoint. The physical
   verifier certifies all 50399 rows: 43145 ordinary triangular-hull plans, 7248
   private clustered-pentagon rows, and six projected residual repairs. Private

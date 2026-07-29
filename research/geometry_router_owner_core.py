@@ -63,12 +63,17 @@ def verify_cycle(geometry):
             "cycle repeats an undirected edge")
 
 
-def verify_intervals(geometry, intervals, owner_count=None):
+def verify_intervals(geometry, intervals, owner_count=None,
+                     allowed_owner_counts=(2, 3)):
     """Verify an ordered, exact partition into proper cyclic intervals."""
     intervals = tuple(tuple(interval) for interval in intervals)
     if owner_count is not None:
         require(len(intervals) == owner_count, "interval/owner count mismatch")
-    require(len(intervals) in (2, 3), "router must have two or three owners")
+    allowed_owner_counts = tuple(allowed_owner_counts)
+    require(allowed_owner_counts and len(allowed_owner_counts) ==
+            len(set(allowed_owner_counts)), "allowed router arities are invalid")
+    require(len(intervals) in allowed_owner_counts,
+            "router owner count is not explicitly allowed")
     flat = tuple(vertex for interval in intervals for vertex in interval)
     require(Counter(flat) == Counter(geometry.vertices),
             "cyclic intervals are not an exact vertex partition")
@@ -117,13 +122,34 @@ def exact_relabel_map(records, expected_source, expected_target, label):
     return mapping
 
 
-def verify_router_owner_split(geometry, intervals, owners, expected_sizes=None):
+def verify_router_owner_split(geometry, intervals, owners, expected_sizes=None,
+                              allowed_owner_counts=(2, 3)):
     """Bind ordered owners to concrete proper intervals of one router cycle."""
     require(len(owners) == len(set(owners)), "router has duplicate interval owners")
-    sizes = verify_intervals(geometry, intervals, len(owners))
+    sizes = verify_intervals(
+        geometry, intervals, len(owners), allowed_owner_counts
+    )
     if expected_sizes is not None:
         require(tuple(expected_sizes) == sizes,
                 "ordered interval sizes do not match concrete owner intervals")
+    return sizes
+
+
+def verify_c5_router_owner_split(geometry, intervals, owners,
+                                 expected_sizes=None):
+    """Verify the complete physical C5 interval-router range d=2,...,5."""
+    require(geometry.length == 5, "C5 router verifier received a non-pentagon")
+    sizes = verify_router_owner_split(
+        geometry, intervals, owners, expected_sizes, (2, 3, 4, 5)
+    )
+    arity = len(owners)
+    require(2 <= arity <= 5, "C5 router arity is outside 2..5")
+    if arity == 5:
+        require(sizes == (1, 1, 1, 1, 1),
+                "degree-five C5 router is not forced singleton")
+    elif arity == 4:
+        require(sorted(sizes) == [1, 1, 1, 2],
+                "degree-four C5 router is not a 1+1+1+2 partition")
     return sizes
 
 
@@ -133,8 +159,9 @@ def undirected_edge(edge):
 
 
 def verify_physical_owner_certificate(expected_vertices, expected_edges,
-                                      expected_attachment_domain, vertices, edges,
-                                      owner_records, attachment_owner_records, owners):
+                                       expected_attachment_domain, vertices, edges,
+                                       owner_records, attachment_owner_records, owners,
+                                       expected_attachment_anchors=None):
     """Check an exhaustive physical graph and connected induced owner territories.
 
     Expected graph and attachment domains are independently reconstructed by the
@@ -156,9 +183,19 @@ def verify_physical_owner_certificate(expected_vertices, expected_edges,
     require(all(endpoint in set(expected_vertices) for edge in expected_edges
                 for endpoint in edge),
             "expected physical edge has an endpoint outside its vertex domain")
-    require(len(expected_attachment_domain) == len(set(expected_attachment_domain)) and
-            set(expected_attachment_domain) <= set(expected_vertices),
-            "expected physical attachment domain is invalid")
+    require(len(expected_attachment_domain) == len(set(expected_attachment_domain)),
+            "expected physical attachment domain has aliases")
+    if expected_attachment_anchors is None:
+        require(set(expected_attachment_domain) <= set(expected_vertices),
+                "expected physical attachment domain is invalid")
+        attachment_anchors = {site: site for site in expected_attachment_domain}
+    else:
+        attachment_anchors = exact_owner_map(
+            expected_attachment_anchors, expected_attachment_domain,
+            "expected attachment anchors"
+        )
+        require(set(attachment_anchors.values()) <= set(expected_vertices),
+                "expected attachment anchor lies outside the physical graph")
     require(len(vertices) == len(set(vertices)), "physical vertex domain has aliases")
     require(set(vertices) == set(expected_vertices),
             "submitted physical vertex domain differs from reconstructed domain")
@@ -180,9 +217,9 @@ def verify_physical_owner_certificate(expected_vertices, expected_edges,
             "physical certificate has an inexact final-owner range")
     require(all(owner in set(owners) for owner in attachment_map.values()),
             "physical attachment has an unknown owner")
-    require(all(attachment_map[vertex] == owner_map[vertex]
-                for vertex in expected_attachment_domain),
-            "physical attachment does not follow its vertex owner")
+    require(all(attachment_map[site] == owner_map[attachment_anchors[site]]
+                for site in expected_attachment_domain),
+            "physical attachment does not follow its reconstructed anchor owner")
 
     adjacency = {vertex: set() for vertex in vertices}
     for left, right in edges:

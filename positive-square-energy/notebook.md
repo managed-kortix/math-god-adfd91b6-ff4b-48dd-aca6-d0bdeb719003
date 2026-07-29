@@ -1,5 +1,23 @@
 # notebook — positive square energy
 
+## 2026-07-29 — fully shared ordinary `T^9PP` closure
+
+The complete 115512-row incidence universe splits into 115502 physically
+certified ordinary rows plus ten exact residuals. Rather than trust one selected
+abstract SAFE split, the verifier checks all 517923 SAFE cycle choices after
+physical ownership. It reconstructs every C3/C5 vertex, canonical shared cut,
+interval, forest remnant, and attachment; owner-induced graphs must be connected
+cacti whose cyclomatic rank equals the complete owned-cycle count, and packet
+theorems are reclassified afterward.
+
+The first audit found 5334 degree-four and 1380 degree-five selected pentagon
+routers outside the old local theorem. The new physical C5 interval-router
+lemma covers all 2--5 occupied ports: four ports force intervals
+`1+1+1+2`, five ports force five singletons, and private remnants are forest
+attachments to one owner. A separate referee accepted the lemma and an ultimate
+audit accepted all 115502 ordinary rows. U1--U10 remain deliberately excluded
+pending physical repair certificates.
+
 ## 2026-07-29 — exact `T^9P|P` endpoint closure
 
 The geometry-aware certificate now closes all 50399 endpoint rows. The 43145
