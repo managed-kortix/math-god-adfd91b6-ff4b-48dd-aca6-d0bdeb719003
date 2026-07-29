@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 106
+- **cycle:** 107
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 107 primary-source-audited Markman's quartic-CM
+  secant-sheaf preprint.  On a special genus-four-Jacobian eightfold, the source
+  rigorously constructs a normalized Chern class with nonzero four-dimensional
+  Weil projection; algebraic propagation remains conditional on semiregularity.
+  The open lemma is equality of kernels of the Atiyah obstruction and Chern-
+  contraction maps from a `28`-dimensional deformation space.  The
+  cohomological half is symbolic, but no explicit RM curve, gluing sheaf,
+  resolution, or Ext matrix is provided, so the finite certificate cannot yet
+  be reproduced.  The route remains the leading Hodge scout, not the main
+  funnel.  No alternate scout beat it.
 
 - 2026-07-29: Cycle 106 audited dynamic phase frustration, Yang--Mills
   martingale applicability, rank-two Bockstein determinants, PCP proof

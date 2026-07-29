@@ -1,5 +1,16 @@
 # Notebook
 
+## Cycle 107
+
+Primary-source audit of Markman arXiv:2509.23079 confirms an algebraic normalized
+Chern class with nonzero quartic-CM Weil projection on a special abelian
+eightfold `J(C) x J(C)^`.  The unresolved family step is exactly injectivity of
+the Buchweitz--Flenner semiregularity map on the Atiyah obstruction image.  This
+reduces to equality of kernels of two maps from a `28`-dimensional deformation
+space.  The cohomological matrix is explicit, but the preprint does not specify
+enough sheaf/resolution data to compute the Ext/Atiyah matrix reproducibly.
+The target remains the leading Hodge scout but is not promoted.
+
 ## Cycle 105
 
 Polarization changes, `K`-linear isogenies, nonprincipal duals, and twisted
