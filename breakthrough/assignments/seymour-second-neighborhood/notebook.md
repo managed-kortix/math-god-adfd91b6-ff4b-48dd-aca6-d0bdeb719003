@@ -907,3 +907,21 @@ No audits yet.
   source is forced by a triangle-row synchronization theorem. If false,
   enumerate the exact finite family of hole-support cores rather than all
   six-edge graphs.
+
+### Reduced-model sharp fixture
+
+- Added a deterministic 16-vertex relaxation with exact reduced degrees and
+  existential inaccessible witnesses. It removes C and all full-CNF path,
+  deletion, and arc-minimality machinery while preserving every genuine k=6
+  counterexample as a model.
+- A directly verified six-of-seven witness has holes exactly `2K3` on the six
+  selected A' vertices. Each selected source has the other two triangle vertices
+  inaccessible; the omitted source has none. This sharp fixture is committed
+  with SHA-256 `c6f958a...979c7e` and prevents overclaiming from six rows.
+- The all-seven reduced CNF is only 3,105 variables/12,128 clauses but remains
+  solver-hard under current direct runs. No reduced UNSAT claim or 2K3-forcing
+  theorem is accepted: packet-only censuses admit many spurious cross packets,
+  and full closed-row/rooted coupling is essential.
+- **Next queued attack:** cube the reduced CNF first by six-hole support, retain
+  explicit SAT leaves and LRAT for UNSAT leaves, and build an assumption-cover
+  checker. This is the smallest currently proved-sound finite terminal model.
