@@ -1,5 +1,23 @@
 # notebook — positive square energy
 
+## 2026-07-28 — geometry-aware `T^9P|P` frontier
+
+The complete endpoint has 50399 canonical rows: 43151 entries on the
+triangular hull and 7248 entries at the two rooted-C5 private distance orbits.
+An attempted 50382-row theorem closure was adversarially rejected because
+pentagons/connectors were symbolic strings, binary triangle intervals used an
+ambiguous synthetic slack position, and owner ledgers were not bijective.
+
+The replacement census explicitly materializes both five-cycles, rooted
+connector objects, all triangle positions, consecutive intervals, and the
+rooted-C5 stabilizer orbits `{v1,v4}` and `{v2,v3}`. It intentionally fails
+closed on all 50399 theorem rows. The reconstructed candidate exceptions have
+uniform geometry: one `A_8+PP` coalescence, one remote-P opening retaining
+`A_9P`, and fifteen nested two-arm rows
+`A_aP+A_bP+A_(7-a-b)`. Their graph-level blueprint is preserved separately,
+but no endpoint theorem is accepted before every ordinary row receives the
+same hardened final-owner treatment.
+
 ## 2026-07-28 — exact `P|A_9|P` endpoint closure
 
 Completed the theorem-aware marked endpoint census: 43151 canonical rows split

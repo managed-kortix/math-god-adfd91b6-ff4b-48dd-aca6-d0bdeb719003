@@ -128,6 +128,12 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     `43151=43145+6`. Integrate this endpoint with `A_10|Q`, `T^9P|P`, and the
     fully shared families; identify the exact remaining rank-eleven marked
     endpoint. Do not infer an all-rank `T^rPP` theorem.
+25. `T^9P|P` has 50399 exact geometry-aware marked rows. Do not restore the
+    rejected symbolic `50382/50399` closure. Implement final-owner theorem
+    records over explicit pentagon/connector/triangle geometry. The candidate
+    residuals are K1=`A_8+PP`, K2=open remote P plus packing-one `A_9P`, and a
+    15-row nested two-arm family `A_aP+A_bP+A_(7-a-b)`. Apply the same hardened
+    geometry and independent theorem checks to the ordinary 50382 rows.
 
 ## Running jobs
 
