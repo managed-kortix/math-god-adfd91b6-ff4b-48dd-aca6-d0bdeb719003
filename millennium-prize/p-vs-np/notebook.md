@@ -171,3 +171,13 @@ decisively, canonical merge belongs to the MMW upper-bound construction, while
 the magnification hypothesis attacks relational search-MCSP, whose solver may
 emit any witness. Hardness of the canonicalized problem does not transfer. The
 Stream-Merge tactic is retired. No separation is claimed.
+
+## Main candidate cycle 87
+
+Oliveira--Santhanam time--space magnification gives full reach for adjacency-
+matrix `k`-Vertex-Cover at fixed `k(n)=2^sqrt(log n)`: an `m^(1+epsilon)` time,
+`m^o(1)` space lower bound implies `P!=NP`. Buss kernelization explains both the
+implication and the barrier. The full matrix reduces to an `m^o(1)`-bit kernel,
+so generic probes/local oracles collapse; the proof must charge computation on
+that kernel. The route is eligible as a full-reach target but has no promoted
+lower-bound mechanism yet. No separation is claimed.

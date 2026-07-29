@@ -5,10 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after ancient-profile and Yang--Mills audits
-- **active main funnel:** selection of a genuinely new full-reach mechanism.
-  Li, Navier analytic-sparsity and ancient-profile arguments, and the finite
-  Yang--Mills common-cone projection are formally retired at exact obstructions.
+- **phase:** P-vs-NP small-Vertex-Cover time--space magnification
+- **active main funnel:** Oliveira--Santhanam adjacency-matrix
+  `k(n)=2^sqrt(log n)` Vertex Cover. The exact full-reach target is exclusion of
+  simultaneous `m^1.01` time and `m^o(1)` workspace. Probe/communication
+  mechanisms are retired by Buss kernelization; the live search is for a
+  computation-sensitive, non-localizable extraction lemma on the exact language.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -140,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 85
+- **cycle:** 87
 - **announcements:** none
 
 ## immutable target list
@@ -159,13 +161,14 @@ waiting process.
 
 ## next exact steps
 
-1. Complete the six-problem rotation with a genuinely distinct candidate; do
-   not repromote finite projections or criteria whose hypotheses are the target.
-2. Advance bounded exact arithmetic/algebraic scouts while searching: derived
-   Kato primitivity, bounded-complexity Hodge spreading, and exact finite
-   calibration artifacts remain legitimate but are not full solutions.
-3. Require every new main lemma to expose an independently checkable structural
-   mechanism and a written counterexample gate before promotion.
+1. Pin the exact random-access machine model and formulate the post-Buss kernel
+   computation as a uniform branching program/RAM problem with charged work.
+2. Seek a non-localizable extraction theorem from every fast small-space solver
+   to a model with a known time--space lower bound; reject read-k, resolution,
+   or pebbling surrogates without a reverse simulation.
+3. Build exact Buss-saturated finite gadgets only to falsify proposed extraction
+   invariants; finite hardness or ordinary NP reductions are not progress toward
+   the required RAM lower bound.
 4. Keep bounded scouts live: BSD derived Kato rank-two primitivity; RH Weil
    spline calibration; Hodge generic-seed obstruction; Navier phase-sensitive
    backscatter depletion; Yang--Mills common-cone physical-slab contraction.
@@ -173,6 +176,14 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycles 86--87 identified a distinct full-reach P-vs-NP target.
+  Oliveira--Santhanam proves that a barely superlinear-time/subpolynomial-space
+  lower bound for adjacency-matrix small-Vertex-Cover implies `P!=NP`. Exact
+  reconstruction confirms `k=2^sqrt(log n)` and exponent `1.01` are valid.
+  Buss kernelization gives an `m^o(1)`-bit core and decisively kills generic
+  cell-probe, communication, and local-oracle mechanisms. The target is active;
+  no lower-bound mechanism or separation is yet claimed.
 
 - 2026-07-29: Cycle 85 audited a radical prime-local Weil SOS route. Every
   Euler factor has an exact Poisson/scattering realization, but the Weil-sign
