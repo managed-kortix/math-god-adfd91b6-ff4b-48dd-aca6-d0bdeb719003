@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 88
+- **cycle:** 90
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,14 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycles 89--90 audited prescribed Tate--Shafarevich visibility.
+  The exact quotient-point and local-lift criterion was pinned, but Tamiozzo
+  already proves broad auxiliary-level visibility under substantial hypotheses.
+  A proposed two-prime class-sensitive refinement fails abstract bipartite
+  reciprocity: local switches remove at most one defect and passive Selmer
+  summands can remain invisible. The conductor-1246 example is prior
+  Cremona--Mazur work. No BSD result is claimed.
 
 - 2026-07-29: Cycle 88 met the small-Vertex-Cover mechanism rotation gate.
   Self-reduction adds only an `m^o(1)` factor; the stored Buss kernel permits

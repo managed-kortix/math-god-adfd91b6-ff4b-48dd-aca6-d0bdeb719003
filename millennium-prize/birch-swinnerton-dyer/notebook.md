@@ -1,5 +1,15 @@
 # Notebook
 
+## Bounded scout cycles 89--90
+
+Prescribed modular visibility has an exact quotient-point/Kummer criterion.
+Tamiozzo already proves broad auxiliary-level visibility of all `Sha[p]`
+classes under substantial hypotheses, using a Selmer-dimensional set of
+admissible primes. A dimension-free two-prime refinement is obstructed by
+one-dimensional local switches and passive Selmer summands invisible to shallow
+bipartite-system classes. The classical conductor-1246, `p=5` example is already
+published by Cremona--Mazur. No BSD result or novelty is claimed.
+
 Bounded scout is queued to audit the exact normalization and independently
 certify the algebraic rank and the `T^2` coefficient for `389a1` at `p=5`.
 No cyclotomic derivative is to be identified with a complex derivative.
