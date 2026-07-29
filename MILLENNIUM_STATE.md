@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 100
+- **cycle:** 101
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 101 audited genuine rank-two Euler systems, full physical-
+  slab contraction, helical phase dynamics, random Euler products, abelian-type
+  motives, and algebraic proof compression.  Rank two for elliptic Euler systems
+  naturally moves to imaginary quadratic fields and current Heegner integrality
+  imports a main conjecture; full-complement slab contraction is exactly
+  sufficient but unproduced; isolated triads phase-lock indefinitely; random
+  Euler products do not transfer to Möbius; abelian-type closure stops at
+  exceptional tensors; and IPS lower bounds lack a Boolean separation bridge.
 
 - 2026-07-29: Cycle 100 ranked the portfolio and hostilely audited the apparent
   BSD lead.  Kim's published `389a1`, `p=5`, `41*61` Kurihara certificate does
