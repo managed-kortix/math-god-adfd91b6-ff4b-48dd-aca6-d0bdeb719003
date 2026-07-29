@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 90
+- **cycle:** 91
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 91 audited helical-sector depletion.  Signed helicity
+  controls a sector difference, while the nonlinearity creates equal opposite
+  magnitudes; an exact integer-wavevector certificate proves that the
+  homochiral cone is not invariant.  Shellwise cumulative positive stretching
+  is finite under global smoothness and implies global smoothness, so the
+  proposed bound is an equivalent continuation criterion rather than a
+  produced estimate.  Phase twins also defeat every phase-blind instantaneous
+  depletion claim.  The tactic was retired.
 
 - 2026-07-29: Cycles 89--90 audited prescribed Tate--Shafarevich visibility.
   The exact quotient-point and local-lift criterion was pinned, but Tamiozzo

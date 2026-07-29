@@ -1,5 +1,16 @@
 # Notebook
 
+## Cycle 91
+
+Helical decomposition does not make signed helicity coercive in the full
+equation: nonlinear production creates equal positive and negative helicity
+magnitudes.  An exact two-wave certificate at `(1,0,0)` and `(0,1,1)` produces
+a nonzero negative-helicity mode at `(1,1,1)`.  The proposed shellwise
+cumulative positive-excess estimate is finite for global smooth solutions and
+implies global regularity, hence is an equivalent continuation reformulation.
+Phase-blind spectra also admit phase twins with opposite stretching.  Route
+retired; no Navier--Stokes result is claimed.
+
 Bounded scout is queued to compute the exact initial derivative of the cubed
 `L^3` norm for rational interacting triads and locate pressure-driven growth
 candidates before any interval PDE validation.
