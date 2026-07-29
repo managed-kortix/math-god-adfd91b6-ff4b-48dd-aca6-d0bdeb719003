@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 91
+- **cycle:** 92
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,13 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 92 pinned the exact CJSW constructive GapMaj theorem, whose
+  polylogtime-uniform `AC0` refuter hypothesis implies `P != NP`.  The proposed
+  bounded-independence/pessimistic-estimator mechanism was decisively falsified
+  by the exact three-bit coordinate-sampling quantifier counterexample.  Query
+  lower bounds provide dense error sets but not deterministic shallow selectors.
+  The full-reach theorem was preserved and the extraction tactic retired.
 
 - 2026-07-29: Cycle 91 audited helical-sector depletion.  Signed helicity
   controls a sector difference, while the nonlinearity creates equal opposite

@@ -1,5 +1,15 @@
 # Notebook
 
+## Cycle 92
+
+The CJSW GapMaj theorem is a valid full-reach constructive-separation target:
+uniform `AC0` refuters against every `o(epsilon^-2)` randomized query algorithm
+imply `P != NP`.  A three-bit exact counterexample defeats the proposed
+pessimistic-estimator seed fixing: randomized coordinate sampling is pointwise
+`2/3` correct, while every fixed coordinate has a promised error.  Query
+hardness gives dense errors but no deterministic shallow selector.  The
+seed-fixing mechanism was retired; no separation is claimed.
+
 Bounded scout is queued to derive a memorization upper bound for fitting an
 arbitrary proposed antichecker and compare its gate exponent with the target.
 This is an adversarial test, not evidence from solver failure.
