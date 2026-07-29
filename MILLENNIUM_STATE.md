@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 94
+- **cycle:** 95
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 95 audited canonical systems, derived BSD heights,
+  finite-field Hodge lifting, suitable-solution rigidity, Kolmogorov refuters,
+  and Balaban RG.  Positive Fourier kernels permit nonreal zeros; derived
+  heights retain the archimedean determinant gap; Tate cycles retain embedded
+  lifting obstructions; ordinary enstrophy permits summable concentration;
+  incompressible errors conflict with uniform shallow outputs; and ultraviolet
+  RG stability does not produce OS observables or an infrared gap.  All routes
+  were retired at exact gates.
 
 - 2026-07-29: Cycle 94 ran a six-problem structural portfolio wave.  Jensen
   heat flow leaks to the next degree; `p`-adic BSD has no positive-rank complex
