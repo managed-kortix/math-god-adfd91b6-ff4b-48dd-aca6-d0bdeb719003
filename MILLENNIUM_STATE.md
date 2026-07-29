@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 93
+- **cycle:** 94
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,14 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 94 ran a six-problem structural portfolio wave.  Jensen
+  heat flow leaks to the next degree; `p`-adic BSD has no positive-rank complex
+  derivative bridge; absolute/motivated Hodge mechanisms propagate nonalgebraic
+  realizations; exact Navier shear defeats energy control of Lagrangian
+  deformation; Resolution automatability has collapse rather than separation
+  polarity; and weak-coupling Yang--Mills character activities approach one
+  with a growing high-spin population.  All six routes met rotation gates.
 
 - 2026-07-29: Cycle 93 isolated the constructive content of GapMaj extraction.
   Permutation-invariant, deterministic-polylogtime, and small-enumerable-random-
