@@ -6,10 +6,11 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
 - **phase:** portfolio rotation after small-Vertex-Cover mechanism audit
-- **active main funnel:** selection review. Oliveira--Santhanam's full-reach
-  target remains correct, but computation-sensitive extraction is retired:
-  the complete Buss kernel fits in allowed space, restricted-model reverse
-  simulations fail, and syntax-sensitive extractors are not junk robust.
+- **active main funnel:** Navier--Stokes full-Fourier phase transversality.
+  Construct or falsify an explicit integer-wavevector packet with simultaneous
+  maximizing active-triad phases, positive vortex stretching, and quantitative
+  escape under the complete unprojected Euler/Navier nonlinearity including
+  every first-order leakage mode. Abstract Galerkin coefficients do not count.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -141,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 111
+- **cycle:** 112
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +175,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 112 strategically rotated the main funnel to Navier full-
+  Fourier phase transversality.  The next exact experiment demands an explicit
+  integer-wavevector packet with positive stretching and quantitative phase
+  escape under the unprojected nonlinearity, not an abstract Galerkin cluster.
+  BSD higher descent stops algebraically but lacks the complex bridge; energy
+  does not control Gevrey radius; Jensen asymptotics leave unbounded low-shift
+  degrees; catalytic restoration defeats checkpoint congestion; planar
+  Yang--Mills lacks exponentially weighted finite-`N` stability; and the Hodge
+  rank lemma remains bounded internal work.
 
 - 2026-07-29: Cycle 111 hostilely corrected Bring applicability.  Bring's
   curve rigorously supplies a smooth canonical quadric, two trigonal pencils,
