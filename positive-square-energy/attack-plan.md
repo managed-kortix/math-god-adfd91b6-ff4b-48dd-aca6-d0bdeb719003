@@ -141,6 +141,20 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     connector edges/remnants, and attachments; then adapt the 7248 private-P
     rows and integrate K1/K2/K3--K17. Keep theorem status fail-closed until all
     physical owner domains are exhaustive.
+27. Physical final owners are now accepted for 43145 triangular-hull ordinary
+    plans, including independent expected graph/attachment domains and complete
+    C5/connector ownership. Remaining finite tasks are exactly six projected
+    A9 repairs plus 7248 private-P rows. Implement the private leaf-pentagon
+    router lemma over the same physical checker, then K1/K2/K3--K17 or project
+    the six hardened A9 repairs where geometry matches. Keep the 115502 fully
+    shared rows queued after this endpoint.
+28. `T^9P|P` is now fully exact-certified on all 50399 rows, including 7248
+    private-P orbits and six projected repairs. The only rank-eleven bulk gap is
+    the 115502 ordinary fully shared `T^9PP` rows: port the shared physical
+    owner core to that unmarked incidence universe, rederive each mixed packet
+    theorem after final ownership, and combine with the ten already proved
+    U1--U10 repairs. Then synthesize the rank-eleven theorem and run fresh
+    hostile topology/certificate gates.
 
 ## Running jobs
 

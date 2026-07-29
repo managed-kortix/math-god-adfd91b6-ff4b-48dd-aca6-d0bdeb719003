@@ -1,5 +1,42 @@
 # notebook — positive square energy
 
+## 2026-07-29 — exact `T^9P|P` endpoint closure
+
+The geometry-aware certificate now closes all 50399 endpoint rows. The 43145
+ordinary triangular-hull plans retain their accepted physical-owner digest.
+For 7246 private-P nonbouquets, the canonical first triangle beyond the
+clustered pentagon root is split on actual C3 vertices: one owner receives both
+complete pentagons and connector in a connected rank-at-most-nine child, while
+the complementary owner contains a nonempty strict triangular packet. The two
+rooted-C5 distance orbits use distinct explicit openings and ledger
+`(9-delta)-1`.
+
+A hostile mutation moved a physical C0 router vertex across the claimed split
+without rejection. The repair derives the entire expected private owner map
+from the canonical router intervals/components and requires exact equality;
+private theorem names, hypotheses, ranks, and radical bounds are independently
+reclassified rather than hard-coded. Six projected residuals close by two
+`TP+A_7P` splits and four explicit C5 openings retaining `A_9P`. Thirty-one
+mutation gates reject malformed domains, connectors, cycles, intervals,
+openings, owners, and theorem records. Normal and optimized runs agree exactly.
+
+## 2026-07-28 — 43145 physical endpoint certificates
+
+The accepted projection is now lifted to complete physical owner domains for
+all 43145 ordinary triangular-hull plans. Shared cuts are canonical graph
+vertices; every triangle and both pentagons have explicit cyclic edges; the
+remote connector is an ordered edge chain with a remnant anchor; every physical
+vertex has an attachment obligation. Terminal connectivity is recomputed on
+the owner-induced graph, complete C3/C5 blocks determine demands, and theorem
+records are independently rederived.
+
+A coordinated deletion attack removed a remnant, its edge, and both owner rows
+without breaking the first checker because its expected domain came from the
+certificate. The corrected checker reconstructs expected vertices, edges, and
+attachments separately from the source row. Twenty hostile mutations now fail,
+and an independent referee accepted digest `63305ff2...`. Exactly 7254 rows
+remain fail-closed: six projected residuals and 7248 private clustered-P rows.
+
 ## 2026-07-28 — shared geometry-aware router bridge
 
 Extracted a common concrete interval/owner kernel while preserving every
