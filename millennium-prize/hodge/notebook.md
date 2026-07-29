@@ -1,5 +1,16 @@
 # Notebook
 
+## Cycle 108
+
+An explicit genus-four quadric-cubic candidate with smooth quadric and modular
+`Q(sqrt(5))` RM data was isolated, but its Jacobian/modular identification is
+only heuristic in the source.  Exact exterior-algebra computation corrects the
+quartic-CM Chern-contraction rank: real-quadratic `(2,2)` multiplicities force
+rank `20` and nullity `8`, not the provisional `24/4`.  Semiregularity requires
+the Atiyah obstruction map to have exactly the same eight-dimensional kernel.
+Simplicity, RR, and gluing incidence do not imply this; off-diagonal gluing
+Atiyah terms remain essential.  The route was not promoted.
+
 ## Cycle 107
 
 Primary-source audit of Markman arXiv:2509.23079 confirms an algebraic normalized

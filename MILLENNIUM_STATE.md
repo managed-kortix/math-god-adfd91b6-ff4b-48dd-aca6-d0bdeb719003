@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 107
+- **cycle:** 108
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 108 sought an explicit quartic-CM semiregularity
+  certificate.  A concrete genus-four quadric-cubic candidate has the required
+  two trigonal pencils and compelling modular `Q(sqrt(5))` data, but the RM
+  identification is explicitly heuristic.  Exact contraction algebra corrected
+  the target: forced real-quadratic `(2,2)` multiplicities give Chern-contraction
+  rank `20` and nullity `8`, not `24/4`.  The obstruction map must have the same
+  kernel; simplicity and RR cannot force this because the restricted Serre
+  trace pairing may be isotropic and gluing contributes off-diagonal Atiyah
+  terms.  No reproducible integrated instance exists, so the route was not
+  promoted.
 
 - 2026-07-29: Cycle 107 primary-source-audited Markman's quartic-CM
   secant-sheaf preprint.  On a special genus-four-Jacobian eightfold, the source
