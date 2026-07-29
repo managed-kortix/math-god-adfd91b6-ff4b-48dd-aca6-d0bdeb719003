@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 110
+- **cycle:** 111
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 111 hostilely corrected Bring applicability.  Bring's
+  curve rigorously supplies a smooth canonical quadric, two trigonal pencils,
+  and an integral Rosati-compatible `Q(sqrt(5))` norm-one unit, but its Jacobian
+  is isogenous to an elliptic fourth power and fails Markman's simple,
+  RM-only generic hypotheses.  The generic secant-space/nonzero-projection
+  argument therefore cannot be imported.  The uniform Chern-contraction theorem
+  and corrected verifier remain valid: rank `20`, nullity `8` under `(2,2)` RM
+  multiplicities.  Symmetry cannot force Atiyah-kernel equality.  With no full
+  seed or Ext certificate, the quartic-CM production route was retired.
 
 - 2026-07-29: Cycle 110 found a rigorous replacement for the heuristic HPS RM
   curve.  Bring's genus-four curve has a smooth canonical quadric and exact

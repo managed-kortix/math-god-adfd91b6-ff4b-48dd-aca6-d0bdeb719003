@@ -1,6 +1,6 @@
 # Cycle 110: rigorous RM seed and symbolic contraction theorem
 
-## Bring's curve removes the RM certification gate
+## Bring's curve supplies elementary RM data
 
 Let Bring's genus-four curve be
 \[
@@ -30,9 +30,12 @@ Then
  f^2-3f+1=0,\qquad f^{-1}=3-f,
 \]
 so `f` is an integral norm-one abelian-variety automorphism with `f^2!=1`.
-This is a rigorous Markman-compatible RM seed and supersedes the heuristic HPS
-modular candidate.  It does not instantiate Markman's later generic gluing
-sheaf or prove semiregularity.
+This rigorously supplies the elementary RM-unit and two-pencil data.  It does
+not supersede the heuristic HPS candidate as a full Markman instance:
+`J(Bring)` is isogenous to a fourth power of an elliptic curve, is not simple,
+and has endomorphism algebra much larger than `Q(sqrt(5))`.  Markman's generic
+secant-space argument uses the simple, RM-only setting, so its nonzero Weil
+projection cannot be imported without a new invariant calculation.
 
 ## Uniform rank theorem
 
@@ -66,9 +69,10 @@ generic theorem.
 
 ## Remaining gate
 
-The semiregularity problem is now cleanly separated from RM existence.  One
-must instantiate Markman's secant/gluing sheaf on a rigorous RM seed and prove
+The semiregularity problem remains separate from the elementary RM identities.
+One must first find a rigorous seed satisfying Markman's full generic
+endomorphism hypotheses, then instantiate the secant/gluing sheaf and prove
 that its generalized Atiyah obstruction map has rank `20` and the verified
-eight-dimensional Chern kernel.  Bring's extra endomorphisms may alter the
-generic deformation/equivariance setup and must be checked before using it as a
-family seed.  No Hodge case is claimed.
+eight-dimensional Chern kernel.  Bring's extra endomorphisms prevent treating
+it as that generic family seed without additional work.  No Hodge case is
+claimed.

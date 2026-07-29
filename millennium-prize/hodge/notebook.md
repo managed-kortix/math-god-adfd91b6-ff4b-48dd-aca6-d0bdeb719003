@@ -1,12 +1,23 @@
 # Notebook
 
+## Cycle 111
+
+Hostile applicability audit corrected Cycle 110: Bring's curve rigorously has
+the two pencils and norm-one `Q(sqrt(5))` unit, but its Jacobian is isogenous to
+an elliptic fourth power, so it is neither simple nor RM-only.  Markman's
+generic secant-space/nonzero-projection proof cannot be imported.  The uniform
+rank-`20`, nullity-`8` contraction theorem remains valid independently and its
+verifier survives corrected sign/parameter audits.  Symmetry does not force the
+eight-dimensional kernel to be Atiyah-unobstructed.  The production route was
+retired.
+
 ## Cycle 110
 
-Bring's curve supplies a rigorous genus-four Markman-compatible seed: its
+Bring's curve supplies rigorous elementary genus-four RM data: its
 smooth canonical quadric gives two trigonal pencils, and the five-cycle
 endomorphism yields exact Rosati-compatible `Q(sqrt(5))` RM with integral
-norm-one unit `f=(r+r^-1)^2`, satisfying `f^2-3f+1=0`.  This removes the
-heuristic RM gap, though not the explicit gluing/semiregularity gate.  The rank
+norm-one unit `f=(r+r^-1)^2`, satisfying `f^2-3f+1=0`.  Its extra endomorphisms
+prevent it from being a full generic Markman seed.  The rank
 verifier was corrected to include `q`, standard bivector contraction order,
 and sparse cancellation.  A symbolic block proof upgrades rank `20`, nullity
 `8` from one specialization to a uniform characteristic-zero theorem.
