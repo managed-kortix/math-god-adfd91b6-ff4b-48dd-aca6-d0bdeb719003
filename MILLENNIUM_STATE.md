@@ -5,11 +5,11 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Yang--Mills temporal-annulus contraction gate
-- **active main funnel:** prove a cutoff/volume/sector-uniform full-kernel
-  temporal-annulus `L^2` SDPI after exact superselection quotient, together with
-  the OS physical-transfer completeness bridge, or construct an explicit
-  gauge-invariant observable sequence whose contraction ratios tend to one.
+- **phase:** portfolio rotation after Yang--Mills annular equivalence gate
+- **active main funnel:** selection review.  Full physical temporal-annulus
+  SDPI is exactly a spectral gap after OS completeness and only screening
+  without it; cutoff-uniformity is stronger than the continuum gap because
+  moving regulator states can escape strong limits.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 119
+- **cycle:** 120
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 120 retired the Yang--Mills annular funnel.  Under an onto
+  OS transfer identification, full-kernel squared-norm contraction is exactly
+  `inf spec(H_perp)>=-log(q)/(2r)`; without that identification it controls only
+  a compression.  An exact moving-rank-one model has cutoff norms one but a
+  strongly convergent gapped limit, proving cutoff-uniform contraction is
+  stronger than a continuum gap.  Gaussian gauge theory has explicit
+  gauge-invariant two-gluon modes of energy `4pi/L` and contraction tending to
+  one, but finite/all-order perturbation cannot distinguish these from a
+  nonperturbative exponentially small mass.  A fresh mechanism must precede,
+  rather than rename, the spectral bound.
 
 - 2026-07-29: Cycle 119 rotated to the Yang--Mills temporal-annulus gate.  The
   exact central `SU(2)` convolution model has singular values
