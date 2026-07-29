@@ -1,5 +1,16 @@
 # Notebook
 
+## Bounded scout cycle 83
+
+Exact straight-link pushforward blocking is gauge-equivariant and reflection
+positive, and the Wilson `SU(2)` character coefficients and tails are explicit.
+In four dimensions the exact induced action nevertheless occupies an infinite
+loop/polymer/intertwiner Banach space. A two-channel common-cone matrix neither
+controls that tail nor the full physical Hilbert complement, and a UV-normalized
+positive Lyapunov functional is perturbatively obstructed. Uniform Banach-tail
+closure, weak-to-strong basin entry, OS compactness/nontriviality, and physical
+completeness remain missing. No Yang--Mills result is claimed.
+
 Bounded scout is queued to verify the spectral-theorem implication with all
 ceilings and limit quantifiers, and to distinguish full-operator contraction
 from finite variational subspace measurements.

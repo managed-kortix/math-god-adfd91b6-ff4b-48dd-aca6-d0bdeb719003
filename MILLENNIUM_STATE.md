@@ -5,10 +5,10 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after Li and Navier sparsity audits
+- **phase:** portfolio rotation after ancient-profile and Yang--Mills audits
 - **active main funnel:** selection of a genuinely new full-reach mechanism.
-  Li positive-square/recurrence/Selberg arguments and automatic Navier
-  analytic-scale sparsity are formally retired at exact obstructions.
+  Li, Navier analytic-sparsity and ancient-profile arguments, and the finite
+  Yang--Mills common-cone projection are formally retired at exact obstructions.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -140,7 +140,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 81
+- **cycle:** 83
 - **announcements:** none
 
 ## immutable target list
@@ -159,15 +159,13 @@ waiting process.
 
 ## next exact steps
 
-1. Complete a written six-problem rotation review. Do not promote constructive
-   MCSP hard-output generation, which already is an explicit general-circuit
-   lower bound, or conditional Navier sparsity without a production theorem.
-2. Audit the Navier terminal ancient-profile route only if it supplies strong
-   global `L^3` compactness for arbitrary Type-II singularities rather than
-   assuming the endpoint continuation criterion.
-3. Audit Yang--Mills weak-to-strong RG basin entry only if a controlled bridge
-   past the weak-coupling chart is isolated; fixed strong-coupling clustering is
-   insufficient.
+1. Complete the six-problem rotation with a genuinely distinct candidate; do
+   not repromote finite projections or criteria whose hypotheses are the target.
+2. Advance bounded exact arithmetic/algebraic scouts while searching: derived
+   Kato primitivity, bounded-complexity Hodge spreading, and exact finite
+   calibration artifacts remain legitimate but are not full solutions.
+3. Require every new main lemma to expose an independently checkable structural
+   mechanism and a written counterexample gate before promotion.
 4. Keep bounded scouts live: BSD derived Kato rank-two primitivity; RH Weil
    spline calibration; Hodge generic-seed obstruction; Navier phase-sensitive
    backscatter depletion; Yang--Mills common-cone physical-slab contraction.
@@ -175,6 +173,14 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycles 82--83 met two more rotation gates. Arbitrary singularity
+  rescaling cannot yield a global bounded-`L^3` ancient profile: CKN gives lower
+  concentration, while Type-II bubbles cause critical mass proliferation and
+  escape. Exact reflection-positive `SU(2)` blocking and character tails were
+  pinned, but a two-channel cone hides the infinite Banach tail, weak-to-strong
+  basin entry, OS nontriviality, and full physical complement. Neither tactic is
+  promoted. No Millennium result is claimed.
 
 - 2026-07-29: Cycles 80--81 met two rotation gates. Li differences were
   certified through `n=10000`, but the Blaschke square lies on the wrong line,

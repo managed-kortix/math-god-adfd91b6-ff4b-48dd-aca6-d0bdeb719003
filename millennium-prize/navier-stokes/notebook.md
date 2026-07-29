@@ -179,6 +179,16 @@ Dyadic energy costs are summable, and the best energy geometry occurs at
 solutions falsify any kinematic automaticity claim. The tactic is retired. No
 Navier result is claimed.
 
+## Main-funnel cycle 82
+
+The terminal ancient-profile route fails for arbitrary Type-II singularities.
+CKN supplies lower concentration but not global critical upper control;
+rescaling cannot reduce the diverging `L^3` norm. Critical bubbles can
+proliferate at vanishing energy cost, producing concentration and escape at
+infinity. Known Liouville/backward-uniqueness classes require precisely the
+nonendpoint critical tightness not inherited by arbitrary profiles. The tactic
+is retired. No Navier result is claimed.
+
 ## Bounded scout cycle 73
 
 The exact helical triad formula exposes indefinite genuinely three-dimensional
