@@ -149,6 +149,16 @@ On bounded rescaled intervals amplification converges to a finite Euler factor,
 so amplitude alone cannot make it unbounded. This smooth two-dimensional family
 gives no blowup or regularity result.
 
+## Bounded scout cycle 74
+
+The scaling-critical dyadic `L^3` recurrence leaves a high--high tail that does
+not close in the proposed `ell^2` envelope. The only high--high-to-low symbol
+gain converts the input derivative to the output frequency and is saturated by
+opposing waves; many shells can add coherently to one low mode. Low transport
+cancellation leaves a Leray commutator rather than pressure cancellation. The
+specific envelope tactic is retired at this exact backscatter obstruction. No
+regularity result is claimed.
+
 ## Bounded scout cycle 73
 
 The exact helical triad formula exposes indefinite genuinely three-dimensional

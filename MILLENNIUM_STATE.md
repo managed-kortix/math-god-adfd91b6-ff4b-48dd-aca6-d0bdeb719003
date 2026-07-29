@@ -143,7 +143,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 73
+- **cycle:** 74
 - **announcements:** none
 
 ## immutable target list
@@ -163,9 +163,9 @@ waiting process.
 ## next exact steps
 
 1. Complete a portfolio review for the next genuinely distinct main funnel.
-   Hodge seeding and Navier enstrophy excursions are retired; the leading live
-   candidate is a scaling-critical Navier `L^3` frequency-flux mechanism, but it
-   must pass a high--high backscatter audit before promotion.
+   Hodge seeding, Navier enstrophy excursions, and the naive critical `L^3`
+   envelope are retired. Any Navier promotion requires a new depletion theorem
+   for coherent high--high backscatter, not another norm majorant.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -180,6 +180,13 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-28: Cycle 74 audited the scaling-critical Navier `L^3` frequency
+  envelope. The only high--high-to-low symbol gain is sharp and fully consumed
+  by the output derivative; coherent opposing waves remove further shell decay.
+  The high--high tail does not close in the proposed `ell^2` envelope, and low
+  transport cancellation leaves an exact Leray commutator rather than pressure
+  cancellation. This tactic is retired. No Navier result is claimed.
 
 - 2026-07-28: Cycles 72--73 met two tactic rotation gates. Hodge cycle seeding
   on a marked component is equivalent to algebraicity of the generic marked
