@@ -1040,3 +1040,21 @@ No audits yet.
   defect-weighted pair/singleton packet identities to the common reduced model;
   then construct a canonical source-cut cover under `S7(A') x S6(K)` and retain
   compact LRAT objects from inception.
+
+### k=5 defect-packet orbit cover
+
+- Added explicit semantic holes and exact-five propagation to the common model,
+  then classified a canonical source's complete cut and required singleton/pair
+  packet under `S6(A'\\{a}) x S6(K)`.
+- The packet-pressure filter leaves exactly 931 semantic orbits representing
+  758,181 labelled source-cut/witness objects. Independent exhaustive labelled
+  enumeration agrees key-by-key; payload SHA-256 is
+  `020cbf13...9f45deb5`.
+- Each leaf encodes the full defect-weighted packet identity, not only its
+  nonnegative bound. A two-second CaDiCaL scout returned UNSAT on 928 leaves and
+  timed out on only indices 915, 918, and 921; all three solve UNSAT under a
+  longer cap. These are not yet certificate claims.
+- **Next queued attack:** launch a content-addressed LRAT campaign across all
+  931 leaves, first piloting the three hard singleton leaves and a stratified
+  sample to bound proof storage. Independently regenerate and fresh-check every
+  retained object before closing both k=5 rows.
