@@ -16,6 +16,17 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-28: built and hostile-audited the first shared geometry-aware router
+  certificate bridge. The hardened `P|A_9|P` verifier now uses the common core
+  without changing any output or digest. Every one of the 43151 triangular-hull
+  `T^9P|P` rows projects bijectively to the A9 universe; all 43145 ordinary
+  plans are rebound to concrete triangle vertices and consecutive intervals.
+  Audits caught source-domain self-reference, cut-map aliasing, and a symmetric
+  cycle-map swap; independent source census, exact incidence reconstruction,
+  and deterministic identity maps now reject all three. Projection digest is
+  `9897c86b...`, concrete-plan digest `c3fd37eb...`, and 15 hostile mutations
+  are rejected. The bridge is accepted only for this bounded projection claim;
+  private-pentagon geometry and exhaustive final owners remain fail-closed.
 - 2026-07-28: generated the complete geometry-aware rank-eleven `T^9P|P`
   endpoint universe: 8011 colored incidences, 3624 clustered-pentagon leaf
   incidences, 43151 triangular-hull rows, 7248 private-pentagon distance-orbit

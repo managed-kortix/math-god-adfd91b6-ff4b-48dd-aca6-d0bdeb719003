@@ -17,6 +17,11 @@ marked rows. It verifies the canonical-row digest
 0bf53914ae760002386b4b94e4de2d0cccbe61725063b4a46435bcd49c70403b.
 ```
 
+Its concrete cyclic interval checks now use
+`research/geometry_router_owner_core.py`, shared with the T9P frontier
+verifier. This extraction does not alter any A9 count, record, digest, or
+printed output.
+
 It searches standard recursive triangle routers, checks proper interval sizes,
 resolves retained cuts and marked demands, assigns each pentagon exactly once,
 and classifies terminal packets from a closed theorem whitelist. Unknown mixed
@@ -119,7 +124,8 @@ as the retained packet bound plus cost `-1`.
 Seven built-in mutation tests must all be rejected: a forged ordinary bound,
 swapped ordinary interval sizes, broken recursive active ownership, a forged
 repair theorem, swapped repair intervals, a corrupted pentagon vertex owner,
-and an unreachable opening connector owner.
+and an unreachable opening connector owner. The swapped interval gate now runs
+through the shared geometry-aware core.
 
 These checks establish the finite `P|A_9|P` endpoint certificate only. They do
 not prove a generic separated-two-pentagon theorem, the complete rank-eleven

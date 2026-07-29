@@ -2,10 +2,10 @@
 """Fail-closed geometry-aware census for the rank-eleven T^9P | P endpoint.
 
 No theorem closure is claimed. The executable materializes the abstract cyclic
-geometry that a future owner certificate must use and freezes the exact 50399
-row universe. It also pins the persisted K1--K17 repair blueprint, but exits
-with RuntimeError because those recipes have not been integrated into one
-uniform graph-level owner verifier for all ordinary and private-P rows.
+geometry, projects the triangular-hull slice bijectively to the hardened
+P | A_9 | P verifier, and realizes all of its 43145 ordinary plans on concrete
+T^9P triangle vertices. It still exits with RuntimeError because private-P rows
+and full graph-level ownership are not certified.
 """
 
 from __future__ import annotations
@@ -42,6 +42,10 @@ INCIDENCE = load_module(
 ROOTS = load_module(
     "rank_eleven_t9p_p_roots", "nonacyclic-t7p-last-bridge-conservative.py"
 )
+CORE = load_module("geometry_router_owner_core", "geometry_router_owner_core.py")
+A9 = load_module(
+    "rank_eleven_a9_two_interface_verifier", "rank-eleven-a9-two-interface-verifier.py"
+)
 
 EXPECTED_ALL_BY_CUT = Counter(
     {1: 1, 2: 12, 3: 91, 4: 412, 5: 1208, 6: 2201, 7: 2393, 8: 1372, 9: 321}
@@ -66,23 +70,13 @@ REPORTED_SEVENTEEN_DIGEST = (
     17, "fcf002bb4150db6dc4c5b19f2e9d76b05de066898413b28ee11c4e0a9619747c"
 )
 BLUEPRINT = HERE / "rank-eleven-t9p-p-seventeen-repair-blueprint-2026-07-28.md"
-EXPECTED_BLUEPRINT_DIGEST = "c56b1830ada29d5b6887d9ddb95a12ddd950052a23854e39e7a4cd92664ecf5d"
+EXPECTED_BLUEPRINT_DIGEST = "163d4c86bc373470f9d012bdb162937d4013ca345577222e3f26603a77b5f92e"
+EXPECTED_PROJECTION_DIGEST = "9897c86b3e197ea3da1fbc2e0ef5ed4440e53bec0d8ac34d6024466c26ccf1a1"
+EXPECTED_PROJECTED_PLAN_DIGEST = "c3fd37ebc47de29a7f49471c6ecd61a280581fe30c3fdf72905548345d814566"
 
 
-@dataclass(frozen=True, order=True)
-class CyclicVertex:
-    cycle: str
-    index: int
-    role: str
-    cut: int | None = None
-
-
-@dataclass(frozen=True)
-class CycleGeometry:
-    label: str
-    length: int
-    vertices: tuple[CyclicVertex, ...]
-    edges: tuple[tuple[CyclicVertex, CyclicVertex], ...]
+CyclicVertex = CORE.CyclicVertex
+CycleGeometry = CORE.CycleGeometry
 
 
 @dataclass(frozen=True)
@@ -111,10 +105,7 @@ def file_digest(path):
 
 
 def unique_map(records, expected_domain, label):
-    keys = [key for key, _ in records]
-    require(len(keys) == len(set(keys)), f"{label} has duplicate owner keys")
-    require(set(keys) == set(expected_domain), f"{label} has an inexact owner domain")
-    return dict(records)
+    return CORE.exact_owner_map(records, expected_domain, label)
 
 
 def make_cycle(label, length, cut_bindings=()):
@@ -135,14 +126,7 @@ def make_cycle(label, length, cut_bindings=()):
 
 
 def verify_cycle(geometry, cut_bindings):
-    require(len(geometry.vertices) == geometry.length and
-            len(set(geometry.vertices)) == geometry.length,
-            "cycle does not have distinct named vertices")
-    require(geometry.edges == tuple(
-        (geometry.vertices[index], geometry.vertices[(index + 1) % geometry.length])
-        for index in range(geometry.length)), "cycle edges are not in named cyclic order")
-    require(len({frozenset(edge) for edge in geometry.edges}) == geometry.length,
-            "cycle repeats an undirected edge")
+    CORE.verify_cycle(geometry)
     cut_vertices = tuple(vertex for vertex in geometry.vertices if vertex.role == "cut")
     private_vertices = tuple(vertex for vertex in geometry.vertices if vertex.role == "private")
     require(tuple(vertex.cut for vertex in cut_vertices) == tuple(cut_bindings),
@@ -153,30 +137,12 @@ def verify_cycle(geometry, cut_bindings):
 
 def consecutive_intervals(geometry):
     """Enumerate every ordered two- and three-part cyclic interval partition."""
-    answer = []
-    n = geometry.length
-    for start in range(n):
-        rotated = geometry.vertices[start:] + geometry.vertices[:start]
-        for first in range(1, n):
-            answer.append((rotated[:first], rotated[first:]))
-        if n == 3:
-            answer.append(((rotated[0],), (rotated[1],), (rotated[2],)))
-    for partition in answer:
-        verify_intervals(geometry, partition)
-    return tuple(answer)
+    counts = (2, 3) if geometry.length == 3 else (2,)
+    return CORE.consecutive_intervals(geometry, counts)
 
 
 def verify_intervals(geometry, intervals):
-    flat = tuple(vertex for interval in intervals for vertex in interval)
-    require(Counter(flat) == Counter(geometry.vertices),
-            "cyclic intervals are not an exact vertex partition")
-    require(all(0 < len(interval) < geometry.length for interval in intervals),
-            "cyclic interval is empty or improper")
-    edge_set = {frozenset(edge) for edge in geometry.edges}
-    for interval in intervals:
-        require(all(frozenset((left, right)) in edge_set
-                    for left, right in zip(interval, interval[1:])),
-                "interval is not consecutive in the named cycle")
+    CORE.verify_intervals(geometry, intervals)
 
 
 def rooted_c5_stabilizer():
@@ -267,7 +233,205 @@ def geometry_text(geometries):
 def connector_text(row_id, connector):
     return repr((row_id, connector.label, connector.pentagon_root.index,
                  connector.hull_position.cycle, connector.hull_position.index,
-                 connector.path_vertices, connector.remnant))
+                  connector.path_vertices, connector.remnant))
+
+
+def projection_structure(tree):
+    adj = INCIDENCE.adjacency(tree)
+    p0 = tree.colors.index("P")
+    require(len(adj[p0]) == 1, "projection requires a clustered-P incidence leaf")
+    clustered_cut = adj[p0][0]
+    clustered_triangles = tuple(cycle for cycle in adj[clustered_cut] if cycle != p0)
+    require(clustered_triangles and
+            all(tree.colors[cycle] == "T" for cycle in clustered_triangles),
+            "clustered-P leaf cut has no triangular hull neighbor")
+    suppress_clustered_cut = len(clustered_triangles) == 1
+    old_triangles = tuple(cycle for cycle, color in enumerate(tree.colors) if color == "T")
+    old_cuts = tuple(cut for cut in range(len(tree.colors), len(adj))
+                     if cut != clustered_cut or not suppress_clustered_cut)
+    return adj, p0, clustered_cut, clustered_triangles, suppress_clustered_cut, \
+        old_triangles, old_cuts
+
+
+def canonical_projection_maps(tree):
+    """Derive the sole allowed relabeling from sorted original vertex labels."""
+    (*_, old_triangles, old_cuts) = projection_structure(tree)
+    cycle_map = {old: new for new, old in enumerate(old_triangles)}
+    cut_map = {old: 9 + index for index, old in enumerate(old_cuts)}
+    return cycle_map, cut_map
+
+
+def incidence_symmetric_triangle_pair(tree):
+    """Find two original triangles with identical incidence neighborhoods."""
+    adj = INCIDENCE.adjacency(tree)
+    triangles = tuple(cycle for cycle, color in enumerate(tree.colors) if color == "T")
+    for index, first in enumerate(triangles):
+        for second in triangles[index + 1:]:
+            if tuple(sorted(adj[first])) == tuple(sorted(adj[second])):
+                return first, second
+    return None
+
+
+def verify_geometry_incidence_binding(signature, tree, geometries):
+    """Bind every named cyclic position to one original incidence-tree edge."""
+    adj = INCIDENCE.adjacency(tree)
+    require(len(geometries) == len(tree.colors),
+            "geometry ledger does not cover every original cycle")
+    bound_edges = []
+    for cycle, (color, geometry) in enumerate(zip(tree.colors, geometries)):
+        expected_label = f"{signature}:C{cycle}:{color}"
+        expected_cuts = tuple(sorted(adj[cycle]))
+        require(geometry.label == expected_label,
+                "cycle geometry is attached to the wrong original cycle")
+        require(geometry.length == (3 if color == "T" else 5),
+                "cycle geometry length disagrees with original cycle color")
+        CORE.verify_cycle(geometry)
+        require(all(vertex.cycle == expected_label and vertex.index == index
+                    for index, vertex in enumerate(geometry.vertices)),
+                "cyclic vertex identity aliases another geometry")
+        cut_vertices = tuple(vertex for vertex in geometry.vertices if vertex.role == "cut")
+        private_vertices = tuple(vertex for vertex in geometry.vertices
+                                 if vertex.role == "private")
+        require(tuple(vertex.cut for vertex in cut_vertices) == expected_cuts,
+                "geometry cut labels disagree with original incidence identities")
+        require(all(vertex.cut is None for vertex in private_vertices),
+                "private geometry position aliases an incidence cut")
+        bound_edges.extend((cycle, vertex.cut) for vertex in cut_vertices)
+    require(Counter(bound_edges) == Counter(tree.edges),
+            "geometry positions do not bind exactly to original incidence edges")
+
+
+def verify_projection_binding(signature, tree, geometries, projected_tree,
+                              cycle_map, cut_map):
+    """Bind relabeling maps and projected edges to the original T9P object."""
+    verify_geometry_incidence_binding(signature, tree, geometries)
+    (_, p0, clustered_cut, _, suppress_clustered_cut,
+     old_triangles, old_cuts) = projection_structure(tree)
+    cycles = CORE.exact_relabel_map(
+        tuple(cycle_map.items()), old_triangles, range(9), "projection cycle map"
+    )
+    cuts = CORE.exact_relabel_map(
+        tuple(cut_map.items()), old_cuts, range(9, 9 + len(old_cuts)),
+        "projection cut map"
+    )
+    canonical_cycles, canonical_cuts = canonical_projection_maps(tree)
+    require(cycles == canonical_cycles,
+            "projection cycle map differs from canonical original-label map")
+    require(cuts == canonical_cuts,
+            "projection cut map differs from canonical original-label map")
+    expected_edges = tuple(sorted(
+        (cycles[cycle], cuts[cut]) for cycle, cut in tree.edges
+        if cycle != p0 and (cut != clustered_cut or not suppress_clustered_cut)
+    ))
+    require(projected_tree.colors == ("T",) * 9,
+            "projected tree does not have exactly nine triangles")
+    require(projected_tree.edges == expected_edges,
+            "projected edges disagree with original incidence identities and maps")
+
+
+def triangular_projection(tree, root_mark):
+    """Delete the clustered leaf P and project both interfaces onto A9."""
+    (adj, p0, clustered_cut, clustered_triangles, suppress_clustered_cut,
+     old_triangles, old_cuts) = projection_structure(tree)
+    cycle_map, cut_map = canonical_projection_maps(tree)
+    projected_tree = A9.BASE.BASE.Tree(
+        ("T",) * 9,
+        tuple(sorted((cycle_map[cycle], cut_map[cut])
+                     for cycle, cut in tree.edges
+                     if cycle != p0 and
+                     (cut != clustered_cut or not suppress_clustered_cut))),
+    )
+    clustered = (
+        A9.BASE.Position("private", cycle_map[clustered_triangles[0]], 0)
+        if suppress_clustered_cut
+        else A9.BASE.Position("cut", cut_map[clustered_cut])
+    )
+    if root_mark.kind == "cut":
+        remote = (clustered if root_mark.vertex == clustered_cut else
+                  A9.BASE.Position("cut", cut_map[root_mark.vertex]))
+    else:
+        require(root_mark.vertex in cycle_map,
+                "triangular-hull root does not lie on a retained triangle")
+        slot = 1 if (suppress_clustered_cut and
+                     root_mark.vertex == clustered_triangles[0]) else 0
+        remote = A9.BASE.Position("private", cycle_map[root_mark.vertex], slot)
+    signature = A9.BASE.marked_signature(projected_tree, (clustered, remote))
+    return signature, projected_tree, (clustered, remote), cycle_map, cut_map
+
+
+def projected_vertex(position, router, geometries, cycle_inverse, cut_inverse):
+    old_router = cycle_inverse[router]
+    geometry = geometries[old_router]
+    if position.kind == "cut":
+        old_cut = cut_inverse[position.vertex]
+        matches = tuple(vertex for vertex in geometry.vertices if vertex.cut == old_cut)
+    else:
+        require(position.vertex == router, "projected private owner is on another router")
+        retained_cuts = set(cut_inverse.values())
+        matches = tuple(vertex for vertex in geometry.vertices
+                        if vertex.cut not in retained_cuts)
+        require(0 <= position.slot < len(matches), "projected private slot is invalid")
+        matches = (matches[position.slot],)
+    require(len(matches) == 1, "A9 position does not project to one concrete T9P vertex")
+    return matches[0]
+
+
+def verify_projected_plan(plan, geometries, cycle_map, cut_map):
+    """Realize every A9 router interval on the corresponding T9P triangles."""
+    cycle_inverse = {new: old for old, new in cycle_map.items()}
+    cut_inverse = {new: old for old, new in cut_map.items()}
+    require(len(cycle_inverse) == 9 and len(cut_inverse) == len(cut_map),
+            "projection relabeling is not bijective")
+    records = []
+    for split in plan.splits:
+        geometry = geometries[cycle_inverse[split.router]]
+        intervals = tuple(
+            tuple(projected_vertex(position, split.router, geometries,
+                                   cycle_inverse, cut_inverse)
+                  for position in positions)
+            for positions, _ in split.owners
+        )
+        CORE.verify_router_owner_split(
+            geometry, intervals, tuple(range(len(intervals))), split.interval_sizes
+        )
+        records.append(repr((split.router, split.active, split.interval_sizes,
+                             tuple(tuple(vertex.index for vertex in interval)
+                                   for interval in intervals))))
+    return tuple(records)
+
+
+def verify_projection_bijection(records, expected_sources, a9_rows):
+    require(digest(sorted(expected_sources)) == EXPECTED_ROW_DIGESTS["triangular-rows"],
+            "independently derived projection source domain digest changed")
+    by_source = unique_map(((source, target) for source, target in records),
+                           expected_sources, "projection source ledger")
+    targets = tuple(by_source.values())
+    expected = tuple(row.signature for row in a9_rows)
+    require(len(targets) == len(set(targets)), "triangular projection is not injective")
+    require(set(targets) == set(expected), "triangular projection is not onto A9 rows")
+    return by_source
+
+
+def derive_triangular_source_domain(classes):
+    """Independently derive and freeze the projection source census."""
+    sources = []
+    physical = 0
+    for signature, tree in classes:
+        adj = INCIDENCE.adjacency(tree)
+        p0 = tree.colors.index("P")
+        if len(adj[p0]) != 1:
+            continue
+        for root_code, _, multiplicity in ROOTS.root_orbits(tree):
+            sources.append(f"T\t{signature}\t{root_code}")
+            physical += multiplicity
+    sources.sort()
+    require(len(sources) == len(set(sources)),
+            "independent triangular source census has duplicates")
+    require(len(sources) == 43151 and physical == 68856,
+            "independent triangular source census count changed")
+    require(digest(sources) == EXPECTED_ROW_DIGESTS["triangular-rows"],
+            "independent triangular source census digest changed")
+    return tuple(sources), physical
 
 
 def expect_rejected(action, label):
@@ -278,7 +442,8 @@ def expect_rejected(action, label):
     raise RuntimeError(f"hostile mutation was accepted: {label}")
 
 
-def mutation_self_tests(triangle, pentagon, connector, orbits):
+def mutation_self_tests(triangle, pentagon, connector, orbits, projected_fixture,
+                        binding_fixture):
     bad_edges = pentagon.edges[:-1] + ((pentagon.vertices[4], pentagon.vertices[1]),)
     expect_rejected(lambda: verify_cycle(replace(pentagon, edges=bad_edges), (pentagon.vertices[0].cut,)),
                     "noncyclic pentagon edge")
@@ -307,7 +472,80 @@ def mutation_self_tests(triangle, pentagon, connector, orbits):
         Counter(vertex for orbit in bad_orbits for vertex in orbit.positions) ==
         Counter(pentagon.vertices[1:]), "mutated C5 orbits are incomplete"),
         "incomplete rooted C5 orbit")
-    return 9
+    projection_records, projection_sources, a9_rows = projected_fixture
+    duplicate_target = projection_records[:-1] + (
+        (projection_records[-1][0], projection_records[0][1]),
+    )
+    expect_rejected(lambda: verify_projection_bijection(
+        duplicate_target, projection_sources, a9_rows),
+                    "nonbijective triangular projection")
+    fresh_source = projection_records[:-1] + (
+        ("T\tfresh-source-alias\tR()", projection_records[-1][1]),
+    )
+    expect_rejected(lambda: verify_projection_bijection(
+        fresh_source, projection_sources, a9_rows),
+        "fresh projection source alias")
+    expect_rejected(lambda: CORE.verify_router_owner_split(
+        triangle,
+        ((triangle.vertices[0],), (triangle.vertices[1],)),
+        ("left", "right"), (1, 2)),
+        "incomplete projected router interval")
+    (binding_signature, binding_tree, binding_geometries, projected_tree,
+     cycle_map, cut_map) = binding_fixture
+    cut_items = tuple(cut_map.items())
+    require(len(cut_items) >= 2, "cut-map mutation fixture has fewer than two cuts")
+    bad_cut_map = dict(cut_map)
+    bad_cut_map[cut_items[0][0]], bad_cut_map[cut_items[1][0]] = (
+        cut_items[1][1], cut_items[0][1]
+    )
+    expect_rejected(lambda: verify_projection_binding(
+        binding_signature, binding_tree, binding_geometries, projected_tree,
+        cycle_map, bad_cut_map), "swapped projection cut map")
+    symmetric_pair = incidence_symmetric_triangle_pair(binding_tree)
+    require(symmetric_pair is not None,
+            "cycle-map mutation fixture has no incidence-symmetric triangles")
+    bad_cycle_map = dict(cycle_map)
+    first_cycle, second_cycle = symmetric_pair
+    bad_cycle_map[first_cycle], bad_cycle_map[second_cycle] = (
+        bad_cycle_map[second_cycle], bad_cycle_map[first_cycle]
+    )
+    swapped_edges = tuple(sorted(
+        (bad_cycle_map[cycle], cut_map[cut])
+        for cycle, cut in binding_tree.edges
+        if cycle in bad_cycle_map and cut in cut_map
+    ))
+    require(swapped_edges == projected_tree.edges,
+            "cycle-map mutation witness is not incidence-symmetric")
+    expect_rejected(lambda: verify_projection_binding(
+        binding_signature, binding_tree, binding_geometries, projected_tree,
+        bad_cycle_map, cut_map), "swapped incidence-symmetric cycle map")
+    cut_sites = tuple(
+        (geometry_index, vertex_index, vertex)
+        for geometry_index, geometry in enumerate(binding_geometries)
+        for vertex_index, vertex in enumerate(geometry.vertices)
+        if vertex.cut is not None
+    )
+    first = cut_sites[0]
+    second = next(site for site in cut_sites if site[2].cut != first[2].cut)
+    bad_geometries = list(binding_geometries)
+    replacements = {}
+    for site, new_cut in ((first, second[2].cut), (second, first[2].cut)):
+        geometry_index, vertex_index, vertex = site
+        vertices = list(replacements.get(geometry_index,
+                                         bad_geometries[geometry_index].vertices))
+        vertices[vertex_index] = replace(vertex, cut=new_cut)
+        replacements[geometry_index] = tuple(vertices)
+    for geometry_index, vertices in replacements.items():
+        geometry = bad_geometries[geometry_index]
+        bad_geometries[geometry_index] = replace(
+            geometry, vertices=vertices,
+            edges=tuple((vertices[index], vertices[(index + 1) % len(vertices)])
+                        for index in range(len(vertices)))
+        )
+    expect_rejected(lambda: verify_projection_binding(
+        binding_signature, binding_tree, tuple(bad_geometries), projected_tree,
+        cycle_map, cut_map), "swapped geometry cut labels")
+    return 15
 
 
 def main():
@@ -315,18 +553,27 @@ def main():
     require(blueprint_digest == EXPECTED_BLUEPRINT_DIGEST,
             "persisted K1--K17 repair blueprint digest changed")
     classes = INCIDENCE.enumerate_colors(tuple(sorted(("T",) * 9 + ("P",))), 0)
+    projection_sources, triangular_physical = derive_triangular_source_domain(classes)
     all_by_cut = Counter()
     leaf_by_cut = Counter()
     all_signatures = []
     leaf_signatures = []
-    triangular_rows = []
+    triangular_rows = list(projection_sources)
     private_rows = []
     incidence_records = []
     triangular_connector_records = []
     private_connector_records = []
-    triangular_physical = 0
     private_physical = 0
     fixture = None
+    binding_fixture = None
+    a9_rows, _, _ = A9.enumerate_rows()
+    a9_by_signature = unique_map(
+        ((row.signature, row) for row in a9_rows),
+        (row.signature for row in a9_rows), "A9 canonical row ledger"
+    )
+    projection_records = []
+    projected_plan_records = []
+    projected_plan_count = 0
 
     require(tuple(signature for signature, _ in classes) ==
             tuple(sorted(signature for signature, _ in classes)),
@@ -341,6 +588,7 @@ def main():
         all_by_cut[cuts] += 1
         all_signatures.append(signature)
         geometries = incidence_geometry(signature, tree)
+        verify_geometry_incidence_binding(signature, tree, geometries)
         incidence_records.append(f"{signature}|{geometry_text(geometries)}")
         p0 = tree.colors.index("P")
         if len(adj[p0]) != 1:
@@ -355,8 +603,6 @@ def main():
         orbits = rooted_private_orbits(clustered)
         for root_code, mark, multiplicity in ROOTS.root_orbits(tree):
             row_id = f"T\t{signature}\t{root_code}"
-            triangular_rows.append(row_id)
-            triangular_physical += multiplicity
             if mark.kind == "cut":
                 candidates = tuple(vertex for geometry in geometries for vertex in geometry.vertices
                                    if vertex.cut == mark.vertex)
@@ -369,6 +615,45 @@ def main():
                 hull = candidates[0]
             connector = connector_for_mark("P1", remote, hull, row_id)
             triangular_connector_records.append(connector_text(row_id, connector))
+            projected_signature, projected_tree, projected_positions, cycle_map, cut_map = (
+                triangular_projection(tree, mark)
+            )
+            verify_projection_binding(
+                signature, tree, geometries, projected_tree, cycle_map, cut_map
+            )
+            if (binding_fixture is None and len(cut_map) >= 2 and
+                    incidence_symmetric_triangle_pair(tree) is not None):
+                binding_fixture = (
+                    signature, tree, geometries, projected_tree,
+                    dict(cycle_map), dict(cut_map)
+                )
+            projected_row = a9_by_signature.get(projected_signature)
+            require(projected_row is not None,
+                    f"triangular projection has no canonical A9 row: {row_id} -> "
+                    f"{projected_signature}")
+            require(A9.BASE.BASE.signature(projected_tree) == projected_row.incidence_signature,
+                    "projected incidence tree disagrees with canonical A9 row")
+            require(A9.BASE.marked_signature(projected_tree, projected_positions) ==
+                    projected_row.signature,
+                    "projected marked positions disagree with canonical A9 row")
+            projection_records.append((row_id, projected_signature))
+            concrete_projected_row = A9.BASE.Row(
+                projected_signature,
+                A9.BASE.BASE.signature(projected_tree),
+                projected_tree,
+                projected_positions,
+                multiplicity,
+            )
+            plan = A9.choose_plan(concrete_projected_row)
+            if plan is not None:
+                A9.verify_plan(concrete_projected_row, plan)
+                interval_records = verify_projected_plan(
+                    plan, geometries, cycle_map, cut_map
+                )
+                projected_plan_records.append(
+                    f"{row_id}|{projected_signature}|{'|'.join(interval_records)}"
+                )
+                projected_plan_count += 1
             if fixture is None:
                 fixture = (next(g for g in geometries if g.length == 3), remote, connector,
                            rooted_private_orbits(remote))
@@ -384,6 +669,13 @@ def main():
     triangular_rows.sort()
     private_rows.sort()
     combined_rows = tuple(sorted(triangular_rows + private_rows))
+    projection = verify_projection_bijection(
+        tuple(projection_records), projection_sources, a9_rows
+    )
+    projection_digest = digest(
+        f"{source}|{projection[source]}" for source in sorted(projection)
+    )
+    projected_plan_digest = digest(sorted(projected_plan_records))
     row_digests = {
         "all-incidence": digest(all_signatures),
         "leaf-incidence": digest(leaf_signatures),
@@ -406,13 +698,23 @@ def main():
             "endpoint row or physical-position count changed")
     require(row_digests == EXPECTED_ROW_DIGESTS, "frozen endpoint row digest changed")
     require(fixture is not None, "hostile mutation fixture is absent")
-    mutation_count = mutation_self_tests(*fixture)
+    require(binding_fixture is not None, "projection-binding mutation fixture is absent")
+    require(projected_plan_count == 43145,
+            "concrete projected interval plan count is not 43145")
+    mutation_count = mutation_self_tests(
+        *fixture, (tuple(projection_records), projection_sources, a9_rows),
+        binding_fixture
+    )
 
     print("colored T^9P incidence trees:", dict(sorted(all_by_cut.items())), "total", len(classes))
     print("clustered-P incidence-leaf trees:", dict(sorted(leaf_by_cut.items())),
           "total", len(leaf_signatures))
     print("triangular-hull rows/placements:", len(triangular_rows), triangular_physical)
     print("private-P distance-orbit rows/physical vertices:", len(private_rows), private_physical)
+    print("triangular-hull projection bijection:", len(projection))
+    print("triangular-hull projection sha256:", projection_digest)
+    print("concrete projected A9 plans:", projected_plan_count)
+    print("concrete projected-plan sha256:", projected_plan_digest)
     print("rooted C5 stabilizer:", rooted_c5_stabilizer())
     for label in sorted(row_digests):
         print(f"{label} sha256:", row_digests[label])
@@ -424,11 +726,15 @@ def main():
 
     require(geometry_digests == EXPECTED_GEOMETRY_DIGESTS,
             "frozen endpoint geometry digest changed")
-    require(mutation_count == 9, "hostile mutation count changed")
+    require(projection_digest == EXPECTED_PROJECTION_DIGEST,
+            "triangular-hull projection digest changed")
+    require(projected_plan_digest == EXPECTED_PROJECTED_PLAN_DIGEST,
+            "concrete projected-plan digest changed")
+    require(mutation_count == 15, "hostile mutation count changed")
     raise RuntimeError(
-        "fail-closed exact census frontier: no endpoint row is theorem-certified; "
-        "the persisted K1--K17 blueprint is not yet integrated with uniform "
-        "graph-level final-owner certificates for all 50399 rows"
+        "fail-closed exact census frontier: the triangular-hull projection and "
+        "43145 concrete router plans are certified, but private-P rows and full "
+        "T9P graph-level final ownership are not theorem-certified"
     )
 
 

@@ -1,5 +1,23 @@
 # notebook — positive square energy
 
+## 2026-07-28 — shared geometry-aware router bridge
+
+Extracted a common concrete interval/owner kernel while preserving every
+`P|A_9|P` count and proof digest byte-for-byte. Deleting the clustered leaf
+pentagon projects all 43151 triangular-hull `T^9P|P` marks bijectively onto the
+hardened A9 universe, and 43145 selected plans now realize actual C3 vertices
+and consecutive intervals.
+
+Three hostile audits found subtle projection flaws: the source domain was
+initially derived from its own records; a bijective cut map could be swapped;
+and incidence-symmetric triangles could exchange projected identities without
+changing edges. The final bridge independently enumerates/freeze-checks the
+source domain, reconstructs projected edges from original incidences, binds
+all geometry cut labels, and requires deterministic increasing-label cycle and
+cut maps. Fifteen mutations are rejected. This proves only the bounded
+projection and interval realization; complete C5/connector/attachment owners
+for the 50399 endpoint rows are still deliberately unclaimed.
+
 ## 2026-07-28 — geometry-aware `T^9P|P` frontier
 
 The complete endpoint has 50399 canonical rows: 43151 entries on the
