@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 102
+- **cycle:** 103
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 103 audited reciprocal mollifiers, local-mixing gap
+  criteria, phase-hypergraph compatibility, nonsplit Weil sixfolds, and TFNP
+  magnification.  Reciprocal product approximation is exactly Nyman--Beurling;
+  local SSM still needs physical projector and cutoff estimates; phase
+  frustration is exactly integer-cycle holonomy but remains kinematic; the
+  nonsplit discriminant-`-3` Weil sixfold isolates a codimension-three cycle
+  production target without producing it; and black-box total-search lower
+  bounds do not yield white-box separation.  The BSD scout returned no report.
 
 - 2026-07-29: Cycle 102 tested a concrete rank-two BSD determinant over
   `Q(sqrt(-31))`, Yang--Mills slab minorization, overlapping Navier phase locks,
