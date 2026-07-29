@@ -30,7 +30,7 @@ instance.
 
 For
 \[
- \operatorname{ch}(F_2)=N\left(g^*\Theta-rac q6(g^{-1})^*\Theta^3\right),
+ \operatorname{ch}(F_2)=N\left(g^*\Theta-\frac q6(g^{-1})^*\Theta^3\right),
 \]
 the Chern-contraction map on
 \[

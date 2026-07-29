@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 108
+- **cycle:** 109
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 109 independently reproduced and machine-certified the
+  quartic-CM Chern-contraction rank.  Exact exterior algebra gives rank `20`,
+  nullity `8` under forced RM `(2,2)` multiplicities, versus `24/4` for four
+  distinct eigenvalues.  The eight kernel directions have explicit
+  representation meaning but are not automatically unobstructed.  The HPS
+  curve still lacks a rigorous RM correspondence; Faltings--Serre can certify a
+  rational isogeny only after exact residual data and does not settle integral
+  polarization.  A direct correspondence satisfying `M^2-3M+I=0` remains the
+  clean checkpoint.  The malformed Cycle 108 formula was repaired.
 
 - 2026-07-29: Cycle 108 sought an explicit quartic-CM semiregularity
   certificate.  A concrete genus-four quadric-cubic candidate has the required

@@ -1,5 +1,16 @@
 # Notebook
 
+## Cycle 109
+
+Added a dependency-free exact exterior-algebra verifier for the full
+`28`-column Chern-contraction matrix.  It reproduces rank `20`, nullity `8` for
+real-quadratic `(2,2)` multiplicities and rank `24`, nullity `4` for four
+distinct eigenvalues.  The kernel decomposes into two trace-free endomorphism
+summands and two matched `B`/Poisson lines, none automatically killed by the
+Atiyah obstruction.  A direct algebraic correspondence on the explicit curve,
+not finite point-count matching, is the clean RM certificate.  No such
+correspondence or Ext matrix was produced.
+
 ## Cycle 108
 
 An explicit genus-four quadric-cubic candidate with smooth quadric and modular
