@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 104
+- **cycle:** 105
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 105 met the nonsplit Weil-sixfold mechanism rotation gate.
+  Markman-type polarization, isogeny, dual, Brauer, and Fourier--Mukai
+  modifications preserve the split determinant norm class; the missing ratio
+  `3` is not a `Q(i)` norm.  Nonzero unitary special cycles lie over proper
+  codimension-three loci, while dominating contraction cycles have zero pure
+  determinant projection.  The deformation bookkeeping was sharpened: the
+  nine-dimensional Weil base has codimension twelve in `A_6`; rank nine denotes
+  projection onto the selected base, not ambient Hodge-map rank.  No seed was
+  produced and the route was retired.
 
 - 2026-07-29: Cycle 104 primary-source-audited the nonsplit `Q(i)` Weil
   sixfold target.  The generic discriminant-`-3` component remains open, while

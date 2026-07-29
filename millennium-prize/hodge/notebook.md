@@ -1,5 +1,16 @@
 # Notebook
 
+## Cycle 105
+
+Polarization changes, `K`-linear isogenies, nonprincipal duals, and twisted
+Fourier--Mukai transports preserve Markman's split Hermitian norm class: the
+determinant remains `-N(alpha)`, never `-3 N(alpha)`.  Nonzero unitary special
+cycles live over proper special loci, while dominating contraction-generated
+cycles have zero determinant projection.  In full `A_6`, the nine-dimensional
+Weil component has codimension twelve; rank nine refers only to dominance onto
+that chosen base.  No nonmetabolic determinant-bearing seed was found, so the
+mechanism was retired.
+
 ## Cycle 104
 
 Primary-source audit confirms a clean bounded open target: the rank-two Weil
