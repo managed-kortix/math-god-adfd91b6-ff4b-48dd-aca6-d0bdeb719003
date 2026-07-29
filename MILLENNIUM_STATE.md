@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 101
+- **cycle:** 102
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 102 tested a concrete rank-two BSD determinant over
+  `Q(sqrt(-31))`, Yang--Mills slab minorization, overlapping Navier phase locks,
+  mixed abelian Chow summands, and proof compression.  The BSD test has a
+  nonzero Kummer wedge but fails Heegner sign, independent ordinary localization,
+  and `H^2`-vanishing gates; global slab mixing constants collapse with boundary
+  size; overlapping triads can remain simultaneously phase-locked and positive;
+  the Hodge closure is formal prior art; and semantic proof compression under
+  `P=NP` is vacuous while natural compression is unsupported.  The RH scout
+  returned no report.
 
 - 2026-07-29: Cycle 101 audited genuine rank-two Euler systems, full physical-
   slab contraction, helical phase dynamics, random Euler products, abelian-type
