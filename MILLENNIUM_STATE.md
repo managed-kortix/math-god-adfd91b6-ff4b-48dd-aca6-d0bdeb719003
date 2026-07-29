@@ -5,11 +5,11 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after Yang--Mills annular equivalence gate
-- **active main funnel:** selection review.  Full physical temporal-annulus
-  SDPI is exactly a spectral gap after OS completeness and only screening
-  without it; cutoff-uniformity is stronger than the continuum gap because
-  moving regulator states can escape strong limits.
+- **phase:** portfolio rotation after Navier critical-passage cancellation gate
+- **active main funnel:** selection review.  Completed tagged passages admit
+  exact simultaneous high-shell backscatter canceling the signed critical
+  derivative; shell-balance trichotomies allow Zeno cascades with summable
+  dissipation, and full Duhamel tree sums retain balanced-tree growth.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 120
+- **cycle:** 121
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 121 declined Navier promotion.  An exact five-mode Fourier
+  packet realizes simultaneous forward and backscatter triads with nonlinear
+  energy conservation and critical `H^(1/2)` contributions `+160` and `-160`.
+  Leakage modes do not affect the initial energy derivative.  Abstract exact
+  shell balances permit infinitely many fixed critical increments before a
+  finite Zeno time with summable dissipation even without backscatter, so the
+  passage trichotomy is bookkeeping absent new equation-specific coercivity.
+  The associahedral alternative has no associative/pre-Lie cancellation and
+  balanced Duhamel trees retain exponential growth, recovering only the known
+  small-critical-data radius.
 
 - 2026-07-29: Cycle 120 retired the Yang--Mills annular funnel.  Under an onto
   OS transfer identification, full-kernel squared-norm contraction is exactly
