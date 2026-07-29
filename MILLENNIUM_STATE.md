@@ -5,12 +5,11 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** rotation review after exact P-vs-NP compression audit
-- **active main funnel:** selection of a new full-reach mechanism. The MMW
-  implication remains valid, but the Stream-Merge tactic is retired: canonical
-  merge is only an upper-bound implementation, while the target search relation
-  permits any witness; residual counting, invented global consistency,
-  proof-compilation, and PRG hitting all fail their implication gates.
+- **phase:** RH Li first-difference funnel
+- **active main funnel:** prove `lambda_(n+1)-lambda_n>0` for all classical Li
+  coefficients through an unconditional one-sided bound for the signed
+  Laguerre transform of `psi(x)-x`. This is stronger than Li positivity and has
+  full reach, but finite verification alone is explicitly insufficient.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 77
+- **cycle:** 79
 - **announcements:** none
 
 ## immutable target list
@@ -161,14 +160,12 @@ waiting process.
 
 ## next exact steps
 
-1. Complete a written portfolio rotation. Do not promote MMW again without a
-   lower-bound lemma for the original noncanonical search relation.
-2. Audit the RH Weil-spline refinement Schur complement for any structural sign
-   theorem stronger than Weil positivity itself; rotate immediately if only
-   recombined positivity remains.
-3. Audit a Yang--Mills physical-slab cone theorem only as an RG component: the
-   main lemma must force entry of the weak-coupling trajectory into its basin,
-   not merely reprove fixed strong-coupling clustering.
+1. Run and independently test the finite Arb Li-difference verifier; record only
+   its exact finite range, never an asymptotic claim.
+2. Derive a frequency-sensitive bound for the signed Laguerre transform of
+   `psi(x)-x`; do not take absolute values across the oscillatory region.
+3. Test whether a centered weighted Laguerre packet admits a positive-square or
+   Hilbert-transform decomposition not equivalent to Li positivity itself.
 4. Keep bounded scouts live: BSD derived Kato rank-two primitivity; RH Weil
    spline calibration; Hodge generic-seed obstruction; Navier phase-sensitive
    backscatter depletion; Yang--Mills common-cone physical-slab contraction.
@@ -176,6 +173,14 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycles 78--79 retired the Weil-spline tactic after proving that
+  nested generalized Schur positivity is exactly the Weil criterion on a dense
+  core; long packets also obstruct support-uniform prime domination. The new RH
+  candidate is strict Li monotonicity. Exact Abel--Laguerre and PNT-error
+  formulas isolate the signed prime transform as the bottleneck, and a finite
+  Arb verifier was added with an explicit non-solution disclaimer. No RH result
+  is claimed.
 
 - 2026-07-29: Cycle 77 normalized the Stream-Merge feasibility, minimization,
   and lexicographic predicates and then met the rotation gate. The process is

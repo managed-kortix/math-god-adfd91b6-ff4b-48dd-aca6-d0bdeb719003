@@ -1,5 +1,18 @@
 # Notebook
 
+## Main-funnel cycles 78--79
+
+Nested Weil-spline Schur positivity is exactly finite Weil positivity and, after
+the density/continuity bridge, the full Weil criterion. Individual channels are
+indefinite, while long packets obstruct uniform prime domination by logarithmic
+gamma energy and fixed-rank moments. This tactic is retired.
+
+The new bounded main candidate is strict monotonicity of the classical Li
+coefficients. Its first differences have exact zero, Abel--Laguerre--Mangoldt,
+and real PNT-error formulas. The signed Laguerre transform of `psi(x)-x` is the
+uniform bottleneck. A rigorous Arb script certifies only finite initial
+inequalities. No RH result is claimed.
+
 ## Tick 1 — exact finite enclosure lemma
 
 Fix integers `N >= 3` and `Q >= N`, and set `epsilon=1/Q`. Define `c_a` and
