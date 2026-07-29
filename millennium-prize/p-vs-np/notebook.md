@@ -1,5 +1,17 @@
 # Notebook
 
+## Cycle 93
+
+For permutation-invariant randomized query algorithms, hypergeometric
+indistinguishability and infinite pigeonhole give an exact canonical boundary-
+layer refuter, subject to boundary-index uniformity.  Deterministic and
+uniformly enumerable small-random-support subclasses also admit constructive
+adversarial completions.  For unrestricted algorithms the mean acceptance is
+a degree-`q` polynomial and a convex combination of depth-`q` trees, but
+thresholding, symmetrization, minimax, and known PTF generators do not select a
+uniform error.  These restricted theorems do not satisfy CJSW; no separation is
+claimed.
+
 ## Cycle 92
 
 The CJSW GapMaj theorem is a valid full-reach constructive-separation target:

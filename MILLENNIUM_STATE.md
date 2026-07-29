@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 92
+- **cycle:** 93
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,14 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 93 isolated the constructive content of GapMaj extraction.
+  Permutation-invariant, deterministic-polylogtime, and small-enumerable-random-
+  support subclasses admit exact canonical uniform refuters.  For arbitrary
+  randomized adaptive algorithms, the mean is a degree-`q` polynomial and the
+  minimax dual supplies a hard permutation orbit, but selecting a good orbit
+  point remains the CJSW uniform-refuter assertion itself.  Symmetrization,
+  low degree, bounded influence, and generic PTF PRGs do not cross this gate.
 
 - 2026-07-29: Cycle 92 pinned the exact CJSW constructive GapMaj theorem, whose
   polylogtime-uniform `AC0` refuter hypothesis implies `P != NP`.  The proposed
