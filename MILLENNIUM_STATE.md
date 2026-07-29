@@ -140,7 +140,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 83
+- **cycle:** 84
 - **announcements:** none
 
 ## immutable target list
@@ -173,6 +173,14 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 84 completed exact bounded-result and novelty audits. The
+  Fermat-plane semiregularity multiplication has a valid all-degree private-
+  pivot proof and new finite auditor, but its tangent-space consequence is known
+  in the complete-intersection/linear-cycle literature. Bounded-complexity dense
+  specialization is standard properness once the uniform bound is assumed. The
+  `389a1`, `p=5`, `41*61` Kurihara certificate is already published by Kim.
+  These are calibrations, not new Hodge/BSD results or Millennium solutions.
 
 - 2026-07-29: Cycles 82--83 met two more rotation gates. Arbitrary singularity
   rescaling cannot yield a global bounded-`L^3` ancient profile: CKN gives lower

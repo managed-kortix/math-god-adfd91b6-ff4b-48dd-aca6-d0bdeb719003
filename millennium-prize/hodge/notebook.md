@@ -1,5 +1,14 @@
 # Notebook
 
+## Bounded calibration cycle 84
+
+The all-degree Fermat-plane semiregularity multiplication has a symbolic private-
+pivot proof and a dependency-free finite auditor. Literature review shows the
+tangent equality and injectivity are known in substance for linear complete-
+intersection cycles. The bounded-complexity dense-specialization lemma is also a
+standard finite-Hilbert/Chow properness argument; producing the uniform bound is
+the unresolved content. These are retained as calibrations, not new Hodge cases.
+
 Bounded scout is queued to formalize the two rank computations in the Fermat
 cubic calibration and then check obstruction/smoothness data; equality of
 Zariski tangent dimensions alone is not actual dominance.
