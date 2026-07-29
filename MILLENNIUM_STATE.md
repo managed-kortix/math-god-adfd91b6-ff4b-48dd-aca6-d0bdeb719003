@@ -5,12 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after Fermat candidate obstruction
-- **active main funnel:** select a genuinely new structural production target.
-  The degree-33 exceptional Fermat character remains open, but da Silva's
-  proposed elementary-symmetric surface is exactly an ambient complete
-  intersection and has zero primitive projection.  Search must use a genuinely
-  nonambient cycle outside power-map and standard join closures.
+- **phase:** degree-33 Fermat exceptional-cycle production
+- **active main funnel:** lift or replace characteristic-two Hermitian-plane
+  representatives of the exceptional character.  A concrete noncoordinate
+  plane has a nonzero exact obstruction already modulo `4`; projector-weighted
+  combinations may cancel this, so the next gate is the character-resolved
+  obstruction matrix for the Hermitian plane span.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 115
+- **cycle:** 117
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +175,24 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 117 moved the exceptional degree-33 character to its exact
+  finite-field lifting gate.  Modulo `2`, the Fermat fourfold is Hermitian and
+  maximal planes span middle etale cohomology, so some projected plane reaches
+  `alpha`.  For an explicit noncoordinate plane, the normal map has rank `9`
+  in a `595`-dimensional target, and the standard `W_2/4` lift has nonzero
+  obstruction `(ab)^16(x0^16 x1^17+x0^17 x1^16)` modulo its image.  Thus the
+  plane itself cannot lift linearly.  Weighted combinations can still cancel,
+  leaving an exact character-resolved obstruction-matrix target.  The packaged
+  Cycle 116 Fermat-candidate paper was built, audited, manifested, and pushed;
+  its README and immutable evidence URL were corrected here.
+
+- 2026-07-29: Cycle 116 packaged the exact negative answer for da Silva's
+  proposed elementary-symmetric surface in the top-level folder
+  `fermat-elementary-symmetric-obstruction/`, with `paper.tex`, built PDF,
+  verifier, disclosure, hostile audit, and narrow manifest entry.  It is not an
+  OCB or X-eligible Hodge resolution; source-author contact remains for Main's
+  accountable publication review.
 
 - 2026-07-29: Cycle 115 answered the proposed Fermat candidate question
   negatively.  Newton's identity proves

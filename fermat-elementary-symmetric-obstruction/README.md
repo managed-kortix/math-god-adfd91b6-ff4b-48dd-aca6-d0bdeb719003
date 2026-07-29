@@ -7,8 +7,10 @@ Hodge conjecture.
 
 ## Reproduce
 
+From the repository root:
+
 ```sh
-python3 verify.py
+python3 fermat-elementary-symmetric-obstruction/verify.py
 bash scripts/build-paper.sh fermat-elementary-symmetric-obstruction
 ```
 
