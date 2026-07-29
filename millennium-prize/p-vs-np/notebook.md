@@ -1,5 +1,17 @@
 # Notebook
 
+## Cycle 97
+
+Gate elimination for one-sided average-case MCSP loses the easy-function
+promise under truth-table patches; exact patch closure at fixed size is
+impossible.  Compressed decision trees give only `Omega(n)` certificate bounds.
+Easy-table-preserving circuit-generated restrictions can leave a full OR on all
+live variables, defeating an unconditional switching lemma.  Constant-density
+sample inconsistency has an enumerative `N^O(log log N)` circuit/SAT-oracle
+upper bound, while tiny-density hardwired cylinders have `poly(n)` size.  The
+required `N^.01` lower bound must charge global circuit fitting; all tested
+local mechanisms were retired.
+
 ## Cycle 96
 
 Oliveira--Santhanam average-case MCSP magnification is valid: a fixed-power

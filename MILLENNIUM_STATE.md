@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 96
+- **cycle:** 97
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 97 attacked the average-case MCSP one-sided rejector by
+  gate elimination, certificates, anchored restrictions, and explicit upper
+  bounds.  Patch closure consumes the easy-size budget, compressed interpolation
+  gives only `Omega(n)`, and an easy-table-preserving restriction can leave
+  `OR_(N^.01)` unchanged.  Constant-density sample inconsistency is a SAT-like
+  global fitting predicate with an enumerative `N^O(log log N)` upper bound;
+  tiny density permits `poly(n)` hardwired cylinders.  The mechanism funnel was
+  retired while the magnification theorem remains a reserve target.
 
 - 2026-07-29: Cycle 96 verified Oliveira--Santhanam average-case MCSP
   magnification from the primary source and corrected the formal model to
