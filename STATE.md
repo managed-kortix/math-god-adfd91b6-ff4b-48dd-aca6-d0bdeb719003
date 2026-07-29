@@ -16,6 +16,30 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-29: completed the exact rank-eleven `T^9P|P` endpoint. The physical
+  verifier certifies all 50399 rows: 43145 ordinary triangular-hull plans, 7248
+  private clustered-pentagon rows, and six projected residual repairs. Private
+  nonbouquets use a canonical actual-C3 split into a complete connected two-P
+  child of rank at most nine plus a nonempty strict triangular sibling; the two
+  rooted-C5 distance orbits use explicit bouquet openings. The final hostile
+  audit caught an owner map not bound to the private router interval and a
+  hard-coded theorem flag. Canonical physical owners are now independently
+  derived, exact maps must match, packet theorems/bounds are reclassified, and
+  the C0-crossing mutation fails. Thirty-one hostile mutations pass their
+  rejection gates; normal and `-O` outputs are byte-identical. Private digest
+  `815040d4...`, residual digest `740a1385...`. This closes only the marked
+  endpoint; 115502 ordinary fully shared `T^9PP` rows remain to harden.
+- 2026-07-28: extended the geometry bridge to exhaustive physical owners for
+  exactly 43145 ordinary triangular-hull `T^9P|P` rows. Each certificate now
+  covers canonical shared cuts, every C3/C5 vertex and edge, connector chain,
+  remnant anchor, and attachment domain; terminal connectivity is checked on
+  owner-induced physical subgraphs and packet theorems are rederived from
+  complete physically owned cycles. A hostile audit found coordinated remnant
+  deletion because the first expected domain was certificate-defined. The
+  verifier now independently reconstructs expected vertices, edges, and
+  attachments from source incidence/connector geometry; the deletion mutation
+  and 19 others fail. Physical certificate digest `63305ff2...` was accepted.
+  The six projected residuals and 7248 private-P rows remain explicitly open.
 - 2026-07-28: built and hostile-audited the first shared geometry-aware router
   certificate bridge. The hardened `P|A_9|P` verifier now uses the common core
   without changing any output or digest. Every one of the 43151 triangular-hull

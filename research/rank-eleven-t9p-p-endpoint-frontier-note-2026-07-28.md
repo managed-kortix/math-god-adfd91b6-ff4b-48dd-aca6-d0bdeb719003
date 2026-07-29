@@ -4,21 +4,18 @@
 
 ## Verdict
 
-The executable `research/rank-eleven-t9p-p-endpoint-frontier-verifier.py` remains
-an exact geometry-aware frontier and always fails closed after checking the
-complete 50399-row universe. Its triangular-hull slice is now projected exactly
-to the hardened `P|A_9|P` verifier; this bounded phase is not a full endpoint
-claim.
+The executable `research/rank-eleven-t9p-p-endpoint-frontier-verifier.py` now
+certifies all 50399 rows by exhaustive physical final ownership: 43145 ordinary
+triangular-hull rows, six predicate-derived projected repairs, and all 7248
+private clustered-pentagon rows.
 
-The requested K1 coalescence, K2 opening, and K3--K17 two-router recipes are
-now persisted in
+The earlier K1 coalescence, K2 opening, and K3--K17 two-router recipes remain
+persisted as design history in
 `research/rank-eleven-t9p-p-seventeen-repair-blueprint-2026-07-28.md`.
 The verifier pins that file at SHA-256
-`163d4c86bc373470f9d012bdb162937d4013ca345577222e3f26603a77b5f92e`.
-They remain explicitly labelled a proof blueprint rather than a certificate:
-they have not been integrated with one uniform graph-level final-owner checker
-for all ordinary and private-pentagon rows. Promoting only the 17 recipes while
-retaining under-materialized ordinary records would regress the hostile audit.
+`d9b9820780624eb9215cd569105b84adeaf3ea0bd016410cc21ce38b85800063`.
+They are not used to recognize or close the six rows. The accepted repairs are
+the already hardened A9 operations transported to explicit T9P geometry.
 
 The former `50382/50399` claim is withdrawn. Its records represented demands
 as strings, used an ambiguous synthetic triangle slack position, and did not
@@ -52,14 +49,40 @@ distance 1: {v1,v4},
 distance 2: {v2,v3}.
 ```
 
-Owner-like incidence ledgers are checked for duplicate keys and exact domains
-before conversion to dictionaries. Fifteen hostile geometry mutations must be
+The 7246 nonbouquet private rows use the proved private leaf-pentagon router
+lemma, persisted in
+`research/rank-eleven-t9p-p-private-router-lemma-2026-07-29.md`. The checker
+chooses the first triangle on the canonical path from the P0
+root cut to the least other cut, assigns its actual root-cut vertex as the
+singleton two-P side, and assigns the complementary two-vertex interval to a
+nonempty strict triangular sibling. The two-P child contains complete P0 and
+P1, the full private-distance connector chain and remnant, and has cyclic rank
+at most nine. All claims are rederived from incidence components and physical
+ownership. Submitted vertex and attachment maps must equal the independently
+derived branch-component map at every physical vertex, and the concrete
+singleton/complementary intervals are explicitly bound to `two-P` and `strict`.
+
+The two bouquet distance rows use the distance-specific P0 openings: distance
+one opens `v3`, while distance two opens `v4`. The retained territory contains
+all nine triangles, the complete retained P0 path, P1, and its full connector;
+the opened singleton is the exact tree charge. The exact ledger is
+`(9-delta)-1=8-delta>0`.
+
+Incidence and physical-owner ledgers are checked for duplicate keys and exact
+domains before conversion to dictionaries. Thirty-one hostile mutations must be
 rejected, including malformed pentagon edges, duplicate vertices, moved roots,
 aliased remnants, nonconsecutive or incomplete triangle intervals, duplicate
 or incomplete owner domains, an incomplete rooted-C5 orbit, a nonbijective
 projection, a fresh source alias, an incomplete projected router interval, a
 swapped cut relabeling, swapped geometry cut identities, and a cycle-map swap
-between two incidence-symmetric triangles.
+between two incidence-symmetric triangles, connector edge loss, split C5
+ownership, a duplicated canonical cut site, forged packet connectivity, and a
+coordinated deletion of the remnant vertex, remnant edge, and both owner rows.
+Private mutations additionally reject a wrong distance/open vertex, a severed
+connector, a rank-ten-or-larger two-P child, an empty strict sibling, split C5
+ownership, and an attachment-owner mismatch.
+The private gate also moves an actual reported `C0` vertex from `strict` to
+`two-P`; exact owner-map comparison rejects it.
 
 ## Theorem frontier
 
@@ -97,14 +120,47 @@ triangle. The concrete projected-plan digest is
 c3fd37ebc47de29a7f49471c6ecd61a280581fe30c3fdf72905548345d814566.
 ```
 
-These are projection and interval-geometry certificates, not T9P theorem
-certificates: the clustered pentagon's complete branch, connector paths,
-pentagon vertices, and off-hull attachments have not yet been propagated into
-one exact final-owner domain for every packet.
+For each accepted row the checker canonicalizes every shared cut to one
+`CutSite`, includes all C3 vertices and edges, both complete C5 cycles, every
+connector chain edge and path vertex, and the explicit remnant anchor. Every
+physical vertex and its attachment receive exactly one final owner. Connectivity
+is recomputed on each owner's induced edge graph. Complete triangle and pentagon
+profiles are recovered from those owned vertices, and `A9.terminal_packet`
+independently rederives theorem, hypothesis, and bound; packet demand strings
+are never used to establish ownership or connectivity.
 
-No one-router, opening, or K-repair record is accepted as a full T9P theorem
-certificate. Therefore the exact certified endpoint theorem frontier remains
-all 50399 rows.
+The expected vertex, edge, and attachment domains are reconstructed separately
+from the row incidence tree, canonical C3/C5 block rules, root mark, and connector
+specification. They are not inferred from the submitted certificate. Submitted
+domains must equal those expected domains exactly, so coordinated deletion cannot
+shrink both the graph and its owner ledgers. The frozen geometry digests below
+are likewise generated from the independent incidence and connector streams and
+then compared with the materialized geometry.
+
+The triangular-hull certified count is 43145, with physical owner-certificate
+digest
+
+```text
+63305ff27b19d07bd705eec8f489dcfcfd12cc8cc129dbe93cf914d1c29c4a1a.
+```
+
+The six physical residual certificates have digest
+
+```text
+740a1385503bdf58761be38057ca9d548f85289183ef4a4c515fbc6038398da3.
+```
+
+All 7248 private rows carry explicit terminal theorem records and exact `Bound`
+ledgers, independently reclassified during verification. Rank-2/3 two-P
+children are nonnegative; rank-4..9 children are strict; every nonbouquet row
+also has a nonempty pure-triangular strict sibling. Bouquet records sum the
+packing-one `A9P1` bound and exact tree bound `-1`. Their certificate digest is
+
+```text
+815040d4da58efb5edb5660de47d14d4012eb6245afcabb5b77c98e2a8a8e43d.
+```
+
+The six projected residual repairs are now physical certificates.
 The previously printed 17 identifiers remain only a reported candidate repair
 frontier, with diagnostic digest
 
@@ -112,12 +168,14 @@ frontier, with diagnostic digest
 fcf002bb4150db6dc4c5b19f2e9d76b05de066898413b28ee11c4e0a9619747c.
 ```
 
-That digest is not a closure claim. A future theorem verifier must integrate
-the persisted blueprint, materialize every refinement inside its current active
-territory, prove complete terminal connectivity including both actual
-pentagons and connector paths, and independently rederive every theorem
-hypothesis and exact ledger. Until the same checker covers all 50399 rows, the
-exact theorem-certified subset remains empty and the executable fails closed.
+That 17-row digest is not used as a closure claim. The verifier instead derives
+the exact six source rows from incidence predicates. Two have a unique
+degree-two C3 router, degree-eight hub, and private/hub marks; their concrete
+`(2,1)` split yields `TP + packing-one A7P` and `8-2*delta>0`. Four are one-cut
+common-hub geometries; opening the rooted clustered C5 into its root singleton
+and complementary four-path retains packing-one `A9P` and yields
+`8-delta>0`. Complete connectors, remnants, owner-induced packet profiles,
+domains, connectivity, and theorem bounds are rechecked on the physical graph.
 
 ## Reproduction
 
@@ -126,14 +184,15 @@ python research/rank-eleven-t9p-p-endpoint-frontier-verifier.py
 python -O research/rank-eleven-t9p-p-endpoint-frontier-verifier.py
 ```
 
-Both modes must print byte-identical census and geometry diagnostics and then
-raise the same explicit `RuntimeError`. No invariant uses `assert`.
+Both modes must print byte-identical census and certificate diagnostics and
+finish with `theorem-certified endpoint rows: 50399 / 50399`. No invariant uses
+`assert`.
 
 The frozen geometry digests are:
 
 ```text
 incidence geometry:      f1db45b36e04eb68ddf6d549e1daf75c0cdae65b22052505e98abf5d4e9ca530
-triangular connectors:   e59ff052f88b00bbfaed46ad8d0fd4a6d6cb42302ad53bf321202066c2d76e8b
-private-P connectors:    df3437148c879d78c0595331f3e9d5966e9edf037ea8a12fb5cd64d6df77b90f
-combined geometry:       82387e52ea2ab4878de670377d9003c5a66297637abcf28778d223a2b3d39398
+triangular connectors:   3ba0f596836c4421986d8f8c3e97887dc87c84e6a1902975383642329f3af8f8
+private-P connectors:    d9d3b59003b5d6827d82011eb5c120c6776e7c648576deb4c01453341215d3a1
+combined geometry:       3da4ebec400a236a10ffb242603b485c7b549a2503fa5c4ee061dcc7afa70b7b
 ```

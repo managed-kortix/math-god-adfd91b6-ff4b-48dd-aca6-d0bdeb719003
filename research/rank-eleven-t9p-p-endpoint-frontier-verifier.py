@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""Fail-closed geometry-aware census for the rank-eleven T^9P | P endpoint.
+"""Fail-closed physical-owner census for the rank-eleven T^9P | P endpoint.
 
-No theorem closure is claimed. The executable materializes the abstract cyclic
-geometry, projects the triangular-hull slice bijectively to the hardened
-P | A_9 | P verifier, and realizes all of its 43145 ordinary plans on concrete
-T^9P triangle vertices. It still exits with RuntimeError because private-P rows
-and full graph-level ownership are not certified.
+The executable projects the triangular-hull slice bijectively to the hardened
+P | A_9 | P verifier and realizes every ordinary and repaired plan as an
+exhaustive physical owner certificate.
 """
 
 from __future__ import annotations
@@ -62,21 +60,25 @@ EXPECTED_ROW_DIGESTS = {
 }
 EXPECTED_GEOMETRY_DIGESTS = {
     "incidence-geometry": "f1db45b36e04eb68ddf6d549e1daf75c0cdae65b22052505e98abf5d4e9ca530",
-    "triangular-connectors": "e59ff052f88b00bbfaed46ad8d0fd4a6d6cb42302ad53bf321202066c2d76e8b",
-    "private-connectors": "df3437148c879d78c0595331f3e9d5966e9edf037ea8a12fb5cd64d6df77b90f",
-    "combined-geometry": "82387e52ea2ab4878de670377d9003c5a66297637abcf28778d223a2b3d39398",
+    "triangular-connectors": "3ba0f596836c4421986d8f8c3e97887dc87c84e6a1902975383642329f3af8f8",
+    "private-connectors": "d9d3b59003b5d6827d82011eb5c120c6776e7c648576deb4c01453341215d3a1",
+    "combined-geometry": "3da4ebec400a236a10ffb242603b485c7b549a2503fa5c4ee061dcc7afa70b7b",
 }
 REPORTED_SEVENTEEN_DIGEST = (
     17, "fcf002bb4150db6dc4c5b19f2e9d76b05de066898413b28ee11c4e0a9619747c"
 )
 BLUEPRINT = HERE / "rank-eleven-t9p-p-seventeen-repair-blueprint-2026-07-28.md"
-EXPECTED_BLUEPRINT_DIGEST = "163d4c86bc373470f9d012bdb162937d4013ca345577222e3f26603a77b5f92e"
+EXPECTED_BLUEPRINT_DIGEST = "d9b9820780624eb9215cd569105b84adeaf3ea0bd016410cc21ce38b85800063"
 EXPECTED_PROJECTION_DIGEST = "9897c86b3e197ea3da1fbc2e0ef5ed4440e53bec0d8ac34d6024466c26ccf1a1"
 EXPECTED_PROJECTED_PLAN_DIGEST = "c3fd37ebc47de29a7f49471c6ecd61a280581fe30c3fdf72905548345d814566"
+EXPECTED_PHYSICAL_CERTIFICATE_DIGEST = "63305ff27b19d07bd705eec8f489dcfcfd12cc8cc129dbe93cf914d1c29c4a1a"
+EXPECTED_PRIVATE_CERTIFICATE_DIGEST = "815040d4da58efb5edb5660de47d14d4012eb6245afcabb5b77c98e2a8a8e43d"
+EXPECTED_RESIDUAL_CERTIFICATE_DIGEST = "740a1385503bdf58761be38057ca9d548f85289183ef4a4c515fbc6038398da3"
 
 
 CyclicVertex = CORE.CyclicVertex
 CycleGeometry = CORE.CycleGeometry
+EXPECTED_BLOCK_CACHE = {}
 
 
 @dataclass(frozen=True)
@@ -86,6 +88,8 @@ class Connector:
     hull_position: CyclicVertex
     path_vertices: tuple[str, ...]
     remnant: str
+    edges: tuple[tuple[object, object], ...]
+    remnant_anchor: object
 
 
 @dataclass(frozen=True)
@@ -93,6 +97,49 @@ class PrivateOrbit:
     distance: int
     positions: tuple[CyclicVertex, ...]
     stabilizer_images: tuple[tuple[int, ...], ...]
+
+
+@dataclass(frozen=True)
+class PrivateTheorem:
+    owner: str
+    theorem: str
+    hypothesis: str
+    cycles: tuple[int, ...]
+    pentagons: tuple[str, ...]
+    bound: object
+
+
+@dataclass(frozen=True)
+class PrivateCertificate:
+    row_id: str
+    distance: int
+    operation: str
+    router: int | None
+    open_vertex: CyclicVertex | None
+    two_p_cycles: tuple[int, ...]
+    strict_cycles: tuple[int, ...]
+    interval_vertices: tuple[tuple[object, ...], ...]
+    interval_owners: tuple[str, ...]
+    theorems: tuple[PrivateTheorem, ...]
+    bound: object
+    vertices: tuple[object, ...]
+    edges: tuple[tuple[object, object], ...]
+    vertex_owners: tuple[tuple[object, str], ...]
+    attachment_owners: tuple[tuple[object, str], ...]
+
+
+@dataclass(frozen=True)
+class ResidualCertificate:
+    row_id: str
+    operation: str
+    router: int | None
+    open_vertex: object | None
+    interval_vertices: tuple[tuple[object, ...], ...]
+    interval_owners: tuple[str, ...]
+    vertices: tuple[object, ...]
+    edges: tuple[tuple[object, object], ...]
+    vertex_owners: tuple[tuple[object, str], ...]
+    attachment_owners: tuple[tuple[object, str], ...]
 
 
 def digest(records):
@@ -178,6 +225,18 @@ def rooted_private_orbits(pentagon):
     return tuple(orbits)
 
 
+def hull_position_for_mark(geometries, mark):
+    if mark.kind == "cut":
+        candidates = tuple(vertex for geometry in geometries
+                           for vertex in geometry.vertices if vertex.cut == mark.vertex)
+        require(candidates, "cut mark has no concrete cyclic position")
+        return candidates[0]
+    candidates = tuple(vertex for vertex in geometries[mark.vertex].vertices
+                       if vertex.role == "private")
+    require(candidates, "private triangle mark has no concrete cyclic position")
+    return candidates[0]
+
+
 def incidence_geometry(signature, tree):
     adj = INCIDENCE.adjacency(tree)
     geometries = []
@@ -205,9 +264,22 @@ def connector_for_mark(label, pentagon, hull_position, row_id):
     root = pentagon.vertices[0]
     path = (f"{row_id}:{label}:path-root", f"{row_id}:{label}:path-hull")
     require(len(path) == len(set(path)), "connector path repeats a symbolic attachment")
-    connector = Connector(label, root, hull_position, path, f"{row_id}:{label}:remnant")
+    remnant = f"{row_id}:{label}:remnant"
+    edges = ((root, path[0]), (path[0], path[1]), (path[1], hull_position),
+             (path[1], remnant))
+    connector = Connector(label, root, hull_position, path, remnant, edges, path[1])
     verify_connector(connector, pentagon, hull_position)
     return connector
+
+
+def connector_specification(label, pentagon_root, hull_position, row_id):
+    """Reconstruct the required connector domain without reading a certificate."""
+    path = (f"{row_id}:{label}:path-root", f"{row_id}:{label}:path-hull")
+    remnant = f"{row_id}:{label}:remnant"
+    vertices = path + (remnant,)
+    edges = ((pentagon_root, path[0]), (path[0], path[1]),
+             (path[1], hull_position), (path[1], remnant))
+    return vertices, edges, path[1]
 
 
 def verify_connector(connector, pentagon, hull_position):
@@ -221,19 +293,75 @@ def verify_connector(connector, pentagon, hull_position):
             "connector path is empty or repeats an attachment object")
     require(connector.remnant not in connector.path_vertices,
             "connector remnant aliases a path vertex")
+    expected = ((connector.pentagon_root, connector.path_vertices[0]),
+                (connector.path_vertices[0], connector.path_vertices[1]),
+                (connector.path_vertices[1], connector.hull_position),
+                (connector.path_vertices[1], connector.remnant))
+    require(connector.edges == expected, "connector chain edges are incomplete or out of order")
+    require(connector.remnant_anchor == connector.path_vertices[1] and
+            (connector.remnant_anchor, connector.remnant) in connector.edges,
+            "connector remnant has no explicit chain anchor")
 
 
 def geometry_text(geometries):
     return repr(tuple((geometry.label,
                        tuple((vertex.index, vertex.role, vertex.cut)
                              for vertex in geometry.vertices))
-                      for geometry in geometries))
+                       for geometry in geometries))
+
+
+def expected_incidence_geometry_text(signature, tree):
+    """Serialize canonical cycle domains directly from the incidence row."""
+    adjacency = INCIDENCE.adjacency(tree)
+    records = []
+    for cycle, color in enumerate(tree.colors):
+        cuts = tuple(sorted(adjacency[cycle]))
+        length = 3 if color == "T" else 5
+        vertices = tuple((index, "cut" if index < len(cuts) else "private",
+                          cuts[index] if index < len(cuts) else None)
+                         for index in range(length))
+        records.append((f"{signature}:C{cycle}:{color}", vertices))
+    return repr(tuple(records))
 
 
 def connector_text(row_id, connector):
     return repr((row_id, connector.label, connector.pentagon_root.index,
                  connector.hull_position.cycle, connector.hull_position.index,
-                  connector.path_vertices, connector.remnant))
+                  connector.path_vertices, connector.remnant, connector.edges,
+                  connector.remnant_anchor))
+
+
+def expected_connector_text(row_id, label, pentagon_root, hull_position):
+    vertices, edges, remnant_anchor = connector_specification(
+        label, pentagon_root, hull_position, row_id
+    )
+    path = vertices[:-1]
+    remnant = vertices[-1]
+    return repr((row_id, label, pentagon_root.index, hull_position.cycle,
+                 hull_position.index, path, remnant, edges, remnant_anchor))
+
+
+def expected_blocks(signature, tree):
+    cached = EXPECTED_BLOCK_CACHE.get(signature)
+    if cached is None:
+        cached = (incidence_geometry(signature, tree),
+                  make_cycle(f"{signature}:remote-P1", 5, ()))
+        EXPECTED_BLOCK_CACHE[signature] = cached
+    return cached
+
+
+def expected_triangular_connector_text(signature, tree, row_id, root_mark):
+    geometries, remote = expected_blocks(signature, tree)
+    hull = hull_position_for_mark(geometries, root_mark)
+    return expected_connector_text(row_id, "P1", remote.vertices[0], hull)
+
+
+def expected_private_connector_text(signature, tree, row_id, hull_index):
+    geometries, remote = expected_blocks(signature, tree)
+    p0 = tree.colors.index("P")
+    hull = geometries[p0].vertices[hull_index]
+    require(hull.role == "private", "expected private connector hull is not private")
+    return expected_connector_text(row_id, "P1", remote.vertices[0], hull)
 
 
 def projection_structure(tree):
@@ -400,6 +528,667 @@ def verify_projected_plan(plan, geometries, cycle_map, cut_map):
     return tuple(records)
 
 
+def projected_owner_resolver(projected_tree, plan, marked_positions):
+    """Derive final packet owners from recursive splits, never packet demands."""
+    adjacency = A9.BASE.BASE.adjacency(projected_tree)
+    split_by_active = {frozenset(split.active): split for split in plan.splits}
+    terminals = {frozenset(packet.cycles): index for index, packet in enumerate(plan.packets)
+                 if packet.cycles}
+    root = frozenset(range(9))
+
+    def descend(active, site):
+        if active in terminals:
+            return terminals[active]
+        require(active in split_by_active, "physical owner reaches no terminal packet")
+        split = split_by_active[active]
+        matches = []
+        for interval_index, (positions, cycles) in enumerate(split.owners):
+            child = frozenset(cycles)
+            if site in positions:
+                matches.append((interval_index, child))
+            elif site.kind == "private" and site.vertex in cycles:
+                matches.append((interval_index, child))
+            elif site.kind == "cut" and set(adjacency[site.vertex]) & set(cycles):
+                matches.append((interval_index, child))
+        require(len(matches) == 1, "physical recursive adhesion is ambiguous")
+        interval_index, child = matches[0]
+        if child:
+            return descend(child, site)
+        return ("empty", active, interval_index)
+
+    empty_tokens = tuple(sorted({descend(root, position) for position in marked_positions
+                                 if not isinstance(descend(root, position), int)},
+                                key=repr))
+    empty_owners = tuple(index for index, packet in enumerate(plan.packets)
+                         if not packet.cycles)
+    require(len(empty_tokens) == len(empty_owners),
+            "hostile-only physical intervals and terminals differ")
+    empty_map = dict(zip(empty_tokens, empty_owners))
+
+    def resolve(site):
+        owner = descend(root, site)
+        if not isinstance(owner, int):
+            require(owner in empty_map, "hostile-only physical interval has no owner")
+            return empty_map[owner]
+        return owner
+
+    return resolve
+
+
+def physical_vertex(value):
+    return CORE.CutSite(value.cut) if isinstance(value, CyclicVertex) and value.cut is not None else value
+
+
+def physical_graph_from_parts(geometries, remote, connector_vertices, connector_edges):
+    """Canonicalize one submitted or independently reconstructed physical graph."""
+    vertices = []
+    edges = []
+    for geometry in geometries + (remote,):
+        vertices.extend(physical_vertex(vertex) for vertex in geometry.vertices)
+        edges.extend((physical_vertex(left), physical_vertex(right))
+                     for left, right in geometry.edges)
+    vertices.extend(connector_vertices)
+    edges.extend((physical_vertex(left), physical_vertex(right))
+                 for left, right in connector_edges)
+    return tuple(dict.fromkeys(vertices)), tuple(edges)
+
+
+def reconstruct_expected_physical_graph(signature, tree, row_id, root_mark):
+    """Derive the graph solely from incidence data and canonical block specs."""
+    expected_geometries, expected_remote = expected_blocks(signature, tree)
+    hull_position = hull_position_for_mark(expected_geometries, root_mark)
+    connector_vertices, connector_edges, _ = connector_specification(
+        "P1", expected_remote.vertices[0], hull_position, row_id
+    )
+    vertices, edges = physical_graph_from_parts(
+        expected_geometries, expected_remote, connector_vertices, connector_edges
+    )
+    return vertices, edges, vertices
+
+
+def reconstruct_expected_private_graph(signature, tree, row_id, hull_index):
+    expected_geometries, expected_remote = expected_blocks(signature, tree)
+    p0 = tree.colors.index("P")
+    hull_position = expected_geometries[p0].vertices[hull_index]
+    require(hull_position.role == "private",
+            "private certificate connector does not enter a private P0 vertex")
+    connector_vertices, connector_edges, _ = connector_specification(
+        "P1", expected_remote.vertices[0], hull_position, row_id
+    )
+    vertices, edges = physical_graph_from_parts(
+        expected_geometries, expected_remote, connector_vertices, connector_edges
+    )
+    return vertices, edges, vertices
+
+
+def canonical_private_router(tree):
+    adjacency = INCIDENCE.adjacency(tree)
+    p0 = tree.colors.index("P")
+    root = adjacency[p0][0]
+    cuts = tuple(range(len(tree.colors), len(adjacency)))
+    require(len(cuts) > 1, "private router requested for a bouquet")
+    target = min(cut for cut in cuts if cut != root)
+    parent = {root: None}
+    queue = [root]
+    for vertex in queue:
+        if vertex == target:
+            break
+        for neighbor in sorted(adjacency[vertex]):
+            if neighbor not in parent:
+                parent[neighbor] = vertex
+                queue.append(neighbor)
+    require(target in parent, "private router target is unreachable")
+    path = []
+    vertex = target
+    while vertex is not None:
+        path.append(vertex)
+        vertex = parent[vertex]
+    path.reverse()
+    require(len(path) >= 3 and path[1] < len(tree.colors) and
+            tree.colors[path[1]] == "T",
+            "first private path router is not a triangle")
+    router = path[1]
+    seen = {root}
+    queue = [root]
+    for vertex in queue:
+        for neighbor in adjacency[vertex]:
+            if neighbor != router and neighbor not in seen:
+                seen.add(neighbor)
+                queue.append(neighbor)
+    x_cycles = tuple(sorted(vertex for vertex in seen
+                            if vertex < len(tree.colors) and tree.colors[vertex] == "T"))
+    strict_cycles = tuple(sorted(set(range(9)) - {router} - set(x_cycles)))
+    root_vertex = next(vertex for vertex in adjacency[router] if vertex == root)
+    require(root_vertex == root, "private router lacks its root-cut singleton")
+    return router, root, x_cycles, strict_cycles
+
+
+def private_theorems(two_p_cycles, strict_cycles, bouquet=False):
+    """Independently classify the two terminal territories and exact ledger."""
+    if bouquet:
+        retained = PrivateTheorem(
+            "A9P1", "one-hostile-packing-one",
+            "nine pairwise-intersecting triangles and complete P1 connector",
+            tuple(range(9)), ("P1",), A9.Bound(A9.Fraction(9), 1, True),
+        )
+        opened = PrivateTheorem(
+            "opened-P0", "nonempty-tree-exact",
+            "one opened P0 vertex with its rooted attachment",
+            (), (), A9.Bound(A9.Fraction(-1), 0, False),
+        )
+        return (retained, opened), retained.bound + opened.bound
+    rank = len(two_p_cycles) + 2
+    require(2 <= rank <= 9, "private two-P theorem rank is outside 2..9")
+    if rank <= 3:
+        theorem = "connected-rank-2/3-nonnegative"
+        bound = A9.ZERO
+    else:
+        theorem = "connected-rank-4..9-strict"
+        bound = A9.Bound(A9.Fraction(0), 0, True)
+    two_p = PrivateTheorem(
+        "two-P", theorem,
+        f"complete connected cyclic rank {rank} with P0 and P1",
+        tuple(two_p_cycles), ("P0", "P1"), bound,
+    )
+    strict = PrivateTheorem(
+        "strict", "pure-triangular-strict",
+        "nonempty connected triangular cactus", tuple(strict_cycles), (),
+        A9.Bound(A9.Fraction(0), 0, True),
+    )
+    return (two_p, strict), two_p.bound + strict.bound
+
+
+def expected_private_owner_map(signature, tree, row_id, distance):
+    """Derive every physical owner from canonical intervals and branch components."""
+    geometries, remote = expected_blocks(signature, tree)
+    p0 = tree.colors.index("P")
+    expected_vertices, _, _ = reconstruct_expected_private_graph(
+        signature, tree, row_id, distance
+    )
+    adjacency = INCIDENCE.adjacency(tree)
+    if len(adjacency) - len(tree.colors) == 1:
+        open_index = 3 if distance == 1 else 4
+        open_vertex = physical_vertex(geometries[p0].vertices[open_index])
+        owners = {vertex: "opened-P0" if vertex == open_vertex else "A9P1"
+                  for vertex in expected_vertices}
+        return owners, (), (), tuple(range(9)), (), geometries[p0].vertices[open_index]
+
+    router, root_cut, two_p_cycles, strict_cycles = canonical_private_router(tree)
+    router_geometry = geometries[router]
+    root_site = CORE.CutSite(root_cut)
+    intervals = ((root_site,), tuple(physical_vertex(vertex)
+                                     for vertex in router_geometry.vertices
+                                     if physical_vertex(vertex) != root_site))
+    interval_owners = ("two-P", "strict")
+    owner_sets = {owner: set(interval) for owner, interval in zip(interval_owners, intervals)}
+    for cycle in two_p_cycles:
+        owner_sets["two-P"].update(physical_vertex(vertex)
+                                   for vertex in geometries[cycle].vertices)
+    for cycle in strict_cycles:
+        owner_sets["strict"].update(physical_vertex(vertex)
+                                    for vertex in geometries[cycle].vertices)
+    owner_sets["two-P"].update(physical_vertex(vertex)
+                               for vertex in geometries[p0].vertices)
+    owner_sets["two-P"].update(remote.vertices)
+    connector_vertices, _, _ = connector_specification(
+        "P1", remote.vertices[0], geometries[p0].vertices[distance], row_id
+    )
+    owner_sets["two-P"].update(connector_vertices)
+    require(owner_sets["two-P"].isdisjoint(owner_sets["strict"]),
+            "canonical private owner components overlap")
+    require(owner_sets["two-P"] | owner_sets["strict"] == set(expected_vertices),
+            "canonical private owner components are not exhaustive")
+    owners = {vertex: owner for owner, domain in owner_sets.items() for vertex in domain}
+    return owners, intervals, interval_owners, two_p_cycles, strict_cycles, None
+
+
+def make_private_certificate(signature, tree, geometries, remote, orbit):
+    p0 = tree.colors.index("P")
+    hull = min(orbit.positions, key=lambda vertex: vertex.index)
+    row_id = f"P\t{signature}\tdistance={orbit.distance}"
+    connector = connector_for_mark("P1", remote, hull, row_id)
+    submitted_vertices, submitted_edges = physical_graph_from_parts(
+        geometries, remote, connector.path_vertices + (connector.remnant,), connector.edges
+    )
+    adjacency = INCIDENCE.adjacency(tree)
+    if len(adjacency) - len(tree.colors) == 1:
+        open_index = 3 if orbit.distance == 1 else 4
+        open_vertex = geometries[p0].vertices[open_index]
+        theorems, bound = private_theorems(tuple(range(9)), (), True)
+        owners = tuple((vertex, "opened-P0" if vertex == open_vertex else "A9P1")
+                       for vertex in submitted_vertices)
+        return PrivateCertificate(
+            row_id, orbit.distance, "distance-specific-open-P0", None,
+            open_vertex, tuple(range(9)), (), (), (), theorems, bound,
+            submitted_vertices, submitted_edges,
+            owners, owners,
+        ), connector
+
+    router, _, x_cycles, strict_cycles = canonical_private_router(tree)
+    two_p_cycles = x_cycles
+    router_geometry = geometries[router]
+    root_cut = adjacency[p0][0]
+    owners = []
+    for vertex in submitted_vertices:
+        owner = None
+        if vertex in {physical_vertex(item) for item in geometries[p0].vertices} or \
+                vertex in set(remote.vertices) | set(connector.path_vertices) | {connector.remnant}:
+            owner = "two-P"
+        if isinstance(vertex, CORE.CutSite) and vertex.cut == root_cut:
+            owner = "two-P"
+        for cycle in two_p_cycles:
+            if vertex in {physical_vertex(item) for item in geometries[cycle].vertices}:
+                owner = "two-P" if owner is None else owner
+        for cycle in strict_cycles:
+            if vertex in {physical_vertex(item) for item in geometries[cycle].vertices}:
+                require(owner in (None, "strict"), "private terminal cycles overlap")
+                owner = "strict"
+        if vertex in {physical_vertex(item) for item in router_geometry.vertices}:
+            candidate = "two-P" if isinstance(vertex, CORE.CutSite) and \
+                vertex.cut == root_cut else "strict"
+            require(owner in (None, candidate), "private router vertex has competing owner")
+            owner = candidate
+        require(owner is not None, "private physical vertex has no derived terminal owner")
+        owners.append((vertex, owner))
+    root_site = CORE.CutSite(root_cut)
+    intervals = ((root_site,), tuple(physical_vertex(vertex)
+                                     for vertex in router_geometry.vertices
+                                     if physical_vertex(vertex) != root_site))
+    interval_owners = ("two-P", "strict")
+    theorems, bound = private_theorems(two_p_cycles, strict_cycles)
+    return PrivateCertificate(
+        row_id, orbit.distance, "leaf-P-router", router, None,
+        two_p_cycles, strict_cycles, intervals, interval_owners, theorems, bound,
+        submitted_vertices, submitted_edges,
+        tuple(owners), tuple(owners),
+    ), connector
+
+
+def verify_private_certificate(signature, tree, certificate):
+    expected_geometries, expected_remote = expected_blocks(signature, tree)
+    p0 = tree.colors.index("P")
+    hull_index = certificate.distance
+    expected_vertices, expected_edges, expected_attachments = (
+        reconstruct_expected_private_graph(
+            signature, tree, certificate.row_id, hull_index
+        )
+    )
+    adjacency = INCIDENCE.adjacency(tree)
+    bouquet = len(adjacency) - len(tree.colors) == 1
+    (expected_owner_map, expected_intervals, expected_interval_owners,
+     expected_two_p_cycles, expected_strict_cycles, expected_open) = (
+        expected_private_owner_map(
+            signature, tree, certificate.row_id, certificate.distance
+        )
+    )
+    submitted_owner_map = CORE.exact_owner_map(
+        certificate.vertex_owners, expected_vertices, "private submitted vertex owners"
+    )
+    submitted_attachment_map = CORE.exact_owner_map(
+        certificate.attachment_owners, expected_attachments,
+        "private submitted attachment owners"
+    )
+    require(submitted_owner_map == expected_owner_map,
+            "private submitted vertex owners differ from canonical branch owners")
+    require(submitted_attachment_map == expected_owner_map,
+            "private submitted attachments differ from canonical branch owners")
+    if bouquet:
+        require(certificate.operation == "distance-specific-open-P0" and
+                certificate.router is None,
+                "bouquet private row does not use the opening theorem")
+        require(certificate.distance in (1, 2), "unknown private distance orbit")
+        require(certificate.open_vertex == expected_open,
+                "wrong distance/open vertex for bouquet")
+        require(not certificate.interval_vertices and not certificate.interval_owners,
+                "bouquet opening carries private router intervals")
+        owner_map, edge_keys, owned = CORE.verify_physical_owner_certificate(
+            expected_vertices, expected_edges, expected_attachments,
+            certificate.vertices, certificate.edges, certificate.vertex_owners,
+            certificate.attachment_owners, ("A9P1", "opened-P0")
+        )
+        p0_vertices = {physical_vertex(vertex) for vertex in expected_geometries[p0].vertices}
+        require({vertex for vertex in p0_vertices if owner_map[vertex] == "opened-P0"} ==
+                {expected_open}, "bouquet opening does not remove exactly its named vertex")
+        require(all(owner_map[vertex] == "A9P1" for vertex in p0_vertices - {expected_open}),
+                "retained P0 path is incomplete")
+        require(certificate.two_p_cycles == tuple(range(9)) and
+                not certificate.strict_cycles,
+                "bouquet retained A9 profile changed")
+        require(len(owned["opened-P0"]) == 1,
+                "opened P0 territory is not the exact nonempty tree charge")
+    else:
+        router, root_cut, two_p_cycles, strict_cycles = canonical_private_router(tree)
+        require(certificate.operation == "leaf-P-router" and
+                certificate.router == router and certificate.open_vertex is None,
+                "private row does not use its canonical first triangle router")
+        require(len(certificate.two_p_cycles) + 2 <= 9, "rank10+ two-P child")
+        require(certificate.strict_cycles, "empty strict sibling")
+        require(certificate.two_p_cycles == two_p_cycles and
+                certificate.strict_cycles == strict_cycles,
+                "private router children differ from incidence components")
+        router_geometry = expected_geometries[router]
+        root_site = CORE.CutSite(root_cut)
+        intervals = ((root_site,), tuple(physical_vertex(vertex)
+                                        for vertex in router_geometry.vertices
+                                        if physical_vertex(vertex) != root_site))
+        require(certificate.interval_vertices == expected_intervals == intervals and
+                certificate.interval_owners == expected_interval_owners ==
+                ("two-P", "strict"),
+                "private concrete intervals are not bound to their final owners")
+        CORE.verify_router_owner_split(
+            CycleGeometry(router_geometry.label, 3,
+                          tuple(physical_vertex(vertex) for vertex in router_geometry.vertices),
+                          tuple((physical_vertex(left), physical_vertex(right))
+                                for left, right in router_geometry.edges)),
+            intervals, ("two-P", "strict"), (1, 2)
+        )
+        owner_map, edge_keys, owned = CORE.verify_physical_owner_certificate(
+            expected_vertices, expected_edges, expected_attachments,
+            certificate.vertices, certificate.edges, certificate.vertex_owners,
+            certificate.attachment_owners, ("two-P", "strict")
+        )
+        p0_vertices = {physical_vertex(vertex) for vertex in expected_geometries[p0].vertices}
+        remote_vertices = set(expected_remote.vertices)
+        require(all(owner_map[vertex] == "two-P"
+                    for vertex in p0_vertices | remote_vertices), "C5 split")
+    derived_theorems, derived_bound = private_theorems(
+        expected_two_p_cycles, expected_strict_cycles, bouquet
+    )
+    require(certificate.theorems == derived_theorems,
+            "private terminal theorem records were not independently rederived")
+    require(certificate.bound == derived_bound and certificate.bound.positive(),
+            "private exact theorem ledger is not positive")
+    theorem = tuple((record.owner, record.theorem, record.hypothesis,
+                     record.cycles, record.pentagons, record.bound)
+                    for record in derived_theorems)
+    text = repr((certificate.row_id, certificate.operation, certificate.distance,
+                 certificate.router, certificate.open_vertex,
+                 certificate.two_p_cycles, certificate.strict_cycles,
+                 certificate.interval_vertices, certificate.interval_owners,
+                 tuple(sorted((repr(vertex), owner) for vertex, owner in owner_map.items())),
+                 tuple(sorted(tuple(sorted(map(repr, edge))) for edge in edge_keys)),
+                 theorem, derived_bound))
+    return text, (signature, tree, certificate)
+
+
+def certify_projected_physical_plan(row_id, plan, projected_tree, geometries,
+                                    projected_positions, clustered, remote, connector,
+                                    cycle_map, cut_map, signature, tree, root_mark):
+    """Materialize all vertices/edges and derive terminal facts on the owned graph."""
+    resolve = projected_owner_resolver(projected_tree, plan, projected_positions)
+    cycle_inverse = {new: old for old, new in cycle_map.items()}
+    cut_inverse = {new: old for old, new in cut_map.items()}
+    concrete_to_position = {}
+    for router in range(9):
+        for position in A9.local_triangle_positions(projected_tree, router):
+            vertex = projected_vertex(position, router, geometries, cycle_inverse, cut_inverse)
+            concrete_to_position[physical_vertex(vertex)] = position
+
+    packet_owners = tuple(range(len(plan.packets)))
+    cycle_owner = {cycle: index for index, packet in enumerate(plan.packets)
+                   for cycle in packet.cycles}
+    p0_owner, p1_owner = tuple(resolve(position) for position in projected_positions)
+    owner_records = []
+
+    def add_vertex(vertex, owner):
+        owner_records.append((vertex, owner))
+
+    for old_cycle, geometry in enumerate(geometries):
+        for vertex in geometry.vertices:
+            physical = physical_vertex(vertex)
+            if old_cycle == geometries.index(clustered):
+                owner = p0_owner
+            else:
+                projected_cycle = cycle_map[old_cycle]
+                owner = cycle_owner.get(projected_cycle)
+                if owner is None:
+                    owner = resolve(concrete_to_position[physical])
+            add_vertex(physical, owner)
+    for vertex in remote.vertices:
+        add_vertex(vertex, p1_owner)
+    for vertex in connector.path_vertices + (connector.remnant,):
+        add_vertex(vertex, p1_owner)
+
+    submitted_vertices, submitted_edges = physical_graph_from_parts(
+        geometries, remote, connector.path_vertices + (connector.remnant,),
+        connector.edges
+    )
+    expected_vertices, expected_edges, expected_attachment_domain = (
+        reconstruct_expected_physical_graph(
+            signature, tree, row_id, root_mark
+        )
+    )
+
+    owner_map = {}
+    for vertex, owner in owner_records:
+        old = owner_map.setdefault(vertex, owner)
+        require(old == owner, "split C5/cut ownership or competing shared-cut owner")
+    attachment_records = tuple(owner_map.items())
+    owner_map, edge_keys, owned = CORE.verify_physical_owner_certificate(
+        expected_vertices, expected_edges, expected_attachment_domain,
+        submitted_vertices, submitted_edges, tuple(owner_map.items()),
+        attachment_records, packet_owners
+    )
+
+    complete_triangles = {owner: [] for owner in packet_owners}
+    for old_cycle, geometry in enumerate(geometries):
+        if geometry.length != 3:
+            continue
+        physicals = {physical_vertex(vertex) for vertex in geometry.vertices}
+        owners = {owner_map[vertex] for vertex in physicals}
+        if len(owners) == 1:
+            complete_triangles[next(iter(owners))].append(cycle_map[old_cycle])
+    pentagons = tuple(zip(A9.PENTAGONS, (clustered, remote)))
+    derived_demands = {owner: [] for owner in packet_owners}
+    for label, geometry in pentagons:
+        owners = {owner_map[physical_vertex(vertex)] for vertex in geometry.vertices}
+        require(len(owners) == 1, "split C5 ownership")
+        derived_demands[next(iter(owners))].append(label)
+
+    for owner, packet in enumerate(plan.packets):
+        cycles = tuple(sorted(complete_triangles[owner]))
+        demands = tuple(sorted(derived_demands[owner]))
+        require(cycles == packet.cycles, "owned graph derives different terminal triangles")
+        derived = A9.terminal_packet(projected_tree, cycles, demands, packet.name)
+        require((derived.theorem, derived.hypothesis, derived.bound) ==
+                (packet.theorem, packet.hypothesis, packet.bound),
+                "owned graph does not derive declared theorem hypotheses")
+    text = repr((row_id, tuple(sorted((repr(vertex), owner)
+                                     for vertex, owner in owner_map.items())),
+                 tuple(sorted(tuple(sorted(map(repr, edge))) for edge in edge_keys)),
+                 tuple((owner, tuple(sorted(map(repr, domain))))
+                       for owner, domain in sorted(owned.items()))))
+    return text, (expected_vertices, expected_edges, expected_attachment_domain,
+                  submitted_vertices, submitted_edges, tuple(owner_map.items()),
+                  attachment_records, packet_owners, clustered, connector, plan,
+                  projected_tree, geometries, remote, cycle_map, cut_map, row_id)
+
+
+def residual_geometry(projected_tree, positions):
+    """Classify the six repair geometries from incidence and marked positions."""
+    adjacency = A9.BASE.BASE.adjacency(projected_tree)
+    cuts = tuple(range(9, len(adjacency)))
+    first, second = positions
+    if len(cuts) == 2:
+        routers = tuple(cycle for cycle in range(9) if len(adjacency[cycle]) == 2)
+        hubs = tuple(cut for cut in cuts if len(adjacency[cut]) == 8)
+        if len(routers) != 1 or len(hubs) != 1:
+            return None
+        router = routers[0]
+        private = A9.BASE.Position("private", router, 0)
+        hub = A9.BASE.Position("cut", hubs[0])
+        if {first, second} == {private, hub}:
+            leaf_cut = next(cut for cut in cuts if cut != hubs[0])
+            return "split-router", router, hubs[0], leaf_cut
+        return None
+    if len(cuts) != 1 or not all(cuts[0] in adjacency[cycle] for cycle in range(9)):
+        return None
+    marked_shape = (
+        first.kind == second.kind == "cut"
+        or {first.kind, second.kind} == {"cut", "private"}
+        or first.kind == second.kind == "private" and first.vertex != second.vertex
+    )
+    return ("open-clustered-P", None, cuts[0], None) if marked_shape else None
+
+
+def make_residual_certificate(row_id, projected_row, geometries, clustered, remote,
+                              connector, cycle_map, cut_map):
+    classification = residual_geometry(projected_row.tree, projected_row.positions)
+    require(classification is not None, "residual certificate requested outside repair geometry")
+    repair = A9.make_safe_repair(projected_row, "physical-A9-repair")
+    A9.verify_safe_repair(projected_row, repair)
+    submitted_vertices, submitted_edges = physical_graph_from_parts(
+        geometries, remote, connector.path_vertices + (connector.remnant,), connector.edges
+    )
+    operation, projected_router, _, _ = classification
+    owners = {}
+
+    def own(vertex, owner):
+        physical = physical_vertex(vertex)
+        old = owners.setdefault(physical, owner)
+        require(old == owner, "residual geometry gives one physical vertex two owners")
+
+    cycle_inverse = {new: old for old, new in cycle_map.items()}
+    if operation == "split-router":
+        packet_by_cycle = {cycle: packet.name for packet in repair.packets
+                           for cycle in packet.cycles}
+        concrete_intervals = tuple(
+            tuple(projected_vertex(position, projected_router, geometries,
+                                   cycle_inverse, {new: old for old, new in cut_map.items()})
+                  for position in interval)
+            for interval in repair.interval_positions
+        )
+        router_geometry = geometries[cycle_inverse[projected_router]]
+        CORE.verify_router_owner_split(
+            router_geometry, concrete_intervals, repair.interval_owners,
+            repair.interval_sizes
+        )
+        router_owner = {
+            physical_vertex(vertex): owner
+            for interval, owner in zip(concrete_intervals, repair.interval_owners)
+            for vertex in interval
+        }
+        for old_cycle, geometry in enumerate(geometries):
+            if old_cycle == geometries.index(clustered):
+                owner = repair.connector_owners[0]
+            elif old_cycle == cycle_inverse[projected_router]:
+                for vertex in geometry.vertices:
+                    own(vertex, router_owner[physical_vertex(vertex)])
+                continue
+            else:
+                owner = packet_by_cycle[cycle_map[old_cycle]]
+            for vertex in geometry.vertices:
+                own(vertex, owner)
+        remote_owner = repair.connector_owners[1]
+        for vertex in remote.vertices + connector.path_vertices + (connector.remnant,):
+            own(vertex, remote_owner)
+        open_vertex = None
+        interval_owners = repair.interval_owners
+    else:
+        root = physical_vertex(clustered.vertices[0])
+        retained = repair.opening.retained_owner
+        opened = repair.opening.opening_owner
+        c5_intervals = ((root,), tuple(physical_vertex(vertex)
+                                       for vertex in clustered.vertices[1:]))
+        physical_clustered = CycleGeometry(
+            clustered.label, 5,
+            tuple(physical_vertex(vertex) for vertex in clustered.vertices),
+            tuple((physical_vertex(left), physical_vertex(right))
+                  for left, right in clustered.edges),
+        )
+        CORE.verify_router_owner_split(
+            physical_clustered, c5_intervals, (retained, opened), (1, 4)
+        )
+        for geometry in geometries:
+            for vertex in geometry.vertices:
+                own(vertex, retained if geometry is not clustered or
+                    physical_vertex(vertex) == root else opened)
+        for vertex in remote.vertices + connector.path_vertices + (connector.remnant,):
+            own(vertex, retained)
+        concrete_intervals = c5_intervals
+        interval_owners = (retained, opened)
+        open_vertex = tuple(physical_vertex(vertex) for vertex in clustered.vertices[1:])
+    require(set(owners) == set(submitted_vertices),
+            "residual owner construction does not cover the physical graph")
+    records = tuple(owners.items())
+    certificate = ResidualCertificate(
+        row_id, operation, cycle_inverse[projected_router] if projected_router is not None else None,
+        open_vertex, concrete_intervals, interval_owners,
+        submitted_vertices, submitted_edges, records, records,
+    )
+    return certificate, repair
+
+
+def verify_residual_certificate(signature, tree, root_mark, projected_row, geometries,
+                                clustered, remote, connector, cycle_map, cut_map,
+                                certificate, repair):
+    classification = residual_geometry(projected_row.tree, projected_row.positions)
+    require(classification is not None, "physical repair no longer has residual geometry")
+    operation, projected_router, _, _ = classification
+    require(certificate.operation == operation and
+            certificate.router == ({new: old for old, new in cycle_map.items()}[projected_router]
+                                   if projected_router is not None else None),
+            "physical repair operation/router differs from geometry predicate")
+    A9.verify_safe_repair(projected_row, repair)
+    expected_vertices, expected_edges, expected_attachments = reconstruct_expected_physical_graph(
+        signature, tree, certificate.row_id, root_mark
+    )
+    owner_names = tuple(dict.fromkeys(owner for _, owner in certificate.vertex_owners))
+    owner_map, edge_keys, owned = CORE.verify_physical_owner_certificate(
+        expected_vertices, expected_edges, expected_attachments,
+        certificate.vertices, certificate.edges, certificate.vertex_owners,
+        certificate.attachment_owners, owner_names
+    )
+    cycle_inverse = {new: old for old, new in cycle_map.items()}
+    complete_triangles = {owner: [] for owner in owner_names}
+    for projected_cycle in range(9):
+        geometry = geometries[cycle_inverse[projected_cycle]]
+        cycle_owners = {owner_map[physical_vertex(vertex)] for vertex in geometry.vertices}
+        if len(cycle_owners) == 1:
+            complete_triangles[next(iter(cycle_owners))].append(projected_cycle)
+    complete_pentagons = {owner: [] for owner in owner_names}
+    for label, geometry in zip(A9.PENTAGONS, (clustered, remote)):
+        cycle_owners = {owner_map[physical_vertex(vertex)] for vertex in geometry.vertices}
+        if len(cycle_owners) == 1:
+            complete_pentagons[next(iter(cycle_owners))].append(label)
+    for packet in repair.packets:
+        require(tuple(sorted(complete_triangles[packet.name])) == packet.cycles and
+                tuple(sorted(complete_pentagons[packet.name])) == packet.demands,
+                "physical residual packet profile differs from owned blocks")
+        derived = A9.terminal_packet(
+            projected_row.tree, complete_triangles[packet.name],
+            complete_pentagons[packet.name], packet.name
+        )
+        require(derived == packet, "physical residual theorem/bound was not rederived")
+    if operation == "split-router":
+        router_geometry = geometries[certificate.router]
+        CORE.verify_router_owner_split(
+            router_geometry, certificate.interval_vertices,
+            certificate.interval_owners, (2, 1)
+        )
+        require(repair.bound == A9.Bound(A9.Fraction(8), 2, True) and
+                repair.bound.positive(), "physical TP+A7P ledger changed")
+    else:
+        root = physical_vertex(clustered.vertices[0])
+        require(certificate.interval_vertices == (
+                    (root,), tuple(physical_vertex(vertex) for vertex in clustered.vertices[1:])),
+                "physical opening is not the rooted C5 singleton/four-path")
+        opened = repair.opening.opening_owner
+        require(set(owned[opened]) == set(certificate.interval_vertices[1]) and
+                len(owned[opened]) == 4,
+                "opened clustered pentagon territory is not the exact four-path")
+        require(repair.bound == A9.Bound(A9.Fraction(8), 1, True) and
+                repair.bound.positive(), "physical opened-A9P ledger changed")
+    text = repr((certificate.row_id, certificate.operation, certificate.router,
+                 certificate.interval_vertices, certificate.interval_owners,
+                 tuple(sorted((repr(vertex), owner) for vertex, owner in owner_map.items())),
+                 tuple(sorted(tuple(sorted(map(repr, edge))) for edge in edge_keys)),
+                 tuple((packet.name, packet.cycles, packet.demands, packet.theorem,
+                        packet.hypothesis, packet.bound) for packet in repair.packets),
+                 repair.bound))
+    return text
+
+
 def verify_projection_bijection(records, expected_sources, a9_rows):
     require(digest(sorted(expected_sources)) == EXPECTED_ROW_DIGESTS["triangular-rows"],
             "independently derived projection source domain digest changed")
@@ -443,7 +1232,9 @@ def expect_rejected(action, label):
 
 
 def mutation_self_tests(triangle, pentagon, connector, orbits, projected_fixture,
-                        binding_fixture):
+                        binding_fixture, physical_fixture, private_router_fixture,
+                        private_bouquet_fixture, residual_split_fixture,
+                        residual_open_fixture):
     bad_edges = pentagon.edges[:-1] + ((pentagon.vertices[4], pentagon.vertices[1]),)
     expect_rejected(lambda: verify_cycle(replace(pentagon, edges=bad_edges), (pentagon.vertices[0].cut,)),
                     "noncyclic pentagon edge")
@@ -456,6 +1247,9 @@ def mutation_self_tests(triangle, pentagon, connector, orbits, projected_fixture
     expect_rejected(lambda: verify_connector(replace(connector, remnant=connector.path_vertices[0]),
                                               pentagon, connector.hull_position),
                     "aliased connector remnant")
+    expect_rejected(lambda: verify_connector(replace(connector, edges=connector.edges[:-1]),
+                                              pentagon, connector.hull_position),
+                    "connector edge loss")
     expect_rejected(lambda: verify_intervals(pentagon, ((pentagon.vertices[0], pentagon.vertices[2]),
                                                         (pentagon.vertices[1], pentagon.vertices[3],
                                                          pentagon.vertices[4]))),
@@ -545,7 +1339,131 @@ def mutation_self_tests(triangle, pentagon, connector, orbits, projected_fixture
     expect_rejected(lambda: verify_projection_binding(
         binding_signature, binding_tree, tuple(bad_geometries), projected_tree,
         cycle_map, cut_map), "swapped geometry cut labels")
-    return 15
+    (expected_vertices, expected_edges, expected_attachment_domain,
+     physical_vertices, physical_edges, physical_owners, attachment_owners,
+     packet_owners, physical_c5, physical_connector, physical_plan,
+     physical_tree, physical_geometries, physical_remote, physical_cycle_map,
+     physical_cut_map, physical_row_id) = physical_fixture
+    split_owners = list(physical_owners)
+    split_vertex = physical_c5.vertices[1]
+    split_index = next(index for index, (vertex, _) in enumerate(split_owners)
+                       if vertex == split_vertex)
+    split_owners[split_index] = (split_vertex,
+                                 next(owner for owner in packet_owners
+                                      if owner != split_owners[split_index][1]))
+    expect_rejected(lambda: CORE.verify_physical_owner_certificate(
+        expected_vertices, expected_edges, expected_attachment_domain,
+        physical_vertices, physical_edges, tuple(split_owners),
+        attachment_owners, packet_owners), "split C5 ownership")
+    duplicated_cut_vertices = physical_vertices + (next(
+        vertex for vertex in physical_vertices if isinstance(vertex, CORE.CutSite)),)
+    expect_rejected(lambda: CORE.verify_physical_owner_certificate(
+        expected_vertices, expected_edges, expected_attachment_domain,
+        duplicated_cut_vertices, physical_edges, physical_owners,
+        attachment_owners, packet_owners), "duplicated canonical cut")
+    forged_edges = tuple(edge for edge in physical_edges
+                         if CORE.undirected_edge(edge) != CORE.undirected_edge(
+                             physical_connector.edges[1]))
+    expect_rejected(lambda: CORE.verify_physical_owner_certificate(
+        expected_vertices, expected_edges, expected_attachment_domain,
+        physical_vertices, forged_edges, physical_owners, attachment_owners,
+        packet_owners), "forged packet connectivity")
+    remnant = physical_connector.remnant
+    remnant_edge = CORE.undirected_edge(
+        (physical_connector.remnant_anchor, remnant)
+    )
+    deleted_vertices = tuple(vertex for vertex in physical_vertices if vertex != remnant)
+    deleted_edges = tuple(edge for edge in physical_edges
+                          if CORE.undirected_edge(edge) != remnant_edge)
+    deleted_owners = tuple(record for record in physical_owners if record[0] != remnant)
+    deleted_attachments = tuple(record for record in attachment_owners
+                                if record[0] != remnant)
+    expect_rejected(lambda: CORE.verify_physical_owner_certificate(
+        expected_vertices, expected_edges, expected_attachment_domain,
+        deleted_vertices, deleted_edges, deleted_owners, deleted_attachments,
+        packet_owners), "coordinated remnant deletion")
+    private_signature, private_tree, private_certificate = private_router_fixture
+    bouquet_signature, bouquet_tree, bouquet_certificate = private_bouquet_fixture
+    expect_rejected(lambda: verify_private_certificate(
+        bouquet_signature, bouquet_tree,
+        replace(bouquet_certificate, open_vertex=next(
+            vertex for vertex in expected_blocks(bouquet_signature, bouquet_tree)[0][
+                bouquet_tree.colors.index("P")].vertices
+            if vertex != bouquet_certificate.open_vertex))),
+        "wrong distance/open vertex")
+    private_connector_edge = next(
+        edge for edge in private_certificate.edges
+        if isinstance(edge[0], str) and ":path-root" in edge[0]
+        or isinstance(edge[1], str) and ":path-root" in edge[1]
+    )
+    expect_rejected(lambda: verify_private_certificate(
+        private_signature, private_tree,
+        replace(private_certificate, edges=tuple(
+            edge for edge in private_certificate.edges if edge != private_connector_edge))),
+        "severed private connector")
+    expect_rejected(lambda: verify_private_certificate(
+        private_signature, private_tree,
+        replace(private_certificate, two_p_cycles=tuple(range(8)))),
+        "rank10+ private child")
+    expect_rejected(lambda: verify_private_certificate(
+        private_signature, private_tree,
+        replace(private_certificate, strict_cycles=())),
+        "empty private strict sibling")
+    private_owners = dict(private_certificate.vertex_owners)
+    private_p0 = expected_blocks(private_signature, private_tree)[0][
+        private_tree.colors.index("P")]
+    split_vertex = physical_vertex(private_p0.vertices[1])
+    private_owners[split_vertex] = "strict"
+    expect_rejected(lambda: verify_private_certificate(
+        private_signature, private_tree,
+        replace(private_certificate, vertex_owners=tuple(private_owners.items()))),
+        "private C5 split")
+    c0_vertex = next(
+        physical_vertex(vertex)
+        for vertex in expected_blocks(private_signature, private_tree)[0][0].vertices
+        if dict(private_certificate.vertex_owners)[physical_vertex(vertex)] == "strict"
+    )
+    c0_owners = dict(private_certificate.vertex_owners)
+    c0_owners[c0_vertex] = "two-P"
+    expect_rejected(lambda: verify_private_certificate(
+        private_signature, private_tree,
+        replace(private_certificate, vertex_owners=tuple(c0_owners.items()))),
+        "private C0 vertex moved from strict to two-P")
+    private_attachments = dict(private_certificate.attachment_owners)
+    attachment_vertex = next(vertex for vertex, owner in private_attachments.items()
+                             if owner == "two-P")
+    private_attachments[attachment_vertex] = "strict"
+    expect_rejected(lambda: verify_private_certificate(
+        private_signature, private_tree,
+        replace(private_certificate,
+                attachment_owners=tuple(private_attachments.items()))),
+        "private attachment mismatch")
+    split_args, split_certificate, split_repair = residual_split_fixture
+    split_owners = dict(split_certificate.vertex_owners)
+    split_vertex = split_certificate.interval_vertices[0][0]
+    split_owners[split_vertex] = split_certificate.interval_owners[1]
+    expect_rejected(lambda: verify_residual_certificate(
+        *split_args, replace(split_certificate, vertex_owners=tuple(split_owners.items())),
+        split_repair), "residual split owner mutation")
+    expect_rejected(lambda: verify_residual_certificate(
+        *split_args, replace(split_certificate,
+                             interval_vertices=tuple(reversed(split_certificate.interval_vertices))),
+        split_repair), "residual ordered interval mutation")
+    open_args, open_certificate, open_repair = residual_open_fixture
+    opened_owners = dict(open_certificate.vertex_owners)
+    opened_vertex = open_certificate.interval_vertices[1][0]
+    opened_owners[opened_vertex] = open_certificate.interval_owners[0]
+    expect_rejected(lambda: verify_residual_certificate(
+        *open_args, replace(open_certificate, vertex_owners=tuple(opened_owners.items())),
+        open_repair), "residual C5 opening mutation")
+    open_connector = open_args[7]
+    severed = tuple(edge for edge in open_certificate.edges
+                    if CORE.undirected_edge(edge) !=
+                    CORE.undirected_edge(open_connector.edges[1]))
+    expect_rejected(lambda: verify_residual_certificate(
+        *open_args, replace(open_certificate, edges=severed), open_repair),
+        "residual connector mutation")
+    return 31
 
 
 def main():
@@ -573,7 +1491,16 @@ def main():
     )
     projection_records = []
     projected_plan_records = []
+    physical_certificate_records = []
+    residual_certificate_records = []
+    residual_source_rows = []
+    private_certificate_records = []
     projected_plan_count = 0
+    physical_fixture = None
+    private_router_fixture = None
+    private_bouquet_fixture = None
+    residual_split_fixture = None
+    residual_open_fixture = None
 
     require(tuple(signature for signature, _ in classes) ==
             tuple(sorted(signature for signature, _ in classes)),
@@ -589,7 +1516,10 @@ def main():
         all_signatures.append(signature)
         geometries = incidence_geometry(signature, tree)
         verify_geometry_incidence_binding(signature, tree, geometries)
-        incidence_records.append(f"{signature}|{geometry_text(geometries)}")
+        expected_geometry_record = expected_incidence_geometry_text(signature, tree)
+        require(expected_geometry_record == geometry_text(geometries),
+                "submitted incidence geometry differs from independent stream")
+        incidence_records.append(f"{signature}|{expected_geometry_record}")
         p0 = tree.colors.index("P")
         if len(adj[p0]) != 1:
             continue
@@ -603,18 +1533,11 @@ def main():
         orbits = rooted_private_orbits(clustered)
         for root_code, mark, multiplicity in ROOTS.root_orbits(tree):
             row_id = f"T\t{signature}\t{root_code}"
-            if mark.kind == "cut":
-                candidates = tuple(vertex for geometry in geometries for vertex in geometry.vertices
-                                   if vertex.cut == mark.vertex)
-                require(candidates, "cut mark has no concrete cyclic position")
-                hull = candidates[0]
-            else:
-                candidates = tuple(vertex for vertex in geometries[mark.vertex].vertices
-                                   if vertex.role == "private")
-                require(candidates, "private triangle mark has no concrete cyclic position")
-                hull = candidates[0]
+            hull = hull_position_for_mark(geometries, mark)
             connector = connector_for_mark("P1", remote, hull, row_id)
-            triangular_connector_records.append(connector_text(row_id, connector))
+            triangular_connector_records.append(expected_triangular_connector_text(
+                signature, tree, row_id, mark
+            ))
             projected_signature, projected_tree, projected_positions, cycle_map, cut_map = (
                 triangular_projection(tree, mark)
             )
@@ -653,7 +1576,36 @@ def main():
                 projected_plan_records.append(
                     f"{row_id}|{projected_signature}|{'|'.join(interval_records)}"
                 )
+                physical_record, candidate_fixture = certify_projected_physical_plan(
+                    row_id, plan, projected_tree, geometries, projected_positions,
+                    clustered, remote, connector, cycle_map, cut_map,
+                    signature, tree, mark
+                )
+                physical_certificate_records.append(physical_record)
+                if physical_fixture is None:
+                    physical_fixture = candidate_fixture
                 projected_plan_count += 1
+            else:
+                require(residual_geometry(projected_tree, projected_positions) is not None,
+                        f"unrecognized projected residual remains fail-closed: {row_id}")
+                certificate, repair = make_residual_certificate(
+                    row_id, concrete_projected_row, geometries, clustered, remote,
+                    connector, cycle_map, cut_map
+                )
+                residual_args = (
+                    signature, tree, mark, concrete_projected_row, geometries,
+                    clustered, remote, connector, cycle_map, cut_map,
+                )
+                residual_certificate_records.append(verify_residual_certificate(
+                    *residual_args, certificate, repair
+                ))
+                residual_source_rows.append((row_id, projected_signature,
+                                             certificate.operation))
+                fixture_value = (residual_args, certificate, repair)
+                if certificate.operation == "split-router" and residual_split_fixture is None:
+                    residual_split_fixture = fixture_value
+                if certificate.operation == "open-clustered-P" and residual_open_fixture is None:
+                    residual_open_fixture = fixture_value
             if fixture is None:
                 fixture = (next(g for g in geometries if g.length == 3), remote, connector,
                            rooted_private_orbits(remote))
@@ -662,9 +1614,23 @@ def main():
             row_id = f"P\t{signature}\tdistance={orbit.distance}"
             private_rows.append(row_id)
             private_physical += len(orbit.positions)
+            private_certificate, private_connector = make_private_certificate(
+                signature, tree, geometries, remote, orbit
+            )
+            private_record, private_fixture = verify_private_certificate(
+                signature, tree, private_certificate
+            )
+            private_certificate_records.append(private_record)
+            if private_certificate.operation == "leaf-P-router" and private_router_fixture is None:
+                private_router_fixture = private_fixture
+            if private_certificate.operation == "distance-specific-open-P0" and \
+                    private_bouquet_fixture is None:
+                private_bouquet_fixture = private_fixture
             for physical in orbit.positions:
                 connector = connector_for_mark("P1", remote, physical, row_id)
-                private_connector_records.append(connector_text(row_id, connector))
+                private_connector_records.append(expected_private_connector_text(
+                    signature, tree, row_id, physical.index
+                ))
 
     triangular_rows.sort()
     private_rows.sort()
@@ -676,6 +1642,9 @@ def main():
         f"{source}|{projection[source]}" for source in sorted(projection)
     )
     projected_plan_digest = digest(sorted(projected_plan_records))
+    physical_certificate_digest = digest(sorted(physical_certificate_records))
+    private_certificate_digest = digest(sorted(private_certificate_records))
+    residual_certificate_digest = digest(sorted(residual_certificate_records))
     row_digests = {
         "all-incidence": digest(all_signatures),
         "leaf-incidence": digest(leaf_signatures),
@@ -699,11 +1668,21 @@ def main():
     require(row_digests == EXPECTED_ROW_DIGESTS, "frozen endpoint row digest changed")
     require(fixture is not None, "hostile mutation fixture is absent")
     require(binding_fixture is not None, "projection-binding mutation fixture is absent")
+    require(physical_fixture is not None, "physical-certificate mutation fixture is absent")
+    require(private_router_fixture is not None and private_bouquet_fixture is not None,
+            "private-certificate mutation fixtures are absent")
+    require(residual_split_fixture is not None and residual_open_fixture is not None,
+            "residual-certificate mutation fixtures are absent")
     require(projected_plan_count == 43145,
             "concrete projected interval plan count is not 43145")
+    require(len(residual_certificate_records) == 6 and
+            Counter(operation for _, _, operation in residual_source_rows) ==
+            Counter({"split-router": 2, "open-clustered-P": 4}),
+            "predicate-derived projected residual profile is not exact")
     mutation_count = mutation_self_tests(
         *fixture, (tuple(projection_records), projection_sources, a9_rows),
-        binding_fixture
+        binding_fixture, physical_fixture, private_router_fixture,
+        private_bouquet_fixture, residual_split_fixture, residual_open_fixture
     )
 
     print("colored T^9P incidence trees:", dict(sorted(all_by_cut.items())), "total", len(classes))
@@ -715,6 +1694,14 @@ def main():
     print("triangular-hull projection sha256:", projection_digest)
     print("concrete projected A9 plans:", projected_plan_count)
     print("concrete projected-plan sha256:", projected_plan_digest)
+    print("physical owner certificates:", len(physical_certificate_records))
+    print("physical owner-certificate sha256:", physical_certificate_digest)
+    print("private physical owner certificates:", len(private_certificate_records))
+    print("private owner-certificate sha256:", private_certificate_digest)
+    print("residual physical owner certificates:", len(residual_certificate_records))
+    print("residual owner-certificate sha256:", residual_certificate_digest)
+    for index, source in enumerate(residual_source_rows, 1):
+        print(f"projected residual source R{index}:", source)
     print("rooted C5 stabilizer:", rooted_c5_stabilizer())
     for label in sorted(row_digests):
         print(f"{label} sha256:", row_digests[label])
@@ -730,12 +1717,17 @@ def main():
             "triangular-hull projection digest changed")
     require(projected_plan_digest == EXPECTED_PROJECTED_PLAN_DIGEST,
             "concrete projected-plan digest changed")
-    require(mutation_count == 15, "hostile mutation count changed")
-    raise RuntimeError(
-        "fail-closed exact census frontier: the triangular-hull projection and "
-        "43145 concrete router plans are certified, but private-P rows and full "
-        "T9P graph-level final ownership are not theorem-certified"
-    )
+    require(physical_certificate_digest == EXPECTED_PHYSICAL_CERTIFICATE_DIGEST,
+            "physical owner-certificate digest changed")
+    require(private_certificate_digest == EXPECTED_PRIVATE_CERTIFICATE_DIGEST,
+            "private owner-certificate digest changed")
+    if EXPECTED_RESIDUAL_CERTIFICATE_DIGEST is not None:
+        require(residual_certificate_digest == EXPECTED_RESIDUAL_CERTIFICATE_DIGEST,
+                "residual owner-certificate digest changed")
+    require(mutation_count == 31, "hostile mutation count changed")
+    print("theorem-certified endpoint rows:",
+          projected_plan_count + len(residual_certificate_records) +
+          len(private_certificate_records), "/", len(combined_rows))
 
 
 if __name__ == "__main__":

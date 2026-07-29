@@ -4,11 +4,33 @@
 
 ## Status
 
-This is a proof blueprint, not a certificate. The geometry-aware census in
-`research/rank-eleven-t9p-p-endpoint-frontier-verifier.py` deliberately accepts
-no theorem rows. The operations below were independently reconstructed from the
-17-row candidate frontier and must still be integrated with exact graph-level
-owners for the entire 50399-row universe.
+This file preserves the earlier 17-row design history. The physical-owner census
+in `research/rank-eleven-t9p-p-endpoint-frontier-verifier.py` now certifies the
+actual six projected residuals by transporting the hardened `A9` repairs into
+the explicit `T9P` graph. The unrelated K1--K17 recipes below are not used for
+dispatch or endpoint closure.
+
+## Physical six-row closure
+
+The source rows are derived by incidence and mark predicates, not by matching
+their signatures. Exactly two rows have two cuts, one degree-two triangle
+router, one degree-eight hub, and marks at the router private position and hub.
+Their concrete `(2,1)` C3 split gives `TP + packing-one A7P`, with exact bound
+`8-2delta>0`. Exactly four rows are common-cut bouquets with one of the three
+allowed mark geometries (cut/cut, cut/private, or private/private on distinct
+triangles). Their rooted clustered C5 is split into the connector-root singleton
+and complementary four-vertex path; the retained graph is packing-one `A9P`
+with exact bound `8-delta>0`.
+
+Every repair certificate includes all C3/C5 vertices and edges, canonical shared
+cuts, the complete remote-P connector and remnant, exact attachment owners,
+connected induced owner territories, independently recovered complete packet
+profiles, and theorem-derived bounds. Unknown or mismatched residual geometry
+still fails closed.
+
+The private-row theorem used by the same endpoint verifier is stated and proved
+separately in
+`research/rank-eleven-t9p-p-private-router-lemma-2026-07-29.md`.
 
 Write `delta=sqrt(5)-2`. The 17 rows have geometry `1+1+15`.
 
@@ -87,12 +109,12 @@ The 15 pairs are
 
 The weakest row is `TP+TP+A_5>2-2delta`.
 
-## Required future gate
+## Historical gate (now implemented for the six residuals)
 
-A theorem verifier must not recognize these rows by signature alone. It must
+A theorem verifier must not recognize repaired rows by signature alone. It must
 derive the geometry from incidence neighborhoods, bind cuts to actual cyclic
 vertices, realize the ordered intervals, retain complete connector paths and
 pentagons, recursively resolve the hub adhesion, independently classify each
 terminal theorem, sum exact bounds, and reject duplicate or incomplete owner
-domains. The same standards must also be applied to every ordinary and private-
-pentagon row before an endpoint theorem is claimed.
+domains. The endpoint verifier now applies those standards to all 50399 rows;
+the K1--K17 historical family remains outside the accepted dispatch.

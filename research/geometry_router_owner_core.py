@@ -25,6 +25,13 @@ class CyclicVertex:
     cut: int | None = None
 
 
+@dataclass(frozen=True, order=True)
+class CutSite:
+    """One canonical physical vertex shared by every incidence at a cut."""
+
+    cut: int
+
+
 @dataclass(frozen=True)
 class CycleGeometry:
     label: str
@@ -118,3 +125,82 @@ def verify_router_owner_split(geometry, intervals, owners, expected_sizes=None):
         require(tuple(expected_sizes) == sizes,
                 "ordered interval sizes do not match concrete owner intervals")
     return sizes
+
+
+def undirected_edge(edge):
+    require(len(edge) == 2 and edge[0] != edge[1], "physical edge is a loop")
+    return frozenset(edge)
+
+
+def verify_physical_owner_certificate(expected_vertices, expected_edges,
+                                      expected_attachment_domain, vertices, edges,
+                                      owner_records, attachment_owner_records, owners):
+    """Check an exhaustive physical graph and connected induced owner territories.
+
+    Expected graph and attachment domains are independently reconstructed by the
+    caller. Submitted vertices, edges, and owner ledgers must match those domains
+    exactly. Cross-owner edges are boundary edges and are not available when a
+    terminal's connectivity is checked.
+    """
+    expected_vertices = tuple(expected_vertices)
+    expected_edges = tuple(tuple(edge) for edge in expected_edges)
+    expected_attachment_domain = tuple(expected_attachment_domain)
+    vertices = tuple(vertices)
+    edges = tuple(tuple(edge) for edge in edges)
+    owners = tuple(owners)
+    require(len(expected_vertices) == len(set(expected_vertices)),
+            "expected physical vertex domain has aliases")
+    expected_edge_keys = tuple(undirected_edge(edge) for edge in expected_edges)
+    require(len(expected_edge_keys) == len(set(expected_edge_keys)),
+            "expected physical edge domain has duplicates")
+    require(all(endpoint in set(expected_vertices) for edge in expected_edges
+                for endpoint in edge),
+            "expected physical edge has an endpoint outside its vertex domain")
+    require(len(expected_attachment_domain) == len(set(expected_attachment_domain)) and
+            set(expected_attachment_domain) <= set(expected_vertices),
+            "expected physical attachment domain is invalid")
+    require(len(vertices) == len(set(vertices)), "physical vertex domain has aliases")
+    require(set(vertices) == set(expected_vertices),
+            "submitted physical vertex domain differs from reconstructed domain")
+    require(len(owners) == len(set(owners)), "physical certificate repeats an owner")
+    edge_keys = tuple(undirected_edge(edge) for edge in edges)
+    require(len(edge_keys) == len(set(edge_keys)), "physical edge domain has duplicates")
+    require(set(edge_keys) == set(expected_edge_keys),
+            "submitted physical edge domain differs from reconstructed domain")
+    require(all(endpoint in set(vertices) for edge in edges for endpoint in edge),
+            "physical edge has an endpoint outside the vertex domain")
+    owner_map = exact_owner_map(
+        owner_records, expected_vertices, "physical vertex owners"
+    )
+    attachment_map = exact_owner_map(
+        attachment_owner_records, expected_attachment_domain,
+        "physical attachment owners"
+    )
+    require(set(owner_map.values()) == set(owners),
+            "physical certificate has an inexact final-owner range")
+    require(all(owner in set(owners) for owner in attachment_map.values()),
+            "physical attachment has an unknown owner")
+    require(all(attachment_map[vertex] == owner_map[vertex]
+                for vertex in expected_attachment_domain),
+            "physical attachment does not follow its vertex owner")
+
+    adjacency = {vertex: set() for vertex in vertices}
+    for left, right in edges:
+        if owner_map[left] == owner_map[right]:
+            adjacency[left].add(right)
+            adjacency[right].add(left)
+    owned_vertices = {}
+    for owner in owners:
+        domain = {vertex for vertex in vertices if owner_map[vertex] == owner}
+        require(domain, "physical terminal owner has an empty domain")
+        seen = {next(iter(domain))}
+        stack = list(seen)
+        while stack:
+            vertex = stack.pop()
+            for neighbor in adjacency[vertex]:
+                if neighbor in domain and neighbor not in seen:
+                    seen.add(neighbor)
+                    stack.append(neighbor)
+        require(seen == domain, "owned physical terminal graph is disconnected")
+        owned_vertices[owner] = frozenset(domain)
+    return owner_map, tuple(edge_keys), owned_vertices
