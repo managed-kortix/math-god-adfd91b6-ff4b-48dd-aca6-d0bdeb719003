@@ -925,3 +925,20 @@ No audits yet.
 - **Next queued attack:** cube the reduced CNF first by six-hole support, retain
   explicit SAT leaves and LRAT for UNSAT leaves, and build an assumption-cover
   checker. This is the smallest currently proved-sound finite terminal model.
+
+### Canonical primary cube cover
+
+- Replaced the raw hole-support split by a stronger 65-leaf semantic symmetry
+  cover fixing one complete A' source row and its two selected inaccessible
+  witnesses. The stabilizer `S6(A'\{2}) x S7(B)` reduces 63,063 labelled
+  row/witness objects to 65 keys.
+- `check_k6_reduced_cubes.py` independently enumerates every labelled object,
+  reproduces all orbit multiplicities, and matches manifest SHA-256
+  `3936f5da...b4a7ab`. Each cube fixes all fifteen source-row arc decisions and
+  two selectors, giving stronger propagation than coarse hole counts.
+- This is semantic graph symmetry: sequential-counter auxiliaries receive fresh
+  satisfying extensions after relabelling and are not treated as syntactic CNF
+  automorphisms.
+- **Next queued experiment:** scout all 65 leaves under a fixed cap. Refine only
+  hard leaves by the incoming-versus-hole status of the seven non-outneighbors,
+  yielding at most 1,110 complete-cut orbits rather than a raw six-hole census.
