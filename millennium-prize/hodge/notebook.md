@@ -140,6 +140,17 @@ map injective for every `d>=3`. This propagates the supplied plane cycle but
 does not create cycles for arbitrary Hodge components. Details are in
 `cycle-71-component-domination-criterion.md`. No full Hodge result is claimed.
 
+## Main-funnel cycle 72: seed equivalence and retirement
+
+A relative cycle component dominates a marked Hodge component exactly when the
+marked class is algebraic on the geometric generic fiber, after finite base
+change. Properness and spread then propagate a generic cycle to every fiber but
+cannot provide the generic seed. CDK algebraicity, countability, degeneration,
+K-theory, and normal functions do not bypass this primary obstruction. Broad
+complete-intersection and linear-cycle seeded cases are prior art. The tactic is
+therefore retired at a precise target-equivalence boundary. No Hodge result is
+claimed.
+
 ## Bounded scout cycle 63
 
 For the cubic-fourfold plane class, the universal relative plane gives a

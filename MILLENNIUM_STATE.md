@@ -5,14 +5,15 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** second exact proof funnel after strategic rotation
-- **active main funnel:** Hodge conjecture — componentwise relative-cycle
-  domination for marked Hodge components of hypersurface fourfolds; the first
-  higher-codimension calibration now proves equality of the selected Fermat
-  quartic plane-incidence and Hodge formal germs by an exact rank-six IVHS
-  computation, while the active bottleneck is generic obstruction-controlled
-  dominance rather than another special branch
-  discrete Nyman--Beurling norm bound; polynomial short-block control and the
+- **phase:** strategic review after exact retirement of the second proof funnel
+- **active main funnel:** rotation review — Hodge component-domination is
+  formally retired because universal cycle seeding is equivalent to generic
+  algebraicity; a three-dimensional Navier--Stokes enstrophy-excursion candidate
+  was also decisively falsified by scaling and summable cascade times. The next
+  funnel must use a genuinely scaling-critical mechanism rather than promote
+  either retired tactic.
+- **retired RH funnel record:** logarithmically smoothed discrete
+  Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
   is now exactly reduced after a second domain audit corrected a transient
   restricted/full-space mix-up; coefficient-aware symmetric hierarchical error
@@ -142,7 +143,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 71
+- **cycle:** 73
 - **announcements:** none
 
 ## immutable target list
@@ -161,10 +162,10 @@ waiting process.
 
 ## next exact steps
 
-1. Find a component-independent seed mechanism producing a relative cycle
-   component for a marked Hodge component, or prove a broad semiregularity/
-   obstruction-lifting theorem beyond supplied complete-intersection cycles;
-   the generic domination criterion itself is now settled.
+1. Complete a portfolio review for the next genuinely distinct main funnel.
+   Hodge seeding and Navier enstrophy excursions are retired; the leading live
+   candidate is a scaling-critical Navier `L^3` frequency-flux mechanism, but it
+   must pass a high--high backscatter audit before promotion.
 2. Attack the compensated Mobius--Chebyshev cell inequality first at the
    summable `kappa/log a` block strength, then determine the strongest factor
    available after every loss and whether its effective mass diverges.
@@ -179,6 +180,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-28: Cycles 72--73 met two tactic rotation gates. Hodge cycle seeding
+  on a marked component is equivalent to algebraicity of the generic marked
+  class; properness, CDK, degeneration, K-theory, and normal functions propagate
+  but do not create that seed. Separately, exact three-dimensional Navier triads
+  and paraproduct estimates show the enstrophy-excursion remainder grows like
+  `K_0 Y^2/nu^4`, while cascade passage costs are summable, so that tactic cannot
+  exclude finite-time blowup. The next funnel requires a genuinely new,
+  scaling-critical mechanism. No Millennium result is claimed.
 
 - 2026-07-28: Cycle 71 proved the generic component-domination criterion:
   proper cycle-class inclusion plus full differential rank at smooth points

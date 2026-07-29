@@ -149,6 +149,16 @@ On bounded rescaled intervals amplification converges to a finite Euler factor,
 so amplitude alone cannot make it unbounded. This smooth two-dimensional family
 gives no blowup or regularity result.
 
+## Bounded scout cycle 73
+
+The exact helical triad formula exposes indefinite genuinely three-dimensional
+vortex stretching. An integer triad has normalized `Y=540`, `Z=900`, and
+stretching `864`, and scaling defeats absolute excursion caps. The best generic
+separated paraproduct estimate leaves a `K_0 Y^2/nu^4` remainder, which worsens
+at high enstrophy; dyadic passage costs are geometrically summable. Thus the
+enstrophy-excursion tactic cannot exclude a finite-time Zeno cascade and is
+retired. Any future route must control the scaling-critical full `L^3` flux.
+
 ## Bounded scout cycle 63
 
 The invariant two-dimensional ansatz has uniformly bounded long-time `L^3`
