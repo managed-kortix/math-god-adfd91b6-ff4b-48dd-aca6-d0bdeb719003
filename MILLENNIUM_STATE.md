@@ -6,11 +6,10 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
 - **phase:** portfolio rotation after small-Vertex-Cover mechanism audit
-- **active main funnel:** Navier--Stokes full-Fourier phase transversality.
-  Construct or falsify an explicit integer-wavevector packet with simultaneous
-  maximizing active-triad phases, positive vortex stretching, and quantitative
-  escape under the complete unprojected Euler/Navier nonlinearity including
-  every first-order leakage mode. Abstract Galerkin coefficients do not count.
+- **active main funnel:** portfolio rotation after exact falsification of
+  Navier full-Fourier phase escape.  Support leakage does not imply departure
+  from gauge-invariant maximizing interaction phases, and qualitative escape
+  has no uniform scale-critical modulus near invariant triad faces.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 112
+- **cycle:** 113
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +174,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 113 retired full-Fourier phase escape.  An exact packet has
+  positive stretching `4`, maximizing physical interaction phase, and leakage
+  launch norm squared `44/5`, yet its interaction scalar stays on the
+  maximizing imaginary ray by an invariant real/imaginary Fourier parity.
+  The exact verifier includes the complete first convolution and full second
+  jet.  Support leakage is not phase escape; phases of newly born modes are
+  undefined; and arbitrarily weak connector couplings block any uniform
+  scale-critical consequence from qualitative transversality.
 
 - 2026-07-29: Cycle 112 strategically rotated the main funnel to Navier full-
   Fourier phase transversality.  The next exact experiment demands an explicit
