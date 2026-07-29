@@ -1021,3 +1021,22 @@ No audits yet.
   `(rho,k)=(0,5)` and `(1,5)`. Reconstruct their strongest reduced collective
   models and require retained proof bytes rather than historical checked-run
   hashes.
+
+### Common k=5 reduction and direct-proof recovery
+
+- The two residual rows project to the same 16-vertex degree sequence:
+  `8^9,7^1,6^6`, hence exactly five holes. The exceptional B vertex has degree
+  seven; the other six dominate both deleted C vertices and have degree six.
+- Every A' row requires at least one inaccessible T vertex, and rows pointing
+  to a degree-six B vertex require at least two. This conditional model was
+  independently audited and encoded in `k5_reduced_cnf.py` (3,112 variables,
+  12,177 clauses). A direct 600-second scout remained unresolved.
+- In parallel, `k5_final_campaign.py` regenerated all sixteen historical full
+  shards byte-for-byte, and every retained LRAT was independently checked. The
+  direct proof objects compress to about 3.88 GB, too large for ordinary Git;
+  they remain local recovery evidence until immutable external storage is
+  arranged. Historical LRAT hashes were reproduced exactly.
+- **Next queued attack:** add explicit five-hole variables and the exact
+  defect-weighted pair/singleton packet identities to the common reduced model;
+  then construct a canonical source-cut cover under `S7(A') x S6(K)` and retain
+  compact LRAT objects from inception.
