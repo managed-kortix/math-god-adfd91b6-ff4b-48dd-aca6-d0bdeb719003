@@ -60,7 +60,7 @@ def payload():
  return "".join(lines).encode("ascii")
 
 
-def emit(index,path):
+def emit(index,path,packet_pressure=False):
  k=keys()[index];O,I,H,W=representative(k);c=build()
  for v in range(16):
   if v==2:continue
@@ -69,6 +69,16 @@ def emit(index,path):
   elif v in I:c.add(vu)
   else:c.add(-uv);c.add(-vu)
  for v in W:c.add(c.var(f"inacc_2_{v}"))
+ if packet_pressure:
+  # For selected inaccessible witnesses t,u, exact degree and the global
+  # six-hole identity imply e^+({t,u},R) <= s, where
+  # s=5-|H|-|W intersect I|-2|W intersect B| and |R|=5.
+  s=5-len(H)-len(W&I)-2*len(W&set(B))
+  if s<0:c.add()
+  else:
+   R=set(range(16))-({2}|O|W)
+   lits=[c.var(f"a_{t}_{r}") for t in sorted(W) for r in sorted(R)]
+   for combo in itertools.combinations(lits,s+1):c.add(*(-v for v in combo))
  with open(path,"w",encoding="ascii",newline="\n") as f:
   for name,num in c.names.items():f.write(f"c var {num} {name}\n")
   f.write(f"p cnf {len(c.names)} {len(c.clauses)}\n")
@@ -77,8 +87,8 @@ def emit(index,path):
 
 
 if __name__=="__main__":
- p=argparse.ArgumentParser();p.add_argument("--list",action="store_true");p.add_argument("--index",type=int);p.add_argument("--output");a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument("--list",action="store_true");p.add_argument("--index",type=int);p.add_argument("--output");p.add_argument("--packet-pressure",action="store_true");a=p.parse_args()
  if a.list:
   print(payload().decode(),end="");print(f"count={len(keys())} multiplicity={sum(map(multiplicity,keys()))} sha256={hashlib.sha256(payload()).hexdigest()}")
- elif a.index is not None and a.output:emit(a.index,a.output)
+ elif a.index is not None and a.output:emit(a.index,a.output,a.packet_pressure)
  else:p.error("use --list or --index I --output FILE")
