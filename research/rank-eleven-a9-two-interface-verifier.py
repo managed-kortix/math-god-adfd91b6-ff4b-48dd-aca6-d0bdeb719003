@@ -29,6 +29,15 @@ if SPEC.loader is None:
 sys.modules[SPEC.name] = BASE
 SPEC.loader.exec_module(BASE)
 
+CORE_SPEC = spec_from_file_location(
+    "geometry_router_owner_core", HERE / "geometry_router_owner_core.py"
+)
+CORE = module_from_spec(CORE_SPEC)
+if CORE_SPEC.loader is None:
+    raise RuntimeError("router-owner core has no import loader")
+sys.modules[CORE_SPEC.name] = CORE
+CORE_SPEC.loader.exec_module(CORE)
+
 TRIANGLES = frozenset(range(9))
 PENTAGONS = ("PA", "PB")
 
@@ -199,6 +208,10 @@ def local_triangle_positions(tree, router):
     )
     require(len(positions) == 3, "router does not have three concrete triangle vertices")
     return tuple(positions)
+
+
+def local_triangle_geometry(tree, router):
+    return CORE.make_cycle(f"T{router}", local_triangle_positions(tree, router))
 
 
 def concrete_split(tree, router, active, owner_anchors):
@@ -506,19 +519,14 @@ def verify_plan(row, plan):
                 "ordered interval sizes do not match concrete vertex owners")
         require(sum(split.interval_sizes) == 3, "router intervals do not cover triangle")
         require(sorted(split.interval_sizes) in ([1, 2], [1, 1, 1]), "improper intervals")
-        local = local_triangle_positions(row.tree, split.router)
-        concrete = tuple(position for positions, _ in split.owners for position in positions)
-        require(Counter(concrete) == Counter(local),
-                "concrete router intervals do not partition its three vertices")
-        local_edges = {
-            frozenset((local[0], local[1])), frozenset((local[1], local[2])),
-            frozenset((local[2], local[0])),
-        }
-        for positions, _ in split.owners:
-            require(len(positions) in (1, 2), "triangle interval has invalid cardinality")
-            if len(positions) == 2:
-                require(frozenset(positions) in local_edges,
-                        "size-two triangle interval is not cyclically consecutive")
+        geometry = local_triangle_geometry(row.tree, split.router)
+        local = geometry.vertices
+        CORE.verify_router_owner_split(
+            geometry,
+            tuple(positions for positions, _ in split.owners),
+            tuple(range(len(split.owners))),
+            split.interval_sizes,
+        )
         branches = [set(cycles) for _, cycles in split.owners]
         require(sum(map(len, branches)) == len(set().union(*branches)), "split branches overlap")
         require(set().union(*branches) == set(split.active) - {split.router},

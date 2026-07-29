@@ -23,14 +23,18 @@ singleton hub interval                  -> A_8,
 two-vertex clustered-P/private-demand   -> PP.
 ```
 
-The second territory must own both complete connectors and both complete
-pentagons. The ledger is `A_8+PP>0`.
+The second territory owns the complete clustered-pentagon incidence branch,
+the complete remote connector and remote pentagon, and the router edge joining
+their two ports. There is no separate connector for the clustered pentagon.
+The clustered branch must contain exactly its pentagonal block and no triangle;
+under this checked hypothesis the complete profile is `PP`, not `TPP`. The
+ledger is `A_8+PP>0`.
 
 ## K2: remote-pentagon opening
 
 All nine triangles and the clustered pentagon have one common cut; the remote
 entry is that cut. Materialize the remote pentagon as rooted cycle
-`v0v1v2v3v4v0`. Keep `v0`, both connector remnants, `A_9`, and the clustered
+`v0v1v2v3v4v0`. Keep `v0`, the complete remote connector, `A_9`, and the clustered
 pentagon in packing-one `A_9P`; give `v1,v2,v3,v4` and their attachments to one
 induced path. The ledger is
 
@@ -62,7 +66,10 @@ singleton hub interval                              -> A_c.
 The second split refines only the active hub child and may not retrieve the
 closed remote arm. Final owners must give each cut, router vertex, connector
 remnant, pentagon vertex, and attachment exactly one descendant. The packet
-ledger is
+verifier must derive that each outer arm is connected and common-cut (hence
+packing one), owns exactly one complete pentagon interface, and contains no
+cycle from a sibling. The final hub owner contains the `c` bare petals and the
+inherited singleton router positions, but no hostile-arm branch. The packet ledger is
 
 ```text
 sigma > (a-delta)+(b-delta)+0 = a+b-2delta >0.

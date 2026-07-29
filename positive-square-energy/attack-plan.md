@@ -134,6 +134,13 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     residuals are K1=`A_8+PP`, K2=open remote P plus packing-one `A_9P`, and a
     15-row nested two-arm family `A_aP+A_bP+A_(7-a-b)`. Apply the same hardened
     geometry and independent theorem checks to the ordinary 50382 rows.
+26. The shared router bridge now certifies an exact 43151-row projection and
+    concrete intervals for 43145 ordinary triangular-hull plans, with canonical
+    identity maps and hostile alias/swap gates. Next extend its final-owner
+    domain from triangles/cuts to complete clustered and remote pentagons,
+    connector edges/remnants, and attachments; then adapt the 7248 private-P
+    rows and integrate K1/K2/K3--K17. Keep theorem status fail-closed until all
+    physical owner domains are exhaustive.
 
 ## Running jobs
 
