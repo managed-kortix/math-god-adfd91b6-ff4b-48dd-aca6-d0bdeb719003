@@ -5,7 +5,8 @@ import hashlib
 import itertools
 import math
 
-from k6_reduced_cnf import A,B,build
+from k6_reduced_cnf import A,B,build,exact
+from snc_cnf import threshold
 
 A0=tuple(v for v in A if v!=2)
 CELLS=("w","z","AI","AH","BI","BH")
@@ -60,7 +61,7 @@ def payload():
  return "".join(lines).encode("ascii")
 
 
-def emit(index,path,packet_pressure=False):
+def emit(index,path,packet_pressure=False,exact_pressure=False):
  k=keys()[index];O,I,H,W=representative(k);c=build()
  for v in range(16):
   if v==2:continue
@@ -69,12 +70,28 @@ def emit(index,path,packet_pressure=False):
   elif v in I:c.add(vu)
   else:c.add(-uv);c.add(-vu)
  for v in W:c.add(c.var(f"inacc_2_{v}"))
- if packet_pressure:
+ if packet_pressure or exact_pressure:
   # For selected inaccessible witnesses t,u, exact degree and the global
   # six-hole identity imply e^+({t,u},R) <= s, where
   # s=5-|H|-|W intersect I|-2|W intersect B| and |R|=5.
   s=5-len(H)-len(W&I)-2*len(W&set(B))
   if s<0:c.add()
+  elif exact_pressure:
+   # Explicit pair-hole semantics expose the exact identity directly.
+   holes={}
+   for u in range(16):
+    for v in range(u+1,16):
+     h=c.var(f"hole_{u}_{v}");holes[u,v]=h
+     uv=c.var(f"a_{u}_{v}");vu=c.var(f"a_{v}_{u}")
+     c.add(-h,-uv);c.add(-h,-vu);c.add(uv,vu,h)
+   exact(c,threshold(c,list(holes.values()),"six_holes"),6)
+   R=set(range(16))-({2}|O|W)
+   support={tuple(sorted((2,v))) for v in H}
+   support|={tuple(sorted((t,y))) for t in W for y in O}
+   support.add(tuple(sorted(W)))
+   events=[c.var(f"a_{t}_{r}") for t in sorted(W) for r in sorted(R)]
+   events += [h for pair,h in holes.items() if pair not in support]
+   exact(c,threshold(c,events,"packet_identity"),s)
   else:
    R=set(range(16))-({2}|O|W)
    lits=[c.var(f"a_{t}_{r}") for t in sorted(W) for r in sorted(R)]
@@ -87,8 +104,8 @@ def emit(index,path,packet_pressure=False):
 
 
 if __name__=="__main__":
- p=argparse.ArgumentParser();p.add_argument("--list",action="store_true");p.add_argument("--index",type=int);p.add_argument("--output");p.add_argument("--packet-pressure",action="store_true");a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument("--list",action="store_true");p.add_argument("--index",type=int);p.add_argument("--output");p.add_argument("--packet-pressure",action="store_true");p.add_argument("--exact-pressure",action="store_true");a=p.parse_args()
  if a.list:
   print(payload().decode(),end="");print(f"count={len(keys())} multiplicity={sum(map(multiplicity,keys()))} sha256={hashlib.sha256(payload()).hexdigest()}")
- elif a.index is not None and a.output:emit(a.index,a.output,a.packet_pressure)
+ elif a.index is not None and a.output:emit(a.index,a.output,a.packet_pressure,a.exact_pressure)
  else:p.error("use --list or --index I --output FILE")
