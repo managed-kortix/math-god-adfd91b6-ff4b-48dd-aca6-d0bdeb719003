@@ -974,3 +974,30 @@ No audits yet.
   run short scouts only below the 36 hard parents, and retain the first LRAT
   pilots to measure whether per-leaf proofs are small enough for durable Git or
   require external content-addressed storage.
+
+### Packet-pressure breakthrough in the complete-cut split
+
+- Exactly 671 of the 1,110 complete-cut orbits refine the 36 hard primary
+  parents. A naive two-second scout left every child unresolved, confirming that
+  merely fixing one full source cut does not expose the collective obstruction.
+- Derived a new exact selected-pair identity. For source `a`, selected
+  inaccessible witnesses `t,u`, eight outneighbors `O`, five remaining vertices
+  `R`, and `h` holes incident with `a`, let `i_v` indicate `v->a` and `b_v`
+  indicate `v in B`. Then
+  `e+({t,u},R)+h_other = 5-h-i_t-i_u-2b_t-2b_u`, where `h_other` counts holes
+  outside the source/witness support. This follows by summing the exact witness
+  outdegrees and the global exact six-hole count.
+- Immediate consequence: `h+i_t+i_u+2b_t+2b_u <= 5`. This rejects 279 of the
+  671 hard children structurally, representing labelled multiplicity 969,048.
+  The sound upper-bound half was added as redundant propagation clauses.
+- With those clauses, a one-second CaDiCaL scout returns UNSAT on 430 children
+  and leaves 241 UNKNOWN. These remain scout statuses except for the retained
+  pilot below.
+- Retained and independently checked the first compact LRAT pilot, complete-cut
+  index 1, key `(0,1,7,0,0,0,2)`: CNF SHA-256
+  `e386e22a...6736cb20`, LRAT SHA-256 `d9922feb...73845cf9`; `lrat-check`
+  returned `c VERIFIED`. Files are `k6-pressure-pilot-0001.{cnf,lrat}`.
+- **Next queued attack:** encode the exact identity rather than only its
+  outgoing-arc upper bound by introducing explicit semantic hole variables and
+  a redundant exact-six-hole cardinality. Then rescout the 241 residual leaves
+  and retain LRATs for all compact terminal leaves.
