@@ -16,6 +16,16 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-28: generated the complete geometry-aware rank-eleven `T^9P|P`
+  endpoint universe: 8011 colored incidences, 3624 clustered-pentagon leaf
+  incidences, 43151 triangular-hull rows, 7248 private-pentagon distance-orbit
+  rows, total 50399. Both pentagons, connector roots/remnants, triangle cyclic
+  positions, and rooted-C5 dihedral orbits are explicit; nine hostile geometry
+  mutations are rejected and normal/`-O` fail identically. A first claimed
+  `50382/50399` closure was withdrawn after audit found symbolic demands,
+  ambiguous slack positions, and non-bijective owner records. Preserved the
+  exact census plus a concrete `1+1+15` repair blueprint; no `T^9P|P` endpoint
+  theorem is claimed until all 50399 final-owner packet records are hardened.
 - 2026-07-28: completed the finite rank-eleven `P|A_9|P` endpoint. A
   fail-closed verifier independently generates 355 incidence trees, 128155
   labelled placements, and 43151 canonical rows; theorem-aware recursive
