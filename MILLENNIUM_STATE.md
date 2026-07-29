@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 105
+- **cycle:** 106
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 106 audited dynamic phase frustration, Yang--Mills
+  martingale applicability, rank-two Bockstein determinants, PCP proof
+  magnification, and a possible quartic-CM Hodge scout.  Kinematic locks need an
+  independent amplitude-dependent tangency identity and an exact conservative
+  hypercycle leaves the maximizing lock immediately.  Kogut--Susskind is not
+  frustration free; heat-bath projectors still need the physical transfer-form
+  comparison.  Kummer wedges do not force a nondegenerate Bockstein determinant,
+  and PCP length does not erase an unknown polynomial collapse exponent.  The
+  Hodge report was incomplete and is queued only for primary-source audit; the
+  RH scout returned no report.
 
 - 2026-07-29: Cycle 105 met the nonsplit Weil-sixfold mechanism rotation gate.
   Markman-type polarization, isogeny, dual, Brauer, and Fourier--Mukai
