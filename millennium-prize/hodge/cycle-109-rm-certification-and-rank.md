@@ -9,7 +9,7 @@ the coefficients of `g^*Theta` and `(g^-1)^*Theta` are respectively
 `lambda_i^2` and `lambda_i^-2`; the controlling ratios are `lambda_i^4`.
 The script constructs the full `28`-column Chern-contraction matrix from
 \[
- \operatorname{ch}(F_2)=g^*\Theta-rac16(g^{-1})^*\Theta^3
+ \operatorname{ch}(F_2)=g^*\Theta-\frac q6(g^{-1})^*\Theta^3
 \]
 using exact rational exterior algebra.  It certifies
 \[

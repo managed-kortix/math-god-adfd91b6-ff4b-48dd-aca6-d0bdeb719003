@@ -1,5 +1,16 @@
 # Notebook
 
+## Cycle 110
+
+Bring's curve supplies a rigorous genus-four Markman-compatible seed: its
+smooth canonical quadric gives two trigonal pencils, and the five-cycle
+endomorphism yields exact Rosati-compatible `Q(sqrt(5))` RM with integral
+norm-one unit `f=(r+r^-1)^2`, satisfying `f^2-3f+1=0`.  This removes the
+heuristic RM gap, though not the explicit gluing/semiregularity gate.  The rank
+verifier was corrected to include `q`, standard bivector contraction order,
+and sparse cancellation.  A symbolic block proof upgrades rank `20`, nullity
+`8` from one specialization to a uniform characteristic-zero theorem.
+
 ## Cycle 109
 
 Added a dependency-free exact exterior-algebra verifier for the full

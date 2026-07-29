@@ -15,6 +15,8 @@ def wedge(left, right):
 def add(out, monomial, coefficient):
     if monomial is not None and coefficient:
         out[monomial] = out.get(monomial, Fraction(0)) + coefficient
+        if not out[monomial]:
+            del out[monomial]
 
 
 def wedge_forms(left, right):
@@ -60,14 +62,16 @@ def gaussian_rank(matrix):
     return rank
 
 
-def rank_for(eigenvalues):
-    # Exterior basis: x_i=i and y_i=4+i.
+def rank_for(eigenvalues, q=Fraction(1)):
+    # x_i (i=0,...,3) is a basis of H^(1,0), y_i=4+i of H^(0,1).
+    # Tangent index i denotes the vector dual to x_i.
+    assert q
     a = [u * u for u in eigenvalues]
     c = [Fraction(1, 1) / value for value in a]
     ch1 = {(i, 4 + i): a[i] for i in range(4)}
     theta_inv = {(i, 4 + i): c[i] for i in range(4)}
     ch3 = scale(wedge_forms(wedge_forms(theta_inv, theta_inv), theta_inv),
-                Fraction(-1, 6))
+                Fraction(-1, 6) * q)
 
     sources = []
     # H^2(O), H^1(T), H^0(wedge^2 T).
@@ -88,7 +92,8 @@ def rank_for(eigenvalues):
             images.append(image)
         else:
             i, j = indices
-            images.append(contract(contract(ch3, j), i))
+            # i_(x_i wedge x_j) = i_(x_j) i_(x_i).
+            images.append(contract(contract(ch3, i), j))
 
     targets = sorted(set().union(*(image.keys() for image in images)))
     matrix = [[image.get(target, Fraction(0)) for image in images]

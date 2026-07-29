@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 109
+- **cycle:** 110
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 110 found a rigorous replacement for the heuristic HPS RM
+  curve.  Bring's genus-four curve has a smooth canonical quadric and exact
+  Rosati-compatible `Q(sqrt(5))` multiplication from a five-cycle; the integral
+  unit `f=(r+r^-1)^2` satisfies `f^2-3f+1=0`.  The contraction verifier was
+  corrected for the missing `q`, bivector contraction order, and sparse
+  cancellation.  A standalone symbolic block argument now proves uniformly
+  that Markman's real-quadratic Chern contraction has rank `20`, nullity `8`.
+  The remaining Hodge gate is still an explicit secant/gluing object whose
+  Atiyah obstruction map has rank `20`; Bring's extra endomorphisms require a
+  deformation-hypothesis audit before use.
 
 - 2026-07-29: Cycle 109 independently reproduced and machine-certified the
   quartic-CM Chern-contraction rank.  Exact exterior algebra gives rank `20`,
