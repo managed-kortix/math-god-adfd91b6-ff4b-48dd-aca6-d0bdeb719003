@@ -6,7 +6,7 @@ from k6_reduced_cnf import exact
 
 W,Z=0,1;A=tuple(range(2,9));K=tuple(range(9,15));S=15;B=K+(S,);N=16
 
-def build():
+def build(explicit_holes=False):
  c=CNF();arc={(u,v):c.var(f"a_{u}_{v}") for u in range(N) for v in range(N) if u!=v}
  for u in range(N):
   for v in range(u+1,N):c.add(-arc[u,v],-arc[v,u])
@@ -18,6 +18,12 @@ def build():
  for u in range(N):
   target=6 if u in K else (7 if u==S else 8)
   exact(c,threshold(c,[arc[u,v] for v in range(N) if v!=u],f"deg{u}"),target)
+ if explicit_holes:
+  holes=[]
+  for u in range(N):
+   for v in range(u+1,N):
+    h=c.var(f"hole_{u}_{v}");holes.append(h);c.add(-h,-arc[u,v]);c.add(-h,-arc[v,u]);c.add(arc[u,v],arc[v,u],h)
+  exact(c,threshold(c,holes,"five_holes"),5)
  for a in A:
   hit=c.var(f"hitK_{a}")
   for b in K:c.add(-arc[a,b],hit)
@@ -31,12 +37,12 @@ def build():
   out=threshold(c,ws,f"inacc_count_{a}");c.add(out[0]);c.add(-hit,out[1])
  return c
 
-def emit(path):
- c=build()
+def emit(path,explicit_holes=False):
+ c=build(explicit_holes)
  with open(path,"w",encoding="ascii",newline="\n") as f:
   for n,v in c.names.items():f.write(f"c var {v} {n}\n")
   f.write(f"p cnf {len(c.names)} {len(c.clauses)}\n")
   for x in c.clauses:f.write(" ".join(map(str,x))+" 0\n")
  print(f"vars={len(c.names)} clauses={len(c.clauses)}")
 
-if __name__=="__main__":p=argparse.ArgumentParser();p.add_argument("output");a=p.parse_args();emit(a.output)
+if __name__=="__main__":p=argparse.ArgumentParser();p.add_argument("output");p.add_argument("--explicit-holes",action="store_true");a=p.parse_args();emit(a.output,a.explicit_holes)
