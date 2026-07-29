@@ -1001,3 +1001,23 @@ No audits yet.
   outgoing-arc upper bound by introducing explicit semantic hole variables and
   a redundant exact-six-hole cardinality. Then rescout the 241 residual leaves
   and retain LRATs for all compact terminal leaves.
+
+### Reduced k=6 certificate closure
+
+- Encoded the exact packet identity with explicit hole variables and a
+  redundant exact-six-hole cardinality. Independent hostile audit verified the
+  support partition, formula, hole equivalence, and exact-cardinality semantics.
+- Certified every one of the 1,110 complete-cut orbit representatives. Each
+  leaf was generated deterministically, solved by pinned CaDiCaL, accepted by
+  pinned `lrat-check`, compressed into a content-addressed object, then freshly
+  regenerated and rechecked by `k6_exact_verify.py`.
+- Fresh readback result: `PASS leaves=1110 labelled=3171168`. The archive has
+  SHA-256 `e44f8ff8...4bb80402`, size 103,486,540 bytes, and represents
+  602,210,046 uncompressed LRAT bytes in 651 deduplicated proof objects.
+- Therefore the 16-vertex all-seven reduced model is now durably UNSAT. Combined
+  with the written forward reduction, this closes the remaining `(rho,k)=(0,6)`
+  isolated-root `m=9` row.
+- **Next queued attack:** return to the two exact durable residuals
+  `(rho,k)=(0,5)` and `(1,5)`. Reconstruct their strongest reduced collective
+  models and require retained proof bytes rather than historical checked-run
+  hashes.
