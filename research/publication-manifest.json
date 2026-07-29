@@ -111,6 +111,32 @@
         "posted_at": "2026-07-30T00:00:00Z"
       },
       "notes": "Major partial progress only. It neither resolves nor is reported as resolving the general conjecture. AI-generated manuscript and certificate suite are disclosed in the public folder."
+    },
+    {
+      "id": "fermat-elementary-symmetric-obstruction",
+      "kind": "published_question_negative_answer",
+      "statement": "The elementary-symmetric surface W proposed in Question 1 of da Silva (2021) has class 2d^2 H^2 and therefore zero projection to every primitive Fermat-character eigenspace.",
+      "source_url": "https://doi.org/10.1017/exp.2021.14",
+      "source_label": "da Silva, Question 1 (candidate W)",
+      "year": 2021,
+      "area": "Algebraic geometry",
+      "scope_status": "claimed_negative_answer_for_proposed_candidate_only",
+      "paper_folder": "fermat-elementary-symmetric-obstruction",
+      "evidence_url": "https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/tree/7b5323d/fermat-elementary-symmetric-obstruction",
+      "ocb": {
+        "eligibility": "not_eligible_specialized_candidate_question_not_full_hodge_resolution",
+        "status": "withheld"
+      },
+      "author_contact": {
+        "status": "pending_main_lane_review_after_stable_public_commit",
+        "recipient_role": "source question author"
+      },
+      "x": {
+        "eligibility": "withheld_narrow_candidate_obstruction_not_hodge_resolution",
+        "status": "withheld"
+      },
+      "ai_assistance_disclosed": true,
+      "notes": "The result answers only whether the proposed W can have the requested primitive projections. It does not decide algebraicity of the exceptional degree-33 character or the Hodge conjecture. Targeted source and citation audit found no prior explicit observation, but priority is stated cautiously."
     }
   ],
   "withheld_groups": [
