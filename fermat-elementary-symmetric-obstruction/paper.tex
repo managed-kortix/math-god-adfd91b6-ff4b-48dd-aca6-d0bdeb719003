@@ -1,0 +1,216 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\DeclareMathOperator{\CH}{CH}
+\title{The elementary-symmetric candidate on a Fermat fourfold\\is an ambient complete intersection}
+\author{}
+\date{July 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $X_{3d}\subset\mathbf P^5_{\mathbf C}$ be the Fermat fourfold and let
+$W_d$ be the surface proposed in Question~1 of da Silva's 2021 notes, defined
+by the first three elementary symmetric polynomials in
+$x_0^d,\ldots,x_5^d$.  Newton's identity proves scheme-theoretically that
+$W_d$ is the intersection on $X_{3d}$ of two ambient divisors.  Consequently
+\[
+ [W_d]=2d^2H^2\in\CH^2(X_{3d}),
+\]
+so its primitive cohomology class and every primitive Fermat-character
+projection vanish.  This gives a negative answer for the proposed candidate,
+without deciding algebraicity of the exceptional characters.  We also record
+the independent fact that any cycle class invariant under coordinatewise
+$d$-th roots of unity can occur only in character sectors whose coordinates
+are all divisible by $d$.
+\end{abstract}
+
+\section{The candidate}
+Let $k$ be a field in which $3$ is invertible, let $d\geq1$, and put
+\[
+ S=k[x_0,\ldots,x_5],\qquad y_i=x_i^d,
+ \qquad F_{3d}=\sum_{i=0}^5x_i^{3d}.
+\]
+Write $e_j=e_j(y_0,\ldots,y_5)$ for the elementary symmetric polynomials.
+Define
+\[
+ X_{3d}=V(F_{3d})\subset\mathbf P^5_k,
+ \qquad W_d=V(e_1,e_2,e_3)\subset\mathbf P^5_k.
+\]
+This is the candidate denoted $W$ in Question~1 of \cite{daSilva}.  The
+condition $3\nmid d$ used there is not needed below.
+
+\section{Scheme structure and cycle class}
+\begin{theorem}\label{thm:ci}
+If $3$ is invertible in $k$, then
+\[
+ (e_1,e_2,e_3)=(e_1,e_2,F_{3d})\subset S.
+\]
+This ideal is a complete-intersection ideal of height three.  Hence
+\[
+ W_d=V_{X_{3d}}(e_1,e_2)
+\]
+scheme-theoretically, and $W_d$ is a pure two-dimensional complete
+intersection of type $(d,2d,3d)$ in $\mathbf P^5$.
+\end{theorem}
+\begin{proof}
+Newton's third identity is
+\[
+ \sum_{i=0}^5y_i^3=e_1^3-3e_1e_2+3e_3.
+\]
+After $y_i=x_i^d$, this becomes
+\begin{equation}\label{eq:newton}
+ F_{3d}=e_1^3-3e_1e_2+3e_3.
+\end{equation}
+It gives both inclusions between the displayed ideals, the reverse inclusion
+using division by $3$.
+
+For completeness, let $A=k[y_0,\ldots,y_5]$.  The elementary symmetric
+functions are algebraically independent, and $A$ is integral over
+$k[e_1,\ldots,e_6]$.  Thus $(e_1,e_2,e_3)$ has height three in the
+Cohen--Macaulay ring $A$, and its generators form a regular sequence.  The map
+\[
+ A\longrightarrow S,\qquad y_i\longmapsto x_i^d,
+\]
+is finite free, with basis $\prod_i x_i^{r_i}$ for $0\leq r_i<d$.
+Flat base change preserves the regular sequence.  Equation
+\eqref{eq:newton} then permits replacing $e_3$ by $F_{3d}$.  The claimed
+height, purity, and scheme-theoretic description follow.
+\end{proof}
+
+Now take $k=\mathbf C$ and let
+$H=c_1(\mathcal O_{X_{3d}}(1))$.
+\begin{corollary}\label{cor:class}
+In the Chow group of the smooth Fermat fourfold,
+\[
+ [W_d]=2d^2H^2\in\CH^2(X_{3d}),\qquad \deg W_d=6d^3.
+\]
+Its cohomology class has zero primitive component and therefore zero
+projection to every primitive Fermat-character eigenspace.
+\end{corollary}
+\begin{proof}
+By Theorem~\ref{thm:ci}, $W_d$ is the proper scheme-theoretic intersection on
+$X_{3d}$ of Cartier divisors of classes $dH$ and $2dH$.  Refined
+intersection, including scheme multiplicities \cite{Fulton}, gives
+\[
+ [W_d]=(dH)(2dH)=2d^2H^2.
+\]
+Since $\int_{X_{3d}}H^4=3d$, its degree is $6d^3$.
+The cycle class lies on the ambient Lefschetz line $\mathbf QH^2$, whose
+projection to $H^4_{\mathrm{prim}}(X_{3d},\mathbf Q)$ is zero.  Primitive
+Fermat-character spaces lie in this primitive summand \cite{Shioda}.
+\end{proof}
+
+Reducedness and irreducibility of $W_d$ are neither asserted nor needed.
+The conclusion concerns the primitive component of its cohomology class; the
+total class $2d^2H^2$ is nonzero.
+
+\section{A coordinate-power sector obstruction}
+Let
+\[
+ X_m=\left\{\sum_{i=0}^N x_i^m=0\right\}\subset\mathbf P^N_{\mathbf C},
+ \qquad d\mid m,
+\]
+and let
+\[
+ G_m=\mu_m^{N+1}/\mu_m^{\mathrm{diag}},\qquad
+ K_d=\mu_d^{N+1}/\mu_d^{\mathrm{diag}}\subset G_m,
+\]
+where the inclusion is induced by $\mu_d\subset\mu_m$.
+A character of $G_m$ is represented by
+$\alpha=(a_0,\ldots,a_N)\in(\mathbf Z/m)^{N+1}$ with
+$\sum_i a_i=0$.
+
+\begin{theorem}\label{thm:sector}
+If a cohomology class $v$ on $X_m$ is invariant under $K_d$, then its
+$\alpha$-character projection is zero unless
+\[
+ d\mid a_i\quad\text{for every }i.
+\]
+In particular this applies to the fundamental class of a cycle defined by
+homogeneous equations in $x_0^d,\ldots,x_N^d$.
+\end{theorem}
+\begin{proof}
+Finite abelian group representations over $\mathbf C$ are semisimple.  If
+$\pi_\alpha$ denotes the character projector, averaging a $K_d$-invariant
+class first over $K_d$ shows
+\[
+ \pi_\alpha(v)=0
+ \quad\text{unless}\quad \chi_\alpha|_{K_d}=1.
+\]
+Explicitly,
+\[
+ \chi_\alpha|_{K_d}[(\zeta_i)]=\prod_i\zeta_i^{a_i}.
+\]
+This is well defined on the diagonal quotient because $\sum_i a_i=0\pmod m$.
+Setting all but one coordinate equal to $1$ shows that the restriction is
+trivial exactly when every $a_i$ is divisible by $d$.
+Equations in the $x_i^d$ are fixed by $K_d$, so their scheme and fundamental
+cycle are invariant.
+\end{proof}
+
+For the fourfold $X_{3d}$, a primitive $(2,2)$ character surviving this test
+must be a permutation of
+\[
+ (d,d,d,2d,2d,2d).
+\]
+Indeed, primitive Fermat characters have all six coordinates nonzero, and the
+$(2,2)$ condition is
+\[
+ \sum_i\langle a_i\rangle=3(3d)=9d
+\]
+for least-positive representatives \cite{Shioda}.  Divisibility by $d$ makes
+each coordinate $d$ or $2d$.  If $r$ coordinates are $2d$, their sum is
+$(6+r)d$, so $r=3$.
+
+\section{Degree 33 and the scope of the answer}
+For $d=11$ the complete-intersection computation gives
+\[
+ [W_{11}]=242H^2,\qquad \deg W_{11}=7986.
+\]
+Da Silva's highlighted exceptional character is
+\[
+ \alpha=(7,10,13,19,22,28)\pmod {33}.
+\]
+It is not coordinatewise divisible by $11$, so Theorem~\ref{thm:sector}
+independently forces its $W_{11}$-projection to vanish.  Corollary
+\ref{cor:class} is stronger: every primitive projection of $W_{11}$ vanishes.
+
+Thus Question~1 of \cite{daSilva} has a negative answer for the proposed
+surface $W$.  Nothing here proves the exceptional character nonalgebraic, nor
+does it settle the Hodge conjecture for the degree-$33$ Fermat fourfold or in
+general.
+
+The version of record of \cite{daSilva} has the correct term $3e_3$ in
+Newton's identity.  An arXiv version displays $3e_3^3$, which is
+dimensionally inhomogeneous and is evidently a typographical error.  Our
+argument uses the corrected published formula.
+
+\section*{Reproducibility and disclosure}
+The accompanying dependency-free verifier checks the degree-$33$ character,
+the numerical cycle-class specialization, and the symmetry obstruction using
+exact integer arithmetic.  The proof itself is symbolic and does not depend on
+the program.
+
+This result was found, drafted, and internally audited by an autonomous AI
+mathematics system.  Multiple independent AI agents reconstructed the ideal
+identity, regular-sequence argument, Chow computation, symmetry obstruction,
+and source wording; hostile audits specifically tested scheme structure,
+embedded components, character conventions, and scope.  No human endorsement
+is claimed.
+
+\begin{thebibliography}{9}
+\bibitem{daSilva}
+G. da Silva Jr., \emph{Notes on the Hodge conjecture for Fermat varieties},
+Experimental Results \textbf{2} (2021), e22,
+\href{https://doi.org/10.1017/exp.2021.14}{doi:10.1017/exp.2021.14}.
+\bibitem{Fulton}
+W. Fulton, \emph{Intersection Theory}, 2nd ed., Springer, 1998.
+\bibitem{Shioda}
+T. Shioda, \emph{The Hodge conjecture for Fermat varieties}, Math. Ann.
+\textbf{245} (1979), 175--184.
+\end{thebibliography}
+\end{document}
