@@ -140,7 +140,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 84
+- **cycle:** 85
 - **announcements:** none
 
 ## immutable target list
@@ -173,6 +173,13 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 85 audited a radical prime-local Weil SOS route. Every
+  Euler factor has an exact Poisson/scattering realization, but the Weil-sign
+  packet is `I-K_p` and indefinite. The sharp local diagonal repair is
+  `2 log(p)/(sqrt(p)-1)` and is not summable; long packets defeat local boundary
+  corrections. Known adelic trace models leave the global RH-equivalent
+  remainder. The tactic is retired. No RH result is claimed.
 
 - 2026-07-29: Cycle 84 completed exact bounded-result and novelty audits. The
   Fermat-plane semiregularity multiplication has a valid all-degree private-

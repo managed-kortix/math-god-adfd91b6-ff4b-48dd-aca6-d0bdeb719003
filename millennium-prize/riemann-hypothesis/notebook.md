@@ -22,6 +22,16 @@ Laguerre recurrence leaks into an infinite signed-moment hierarchy. The tactic
 is retired after finite Arb certification through `n=10000`. No RH result is
 claimed.
 
+## Bounded scout cycle 85
+
+Euler factors admit exact delay/resolvent and scattering realizations, but the
+Weil-sign local packet is `I-K_p` for a positive Poisson operator and is
+indefinite. Its sharp diagonal SOS repair costs `2 log(p)/(sqrt(p)-1)`, which is
+not summable over primes. Long packets rule out local boundary repair. Existing
+adelic constructions leave precisely a sign-indefinite compact/supertrace
+remainder whose global positivity is Weil/RH. The prime-local SOS tactic is
+retired. No RH result is claimed.
+
 ## Tick 1 — exact finite enclosure lemma
 
 Fix integers `N >= 3` and `Q >= N`, and set `epsilon=1/Q`. Define `c_a` and
