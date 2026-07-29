@@ -169,6 +169,16 @@ an ultraviolet cutoff. Exact orthogonal packet examples also show that zero
 orientation quadrupole does not control phase-sensitive low backscatter. Both
 depletion variants are retired. No Navier result is claimed.
 
+## Main-funnel cycle 81
+
+The analytic-scale linear-sparsity criterion is established and admits a sharp
+volume-to-centered-line lemma. But energy, enstrophy averaging, negative norms,
+CKN theory, and maximum-point identities do not generate its hypothesis.
+Dyadic energy costs are summable, and the best energy geometry occurs at
+`Omega^(-2/5)` rather than the analytic `Omega^(-1/2)` scale. Exact broad-core
+solutions falsify any kinematic automaticity claim. The tactic is retired. No
+Navier result is claimed.
+
 ## Bounded scout cycle 73
 
 The exact helical triad formula exposes indefinite genuinely three-dimensional

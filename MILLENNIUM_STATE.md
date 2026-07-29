@@ -5,11 +5,10 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** RH Li first-difference funnel
-- **active main funnel:** prove `lambda_(n+1)-lambda_n>0` for all classical Li
-  coefficients through an unconditional one-sided bound for the signed
-  Laguerre transform of `psi(x)-x`. This is stronger than Li positivity and has
-  full reach, but finite verification alone is explicitly insufficient.
+- **phase:** portfolio rotation after Li and Navier sparsity audits
+- **active main funnel:** selection of a genuinely new full-reach mechanism.
+  Li positive-square/recurrence/Selberg arguments and automatic Navier
+  analytic-scale sparsity are formally retired at exact obstructions.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -141,7 +140,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 79
+- **cycle:** 81
 - **announcements:** none
 
 ## immutable target list
@@ -160,12 +159,15 @@ waiting process.
 
 ## next exact steps
 
-1. Run and independently test the finite Arb Li-difference verifier; record only
-   its exact finite range, never an asymptotic claim.
-2. Derive a frequency-sensitive bound for the signed Laguerre transform of
-   `psi(x)-x`; do not take absolute values across the oscillatory region.
-3. Test whether a centered weighted Laguerre packet admits a positive-square or
-   Hilbert-transform decomposition not equivalent to Li positivity itself.
+1. Complete a written six-problem rotation review. Do not promote constructive
+   MCSP hard-output generation, which already is an explicit general-circuit
+   lower bound, or conditional Navier sparsity without a production theorem.
+2. Audit the Navier terminal ancient-profile route only if it supplies strong
+   global `L^3` compactness for arbitrary Type-II singularities rather than
+   assuming the endpoint continuation criterion.
+3. Audit Yang--Mills weak-to-strong RG basin entry only if a controlled bridge
+   past the weak-coupling chart is isolated; fixed strong-coupling clustering is
+   insufficient.
 4. Keep bounded scouts live: BSD derived Kato rank-two primitivity; RH Weil
    spline calibration; Hodge generic-seed obstruction; Navier phase-sensitive
    backscatter depletion; Yang--Mills common-cone physical-slab contraction.
@@ -173,6 +175,14 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycles 80--81 met two rotation gates. Li differences were
+  certified through `n=10000`, but the Blaschke square lies on the wrong line,
+  Selberg kernels remain signed, and recurrence leaks through infinitely many
+  moments. Navier analytic-scale sparsity is a valid conditional criterion, but
+  energy costs are summable, energy geometry misses the analytic scale by
+  `Omega^(1/10)`, and exact broad cores disprove kinematic automaticity. Both
+  tactics are retired. No Millennium result is claimed.
 
 - 2026-07-29: Cycles 78--79 retired the Weil-spline tactic after proving that
   nested generalized Schur positivity is exactly the Weil criterion on a dense

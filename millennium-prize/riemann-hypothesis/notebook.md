@@ -13,6 +13,15 @@ and real PNT-error formulas. The signed Laguerre transform of `psi(x)-x` is the
 uniform bottleneck. A rigorous Arb script certifies only finite initial
 inequalities. No RH result is claimed.
 
+## Main-funnel cycle 80
+
+The Li kernel has an exact Blaschke-form Laplace transform, but its positive
+Hermitian square lies on the wrong line and first differences retain an
+oscillatory phase. Selberg symmetry gives a signed, non-separable transform;
+Laguerre recurrence leaks into an infinite signed-moment hierarchy. The tactic
+is retired after finite Arb certification through `n=10000`. No RH result is
+claimed.
+
 ## Tick 1 — exact finite enclosure lemma
 
 Fix integers `N >= 3` and `Q >= N`, and set `epsilon=1/Q`. Define `c_a` and
