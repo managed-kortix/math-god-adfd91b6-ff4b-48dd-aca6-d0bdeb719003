@@ -5,12 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after collision and Koszul gates
-- **active main funnel:** selection review.  The flat doubled-plane pencil
-  collision fails containment in the characteristic-two Fermat fiber by an
-  exact 34-term remainder.  The fixed alpha-visible plane's unrestricted graded
-  `4|4` Koszul factorization also has rank jump `9 -> 10`, recovering the same
-  scalar obstruction as the embedded normal gate.
+- **phase:** portfolio rotation after exact Kurihara production certificate
+- **active main funnel:** selection review.  For `433a1`, `p=7`, and
+  `n=29*113`, exact plus modular symbols give the nonzero two-prime Kurihara
+  value `3 mod 7`.  Published Selmer-structure theory plus independent rank two
+  yields `Sha[7^infty]=0`; this is a new replayable computational instance, not
+  a new BSD theorem.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 134
+- **cycle:** 135
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +175,19 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 135 produced an exact positive arithmetic certificate.
+  For `433a1: y^2+xy=x^3+1`, `p=7`, primitive roots `2 mod 29` and `3 mod 113`,
+  exact PARI plus modular symbols over all 3136 units give
+  `delta_(29*113)=3 mod 7`.  Point counts certify `a_7=-3` and
+  `a_29=a_113=2`; the auxiliary cyclotomic ideals have exact 7-adic valuation
+  one.  Kim's published theorem gives Selmer corank at most two; independent
+  rank two and the unit Kurihara value yield
+  `Sel(Q,E[7^infty])=(Q_7/Z_7)^2` and `Sha[7^infty]=0` under the audited
+  surjectivity/Manin hypotheses.  A GP generator and dependency-free compact
+  verifier reproduce the certificate.  This exact curve-prime computation
+  appears unprinted, but the theorem and consequence mechanism are prior work;
+  it is calibration/data rather than a Millennium advance.
 
 - 2026-07-30: Cycle 134 closed two canonical Hodge continuations.  The ambient
   flat collision `s(s+U)^2` has fundamental cycle `[L_A]+2[L_B]` and remains
