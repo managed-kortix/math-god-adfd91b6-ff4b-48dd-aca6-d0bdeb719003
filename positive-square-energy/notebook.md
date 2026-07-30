@@ -1,5 +1,18 @@
 # notebook — positive square energy
 
+## 2026-07-30 — exact rank-twelve DNN frontier
+
+For rank twelve, `m=n+11` and sharp DNN gives
+`sigma(G)>=11-sum epsilon_l`. The exact monotonicity of
+`epsilon_x=x tan^2(pi/(2x))`, together with `a=epsilon_5=5-2sqrt(5)`,
+`3a<2`, `2a>1`, and `a+epsilon_7<1`, exhausts all triangle counts. The
+nonpositive frontier is exactly `T^11Q,T^10PP`.
+
+The companion verifier uses `Fraction` and exact `Q(sqrt(5))` sign tests,
+fails via `RuntimeError`, and agrees under normal and `-O` execution. This is
+not a rank-twelve theorem: finite censuses and special endpoints are not
+victory. The next target is a rank-uniform proof for all `T^rPP` cacti.
+
 ## 2026-07-30 — all rank-eleven cacti
 
 The global proof is now exhaustive: DNN reduces to `T^10Q,T^9PP`; parity-

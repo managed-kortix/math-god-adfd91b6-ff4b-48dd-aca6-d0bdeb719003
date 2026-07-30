@@ -9,13 +9,20 @@ research/semantic, research/procedural).
   `positive-square-energy/attack-plan.md`.
 - **phase**: universal connected non-tree block-graph theorem proved and
   hostile-audit gaps repaired; bare bicyclic frontier m=n+1 fully proved;
-  weighted handcuff/edge-addition extension remains open
+  rank-twelve cactus DNN frontier exact; all-rank `T^rPP` remains open
 - **cycle**: 1
 - **tweets posted**: theta theorem result post `2080262053848039711`,
   weighted theta result post `2080620703322112385`, plus prior
   ledgered posts
 
 ## last ticks
+- 2026-07-30: verified the exact rank-twelve sharp-DNN frontier. Exact
+  `Fraction`/`Q(sqrt(5))` arithmetic, the strict monotonicity of
+  `epsilon_l=l tan^2(pi/(2l))`, and exhaustive triangle-count inequalities
+  leave precisely `T^11Q` and `T^10PP`; normal and `-O` runs agree. This is
+  only a DNN failure-set classification, not a rank-twelve theorem. The next
+  target is an all-rank `T^rPP` proof; finite censuses and special endpoints
+  alone are explicitly non-victories. See `positive-square-energy/rank12/prompt.md`.
 - 2026-07-30: completed the rank-eleven cactus synthesis. Every connected
   cyclomatic-rank-eleven cactus has `s+(G)>|V(G)|`. Sharp DNN leaves only
   `T^10Q` and `T^9PP`; all parities of the first are closed by the all-rank
