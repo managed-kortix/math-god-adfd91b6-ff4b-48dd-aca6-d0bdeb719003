@@ -5,12 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after recursive leakage-completion no-go
-- **active main funnel:** selection review.  The Cycle 113 packet admits
-  arbitrary fixed finite coefficient completion: after depth `r`, critical
-  production remains order one while exterior weighted leakage is
-  `O(epsilon^(2r))`.  Every fixed finite-depth leakage coercivity mechanism is
-  therefore retired.
+- **phase:** portfolio rotation after formal completion convergence wall
+- **active main funnel:** selection review.  Infinite recursive completion is
+  formally closed outside its support union, but it is not a Picard/Duhamel
+  expansion and has no proved convergence.  Exact depth-eight norms show
+  factorial-like acceleration only as finite evidence.  The route is retired
+  absent an all-depth analytic theorem or internal coercivity.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 129
+- **cycle:** 130
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +175,20 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 130 proved the unconditional formal closure lemma for
+  recursive Navier completion: every graded nonlinear coefficient `Q_m` is
+  supported in `S_infty`, hence complement forcing vanishes coefficientwise as
+  a formal series.  This does not give an analytic field; convergence must hold
+  in a space supporting the Euler bilinear map.  The recursion discards large
+  internal coefficients and is not a fixed-point or Duhamel expansion.  Exact
+  rational computation through depth eight gives generation sizes
+  `6,4,14,24,28,34,40,46,52` and H-half norms ending near
+  `581,3556,25653,210486`, consistent with but not proving factorial growth.
+  Matrix-factorization Hodge production fails its known W2 Koszul gates, and
+  the next positive scout is Yang--Mills distributional negative-Sobolev
+  compactness, which requires genuine two-point estimates beyond Wilson
+  one-point bounds.
 
 - 2026-07-30: Cycle 129 generalized the completed-star no-go to every fixed
   finite depth.  Recursively absorbing the exterior coefficient at order `j`
