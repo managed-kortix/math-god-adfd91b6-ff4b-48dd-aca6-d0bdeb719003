@@ -1,0 +1,215 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\splus}{s^+}
+\newcommand{\sminus}{s^-}
+\newcommand{\sig}{\sigma}
+\newcommand{\one}{\mathbf 1}
+
+\title{Positive Square Energy of Every Cyclomatic-Rank-Thirteen Cactus}
+\author{AI-generated manuscript; no human author is claimed}
+\date{30 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove that every connected cactus $G$ of cyclomatic rank thirteen on $n$
+vertices satisfies $s^+(G)>n$.  The sharp cactus doubly nonnegative formula
+leaves exactly the cycle multisets $T^{12}Q$ and $T^{11}PP$, where
+$T=C_3$, $P=C_5$, and $Q$ is an arbitrary cycle.  Existing all-rank hostile
+and nonhostile one-cycle theorems close the first family for every parity of
+$Q$, and the existing all-rank two-pentagon theorem closes the second.  We
+give the new exact frontier calculation and cite, rather than duplicate, the
+three rank-uniform structural proofs.
+\end{abstract}
+
+\section{Sharp DNN bound and exact frontier}
+
+All graphs are finite, simple, and undirected.  A cactus is connected and has
+only bridge or cycle blocks; its cyclomatic rank is the number of cycle blocks.
+For adjacency eigenvalues $\lambda_1,\ldots,\lambda_n$, put
+\[
+ \splus(G)=\sum_{\lambda_i>0}\lambda_i^2,
+ \qquad
+ \sminus(G)=\sum_{\lambda_i<0}\lambda_i^2,
+ \qquad
+ \sig(G)=\splus(G)-|V(G)|.
+\]
+
+For an edge-containing graph define
+\[
+ \kappa(G)=\sup_{\substack{M\succeq0,\ M\geq0\\\one^TM\one>0}}
+ \frac{4\bigl(\sum_{uv\in E(G)}\sqrt{M_{uv}}\bigr)^2}
+      {\one^TM\one}.
+\]
+The sharp cactus DNN theorem~\cite{DNN,LTZ} states that if a cactus has $b$
+bridge blocks and cycle blocks $C_{\ell_1},\ldots,C_{\ell_r}$, then
+\begin{equation}\label{eq:kappa}
+ \sminus(G)\leq\kappa(G)
+ =b+\sum_{i=1}^r\kappa(C_{\ell_i}),
+ \qquad
+ \kappa(C_\ell)=
+ \begin{cases}
+  \ell,&\ell\text{ even},\\
+  \ell\sec^2\!\bigl(\pi/(2\ell)\bigr),&\ell\text{ odd}.
+ \end{cases}
+\end{equation}
+Set
+\[
+ \epsilon_\ell=
+ \begin{cases}
+  0,&\ell\text{ even},\\
+  \ell\tan^2\!\bigl(\pi/(2\ell)\bigr),&\ell\text{ odd}.
+ \end{cases}
+\]
+For rank thirteen, $|E(G)|=n+12$ and block counting gives
+$b+\sum_i\ell_i=n+12$.  Since
+$\splus(G)+\sminus(G)=2|E(G)|$, equation~\eqref{eq:kappa} yields
+\begin{equation}\label{eq:surplus}
+ \boxed{\sig(G)\geq12-\sum_{i=1}^{13}\epsilon_{\ell_i}.}
+\end{equation}
+
+\begin{proposition}[Exact rank-thirteen frontier]\label{prop:frontier}
+The right side of~\eqref{eq:surplus} is nonpositive exactly for
+\[
+ \boxed{T^{12}Q}\quad(q\geq3,\text{ including }Q=T),
+ \qquad
+ \boxed{T^{11}PP}.
+\]
+Every other rank-thirteen cycle multiset has positive surplus.
+\end{proposition}
+
+\begin{proof}
+For real $x\geq3$, $\epsilon_x=x\tan^2(\pi/(2x))$ decreases strictly.  Indeed,
+with $u=\pi/(2x)$, the derivative of $\tan^2u/u$ has the sign of
+$2u-\sin u\cos u>0$.  Thus every nontriangle contributes at most
+\[
+ a:=\epsilon_5=5-2\sqrt5.
+\]
+The exact comparisons needed below are
+\begin{equation}\label{eq:exact}
+ 0<a<1,\qquad3a<2,\qquad2a>1,
+ \qquad a+\epsilon_7<1.
+\end{equation}
+After moving radicals to positive sides, the squaring certificates are
+$20<25$, $4<5$, $169<180$, and $80<81$.  For the last inequality,
+$\cos(\pi/7)>2159/2401>7/8$ gives $\epsilon_7<7/15$, while
+$7/15<2\sqrt5-4=1-a$ follows from $4489<4500$.
+
+Let $t$ be the number of triangles.  If $t\leq10$, monotonicity and
+\eqref{eq:exact} give
+$\sum_i\epsilon_{\ell_i}\leq10+3a<12$.  If $t=11$, the two nontriangles
+contribute less than one when one is even, or when their odd lengths are not
+both five, since then their sum is at most $a+\epsilon_7<1$.  The unique
+remaining pair is $PP$, and $11+2a>12$.  If $t\geq12$, the multiset is
+$T^{12}Q$ and its excess sum is $12+\epsilon_q\geq12$.  These cases are
+exhaustive.  The exact note and fail-closed arithmetic verifier independently
+freeze this classification~\cite{Frontier}.
+\end{proof}
+
+\section{Closure of the frontier}
+
+\begin{proposition}\label{prop:onecycle}
+Every connected cactus whose cycle blocks are twelve triangles and one cycle
+$Q=C_q$ satisfies $\splus(G)>|V(G)|$.
+\end{proposition}
+
+\begin{proof}
+If $q\equiv1\pmod4$, then $q\geq5$ and the all-rank
+triangle--hostile-cycle theorem applies~\cite{Hostile}.  If $q$ is even or
+$q\equiv3\pmod4$, the all-rank nonhostile one-cycle theorem applies
+\cite{Nonhostile}.  These alternatives exhaust every integer $q\geq3$, and the
+nonhostile theorem explicitly includes $q=3$.  Both theorems allow arbitrary
+shared cuts, bridge connectors, and finite tree attachments.
+\end{proof}
+
+\begin{proposition}\label{prop:twopent}
+Every connected cactus whose cycle blocks are eleven triangles and two
+pentagons satisfies $\splus(G)>|V(G)|$.
+\end{proposition}
+
+\begin{proof}
+This is the all-rank two-pentagon theorem~\cite{TwoPent}, specialized to
+$r=11$.  Its statement permits arbitrary cactus incidence, bridge lengths and
+branching, and arbitrary finite tree attachments.
+\end{proof}
+
+\begin{theorem}\label{thm:main}
+Every connected cyclomatic-rank-thirteen cactus $G$ on $n$ vertices satisfies
+\[
+ \boxed{\splus(G)>n}.
+\]
+\end{theorem}
+
+\begin{proof}
+Outside the two families in Proposition~\ref{prop:frontier}, strict positivity
+follows immediately from~\eqref{eq:surplus}.  Proposition~\ref{prop:onecycle}
+closes $T^{12}Q$ for every parity of $Q$, and Proposition~\ref{prop:twopent}
+closes $T^{11}PP$.  The frontier classification is exhaustive.
+\end{proof}
+
+\section{Reproduction, scope, and disclosure}
+
+From the repository root, reproduce the exact frontier audit with Python 3.10
+or newer:
+\begin{verbatim}
+python3 research/rank-thirteen-cactus-dnn-residual-frontier-verifier.py
+python3 -O research/rank-thirteen-cactus-dnn-residual-frontier-verifier.py
+\end{verbatim}
+Both runs report the certificate SHA-256 digest
+\begin{center}
+\texttt{afed9ecb78b7def1cf0daf14655730e64f52fe59a1e8a38f1b9f115b5aecce76}.
+\end{center}
+The SHA-256 digest of the verifier file itself is
+\begin{center}
+\texttt{7da0684ff251c57a6832c5ce5077c76105af3d116eb30532f54007c2a5ec7fa9}.
+\end{center}
+The verifier also rejects four hostile mutations.  It certifies only the
+sharp-DNN frontier; positivity on the residual families comes from the cited
+all-rank manuscripts.
+
+\paragraph{Scoped nonclaim.}
+This paper proves only the stated result for finite simple connected cacti of
+cyclomatic rank thirteen.  It does not claim the positive-square-energy
+conjecture for all graphs, a theorem for arbitrary cactus rank, or a result for
+non-cactus block intersections.  The two-pentagon theorem makes no claim for
+three pentagons.
+
+\section*{AI disclosure}
+This manuscript was generated and assembled by an AI coding and mathematical
+reasoning system from the cited repository manuscripts, note, and exact
+verifier.  No human authorship, review, or verification is claimed.  The result
+should be assessed from the displayed reduction and cited proof objects.
+
+\begin{thebibliography}{99}
+\bibitem{LTZ} Y.~Liu, Q.~Tang, and S.~Zhang,
+\emph{The positive and negative square-energy conjecture}, arXiv:2607.18031,
+2026.
+
+\bibitem{DNN} Companion manuscript, \emph{The Optimized Liu--Tang--Zhang
+Constant for Cactus Graphs}, 2026; \path{sharp-cactus-dnn/paper.tex}.
+
+\bibitem{Frontier} \emph{Exact rank-thirteen cactus DNN residual frontier},
+30 July 2026;
+\path{research/rank-thirteen-cactus-dnn-residual-frontier-2026-07-30.md} and
+\path{research/rank-thirteen-cactus-dnn-residual-frontier-verifier.py}.
+
+\bibitem{Hostile} Companion manuscript, \emph{Cacti with Arbitrarily Many
+Triangles and One Hostile Cycle}, 2026;
+\path{all-rank-triangle-hostile-cacti/paper.tex}.
+
+\bibitem{Nonhostile} \emph{All-rank nonhostile one-cycle cactus theorem},
+30 July 2026;
+\path{research/all-rank-nonhostile-one-cycle-theorem-2026-07-30.md}.
+
+\bibitem{TwoPent} Companion manuscript, \emph{Positive Square Energy for Cacti
+with Triangles and Two Pentagons}, 2026;
+\path{all-rank-triangle-two-pentagon-cacti/paper.tex}.
+\end{thebibliography}
+
+\end{document}

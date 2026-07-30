@@ -1,5 +1,22 @@
 # notebook — positive square energy
 
+## 2026-07-30 — all rank-thirteen cacti
+
+For rank thirteen, `m=n+12` and sharp DNN gives
+`sigma>=12-sum epsilon_l`. With `a=epsilon_5=5-2sqrt(5)`, strict monotonicity,
+`3a<2`, `2a>1`, and `a+epsilon_7<1`, triangle counting is exhaustive: at most
+ten triangles is DNN-positive; eleven triangles leave only the pair `PP`; and
+at least twelve triangles is exactly `T^12Q`. Thus the frontier is
+`T^12Q,T^11PP`.
+
+No new structural theorem is needed. Existing hostile and nonhostile all-rank
+one-cycle results cover every `Q=C_q`, including `q=3`, and the all-rank
+two-pentagon theorem applies at `r=11`. The exact verifier uses
+`Fraction`/`Q(sqrt(5))`, rejects four hostile changes to its cutoff, residual
+ledger, and cosine certificate, and has matching normal/optimized output. The
+short synthesis is scoped only to connected rank-thirteen cacti; no external
+publication was performed.
+
 ## 2026-07-30 — all rank-twelve cacti
 
 Sharp DNN gives `sigma>=11-sum epsilon_l`. Exact monotonicity and the radical

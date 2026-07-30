@@ -194,6 +194,13 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     `all-rank-twelve-cacti/paper.tex`. Next apply the publication workflow to
     the two verified results (all-rank `T^rPP` and rank twelve) without OCB
     resolution overclaim, then derive the exact rank-thirteen DNN frontier.
+35. Rank thirteen is complete. Sharp DNN gives `sigma>=12-sum epsilon_l`, and
+    the exact fail-closed frontier is `T^12Q,T^11PP`. The complementary
+    all-rank one-cycle results close every parity of `Q`, including `q=3`, and
+    the all-rank two-pentagon theorem closes `T^11PP` at `r=11`. The
+    authoritative synthesis is `all-rank-thirteen-cacti/paper.tex`; its
+    verifier rejects four hostile mutations and agrees normally and under
+    `python -O`. Do not infer an all-rank cactus theorem from this synthesis.
 33. Rank twelve now has an exact fail-closed sharp-DNN frontier:
     `T^11Q,T^10PP`. The one-`Q` branch is covered by the all-rank parity
     theorems, but this frontier calculation is not a rank-twelve proof. Follow
