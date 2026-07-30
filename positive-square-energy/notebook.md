@@ -1,5 +1,15 @@
 # notebook — positive square energy
 
+## 2026-07-30 — all rank-twelve cacti
+
+Sharp DNN gives `sigma>=11-sum epsilon_l`. Exact monotonicity and the radical
+comparisons `3 epsilon_5<2`, `2 epsilon_5>1`, and
+`epsilon_5+epsilon_7<1` leave only `T^11Q` and `T^10PP`. The first is closed
+for every parity of Q by the complementary all-rank one-cycle theorems; the
+second is now an immediate specialization of all-rank `T^rPP`. Thus every
+connected rank-twelve cactus is strict. Both independent audits reproduced the
+frontier and accepted the three-page synthesis.
+
 ## 2026-07-30 — all-rank `T^rPP`
 
 The winning move was to take a maximum packing of triangles before any bridge

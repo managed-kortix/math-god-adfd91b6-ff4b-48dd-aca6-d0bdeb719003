@@ -16,6 +16,13 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-30: completed rank twelve. Every connected cyclomatic-rank-twelve
+  cactus satisfies `s+(G)>|V(G)|`. The exact sharp-DNN frontier is only
+  `T^11Q,T^10PP`; all `T^11Q` parities are covered by the hostile/nonhostile
+  all-rank one-cycle theorems, and `T^10PP` is the `r=10` case of the new
+  all-rank two-pentagon theorem. The concise paper and PDF are in
+  `all-rank-twelve-cacti/`. Two independent ultimate audits accepted the proof,
+  exact frontier verifier, dependency scopes, digests, and rebuilt PDF.
 - 2026-07-30: proved the all-rank two-pentagon theorem: every connected cactus
   with `r>=1` triangles and exactly two pentagons has `sigma>0`, for arbitrary
   shared cuts, bridge trees, and attached forests. The key order is maximum-

@@ -190,6 +190,10 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     `T^10PP`, both all-rank families are closed. Next synthesize the short
     rank-twelve cactus paper, audit dependency scopes, build PDF, and publish
     only after definitive acceptance.
+34. Rank twelve is complete and independently accepted. Authoritative paper:
+    `all-rank-twelve-cacti/paper.tex`. Next apply the publication workflow to
+    the two verified results (all-rank `T^rPP` and rank twelve) without OCB
+    resolution overclaim, then derive the exact rank-thirteen DNN frontier.
 33. Rank twelve now has an exact fail-closed sharp-DNN frontier:
     `T^11Q,T^10PP`. The one-`Q` branch is covered by the all-rank parity
     theorems, but this frontier calculation is not a rank-twelve proof. Follow
