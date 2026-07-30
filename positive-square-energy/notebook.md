@@ -1,5 +1,23 @@
 # notebook — positive square energy
 
+## 2026-07-30 — post-cactus frontier: attached theta cores
+
+Every connected bicyclic graph has either a cactus kernel or a theta kernel.
+Only the latter with forests attached at multiple core vertices remains. Exact
+matching-message elimination gives activities `a_v=t+sum 1/q`, positive branch
+factors, path continuants `d_j`, and a two-terminal carrier
+`W=pq-b^2`, `b=u+iv`. Continuant minors prove
+`Re W=pq-u^2+v^2>0`; hence no phase winding. The signed-energy target is exactly
+the phase-area inequality `integral t Arg(W)<=pi/2`.
+
+Path residues split into 12 nonbipartite mod-four channels: four have `uv>=0`
+pointwise, four `uv<0`, and four reduce to one cancellation such as
+`1/d_r-1/d_s`. Attachments decrease transfers but do not preserve cancellation
+signs. Direct bare-theta pointwise domination fails at genuine leaf messages
+(`t=1/4`), as do surplus monotonicity under one leaf and host-independent star
+extremality. The remaining proof must be integrated and use realizable message
+recurrences.
+
 ## 2026-07-30 — every nonunicyclic cactus
 
 For arbitrary cyclomatic rank `k>=2`, sharp cactus DNN gives

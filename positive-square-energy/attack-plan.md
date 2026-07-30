@@ -194,6 +194,12 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     `all-rank-twelve-cacti/paper.tex`. Next apply the publication workflow to
     the two verified results (all-rank `T^rPP` and rank twelve) without OCB
     resolution overclaim, then derive the exact rank-thirteen DNN frontier.
+35. The uniform frontier synthesis now proves every connected cactus with at
+    least two cycles. The next sharp sparse class is every connected bicyclic
+    graph. Reduce to theta 2-core plus arbitrary multi-root forests and attack
+    the exact right-half-plane continuant kernel in
+    `positive-square-energy/bicyclic-theta/prompt.md`. Do not return to lossy
+    multi-diagonal weighted cores or false attachment monotonicity.
 35. Rank thirteen is complete. Sharp DNN gives `sigma>=12-sum epsilon_l`, and
     the exact fail-closed frontier is `T^12Q,T^11PP`. The complementary
     all-rank one-cycle results close every parity of `Q`, including `q=3`, and

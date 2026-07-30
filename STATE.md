@@ -17,6 +17,18 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-30: after completing all nonunicyclic cacti, selected the exact next
+  frontier: all connected bicyclic graphs. Cactus bicyclic kernels are done;
+  the only missing family is a simple theta 2-core with arbitrary forests
+  attached at multiple core vertices. Tree-message elimination reduces it
+  losslessly to `W=pq-(u+iv)^2` with `Re W>0`, so winding is absent and the
+  theorem is equivalent to one continuant phase-area bound `<=pi/2`. Mod-four
+  analysis leaves four one-dimensional cancellation channels. Hostile searches
+  killed attachment-surplus monotonicity, star extremality for actual surplus,
+  separable diagonal penalties, and pointwise comparison to the bare theta.
+  No numerical counterexample exists in extensive searches; the observed
+  infimum is the bare `Theta(2,2,3)` surplus about `.698`. See
+  `positive-square-energy/bicyclic-theta/prompt.md`.
 - 2026-07-30: completed the all-nonunicyclic cactus theorem. For every rank
   `k>=2`, sharp DNN gives `sigma>=k-1-sum epsilon_l`; a constant-size exact
   argument leaves precisely `T^(k-1)Q,T^(k-2)PP`. Hostile/nonhostile all-rank
