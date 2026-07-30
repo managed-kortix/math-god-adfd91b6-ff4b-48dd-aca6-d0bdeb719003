@@ -5,12 +5,11 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after Yang--Mills loop-modulus UV gate
-- **active main funnel:** selection review.  Bare Wilson loops have only
-  logarithmic one-plaquette continuity and Gaussian nearby-contour
-  decorrelation from perimeter/cusp ultraviolet noise; renormalized loops lose
-  automatic boundedness and the proposed loop compactness criterion was also
-  insufficient for a complete OS local theory.
+- **phase:** portfolio rotation after completed triad-star leakage no-go
+- **active main funnel:** selection review.  Completing the first-generation
+  support does not make exterior leakage coercive: an exact epsilon-family has
+  order-one critical production and exterior weighted launch norm squared
+  `O(epsilon^2)`, so every universal flux/leakage constant diverges.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 124
+- **cycle:** 125
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +174,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 125 retired Navier complete-star leakage coercivity.  The
+  Cycle 113 core augmented by epsilon times all four launch modes has exact
+  `E_half=8+6sqrt(2)+(44sqrt(5)/5)epsilon^2`, order-one
+  `Phi_half`, and exterior `Lambda_half=A epsilon^2+B epsilon^4` with positive
+  explicit radical coefficients.  Hence `Phi_half^2/(E_half Lambda_half)`
+  diverges like a positive constant times `epsilon^-2`.  A fail-closed
+  dependency-free verifier reconstructs all 100 ordered pairs and includes the
+  order-epsilon internal corrections.  Decision-tree MCSP grids were weaker
+  than sparse-ball interpolation, the BSD `S_3` packet lacked a determinant
+  theorem, and no distinguished Hodge collective Chow lift was produced.
 
 - 2026-07-30: Cycle 124 tested and retired Yang--Mills bare-loop compactness.
   Exact plaquette insertion gives `|Delta W|^2<=2(1-W_p)`, only
