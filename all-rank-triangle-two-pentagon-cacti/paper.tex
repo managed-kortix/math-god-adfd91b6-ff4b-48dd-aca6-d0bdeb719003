@@ -1,0 +1,683 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\splus}{s^+}
+\newcommand{\sminus}{s^-}
+\newcommand{\sig}{\sigma}
+\newcommand{\D}{D}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\T}{\mathsf T}
+\newcommand{\Pp}{\mathsf P}
+
+\title{Positive Square Energy for Cacti with Triangles and Two Pentagons}
+\author{AI-generated manuscript; no human author is claimed}
+\date{30 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $G$ be a connected cactus whose complete cyclic blocks are $r\geq1$
+triangles and exactly two pentagons.  Shared cut vertices, bridge connectors of
+arbitrary length and branching, and arbitrary finite trees attached at
+arbitrary vertices are all allowed.  We prove
+\[
+  \splus(G)>|V(G)|.
+\]
+The proof applies maximum-triangle Voronoi to the original graph before any
+bridge cut.  Every resulting territory has triangle-packing number one.  We
+give a self-contained Sachs--Coulson proof of the required one-pentagon local
+estimate with unrestricted incidence and ports.  A well-founded actual-bridge
+induction reduces a territory retaining both pentagons to one shared-cut
+cluster.  Its incidence tree has exactly seven structural forms; common-cut
+and rooted two-pentagon hinge theorems handle three forms, and explicit
+physical interval ownership handles the others.  Every cut, fragment,
+connector remnant, and attached tree receives exactly one owner.
+\end{abstract}
+
+\section{Statement, notation, and established packet inputs}
+
+All graphs are finite, simple, and undirected.  For the adjacency eigenvalues
+$\lambda_1,\ldots,\lambda_n$ of a graph $H$, put
+\[
+ \splus(H)=\sum_{\lambda_j>0}\lambda_j^2,
+ \qquad
+ \sminus(H)=\sum_{\lambda_j<0}\lambda_j^2,
+ \qquad
+ \sig(H)=\splus(H)-|V(H)|,
+\]
+and write $\D(H)=\splus(H)-\sminus(H)$.  A cactus is a graph whose blocks are
+bridges, isolated vertices, or cycles.  Throughout, $\T=C_3$, $\Pp=C_5$, and
+\[
+ \delta=\sqrt5-2.
+\]
+A ``complete cycle'' in an induced subgraph means a cyclic block retained in
+its entirety; a proper fragment of a cycle is only a forest.
+
+\begin{theorem}\label{thm:main}
+Let $G$ be a connected cactus whose complete cyclic blocks are $r\geq1$
+triangles and exactly two copies of $C_5$.  The cyclic blocks may meet at cut
+vertices in arbitrary cactus incidence, distinct cyclic clusters may be joined
+by arbitrary bridge trees, and arbitrary finite trees may be attached at every
+vertex.  If $n=|V(G)|$, then
+\[
+ \boxed{\splus(G)>n}.
+\]
+\end{theorem}
+
+We use the following proved packet results.  They are stated in precisely the
+tree-uniform forms needed here; their sources are listed at the end.
+
+\begin{lemma}[Packet inputs]\label{lem:inputs}
+The following assertions hold with arbitrary finite tree attachments.
+\begin{enumerate}
+\item\label{in:super} If $V(H)=V_1\dot\cup\cdots\dot\cup V_k$, then
+\[
+ \splus(H)\geq\sum_j\splus(H[V_j]),
+ \qquad
+ \sig(H)\geq\sum_j\sig(H[V_j]).
+\]
+\item\label{in:tri} If a connected cactus has $b\geq1$ triangular cyclic
+blocks, no other complete cycles, and no two vertex-disjoint triangles, then
+\[
+ \sig(H)>b-1\geq0.
+\]
+\item\label{in:pents} A connected unicyclic pentagonal cactus has
+$\sig(H)\geq-\delta$.  A connected cactus whose only complete cycles are two
+pentagons has $\sig(H)\geq0$.
+\item\label{in:common} If $b\geq1$ triangles and two pentagons all contain one
+common cut vertex, then
+\[
+ \sig(H)>b+1-\frac4{3\sqrt{13}}>0.
+\]
+\item\label{in:small} Every connected tricyclic cactus has nonnegative
+surplus, and every $\T\Pp\Pp$ cactus has positive surplus.  The rank-four and
+rank-five packets $\T^2\Pp\Pp$ and $\T^3\Pp\Pp$ also have positive surplus.
+\item\label{in:hinge} Suppose two pentagons share a cut $x$, and a nonempty
+connected triangular cactus enters at one vertex $y$ of the first pentagon
+through one interface, where $y=x$ is allowed.  Then the resulting rooted
+two-pentagon hinge has positive surplus.
+\end{enumerate}
+\end{lemma}
+
+For completeness, item~\ref{in:super} follows from the variational formula
+\[
+ \tr(A_+^2)=\max_{X\succeq0}
+ \bigl(2\tr(AX)-\tr(X^2)\bigr).
+\]
+Order the vertices by the partition and test with the positive spectral part
+of the block-diagonal matrix having diagonal blocks $A(H[V_j])$.  Off-block
+entries make no trace contribution, proving the first inequality; subtracting
+$\sum_j|V_j|=|V(H)|$ proves the second.  Items
+\ref{in:tri}--\ref{in:hinge} are the common-cut, hinge, and low-rank companion
+theorems cited in Section~\ref{sec:dependencies}.  The new estimate required
+for this proof is Lemma~\ref{lem:L}; unlike an earlier one-interface packet,
+it permits any number of pentagonal ports.
+
+\section{Voronoi first}\label{sec:voronoi}
+
+Choose a maximum-cardinality family
+$\T_1,\ldots,\T_m$ of pairwise vertex-disjoint triangles in the original
+graph $G$.  Assign each vertex $v$ to the index minimizing lexicographically
+\[
+ \bigl(d_G(v,V(\T_i)),i\bigr),                              \tag{2.1}
+\]
+and let $G_i$ be induced by the vertices assigned to $i$.
+
+\begin{lemma}[Maximum-triangle Voronoi territories]\label{lem:voronoi}
+The sets $V(G_i)$ form an exhaustive induced vertex partition.  Every $G_i$
+is connected, contains the whole selected triangle $\T_i$, and contains no
+two vertex-disjoint retained triangles.
+\end{lemma}
+
+\begin{proof}
+Certainly every vertex has exactly one owner.  Every vertex of $\T_i$ has
+distance zero from $\T_i$; disjointness of the selected family makes $i$ its
+unique zero-distance owner, so $\T_i$ is retained wholly.
+
+Here is the owner detail needed for connectivity.  Suppose $v$ has owner $i$
+and $u$ is the predecessor of $v$ on a shortest path from $v$ to $\T_i$.
+Then $d_i(u)=d_i(v)-1$.  For every $j$, one-Lipschitzness gives
+$d_j(u)\geq d_j(v)-1$.  Since $(d_i(v),i)\leq(d_j(v),j)$ lexicographically,
+it follows that
+\[
+ (d_i(u),i)=(d_i(v)-1,i)\leq(d_j(u),j).
+\]
+Thus $u$ has the same owner as $v$.  Iterating reaches $\T_i$ inside $G_i$,
+so $G_i$ is connected.  This also clarifies that fixed priority is used only
+to resolve equal distances consistently; it does not reassign an anchor after
+the fact.
+
+If $G_i$ contained vertex-disjoint triangles $D,E$, then
+\[
+ D,E,\{\T_j:j\ne i\}
+\]
+would be a triangle packing larger than the chosen one.  The two triangles
+$D,E$ replace $\T_i$; they need not be disjoint from it.  This is why the
+packing must be maximum, not merely maximal.
+\end{proof}
+
+An induced subgraph of a cactus creates no new cycle.  Therefore a triangle or
+pentagon split among owners contributes only forest fragments; in particular,
+a proper pentagon fragment is a path, never a new $\Pp$ packet.  A fragment may
+lie on the minimal hull between retained cycles or hang off it, and both roles
+are allowed as forest structure in the packet statements.  Every original
+off-hull tree component has one actual anchor and follows the owner of that
+anchor.  Thus no physical vertex is discarded, no fragment is promoted to a
+complete cycle, and no attached tree is duplicated.
+
+Classify $G_i$ by the number of complete pentagons it retains.
+\begin{itemize}
+\item A $0\Pp$ territory retains $b\geq1$ triangles and has triangle-packing
+number one, so Lemma~\ref{lem:inputs}\ref{in:tri} makes it strict.
+\item A $1\Pp$ territory retains $a\geq1$ packing-one triangles and is
+positive by Lemma~\ref{lem:L} below, irrespective of ports and bridge
+incidence.
+\item A $2\Pp$ territory retains both pentagons and $a\geq1$ packing-one
+triangles.  Sections~\ref{sec:bridges}--\ref{sec:H} prove it positive.
+\end{itemize}
+The territories are induced, disjoint, and exhaustive.  Consequently these
+three local assertions, followed by Lemma~\ref{lem:inputs}\ref{in:super}, prove
+the main theorem.
+
+\section{Lemma L: unrestricted packing-one one-pentagon packets}
+
+For a graph $F$ and positive vertex activities
+$\alpha=(\alpha_v)_{v\in V(F)}$, define the signless matching partition
+\[
+ Z_F(\alpha)=\sum_{M\text{ matching of }F}
+       \prod_{v\text{ unmatched by }M}\alpha_v,
+ \qquad
+ Z_F(t)=\sum_M t^{|V(F)|-2|M|}.
+\]
+Empty graphs have matching partition one.  Also normalize the characteristic
+polynomial by
+\[
+ \Psi_F(t)=i^{-|V(F)|}\det(itI-A(F))
+           =\prod_{j=1}^{|V(F)|}(t+i\lambda_j),\qquad t>0.
+\]
+Its continuous phase, tending to zero at infinity, is
+\[
+ \Theta_F(t)=\sum_j\arctan\frac{\lambda_j}{t}.
+\]
+
+\begin{lemma}[Signed Coulson identity]\label{lem:coulson}
+For every finite graph $F$,
+\[
+ \D(F)=-\frac4\pi\int_0^\infty t\Theta_F(t)\,dt.          \tag{3.1}
+\]
+\end{lemma}
+
+\begin{proof}
+For real $\lambda$,
+\[
+ \lambda|\lambda|=\frac2\pi\int_0^\infty
+       \frac{\lambda^3}{\lambda^2+t^2}\,dt.
+\]
+Moreover $\Theta_F'(t)=-\sum_j\lambda_j/(\lambda_j^2+t^2)$, and
+$\sum_j\lambda_j=\tr A(F)=0$ gives
+\[
+ \sum_j\frac{\lambda_j^3}{\lambda_j^2+t^2}
+ =t^2\Theta_F'(t).
+\]
+Sum the scalar identity and integrate by parts.  The boundary term vanishes:
+$t^2\Theta_F(t)\to0$ at zero, and the arctangent expansion gives
+$\Theta_F(t)=O(t^{-3})$ at infinity.  This also gives convergence and fixes
+the sign in~(3.1).
+\end{proof}
+
+\begin{lemma}[Lemma L]\label{lem:L}
+Let $H$ be a connected cactus whose complete cyclic blocks are one pentagon
+$Q=C_5$ and $a\geq1$ triangles.  Suppose no two retained triangles are
+vertex-disjoint.  Shared cuts, bridges, the number of occupied vertices of
+$Q$, and arbitrary finite tree attachments are unrestricted.  Then
+\[
+ \D(H)>-2\delta,
+ \qquad
+ \sig(H)>a-\delta>0.                                     \tag{L}
+\]
+\end{lemma}
+
+\begin{proof}
+Let the \emph{spine} $S_H$ be the union of all complete cyclic blocks and the
+unique minimal paths joining them.  Every component outside $S_H$ is a tree
+with one spine attachment; two attachments would create another cycle.
+
+Orient an off-spine branch toward the spine.  For an oriented edge $u\to v$,
+let $T_{u\to v}$ be the branch below $u$, including $u$.  Splitting matchings
+according to whether $u$ is unmatched or is matched to one child gives the
+exact message recursion
+\[
+ M_{u\to v}(t)=\frac{Z_{T_{u\to v}}(t)}
+                     {Z_{T_{u\to v}-u}(t)}
+ =t+\sum_{w\text{ child of }u}\frac1{M_{w\to u}(t)}\geq t. \tag{3.2}
+\]
+Starting with leaves and extracting the denominators in~(3.2) produces the
+same positive real factor $K(t)$ in every Sachs carrier and replaces the
+unmatched-vertex activity at each spine vertex by
+\[
+ \alpha_v(t)=t+y_v(t),\qquad y_v(t)\geq0.                 \tag{3.3}
+\]
+The common-factor statement remains true when a Sachs cycle deletes a spine
+vertex: the branch below it then contributes its already extracted full tree
+factor, while an available root contributes the corresponding reciprocal
+message.  Thus~(3.2)--(3.3) are an exact matching decomposition, not an
+attachment monotonicity assertion.
+
+We now derive the grouped Sachs formula.  For a collection $\mathcal C$ of
+pairwise vertex-disjoint cycles, normalized Sachs expansion gives
+\[
+ \frac{\Psi_H(t)}{K(t)}
+ =\sum_{\mathcal C}\prod_{C\in\mathcal C}(-2i^{-|C|})
+     Z_{S_H-V(\mathcal C)}(\alpha).                       \tag{3.4}
+\]
+Indeed, after the cycle components are fixed, all remaining elementary
+components form a matching; substitution at $it$ converts its alternating
+matching polynomial to the signless partition.  A triangle has multiplier
+$-2i$, while $Q=C_5$ has multiplier $+2i$.  Since no two triangles are
+disjoint, a Sachs collection contains at most one triangle.  A disjoint
+$Q$--triangle pair has multiplier $(2i)(-2i)=4$.  Therefore, exactly,
+\[
+ \frac{\Psi_H(t)}{K(t)}=R+2i(B-A),                        \tag{3.5}
+\]
+where, writing $S=V(Q)$,
+\begin{align*}
+ B&=Z_{S_H-S}(\alpha)>0,\\
+ A&=\sum_T Z_{S_H-V(T)}(\alpha)>0,\\
+ R&=Z_{S_H}(\alpha)
+   +4\sum_{T\cap Q=\varnothing}
+       Z_{S_H-(S\cup V(T))}(\alpha)>0.                   \tag{3.6}
+\end{align*}
+The sums run over retained triangles, and the last sum is zero if there is no
+triangle disjoint from $Q$.
+
+Nothing in~(3.5)--(3.6) assumes one port on $Q$.  Retain every shared cut of
+$Q$ in $S$.  Every edge from such a cut into another block, and every first
+edge of a bridge connector leaving $Q$, is then a boundary edge between $S$
+and $S_H-S$.  Partition matchings counted by $Z_{S_H}(\alpha)$ according to
+whether they use any such boundary edge.  Matchings using none factor, while
+all other weights are nonnegative.  Hence
+\[
+ Z_{S_H}(\alpha)=Z_Q(\alpha|_S)B+E,\qquad E\geq0.          \tag{3.7}
+\]
+Because each activity is at least $t$ and matching partitions have
+nonnegative coefficients,
+\[
+ Z_Q(\alpha|_S)=Z_5(t)+L,\qquad L\geq0,                   \tag{3.8}
+\]
+where $Z_5(t)$ is the bare $C_5$ matching partition.  Combining
+(3.5)--(3.8) in the displayed notation gives
+\begin{align*}
+ R-Z_5(t)(B-A)
+ &=E+LB+Z_5(t)A\\
+ &\quad+4\sum_{T\cap Q=\varnothing}
+       Z_{S_H-(S\cup V(T))}(\alpha)>0.                   \tag{3.9}
+\end{align*}
+The inequality is strict because $A>0$ and $Z_5(t)>0$.
+
+Since $K,R>0$, the continuous phase is the principal value
+\[
+ \Theta_H(t)=\arctan\frac{2(B-A)}R.
+\]
+The bare pentagon has normalized polynomial $Z_5(t)+2i$ and phase
+$\theta_5(t)=\arctan(2/Z_5(t))$.  If $B-A\leq0$, then
+$\Theta_H\leq0<\theta_5$.  If $B-A>0$, inequality~(3.9) gives
+$R>Z_5(t)(B-A)$ and again $\Theta_H<\theta_5$.  Thus the comparison is strict
+for every $t>0$.
+
+The eigenvalues of $C_5$ are $2\cos(2\pi j/5)$, $0\leq j<5$.  Its positive
+eigenvalues are $2$ and $(\sqrt5-1)/2$ twice, so
+\[
+ \splus(C_5)=7-\sqrt5,
+ \quad \sminus(C_5)=3+\sqrt5,
+ \quad \D(C_5)=4-2\sqrt5=-2\delta.                       \tag{3.10}
+\]
+Lemma~\ref{lem:coulson} and the strict phase comparison give
+$\D(H)>\D(C_5)=-2\delta$.  Finally, $H$ has $a+1$ cyclic blocks, hence
+$|E(H)|=|V(H)|+a$, and
+\[
+ \splus(H)+\sminus(H)=\tr A(H)^2=2|E(H)|.
+\]
+Averaging this identity with the bound on $\D(H)$ yields
+$\sig(H)>a-\delta>0$, proving~(L).
+\end{proof}
+
+The proof explicitly covers a pentagon sharing several distinct cuts with the
+packing-one triangular part and a pentagon separated from that part by an
+arbitrarily branching bridge tree.  No one-interface or common-cut
+classification is hidden in Lemma~\ref{lem:L}.
+
+\section{Well-founded actual-bridge induction}\label{sec:bridges}
+
+Fix a $2\Pp$ Voronoi territory $K$.  All its retained triangles have packing
+number one, a property inherited by every induced component obtained by
+cutting an actual bridge.
+
+A \emph{shared-cut cluster} is a maximal collection of complete cyclic blocks
+connected by successive shared cut vertices.  Contract each cluster support
+in the cactus block--cut tree.  Between distinct cluster nodes lies a nonempty
+chain of actual bridge blocks.  Consider only bridges on the minimal subtree
+spanning the cyclic clusters.  Cutting one such bridge gives two connected
+induced components, each containing a complete cycle.  Every unused connector
+segment, bridge-tree branch, cycle fragment, and off-hull tree remains on the
+side containing its actual anchor.  Complete cycles are recomputed in the
+physical components after each cut.
+
+\begin{proposition}[Actual-bridge reduction]\label{prop:bridge}
+Every $2\Pp$ packing-one territory with more than one shared-cut cluster has
+positive surplus, provided the same assertion holds for smaller $2\Pp$
+territories.
+\end{proposition}
+
+\begin{proof}
+Use lexicographic induction on
+\[
+ \mu(K)=(\text{number of complete cyclic blocks},
+          \text{number of shared-cut clusters}).          \tag{4.1}
+\]
+Only hull bridges whose two sides contain complete cycles are eligible.  If a
+cut leaves one terminal side and an active $\T^b\Pp\Pp$ side, the active side
+is missing every complete cycle on the terminal side.  Its first coordinate
+in~(4.1) is therefore strictly smaller.  Thus recursion cannot repeat the same
+instance, and connector-only branches cannot create an infinite or vacuous
+step.
+
+For an eligible bridge, the distribution of the two pentagons is exhaustive.
+\begin{enumerate}
+\item One side has no pentagon.  It is a nonempty triangular packing-one
+cactus and has nonnegative surplus, in fact strict by
+Lemma~\ref{lem:inputs}\ref{in:tri}.  If the opposite $2\Pp$ side retains a
+triangle, it is a smaller induction instance.  If it retains none, it is one
+connected $\Pp\Pp$ packet with nonnegative surplus, and the triangular side
+supplies strictness.
+
+\item One side is a bare one-pentagon packet.  The exact complete-cycle
+profile is
+\[
+ \Pp+\T^b\Pp,
+\]
+with $b\geq1$.  Lemma~\ref{lem:inputs}\ref{in:pents} and Lemma~\ref{lem:L}
+give
+\[
+ \sig(K)\geq-\delta+(b-\delta)=b-2\delta>0.              \tag{4.2}
+\]
+Lemma~\ref{lem:L} applies to the whole second component with its actual
+incidence, not to an imagined marked interface.
+
+\item One side is a pure connected $\Pp\Pp$ packet.  Keep it intact, with
+surplus at least zero.  The other side is a nonempty triangular packing-one
+cactus and is strict.  In particular, the two pentagons are not split into two
+adverse singleton charges.
+
+\item Each side contains one pentagon and at least one triangle.  Both are
+packing-one one-pentagon packets, so Lemma~\ref{lem:L} makes both positive.
+\end{enumerate}
+These are exactly the $0+2$ and $1+1$ pentagon distributions and their
+symmetric forms.  A side called $\Pp$ or $\Pp\Pp$ has no hidden triangle:
+packet selection occurs only after reading complete cycles from the actual
+bridge component.  Superadditivity completes every induction step.
+\end{proof}
+
+It remains to prove positivity when all complete cycles of $K$ form one
+shared-cut cluster.
+
+\section{One-cluster structure and the seven forms}\label{sec:structure}
+
+For one shared-cut cluster, form the bipartite cycle--cut incidence graph $I$:
+its nodes are complete cyclic blocks and cut vertices belonging to at least
+two such blocks, with containment as incidence.  The graph $I$ is a tree.  An
+incidence cycle would produce either a graph cycle traversing several blocks
+or two cyclic blocks meeting in more than one vertex, both forbidden in a
+cactus.
+
+Let the cluster have $a\geq1$ triangles and two pentagons.  If $a=1$, it is a
+$\T\Pp\Pp$ tricyclic cactus and is strict by
+Lemma~\ref{lem:inputs}\ref{in:small}; this includes the incidence path
+$\Pp-x-\T-y-\Pp$.  Assume henceforth that $a\geq2$.
+
+Choose triangles $T_1,T_2$.  They meet because the triangle-packing number is
+one; call their common vertex $x$.  Every third triangle $T$ meets both.  If
+$T$ met $T_1$ away from $x$ and $T_2$ away from $x$, the corresponding paths
+in $I$ would form an incidence cycle.  If it met one away from $x$ and the
+other at $x$, it would share two vertices with that triangle.  Both are
+impossible.  Hence every triangle contains $x$.
+
+After deleting the pentagon nodes and cuts used only by them, the triangular
+incidence is a star centered at $x$.  A non-$x$ cut belongs to at most one
+triangle, since two such triangles would share it as well as $x$.  Call these
+non-$x$ vertices \emph{private} triangle ports.
+
+Restore the pentagons.  A pentagon independent of the other can attach to the
+triangular star at only one cut; two attachments would close a cycle in $I$.
+The cut is either $x$ or a private port of one triangle.  If one pentagon lies
+between the other and the star, the two pentagons form a serial pair, whose
+first pentagon attaches at $x$ or at a private port.  Therefore, up to
+exchanging the pentagons and triangle petals, the possibilities are exactly
+\begin{align*}
+\mathrm{H1}&:\ \text{both pentagons attach at }x;\\
+\mathrm{H2}&:\ \text{both attach at the same private cut }y
+                    \text{ of one triangle};\\
+\mathrm{H3}&:\ \text{one attaches at }x\text{ and one at a private cut }y;\\
+\mathrm{H4}&:\ \text{they attach at private cuts on two distinct triangles};\\
+\mathrm{H5}&:\ \text{a serial }\Pp\text{--}\Pp\text{ pair whose first
+                    pentagon attaches at }x;\\
+\mathrm{H6}&:\ \text{a serial }\Pp\text{--}\Pp\text{ pair whose first
+                    pentagon attaches at a private cut }y;\\
+\mathrm{H7}&:\ \text{they attach at the two distinct private cuts }y,z
+                    \text{ of one triangle}.             \tag{5.1}
+\end{align*}
+This list is forced by the tree $I$: one private port gives H2, two ports on
+one petal give H7, ports on distinct petals give H4, mixed central/private
+ports give H3, and dependence of the pentagon nodes gives exactly the two
+serial cases H5--H6.  There is no triangle hidden beyond a pentagonal port,
+because every triangle is already a petal at $x$.
+
+\section{Physical ownership for H1--H7}\label{sec:H}
+
+We first record the physical rule used in the non-hinge rows.  When vertices
+of a router cycle are partitioned into consecutive intervals, the entire
+incidence component at an occupied port follows the interval containing that
+port.  Every connector remnant and every arbitrary tree follows its actual
+anchor.  Edges joining different owners disappear only when induced
+subgraphs are formed.  Thus owners are connected, induced, disjoint, and
+exhaustive; a proper cycle interval is a path and creates no complete cycle.
+
+\begin{proposition}[The seven terminal forms]\label{prop:H}
+Every one-cluster packing-one $\T^a\Pp\Pp$ cactus has positive surplus.
+More precisely, for $a\geq2$ the exact terminal packets and margins are:
+\begin{center}
+\begin{tabular}{@{}cll@{}}
+\toprule
+Type & Physical terminal packets & Surplus bound\\
+\midrule
+H1 & common-cut $\T^a\Pp\Pp$
+   & $>a+1-4/(3\sqrt{13})$\\
+H2 & rooted common-cut $\Pp\Pp$ hinge entered at $y$
+   & $>0$\\
+H3 & $\Pp+\T^{a-1}\Pp$ via a $1+2$ triangle split
+   & $>(a-1)-2\delta$\\
+H4 & $\Pp+\T^{a-1}\Pp$ via a pentagon-bearing petal
+   & $>(a-1)-2\delta$\\
+H5 & rooted $\Pp\Pp$ hinge entered at $x$
+   & $>0$\\
+H6 & rooted $\Pp\Pp$ hinge entered at $y$
+   & $>0$\\
+H7 & $\Pp+\T^{a-1}\Pp$ via a valid $1+2$ port split
+   & $>(a-1)-2\delta$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{proposition}
+
+\begin{proof}
+H1 is exactly Lemma~\ref{lem:inputs}\ref{in:common}.  In H2 the two
+pentagons share their cut and the nonempty triangular star enters that rooted
+hinge at $y$ through one interface.  H5 and H6 are the same hinge dependency,
+with entry at $x$ and $y$, respectively.  These three applications include all
+finite trees at the hinge, triangular side, and interface; no bare-core
+replacement is made.
+
+For H3, split the marked router triangle into the singleton interval $\{y\}$
+and the complementary two-vertex interval.  The first owner receives $y$, all
+four private vertices of the pentagon incident at $y$, and every remnant or
+tree anchored in that incidence branch.  It therefore retains the whole
+pentagon: ``singleton $y$'' refers only to the interval of the router triangle,
+not to a singleton-vertex final territory.  The complementary owner receives
+the other two triangle vertices, every remaining incidence branch, and every
+remaining vertex.  Its complementary triangle edge keeps it connected through
+$x$.  The router triangle is destroyed; this owner retains exactly $a-1$
+triangles and the other complete pentagon.  Hence the physical packet profile
+is $\Pp+\T^{a-1}\Pp$.
+
+The H4 split is identical on either pentagon-bearing petal: choose its occupied
+private port as the singleton interval and give the other two triangle
+vertices, including $x$, to the complementary owner.  The other pentagon's
+petal and all remaining petals stay connected through $x$, again giving
+$\Pp+\T^{a-1}\Pp$.
+
+For H7, the router triangle has three distinct ports $x,y,z$.  Choose either
+occupied private port, say $y$, as the singleton interval.  Its entire
+pentagon branch receives $y$.  The other two consecutive triangle vertices
+form one interval containing $x$ and $z$; they receive the other pentagon
+branch and all triangular petals at $x$.  This is a valid physical $1+2$
+split, destroys the router triangle, and has the same
+$\Pp+\T^{a-1}\Pp$ profile.  Each shared cut is assigned once, and every
+incidence branch follows its actual port.  This is an ownership construction,
+not an abstract demand allocation.
+
+In H3, H4, and H7, the one-pentagon owner retains a subfamily of the original
+packing-one triangles, so Lemma~\ref{lem:L} applies.  Charging the bare
+pentagon by Lemma~\ref{lem:inputs}\ref{in:pents} gives
+\[
+ \sig(K)>(a-1)-2\delta
+ \geq1-2\delta=5-2\sqrt5>0.                              \tag{6.1}
+\]
+This proves all seven rows.
+\end{proof}
+
+The H7 row is asserted for the unmarked one-cluster object classified in
+Section~\ref{sec:structure}: its private occupied port is available, the other
+two vertices are one consecutive interval containing $x$ and the other port,
+and every branch follows its actual port.  It is not a rule that may be copied
+blindly into an externally marked recursive state.  If an external entry would
+disconnect an owner or assign a port twice, that opening is unavailable.  At
+total ranks four and five the established $\T^2\Pp\Pp$ and
+$\T^3\Pp\Pp$ terminals are used.  At larger marked rank, a leaf-pentagon
+opening is valid only after checking physically that deleting its occupied cut
+leaves its four private vertices, remnants, and attachments in one connected
+acyclic owner and leaves a connected packing-one $\T^a\Pp$ complement.  When
+that predicate holds, its ledger is
+\[
+ -1+(a-\delta)>0
+\]
+by Lemma~\ref{lem:L}; when it fails, no formal H7 opening is claimed.  The main
+proof needs only the unmarked form already proved in Proposition~\ref{prop:H}.
+
+\section{Completion, dependencies, and scope}\label{sec:dependencies}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+First apply maximum-triangle Voronoi to $G$.  Make no bridge cut beforehand.
+Lemma~\ref{lem:voronoi} says that every territory contains its selected
+triangle and has triangle-packing number one.  The $0\Pp$, $1\Pp$, and
+$2\Pp$ classification is exhaustive.  The first type is strict by
+Lemma~\ref{lem:inputs}\ref{in:tri}, and the second is positive by the
+self-contained Lemma~\ref{lem:L}.  For the third type, induct on the
+well-founded measure~(4.1).  Proposition~\ref{prop:bridge} handles every
+multiple-cluster step, while Proposition~\ref{prop:H} is the one-cluster base.
+Superadditivity over the nonempty induced territories gives
+\[
+ \sig(G)\geq\sum_i\sig(G_i)>0.
+\]
+Equivalently, $\splus(G)>|V(G)|$.
+\end{proof}
+
+The proof depends on the following previously proved results, in addition to
+the elementary superadditivity and the complete proof of Lemma~\ref{lem:L}
+given here:
+\begin{itemize}
+\item the packing-one triangular phase estimate and triangular Voronoi
+territories from the all-rank one-hostile-cycle manuscript;
+\item the exact common-cut $\T^b\Pp\Pp$ Schur--Sachs inequality for H1;
+\item the rooted two-pentagon hinge theorem, including its separate
+common-root deletion identities, for H2, H5, and H6;
+\item the complete tricyclic theorem for $a=1$, and the proved rank-four and
+rank-five terminals for externally marked low-rank fallback;
+\item the physical consecutive-interval router lemma for exact ownership of
+ports, cuts, remnants, and attached trees.
+\end{itemize}
+These dependencies are the repository proof objects
+\cite{Hostile,CommonCut,Hinge,Tricyclic,Tetracyclic,Pentacyclic,Router}.
+In particular, no unrestricted global estimate
+$\sig(\T^a\Pp)>a-\delta$ is assumed.  Every quantitative one-pentagon
+invocation occurs inside a Voronoi territory or one of its induced
+bridge/router descendants, where the retained triangles still have packing
+number one and Lemma~\ref{lem:L} applies.
+
+\paragraph{Scope and nonclaim.}
+The theorem covers finite simple connected cacti with exactly $r\geq1$
+triangles and exactly two pentagons, arbitrary shared cuts, arbitrary bridge
+lengths and branching, and arbitrary finite forest attachments.  Split
+pentagon fragments remain forests with their physical owners.  The proof does
+not cover three pentagons, non-cactus block intersections, or a merely maximal
+triangle packing.  It establishes the stated family only.  It is not a proof
+of the universal Akbari--Kumar--Mohar--Pragada--Zhang positive-square-energy
+conjecture for all graphs, nor even a claim for every cactus outside this block
+profile.
+
+\section*{AI disclosure}
+
+This manuscript was generated and assembled by an AI coding and mathematical
+reasoning system from the accepted proof note and the cited repository proof
+objects.  No human authorship, human review, or human verification is claimed.
+The result should be assessed from the displayed argument and its explicit
+dependencies rather than from asserted authority.
+
+\begin{thebibliography}{99}
+\bibitem{AKMPZ}
+S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and X.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264v1, 2025.
+
+\bibitem{Hostile}
+Companion manuscript, \emph{Cacti with Arbitrarily Many Triangles and One
+Hostile Cycle}, 2026;
+\path{all-rank-triangle-hostile-cacti/paper.tex}.
+
+\bibitem{CommonCut}
+\emph{Common-cut residual bouquets: an exact rooted Schur--Sachs inequality},
+26 July 2026;
+\path{research/common-cut-bouquet-rooted-schur-2026-07-26.md}.
+
+\bibitem{Hinge}
+\emph{Rooted two-pentagon hinge theorem}, 28 July 2026;
+\path{research/rooted-two-pentagon-hinge-theorem-2026-07-28.md}.
+
+\bibitem{Tricyclic}
+Companion manuscript, \emph{Positive Square Energy of Every Tricyclic Cactus},
+2026; \path{all-tricyclic-cacti/paper.tex}.
+
+\bibitem{Tetracyclic}
+Companion manuscript, \emph{Positive Square Energy of Every Tetracyclic
+Cactus}, 2026; \path{all-tetracyclic-cacti/paper.tex}.
+
+\bibitem{Pentacyclic}
+Companion manuscript, \emph{All Pentacyclic Cacti}, 2026;
+\path{all-pentacyclic-cacti/paper.tex}.
+
+\bibitem{Router}
+\emph{Physical $C_5$ interval-router lemma}, 29 July 2026;
+\path{research/physical-c5-interval-router-lemma-2026-07-29.md}.
+\end{thebibliography}
+
+\end{document}

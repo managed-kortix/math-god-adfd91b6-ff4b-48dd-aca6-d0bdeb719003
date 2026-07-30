@@ -183,6 +183,13 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     workflow for this major partial AKMPZ result, then move the mathematical
     frontier to rank twelve only after deriving its exact sharp-DNN residual
     profiles and writing a victory/non-victory prompt.
+33. The rank-uniform `T^rPP` obstruction is now solved. The accepted proof is
+    `all-rank-triangle-two-pentagon-cacti/paper.tex`: Voronoi first, unrestricted
+    local packing-one one-P Sachs margin, actual-bridge induction, and exact
+    H1--H7 one-cluster topology. Since rank-twelve DNN leaves only `T^11Q` and
+    `T^10PP`, both all-rank families are closed. Next synthesize the short
+    rank-twelve cactus paper, audit dependency scopes, build PDF, and publish
+    only after definitive acceptance.
 33. Rank twelve now has an exact fail-closed sharp-DNN frontier:
     `T^11Q,T^10PP`. The one-`Q` branch is covered by the all-rank parity
     theorems, but this frontier calculation is not a rank-twelve proof. Follow

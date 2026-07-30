@@ -16,6 +16,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-30: proved the all-rank two-pentagon theorem: every connected cactus
+  with `r>=1` triangles and exactly two pentagons has `sigma>0`, for arbitrary
+  shared cuts, bridge trees, and attached forests. The key order is maximum-
+  triangle Voronoi first, making every territory triangle-packing-one. A new
+  multiport Sachs lemma gives `sigma(T^aP)>a-(sqrt(5)-2)` for every such local
+  one-P packet. Actual-bridge induction closes separated territories; a one-
+  cluster packing-one core with `a>=2` has a common triangular cut and exactly
+  seven incidence forms H1--H7, closed by common-cut/hinge packets or explicit
+  physical `P+T^(a-1)P` triangle intervals. Hostile review caught ambiguity over
+  singleton intervals and a non-well-founded bridge measure; complete pentagon
+  ownership is now explicit and induction is on complete cyclic blocks. Two
+  ultimate paper audits accepted. This closes the `T^10PP` rank-twelve DNN
+  residual; together with all-rank `T^11Q`, rank twelve is ready for synthesis.
 - 2026-07-30: verified the exact rank-twelve sharp-DNN frontier. Exact
   `Fraction`/`Q(sqrt(5))` arithmetic, the strict monotonicity of
   `epsilon_l=l tan^2(pi/(2l))`, and exhaustive triangle-count inequalities

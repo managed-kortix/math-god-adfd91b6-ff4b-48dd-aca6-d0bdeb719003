@@ -1,5 +1,23 @@
 # notebook — positive square energy
 
+## 2026-07-30 — all-rank `T^rPP`
+
+The winning move was to take a maximum packing of triangles before any bridge
+cut. Every induced Voronoi territory then contains a triangle and has triangle
+packing number one. For a local `T^aP` cactus the full multiport Sachs expansion
+is still `R+2i(B-A)`, with `R>0`; separating matchings at the pentagon proves
+`R>Z_5(B-A)`, hence phase below bare `C5` and
+`sigma>a-(sqrt(5)-2)`.
+
+Two-P territories reduce along actual hull bridges. A one-cluster territory
+with at least two triangles has all triangles through one cut; incidence-tree
+acyclicity leaves exactly H1--H7. Common-cut and rooted-hinge theorems close
+four forms; the other three split one triangle physically into a complete bare
+P owner and a packing-one `T^(a-1)P` owner, with margin
+`(a-1)-2(sqrt(5)-2)>0`. The singleton is only a triangle interval: its owner
+also receives all five pentagon vertices. The base `a=1` is the complete TPP
+theorem. Final audits accepted the all-rank theorem.
+
 ## 2026-07-30 — exact rank-twelve DNN frontier
 
 For rank twelve, `m=n+11` and sharp DNN gives
