@@ -16,6 +16,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-30: closed the remaining nonhostile `T^10Q` dependency analytically,
+  in fact at all ranks: for `r>=1` triangles and one `Q` of even length or
+  length `3 mod 4`, arbitrary cactus incidence/bridges/trees have `sigma>0`.
+  A maximum cycle packing gives connected induced packing-one territories.
+  In each territory, favorable odd cycles contribute a strictly negative Sachs
+  imaginary part while even-cycle singleton terms are real; Coulson gives
+  `s+>s-`. A possible even-Q-only territory is bipartite unicyclic and has
+  exact zero surplus, while a prioritized triangle territory is strict. Two
+  independent referees accepted the proof. The `T^10Q` rank-eleven branch is
+  therefore complete without a physical census. Daily OCB public readback found
+  no listed pending record on the reachable first page; pagination remains HTTP
+  400. Gmail review was attempted but blocked by unavailable connector tooling,
+  so no mailbox state was inferred and no message was sent.
 - 2026-07-29: completed the fully shared rank-eleven `T^9PP` endpoint:
   `115512=115502+10`, all with physical final-owner certificates. U1--U10 now
   pass the same independent graph/domain/theorem pipeline as ordinary rows.

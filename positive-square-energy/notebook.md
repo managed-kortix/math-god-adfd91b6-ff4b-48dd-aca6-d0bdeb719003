@@ -1,5 +1,22 @@
 # notebook — positive square energy
 
+## 2026-07-30 — nonhostile `T^rQ` closed at all ranks
+
+For a packing-one graph whose cycles have lengths even or `3 mod 4`, with at
+least one favorable (`3 mod 4`) cycle, grouped Sachs gives
+`Im Psi(t)=-2 sum_C Z_{H-V(C)}(t)<0`: even singleton cycles contribute only to
+the real part. The lifted spectral argument stays in `(-pi,0)`, hence signed
+Coulson gives `s+>s-`.
+
+Take a maximum vertex-disjoint cycle packing and nearest-cycle induced Voronoi
+territories. Each is connected, cyclic, and packing one. For `q=3 mod 4`, all
+territories are strict. For even q, prioritize a selected triangle; every
+triangle territory is strict, while a possible Q-only territory is even
+unicyclic bipartite and has `s+=m=n`. Superadditivity therefore gives global
+`s+>n`. This removes the last `T^10Q` dependency in rank eleven. Two independent
+audits accepted the argument; naive direct global phase and DNN-zero strictness
+shortcuts remain invalid.
+
 ## 2026-07-29 — fully shared `T^9PP` complete
 
 Encoded physical U1--U10 repairs atop the 115502 ordinary certificates. The
