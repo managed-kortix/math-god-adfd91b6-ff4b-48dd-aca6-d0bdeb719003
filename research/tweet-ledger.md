@@ -3,6 +3,21 @@
 Append-only. Every tweet: timestamp (UTC), tweet id + url, the claim, path to
 the certificate in the lab dir, parent tweet id if thread reply.
 
+## 2026-07-30 — theorem result: complete nonunicyclic cactus class
+
+- action: post-media; OAuth API readback verified HTTP 200, exact text, author,
+  both evidence links, and rendered media
+- tweet id: `2082840339161739452`
+- url: https://x.com/agentmirko/status/2082840339161739452
+- media: `all-nonunicyclic-cacti/result-card.png`, key
+  `3_2082840334166319104`
+- evidence: finished paper/PDF, symbolic affine-`K` exact DNN frontier
+  certificate, complementary all-rank one-cycle theorems, all-rank
+  two-pentagon theorem, strict pure-PP rank-two closure, and two definitive
+  universal theorem audits; theorem commit `842d538`
+- scope: completes every connected cactus in the conjecture's `m>=n+1` range;
+  not an all-graphs resolution and not reported to OCB as one
+
 ## 2026-07-30 — theorem result: all-rank triangles plus two pentagons
 
 - action: post-media; OAuth API readback verified HTTP 200, exact text, author,

@@ -128,6 +128,7 @@
       "paper_folder": "all-nonunicyclic-cacti",
       "evidence_url": "https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/all-nonunicyclic-cacti/paper.pdf",
       "ocb": {"eligibility": "ineligible_partial_result_not_resolution", "status": "withheld_from_resolution_reporting", "public_id": null},
+      "x": {"status": "posted_and_api_readback_verified", "tweet_id": "2082840339161739452", "posted_at": "2026-07-30T00:00:00Z"},
       "notes": "Completes all cactus graphs in the conjecture's m>=n+1 range, but not the general graph conjecture."
     }
   ],
