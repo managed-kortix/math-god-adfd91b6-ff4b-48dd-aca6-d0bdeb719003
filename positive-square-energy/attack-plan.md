@@ -168,6 +168,14 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     `T^10Q` branch (even Q and q=3 mod 4): either prove it follows directly from
     favorable-cycle Sachs phase for arbitrary incidence topology, or build a
     physical rank-eleven verifier. Then synthesize paper and run ultimate gates.
+31. The nonhostile `T^10Q` branch is now closed at all ranks by the maximum-
+    packing mixed-phase theorem in
+    `research/all-rank-nonhostile-one-cycle-theorem-2026-07-30.md`; no finite
+    verifier is needed. The next obligation is the global rank-eleven synthesis:
+    enumerate the sharp-DNN reduction, actual-bridge pruning, every marked and
+    fully-shared endpoint, and audit that every branch invokes only earlier or
+    independently proved packets. Build the paper only after a hostile dependency
+    referee accepts this exhaustive tree.
 
 ## Running jobs
 
