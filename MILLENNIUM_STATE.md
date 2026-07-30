@@ -5,12 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after temporal-block composite no-go
-- **active main funnel:** selection review.  Temporal blocking before squaring
-  suppresses free electric Wick aliasing only at nonzero physical time width;
-  shrinking the block restores a `1/ell` divergence, while exact target-vertex
-  retention forces a trivial all-pass delta filter.  A valid Yang--Mills route
-  needs a genuine reflection-compatible composite renormalization.
+- **phase:** adjacent graded matrix-factorization cone gate
+- **active main funnel:** Hodge categorical lifting.  The full shifted `4|4`
+  Koszul factorizations of an abstract adjacent plane pair have exact
+  homogeneous odd morphism cohomology `k^2`, with explicit heterogeneous-degree
+  cocycles.  The next gate is the complete W2 obstruction test for all 33
+  projective `8|8` cones; no Orlov/geometric identification is assumed.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 137
+- **cycle:** 138
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +175,18 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 138 resolved the adjacent graded-MF Ext ambiguity.  In the
+  normal form `L=(q,r,s), M=(p,r,s)`, with
+  `F=pqA+rB+sC`, the full shifted `4|4` Koszul modules are
+  `K0=S+S(-31)^3`, `K1=S(1)^3+S(-30)`.  Exact sparse-polynomial verification
+  proves both squares equal `F`, and cocycles
+  `Phi_a=a epsilon_1-Aa iota_1` for `a=z0,z1` have the required entry degrees
+  `1,32`.  The complete degree-zero hypersurface complex gives
+  `H^1=N_1/kq=k^2`.  This is a rigorous internal `HMF^gr` statement only;
+  Orlov's parameter is `-27`, and no geometric plane-sheaf or Hodge claim is
+  inferred.  The next exact experiment is the full W2 defect of all 33
+  projective adjacent cones.
 
 - 2026-07-30: Cycle 137 generalized the Wick-contact obstruction to temporal
   block preprocessing.  The exact box-filter fourth moment is
