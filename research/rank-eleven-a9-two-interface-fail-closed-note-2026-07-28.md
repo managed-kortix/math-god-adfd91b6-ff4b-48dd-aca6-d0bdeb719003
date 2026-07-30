@@ -54,7 +54,7 @@ digests are
 ordinary accepted signatures:
   8d170ef9af714c6288214e5933826fcbfe2d006dc0e70c7277a393fc2d18239c
 ordinary theorem/owner records:
-  d59ea6b38bef5f5bcdd2d6dbf2ebcb40db7096059c573c53c49122785de904c2
+  58f9951b620fa9f4830724a8bbc5b426a6125437b11c84b125d4ee63488dd3ec
 ```
 
 The previous `43135` implementation omitted fifteen explicit two-arm plans;
@@ -76,7 +76,7 @@ common-cut one-hostile theorem. Every plan is positive; the smallest is
 `TP+TP+A5 > 2-2*(sqrt(5)-2)`. The frozen two-arm owner-plan digest is
 
 ```text
-c609dbaec9d7c8abe4e66c5f01375e88b28e56b77110c2be17e026eb46f48f5c.
+1512256af2a6e1294ca6f21d176877829ad1fd1aabb7555345e5486cb8b3b98d.
 ```
 
 The verifier independently rederives every terminal packet from its concrete
@@ -86,8 +86,23 @@ actual router positions into cyclically consecutive intervals; binds ordered
 interval sizes to those position owners (so `(2,1)` cannot be changed to
 `(1,2)`); verifies nesting by active cycle sets; recursively resolves every cut
 and connector to its final packet; and checks connected terminal carriers and
-theorem-derived radical ledgers. An unrecognized or mutated profile fails
-closed.
+theorem-derived radical ledgers.
+
+The ordinary final-position gate is exhaustive. Its independently derived
+domain is every physical shared cut in the incidence tree, including a cut
+incident only with sacrificed routers, together with every private cyclic
+position of every sacrificed router. Every shared cut is resolved from the root
+active territory and must select exactly one child at every refinement. Every
+concrete position in every router interval is resolved from the root; for a
+nonempty child interval the result must equal resolution through that child's
+unique cut adhesion. Each nonroot active set must occur as exactly one parent
+child, so a sibling cannot retrieve positions from a closed branch. The final
+position/cut owner records have no duplicate keys and must equal the
+independently derived domain exactly. Submitted records, including mutation
+fixtures, must equal this rederived map. Thus even a hypothetical all-router cut and private
+parent-router positions receive explicit terminal owners even when no retained
+triangle is incident there. An unrecognized, ambiguous, or mutated profile
+fails closed.
 
 ## Safe residual repairs
 
@@ -121,11 +136,12 @@ exhaustive, cut owners must agree with incident retained packets, connector
 owner names must exist and be reachable, and the opening ledger is recomputed
 as the retained packet bound plus cost `-1`.
 
-Seven built-in mutation tests must all be rejected: a forged ordinary bound,
-swapped ordinary interval sizes, broken recursive active ownership, a forged
-repair theorem, swapped repair intervals, a corrupted pentagon vertex owner,
-and an unreachable opening connector owner. The swapped interval gate now runs
-through the shared geometry-aware core.
+Ten built-in mutation tests must all be rejected: a forged ordinary bound,
+duplicate final-position key, forged final-position owner, a shared-cut
+placed in two router intervals, swapped ordinary interval sizes, broken
+recursive active ownership, a forged repair theorem, swapped repair intervals,
+a corrupted pentagon vertex owner, and an unreachable opening connector owner.
+The interval gates run through the shared geometry-aware core.
 
 These checks establish the finite `P|A_9|P` endpoint certificate only. They do
 not prove a generic separated-two-pentagon theorem, the complete rank-eleven

@@ -16,6 +16,20 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-30: completed the rank-eleven cactus synthesis. Every connected
+  cyclomatic-rank-eleven cactus has `s+(G)>|V(G)|`. Sharp DNN leaves only
+  `T^10Q` and `T^9PP`; all parities of the first are closed by the all-rank
+  hostile/nonhostile theorems. For `T^9PP`, the exact `266=253+13` partition
+  audit, corrected bound-sum actual-bridge pruning, the physical `T^9P|P`
+  endpoint, hardened `P|A_9|P` endpoint, and fully shared `115512=115502+10`
+  census exhaust all topologies. Ultimate review exposed two final synthesis
+  defects: an overbroad leaf-pruning lemma and incomplete final ownership of
+  shared cuts in the A9 ordinary plans. The leaf lemma now states the exact
+  positive bound-sum condition; A9 now resolves every shared cut and sacrificed-
+  router private position through unique recursive children, freezes an exact
+  duplicate-free owner domain, and rejects ten mutations. The abstract-to-
+  physical connector lifting is proved explicitly. Final referee: ACCEPT.
+  Paper and PDF are in `all-rank-eleven-cacti/`.
 - 2026-07-30: closed the remaining nonhostile `T^10Q` dependency analytically,
   in fact at all ranks: for `r>=1` triangles and one `Q` of even length or
   length `3 mod 4`, arbitrary cactus incidence/bridges/trees have `sigma>0`.
