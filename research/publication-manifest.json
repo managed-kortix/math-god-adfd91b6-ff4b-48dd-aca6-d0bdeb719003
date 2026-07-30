@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-07-29",
+  "updated": "2026-07-30",
   "results": [
     {
       "id": "akmpz-conjecture-1-2",
@@ -29,7 +29,8 @@
         "all-heptacyclic-cacti",
         "all-octacyclic-cacti",
         "all-nonacyclic-cacti",
-        "all-decacyclic-cacti"
+        "all-decacyclic-cacti",
+        "all-rank-eleven-cacti"
       ],
       "notes": "All listed papers are partial class results; none resolves the general conjecture."
     },
@@ -105,7 +106,8 @@
         "all-heptacyclic-cacti",
         "all-octacyclic-cacti",
         "all-nonacyclic-cacti",
-        "all-decacyclic-cacti"
+        "all-decacyclic-cacti",
+        "all-rank-eleven-cacti"
       ]
     },
     {
