@@ -5,12 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after exact Kurihara production certificate
-- **active main funnel:** selection review.  For `433a1`, `p=7`, and
-  `n=29*113`, exact plus modular symbols give the nonzero two-prime Kurihara
-  value `3 mod 7`.  Published Selmer-structure theory plus independent rank two
-  yields `Sha[7^infty]=0`; this is a new replayable computational instance, not
-  a new BSD theorem.
+- **phase:** portfolio rotation after Kurihara localization refinement
+- **active main funnel:** selection review.  The `433a1` certificate is now
+  robust under mixed-rectangle transport and has an explicit auxiliary-prime
+  localization determinant `6 mod 7`, independently certifying rational
+  generator independence.  Further finite Kurihara examples are routine absent
+  a family nonvanishing theorem, so the funnel rotates.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 135
+- **cycle:** 136
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +175,18 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 136 refined, then retired, the `433a1` computation as a
+  main funnel.  Rectangle-centering of the grouped modular-symbol matrix leaves
+  the weighted Kurihara value `3 mod 7`; grouped row/column noise and primitive-
+  root linear relabeling change it only by a unit.  Exact local arithmetic sends
+  `P=(0,1),Q=(-1,1)` to matrix `[[1,5],[1,4]]` in the `29,113` local quotients,
+  with determinant `6 mod 7` and explicit divisibility witnesses.  This proves
+  rational independence and prime-to-seven index given the external rank upper
+  bound, but the Selmer upper bound still uses Kim.  A bounded scan found
+  nonzero two-prime values for all 27 eligible rank-two curve-prime pairs of
+  conductor at most 1000; this is finite computational evidence, not a uniform
+  theorem, and was not promoted into a census artifact.
 
 - 2026-07-30: Cycle 135 produced an exact positive arithmetic certificate.
   For `433a1: y^2+xy=x^3+1`, `p=7`, primitive roots `2 mod 29` and `3 mod 113`,
