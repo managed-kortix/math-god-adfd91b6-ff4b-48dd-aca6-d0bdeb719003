@@ -162,6 +162,12 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     corrected U7 and degree-four U8. Then combine DNN, bridge pruning, all
     marked endpoints, all-rank `T^rQ`, and fully shared closure into the complete
     rank-eleven theorem.
+30. Fully shared `T^9PP` is now complete on all 115512 rows, including U1--U10
+    with interval/branch owner binding and nested refinement replay. Before
+    claiming rank eleven, resolve the dependency audit's remaining nonhostile
+    `T^10Q` branch (even Q and q=3 mod 4): either prove it follows directly from
+    favorable-cycle Sachs phase for arbitrary incidence topology, or build a
+    physical rank-eleven verifier. Then synthesize paper and run ultimate gates.
 
 ## Running jobs
 
