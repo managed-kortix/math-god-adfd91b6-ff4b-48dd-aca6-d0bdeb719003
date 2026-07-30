@@ -1,5 +1,27 @@
 # notebook — positive square energy
 
+## 2026-07-30 — every nonunicyclic cactus
+
+For arbitrary cyclomatic rank `k>=2`, sharp cactus DNN gives
+`sigma>=k-1-sum epsilon_l`. Let `h` count nontriangles and
+`a=epsilon_5=5-2sqrt(5)`. If `h>=3`, then
+`sum epsilon<=(k-3)+3a<k-1`. If `h=2`, every pair except `PP` contributes
+less than one, using `a+epsilon_7<1`; `PP` survives because `2a>1`. If
+`h<=1`, the multiset is `T^(k-1)Q`, allowing `Q=T`. Thus the exact uniform
+frontier is `T^(k-1)Q,T^(k-2)PP`.
+
+The residual closure is dependency-exact. Hostile and nonhostile all-rank
+one-cycle theorems cover every `Q=C_q`. For `k>=3`, the all-rank theorem with
+`r=k-2>=1` triangles and two pentagons closes `T^(k-2)PP`. At `k=2`, where
+that theorem does not apply, the pure two-pentagon cactus either has one shared
+cut (bouquet theorem) or a positive-length connecting path (all-connectors
+theorem). Rank one is excluded: `C4` has spectrum `2,0,0,-2` and `s+=n=4`.
+
+The new verifier is constant-size in rank, checks symbolic cases plus
+symbolic affine-`K` identities (with representative substitutions), rejects seven hostile mutations, and is byte-identical under
+normal and optimized Python. The manuscript makes no claim for all graphs and
+was not published externally.
+
 ## 2026-07-30 — all rank-thirteen cacti
 
 For rank thirteen, `m=n+12` and sharp DNN gives

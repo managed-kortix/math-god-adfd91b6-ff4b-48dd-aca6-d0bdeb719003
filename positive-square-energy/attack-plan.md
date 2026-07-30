@@ -201,6 +201,16 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     authoritative synthesis is `all-rank-thirteen-cacti/paper.tex`; its
     verifier rejects four hostile mutations and agrees normally and under
     `python -O`. Do not infer an all-rank cactus theorem from this synthesis.
+36. The rank-uniform synthesis is now complete: every finite simple connected
+    cactus of cyclomatic rank `k>=2` has `s+>n`. The exact DNN deficiency
+    frontier is `T^(k-1)Q,T^(k-2)PP`; all-rank hostile/nonhostile one-cycle
+    theorems close the first, and the all-rank two-pentagon theorem closes the
+    second for `k>=3`. The pure `PP` boundary at `k=2` uses the separate bouquet
+    and connector theorems. Rank one remains excluded (`C4` has equality).
+    Authoritative synthesis: `all-nonunicyclic-cacti/paper.tex`; proof note and
+    constant-size fail-closed verifier are under `research/`. Do not promote
+    this cactus theorem to a claim for arbitrary graphs, and do not publish it
+    under the present instruction.
 33. Rank twelve now has an exact fail-closed sharp-DNN frontier:
     `T^11Q,T^10PP`. The one-`Q` branch is covered by the all-rank parity
     theorems, but this frontier calculation is not a rank-twelve proof. Follow

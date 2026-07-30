@@ -1,0 +1,295 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\splus}{s^+}
+\newcommand{\sminus}{s^-}
+\newcommand{\sig}{\sigma}
+\newcommand{\one}{\mathbf 1}
+
+\title{Positive Square Energy of Every Nonunicyclic Cactus}
+\author{AI-generated manuscript; no human author is claimed}
+\date{30 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We prove that every finite simple connected cactus $G$ of cyclomatic rank
+$k\geq2$ and order $n$ satisfies $s^+(G)>n$.  The exact cactus doubly
+nonnegative bound gives
+\[
+ s^+(G)-n\geq k-1-\sum_i\epsilon_{\ell_i}.
+\]
+A rank-independent deficiency calculation shows that its non-strict frontier
+is exactly $T^{k-1}Q$ and $T^{k-2}PP$, where $T=C_3$, $P=C_5$, and $Q$ is an
+arbitrary cycle.  Existing hostile and nonhostile all-rank one-cycle theorems
+close the first family.  The all-rank two-pentagon theorem closes the second
+for $k\geq3$, while at $k=2$ the pure two-pentagon family follows from the
+separate shared-cut and positive-connector theorems.  Rank one is explicitly
+excluded: $C_4$ has $s^+(C_4)=4=|V(C_4)|$.  A constant-size, fail-closed exact
+verifier freezes the uniform frontier calculation.
+\end{abstract}
+
+\section{Statement and the rank-one boundary}
+
+All graphs in this paper are finite, simple, and undirected.  A cactus is
+connected and has only bridge or cycle blocks.  Its cyclomatic rank is the
+number of cyclic blocks.  For the adjacency eigenvalues
+$\lambda_1,\ldots,\lambda_n$, put
+\[
+ \splus(G)=\sum_{\lambda_i>0}\lambda_i^2,
+ \qquad
+ \sminus(G)=\sum_{\lambda_i<0}\lambda_i^2,
+ \qquad
+ \sig(G)=\splus(G)-|V(G)|.
+\]
+
+\begin{theorem}\label{thm:main}
+Every finite simple connected cactus $G$ of cyclomatic rank $k\geq2$ satisfies
+\[
+ \boxed{\splus(G)>|V(G)|}.
+\]
+\end{theorem}
+
+The lower bound $k\geq2$ is essential for strictness.  The adjacency spectrum
+of $C_4$ is $2,0,0,-2$, and therefore
+\[
+ \splus(C_4)=4=|V(C_4)|.
+\]
+Thus Theorem~\ref{thm:main} neither includes nor can be extended verbatim to
+all unicyclic cacti.
+
+\section{The rank-uniform sharp-DNN frontier}
+
+For an edge-containing graph define
+\[
+ \kappa(G)=\sup_{\substack{M\succeq0,\ M\geq0\\\one^TM\one>0}}
+ \frac{4\bigl(\sum_{uv\in E(G)}\sqrt{M_{uv}}\bigr)^2}
+      {\one^TM\one}.
+\]
+The exact cactus DNN theorem~\cite{DNN,LTZ} says that if a cactus has $b$
+bridge blocks and cycle blocks $C_{\ell_1},\ldots,C_{\ell_k}$, then
+\begin{equation}\label{eq:kappa}
+ \sminus(G)\leq\kappa(G)
+ =b+\sum_{i=1}^k\kappa(C_{\ell_i}),
+ \qquad
+ \kappa(C_\ell)=
+ \begin{cases}
+  \ell,&\ell\text{ even},\\
+  \ell\sec^2\!\bigl(\pi/(2\ell)\bigr),&\ell\text{ odd}.
+ \end{cases}
+\end{equation}
+Set
+\[
+ \epsilon_\ell=
+ \begin{cases}
+ 0,&\ell\text{ even},\\
+ \ell\tan^2\!\bigl(\pi/(2\ell)\bigr),&\ell\text{ odd}.
+ \end{cases}
+\]
+If $n=|V(G)|$, block counting gives
+$b+\sum_i\ell_i=n+k-1$, while
+$\splus(G)+\sminus(G)=2|E(G)|=2(n+k-1)$.  Hence
+\begin{equation}\label{eq:surplus}
+ \boxed{\sig(G)\geq k-1-\sum_{i=1}^k\epsilon_{\ell_i}.}
+\end{equation}
+
+Write $T=C_3$, $P=C_5$, and
+\[
+ a=\epsilon_5=5-2\sqrt5.
+\]
+For real $x\geq3$, $x\tan^2(\pi/(2x))$ decreases strictly.  Indeed, with
+$u=\pi/(2x)$, differentiation reduces the sign to
+$2u-\sin u\cos u>0$.  Thus $\epsilon_3=1$ and every nontriangle contributes
+at most $a$.  We use the exact comparisons
+\begin{equation}\label{eq:exact}
+ 0<a<1,\qquad3a<2,\qquad2a>1,
+ \qquad a+\epsilon_7<1.
+\end{equation}
+The last follows from $\cos(\pi/7)>2159/2401>7/8$, which gives
+$\epsilon_7<7/15$, and from
+$7/15<2\sqrt5-4=1-a$, certified by $(67/30)^2<5$.
+
+\begin{proposition}[Exact uniform deficiency frontier]\label{prop:frontier}
+For every integer $k\geq2$, the right side of~\eqref{eq:surplus} is not
+strictly positive exactly on the two cycle-multiset families
+\[
+ \boxed{T^{k-1}Q},\qquad \boxed{T^{k-2}PP},
+\]
+where $Q=C_q$ is arbitrary and may equal $T$.
+\end{proposition}
+
+\begin{proof}
+Let $h$ be the number of nontriangular cycles.  If $h\geq3$, monotonicity and
+\eqref{eq:exact} give
+\[
+ \sum_i\epsilon_{\ell_i}\leq(k-h)+ha
+ \leq(k-3)+3a<k-1.
+\]
+If $h=2$, a pair containing an even cycle contributes less than one.  If both
+cycles are odd but are not both pentagons, their contribution is at most
+$a+\epsilon_7<1$.  The sole remaining pair is $PP$, and it is genuinely
+residual because $2a>1$.  This gives $T^{k-2}PP$.
+
+If $h\leq1$, the multiset is $T^{k-1}Q$, allowing $Q=T$ when $h=0$.  Conversely
+every such multiset has epsilon sum
+$(k-1)+\epsilon_q\geq k-1$, so~\eqref{eq:surplus} is not strict.  The cases
+are exhaustive.
+\end{proof}
+
+This proof has a fixed number of cases and inequalities independent of $k$.
+The exact verifier~\cite{Frontier} represents each quantity as an affine
+element $cK+d$ of $\mathbb Q(\sqrt5)[K]$.  It proves that the $K$ coefficient
+cancels in every comparison and checks the exact sign of the remaining
+constant.  It also proves that the $h\geq3$ bound decreases with $h$, so its
+maximum is attained at $h=3$.  Substitutions at
+$K=2,3,4,5,7,13,64$ semantically test every generated affine template, but no
+finite collection of ranks is used to prove the arbitrary-rank claim.
+
+\section{Closure of the two residual families}
+
+\begin{proposition}[One distinguished cycle]\label{prop:q}
+Every connected cactus with cycle multiset $T^{k-1}Q$, $k\geq2$, has positive
+surplus.
+\end{proposition}
+
+\begin{proof}
+There are $k-1\geq1$ triangles.  If $q\equiv1\pmod4$, then $q\geq5$ and the
+all-rank triangle--hostile-cycle theorem applies~\cite{Hostile}.  If $q$ is
+even or $q\equiv3\pmod4$, the all-rank nonhostile one-cycle theorem applies
+\cite{Nonhostile}.  The latter explicitly includes $q=3$, hence also the
+all-triangle member.  These alternatives exhaust every integer $q\geq3$.
+Both inputs permit arbitrary shared cuts, bridge connectors, cactus incidence,
+and finite tree attachments.
+\end{proof}
+
+\begin{proposition}[Two pentagons]\label{prop:pp}
+Every connected cactus with cycle multiset $T^{k-2}PP$, $k\geq2$, has positive
+surplus.
+\end{proposition}
+
+\begin{proof}
+Suppose first that $k\geq3$.  Then $r=k-2\geq1$, and the all-rank theorem for
+$r$ triangles and exactly two pentagons applies directly~\cite{TwoPent}.
+
+It remains to respect the boundary $k=2$, where there are no triangles and the
+all-rank $T^rPP$ theorem is outside its hypothesis.  If the two pentagons meet,
+the cactus property forces their intersection to be one cut vertex; the
+two-pentagon bouquet theorem gives
+\[
+ \splus(G)\geq n+1-\frac4{3\sqrt{13}}>n
+\]
+with arbitrary attached trees~\cite{Bouquet}.  If they do not meet, their
+unique connecting path has positive length; the two-actual-lobes connector
+theorem gives
+\[
+ \splus(G)>n+5-2\sqrt5>n
+\]
+for every connector length and arbitrary trees~\cite{Connector}.  The two
+possibilities exhaust the pure $PP$ bicyclic family.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Outside the two families of Proposition~\ref{prop:frontier},
+equation~\eqref{eq:surplus} is strictly positive.  Proposition~\ref{prop:q}
+closes $T^{k-1}Q$ for every $q\geq3$, and Proposition~\ref{prop:pp} closes
+$T^{k-2}PP$, including its separate pure bicyclic boundary.  The frontier is
+exhaustive.
+\end{proof}
+
+\section{Dependency map and reproducibility}
+
+The logical dependency map is exact:
+\begin{verbatim}
+main theorem
+|-- sharp DNN bound and uniform frontier
+|   |-- sharp-cactus-dnn/paper.tex
+|   `-- research/rank-uniform-cactus-dnn-frontier-verifier.py
+|-- T^(k-1)Q
+|   |-- all-rank-triangle-hostile-cacti/paper.tex
+|   `-- research/all-rank-nonhostile-one-cycle-theorem-2026-07-30.md
+`-- T^(k-2)PP
+    |-- k>=3: all-rank-triangle-two-pentagon-cacti/paper.tex
+    |-- k=2 shared cut: two-c5-bouquet-trees/paper.tex
+    `-- k=2 connector: two-c5-all-connectors/paper.tex
+\end{verbatim}
+The earlier fixed-rank cactus manuscripts are corroborating specializations,
+not premises.  A prose proof object with the same map is~\cite{ProofNote}.
+
+From the repository root, reproduce the exact frontier and PDF with Python
+3.10 or newer:
+\begin{verbatim}
+python3 research/rank-uniform-cactus-dnn-frontier-verifier.py
+python3 -O research/rank-uniform-cactus-dnn-frontier-verifier.py
+bash scripts/build-paper.sh all-nonunicyclic-cacti
+\end{verbatim}
+The two verifier outputs must be byte-identical.  The verifier uses exact
+\texttt{Fraction} arithmetic in the affine ring $\mathbb Q(\sqrt5)[K]$ and
+freezes a canonical digest of the generated symbolic expression records,
+rather than prose or calls to a finite-rank frontier function.  Its certificate
+SHA-256 digest is
+\begin{center}
+\texttt{1b549165c84ab20bdaebfec9329c37fb3e808ef435bda7a3586c8285c2d075ca},
+\end{center}
+and rejects seven hostile mutations: changing a $K$ coefficient, reversing the
+radical sign in $a$, changing either the $h\geq3$ or $h=2$ boundary, or
+deleting, reordering, or altering a survivor family.  It certifies only
+Proposition~\ref{prop:frontier}; the DNN theorem and structural closures remain
+the displayed mathematical dependencies.
+
+\paragraph{Scoped nonclaim.}
+Theorem~\ref{thm:main} concerns only finite simple connected cacti of
+cyclomatic rank at least two.  It does not prove a statement for all graphs,
+disconnected graphs, non-cactus block intersections, or unicyclic cacti.  In
+particular, no universal all-graphs version of the positive-square-energy
+conjecture is claimed.
+
+\section*{AI disclosure}
+This manuscript and its proof-note assembly were generated by an AI coding and
+mathematical reasoning system from the cited repository proof objects.  No
+human authorship, review, or verification is claimed.  The result should be
+assessed from the displayed reduction and dependencies.  No external
+publication was performed as part of this work.
+
+\begin{thebibliography}{99}
+\bibitem{LTZ} Y.~Liu, Q.~Tang, and S.~Zhang,
+\emph{The positive and negative square-energy conjecture}, arXiv:2607.18031,
+2026.
+
+\bibitem{DNN} Companion manuscript, \emph{The Optimized Liu--Tang--Zhang
+Constant for Cactus Graphs}, 2026; \path{sharp-cactus-dnn/paper.tex}.
+
+\bibitem{Frontier} \emph{Rank-uniform cactus DNN frontier verifier}, 30 July
+2026; \path{research/rank-uniform-cactus-dnn-frontier-verifier.py}.
+
+\bibitem{ProofNote} \emph{Every nonunicyclic cactus has strict positive square
+energy}, proof note, 30 July 2026;
+\path{research/rank-uniform-cactus-theorem-proof-note-2026-07-30.md}.
+
+\bibitem{Hostile} Companion manuscript, \emph{Cacti with Arbitrarily Many
+Triangles and One Hostile Cycle}, 2026;
+\path{all-rank-triangle-hostile-cacti/paper.tex}.
+
+\bibitem{Nonhostile} \emph{All-rank nonhostile one-cycle cactus theorem},
+30 July 2026;
+\path{research/all-rank-nonhostile-one-cycle-theorem-2026-07-30.md}.
+
+\bibitem{TwoPent} Companion manuscript, \emph{Positive Square Energy for Cacti
+with Triangles and Two Pentagons}, 2026;
+\path{all-rank-triangle-two-pentagon-cacti/paper.tex}.
+
+\bibitem{Bouquet} Companion manuscript, \emph{Positive Square Energy for a
+Two-$C_5$ Bouquet with Arbitrary Trees}, 2026;
+\path{two-c5-bouquet-trees/paper.tex}.
+
+\bibitem{Connector} Companion manuscript, \emph{Positive Square Energy for
+Two Pentagons Joined by an Arbitrary Path}, 2026;
+\path{two-c5-all-connectors/paper.tex}.
+\end{thebibliography}
+
+\end{document}

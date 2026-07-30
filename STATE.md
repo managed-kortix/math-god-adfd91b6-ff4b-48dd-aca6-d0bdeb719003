@@ -9,14 +9,25 @@ research/semantic, research/procedural).
   `positive-square-energy/attack-plan.md`.
 - **phase**: universal connected non-tree block-graph theorem proved and
   hostile-audit gaps repaired; bare bicyclic frontier m=n+1 fully proved;
-  every cyclomatic-rank-thirteen cactus proved by exact DNN frontier plus
-  existing all-rank one-cycle and two-pentagon theorems
+  every finite simple connected cactus of cyclomatic rank at least two proved
+  strict by the rank-uniform DNN frontier and all-rank residual theorems
 - **cycle**: 1
 - **tweets posted**: theta theorem result post `2080262053848039711`,
   weighted theta result post `2080620703322112385`, plus prior
   ledgered posts
 
 ## last ticks
+- 2026-07-30: completed the all-nonunicyclic cactus theorem. For every rank
+  `k>=2`, sharp DNN gives `sigma>=k-1-sum epsilon_l`; a constant-size exact
+  argument leaves precisely `T^(k-1)Q,T^(k-2)PP`. Hostile/nonhostile all-rank
+  one-cycle theorems close the first family. The all-rank two-pentagon theorem
+  closes the second for `k>=3`; at `k=2`, the pure `PP` family is exhausted by
+  the shared-cut bouquet and positive-connector theorems. Rank one is expressly
+  excluded, with `C4` giving equality `s+=n=4`. The fail-closed verifier checks
+  symbolic affine-`K` identities plus representative substitutions, rejects seven hostile mutations, and
+  agrees normally and under `-O`. Paper, README, proof note, and PDF are in
+  `all-nonunicyclic-cacti/` and `research/`. No universal all-graphs theorem is
+  claimed, and nothing was published externally.
 - 2026-07-30: completed rank thirteen. For a rank-thirteen cactus, sharp DNN
   gives `sigma>=12-sum epsilon_l`; exact monotonicity and radical comparisons
   leave only `T^12Q,T^11PP`. Complementary hostile/nonhostile all-rank
