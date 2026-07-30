@@ -183,6 +183,11 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     workflow for this major partial AKMPZ result, then move the mathematical
     frontier to rank twelve only after deriving its exact sharp-DNN residual
     profiles and writing a victory/non-victory prompt.
+33. Rank twelve now has an exact fail-closed sharp-DNN frontier:
+    `T^11Q,T^10PP`. The one-`Q` branch is covered by the all-rank parity
+    theorems, but this frontier calculation is not a rank-twelve proof. Follow
+    `rank12/prompt.md`: attack the all-rank `T^rPP` family next; a finite census
+    or one special endpoint alone is progress, not victory.
 
 ## Running jobs
 
