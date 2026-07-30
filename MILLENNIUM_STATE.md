@@ -5,12 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after spatial-smearing ultraviolet gate
-- **active main funnel:** selection review.  Slice-local spatial gauge smearing
-  exactly preserves reflection positivity, but a free transverse electric
-  channel retains a positive contact peak proportional to
-  `sigma^(-3/2) a_tau^(-1)`, so spatial smearing is not a standalone complete
-  four-dimensional UV regulator.
+- **phase:** portfolio rotation after temporal-regularization gate
+- **active main funnel:** selection review.  Under entire tempered symbols,
+  every universal free temporal multiplier preserving reflection positivity
+  modulo contacts is polynomial, hence cannot improve ultraviolet decay.  The
+  surviving route is direct negative-Sobolev compactness of unsmoothed temporal
+  distributions, for which current Wilson bounds are insufficient.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 127
+- **cycle:** 128
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +175,22 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 128 closed universal linear temporal smoothing under exact
+  reflection positivity.  If entire real `q` makes
+  `q(p0^2)/(p0^2+a)` RP modulo contact terms for every mass `a>0`, Stieltjes
+  uniqueness and polynomial division force `q` to be polynomial with
+  `q(-a)>=0`; without quotienting contacts only a nonnegative constant survives.
+  Hence no entire tempered UV-decaying universal temporal smoother exists.
+  The free spatially smeared electric field instead has sharp local temporal
+  threshold `H^{-s}` for `s>1/2`, with logarithmic endpoint failure.  A
+  gauge-invariant action-density compactness target naturally lies above
+  `s=5/2`, but standard Wilson one-point estimates contain no spectral decay and
+  cannot prove it.  Half-space flow gives only fixed-collar parabolic locality;
+  fixed-reference DeTurck gauge is not an equivariant physical smearing map.
+  The Hodge scalar Witt carry is quadratic and does not define a linear Chow
+  obstruction, while two-interval RH positivity rigidly becomes a variance
+  square compatible with off-line zeros.
 
 - 2026-07-30: Cycle 127 separated reflection positivity from ultraviolet
   completeness for spatial gauge smearing.  Pullback by any gauge-equivariant,
