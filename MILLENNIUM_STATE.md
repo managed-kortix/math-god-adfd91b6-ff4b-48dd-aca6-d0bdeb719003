@@ -5,12 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after formal completion convergence wall
-- **active main funnel:** selection review.  Infinite recursive completion is
-  formally closed outside its support union, but it is not a Picard/Duhamel
-  expansion and has no proved convergence.  Exact depth-eight norms show
-  factorial-like acceleration only as finite evidence.  The route is retired
-  absent an all-depth analytic theorem or internal coercivity.
+- **phase:** portfolio rotation after Wick-contact aliasing gate
+- **active main funnel:** selection review.  The naively centered square of a
+  spatially smoothed electric field is not tight even in free Maxwell theory:
+  temporal contact noise is squared and aliases into every external lattice
+  frequency with variance `1/(96*pi^3*sigma^3*a_tau)`.  A valid interacting
+  compactness target first needs a reflection-compatible composite regulator.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 130
+- **cycle:** 131
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +175,19 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 131 falsified the naive Yang--Mills negative-Sobolev
+  compactness target already in lattice free Maxwell theory.  For centered
+  electric energy `(1/2)(|E|^2-E|E|^2)`, high internal temporal frequencies
+  have covariance `Q_infty=(2/3)G_sigma I_3`; Wick contraction gives
+  `(1/2)Tr(Q_infty^2)=1/(96*pi^3*sigma^3)`.  The `1/a_tau` internal alias count
+  therefore produces the same divergent spectral mass at every fixed external
+  frequency, so no `H^{-s}` norm is uniformly bounded.  An exact dependency-
+  free verifier checks the constants.  The renormalized continuum composite
+  smeared after formation instead has positive two-photon polynomial
+  `15 omega^4-30 omega^2 p^2+23 p^4` and threshold `s>5/2`; the operations do
+  not commute.  Additive centering cannot remove connected contact variance,
+  so any revival needs a genuine temporal/bilocal composite prescription.
 
 - 2026-07-30: Cycle 130 proved the unconditional formal closure lemma for
   recursive Navier completion: every graded nonlinear coefficient `Q_m` is
