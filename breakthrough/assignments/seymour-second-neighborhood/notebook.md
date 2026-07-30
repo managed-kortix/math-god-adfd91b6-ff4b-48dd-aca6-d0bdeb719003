@@ -1125,3 +1125,22 @@ No audits yet.
   parents, easy `(highC,r)` children, easy internal-C children, and witness
   refinements for the 35 residuals. Split the 59 hard witness leaves by the
   exact gain/private-loss status of the distinguished B-to-C witness arc.
+
+### m=5 B6 direct certificate execution
+
+- Longer direct runs closed all 35 hard internal templates; after witness
+  normalization only two leaves required more than ten minutes, and both solved
+  UNSAT within one hour. This made a direct parent campaign preferable to a
+  complicated hierarchical certificate.
+- Generated, retained, and independently checked LRATs for all 4,355 canonical
+  placement parents. Raw proof bytes total 55,802,829,675; xz-3 content-addressed
+  objects total 7,655,223,816 bytes. The largest raw proof is 2,443,975,391
+  bytes (parent 2339). All leaf metadata states are `UNSAT_VERIFIED`.
+- The campaign is locally complete but not yet durable in Git: the 6.6 GB object
+  set exceeds practical repository storage. Do not promote branch closure until
+  immutable external/archive storage and a fresh complete readback are secured.
+- **Next queued action:** construct a deterministic archive/manifest, verify all
+  4,355 object and CNF hashes with a fresh checker pass, and place proof bytes in
+  immutable content-addressed storage. If no suitable external destination is
+  available, retain a formally audited hierarchical subset campaign compact
+  enough for Git rather than reverting to hash-only evidence.

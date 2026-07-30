@@ -13,7 +13,7 @@ def exact(c,o,v):
  if v==0:c.add(-o[0])
  elif v==len(o):c.add(o[-1])
  else:c.add(o[v-1]);c.add(-o[v])
-def emit(i,path,high_c=None,r=None,high_mask=None,cstates=None,tail=None,witnesses=()):
+def emit(i,path,high_c=None,r=None,high_mask=None,cstates=None,tail=None,witnesses=(),arc_status=None,gain_block=None,gain_midpoint=None):
  name,w=placements()[i];n,edges=SHAPES[name];mp=embedding(name,w);E={tuple(sorted((mp[u],mp[v]))) for u,v in edges};c=generate(18,6,5,True,None,None,True)
  for u in range(18):
   for v in range(u+1,18):c.add(c.var(f"h_{u}_{v}") if (u,v) in E else -c.var(f"h_{u}_{v}"))
@@ -30,6 +30,28 @@ def emit(i,path,high_c=None,r=None,high_mask=None,cstates=None,tail=None,witness
   for u in range(15,18):
    for v in range(9,15):c.add(c.var(f"a_{u}_{v}") if (u==15+tail and v==9) else -c.var(f"a_{u}_{v}"))
  for w,u in witnesses:c.add(c.var(f"wit_{w}_{u}"))
+ if arc_status is not None:
+  ai,aj=witnesses[0];gain=c.var(f"cube_gain_{ai}_{aj}");paths=[c.var(f"p_{ai}_{k}_{aj}") for k in range(18) if k not in (ai,aj)]
+  for z in paths:c.add(-z,gain)
+  c.add(-gain,*paths)
+  losses=[]
+  for t in range(18):
+   if t in (ai,aj):continue
+   loss=c.var(f"cube_loss_{ai}_{aj}_{t}");losses.append(loss);alts=[c.var(f"p_{ai}_{k}_{t}") for k in range(18) if k not in (ai,aj,t)]
+   c.add(-loss,c.var(f"q_{ai}_{t}"));c.add(-loss,c.var(f"a_{aj}_{t}"))
+   for z in alts:c.add(-loss,-z)
+   c.add(loss,-c.var(f"q_{ai}_{t}"),-c.var(f"a_{aj}_{t}"),*alts)
+  g,l=arc_status;c.add(gain if g else -gain);exact(c,threshold(c,losses,f"cube_losses_{ai}_{aj}_{l}"),l)
+  if gain_block is not None:
+   blocks=((0,),tuple(range(1,9)),tuple(v for v in range(9,15) if v!=ai),tuple(v for v in range(15,18) if v!=aj))
+   for b in range(gain_block):
+    for k in blocks[b]:c.add(-c.var(f"p_{ai}_{k}_{aj}"))
+   c.add(*(c.var(f"p_{ai}_{k}_{aj}") for k in blocks[gain_block]))
+  if gain_midpoint is not None:
+   candidates=[k for k in range(9,15) if k!=ai]
+   for k in candidates:
+    if k<gain_midpoint:c.add(-c.var(f"p_{ai}_{k}_{aj}"))
+   c.add(c.var(f"p_{ai}_{gain_midpoint}_{aj}"))
  with open(path,"w",encoding="ascii",newline="\n") as f:
   for key,val in c.names.items():f.write(f"c var {val} {key}\n")
   f.write(f"p cnf {len(c.names)} {len(c.clauses)}\n")
