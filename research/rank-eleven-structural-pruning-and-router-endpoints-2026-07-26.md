@@ -65,17 +65,24 @@ and every branch rooted on either remnant stay with their respective sides.
 The lifted sides are connected, induced, disjoint, and exhaustive. No cyclic
 block is opened during this global pruning.
 
-### Lemma 2.1 (rank-ten leaf pruning)
+### Lemma 2.1 (certified leaf pruning)
 
-Let `L` be a leaf cluster of `R`. If `rank(L)>=4`, or if `L` is a triangular
-unicyclic cluster, then cutting the first actual bridge away from `L` proves
-`sigma(G)>0`.
+Let `L` be a leaf cluster of `R`. Cutting the first actual bridge away from `L`
+proves `sigma(G)>0` whenever proved bounds for the resulting connected leaf and
+complement packets have positive sum.
 
-**Proof.** The leaf side is strict by the stated lower-rank packet theorem.
-The complementary side is a connected cactus of rank at most ten. If its rank
-is at least four it is strict; if it has rank two or three it is nonnegative.
-In all cases the sum is strict. The ownership convention above proves that the
-two packets are genuine induced territories. QED.
+**Proof.** The ownership convention above proves that the two packets are
+genuine induced territories. Positive-square-energy superadditivity makes the
+global surplus at least the sum of their proved bounds, which is positive by
+hypothesis. QED.
+
+In particular, every use below is one of the following certified combinations:
+a triangular singleton plus a strict rank-ten complement; `A_7` plus a strict
+rank-four complement; `A_8` plus a nonnegative rank-three complement; `A_9`
+plus a nonnegative rank-two complement; or nonnegative `T^2P` plus a strict
+rank-eight complement. We do not use the invalid blanket inference that an
+arbitrary strict rank-ten leaf pays an otherwise uncontrolled hostile
+rank-one complement.
 
 Thus a disconnected residual can survive pruning only while every leaf mark
 is a hostile singleton `P` or `Q`, except that a rank-two or rank-three leaf may

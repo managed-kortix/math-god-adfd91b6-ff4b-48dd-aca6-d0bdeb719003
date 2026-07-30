@@ -499,7 +499,7 @@ def two_arm_common_hub_plan(row):
     return plan
 
 
-def verify_plan(row, plan):
+def verify_plan(row, plan, submitted_position_owners=None):
     adjacency = BASE.BASE.adjacency(row.tree)
     for packet in plan.packets:
         derived = terminal_packet(row.tree, packet.cycles, packet.demands, packet.name)
@@ -541,8 +541,28 @@ def verify_plan(row, plan):
     split_by_active = {frozenset(split.active): split for split in plan.splits}
     require(len(split_by_active) == len(plan.splits), "two splits refine the same active territory")
     root = frozenset(TRIANGLES)
+    child_active_sets = [
+        frozenset(cycles)
+        for split in plan.splits
+        for _, cycles in split.owners
+        if cycles
+    ]
+    for active in split_by_active:
+        if active == root:
+            continue
+        require(child_active_sets.count(active) == 1,
+                "recursive split is not the unique active child of its parent")
     terminals = {frozenset(packet.cycles): index for index, packet in enumerate(plan.packets)
                  if packet.cycles}
+
+    def child_adhesion(positions, child):
+        candidates = [
+            position for position in positions
+            if position.kind == "cut" and set(adjacency[position.vertex]) & set(child)
+        ]
+        require(len(candidates) == 1,
+                "router child does not have one concrete adhesion position")
+        return candidates[0]
 
     def resolve(active, site):
         if active in terminals:
@@ -552,44 +572,90 @@ def verify_plan(row, plan):
         matches = []
         for positions, cycles in split.owners:
             if site in positions:
-                matches.append(frozenset(cycles))
+                matches.append((positions, frozenset(cycles), True))
             elif site.kind == "private" and site.vertex in cycles:
-                matches.append(frozenset(cycles))
+                matches.append((positions, frozenset(cycles), False))
             elif site.kind == "cut" and set(adjacency[site.vertex]) & set(cycles):
-                matches.append(frozenset(cycles))
+                matches.append((positions, frozenset(cycles), False))
         require(len(matches) == 1, "recursive adhesion does not select one child")
-        if not matches[0]:
+        positions, child, explicit = matches[0]
+        if not child:
             labels = [label for label, position in zip(PENTAGONS, row.positions)
-                      if position == site]
+                      if position in positions]
             owners = [index for index, packet in enumerate(plan.packets)
                       if set(labels) & set(packet.demands) and not packet.cycles]
             require(len(set(owners)) == 1, "hostile-only interval has no unique final owner")
             return owners[0]
-        return resolve(matches[0], site)
+        # Preserve a site while it merely lies inside an ancestral branch. Once
+        # it is an explicit vertex of the current router interval, continue
+        # through that child's unique cut adhesion. This binds private
+        # parent-router positions without pretending they are descendant sites.
+        next_site = child_adhesion(positions, child) if explicit else site
+        return resolve(child, next_site)
 
+    interval_owner_records = []
     for split in plan.splits:
         for positions, cycles in split.owners:
-            if not cycles:
-                continue
-            anchor = positions[-1]
-            resolve(frozenset(cycles), anchor)
+            root_owners = {resolve(root, position) for position in positions}
+            require(len(root_owners) == 1,
+                    "concrete router interval positions have different root owners")
+            root_owner = next(iter(root_owners))
+            if cycles:
+                child_owner = resolve(
+                    frozenset(cycles), child_adhesion(positions, frozenset(cycles))
+                )
+                require(root_owner == child_owner,
+                        "router interval child owner disagrees with root owner: "
+                        f"router={split.router} active={split.active} positions={positions} "
+                        f"cycles={cycles} root={root_owner} child={child_owner}")
+            for position in positions:
+                interval_owner_records.append((position, root_owner))
     cycle_owner = {
         cycle: index for index, packet in enumerate(plan.packets) for cycle in packet.cycles
     }
+    cut_owner_records = []
     for cut in range(9, len(adjacency)):
+        position = BASE.Position("cut", cut)
+        resolved_owner = resolve(root, position)
+        cut_owner_records.append((position, resolved_owner))
         owners = {cycle_owner[cycle] for cycle in adjacency[cut] if cycle in cycle_owner}
         require(len(owners) <= 1, "retained cut has competing final owners")
         if owners:
-            require(resolve(root, BASE.Position("cut", cut)) in owners,
+            require(resolved_owner in owners,
                     "recursive cut owner disagrees with final packet")
     for label, position in zip(PENTAGONS, row.positions):
         packet = next(index for index, item in enumerate(plan.packets) if label in item.demands)
         require(resolve(root, position) == packet,
                 "connector mark does not recursively reach its declared packet")
+    expected_positions = tuple(
+        [BASE.Position("cut", cut) for cut in range(9, len(adjacency))]
+        + [position for router in plan.routers
+           for position in local_triangle_positions(row.tree, router)
+           if position.kind == "private"]
+    )
+    require(len(expected_positions) == len(set(expected_positions)),
+            "independently derived final-position domain has duplicate keys")
+    derived_records = tuple(cut_owner_records + interval_owner_records)
+    derived_map = {}
+    for position, owner in derived_records:
+        old = derived_map.setdefault(position, owner)
+        require(old == owner, "final position receives competing terminal owners")
+    require(set(derived_map) == set(expected_positions),
+            "final position/cut owner map has an inexact domain")
+    canonical_records = tuple((position, derived_map[position])
+                              for position in sorted(expected_positions))
+    if submitted_position_owners is not None:
+        submitted = CORE.exact_owner_map(
+            submitted_position_owners, expected_positions,
+            "submitted final position/cut owners",
+        )
+        require(submitted == derived_map,
+                "submitted final position/cut owners differ from recursive resolution")
     require(plan.bound.positive(), "theorem ledger is not positive")
+    return canonical_records
 
 
-def plan_text(row, plan):
+def plan_text(row, plan, position_owners):
     packets = ";".join(
         f"{packet.cycles}:{','.join(packet.demands)}:{packet.theorem}:"
         f"{packet.bound.credit},{packet.bound.deficits},{int(packet.bound.strict)}"
@@ -599,7 +665,10 @@ def plan_text(row, plan):
         f"T{step.router}@{step.active}:{step.interval_sizes}:{step.owners}"
         for step in plan.splits
     )
-    return f"{row.signature}|{packets}|{splits}"
+    owners = ";".join(
+        f"{position.text()}={owner}" for position, owner in position_owners
+    )
+    return f"{row.signature}|{packets}|{splits}|final-positions={owners}"
 
 
 def repair_text(row, repair):
@@ -628,7 +697,7 @@ def expect_rejected(action, label):
 
 def mutation_self_tests(plan_rows, repairs, repair_rows):
     tests = 0
-    row, plan = next((row, plan) for row, plan in plan_rows if plan.packets)
+    row, plan = next((row, plan) for row, plan, _ in plan_rows if plan.packets)
     bad_packet = replace(plan.packets[0], bound=Bound(Fraction(999), 0, True))
     expect_rejected(
         lambda: verify_plan(row, replace(plan, packets=(bad_packet,) + plan.packets[1:])),
@@ -636,7 +705,46 @@ def mutation_self_tests(plan_rows, repairs, repair_rows):
     )
     tests += 1
 
-    row, plan = next((row, plan) for row, plan in plan_rows
+    row, plan, owners = next((row, plan, owners) for row, plan, owners in plan_rows
+                             if owners)
+    position, owner = owners[0]
+    bad_owners = ((position, owner), (position, owner)) + owners[1:]
+    expect_rejected(lambda: verify_plan(row, plan, bad_owners),
+                    "duplicate final position owner key")
+    tests += 1
+
+    packet_count = len(plan.packets)
+    forged = (owner + 1) % packet_count if packet_count > 1 else owner + 1
+    bad_owners = ((position, forged),) + owners[1:]
+    expect_rejected(lambda: verify_plan(row, plan, bad_owners),
+                    "forged final position owner")
+    tests += 1
+
+    ambiguity_fixture = next(
+        ((row, plan, index, owner_index, position)
+         for row, plan, _ in plan_rows
+         for index, split in enumerate(plan.splits)
+         for owner_index, (positions, cycles) in enumerate(split.owners)
+         if cycles
+         for position in positions
+         if position.kind == "cut"),
+        None,
+    )
+    require(ambiguity_fixture is not None, "shared-cut interval ambiguity fixture is absent")
+    row, plan, split_index, owner_index, position = ambiguity_fixture
+    split = plan.splits[split_index]
+    target_index = next(index for index in range(len(split.owners)) if index != owner_index)
+    target_positions, target_cycles = split.owners[target_index]
+    bad_target = (target_positions + (position,), target_cycles)
+    bad_owners = split.owners[:target_index] + (bad_target,) + split.owners[target_index + 1:]
+    bad_split = replace(split, owners=bad_owners,
+                        interval_sizes=tuple(len(items) for items, _ in bad_owners))
+    bad_splits = plan.splits[:split_index] + (bad_split,) + plan.splits[split_index + 1:]
+    expect_rejected(lambda: verify_plan(row, replace(plan, splits=bad_splits)),
+                    "shared-cut interval ambiguity")
+    tests += 1
+
+    row, plan = next((row, plan) for row, plan, _ in plan_rows
                      if any(split.interval_sizes == (2, 1) for split in plan.splits))
     index = next(index for index, split in enumerate(plan.splits)
                  if split.interval_sizes == (2, 1))
@@ -647,7 +755,7 @@ def mutation_self_tests(plan_rows, repairs, repair_rows):
                     "swapped ordered triangle intervals")
     tests += 1
 
-    row, plan = next((row, plan) for row, plan in plan_rows if len(plan.splits) >= 2)
+    row, plan = next((row, plan) for row, plan, _ in plan_rows if len(plan.splits) >= 2)
     bad_child = replace(plan.splits[1], active=plan.splits[0].active)
     bad_splits = (plan.splits[0], bad_child) + plan.splits[2:]
     expect_rejected(lambda: verify_plan(row, replace(plan, splits=bad_splits)),
@@ -897,11 +1005,11 @@ def main():
         if plan is None:
             residuals.append(row)
             continue
-        verify_plan(row, plan)
+        position_owners = verify_plan(row, plan)
         accepted.append(row)
-        accepted_plans.append((row, plan))
+        accepted_plans.append((row, plan, position_owners))
         theorem_counts.update(packet.theorem for packet in plan.packets)
-        records.append(plan_text(row, plan))
+        records.append(plan_text(row, plan, position_owners))
         exceptional = (
             len(plan.splits) == 2
             and plan.routers == tuple(position.vertex for position in row.positions)
@@ -909,7 +1017,7 @@ def main():
             and all(len(split.interval_sizes) == 2 for split in plan.splits)
         )
         if exceptional:
-            two_arm_records.append(plan_text(row, plan))
+            two_arm_records.append(plan_text(row, plan, position_owners))
         if index % 5000 == 0:
             print(f"checked {index}/{len(rows)}", flush=True)
 
@@ -960,14 +1068,14 @@ def main():
             "fail-closed: search residuals differ from specified six signatures")
     require(accepted_digest == "8d170ef9af714c6288214e5933826fcbfe2d006dc0e70c7277a393fc2d18239c",
             "ordinary accepted-signature digest changed")
-    require(proof_digest == "d59ea6b38bef5f5bcdd2d6dbf2ebcb40db7096059c573c53c49122785de904c2",
+    require(proof_digest == "58f9951b620fa9f4830724a8bbc5b426a6125437b11c84b125d4ee63488dd3ec",
             "ordinary proof digest changed")
     require(len(two_arm_records) == 15, "explicit two-arm plan count changed")
-    require(two_arm_digest == "c609dbaec9d7c8abe4e66c5f01375e88b28e56b77110c2be17e026eb46f48f5c",
+    require(two_arm_digest == "1512256af2a6e1294ca6f21d176877829ad1fd1aabb7555345e5486cb8b3b98d",
             "explicit two-arm plan digest changed")
     require(repair_digest == "9b8631b8d1b92970584156e2e444fedf78c2394e0867d43c1204aa09c4f49e0e",
             "safe repair digest changed")
-    require(mutation_count == 7, "mutation self-test count changed")
+    require(mutation_count == 10, "mutation self-test count changed")
 
 
 if __name__ == "__main__":

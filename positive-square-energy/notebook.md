@@ -1,5 +1,23 @@
 # notebook — positive square energy
 
+## 2026-07-30 — all rank-eleven cacti
+
+The global proof is now exhaustive: DNN reduces to `T^10Q,T^9PP`; parity-
+complete all-rank theorems close `T^10Q`; shared-cut clusters split `T^9PP`
+into 253 direct rows, 13 bridge-pruning rows, or one fully shared cluster. The
+13 rows reduce exactly to `T^9P|P` and `P|A9|P`, both certified, while the one-
+cluster universe is `115512=115502+10`.
+
+The final hostile audit found that the old blanket rank-ten leaf statement was
+false when the complement is a hostile singleton; all actual uses had positive
+bound sums, now stated directly. It also found that A9 ordinary records had not
+assigned cuts incident only with sacrificed routers. The checker now resolves
+all shared cuts and private router positions through exact unique active-child
+nesting and freezes complete owner maps. A lifting lemma assigns arbitrary
+external pentagons, connectors, remnants, and rooted trees without changing
+complete cycle profiles. Ten A9 mutations reject. The definitive paper audit
+accepted the strict theorem `s+(G)>n` for every connected rank-eleven cactus.
+
 ## 2026-07-30 — nonhostile `T^rQ` closed at all ranks
 
 For a packing-one graph whose cycles have lengths even or `3 mod 4`, with at
