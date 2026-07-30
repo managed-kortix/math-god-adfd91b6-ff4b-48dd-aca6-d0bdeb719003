@@ -5,11 +5,11 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after completed triad-star leakage no-go
-- **active main funnel:** selection review.  Completing the first-generation
-  support does not make exterior leakage coercive: an exact epsilon-family has
-  order-one critical production and exterior weighted launch norm squared
-  `O(epsilon^2)`, so every universal flux/leakage constant diverges.
+- **phase:** portfolio rotation after isotropic-flow reflection-positivity gate
+- **active main funnel:** selection review.  Positive four-dimensional heat
+  flow is not an OS-positive observable map even for a free scalar channel: its
+  strictly log-concave time kernel gives a negative two-point reflection Hankel
+  determinant.  Half-space flow remains only a conditional replacement.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -141,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 125
+- **cycle:** 126
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +174,21 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 126 retired ordinary isotropic flow as an automatic
+  Yang--Mills OS-positive compactness gate.  For
+  `C_t(p0)=exp(-2t p0^2)/(p0^2+w^2)`, the time kernel is the convolution of a
+  Gaussian and `exp(-w|tau|)/(2w)`, hence strictly log-concave.  Thus every
+  distinct positive pair `s1,s2` gives
+  `K(2s1)K(2s2)-K(s1+s2)^2<0`; `t=w=1,s1=1/2,s2=1` is an explicit certificate.
+  Scope is exact for linear heat smearing and conditional for nonlinear
+  Yang--Mills channels with proved rapid momentum decay.  Half-space flow
+  restores positive-time measurability and has an exact free image-kernel
+  boundary defect, but its nonlinear shrinking-flow construction is open.
+  Navier time integration still fails on short/low-Reynolds scales, the Hodge
+  single-character projector is not rational over `F_32`, the RH nonnegative
+  prime-interval gate retains an uncancellable pole, and size-two decision-tree
+  rank saturation has no P-versus-NP implication.
 
 - 2026-07-30: Cycle 125 retired Navier complete-star leakage coercivity.  The
   Cycle 113 core augmented by epsilon times all four launch modes has exact
