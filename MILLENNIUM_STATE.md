@@ -5,11 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after exhaustive adjacent-plane no-go
-- **active main funnel:** selection review.  All `1023` Hermitian graph planes
-  meeting the fixed alpha-visible `L_A` in a line give full union normal-map
-  rank jump `17 -> 18`; no adjacent reduced pair lifts to the standard Fermat
-  `W_2` model.  Hodge remains bounded pending a distinguished collective cycle.
+- **phase:** portfolio rotation after Yang--Mills loop-modulus UV gate
+- **active main funnel:** selection review.  Bare Wilson loops have only
+  logarithmic one-plaquette continuity and Gaussian nearby-contour
+  decorrelation from perimeter/cusp ultraviolet noise; renormalized loops lose
+  automatic boundedness and the proposed loop compactness criterion was also
+  insufficient for a complete OS local theory.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -141,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 123
+- **cycle:** 124
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +175,19 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 124 tested and retired Yang--Mills bare-loop compactness.
+  Exact plaquette insertion gives `|Delta W|^2<=2(1-W_p)`, only
+  `O(1/log(1/a))` along asymptotic freedom rather than a positive geometric
+  Hölder power.  Gaussian edge displacement yields
+  `2(1-exp(-S_a(h)))` with `S_a(h)~g^2 L/a` for resolved nearby contours, so
+  bare loops decorrelate.  Perimeter/cusp renormalization sacrifices automatic
+  boundedness/tightness and does not automatically preserve reflection
+  positivity.  Moreover loop moment tightness plus one noncollapse variance
+  omits OS consistency, Euclidean restoration, local fields, temperedness, and
+  dynamics.  Hodge's complete 1023-pair no-go remains bounded; MCSP annihilator
+  degree, BSD quadratic base change, RH finite Euler perturbations, and global
+  Yang compactness all failed their promotion gates.
 
 - 2026-07-30: Cycle 123 exhaustively closed the minimal interacting Hermitian-
   plane ansatz.  Every line-intersecting neighbor is `B_z=A(I+zz^t)` for one of
