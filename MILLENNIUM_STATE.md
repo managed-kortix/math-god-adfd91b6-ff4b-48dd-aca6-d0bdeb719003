@@ -5,12 +5,11 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge nonlinear adjacent-plane lifting gate
-- **active main funnel:** test the full `W_2` embedded obstruction of the three
-  alpha-visible rank-one Hermitian neighbors whose nine component middle
-  obstruction coordinates cancel.  One adjacent pair `L_A union L_I` is
-  already exactly obstructed by rank `17 -> 18` in its complete union normal
-  map; componentwise cancellation alone does not count.
+- **phase:** portfolio rotation after exhaustive adjacent-plane no-go
+- **active main funnel:** selection review.  All `1023` Hermitian graph planes
+  meeting the fixed alpha-visible `L_A` in a line give full union normal-map
+  rank jump `17 -> 18`; no adjacent reduced pair lifts to the standard Fermat
+  `W_2` model.  Hodge remains bounded pending a distinguished collective cycle.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 122
+- **cycle:** 123
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +174,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 123 exhaustively closed the minimal interacting Hermitian-
+  plane ansatz.  Every line-intersecting neighbor is `B_z=A(I+zz^t)` for one of
+  `1023` nonzero isotropic `z=(a,b,a+b)`.  Genuine `W_2(F_32)` computation of
+  each complete `(1,1,2)` union gives `rank(M)=17` and `rank(M|h)=18`; liftable
+  pairs are zero.  The deterministic 1023-record stream has SHA-256
+  `c893f4112547e53d50f762167923aa67e17008f7c24cb11bfdaa0f179e9633fe`.
+  This includes all three componentwise-cancellation candidates.  The result
+  does not obstruct triples, nonreduced cycles, relative Chow classes, or the
+  Hodge conjecture, so the funnel rotates rather than launching an unstructured
+  larger census.
 
 - 2026-07-29: Cycle 122 promoted the Hodge nonlinear adjacent-plane gate.  The
   exact relation `A-I=uu^t` makes `L_A union L_I` a `(1,1,2)` complete
