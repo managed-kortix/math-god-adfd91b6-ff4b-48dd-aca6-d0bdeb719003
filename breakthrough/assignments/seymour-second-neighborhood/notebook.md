@@ -1058,3 +1058,20 @@ No audits yet.
   931 leaves, first piloting the three hard singleton leaves and a stratified
   sample to bound proof storage. Independently regenerate and fresh-check every
   retained object before closing both k=5 rows.
+
+### Reduced k=5 certificate closure
+
+- Completed all 931 packet leaves. The campaign represents 917,003,695 raw LRAT
+  bytes and compresses to a 120,197,280-byte archive with SHA-256
+  `d3f845d9...137c0f1d`.
+- Fresh deterministic CNF regeneration, object hash readback, decompression, and
+  pinned `lrat-check` acceptance succeeded for every leaf:
+  `PASS leaves=931 labelled=758181`.
+- Together with the independently audited common projection, this durably closes
+  both final isolated-root rows `(rho,k)=(0,5)` and `(1,5)`. Thus every row in
+  the isolated-root `m=9` aggregate is now eliminated.
+- Scope remains restricted: this closes the isolated-hole branch of the order-18
+  minimum-outdegree-eight program, not all order-18 counterexamples and not SNC.
+- **Next queued attack:** return to the complete order-18 missing-graph split,
+  identify the exact non-isolated residual families outside this branch, and
+  derive the next sound structural compression rather than declaring victory.
