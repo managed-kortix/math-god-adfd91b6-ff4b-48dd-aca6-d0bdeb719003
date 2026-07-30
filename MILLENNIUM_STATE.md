@@ -5,11 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after isotropic-flow reflection-positivity gate
-- **active main funnel:** selection review.  Positive four-dimensional heat
-  flow is not an OS-positive observable map even for a free scalar channel: its
-  strictly log-concave time kernel gives a negative two-point reflection Hankel
-  determinant.  Half-space flow remains only a conditional replacement.
+- **phase:** portfolio rotation after spatial-smearing ultraviolet gate
+- **active main funnel:** selection review.  Slice-local spatial gauge smearing
+  exactly preserves reflection positivity, but a free transverse electric
+  channel retains a positive contact peak proportional to
+  `sigma^(-3/2) a_tau^(-1)`, so spatial smearing is not a standalone complete
+  four-dimensional UV regulator.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -141,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 126
+- **cycle:** 127
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +175,21 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 127 separated reflection positivity from ultraviolet
+  completeness for spatial gauge smearing.  Pullback by any gauge-equivariant,
+  reflection-commuting, single-time-slice smearing map preserves the original
+  positive-half algebra and hence exact regulator-level RP.  In free Maxwell
+  theory, however, the traced spatially smeared electric covariance has contact
+  coefficient `2/(4*pi*sigma)^(3/2)` and temporal-lattice peak
+  `2/((4*pi*sigma)^(3/2)*a_tau)`; the smooth zero-time term is
+  `-1/(4*pi^2*sigma^2)`.  A dependency-free exact verifier checks these
+  constants.  Thus spatial smearing is viable preprocessing but not complete
+  UV regularization.  The rational Hodge trace has a nonzero geometric orbit
+  projection but its apparent mod-2 scalar cancellation leaves a Witt carry;
+  Navier turnover/viscosity coercivity fails by amplitude rescaling; the BSD
+  cubic rank-one packet is classical; and decision-tree interpolation rank has
+  no direct lower-bound implication.
 
 - 2026-07-30: Cycle 126 retired ordinary isotropic flow as an automatic
   Yang--Mills OS-positive compactness gate.  For
