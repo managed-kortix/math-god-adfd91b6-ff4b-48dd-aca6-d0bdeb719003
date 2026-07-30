@@ -137,6 +137,29 @@
       },
       "ai_assistance_disclosed": true,
       "notes": "The result answers only whether the proposed W can have the requested primitive projections. It does not decide algebraicity of the exceptional degree-33 character or the Hodge conjecture. Targeted source and citation audit found no prior explicit observation, but priority is stated cautiously."
+    },
+    {
+      "id": "all-rank-eleven-cacti",
+      "kind": "partial_class_theorem",
+      "statement": "Every connected cactus G of cyclomatic rank eleven satisfies s^+(G)>|V(G)|.",
+      "source_url": "https://arxiv.org/abs/2506.07264v1",
+      "source_label": "Strict rank-eleven cactus case of Akbari--Kumar--Mohar--Pragada--Zhang Conjecture 1.2",
+      "year": 2026,
+      "area": "Spectral graph theory",
+      "scope_status": "verified_partial_class_result",
+      "paper_folder": "all-rank-eleven-cacti",
+      "evidence_url": "https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/all-rank-eleven-cacti/paper.pdf",
+      "ocb": {
+        "eligibility": "ineligible_partial_result_not_resolution",
+        "status": "withheld_from_resolution_reporting",
+        "public_id": null
+      },
+      "x": {
+        "status": "posted_and_api_readback_verified",
+        "tweet_id": "2082755347719069956",
+        "posted_at": "2026-07-30T00:00:00Z"
+      },
+      "notes": "Major partial progress only. It neither resolves nor is reported as resolving the general conjecture. AI-generated manuscript and certificate suite are disclosed in the public folder."
     }
   ],
   "withheld_groups": [
