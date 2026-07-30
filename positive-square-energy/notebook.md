@@ -15,6 +15,22 @@ a 2-connected rank-three block suppresses to four multigraph kernels. DNN block
 savings should sieve easy path residues, leaving coarse hostile-cycle phase
 packets with budget `D>=-4`.
 
+## 2026-07-30 — exact DNN closeout of the four-path kernel
+
+The DNN constant has exact elliptope dual
+`kappa=min_C sum_E 2/(1-C_e)`. For r paths with common terminals, fixing their
+correlation separates the path costs exactly and equal-angle interpolation is
+attainable. For four path lengths the excess over `L` is the minimum of the
+four tangent terms in `tricyclic-general/four-path-dnn-theorem.md`; it is at
+most 2. Hence `kappa<=L+2=n+4`, closing this entire kernel including arbitrary
+rooted trees. Do not confuse this with a generic two-terminal DNN additivity
+claim: the proof uses the correlation dual and a common endpoint correlation.
+
+Two tempting theta+cycle tools are false. The arbitrary-graph root activity
+phase lemma fails already for a paw graph, and `D(X vee Y)>=D(X)+D(Y)` fails
+for `C3 vee C3` and for `Theta(1,2,2) vee C3`. A direct rooted packet remains
+necessary.
+
 ## 2026-07-30 — every connected bicyclic graph
 
 The attached-theta phase problem closes pointwise after charging hostile odd

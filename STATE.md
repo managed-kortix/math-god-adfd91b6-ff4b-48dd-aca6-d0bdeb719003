@@ -17,6 +17,16 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-30: proved a complete DNN theorem for the first 2-connected
+  tricyclic kernel: every simple four-path generalized theta subdivision with
+  arbitrary rooted-tree attachments satisfies `s^+>=n`. The exact correlation
+  dual reduces kappa to one endpoint angle; a rigorous four-term tangent lemma
+  gives `kappa<=n+4`, with auxiliary equality only at lengths `(1,2,2,2)`.
+  Durable proof: `positive-square-energy/tricyclic-general/four-path-dnn-theorem.md`.
+  Also classified all rank-three suppressed kernels as four-path theta,
+  doubled triangle, K4, or doubled C4. Direct theta+cycle gluing remains open:
+  both a proposed arbitrary root-phase lemma and D-superadditivity under
+  coalescence were explicitly disproved, so neither may be used.
 - 2026-07-30: after the complete bicyclic theorem, tested promotion by adding
   one edge. Exhaustive data strongly suggest `s+(H+e)>=s+(H)` for bicyclic H,
   but the proposed generic finite-kernel phase-SOS proof was rejected: it did
