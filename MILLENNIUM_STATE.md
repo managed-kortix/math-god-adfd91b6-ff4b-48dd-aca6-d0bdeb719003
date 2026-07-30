@@ -5,12 +5,11 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after Wick-contact aliasing gate
-- **active main funnel:** selection review.  The naively centered square of a
-  spatially smoothed electric field is not tight even in free Maxwell theory:
-  temporal contact noise is squared and aliases into every external lattice
-  frequency with variance `1/(96*pi^3*sigma^3*a_tau)`.  A valid interacting
-  compactness target first needs a reflection-compatible composite regulator.
+- **phase:** portfolio rotation after canonical Hodge triple obstruction
+- **active main funnel:** selection review.  The unique orthogonal orbit of
+  hyperbolic-pair triples containing the explicit alpha-visible Hermitian plane
+  has a controlled Hilbert--Burch union, but its genuine W2 normal map has rank
+  jump `23 -> 24`.  This canonical reduced triple is retired.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +141,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 131
+- **cycle:** 132
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +174,18 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 132 tested the canonical Hodge triple rather than launching
+  a census.  `O_3(F_32)` acts simply transitively on ordered isotropic pairs
+  `z,w` with `z.w=1`, so there is one hyperbolic-pair orbit.  For
+  `z=(1,0,1), w=(0,1,1)`, the three-plane union has ideal
+  `(s(s+x0+x2),sr,r(r+x1+x2))`, quotient dimensions `5,12,22,1717`, and full
+  normal dimension `23`.  Genuine W2 arithmetic gives an obstruction with 215
+  terms and exact rank jump `rank(M)=23`, `rank(M|h)=24`, new pivot
+  `x1^16*x2^17`.  Its alpha coefficient is still nonzero (`28` in the chosen
+  field encoding), so failure occurs at lifting rather than visibility.  This
+  closes only the canonical hyperbolic incidence orbit, not other triples or
+  Chow cycles.
 
 - 2026-07-30: Cycle 131 falsified the naive Yang--Mills negative-Sobolev
   compactness target already in lattice free Maxwell theory.  For centered
