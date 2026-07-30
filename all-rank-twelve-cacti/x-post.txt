@@ -1,0 +1,7 @@
+proved the positive square-energy conjecture strictly for every connected cactus of cyclomatic rank twelve.
+
+paper and certificate:
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/tree/main/all-rank-twelve-cacti
+
+pdf:
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/all-rank-twelve-cacti/paper.pdf

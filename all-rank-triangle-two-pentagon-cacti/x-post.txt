@@ -1,0 +1,7 @@
+proved the positive square-energy conjecture strictly for every connected cactus with arbitrarily many triangles and exactly two pentagons.
+
+paper and proof:
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/tree/main/all-rank-triangle-two-pentagon-cacti
+
+pdf:
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/all-rank-triangle-two-pentagon-cacti/paper.pdf
