@@ -1,0 +1,7 @@
+proved the positive square-energy conjecture strictly for every connected cactus with at least two cycles.
+
+paper and certificate:
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/tree/main/all-nonunicyclic-cacti
+
+pdf:
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/all-nonunicyclic-cacti/paper.pdf
