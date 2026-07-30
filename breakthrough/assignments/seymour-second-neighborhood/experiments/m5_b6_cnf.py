@@ -13,16 +13,27 @@ def exact(c,o,v):
  if v==0:c.add(-o[0])
  elif v==len(o):c.add(o[-1])
  else:c.add(o[v-1]);c.add(-o[v])
-def emit(i,path,high_c=None,r=None):
+def emit(i,path,high_c=None,r=None,high_mask=None,cstates=None,tail=None,witnesses=()):
  name,w=placements()[i];n,edges=SHAPES[name];mp=embedding(name,w);E={tuple(sorted((mp[u],mp[v]))) for u,v in edges};c=generate(18,6,5,True,None,None,True)
  for u in range(18):
   for v in range(u+1,18):c.add(c.var(f"h_{u}_{v}") if (u,v) in E else -c.var(f"h_{u}_{v}"))
  if high_c is not None:exact(c,threshold(c,[c.var(f"cnt_d1_{u}_17_9") for u in range(15,18)],f"cube_highC_{high_c}"),high_c)
  if r is not None:exact(c,threshold(c,[c.var(f"a_{u}_{v}") for u in range(15,18) for v in range(9,15)],f"cube_r_{r}"),r)
+ if high_mask is not None:
+  for j,u in enumerate(range(15,18)):c.add(c.var(f"cnt_d1_{u}_17_9") if j in high_mask else -c.var(f"cnt_d1_{u}_17_9"))
+ if cstates is not None:
+  for state,(u,v) in zip(cstates,((15,16),(15,17),(16,17))):
+   if state==0:c.add(c.var(f"a_{u}_{v}"))
+   elif state==1:c.add(c.var(f"a_{v}_{u}"))
+   else:c.add(c.var(f"h_{u}_{v}"))
+ if tail is not None:
+  for u in range(15,18):
+   for v in range(9,15):c.add(c.var(f"a_{u}_{v}") if (u==15+tail and v==9) else -c.var(f"a_{u}_{v}"))
+ for w,u in witnesses:c.add(c.var(f"wit_{w}_{u}"))
  with open(path,"w",encoding="ascii",newline="\n") as f:
   for key,val in c.names.items():f.write(f"c var {val} {key}\n")
   f.write(f"p cnf {len(c.names)} {len(c.clauses)}\n")
   for z in c.clauses:f.write(" ".join(map(str,z))+" 0\n")
- print(f"index={i} shape={name} word={w} highC={high_c} r={r} support={sorted(E)} vars={len(c.names)} clauses={len(c.clauses)}")
+ print(f"index={i} shape={name} word={w} highC={high_c} r={r} high_mask={high_mask} cstates={cstates} tail={tail} support={sorted(E)} vars={len(c.names)} clauses={len(c.clauses)}")
 if __name__=="__main__":
  p=argparse.ArgumentParser();p.add_argument("index",type=int);p.add_argument("output");p.add_argument("--high-c",type=int);p.add_argument("--r",type=int);a=p.parse_args();emit(a.index,a.output,a.high_c,a.r)

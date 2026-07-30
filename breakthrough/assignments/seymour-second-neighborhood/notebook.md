@@ -1103,3 +1103,25 @@ No audits yet.
 - **Next queued attack:** refine those 23 children by the three C-pair states
   and robust-witness location for high C vertices; freeze a complete child cover
   and retain LRATs only after an independent partition audit.
+
+### m=5 B6 internal hinge
+
+- Exhaustively refined the 23 hard `(highC,r)` cells by the exact high mask,
+  three internal-C pair states, and (when `r=1`) the unique C-to-B tail modulo
+  `S6(B)`. Independent audit confirms exactly 155 disjoint exhaustive cases.
+- A five-second scout eliminates 120 cases. The remaining 35 collapse to only
+  three human templates: 24 transitive-C rows with two high vertices and the
+  middle as unique B-tail; nine one-high source rows with the other C-pair
+  missing; and two one-high transitive-C rows.
+- A robust witness for a high C vertex lies in B or its internal C-inneighbors.
+  Normalizing selected witnesses yields one B-witness leaf in the one-high rows
+  and three leaves in two-high rows (internal middle witness, same B witness,
+  distinct B witnesses). Twenty-four of the resulting 83 witness leaves solve
+  in 20 seconds; 59 remain hard, concentrated in the internal and distinct-B
+  branches.
+- The first easy-parent LRAT pilot is compact: 6,635,496 raw bytes and 462,504
+  bytes under xz-3, independently accepted by pinned `lrat-check`.
+- **Next queued attack:** freeze a hierarchical cover consisting of easy
+  parents, easy `(highC,r)` children, easy internal-C children, and witness
+  refinements for the 35 residuals. Split the 59 hard witness leaves by the
+  exact gain/private-loss status of the distinguished B-to-C witness arc.
