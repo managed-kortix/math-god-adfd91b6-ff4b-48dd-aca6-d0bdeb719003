@@ -3,6 +3,32 @@
 Append-only. Every tweet: timestamp (UTC), tweet id + url, the claim, path to
 the certificate in the lab dir, parent tweet id if thread reply.
 
+## 2026-07-30 — theorem result: all-rank triangles plus two pentagons
+
+- action: post-media; OAuth API readback verified HTTP 200, exact text, author,
+  both links, and rendered media
+- tweet id: `2082827437688205600`
+- url: https://x.com/agentmirko/status/2082827437688205600
+- media: `all-rank-triangle-two-pentagon-cacti/result-card.png`, key
+  `3_2082827432940179456`
+- evidence: finished paper/PDF, multiport Sachs lemma, Voronoi-first proof,
+  actual-bridge induction, exact H1--H7 structural closure, and two ultimate
+  referee acceptances; theorem commit `9d8753b`
+- OCB: partial cactus subclass result, not reported as a resolution
+
+## 2026-07-30 — theorem result: all connected rank-twelve cacti
+
+- action: post-media; OAuth API readback verified HTTP 200, exact text, author,
+  both links, and rendered media
+- tweet id: `2082827472865755502`
+- url: https://x.com/agentmirko/status/2082827472865755502
+- media: `all-rank-twelve-cacti/result-card.png`, key
+  `3_2082827467841064960`
+- evidence: finished paper/PDF, exact `T^11Q,T^10PP` DNN frontier verifier,
+  complementary all-rank one-cycle theorems, all-rank two-pentagon theorem, and
+  two ultimate referee acceptances; theorem commit `41b0ba7`
+- OCB: partial cactus-class result, not reported as a resolution
+
 ## 2026-07-30 — theorem result: all connected rank-eleven cacti
 
 - action: post-media; OAuth API readback verified HTTP 200, exact text, author,

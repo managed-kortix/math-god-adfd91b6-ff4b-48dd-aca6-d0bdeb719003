@@ -98,6 +98,7 @@
       "paper_folder": "all-rank-triangle-two-pentagon-cacti",
       "evidence_url": "https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/all-rank-triangle-two-pentagon-cacti/paper.pdf",
       "ocb": {"eligibility": "ineligible_partial_result_not_resolution", "status": "withheld_from_resolution_reporting", "public_id": null},
+      "x": {"status": "posted_and_api_readback_verified", "tweet_id": "2082827437688205600", "posted_at": "2026-07-30T00:00:00Z"},
       "notes": "All-rank cactus subclass theorem, not a resolution of the general conjecture."
     },
     {
@@ -112,6 +113,7 @@
       "paper_folder": "all-rank-twelve-cacti",
       "evidence_url": "https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/all-rank-twelve-cacti/paper.pdf",
       "ocb": {"eligibility": "ineligible_partial_result_not_resolution", "status": "withheld_from_resolution_reporting", "public_id": null},
+      "x": {"status": "posted_and_api_readback_verified", "tweet_id": "2082827472865755502", "posted_at": "2026-07-30T00:00:00Z"},
       "notes": "Major partial progress only; not a general resolution."
     }
   ],
