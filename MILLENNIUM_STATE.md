@@ -5,12 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after Kurihara localization refinement
-- **active main funnel:** selection review.  The `433a1` certificate is now
-  robust under mixed-rectangle transport and has an explicit auxiliary-prime
-  localization determinant `6 mod 7`, independently certifying rational
-  generator independence.  Further finite Kurihara examples are routine absent
-  a family nonvanishing theorem, so the funnel rotates.
+- **phase:** portfolio rotation after temporal-block composite no-go
+- **active main funnel:** selection review.  Temporal blocking before squaring
+  suppresses free electric Wick aliasing only at nonzero physical time width;
+  shrinking the block restores a `1/ell` divergence, while exact target-vertex
+  retention forces a trivial all-pass delta filter.  A valid Yang--Mills route
+  needs a genuine reflection-compatible composite renormalization.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 136
+- **cycle:** 137
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +175,19 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 137 generalized the Wick-contact obstruction to temporal
+  block preprocessing.  The exact box-filter fourth moment is
+  `2/(3m)+1/(3m^3)`, so lattice alias multiplicity is `~N/m`: fixed slice width
+  diverges as `1/a_tau`, fixed physical width gives a bilocal object of size
+  `1/ell`, and `ell->0` diverges.  More generally Fatou forces divergence for
+  every temporal approximate identity because the free electric covariance has
+  a nonzero high-frequency limit.  Exact two-leg vertex retention forces the
+  multiplier to be constant; a finite cyclic all-pass FIR is a delta
+  translation.  A dependency-free verifier checks moments and all-pass rigidity.
+  The Hodge `2x3` maximal-minor proposal was rejected by a height bound, and
+  coupled matrix-factorization scouts exposed unresolved grading/Ext issues;
+  no categorical lifting claim was persisted.
 
 - 2026-07-30: Cycle 136 refined, then retired, the `433a1` computation as a
   main funnel.  Rectangle-centering of the grouped modular-symbol matrix leaves
