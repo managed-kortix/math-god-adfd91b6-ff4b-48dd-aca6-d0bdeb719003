@@ -5,11 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after Navier critical-passage cancellation gate
-- **active main funnel:** selection review.  Completed tagged passages admit
-  exact simultaneous high-shell backscatter canceling the signed critical
-  derivative; shell-balance trichotomies allow Zeno cascades with summable
-  dissipation, and full Duhamel tree sums retain balanced-tree growth.
+- **phase:** Hodge nonlinear adjacent-plane lifting gate
+- **active main funnel:** test the full `W_2` embedded obstruction of the three
+  alpha-visible rank-one Hermitian neighbors whose nine component middle
+  obstruction coordinates cancel.  One adjacent pair `L_A union L_I` is
+  already exactly obstructed by rank `17 -> 18` in its complete union normal
+  map; componentwise cancellation alone does not count.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -141,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 121
+- **cycle:** 122
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +175,18 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-29: Cycle 122 promoted the Hodge nonlinear adjacent-plane gate.  The
+  exact relation `A-I=uu^t` makes `L_A union L_I` a `(1,1,2)` complete
+  intersection with line intersection and nonzero alpha class.  A
+  dependency-free verifier using genuine `W_2(F_32)` arithmetic constructs the
+  divided Fermat remainder and the complete 17-column union normal map;
+  `rank(M)=17` while `rank(M|h)=18`, so this union does not lift modulo `4`.
+  Three other rank-one neighbors cancel all nine component middle coordinates
+  while retaining alpha visibility; their full union obstruction is the next
+  experiment.  The known rank-two BSD example `37a1/Q(sqrt(-2))` follows from
+  Creutz--Miller rank-one cases and classical functoriality and is prior work,
+  not a new funnel result.
 
 - 2026-07-29: Cycle 121 declined Navier promotion.  An exact five-mode Fourier
   packet realizes simultaneous forward and backscatter triads with nonlinear
