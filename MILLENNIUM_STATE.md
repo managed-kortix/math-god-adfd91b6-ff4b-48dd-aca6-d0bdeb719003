@@ -5,12 +5,13 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** adjacent graded matrix-factorization cone gate
-- **active main funnel:** Hodge categorical lifting.  The full shifted `4|4`
-  Koszul factorizations of an abstract adjacent plane pair have exact
-  homogeneous odd morphism cohomology `k^2`, with explicit heterogeneous-degree
-  cocycles.  The next gate is the complete W2 obstruction test for all 33
-  projective `8|8` cones; no Orlov/geometric identification is assumed.
+- **phase:** actual adjacent cone obstruction contraction
+- **active main funnel:** Hodge categorical lifting.  The Cycle 122 adjacent
+  Fermat pair now has an exact sparse normal form and coordinate transform, but
+  the coefficientwise Teichmuller lift differs from the transformed standard
+  Fermat W2 model by a nonzero 76-term carry.  The next gate is the contracted
+  full endomorphism obstruction for all 33 projective `8|8` cones, retaining
+  this scalar carry and unrestricted lower-left corrections.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +143,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 138
+- **cycle:** 139
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +176,19 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 139 specialized the adjacent graded-MF gate to the actual
+  Cycle 122 Fermat pair.  An explicit coordinate transform of determinant `t`
+  sends the planes to `(q,r,s)` and `(p,r,s)` and gives
+  `F=pq(p^31+q^31)+rB32+sC32`, with support sizes `2,9,7` and 18 total terms.
+  Genuine W2 computation proves that coefficientwise Teichmuller lifting of
+  this sparse identity is not the transformed standard Fermat lift: the pure
+  carry has 76 terms and SHA-256
+  `883504597c5e7284aa84d9742da8c651fc259d6f0abf088d6dca86a38633b69b`.
+  Therefore cone computations over the multiplicatively lifted normal-form
+  potential solve the wrong deformation problem unless this carry is included.
+  Separate component obstruction does not settle unrestricted cone lifting,
+  because lower-left first-order corrections can alter diagonal defects.
 
 - 2026-07-30: Cycle 138 resolved the adjacent graded-MF Ext ambiguity.  In the
   normal form `L=(q,r,s), M=(p,r,s)`, with
