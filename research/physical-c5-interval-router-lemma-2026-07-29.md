@@ -60,6 +60,20 @@ is a cactus with exactly the claimed complete profile plus arbitrary forest
 attachments, which is precisely the scope of the tree-uniform packet theorems.
 QED.
 
+## Grouped-component corollary
+
+One occupied port may instead receive a singleton interval while the
+complementary four-vertex path receives several of the other incidence
+components under one owner. This two-owner coarsening is valid whenever those
+components together with the path form a connected owner-induced physical
+territory and its cyclomatic number equals the number of complete cycles derived
+after ownership. These are post-ownership physical predicates; a disconnected
+incidence carrier receives no exception. The same inducedness and exhaustion
+argument applies: the singleton and complementary path partition `C5`, every
+branch follows its actual port, and grouping branches cannot duplicate a cut or
+vertex. This is the form used by the U4 and U8 rank-eleven repairs; it is not the
+one-owner-per-component construction above.
+
 ## Executable gate
 
 `geometry_router_owner_core.py` exposes

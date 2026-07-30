@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Fail-closed first-phase verifier for fully shared rank-eleven T^9PP.
+"""Fail-closed physical verifier for fully shared rank-eleven T^9PP.
 
 The verifier regenerates the complete color-preserving incidence universe and
 searches ordinary one-cycle splits.  Every accepted split is then rebuilt on a
 concrete C3/C5 geometry, given exhaustive physical final owners, and classified
-again from the owned terminal packets.  The ten nonordinary rows remain
-explicitly unresolved here; this executable makes no full-closure claim.
+again from the owned terminal packets.  The ten nonordinary rows are closed by
+separately reconstructed physical opening/router certificates.
 """
 
 from __future__ import annotations
@@ -66,6 +66,7 @@ EXPECTED_DEGREE4_DIGEST = "1724a7155021b740373957fbcc81eee7dea4d9bc8892d4e9e2ccd
 EXPECTED_DEGREE5_DIGEST = "e9049b58c3212b15fb3892367822ed1051aa0663e58828b771658fa8544f020c"
 EXPECTED_CANDIDATE_COUNT = 517923
 EXPECTED_CANDIDATE_DIGEST = "071df2e10153eb21a8153cc3e45de6768e350a2257a692b0b03979227bc37a0f"
+EXPECTED_REPAIR_DIGEST = "eedc3bebd64e4711849115b3846db2eee2a93cd7ffee628e49f7a3133f73c324"
 TRIANGLE_MARGIN = {1: 0, 2: 1, 3: 2, 4: 3, 5: 2, 6: 1, 7: 0, 8: 0, 9: 0}
 
 
@@ -128,6 +129,54 @@ class Certificate:
     attachment_owners: tuple[tuple[ForestAttachment, int], ...]
     packets: tuple[Packet, ...]
     bound: Bound
+
+
+@dataclass(frozen=True)
+class RadicalLedger:
+    credit: Fraction
+    deficits: int
+    sqrt13_charge: Fraction
+    strict: bool
+
+    def positive(self):
+        if self.sqrt13_charge:
+            require(self.deficits == 0,
+                    "mixed sqrt(5)/sqrt(13) repair ledger is unsupported")
+            return (self.credit > 0 and
+                    13 * self.credit * self.credit >
+                    self.sqrt13_charge * self.sqrt13_charge)
+        return Bound(self.credit, self.deficits, self.strict).positive()
+
+
+@dataclass(frozen=True)
+class RepairPacket:
+    owner: str
+    cycles: tuple[int, ...]
+    theorem: str
+    hypothesis: str
+    bound: Bound
+
+
+@dataclass(frozen=True)
+class RepairCertificate:
+    code: str
+    signature: str
+    operation: str
+    routers: tuple[int, ...]
+    opened: tuple[int, ...]
+    nesting: tuple[int, ...]
+    router_splits: tuple[tuple[int, tuple[tuple[object, ...], ...],
+                               tuple[str, ...]], ...]
+    opening_splits: tuple[tuple[int, tuple[tuple[object, ...], ...],
+                                tuple[str, str]], ...]
+    geometry_vertices: tuple[tuple[object, ...], ...]
+    vertices: tuple[object, ...]
+    edges: tuple[tuple[object, object], ...]
+    remnant_anchors: tuple[tuple[RouterRemnant, object], ...]
+    vertex_owners: tuple[tuple[object, str], ...]
+    attachment_owners: tuple[tuple[ForestAttachment, str], ...]
+    packets: tuple[RepairPacket, ...]
+    ledger: RadicalLedger
 
 
 def stream_digest(records):
@@ -627,12 +676,604 @@ def certificate_text(certificate):
                  owners, attachments, packets, certificate.bound))
 
 
+REPAIR_SIGNATURES = (
+    "X(P()P()T()T()T()T()T()T()T()T()T())",
+    "P(X(P())X(T()T()T()T()T()T()T()T()T()))",
+    "T(X(P())X(P()T()T()T()T()T()T()T()T()))",
+    "P(X(P())X(T())X(T()T()T()T()T()T()T()T()))",
+    "T(X(P())X(P())X(T()T()T()T()T()T()T()T()))",
+    "T(X(P())X(P()T()T()T()T()T()T()T())X(T()))",
+    "X(T()T()T()T()T()T()T()T(X(P()))T(X(P())))",
+    "P(X(P())X(T())X(T())X(T()T()T()T()T()T()T()))",
+    "X(T()T()T()T()T()T()T(X(P()))T(X(P())X(T())))",
+    "X(T()T()T()T()T()T(X(P())X(T()))T(X(P())X(T())))",
+)
+
+
+def repair_spec(code):
+    specs = {
+        "U1": ("common-cut-T9PP", (), (), (), (),
+               (("all", tuple(range(11)), "common-cut-T9PP"),),
+               RadicalLedger(Fraction(10), 0, Fraction(4, 3), True)),
+        "U2": ("open-leaf-P+common-cut-T9P", (), (10,), (), (),
+               (("retained", tuple(range(10)), "common-cut-T9P"),),
+               RadicalLedger(Fraction(8), 1, 0, True)),
+        "U3": ("P+common-cut-T8P", (0,), (), (0,),
+               ((0, ((12,), (11,)), ("P", "retained")),),
+               (("P", (9,), "P"),
+                ("retained", tuple(range(1, 9)) + (10,), "common-cut-T8P")),
+               RadicalLedger(Fraction(8), 2, 0, True)),
+        "U4": ("A8+TP-via-C5", (0,), (), (0,),
+               ((0, ((11,), (12, 13)), ("A8", "TP")),),
+               (("A8", (1,) + tuple(range(3, 10)), "common-cut-A8"),
+                ("TP", (2, 10), "TP-quantitative")),
+               RadicalLedger(Fraction(3, 4), 0, 0, True)),
+        "U5": ("opening+packing-one-T9P", (), (9,), (), (),
+               (("retained", tuple(range(9)) + (10,), "packing-one-T9P"),),
+               RadicalLedger(Fraction(8), 1, 0, True)),
+        "U6": ("P+T+common-cut-T7P", (0,), (), (0,),
+               ((0, ((11,), (12,), (13,)), ("retained", "T", "P")),),
+               (("P", (9,), "P"), ("T", (2,), "T"),
+                ("retained", (1,) + tuple(range(3, 9)) + (10,),
+                 "common-cut-T7P")),
+               RadicalLedger(Fraction(7), 2, 0, True)),
+        "U7": ("one-router-P+packing-one-T8P", (0,), (), (0,),
+               ((0, ((12,), (11,)), ("P", "retained")),),
+               (("P", (9,), "P"),
+                ("retained", tuple(range(1, 9)) + (10,), "packing-one-T8P")),
+               RadicalLedger(Fraction(8), 2, 0, True)),
+        "U8": ("degree4-C5-T+rank9-T8P", (0,), (), (0,),
+               ((0, ((12,), (11, 13, 14)), ("T", "rank9")),),
+               (("T", (2,), "T"),
+                ("rank9", (1,) + tuple(range(3, 11)), "connected-rank9-T8P")),
+               RadicalLedger(Fraction(0), 0, 0, True)),
+        "U9": ("nested-P+P+T+A6", (0, 1), (), (0, 1),
+               ((0, ((11,), (12,), (13,)), ("active", "T", "P1")),
+                (1, ((14,), (11,)), ("P2", "A6"))),
+               (("P1", (9,), "P"), ("P2", (10,), "P"),
+                ("T", (2,), "T"), ("A6", tuple(range(3, 9)), "common-cut-A6")),
+               RadicalLedger(Fraction(1), 2, 0, True)),
+        "U10": ("nested-P+P+T+T+A5", (0, 1), (), (0, 1),
+                ((0, ((11,), (12,), (14,)), ("active", "T1", "P1")),
+                 (1, ((11,), (13,), (15,)), ("A5", "T2", "P2"))),
+                (("P1", (9,), "P"), ("P2", (10,), "P"),
+                 ("T1", (2,), "T"), ("T2", (8,), "T"),
+                 ("A5", tuple(range(3, 8)), "common-cut-A5")),
+                RadicalLedger(Fraction(2), 2, 0, True)),
+    }
+    return specs[code]
+
+
+def repair_graph(geometries, routers):
+    vertices, edges, remnants = physical_graph(geometries)
+    vertices, edges, remnants = list(vertices), list(edges), list(remnants)
+    for router in routers:
+        for vertex in geometries[router].vertices:
+            if vertex.role == "private":
+                remnant = RouterRemnant(router, vertex.index)
+                anchor = physical_vertex(vertex)
+                vertices.append(remnant)
+                edges.append((anchor, remnant))
+                remnants.append((remnant, anchor))
+    return tuple(vertices), tuple(edges), tuple(remnants)
+
+
+def intervals_for_ports(geometry, port_groups):
+    vertices = tuple(physical_vertex(vertex) for vertex in geometry.vertices)
+    position = {vertex.cut: index for index, vertex in enumerate(geometry.vertices)
+                if vertex.cut is not None}
+    claimed = {}
+    for group_index, ports in enumerate(port_groups):
+        for port in ports:
+            require(port in position and position[port] not in claimed,
+                    "repair interval names an absent or repeated port")
+            claimed[position[port]] = group_index
+    require(set(position.values()) == set(claimed),
+            "repair intervals do not partition occupied router ports")
+    if len(port_groups) == 2 and len(port_groups[0]) == 1:
+        singleton = position[port_groups[0][0]]
+        order = tuple(vertices[(singleton + offset) % len(vertices)]
+                      for offset in range(len(vertices)))
+        return ((order[0],), order[1:])
+    require(len(port_groups) == len(vertices),
+            "nonbinary repair must use forced singleton intervals")
+    return tuple((vertices[position[group[0]]],) for group in port_groups)
+
+
+def make_repair_certificate(code, signature, tree):
+    operation, routers, opened, nesting, split_specs, packet_specs, ledger = repair_spec(code)
+    require(signature == REPAIR_SIGNATURES[int(code[1:]) - 1],
+            f"{code}: exact residual signature changed")
+    adjacency = local_adjacency(tree)
+    geometries = incidence_geometry(signature, tree, adjacency)
+    vertices, edges, remnants = repair_graph(geometries, routers)
+    packet_cycle_owner = {cycle: owner for owner, cycles, _ in packet_specs for cycle in cycles}
+    require(len(packet_cycle_owner) == sum(len(cycles) for _, cycles, _ in packet_specs),
+            f"{code}: repair packets overlap")
+    require(set(packet_cycle_owner) == set(range(CYCLE_COUNT)) - set(routers) - set(opened),
+            f"{code}: retained cycle domain is inexact")
+    split_cut_owners = {}
+    for _, groups, group_owners in split_specs:
+        for group, owner in zip(groups, group_owners):
+            terminal_owner = owner
+            if owner == "active":
+                terminal_owner = "A6" if code == "U9" else "A5"
+            for cut in group:
+                old = split_cut_owners.setdefault(cut, terminal_owner)
+                require(old == terminal_owner,
+                        f"{code}: nested routers disagree on a cut owner")
+    cut_owners = {}
+    for cut in range(CYCLE_COUNT, len(adjacency)):
+        candidates = {packet_cycle_owner[cycle] for cycle in adjacency[cut]
+                      if cycle in packet_cycle_owner}
+        if cut in split_cut_owners:
+            require(split_cut_owners[cut] in candidates,
+                    f"{code}: router cut owner does not retain an incident branch")
+            cut_owners[cut] = split_cut_owners[cut]
+        else:
+            require(len(candidates) == 1, f"{code}: cut has no unique terminal owner")
+            cut_owners[cut] = next(iter(candidates))
+    router_splits = []
+    router_vertex_owners = {}
+    for router, groups, owners in split_specs:
+        intervals = intervals_for_ports(geometries[router], groups)
+        physical_geometry = CORE.CycleGeometry(
+            geometries[router].label, geometries[router].length,
+            tuple(physical_vertex(vertex) for vertex in geometries[router].vertices),
+            tuple((physical_vertex(left), physical_vertex(right))
+                  for left, right in geometries[router].edges),
+        )
+        if physical_geometry.length == 5:
+            CORE.verify_c5_router_owner_split(physical_geometry, intervals, owners)
+        else:
+            CORE.verify_router_owner_split(physical_geometry, intervals, owners)
+        router_splits.append((router, intervals, owners))
+        for interval, owner in zip(intervals, owners):
+            terminal_owner = owner
+            if owner == "active":
+                terminal_owner = "A6" if code == "U9" else "A5"
+            for vertex in interval:
+                router_vertex_owners[vertex] = terminal_owner
+    opening_splits = []
+    opening_vertex_owners = {}
+    for cycle in opened:
+        require(len(adjacency[cycle]) == 1, f"{code}: opened pentagon is not a leaf")
+        cut = adjacency[cycle][0]
+        root = CORE.CutSite(cut)
+        cycle_vertices = tuple(physical_vertex(vertex) for vertex in geometries[cycle].vertices)
+        start = cycle_vertices.index(root)
+        order = tuple(cycle_vertices[(start + offset) % 5] for offset in range(5))
+        retained_owner = cut_owners[cut]
+        opened_owner = f"opened-{cycle}"
+        intervals = ((root,), order[1:])
+        physical_geometry = CORE.CycleGeometry(
+            geometries[cycle].label, 5, cycle_vertices,
+            tuple((physical_vertex(left), physical_vertex(right))
+                  for left, right in geometries[cycle].edges),
+        )
+        CORE.verify_c5_router_owner_split(
+            physical_geometry, intervals, (retained_owner, opened_owner), (1, 4)
+        )
+        opening_splits.append((cycle, intervals, (retained_owner, opened_owner)))
+        opening_vertex_owners.update({root: retained_owner})
+        opening_vertex_owners.update({vertex: opened_owner for vertex in order[1:]})
+    owners = {}
+    for cycle, geometry in enumerate(geometries):
+        for vertex in geometry.vertices:
+            physical = physical_vertex(vertex)
+            if cycle in routers:
+                owner = router_vertex_owners[physical]
+            elif cycle in opened:
+                owner = opening_vertex_owners[physical]
+            else:
+                owner = packet_cycle_owner[cycle]
+            old = owners.setdefault(physical, owner)
+            require(old == owner, f"{code}: shared physical cut has competing owners")
+    for remnant, anchor in remnants:
+        owners[remnant] = owners[anchor]
+    attachments, attachment_anchors = expected_attachment_specification(vertices, remnants)
+    certificate = RepairCertificate(
+        code, signature, operation, routers, opened, nesting,
+        tuple(router_splits), tuple(opening_splits),
+        tuple(tuple(physical_vertex(vertex) for vertex in geometry.vertices)
+              for geometry in geometries), vertices, edges, remnants,
+        tuple(owners.items()),
+        tuple((site, owners[anchor]) for site, anchor in attachment_anchors),
+        (), ledger,
+    )
+    edge_keys = tuple(CORE.undirected_edge(edge) for edge in edges)
+    owned = {
+        owner: frozenset(vertex for vertex, assigned in owners.items()
+                         if assigned == owner)
+        for owner in dict.fromkeys(owners.values())
+    }
+    complete = complete_repair_cycles(certificate, owners)
+    packet_owners = tuple(owner for owner, _, _ in packet_specs)
+    packets = derive_physical_repair_packets(
+        tree, certificate, owners, edge_keys, owned, complete, packet_owners
+    )
+    certificate = replace(certificate, packets=packets)
+    verify_repair_certificate(tree, certificate)
+    return certificate
+
+
+def complete_repair_cycles(certificate, owner_map):
+    complete = {owner: [] for owner in dict.fromkeys(owner_map.values())}
+    for cycle, vertices in enumerate(certificate.geometry_vertices):
+        cycle_owners = {owner_map[vertex] for vertex in vertices}
+        if len(cycle_owners) == 1:
+            complete[next(iter(cycle_owners))].append(cycle)
+    return {owner: tuple(cycles) for owner, cycles in complete.items()}
+
+
+def physical_common_vertex(cycles, geometry_vertices):
+    common = set(geometry_vertices[cycles[0]])
+    for cycle in cycles[1:]:
+        common &= set(geometry_vertices[cycle])
+    return min(common, key=repr) if common else None
+
+
+def physical_pairwise_intersecting(cycles, geometry_vertices):
+    return all(set(geometry_vertices[first]) & set(geometry_vertices[second])
+               for index, first in enumerate(cycles)
+               for second in cycles[index + 1:])
+
+
+def derive_physical_repair_packet(tree, certificate, owner, cycles,
+                                  edge_keys, domain):
+    cycles = tuple(sorted(cycles))
+    require(cycles, "repair terminal carrier is empty")
+    require(domain, "repair terminal physical domain is empty")
+    internal_edges = sum(edge <= domain for edge in edge_keys)
+    cyclomatic = internal_edges - len(domain) + 1
+    require(cyclomatic == len(cycles),
+            "repair terminal physical graph has the wrong complete-cycle rank")
+    triangles = tuple(cycle for cycle in cycles if tree.colors[cycle] == "T")
+    pentagons = tuple(cycle for cycle in cycles if tree.colors[cycle] == "P")
+    t, p = len(triangles), len(pentagons)
+    if (t, p) == (9, 2):
+        hub = physical_common_vertex(cycles, certificate.geometry_vertices)
+        require(hub is not None, "T9PP repair packet lacks its common cut")
+        theorem = "common-cut-T9PP"
+        hypothesis = f"all eleven complete physical cycles share {hub!r}"
+        bound = Bound(Fraction(10), 0, True)
+    elif p == 1 and t >= 2:
+        hub = physical_common_vertex(cycles, certificate.geometry_vertices)
+        if hub is not None:
+            theorem = f"common-cut-T{t}P"
+            hypothesis = f"all complete physical cycles share {hub!r}"
+            bound = Bound(Fraction(t), 1, True)
+        elif physical_pairwise_intersecting(triangles,
+                                            certificate.geometry_vertices):
+            theorem = f"packing-one-T{t}P"
+            hypothesis = "every pair of complete physical triangles intersects"
+            bound = Bound(Fraction(t), 1, True)
+        else:
+            require(t + p == 9,
+                    "one-hostile physical packet has no applicable theorem")
+            theorem = "connected-rank9-T8P"
+            hypothesis = ("owner-induced physical cactus is connected with "
+                          "cyclomatic rank 9 and profile T8P")
+            bound = Bound(0, 0, True)
+    elif (t, p) == (1, 1):
+        theorem, hypothesis = "TP-quantitative", "complete connected TP cactus"
+        bound = Bound(Fraction(3, 4), 0, True)
+    elif (t, p) == (0, 1):
+        theorem, hypothesis = "P", "one complete pentagon"
+        bound = Bound(0, 1, False)
+    elif p == 0 and t == 1:
+        theorem, hypothesis = "T", "one complete triangle"
+        bound = Bound(0, 0, True)
+    elif p == 0 and t in (5, 6, 8):
+        hub = physical_common_vertex(triangles, certificate.geometry_vertices)
+        require(hub is not None, "triangular repair cluster lacks its common cut")
+        theorem = f"common-cut-A{t}"
+        hypothesis = f"all complete physical triangles share {hub!r}"
+        bound = Bound(Fraction(TRIANGLE_MARGIN[t]), 0, True)
+    else:
+        raise UnprovedPacket(f"unproved repair packet T^{t}P^{p}")
+    return RepairPacket(owner, cycles, theorem, hypothesis, bound)
+
+
+def derive_physical_repair_packets(tree, certificate, owner_map, edge_keys,
+                                   owned, complete, packet_owners):
+    return tuple(
+        derive_physical_repair_packet(
+            tree, certificate, owner, complete[owner], edge_keys, owned[owner]
+        )
+        for owner in packet_owners
+    )
+
+
+def derive_repair_ledger(certificate, packets):
+    credit = sum((packet.bound.credit for packet in packets),
+                 Fraction(-len(certificate.opened)))
+    deficits = sum(packet.bound.deficits for packet in packets)
+    sqrt13_charge = Fraction(0)
+    strict = any(packet.bound.strict for packet in packets)
+    for packet in packets:
+        theorem = packet.theorem
+        if theorem == "common-cut-T9PP":
+            sqrt13_charge += Fraction(4, 3)
+        elif not (theorem.startswith("common-cut-T") or
+                  theorem.startswith("packing-one-T") or theorem == "P" or
+                  theorem == "TP-quantitative" or
+                  theorem.startswith("common-cut-A") or theorem in
+                  ("T", "connected-rank9-T8P")):
+            raise UnprovedPacket(f"repair ledger has unknown theorem {theorem}")
+    return RadicalLedger(credit, deficits, sqrt13_charge, strict)
+
+
+def physical_interval_children(domain, edge_keys, geometry_vertices, intervals):
+    """Split one current physical domain only along its router boundaries."""
+    domain = set(domain)
+    interval_of = {
+        vertex: index for index, interval in enumerate(intervals)
+        for vertex in interval
+    }
+    require(set(geometry_vertices) == set(interval_of),
+            "nested replay intervals do not exhaust the current router")
+    router_edges = {
+        frozenset((geometry_vertices[index],
+                   geometry_vertices[(index + 1) % len(geometry_vertices)]))
+        for index in range(len(geometry_vertices))
+    }
+    boundaries = set()
+    for edge in router_edges:
+        left, right = tuple(edge)
+        if interval_of[left] != interval_of[right]:
+            boundaries.add(edge)
+    adjacency = {vertex: set() for vertex in domain}
+    for edge in edge_keys:
+        if edge <= domain and edge not in boundaries:
+            left, right = tuple(edge)
+            adjacency[left].add(right)
+            adjacency[right].add(left)
+    components = []
+    covered = set()
+    for interval in intervals:
+        start = interval[0]
+        require(start in domain, "nested replay interval leaves its parent domain")
+        seen = {start}
+        stack = [start]
+        while stack:
+            vertex = stack.pop()
+            for neighbor in adjacency[vertex]:
+                if neighbor not in seen:
+                    seen.add(neighbor)
+                    stack.append(neighbor)
+        require(set(interval) <= seen,
+                "nested replay interval is disconnected inside its child")
+        require(not covered & seen,
+                "nested replay retrieves a previously closed sibling")
+        covered |= seen
+        components.append(frozenset(seen))
+    require(covered == domain,
+            "nested replay children do not exhaust their physical parent")
+    return tuple(components)
+
+
+def verify_nested_refinement(certificate, edge_keys, owned, owner_map):
+    if len(certificate.nesting) <= 1:
+        return
+    require(certificate.nesting == tuple(router for router, _, _
+                                         in certificate.router_splits),
+            "nested refinement order differs from physical split order")
+    current = frozenset(certificate.vertices)
+    closed = {}
+    active_parents = []
+    for step_index, (router, intervals, child_names) in enumerate(
+            certificate.router_splits):
+        require(set(certificate.geometry_vertices[router]) <= current,
+                "nested router is not wholly inside the active parent")
+        children = physical_interval_children(
+            current, edge_keys, certificate.geometry_vertices[router], intervals
+        )
+        if step_index + 1 < len(certificate.router_splits):
+            next_router = certificate.router_splits[step_index + 1][0]
+            next_vertices = set(certificate.geometry_vertices[next_router])
+            active_indices = tuple(index for index, child in enumerate(children)
+                                   if next_vertices <= child)
+            require(len(active_indices) == 1,
+                    "next nested router is not wholly inside exactly one child")
+            active_index = active_indices[0]
+            require(child_names[active_index] == "active",
+                    "physical active child disagrees with submitted refinement")
+            for index, (name, child) in enumerate(zip(child_names, children)):
+                if index != active_index:
+                    require(name in owned and child == owned[name],
+                            "closed first-stage sibling differs from final owner domain")
+                    require(all(owner_map[vertex] == name for vertex in intervals[index]),
+                            "closed interval vertices disagree with their declared owner")
+                    closed[name] = child
+            active_parents.append(children[active_index])
+            current = children[active_index]
+            require(not any(current & domain for domain in closed.values()),
+                    "active refinement retrieves a closed sibling")
+        else:
+            require("active" not in child_names,
+                    "last nested split leaves an unresolved active child")
+            for name, child in zip(child_names, children):
+                require(name in owned and child == owned[name],
+                        "final nested descendant differs from final owner map")
+                interval = intervals[child_names.index(name)]
+                require(all(owner_map[vertex] == name for vertex in interval),
+                        "final nested interval vertices disagree with their descendant")
+                closed[name] = child
+    require(set(closed) == set(owned),
+            "sequential refinement descendants do not equal final owners")
+    require(set().union(*(set(domain) for domain in closed.values())) ==
+            set(certificate.vertices),
+            "sequential refinement descendants do not exhaust the graph")
+    for parent in active_parents:
+        descendants = tuple(domain for domain in closed.values() if domain <= parent)
+        require(descendants and set().union(*(set(domain) for domain in descendants)) ==
+                set(parent),
+                "first-stage active interval does not resolve exactly to later descendants")
+
+
+def verify_repair_owner_bindings(certificate, edge_keys, owned, owner_map):
+    """Bind every declared interval and its physical branch to final owners."""
+    if len(certificate.nesting) > 1:
+        verify_nested_refinement(certificate, edge_keys, owned, owner_map)
+    else:
+        for router, intervals, owner_names in certificate.router_splits:
+            children = physical_interval_children(
+                certificate.vertices, edge_keys,
+                certificate.geometry_vertices[router], intervals
+            )
+            for interval, name, child in zip(intervals, owner_names, children):
+                require(name in owned and child == owned[name],
+                        "router interval branch differs from its declared final owner")
+                require(all(owner_map[vertex] == name for vertex in interval),
+                        "router interval vertex differs from its declared final owner")
+    for cycle, intervals, owner_names in certificate.opening_splits:
+        children = physical_interval_children(
+            certificate.vertices, edge_keys,
+            certificate.geometry_vertices[cycle], intervals
+        )
+        for interval, name, child in zip(intervals, owner_names, children):
+            require(name in owned and child == owned[name],
+                    "opening branch differs from its declared final owner")
+            require(all(owner_map[vertex] == name for vertex in interval),
+                    "opening interval vertex differs from its declared final owner")
+
+
+def verify_repair_certificate(tree, certificate):
+    code = certificate.code
+    require(certificate.signature == REPAIR_SIGNATURES[int(code[1:]) - 1],
+            f"{code}: submitted residual signature changed")
+    operation, routers, opened, nesting, split_specs, packet_specs, _ = repair_spec(code)
+    require((certificate.operation, certificate.routers, certificate.opened,
+             certificate.nesting) == (operation, routers, opened, nesting),
+            f"{code}: repair operation ledger changed")
+    adjacency = local_adjacency(tree)
+    require(local_signature(tree, adjacency) == certificate.signature,
+            f"{code}: repair is attached to the wrong incidence graph")
+    geometries = incidence_geometry(certificate.signature, tree, adjacency)
+    expected_vertices, expected_edges, expected_remnants = repair_graph(geometries, routers)
+    expected_attachments, attachment_anchors = expected_attachment_specification(
+        expected_vertices, expected_remnants
+    )
+    require(certificate.geometry_vertices == tuple(
+                tuple(physical_vertex(vertex) for vertex in geometry.vertices)
+                for geometry in geometries),
+            f"{code}: physical cycle geometry changed")
+    require(certificate.remnant_anchors == expected_remnants,
+            f"{code}: connector-remnant domain changed")
+    require(tuple(router for router, _, _ in certificate.router_splits) == routers,
+            f"{code}: router split order changed")
+    for submitted, expected in zip(certificate.router_splits, split_specs):
+        router, groups, owner_names = expected
+        intervals = intervals_for_ports(geometries[router], groups)
+        require(submitted == (router, intervals, owner_names),
+                f"{code}: concrete router intervals changed")
+        physical_geometry = CORE.CycleGeometry(
+            geometries[router].label, geometries[router].length,
+            tuple(physical_vertex(vertex) for vertex in geometries[router].vertices),
+            tuple((physical_vertex(left), physical_vertex(right))
+                  for left, right in geometries[router].edges),
+        )
+        if physical_geometry.length == 5:
+            CORE.verify_c5_router_owner_split(
+                physical_geometry, intervals, owner_names
+            )
+        else:
+            CORE.verify_router_owner_split(physical_geometry, intervals, owner_names)
+    require(tuple(cycle for cycle, _, _ in certificate.opening_splits) == opened,
+            f"{code}: physical opening domain changed")
+    for cycle, intervals, owner_names in certificate.opening_splits:
+        require(len(adjacency[cycle]) == 1 and tuple(map(len, intervals)) == (1, 4),
+                f"{code}: opening is not the exact rooted C5 singleton/four-path")
+        root = CORE.CutSite(adjacency[cycle][0])
+        require(intervals[0] == (root,),
+                f"{code}: opening singleton is not the incidence vertex")
+        retained_owner = next(packet.owner for packet in certificate.packets
+                              if cycle not in packet.cycles and
+                              root in certificate.geometry_vertices[next(
+                                  retained for retained in packet.cycles
+                                  if root in certificate.geometry_vertices[retained]
+                              )])
+        require(owner_names == (retained_owner, f"opened-{cycle}"),
+                f"{code}: opening owners do not bind root and four-path")
+        physical_geometry = CORE.CycleGeometry(
+            geometries[cycle].label, 5,
+            tuple(physical_vertex(vertex) for vertex in geometries[cycle].vertices),
+            tuple((physical_vertex(left), physical_vertex(right))
+                  for left, right in geometries[cycle].edges),
+        )
+        CORE.verify_c5_router_owner_split(
+            physical_geometry, intervals, owner_names, (1, 4)
+        )
+    final_owners = tuple(dict.fromkeys(owner for _, owner in certificate.vertex_owners))
+    owner_map, edge_keys, owned = CORE.verify_physical_owner_certificate(
+        expected_vertices, expected_edges, expected_attachments,
+        certificate.vertices, certificate.edges, certificate.vertex_owners,
+        certificate.attachment_owners, final_owners, attachment_anchors,
+    )
+    verify_repair_owner_bindings(certificate, edge_keys, owned, owner_map)
+    complete = complete_repair_cycles(certificate, owner_map)
+    packet_owners = tuple(owner for owner, _, _ in packet_specs)
+    expected_packet_cycles = tuple((owner, tuple(sorted(cycles)))
+                                   for owner, cycles, _ in packet_specs)
+    require(tuple((packet.owner, packet.cycles) for packet in certificate.packets) ==
+            expected_packet_cycles,
+            f"{code}: packet owner identities differ from the repair specification")
+    require(set(complete) - set(packet_owners) ==
+            {f"opened-{cycle}" for cycle in opened},
+            f"{code}: unexpected physical terminal owner")
+    require(all(not complete[f"opened-{cycle}"] for cycle in opened),
+            f"{code}: opened tree retains a complete cycle")
+    derived_packets = tuple(
+        derive_physical_repair_packet(
+            tree, certificate, owner, complete[owner], edge_keys, owned[owner]
+        ) for owner in packet_owners
+    )
+    require(certificate.packets == derived_packets,
+            f"{code}: full packet was not rederived from the physical owner graph")
+    derived_ledger = derive_repair_ledger(certificate, derived_packets)
+    require(certificate.ledger == derived_ledger,
+            f"{code}: radical ledger is not the exact theorem/opening sum")
+    require(derived_ledger.positive(), f"{code}: exact radical ledger is not positive")
+
+
 def expect_rejected(action, label):
     try:
         action()
     except RuntimeError:
         return
     raise RuntimeError(f"hostile mutation was accepted: {label}")
+
+
+def coordinated_owner_domain_swap(tree, certificate, first, second):
+    """Relabel two complete owner domains and rebuild packet/ledger claims."""
+    def swapped(owner):
+        if owner == first:
+            return second
+        if owner == second:
+            return first
+        return owner
+
+    vertex_owners = tuple((vertex, swapped(owner))
+                          for vertex, owner in certificate.vertex_owners)
+    attachment_owners = tuple((site, swapped(owner))
+                              for site, owner in certificate.attachment_owners)
+    owner_map = dict(vertex_owners)
+    edge_keys = tuple(CORE.undirected_edge(edge) for edge in certificate.edges)
+    owned = {
+        owner: frozenset(vertex for vertex, assigned in owner_map.items()
+                         if assigned == owner)
+        for owner in dict.fromkeys(owner_map.values())
+    }
+    mutated = replace(certificate, vertex_owners=vertex_owners,
+                      attachment_owners=attachment_owners, packets=())
+    complete = complete_repair_cycles(mutated, owner_map)
+    packet_owners = tuple(packet.owner for packet in certificate.packets)
+    packets = derive_physical_repair_packets(
+        tree, mutated, owner_map, edge_keys, owned, complete, packet_owners
+    )
+    mutated = replace(mutated, packets=packets)
+    return replace(mutated, ledger=derive_repair_ledger(mutated, packets))
 
 
 def mutation_self_tests(fixtures):
@@ -720,6 +1361,149 @@ def mutation_self_tests(fixtures):
     return tests
 
 
+def repair_mutation_self_tests(repairs):
+    tests = 0
+    tree7, repair7 = repairs["U7"]
+    literal_packets = (
+        RepairPacket("P-left", (9,), "P", "P", Bound(0, 0, True)),
+        RepairPacket("P-right", (10,), "P", "P", Bound(0, 0, True)),
+        RepairPacket("A7", tuple(range(2, 9)), "common-cut-A7", "A7", Bound(0, 0, True)),
+    )
+    expect_rejected(lambda: verify_repair_certificate(
+        tree7, replace(repair7, operation="literal-N7-P+P+A7",
+                       packets=literal_packets,
+                       ledger=RadicalLedger(Fraction(0), 2, 0, True))),
+        "invalid literal U7 extension",
+    )
+    tests += 1
+    tree3, repair3 = repairs["U3"]
+    router, intervals, owners = repair3.router_splits[0]
+    expect_rejected(lambda: verify_repair_certificate(
+        tree3, replace(repair3,
+                       router_splits=((router, intervals, tuple(reversed(owners))),))),
+        "U3 swapped interval owners",
+    )
+    tests += 1
+    tree4, repair4 = repairs["U4"]
+    forged4 = replace(repair4.packets[1], theorem="forged-TP")
+    expect_rejected(lambda: verify_repair_certificate(
+        tree4, replace(repair4, packets=(repair4.packets[0], forged4))),
+        "U4 forged TP theorem",
+    )
+    tests += 1
+    forged_hypothesis = replace(
+        repair4.packets[0], hypothesis="all triangles share a forged vertex"
+    )
+    expect_rejected(lambda: verify_repair_certificate(
+        tree4, replace(repair4,
+                       packets=(forged_hypothesis,) + repair4.packets[1:])),
+        "U4 forged physical hypothesis",
+    )
+    tests += 1
+    expect_rejected(lambda: verify_repair_certificate(
+        tree4, coordinated_owner_domain_swap(tree4, repair4, "A8", "TP")),
+        "U4 coordinated owner-domain swap",
+    )
+    tests += 1
+    tree5, repair5 = repairs["U5"]
+    cycle, intervals, owners = repair5.opening_splits[0]
+    expect_rejected(lambda: verify_repair_certificate(
+        tree5, replace(repair5,
+                       opening_splits=((cycle, intervals, tuple(reversed(owners))),))),
+        "U5 swapped opening owners",
+    )
+    tests += 1
+    tree6, repair6 = repairs["U6"]
+    router, intervals, owners = repair6.router_splits[0]
+    expect_rejected(lambda: verify_repair_certificate(
+        tree6, replace(repair6,
+                       router_splits=((router, intervals[:-1], owners[:-1]),))),
+        "U6 omitted forced singleton",
+    )
+    tests += 1
+    tree8, repair8 = repairs["U8"]
+    router, intervals, owners = repair8.router_splits[0]
+    wrong_intervals = (intervals[1][:1], intervals[0] + intervals[1][1:])
+    expect_rejected(lambda: verify_repair_certificate(
+        tree8, replace(repair8,
+                       router_splits=((router, wrong_intervals, owners),))),
+        "wrong C5 singleton",
+    )
+    tests += 1
+    forged_bound = replace(repair8.packets[1],
+                           bound=Bound(Fraction(1), 0, True))
+    expect_rejected(lambda: verify_repair_certificate(
+        tree8, replace(repair8,
+                       packets=(repair8.packets[0], forged_bound))),
+        "U8 forged physical packet bound",
+    )
+    tests += 1
+    expect_rejected(lambda: verify_repair_certificate(
+        tree8, coordinated_owner_domain_swap(tree8, repair8, "T", "rank9")),
+        "U8 coordinated owner-domain swap",
+    )
+    tests += 1
+    tree9, repair9 = repairs["U9"]
+    expect_rejected(lambda: verify_repair_certificate(
+        tree9, replace(repair9, nesting=tuple(reversed(repair9.nesting)))),
+        "reversed nested repair order",
+    )
+    tests += 1
+    expect_rejected(lambda: verify_repair_certificate(
+        tree7, coordinated_owner_domain_swap(tree7, repair7, "P", "retained")),
+        "U7 coordinated owner-domain swap",
+    )
+    tests += 1
+    owner_map9 = dict(repair9.vertex_owners)
+    edge_keys9 = tuple(CORE.undirected_edge(edge) for edge in repair9.edges)
+    owned9 = {
+        owner: frozenset(vertex for vertex, assigned in owner_map9.items()
+                         if assigned == owner)
+        for owner in dict.fromkeys(owner_map9.values())
+    }
+    owned9["A6"] = owned9["A6"] | owned9["T"]
+    expect_rejected(lambda: verify_nested_refinement(
+        repair9, edge_keys9, owned9, owner_map9),
+                    "U9 closed sibling retrieval")
+    tests += 1
+    tree2, repair2 = repairs["U2"]
+    cycle, intervals, owners = repair2.opening_splits[0]
+    expect_rejected(lambda: verify_repair_certificate(
+        tree2, replace(repair2,
+                       opening_splits=((cycle, tuple(reversed(intervals)), owners),))),
+        "reversed physical opening",
+    )
+    tests += 1
+    tree1, repair1 = repairs["U1"]
+    expect_rejected(lambda: verify_repair_certificate(
+        tree1, replace(repair1,
+                       ledger=RadicalLedger(Fraction(10), 0, Fraction(3, 2), True))),
+        "forged common-cut radical charge",
+    )
+    tests += 1
+    tree10, repair10 = repairs["U10"]
+    forged10 = replace(repair10.packets[-1], theorem="common-cut-A6")
+    expect_rejected(lambda: verify_repair_certificate(
+        tree10, replace(repair10,
+                        packets=repair10.packets[:-1] + (forged10,))),
+        "U10 forged nested cluster rank",
+    )
+    tests += 1
+    owner_map10 = dict(repair10.vertex_owners)
+    edge_keys10 = tuple(CORE.undirected_edge(edge) for edge in repair10.edges)
+    owned10 = {
+        owner: frozenset(vertex for vertex, assigned in owner_map10.items()
+                         if assigned == owner)
+        for owner in dict.fromkeys(owner_map10.values())
+    }
+    owned10["A5"] = owned10["A5"] | owned10["P1"]
+    expect_rejected(lambda: verify_nested_refinement(
+        repair10, edge_keys10, owned10, owner_map10),
+        "U10 closed sibling retrieval")
+    tests += 1
+    return tests
+
+
 def main():
     classes = BASE.enumerate_colors(tuple(sorted(COLORS)), 0)
     class_digest = validate_classes(classes)
@@ -776,6 +1560,21 @@ def main():
     require(set((2, 4, 5)) <= set(fixtures),
             "missing degree-2/4/5 mutation fixtures")
     mutation_count = mutation_self_tests(fixtures)
+    residual_by_signature = dict(residuals)
+    require(set(residual_by_signature) == set(REPAIR_SIGNATURES),
+            "repair signatures do not exactly exhaust the ordinary residual stream")
+    repairs = {}
+    repair_hasher = sha256()
+    repair_theorems = Counter()
+    for number, signature in enumerate(REPAIR_SIGNATURES, 1):
+        code = f"U{number}"
+        tree = residual_by_signature[signature]
+        repair = make_repair_certificate(code, signature, tree)
+        repairs[code] = (tree, repair)
+        repair_theorems.update(packet.theorem for packet in repair.packets)
+        repair_hasher.update(repr(repair).encode("ascii") + b"\n")
+    repair_mutations = repair_mutation_self_tests(repairs)
+    repair_digest = repair_hasher.hexdigest()
     degree4_digest = stream_digest(router_degree_signatures[4])
     degree5_digest = stream_digest(router_degree_signatures[5])
 
@@ -783,7 +1582,7 @@ def main():
     print("ordinary physical-owner SAFE:", sum(safe_by_cut.values()))
     print("physical theorem certificates for abstract SAFE candidates:",
           physical_candidate_count)
-    print("fail-closed residual rows:", len(residuals))
+    print("ordinary residual rows repaired physically:", len(repairs))
     print("all by cut:", dict(sorted(EXPECTED_ALL_BY_CUT.items())))
     print("SAFE by cut:", dict(sorted(safe_by_cut.items())))
     print("post-ownership theorem uses:", dict(sorted(theorem_counts.items())))
@@ -799,14 +1598,19 @@ def main():
     print("physical-proof sha256:", proof_digest)
     print("all-candidate physical-proof sha256:", candidate_digest)
     print("residual sha256:", residual_digest)
-    print("rejected hostile mutations:", mutation_count)
-    for number, (signature, _) in enumerate(residuals, 1):
-        print(f"U{number}: {signature}")
-    print(f"FIRST-PHASE ONLY: {len(classes)}={sum(safe_by_cut.values())}+{len(residuals)}; residuals remain fail-closed")
+    print("repair-proof sha256:", repair_digest)
+    print("repair theorem uses:", dict(sorted(repair_theorems.items())))
+    print("rejected hostile mutations:", mutation_count + repair_mutations)
+    for code, (_, repair) in repairs.items():
+        print(f"{code} CLOSED: {repair.signature} operation={repair.operation} ledger={repair.ledger}")
+    print(f"FULLY SHARED CLOSED: {len(classes)}/{len(classes)} = {sum(safe_by_cut.values())} ordinary + {len(repairs)} repairs")
 
     require(safe_by_cut == EXPECTED_SAFE_BY_CUT, "ordinary SAFE cut-count census changed")
     require(sum(safe_by_cut.values()) == 115502, "ordinary physical-owner SAFE total changed")
     require(len(residuals) == 10, "exact fail-closed residual count changed")
+    require(len(repairs) == 10 and all(repair.ledger.positive()
+                                      for _, repair in repairs.values()),
+            "physical repair closure count changed")
     require(accepted_digest == EXPECTED_ACCEPTED_DIGEST,
             "ordinary accepted-signature digest changed")
     require(proof_digest == EXPECTED_PHYSICAL_DIGEST,
@@ -824,6 +1628,9 @@ def main():
     require(candidate_digest == EXPECTED_CANDIDATE_DIGEST,
             "all abstract SAFE physical-certificate digest changed")
     require(mutation_count == 8, "hostile mutation count changed")
+    require(repair_mutations == 17, "repair hostile mutation count changed")
+    require(repair_digest == EXPECTED_REPAIR_DIGEST,
+            "physical repair-certificate digest changed")
 
 
 if __name__ == "__main__":

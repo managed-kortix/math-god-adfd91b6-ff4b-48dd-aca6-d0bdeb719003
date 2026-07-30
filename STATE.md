@@ -16,6 +16,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-29: completed the fully shared rank-eleven `T^9PP` endpoint:
+  `115512=115502+10`, all with physical final-owner certificates. U1--U10 now
+  pass the same independent graph/domain/theorem pipeline as ordinary rows.
+  Repairs include common-cut/opening/router packets, corrected one-router U7,
+  grouped-C5 U4/U8, and nested U9/U10. Successive hostile audits caught unchecked
+  packet hypotheses/bounds, code-selected rank theorems, metadata-only nesting,
+  and finally owner-domain swaps consistent with recomputed packet ledgers.
+  Full packet records are now independently rederived, connectivity/rank and
+  common-cut/packing-one predicates come from owner-induced physical graphs,
+  nested active descendants are replayed, and every interval plus incidence
+  branch is bound to its declared final owner. Twenty-five hostile mutations
+  reject; final gate accepted. Repair digest `eedc3beb...`. The remaining full
+  rank-eleven synthesis must still close nonhostile `T^10Q` scope exactly.
 - 2026-07-29: hardened the bulk fully shared rank-eleven `T^9PP` frontier. An
   independent verifier regenerates 115512 incidence rows and physically checks
   all 517923 abstract SAFE cycle choices, proving exactly 115502 ordinary rows

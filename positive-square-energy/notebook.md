@@ -1,5 +1,22 @@
 # notebook — positive square energy
 
+## 2026-07-29 — fully shared `T^9PP` complete
+
+Encoded physical U1--U10 repairs atop the 115502 ordinary certificates. The
+ten final packetizations match the established ledgers, including corrected
+U7, degree-four grouped-C5 U8, and nested U9/U10. The grouped-component C5
+corollary was stated explicitly for U4/U8.
+
+The hostile sequence was productive: theorem hypotheses and bounds were first
+unchecked; U5/U7 predicates came from abstract incidences; U8 connectivity was
+code-selected; U9/U10 nesting was metadata; and owner-domain swaps could preserve
+valid recomputed profiles while violating named router owners. The final checker
+rederives complete RepairPackets, physical connectivity/rank/common cuts,
+replays active descendants, and binds every interval and full incidence branch
+to the terminal owner named by the operation. Twenty-five mutations reject and
+the final audit accepted `115512/115512`. Full rank eleven awaits a precise
+nonhostile `T^10Q` closure and global synthesis.
+
 ## 2026-07-29 — fully shared ordinary `T^9PP` closure
 
 The complete 115512-row incidence universe splits into 115502 physically

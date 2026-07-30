@@ -1,4 +1,4 @@
-# Fully shared rank-eleven `T^9PP`: first-phase physical verifier
+# Fully shared rank-eleven `T^9PP`: physical closure verifier
 
 **Date:** 2026-07-29
 
@@ -14,13 +14,14 @@ reclassifies every complete owned terminal packet.
 The exact result is
 
 ```text
-115512 = 115502 ordinary physical-owner SAFE + 10 residual.
+115512 = 115502 ordinary physical-owner SAFE + 10 physical repairs.
 ```
 
-This is deliberately a first-phase result. The ten residual signatures are not
-claimed closed by this verifier, even though separate ladder notes describe
-candidate repairs. No fully shared endpoint theorem or rank-eleven theorem is
-asserted here.
+The verifier now closes the exact ten ordinary residual signatures through the
+same independently reconstructed graph, exhaustive final-owner, complete-cycle,
+theorem-reclassification, and exact-ledger pipeline. This proves the fully
+shared incidence family only; it does not assert the global rank-eleven cactus
+theorem or router reachability R11.
 
 ## Reproduction
 
@@ -106,12 +107,32 @@ interval/attachment drift, forged theorem, missing attachment domain,
 unsupported old-default arity, fifth-interval omission, and coordinated
 remnant/domain deletion.
 
-## Exact residual boundary
+## Physical repair closure
 
-The ten rows are the frozen ordinary-split residual signatures `U1`--`U10`
-printed by the executable, with cut distribution `{1:1,2:2,3:4,4:2,5:1}`.
-They are isolated rather than silently passed to handwritten recipes. A later
-phase may encode their openings and nested router repairs on the same physical
-owner domain and independently rederive their common-cut or packing-one packet
-theorems. Until then the executable exits successfully only for the stated
-`115502/115512` first-phase claim.
+The ten rows are matched by exact canonical signature, not residual order. For
+each one the executable reconstructs all `C3`/`C5` positions, physical shared
+cuts, sacrificed-router remnants, opening paths, nested refinement order,
+attachment domains, and final owners. It then derives complete cycles from the
+owner map and reclassifies the terminal theorem before summing the ledger.
+
+| row | physical operation | derived terminal profile | exact ledger |
+|---|---|---|---:|
+| `U1` | no split; common cut predicate | common-cut `T^9PP` | `>10-4/(3sqrt(13))` |
+| `U2` | rooted leaf-`P` opening `1+4` | common-cut `T^9P` + tree | `>8-delta` |
+| `U3` | triangle `1+2` router | `P` + common-cut `T^8P` | `>8-2delta` |
+| `U4` | `C5` singleton/complement | `A_8+TP` | `>3/4` |
+| `U5` | rooted leaf-`P` opening `1+4` | packing-one `T^9P` + tree | `>8-delta` |
+| `U6` | forced triangle singletons | `P+T+` common-cut `T^7P` | `>7-2delta` |
+| `U7` | corrected one-router `1+2` split | `P+` packing-one `T^8P` | `>8-2delta` |
+| `U8` | degree-four `C5` singleton/complement | `T+` rank-nine `T^8P` | `>0` |
+| `U9` | two nested triangle refinements | `P+P+T+A_6` | `>1-2delta` |
+| `U10` | two nested triangle refinements | `P+P+T+T+A_5` | `>2-2delta` |
+
+The radical predicates are exact rational comparisons after squaring; no
+floating-point approximation or qualitative strictness is used as credit.
+Twenty-five hostile mutations are rejected (eight ordinary and seventeen repair
+mutations), including coordinated U4/U7/U8 owner-domain swaps with rederived
+packets and ledgers, forged packet hypotheses and bounds, closed-sibling
+retrieval in both nested repairs, and the invalid literal
+`U7` extension, a wrong `C5` singleton, reversed nesting/opening, and a forged
+common-cut radical charge. Both normal and `-O` runs report `115512/115512`.
