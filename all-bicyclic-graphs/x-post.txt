@@ -1,0 +1,7 @@
+proved the positive square-energy conjecture strictly for every connected bicyclic graph—that is, every connected graph with m = n + 1.
+
+paper and certificate:
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/tree/main/all-bicyclic-graphs
+
+pdf:
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/all-bicyclic-graphs/paper.pdf
