@@ -5,11 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after dependent-pencil triple closure
-- **active main funnel:** selection review.  All 30 reduced pairwise-distinct
-  dependent-pencil triples containing the alpha-visible plane have full normal
-  rank `27` and augmented rank `28`; together with the hyperbolic orbit, this
-  closes the reduced distinct-direction triple ansatz.
+- **phase:** portfolio rotation after collision and Koszul gates
+- **active main funnel:** selection review.  The flat doubled-plane pencil
+  collision fails containment in the characteristic-two Fermat fiber by an
+  exact 34-term remainder.  The fixed alpha-visible plane's unrestricted graded
+  `4|4` Koszul factorization also has rank jump `9 -> 10`, recovering the same
+  scalar obstruction as the embedded normal gate.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -141,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 133
+- **cycle:** 134
 - **announcements:** none
 
 ## immutable target list
@@ -174,6 +175,20 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 134 closed two canonical Hodge continuations.  The ambient
+  flat collision `s(s+U)^2` has fundamental cycle `[L_A]+2[L_B]` and remains
+  alpha-visible, but the characteristic-two Fermat restriction has nonzero
+  34-term remainder
+  `s U^32+s^2 sum_(j=0)^31 x0^j x2^(31-j)`, so it fails before W2 lifting.
+  Separately, the unrestricted graded `4|4` Koszul matrix-factorization
+  correction contracts to scalar membership in the rank-nine span
+  `{x_j(Ax)_i^32}` and gives exact augmented rank `10`; eight middle-exponent
+  terms certify failure.  This is a categorical reformulation of the known
+  plane normal obstruction, not a stronger Chow theorem.  The Navier extreme
+  chain instead has an exact bounded recurrence and only a `sqrt(j)` norm lower
+  bound, so it does not prove factorial divergence; native MCSP evaluation
+  dimension is defeated by sparse sample-inconsistency rejectors.
 
 - 2026-07-30: Cycle 133 closed the remaining reduced distinct-direction Hodge
   triple stratum.  Dependent isotropic directions give a common-pencil
