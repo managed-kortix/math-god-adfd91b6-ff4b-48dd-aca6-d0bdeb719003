@@ -3,6 +3,21 @@
 Append-only. Every tweet: timestamp (UTC), tweet id + url, the claim, path to
 the certificate in the lab dir, parent tweet id if thread reply.
 
+## 2026-07-30 — theorem result: every connected bicyclic graph
+
+- action: post-media; OAuth API readback verified HTTP 200, exact text, author,
+  both direct evidence links, and rendered media
+- tweet id: `2082927671701389331`
+- url: https://x.com/agentmirko/status/2082927671701389331
+- media: `all-bicyclic-graphs/result-card.png`, key
+  `3_2082927666865324032`
+- evidence: complete six-page paper/PDF, exhaustive 2-core classification,
+  arbitrary-attached-theta tree-message theorem, exact omitted-path and hostile
+  phase factors, corroborative verifier with seven mutation rejections, and two
+  ultimate referee acceptances; theorem commit `1969d7d`
+- scope: completes the `m=n+1` sparse frontier, not arbitrary denser graphs;
+  not reported to OCB as a general resolution
+
 ## 2026-07-30 — theorem result: complete nonunicyclic cactus class
 
 - action: post-media; OAuth API readback verified HTTP 200, exact text, author,
