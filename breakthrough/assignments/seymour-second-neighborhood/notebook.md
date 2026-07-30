@@ -1081,3 +1081,25 @@ No audits yet.
   by adding exact A-B incidence, simultaneous badness, and arc-deletion private
   endpoint constraints. In parallel, construct the currently missing six-edge
   support census for `m=6`.
+
+### Fresh m=5 B6 placement cover
+
+- The historical 170-ledger boundary is not reproducible from committed files:
+  its scratch enumerator and at least one immediate filter were never retained.
+  Replaced it with a broader first-principles cover that does not trust those
+  counts.
+- The five uncovered support shapes have exactly 4,355 canonical rooted-layer
+  placements under support automorphisms and layer permutations, with counts
+  `688,1459,283,194,1731`. Independent enumeration agrees; payload SHA-256 is
+  `e5873a71...7d305ed9`.
+- Every placement emits a standalone full order-18 CNF containing exact first
+  and second neighborhoods, badness, all robust deletion witnesses, full arc
+  minimality, and every missing-pair unit. A one-second scout eliminated 4,332
+  parents and left only 23 hard placements.
+- Splitting each hard parent by the exact number of high vertices in C and the
+  exact C-to-B arc count leaves one hard child per parent: either `(highC,r)=(1,0)`
+  or `(2,1)`. All other children solve immediately. This recovers the structural
+  hinge without relying on the missing old ledger filters.
+- **Next queued attack:** refine those 23 children by the three C-pair states
+  and robust-witness location for high C vertices; freeze a complete child cover
+  and retain LRATs only after an independent partition audit.
