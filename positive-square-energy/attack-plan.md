@@ -205,6 +205,11 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     Apply publication workflow, then attack promotion from a spanning connected
     bicyclic subgraph to arbitrary `m>=n+1`: the next bottleneck is a connected
     chord-addition/basis-exchange certificate, not the sparse base theorem.
+37. Nonnegative chord correlation is false for every spanning bicyclic base in
+    a small four-path example, and a claimed generic bicyclic edge-phase SOS
+    was not proved. Keep edge monotonicity as a parallel conjecture, but make the
+    next proof target all connected tricyclic graphs via block/kernel analysis;
+    see `positive-square-energy/tricyclic-general/prompt.md`.
 35. Rank thirteen is complete. Sharp DNN gives `sigma>=12-sum epsilon_l`, and
     the exact fail-closed frontier is `T^12Q,T^11PP`. The complementary
     all-rank one-cycle results close every parity of `Q`, including `q=3`, and

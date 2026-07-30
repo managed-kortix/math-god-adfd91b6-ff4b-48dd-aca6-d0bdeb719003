@@ -1,5 +1,20 @@
 # notebook — positive square energy
 
+## 2026-07-30 — promotion obstruction and tricyclic pivot
+
+For an added edge `uv`, exact variational tangent is
+`s+(H+uv)>=s+(H)+4(A(H)_+)_{uv}` and exact determinant ratio is
+`(1-R_uv)^2-R_uu R_vv`. Every spanning bicyclic base can have negative omitted-
+edge correlation; matroid averaging does not force a good sign. Curvature often
+repairs it, and exhaustive tricyclic tests through order 12 found no decreasing
+edge addition, but no uniform phase-area proof exists.
+
+Direct tricyclic structure is finite after block decomposition: cycle/cycle/
+cycle is done; theta+cycle reduces to direct rooted gluing after bridge cases;
+a 2-connected rank-three block suppresses to four multigraph kernels. DNN block
+savings should sieve easy path residues, leaving coarse hostile-cycle phase
+packets with budget `D>=-4`.
+
 ## 2026-07-30 — every connected bicyclic graph
 
 The attached-theta phase problem closes pointwise after charging hostile odd

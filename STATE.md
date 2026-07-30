@@ -17,6 +17,15 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-30: after the complete bicyclic theorem, tested promotion by adding
+  one edge. Exhaustive data strongly suggest `s+(H+e)>=s+(H)` for bicyclic H,
+  but the proposed generic finite-kernel phase-SOS proof was rejected: it did
+  not display a uniform identity for realizable two-terminal tree messages.
+  Positive-projector entries can be negative and general connected edge
+  monotonicity fails in dense graphs. Switched the next rigorous target to all
+  connected tricyclic graphs, with exact block-rank split `1+1+1`, `2+1`, or
+  one rank-three block and four suppressed kernels. Victory contract:
+  `positive-square-energy/tricyclic-general/prompt.md`.
 - 2026-07-30: proved every finite simple connected bicyclic graph satisfies
   `s+(G)>|V(G)|`. The 2-core is either a bicyclic cactus (already covered) or a
   theta with arbitrary rooted forests. For the theta case, exact tree-message
