@@ -1070,8 +1070,14 @@ No audits yet.
 - Together with the independently audited common projection, this durably closes
   both final isolated-root rows `(rho,k)=(0,5)` and `(1,5)`. Thus every row in
   the isolated-root `m=9` aggregate is now eliminated.
-- Scope remains restricted: this closes the isolated-hole branch of the order-18
-  minimum-outdegree-eight program, not all order-18 counterexamples and not SNC.
-- **Next queued attack:** return to the complete order-18 missing-graph split,
-  identify the exact non-isolated residual families outside this branch, and
-  derive the next sound structural compression rather than declaring victory.
+- Combining the isolated-hole closure with the earlier perfect-matching theorem
+  closes the complete `m=9` branch: a nine-edge missing graph on 18 vertices
+  without an isolate has average and minimum degree one, hence is exactly
+  `9K2`. The normalization and complement argument are consolidated in
+  `attempts/tick48-complete-m9-closure.md`.
+- Scope remains restricted: the exact order-18 residual is `m in {5,6,7}`; this
+  is not all order 18 and not SNC.
+- **Next queued attack:** complete the existing 170-ledger `m=5`, B6 frontier
+  by adding exact A-B incidence, simultaneous badness, and arc-deletion private
+  endpoint constraints. In parallel, construct the currently missing six-edge
+  support census for `m=6`.
