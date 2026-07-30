@@ -5,12 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after temporal-regularization gate
-- **active main funnel:** selection review.  Under entire tempered symbols,
-  every universal free temporal multiplier preserving reflection positivity
-  modulo contacts is polynomial, hence cannot improve ultraviolet decay.  The
-  surviving route is direct negative-Sobolev compactness of unsmoothed temporal
-  distributions, for which current Wilson bounds are insufficient.
+- **phase:** portfolio rotation after recursive leakage-completion no-go
+- **active main funnel:** selection review.  The Cycle 113 packet admits
+  arbitrary fixed finite coefficient completion: after depth `r`, critical
+  production remains order one while exterior weighted leakage is
+  `O(epsilon^(2r))`.  Every fixed finite-depth leakage coercivity mechanism is
+  therefore retired.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 128
+- **cycle:** 129
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +175,20 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 129 generalized the completed-star no-go to every fixed
+  finite depth.  Recursively absorbing the exterior coefficient at order `j`
+  into generation `V_(j+1)` makes all exterior convolution coefficients below
+  `epsilon^r` vanish after depth `r`, while preserving core flux
+  `8(sqrt(2)-1)` and energy `8+6sqrt(2)+O(epsilon^2)`.  Thus squared leakage is
+  `O(epsilon^(2r))` and the coercivity ratio diverges at least as
+  `epsilon^(-2r)`.  A dependency-free exact verifier computes depths through
+  three with generation sizes `6,4,14,24`; after the 48-mode third completion,
+  the leading order-three leak has 28 modes.  Hodge's actual orbit union has a
+  vacuous degree-33 alpha normal target and no symmetry shortcut; stable
+  decision-tree identities reject easy OR circuits; the BSD rank-one packet was
+  prior work; and every universally nonnegative multi-interval RH quadratic
+  killing the pole is PSD on the contrast space.
 
 - 2026-07-30: Cycle 128 closed universal linear temporal smoothing under exact
   reflection positivity.  If entire real `q` makes
