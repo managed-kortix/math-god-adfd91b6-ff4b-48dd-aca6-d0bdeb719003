@@ -17,6 +17,18 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-30: proved every finite simple connected bicyclic graph satisfies
+  `s+(G)>|V(G)|`. The 2-core is either a bicyclic cactus (already covered) or a
+  theta with arbitrary rooted forests. For the theta case, exact tree-message
+  elimination and four-state path continuants prove phase domination by at
+  most two hostile bare cycles in every residue channel, including the delicate
+  negative even-cycle coefficient. The one-hostile channel uses coordinatewise
+  matching-partition monotonicity plus an explicit bare continuant injection;
+  the two-hostile channel uses positive endpoint-packet factors `E1,E2`.
+  Integration gives `D>=-4(sqrt(5)-2)>-2`, hence the uniform strict margin
+  `sigma>=5-2sqrt(5)`. Two independent ultimate audits accepted the proof and
+  PDF. Paper: `all-bicyclic-graphs/`; supporting exact verifier rejects seven
+  mutations in normal and `-O` modes.
 - 2026-07-30: after completing all nonunicyclic cacti, selected the exact next
   frontier: all connected bicyclic graphs. Cactus bicyclic kernels are done;
   the only missing family is a simple theta 2-core with arbitrary forests

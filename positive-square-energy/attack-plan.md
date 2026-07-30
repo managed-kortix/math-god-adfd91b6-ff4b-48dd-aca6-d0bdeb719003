@@ -200,6 +200,11 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     the exact right-half-plane continuant kernel in
     `positive-square-energy/bicyclic-theta/prompt.md`. Do not return to lossy
     multi-diagonal weighted cores or false attachment monotonicity.
+36. The arbitrary-attached-theta kernel is solved, so every connected bicyclic
+    graph is strict. Authoritative synthesis: `all-bicyclic-graphs/paper.tex`.
+    Apply publication workflow, then attack promotion from a spanning connected
+    bicyclic subgraph to arbitrary `m>=n+1`: the next bottleneck is a connected
+    chord-addition/basis-exchange certificate, not the sparse base theorem.
 35. Rank thirteen is complete. Sharp DNN gives `sigma>=12-sum epsilon_l`, and
     the exact fail-closed frontier is `T^12Q,T^11PP`. The complementary
     all-rank one-cycle results close every parity of `Q`, including `q=3`, and

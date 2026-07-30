@@ -1,0 +1,430 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\splus}{s^+}
+\newcommand{\sminus}{s^-}
+\newcommand{\Arg}{\operatorname{Arg}}
+
+\title{Strict Positive Square Energy of Every Bicyclic Graph}
+\author{AI-generated manuscript; no human author is claimed}
+\date{30 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $G$ be a finite simple connected graph with $n$ vertices and $n+1$
+edges.  We prove the strict inequality $\splus(G)>n$, where $\splus$ is the
+sum of the squares of the positive adjacency eigenvalues.  The $2$-core is
+either a bicyclic cactus (a figure-eight or handcuff/dumbbell) or a theta;
+arbitrary rooted trees may be attached at its vertices.  The cactus class is
+covered by the strict theorem for every nonunicyclic cactus.  For the
+non-cactus class we give the analytic attached-theta argument: tree messages,
+an open-right-half-plane Sachs expansion, and exact endpoint packets controlling
+zero, one, or two hostile odd cycles.  The delicate negative Sachs coefficient
+of a $0\pmod4$ cycle is handled by explicit factorizations.  The phase charge
+theorem gives, for every nonbipartite attached theta,
+\[
+ \splus(G)-n\geq5-2\sqrt5>0.
+\]
+The cited finite verifier checks packet identities and hostile mutations, but
+the proof is uniform and does not use a finite path-length census.
+\end{abstract}
+
+\section{Statement and structural reduction}
+
+All graphs are finite, simple, and undirected.  For the adjacency eigenvalues
+$\lambda_1,\ldots,\lambda_n$, set
+\[
+ \splus(G)=\sum_{\lambda_j>0}\lambda_j^2,\qquad
+ \sminus(G)=\sum_{\lambda_j<0}\lambda_j^2,\qquad
+ D(G)=\splus(G)-\sminus(G).
+\]
+Since $\operatorname{tr}A(G)^2=2|E(G)|$, a bicyclic graph satisfies
+\begin{equation}\label{eq:energy}
+ \splus(G)+\sminus(G)=2n+2,
+ \qquad \splus(G)=n+1+\frac12D(G).
+\end{equation}
+
+\begin{theorem}\label{thm:main}
+Every finite simple connected graph $G$ with $|V(G)|=n$ and
+$|E(G)|=n+1$ satisfies
+\[
+ \boxed{\splus(G)>n}.
+\]
+\end{theorem}
+
+Recall that the $2$-core is obtained by repeatedly deleting vertices of degree
+at most one.
+
+\begin{proposition}[Bicyclic core dichotomy]\label{prop:structure}
+The $2$-core $H$ of a finite simple connected bicyclic graph is exactly one of
+the following:
+\begin{enumerate}
+ \item a cactus with two cyclic blocks, either sharing one cut vertex
+ (figure-eight or tight handcuff), or vertex-disjoint and joined by a path
+ (dumbbell or loose handcuff);
+ \item a theta graph, consisting of three internally vertex-disjoint paths of
+ positive lengths between two distinct terminals, with at most one path of
+ length one.
+\end{enumerate}
+Every component outside $H$ is a tree attached to exactly one vertex of $H$.
+\end{proposition}
+
+\begin{proof}
+The core is connected, has minimum degree at least two, and retains
+$|E(H)|-|V(H)|=1$.  Thus
+\[
+ \sum_{v\in V(H)}(\deg_H(v)-2)=2.
+\]
+Either one vertex has degree four and all others degree two, or two vertices
+have degree three and all others degree two.  The first case gives two cycles
+meeting at the exceptional vertex.  In the second case suppress maximal
+degree-two paths.  If a suppressed edge is a bridge, the remaining half-edges
+form one cycle at each endpoint and the bridge expands to the joining path.
+Otherwise the suppressed multigraph has three parallel terminal-to-terminal
+edges, which expand to a theta.  Simplicity forbids two direct terminal edges.
+Reversing leaf deletion attaches rooted trees, each at one core vertex.
+\end{proof}
+
+The cactus alternative follows from the following strict theorem, whose
+manuscript includes the rank-uniform DNN frontier and closure of its residual
+families.
+
+\begin{theorem}[Nonunicyclic cactus theorem \cite{Cactus}]\label{thm:cactus}
+Every finite simple connected cactus of cyclomatic rank at least two satisfies
+$\splus(G)>|V(G)|$.
+\end{theorem}
+
+We prove the attached-theta alternative in enough detail that the main result
+does not treat the research note as a black box.
+
+\section{Tree messages and the right half-plane}
+
+For positive activities $a=(a_v)$ and a graph $J$, define
+\begin{equation}\label{eq:Z}
+ Z_J(a)=\sum_{M\text{ matching of }J}
+             \prod_{v\text{ unmatched by }M}a_v.
+\end{equation}
+Orient each off-core branch toward its core root.  The leaf recurrence gives
+\begin{equation}\label{eq:messages}
+ Q_{u\to v}=t+\sum_{w\text{ child of }u}Q_{w\to u}^{-1}>0,
+ \qquad
+ a_v=t+\sum_{u\text{ off-core at }v}Q_{u\to v}^{-1}\geq t.
+\end{equation}
+Extracting branch partitions gives one factor $K(t)>0$.  It remains common
+when a Sachs cycle deletes a core root: the detached branches contribute their
+full partitions.  Thus no cycle-deletion term carries a hidden quotient.
+
+Normalize
+\begin{equation}\label{eq:Psi}
+ \Psi_G(t)=i^{-n}\det(itI-A(G))=\prod_{j=1}^n(t+i\lambda_j),\qquad t>0.
+\end{equation}
+Its continuous argument tending to zero at infinity is
+$\Theta_G(t)=\sum_j\arctan(\lambda_j/t)$, and the signed Coulson identity is
+\begin{equation}\label{eq:coulson}
+ D(G)=-\frac4\pi\int_0^\infty t\Theta_G(t)\,dt.
+\end{equation}
+This follows by integrating the identity for $\lambda|\lambda|$, using
+$\sum_j\lambda_j=0$, and integrating by parts.
+
+Let theta paths $P_0,P_1,P_2$ join terminals $x,y$, with
+$\ell_j=|E(P_j)|$.  If their parities agree, the graph and all its tree
+attachments are bipartite, so spectral symmetry gives
+$\splus(G)=|E(G)|=n+1$.  Otherwise label the two odd and one even cycles
+\begin{equation}\label{eq:cycles}
+ C_1=P_0\cup P_1,\qquad C_2=P_0\cup P_2,
+ \qquad C_e=P_1\cup P_2.
+\end{equation}
+Put
+\[
+ d_j=Z_{P_j-\{x,y\}}(a),\qquad
+ \varepsilon=\begin{cases}+1,&|C_e|\equiv2\pmod4,\\
+                           -1,&|C_e|\equiv0\pmod4.
+             \end{cases}
+\]
+Call an odd cycle hostile when its length is $1\pmod4$, favorable when it is
+$3\pmod4$, and set $\eta_j=+1$ or $-1$ accordingly.  Sachs expansion gives
+\begin{equation}\label{eq:sachs-theta}
+ \frac{\Psi_G(t)}{K(t)}=W=R+2i(\eta_1d_2+\eta_2d_1),
+ \qquad R=Z_H(a)+2\varepsilon d_0.
+\end{equation}
+No two theta cycles are vertex-disjoint, so no double-cycle term occurs.
+
+\begin{lemma}[Open right half-plane]\label{lem:rhp}
+For every $t>0$, $R>0$.  Thus the continuous argument of $W$ is its principal
+argument in $(-\pi/2,\pi/2)$.
+\end{lemma}
+
+\begin{proof}
+Partition matchings first on the even cycle.  The omitted-path packet below
+gives $Z_H(a)=z_ed_0+E_e$, where
+$z_e=Z_{C_e}(a|_{C_e})$ and $E_e\geq0$.  The even cycle has two perfect
+matchings and its empty matching has positive weight, so $z_e>2$.  Hence
+\[
+ R=(z_e+2)d_0+E_e>0\quad(\varepsilon=+1),\qquad
+ R=(z_e-2)d_0+E_e>0\quad(\varepsilon=-1).
+\]
+\end{proof}
+
+\section{The exact omitted-path packet}
+
+For a list of positive numbers define the continuant
+\[
+ K()=1,\quad K(c_1)=c_1,\quad
+ K(c_1,\ldots,c_r)=c_rK(c_1,\ldots,c_{r-1})+K(c_1,\ldots,c_{r-2}).
+\]
+It obeys
+\begin{equation}\label{eq:continuant-det}
+ K(c_1,\ldots,c_r)K(c_2,\ldots,c_{r-1})
+ -K(c_1,\ldots,c_{r-1})K(c_2,\ldots,c_r)=(-1)^r,
+\end{equation}
+the determinant identity behind terminal path elimination.
+
+Let $C$ be one theta cycle and let its omitted path be
+$Q:x=v_0,v_1,\ldots,v_r=y$, with $c_j=a_{v_j}$.  Define
+\begin{align*}
+ D_Q&=K(c_1,\ldots,c_{r-1}),\\
+ L_Q&=\begin{cases}0,&r=1,\\K(c_2,\ldots,c_{r-1}),&r\geq2,\end{cases}
+ &R_Q&=\begin{cases}0,&r=1,\\K(c_1,\ldots,c_{r-2}),&r\geq2,\end{cases}\\
+ M_Q&=\begin{cases}1,&r=1,\\0,&r=2,\\
+ K(c_2,\ldots,c_{r-2}),&r\geq3.
+ \end{cases}
+\end{align*}
+Empty continuants are one.  If $z_C=Z_C(a|_C)$ and superscripts indicate
+deleted terminals, partitioning by the first and last edges of $Q$ gives the
+exact four-state identity
+\begin{equation}\label{eq:packet}
+ Z_H(a)=z_CD_Q+z_C^xL_Q+z_C^yR_Q+z_C^{xy}M_Q.
+\end{equation}
+This includes a direct omitted edge ($r=1$) and a two-edge path ($r=2$), the
+two cases in which informal empty-path conventions are most dangerous.
+
+For a hostile cycle of length $q$, activity monotonicity gives
+\begin{equation}\label{eq:weighted-cycle}
+ z_C\geq Z_{C_q}(t)=:Z_q(t),
+ \,\qquad
+ 0<\Arg(z_C+2i)\leq\Arg(Z_q(t)+2i).
+\end{equation}
+The comparator is the isolated weighted cycle after tree elimination, not the
+bare attached theta; the latter comparison need not hold.
+
+\section{Channel lemmas}
+
+If neither odd cycle is hostile, \eqref{eq:sachs-theta} gives
+$\operatorname{Im}W=-2(d_1+d_2)<0$, and hence $\Theta_G(t)<0$.  The one- and
+two-hostile channels require exact control of the negative coefficient created
+when $|C_e|\equiv0\pmod4$.
+
+\begin{lemma}[One-hostile channel]\label{lem:one}
+Suppose $C_1$ is hostile, $C_2$ is favorable, and $q=|C_1|$.  Then
+\begin{equation}\label{eq:one-phase}
+ \Theta_G(t)<\Arg(Z_q(t)+2i)\qquad(t>0).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Set $B=d_2$, $A=d_1$, and $Z_q=Z_q(t)$, so
+$\operatorname{Im}W=2(B-A)$.  If $|C_e|\equiv2\pmod4$, applying
+\eqref{eq:packet} to $C_1$ gives
+\begin{align}\label{eq:positive-one}
+ R-Z_q(B-A)={}&(z_{C_1}-Z_q)B+Z_qA+z_{C_1}^xL_{P_2}\notag\\
+ &+z_{C_1}^yR_{P_2}+z_{C_1}^{xy}M_{P_2}+2d_0>0.
+\end{align}
+If $B-A\leq0$, the phase is nonpositive.  Otherwise division by $RZ_q>0$
+and Lemma~\ref{lem:rhp} give
+$\arctan(2(B-A)/R)<\arctan(2/Z_q)$.
+
+Suppose instead that $|C_e|\equiv0\pmod4$.  The last term in
+\eqref{eq:positive-one} becomes $-2d_0$, so termwise positivity would be
+invalid.  Define
+\[
+ F(a)=Z_H(a)-2d_0-Z_q(B-A).
+\]
+We show $F(a)\geq F(t)>0$ on $a_v\geq t$.  Let
+$I_j=V(P_j)-\{x,y\}$.  Differentiating a matching partition deletes the
+corresponding vertex, and hence
+\[
+ \partial_vF=\begin{cases}
+ Z_{H-v},&v=x,y,\\
+ Z_{H-v}+Z_qZ_{I_1-v},&v\in I_1,\\
+ Z_{H-v}-Z_qZ_{I_2-v},&v\in I_2,\\
+ Z_{H-v}-2Z_{I_0-v},&v\in I_0.
+ \end{cases}
+\]
+For $v\in I_2$, unite a matching of $C_1$ and a matching of $I_2-v$, using
+no boundary edge.  This is a coefficient-preserving injection into matchings
+of $H-v$, so
+$Z_{H-v}\geq z_{C_1}Z_{I_2-v}\geq Z_qZ_{I_2-v}$.  Similarly, using $C_e$ and
+$I_0-v$ gives $Z_{H-v}>2Z_{I_0-v}$ because $Z_{C_e}(a)>2$.  Every derivative
+is nonnegative, proving $F(a)\geq F(t)$.
+
+For strict bare positivity put $a=\ell_0$, $b=\ell_1$, $c=\ell_2$, and let
+$K_r=K(t,\ldots,t)$ ($r$ entries), with $K_{-1}=0$, $K_0=1$.  The residues
+force $a$ even and $b,c$ odd.  A two-image, uncovered-vertex-preserving
+matching injection gives coefficientwise
+\begin{equation}\label{eq:bare-injection}
+ (K_{a+b}+K_{a+b-2})K_{b-1}\geq2K_{a-1}.
+\end{equation}
+Indeed, for each matching of the interior of $P_0$, complete through $P_1$ in
+the two parity choices and shift each retained $P_0$ edge by one in the second
+image.  The images are disjoint because exactly the second uses the first
+$P_0$ edge, and both add $b$ matched edges, preserving every power of $t$.
+Formula \eqref{eq:packet} now yields
+\[
+ F(t)=Z_qK_{b-1}-2K_{a-1}+K_{a-1}K_{b-1}>0\quad(c=1),
+\]
+while for odd $c\geq3$ it yields
+\[
+ F(t)=Z_qK_{b-1}-2K_{a-1}
+ +2K_{a+b-1}K_{c-2}+K_{a-1}K_{b-1}K_{c-3}>0.
+\]
+The first difference is nonnegative by \eqref{eq:bare-injection}; a remaining
+term is positive.  Therefore $R>Z_q(B-A)$ also in the $0\pmod4$ channel, and
+the preceding sign split proves \eqref{eq:one-phase}.
+\end{proof}
+
+\begin{lemma}[Two-hostile channel]\label{lem:two}
+If both odd cycles are hostile, then
+\begin{equation}\label{eq:two-phase}
+ \Theta_G(t)\leq
+ \Arg(Z_{|C_1|}(t)+2i)+\Arg(Z_{|C_2|}(t)+2i).
+\end{equation}
+The sum on the right is its continuous product argument, not a principal
+argument reset when the real part of the product changes sign.
+\end{lemma}
+
+\begin{proof}
+Write $z_j=Z_{C_j}(a|_{C_j})$, $B_1=d_2$, and $B_2=d_1$.  The packet identity
+with the other path omitted gives
+\begin{equation}\label{eq:Ej}
+ R=z_jB_j+E_j,
+ \qquad E_j=z_j^xL_Q+z_j^yR_Q+z_j^{xy}M_Q+2\varepsilon d_0.
+\end{equation}
+For $\varepsilon=+1$, clearly $E_j\geq0$.  For $\varepsilon=-1$, the residues
+force $P_0$ odd and $P_1,P_2$ even.  Each omitted path $Q$ has even length at
+least two, so $L_Q,R_Q\geq1$.  Retaining a matching of
+$P_0-\{x,y\}$ and adding the unique perfect matching of the remaining even
+path injects coefficient-preservingly into matchings of $C_j-x$ and $C_j-y$.
+Consequently the delicate expression factors exactly as
+\begin{align}\label{eq:zero-factor}
+ E_j={}&(z_j^x-d_0)L_Q+d_0(L_Q-1)\notag\\
+       &+(z_j^y-d_0)R_Q+d_0(R_Q-1)+z_j^{xy}M_Q\geq0.
+\end{align}
+This remains valid when $P_0$ is one edge, when $Q$ has length two, and when
+$M_Q=0$; no empty-state convention has been suppressed.
+
+Thus $2B_j/R\leq2/z_j$.  Put $\theta_j=\arctan(2/z_j)$ and
+$\Theta=\arctan(2(B_1+B_2)/R)\in(0,\pi/2)$.  If
+$\theta_1+\theta_2<\pi/2$, then
+\[
+ \tan(\theta_1+\theta_2)
+ =\frac{2/z_1+2/z_2}{1-4/(z_1z_2)}
+ \geq\frac{2(B_1+B_2)}R,
+\]
+so $\Theta\leq\theta_1+\theta_2$.  If the sum is at least $\pi/2$, the result
+is immediate.  Moreover
+\[
+ (z_1+2i)(z_2+2i)=(z_1z_2-4)+2i(z_1+z_2)
+\]
+has continuous argument $\theta_1+\theta_2\in(0,\pi)$, passing through
+$\pi/2$ rather than jumping branches.  Apply \eqref{eq:weighted-cycle} to
+ both cycles to obtain \eqref{eq:two-phase}.
+\end{proof}
+
+\section{The phase charge theorem}
+
+\begin{theorem}[Attached-theta phase charge]\label{thm:theta}
+Let $G$ be a finite simple connected graph whose $2$-core is a theta, with
+arbitrary finite rooted trees attached at arbitrary core vertices.  If $G$ is
+nonbipartite, then
+\begin{equation}\label{eq:theta-bound}
+ D(G)\geq-4(\sqrt5-2),
+ \qquad \splus(G)-|V(G)|\geq5-2\sqrt5>0.
+\end{equation}
+If $G$ is bipartite, then $\splus(G)=|V(G)|+1$.
+\end{theorem}
+
+\begin{proof}
+For a hostile odd cycle $C_q$, $q\equiv1\pmod4$, its spectrum and
+\eqref{eq:coulson} give
+\begin{equation}\label{eq:cycle-charge}
+ D(C_q)=-2(\sec(\pi/q)-1),
+ \qquad
+ \int_0^\infty t\Arg(Z_q(t)+2i)\,dt
+ =\frac\pi2(\sec(\pi/q)-1).
+\end{equation}
+For $q\geq5$, this charge decreases and is at most
+$\delta:=\sec(\pi/5)-1=\sqrt5-2$.  There are at most two hostile cycles.
+The zero-hostile phase is negative, Lemma~\ref{lem:one} charges one hostile
+cycle to its bare cycle, and Lemma~\ref{lem:two} charges two to their sum.
+Thus $D(G)\geq-4\delta$.  By \eqref{eq:energy},
+\[
+ \splus(G)-n=1+\frac12D(G)
+ \geq1-2\delta=5-2\sqrt5>0.
+\]
+The last inequality follows from $25>20$.  The bipartite assertion was proved
+before \eqref{eq:cycles}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+By Proposition~\ref{prop:structure}, a cactus core makes $G$ a rank-two
+cactus, covered by Theorem~\ref{thm:cactus}; a theta core is covered by
+Theorem~\ref{thm:theta}.  Both alternatives include arbitrary tree attachments.
+\end{proof}
+
+\section{Reproducibility and scope}
+
+The full derivation underlying Sections 2--5 is the research note
+\cite{ThetaNote}; the proof above reproduces its uniform argument and key
+lemmas.  The exact verifier \cite{ThetaVerify} checks the endpoint states,
+low-length conventions, bare injection, $0\pmod4$ factorization, phase ledger,
+and rejection of seven hostile mutations.  From the repository root, run it
+normally and with optimization:
+\begin{verbatim}
+python3 positive-square-energy/experiments/\
+  arbitrary_attached_theta_phase_verifier.py
+python3 -O positive-square-energy/experiments/\
+  arbitrary_attached_theta_phase_verifier.py
+bash scripts/build-paper.sh all-bicyclic-graphs
+\end{verbatim}
+The verifier is corroborative only: uniform completeness comes from the
+continuant recurrences and matching injections, not a finite path census.
+
+\paragraph{Scoped nonclaim.}
+The theorem concerns finite simple connected graphs with exactly $n+1$ edges.
+It does not claim a strict bound for unicyclic or disconnected graphs, or an
+all-densities strengthening.  Indeed $\splus(C_4)=|V(C_4)|=4$.
+
+\section*{AI disclosure}
+This manuscript and its proof-object assembly were generated by an AI coding
+and mathematical reasoning system from the cited repository materials.  No
+human authorship, review, or verification is claimed.  The result should be
+assessed from the displayed argument and reproducible dependencies.  No
+external publication was performed as part of this work.
+
+\begin{thebibliography}{99}
+\bibitem{AKMPZ} S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and S.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264, 2025.
+
+\bibitem{Cactus} Companion manuscript, \emph{Positive Square Energy of Every
+Nonunicyclic Cactus}, 2026; \path{all-nonunicyclic-cacti/paper.tex}.
+
+\bibitem{ThetaNote} \emph{Arbitrary attached theta: continuant phase
+reduction}, research proof note, 2026;
+\path{positive-square-energy/bicyclic-theta/arbitrary-attached-theta-phase-note.md}.
+
+\bibitem{ThetaVerify} \emph{Supporting fail-closed checks for the attached-
+theta phase proof}, 2026;
+\path{positive-square-energy/experiments/arbitrary_attached_theta_phase_verifier.py}.
+\end{thebibliography}
+
+\end{document}

@@ -1,5 +1,22 @@
 # notebook — positive square energy
 
+## 2026-07-30 — every connected bicyclic graph
+
+The attached-theta phase problem closes pointwise after charging hostile odd
+cycles. Tree messages give activities at least `t`, a common positive factor,
+and exact four-state path packets. `Re Psi>0` follows by applying the omitted-
+path packet to the even cycle. Zero-hostile channels have negative phase.
+
+For one hostile cycle with an adverse `0 mod 4` even cycle, define
+`F=Z_H-2d0-Z_q(B-A)`. Derivatives in each path/terminal activity are
+nonnegative by explicit no-boundary matching subpartitions. At the bare point,
+two degree-preserving injections establish the remaining continuant inequality.
+For two hostile cycles, exact positive remainders `E1,E2` give comparison with
+the product of their weighted carriers; weighted phases are bounded by bare
+cycle phases. Coulson then yields `D>=-4delta`, `delta=sqrt(5)-2`, and
+`sigma>=1-2delta=5-2sqrt(5)>0`. Combined with complete bicyclic cacti, this
+proves all connected `m=n+1` graphs.
+
 ## 2026-07-30 — post-cactus frontier: attached theta cores
 
 Every connected bicyclic graph has either a cactus kernel or a theta kernel.
