@@ -102,10 +102,14 @@ This proves both the valuation and leading unit.  With cyclotomic coordinate
 rescales the normalized determinant by a square unit, so nonvanishing is
 generator-independent.
 
-Under the standard Nekovář/Sano identification of the first cyclotomic
-Bockstein pairing with the cyclotomic `p`-adic height (up to sign and the fixed
-augmentation coordinate), the computation proves nondegeneracy of that
-rank-two pairing for this curve.  It does **not** identify the scalar `6` with
+For the Greenberg Selmer complex at the good ordinary prime seven, use the
+unit-root splitting and global cyclotomic logarithm matching the Mazur--Tate
+sigma-height normalization.  The Nekovář/Sano comparison then identifies the
+first cyclotomic Bockstein pairing, after global duality, with this height over
+`Q_7`, up to the conventional global sign and the chosen basis of `I/I^2`.
+The computation therefore proves rational nondegeneracy of that rank-two
+pairing.  It does not by itself identify an integral Bockstein lattice or its
+normalized leading unit.  In particular, it does **not** identify the scalar `6` with
 the Cycle 136 localization determinant or Cycle 135 Kurihara number.  Their
 matching residues are not a proved comparison theorem.
 
