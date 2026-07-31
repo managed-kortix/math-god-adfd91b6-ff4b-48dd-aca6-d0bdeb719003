@@ -5,15 +5,21 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** BSD decorated governing-field gate
-- **active main funnel:** for prime quadratic twists of `433a1` at `p=7`, put
-  the local Selmer functional `lambda_q` and derived modular-symbol coordinate
-  `c(q,ell)` in common determinant lines and decide whether their pair factors
-  through Frobenius in one finite Galois extension.  The first checkpoint is an
-  exact dichotomy: construct the extension with uniform twist-local and
-  primitivity hypotheses, or produce a same-Frobenius/different-coordinate
-  collision.  Chebotarev and explicit reciprocity are later separate gates to a
-  bounded certificate-density theorem, not to full BSD.  Cycle 180 makes the
+- **phase:** BSD varying-conductor Frobenius obstruction
+- **active main funnel:** Cycle 181 defines the prime-twist coordinate
+  `c(q,ell)` exactly as the first augmentation/Kurihara derivative of the
+  Mazur--Tate element of `E^(D_q)`. The twist has conductor `433 q^2`, and its
+  twist formula uses base modular symbols with denominator `q ell`, so the
+  fixed residual Selmer governing field does not automatically govern `c`.
+  Conductor growth is not itself a proof of nonfactorization. The exact test
+  for a named finite Galois field `L` is a same-Frobenius/different-`c`
+  collision, preferably at fixed `ell` and with zero versus nonzero values;
+  one collision refutes only `L`, while universal nonfactorization requires
+  collisions along a cofinal tower. A positive theorem must construct a fixed
+  determinant line and comparison maps, an exact Frobenius formula for
+  `(lambda_q,c(q,ell))`, and uniform twist-local, integrality, and Kurihara
+  hypotheses. Chebotarev and explicit reciprocity remain later gates to a
+  bounded certificate-density theorem, not to full BSD. Cycle 180 makes the
   Yang--Mills wall precise: its temporal connected-decay criterion is the gap by
   the spectral theorem, and the polymer bridge still needs uniform synthesis
   and temporal Schur control on the entire physical complement, plus an
@@ -34,6 +40,17 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   projected seed, with rank-nine tangent image and vanishing obstructions.
   The obvious projector expansion has only cohomological obstruction
   cancellation and is not such a germ.
+- 2026-07-31: Cycle 181 fixed `D_q=q` for `q=1 mod 4` and `D_q=-q` for
+  `q=3 mod 4`, and defined `c(q,ell)` as the one-prime Kurihara sum
+  `sum_a [a/ell]^+_(E^(D_q)) log_eta(a) mod 7`, or invariantly in the tensor
+  product of the twist modular-symbol line and `I_ell/I_ell^2`. Since the
+  twist conductor is `433 q^2` and the twist identity introduces endpoints of
+  denominator `q ell`, no fixed-Selmer-field Frobenius factorization follows.
+  This is an obstruction to a proof, not a nonfactorization theorem. Exact
+  factorization through a named `L` is equivalent to constancy on every pair
+  of Frobenius fibres; a fixed-`ell` zero/nonzero collision refutes `L`, while
+  refuting every finite extension needs such collisions along a cofinal tower.
+  No BSD or density result is claimed.
   Previously, for arrows remaining `eta=1` relative to the transported
   threefold, the restricted polarization degree stays 256; after passage to a
   fine level
@@ -335,7 +352,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 180
+- **cycle:** 181
 - **announcements:** none
 
 ## immutable target list
@@ -369,6 +386,21 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 181 separated the decorated prime-twist density calculation
+  from its missing arithmetic input.  If one finite governing extension gives
+  the joint coordinate `(lambda,c)` and its fibers over `S^* x F_7` are
+  balanced, Chebotarev rigorously gives transition probabilities
+  `(1-7^-r)/7` and `7^(-r-1)` for each symbol increment.  At `r=2`, rank drop
+  with nonzero decoration has conditional density `288/343`; the absolute
+  density also includes the admissible Frobenius-packet factor.  For ordered
+  prime pairs the squarefree sieve only removes the diagonal, of relative
+  density zero, so the same conditional constant survives.  Frobenianity alone
+  does not imply balanced fibers, does not remove the auxiliary prime, and does
+  not handle squarefree twists with unboundedly many factors.  Finite governance
+  of the derived coordinate, balanced fibers, the twist-local comparison,
+  uniform primitivity, explicit reciprocity, and the rank-one converse remain
+  hypotheses; no BSD or prime-twist density theorem is claimed.
 
 - 2026-07-31: The Cycle 178 Yang--Mills companion implemented the surviving
   ordering-sensitive tail mechanism. For electric `P_D=1_[0,D](C)` and the

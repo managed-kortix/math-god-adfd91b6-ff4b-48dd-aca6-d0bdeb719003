@@ -1,5 +1,34 @@
 # Notebook
 
+## Conductor/Frobenius audit cycle 181
+
+For the fundamental-discriminant convention `D_q=q` if `q=1 mod 4` and
+`D_q=-q` if `q=3 mod 4`, define `c(q,ell)` by applying the first augmentation
+derivative to the Mazur--Tate element of `E^(D_q)`, equivalently by
+`sum_a [a/ell]^+_(E^(D_q)) log_eta(a) mod 7`. The twist has conductor
+`433 q^2`; the twist formula rewrites its values using base modular symbols
+with denominator `q ell`. Thus a fixed residual Selmer governing field does not
+automatically govern `c`, although conductor growth alone does not prove that
+no finite extension can do so. For a named field `L`, exact factorization is
+equivalent to constancy on Frobenius fibers, and a fixed-`ell` zero/nonzero
+collision refutes `L`. Universal nonfactorization requires collisions along a
+cofinal tower. See `cycle-181-conductor-and-frobenius-obstruction.md`.
+
+## Conditional theorem cycle 181
+
+Frobenianity of the decorated coordinate is not equidistribution.  If one
+finite governing extension controls `(lambda,c)` and every fiber over
+`S^* x F_7` has the same size, Chebotarev gives probability
+`(1-7^(-r))/7` for each downward increment and `7^(-r-1)` for each upward
+increment.  At `r=2`, the event `lambda!=0,c!=0` therefore has relative
+density `(48/49)(6/7)=288/343`.  For two ordered primes, imposing squarefree
+product only deletes the diagonal and preserves that relative density.  This
+does not handle squarefree twists of unbounded length or project a decorated
+pair count to prime twists.  Finite governance of `c`, balanced fibers, local
+twist comparison, uniform primitivity, explicit reciprocity, and auxiliary-
+prime removal remain unproved.  See
+`cycle-181-frobenian-decorated-transition.md`.
+
 ## Bounded scout cycle 178
 
 The concrete candidate is the prime quadratic-twist family of `433a1` at
