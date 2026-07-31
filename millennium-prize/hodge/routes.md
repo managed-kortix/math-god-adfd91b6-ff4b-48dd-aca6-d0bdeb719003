@@ -35,3 +35,21 @@ exceptional Weil projection. The particular graph-divisor triples have common
 base dimensions `3,0,0,0,0,0,0`. Thus smooth effective replacements in the
 same line bundles cannot yield the required rank-nine pair; the active search
 must leave the fixed-line-bundle complete-intersection architecture.
+
+## Cycle 198 vector-bundle classification
+
+An unpinned request for a bundle on the geometric generic fiber with nonzero
+exceptional `c_3` projection is not a new gate. It is equivalent to algebraicity
+of the Weil classes: `c_3` is already algebraic, while rational Chern character
+identifies algebraic `K_0` with rational Chow. For the converse, lift a pure
+codimension-three Chow class to `[E]-[F]`; equality of rank, `c_1`, and `c_2`
+gives `ch_3(E)-ch_3(F)=(c_3(E)-c_3(F))/2`.
+
+The non-equivalent bounded replacement is to pin one independently constructed
+special-fiber object `E_0` and compute the nine-column Atiyah obstruction map
+`T_0S -> Ext^2(E_0,E_0)`. Rank zero is necessary for all-direction deformation
+but is neither implied by Hodge algebraicity nor sufficient for generic
+algebraicity; nonzero rank rejects only the chosen object. The next candidate
+must be a non-split, nontransverse extension with an explicit locally free
+resolution, since transverse graph extensions
+cannot alter the degree-two obstruction.

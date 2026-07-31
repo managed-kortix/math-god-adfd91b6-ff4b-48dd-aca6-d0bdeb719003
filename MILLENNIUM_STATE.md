@@ -6,6 +6,22 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
 - **phase:** Hodge fixed-degree relative-Chow production gate
+- **Cycle 198 vector-bundle `c_3` hostile audit:** the unpinned generic request
+  for a vector bundle with nonzero exceptional `c_3` projection is equivalent
+  to algebraicity of the Weil space in the very-general PEL setting. The
+  forward implication is immediate because Chern classes are algebraic; the
+  converse uses `K_0_Q = CH^*_Q` and a pure codimension-three lift `[E]-[F]`:
+  equality of rank, `c_1`, and `c_2` gives
+  `ch_3(E)-ch_3(F)=(c_3(E)-c_3(F))/2`. Thus changing
+  the unknown cycle into an existential bundle/perfect-complex lift is
+  circular. A genuinely non-equivalent exact gate pins one independently
+  constructed special-fiber object and asks for rank zero of its nine-column
+  Atiyah map `T_0S -> Ext^2(E_0,E_0)`. This finite, falsifiable checkpoint is
+  neither implied by Hodge nor sufficient by itself; failure rejects only that
+  object. The next smallest candidate must be an explicit non-split extension
+  on nontransverse or new
+  support, because transverse graph `Ext` cannot modify the degree-two
+  obstruction. Quadratic jets are deferred until first-order rank zero.
 - **Cycle 197 Appell--Humbert complete-intersection no-go:** for a divisor
   class with Hermitian matrix `R`, the exact infinitesimal condition along the
   PEL Beltrami tangent `mu_B=[[0,B],[Q^-1 B^t,0]]` is that `mu_B^t R` be
@@ -651,7 +667,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 197
+- **cycle:** 198
 - **announcements:** none
 
 ## immutable target list
