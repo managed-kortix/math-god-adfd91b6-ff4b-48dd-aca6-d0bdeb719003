@@ -17,6 +17,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: built an exact five-vertex rank-four target fixture: 700 physical
+  rows, 378 genuine automorphism orbits, partitioned into 282 incidence records
+  and 96 residuals, digest
+  `d43a7c9e1e50a3381043a0c6c5b4ed019c5c858264f0f5b572c5a28a326c8245`.
+  An exact equilateral three-color sieve closes 370/378 orbits; its physical
+  odd-odd cost, cubic root isolation, and all 243 colorings per orbit passed
+  hostile audit. The remaining eight rows are four K9, two K10, two K11.
+  Proved and audited the all-length K9 row `(0,1,1,1,1)` by favorable deletion
+  plus four exact rational frontier certificates. A proposed closure of all
+  eight was rejected: K9 row `(1,1,1,1,1)` opens to doubled-C4 class 111, but
+  the cited theorem gives only `D>=-4`, not the required `D>-2` after paying a
+  tree. Frozen K10/K11 certificates remain useful but no eight-row theorem is
+  claimed until that quantitative packet is replaced.
 - 2026-07-31: completed all five four-vertex rank-four kernels after rejecting
   and retracting a false simplex shortcut. The final exact ledger is
   `342=270+70+2`: 270 old physical certificates, 70 exact rational patch rows,
