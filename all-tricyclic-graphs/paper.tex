@@ -1,0 +1,962 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+\usepackage{booktabs,array,longtable,pdflscape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\splus}{s^+}
+\newcommand{\sminus}{s^-}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\Arg}{\operatorname{Arg}}
+
+\title{Positive Square Energy of Every Tricyclic Graph}
+\author{AI-generated manuscript; no human author is claimed}
+\date{31 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $G$ be a finite simple connected graph with $n$ vertices and $n+2$
+edges.  We prove $\splus(G)\geq n$, where $\splus$ is the sum of the squares
+of the positive adjacency eigenvalues.  The proof first splits the cyclic
+blocks by cyclomatic ranks $1+1+1$, $2+1$, or $3$.  The first class is the
+tricyclic cactus theorem.  The second consists of one theta block and one
+cycle block and follows from an exact doubly nonnegative (DNN) sieve and two
+induced-territory repairs.  A rank-three block, after suppressing degree-two
+paths, has exactly one of four kernels: a four-path theta, a doubled triangle,
+$K_4$, or a doubled $4$-cycle.  We give the correlation dual for the DNN
+constant, its exact path lemma, and the finite parity certificates and
+structural repairs covering those kernels.  Arbitrary bridges and arbitrary
+rooted-tree attachments are included.  We assert no strict inequality in
+cases closed only at the DNN boundary.
+\end{abstract}
+
+\section{Statement and basic tools}
+
+All graphs are finite, simple, and undirected.  If
+$\lambda_1,\ldots,\lambda_n$ are the adjacency eigenvalues, put
+\[
+ \splus(G)=\sum_{\lambda_j>0}\lambda_j^2,
+ \qquad \sminus(G)=\sum_{\lambda_j<0}\lambda_j^2,
+ \qquad D(G)=\splus(G)-\sminus(G).
+\]
+For a tricyclic graph, $\operatorname{tr}A^2=2|E|$ gives
+\begin{equation}\label{eq:energy}
+ \splus(G)+\sminus(G)=2n+4,
+ \qquad \splus(G)=n+2+\frac12D(G).
+\end{equation}
+
+\begin{theorem}\label{thm:main}
+Every finite simple connected graph $G$ with $|V(G)|=n$ and
+$|E(G)|=n+2$ satisfies
+\[
+ \boxed{\splus(G)\geq n}.
+\]
+\end{theorem}
+
+We use the following pinching consequence of the variational formula for the
+positive part of a symmetric matrix.
+
+\begin{lemma}[Induced superadditivity]\label{lem:super}
+If $V(G)=V_1\mathbin{\dot\cup}\cdots\mathbin{\dot\cup}V_r$, then
+\[
+ \splus(G)\geq\sum_{j=1}^r\splus(G[V_j]).
+\]
+In particular, for $\sigma(H)=\splus(H)-|V(H)|$ one has
+$\sigma(G)\geq\sum_j\sigma(G[V_j])$.
+\end{lemma}
+
+\begin{proof}
+For a real symmetric matrix $A$,
+$\operatorname{tr}(A_+^2)=\max_{X\succeq0}
+(2\operatorname{tr}AX-\operatorname{tr}X^2)$.  Insert the block diagonal
+matrix whose blocks are the positive parts of the principal matrices
+$A[V_j]$.  All cross-block entries of $A$ disappear from the trace, giving
+the assertion.
+\end{proof}
+
+A nonempty connected tree $T$ is bipartite, so its nonzero spectrum is
+symmetric and $\splus(T)=|E(T)|=|V(T)|-1$; hence $\sigma(T)=-1$.
+We shall also use the following attached-bicyclic credits.
+
+\begin{lemma}[Bicyclic credits]\label{lem:credits}
+Let $H$ be connected and bicyclic, allowing rooted trees at every core
+vertex.
+\begin{enumerate}
+ \item If $H$ is bipartite, then $\sigma(H)=1$.
+ \item If its cyclic core is either a two-triangle cactus or
+ $\Theta(1,2,2)$, then $\sigma(H)>1$.
+ \item Every bicyclic cactus has $\sigma(H)\geq0$; every nonunicyclic cactus
+ has $\splus(H)>|V(H)|$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The first statement follows from spectral symmetry and $|E(H)|=|V(H)|+1$.
+For (2), orient every attached tree toward the core.  Its matching recurrence
+replaces the activity $t$ at each core vertex by
+\begin{equation}\label{eq:message}
+ Q_{u\to v}=t+\sum_{w\text{ child of }u}Q_{w\to u}^{-1}>0,
+ \qquad a_v=t+\sum_{u\text{ off core at }v}Q_{u\to v}^{-1}\geq t,
+\end{equation}
+and extracts one common positive factor.  In the normalized Sachs expansion
+$i^{-|V|}\det(itI-A)$, every singleton triangle contributes a strictly
+negative imaginary term.  The empty term and the even-cycle or disjoint-pair
+terms are real.  Thus the determinant lies in the open lower half-plane for
+$t>0$.  Its continuous argument is negative, and the signed Coulson identity
+\begin{equation}\label{eq:coulson}
+ D(H)=-\frac4\pi\int_0^\infty t\,\Arg
+ \bigl(i^{-|V(H)|}\det(itI-A(H))\bigr)\,dt
+\end{equation}
+gives $D(H)>0$.  Since $H$ is bicyclic,
+$\sigma(H)=1+D(H)/2>1$.  Statement (3) is the sharp bicyclic-cactus and
+nonunicyclic-cactus theorem; its proof uses the same tree elimination, the
+block-additive DNN constant below, and the residual cycle packets
+\cite{BicyclicCactus,NonunicyclicCactus}.  We cite it only in its displayed
+form.
+\end{proof}
+
+\section{The DNN dual and the exact path lemma}
+
+For an edge-containing graph $H$, define
+\begin{equation}\label{eq:kappa}
+ \kappa(H)=\sup_{\substack{M\succeq0,\ M\geq0\\\one^TM\one>0}}
+ \frac{4\bigl(\sum_{uv\in E(H)}\sqrt{M_{uv}}\bigr)^2}
+ {\one^TM\one}.
+\end{equation}
+
+\begin{lemma}[DNN spectral inequality and correlation dual]
+\label{lem:dual}
+For every graph $H$,
+\begin{equation}\label{eq:dnn-bound}
+ \sminus(H)\leq\kappa(H),
+ \qquad
+ \kappa(H)=\min_{\substack{R\succeq0\\R_{vv}=1}}
+ \sum_{uv\in E(H)}\frac{2}{1-R_{uv}},
+\end{equation}
+where boundary values are interpreted by limits.  Moreover $\kappa$ is
+additive under one-vertex sums and $\kappa(T)=|E(T)|$ for a tree.
+\end{lemma}
+
+\begin{proof}
+Write $A=P-B$ for its positive and negative spectral parts.  Then
+$M=B\circ B$ is positive semidefinite and entrywise nonnegative.  Also
+$\one^TM\one=\operatorname{tr}B^2=\sminus$ and
+$\sminus/2=-\sum_{uv\in E}B_{uv}\leq\sum_E\sqrt{M_{uv}}$.
+Equation \eqref{eq:kappa} yields $(\sminus)^2\leq\kappa\sminus$.
+
+For weak duality, weighted Cauchy--Schwarz and a correlation matrix $R$ give
+\[
+ \one^TM\one-\sum_{uv\in E}2(1-R_{uv})M_{uv}
+ =\langle R,M\rangle+2\sum_{uv\notin E}(1-R_{uv})M_{uv}\geq0.
+\]
+Optimizing the weights proves the ``$\leq$'' part of the dual.  Conversely,
+normalize $\langle J,M\rangle=1$ and use
+$(\sum_e\sqrt{x_e})^2=\min_{a_e>0,\sum a_e=1}\sum_ex_e/a_e$.
+Sion minimax and $(\mathcal S_+\cap\mathcal N)^*=\mathcal S_++\mathcal N$
+produce a correlation matrix attaining the reverse inequality; an
+$\varepsilon$ truncation gives boundary points.  This proves
+\eqref{eq:dnn-bound}.
+
+For a one-vertex sum, fold nonedge entries into diagonal terms by adding
+$M_{uv}(e_u-e_v)(e_u-e_v)^T$, then split the Gram vector at the cut vertex
+orthogonally between the two sides.  Both the edge numerator and denominator
+split, and Cauchy--Schwarz proves subadditivity.  Orthogonally gluing
+near-optimizers with the optimal relative scale proves the reverse inequality.
+Iterating $\kappa(K_2)=1$ gives the tree formula.
+\end{proof}
+
+\begin{lemma}[Exact path elimination]\label{lem:path}
+Suppose a kernel edge $uv$ is replaced by a path of length $\ell$.  If the
+endpoint correlation is $r=R_{uv}$, its exact excess over the baseline
+$\ell$ in the dual is
+\begin{equation}\label{eq:path}
+ f_\ell(r)=\ell\tan^2\!\left(
+ \frac{\arccos((-1)^\ell r)}{2\ell}\right).
+\end{equation}
+For a fixed $r$ and parity, $f_{\ell+2}(r)<f_\ell(r)$ unless the endpoint
+angle vanishes.  Different paths may use the same endpoint vectors, so the
+minimum of the sum of these path costs over kernel correlation matrices is
+exactly $\kappa-L$, where $L$ is the sum of the path lengths.
+\end{lemma}
+
+\begin{proof}
+Alternately negate the unit Gram vectors along the path.  The transformed
+endpoint angle is $\beta=\arccos((-1)^\ell r)$.  The spherical triangle
+inequality says the sum of the $\ell$ successive angles is at least $\beta$;
+convexity of $\sec^2(x/2)$ makes equal angles optimal.  Equally spaced planar
+vectors on the shortest arc attain the bound, proving exactness.  With
+$h_s(x)=s\tan^2(x/s)$ and $z=x/s$,
+\[
+ \frac{d}{ds}h_s(x)=\tan z\,(\tan z-2z\sec^2z)<0
+\]
+because $\sin z\cos z<z$.  This proves parity monotonicity.
+\end{proof}
+
+If a rank-three core has $L$ edges, it has $L-2$ vertices.  Thus
+\begin{equation}\label{eq:threshold}
+ \kappa\leq L+2\quad\Longrightarrow\quad
+ \splus=2L-\sminus\geq L-2=|V|.
+\end{equation}
+By Lemma~\ref{lem:dual}, the same implication survives arbitrary rooted-tree
+attachments: each attached tree edge adds one to both $\kappa$ and the vertex
+count.
+
+\section{Cyclic-block classification}
+
+We use the standard block decomposition: a block is a maximal connected
+subgraph with no cut vertex, with bridges regarded as two-vertex blocks. Thus
+a cycle meeting the rest of the graph in a single vertex is a separate
+rank-one block. All degrees used when suppressing a cyclic block are degrees
+within that block.
+
+The cyclomatic rank of a connected graph is $|E|-|V|+1$.  Bridge blocks have
+rank zero, and ranks add over the nontrivial blocks.
+
+\begin{proposition}[Block alternatives]\label{prop:blocks}
+The positive ranks of the cyclic blocks of a connected tricyclic graph are
+exactly one of
+\[
+ 1+1+1,\qquad 2+1,\qquad 3.
+\]
+Rank-one blocks are cycles.  A simple rank-two $2$-connected block is a theta.
+A rank-three $2$-connected block, after suppressing each maximal path whose
+internal vertices have degree two in the block, has exactly one of the
+following loopless multigraph kernels:
+\begin{enumerate}
+ \item four parallel edges between two branch vertices;
+ \item a triangle with two adjacent sides doubled;
+ \item $K_4$;
+ \item a $4$-cycle with two opposite sides doubled.
+\end{enumerate}
+Every omitted part is a bridge path or a rooted tree attached at one vertex.
+\end{proposition}
+
+\begin{proof}
+Block ranks are positive integers summing to three, giving the three
+partitions.  A rank-one $2$-connected graph is a cycle.  In rank two,
+$\sum_v(d(v)-2)=2$ after suppressing degree two; $2$-connectivity forces two
+degree-three vertices joined by three parallel kernel edges.
+
+Suppression cannot create a loop. Such a loop would come from a cycle based at
+a branch vertex $u$ whose other vertices all have degree two in the block. If
+the block had any part outside that cycle, deleting $u$ would separate the
+cycle interior from that part, contrary to $2$-connectivity. If it had no
+outside part, the block would itself be a cycle and have rank one.
+
+In rank three the same sum is four.  Hence the branch degrees are either
+$(4,4)$, $(4,3,3)$, or $(3,3,3,3)$.  The first gives four parallel edges.
+For $(4,3,3)$, looplessness and $2$-connectivity force the degree-four vertex
+to have two edges to each degree-three vertex, with one edge between the latter:
+ the doubled triangle.  A cubic loopless $2$-connected multigraph on four
+vertices is either simple, hence $K_4$, or has parallel edges.  Choose a
+parallel pair $uv$.  It cannot be a triple edge, since then $\{u,v\}$ would
+be a component, so it is exactly double.  Each of $u,v$ has one remaining
+incidence.  If both met the same remaining vertex $x$, the fourth vertex $y$
+could meet only $x$; making $d(y)=3$ would already give three $xy$ edges and
+force $d(x)\geq5$.  Thus the two incidences meet the two remaining vertices
+$x,y$ separately.  Now $x$ and $y$ each have residual degree two, and their
+only available mutual edge therefore occurs twice.  Consequently the kernel
+has the double edges $uv,xy$ and two single connectors, hence is a $4$-cycle
+with opposite sides doubled.  Simplicity of the original graph says at most
+one path in each parallel family may have length one.  Reversing suppression
+and leaf deletion gives the final assertion.
+\end{proof}
+
+\section{The $1+1+1$ and $2+1$ blocks}
+
+\begin{proposition}\label{prop:111}
+Every tricyclic graph with block ranks $1+1+1$ satisfies $\splus>n$.
+\end{proposition}
+
+\begin{proof}
+Such a graph is a cactus of cyclomatic rank three, including all bridge paths
+and tree attachments.  Apply Lemma~\ref{lem:credits}(3).
+\end{proof}
+
+For a theta with path lengths $a,b,c$, put $L=a+b+c$ and
+\begin{equation}\label{eq:Delta}
+ \Delta(a,b,c)=\min_{0\leq\theta\leq\pi}
+ \left(\sum_{\ell\ \mathrm{even}}\ell\tan^2\frac{\theta}{2\ell}
+ +\sum_{\ell\ \mathrm{odd}}\ell\tan^2\frac{\pi-\theta}{2\ell}\right).
+\end{equation}
+For a cycle put $\epsilon_q=0$ for even $q$ and
+$\epsilon_q=q\tan^2(\pi/(2q))$ for odd $q$.
+
+\begin{lemma}[Theta--cycle DNN sieve]\label{lem:21sieve}
+For a graph whose cyclic blocks are $\Theta(a,b,c)$ and $C_q$,
+\[
+ \splus(G)\geq n+2-\Delta(a,b,c)-\epsilon_q.
+\]
+This is at least $n$ except possibly for
+\[
+ \Theta(1,2,r)+C_3\quad(r\geq2),
+ \qquad \Theta(1,2,2)+C_5.
+\]
+\end{lemma}
+
+\begin{proof}
+Lemma~\ref{lem:path} gives $\kappa(\Theta)=L+\Delta$ and
+$\kappa(C_q)=q+\epsilon_q$; one-vertex additivity includes every intervening
+bridge and attached tree.  The displayed spectral bound follows from
+Lemma~\ref{lem:dual}.  We now give the numerical classification needed for
+the sieve.  Put $x=\theta/2$ and
+\[
+ h_s(y)=s\tan^2(y/s).
+\]
+For fixed $0<y<\pi/2$ this is strictly decreasing in $s$, since, with
+$z=y/s$,
+\begin{equation}\label{eq:hs-derivative}
+ \frac{d}{ds}h_s(y)
+ =\frac{\tan z}{\cos^2z}\bigl(\sin z\cos z-2z\bigr)<0.
+\end{equation}
+Thus, within a fixed parity, replacing an even length by $2$ or an odd
+length by $1$ or $3$ can only increase the objective in
+\eqref{eq:Delta}.  Because the graph is simple, at most one of the three
+theta paths has length one.
+
+First suppose that no path has length one, and let $e$ be the number of even
+paths.  Parity monotonicity bounds the objective from above by
+\[
+ F_e(x)=2e\tan^2(x/2)+3(3-e)
+             \tan^2\bigl((\pi/2-x)/3\bigr).
+\]
+For $e=0$ and $e=3$, take respectively $x=\pi/2$ and $x=0$, obtaining zero.
+For the two mixed cases the explicit tests
+\[
+ F_1(\pi/4)<1,
+ \qquad F_2(\pi/6)<1
+\]
+follow from $\tan(\pi/8)=\sqrt2-1$,
+$\tan(\pi/12)=2-\sqrt3$, and
+$\tan(\pi/9)<\tan(\pi/8)$; after substitution the two upper bounds are
+$48-4\sqrt2-24\sqrt3$ and $37-6\sqrt2-16\sqrt3$, both less than one by
+successive squaring of positive sides.  Hence $\Delta<1$ whenever there is
+no length-one path.
+
+Now suppose that there is one such path.  Its contribution is $\cot^2x$.
+If the other two paths are odd, the choice $x=\pi/2$ gives $\Delta=0$.
+If exactly one of them is even and its length is at least $4$, monotonicity
+and the test $x=\pi/3$ give
+\begin{equation}\label{eq:one-unit-mixed-test}
+ \Delta\leq \frac13+4\tan^2\frac{\pi}{12}
+                    +3\tan^2\frac{\pi}{18}<1.
+\end{equation}
+Indeed $\tan(\pi/18)<\tan(\pi/12)<1/3$, and the resulting inequality follows
+from $48\sqrt3>83$, whose square is $6912>6889$.  If both remaining paths
+are even and both have length at least $4$, the same test gives
+\begin{equation}\label{eq:one-unit-even-test}
+ \Delta\leq\frac13+8\tan^2\frac{\pi}{12}<1,
+\end{equation}
+because $12(2-\sqrt3)^2<1$, equivalently $6889<6912$ after squaring.
+
+It remains precisely to consider sorted triples $(1,2,r)$, $r\geq2$.
+The first two path terms satisfy, on writing $u=\tan(x/2)$,
+\begin{equation}\label{eq:theta-base-one}
+ \cot^2x+2\tan^2(x/2)
+ =\frac{1}{4u^2}-\frac12+\frac94u^2\geq1.
+\end{equation}
+The third term is positive in the interior; at whichever endpoint it can
+vanish, the expression in \eqref{eq:theta-base-one} is either divergent or
+equal to $2$.  Compactness therefore makes the minimum strictly larger than
+$1$.  This proves the exact classification
+\begin{equation}\label{eq:Delta-classification}
+ \Delta(a,b,c)>1
+ \quad\Longleftrightarrow\quad
+ (a,b,c)=(1,2,r)\ \text{after sorting},\quad r\geq2.
+\end{equation}
+For $r=2$, the whole objective is
+\[
+ \frac{1}{4u^2}-\frac12+\frac{17}{4}u^2,
+\]
+so minimization at $u^2=1/\sqrt{17}$ gives the exact maximum
+\begin{equation}\label{eq:Delta-122}
+ \Delta(1,2,2)=\frac{\sqrt{17}-1}{2}.
+\end{equation}
+For even $r\geq4$, \eqref{eq:hs-derivative} makes the objective pointwise
+smaller than for $r=2$.  Moreover, away from $r=2$ one has the uniform strict
+bound $\Delta(1,2,r)<4/3$: for odd $r\geq3$, test $x=\pi/3$ and use
+$\tan(\pi/18)<1/3$, while for even $r\geq4$ the same test reduces to
+$1+4(2-\sqrt3)^2<4/3$, already contained in $6889<6912$.  Since
+$4/3<(\sqrt{17}-1)/2$, this also proves that \eqref{eq:Delta-122} is the
+global maximum.
+
+Finally, the odd-cycle excess is $h_q(\pi/2)$, so
+\eqref{eq:hs-derivative} says that it decreases strictly with odd $q$.  The
+first two values and a convenient bound for the rest are
+\begin{equation}\label{eq:cycle-excess-cases}
+ \epsilon_3=1,
+ \qquad \epsilon_5=5-2\sqrt5<\frac23,
+ \qquad \epsilon_q\leq\epsilon_7<\frac25\quad(q\geq7\text{ odd}).
+\end{equation}
+Here the first two identities are exact.  For the last inequality, use
+$\sin t<t$, $\cos t>1-t^2/2$, and $\pi<22/7$ at $t=\pi/14$; clearing
+denominators gives $7\tan^2t<2/5$.  Even cycles have zero excess.
+
+We need $\Delta+\epsilon_q\leq2$.  For $q=3$,
+\eqref{eq:Delta-classification} leaves exactly every $(1,2,r)$.  For $q=5$,
+the bound $\Delta<4/3$ disposes of all those triples except $(1,2,2)$, and
+\eqref{eq:Delta-122} shows that this remaining triple really exceeds the DNN
+threshold: $(\sqrt{17}-1)/2+5-2\sqrt5>2$, since
+$\sqrt{17}+7>4\sqrt5$.  For odd $q\geq7$,
+$(\sqrt{17}-1)/2<8/5$ and \eqref{eq:cycle-excess-cases} give a strict total
+below $2$; even $q$ is immediate.  Thus the exact residuals of this DNN sieve
+are the two rows stated.  They are failures of the DNN threshold, not graph
+counterexamples.
+\end{proof}
+
+\begin{proposition}\label{prop:21}
+Every tricyclic graph with block ranks $2+1$ satisfies $\splus(G)>n$.
+\end{proposition}
+
+\begin{proof}
+Only the rows of Lemma~\ref{lem:21sieve} need repair.  In
+$\Theta(1,2,r)+C_3$, choose an internal theta vertex not used by the unique
+block-tree route to the external triangle: for $r=2$ choose one of the two
+length-two internal vertices; for $r\geq3$ choose one of two internal vertices
+of the $r$-path.  Delete that vertex together with its rooted branch.  The
+deleted induced territory is a nonempty tree of credit $-1$, while the
+connected complement is an attached two-triangle bicyclic cactus of credit
+$>1$ by Lemma~\ref{lem:credits}.  Lemma~\ref{lem:super} gives positive total
+credit.
+
+For $\Theta(1,2,2)+C_5$, a separating bridge gives two induced territories.
+The theta territory has credit $>1$ and the attached pentagon has credit at
+least $-(\sqrt5-2)$, by the one-cycle phase comparison
+$D\geq-2(\sec(\pi/5)-1)$.  Their sum is positive.  If the blocks share a cut
+vertex, keep the theta and that cut vertex in one territory and put the other
+four pentagon vertices, with all their rooted branches, in the other.  The
+latter is a nonempty tree of credit $-1$ and the former has credit $>1$.
+These assignments cover every bridge length, cut location, and rooted branch.
+\end{proof}
+
+\section{The four rank-three kernels}
+
+\subsection{Four-path theta}
+
+\begin{proposition}\label{prop:fourpath}
+Every simple subdivision of the four-parallel-edge kernel, with arbitrary
+rooted trees, satisfies $\splus\geq n$.
+\end{proposition}
+
+\begin{proof}
+For path lengths $\ell_1,\ldots,\ell_4$, Lemma~\ref{lem:path} reduces the
+excess to
+\[
+ \Phi(\theta)=\sum_{\ell\ \mathrm{even}}\ell\tan^2\frac{\theta}{2\ell}
+ +\sum_{\ell\ \mathrm{odd}}\ell\tan^2\frac{\pi-\theta}{2\ell}.
+\]
+If no length is one, monotonicity reduces even lengths to two and odd lengths
+to three.  Writing $x=\theta/2$ and letting $e$ be the number of even paths,
+test
+$2e\tan^2(x/2)+3(4-e)\tan^2((\pi/2-x)/3)$ at an endpoint for
+$e=0,1,3,4$; for $e=2$ its right derivative at $x=0$ is negative.  The
+minimum is at most two.
+
+If one length is one (there cannot be two by simplicity), its term is
+$\cot^2x$.  For zero, one, or two even paths among the remaining three,
+$x=\pi/2$ or $x=\pi/3$ gives a value below two.  With three even paths,
+\[
+ \Phi(2x)\leq\cot^2x+6\tan^2(x/2).
+\]
+At $u=\tan(x/2)$ the right side is
+$1/(4u^2)-1/2+25u^2/4$, with minimum two at $u^2=1/5$.
+Strict path monotonicity improves this unless the lengths are $(1,2,2,2)$,
+where direct substitution gives equality.  Hence $\kappa\leq L+2$, and
+\eqref{eq:threshold} proves the claim.  Notice that the exceptional core has
+spectrum $\{3,-2,-1,0,0\}$ and actually has $\splus=9>5$; we do not infer a
+general strict statement from this isolated computation.
+\end{proof}
+
+\subsection{Finite kernel certificates}
+
+The remaining arguments repeatedly use the following finite-certificate
+principle.  Encode a path parity by $0$ for even and $1$ for odd.  Switching at
+a branch vertex toggles all incident bits.  For fixed physical parities,
+Lemma~\ref{lem:path} reduces all lengths to the first simple lengths: two for
+even, one for odd, except that two parallel odd paths use $1,3$.  A displayed
+correlation Gram matrix with path excess at most two then proves every longer
+realization of that physical row.  A switching label is used only to organize
+rows; it is never used to transport a certificate between physical rows with
+different first lengths.
+
+\begin{lemma}[Doubled $4$-cycle certificate]\label{lem:dc4}
+Every simple subdivision of the doubled-$4$-cycle kernel satisfies
+$\kappa\leq L+2$, except for the structural rows explicitly repaired in the
+proof; all rows nevertheless satisfy $\splus\geq n$.
+\end{lemma}
+
+\begin{proof}
+Write the paths as $a,A:01$, $b:12$, $c,C:23$, $d:30$.
+The eight switching invariants and the complete numbers of simple physical
+rows are shown in Table~\ref{tab:dc4}.  Exact planar Gram vectors
+$u_j=(\cos(\pi k_j/6),\sin(\pi k_j/6))$ give excess at most two in the first
+seven classes; all simple representatives are checked separately.  The two
+boundary certificate types have contributions, in a suitable order,
+$2/3,1/3,0,2/3,1/3,0$, summing to two; all other listed certificates have
+strict slack.  This is the finite table proved by direct substitution in
+\eqref{eq:path} in \cite{DoubledC4}.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{cccc}
+\toprule
+invariant & first simple row & physical rows & disposition\\
+\midrule
+000&000000&2&DNN\\
+001&000001&2&DNN\\
+010&000010&4&DNN\\
+011&000011&4&DNN\\
+100&010000&4&DNN\\
+101&010001&4&DNN\\
+110&010010&8&DNN, boundary allowed\\
+111&010011&8&DNN or deletion\\
+\bottomrule
+\end{tabular}
+\caption{Doubled-$4$-cycle switching census; the counts total all $36$ simple
+physical parity rows.}\label{tab:dc4}
+\end{table}
+
+For completeness, normalize class $111$ so each doubled side has one even and
+one odd path and the connectors have opposite parity.  If a member of a
+doubled pair is longer than canonical, the exact planar certificates at
+lengths $(4,1,1,2,1,2)$ and $(2,3,1,2,1,2)$ have respective excesses bounded
+by
+\[
+ 4\tan^2\frac{3\pi}{32}+3\tan^2\frac\pi8
+ +2\tan^2\frac\pi{16}+2\tan^2\frac{3\pi}{16}<1.862,
+\]
+\[
+ 2\tan^2\frac\pi{16}+4\tan^2\frac\pi8
+ +2\tan^2\frac{3\pi}{16}<1.662.
+\]
+If both doubled pairs are canonical, open an internal vertex of the even
+connector.  The deleted territory is a tree of credit $-1$; the complement is
+a two-triangle cactus of credit $>1$.  This exhausts class $111$ and includes
+all attachments.
+\end{proof}
+
+\begin{lemma}[Doubled-triangle certificate]\label{lem:dtri}
+Every simple subdivision of the doubled-triangle kernel, with arbitrary rooted
+trees, satisfies $\splus\geq n$.
+\end{lemma}
+
+\begin{proof}
+Write $a,A:01$, $b,B:02$, and $c:12$.  A doubled pair has first-simple type
+$EE=(2,2)$, $EO=(1,2)$, or $OO=(1,3)$.  Table~\ref{tab:dtri} is the complete
+$32$-row physical census.  In eleven orbits an exact rational $3\times3$
+correlation matrix gives excess at most two.  The entries are obtained from
+multiple-angle formulas; for example, with parameter $t$,
+\[
+ r_{EE}=r_{EO}=\frac{1-6t^2+t^4}{(1+t^2)^2},\quad
+ e_{EE}=4t^2,\quad e_{EO}=\left(\frac{1-t^2}{2t}\right)^2+2t^2,
+\]
+and, for $q=(3t-t^3)/(1-3t^2)$,
+$r_{OO}=-(1-q^2)/(1+q^2)$ and $e_{OO}=q^2+3t^2$.
+Substitution, nonnegative determinant, and the exact excess fractions are
+listed in \cite{DoubledTriangle}; thus no floating optimization is used.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{ccccc}
+\toprule
+pair types&rows for even $c$&rows for odd $c$&DNN rows&structural rows\\
+\midrule
+$EE,EE$&1&1&2&0\\
+$EE,EO$&4&4&8&0\\
+$EE,OO$&2&2&4&0\\
+$EO,EO$&4&4&4&4\\
+$EO,OO$&4&4&8&0\\
+$OO,OO$&1&1&2&0\\
+\midrule
+total&16&16&28&4\\
+\bottomrule
+\end{tabular}
+\caption{Doubled-triangle physical parity census.}\label{tab:dtri}
+\end{table}
+
+The four structural rows are $EO,EO$ with odd $c$.  If any parallel path is
+noncanonical, exact planar certificates reduce to $(4,1,2,1,1)$ or
+$(2,3,2,1,1)$ and have excess below $229/120$ or $31/20$.  Otherwise both
+parallel pairs are $\{1,2\}$.  If $c\geq3$, open $c$ and leave a two-triangle
+cactus; if $c=1$, open the even member of one pair and leave
+$\Theta(1,2,2)$.  Lemmas~\ref{lem:super} and \ref{lem:credits} pay the deleted
+tree.  These alternatives exhaust every length and attachment.
+\end{proof}
+
+\begin{lemma}[$K_4$-subdivision certificate]\label{lem:k4}
+Every simple subdivision of $K_4$, with arbitrary rooted trees, satisfies
+$\splus\geq n$.
+\end{lemma}
+
+\begin{proof}
+Switching the six path parities has eight classes, each containing eight
+physical rows.  Label the branch vertices $1,2,3,4$, switch so that the three
+paths to vertex $4$ are odd, and let $\epsilon_{12},\epsilon_{13},
+\epsilon_{23}$ indicate which normalized triangle paths are even.  The word
+$000$ is the all-odd class.  For a word of weight one use, up to a permutation
+of $1,2,3$, the normalized planar angles
+$(2\pi/3,4\pi/3,4\pi/3,0)$; for weight two use
+$(2\pi/3,4\pi/3,\pi,0)$; for weight three use $(\pi,\pi,\pi,0)$.
+After undoing the switch on the vectors, but not on the physical path lengths,
+every canonical physical path has cost $0$, $a=2\tan^2(\pi/12)=14-8\sqrt3$,
+or $b=\tan^2(\pi/6)=1/3$.  The complete eight-switch substitution for either
+a weight-one or a weight-two class is Table~\ref{tab:k4}; permutations give
+all six such classes.  The weight-three template has zero cost in all eight
+rows.  This is the exact physical-row table of \cite{K4Seven}, not a transport
+of canonical lengths across a switch.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{cccc}
+\toprule
+number of rows&number of $a$ terms&number of $b$ terms&total excess\\
+\midrule
+1&0&5&$5/3$\\
+2&2&3&$2a+1$\\
+4&3&2&$3a+2/3$\\
+1&4&1&$4a+1/3$\\
+\bottomrule
+\end{tabular}
+\caption{Exact eight-switch physical-cost census for each weight-one or
+weight-two $K_4$ class.  There are three classes of each weight; the remaining
+weight-three class has eight zero-cost rows.  Thus the table and that last
+class account for all $6\cdot8+8=56$ non-all-odd physical rows.}
+\label{tab:k4}
+\end{table}
+
+Exactly, $a<1/6$ because $\sqrt3>83/48$, whose square is the integer
+inequality $6912>6889$.  Hence the four totals in Table~\ref{tab:k4} are at
+most $5/3<2$.  Fixed-physical-parity path monotonicity proves all longer
+realizations, and one-vertex additivity includes all rooted trees.  In
+particular, the seven-class ledger proves the strict bound $\kappa<L+2$ in
+all $56$ rows.  The normalized templates, all eight switch triples, the
+four-type physical substitution table, and these exact inequalities are
+given explicitly in \cite{K4Seven}.
+
+Here is the independent all-length cover of the last class
+\cite{K4Cover}.  Call an odd path
+long when its length is at least three.  With at least three long paths, use
+four regular-simplex vectors, $R_{ij}=-1/3$: a unit path contributes $1/2$
+and a long path contributes at most
+$3\tan^2(\arccos(1/3)/6)<1/6$, so the total is at most two.  With exactly two
+long paths, there are two placements.  Opposite paths use branch angles
+$(0,\pi/4,\pi,5\pi/4)$ and give
+$8\tan^2(\pi/8)=24-16\sqrt2<2$.  Adjacent paths use
+$(0,3\pi/8,13\pi/8,\pi)$ and give
+\[
+ 6\tan^2\frac{5\pi}{48}+\tan^2\frac\pi8
+ +2\tan^2\frac{3\pi}{16}<\frac{71}{40}<2.
+\]
+With one long path, open it at an internal vertex; the complement is an
+attached $\Theta(1,2,2)$ and pays for the deleted tree.  With no long path the
+core is $K_4$.  We include the attached-$K_4$ argument rather than infer it
+from the bare spectrum.  For any graph $H$ obtained by attaching rooted trees
+at the four vertices of $K_4$, put
+$Z_F(t)=\sum_jm_j(F)t^{|V(F)|-2j}>0$, where $m_j(F)$ counts the $j$-edge
+matchings of $F$.  Grouping Sachs' expansion by its vertex-disjoint cycle
+collection gives
+\[
+ \Psi_H(t):=i^{-|V(H)|}\det(itI-A(H))
+ =\sum_{\mathcal C}\prod_{C\in\mathcal C}(-2i^{-|C|})
+ Z_{H-V(\mathcal C)}(t).
+\]
+Every cycle lies in the $K_4$, so no two are vertex-disjoint.  The empty term
+and the $4$-cycle terms are real, whereas each of the four triangles has
+factor $-2i$.  Therefore
+\[
+ \operatorname{Im}\Psi_H(t)
+ =-2\sum_{T\subseteq K_4,\ T\cong K_3}Z_{H-V(T)}(t)<0
+ \qquad(t>0).
+\]
+Moreover $\Psi_H(t)=\prod_j(t+i\lambda_j)$, so
+$\sum_j\arctan(\lambda_j/t)$ is its continuous argument tending to zero at
+infinity.  Since the curve remains in the open lower half-plane, that
+argument is the principal one and is negative.  The signed Coulson identity
+\eqref{eq:coulson} yields $D(H)>0$.  As $H$ is tricyclic,
+\eqref{eq:energy} gives $\splus(H)>|V(H)|+2$, in particular the required
+claim.  This is the attached-$K_4$ lower-half-plane Sachs packet from
+\cite{PackingTwo}; bare $K_4$ has spectrum $\{3,-1,-1,-1\}$ and $\splus=9$.
+Thus all eight classes are covered.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Apply Proposition~\ref{prop:blocks}.  Block ranks $1+1+1$ are covered by
+Proposition~\ref{prop:111}, and ranks $2+1$ by Proposition~\ref{prop:21}.
+For one rank-three block, the suppressed kernel is one of the four listed in
+Proposition~\ref{prop:blocks}; apply Proposition~\ref{prop:fourpath} or
+Lemmas~\ref{lem:dc4}, \ref{lem:dtri}, and \ref{lem:k4}.  The DNN additivity
+and each structural deletion explicitly include every bridge and rooted-tree
+attachment.  The alternatives are exhaustive, proving $\splus(G)\geq n$.
+\end{proof}
+
+\appendix
+\section{Complete doubled-$C_4$ Gram ledger}\label{app:dc4-ledger}
+
+This appendix makes Lemma~\ref{lem:dc4} reconstructible without consulting
+the proof note.  The path order is $(a,A,b,c,C,d)$ and a parity word uses zero
+for even and one for odd.  In Table~\ref{tab:dc4-complete}, $\ell$ is the
+canonical physical length vector (replace zero by two and one by one), and
+$k=(k_1,k_2,k_3)$ means that the four branch vectors have arguments
+$\pi(0,k_1,k_2,k_3)/6$.  Thus
+\[
+ R_{ij}=\cos\frac{\pi(k_i-k_j)}6.
+\]
+For a path joining $i$ to $j$, let $q\in\{0,\ldots,6\}$ be the principal
+integer satisfying
+\[
+ \arccos((-1)^\ell R_{ij})=\frac{\pi q}{6}.
+\]
+The six entries in the $q$ column follow the path order, and the certified
+excess is therefore reconstructed, with no numerical optimization, as
+\begin{equation}\label{eq:dc4-ledger-cost}
+ E=\sum_{r=1}^6\ell_r\tan^2\frac{\pi q_r}{12\ell_r}.
+\end{equation}
+Every displayed Gram matrix is planar and hence positive semidefinite with
+unit diagonal.  The rational number in the last column is a strict upper
+bound unless equality is printed.
+
+\begin{landscape}
+\begin{longtable}{ccccc}
+\caption{The complete $28$-row doubled-$C_4$ DNN Gram ledger.}
+\label{tab:dc4-complete}\\
+\toprule
+parity row&canonical $\ell$&$(k_1,k_2,k_3)$&$(q_a,q_A,q_b,q_c,q_C,q_d)$&exact bound for $E$\\
+\midrule
+\endfirsthead
+\toprule
+parity row&canonical $\ell$&$(k_1,k_2,k_3)$&$(q_a,q_A,q_b,q_c,q_C,q_d)$&exact bound for $E$\\
+\midrule
+\endhead
+000000&222222&$(0,0,0)$&$(0,0,0,0,0,0)$&$E=0$\\
+001001&221221&$(0,6,6)$&$(0,0,0,0,0,0)$&$E=0$\\
+000001&222221&$(11,8,7)$&$(1,1,3,1,1,1)$&$E<3/5$\\
+001000&221222&$(1,8,9)$&$(1,1,1,1,1,3)$&$E<3/5$\\
+000010&222212&$(1,3,11)$&$(1,1,2,4,2,1)$&$E<5/4$\\
+000100&222122&$(1,3,11)$&$(1,1,2,2,4,1)$&$E<5/4$\\
+010000&212222&$(8,9,10)$&$(4,2,1,1,1,2)$&$E<5/4$\\
+100000&122222&$(8,9,10)$&$(2,4,1,1,1,2)$&$E<5/4$\\
+000011&222211&$(1,2,6)$&$(1,1,1,4,2,0)$&$E<9/8$\\
+000101&222121&$(1,2,6)$&$(1,1,1,2,4,0)$&$E<9/8$\\
+001010&221212&$(11,5,1)$&$(1,1,0,4,2,1)$&$E<9/8$\\
+001100&221122&$(11,5,1)$&$(1,1,0,2,4,1)$&$E<9/8$\\
+010001&212221&$(8,7,6)$&$(4,2,1,1,1,0)$&$E<9/8$\\
+100001&122221&$(8,7,6)$&$(2,4,1,1,1,0)$&$E<9/8$\\
+011000&211222&$(8,2,1)$&$(4,2,0,1,1,1)$&$E<9/8$\\
+101000&121222&$(8,2,1)$&$(2,4,0,1,1,1)$&$E<9/8$\\
+001011&221211&$(2,9,5)$&$(2,2,1,4,2,1)$&$E<3/2$\\
+001101&221121&$(2,9,5)$&$(2,2,1,2,4,1)$&$E<3/2$\\
+011001&211221&$(4,9,7)$&$(4,2,1,2,2,1)$&$E<3/2$\\
+101001&121221&$(4,9,7)$&$(2,4,1,2,2,1)$&$E<3/2$\\
+010010&212212&$(8,8,0)$&$(4,2,0,4,2,0)$&$E=2$\\
+010100&212122&$(8,8,0)$&$(4,2,0,2,4,0)$&$E=2$\\
+100010&122212&$(8,8,0)$&$(2,4,0,4,2,0)$&$E=2$\\
+100100&122122&$(8,8,0)$&$(2,4,0,2,4,0)$&$E=2$\\
+011011&211211&$(4,10,6)$&$(4,2,0,4,2,0)$&$E=2$\\
+011101&211121&$(4,10,6)$&$(4,2,0,2,4,0)$&$E=2$\\
+101011&121211&$(4,10,6)$&$(2,4,0,4,2,0)$&$E=2$\\
+101101&121121&$(4,10,6)$&$(2,4,0,2,4,0)$&$E=2$\\
+\bottomrule
+\end{longtable}
+\end{landscape}
+
+For a paper-only check of the last column, substitute the integer angles in
+\eqref{eq:dc4-ledger-cost}, reduce by the half-angle identity
+$\tan^2(x/2)=(1-\cos x)/(1+\cos x)$, and use
+\[
+ \cos\frac\pi6=\frac{\sqrt3}{2},\quad
+ \cos\frac\pi4=\frac{\sqrt2}{2},\quad
+ \cos\frac\pi3=\frac12.
+\]
+Clearing positive denominators and squaring positive sides proves the stated
+rational comparisons.  In each of the eight equality rows the six terms are,
+up to exchanging members within a doubled pair,
+\[
+ (2/3,1/3,0,2/3,1/3,0),
+\]
+so equality is exact.  The ledger contains $2+2+4+4+4+4+8=28$ rows, namely
+all simple physical rows in switching classes $000$ through $110$.  The eight
+remaining simple rows are
+\[
+010011,\ 010101,\ 011010,\ 011100,\quad
+100011,\ 100101,\ 101010,\ 101100;
+\]
+these are precisely class $111$ and are closed by the long-path certificates
+and structural deletion in the proof of Lemma~\ref{lem:dc4}.  Thus the displayed
+$28+8=36$ count is the entire simple physical parity census.
+
+\section{Complete doubled-triangle rational ledger}\label{app:dtri-ledger}
+
+We similarly expand the twelve-orbit table used in Lemma~\ref{lem:dtri}.  For
+a doubled side of type $S\in\{EE,EO,OO\}$ and rational parameter $t$, put
+\begin{align*}
+r_{EE}(t)=r_{EO}(t)&=\frac{1-6t^2+t^4}{(1+t^2)^2},
+&e_{EE}(t)&=4t^2,\\
+&&e_{EO}(t)&=\left(\frac{1-t^2}{2t}\right)^2+2t^2,\\
+q(t)&=\frac{3t-t^3}{1-3t^2},
+&r_{OO}(t)&=-\frac{1-q(t)^2}{1+q(t)^2},
+&e_{OO}(t)&=q(t)^2+3t^2.
+\end{align*}
+For the connector define
+\[
+r_E(t)=\frac{1-6t^2+t^4}{(1+t^2)^2},\quad e_E(t)=2t^2,
+\qquad r_O(t)=\frac{t^2-1}{t^2+1},\quad e_O(t)=t^2.
+\]
+Given $(t_1,t_2,t_c)$, the table uses
+\[
+R=\begin{pmatrix}1&r_1&r_2\\r_1&1&r_c\\r_2&r_c&1\end{pmatrix},
+\qquad E=e_{S_1}(t_1)+e_{S_2}(t_2)+e_P(t_c),
+\]
+where $P$ is the connector parity.  These multiple-angle formulas reconstruct
+every parameterized row using rational arithmetic only.  The three boundary
+rows use their displayed correlations directly.
+
+\begin{landscape}
+\begin{longtable}{ccccccc}
+\caption{Complete doubled-triangle rational certificate table.  The orbit
+sizes total $32$ labelled physical rows.}\label{tab:dtri-complete}\\
+\toprule
+types&$c$&size&$(t_1,t_2,t_c)$&$(r_1,r_2,r_c)$&$E$&$\det R$\\
+\midrule
+\endfirsthead
+\toprule
+types&$c$&size&$(t_1,t_2,t_c)$&$(r_1,r_2,r_c)$&$E$&$\det R$\\
+\midrule
+\endhead
+$EE,EE$&$E$&1&$(0,0,0)$&$(1,1,1)$&$0$&$0$\\
+$EE,EE$&$O$&1&$(1/3,1/3,1/2)$&$(7/25,7/25,-3/5)$&$41/36$&$1216/3125$\\
+$EE,EO$&$E$&4&$(0,1/2,1/2)$&$(1,-7/25,-7/25)$&$25/16$&$0$\\
+$EE,EO$&$O$&4&$(1/4,1/2,1/3)$&$(161/289,-7/25,-4/5)$&$205/144$&$11527191/52200625$\\
+$EE,OO$&$E$&2&$(1/4,1/4,1/3)$&$(161/289,-495/4913,7/25)$&$2246/1521$&$8593933244/15085980625$\\
+$EE,OO$&$O$&2&boundary&$(1,-1,-1)$&$0$&$0$\\
+$EO,EO$&$E$&4&boundary&$(-1/2,-1/2,1)$&$2$&$0$\\
+$EO,EO$&$O$&4&class $111$&---&structural&---\\
+$EO,OO$&$E$&4&$(1/2,1/5,1/5)$&$(-7/25,-828/2197,119/169)$&$83009/48400$&$1304316959/3016755625$\\
+$EO,OO$&$O$&4&$(1/2,1/5,1/2)$&$(-7/25,-828/2197,-3/5)$&$91237/48400$&$883705599/3016755625$\\
+$OO,OO$&$E$&1&boundary&$(-1,-1,1)$&$0$&$0$\\
+$OO,OO$&$O$&1&$(1/5,1/5,1/2)$&$(-828/2197,-828/2197,-3/5)$&$16881/12100$&$22382224/120670225$\\
+\bottomrule
+\end{longtable}
+\end{landscape}
+
+For each nonstructural row, $|r_1|,|r_2|,|r_c|\leq1$ and the displayed
+determinant is nonnegative; hence all principal minors of $R$ are nonnegative
+and $R\succeq0$.  Direct substitution gives the displayed excess fraction.
+The only less immediate threshold checks are
+\[
+2246<2(1521),\quad 83009<2(48400),\quad
+91237<2(48400),\quad 16881<2(12100),
+\]
+and every other DNN row visibly has $E\leq2$.  The size column sums to
+$16$ rows for each connector parity, or $32$ in all; the structural orbit has
+size four, leaving $28$ labelled DNN rows.  This supplies all correlations,
+excesses, determinants, and multiplicities needed to reconstruct the finite
+part of the doubled-triangle proof from the paper alone.
+
+\section{Reproducibility, dependencies, and scope}
+
+The detailed exact tables summarized above are repository proof objects, not
+empirical graph censuses.  They prove arbitrary path lengths by the monotonic
+path lemma and arbitrary rooted trees by one-vertex DNN additivity or explicit
+territory ownership.  The source notes are:
+\begin{verbatim}
+positive-square-energy/tricyclic-general/four-path-dnn-theorem.md
+positive-square-energy/tricyclic-general/theta-cycle-dnn-reduction.md
+positive-square-energy/tricyclic-general/theta-cycle-completion.md
+positive-square-energy/tricyclic-general/doubled-c4-switching-sieve.md
+positive-square-energy/tricyclic-general/k4-seven-switching-classes.md
+positive-square-energy/tricyclic-general/k4-all-odd-dnn-cover.md
+positive-square-energy/tricyclic-general/doubled-triangle-dnn-cover.md
+\end{verbatim}
+The finite rational audit checks twelve doubled-triangle type/parity orbits
+(32 labelled physical rows), partitioned accurately as 28 DNN rows and four
+structural class-$111$ rows; it also checks the two exact rational tangent
+certificates used when a class-$111$ parallel path is noncanonical.  It checks
+the doubled-$4$-cycle partition into 28 DNN rows and eight structural
+class-$111$ rows, all 56 physical $K_4$ rows outside the all-odd switching
+class, and explicitly enumerates all 64 all-odd long/unit subsets.  The latter
+split into 42 DNN-audited subsets with at least three long paths, 12 adjacent
+and three opposite DNN-audited two-long subsets, six one-long structural
+deletions, and one no-long attached-$K_4$ packet.  Thus 57 subsets are audited
+by the displayed DNN bounds and seven have structural dispositions.  The audit
+also checks nine four-path representative symbolic records, including the
+one-unit $e=0$ endpoint case, and the rational tangent bounds occurring in
+those records.  These records do not constitute a machine proof of the
+analytic tangent lemma or its all-length coverage.  The verifier rejects
+thirteen deliberately corrupted certificate payloads.
+For the 56-row audit it reconstructs every switching invariant and physical
+sign transport while retaining the physical path parity.  Run the audit both
+normally and with Python assertions disabled:
+\begin{verbatim}
+python3 research/tricyclic-finite-rational-certificates-verifier.py
+python3 -O research/tricyclic-finite-rational-certificates-verifier.py
+\end{verbatim}
+Both runs must report the certificate digest
+\begin{verbatim}
+a34ed2d3898c1a244e861ce11ffb51d84d65eb4409066f0745829de5a8ca58b8
+\end{verbatim}
+This canonical payload digest is embedded in the verifier and mirrored in the
+README manifest.  Both runs must also report thirteen rejected hostile
+mutations.  More generally, the verifier does not
+prove DNN duality, path elimination or monotonicity, induced
+superadditivity, the kernel classification, the territory repairs, or the
+attached-$K_4$ Sachs argument.  It is a fail-closed exact audit of only the
+finite records just enumerated.
+Build this manuscript from the repository root with
+\begin{verbatim}
+bash scripts/build-paper.sh all-tricyclic-graphs
+\end{verbatim}
+
+\paragraph{Scoped nonclaim.}
+The theorem concerns exactly finite simple connected graphs with $m=n+2$.
+Some branches above are strict, but DNN certificates may meet their auxiliary
+boundary.  We therefore claim only $\splus(G)\geq n$ globally.  We do not claim
+that all DNN equality cases have been spectrally classified, nor do we invoke
+edge monotonicity or the false inequality $\splus(G)\geq\operatorname{MaxCut}(G)$.
+
+\section*{AI disclosure}
+This manuscript and its proof-object synthesis were generated by an AI coding
+and mathematical reasoning system from the cited repository materials.  No
+human authorship, review, or verification is claimed.  The result should be
+assessed from the displayed proof and its exact local dependencies.  No
+external publication was performed as part of this work.
+
+\begin{thebibliography}{99}
+\bibitem{BicyclicCactus}
+Companion manuscript, \emph{Positive Square Energy of Every Bicyclic Cactus},
+2026; \path{all-bicyclic-cacti/paper.tex}.
+
+\bibitem{NonunicyclicCactus}
+Companion manuscript, \emph{Positive Square Energy of Every Nonunicyclic
+Cactus}, 2026; \path{all-nonunicyclic-cacti/paper.tex}.
+
+\bibitem{DoubledC4}
+\emph{The doubled-$C_4$ kernel: exact switching sieve}, proof note, 2026;
+\path{positive-square-energy/tricyclic-general/doubled-c4-switching-sieve.md}.
+
+\bibitem{DoubledTriangle}
+\emph{The doubled-triangle kernel: complete physical parity cover}, proof note,
+2026; \path{positive-square-energy/tricyclic-general/doubled-triangle-dnn-cover.md}.
+
+\bibitem{K4Cover}
+\emph{The all-odd $K_4$-subdivision class}, proof note, 2026;
+\path{positive-square-energy/tricyclic-general/k4-all-odd-dnn-cover.md}.
+
+\bibitem{K4Seven}
+\emph{The seven non-all-odd switching classes of subdivided $K_4$}, proof
+note, 2026;
+\path{positive-square-energy/tricyclic-general/k4-seven-switching-classes.md}.
+
+\bibitem{PackingTwo}
+Companion manuscript, \emph{Square-energy sign under cycle packing number at
+most two}, 2026; \path{packing-two-square-energy/paper.tex}.
+\end{thebibliography}
+
+\end{document}

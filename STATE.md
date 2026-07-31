@@ -17,6 +17,17 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: synthesized and proved the full connected tricyclic theorem:
+  every finite simple connected graph with `m=n+2` satisfies `s^+>=n`.
+  The 15-page paper gives the standard block-rank split, proves the four-kernel
+  classification with loop exclusion, embeds the finite doubled-C4,
+  doubled-triangle, and K4 ledgers, and treats all attachments. The fail-closed
+  exact verifier passes normally and under `-O`, enumerates all stated finite
+  rows, rejects 13 hostile mutations, and has certificate digest
+  `a34ed2d3898c1a244e861ce11ffb51d84d65eb4409066f0745829de5a8ca58b8`.
+  After successive hostile blockers (missing K4 classes, paper-only tables,
+  theta-cycle sieve derivation, and an implicit loopless-kernel step), the final
+  ultimate referee returned ACCEPT. Paper: `all-tricyclic-graphs/paper.pdf`.
 - 2026-07-31: completed the final rank-three kernel, doubled triangle. An exact
   physical 32-parity-row census reduces to 12 symmetry orbits; 11 have rational
   three-branch Gram certificates with `kappa-L<=2`. The remaining EO/EO plus
