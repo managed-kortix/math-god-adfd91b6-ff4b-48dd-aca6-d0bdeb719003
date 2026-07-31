@@ -1,5 +1,49 @@
 # Notebook
 
+## Cycle 202A Fourier--Mukai obstruction transport
+
+An untwisted graph sheaf transforms to a shifted sheaf on its annihilator, but
+tensoring first by a relative ample line bundle gives an IT0 Fourier--Mukai
+transform that is a full-support vector bundle. The projector object therefore
+becomes a bounded complex of such bundles, and its degree-six Chern character
+is the cohomological Fourier transform of the same nonzero exceptional Weil
+class. This does not improve deformation: the relative equivalence conjugates
+`At(E) contraction kappa(v)` in `Ext^2`, preserving the kernel and rank of the
+nine-column obstruction map. Dense-branch obstruction is merely encoded as a
+full-support bundle obstruction; semiregularity cancellation remains traced
+rather than raw. The unknown Karoubi corner is transported unchanged. No Hodge
+result is claimed.
+
+## Cycle 202 multiplicity Chow tangent gate
+
+At a generic multiplicity-`m` codimension-three branch, the transverse Chow
+germ is `Sym^m(A^3)` and has tangent dimension `binom(m+3,3)-1`, with
+multisymmetric generators of degrees one through `m`. The degree-at-least-two
+generators are genuine singular Chow directions missed by the ordered reduced-
+branch cover. On embedded or split branches the traced obstruction equation is
+`m_k rho_k(B)=0`, and point-supported edges cannot change it. But an
+arbitrary relative Chow branch can have linear base coupling to higher
+multisymmetric generators, so the absolute tangent calculation does not extend
+the dense-open obstruction to all Chow tangents. No full base direction is yet
+constructed. Its endpoint cycle classes must be horizontal separately; the
+next finite tests are the common positive/negative semiregularity rank and the
+differential of an explicit rational-equivalence incidence.
+
+## Cycle 202 generically nonreduced graph-support obstruction
+
+For every `m>0`, the automorphism `(x,y) -> (x,y-ax)` pulls
+`X x V(z_1^m,z_2,z_3)` back to an explicit codimension-three lci
+`Z_(a,m)` supported on `Gamma_a`, with generic length `m` and fundamental cycle
+`m[Gamma_a]`.  Applying this construction with lengths `|c_k|` realizes both
+Cycle 169 projector endpoints as generically nonreduced scheme unions. For an
+arbitrary generic graph thickening of length `m`, semiregularity sends its
+embedded KS obstruction to `m` times the graph cycle-class obstruction. Cycle
+152 identifies the latter with the same rank map and kernel as `rho_a`; hence
+in characteristic zero a lift forces `rho_a(B)=0`. Componentwise restriction gives exactly the
+same common-kernel bound as for reduced support. Both explicit endpoints have
+zero PEL image because each contains a nonunit graph. Nilpotents enlarge only
+the vertical Hilbert tangent; no Hodge result is claimed.
+
 ## Cycle 201B clean-union smoothing gate
 
 For any connected reduced clean union `Z=union G_a` of codimension-three

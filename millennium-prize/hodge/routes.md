@@ -75,6 +75,17 @@ all pairwise `Ext^3` groups are nonzero. Thus only projector-sensitive,
 untraced information could close the boundary, and that information is
 presently just the unknown raw Atiyah corner itself.
 
+Cycle 202A shows that Fourier--Mukai transport changes presentation, not this
+gate. Untwisted graph sheaves transform to shifted sheaves on annihilator
+threefolds. After tensoring by a relative ample line bundle they transform to
+full-support vector bundles, and the projector object becomes a bounded bundle
+complex whose `ch_3` is the cohomological Fourier transform of the same nonzero
+exceptional class. But a relative Fourier--Mukai equivalence conjugates the
+raw Atiyah obstruction in `Ext^2`; its kernel and rank are unchanged in every
+PEL direction. Thus a dense-branch obstruction becomes a full-support
+endomorphism-valued bundle obstruction, not a cancelable one. The Karoubi gap
+is likewise transported rather than closed.
+
 Cycle 201B closes reduced clean-union smoothings as the immediate geometric
 escape. For `Z=union G_a`, restriction to each dense branch open forces the PEL
 tangent into `intersection ker(rho_a)`; clean smoothing and gluing modules are
@@ -85,3 +96,17 @@ image dimension at most one. Signed endpoint equality cancels semiregularity
 images, not the separate endpoint deformation conditions. The search must use
 support already generically irreducible at the special fiber, a generically
 linked/nonreduced object, or genuinely non-graph support.
+
+Cycle 202 tests the generically linked escape in its strongest common-envelope
+form. Link each graph `Gamma_k` inside three general divisors of class `mP` and
+write the connected residual as `R_k`; then the exact Chow identity is
+`[R_k]=m^3P^3-[Gamma_k]`. This gives effective residual endpoints with new
+support and an explicit rational equivalence, but both endpoint degrees rise by
+the same positive auxiliary degree. More decisively, `P^3` is horizontal, so
+the residual semiregularity condition is exactly the graph condition with the
+opposite sign. Its PEL tangent potential has dimensions `(3,0,0,0,0,0,0)`,
+and each endpoint contains a nonunit residual, forcing the explicit
+decomposition-preserving liaison germ to have pair tangent image zero. This
+does not exclude extra branches of the ambient Chow germ that destroy the
+residual decomposition. Common ample linkage changes support but does not
+improve the tangent gate in its natural incidence.

@@ -6,6 +6,46 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
 - **phase:** Hodge fixed-degree relative-Chow production gate
+- **Cycle 202A Fourier--Mukai obstruction transport:** the untwisted transform
+  of a graph structure sheaf is a shifted sheaf on the annihilator threefold.
+  Tensoring first by a relative ample line bundle makes it IT0, so its transform
+  is a full-support vector bundle; the signed projector becomes a bounded
+  bundle complex whose `ch_3` is the cohomological Fourier transform of the
+  same nonzero exceptional class. Because the line bundle and Poincare kernel
+  extend over every first-order PEL direction, the resulting relative
+  equivalence conjugates the raw Atiyah obstruction in `Ext^2` and preserves
+  its kernel and rank. Thus dense-branch obstruction becomes a full-support
+  endomorphism-valued obstruction, not a cancelable one; traced
+  semiregularity cancellation and the Karoubi gap are unchanged. No Hodge
+  result is claimed.
+- **Cycle 202 generic graph-thickening gate:** for every `m>0`, pull back
+  `X x V(z_1^m,z_2,z_3)` by `(x,y)->(x,y-ax)` to obtain an explicit
+  codimension-three lci of generic length `m` on `Gamma_a`. Lengths `|c_k|`
+  exactly realize the two projector endpoints as generically nonreduced scheme
+  unions. For any generic graph thickening of length `m`, semiregularity sends
+  its embedded KS obstruction to `m` times the graph cycle-class obstruction;
+  Cycle 152 identifies the latter with the same rank map and kernel as
+  `rho_a`. Characteristic zero therefore preserves each reduced-support kernel. Both
+  endpoints still have zero PEL image because they contain nonunit graphs.
+  Nilpotents add vertical Hilbert directions only; genuinely new generic
+  reduced support or a non-Hilbert Chow tangent remains necessary. No Hodge
+  result is claimed.
+- **Cycle 202 ample-linkage residual gate:** link each transformed graph
+  `Gamma_k` in a complete intersection of three general `|mP|` divisors and
+  let `R_k` be its connected residual. The exact Chow identity is
+  `[R_k]=m^3 P^3-[Gamma_k]`, so substitution gives an explicit effective
+  residual pair rationally equivalent to `D_0 alpha_0`, with genuinely new
+  support. Its degrees are `360m^3 A_+-d_-` and `360m^3 A_+-d_+`; hence both
+  exceed the frozen endpoint degrees by the same auxiliary amount. Since
+  `P^3` is horizontal on the full PEL base, contraction of `[R_k]` is the
+  negative of contraction of `[Gamma_k]`. The residual tangent-potential
+  dimensions are therefore `(3,0,0,0,0,0,0)`. Each effective endpoint
+  contains a nonunit residual, so the explicit decomposition-preserving
+  liaison germ has zero PEL tangent image. This does not exclude an additional
+  ambient-Chow branch that destroys the residual decomposition. Common ample
+  linkage succeeds in producing connected new support and an explicit rational
+  equivalence, but neither preserves fixed degrees nor improves the graph
+  obstruction in its natural incidence. No Hodge result is claimed.
 - **Cycle 201B clean-union smoothing gate:** for every connected reduced clean
   union `Z=union G_a` of codimension-three graphs, restriction to dense branch
   opens gives `im(T_[Z] Hilb(A/S)->T_0S) subset intersection ker rho_a`.
@@ -722,7 +762,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 201
+- **cycle:** 202
 - **announcements:** none
 
 ## immutable target list
