@@ -1,5 +1,19 @@
 # Notebook
 
+## Cycle 196 finite-type rational-equivalence correction
+
+Fixing `d_+` and `d_-` makes the ambient product of effective Chow spaces
+finite type, but does not make the locus `[Y^+]-[Y^-]=D_0 alpha_0` finite type.
+After cross-adding the fixed pair, the endpoints have common degree
+`D=d_++d_-=8387930766330029152`.  Rational equivalence is parametrized by a
+countable union of finite-type endpoint incidences `R_(e,n,h)`, with auxiliary
+effective degree `e` and a chain of `P^1` maps of degrees `h` in
+`Chow_(D+e)`.  Fixed endpoint degree gives no known uniform bound on these
+data.  Chow connected components yield algebraic, not rational, equivalence.
+Accordingly, production requires one explicit witness stratum; a universal
+negative result requires explicit complexity bounds or a uniform obstruction
+over every stratum.
+
 ## Cycle 170 Pontryagin connected-representative obstruction
 
 For scalar graphs in `A=E_i^3 x E_i^3`, the group law gives the exact Chow

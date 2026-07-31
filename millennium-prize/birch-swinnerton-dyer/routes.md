@@ -1,5 +1,19 @@
 # Routes
 
+Cycle 195 identifies the displayed `D=-1499` point as a saturated
+Mordell--Weil generator using the exact 2-descent and the Cremona--Siksek
+height calculation. The component and divisibility checks are exact, but the
+eclib ANTS lower bound is a non-directed `bigfloat` result replayed at two
+precisions, so the generator conclusion retains that numerical-library trust
+assumption. Exact local arithmetic and directed Arb intervals put its
+point-normalized BSD quotient in
+`(0.9998891243271545,1.0001875109945714)`. Unconditionally, analytic rank one
+and Gross--Zagier--Kolyvagin make `Sha` finite; 2-descent gives
+`Sha[2^infty]=0`; Cassels--Tate makes its order an odd square. No odd prime is
+proved to divide or not divide the order, and the real quotient interval is
+not an odd-prime BSD theorem. Thus `Sha=1` remains predicted, not proved. See
+`cycle-195-D-1499-exact-interval-bsd-quotient.md`.
+
 Cycle 194 gives a rigorous analytic-rank certificate for the second collision
 twist, `D=-29023`. Its fail-closed verifier pins `650000` exact integer
 coefficients and uses rational enclosures for `pi`, every exponential-integral
@@ -8,8 +22,9 @@ weight, signed summation, and the infinite tail to prove
 number is `-1`, so the analytic rank is one. Together with Cycle 193 for
 `D=-1499`, both collision twists now have certified analytic rank one.
 Gross--Zagier--Kolyvagin then gives algebraic rank one and finiteness of the
-full Tate--Shafarevich group for each twist. This proves neither the refined
-BSD leading-term formula nor the order of `Sha`, a regulator, or a generator.
+full Tate--Shafarevich group for each twist. At that stage this proved neither
+the refined BSD leading-term formula nor the order of `Sha`, a regulator, or a
+generator; Cycle 195 later certifies the latter two for `D=-1499` only.
 See `cycle-194-D-29023-rigorous-derivative-certificate.md`.
 
 Cycle 193 gives a rigorous analytic-rank certificate for the first collision

@@ -1,5 +1,25 @@
 # Notebook
 
+## Full `Sha` audit cycle 195
+
+For the `D=-1499` twist, eclib's Cremona--Siksek lower-height calculation and
+the certified 2-descent identify the Cycle 192 point as a saturated generator,
+subject to trust in eclib's non-directed `bigfloat` evaluation. Cycle 195 now
+prints the component groups, exponents, and point images, replays the bound at
+200 and 300 digits, and pins the tested eclib package and shared-library hash;
+the public API exposes no directed endpoint for the ANTS constant.
+Cycle 193's analytic-rank-one certificate and Gross--Zagier--Kolyvagin make
+the full Tate--Shafarevich group finite. The Kummer sequence with the exact
+2-Selmer dimension gives `Sha[2]=0`, hence `Sha[2^infty]=0`; the nondegenerate
+Cassels--Tate pairing then makes the remaining order an odd square. Thus `2`
+is rigorously excluded, but no odd prime divisor is either proved or excluded.
+The point-normalized BSD quotient lies in
+`(0.9998891243271545,1.0001875109945714)`, strongly supporting `Sha=1`, but
+rounding this real interval is not a proof of an odd-prime BSD part. The
+qualitative Kolyvagin theorem also supplies no numerical order without a
+computed normalized Heegner index. See
+`cycle-195-D-1499-exact-interval-bsd-quotient.md`.
+
 ## Exact `[1:3]` coordinates cycle 189
 
 The exact fixed-level-433 producer computes the first three requested members

@@ -5,7 +5,53 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** BSD reciprocity/determinant obstruction gate
+- **phase:** Hodge fixed-degree relative-Chow production gate
+- **Cycle 196 finite-type correction:** fixing the exact endpoint degrees
+  `d_+=6072151396206990896` and `d_-=2315779370123038256` makes the ambient
+  product of effective relative Chow spaces finite type, but does not make the
+  rational-equivalence condition finite type.  Cross-adding the Cycle 169 pair
+  gives two effective endpoints of common degree
+  `D=8387930766330029152`.  Their rational equivalences form a countable union
+  of finite-type incidences `R_(e,n,h)`, parametrizing an auxiliary effective
+  cycle of degree `e` and a chain of rational curves of degrees `h` in the
+  degree-`D+e` Chow scheme.  No bound on `(e,n,h)` follows from fixed endpoint
+  degree alone.  Connected Chow components detect only algebraic equivalence
+  and cannot replace this incidence.  The corrected positive gate asks for one
+  explicit witness stratum with rank-nine relative tangent and a second-order
+  lift; the negative gate needs explicit uniform complexity bounds or an
+  obstruction valid on every stratum.  No moving pair or Hodge result is
+  claimed.
+- **Cycle 195 BSD exact/interval leading-term audit:** for `D=-1499`, exact
+  arithmetic on the minimal model certifies trivial rational torsion,
+  `c_433=1`, `c_1499=2`, and Tamagawa product `2`. An independent Arb replay
+  gives rational intervals for the real Neron period and the canonical height
+  of the Cycle 192 exact point. Combining these with Cycle 193's rigorous
+  `L'` interval puts `Q_P=L'/(Omega*c*height(P))` in
+  `(0.9998891243271545,1.0001875109945714)`, isolating `1` among integers.
+  This does not isolate integer Sha/index factors: under refined rank-one BSD
+  the identity is `Q_P=|Sha|/m^2`, with `m=[E(Q)_free:ZP]`, and no theorem
+  input makes this ratio an integer. Even exact equality `Q_P=1` would permit
+  `(|Sha|,m)=(9,3)` as well as `(1,1)`. No refined BSD formula, Sha order, or
+  saturation is claimed by the interval argument. A separate eclib
+  Cremona--Siksek height-bound replay proves that the displayed point is a
+  saturated generator. Together with Cycle 193 and the exact 2-descent, the
+  unconditional full-`Sha` endpoint is: `Sha` is finite,
+  `Sha[2^infty]=0`, and Cassels--Tate makes its order an odd square. No odd
+  prime divisor is proved to occur or excluded, and `Sha=1` is not proved;
+  neither the qualitative Kolyvagin theorem nor the real BSD quotient interval
+  supplies the missing Heegner index or odd-prime BSD valuations.
+- **Cycle 195 strategic referee:** rotate the main funnel from BSD to Hodge.
+  The exact rank-one certificates for `D=-1499,-29023` remain strong individual
+  results, but they supply no generator, regulator, order of `Sha`, refined
+  leading term, or family bridge.  The strict `L_0` governance route is already
+  falsified, while repairing it needs a new prime-denominator modular-symbol
+  correlation theorem; the direct determinant-line continuation asks for the
+  refined-BSD/ETNC compatibility itself.  The one promoted gate is the bounded
+  relative-Chow test for the Cycle 151 seed: in the degree spaces fixed by
+  `C_0^+,C_0^-`, produce a pair representing `D_0 alpha_0` whose Chow-to-PEL
+  tangent map has rank nine and whose rank-nine lift extends through second
+  order, or give an exact obstruction for the full degree-bounded incidence.
+  No Millennium result is claimed.
 - **Cycle 194 closes both collision twists at rank one:** for `D=-29023`, a
   fail-closed directed-rational replay of the odd-sign approximate functional
   equation pins `650000` exact coefficients and proves
@@ -591,7 +637,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 194
+- **cycle:** 196
 - **announcements:** none
 
 ## immutable target list
