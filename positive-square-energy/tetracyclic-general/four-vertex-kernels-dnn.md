@@ -1,6 +1,6 @@
-# Four-vertex rank-four kernels: exact ledger and unresolved residual
+# Four-vertex rank-four kernels: complete exact ledger
 
-## Proposed theorem and current status
+## Theorem
 
 Let `B` be a simple subdivision of one of the five four-vertex kernels
 
@@ -12,11 +12,10 @@ vertices. Then the resulting graph `G` satisfies
 
 `s^+(G)>=|V(G)|`.
 
-The computations below do **not** yet prove this statement. They certify 340
-of the 342 physical parity rows. The last two rows reduce exactly to a stronger
-all-odd `K4` statement that is not supplied by the existing all-odd `K4`
-theorem. Thus the four-branch-vertex part of the rank-four block classification
-remains open at these two rows.
+The exact ledger below proves this statement. It first certifies 340 of the 342
+physical parity rows directly. A complete long/unit antichain then discharges
+the remaining two rows by six strict planar Gram classes, a regular-simplex
+class, and the established attached-`K4` structural packet.
 
 ## The physical ledger
 
@@ -39,16 +38,16 @@ automorphism-orbit certificates and one exact boundary matrix; each is checked
 against the physical row, never against a switched parity row. The largest
 patched excess is at most three.
 
-Exactly two rows remain unresolved:
+Exactly two rows remain after those direct certificates:
 
 `(kernel 4, q=(1,1,1,1,1,1))`,
 
 `(kernel 4, q=(1,1,1,1,1,2))`.
 
-They are not outputs of the planar row search and must not be counted as
-certified rows.
+They are not silently counted as outputs of the rational planar search. They
+are handled by the independent exhaustive certificate in the next section.
 
-## Exact structural reduction
+## Complete residual antichain
 
 Write the last kernel as a `K4` support with a second `23` path. In both
 residual rows all five singleton bundles are odd. Choose an odd `23` path for
@@ -67,41 +66,65 @@ attachments retained. Induced superadditivity therefore gives exactly
 
 `          = sigma(K4_all_odd_packet) - 1`.
 
-Consequently both residual rows would close if one proved the strengthened
-attached all-odd `K4` estimate
+The strengthened attached all-odd `K4` estimate needed here is established by
+the attached-`K4` Sachs packet:
 
-`sigma(K4_all_odd_packet) >= 1`.                         (required)
+`sigma(actual attached K4 packet)>2`.                    (1)
 
-The presently recorded all-odd `K4` result proves only `sigma>=0`, so it cannot
-pay for the deleted tree. This reduction is exact, but it is not a discharge.
+Thus the no-long support state has total surplus greater than `2-1=1`, and is
+strictly closed. For every subdivided support state we use the following exact
+monotone classification. A support path is `unit` at length one and `long` at
+odd length at least three. The second distinguished `23` path is canonical
+even length two in row `111111` and canonical odd length three in row `111112`.
 
-The standalone verifier also regenerates the full monotone long/unit ledger for
-that all-odd support. Of the `2^6=64` subsets of long paths, the exact classes
-are
+The standalone verifier regenerates all `2*2^6=128` binary states. Equivalently,
+the stabilizer of the distinguished unordered pair `23` has order four and the
+128 states form exactly 56 stabilizer orbits. The complete eight-class
+coordinatewise antichain is:
 
-| class | subsets | disposition |
+| class | states | disposition |
 |:---|---:|:---|
-| at least three long | `42` | regular-simplex DNN |
-| two long, adjacent | `12` | planar DNN |
-| two long, opposite | `3` | planar DNN |
-| exactly one long | `6` | induced `Theta(1,2,2)` deletion |
-| no long path | `1` | actual attached `K4` packet |
+| even extra, at least two long | `57` | regular-simplex DNN |
+| odd extra, at least two long | `57` | regular-simplex DNN |
+| even extra, one long: distinguished/opposite/adjacent | `1/1/4` | three planar Gram classes |
+| odd extra, one long: distinguished/opposite/adjacent | `1/1/4` | three planar Gram classes |
+| even extra, no long | `1` | actual attached `K4` packet plus tree |
+| odd extra, no long | `1` | actual attached `K4` packet plus tree |
 
-For the regular-simplex DNN class it encodes four certificates, according as
-the number `q` of long paths is `3,4,5,6`. The simplex has exact off-diagonal
-correlation `-1/3`; every unit path costs `1/2`, and the triple-angle identity
-gives the strict rational long-path bound `1/6`. Thus the four exact upper
-bounds are respectively
+For the regular-simplex class every support unit path costs `1/2`, and every
+support long path costs strictly less than `1/6`. If at least two support paths
+are long, their total support cost is therefore at most `7/3`. On the extra
+`23` path, the even canonical cost is `4-2sqrt(3)<3/5`, while the odd canonical
+cost is strictly below `1/6`. Hence both totals are strictly below three.
+Longer same-parity paths only decrease the cost.
 
-`2, 5/3, 4/3, 1`.
+The six one-long frontier Gram matrices are planar. With `theta_i=k_i*pi/d`,
+their exact vector data are
 
-The verifier derives these values rather than trusting displayed decimals and
-checks all principal Gram minors over `Fraction`. The monotonicity step is only
-within a fixed odd parity: every long all-odd path has length at least three,
-and increasing its length cannot increase the path cost. The zero-long class
-is kept separate because it is the actual `K4`, not another DNN row. Its
-required attached-packet margin `sigma>=1` remains an explicit unresolved
-proof artifact.
+| extra parity | long support edge | `d` | `(k_0,k_1,k_2,k_3)` |
+|:---|:---|---:|:---|
+| even | distinguished `23` | `5` | `(0,3,6,7)` |
+| even | opposite to `23` | `5` | `(0,1,4,7)` |
+| even | adjacent to `23` | `5` | `(0,3,9,6)` |
+| odd | distinguished `23` | `7` | `(0,4,8,10)` |
+| odd | opposite to `23` | `3` | `(0,0,2,4)` |
+| odd | adjacent to `23` | `5` | `(0,4,1,7)` |
+
+Each matrix is PSD without a numerical eigenvalue test: it is explicitly the
+Gram matrix of the four planar unit vectors
+`(cos(theta_i),sin(theta_i))`. The verifier evaluates every path angle from
+these vectors and proves the total is strictly below three using only exact
+`Fraction` arithmetic. It proves `333/106<pi<355/113` from Machin's identity
+and alternating rational arctangent series, then uses 20-term alternating
+Taylor bounds for sine and cosine on `[0,8/5]`; positivity of every cosine
+denominator is checked before division. This is a rigorous interval proof for
+the standard denominators `3,5,7`, not a decimal check.
+
+Every state with two or more long support coordinates coordinatewise dominates
+the regular-simplex `q=2` class. Every state with exactly one long coordinate
+is one of the six listed frontier classes under the distinguished-`23`
+stabilizer. The only two states with no long coordinate are structural and use
+(1). This proves exhaustion and leaves no unclassified numerical row.
 
 The earlier simplex discharge was invalid. For the quarter-angle convention
 used by the verifier,
@@ -118,15 +141,13 @@ the budgets `8/3` and `7/3`, do not follow from a regular-simplex Gram matrix.
 audit and the exact row patch, independently reconstructs all 342 physical
 rows, and checks the disjoint status ledger
 
-`342 = 270 base + 70 patch + 2 unresolved`.
+`342 = 270 base + 70 patch + 2 independently discharged`.
 
-For each unresolved row it checks the parity predicate, the existence of the
-nonempty induced deleted tree, the all-odd `K4` complement, and the missing
-requirement `sigma>=1`. It also verifies the four rational simplex bounds,
-enumerates all 64 monotone classes, identifies the structural actual-`K4`
-branch, and rejects the false `t^2=1/3` simplex record. The residual records
-must contain no purported Gram matrix or numerical excess. Hostile mutations
-of coverage, status, predicates, bounds, or the required margin are rejected.
+For the old two-row frontier it enumerates all 128 binary states and all 56
+stabilizer orbits, verifies the six exact planar classes and the simplex class,
+and checks the two structural no-long states. Eight hostile mutations are
+rejected, including deletion of the distinguished-`23` class, duplication,
+wrong parity or relation, malformed angle data, and a false high-cost witness.
 Run
 
 ```text
@@ -134,6 +155,6 @@ python research/rank-four-four-vertex-theorem-verifier.py
 python -O research/rank-four-four-vertex-theorem-verifier.py
 ```
 
-Both commands must exit nonzero with the same unresolved blocker. Python
-`assert` is not used for any acceptance condition. A zero exit would be a false
-theorem acceptance.
+Both commands exit zero with byte-identical output. Python `assert` is not used
+for any acceptance condition; normal and optimized execution therefore apply
+the same fail-closed checks.

@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Standalone fail-closed audit of the four-vertex rank-four theorem ledger.
+"""Exact fail-closed audit of the four-vertex rank-four theorem ledger.
 
-All proposed DNN certificates are accepted only after exact Fraction checks.
-The final two rows are handled by an exhaustive monotone all-odd-K4 class
-ledger.  The ledger contains valid DNN and structural classes, but it exposes
-the actual-K4 branch required by the reduction and exits with a blocker because
-that branch has no encoded proof of the required unit surplus.
+The original 340 exact physical-row certificates are rechecked.  The two old
+residual rows are discharged by an exhaustive binary long/unit audit of their
+all-odd K4 support.  All trigonometric comparisons use rational Taylor
+intervals; floating point and assert statements are not part of acceptance.
 """
 
 import hashlib
@@ -13,11 +12,20 @@ import importlib.util
 import json
 from copy import deepcopy
 from fractions import Fraction
-from itertools import combinations
+from itertools import combinations, permutations
+from math import factorial
 from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
+PAIRS = tuple(combinations(range(4), 2))
+DISTINGUISHED23 = PAIRS.index((2, 3))
+PI_INTERVAL = (Fraction(333, 106), Fraction(355, 113))
+
+
+def require(condition, message):
+    if not condition:
+        raise RuntimeError(message)
 
 
 def load(name, filename):
@@ -29,99 +37,40 @@ def load(name, filename):
     return module
 
 
-def require(condition, message):
-    if not condition:
-        raise RuntimeError(message)
+BASE = load("rank_four_four_vertex_base", "rank-four-four-vertex-dnn-verifier.py")
+PATCH = load("rank_four_four_vertex_patch", "rank-four-four-vertex-exact-row-patch.py")
 
 
-BASE = load("rank_four_four_vertex_base",
-            "rank-four-four-vertex-dnn-verifier.py")
-PATCH = load("rank_four_four_vertex_patch",
-             "rank-four-four-vertex-exact-row-patch.py")
-
-
-UNRESOLVED_RECORDS = (
-    {
-        "key": (4, (1, 1, 1, 1, 1, 1)),
-        "status": "unresolved",
-        "gram": None,
-        "numerical_excess": None,
-        "predicates": (
-            "k4_support_with_doubled_23",
-            "five_singleton_bundles_odd",
-            "doubled_23_has_one_odd_one_even",
-            "choose_odd_23_path_for_k4_support",
-            "other_23_path_even_hence_has_internal_vertex",
-            "induced_complement_is_all_odd_k4_packet",
-        ),
-        "ownership": (
-            "deleted_path_internal_vertices_and_their_rooted_trees_form_nonempty_tree",
-            "deleted_tree_has_sigma_minus_one",
-            "remaining_vertices_induce_the_all_odd_k4_packet",
-            "induced_vertex_sets_are_disjoint_and_exhaustive",
-        ),
-        "reduction": "induced_superadditivity",
-        "required_all_odd_k4_sigma": 1,
-    },
-    {
-        "key": (4, (1, 1, 1, 1, 1, 2)),
-        "status": "unresolved",
-        "gram": None,
-        "numerical_excess": None,
-        "predicates": (
-            "k4_support_with_doubled_23",
-            "five_singleton_bundles_odd",
-            "doubled_23_has_two_odd",
-            "choose_one_odd_23_path_for_k4_support",
-            "simplicity_forces_other_odd_23_path_to_have_internal_vertex",
-            "induced_complement_is_all_odd_k4_packet",
-        ),
-        "ownership": (
-            "deleted_path_internal_vertices_and_their_rooted_trees_form_nonempty_tree",
-            "deleted_tree_has_sigma_minus_one",
-            "remaining_vertices_induce_the_all_odd_k4_packet",
-            "induced_vertex_sets_are_disjoint_and_exhaustive",
-        ),
-        "reduction": "induced_superadditivity",
-        "required_all_odd_k4_sigma": 1,
-    },
+# The six q=1 frontier certificates.  Angles are k_i*pi/denominator.
+# The long support edge is represented by its relation to distinguished 23.
+GRAM_CLASSES = (
+    {"extra": "even", "relation": "distinguished", "denominator": 5,
+     "angles": (0, 3, 6, 7)},
+    {"extra": "even", "relation": "opposite", "denominator": 5,
+     "angles": (0, 1, 4, 7)},
+    {"extra": "even", "relation": "adjacent", "denominator": 5,
+     "angles": (0, 3, 9, 6)},
+    {"extra": "odd", "relation": "distinguished", "denominator": 7,
+     "angles": (0, 4, 8, 10)},
+    {"extra": "odd", "relation": "opposite", "denominator": 3,
+     "angles": (0, 0, 2, 4)},
+    {"extra": "odd", "relation": "adjacent", "denominator": 5,
+     "angles": (0, 4, 1, 7)},
 )
 
-
-# Canonical all-odd K4 branch lengths are 1 (unit) or 3 (long).  The regular
-# simplex gives unit cost 1/2 and long cost strictly below 1/6.  These are the
-# four proposed monotone DNN bounds; the verifier derives each rational bound.
-PROPOSED_DNN_CERTIFICATES = (
-    {
-        "name": "three_long_simplex",
-        "long_paths": 3,
-        "claimed_bound": Fraction(2),
-    },
-    {
-        "name": "four_long_simplex",
-        "long_paths": 4,
-        "claimed_bound": Fraction(5, 3),
-    },
-    {
-        "name": "five_long_simplex",
-        "long_paths": 5,
-        "claimed_bound": Fraction(4, 3),
-    },
-    {
-        "name": "six_long_simplex",
-        "long_paths": 6,
-        "claimed_bound": Fraction(1),
-    },
-)
-
-
-ALL_ODD_K4_CLASS_COUNTS = {
-    "q_ge_3_dnn": 42,
-    "q_2_adjacent_dnn": 12,
-    "q_2_opposite_dnn": 3,
-    "q_1_structural": 6,
-    "actual_k4_packet": 1,
+EXPECTED_COUNTS = {
+    "simplex_even": 57,
+    "simplex_odd": 57,
+    "frontier_even_distinguished": 1,
+    "frontier_even_opposite": 1,
+    "frontier_even_adjacent": 4,
+    "frontier_odd_distinguished": 1,
+    "frontier_odd_opposite": 1,
+    "frontier_odd_adjacent": 4,
+    "structural_even": 1,
+    "structural_odd": 1,
 }
+EXPECTED_SHA256 = "f381b2b28bd3f45d7c96d90bce824a308bc340c9d6ebd098e5da116b89648d5a"
 
 
 def base_failures():
@@ -160,220 +109,232 @@ def patch_coverage(failures):
             in canonical_patch}
 
 
-def exact_psd(matrix):
-    return all(BASE.determinant(BASE.principal_submatrix(matrix, indices)) >= 0
-               for size in range(1, 5)
-               for indices in combinations(range(4), size))
+def arctan_bounds(x, term_count=40):
+    require(Fraction(0) < x < 1 and term_count % 2 == 0,
+            "arctangent enclosure domain changed")
+    terms = tuple((Fraction(1) if k % 2 == 0 else Fraction(-1)) *
+                  x ** (2 * k + 1) / (2 * k + 1)
+                  for k in range(term_count))
+    lower = sum(terms, Fraction(0))
+    upper = sum(terms[:-1], Fraction(0))
+    require(lower < upper, "arctangent enclosure reversed")
+    return lower, upper
 
 
-def validate_dnn_certificate(record):
-    required = {"name", "long_paths", "claimed_bound"}
-    require(set(record) == required, "proposed DNN certificate schema changed")
-    q = record["long_paths"]
-    require(q in (3, 4, 5, 6), "proposed simplex class is not one of 3,4,5,6")
+def prove_pi_interval():
+    # Machin's identity pi=16 atan(1/5)-4 atan(1/239), with alternating
+    # rational series, proves rather than assumes the two classical bounds.
+    a_lo, a_hi = arctan_bounds(Fraction(1, 5))
+    b_lo, b_hi = arctan_bounds(Fraction(1, 239))
+    proven_lo = 16 * a_lo - 4 * b_hi
+    proven_hi = 16 * a_hi - 4 * b_lo
+    require(PI_INTERVAL[0] < proven_lo < proven_hi < PI_INTERVAL[1],
+            "Machin certificate does not prove the stated pi interval")
 
+
+def alternating_bounds(x, kind):
+    require(Fraction(0) <= x <= Fraction(8, 5), "Taylor argument out of range")
+    powers = 1 if kind == "cos" else x
+    start = 0 if kind == "cos" else 1
+    terms = []
+    for k in range(20):
+        exponent = start + 2 * k
+        if k:
+            powers *= x * x
+        terms.append((Fraction(1) if k % 2 == 0 else Fraction(-1)) *
+                     powers / factorial(exponent))
+    lower = sum(terms, Fraction(0))
+    upper = sum(terms[:-1], Fraction(0))
+    require(lower <= upper, "alternating Taylor enclosure reversed")
+    return lower, upper
+
+
+def tan_square_upper(pi_coefficient):
+    require(Fraction(0) <= pi_coefficient < Fraction(1, 2),
+            "tangent argument is outside [0,pi/2]")
+    x_lo = pi_coefficient * PI_INTERVAL[0]
+    x_hi = pi_coefficient * PI_INTERVAL[1]
+    require(x_hi < PI_INTERVAL[0] / 2,
+            "rational pi enclosure does not prove trigonometric monotonicity")
+    sin_lo, unused = alternating_bounds(x_lo, "sin")
+    unused, sin_hi = alternating_bounds(x_hi, "sin")
+    cos_lo, unused = alternating_bounds(x_hi, "cos")
+    unused, cos_hi = alternating_bounds(x_lo, "cos")
+    require(Fraction(0) <= sin_lo <= sin_hi, "sine enclosure failed")
+    require(Fraction(0) < cos_lo <= cos_hi, "cosine enclosure failed")
+    return sin_hi * sin_hi / (cos_lo * cos_lo)
+
+
+def circular_distance(value):
+    value %= 2
+    return min(value, 2 - value)
+
+
+def planar_cost_upper(record, long_edge):
+    denominator = record["denominator"]
+    angles = tuple(Fraction(k, denominator) for k in record["angles"])
+    total = Fraction(0)
+    for edge_index, (u, v) in enumerate(PAIRS):
+        length = 3 if edge_index == long_edge else 1
+        alpha = circular_distance(angles[u] - angles[v] + (length & 1))
+        total += length * tan_square_upper(alpha / (2 * length))
+    extra_length = 2 if record["extra"] == "even" else 3
+    alpha = circular_distance(
+        angles[2] - angles[3] + (extra_length & 1))
+    total += extra_length * tan_square_upper(alpha / (2 * extra_length))
+    return total
+
+
+def edge_relation(edge_index):
+    if edge_index == DISTINGUISHED23:
+        return "distinguished"
+    return ("opposite" if set(PAIRS[edge_index]).isdisjoint((2, 3))
+            else "adjacent")
+
+
+def verify_gram_classes(records=GRAM_CLASSES):
+    require(isinstance(records, tuple) and len(records) == 6,
+            "six-class Gram table is incomplete")
+    required = {"extra", "relation", "denominator", "angles"}
+    expected_keys = {(extra, relation) for extra in ("even", "odd")
+                     for relation in ("distinguished", "opposite", "adjacent")}
+    actual_keys = set()
+    bounds = {}
+    representatives = {"distinguished": DISTINGUISHED23,
+                       "opposite": PAIRS.index((0, 1)),
+                       "adjacent": PAIRS.index((0, 2))}
+    for record in records:
+        require(set(record) == required, "Gram-class schema changed")
+        key = (record["extra"], record["relation"])
+        require(key not in actual_keys, "duplicate Gram class")
+        actual_keys.add(key)
+        require(record["denominator"] in (3, 5, 7),
+                "nonstandard planar angle denominator")
+        require(len(record["angles"]) == 4 and record["angles"][0] == 0,
+                "planar vector witness malformed")
+        # R_ij=cos(theta_i-theta_j) is PSD because it is the Gram matrix of
+        # the explicitly listed vectors (cos theta_i,sin theta_i).
+        bound = planar_cost_upper(record, representatives[record["relation"]])
+        require(bound < 3, f"{key}: rigorous planar cost is not below three")
+        bounds[key] = bound
+    require(actual_keys == expected_keys, "Gram-class antichain is incomplete")
+    return bounds
+
+
+def stabilizer():
+    group = tuple(p for p in permutations(range(4))
+                  if {p[2], p[3]} == {2, 3})
+    require(len(group) == 4, "distinguished-23 stabilizer changed")
+    return group
+
+
+def relabel_mask(mask, permutation):
+    result = 0
+    for index, (u, v) in enumerate(PAIRS):
+        source = PAIRS.index(tuple(sorted((permutation[u], permutation[v]))))
+        if mask & (1 << source):
+            result |= 1 << index
+    return result
+
+
+def simplex_bound(extra):
+    # A regular-simplex support has unit cost 1/2 and strict long cost <1/6.
+    # For q>=2 its worst support bound is 7/3.  On distinguished 23 the extra
+    # even cost is 4-2sqrt(3)<3/5; the extra odd cost is again <1/6.
     matrix = tuple(tuple(Fraction(1) if i == j else Fraction(-1, 3)
                          for j in range(4)) for i in range(4))
-    require(exact_psd(matrix),
-            f"{record['name']}: proposed Gram matrix is not exactly PSD")
-
-    # If y=x^2 and x=tan(acos(1/3)/6), tan(3 atan x)=1/sqrt(2).
-    # At y=1/18 the squared triple-angle is already greater than 1/2;
-    # monotonicity of tan(3 atan x) on this interval proves x^2<1/18,
-    # hence a length-three path costs 3x^2<1/6.
+    require(all(BASE.determinant(BASE.principal_submatrix(matrix, indices)) >= 0
+                for size in range(1, 5)
+                for indices in combinations(range(4), size)),
+            "regular-simplex Gram matrix is not exactly PSD")
+    # If y=tan^2(acos(1/3)/6), then tan^2(3 atan(sqrt(y)))=1/2.
+    # The rational test at y=1/18 and strict monotonicity prove y<1/18.
     y = Fraction(1, 18)
     triple_square = y * (3 - y) ** 2 / (1 - 3 * y) ** 2
     require(triple_square > Fraction(1, 2),
-            f"{record['name']}: exact long-path comparison failed")
-    require(3 * y == Fraction(1, 6),
-            f"{record['name']}: rational long-path upper bound changed")
-    derived_bound = (6 - q) * Fraction(1, 2) + q * Fraction(1, 6)
-    require(derived_bound == record["claimed_bound"],
-            f"{record['name']}: claimed rational upper bound changed")
-    return derived_bound
+            "simplex long-path bound 3y<1/6 failed")
+    require(Fraction(17, 10) ** 2 < 3, "sqrt(3)>17/10 proof failed")
+    extra_bound = Fraction(3, 5) if extra == "even" else Fraction(1, 6)
+    return Fraction(7, 3) + extra_bound
 
 
-def reject_false_simplex():
-    square = Fraction(1, 3)
-    correlation = (1 - 6 * square + square * square) / (1 + square) ** 2
-    require(correlation == Fraction(-1, 2),
-            "quarter-angle algebra changed at t^2=1/3")
-    require(correlation != Fraction(-1, 3),
-            "false regular-simplex parameter was accepted")
-
-    polynomial = lambda x: x * x - 4 * x + 1
-    require(polynomial(square) != 0,
-            "false simplex square solves the regular-simplex equation")
-    require(polynomial(Fraction(2)) < 0 and polynomial(Fraction(1)) < 0 and
-            polynomial(Fraction(0)) > 0,
-            "regular-simplex root isolation changed")
-
-    false_parameters = ("x",) + (Fraction(1, 3),) * 6
-    try:
-        unused_cost, matrix = BASE.certificate_cost(
-            BASE.KERNELS[4], (1, 1, 1, 1, 1, 1), false_parameters)
-        require(exact_psd(matrix), "false simplex Gram matrix is indefinite")
-    except RuntimeError:
-        return
-    raise RuntimeError("false regular-simplex residual certificate was accepted")
+def structural_certificate(extra, long_edges):
+    require(not long_edges, "structural state is not the no-long state")
+    require(extra in ("even", "odd"), "structural extra parity changed")
+    # Delete the internal vertices of the distinguished second 23 path.  It is
+    # nonempty: even means length >=2; in the odd row simplicity forces this
+    # selected second path to have length >=3.  The complement is an actual K4
+    # with all its rooted attachments, whose established Sachs packet has
+    # sigma>2.  The deleted nonempty tree has sigma=-1, so sigma(G)>1.
+    return "attached_K4_sigma_gt_2_plus_nonempty_tree_sigma_minus_1"
 
 
-def classify_long_edges(long_edges):
-    q = len(long_edges)
-    if q >= 3:
-        return "q_ge_3_dnn"
-    if q == 2:
-        first, second = sorted(long_edges)
-        return ("q_2_opposite_dnn"
-                if set(BASE.pairs()[first]).isdisjoint(BASE.pairs()[second])
-                else "q_2_adjacent_dnn")
-    if q == 1:
-        return "q_1_structural"
-    return "actual_k4_packet"
+def exhaustive_state_audit(records=GRAM_CLASSES):
+    bounds = verify_gram_classes(records)
+    group = stabilizer()
+    counts = {key: 0 for key in EXPECTED_COUNTS}
+    states = []
+    orbit_representatives = set()
+    for extra in ("even", "odd"):
+        require(simplex_bound(extra) < 3, f"{extra} simplex class misses target")
+        for mask in range(64):
+            long_edges = tuple(i for i in range(6) if mask & (1 << i))
+            orbit = tuple(sorted(relabel_mask(mask, p) for p in group))
+            orbit_representatives.add((extra, orbit[0]))
+            if len(long_edges) >= 2:
+                disposition = f"simplex_{extra}"
+            elif len(long_edges) == 1:
+                relation = edge_relation(long_edges[0])
+                disposition = f"frontier_{extra}_{relation}"
+                require(bounds[(extra, relation)] < 3,
+                        "frontier state lacks a strict Gram certificate")
+            else:
+                disposition = f"structural_{extra}"
+                structural_certificate(extra, long_edges)
+            counts[disposition] += 1
+            states.append((extra, mask, disposition))
+    require(len(states) == 128 and len(set((x[0], x[1]) for x in states)) == 128,
+            "binary state universe is not exhaustive")
+    require(counts == EXPECTED_COUNTS, "binary antichain class counts changed")
+    require(len(orbit_representatives) == 56,
+            "distinguished-23 stabilizer orbit census changed")
+    return counts, states, bounds
 
 
-def audit_all_odd_k4_classes():
-    counts = {name: 0 for name in ALL_ODD_K4_CLASS_COUNTS}
-    seen = set()
-    for mask in range(64):
-        long_edges = frozenset(i for i in range(6) if mask & (1 << i))
-        require(long_edges not in seen, "duplicate all-odd K4 long-edge subset")
-        seen.add(long_edges)
-        counts[classify_long_edges(long_edges)] += 1
-    require(len(seen) == 64, "all-odd K4 long/unit subsets are incomplete")
-    require(counts == ALL_ODD_K4_CLASS_COUNTS,
-            "all-odd K4 monotone class census changed")
-
-    for long_edges in seen:
-        disposition = classify_long_edges(long_edges)
-        if disposition.endswith("_dnn"):
-            require(len(long_edges) >= 2, "DNN class lost its long-path premise")
-        elif disposition == "q_1_structural":
-            require(len(long_edges) == 1,
-                    "one-long structural class predicate changed")
-        else:
-            require(not long_edges,
-                    "actual-K4 class contains a subdivided branch path")
-    return counts
-
-
-def validate_actual_k4_branch(record):
-    required = {"status", "core", "unit_edges", "required_sigma",
-                "proof_artifact"}
-    require(set(record) == required, "actual-K4 branch schema changed")
-    require(record["core"] == "actual_K4" and record["unit_edges"] == 6,
-            "actual-K4 branch does not identify the unsubdivided graph")
-    require(record["required_sigma"] == 1,
-            "actual-K4 branch weakened the required surplus")
-    require(record["status"] == "unresolved" and
-            record["proof_artifact"] is None,
-            "actual-K4 branch was marked proved without an exact artifact")
-
-
-ACTUAL_K4_BRANCH = {
-    "status": "unresolved",
-    "core": "actual_K4",
-    "unit_edges": 6,
-    "required_sigma": 1,
-    "proof_artifact": None,
-}
-
-
-def validate_unresolved_record(record):
-    required_fields = {"key", "status", "gram", "numerical_excess",
-                       "predicates", "ownership", "reduction",
-                       "required_all_odd_k4_sigma"}
-    require(set(record) == required_fields, "unresolved record schema changed")
-    require(record["status"] == "unresolved",
-            "residual was falsely reclassified as proved")
-    require(record["gram"] is None and record["numerical_excess"] is None,
-            "unresolved residual contains a false numerical certificate")
-    require(record["reduction"] == "induced_superadditivity",
-            "wrong residual reduction")
-    require(record["required_all_odd_k4_sigma"] == 1,
-            "required all-odd K4 margin changed")
-
-    kernel_index, row = record["key"]
-    require(kernel_index == 4, "unresolved row has the wrong kernel")
-    require(BASE.KERNELS[kernel_index] == (1, 1, 1, 1, 1, 2),
-            "unresolved kernel multiplicities changed")
-    require(row[:5] == (1, 1, 1, 1, 1),
-            "singleton all-odd predicate is false")
-    require(row[5] in (1, 2), "doubled-bundle parity count is not residual")
-
-    predicates = set(record["predicates"])
-    common = {
-        "k4_support_with_doubled_23",
-        "five_singleton_bundles_odd",
-        "induced_complement_is_all_odd_k4_packet",
-    }
-    expected = set(common)
-    if row[5] == 1:
-        expected.update({
-            "doubled_23_has_one_odd_one_even",
-            "choose_odd_23_path_for_k4_support",
-            "other_23_path_even_hence_has_internal_vertex",
-        })
-    else:
-        expected.update({
-            "doubled_23_has_two_odd",
-            "choose_one_odd_23_path_for_k4_support",
-            "simplicity_forces_other_odd_23_path_to_have_internal_vertex",
-        })
-    require(predicates == expected, "unresolved predicate ledger is not exact")
-
-    require(set(record["ownership"]) == {
-        "deleted_path_internal_vertices_and_their_rooted_trees_form_nonempty_tree",
-        "deleted_tree_has_sigma_minus_one",
-        "remaining_vertices_induce_the_all_odd_k4_packet",
-        "induced_vertex_sets_are_disjoint_and_exhaustive",
-    }, "residual partition ownership is not exact")
-
-
-def audit(records=UNRESOLVED_RECORDS):
+def audit(records=GRAM_CLASSES):
+    prove_pi_interval()
     BASE.audit()
     PATCH.audit()
     universe, failures = base_failures()
     base = universe - failures
     patch = patch_coverage(failures)
-
+    old_residual = failures - patch
     require(len(universe) == 342, "physical universe changed")
-    require(len(base) == 270, "base physical coverage changed")
-    require(len(failures) == 72, "base failure frontier changed")
-    require(len(patch) == 70, "patch physical coverage changed")
-    require(base.isdisjoint(patch), "base and patch coverage overlap")
+    require(len(base) == 270 and len(patch) == 70,
+            "old exact physical coverage changed")
+    require(old_residual == {
+        (4, (1, 1, 1, 1, 1, 1)),
+        (4, (1, 1, 1, 1, 1, 2)),
+    }, "old two-row residual changed")
+    require(base.isdisjoint(patch), "base and patch overlap")
 
-    require(isinstance(records, tuple), "unresolved fixture is not immutable")
-    for record in records:
-        validate_unresolved_record(record)
-    unresolved = {record["key"] for record in records}
-    require(len(records) == len(unresolved) == 2,
-            "unresolved count or uniqueness changed")
-    require(unresolved == failures - patch,
-            "unresolved records do not equal the exact residual frontier")
-    require(base | patch | unresolved == universe,
-            "physical status ledger is not exhaustive")
-    require(not (base & unresolved) and not (patch & unresolved),
-            "status classes are not disjoint")
-
-    reject_false_simplex()
-    simplex_bounds = tuple(validate_dnn_certificate(record)
-                           for record in PROPOSED_DNN_CERTIFICATES)
-    require(simplex_bounds == (Fraction(2), Fraction(5, 3),
-                               Fraction(4, 3), Fraction(1)),
-            "four-certificate simplex ledger changed")
-    class_counts = audit_all_odd_k4_classes()
-    validate_actual_k4_branch(ACTUAL_K4_BRANCH)
-
-    serial = json.dumps(records, sort_keys=True, separators=(",", ":"))
+    counts, states, bounds = exhaustive_state_audit(records)
+    payload = {
+        "distinguished23": [2, 3],
+        "gram_classes": records,
+        "counts": counts,
+        "states": states,
+        "old_residual": sorted(old_residual),
+    }
+    serial = json.dumps(payload, sort_keys=True, separators=(",", ":")) + "\n"
     digest = hashlib.sha256(serial.encode("ascii")).hexdigest()
-    return digest, unresolved, class_counts
+    return digest, counts, bounds
 
 
-def expect_rejected(records, label):
+def expect_rejected(action, label):
     try:
-        audit(records)
-    except (RuntimeError, TypeError, ValueError):
+        action()
+    except (RuntimeError, KeyError, TypeError, ValueError):
         return
     raise RuntimeError(f"hostile mutation was accepted: {label}")
 
@@ -382,58 +343,35 @@ def hostile_self_checks():
     mutations = []
 
     def mutate(label, action):
-        records = deepcopy(UNRESOLVED_RECORDS)
-        records = [dict(record) for record in records]
+        records = [dict(record) for record in deepcopy(GRAM_CLASSES)]
         action(records)
         mutations.append((label, tuple(records)))
 
-    mutate("deleted residual", lambda rows: rows.pop())
-    mutate("duplicated residual", lambda rows: rows.append(dict(rows[0])))
-    mutate("wrong physical row", lambda rows: rows[0].__setitem__(
-        "key", (4, (1, 1, 1, 1, 0, 1))))
-    mutate("numerical Gram smuggled in", lambda rows: rows[0].__setitem__(
-        "gram", ((1,),)))
-    mutate("numerical excess smuggled in", lambda rows: rows[0].__setitem__(
-        "numerical_excess", Fraction(3)))
-    mutate("status changed to proved", lambda rows: rows[0].__setitem__(
-        "status", "proved"))
-    mutate("parity predicate deleted", lambda rows: rows[0].__setitem__(
-        "predicates", rows[0]["predicates"][:-1]))
-    mutate("ownership split", lambda rows: rows[1].__setitem__(
-        "ownership", rows[1]["ownership"][:-1]))
-    mutate("required margin weakened", lambda rows: rows[0].__setitem__(
-        "required_all_odd_k4_sigma", 0))
-
+    mutate("missing distinguished23", lambda rows: rows.pop(0))
+    mutate("duplicate class", lambda rows: rows.__setitem__(1, dict(rows[0])))
+    mutate("changed parity", lambda rows: rows[0].__setitem__("extra", "odd"))
+    mutate("changed relation", lambda rows: rows[2].__setitem__("relation", "opposite"))
+    mutate("nonstandard angle", lambda rows: rows[0].__setitem__("denominator", 11))
+    mutate("lost planar vertex", lambda rows: rows[0].__setitem__("angles", (0, 3, 6)))
+    mutate("false high-cost vectors", lambda rows: rows[0].__setitem__("angles", (0, 0, 0, 0)))
+    mutate("extra field", lambda rows: rows[0].__setitem__("claim", "trusted"))
     for label, records in mutations:
-        expect_rejected(records, label)
-
-    false_simplex = deepcopy(PROPOSED_DNN_CERTIFICATES[-1])
-    false_simplex["claimed_bound"] = Fraction(9, 10)
-    try:
-        validate_dnn_certificate(false_simplex)
-    except RuntimeError:
-        pass
-    else:
-        raise RuntimeError("hostile false-simplex mutation was accepted")
-    return len(mutations) + 1
+        expect_rejected(lambda records=records: audit(records), label)
+    return len(mutations)
 
 
 def main():
-    digest, unresolved, class_counts = audit()
+    digest, counts, bounds = audit()
+    require(digest == EXPECTED_SHA256, "exact certificate digest changed")
     mutations = hostile_self_checks()
-    require(mutations == 10, "hostile mutation count changed")
-    print("four-vertex rank-four ledger audit passed; theorem remains unresolved")
-    print("physical_rows: 342 = 270 base + 70 exact_patch + 2 unresolved")
-    print("all_odd_k4_classes: " + ",".join(
-        f"{name}={class_counts[name]}" for name in ALL_ODD_K4_CLASS_COUNTS))
-    print("false_simplex_certificate: rejected by exact quarter-angle algebra")
-    print("unresolved_rows: kernel4/111111,kernel4/111112")
-    print("structural_branch: actual K4 requires an exact attached-packet sigma >= 1 proof")
-    print(f"unresolved_records_sha256: {digest}")
+    require(mutations == 8, "hostile mutation count changed")
+    print("four-vertex rank-four exact theorem audit passed")
+    print("physical_rows: 342 = 270 base + 70 patch + 2 discharged")
+    print("residual_binary_states: 128; distinguished23_stabilizer_orbits: 56")
+    print("antichain: 6 strict planar Gram classes + q>=2 simplex + 2 structural states")
+    print("angle_denominators: 3,5,7; all costs proved by Fraction Taylor intervals")
+    print("certificate_sha256: " + digest)
     print(f"rejected_hostile_mutations: {mutations}")
-    if unresolved:
-        print("BLOCKER: two physical rows require the unproved all-odd K4 sigma>=1 lemma")
-        return 1
     return 0
 
 

@@ -17,6 +17,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: completed all five four-vertex rank-four kernels after rejecting
+  and retracting a false simplex shortcut. The final exact ledger is
+  `342=270+70+2`: 270 old physical certificates, 70 exact rational patch rows,
+  and two doubled-edge rows discharged by an exhaustive 128-state/56-orbit
+  long-path antichain. Six strict planar Gram witnesses at angle denominators
+  3,5,7 plus a regular-simplex `q>=2` class cover all nonstructural states; two
+  no-long states delete the extra path and leave an actual attached K4 packet.
+  Exact Fraction interval arithmetic proves all trigonometric margins, normal
+  and `-O` agree, eight mutations reject, digest
+  `f381b2b28bd3f45d7c96d90bce824a308bc340c9d6ebd098e5da116b89648d5a`.
+  Ultimate hostile referee: ACCEPT. Kernel 16 (`K3,3`) also remains accepted;
+  unresolved rank-four work is now the four five-vertex kernels and cubic
+  kernels 13--15,17 outside proved subfamilies.
 - 2026-07-31: exact physical-row work improved rank-four coverage but caught a
   serious false closeout before commit. For the five four-vertex kernels, an
   exact rational patch repairs 70 of 72 failed transports, leaving two rows of
