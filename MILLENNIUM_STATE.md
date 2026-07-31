@@ -214,7 +214,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 170
+- **cycle:** 171
 - **announcements:** none
 
 ## immutable target list
@@ -545,6 +545,17 @@ waiting process.
   Relative rate and forcing-magnitude dwell taxes are retired.  Promotion now
   requires an exact-symbol temporal-coherence theorem producing a nonsummable
   heat-filtered response in an a priori finite budget.
+
+- 2026-07-31: Cycle 171 fixed the exact normalization between the ordinary
+  modular-symbol second power moment and the cyclotomic derivative for
+  `433a1,p=7`.  With PARI's Neron-period-normalized plus symbol and the fully
+  stabilized unit-root measure, `M2=F''(0)+F'(0)=L_(7,alpha)''(0)/log_7(8)^2`;
+  the quadratic Taylor coefficient is therefore `log_7(8)^2 M2/2`.  A period
+  change contributes exactly `Omega_E^+/Omega_*^+`, while the ordinary Euler
+  factor is already in the measure.  The committed packets additionally give
+  the exact finite congruence `M2/2=(1-alpha^-1)^2 Reg_7/log_7(8)^2 mod 7^6`,
+  checked by an integer verifier.  This is a normalization identity and finite
+  packet comparison, not equality in `Q_7` or a p-adic BSD theorem.
 
 - 2026-07-31: Cycle 148 computed the complete simultaneous convolution of the
   mirror-free chain through depth eight in a raw unit-output gauge.  Exterior
