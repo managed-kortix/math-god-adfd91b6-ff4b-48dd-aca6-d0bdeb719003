@@ -5,13 +5,16 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Navier--Stokes global cross-edge depletion gate
+- **phase:** Navier--Stokes invariant global cross-edge depletion gate
 - **active main funnel:** test whether an arbitrarily long exact Fourier cascade
-  with unit designated critical throughput must pay linearly in the complete
-  off-circuit Leray convolution.  The target includes all nonadjacent cross
-  edges, collisions, phases, polarizations, and reciprocal amplitude gauges.
-  An arbitrary-depth family with sublinear weighted off-circuit cost retires
-  the mechanism; bounded-depth positive minima are calibration only.
+  with orbit-level unit designated throughput has excess joint cost or must pay
+  linearly in the complete off-circuit Leray convolution after minimization over
+  all phases, polarizations, collisions, reality constraints, representation
+  gauges, and reciprocal-amplitude constraint symmetries.  Raw unit-output
+  normalization is excluded: a one-triad dilation has unit output and constant
+  critical energy.  An arbitrary-depth
+  family with sublinear invariant off-circuit cost retires the mechanism;
+  bounded-depth positive minima are calibration only.
   For every transported Cycle 151 diagonal image, the exact identities are
   `chi(M|Y)=16 eta` and `m^-3 f_*[Gamma]=eta^-1[Y]`, with exact denominator
   `eta` by primitivity. If one fixed integer `D` clears any positive
@@ -41,6 +44,18 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   its K-antilinear involution and descended diagonal abelian threefold.  Although
   the tensor varies under Hecke conjugacy, the carried restricted degree puts
   every iterated `eta=1` target in the common bounded Hilbert locus above.
+- 2026-07-31: Cycle 175 isolated an exact conditional `cL-C` lower bound for
+  complete off-circuit Leray output.  A linear set of uniformly charged cross
+  witnesses, bounded additive multiplicity, a uniform lower frame bound for
+  colliding projected vectors, and an `ell^2` bound on the entire unselected
+  convolution imply
+  `O_S(u)>=(alpha/sqrt(A)-rho)^2(L-C_0)`.  Additive energy can supply linearly
+  many distinct frequency channels, while reciprocal-product identities can
+  defeat amplitude gauges pairwise.  Neither controls vector cancellation or
+  the residual full convolution.  Completion robustness is the principal
+  unproved assumption and is attacked by the existing arbitrary-fixed-depth
+  recursive completions; unit critical throughput alone does not currently
+  imply the lemma's hypotheses.  No Navier--Stokes result is claimed.
 - 2026-07-31: Cycle 174 isolated the exact canonical-system production target
   for RH.  Positive Hamiltonians give a basis-free finite truncation law:
   every endpoint-kernel increment is the integral of a Hamiltonian Gram square,
@@ -224,7 +239,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 174
+- **cycle:** 175
 - **announcements:** none
 
 ## immutable target list
@@ -258,6 +273,21 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 175 hostile-audited the phrase "unit designated critical
+  throughput."  A valid charge must live on real frequency orbits, coherently
+  sum ordered interactions and conjugates, declare its dilation law, and be
+  independent of polarization coordinates; circuit cost must then be minimized
+  over representation gauges and reciprocal-amplitude constraint symmetries.
+  The exact real triad
+  `p=N e1,q=N e2`, with Cycle 150 polarizations and amplitudes
+  `A=(2N)^(-1/2)`, has unit symmetrized output norm but complete input
+  `H^(1/2)` energy exactly `4` for every `N`.  Reciprocal rescaling preserves
+  output while changing the physical field and energy like `r^2+r^-2`; selecting
+  a nonminimal representative can manufacture growth.  Any surviving many-edge
+  theorem must prove excess constrained-minimum joint cost or invariant
+  off-circuit depletion beyond the compulsory AM--GM one-edge normalization
+  cost.  No regularity result is claimed.
 
 - 2026-07-31: Cycle 174 derived the exact Wilson atomic-approximation wall.
   Generatorwise bounds `||Sw_alpha||<=rho` plus Wilson synthesis with error

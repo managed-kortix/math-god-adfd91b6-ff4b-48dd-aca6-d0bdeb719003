@@ -1,5 +1,31 @@
 # Notebook
 
+## Cycle 175
+
+The full off-circuit `cL-C` target has an exact conditional frame lemma.  If
+`L-C_0` selected cross interactions have weighted norm at least `alpha`, their
+sum frequencies have multiplicity at most `A`, colliding Leray vectors have
+lower frame constant `1/A`, and the coherently summed unselected convolution
+has `ell^2` norm at most `rho sqrt(L-C_0)`, then the complete output is at least
+`(alpha/sqrt(A)-rho)^2(L-C_0)`.  Additive energy can provide distinct channels
+but not polarized noncancellation.  The residual/completion bound remains the
+unproved central assumption, so the lemma is not a regularity result.
+
+Hostile audit showed that "unit designated critical throughput" is not an
+invariant hypothesis until it is defined on real frequency orbits, coherently
+sums collisions and conjugates, declares its dilation law, and is minimized
+over polarization representation gauges and reciprocal-amplitude constraint
+symmetries.  The exact real triad
+`p=N e1`, `q=N e2`, with Cycle 150 polarizations and amplitudes
+`A=(2N)^(-1/2)`, has unit symmetrized output norm and complete input
+`H^(1/2)` energy exactly `4` for every `N`.  Reciprocal rescaling preserves the
+output while changing the physical field and its energy by a factor
+proportional to `r^2+r^-2`; it is a noncompact symmetry of the constraint, not
+literally a coordinate gauge.  A raw chosen representative can therefore
+manufacture energy growth.  Any surviving many-edge claim must concern the
+constrained-minimum joint excess cost or invariant off-circuit output, not the
+AM--GM normalization cost.
+
 ## Cycle 91
 
 Helical decomposition does not make signed helicity coercive in the full
