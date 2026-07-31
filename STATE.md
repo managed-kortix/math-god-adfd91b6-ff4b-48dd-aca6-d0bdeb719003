@@ -17,6 +17,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: proved the complete low-order rank-five block theorem: all 17
+  suppressed kernels on at most four branch vertices (`1+3+13`) satisfy the
+  pentacyclic target after arbitrary subdivision and arbitrary rooted-tree
+  attachment. The six-path dipole is analytic and strict; the three-vertex
+  ledger covers 98 physical rows / 74 automorphism orbits; the four-vertex
+  ledger covers 1281 physical rows / 821 orbits as `808+13`, with the last
+  13 closed by a 117-target frontier covering set (116 strict rational Gram
+  certificates and one exact PSD equality). The fail-closed master verifier
+  passes normally and under `python3 -O`, rejects hostile mutations, and has
+  dependency-manifest digest
+  `691d3d2e22740e502001c3150910095ac554c13f70fb88f77b8b432fa8bfdedf`.
+  A hostile independent referee returned ACCEPT after raw-byte fixture locks
+  and the frontier-covering terminology/logic were corrected.
 - 2026-07-31: replaced the irrecoverably failed pinned Breakthrough root after
   preserving its branch. The existing heartbeat had already provisioned exactly
   one replacement `02e4f7af-a0b4-4240-8f2b-81db562e11a4`; renamed it, atomically
