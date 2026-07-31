@@ -1346,3 +1346,51 @@ No audits yet.
   scout all 40,415 rows for proof-size distribution.  Before bulk retention,
   derive grouping/cube cuts from the exact `(q,h,H_CC)` C-pattern classes so the
   certificate archive remains repository-sized.
+
+### Human closure of B7 lambda=1, q=0
+
+- Proved that the entire 8,847-parent B7 cell `lambda=1,q=0,r=0` is impossible;
+  see `attempts/tick51-b7-q0-human-proof.md`.  A C vertex with no internal
+  outneighbor has `N+=R union A` and exact `N++=B`; deleting its arc to the root
+  leaves it bad, contradicting arc minimality.
+- Two independent proof routes and a hostile audit verified the exact-distance
+  semantics, the presence of the C-to-root arc, and the deletion inequality.
+  Exhaustive CNF regression independently found all 8,847 contradictions by
+  propagation using only the relevant C-to-root arc-minimality blocks.
+- The residual forced-child campaign now has 31,568 canonical parents: all
+  14,649 B6 parents and B7 `q=1,...,5` totaling 16,919.  This remains only a
+  restricted m=6 frontier, not an order-18 or SNC result.
+- A 200-child checked-LRAT scout found every sampled forced child UNSAT, with
+  projected direct compressed proof storage near 16 GiB.  The leading durable
+  route is therefore selector-grouped certification by `(branch,q,h)`, while
+  human work targets compatibility of saturated inaccessible packets across A
+  rows.
+
+### Frozen residual forced-child selector groups
+
+- Added nine selector-grouped CNFs after removing only the human-closed B7
+  `q=0` cell. They partition exactly 31,568 rows: B6 `q=0,1,2,3` and B7
+  `q=1,2,3,4,5`. The manifest and CNF metadata bind the exclusion to the exact
+  3,055-byte human proof. The 1,611-byte manifest SHA-256 is
+  `6cf29f05bc2d76437c10b8c19e173c6d8c666f8001a3b1504ab1cf108932a29c`.
+- Every group consists of the frozen branch base, common forced C suffix, fresh
+  selectors from 23,617, one ALO, and 153 guarded pair-ordered hole clauses per
+  row. After existentially quantifying the selectors, this is equisatisfiable
+  with the disjunction of member CNFs. A separately implemented checker asserts
+  all member projections are unique, reconstructs the exact stream, and accepts
+  model attribution only after a complete assignment satisfies every clause and
+  has exactly one true selector. Boundary, hostile model, proof-identity, and
+  CNF mutation tests pass.
+- A fresh complete nine-group campaign generated and structurally checked every
+  frozen CNF, solved each with pinned CaDiCaL 1.7.3 in textual LRAT mode, and
+  obtained `c VERIFIED` from pinned `lrat-check` for every proof. Timings use
+  Python `time.monotonic`, not `/usr/bin/time`.
+- The nine `xz -3` artifacts total 9,444,352 bytes and are retained under
+  `certificates/`. Exact uncompressed/compressed hashes, byte counts, stage
+  timings, tool commits, and executable hashes are frozen in
+  `experiments/m6-forced-group-certificates.tsv`. The fresh verifier regenerates
+  and structurally checks every CNF before authenticating, decompressing, and
+  independently checking every durable LRAT.
+- Together with the separately audited B7 `q=0` human proof, this eliminates the
+  full 40,415-row forced-child frontier. It remains a restricted `m=6` result,
+  not by itself an order-18 or SNC theorem.

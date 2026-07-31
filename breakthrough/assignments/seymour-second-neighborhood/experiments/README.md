@@ -237,3 +237,39 @@ accepted placement has an orientation completion, or eliminate B6/B7. The
 checker validates exact generator identity and projection but does not establish
 the mathematical semantics of each base clause; those semantics retain their
 separate small-instance regression and eventual proof-checking requirements.
+
+After the human elimination of forced B7 `q=0`, the selector-grouped residual is
+frozen by `m6-forced-selector-groups.tsv`: nine `(branch,q,h)` groups cover all
+31,568 remaining forced rows (B6 `q=0..3`, B7 `q=1..5`). Reproduce one group and
+run the independent gate with:
+
+```sh
+python3 m6_forced_group_cnf.py --group B7-q5 --output /tmp/m6-B7-q5.cnf
+python3 check_m6_forced_group_cnf.py /tmp/m6-B7-q5.cnf
+python3 test_m6_forced_group_cnf.py
+```
+
+The manifest and each CNF bind the excluded B7 `q=0` cell to
+`attempts/tick51-b7-q0-human-proof.md` by its exact 3,055 bytes and SHA-256.
+Each CNF is the exact branch base, the common forced orientation/high-C units,
+fresh selectors beginning at 23,617, one selector ALO, and 153 ordered guarded
+hole clauses per member. After existentially quantifying the fresh selectors,
+the grouped CNF is equisatisfiable with the disjunction of its member CNFs; it
+is not logically equivalent over the enlarged variable set. The checker
+independently derives the residual rows, asserts every member projection is
+unique in every group, reconstructs every clause, and freezes all nine file
+hashes. `--model` requires a complete assignment of every CNF variable,
+evaluates every clause, requires exactly one true selector, and only then
+attributes the model.
+
+All nine groups are now CaDiCaL-UNSAT and independently LRAT-verified. The
+durable `xz -3` proofs are `../certificates/m6-forced-*.lrat.xz`; exact CNF,
+LRAT, and compressed identities plus Python `time.monotonic` stage timings are
+in `m6-forced-group-certificates.tsv`. Fresh verification regenerates and
+structurally checks every CNF, decompresses and authenticates every LRAT, and
+runs the pinned checker:
+
+```sh
+python3 verify_m6_forced_group_certificates.py \
+  --checker /path/to/pinned/lrat-check
+```
