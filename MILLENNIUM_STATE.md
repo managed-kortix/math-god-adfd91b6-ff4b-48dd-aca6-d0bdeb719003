@@ -5,19 +5,13 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after Hodge graph closure
-- **active main funnel:** deformation of an exceptional algebraic seed.  On the
-  explicit `Q(i)` determinant-class `[-3]` Weil sixfold `E_i^3 x E_i^3`, the
-  antilinear diagonal graph has nonzero pure determinant projection and spans
-  the exceptional rank-two Weil space after the `K` action. The diagonal has
-  rank-six embedded obstruction. Split denominator-cleared projector objects,
-  triangular extensions, and smallest effective graph unions retain
-  componentwise obstruction. Grading now also forbids every bidirectional return
-  cycle built from transverse graph cross-Ext-three classes. The next candidate
-  the final clean two-graph candidate globally smooths and has lower-degree
-  cross Ext, but its opposite Ext-one return product is zero and its full class
-  remains rank-eight obstructed.  All concrete graph-derived deformation routes
-  are closed; retain the special nonsplit seed and rotate to a new Clay funnel.
+- **phase:** Yang--Mills shrinking-composite gate
+- **active main funnel:** reflection-compatible local observable construction.
+  The free spatially smoothed point-split electric square has an exact positive
+  two-photon OS density and a well-defined collar limit, so reflection
+  positivity is not the obstacle. The next gate is an interacting,
+  gauge-invariant composite with resolution shrinking in physical units and
+  cutoff/volume-uniform local negative-Sobolev tightness plus noncollapse.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -149,7 +143,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 156
+- **cycle:** 157
 - **announcements:** none
 
 ## immutable target list
@@ -182,6 +176,18 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 157 rotated to Yang--Mills and settled the free point-split
+  composite gate positively. For tests supported `t>=delta`, both endpoints
+  remain in the positive algebra and the epsilon-to-zero reflected kernel has a
+  nonnegative two-photon spectral representation. In the unsmoothed case its
+  density polynomial is `15 omega^4-30 omega^2 p^2+23 p^4`, strictly positive
+  on the physical cone; fixed constituent heat smoothing adds a positive
+  internal Gaussian weight and gives all spectral moments. This is only a
+  collar/noncontact result: temporal contact-square aliasing still obstructs the
+  naive local electric square. Promotion now requires interacting shrinking-
+  resolution tightness and noncollapse, and mass-gap promotion still requires
+  full physical-complement contraction.
 
 - 2026-07-31: Cycle 156 closed the globally smoothable clean two-graph escape.
   For `Gamma_I` and `Gamma_diag(3,1,1)`, cross Ext dimensions are
