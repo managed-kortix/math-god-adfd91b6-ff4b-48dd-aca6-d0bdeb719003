@@ -10,8 +10,13 @@ Cycle 178 refines the finite-lattice route. With electric
 prove a whole-low-block Wilson contraction. Its exact orthogonal tail is
 `QH intersect ker(P_D)`. Ordered Duhamel expansion supplies a finite-volume
 Casimir-tail bound, but its raw constants contain extensive `E_0` and `||W||`.
-The next production lemma is therefore a linked-cluster ground-state transform
-and local connected tail estimate uniform in volume. Continuum promotion also
-requires reflection-positive RG basin entry from bare `g(a)->0`, where the
-strong-coupling parameter `2/g(a)^4` is large, followed by a nontrivial OS
-limit.
+Cycle 179 rules out repairing this by a fixed global cube of bare local Casimir
+cutoffs: product rotors, realized exactly as gauge-invariant loops sharing an
+edge, retain a one-particle tail contraction at least `exp(-s gamma)` in the
+infinite-volume supremum. Ground-state conjugation may itself be nonlocal and
+gauge constrained. The next production lemma must instead use an anchored
+connected/polymer norm or interacting-ground-state spectral sectors and prove
+that this local control implies contraction on the entire vacuum complement.
+Continuum promotion also requires reflection-positive RG basin entry from bare
+`g(a)->0`, where the strong-coupling parameter `2/g(a)^4` is large, followed by
+a nontrivial OS limit.

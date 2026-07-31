@@ -1,5 +1,24 @@
 # Notebook
 
+## Hostile cycle 179
+
+Ground-state conjugation does not itself prove locality: even a nearest-neighbor
+harmonic Hamiltonian has drift kernel `A^(1/2)`, which is dense, and on the
+physical gauge space all derivatives must remain horizontal while plaquette
+coordinates obey Bianchi constraints.  More decisively, a fixed local Casimir
+cube fails even when the transform is exactly local.  For `N` product Mathieu
+rotors with dressed one-site vacuum `phi`, let `a_D=||p_D phi||^2<1` and cut off
+every site's Fourier degree by `D`.  A first excited rotor tensored with `N-1`
+dressed vacua can be corrected into the exact Casimir tail and converges back to
+that one-particle state because the all-low spectator weight is `a_D^(N-1)`.
+Hence `liminf_N ||S_N(s)(I-Pi_(D,N))|| >= exp(-s gamma)` for every finite `D`.
+The same model is realized on the gauge quotient of `N` loops sharing one
+reference edge, so plaquette overlap and Gauss invariance do not repair it.
+Global bare local-Casimir tails are retired; only anchored connected/polymer
+norms or ground-state-adapted local spectral sectors remain possible.  Full
+derivation: `cycle-179-local-ground-transform-no-go.md`.  No Yang--Mills mass
+gap is claimed.
+
 ## Bounded scout cycle 178
 
 The proposed Wilson representation low/tail split fails before continuum

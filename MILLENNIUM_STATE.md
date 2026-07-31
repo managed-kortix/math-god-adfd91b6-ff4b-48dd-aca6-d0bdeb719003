@@ -5,13 +5,18 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Yang--Mills electric-Casimir moving-tail gate
+- **phase:** Yang--Mills connected-tail implication gate
 - **active main funnel:** replace the false bare Wilson cutoff by an
   ordering-sensitive electric-heat tail after the Gauss and vacuum quotients.
   The finite-lattice Duhamel bound is exact, but its ground-energy factor and
-  magnetic norm are extensive.  The next production lemma is a linked-cluster
-  ground-state transform giving a local connected tail estimate uniform in
-  volume; bare representation truncation and character decay are retired.
+  magnetic norm are extensive.  Cycle 179 now rules out a fixed global cube of
+  bare local Casimir cutoffs even after an exactly local product ground-state
+  transform: spectator dressed vacua place a physical one-particle excitation
+  asymptotically in the tail.  Ground-state conjugation can also be nonlocal and
+  gauge constrained.  The next production lemma must use an anchored
+  connected/polymer norm or interacting-ground-state local spectral sectors
+  and prove that such local control contracts the entire vacuum complement;
+  bare representation truncation and character decay are retired.
   For every transported Cycle 151 diagonal image, the exact identities are
   `chi(M|Y)=16 eta` and `m^-3 f_*[Gamma]=eta^-1[Y]`, with exact denominator
   `eta` by primitivity. If one fixed integer `D` clears any positive
@@ -52,6 +57,18 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   output forces the receiver quartet to vanish, even allowing complex
   polarizations. The raw Laurent filter cannot become a closed cubic receiver
   architecture without completion modes or different frequencies.
+- 2026-07-31: Cycle 179 hostile-audited the proposed local Casimir repair.  A
+  nearest-neighbor quadratic Hamiltonian already has a generally dense
+  ground-transform drift `A^(1/2)`, while Gauss and Bianchi constraints obstruct
+  independent plaquette factors.  More decisively, for `N` product Mathieu
+  rotors and every fixed Fourier cutoff `D`, the exact physical Casimir tail
+  contains vectors converging to a one-particle excitation, because the
+  all-low spectator weight is `a_D^(N-1)->0`.  Therefore its semigroup norm has
+  `liminf >= exp(-s gamma)`, despite the ground transform being exactly local.
+  The model embeds as `N` gauge-invariant loops sharing a reference edge, so
+  plaquette overlap does not repair the estimate.  Global bare local-Casimir
+  tails are retired; an anchored connected norm plus a global implication
+  theorem is now required.  No Yang--Mills result is claimed.
 - 2026-07-31: Cycle 178 hostile-audited the Yang--Mills Wilson low/tail split.
   In the one-plaquette `SU(2)` class space,
   `w chi_j=(chi_(j+1/2)+chi_(j-1/2))/2`, so every spin cutoff has exact
@@ -283,7 +300,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 178
+- **cycle:** 179
 - **announcements:** none
 
 ## immutable target list
