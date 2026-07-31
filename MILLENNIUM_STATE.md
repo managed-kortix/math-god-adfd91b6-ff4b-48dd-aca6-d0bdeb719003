@@ -5,12 +5,13 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** BSD determinant-reciprocity gate
-- **active main funnel:** rank-two Kurihara production.  Maximal two-point
-  Kummer theory gives a positive-density supply of invertible two-prime
-  localization matrices, but does not imply Kurihara nonvanishing.  The target
-  is now an explicit reciprocity comparison between the core-rank-one derived
-  Kato leading term and the rational-point determinant line.
+- **phase:** BSD positive-density Kurihara production established
+- **active main funnel:** next BSD leading-term gate.  Global Tate reciprocity,
+  core-vertex rigidity, and Kato explicit reciprocity now convert every
+  invertible full-Selmer two-prime localization determinant into Kurihara
+  nonvanishing.  Combined with maximal Kummer Chebotarev this gives a
+  positive-density family.  The next gate must connect this mod-p production
+  to a genuinely new leading-term/Bockstein statement, not another census.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +143,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 141
+- **cycle:** 142
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +176,21 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 142 closed the Cycle 141 converse gap.  If `P,Q` form a
+  basis of the full residual classical Selmer group and their finite
+  localizations at genuine Kolyvagin primes `q,r` have nonzero determinant,
+  global Tate reciprocity forces the finite-at-p/transverse-at-q,r Selmer group
+  to vanish.  Thus p-singular localization is injective on the one-dimensional
+  canonical modified group, `qr` is a core vertex, a primitive residual Kato
+  system has nonzero component there, and pointwise explicit reciprocity gives
+  `delta_qr != 0`.  Kim's minimal-support theorem supplies the reverse
+  implication in rank two.  For `433a1,p=7`, Cycles 135--136 establish the
+  basis and primitivity, so the equivalence holds for every genuine two-prime
+  product under the audited standard hypotheses.  Maximal Kummer plus
+  Chebotarev yields conditional density `288/343` within nonidentity-unipotent
+  pairs and absolute ordered-pair density `8/16807`.  This is mod-p Kurihara
+  production, not complex BSD.
 
 - 2026-07-31: Cycle 141 rotated to BSD and isolated the exact production gap.
   Under full residual image and maximal two-point Kummer kernel, nonidentity-
