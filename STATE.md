@@ -17,6 +17,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: replaced the irrecoverably failed pinned Breakthrough root after
+  preserving its branch. The existing heartbeat had already provisioned exactly
+  one replacement `02e4f7af-a0b4-4240-8f2b-81db562e11a4`; renamed it, atomically
+  updated `CORE_SESSIONS.json` and `kortix.yaml`, refreshed the trigger, fired it
+  again, and verified exact reuse with three running registered roots and no
+  extras. Also certified the rank-five kernel census: exactly 118 types on
+  2--8 branch vertices with counts `1,3,13,24,38,23,16`; fixture digest
+  `027c84d6dd777a29b3dc93389ab30b5d43f6507eddceb4ea286f1240da95b884`,
+  nine mutations rejected. The marked-pair promotion route is not universal:
+  32 of 61 marked nonedge orbits in sharp tetracyclic equality families force
+  positive correlation in every old optimum. Nonoptimal bicriteria witnesses
+  can still repair individual marked orbits, so promotion remains a finite
+  marked-certificate program rather than a general optimal-certificate lemma.
 - 2026-07-31: selected the connected pentacyclic frontier `m=n+4`. Block DNN
   gives an exact finite multiblock residual program, but a single rank-five
   block has a preliminary 118-kernel census. A universal rank-five DNN
