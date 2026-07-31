@@ -1,5 +1,41 @@
 # Notebook
 
+## Exact `[1:3]` coordinates cycle 189
+
+The exact fixed-level-433 producer computes the first three requested members
+of the repeated full-`L_0` class `[1:3]`.  The rational lifts and residues are
+`74 -> 4` for `q=11831`, `-17/2 -> 2` for `q=14897`, and `-341 -> 2` for
+`q=48889`, all modulo seven.  Every value is nonzero, so this initial class
+segment has no zero/nonzero collision.  Exact finite-field replay independently
+certifies the common nonidentity-unipotent projective row `[1:3]`.  See
+`cycle-189-class-13-exact-symbol-certificate.md`.
+
+## Exact twist period factor cycle 188
+
+For every prime-twist parameter `D_q` away from `2*433`, the integral model
+`y^2-xy=x^3+((D_q-1)/4)x^2+D_q^3` is globally minimal: its invariants are
+`c4=D_q^2` and `Delta=-433 D_q^6`, which rule out scaling at every prime.
+The twist map pulls the base Neron differential back to `sqrt(D_q)` times the
+twist differential.  Consequently the Cycle 187 period factor is exactly
+`kappa_q=1`, hence a 7-adic unit reducing to `1 mod 7`, for all candidate
+primes.  This is checked explicitly for `1499,6287,3823,8317`.  See
+`cycle-188-exact-twist-period-factor.md`.  The exact base-symbol computations
+give residues `4,1,1,4 mod 7`, respectively, so both first same-class pairs are
+nonzero/nonzero and neither is the requested zero/nonzero collision.
+
+## Base-symbol twist formula cycle 187
+
+For `eta=2 mod 29`, `c(q,29)` can be computed without constructing the
+level-`433*q^2` symbol space.  The quadratic-twist identity expresses each
+twist plus symbol as a Legendre-weighted sum of level-433 symbols at
+`(aq+29u)/(29q)`.  It uses base plus symbols for `q=1 mod 4` and base minus
+symbols for `q=3 mod 4`; the latter sign is positive with the pinned Gauss sum
+`tau=i*sqrt(q)`.  The sole normalization is the exact rational Neron-period
+comparison `kappa_q`; Cycle 188 proves that it is identically one in this
+prime-twist family.
+Pairing `a` with `29-a` reduces the calculation to `12(q-1)` weighted base
+symbols.  See `cycle-187-base-symbol-twist-formula.md`.
+
 ## Cyclotomic modulus audit cycle 186
 
 The field `L_0 Q(zeta_(8*7*433*29))` is a valid but nonminimal refinement of
@@ -10,8 +46,9 @@ factors at `8` and `433` likewise overconstrain unless the final packet really
 uses full residue classes. Same Frobenius in `L_0`, with admissibility checked
 on both primes, is the logically minimal counterexample criterion. See
 `cycle-186-cyclotomic-modulus-minimality-audit.md`.
-The Cycle 185 progression anchored at `1289` lies in the `-1` character fibre,
-so it actually fails the stated fixed-`29` admissibility condition throughout.
+Cycle 187 corrects an arithmetic error in Cycle 186: `1289=13 mod 29` and
+`10^2=13 mod 29`, so the Cycle 185 progression lies in the admissible `+1`
+character fiber. Its full modulus is still nonminimal.
 
 ## Semidirect Kummer conjugacy cycle 184
 

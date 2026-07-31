@@ -1,0 +1,53 @@
+ROW q=8191 a=2 weight=2 U=-86
+ROW q=8191 a=3 weight=3 U=-229/2
+ROW q=8191 a=4 weight=4 U=255/2
+ROW q=8191 a=5 weight=2 U=-152
+ROW q=8191 a=6 weight=5 U=81/2
+ROW q=8191 a=7 weight=3 U=15/2
+ROW q=8191 a=8 weight=6 U=-255/2
+ROW q=8191 a=9 weight=6 U=-208
+ROW q=8191 a=10 weight=4 U=208
+ROW q=8191 a=11 weight=1 U=152
+ROW q=8191 a=13 weight=1 U=86
+ROW q=8191 a=14 weight=5 U=-81/2
+RESULT q=8191 D=-8191 epsilon=-1 kappa=1 total=-1230 c_mod_7=2 status=NONZERO model=[1, 1, 1, -1397760, -550191152734] change=[1, 683, 1, 342]
+ROW q=10949 a=2 weight=2 U=-282
+ROW q=10949 a=3 weight=3 U=-241/2
+ROW q=10949 a=4 weight=4 U=-433/2
+ROW q=10949 a=5 weight=2 U=359
+ROW q=10949 a=6 weight=5 U=-721/2
+ROW q=10949 a=7 weight=3 U=155/2
+ROW q=10949 a=8 weight=6 U=433/2
+ROW q=10949 a=9 weight=6 U=-253
+ROW q=10949 a=10 weight=4 U=253
+ROW q=10949 a=11 weight=1 U=-359
+ROW q=10949 a=13 weight=1 U=282
+ROW q=10949 a=14 weight=5 U=721/2
+RESULT q=10949 D=10949 epsilon=1 kappa=1 total=-125 c_mod_7=1 status=NONZERO model=[1, 1, 0, -2497512, 1314090841085] change=[1, -912, 1, -456]
+ROW q=19559 a=2 weight=2 U=21
+ROW q=19559 a=3 weight=3 U=167/2
+ROW q=19559 a=4 weight=4 U=447/2
+ROW q=19559 a=5 weight=2 U=293
+ROW q=19559 a=6 weight=5 U=145/2
+ROW q=19559 a=7 weight=3 U=621/2
+ROW q=19559 a=8 weight=6 U=-447/2
+ROW q=19559 a=9 weight=6 U=166
+ROW q=19559 a=10 weight=4 U=-166
+ROW q=19559 a=11 weight=1 U=-293
+ROW q=19559 a=13 weight=1 U=-21
+ROW q=19559 a=14 weight=5 U=-145/2
+RESULT q=19559 D=-19559 epsilon=-1 kappa=1 total=1381 c_mod_7=2 status=NONZERO model=[1, 0, 0, -7969885, -7491043923654] change=[1, 1630, 1, 815]
+ROW q=31963 a=2 weight=2 U=48
+ROW q=31963 a=3 weight=3 U=58
+ROW q=31963 a=4 weight=4 U=-77/2
+ROW q=31963 a=5 weight=2 U=45/2
+ROW q=31963 a=6 weight=5 U=-58
+ROW q=31963 a=7 weight=3 U=-45
+ROW q=31963 a=8 weight=6 U=-45/2
+ROW q=31963 a=9 weight=6 U=-48
+ROW q=31963 a=10 weight=4 U=77/2
+ROW q=31963 a=11 weight=1 U=-259/2
+ROW q=31963 a=13 weight=1 U=93/2
+ROW q=31963 a=14 weight=5 U=45
+RESULT q=31963 D=-31963 epsilon=-1 kappa=1 total=-391 c_mod_7=1 status=NONZERO model=[1, 1, 0, -21284028, -32692270764115] change=[1, 2664, 1, 1332]
+PASS: exact base-level-433 computations completed

@@ -48,13 +48,11 @@ cyclotomic classes where the predicate sees only two; relative to the quadratic
 field, it can make a pair collision about 14 times harder before any other
 constraints are counted.
 
-This also exposes a fail-closed error in the current Cycle 185 progression
-screen. Its anchor `q=1289` has `(q/29)=-1`, as that note records. Therefore
-`a_29(E^(D_q))=-2=5 mod 7`, not `29+1=2 mod 7`. Every prime
-`q=1289+k(8*7*433*29)` has the same value `-1` and fails the stated Cycle 182
-one-prime admissibility condition. That progression can contain no admissible
-collision at fixed `ell=29`; it must be replaced by a residue with
-`(q/29)=1`, or admissibility must be deliberately redefined and justified.
+The Cycle 185 note incorrectly records the anchor character as `-1`. In fact
+`1289=13 mod 29` and `10^2=13 mod 29`, so `(1289/29)=1`. Consequently that
+progression is admissible at fixed `ell=29`. It remains a highly nonminimal
+refinement: fixing a full residue modulo 29 splits the admissible quadratic
+character fiber into 14 separate cyclotomic fibers.
 
 The definition of `c(q,29)` itself supplies no reason to adjoin
 `Q(zeta_29)`. The discrete logarithms are taken in the fixed group

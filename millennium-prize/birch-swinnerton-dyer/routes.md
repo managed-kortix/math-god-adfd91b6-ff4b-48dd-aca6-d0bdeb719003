@@ -9,9 +9,9 @@ frozen packet uses the corresponding residue data. The logically minimal test
 matches Frobenius in `L_0` and checks admissibility directly; an automatically
 filtered search should adjoin only the character field cut out by its exact
 predicate. See `cycle-186-cyclotomic-modulus-minimality-audit.md`.
-In particular, the Cycle 185 anchor `1289` has `(1289/29)=-1`, so its entire
-full-modulus progression fails the Cycle 182 condition at `ell=29` and cannot
-produce an admissible collision under the currently frozen predicate.
+Cycle 187 corrects the earlier anchor calculation: `(1289/29)=1`, since
+`1289=13 mod 29` and `10^2=13 mod 29`. The full-modulus progression is
+admissible at `ell=29`, though still needlessly sparse.
 
 Cycle 185 proves the maximal-group hypothesis for the named Kummer field.
 Multiplicative reduction with `v_433(Delta)=1` supplies a mod-7 transvection,

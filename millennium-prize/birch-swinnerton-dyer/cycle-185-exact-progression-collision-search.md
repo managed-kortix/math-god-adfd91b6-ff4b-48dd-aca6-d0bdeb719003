@@ -18,7 +18,7 @@ anchor.  Search
 This congruence gives exactly the same Frobenius in
 `Q(zeta_M)`, not merely the same separate residues at selected factors.  It
 also fixes the fundamental-discriminant sign convention and the Legendre
-symbol at `ell=29` (the common value for the anchor fiber is `-1`).  It does
+symbol at `ell=29` (the common value for the anchor fiber is `+1`).  It does
 not fix Frobenius in the nonabelian Kummer
 field.
 
