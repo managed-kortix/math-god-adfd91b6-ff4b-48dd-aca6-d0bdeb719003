@@ -109,7 +109,7 @@ def main():
         r *= m
 
     print("Cycle 175 progression collision filter")
-    print("m, input support, output support, canceled signed channels")
+    print("m, input support, output support, canceled output frequencies")
     for row in rows:
         print(*row)
     print("sequential multipliers =", multipliers)

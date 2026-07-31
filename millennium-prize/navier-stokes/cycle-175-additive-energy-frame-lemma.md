@@ -75,11 +75,12 @@ merely the selected set `X`.
 4. **Full-convolution robustness:** set
 
    \[
-   y_k=\omega_k^{1/2}P_k\sum_{p+q=k}(u_p\cdot q)u_q,
-   \qquad r=y-T_Xz.
+   y_k^{\rm off}=\mathbf1_{k\notin S}\omega_k^{1/2}P_k
+   \sum_{p+q=k}(u_p\cdot q)u_q,
+   \qquad r=y^{\rm off}-T_Xz.
    \]
 
-   Thus `r_k` is the coherently summed weighted contribution of every
+   Thus `r_k` is the coherently summed weighted off-circuit contribution of every
    unselected signed convolution term, including collisions and recursively
    populated correction modes.  Assume
 
@@ -112,7 +113,7 @@ In particular this is `cL-C`, with
  \ge {\alpha^2\over A}|X_0|.
 \]
 
-The complete off-circuit output is `T_Xz+r`.  The reverse triangle inequality
+The complete off-circuit output is `y^off=T_Xz+r`.  The reverse triangle inequality
 and robustness therefore give
 
 \[

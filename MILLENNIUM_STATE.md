@@ -5,16 +5,16 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Navier--Stokes invariant global cross-edge depletion gate
-- **active main funnel:** test whether an arbitrarily long exact Fourier cascade
-  with orbit-level unit designated throughput has excess joint cost or must pay
-  linearly in the complete off-circuit Leray convolution after minimization over
-  all phases, polarizations, collisions, reality constraints, representation
-  gauges, and reciprocal-amplitude constraint symmetries.  Raw unit-output
-  normalization is excluded: a one-triad dilation has unit output and constant
-  critical energy.  An arbitrary-depth
-  family with sublinear invariant off-circuit cost retires the mechanism;
-  bounded-depth positive minima are calibration only.
+- **phase:** Navier--Stokes global cross-edge depletion falsified for raw orbit output
+- **active main funnel:** portfolio rotation after the simultaneous collision
+  adversary.  A single globally factored real divergence-free field can populate
+  arbitrarily many scales while its complete quadratic Leray convolution has
+  only the terminal boundary quartet.  A shared-pump multilayer variant has zero
+  undesignated output and constraint-minimized critical cost
+  `O(sqrt(log L))` under unit complete orbit-output constraints.  Any surviving
+  cascade mechanism must use a different homogeneous observable, such as actual
+  cubic receiver flux with dynamical inheritance; raw forcing/output norms are
+  retired.
   For every transported Cycle 151 diagonal image, the exact identities are
   `chi(M|Y)=16 eta` and `m^-3 f_*[Gamma]=eta^-1[Y]`, with exact denominator
   `eta` by primitivity. If one fixed integer `D` clears any positive
@@ -44,6 +44,18 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   its K-antilinear involution and descended diagonal abelian threefold.  Although
   the tensor varies under Hecke conjugacy, the carried restricted degree puts
   every iterated `eta=1` target in the common bounded Hilbert locus above.
+- 2026-07-31: Cycle 176 extended the Cycle 175 Laurent collision filter to one
+  simultaneously populated arbitrary-depth field. For
+  `R_(n+1)=m_n R_n`, the factorization
+  `A_(R_0) product_n B_(m_n,R_n)=A_(R_D)` may be split between an `e_3` rail
+  family and an `e_2` collinear-pump family. Both families are internally
+  silent, reality is exact, and the complete ordered 3D Leray convolution has
+  only the terminal boundary quartet. Alternating factors puts unboundedly many
+  scales in both families. Conversely, Newton polytopes show that any two
+  scalar Laurent factors with a two-monomial product are supported on one
+  common affine line; independent multivariate scale directions are impossible
+  in this ansatz. There is no critical normalization, dynamic invariance, or
+  Navier--Stokes regularity consequence.
 - 2026-07-31: Cycle 175 isolated an exact conditional `cL-C` lower bound for
   complete off-circuit Leray output.  A linear set of uniformly charged cross
   witnesses, bounded additive multiplicity, a uniform lower frame bound for
@@ -239,7 +251,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 175
+- **cycle:** 176
 - **announcements:** none
 
 ## immutable target list

@@ -57,7 +57,8 @@ interactions vanish because `e_2\cdot\ell_j=0`.  For a rail frequency
 \]
 
 It is independent of `x,s`, and projection changes nothing.  Consequently the
-complete ordered real convolution is exactly the Laurent product above.  Its
+complete ordered real convolution, after pairing the two orders of each
+rail--pump interaction, is exactly the Laurent product above.  Its
 only nonzero outputs are
 
 \[
@@ -65,8 +66,10 @@ only nonzero outputs are
 \]
 
 with raw symmetrized coefficients `+Y e_3` at `(-mR,\pm Y,0)` and
-`-Y e_3` at `(mR,\pm Y,0)`.  Thus all `2(m-1)` interior signed cross channels
-cancel coherently, while the designated boundary quartet survives.  The two
+`-Y e_3` at `(mR,\pm Y,0)`.  Thus `2(m-1)` interior output frequencies
+cancel coherently across the two reality layers; these comprise `4(m-1)`
+unordered rail--pump contributions and `8(m-1)` ordered summands.  The
+designated boundary quartet survives.  The two
 outputs on either reality layer again have equal norm and the same transverse
 polarization.
 

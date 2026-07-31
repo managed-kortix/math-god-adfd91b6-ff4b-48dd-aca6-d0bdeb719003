@@ -1,5 +1,19 @@
 # Notebook
 
+## Cycle 176
+
+The Cycle 175 progression filter has an exact simultaneously populated
+arbitrary-depth extension. If `R_(n+1)=m_n R_n`, then
+`A_(R_0) product_n B_(m_n,R_n)=A_(R_D)`. Partitioning the geometric factors
+between an `e_3` rail polynomial and an `e_2` collinear-pump polynomial gives a
+single real divergence-free 3D field whose complete quadratic convolution is
+only the terminal boundary quartet. Alternating the partition puts arbitrarily
+many scales in both silent shear families. A Newton-polytope argument is sharp:
+any two Laurent factors whose product has only two boundary monomials have
+supports on one common affine line, so a genuinely independent-variable
+version is impossible in this two-shear product ansatz. This is a
+Fourier-algebra filter, not an invariant subsystem or a regularity result.
+
 ## Cycle 175
 
 The full off-circuit `cL-C` target has an exact conditional frame lemma.  If
