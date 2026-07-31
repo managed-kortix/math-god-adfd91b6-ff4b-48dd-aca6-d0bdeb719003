@@ -46,8 +46,9 @@ The verifier evaluates this sum independently with `fractions.Fraction`. Every
 accepted sum is strictly less than the tetracyclic excess budget three. For
 fixed transformed endpoints and fixed parity, replacing a path length `l` by
 `l+2` can only decrease its optimally eliminated cost. Rooted trees add exactly
-one unit per edge to the DNN quantity, so a strict core budget proves the
-stated strict inequality with all rooted attachments.
+one unit per edge to the DNN quantity, so a strict core budget supplies strict
+auxiliary slack with all rooted attachments; the equality family below retains
+only the stated non-strict conclusion.
 
 ## The four kernel-9 parity variants
 

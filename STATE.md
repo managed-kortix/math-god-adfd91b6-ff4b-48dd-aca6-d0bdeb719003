@@ -17,6 +17,20 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: completed and synthesized the full connected tetracyclic theorem:
+  every finite simple connected graph with `m=n+3` satisfies `s^+>=n`.
+  The 15-page paper proves all block partitions, embeds an exhaustive rank
+  `3+1` canonical/noncanonical ledger, classifies all 17 rank-four kernels, and
+  maps every kernel to its analytic/exact theorem owner. The master verifier
+  invokes seven direct and three nested exact dependencies, reproduces the
+  `1,2,5,4,5` kernel partition, rejects eight dependency omissions, and has
+  manifest digest
+  `38b93ad68fe94e678de68547f916e4e4c0b58845377050df455ad860f4e16202`.
+  Successive hostile audits repaired missing two-diamond durability, incomplete
+  `2+1+1` territory credit, malformed theta monotonicity, incomplete verifier
+  commands, and a rank `3+1` canonical/noncanonical exhaustion ambiguity.
+  Final paper-only and independent referees both returned ACCEPT. Paper:
+  `all-tetracyclic-graphs/paper.pdf`. No global strictness is claimed.
 - 2026-07-31: completed the remaining cubic rank-four kernels 13--15 and 17.
   Exact physical census: 1400 rows, 376 automorphism orbits. The exact
   three-color sieve closes 359 and leaves 17. For K13--15, a frozen

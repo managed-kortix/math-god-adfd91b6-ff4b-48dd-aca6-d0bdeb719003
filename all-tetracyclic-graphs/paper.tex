@@ -1,0 +1,923 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+\usepackage{booktabs,array,longtable,pdflscape}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\splus}{s^+}
+\newcommand{\sminus}{s^-}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\kap}{\kappa}
+\newcommand{\sig}{\sigma}
+
+\title{Positive Square Energy of Every Tetracyclic Graph}
+\author{AI-generated manuscript; no human author is claimed}
+\date{31 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $G$ be a finite simple connected graph with $n$ vertices and $n+3$
+edges.  We prove that the sum $\splus(G)$ of the squares of its positive
+adjacency eigenvalues is at least $n$.  The positive cyclomatic ranks of the
+cyclic blocks partition four as $1+1+1+1$, $2+1+1$, $2+2$, $3+1$, or $4$.
+The first four alternatives are closed by a sharp block-additive doubly
+nonnegative bound and explicit induced-territory packets for its residuals.
+In the last alternative, suppression of degree-two paths gives exactly
+seventeen loopless $2$-connected multigraph kernels.  We include the DNN
+correlation dual, exact path elimination, the kernel classification, and
+complete count ledgers for the exact finite certificates covering all
+seventeen kernels.  Parity monotonicity turns each finite frontier into an
+all-length proof, and one-vertex additivity includes arbitrary rooted trees.
+Some subsidiary estimates are strict, but boundary certificates occur, so no
+strict global assertion is made.
+\end{abstract}
+
+\section{Statement and spectral reductions}
+
+All graphs are finite, simple, and undirected.  Let
+$\lambda_1,\ldots,\lambda_n$ be the adjacency eigenvalues and put
+\[
+ \splus(G)=\sum_{\lambda_i>0}\lambda_i^2,
+ \qquad \sminus(G)=\sum_{\lambda_i<0}\lambda_i^2,
+ \qquad D(G)=\splus(G)-\sminus(G).
+\]
+Since $\operatorname{tr}A(G)^2=2|E(G)|$, a tetracyclic graph satisfies
+\begin{equation}\label{eq:trace}
+ \splus(G)+\sminus(G)=2n+6,
+ \qquad \splus(G)=n+3+\frac12D(G).
+\end{equation}
+
+\begin{theorem}\label{thm:main}
+Every finite simple connected graph $G$ with $|V(G)|=n$ and
+$|E(G)|=n+3$ satisfies
+\[
+ \boxed{\splus(G)\geq n}.
+\]
+\end{theorem}
+
+We use square-energy credit $\sig(H)=\splus(H)-|V(H)|$.  The following
+standard pinching inequality permits structural repairs.
+
+\begin{lemma}[Induced superadditivity]\label{lem:super}
+If $V(G)=V_1\mathbin{\dot\cup}\cdots\mathbin{\dot\cup}V_r$, then
+\[
+ \splus(G)\geq\sum_{j=1}^r\splus(G[V_j]),
+ \qquad
+ \sig(G)\geq\sum_{j=1}^r\sig(G[V_j]).
+\]
+\end{lemma}
+
+\begin{proof}
+For a real symmetric matrix $A$,
+\[
+ \operatorname{tr}(A_+^2)=
+ \max_{X\succeq0}\bigl(2\operatorname{tr}(AX)-\operatorname{tr}(X^2)\bigr).
+\]
+Insert the block diagonal matrix whose blocks are the positive parts of the
+principal matrices $A[V_j]$.  Cross edges make no contribution to the trace.
+\end{proof}
+
+A nonempty connected tree $T$ is bipartite, so
+$\splus(T)=|E(T)|=|V(T)|-1$ and $\sig(T)=-1$.  We shall use the following
+attachment-uniform credits, all proved in the cited lower-rank manuscripts.
+
+\begin{lemma}[Lower-rank packets]\label{lem:packets}
+Arbitrary rooted trees may be attached at arbitrary vertices in every item.
+\begin{enumerate}
+\item Every connected bicyclic graph has positive credit; a bipartite one has
+credit exactly one.  A two-triangle cactus and $\Theta(1,2,2)$ have credit
+strictly greater than one.
+\item Every connected tricyclic graph has nonnegative credit.
+\item A triangular unicyclic cactus has positive credit.  A pentagonal
+unicyclic cactus has credit at least $2-\sqrt5$.
+\item A triangle--pentagon bicyclic cactus has credit greater than
+$3-\sqrt5$, and a three-cycle packet $C_3,C_3,C_5$ whose triangles share a
+cut has credit greater than $4-\sqrt5$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The bicyclic and tricyclic statements are the complete lower-rank theorems
+\cite{BicyclicGraphs,TricyclicGraphs}.  The sharper cactus credits follow from
+the signed Coulson formula after rooted-tree matching-message elimination
+\cite{TetracyclicCactus}.  They are quoted with exactly the margins used
+below; no edge-addition monotonicity is involved.
+\end{proof}
+
+\section{The DNN dual and exact paths}
+
+For an edge-containing graph $H$, define
+\begin{equation}\label{eq:kappa-primal}
+ \kap(H)=\sup_{\substack{M\succeq0,\ M\geq0\\\one^TM\one>0}}
+ \frac{4\bigl(\sum_{uv\in E(H)}\sqrt{M_{uv}}\bigr)^2}
+ {\one^TM\one}.
+\end{equation}
+
+\begin{lemma}[DNN inequality and correlation dual]\label{lem:dnn}
+For every graph $H$,
+\begin{equation}\label{eq:dnn-dual}
+ \sminus(H)\leq\kap(H),
+ \qquad
+ \kap(H)=\min_{\substack{R\succeq0\\R_{vv}=1}}
+ \sum_{uv\in E(H)}\frac{2}{1-R_{uv}},
+\end{equation}
+with boundary values interpreted by limits.  If $H=H_1\vee H_2$ is a
+one-vertex sum, then
+\[
+ \kap(H)=\kap(H_1)+\kap(H_2).
+\]
+In particular, $\kap(T)=|E(T)|$ for every tree.
+\end{lemma}
+
+\begin{proof}
+Write $A=P-B$ for the positive and negative spectral parts.  The Schur product
+theorem makes $M=B\circ B$ positive semidefinite and entrywise nonnegative.
+Moreover
+\[
+ \one^TM\one=\operatorname{tr}B^2=\sminus(H),
+ \qquad
+ \frac{\sminus(H)}2=-\sum_{uv\in E(H)}B_{uv}
+ \leq\sum_{uv\in E(H)}\sqrt{M_{uv}}.
+\]
+Substitution in \eqref{eq:kappa-primal} proves $\sminus\leq\kap$.
+
+For weak duality, if $R$ is a correlation matrix, then
+\[
+ \one^TM\one-
+ \sum_{uv\in E(H)}2(1-R_{uv})M_{uv}
+ =\langle R,M\rangle+
+ 2\sum_{\substack{u<v\\uv\notin E(H)}}(1-R_{uv})M_{uv}\geq0.
+\]
+Weighted Cauchy--Schwarz gives the upper bound in \eqref{eq:dnn-dual}.
+For the reverse bound normalize $\langle J,M\rangle=1$, use
+\[
+ (\sum_e\sqrt{x_e})^2
+ =\min_{a_e>0,\ \sum a_e=1}\sum_e\frac{x_e}{a_e},
+\]
+and apply conic minimax with
+$(\mathcal S_+\cap\mathcal N)^*=\mathcal S_++\mathcal N$; an
+$\varepsilon$ truncation treats boundary points.
+
+For a one-vertex sum, restriction of a feasible correlation matrix gives one
+inequality.  Conversely, realize the two correlation matrices by unit Gram
+vectors with their common cut vector equal and place their orthogonal
+components in orthogonal subspaces.  This glues feasible matrices and proves
+the opposite inequality.  Iterating $\kap(K_2)=1$ proves the tree formula.
+\end{proof}
+
+\begin{lemma}[Exact path elimination]\label{lem:path}
+Replace a kernel edge $uv$ by a path of length $\ell$.  For fixed endpoint
+correlation $r=R_{uv}$, the exact excess of its contribution over $\ell$ is
+\begin{equation}\label{eq:path-cost}
+ f_\ell(r)=\ell\tan^2\!\left(
+ \frac{\arccos((-1)^\ell r)}{2\ell}\right).
+\end{equation}
+For fixed $r$ and fixed parity, $f_{\ell+2}(r)\leq f_\ell(r)$, strictly unless
+the transformed endpoint angle is zero.  If a subdivided kernel has total path
+length $L$, then
+\begin{equation}\label{eq:kernel-min}
+ \kap(H)-L=\min_R\sum_{P}f_{|P|}(R_{u_Pv_P}),
+\end{equation}
+where $R$ ranges over correlation matrices on the branch vertices.
+\end{lemma}
+
+\begin{proof}
+Represent $R$ by unit vectors and alternately negate the vectors along the
+path.  The transformed endpoint angle is
+$\beta=\arccos((-1)^\ell r)$.  The spherical triangle inequality makes the
+sum of successive angles at least $\beta$, and convexity of
+$\sec^2(x/2)$ makes equal angles optimal.  Equally spaced planar vectors on a
+shortest arc attain equality, yielding
+$\ell\sec^2(\beta/(2\ell))=\ell+f_\ell(r)$.  The constructions for distinct
+paths share only their fixed endpoint vectors and are therefore compatible.
+Finally, for $h_s(x)=s\tan^2(x/s)$,
+\[
+ \frac{d}{ds}h_s(x)=
+ \tan z\sec^2z\bigl(\sin z\cos z-2z\bigr)<0,
+ \qquad z=x/s,
+\]
+because $0<\sin z\cos z<z<2z$.  This proves fixed-parity monotonicity.
+\end{proof}
+
+If a connected rank-$r$ core has $L$ edges, it has $L-r+1$ vertices.
+Consequently, for rank four,
+\begin{equation}\label{eq:budget}
+ \kap(H)\leq L+3
+ \quad\Longrightarrow\quad
+ \splus(H)\geq2L-(L+3)=L-3=|V(H)|.
+\end{equation}
+Tree attachments preserve this calculation, since each new tree edge adds one
+to $L$, $|V|$, and $\kap$.
+
+\section{Block partitions and all multiblock residuals}
+
+A block is a maximal connected subgraph without a cut vertex; bridges count
+as two-vertex blocks.  Cyclomatic rank is additive over blocks.  Suppression
+and all degree statements below are internal to the relevant block.
+
+\begin{proposition}[Block alternatives]\label{prop:block-alternatives}
+The positive ranks of the cyclic blocks of a connected tetracyclic graph are
+exactly
+\[
+ 1+1+1+1,\qquad2+1+1,\qquad2+2,\qquad3+1,\qquad4.
+\]
+Rank-one blocks are cycles, and rank-two blocks are subdivisions of three
+parallel kernel edges, i.e. theta graphs.
+\end{proposition}
+
+\begin{proof}
+The positive block ranks are positive integers summing to four.  A rank-one
+$2$-connected block is a cycle.  After suppressing degree-two vertices of a
+rank-two block, the identity $\sum_v(d(v)-2)=2$ and $2$-connectivity force two
+degree-three vertices joined by three parallel edges.  Suppression creates no
+loop: a suppressed loop would be a cycle attached to the rest at one branch
+vertex, making that vertex a cut.
+\end{proof}
+
+For a theta with path lengths $a,b,c$, define its exact DNN excess
+\begin{equation}\label{eq:theta-excess}
+ \Delta(a,b,c)=\min_{0\leq\theta\leq\pi}
+ \left(
+ \sum_{\ell\ \mathrm{even}}\ell\tan^2\frac{\theta}{2\ell}
+ +\sum_{\ell\ \mathrm{odd}}\ell\tan^2\frac{\pi-\theta}{2\ell}
+ \right).
+\end{equation}
+For a cycle let $\epsilon_q=0$ for even $q$ and
+$\epsilon_q=q\tan^2(\pi/(2q))$ for odd $q$.  Lemma~\ref{lem:path} gives
+$\kap(\Theta)=|E(\Theta)|+\Delta$ and
+$\kap(C_q)=q+\epsilon_q$.
+
+The elementary tangent classification needed here is
+\begin{equation}\label{eq:theta-class}
+ \Delta(a,b,c)>1
+ \Longleftrightarrow (a,b,c)=(1,2,r)\ (r\geq2),
+ \qquad
+ \max\Delta=\Delta(1,2,2)=\frac{\sqrt{17}-1}{2},
+\end{equation}
+and, away from $(1,2,2)$ in the exceptional family,
+$\Delta(1,2,r)<4/3$.  Also
+\begin{equation}\label{eq:cycle-values}
+ \epsilon_3=1,
+ \qquad \epsilon_5=5-2\sqrt5<\frac23,
+ \qquad \epsilon_q<\frac25\quad(q\geq7\text{ odd}).
+\end{equation}
+Here is the full classification argument.  Put $x=\theta/2$ and
+$h_s(y)=s\tan^2(y/s)$.  For fixed $0<y<\pi/2$,
+\begin{equation}\label{eq:h-monotone}
+ \frac{d}{ds}h_s(y)=
+ \frac{\tan(y/s)}{\cos^2(y/s)}
+ \left(\sin(y/s)\cos(y/s)-\frac{2y}{s}\right)<0.
+\end{equation}
+Thus an upper-bound test may replace an even path by length two and a nonunit
+odd path by length three.  Simplicity permits at most one unit path.
+
+Suppose first that there is no unit path, and let $e$ be the number of even
+paths.  It is enough to test
+\[
+ F_e(x)=2e\tan^2(x/2)+3(3-e)
+              \tan^2((\pi/2-x)/3).
+\]
+For $e=0,3$, use respectively $x=\pi/2,0$.  For the mixed cases use
+\[
+ F_1(\pi/4)<1,
+ \qquad F_2(\pi/6)<1.
+\]
+The identities $\tan(\pi/8)=\sqrt2-1$ and
+$\tan(\pi/12)=2-\sqrt3$, together with
+$\tan(\pi/9)<\tan(\pi/8)$, bound the two values by
+$48-4\sqrt2-24\sqrt3$ and $37-6\sqrt2-16\sqrt3$; successive squaring of
+positive sides proves both are below one.  Hence $\Delta<1$ in this case.
+
+Now suppose one path has length one.  Its contribution is $\cot^2x$.  If the
+other paths are both odd, $x=\pi/2$ gives zero.  If exactly one is even and
+that even length is at least four, $x=\pi/3$ gives
+\[
+ \Delta\leq\frac13+4\tan^2\frac\pi{12}
+                    +3\tan^2\frac\pi{18}<1;
+\]
+if both are even and at least four, the same test gives
+\[
+ \Delta\leq\frac13+8\tan^2\frac\pi{12}<1.
+\]
+Indeed $\tan(\pi/18)<\tan(\pi/12)<1/3$, and both comparisons reduce to
+$48\sqrt3>83$, equivalently $6912>6889$ after squaring.  Therefore the only
+remaining sorted triples are $(1,2,r)$, $r\geq2$.  With
+$u=\tan(x/2)$, the first two terms obey
+\[
+ \cot^2x+2\tan^2(x/2)
+ =\frac1{4u^2}-\frac12+\frac94u^2\geq1.
+\]
+The third term is positive in the interior; at either endpoint where it can
+vanish, the displayed expression diverges or equals two.  Compactness makes
+the minimum strictly greater than one.  This proves the equivalence in
+\eqref{eq:theta-class}.
+
+For $r=2$ the complete objective is
+\[
+ \frac1{4u^2}-\frac12+\frac{17}{4}u^2,
+\]
+whose minimum, at $u^2=1/\sqrt{17}$, is
+$(\sqrt{17}-1)/2$.  For even $r\geq4$, \eqref{eq:h-monotone} makes the
+objective pointwise smaller.  For odd $r\geq3$, testing $x=\pi/3$ and using
+$\tan(\pi/18)<1/3$ gives $\Delta<4/3$; for even $r\geq4$ the same test gives
+$1+4(2-\sqrt3)^2<4/3$.  Thus $(1,2,2)$ is the global maximum and every other
+exceptional row has the asserted strict $4/3$ bound.  Finally,
+$\epsilon_q=h_q(\pi/2)$ decreases through odd $q$ by
+\eqref{eq:h-monotone}; direct evaluation gives $\epsilon_3=1$ and
+$\epsilon_5=5-2\sqrt5$, while
+$\sin t<t$, $\cos t>1-t^2/2$, and $\pi<22/7$ at $t=\pi/14$ give
+$\epsilon_7<2/5$.  This proves \eqref{eq:cycle-values} and reproduces the
+complete theta--cycle classification from the tricyclic proof
+\cite{TricyclicGraphs}.
+
+\begin{proposition}[Multiblock closure]\label{prop:multiblock}
+Every tetracyclic graph having at least two positive-rank cyclic blocks
+satisfies $\splus(G)\geq|V(G)|$.
+\end{proposition}
+
+\begin{proof}
+We give the complete residual ledger.  In each direct row, block additivity of
+$\kap$, together with \eqref{eq:budget}, proves the claim.  The last column
+names the only rows not direct and the packet that closes them.
+\begin{center}
+\begin{tabular}{p{1.7cm}p{4.5cm}p{6.4cm}}
+\toprule
+block ranks&direct DNN criterion&exact residual packet\\
+\midrule
+$1^4$&$\sum_i\epsilon_{q_i}\leq3$&
+$\{3,3,3,q\}$ with odd $q$, and $\{3,3,5,5\}$; the complete cactus
+territory theorem closes both families\\
+$2+1+1$&$\Delta+\epsilon_p+\epsilon_q\leq3$&
+$\Theta(1,2,r)+C_3+C_3$ and
+$\Theta(1,2,2)+C_3+C_5$\\
+$2+2$&$\Delta_1+\Delta_2\leq3$&
+two copies of $\Theta(1,2,2)$\\
+$3+1$&$e_B+\epsilon_q\leq3$ for each rank-three certificate&
+the canonical doubled-triangle and doubled-$C_4$ class $111$ rows, and the
+all-odd $K_4$ rows with at most one long path\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+For $1^4$, the exact cycle calculation leaves precisely the two displayed
+families: $\epsilon_3=1$, and among two nontriangular odd cycles only the pair
+$5,5$ has excess sum greater than one.  Maximum-packing territories,
+shared-cut incidence trees, and the exact twenty-type $C_3,C_3,C_5,C_5$
+ledger close them, including arbitrary connectors and rooted branches
+\cite{TetracyclicCactus}.
+
+For $2+1+1$, equations \eqref{eq:theta-class}--\eqref{eq:cycle-values} leave
+exactly the two rows shown.  In $\Theta(1,2,r)+C_3+C_3$, write the theta paths
+as the edge $xy$, the length-two path $xay$, and the $x$--$y$ path $P$ of
+length $r$.  Open an internal vertex $v$ of $P$.  Its territory $R$ consists
+of $v$, every off-theta component whose block-cut route first meets the theta
+at $v$, and every rooted branch based there.  The complementary induced
+territory $H$ is connected through the other two theta arms and contains the
+intrinsic triangle $xayx$; the remnants of $P-v$ are trees in $H$.  Every cut
+vertex belongs to exactly one side, and every component at that cut follows
+its unique block-cut-tree route.
+
+Let $k$ be the number of external triangles owned by $R$.  For $k=1$, $R$ is
+a triangular packet of credit $>0$ and $H$ is a two-triangle packet of credit
+$>1$; for $k=2$ these credits are reversed.  Let $k=0$.  Then $R$ is one
+nonempty tree of credit $-1$.  If the three triangles retained in $H$ have
+packing number at most two---in particular, if the external triangles share a
+cut---their normalized Sachs polynomial has strictly negative imaginary part:
+singleton triangle terms are negative imaginary and, since no three cycles
+are vertex-disjoint, all other cycle-collection terms are real.  Hence
+$D(H)>0$, and because $H$ is tricyclic its credit is $2+D(H)/2>2$, which pays
+$R$.  If their packing number is three, the triangles are pairwise
+vertex-disjoint.  The reduced block tree joining them contains an actual
+bridge; cut one such bridge so that the two retained induced cyclic territories
+contain two triangles and one triangle.  Give the whole connector component at
+the cut to one endpoint territory.  Their credits are $>1$ and $>0$, so
+together with $R$ the total is strictly greater than $1+0-1=0$.  This exhausts
+$k=0,1,2$ and specifies ownership of every connector, cut, and rooted branch.
+
+For $\Theta(1,2,2)+C_3+C_5$, the shared-cut incidence tree
+has either separate clusters or one central block.  Separating bridges use
+the credits $>1$, $>0$, and $\geq2-\sqrt5$.  In one cluster, opening the
+theta internal vertex away from its triangle cut leaves either a two-triangle
+packet against a pentagonal packet, or a shared-triangle
+$C_3,C_3,C_5$ packet against one tree.  Their credits are respectively
+$>1+(2-\sqrt5)>0$ and $>(4-\sqrt5)-1>0$.  If the external triangle or
+pentagon is the central block, split that cycle at one cut; the remaining path
+belongs to the packet at the other cut.  These are all central-node choices
+and assign every cut and branch once \cite{ThetaTwoCycles}.
+
+For $2+2$, \eqref{eq:theta-class} shows that only two diamonds
+$\Theta(1,2,2)$ can exceed the budget.  If an actual bridge separates them,
+cut it and assign the complete connector to either endpoint territory; the two
+attached-diamond credits are each $>1$.  Suppose instead that they share a cut
+$w$, and keep $w$, the first diamond, and all branches assigned to that side
+in a territory $H$.  If $w$ has degree three in the second diamond, its other
+three vertices induce a path, which with their rooted branches is one nonempty
+tree $T$.  If $w$ has degree two there, choose a degree-three neighbor $p$ and
+transfer $p$, the edge $wp$, and every branch rooted at $p$ to $H$.  This adds
+only a rooted tree at $w$, so $H$ is still an attached-diamond packet; the two
+vertices left from the second diamond induce an edge and, with their branches,
+form one nonempty tree $T$.  In both cut orbits the territories are disjoint,
+connected, and induced, every cut and branch is owned exactly once, and
+$\sig(H)+\sig(T)>1-1=0$.  This is the complete two-diamond argument
+\cite{TwoDiamonds}.
+
+For $3+1$, use the complete rank-three ledgers from the tricyclic proof
+\cite{TricyclicGraphs}.  The following table makes the canonical/noncanonical
+split exhaustive.  Here $j$ is the number of long paths in the all-odd
+$K_4$ class; ``canonical pair'' means lengths $\{1,2\}$ in each doubled
+pair.  Every number in the fourth column is an exact rational upper bound,
+not a decimal optimization.
+\begin{center}
+\small
+\begin{tabular}{p{2.4cm}p{3.3cm}p{3.0cm}p{3.2cm}}
+\toprule
+rank-three family&physical state&number/disposition&actual excess certificate\\
+\midrule
+four-path theta&all simple rows&all DNN&$e_B\leq2$; equality only at $(1,2,2,2)$\\
+doubled triangle&outside class $111$&$28$ labelled rows, DNN&$e_B\leq2$ from the physical Gram ledger\\
+doubled triangle, class $111$&a parallel path noncanonical&four relabelled choices, DNN&even-long $e_B<229/120<2$; odd-long $e_B<31/20<2$\\
+doubled triangle, class $111$&both doubled pairs canonical&four labelled rows, structural&hostile-cycle certificate $e_B<221/100$\\
+doubled $C_4$&outside class $111$&$28$ labelled rows, DNN&$e_B\leq2$ from the physical Gram ledger\\
+doubled $C_4$, class $111$&a doubled path noncanonical&either pair and either parity, DNN&even-long $e_B<1862/1000<2$; odd-long $e_B<1662/1000<2$\\
+doubled $C_4$, class $111$&both doubled pairs canonical&eight labelled rows, structural&hostile-cycle certificate $e_B<9/4$\\
+$K_4$, non-all-odd&all physical rows&$56$ labelled rows, DNN&$e_B\leq5/3<2$\\
+$K_4$, all odd&$j\geq3$&all subsets, DNN&simplex: $e_B<3-j/3\leq2$\\
+$K_4$, all odd&$j=2$, opposite&three placements, DNN&$e_B\leq24-16\sqrt2<2$\\
+$K_4$, all odd&$j=2$, adjacent&twelve placements, DNN&$e_B<71/40<2$\\
+$K_4$, all odd&$j=1$&six placements, structural&hostile-cycle certificate $e_B<12/5$\\
+$K_4$, all odd&$j=0$&the unsubdivided $K_4$, structural&attached-$K_4$ Sachs packet\\
+\bottomrule
+\end{tabular}
+\end{center}
+The two doubled-triangle bounds come from the planar angle records
+$(12;16,7)$ and $(6;2,8)$ at physical lengths $(4,1,2,1,1)$ and
+$(2,3,2,1,1)$.  The doubled-$C_4$ bounds come from
+$Q(0,3,2,5)$ and $Q(0,1,1,4)$ at $(4,1,2,2,1,1)$ and
+$(2,3,2,2,1,1)$.  Reflection and interchange within a doubled pair cover
+every labelled placement, and fixed-parity monotonicity covers every further
+length increase.  For all-odd $K_4$, the two-long paths are either adjacent or
+opposite, and the $j\geq3$ simplex estimate covers every remaining subset.
+Thus the $j=0,1$ rows, and only those all-odd rows, require structural
+ownership.  This also verifies directly that an external triangle closes by
+DNN every newly listed noncanonical state: each of
+\[
+ \frac{229}{120},\quad\frac{31}{20},\quad\frac{1862}{1000},
+ \quad\frac{1662}{1000},\quad\frac{71}{40},\quad
+ 24-16\sqrt2
+\]
+is strictly below two, and $\epsilon_3=1$.
+
+For a hostile cycle $Q=C_q$, where $q\equiv1\pmod4$ and $q\geq5$,
+\[
+ \epsilon_q\leq5-2\sqrt5<\frac35.
+\]
+All DNN rows in the table have $e_B\leq2$, so $e_B+\epsilon_q<3$.
+For the three non-$K_4$ structural types and the one-long all-odd $K_4$ type,
+the displayed bounds give respectively
+$221/100+3/5<3$, $9/4+3/5<3$, and $12/5+3/5=3$ with strictness in both
+constituent estimates.  The attached $K_4$ packet has credit $>2$; an actual
+bridge separating it from $Q$ is cut and its whole connector is assigned to
+one endpoint territory, giving total credit
+$>2-(\sec(\pi/q)-1)>0$.  At a shared cut $z$, the $K_4$ territory owns $z$
+and every branch rooted on its side, while the other territory owns $Q-z$ and
+its branches; the latter is one nonempty tree, so the total is $>2-1>0$.
+
+It remains to specify ownership for the structural rows when $Q$ is a triangle
+or has length $3\pmod4$.  For a canonical doubled-triangle or doubled-$C_4$
+row, open exactly the internal path vertex used in its tricyclic repair; for a
+one-long all-odd $K_4$ row, open an internal vertex of the long path.  Give the
+opened vertex every component whose unique block-cut route first meets the
+rank-three block there.  The complementary territory contains the same
+attached two-triangle or diamond packet as in the tricyclic proof.  If the
+opened territory owns $Q$, it is a favorable unicyclic packet of credit $>0$
+and the complement has credit $>1$.  Otherwise it is one nonempty tree of
+credit $-1$, while the complement has three favorable cycles.  Packing number
+at most two gives complement credit $>2$ by the Sachs argument above; packing
+number three supplies an actual bridge separating credits $>1$ and $>0$.
+Every connector remnant stays whole on one side, every cut has one owner, and
+each rooted branch follows the territory owning its root.  For $j=0$, the
+attached-$K_4$ territory owns the complete $K_4$ and its rooted branches; a
+separating route leaves a favorable unicyclic territory, while at a shared cut
+$z$ the other territory is the tree $Q-z$.  Even cycles have zero DNN excess.
+This exhausts the table and assigns every vertex, connector, cut, and branch
+exactly once; the underlying Gram records are reproduced in
+\cite{RankThreeCycle}.  This proves every multiblock alternative.
+\end{proof}
+
+\section{Classification of the rank-four kernels}
+
+It remains to consider one positive-rank block.  Suppress every maximal path
+whose internal vertices have block degree two, retaining parallel kernel
+edges.  The original graph is simple, so at most one path in a parallel class
+can have length one.
+
+\begin{proposition}[Seventeen-kernel classification]\label{prop:kernels}
+Let $K$ be a loopless multigraph with at least two vertices, no cut vertex,
+minimum degree at least three, and cyclomatic rank four.  Then
+$2\leq|V(K)|\leq6$, and $K$ is isomorphic to exactly one of the seventeen
+multigraphs in Table~\ref{tab:kernels}.
+\end{proposition}
+
+\begin{table}[p]
+\centering\small
+\begin{tabular}{r r l l r}
+\toprule
+No.&$v$&degree multiset&upper-triangle multiplicities&simplicity cost\\
+\midrule
+1&2&$5,5$&$5$&4\\
+2&3&$5,4,3$&$1,2,3$&3\\
+3&3&$4,4,4$&$2,2,2$&3\\
+4&4&$5,3,3,3$&$0,1,2,1,2,1$&2\\
+5&4&$4,4,3,3$&$0,1,2,2,1,1$&2\\
+6&4&$4,4,3,3$&$0,1,2,2,2,0$&3\\
+7&4&$4,4,3,3$&$0,1,2,3,1,0$&3\\
+8&4&$4,4,3,3$&$1,1,1,1,1,2$&1\\
+9&5&$4,3,3,3,3$&$0,0,1,2,1,0,2,2,0,0$&3\\
+10&5&$4,3,3,3,3$&$0,0,1,2,1,1,1,1,1,0$&1\\
+11&5&$4,3,3,3,3$&$0,0,1,2,1,1,1,2,0,0$&2\\
+12&5&$4,3,3,3,3$&$0,1,1,1,1,1,1,0,1,1$&0\\
+13&6&$3,3,3,3,3,3$&$0,0,0,1,2,0,1,1,1,2,1,0,0,0,0$&2\\
+14&6&$3,3,3,3,3,3$&$0,0,0,1,2,0,1,2,0,2,0,1,0,0,0$&3\\
+15&6&$3,3,3,3,3,3$&$0,0,0,1,2,1,1,0,1,1,1,0,1,0,0$&1\\
+16&6&$3,3,3,3,3,3$&$0,0,1,1,1,0,1,1,1,1,1,1,0,0,0$&0\\
+17&6&$3,3,3,3,3,3$&$0,0,1,1,1,1,0,1,1,1,0,1,1,0,0$&0\\
+\bottomrule
+\end{tabular}
+\caption{Canonical kernel list.  Multiplicities use lexicographic
+upper-triangle order; the final column is
+$\sum_{u<v}\max(m_{uv}-1,0)$.}\label{tab:kernels}
+\end{table}
+
+\begin{proof}
+Let $v=|V(K)|$ and $e=|E(K)|$.  Since $e=v+3$,
+\begin{equation}\label{eq:degree-excess}
+ \sum_x(d(x)-2)=2e-2v=6.
+\end{equation}
+Every summand is positive, so $2\leq v\leq6$.  The positive integers
+$d(x)-2$ partition six.  For each resulting degree multiset introduce a
+nonnegative integer $a_{ij}$ for every pair $i<j$ and solve
+\[
+ \sum_{j\ne i}a_{\min(i,j),\max(i,j)}=d_i.
+\]
+Reject a solution if its positive support disconnects after deletion of some
+vertex, and quotient by permutations preserving the degree multiset.  The
+possible degree rows and surviving orbit counts are
+\[
+\begin{array}{c|c|c}
+v&\text{degree multisets}&\text{orbits}\\ \hline
+2&(5,5)&1\\
+3&(5,4,3),(4,4,4)&1+1\\
+4&(5,3,3,3),(4,4,3,3)&1+4\\
+5&(4,3,3,3,3)&4\\
+6&(3,3,3,3,3,3)&5.
+\end{array}
+\]
+Solving these incidence equations gives exactly the vectors in
+Table~\ref{tab:kernels}.  Their lexicographically least vectors over all
+labellings are distinct, proving nonisomorphism.  Suppression cannot create a
+loop for the same cut-vertex reason used in Proposition~\ref{prop:block-alternatives}.
+The independently regenerated list has canonical checksum
+\begin{center}\ttfamily\small
+d89e6e60c66e480ba89e662ab90b5ace211cbcff7292f92ad1614bb0937eb8e9.
+\end{center}
+\end{proof}
+
+\section{Exact certificate ledgers for all seventeen kernels}
+
+A physical row records, in each kernel bundle, the number of odd paths.  It is
+not a switching class.  A certificate consists of an explicit correlation
+Gram matrix on branch vertices and, where needed, exact rational planar
+vectors on path interiors.  Its cost is the sum in \eqref{eq:kernel-min}.
+Every accepted cost is at most the tetracyclic budget three.  A canonical row
+uses length two for an even path and length one for an odd path, except that
+parallel odd paths use lengths one and three to preserve simplicity.  A
+one-coordinate frontier adds two to one physical path.  By
+Lemma~\ref{lem:path}, the canonical certificate covers a row unchanged in all
+coordinates, while any noncanonical descendant is covered by a frontier in
+one changed coordinate and monotonicity in every other coordinate.
+
+\begin{proposition}[Kernel certificate theorem]\label{prop:kernel-cert}
+Every simple subdivision $H$ of every kernel in Table~\ref{tab:kernels}
+satisfies
+\[
+ \kap(H)\leq|E(H)|+3
+\]
+or has an induced structural packet proving directly that
+$\splus(H)\geq|V(H)|$.  The same conclusion holds after arbitrary rooted trees
+are attached at arbitrary vertices.
+\end{proposition}
+
+\begin{proof}
+We summarize the exact ledgers by branch-vertex count.  Each cited proof note
+prints the formulas or defines the digest-locked fixture and a fail-closed
+exact verifier.
+
+\paragraph{Two branch vertices: kernel 1.}
+The block is five internally disjoint terminal paths.  Its excess is the
+five-term version of \eqref{eq:theta-excess}.  Fixed-parity monotonicity reduces
+nonunit lengths to two or three.  If no path is unit, endpoint tests cover
+four parity counts; in the remaining count the objective has negative
+derivative at the endpoint value three.  If one path is unit, four parity
+counts are handled by $\theta=\pi$ or $2\pi/3$.  In the last count, with
+$u=\tan(\theta/4)$, the upper bound is
+\[
+ \frac1{4u^2}-\frac12+\frac{33}{4}u^2,
+ \qquad \min=\frac{\sqrt{33}-1}{2}<3.
+\]
+Thus the excess is strictly below three for every simple five-path block
+\cite{FivePath}.
+
+\paragraph{Three branch vertices: kernels 2--3.}
+Their bundle multiplicities are $(1,2,3)$ and $(2,2,2)$.  If $q$ of the six
+paths are odd and $q\geq3$, the equicorrelation matrix with off-diagonal
+$-1/2$ gives cost
+\[
+ \frac q3+\frac{2(6-q)}3=4-\frac q3\leq3.
+\]
+For $q\leq2$, the complete rational ledgers have respectively nine labelled
+bundle-count rows and four rows up to bundle permutation.  All thirteen costs
+are strict; their maxima are $21/8$ and $17/8$.  Every $3\times3$ Gram
+determinant is listed as a nonnegative rational number \cite{ThreeVertex}.
+
+\paragraph{Four branch vertices: kernels 4--8.}
+The physical row counts are
+\[
+ 72,\ 72,\ 54,\ 48,\ 96,
+ \qquad\text{total }342.
+\]
+The exact disjoint ledger is
+\begin{equation}\label{eq:four-ledger}
+ 342=270\ \text{base}+70\ \text{rational patch}
+       +2\ \text{independently discharged}.
+\end{equation}
+The last two rows are kernel 8 with all five singleton bundles odd and the
+doubled bundle containing one or two odd paths.  An exhaustive
+$2\cdot2^6=128$ long/unit state census has 56 stabilizer orbits.  There are
+114 states with at least two long support paths, twelve one-long states in six
+planar Gram classes, and two no-long structural states.  A regular-simplex
+matrix proves the first group strictly below three; exact planar angles with
+denominators $3,5,7$ prove the second; in the last group, deleting the extra
+path leaves an attached all-odd $K_4$ packet against one tree.  The verifier
+proves all trigonometric comparisons with rational intervals and rejects eight
+hostile mutations.  The canonical payload digest is
+\begin{center}\ttfamily\small
+f381b2b28bd3f45d7c96d90bce824a308bc340c9d6ebd098e5da116b89648d5a.
+\end{center}
+See \cite{FourVertex}.
+
+\paragraph{Five branch vertices: kernels 9--12.}
+The physical and genuine automorphism-orbit ledgers are
+\[
+\begin{array}{c|rrrr|r}
+\text{kernel}&9&10&11&12&\text{total}\\ \hline
+\text{physical rows}&108&192&144&256&700\\
+\text{orbits}&63&120&144&51&378.
+\end{array}
+\]
+An exact equilateral three-color sieve, checking all $3^5=243$ labelled
+colorings per orbit, gives
+\begin{equation}\label{eq:five-ledger}
+ 378=370\ \text{direct}+8\ \text{residual}.
+\end{equation}
+The physical odd--odd doubled-bundle cost uses lengths $(1,3)$ and the
+algebraic number $a=3\tan^2(\pi/18)$, isolated as the unique root in
+$(93/1000,94/1000)$ of
+$a^3-27a^2+99a-9$.  Thus no floating comparison occurs.
+
+The eight residual orbits split as $4,2,2,0$ across kernels 9--12.  Seven
+non-symbolic rows use sixty exact rational records: canonical and
+one-coordinate $+2$ frontiers for six eight-path rows, plus six doubled-path
+frontiers for one kernel-9 row.  The remaining kernel-9 equality row uses five
+planar vectors over $\mathbb Q(\sqrt3)$: two odd singleton paths have
+correlation $-1$ and cost zero, while each of three mixed doubled bundles has
+correlation $-1/2$ and cost $1/3+2/3=1$.  Its total is exactly three.
+The closure verifier recomputes every rational internal-vector ledger and the
+symbolic Gram identities and rejects ten hostile mutations
+\cite{FiveSieve,FiveClosure}.
+
+\paragraph{Six branch vertices: kernels 13--17.}
+Kernel 16 is $K_{3,3}$.  Its $2^9=512$ physical parity rows have exact
+three-color score histogram
+\[
+\begin{array}{c|rrrrrrrr}
+S&0&3&4&5&6&7&8&9\\ \hline
+\#&1&6&27&63&147&168&81&19.
+\end{array}
+\]
+If $q$ odd paths and $b$ even paths are bichromatic, the excess is
+$(q+2b)/3=S/3\leq3$.  The verifier checks all $3^6=729$ colorings for every
+row and all 26 genuine automorphism orbits \cite{KernelSixteen}.
+
+For kernels 13, 14, 15, and 17, the labelled physical-row counts are
+$288,216,384,512$, the automorphism-group orders are $4,6,4,12$, and the
+genuine orbit counts are $102,56,144,74$.  Thus there are $1400$ labelled
+rows and 376 genuine orbits.  The exact partition is
+\begin{equation}\label{eq:six-sieve}
+ 376=359\ \text{three-color certified}+17\ \text{residual},
+ \qquad (5,6,5,1)\text{ residual by kernel}.
+\end{equation}
+For the sixteen residual orbits of kernels 13--15, canonical and nine
+one-coordinate frontiers give
+\begin{equation}\label{eq:six-frontier}
+ 160=148\ \text{strict rational certificates}
+        +12\ \text{symbolic kernel-14 targets}.
+\end{equation}
+The twelve targets are the canonical row and coordinates $0,3,8$ for each of
+three kernel-14 rows.  Their three Gram determinants are $1/2,0,1/2$; every
+$2\times2$ principal minor is $3/4$, each mixed doubled bundle costs one, and
+each canonical total is exactly three.
+
+Kernel 17 has 512 labelled parity rows and 74 genuine automorphism orbits.
+Seven exact planar templates over $\mathbb Q(\sqrt3)$, with all 32 branch sign
+switches per template, cover all 512 physical rows.  Their disjoint first-cover
+gains are
+\[
+ 284,\ 123,\ 56,\ 24,\ 13,\ 8,\ 4,
+\]
+which sum to 512.  In particular, they cover the residual orbit at its
+canonical vector and all nine coordinate frontiers.  The final verifier
+requires the 359-row sieve, 148-record fixture, twelve symbolic targets, and
+seven-template audit, then reconstructs all ledgers.  The residual is zero
+\cite{CubicFinal}.
+
+All direct rows now satisfy \eqref{eq:budget}.  Every structural row uses an
+induced partition whose deleted territory and all branches based there are
+owned explicitly; retained branches stay with the complementary packet.
+Fixed-parity monotonicity proves arbitrary subdivisions, and
+Lemma~\ref{lem:dnn} proves arbitrary rooted-tree attachments.  This completes
+all seventeen kernels.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Apply Proposition~\ref{prop:block-alternatives}.  If there is more than one
+positive-rank cyclic block, Proposition~\ref{prop:multiblock} applies.  If
+there is one rank-four block, suppress its degree-two paths.  Proposition
+\ref{prop:kernels} gives one of the seventeen kernels, and Proposition
+\ref{prop:kernel-cert} proves the required inequality for every subdivision
+and every attached rooted tree.  The alternatives are exhaustive, so
+$\splus(G)\geq|V(G)|$.
+\end{proof}
+
+\appendix
+\section{Verifier manifest and exact scopes}\label{app:verify}
+
+All commands below are run from the repository root.  Run every finite audit
+normally and with Python assertions disabled; the paired outputs must be
+byte-identical where the verifier says so.
+
+\begin{verbatim}
+python3 research/rank-four-kernel-census-verifier.py
+python3 -O research/rank-four-kernel-census-verifier.py
+
+python3 research/rank-four-three-vertex-tables-verifier.py
+python3 -O research/rank-four-three-vertex-tables-verifier.py
+
+python3 research/rank-four-four-vertex-theorem-verifier.py
+python3 -O research/rank-four-four-vertex-theorem-verifier.py
+
+python3 research/rank-four-five-vertex-three-color-verifier.py
+python3 -O research/rank-four-five-vertex-three-color-verifier.py
+python3 research/rank-four-five-vertex-residual-closure-verifier.py
+python3 -O research/rank-four-five-vertex-residual-closure-verifier.py
+
+python3 research/rank-four-kernel16-three-color-verifier.py
+python3 -O research/rank-four-kernel16-three-color-verifier.py
+python3 research/rank-four-cubic-kernels-final-verifier.py
+python3 -O research/rank-four-cubic-kernels-final-verifier.py
+
+python3 research/tetracyclic-master-verifier.py
+python3 -O research/tetracyclic-master-verifier.py
+\end{verbatim}
+
+The census verifier independently enumerates weak edge-multiplicity
+compositions on two through six vertices.  It finds respectively
+$1,7,54,255,550$ labelled survivors and collapses them to
+$1,2,5,4,5$ canonical classes.  It checks the exact list, degree excess,
+simplicity costs, checksum, and hostile mutations.
+
+The three-vertex verifier reconstructs all $24+27=51$ physical rows, split as
+$9+10$ low-odd rational-table rows and $15+17$ common-simplex rows, and checks
+every Gram principal minor exactly.  The four-vertex verifier reconstructs the disjoint
+$342=270+70+2$ ledger and all 128 long/unit frontier states.  The five-vertex
+pair reconstructs all 700 physical rows, 378 orbits, the
+$370+8$ sieve, the sixty rational records, and the symbolic equality row.  The
+kernel-16 verifier reconstructs all 512 rows and its score histogram.  The
+final cubic verifier invokes its dependency audits and checks
+$376=359+17$, $160=148+12$, all symbolic kernel-14 matrices, and all 512
+kernel-17 first-cover assignments.  The master verifier invokes all seven
+finite dependency verifiers, verifies their file and output digests, checks
+that kernels $1$ through $17$ have exactly one theorem owner (with the stated
+sieve/closure composition for kernels $9$--$12$), and records kernel 1 as the
+separate analytic five-path theorem.
+
+These programs are exact audits of finite combinatorial and rational or
+quadratic-algebraic proof objects.  They do not replace the mathematical proofs
+of DNN duality, path elimination, monotonicity, block classification, induced
+superadditivity, or the multiblock territory lemmas.  Conversely, the paper
+does not ask a floating-point optimizer or finite graph-order census to prove
+an all-length assertion.
+
+The detailed proof-object sources are:
+\begin{verbatim}
+positive-square-energy/tetracyclic-general/
+  five-path-dnn-theorem.md
+  three-vertex-kernels-dnn.md
+  four-vertex-kernels-dnn.md
+  five-vertex-three-color-dnn-sieve.md
+  five-vertex-residual-closure-theorem.md
+  kernel16-three-color-dnn.md
+  cubic-kernels-13-15-17-final-theorem.md
+  rank-four-kernel-classification.md
+  theta-two-cycle-residuals.md
+  two-diamond-blocks.md
+  rank3-hostile-cycle-packet.md
+\end{verbatim}
+
+Build this manuscript with
+\begin{verbatim}
+bash scripts/build-paper.sh all-tetracyclic-graphs
+\end{verbatim}
+
+\paragraph{Scoped nonclaim.}
+The theorem concerns exactly finite simple connected graphs with $m=n+3$.
+The argument does not assume that adding an edge increases $\splus$, does not
+transport physical path lengths through switching, and does not infer a
+quantitative reserve from an unquantified lower-rank theorem.  Several DNN
+certificates attain their auxiliary excess budget three.  We therefore assert
+only $\splus(G)\geq n$ globally, not strict inequality and not a classification
+of spectral equality.
+
+\section*{AI disclosure}
+This manuscript and its proof-object synthesis were generated by an AI coding
+and mathematical reasoning system from the cited repository materials.  No
+human authorship, review, or verification is claimed.  The result should be
+assessed from the displayed argument and exact local dependencies.  No
+external publication was performed as part of this work.
+
+\begin{thebibliography}{99}
+\bibitem{BicyclicGraphs}
+Companion manuscript, \emph{Positive Square Energy of Every Bicyclic Graph},
+2026; \path{all-bicyclic-graphs/paper.tex}.
+
+\bibitem{TricyclicGraphs}
+Companion manuscript, \emph{Positive Square Energy of Every Tricyclic Graph},
+2026; \path{all-tricyclic-graphs/paper.tex}.
+
+\bibitem{TetracyclicCactus}
+Companion manuscript, \emph{Positive Square Energy of Every Tetracyclic
+Cactus}, 2026; \path{all-tetracyclic-cacti/paper.tex}.
+
+\bibitem{FivePath}
+\emph{The five-path rank-four block}, proof note, 2026;
+\path{positive-square-energy/tetracyclic-general/five-path-dnn-theorem.md}.
+
+\bibitem{ThreeVertex}
+\emph{Three-vertex rank-four kernels: a uniform DNN certificate}, proof note,
+2026; \path{positive-square-energy/tetracyclic-general/three-vertex-kernels-dnn.md}.
+
+\bibitem{FourVertex}
+\emph{Four-vertex rank-four kernels: complete exact ledger}, proof note, 2026;
+\path{positive-square-energy/tetracyclic-general/four-vertex-kernels-dnn.md}.
+
+\bibitem{FiveSieve}
+\emph{Five-vertex rank-four kernels: exact coarse three-color sieve}, proof
+note, 2026;
+\path{positive-square-energy/tetracyclic-general/five-vertex-three-color-dnn-sieve.md}.
+
+\bibitem{FiveClosure}
+\emph{Five-vertex rank-four kernels: closure of the eight residual rows}, proof
+note, 2026;
+\path{positive-square-energy/tetracyclic-general/five-vertex-residual-closure-theorem.md}.
+
+\bibitem{KernelSixteen}
+\emph{Kernel 16: exact three-color certificate on all physical rows}, proof
+note, 2026;
+\path{positive-square-energy/tetracyclic-general/kernel16-three-color-dnn.md}.
+
+\bibitem{CubicFinal}
+\emph{Cubic kernels 13--15 and 17: exact final theorem}, proof note, 2026;
+\path{positive-square-energy/tetracyclic-general/cubic-kernels-13-15-17-final-theorem.md}.
+
+\bibitem{ThetaTwoCycles}
+\emph{The tetracyclic $2+1+1$ residuals}, proof note, 2026;
+\path{positive-square-energy/tetracyclic-general/theta-two-cycle-residuals.md}.
+
+\bibitem{RankThreeCycle}
+\emph{Rank-three block plus one hostile cycle: canonical residual packet},
+proof note, 2026;
+\path{positive-square-energy/tetracyclic-general/rank3-hostile-cycle-packet.md}.
+
+\bibitem{TwoDiamonds}
+\emph{Two diamond blocks}, proof note, 2026;
+\path{positive-square-energy/tetracyclic-general/two-diamond-blocks.md}.
+\end{thebibliography}
+
+\end{document}
