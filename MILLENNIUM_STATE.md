@@ -5,10 +5,23 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge volume-16 type transitions and projector-algebra audit
-- **active main funnel:** portfolio rotation after carried split-Hecke closure.
-  For arrows remaining `eta=1` relative to the transported threefold, the
-  restricted polarization degree stays 256; after passage to a fine level
+- **phase:** Hodge full-Hecke degree--denominator gate and fixed-degree Chow germ
+- **active main funnel:** portfolio rotation after direct Hecke-saturation closure.
+  For every transported Cycle 151 diagonal image, the exact identities are
+  `chi(M|Y)=16 eta` and `m^-3 f_*[Gamma]=eta^-1[Y]`, with exact denominator
+  `eta` by primitivity. If one fixed integer `D` clears any positive
+  normalization and `D Z=k[Y]`, then `deg(D Z)=16 k eta>=16 eta`. Since every
+  good inert PEL kernel has `eta>=p`, no full-Hecke family can have both bounded
+  degree and a uniform denominator. Averaging over the correspondence adds its
+  branch-count denominator and does not remove `eta`. The remaining Hodge
+  candidate must instead be a new fixed-degree relative Chow germ through an
+  effective positive/negative pair representing a fixed multiple of the
+  projected seed, with rank-nine tangent image and vanishing obstructions.
+  The obvious projector expansion has only cohomological obstruction
+  cancellation and is not such a germ.
+  Previously, for arrows remaining `eta=1` relative to the transported
+  threefold, the restricted polarization degree stays 256; after passage to a
+  fine level
   cover, the orbit lies in the proper closed image of one fixed-polynomial
   abelian-subthreefold Hilbert locus.  Borel density and the `SL_6` centralizer
   computation give generic endomorphism algebra `Q(i)`, hence generic
@@ -21,6 +34,18 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   its K-antilinear involution and descended diagonal abelian threefold.  Although
   the tensor varies under Hecke conjugacy, the carried restricted degree puts
   every iterated `eta=1` target in the common bounded Hilbert locus above.
+- 2026-07-31: Cycle 168 computed the full good-prime PEL Hecke trace of the
+  diagonal. The sheet count is `N_p=(p+1)(p^3+1)(p^5+1)` at inert primes and
+  `N_p=sum_(r=0)^6 [6 choose r]_p` at split primes, in either case asymptotic
+  to `p^9`. Since each raw pushforward has degree `16p^3`, the integral
+  effective trace has exact degree `16p^3 N_p`, asymptotic to `16p^12`.
+  Middle-weight normalization has degree `16N_p` and exact denominator `p^3`;
+  averaging has degree 16 but exact denominator `N_p p^3` on the fine disjoint
+  Hecke target. The algebraic Weil projector commutes with every PEL isogeny,
+  so the exceptional projection is the direct sum of nonzero transported seed
+  projections and becomes `N_p` times the seed under sheetwise normalized
+  cohomological identifications. Full tracing therefore gives no cancellation
+  and no bounded integral Chow complexity.
 - 2026-07-31: Cycle 165 audited restricted polarization degree under iterated
   `eta=1` transport.  The Cycle 151 diagonal restriction has type `(2,2,4)`,
   hence polarization volume `chi=16`, unnormalized top intersection `96`, and
@@ -164,6 +189,15 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
+- 2026-07-31: Cycle 168 proved the exact normalization dichotomy for the full
+  Hecke transport of the Cycle 151 seed. A fixed denominator `D` turns every
+  positive normalized branch into `k[Y]` of degree `16 k eta`; inert branches
+  have `eta>=p`, so finite-type bounded-degree transport and uniform
+  denominators cannot coexist. Raw, middle-weight, and averaged full Hecke sums
+  merely move growth between degree and denominator. This closes direct Hecke
+  saturation, while leaving one precise candidate: a fixed-degree effective
+  pair representing the projected seed on a relative Chow component with
+  rank-nine tangent image and vanishing obstructions.
 - 2026-07-31: Cycle 167 classified the four volume-16 threefold polarization
   types and computed the complete abstract prime-two transition matrix under
   maximal-isotropic quotient.  Good odd-prime completely adapted steps preserve
@@ -172,7 +206,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 167
+- **cycle:** 168
 - **announcements:** none
 
 ## immutable target list

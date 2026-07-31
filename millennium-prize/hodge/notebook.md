@@ -1,5 +1,33 @@
 # Notebook
 
+## Cycle 168 full prime-Hecke trace
+
+For all PEL maximal-isotropic prime-Hecke kernels, the exact sheet count is
+`(p+1)(p^3+1)(p^5+1)` at inert primes and `sum_r [6 choose r]_p` at split
+primes, both asymptotic to `p^9`. Every raw diagonal pushforward has normalized
+degree `16p^3`, so the integral effective trace has degree `16p^3 N_p`,
+asymptotic to `16p^12`. Weight normalization has degree `16N_p` and exact
+denominator `p^3`; Hecke averaging has degree 16 but exact denominator
+`N_p p^3` on the fine disjoint correspondence. The Weil projector commutes
+with every PEL isogeny, so the exceptional projection is the direct sum of the
+nonzero transported seed projection; under sheetwise middle-weight
+identifications it is `N_p alpha`, or `alpha` after averaging. Thus full trace
+creates no cancellation and no bounded integral Chow complexity.
+
+## Cycle 168 full-Hecke normalization gate
+
+For any transported diagonal image `Y`, with `eta=m^3/deg(f|Gamma)`, one has
+`chi(M|Y)=16 eta` and `m^-3 f_*[Gamma]=eta^-1[Y]`; primitivity makes the latter
+denominator exact. If a fixed `D` clears any positive rescaling and
+`D Z=k[Y]`, then `deg(D Z)=16 k eta>=16 eta`. Thus unbounded inert primes,
+where every PEL kernel has `eta>=p`, forbid simultaneous bounded degree and
+uniform denominator. Full-correspondence averaging only adds its branch-count
+denominator. The surviving candidate is not a Hecke saturation but a fixed-
+degree product of two relative Chow spaces through an effective pair whose
+difference is a fixed multiple of the projected seed and whose component has
+rank-nine tangent image with vanishing obstructions; the obvious projector
+pair does not acquire this property from cohomological cancellation.
+
 ## Cycle 167 hostile arbitrary-chain audit
 
 The Cycle 166 chain survives, but its definition of `widetilde K` was not
