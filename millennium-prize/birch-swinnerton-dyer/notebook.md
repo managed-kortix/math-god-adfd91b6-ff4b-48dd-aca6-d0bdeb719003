@@ -1,5 +1,22 @@
 # Notebook
 
+## Bounded scout cycle 178
+
+The concrete candidate is the prime quadratic-twist family of `433a1` at
+`p=7`, restricted to one Frobenius packet with root number `-1` and one local
+Selmer switch.  Decorating the one-step Selmer transition by a residual
+Kurihara coordinate gives the exact candidate
+`(S,z)->(ker(lambda),z+c)` for `lambda!=0` and
+`(S,z)->(S+F_7,z+c)` for `lambda=0`.  Under uniform `(lambda,c)`, the
+probabilities are `(1-7^(-r))/7` for each downward symbol increment and
+`7^(-r-1)` for each upward symbol increment.
+The one-step state space is finite.  The missing production lemma is that `c`
+is controlled and equidistributed by a finite governing extension jointly
+with `lambda`; ordinary Selmer governing fields do not imply this.  Bare
+positive-density rank one is likely known, so only explicit certificate
+density could be novel.  See `cycle-178-derived-symbol-prime-twist-scout.md`.
+No rank-one density or BSD result is claimed.
+
 ## Bounded scout cycles 89--90
 
 Prescribed modular visibility has an exact quotient-point/Kummer criterion.

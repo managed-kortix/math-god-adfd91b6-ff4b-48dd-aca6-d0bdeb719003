@@ -1,5 +1,38 @@
 # Notebook
 
+## Bounded scout cycle 178
+
+The proposed Wilson representation low/tail split fails before continuum
+passage if its tail norm is unweighted.  In the one-plaquette `SU(2)` physical
+class space, `w=chi_(1/2)/2` satisfies
+`w chi_j=(chi_(j+1/2)+chi_(j-1/2))/2`; hence for every representation cutoff
+`Pi_J`, the gauge-invariant escaping state `chi_(J+1/2)` obeys
+`||Pi_J w(I-Pi_J)||>=1/2`.  Closed plaquette spin networks survive Gauss'
+quotient, and disjoint plaquettes force HS cost at least `sqrt(K)/2` for `K`
+channels.  Weak-coupling magnetic coefficients multiply rather than remove the
+constant.  A live tail estimate must include ordering-sensitive electric
+Casimir smoothing.  On the boundary state, a symmetrically heat-damped magnetic
+term still costs at least
+`(lambda_beta/2) exp[-t{J(J+1)+(J+1/2)(J+3/2)}/2]`, forcing
+`tJ^2 >= log(lambda_beta)+O(1)` merely to keep this channel bounded.  Full
+derivation: `cycle-178-wilson-low-tail-adversary.md`.
+
+The complementary ordered-semigroup calculation makes the surviving finite
+theorem exact. For `K_lambda=C+lambda W`, `W>=0`, let `P_D=1_[0,D](C)` and let
+`Pi_D` project in the interacting-vacuum complement onto `Q P_D H`. Its exact
+orthogonal tail is `QH intersect ker(P_D)`, not the range of `Q(I-P_D)Q`.
+Duhamel ordering then gives
+`||S_s(I-Pi_D)||<=exp(sE_0)[exp(-s Lambda_D)+
+(lambda||W||/Lambda_D)(1-exp(-s Lambda_D))]`. Together with the whole-low-block
+bound `||S_s Pi_D||<=q_D`, this yields
+`||S_s||<=sqrt(q_D^2+R_D^2)` and an explicit finite-lattice gap. The criterion
+is uniform over volumes if uniform `q_D,R_D` exist, but the displayed proof
+does not furnish them: `||W||` and `E_0` are extensive and fixed total degree
+misses the dressed volume vacuum. Linked-cluster vacuum renormalization and a
+local connected tail estimate remain necessary, and `lambda=2/g^4` becomes
+large on the asymptotically free continuum path. Full derivation:
+`cycle-178-electric-casimir-tail.md`. No Yang--Mills mass gap is claimed.
+
 ## Bounded scout cycle 174
 
 Wilson-loop contraction plus qualitative density cannot form an intermediate

@@ -5,17 +5,13 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Navier--Stokes linear critical cost falsified for actual receiver flux
-- **active main funnel:** portfolio rotation after the simultaneous collision
-  adversary.  A single globally factored real divergence-free field can populate
-  arbitrarily many scales while its complete quadratic Leray convolution has
-  only the terminal boundary quartet.  After those terminal modes are populated
-  as physical receivers, a shared-pump multilayer variant has exact unit actual
-  cubic flux on every receiver orbit and constraint-minimized full `H^(1/2)`
-  cost `Theta(L^(2/3))`.  Receiver--pump interactions create an explicit large
-  undesignated convolution, so any surviving cascade mechanism must dynamically
-  inherit the receivers while controlling that output; static forcing and flux
-  normalizations alone are retired.
+- **phase:** Yang--Mills electric-Casimir moving-tail gate
+- **active main funnel:** replace the false bare Wilson cutoff by an
+  ordering-sensitive electric-heat tail after the Gauss and vacuum quotients.
+  The finite-lattice Duhamel bound is exact, but its ground-energy factor and
+  magnetic norm are extensive.  The next production lemma is a linked-cluster
+  ground-state transform giving a local connected tail estimate uniform in
+  volume; bare representation truncation and character decay are retired.
   For every transported Cycle 151 diagonal image, the exact identities are
   `chi(M|Y)=16 eta` and `m^-3 f_*[Gamma]=eta^-1[Y]`, with exact denominator
   `eta` by primitivity. If one fixed integer `D` clears any positive
@@ -56,6 +52,16 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   output forces the receiver quartet to vanish, even allowing complex
   polarizations. The raw Laurent filter cannot become a closed cubic receiver
   architecture without completion modes or different frequencies.
+- 2026-07-31: Cycle 178 hostile-audited the Yang--Mills Wilson low/tail split.
+  In the one-plaquette `SU(2)` class space,
+  `w chi_j=(chi_(j+1/2)+chi_(j-1/2))/2`, so every spin cutoff has exact
+  physical escaping states with `||Pi_J w(I-Pi_J)||>=1/2`; closed plaquette
+  spin networks survive Gauss' quotient.  `K` disjoint channels force
+  Hilbert--Schmidt cost at least `sqrt(K)/2`, while weak-coupling magnetic
+  coefficients amplify the operator-norm constant.  Only an
+  ordering-sensitive electric/Casimir-smoothed tail remains live.  Its boundary
+  channel already forces `tJ^2>=log(lambda_beta)+O(1)` merely to stay uniformly
+  bounded as `lambda_beta` diverges.  No Yang--Mills result is claimed.
 - 2026-07-31: Cycle 177 populated the terminal outputs of a shared-pump `m=2`
   collision family as phase-aligned physical receiver modes.  On `L` distinct
   horizontal layers, the exact constraints are `Y_n a_n b c_n=1`, while the
@@ -277,7 +283,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 177
+- **cycle:** 178
 - **announcements:** none
 
 ## immutable target list
@@ -311,6 +317,33 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: The Cycle 178 Yang--Mills companion implemented the surviving
+  ordering-sensitive tail mechanism. For electric `P_D=1_[0,D](C)` and the
+  interacting-vacuum quotient `Q`, the exact low space is `Q P_D H` and its
+  orthogonal tail is `QH intersect ker(P_D)`; `Q(I-P_D)Q` is not generally a
+  projection. Positivity and ordered Duhamel expansion for
+  `K_lambda=C+lambda W` give
+  `R_D=exp(sE_0)[exp(-s Lambda_D)+(lambda||W||/Lambda_D)
+  (1-exp(-s Lambda_D))]`. A whole-low-block estimate `q_D=||S_s Pi_D||` then
+  gives `||S_s||<=sqrt(q_D^2+R_D^2)` and an explicit finite-lattice gap; uniform
+  `q_D,R_D` imply a volume-uniform gap. The bare estimate does not verify that
+  hypothesis because `||W||` and `E_0` are extensive and fixed total degree
+  misses the dressed volume vacuum. A linked-cluster vacuum transform, local
+  connected tail estimate, rigorous RG basin entry from `g(a)->0`, and an OS
+  limit remain missing. No Yang--Mills mass gap is claimed.
+
+- 2026-07-31: Cycle 178 BSD scout selected the prime quadratic twists of
+  `433a1` at `p=7` as a concrete certificate-density test, not as a new bare
+  rank-one-density target.  A one-prime decorated Selmer update has finite
+  states and exact candidate law `(S,z)->(ker lambda,z+c)` when `lambda!=0`, and
+  `(S,z)->(S+F_7,z+c)` otherwise.  Uniform `(lambda,c)` would give probabilities
+  `(1-7^-r)/7` per downward symbol increment and `7^(-r-1)` per upward symbol
+  increment.  The unresolved and
+  genuinely new production lemma is that the derived modular-symbol coordinate
+  `c` is Frobenian in one finite governing extension jointly with the local
+  Selmer functional.  This is a scout target only; no density or BSD theorem is
+  claimed.
 
 - 2026-07-31: Cycle 177 formulated the invariant many-edge baseline for actual
   cubic receiver flux. With orbit energies `x_[j]=2|j||u_j|^2`, unit triad
