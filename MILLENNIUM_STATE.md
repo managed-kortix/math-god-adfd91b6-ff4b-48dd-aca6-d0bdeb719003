@@ -5,14 +5,13 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** BSD exact cyclotomic order proved; leading scalar remains conjectural
-- **active main funnel:** portfolio rotation after the curve-specific BSD gate.
-  For `433a1,p=7`, exact interpolation, root number, functional equation, and
-  the modular-symbol residue `M2=5 mod 7` prove that the ordinary trivial-branch
-  cyclotomic p-adic L-function has order exactly two.  Identifying its quadratic
-  coefficient with the height regulator is the rank-two generalized
-  Perrin--Riou/p-adic BSD leading-term conjecture, not a consequence of further
-  finite precision.
+- **phase:** Navier--Stokes global cross-edge depletion gate
+- **active main funnel:** test whether an arbitrarily long exact Fourier cascade
+  with unit designated critical throughput must pay linearly in the complete
+  off-circuit Leray convolution.  The target includes all nonadjacent cross
+  edges, collisions, phases, polarizations, and reciprocal amplitude gauges.
+  An arbitrary-depth family with sublinear weighted off-circuit cost retires
+  the mechanism; bounded-depth positive minima are calibration only.
   For every transported Cycle 151 diagonal image, the exact identities are
   `chi(M|Y)=16 eta` and `m^-3 f_*[Gamma]=eta^-1[Y]`, with exact denominator
   `eta` by primitivity. If one fixed integer `D` clears any positive
@@ -42,6 +41,16 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   its K-antilinear involution and descended diagonal abelian threefold.  Although
   the tensor varies under Hecke conjugacy, the carried restricted degree puts
   every iterated `eta=1` target in the common bounded Hilbert locus above.
+- 2026-07-31: Cycle 174 isolated the exact canonical-system production target
+  for RH.  Positive Hamiltonians give a basis-free finite truncation law:
+  every endpoint-kernel increment is the integral of a Hamiltonian Gram square,
+  so all finite spectral matrices increase in Loewner order.  A locally uniform
+  exhaustion converging to the shifted-xi de Branges kernel for rational shifts
+  tending to zero would prove RH.  Conversely, the de Branges inverse theorem
+  and canonical chain produce such an exhaustion from the Hermite--Biehler
+  property.  Thus the existential construction is exactly the shifted
+  Hermite--Biehler/RH assertion; only an explicit arithmetic Hamiltonian plus a
+  uniform endpoint-error theorem would be a new production lemma.
 - 2026-07-31: Cycle 168 computed the full good-prime PEL Hecke trace of the
   diagonal. The sheet count is `N_p=(p+1)(p^3+1)(p^5+1)` at inert primes and
   `N_p=sum_(r=0)^6 [6 choose r]_p` at split primes, in either case asymptotic
@@ -215,7 +224,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 173
+- **cycle:** 174
 - **announcements:** none
 
 ## immutable target list
@@ -243,11 +252,28 @@ waiting process.
    whose first lemma survives hostile countermodels before promotion.
 4. Keep bounded scouts live: BSD derived Kato rank-two primitivity; RH Weil
    spline calibration; Hodge generic-seed obstruction; Navier phase-sensitive
-   backscatter depletion; Yang--Mills common-cone physical-slab contraction.
+   backscatter depletion; Yang--Mills Wilson atomic synthesis or low/tail slab
+   decomposition.
 5. Rotate only at a proved checkpoint, decisive falsification, or documented
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 174 derived the exact Wilson atomic-approximation wall.
+  Generatorwise bounds `||Sw_alpha||<=rho` plus Wilson synthesis with error
+  `epsilon||f||` and coefficient cost `sum|c_alpha|<=A||f||` give the exact
+  composable inequality `||S||<=epsilon+rho A`; a two-generator example shows
+  density without coefficient control can coherently reconstruct an
+  uncontracted eigenvector.  Norm contraction by `q` on a whole Wilson trial
+  space plus uniform relative approximation error `epsilon` gives
+  `||S||<=q+(1+q)epsilon`; a same-state positive form estimate gives the formula
+  with `sqrt(q)`.  A proper linear trial subspace has worst-case relative error
+  exactly one, so qualitative density or fixed-observable approximation cannot
+  yield an intermediate criterion.  The genuinely structured checkpoint is a
+  low-complexity estimate `||S Pi_M||<=q_M` plus an independent moving-tail
+  estimate `||S(I-Pi_M)||<=r_M`, with `q_M^2+r_M^2<1`; these compose to full
+  contraction, while the escaping-vector model proves that the tail cannot be
+  omitted.  No Yang--Mills mass gap is claimed.
 
 - 2026-07-31: Cycle 170 closed two final graph-supported Hodge variants.  For
   the denominator-cleared projector class `Z=sum c_k Gamma_(u^k)`, exact

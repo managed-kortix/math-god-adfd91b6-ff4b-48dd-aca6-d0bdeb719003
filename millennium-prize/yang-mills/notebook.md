@@ -1,5 +1,23 @@
 # Notebook
 
+## Bounded scout cycle 174
+
+Wilson-loop contraction plus qualitative density cannot form an intermediate
+mass-gap criterion.  The exact atomic version is: if every normalized Wilson
+generator obeys `||Sw_alpha||<=rho` and each `f` has an approximant
+`g=sum c_alpha w_alpha` with error `epsilon||f||` and coefficient cost
+`sum|c_alpha|<=A||f||`, then `||S||<=epsilon+rho A`.  Coefficient control is
+essential: two individually contracted generators can span an uncontracted
+eigenvector by coherent addition.  Contraction on an entire Wilson trial space
+and relative approximation error `epsilon` instead gives
+`||S||<=q+(1+q)epsilon`; but a proper linear trial subspace has worst-case
+relative error exactly one.  A second structured checkpoint must separately
+prove low-complexity contraction
+`||S Pi_M||<=q_M` and moving-tail control
+`||S(I-Pi_M)||<=r_M`, with `q_M^2+r_M^2<1`.  The escaping-vector model shows
+that fixed-loop density or pointwise approximation cannot replace the tail
+bound.  Full derivation: `cycle-174-wilson-atomic-approximation-wall.md`.
+
 ## Bounded scout cycle 83
 
 Exact straight-link pushforward blocking is gauge-equivariant and reflection
