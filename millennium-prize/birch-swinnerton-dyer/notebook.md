@@ -1,5 +1,30 @@
 # Notebook
 
+## Cyclotomic modulus audit cycle 186
+
+The field `L_0 Q(zeta_(8*7*433*29))` is a valid but nonminimal refinement of
+the `L_0` collision test. The factor `7` is already in `L_0` by the Weil
+pairing. Since `a_29(E)=2=30 mod 7`, fixed-`29` admissibility is exactly
+`(D_q/29)=(q/29)=1`, so it needs only `Q(sqrt(29))`, not `Q(zeta_29)`. Full
+factors at `8` and `433` likewise overconstrain unless the final packet really
+uses full residue classes. Same Frobenius in `L_0`, with admissibility checked
+on both primes, is the logically minimal counterexample criterion. See
+`cycle-186-cyclotomic-modulus-minimality-audit.md`.
+The Cycle 185 progression anchored at `1289` lies in the `-1` character fibre,
+so it actually fails the stated fixed-`29` admissibility condition throughout.
+
+## Semidirect Kummer conjugacy cycle 184
+
+For any semidirect product `M semidirect H`, `(m,A)` and `(m',A')` are
+conjugate exactly when some `B in H` has `A'=BAB^-1` and
+`m'=Bm mod (I-A')M`. Over fixed `A`, this is the centralizer orbit space on
+`M/(I-A)M`. For `M=V^2`, `H=GL_2(F_p)`, and nonidentity-unipotent `A`, the
+centralizer acts on the one-dimensional quotient by all nonzero scalars, so the
+classes are the zero row and the projective rows. Hence the certified rows
+`(1,5)` and `(1,4)` have distinct full Kummer conjugacy classes because their
+determinant is `6 mod 7`. They cannot be a same-Frobenius collision pair in
+`L_0`. See `cycle-184-semidirect-kummer-conjugacy.md`.
+
 ## Collision certificate gate cycle 182
 
 Cycle 181 does not contain enough raw information to reconstruct an exact

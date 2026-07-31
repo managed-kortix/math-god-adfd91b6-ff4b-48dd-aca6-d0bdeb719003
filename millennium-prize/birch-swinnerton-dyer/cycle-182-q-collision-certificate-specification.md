@@ -60,7 +60,12 @@ The certificate is complete only when all of the following are committed.
    the same permutation cycle type.  Supply a class-separating resolvent,
    explicit residue-field action, or another exact class-identification
    witness.  The verifier must check equality of conjugacy classes, not merely
-   equality of labels printed by unrelated runs.
+   equality of labels printed by unrelated runs.  For the two-point Kummer
+   field, equality of residual `GL_2(F_7)` classes is also insufficient.  The
+   witness must identify the centralizer orbit of the affine Kummer pair in
+   `(E[7]/(A-I)E[7])^2`, with explicit basis and lift comparison maps.  In the
+   nonidentity-unipotent packet this reduces to equality of the zero/ordered
+   projective localization row, as proved in Cycle 184.
 4. **Twist records.** Record
    `D_q=q` for `q=1 mod 4` and `D_q=-q` for `q=3 mod 4`, the global minimal
    model of `E^(D_q)`, the change of variables from the generated twist, its
