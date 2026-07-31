@@ -41,3 +41,32 @@ reverse simulation transfers OBDD hardness to exact relational
 computable function must hide a family of matchings so that every variable
 order leaves one matching with `Omega(N)` independent cross-cut bits, without
 letting the program read a selector first.
+
+Cycle 183 rules out an every-order strengthening of the same Reed--Muller
+splice packing. Put the hyperplane `x_1=0` in the first half of the order. For
+`f,g in RM(d,n)`, the splice `(1+x_1)f+x_1g` lies in `RM(d+1,n)`, so every
+off-diagonal splice is easy whenever the MCSP threshold contains that code.
+For an arbitrary half-set with indicator `a`, the exact hard-pair count is the
+sum over nonzero `q in RM(d,n)` of
+`|RM(d,n)|-|(RM(d,n)+aq) cap E|`. Generalized Hamming weights control
+restriction kernels and expose the large hyperplane-supported subcode, but do
+not control these circuit-easiness intersections.
+
+Cycle 183 randomized audit: no Yao distribution supported only on the natural
+diagonal easy tables and certified hard cross-splices can extend the exact
+width bound.  At a fixed cut the prefix and suffix codewords have unique
+indices, so public-coin equality fingerprinting solves the whole witness
+promise with `O(log(1/epsilon))` one-way bits, independent of `|C|`; hence every
+such input distribution has a constant-message deterministic protocol of
+error at most `epsilon`.  Mixing public cuts does not help.  A randomized OBDD
+lower bound needs a richer labelled cross-splice matrix with an information-
+hard row pattern, which the present support-size/counting estimate does not
+supply.  This is an obstacle to the proof route, not a small randomized OBDD.
+
+Cycle 183 referee decision: do not spend main-funnel compute optimizing the
+same random-order easy-table packing.  Its MMW ceiling and model-transfer gaps
+are structural.  The only live OBDD scout is qualitatively stronger: one
+explicit polynomial-time function must hide a polynomial-size matching family
+so that every variable order has a balanced cut retaining `Omega(N)`
+independent bits, with no input-readable selector.  Even success would remain
+an all-order OBDD theorem, not a `P != NP` result.

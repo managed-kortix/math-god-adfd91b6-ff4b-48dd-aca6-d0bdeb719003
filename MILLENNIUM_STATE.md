@@ -5,8 +5,21 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** BSD exact collision certificate gate
-- **active main funnel:** Cycle 182 finds that Cycle 181 contains no raw
+- **phase:** BSD fixed-Kummer-field collision search gate
+- **active main funnel:** Cycle 183 closes the direct randomized extension of
+  the MCSP exact splice packing.  For any fixed cut, the easy diagonal inputs
+  and any selected hard cross-splices form an equality-fingerprint promise:
+  prefix and suffix strings uniquely identify their codeword indices, and a
+  public pairwise-independent hash gives bounded-error one-way communication
+  `O(log(1/epsilon))`, independent of the packing size.  Therefore every
+  distribution over the natural splice witnesses admits a constant-message
+  deterministic protocol with the target distributional error; mixing public
+  cuts or orders does not repair the Yao argument.  This defeats only the
+  witness-distribution proof, not randomized MCSP OBDDs themselves.  A viable
+  lower bound needs information-hard structure in the full labelled
+  cross-splice matrix, not merely sparsity of easy splices.  The separate
+  `N^o(1)` packing ceiling at the MMW parameter remains.
+  Cycle 182 finds that Cycle 181 contains no raw
   collision computation that can be reconstructed: it names no candidate
   field, fixed auxiliary prime, twist-prime pair, symbol rows, or Frobenius
   witnesses. A complete future certificate has three independent layers:
@@ -33,6 +46,17 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent OS continuum construction.  Random-order MCSP remains a bounded
   restricted-model scout unless its quantifiers and resources transfer to the
   exact relational MMW problem.
+  Cycle 183 keeps BSD as main and stops promotion of the random-order OBDD
+  route.  The Cycle 182 Reed--Muller splice theorem is a valid bounded
+  exact-decision result, but easy-table packing is intrinsically capped at
+  `N^o(1)` forced state bits at the MMW threshold and supplies neither
+  relational search nor update-time hardness.  The next exact non-equivalence
+  target fixes `L_0=Q(E[7],7^-1 P,7^-1 Q)` for `E=433a1`, `P=(0,1)`,
+  `Q=(-1,1)`, fixes `ell=29`, and searches in
+  `L_0 Q(zeta_(8*7*433*29))` for an admissible same-Frobenius pair with
+  zero/nonzero `c(q,29)`, subject to the complete Cycle 182 three-layer
+  certificate.  A collision refutes only this named field; a finite negative
+  search proves no factorization.
   Cycle 182 hostile-audits the random-order MCSP splice proposal. Conditional
   on a midpoint containing `k` of a pair's `d` disagreements, a splice is
   uniform over only `binom(d,k)` candidates, so balance alone is insufficient
@@ -57,6 +81,15 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   projected seed, with rank-nine tangent image and vanishing obstructions.
    The obvious projector expansion has only cohomological obstruction
    cancellation and is not such a germ.
+- 2026-07-31: Cycle 183 shows that the exact pairwise splice packing has no
+  direct bounded-error/Yao extension.  On its natural promise, both sides can
+  identify codeword indices and public equality fingerprinting uses
+  `O(log(1/epsilon))` one-way bits regardless of `|C|`.  Thus every distribution
+  over diagonal easy inputs and certified hard cross-splices has a
+  constant-message deterministic protocol with target average error.  A
+  randomized OBDD lower bound would require a richer distributionally hard
+  pattern in the full cross-splice matrix; support-size counting alone does not
+  provide it.  No small randomized MCSP OBDD or separation is claimed.
 - 2026-07-31: Cycle 182 calibrated the random-order exact OBDD scout. A size
   lower bound `L` for most fixed orders is stronger than near-linear decision
   depth and yields deterministic one-way random-partition hardness plus
@@ -381,7 +414,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 182
+- **cycle:** 183
 - **announcements:** none
 
 ## immutable target list

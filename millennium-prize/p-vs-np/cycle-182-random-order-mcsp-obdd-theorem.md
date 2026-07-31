@@ -50,8 +50,15 @@ Let `A` be the first `N/2` coordinates in the random order.  For distinct
 
 Let `D={x:f(x)!=g(x)}` and `w=|D|>=W`.  For any fixed truth table `h`, equality
 `f star_A g=h`, if possible, uniquely specifies `A cap D`.  For a prescribed
-subset `R subset D`, the number of balanced `A` with `A cap D=R` is at most
-`2^(N-w)`.  Since
+subset `R subset D`, writing `r=|R|`, the number of balanced `A` with `A cap
+D=R` is exactly
+
+\[
+{N-w\choose N/2-r},
+\]
+
+with the value understood as zero when the lower index is infeasible.  In
+particular it is at most `2^(N-w)`.  Since
 
 \[
 {N\choose N/2}\ge {2^N\over N+1},
@@ -85,7 +92,34 @@ s=\left\lfloor {N\over64n}\right\rfloor.
 \]
 
 Then `s>=2K`, `W=N/4`, and elementary bounds on `L_(n,s)` give failure
-probability at most `2^(-3N/16)`.  Hence, with that probability bound,
+probability at most `2^(-3N/16)`.  Here are the explicit inequalities.  For
+`n>=20`, both `s+1<=N` and `n+s+2<=N`, and therefore
+
+\[
+\log_2 L_{n,s}\le 2n+(2n+2)s.
+\]
+
+Also
+
+\[
+s\ge 2K,
+\qquad
+n^2+4n+3\le {N\over64}.
+\]
+
+The first inequality follows from
+`2^n>64n(n^2+n+2)` and the second from
+`2^n>=64(n^2+4n+3)`; each holds at `n=20` and is preserved when `n` is
+incremented because its right-hand polynomial grows by a factor less than two.
+Consequently the base-two logarithm of the failure bound is at most
+
+\[
+-{N\over4}+2K+2n+(2n+2)s+(n+1)
+\le -{N\over4}+{N\over64}+{N\over32}\left(1+{1\over n}\right)
+\le -{3N\over16}.
+\]
+
+Hence, with probability at least `1-2^(-3N/16)`,
 
 \[
 \boxed{
