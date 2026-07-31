@@ -5,7 +5,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge Hecke-transport normalization gate closed
+- **phase:** Hodge composite Hecke-incidence gate closed
 - **active main funnel:** portfolio selection after exact Hecke transport audit.
   Dense transport of the special nonsplit seed multiplies effective
   codimension-three degree by the square root of the ambient isogeny degree;
@@ -144,7 +144,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 161
+- **cycle:** 162
 - **announcements:** none
 
 ## immutable target list
@@ -177,6 +177,19 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 162 corrected and extended the Hodge kernel-incidence
+  audit.  The four-orbit formula applies to prime torsion, not `p^e`-torsion;
+  composite levels require elementary divisors.  For a kernel split relative
+  to `A[m]=Gamma[m] perp H`, with `delta=|K cap Gamma[m]|` and
+  `eta=m^3/delta`, the exact residual coupling has order `eta^2`.  The reduced
+  image of `Gamma` has primitive integral homology/cohomology and Chow class,
+  so `m^-3 f_*[Gamma]=eta^-1[f(Gamma)]` has actual denominator exactly `eta`;
+  equivalently `eta` is the product of the induced polarization type.  For the
+  Cycle 151 polarization, the two-symplectic-space decomposition is valid only
+  at primes at least five and is not PEL-stable.  Bounded incidence gives an
+  unpolarized bounded correspondence but not automatically a bounded
+  correspondence between the original polarized moduli points.
 
 - 2026-07-31: The Cycle 161 Hodge follow-up classified prime-level kernel
   intersections exactly.  In the decomposition of twelve-dimensional
