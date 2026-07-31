@@ -5,13 +5,13 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge fixed-degree projector-pair tangent gate closed
-- **active main funnel:** portfolio rotation after graph-supported Chow-germ
-  closure.  Clearing the explicit Weil projector gives a fixed effective pair,
-  but each side contains a nonunit Gaussian graph with injective obstruction on
-  the nine-dimensional PEL tangent.  The pair's relative base tangent is zero;
-  all graph/translate models have base-tangent rank at most three.  Any viable
-  germ must use a genuinely different rationally equivalent representative.
+- **phase:** Hodge fixed-degree representative route retired
+- **active main funnel:** BSD rank-two integral leading-term comparison.  The
+  next gate is an exact determinant-line identity relating the cyclotomic
+  leading term of Kato's class, the rank-two Mazur--Tate height regulator, and
+  the correctly normalized ordinary modular-symbol second moment.  Finite
+  congruence agreement is calibration only; the target is a theorem with every
+  Euler, period, lattice-index, and logarithmic normalization explicit.
   For every transported Cycle 151 diagonal image, the exact identities are
   `chi(M|Y)=16 eta` and `m^-3 f_*[Gamma]=eta^-1[Y]`, with exact denominator
   `eta` by primitivity. If one fixed integer `D` clears any positive
@@ -214,7 +214,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 169
+- **cycle:** 170
 - **announcements:** none
 
 ## immutable target list
@@ -247,6 +247,21 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 170 closed two final graph-supported Hodge variants.  For
+  the denominator-cleared projector class `Z=sum c_k Gamma_(u^k)`, exact
+  Pontryagin multiplication gives
+  `Z*Z=-104188231402289079266552000000000000[A]`.  Every effective
+  three-cycle has nonnegative Pontryagin-square coefficient, so `Z` is not
+  rationally equivalent to any single effective cycle, connected or otherwise.
+  The seven graph classes are cohomologically independent by the Vandermonde
+  matrix of the seven distinct `u`-eigenvalues.  First graph thickenings add
+  eighteen vertical Hilbert directions but their ambient obstruction is an
+  injective transform of the reduced graph obstruction, so their PEL-base
+  image remains at most three-dimensional.  Hodge rotates: finding another
+  effective pair with a dominant germ is now the variational algebraicity
+  problem itself, not a mechanism produced by graphs, Hecke saturation,
+  nilpotents, or the projector complex.
 
 - 2026-07-31: Cycle 169 expanded the Cycle 152 projector exactly after clearing
   denominator `930187500000000000` and audited its positive/negative graph

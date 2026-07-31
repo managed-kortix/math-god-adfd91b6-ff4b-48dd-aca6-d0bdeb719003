@@ -1,5 +1,20 @@
 # Notebook
 
+## Cycle 170 Pontryagin connected-representative obstruction
+
+For scalar graphs in `A=E_i^3 x E_i^3`, the group law gives the exact Chow
+identity `Gamma_a*Gamma_b=N(a-b)^3[A]` for `a!=b`, while
+`Gamma_a*Gamma_a=0`.  Applying this to the denominator-cleared Cycle 169 class
+`Z=sum_k c_k Gamma_(u^k)` gives
+`Z*Z=-104188231402289079266552000000000000[A]`.  The Pontryagin square of any
+effective three-cycle is a nonnegative multiple of `[A]`, so no effective,
+hence no connected effective, cycle is rationally equivalent to `Z`.  The
+seven graph classes are also cohomologically independent by the seven-sector
+Vandermonde matrix, so theorem-of-cube manipulations cannot create a graph-only
+relation.  New connected positive/negative representatives remain logically
+possible, but adding a common bridge does not improve their componentwise
+relative Chow obstruction.
+
 ## Cycle 168 full prime-Hecke trace
 
 For all PEL maximal-isotropic prime-Hecke kernels, the exact sheet count is
