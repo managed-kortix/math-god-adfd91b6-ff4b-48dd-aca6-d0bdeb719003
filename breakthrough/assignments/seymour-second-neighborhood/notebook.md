@@ -1308,7 +1308,9 @@ No audits yet.
   vertices high.
 - This B6 forced regime has 14,649 canonical rows, partitioned by `(q,h)` as
   `(0,3):6286`, `(1,2):5541`, `(2,1):2410`, `(3,0):412`.  The analogous large
-  forced B7 regime has 25,766 rows and both C vertices high.
+  forced B7 regime is exactly `lambda=1`; it has 25,766 rows, `r=0`, and both C
+  vertices high.  Its `(q,h)` cells run from `(0,5)` through `(5,0)`; `h=5`
+  alone is only the 8,847-row `q=0` subcell.
 - A temporary 48-parent solver scout had no certificate status. Hostile audit
   found that its B6 selector accidentally used `h=3`, selecting only the 6,286
   rows with `q=0`, rather than all 14,649 rows with `lambda=3`.  The observation
@@ -1316,5 +1318,31 @@ No audits yet.
 - Full definitions, identities, and the required versioned child-shard contract
   are in `attempts/tick50-m6-parent-frontier.md`.
 - **Next queued attack:** implement an independently checked `(lambda,r)` child
-  emitter.  Begin with B6 `lambda=3,r=0` and the forced B7 row, and retain only
+  emitter.  Begin with B6 `lambda=3,r=0` and B7 `lambda=1,r=0`, and retain only
   LRAT-verified outcomes keyed to the exact child CNF hash.
+
+### Versioned forced C-layer children
+
+- Added an exact child gate for the complete B6 `lambda=3` and B7 `lambda=1`
+  regimes.  It inherits the authenticated parent base and 153 hole units, then
+  appends only forced units: every `C->B` arc false and every C degree-nine bit
+  true.  The independent checker reconstructs eligibility and authenticates the
+  ordered parent prefix and complete child suffix.
+- The child manifest has 40,415 rows: 14,649 B6 and 25,766 B7.  It is 1,131,918
+  bytes with SHA-256 `751da64e...cc1950`.  All 68 support types and 353 eligible
+  occupancy classes occur.  B6 children have 142,910 clauses; B7 children have
+  142,898, with the same 23,616-variable map.
+- Eight stratified pilots spanning every B6 `q=0,1,2,3` and B7
+  `q=0,1,3,5` cell produced LRATs accepted by pinned `lrat-check`.  These are
+  operational pilot observations only: the artifacts remain temporary and do
+  not eliminate a child family.
+- A hostile human-proof audit rejected an attempted `q<=1` inference and an
+  attempted exclusion of inaccessible B vertices.  The valid core is narrower:
+  for a low `a in A`, if it acquires `k` exact C second neighbors, at least `k`
+  vertices of `T` are inaccessible from `a`, and each requires a distinct hole
+  crossing from that inaccessible endpoint into `{a} union N_T^+(a)`.  Charges
+  cannot yet be synchronized across different A rows.
+- **Next queued attack:** freeze a content-addressed forced-child campaign and
+  scout all 40,415 rows for proof-size distribution.  Before bulk retention,
+  derive grouping/cube cuts from the exact `(q,h,H_CC)` C-pattern classes so the
+  certificate archive remains repository-sized.

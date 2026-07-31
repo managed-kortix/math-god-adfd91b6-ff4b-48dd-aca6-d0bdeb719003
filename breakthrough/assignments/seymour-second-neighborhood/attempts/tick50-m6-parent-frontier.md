@@ -52,9 +52,11 @@ survivors in this regime, partitioned by `(q,h)` as
 (0,3): 6286,  (1,2): 5541,  (2,1): 2410,  (3,0): 412.
 ```
 
-The analogous B7 identity is `t=3-lambda+r`.  The large forced row has
-`h=5`, `lambda+q=1`, `r=0`, and both C vertices high; it contains 25,766
-canonical placements.
+The analogous B7 identity is `t=3-lambda+r`.  The complete large forced regime
+is `lambda=1`, which forces `r=0` and both C vertices high; it contains 25,766
+canonical placements.  It includes every `(q,h)=(q,5-q)` for `0<=q<=5`.
+The narrower condition `h=5` (equivalently `q=0`) contains only 8,847 rows and
+must not be confused with the complete regime.
 
 ## Scout warning
 
