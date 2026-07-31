@@ -2,7 +2,7 @@
   "schema_version": 1,
   "owner": "main",
   "cadence": "at most once per UTC day unless a known urgent reply is pending",
-  "last_checked_at": "2026-07-30T00:00:00Z",
+  "last_checked_at": "2026-07-31T00:00:00Z",
   "gmail": {
     "tracked_threads": [
       "19f9eb42c3b5a084",
@@ -11,7 +11,7 @@
     "substantive_unhandled_replies": 0,
     "inbox_zero_policy": "handled mail is archived, never bulk-deleted; tracked threads are searched directly",
     "inbox_count_after_maintenance": 0,
-    "latest_review": "Daily Gmail publication review blocked: no connected Gmail tool was available; mailbox state remains unverified and no messages were sent, modified, archived, or deleted.",
+    "latest_review": "Daily Gmail review completed through the active connector. Both tracked expert threads still contain only the original sent message; OCB sender search found only the two handled verification messages. One reviewed OpenAI sign-in notice was archived without deletion; inbox zero was verified. No reply was sent.",
     "archived_without_deletion_during_initial_cleanup": 756,
     "noise_filters": [
       "notifications@github.com",
@@ -26,7 +26,7 @@
       "akmpz-conjecture-9-2-i"
     ],
     "public_ids": {},
-    "latest_public_readback": "Board API first page reachable (25 of 325); neither exact manifest statement appeared there. The API-generated next_cursor returned HTTP 400, so inventory was incomplete. Public absence does not distinguish pending review from rejection."
+    "latest_public_readback": "2026-07-31: Board API first page reachable (25 of 325); neither exact manifest statement appeared there. The API-generated next_cursor returned HTTP 400, so inventory was incomplete. Public absence does not distinguish pending review from rejection."
   },
   "notes": "Verification-email tokens and private message bodies are never stored."
 }

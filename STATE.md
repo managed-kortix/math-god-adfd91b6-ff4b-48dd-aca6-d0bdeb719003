@@ -17,6 +17,28 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: completed tricyclic block rank `2+1`. Exact DNN left only
+  `Theta(1,2,r)+C3` and `Theta(1,2,2)+C5`. Both close by induced territories:
+  in the triangle row, delete a non-route internal theta-arm vertex and its
+  rooted branches, leaving a two-triangle bicyclic cactus of surplus `>1`
+  against one tree of surplus `-1`; in the pentagon shared-cut row, keep the
+  intact favorable theta and open `C5` at the cut into one tree. Bridge-separated
+  rows follow from theta and unicyclic margins. Hostile audit accepted complete
+  vertex/branch ownership and the open-lower-half-plane proof that a two-triangle
+  cactus has surplus `>1`. Proof: `tricyclic-general/theta-cycle-completion.md`.
+- 2026-07-31: strict core audit initially found the pinned Breakthrough root
+  stopped; fired its existing registered `breakthrough-heartbeat` (no new root)
+  and verified all three registered cores running with no extras. Completed the
+  daily publication review: Gmail connector was available, both tracked expert
+  threads still contain only our sent message, OCB mail has only the two old
+  verification messages, and public OCB pagination still fails after page one;
+  no status change. Archived one reviewed OpenAI sign-in notice without deletion
+  and verified inbox zero. For tricyclic block rank `2+1`, exact additive DNN
+  now proves every theta-plus-cycle graph except precisely
+  `Theta(1,2,r)+C3 (r>=2)` and `Theta(1,2,2)+C5`, independent of roots, bridges,
+  and trees. See `tricyclic-general/theta-cycle-dnn-reduction.md`. A proposed
+  general rooted phase closeout was rejected for double-spending theta phase
+  between the root minor and Schur increment.
 - 2026-07-30: proved a complete DNN theorem for the first 2-connected
   tricyclic kernel: every simple four-path generalized theta subdivision with
   arbitrary rooted-tree attachments satisfies `s^+>=n`. The exact correlation

@@ -210,6 +210,11 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     was not proved. Keep edge monotonicity as a parallel conjecture, but make the
     next proof target all connected tricyclic graphs via block/kernel analysis;
     see `positive-square-energy/tricyclic-general/prompt.md`.
+38. Tricyclic block rank `2+1` is complete. Exact block-additive DNN leaves only
+    `Theta(1,2,r)+C3` and `Theta(1,2,2)+C5`; induced-territory partitions close
+    both with strict surplus. See `tricyclic-general/theta-cycle-completion.md`.
+    The remaining tricyclic frontier is one rank-three 2-connected block:
+    doubled triangle, K4 subdivision, and doubled C4 (four-path is complete).
 35. Rank thirteen is complete. Sharp DNN gives `sigma>=12-sum epsilon_l`, and
     the exact fail-closed frontier is `T^12Q,T^11PP`. The complementary
     all-rank one-cycle results close every parity of `Q`, including `q=3`, and
