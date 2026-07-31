@@ -5,16 +5,17 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Navier--Stokes global cross-edge depletion falsified for raw orbit output
+- **phase:** Navier--Stokes linear critical cost falsified for actual receiver flux
 - **active main funnel:** portfolio rotation after the simultaneous collision
   adversary.  A single globally factored real divergence-free field can populate
   arbitrarily many scales while its complete quadratic Leray convolution has
-  only the terminal boundary quartet.  A shared-pump multilayer variant has zero
-  undesignated output and constraint-minimized critical cost
-  `O(sqrt(log L))` under unit complete orbit-output constraints.  Any surviving
-  cascade mechanism must use a different homogeneous observable, such as actual
-  cubic receiver flux with dynamical inheritance; raw forcing/output norms are
-  retired.
+  only the terminal boundary quartet.  After those terminal modes are populated
+  as physical receivers, a shared-pump multilayer variant has exact unit actual
+  cubic flux on every receiver orbit and constraint-minimized full `H^(1/2)`
+  cost `Theta(L^(2/3))`.  Receiver--pump interactions create an explicit large
+  undesignated convolution, so any surviving cascade mechanism must dynamically
+  inherit the receivers while controlling that output; static forcing and flux
+  normalizations alone are retired.
   For every transported Cycle 151 diagonal image, the exact identities are
   `chi(M|Y)=16 eta` and `m^-3 f_*[Gamma]=eta^-1[Y]`, with exact denominator
   `eta` by primitivity. If one fixed integer `D` clears any positive
@@ -44,6 +45,31 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   its K-antilinear involution and descended diagonal abelian threefold.  Although
   the tensor varies under Hecke conjugacy, the carried restricted degree puts
   every iterated `eta=1` target in the common bounded Hilbert locus above.
+- 2026-07-31: Cycle 177 fully populated the Cycle 176 terminal receiver quartet
+  and computed all source--receiver and receiver--receiver terms symbolically.
+  The divergence-free receiver family has four polarization parameters. If `T`
+  is the terminal radius and `0<S<T` the extreme pump exponent, the uniquely
+  represented output `(T+S,Y,0)` has preprojection vector
+  `(aY^2,aY(S-T),bY)`. Its Leray projection vanishes only if `b=0` and then
+  either `a=0` or `Y^2=S^2-T^2`; the latter is impossible. The opposite
+  endpoint kills the other receiver polarization. Thus cancelling every new
+  output forces the receiver quartet to vanish, even allowing complex
+  polarizations. The raw Laurent filter cannot become a closed cubic receiver
+  architecture without completion modes or different frequencies.
+- 2026-07-31: Cycle 177 populated the terminal outputs of a shared-pump `m=2`
+  collision family as phase-aligned physical receiver modes.  On `L` distinct
+  horizontal layers, the exact constraints are `Y_n a_n b c_n=1`, while the
+  complete critical energy is
+  `2Rb^2+sum_n(4K_n a_n^2+4Q_n c_n^2)`.  Minimization over all amplitudes gives
+  `3*2^(5/3) R^(1/3) S_L^(2/3)`, where
+  `S_L=sum_n sqrt(K_n Q_n)/Y_n`; for `R=1,Y_n=n`, this is
+  `3*2^(5/3)L^(2/3)(1+o(1))=o(L)`.  The full receiver--pump convolution is not
+  silent: on each positive layer it occupies `x=-3R,-R,R,3R`, with magnitudes
+  `Y_n b c_n=1/a_n`; the inner pair lands on rails and the outer pair is
+  exterior.  Thus static unit actual receiver flux alone cannot force linear
+  `H^(1/2)` cost, but the example does not defeat a condition controlling all
+  undesignated output or dynamical inheritance.  No Navier--Stokes result is
+  claimed.
 - 2026-07-31: Cycle 176 extended the Cycle 175 Laurent collision filter to one
   simultaneously populated arbitrary-depth field. For
   `R_(n+1)=m_n R_n`, the factorization
@@ -251,7 +277,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 176
+- **cycle:** 177
 - **announcements:** none
 
 ## immutable target list
@@ -285,6 +311,16 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 177 formulated the invariant many-edge baseline for actual
+  cubic receiver flux. With orbit energies `x_[j]=2|j||u_j|^2`, unit triad
+  flux implies `x_p x_q x_k>=d_e=gamma_e^-2`. The resulting three-uniform
+  geometric program has an exact weighted-incidence AM--GM dual. For `L` edges
+  sharing one pump its value is `3(sum_i sqrt(d_i))^(2/3)`, with an explicit
+  stability excess for pump and sender/receiver imbalance. The actual phased
+  Leray star `p=(N,0,0)`, `q_i=(0,Y_i,0)`, `k_i=(N,Y_i,0)` attains the baseline
+  with every designated cubic orbit flux equal to one, so shared pumping alone
+  has zero compatibility excess. No regularity result is claimed.
 
 - 2026-07-31: Cycle 175 hostile-audited the phrase "unit designated critical
   throughput."  A valid charge must live on real frequency orbits, coherently

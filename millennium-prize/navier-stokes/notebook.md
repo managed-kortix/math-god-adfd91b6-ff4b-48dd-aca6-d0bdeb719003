@@ -1,5 +1,39 @@
 # Notebook
 
+## Cycle 177 cubic-flux baseline supplement
+
+For actual receiver flux and orbit energies `x_[j]=2|j||u_j|^2`, the sharp
+edge estimate `Phi_e<=gamma_e(x_p x_q x_k)^(1/2)` gives a three-uniform
+geometric program. Its weighted-incidence dual is the exact constrained
+AM--GM baseline and charges every shared mode only once. Physical cost minus
+this baseline is the invariant compatibility excess.
+
+For `L` triads sharing one pump, with `d_i=gamma_i^-2` and
+`D=sum_i sqrt(d_i)`, the exact baseline is `3D^(2/3)`. The common-pump Leray
+star `p=(N,0,0)`, `q_i=(0,Y_i,0)`, `k_i=(N,Y_i,0)`, with a quarter-turn receiver
+phase, attains unit cubic flux on every designated triad and equality in the
+baseline. Shared pumping alone therefore has zero excess. This supplements the
+filter no-go below; it is not a regularity result.
+
+## Cycle 177
+
+The immediate cubic-flux reinterpretation of the Cycle 176 filter fails.  The
+constructed coefficients are real, its nonlinearity has the common Fourier
+factor `i`, and its only quadratic outputs are unoccupied terminal modes, so
+every physical pairing `Re(conj(u_q) dot N_q(u))` is zero.  A nonzero flux needs
+an added receiver with a relative phase.  Exact full convolution over the
+four-parameter divergence-free receiver family shows that the outermost
+receiver--pump outputs can all vanish only when the receiver quartet is zero;
+receiver--receiver terms cannot cancel their unique frequencies.  Invariant
+checkerboard parity can
+support such phase-locked transfer and supplies neither escape nor a one-sided
+sign.  For any fixed shell set, the signed cubic flux integrates to the exact
+shell-energy identity, so it is not a new finite budget.  The route is rotated
+out of the main funnel.  Its only live bounded-scout gate is a scale-uniform,
+arbitrary-depth theorem giving one-sided coherent physical flux on
+bounded-overlap intervals, controlling reverse flux, and charging the result to
+one declared finite positive Navier--Stokes budget.
+
 ## Cycle 176
 
 The Cycle 175 progression filter has an exact simultaneously populated
