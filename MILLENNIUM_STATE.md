@@ -5,21 +5,13 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Navier temporal-coherence gate
-- **active main funnel:** exact-symbol Navier depletion.  Fixed-support and
-  recursively completed packets show that order-one critical production can
-  coexist with arbitrarily small exterior launch while the active phase stays
-  exactly locked.  Local leakage/phase escape is retired.  The surviving gate
-  cannot rely on mirror branching either: an exact infinite equal-shell chain
-  kills every designated mirror with compatible polarizations.  The surviving
-  gate cannot be a raw simultaneous cross norm either: one unit-output gauge
-  grows exponentially but pays increasing critical energy, while finite-depth
-  completion hides exterior output without reducing forcing on tiny populated
-  modes.  The surviving target is a time-integrated relative-rate/dwell-time
-  cost also fails without phase coherence: rapid temporal rotation and cheap
-  high-frequency viscous absorption allow long large forcing with tiny
-  response.  The surviving target is coherent heat-filtered Duhamel response
-  charged to a known finite budget using exact unaveraged Leray compatibility.
+- **phase:** portfolio rotation after Navier coherence closure
+- **active main funnel:** selection review.  A two-stage genuine NS cascade
+  with uniformly nondegenerate normalized symbols is exactly heat-resonant and
+  has no competing Picard route, yet its terminal heat-budget charge over one
+  parent lifetime decays as `N^-4`.  Temporal coherence without an intrinsic
+  critical-throughput amplitude bound is therefore retired; the Navier funnel
+  has reached a regularity-level normalization wall.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -151,7 +143,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 149
+- **cycle:** 150
 - **announcements:** none
 
 ## immutable target list
@@ -184,6 +176,18 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 150 ran the final bounded Navier coherence test.  The linked
+  triads `Ne1+Ne2=N(e1+e2)` and `N(e1+e2)+Ne3=N(1,1,1)` have exact normalized
+  edge symbols `1/sqrt(2)` and `1/sqrt(3)`; all competing positive bracketings
+  vanish and no signed source collision reaches the terminal mode.  The exact
+  second-generation response is `-N^2 t^2 exp(-3 nu N^2 t)(1,-1,0)`, with no
+  temporal cancellation.  Nevertheless its heat-budget charge over one parent
+  viscous lifetime is `[1-(131/8)e^-3]/(54 nu^4 N^4) -> 0`.  Hence absence of
+  dispersion and exact heat resonance do not give scale-uniform payment from
+  symbol efficiency alone.  A critical-throughput amplitude lower bound would
+  be required and is regularity-level input.  Navier is rotated after this
+  decisive no-go.
 
 - 2026-07-31: Cycle 149 derived the exact modal action identity
   `integral(|u_t|^2/lambda + lambda|u|^2) = integral |F|^2/lambda - endpoint`.
