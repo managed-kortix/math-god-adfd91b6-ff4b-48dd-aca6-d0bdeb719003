@@ -5,13 +5,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge fixed-degree representative route retired
-- **active main funnel:** BSD rank-two integral leading-term comparison.  The
-  next gate is an exact determinant-line identity relating the cyclotomic
-  leading term of Kato's class, the rank-two Mazur--Tate height regulator, and
-  the correctly normalized ordinary modular-symbol second moment.  Finite
-  congruence agreement is calibration only; the target is a theorem with every
-  Euler, period, lattice-index, and logarithmic normalization explicit.
+- **phase:** BSD exact cyclotomic order proved; leading scalar remains conjectural
+- **active main funnel:** portfolio rotation after the curve-specific BSD gate.
+  For `433a1,p=7`, exact interpolation, root number, functional equation, and
+  the modular-symbol residue `M2=5 mod 7` prove that the ordinary trivial-branch
+  cyclotomic p-adic L-function has order exactly two.  Identifying its quadratic
+  coefficient with the height regulator is the rank-two generalized
+  Perrin--Riou/p-adic BSD leading-term conjecture, not a consequence of further
+  finite precision.
   For every transported Cycle 151 diagonal image, the exact identities are
   `chi(M|Y)=16 eta` and `m^-3 f_*[Gamma]=eta^-1[Y]`, with exact denominator
   `eta` by primitivity. If one fixed integer `D` clears any positive
@@ -214,7 +215,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 171
+- **cycle:** 173
 - **announcements:** none
 
 ## immutable target list
@@ -545,6 +546,36 @@ waiting process.
   Relative rate and forcing-magnitude dwell taxes are retired.  Promotion now
   requires an exact-symbol temporal-coherence theorem producing a nonsummable
   heat-filtered response in an a priori finite budget.
+
+- 2026-07-31: Cycle 173 hostile-audited the exact cyclotomic order for
+  `433a1,p=7`. The Cycle 136 localization determinant supplies positive rank;
+  the only Gross--Zagier--Kolyvagin contrapositive used is the rank-zero theorem
+  `L(E,1) != 0 => E(Q) finite`, yielding the constant interpolation zero but no
+  claim of complex analytic rank two. The sole bad prime is split
+  multiplicative (`179^2=-1 mod 433`), hence the global root number is `+1`.
+  Keeping the full equation `F(T)=w u(T)F((1+T)^-1-1)`, with
+  `u(T)=(1+T)^(-ell(433))`, its linear coefficient is
+  `(1+u(0))F'(0)=u'(0)F(0)` when `w=+1`; therefore `u(0)=1` suffices only after
+  `F(0)=0`, and the sign is essential. This gives `F'(0)=0`. Cycle 171's
+  exact identity `M2=F''(0)+F'(0)` and certificate `M2=5 mod 7` then give
+  `F''(0) != 0`, proving `ord_T F=2`. This does not prove rank-two p-adic BSD,
+  its regulator leading term, or complex analytic rank two.
+
+- 2026-07-31: Cycle 172 audited the requested theorem bridge for
+  `433a1,p=7`.  Balakrishnan--Besser proves exactly that, for the unit-root
+  splitting and standard global logarithm, the Mazur--Tate sigma height used
+  in Cycles 143--145 equals the Coleman--Gross (hence Nekovar) cyclotomic
+  height.  The optimal modular parametrization (degree 28, Manin constant one)
+  likewise fixes periods but supplies no rank-two leading-term identity.
+  Published p-adic Gross--Zagier and the Disegni/Burungale--Skinner--Tian--Wan
+  BSD theorems cover analytic rank at most one, not this rank-two curve.
+  Burns--Kurihara--Sano gives the correct arbitrary-rank Bockstein/generalized
+  Rubin formalism, but the needed derived-Kato leading identity is the
+  Generalized Perrin--Riou conjecture and main-conjecture descent gives only an
+  unspecified p-adic unit.  Thus no audited theorem proves exactly in Q_7 that
+  `M2/2=(1-alpha^-1)^2 Reg_7/log_7(8)^2`; the mod `7^6` match remains finite
+  evidence.  Further precision is retired in favor of a rank-two explicit-
+  reciprocity or generalized Perrin--Riou proof.
 
 - 2026-07-31: Cycle 171 fixed the exact normalization between the ordinary
   modular-symbol second power moment and the cyclotomic derivative for

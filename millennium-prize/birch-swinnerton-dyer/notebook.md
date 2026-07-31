@@ -132,3 +132,18 @@ alone does not force this. A certified non-torsion rational point would imply
 the vanishing noncircularly by the contrapositive of the rank-zero Gross--
 Zagier--Kolyvagin theorem; interpolation and Cycle 59 would then kill both
 constant and tangent moments. This is no BSD proof.
+
+## Main-funnel cycle 173
+
+For `433a1,p=7`, the exact cyclotomic order is two. The Cycle 136 localization
+determinant proves that `P=(0,1)` and `Q=(-1,1)` are independent, hence positive
+rank. The contrapositive used is only the established rank-zero implication
+`L(E,1) != 0 => E(Q) finite`; it gives `L(E,1)=0` without asserting analytic
+rank at least two. Interpolation gives `F(0)=0`. The exact functional equation
+must be retained as `F(T)=w(E)u(T)F((1+T)^-1-1)`, with the conductor unit
+`u(T)=(1+T)^(-ell(433))`. For `w(E)=+1`, coefficient comparison gives
+`(1+u(0))F'(0)=u'(0)F(0)`; thus `u(0)=1` suffices only after the
+constant zero is known, while the sign is essential. Finally Cycle 171's
+`M2=F''(0)+F'(0)` and exact `M2=5 mod 7` imply `F''(0) != 0`. Hence
+`ord_(T=0) F=2`. This is a p-adic order theorem, not rank-two p-adic BSD or a
+complex analytic-rank-two proof.
