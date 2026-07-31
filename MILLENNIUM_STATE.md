@@ -5,13 +5,13 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** corrected ordinary cyclotomic packet and high-precision height
-- **active main funnel:** BSD leading-term comparison.  Exact p-power modular
-  symbols now give corrected ordinary cyclotomic moments through conductor `7^7`,
-  while a compact Frobenius certificate pins the unit root and Katz E2 needed
-  for high-precision sigma heights.  A finite numerical leading-term match is
-  not promoted to equality in `Q_7`; the next gate is a complete independent
-  normalization-compatible coefficient certificate or a strategic rotation.
+- **phase:** Navier all-depth cascade-circuit gate
+- **active main funnel:** exact-symbol Navier depletion.  Fixed-support and
+  recursively completed packets show that order-one critical production can
+  coexist with arbitrarily small exterior launch while the active phase stays
+  exactly locked.  Local leakage/phase escape is retired.  The surviving gate
+  is an all-depth obstruction to a scale-uniform cascade circuit using the
+  exact unaveraged Leray triad compatibility.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -143,7 +143,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 145
+- **cycle:** 146
 - **announcements:** none
 
 ## immutable target list
@@ -176,6 +176,18 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 146 rotated to Navier and closed exterior-launch/phase-
+  escape coercivity.  The sharp identity is `Phi^2 <= 4 E I_internal`; exterior
+  launch does not enter.  On a fixed ten-mode completion of the Cycle 113
+  packet, exact critical normalization leaves `Phi -> c_*>0` while
+  `Lambda_out=O(epsilon^2)`, so `Phi^2/(E Lambda_out)->infinity`.  The Fourier
+  parity class keeps the active interaction phase exactly maximizing.
+  Recursive completion makes exterior launch `O_r(epsilon^(2r))` at every
+  fixed depth.  Finite universally Euler-closed supports are exactly collinear
+  and have zero nonlinearity, but qualitative nonclosure gives no quantitative
+  tax.  The next legitimate target is an all-depth exact-symbol cascade-circuit
+  obstruction, not another local leakage inequality.
 
 - 2026-07-31: Cycle 145 corrected the ordinary stabilization formula by adding
   the lower-conductor `V_7` term.  Correct compatible second-moment residues are
