@@ -5,12 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after adjacent-cone obstruction closure
-- **active main funnel:** selection review.  For the actual adjacent Fermat
-  pair, the complete opposite Ext-one Yoneda transfer into diagonal Ext-two is
-  zero, while a common coefficient functional detects the 76-term standard-
-  Fermat carry.  All 33 projective `8|8` extension cones retain rank jump
-  `11 -> 12` and are first-order obstructed.
+- **phase:** BSD determinant-reciprocity gate
+- **active main funnel:** rank-two Kurihara production.  Maximal two-point
+  Kummer theory gives a positive-density supply of invertible two-prime
+  localization matrices, but does not imply Kurihara nonvanishing.  The target
+  is now an explicit reciprocity comparison between the core-rank-one derived
+  Kato leading term and the rational-point determinant line.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 140
+- **cycle:** 141
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +175,21 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 141 rotated to BSD and isolated the exact production gap.
+  Under full residual image and maximal two-point Kummer kernel, nonidentity-
+  unipotent auxiliary primes have density `1/[p(p-1)]`; conditioned on two such
+  primes, the rational-point localization determinant is nonzero with density
+  `(1-1/p)(1-1/p^2)`.  Only the zero row/projective direction is conjugacy
+  invariant; literal coordinate equidistribution is not.  For `p=7` the exact
+  constants are `1/42`, `288/343`, and absolute ordered-pair density `8/16807`.
+  Exploratory exact data on 37 `433a1` pairs had determinant zero iff Kurihara
+  delta zero, but pair-dependent unit ratios rule out a naive fixed or
+  prime-factorized scalar formula.  This is evidence only.  The missing theorem
+  is determinant-line explicit reciprocity; two-prime Kato derivatives remain
+  core-rank-one.  Cycles 135--136 were corrected: their explicit localization
+  determinant supplies rank >=2, so Kim's Kurihara upper bound sandwiches rank
+  two without a separate external rank computation.
 
 - 2026-07-30: Cycle 140 closed the minimal adjacent graded-MF cone ansatz.  The
   lower-left correction loophole was treated explicitly: ordinary/graded

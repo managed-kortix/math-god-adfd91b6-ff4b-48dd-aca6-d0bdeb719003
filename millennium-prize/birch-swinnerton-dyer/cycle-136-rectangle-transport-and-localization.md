@@ -82,10 +82,12 @@ Q-5P=(5,9)=7(1,1)\quad\text{over }\mathbf F_{29},
 Q-4P=(88,51)=7(7,32)\quad\text{over }\mathbf F_{113}.
 \]
 
-The nonzero determinant independently proves that `P,Q` are rationally
-independent and that their lattice has index prime to seven once the external
-rank-two upper bound is supplied.  It does not prove that the full Selmer group
-equals the rational Kummer subspace: the Selmer upper bound and
+The nonzero determinant independently proves that `P,Q` are independent modulo
+seven and hence rationally independent.  Combined with the Selmer upper bound
+from the Cycle 135 Kurihara value and Kim's theorem, this sandwiches the rank at
+two without a separate database or descent rank determination.  The determinant
+alone does not prove that the full Selmer group equals the rational Kummer
+subspace: the upper bound and
 `Sha[7^infty]=0` still use Kim's theorem and the Kurihara nonvanishing.
 
 The rectangle observation is elementary certificate bookkeeping.  Under

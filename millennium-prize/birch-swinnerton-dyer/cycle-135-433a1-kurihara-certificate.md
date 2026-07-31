@@ -74,8 +74,9 @@ columns: 0,3,3,6,4,3,5
 and each totals `3 mod 7`.
 
 Kim's published Theorem 1.8 gives Selmer corank at most two from this nonzero
-two-prime value.  Independent rank-two input for `433a1` supplies the reverse
-inequality.  Under the theorem's residual-surjectivity and Manin-normalization
+two-prime value.  The explicit points and invertible localization matrix of
+Cycle 136 supply the reverse rank inequality without a separate database or
+descent rank determination.  Under the theorem's residual-surjectivity and Manin-normalization
 hypotheses, the unit valuation then yields
 
 \[
@@ -88,8 +89,9 @@ hypotheses, the unit valuation then yields
 The curve has minimal discriminant `-433`, conductor `433`, Tamagawa product
 one, Manin constant one, and maximal mod-seven image according to the audited
 curve data.  The points `(0,1)` and `(-1,1)` lie on the curve; the rigorous rank
-two determination is external input and is not re-proved by the dependency-
-free verifier.
+two lower bound is independently certified by Cycle 136; the upper bound still
+comes from Kim's published theorem and is not re-proved by the dependency-free
+verifier.
 
 The exact residue depends on primitive-root conventions up to a nonzero unit;
 nonvanishing is canonical.  Literature searches found published rank-two
