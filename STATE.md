@@ -17,6 +17,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: completed all four five-vertex rank-four kernels. Exact physical
+  enumeration gives 700 rows and 378 automorphism orbits. The accepted
+  equilateral three-color sieve closes 370 orbits; a frozen exact residual
+  package closes the remaining eight (K9:4, K10:2, K11:2). The package checks
+  60 rational canonical/+2 frontier certificates and a separate exact
+  `Q(sqrt(3))` equality certificate for K9 row `(1,1,1,1,1)`, whose two odd
+  singleton paths cost zero and three mixed doubled bundles cost one each.
+  All-length coverage follows by fixed-parity coordinatewise monotonicity;
+  arbitrary rooted trees follow by kappa additivity or explicit induced-tree
+  ownership. Hostile audits caught and repaired a false `D>-2` citation and a
+  strictness overclaim at the equality row. Definitive referee: ACCEPT. The
+  remaining single-block tetracyclic frontier is cubic kernels 13--15 and 17;
+  kernel 16 is complete.
 - 2026-07-31: built an exact five-vertex rank-four target fixture: 700 physical
   rows, 378 genuine automorphism orbits, partitioned into 282 incidence records
   and 96 residuals, digest
