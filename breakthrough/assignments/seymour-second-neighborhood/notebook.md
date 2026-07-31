@@ -1234,3 +1234,30 @@ No audits yet.
   cover, SAT/CNF campaign, branch elimination, or result on SNC. The next step
   is to add exact present-pair orientations and full order-18 constraints per
   canonical parent without weakening this cover identity.
+
+### Exact m=6 placement-only filter
+
+- Applied only five proved necessary placement tests to the frozen 187,324-row
+  cover: B-to-A support, per-A outgoing capacity, per-C local capacity, the B6
+  three-C-hole aggregate, and exact existential C-degree feasibility for both
+  branches. Exact formulas and reproduction commands are in
+  `experiments/README.md`.
+- The status artifact is a packed three-bit partition keyed by frozen cover row,
+  not a second copy of the placement rows. A separate checker reparses graph6
+  holes, materializes the omitted vertices to form the full 18-vertex coloring,
+  tests pair presence directly, brute-enumerates C-C directions and C degree
+  targets, verifies reason totals, and verifies the complete ordered partition.
+- The C checks range over every actual C vertex up to the branch capacity,
+  including C vertices isolated from the six-hole support, and orient exactly
+  the present internal C pairs. Frozen row 17 (`B6`, `BCCC`, K4 hole support)
+  is an explicit feasible regression: its three missing C-C pairs are not
+  oriented and its three C vertices may all target degree nine.
+- The filter accepts 76,361 rows and rejects 110,963. First-failure counts are
+  `B_NO_PRESENT_A=0`, `A_OUT_CAPACITY=7`, `C_LOCAL_CAPACITY=0`,
+  `B6_C_HOLES=85134`, and `C_DEGREE_DP=25822`. The 95,083-byte ledger SHA-256 is
+  `9bfd2fadda610dde6cef7c13956edba6b0fa763e2ffc31226c0ddf1323fd1d0c`.
+  By branch, B6 accepts 23,578 and rejects 88,642; B7 accepts 52,783 and rejects
+  22,321.
+- **Scope:** rejection is only by necessary placement conditions. Acceptance
+  asserts no orientation completion, bad local model, or branch feasibility;
+  the filter is not a B6/B7 elimination or an SNC result.

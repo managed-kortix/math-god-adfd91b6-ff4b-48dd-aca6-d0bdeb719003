@@ -134,3 +134,48 @@ canonical representative and orbit size, and separately counts all valid raw
 colorings. Orbit weights sum to 1,862,693 B6 and 1,022,346 B7 raw colorings.
 This is a placement cover only; it does not orient present pairs, emit CNFs, or
 eliminate either branch.
+
+The placement-only filter reads `m6-placement-cover.txt` without regenerating or
+relabeling it and assigns every row one deterministic status. Run it and its
+materially independent checker with:
+
+```sh
+python3 m6_placement_filter.py --output m6-placement-filter.txt
+python3 m6_placement_filter.py --check m6-placement-filter.txt
+python3 check_m6_placement_filter.py m6-placement-filter.txt
+python3 test_m6_placement_filter.py
+```
+
+Write `h_X(v)` for the number of six missing pairs from `v` to cell `X`, and
+write `H_XY` for the corresponding cell-pair total. Cell sizes are
+`(r,a,b,c)=(1,8,6,3)` in B6 and `(1,8,7,2)` in B7. The filter applies only these
+necessary predicates, in the displayed order (the ledger records the first
+failure):
+
+1. Every `v in B` has a present pair to A: `h_A(v)<8`.
+2. Every `v in A` has at least eight possible outgoing pairs in `A union B`:
+   `(7+b)-h_A(v)-h_B(v)>=8`.
+3. For every actual `v in C`, including C vertices isolated from the six-hole
+   support, put `f_v=9-h_R(v)-h_A(v)` and
+   `q_v=b+c-1-h_B(v)-h_C(v)`. The locally possible degree interval meets
+   `{8,9}` exactly when `f_v<=9` and `f_v+q_v>=8`.
+4. In B6, `H_RC+H_AC+H_CC>=3`.
+5. The exact C feasibility check uses all `c` actual C vertices, orients every
+   present C-C pair (and no missing C-C pair), then asks for targets
+   `d_v in {8,9}`, with at most three C targets equal to nine, such that
+   `f_v+out_CC(v)<=d_v<=f_v+out_CC(v)+b-h_B(v)` for every `v in C`.
+
+The last check is a tiny finite DP over present C-C pairs in the producer. The
+checker instead materializes the full 18-vertex coloring, tests pair presence,
+and directly enumerates directions and targets. The bound of three degree-nine
+C vertices follows from `C(18,2)-6=147=15*8+3*9`. C-B choices are independent
+once their C endpoint is fixed, so the interval condition is exact. The ledger packs each reason code
+into three bits in frozen zero-based row order, then base64-encodes that keyed
+status stream. The checker requires exactly one valid status per cover row and
+checks a disjoint exhaustive partition without duplicating the 6.6 MB cover.
+The deterministic ledger is 95,083 bytes with SHA-256
+`9bfd2fadda610dde6cef7c13956edba6b0fa763e2ffc31226c0ddf1323fd1d0c`.
+
+These are necessary placement predicates only. They do not orient A-A, A-B,
+B-B, or all C incident pairs simultaneously with non-C degrees, do not encode
+badness or minimality, and do not eliminate either branch.
