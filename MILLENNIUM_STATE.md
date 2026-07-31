@@ -5,13 +5,15 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Yang--Mills shrinking-composite gate
+- **phase:** portfolio rotation after Yang--Mills composite closure
 - **active main funnel:** reflection-compatible local observable construction.
   The free spatially smoothed point-split electric square has an exact positive
   two-photon OS density and a well-defined collar limit, so reflection
-  positivity is not the obstacle. The next gate is an interacting,
-  gauge-invariant composite with resolution shrinking in physical units and
-  cutoff/volume-uniform local negative-Sobolev tightness plus noncollapse.
+  positivity is not the obstacle.  Free scaling and exact lattice contact
+  analysis now show that shrinking spatial smoothing before squaring fails
+  tightness in every Sobolev topology; the local object requires genuinely
+  four-dimensional renormalization.  Without an interacting uniform estimate,
+  rotate after preserving the calibration and no-go.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -143,7 +145,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 157
+- **cycle:** 158
 - **announcements:** none
 
 ## immutable target list
@@ -176,6 +178,18 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 158 closed shrinking spatial smoothing as a local-composite
+  route.  In free Maxwell, the equal-time constituent-smoothed quadratic
+  covariance is `rho^-5/2 Phi(sqrt(rho)k)` with `Phi(0)>0`; the only noncollapsed
+  multiplicative limit is spatial white noise after scaling by `rho^(5/4)`, not
+  the Maxwell composite.  On a temporal lattice, contact-contact aliasing gives
+  positive covariance `~1/(a_tau rho^3)` at every fixed external frequency, so
+  the centered square is not tight in local `H^-s` for any finite s.  Identity
+  subtraction leaves covariance unchanged and contact polynomials do not remove
+  this positive plateau.  The formal `s>4` threshold applies only to a properly
+  renormalized four-dimensional composite.  No interacting shrinking-resolution
+  estimate is available, so Yang--Mills rotates.
 
 - 2026-07-31: Cycle 157 rotated to Yang--Mills and settled the free point-split
   composite gate positively. For tests supported `t>=delta`, both endpoints
