@@ -53,3 +53,35 @@ algebraicity; nonzero rank rejects only the chosen object. The next candidate
 must be a non-split, nontransverse extension with an explicit locally free
 resolution, since transverse graph extensions
 cannot alter the degree-two obstruction.
+
+Cycles 199--200 upgrade the last statement from ordinary extensions to every
+finite twisted complex on the seven transformed graph vertices. Cross-Ext is
+concentrated in degree three, so the degree-one cross-arrow quiver is acyclic;
+no cross-path or higher `A_infinity` product can return to cancel a diagonal
+degree-two obstruction. The nonzero projector coefficients then force a
+nonzero graph obstruction. This does not yet close arbitrary retracts in the
+idempotent-complete thick category: generic-open localization can kill the
+global `H^1(N)` class, and K-additivity sees only the already-cancelled
+semiregularity image. Finite-cone candidates must add new or nontransverse
+support; closing the Karoubi boundary requires a new categorical theorem.
+
+Cycle 201 shows exactly what that theorem cannot be. For a retract
+`E --i--> C --p--> E`, Atiyah naturality gives
+`o_v(E)=p[2]o_v(C)i`, but a nonzero ambient obstruction can lie on the
+complementary summand. Trace and ordinary Hochschild semiregularity factor
+through the Chern character and vanish on the horizontal class `xi`. The
+graph-generated category has no vertex-separating central idempotents because
+all pairwise `Ext^3` groups are nonzero. Thus only projector-sensitive,
+untraced information could close the boundary, and that information is
+presently just the unknown raw Atiyah corner itself.
+
+Cycle 201B closes reduced clean-union smoothings as the immediate geometric
+escape. For `Z=union G_a`, restriction to each dense branch open forces the PEL
+tangent into `intersection ker(rho_a)`; clean smoothing and gluing modules are
+supported on the multiple locus. This holds even if the general support is
+smooth and geometrically irreducible. Any endpoint retaining a nonunit
+transformed graph has zero PEL image, while the smallest nontransverse pair has
+image dimension at most one. Signed endpoint equality cancels semiregularity
+images, not the separate endpoint deformation conditions. The search must use
+support already generically irreducible at the special fiber, a generically
+linked/nonreduced object, or genuinely non-graph support.

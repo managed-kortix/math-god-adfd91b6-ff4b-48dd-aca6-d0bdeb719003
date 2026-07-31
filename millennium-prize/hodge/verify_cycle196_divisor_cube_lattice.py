@@ -25,6 +25,14 @@ def gaussian_multiply(a, b):
     return (a[0] * b[0] - a[1] * b[1], a[0] * b[1] + a[1] * b[0])
 
 
+def evaluate_integer_polynomial(coefficients, value):
+    result = (0, 0)
+    for coefficient in reversed(coefficients):
+        result = gaussian_multiply(result, value)
+        result = (result[0] + coefficient, result[1])
+    return result
+
+
 def add(*forms):
     result = {}
     for form in forms:
@@ -156,6 +164,20 @@ def main():
         (-117, 44),
     ]
 
+    sector_eigenvalues = [
+        (-117, -44),
+        (-35, -120),
+        (75, -100),
+        (125, 0),
+        (75, 100),
+        (-35, 120),
+        (-117, 44),
+    ]
+    assert [
+        evaluate_integer_polynomial(COEFFICIENTS, eigenvalue)
+        for eigenvalue in sector_eigenvalues
+    ] == [(D0, 0)] + [(0, 0)] * 5 + [(D0, 0)]
+
     graphs = []
     matrices = []
     for power in powers:
@@ -188,6 +210,7 @@ def main():
     print("Cycle 196 Hermitian divisor-cube lattice")
     print(f"D0 = {D0}")
     print(f"projector coefficients = {COEFFICIENTS}")
+    print("coefficient signs agree with D0*q: positive on both pure sectors")
     print(f"powers of 2+i = {powers}")
     print(f"nonzero integral coordinates of D0*alpha0 = {len(target)}")
     print(f"coordinate content of D0*alpha0 = {content}")

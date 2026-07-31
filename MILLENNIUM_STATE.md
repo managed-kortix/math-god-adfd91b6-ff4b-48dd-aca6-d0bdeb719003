@@ -6,6 +6,61 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
 - **phase:** Hodge fixed-degree relative-Chow production gate
+- **Cycle 201B clean-union smoothing gate:** for every connected reduced clean
+  union `Z=union G_a` of codimension-three graphs, restriction to dense branch
+  opens gives `im(T_[Z] Hilb(A/S)->T_0S) subset intersection ker rho_a`.
+  Smoothing and gluing corrections are supported on the multiple locus and
+  cannot cancel a graph normal obstruction there, even if the general support
+  is smooth and geometrically irreducible. Hence an endpoint retaining a
+  nonunit transformed graph has zero PEL tangent image; the pair
+  `Gamma_I union Gamma_diag(3,1,1)` has image dimension at most one. Signed
+  endpoint equality cancels only after semiregularity, while the pair space
+  imposes both endpoint conditions; a common graph bridge only shrinks the
+  image. The next support must already be generically irreducible at the
+  special fiber, be generically linked/nonreduced, or be genuinely non-graph.
+  This closes embedded reduced clean smoothings, not arbitrary Chow tangents
+  unsupported by a Hilbert family. No Hodge result is claimed.
+- **Cycle 201 retract-natural obstruction audit:** for a splitting
+  `E --i--> C --p--> E`, naturality of the Atiyah class gives the exact corner
+  formula `o_v(E)=p[2]o_v(C)i`. It does not give the needed converse: a nonzero
+  ambient obstruction can lie entirely on the complementary summand.
+  Trace/Hochschild semiregularity factors through `ch(E)` and vanishes in the
+  relevant degree for every object of class `xi`, including the known
+  obstructed split graph object; inserting the projector gives the same trace,
+  while retaining the untraced corner is tautologically the unknown raw
+  obstruction. Central projectors also fail: scalar degree-zero endomorphisms
+  on each `F_k` and nonzero pairwise `Ext^3` force every central idempotent of
+  the thick generated category to be zero or one. Deformation base change only
+  repackages raw liftability. Hence these methods cannot promote Cycle 200 to
+  arbitrary retracts; the universal statement remains open pending genuinely
+  noncentral projector classification. No Hodge result is claimed.
+- **Cycle 200 graph triangulated-envelope hostile audit:** let `F_k` be the seven
+  transformed graph structure sheaves occurring in the denominator-cleared
+  Weil projector class `xi=sum c_k[F_k]`. Every `c_k` is nonzero. For each
+  distinct graph cross-Ext is concentrated in degree three. After shifts, a
+  degree-one cross-arrow quiver has no directed cycle: summing degrees around a
+  cycle would give `3m=m`. Every finite twisted complex is therefore filtered
+  by an acyclic vertex order, and no cross-path or higher `A_infinity` product
+  can return to cancel a diagonal degree-two obstruction. Since every `c_k` is
+  nonzero and each graph has nonzero normal Kodaira--Spencer map, no finite
+  graph-sheaf cone with projector class has rank-zero Atiyah map. Hostile audit
+  rejects a stronger localization proof: restriction to a small open can kill
+  the global `H^1(N)` obstruction. Thus arbitrary retracts in the Karoubi/thick
+  closure are not excluded by K-additivity and the Ext quiver alone. No Hodge
+  result is claimed.
+- **Cycle 199 nontransverse graph-extension gate:** for the smallest clean pair
+  `Gamma_I,Gamma_diag(3,1,1)`, excess intersection gives
+  `Ext^*(F_0,F_1)=tau*Lambda(h_1,h_2,e_1,e_2)` on each of four abelian-surface
+  components, hence dimensions `4(1,4,6,4,1)` and cross `Ext^2=C^16`.
+  Ordinary `Ext^1` extensions have class `[F_0]+[F_1]`, while shifted
+  cross-`Ext^2` totalizations have `[F_0]-[F_1]`; their Weil coefficients are
+  respectively `4` and `-2`, and gluing cannot tune either. Opposite returns
+  still vanish by squaring the unique transverse generator. More decisively,
+  every cross term is supported on the intersection, while restriction to each
+  dense graph open retains `rho_0(B)` and `rho_1(B)`. Their common kernel is
+  one-dimensional, so every such cone has Atiyah rank at least eight and fails
+  the Cycle 198 rank-zero gate. The next object needs a differential nonzero
+  generically on all support components or genuinely new support.
 - **Cycle 198 vector-bundle `c_3` hostile audit:** the unpinned generic request
   for a vector bundle with nonzero exceptional `c_3` projection is equivalent
   to algebraicity of the Weil space in the very-general PEL setting. The
@@ -667,7 +722,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 198
+- **cycle:** 201
 - **announcements:** none
 
 ## immutable target list

@@ -1,5 +1,68 @@
 # Notebook
 
+## Cycle 201B clean-union smoothing gate
+
+For any connected reduced clean union `Z=union G_a` of codimension-three
+graphs, restriction to the dense branch opens gives
+`im(T_[Z] Hilb(A/S) -> T_0S) subset intersection_a ker(rho_a)`. The clean
+smoothing module and gluing terms are supported on the multiple locus, so they
+cannot cancel a normal Kodaira--Spencer class on a dense graph open. This stays
+true when the general support is smooth and geometrically irreducible. Every
+endpoint union retaining a nonunit transformed graph therefore has zero PEL
+tangent image; `Gamma_I union Gamma_diag(3,1,1)` has image dimension at most
+one. Signed endpoint equality cancels only after semiregularity, while the pair
+space imposes both endpoint conditions separately. A common graph bridge only
+adds kernel conditions. The next support must already be generically
+irreducible at the special fiber, be generically linked/nonreduced, or be
+genuinely non-graph. This is an embedded-smoothing statement; an arbitrary
+Chow tangent not induced by a Hilbert family is not identified with it.
+
+## Cycle 201 retract-natural obstruction audit
+
+The exact retract formula is `o_v(E)=p[2]o_v(C)i`; it shows that retracts of
+unobstructed objects are unobstructed, but a nonzero ambient obstruction may
+live wholly on the complementary summand.  Categorical trace and Hochschild
+semiregularity factor through `ch(E)` and vanish in the relevant degree for
+every object of projector class `xi`, including the known obstructed split
+object.  Projector-inserted trace has the same failure, while retaining the
+untraced corner merely recovers the unknown raw obstruction.  Central
+idempotents cannot separate vertices: `End^0(F_k)=C` and every pair has nonzero
+`Ext^3`, forcing all central idempotent scalars to agree.  Deformation-category
+base change repackages raw liftability but does not make it K-theoretic.  Thus
+the four proposed categorical devices cannot close the Karoubi boundary; a
+classification of noncentral splitting projectors would be new required input.
+
+## Cycle 200 graph triangulated-envelope hostile audit
+
+The Cycle 199 cross-Ext computation closes the finite twisted-complex envelope.
+Every cross group lies in degree three; after shifts, a directed cycle of
+degree-one arrows would force `3m=m`. Hence each finite graph-sheaf twisted
+complex has an acyclic vertex filtration, and no cross-path or higher
+`A_infinity` operation can return to alter a diagonal degree-two obstruction.
+The nonzero projector coefficients retain nonzero multiples of the individual
+normal obstructions. A stronger thick-category argument remains unproved:
+generic-open restriction can kill the global `H^1(N)` class, and an arbitrary
+Karoubi summand need not preserve the vertex filtration. K-additivity and
+cohomological cancellation alone decide neither raw Atiyah vanishing nor this
+retract boundary.
+
+## Cycle 199 nontransverse graph extensions
+
+For `F_0=O_(Gamma_I)` and `F_1=O_(Gamma_diag(3,1,1))`, the clean intersection
+is four copies of `E_i^2`, with excess rank two and one transverse normal line.
+The cross algebra on each component is
+`tau Lambda(h_1,h_2,e_1,e_2)`, giving global dimensions
+`4(1,4,6,4,1)` and `Ext^2=C^16`. A nonzero `Ext^1` class gives the smallest
+ordinary nonsplit extension; an `Ext^2` class gives the smallest shifted cone
+using the requested group. Their `K_0` classes are respectively
+`[F_0]+[F_1]` and `[F_0]-[F_1]`, so their pure Weil coefficients are fixed at
+`4` and `-2`. The opposite degree-one product is zero
+because it squares the unique transverse generator. Independently of this
+product, cross corrections vanish away from the double locus. Restriction to
+the two dense graph opens forces both graph equations; their common PEL kernel
+is one-dimensional. Every such extension/cone therefore has Atiyah rank at
+least eight and cannot pass the rank-zero deformation gate.
+
 ## Cycle 197 Appell--Humbert complete-intersection no-go
 
 For a divisor class with Hermitian matrix `R`, the PEL Beltrami tangent

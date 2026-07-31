@@ -67,10 +67,17 @@ def main():
     W=["dz1","dz2","dz3","dbar4","dbar5","dbar6"]
     Wb=["dbar1","dbar2","dbar3","dz4","dz5","dz6"]
     assert coeff(graph,W)==1 and coeff(graph,Wb)==-1
+    # Each real graph factor is (i/2) times its complex-basis factor.
+    normalization=(Fraction(0,1),Fraction(-1,8))
+    normalized_W=(normalization[0]*coeff(graph,W),normalization[1]*coeff(graph,W))
+    normalized_Wb=(normalization[0]*coeff(graph,Wb),normalization[1]*coeff(graph,Wb))
+    assert normalized_W==(0,Fraction(-1,8))
+    assert normalized_Wb==(0,Fraction(1,8))
     print("Cycle 151 nonsplit diagonal seed")
     print("Hermitian determinant = -3; alternating determinant = 9")
     print("polarization type = (1,1,1,1,1,3); signature = (3,3)")
     print("diagonal W^6 coefficient = 1; conjugate coefficient = -1")
+    print("normalized coefficients = -i/8, +i/8")
     print("all exact checks passed")
 
 
