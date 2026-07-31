@@ -5,15 +5,18 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Navier global cross-edge cascade gate
+- **phase:** Navier dynamical dwell-time gate
 - **active main funnel:** exact-symbol Navier depletion.  Fixed-support and
   recursively completed packets show that order-one critical production can
   coexist with arbitrarily small exterior launch while the active phase stays
   exactly locked.  Local leakage/phase escape is retired.  The surviving gate
   cannot rely on mirror branching either: an exact infinite equal-shell chain
   kills every designated mirror with compatible polarizations.  The surviving
-  gate is the accumulated complete cross-edge convolution of the simultaneous
-  circuit, using the exact unaveraged Leray compatibility.
+  gate cannot be a raw simultaneous cross norm either: one unit-output gauge
+  grows exponentially but pays increasing critical energy, while finite-depth
+  completion hides exterior output without reducing forcing on tiny populated
+  modes.  The surviving target is a time-integrated relative-rate/dwell-time
+  cost using the exact unaveraged Leray compatibility.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -145,7 +148,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 147
+- **cycle:** 148
 - **announcements:** none
 
 ## immutable target list
@@ -178,6 +181,19 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 148 computed the complete simultaneous convolution of the
+  mirror-free chain through depth eight in a raw unit-output gauge.  Exterior
+  support grows quadratically and the unweighted squared output empirically as
+  `16^L`, dominated by rail--rail interactions.  This is not intrinsic: the
+  normalized edge symbol stays O(1) but its derivative-scale/critical-charge
+  efficiency decays, so unit output pays increasing energy.  Six-periodic
+  arithmetic creates coherent collision channels, preventing naive pairwise
+  norm lower bounds.  Reciprocal amplitude rescaling obeys a pair-product
+  obstruction, but arbitrary-depth uniqueness and normalized coercivity remain
+  unproved.  Recursive completion again hides exterior output while leaving
+  order-one forcing on tiny populated correction modes.  The funnel therefore
+  advances to a dynamical dwell-time/relative-rate gate.
 
 - 2026-07-31: Cycle 147 refuted mirror-sideband branching as a universal
   all-depth tax.  Unequal-radius inputs cannot kill only one mirror, but
