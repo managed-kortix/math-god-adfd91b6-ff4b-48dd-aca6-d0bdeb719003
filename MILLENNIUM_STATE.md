@@ -5,7 +5,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Navier dynamical dwell-time gate
+- **phase:** Navier temporal-coherence gate
 - **active main funnel:** exact-symbol Navier depletion.  Fixed-support and
   recursively completed packets show that order-one critical production can
   coexist with arbitrarily small exterior launch while the active phase stays
@@ -16,7 +16,10 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   grows exponentially but pays increasing critical energy, while finite-depth
   completion hides exterior output without reducing forcing on tiny populated
   modes.  The surviving target is a time-integrated relative-rate/dwell-time
-  cost using the exact unaveraged Leray compatibility.
+  cost also fails without phase coherence: rapid temporal rotation and cheap
+  high-frequency viscous absorption allow long large forcing with tiny
+  response.  The surviving target is coherent heat-filtered Duhamel response
+  charged to a known finite budget using exact unaveraged Leray compatibility.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -148,7 +151,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 148
+- **cycle:** 149
 - **announcements:** none
 
 ## immutable target list
@@ -181,6 +184,18 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 149 derived the exact modal action identity
+  `integral(|u_t|^2/lambda + lambda|u|^2) = integral |F|^2/lambda - endpoint`.
+  It confirms large forcing on a tiny mode pays temporal action, but that action
+  is not bounded by the Leray energy inequality.  Rapidly rotating forcing can
+  remain order one indefinitely with arbitrarily small amplitude and viscous
+  cost; high-frequency quasi-steady absorption is likewise cheap in the energy
+  budget.  The heat-adapted causal Duhamel norm is exactly budgetable for
+  generated modes, but deliberately discounts such temporal cancellation.
+  Relative rate and forcing-magnitude dwell taxes are retired.  Promotion now
+  requires an exact-symbol temporal-coherence theorem producing a nonsummable
+  heat-filtered response in an a priori finite budget.
 
 - 2026-07-31: Cycle 148 computed the complete simultaneous convolution of the
   mirror-free chain through depth eight in a raw unit-output gauge.  Exterior
