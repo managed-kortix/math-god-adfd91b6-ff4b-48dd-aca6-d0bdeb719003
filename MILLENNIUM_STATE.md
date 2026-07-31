@@ -5,7 +5,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge connected-representative rotation gate
+- **phase:** portfolio rotation after Hodge graph closure
 - **active main funnel:** deformation of an exceptional algebraic seed.  On the
   explicit `Q(i)` determinant-class `[-3]` Weil sixfold `E_i^3 x E_i^3`, the
   antilinear diagonal graph has nonzero pure determinant projection and spans
@@ -14,10 +14,10 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   triangular extensions, and smallest effective graph unions retain
   componentwise obstruction. Grading now also forbids every bidirectional return
   cycle built from transverse graph cross-Ext-three classes. The next candidate
-  four-graph staircase is connected but its asserted determinantal smoothing
-  had the wrong central ideal, fails global Picard compatibility, and has zero
-  PEL base tangent.  The next gate requires a different connected global
-  representative, not another local graph smoothing.
+  the final clean two-graph candidate globally smooths and has lower-degree
+  cross Ext, but its opposite Ext-one return product is zero and its full class
+  remains rank-eight obstructed.  All concrete graph-derived deformation routes
+  are closed; retain the special nonsplit seed and rotate to a new Clay funnel.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -149,7 +149,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 155
+- **cycle:** 156
 - **announcements:** none
 
 ## immutable target list
@@ -182,6 +182,18 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 156 closed the globally smoothable clean two-graph escape.
+  For `Gamma_I` and `Gamma_diag(3,1,1)`, cross Ext dimensions are
+  `4(1,4,6,4,1)` in degrees one through five, so opposite degree-one arrows
+  exist, but their Yoneda return into self Ext-two is identically zero.  Cross
+  corrections live on the intersection and cannot cancel component obstruction
+  on dense graph opens.  The combined PEL obstruction and contraction of the
+  smooth class both have rank eight and one-dimensional kernel; only the pure
+  exceptional projection is horizontal.  The smoothing remains inside an
+  abelian-fourfold extra-endomorphism locus.  Dense Hecke algebraicity also
+  fails to spread without uniform degree and denominator bounds.  Hodge rotates
+  after preserving its explicit special nonsplit seed.
 
 - 2026-07-31: Cycle 155 corrected and retired the staircase smoothing.  The
   four-graph union ideal is the squarefree monomial ideal `J`; the displayed
