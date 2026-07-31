@@ -5,9 +5,9 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** exact finite cyclotomic leading-term packet
+- **phase:** corrected ordinary cyclotomic packet and high-precision height
 - **active main funnel:** BSD leading-term comparison.  Exact p-power modular
-  symbols now give stabilized raw cyclotomic moments through conductor `7^7`,
+  symbols now give corrected ordinary cyclotomic moments through conductor `7^7`,
   while a compact Frobenius certificate pins the unit root and Katz E2 needed
   for high-precision sigma heights.  A finite numerical leading-term match is
   not promoted to equality in `Q_7`; the next gate is a complete independent
@@ -143,7 +143,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 144
+- **cycle:** 145
 - **announcements:** none
 
 ## immutable target list
@@ -177,12 +177,23 @@ waiting process.
 
 ## last ticks
 
+- 2026-07-31: Cycle 145 corrected the ordinary stabilization formula by adding
+  the lower-conductor `V_7` term.  Correct compatible second-moment residues are
+  `5,40,187,2245,9448,76676`, not the prior raw-normalization sequence.  A new
+  dependency-free sigma verifier, using Frobenius-certified `E2=4471315` and
+  coefficients through sigma degree nine, reconstructs the height matrix
+  `[[2952047,1507520],[1507520,4713289]] mod 7^8` and regulator
+  `2495619 mod 7^8`, with normalized unit `50931 mod 7^6`.  This completes the
+  exact finite curve calibration; no equality in Q7 or full BSD scalar claim is
+  inferred.
+
 - 2026-07-31: Cycle 144 produced exact p-power Mazur--Tate raw moments for
   `433a1,p=7` at conductors `7^5,7^6,7^7`: `(D0,D1,D2)` equals
   `(0,-4802,967053944)`, `(0,621859,12876477045)`, and
-  `(0,78942479,9062036974073)`.  After unit-root normalization, `D2` stabilizes
-  through residues `5,33,278,1650,16056,32863` modulo `7,...,7^6`.
-  These are power moments, not automatically the T-square coefficient or
+  `(0,78942479,9062036974073)`.  Correction: ordinary stabilization requires
+  the lower-conductor `V_7` subtraction.  The compatible `M2` residues are
+  `5,40,187,2245,9448,76676` modulo `7,...,7^6`; the earlier raw-normalization
+  sequence was not an ordinary measure.  These are power moments, not automatically the T-square coefficient or
   analytic derivative.  A separate integer verifier checks a crystalline
   Frobenius matrix modulo `7^8`, its unit root `3795817`, sigma parameter
   `2509791`, and Katz `E2=4471315`.  A reported p-adic BSD match through `7^8`

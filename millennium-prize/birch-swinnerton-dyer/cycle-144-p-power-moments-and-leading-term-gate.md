@@ -42,22 +42,33 @@ D_{2,n}=\Theta_n''(0)+\Theta_n'(0).
 Thus they must not be confused with the falling-factorial `T^2` coefficient or
 with an analytic `s`-derivative.
 
-For the unit root `alpha` of
+The raw moments are not themselves the compatible ordinary distribution.  For
+the unit root `alpha` of
 
 \[
 X^2+3X+7,
 \qquad\alpha=4\pmod7,
 \]
 
-the normalized values `alpha^(-(n+1))D_(2,n)` stabilize as
+the `p`-stabilized symbol contains the lower-conductor degeneracy term.  Exact
+trace over the seven lifts gives
 
 \[
-5,33,278,1650,16056,32863
+M_{2,n}=\alpha^{-(n+1)}\left(D_{2,n}-\alpha^{-1}
+\left(7D_{2,n-1}+6\cdot7^nD_{1,n-1}\right)\right)\pmod {7^n}.
 \]
 
-modulo successive powers `7,...,7^6`.  In particular the normalized second
-power moment is a unit.  This is an exact finite modular-symbol certificate,
-not yet a convention-free `p`-adic BSD coefficient.
+The corrected compatible residues are
+
+\[
+5,40,187,2245,9448,76676
+\]
+
+modulo successive powers `7,...,7^6`.  In particular the ordinary second power
+moment is a unit.  The previously displayed raw normalization omitted the
+lower-conductor term; the exact raw table remains valid, but that earlier
+sequence was not an ordinary measure.  This is an exact finite modular-symbol
+certificate, not yet a convention-free `p`-adic BSD coefficient.
 
 An independent crystalline packet records geometric Frobenius on
 `dx/v,x dx/v`, where `v^2=4x^3+x^2+4`, modulo `7^8`:
