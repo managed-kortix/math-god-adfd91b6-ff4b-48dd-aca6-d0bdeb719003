@@ -5,7 +5,34 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge fixed-degree relative-Chow production gate
+- **phase:** Navier--Stokes quadratic-order finite-support completion gate
+- **Cycle 203 first Ferrand-double bounded campaign:** first doubles on either
+  `Gamma_I` or `Gamma_diag(3,1,1)` are parameterized, for each fixed Hilbert
+  polynomial, by the locally-free open in `Quot(O_G^3,P_L)`; the embedded
+  Ferrand algebra has no independent extension coordinate. On every local
+  quotient chart its Atiyah matrix has the canonical block
+  `(A_r(a) tensor I_3)rho_M`, with `det A_r=+/-2`. The block ranks are exactly
+  `6` and `8`; the paired block has rank `8`. Elimination of its entries to all
+  quotient/extension parameters gives the unit ideal, so the rank-zero locus is
+  empty on every bounded campaign. Additional line-quotient obstruction rows
+  may increase rank but cannot change this conclusion. No Hodge result is
+  claimed.
+- **Cycle 203 minimal Gorenstein-link gate:** fix `L=mP` and parameterize the
+  smallest non-CI codimension-three Gorenstein centers by `5 x 5` alternating
+  matrices with entries in `H^0(L)`. Containing `Gamma_I` or
+  `Gamma_diag(3,1,1)` is exactly the rank-at-most-two condition after
+  restriction; on each of ten pivot charts three corrected entries lie in the
+  graph ideal, and their normal determinant cuts out the proper-link open.
+  Buchsbaum--Eisenbud gives `[O_W]=1-5O(-2L)+5O(-3L)-O(-5L)`. Hence the
+  canonical rank-zero liaison sheaf `E_G=I_G/I_W` has
+  `ch_3(E_G)=5m^3P^3-[G]`, with nonzero exceptional coefficient `-1` or `-3`.
+  Since `P^3` is PEL-horizontal, its first semiregularity obstruction is the
+  negative graph map. Exact ranks are `6` for `Gamma_I` and `8` for `Gamma_D`,
+  independently of every matrix parameter. The rank-zero parameter ideal is
+  already `(1)` and remains `(1)` after saturation by all proper-link open
+  conditions. Thus homogeneous minimal Pfaffian linkage supplies exceptional
+  rank-zero sheaves but never a rank-zero obstruction map; weighted centers
+  with nonhorizontal universal class remain open. No Hodge result is claimed.
 - **Cycle 202A Fourier--Mukai obstruction transport:** the untwisted transform
   of a graph structure sheaf is a shifted sheaf on the annihilator threefold.
   Tensoring first by a relative ample line bundle makes it IT0, so its transform
@@ -762,7 +789,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 202
+- **cycle:** 203
 - **announcements:** none
 
 ## immutable target list

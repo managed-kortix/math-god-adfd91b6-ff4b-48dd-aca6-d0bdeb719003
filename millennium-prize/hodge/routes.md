@@ -97,6 +97,15 @@ images, not the separate endpoint deformation conditions. The search must use
 support already generically irreducible at the special fiber, a generically
 linked/nonreduced object, or genuinely non-graph support.
 
+Cycle 203 closes the first Ferrand-double version of the nonreduced escape. For
+each fixed Hilbert polynomial these doubles form the locally-free open in
+`Quot(O_G^3,P_L)`. Local universal equations give a canonical Atiyah block
+`(A_r tensor I_3)rho_G` with `det A_r=+/-2`; its rank-zero equations eliminate
+to the unit ideal for both `Gamma_I` and `Gamma_diag(3,1,1)`, separately and as
+a pair. Extra quotient-line obstruction rows cannot restore rank zero. More
+complicated non-Ferrand generic support or a genuinely Chow-only tangent is
+still required.
+
 Cycle 202 tests the generically linked escape in its strongest common-envelope
 form. Link each graph `Gamma_k` inside three general divisors of class `mP` and
 write the connected residual as `R_k`; then the exact Chow identity is
@@ -110,3 +119,17 @@ decomposition-preserving liaison germ to have pair tangent image zero. This
 does not exclude extra branches of the ambient Chow germ that destroy the
 residual decomposition. Common ample linkage changes support but does not
 improve the tangent gate in its natural incidence.
+
+Cycle 203 tests the smallest non-complete-intersection refinement: homogeneous
+height-three Gorenstein centers defined by the five Pfaffians of a `5 x 5`
+alternating matrix with entries in one fixed system `|mP|`. Containment of
+`Gamma_I` or `Gamma_diag(3,1,1)` is the quadratic rank-at-most-two condition on
+the restricted alternating matrix; ten pivot charts give explicit local
+parameters and residual colon ideals. The canonical liaison sheaf has
+`[E_G]=[O_W]-[O_G]` and `ch_3(E_G)=5m^3P^3-[G]`, so it is rank zero with nonzero
+exceptional projection. But `P^3` is horizontal, and its first semiregularity
+obstruction is exactly the negative graph map, of rank `6` for `Gamma_I` and
+`8` for `Gamma_D`. These ranks are independent of every Pfaffian parameter;
+the rank-zero ideal, even after saturation by the proper-link open conditions,
+is the unit ideal. Weighted Pfaffian systems with nonhorizontal center class
+remain outside this bounded no-go.

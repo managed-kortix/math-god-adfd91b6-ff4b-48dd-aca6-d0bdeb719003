@@ -1,5 +1,20 @@
 # Notebook
 
+## Cycle 203 first Ferrand doubles
+
+For either `G=Gamma_I` or `Gamma_diag(3,1,1)`, fixed-polynomial first Ferrand
+doubles are the locally-free quotients `O_G^3 -> L` in a bounded Quot scheme;
+the embedded square-zero algebra is uniquely determined by the quotient. On a
+local chart `q(z_r)=1`, its equations are
+`(z_j-a_j z_r, z_r^2)`, and differentiation gives an invertible normal matrix
+`A_r(a)` with determinant `+/-2`. Thus the full Atiyah matrix contains the
+canonical block `(A_r tensor I_3)rho_M`. Its ranks are `6` for the identity
+graph and `8` for the `(3,1,1)` graph; the paired block has rank `8` and common
+kernel dimension one. Eliminating rank-zero equations to all quotient and
+extension parameters gives `(1)` on every chart. Quotient-dependent trace-free
+rows may only increase rank. Hence every bounded first-double rank-zero locus
+is empty; no Hodge result is claimed.
+
 ## Cycle 202A Fourier--Mukai obstruction transport
 
 An untwisted graph sheaf transforms to a shifted sheaf on its annihilator, but
