@@ -5,19 +5,22 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge restricted-polarization degree convention audited
+- **phase:** Hodge split-prime eta-one chains and bounded-locus audit
 - **active main funnel:** portfolio rotation after carried split-Hecke closure.
   For arrows remaining `eta=1` relative to the transported threefold, the
-  restricted polarization degree stays 256; the orbit lies in a proper closed
-  finite union of bounded-type abelian-subthreefold loci.  A semigroup which
+  restricted polarization degree stays 256; after passage to a fine level
+  cover, the orbit lies in the proper closed image of one fixed-polynomial
+  abelian-subthreefold Hilbert locus.  Borel density and the `SL_6` centralizer
+  computation give generic endomorphism algebra `Q(i)`, hence generic
+  simplicity.  A semigroup which
   discards the carried threefold is a different unresolved object.
   At good inert primes every PEL-stable maximal isotropic kernel has
   `eta>=p`, with exactly `(p+1)^2(p^2+1)` kernels at equality.  At good split
   primes adapted `eta=1` kernels survive and number `2(p+1)(p^2+1)`, but every
   such kernel is preserved by the factor-swap involution.  Each quotient retains
-  its K-antilinear involution and descended diagonal abelian threefold.  The
-  tensor varies under Hecke conjugacy, however, so individual specialness does
-  not imply that the union lies in one proper closed locus.
+  its K-antilinear involution and descended diagonal abelian threefold.  Although
+  the tensor varies under Hecke conjugacy, the carried restricted degree puts
+  every iterated `eta=1` target in the common bounded Hilbert locus above.
 - 2026-07-31: Cycle 165 audited restricted polarization degree under iterated
   `eta=1` transport.  The Cycle 151 diagonal restriction has type `(2,2,4)`,
   hence polarization volume `chi=16`, unnormalized top intersection `96`, and
@@ -26,10 +29,10 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   `deg(phi_(M|Y))=eta^2 deg(phi_(L|Gamma))`; thus `eta=1` preserves 16 in the
   volume convention and 256 in the standard polarization-degree convention,
   but need not preserve the full elementary-divisor type.  Reading `eta` as
-  an absolute degree silently assumes a principal seed restriction.  Iterated
-  numerical preservation is conditional on having kernels adapted to each
-  current descended threefold; the original prime-level count does not prove
-  existence of arbitrary chains.
+  an absolute degree silently assumes a principal seed restriction.  Cycle 166
+  now realizes the iteration by alternating one split adapted isogeny with its
+  complement; the explicit local lattices also give all split-supported
+  composite levels.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -161,7 +164,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 165
+- **cycle:** 166
 - **announcements:** none
 
 ## immutable target list
@@ -194,6 +197,31 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: A second Cycle 166 output settled existence of arbitrarily long
+  carried split-prime `eta=1` chains.  For one adapted over-lattice `Lambda_1`
+  at `p=1 mod 4`, set `Lambda_(2r)=p^-r Lambda_0` and
+  `Lambda_(2r+1)=p^-r Lambda_1`, with form `p^nE_0`.  Every arrow has ambient
+  kernel order `p^6` and carried kernel order `p^3`.  A length-`N` composite
+  has level `m=p^N`, kernel order `m^6`, carried kernel order `m^3`, and
+  `eta_m=1`; independent local lattices give mixed levels supported on good
+  split primes.  The fixed-prime chain is periodic up to polarized isomorphism,
+  and all carried chains remain in the bounded Hilbert locus, so this proves
+  existence but no generic or dense Hodge transport.
+
+- 2026-07-31: Cycle 166 hostile-audited the Cycle 165 closure step.  A Hilbert
+  scheme is not indexed by exact polarization type: all four product-16 types
+  have the same polynomial `16r^3 n^3` after a fixed universal multiple `rL`.
+  On a neat finite-level cover, zero, inverse, and addition are closed
+  incidence conditions; the connected subgroup components are projective over
+  the base, so their image is closed and descends through the finite level
+  map.  The original wording hid the lack of a universal family/line bundle on
+  the coarse PEL space and asserted, rather than proved or cited, the generic
+  endomorphism identity `End^0=K`.  Subject to that standard component-specific
+  theorem, generic simplicity makes the locus proper and the carried
+  `eta=1` orbit nondense.  No counterexample was found, but the result remains
+  conditional on carrying the same threefold data.  The companion Cycle 166
+  lattice construction separately supplies periodic and mixed-prime chains.
 
 - 2026-07-31: Cycle 165 identified the invariant missing from the varying-
   involution discussion.  The Cycle 151 diagonal restriction has type

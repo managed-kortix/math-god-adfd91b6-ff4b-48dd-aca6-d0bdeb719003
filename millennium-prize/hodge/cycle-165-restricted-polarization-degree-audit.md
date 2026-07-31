@@ -146,20 +146,23 @@ Cycle 151 seed in the locus
 \deg(\phi_{L|Y})=256.
 \]
 
-This locus is closed in the PEL moduli space.  Indeed, only four restricted
+The following closure argument needs the fine-level and generic-endomorphism
+qualifications supplied in Cycle 166.  Only four restricted
 polarization types have product 16:
 
 \[
 (1,1,16),\quad(1,2,8),\quad(1,4,4),\quad(2,2,4).
 \]
 
-For each type, three-dimensional abelian subgroup schemes through the identity
-form a closed subspace of the corresponding projective relative Hilbert
-scheme.  Its map to the PEL base is proper, so its image is closed.  The finite
-union over these four types is closed.  On the nine-dimensional nonsplit Weil
-component it is proper because the geometric generic sixfold is simple (its
-generic rational endomorphism algebra is `K`, hence has no nontrivial
-idempotent).
+On a neat finite-level cover, etale-locally represent a fixed multiple `rL` of
+the universal polarization by a line bundle.  All four types then have the
+single Hilbert polynomial `16r^3n^3`.  The closed subgroup incidence locus in
+that projective relative Hilbert scheme has closed image in the base; the
+intrinsic condition descends from the etale charts and then through the finite
+level map.  Subject to the standard component-specific theorem that
+the geometric generic endomorphism algebra is `K`, the locus is proper because
+the geometric generic sixfold is simple.  Exact type itself is not encoded by
+the Hilbert polynomial and is not needed for this argument.
 
 Therefore any iterated orbit which continues to require `eta=1` relative to
 the transported `Y` is not Zariski dense.  This does not settle a different

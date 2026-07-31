@@ -1,5 +1,19 @@
 # Notebook
 
+## Cycle 166 arbitrary split-prime chains
+
+One Cycle 163 split adapted kernel and its complementary isogeny produce an
+arbitrarily long carried `eta=1` chain. If `Lambda_1` is the quotient
+over-lattice at a good split prime `p`, take
+`Lambda_(2r)=p^-r Lambda_0` and `Lambda_(2r+1)=p^-r Lambda_1`, with forms
+`p^n E_0`. Every lattice index is `p^6`, every diagonal-lattice index is
+`p^3`, and a length-`N` composite has level `m=p^N`, kernel order `m^6`,
+restricted degree `m^3`, and `eta_m=1`. Localizing this construction at
+finitely many split primes gives mixed composite levels and arbitrary words of
+prime arrows. The one-prime chain is periodic up to polarized isomorphism and
+all such carried chains stay in the bounded Hilbert locus, so existence gives
+no generic Hodge transport.
+
 ## Cycle 164 split-quotient descent
 
 Every Cycle 163 split adapted kernel has the form `K=D+JD` with `D` inside the
