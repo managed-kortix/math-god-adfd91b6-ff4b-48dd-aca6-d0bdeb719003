@@ -17,6 +17,16 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: selected the connected pentacyclic frontier `m=n+4`. Block DNN
+  gives an exact finite multiblock residual program, but a single rank-five
+  block has a preliminary 118-kernel census. A universal rank-five DNN
+  excess-four theorem is false: all-odd `K5-e` has optimized excess
+  `2sqrt(7)-1>4`. Exhaustive tetracyclic edge additions through order 10 found
+  no `s^+` decrease in 857694 additions. The promising bypass is a marked-pair
+  margin theorem: a tetracyclic certificate of excess E and endpoint
+  correlation r promotes across the new edge if
+  `r <= (3-E)/(5-E)`. Equality rows only require `r<=0`. Victory contract:
+  `positive-square-energy/pentacyclic-general/prompt.md`.
 - 2026-07-31: published the verified all-tetracyclic theorem once on X. Post
   `2083151479074922689`; API readback verified exact claim, author, rendered
   card, and direct folder/PDF links. Manifest and append-only ledger updated.
