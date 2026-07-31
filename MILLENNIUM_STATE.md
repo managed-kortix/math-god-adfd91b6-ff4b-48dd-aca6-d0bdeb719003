@@ -5,7 +5,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge split-prime eta-one chains and bounded-locus audit
+- **phase:** Hodge volume-16 type transitions and projector-algebra audit
 - **active main funnel:** portfolio rotation after carried split-Hecke closure.
   For arrows remaining `eta=1` relative to the transported threefold, the
   restricted polarization degree stays 256; after passage to a fine level
@@ -164,7 +164,15 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 166
+- 2026-07-31: Cycle 167 classified the four volume-16 threefold polarization
+  types and computed the complete abstract prime-two transition matrix under
+  maximal-isotropic quotient.  Good odd-prime completely adapted steps preserve
+  exact type.  The idempotent-algebra lemma now separates a merely complementary
+  second factor, which one factor already forces up to isogeny, from genuinely
+  independent projector data.  Fixed extra Peirce data define a proper ambient
+  special locus, but strict containment in every component of `Z_16` still
+  needs a relative generic-endomorphism argument.
+- **cycle:** 167
 - **announcements:** none
 
 ## immutable target list
@@ -197,6 +205,18 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 167 hostile-audited the arbitrary split-prime lattice
+  chain.  Cycle 166's `widetilde K` definition was ill typed as written:
+  `K subset p^-1 Lambda_0/Lambda_0` must first be identified with a subgroup
+  of `Lambda_0/pLambda_0`.  The invariant correction is
+  `Lambda_1=q^-1(K) subset p^-1 Lambda_0`.  After that repair, maximal
+  isotropy proves integrality and preservation of the exact ambient type
+  `(1,1,1,1,1,3)` (and carried type `(2,2,4)`), finite-support local lattices
+  globalize by intersection, and multiplication by `p^r` proves genuine
+  two-class polarized periodicity.  Infinite-support words mean chains of
+  finite prefixes, not a single finite-index lattice.  No degree formula or
+  no-generic-transport conclusion is overturned.
 
 - 2026-07-31: A second Cycle 166 output settled existence of arbitrarily long
   carried split-prime `eta=1` chains.  For one adapted over-lattice `Lambda_1`

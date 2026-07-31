@@ -1,5 +1,19 @@
 # Notebook
 
+## Cycle 167 hostile arbitrary-chain audit
+
+The Cycle 166 chain survives, but its definition of `widetilde K` was not
+literally well typed: `K` lies in `p^-1 Lambda_0/Lambda_0`, not in
+`Lambda_0/pLambda_0`, until multiplication by `p` identifies the two.  The
+clean definition is `Lambda_1=q^-1(K)` for the quotient map from
+`p^-1 Lambda_0`.  Maximal isotropy proves integrality and preserves the exact
+ambient type locally; it also preserves the carried type `(2,2,4)`.  Finite
+local data globalize by adelic lattice intersection, while an infinite-support
+word means a chain of finite prefixes, not one global finite-index lattice.
+Multiplication by `p^r` explicitly proves the claimed two-class polarized
+periodicity.  Thus the flaw is notation/domain ambiguity, not a counterexample
+to the chain or its degree formulas.
+
 ## Cycle 166 arbitrary split-prime chains
 
 One Cycle 163 split adapted kernel and its complementary isogeny produce an
@@ -298,3 +312,19 @@ Macaulay pairing make this functional nonzero for every nonzero primitive
 class; `gamma=3[P]-h^2` has square `24`. Thus the selected formal plane branch
 equals its selected Hodge germ. This says nothing about arbitrary Hodge
 components and proves no Hodge-conjecture case.
+
+## Main-funnel cycle 167
+
+Polarization volume 16 gives exactly four threefold types: `(1,1,16)`,
+`(1,2,8)`, `(1,4,4)`, and `(2,2,4)`.  The complete abstract prime-two
+maximal-isotropic transition matrix is computed in
+`cycle-167-volume-16-types-and-idempotents.md`; good odd-prime completely
+adapted steps preserve exact type.  Poincare reducibility shows that one
+threefold already forces a complementary projector, so an unqualified second
+factor need not cut `Z_16` further.  A smaller special locus requires projector
+algebra strictly larger than the single-decomposition algebra, measured by its
+Peirce components or repeated-isotypic matrix block.  Fixed integral Peirce
+data give a proper ambient locus; an unspecified extra Hom condition is only a
+countable union until bounded.  Ambient properness follows from generic
+endomorphism field `Q(i)`, but strictness inside every component of `Z_16`
+remains unproved.  No Hodge-conjecture result is claimed.

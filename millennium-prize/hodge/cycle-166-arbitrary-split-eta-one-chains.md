@@ -35,17 +35,25 @@ plane. Thus `K` is `Z[i]`-stable, Lagrangian, `t`-stable, and
 |K|=p^6,\qquad |K\cap\Gamma[p]|=|D|=p^3.
 \]
 
-If `widetilde K` is the inverse image of `K` under
-`Lambda_0 -> Lambda_0/pLambda_0`, set
+Let
 
 \[
-\Lambda_1=\Lambda_0+{1\over p}\widetilde K,
+q:p^{-1}\Lambda_0\longrightarrow
+p^{-1}\Lambda_0/\Lambda_0=A_0[p]
+\]
+
+be the quotient map, and set
+
+\[
+\Lambda_1=q^{-1}(K),
 \qquad E_1=pE_0.
 \]
 
-Here `(1/p)widetilde K` denotes the inverse image of `K` in
-`p^{-1}Lambda_0`. Then `E_1` is integral on `Lambda_1`, and the identity on
-`V` induces the polarized `p`-isogeny
+Equivalently, multiplication by `p` identifies `A_0[p]` with
+`Lambda_0/pLambda_0`; if `widehat K` is the inverse image of the corresponding
+subgroup in `Lambda_0`, then `Lambda_1=p^{-1}widehat K`. Isotropy of `K`
+makes `E_1` integral on `Lambda_1`, and the identity on `V` induces the
+polarized `p`-isogeny
 
 \[
 f_0:(V/\Lambda_0,E_0)\longrightarrow(V/\Lambda_1,E_1),
@@ -55,10 +63,12 @@ f_0:(V/\Lambda_0,E_0)\longrightarrow(V/\Lambda_1,E_1),
 The carried diagonal has lattice
 
 \[
-U\cap\Lambda_1=\Delta_0+{1\over p}\widetilde D,
+U\cap\Lambda_1=q_U^{-1}(D)=p^{-1}\widehat D,
 \]
 
-where `widetilde D` is the inverse image of `D` in `Delta_0`. Consequently
+where `q_U:p^{-1}Delta_0 -> Gamma[p]` is the quotient map and `widehat D` is
+the inverse image in `Delta_0` after the same multiplication-by-`p`
+identification. Consequently
 
 \[
 [U\cap\Lambda_1:\Delta_0]=p^3,
@@ -196,8 +206,11 @@ m^{-3}(F_{\mathbf e})_*[\Gamma]=[Y_{\mathbf e}].
 \]
 
 The descended Weil projector therefore has nonzero value on `[Y_e]`. The
-restricted polarization volume remains 16 and its polarization-isogeny degree
-remains 256, as in Cycle 165.
+restricted polarization retains exact type `(2,2,4)`: at every allowed prime,
+the seed restriction is prime to `p` and `D` is maximal isotropic, so the local
+quotient lattice is self-dual for the rescaled restricted form. In particular
+its volume remains 16 and its polarization-isogeny degree remains 256, as in
+Cycle 165.
 
 The construction settles existence, but not globalization. At one fixed prime,
 
