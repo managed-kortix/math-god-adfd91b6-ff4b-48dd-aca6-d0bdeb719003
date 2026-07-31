@@ -5,16 +5,16 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge projected-seed deformation gate
+- **phase:** Hodge bidirectional twisted-graph gate
 - **active main funnel:** deformation of an exceptional algebraic seed.  On the
   explicit `Q(i)` determinant-class `[-3]` Weil sixfold `E_i^3 x E_i^3`, the
   antilinear diagonal graph has nonzero pure determinant projection and spans
-  the exceptional rank-two Weil space after the `K` action.  The next gate is
-  the diagonal itself has rank-six embedded obstruction and moves over only a
-  three-dimensional tangent locus, although its projected Weil class is
-  horizontal in all nine directions.  The next gate is a different effective
-  Chow/perfect-complex representative whose obstruction cancels before, not
-  merely after, semiregularity.
+  the exceptional rank-two Weil space after the `K` action. The diagonal has
+  rank-six embedded obstruction. Split denominator-cleared projector objects,
+  triangular extensions, and smallest effective graph unions retain
+  componentwise obstruction. The next graph-based gate is a genuinely
+  bidirectional twisted complex with return paths canceling diagonal Atiyah
+  classes before semiregularity, or strategic rotation to a non-graph seed.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -146,7 +146,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 152
+- **cycle:** 153
 - **announcements:** none
 
 ## immutable target list
@@ -179,6 +179,19 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 153 closed the natural split/filtered realizations of the
+  projected diagonal class. The denominator-cleared polynomial-projector
+  perfect object has the correct rational Chern class, but its raw Atiyah
+  obstruction is block diagonal; shifts change supertrace signs, not component
+  obstruction signs. Upper-triangular extensions cannot modify diagonal
+  Maurer--Cartan curvature. Distinct transverse graph sheaves have cross Ext
+  concentrated in degree three, and the smallest effective graph unions have
+  no local node-smoothing parameters; `Gamma_1 union Gamma_i` retains the
+  three-dimensional graph kernel, while `Gamma_1 union Gamma_(1+i)` is
+  obstructed in all nine PEL directions. Only a genuinely bidirectional
+  twisted complex with explicit return-path null-homotopies remains within the
+  graph category.
 
 - 2026-07-31: Cycle 152 repaired and sharpened the special seed.  The normalized
   graph coefficients are the conjugate pair `-i/8,+i/8`.  The rational Weil
