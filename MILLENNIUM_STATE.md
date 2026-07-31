@@ -5,13 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** actual adjacent cone obstruction contraction
-- **active main funnel:** Hodge categorical lifting.  The Cycle 122 adjacent
-  Fermat pair now has an exact sparse normal form and coordinate transform, but
-  the coefficientwise Teichmuller lift differs from the transformed standard
-  Fermat W2 model by a nonzero 76-term carry.  The next gate is the contracted
-  full endomorphism obstruction for all 33 projective `8|8` cones, retaining
-  this scalar carry and unrestricted lower-left corrections.
+- **phase:** portfolio rotation after adjacent-cone obstruction closure
+- **active main funnel:** selection review.  For the actual adjacent Fermat
+  pair, the complete opposite Ext-one Yoneda transfer into diagonal Ext-two is
+  zero, while a common coefficient functional detects the 76-term standard-
+  Fermat carry.  All 33 projective `8|8` extension cones retain rank jump
+  `11 -> 12` and are first-order obstructed.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -143,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 139
+- **cycle:** 140
 - **announcements:** none
 
 ## immutable target list
@@ -176,6 +175,20 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-30: Cycle 140 closed the minimal adjacent graded-MF cone ansatz.  The
+  lower-left correction loophole was treated explicitly: ordinary/graded
+  adjacent Ext-one groups are two-dimensional, but both opposite Yoneda product
+  maps into component Ext-two vanish, so no lower-left cocycle can absorb the
+  diagonal carry.  Genuine W2 arithmetic reconstructs the 76-term transformed
+  standard-Fermat carry; on both components the Koszul rank is `9 -> 10`, and
+  after all two extension-transfer columns every one of the 33 projective
+  classes has rank `11 -> 12`.  Coefficient extraction at
+  `z1^16 p^17`/`z1^16 q^17` annihilates all boundaries and transfers but equals
+  `13` on the carry.  Aggregate SHA-256 is
+  `0f01205954b0393a9136c4ba71b0cf45dc3cf471075951713b74f07857280b57`.
+  This obstructs only these adjacent two-plane cones, not larger twisted
+  complexes or Hodge.
 
 - 2026-07-30: Cycle 139 specialized the adjacent graded-MF gate to the actual
   Cycle 122 Fermat pair.  An explicit coordinate transform of determinant `t`
