@@ -1,5 +1,18 @@
 # Notebook
 
+## Cycle 164 split-quotient descent
+
+Every Cycle 163 split adapted kernel has the form `K=D+JD` with `D` inside the
+diagonal.  The factor-swap involution `t` acts by `+1` on `D` and `-1` on
+`JD`, hence preserves `K` and descends integrally to a K-antilinear involution
+`tbar` of the quotient.  Its exact graph is
+`[Gamma_tbar]=p^-6(f times f)_*[Gamma_t]`, and
+`(Delta+Gamma_tbar)/2` projects onto the descended diagonal threefold
+`Y=f(Gamma)`.  Since `deg(f|Gamma)=p^3`, the normalized class is exactly
+`p^-3 f_*[Gamma]=[Y]`.  Thus all `2(p+1)(p^2+1)` adapted quotients remain on
+the proper extra-endomorphism/decomposition locus; split eta one does not
+yield generic transport.
+
 ## Cycle 163 PEL follow-up
 
 For the Cycle 151 K-antilinear graph at every good prime, a PEL-stable kernel
