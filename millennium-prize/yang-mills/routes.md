@@ -14,9 +14,23 @@ Cycle 179 rules out repairing this by a fixed global cube of bare local Casimir
 cutoffs: product rotors, realized exactly as gauge-invariant loops sharing an
 edge, retain a one-particle tail contraction at least `exp(-s gamma)` in the
 infinite-volume supremum. Ground-state conjugation may itself be nonlocal and
-gauge constrained. The next production lemma must instead use an anchored
-connected/polymer norm or interacting-ground-state spectral sectors and prove
-that this local control implies contraction on the entire vacuum complement.
+gauge constrained. Cycle 180 proves the abstract replacement: uniform
+variance-normalized imaginary-time connected decay on a dense local form core
+gives the full gap by the spectral theorem, while an anchored polymer norm gives
+that estimate only if it has a volume-uniform stable synthesis and a two-sided
+Schur-summable connected kernel. Its product benchmark is exact: the incomplete
+tensor product over the dressed vacuum is the support-labeled direct sum of
+finite excitations, with frame constant one, and dressed local spectral tails
+contract independently of all vacuum spectators. The shared-edge `U(1)` gauge
+quotient preserves that isometry. The next production lemma must establish the
+corresponding stable synthesis and tail exhaustion for the interacting physical
+gauge vacuum; equal-time clustering alone is insufficient.
 Continuum promotion also requires reflection-positive RG basin entry from bare
 `g(a)->0`, where the strong-coupling parameter `2/g(a)^4` is large, followed by
 a nontrivial OS limit.
+
+Cycle 180 referee verdict: this is now an equivalence wall for main-funnel
+purposes. The variance-normalized temporal criterion is gap-level by the
+spectral theorem, while the interacting stable synthesis, temporal Schur bound,
+and OS limit have no weaker jointly falsifiable production lemma. The exact
+product benchmark is preserved, but Yang--Mills rotates.

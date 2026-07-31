@@ -1,5 +1,11 @@
 # Routes
 
-Scout lemma: for semistable rank-two `E/Q`, good ordinary `p>=5`, and
-irreducible `E[p]`, test whether `ord_(T=0)L_p(E,T)=2` can be transferred to
-`ord_(s=1)L(E,s)=2`. First calibration: `389a1` at `p=5`.
+Cycle 180 main gate: for prime quadratic twists of `433a1` at `p=7`, define the
+one-prime Selmer functional `lambda_q` and residual derived modular-symbol
+coordinate `c(q,ell)` in common determinant lines. Prove that the pair factors
+through Frobenius in one finite governing extension, uniformly with the local
+twist comparison and Kurihara primitivity hypotheses, or falsify finite
+governance by an explicit same-Frobenius/different-`c` collision. A surviving
+factorization would support a bounded certificate-density theorem via
+Chebotarev and explicit reciprocity; it is not by itself the full BSD
+conjecture.

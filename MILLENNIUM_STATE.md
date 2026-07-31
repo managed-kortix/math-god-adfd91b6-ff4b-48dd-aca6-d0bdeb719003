@@ -5,18 +5,21 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Yang--Mills connected-tail implication gate
-- **active main funnel:** replace the false bare Wilson cutoff by an
-  ordering-sensitive electric-heat tail after the Gauss and vacuum quotients.
-  The finite-lattice Duhamel bound is exact, but its ground-energy factor and
-  magnetic norm are extensive.  Cycle 179 now rules out a fixed global cube of
-  bare local Casimir cutoffs even after an exactly local product ground-state
-  transform: spectator dressed vacua place a physical one-particle excitation
-  asymptotically in the tail.  Ground-state conjugation can also be nonlocal and
-  gauge constrained.  The next production lemma must use an anchored
-  connected/polymer norm or interacting-ground-state local spectral sectors
-  and prove that such local control contracts the entire vacuum complement;
-  bare representation truncation and character decay are retired.
+- **phase:** BSD decorated governing-field gate
+- **active main funnel:** for prime quadratic twists of `433a1` at `p=7`, put
+  the local Selmer functional `lambda_q` and derived modular-symbol coordinate
+  `c(q,ell)` in common determinant lines and decide whether their pair factors
+  through Frobenius in one finite Galois extension.  The first checkpoint is an
+  exact dichotomy: construct the extension with uniform twist-local and
+  primitivity hypotheses, or produce a same-Frobenius/different-coordinate
+  collision.  Chebotarev and explicit reciprocity are later separate gates to a
+  bounded certificate-density theorem, not to full BSD.  Cycle 180 makes the
+  Yang--Mills wall precise: its temporal connected-decay criterion is the gap by
+  the spectral theorem, and the polymer bridge still needs uniform synthesis
+  and temporal Schur control on the entire physical complement, plus an
+  independent OS continuum construction.  Random-order MCSP remains a bounded
+  restricted-model scout unless its quantifiers and resources transfer to the
+  exact relational MMW problem.
   For every transported Cycle 151 diagonal image, the exact identities are
   `chi(M|Y)=16 eta` and `m^-3 f_*[Gamma]=eta^-1[Y]`, with exact denominator
   `eta` by primitivity. If one fixed integer `D` clears any positive
@@ -46,6 +49,38 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   its K-antilinear involution and descended diagonal abelian threefold.  Although
   the tensor varies under Hecke conjugacy, the carried restricted degree puts
   every iterated `eta=1` target in the common bounded Hilbert locus above.
+- 2026-07-31: Cycle 180 also proved the spectator-free product benchmark. The
+  incomplete tensor product over the dressed one-site vacuum is exactly
+  `direct-sum_(X finite) K^(tensor X)`, and the normalized product Hamiltonian
+  is `direct-sum_X sum_(i in X)k_i`. Hence dressed high spectral excitations
+  contract by `exp(-s Lambda_D)` uniformly in volume, without testing vacuum
+  spectators. The overlapping shared-edge `U(1)` gauge quotient is unitarily
+  identical. General interacting gauge vacua still require the Cycle 180
+  stable-synthesis and temporal-kernel hypotheses. No Yang--Mills result is
+  claimed.
+- 2026-07-31: Cycle 180 strategic referee review classed the current
+  Yang--Mills architecture as an equivalence wall for main-funnel purposes.
+  The abstract temporal criterion is exactly gap-level, while no weaker
+  interacting gauge synthesis theorem with continuum reach is specified.
+  Random-order MCSP can yield a bounded exact query or streaming theorem, but
+  has no Millennium implication absent a resource-preserving transfer to exact
+  relational `search-MCSP^SAT` in the MMW model.  The next main is BSD's
+  `433a1`, `p=7` decorated prime-twist governing-field dichotomy. No Millennium
+  result is claimed.
+- 2026-07-31: Cycle 180 formulated the exact non-circular connected-tail
+  implication.  Uniform imaginary-time connected autocorrelation decay
+  `C_t(A,A)<=C exp(-mt) C_0(A,A)` for every finite local linear combination on
+  a dense vacuum-complement core gives the full gap `m`; the integrated bound
+  `int C_t dt<=K C_0` gives gap `K^-1`.  An anchored polymer norm implies these
+  bounds only with a volume-uniform stable-synthesis/lower-frame estimate and
+  two-sided Schur summability of the temporal connected kernel.  Product-rotor
+  excitation sectors meet this bridge with frame constant one.  In contrast,
+  an inhomogeneous product vacuum can be uniquely and exactly spatially
+  clustered while local excitation energies tend to zero, so spatial
+  clustering alone does not imply a gap.  The companion hostile audit gives
+  finite-volume invisible-sector and rare-delocalized-excitation versions of
+  the same obstruction; the latter uses only unit local coefficients and has a
+  unique product vacuum but gap at most `1/N`. No Yang--Mills result is claimed.
 - 2026-07-31: Cycle 177 fully populated the Cycle 176 terminal receiver quartet
   and computed all source--receiver and receiver--receiver terms symbolically.
   The divergence-free receiver family has four polarization parameters. If `T`
@@ -300,7 +335,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 179
+- **cycle:** 180
 - **announcements:** none
 
 ## immutable target list

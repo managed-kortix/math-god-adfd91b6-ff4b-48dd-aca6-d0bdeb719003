@@ -1,5 +1,61 @@
 # Notebook
 
+## Cycle 180 spectator norm
+
+The incomplete tensor product over the dressed one-site vacuum gives the exact
+spectator-free norm for product rotors. With `K=phi^perp`, it is unitarily
+`direct-sum_(X finite) K^(tensor X)`; squared norms sum over actual excitation
+supports, while every vacuum spectator contributes one. The normalized product
+Hamiltonian is `direct-sum_X sum_(i in X)k_i`. A dressed one-site spectral tail
+therefore contracts by `exp(-s Lambda_D)`, uniformly in volume, whether a high
+excitation occurs anywhere or at a specified finite anchor. The shared-edge
+`U(1)` loop quotient is unitarily the same construction. For an interacting
+gauge vacuum, the GNS norm still removes identity spectators and a local-algebra
+exhaustion gives an exact martingale decomposition, but support orthogonality and
+dynamical tail invariance require the stable-synthesis/split estimate isolated
+in the companion Cycle 180 work. Full derivation:
+`cycle-180-dressed-vacuum-excitation-norm.md`. No Yang--Mills mass gap is
+claimed.
+
+## Cycle 180
+
+The exact connected-correlation implication is now isolated.  If centered local
+vectors are dense in the full vacuum complement and their imaginary-time
+autocorrelations obey the volume-uniform physical-variance bound
+`C_t(A,A)<=C exp(-m t) C_0(A,A)` for all finite local linear combinations, the
+spectral theorem gives the full gap `H|_Q>=m`; no semigroup norm gap is assumed.
+The integrated susceptibility bound `int C_t dt<=K C_0` instead gives gap
+`K^(-1)`.  An anchored polymer estimate reaches these criteria only with a
+uniform lower frame/stable-synthesis bound and two-sided Schur summability of
+the connected temporal kernel.  Spatial clustering, fixed-polymer decay, or
+density without the frame constant is insufficient.  Product rotors have the
+orthogonal excitation-sector decomposition with frame constant one, whereas an
+inhomogeneous product of two-level sites with excitation energies tending to
+zero has a unique exactly clustered vacuum and zero gap.  Full theorem and
+proof: `cycle-180-anchored-correlation-gap.md`.  No Yang--Mills mass gap is
+claimed.  The companion hostile constructions in
+`cycle-180-connected-local-control-no-go.md` exhibit invisible soft sectors and
+rare delocalized excitations, reinforcing that equal-time local control alone
+does not provide the required bridge.
+
+## Hostile cycle 180
+
+Connected local control does not by itself imply a full-complement gap. Two
+finite-range qubit families make the failure exact. A product model with an
+`exp(-N)` soft on-site sector has a unique product vacuum, zero connected
+correlations, exact local ground-state tails, and gap `exp(-N)`. A less visible
+model combines unit-coefficient nearest-neighbor swap-antisymmetry projections
+with one unit boundary pin. Its unique product vacuum has the same perfect local
+control, while the uniform one-particle trial state has energy `1/N`, forcing
+the gap to zero; on every fixed `ell`-site region its reduced state is only
+`2 ell/N` in trace norm from the vacuum. GHZ finite-volume states instead
+fail clustering, while broken-symmetry or topological examples expose sector
+selection. Therefore connected/polymer decay needs a separate finite-size,
+local-gap, martingale/detectability, or coercive local-to-global theorem
+covering all moving and global sectors. Full derivation:
+`cycle-180-connected-local-control-no-go.md`. No Yang--Mills mass gap is
+claimed.
+
 ## Hostile cycle 179
 
 Ground-state conjugation does not itself prove locality: even a nearest-neighbor
