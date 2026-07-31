@@ -5,7 +5,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge nontransverse staircase gate
+- **phase:** Hodge connected-representative rotation gate
 - **active main funnel:** deformation of an exceptional algebraic seed.  On the
   explicit `Q(i)` determinant-class `[-3]` Weil sixfold `E_i^3 x E_i^3`, the
   antilinear diagonal graph has nonzero pure determinant projection and spans
@@ -14,9 +14,10 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   triangular extensions, and smallest effective graph unions retain
   componentwise obstruction. Grading now also forbids every bidirectional return
   cycle built from transverse graph cross-Ext-three classes. The next candidate
-  is the connected four-graph staircase with positive-dimensional intersections
-  and an explicit local determinantal smoothing; its global Eagon--Northcott
-  obstruction is the gate.
+  four-graph staircase is connected but its asserted determinantal smoothing
+  had the wrong central ideal, fails global Picard compatibility, and has zero
+  PEL base tangent.  The next gate requires a different connected global
+  representative, not another local graph smoothing.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -148,7 +149,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 154
+- **cycle:** 155
 - **announcements:** none
 
 ## immutable target list
@@ -181,6 +182,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 155 corrected and retired the staircase smoothing.  The
+  four-graph union ideal is the squarefree monomial ideal `J`; the displayed
+  maximal minors define a different ideal `D` with a middle quadric component,
+  and `J=in(D)` only as a Groebner degeneration.  The corner-t family is flat
+  and smooth away from zero but specializes to `D`, not `J`.  Globally the
+  matrix would require the false Picard identity `A2 B2 = A3 B1`, and its corner
+  Hom bundles have no sections.  Independently, preserving all four dense graph
+  opens forces the PEL tangent B to vanish.  A two-graph d-semistable union does
+  globally smooth and has exceptional coefficient four, but only inside the
+  special extra-endomorphism locus.  A new connected representative is needed.
 
 - 2026-07-31: Cycle 154 closed all bidirectional twisted complexes built from
   pairwise transverse graph sheaves. Cross Ext is concentrated in degree three;

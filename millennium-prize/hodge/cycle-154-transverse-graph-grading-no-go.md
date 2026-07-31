@@ -51,22 +51,19 @@ M_3=\operatorname{diag}(2,2,2).
 
 Its components intersect in positive dimensions and its exceptional coefficient
 is `1+2+4+8=15` times the diagonal seed. Near the common origin, with
-`a_j=y_j-2x_j`, `b_j=y_j-x_j`, its reduced ideal is the `2x2` minors of
+`a_j=y_j-2x_j`, `b_j=y_j-x_j`, its reduced ideal is
 
 \[
-\begin{pmatrix}a_1&a_2&a_3&0\\0&b_1&b_2&b_3\end{pmatrix}.
+J=(a_1b_1,a_1b_2,a_1b_3,a_2b_2,a_2b_3,a_3b_3).
 \]
 
-Unlike two transverse three-planes, it has an explicit local determinantal
-smoothing obtained by replacing the two zero corner entries by a parameter
-`t`. The nearby local rank-one locus is smooth of dimension three.
+Cycle 155 corrected the proposed smoothing: `J` is only the initial ideal of
+the displayed determinantal ideal, and the corner-`t` family has the wrong
+central fiber.  Moreover, incompatible Picard labels prevent the matrix from
+globalizing.
 
-This local smoothing is not yet a global cycle deformation. Globalization must
-preserve the nonzero exceptional class and produce base tangents beyond the
-extra-endomorphism locus. A generic Thom--Porteous construction from deformable
-divisor-generated bundles would fall into the balanced sector and lose the
-Weil coefficient. The next gate is the global Eagon--Northcott
-deformation/obstruction map of this exact staircase union.
+Thus the staircase remains a connected exceptional cycle but not a viable
+determinantal deformation candidate.
 
 This is a grading no-go for the transverse graph category and a precise
 nontransverse replacement candidate, not a generic Hodge theorem.
