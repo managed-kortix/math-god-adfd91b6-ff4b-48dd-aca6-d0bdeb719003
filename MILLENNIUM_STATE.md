@@ -5,13 +5,13 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** exact cyclotomic height gate completed
-- **active main funnel:** BSD leading-term comparison.  For `433a1,p=7`, direct
-  sigma-function arithmetic proves the cyclotomic height regulator has
-  valuation two and normalized residue six, hence the first rank-two
-  cyclotomic height/Bockstein pairing is nondegenerate.  Direct transport from
-  auxiliary tame augmentation lines to the cyclotomic line is impossible; the
-  next gate is a genuinely global leading-term comparison, not another census.
+- **phase:** exact finite cyclotomic leading-term packet
+- **active main funnel:** BSD leading-term comparison.  Exact p-power modular
+  symbols now give stabilized raw cyclotomic moments through conductor `7^7`,
+  while a compact Frobenius certificate pins the unit root and Katz E2 needed
+  for high-precision sigma heights.  A finite numerical leading-term match is
+  not promoted to equality in `Q_7`; the next gate is a complete independent
+  normalization-compatible coefficient certificate or a strategic rotation.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -143,7 +143,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 143
+- **cycle:** 144
 - **announcements:** none
 
 ## immutable target list
@@ -176,6 +176,19 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 144 produced exact p-power Mazur--Tate raw moments for
+  `433a1,p=7` at conductors `7^5,7^6,7^7`: `(D0,D1,D2)` equals
+  `(0,-4802,967053944)`, `(0,621859,12876477045)`, and
+  `(0,78942479,9062036974073)`.  After unit-root normalization, `D2` stabilizes
+  through residues `5,33,278,1650,16056,32863` modulo `7,...,7^6`.
+  These are power moments, not automatically the T-square coefficient or
+  analytic derivative.  A separate integer verifier checks a crystalline
+  Frobenius matrix modulo `7^8`, its unit root `3795817`, sigma parameter
+  `2509791`, and Katz `E2=4471315`.  A reported p-adic BSD match through `7^8`
+  was not promoted: the committed independently reconstructed regulator has
+  only `7^3` precision, and finite precision plus incomplete global factors
+  cannot prove a leading-coefficient identity.
 
 - 2026-07-31: Cycle 143 computed the `433a1,p=7` cyclotomic Mazur--Tate height
   regulator exactly without database regulator input.  Rational multiplication
