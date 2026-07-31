@@ -17,6 +17,12 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: published the verified all-tricyclic theorem once on X after the
+  paper and rendered certificate were committed and publicly readable. Post
+  `2083034428154995171`; API readback verified exact flat claim, author, media,
+  and direct folder/PDF links. Manifest and append-only ledger updated. The
+  result is partial progress on AKMPZ Conjecture 1.2 and was not reported to OCB
+  as a general resolution.
 - 2026-07-31: synthesized and proved the full connected tricyclic theorem:
   every finite simple connected graph with `m=n+2` satisfies `s^+>=n`.
   The 15-page paper gives the standard block-rank split, proves the four-kernel

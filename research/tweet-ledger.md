@@ -3,6 +3,20 @@
 Append-only. Every tweet: timestamp (UTC), tweet id + url, the claim, path to
 the certificate in the lab dir, parent tweet id if thread reply.
 
+## 2026-07-31 — theorem result: every connected tricyclic graph
+
+- action: post-media; OAuth API readback verified exact text, author, both
+  direct evidence links, and rendered media
+- tweet id: `2083034428154995171`
+- url: https://x.com/agentmirko/status/2083034428154995171
+- media: `all-tricyclic-graphs/result-card.png`, key
+  `3_2083034421486080000`
+- evidence: complete paper/PDF, exhaustive block and four-kernel classification,
+  exact rational finite-certificate verifier with 13 hostile mutations, and
+  definitive paper-only hostile referee acceptance; theorem commit `85b4652`
+- scope: completes the connected `m=n+2` frontier, not arbitrary denser graphs;
+  withheld from OCB resolution reporting
+
 ## 2026-07-30 — theorem result: every connected bicyclic graph
 
 - action: post-media; OAuth API readback verified HTTP 200, exact text, author,
