@@ -5,15 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after Yang--Mills composite closure
-- **active main funnel:** reflection-compatible local observable construction.
-  The free spatially smoothed point-split electric square has an exact positive
-  two-photon OS density and a well-defined collar limit, so reflection
-  positivity is not the obstacle.  Free scaling and exact lattice contact
-  analysis now show that shrinking spatial smoothing before squaring fails
-  tightness in every Sobolev topology; the local object requires genuinely
-  four-dimensional renormalization.  Without an interacting uniform estimate,
-  rotate after preserving the calibration and no-go.
+- **phase:** P-vs-NP semantic query gate closed
+- **active main funnel:** portfolio selection after MCSP audit.  Exact easy-set
+  counting gives `D(MCSP[s]) >= N-O(s log(n+s))`, but query/probe complexity
+  cannot cross the linear input-size barrier.  Junk-robust post-kernel trace
+  invariants collapse to semantic branching-program lower bounds and restate
+  the missing separation.  No non-tautological P-vs-NP mechanism remains.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -145,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 158
+- **cycle:** 159
 - **announcements:** none
 
 ## immutable target list
@@ -178,6 +175,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 159 audited MCSP and kernel-time invariants.  Circuit
+  counting proves the exact semantic bound `D(MCSP[s]) >= N-O(s log(n+s))`, so
+  at `s=N^(1/4)` deterministic query complexity is `N-o(N)`.  MUX
+  interpolation separately gives NO-certificate size at least
+  `N^(1/4)/3-O(log N)`.  Neither reaches superlinear time or unrestricted
+  circuits.  Any execution-trace/kernel invariant based on probe order,
+  information location, or pebbling is spoofed by junk and state re-encoding;
+  making it representation-independent turns it into the original semantic
+  branching-program/RAM lower-bound problem.  P-vs-NP rotates after preserving
+  the query theorem.
 
 - 2026-07-31: Cycle 158 closed shrinking spatial smoothing as a local-composite
   route.  In free Maxwell, the equal-time constituent-smoothed quadratic
