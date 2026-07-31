@@ -17,6 +17,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: advanced tetracyclic structure. Independently audited the exact
+  rank-four suppressed-kernel census: 17 loopless no-cut-vertex multigraph
+  types on 2--6 vertices, checksum
+  `d89e6e60c66e480ba89e662ab90b5ace211cbcff7292f92ad1614bb0937eb8e9`.
+  Proved the 5-dipole all-length DNN theorem (strict excess `<3`) and both
+  three-vertex kernels `(1,2,3)` and `(2,2,2)` (excess `<=3`), all with rooted
+  trees. Proved the `2+1+1` DNN residual families by exact induced-territory
+  packets, and independently proved two diamond blocks (`2+2` residual) by
+  bridge/shared-cut partitions. A hostile star-attachment family proved that
+  favorable bicyclic surplus has exact infimum one, so it cannot also pay a
+  hostile external-cycle deficit; rank `3+1` needs a coupled packet rather than
+  stronger uniform margin. New notes are under `tetracyclic-general/` and await
+  final audits before promotion.
 - 2026-07-31: selected the connected tetracyclic frontier `m=n+3`. Block ranks
   split as `1+1+1+1,2+1+1,2+2,3+1,4`. Cacti are complete. Sharp block DNN
   leaves small rooted residuals in the middle partitions, notably
