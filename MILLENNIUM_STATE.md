@@ -5,13 +5,15 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Navier all-depth cascade-circuit gate
+- **phase:** Navier global cross-edge cascade gate
 - **active main funnel:** exact-symbol Navier depletion.  Fixed-support and
   recursively completed packets show that order-one critical production can
   coexist with arbitrarily small exterior launch while the active phase stays
   exactly locked.  Local leakage/phase escape is retired.  The surviving gate
-  is an all-depth obstruction to a scale-uniform cascade circuit using the
-  exact unaveraged Leray triad compatibility.
+  cannot rely on mirror branching either: an exact infinite equal-shell chain
+  kills every designated mirror with compatible polarizations.  The surviving
+  gate is the accumulated complete cross-edge convolution of the simultaneous
+  circuit, using the exact unaveraged Leray compatibility.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -143,7 +145,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 146
+- **cycle:** 147
 - **announcements:** none
 
 ## immutable target list
@@ -176,6 +178,19 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 147 refuted mirror-sideband branching as a universal
+  all-depth tax.  Unequal-radius inputs cannot kill only one mirror, but
+  equal-radius 3D polarizations can.  The integer recurrence
+  `q_(n+1)=q_n+R q_n`, `R(x,y,z)=(z,x,y)`, starting at `(1,2,3)`, has
+  `|q_n|=|R q_n|`; compatible cross-product polarizations kill every designated
+  `q_n-Rq_n` output while producing a nonzero next rail for arbitrary depth.
+  Mirrors stay at radius squared six while intended radii grow.  This is not a
+  closed subsystem: nonadjacent cross-edge outputs remain.  Jacobi identities
+  were also demoted because the symmetric Euler quadratic map does not uniquely
+  determine an antisymmetric bracket lift; bare Gram/Jacobi identities provide
+  no quantitative circuit cost.  The next gate is complete simultaneous
+  cross-edge output versus intended gain.
 
 - 2026-07-31: Cycle 146 rotated to Navier and closed exterior-launch/phase-
   escape coercivity.  The sharp identity is `Phi^2 <= 4 E I_internal`; exterior
