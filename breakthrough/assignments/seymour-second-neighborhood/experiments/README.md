@@ -89,3 +89,25 @@ checker and completion ledger are in place.
 grouping: intersection parameters remain existential while all six margins and
 the C state remain exact. `check_m8_rho5_groups.py` independently verifies the
 weighted partition back to all 735 leaves and 63,517,608 labelled objects.
+
+The frozen `m=6` support census consists of all 68 unlabeled isolate-free simple
+graphs with six edges. Regenerate and audit its deterministic ASCII graph6
+payload with no third-party Python packages:
+
+```sh
+python3 m6_support_census.py --output m6-support-census.txt
+python3 m6_support_census.py --check m6-support-census.txt
+python3 check_m6_support_census.py m6-support-census.txt
+python3 test_m6_support_census.py
+```
+
+The frozen payload is 934 bytes with SHA-256
+`e97de806f6db6c3ac1768cab9259f7f0cd1c91ee26d949c1a3455ef8e471c8be`; both
+programs assert that value and the order distribution `1,5,15,20,15,7,3,1,1`
+for orders 4 through 12.
+
+The producer uses one-edge canonical augmentation and permutes vertices only
+inside connected components of order at most seven. The checker instead uses
+arbitrary-neighborhood vertex augmentation and a degree-constrained explicit
+isomorphism search before independently reconstructing the payload. Neither
+program scans the roughly 90 million labelled six-edge subsets on 12 vertices.

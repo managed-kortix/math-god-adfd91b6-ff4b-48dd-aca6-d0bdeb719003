@@ -1165,3 +1165,24 @@ No audits yet.
 - **Next queued attack:** selector-batch the 4,332 easy parents by support shape,
   pilot LRAT size, and independently prove exact batch coverage.  In parallel,
   build the first-principles 68-shape six-edge support census for `m=6`.
+
+### First-principles m=6 support census
+
+- Added a standard-library-only census of all isolate-free simple missing
+  graphs with exactly six edges.  There are exactly 68 isomorphism types, with
+  support-order distribution `1,5,15,20,15,7,3,1,1` for orders 4 through 12.
+- The production generator uses one-edge canonical augmentation for connected
+  components followed by component multisets.  A materially independent checker
+  uses arbitrary-neighborhood vertex augmentation and degree-constrained
+  backtracking isomorphism.  Both reproduce the frozen 934-byte payload with
+  SHA-256 `e97de806...471c8be`; see `experiments/m6-support-census.txt`.
+- A hostile audit separately reproduced the order counts by Burnside counting
+  and found no mathematical gap.  The payload convention is component-canonical
+  rather than globally lexicographically graph6-canonical; this is explicit and
+  does not affect uniqueness or coverage.
+- **Scope:** this freezes only the undirected support universe, not rooted
+  placements or orientations, and is not a branch elimination.
+- **Next queued attack:** enumerate canonical rooted-cell colorings of all 68
+  supports for both B6 capacities `(1,8,6,3)` and B7 capacities `(1,8,7,2)`,
+  forbidding only root-A missing edges.  Require an independent orbit-weight
+  checker before emitting full parent CNFs.
