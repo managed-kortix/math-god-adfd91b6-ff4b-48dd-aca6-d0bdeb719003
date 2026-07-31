@@ -5,12 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** BSD positive-density Kurihara production established
+- **phase:** BSD positive-density Kurihara corollary established
 - **active main funnel:** next BSD leading-term gate.  Global Tate reciprocity,
   core-vertex rigidity, and Kato explicit reciprocity now convert every
   invertible full-Selmer two-prime localization determinant into Kurihara
   nonvanishing.  Combined with maximal Kummer Chebotarev this gives a
-  positive-density family.  The next gate must connect this mod-p production
+  conditional positive-density family.  The next gate must connect this mod-p production
   to a genuinely new leading-term/Bockstein statement, not another census.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
@@ -184,7 +184,8 @@ waiting process.
   to vanish.  Thus p-singular localization is injective on the one-dimensional
   canonical modified group, `qr` is a core vertex, a primitive residual Kato
   system has nonzero component there, and pointwise explicit reciprocity gives
-  `delta_qr != 0`.  Kim's minimal-support theorem supplies the reverse
+  `delta_qr != 0`.  This is a corollary/synthesis of Mazur--Rubin and Kim, not
+  a new rigidity or explicit-reciprocity theorem.  Kim's minimal-support theorem supplies the reverse
   implication in rank two.  For `433a1,p=7`, Cycles 135--136 establish the
   basis and primitivity, so the equivalence holds for every genuine two-prime
   product under the audited standard hypotheses.  Maximal Kummer plus

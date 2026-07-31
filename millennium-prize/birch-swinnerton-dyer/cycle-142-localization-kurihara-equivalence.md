@@ -1,6 +1,8 @@
 # Cycle 142: localization determinants force Kurihara nonvanishing
 
-This cycle closes the one-way gap left in Cycle 141.  The bridge is not a
+This cycle records an explicit corollary of Mazur--Rubin core-vertex rigidity
+and Kim's refined explicit reciprocity law which closes the one-way gap left in
+Cycle 141.  The bridge is not a
 termwise scalar identity between a rational-point determinant and a Kurihara
 number.  Instead, global Tate reciprocity makes the auxiliary determinant force
 injectivity of `p`-singular localization on the modified canonical Selmer
@@ -59,7 +61,7 @@ D_{q,r}(P,Q)\ne0
 }
 \]
 
-## Proof of the new direction
+## Proof of the converse corollary
 
 At each auxiliary prime there is an orthogonal decomposition
 
@@ -208,8 +210,10 @@ Finite ramified or normalization-exception sets and the diagonal `q=r` have
 zero pair density.  For unordered pairs the asymptotic count is half the
 ordered count, while the density relative to all unordered pairs is the same.
 
-This is a positive-density family theorem for mod-`p` two-prime Kurihara
-nonvanishing under the stated rank-two/primitivity hypotheses.  It remains an
-application and synthesis of Kolyvagin-system and explicit-reciprocity theory;
-it does not prove the complex BSD leading-coefficient formula or any
-Millennium problem.
+This is a positive-density corollary for mod-`p` two-prime Kurihara
+nonvanishing under the stated residual-surjectivity, full-Selmer-basis,
+primitivity, local-torsion-zero, Manin/Tamagawa-unit, and genuine-level-`p`
+Kolyvagin-prime hypotheses.  It is an application and synthesis of existing
+Mazur--Rubin rigidity and Kim explicit-reciprocity theory; no new rigidity or
+explicit-reciprocity theorem is claimed.  It does not prove the complex BSD
+leading-coefficient formula or any Millennium problem.
