@@ -1,27 +1,29 @@
-# Four-vertex rank-four kernels: exact census and certificate blocker
+# Four-vertex rank-four kernels: exact ledger and unresolved residual
 
-## Status
+## Proposed theorem and current status
 
-This file does **not** claim the four-vertex DNN theorem.  The requested exact
-census is reproducible, and 33 switching-orbit representatives have exact Gram
-matrices of canonical excess at most three.  Those representative certificates
-do not, however, transport to all 342 physical bundle-count rows while keeping
-their physical odd/even canonical path costs.  The accompanying verifier fails
-closed at that point.
-
-## Exact physical census
-
-Use the edge order `01,02,03,12,13,23`.  The five four-vertex kernels from the
-rank-four kernel classification are
+Let `B` be a simple subdivision of one of the five four-vertex kernels
 
 `(0,1,2,1,2,1)`, `(0,1,2,2,1,1)`, `(0,1,2,2,2,0)`,
-`(0,1,2,3,1,0)`, and `(1,1,1,1,1,2)`.
+`(0,1,2,3,1,0)`, or `(1,1,1,1,1,2)`,
 
-For a multiplicity vector `m`, a physical bundle-count row is an integer vector
-`q` with `0<=q_e<=m_e`; `q_e` is the number of physically odd paths in that
-parallel bundle.  Independent Cartesian enumeration therefore gives
+in edge order `01,02,03,12,13,23`. Attach arbitrary rooted trees at arbitrary
+vertices. Then the resulting graph `G` satisfies
 
-| kernel | physical rows |
+`s^+(G)>=|V(G)|`.
+
+The computations below do **not** yet prove this statement. They certify 340
+of the 342 physical parity rows. The last two rows reduce exactly to a stronger
+all-odd `K4` statement that is not supplied by the existing all-odd `K4`
+theorem. Thus the four-branch-vertex part of the rank-four block classification
+remains open at these two rows.
+
+## The physical ledger
+
+For kernel multiplicities `m`, let `q_e` be the number of physically odd paths
+in bundle `e`. Thus `0<=q_e<=m_e`. Direct Cartesian enumeration gives
+
+| kernel | rows |
 |:---|---:|
 | `(0,1,2,1,2,1)` | `72` |
 | `(0,1,2,2,1,1)` | `72` |
@@ -30,72 +32,108 @@ parallel bundle.  Independent Cartesian enumeration therefore gives
 | `(1,1,1,1,1,2)` | `96` |
 | total | `342` |
 
-Switching a branch vertex replaces `q_e` by `m_e-q_e` in every incident
-bundle.  Quotienting by the eight switch patterns (modulo global switching) and
-by each kernel's full vertex automorphism group gives respectively
+The old switching-orbit packet directly certifies 270 physical rows after its
+Gram matrices are transported back to the original physical costs. The exact
+row patch certifies 70 more rows. It consists of 42 rational planar
+automorphism-orbit certificates and one exact boundary matrix; each is checked
+against the physical row, never against a switched parity row. The largest
+patched excess is at most three.
 
-`6,6,7,6,8`,
+Exactly two rows remain unresolved:
 
-hence exactly 33 orbits.  The verifier derives these numbers rather than
-reading a row list.
+`(kernel 4, q=(1,1,1,1,1,1))`,
 
-## Exact candidate certificates
+`(kernel 4, q=(1,1,1,1,1,2))`.
 
-`research/rank-four-four-vertex-dnn-verifier.py` contains one immutable
-certificate record for each of the 33 canonical orbit representatives.  In 32
-records, four rational parameters `a_i` specify planar vectors at angles
-`4 atan(a_i)`.  For an edge `ij`, put
+They are not outputs of the planar row search and must not be counted as
+certified rows.
 
-`t_ij=|tan((theta_i-theta_j)/4)|`.
+## Exact structural reduction
 
-The verifier obtains this rationally from
+Write the last kernel as a `K4` support with a second `23` path. In both
+residual rows all five singleton bundles are odd. Choose an odd `23` path for
+the `K4` support and let `T` be the internal vertices of the other `23` path,
+together with every rooted tree based at those vertices. The other path has an
+internal vertex: in row `111111` it is even and hence has length at least two;
+in row `111112` both paths are odd, but simplicity permits at most one direct
+`23` edge, so one of them has odd length at least three and is chosen as the
+deleted path.
 
-`|(a_i-a_j)/(1+a_i a_j)|`, reduced to the smaller-angle value, and checks
+The induced graph `T` is a nonempty tree, so `sigma(T)=-1`. Its induced
+complement is an all-odd subdivision of `K4`, with all remaining rooted-tree
+attachments retained. Induced superadditivity therefore gives exactly
 
-`r_ij=(1-6t_ij^2+t_ij^4)/(1+t_ij^2)^2`,
+`sigma(G) >= sigma(K4_all_odd_packet) + sigma(T)`
 
-`c_odd(t_ij)=(1-t_ij^2)^2/(4t_ij^2)`,
+`          = sigma(K4_all_odd_packet) - 1`.
 
-`c_even(t_ij)=2t_ij^2`.
+Consequently both residual rows would close if one proved the strengthened
+attached all-odd `K4` estimate
 
-The remaining record is the regular-simplex Gram matrix, encoded by
-`t_ij^2=1/3` on every pair.  Its correlations are `-1/3`, every odd canonical
-cost is `1/3`, and every even canonical cost is `2/3`.
+`sigma(K4_all_odd_packet) >= 1`.                         (required)
 
-For every representative the program constructs every Gram entry as a
-`Fraction`, checks all 15 principal minors are nonnegative by exact rational
-Gaussian elimination, computes the exact weighted path excess, and verifies it
-is at most three.  The largest is exactly three.
+The presently recorded all-odd `K4` result proves only `sigma>=0`, so it cannot
+pay for the deleted tree. This reduction is exact, but it is not a discharge.
 
-## Why this is not yet a theorem
+The standalone verifier also regenerates the full monotone long/unit ledger for
+that all-odd support. Of the `2^6=64` subsets of long paths, the exact classes
+are
 
-Switching is valid for naming signed-kernel orbits and changing Gram-vector
-signs, but it does not change a physical path length.  In particular, a
-certificate checked only after replacing `q_e` by `m_e-q_e` may exchange the
-odd cost with the even cost in a bundle.  The transformed matrix must therefore
-be substituted back into the original physical row and rechecked there.
+| class | subsets | disposition |
+|:---|---:|:---|
+| at least three long | `42` | regular-simplex DNN |
+| two long, adjacent | `12` | planar DNN |
+| two long, opposite | `3` | planar DNN |
+| exactly one long | `6` | induced `Theta(1,2,2)` deletion |
+| no long path | `1` | actual attached `K4` packet |
 
-The verifier performs that substitution for the rational planar records.  Some
-transported rows either place an odd path at a zero-cost denominator boundary
-or have exact excess greater than three.  The regular-simplex boundary record
-also does not provide rational transported costs after a nontrivial sign
-switch.  Consequently the 33 representative checks are insufficient to cover
-the 342 physical rows.
+For the regular-simplex DNN class it encodes four certificates, according as
+the number `q` of long paths is `3,4,5,6`. The simplex has exact off-diagonal
+correlation `-1/3`; every unit path costs `1/2`, and the triple-angle identity
+gives the strict rational long-path bound `1/6`. Thus the four exact upper
+bounds are respectively
 
-Run the audit with
+`2, 5/3, 4/3, 1`.
+
+The verifier derives these values rather than trusting displayed decimals and
+checks all principal Gram minors over `Fraction`. The monotonicity step is only
+within a fixed odd parity: every long all-odd path has length at least three,
+and increasing its length cannot increase the path cost. The zero-long class
+is kept separate because it is the actual `K4`, not another DNN row. Its
+required attached-packet margin `sigma>=1` remains an explicit unresolved
+proof artifact.
+
+The earlier simplex discharge was invalid. For the quarter-angle convention
+used by the verifier,
+
+`r=(1-6t^2+t^4)/(1+t^2)^2`.
+
+Thus regular-simplex correlation `r=-1/3` gives `t^2=2-sqrt(3)`, not `1/3`;
+indeed `t^2=1/3` gives `r=-1/2`. The claimed costs `1/3` and `2/3`, and hence
+the budgets `8/3` and `7/3`, do not follow from a regular-simplex Gram matrix.
+
+## Fail-closed audit
+
+`research/rank-four-four-vertex-theorem-verifier.py` imports the original base
+audit and the exact row patch, independently reconstructs all 342 physical
+rows, and checks the disjoint status ledger
+
+`342 = 270 base + 70 patch + 2 unresolved`.
+
+For each unresolved row it checks the parity predicate, the existence of the
+nonempty induced deleted tree, the all-odd `K4` complement, and the missing
+requirement `sigma>=1`. It also verifies the four rational simplex bounds,
+enumerates all 64 monotone classes, identifies the structural actual-`K4`
+branch, and rejects the false `t^2=1/3` simplex record. The residual records
+must contain no purported Gram matrix or numerical excess. Hostile mutations
+of coverage, status, predicates, bounds, or the required margin are rejected.
+Run
 
 ```text
-python research/rank-four-four-vertex-dnn-verifier.py
-python -O research/rank-four-four-vertex-dnn-verifier.py
+python research/rank-four-four-vertex-theorem-verifier.py
+python -O research/rank-four-four-vertex-theorem-verifier.py
 ```
 
-It prints the exact census and representative maximum, reports the number of
-failed physical transports, and then raises
-
-`BLOCKER: orbit representatives do not certify every physical row`.
-
-An actual theorem artifact requires either an exact certificate attached to
-each physical row (certificates may be shared only after direct physical-cost
-verification), or a symbolic transport argument that preserves the physical
-canonical costs.  Neither is supplied here, so no four-vertex DNN theorem or
-tetracyclic closure is claimed.
+Both commands must exit nonzero with the same unresolved blocker. Python
+`assert` is not used for any acceptance condition. A zero exit would be a false
+theorem acceptance.

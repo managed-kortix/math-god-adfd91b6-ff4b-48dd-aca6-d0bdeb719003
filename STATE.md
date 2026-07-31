@@ -17,6 +17,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: exact physical-row work improved rank-four coverage but caught a
+  serious false closeout before commit. For the five four-vertex kernels, an
+  exact rational patch repairs 70 of 72 failed transports, leaving two rows of
+  K4 support plus a doubled edge. A proposed regular-simplex discharge was
+  false (`r=-1/3` gives odd cost `1/2`, while the claimed `t^2=1/3` gives the
+  non-PSD four-vector equicorrelation `-1/2`). The theorem note/verifier now
+  deliberately fail closed at exactly those two rows. Kernel 16 (`K3,3`) is
+  independently proved for all 512 physical parity rows by an exact exhaustive
+  three-color score theorem, normal/`-O` identical. The hard kernel-9 row
+  `q=(0,1,1,1,1)` has an accepted structural packet in two key length channels,
+  leaving three favorable triangle blocks after deletion. Experimental
+  six-vertex rational Gram search remains uncommitted search tooling, not a
+  certificate.
 - 2026-07-31: hardened tetracyclic progress. Hostile audit accepted the
   five-path and `2+1+1` notes; repaired two scope/domain statements in the
   three-vertex theorem. Added a fail-closed exact rank-four kernel census
