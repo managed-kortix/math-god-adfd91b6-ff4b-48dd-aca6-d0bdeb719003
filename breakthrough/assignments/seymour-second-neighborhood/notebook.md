@@ -1186,3 +1186,51 @@ No audits yet.
   supports for both B6 capacities `(1,8,6,3)` and B7 capacities `(1,8,7,2)`,
   forbidding only root-A missing edges.  Require an independent orbit-weight
   checker before emitting full parent CNFs.
+
+### Complete m=6 rooted-placement cover
+
+- Froze all rooted-cell color orbits of the 68 six-edge supports, imposing only
+  cell capacities and the necessary prohibition on a root-A missing pair.  The
+  cover has 112,220 B6 rows and 75,104 B7 rows, total 187,324; its 6,659,672-byte
+  payload has SHA-256 `22d7744f...966ed5e`.
+- An independent checker reconstructs each full support automorphism group,
+  verifies every representative is the true orbit minimum, verifies its orbit
+  weight, and compares weighted sums with direct raw-coloring counts.  The raw
+  totals are 1,862,693 for B6 and 1,022,346 for B7, including repeated-component
+  symmetries such as the order-46,080 group of `6K2`.
+- Hostile audit found one implementation precondition but no payload defect:
+  the fast producer's component assembly assumes the hashed support census's
+  component-canonical labeling and is not invariant under arbitrary relabeling.
+  This is now explicit in code.  The independent full-group checker is the gate
+  that makes every frozen row genuinely canonical.
+- **Scope:** this is an exact support-placement cover, not an orientation search
+  or branch elimination.
+- **Next queued attack:** apply separately proved placement-only degree filters
+  (especially the B6 requirement that at least three holes meet C through
+  `R-C`, `A-C`, or `C-C`) with an independent rejected-orbit ledger, then emit
+  full B6/B7 parent CNFs for survivors.
+
+### Frozen m=6 rooted-cell placement cover
+
+- Decoded all 68 frozen six-edge supports and enumerated colorings by the four
+  rooted cells `R,A,B,C`, imposing only the stated capacities and the prohibition
+  on `R-A` support edges. Quotienting uses the full automorphism group of each
+  uncolored support, including permutations of isomorphic components.
+- The canonical cover has 187,324 rows: 112,220 in B6 and 75,104 in B7. By
+  support order 4 through 12, the B6 counts are
+  `18,880,8439,26632,37076,26211,10311,2347,306`; the B7 counts are
+  `15,722,6412,18784,24533,16541,6404,1487,206`.
+- The deterministic 6,659,672-byte payload is
+  `experiments/m6-placement-cover.txt`, SHA-256
+  `22d7744f1eecee3ea22527e4beec645ae999c912184f1f23c1a7f701e966ed5e`.
+  Each row includes its raw-coloring orbit weight.
+- A materially separate checker parses the payload, independently reconstructs
+  full support automorphism groups, verifies canonicality and exact orbit size,
+  and counts raw valid colorings directly by constrained backtracking. The orbit
+  weights reproduce 1,862,693 B6 and 1,022,346 B7 raw colorings.
+- Exact commands are documented in `experiments/README.md`; both the original
+  support-census regression and the new producer/checker regression pass.
+- **Scope:** this is a complete rooted-cell placement cover, not an orientation
+  cover, SAT/CNF campaign, branch elimination, or result on SNC. The next step
+  is to add exact present-pair orientations and full order-18 constraints per
+  canonical parent without weakening this cover identity.

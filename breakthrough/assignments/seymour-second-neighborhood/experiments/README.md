@@ -111,3 +111,26 @@ inside connected components of order at most seven. The checker instead uses
 arbitrary-neighborhood vertex augmentation and a degree-constrained explicit
 isomorphism search before independently reconstructing the payload. Neither
 program scans the roughly 90 million labelled six-edge subsets on 12 vertices.
+
+The rooted-cell placement cover decodes that frozen support payload and colors
+every support vertex in `R,A,B,C`, with capacities `B6=(1,8,6,3)` and
+`B7=(1,8,7,2)`. The only forbidden support edge is `R-A`. Rows are canonical
+under the full automorphism group of the uncolored support, and each row records
+its raw-coloring orbit size.
+
+```sh
+python3 m6_placement_cover.py --output m6-placement-cover.txt
+python3 m6_placement_cover.py --check m6-placement-cover.txt
+python3 check_m6_placement_cover.py m6-placement-cover.txt
+python3 test_m6_placement_cover.py
+```
+
+The deterministic payload has 187,324 rows (112,220 B6 and 75,104 B7), is
+6,659,672 bytes, and has SHA-256
+`22d7744f1eecee3ea22527e4beec645ae999c912184f1f23c1a7f701e966ed5e`.
+The independent checker does not import the producer: it reconstructs each full
+support automorphism group by degree-constrained backtracking, validates every
+canonical representative and orbit size, and separately counts all valid raw
+colorings. Orbit weights sum to 1,862,693 B6 and 1,022,346 B7 raw colorings.
+This is a placement cover only; it does not orient present pairs, emit CNFs, or
+eliminate either branch.
