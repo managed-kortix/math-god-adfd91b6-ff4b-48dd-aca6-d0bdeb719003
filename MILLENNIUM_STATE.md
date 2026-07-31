@@ -5,13 +5,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio rotation after Navier coherence closure
-- **active main funnel:** selection review.  A two-stage genuine NS cascade
-  with uniformly nondegenerate normalized symbols is exactly heat-resonant and
-  has no competing Picard route, yet its terminal heat-budget charge over one
-  parent lifetime decays as `N^-4`.  Temporal coherence without an intrinsic
-  critical-throughput amplitude bound is therefore retired; the Navier funnel
-  has reached a regularity-level normalization wall.
+- **phase:** Hodge nonsplit special seed produced
+- **active main funnel:** deformation of an exceptional algebraic seed.  On the
+  explicit `Q(i)` determinant-class `[-3]` Weil sixfold `E_i^3 x E_i^3`, the
+  antilinear diagonal graph has nonzero pure determinant projection and spans
+  the exceptional rank-two Weil space after the `K` action.  The next gate is
+  whether any Chow/perfect-complex branch carrying this projected class moves
+  beyond the proper extra-endomorphism locus toward the nine-dimensional
+  nonsplit component.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -143,7 +144,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 150
+- **cycle:** 151
 - **announcements:** none
 
 ## immutable target list
@@ -176,6 +177,18 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 151 produced an explicit algebraic exceptional seed on a
+  genuinely nonsplit Weil sixfold.  Take `A0=E_i^3 x E_i^3`, standard/conjugate
+  `Q(i)` action, and polarization weights `(1,1,1;1,1,3)`.  Its Hermitian
+  matrix is `diag(1,1,1,-1,-1,-3)`, signature `(3,3)`, nonsplit determinant
+  class `[-3]`.  The codimension-three diagonal graph between the blocks is
+  K-antilinear.  Exact exterior expansion gives pure coefficients `+1` on
+  `dz1 dz2 dz3 dbar4 dbar5 dbar6` and `-1` on its conjugate, so its Weil
+  projection is nonzero.  Algebraic K-correspondences then span the rank-two
+  exceptional space at this special fiber.  The graph lies on a proper
+  decomposition/extra-endomorphism locus and no dominating deformation branch
+  is yet proved; generic Hodge remains open.
 
 - 2026-07-31: Cycle 150 ran the final bounded Navier coherence test.  The linked
   triads `Ne1+Ne2=N(e1+e2)` and `N(e1+e2)+Ne3=N(1,1,1)` have exact normalized
