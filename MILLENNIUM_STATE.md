@@ -5,14 +5,16 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge nonsplit special seed produced
+- **phase:** Hodge projected-seed deformation gate
 - **active main funnel:** deformation of an exceptional algebraic seed.  On the
   explicit `Q(i)` determinant-class `[-3]` Weil sixfold `E_i^3 x E_i^3`, the
   antilinear diagonal graph has nonzero pure determinant projection and spans
   the exceptional rank-two Weil space after the `K` action.  The next gate is
-  whether any Chow/perfect-complex branch carrying this projected class moves
-  beyond the proper extra-endomorphism locus toward the nine-dimensional
-  nonsplit component.
+  the diagonal itself has rank-six embedded obstruction and moves over only a
+  three-dimensional tangent locus, although its projected Weil class is
+  horizontal in all nine directions.  The next gate is a different effective
+  Chow/perfect-complex representative whose obstruction cancels before, not
+  merely after, semiregularity.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -144,7 +146,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 151
+- **cycle:** 152
 - **announcements:** none
 
 ## immutable target list
@@ -177,6 +179,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 152 repaired and sharpened the special seed.  The normalized
+  graph coefficients are the conjugate pair `-i/8,+i/8`.  The rational Weil
+  projector is induced by an explicit degree-six polynomial in the algebraic
+  endomorphism `u=2+i`, avoiding the invalid shortcut of exterior-powering a
+  complex projector.  For `Q=diag(1,1,3)`, the graph obstruction is
+  `rho(B)=Q^-1 B^t-B`, rank six with three-dimensional kernel; the full graph
+  contraction has the same ranks, while the pure Weil projection contracts to
+  zero in all nine PEL directions.  Projector-combination obstructions cancel
+  only after semiregularity and do not define a deforming effective Chow point.
+  The graph ansatz is first-order closed; another representative is required.
 
 - 2026-07-31: Cycle 151 produced an explicit algebraic exceptional seed on a
   genuinely nonsplit Weil sixfold.  Take `A0=E_i^3 x E_i^3`, standard/conjugate
