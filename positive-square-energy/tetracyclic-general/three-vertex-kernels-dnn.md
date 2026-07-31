@@ -13,10 +13,9 @@ and consequently
 
 `s^+(G) >= |V(G)|`.
 
-In fact the proof applies to every loopless three-vertex subdivision with six
-branch paths, independently of how the six paths are distributed among the
-three vertex pairs. The two multiplicity triples in the statement are exactly
-the rank-four, minimum-degree-at-least-three triples.
+The two multiplicity triples in the statement are exactly the rank-four,
+minimum-degree-at-least-three triples; the finite tables below are asserted
+only for those two triples.
 
 ## 1. Exact path reduction
 
@@ -49,7 +48,7 @@ special odd--odd physical base row is needed.
 
 ## 2. Rational three-correlation certificates
 
-For `t>=0` set
+For `0<=t<=1` set
 
 `r(t)=(1-6t^2+t^4)/(1+t^2)^2`.                                (5)
 

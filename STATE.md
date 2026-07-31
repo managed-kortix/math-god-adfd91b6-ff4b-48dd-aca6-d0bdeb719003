@@ -17,6 +17,18 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: hardened tetracyclic progress. Hostile audit accepted the
+  five-path and `2+1+1` notes; repaired two scope/domain statements in the
+  three-vertex theorem. Added a fail-closed exact rank-four kernel census
+  verifier and hand classification: 17 types, normal/`-O` identical, nine
+  mutations rejected. Proved the rank `3+1` hostile external-cycle packet by
+  direct DNN margins for doubled-triangle/C4/K4 structural rows plus an exact
+  attached-K4 shared-cut partition; hostile referee accepted. A claimed
+  four-vertex rank-four theorem was rejected: exact orbit representatives fail
+  on 72 physical transports, exposing again that switching does not transport
+  canonical path lengths. Five-vertex incidence Gram certificates close 282 of
+  378 orbits but leave 96; six-vertex kernels are numerically promising but
+  lack exact certificate tables. No theorem claimed for those families.
 - 2026-07-31: advanced tetracyclic structure. Independently audited the exact
   rank-four suppressed-kernel census: 17 loopless no-cut-vertex multigraph
   types on 2--6 vertices, checksum
