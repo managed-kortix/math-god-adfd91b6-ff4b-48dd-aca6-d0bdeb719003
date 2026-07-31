@@ -1261,3 +1261,60 @@ No audits yet.
 - **Scope:** rejection is only by necessary placement conditions. Acceptance
   asserts no orientation completion, bad local model, or branch feasibility;
   the filter is not a B6/B7 elimination or an SNC result.
+
+### Full m=6 parent CNF projection
+
+- Added `experiments/m6_parent_cnf.py`, which refuses non-frozen cover/filter
+  payloads and selects either a zero-based accepted ordinal or an accepted
+  original cover index. The mapping is deterministic first-label embedding in
+  each rooted cell, with the distinct B6/B7 boundaries made explicit.
+- Every parent calls the complete order-18 `snc_cnf.generate` model with six
+  missing pairs, robust deletion witnesses, and full arc-minimality, then fixes
+  all 153 semantic hole variables. Six units are positive and 147 negative;
+  comments retain both selectors and the complete support projection.
+- Hardened the checker as a hostile-input gate. It strictly decodes short-form
+  graph6 length, alphabet, and padding; requires metadata in its exact canonical
+  order and set; permits no post-header comments; and requires unique variable
+  names numbered consecutively `1..N`. It reconstructs the selected B6/B7 base
+  and requires exact ordered equality before an exact 153-unit suffix in graph6
+  pair order. Mutation tests alter, delete, append, and reorder both base
+  clauses and units, and cover duplicate names, variable zero/gaps, metadata,
+  post-header comments, selector negatives/bounds, and malformed graph6.
+- Frozen generator fingerprints use `<number> <name>\n` variable records and
+  ordinary DIMACS clause lines. The common 23,616-variable map hash is
+  `cff4c18a4425f26c188790871da51a58b13569764bf89c83d1c736d5f9db070e`.
+  B6 has 142,736 base clauses and hash
+  `22b118674d05045d0a1c8628ccb5b9a7f72fbcd53f6086ecab1b2ab369ca12c1`;
+  B7 has 142,729 and hash
+  `a21d68c9a70642ad15b836d162996779d0b4ee4590a7bccd7f3af54f394341ab`.
+  The harmless units `-1` (`a_0_0`) and `-325` (`q_0_0`) each occur twice in
+  both historical base streams. They are deliberately frozen rather than
+  removed; `snc_cnf.py` is unchanged for compatibility with certified runs.
+- Regression fixtures include accepted ordinal zero, frozen row 17, last B6,
+  first B7, final accepted, order-12 endpoints, and support vertices omitted
+  from cells with hole-isolated full-graph vertices. Direct embedding checks run
+  over all accepted rows and cover every support type/observed occupancy; only
+  five full CNFs are built, avoiding a 76,361-parent test explosion.
+- **Scope:** this is a deterministic parent emitter and exact generator/projection
+  identity gate. It performs no SAT campaign, creates no proof artifact, does
+  not prove clause semantics independently, and does not close either branch.
+
+### Exact m=6 C-layer funnel and scout correction
+
+- The complete scalar notation is now frozen as
+  `lambda=H_RC+H_AC+H_CC`, `q=H_CB`, and `h` equal to holes wholly outside C,
+  so `lambda+q+h=6`.  In B6, summing C degrees gives
+  `highC=6-lambda+e(C,B)`.  Thus `lambda=3` forces `e(C,B)=0` and all three C
+  vertices high.
+- This B6 forced regime has 14,649 canonical rows, partitioned by `(q,h)` as
+  `(0,3):6286`, `(1,2):5541`, `(2,1):2410`, `(3,0):412`.  The analogous large
+  forced B7 regime has 25,766 rows and both C vertices high.
+- A temporary 48-parent solver scout had no certificate status. Hostile audit
+  found that its B6 selector accidentally used `h=3`, selecting only the 6,286
+  rows with `q=0`, rather than all 14,649 rows with `lambda=3`.  The observation
+  is explicitly discarded as branch evidence; no proof object was retained.
+- Full definitions, identities, and the required versioned child-shard contract
+  are in `attempts/tick50-m6-parent-frontier.md`.
+- **Next queued attack:** implement an independently checked `(lambda,r)` child
+  emitter.  Begin with B6 `lambda=3,r=0` and the forced B7 row, and retain only
+  LRAT-verified outcomes keyed to the exact child CNF hash.

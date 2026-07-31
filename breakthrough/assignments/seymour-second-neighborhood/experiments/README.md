@@ -179,3 +179,61 @@ The deterministic ledger is 95,083 bytes with SHA-256
 These are necessary placement predicates only. They do not orient A-A, A-B,
 B-B, or all C incident pairs simultaneously with non-C degrees, do not encode
 badness or minimality, and do not eliminate either branch.
+
+`m6_parent_cnf.py` turns exactly one accepted frozen row into a standalone full
+order-18 parent CNF. It hard-checks both frozen input hashes and headers, accepts
+either the zero-based ordinal among the 76,361 accepted rows or the original
+zero-based cover index, and rejects a cover-index selector whose filter status
+is nonzero. For each cell it embeds support vertices in support-label order onto
+the first available full-graph labels. Thus B6 uses
+`R=0,A=1..8,B=9..14,C=15..17`, while B7 uses
+`R=0,A=1..8,B=9..15,C=16..17`.
+
+```sh
+python3 m6_parent_cnf.py --accepted-ordinal 0 --output /tmp/m6-a0.cnf
+python3 m6_parent_cnf.py --cover-index 17 --output /tmp/m6-row17.cnf
+python3 check_m6_parent_cnf.py /tmp/m6-a0.cnf
+python3 test_m6_parent_cnf.py
+```
+
+The emitter calls the complete
+`generate(18,bsize,6,robust_witness=True,arc_minimal=True)` model and refuses to
+write unless its exact ordered variable map and base clause stream match the
+frozen branch fingerprints. The canonical hash serialization is one
+`<number> <name>\n` record per variable and one ordinary DIMACS clause line per
+base clause. Both branches have 23,616 variables and variable-map SHA-256
+`cff4c18a4425f26c188790871da51a58b13569764bf89c83d1c736d5f9db070e`.
+B6 has 142,736 base clauses with SHA-256
+`22b118674d05045d0a1c8628ccb5b9a7f72fbcd53f6086ecab1b2ab369ca12c1`;
+B7 has 142,729 with SHA-256
+`a21d68c9a70642ad15b836d162996779d0b4ee4590a7bccd7f3af54f394341ab`.
+The historical stream contains two harmless duplicate base clauses in each
+branch: units `-1` (`a_0_0`) and `-325` (`q_0_0`) each occur twice. They remain
+part of the frozen stream because existing certified campaigns depend on the
+exact clauses in `snc_cnf.py`.
+
+After that base, the emitter appends exactly one unit for every one of the 153
+unordered-pair hole variables in graph6 pair order
+`(0,1),(0,2),(1,2),...,(16,17)`: six positive units for the embedded support
+and 147 negative units. Comments record the frozen hashes, both selectors,
+branch, support identity, placement, embedding, holes, and model options before
+the exact variable map and DIMACS body.
+
+`check_m6_parent_cnf.py` is a hostile-input CNF parser and projection checker.
+It separately parses the cover and filter bitstream, strictly parses short-form
+graph6 including length and padding, reconstructs the selected frozen branch,
+and authenticates both branch hashes plus exact ordered equality of the base
+variable map and clause stream. Variable declarations must be unique names
+numbered consecutively from 1 through N; metadata must have the canonical order
+and exact key set; and no comment is allowed after the DIMACS header. The only
+permitted suffix is the exact 153-unit pair-ordered projection.
+The regression generates only five large boundary CNFs (accepted ordinal zero,
+accepted row 17, last B6, first B7, and final accepted row); direct helper checks
+cover all 76,361 accepted embeddings, all 68 support types, and all observed
+cell occupancies without generating 76,361 roughly 10 MB files.
+
+This parent layer does not solve any CNF, produce or check a proof, prove that an
+accepted placement has an orientation completion, or eliminate B6/B7. The
+checker validates exact generator identity and projection but does not establish
+the mathematical semantics of each base clause; those semantics retain their
+separate small-instance regression and eventual proof-checking requirements.
