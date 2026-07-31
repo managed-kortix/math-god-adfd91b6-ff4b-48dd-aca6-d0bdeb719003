@@ -173,7 +173,7 @@
       "paper_folder": "all-tetracyclic-graphs",
       "evidence_url": "https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/all-tetracyclic-graphs/paper.pdf",
       "ocb": {"eligibility": "ineligible_partial_result_not_resolution", "status": "withheld_from_resolution_reporting", "public_id": null},
-      "x": {"status": "eligible_not_posted", "tweet_id": null, "posted_at": null},
+      "x": {"status": "posted_and_api_readback_verified", "tweet_id": "2083151479074922689", "posted_at": "2026-07-31T11:23:10Z"},
       "notes": "Completes the full connected m=n+3 frontier, but does not resolve the general m>=n+1 conjecture and is withheld from OCB resolution reporting."
     }
   ],

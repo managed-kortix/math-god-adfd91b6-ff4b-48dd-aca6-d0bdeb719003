@@ -17,6 +17,10 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: published the verified all-tetracyclic theorem once on X. Post
+  `2083151479074922689`; API readback verified exact claim, author, rendered
+  card, and direct folder/PDF links. Manifest and append-only ledger updated.
+  This is partial AKMPZ progress and was not reported to OCB as a resolution.
 - 2026-07-31: completed and synthesized the full connected tetracyclic theorem:
   every finite simple connected graph with `m=n+3` satisfies `s^+>=n`.
   The 15-page paper proves all block partitions, embeds an exhaustive rank
