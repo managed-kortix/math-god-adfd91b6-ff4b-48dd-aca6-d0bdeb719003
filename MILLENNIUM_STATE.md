@@ -5,12 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** P-vs-NP semantic query gate closed
-- **active main funnel:** portfolio selection after MCSP audit.  Exact easy-set
-  counting gives `D(MCSP[s]) >= N-O(s log(n+s))`, but query/probe complexity
-  cannot cross the linear input-size barrier.  Junk-robust post-kernel trace
-  invariants collapse to semantic branching-program lower bounds and restate
-  the missing separation.  No non-tautological P-vs-NP mechanism remains.
+- **phase:** RH Weil-spline refinement gate closed
+- **active main funnel:** portfolio selection after refinement audit.  Raw
+  minimum-eigenvalue ratios across spline levels are basis dependent; the
+  intrinsic generalized Ritz constants relative to a fixed norm decrease under
+  nested refinement.  Finite positive matrices therefore remain finite
+  restrictions of the Weil criterion, not a mechanism for uniform positivity.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +142,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 159
+- **cycle:** 160
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +175,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 160 audited the RH Weil-spline refinement gate.  For a fixed
+  norm Gram matrix `M_j`, the intrinsic constants are
+  `alpha_j=lambda_min(H_j,M_j)` and exact nested Galerkin refinement gives
+  `alpha_(j+1)<=alpha_j`.  Raw ordinary eigenvalue ratios can be changed
+  arbitrarily by rescaling the fine basis, while existence of some positive
+  ratio for one positive pair is tautological.  The old three-hat calibration
+  was reproduced and an expanded fifteen-hat matrix was numerically positive,
+  but its raw minimum eigenvalue fell from `1.7775e-4` to `4.6951e-7`; this is
+  non-rigorous finite calibration only.  The gate is retired pending a fixed
+  form norm, interval assembly, and a uniform all-level theorem.
 
 - 2026-07-31: Cycle 159 audited MCSP and kernel-time invariants.  Circuit
   counting proves the exact semantic bound `D(MCSP[s]) >= N-O(s log(n+s))`, so
