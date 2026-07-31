@@ -5,9 +5,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge split adapted quotient correspondence computed
-- **active main funnel:** restricted split-Hecke orbit closure after exact PEL
-  transport audit.
+- **phase:** Hodge restricted-polarization degree convention audited
+- **active main funnel:** portfolio rotation after carried split-Hecke closure.
+  For arrows remaining `eta=1` relative to the transported threefold, the
+  restricted polarization degree stays 256; the orbit lies in a proper closed
+  finite union of bounded-type abelian-subthreefold loci.  A semigroup which
+  discards the carried threefold is a different unresolved object.
   At good inert primes every PEL-stable maximal isotropic kernel has
   `eta>=p`, with exactly `(p+1)^2(p^2+1)` kernels at equality.  At good split
   primes adapted `eta=1` kernels survive and number `2(p+1)(p^2+1)`, but every
@@ -15,6 +18,18 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   its K-antilinear involution and descended diagonal abelian threefold.  The
   tensor varies under Hecke conjugacy, however, so individual specialness does
   not imply that the union lies in one proper closed locus.
+- 2026-07-31: Cycle 165 audited restricted polarization degree under iterated
+  `eta=1` transport.  The Cycle 151 diagonal restriction has type `(2,2,4)`,
+  hence polarization volume `chi=16`, unnormalized top intersection `96`, and
+  polarization-isogeny degree `deg(phi)=256`.  For one step the exact formulas
+  are `chi(M|Y)=eta chi(L|Gamma)` and
+  `deg(phi_(M|Y))=eta^2 deg(phi_(L|Gamma))`; thus `eta=1` preserves 16 in the
+  volume convention and 256 in the standard polarization-degree convention,
+  but need not preserve the full elementary-divisor type.  Reading `eta` as
+  an absolute degree silently assumes a principal seed restriction.  Iterated
+  numerical preservation is conditional on having kernels adapted to each
+  current descended threefold; the original prime-level count does not prove
+  existence of arbitrary chains.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -146,7 +161,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 164
+- **cycle:** 165
 - **announcements:** none
 
 ## immutable target list
@@ -179,6 +194,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 165 identified the invariant missing from the varying-
+  involution discussion.  The Cycle 151 diagonal restriction has type
+  `(2,2,4)`, normalized volume 16, top intersection 96, and polarization-map
+  degree 256.  An adapted step multiplies the volume by `eta` and the degree by
+  `eta^2`; hence an iterated carried `eta=1` orbit preserves degree 256.  Only
+  four polarization types have volume 16, and their abelian-subthreefold loci
+  are a proper closed finite union in the generically simple nine-dimensional
+  Weil component.  Thus the carried restricted orbit is nondense.  This does
+  not cover a semigroup that discards the transported threefold, nor prove
+  existence of arbitrary chains.
 
 - 2026-07-31: Cycle 164 computed the exact correspondence on every split
   adapted Cycle 163 quotient.  For `K=D+JD`, factor swap acts by `+1` on `D`
