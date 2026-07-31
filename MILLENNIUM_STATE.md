@@ -6,6 +6,20 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
 - **phase:** Hodge fixed-degree relative-Chow production gate
+- **Cycle 197 Appell--Humbert complete-intersection no-go:** for a divisor
+  class with Hermitian matrix `R`, the exact infinitesimal condition along the
+  PEL Beltrami tangent `mu_B=[[0,B],[Q^-1 B^t,0]]` is that `mu_B^t R` be
+  symmetric. Imposing it for every `B` has real rank 35 on `Herm_6(C)` and
+  leaves only the integral polarization line
+  `Z*diag(1,1,1,1,1,3)`. None of the Cycle 196 rank-one graph-divisor classes
+  remains `(1,1)` on the full base; changing to smooth effective sections in
+  the same line bundles cannot change this. The three divisors cutting
+  `Gamma_(u^k)` have common PEL-base dimensions `3,0,0,0,0,0,0`, so the
+  displayed signed collections have rank zero. Any full-base divisor triple
+  is a multiple of the polarization cube, whose exceptional Weil projection
+  vanishes. Therefore no rank-nine signed pair exists in this smooth
+  fixed-line-bundle complete-intersection architecture. General relative Chow
+  representatives remain open; no Hodge result is claimed.
 - **Cycle 196 finite-type correction:** fixing the exact endpoint degrees
   `d_+=6072151396206990896` and `d_-=2315779370123038256` makes the ambient
   product of effective relative Chow spaces finite type, but does not make the
@@ -637,7 +651,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 196
+- **cycle:** 197
 - **announcements:** none
 
 ## immutable target list

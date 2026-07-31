@@ -1,5 +1,20 @@
 # Notebook
 
+## Cycle 197 Appell--Humbert complete-intersection no-go
+
+For a divisor class with Hermitian matrix `R`, the PEL Beltrami tangent
+`mu_B=[[0,B],[Q^-1 B^t,0]]` preserves type `(1,1)` exactly when `mu_B^t R` is
+symmetric. Requiring this for all nine complex PEL directions has real rank 35
+on `Herm_6(C)`, leaving only the polarization line generated integrally by
+`P=diag(1,1,1,1,1,3)`. None of the rank-one Cycle 196 graph-divisor classes
+lies on this line. Changing to smooth effective sections in the same line
+bundles cannot alter the obstruction. Simultaneous preservation of the three
+divisors for `Gamma_(u^k)` has base dimensions `3,0,0,0,0,0,0`; hence either
+signed Cycle 196 collection has common base zero. More generally, every triple
+intersection of full-base relative divisor classes is a multiple of `P^3`,
+whose Weil projection is zero, so no rank-nine signed smooth
+complete-intersection pair can represent `D_0 alpha_0`.
+
 ## Cycle 196 finite-type rational-equivalence correction
 
 Fixing `d_+` and `d_-` makes the ambient product of effective Chow spaces

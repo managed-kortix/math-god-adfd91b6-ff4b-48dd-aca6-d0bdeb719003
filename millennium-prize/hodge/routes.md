@@ -26,3 +26,12 @@ equivalence and do not suffice.  The transformed-graph pair has rank zero, and
 no single effective cycle can represent the signed class, so a positive
 certificate must introduce genuinely new support.  This is a production gate,
 not the Hodge conjecture.
+
+The Cycle 196 divisor-cube decomposition does not supply that support. Cycle
+197's Appell--Humbert calculation shows that the only integral divisor classes
+remaining `(1,1)` over the full PEL germ are multiples of the polarization
+`P`. Full-base triple intersections therefore span only `P^3`, which has zero
+exceptional Weil projection. The particular graph-divisor triples have common
+base dimensions `3,0,0,0,0,0,0`. Thus smooth effective replacements in the
+same line bundles cannot yield the required rank-nine pair; the active search
+must leave the fixed-line-bundle complete-intersection architecture.

@@ -1,0 +1,45 @@
+{
+  "cycle": 197,
+  "field": "Q",
+  "base_dimension": 9,
+  "base_coordinates": [
+    "b11", "b12", "b13",
+    "b21", "b22", "b23",
+    "b31", "b32", "b33"
+  ],
+  "hermitian_diagonal": [1, 1, 3],
+  "graph_norms": [1, 5, 25, 125, 625, 3125, 15625],
+  "graph_powers": [
+    [1, 0], [2, 1], [3, 4], [2, 11],
+    [-7, 24], [-38, 41], [-117, 44]
+  ],
+  "lci_test_pair": {
+    "plus_graphs": [0],
+    "minus_graphs": [1],
+    "expected_plus_base_image_dimension": 3,
+    "expected_minus_base_image_dimension": 0,
+    "expected_pair_base_image_dimension": 0
+  },
+  "projector_pair": {
+    "plus_graphs": [0, 2, 4, 5],
+    "minus_graphs": [1, 3, 6],
+    "expected_plus_base_image_dimension": 0,
+    "expected_minus_base_image_dimension": 0,
+    "expected_pair_base_image_dimension": 0
+  },
+  "second_order_template": {
+    "convention": "f(t,x)=A*x+B*t+quadratic+higher; x=U*t+W(t,t)",
+    "first_order_equation": "A*U+B=0",
+    "second_order_equation": "A*W_ab+coefficient_ta_tb(quadratic(t,U*t))=0",
+    "required_fields_for_each_sign": {
+      "equation_count": "integer r",
+      "chart_variable_count": "integer m",
+      "A": "r by m rational matrix",
+      "B": "r by 9 rational matrix",
+      "quadratic": "for each equation, coefficients of t_a*t_b, t_a*x_j, x_i*x_j",
+      "U": "m by 9 rational first-order witness",
+      "W": "45 vectors of length m, indexed by 1 <= a <= b <= 9"
+    },
+    "explicit_pair_status": "not_reached: tangent image has dimension 0, not 9"
+  }
+}
