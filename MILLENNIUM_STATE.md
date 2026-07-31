@@ -5,15 +5,22 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge full-Hecke degree--denominator gate and fixed-degree Chow germ
-- **active main funnel:** portfolio rotation after direct Hecke-saturation closure.
+- **phase:** Hodge fixed-degree projector-pair tangent gate closed
+- **active main funnel:** portfolio rotation after graph-supported Chow-germ
+  closure.  Clearing the explicit Weil projector gives a fixed effective pair,
+  but each side contains a nonunit Gaussian graph with injective obstruction on
+  the nine-dimensional PEL tangent.  The pair's relative base tangent is zero;
+  all graph/translate models have base-tangent rank at most three.  Any viable
+  germ must use a genuinely different rationally equivalent representative.
   For every transported Cycle 151 diagonal image, the exact identities are
   `chi(M|Y)=16 eta` and `m^-3 f_*[Gamma]=eta^-1[Y]`, with exact denominator
   `eta` by primitivity. If one fixed integer `D` clears any positive
   normalization and `D Z=k[Y]`, then `deg(D Z)=16 k eta>=16 eta`. Since every
-  good inert PEL kernel has `eta>=p`, no full-Hecke family can have both bounded
-  degree and a uniform denominator. Averaging over the correspondence adds its
-  branch-count denominator and does not remove `eta`. The remaining Hodge
+  good inert PEL kernel has `eta>=p`, no family of individual normalized
+  branches can have both bounded degree and a uniform denominator.  On the
+  labeled fine Hecke cover, averaging adds its branch-count denominator and
+  does not remove `eta`; after unlabelled pushdown, branch coincidences require
+  a separate stabilizer calculation and may reduce coefficients.  The remaining Hodge
   candidate must instead be a new fixed-degree relative Chow germ through an
   effective positive/negative pair representing a fixed multiple of the
   projected seed, with rank-nine tangent image and vanishing obstructions.
@@ -44,8 +51,9 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   Hecke target. The algebraic Weil projector commutes with every PEL isogeny,
   so the exceptional projection is the direct sum of nonzero transported seed
   projections and becomes `N_p` times the seed under sheetwise normalized
-  cohomological identifications. Full tracing therefore gives no cancellation
-  and no bounded integral Chow complexity.
+  cohomological identifications.  Thus the labeled trace gives no cancellation
+  or bounded integral Chow complexity.  No claim is made after unlabelled
+  branch merging without a coincidence calculation.
 - 2026-07-31: Cycle 165 audited restricted polarization degree under iterated
   `eta=1` transport.  The Cycle 151 diagonal restriction has type `(2,2,4)`,
   hence polarization volume `chi=16`, unnormalized top intersection `96`, and
@@ -206,7 +214,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 168
+- **cycle:** 169
 - **announcements:** none
 
 ## immutable target list
@@ -239,6 +247,17 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 169 expanded the Cycle 152 projector exactly after clearing
+  denominator `930187500000000000` and audited its positive/negative graph
+  pair.  For the transformed graph `Gamma_k`, the obstruction is
+  `rho_k(B)=Q^-1 B^t-5^k B`.  It has kernel dimension three at `k=0` and is
+  injective for every `k=1,...,6`.  Both effective sides contain injective
+  components, so their product-Chow germ has zero tangent image in the
+  nine-dimensional PEL base.  Multiplicities and translations do not help;
+  the exact graph-supported ceiling is rank three.  Cohomological
+  semiregularity cancellation of the signed Weil class does not cancel the
+  direct-sum embedded obstructions.
 
 - 2026-07-31: Cycle 167 hostile-audited the arbitrary split-prime lattice
   chain.  Cycle 166's `widetilde K` definition was ill typed as written:
