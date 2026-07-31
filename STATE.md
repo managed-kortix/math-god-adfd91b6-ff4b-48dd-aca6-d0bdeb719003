@@ -17,6 +17,17 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: selected the connected tetracyclic frontier `m=n+3`. Block ranks
+  split as `1+1+1+1,2+1+1,2+2,3+1,4`. Cacti are complete. Sharp block DNN
+  leaves small rooted residuals in the middle partitions, notably
+  `Theta(1,2,r)+C3+C3`, `Theta(1,2,2)+C3+C5`, two copies of
+  `Theta(1,2,2)`, and structural rank-three rows plus a cycle. These cannot be
+  closed merely by citing positive tricyclic surplus because a deletion tree
+  costs one full unit. A proposed rank-four kernel census found 17 types under
+  the no-cut-vertex convention, but it remains unaudited and is not yet a
+  theorem. Rank-four DNN needs kernel excess at most three; ordinary frustration
+  counting is too weak for even/direct paths. Victory contract:
+  `positive-square-energy/tetracyclic-general/prompt.md`.
 - 2026-07-31: published the verified all-tricyclic theorem once on X after the
   paper and rendered certificate were committed and publicly readable. Post
   `2083034428154995171`; API readback verified exact flat claim, author, media,
