@@ -220,6 +220,11 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     canonical length-1/2 Gram certificates, while the all-odd class has an
     independent all-length cover in `tricyclic-general/k4-all-odd-dnn-cover.md`.
     The doubled triangle is now the decisive final kernel.
+40. Doubled triangle is complete by an exact 32-physical-parity-row rational
+    DNN census plus one structural orbit. Therefore every component of the
+    connected tricyclic classification is proved. Synthesize the all-tricyclic
+    theorem, independently verify the finite rational tables, and audit every
+    block/kernel classification and attachment lift before any claim.
 35. Rank thirteen is complete. Sharp DNN gives `sigma>=12-sum epsilon_l`, and
     the exact fail-closed frontier is `T^12Q,T^11PP`. The complementary
     all-rank one-cycle results close every parity of `Q`, including `q=3`, and

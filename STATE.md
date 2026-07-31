@@ -17,6 +17,17 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: completed the final rank-three kernel, doubled triangle. An exact
+  physical 32-parity-row census reduces to 12 symmetry orbits; 11 have rational
+  three-branch Gram certificates with `kappa-L<=2`. The remaining EO/EO plus
+  odd-connector orbit is closed at noncanonical parallel lengths by two exact
+  planar certificates and at canonical lengths by induced deletion to either
+  a two-triangle cactus or `Theta(1,2,2)` plus one tree. Multiple hostile audits
+  caught a false switching transport, a reversed odd-odd `(1,3)` contribution,
+  and missing Gram definitions; all were repaired. Definitive referee: ACCEPT.
+  Proof: `tricyclic-general/doubled-triangle-dnn-cover.md`. All tricyclic block
+  types and all four 2-connected rank-three kernels are now individually
+  closed; next step is full synthesis, paper, verifier, and hostile audit.
 - 2026-07-31: completed two more 2-connected rank-three kernels. Every simple
   doubled-C4 subdivision is covered by an exact eight-class switching/DNN sieve;
   the unique failed class is closed by either two explicit longer-path Gram
