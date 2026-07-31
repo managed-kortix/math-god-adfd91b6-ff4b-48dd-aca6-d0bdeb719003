@@ -17,6 +17,18 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: completed the remaining cubic rank-four kernels 13--15 and 17.
+  Exact physical census: 1400 rows, 376 automorphism orbits. The exact
+  three-color sieve closes 359 and leaves 17. For K13--15, a frozen
+  canonical/+2 antichain has 160 targets: 148 exact rational path-vector
+  certificates and 12 symbolic K14 equality targets. The latter are three
+  physical rows with Gram determinants `1/2,0,1/2` and exact excess three.
+  K17 is covered on all 512 labelled parity rows by seven exact Q(sqrt(3))
+  templates. The final verifier invokes all dependencies fail closed, passes
+  normally and under `-O`, and has zero residual. Ultimate hostile referee:
+  ACCEPT. Together with kernel16, every six-vertex rank-four kernel is now
+  complete. All 17 single-block rank-four kernels and all multiblock partitions
+  are individually proved; next step is full tetracyclic synthesis and audits.
 - 2026-07-31: completed all four five-vertex rank-four kernels. Exact physical
   enumeration gives 700 rows and 378 automorphism orbits. The accepted
   equilateral three-color sieve closes 370 orbits; a frozen exact residual
