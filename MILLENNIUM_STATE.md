@@ -5,14 +5,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge composite Hecke-incidence gate closed
-- **active main funnel:** portfolio selection after exact Hecke transport audit.
-  Dense transport of the special nonsplit seed multiplies effective
-  codimension-three degree by the square root of the ambient isogeny degree;
-  middle-weight normalization instead introduces potentially unbounded
-  denominators.  Prime-level kernel intersections have four exact symplectic
-  strata, but their finite-field rarity alone does not prove geometric
-  non-density or generic algebraicity.
+- **phase:** Hodge PEL-antilinear prime-kernel gate classified
+- **active main funnel:** portfolio selection after exact PEL kernel audit.
+  At good inert primes every PEL-stable maximal isotropic kernel has
+  `eta>=p`, with exactly `(p+1)^2(p^2+1)` kernels at equality.  At good split
+  primes adapted `eta=1` kernels survive and number `2(p+1)(p^2+1)`.  Thus
+  inert support forces denominator growth, but split support leaves the
+  bounded-eta transport escape open; finite incidence still gives no geometric
+  density or generic algebraicity theorem.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -144,7 +144,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 162
+- **cycle:** 163
 - **announcements:** none
 
 ## immutable target list
@@ -177,6 +177,41 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: The Cycle 163 Hodge follow-up imposed PEL stability on
+  prime-level kernels relative to the K-antilinear diagonal graph.  The
+  intersection `D` must be isotropic for both the graph symplectic form and the
+  symmetric cross-form `e(x,Jy)`, whose radical is the first two elliptic
+  coordinates and whose residual plane is `X^2+Y^2`.  At inert primes this
+  plane is anisotropic, so `dim D<=2`, `eta>=p`, and the equality stratum has
+  exactly `(p+1)^2(p^2+1)` kernels.  At split primes the eta-one kernels are
+  exactly `O(L+ell_+)` and `O(L+ell_-)`, with `L` Lagrangian in the
+  four-dimensional radical, hence exactly `2(p+1)(p^2+1)` kernels.  PEL
+  stability kills adapted inert transport but not adapted split transport.
+  This is a good-prime finite-module theorem, not a composite-level or Hodge
+  result.
+
+- 2026-07-31: Cycle 163 also repaired two scope points in the composite
+  transport theorem.  A common cover of same-source polarized `m`-isogeny
+  quotients pulls both descended polarizations back to the same class `mL`, so
+  bounded `eta` does give a polarized rational Hecke bridge with cover-leg
+  degrees at most `eta^2`; this still does not establish properness or density.
+  The exact Chow denominator remains `eta` because the reduced abelian
+  subvariety class is cohomologically primitive.  Its polarization-volume
+  interpretation, however, is a ratio: if the seed and image restriction types
+  have products `e_1e_2e_3` and `d_1d_2d_3`, then
+  `d_1d_2d_3=eta e_1e_2e_3`.  No principal seed restriction is assumed.
+
+- 2026-07-31: Cycle 163 supplied the missing referee proof for the composite
+  kernel-incidence formulas.  For a Lagrangian subgroup `K=K^perp` of
+  `G perp H` over `Z/p^e`, the projections of `K` equal the orthogonal
+  complements of `K cap G` and `K cap H`, and the residual quotient is the
+  graph of an anti-isometry of the quotient pairings; no freeness or
+  direct-summand hypothesis is needed.  Equal ambient factor orders are
+  essential and imply `|K cap G|=|K cap H|=delta`; then the residual order is
+  exactly `(p^(3e)/delta)^2=eta^2`.  Nonfree examples over `Z/p^2` and
+  `Z/p^3` verify the boundary case, while unequal factors furnish a
+  counterexample to the unqualified intersection equality.
 
 - 2026-07-31: Cycle 162 corrected and extended the Hodge kernel-incidence
   audit.  The four-orbit formula applies to prime torsion, not `p^e`-torsion;

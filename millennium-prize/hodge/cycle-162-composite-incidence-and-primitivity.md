@@ -28,7 +28,8 @@ A_K=K\cap G,\qquad B_K=K\cap H,
 \qquad\delta=|A_K|.
 \]
 
-Projection to either factor and symplectic orthogonality give
+Projection to either equal-order factor and the Lagrangian identity
+`K=K^perp` give
 
 \[
 |A_K|=|B_K|,
@@ -39,6 +40,11 @@ and the residual part of `K` is the graph of an anti-symplectic isomorphism
 \[
 A_K^\perp/A_K\simeq B_K^\perp/B_K.
 \]
+
+This remains true over every `Z/p^e Z`, without freeness of the intersections:
+the two projections of `K` are exactly `A_K^perp` and `B_K^perp`.  A detailed
+nonfree-module proof and the necessity of the equal-order hypothesis are given
+in Cycle 163.
 
 Consequently, with
 
@@ -84,21 +90,25 @@ class `[Y]` and its Poincare dual are primitive.  Divisibility in integral Chow
 would imply divisibility of this cohomology class.  Therefore
 
 \[
-\boxed{[Y]\text{ is primitive in integral cohomology and Chow,}}
+\boxed{[Y]\text{ is primitive in integral cohomology and is not divisible
+in integral Chow,}}
 \]
 
 and the actual integral denominator of the normalized class is exactly `eta`,
 not merely a divisor of it.
 
-Equivalently, if the induced polarization on `Y` has type
+If the restricted seed polarization `L|_Gamma` has type
+`(e_1,e_2,e_3)` and the induced polarization on `Y` has type
 `(d_1,d_2,d_3)`, then projection gives
 
 \[
-\boxed{{m^3\over\delta}=d_1d_2d_3.}
+\boxed{d_1d_2d_3={m^3\over\delta}e_1e_2e_3.}
 \]
 
-The denominator is the polarization volume of the reduced image; it equals one
-exactly when that induced polarization is principal.
+Thus `eta=m^3/delta` is the ratio of the two polarization volumes, not in
+general the absolute polarization volume of the image.  For the Cycle 151
+diagonal, the restricted alternating form has blocks `2J,2J,4J`, so this
+qualification is essential.
 
 ## Scope corrections
 
@@ -109,11 +119,14 @@ At `p=3` the ambient pairing and the orthogonal complement are degenerate; at
 so this symplectic decomposition is not a decomposition by PEL
 `O_K/p`-submodules.
 
-A bounded `eta` does give bounded-degree unpolarized isogenies or algebraic
-correspondences between quotient varieties after passing through a common
-cover.  It does not automatically give a bounded Hecke correspondence between
-the original polarized moduli points: compatibility of the descended
-polarizations and level structures is additional data.  Hence finite incidence
-rarity does not prove Zariski non-density.
+A bounded `eta` gives bounded-degree isogenies or algebraic correspondences
+between quotient varieties after passing through a common cover.  When both
+kernels are polarized `m`-isogeny kernels from the same source, compatibility
+of the descended polarizations is automatic on that cover: both pull back to
+`mL`.  The two cover legs have degree at most `eta^2`, and the resulting
+rational polarized isogeny has denominator at most `eta^2`.  Arbitrary level
+structures or kernels not arising from this same-source construction still
+require separate compatibility.  In all cases, finite incidence rarity alone
+does not prove that the adapted locus is proper or Zariski nondense.
 
 No generic algebraicity theorem or Hodge-conjecture result is claimed.

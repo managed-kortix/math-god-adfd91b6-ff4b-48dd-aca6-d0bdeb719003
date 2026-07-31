@@ -1,5 +1,29 @@
 # Notebook
 
+## Cycle 163 PEL follow-up
+
+For the Cycle 151 K-antilinear graph at every good prime, a PEL-stable kernel
+intersection `D` is simultaneously isotropic for the graph symplectic form and
+the symmetric cross-form `e(x,Jy)`.  The latter has a four-dimensional radical
+and residual plane `X^2+Y^2`.  At inert primes anisotropy forces `dim D<=2`, so
+`eta>=p`; exactly `(p+1)^2(p^2+1)` kernels attain equality and none has eta one.
+At split primes the eta-one kernels are exactly `O(L+ell_+)` and
+`O(L+ell_-)`, for `L` Lagrangian in the radical, and number
+`2(p+1)(p^2+1)`.  Thus PEL stability forces large eta on inert support but
+does not remove the adapted split-prime escape.
+
+## Cycle 163
+
+A finite-group referee proof now validates the Cycle 162 kernel formulas over
+arbitrary `Z/p^e Z`-modules, including nonfree isotropic intersections.  If
+`K=K^perp` in `G perp H`, its projections are exactly
+`(K cap G)^perp` and `(K cap H)^perp`; the residual quotient is the graph of an
+anti-isometry between the resulting quotient pairings.  Equal factor orders
+are essential: only then do the intersection orders agree.  For rank-six equal
+factors, `|A_K|=|B_K|=delta` and the residual order is exactly
+`(p^(3e)/delta)^2=eta^2`.  Explicit nonfree examples over `Z/p^2` and `Z/p^3`
+pass, while unequal factors give a counterexample to the unqualified equality.
+
 ## Cycle 111
 
 Hostile applicability audit corrected Cycle 110: Bring's curve rigorously has
