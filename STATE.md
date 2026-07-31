@@ -17,6 +17,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: completed two more 2-connected rank-three kernels. Every simple
+  doubled-C4 subdivision is covered by an exact eight-class switching/DNN sieve;
+  the unique failed class is closed by either two explicit longer-path Gram
+  certificates or deletion of the even connector, leaving a favorable
+  two-triangle cactus plus one tree. Ultimate audit found and repaired one
+  periodic-angle typo `(0,12,12)->(0,6,6)`. Also closed the all-odd K4
+  subdivision class: regular-simplex DNN handles at least three long paths,
+  explicit planar certificates handle the two placement orbits with exactly
+  two, induced deletion handles one, and the K4 packet handles zero. Files:
+  `tricyclic-general/doubled-c4-switching-sieve.md` and
+  `tricyclic-general/k4-all-odd-dnn-cover.md`. K4's seven other switching classes
+  have explicit canonical DNN certificates by parity monotonicity; synthesis
+  and audit remain. Doubled triangle remains the last unsynthesized kernel.
 - 2026-07-31: completed tricyclic block rank `2+1`. Exact DNN left only
   `Theta(1,2,r)+C3` and `Theta(1,2,2)+C5`. Both close by induced territories:
   in the triangle row, delete a non-route internal theta-arm vertex and its

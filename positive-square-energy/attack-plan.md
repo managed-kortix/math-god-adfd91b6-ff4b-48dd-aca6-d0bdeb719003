@@ -215,6 +215,11 @@ m=20 full paired fresh certification is complete on all 1,032,754 graphs.
     both with strict surplus. See `tricyclic-general/theta-cycle-completion.md`.
     The remaining tricyclic frontier is one rank-three 2-connected block:
     doubled triangle, K4 subdivision, and doubled C4 (four-path is complete).
+39. Doubled C4 is complete by an exact eight-switching-class DNN/deletion sieve.
+    K4 is complete modulo final synthesis: seven switching classes have
+    canonical length-1/2 Gram certificates, while the all-odd class has an
+    independent all-length cover in `tricyclic-general/k4-all-odd-dnn-cover.md`.
+    The doubled triangle is now the decisive final kernel.
 35. Rank thirteen is complete. Sharp DNN gives `sigma>=12-sum epsilon_l`, and
     the exact fail-closed frontier is `T^12Q,T^11PP`. The complementary
     all-rank one-cycle results close every parity of `Q`, including `q=3`, and
