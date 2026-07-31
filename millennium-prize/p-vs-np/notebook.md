@@ -1,5 +1,21 @@
 # Notebook
 
+## Cycle 182
+
+Affine-plane slope partitions give an explicit `q(q-1)`-member order family
+with seed at most `2 log q`: blocks from distinct slopes meet in one point, and
+balanced block-prefix Venn cells have exact product size up to one `O(q)`
+boundary block. This is a genuine cross-splice candidate for designated order
+pairs, stronger and cleaner than invoking small bias for rectangle incidence.
+It gives an exact designated-order theorem: equality has
+`width >= 2^((q^2-1)/2)` in every nonzero-slope affine order, since the middle
+cut splits `2 floor(q/2)(q-floor(q/2))` equality pairs. It does not imply
+order-independent OBDD hardness: the paired variable order has width two, and
+a selector for hidden matchings may itself be read first. Even exponential
+OBDD hardness would remain restricted-model:
+there is no reverse simulation to unrestricted circuits, RAMs, or the exact
+MMW `search-MCSP^SAT` relation. No separation is claimed.
+
 ## Cycle 97
 
 Gate elimination for one-sided average-case MCSP loses the easy-function

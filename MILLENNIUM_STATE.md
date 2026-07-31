@@ -5,8 +5,15 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** BSD varying-conductor Frobenius obstruction
-- **active main funnel:** Cycle 181 defines the prime-twist coordinate
+- **phase:** BSD exact collision certificate gate
+- **active main funnel:** Cycle 182 finds that Cycle 181 contains no raw
+  collision computation that can be reconstructed: it names no candidate
+  field, fixed auxiliary prime, twist-prime pair, symbol rows, or Frobenius
+  witnesses. A complete future certificate has three independent layers:
+  pinned exact modular-symbol replay, dependency-free rational/mod-7 reduction,
+  and class-separating Galois verification in the cyclotomic compositum;
+  polynomial factorization type alone does not identify a nonabelian Frobenius
+  class. No collision is currently claimed. Cycle 181 defines the prime-twist coordinate
   `c(q,ell)` exactly as the first augmentation/Kurihara derivative of the
   Mazur--Tate element of `E^(D_q)`. The twist has conductor `433 q^2`, and its
   twist formula uses base modular symbols with denominator `q ell`, so the
@@ -26,6 +33,16 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent OS continuum construction.  Random-order MCSP remains a bounded
   restricted-model scout unless its quantifiers and resources transfer to the
   exact relational MMW problem.
+  Cycle 182 hostile-audits the random-order MCSP splice proposal. Conditional
+  on a midpoint containing `k` of a pair's `d` disagreements, a splice is
+  uniform over only `binom(d,k)` candidates, so balance alone is insufficient
+  and the hard-table union bound must use that support. Pair-dependent splice
+  orientation is harmless for exact decision MCSP, but the easy-table packing
+  has `log|C|<=O(s log(n+s))=N^o(1)` at the MMW parameter and therefore cannot
+  force fixed-power space. Constant average-order correctness gives no single
+  order good for all pairwise splices, and decision midpoint width gives
+  neither relational-search nor update-time hardness. No separation is
+  claimed.
   For every transported Cycle 151 diagonal image, the exact identities are
   `chi(M|Y)=16 eta` and `m^-3 f_*[Gamma]=eta^-1[Y]`, with exact denominator
   `eta` by primitivity. If one fixed integer `D` clears any positive
@@ -38,8 +55,20 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   candidate must instead be a new fixed-degree relative Chow germ through an
   effective positive/negative pair representing a fixed multiple of the
   projected seed, with rank-nine tangent image and vanishing obstructions.
-  The obvious projector expansion has only cohomological obstruction
-  cancellation and is not such a germ.
+   The obvious projector expansion has only cohomological obstruction
+   cancellation and is not such a germ.
+- 2026-07-31: Cycle 182 calibrated the random-order exact OBDD scout. A size
+  lower bound `L` for most fixed orders is stronger than near-linear decision
+  depth and yields deterministic one-way random-partition hardness plus
+  fixed-order exact decision-streaming space `log L-log(N+1)`. It does not
+  cover best-order, adaptive, or repeated-read branching programs, does not
+  charge update time, and does not transfer from Boolean decision MCSP to exact
+  relational `search-MCSP^SAT` in the MMW model. The standard OBDD simulations
+  are not novel; any MCSP-specific simultaneous residual-state packing needs a
+  primary-source novelty audit. The affine equality example is only a
+  designated-order benchmark, while MCSP easy-table packing is capped at
+  `N^o(1)` forced state bits at the MMW parameter. No `P != NP` result is
+  claimed.
 - 2026-07-31: Cycle 181 fixed `D_q=q` for `q=1 mod 4` and `D_q=-q` for
   `q=3 mod 4`, and defined `c(q,ell)` as the one-prime Kurihara sum
   `sum_a [a/ell]^+_(E^(D_q)) log_eta(a) mod 7`, or invariantly in the tensor
@@ -352,7 +381,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 181
+- **cycle:** 182
 - **announcements:** none
 
 ## immutable target list

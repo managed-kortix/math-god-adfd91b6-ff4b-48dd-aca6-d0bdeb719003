@@ -1,5 +1,13 @@
 # Routes
 
+Cycle 182 finds that the Cycle 181 report has no reconstructible collision
+data.  A future fixed-`ell` zero/nonzero certificate must commit the named
+Galois field and compositum, class-separating Frobenius witnesses, exact twist
+models and normalizations, every rational modular symbol, grouped sums, and a
+pinned producer.  Acceptance requires independent arithmetic replay,
+dependency-free mod-7 reduction, and Galois verification.  See
+`cycle-182-q-collision-certificate-specification.md`.
+
 Cycle 181 defines `c(q,ell)` exactly as the first augmentation derivative of
 the Mazur--Tate element of `E^(D_q)`, equivalently the one-prime Kurihara sum.
 Its newform has conductor `433 q^2`, and the twist formula uses base symbols of

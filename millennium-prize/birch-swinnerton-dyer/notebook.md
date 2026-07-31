@@ -1,5 +1,17 @@
 # Notebook
 
+## Collision certificate gate cycle 182
+
+Cycle 181 does not contain enough raw information to reconstruct an exact
+`q` collision: no named field, fixed `ell`, pair of twist primes, modular-symbol
+rows, or Frobenius witnesses is present, and no Cycle 182 producer/data is
+committed.  Cycle 182 therefore specifies a fail-closed certificate with three
+independent layers: pinned exact modular-symbol replay, dependency-free mod-7
+reduction, and class-separating Galois/Frobenius verification in
+`L Q(zeta_(8*7*433*ell))`.  Polynomial factorization type alone is not an
+adequate nonabelian Frobenius witness.  No collision is claimed.  See
+`cycle-182-q-collision-certificate-specification.md`.
+
 ## Conductor/Frobenius audit cycle 181
 
 For the fundamental-discriminant convention `D_q=q` if `q=1 mod 4` and
