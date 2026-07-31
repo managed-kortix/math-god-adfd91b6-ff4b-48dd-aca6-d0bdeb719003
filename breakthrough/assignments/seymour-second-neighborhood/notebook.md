@@ -1144,3 +1144,24 @@ No audits yet.
   immutable content-addressed storage. If no suitable external destination is
   available, retain a formally audited hierarchical subset campaign compact
   enough for Git rather than reverting to hash-only evidence.
+
+### m=5 B6 hostile certificate repair
+
+- A hostile orbit audit found that the proposed two-high witness refinement was
+  incomplete: fixing the unique `C->B` head distinguishes that B vertex from a
+  generic source witness.  The old three rows omitted three genuine equality
+  orbits and included one contradictory row.  The corrected scout has five
+  feasible witness orbits; see `attempts/tick49-m5-certificate-audit.md`.
+- Proved two simplifying facts for the corrected hierarchy: a selected robust
+  witness arc has no private second-neighbor loss, and every gain midpoint for
+  a B-to-source-C witness lies in B.  These delete the positive-loss and
+  root/A/C-gain children.
+- Hardened the direct campaign so existing metadata is never trusted by
+  filename, persisted compressed LRATs are freshly decompressed and checked,
+  the cover identity is unconditional, and any missing/failed leaf makes the
+  command fail.  Hardened malformed refinement arguments as well.
+- **Status:** no branch closure is promoted.  The local 7.66 GB object set is not
+  a durable certificate and the old compact hierarchy was incomplete.
+- **Next queued attack:** selector-batch the 4,332 easy parents by support shape,
+  pilot LRAT size, and independently prove exact batch coverage.  In parallel,
+  build the first-principles 68-shape six-edge support census for `m=6`.

@@ -10,10 +10,22 @@ def embedding(name,w):
  for v,c in enumerate(w):mp[v]=LABELS[c][used[c]];used[c]+=1
  return mp
 def exact(c,o,v):
+ if not o or not 0<=v<=len(o):raise ValueError("invalid exact-cardinality request")
  if v==0:c.add(-o[0])
  elif v==len(o):c.add(o[-1])
  else:c.add(o[v-1]);c.add(-o[v])
 def emit(i,path,high_c=None,r=None,high_mask=None,cstates=None,tail=None,witnesses=(),arc_status=None,gain_block=None,gain_midpoint=None):
+ if not 0<=i<len(placements()):raise ValueError("placement index out of range")
+ if high_c is not None and not 0<=high_c<=3:raise ValueError("high_c out of range")
+ if r is not None and not 0<=r<=18:raise ValueError("r out of range")
+ if high_mask is not None and (any(j not in range(3) for j in high_mask) or len(set(high_mask))!=len(high_mask)):raise ValueError("invalid high mask")
+ if cstates is not None and (len(cstates)!=3 or any(x not in (0,1,2) for x in cstates)):raise ValueError("invalid C-pair states")
+ if tail is not None and tail not in range(3):raise ValueError("invalid C tail")
+ if any(not (isinstance(w,int) and isinstance(u,int) and 0<=w<18 and 0<=u<18 and w!=u) for w,u in witnesses):raise ValueError("invalid witness")
+ if arc_status is not None and not witnesses:raise ValueError("arc status requires a witness")
+ if (gain_block is not None or gain_midpoint is not None) and arc_status is None:raise ValueError("gain refinement requires arc status")
+ if gain_block is not None and gain_block not in range(4):raise ValueError("invalid gain block")
+ if gain_midpoint is not None and (gain_midpoint not in range(9,15) or (witnesses and gain_midpoint==witnesses[0][0])):raise ValueError("invalid gain midpoint")
  name,w=placements()[i];n,edges=SHAPES[name];mp=embedding(name,w);E={tuple(sorted((mp[u],mp[v]))) for u,v in edges};c=generate(18,6,5,True,None,None,True)
  for u in range(18):
   for v in range(u+1,18):c.add(c.var(f"h_{u}_{v}") if (u,v) in E else -c.var(f"h_{u}_{v}"))
