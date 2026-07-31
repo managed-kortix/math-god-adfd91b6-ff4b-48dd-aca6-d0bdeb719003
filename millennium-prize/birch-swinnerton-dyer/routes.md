@@ -1,5 +1,51 @@
 # Routes
 
+Cycle 194 gives a rigorous analytic-rank certificate for the second collision
+twist, `D=-29023`. Its fail-closed verifier pins `650000` exact integer
+coefficients and uses rational enclosures for `pi`, every exponential-integral
+weight, signed summation, and the infinite tail to prove
+`9776577544974464/10^15 < L'(1) < 141618654480665006/10^15`. The exact root
+number is `-1`, so the analytic rank is one. Together with Cycle 193 for
+`D=-1499`, both collision twists now have certified analytic rank one.
+Gross--Zagier--Kolyvagin then gives algebraic rank one and finiteness of the
+full Tate--Shafarevich group for each twist. This proves neither the refined
+BSD leading-term formula nor the order of `Sha`, a regulator, or a generator.
+See `cycle-194-D-29023-rigorous-derivative-certificate.md`.
+
+Cycle 193 gives a rigorous analytic-rank certificate for the first collision
+twist, `D=-1499`. It derives
+`L'(1)=2 sum a_n E1(2*pi*n/sqrt(N))/n`, pins `100000` exact integer
+coefficients, encloses `pi`, all exponential-integral weights, and the infinite
+tail with rational directed arithmetic, and obtains a strictly positive
+rational interval for `L'(1)`. Together with exact root number `-1`, this proves
+analytic rank one for this individual twist; Gross--Zagier--Kolyvagin gives
+algebraic rank one and finite `Sha`, but no refined BSD formula. See
+`cycle-193-rigorous-derivative-certificate.md`.
+
+Cycles 192--193 run PARI's 2-descent on the two collision twists
+`D=-1499,-29023`. Full `bnfcertify` certification of the common 2-division
+cubic's class and unit data certifies the exact 2-Selmer upper bound one; it
+does not itself prove a positive Mordell--Weil rank. The exact non-torsion point
+for `D=-1499` therefore makes that rank exactly one. At the descent stage for
+`D=-29023`, no point or certified analytic nonvanishing was known, so the
+conservative rank interval was `[0,1]` and the descent alone made no claim of
+`Sha[2]=0`. PARI found no point even at effort six and `ellheegner` exhausted a
+1 GB stack; the conditional BSD height estimate was about `2659.76`. Cycle 194
+later closes rank one and finite `Sha` by the independent certified analytic
+and Gross--Zagier--Kolyvagin route, without retroactively strengthening the
+descent. See `cycle-192-pari-2descent-and-point-obstruction.md`.
+
+Cycle 191 surveys the exact modular-symbol distribution route to infinitely
+many zero/nonzero `c(q,29)` values in one fixed `L_0` class.  The theorems of
+Petridis--Risager, Constantinescu--Nordentoft, and Lee--Sun distribute
+individual fixed-level symbols over all reduced rational cusps of bounded
+denominator; they do not specialize to prime denominators in a nonabelian
+Chebotarev class or to the Legendre-weighted `q-1`-symbol aggregate defining
+`c(q,29)`.  Finite Fourier inversion reduces the desired result exactly to six
+nontrivial exponential-sum cancellations on the fixed class.  Chebotarev gives
+infinitely many primes in the local packet, but not cancellation of the
+Kurihara coordinate.  See `cycle-191-modular-symbol-distribution-route.md`.
+
 Cycle 186 audits the cyclotomic refinement in the selected collision target.
 The compositum with `Q(zeta_(8*7*433*29))` is sufficient but nonminimal:
 `Q(zeta_7)` is already in `L_0` by the Weil pairing, and fixed-`ell`

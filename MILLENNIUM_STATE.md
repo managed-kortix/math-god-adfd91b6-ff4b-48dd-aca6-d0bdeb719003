@@ -5,7 +5,95 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** BSD fixed-Kummer-field collision search gate
+- **phase:** BSD reciprocity/determinant obstruction gate
+- **Cycle 194 closes both collision twists at rank one:** for `D=-29023`, a
+  fail-closed directed-rational replay of the odd-sign approximate functional
+  equation pins `650000` exact coefficients and proves
+  `9776577544974464/10^15 < L'(E^(-29023),1) <
+  141618654480665006/10^15`. Together with the exact root number `-1`, this
+  certifies analytic rank one. Cycle 193 already certifies analytic rank one
+  for `D=-1499`. Gross--Zagier and Kolyvagin therefore give, for each of the
+  two collision twists, algebraic rank one and finiteness of the full
+  Tate--Shafarevich group. These are unconditional rank-one consequences
+  subject to the certificates' stated producer trust boundaries; no refined
+  BSD leading-term formula, order of `Sha`, regulator, or generator is proved.
+- **Conservative pre-Cycle-194 descent history:** no exact coordinates for
+  `D=-29023` were recovered.
+  Independent eclib 20250627 minimisation confirms the exact 2-cover is
+  already minimal; its Stoll--Cremona quartic sieve found no point through
+  projective naive height `10000`. Magma V2.29-8 produced one locally soluble
+  4-cover and two reduced degree-eight covers; searches found no point through
+  heights `10^8` on the 4-cover and `3*10^13` on each 8-cover. PARI and Magma
+  Heegner routines respectively exceeded 1 GB and about 300 MB. This is only
+  a computational large-height obstruction. Certified cubic class/unit data
+  give the 2-Selmer upper bound one, but at that stage, without a rational point
+  or certified analytic nonvanishing, the rigorous Mordell--Weil rank interval
+  remained `[0,1]`; the descent artifacts alone did not prove `Sha[2]=0` or
+  that the nonzero 2-cover came from `E(Q)`. Cycle 194 supersedes only that
+  former endpoint through an independent analytic theorem route; it does not
+  retroactively strengthen the descent computation. The report records the
+  explicit 4-cover and reproduction commands.
+- **Cycle 193 certified analytic rank for the first twist:** for the twist of
+  `433a1` by `D=-1499`, the odd-sign weight-two approximate functional
+  equation is proved in the form
+  `L'(1)=2 sum_(n>=1) a_n E1(2*pi*n/sqrt(N))/n`.  The first `100000` exact
+  integer coefficients are pinned by SHA-256. Machin-series bounds for `pi`,
+  directed denominator-`10^50` exponential arithmetic, convex midpoint and
+  trapezoid bounds for every `E1` value, and the Deligne/divisor tail estimate
+  give the wholly rational interval
+  `[425055458712371550288205049784482504359146782438892/10^50,
+  425182303658182754137303934460410663840644112448588/10^50]`.
+  Its lower endpoint is positive, so `L'(E^(-1499),1) != 0` rigorously. With
+  the exact root number `-1`, this certifies analytic rank one for this twist.
+  Gross--Zagier--Kolyvagin then gives algebraic rank one and finite `Sha`.
+  This is one explicit BSD-family member, not a density theorem or a refined
+  BSD leading-term result.
+- **Cycle 192 exact descent:** PARI/GP 2.15.4 returns `[1,1,0]` for both twists
+  of `433a1` by `D=-1499,-29023`. Cycle 193's `bnfcertify` audit removes the
+  hidden-GRH concern from the cubic class/unit computation and certifies the
+  resulting 2-Selmer upper bound one; it does not certify an algebraic-rank
+  lower bound. For `D=-1499`, an exact non-torsion point supplies the lower
+  bound, so its algebraic rank is exactly one and `Sha[2]=0`.
+  Before Cycle 194, for `D=-29023`, effort-six point search returned no point
+  and `ellheegner` exhausted a 1 GB stack. Its exact locally soluble 2-cover is
+  recorded; the
+  numerical BSD-predicted generator height is about `2659.76`, so the honest
+  endpoint is a search/height obstruction rather than a Selmer obstruction.
+  Exact local arithmetic gives root number `-1` for both twists. At 48 digits,
+  `ellanalyticrank` returns respectively
+  `[1,4.25102592248315418934753906455942820689058223725]` and
+  `[1,75.6578918899708368505115715917633505694509817915]`; these agree with
+  80-digit runs. They are numerical threshold-based L-function computations,
+  not certified analytic-rank proofs. The rigorous conclusion of the descent
+  stage was the exact root number and algebraic rank interval `[0,1]`, not
+  analytic BSD; Cycle 194 later supplies certified analytic nonvanishing and
+  the Gross--Zagier--Kolyvagin rank-one/finite-`Sha` consequence without using
+  or strengthening this descent evidence.
+- **Cycle 191 distribution audit:** the exact published residual-distribution
+  theorems of Constantinescu--Nordentoft and Lee--Sun, and the archimedean
+  theorem of Petridis--Risager, average individual fixed-level modular symbols
+  over all reduced rational cusps of bounded denominator. They do not imply
+  distribution of the Legendre-weighted `q-1`-symbol aggregate `c(q,29)` on
+  prime denominators in one nonabelian `L_0` Frobenius class. Finite Fourier
+  inversion reduces the desired same-class infinitude to six estimates
+  `sum exp(2*pi*i*h*c(q)/7)=o(pi_C(X))`, `h=1,...,6`. The packet itself is a
+  finite-level Chebotarev set after adjoining `E[49]` and the fixed character
+  fields, so it has infinitely many primes once nonempty; Chebotarev gives no
+  cancellation in `c`. The missing theorem is therefore a prime-denominator,
+  grouped modular-symbol correlation estimate, not a formal literature
+  corollary. No infinitude of zero or nonzero coordinates, density, or BSD case
+  is claimed.
+- **latest bounded analysis:** Cycle 191 applies the Cycle 190 collision to any
+  proposed fixed-`L_0` explicit-reciprocity/determinant formula. Since
+  `q=29023` and `q=1499` have identical full `L_0` Kummer Frobenius but
+  zero/nonzero Kurihara coordinates, no identity up to nonzero units can use a
+  determinant whose vanishing is `L_0`-Frobenian. Any enlarged governing datum
+  must separate the pair, so the minimal forced information is one binary bit.
+  The quadratic character `(5/q)` realizes such a separator, and
+  `L_0 Q(sqrt(5))/L_0` has degree two; this proves separation only, not
+  governance or sufficiency. Lemma 191.1 records the general collision
+  obstruction. No explicit reciprocity theorem, density result, or BSD case is
+  claimed.
 - **latest bounded computation:** Cycle 190 completes a fail-closed strict
   nonfactorization certificate for the named field
   `L_0=Q(E[7],7^-1P,7^-1Q)`.  The admissible primes `q=29023` and `q=1499`
@@ -503,7 +591,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 190
+- **cycle:** 194
 - **announcements:** none
 
 ## immutable target list

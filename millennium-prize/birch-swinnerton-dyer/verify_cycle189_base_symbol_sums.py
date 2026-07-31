@@ -17,9 +17,13 @@ EXPECTED = {
 }
 
 
+def require(condition, message):
+    if not condition:
+        raise RuntimeError(message)
+
+
 def reduce_mod_7(value: Fraction) -> int:
-    if value.denominator % P == 0:
-        raise AssertionError(f"non-7-integral rational: {value}")
+    require(value.denominator % P != 0, f"non-7-integral rational: {value}")
     return value.numerator * pow(value.denominator, -1, P) % P
 
 
@@ -30,28 +34,31 @@ with path.open(newline="", encoding="ascii") as source:
     for row in csv.DictReader(data_lines):
         parsed = {key: int(value) for key, value in row.items()}
         q = parsed["q"]
-        if q not in rows_by_q:
-            raise AssertionError(f"unexpected q={q}")
+        require(q in rows_by_q, f"unexpected q={q}")
         rows_by_q[q].append(parsed)
 
 statuses = set()
 for q, rows in rows_by_q.items():
     expected_D, expected_epsilon, expected_total, expected_residue = EXPECTED[q]
-    assert len(rows) == len(ACTIVE_A)
-    assert tuple(row["a"] for row in rows) == ACTIVE_A
+    require(len(rows) == len(ACTIVE_A), f"wrong row count at q={q}")
+    require(tuple(row["a"] for row in rows) == ACTIVE_A,
+            f"incomplete or unordered rows at q={q}")
     total = Fraction(0)
     for row in rows:
-        assert row["D"] == expected_D
-        assert row["epsilon"] == expected_epsilon
-        assert row["weight"] == WEIGHTS[row["a"]]
-        assert row["denominator"] > 0 and row["denominator"] % P
+        require(row["D"] == expected_D, f"wrong D at q={q}, a={row['a']}")
+        require(row["epsilon"] == expected_epsilon,
+                f"wrong epsilon at q={q}, a={row['a']}")
+        require(row["weight"] == WEIGHTS[row["a"]],
+                f"wrong weight at q={q}, a={row['a']}")
+        require(row["denominator"] > 0 and row["denominator"] % P,
+                f"bad denominator at q={q}, a={row['a']}")
         total += row["weight"] * Fraction(row["numerator"], row["denominator"])
     residue = reduce_mod_7(total)
-    assert total == expected_total
-    assert residue == expected_residue
+    require(total == expected_total, f"wrong total at q={q}")
+    require(residue == expected_residue, f"wrong residue at q={q}")
     status = "ZERO" if residue == 0 else "NONZERO"
     statuses.add(status)
     print(f"q={q} total={total} c(q,29)={residue} status={status}")
 
-assert statuses == {"NONZERO"}
+require(statuses == {"NONZERO"}, "unexpected zero in [1:3] rows")
 print("PASS: all three [1:3] coordinates are nonzero; no zero/nonzero collision")

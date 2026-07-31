@@ -20,7 +20,11 @@ same Cycle 187 `[1:5]` Frobenius bucket finds a zero at `q=29023`. Since Cycle
  c(q_0,29)=0,\quad c(q_1,29)=4\ne0
 \]
 
-is the sought zero/nonzero comparison inside one full `L_0` conjugacy class.
+is the sought zero/nonzero comparison for primes assigned the same full `L_0`
+conjugacy class by the Cycle 184--187 classification. This report certifies the
+symbol values, not that class assignment; Cycle 190 supplies the fail-closed
+combined class-and-symbol certificate. The resulting conclusion is strict and
+no-exception only, not eventual Frobenian nonfactorization.
 
 ## Formula and normalization
 
@@ -63,12 +67,15 @@ Run from the repository root:
 ```sh
 gp -fq -s 4G millennium-prize/birch-swinnerton-dyer/cycle189_base433_symbol_sums.gp
 python3 millennium-prize/birch-swinnerton-dyer/verify_cycle189_base433_symbol_sums.py
+python3 -O millennium-prize/birch-swinnerton-dyer/verify_cycle189_base433_symbol_sums.py
 ```
 
 The GP producer recomputes all 36 exact Legendre-weighted raw sums from the
-level-433 symbols and fails closed against the committed values. The independent
+level-433 symbols and fails closed against the committed values. The separate
 Python verifier checks the CSV schema, row sets, weights, signs, exact rational
-totals, 7-integrality, and residues without PARI. Environment: PARI/GP 2.15.4
+totals, 7-integrality, and residues without invoking PARI. It replays output
+from the same PARI modular-symbol backend and is not an independent arithmetic
+backend. Environment: PARI/GP 2.15.4
 and Python 3.
 
 This establishes the exact modular-symbol zero/nonzero input. A final Cycle 182

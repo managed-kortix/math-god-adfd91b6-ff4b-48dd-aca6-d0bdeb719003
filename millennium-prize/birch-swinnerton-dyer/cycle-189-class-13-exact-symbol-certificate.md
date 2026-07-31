@@ -2,7 +2,7 @@
 
 Fix `E=433a1`, `p=7`, `ell=29`, and primitive root `eta=2 mod 29` as in
 Cycle 187.  The three requested primes `11831,14897,48889` all pass the frozen
-packet and have the same full `L_0` conjugacy label
+packet and are assigned the same full `L_0` conjugacy label
 `(nonidentity unipotent,[1:3])`.  The exact finite-field data are
 
 | `q` | `#E(F_q)` | `a_q` | projective row |
@@ -43,11 +43,14 @@ gp -q millennium-prize/birch-swinnerton-dyer/cycle189_433a1_base_symbol_sums.gp 
 cmp /tmp/cycle189_base_symbol_sums.csv \
   millennium-prize/birch-swinnerton-dyer/cycle189_base_symbol_sums.csv
 python3 millennium-prize/birch-swinnerton-dyer/verify_cycle189_base_symbol_sums.py
+python3 -O millennium-prize/birch-swinnerton-dyer/verify_cycle189_base_symbol_sums.py
 python3 millennium-prize/birch-swinnerton-dyer/verify_cycle189_frobenius_class.py
+python3 -O millennium-prize/birch-swinnerton-dyer/verify_cycle189_frobenius_class.py
 sha256sum -c millennium-prize/birch-swinnerton-dyer/cycle189_SHA256SUMS
 ```
 
-The Python rational verifier is dependency-free and does not call PARI.  The
-finite-field verifier independently replays point counts, packet predicates,
-and localization rows.  The modular-symbol provenance itself is replayed by
-the exact PARI producer and byte comparison.
+The Python rational verifier is dependency-free and does not call PARI. The
+separate finite-field verifier replays point counts, packet predicates, and
+localization rows. The modular-symbol provenance itself is replayed by the
+exact PARI producer and byte comparison; these are separate checks around the
+same PARI modular-symbol backend, not independent arithmetic backends.

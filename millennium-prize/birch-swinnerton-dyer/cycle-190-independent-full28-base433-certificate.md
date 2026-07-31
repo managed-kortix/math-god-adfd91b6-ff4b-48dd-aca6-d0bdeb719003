@@ -1,8 +1,8 @@
-# Cycle 190: independent full-28-row replay of the `[1:5]` pair
+# Cycle 190: separate same-backend full-28-row replay of the `[1:5]` pair
 
 ## Exact result
 
-An independent GP producer recomputed all 28 base-level-433 rows for each of
+An alternate GP producer recomputed all 28 base-level-433 rows for each of
 `q=1499` and `q=29023`. It does not import either earlier 12-row table or any
 earlier expected row value. For `E=433a1`, `p=7`, `ell=29`, and generator
 `2 mod 29`, the exact results are
@@ -12,16 +12,17 @@ earlier expected row value. For `E=433a1`, `p=7`, `ell=29`, and generator
 | 1499 | -150 | 365/2 | 4 (nonzero) |
 | 29023 | -3108 | 77/2 | 0 |
 
-Thus the independent computation agrees exactly with the prior reductions
+Thus the separate computation agrees exactly with the prior reductions
 
 \[
  c(1499,29)=4,\qquad c(29023,29)=0\pmod 7.
 \]
 
 It confirms the zero/nonzero modular-symbol comparison for the pair
-`(29023,1499)`. This certificate independently checks the coordinate
-calculation; it does not add a new proof of the common full-`L_0` conjugacy
-class or claim a BSD result.
+`(29023,1499)`. This certificate separately checks the coordinate calculation,
+but it uses the same PARI/GP modular-symbol backend and is not an independent
+arithmetic backend. It does not add a new proof of the common full-`L_0`
+conjugacy class or claim a BSD result.
 
 ## Alternate formula
 
@@ -49,7 +50,7 @@ lifts need not be equal over `Q`: their differences are
 | 1499 | -665/2 | -95/2 |
 | 29023 | -6293/2 | -899/2 |
 
-All denominators are 1 or 2 and hence 7-adic units. PARI independently returns
+All denominators are 1 or 2 and hence 7-adic units. The alternate PARI run returns
 minimal changes `[1,125,1,63]` and `[1,2419,1,1210]`, so the differential
 factor is `kappa_q=1`; the twist conductors are `433*q^2`.
 
@@ -60,10 +61,11 @@ From the repository root run:
 ```sh
 gp -fq -s 4G millennium-prize/birch-swinnerton-dyer/cycle190_independent_full28_base433.gp
 python3 millennium-prize/birch-swinnerton-dyer/verify_cycle190_independent_full28.py
+python3 -O millennium-prize/birch-swinnerton-dyer/verify_cycle190_independent_full28.py
 sha256sum -c millennium-prize/birch-swinnerton-dyer/cycle190_SHA256SUMS
 ```
 
-The GP run performs 56 independently generated exact character sums from the
+The GP run performs 56 separately generated exact character sums from the
 level-433 symbol space. The Python verifier reconstructs discrete logarithms,
 checks the complete row sets and pairing symmetry, computes both exact lifts,
 and compares their reductions without PARI. Environment used: PARI/GP 2.15.4

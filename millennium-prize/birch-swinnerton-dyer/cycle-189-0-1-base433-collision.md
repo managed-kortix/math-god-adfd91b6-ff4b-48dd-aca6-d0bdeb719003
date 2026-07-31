@@ -1,4 +1,4 @@
-# Cycle 189: exact `[0:1]` base-level-433 collision
+# Cycle 189: exact `[0:1]` base-level-433 symbol-value candidate
 
 ## Result
 
@@ -28,11 +28,15 @@ Since all four are nonzero, the exact computation continued in the same
 | 109789 | 109789 | -1354 | 4 |
 | 114311 | -114311 | 3311 | 0 |
 
-Thus `(8191,114311)` is an explicit same-`L_0`-class nonzero/zero pair under
-the Cycle 185 maximal semidirect-product theorem and Cycle 184 conjugacy
-classification.  This refutes factorization of `c(q,29)` through the named
-field `L_0`; it is not a BSD proof and does not establish universal
-nonfactorization through every finite extension.
+Thus `(8191,114311)` is an exact nonzero/zero symbol-value pair whose primes are
+reported in the Cycle 187 `[0:1]` bucket. This artifact does not include a
+fail-closed replay of primality, packet membership, localization witnesses, or
+full `L_0` conjugacy-class equality. The pair is therefore an uncertified
+same-class candidate and does not by itself establish nonfactorization through
+`L_0`. Even after a combined class certificate, one pair could refute only
+strict, no-exception factorization, not an eventual Frobenian statement with
+finitely many exceptions. It is not a BSD proof and does not establish
+universal nonfactorization through every finite extension.
 
 ## Exact formula
 
@@ -69,10 +73,12 @@ Run from the repository root:
 rm -f millennium-prize/birch-swinnerton-dyer/cycle189_0_1_base433_symbol_sums.csv && gp -fq -s 1G millennium-prize/birch-swinnerton-dyer/cycle189_0_1_base433_symbol_formula.gp
 rm -f millennium-prize/birch-swinnerton-dyer/cycle189_0_1_base433_symbol_sums_continuation.csv && CYCLE189_CONTINUE=1 gp -fq -s 1G millennium-prize/birch-swinnerton-dyer/cycle189_0_1_base433_symbol_formula.gp
 python3 millennium-prize/birch-swinnerton-dyer/verify_cycle189_0_1_base433_symbol_sums.py
+python3 -O millennium-prize/birch-swinnerton-dyer/verify_cycle189_0_1_base433_symbol_sums.py
 ```
 
 The first GP command recomputes the requested four-prime artifact. The second
 runs the increasing continuation and stops after the first zero. The Python
 verifier checks both committed CSV files, their exact row sets and
 normalizations, all rational weighted totals, 7-integrality, residues, and the
-named zero/nonzero pair.  PARI/GP 2.15.4 was used for the committed run.
+named zero/nonzero symbol-value pair. It does not certify a common `L_0` class.
+PARI/GP 2.15.4 was used for the committed run.

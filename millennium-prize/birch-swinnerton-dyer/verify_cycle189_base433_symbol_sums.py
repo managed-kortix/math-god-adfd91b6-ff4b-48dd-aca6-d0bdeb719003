@@ -18,9 +18,13 @@ EXPECTED = {
 }
 
 
+def require(condition, message):
+    if not condition:
+        raise RuntimeError(message)
+
+
 def mod7(value: Fraction) -> int:
-    if value.denominator % P == 0:
-        raise AssertionError(f"non-7-integral rational: {value}")
+    require(value.denominator % P != 0, f"non-7-integral rational: {value}")
     return value.numerator * pow(value.denominator, -1, P) % P
 
 
@@ -28,31 +32,36 @@ path = Path(__file__).with_name("cycle189_base433_symbol_sums.csv")
 rows_by_q = {q: [] for q in EXPECTED}
 with path.open(newline="", encoding="ascii") as source:
     reader = csv.DictReader(source)
-    assert reader.fieldnames == [
+    require(reader.fieldnames == [
         "q", "D", "epsilon", "a", "weight", "numerator", "denominator"
-    ]
+    ], "bad CSV schema")
     for source_row in reader:
         row = {key: int(value) for key, value in source_row.items()}
         q = row["q"]
-        if q not in rows_by_q:
-            raise AssertionError(f"unexpected q={q}")
+        require(q in rows_by_q, f"unexpected q={q}")
         rows_by_q[q].append(row)
 
 for q, rows in rows_by_q.items():
     expected_D, expected_epsilon, expected_total, expected_residue = EXPECTED[q]
-    assert len(rows) == len(ACTIVE_A)
-    assert tuple(row["a"] for row in rows) == ACTIVE_A
+    require(len(rows) == len(ACTIVE_A), f"wrong row count at q={q}")
+    require(tuple(row["a"] for row in rows) == ACTIVE_A,
+            f"incomplete or unordered rows at q={q}")
     total = Fraction(0)
     for row in rows:
-        assert row["D"] == expected_D
-        assert row["epsilon"] == expected_epsilon
-        assert row["weight"] == WEIGHTS[row["a"]]
-        assert row["denominator"] > 0 and row["denominator"] % P
+        require(row["D"] == expected_D, f"wrong D at q={q}, a={row['a']}")
+        require(row["epsilon"] == expected_epsilon,
+                f"wrong epsilon at q={q}, a={row['a']}")
+        require(row["weight"] == WEIGHTS[row["a"]],
+                f"wrong weight at q={q}, a={row['a']}")
+        require(row["denominator"] > 0 and row["denominator"] % P,
+                f"bad denominator at q={q}, a={row['a']}")
         total += row["weight"] * Fraction(row["numerator"], row["denominator"])
     residue = mod7(total)
-    assert total == expected_total and residue == expected_residue
+    require(total == expected_total, f"wrong total at q={q}")
+    require(residue == expected_residue, f"wrong residue at q={q}")
     status = "ZERO" if residue == 0 else "NONZERO"
     print(f"q={q} total={total} c(q,29)={residue} status={status}")
 
-assert KNOWN_Q1499_RESIDUE != 0 and EXPECTED[29023][3] == 0
+require(KNOWN_Q1499_RESIDUE != 0 and EXPECTED[29023][3] == 0,
+        "configured comparison is not zero/nonzero")
 print("PASS: exact raw sums, rational totals, and mod-7 zero are verified")

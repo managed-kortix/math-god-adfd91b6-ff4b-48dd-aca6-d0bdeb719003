@@ -1,4 +1,4 @@
-# Cycle 190: exact fixed-`L_0` non-Frobenian theorem
+# Cycle 190: strict no-exception fixed-`L_0` nonfactorization theorem
 
 ## Frozen objects and domain
 
@@ -49,7 +49,7 @@ Only the vanishing of (190.2) is used below.
 ## Frobenian definitions
 
 Write `G_0=Gal(L_0/Q)` and let `G_0^#` be its set of conjugacy classes. A
-scalar function `d:A -> F_7` is **`L_0`-Frobenian on `A`** if there is a
+scalar function `d:A -> F_7` is **strictly `L_0`-Frobenian on `A`** if there is a
 function
 
 \[
@@ -59,7 +59,7 @@ function
 such that `d(q)=F(Frob_q(L_0))` for every `q in A`. Since `ell=29` is fixed,
 including `Frob_29` as a second, constant argument gives the same definition.
 
-The intrinsic vanishing predicate is **`L_0`-Frobenian** if there is a function
+The intrinsic vanishing predicate is **strictly `L_0`-Frobenian** if there is a function
 
 \[
  Z:G_0^\#\longrightarrow\{0,1\}
@@ -72,16 +72,18 @@ such that
  \quad\Longleftrightarrow\quad \mathfrak c(q,29)=0             \tag{190.3}
 \]
 
-for every `q in A`. A line-valued Frobenian formulation must instead provide
+for every `q in A`, with no exceptional primes. This strict definition is not
+the standard eventual convention that permits finitely many exceptions. A
+line-valued strict Frobenian formulation must instead provide
 isomorphisms from all lines in (190.2) to one fixed line and a class function
 with values in that line.
 
 ## Theorem
 
-**Theorem 190.1 (fixed-`L_0` non-governance).** On the packet `A`, the
-vanishing predicate (190.3) is not `L_0`-Frobenian. Consequently:
+**Theorem 190.1 (strict fixed-`L_0` nonfactorization).** On the packet `A`, the
+vanishing predicate (190.3) is not strictly `L_0`-Frobenian. Consequently:
 
-1. the pinned scalar `q -> c(q,29)` is not `L_0`-Frobenian;
+1. the pinned scalar `q -> c(q,29)` is not strictly `L_0`-Frobenian;
 2. no choice of nonzero line trivializations can make the invariant
    coordinates `mathfrak c(q,29)` the pullback of a function on `G_0^#`;
 3. no subextension of `L_0/Q`, or quotient of `G_0`, governs the vanishing of
@@ -150,6 +152,8 @@ comparison of their nonzero scalar values.
 - It does not prove that no finite Galois extension governs `c`. Universal
   nonfactorization would require collisions for a cofinal tower of finite
   extensions.
+- It does not refute an eventual Frobenian statement allowing finitely many
+  exceptional primes; a single finite collision cannot do so.
 - It does not assert equidistribution, infinitude, positive density, or even a
   second collision. Chebotarev cannot be applied to `c` through `L_0` after
   this obstruction.
@@ -160,8 +164,9 @@ comparison of their nonzero scalar values.
   group, regulator, or leading coefficient of either twist.
 
 In particular, Theorem 190.1 proves neither BSD for either displayed curve nor
-any case, average, or density statement toward BSD. It falsifies one named
-finite-governing-field mechanism for one auxiliary modular-symbol coordinate.
+any case, average, or density statement toward BSD. It falsifies strict,
+no-exception factorization through one named finite field for one auxiliary
+modular-symbol coordinate.
 BSD for all elliptic curves over `Q` would still require the rank equality
 `ord_(s=1)L(E,s)=rank E(Q)` for every curve (and the refined conjecture requires
 still more); no implication from this non-governance statement supplies that

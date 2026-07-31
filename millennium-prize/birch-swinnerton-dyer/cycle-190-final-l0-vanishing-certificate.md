@@ -152,8 +152,9 @@ dd212f962025100c412e40c2d70b3020911fedfd4568d0964a7362628f37fcc1  cycle189_base4
 ```
 
 The two GP producers are the exact modular-symbol provenance layer. The final
-Python verifier is intentionally independent of PARI: it locks those producers
-and outputs by hash, then replays the certificate arithmetic from the outputs.
+Python verifier does not invoke PARI: it locks those producers and outputs by
+hash, then separately replays the certificate arithmetic from the outputs. It
+is not an independent modular-symbol backend.
 
 ## Fail-closed replay
 

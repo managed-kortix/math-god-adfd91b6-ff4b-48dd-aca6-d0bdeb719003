@@ -1,0 +1,12 @@
+producer=PARI/GP [2, 15, 4]
+base_curve=433a1
+twist_D=-29023
+minimal_model=[1, 1, 1, -17548636, -24475377572834]
+conductor=364730851057
+root_number=-1
+bad_prime_433_reduction=multiplicative
+a_433=1
+bad_prime_29023_reduction=additive
+a_29023=0
+coefficient_count=650000
+coefficient_method=ellan

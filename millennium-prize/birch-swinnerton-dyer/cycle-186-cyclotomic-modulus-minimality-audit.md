@@ -9,10 +9,12 @@ The field
 \]
 
 is a mathematically valid refinement for a same-Frobenius collision test, but
-it is neither a governing field for `c(q,29)` nor a minimal field for the
+it is neither a proved governing field for `c(q,29)` nor a minimal field for the
 stated fixed-`ell` experiment. Equality of Frobenius in this compositum implies
-equality in `L_0`, so a zero/nonzero collision there still refutes governance by
-`L_0`. The converse loss is substantial: the full cyclotomic field splits one
+equality in `L_0`, so a zero/nonzero collision there refutes strict,
+no-exception factorization through `L_0`. One finite collision does not refute
+an eventual Frobenian statement permitting finitely many exceptions. The
+converse loss is substantial: the full cyclotomic field splits one
 `L_0`-Frobenius fibre according to residue data that the current admissibility
 predicate does not use, making collisions needlessly rarer.
 
@@ -137,7 +139,8 @@ Use one of the following, in increasing order of automatic filtering.
 
 1. Search same-conjugacy-class pairs in `L_0`, check every admissibility
    condition directly for both primes, and compare only zero versus nonzero
-   `c(q,29)`. This is the logically minimal test of `L_0`-governance.
+   `c(q,29)`. This is the logically minimal test of strict, no-exception
+   `L_0`-factorization.
 2. Freeze the exact admissibility predicate, express each of its prime-varying
    clauses as a Dirichlet character, and adjoin only the field cut out by those
    characters. This makes admissibility constant on fibres without fixing
@@ -150,6 +153,7 @@ Use one of the following, in increasing order of automatic filtering.
 No finite cyclotomic enlargement resolves the central governance question for
 `c(q,29)`: that coordinate still comes from varying conductor `433q^2`. The
 cyclotomic factor can govern declared congruence filters, not the modular-symbol
-coordinate whose failure of `L_0`-governance is being tested.
+coordinate whose strict, no-exception factorization through `L_0` is being
+tested.
 
 No BSD case or finite-governance theorem is claimed.

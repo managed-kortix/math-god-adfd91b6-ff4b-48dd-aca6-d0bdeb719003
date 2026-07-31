@@ -54,6 +54,7 @@ Run from the repository root:
 ```text
 gp -fq -s 1G millennium-prize/birch-swinnerton-dyer/cycle189_1_2_base433_symbol_formula.gp
 python3 millennium-prize/birch-swinnerton-dyer/verify_cycle189_1_2_base433_symbol_sums.py
+python3 -O millennium-prize/birch-swinnerton-dyer/verify_cycle189_1_2_base433_symbol_sums.py
 sha256sum -c millennium-prize/birch-swinnerton-dyer/cycle189_1_2_SHA256SUMS
 ```
 
