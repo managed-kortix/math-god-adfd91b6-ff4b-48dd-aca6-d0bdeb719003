@@ -76,9 +76,13 @@ This closes the final concrete graph-derived escape.
 The dense-Hecke-orbit route also stops at a precise boundedness wall.  A fixed
 uniform denominator and degree bound for effective representatives on a dense
 set would force a dominating proper Chow component and generic algebraicity.
-But isogeny transport grows middle-dimensional degree like the square root of
-isogeny degree, while normalization creates unbounded denominators.  Density
-alone does not select one finite-type Chow stratum.
+For a polarized isogeny `f^*M=qL` between principally polarized sixfolds,
+isogeny transport grows codimension-three degree exactly by
+`q^3=sqrt(deg(f))`, while weight normalization uses `q^-3`.  The latter is a
+displayed denominator only: its reduced denominator may be smaller if the
+pushforward cycle is divisible.  Density alone supplies neither a uniform raw
+degree bound nor a uniform reduced-denominator bound, and hence does not select
+one finite-type integral Chow stratum.
 
 The Hodge funnel is therefore rotated after preserving the special nonsplit
 seed and these deformation no-gos.  No generic nonsplit Weil theorem or Hodge

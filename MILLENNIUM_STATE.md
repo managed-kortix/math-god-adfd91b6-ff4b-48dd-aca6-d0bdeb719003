@@ -5,12 +5,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** RH Weil-spline refinement gate closed
-- **active main funnel:** portfolio selection after refinement audit.  Raw
-  minimum-eigenvalue ratios across spline levels are basis dependent; the
-  intrinsic generalized Ritz constants relative to a fixed norm decrease under
-  nested refinement.  Finite positive matrices therefore remain finite
-  restrictions of the Weil criterion, not a mechanism for uniform positivity.
+- **phase:** Hodge Hecke-transport normalization gate closed
+- **active main funnel:** portfolio selection after exact Hecke transport audit.
+  Dense transport of the special nonsplit seed multiplies effective
+  codimension-three degree by the square root of the ambient isogeny degree;
+  middle-weight normalization instead introduces potentially unbounded
+  denominators.  Prime-level kernel intersections have four exact symplectic
+  strata, but their finite-field rarity alone does not prove geometric
+  non-density or generic algebraicity.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -142,7 +144,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 160
+- **cycle:** 161
 - **announcements:** none
 
 ## immutable target list
@@ -175,6 +177,29 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: The Cycle 161 Hodge follow-up classified prime-level kernel
+  intersections exactly.  In the decomposition of twelve-dimensional
+  symplectic torsion into two nondegenerate six-spaces, the stabilizer has four
+  Lagrangian-kernel orbits indexed by `d=dim(K cap Gamma[p])`.  Their exact
+  counts are `I_(3,d)(p)^2 |Sp_(2(3-d))(p)|`; the adapted split orbit `d=3`
+  has density `p^-9(1+O(p^-1))`.  This is finite symplectic incidence only.
+  Turning bounded incidence into a proper Hecke locus requires a correctly
+  polarized bounded correspondence: a common cover of two quotient targets
+  does not automatically provide the claimed direct bounded-degree isogeny.
+  Accordingly no Zariski non-density theorem is claimed.
+
+- 2026-07-31: Cycle 161 hostilely audited codimension-three transport under a
+  polarized isogeny `f^*M=qL` of principally polarized abelian sixfolds.  The
+  exact formulas are `deg(f)=q^6`, `deg_M(f_*Z)=q^3 deg_L(Z)`, and normalized
+  transport `q^-3 f_*Z`.  Thus the raw degree multiplier is
+  `sqrt(deg(f))`.  For `[m]`, however, `q=m^2`, so the factors are `m^6` and
+  `m^-6`, not `m^3` and `m^-3`.  The normalizing factor gives only an upper
+  bound on the reduced denominator absent a primitivity argument.  Moreover,
+  `q^-3 f_*` is middle-weight/intersection normalization, whereas the inverse
+  of pullback is `q^-6 f_*`; a Hecke sum also has an independent
+  correspondence-degree normalization.  Cycle 156 was sharpened accordingly;
+  dense Hecke transport still gives no bounded integral Chow stratum.
 
 - 2026-07-31: Cycle 160 audited the RH Weil-spline refinement gate.  For a fixed
   norm Gram matrix `M_j`, the intrinsic constants are
