@@ -5,13 +5,13 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** BSD positive-density Kurihara corollary established
-- **active main funnel:** next BSD leading-term gate.  Global Tate reciprocity,
-  core-vertex rigidity, and Kato explicit reciprocity now convert every
-  invertible full-Selmer two-prime localization determinant into Kurihara
-  nonvanishing.  Combined with maximal Kummer Chebotarev this gives a
-  conditional positive-density family.  The next gate must connect this mod-p production
-  to a genuinely new leading-term/Bockstein statement, not another census.
+- **phase:** exact cyclotomic height gate completed
+- **active main funnel:** BSD leading-term comparison.  For `433a1,p=7`, direct
+  sigma-function arithmetic proves the cyclotomic height regulator has
+  valuation two and normalized residue six, hence the first rank-two
+  cyclotomic height/Bockstein pairing is nondegenerate.  Direct transport from
+  auxiliary tame augmentation lines to the cyclotomic line is impossible; the
+  next gate is a genuinely global leading-term comparison, not another census.
 - **retired RH funnel record:** logarithmically smoothed discrete
   Nyman--Beurling norm bound; polynomial short-block control and the
   gcd variance are settled but strategically insufficient; the full Gram form
@@ -143,7 +143,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   the post-staircase residual `R`
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 142
+- **cycle:** 143
 - **announcements:** none
 
 ## immutable target list
@@ -176,6 +176,18 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-07-31: Cycle 143 computed the `433a1,p=7` cyclotomic Mazur--Tate height
+  regulator exactly without database regulator input.  Rational multiplication
+  by `#E(F_7)=11`, together with `sigma(t)=t+t^2/2+O(t^3)`, gives height matrix
+  `[[42,35],[35,28]] mod 49`; because every entry is divisible by seven, its
+  determinant is `294=6*7^2 mod 343`.  Therefore `v_7(Reg_7)=2` and the leading
+  unit is `6 mod 7`.  Under the standard height/Bockstein identification this
+  certifies a nondegenerate rank-two cyclotomic first Bockstein for this curve,
+  but no equality with the Kurihara or localization scalar is claimed.  The
+  proposed direct mixed-to-cyclotomic augmentation transport was retired:
+  auxiliary cotangent lines are finite p-power torsion/tame at q, while the
+  cyclotomic cotangent line is torsion-free and unramified at q.
 
 - 2026-07-31: Cycle 142 closed the Cycle 141 converse gap.  If `P,Q` form a
   basis of the full residual classical Selmer group and their finite
