@@ -273,3 +273,32 @@ runs the pinned checker:
 python3 verify_m6_forced_group_certificates.py \
   --checker /path/to/pinned/lrat-check
 ```
+
+The remaining exact `m=6` parent frontier is frozen independently in
+`m6-residual-selector-groups.tsv`. It has 23 `(branch,lambda,r,t)` groups and
+80,974 parent/group memberships, with authoritative branch subtotals B6=19,911
+and B7=61,063. A parent can occur in more than one group
+when its pointwise C states permit more than one exact `(r,t)` pair. The only
+excluded regimes are B6 `lambda=3` and B7 `lambda=1`; the manifest and every
+CNF bind those exclusions to the committed forced selector manifest,
+certificate ledger, and fresh verifier by exact byte count and SHA-256.
+
+```sh
+python3 m6_residual_group_cnf.py --group B7-l6-r5-t2 \
+  --output /tmp/m6-B7-l6-r5-t2.cnf
+python3 check_m6_residual_group_cnf.py /tmp/m6-B7-l6-r5-t2.cnf
+python3 test_m6_residual_group_cnf.py
+```
+
+The producer derives feasible `r=e(C,B)` and `t=highC` from exact pointwise C
+states, adds deterministic unary exact-cardinality counters for both values,
+then adds fresh selectors, one ALO clause, and 153 pair-ordered guarded hole
+clauses per member. The checker separately enumerates internal-C orientations
+and each C vertex's degree-eight/nine target, reconstructs every counter and
+clause, and requires a complete satisfying model with exactly one true
+selector before attribution. The regression actually emits, independently
+reconstructs, checks, and hashes every one of the 23 CNFs. The 3,915-byte
+manifest SHA-256 is
+`b55f0b8e69a77b64254285b9134262cedb961e18a13ad10e4ce350bd04caa85a`.
+This layer generates and checks CNFs only; it does not run a solver or claim
+that any of the 23 groups is UNSAT.

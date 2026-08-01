@@ -25,6 +25,16 @@ compression, and next decision.
 
 No audits yet.
 
+## 2026-07-31 — residual m=6 suite hardening
+
+- The residual regression now generates and independently reconstructs all 23
+  selector-group CNFs before checking their frozen hashes; it no longer samples
+  only the two branch boundary files while comparing hash dictionaries.
+- The producer and independent checker both derive and enforce authoritative
+  membership subtotals B6=19,911 and B7=61,063, now recorded in the manifest.
+- Added hostile mutations inside both exact-cardinality counters of a B6 CNF.
+  This is test-suite hardening only.
+
 ## 2026-07-25 — tick 1
 
 - **Control state:** accepted exclusive ownership; status changed from `ready`
@@ -1394,3 +1404,32 @@ No audits yet.
 - Together with the separately audited B7 `q=0` human proof, this eliminates the
   full 40,415-row forced-child frontier. It remains a restricted `m=6` result,
   not by itself an order-18 or SNC theorem.
+
+### Frozen exact residual m=6 selector groups
+
+- Removed exactly the already certified forced regimes B6 `lambda=3` and B7
+  `lambda=1`. The new manifest and every generated CNF bind this exclusion to
+  the committed forced selector manifest, nine-group certificate ledger, and
+  fresh certificate verifier by exact byte counts and SHA-256 identities.
+- Independently enumerating every present internal-C orientation and every
+  pointwise C degree target in `{8,9}` derives the feasible exact pairs
+  `(r,t)=(e(C,B),highC)`. The residual is exactly 23
+  `(branch,lambda,r,t)` groups with 80,974 memberships, split authoritatively as
+  B6=19,911 and B7=61,063; overlap is intentional when one parent admits
+  multiple exact pointwise C states.
+- Each group CNF is the frozen branch base followed by deterministic unary
+  exact-cardinality counters for `r` and `highC`, fresh selectors, one ALO, and
+  exactly 153 pair-ordered guarded hole clauses per member. The independent
+  checker separately derives the C states and reconstructs the entire variable
+  and clause stream.
+- The frozen 3,915-byte manifest is
+  `experiments/m6-residual-selector-groups.tsv`, SHA-256
+  `b55f0b8e69a77b64254285b9134262cedb961e18a13ad10e4ce350bd04caa85a`.
+  All 23 deterministic CNFs are generated, independently reconstructed and
+  checked, and pinned by hash in both producer and checker.
+- Strict attribution rejects partial assignments, contradictory assignments,
+  any falsified clause, and zero or multiple true selectors before reporting a
+  parent. Exhaustive partition, boundary, identity, counter, guard, and hostile
+  mutation tests are in `experiments/test_m6_residual_group_cnf.py`.
+- **Scope:** no residual CNF was solved and no proof artifact was produced. The
+  23 groups are a frozen campaign target, not an elimination result.
