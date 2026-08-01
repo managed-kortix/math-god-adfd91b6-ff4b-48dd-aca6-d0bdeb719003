@@ -1,5 +1,18 @@
 # Notebook
 
+## Cycle 223 conics on Chow varieties
+
+For a Chow-degree-two map from `P^1` with geometrically integral, generically
+reduced general `r`-cycle, the universal incidence pushes forward to twice the
+linear `(r+1)`-plane class. If `S` is its swept carrier and `delta` the generic
+incidence degree, then `delta deg(S)=2`. The two cases are a birational sweep of
+an integral quadric `Q^(r+1) subset P^(r+2)` and a degree-two sweep of a linear
+`P^(r+1)`. For three-cycles these are `Q^4` and `P^4`; both contain lines and
+therefore cannot lie in an abelian variety. Hence the integral-general conic
+mechanism is empty on `A_0`. As the second consecutive support failure after
+Cycle 222, it triggers the stop rule and returns the funnel to portfolio
+discovery. No Hodge result is claimed.
+
 ## Cycle 222 lines on Chow varieties
 
 A nonconstant line in `Chow_(r,d)(X subset P^N)` with integral, generically

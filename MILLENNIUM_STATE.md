@@ -1,5 +1,20 @@
 # millennium state — dedicated working memory
 
+- 2026-08-01: Cycle 223 retires the integral-general Chow-degree-two support
+  mechanism and triggers the Cycle 216 stop rule. For a nonconstant map
+  `P^1 -> Chow_(r,d)(X)` of Chow degree two with geometrically integral,
+  generically reduced general member, the dominating universal incidence
+  component sweeps an `(r+1)`-fold `S` and satisfies
+  `delta deg(S)=2`. Thus either it maps birationally to an integral quadric
+  `Q^(r+1) subset P^(r+2)`, or it maps with degree two to a linear
+  `P^(r+1)`. At `r=3`, both the quadric `Q^4` and linear `P^4` contain a line,
+  so neither can lie in the abelian sixfold `A_0`, which contains no rational
+  curves. Therefore no Chow conic on `A_0` has integral general member,
+  independently of endpoints, tangent rank, or jets. This is the second
+  consecutive failed support mechanism after Cycle 222; return the main funnel
+  to portfolio discovery rather than escalating to Chow degree three. No Hodge
+  result is claimed.
+
 - 2026-08-01: Cycle 222 retires Cycle 218's entire degree-one Chow-secant
   architecture. For a nonconstant line in `Chow_(r,d)(X subset P^N)` with
   integral, generically reduced general member, a general codimension-`r+1`
@@ -307,8 +322,8 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge fixed-degree relative Chow production gate after retirement
-  of the exhausted Navier low-mode screens
+- **phase:** focused portfolio discovery after two consecutive Hodge support
+  failures; do not escalate the integral-general Chow search to degree three
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -1140,7 +1155,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 222
+- **cycle:** 223
 - **announcements:** none
 
 ## immutable target list

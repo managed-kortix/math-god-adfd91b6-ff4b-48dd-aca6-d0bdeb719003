@@ -1,5 +1,18 @@
 # Routes
 
+## Cycle 223 conic-carrier obstruction
+
+For a nonconstant degree-two map `P^1 -> Chow_(r,d)(X)` with geometrically
+integral, generically reduced general member, the universal incidence has one
+dominating component and its swept carrier `S` satisfies
+`delta deg(S)=2`. Hence either `delta=1` and `S` is an integral quadric
+`Q^(r+1) subset P^(r+2)`, or `delta=2` and `S=P^(r+1)` is swept twice. For
+`r=3`, both a quadric `Q^4` and a linear `P^4` contain a projective line, so
+neither embeds in the abelian sixfold `A_0`. Thus no Chow-degree-two family on
+`A_0` has integral general member. This is the second consecutive failed
+support mechanism after the degree-one secant, so the Cycle 216 stop rule
+returns the main funnel to portfolio discovery rather than Chow degree three.
+
 ## Cycle 222 linear-carrier obstruction
 
 Cycle 218's degree-one secant cannot meet its declared integral-general open.
