@@ -1,5 +1,59 @@
 # Notebook
 
+## Cycle 208
+
+The exact selector-free MCSP target is the asymmetric template: at every
+balanced truth-table cut there must be `2^m` consistent prefix rows and `m`
+consistent suffix queries whose completed tables have circuit size at most `s`
+exactly when `z_j=1`. This immediately embeds `INDEX_m`; a sufficient
+direct-sum lemma needs only a uniform easy-side upper bound and hard-side lower
+bound separated by one gate, but the gap must survive every unqueried bit. The
+easy-template entropy window is `m<=O(r log(n+r))`. The simplest disjoint-
+subcube multiplexer has no additive rigidity: identical components share all
+gates, and even distinct `f_i=H XOR x_i` share `H`, giving total size
+`C(H)+O(t)` versus nominal component sum `t(C(H)-1)`. Thus restriction proves
+only a maximum, not a sum. No MCSP or unrestricted lower bound follows.
+
+## Cycle 207
+
+Hostile audit confirms the `HWB_(8m)` construction under the one-based
+convention `[8m]={1,...,8m}`. Prefix assignments are rows and suffix queries
+are columns, giving `K(z,j)=z_j`, the transpose of the other common `INDEX_m`
+orientation. Data and compensator sets are disjoint prefix coordinates; every
+query is confined to the suffix and therefore leaves all data positions
+untouched. Distinct data indices require distinct suffix weights, excluding
+duplicate columns. A dependency-free verifier exhaustively evaluates every cut
+through `m=3` (`N=24`, `2717096` cuts) and checks structural identities on
+representative cuts through `m=64`. No flaw or counterpartition survives.
+Mixing zero-based labels with `x_(|x|)` would be erroneous, but is not the
+convention used. This remains an OBDD theorem, not an MCSP transfer or
+unrestricted lower bound.
+
+The constant audit shows that the midpoint is wasteful. Cutting `HWB_(6m)`
+after `4m` variables and using `[m,3m]` and `[3m,5m]` gives the same exact
+`INDEX_m` minor, improving the exponent from `1/8` to `1/6`. This is optimal
+for the fixed-weight complementary-pair/suffix-weight prescribed-cut interval
+mechanism:
+after putting `2k+O(1)` prefix positions outside all accessible windows, a
+near-uniform central placement makes every window contain at most
+`(N-2k)/4+o(N)` prefix coordinates. Hence universal `INDEX_k` extraction by
+this method requires `k/N<=1/6+o(1)` and cannot recover the known `HWB`
+exponent `1/5`. The exact-minor certificate is structurally clean but does not
+improve the known asymptotic HWB lower bound.
+
+## Cycle 206
+
+`HWB_(8m)` gives an exact selector-free all-order benchmark. At the midpoint of
+any order, one of `[m,5m]` and `[3m,7m]` contains `m` prefix indices. Store an
+arbitrary `m`-bit word there, pair each data bit with its complement to freeze
+the prefix weight at `m` or `3m`, and use the suffix weight to select the
+address. This embeds the exact `INDEX_m` matrix and forces width `2^m` in every
+order. The direct quadratic-code transfer fails exactly: the order with
+`u_1=0` first sends every `RM(2,n)` cross-splice into `RM(3,n)`, all easy above
+the explicit cubic ANF threshold. Thus selector removal is possible in an
+explicit polynomial-time family, but not by the natural Reed--Muller
+easy-table splice construction. No MCSP or unrestricted lower bound follows.
+
 ## Cycle 182
 
 Affine-plane slope partitions give an explicit `q(q-1)`-member order family

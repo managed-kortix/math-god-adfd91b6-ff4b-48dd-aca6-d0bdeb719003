@@ -70,3 +70,36 @@ explicit polynomial-time function must hide a polynomial-size matching family
 so that every variable order has a balanced cut retaining `Omega(N)`
 independent bits, with no input-readable selector.  Even success would remain
 an all-order OBDD theorem, not a `P != NP` result.
+
+Cycle 206 closes the abstract selector-free benchmark but not its MCSP
+transfer. For `HWB_(8m)(x)=x_(|x|)`, every midpoint partition contains an exact
+`INDEX_m` communication-matrix minor: use `m` data/compensator pairs to keep
+the prefix weight fixed at `m` or `3m`, and let the suffix weight address the
+data bit. Hence every variable order has exact OBDD width at least `2^m`
+without a separate selector input. The natural MCSP quadratic-code replacement
+has an exact counterorder: put the affine hyperplane `u_1=0` first. Every splice
+of two `RM(2,n)` words then lies in `RM(3,n)` and is easy once
+`s>=3 sum_(j<=3) binom(n,j)`, so that splice matrix contains no nonconstant
+minor. The surviving problem is an MCSP-specific selector-free construction,
+not the order-oblivious combinatorics alone.
+
+Cycle 207 hostile audit finds no flaw in the `HWB_(8m)` midpoint theorem. With
+one-based coordinates, all data and compensator coordinates lie in the prefix,
+suffix queries leave the data untouched, and distinct address indices require
+distinct suffix weights, ruling out duplicate columns. The exact cut submatrix
+is `K(z,j)=z_j`, with data words as rows and queries as columns; under the
+opposite convention this is called the transpose of `INDEX_m`. The zero-weight
+value is unused. The all-order OBDD lower bound is formal, while the MCSP and
+unrestricted-model transfer gaps remain.
+
+Cycle 208 isolates the exact MCSP transfer as `AMT(n,s,m)`: every balanced cut
+must admit consistent rows and queries whose completions are easy iff the
+queried row bit is one. A direct-sum implementation must prove a uniform
+one-sided complexity gap after maximizing over all unqueried component choices;
+this is stronger than recovering each component by restriction. The literal
+disjoint-subcube gadget fails by gate sharing. Even pairwise distinct
+components `f_i=H XOR x_i` combine as `H XOR x_a`, costing `C(H)+O(t)` rather
+than `sum_i C(f_i)`. Easy circuit templates also obey the entropy ceiling
+`m=O(r log(n+r))`, which is `N^o(1)` at the MMW threshold. A live construction
+therefore needs genuine anti-sharing rigidity and still lacks the relational-
+search/update-time transfer.

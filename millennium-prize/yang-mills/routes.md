@@ -1,5 +1,12 @@
 # Routes
 
+Cycle 181 records the smallest nontrivial gauge-invariant `SU(2)` benchmark.
+One square reduces to the class-function Jacobi operator with diagonal
+`n(n+2)+lambda` and off-diagonal `-lambda/2`.  Its centered character atoms give
+an exact finite generalized temporal matrix test, and a Sturm script computes
+its Ritz gap.  This validates the atomic/temporal machinery but cannot test the
+volume-uniform moving sectors or the OS continuum limit required by the route.
+
 Scout lemma for `SU(2)`: after fixing a physical scale, prove a cutoff- and
 volume-uniform contraction `<f,T^ceil(r0/a)f> <= q||f||^2`, `q<1`, on the
 entire gauge-invariant physical subspace orthogonal to the vacuum. This would

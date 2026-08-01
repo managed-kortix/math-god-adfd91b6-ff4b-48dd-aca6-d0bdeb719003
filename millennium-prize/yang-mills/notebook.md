@@ -1,5 +1,19 @@
 # Notebook
 
+## Bounded scout cycle 181
+
+The one-square `SU(2)` lattice reduces exactly by Gauss' law to the class space
+`L^2(SU(2))^Ad`.  In its orthonormal character basis `e_n=chi_(n/2)`, the
+dimensionless Kogut--Susskind block is the Jacobi matrix with diagonal
+`n(n+2)+lambda` and neighboring entries `-lambda/2`.  Centering these atoms on
+the interacting vacuum gives exact Gram matrix `I-aa*`; the temporal criterion
+on every finite coherent synthesis is the largest generalized eigenvalue of
+`M_I(t)c=q G_I c`.  A dependency-free Sturm benchmark computes the first gap,
+including `3` at `lambda=0` and `3.11386381151` at `lambda=1`.  This is an exact
+finite-block decomposition and reproducible toy benchmark, not a volume-uniform
+or continuum Yang--Mills gap.  Full derivation:
+`cycle-181-one-plaquette-atomic-gap.md`.
+
 ## Cycle 180 spectator norm
 
 The incomplete tensor product over the dressed one-site vacuum gives the exact

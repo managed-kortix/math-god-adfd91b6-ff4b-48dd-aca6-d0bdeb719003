@@ -1,11 +1,89 @@
 # millennium state — dedicated working memory
 
+- 2026-08-01: Cycle 207 constant audit improves the exact complementary-pair
+  HWB minor from exponent `1/8` to `1/6`: for `HWB_(6m)`, cut after `4m`
+  variables and use address intervals `[m,3m]`, `[3m,5m]`. One contains `m`
+  prefix indices and the `2m`-variable suffix realizes every query weight.
+  The prescribed-cut method cannot reach the known universal HWB exponent
+  `1/5`. In general,
+  after putting `2k+O(1)` prefix positions outside all accessible windows, a
+  near-uniform central placement bounds each window by
+  `(N-2k)/4+o(N)`; universal extraction therefore requires
+  `k/N<=1/6+o(1)`. The exact INDEX minor is a clean structural certificate,
+  but is quantitatively weaker than the classical HWB lower bound and carries
+  no established literature-novelty claim.
+
+- 2026-08-01: Cycle 207 strategic review rotates the main funnel out of P
+  versus NP after the HWB all-order gate succeeds.  HWB has exponential
+  deterministic OBDD width in every order while retaining polynomial-size
+  unrestricted circuits, so another all-order easy-function theorem does not
+  cross the official barrier.  MCSP transfer remains blocked independently by
+  `N^o(1)` easy-table entropy at the MMW threshold, the noncanonical outputs of
+  exact relational `search-MCSP^SAT`, and the absence of a solver-state
+  direct-sum theorem.  P versus NP re-enters only with either the direct
+  MMW-strength exclusion of exact one-pass solvers having both `N^epsilon`
+  space and update time, or a reduction from every such solver to a named
+  unconditional `N^delta` lower bound with `delta>epsilon`.  The reduction must
+  handle every valid output and preserve oracle, exactness, resources, and
+  order quantifiers up to `N^o(1)` factors.  This is a selection criterion, not
+  a lower bound; no separation is claimed.  Until another lane presents a frozen
+  non-equivalent finitely falsifiable production lemma, the main funnel is in
+  portfolio discovery rather than assigned by default.
+- 2026-08-01: Cycle 208 formulates the finite asymmetric MCSP template needed
+  for the selector-free transfer. At every balanced truth-table cut, consistent
+  rows `rho(z)` and queries `sigma(j)` must satisfy
+  `C(rho(z) cup sigma(j))<=s` iff `z_j=1`; this alone gives the exact `INDEX_m`
+  minor. The sufficient direct-sum lemma is only one-sided but must leave a
+  positive uniform gap after all unqueried component choices. Easy circuit
+  templates have entropy ceiling `m=O(r log(n+r))`. The simplest disjoint-
+  subcube gadget fails additive rigidity by gate sharing: distinct components
+  `f_i=H XOR x_i` combine into `H XOR x_a`, of size `C(H)+O(t)` rather than
+  `t(C(H)-1)`. Thus restrictions give a maximum, not a sum; genuine anti-sharing
+  would require a new unrestricted-circuit lower-bound mechanism. No MCSP,
+  unrestricted circuit, or P-versus-NP conclusion follows.
+- 2026-08-01: Cycle 207 hostile audit confirms the `HWB_(8m)` every-order
+  midpoint minor with one-based coordinates. For every midpoint prefix, one of
+  `[m,5m]` and `[3m,7m]` supplies `m` data indices; disjoint complementary
+  prefix pairs freeze weight at `m` or `3m`, and suffix assignments of the
+  distinct weights `i_j-r` touch no data coordinate and cannot duplicate. The
+  exact cut submatrix is `K(z,j)=z_j`, i.e. data words as rows and queries as
+  columns (the transpose under the opposite INDEX convention), so it has
+  `2^m` distinct residual rows. A zero-based convention combined with
+  `x_(|x|)` would be erroneous, but is not used. This proves only the exact
+  all-order OBDD bound for HWB; no MCSP, unrestricted circuit, or P-versus-NP
+  conclusion follows.
+- 2026-08-01: Cycle 206 separated finite-disk canonical approximation from the
+  RH-strength production limit.  An unconditional exact `N=1` certificate uses
+  `omega=1`, `H=I_2/4` on `[0,1]`, and proves by rational theta-integral bounds
+  that its endpoint kernel differs from the shifted-xi de Branges kernel by
+  less than `70133/151620<1/2` on `|z|,|w|<=1`; a dependency-free verifier
+  reproduces the fractions.  This coarse certificate creates no xi-kernel
+  positivity.  Positive rational/algebraic piecewise-constant approximants
+  with errors tending to zero on exhausting disks for shifts tending to zero
+  are RH-equivalent: forward by closedness of finite PSD matrices and the
+  strictness clause, reverse existentially by de Branges inversion followed by
+  `L^1` and rational-step density.  Thus exact small `N` is easy but
+  non-probative; explicit vanishing endpoint errors remain the RH-strength
+  production lemma.  No RH result is claimed.
+
 Read this file first in every fresh `math-god` Millennium keyed session. This
 state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Navier--Stokes quadratic-order finite-support completion gate
+- **phase:** BSD rank-one seven-part valuation gate
+- **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
+  certificate retires the frozen Navier two-jet architecture, the main funnel
+  rotates to the selector-free all-order INDEX scout.  The exact lexicographic
+  criterion is `(barrier crossing, non-equivalence, finite falsifiability,
+  official transfer)`.  P versus NP scores `(1,1,1,0)`: one explicit function
+  must contain a linear-size INDEX residual minor across a suitable cut of
+  every variable order, without an input-readable selector.  A proof gives an
+  all-order exponential deterministic OBDD lower bound, not an unrestricted
+  circuit lower bound.  Yang--Mills finite blocks score `(0,1,1,0)` because
+  they do not control escaping vacuum-complement states; the RH canonical
+  endpoint scores `(1,0,0,1)` because uniform shifted-xi endpoint convergence
+  is Hermite--Biehler/RH-equivalent.  No Millennium result is claimed.
 - **Cycle 205 corrected exact certificate:** after fixing the positive terminal
   derivative to `P1[(8,-1,0)]=+i e3`, exact RREF still has rank 27 and nullity
   nine. The former terminal constant-2 certificate is invalid: `e0509` and
@@ -812,7 +890,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 205
+- **cycle:** 208
 - **announcements:** none
 
 ## immutable target list
@@ -2929,3 +3007,10 @@ waiting process.
   singleton sign; adaptive weighted stopping is formally weaker but already
   RH-sufficient. RH diagonalization or the RH-conditional coefficient route
   cannot be used to prove RH without circularity. No sign theorem is claimed.
+- 2026-08-01: Yang--Mills bounded scout instantiated the one-square `SU(2)`
+  physical block. Gauss reduction gives `L^2(SU(2))^Ad`; in the character basis
+  its exact Jacobi Hamiltonian has diagonal `n(n+2)+lambda` and neighboring
+  entries `-lambda/2`. Centered atoms yield Gram matrix `I-aa*` and a finite
+  generalized temporal matrix criterion. A dependency-free Sturm benchmark
+  computes the gap (`3.11386381151` at `lambda=1`). This is a finite-volume toy
+  benchmark, not a uniform-volume or continuum mass gap. No solution is claimed.
