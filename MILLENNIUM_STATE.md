@@ -6,6 +6,29 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
 - **phase:** Navier--Stokes quadratic-order finite-support completion gate
+- **Cycle 205 corrected exact certificate:** after fixing the positive terminal
+  derivative to `P1[(8,-1,0)]=+i e3`, exact RREF still has rank 27 and nullity
+  nine. The former terminal constant-2 certificate is invalid: `e0509` and
+  `e0513` now have the same reduced image. With the 19-row linear substitution,
+  `e0089`, `e0436/242905`, and `e0509` sum exactly to `1`; the regenerated
+  22-equation reduced ideal and full 514-equation ideal are therefore unit over
+  `Q`. Exact Python and Singular certificates verify zero remainder. No subset
+  of one or two among the 22 fully reduced nonlinear forms is contradictory;
+  this three-form subset is first. Each row in the displayed original 22-row
+  certificate is necessary, but global minimality among all subsets of the 514
+  source rows is not claimed. This retires only the pinned Cycle 177 seed/
+  frozen-S2/two-jet ansatz, not finite Fourier architectures generally and not
+  Navier--Stokes blowup or regularity.
+- **Navier gate scope:** the Cycle 203 ideal tests only whether the pinned
+  Cycle 177 seed, its fixed first-completion support `S`, and the allowed helper
+  coefficients admit exact Fourier-real tangency through second time order. An
+  exact infeasibility certificate would retire this particular sequential
+  finite-filter architecture. It would not obstruct blowup: exact invariant
+  Fourier support is unnecessary for a singular trajectory, which may generate
+  new modes. Nor would it exclude other supports or seeds, approximate/error-
+  controlled leakage, time-dependent constructions, or infinite-mode
+  mechanisms. The bounded conclusion is failure of the declared two-jet ansatz,
+  not regularity, non-blowup, or a universal finite-Fourier no-go.
 - **Cycle 203 first Ferrand-double bounded campaign:** first doubles on either
   `Gamma_I` or `Gamma_diag(3,1,1)` are parameterized, for each fixed Hilbert
   polynomial, by the locally-free open in `Quot(O_G^3,P_L)`; the embedded
@@ -789,7 +812,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 203
+- **cycle:** 205
 - **announcements:** none
 
 ## immutable target list

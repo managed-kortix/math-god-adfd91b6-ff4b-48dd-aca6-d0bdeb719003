@@ -1,0 +1,159 @@
+{
+  "artifacts": [
+    {
+      "bytes": 3405,
+      "path": "millennium-prize/navier-stokes/cycle-205-singular-unit-ideal.md",
+      "sha256": "954acf26831797dad4c6739192371ef4661c8ab18295cbfc0044bbbbe845b1d3"
+    },
+    {
+      "bytes": 2426020,
+      "path": "millennium-prize/navier-stokes/cycle204_s2_equations.json",
+      "sha256": "983fde94f2a99a6e484d24dd898d0a73ca02dbfea337c3cf89c7ad73a55a835a"
+    },
+    {
+      "bytes": 32591,
+      "path": "millennium-prize/navier-stokes/cycle204_s2_support.json",
+      "sha256": "25d981a7c6f6a56d9c5ded8ddb2ef0e4ec12f58068361be0012dfe841a3cf1a4"
+    },
+    {
+      "bytes": 696667,
+      "path": "millennium-prize/navier-stokes/cycle205_full_certificate_qq.sing",
+      "sha256": "9c34e9dd442736531273a3bcd61d1df7b664cbf2ab6600aa2ff2593a8bbbb4b8"
+    },
+    {
+      "bytes": 696225,
+      "path": "millennium-prize/navier-stokes/cycle205_full_qq.sing",
+      "sha256": "081ab137271666e6de319ac6eed4c21c13c21304827e8aee65abf69ece320b8f"
+    },
+    {
+      "bytes": 20362,
+      "path": "millennium-prize/navier-stokes/cycle205_linear_reduction.json",
+      "sha256": "903e1857d54b720a89f04ba0a0d2b5057d94522ef591b5a69fcfadbfbcb30f34"
+    },
+    {
+      "bytes": 1413,
+      "path": "millennium-prize/navier-stokes/cycle205_mod_32003.sing",
+      "sha256": "46702e14d0d0f1ba152145f15c1cb3e8f9f7020b8475416939ab596b0064483a"
+    },
+    {
+      "bytes": 1413,
+      "path": "millennium-prize/navier-stokes/cycle205_mod_32009.sing",
+      "sha256": "5b09b708efad2305594aa9b3b3b9b0d50dd0b666f2a46dd5a2921960bd807980"
+    },
+    {
+      "bytes": 1413,
+      "path": "millennium-prize/navier-stokes/cycle205_mod_32027.sing",
+      "sha256": "2017e460706790b74a019fefba88be4a80770fb4ec87a709651d74210a30dafb"
+    },
+    {
+      "bytes": 1413,
+      "path": "millennium-prize/navier-stokes/cycle205_mod_32029.sing",
+      "sha256": "8cb4ef3587d08ed6127a29426fc54eb1d9074902a3c37937a546161db567e3ac"
+    },
+    {
+      "bytes": 1413,
+      "path": "millennium-prize/navier-stokes/cycle205_mod_32051.sing",
+      "sha256": "1350d0f678642d588e9bf28b0f01d916d106293610f6726c659819b4016e9ce7"
+    },
+    {
+      "bytes": 1718,
+      "path": "millennium-prize/navier-stokes/cycle205_reduced_qq.sing",
+      "sha256": "ab5e8f4793a705b037f8c436bbe2cb39d0406cfc38ba8cfc55529ea8021317c5"
+    },
+    {
+      "bytes": 13783,
+      "path": "millennium-prize/navier-stokes/generate_cycle205_singular.py",
+      "sha256": "0f1fd050070047d9044a433057e12da5c4246fc538de6706ddcccf57a741e2eb"
+    },
+    {
+      "bytes": 3354,
+      "path": "millennium-prize/navier-stokes/run_cycle205_singular.py",
+      "sha256": "87862ac3fdf0d1a494c2f68ec07a6a1f3b689cb4ea746946116a32f8aafef218"
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "millennium-prize/navier-stokes/generate_cycle204_s2_system.py",
+        "--check"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "python3",
+        "millennium-prize/navier-stokes/generate_cycle205_singular.py",
+        "--check"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "Singular",
+        "-q",
+        "millennium-prize/navier-stokes/cycle205_full_qq.sing"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "Singular",
+        "-q",
+        "millennium-prize/navier-stokes/cycle205_mod_32003.sing"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "Singular",
+        "-q",
+        "millennium-prize/navier-stokes/cycle205_mod_32009.sing"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "Singular",
+        "-q",
+        "millennium-prize/navier-stokes/cycle205_mod_32027.sing"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "Singular",
+        "-q",
+        "millennium-prize/navier-stokes/cycle205_mod_32029.sing"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "Singular",
+        "-q",
+        "millennium-prize/navier-stokes/cycle205_mod_32051.sing"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "Singular",
+        "-q",
+        "millennium-prize/navier-stokes/cycle205_reduced_qq.sing"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "Singular",
+        "-q",
+        "millennium-prize/navier-stokes/cycle205_full_certificate_qq.sing"
+      ],
+      "exit": 0
+    }
+  ],
+  "host": "Linux-6.8.0-88-generic-x86_64-with-glibc2.39",
+  "schema": "cycle205-singular-manifest-v1",
+  "started_utc": "2026-08-01T03:16:17.736388+00:00"
+}

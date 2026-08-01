@@ -1,0 +1,1023 @@
+{
+  "counts": {
+    "distinct_reduced_equations": 22,
+    "free_variables": 9,
+    "input_equations": 514,
+    "input_variables": 36,
+    "linear_equations": 44,
+    "linear_rank": 27,
+    "nonzero_reduced_images_before_deduplication": 36,
+    "reduced_degree_counts": {
+      "2": 14,
+      "3": 8
+    }
+  },
+  "equations": [
+    {
+      "degree": 2,
+      "id": "r00",
+      "sources": [
+        "e0448"
+      ],
+      "terms": [
+        {
+          "coefficient": "1",
+          "monomial": []
+        },
+        {
+          "coefficient": "-16",
+          "monomial": [
+            "q1_o9_planar_im"
+          ]
+        },
+        {
+          "coefficient": "2",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-1",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "-16",
+          "monomial": [
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "3",
+          "monomial": [
+            "q1_o10_planar_im",
+            "q1_o10_planar_im"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 2,
+      "id": "r01",
+      "sources": [
+        "e0456"
+      ],
+      "terms": [
+        {
+          "coefficient": "1",
+          "monomial": []
+        },
+        {
+          "coefficient": "-16",
+          "monomial": [
+            "q1_o9_planar_im"
+          ]
+        },
+        {
+          "coefficient": "2",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-1",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "1",
+          "monomial": [
+            "q1_o10_planar_im",
+            "q1_o10_planar_im"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 2,
+      "id": "r02",
+      "sources": [
+        "e0452"
+      ],
+      "terms": [
+        {
+          "coefficient": "1",
+          "monomial": []
+        },
+        {
+          "coefficient": "16",
+          "monomial": [
+            "q1_o9_planar_im"
+          ]
+        },
+        {
+          "coefficient": "2",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-1",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "16",
+          "monomial": [
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "3",
+          "monomial": [
+            "q1_o10_planar_im",
+            "q1_o10_planar_im"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 2,
+      "id": "r03",
+      "sources": [
+        "e0444"
+      ],
+      "terms": [
+        {
+          "coefficient": "1",
+          "monomial": []
+        },
+        {
+          "coefficient": "16",
+          "monomial": [
+            "q1_o9_planar_im"
+          ]
+        },
+        {
+          "coefficient": "2",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-1",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "1",
+          "monomial": [
+            "q1_o10_planar_im",
+            "q1_o10_planar_im"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 2,
+      "id": "r04",
+      "sources": [
+        "e0436",
+        "e0464"
+      ],
+      "terms": [
+        {
+          "coefficient": "4",
+          "monomial": []
+        },
+        {
+          "coefficient": "-4",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o9_planar_im"
+          ]
+        },
+        {
+          "coefficient": "8",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-3",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 3,
+      "id": "r05",
+      "sources": [
+        "e0433",
+        "e0469"
+      ],
+      "terms": [
+        {
+          "coefficient": "4",
+          "monomial": [
+            "q1_o9_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-8",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o9_planar_im",
+            "q1_o9_planar_im"
+          ]
+        },
+        {
+          "coefficient": "12",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o9_planar_im",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-6",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "-3",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re",
+            "q1_o10_planar_im"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 2,
+      "id": "r06",
+      "sources": [
+        "e0509",
+        "e0513"
+      ],
+      "terms": [
+        {
+          "coefficient": "4",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o9_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-4",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "1",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 2,
+      "id": "r07",
+      "sources": [
+        "e0089",
+        "e0109",
+        "e0428",
+        "e0472"
+      ],
+      "terms": [
+        {
+          "coefficient": "4",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o9_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-1",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 3,
+      "id": "r08",
+      "sources": [
+        "e0441"
+      ],
+      "terms": [
+        {
+          "coefficient": "904",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o9_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-4",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o9_planar_im",
+            "q1_o9_planar_im"
+          ]
+        },
+        {
+          "coefficient": "16",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o9_planar_im",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-5",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "-12",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_im",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-226",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "8",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-4",
+          "monomial": [
+            "q1_o10_planar_im"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 3,
+      "id": "r09",
+      "sources": [
+        "e0461"
+      ],
+      "terms": [
+        {
+          "coefficient": "904",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o9_planar_im"
+          ]
+        },
+        {
+          "coefficient": "4",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o9_planar_im",
+            "q1_o9_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-16",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o9_planar_im",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "5",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "12",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_im",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-226",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "-8",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "4",
+          "monomial": [
+            "q1_o10_planar_im"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 3,
+      "id": "r10",
+      "sources": [
+        "e0425",
+        "e0477"
+      ],
+      "terms": [
+        {
+          "coefficient": "4",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o9_planar_im",
+            "q1_o9_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-3",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 3,
+      "id": "r11",
+      "sources": [
+        "e0424",
+        "e0476"
+      ],
+      "terms": [
+        {
+          "coefficient": "12",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o9_planar_im",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "-1",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 3,
+      "id": "r12",
+      "sources": [
+        "e0460"
+      ],
+      "terms": [
+        {
+          "coefficient": "28",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o9_planar_im",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "-1808",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "-16",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_re",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-8",
+          "monomial": [
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "3",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "-12",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_im",
+            "q1_o10_planar_im"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 3,
+      "id": "r13",
+      "sources": [
+        "e0440"
+      ],
+      "terms": [
+        {
+          "coefficient": "28",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o9_planar_im",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "1808",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "-16",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_re",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "-8",
+          "monomial": [
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "3",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "-12",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_im",
+            "q1_o10_planar_im"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 2,
+      "id": "r14",
+      "sources": [
+        "e0088",
+        "e0108",
+        "e0429",
+        "e0473"
+      ],
+      "terms": [
+        {
+          "coefficient": "1",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_re"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 2,
+      "id": "r15",
+      "sources": [
+        "e0437",
+        "e0465"
+      ],
+      "terms": [
+        {
+          "coefficient": "1",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "1",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_im"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 3,
+      "id": "r16",
+      "sources": [
+        "e0432",
+        "e0468"
+      ],
+      "terms": [
+        {
+          "coefficient": "6",
+          "monomial": [
+            "q1_o9_planar_im",
+            "q1_o10_planar_re",
+            "q1_o10_planar_im"
+          ]
+        },
+        {
+          "coefficient": "1",
+          "monomial": [
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "-1",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_re",
+            "q1_o10_planar_re"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 2,
+      "id": "r17",
+      "sources": [
+        "e0457"
+      ],
+      "terms": [
+        {
+          "coefficient": "8",
+          "monomial": [
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "-3",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_im"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 2,
+      "id": "r18",
+      "sources": [
+        "e0445"
+      ],
+      "terms": [
+        {
+          "coefficient": "8",
+          "monomial": [
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "3",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_im"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 2,
+      "id": "r19",
+      "sources": [
+        "e0449"
+      ],
+      "terms": [
+        {
+          "coefficient": "24",
+          "monomial": [
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "-5",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_im"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 2,
+      "id": "r20",
+      "sources": [
+        "e0453"
+      ],
+      "terms": [
+        {
+          "coefficient": "24",
+          "monomial": [
+            "q1_o10_planar_re"
+          ]
+        },
+        {
+          "coefficient": "5",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_im"
+          ]
+        }
+      ]
+    },
+    {
+      "degree": 2,
+      "id": "r21",
+      "sources": [
+        "e0508",
+        "e0512"
+      ],
+      "terms": [
+        {
+          "coefficient": "1",
+          "monomial": [
+            "q1_o10_planar_re",
+            "q1_o10_planar_im"
+          ]
+        }
+      ]
+    }
+  ],
+  "exceptional_primes": [
+    2
+  ],
+  "free_variable_order": [
+    "q1_o8_vertical_re",
+    "q1_o8_vertical_im",
+    "q1_o9_planar_im",
+    "q1_o9_vertical_re",
+    "q1_o9_vertical_im",
+    "q1_o10_planar_re",
+    "q1_o10_planar_im",
+    "q1_o10_vertical_re",
+    "q1_o10_vertical_im"
+  ],
+  "method": "exact rational RREF of all degree-one equations, followed by substitution and primitive integer normalization",
+  "schema": "cycle205-linear-reduction-v1",
+  "source": "cycle204_s2_equations.json",
+  "source_sha256": "983fde94f2a99a6e484d24dd898d0a73ca02dbfea337c3cf89c7ad73a55a835a",
+  "substitutions": [
+    {
+      "constant": "0",
+      "rref_source_row": "e0019",
+      "terms": [],
+      "variable": "q1_o0_planar_re"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0018",
+      "terms": [],
+      "variable": "q1_o0_planar_im"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0045",
+      "terms": [],
+      "variable": "q1_o0_vertical_re"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0044",
+      "terms": [],
+      "variable": "q1_o0_vertical_im"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0043",
+      "terms": [],
+      "variable": "q1_o1_planar_re"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0042",
+      "terms": [],
+      "variable": "q1_o1_planar_im"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0053",
+      "terms": [],
+      "variable": "q1_o1_vertical_re"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0052",
+      "terms": [],
+      "variable": "q1_o1_vertical_im"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0025",
+      "terms": [],
+      "variable": "q1_o2_planar_re"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0024",
+      "terms": [],
+      "variable": "q1_o2_planar_im"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0057",
+      "terms": [],
+      "variable": "q1_o2_vertical_re"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0056",
+      "terms": [],
+      "variable": "q1_o2_vertical_im"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0059",
+      "terms": [],
+      "variable": "q1_o4_planar_re"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0058",
+      "terms": [],
+      "variable": "q1_o4_planar_im"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0093",
+      "terms": [
+        {
+          "coefficient": "-1/2",
+          "variable": "q1_o10_planar_re"
+        }
+      ],
+      "variable": "q1_o4_vertical_re"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0092",
+      "terms": [
+        {
+          "coefficient": "-1",
+          "variable": "q1_o9_planar_im"
+        }
+      ],
+      "variable": "q1_o4_vertical_im"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0063",
+      "terms": [],
+      "variable": "q1_o5_planar_re"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0062",
+      "terms": [],
+      "variable": "q1_o5_planar_im"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0097",
+      "terms": [],
+      "variable": "q1_o5_vertical_re"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0096",
+      "terms": [
+        {
+          "coefficient": "2",
+          "variable": "q1_o9_planar_im"
+        },
+        {
+          "coefficient": "-1",
+          "variable": "q1_o10_planar_im"
+        }
+      ],
+      "variable": "q1_o5_vertical_im"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0091",
+      "terms": [],
+      "variable": "q1_o6_planar_re"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0090",
+      "terms": [],
+      "variable": "q1_o6_planar_im"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0101",
+      "terms": [
+        {
+          "coefficient": "1/2",
+          "variable": "q1_o10_planar_re"
+        }
+      ],
+      "variable": "q1_o6_vertical_re"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0100",
+      "terms": [
+        {
+          "coefficient": "-1",
+          "variable": "q1_o9_planar_im"
+        }
+      ],
+      "variable": "q1_o6_vertical_im"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0085",
+      "terms": [],
+      "variable": "q1_o8_planar_re"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0084",
+      "terms": [],
+      "variable": "q1_o8_planar_im"
+    },
+    {
+      "constant": "0",
+      "rref_source_row": "e0105",
+      "terms": [
+        {
+          "coefficient": "1/2",
+          "variable": "q1_o10_planar_re"
+        }
+      ],
+      "variable": "q1_o9_planar_re"
+    }
+  ]
+}

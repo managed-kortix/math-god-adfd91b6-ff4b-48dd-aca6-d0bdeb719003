@@ -1,0 +1,94 @@
+Cycle 205 exact Singular campaign
+started_utc=2026-08-01T03:16:17.736388+00:00
+host=Linux-6.8.0-88-generic-x86_64-with-glibc2.39
+
+$ python3 millennium-prize/navier-stokes/generate_cycle204_s2_system.py --check
+Cycle 204 S2 replay matches both committed JSON files
+exit=0
+
+$ python3 millennium-prize/navier-stokes/generate_cycle205_singular.py --check
+Cycle 205 Singular artifacts replay byte-for-byte
+exit=0
+
+$ Singular -q millennium-prize/navier-stokes/cycle205_full_qq.sing
+CYCLE205_FULL_INPUT equations=514 variables=36
+Use cycle205_linear_reduction.json for the exact 44-row rank-27 elimination.
+exit=0
+
+$ Singular -q millennium-prize/navier-stokes/cycle205_mod_32003.sing
+CYCLE205_START prime=32003 equations=22 variables=9
+CYCLE205_RESULT prime=32003 unit=1 gb_size=1 elapsed_ms=0
+CYCLE205_GB_CONSTANT 1
+exit=0
+
+$ Singular -q millennium-prize/navier-stokes/cycle205_mod_32009.sing
+CYCLE205_START prime=32009 equations=22 variables=9
+CYCLE205_RESULT prime=32009 unit=1 gb_size=1 elapsed_ms=0
+CYCLE205_GB_CONSTANT 1
+exit=0
+
+$ Singular -q millennium-prize/navier-stokes/cycle205_mod_32027.sing
+CYCLE205_START prime=32027 equations=22 variables=9
+CYCLE205_RESULT prime=32027 unit=1 gb_size=1 elapsed_ms=0
+CYCLE205_GB_CONSTANT 1
+exit=0
+
+$ Singular -q millennium-prize/navier-stokes/cycle205_mod_32029.sing
+CYCLE205_START prime=32029 equations=22 variables=9
+CYCLE205_RESULT prime=32029 unit=1 gb_size=1 elapsed_ms=0
+CYCLE205_GB_CONSTANT 1
+exit=0
+
+$ Singular -q millennium-prize/navier-stokes/cycle205_mod_32051.sing
+CYCLE205_START prime=32051 equations=22 variables=9
+CYCLE205_RESULT prime=32051 unit=1 gb_size=1 elapsed_ms=0
+CYCLE205_GB_CONSTANT 1
+exit=0
+
+$ Singular -q millennium-prize/navier-stokes/cycle205_reduced_qq.sing
+CYCLE205_QQ_START equations=22 variables=9
+CYCLE205_QQ_RESULT unit=1 gb_size=1 elapsed_ms=0
+CYCLE205_CERTIFICATE_BEGIN
+C[1]=-1/4
+C[2]=1/16*x2+3/4
+C[3]=-1/4
+C[4]=-1/16*x2+3/4
+C[7]=1/2
+C[21]=1/48*x5
+C[22]=-5/48*x5
+CYCLE205_CERTIFICATE_END
+CYCLE205_CERTIFICATE_REMAINDER 0
+exit=0
+
+$ Singular -q millennium-prize/navier-stokes/cycle205_full_certificate_qq.sing
+CYCLE205_FULL_QQ_START equations=514 variables=36
+CYCLE205_FULL_QQ_RESULT unit=1 gb_size=1 elapsed_ms=0
+CYCLE205_FULL_CERTIFICATE_BEGIN
+C[56]=956/481*q1_o9_planar_re
+C[69]=-956/481*q1_o9_planar_im
+C[70]=956/481*q1_o9_planar_re
+C[85]=192/65*q1_o0_planar_im-1004/37*q1_o1_planar_im+2*q1_o4_vertical_im+q1_o5_vertical_im+q1_o6_vertical_im-q1_o10_planar_im-346
+C[86]=-192/65*q1_o0_planar_re+1004/37*q1_o1_planar_re-2*q1_o4_vertical_re-3*q1_o5_vertical_re-q1_o6_vertical_re+q1_o10_planar_re
+C[93]=720/481*q1_o9_planar_im+q1_o10_planar_im
+C[94]=-q1_o9_planar_re-q1_o10_planar_re
+C[95]=-216/65*q1_o8_vertical_im-400/481*q1_o9_vertical_im+76/1313*q1_o10_vertical_im
+C[96]=216/65*q1_o8_vertical_re+400/481*q1_o9_vertical_re-76/1313*q1_o10_vertical_re
+C[97]=242/481*q1_o9_planar_im
+C[98]=-q1_o9_planar_re
+C[99]=-1236/325*q1_o8_vertical_im-8/13*q1_o9_vertical_im+76/1313*q1_o10_vertical_im
+C[100]=7092/2275*q1_o8_vertical_re+8/13*q1_o9_vertical_re-76/1313*q1_o10_vertical_re
+C[101]=239/481*q1_o9_planar_im
+C[103]=4092/101*q1_o0_vertical_im-96/25*q1_o8_vertical_im-16*q1_o9_vertical_im+76/101*q1_o10_vertical_im
+C[104]=4092/101*q1_o0_vertical_re-888/175*q1_o8_vertical_re-76/101*q1_o10_vertical_re
+C[105]=-192/13*q1_o0_planar_im-720/481*q1_o9_planar_im
+C[106]=-192/13*q1_o0_planar_re-q1_o9_planar_re
+C[110]=1
+C[437]=1/242905
+C[514]=1
+CYCLE205_FULL_CERTIFICATE_END
+CYCLE205_FULL_CERTIFICATE_REMAINDER 0
+exit=0
+
+manifest_sha256=251070165a566d442554e74df863367cd680b5fef5527ce552d5f9dcf610092f
+completed_utc=2026-08-01T03:16:23.526702+00:00
+status=PASS
