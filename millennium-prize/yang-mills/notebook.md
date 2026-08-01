@@ -1,5 +1,35 @@
 # Notebook
 
+## Continuum admission audit cycle 236
+
+`CA235 FAIL` is terminal. The exact Cycle 235 gap is off the asymptotically
+free trajectory. A fixed-physical-time contraction on the full moving
+vacuum complement is gap-equivalent; the separated exact-RG candidate has no
+analytic complement bound for its infinite induced action; and slice-local
+spatial smearing does not close temporal contacts, Euclidean restoration, or
+the local OS algebra. Thus no candidate simultaneously passes physical
+scaling, non-equivalence, finite falsifiability, and official transfer. The
+strong-coupling theorem is retained and the main funnel rotates to focused
+portfolio discovery. Full audit:
+`cycle-236-ca235-continuum-admission-audit.md`.
+
+## Hostile CA235 anisotropic scale decision
+
+`CA235 FAIL`. The explicit Cycle 235 gap applies only at
+`lambda=2/g^4<=lambda_*=1/(8*15970360332^416)`, equivalently at a fixed
+extremely large bare coupling. Every four-dimensional cutoff-removal trajectory
+has `g(a)->0` and hence `lambda(a)->infinity`, so after a finite index it is
+outside the certified domain and has no cofinal certified subsequence. A
+temporal anisotropic limit merely produces the Hamiltonian at fixed spatial
+lattice; fixed anisotropy changes only finite constants; singular running
+anisotropy either restores the same divergent ratio after energy rescaling or
+changes the target theory. The dimensional prefactor `g^2/(2a)` cannot be used
+once the dimensionless gap hypothesis fails. No OS existence, nontriviality,
+Euclidean-invariance, continuum-gap, or every-compact-simple-group quantifier is
+advanced. The finite boundary falsifier is not a continuum production
+falsifier. Preserve `BR235 PASS`, close this route, and rotate under the frozen
+rule. Audit: `cycle-236-ca235-anisotropic-scale-audit.md`.
+
 ## Endpoint completeness and terminal BR235
 
 The exact Yarotsky projector resolution proves endpoint completeness. In every

@@ -1,5 +1,21 @@
 # Routes
 
+## Cycle 236 continuum-admission failure
+
+`CA235` is terminal `FAIL`. The physical trajectory has `a -> 0`,
+`lambda(a)=2/g(a)^4 -> infinity`, and physical Hamiltonian rescaling by
+`g(a)^2/(2a)`; the Cycle 235 gap lies at fixed extremely small `lambda`.
+Full-complement contraction at one
+fixed physical time is the desired uniform lattice mass bound in semigroup
+form. A separated reflection-positive RG contraction lacks an analytic bound
+on the induced infinite loop/representation tail, so its finite truncation has
+no fail-closed success output. Slice-local spatial smearing preserves
+reflection positivity but leaves temporal contact divergence and does not
+construct a complete Euclidean-covariant local algebra. No one candidate passes
+all four tests. The bounded theorem is archived and the portfolio rotates. See
+`cycle-236-ca235-continuum-admission-audit.md` and
+`../cycle-236-strategic-rotation.md`.
+
 ## Cycle 235 endpoint completeness: terminal BR235 PASS
 
 Yarotsky's exact sector projectors leave no unrepresented endpoint channel. At
@@ -9,9 +25,13 @@ the initial face a nonzero term obeys
 `I` or `J` event support. Bare classical propagation with all `I_k` empty is
 exactly an overlapping string of represented `J` events. This removes the sole
 condition in the augmented-boundary-graph theorem and records terminal
-`BR235 PASS`, preserving the explicit finite-lattice strong-coupling gap. It
-does not pass `CA235` or advance a continuum Clay quantifier. See
-`cycle-235-endpoint-completeness-audit.md`.
+`BR235 PASS`, preserving the explicit finite-lattice strong-coupling gap. A
+hostile anisotropic audit now assigns `CA235 FAIL`: every cutoff-removal path
+has `lambda=2/g^4->infinity`, eventually disjoint from the certified bounded
+interval, and temporal anisotropy does not remove the spatial cutoff or alter
+that ratio. No named continuum Clay quantifier advances. See
+`cycle-235-endpoint-completeness-audit.md` and
+`cycle-236-ca235-anisotropic-scale-audit.md`.
 
 ## Cycle 235 augmented boundary graph
 

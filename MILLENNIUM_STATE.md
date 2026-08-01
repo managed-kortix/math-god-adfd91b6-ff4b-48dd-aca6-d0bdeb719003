@@ -1,5 +1,54 @@
 # millennium state — dedicated working memory
 
+- 2026-08-01: Cycle 236 records terminal `CA235 FAIL` and rotates the main
+  funnel out of Yang--Mills. The audited scaling is `a_k -> 0`,
+  `lambda_k=2/g_k^4 -> infinity`, with the physical Hamiltonian normalized by
+  `g_k^2/(2a_k)`. The
+  Cycle 235 theorem fails this physical-scaling test. Uniform fixed-physical-
+  time contraction on the entire moving vacuum complement is the lattice mass
+  bound under another name; exact one-step RG contraction is separated but has
+  no analytic complement bound for the infinite induced loop/representation
+  tail; and slice-local spatial smearing does not transfer to a complete
+  Euclidean-covariant OS algebra. Hence no candidate passes all four `CA235`
+  tests. The explicit strong-coupling gap is archived, not discarded. The
+  portfolio rotates to BSD's frozen effective integral Heegner--Kolyvagin
+  checkpoint `HK236`, which must produce an explicit comparison factor,
+  directed height/index cutoff, and complete finite-prime list. See
+  `millennium-prize/yang-mills/cycle-236-ca235-continuum-admission-audit.md` and
+  `millennium-prize/cycle-236-strategic-rotation.md`.
+
+- 2026-08-01: Under the stipulated `CA235 FAIL`, Cycle 236 preserves the
+  terminal `BR235 PASS` finite-lattice theorem and rotates the main funnel from
+  Yang--Mills rather than extending the retired boundary/small-coupling
+  architecture.  The newest exact six-lane comparison selects BSD at
+  `(1,1,1,0)`: Cycle 224's effective integral Heegner--Kolyvagin packet is the
+  only currently stated non-equivalent barrier crossing with an exact finite
+  falsifier.  Freeze `HK236` for `A=433a1^(-1499)` and the initial candidate
+  `K=Q(sqrt(-115))`.  A pass must certify the integral Heegner datum, an explicit
+  exceptional factor `C_A` in the Kolyvagin divisibility, directed upper/lower
+  height bounds and integer index cutoff `B_A`, and the complete remaining
+  finite-prime list.  Only `PASS` persists to primary computations; `FAIL` or
+  `WALL` retires this frozen curve/field architecture and triggers portfolio
+  review, with no nearby-field cycling.  See
+  `millennium-prize/cycle-236-strategic-rotation.md`.
+
+- 2026-08-01: hostile anisotropic audit assigns Yang--Mills `CA235 FAIL`.
+  Cycle 235 applies only at
+  `lambda=2/g^4<=1/(8*(15970360332)^416)`, equivalently above a fixed enormous
+  bare-coupling threshold. Every ultraviolet cutoff-removal sequence has
+  `g(a)->0` and `lambda(a)->infinity`, so it eventually leaves the theorem's
+  domain and has no cofinal certified subsequence. Taking temporal lattice
+  spacing to zero only yields the Hamiltonian at fixed spatial lattice; finite
+  anisotropy changes constants but not the divergent inverse-fourth-power
+  ratio; singular running anisotropy either restores that ratio under physical
+  energy normalization or changes the target away from isotropic Yang--Mills.
+  The prefactor `g^2/(2a)` cannot transfer a dimensionless bound whose coupling
+  hypothesis fails. Thus no `R^4` existence, nontriviality, Wightman/OS,
+  continuum spectral-gap, or every-compact-simple-group quantifier advances.
+  Preserve terminal `BR235 PASS`, close boundary-polymer work as a main-funnel
+  route, and rotate under the frozen rule. See
+  `millennium-prize/yang-mills/cycle-236-ca235-anisotropic-scale-audit.md`.
+
 - 2026-08-01: Yang--Mills endpoint audit terminalizes `BR235` as `PASS`.
   Yarotsky's exact `J`-sector projector resolution gives
   `J_1=A_- setminus Lambda_(I_1)` for every nonzero initial-face term, while
@@ -609,9 +658,9 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Yang--Mills `BR235 PASS` terminal; explicit strong-coupling lattice
-  result retained, with post-checkpoint main-funnel continuation barred unless
-  `CA235` passes
+- **phase:** Yang--Mills `BR235 PASS` retained and `CA235 FAIL` terminal; main
+  funnel rotated to BSD effective integral Heegner--Kolyvagin checkpoint
+  `HK236`
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -1443,7 +1492,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 235
+- **cycle:** 236
 - **announcements:** none
 
 ## immutable target list
