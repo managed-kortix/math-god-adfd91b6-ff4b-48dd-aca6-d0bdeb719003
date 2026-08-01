@@ -1,5 +1,41 @@
 # millennium state — dedicated working memory
 
+- 2026-08-01: Cycle 212 audits the universal periodic Navier--Stokes factor-two
+  `L^3` gate. The exact velocity identity leaves an unsigned pressure term;
+  Calderon--Zygmund and weighted Holder reduce it to `int|u|^5`, whose 3D
+  Gagliardo--Nirenberg bound is critical and absorbs only for small `L^3` data.
+  The heat--Leray Duhamel kernel is integrable in 2D and gives the explicit
+  local interval `t<=nu^5/(24 K_2||u_0||_3)^6`, but its 3D endpoint exponent is
+  one and Kato's repair is profile-dependent. Two-dimensional vorticity
+  contraction plus Biot--Savart gives a global bound depending on
+  `||omega_0||_(6/5)`, with no universal ratio to `||u_0||_3`. The estimates
+  neither prove nor refute the factor two; they support Cycle 211's certified
+  2D Euler inverse-transfer crossing and positive-viscosity enclosure as the
+  cleanest falsifier mechanism. No Navier--Stokes result is claimed.
+- 2026-08-01: The Cycle 211 hostile literature audit finds no immediate known
+  proof or refutation of the universal factor-two periodic `L^3` gate.
+  Palasek's rigorous arXiv:2509.18595 arbitrary-growth theorem bounds initial
+  data in `BMO^{-1}`/`B^{-1}_{infinity,1}`, not in `L^3`, so it is not a
+  same-norm falsifier. Ramirez--Protas arXiv:2604.13338 directly optimizes
+  periodic final `L^3` and reports numerical transient growth, but the displayed
+  ratios are only about `1.04--1.10` and carry no certificate. Conserved 2D
+  vorticity norms give only a datum-dependent velocity bound, while known
+  vorticity-gradient growth and inviscid damping do not imply velocity `L^3`
+  growth. The Euler-reversal/inviscid-limit breaker remains the immediate
+  theoretical target; no Navier--Stokes result is claimed.
+- 2026-08-01: Cycle 211 sharpens the Navier factor-two breaker to a single
+  smooth two-dimensional Euler orbit with endpoint `L^3` ratio greater than two.
+  Time reversal allows either a growth or decay search. An explicit finite-time
+  inviscid-limit estimate transfers any strict Euler margin to sufficiently
+  small effective viscosity, and `u_lambda(t)=lambda
+  w_(nu/lambda)(lambda t)` then transfers it to any fixed physical viscosity;
+  amplitude alone never enlarges the ratio. Hyperbolic mixing is conceptually
+  relevant through `||u||_3 asymp ||omega||_(W^-1,3)`, but reversibility and
+  rearrangement do not themselves refute the lemma: Euler energy is also fixed,
+  and equimeasurable endpoints need not be dynamically accessible. The exact
+  production target is now a full-Euler interval/tail certificate, endpoint
+  cubature with margin, and an explicit viscosity threshold. No crossing or
+  arbitrary-amplification theorem is claimed.
 - 2026-08-01: The bounded `D=-29023,p=7` re-entry scout succeeds on the
   Kurihara coordinate at the second genuine Kolyvagin prime. The known value
   at `ell=29` is zero, while exact Cycle 187 base-twist symbols at `ell=113`,
@@ -965,7 +1001,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 211
+- **cycle:** 212
 - **announcements:** none
 
 ## immutable target list

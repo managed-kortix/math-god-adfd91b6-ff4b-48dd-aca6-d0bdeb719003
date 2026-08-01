@@ -293,3 +293,38 @@ periodic Biot--Savart maps it to velocity `L^3`. Hence neither amplitude nor
 arbitrarily long rescaled time can make the Cycle 43 profile amplify without
 bound. The estimate is data-dependent, and vorticity rearrangement alone gives
 no universal factor. This closes this ansatz, not Navier--Stokes.
+
+## Main-funnel cycle 211
+
+The factor-two breaker reduces to one finite-time 2D Euler orbit. If a smooth
+Euler solution has endpoint `L^3` ratio greater than `2+eta`, fixed-time
+inviscid-limit stability transfers the strict crossing to all sufficiently
+small effective viscosities. The exact scaling
+`u_lambda(t)=lambda w_(nu/lambda)(lambda t)` then transfers it to any fixed
+physical viscosity, and the 2D field embeds in `T^3`. Euler time reversal lets
+the search target decay as well as growth. Hyperbolic mixing is relevant because
+`||u||_3` is equivalent to the vorticity `W^(-1,3)` norm, but rearrangement alone
+does not produce an Euler orbit and generally fails the conserved-energy gate.
+The rigorous target is therefore an interval-certified full Euler trajectory,
+endpoint cubature, an explicit inviscid-limit constant, and only then amplitude
+scaling. See `cycle-211-euler-reversal-breaker.md`.
+
+## Main-funnel cycle 212
+
+The exact velocity identity is
+`(1/3)d_t||u||_3^3+nu D=int p u dot grad|u|`. Periodic Calderon--Zygmund and
+weighted Holder bound the pressure term by
+`C D^(1/2)(int|u|^5)^(1/2)`. In 3D, Gagliardo--Nirenberg makes the resulting
+dissipative coefficient proportional to the critical norm, so only small data
+are absorbed. In 2D, heat--Leray Duhamel has integrable kernel
+`K_2(nu t)^(-5/6)` and gives the explicit local factor-two interval
+`t<=nu^5/(24 K_2||u_0||_3)^6`. In 3D the corresponding exponent is one and
+does not close from `L^infinity_tL^3_x`; Kato's repair depends on the full heat
+profile, not only its `L^3` norm. Two-dimensional vorticity contraction and
+Biot--Savart give `||u(t)||_3<=C||omega_0||_(6/5)`, but the ratio to the initial
+velocity norm is unbounded. These standard mechanisms support only local or
+data-dependent constants and give no reason for the global number two. A
+quantitatively enclosed 2D Euler inverse-transfer crossing, followed by a
+positive-viscosity inviscid-limit enclosure, remains the cleanest counterexample
+route. No crossing or Navier--Stokes result is claimed. See
+`cycle-212-l3-bound-mechanisms.md`.
