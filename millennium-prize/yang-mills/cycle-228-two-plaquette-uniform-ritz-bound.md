@@ -1,15 +1,15 @@
-# Cycle 228: a cutoff-uniform two-plaquette Ritz-gap bound
+# Cycle 228: an untruncated two-plaquette gap bound
 
-This bounded result concerns the dimensionless two-plaquette `SU(2)` Hamiltonian
-from Cycle 226,
+This bounded result concerns the full dimensionless two-plaquette `SU(2)`
+Hamiltonian from Cycle 226,
 
 \[
  K_\lambda=T+\lambda(2-w_A-w_B),\qquad \lambda\geq0,
 \]
 
-on `L^2(SU(2)^2)^Ad`. It proves an exact lower bound for every natural finite
-spin compression. It is not a volume-uniform lattice theorem and makes no
-continuum claim.
+on `L^2(SU(2)^2)^Ad`. It proves an exact lower bound for the untruncated
+operator, as well as every natural finite spin compression. It is not a
+volume-uniform lattice theorem and makes no continuum claim.
 
 ## Representation-theoretic electric floor
 
@@ -52,6 +52,18 @@ gives, with eigenvalues in increasing order,
 
 This is uniform in `J`; it uses the simultaneous-conjugation triangle rule
 rather than a tensor-product reduction.
+
+Vacuum coupling does not invalidate this conclusion. For every
+two-dimensional subspace `S`, there is a nonzero `psi in S cap Omega^perp`,
+and (228.2)--(228.3) give
+
+\[
+ {\langle\psi,K_\lambda\psi\rangle\over\|\psi\|^2}\geq3. \tag{228.4a}
+\]
+
+Thus the maximum Rayleigh quotient on `S` is at least `3`, exactly as required
+by the second min--max level. The argument never asserts that `Q` reduces
+`K_lambda`.
 
 ## Exact comparison and Schur lemma
 
@@ -120,15 +132,78 @@ for every natural cutoff `J>=1/2`. The right side is positive exactly for
  \qquad(\lambda=1,\ J\geq1/2).                            \tag{228.10}
 \]
 
-Thus at the Cycle 226 benchmark coupling, shared `c` sectors do not create
-arbitrarily low Ritz gaps as the spin cutoff grows. The argument does not
-assert monotonicity of Ritz gaps, identify the untruncated gap, or remain
-coercive through a continuum scaling in which `lambda` leaves the interval
-`[0,12/7)`.
+## Passage to the full operator
+
+Write a vector in the coupled basis as
+
+\[
+ \psi=\sum_{a,b,c}\psi_{ab}^c\Phi_{ab}^c,
+ \qquad \tau_{ab}^c=3C_a+3C_b+C_c.
+\]
+
+The closed electric form is
+
+\[
+ t[\psi]=\sum_{a,b,c}\tau_{ab}^c|\psi_{ab}^c|^2,
+ \qquad
+ D(t)=\left\{\psi:\sum_{a,b,c}\tau_{ab}^c|\psi_{ab}^c|^2<\infty\right\}.
+                                                               \tag{228.11}
+\]
+
+Only finitely many admissible triples have `tau_(ab)^c<=R`: already
+`3C_a+3C_b<=R`. Hence `T` has compact resolvent. The magnetic multiplication
+operator `V_lambda=lambda(2-w_A-w_B)` is bounded, self-adjoint, and
+nonnegative, so the form sum `K_lambda=T+V_lambda` is self-adjoint,
+semibounded, and also has compact resolvent.
+
+The ranges of the nested projections `P_J` exhaust the coupled basis. For
+every `psi in D(t)`, coefficient truncation gives
+
+\[
+ \|(I-P_J)\psi\|^2+t[(I-P_J)\psi]\longrightarrow0.          \tag{228.12}
+\]
+
+Thus their union is a form core for `T`. Since `V_lambda` is bounded, the
+`T`-form norm and the `K_lambda`-form norm are equivalent, so the same union is
+a form core for `K_lambda`. The conforming Rayleigh--Ritz/min--max theorem then
+gives, for every fixed eigenvalue index `n`,
+
+\[
+ E_{n,J}\downarrow E_n(K_\lambda).                          \tag{228.13}
+\]
+
+Passing (228.4) to the limit gives `E_1(K_lambda)>=3`, while the fixed trial
+space in (228.5), which lies in every `P_J` for `J>=1/2`, gives directly
+`E_0(K_lambda)<=U_lambda`. Therefore
+
+\[
+ \boxed{\quad E_1(K_\lambda)-E_0(K_\lambda)\geq
+ {3+\sqrt{9+2\lambda^2}\over2}-2\lambda\quad}              \tag{228.14}
+\]
+
+for `0<=lambda<12/7`. At the benchmark coupling,
+
+\[
+ \boxed{\quad \operatorname{gap}(K_1)\geq
+ {\sqrt{11}-1\over2}=1.158312395\ldots>1.\quad}             \tag{228.15}
+\]
+
+In particular `E_0(K_1)<3<=E_1(K_1)`, so compact resolvent and the min--max
+count also show that the ground eigenvalue is simple. Equivalently, the
+one-dimensional Schur complement permits at most one eigenvalue below `3`;
+the vacuum/first-shell trial guarantees that one exists.
+
+Thus at the Cycle 226 benchmark coupling, shared `c` sectors do not create a
+low untruncated gap. This conclusion concerns only the fixed two-plaquette
+operator. It does not provide a volume-uniform estimate or remain coercive
+through a continuum scaling in which `lambda` leaves `[0,12/7)`.
 
 ## Trust boundary
 
 As in Cycle 226, (228.1) and the fundamental-character matrix element in
 (228.5) are representation-theoretic inputs. Everything after those inputs is
-an exact operator inequality, min--max argument, or one-dimensional Schur
-comparison; no floating-point calculation is used.
+an exact operator inequality, closed-form argument, min--max argument, or
+one-dimensional Schur comparison; no floating-point calculation is used. In
+particular, there is no flaw in the `E_1>=3` argument: its decisive content is
+the codimension-one inequality `K_lambda>=3Q`, not invariance of
+`Omega^perp` under `K_lambda`.

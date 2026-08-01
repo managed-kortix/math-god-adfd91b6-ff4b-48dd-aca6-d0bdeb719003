@@ -1,6 +1,107 @@
 # Notebook
 
-## Bounded scout cycle 228
+## Hostile rooted count cycle 232
+
+Allowing an `I` and a `J` event to share a center invalidates Cycle 231's
+unqualified step `number of events <= support size`. Forgetting the event type
+has fiber at most two, so `m<=2|supp C|`. With labelled overlap degree 191 and
+38 possible roots over a fixed point, a direct DFS bound gives
+`N_n<=(2*191^4)^n`; thus `c'=2661726722`. Taking
+`q'=6c'=15970360332`, the exact support constants 24 and 14 yield the explicit
+bulk endpoint `|lambda|<=1/(8*(q')^416)` and the bulk tilt window
+`0<theta<log(3/e)`. This is not an explicit gap theorem: Yarotsky's
+boundary-vector insertion creates a separate polymer species whose uniform
+activity/count constants and full-complement gap conversion have not been
+quantified. Full proof and separation:
+`cycle-232-independent-yarotsky-audit.md`.
+
+## Bulk activity/KP candidate audit cycle 231
+
+For the square-lattice `SU(2)` rotor with `C_2(j)=j(j+1)`, the verified cell
+bookkeeping is `c_G=3/4`, `Lambda_0={0,e_1,e_2}`, `r=3`, and `s=1`; hence the
+normalized plaquette perturbation has norm `b=4|lambda|`. The support
+cardinalities `7,12,37,27,27,19` and the resulting candidate overlap-degree
+bounds are also verified. The former polymer count is not: coincident `I` and
+`J` events invalidate the event-center injection used to claim that event count
+is at most support size. Thus the numerical polymer constant and coupling
+endpoint are retracted. Yarotsky Lemma 3's arithmetic remains valid only
+conditionally on a repaired count. Boundary insertion constants and the
+full-Hilbert-space gap conversion are unquantified, and no replacement endpoint
+is asserted within Cycle 231; Cycle 232 supplies a corrected bulk-only
+endpoint. Full audit:
+`cycle-231-explicit-yarotsky-threshold.md`.
+
+## Strong-coupling cycle 230
+
+Use links, not plaquettes, as the tensor sites. The electric Hamiltonian
+`T=sum_e C_e` has the unique constant product vacuum and the Peter--Weyl floor
+`T>=c_G(I-|Omega><Omega|)` uniformly in volume. The plaquette potential obeys
+`0<=1-w_p<=2`; after removing its scalar part the local perturbation has norm
+one and finite four-link range. Yarotsky's cluster theorem therefore applies
+to the actual infinite-dimensional link spaces after grouping the finitely
+many outgoing link orientations into each cell site, and yields some nonzero
+`lambda_Y(G,rho,d_s)` for
+which the ambient finite-volume ground state is unique and uniformly gapped.
+Gauge invariance makes the Haar Gauss space reducing, and the bare vacuum is
+physical, so the same bound holds after Gauss projection. This bypasses the
+Cycle 229 frustration obstruction: interacting plaquette terms are
+perturbations and need not have compatible local vacua.
+
+Citation alone blocks an explicit untruncated endpoint. Yarotsky's constants
+and the later unbounded Lie--Schwinger threshold are existential. The explicit
+`2^-17 Delta/(D J)` interval with gap `Delta/2` in
+Bravyi--DiVincenzo--Loss assumes finite-dimensional qubits and two-local graph
+edges, not four-link Wilson terms on `L^2(G)`. It is only an encoding benchmark
+unless a matching finite-dimensional two-local reduction is supplied. Cycle
+231 attempts to reconstruct Yarotsky's omitted constants for square-lattice
+`SU(2)`, but its polymer count fails and its boundary/gap constants remain
+open. The qualitative theorem and citation boundary are in
+`cycle-230-strong-coupling-product-gap.md`.
+
+## Main-funnel companion cycle 229
+
+The two-plaquette cover admits an exact bounded-operator ambient-link Knabe
+theorem without factorizing the physical Hilbert space. Embed each bounded
+gauge-invariant block in `K_Lambda=\bigotimes_e L^2(G)`, use the Haar Gauss
+projector `P_Lambda`, and suppose
+`h_B^2>=gamma h_B` and `{h_B,h_C}>=-eta(h_B+h_C)` for intersecting supports.
+Every bulk square-lattice two-plaquette block has exactly 22 other
+link-overlapping blocks, so `H^2>=(gamma-22eta)H`; since `[H,P_Lambda]=0`, the
+same gap bound holds on the physical common-kernel complement. The canonical
+weighted blocks sum exactly to `K_Lambda,lambda`, and seven times one block is
+the Cycle 226 simultaneous-conjugation operator at coupling `7lambda/4`.
+The theorem does not directly cover those blocks' unbounded electric Casimirs.
+For an unbounded pencil, the generalized overlap quotient and cutoff Schur
+protocol remain conditional on separate product/form-domain, closure,
+cutoff-tail, resolvent, and unbounded-overlap proofs. Independently, shifting
+each block by its own ground energy gives overlapping local
+kernels with zero intersection for `lambda>0`: positivity improvement makes
+each local ground state unique, while a shared-plaquette Wilson term prevents
+the product factorization that membership in both extended kernels forces.
+Thus the direct frustration-free Knabe/martingale/detectability architecture is
+obstructed even though Gauss projection itself transfers cleanly. Full theorem,
+constants, conditional unbounded-pencil protocol, and scaling audit:
+`cycle-229-gauss-projected-finite-size-coercivity.md`.
+
+## Hostile cycle 229
+
+Positive two-plaquette gaps do not imply a volume gap, even with unit
+projection interactions, a unique frustration-free vacuum, and shared-link
+sector compatibility. The exact open-chain family
+`H_N=n_1+sum_i(I-S_(i,i+1))/2` has every nonzero one/two-block gap at least
+`1-1/sqrt(2)`, while the Dirichlet--Neumann one-particle wave has Rayleigh
+quotient `1-cos(pi/(2N-1))=O(N^-2)`. The local antisymmetric state embeds as
+`(Phi_(1/2,0)^(1/2)-Phi_(0,1/2)^(1/2))/sqrt(2)` in the exact shared-link
+intertwiner sector, so local Gauss data alone do not remove the boundary mode;
+no full lattice-gauge realization of the glued qubit chain is asserted. This
+does not defeat standard Knabe: at patch size two its strict
+threshold is missed at equality, larger patch gaps are `O(m^-2)`, and the
+family has an open boundary pin. Nor is it a Kogut--Susskind counterexample:
+the actual electric term gives both moving-loop placements energy three and
+Cycle 228 proves `T>=3Q`. Full audit:
+`cycle-229-two-plaquette-hostile-family.md`.
+
+## Exact spectral scout cycle 228
 
 The exact simultaneous-conjugation labels give a cutoff-independent electric
 floor: `T>=3Q`. Indeed a state with only one nonzero plaquette spin has the
@@ -13,8 +114,14 @@ least `(3+sqrt(9+2lambda^2))/2-2lambda`, positive for `0<=lambda<12/7` and
 equal to `(sqrt(11)-1)/2>1` at `lambda=1`. A one-dimensional Feshbach--Schur
 complement independently shows that at most one Ritz value lies below the
 electric floor. Thus shared `c` sectors cannot generate arbitrarily low
-cutoff Ritz gaps at the benchmark coupling. This is a finite-model,
-cutoff-uniform comparison only, with no volume or continuum claim. Full proof:
+cutoff Ritz gaps at the benchmark coupling. The coupled-basis truncations form
+a form core, `T` and its bounded magnetic perturbation have compact resolvent,
+and conforming Ritz eigenvalues converge to the full eigenvalues. Therefore the
+same bound holds for the untruncated two-plaquette operator: at `lambda=1`,
+`gap(K_1)>=(sqrt(11)-1)/2=1.158312395...`. Vacuum coupling causes no flaw:
+every two-dimensional trial space contains a vector orthogonal to the vacuum,
+whose Rayleigh quotient is at least `3`. This remains a fixed finite-volume
+model result, with no volume-uniform or continuum claim. Full proof:
 `cycle-228-two-plaquette-uniform-ritz-bound.md`.
 
 ## Bounded scout cycle 226

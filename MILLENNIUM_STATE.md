@@ -1,8 +1,118 @@
 # millennium state — dedicated working memory
 
-- 2026-08-01: Yang--Mills bounded scout Cycle 228 proves an exact spin-cutoff
-  uniform statement for the Cycle 226 simultaneous-conjugation two-plaquette
-  model. The triangle rule and the positive shared Casimir give `T>=3Q`:
+- 2026-08-01: Yang--Mills hostile Cycle 232 repairs the rooted combinatorics
+  while allowing coincident `I/J` centers. Forgetting event type has fibers of
+  size at most two, hence a configuration with support size `n` has at most
+  `2n` labelled events. The event-overlap degree 191, 38 possible roots, and a
+  DFS-walk injection give `N_n<=(2*191^4)^n`, with
+  `c'=2661726722`. Taking `q'=6c'=15970360332` and exact event support constants
+  24 and 14 proves a bulk KP certificate at
+  `|lambda|<=1/(8*(q')^416)`, with bulk tilt
+  `0<theta<log(3/e)`. This is deliberately not called a gap theorem:
+  Yarotsky's arbitrary-boundary-vector insertion creates separate polymers,
+  and its uniform activity/count constants and conversion to a full-complement
+  gap have not been made explicit. See
+  `millennium-prize/yang-mills/cycle-232-independent-yarotsky-audit.md`.
+
+- 2026-08-01: Yang--Mills Cycle 233 audits Yarotsky's later KP-to-gap step.
+  Under a generic rooted count `N_n<=c^n` and activities
+  `|w(chi)|<=eta^|supp chi|`, tilted KP permits every
+  `theta<log(1/(2 e c eta))`; this is the precise cyclic-subspace Euclidean
+  exponent per time step. Applying it to Cycle 232's repaired
+  `c'=2*191^4`, `q'=6c'`, and `t_0=14 log q'` gives the explicit bulk/cyclic
+  physical gap lower bound `(log 3-1)/(56 log 15970360332)`, approximately
+  `7.495e-5`, at its conditional bulk coupling certificate. It is not an
+  extracted full-Hilbert bound. Yarotsky's final paragraph gives no definition
+  or activity/count estimate for the arbitrary-vector boundary polymers, no
+  `N`-uniform insertion radius, and no tilted separation of one-face from
+  two-face clusters. Cycle 233 states the exact missing marked-polymer lemma and
+  shows why a volume-dependent open radius would suffice; its constants cannot
+  be recovered from the published details. See
+  `millennium-prize/yang-mills/cycle-233-yarotsky-boundary-gap-audit.md`.
+
+- 2026-08-01: Hostile audit reclassifies Yang--Mills Cycle 231 as a bulk
+  activity/KP candidate audit, not an explicit threshold theorem. The verified
+  data are `C_2(j)=j(j+1)`, `c_G=3/4`, `Lambda_0={0,e_1,e_2}`, `r=3`, `s=1`,
+  normalized perturbation norm `b=4|lambda|`, support cardinalities
+  `|D|=7`, `|A+D|=12`, and difference-set cardinalities `37,27,27,19`.
+  Yarotsky Lemma 3's conditional arithmetic with generic support constants
+  `54,18` is also correct. The fatal flaw is the assertion that event count is
+  at most support cardinality: coincident `I` and `J` events invalidate the
+  center injection. Hence `c=72962`, `q=875544`, and the former numerical
+  coupling claim are unsupported. Boundary insertions, inserted-polymer
+  expansions, and the full-Hilbert-space gap remain unquantified; no alternative
+  numerical endpoint is asserted. See
+  `millennium-prize/yang-mills/cycle-231-explicit-yarotsky-threshold.md`.
+
+- 2026-08-01: Yang--Mills Cycle 230 identifies the correct rigorous
+  strong-coupling architecture. On the ambient link tensor product,
+  `T=sum_e C_e` has the constant product vacuum and a volume-independent
+  Peter--Weyl gap `c_G`; Wilson plaquette multiplication is bounded and
+  finite-range. Yarotsky's infinite-dimensional cluster theorem therefore
+  gives an existential nonzero interval `|lambda|<lambda_Y(G,rho,d_s)` with a
+  unique volume-uniformly gapped ambient ground state, after grouping outgoing
+  link orientations into unit-cell tensor sites. Gauge invariance makes the
+  Haar Gauss space reducing and the bare vacuum is physical, so restriction
+  preserves that gap.
+  This bypasses Cycle 229's frustration obstruction because no interacting
+  local Wilson vacuum is used. Hostile literature audit finds a quantitative
+  boundary: Yarotsky and the unbounded higher-dimensional Lie--Schwinger
+  theorem statements leave the small-coupling threshold existential. The explicit
+  Bravyi--DiVincenzo--Loss bound
+  `|epsilon|<=2^-17 Delta/(D J)`, gap `Delta/2`, assumes finite-dimensional
+  qubits and two-local edges and does not directly cover four-link Wilson terms
+  on `L^2(G)`. Thus citation alone gives only a qualitative untruncated
+  strong-coupling lattice gap; Cycle 231 records a failed attempt to make the
+  square-lattice `SU(2)` constants explicit. Neither result approaches the
+  continuum path `lambda=2/g^4 -> infinity`. See
+  `millennium-prize/yang-mills/cycle-230-strong-coupling-product-gap.md`.
+
+- 2026-08-01: Yang--Mills main-funnel Cycle 229 companion derives an exact
+  Gauss-projected local-to-global theorem for bounded adjacent two-plaquette
+  block operators and finds the canonical frustration obstruction. Work first
+  on the unconstrained link tensor product and compress only afterward by the
+  Haar Gauss projector. If bounded nonnegative `h_B` obey
+  `h_B^2>=gamma h_B` and every link-overlapping pair obeys
+  `{h_B,h_C}>=-eta(h_B+h_C)`, the exact bulk overlap degree 22 gives
+  `H^2>=(gamma-22eta)H` and the same physical common-kernel gap. This theorem
+  does not directly cover blocks containing the unbounded electric Casimirs;
+  the generalized overlap quotient and cutoff Schur protocol are conditional
+  there on separate domain, closure, tail, and unbounded-theorem proofs.
+  Weighted blocks sum exactly to Kogut--Susskind, and seven times the smallest
+  block is the Cycle 226 simultaneous-conjugation operator at coupling
+  `7lambda/4`. Independently, at positive magnetic coupling, locally
+  ground-energy-shifted overlapping blocks
+  have zero common kernel: positivity improvement makes each local ground state
+  unique, and the crossing Wilson term forbids the product factorization forced
+  by simultaneous membership. Thus the direct frustration-free
+  Knabe/martingale/detectability implementation cannot bound the global
+  vacuum-complement gap. This retires that implementation, not finite-size
+  criteria generally and not Yang--Mills. It is consistent with Cycle 228:
+  that cycle proves an isolated untruncated block gap, whereas the incompatible
+  shifted block kernels prevent the required frustration-free local-to-global
+  step. At the cover normalization Cycle 228 applies only when the lattice
+  parameter obeys `7lambda/4<12/7`, namely `lambda<48/49`, and it does not
+  certify the overlap anticommutator. See
+  `millennium-prize/yang-mills/cycle-229-gauss-projected-finite-size-coercivity.md`.
+
+- 2026-08-01: Yang--Mills hostile Cycle 229 gives an exact boundary-mode
+  obstruction to qualitative two-plaquette coercivity criteria. The
+  frustration-free unit-projector chain
+  `H_N=n_1+sum_i(I-S_(i,i+1))/2` has a unique vacuum and every nonzero one/two-
+  block gap at least `1-1/sqrt(2)`, but its exact Dirichlet--Neumann trial wave
+  has energy `1-cos(pi/(2N-1))=O(N^-2)`. Its antisymmetric local state is the
+  shared-link `c=1/2` combination of the two Cycle 226 first-shell placements,
+  so local Gauss data alone do not remove the mechanism; no full lattice-gauge
+  realization of the glued qubit chain is claimed. Standard Knabe is
+  not contradicted: its size-two strict threshold is met only at equality,
+  larger patch gaps are diffusive, and the example is boundary-pinned. The
+  actual Kogut--Susskind block also excludes this specific moving-loop attack
+  because `T>=3Q`; this does not prove a volume gap. A live criterion must
+  contain a strict quantitative patch/overlap threshold.
+
+- 2026-08-01: Yang--Mills exact spectral scout Cycle 228 proves an untruncated
+  gap bound for the Cycle 226 simultaneous-conjugation two-plaquette model.
+  The triangle rule and the positive shared Casimir give `T>=3Q`:
   one nonzero plaquette spin forces the same `c` and costs at least `3`, while
   two nonzero spins cost at least `9/2` even if `c=0`. Since the magnetic
   potential is positive, every natural cutoff has `E_1>=3`. The exact
@@ -12,8 +122,13 @@
   `0<=lambda<12/7` and equals `(sqrt(11)-1)/2>1` at `lambda=1`. The associated
   one-dimensional Schur complement shows at most one Ritz value below `3`.
   Therefore shared `c` sectors do not create arbitrarily low Ritz gaps at the
-  benchmark coupling. This is not a volume-uniform or continuum Yang--Mills
-  result.
+  benchmark coupling. The spin truncations exhaust a form core; the electric
+  operator has compact resolvent, its bounded magnetic perturbation retains
+  compact resolvent, and min--max levels converge. Hence the full operator at
+  `lambda=1` has gap at least `(sqrt(11)-1)/2=1.158312395...`. Vacuum coupling
+  does not spoil `E_1>=3`: every two-dimensional min--max space contains a
+  nonzero vector in `Omega^perp`. This is not a volume-uniform or continuum
+  Yang--Mills result.
 
 - 2026-08-01: Cycle 227 applies the six-lane rotation criterion after exact
   finite-mode Navier architectures close and the frozen Cycle 225 item 4 packet
@@ -417,8 +532,8 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Yang--Mills shared-link finite-size coercivity admission gate after
-  Cycle 227 rotation; do not infer volume or continuum gaps from finite Ritz data
+- **phase:** Yang--Mills strong-coupling boundary-insertion gate after the
+  frustration-free shared-link obstruction; bulk KP control is not a full gap
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -1250,7 +1365,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 228
+- **cycle:** 233
 - **announcements:** none
 
 ## immutable target list
