@@ -131,5 +131,11 @@ exceptional projection. But `P^3` is horizontal, and its first semiregularity
 obstruction is exactly the negative graph map, of rank `6` for `Gamma_I` and
 `8` for `Gamma_D`. These ranks are independent of every Pfaffian parameter;
 the rank-zero ideal, even after saturation by the proper-link open conditions,
-is the unit ideal. Weighted Pfaffian systems with nonhorizontal center class
-remain outside this bounded no-go.
+is the unit ideal. Cycle 205 closes the clean free-coordinate weighted
+continuation. If all generator and matrix-entry weights are coordinatewise
+effective, vanishing of one pure coordinate cube forces that coordinate vector
+onto a ray obtained by permuting `(0,1,1,1,1)`. Distinct rays necessarily
+produce pair-mixed cubic contamination; a common ray has zero trilinear
+coefficient. Hence `C(N)=kXYZ` has no solution for `k!=0`, including `k=1,3`.
+This does not cover effective divisor cones with relations or nonsimplicial
+effectivity.

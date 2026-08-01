@@ -363,8 +363,15 @@ remainders. The weighted enstrophy still needs a slab certificate. See
 
 The finite coefficient cube is replaced by continuous low-mode Fourier
 optimization. `cycle214_gradient.cpp` differentiates the complete dealiased 2D
-Euler midpoint trajectory with forward tangents, including terminal time, and
+Euler RK4 trajectory with forward tangents, including terminal time, and
 maximizes the endpoint velocity `L^3` ratio on the unit coefficient sphere.
 Random seeds start at `N=32`; ratios above `1.2` continue at `N=64`, with two as
 the candidate threshold. This is a floating high-variance screen only, not a
 Galerkin or full-PDE certificate. See `cycle-214-gradient-screen.md`.
+
+The frozen max-wave-four extension used 16 fixed starts and 12 RK4-gradient
+iterations each. Its best coarse endpoint was `1.1699662837490548` at
+`T=1.0547139450639225`; doubling steps changed it by about `1.98e-6`, but moving
+from `N=16` to `N=32` reduced the reevaluated ratio to about `1.0138`. The scout
+therefore fails spatial resolution and stops at its declared budget. No crossing,
+certificate, or PDE conclusion is claimed.

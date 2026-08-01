@@ -168,12 +168,13 @@ other.  The committed status is:
   `Sel(Q,A[7^infty])=Q_7/Z_7` and `Sha[7^infty]=0`.  BSTW then gives
   `v_7(L'(1,A)/(Omega_A R(A/Q)))=0`.  This uses no real rounding and does not
   depend on the Cycle 195 generator trust boundary.
-- For `D=-29023`, no rational generator, regulator, normalized Heegner index,
-  or rank-one BSD quotient has been computed.  The analytic-rank certificate
-  and qualitative Kolyvagin theorem do not supply these data.
-- For `D=-29023`, the present report does not evaluate the algebraic
-  leading-term quotient in (2), prove that it is a `7`-adic unit, or compute a
-  normalized Heegner/Kolyvagin index.  Its common valuation remains unknown.
+- For `D=-29023`, Cycle 215 combines Cycle 211's exact nonzero Kurihara value
+  at `113` with rank one and trivial torsion. The rank-one Kummer space and
+  Kim's residual Selmer group are both one-dimensional, so the Kummer
+  injection is surjective and `Sha[7^infty]=0`. BSTW then proves that the
+  normalized leading-term quotient in (2) is a `7`-adic unit. No rational
+  generator, regulator value, or normalized Heegner index is needed for this
+  valuation.
 
 The fact that `7` divides neither the torsion order nor the Tamagawa product
 only removes local factors from (2).  For `D=-1499`, vanishing comes from the

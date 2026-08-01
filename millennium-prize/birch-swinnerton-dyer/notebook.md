@@ -1,5 +1,19 @@
 # Notebook
 
+## `D=-29023` exact localization cycle 215
+
+The missing rational coordinates are not logically needed. Cycle 211 and
+Kim's theorem give a one-dimensional residual Selmer group whose localization
+at `113` is an isomorphism. Cycle 194 gives rank one, and exact torsion
+arithmetic gives `A(Q)_tors=0`, so the Kummer injection from
+`A(Q)/7A(Q)` is an injection between one-dimensional spaces and hence an
+isomorphism. Therefore every primitive rational generator has nonzero local
+image, `Sha[7^infty]=0`, and BSTW gives normalized leading-term valuation zero.
+An exact eclib coordinate search ran for 600 seconds without completing its
+Type-3 quartic range or finding a point; that bounded failure is irrelevant to
+the dimension certificate. See
+`cycle-215-D-29023-exact-kummer-localization.md`.
+
 ## Explicit Heegner trace cycle 209
 
 For the `D=-1499` twist, the field calculation is exact:

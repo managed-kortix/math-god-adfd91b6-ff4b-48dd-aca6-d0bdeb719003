@@ -156,6 +156,22 @@ class Cycle212Tests(unittest.TestCase):
         with self.assertRaises(ValueError):
             check_picard_box(entry, tiny, remainder, Fraction(1), Fraction(1), tiny)
 
+    def test_picard_rejects_bad_endpoint_keys_and_nonreal_remainder(self):
+        modes = retained_modes(1)
+        zero = {k: CInterval.point() for k in modes}
+        wide = {
+            k: CInterval(Interval(-1, 1), Interval(-1, 1)) for k in modes
+        }
+        missing = dict(wide)
+        missing.pop(next(iter(modes)))
+        with self.assertRaisesRegex(ValueError, "incompatible Picard data"):
+            check_picard_box(zero, wide, zero, Fraction(1), Fraction(1, 10), missing)
+
+        nonreal = dict(zero)
+        nonreal[(1, 0)] = CInterval.point(0, 1)
+        with self.assertRaisesRegex(ValueError, "reality"):
+            check_picard_box(zero, wide, nonreal, Fraction(1), Fraction(1, 10), wide)
+
     def test_full_manifest_fails_closed(self):
         manifest = {
             "format": "cycle212-component-v1",

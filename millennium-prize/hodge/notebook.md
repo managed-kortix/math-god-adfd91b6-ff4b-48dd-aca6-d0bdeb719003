@@ -1,5 +1,18 @@
 # Notebook
 
+## Cycle 205 clean weighted-Pfaffian no-go
+
+For free nonnegative coordinate weights, requiring every `5 x 5` Pfaffian
+entry class to be effective and the complete center cubic to equal `kXYZ`
+has no solution for any nonzero `k`. After sorting one coordinate vector,
+effectivity and parity give `x=q+2r+z+2u`; its pure-cubic coefficient expands
+as a polynomial with positive coefficients in every variable except the single
+free gap `p`. Hence a zero pure cube is exactly a multiple of a permutation of
+`(0,1,1,1,1)`. Two distinct such rays create positive `X^2Y` and `XY^2`
+contamination, while three coordinates on one ray have zero `XYZ` coefficient.
+This is an unbounded arithmetic no-go in the free coordinate cone, not for
+effective divisor cones with relations. No Hodge result is claimed.
+
 ## Cycle 203 first Ferrand doubles
 
 For either `G=Gamma_I` or `Gamma_diag(3,1,1)`, fixed-polynomial first Ferrand

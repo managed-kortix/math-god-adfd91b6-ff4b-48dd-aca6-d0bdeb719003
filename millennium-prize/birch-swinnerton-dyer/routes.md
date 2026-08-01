@@ -1,5 +1,16 @@
 # Routes
 
+Cycle 215 closes the seven-primary part for `D=-29023` without finding the
+huge rational generator. Cycle 211 gives
+`delta_tilde_113=-17186=6 mod 7`, so Kim identifies the residual Selmer group
+with the one-dimensional quotient `A(F_113)/7A(F_113)`. Cycle 194 proves rank
+one and PARI proves trivial rational torsion; hence `A(Q)/7A(Q)` is itself a
+one-dimensional subspace of that Selmer group and must equal it. The rational
+Kummer localization is therefore nonzero, `Sha[7^infty]=0`, and BSTW `corA'`
+gives `v_7(L'(1,A)/(Omega_A R(A/Q)))=0`. No floating point or rational
+generator coordinates enter this deduction. See
+`cycle-215-D-29023-exact-kummer-localization.md`.
+
 Cycle 209 closes the seven-primary part for `D=-1499` without real rounding.
 The exact one-prime Kurihara value at `29` is `-150=4 mod 7`, and the displayed
 rational point has nonzero image in `A(F_29)/7A(F_29)`. Under Kim's

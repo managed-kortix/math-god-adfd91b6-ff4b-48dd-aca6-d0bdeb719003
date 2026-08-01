@@ -1,5 +1,42 @@
 # millennium state — dedicated working memory
 
+- 2026-08-01: Cycle 215 closes the `D=-29023,p=7` localization gate without
+  rational generator coordinates. Cycle 211's exact value
+  `delta_tilde_113=-17186=6 mod 7` and Kim's theorem identify the residual
+  Selmer group with the one-dimensional quotient
+  `A(F_113)/7A(F_113)`. Cycle 194 proves rank one and exact torsion arithmetic
+  gives `A(Q)_tors=0`, so the Kummer injection from the one-dimensional space
+  `A(Q)/7A(Q)` is automatically surjective. Hence rational localization at
+  `113` is nonzero, `Sha(A/Q)[7^infty]=0`, and BSTW `corA'` gives
+  `v_7(L'(1,A)/(Omega_A R(A/Q)))=0`, subject to the recorded Kim/BSTW and
+  producer trust boundaries. A 600-second exact mwrank Type-3 quartic search
+  found no point and did not complete its coefficient range; this bounded
+  coordinate obstruction is irrelevant to the dimension certificate. No full
+  BSD result is claimed.
+
+- 2026-08-01: Cycle 215 proves the exact full-2D enclosure interface underlying
+  the Cycle 214 slab artifact. Closed non-strict cap faces are handled by an
+  outward strict perturbation and cooperative maximum-excess comparison, so
+  zero derivative and simultaneous first contact are not misused. The retained
+  inclusion is the full Picard map `A+[0,h](F(W)+R) subset W`, coupled to the
+  shell tube in one product bootstrap; explicit-shell endpoints follow from a
+  rational variation-of-constants bound. The hardened validator rejects
+  duplicate/noncanonical keys, checks reality on every Picard object, and now
+  includes shells 3--31 in endpoint analytic and cubature bounds. Exact
+  second-order midpoint cubature gives initial L3-cube `[3.5186454,3.5743551]`
+  and final cube `[3.2477649,3.3623115]`, certifying strict endpoint near-decay
+  for this datum. The artifact replays as `PASS FULL 2D PDE ENCLOSURE Cycle
+  215`; it proves no amplification and no 3D Millennium result.
+
+- 2026-08-01: The frozen Cycle 214 max-wave-four gradient scout completes
+  exactly 16 starts (PRNG seed 214), 12 RK4-gradient iterations each, with 80
+  real coefficient parameters. The best `N=16`, 64-step endpoint ratio is
+  `1.1699662837490548` at `T=1.0547139450639225`; 128 steps give
+  `1.1699682602545018`. Spatial reevaluation at `N=32` gives only
+  `1.0137912554951243` and `1.0137985433626824` at 64 and 128 steps. Time-step
+  behavior is stable at each grid, but the coarse optimum is not spatially
+  resolved. The frozen budget is exhausted with no ratio above two observed;
+  no crossing, certificate, or Navier--Stokes claim is made.
 - 2026-08-01: Cycle 214 sharpens the interval validator's Fourier shell
   constants by pairing `(p,q)` and `(q,p)` before absolute values. The exact
   multiplier contains `|q|^2-|p|^2`, so equal Euclidean shells cancel. If a
@@ -65,12 +102,12 @@
   denominators are seven-units and the exact minimal differential scale is
   one. Finite-field arithmetic gives `A(F_113)=Z/112`, with `G=(85,7)` of
   order 112 and `16G=(53,42)` of order seven, so the local quotient is explicit
-  and nonzero. This is not yet a global Kummer localization witness: no exact
-  rational generator for the `D=-29023` rank-one twist is known. The prior
-  quartic, four-cover, and eight-cover searches therefore remain the bounded
-  obstruction to copying Cycle 209's proof that the rational line spans the
-  local quotient. Kurihara nonvanishing is certified; `Sha[7]=0` is not yet
-  claimed.
+  and nonzero. No exact rational generator for the `D=-29023` rank-one twist is
+  known, and the prior quartic, four-cover, and eight-cover searches remain a
+  bounded coordinate obstruction. Cycle 215 later removes that obstruction
+  from the Selmer deduction by a dimension argument: the rank-one Kummer space
+  and Kim's one-dimensional Selmer group coincide, proving nonzero rational
+  localization and `Sha[7^infty]=0` without coordinates.
 - 2026-08-01: Cycle 210's bounded BSD scout excludes the 11-primary part for
   the same `D=-1499` twist. At the Kolyvagin prime `661`, exact PARI modular
   symbols give `delta_tilde_661=203746=4 mod 11`; the known rational point has
@@ -251,6 +288,18 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   empty on every bounded campaign. Additional line-quotient obstruction rows
   may increase rank but cannot change this conclusion. No Hodge result is
   claimed.
+- **Cycle 205 clean weighted-Pfaffian no-go:** in the free nonnegative
+  three-coordinate cone, impose coordinatewise effectivity on all five
+  Pfaffian generator classes and all ten matrix-entry classes. Sorting any one
+  coordinate vector and eliminating the strongest pair inequality expresses
+  its pure center-cubic coefficient as a nonnegative polynomial whose zero set
+  is exactly the five rays obtained from `(0,1,1,1,1)` by permutation. Two
+  distinct rays give nonzero pair-mixed cubic coefficients, while three
+  directions on one ray give zero `XYZ` coefficient. Thus the full identity
+  `C(N)=kXYZ` is impossible for every `k!=0`, including the graph targets `1`
+  and `3`; the Cycle 204 coefficient-3 near miss cannot be decontaminated in
+  this cone. Divisor cones with relations or nonsimplicial effectivity remain
+  outside the certificate. No Hodge result is claimed.
 - **Cycle 203 minimal Gorenstein-link gate:** fix `L=mP` and parameterize the
   smallest non-CI codimension-three Gorenstein centers by `5 x 5` alternating
   matrices with entries in `H^0(L)`. Containing `Gamma_I` or
@@ -265,8 +314,9 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independently of every matrix parameter. The rank-zero parameter ideal is
   already `(1)` and remains `(1)` after saturation by all proper-link open
   conditions. Thus homogeneous minimal Pfaffian linkage supplies exceptional
-  rank-zero sheaves but never a rank-zero obstruction map; weighted centers
-  with nonhorizontal universal class remain open. No Hodge result is claimed.
+  rank-zero sheaves but never a rank-zero obstruction map. Cycle 205 excludes
+  clean nonhorizontal weighted centers in a free nonnegative coordinate cone;
+  divisor cones with relations remain open. No Hodge result is claimed.
 - **Cycle 202A Fourier--Mukai obstruction transport:** the untwisted transform
   of a graph structure sheaf is a shifted sheaf on the annihilator threefold.
   Tensoring first by a relative ample line bundle makes it IT0, so its transform
@@ -1023,7 +1073,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 214
+- **cycle:** 215
 - **announcements:** none
 
 ## immutable target list

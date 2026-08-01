@@ -7,6 +7,7 @@ import argparse
 import json
 from dataclasses import dataclass
 from fractions import Fraction
+from functools import lru_cache
 from math import factorial, isqrt
 from pathlib import Path
 
@@ -84,6 +85,16 @@ class Interval:
 
 def as_interval(value) -> Interval:
     return value if isinstance(value, Interval) else Interval.point(value)
+
+
+def round_interval_outward(value: Interval, denominator_bits: int = 128) -> Interval:
+    """Replace an interval by a containing dyadic interval of fixed precision."""
+    if denominator_bits < 1:
+        raise ValueError("rounding precision must be positive")
+    scale = 1 << denominator_bits
+    lo = value.lo.numerator * scale // value.lo.denominator
+    hi = -((-value.hi.numerator * scale) // value.hi.denominator)
+    return Interval(Fraction(lo, scale), Fraction(hi, scale))
 
 
 @dataclass(frozen=True)
@@ -199,9 +210,20 @@ def check_reality(boxes: dict[Mode, CInterval]) -> None:
 
 
 def check_picard_box(entry, enclosure, remainder, viscosity, step, endpoint):
-    if step <= 0 or set(entry) != set(enclosure) or set(remainder) != set(enclosure):
+    viscosity = q(viscosity)
+    step = q(step)
+    if (
+        viscosity <= 0
+        or step <= 0
+        or set(entry) != set(enclosure)
+        or set(remainder) != set(enclosure)
+        or set(endpoint) != set(enclosure)
+    ):
         raise ValueError("incompatible Picard data")
+    check_reality(entry)
     check_reality(enclosure)
+    check_reality(remainder)
+    check_reality(endpoint)
     rhs = vorticity_rhs(enclosure, viscosity)
     derivative = {k: rhs[k] + remainder[k] for k in enclosure}
     time_interval = Interval(Fraction(0), step)
@@ -477,14 +499,45 @@ def low_mode_tail_remainder_bound(
     )
 
 
-def analytic_velocity_bounds(
-    omega: dict[Mode, CInterval], tail_cap: Fraction, tail_rho: Fraction, first_shell: int
-) -> tuple[Fraction, Fraction, Fraction]:
-    """Return retained-plus-tail bounds for |u|, ||grad u||, and one tail component."""
+@dataclass(frozen=True)
+class AnalyticVelocityBounds:
+    uniform: Fraction
+    gradient: Fraction
+    second_derivative: Fraction
+    tail_component: Fraction
+    explicit_shell_component: Fraction
+    geometric_cap_component: Fraction
+
+
+def analytic_velocity_shell_bounds(
+    omega: dict[Mode, CInterval],
+    explicit_shells: dict[int, Fraction],
+    tail_cap: Fraction,
+    tail_rho: Fraction,
+    first_shell: int,
+) -> AnalyticVelocityBounds:
+    """Coefficientwise Fourier bounds including every explicit unresolved shell.
+
+    A shell mass ``z_n=sum_|k|inf=n |omega_k|`` contributes at most ``z_n/n``
+    to each velocity component, ``z_n`` to each first coordinate derivative,
+    and ``n*z_n`` to each second coordinate derivative.  The same inequalities
+    are summed exactly for the geometric cap.
+    """
+    tail_cap, tail_rho = q(tail_cap), q(tail_rho)
+    explicit_shells = {shell: q(mass) for shell, mass in explicit_shells.items()}
     if (0, 0) in omega:
         raise ValueError("analytic norm input contains the zero mode")
+    if tail_cap < 0 or tail_rho <= 1 or first_shell < 1:
+        raise ValueError("invalid geometric cap parameters")
+    if explicit_shells and set(explicit_shells) != set(
+        range(1 + max(max(abs(k[0]), abs(k[1])) for k in omega), first_shell)
+    ):
+        raise ValueError("explicit shells must fill the gap between retained modes and the cap")
+    if any(value < 0 for value in explicit_shells.values()):
+        raise ValueError("explicit shell masses must be nonnegative")
     velocity = Fraction(0)
     gradient = Fraction(0)
+    second_derivative = Fraction(0)
     for k, coefficient in omega.items():
         magnitude = sqrt_interval(coefficient.re.square() + coefficient.im.square()).hi
         length = sqrt_interval(Interval.point(k[0] * k[0] + k[1] * k[1])).lo
@@ -492,15 +545,36 @@ def analytic_velocity_bounds(
             raise ValueError("failed to obtain a positive mode length bound")
         velocity += magnitude / length
         gradient += magnitude
+        second_derivative += max(abs(k[0]), abs(k[1])) * magnitude
+    explicit_velocity = sum((mass / shell for shell, mass in explicit_shells.items()), Fraction(0))
+    explicit_gradient = sum(explicit_shells.values(), Fraction(0))
+    explicit_second = sum((shell * mass for shell, mass in explicit_shells.items()), Fraction(0))
     shell_mass = geometric_tail_sum(tail_cap, tail_rho, first_shell)
-    tail_velocity = shell_mass / first_shell
-    return velocity + tail_velocity, gradient + shell_mass, tail_velocity
+    cap_velocity = shell_mass / first_shell
+    cap_second = geometric_tail_sum(tail_cap, tail_rho, first_shell, power=1)
+    return AnalyticVelocityBounds(
+        velocity + explicit_velocity + cap_velocity,
+        gradient + explicit_gradient + shell_mass,
+        second_derivative + explicit_second + cap_second,
+        explicit_velocity + cap_velocity,
+        explicit_velocity,
+        cap_velocity,
+    )
+
+
+def analytic_velocity_bounds(
+    omega: dict[Mode, CInterval], tail_cap: Fraction, tail_rho: Fraction, first_shell: int
+) -> tuple[Fraction, Fraction, Fraction]:
+    """Backward-compatible retained-plus-geometric-cap analytic bounds."""
+    bounds = analytic_velocity_shell_bounds(omega, {}, tail_cap, tail_rho, first_shell)
+    return bounds.uniform, bounds.gradient, bounds.tail_component
 
 
 PI_LO = Fraction(103993, 33102)
 PI_HI = Fraction(104348, 33215)
 
 
+@lru_cache(maxsize=None)
 def trig_interval(turns: Fraction, kind: str, degree: int = 18) -> Interval:
     """Enclose sin/cos(2*pi*turns) by Taylor arithmetic with rational remainder."""
     if kind not in ("sin", "cos") or degree < 2:
@@ -508,6 +582,18 @@ def trig_interval(turns: Fraction, kind: str, degree: int = 18) -> Interval:
     turns -= turns.numerator // turns.denominator
     if turns > Fraction(1, 2):
         turns -= 1
+    symmetry_sign = 1
+    if turns < 0:
+        turns = -turns
+        if kind == "sin":
+            symmetry_sign = -symmetry_sign
+    if turns > Fraction(1, 4):
+        turns = Fraction(1, 2) - turns
+        if kind == "cos":
+            symmetry_sign = -symmetry_sign
+    if turns > Fraction(1, 8):
+        turns = Fraction(1, 4) - turns
+        kind = "cos" if kind == "sin" else "sin"
     factor = 2 * turns
     if factor < 0:
         x = Interval(PI_HI * factor, PI_LO * factor)
@@ -524,7 +610,8 @@ def trig_interval(turns: Fraction, kind: str, degree: int = 18) -> Interval:
     last_exponent = max(range(parity, degree + 1, 2))
     remainder_order = last_exponent + 1
     radius = max(abs(x.lo), abs(x.hi)) ** remainder_order / factorial(remainder_order)
-    return result + Interval(-radius, radius)
+    result = result + Interval(-radius, radius)
+    return round_interval_outward(result if symmetry_sign == 1 else -result)
 
 
 def velocity_at_turns(omega: dict[Mode, CInterval], point: tuple[Fraction, Fraction], degree=18):
@@ -565,6 +652,51 @@ def l3_cubature(
     sqrt_two_upper = Fraction(665857, 470832)
     cell_radius = sqrt_two_upper * PI_HI / grid
     error = 3 * uniform_u * uniform_u * gradient_u * cell_radius
+    return Interval(max(Fraction(0), average.lo - error), average.hi + error)
+
+
+def l3_endpoint_bounds(
+    omega,
+    grid: int,
+    analytic: AnalyticVelocityBounds,
+    degree=18,
+):
+    """Exact midpoint bounds for the normalized endpoint integral of |u|^3.
+
+    The point intervals include the complete unresolved velocity component.
+    The midpoint remainder uses
+    ``|d_jj |u|^3| <= 6 U G_j^2 + 3 U^2 H_j`` and bounds each coordinate by
+    the aggregate ``gradient`` and ``second_derivative`` values.
+    """
+    if grid < 1 or min(
+        analytic.uniform,
+        analytic.gradient,
+        analytic.second_derivative,
+        analytic.tail_component,
+    ) < 0:
+        raise ValueError("invalid endpoint cubature parameters")
+    omega = {
+        k: CInterval(
+            round_interval_outward(value.re),
+            round_interval_outward(value.im),
+        )
+        for k, value in omega.items()
+    }
+    total = Interval.point(0)
+    tail = Interval(-analytic.tail_component, analytic.tail_component)
+    for a in range(grid):
+        for b in range(grid):
+            point = (Fraction(2 * a + 1, 2 * grid), Fraction(2 * b + 1, 2 * grid))
+            ux, uy = velocity_at_turns(omega, point, degree)
+            norm = sqrt_interval((ux + tail).square() + (uy + tail).square())
+            cube = round_interval_outward(norm * norm * norm)
+            total = round_interval_outward(total + cube)
+    average = total / (grid * grid)
+    one_coordinate_hessian = (
+        6 * analytic.uniform * analytic.gradient * analytic.gradient
+        + 3 * analytic.uniform * analytic.uniform * analytic.second_derivative
+    )
+    error = PI_HI * PI_HI * one_coordinate_hessian / (3 * grid * grid)
     return Interval(max(Fraction(0), average.lo - error), average.hi + error)
 
 

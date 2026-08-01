@@ -99,26 +99,42 @@ class DifferentiableEuler {
         double initial_norm = norm_and_derivative(state, tangent, initial_derivative);
         double h = terminal_time / steps;
         for (int step = 0; step < steps; ++step) {
-            std::vector<Complex> f;
-            std::vector<std::vector<Complex>> df;
-            rhs(state, tangent, f, df);
-            std::vector<Complex> midpoint(size_);
-            std::vector<std::vector<Complex>> dmid(
+            std::vector<Complex> k1, k2, k3, k4, stage(size_);
+            std::vector<std::vector<Complex>> dk1, dk2, dk3, dk4;
+            std::vector<std::vector<Complex>> dstage(
                 pcount, std::vector<Complex>(size_));
-            for (int i = 0; i < size_; ++i) midpoint[i] = state[i] + 0.5 * h * f[i];
+            rhs(state, tangent, k1, dk1);
+            for (int i = 0; i < size_; ++i) stage[i] = state[i] + 0.5 * h * k1[i];
             for (int p = 0; p < pcount; ++p) {
                 double dh = p == pcount - 1 ? 1.0 / steps : 0.0;
                 for (int i = 0; i < size_; ++i)
-                    dmid[p][i] = tangent[p][i] + 0.5 * (dh * f[i] + h * df[p][i]);
+                    dstage[p][i] = tangent[p][i] + 0.5 * (dh * k1[i] + h * dk1[p][i]);
             }
-            std::vector<Complex> fm;
-            std::vector<std::vector<Complex>> dfm;
-            rhs(midpoint, dmid, fm, dfm);
-            for (int i = 0; i < size_; ++i) state[i] += h * fm[i];
+            rhs(stage, dstage, k2, dk2);
+            for (int i = 0; i < size_; ++i) stage[i] = state[i] + 0.5 * h * k2[i];
             for (int p = 0; p < pcount; ++p) {
                 double dh = p == pcount - 1 ? 1.0 / steps : 0.0;
                 for (int i = 0; i < size_; ++i)
-                    tangent[p][i] += dh * fm[i] + h * dfm[p][i];
+                    dstage[p][i] = tangent[p][i] + 0.5 * (dh * k2[i] + h * dk2[p][i]);
+            }
+            rhs(stage, dstage, k3, dk3);
+            for (int i = 0; i < size_; ++i) stage[i] = state[i] + h * k3[i];
+            for (int p = 0; p < pcount; ++p) {
+                double dh = p == pcount - 1 ? 1.0 / steps : 0.0;
+                for (int i = 0; i < size_; ++i)
+                    dstage[p][i] = tangent[p][i] + dh * k3[i] + h * dk3[p][i];
+            }
+            rhs(stage, dstage, k4, dk4);
+            for (int i = 0; i < size_; ++i)
+                state[i] += h * (k1[i] + 2.0 * k2[i] + 2.0 * k3[i] + k4[i]) / 6.0;
+            for (int p = 0; p < pcount; ++p) {
+                double dh = p == pcount - 1 ? 1.0 / steps : 0.0;
+                for (int i = 0; i < size_; ++i) {
+                    Complex weighted = k1[i] + 2.0 * k2[i] + 2.0 * k3[i] + k4[i];
+                    Complex dweighted = dk1[p][i] + 2.0 * dk2[p][i]
+                        + 2.0 * dk3[p][i] + dk4[p][i];
+                    tangent[p][i] += (dh * weighted + h * dweighted) / 6.0;
+                }
             }
         }
 
@@ -390,11 +406,20 @@ int main(int argc, char **argv) try {
         double br = b.ratio64 > 0.0 ? b.ratio64 : b.ratio32;
         return ar > br;
     });
+    const Candidate &best = candidates.front();
+    Evaluation best_coarse_steps = coarse.evaluate(
+        best.coefficients, best.time, o.steps, false);
+    Evaluation best_coarse_half_step = coarse.evaluate(
+        best.coefficients, best.time, 2 * o.steps, false);
+    Evaluation best_fine_steps = fine.evaluate(
+        best.coefficients, best.time, o.steps, false);
+    Evaluation best_fine_half_step = fine.evaluate(
+        best.coefficients, best.time, 2 * o.steps, false);
     std::ofstream out(o.output);
     out << std::setprecision(17);
     out << "{\n  \"status\": \"FLOATING_AUTOMATIC_GRADIENT_SCREEN\",\n"
         << "  \"rigorous_interval_certificate\": false,\n"
-        << "  \"method\": {\"gradient\": \"forward_tangent_discrete_midpoint\","
+        << "  \"method\": {\"gradient\": \"forward_tangent_discrete_rk4\","
         << " \"n32\": " << o.n32 << ", \"n64\": " << o.n64
         << ", \"max_wave\": " << o.max_wave << ", \"parameters\": "
         << coarse.parameter_count() << ", \"steps32\": " << o.steps
@@ -403,6 +428,16 @@ int main(int argc, char **argv) try {
         << ", \"target\": " << o.target << "},\n"
         << "  \"counts\": {\"promoted\": " << promoted
         << ", \"crossed_target\": " << crossed << "},\n"
+        << "  \"best_resolution_checks\": {\"seed\": " << best.seed
+        << ", \"T\": " << best.time
+        << ", \"n" << o.n32 << "_steps" << o.steps << "\": "
+        << best_coarse_steps.ratio
+        << ", \"n" << o.n32 << "_steps" << 2 * o.steps << "\": "
+        << best_coarse_half_step.ratio
+        << ", \"n" << o.n64 << "_steps" << o.steps << "\": "
+        << best_fine_steps.ratio
+        << ", \"n" << o.n64 << "_steps" << 2 * o.steps << "\": "
+        << best_fine_half_step.ratio << "},\n"
         << "  \"candidates\": [\n";
     for (size_t i = 0; i < candidates.size(); ++i) {
         const Candidate &c = candidates[i];

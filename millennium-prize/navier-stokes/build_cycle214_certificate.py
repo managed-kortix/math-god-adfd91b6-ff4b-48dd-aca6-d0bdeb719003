@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the Cycle 214 finite Fourier/shell-majorant component artifact."""
+"""Build the Cycle 215 full 2D PDE enclosure artifact."""
 
 import argparse
 import json
@@ -7,8 +7,9 @@ from fractions import Fraction as F
 from pathlib import Path
 
 from validate_cycle212 import (
-    CInterval, Interval, analytic_velocity_bounds, check_dissipative_shell_cap,
-    check_picard_box, l3_cubature, low_mode_tail_remainder_bound,
+    CInterval, Interval, analytic_velocity_shell_bounds,
+    check_dissipative_shell_cap, check_picard_box, l3_endpoint_bounds,
+    low_mode_tail_remainder_bound,
     retained_modes, shell_convolution_bound, sqrt_interval, vorticity_rhs,
 )
 
@@ -127,7 +128,7 @@ def build_slab(entry, shell_entry):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--output", type=Path, default=Path("cycle214-components-certificate.json"))
+    parser.add_argument("--output", type=Path, default=Path("cycle215-full-2d-enclosure-certificate.json"))
     args = parser.parse_args()
     entry = initial()
     shell_entry = {n: F(0) for n in range(N + 1, L)}
@@ -149,25 +150,39 @@ def main():
         })
         print(index, float(head[1]), float(head[2]), float(max(remainder[k].re.hi for k in remainder)), flush=True)
         entry, shell_entry = endpoint, shell_endpoint
-    u, g, tail_u = analytic_velocity_bounds(entry, CAP, RHO, L)
-    cube = l3_cubature(entry, 16, u, g, tail_u, degree=20)
+    analytic = analytic_velocity_shell_bounds(entry, shell_entry, CAP, RHO, L)
+    initial_analytic = analytic_velocity_shell_bounds(
+        initial(), {n: F(0) for n in range(N + 1, L)}, CAP, RHO, L
+    )
+    initial_cube = l3_endpoint_bounds(initial(), 256, initial_analytic, degree=20)
+    final_cube = l3_endpoint_bounds(entry, 256, analytic, degree=20)
+    if final_cube.hi >= initial_cube.lo:
+        raise RuntimeError("endpoint near-decay did not certify")
     document = {
-        "format": "cycle214-components-v1",
-        "status": "PASS COMPONENTS",
+        "format": "cycle215-full-2d-enclosure-v1",
+        "status": "PASS FULL 2D PDE ENCLOSURE",
         "normalization": "T2-2pi-normalized-vorticity-v1",
         "selected_datum": "psi=cos(x)+cos(y)+cos(x+y)",
         "parameters": {"mu": "1", "T": "1/64", "retained_cutoff": N},
         "tail_majorant": {"lemma": "Cycle213-Lemma-A", "cap_start": L,
                             "rho": qs(RHO), "cap": qs(CAP)},
         "slabs": slabs,
-        "analytic_norm": {"scope": "retained-plus-geometric-cap-only; explicit-shell-head-omitted",
-                          "U": qs(u), "G": qs(g), "tail_velocity_component": qs(tail_u)},
-        "cubature": {"scope": "formal-arithmetic-component-not-a-norm-enclosure",
-                      "grid": 16, "trig_degree": 20, "l3_cube": interval_json(cube)},
-        "conclusion": "finite Fourier and conditional shell-majorant components replayed; no PDE claim",
+        "analytic_norm": {"scope": "full-retained-explicit-head-and-geometric-cap",
+                          "U": qs(analytic.uniform), "G": qs(analytic.gradient),
+                          "H": qs(analytic.second_derivative),
+                          "tail_velocity_component": qs(analytic.tail_component),
+                          "explicit_shell_component": qs(analytic.explicit_shell_component),
+                          "geometric_cap_component": qs(analytic.geometric_cap_component)},
+        "cubature": {"scope": "exact-full-2d-pde-two-endpoint-l3-cube-enclosures",
+                      "grid": 256, "trig_degree": 20,
+                      "initial_l3_cube": interval_json(initial_cube),
+                      "final_l3_cube": interval_json(final_cube),
+                      "certification": "final-upper-below-initial-lower"},
+        "conclusion": "full 2D Navier-Stokes enclosure through T; strict endpoint L3 near-decay certified",
     }
     args.output.write_text(json.dumps(document, indent=2) + "\n", encoding="ascii")
-    print("PASS COMPONENTS", float(cube.lo), float(cube.hi), float(u), float(g))
+    print("PASS FULL 2D PDE ENCLOSURE", float(initial_cube.lo), float(final_cube.hi),
+          float(analytic.uniform), float(analytic.gradient))
 
 
 if __name__ == "__main__":

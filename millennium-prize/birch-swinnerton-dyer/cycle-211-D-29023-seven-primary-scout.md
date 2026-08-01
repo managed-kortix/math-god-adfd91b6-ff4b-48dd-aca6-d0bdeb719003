@@ -80,21 +80,24 @@ has exact order `112`. Its class generates
  16G=(53,42),\qquad \operatorname{ord}(16G)=7.
 \]
 
-This is an exact nonzero local quotient witness. It is not yet the localization
-of a displayed rational Mordell--Weil point: no exact rational coordinates for
-a generator of `A(Q)` are presently available. Consequently this scout proves
-Kurihara nonvanishing and identifies the one-dimensional local target, but by
-itself does not prove that a rational Kummer class spans that target.
+This is an exact nonzero local quotient witness. It is not the reduction of a
+displayed rational Mordell--Weil point: no exact rational coordinates for a
+generator of `A(Q)` are presently available. Cycle 215 closes that apparent
+gap without coordinates: the rank-one rational Kummer space injects into
+Kim's one-dimensional Selmer space, so it equals that space and its
+localization necessarily spans this target.
 
 Under Kim's Cycle 209 theorem packet, the nonzero value gives the same
 one-dimensional residual Selmer conclusion for `A` after the curve-specific
 hypotheses are imported: the mod-seven representation is surjective, seven is
 good ordinary and nonanomalous (`#A(F_7)=5`), and the Tamagawa factors are
 seven-units. Since Cycle 194 certifies analytic rank one, Gross--Zagier--
-Kolyvagin supplies algebraic rank one and finite `Sha`. To conclude
-`Sha(A/Q)[7]=0` by the Cycle 209 localization argument, one still needs an
-exact global Kummer localization witness, or an equivalent theorem identifying
-the rational line with the displayed nonzero local line.
+Kolyvagin supplies algebraic rank one and finite `Sha`. Cycle 215 supplies the
+missing dimension argument and concludes
+`Sha(A/Q)[7^infty]=0`: rank one and trivial rational torsion make
+`A(Q)/7A(Q)` one-dimensional, while Kim makes the full residual Selmer group
+one-dimensional and its localization at `113` an isomorphism. Thus the Kummer
+injection is already surjective and no generator coordinates are needed.
 
 ## Reproduction
 
@@ -108,5 +111,5 @@ The exact producer takes several minutes. Its output must report
 `delta_tilde_113=-17186=6 mod 7`, the cyclic group of order `112`, and the
 order-seven point `(53,42)`.
 
-This is a successful bounded re-entry certificate for the Kurihara coordinate,
-not a full BSD result and not yet a complete seven-primary `Sha` certificate.
+This is the exact Kurihara input to Cycle 215's complete seven-primary `Sha`
+certificate, not a full BSD result.

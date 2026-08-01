@@ -29,10 +29,14 @@ class GradientScreenTest(unittest.TestCase):
             self.assertEqual(data["status"], "FLOATING_AUTOMATIC_GRADIENT_SCREEN")
             self.assertFalse(data["rigorous_interval_certificate"])
             self.assertEqual(data["method"]["gradient"],
-                             "forward_tangent_discrete_midpoint")
+                             "forward_tangent_discrete_rk4")
             self.assertEqual(data["method"]["parameters"], 8)
             self.assertEqual(len(data["candidates"]), 2)
             self.assertEqual(data["counts"]["promoted"], 2)
+            self.assertEqual(data["best_resolution_checks"]["seed"],
+                             data["candidates"][0]["seed"])
+            self.assertGreater(data["best_resolution_checks"]["n8_steps16"], 0.0)
+            self.assertGreater(data["best_resolution_checks"]["n8_steps32"], 0.0)
             for candidate in data["candidates"]:
                 self.assertGreater(candidate["ratio32"], 0.0)
                 self.assertGreater(candidate["ratio64"], 0.0)
