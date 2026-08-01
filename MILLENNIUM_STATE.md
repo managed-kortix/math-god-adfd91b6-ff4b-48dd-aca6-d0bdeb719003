@@ -1,5 +1,39 @@
 # millennium state — dedicated working memory
 
+- 2026-08-01: The bounded `D=-29023,p=7` re-entry scout succeeds on the
+  Kurihara coordinate at the second genuine Kolyvagin prime. The known value
+  at `ell=29` is zero, while exact Cycle 187 base-twist symbols at `ell=113`,
+  `eta=3`, give `delta_tilde_113=-17186=6 mod 7`; all completed symbol
+  denominators are seven-units and the exact minimal differential scale is
+  one. Finite-field arithmetic gives `A(F_113)=Z/112`, with `G=(85,7)` of
+  order 112 and `16G=(53,42)` of order seven, so the local quotient is explicit
+  and nonzero. This is not yet a global Kummer localization witness: no exact
+  rational generator for the `D=-29023` rank-one twist is known. The prior
+  quartic, four-cover, and eight-cover searches therefore remain the bounded
+  obstruction to copying Cycle 209's proof that the rational line spans the
+  local quotient. Kurihara nonvanishing is certified; `Sha[7]=0` is not yet
+  claimed.
+- 2026-08-01: Cycle 210's bounded BSD scout excludes the 11-primary part for
+  the same `D=-1499` twist. At the Kolyvagin prime `661`, exact PARI modular
+  symbols give `delta_tilde_661=203746=4 mod 11`; the known rational point has
+  nonzero image in the one-dimensional quotient `A(F_661)/11A(F_661)`. After
+  the audited good-ordinary, nonanomalous, residual-surjectivity, Tamagawa, and
+  Manin checks, Kim's theorems give `Sha(A/Q)[11^infty]=0`, and BSTW `corA'`
+  gives 11-adic valuation zero for the normalized leading term. The modular-
+  symbol producer and external theorems remain trust boundaries. This is one
+  additional primary result, not `Sha=1` or full BSD.
+- 2026-08-01: Cycle 210 portfolio discovery selects Navier--Stokes, not another
+  isolated BSD primary check. The promoted sufficient lemma is the universal
+  factor-two bound for mean-zero periodic `L^3` amplification. A proof transfers
+  to the periodic Clay existence alternative by endpoint
+  `L^infinity_t L^3_x` continuation, while one interval-certified embedded-2D
+  trajectory with amplification greater than two refutes the lemma globally.
+  The first finite campaign freezes five Fourier frequencies, coefficients in
+  `{-2,-1,0,1,2}`, seven effective viscosities, and times `j/16<=4`; acceptance
+  requires a full-PDE tail and cubature certificate, never a Galerkin crossing.
+  Finite-family exclusion retires only that box. Hodge's weighted-link audit is
+  the runner-up but currently offers another architecture no-go rather than a
+  replacement production family. No Navier or Millennium result is claimed.
 - 2026-08-01: Hostile re-audit retracts the claimed rigorous Cycle 209 Heegner
   index certificate. The field facts are exact: `K=Q(sqrt(-115))` has
   fundamental discriminant `-115`, class number two, and satisfies the Heegner
@@ -111,7 +145,8 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** portfolio discovery after BSD seven-part gate
+- **phase:** Navier--Stokes critical-`L^3` amplification gate after BSD
+  seven- and eleven-primary scouts
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -930,7 +965,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 210
+- **cycle:** 211
 - **announcements:** none
 
 ## immutable target list

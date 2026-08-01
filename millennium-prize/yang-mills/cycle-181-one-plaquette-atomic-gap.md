@@ -1,8 +1,9 @@
-# Cycle 181: a finite-cutoff gauge-invariant `SU(2)` plaquette block
+# Cycle 181: a certified half-line gauge-invariant `SU(2)` plaquette block
 
 This bounded scout instantiates the smallest lattice cell carrying a magnetic
 interaction: one oriented square, with four links and four vertices.  It gives
-a finite-cutoff atomic criterion and a reproducible finite-matrix benchmark.
+a finite-cutoff atomic criterion and, for its Jacobi closure, a reproducible
+half-line spectral certificate.
 It is a finite-volume toy model and does not address the continuum, uniform
 volume, or four-dimensional existence quantifiers in the Clay statement.
 
@@ -60,9 +61,9 @@ gives the character-basis Jacobi recurrence
 \tag{181.4}
 \]
 
-Equation (181.4) records the character-basis recurrence.  No claim about the
-spectrum, ground state, heat kernel, or gap of its half-line closure is used or
-certified below.
+Equation (181.4) defines a bounded-below Jacobi operator with compact resolvent:
+its diagonal tends to infinity and its off-diagonal part is bounded.  The first
+two eigenvalues and their gap are certified below.
 
 ## Finite atomic synthesis
 
@@ -77,9 +78,8 @@ matrix is
 \]
 
 This is the finite principal matrix `J_N` of dimension `N+1`.  The omitted
-boundary channel is `-(lambda/2)e_(N+1)<e_N,cdot>`, but its presence does not
-turn a certificate for `J_N` into an enclosure for any half-line eigenvalue.
-No cutoff convergence rate or infinite-operator error bar is claimed.
+boundary channel is `-(lambda/2)e_(N+1)<e_N,cdot>`.  The next section controls
+that channel rather than discarding it.
 
 Let `Omega_N=sum_(n=0)^N a_n e_n` be a normalized lowest eigenvector of `J_N`
 and put `xi_(n,N)=e_n-a_n Omega_N`.  For `I subset {0,...,N}`, the finite
@@ -118,23 +118,59 @@ Hence the finite atomic criterion is the generalized matrix inequality
 
 It tests every coherent linear combination of the chosen finite-cutoff atoms,
 unlike generatorwise diagonal correlators.  It is a statement about `J_N` only.
-Passing either this criterion or its gap to the half-line problem requires a
-separate tail theorem, which is not supplied here.
+The temporal criterion remains finite-dimensional; the spectral gap itself is
+passed to the half-line by the following separate tail theorem.
+
+## Exact Schur-complement tail enclosure
+
+Split the half-line at `N` and call the compression to
+`span(e_(N+1),e_(N+2),...)` by `T_N`.  Since `W>=0`,
+
+\[
+ T_N\ge (N+1)(N+3)I.                                      \tag{181.10}
+\]
+
+For rational `x<(N+1)(N+3)`, put
+`r_N(x)=<e_(N+1),(T_N-x)^(-1)e_(N+1)>`.  Operator monotonicity and the scalar
+Cauchy--Schwarz inequality give the exact rational bounds
+
+\[
+ {1\over (N+1)(N+3)+\lambda-x}\le r_N(x)
+ \le {1\over (N+1)(N+3)-x}.                              \tag{181.11}
+\]
+
+Indeed, the denominator on the left is
+`<e_(N+1),(T_N-x)e_(N+1)>`; the upper bound follows from (181.10).  The Schur
+complement of `T_N-x` is
+
+\[
+ S_N(x)=J_N-xI-{\lambda^2\over4}r_N(x)E_{NN}.             \tag{181.12}
+\]
+
+Because the tail block is positive, Sylvester inertia says that the number of
+half-line eigenvalues below `x` equals the negative inertia of `S_N(x)`.  On
+substituting the lower and upper bounds (181.11), matrix order brackets that
+inertia by two exact finite Jacobi Sturm counts.  Rational bisection therefore
+produces `L_k<=E_k(K_lambda)<=U_k`; subtraction gives
+`L_1-U_0<=E_1-E_0<=U_1-L_0`.  This is a genuine half-line enclosure, not a
+cutoff-drift estimate.
 
 ## Computable gap benchmark
 
 The script `verify_cycle181_one_plaquette_gap.py` forms `J_N` over
-`fractions.Fraction` and bisects its exact Sturm count.  Its output consists of
-closed rational intervals for `E_0(J_N)`, `E_1(J_N)`, and their difference;
-the displayed cutoff `N` is part of every run.  There are no floating-point
-eigenvalue, exponential, or cutoff-drift claims.  For example:
+`fractions.Fraction`, evaluates both Schur endpoint matrices, and bisects exact
+Sturm counts.  Its output gives closed rational intervals for both the finite
+Ritz values and the half-line `E_0`, `E_1`, and gap.  The displayed `N` controls
+the certificate width; it is not asserted to be the operator cutoff.  There are
+no floating-point eigenvalue or cutoff-drift claims.  For example:
 
 ```
 python3 millennium-prize/yang-mills/verify_cycle181_one_plaquette_gap.py \
-  --cutoff 32 --couplings 0 1/10 1 --tolerance 1/1000000000000
+  --cutoff 12 --couplings 1 --tolerance 1/10000000000
 python3 -O millennium-prize/yang-mills/test_cycle181_one_plaquette_gap.py
 ```
 
-The certificates concern only the named finite matrices.  They provide no
-volume-uniform lower bound, no half-line spectral enclosure, and no
-Osterwalder--Schrader continuum construction.
+At `lambda=1`, this certifies a positive half-line gap tightly around
+`3.11386381151`.  It remains one finite-volume plaquette model: the result gives
+no volume-uniform lower bound and no Osterwalder--Schrader continuum
+construction.

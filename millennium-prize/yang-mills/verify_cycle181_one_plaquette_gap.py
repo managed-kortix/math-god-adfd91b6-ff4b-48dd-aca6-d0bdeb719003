@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact finite-cutoff Sturm certificates for the SU(2) plaquette matrix."""
+"""Exact half-line and finite-cutoff certificates for the SU(2) plaquette."""
 
 import argparse
 from fractions import Fraction
@@ -84,6 +84,99 @@ def low_spectrum_intervals(coupling, cutoff, tolerance=Fraction(1, 10**12)):
     )
 
 
+def tail_resolvent_bounds(x, coupling, cutoff):
+    """Bound <e_(N+1),(T_N-x)^-1 e_(N+1)> by rational numbers."""
+    coupling = Fraction(coupling)
+    x = Fraction(x)
+    if coupling < 0:
+        raise ValueError("lambda must be nonnegative")
+    if cutoff < 0:
+        raise ValueError("cutoff N must be nonnegative")
+
+    first = cutoff + 1
+    first_diagonal = Fraction(first * (first + 2)) + coupling
+    tail_floor = Fraction(first * (first + 2))
+    if x >= tail_floor:
+        raise ValueError("spectral parameter must lie below the tail floor")
+    return Fraction(1, first_diagonal - x), Fraction(1, tail_floor - x)
+
+
+def half_line_count_bounds(x, coupling, cutoff):
+    """Enclose the number of half-line eigenvalues strictly below x."""
+    coupling = Fraction(coupling)
+    diagonal, off_diagonal = finite_matrix(coupling, cutoff)
+    if coupling == 0:
+        count = sturm_count(Fraction(x), diagonal, off_diagonal)
+        return count, count
+
+    resolvent_lower, resolvent_upper = tail_resolvent_bounds(x, coupling, cutoff)
+    boundary_square = (coupling / 2) ** 2
+
+    def schur_count(resolvent_bound):
+        adjusted = list(diagonal)
+        adjusted[-1] -= boundary_square * resolvent_bound
+        return sturm_count(Fraction(x), tuple(adjusted), off_diagonal)
+
+    return schur_count(resolvent_lower), schur_count(resolvent_upper)
+
+
+def half_line_eigenvalue_interval(
+    index, coupling, cutoff, tolerance=Fraction(1, 10**12)
+):
+    """Enclose a low half-line eigenvalue using the exact boundary Schur bounds."""
+    coupling = Fraction(coupling)
+    tolerance = Fraction(tolerance)
+    if not 0 <= index <= cutoff:
+        raise ValueError("eigenvalue index is outside the retained block")
+    if tolerance <= 0:
+        raise ValueError("tolerance must be positive")
+    if coupling == 0:
+        value = Fraction(index * (index + 2))
+        return value, value
+
+    diagonal, off_diagonal = finite_matrix(coupling, cutoff)
+    _, ritz_upper = eigenvalue_interval(index, diagonal, off_diagonal, tolerance / 4)
+    tail_floor = Fraction((cutoff + 1) * (cutoff + 3))
+    if ritz_upper >= tail_floor:
+        raise ValueError("retained Ritz value is not below the certified tail floor")
+
+    # Positivity gives a common certified lower bracket.  The two searches locate
+    # the count transition for the largest and smallest admissible Schur terms.
+    lower_good, lower_bad = Fraction(0), ritz_upper
+    if half_line_count_bounds(lower_good, coupling, cutoff)[1] > index:
+        raise ValueError("zero is not a certified lower eigenvalue bracket")
+    if half_line_count_bounds(lower_bad, coupling, cutoff)[0] <= index:
+        raise ValueError("Ritz bracket does not resolve the Schur count")
+    while lower_bad - lower_good > tolerance / 2:
+        midpoint = (lower_good + lower_bad) / 2
+        _, maximum_count = half_line_count_bounds(midpoint, coupling, cutoff)
+        if maximum_count <= index:
+            lower_good = midpoint
+        else:
+            lower_bad = midpoint
+
+    upper_bad, upper_good = Fraction(0), ritz_upper
+    while upper_good - upper_bad > tolerance / 2:
+        midpoint = (upper_bad + upper_good) / 2
+        minimum_count, _ = half_line_count_bounds(midpoint, coupling, cutoff)
+        if minimum_count > index:
+            upper_good = midpoint
+        else:
+            upper_bad = midpoint
+
+    return lower_good, upper_good
+
+
+def half_line_low_spectrum(coupling, cutoff, tolerance=Fraction(1, 10**12)):
+    """Enclose E0 and E1 of the half-line Jacobi operator."""
+    if cutoff < 1:
+        raise ValueError("cutoff N must be at least 1")
+    return tuple(
+        half_line_eigenvalue_interval(index, coupling, cutoff, tolerance)
+        for index in range(2)
+    )
+
+
 def subtract_intervals(left, right):
     """Enclose x-y for x in left and y in right."""
     return left[0] - right[1], left[1] - right[0]
@@ -117,15 +210,21 @@ def main():
     if any(coupling < 0 for coupling in args.couplings):
         parser.error("lambda values must be nonnegative")
 
-    print(f"finite matrix J_N: N={args.cutoff}, dimension={args.cutoff + 1}")
+    print(f"retained Jacobi block: N={args.cutoff}, dimension={args.cutoff + 1}")
     print(f"exact target width: {args.tolerance}")
     for coupling in args.couplings:
-        spectrum = low_spectrum_intervals(coupling, args.cutoff, args.tolerance)
+        finite_spectrum = low_spectrum_intervals(coupling, args.cutoff, args.tolerance)
+        finite_gap = subtract_intervals(finite_spectrum[1], finite_spectrum[0])
+        spectrum = half_line_low_spectrum(coupling, args.cutoff, args.tolerance)
         gap = subtract_intervals(spectrum[1], spectrum[0])
         print(f"lambda={coupling}")
-        print(f"  E0(J_N) in {format_interval(spectrum[0])}")
-        print(f"  E1(J_N) in {format_interval(spectrum[1])}")
-        print(f"  gap(J_N) in {format_interval(gap)}")
+        print(f"  E0(J_N) in {format_interval(finite_spectrum[0])}")
+        print(f"  E1(J_N) in {format_interval(finite_spectrum[1])}")
+        print(f"  gap(J_N) in {format_interval(finite_gap)}")
+        print("  half-line Schur certificate")
+        print(f"  E0(K_lambda) in {format_interval(spectrum[0])}")
+        print(f"  E1(K_lambda) in {format_interval(spectrum[1])}")
+        print(f"  gap in {format_interval(gap)}")
 
 
 if __name__ == "__main__":

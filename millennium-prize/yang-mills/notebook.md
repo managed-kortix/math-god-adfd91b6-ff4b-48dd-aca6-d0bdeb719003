@@ -8,10 +8,13 @@ dimensionless Kogut--Susskind block is the Jacobi matrix with diagonal
 `n(n+2)+lambda` and neighboring entries `-lambda/2`.  Centering these atoms on
 the interacting vacuum gives exact Gram matrix `I-aa*`; the temporal criterion
 on every finite coherent synthesis is the largest generalized eigenvalue of
-`M_I(t)c=q G_I c`.  A dependency-free Sturm benchmark computes the first gap,
-including `3` at `lambda=0` and `3.11386381151` at `lambda=1`.  This is an exact
-finite-block decomposition and reproducible toy benchmark, not a volume-uniform
-or continuum Yang--Mills gap.  Full derivation:
+`M_I(t)c=q G_I c`.  For the half-line closure, the omitted tail obeys
+`T_N>=(N+1)(N+3)`, while its boundary resolvent lies between the reciprocal of
+its exact boundary diagonal minus `x` and the reciprocal tail floor minus `x`.
+The resulting rank-one Schur complements and exact Sturm counts enclose `E_0`,
+`E_1`, and the gap.  They certify `3` at `lambda=0` and a gap tightly around
+`3.11386381151` at `lambda=1`.  This is a rigorous half-line toy benchmark, not
+a volume-uniform or continuum Yang--Mills gap.  Full derivation:
 `cycle-181-one-plaquette-atomic-gap.md`.
 
 ## Cycle 180 spectator norm

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the Cycle 205 three-row obstruction for symbolic R, Y, and nu."""
+"""Verify the Cycle 205 obstruction for symbolic scales and seed amplitudes."""
 
 from __future__ import annotations
 
@@ -7,6 +7,7 @@ import sympy as sp
 
 
 R, Y, nu = sp.symbols("R Y nu", real=True, nonzero=True)
+A, B = sp.symbols("A B", real=True)
 I = sp.I
 
 
@@ -59,14 +60,14 @@ def polarization_basis(wave):
 def seed_field():
     e2 = (0, 1, 0)
     e3 = (0, 0, 1)
-    field = {(x, 0, 0): e2 for x in (-6, -2, 2, 6)}
+    field = {(x, 0, 0): vector_scale(A, e2) for x in (-6, -2, 2, 6)}
     for wave, coefficient in {
         (-2, 1, 0): 1,
         (2, 1, 0): -1,
         (2, -1, 0): 1,
         (-2, -1, 0): -1,
     }.items():
-        field[wave] = vector_scale(coefficient, e3)
+        field[wave] = vector_scale(B * coefficient, e3)
     return field
 
 
@@ -180,12 +181,12 @@ def main():
     }
     substitution.update({
         variables["q1_o9_planar_re"]: c / 2,
-        variables["q1_o4_vertical_re"]: -R * c / 2,
-        variables["q1_o4_vertical_im"]: -R * a,
+        variables["q1_o4_vertical_re"]: -B * R * c / (2 * A),
+        variables["q1_o4_vertical_im"]: -B * R * a / A,
         variables["q1_o5_vertical_re"]: 0,
-        variables["q1_o5_vertical_im"]: R * (2 * a - b),
-        variables["q1_o6_vertical_re"]: R * c / 2,
-        variables["q1_o6_vertical_im"]: -R * a,
+        variables["q1_o5_vertical_im"]: B * R * (2 * a - b) / A,
+        variables["q1_o6_vertical_re"]: B * R * c / (2 * A),
+        variables["q1_o6_vertical_im"]: -B * R * a / A,
     })
     assert all(sp.cancel(expression.subs(substitution)) == 0 for expression in linear)
     active = [symbol for name, symbol in variables.items() if "_o3_" not in name and "_o7_" not in name]
@@ -208,21 +209,37 @@ def main():
     g = sp.factor(real_imag(second[second_wave][2], "real"))
 
     terminal_seed = navier(seed_field(), {(8, -1, 0)})[(8, -1, 0)][2]
+    assert sp.factor(terminal_seed - I * A * B * Y) == 0
     h = sp.factor(real_imag(reduced_first[(8, -1, 0)][2] - terminal_seed, "imag"))
 
-    expected_f = R**2 * Y * (c**2 - 4 * a**2) / 4
-    expected_g = Y**2 * (1 + R**2 * (8 * a * b - 3 * c**2 - 4 * a**2) / 4)
-    expected_h = R**2 * Y * (4 * a * b - c**2 - 4 * a**2) / 2
+    expected_f = B * R**2 * Y * (c**2 - 4 * a**2) / (4 * A)
+    expected_g = B * Y**2 * (4 * A**2 + R**2 * (8 * a * b - 3 * c**2 - 4 * a**2)) / 4
+    expected_h = B * R**2 * Y * (4 * a * b - c**2 - 4 * a**2) / (2 * A)
     assert sp.cancel(f - expected_f) == 0
     assert sp.cancel(g - expected_g) == 0
     assert sp.cancel(h - expected_h) == 0
-    certificate = sp.factor(f / Y + g / Y**2 - h / Y)
-    assert certificate == 1
+
+    certificate = sp.factor(A * Y * f + g - A * Y * h)
+    assert certificate == A**2 * B * Y**2
+
+    F = c**2 - 4 * a**2
+    G = 4 * A**2 + R**2 * (8 * a * b - 3 * c**2 - 4 * a**2)
+    H = 4 * a * b - c**2 - 4 * a**2
+    resultant_b = sp.factor(sp.resultant(B * G, B * H, b))
+    resultant_c = sp.factor(sp.resultant(B * F, resultant_b, c))
+    assert resultant_b == -4 * B**2 * a * (4 * A**2 + 4 * R**2 * a**2 - R**2 * c**2)
+    assert resultant_c == 256 * A**4 * B**6 * a**2
+    exceptional = sp.factor(A**2 * B * Y**2)
+    assert exceptional == A**2 * B * Y**2
 
     print("f =", f)
     print("g =", g)
     print("h =", h)
-    print("certificate: f/Y + g/Y^2 - h/Y =", certificate)
+    print("terminal seed derivative =", terminal_seed)
+    print("certificate: A*Y*f + g - A*Y*h =", certificate)
+    print("Res_b(B*G, B*H) =", resultant_b)
+    print("Res_c(B*F, Res_b) =", resultant_c)
+    print("certificate-exceptional locus: A*B*Y = 0")
 
 
 if __name__ == "__main__":
