@@ -17,6 +17,21 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-07-31: proved the complete rank-five order-five kernel theorem: all 24
+  suppressed kernels on five branch vertices satisfy the pentacyclic target
+  after arbitrary subdivision and rooted-tree attachment. The non-`K5-e`
+  verifier certifies 6282 physical rows / 4238 automorphism orbits, with 4030
+  tetrahedral orbits and 207 residual rows closed by 2062 strict rational
+  frontier witnesses, four exact K35 equality templates, and four owner-exact
+  K22 attached-`K4` structural closures. The formerly excluded all-odd `K5-e`
+  family is independently complete: all 19683 unit/residue states partition as
+  `18848+53+640+142`; the last 142 form 16 orbits with exact rational
+  certificates (fixture digest
+  `35523cc3be872181e2f343a7e21936f82b14e4a6968896fc2dcfd5f545da1ee1`).
+  Both fail-closed verifiers pass normal/`-O`, hostile audits returned ACCEPT,
+  and the paper now states the correct DNN-or-structural disjunction rather
+  than a false universal DNN excess-four claim. Thus 41 of the 118 rank-five
+  kernels (orders 2--5) are complete; orders 6--8 remain.
 - 2026-07-31: proved the complete low-order rank-five block theorem: all 17
   suppressed kernels on at most four branch vertices (`1+3+13`) satisfy the
   pentacyclic target after arbitrary subdivision and arbitrary rooted-tree
