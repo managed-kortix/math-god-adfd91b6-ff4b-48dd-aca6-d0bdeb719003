@@ -1,5 +1,17 @@
 # millennium state — dedicated working memory
 
+- 2026-08-01: Cycle 216 applies the Cycle 210 retirement rule to the exhausted
+  Navier max-wave-four screen. The Cycle 215 full-PDE enclosure pipeline is
+  retained as certification infrastructure, but a validator without a crossing
+  mechanism does not justify enlarging the frozen Fourier box or random budget.
+  The universal factor-two lemma remains open; only the low-mode screening
+  architecture is retired. A six-lane review promotes Hodge's fixed-degree
+  relative Chow production gate: freeze one explicit incidence stratum and new
+  non-graph support ansatz, then either certify rational equivalence, a rank-nine
+  PEL tangent minor, and a second-order lift, or certify the saturated unit ideal
+  for those conditions. This is a finitely falsifiable production checkpoint,
+  not the Hodge conjecture. No Millennium result is claimed.
+
 - 2026-08-01: Cycle 215 closes the `D=-29023,p=7` localization gate without
   rational generator coordinates. Cycle 211's exact value
   `delta_tilde_113=-17186=6 mod 7` and Kim's theorem identify the residual
@@ -240,8 +252,8 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Navier--Stokes critical-`L^3` amplification gate after BSD
-  seven- and eleven-primary scouts
+- **phase:** Hodge fixed-degree relative Chow production gate after retirement
+  of the exhausted Navier low-mode screens
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
