@@ -328,3 +328,19 @@ quantitatively enclosed 2D Euler inverse-transfer crossing, followed by a
 positive-viscosity inviscid-limit enclosure, remains the cleanest counterexample
 route. No crossing or Navier--Stokes result is claimed. See
 `cycle-212-l3-bound-mechanisms.md`.
+
+## Main-funnel cycle 213
+
+Disconnected packet superposition does not amplify transient `L^3` ratios when
+the claimed nonlinear decoupling is genuine. Cubic endpoint additivity makes
+the aggregate ratio the weighted cubic mean of the component ratios, hence no
+larger than the best packet; an explicit perturbative inequality gives the same
+no-go under asymptotic endpoint additivity and Kato-stability error. Endpoint
+`L^3` mild theory can transfer a finite approximate packet sum only after the
+cross-interaction residual is controlled, and its constants are not uniform on
+critical `L^3` balls. Dyadic frequency separation supplies only a square-function
+equivalence: critical high--low interactions need not be small. Therefore any
+successful many-scale breaker must exploit initial cancellation, final packet
+collision, or a sequential coupled cascade, exactly where decoupling fails.
+This retires gain-by-decoupled-replication, not the universal factor-two lemma.
+See `cycle-213-disconnected-packet-superposition-no-go.md`.

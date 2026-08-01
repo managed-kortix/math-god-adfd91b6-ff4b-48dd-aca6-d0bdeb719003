@@ -36,7 +36,10 @@ class ScreenTest(unittest.TestCase):
             self.assertEqual(data["status"], "NUMERICS_SCREENING_ONLY")
             self.assertFalse(data["rigorous_interval_certificate"])
             self.assertEqual(data["enumeration"]["raw_nonzero"], 5**10 - 1)
-            self.assertGreater(data["enumeration"]["nonlinear"], 0)
+            self.assertEqual(data["enumeration"]["primitive"], 9_706_576)
+            self.assertEqual(data["enumeration"]["canonical"], 152_621)
+            self.assertEqual(data["enumeration"]["nonlinear"], 152_586)
+            self.assertEqual(data["method"]["proxy_retained"], 8)
             self.assertEqual(len(data["coarse_ranked"]), 7)
             self.assertGreater(data["fine_reruns"][0]["max_ratio"], 0)
 

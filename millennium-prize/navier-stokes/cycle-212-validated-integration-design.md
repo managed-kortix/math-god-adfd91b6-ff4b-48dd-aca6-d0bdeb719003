@@ -141,15 +141,15 @@ closed rather than becoming an assumed tail bound.
 ## Reusable skeleton and present scope
 
 `validate_cycle212.py` implements exact rational interval arithmetic, complex
-Fourier convolution, Picard-box checks, analytic-tail conversion, directed
-Taylor trigonometric enclosures, and Lipschitz `L^3` cubature.  Its self-test
-uses exact manufactured boxes and returns `PASS COMPONENTS`.  The production
-manifest loader rejects `mode="full"` because the shell comparison replay is
-not implemented yet.
+Fourier convolution, Picard-box checks, the Cycle 213 dissipative shell
+comparison primitive, analytic-tail conversion, directed Taylor trigonometric
+enclosures, and Lipschitz `L^3` cubature.  Its self-test uses exact manufactured
+boxes and returns `PASS COMPONENTS`.  The production manifest loader still
+rejects `mode="full"` because no slab-specific shell comparison data has been
+published.
 
 Thus Cycle 212 fixes the exact theorem and certificate architecture and supplies
-reusable audited primitives.  It does **not** certify the selected trajectory,
-does not report an amplification ratio, and does not close either outcome of
-the Cycle 210 finite campaign.  The next mathematical implementation gate is
-item 3: an explicit dissipative shell comparison theorem whose constants are
-strong enough to survive interval replay.
+reusable audited primitives.  Cycle 213 supplies item 3's comparison lemma, but
+there is still no slab chain to replay.  The code does **not** certify the
+selected trajectory, does not report an amplification ratio, and does not close
+either outcome of the Cycle 210 finite campaign.

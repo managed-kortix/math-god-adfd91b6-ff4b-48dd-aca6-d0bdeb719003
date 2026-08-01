@@ -39,10 +39,16 @@ struct RankedCoeff {
 };
 
 struct RunResult {
-    double maximum = 0.0;
+    double maximum = 1.0;
     double time = 0.0;
     bool finite = true;
     std::array<double, 64> checkpoints{};
+};
+
+struct FourierPsiMode {
+    int kx;
+    int ky;
+    Complex coefficient;
 };
 
 static int gcd_coeff(const Coeff &c) {
@@ -146,6 +152,19 @@ class SpectralSolver {
         return omega;
     }
 
+    std::vector<Complex> initial(const std::vector<FourierPsiMode> &modes) const {
+        std::vector<Complex> omega(size_, 0.0);
+        for (const auto &mode : modes) {
+            int k2 = mode.kx * mode.kx + mode.ky * mode.ky;
+            if (!k2 || std::abs(mode.kx) >= n_ / 3 || std::abs(mode.ky) >= n_ / 3)
+                throw std::runtime_error("initial mode outside dealiased range");
+            omega[index(mode.kx, mode.ky)] += -double(k2 * size_) * mode.coefficient;
+            omega[index(-mode.kx, -mode.ky)] +=
+                -double(k2 * size_) * std::conj(mode.coefficient);
+        }
+        return omega;
+    }
+
     double l3(const std::vector<Complex> &omega) {
         velocity(omega, a_, b_);
         fft2(a_, true); fft2(b_, true);
@@ -178,7 +197,11 @@ class SpectralSolver {
     }
 
     RunResult run(const Coeff &coef, double mu, int steps_per_unit, double final_time) {
-        auto omega = initial(coef), previous = omega;
+        return run(initial(coef), mu, steps_per_unit, final_time, 1.0);
+    }
+
+    RunResult run(std::vector<Complex> omega, double mu, int steps_per_unit,
+                  double final_time, double time_direction) {
         std::vector<Complex> nl, old_nl;
         nonlinear_term(omega, nl);
         old_nl = nl;
@@ -191,22 +214,28 @@ class SpectralSolver {
         RunResult result;
         int cp = 0;
         for (int step = 1; step <= steps; ++step) {
-            previous = omega;
             for (int i = 0; i < size_; ++i) {
                 auto [kx, ky] = wave(i);
                 double e = std::exp(-mu * (kx * kx + ky * ky) * dt);
                 double e2 = e * e;
-                if (step == 1) omega[i] = e * (omega[i] + dt * nl[i]);
-                else omega[i] = e * omega[i] + dt * (1.5 * e * nl[i] - 0.5 * e2 * old_nl[i]);
+                if (step == 1) omega[i] = e * (omega[i] + time_direction * dt * nl[i]);
+                else omega[i] = e * omega[i] + time_direction * dt *
+                    (1.5 * e * nl[i] - 0.5 * e2 * old_nl[i]);
             }
             old_nl.swap(nl);
             nonlinear_term(omega, nl);
-            if (!std::isfinite(std::abs(omega[index(1, 0)]))) {
+            bool all_finite = true;
+            for (Complex z : omega) all_finite = all_finite && std::isfinite(std::abs(z));
+            if (!all_finite) {
                 result.finite = false;
                 break;
             }
             if (step % checkpoint_stride == 0 && cp < 64) {
                 double ratio = l3(omega) / initial_norm;
+                if (!std::isfinite(ratio)) {
+                    result.finite = false;
+                    break;
+                }
                 result.checkpoints[cp++] = ratio;
                 if (ratio > result.maximum) {
                     result.maximum = ratio;
@@ -318,13 +347,21 @@ static Options parse_options(int argc, char **argv) {
 
 int main(int argc, char **argv) try {
     Options options = parse_options(argc, argv);
+    if (options.proxy_keep <= 0 || options.candidate_keep <= 0 || options.fine_keep < 0)
+        throw std::runtime_error("retention counts must be positive (fine-keep may be zero)");
+    if (!(options.final_time > 0.0) || options.final_time > 4.0 ||
+        !std::isfinite(options.final_time))
+        throw std::runtime_error("final time must be finite and in (0, 4]");
     std::priority_queue<RankedCoeff> proxy;
-    uint64_t primitive = 0, canonical_count = 0, active = 0;
+    uint64_t raw_nonzero = 0, primitive = 0, canonical_count = 0, active = 0;
     constexpr uint64_t TOTAL = 9765625; // 5^10
-    for (uint64_t code = 1; code < TOTAL; ++code) {
+    for (uint64_t code = 0; code < TOTAL; ++code) {
         uint64_t q = code; Coeff c{};
         for (int i = 0; i < 10; ++i) { c[i] = int(q % 5) - 2; q /= 5; }
-        if (gcd_coeff(c) != 1) continue;
+        int g = gcd_coeff(c);
+        if (g == 0) continue;
+        ++raw_nonzero;
+        if (g != 1) continue;
         ++primitive;
         if (canonical(c) != c) continue;
         ++canonical_count;
@@ -385,10 +422,10 @@ int main(int argc, char **argv) try {
     f << std::setprecision(17);
     f << "{\n  \"status\": \"NUMERICS_SCREENING_ONLY\",\n"
       << "  \"rigorous_interval_certificate\": false,\n"
-      << "  \"enumeration\": {\"raw_nonzero\": " << TOTAL - 1
+      << "  \"enumeration\": {\"raw_nonzero\": " << raw_nonzero
       << ", \"primitive\": " << primitive << ", \"canonical\": " << canonical_count
       << ", \"nonlinear\": " << active << "},\n"
-      << "  \"method\": {\"proxy_retained\": " << options.proxy_keep
+      << "  \"method\": {\"proxy_retained\": " << proxies.size()
       << ", \"trajectory_candidates\": " << candidates.size()
       << ", \"coarse_n\": " << options.coarse_n
       << ", \"coarse_steps_per_unit\": " << options.coarse_steps_per_unit
@@ -406,9 +443,13 @@ int main(int argc, char **argv) try {
         f << "  ]";
     };
     write_records("coarse_ranked", coarse); f << ",\n"; write_records("fine_reruns", fine);
-    const Record &best_record = fine.empty() ? coarse.front() : fine.front();
+    auto observed_over_two = [](const std::vector<Record> &records) {
+        return std::any_of(records.begin(), records.end(), [](const Record &record) {
+            return record.run.finite && record.run.maximum > 2.0;
+        });
+    };
     f << ",\n  \"observed_over_two\": "
-      << (best_record.run.finite && best_record.run.maximum > 2.0 ? "true" : "false")
+      << (observed_over_two(coarse) || observed_over_two(fine) ? "true" : "false")
       << "\n}\n";
     std::cout << options.output << "\n";
     return 0;

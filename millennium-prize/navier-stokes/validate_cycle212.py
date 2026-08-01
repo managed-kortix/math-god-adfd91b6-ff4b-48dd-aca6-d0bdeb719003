@@ -219,6 +219,175 @@ def geometric_tail_sum(cap: Fraction, rho: Fraction, first_shell: int, power: in
     return cap * r**first_shell * (first_shell - (first_shell - 1) * r) / (1 - r) ** 2
 
 
+def _finite_geometric_moments(x: Fraction, first: int, last: int) -> tuple[Fraction, Fraction]:
+    """Return sum x^a and sum a*x^a on an inclusive finite integer range."""
+    if first > last:
+        return Fraction(0), Fraction(0)
+    mass = Fraction(0)
+    moment = Fraction(0)
+    power = x**first
+    for index in range(first, last + 1):
+        mass += power
+        moment += index * power
+        power *= x
+    return mass, moment
+
+
+def _tail_pair_moment(x: Fraction, cap_start: int, target_shell: int) -> Fraction:
+    """Bound sum b*x^(a+b) over a,b>=cap_start and a+b>=target_shell."""
+    m = max(0, target_shell - 2 * cap_start)
+    one_minus_x = 1 - x
+    sum_0 = x**m / one_minus_x
+    sum_1 = x**m * (Fraction(m, 1) / one_minus_x + x / one_minus_x**2)
+    sum_2 = x**m * (
+        Fraction(m * m, 1) / one_minus_x
+        + 2 * m * x / one_minus_x**2
+        + x * (1 + x) / one_minus_x**3
+    )
+    # For s=(a-L)+(b-L), sum over the s+1 pairs of b is
+    # (s+1)(s+2L)/2.
+    return x ** (2 * cap_start) * (
+        sum_2 + (2 * cap_start + 1) * sum_1 + 2 * cap_start * sum_0
+    ) / 2
+
+
+def shell_convolution_bound(
+    target_shell: int,
+    head: dict[int, Fraction],
+    cap: Fraction,
+    rho: Fraction,
+    cap_start: int,
+    unresolved_cutoff: int = 0,
+) -> Fraction:
+    """Rational l-infinity shell bound for the vorticity convolution.
+
+    ``head[a]`` bounds the full mass on shell ``a`` for 1 <= a < cap_start,
+    while the remaining masses obey z_a <= cap*rho^-a.  If
+    ``unresolved_cutoff`` is positive, only pairs with at least one shell above
+    that cutoff are included; this gives a retained-mode remainder bound.
+    """
+    if target_shell < 1 or cap < 0 or rho <= 1 or cap_start < 1:
+        raise ValueError("invalid shell convolution parameters")
+    if set(head) != set(range(1, cap_start)):
+        raise ValueError("shell head must contain exactly 1,...,cap_start-1")
+    if any(value < 0 for value in head.values()):
+        raise ValueError("shell masses must be nonnegative")
+    if unresolved_cutoff < 0 or unresolved_cutoff >= cap_start:
+        raise ValueError("unresolved cutoff must lie below cap_start")
+
+    x = 1 / rho
+    result = Fraction(0)
+
+    # Ordered head-head pairs.  The factor 2 follows from
+    # |p^perp.q|/|p|_2^2 <= 2 |q|_infinity/|p|_infinity.
+    for a, mass_a in head.items():
+        for b, mass_b in head.items():
+            if abs(a - b) <= target_shell <= a + b:
+                if unresolved_cutoff and a <= unresolved_cutoff and b <= unresolved_cutoff:
+                    continue
+                result += 2 * Fraction(b, a) * mass_a * mass_b
+
+    # One head and one capped shell.  Triangle geometry restricts the capped
+    # index to a finite interval.  In the reverse ordering use 1/a <= 1/L.
+    for h, mass_h in head.items():
+        first = max(cap_start, abs(target_shell - h))
+        last = target_shell + h
+        tail_mass, tail_moment = _finite_geometric_moments(x, first, last)
+        result += 2 * mass_h * cap * (
+            tail_moment / h + Fraction(h, cap_start) * tail_mass
+        )
+
+    # For two capped shells, discard only |a-b|<=n and retain a+b>=n.
+    # This leaves a closed rational geometric second moment.
+    result += Fraction(2, cap_start) * cap * cap * _tail_pair_moment(
+        x, cap_start, target_shell
+    )
+    return result
+
+
+@dataclass(frozen=True)
+class ShellComparisonCertificate:
+    finite_margins: tuple[Fraction, ...]
+    ray_coefficients: tuple[Fraction, Fraction, Fraction]
+
+
+def check_dissipative_shell_cap(
+    head: dict[int, Fraction],
+    cap: Fraction,
+    rho: Fraction,
+    cap_start: int,
+    viscosity: Fraction,
+    initial_shells: dict[int, Fraction] | None = None,
+) -> ShellComparisonCertificate:
+    """Verify inward inequalities for every face z_n=cap*rho^-n, n>=L.
+
+    ``initial_shells`` is either omitted when domination is inherited from the
+    preceding slab or is the finite list of nonzero initial tail shells; omitted
+    indices in that list are asserted to have zero mass.
+    """
+    viscosity = q(viscosity)
+    cap = q(cap)
+    rho = q(rho)
+    head = {index: q(value) for index, value in head.items()}
+    if viscosity <= 0 or cap <= 0:
+        raise ValueError("positive viscosity and tail cap required")
+    if initial_shells is not None:
+        for index, value in initial_shells.items():
+            value = q(value)
+            if index < cap_start or value < 0 or value > cap * rho ** (-index):
+                raise ValueError(f"initial tail domination fails at shell {index}")
+
+    x = 1 / rho
+    margins = []
+    for index in range(cap_start, 2 * cap_start):
+        face = cap * x**index
+        margin = viscosity * index * index * face - shell_convolution_bound(
+            index, head, cap, rho, cap_start
+        )
+        if margin < 0:
+            raise ValueError(f"tail face is not inward at shell {index}")
+        margins.append(margin)
+
+    # From n=2L onward, the normalized convolution bound is exactly a quadratic
+    # in n.  Recover it at three rational points and prove its margin is
+    # nonnegative on the complete real ray (hence on every integer shell).
+    ray_start = 2 * cap_start
+    normalized = []
+    for index in range(ray_start, ray_start + 3):
+        bound = shell_convolution_bound(index, head, cap, rho, cap_start)
+        normalized.append(bound / (cap * x**index))
+    q2 = (normalized[2] - 2 * normalized[1] + normalized[0]) / 2
+    q1 = normalized[1] - normalized[0] - q2
+    q0 = normalized[0]
+    a = viscosity - q2
+    b = 2 * viscosity * ray_start - q1
+    c = viscosity * ray_start * ray_start - q0
+    if a < 0 or c < 0:
+        raise ValueError("dissipative tail ray has a negative leading or endpoint margin")
+    if a == 0:
+        if b < 0:
+            raise ValueError("dissipative tail ray decreases without bound")
+    elif b < 0 and 4 * a * c < b * b:
+        raise ValueError("dissipative tail ray has a negative interior minimum")
+    return ShellComparisonCertificate(tuple(margins), (a, b, c))
+
+
+def low_mode_tail_remainder_bound(
+    target_shell: int,
+    retained_cutoff: int,
+    head: dict[int, Fraction],
+    cap: Fraction,
+    rho: Fraction,
+    cap_start: int,
+) -> Fraction:
+    """Bound one retained coefficient's omitted nonlinear remainder in modulus."""
+    if target_shell > retained_cutoff:
+        raise ValueError("target shell is not retained")
+    return shell_convolution_bound(
+        target_shell, head, cap, rho, cap_start, unresolved_cutoff=retained_cutoff
+    )
+
+
 def analytic_velocity_bounds(
     omega: dict[Mode, CInterval], tail_cap: Fraction, tail_rho: Fraction, first_shell: int
 ) -> tuple[Fraction, Fraction, Fraction]:
@@ -325,7 +494,7 @@ def load_manifest(path: Path):
     if data["normalization"] != "T2-2pi-normalized-vorticity-v1":
         raise ValueError("normalization mismatch")
     if data["mode"] == "full":
-        raise ValueError("full mode unavailable: shell comparison replay is not implemented")
+        raise ValueError("full mode unavailable: production shell comparison data is absent")
     if data["mode"] != "components":
         raise ValueError("mode must be components or full")
     return data
@@ -388,7 +557,7 @@ def main():
         f"(lower={cube.lo}, upper numerator bits={cube.hi.numerator.bit_length()}, "
         f"upper denominator bits={cube.hi.denominator.bit_length()})"
     )
-    print("NO PDE OR AMPLIFICATION CLAIM: full shell comparison replay is unavailable")
+    print("NO PDE OR AMPLIFICATION CLAIM: production shell comparison data is absent")
 
 
 if __name__ == "__main__":

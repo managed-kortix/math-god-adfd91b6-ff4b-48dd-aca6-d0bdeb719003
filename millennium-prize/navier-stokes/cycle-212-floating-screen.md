@@ -6,6 +6,12 @@ This artifact is **numerics screening only**. It is not a directed interval
 PDE enclosure, a finite-family exclusion, a factor-two falsifier, a Navier--
 Stokes regularity result, or a Millennium result.
 
+The implemented symmetry quotient uses only transformations that preserve the
+frozen coefficient cube: translations by multiples of `pi/2`, central
+inversion, and coordinate interchange. Continuous translations, arbitrary
+rotations, and amplitude rescalings are not quotient operations on this finite
+campaign.
+
 `cycle212_screen.cpp` enumerates the frozen ten integer coefficients, removes
 nonprimitive scalar duplicates, and canonicalizes the finite symmetries coming
 from quarter-period translations, central inversion, and coordinate interchange.
@@ -27,6 +33,13 @@ stepping. It samples the full velocity `L^3` norm on the declared `j/16` grid.
 The best coarse runs are repeated at higher spatial and temporal resolution.
 Agreement between reruns is only a floating convergence check and must not be
 reported as an interval bound.
+
+Audit checks confirm the declared normalization: the stored Fourier arrays use
+the FFT's unnormalized forward convention, so initial coefficients carry the
+factor `N^2`, inverse FFT evaluation recovers the physical velocity, and the
+grid average computes normalized-Haar `L^3`. The nonlinear sign implements
+`omega_t=-u dot grad(omega)+mu Delta omega`, and the first integrating-factor
+Euler step followed by integrating-factor AB2 has the stated heat factors.
 
 ## Reproduction
 

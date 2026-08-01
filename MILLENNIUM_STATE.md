@@ -1,5 +1,17 @@
 # millennium state — dedicated working memory
 
+- 2026-08-01: Cycle 213 gives a rigorous no-go for defeating the periodic
+  Navier--Stokes factor-two `L^3` gate by nonlinearly decoupled packet
+  replication. Under endpoint cubic additivity and small exact-solution error,
+  the total amplification is bounded by the cubic weighted maximum of the
+  packet amplifications; hence arbitrarily many packets below two cannot cross
+  two by a fixed margin. Endpoint Kato theory preserves this conclusion when a
+  finite approximate sum has small cross-interaction residual, but supplies no
+  uniform decoupling on critical `L^3` balls. Frequency separation alone gives
+  only Littlewood--Paley equivalence, while critical paraproducts need not be
+  small. Initial cancellation, final collision, or a sequential coupled
+  cascade remain loopholes precisely because they abandon nonlinear
+  decoupling. No factor-two theorem or counterexample is claimed.
 - 2026-08-01: Cycle 212 audits the universal periodic Navier--Stokes factor-two
   `L^3` gate. The exact velocity identity leaves an unsigned pressure term;
   Calderon--Zygmund and weighted Holder reduce it to `int|u|^5`, whose 3D
@@ -1001,7 +1013,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 212
+- **cycle:** 213
 - **announcements:** none
 
 ## immutable target list

@@ -24,3 +24,8 @@ Biot--Savart constant. In 2D the heat--Duhamel estimate does certify a local
 factor-two interval of size `nu^5/(24 K_2||u_0||_3)^6`, after fixing a periodic
 heat--Leray constant. The Cycle 211 Euler inverse-transfer breaker remains the
 preferred falsifier route. See `cycle-212-l3-bound-mechanisms.md`.
+
+Cycle 213 replaces the proxy-only finite-family shortlist by reduced-resolution
+integration of all 152586 nonlinear canonical rows. Its declared floating
+pipeline has maximum `1.0132639341307961`; this is explicitly not an interval
+claim. See `cycle-213-finite-family-screen.md`.
