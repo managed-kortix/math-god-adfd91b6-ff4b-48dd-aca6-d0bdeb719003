@@ -1,5 +1,53 @@
 # Routes
 
+## Cycle 235 endpoint completeness: terminal BR235 PASS
+
+Yarotsky's exact sector projectors leave no unrepresented endpoint channel. At
+the initial face a nonzero term obeys
+`J_1=A_- setminus Lambda_(I_1)`; the final range is supported in
+`tilde Lambda_(I_N) union J_N`. Thus every non-vacuum endpoint leg lies in an
+`I` or `J` event support. Bare classical propagation with all `I_k` empty is
+exactly an overlapping string of represented `J` events. This removes the sole
+condition in the augmented-boundary-graph theorem and records terminal
+`BR235 PASS`, preserving the explicit finite-lattice strong-coupling gap. It
+does not pass `CA235` or advance a continuum Clay quantifier. See
+`cycle-235-endpoint-completeness-audit.md`.
+
+## Cycle 235 augmented boundary graph
+
+The repaired boundary construction adjoins one vertex for each occupied time
+endpoint to the graph of ordinary bulk connected components and uses the
+connected components of that augmented graph as the polymer objects. It never
+fuses merely because no global vacuum cut exists. Each endpoint vertex carries
+the complete finite-volume endpoint vector, so the tensor-network contraction
+factorizes over augmented components without factorizing an entangled endpoint
+over spatial subsets. The exact configuration partition supports summed
+operator-valued activities. The Cycle 232 rooted estimate then gives a marked
+activity bound uniform in slab length. Joint logarithmic terms either contain
+a genuine two-face augmented component or connect separate face marks through
+an incompatibility chain, and in both cases their multiplicity-charged support
+is at least the slab length. Marked KP and the open-ball spectral argument
+restore the explicit finite-volume ambient and Gauss-physical gap
+`(log(3)-1)/(56 log(15970360332))` at the Cycle 232 coupling endpoint, provided
+the labelled expansion represents every non-vacuum endpoint transmission leg.
+An omitted bare channel is the exact obstruction and withdraws the gap claim.
+The result remains a strong-coupling lattice theorem, not a continuum
+Yang--Mills mass-gap result. See `cycle-235-augmented-boundary-graph.md`.
+
+## Cycle 235 boundary/continuum decision gate
+
+Further direct boundary repair receives exactly one frozen
+temporal-renewal checkpoint. `BR235` must prove an exact configuration identity,
+summed activities for entangled endpoint sectors, an `N`-uniform insertion
+radius with the bulk tilt, separate one/two-face decay, and hostilely audited
+full-Hilbert spectral closure. It terminates only as `PASS`, `FAIL`, or `WALL`;
+the portfolio does not rotate while it is open. Once terminal, Yang--Mills
+retains the main funnel only through `CA235`: a concrete packet on
+`a -> 0`, `lambda(a) -> infinity` with a non-equivalent scale-uniform lemma, an
+exact finite falsifier, and an official-transfer chain. A boundary theorem
+alone is archived as a strong-coupling result and the portfolio rotates. See
+`cycle-235-boundary-continuum-stop-rule.md`.
+
 ## Cycle 234 direct boundary insertion
 
 Cycle 234's proposed closure is retracted.  The finite endpoint-sector

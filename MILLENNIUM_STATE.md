@@ -1,5 +1,56 @@
 # millennium state — dedicated working memory
 
+- 2026-08-01: Yang--Mills endpoint audit terminalizes `BR235` as `PASS`.
+  Yarotsky's exact `J`-sector projector resolution gives
+  `J_1=A_- setminus Lambda_(I_1)` for every nonzero initial-face term, while
+  the final one-step range is supported on
+  `tilde Lambda_(I_N) union J_N`. Every non-vacuum endpoint leg therefore lies
+  in an `I` or `J` event support. The finite hostile channel with every `I_k`
+  empty and `J_k={x}` is not omitted: its adjacent two-layer `J` events form one
+  represented bulk component joining the faces. This discharges the sole
+  fail-closed hypothesis in the augmented-graph manuscript; together with its
+  exact identity, entangled endpoint activities, uniform same-tilt estimate,
+  face separation, and full-space spectral closure, it proves the stated
+  explicit finite-lattice strong-coupling gap. `CA235` remains unsatisfied, so
+  no continuum Yang--Mills or Clay conclusion follows. See
+  `millennium-prize/yang-mills/cycle-235-endpoint-completeness-audit.md`.
+
+- 2026-08-01: Yang--Mills Cycle 235 repairs Cycle 234 with the augmented graph
+  whose vertices are ordinary bulk connected components and the occupied
+  initial/final endpoint vertices. Endpoint edges record actual non-vacuum face
+  legs; marked objects are augmented connected components, never no-cut
+  fusions. Treating each arbitrary entangled endpoint vector as one whole-face
+  tensor gives an exact operator-valued component factorization and a canonical
+  configuration-to-gas bijection. Temporally interleaved but graph-disconnected
+  endpoint families simply form separate marks and factor without a vacuum time
+  cut. Operator-norm fiber sums satisfy the uniform marked activity bound
+  `D_(L,theta)(2||v||+||v||^2)`. A true two-face augmented object contains a
+  connected bulk component incident to both faces; a logarithmic cluster with
+  separate marks contains an incompatibility path between them. Both have
+  multiplicity-charged size at least `N`, so marked KP supplies two-face decay
+  and the one-face/bulk decomposition. The open-ball spectral argument now
+  proves the finite-volume ambient and Gauss-physical strong-coupling gap
+  `(log(3)-1)/(56 log(15970360332))` for
+  `|lambda|<=1/(8*(15970360332)^416)` on periodic tori realizing the Cycle 232
+  geometry. The companion endpoint audit now proves the formerly conditional
+  completeness check: every non-vacuum transmission leg is in an `I` or `J`
+  component, and bare propagation is a represented `J` string. This has no
+  weak-coupling continuum, OS, or Millennium Prize consequence. See
+  `millennium-prize/yang-mills/cycle-235-augmented-boundary-graph.md`.
+
+- 2026-08-01: Yang--Mills Cycle 235 freezes the stop/rotation rule after the
+  Cycle 234 boundary-factorization failure. Further boundary repair has bounded
+  positive value because it could make the strong-coupling full-Hilbert gap
+  explicit, but it does not address the continuum path
+  `lambda=2/g^4 -> infinity`. No rotation occurs until the canonical
+  temporal-renewal checkpoint `BR235` receives a written `PASS`, `FAIL`, or
+  `WALL` audit. A terminal boundary result retains Yang--Mills as the main
+  funnel only if the separate `CA235` packet specifies physical cutoff scaling,
+  a non-equivalent scale-uniform production lemma, an exact finite falsifier,
+  and an implication to a named Clay quantifier. Otherwise preserve the bounded
+  result and rotate by portfolio review. See
+  `millennium-prize/yang-mills/cycle-235-boundary-continuum-stop-rule.md`.
+
 - 2026-08-01: Yang--Mills hostile Cycle 232 repairs the rooted combinatorics
   while allowing coincident `I/J` centers. Forgetting event type has fibers of
   size at most two, hence a configuration with support size `n` has at most
@@ -558,8 +609,9 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Yang--Mills strong-coupling boundary-insertion gate after the
-  frustration-free shared-link obstruction; bulk KP control is not a full gap
+- **phase:** Yang--Mills `BR235 PASS` terminal; explicit strong-coupling lattice
+  result retained, with post-checkpoint main-funnel continuation barred unless
+  `CA235` passes
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -1391,7 +1443,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 234
+- **cycle:** 235
 - **announcements:** none
 
 ## immutable target list

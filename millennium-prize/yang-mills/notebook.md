@@ -1,5 +1,58 @@
 # Notebook
 
+## Endpoint completeness and terminal BR235
+
+The exact Yarotsky projector resolution proves endpoint completeness. In every
+nonzero initial sector term, `J_1=A_- setminus Lambda_(I_1)`; at the final face,
+the last step has range supported in `tilde Lambda_(I_N) union J_N`. Hence each
+non-vacuum endpoint leg belongs to an `I` or `J` event support. The hostile bare
+channel `I_k=emptyset`, `J_k={x}` for all `k` is represented by an overlapping
+string of two-layer `J` events and is one bulk component. This discharges the
+only fail-closed hypothesis in the augmented-graph proof. Together with that
+proof's exact identity, entangled operator-valued activities, same-tilt bounds,
+face separation, and open-ball closure, `BR235` is terminal `PASS`. The explicit
+strong-coupling lattice theorem is retained; `CA235` remains unsatisfied and no
+continuum result follows. Audit:
+`cycle-235-endpoint-completeness-audit.md`.
+
+## Augmented boundary graph cycle 235
+
+Cycle 234 is repaired by using the connected components of the graph whose
+vertices are ordinary bulk connected components plus the occupied initial and
+final endpoint vertices. An endpoint is adjacent exactly to the bulk components
+with actual non-vacuum legs at that face. Marked objects are these augmented
+connected components, not a fusion based on absence of a complete vacuum time
+cut. Keeping each arbitrary endpoint vector as one whole-face tensor proves
+exact operator-valued factorization even for spatially entangled vectors.
+Separate initial/final marks multiply because their endpoint tensors belong to
+different graph components; hostile temporally interleaved families need no
+vacuum cut. Summing activity fibers in operator norm gives the
+`D_(L,theta)(2||v||+||v||^2)` bound. A genuine two-face mark contains one bulk
+component incident to both faces, while a logarithmic cluster of separate marks
+has an incompatibility path between them; either has charged size at least `N`.
+Marked KP therefore yields the full open-ball asymptotic and the finite-volume
+ambient/physical strong-coupling gap
+`(log(3)-1)/(56 log(15970360332))` at
+`|lambda|<=1/(8*15970360332^416)`. The companion endpoint audit proves that
+every non-vacuum endpoint transmission leg is represented in the labelled
+event expansion, with bare propagation encoded by `J` events. This is not a
+continuum result. Full proof:
+`cycle-235-augmented-boundary-graph.md`.
+
+## Boundary/continuum stop rule cycle 235
+
+The Cycle 234 failure does not trigger an immediate rotation. One canonical
+temporal-renewal repair is frozen as `BR235`, including exact combinatorial
+identity, entangled endpoint activities, same-tilt `N`-uniform control,
+one/two-face separation, and full-space spectral audit. It must end in a written
+`PASS`, `FAIL`, or equivalence `WALL`. Its expected value is bounded: even a
+pass lies at very small lattice `lambda`, opposite the continuum trajectory
+`lambda=2/g^4 -> infinity`. After a terminal audit, Yang--Mills continues as
+the main funnel only if `CA235` supplies physical scaling, a non-equivalent
+uniform production lemma, an exact finite falsifier, and a transfer to a named
+Clay quantifier. Full criterion:
+`cycle-235-boundary-continuum-stop-rule.md`.
+
 ## Direct boundary insertion cycle 234
 
 Hostile audit retracts the proposed bounded-Wilson closure.  The
