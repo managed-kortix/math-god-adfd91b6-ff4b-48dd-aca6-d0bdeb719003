@@ -308,3 +308,19 @@ reverse simulation; syntax-sensitive extractors also fail a junk-computation
 robustness test. Standard SAT reductions have fatal adjacency-matrix and
 parameter blowups. The proof mechanism is retired while the magnification
 implication remains valid. No separation is claimed.
+
+## Bounded scout cycle 209
+
+Prefix-constrained MCSP is the exact completion predicate
+`min_(f extends rho) C(f)<=s`. A complete padded table cannot simply contain a
+chosen completion, because choosing it is the search being reduced. Literal
+tagged slices have the wrong quantifier: restriction gives a maximum over slice
+complexities, not the existential minimum. More strongly, distinct completions
+of one balanced prefix can share essentially their full cost. For
+`A={x_1=0}` and `f_i=H XOR (x_1 AND x_(i+1))`, all `f_i` agree on `A` and each
+has complexity at least `C(H)-2`, while the tagged table is
+`H XOR (x_1 AND x_(sel(a)+1))` and has size `C(H)+O(t)`. Thus repetition and easy
+truth-table tags do not provide additive resource isolation. This refutes the
+padding/tagging construction, not every possible many-one reduction; the
+missing ingredient remains an unrestricted-circuit anti-sharing theorem. No
+MCSP lower bound or separation is claimed.

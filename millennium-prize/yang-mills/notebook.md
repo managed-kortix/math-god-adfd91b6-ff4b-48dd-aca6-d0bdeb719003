@@ -1,5 +1,22 @@
 # Notebook
 
+## Bounded scout cycle 228
+
+The exact simultaneous-conjugation labels give a cutoff-independent electric
+floor: `T>=3Q`. Indeed a state with only one nonzero plaquette spin has the
+triangle-forced shared spin `c=a` or `c=b` and energy at least `3`, while two
+nonzero plaquette spins cost at least `9/2`, even when `c=0`. Positivity of
+`lambda(2-w_A-w_B)` then gives `E_(1,J)>=3` in every natural cutoff `J>=1/2`.
+The exact vacuum/symmetric-first-shell compression gives
+`E_(0,J)<=2lambda+(3-sqrt(9+2lambda^2))/2`; hence every cutoff Ritz gap is at
+least `(3+sqrt(9+2lambda^2))/2-2lambda`, positive for `0<=lambda<12/7` and
+equal to `(sqrt(11)-1)/2>1` at `lambda=1`. A one-dimensional Feshbach--Schur
+complement independently shows that at most one Ritz value lies below the
+electric floor. Thus shared `c` sectors cannot generate arbitrarily low
+cutoff Ritz gaps at the benchmark coupling. This is a finite-model,
+cutoff-uniform comparison only, with no volume or continuum claim. Full proof:
+`cycle-228-two-plaquette-uniform-ritz-bound.md`.
+
 ## Bounded scout cycle 226
 
 Two adjacent `SU(2)` squares reduce by tree gauge fixing to

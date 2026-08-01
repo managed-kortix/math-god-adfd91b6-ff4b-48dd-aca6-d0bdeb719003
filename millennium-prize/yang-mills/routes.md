@@ -1,5 +1,20 @@
 # Routes
 
+## Active Cycle 227 gate: shared-link finite-size coercivity
+
+The main funnel now asks for a gauge-reduced finite-size criterion, not another
+isolated Ritz gap.  A passing architecture must fix its blocks, overlaps,
+boundary convention, coupling range, and physical Hilbert spaces; prove an
+explicit noncircular inequality from finitely many untruncated block constants
+to a volume-uniform physical gap; and certify those constants with Casimir-tail
+enclosures.  The two-plaquette simultaneous-conjugation reduction is the
+mandatory smallest check: shared intertwiner sectors and the coupled electric
+Casimir forbid tensor-product plaquette embeddings.  The gate closes either by
+one proved criterion plus one strict certified block instance, or by an exact
+counterexample to the declared overlap/coercivity inequality.  Continuum
+tightness, reflection positivity, nontriviality, and OS reconstruction remain
+later gates.  See `../cycle-227-strategic-rotation.md`.
+
 Cycle 181 records the smallest nontrivial gauge-invariant `SU(2)` benchmark.
 One square reduces to the class-function Jacobi operator with diagonal
 `n(n+2)+lambda` and off-diagonal `-lambda/2`.  Its centered character atoms give

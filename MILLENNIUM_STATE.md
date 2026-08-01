@@ -1,5 +1,34 @@
 # millennium state — dedicated working memory
 
+- 2026-08-01: Yang--Mills bounded scout Cycle 228 proves an exact spin-cutoff
+  uniform statement for the Cycle 226 simultaneous-conjugation two-plaquette
+  model. The triangle rule and the positive shared Casimir give `T>=3Q`:
+  one nonzero plaquette spin forces the same `c` and costs at least `3`, while
+  two nonzero spins cost at least `9/2` even if `c=0`. Since the magnetic
+  potential is positive, every natural cutoff has `E_1>=3`. The exact
+  vacuum/symmetric-first-shell compression bounds
+  `E_0<=2lambda+(3-sqrt(9+2lambda^2))/2`, yielding Ritz gap at least
+  `(3+sqrt(9+2lambda^2))/2-2lambda`, uniformly in cutoff. It is positive for
+  `0<=lambda<12/7` and equals `(sqrt(11)-1)/2>1` at `lambda=1`. The associated
+  one-dimensional Schur complement shows at most one Ritz value below `3`.
+  Therefore shared `c` sectors do not create arbitrarily low Ritz gaps at the
+  benchmark coupling. This is not a volume-uniform or continuum Yang--Mills
+  result.
+
+- 2026-08-01: Cycle 227 applies the six-lane rotation criterion after exact
+  finite-mode Navier architectures close and the frozen Cycle 225 item 4 packet
+  fails.  The main funnel rotates to the Yang--Mills shared-link finite-size
+  coercivity admission gate.  A candidate must give explicit gauge-reduced
+  block/overlap maps, a noncircular finite-block-to-volume gap inequality with
+  constants, certified untruncated local tests using the Cycle 226
+  two-plaquette reduction as the smallest check, and an honest physical-scaling
+  statement that leaves continuum and OS reconstruction as later gates.  Exact
+  counterexamples may retire a declared cover/inequality.  Ritz gaps, naive
+  plaquette tensorization, larger spin cutoffs, another finite Fourier cascade,
+  and generic SAT/circuit lower-bound restatements are inadmissible.  This is a
+  strategic selection, not a Yang--Mills, Navier--Stokes, or other Millennium
+  result.  See `millennium-prize/cycle-227-strategic-rotation.md`.
+
 - 2026-08-01: Cycle 226 closes Cycle 224's coefficient-dependent finite-closure
   loophole. The known Elgindi--Hu--Sverak theorem says every mean-zero exact 2D
   Euler solution with finite Fourier support is stationary and supported on one
@@ -345,6 +374,19 @@
   `t(C(H)-1)`. Thus restrictions give a maximum, not a sum; genuine anti-sharing
   would require a new unrestricted-circuit lower-bound mechanism. No MCSP,
   unrestricted circuit, or P-versus-NP conclusion follows.
+- 2026-08-01: Cycle 209 isolates prefix-constrained MCSP as
+  `min_(f extends rho) C(f)<=s` and rejects the literal reduction to ordinary
+  MCSP by truth-table padding/tagging. Tagged slices encode joint smallness and
+  restriction yields a maximum, whereas prefix completion asks for an
+  existential minimum. The mismatch persists under distinct completions of a
+  balanced prefix: with `A={x_1=0}` and
+  `f_i=H XOR (x_1 AND x_(i+1))`, every slice extends the same prefix and costs
+  at least `C(H)-2`, but their tagged union is
+  `H XOR (x_1 AND x_(sel(a)+1))` of size `C(H)+O(t)`. An unrestricted circuit shares
+  the entire hard core `H`; easy tags do not impose resource isolation. This is
+  a counterexample to slice/padding accounting, not an unconditional exclusion
+  of every possible many-one reduction. Exact transfer still requires a new
+  anti-sharing/direct-sum theorem. No MCSP lower bound or separation follows.
 - 2026-08-01: Cycle 207 hostile audit confirms the `HWB_(8m)` every-order
   midpoint minor with one-based coordinates. For every midpoint prefix, one of
   `[m,5m]` and `[3m,7m]` supplies `m` data indices; disjoint complementary
@@ -375,8 +417,8 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** focused portfolio discovery after two consecutive Hodge support
-  failures; do not escalate the integral-general Chow search to degree three
+- **phase:** Yang--Mills shared-link finite-size coercivity admission gate after
+  Cycle 227 rotation; do not infer volume or continuum gaps from finite Ritz data
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -1208,7 +1250,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 226
+- **cycle:** 228
 - **announcements:** none
 
 ## immutable target list
