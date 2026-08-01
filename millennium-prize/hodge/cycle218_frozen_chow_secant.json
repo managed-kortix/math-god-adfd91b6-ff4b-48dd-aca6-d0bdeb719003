@@ -1,0 +1,36 @@
+{
+  "cycle": 218,
+  "ambient": "E_i^3 x E_i^3",
+  "polarization_type": [1, 1, 1, 1, 1, 3],
+  "D0": 930187500000000000,
+  "coefficients": [
+    317131927490234375,
+    -2073948378906250,
+    12564289203125,
+    -56707735500,
+    27598945,
+    3626326,
+    -68381
+  ],
+  "graph_degrees": [
+    16,
+    576,
+    51376,
+    5969376,
+    735159376,
+    91621109376,
+    11445800859376
+  ],
+  "d_plus": 6072151396206990896,
+  "d_minus": 2315779370123038256,
+  "common_degree": 8387930766330029152,
+  "incidence": {
+    "auxiliary_degree_e": 0,
+    "chain_length_n": 1,
+    "map_degrees_h": [1],
+    "map": "[s:t] -> [s*a(Y)+t*b(Y)]"
+  },
+  "pel_tangent_dimension": 9,
+  "second_order_pairs": 45,
+  "status": "frozen_candidate_not_certificate"
+}

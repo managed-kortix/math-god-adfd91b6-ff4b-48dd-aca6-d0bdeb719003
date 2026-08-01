@@ -1,5 +1,17 @@
 # Routes
 
+## Cycle 218 frozen Chow-secant candidate
+
+After the split maximal-minor support fails by degree, retain the same one-step
+stratum `(e,n,h)=(0,1,(1))` but leave the exact-degree endpoints as unknown
+integral non-graph Chow points. Cross-add the Cycle 169 reference endpoints and
+require their Chow-form secant line to lie entirely in `Chow_(3,D)`. A passing
+point must print the line equations and support-open witnesses, a named exact
+rank-nine ambient-relative Jacobian minor, and all 45 Hessian lift solutions.
+The secant certifies the special-fiber rational equivalence and is not falsely
+differentiated over the PEL base. Saturated unit ideal retires only this single
+degree-one secant architecture. No point or obstruction certificate is known.
+
 ## Active gate: fixed-degree relative Chow production
 
 For the Cycle 151 seed `alpha_0=P_Weil[Gamma]` on
@@ -139,3 +151,16 @@ produce pair-mixed cubic contamination; a common ray has zero trilinear
 coefficient. Hence `C(N)=kXYZ` has no solution for `k!=0`, including `k=1,3`.
 This does not cover effective divisor cones with relations or nonsimplicial
 effectivity.
+
+Cycle 217 freezes a genuinely different maximal-minor support and its complete
+rational-equivalence witness: `R_(0,1,(1))`, with a degree-one curve joining
+`Y^++C_0^-` to `Y^-+C_0^+`. The endpoints are the pure 1-generic expected
+codimension-three degeneracy loci of `4 x 2` matrices with entries in
+`O(161557P)` and `O(117159P)`. Thom--Porteous makes their classes `4m^3P^3`
+and their degrees `1440m^3`, missing the frozen degrees by
+`38575937992976` and `41165986060496`. More uniformly, the target degrees are
+`296` and `56` modulo `360`, impossible for any split-polarization standard
+determinantal class. The incidence is empty before its tangent or quadratic-jet
+systems; such a pair also has zero exceptional Weil projection. Nonsplit
+bundles with a genuinely new exceptional Chern class remain outside the
+obstruction.

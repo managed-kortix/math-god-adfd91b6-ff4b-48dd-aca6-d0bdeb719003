@@ -1,5 +1,17 @@
 # millennium state — dedicated working memory
 
+- 2026-08-01: Cycle 218 freezes a second, surviving use of
+  `(e,n,h)=(0,1,(1))` after the independently created split-determinantal
+  endpoint ansatz fails by degree. The new candidate leaves the two exact-degree
+  endpoints unknown on an integral, generically reduced non-graph Chow open,
+  cross-adds the Cycle 169 references, and requires the projective secant of
+  their Chow forms to lie in `Chow_(3,D)`. Coefficient equations give the
+  explicit finite `P^1` rational-equivalence witness. The rank-nine Jacobian
+  minor and 45 quadratic lifts are computed in the ambient relative Chow
+  product, not by pretending the obstructed reference graphs extend over the
+  PEL base. No point or saturated unit-ideal certificate is produced. This is
+  a finite frozen candidate, not a Hodge result.
+
 - 2026-08-01: Cycle 216 applies the Cycle 210 retirement rule to the exhausted
   Navier max-wave-four screen. The Cycle 215 full-PDE enclosure pipeline is
   retained as certification infrastructure, but a validator without a crossing

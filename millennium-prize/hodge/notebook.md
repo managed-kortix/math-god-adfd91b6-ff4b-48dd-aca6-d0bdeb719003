@@ -1,5 +1,33 @@
 # Notebook
 
+## Cycle 218 frozen Chow-secant candidate
+
+Freeze `(e,n,h)=(0,1,(1))` again, now without imposing the already obstructed
+split determinantal endpoints. Unknown endpoints of the exact Cycle 169
+degrees lie in a declared integral, generically reduced non-graph open.
+Cross-add the reference pair and require the projective secant between the two
+Chow forms to lie in `Chow_(3,D)` coefficient by coefficient. This line is the
+explicit `P^1` rational-equivalence chain. It selects the special-fiber point;
+the rank-nine Jacobian and 45 Hessian lifts are correctly computed in the
+ambient relative Chow product because the reference graphs do not extend over
+the PEL base. No point or unit-ideal certificate is yet known. No Hodge result
+is claimed.
+
+## Cycle 217 split determinantal degree obstruction
+
+Freeze `R_(0,1,(1))`: one degree-one rational curve in
+`Chow_(3,d_++d_-)` joins `Y^++C_0^-` to `Y^-+C_0^+`, with no auxiliary cycle.
+Take the endpoints to be the expected codimension-three maximal-minor loci of
+`4 x 2` matrices of sections of `O(161557P)` and `O(117159P)`, saturated by the
+1-generic, pure, integral support open. Thom--Porteous forces the endpoint
+classes to be `4m^3P^3` and their degrees to be `1440m^3`.
+The frozen degrees are respectively `296` and `56` modulo `360`, so the
+incidence is empty before tangent or second-order equations. Even without the
+degree mismatch, a difference of these classes has zero exceptional Weil
+projection. This retires split-polarization maximal-minor supports, not
+determinantal loci from independently constructed nonsplit exceptional
+bundles. No Hodge result is claimed.
+
 ## Cycle 205 clean weighted-Pfaffian no-go
 
 For free nonnegative coordinate weights, requiring every `5 x 5` Pfaffian
