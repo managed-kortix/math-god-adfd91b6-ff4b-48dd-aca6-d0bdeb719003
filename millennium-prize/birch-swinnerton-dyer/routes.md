@@ -1,5 +1,16 @@
 # Routes
 
+Cycle 209 closes the seven-primary part for `D=-1499` without real rounding.
+The exact one-prime Kurihara value at `29` is `-150=4 mod 7`, and the displayed
+rational point has nonzero image in `A(F_29)/7A(F_29)`. Under Kim's
+Selmer-structure theorem this gives `Sel(Q,A[7^infty])=Q_7/Z_7` and
+`Sha(A/Q)[7^infty]=0`. Under BSTW `corA'`, with the separately audited local
+and normalization hypotheses, the normalized algebraic leading term has
+valuation `v_7(L'(1,A)/(Omega_A R(A/Q)))=0`. The exact arithmetic is
+fail-closed and hash-pinned; Kim and BSTW remain theorem trust boundaries.
+This does not prove full `Sha=1` or full BSD. See
+`cycle-209-D-1499-seven-adic-leading-term.md`.
+
 Cycle 195 identifies the displayed `D=-1499` point as a saturated
 Mordell--Weil generator using the exact 2-descent and the Cremona--Siksek
 height calculation. The component and divisibility checks are exact, but the

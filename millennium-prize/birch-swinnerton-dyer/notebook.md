@@ -1,5 +1,31 @@
 # Notebook
 
+## Explicit Heegner trace cycle 209
+
+For the `D=-1499` twist, the field calculation is exact:
+`K=Q(sqrt(-115))` has fundamental discriminant `-115`, class number two, and
+satisfies the Heegner hypothesis for `N=433*1499^2`; `-115` is a square modulo
+`4N`. The claimed trace identity is not exact. PARI's nondirected
+Gross--Zagier/modular-parametrization stage reports `Index^2=63.996...`, rounds
+to `ind=8`, and recognizes the Cycle 195 point `P`. Its internal semantics make
+`y_K=+/-8P` the correctly normalized numerical candidate, but neither the
+index nor the link to the mathematical trace is certified. Exact reduction of
+the candidate gives `P mod 7=(6,5)` and `8P mod 7=(4,2)`; this does not prove
+Heegner primitivity. The separate Kurihara/Selmer result below is unaffected.
+See `cycle-209-explicit-Heegner-trace-mod7.md`.
+
+## Seven-primary closure cycle 209
+
+For the `D=-1499` twist, the exact one-prime Kurihara value at `29` is
+`delta_tilde_29=-150=4 mod 7`. The rational point reduces to an element of
+exact order `28`, so its Kummer class is nonzero in the one-dimensional local
+quotient. Kim's Selmer-structure theorem gives
+`Sel(Q,A[7^infty])=Q_7/Z_7` and `Sha[7^infty]=0`; BSTW `corA'` then gives the
+exact normalized leading-term valuation zero. No real quotient is rounded and
+the Cycle 195 generator scope is unnecessary. The modular-symbol producer is
+PARI/GP and its exact output is hash-pinned; Kim and BSTW are external theorem
+trust boundaries. See `cycle-209-D-1499-seven-adic-leading-term.md`.
+
 ## Full `Sha` audit cycle 195
 
 For the `D=-1499` twist, eclib's Cremona--Siksek lower-height calculation and

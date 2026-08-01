@@ -1,5 +1,45 @@
 # millennium state — dedicated working memory
 
+- 2026-08-01: Hostile re-audit retracts the claimed rigorous Cycle 209 Heegner
+  index certificate. The field facts are exact: `K=Q(sqrt(-115))` has
+  fundamental discriminant `-115`, class number two, and satisfies the Heegner
+  hypothesis for `N=433*1499^2` (indeed `-115` is a square modulo `4N`). PARI
+  reports `Index^2=63.996...`, rounds to `ind=8`, and recognizes the Cycle 195
+  point. Source inspection confirms that its factor bookkeeping makes `8P`
+  the intended class-group-trace candidate; the factor `16` is only the
+  doubled lattice-search multiplier. But the index and modular logarithm are
+  nondirected floating computations, and the verifier hard-codes rather than
+  extracts `8`. Therefore `y_K=+/-8P` is numerical evidence, not a rigorous
+  identity, and no independent Heegner-primitivity conclusion follows. The
+  separate exact-arithmetic Kurihara/Selmer seven-part route is unaffected.
+- 2026-08-01: Cycle 209 closes the `D=-1499` seven-part gate without real
+  rounding. At the genuine Kolyvagin prime `29`, exact twist modular symbols
+  give `delta_tilde_29=-150=4 mod 7`; the displayed rational point reduces to
+  `(0,11)` with nonzero image in `A(F_29)/7A(F_29)`. Under Kim
+  arXiv:2203.12159v6, Theorems 1.8 and 1.10, the audited surjectivity,
+  nonanomalous, Tamagawa-unit, and Manin-unit hypotheses give
+  `Sel(Q,A[7^infty])=Q_7/Z_7` and `Sha(A/Q)[7^infty]=0`. Under BSTW
+  arXiv:2409.01350v2 `corA'`, this proves
+  `v_7(L'(1,A)/(Omega_A R(A/Q)))=v_7(#Sha)=0`. The fail-closed Python verifier
+  locks the exact PARI modular-symbol rows by SHA-256 and replays all finite
+  arithmetic; Kim and BSTW remain external theorem trust boundaries. This is
+  one seven-primary result, not full `Sha=1`, full BSD, or a Millennium
+  solution. Gross--Zagier supplies a separate rational-algebraicity route after
+  an auxiliary rank-zero twist and complete normalization, but the modular
+  degree alone does not compute the normalized Heegner-trace index; that longer
+  route is unnecessary for this valuation.
+
+- 2026-08-01: Hostile primary-source re-audit of arXiv:2409.01350v2 corrects
+  the bounded BSTW `p=7` rank-one-twist applicability note.  The exact `corA'`
+  display suppresses `#E(Q)_tor^2`, harmless only because residual absolute
+  irreducibility makes it a `p`-unit; the proof contains a `c_g^{-2}` Manin
+  factor and congruence/optimal-period comparisons before removing them up to
+  `p`-adic units.  The valuation claim now explicitly requires Neron-period and
+  Neron--Tate-regulator conventions plus finiteness and all unit checks.
+  Crucially, `p \nmid 2N` forces good reduction, so `p` cannot divide the
+  minimal discriminant; the later `KaMC_r(c)` twist clause allowing
+  `p | disc(K)` is not permission to apply `corA'` to a bad-reduction twist.
+
 - 2026-08-01: Cycle 207 constant audit improves the exact complementary-pair
   HWB minor from exponent `1/8` to `1/6`: for `HWB_(6m)`, cut after `4m`
   variables and use address intervals `[m,3m]`, `[3m,5m]`. One contains `m`
@@ -71,7 +111,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** BSD rank-one seven-part valuation gate
+- **phase:** portfolio discovery after BSD seven-part gate
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -890,7 +930,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 208
+- **cycle:** 210
 - **announcements:** none
 
 ## immutable target list
