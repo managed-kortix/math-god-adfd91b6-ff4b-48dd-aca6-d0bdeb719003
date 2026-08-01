@@ -1,6 +1,35 @@
 # Routes
 
-## Cycle 218 frozen Chow-secant candidate
+## Cycle 222 linear-carrier obstruction
+
+Cycle 218's degree-one secant cannot meet its declared integral-general open.
+For any projective `X subset P^N`, a nonconstant Chow-form line with integral,
+generically reduced general `r`-cycle has incidence sweep `S` satisfying
+`delta deg(S)=1`: intersect the universal incidence with a general codimension
+`r+1` linear space and use that a Chow hyperplane meets the parameter line once.
+Thus `S=P^(r+1) subset X`. Projective space itself has positive examples:
+hypersurface pencils, including a plane-conic pencil with two reducible
+endpoints having no common component and integral general member. But the
+abelian sixfold `A_0` contains no `P^4`, since it contains no rational curve.
+Hence the Cycle 218 `U_mov` is empty by its condition 3, before tangent and jet
+tests. Chow-degree-at-least-two curves remain outside this no-go.
+
+## Cycle 221 intrinsic-family audit
+
+Cycle 218 is scheme-theoretically finite but not an instantiated elimination
+problem: it omits the embedding, Chow equations, and charts whose construction
+at degree `8387930766330029152` dominates the computation.  A supplied flat
+family `X -> P^1` has the same exact degree-one condition intrinsically:
+`deg(c_X^*O_Chow(1))=int_[X]c1(H)^4=1`, and fixed endpoint fundamental cycles
+give the same one-step rational equivalence.  One fixed Hilbert polynomial and
+Gotzmann Grassmann charts replace ambient Chow equations, but endpoint scheme
+structures are noncanonical and the unrestricted ranks remain enormous.  The
+displayed JSON degrees are polarization Euler characteristics, not projective
+degrees; for an embedding `H=P^r`, Chow degree is divisible by `r^4`, making
+literal degree one impossible for `r>1`.  The next candidate must freeze `H`,
+one Hilbert polynomial, endpoint schemes, and a sparse family presentation.
+
+## Retired Cycle 218 frozen Chow-secant candidate
 
 After the split maximal-minor support fails by degree, retain the same one-step
 stratum `(e,n,h)=(0,1,(1))` but leave the exact-degree endpoints as unknown
@@ -8,9 +37,11 @@ integral non-graph Chow points. Cross-add the Cycle 169 reference endpoints and
 require their Chow-form secant line to lie entirely in `Chow_(3,D)`. A passing
 point must print the line equations and support-open witnesses, a named exact
 rank-nine ambient-relative Jacobian minor, and all 45 Hessian lift solutions.
-The secant certifies the special-fiber rational equivalence and is not falsely
-differentiated over the PEL base. Saturated unit ideal retires only this single
-degree-one secant architecture. No point or obstruction certificate is known.
+The secant would certify the special-fiber rational equivalence and is not
+falsely differentiated over the PEL base. Cycle 222 proves that its
+integral-general open is empty: a degree-one Chow family would force a `P^4`
+inside the abelian variety. The entire degree-one secant architecture is
+retired; no elimination is needed.
 
 ## Active gate: fixed-degree relative Chow production
 

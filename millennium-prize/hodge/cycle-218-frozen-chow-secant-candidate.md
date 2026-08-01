@@ -7,6 +7,11 @@ candidate is a degree-one rational curve in a Chow variety, with two integral
 non-graph endpoint cycles of the exact Cycle 169 degrees.  It uses the singular
 Chow space directly rather than an ordered collection of moving graph branches.
 
+Subsequent status: Cycle 222 proves that condition 3 of `U_mov` is impossible.
+A nonconstant Chow-form line with integral general `r`-cycle sweeps a linear
+`P^(r+1)` in the ambient variety, while an abelian variety contains no rational
+curve and hence no such linear space. Thus this architecture is now retired.
+
 The ambient sixfold and constants are
 
 \[

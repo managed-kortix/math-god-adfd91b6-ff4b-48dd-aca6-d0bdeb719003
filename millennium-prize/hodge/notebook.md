@@ -1,6 +1,36 @@
 # Notebook
 
-## Cycle 218 frozen Chow-secant candidate
+## Cycle 222 lines on Chow varieties
+
+A nonconstant line in `Chow_(r,d)(X subset P^N)` with integral, generically
+reduced general member forces a linear `P^(r+1) subset X`. Indeed, the universal
+incidence sweep has dimension `r+1`; intersecting it with a general codimension
+`r+1` linear space counts both the single intersection with a Chow hyperplane
+on the parameter line and `delta deg(S)`, so `delta deg(S)=1`. Projective-space
+hypersurface pencils show that reducible endpoints with no common summand can
+have integral general member: `x_0x_1` and
+`x_2(x_0+x_1+x_2)` give the divisor example and, in a fixed plane, the curve
+example. Zero-cycles admit no such example because an integral reduced
+zero-cycle has degree one. Since an abelian variety contains no `P^4`, Cycle
+218's integral-general secant open is empty. This retires Chow degree one only;
+higher-degree rational curves and chains remain open. No Hodge result is
+claimed.
+
+## Cycle 221 Chow-pencil UFD scout
+
+For `P=F_(Y^+)F_(C_0^-)` and `Q=F_(Y^-)F_(C_0^+)`, write
+`g=gcd(P,Q)`. In the polynomial UFD the universal pencil has the exact
+factorization `sP+tQ=g(sp+tq)`, with `sp+tq` irreducible after removing `g`.
+Distinct scalar members therefore have gcd exactly `g`. Since Cycle 218 asks
+the general member to be geometrically integral, `g=1`, giving four explicit
+cross-coprimality conditions between the two unknown and two reference Chow
+forms. No stronger common-factor conclusion follows: the line `sxy+tzw` in
+the Chow space of quadric divisors on `P^3` has reduced reducible endpoints
+`xy` and `zw`, gcd one, and geometrically integral rank-four general member.
+Hence UFD/resultant geometry supplies useful open witnesses but does not retire
+the frozen higher-codimension Chow secant. No Hodge result is claimed.
+
+## Retired Cycle 218 frozen Chow-secant candidate
 
 Freeze `(e,n,h)=(0,1,(1))` again, now without imposing the already obstructed
 split determinantal endpoints. Unknown endpoints of the exact Cycle 169
@@ -10,8 +40,9 @@ Chow forms to lie in `Chow_(3,D)` coefficient by coefficient. This line is the
 explicit `P^1` rational-equivalence chain. It selects the special-fiber point;
 the rank-nine Jacobian and 45 Hessian lifts are correctly computed in the
 ambient relative Chow product because the reference graphs do not extend over
-the PEL base. No point or unit-ideal certificate is yet known. No Hodge result
-is claimed.
+the PEL base. Cycle 222 subsequently proves that no such line can have integral
+general member on an abelian variety, so the declared open is empty before
+these equations are reached. No Hodge result is claimed.
 
 ## Cycle 217 split determinantal degree obstruction
 

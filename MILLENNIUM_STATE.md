@@ -1,5 +1,48 @@
 # millennium state — dedicated working memory
 
+- 2026-08-01: Cycle 222 retires Cycle 218's entire degree-one Chow-secant
+  architecture. For a nonconstant line in `Chow_(r,d)(X subset P^N)` with
+  integral, generically reduced general member, a general codimension-`r+1`
+  linear space counts the universal incidence both as one Chow-hyperplane
+  intersection and as `delta deg(S)`. Hence the swept locus is a linear
+  `P^(r+1)` contained in `X`. Projective-space pencils show the endpoint premise
+  is otherwise possible: two reducible conics with no common line can have an
+  integral general conic; zero-cycles give a no-go. But the abelian sixfold
+  `A_0` contains no `P^4` because it contains no rational curves. Thus Cycle
+  218's `U_mov` is empty by its integral-general condition, independently of
+  endpoint degrees, tangent rank, or jets. Chow degree at least two remains
+  open. No Hodge result is claimed.
+
+- 2026-08-01: The Cycle 221 exact-algebra scout isolates the full UFD content
+  of the Cycle 218 Chow pencil. For `P=F_(Y^+)F_(C_0^-)` and
+  `Q=F_(Y^-)F_(C_0^+)`, removing `g=gcd(P,Q)` leaves the irreducible universal
+  form `sp+tq` in the polynomial ring with pencil parameters; two distinct
+  scalar members have gcd exactly `g`. Geometric integrality of the general
+  member therefore forces four cross-coprimality conditions on the endpoint
+  and reference Chow factors. A sharp counterexample blocks the hoped-for
+  stronger conclusion: the quadric-divisor Chow line `sxy+tzw` on `P^3` has
+  coprime reduced reducible endpoints and geometrically integral general
+  member. Thus irreducibility/resultants add cheap open witnesses but cannot
+  force common components or retire the higher-codimension secant incidence.
+  No Cycle 218 point and no Hodge result is produced.
+
+- 2026-08-01: Cycle 221 audits whether the frozen Cycle 218 Chow secant is an
+  executable finite computation. It is finite only after supplying an actual
+  embedding, Chow equations, and charts, whose construction at degree
+  `8387930766330029152` is the omitted computation. A flat family
+  `X -> P^1` gives an intrinsic replacement: the Chow degree is the degree of
+  the fourfold Deligne pairing, equivalently `int_[X] c1(H)^4`, while endpoint
+  fundamental-cycle equalities give exactly the same rational equivalence.
+  Fixed-Hilbert-polynomial Grassmann charts make this explicit without Chow
+  equations, but enormous graph multiplicities require noncanonical endpoint
+  thickenings and do not determine that polynomial; unrestricted Gotzmann data
+  remain enormous. More seriously, the JSON degrees are normalized
+  polarization Euler characteristics, not projective degrees. For the natural
+  embedding `H=P^r`, Chow-map degree is divisible by `r^4`, so literal degree
+  one is impossible when `r>1`. Cycle 218 is not an instantiable elimination
+  target as frozen. A successor must specify a very ample bundle, one Hilbert
+  polynomial and endpoint scheme structure, and a sparse family presentation.
+
 - 2026-08-01: Cycle 218 freezes a second, surviving use of
   `(e,n,h)=(0,1,(1))` after the independently created split-determinantal
   endpoint ansatz fails by degree. The new candidate leaves the two exact-degree
@@ -1097,7 +1140,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 215
+- **cycle:** 222
 - **announcements:** none
 
 ## immutable target list
