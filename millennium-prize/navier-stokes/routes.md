@@ -47,10 +47,35 @@ is at most two. It does not give a launch-scale-independent factor two, so a
 coupled high-enstrophy Euler crossing remains open. See
 `cycle-216-sequential-inverse-cascade-no-go.md`.
 
-Cycle 224 freezes a deterministic eight-frequency Fibonacci packet with six
-exact phase-aligned inverse-transfer triads. Exact full-convolution bookkeeping
+Cycle 224 freezes a deterministic eight-frequency Fibonacci packet that is
+instantaneous isolated-triad upscale-biased at six designated triads; this is
+not a cascade claim. Exact full-convolution bookkeeping
 finds 60 exterior modes and a squared velocity-forcing leakage/intended ratio
 about `771.56`, so the packet fails the declared `1/16` structural admission
 gate before numerical integration. The reusable output is the finite
 admission/failure criterion, not an `L^3` crossing. See
 `cycle-224-deterministic-fibonacci-packet.md`.
+
+Cycle 225 negates the packet amplitudes to match the frozen Cycle 212 convention
+`k^perp=(k_2,-k_1)` and ordered coefficient `-det(p,q)/|p|^2`. An exact
+scale-separated packet has six positive lower-receiver rates and squared
+velocity-forcing leakage/intended ratio about `0.0410717<1/16`, so it passes
+the instantaneous finite leakage gate. The subsequently frozen item 4 screen
+gives `1.0006370099010511` for `N128 dt1/1024 T8` and
+`1.0006370044160084` for `N256 dt1/2048 T8`. Energy and enstrophy drifts pass
+the declared `2^-20` ceiling and the ratios agree, but the common value about
+`1.000637` is far below `9/4`; item 4 fails and no tuning is authorized. These
+are floating Galerkin labels, not a PDE claim. The unique exterior mode
+`k_7+k_8` has coefficient `987/974170`, proving zero leakage incompatible with
+all six active triads. See `cycle-225-quadratic-leakage-cancellation.md`.
+
+Cycle 226 closes the real coefficient-dependent finite-closure loophole by
+invoking the Elgindi--Hu--Sverak finite-mode rigidity theorem. Any exact real 2D
+Euler solution in one fixed finite support is stationary after removal of the
+mean, and its support lies on one origin-line or one origin-circle. The paper
+asserts the same for complex solutions, but its printed proof uses real support
+symmetry, so the all-complex invariant-variety and radical decomposition claims
+are conditional on that extension. No real nonstationary finite-mode candidate
+exists at any support size; a viable Euler breaker must certify an infinite
+tail. See `cycle-226-coefficient-variety-finite-mode-rigidity.md` and
+`cycle-226-hostile-literature-audit.md`.

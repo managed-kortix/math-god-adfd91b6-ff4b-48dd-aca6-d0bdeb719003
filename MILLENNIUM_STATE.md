@@ -1,8 +1,46 @@
 # millennium state — dedicated working memory
 
-- 2026-08-01: Cycle 224 tests the Navier coupled inverse-transfer admission gate
+- 2026-08-01: Cycle 226 closes Cycle 224's coefficient-dependent finite-closure
+  loophole. The known Elgindi--Hu--Sverak theorem says every mean-zero exact 2D
+  Euler solution with finite Fourier support is stationary and supported on one
+  origin-line or one origin-circle. The source asserts the same for complex
+  coefficients, but its printed proof uses Fourier-real support symmetry; the
+  arbitrary-complex extension remains a recorded trust boundary. Therefore any
+  Fourier-real reduced algebraic coefficient variety on a finite support that
+  kills every exterior quadratic and is invariant under the internal Euler
+  derivation is contained in the equilibrium variety. On the real locus, that variety is
+  the union of coordinate subspaces indexed by maximal line/circle subsets,
+  and its radical ideal is their coordinate-ideal intersection. A retained
+  mean creates only Galilean translates. No nonstationary finite-mode solution
+  exists at any cardinality in the physical real class; an Euler breaker must certify an infinite tail.
+  This is not a Navier or Millennium result.
+
+- 2026-08-01: Cycle 225 solves the fixed Fibonacci-rail instantaneous leakage
+  gate in exact amplitude/phase algebra.  The real phase-coherent packet
+  `(-1/1000,-1/1000,1,1,1,-1/1000,-1/1000,-1/1000)` has all six isolated-triad
+  lower-receiver rates positive and exact squared `H^-1` forcing ratio
+  `L^2/I^2 about 0.0410717 < 1/16`, so small leakage is possible by a strongly
+  scale-separated nonzero packet; no orbit claim follows.  Exact zero exterior
+  leakage is impossible with all six triads active: the uniquely generated mode
+  `k_7+k_8=(55,34)` has forcing `(987/974170)z_7z_8`.  Saturating by
+  `z_7 z_8 != 0` gives Groebner basis `[1]`, certified by
+  `t f^2+t g^2-h=1` for the real and imaginary parts of `z_7z_8`.
+
+- 2026-08-01: The frozen Cycle 225 item 4 orbit screen fails without tuning.
+  The exact floating labels and endpoint/checkpoint maxima are
+  `N128 dt1/1024 T8: 1.0006370099010511` and
+  `N256 dt1/2048 T8: 1.0006370044160084`. Their discrepancy is about
+  `5.49e-9`; energy drifts are `3.33e-8,8.33e-9` and enstrophy drifts are
+  `1.02e-7,2.54e-8`, so agreement and the `2^-20` drift subchecks pass, but the
+  required common ratio `>=9/4` fails decisively. The deterministic C++ AB2,
+  square-`2/3`-dealiased Galerkin harness and JSON outputs are committed. No
+  amplitudes, phases, times, methods, or nearby packets are tuned. These are
+  floating Galerkin results only, not a PDE claim or a Navier--Stokes result.
+
+- 2026-08-01: Cycle 224 tests a Navier coupled upscale-transfer admission gate
   with exact two-dimensional Fourier algebra.  An eight-rail Fibonacci packet
-  has six correctly signed lower-receiver triads, but its complete initial
+  is instantaneous isolated-triad upscale-biased at six correctly signed
+  lower receivers, but its complete initial
   convolution launches 60 exterior modes and has exact squared velocity-forcing
   leakage/on-support ratio about `771.56`, versus the frozen admission ceiling
   `1/16`; it is rejected before orbit integration.  A separate exhaustive
@@ -1170,7 +1208,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 224
+- **cycle:** 226
 - **announcements:** none
 
 ## immutable target list

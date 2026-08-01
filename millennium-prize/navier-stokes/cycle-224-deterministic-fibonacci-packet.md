@@ -1,26 +1,27 @@
-# Cycle 224: deterministic finite inverse-transfer packet gate
+# Cycle 224: deterministic finite upscale-biased packet gate
 
 ## Decision
 
 Replace random screening by one exact, finite, phase-coherent 2D Euler packet.
-The packet below realizes six simultaneous signed inverse-transfer triads. It is
+The packet below is instantaneous isolated-triad upscale-biased at six
+simultaneous designated triads. It is
 not admitted as a factor-two candidate: the exact full convolution has a large
 off-rail leakage budget. Its value is structural. It fixes a reproducible
-cascade architecture and a fail-closed finite test that any continuation must
+packet architecture and a fail-closed finite test that any continuation must
 pass before full-PDE integration.
 
 Work on `T^2=(R/2pi Z)^2` with normalized Haar measure and
 
 \[
  \omega(x)=\sum_{m\ne0}\omega_m e^{im\cdot x},\qquad
- u_m={i m^\perp\over |m|^2}\omega_m,
+ m^\perp=(m_2,-m_1),\qquad u_m={i m^\perp\over |m|^2}\omega_m,
  \tag{224.1}
 \]
 
 so that
 
 \[
- \dot\omega_m=\sum_{p+q=m}{p\times q\over |p|^2}\omega_p\omega_q,
+ \dot\omega_m=\sum_{p+q=m}{-\det(p,q)\over |p|^2}\omega_p\omega_q,
  \qquad p\times q=p_1q_2-p_2q_1.                 \tag{224.2}
 \]
 
@@ -58,7 +59,7 @@ Take a real even vorticity packet supported on `S={+-k_1,...,+-k_8}`:
 \[
  \omega_{k_j}=\omega_{-k_j}=a_j,
  \quad
- (a_1,\ldots,a_8)={1\over16}(1,1,-1,-1,-1,1,16,16).
+ (a_1,\ldots,a_8)={1\over16}(-1,-1,1,1,1,-1,-16,-16).
  \tag{224.5}
 \]
 
@@ -68,7 +69,7 @@ phase. The signs satisfy
 
 \[
  \operatorname{sgn}(a_{j+2})
- =(k_j\times k_{j+1})
+  =-(k_j\times k_{j+1})
   \operatorname{sgn}(a_j)\operatorname{sgn}(a_{j+1}).
  \tag{224.6}
 \]
@@ -85,13 +86,13 @@ rates are
 
 \[
  \begin{aligned}
- \dot Z_p&=4D(|q|^{-2}-|r|^{-2})R,\\
- \dot Z_q&=4D(|r|^{-2}-|p|^{-2})R,\\
- \dot Z_r&=4D(|p|^{-2}-|q|^{-2})R.
+ \dot Z_p&=-4D(|q|^{-2}-|r|^{-2})R,\\
+ \dot Z_q&=-4D(|r|^{-2}-|p|^{-2})R,\\
+ \dot Z_r&=-4D(|p|^{-2}-|q|^{-2})R.
  \end{aligned}                                      \tag{224.7}
 \]
 
-Equation (224.6) makes `D R>0` at every stage. Therefore the middle shell loses
+Equation (224.6) makes `D R<0` at every stage. Therefore the middle shell loses
 vorticity variance while both adjacent shells gain it. More importantly, the
 lower receiver always gains. The exact rates `(low,middle,high)` are
 
@@ -111,10 +112,11 @@ Each row separately satisfies conservation of enstrophy and kinetic energy:
  \tag{224.8}
 \]
 
-The ordering is inverse when read from stage 6 to stage 1: a stage deposits into
+The ordering is upscale-biased when read from stage 6 to stage 1: a stage deposits into
 the lower rail that is the high input of the preceding stage. This is an exact
 instantaneous transfer graph, not a proof that the nonlinear orbit executes the
-six transfers one after another for positive dwell times.
+six transfers one after another for positive dwell times. In particular, this
+is not a demonstrated cascade.
 
 ## Full-convolution leakage budget
 

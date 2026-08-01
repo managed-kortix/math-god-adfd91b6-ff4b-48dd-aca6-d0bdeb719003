@@ -9,7 +9,9 @@ On the normalized-Haar `2 pi` torus write the real vorticity as
  \omega_{-k}=\overline{\omega_k},
 \]
 
-and use `u_k=(i k_2,-i k_1)omega_k/|k|^2`. The symmetrized Euler
+and use `k^perp=(k_2,-k_1)` and `u_k=i k^perp omega_k/|k|^2`. The ordered
+Euler coefficient is `-det(p,q)/|p|^2`. Pairing the two orders gives the
+symmetrized Euler
 coefficient is the rational number
 
 \[

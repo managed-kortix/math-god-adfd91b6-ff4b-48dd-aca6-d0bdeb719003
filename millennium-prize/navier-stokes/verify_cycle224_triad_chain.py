@@ -29,6 +29,12 @@ def main() -> None:
     values = [tuple(v) for v in best["initial_integer_coefficients"]]
     model = scout.Galerkin(reps)
 
+    for p in model.modes:
+        for q in model.modes:
+            ordered_pair = (-scout.Fraction(scout.cross(p, q), scout.norm2(p))
+                            - scout.Fraction(scout.cross(q, p), scout.norm2(q))) / 2
+            assert ordered_pair == scout.coefficient(p, q)
+
     assert scout.exact_invariant_check(model)["passed"]
     expected_ode = scout.exact_ode(model)
     assert expected_ode == best["exact_galerkin_ode"]
@@ -56,6 +62,7 @@ def main() -> None:
     assert ratio > 1.07
 
     print("PASS exact Galerkin ODE and energy/enstrophy identities")
+    print("PASS canonical ordered/symmetrized convolution coefficient cross-test")
     print(f"PASS exact full-Euler initial leakage: {len(leakage)} exterior modes")
     print(f"FLOAT refinement grid=32 dt={dt}: L3 oscillation ratio {ratio:.12f}")
     print(f"FLOAT extrema: step {lo[0]} -> {hi[0]}, L3 {lo[1]:.12f} -> {hi[1]:.12f}")

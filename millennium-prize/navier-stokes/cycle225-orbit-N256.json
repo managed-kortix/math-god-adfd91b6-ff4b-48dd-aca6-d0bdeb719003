@@ -1,0 +1,17 @@
+{
+  "status": "FLOATING_GALERKIN_SCREEN_ONLY",
+  "pde_certificate": false,
+  "floating_label": "N256 dt1/2048 T8",
+  "packet": "cycle225_fibonacci_epsilon_1_over_1000",
+  "method": "square_two_thirds_pseudospectral_euler_ab2",
+  "n": 256,
+  "cutoff": 85,
+  "dt": "1/2048",
+  "final_time": 8,
+  "checkpoint_spacing": "1/16",
+  "endpoint_l3_ratio": 1.0006370044160084,
+  "maximum_checkpoint_l3_ratio": 1.0006370044160084,
+  "maximum_checkpoint_time": 8,
+  "energy_relative_drift": 8.326847655837355e-09,
+  "enstrophy_relative_drift": 2.5396648117848031e-08
+}

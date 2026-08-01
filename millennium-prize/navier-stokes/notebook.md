@@ -395,10 +395,41 @@ as the launch frequency grows, so it does not prove the universal factor-two lem
 
 The deterministic Fibonacci rails
 `(1,1),(2,1),(3,2),(5,3),(8,5),(13,8),(21,13),(34,21)` support six exact
-phase-aligned triads with positive lower-frequency receiver rates. The explicit
-top-loaded amplitudes `(1,1,-1,-1,-1,1,16,16)/16` realize the signed graph, but
+designated isolated triads with positive lower-frequency receiver rates. The
+packet is only instantaneous upscale-biased, not a demonstrated cascade. The
+explicit
+top-loaded amplitudes `(-1,-1,1,1,1,-1,-16,-16)/16` realize the signed graph, but
 the complete initial convolution has 60 exterior modes. Its exact squared
 `H^-1` leakage is about `8.8769e-4`, versus about `1.1505e-6` on-support, a
 ratio about `771.56`. It therefore fails the finite isolation threshold before
 integration. This is a deterministic structural exclusion, not an Euler
 `L^3` crossing. See `cycle-224-deterministic-fibonacci-packet.md`.
+
+## Quadratic leakage cycle 225
+
+With the Cycle 212 convention `k^perp=(k_2,-k_1)` and ordered coefficient
+`-det(p,q)/|p|^2`, the signed packet
+`(-1/1000,-1/1000,1,1,1,-1/1000,-1/1000,-1/1000)` has six positive
+lower-receiver rates. Its exact squared `H^-1` leakage/on-support ratio remains
+about `0.0410717<1/16`; this is an instantaneous isolated-triad upscale-biased
+packet, not a cascade claim. Its frozen item 4 continuation gives floating
+ratios `1.0006370099010511` at `N128 dt1/1024 T8` and
+`1.0006370044160084` at `N256 dt1/2048 T8`. The ratio agreement and energy/
+enstrophy drift checks pass, but the required `9/4` endpoint threshold fails.
+No tuning is allowed and no PDE claim follows. Exact zero exterior leakage
+remains impossible because the unique `k_7+k_8` coefficient is `987/974170`.
+See `cycle-225-quadratic-leakage-cancellation.md`.
+
+## Finite-mode rigidity cycle 226
+
+The coefficient-dependent closure loophole left in Cycle 224 is closed by the
+known Elgindi--Hu--Sverak theorem: every mean-zero real 2D Euler solution in one
+fixed finite Fourier support is stationary, with support on one origin-line or
+one origin-circle. For a fixed finite support `S`, impose every exterior
+quadratic and require the internal Euler derivation to preserve an invariant
+set. Every real orbit is then constant. The source says the theorem remains
+true for complex solutions, but its printed proof uses real support symmetry;
+therefore the full complex-variety statement and complex radical decomposition
+retain that caveat. Nonzero mean adds only Galilean translates. See
+`cycle-226-coefficient-variety-finite-mode-rigidity.md` and
+`cycle-226-hostile-literature-audit.md`.

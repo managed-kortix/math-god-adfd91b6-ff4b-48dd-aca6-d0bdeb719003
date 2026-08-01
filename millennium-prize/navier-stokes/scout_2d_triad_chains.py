@@ -261,6 +261,8 @@ def screen(seed: int, bound: int, length: int, support_limit: int, starts: int,
     best["exact_galerkin_ode"] = exact_ode(model)
     return {
         "conventions": {
+            "k_perp": "(k2,-k1)",
+            "ordered_euler_coefficient": "-det(p,q)/|p|^2",
             "torus": "normalized Haar measure on (R/2piZ)^2",
             "vorticity_ode": "dot omega_k = sum_(p+q=k) cross(p,q)/2*(1/|q|^2-1/|p|^2)*omega_p*omega_q",
             "reality": "omega_-k = conjugate(omega_k)",

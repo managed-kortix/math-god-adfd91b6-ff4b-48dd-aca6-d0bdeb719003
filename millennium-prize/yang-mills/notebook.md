@@ -1,5 +1,22 @@
 # Notebook
 
+## Bounded scout cycle 226
+
+Two adjacent `SU(2)` squares reduce by tree gauge fixing to
+`L^2(SU(2)^2)^Ad`, with simultaneous rather than independent conjugation.  In
+the normalized coupled basis `Phi_(ab)^c`, the seven-link electric operator is
+exactly `3C_a+3C_b+C_c`; the shared-link spin `c` obstructs a tensor sum of the
+one-plaquette Hamiltonians.  Its natural `a,b<=1/2` spin-cutoff compression has
+dimension five and Ritz gap `3.141511514718...` at `lambda=1`; the tensor sum of
+the corresponding two-state one-plaquette compressions has cutoff Ritz gap
+`sqrt(10)=3.162277660168...`.  Here `sqrt(10)` is not the full one-plaquette
+gap, which is approximately `3.11386381151`.  The finite matrices witness the
+structural simultaneous-conjugation and `c`-sector obstruction, but give no
+ordering or tensorization statement for untruncated gaps.  The verifier trusts
+the displayed representation-theory reduction and recoupling entries and
+certifies only the ensuing polynomial and spectral enclosures.  Full audit:
+`cycle-226-two-plaquette-shared-link-gap.md`.
+
 ## Bounded scout cycle 181
 
 The one-square `SU(2)` lattice reduces exactly by Gauss' law to the class space
