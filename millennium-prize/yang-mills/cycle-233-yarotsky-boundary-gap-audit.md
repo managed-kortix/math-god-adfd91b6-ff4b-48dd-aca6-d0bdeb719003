@@ -107,11 +107,23 @@ one needs the pinned estimate
 \]
 
 for each finite set of space-time points `S`, with a finite convention constant
-from the chosen KP theorem.  Formula (233.8) follows from the standard
-KP cluster bound by adjoining a zero-activity ghost polymer supported on `S`.
-The ghost-polymer check is again (233.7), with `s(chi)` replaced by `|S|`.
-The exact value of `C_KP` depends on whether the pinned theorem includes the
-pin's `e^a` factor.  It changes only a prefactor, not the exponent or gap.
+from the chosen KP theorem.  Formula (233.8) follows pointwise from the standard
+pinned KP cluster bound.  For each `x in S`, adjoin a formal singleton pin at
+`x`, differentiate the cluster expansion in its activity at zero, and then sum
+over `x`.  The KP check for each pin is
+
+\[
+ \sum_{\chi:\,x\in\operatorname{supp}\chi}
+ |w(\chi)|e^{(1+\theta)s(\chi)}
+ \le {x_\theta\over1-x_\theta}\le1.
+\]
+
+Thus a convention in which the pinned theorem carries an `e^{a}` factor still
+gives an absolute constant (for example `e` when the singleton pin has
+`a=1`), followed by the union bound over `x in S`.  One must not instead use a
+single pin with `a=|S|` and then call its possible `e^{|S|}` factor an absolute
+constant.  This pointwise construction proves (233.8) with a constant
+independent of `S`, `N`, and `Lambda`.
 
 For Yarotsky's connected space-time supports, a cluster of time length `l(X)`
 satisfies
@@ -121,7 +133,10 @@ satisfies
 \]
 
 Indeed, a chain of intersecting supports spanning `l` time steps has at least
-one support point on every intervening layer.  Combining (233.8)--(233.9)
+one support point on every intervening layer.  Repeated copies of a polymer do
+not invalidate this inequality: `||X||_s` charges every copy with its
+multiplicity, whereas `l(X)` only sees the union's time span.  Combining
+(233.8)--(233.9)
 controls clusters longer than `N`.  The factor `l(X)-N` in Yarotsky's remainder
 costs no exponential rate: for `0<delta<theta`,
 
@@ -148,6 +163,26 @@ and then `theta` approach `theta_*` proves the cyclic lower bound
 `theta_*/t_0`.  This is the precise replacement for Yarotsky's informal
 identification `a_3=-log epsilon`: the activity parameter itself is not the
 cluster-tail parameter after entropy has been summed.
+
+Here `E_Lambda` in the bulk-only statement means the bottom of the spectral
+measure of `H_Lambda` seen by `Omega_0`, equivalently the bottom of the
+restriction to its cyclic subspace.  The inference uses positivity, not a
+formal comparison of logarithms.  Writing
+`E_Lambda=-a_(2,Lambda)/t_0` and `A_Lambda=exp(a_(1,Lambda))`, (233.11) gives
+
+\[
+ \langle e^{-t_0NH_\Lambda}\Omega_0,\Omega_0\rangle
+ =A_\Lambda e^{-t_0NE_\Lambda}
+   (1+O_{\Lambda,\delta}(e^{-\delta N})),\qquad A_\Lambda>0.
+\]
+
+The spectral theorem then forces an atom of mass `A_Lambda` at `E_Lambda` and
+no spectral-measure support in
+`(E_Lambda,E_Lambda+delta/t_0)`.  Integer Euclidean times suffice: a positive
+mass in that interval would decay more slowly than the displayed remainder.
+This argument says nothing about spectral subspaces orthogonal to `Omega_0`;
+identifying `E_Lambda` with the bottom of the full spectrum requires the
+boundary-insertion/completeness step below.
 
 For comparison only, the superseded Cycle 231 candidate count had
 `c=72962`, `q=12c=875544`, and `c eta=1/12`, which would give
@@ -314,6 +349,28 @@ already been established uniformly along the segment.
 6. **Gauge restriction.** Once an ambient full-Hilbert gap is proved, the
    commuting Gauss projection does not reduce it.  It cannot repair the
    missing ambient boundary-insertion step.
+
+## 6. Hostile re-audit of the cyclic claim
+
+The four possible failure points in the bulk-to-cyclic inference survive the
+hostile check, subject to the hypotheses already printed in (233.1):
+
+1. `l(X)<=||X||_s` is valid because cluster connectivity supplies an
+   intersecting chain across every intermediate time layer, and the right side
+   counts polymer support with multiplicity.
+2. The required pinned estimate follows from singleton pins and a union bound.
+   A single `S`-sized ghost pin would not justify an `S`-independent convention
+   constant, so that shortcut is retracted.
+3. Tilted absolute summability gives both finite coefficients in (233.11) and
+   the `O(e^{-delta N})` remainder for every `delta<theta`; the polynomial
+   factor `l(X)-N` does not consume the endpoint after taking suprema as in
+   (233.10).
+4. Positivity of the spectral measure converts (233.11) into a gap for exactly
+   the cyclic restriction.  It does not convert it into a full-Hilbert gap.
+
+Accordingly, the conditional bulk/cyclic number `theta_*/t_0` is retained.
+Any wording that promotes it to a full-Hilbert gap without (233.16)--(233.18)
+remains retracted.
 
 ## Source audited
 

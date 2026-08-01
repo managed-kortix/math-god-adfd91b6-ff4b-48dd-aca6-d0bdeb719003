@@ -30,6 +30,32 @@
   be recovered from the published details. See
   `millennium-prize/yang-mills/cycle-233-yarotsky-boundary-gap-audit.md`.
 
+- 2026-08-01: Hostile re-audit of Cycle 233 retains the conditional
+  bulk-to-cyclic exponent `theta_*/t_0`. The time span is bounded by the sum of
+  polymer support cardinalities with multiplicity; singleton pinned KP bounds
+  plus a union bound give the needed constant linear in the pinning set; the
+  tilted cluster sum yields the logarithmic remainder for every exponent below
+  the tilt; and positivity of the spectral measure gives a gap only in the
+  product-vacuum cyclic restriction. The former shortcut using one `S`-sized
+  ghost while treating a possible `e^|S|` factor as absolute is retracted. No
+  full-Hilbert numerical gap is restored.
+
+- 2026-08-01: Hostile re-audit retracts Cycle 234's full-Hilbert gap claim.
+  Its `2^|Lambda|` vacuum/excited endpoint-sector decomposition is valid for
+  arbitrary entangled vectors even with infinite-dimensional one-site spaces,
+  and Cycle 232's configuration estimate is an operator-norm bound before
+  endpoint contraction. The fatal gap is the claimed full-face polymer
+  factorization: spatially disjoint endpoint-connected component families can
+  overlap in time and leave no complete vacuum cut without containing an
+  intersecting chain between the faces. The text fuses this case but then uses
+  the false connected-chain assertion, and it supplies no exact canonical
+  configuration-to-gas identity. Hence the marked activity estimate, KP
+  insertion, and one/two-face logarithmic separation are not proved. The
+  open-ball spectral inference would be valid conditional on that missing
+  expansion, including for complex formal activities, but cannot repair it.
+  Cycle 232 remains bulk-only and Cycle 233 remains cyclic-only. See
+  `millennium-prize/yang-mills/cycle-234-direct-boundary-insertion.md`.
+
 - 2026-08-01: Hostile audit reclassifies Yang--Mills Cycle 231 as a bulk
   activity/KP candidate audit, not an explicit threshold theorem. The verified
   data are `C_2(j)=j(j+1)`, `c_G=3/4`, `Lambda_0={0,e_1,e_2}`, `r=3`, `s=1`,
@@ -1365,7 +1391,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 233
+- **cycle:** 234
 - **announcements:** none
 
 ## immutable target list

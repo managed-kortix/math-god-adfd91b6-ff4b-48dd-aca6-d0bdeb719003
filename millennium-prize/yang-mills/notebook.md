@@ -1,5 +1,21 @@
 # Notebook
 
+## Direct boundary insertion cycle 234
+
+Hostile audit retracts the proposed bounded-Wilson closure.  The
+`2^|Lambda|` endpoint-sector decomposition works for arbitrary entangled
+vectors, and the Cycle 232 estimate is in operator norm.  The failure is the
+claimed equivalence between connected full-face fusion and temporal vacuum-cut
+factorization.  Spatially disjoint endpoint component families may overlap in
+time so that no global vacuum cut exists, while no intersecting support chain
+joins the faces.  The union does charge all time layers, but Cycle 234 neither
+states that repaired lemma nor proves an exact configuration-to-gas identity;
+therefore it has no proved activity sum, marked KP insertion, or one/two-face
+logarithmic separation.  The open-ball spectral step is sound only conditional
+on such an expansion.  Cycle 232 remains bulk-only and Cycle 233 cyclic-only.
+Audit:
+`cycle-234-direct-boundary-insertion.md`.
+
 ## Hostile rooted count cycle 232
 
 Allowing an `I` and a `J` event to share a center invalidates Cycle 231's

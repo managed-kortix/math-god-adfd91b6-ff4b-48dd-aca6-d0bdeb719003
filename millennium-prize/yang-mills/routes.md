@@ -1,5 +1,18 @@
 # Routes
 
+## Cycle 234 direct boundary insertion
+
+Cycle 234's proposed closure is retracted.  The finite endpoint-sector
+decomposition and endpoint operator-norm bounds are sound, but full-face fusion
+does not define an exact polymer factorization.  Spatially disjoint component
+families can overlap in time, have no global vacuum cut, and still contain no
+intersecting chain between the temporal faces.  Although their union charges
+all time layers, that repair and an exact configuration-to-gas identity are not
+proved, so the marked KP estimate and two-face decay do not follow as written.
+The Cycle 232 endpoint remains bulk-only and the explicit Cycle
+233 number remains a cyclic-subspace bound. See
+`cycle-234-direct-boundary-insertion.md`.
+
 ## Cycle 232 hostile bulk-polymer correction
 
 For a count robust under coincident `I/J` centers, the number of labelled
