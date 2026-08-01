@@ -163,6 +163,16 @@ def retained_modes(cutoff: int) -> tuple[Mode, ...]:
     )
 
 
+def paired_vorticity_coefficient(p: Mode, qmode: Mode) -> Fraction:
+    """Coefficient after pairing the ordered interactions (p,q) and (q,p)."""
+    p2 = p[0] * p[0] + p[1] * p[1]
+    q2 = qmode[0] * qmode[0] + qmode[1] * qmode[1]
+    if p2 == 0 or q2 == 0:
+        raise ValueError("vorticity interactions require nonzero modes")
+    cross = p[1] * qmode[0] - p[0] * qmode[1]
+    return Fraction(cross * (q2 - p2), 2 * p2 * q2)
+
+
 def vorticity_rhs(boxes: dict[Mode, CInterval], viscosity: Fraction) -> dict[Mode, CInterval]:
     if viscosity <= 0 or (0, 0) in boxes:
         raise ValueError("positive viscosity and zero-free mode map required")
@@ -174,8 +184,7 @@ def vorticity_rhs(boxes: dict[Mode, CInterval], viscosity: Fraction) -> dict[Mod
             omega_q = boxes.get(qmode)
             if omega_q is None:
                 continue
-            p2 = p[0] * p[0] + p[1] * p[1]
-            coefficient = Fraction(p[1] * qmode[0] - p[0] * qmode[1], p2)
+            coefficient = paired_vorticity_coefficient(p, qmode)
             value = value + (omega_p * omega_q).scale(coefficient)
         output[k] = value
     return output
@@ -251,6 +260,40 @@ def _tail_pair_moment(x: Fraction, cap_start: int, target_shell: int) -> Fractio
     ) / 2
 
 
+def analytic_enstrophy_tail_bound(
+    target_shell: int,
+    cap_start: int,
+    rho: Fraction,
+    weighted_enstrophy: Fraction,
+    analytic_order: int = 2,
+) -> Fraction:
+    """Bound tail-tail production on one l-infinity shell after antisymmetry.
+
+    The supplied quantity bounds
+    sum rho^(2|k|_inf) (1+|k|_inf)^(2s) |omega_k|^2.  Pairing (p,q)
+    with (q,p) cancels equal Euclidean radii and gives a coefficient at most
+    |k|_2^2/L^2.  Cauchy--Schwarz then bounds the complete shell without a
+    lattice convolution count beyond the exact ``8*n`` target-shell size.
+    """
+    rho = q(rho)
+    weighted_enstrophy = q(weighted_enstrophy)
+    if (
+        target_shell < 1
+        or cap_start < 1
+        or rho <= 1
+        or weighted_enstrophy < 0
+        or analytic_order < 0
+    ):
+        raise ValueError("invalid analytic enstrophy parameters")
+    return (
+        16
+        * target_shell**3
+        * weighted_enstrophy
+        * rho ** (-target_shell)
+        / (cap_start**2 * (1 + target_shell) ** analytic_order)
+    )
+
+
 def shell_convolution_bound(
     target_shell: int,
     head: dict[int, Fraction],
@@ -258,6 +301,8 @@ def shell_convolution_bound(
     rho: Fraction,
     cap_start: int,
     unresolved_cutoff: int = 0,
+    weighted_enstrophy: Fraction | None = None,
+    analytic_order: int = 2,
 ) -> Fraction:
     """Rational l-infinity shell bound for the vorticity convolution.
 
@@ -298,10 +343,24 @@ def shell_convolution_bound(
         )
 
     # For two capped shells, discard only |a-b|<=n and retain a+b>=n.
-    # This leaves a closed rational geometric second moment.
-    result += Fraction(2, cap_start) * cap * cap * _tail_pair_moment(
+    # This leaves a closed rational geometric second moment.  A supplied
+    # weighted enstrophy bound gives an often much smaller, cancellation-aware
+    # alternative for this complete tail-tail contribution.
+    tail_tail = Fraction(2, cap_start) * cap * cap * _tail_pair_moment(
         x, cap_start, target_shell
     )
+    if weighted_enstrophy is not None:
+        tail_tail = min(
+            tail_tail,
+            analytic_enstrophy_tail_bound(
+                target_shell,
+                cap_start,
+                rho,
+                weighted_enstrophy,
+                analytic_order,
+            ),
+        )
+    result += tail_tail
     return result
 
 
@@ -318,6 +377,8 @@ def check_dissipative_shell_cap(
     cap_start: int,
     viscosity: Fraction,
     initial_shells: dict[int, Fraction] | None = None,
+    weighted_enstrophy: Fraction | None = None,
+    analytic_order: int = 2,
 ) -> ShellComparisonCertificate:
     """Verify inward inequalities for every face z_n=cap*rho^-n, n>=L.
 
@@ -342,19 +403,38 @@ def check_dissipative_shell_cap(
     for index in range(cap_start, 2 * cap_start):
         face = cap * x**index
         margin = viscosity * index * index * face - shell_convolution_bound(
-            index, head, cap, rho, cap_start
+            index,
+            head,
+            cap,
+            rho,
+            cap_start,
+            weighted_enstrophy=weighted_enstrophy,
+            analytic_order=analytic_order,
         )
         if margin < 0:
             raise ValueError(f"tail face is not inward at shell {index}")
         margins.append(margin)
 
-    # From n=2L onward, the normalized convolution bound is exactly a quadratic
-    # in n.  Recover it at three rational points and prove its margin is
-    # nonnegative on the complete real ray (hence on every integer shell).
+    # From n=2L onward the head-tail part is linear after normalization.  The
+    # geometric tail-tail estimate is quadratic.  If an analytic enstrophy
+    # estimate of order at least two is supplied, n^3/(1+n)^s <= n replaces
+    # that quadratic by a linear cancellation-aware ray majorant.
     ray_start = 2 * cap_start
     normalized = []
     for index in range(ray_start, ray_start + 3):
         bound = shell_convolution_bound(index, head, cap, rho, cap_start)
+        if weighted_enstrophy is not None and analytic_order >= 2:
+            geometric_tail = Fraction(2, cap_start) * cap * cap * _tail_pair_moment(
+                x, cap_start, index
+            )
+            analytic_ray = (
+                16
+                * q(weighted_enstrophy)
+                * index
+                * x**index
+                / cap_start**2
+            )
+            bound = bound - geometric_tail + analytic_ray
         normalized.append(bound / (cap * x**index))
     q2 = (normalized[2] - 2 * normalized[1] + normalized[0]) / 2
     q1 = normalized[1] - normalized[0] - q2
@@ -379,12 +459,21 @@ def low_mode_tail_remainder_bound(
     cap: Fraction,
     rho: Fraction,
     cap_start: int,
+    weighted_enstrophy: Fraction | None = None,
+    analytic_order: int = 2,
 ) -> Fraction:
     """Bound one retained coefficient's omitted nonlinear remainder in modulus."""
     if target_shell > retained_cutoff:
         raise ValueError("target shell is not retained")
     return shell_convolution_bound(
-        target_shell, head, cap, rho, cap_start, unresolved_cutoff=retained_cutoff
+        target_shell,
+        head,
+        cap,
+        rho,
+        cap_start,
+        unresolved_cutoff=retained_cutoff,
+        weighted_enstrophy=weighted_enstrophy,
+        analytic_order=analytic_order,
     )
 
 

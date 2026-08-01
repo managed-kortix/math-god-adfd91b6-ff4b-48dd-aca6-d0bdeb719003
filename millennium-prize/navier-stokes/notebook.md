@@ -344,3 +344,27 @@ successful many-scale breaker must exploit initial cancellation, final packet
 collision, or a sequential coupled cascade, exactly where decoupling fails.
 This retires gain-by-decoupled-replication, not the universal factor-two lemma.
 See `cycle-213-disconnected-packet-superposition-no-go.md`.
+
+## Main-funnel cycle 214
+
+Pairing the ordered vorticity interactions before interval absolute values gives
+the exact antisymmetric multiplier
+`(p^perp dot q)(|q|^2-|p|^2)/(2|p|^2|q|^2)`; equal Euclidean shells therefore
+cancel. A slab bound on analytic weighted enstrophy converts the remaining
+tail-tail convolution into `16 n^3 E rho^-n/(L^2(1+n)^s)`. For `s>=2` this is
+linear after normalization by `rho^-n`, rather than the old quadratic
+geometric tail cost, so viscosity's `mu n^2` coercivity eventually wins even at
+small `mu`. The exact validator uses the paired coefficient for retained modes
+and optionally takes this analytic estimate on tail faces and low-mode
+remainders. The weighted enstrophy still needs a slab certificate. See
+`cycle-214-euclidean-antisymmetric-shell-bound.md`.
+
+## Main-funnel cycle 214
+
+The finite coefficient cube is replaced by continuous low-mode Fourier
+optimization. `cycle214_gradient.cpp` differentiates the complete dealiased 2D
+Euler midpoint trajectory with forward tangents, including terminal time, and
+maximizes the endpoint velocity `L^3` ratio on the unit coefficient sphere.
+Random seeds start at `N=32`; ratios above `1.2` continue at `N=64`, with two as
+the candidate threshold. This is a floating high-variance screen only, not a
+Galerkin or full-PDE certificate. See `cycle-214-gradient-screen.md`.

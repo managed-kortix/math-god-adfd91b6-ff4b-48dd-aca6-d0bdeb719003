@@ -1,5 +1,15 @@
 # millennium state — dedicated working memory
 
+- 2026-08-01: Cycle 214 sharpens the interval validator's Fourier shell
+  constants by pairing `(p,q)` and `(q,p)` before absolute values. The exact
+  multiplier contains `|q|^2-|p|^2`, so equal Euclidean shells cancel. If a
+  slab encloses analytic weighted enstrophy `E_(rho,s)`, tail-tail production
+  on shell `n` is bounded by `16 n^3 E rho^-n/(L^2(1+n)^s)`; for `s>=2` its
+  normalized cost is linear, replacing Cycle 213's artificial quadratic
+  tail-tail competition with viscosity. The rational validator implements the
+  paired retained-mode coefficient and optional analytic tail/remainder bound.
+  A production trajectory must still certify weighted enstrophy slab by slab;
+  no crossing or Navier--Stokes result is claimed.
 - 2026-08-01: Cycle 213 gives a rigorous no-go for defeating the periodic
   Navier--Stokes factor-two `L^3` gate by nonlinearly decoupled packet
   replication. Under endpoint cubic additivity and small exact-solution error,
@@ -1013,7 +1023,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 213
+- **cycle:** 214
 - **announcements:** none
 
 ## immutable target list

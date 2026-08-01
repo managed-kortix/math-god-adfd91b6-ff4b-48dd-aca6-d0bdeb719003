@@ -29,3 +29,9 @@ Cycle 213 replaces the proxy-only finite-family shortlist by reduced-resolution
 integration of all 152586 nonlinear canonical rows. Its declared floating
 pipeline has maximum `1.0132639341307961`; this is explicitly not an interval
 claim. See `cycle-213-finite-family-screen.md`.
+
+Cycle 214 replaces the frozen integer family by continuous optimization of a
+low-mode Fourier box and terminal time. A discrete automatic-gradient midpoint
+solver screens random seeds at `N=32`, promotes endpoint ratios above `1.2` to
+`N=64`, and records any floating ratio above two. This remains candidate
+generation only. See `cycle-214-gradient-screen.md`.

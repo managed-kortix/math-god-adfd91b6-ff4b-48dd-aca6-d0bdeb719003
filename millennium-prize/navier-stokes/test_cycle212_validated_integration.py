@@ -10,12 +10,14 @@ from pathlib import Path
 from validate_cycle212 import (
     CInterval,
     Interval,
+    analytic_enstrophy_tail_bound,
     analytic_velocity_bounds,
     check_dissipative_shell_cap,
     check_picard_box,
     geometric_tail_sum,
     load_manifest,
     low_mode_tail_remainder_bound,
+    paired_vorticity_coefficient,
     retained_modes,
     sqrt_interval,
     shell_convolution_bound,
@@ -69,6 +71,46 @@ class Cycle212Tests(unittest.TestCase):
         )
         self.assertEqual(len(certificate.finite_margins), 3)
         self.assertGreaterEqual(certificate.ray_coefficients[0], 0)
+
+    def test_angular_pairing_cancels_equal_euclidean_shells(self):
+        self.assertEqual(paired_vorticity_coefficient((1, 0), (0, 1)), 0)
+        self.assertEqual(
+            paired_vorticity_coefficient((1, 0), (1, 1)), Fraction(-1, 4)
+        )
+
+    def test_analytic_enstrophy_improves_tail_tail_bound(self):
+        head = {1: Fraction(1, 100), 2: Fraction(1, 100)}
+        cap = Fraction(1)
+        rho = Fraction(2)
+        coarse = shell_convolution_bound(8, head, cap, rho, 3)
+        analytic = shell_convolution_bound(
+            8,
+            head,
+            cap,
+            rho,
+            3,
+            weighted_enstrophy=Fraction(1, 10000),
+            analytic_order=2,
+        )
+        self.assertLess(analytic, coarse)
+        self.assertGreater(
+            analytic_enstrophy_tail_bound(8, 3, rho, Fraction(1, 10000)), 0
+        )
+        coarse_ray = check_dissipative_shell_cap(
+            head, Fraction(1, 1000), rho, 3, Fraction(1)
+        )
+        analytic_ray = check_dissipative_shell_cap(
+            head,
+            Fraction(1, 1000),
+            rho,
+            3,
+            Fraction(1),
+            weighted_enstrophy=Fraction(1, 10000),
+            analytic_order=2,
+        )
+        self.assertGreater(
+            analytic_ray.ray_coefficients[0], coarse_ray.ray_coefficients[0]
+        )
 
     def test_shell_convolution_dominates_direct_truncation(self):
         head = {1: Fraction(2, 5), 2: Fraction(1, 3)}
