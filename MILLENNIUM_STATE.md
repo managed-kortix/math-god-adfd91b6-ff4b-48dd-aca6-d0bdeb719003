@@ -1,5 +1,20 @@
 # millennium state — dedicated working memory
 
+- 2026-08-01: Cycle 224 tests the Navier coupled inverse-transfer admission gate
+  with exact two-dimensional Fourier algebra.  An eight-rail Fibonacci packet
+  has six correctly signed lower-receiver triads, but its complete initial
+  convolution launches 60 exterior modes and has exact squared velocity-forcing
+  leakage/on-support ratio about `771.56`, versus the frozen admission ceiling
+  `1/16`; it is rejected before orbit integration.  A separate exhaustive
+  three-triad scout finds only floating Galerkin `L^3` oscillation about `1.08`
+  and exact first-order leakage.  More generally, every finite symmetric support
+  invariant for all 2D Euler coefficient assignments is collinear or lies on one
+  frequency circle, so its nonlinear vorticity dynamics vanish.  Energy and
+  enstrophy also bound any fixed-launch-band orbit by a computable
+  `C_T (K_+/kappa_0)^(1/3)` ratio, but this is not a universal factor-two bound.
+  These are architecture obstructions, not an Euler crossing, Navier result, or
+  Millennium solution.
+
 - 2026-08-01: Cycle 223 retires the integral-general Chow-degree-two support
   mechanism and triggers the Cycle 216 stop rule. For a nonconstant map
   `P^1 -> Chow_(r,d)(X)` of Chow degree two with geometrically integral,
@@ -1155,7 +1170,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 223
+- **cycle:** 224
 - **announcements:** none
 
 ## immutable target list

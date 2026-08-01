@@ -35,3 +35,22 @@ low-mode Fourier box and terminal time. A discrete automatic-gradient midpoint
 solver screens random seeds at `N=32`, promotes endpoint ratios above `1.2` to
 `N=64`, and records any floating ratio above two. This remains candidate
 generation only. See `cycle-214-gradient-screen.md`.
+
+Cycle 216 gives the hostile bound for a finite sequential inverse cascade.
+Conserved energy `E` and enstrophy `Z`, together with two-dimensional
+Gagliardo--Nirenberg, imply the orbitwise ratio bound
+`||u(t)||_3/||u(0)||_3<=C_T(Z/(kappa_0^2E))^(1/6)`. Initial Fourier support
+below `K_+` therefore gives `C_T(K_+/kappa_0)^(1/3)`, with a stable
+enstrophy-leakage version. This rules out unbounded amplification at a fixed
+launch band and rules out a factor-two crossing whenever the displayed constant
+is at most two. It does not give a launch-scale-independent factor two, so a
+coupled high-enstrophy Euler crossing remains open. See
+`cycle-216-sequential-inverse-cascade-no-go.md`.
+
+Cycle 224 freezes a deterministic eight-frequency Fibonacci packet with six
+exact phase-aligned inverse-transfer triads. Exact full-convolution bookkeeping
+finds 60 exterior modes and a squared velocity-forcing leakage/intended ratio
+about `771.56`, so the packet fails the declared `1/16` structural admission
+gate before numerical integration. The reusable output is the finite
+admission/failure criterion, not an `L^3` crossing. See
+`cycle-224-deterministic-fibonacci-packet.md`.

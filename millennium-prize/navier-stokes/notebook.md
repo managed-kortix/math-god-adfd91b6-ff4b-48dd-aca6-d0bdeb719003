@@ -375,3 +375,30 @@ iterations each. Its best coarse endpoint was `1.1699662837490548` at
 from `N=16` to `N=32` reduced the reevaluated ratio to about `1.0138`. The scout
 therefore fails spatial resolution and stops at its declared budget. No crossing,
 certificate, or PDE conclusion is claimed.
+
+## Hostile mirror cycle 216
+
+Energy and enstrophy give an exact bounded no-go for any fixed-band finite
+sequential 2D Euler inverse cascade. Two-dimensional Gagliardo--Nirenberg and
+`||grad u||_2=||omega||_2` imply
+`||u(t)||_3/||u(0)||_3<=C_T(Z/(kappa_0^2E))^(1/6)`. If the initial support lies
+below `K_+`, this is at most `C_T(K_+/kappa_0)^(1/3)`; an enstrophy-tail cap
+gives the stable version `C_T((K_+^2+L)/kappa_0^2)^(1/6)`. Exact shell
+accounting caps separated high-mode energy once low-mode energy is specified,
+while isolated triads split energy to both extreme legs. The bound ignores
+stage count, phases, gaps, and Hamiltonian realization. It excludes a factor
+above two only when its explicit right side is at most two and is not uniform
+as the launch frequency grows, so it does not prove the universal factor-two lemma. See
+`cycle-216-sequential-inverse-cascade-no-go.md`.
+
+## Structural packet cycle 224
+
+The deterministic Fibonacci rails
+`(1,1),(2,1),(3,2),(5,3),(8,5),(13,8),(21,13),(34,21)` support six exact
+phase-aligned triads with positive lower-frequency receiver rates. The explicit
+top-loaded amplitudes `(1,1,-1,-1,-1,1,16,16)/16` realize the signed graph, but
+the complete initial convolution has 60 exterior modes. Its exact squared
+`H^-1` leakage is about `8.8769e-4`, versus about `1.1505e-6` on-support, a
+ratio about `771.56`. It therefore fails the finite isolation threshold before
+integration. This is a deterministic structural exclusion, not an Euler
+`L^3` crossing. See `cycle-224-deterministic-fibonacci-packet.md`.
