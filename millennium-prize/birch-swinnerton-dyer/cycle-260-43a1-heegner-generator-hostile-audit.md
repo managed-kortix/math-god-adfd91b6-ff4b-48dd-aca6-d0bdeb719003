@@ -105,7 +105,8 @@ quotient or by rounding a Gross--Zagier height ratio.
 
 The primary statements were checked directly in Byungchul Cha, *J. Number
 Theory* **111** (2005), 154--178, DOI
-`10.1016/j.jnt.2004.08.009`:
+`10.1016/j.jnt.2004.08.009`; Cycle 262 preserves the exact theorem text,
+standing context, journal-page anchors, and original Kolyvagin citation:
 
 - Cha's quoted Kolyvagin Theorem 3 applies to every odd prime `p` when `y_K`
   is non-torsion and `Gal(Q(E[p])/Q)=GL_2(F_p)`. Its displayed statement does
@@ -132,22 +133,23 @@ prime `3`; it must pass the same residual check. The ramified prime `7` cannot
 be passed through Cha's irreducible theorem and requires the stronger
 surjectivity hypothesis (or an independent 7-Selmer computation).
 
-LMFDB currently records maximal mod-`p` image for every prime and no rational
-isogenies. The latter proves residual irreducibility for every `p`, once the
-completeness of the rational isogeny computation is certified; it does not by
-itself prove surjectivity at `7`. The former is strong supporting database
-evidence but no primary residual-image certificate or replayable group
-calculation is committed here. Hence the all-odd-prime step remains open at
-the artifact level.
+Cycle 261 subsequently closes this artifact gap without using the LMFDB image
+record. The semistable reducibility-to-rational-torsion lemma plus Mazur's
+torsion theorem, type `I_1` Tate inertia, Dickson's
+subgroup classification, explicit Frobenius discriminants, and exact matrix
+enumeration prove `im(rho_bar_E,p)=GL_2(F_p)` for every prime `p`.
 
-There is a short potential repair specifically at `p=7`: type `I_1`
-multiplicative reduction at `43` should supply a nontrivial transvection modulo
-`7`, while Frobenius at `3` has characteristic polynomial with discriminant
-`a_3^2-4*3=-8=6 mod 7`, a nonsquare. A cited subgroup-classification lemma,
-together with a fully written tame-inertia argument and the surjective
-cyclotomic determinant, should then prove `GL_2(F_7)`. Those theorem statements
-and deductions are not yet committed as a proof, so this audit does not silently
-promote the database image record.
+At `p=7`, type `I_1` multiplicative reduction at `43` supplies a nontrivial
+transvection, while Frobenius at `2` has discriminant `-4=3 mod 7`, a
+nonsquare. Cycle 261 writes the subgroup-classification and inertia deductions
+in full and supplies an exact verifier for all finite calculations.
+
+Cycle 262 decisively rechecks this interpretation against the published scan.
+Cha Theorem 3 is on journal page 155 and has no unramifiedness or good-reduction
+clause; those clauses occur only in Cha Theorem 21 on journal page 173. Thus
+Theorem 3 really does cover ramified `p=7` and bad multiplicative `p=43` once
+the Cycle 261 residual-surjectivity certificate is supplied. See
+`cycle-262-43a1-kolyvagin-theorem3-literature-audit.md`.
 
 If (260.4), the Mordell--Weil generator certificate, and these residual facts
 were supplied, the cited theorem would give `Sha(E/K)[p^infty]=0` for every
@@ -209,8 +211,9 @@ committed:
    explicit acceptance of PARI's exact descent implementation as the theorem
    trust boundary.
 
-Until then the rigorous status is `GAPS`: the classical setup is correct, but
-`Sha(43a1/Q)=0` is not established by the audited packet. No BSD claim is made.
+Item 3 is closed by Cycle 261. Until the other items are closed, the rigorous
+status remains `GAPS`: the classical setup is correct, but `Sha(43a1/Q)=0` is
+not established by the audited packet. No BSD claim is made.
 
 ## Sources consulted
 

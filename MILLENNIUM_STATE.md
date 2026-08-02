@@ -1,5 +1,113 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: Hostile publication review classifies the Cycle 263 theorem
+  `Sha(43a1/Q)=0` as `ROUTINE/KNOWN-IN-PRACTICE`. Although the internal packet
+  records a valid curve-specific theorem within its stated trust boundary, the
+  result is a low-conductor specialization of classical Gross--Zagier--
+  Kolyvagin plus full 2-descent, with no new method, family theorem, or
+  Millennium resolution. The absence of a located paper printing the literal
+  curve-label statement does not establish novelty. Suppress public
+  announcement and external workflow: no paper/package work, publication-
+  manifest row, X post, OCB submission or resolution report, or author/expert
+  contact. Retain the packet internally as a reproducibility and theorem-
+  application case study. No external action was taken. See
+  `millennium-prize/birch-swinnerton-dyer/cycle-263-43a1-publication-gate-literature-audit.md`.
+
+- 2026-08-02: BSD Cycle 263 integrates the bounded arithmetic dependencies and
+  proves the curve-specific theorem `Sha(43a1/Q)=0` within the packet's stated
+  theorem-backed exact-computation trust boundary. For
+  `K=Q(sqrt(-7))`, the normalized maximal-order Heegner point is exactly
+  `y_K=P=(0,0)`, and `E(K)=ZP`, so every Kolyvagin index exponent is zero.
+  All residual representations are surjective. Kolyvagin Theorem 3 exactly as
+  quoted by Cha, JNT 111 (2005), journal p. 155, therefore kills every odd
+  primary part over `K`, including at ramified `p=7` and bad multiplicative
+  `p=43`. Since `cor o res=[K:Q]=2`, restriction injects odd-primary Sha over
+  `Q`. The full 2-descent gives `Sel^(2)(E/Q)=<delta(P)>` and
+  `Sha(E/Q)[2]=0`, which kills the entire 2-primary part. The proof trusts the
+  cited external theorems and standard exact PARI/eclib implementations; the
+  optional independent Magma scripts were not run, and database Sha values,
+  floating Heegner recognition, and numerical leading-term quotients are not
+  inputs. This proves neither an exact leading-term formula nor a family-rank
+  theorem. See
+  `millennium-prize/birch-swinnerton-dyer/cycle-263-43a1-sha-vanishing-theorem.md`.
+
+- 2026-08-02: Navier Cycle 263 freezes and validates `C263-MG1`, implicit
+  midpoint on the exact symmetric square Galerkin convolution. Since the
+  semidiscrete vector field is tangent to both quadratic forms, midpoint
+  preserves Galerkin energy and enstrophy exactly at zero solve residual; the
+  implementation replays the exact finite-residual defect identities and
+  Cauchy--Schwarz bounds. Deterministic synthetic `K=2,3` tests pass: maximum
+  direct-versus-padded RHS discrepancy `1.10e-15`, normalized tangency
+  `3.36e-16`, Newton residual/scale `2.02e-14`, identity closure `5.71e-17`,
+  and reversal error `5.83e-16`. The retired Cycle 258 family was neither
+  loaded nor rerun. Record `C263-MG1 PASS: BOTH FINITE GALERKIN INVARIANTS
+  PRESERVED UP TO REPLAYED SOLVE AND ROUNDOFF RESIDUALS; CYCLE258 NOT RERUN;
+  NUMERICAL FINITE-DIMENSIONAL ONLY.` This supplies an integrator mechanism,
+  not a full Euler enclosure or an `ND251` directed `2+eta` crossing. See
+  `millennium-prize/navier-stokes/cycle-263-midpoint-galerkin-validation.md`.
+
+- 2026-08-02: A hostile audit corrects, but does not retract, Cycle 261's
+  all-prime residual-surjectivity result for `43a1`. The prior phrase "Mazur's
+  semistable isogeny theorem" was too broad: Mazur's general prime-isogeny
+  theorem allows `11,13,17,19,37,43,67,163`. The exact input is the semistable
+  reducibility lemma: reducible `E[p]` forces `E` or its `p`-isogenous quotient
+  to have rational `p`-torsion; Mazur's torsion theorem then excludes `p>7`.
+  Thus no curve-specific conductor/discriminant test is needed for
+  irreducibility. At `p=43`, however, the transvection uses the curve-specific
+  `I_1` fact `v_43(Delta_min)=1`: over `Q_43(mu_43)`, the Tate parameter has a
+  nontrivial Kummer class and wild inertia acts by a nonidentity unipotent.
+  The `p=3,5` matrix enumeration correctly covers every relative position
+  after conjugating inertia to standard form. The verifier now uses explicit
+  exceptions and remains fail-closed under `python3 -O`. Record `CORRECTED
+  PASS: ALL-PRIME RESIDUAL SURJECTIVITY SURVIVES; ATTRIBUTION AND VERIFIER
+  HARDENED.`
+
+- 2026-08-02: Navier `C258-V1` promotes `0/4`. All four frozen validation
+  members pass step-halving, fine-resolution, independent-cubature, and
+  alias-replay gates, but all fail the declared conservation gate; maximum
+  enstrophy drifts are `6.37e-5` to `1.44e-4` against `2e-5`. Fine-step RK4
+  runs already fall below the drift gate, so another smaller-step RK4 run would
+  be post-outcome selection rather than structure-preserving validation. The
+  best fine directed increase is only `1.0477998704925884`, despite a
+  bidirectional ratio `1.2328250527754527`. Record `CYCLE258 FAMILY RETIRED
+  FROM PRODUCTION: C258-V1 HAS 0/4 PROMOTIONS; FROZEN CONSERVATION GATE FAILS;
+  NO RERUN AND NO THRESHOLD TUNING; NUMERICAL ONLY.` The next `ND251`
+  architecture must freeze an energy-and-enstrophy-preserving Galerkin update
+  with replayable residual bounds and use directed endpoint amplification
+  toward `2+eta` as its objective. This is operational retirement, not an Euler
+  family exclusion; no Navier--Stokes or Millennium result is claimed. See
+  `millennium-prize/navier-stokes/cycle-262-cycle258-v1-strategic-decision.md`.
+
+- 2026-08-02: BSD Cycle 261 upgrades the `43a1`, `D_K=-7` Heegner image from
+  numerical `ellheegner` recognition to an exact formal-`q` certificate. For
+  the degree-two optimal quotient, the Fricke-invariant functions
+  `S=j(z)+j(43z)` and `R=j(z)j(43z)` are reconstructed over `Q` in the exact
+  Riemann--Roch bases `L(43O)` and `L(44O)`. The class polynomial
+  `H_-7(T)=T+3375` imposes `S=-6750`, `R=3375^2`; integer resultants have common
+  polynomial factor exactly `X`, and the trace equation selects `Y=0` over
+  `X=0`, proving the normalized CM image and class-number-one trace are
+  `y_K=(0,0)=P`. This closes only Cycle 260's Heegner-image gap. Residual
+  images, Mordell--Weil saturation, and an independently replayed proof-enabled
+  2-descent remain before any `Sha=0` or BSD claim. See
+  `millennium-prize/birch-swinnerton-dyer/cycle-261-43a1-dminus7-exact-cm-certificate.md`.
+
+- 2026-08-02: Cycle 261 reviews `43a1` only after the current scouts report.
+  Proving `Sha(43a1/Q)=0` would be a genuine bounded arithmetic theorem and a
+  meaningful curve-specific BSD partial result, but not an official BSD
+  transfer: it proves neither a family rank equality nor the exact complex
+  leading-term formula. Publication novelty is not presumed. The four Cycle
+  260 gaps form a finite fail-closed packet: directed convention-audited
+  Heegner-point isolation, Mordell--Weil generation/index, complete residual
+  images including `p=7`, and independent proof-enabled 2-descent. Authorize
+  one bounded side closure campaign with no nearby curves, fields, or weakened
+  substitutes. Cycle 258's integrated Euler family passed its numerical `1.1`
+  gate, while Cycle 259 retired only its weak patch grid and the Hodge scout
+  rejected its fixed architecture. Therefore `ND251` remains the main funnel
+  and BSD remains `(0,1,1,0)`. Record `ND251 REMAINS MAIN; AUTHORIZE ONE
+  BOUNDED 43a1 SHA-CLOSURE PACKET; NO BSD TRANSFER.` No `Sha=0`, BSD, or
+  Millennium result is claimed. See
+  `millennium-prize/cycle-261-strategic-review.md`.
+
 - 2026-08-02: BSD Cycle 260 hostilely audits the proposed
   `Sha(43a1/Q)=0` argument from `K=Q(sqrt(-7))`. Exact arithmetic confirms the
   model `y^2+y=x^3+x^2`, conductor `43`, discriminant `-43`, candidate
@@ -1297,10 +1405,14 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 260 keeps focused Navier dynamics `ND251` in
-  production-architecture discovery. The frozen Cycle 255 numerical funnel is
-  retired from production after zero promotions, but its exact certificate and
-  transfer infrastructure remain reusable. Literal full-vorticity
+- **phase:** Cycle 263 keeps focused Navier dynamics `ND251` in
+  production-architecture discovery. The frozen Cycle 258 family is retired
+  from production after `C258-V1` promotes `0/4` at its conservation gate. The
+  next architecture must preserve Galerkin energy and enstrophy by construction
+  and optimize directed endpoint amplification. Cycle 255's exact certificate
+  and transfer infrastructure remain reusable. The bounded `43a1` side packet
+  is closed by its curve-specific Sha-vanishing theorem without a lane
+  rotation. Literal full-vorticity
   `dot H^-1` growth is off the Euler energy shell; the viable target is
   fixed-`dot H^-1`, variable-`W^(-1,3)` amplification, while `KI240` remains
   `INCOMPLETE`.
@@ -2135,7 +2247,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 260
+- **cycle:** 263
 - **announcements:** none
 
 ## immutable target list

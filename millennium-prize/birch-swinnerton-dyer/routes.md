@@ -1,5 +1,49 @@
 # Routes
 
+Cycle 263 integrates the bounded `43a1` packet into the curve-specific theorem
+`Sha(43a1/Q)=0`. The exact CM certificate gives `y_K=P`, the Mordell--Weil
+certificate gives `E(K)=ZP`, and all residual images are surjective. Therefore
+the exact Kolyvagin Theorem 3 quoted by Cha on JNT journal p. 155 gives
+`Sha(E/K)[p^infty]=0` for every odd `p`, including ramified `7` and bad
+multiplicative `43`. Restriction--corestriction injects the odd-primary groups
+over `Q` into those over `K`. The independent full 2-descent over `Q` gives
+`Sha(E/Q)[2]=0`, hence vanishing of the full 2-primary group. The theorem has
+an explicit PARI/eclib and external-theorem trust boundary and uses no database
+Sha value, floating-point Heegner recognition, or numerical leading-term
+quotient. It is not a claim of the full Birch--Swinnerton-Dyer conjecture. See
+`cycle-263-43a1-sha-vanishing-theorem.md`.
+
+Cycle 262 decisively verifies the odd-prime literature gate from the published
+Cha scan. Kolyvagin Theorem 3 as quoted on JNT journal p. 155 assumes an odd
+prime and full residual surjectivity, but does not exclude primes dividing the
+quadratic discriminant or conductor and does not require good reduction at
+`p`. Thus it applies at ramified `p=7` and bad multiplicative `p=43` for
+`43a1`; Cycle 261 supplies surjectivity and the exact index packet supplies
+`m_7=m_43=0`. Cha Theorem 21's unramifiedness and good-or-multiplicative
+conditions belong only to the irreducibility relaxation. No direct finite
+Selmer computation at 7 or 43 is needed. See
+`cycle-262-43a1-kolyvagin-theorem3-literature-audit.md`.
+
+Cycle 261 closes the residual-image item in the bounded `43a1` packet. For the
+displayed curve, the semistable reducibility-to-rational-torsion lemma plus
+Mazur's torsion theorem closes every `p>=11` (the general rational-isogeny list
+alone does not), exact Frobenius witnesses close `p=3,5,7`, type `I_1` inertia supplies a
+transvection, and Dickson plus exact small-prime enumeration proves
+`im(rho_bar_E,p)=GL_2(F_p)` for every prime, including `7` and `43`. This is
+not an image-database assertion. The Heegner identity, Mordell--Weil/index, and
+independent 2-descent items remain open. See
+`cycle-261-43a1-all-prime-residual-surjectivity.md`.
+
+Cycle 261 classifies a successful proof of `Sha(43a1/Q)=0` as a meaningful
+curve-specific BSD partial theorem, but not an official BSD transfer or a
+presumed novel result. The four Cycle 260 gaps are finite enough to justify one
+bounded fail-closed side packet: directed normalized Heegner-point isolation,
+Mordell--Weil generation/index, complete residual images, and an independent
+proof-enabled 2-descent. Failure of any terminal item ends the packet; do not
+cycle through nearby curves or fields. `ND251` remains the main funnel after
+the current Navier scouts, and BSD remains `(0,1,1,0)`. See
+`../cycle-261-strategic-review.md`.
+
 Cycle 260 hostilely audits the proposed `43a1`, `K=Q(sqrt(-7))` shortcut and
 records `GAPS`, not a theorem. The curve model and Heegner hypothesis pass.
 Cha covers odd `p != 7`, including `p=3,43`, subject to irreducibility; the

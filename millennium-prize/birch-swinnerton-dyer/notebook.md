@@ -1,5 +1,79 @@
 # Notebook
 
+## `43a1` Shafarevich--Tate vanishing theorem cycle 263
+
+The bounded packet now proves `Sha(43a1/Q)=0` within its stated theorem-backed
+exact-computation trust boundary. For `K=Q(sqrt(-7))`, the exact normalized CM
+identity `y_K=P` and `E(K)=ZP` make every Kolyvagin index exponent `m_p=0`.
+Full residual surjectivity lets the exact Kolyvagin Theorem 3 quoted by Cha,
+JNT 111 (2005), journal p. 155, apply to every odd prime without excluding
+ramified `p=7` or bad multiplicative `p=43`. Thus every odd-primary part over
+`K` vanishes; restriction--corestriction, whose composite is multiplication by
+two, injects each odd-primary part over `Q`. At two, the full 2-descent gives
+`Sel^(2)(E/Q)=<delta(P)>` and hence `Sha(E/Q)[2]=0`; any nonzero 2-primary
+torsion group has nonzero 2-torsion. This is a curve-specific Sha theorem, not
+an exact leading-term or family-rank result. The PARI/eclib trust boundary and
+the unavailable optional Magma replay are explicit. See
+`cycle-263-43a1-sha-vanishing-theorem.md`.
+
+## Decisive `43a1` Kolyvagin literature audit cycle 262
+
+The published scan of Cha, JNT 111 (2005), p. 155, states Kolyvagin Theorem 3
+for an odd prime under full residual surjectivity and gives
+`ord_p #Sha(E/K) <= 2m_p`; it has no condition that `p` be unramified in `K`
+or that `E` have good reduction at `p`. Those local restrictions occur in
+Cha's weaker-image Theorem 21 on p. 173. Therefore Theorem 3 covers both
+ramified `p=7` and bad multiplicative `p=43` for `43a1`, because Cycle 261
+proves full residual surjectivity at both primes. The exact Heegner and
+Mordell--Weil certificates give `m_7=m_43=0`, so both primary parts over `K`,
+and hence over `Q`, vanish. No direct 7- or 43-Selmer fallback is needed. See
+`cycle-262-43a1-kolyvagin-theorem3-literature-audit.md`.
+
+## `43a1` Mordell--Weil group over `K` cycle 261
+
+The integral Heegner index is now computed over the actual Heegner field, not
+inferred from `E(Q)`. Exact full 2-descent on the minimal `-7` twist
+`[0,-1,1,-16,-106]` gives rank zero, hence `rank E(K)=1`. Reductions at the
+split prime 2 and inert prime 3 have orders 5 and 12, eliminating odd torsion;
+the irreducible 2-division cubic stays irreducible over the quadratic field and
+eliminates 2-primary torsion. Hence `E(K)_tors=0`.
+Thus `Q-sigma(Q)` vanishes for every `Q in E(K)`, so `E(K)=E(Q)`. Eclib's full
+2-descent and saturation returns `-P=(0,-1)` as an unconditional Mordell--Weil
+basis, proving `E(K)_free=ZP` and, with the exact CM identity, index one for
+`y_K=P`. PARI and eclib were replayed locally; the supplied Magma direct
+number-field checker remains an unrun independent cross-check. See
+`43a1/K-mordell-weil-certificate.md`.
+
+## All-prime residual surjectivity for `43a1` cycle 261
+
+The residual-image gap from Cycle 260 is closed without an image database.
+For `E:y^2+y=x^3+x^2`, `Delta_min=-43` and type `I_1` reduction at 43 put a
+transvection in every residual image. The precise semistable lemma says that a
+reducible `E[p]` makes `E` or its `p`-isogenous quotient have rational
+`p`-torsion; Mazur torsion then gives irreducibility for `p>=11`, despite the
+prime degrees allowed by the general isogeny theorem. Frobenius discriminants
+`-4` at 2 and `-8` at 3 give irreducibility at `3,5,7`; and the 2-division
+cubic has Galois group `S_3`.
+Dickson's classification gives full image for `p>=7`, explicitly including
+`7,43` and all large primes, while finite matrix enumeration gives full image
+at `3,5`. At `p=43`, the transvection comes from the degree-43 Kummer extension
+of the Tate parameter with valuation one. Thus every mod-`p` image is
+`GL_2(F_p)`. The verifier is now fail-closed under `python -O`. The normalized
+Heegner-point, Mordell--Weil/index, and independent 2-descent gaps remain. See
+`cycle-261-43a1-all-prime-residual-surjectivity.md`.
+
+## Bounded `43a1` strategic decision cycle 261
+
+After the current Navier and Hodge scouts reported, Cycle 261 keeps `ND251` as
+the main funnel and authorizes only one bounded `43a1` side closure packet.
+`Sha(43a1/Q)=0`, if fully proved, is a genuine curve-specific arithmetic
+theorem and meaningful BSD partial result, but it supplies no official BSD
+transfer and has no presumed publication novelty. The packet must close the
+directed normalized Heegner identity, Mordell--Weil generation/index, all
+residual hypotheses, and proof-enabled 2-descent; any terminal failure stops
+the campaign without nearby-curve or nearby-field cycling. See
+`../cycle-261-strategic-review.md`.
+
 ## Hostile `43a1`, `D_K=-7` audit cycle 260
 
 The proposed proof of `Sha(43a1/Q)=0` is not promoted. The exact model is

@@ -1,5 +1,42 @@
 # Notebook
 
+## Cycle 263 invariant-preserving Galerkin integrator
+
+`C263-MG1` freezes implicit midpoint on the exact symmetric square Galerkin
+convolution, with a full Newton solve, actual nonlinear residual recording,
+independent `4K+1` padded RHS replay, and exact stepwise energy/enstrophy defect
+identities. Both invariants are quadratic and the Galerkin vector field is
+tangent to both level sets, so exact midpoint preserves both. The synthetic
+`K=2,3` validation passes all frozen gates: maximum RHS replay discrepancy is
+`1.10e-15`, normalized tangency `3.36e-16`, Newton residual/scale `2.02e-14`,
+defect-identity closure `5.71e-17`, and reversal error `5.83e-16`. No retired
+Cycle 258 data were loaded or rerun. This validates only the finite-dimensional
+conservation mechanism; no full Euler enclosure or directed `2+eta` crossing
+is claimed. See `cycle-263-midpoint-galerkin-architecture.md` and
+`cycle-263-midpoint-galerkin-validation.md`.
+
+## Cycle 262 retirement of the Cycle 258 family
+
+`C258-V1` promotes `0/4`: every member fails the frozen conservation gate even
+though the step-halving, resolution, cubature, and alias-replay checks pass. The
+fine RK4 steps already reduce enstrophy drift below the gate, so another RK4
+run would be a post-outcome method/step selection rather than a
+structure-preserving validation. Retire the frozen Cycle 258 family and its
+validation branch from production; do not rerun or tune thresholds. The next
+`ND251` architecture must freeze an energy-and-enstrophy-preserving Galerkin
+update with replayable residual bounds and must select on directed endpoint
+amplification toward `2+eta`, not bidirectional excursion. See
+`cycle-262-cycle258-v1-strategic-decision.md`.
+
+## Cycle 261 strategic retention
+
+After Cycle 258 passes its declared numerical `1.1` variation gate, Cycle 259
+retires only the weak ellipse-pair patch grid, and the concurrent BSD/Hodge
+scouts report, `ND251` remains the main funnel. One finite fail-closed `43a1`
+Sha-closure side packet is authorized because its gaps are exact and bounded;
+it is not a BSD lane rotation or an official transfer. See
+`../cycle-261-strategic-review.md`.
+
 ## Cycle 259 bounded opposite-sign patch contour scout
 
 A frozen 24-member equal-area ellipse-pair grid was evolved by periodic

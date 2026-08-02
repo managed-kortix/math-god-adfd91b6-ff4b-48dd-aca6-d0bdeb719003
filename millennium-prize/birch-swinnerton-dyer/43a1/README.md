@@ -19,7 +19,15 @@ python3 millennium-prize/birch-swinnerton-dyer/43a1/verify_43a1_exact.py \
   | tee millennium-prize/birch-swinnerton-dyer/43a1/output-exact.txt
 gp -fq millennium-prize/birch-swinnerton-dyer/43a1/verify_43a1.gp \
   | tee millennium-prize/birch-swinnerton-dyer/43a1/output-pari.txt
+gp -fq millennium-prize/birch-swinnerton-dyer/43a1/verify_dminus7_cm_exact.gp \
+  | tee millennium-prize/birch-swinnerton-dyer/43a1/output-dminus7-exact.txt
+gp -fq millennium-prize/birch-swinnerton-dyer/43a1/verify_43a1_K.gp \
+  | tee millennium-prize/birch-swinnerton-dyer/43a1/output-K.txt
+printf '0 1 1 0 0\n' | mwrank -v 2 -p 1000
 ```
+
+The retained transcripts are `output-K.txt` and
+`output-mwrank-saturation.txt`.
 
 Optional independent backends are supplied but were not run here:
 
@@ -27,6 +35,12 @@ Optional independent backends are supplied but were not run here:
 sage millennium-prize/birch-swinnerton-dyer/43a1/verify_43a1.sage
 magma millennium-prize/birch-swinnerton-dyer/43a1/verify_43a1.m
 ```
+
+The focused exact 2-descent certificate and checkers are in
+`2descent-certificate.md`, `verify_43a1_2descent.gp`, and
+`verify_43a1_2descent.m`.  The GP checker is runnable in this environment;
+the Magma checker exposes the full Selmer group, Kummer map, relevant primes,
+local maps, and explicit cover basis for an independent replay.
 
 ## Conclusions and status
 
@@ -40,8 +54,9 @@ magma millennium-prize/birch-swinnerton-dyer/43a1/verify_43a1.m
 | rank | 1 | PARI exact 2-descent returns `[1,1]`, and `P` supplies the lower bound |
 | 2-Selmer | dimension 1 | interpretation of PARI's complete 2-descent: one nonzero locally soluble cover, together with trivial `E(Q)[2]`; Sage/Magma scripts request independent implementations |
 | generator | `P=(0,0)` | PARI's descent point is `[-3/4,1/8]=5P`; `P` is a primitive generator once the rank-one 2-descent/saturation result is accepted; direct tests show no division by 2, 3, or 5 |
-| Heegner, `D=-7` | the class-number-one CM point maps numerically to `(0,0)`; `ellheegner` returns `(0,0)` | Heegner hypothesis exact, modular parametrization numerical/arbitrary precision, final rational point exactly verified; not a symbolic CM evaluation certificate |
-| mod-p images | maximal for every prime `p` | LMFDB/Sutherland-Zywina database theorem-backed data; this packet independently supplies Frobenius traces and absence of rational isogenies as evidence, not a proof of all images |
+| group over `K=Q(sqrt(-7))` | `E(K)_tors=0`, `E(K)_free=Z P` | exact `-7`-twist 2-descent gives twist rank zero; prime-to-residue-characteristic reduction at 2 and 3 eliminates odd torsion, while the irreducible cubic gives `E(K)[2]=0`; hence `E(K)=E(Q)`, and eclib's full saturation gives `E(Q)=Z P` |
+| Heegner, `D=-7` | the class-number-one CM point maps exactly to `(0,0)` | exact formal-`q` reconstruction of the descended trace and norm of the two `j`-invariants, followed by integer-resultant fiber elimination; see Cycle 261 |
+| mod-p images | maximal for every prime `p` | proved without image-database input in Cycle 261 by the semistable reducibility lemma plus Mazur torsion, Tate inertia, Dickson classification, and exact small-prime witnesses |
 
 ### Rank and 2-Selmer caution
 
@@ -69,12 +84,21 @@ certified class- and unit-group subroutines, rerun the Sage `proof=True` and
 Magma `TwoSelmerGroup` alternatives and retain their transcripts.
 
 The 2-descent alone proves only odd saturation of the visible rank-one
-subgroup.  PARI's point `Q=(-3/4,1/8)` satisfies `Q=5P`, while direct
-`ellisdivisible` checks exclude division of `P` by 2, 3, and 5.  A fully general
-generator proof is supplied by the complete Mordell--Weil/saturation routines
-requested in the Sage and Magma alternatives.  The identification of `P` as
-the generator is also database data in Cremona/LMFDB, but database agreement is
-not substituted for saturation.
+subgroup. PARI's point `Q=(-3/4,1/8)` satisfies `Q=5P`, while direct
+`ellisdivisible` checks exclude division of `P` by 2, 3, and 5. Eclib's full
+Mordell--Weil calculation supplies the missing all-prime saturation: at
+1000-bit precision it returns `[0:-1:1]=-P`, says the basis is already
+saturated, and states that the full basis has been determined unconditionally.
+The identification is therefore not taken from Cremona/LMFDB.
+
+Over `K=Q(sqrt(-7))`, the exact `-7`-twist descent proves rank zero for the
+anti-invariant part. Exact reductions give `#E(F_2)=5` (2 split) and
+`#E(F_9)=12` (3 inert), eliminating odd torsion; the irreducible rational
+2-division cubic remains irreducible over the quadratic field `K`, eliminating
+2-primary torsion. Thus `E(K)_tors=0`. For every `Q in E(K)`, the
+anti-invariant point `Q-sigma(Q)` is then both torsion and zero; hence
+`E(K)=E(Q)=ZP`. See `K-mordell-weil-certificate.md`. This proves the literal
+index `[E(K)_free:Z y_K]=1` after the exact CM certificate identifies `y_K=P`.
 
 ## Heegner point with discriminant -7
 
@@ -102,14 +126,35 @@ from coefficients counted directly from `E`; applying the complex
 uniformization gives `(0,0)` to the displayed precision.  PARI's independent
 `ellheegner(E)` implementation also returns the exact point `(0,0)`.
 
-What is proved exactly here is the Heegner hypothesis and that the rational
-output lies on `E`.  The equality between the CM divisor's modular image and
-that output is obtained through rapidly convergent floating-point evaluation,
-not interval arithmetic or a symbolic algebraic CM certificate.  It is strong
-reproducible evidence, and enough to recover the candidate, but should not be
-mislabelled as an exact proof of the modular parametrization evaluation.
+The independent Cycle 261 certificate upgrades this numerical recognition.
+It reconstructs `j(z)+j(43z)` and `j(z)j(43z)` exactly as rational functions
+on the optimal quotient from formal `q`-series. It also verifies the `+1`
+Fricke eigenvalue, the positive differential normalization, trivial rational
+torsion, equality of the reduced quadratic-form classes for `tau` and
+`43*tau`, independent Riemann--Roch uniqueness coefficients, and the exact
+gcd of three nonzero resultants. Substitution of `H_-7(T)=T+3375` then isolates
+the unique point `(0,0)`. See `verify_dminus7_cm_exact.gp` and
+`../cycle-261-43a1-dminus7-exact-cm-certificate.md`.
 
 ## Mod-p images
+
+Cycle 261 now supplies the missing proof-grade all-prime argument. See
+`../cycle-261-43a1-all-prime-residual-surjectivity.md` and reproduce its finite
+checks with
+
+```sh
+python3 millennium-prize/birch-swinnerton-dyer/verify_cycle261_43a1_residual.py
+```
+
+It proves `im(rho_bar_E,p)=GL(2,F_p)` for every prime, using no image database:
+the semistable reducibility-to-rational-torsion lemma and Mazur's torsion
+theorem close `p>=11` (not the general isogeny-degree list alone); exact Frobenius
+discriminants close irreducibility at `3,5,7`; multiplicative `I_1` inertia at
+43 supplies a transvection for every `p`; Dickson's classification closes
+`p>=7`; and exhaustive exact matrix checks close `p=3,5`. The irreducible
+2-division cubic of nonsquare discriminant closes `p=2`.
+
+### Prior database evidence
 
 LMFDB release 1.2.1 records `nonmax_primes=[]`: every prime-adic image is
 maximal, and records an adelic image of index 2 and level 86.  These are
@@ -126,12 +171,9 @@ The packet's exact independent evidence is narrower:
    `T^2-a_q T+q`, useful as reproducible witnesses against proposed exceptional
    images for any fixed `p`.
 
-Items 1--4 do **not** by themselves prove surjectivity for every prime.  A
-proof-grade all-prime statement needs an effective exceptional-prime theorem
-plus subgroup elimination, or a trusted Sage/Magma implementation.  The Sage
-script asks `non_surjective()` and per-prime `image_type`; the Magma script asks
-`GaloisRepresentation` through 47.  Their outputs should be described as
-theorem-backed software computations, with the exact software version retained.
+Items 1--4 were formerly only evidence. They are now supplemented by the
+Cycle 261 theorem argument; the optional Sage and Magma image commands remain
+cross-checks and are not proof inputs.
 
 ## Database comparison
 

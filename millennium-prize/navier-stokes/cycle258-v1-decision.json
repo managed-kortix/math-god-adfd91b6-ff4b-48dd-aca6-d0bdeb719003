@@ -1,0 +1,168 @@
+{
+  "format": "C258-V1-decision",
+  "members": [
+    {
+      "checks": {
+        "alias_replay": true,
+        "conservation": false,
+        "cubature": true,
+        "extrema": false,
+        "fine_resolution": true,
+        "n256_step_halving": true
+      },
+      "family_index": 30,
+      "fine_extrema": {
+        "n128": {
+          "maximum": {
+            "l3": 1.5240021128463646,
+            "time": 0.28125
+          },
+          "minimum": {
+            "l3": 1.262569737166604,
+            "time": 2.5
+          }
+        },
+        "n256": {
+          "maximum": {
+            "l3": 1.5240022801364101,
+            "time": 0.28125
+          },
+          "minimum": {
+            "l3": 1.2617979973202889,
+            "time": 2.37890625
+          }
+        }
+      },
+      "fine_n128_n256_ratio_change": 0.0007383958883697694,
+      "max_alias_replay_relative_rhs_discrepancy": 4.479216736792508e-16,
+      "max_cubature_ratio_change": 5.5182305391809905e-09,
+      "max_relative_energy_drift": 9.72350070238548e-07,
+      "max_relative_enstrophy_drift": 0.00014403801072215838,
+      "n256_step_halving_ratio_change": 5.661108433141493e-07,
+      "passes_all_gates": false
+    },
+    {
+      "checks": {
+        "alias_replay": true,
+        "conservation": false,
+        "cubature": true,
+        "extrema": true,
+        "fine_resolution": true,
+        "n256_step_halving": true
+      },
+      "family_index": 36,
+      "fine_extrema": {
+        "n128": {
+          "maximum": {
+            "l3": 1.5165541920005412,
+            "time": 0.265625
+          },
+          "minimum": {
+            "l3": 1.23029203415111,
+            "time": 2.5
+          }
+        },
+        "n256": {
+          "maximum": {
+            "l3": 1.5165546827025618,
+            "time": 0.265625
+          },
+          "minimum": {
+            "l3": 1.2311546878826947,
+            "time": 2.5
+          }
+        }
+      },
+      "fine_n128_n256_ratio_change": 0.0008633226781715742,
+      "max_alias_replay_relative_rhs_discrepancy": 4.80834808767504e-16,
+      "max_cubature_ratio_change": 3.7893088666862695e-10,
+      "max_relative_energy_drift": 1.0468543343300496e-06,
+      "max_relative_enstrophy_drift": 8.647628712987743e-05,
+      "n256_step_halving_ratio_change": 1.6558717952364077e-08,
+      "passes_all_gates": false
+    },
+    {
+      "checks": {
+        "alias_replay": true,
+        "conservation": false,
+        "cubature": true,
+        "extrema": true,
+        "fine_resolution": true,
+        "n256_step_halving": true
+      },
+      "family_index": 43,
+      "fine_extrema": {
+        "n128": {
+          "maximum": {
+            "l3": 1.5125494101051142,
+            "time": 0.265625
+          },
+          "minimum": {
+            "l3": 1.2249706673169372,
+            "time": 2.5
+          }
+        },
+        "n256": {
+          "maximum": {
+            "l3": 1.5125498717820376,
+            "time": 0.265625
+          },
+          "minimum": {
+            "l3": 1.2268974161231083,
+            "time": 2.5
+          }
+        }
+      },
+      "fine_n128_n256_ratio_change": 0.0019387260324619238,
+      "max_alias_replay_relative_rhs_discrepancy": 4.667873447109573e-16,
+      "max_cubature_ratio_change": 2.16194462332453e-09,
+      "max_relative_energy_drift": 9.876780097117788e-07,
+      "max_relative_enstrophy_drift": 8.193412646417819e-05,
+      "n256_step_halving_ratio_change": 2.9575521565128327e-07,
+      "passes_all_gates": false
+    },
+    {
+      "checks": {
+        "alias_replay": true,
+        "conservation": false,
+        "cubature": true,
+        "extrema": true,
+        "fine_resolution": true,
+        "n256_step_halving": true
+      },
+      "family_index": 44,
+      "fine_extrema": {
+        "n128": {
+          "maximum": {
+            "l3": 1.4839313829795988,
+            "time": 0.2734375
+          },
+          "minimum": {
+            "l3": 1.204752830345623,
+            "time": 2.5
+          }
+        },
+        "n256": {
+          "maximum": {
+            "l3": 1.483931816524373,
+            "time": 0.2734375
+          },
+          "minimum": {
+            "l3": 1.2075574052903186,
+            "time": 2.5
+          }
+        }
+      },
+      "fine_n128_n256_ratio_change": 0.0028603595008804827,
+      "max_alias_replay_relative_rhs_discrepancy": 4.949772058785888e-16,
+      "max_cubature_ratio_change": 6.479030645323292e-10,
+      "max_relative_energy_drift": 7.669640217367046e-07,
+      "max_relative_enstrophy_drift": 6.367448086663785e-05,
+      "n256_step_halving_ratio_change": 3.858287989100262e-07,
+      "passes_all_gates": false
+    }
+  ],
+  "numerical_only": true,
+  "promoted_family_indices": [],
+  "promotion": false
+}

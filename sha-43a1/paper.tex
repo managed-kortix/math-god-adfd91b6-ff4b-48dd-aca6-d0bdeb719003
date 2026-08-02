@@ -1,0 +1,492 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\urlstyle{same}
+\setlength{\emergencystretch}{3em}
+\sloppy
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\F}{\mathbf F}
+\newcommand{\Z}{\mathbf Z}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Sel}{\operatorname{Sel}}
+\newcommand{\Sha}{\mathop{\mathrm{Sha}}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\artifact}[1]{\href{run:../#1}{\nolinkurl{#1}}}
+
+\title{Triviality of the Tate--Shafarevich Group of the Elliptic Curve 43a1}
+\author{A curve-specific verification note}
+\date{2 August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let
+\[
+ E/\Q:\qquad y^2+y=x^3+x^2,
+\]
+the elliptic curve with Cremona label \(43\mathrm a1\).  We prove
+\(\Sha(E/\Q)=0\).  The proof identifies an exactly normalized Heegner point
+over \(K=\Q(\sqrt{-7})\), proves that it generates \(E(K)\), verifies every
+residual-image hypothesis in Kolyvagin's odd-primary bound, and uses a full
+2-descent for the 2-primary part.  All computer calculations used in the
+proof are exact-arithmetic or algorithmically certified; scripts, retained
+outputs, and replay commands are linked.
+The declared trust boundary is the ordinary one for published theorems and
+the exact PARI/GP and eclib algorithms named below.  This is a result about
+one specified curve.  It is not a proof of the Birch and Swinnerton-Dyer
+conjecture, does not imply the conjecture for any family, and carries no claim
+of novelty.
+\end{abstract}
+
+\section{Scope and trust statement}
+
+The purpose of this note is deliberately narrow.  Its only main assertion is
+the following.
+
+\begin{theorem}\label{thm:main}
+For the elliptic curve
+\[
+ E/\Q:y^2+y=x^3+x^2
+\]
+with Cremona label \(43\mathrm a1\), one has
+\[
+ \Sha(E/\Q)=0.
+\]
+\end{theorem}
+
+The theorem is proved under standard theorem/CAS trust.  ``Theorem trust''
+means that the cited published results of Kolyvagin, in the precise form
+quoted by Cha, and the standard results on semistable residual
+representations, Tate curves, rational torsion, and finite subgroups of
+\(\operatorname{GL}_2(\F_p)\) are accepted.  ``CAS trust'' means that the
+documented exact arithmetic, full 2-descent, modular-form, modular
+parametrization, and saturation algorithms in PARI/GP 2.15.4 and eclib/mwrank
+are accepted.  No floating-point recognition, rounded BSD quotient, LMFDB
+value of \(\Sha\), or unproved database image label is a proof input.
+
+This trust statement is not decorative.  The exact CM calculation invokes
+PARI's modular-form and Taniyama-series constructors.  The Selmer upper bounds
+invoke PARI's full 2-descent.  The integral Mordell--Weil basis invokes eclib's
+descent and saturation.  The retained artifacts make those calls replayable,
+but they do not expand the internals of those systems into a kernel-independent
+formal proof.
+
+No novelty claim is made.  The curve is small, its expected arithmetic is in
+standard databases, and the ingredients are classical.  The point here is an
+explicit proof packet with its hypotheses and trust boundary exposed.
+
+\section{Exact arithmetic data}
+
+Put \(P=(0,0)\).  Direct invariant calculation from the displayed equation
+gives
+\[
+ b_2=4,\quad b_4=0,\quad b_6=1,\quad b_8=1,
+ \quad c_4=16,
+ \quad \Delta=-43,
+ \quad j=-\frac{4096}{43}.
+\]
+Thus the equation is globally minimal, \(N_E=43\), and \(E\) is semistable,
+with nonsplit multiplicative reduction of type \(I_1\) at 43 and good
+reduction elsewhere.  In particular \(v_{43}(\Delta_{\min})=1\).
+
+Completing the square gives the 2-division polynomial
+\[
+ f_2(X)=4X^3+4X^2+1.
+\]
+It has no rational root and has discriminant \(-16\cdot43\).  Hence
+\(E(\Q)[2]=0\), and its splitting field has Galois group
+\(S_3=\operatorname{GL}_2(\F_2)\).  Exact counts give
+\[
+ \#E(\F_2)=5,\qquad \#E(\F_3)=6.
+\]
+Reduction therefore proves that \(E(\Q)_{\rm tors}=0\).  These elementary
+calculations are replayed without external packages by
+\artifact{millennium-prize/birch-swinnerton-dyer/43a1/verify_43a1_exact.py};
+the retained output is
+\artifact{millennium-prize/birch-swinnerton-dyer/43a1/output-exact.txt}.
+
+\section{The normalized Heegner point}
+
+Let
+\[
+ K=\Q(\sqrt{-7}),\qquad
+ \tau=\frac{-37+\sqrt{-7}}{86}.
+\]
+The discriminant \(-7\) is fundamental and has class number one.  Moreover
+\[
+ 37^2+7=4\cdot43\cdot8,
+\]
+so 43 splits in \(K\), and the maximal-order Heegner hypothesis holds for
+\(X_0(43)\).
+
+Fix the strong Weil parametrization
+\[
+ \pi:X_0(43)\longrightarrow E,
+ \qquad \pi(\infty)=O,
+\]
+with pullback of the Neron differential equal to the normalized newform
+differential.  Let \(y_K\) be the trace to \(K\) of the maximal-order CM point
+under this parametrization.  This convention fixes the base point, sign, and
+trace normalization used in Kolyvagin's theorem.
+
+\begin{proposition}\label{prop:heegner}
+With these conventions,
+\[
+ \pi(\tau)=P=(0,0),\qquad y_K=P.
+\]
+\end{proposition}
+
+\begin{proof}
+The Hilbert class polynomial is \(H_{-7}(T)=T+3375\).  The primitive forms
+\([43,37,8]\) and \([1,37,344]\), corresponding to \(\tau\) and
+\(43\tau\), both reduce to \([1,1,2]\).  Therefore
+\[
+ j(\tau)=j(43\tau)=-3375.
+\]
+Set \(S=j(z)+j(43z)\) and \(R=j(z)j(43z)\).  At the CM point,
+\[
+ S=-6750,
+ \qquad R=11390625.                                      \tag{1}
+\]
+
+The exact certificate constructs the Laurent series \(X(q),Y(q)\) of the
+optimal parametrization and verifies
+\[
+ Y^2+Y=X^3+X^2,
+ \qquad \frac{qX'(q)}{2Y(q)+1}=f(q).
+\]
+It also checks modular degree two, Fricke eigenvalue \(+1\), and trivial
+rational torsion.  By Manin--Drinfeld \cite{Manin}, the image of the other
+rational cusp is torsion, hence zero; thus the parametrization is the
+normalized Fricke quotient, without an unresolved negation or torsion
+translation.  The functions \(S\)
+and \(R\) descend to rational functions on \(E\), belonging respectively to
+\(L(43O)\) and \(L(44O)\).  Their coefficients are recovered over \(\Q\) from
+formal \(q\)-series and independently checked through orders 43 and 44.  The
+Riemann--Roch zero bound turns those finite checks into identities, rather than
+numerical approximations.
+
+Writing
+\[
+ S=A_S(X)+B_S(X)Y,
+ \qquad R=A_R(X)+B_R(X)Y,
+\]
+the exact values needed at \(X=0\) are
+\[
+ A_S(0)=-6750,
+ \quad B_S(0)=-22750,
+ \quad A_R(0)=11390625.                                  \tag{2}
+\]
+The certificate takes resultants with the Weierstrass equation and computes
+the monic gcd of three nonzero projected resultants.  That gcd is exactly
+\(X\).  Hence every common point satisfying (1) has \(X=0\).  The curve
+equation then gives \(Y=0\) or \(-1\), while (2) selects \(Y=0\).  Thus the
+CM fiber is the single point \(P\).  Since the class number is one, the trace
+defining \(y_K\) has one summand, proving \(y_K=P\).
+
+Every operation just described is exact integer or rational arithmetic after
+the standard PARI constructors are called.  The complete executable
+certificate is
+\artifact{millennium-prize/birch-swinnerton-dyer/43a1/verify_dminus7_cm_exact.gp},
+and its retained successful output is
+\artifact{millennium-prize/birch-swinnerton-dyer/43a1/output-dminus7-exact.txt}.
+\end{proof}
+
+\section{The Mordell--Weil index over the quadratic field}
+
+The quadratic twist by \(-7\) has global minimal model
+\[
+ E^{(-7)}:[0,-1,1,-16,-106],
+ \qquad y^2+y=x^3-x^2-16x-106.
+\]
+Its discriminant and conductor are \(-43\cdot7^6\) and \(43\cdot7^2\).
+Full multiplication-by-two descent gives
+\[
+ \dim_{\F_2}\Sel^{(2)}(E/\Q)=1,
+ \qquad
+ \dim_{\F_2}\Sel^{(2)}(E^{(-7)}/\Q)=0.                 \tag{3}
+\]
+Because both rational 2-torsion groups vanish, (3), together with the point
+\(P\), gives ranks one and zero respectively.  The eigenspace decomposition
+for \(\Gal(K/\Q)\) therefore gives \(\operatorname{rank}E(K)=1\).
+
+There is no torsion over \(K\).  The prime 2 splits and 3 is inert in \(K\).
+The exact counts
+\[
+ \#E(\F_2)=5,
+ \qquad
+ \#E(\F_9)=(3+1)^2-a_3^2=12,
+ \qquad a_3=-2,
+\]
+eliminate odd torsion.  The irreducible cubic \(f_2\) remains without a root
+over a quadratic extension, so \(E(K)[2]=0\), which eliminates all 2-primary
+torsion.
+
+For \(Q\in E(K)\), the point \(Q-\sigma Q\) is anti-invariant and corresponds
+to a rational point on \(E^{(-7)}\).  That twist has rank zero, so
+\(Q-\sigma Q\) is torsion and hence zero.  Consequently
+\[
+ E(K)=E(\Q).                                             \tag{4}
+\]
+Eclib's full 2-descent and saturation at 1000-bit precision returns
+\([0:-1:1]=-P\), reports that the basis is already saturated, and certifies
+unconditionally that it is the full Mordell--Weil basis.  Combining this with
+(4) proves
+\begin{equation}
+ E(K)_{\rm tors}=0,
+ \qquad E(K)=\Z P.                                      \tag{5}
+\end{equation}
+In particular, Proposition~\ref{prop:heegner} and (5) imply
+\[
+ [E(K)_{\rm free}:\Z y_K]=1.                            \tag{6}
+\]
+
+The twist descent and point counts are replayed by
+\artifact{millennium-prize/birch-swinnerton-dyer/43a1/verify_43a1_K.gp},
+with output
+\artifact{millennium-prize/birch-swinnerton-dyer/43a1/output-K.txt}.
+The full saturation transcript is
+\artifact{millennium-prize/birch-swinnerton-dyer/43a1/output-mwrank-saturation.txt}.
+The detailed certificate and its trust accounting are in
+\artifact{millennium-prize/birch-swinnerton-dyer/43a1/K-mordell-weil-certificate.md}.
+
+\section{Residual surjectivity at every prime}
+
+\begin{proposition}\label{prop:image}
+For every rational prime \(p\),
+\[
+ \overline\rho_{E,p}(G_\Q)=\operatorname{GL}_2(\F_p).
+\]
+\end{proposition}
+
+\begin{proof}
+The case \(p=2\) follows from the irreducible 2-division cubic with nonsquare
+discriminant.  For odd \(p\), the type \(I_1\) multiplicative reduction at 43
+supplies a nonidentity transvection on \(E[p]\).  This includes \(p=43\): the
+Tate parameter has valuation one, so its class is not a 43rd power and wild
+inertia supplies the required unipotent.  The nonsplit quadratic twist is
+unramified and does not alter inertia.
+
+If a semistable elliptic curve over \(\Q\) has reducible \(E[p]\), then it or
+its \(p\)-isogenous curve has a rational point of order \(p\).  Mazur's
+rational-torsion theorem therefore gives irreducibility for \(p\geq11\).
+For \(p=3,5,7\), direct point counts at 2 and 3 give Frobenius discriminants
+\(-4\) and \(-8\).  Their reductions are nonsquares at the indicated primes:
+\[
+ -4\equiv2\pmod3,
+ \qquad -8\equiv2\pmod5,
+ \qquad -4\equiv3\pmod7.
+\]
+Thus \(E[p]\) is irreducible for every odd \(p\).
+
+For \(p\geq7\), Dickson's classification implies that an irreducible subgroup
+of \(\operatorname{GL}_2(\F_p)\) containing a transvection contains
+\(\operatorname{SL}_2(\F_p)\).  The determinant is the surjective cyclotomic
+character, so the image is all of \(\operatorname{GL}_2(\F_p)\).  For
+\(p=3,5\), exhaustive exact enumeration handles the exceptional small groups:
+after fixing the transvection, every matrix with the required Frobenius trace
+and determinant generates a group of order 48 and 480 respectively, exactly
+the orders of \(\operatorname{GL}_2(\F_3)\) and
+\(\operatorname{GL}_2(\F_5)\).
+
+The point counts, cubic discriminant, and finite matrix enumerations are
+replayed by
+\artifact{millennium-prize/birch-swinnerton-dyer/verify_cycle261_43a1_residual.py}.
+The theorem-level infinite-prime reduction and the characteristic-43 inertia
+argument are written out in
+\artifact{millennium-prize/birch-swinnerton-dyer/cycle-261-43a1-all-prime-residual-surjectivity.md}.
+No Galois-image database is used.
+\end{proof}
+
+\section{Odd-primary vanishing}
+
+We use Kolyvagin's inequality exactly as printed in Cha
+\cite[Theorem 3, p.~155]{Cha}.  In its standing modular-Heegner setting, if
+\(p\) is odd, \(y_K\) has infinite order, and
+\(\Gal(\Q(E[p])/\Q)=\operatorname{GL}_2(\F_p)\), then
+\begin{equation}
+ \ord_p\#\Sha(E/K)\leq 2m_p,                            \tag{7}
+\end{equation}
+where \(m_p\) is the largest integer for which
+\(y_K\in p^{m_p}E(K)\) modulo \(p\)-torsion points, in Cha's wording.  The
+Kolyvagin theorem package also gives the finiteness needed for the order in
+(7).
+
+The exact wording matters.  Theorem 3 has no condition \(p\nmid D_K\), no
+condition \(p\nmid N_E\), and no good-reduction condition at \(p\).  Therefore
+it covers both \(p=7\), which ramifies in \(K\), and \(p=43\), where \(E\)
+has bad multiplicative reduction.  Those extra local conditions occur in
+Cha's later irreducibility-only variant, Theorem 21, not in Theorem 3.  The
+published-text audit, including page anchors and stable DOI links, is
+\artifact{millennium-prize/birch-swinnerton-dyer/cycle-262-43a1-kolyvagin-theorem3-literature-audit.md}.
+
+By (5), (6), and Proposition~\ref{prop:heegner}, \(y_K=P\) is non-torsion and
+\(m_p=0\) for every prime.  Proposition~\ref{prop:image} supplies the full
+residual-image hypothesis for every odd \(p\).  Equation (7) therefore gives
+\[
+ \Sha(E/K)[p^\infty]=0
+ \qquad\text{for every odd prime }p.                    \tag{8}
+\]
+
+Restriction preserves local triviality and defines
+\[
+ \operatorname{res}:\Sha(E/\Q)[p^\infty]
+ \longrightarrow\Sha(E/K)[p^\infty].
+\]
+Corestriction after restriction is multiplication by two.  Hence restriction
+is injective on odd-primary groups, and (8) yields
+\begin{equation}
+ \Sha(E/\Q)[p^\infty]=0
+ \qquad\text{for every odd prime }p.                    \tag{9}
+\end{equation}
+The same restriction argument, together with finite generation of \(E(K)\),
+also transfers the qualitative finiteness conclusion to \(\Sha(E/\Q)\): its
+restriction kernel lies in the finite group \(H^1(\Gal(K/\Q),E(K))\), and its
+image lies in finite \(\Sha(E/K)\).
+
+\section{The 2-primary part}
+
+The full multiplication-by-two descent over \(\Q\) returns one basis element
+for the everywhere locally soluble 2-covers.  Its explicit affine quartic is
+\[
+ C:\quad V^2=U^4-2U^2+4U+1.                            \tag{10}
+\]
+The exact cover map satisfies the Weierstrass equation identically modulo
+(10).  The point \((U,V)=(0,1)\) maps to \((1,1)=-3P\), which represents the
+nonzero Kummer class of \(P\).  Therefore
+\[
+ \Sel^{(2)}(E/\Q)=\langle\delta(P)\rangle\simeq\F_2.   \tag{11}
+\]
+The Kummer sequence is
+\[
+ 0\longrightarrow E(\Q)/2E(\Q)
+ \longrightarrow\Sel^{(2)}(E/\Q)
+ \longrightarrow\Sha(E/\Q)[2]
+ \longrightarrow0.
+\]
+Since \(E(\Q)=\Z P\), both the first and middle terms have dimension one.
+Thus
+\begin{equation}
+ \Sha(E/\Q)[2]=0.                                      \tag{12}
+\end{equation}
+
+The exact GP checker verifies the complete basis size, literal quartic, cover
+map, rational point, Kummer class, and 2-division polynomial:
+\artifact{millennium-prize/birch-swinnerton-dyer/43a1/verify_43a1_2descent.gp}.
+The certificate explanation is
+\artifact{millennium-prize/birch-swinnerton-dyer/43a1/2descent-certificate.md}.
+The upper-bound assertion in (11) is precisely where trust in PARI's
+documented full 2-descent implementation enters.
+
+The group \(\Sha(E/\Q)\) is finite by the preceding section.  Every nonzero
+finite 2-primary group contains a nonzero element of order two.  Equation (12)
+therefore implies
+\begin{equation}
+ \Sha(E/\Q)[2^\infty]=0.                               \tag{13}
+\end{equation}
+
+\section{Proof of the theorem}
+
+Equation (9) eliminates every odd-primary component of the finite group
+\(\Sha(E/\Q)\), and (13) eliminates its 2-primary component.  A finite abelian
+group is the direct sum of its primary components.  Hence
+\[
+ \Sha(E/\Q)=0,
+\]
+which proves Theorem~\ref{thm:main}.
+
+\section{Reproduction ledger}
+
+Run the following from the repository root.  The commands perform exact
+checks; they do not query LMFDB for the claimed conclusion.
+
+\begin{verbatim}
+python3 millennium-prize/birch-swinnerton-dyer/43a1/verify_43a1_exact.py
+gp -fq millennium-prize/birch-swinnerton-dyer/43a1/verify_43a1_2descent.gp
+gp -fq millennium-prize/birch-swinnerton-dyer/43a1/verify_dminus7_cm_exact.gp
+gp -fq millennium-prize/birch-swinnerton-dyer/43a1/verify_43a1_K.gp
+printf '0 1 1 0 0\n' | mwrank -v 2 -p 1000
+python3 millennium-prize/birch-swinnerton-dyer/verify_cycle261_43a1_residual.py
+bash scripts/build-paper.sh sha-43a1
+\end{verbatim}
+
+The decisive expected terminal markers are
+\texttt{ALL\_EXACT\_2DESCENT\_ASSERTIONS\_PASSED=1},
+\texttt{FORMAL\_Q\_CERTIFICATE\_PASSED=1},
+\texttt{ALL\_EXACT\_K\_RANK\_TORSION\_ASSERTIONS\_PASSED=1}, and
+\texttt{ALL\_PRIME\_RESIDUAL\_SURJECTIVITY\_CERTIFICATE=PASS}; mwrank must
+state that the points were already saturated and that the full Mordell--Weil
+basis was determined unconditionally.
+
+For convenience, the packet index is
+\artifact{millennium-prize/birch-swinnerton-dyer/43a1/README.md}.  Stable
+external links for the two theorem sources are Cha's article
+\href{https://doi.org/10.1016/j.jnt.2004.08.009}{doi:10.1016/j.jnt.2004.08.009}
+and Kolyvagin's chapter
+\href{https://doi.org/10.1007/BFb0086267}{doi:10.1007/BFb0086267}.
+PARI/GP documentation is at
+\url{https://pari.math.u-bordeaux.fr/dochtml/html-stable/}, and eclib source
+and documentation are at \url{https://github.com/JohnCremona/eclib}.
+
+\section{What has not been proved}
+
+Theorem~\ref{thm:main} is curve-specific.  It does not prove BSD for
+\(43\mathrm a1\): no equality of the leading Taylor coefficient with the BSD
+arithmetic expression is asserted here.  It does not prove BSD for all
+elliptic curves, for all rank-one curves, or for any nontrivial family.  It
+does not constitute a Clay Millennium Prize solution or a reduction of that
+problem.  Database entries for analytic rank, regulator, Tamagawa product,
+and analytic order of \(\Sha\) are corroboration only and are absent from the
+logical chain.  No publication-priority or novelty claim is made.
+
+\begin{thebibliography}{9}
+
+\bibitem{Cha}
+B. Cha,
+\emph{Vanishing of some cohomology groups and bounds for the
+Shafarevich--Tate groups of elliptic curves},
+J. Number Theory \textbf{111} (2005), 154--178.
+\href{https://doi.org/10.1016/j.jnt.2004.08.009}
+{doi:10.1016/j.jnt.2004.08.009}.
+
+\bibitem{Kolyvagin}
+V. A. Kolyvagin,
+\emph{On the structure of Shafarevich--Tate groups},
+in Algebraic Geometry (Chicago, 1989), Lecture Notes in Math. 1479,
+Springer, 1991, 94--121.
+\href{https://doi.org/10.1007/BFb0086267}{doi:10.1007/BFb0086267}.
+
+\bibitem{MazurTorsion}
+B. Mazur,
+\emph{Modular curves and the Eisenstein ideal},
+Publ. Math. IHES \textbf{47} (1977), 33--186.
+
+\bibitem{Serre}
+J.-P. Serre,
+\emph{Proprietes galoisiennes des points d'ordre fini des courbes
+elliptiques},
+Invent. Math. \textbf{15} (1972), 259--331.
+
+\bibitem{Silverman}
+J. H. Silverman,
+\emph{Advanced Topics in the Arithmetic of Elliptic Curves},
+Graduate Texts in Mathematics 151, Springer, 1994, Chapter V.
+
+\bibitem{Manin}
+Yu. I. Manin,
+\emph{Parabolic points and zeta functions of modular curves},
+Math. USSR-Izv. \textbf{6} (1972), 19--64.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,53 @@
+{
+  "algebra_replay": [
+    {
+      "cutoff": 2,
+      "energy_normalized_tangency": 3.3608498534330667e-16,
+      "enstrophy_normalized_tangency": 1.9895072236162443e-16,
+      "rhs_relative_discrepancy": 1.0930757116988194e-15
+    },
+    {
+      "cutoff": 3,
+      "energy_normalized_tangency": 1.1688958486099106e-16,
+      "enstrophy_normalized_tangency": 1.3816771575931262e-17,
+      "rhs_relative_discrepancy": 8.187168525811609e-16
+    }
+  ],
+  "cycle258_family_used": false,
+  "failures": [],
+  "format": "C263-MG1-validation",
+  "gates": {
+    "identity_closure": 2e-13,
+    "newton_residual_ratio": 5e-13,
+    "normalized_tangency": 2e-13,
+    "reversal": 2e-11,
+    "rhs_replay": 2e-13
+  },
+  "method": "implicit midpoint on exact square Galerkin convolution",
+  "numerical_only": true,
+  "passed": true,
+  "trajectory": {
+    "cutoff": 3,
+    "forward_endpoint_energy_relative_drift": 1.3589129821411916e-13,
+    "forward_endpoint_enstrophy_relative_drift": 2.1571633368466792e-13,
+    "forward_steps": 32,
+    "max_newton_iterations": 2,
+    "max_newton_residual_ratio": 2.0180764031113372e-14,
+    "maximum_step_defects": {
+      "energy": {
+        "absolute_defect": 6.938893903907228e-16,
+        "identity_relative_closure": 4.1888472825367356e-17,
+        "relative_defect": 4.8796795588405864e-15,
+        "residual_bound": 6.32553962039999e-15
+      },
+      "enstrophy": {
+        "absolute_defect": 1.2212453270876722e-15,
+        "identity_relative_closure": 5.704643288600516e-17,
+        "relative_defect": 7.582510261020029e-15,
+        "residual_bound": 1.7961206833468822e-14
+      }
+    },
+    "reversal_relative_state_error": 5.822471974973178e-16,
+    "step_size": 0.015625
+  }
+}
