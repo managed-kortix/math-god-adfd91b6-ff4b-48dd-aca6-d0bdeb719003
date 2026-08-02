@@ -1431,5 +1431,95 @@ No audits yet.
   any falsified clause, and zero or multiple true selectors before reporting a
   parent. Exhaustive partition, boundary, identity, counter, guard, and hostile
   mutation tests are in `experiments/test_m6_residual_group_cnf.py`.
-- **Scope:** no residual CNF was solved and no proof artifact was produced. The
-  23 groups are a frozen campaign target, not an elimination result.
+- **Scope at freeze:** the 23 groups were initially a campaign target. Four
+  complete groups have since received durable checked certificates, as recorded
+  below; no claim applies to the other 19 groups.
+
+### Rooted clean-sink theorem over the frozen residual
+
+- Proved the local rooted clean-sink theorem in
+  `attempts/tick52-rooted-clean-sink-theorem.md`: a degree-nine C vertex with
+  zero internal-C and zero C-to-B outdegree dominates `R union A`, has exact
+  second neighborhood B, and remains bad after deleting its root arc,
+  contradicting arc minimality.
+- Exhaustively classified each frozen `(parent,r,t)` membership by enumerating
+  every present internal-C orientation and every compatible pointwise degree
+  assignment. A membership is eliminated only when every realization has a
+  clean sink. This removes 34,810 of 80,974 memberships and leaves 46,164.
+- Memberships are not parents. The eliminated and remaining streams contain
+  17,084 and 18,862 distinct parents, respectively (35,946 total, no mixed
+  parent). Branch membership partitions are B6 `11,072/8,839` and B7
+  `23,738/37,325`, eliminated/remaining.
+- Frozen artifacts are `experiments/m6-clean-sink-eliminated.tsv` (1,705,845
+  bytes, SHA-256 `df4cbe41...f153b6`),
+  `experiments/m6-clean-sink-remaining.tsv` (2,262,190 bytes, SHA-256
+  `416b7e51...f4b642`), and `experiments/m6-clean-sink-manifest.tsv` (2,104
+  bytes, SHA-256 `733e06c8...b53217`). The manifest includes branch and all
+  23 group count rows and binds the unchanged source manifest and theorem.
+- `experiments/check_m6_clean_sink_manifest.py` independently reconstructs all
+  80,974 memberships from the placement cover/filter and reimplements the
+  universal pointwise predicate. Hostile tests cover count, stream, truncation,
+  group movement, duplicate, source-identity, and theorem-identity mutations.
+- **Campaign hygiene and scope:** the clean-sink theorem did not change the
+  frozen 23-group CNFs. Four complete groups were later certified UNSAT; among
+  their 15,310 memberships, 9,304 were already clean-sink eliminated and 6,006
+  came from the clean-sink remaining stream. Other remaining memberships are not
+  claimed satisfiable, and this remains a restricted order-18 `m=6` result.
+
+### First checked residual-group certificates
+
+- Retained independently checked LRATs for four complete frozen groups:
+  `B6-l4-r0-t2`, `B6-l4-r1-t3`, `B6-l5-r2-t3`, and `B7-l6-r3-t0`.
+  They cover 15,310 residual memberships. The exact 23-group CNFs were
+  regenerated and structurally checked before each retained proof was replayed
+  with pinned `lrat-check` and returned `c VERIFIED`.
+- The four `xz -3` artifacts total 23,309,904 bytes. CNF, raw LRAT, and
+  compressed identities, stage timings, and tool hashes are frozen in
+  `experiments/m6-residual-group-certificates.tsv`; complete fresh readback is
+  `experiments/verify_m6_residual_group_certificates.py`.
+- This certification subsumes the clean-sink disposition for those four groups
+  but does not alter the theorem's exact stream audit. Nineteen residual groups
+  remain uncertified; no order-18 or SNC closure is claimed.
+
+### Exact clean-sink remaining parent selector groups
+
+- Exploited the independently verified zero-mixed-parent fact to project the
+  46,164 clean-sink remaining memberships to exactly 18,862 unique parents.
+  Grouping only by `(branch,lambda)` gives eight groups with counts B6
+  `l4=2470,l5=1024,l6=220` and B7
+  `l2=8119,l3=5016,l4=1649,l5=322,l6=42`.
+- Each deterministic CNF is exactly its frozen 23,616-variable branch base,
+  one selector per unique parent, one ALO, and 153 pair-ordered guarded hole
+  clauses per parent. It deliberately has zero `r`/`highC` counter variables
+  and clauses: each surviving parent encompasses every feasible state and the
+  clean-sink theorem removed whole parents rather than selected states.
+- Every manifest/CNF binds the clean-sink remaining stream, partition manifest,
+  theorem report, and prior forced certificate ledger/verifier/selector
+  manifest by exact byte count and SHA-256. The 1,838-byte eight-group manifest
+  is `experiments/m6-clean-sink-selector-groups.tsv`, SHA-256
+  `6e7eee0ddd5b4c7ef02cdf459c9a0647f720513e7ee4987a3a8b0c17af37eeda`.
+- `experiments/check_m6_clean_sink_group_cnf.py` independently reparses the
+  clean stream and cover/filter, establishes the exact parent projection and
+  no-mixed property, reconstructs the immutable base/ALO/all guards, and only
+  attributes complete satisfying models with exactly one selector. The
+  regression emits and checks all eight hashes and mutates both branch bases,
+  ALO, guards, metadata, selector names, and all six bound identities.
+- Exact `(parents,variables,clauses)` dimensions are B6-l4
+  `(2470,26086,520647)`, B6-l5 `(1024,24640,299409)`, B6-l6
+  `(220,23836,176397)`, B7-l2 `(8119,31735,1384937)`, B7-l3
+  `(5016,28632,910178)`, B7-l4 `(1649,25265,395027)`, B7-l5
+  `(322,23938,191996)`, and B7-l6 `(42,23658,149156)`.
+
+### Checked clean-sink B6-l4 certificate
+
+- Regenerated the exact clean-sink `B6-l4` CNF from the frozen selector
+  manifest/theorem/remaining stream and independently checked its canonical
+  shape: 2,470 parents, 26,086 variables, and 520,647 clauses.
+- Pinned CaDiCaL 1.7.3 returned UNSAT and emitted a textual LRAT; pinned
+  `lrat-check` returned `c VERIFIED`. The durable `xz -3` proof is
+  `certificates/m6-clean-sink-B6-l4.lrat.xz`.
+- `experiments/m6-clean-sink-B6-l4-certificate.tsv` records exact source, tool,
+  CNF, LRAT, and compressed identities. The strict fresh verifier is
+  `experiments/verify_m6_clean_sink_B6_l4_certificate.py`.
+- This certifies only the complete clean-sink `B6-l4` group. The other seven
+  clean-sink groups retain no SAT/UNSAT claim here.
