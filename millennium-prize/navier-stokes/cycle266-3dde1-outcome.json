@@ -1,0 +1,19 @@
+{
+  "claim": "No Euler, Navier-Stokes, or Millennium result.",
+  "execution": "NOT_RUN_RESOURCE_INFEASIBLE",
+  "family_sha256": "8c03c47e62c9fe141e872900ccddceb0c025e4d3dd05f48a4e8f6b5d703964fe",
+  "family_size": 132,
+  "format": "C266-3DDE1-outcome-v1",
+  "manifest_sha256": "4faade2cf3419191eb46ed7cd93483db2faef49d88df2162ab1a7a07e2edb9a6",
+  "pde_certificate": false,
+  "preflight": {
+    "available_logical_cores": 2,
+    "minimum_midpoint_steps": 202752,
+    "minimum_rhs_evaluations": 405504,
+    "resource_feasible": false
+  },
+  "promotions": [],
+  "status": "NUMERICAL_ONLY",
+  "stop_rule_triggered": "RESOURCE_PREFLIGHT_FAIL",
+  "trajectories_generated": 0
+}

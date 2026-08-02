@@ -1,0 +1,117 @@
+{
+  "format": "C266-3DDE1-manifest-v1",
+  "status": "FROZEN_BEFORE_TRAJECTORY_COMPUTE",
+  "architecture": "cycle-265-genuine-3d-euler-pivot-architecture.md#7",
+  "source_digests": {
+    "architecture_sha256": "7e2a6f4a0e18699c3a45dc9e8e939f82dbdb12f505cbdb3747beddd78c3d9397",
+    "generator_sha256": "993419d6b3633d9bcb82264b506ddfbdc160bc729351aa05c054c59b37021c78"
+  },
+  "family": {
+    "file": "cycle266-3dde1-exact-family.json",
+    "format": "C266-3DDE1-exact-family-v1",
+    "profile_count": 132,
+    "sha256": "8c03c47e62c9fe141e872900ccddceb0c025e4d3dd05f48a4e8f6b5d703964fe",
+    "orientation": "forward_only",
+    "reversal_policy": "forbidden_in_numerical_screen; allowed only after a complete full-PDE endpoint enclosure"
+  },
+  "horizons": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "horizon_policy": "one trajectory per profile runs monotonically to T=4 and records only the four declared endpoints",
+  "levels": [
+    {
+      "name": "K7",
+      "cubic_cutoff": 7,
+      "dealiased_fft_side": 29,
+      "step_size": "1/128",
+      "endpoint_cubature_grids": [48, 96]
+    },
+    {
+      "name": "K10",
+      "cubic_cutoff": 10,
+      "dealiased_fft_side": 41,
+      "step_size": "1/256",
+      "endpoint_cubature_grids": [64, 128]
+    }
+  ],
+  "integrator": {
+    "method": "implicit_midpoint",
+    "nonlinear_solver": "fixed-point Anderson depth 4",
+    "maximum_iterations_per_step": 80,
+    "unconverged_step": "fail_closed",
+    "quadratic_invariant_replay": "per-step exact floating identity (I1-I0)-h<midpoint,F(midpoint)>-<midpoint,residual> for energy and helicity"
+  },
+  "gates": {
+    "nonlinear_residual_ratio_max": 1e-11,
+    "energy_tangency_max": 2e-12,
+    "helicity_tangency_max": 2e-12,
+    "energy_identity_closure_max": 2e-12,
+    "helicity_identity_closure_max": 2e-12,
+    "relative_energy_drift_max": 2e-9,
+    "energy_scaled_helicity_drift_max": 2e-9,
+    "divergence_defect_max": 2e-12,
+    "reality_defect_max": 2e-12,
+    "doubled_cubature_endpoint_ratio_difference_max": 0.002,
+    "cross_resolution_endpoint_ratio_difference_max": 0.02
+  },
+  "promotion": {
+    "objective": "directed endpoint velocity L3 ratio at a declared horizon only",
+    "threshold": 2.2,
+    "strict_comparison": true,
+    "required_levels": ["K7", "K10"],
+    "maximum_promotions": 4,
+    "ranking": "descending K10 ratio, then smaller cross-resolution difference, then profile index, then horizon"
+  },
+  "stop_rules": {
+    "no_expansion": "after all 132 profiles and four horizons, stop regardless of outcome",
+    "early_global_stop": "none except resource preflight failure or fail-closed numerical error",
+    "forbidden_after_output": [
+      "horizon extension",
+      "phase insertion",
+      "coefficient optimization",
+      "step or resolution substitution",
+      "gate or threshold relaxation",
+      "interior-extremum promotion"
+    ]
+  },
+  "analytic_feasibility": {
+    "stage": "only after numerical promotion",
+    "q0_grid": ["5/4", "3/2", "2", "3"],
+    "M": "exact initial A_q0 norm",
+    "alpha": "M",
+    "acceptance": "q0*(1-M*T)>1 using exact algebraic arithmetic",
+    "maximum_picard_tail_certificate_attempts": 4,
+    "no_replacement_after_filter_failure": true
+  },
+  "certificate": {
+    "schema": "C265-3D-ATI1 equations (265.11)-(265.24)",
+    "required_sections": [
+      "metadata",
+      "exact_initial_datum",
+      "analytic_tail",
+      "retained_midpoint_nodes",
+      "omitted_convolution_boxes",
+      "picard_slabs",
+      "endpoint_cubature",
+      "directed_conclusion",
+      "inviscid_transfer",
+      "digests"
+    ],
+    "parser": "strict exact keys; rational strings only except outward-rounded exponential enclosure",
+    "arithmetic": "fail_closed"
+  },
+  "resource_policy": {
+    "preflight_before_trajectory_generation": true,
+    "minimum_logical_cores": 4,
+    "maximum_minimum_rhs_evaluations": 1000000,
+    "reason": "the full frozen two-level run has at least two nonlinear RHS evaluations per midpoint step and must fit the current bounded cycle without partial output"
+  },
+  "outcome_policy": {
+    "persist_even_if_not_run": true,
+    "status": "NUMERICAL_ONLY",
+    "pde_certificate": false
+  }
+}

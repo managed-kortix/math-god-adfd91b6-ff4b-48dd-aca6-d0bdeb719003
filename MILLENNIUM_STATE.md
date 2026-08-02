@@ -1,5 +1,31 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: `C266-3DDE1` completes the Section 7 pre-compute freeze for all
+  132 exact Kida--Pelz/tangent profiles. It fixes forward horizons `1,2,3,4`,
+  cubic levels `K=7,10`, dealiased sides `29,41`, implicit-midpoint steps
+  `1/128,1/256`, doubled endpoint cubature, energy/helicity/residual/structure
+  gates, strict directed `L3>2.20` promotion, at most four certificate attempts,
+  and no-expansion/no-tuning stops. The current two-core host fails the frozen
+  four-core resource preflight: the complete screen needs `202752` midpoint
+  steps and at least `405504` 3D FFT right-hand-side evaluations. Consequently
+  zero trajectories were generated and the persisted outcome is numerical-only
+  `NOT_RUN_RESOURCE_INFEASIBLE`, with no Euler, Navier--Stokes, or Millennium
+  claim. See `millennium-prize/navier-stokes/cycle-266-3dde1-outcome.md`.
+
+- 2026-08-02: The 3D Euler velocity-`L3` literature scout finds no checked
+  factor-two precedent in Kida--Pelz, classical anti-parallel-tube, or
+  Hou--Luo sources. Their large reported/proved growth concerns vorticity,
+  enstrophy, strain, derivatives, impulse, support, or analyticity width, none
+  of which lower-bounds undifferentiated velocity `L3`. The exact periodic Kida
+  trigonometric field remains the best torus baseline. Hou--Luo supplies the
+  cleanest separately reusable printed datum,
+  `u1=100 exp(-30(1-r^2)^4) sin(2 pi z/L)`, `L=1/6`, but on a solid cylinder with a wall;
+  its `3*10^8` factor is maximum-vorticity growth, not velocity growth. Keep
+  promotion exclusively on complete endpoint velocity `L3`, and treat any
+  factor-two crossing as a new numerical observation requiring full-PDE
+  enclosure. No Euler, Navier--Stokes, or Millennium result is claimed. See
+  `millennium-prize/navier-stokes/cycle-266-3d-euler-velocity-lp-literature-scout.md`.
+
 - 2026-08-02: Navier exact scout classifies the stationary-base triangular
   skew-product architecture `u=(v,w_0 o Phi_-t)`. Its velocity `L3` is constant
   for every passive datum exactly when `v dot grad |v|^2=0`. The steady cellular
@@ -29,6 +55,16 @@
   gates, and stop rules. No Euler, Navier--Stokes, or Millennium result is
   claimed. See
   `millennium-prize/navier-stokes/cycle-265-genuine-3d-euler-pivot-architecture.md`.
+
+- 2026-08-02: Hostile replay of the `C265-3D-ATI1` 3D inviscid-transfer
+  interface confirms that the ordered difference terms have coefficients
+  `D_rho(v) Z` and `(A_rho(v)+Z)D_rho(z)`, with no factor two. It distinguishes
+  exact Laplacian dissipation `|k|_2^2` from the forcing majorant `|k|_1^2`,
+  sets `H=M kappa_2` and `B=H Phi(G,T)`, and makes the shrinking-radius,
+  outward-exponential, strict bootstrap, continuation, endpoint, viscosity,
+  and physical-amplitude checks fail closed. This is an audit of a conditional
+  transfer architecture; no Euler crossing or rigorous Navier--Stokes
+  certificate currently exists.
 
 - 2026-08-02: P-versus-NP bounded scout `P264-AMT-GADGET` stops on the explicit
   shared-circuit branch. Freeze two address slices with `H=AND_8` and
@@ -1500,7 +1536,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 265 pivots focused Navier dynamics `ND251` to genuine 3D
+- **phase:** Cycle 266 develops focused Navier dynamics `ND251` through genuine 3D
   Euler amplification architecture `C265-3D-ATI1`. The first frozen 3D
   alignment scout stops below its `1.2` gate; a new production manifest must
   use genuine stretching, directed endpoints, energy/helicity integrity, and
@@ -2337,7 +2373,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 265
+- **cycle:** 266
 - **announcements:** none
 
 ## immutable target list

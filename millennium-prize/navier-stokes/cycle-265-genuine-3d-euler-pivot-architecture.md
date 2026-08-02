@@ -93,7 +93,12 @@ estimate in (265.6). Choose rational `q0,M,alpha,T` with
  A_{q_0}(v_0)\le M,\qquad \alpha\ge M,\qquad q(T)>1.    \tag{265.7}
 \]
 
-The same closed-face comparison used in Cycle 255 yields
+Here `q'/q=-alpha/(1-alpha t)<=-alpha`, so on the closed face
+`A_q(v)=M` the coefficient in (265.6) is nonpositive. The certificate must
+check `T>0`, `q0>1`, `M>0`, `alpha>=M`, the initial norm bound, and the strict
+gate `q0(1-alpha T)>1` in exact arithmetic. Incompatible radius and slope gates
+fail rather than being relaxed. The same closed-face comparison used in Cycle
+255 then yields
 
 \[
  A_{q(t)}(v(t))\le M,
@@ -104,10 +109,11 @@ The same closed-face comparison used in Cycle 255 yields
 
 At finite Galerkin cutoff the comparison is elementary. Uniform control at
 the smaller fixed weight `q(T)` gives compactness and convergence of the
-quadratic convolution at every still smaller weight. It therefore constructs
-and uniquely identifies a real-analytic full 3D Euler solution through time
-`T`. This proves only finite-time smoothness of the selected orbit; it assumes
-nothing about global 3D regularity.
+quadratic convolution at every still smaller weight. Standard analytic-Wiener
+local well-posedness and uniqueness then identify the limit and continue it
+through time `T`. A certificate may invoke this conclusion only after all
+(265.7) gates pass. This proves only finite-time smoothness of the selected
+orbit; it assumes nothing about global 3D regularity.
 
 The initial datum may have finite Fourier support. Genuine infinite initial
 support is not a mathematical requirement: (265.8) controls every mode created
@@ -225,6 +231,10 @@ Choose exact rational `rho0,beta,epsilon` such that
  \qquad \rho(T)>1,\qquad \beta\ge M+\epsilon.          \tag{265.18}
 \]
 
+All inequalities in (265.18) are replay gates. In particular, the simultaneous
+requirements `beta>=M+epsilon` and `rho0(1-beta T)>1` must be checked exactly;
+if they are incompatible, this transfer route supplies no viscosity threshold.
+
 Let `w_nu` solve 3D Navier--Stokes with viscosity `nu>0` and initial datum
 `v(0)`, on its maximal smooth interval, and put `z=w_nu-v`. Define
 
@@ -236,34 +246,58 @@ and the exact finite maxima
 
 \[
  \kappa_j=\max_{n\ge1}n^j(\rho_0/Q)^n,\qquad
- G=M\kappa_1,\qquad B=M\kappa_2\Phi(G,T),              \tag{265.19}
+ G=M\kappa_1,\qquad H=M\kappa_2,\qquad
+ B=H\Phi(G,T),                                         \tag{265.19}
 \]
 
 where `Phi(G,T)=(exp(GT)-1)/G`, with value `T` at `G=0`.
 The maximizing integer is found by comparing consecutive rational terms, so
 only the outward exponential bound in `Phi` is non-rational.
 
-Subtracting the Fourier equations and using the norm-one Leray projector gives
+Write
 
 \[
- D^+Z\le D_\rho(v)Z+
+ \mathcal B(a,b)_k=-iP_k\sum_{p+r=k}(a_p\mathbin\cdot r)b_r.
+\]
+
+The ordered difference is exactly
+`B(v,z)+B(z,v)+B(z,z)`: the derivative falls on `z`, `v`, and `z`,
+respectively. Subtracting the Fourier equations, retaining the favorable
+viscous term, and using the norm-one Leray projector gives
+
+\[
+ D^+Z+\nu E_\rho^{(2)}(z)\le D_\rho(v)Z+
  \left(A_\rho(v)+Z+{\rho'\over\rho}\right)D_\rho(z)
  +\nu D_\rho^{(2)}(v).                                 \tag{265.20}
 \]
 
-Here `D_rho^(2)(v)=sum |k|_1^2 rho^{|k|_1}|v_k|_2`.
+Here
+`E_rho^(2)(z)=sum |k|_2^2 rho^{|k|_1}|z_k|_2` is the exact
+Laplacian dissipation and
+`D_rho^(2)(v)=sum |k|_1^2 rho^{|k|_1}|v_k|_2` is its declared upper
+majorant for the viscosity forcing, using `|k|_2^2<=|k|_1^2`.
+Thus the coefficient of `D_rho(v)Z` is one, not two; the other mixed
+bilinear term contributes `A_rho(v)D_rho(z)`. Dropping the nonnegative
+`nu E_rho^(2)(z)` is valid but must not be described as an equality.
 Equations (265.17)--(265.19) imply
-`D_rho(v)<=G`, `D_rho^(2)(v)<=M kappa_2`, and
+`D_rho(v)<=G`, `D_rho^(2)(v)<=H`, and
 `A_rho(v)<=M`. While `Z<=epsilon`, the coefficient of `D_rho(z)` is
-nonpositive because `rho'/rho<=-beta`. Therefore
+nonpositive because
+`rho'/rho=-beta/(1-beta t)<=-beta` and
+`A_rho(v)+Z<=M+epsilon<=beta`. Therefore
 
 \[
- Z(t)\le\nu M\kappa_2\Phi(G,t)\le\nu B.               \tag{265.21}
+ Z(t)\le\nu H\Phi(G,t)\le\nu B.                       \tag{265.21}
 \]
 
-If `nu B<epsilon`, bootstrap continuation proves (265.21) on `[0,T]`; in
-particular it also proves that the Navier--Stokes solution cannot lose
-smoothness before `T`. Since normalized Haar measure has mass one and
+For certification, replace `B` by a strictly positive rational outward upper
+bound `B_up>=B`. If `nu B_up<epsilon`, a first-exit argument makes the
+bootstrap strict. If the maximal smooth Navier--Stokes time were at most `T`,
+then `A_rho(w_nu)<=A_rho(v)+Z<=M+nu B_up` with
+`rho>=rho(T)>1` would give a uniform analytic Wiener, hence Lipschitz, bound up
+to that time and the standard local theory would continue the solution. Thus
+the maximal time is greater than `T`, and (265.21) holds on `[0,T]`. Since
+normalized Haar measure has mass one and
 `|z(x)|_2<=A_1(z)<=Z`,
 
 \[
@@ -279,7 +313,8 @@ For exact endpoint replay, supply rationals `a>0` and `delta>0` with
  a^3\ge U_0,\qquad (2a+\delta)^3<L_T.                  \tag{265.23}
 \]
 
-Let `B_up` be a rigorously replayed positive upper bound for `B`. Then every
+Let `B_up` be the same rigorously replayed positive rational upper bound for
+`B` used in the continuation gate. Then every
 
 \[
  0<\nu<\nu_0^{rat}:={\min(\epsilon,\delta)\over B_{up}} \tag{265.24}
@@ -295,13 +330,39 @@ There is only one endpoint perturbation because the Euler and viscous initial
 data agree exactly. For fixed physical viscosity `nu_phys>0`, the exact scaling
 
 \[
- u_\lambda(t,x)=\lambda w_{\nu_{phys}/\lambda}(\lambda t,x)
+ u_\lambda(t,x)=\lambda w_{\nu_{phys}/\lambda}(\lambda t,x),\qquad
+ p_\lambda(t,x)=\lambda^2p_{\nu_{phys}/\lambda}(\lambda t,x)
 \]
 
 produces a 3D periodic Navier--Stokes solution at viscosity `nu_phys` whenever
 `lambda>nu_phys/nu_0^{rat}`, with the same strict ratio at time `T/lambda`.
 Unlike the old route, no two-dimensional lift is used: both the Euler seed and
 the transferred Navier--Stokes solution are genuinely 3D.
+
+### Hostile transfer replay
+
+No rigorous transfer certification is emitted unless all of the following
+pass exactly:
+
+1. `T,M,Q,rho0,beta,epsilon,a,delta,B_up` are finite in their declared
+   exact domains, with `T,M,epsilon,a,delta,B_up>0` and `Q>rho0>1`;
+2. both radius gates `rho0(1-beta T)>1` and `beta>=M+epsilon` pass;
+3. `kappa_1,kappa_2`, then `G,H`, are recomputed from `rho0/Q` by exact
+   consecutive-term comparisons rather than trusted as certificate fields;
+4. an outward exponential replay proves the positive rational bound
+   `B_up>=H Phi(G,T)`; a rounded exponential value fails;
+5. the directed endpoint witnesses satisfy `a^3>=U_0` and the strict gate
+   `(2a+delta)^3<L_T`; equality, reversed endpoints, or floating cube roots
+   fail; and
+6. the emitted effective viscosity obeys the exact strict inequalities
+   `0<nu<min(epsilon,delta)/B_up`. For physical viscosity, the emitted
+   amplitude obeys `lambda>nu_phys B_up/min(epsilon,delta)` and the terminal
+   time is exactly `T/lambda`.
+
+Failure of any gate sets the viscosity threshold to `UNAVAILABLE`; it must not
+be weakened, repaired from floating data, or reported as zero/positive. The
+amplitude scaling preserves a certified ratio but cannot create the missing
+Euler endpoint crossing or cure a failed radius/continuation gate.
 
 ## 6. Deterministic vortex-stretching family
 
