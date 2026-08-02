@@ -1,5 +1,35 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: Cycle 268 rotates the main funnel from open-ended `ND251`
+  discovery to the bounded Hodge packet `H268-MIN2-AKS`. The numerical Euler
+  screens are weak or resource-stopped; fixed finite Fourier support is exactly
+  stationary, and the exact infinite-support phase manifold is planar with cap
+  `2^(1/6)<2`. Preserve and pause `ND251`; do not retire it. Hodge Cycle 266
+  proves that universal H264 diagonal survival fails even on a noncontractible
+  two-cell minimal complex, so that mechanism is retired. The new exact target
+  is the symbolic census of every two-cell minimal packet in the actual
+  seven-graph `A_infinity` category and its actual nine PEL Atiyah obstruction
+  classes. Return exact survival, cancellation, mixed stratification, or the
+  first missing-structure wall, then stop without higher-cell escalation. None
+  of these bounded outputs is `KI240 PASS/FAIL`. See
+  `millennium-prize/cycle-268-strategic-rotation.md`.
+
+- 2026-08-02: The nonlinear infinite-support scout resolves the loophole left
+  by the finite-mode theorem positively but harmlessly. The exact analytic
+  family `u_(epsilon,tau)=(v,w_epsilon o Phi_-tau)`, with
+  `v=(sin y,-sin x)` and
+  `w_epsilon=(4+epsilon v dot grad |v|^2)^(1/2)`, is a two-parameter
+  Euler-invariant set. A one-variable Laurent specialization proves genuine
+  infinite Fourier support at `tau=0`, and an exact positive first-variation
+  integral proves nonconstant complete velocity `L3`. The support remains
+  planar and the triangular correlation bound gives the universal cap
+  `2^(1/6)<2`, so it cannot pass the production gate. The generalized-Beltrami
+  branch has a structural no-go: pointwise `curl u=lambda(x)u` kills the Leray
+  nonlinearity and every Euler trajectory staying in that class is stationary.
+  No Euler factor-two crossing, Navier--Stokes result, or Millennium result is
+  claimed. See
+  `millennium-prize/navier-stokes/cycle-268-infinite-support-phase-manifold.md`.
+
 - 2026-08-02: The finite-dimensional genuine-3D Euler scout proves the exact
   fixed-support no-go using Kishimoto--Yoneda's 3D classification. Every real
   mean-zero finite-mode Euler solution is stationary; if its support spans
@@ -1550,12 +1580,8 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 267 develops focused Navier dynamics `ND251` through genuine 3D
-  Euler amplification architecture `C265-3D-ATI1`. The first frozen 3D
-  alignment scout stops below its `1.2` gate; a new production manifest must
-  use genuine stretching, directed endpoints, energy/helicity integrity, and
-  the exact analytic-tail/Picard interface. The bounded `43a1` side packet is
-  closed, and `KI240` remains `INCOMPLETE`.
+- **phase:** Cycle 268 runs the bounded Hodge chain-level census
+  `H268-MIN2-AKS`; `ND251` is paused, not retired
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -2387,7 +2413,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 267
+- **cycle:** 268
 - **announcements:** none
 
 ## immutable target list

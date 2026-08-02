@@ -1,5 +1,33 @@
 # Notebook
 
+## Cycle 268 main-funnel target
+
+The active main funnel is `H268-MIN2-AKS`. Cycle 266 retires universal H264
+diagonal survival even after scalar-unit cancellation: its noncontractible
+minimal packet makes the model diagonal `a_1a_2` exact. The remaining bounded
+question is whether the actual nine Atiyah--Kodaira--Spencer cocycles survive.
+Classify symbolically every two-cell minimal Maurer--Cartan packet in the actual
+seven-graph `A_infinity` category and return an exact survival theorem, an exact
+all-nine cancellation packet, a complete mixed stratification, or the first
+missing higher-product/Atiyah-transfer wall. Stop at two cells; do not assume
+strict formality, sample coefficient boxes, or escalate without a new strategic
+review. See `../cycle-268-strategic-rotation.md`.
+
+## Cycle 266 minimal cancellation and counterexample
+
+Finite unit cancellation gives a strict decomposition of every strict packet
+over the compressed graph Ext algebra into a minimal packet and elementary
+two-cell unit cones.  The endomorphism and cross-Hom complexes involving the
+contractible part are contractible, so functorial obstruction cohomology is
+unchanged by cancellation.  Minimality does not restore H264 survival: for
+`T=(F_0[0] direct-sum F_0[1],Q=a_1a_2)`, the twisting entry has total degree
+one, lies in the augmentation ideal, and `Q^2=0`, while the degree-one reverse
+unit `G:F_0[1]->F_0[0]` satisfies
+`d(G)=a_1a_2|A+a_1a_2|B`.  Exact row reduction gives `dim H^0 End(T)=7`, so
+the minimal packet is not contractible.  This disproves universal H264
+diagonal-dual survival even on minimal complexes, but is not a `KI240` or
+Hodge counterexample.  See `cycle-266-minimal-cancellation-and-counterexample.md`.
+
 ## Cycle 264 bounded scout
 
 `H264-KI-MIN` freezes only the minimal two-vertex shifted-return model for

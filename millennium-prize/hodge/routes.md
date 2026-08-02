@@ -1,5 +1,18 @@
 # Routes
 
+## Cycle 268 two-cell minimal Atiyah census
+
+`H268-MIN2-AKS` is the active main funnel. The universal H264 diagonal-survival
+mechanism is retired by the Cycle 266 noncontractible minimal counterpacket, but
+that calculation did not evaluate the actual nine PEL Atiyah obstruction
+cocycles. In the actual seven-graph minimal `A_infinity` category, classify all
+two-cell minimal Maurer--Cartan components and compute their total chain-level
+obstruction maps exactly. Terminate with universal survival, one all-nine
+cancellation packet, a complete mixed stratification, or the first exact
+missing-structure wall. Two cells is a hard stop; no strict-formality
+substitution, floating component sampling, or automatic escalation is allowed.
+Full target and stop rules: `../cycle-268-strategic-rotation.md`.
+
 ## Cycle 258 abelian-fourfold theta-section no-go
 
 Keep focused Navier dynamics as the main lane, but freeze one bounded non-graph

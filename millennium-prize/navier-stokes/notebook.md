@@ -1,5 +1,17 @@
 # Notebook
 
+## Cycle 268 nonlinear infinite-support manifold
+
+The cellular carrier `v=(sin y,-sin x)` and analytic passive component
+`w_epsilon=(4+epsilon v dot grad |v|^2)^(1/2)` generate an exact two-parameter
+Euler-invariant set `u_(epsilon,tau)=(v,w_epsilon o Phi_-tau)`. A Laurent
+polynomial specialization proves that every `tau=0` member has genuinely
+infinite Fourier support, while an exact positive derivative proves that its
+complete velocity `L3` varies. Thus finite parameter count does not trigger
+finite-mode rigidity. The family remains planar and obeys the triangular
+`2^(1/6)` cap. Pointwise generalized-Beltrami trajectories are stationary and
+cannot vary `L3`. See `cycle-268-infinite-support-phase-manifold.md`.
+
 ## Cycle 267 finite-dimensional genuine-3D Euler no-go
 
 Kishimoto--Yoneda's 3D finite-mode classification closes the fixed-support
