@@ -1,5 +1,53 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: hostile BSD literature audit corrects the Cycle 237 claim that
+  `p=1499` is the sole structural exception. Cha Theorem 21 excludes `5,23`
+  by ramification and `1499` by additive reduction, but Kolyvagin's original
+  surjective theorem as quoted by Cha Theorem 3 imposes neither restriction.
+  Hence all three primes are finite residual-image checks. The singleton
+  non-CM isogeny class proves irreducibility, not surjectivity, so the current
+  support statement is only
+  `p | #Sha => p | I_A or p in {5,23,1499}`. The exact auxiliary modular symbol
+  already certifies rank-zero twist nonvanishing. Rank one over `Q` and `K`
+  gives a 2-primary free-lattice quotient, not integral equality, though odd
+  index valuations agree; odd-primary restriction `Q -> K` is injective, and
+  the certified 2-descent separately kills the full 2-primary Sha. `HK236`
+  remains `WALL`, now for missing residual-image and exact index/height
+  certificates rather than a theorem-imposed additive-prime exponent. See
+  `millennium-prize/birch-swinnerton-dyer/cycle-238-hostile-kolyvagin-literature-audit.md`.
+
+- 2026-08-02: Cycle 237 assigns terminal `HK236 WALL` under the unchanged
+  Cycle 236 rule. Exact Heegner-hypothesis and modular-symbol work preserves an
+  analytic index-square factor `64`, but not the integral Mordell--Weil index:
+  the latter also contains the unknown analytic `Sha` factor. No exact CM-trace coordinate or directed
+  elliptic-logarithm identification proves `y=+/-8P`. The original claim that
+  additive reduction makes `1499` a theorem-imposed exception is superseded by
+  the hostile audit above; the actual integral-theorem gap is the uncertified
+  residual image at `5,23,1499`. The height packet also has neither a directed
+  global lower bound nor a certified trace upper bound; therefore no `C_A`,
+  unconditional `M`, `B_A`, or complete frozen prime list is printed. The
+  weaker support implication and conditional `M=35` are not substituted, and
+  the curve/field architecture is retired with no nearby-field cycling. The
+  six-lane review leaves Navier--Stokes lexicographically first at `(1,1,0,1)`,
+  but without a frozen finite production object, so the next funnel is focused
+  discovery through a genuinely-infinite-tail critical-`L^3` amplification
+  admission gate rather than an assigned proof lane. See
+  `millennium-prize/cycle-237-strategic-rotation.md`.
+
+- 2026-08-01: The exact `HK236` height/index audit for
+  `A=433a1^(-1499)` returns `WALL`, not a finite unconditional cutoff. Arb and
+  rational arithmetic certify Silverman's explicit height-difference constant
+  (with Bremner's `1.922` correction), but that bound alone needs an exhaustive
+  point exclusion to become positive. The sharper Cremona--Siksek ANTS VII
+  computation still lacks directed intervals. If its strict EGR bound `>7`
+  were certified, the exact component exponent `2` would give the global bound
+  `hhat(G)>7/4`. The certified point-height interval would then give point-index
+  cutoff `4`; if the separately uncertified trace identity `y=+/-8P` were also
+  proved, `hhat(y)<2174` and the exact Heegner-index cutoff would be `M=35`.
+  Since both directed Siksek certification and integral trace identification
+  are missing, no unconditional finite `M` is printed. See
+  `millennium-prize/birch-swinnerton-dyer/cycle-237-exact-height-index-obstruction.md`.
+
 - 2026-08-01: Cycle 236 records terminal `CA235 FAIL` and rotates the main
   funnel out of Yang--Mills. The audited scaling is `a_k -> 0`,
   `lambda_k=2/g_k^4 -> infinity`, with the physical Hamiltonian normalized by
@@ -658,9 +706,8 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Yang--Mills `BR235 PASS` retained and `CA235 FAIL` terminal; main
-  funnel rotated to BSD effective integral Heegner--Kolyvagin checkpoint
-  `HK236`
+- **phase:** focused portfolio discovery after terminal `HK236 WALL`; Navier
+  genuinely-infinite-tail critical-`L^3` admission gate is the leading scout
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -1492,7 +1539,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 236
+- **cycle:** 238
 - **announcements:** none
 
 ## immutable target list

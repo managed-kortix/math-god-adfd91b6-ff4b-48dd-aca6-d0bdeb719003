@@ -1,5 +1,46 @@
 # Notebook
 
+## Terminal `HK236` decision cycle 237
+
+The frozen checkpoint is terminal `WALL`. The exact trace audit does not
+identify the integral CM trace with `+/-8P`; the integral Kolyvagin packet has
+no effective exponent at the additive conductor prime `1499`; and the height
+packet has neither a directed global lower bound nor a certified upper bound
+for the trace. Thus no unconditional `C_A`, `M`, `B_A`, or complete prime list
+is available. The support implication with `1499` added by hand and the
+conditional cutoff `M=35` are not accepted as replacements for the frozen
+items. The curve/field architecture is retired, and the portfolio rotates to
+focused Navier genuinely-infinite-tail discovery. See
+`../cycle-237-strategic-rotation.md`.
+
+## Exact auxiliary index scout cycle 237
+
+For the `D=-1499` twist and Heegner field discriminant `-115`, the associated
+rank-zero base twist has discriminant `172385=115*1499`. Exact level-433 plus
+modular-symbol arithmetic gives the quadratic-character sum `S=64`. The twist
+period relation cancels the square roots in the Gross--Zagier index expression,
+so its index square is exactly `64` and its positive index is exactly `8`; the
+former rounded `63.996...` is no longer needed. This still does not certify the
+separate elliptic-logarithm identification of the CM trace with `+/-8P`:
+PARI's recognition is floating, and the existing primitivity proof for `P`
+retains its nondirected eclib height-bound scope. See
+`cycle-237-exact-heegner-index-scout.md`.
+
+## Integral Kolyvagin factor audit cycle 237
+
+Hostile Cycle 238 corrects the overclaim that `1499` is the sole structural
+exception. Cha excludes `5,23` because they ramify in `K` and excludes `1499`
+because the reduction is additive. Kolyvagin's original surjective theorem as
+stated by Cha has neither restriction, so all three can be restored by
+certified residual-surjectivity checks. A singleton non-CM rational isogeny
+class proves residual irreducibility, not surjectivity. The currently justified
+support statement is therefore
+`p | #Sha => p | I_A or p in {5,23,1499}`. Also, rank one over both fields gives
+only a 2-primary lattice index between `A(Q)_free` and `A(K)_free`, not literal
+equality; their odd index valuations do agree. The exact auxiliary modular
+symbol already certifies the rank-zero twist value. See
+`cycle-238-hostile-kolyvagin-literature-audit.md`.
+
 ## `D=-29023` exact localization cycle 215
 
 The missing rational coordinates are not logically needed. Cycle 211 and

@@ -1,5 +1,28 @@
 # Routes
 
+Cycle 237 terminalizes the frozen checkpoint as `HK236 WALL`. The exact
+modular-symbol index `8` does not certify the CM trace coordinates, the
+residual images at `5,23,1499` are not certified in the proof packet, and the
+undirected lower-height input plus unidentified trace prevents an unconditional
+cutoff. Under the unchanged stop rule, the weaker support implication and
+conditional `M=35` do not count as a pass. Retire this curve/field architecture,
+do not cycle through nearby fields or isolated primary checks, and return to
+the six-lane review recorded in `../cycle-237-strategic-rotation.md`.
+
+Cycle 238 hostilely corrects the Cycle 237 explanation while retaining
+`HK236 WALL`. Cha's irreducible theorem covers every odd prime except `5,23`
+(ramified in `K`) and `1499` (additive reduction). Kolyvagin's original
+surjective theorem as stated by Cha has neither local restriction, so all
+three exceptional primes can be restored by certified residual-surjectivity
+checks. The singleton non-CM isogeny class proves irreducibility but not
+surjectivity. Thus the currently justified support statement is
+`p | #Sha => p | I_A or p in {5,23,1499}`, not a sole structural exception at
+`1499`. The exact auxiliary modular symbol certifies rank-zero nonvanishing;
+the 2-descent handles `2`; and the `Q`-to-`K` free-lattice index is only known
+to be 2-primary, which suffices for odd valuations but is not literal lattice
+equality. See `cycle-238-hostile-kolyvagin-literature-audit.md` and
+`cycle-237-integral-kolyvagin-factor-wall.md`.
+
 Cycle 215 closes the seven-primary part for `D=-29023` without finding the
 huge rational generator. Cycle 211 gives
 `delta_tilde_113=-17186=6 mod 7`, so Kim identifies the residual Selmer group
