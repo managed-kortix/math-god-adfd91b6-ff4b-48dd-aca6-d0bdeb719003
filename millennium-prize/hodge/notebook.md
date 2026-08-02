@@ -1,5 +1,17 @@
 # Notebook
 
+## Cycle 250 F242 sparse-witness geometry
+
+The Cycle 249 `S=-i` witness passes tangent injectivity exactly: in homogeneous
+canonical coordinates the twenty `3 x 3` minors of its three tangent columns,
+together with the Fermat equations, generate `(1)` on each of the 27 standard
+projective patches of `C^3`. It nevertheless has a cheap global collision.
+Since the middle column of `L_1` is zero, `L_1 phi` retains only `q_X,q_Z`;
+for `P=[1:0:1]` and `Q=[-1:0:1]`, one has projectively
+`Q=sigma_X(P)=sigma_Z(P)`, so both retained quotients agree. Holding the other
+two factors fixed proves noninjectivity. This one witness is
+`REJECT_NONINJECTIVE`; the finite category remains incomplete.
+
 ## Cycle 246 weight and punctured-support wall
 
 The independent repair terminates at `WALL`. Weight, cell, and bar filtrations
@@ -47,6 +59,36 @@ Cycle 200 and `KI240` are `INCOMPLETE`. The active portfolio phase remains
 Navier focused discovery `LA242`, now by the corrected lane comparison rather
 than by terminal Hodge closure. `NB242` is calibration and `F242` remains an
 incomplete inactive scout.
+
+## Cycle 250 F242 difference-scheme obstruction
+
+For the explicit Cycle 248 map, the difference image `D=phi(C)-phi(C)` is an
+effective ample divisor with class
+`[D]=gamma*[-1]^*gamma=8(eta_1+eta_2+eta_3)`.  At zero its tangent cone is the
+Fermat quartic `z_X^4+z_Y^4+z_Z^4=0`, obtained directly from the three quotient
+differentials, so `mult_0(D)=4`.  This corrects the proposed scheme gate:
+`ker(M) intersect D^3` can never be the reduced identity scheme.  On a
+rank-six kernel all three restricted divisor equations lie in `m^4`; when
+their leading quartics are regular, the identity has local length `4^3=64`.
+Thus the difference image remains an exact set-theoretic collision gate, but
+closed immersion must be checked on `C^3 times_(E^6) C^3=Delta` before the
+diagonals are contracted.  The exact nullspace/quartic Groebner prefilter is
+implemented in `verify_cycle250_f242_difference_gate.py`.
+
+## Cycle 249 F242 exact Weil prefilter
+
+Writing `L_r=(U_r;V_r)`, the exceptional coordinate of the Cycle 248 27-image
+sum is the Gaussian polynomial
+`S=sum_(a,b,c) det(U_1a,U_2b,U_3c) conjugate(det(V_1a,V_2b,V_3c))`.
+With `H_r=U_r conjugate(V_r)^t`, Cauchy--Binet and cubic polarization reduce it
+to seven `3x3` determinants: `det(H1+H2+H3)-sum det(Hr+Hs)+sum det(Hr)`.
+The exact projection is `-i conjugate(S) Omega_W+i S Omega_Wbar`; hence,
+conditional on G0, G1 is exactly `S!=0`. Before G0 this is a necessary
+prefilter. A sparse norm-one witness has block ranks `(2,3,3)`, total rank six,
+and `S=-i`, giving projection `Omega_W+Omega_Wbar`, so the polynomial is not
+universally zero. Enumeration can now reject block-rank, total-rank, and `S=0`
+candidates before any geometric calculation. This does not test closed
+immersion or deformation.
 
 ## Cycle 248 explicit Fermat-quartic elliptic splitting
 

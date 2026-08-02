@@ -1,5 +1,66 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: The Hodge Cycle 250 exact one-witness test resolves the Cycle 249
+  sparse `S=-i` candidate. Its twenty tangent minors plus the three Fermat
+  equations generate the unit ideal on all 27 projective patches over `Q(i)`,
+  so its tangent map is everywhere injective. Nevertheless it is cheaply
+  rejected: the middle column of `L_1` is zero, while `P=[1:0:1]` and
+  `Q=[-1:0:1]` satisfy `Q=sigma_X(P)=sigma_Z(P)` projectively. Thus the two
+  retained quotients `q_X,q_Z` agree, giving `L_1 phi(P)=L_1 phi(Q)` and a
+  collision after fixing the other source factors. The witness is not a closed
+  immersion. No enumeration or Hodge result is claimed. See
+  `millennium-prize/hodge/cycle-250-f242-sparse-witness-geometry.md`.
+
+- 2026-08-02: Cycle 250 gives a `KINEMATIC ONLY` endpoint construction on
+  `T^2`. A concentrated analytic heat-kernel primitive and a sinusoidal
+  primitive are exchanged between unit and scale-`N` directions by the
+  orientation-preserving automorphism
+  `B_N=((1,N),(N,N^2+1))`. The exact pullback is
+  `omega_1=omega_0 o B_N`, so in transport notation the endpoint map is
+  `eta=B_N^-1`. Tuning the continuous amplitude to
+  `t_*=||F_epsilon||_2/||sin||_2` makes the two homogeneous `H^-1` energies
+  exactly equal. Heat-kernel concentration makes the primitive `L^3/L^2`
+  ratio `R>2`; any `sqrt(1+N^2)>(1+2R)/(R-2)` then proves the directed bound
+  `||K omega_0||_3/||K omega_1||_3>2`. Cross terms vanish by independent
+  unimodular phase coordinates, not pointwise vector orthogonality. This
+  passes only the static Cycle 247 screen: the displayed automorphism is not a
+  flow map, no self-induced Euler path is supplied, and no Navier--Stokes or
+  Millennium result is claimed. See
+  `millennium-prize/navier-stokes/cycle-250-kinematic-equal-energy-endpoints.md`.
+
+- 2026-08-02: Cycle 249 computes the F242 exceptional projection exactly.
+  For `L_r=(U_r;V_r)`, its determinant coordinate is
+  `S=sum_(a,b,c) det(U_1a,U_2b,U_3c) conjugate(det(V_1a,V_2b,V_3c))` and
+  `P_W z_L=-i conjugate(S) Omega_W+i S Omega_Wbar`. With
+  `H_r=U_r conjugate(V_r)^t`, Cauchy--Binet and cubic polarization give a
+  seven-`3x3`-determinant formula for `S`. The polynomial is not universally
+  zero: an explicit norm-one triple has block ranks `(2,3,3)`, total rank six,
+  and `S=-i`, giving projection `Omega_W+Omega_Wbar`. Conditional on the G0
+  closed-immersion certificate, `S!=0` is exactly G1; before G0 it is only a
+  necessary prefilter. Thus exact enumeration may reject block-rank failures,
+  total-rank failures, and then `S=0` before expensive geometry. This closes only the
+  projector calculation; closed immersion, exhaustive enumeration, and all
+  deformation gates remain `INCOMPLETE`. No Hodge result is claimed. See
+  `millennium-prize/hodge/cycle-249-f242-exact-weil-prefilter.md`.
+
+- 2026-08-02: Cycle 248 closes the Cycle 247 fixed-factor question
+  unconditionally. A hostile primary-source normalization audit found no
+  index, sign, or admissibility defect in the argument: `V_N` is admissible for
+  `d_N` despite its zero endpoint coefficient, the exact split is
+  `mathcal P_N=P_N+A_N^2`, and `A_N~1/log N`. The BDBLS/Burnol lower barrier and
+  the negligible restricted tail give `liminf P_N log N >= C_B>0`. Any fixed
+  `q<1` contraction on all sufficiently late links of a dyadic ray would
+  instead give geometric decay
+  and `P_(2^j N_0) log(2^j N_0)->0`. Hence every such `q` fails infinitely often
+  on every ray, equivalently each ray has ratio limsup at least one; the Cycle
+  247 correlation threshold fails cofinally. Under RH plus the additional
+  Bettin--Conrey--Farmer reciprocal-derivative moment hypothesis,
+  `P_N~C_0/log N` and `P_(2N)/P_N~log N/log(2N)->1`, so fixed contraction fails
+  eventually at every scale. RH alone supplies no known fixed-taper
+  asymptotic, but this does not affect the unconditional disproof. The Cycle
+  242 transfer implication remains valid with an impossible hypothesis. See
+  `millennium-prize/riemann-hypothesis/cycle-248-fixed-dyadic-contraction-wall.md`.
+
 - 2026-08-02: Cycle 247 gives an exact obstruction to the proposed literal
   homogeneous inverse-mixing mechanism. For every smooth mean-zero 2D Euler
   orbit,
@@ -1791,7 +1852,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 248
+- **cycle:** 250
 - **announcements:** none
 
 ## immutable target list
