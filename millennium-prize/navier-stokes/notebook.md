@@ -1,5 +1,23 @@
 # Notebook
 
+## Cycle 256 explicit Cycle 211 transfer theorem
+
+For an oriented Cycle 255 Euler enclosure, put
+`Q=q0(1-alpha T)`, `kappa_j(Q)=max_(n>=1)n^j/Q^n`,
+`G=M kappa_1(Q)`, and `H=M kappa_2(Q)`. The analytic bound gives
+`||grad omega||_infinity<=G` and `||Delta omega||_2<=H`. If `theta` is the
+viscous-minus-Euler vorticity, its exact energy inequality is
+`D^+||theta||_2<=G||theta||_2+mu H`; Hausdorff--Young plus a lattice-shell
+sum gives the explicit rational conversion `||K theta||_3<=4||theta||_2`.
+For directed endpoint cubic bounds `C_in,C_out`, define
+`d=C_out^(1/3)-2C_in^(1/3)`. Only when the certificate proves
+`C_out>8C_in` is the threshold positive, and then
+`mu0=d/[4H Phi(G,T)]`, where `Phi=(exp(GT)-1)/G` (or `T` at `G=0`). At fixed
+physical viscosity `nu`, every `lambda>nu/mu0` makes
+`u_lambda(t)=lambda w_(nu/lambda)(lambda t)` cross two at time `T/lambda`.
+No Cycle 255 crossing is assumed or presently available. See
+`cycle-256-explicit-cycle211-transfer-theorem.md`.
+
 ## Cycle 255 Euler Fourier-tail certificate design
 
 Cycle 215's geometric shell cap cannot survive the Euler limit by putting

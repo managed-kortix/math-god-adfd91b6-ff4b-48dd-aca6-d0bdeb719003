@@ -23,7 +23,9 @@ Use the Cycle 212 vorticity normalization with `mu=0` and put
  D_q(\omega)=\sum_{k\ne0}|k|_1q^{|k|_1}|\omega_k|.       \tag{255.1}
 \]
 
-Let `q(t)>1` be differentiable. The ordered Euler multiplier obeys
+Let `q(t)>1` be differentiable. With normalized Haar Fourier coefficients,
+`k^perp=(k_2,-k_1)`, and the sign convention (212.2), the ordered Euler term is
+`(p^perp dot r)/|p|_2^2`. Its sign is immaterial for this estimate, and
 
 \[
  { |p^\perp\!\cdot r|\over |p|_2^2}
@@ -32,7 +34,16 @@ Let `q(t)>1` be differentiable. The ordered Euler multiplier obeys
 \]
 
 Termwise differentiation in a finite Galerkin system, followed by the upper
-Dini derivative at zero coefficients, gives
+Dini derivative at zero coefficients, gives, with no factor two,
+
+\[
+ \sum_k q^{|k|_1}\left|\sum_{p+r=k}
+ {p^\perp\!\cdot r\over|p|_2^2}\omega_p\omega_r\right|
+ \le\sum_{p,r}q^{|p|_1}q^{|r|_1}|r|_1|\omega_p||\omega_r|
+ =A_qD_q,
+\]
+
+while differentiating the weight contributes exactly `(q'/q)D_q`. Hence
 
 \[
  D^+A_{q(t)}\le
@@ -46,20 +57,48 @@ Choose rational `q0>1`, `alpha>0`, and `M>0`, and set
  A_{q_0}(\omega(0))\le M,\qquad \alpha\ge M,            \tag{255.3}
 \]
 
-with `q(T)>1`. Since `q'/q=-alpha/(1-alpha t)<=-M`, scalar comparison in
-(255.2) proves
+with `q(T)>1`. Here
+
+\[
+ {q'(t)\over q(t)}={-q_0\alpha\over q_0(1-\alpha t)}
+ ={-\alpha\over1-\alpha t}\le-\alpha\le-M.             \tag{255.3a}
+\]
+
+The inequality uses `0<1-alpha t<=1`, which follows on `[0,T]` from
+`q(T)>1` and `q0>0`; there is no hidden sign reversal in (255.3a).
+
+The closed-face conclusion from (255.2) is valid, but it is not based only on
+the slogan that a non-strict first-contact derivative cannot point outward.
+At a fixed Galerkin cutoff let `Lambda` be the largest retained `|k|_1`, so
+`D_q<=Lambda A_q`. For `B=(A_q-M)_+`, equations (255.2)--(255.3a) imply
+
+\[
+ D^+B\le \Lambda(B+M)B.
+\]
+
+Indeed this follows directly where `A_q>M`; at `A_q=M`, (255.2) gives
+`D^+A_q<=0`, and where `A_q<M` the positive part is locally zero. Since
+`B(0)=0`, scalar comparison proves
 
 \[
  A_{q(t)}(\omega(t))\le M\quad(0\le t\le T),
  \qquad z_n(t)\le Mq(t)^{-n}.                           \tag{255.4}
 \]
 
-For completeness, use an outward perturbation at each finite cutoff, where the
-scalar face is strictly inward, and then send the perturbation to zero. The
-common radius `log q(T)>0` gives dominated convergence of the convolution as
-the cutoff tends to infinity. Equivalently, local analytic existence plus
-(255.4) continues the analytic solution through `T`; uniqueness identifies it
-with the global smooth 2D Euler solution. Equality in (255.3) is allowed.
+For passage to the full equation, use this estimate at each fixed cutoff. The
+resulting uniform bound also gives
+`A_{q(T)}(omega(t))<=M` for all `t<=T`. For any fixed
+`1<rho<q(T)`, the elementary bound
+`sup_(n>=1) n(rho/q(T))^n<infinity` uniformly controls `D_rho` and hence the
+Euler convolution and each coefficient derivative. Compactness and dominated
+convergence therefore pass the Galerkin equations and (255.4) to a full Euler
+solution. Standard uniqueness identifies the limit with the global smooth 2D
+Euler solution; the surviving radius `log q(T)>0` also supplies analytic
+continuation past `T`. Equality in either non-strict condition in (255.3) is
+allowed.
+
+If `z_n=sum_(|k|_infinity=n)|omega_k|`, then `|k|_1>=n` on that shell, so
+`q^n z_n<=A_q`; this is the last implication in (255.4), with coefficient one.
 
 The linear `q` is intentional: all weights at rational slab endpoints are
 rational, so no interval exponential enters the trusted core.
@@ -86,7 +125,11 @@ unresolved_cutoff = N.
 
 The Cycle 213 expression is an absolute convolution bound and does not use
 viscosity. Only `check_dissipative_shell_cap` is forbidden. The exact retained
-vector field uses the paired coefficient (214.1), and each slab verifies
+vector field may use the half-symmetrized coefficient (214.1) only while still
+summing over both ordered inputs `p` and `r=k-p`, as
+`validate_cycle212.py` does. If unordered pairs are enumerated once, the
+coefficient must instead be twice (214.1); otherwise the vector field is wrong
+by a factor of two. Each slab verifies
 
 \[
  A_j+[0,h_j](F_N(W_j)+R_j)\subseteq W_j,
@@ -249,6 +292,7 @@ The shrinking-weight lemma removes the viscosity dependence that made Cycle
 215 unusable for ND251 and supplies generated-scale bounds for smooth
 infinite-support data. The family and certificate make the next search finite,
 falsifiable, and deterministic. They do not prove that a member crosses two,
-establish the Cycle 211 inviscid-limit constant, or resolve Navier--Stokes. If
-(255.11) is eventually certified, the next artifact must append the explicit
-Cycle 211 `mu0` and physical-amplitude threshold.
+establish a crossing or resolve Navier--Stokes. Cycle 256 supplies the
+conditional Cycle 211 transfer formula: if (255.11) is eventually certified,
+the artifact can compute the explicit `mu0` and fixed-viscosity amplitude
+threshold directly from its analytic and endpoint fields.

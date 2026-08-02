@@ -1,0 +1,18 @@
+{
+  "format": "cycle255-floating-candidate-screen-v1",
+  "status": "FLOATING_GALERKIN_SCREEN_ONLY",
+  "pde_certificate": false,
+  "complete": true,
+  "method": "square_two_thirds_pseudospectral_euler_rk4",
+  "enumeration": "one_based_profile_sigma_epsilon_time",
+  "n": 64,
+  "cutoff": 21,
+  "dt": "1/2048",
+  "completed_enumeration_index": 149952,
+  "shard_count": 2,
+  "shard_index": 0,
+  "feasible_members_screened": 6570,
+  "promotion_threshold": 1.5,
+  "promoted_count_before_cap": 0,
+  "promoted": [  ]
+}

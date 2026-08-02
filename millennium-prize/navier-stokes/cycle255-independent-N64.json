@@ -1,0 +1,26 @@
+{
+  "status":"NUMERICAL_CANDIDATE_GENERATION_ONLY",
+  "pde_certificate":false,
+  "independent_method":"square_two_thirds_pseudospectral_euler_rk4",
+  "n":64,"cutoff":21,"dt":"1/2048",
+  "normalization":"unnormalized_forward_fft_normalized_haar_grid_l3",
+  "family":{"profiles":781,"tail_variants":6,"terminal_times":32,"feasible_base_members":4686,"selection":"largest_absolute_initial_log_l3_derivative","shortlist":24},
+  "controls":[
+    {"name":"shear_psi_cos_y","initial_l3":0.75150139274284411,"expected_l3":0.75150110119121771,"normalization_relative_error":3.8795901424748536e-07,"rhs_relative_l2":0,"ratio_at_1_over_16":1,"energy_relative_drift":0,"enstrophy_relative_drift":0},
+    {"name":"equal_shell_P1","initial_l3":1.6485922462652562,"expected_l3":0,"normalization_relative_error":0,"rhs_relative_l2":1.7488922429920871e-17,"ratio_at_1_over_16":1,"energy_relative_drift":0,"enstrophy_relative_drift":0}
+  ],
+  "top_results":[
+    {"profile_index":16,"a":[1,-2,-2,1,-1],"sigma":"1/24","epsilon":"1/1024","direction":1,"T":"1/16","family_index_0based":3232,"selection_score":0.0015249379834804146,"max_ratio":1.0000954185401316,"ratio_at_max_feasible_T":1.0000954185401316,"max_feasible_T":"1/16","energy_relative_drift":0,"enstrophy_relative_drift":4.4408920985006262e-16},
+    {"profile_index":506,"a":[1,2,-2,-1,-1],"sigma":"1/24","epsilon":"1/1024","direction":1,"T":"1/16","family_index_0based":97312,"selection_score":0.0015249379834803825,"max_ratio":1.0000954185401307,"ratio_at_max_feasible_T":1.0000954185401307,"max_feasible_T":"1/16","energy_relative_drift":2.2204460492503131e-16,"enstrophy_relative_drift":4.4408920985006262e-16},
+    {"profile_index":506,"a":[1,2,-2,-1,-1],"sigma":"1/24","epsilon":"1/512","direction":1,"T":"1/16","family_index_0based":97280,"selection_score":0.0015249379827577819,"max_ratio":1.000095418540087,"ratio_at_max_feasible_T":1.000095418540087,"max_feasible_T":"1/16","energy_relative_drift":6.6613381477509392e-16,"enstrophy_relative_drift":8.8817841970012523e-16},
+    {"profile_index":16,"a":[1,-2,-2,1,-1],"sigma":"1/24","epsilon":"1/512","direction":1,"T":"1/16","family_index_0based":3200,"selection_score":0.0015249379827578053,"max_ratio":1.0000954185400865,"ratio_at_max_feasible_T":1.0000954185400865,"max_feasible_T":"1/16","energy_relative_drift":6.6613381477509392e-16,"enstrophy_relative_drift":8.8817841970012523e-16},
+    {"profile_index":16,"a":[1,-2,-2,1,-1],"sigma":"1/24","epsilon":"1/256","direction":1,"T":"1/16","family_index_0based":3168,"selection_score":0.0015249379813125957,"max_ratio":1.0000954185399971,"ratio_at_max_feasible_T":1.0000954185399971,"max_feasible_T":"1/16","energy_relative_drift":6.6613381477509392e-16,"enstrophy_relative_drift":1.5543122344752192e-15},
+    {"profile_index":506,"a":[1,2,-2,-1,-1],"sigma":"1/24","epsilon":"1/256","direction":1,"T":"1/16","family_index_0based":97248,"selection_score":0.0015249379813125506,"max_ratio":1.0000954185399966,"ratio_at_max_feasible_T":1.0000954185399966,"max_feasible_T":"1/16","energy_relative_drift":6.6613381477509392e-16,"enstrophy_relative_drift":1.5543122344752192e-15},
+    {"profile_index":16,"a":[1,-2,-2,1,-1],"sigma":"1/16","epsilon":"1/1024","direction":1,"T":"1/16","family_index_0based":3136,"selection_score":0.0015249379788157514,"max_ratio":1.000095418539841,"ratio_at_max_feasible_T":1.000095418539841,"max_feasible_T":"1/16","energy_relative_drift":1.2212453270876722e-15,"enstrophy_relative_drift":3.3306690738754696e-16},
+    {"profile_index":506,"a":[1,2,-2,-1,-1],"sigma":"1/16","epsilon":"1/1024","direction":1,"T":"1/16","family_index_0based":97216,"selection_score":0.0015249379788157239,"max_ratio":1.0000954185398396,"ratio_at_max_feasible_T":1.0000954185398396,"max_feasible_T":"1/16","energy_relative_drift":1.2212453270876722e-15,"enstrophy_relative_drift":3.3306690738754696e-16},
+    {"profile_index":16,"a":[1,-2,-2,1,-1],"sigma":"1/16","epsilon":"1/512","direction":1,"T":"1/16","family_index_0based":3104,"selection_score":0.0015249379734284892,"max_ratio":1.0000954185395059,"ratio_at_max_feasible_T":1.0000954185395059,"max_feasible_T":"1/16","energy_relative_drift":3.3306690738754696e-16,"enstrophy_relative_drift":1.1102230246251565e-16},
+    {"profile_index":506,"a":[1,2,-2,-1,-1],"sigma":"1/16","epsilon":"1/512","direction":1,"T":"1/16","family_index_0based":97184,"selection_score":0.0015249379734284501,"max_ratio":1.000095418539505,"ratio_at_max_feasible_T":1.000095418539505,"max_feasible_T":"1/16","energy_relative_drift":3.3306690738754696e-16,"enstrophy_relative_drift":1.1102230246251565e-16},
+    {"profile_index":16,"a":[1,-2,-2,1,-1],"sigma":"1/16","epsilon":"1/256","direction":1,"T":"1/16","family_index_0based":3072,"selection_score":0.0015249379626539393,"max_ratio":1.0000954185388338,"ratio_at_max_feasible_T":1.0000954185388338,"max_feasible_T":"1/16","energy_relative_drift":2.2204460492503131e-16,"enstrophy_relative_drift":4.4408920985006262e-16},
+    {"profile_index":506,"a":[1,2,-2,-1,-1],"sigma":"1/16","epsilon":"1/256","direction":1,"T":"1/16","family_index_0based":97152,"selection_score":0.0015249379626539013,"max_ratio":1.0000954185388318,"ratio_at_max_feasible_T":1.0000954185388318,"max_feasible_T":"1/16","energy_relative_drift":2.2204460492503131e-16,"enstrophy_relative_drift":4.4408920985006262e-16}
+  ]
+}

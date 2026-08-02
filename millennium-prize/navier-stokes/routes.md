@@ -1,5 +1,17 @@
 # Routes
 
+Cycle 256 specializes the Cycle 211 transfer to the exact fields of an
+eventual Cycle 255 certificate. From `Q=q0(1-alpha T)` and `A_Q<=M`, set
+`G=M max_(n>=1)n/Q^n` and `H=M max_(n>=1)n^2/Q^n`. The
+viscous-minus-Euler vorticity then obeys
+`D^+||theta||_2<=G||theta||_2+mu H`, and the explicit conversion
+`||K theta||_3<=4||theta||_2` yields
+`mu0=(C_out^(1/3)-2C_in^(1/3))/(4H Phi(G,T))` only after the exact endpoint
+gate `C_out>8C_in`. For any fixed physical viscosity `nu`, amplitudes
+`lambda>nu/mu0` transfer the ratio at time `T/lambda`. No crossing is assumed
+or currently certified. See
+`cycle-256-explicit-cycle211-transfer-theorem.md`.
+
 Cycle 255 replaces the viscosity-dependent Cycle 215 tail face by a shrinking
 analytic Euler weight. The exact inequality
 `D^+A_q<=(A_q+q'/q)D_q`, with rational

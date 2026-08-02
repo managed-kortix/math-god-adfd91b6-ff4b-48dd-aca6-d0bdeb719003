@@ -1,5 +1,22 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: Navier Cycle 256 makes the Cycle 211 transfer explicit for an
+  eventual directed Cycle 255 certificate. With
+  `Q=q0(1-alpha T)`, `kappa_j=max_(n>=1)n^j/Q^n`,
+  `G=M kappa_1`, and `H=M kappa_2`, the analytic vorticity enclosure gives
+  `||grad omega||_infinity<=G` and `||Delta omega||_2<=H`. The
+  viscous-minus-Euler vorticity obeys
+  `D^+||theta||_2<=G||theta||_2+mu H`, while an explicit
+  Hausdorff--Young/lattice estimate gives `||K theta||_3<=4||theta||_2`.
+  For directed cubic endpoint bounds `C_in,C_out`, a positive threshold exists
+  only after the exact gate `C_out>8C_in`; then
+  `mu0=(C_out^(1/3)-2C_in^(1/3))/(4H Phi(G,T))`, with
+  `Phi=(exp(GT)-1)/G` and its continuous value `T` at zero. At any fixed
+  viscosity `nu`, every amplitude `lambda>nu/mu0` yields the same ratio at
+  physical time `T/lambda`. No Cycle 255 crossing is assumed or currently
+  certified, so no Navier--Stokes or Millennium result is claimed. See
+  `millennium-prize/navier-stokes/cycle-256-explicit-cycle211-transfer-theorem.md`.
+
 - 2026-08-02: Navier Cycle 254 isolates the zero-circulation patch route. A
   deterministic equal-area opposite-sign periodic ellipse pair is an exact
   Yudovich patch family under full contour dynamics, but not under a closed
@@ -1186,7 +1203,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 255 runs focused Navier dynamics `ND251` after the exact
+- **phase:** Cycle 256 runs focused Navier dynamics `ND251` after the exact
   F242 source-level no-go retired that Hodge support architecture. Literal
   full-vorticity `dot H^-1` growth is off the Euler energy shell; the viable
   target is fixed-`dot H^-1`, variable-`W^(-1,3)` amplification, while `KI240`
@@ -2022,7 +2039,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 255
+- **cycle:** 256
 - **announcements:** none
 
 ## immutable target list
