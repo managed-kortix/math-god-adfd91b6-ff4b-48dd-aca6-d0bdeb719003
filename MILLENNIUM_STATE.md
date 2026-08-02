@@ -1,5 +1,60 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: Cycle 239 focused discovery exactly rejects the direct infinite
+  Fibonacci-rail completion of the Cycle 224 architecture. For
+  `k_j=(F_(j+1),F_j)`, the doubled mode
+  `h_n=2k_(n+2)=k_n+k_(n+3)=-k_(n+1)+k_(n+4)` has exactly those two rail-pair
+  contributions. Cancelling it forces
+  `a_(n+4)=-q_n a_n a_(n+3)/a_(n+1)`, where exact odd-Fibonacci algebra gives
+  `q_n>2`. Hence `a_(n+6)=-q_nq_(n+1)q_(n+2)a_n` and every nonzero residue
+  subsequence grows by more than eight, precluding `L^2`, smooth, or analytic
+  vorticity. The same recurrence forces `R_n R_(n+2)<0` for adjacent
+  lower-receiver rates two scales apart, precluding consistently signed upscale
+  transfer. One cancellation identity plus two claimed positive rates is a
+  finite exact rejection witness. The result retires this all-scale rail, not
+  the general genuinely-infinite-tail discovery gate. See
+  `millennium-prize/navier-stokes/cycle-239-infinite-fibonacci-rail-obstruction.md`.
+
+- 2026-08-02: Cycle 240 selects a new Hodge Karoubi-idempotent structural
+  admission gate `KI240`, replacing the Navier infinite-tail scout after the
+  Cycle 238 and Cycle 239 Fibonacci architectures' exact failures. It targets
+  exactly the Cycle 200--201 retract loophole for the explicit class `xi` in
+  `thick<F_0,...,F_6>` and avoids the retired Chow-degree-one/two, graph-union,
+  linkage, Ferrand, Fourier--Mukai, trace/Hochschild, and central-idempotent
+  architectures. The exact candidate theorem says every object of this
+  category with class `xi` has a nonzero Atiyah obstruction in some PEL
+  direction. `PASS` requires a universal arbitrary-noncentral-projector proof;
+  one finite exact packet with all nine corner classes zero is `FAIL`.
+  `WALL` and `INCOMPLETE` are separated from search failure. A pass closes this
+  support category's Karoubi boundary but does not imply Hodge. Its score
+  `(1,1,1,0)` beats Navier's `(1,1,0,1)` lexicographically because the universal
+  structural claim has a finite exact counterexample. Hodge is now the assigned
+  main gate under this theorem-and-breaker protocol. See
+  `millennium-prize/cycle-240-hodge-karoubi-idempotent-admission.md`.
+
+- 2026-08-02: Cycle 227 audits rigorous smooth 2D/3D Euler velocity norm-growth
+  literature through the current date against the exact same-norm `L^3` seed.
+  Cordoba--Martinez-Zoroa--Ozanski gives arbitrary `H^(beta')` growth of
+  vorticity from smooth compactly supported 2D data under
+  `beta'>(2-beta)beta/(2-beta^2)`, while Bourgain--Li and related theorems
+  inflate differentiated critical Sobolev/Besov norms. None compares velocity
+  `L^3` at two endpoints. The Fourier scaling
+  `||omega_N||_(H^s)~|a_N|N^s` versus `||u_N||_3~|a_N|N^-1` proves that these
+  lower bounds cannot imply a velocity `L^3` lower bound. No identified theorem
+  supplies a smooth factor-greater-than-two Euler seed; the Cycle 211 breaker
+  remains a new construction/certification task. No Navier--Stokes result is
+  claimed. See `millennium-prize/navier-stokes/cycle-227-smooth-euler-lp-literature-scout.md`.
+
+- 2026-08-02: The direct genuinely-infinite Fibonacci-rail continuation with
+  real-even geometric amplitudes `a_j=A r^(j-1)`, `Ar!=0`, has an exact stable
+  unit-ideal obstruction.  Pair sums/differences were collected over `Q` through
+  depth `J=12`; already `k_2-k_1=(1,0)` is a globally unique representation and
+  forces `(-3/10)A^2r=0`.  With `g=A^2r` and saturation
+  `h=tA^2r^2-1`, the finite certificate is `trg-h=1`.  The same equation persists
+  at every `J>=2`, so it extrapolates to the infinite sequence.  This retires
+  only the single-ratio real-even Fibonacci architecture, not general infinite
+  tails. See `millennium-prize/navier-stokes/cycle-238-infinite-fibonacci-rail-obstruction.md`.
+
 - 2026-08-02: hostile BSD literature audit corrects the Cycle 237 claim that
   `p=1499` is the sole structural exception. Cha Theorem 21 excludes `5,23`
   by ramification and `1499` by additive reduction, but Kolyvagin's original
@@ -706,8 +761,8 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** focused portfolio discovery after terminal `HK236 WALL`; Navier
-  genuinely-infinite-tail critical-`L^3` admission gate is the leading scout
+- **phase:** Hodge `KI240` Karoubi-idempotent structural gate assigned after
+  terminal `HK236 WALL` and the Navier Cycle 238--239 architecture obstructions
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -1539,7 +1594,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 238
+- **cycle:** 240
 - **announcements:** none
 
 ## immutable target list

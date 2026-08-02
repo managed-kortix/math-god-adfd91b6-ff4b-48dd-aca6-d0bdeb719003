@@ -1,0 +1,2366 @@
+{
+  "architecture": {
+    "nondegeneracy": "A*r!=0",
+    "paired_euler_coefficient": "-det(p,q)*(1/|p|^2-1/|q|^2)",
+    "rails": "k_j=(F_(j+1),F_j), F_1=F_2=1",
+    "real_even_amplitudes": "a_j=A*r^(j-1)"
+  },
+  "decision": {
+    "exact_off_rail_cancellation": false,
+    "extrapolates_to_infinite_depth": true,
+    "first_obstructed_depth": 2
+  },
+  "depth_certificates": [
+    {
+      "depth": 2,
+      "equation_sha256": "c7327bd3d1320dcab9bf8564d069e68726b97b1c0a439fa8e79bd36bf1b2df6d",
+      "off_rail_equation_count": 1,
+      "saturated_ideal": "unit",
+      "witness_mode": [
+        1,
+        0
+      ]
+    },
+    {
+      "depth": 3,
+      "equation_sha256": "e44308a96c84c304715fbd71ab1b95c0047565e09f9e9e5c814a46e33b8ec829",
+      "off_rail_equation_count": 2,
+      "saturated_ideal": "unit",
+      "witness_mode": [
+        1,
+        0
+      ]
+    },
+    {
+      "depth": 4,
+      "equation_sha256": "7a1340ecc4f3da0a6e4850d3bbf8f7ebec0d0276414836b617a05cce10bc4ce8",
+      "off_rail_equation_count": 5,
+      "saturated_ideal": "unit",
+      "witness_mode": [
+        1,
+        0
+      ]
+    },
+    {
+      "depth": 5,
+      "equation_sha256": "45a4b0e79b31692c7b0f4ce1248f2010fa5e2792acd58de885c37e0de21a6f07",
+      "off_rail_equation_count": 8,
+      "saturated_ideal": "unit",
+      "witness_mode": [
+        1,
+        0
+      ]
+    },
+    {
+      "depth": 6,
+      "equation_sha256": "201753697142b0a50d55ce48c9f17494196b81f8c0dcefd3461ced6b7e9e2507",
+      "off_rail_equation_count": 13,
+      "saturated_ideal": "unit",
+      "witness_mode": [
+        1,
+        0
+      ]
+    },
+    {
+      "depth": 7,
+      "equation_sha256": "e34e2315111db4e0acc9ba6836506d4287fa102d12acc1ca704076d2dc35b840",
+      "off_rail_equation_count": 20,
+      "saturated_ideal": "unit",
+      "witness_mode": [
+        1,
+        0
+      ]
+    },
+    {
+      "depth": 8,
+      "equation_sha256": "ca914b357f37135a75b84c2bc40278a2a13baf9090cb26a14ffeab6419399412",
+      "off_rail_equation_count": 29,
+      "saturated_ideal": "unit",
+      "witness_mode": [
+        1,
+        0
+      ]
+    },
+    {
+      "depth": 9,
+      "equation_sha256": "9d3154ff721808ffc8d7a18fcbd0cd7ba0a0189c23b8a3201fa734bacdd150a3",
+      "off_rail_equation_count": 40,
+      "saturated_ideal": "unit",
+      "witness_mode": [
+        1,
+        0
+      ]
+    },
+    {
+      "depth": 10,
+      "equation_sha256": "a8e64050234428d616cfd719a0120a60fcdbc221f81d3e0e8d36a7980fd624cc",
+      "off_rail_equation_count": 53,
+      "saturated_ideal": "unit",
+      "witness_mode": [
+        1,
+        0
+      ]
+    },
+    {
+      "depth": 11,
+      "equation_sha256": "a177bd45d5e76796a057254c7b81a472166b5072904c482beed77eddcb4c16a5",
+      "off_rail_equation_count": 68,
+      "saturated_ideal": "unit",
+      "witness_mode": [
+        1,
+        0
+      ]
+    },
+    {
+      "depth": 12,
+      "equation_sha256": "c1a5035fcfa4c6cb4b3594eae79f39628fab4f50a346ced45f40f442a2c0ece1",
+      "off_rail_equation_count": 85,
+      "saturated_ideal": "unit",
+      "witness_mode": [
+        1,
+        0
+      ]
+    }
+  ],
+  "max_depth": 12,
+  "max_depth_exact_equations": [
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        1,
+        0
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-3/10",
+          "exponent": 1
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-3/10",
+          "geometric_exponent": 1,
+          "kind": "difference",
+          "pair": [
+            1,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        4,
+        2
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-16/17",
+          "exponent": 3
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-16/17",
+          "geometric_exponent": 3,
+          "kind": "difference",
+          "pair": [
+            1,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        4,
+        3
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "11/26",
+          "exponent": 2
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "11/26",
+          "geometric_exponent": 2,
+          "kind": "sum",
+          "pair": [
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        6,
+        4
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "16/17",
+          "exponent": 3
+        },
+        {
+          "coefficient": "168/445",
+          "exponent": 5
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "16/17",
+          "geometric_exponent": 3,
+          "kind": "sum",
+          "pair": [
+            1,
+            4
+          ]
+        },
+        {
+          "coefficient": "168/445",
+          "geometric_exponent": 5,
+          "kind": "difference",
+          "pair": [
+            2,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        7,
+        4
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-12383/7565",
+          "exponent": 4
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-261/178",
+          "geometric_exponent": 4,
+          "kind": "difference",
+          "pair": [
+            1,
+            5
+          ]
+        },
+        {
+          "coefficient": "-29/170",
+          "geometric_exponent": 4,
+          "kind": "sum",
+          "pair": [
+            2,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        9,
+        6
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "261/178",
+          "exponent": 4
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "261/178",
+          "geometric_exponent": 4,
+          "kind": "sum",
+          "pair": [
+            1,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        10,
+        6
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-168/445",
+          "exponent": 5
+        },
+        {
+          "coefficient": "-440/3029",
+          "exponent": 7
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-168/445",
+          "geometric_exponent": 5,
+          "kind": "sum",
+          "pair": [
+            2,
+            5
+          ]
+        },
+        {
+          "coefficient": "-440/3029",
+          "geometric_exponent": 7,
+          "kind": "difference",
+          "pair": [
+            3,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        11,
+        7
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "879928/1347905",
+          "exponent": 6
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "684/1165",
+          "geometric_exponent": 6,
+          "kind": "difference",
+          "pair": [
+            2,
+            6
+          ]
+        },
+        {
+          "coefficient": "76/1157",
+          "geometric_exponent": 6,
+          "kind": "sum",
+          "pair": [
+            3,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        12,
+        7
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-1155/466",
+          "exponent": 5
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-1155/466",
+          "geometric_exponent": 5,
+          "kind": "difference",
+          "pair": [
+            1,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        14,
+        9
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "1155/466",
+          "exponent": 5
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "1155/466",
+          "geometric_exponent": 5,
+          "kind": "sum",
+          "pair": [
+            1,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        15,
+        9
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-684/1165",
+          "exponent": 6
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-684/1165",
+          "geometric_exponent": 6,
+          "kind": "sum",
+          "pair": [
+            2,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        16,
+        10
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "440/3029",
+          "exponent": 7
+        },
+        {
+          "coefficient": "288/5185",
+          "exponent": 9
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "440/3029",
+          "geometric_exponent": 7,
+          "kind": "sum",
+          "pair": [
+            3,
+            6
+          ]
+        },
+        {
+          "coefficient": "288/5185",
+          "geometric_exponent": 9,
+          "kind": "difference",
+          "pair": [
+            4,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        18,
+        11
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-3941593/15705365",
+          "exponent": 8
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-1791/7930",
+          "geometric_exponent": 8,
+          "kind": "difference",
+          "pair": [
+            3,
+            7
+          ]
+        },
+        {
+          "coefficient": "-199/7922",
+          "geometric_exponent": 8,
+          "kind": "sum",
+          "pair": [
+            4,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        19,
+        12
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "121/122",
+          "exponent": 7
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "121/122",
+          "geometric_exponent": 7,
+          "kind": "difference",
+          "pair": [
+            2,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        20,
+        12
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-1216/305",
+          "exponent": 6
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-1216/305",
+          "geometric_exponent": 6,
+          "kind": "difference",
+          "pair": [
+            1,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        22,
+        14
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "1216/305",
+          "exponent": 6
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "1216/305",
+          "geometric_exponent": 6,
+          "kind": "sum",
+          "pair": [
+            1,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        23,
+        14
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-121/122",
+          "exponent": 7
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-121/122",
+          "geometric_exponent": 7,
+          "kind": "sum",
+          "pair": [
+            2,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        24,
+        15
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "1791/7930",
+          "exponent": 8
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "1791/7930",
+          "geometric_exponent": 8,
+          "kind": "sum",
+          "pair": [
+            3,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        26,
+        16
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-288/5185",
+          "exponent": 9
+        },
+        {
+          "coefficient": "-3016/142133",
+          "exponent": 11
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-288/5185",
+          "geometric_exponent": 9,
+          "kind": "sum",
+          "pair": [
+            4,
+            7
+          ]
+        },
+        {
+          "coefficient": "-3016/142133",
+          "geometric_exponent": 11,
+          "kind": "difference",
+          "pair": [
+            5,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        29,
+        18
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "70713767/736959605",
+          "exponent": 10
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "4689/54298",
+          "geometric_exponent": 10,
+          "kind": "difference",
+          "pair": [
+            4,
+            8
+          ]
+        },
+        {
+          "coefficient": "521/54290",
+          "geometric_exponent": 10,
+          "kind": "sum",
+          "pair": [
+            5,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        31,
+        19
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-7920/20761",
+          "exponent": 9
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-7920/20761",
+          "geometric_exponent": 9,
+          "kind": "difference",
+          "pair": [
+            3,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        32,
+        20
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "12736/7985",
+          "exponent": 8
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "12736/7985",
+          "geometric_exponent": 8,
+          "kind": "difference",
+          "pair": [
+            2,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        33,
+        20
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-20735/3194",
+          "exponent": 7
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-20735/3194",
+          "geometric_exponent": 7,
+          "kind": "difference",
+          "pair": [
+            1,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        35,
+        22
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "20735/3194",
+          "exponent": 7
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "20735/3194",
+          "geometric_exponent": 7,
+          "kind": "sum",
+          "pair": [
+            1,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        36,
+        22
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-12736/7985",
+          "exponent": 8
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-12736/7985",
+          "geometric_exponent": 8,
+          "kind": "sum",
+          "pair": [
+            2,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        37,
+        23
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "7920/20761",
+          "exponent": 9
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "7920/20761",
+          "geometric_exponent": 9,
+          "kind": "sum",
+          "pair": [
+            3,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        39,
+        24
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-4689/54298",
+          "exponent": 10
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-4689/54298",
+          "geometric_exponent": 10,
+          "kind": "sum",
+          "pair": [
+            4,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        42,
+        26
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "3016/142133",
+          "exponent": 11
+        },
+        {
+          "coefficient": "7896/974173",
+          "exponent": 13
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "3016/142133",
+          "geometric_exponent": 11,
+          "kind": "sum",
+          "pair": [
+            5,
+            8
+          ]
+        },
+        {
+          "coefficient": "7896/974173",
+          "geometric_exponent": 13,
+          "kind": "difference",
+          "pair": [
+            6,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        47,
+        29
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-5075468552/138462131009",
+          "exponent": 12
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-12276/372109",
+          "geometric_exponent": 12,
+          "kind": "difference",
+          "pair": [
+            5,
+            9
+          ]
+        },
+        {
+          "coefficient": "-1364/372101",
+          "geometric_exponent": 12,
+          "kind": "sum",
+          "pair": [
+            6,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        50,
+        31
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "20735/142154",
+          "exponent": 11
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "20735/142154",
+          "geometric_exponent": 11,
+          "kind": "difference",
+          "pair": [
+            4,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        52,
+        32
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-33344/54353",
+          "exponent": 10
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-33344/54353",
+          "geometric_exponent": 10,
+          "kind": "difference",
+          "pair": [
+            3,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        53,
+        33
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "54288/20905",
+          "exponent": 9
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "54288/20905",
+          "geometric_exponent": 9,
+          "kind": "difference",
+          "pair": [
+            2,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        54,
+        33
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-87759/8362",
+          "exponent": 8
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-87759/8362",
+          "geometric_exponent": 8,
+          "kind": "difference",
+          "pair": [
+            1,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        56,
+        35
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "87759/8362",
+          "exponent": 8
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "87759/8362",
+          "geometric_exponent": 8,
+          "kind": "sum",
+          "pair": [
+            1,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        57,
+        35
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-54288/20905",
+          "exponent": 9
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-54288/20905",
+          "geometric_exponent": 9,
+          "kind": "sum",
+          "pair": [
+            2,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        58,
+        36
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "33344/54353",
+          "exponent": 10
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "33344/54353",
+          "geometric_exponent": 10,
+          "kind": "sum",
+          "pair": [
+            3,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        60,
+        37
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-20735/142154",
+          "exponent": 11
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-20735/142154",
+          "geometric_exponent": 11,
+          "kind": "sum",
+          "pair": [
+            4,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        63,
+        39
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "12276/372109",
+          "exponent": 12
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "12276/372109",
+          "geometric_exponent": 12,
+          "kind": "sum",
+          "pair": [
+            5,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        68,
+        42
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-7896/974173",
+          "exponent": 13
+        },
+        {
+          "coefficient": "-5168/1669265",
+          "exponent": 15
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-7896/974173",
+          "geometric_exponent": 13,
+          "kind": "sum",
+          "pair": [
+            6,
+            9
+          ]
+        },
+        {
+          "coefficient": "-5168/1669265",
+          "geometric_exponent": 15,
+          "kind": "difference",
+          "pair": [
+            7,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        76,
+        47
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "22768792417/1626152892845",
+          "exponent": 14
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "32139/2550418",
+          "geometric_exponent": 14,
+          "kind": "difference",
+          "pair": [
+            6,
+            10
+          ]
+        },
+        {
+          "coefficient": "3571/2550410",
+          "geometric_exponent": 14,
+          "kind": "sum",
+          "pair": [
+            7,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        81,
+        50
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-54285/974194",
+          "exponent": 13
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-54285/974194",
+          "geometric_exponent": 13,
+          "kind": "difference",
+          "pair": [
+            5,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        84,
+        52
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "21824/93041",
+          "exponent": 12
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "21824/93041",
+          "geometric_exponent": 12,
+          "kind": "difference",
+          "pair": [
+            4,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        86,
+        53
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-841/842",
+          "exponent": 11
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-841/842",
+          "geometric_exponent": 11,
+          "kind": "difference",
+          "pair": [
+            3,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        87,
+        54
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "229761/54730",
+          "exponent": 10
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "229761/54730",
+          "geometric_exponent": 10,
+          "kind": "difference",
+          "pair": [
+            2,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        88,
+        54
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-93024/5473",
+          "exponent": 9
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-93024/5473",
+          "geometric_exponent": 9,
+          "kind": "difference",
+          "pair": [
+            1,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        90,
+        56
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "93024/5473",
+          "exponent": 9
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "93024/5473",
+          "geometric_exponent": 9,
+          "kind": "sum",
+          "pair": [
+            1,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        91,
+        56
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-229761/54730",
+          "exponent": 10
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-229761/54730",
+          "geometric_exponent": 10,
+          "kind": "sum",
+          "pair": [
+            2,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        92,
+        57
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "841/842",
+          "exponent": 11
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "841/842",
+          "geometric_exponent": 11,
+          "kind": "sum",
+          "pair": [
+            3,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        94,
+        58
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-21824/93041",
+          "exponent": 12
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-21824/93041",
+          "geometric_exponent": 12,
+          "kind": "sum",
+          "pair": [
+            4,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        97,
+        60
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "54285/974194",
+          "exponent": 13
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "54285/974194",
+          "geometric_exponent": 13,
+          "kind": "sum",
+          "pair": [
+            5,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        102,
+        63
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-32139/2550418",
+          "exponent": 14
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-32139/2550418",
+          "geometric_exponent": 14,
+          "kind": "sum",
+          "pair": [
+            6,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        110,
+        68
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "5168/1669265",
+          "exponent": 15
+        },
+        {
+          "coefficient": "54120/45765229",
+          "exponent": 17
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "5168/1669265",
+          "geometric_exponent": 15,
+          "kind": "sum",
+          "pair": [
+            7,
+            10
+          ]
+        },
+        {
+          "coefficient": "54120/45765229",
+          "geometric_exponent": 17,
+          "kind": "difference",
+          "pair": [
+            8,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        123,
+        76
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-408569128543/76394294986685",
+          "exponent": 16
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-84141/17480770",
+          "geometric_exponent": 16,
+          "kind": "difference",
+          "pair": [
+            7,
+            11
+          ]
+        },
+        {
+          "coefficient": "-9349/17480762",
+          "geometric_exponent": 16,
+          "kind": "sum",
+          "pair": [
+            8,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        131,
+        81
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "142120/6677081",
+          "exponent": 15
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "142120/6677081",
+          "geometric_exponent": 15,
+          "kind": "difference",
+          "pair": [
+            6,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        136,
+        84
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-228544/2550473",
+          "exponent": 14
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-228544/2550473",
+          "geometric_exponent": 14,
+          "kind": "difference",
+          "pair": [
+            5,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        139,
+        86
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "372099/974338",
+          "exponent": 13
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "372099/974338",
+          "geometric_exponent": 13,
+          "kind": "difference",
+          "pair": [
+            4,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        141,
+        87
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-601524/372541",
+          "exponent": 12
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-601524/372541",
+          "geometric_exponent": 12,
+          "kind": "difference",
+          "pair": [
+            3,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        142,
+        88
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "974168/143285",
+          "exponent": 11
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "974168/143285",
+          "geometric_exponent": 11,
+          "kind": "difference",
+          "pair": [
+            2,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        143,
+        88
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-1576025/57314",
+          "exponent": 10
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-1576025/57314",
+          "geometric_exponent": 10,
+          "kind": "difference",
+          "pair": [
+            1,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        145,
+        90
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "1576025/57314",
+          "exponent": 10
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "1576025/57314",
+          "geometric_exponent": 10,
+          "kind": "sum",
+          "pair": [
+            1,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        146,
+        90
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-974168/143285",
+          "exponent": 11
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-974168/143285",
+          "geometric_exponent": 11,
+          "kind": "sum",
+          "pair": [
+            2,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        147,
+        91
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "601524/372541",
+          "exponent": 12
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "601524/372541",
+          "geometric_exponent": 12,
+          "kind": "sum",
+          "pair": [
+            3,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        149,
+        92
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-372099/974338",
+          "exponent": 13
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-372099/974338",
+          "geometric_exponent": 13,
+          "kind": "sum",
+          "pair": [
+            4,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        152,
+        94
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "228544/2550473",
+          "exponent": 14
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "228544/2550473",
+          "geometric_exponent": 14,
+          "kind": "sum",
+          "pair": [
+            5,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        157,
+        97
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-142120/6677081",
+          "exponent": 15
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-142120/6677081",
+          "geometric_exponent": 15,
+          "kind": "sum",
+          "pair": [
+            6,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        165,
+        102
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "84141/17480770",
+          "exponent": 16
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "84141/17480770",
+          "geometric_exponent": 16,
+          "kind": "sum",
+          "pair": [
+            7,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        178,
+        110
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-54120/45765229",
+          "exponent": 17
+        },
+        {
+          "coefficient": "-141688/313679525",
+          "exponent": 19
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-54120/45765229",
+          "geometric_exponent": 17,
+          "kind": "sum",
+          "pair": [
+            8,
+            11
+          ]
+        },
+        {
+          "coefficient": "-141688/313679525",
+          "geometric_exponent": 19,
+          "kind": "difference",
+          "pair": [
+            9,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        199,
+        123
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "29325899280728/14355615294236225",
+          "exponent": 18
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "220284/119814925",
+          "geometric_exponent": 18,
+          "kind": "difference",
+          "pair": [
+            8,
+            12
+          ]
+        },
+        {
+          "coefficient": "24476/119814917",
+          "geometric_exponent": 18,
+          "kind": "sum",
+          "pair": [
+            9,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        212,
+        131
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-14883/1830610",
+          "exponent": 17
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-14883/1830610",
+          "geometric_exponent": 17,
+          "kind": "difference",
+          "pair": [
+            7,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        220,
+        136
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "598336/17480825",
+          "exponent": 16
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "598336/17480825",
+          "geometric_exponent": 16,
+          "kind": "difference",
+          "pair": [
+            6,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        225,
+        139
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-974168/6677225",
+          "exponent": 15
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-974168/6677225",
+          "geometric_exponent": 15,
+          "kind": "difference",
+          "pair": [
+            5,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        228,
+        141
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "1574811/2550850",
+          "exponent": 14
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "1574811/2550850",
+          "geometric_exponent": 14,
+          "kind": "difference",
+          "pair": [
+            4,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        230,
+        142
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-2550408/975325",
+          "exponent": 13
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-2550408/975325",
+          "geometric_exponent": 13,
+          "kind": "difference",
+          "pair": [
+            3,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        231,
+        143
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "165044/15005",
+          "exponent": 12
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "165044/15005",
+          "geometric_exponent": 12,
+          "kind": "difference",
+          "pair": [
+            2,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        232,
+        143
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-6677047/150050",
+          "exponent": 11
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-6677047/150050",
+          "geometric_exponent": 11,
+          "kind": "difference",
+          "pair": [
+            1,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        234,
+        145
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "6677047/150050",
+          "exponent": 11
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "6677047/150050",
+          "geometric_exponent": 11,
+          "kind": "sum",
+          "pair": [
+            1,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        235,
+        145
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-165044/15005",
+          "exponent": 12
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-165044/15005",
+          "geometric_exponent": 12,
+          "kind": "sum",
+          "pair": [
+            2,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        236,
+        146
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "2550408/975325",
+          "exponent": 13
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "2550408/975325",
+          "geometric_exponent": 13,
+          "kind": "sum",
+          "pair": [
+            3,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        238,
+        147
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-1574811/2550850",
+          "exponent": 14
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-1574811/2550850",
+          "geometric_exponent": 14,
+          "kind": "sum",
+          "pair": [
+            4,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        241,
+        149
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "974168/6677225",
+          "exponent": 15
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "974168/6677225",
+          "geometric_exponent": 15,
+          "kind": "sum",
+          "pair": [
+            5,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        246,
+        152
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-598336/17480825",
+          "exponent": 16
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-598336/17480825",
+          "geometric_exponent": 16,
+          "kind": "sum",
+          "pair": [
+            6,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        254,
+        157
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "14883/1830610",
+          "exponent": 17
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "14883/1830610",
+          "geometric_exponent": 17,
+          "kind": "sum",
+          "pair": [
+            7,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        267,
+        165
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-220284/119814925",
+          "exponent": 18
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-220284/119814925",
+          "geometric_exponent": 18,
+          "kind": "sum",
+          "pair": [
+            8,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        288,
+        178
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "141688/313679525",
+          "exponent": 19
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "141688/313679525",
+          "geometric_exponent": 19,
+          "kind": "sum",
+          "pair": [
+            9,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "equation": "A^2*sum(c_e*r^e)=0",
+      "mode": [
+        322,
+        199
+      ],
+      "polynomial_in_r": [
+        {
+          "coefficient": "-64079/821223650",
+          "exponent": 20
+        }
+      ],
+      "terms": [
+        {
+          "coefficient": "-64079/821223650",
+          "geometric_exponent": 20,
+          "kind": "sum",
+          "pair": [
+            10,
+            12
+          ]
+        }
+      ]
+    }
+  ],
+  "stable_unit_ideal_obstruction": {
+    "bezout_identity": "t*r*g-h=1",
+    "bounded_representations": [
+      [
+        "difference",
+        1,
+        2
+      ]
+    ],
+    "equation": "(-3/10)*A^2*r=0",
+    "groebner_basis_Q": [
+      "1"
+    ],
+    "mode": [
+      1,
+      0
+    ],
+    "normalized_generator": "g=A^2*r",
+    "saturation_generator": "h=t*A^2*r^2-1",
+    "unique_representation": "k_2-k_1",
+    "uniqueness_reason": "F_j=F_i only for {i,j}={1,2}; positive rail sums have positive second coordinate"
+  }
+}

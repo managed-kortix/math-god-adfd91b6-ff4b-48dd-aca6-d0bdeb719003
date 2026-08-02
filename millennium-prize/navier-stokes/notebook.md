@@ -433,3 +433,14 @@ therefore the full complex-variety statement and complex radical decomposition
 retain that caveat. Nonzero mean adds only Galilean translates. See
 `cycle-226-coefficient-variety-finite-mode-rigidity.md` and
 `cycle-226-hostile-literature-audit.md`.
+
+## Infinite geometric rail cycle 238
+
+The infinite Fibonacci rails with real-even geometric amplitudes
+`a_j=A r^(j-1)`, `Ar!=0`, fail exact off-rail cancellation immediately. Exact
+pair-sum/difference equations through `J=12` retain the globally unique output
+`k_2-k_1=(1,0)`, whose forcing is `(-3/10)A^2r`. Saturating by nondegeneracy gives
+the explicit unit-ideal certificate `tr(A^2r)-(tA^2r^2-1)=1`. The persistent
+equation proves the infinite extrapolation and retires this single-ratio
+real-even architecture only. See
+`cycle-238-infinite-fibonacci-rail-obstruction.md`.

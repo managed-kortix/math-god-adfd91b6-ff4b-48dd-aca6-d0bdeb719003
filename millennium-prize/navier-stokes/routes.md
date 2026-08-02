@@ -79,3 +79,24 @@ are conditional on that extension. No real nonstationary finite-mode candidate
 exists at any support size; a viable Euler breaker must certify an infinite
 tail. See `cycle-226-coefficient-variety-finite-mode-rigidity.md` and
 `cycle-226-hostile-literature-audit.md`.
+
+Cycle 239 tests the direct genuinely infinite Fibonacci-rail continuation.
+Exact cancellation of each doubled-rail exterior mode forces
+`a_(n+4)=-q_n a_n a_(n+3)/a_(n+1)` with `q_n>2`. It follows exactly that
+`a_(n+6)=-q_n q_(n+1) q_(n+2)a_n`, so every nonzero residue subsequence grows
+by more than eight, and that the adjacent lower-receiver rates satisfy
+`R_n R_(n+2)<0`. The rail therefore supports neither a convergent Fourier tail
+nor consistently signed upscale transfer under the declared all-scale leakage
+cancellation. This finite exact obstruction retires only that architecture.
+See `cycle-239-infinite-fibonacci-rail-obstruction.md`.
+
+Cycle 227 checks the smooth 2D/3D Euler norm-growth literature through
+2026-08-02 against the exact Cycle 211 seed. The strongest direct smooth-data
+theorem found, Cordoba--Martinez-Zoroa--Ozanski, gives arbitrary growth of a
+positive Sobolev norm of vorticity on `R^2`; Bourgain--Li and related results
+inflate differentiated critical velocity norms. None compares velocity `L^3`
+with itself at two times. A single-frequency scaling example proves that large
+positive-order vorticity/Sobolev norm gives no lower bound for velocity `L^3`,
+so these theorems cannot be converted by embedding or interpolation. No known
+theorem located supplies the required smooth factor-greater-than-two seed. See
+`cycle-227-smooth-euler-lp-literature-scout.md`.
