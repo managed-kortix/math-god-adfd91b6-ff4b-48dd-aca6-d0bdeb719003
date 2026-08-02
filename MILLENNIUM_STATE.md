@@ -1,5 +1,64 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: BSD Cycle 260 hostilely audits the proposed
+  `Sha(43a1/Q)=0` argument from `K=Q(sqrt(-7))`. Exact arithmetic confirms the
+  model `y^2+y=x^3+x^2`, conductor `43`, discriminant `-43`, candidate
+  generator `(0,0)`, class number one, and splitting of `43`, so the classical
+  Heegner hypothesis passes. Cha's primary Theorem 21 covers odd `p != 7`,
+  including small `p=3` and multiplicative conductor prime `p=43`, only after
+  residual irreducibility; ramified `p=7` requires Kolyvagin's surjective
+  theorem or direct Selmer control. Restriction--corestriction correctly
+  injects odd-primary Sha from `Q` into `K`, but says nothing at two. The
+  packet lacks an exact convention-audited proof that the normalized Heegner
+  point is `+/-P`, a certified all-prime residual packet, and a proof-enabled
+  independent 2-descent replay (the concurrent PARI exact descent is
+  algorithmic evidence). Record `GAPS`: PARI recognition, LMFDB `sha=1`, and a
+  rounded BSD quotient are not proofs. No BSD or `Sha=0` claim is made. See
+  `millennium-prize/birch-swinnerton-dyer/cycle-260-43a1-heegner-generator-hostile-audit.md`.
+
+- 2026-08-02: Navier Cycle 258 freezes a 45-member deterministic family around
+  the five Cycle 257 finite-Fourier candidates before compute, then replaces
+  initial-derivative ranking by bidirectional time-integrated logarithmic
+  velocity-`L3` growth on square-two-thirds RK4 Euler trajectories through
+  time `2.5`. At both `N=64` and `N=128`, all 45 sampled variation ratios exceed
+  the declared `1.1` gate, so the no-promotion stop does not fire. The `N=128`
+  maximum is `1.2347667295419633` for family index 43, a `rho=20`, `+0.025`
+  direction-1 perturbation; its `N=64` ratio is `1.1943266343927748`. The
+  largest memberwise resolution difference is `0.04587355572051899`, and the
+  maximum enstrophy drift is about `1.1e-4`, so this is numerical candidate
+  selection only, far below factor two and without a full-PDE enclosure. See
+  `millennium-prize/navier-stokes/cycle-258-integrated-l3-trajectory-scout.md`.
+
+- 2026-08-02: Navier Cycle 259 runs a bounded full-contour scout for the Cycle
+  254 patch wall. A deterministic 24-member equal-area opposite-sign periodic
+  ellipse-pair grid is evolved through `|t|=1/2` with Fourier-Green midpoint
+  panels and RK4. The complete-velocity `L^3` max/min screen promotes `0/24` at
+  `1.2`; its 32-node maximum is `1.008192826706615`, and the leading geometry
+  falls to `1.0044771166846347` at 64 nodes. Sampled separation stays positive,
+  chord--arc ratios stay bounded, and a rigid-motion-invariant shape diagnostic
+  is nonzero, but these are monitors rather than enclosures. The weak-signal
+  stop fires: do not extend or tune this grid. No patch certificate, Euler
+  crossing, Navier--Stokes result, or Millennium result is claimed. See
+  `millennium-prize/navier-stokes/cycle-259-opposite-sign-patch-contour-scout.md`.
+
+- 2026-08-02: A bounded Hodge scout is exactly rejected while focused Navier dynamics
+  remains the main lane.  On `A_0=E_i^3 x E_i^3`, embed `E_i^4` by
+  `(t1,t2,t3,t4) -> (t1,t2,t3;t1,t2,t4)` and take a smooth divisor for the
+  very ample Appell--Humbert matrix
+  `3*((2,0,0,0),(0,2,0,0),(0,0,2,1),(0,0,1,2))`.  The resulting threefold has
+  irregularity four and ample canonical bundle, so it is genuinely non-graph;
+  it is not a product-of-three-curves sum image and is outside the F242
+  `64<512` collision theorem.  Its exceptional Weil period is exactly nonzero:
+  pullback of `Omega_W` omits `dt4 dbar(t3)`, supplied by the Hermitian entry
+  `H_43=3`.  It fails the first finite deformation gate uniformly in the theta
+  section: for the PEL tangent `C=E_12`, the contraction with the support class
+  has coefficient `-6` on
+  `dz3 dz4 dbar(z1) dbar(z3) dbar(z4) dbar(z5)`.  Hence the potential does not
+  vanish and the raw normal obstruction and 45 quadratic lifts are not
+  reached.  This retires only the fixed theta-section architecture; no Hodge or
+  Millennium result is claimed.  See
+  `millennium-prize/hodge/cycle-258-abelian-fourfold-theta-section-no-go.md`.
+
 - 2026-08-02: Navier Cycle 257 derives the exact initial formula
   `d||u||_3^3/dt=3 integral |u|u dot K(-u dot grad omega)` and the full exact
   finite-coefficient gradient, including the adjoint Biot--Savart term. A
@@ -1238,7 +1297,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 257 keeps focused Navier dynamics `ND251` in
+- **phase:** Cycle 260 keeps focused Navier dynamics `ND251` in
   production-architecture discovery. The frozen Cycle 255 numerical funnel is
   retired from production after zero promotions, but its exact certificate and
   transfer infrastructure remain reusable. Literal full-vorticity
@@ -2076,7 +2135,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 257
+- **cycle:** 260
 - **announcements:** none
 
 ## immutable target list

@@ -1,5 +1,22 @@
 # Notebook
 
+## Hostile `43a1`, `D_K=-7` audit cycle 260
+
+The proposed proof of `Sha(43a1/Q)=0` is not promoted. The exact model is
+`[0,1,1,0,0]`, with conductor `43`, discriminant `-43`, and generator candidate
+`P=(0,0)`. The field `Q(sqrt(-7))` has class number one, and `43` splits, so the
+classical Heegner hypothesis passes. Cha's Theorem 21 can cover every odd
+`p != 7`, including `3` and the multiplicative conductor prime `43`, after
+residual irreducibility; ramified `p=7` requires the surjective Kolyvagin
+theorem or a direct Selmer computation. Restriction to `K` is injective on odd
+primary Sha by restriction--corestriction. The committed packet does not prove
+the normalized identity `y_K=+/-P`, certify the residual hypotheses at every
+odd prime, or supply a proof-enabled independent 2-descent replay. Record
+`GAPS`; database `sha=1` and PARI point recognition are not proofs. The
+concurrent PARI 2-descent is exact algorithmic evidence but retains that trust
+boundary. No BSD claim is made. See
+`cycle-260-43a1-heegner-generator-hostile-audit.md`.
+
 ## Terminal `HK236` decision cycle 237
 
 The frozen checkpoint is terminal `WALL`. The exact trace audit does not

@@ -1,5 +1,16 @@
 # Routes
 
+Cycle 258 freezes a 45-member local family around the five Cycle 257 finite-
+Fourier candidates before compute, then optimizes accumulated logarithmic
+velocity-`L3` growth along numerical Euler trajectories rather than the initial
+derivative. Every member is integrated bidirectionally through time `2.5` at
+`N=64` and `N=128`. All 45 exceed the declared `1.1` sampled-variation gate at
+`N=128`; the maximum is `1.2347667295419633` for a `rho=20` tangent
+perturbation. The no-promotion stop therefore does not fire, but the maximum
+cross-resolution ratio difference is about `0.0459`, the lead is far below
+two, and no full-PDE enclosure is supplied. This is numerical candidate
+selection only. See `cycle-258-integrated-l3-trajectory-scout.md`.
+
 Cycle 257 derives the exact initial identity
 `d||u||_3^3/dt=3 integral |u|u dot K(-u dot grad omega)` and its exact
 coefficient gradient. A deterministic all-mode streamfunction box through wave

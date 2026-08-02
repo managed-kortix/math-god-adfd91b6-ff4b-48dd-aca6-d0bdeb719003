@@ -1,0 +1,59 @@
+{
+  "contour_points_per_patch": 64,
+  "dt": 0.00390625,
+  "family_size": 2,
+  "final_time_each_direction": 0.5,
+  "kernel_fourier_cutoff": 96,
+  "kernel_grid": 512,
+  "method": "RK4 periodic Fourier-Green panel contour dynamics",
+  "pde_certificate": false,
+  "promotion_threshold": 1.2,
+  "promotions": 0,
+  "sample_dt": 0.0625,
+  "status": "NUMERICAL_SCOUT_ONLY",
+  "top_results": [
+    {
+      "geometry": {
+        "angle_index": 1,
+        "aspect": 0.45,
+        "gap": 0.15,
+        "semimajor": 0.65
+      },
+      "maximum": {
+        "l3": 0.08134064164388048,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 2.720195392947783,
+      "maximum_relative_area_drift": 0.004665520049633498,
+      "minimum": {
+        "l3": 0.08097809327140518,
+        "time": -0.5
+      },
+      "minimum_node_separation": 0.3629302648926953,
+      "nonrelative_shape_change": 0.03628892039449583,
+      "variation_ratio": 1.0044771166846347
+    },
+    {
+      "geometry": {
+        "angle_index": 2,
+        "aspect": 0.45,
+        "gap": 0.15,
+        "semimajor": 0.65
+      },
+      "maximum": {
+        "l3": 0.08165727402003857,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 2.6285083896865964,
+      "maximum_relative_area_drift": 0.004414730439275427,
+      "minimum": {
+        "l3": 0.08140326990539706,
+        "time": 0.5
+      },
+      "minimum_node_separation": 0.5075000000000003,
+      "nonrelative_shape_change": 0.0061594546519196935,
+      "variation_ratio": 1.003120318323044
+    }
+  ],
+  "velocity_cubature_grid": 64
+}

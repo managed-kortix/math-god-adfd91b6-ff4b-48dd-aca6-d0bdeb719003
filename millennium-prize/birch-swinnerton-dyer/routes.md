@@ -1,5 +1,16 @@
 # Routes
 
+Cycle 260 hostilely audits the proposed `43a1`, `K=Q(sqrt(-7))` shortcut and
+records `GAPS`, not a theorem. The curve model and Heegner hypothesis pass.
+Cha covers odd `p != 7`, including `p=3,43`, subject to irreducibility; the
+ramified prime `7` needs residual surjectivity under Kolyvagin's theorem or a
+direct Selmer computation. Odd-primary restriction from `Q` to `K` is
+injective. The exact normalized Heegner identity and index, complete residual
+certificates, and a proof-enabled independent 2-descent replay are absent. Do
+not infer `Sha=0` from
+`ellheegner`, LMFDB's rounded analytic value, or BSD. See
+`cycle-260-43a1-heegner-generator-hostile-audit.md`.
+
 Cycle 237 terminalizes the frozen checkpoint as `HK236 WALL`. The exact
 modular-symbol index `8` does not certify the CM trace coordinates, the
 residual images at `5,23,1499` are not certified in the proof packet, and the

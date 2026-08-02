@@ -1,5 +1,21 @@
 # Routes
 
+## Cycle 258 abelian-fourfold theta-section no-go
+
+Keep focused Navier dynamics as the main lane, but freeze one bounded non-graph
+Hodge scout that does not reuse F242.  Embed `E_i^4` in `E_i^6` by
+`(t1,t2,t3,t4) -> (t1,t2,t3;t1,t2,t4)` and take a smooth divisor with Hermitian
+matrix `3*((2,0,0,0),(0,2,0,0),(0,0,2,1),(0,0,1,2))`.  It has irregularity
+four and ample canonical bundle.  The off-diagonal entry `H_43=3` completes the
+pullback of the determinant form, proving nonzero exceptional Weil projection.
+The architecture has no three independent curve-difference divisors, so the
+F242 intersection no-go does not apply.  It nevertheless fails its exact first
+deformation gate: for `C=E_12`, the contraction of `nu_*c1(L_H)` has coefficient
+`-6` on `dz3 dz4 dbar(z1) dbar(z3) dbar(z4) dbar(z5)`.  Thus potential
+vanishing fails for every theta section, and raw normal obstructions and higher
+lifts are not reached.  There is no viable route from this fixed architecture.
+See `cycle-258-abelian-fourfold-theta-section-no-go.md`.
+
 Cycle 251 subsequently closes the entire F242 candidate campaign before
 enumeration. On `K=ker[M_1 M_2 M_3]^0`, tangent injectivity makes the three
 quartic tangent-cone equations, including zero-component tangent relations, a

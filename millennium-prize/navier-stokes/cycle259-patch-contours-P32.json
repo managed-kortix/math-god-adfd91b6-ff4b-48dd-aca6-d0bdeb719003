@@ -1,0 +1,521 @@
+{
+  "contour_points_per_patch": 32,
+  "dt": 0.0078125,
+  "family_size": 24,
+  "final_time_each_direction": 0.5,
+  "kernel_fourier_cutoff": 96,
+  "kernel_grid": 512,
+  "method": "RK4 periodic Fourier-Green panel contour dynamics",
+  "pde_certificate": false,
+  "promotion_threshold": 1.2,
+  "promotions": 0,
+  "sample_dt": 0.0625,
+  "status": "NUMERICAL_SCOUT_ONLY",
+  "top_results": [
+    {
+      "geometry": {
+        "angle_index": 1,
+        "aspect": 0.45,
+        "gap": 0.15,
+        "semimajor": 0.65
+      },
+      "maximum": {
+        "l3": 0.08078905197408505,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 2.7140042923579686,
+      "maximum_relative_area_drift": 0.010414842172553729,
+      "minimum": {
+        "l3": 0.08013253996062675,
+        "time": -0.5
+      },
+      "minimum_node_separation": 0.36904758227116524,
+      "nonrelative_shape_change": 0.0369692485343065,
+      "variation_ratio": 1.008192826706615
+    },
+    {
+      "geometry": {
+        "angle_index": 1,
+        "aspect": 0.45,
+        "gap": 0.3,
+        "semimajor": 0.65
+      },
+      "maximum": {
+        "l3": 0.08140275883803111,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 2.694406929304394,
+      "maximum_relative_area_drift": 0.009798094488967513,
+      "minimum": {
+        "l3": 0.08075566660342488,
+        "time": -0.5
+      },
+      "minimum_node_separation": 0.508976978771473,
+      "nonrelative_shape_change": 0.030806255901666635,
+      "variation_ratio": 1.0080129638181796
+    },
+    {
+      "geometry": {
+        "angle_index": 1,
+        "aspect": 0.45,
+        "gap": 0.15,
+        "semimajor": 0.45
+      },
+      "maximum": {
+        "l3": 0.044605370719960784,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 2.7016742682598673,
+      "maximum_relative_area_drift": 0.010041055645809482,
+      "minimum": {
+        "l3": 0.04425113054631154,
+        "time": -0.5
+      },
+      "minimum_node_separation": 0.29901355109598277,
+      "nonrelative_shape_change": 0.03317150662211277,
+      "variation_ratio": 1.0080052231270908
+    },
+    {
+      "geometry": {
+        "angle_index": 1,
+        "aspect": 0.45,
+        "gap": 0.3,
+        "semimajor": 0.45
+      },
+      "maximum": {
+        "l3": 0.045046447550398654,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 2.678223086036287,
+      "maximum_relative_area_drift": 0.009331029580506467,
+      "minimum": {
+        "l3": 0.04470046992425787,
+        "time": -0.5
+      },
+      "minimum_node_separation": 0.4364610817028668,
+      "nonrelative_shape_change": 0.025754032679447425,
+      "variation_ratio": 1.007739910267767
+    },
+    {
+      "geometry": {
+        "angle_index": 2,
+        "aspect": 0.45,
+        "gap": 0.15,
+        "semimajor": 0.45
+      },
+      "maximum": {
+        "l3": 0.04475523174910643,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 2.620738635454219,
+      "maximum_relative_area_drift": 0.009637747507666217,
+      "minimum": {
+        "l3": 0.04444992944873254,
+        "time": 0.5
+      },
+      "minimum_node_separation": 0.39749999999999996,
+      "nonrelative_shape_change": 0.00630822939090514,
+      "variation_ratio": 1.0068684541046575
+    },
+    {
+      "geometry": {
+        "angle_index": 2,
+        "aspect": 0.45,
+        "gap": 0.3,
+        "semimajor": 0.45
+      },
+      "maximum": {
+        "l3": 0.04512771292646903,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 2.6176877946941812,
+      "maximum_relative_area_drift": 0.00927692512710665,
+      "minimum": {
+        "l3": 0.04482045960708176,
+        "time": 0.5
+      },
+      "minimum_node_separation": 0.5474999999999999,
+      "nonrelative_shape_change": 0.005253083594696006,
+      "variation_ratio": 1.0068552023357369
+    },
+    {
+      "geometry": {
+        "angle_index": 2,
+        "aspect": 0.45,
+        "gap": 0.15,
+        "semimajor": 0.65
+      },
+      "maximum": {
+        "l3": 0.08109012681270647,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 2.622562818297066,
+      "maximum_relative_area_drift": 0.009763678139774523,
+      "minimum": {
+        "l3": 0.08054458484771981,
+        "time": 0.5
+      },
+      "minimum_node_separation": 0.5075000000000003,
+      "nonrelative_shape_change": 0.006789713558257304,
+      "variation_ratio": 1.0067731675073883
+    },
+    {
+      "geometry": {
+        "angle_index": 2,
+        "aspect": 0.45,
+        "gap": 0.3,
+        "semimajor": 0.65
+      },
+      "maximum": {
+        "l3": 0.08158087241649317,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 2.620096804594736,
+      "maximum_relative_area_drift": 0.009473474144690353,
+      "minimum": {
+        "l3": 0.08103293834806506,
+        "time": 0.5
+      },
+      "minimum_node_separation": 0.6575000000000002,
+      "nonrelative_shape_change": 0.005868749652987448,
+      "variation_ratio": 1.0067618684401465
+    },
+    {
+      "geometry": {
+        "angle_index": 0,
+        "aspect": 0.45,
+        "gap": 0.3,
+        "semimajor": 0.45
+      },
+      "maximum": {
+        "l3": 0.04493945270621634,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 2.618405371259207,
+      "maximum_relative_area_drift": 0.007238355978278266,
+      "minimum": {
+        "l3": 0.044689839879697976,
+        "time": 0.5
+      },
+      "minimum_node_separation": 0.2999999999999998,
+      "nonrelative_shape_change": 0.005625482481643074,
+      "variation_ratio": 1.0055854491130491
+    },
+    {
+      "geometry": {
+        "angle_index": 0,
+        "aspect": 0.45,
+        "gap": 0.3,
+        "semimajor": 0.65
+      },
+      "maximum": {
+        "l3": 0.08114213263330916,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 2.621300363203476,
+      "maximum_relative_area_drift": 0.00701790924699619,
+      "minimum": {
+        "l3": 0.08072698104558271,
+        "time": -0.5
+      },
+      "minimum_node_separation": 0.2999999999999998,
+      "nonrelative_shape_change": 0.006647768991610903,
+      "variation_ratio": 1.00514266212299
+    },
+    {
+      "geometry": {
+        "angle_index": 0,
+        "aspect": 0.45,
+        "gap": 0.15,
+        "semimajor": 0.45
+      },
+      "maximum": {
+        "l3": 0.044388258341725426,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 2.6224984482499782,
+      "maximum_relative_area_drift": 0.007073910739765155,
+      "minimum": {
+        "l3": 0.044169859580669296,
+        "time": -0.5
+      },
+      "minimum_node_separation": 0.15000000000000036,
+      "nonrelative_shape_change": 0.007594232351978647,
+      "variation_ratio": 1.004944520157626
+    },
+    {
+      "geometry": {
+        "angle_index": 1,
+        "aspect": 0.7,
+        "gap": 0.15,
+        "semimajor": 0.65
+      },
+      "maximum": {
+        "l3": 0.1163323187122348,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 2.0091428395778346,
+      "maximum_relative_area_drift": 0.0076207765419367135,
+      "minimum": {
+        "l3": 0.1157786879525717,
+        "time": -0.5
+      },
+      "minimum_node_separation": 0.2650607181360575,
+      "nonrelative_shape_change": 0.02497801669744293,
+      "variation_ratio": 1.0047818019831931
+    },
+    {
+      "geometry": {
+        "angle_index": 0,
+        "aspect": 0.45,
+        "gap": 0.15,
+        "semimajor": 0.65
+      },
+      "maximum": {
+        "l3": 0.0803176987867187,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 2.625142547582705,
+      "maximum_relative_area_drift": 0.006858344982083708,
+      "minimum": {
+        "l3": 0.0799492753393242,
+        "time": 0.5
+      },
+      "minimum_node_separation": 0.15000000000000036,
+      "nonrelative_shape_change": 0.008418318314087347,
+      "variation_ratio": 1.0046082149691893
+    },
+    {
+      "geometry": {
+        "angle_index": 1,
+        "aspect": 0.7,
+        "gap": 0.3,
+        "semimajor": 0.65
+      },
+      "maximum": {
+        "l3": 0.11765387749172174,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 1.9906062041158772,
+      "maximum_relative_area_drift": 0.006845890072334493,
+      "minimum": {
+        "l3": 0.11711523785454109,
+        "time": -0.5
+      },
+      "minimum_node_separation": 0.4090934725929133,
+      "nonrelative_shape_change": 0.020026251032798426,
+      "variation_ratio": 1.004599227624416
+    },
+    {
+      "geometry": {
+        "angle_index": 1,
+        "aspect": 0.7,
+        "gap": 0.15,
+        "semimajor": 0.45
+      },
+      "maximum": {
+        "l3": 0.06451300340539588,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 1.99773310763982,
+      "maximum_relative_area_drift": 0.007165366698510978,
+      "minimum": {
+        "l3": 0.06421875278271534,
+        "time": -0.5
+      },
+      "minimum_node_separation": 0.22751949623915044,
+      "nonrelative_shape_change": 0.021986418944974107,
+      "variation_ratio": 1.0045820046315153
+    },
+    {
+      "geometry": {
+        "angle_index": 1,
+        "aspect": 0.7,
+        "gap": 0.3,
+        "semimajor": 0.45
+      },
+      "maximum": {
+        "l3": 0.06543502077756781,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 1.975658217412311,
+      "maximum_relative_area_drift": 0.00623814835633274,
+      "minimum": {
+        "l3": 0.06515141444402207,
+        "time": -0.5
+      },
+      "minimum_node_separation": 0.3730067229816382,
+      "nonrelative_shape_change": 0.01632135284917502,
+      "variation_ratio": 1.0043530341737923
+    },
+    {
+      "geometry": {
+        "angle_index": 2,
+        "aspect": 0.7,
+        "gap": 0.15,
+        "semimajor": 0.65
+      },
+      "maximum": {
+        "l3": 0.11675991141071485,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 1.9295847718769297,
+      "maximum_relative_area_drift": 0.007524426514336824,
+      "minimum": {
+        "l3": 0.11629721532756328,
+        "time": 0.5
+      },
+      "minimum_node_separation": 0.3450000000000002,
+      "nonrelative_shape_change": 0.00559527552637773,
+      "variation_ratio": 1.0039785654527353
+    },
+    {
+      "geometry": {
+        "angle_index": 2,
+        "aspect": 0.7,
+        "gap": 0.15,
+        "semimajor": 0.45
+      },
+      "maximum": {
+        "l3": 0.06471548423963756,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 1.9272454832342438,
+      "maximum_relative_area_drift": 0.0072048315345150105,
+      "minimum": {
+        "l3": 0.06446056002458177,
+        "time": 0.5
+      },
+      "minimum_node_separation": 0.28500000000000014,
+      "nonrelative_shape_change": 0.004773579830725794,
+      "variation_ratio": 1.003954731621298
+    },
+    {
+      "geometry": {
+        "angle_index": 2,
+        "aspect": 0.7,
+        "gap": 0.3,
+        "semimajor": 0.65
+      },
+      "maximum": {
+        "l3": 0.11791415907042725,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 1.9259608467383917,
+      "maximum_relative_area_drift": 0.006990401151572456,
+      "minimum": {
+        "l3": 0.11745559253753658,
+        "time": 0.5
+      },
+      "minimum_node_separation": 0.4950000000000001,
+      "nonrelative_shape_change": 0.004263586138960829,
+      "variation_ratio": 1.0039041694225341
+    },
+    {
+      "geometry": {
+        "angle_index": 2,
+        "aspect": 0.7,
+        "gap": 0.3,
+        "semimajor": 0.45
+      },
+      "maximum": {
+        "l3": 0.0655455291194145,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 1.9232487889361563,
+      "maximum_relative_area_drift": 0.006532827226348958,
+      "minimum": {
+        "l3": 0.06529298542907375,
+        "time": 0.5
+      },
+      "minimum_node_separation": 0.43500000000000005,
+      "nonrelative_shape_change": 0.003340972794168895,
+      "variation_ratio": 1.0038678533181038
+    },
+    {
+      "geometry": {
+        "angle_index": 0,
+        "aspect": 0.7,
+        "gap": 0.15,
+        "semimajor": 0.65
+      },
+      "maximum": {
+        "l3": 0.11577358785417671,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 1.9314788119514121,
+      "maximum_relative_area_drift": 0.003398758183918771,
+      "minimum": {
+        "l3": 0.11549273549077481,
+        "time": -0.5
+      },
+      "minimum_node_separation": 0.15000000000000036,
+      "nonrelative_shape_change": 0.0076952962944798475,
+      "variation_ratio": 1.0024317751433323
+    },
+    {
+      "geometry": {
+        "angle_index": 0,
+        "aspect": 0.7,
+        "gap": 0.15,
+        "semimajor": 0.45
+      },
+      "maximum": {
+        "l3": 0.06425696624276718,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 1.9289621467044646,
+      "maximum_relative_area_drift": 0.002513634259389552,
+      "minimum": {
+        "l3": 0.06412086228141295,
+        "time": 0.5
+      },
+      "minimum_node_separation": 0.15000000000000036,
+      "nonrelative_shape_change": 0.006139482309974298,
+      "variation_ratio": 1.0021226158930443
+    },
+    {
+      "geometry": {
+        "angle_index": 0,
+        "aspect": 0.7,
+        "gap": 0.3,
+        "semimajor": 0.45
+      },
+      "maximum": {
+        "l3": 0.06530409059895823,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 1.9240985235969792,
+      "maximum_relative_area_drift": 0.002784844296319866,
+      "minimum": {
+        "l3": 0.0651774161237401,
+        "time": 0.5
+      },
+      "minimum_node_separation": 0.2999999999999998,
+      "nonrelative_shape_change": 0.003789222820523852,
+      "variation_ratio": 1.001943533247431
+    },
+    {
+      "geometry": {
+        "angle_index": 0,
+        "aspect": 0.7,
+        "gap": 0.3,
+        "semimajor": 0.65
+      },
+      "maximum": {
+        "l3": 0.11732913111336347,
+        "time": 0.0
+      },
+      "maximum_chord_arc": 1.9272475571173941,
+      "maximum_relative_area_drift": 0.0025385952239261877,
+      "minimum": {
+        "l3": 0.11710398054364644,
+        "time": -0.5
+      },
+      "minimum_node_separation": 0.2999999999999998,
+      "nonrelative_shape_change": 0.005147674563535487,
+      "variation_ratio": 1.0019226551366724
+    }
+  ],
+  "velocity_cubature_grid": 64
+}

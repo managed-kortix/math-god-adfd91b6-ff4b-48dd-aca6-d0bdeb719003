@@ -1,5 +1,19 @@
 # Notebook
 
+## Cycle 258 abelian-fourfold theta-section no-go
+
+A genuinely non-graph support on `E_i^6` is obtained by embedding `E_i^4` as
+`(t1,t2,t3;t1,t2,t4)` and taking a smooth divisor with Hermitian matrix
+`3*((2,0,0,0),(0,2,0,0),(0,0,2,1),(0,0,1,2))`.  It has irregularity four,
+ample canonical bundle, and no product-of-three-curves sum presentation.  The
+off-diagonal entry `H_43=3` supplies the unique complementary pair in the
+pulled-back determinant form, so its exceptional Weil projection is nonzero.
+The architecture nevertheless fails uniformly before raw deformation theory:
+for the PEL tangent `E_12`, contraction of its class has coefficient `-6` on
+`dz3 dz4 dbar(z1) dbar(z3) dbar(z4) dbar(z5)`.  Potential vanishing therefore
+fails for every theta section.  The architecture is retired; no Hodge result is
+claimed.  See `cycle-258-abelian-fourfold-theta-section-no-go.md`.
+
 ## Cycle 251 strategic rotation
 
 The initial rotation from `LA242` to a bounded `F242` candidate campaign was

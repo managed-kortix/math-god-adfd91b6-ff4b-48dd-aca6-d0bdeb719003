@@ -1,5 +1,17 @@
 # Notebook
 
+## Cycle 259 bounded opposite-sign patch contour scout
+
+A frozen 24-member equal-area ellipse-pair grid was evolved by periodic
+Fourier-Green panel contour dynamics in both directions through `|t|=1/2`.
+The full 32-node screen has `0/24` promotions at the declared `1.2` gate and
+maximum complete-velocity `L^3` max/min ratio `1.008192826706615`. The leading
+geometry has positive sampled separation, bounded sampled chord--arc ratio, and
+a nonzero translation/rotation-invariant shape diagnostic; its 64-node replay
+drops to `1.0044771166846347`. The weak-signal stop fires, so do not extend time
+or tune this grid. This is numerical only, with no contour/PDE enclosure. See
+`cycle-259-opposite-sign-patch-contour-scout.md`.
+
 ## Cycle 257 strategic review
 
 The exhaustive Cycle 255 `N=64` screen integrates all 10,038 exactly feasible

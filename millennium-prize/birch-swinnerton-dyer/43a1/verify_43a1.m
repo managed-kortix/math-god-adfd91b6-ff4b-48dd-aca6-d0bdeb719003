@@ -1,0 +1,20 @@
+// Run with: magma verify_43a1.m
+Q := Rationals();
+E := EllipticCurve([Q | 0,1,1,0,0]);
+P := E![0,0,1];
+print "MODEL", aInvariants(E);
+print "CONDUCTOR", Conductor(E);
+print "DISCRIMINANT", Discriminant(E);
+print "LOCAL_43", LocalInformation(E,43);
+print "TAMAGAWA", TamagawaNumbers(E);
+print "TORSION", TorsionSubgroup(E);
+print "RANK", Rank(E);
+G, phi := MordellWeilGroup(E);
+print "MORDELL_WEIL_GROUP", G;
+print "MORDELL_WEIL_GENERATORS", [phi(G.i) : i in [1..Ngens(G)]];
+print "TWO_SELMER_GROUP", TwoSelmerGroup(E);
+print "MOD_P_IMAGES_TO_47", [<p,GaloisRepresentation(E,p)> : p in PrimesUpTo(47)];
+ar, leading := AnalyticRank(E : Precision := 30);
+print "ANALYTIC_RANK_NUMERICAL", ar, leading;
+assert Conductor(E) eq 43 and Discriminant(E) eq -43;
+assert Rank(E) eq 1 and #TorsionSubgroup(E) eq 1;
