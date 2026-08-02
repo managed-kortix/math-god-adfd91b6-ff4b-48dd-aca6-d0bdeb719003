@@ -1,5 +1,21 @@
 # Notebook
 
+## Cycle 265 triangular skew-product classification
+
+Every stationary-base triangular 2D3C Euler flow has the exact form
+`u=(v,w_0 o Phi_-t)` and Lagrangian map
+`eta_t(a,z)=(Phi_t(a),z+t w_0(a))`. Its complete velocity `L3` is constant for
+every passive component exactly when `v dot grad |v|^2=0`; otherwise an explicit
+smooth passive component makes its initial derivative nonzero. The cellular
+carrier `v=(sin y,-sin x)` with
+`w_0=(4+epsilon v dot grad |v|^2)^(1/2)` is a concrete global smooth periodic
+example. If `A=||v||_3`, `B=||w_0||_3`, and `C_r` is the nonnegative endpoint
+overlap correlation, the exact ratio is
+`[(A^3+B^3+C_t)/(A^3+B^3+C_s)]^(1/3)`. Optimizing the allowed correlation gives
+the universal cap `2^(1/6)<2`, sharp from component data alone but not claimed
+dynamically sharp. Thus no factor-two example exists in this architecture. See
+`cycle-265-triangular-skew-product-l3-classification.md`.
+
 ## Cycle 264 directed-endpoint midpoint-Galerkin screen
 
 `C264-DE1` generates three fresh Cycle 257 variational centers at

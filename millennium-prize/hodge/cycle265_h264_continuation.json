@@ -1,0 +1,120 @@
+{
+  "artifact": "H265-H264-BOUNDED-CONTINUATION",
+  "conclusion": {
+    "counterpacket_is_contractible": true,
+    "ki240_claim": false,
+    "minimal_packet_question_decided": false,
+    "universal_survival_over_all_strict_finite_twisted_complexes": false
+  },
+  "counterpacket": {
+    "Q": "unit:A->B",
+    "Q_degree": 1,
+    "Q_squared": true,
+    "Qh": [
+      "B",
+      "B",
+      []
+    ],
+    "cells": [
+      {
+        "name": "A",
+        "shift": 0,
+        "vertex": "F_0"
+      },
+      {
+        "name": "B",
+        "shift": -1,
+        "vertex": "F_0"
+      }
+    ],
+    "contraction": "h=unit:B->A",
+    "hQ": [
+      "A",
+      "A",
+      []
+    ],
+    "h_degree": -1
+  },
+  "diagonal_class": {
+    "O": "a_1a_2|A + a_1a_2|B",
+    "d_G": {
+      "a_1a_2:A->A": 1,
+      "a_1a_2:B->B": 1
+    },
+    "degree": 2,
+    "lambda_A_on_d_G": 1,
+    "lambda_A_on_image_d_End_1": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "outcome": "exact",
+    "primitive": "G=a_1a_2*h:B->A",
+    "primitive_degree": 1
+  },
+  "endomorphism_complex": {
+    "cohomology_dimensions": {
+      "-1": 0,
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 0
+    },
+    "d_squared_zero": true,
+    "differential_ranks": {
+      "-1": 1,
+      "0": 7,
+      "1": 21,
+      "2": 35,
+      "3": 35,
+      "4": 21,
+      "5": 7,
+      "6": 1,
+      "7": 0
+    },
+    "graded_dimensions": {
+      "-1": 1,
+      "0": 8,
+      "1": 28,
+      "2": 56,
+      "3": 70,
+      "4": 56,
+      "5": 28,
+      "6": 8,
+      "7": 1
+    },
+    "total_dimension": 256
+  },
+  "field": "Q(i)",
+  "scope": "strict two-vertex compressed Ext model only; no KI240 claim",
+  "version": 1
+}

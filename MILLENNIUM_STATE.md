@@ -1,5 +1,35 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: Navier exact scout classifies the stationary-base triangular
+  skew-product architecture `u=(v,w_0 o Phi_-t)`. Its velocity `L3` is constant
+  for every passive datum exactly when `v dot grad |v|^2=0`. The steady cellular
+  carrier `(sin y,-sin x)` and an explicit positive square-root passive datum
+  give a global smooth periodic solution with rigorously nonzero initial `L3`
+  derivative. For component norms `A,B` and endpoint overlap correlations
+  `C_s,C_t`, the exact ratio is
+  `[(A^3+B^3+C_t)/(A^3+B^3+C_s)]^(1/3)`, and its norm-only optimum is the
+  universal cap `2^(1/6)<2`. Thus there is no factor-two example in this
+  architecture. Algebraic sharpness does not establish smooth dynamical
+  sharpness, and time-dependent-base 2D3C and general 3D Euler remain outside
+  scope. No Navier--Stokes or Millennium result is claimed. See
+  `millennium-prize/navier-stokes/cycle-265-triangular-skew-product-l3-classification.md`.
+
+- 2026-08-02: `ND251` strategically pivots candidate generation from repeated
+  weak 2D velocity-`L3` screens to genuinely 3D smooth periodic Euler. The
+  `C265-3D-ATI1` architecture derives a dimension-independent shrinking
+  velocity-Wiener tail, the complete 3D omitted-convolution/recentered-Picard
+  interface, and a new shrinking-Wiener inviscid estimate
+  `sup_t ||w_nu-v||_3 <= nu B` with an explicit rational viscosity threshold.
+  It identifies a deterministic 132-profile multiscale Kida--Pelz/tangent
+  family whose exact stretching field is nonzero. Vortex stretching is only a
+  mechanism hypothesis; promotion still requires a directed endpoint ratio
+  above two and a full-PDE certificate. This is written architecture, not a
+  compute freeze: no member was run, and compute remains prohibited until a
+  separate `C265-3DDE1` manifest freezes coefficients, horizons, numerical
+  gates, and stop rules. No Euler, Navier--Stokes, or Millennium result is
+  claimed. See
+  `millennium-prize/navier-stokes/cycle-265-genuine-3d-euler-pivot-architecture.md`.
+
 - 2026-08-02: P-versus-NP bounded scout `P264-AMT-GADGET` stops on the explicit
   shared-circuit branch. Freeze two address slices with `H=AND_8` and
   `f_i=H XOR x_i`. Essential-variable counting gives exact costs `C_B(H)=7`
@@ -1470,17 +1500,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 264 keeps focused Navier dynamics `ND251` in
-  production-architecture discovery. The frozen Cycle 258 family is retired
-  from production after `C258-V1` promotes `0/4` at its conservation gate. The
-  next architecture must preserve Galerkin energy and enstrophy by construction
-  and optimize directed endpoint amplification. Cycle 255's exact certificate
-  and transfer infrastructure remain reusable. The bounded `43a1` side packet
-  is closed by its curve-specific Sha-vanishing theorem without a lane
-  rotation. Literal full-vorticity
-  `dot H^-1` growth is off the Euler energy shell; the viable target is
-  fixed-`dot H^-1`, variable-`W^(-1,3)` amplification, while `KI240` remains
-  `INCOMPLETE`.
+- **phase:** Cycle 265 pivots focused Navier dynamics `ND251` to genuine 3D
+  Euler amplification architecture `C265-3D-ATI1`. The first frozen 3D
+  alignment scout stops below its `1.2` gate; a new production manifest must
+  use genuine stretching, directed endpoints, energy/helicity integrity, and
+  the exact analytic-tail/Picard interface. The bounded `43a1` side packet is
+  closed, and `KI240` remains `INCOMPLETE`.
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -2312,7 +2337,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 264
+- **cycle:** 265
 - **announcements:** none
 
 ## immutable target list

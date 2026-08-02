@@ -1,5 +1,17 @@
 # Routes
 
+Cycle 265 classifies the exact stationary-base triangular/skew-product 2D3C
+architecture. It has form `u=(v,w_0 o Phi_-t)`. Complete velocity `L3` is
+universally constant in the passive datum exactly when
+`v dot grad |v|^2=0`; a cellular steady carrier gives an explicit smooth
+periodic counterexample to constancy. Endpoint variation is exactly an overlap-
+correlation change. For component norms `A,B`, every two-time ratio is at most
+`sqrt(A^2+B^2)/(A^3+B^3)^(1/3)<=2^(1/6)<2`. The last constant is algebraically
+sharp from component norms and equimeasurability, though dynamical sharpness is
+not claimed. This excludes factor two for the architecture, not for general
+time-dependent 2D3C or 3D Euler. See
+`cycle-265-triangular-skew-product-l3-classification.md`.
+
 Cycle 258 freezes a 45-member local family around the five Cycle 257 finite-
 Fourier candidates before compute, then optimizes accumulated logarithmic
 velocity-`L3` growth along numerical Euler trajectories rather than the initial
