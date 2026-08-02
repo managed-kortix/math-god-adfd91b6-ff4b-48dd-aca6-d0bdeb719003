@@ -1,5 +1,20 @@
 # Routes
 
+## Cycle 264 one-step RG-tail obstruction
+
+The frozen two-dimensional square-lattice straight-link scale-two pushforward
+is gauge equivariant and reflection positive. Exact `SU(2)` convolution gives
+the full blocked character tail `c_j -> c_j^4`; the corresponding logarithmic
+action tail is explicit and this free-boundary two-dimensional architecture has
+no multi-face induced polymers. It nevertheless fails the required uniform
+weighted contraction. Above every representation cutoff, an admissible
+one-character perturbation has local Lipschitz ratio `4c_j^3` in every positive
+diagonal weighted `ell^p` or supremum norm. Fixed-order Wilson coefficients tend
+to one as `beta -> infinity`, so these tail ratios tend to four. Record
+`Y264-RG-TAIL: VIOLATING TAIL FAMILY` and stop this architecture. No
+four-dimensional, cutoff-removal, or continuum claim follows. See
+`cycle-264-reflection-positive-rg-tail.md`.
+
 ## Cycle 236 continuum-admission failure
 
 `CA235` is terminal `FAIL`. The physical trajectory has `a -> 0`,

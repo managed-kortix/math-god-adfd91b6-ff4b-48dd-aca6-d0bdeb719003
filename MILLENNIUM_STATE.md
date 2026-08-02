@@ -1,5 +1,41 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: P-versus-NP bounded scout `P264-AMT-GADGET` stops on the explicit
+  shared-circuit branch. Freeze two address slices with `H=AND_8` and
+  `f_i=H XOR x_i`. Essential-variable counting gives exact costs `C_B(H)=7`
+  and `C_B(f_i)=8`, but the circuit
+  `H XOR (x_1 XOR (a AND (x_1 XOR x_2)))` has eleven gates. Hence it violates
+  the conservative direct-sum baseline `2(C_B(H)-1)=12` by one gate and exact
+  component additivity `16` by five gates. One admissible joint component
+  choice refutes rigidity universal over all unqueried choices. This retires
+  only the frozen literal address/data multiplexer, not abstract `AMT`; no MCSP,
+  unrestricted-circuit, P-versus-NP, or Millennium claim follows. See
+  `millennium-prize/p-vs-np/cycle-264-amt-address-data-shared-circuit-breaker.md`.
+
+- 2026-08-02: Yang--Mills bounded scout `Y264-RG-TAIL` stops with a violating
+  tail family. On the frozen two-dimensional free-boundary square-lattice
+  `SU(2)` straight-link scale-two pushforward, reflection positivity is exact
+  and normalized character coefficients obey `c_j -> c_j^4`, giving the full
+  infinite character and logarithmic action tails. Above every cutoff, an
+  admissible one-character perturbation has local ratio `4c_j^3` in any finite
+  positive diagonal weighted `ell^p` or supremum norm; along the Wilson
+  weak-coupling ray this tends to four. Hence no declared representation-
+  cutoff-uniform strict weighted contraction exists. The architecture is
+  stopped. This is a finite two-dimensional obstruction with no continuum,
+  four-dimensional Yang--Mills, or mass-gap claim. See
+  `millennium-prize/yang-mills/cycle-264-reflection-positive-rg-tail.md`.
+
+- 2026-08-02: RH bounded scout `R264-NB-DYADIC` freezes the complete
+  logarithmically tapered `N=2^m -> 2N` endpoint functional and returns its
+  symbolic-output gate. Exact coefficient comparison and unit-cell integration
+  make `P_(2N)<=P_N` equivalent to one absolutely convergent signed
+  divisor-sum inequality in the cumulative actual Mobius channels. The grouped
+  formula retains constant, linear, physical `[1,2N]`, and infinite
+  oscillatory-tail contributions; no cutoff or harmonic truncation enters.
+  This is an exact reformulation, not a proof of the sign. The scout stops with
+  no cutoff escalation and no RH claim. See
+  `millennium-prize/riemann-hypothesis/cycle-264-nb-dyadic-endpoint-functional.md`.
+
 - 2026-08-02: Cycle 264 formally closes the single bounded `43a1` side packet.
   Its internal target succeeds: `Sha(43a1/Q)=0` holds within the stated
   theorem-backed exact-computation trust boundary. Its publication gate is a

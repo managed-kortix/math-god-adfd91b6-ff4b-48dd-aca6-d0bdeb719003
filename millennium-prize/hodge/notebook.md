@@ -10,6 +10,18 @@ model: survival is only a mechanism test, not `KI240 PASS`, and a kill retires
 this repair ansatz. `ND251` remains the main funnel. See
 `../cycle-264-strategic-review.md`.
 
+The exact bounded computation is complete. Freeze the strict minimal model
+with `m_1=0`, the Cycle 241 Yoneda product as `m_2`, and `m_n=0` for `n>=3`.
+For `T=(F_0[0] direct-sum F_1[2] direct-sum F_0[4],Q=x_01,0)`, the complete
+352-dimensional endomorphism complex has `d(f)=Qf-(-1)^|f|fQ`. The second
+return arrow `y=x_10,0:F_1[2]->F_0[4]` obeys
+`d(y)=omega_0:F_0[0]->F_0[4]`, so the cell-off-diagonal top return is killed.
+The cell-diagonal degree-two cocycle
+`a_1a_2|A+a_1a_2|B+a_1a_2|C` nevertheless survives: coefficient extraction
+on `a_1a_2:A->A` annihilates the full degree-one image and evaluates to one
+on the cocycle. This is a mechanism-test pass only, not `KI240 PASS`, and no
+Hodge claim. See `cycle-264-ki-min.md` and `cycle264_ki_min.json`.
+
 ## Cycle 258 abelian-fourfold theta-section no-go
 
 A genuinely non-graph support on `E_i^6` is obtained by embedding `E_i^4` as

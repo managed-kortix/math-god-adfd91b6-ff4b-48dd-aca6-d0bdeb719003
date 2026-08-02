@@ -2,13 +2,19 @@
 
 ## Cycle 264 bounded scout
 
-`Y264-RG-TAIL` freezes one reflection-positive square-lattice `SU(2)` blocking
-step and its complete character/loop tail. It must prove a representation-
-cutoff-uniform weighted contraction on the induced complement or exhibit a tail
-family violating every declared weight budget, then stop after that blocking
-architecture. Finite truncations and fixed-coupling gaps receive no continuum
-credit. `ND251` remains the main funnel. See
-`../cycle-264-strategic-review.md`.
+`Y264-RG-TAIL` terminates with a violating tail family. For the frozen
+two-dimensional free-boundary straight-link scale-two pushforward, reflection
+positivity is inherited and exact convolution sends every normalized `SU(2)`
+character coefficient to `c_j^4`. The complete blocked density is
+`1+sum_(j>0)(2j+1)c_j^4 chi_j`; its action coefficients are the exact character
+integrals of the logarithm, and no multi-face polymers occur in this particular
+two-dimensional architecture. At any cutoff, a one-coordinate admissible
+perturbation above the cutoff has weighted Lipschitz ratio `4c_j^3`, independent
+of every finite positive diagonal weight. Along the Wilson weak-coupling ray
+`c_j -> 1`, this ratio tends to four. Thus no declared weighted `ell^p` or
+supremum budget gives a cutoff-uniform strict contraction. The architecture
+stops; this is not a four-dimensional or continuum result. See
+`cycle-264-reflection-positive-rg-tail.md`.
 
 ## Continuum admission audit cycle 236
 

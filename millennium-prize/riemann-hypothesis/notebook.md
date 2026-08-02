@@ -10,6 +10,14 @@ first admissible scale, then stop without cutoff escalation. Finite positivity
 earns no RH credit. `ND251` remains the main funnel. See
 `../cycle-264-strategic-review.md`.
 
+The scout returns the symbolic output and stops. For `N=2^m`, the exact
+decrement `P_N-P_(2N)` is `alpha` times the absolutely convergent grouped cell
+sum (264.9) in `cycle-264-nb-dyadic-endpoint-functional.md`. Its divisor
+impulses use the complete actual coefficient channels; the constant, linear,
+retained `[1,2N]`, and infinite oscillatory-tail terms all remain present. The
+result is an exact equivalence to a signed divisor-sum inequality, not a proof
+of its sign. No cutoff search and no RH claim were made.
+
 ## Main-funnel cycles 78--79
 
 Nested Weil-spline Schur positivity is exactly finite Weil positivity and, after

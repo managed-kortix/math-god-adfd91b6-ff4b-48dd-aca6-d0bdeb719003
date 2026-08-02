@@ -1,0 +1,159 @@
+{
+  "artifact": "H264-KI-MIN",
+  "cells": [
+    {
+      "name": "A",
+      "shift": 0,
+      "vertex": "F_0"
+    },
+    {
+      "name": "B",
+      "shift": 2,
+      "vertex": "F_1"
+    },
+    {
+      "name": "C",
+      "shift": 4,
+      "vertex": "F_0"
+    }
+  ],
+  "conclusion": {
+    "diagonal_ext2_obstruction_survives": true,
+    "ki240_claim": false,
+    "mechanism_test_pass": true,
+    "shifted_return_top_class_is_boundary": true
+  },
+  "diagonal_obstruction": {
+    "cocycle": "O=a_1a_2|A + a_1a_2|B + a_1a_2|C",
+    "d_O": 0,
+    "degree": 2,
+    "dual_cocycle": "lambda_A extracts the coefficient of a_1a_2:A->A",
+    "lambda_A_on_O": 1,
+    "lambda_A_on_image_d_End_1": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "outcome": "survives"
+  },
+  "endomorphism_complex": {
+    "cohomology_dimensions": {
+      "-1": 20,
+      "-2": 15,
+      "-3": 6,
+      "-4": 1,
+      "0": 17,
+      "1": 38,
+      "10": 1,
+      "2": 45,
+      "3": 60,
+      "4": 45,
+      "5": 38,
+      "6": 17,
+      "7": 20,
+      "8": 15,
+      "9": 6
+    },
+    "d_squared_zero": true,
+    "differential": "d(f)=Q*f-(-1)^degree(f)*f*Q",
+    "differential_ranks": {
+      "-1": 0,
+      "-2": 0,
+      "-3": 0,
+      "-4": 0,
+      "0": 1,
+      "1": 1,
+      "10": 0,
+      "2": 0,
+      "3": 0,
+      "4": 1,
+      "5": 1,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    "graded_dimensions": {
+      "-1": 20,
+      "-2": 15,
+      "-3": 6,
+      "-4": 1,
+      "0": 18,
+      "1": 40,
+      "10": 1,
+      "2": 46,
+      "3": 60,
+      "4": 46,
+      "5": 40,
+      "6": 18,
+      "7": 20,
+      "8": 15,
+      "9": 6
+    },
+    "total_dimension": 352
+  },
+  "ext_algebra": {
+    "cross": "Ext^3(F_0,F_1)=Ext^3(F_1,F_0)=K^8; all other cross Ext vanish",
+    "model": "strict minimal A-infinity model: m_1=0, m_2=Yoneda product, m_n=0 for n>=3",
+    "normalized_pair": "x_10,s*x_01,t=delta_st*omega_0; x_01,t*x_10,s=-delta_st*omega_1",
+    "self": "Ext*(F_i,F_i)=Lambda(a_1,...,a_6)"
+  },
+  "field": "Q(i)",
+  "return_block": {
+    "class": "omega_0:A->C",
+    "d_y": "+omega_0:A->C",
+    "degree": 2,
+    "outcome": "killed",
+    "primitive": "y=x_10,0:B->C",
+    "verified_coefficient": 1
+  },
+  "scope": "minimal two-vertex shifted-return mechanism test only",
+  "twisted_object": {
+    "Q": "x_01,0:A->B",
+    "Q_degree": 1,
+    "Q_squared": 0,
+    "return_generator": "y=x_10,0:B->C",
+    "return_generator_degree": 1,
+    "two_arrow_candidate": "x_01,0:A->B plus x_10,0:B->C",
+    "two_arrow_candidate_squared": "+omega_0:A->C (nonzero, so not Maurer-Cartan)",
+    "underlying": "A direct-sum B direct-sum C"
+  },
+  "version": 1
+}

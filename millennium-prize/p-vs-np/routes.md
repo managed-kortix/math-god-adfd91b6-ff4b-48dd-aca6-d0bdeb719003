@@ -103,3 +103,13 @@ than `sum_i C(f_i)`. Easy circuit templates also obey the entropy ceiling
 `m=O(r log(n+r))`, which is `N^o(1)` at the MMW threshold. A live construction
 therefore needs genuine anti-sharing rigidity and still lacks the relational-
 search/update-time transfer.
+
+Cycle 264 freezes the smallest nontrivial literal address/data multiplexer with
+an exact one-gate breaker. For `H=AND_8` and `f_i=H XOR x_i`, essential-variable
+counting gives exact costs `C_B(H)=7` and `C_B(f_i)=8`, while computing `H` once
+and multiplexing `x_1,x_2` gives an eleven-gate shared circuit. Thus
+`11<2(7-1)=12`, so even the conservative additive baseline fails, and
+`11<8+8` refutes exact additivity. Since the desired rigidity is universal over
+unqueried component choices, this explicit joint choice is a complete breaker
+for the frozen gadget. It does not refute abstract `AMT` or imply an MCSP or
+P-versus-NP lower bound.

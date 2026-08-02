@@ -9,6 +9,16 @@ that violates direct sum, then stop with that gadget. A pass remains an MCSP
 transfer checkpoint, not `P != NP`. `ND251` remains the main funnel. See
 `../cycle-264-strategic-review.md`.
 
+The frozen two-slice instance takes `H=AND_8` and
+`f_i=H XOR x_i`. Exact essential-variable counting gives `C_B(H)=7` and
+`C_B(f_i)=8`. The shared address circuit
+`H XOR (x_1 XOR (a AND (x_1 XOR x_2)))` has eleven gates. It therefore violates
+the conservative direct-sum lower bound `2(C_B(H)-1)=12` by one gate, and the
+exact component sum `16` by five gates. This explicit admissible joint choice
+breaks a lower bound universal over all unqueried components. Stop on the
+shared-circuit branch; the abstract `AMT` template remains open. See
+`cycle-264-amt-address-data-shared-circuit-breaker.md`.
+
 ## Cycle 208
 
 The exact selector-free MCSP target is the asymmetric template: at every
