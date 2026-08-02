@@ -1,5 +1,29 @@
 # Routes
 
+Cycle 257 derives the exact initial identity
+`d||u||_3^3/dt=3 integral |u|u dot K(-u dot grad omega)` and its exact
+coefficient gradient. A deterministic all-mode streamfunction box through wave
+five is optimized on `energy=1`, `enstrophy=rho` shells by tangent projection
+and uniquely defined spectral-tilt retraction. The largest floating
+double-grid scale-invariant logarithmic derivative is about `0.305271` at
+`rho=20`. This supplies finite coefficient boxes for a later interval KKT pass,
+not a global optimum or finite-time crossing. A frequency/enstrophy structural
+bound grows like `K^(4/3)(Z/E)^(1/2)` and therefore does not force factor two;
+the missing gate is persistence of positive logarithmic growth for integrated
+area `log 2`. See `cycle-257-initial-l3-variational-scout.md`.
+
+Cycle 257 retires only the frozen Cycle 255 numerical production funnel after
+the exhaustive `N=64` screen returns `0/10038` promotions at the declared
+`1.5` gate. The maximum ratio is `1.0002951424615105`; 372 ratios are at least
+`1.0001`, and none is at least `1.001` or `1.01`. This is numerical evidence
+and an operational stop, not a full-Euler exclusion of the family. `ND251`
+remains the main funnel, now in discovery of a genuinely new deterministic
+production architecture. The shrinking-analytic-tail, retained-mode
+enclosure, endpoint-cubature, and Cycle 256 transfer interfaces remain reusable;
+the retired packet/tail/time family may not be tuned or enlarged. See
+`../cycle-257-strategic-review.md` and
+`cycle-256-cycle255-exhaustive-n64-screen.md`.
+
 Cycle 256 specializes the Cycle 211 transfer to the exact fields of an
 eventual Cycle 255 certificate. From `Q=q0(1-alpha T)` and `A_Q<=M`, set
 `G=M max_(n>=1)n/Q^n` and `H=M max_(n>=1)n^2/Q^n`. The
@@ -9,7 +33,10 @@ viscous-minus-Euler vorticity then obeys
 `mu0=(C_out^(1/3)-2C_in^(1/3))/(4H Phi(G,T))` only after the exact endpoint
 gate `C_out>8C_in`. For any fixed physical viscosity `nu`, amplitudes
 `lambda>nu/mu0` transfer the ratio at time `T/lambda`. No crossing is assumed
-or currently certified. See
+or currently certified. Hostile replay confirms these constants but requires
+positive exact inputs, consistent endpoint orientation, strict rational gates,
+and an outward rational upper enclosure of `Phi` for any rational lower
+threshold; all degenerate or rounded cases fail closed. See
 `cycle-256-explicit-cycle211-transfer-theorem.md`.
 
 Cycle 255 replaces the viscosity-dependent Cycle 215 tail face by a shrinking

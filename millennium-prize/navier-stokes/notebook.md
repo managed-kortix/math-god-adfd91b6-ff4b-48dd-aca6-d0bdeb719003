@@ -1,5 +1,16 @@
 # Notebook
 
+## Cycle 257 strategic review
+
+The exhaustive Cycle 255 `N=64` screen integrates all 10,038 exactly feasible
+members in both directions and promotes none at `1.5`. Its maximum ratio is
+`1.0002951424615105`; 372 ratios reach `1.0001`, and none reaches `1.001` or
+`1.01`. This retires the frozen numerical production funnel only, not the
+analytic family by theorem. Keep `ND251` and seek a genuinely new deterministic
+production architecture; preserve the exact Cycle 255 certificate interfaces
+and Cycle 256 transfer theorem for reuse. See
+`../cycle-257-strategic-review.md`.
+
 ## Cycle 256 explicit Cycle 211 transfer theorem
 
 For an oriented Cycle 255 Euler enclosure, put
@@ -15,6 +26,10 @@ For directed endpoint cubic bounds `C_in,C_out`, define
 `mu0=d/[4H Phi(G,T)]`, where `Phi=(exp(GT)-1)/G` (or `T` at `G=0`). At fixed
 physical viscosity `nu`, every `lambda>nu/mu0` makes
 `u_lambda(t)=lambda w_(nu/lambda)(lambda t)` cross two at time `T/lambda`.
+Hostile audit confirms the signs and constants. Rational replay must replace
+`Phi` by a verified rational upper bound in the denominator, select forward or
+reversed endpoint data consistently, and reject nonpositive inputs, equality,
+or floating-point-only strictness.
 No Cycle 255 crossing is assumed or presently available. See
 `cycle-256-explicit-cycle211-transfer-theorem.md`.
 
@@ -85,6 +100,20 @@ only a sufficiently small fixed neighborhood, so instability alone is
 perturbatively capped and does not pass `ND251`. Energy itself imposes no
 global `L^3` cap, and a later order-one unstable-manifold excursion is not
 excluded. See `cycle-253-kolmogorov-instability-cap.md`.
+
+## Cycle 257 deterministic multiscale self-strain scout
+
+A 5,184-member real-analytic 2D Euler family combines three Gaussian-tail
+directional derivative packets, inspired by Cycle 250's concentrated profile,
+with active axial and diagonal low modes. The low modes belong to the same
+vorticity and therefore provide self-induced rather than prescribed strain.
+All members were ranked by the absolute initial logarithmic velocity-`L^3`
+derivative; the top 16 were integrated through `|t|<=1/2` at both `N=64` and
+`N=128`. The largest max/min variations are respectively `1.0174220504` and
+`1.0174778325`, below the frozen `1.05` promotion gate. The prescribed stop
+condition fires. This is a numerical-only derivative-shortlist screen, not an
+exhaustive family exclusion or PDE certificate. See
+`cycle-257-multiscale-self-strain-scout.md`.
 
 ## Cycle 252 explicit Euler-family scout
 
@@ -619,3 +648,19 @@ the explicit unit-ideal certificate `tr(A^2r)-(tA^2r^2-1)=1`. The persistent
 equation proves the infinite extrapolation and retires this single-ratio
 real-even architecture only. See
 `cycle-238-infinite-fibonacci-rail-obstruction.md`.
+
+## Main-funnel cycle 257
+
+For smooth 2D Euler data the exact initial cubic velocity variation is
+`3 integral |u|u dot K(-u dot grad omega)`. Its logarithmic derivative has no
+extra factor three and, after division by `||u||_2`, is invariant under Euler
+amplitude scaling. The exact coefficient gradient includes both the direct
+variation of `|u|u` and the adjoint Biot--Savart variation of
+`-u dot grad omega`. A deterministic wave-five search on energy-one,
+fixed-enstrophy shells gives floating doubled-grid objectives `0.137607`,
+`0.215427`, `0.270808`, `0.300044`, and `0.305271` for enstrophy levels
+`4,8,12,16,20`. These are candidate boxes only. Energy/enstrophy and a launch
+cap give a coarse instantaneous bound proportional to
+`K^(4/3)(Z/E)^(1/2)`, but no duration control; accumulating factor two still
+requires positive logarithmic derivative along an orbit with time integral
+greater than `log 2`. See `cycle-257-initial-l3-variational-scout.md`.

@@ -1,5 +1,34 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: Navier Cycle 257 derives the exact initial formula
+  `d||u||_3^3/dt=3 integral |u|u dot K(-u dot grad omega)` and the full exact
+  finite-coefficient gradient, including the adjoint Biot--Savart term. A
+  deterministic real streamfunction box through wave five, constrained by
+  `energy=1` and fixed enstrophy, gives floating doubled-grid scale-invariant
+  logarithmic derivatives up to `0.3052711112` at enstrophy `20`; directional
+  gradient errors are below `1.8e-9`. These are seeds for an interval KKT pass,
+  not interval-certified optima. A coarse structural bound scales as
+  `K^(4/3)(Z/E)^(1/2)` and does not yield factor two. The decisive missing gate
+  is persistence: the logarithmic derivative must have orbit-time integral
+  exceeding `log 2`. No Euler crossing, Navier--Stokes result, or Millennium
+  result is claimed. See
+  `millennium-prize/navier-stokes/cycle-257-initial-l3-variational-scout.md`.
+
+- 2026-08-02: Cycle 257 strategic review keeps Navier dynamics `ND251` as the
+  main funnel but retires only the frozen Cycle 255 numerical production
+  funnel. Exact preprocessing accepts 10,038 of 149,952 members; the completed
+  bidirectional `N=64` screen promotes `0/10038` at the declared `1.5` gate.
+  Its maximum ratio is `1.0002951424615105`; 372 ratios reach `1.0001`, and
+  none reach `1.001` or `1.01`. Record `CYCLE255 FROZEN NUMERICAL FUNNEL
+  RETIRED FROM PRODUCTION: 0/10038 PROMOTIONS AT 1.5; NUMERICAL ONLY.` This is
+  an operational stop, not a full-Euler family exclusion. Do not tune or
+  enlarge that family. A genuinely new deterministic production architecture
+  may reuse the exact analytic-tail, retained-enclosure, cubature, and Cycle
+  256 transfer infrastructure. The six-lane scores remain led by
+  Navier--Stokes `(1,1,0,1)` because no new evidence changes another lane. No
+  Euler crossing, Navier--Stokes result, or Millennium result is claimed. See
+  `millennium-prize/cycle-257-strategic-review.md`.
+
 - 2026-08-02: Navier Cycle 256 makes the Cycle 211 transfer explicit for an
   eventual directed Cycle 255 certificate. With
   `Q=q0(1-alpha T)`, `kappa_j=max_(n>=1)n^j/Q^n`,
@@ -13,7 +42,13 @@
   `mu0=(C_out^(1/3)-2C_in^(1/3))/(4H Phi(G,T))`, with
   `Phi=(exp(GT)-1)/G` and its continuous value `T` at zero. At any fixed
   viscosity `nu`, every amplitude `lambda>nu/mu0` yields the same ratio at
-  physical time `T/lambda`. No Cycle 255 crossing is assumed or currently
+  physical time `T/lambda`. A hostile replay audit confirms the difference
+  equation, gradient coefficient, Wiener-to-Laplacian bound, conversion
+  constant `4`, endpoint orientation, and amplitude scaling. It additionally
+  requires positive exact inputs, one consistently selected orientation, and a
+  replayed rational upper bound for `Phi` when producing a rational lower
+  threshold; rounded exponentials and non-strict gates fail closed. No Cycle
+  255 crossing is assumed or currently
   certified, so no Navier--Stokes or Millennium result is claimed. See
   `millennium-prize/navier-stokes/cycle-256-explicit-cycle211-transfer-theorem.md`.
 
@@ -1203,11 +1238,13 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 256 runs focused Navier dynamics `ND251` after the exact
-  F242 source-level no-go retired that Hodge support architecture. Literal
-  full-vorticity `dot H^-1` growth is off the Euler energy shell; the viable
-  target is fixed-`dot H^-1`, variable-`W^(-1,3)` amplification, while `KI240`
-  remains `INCOMPLETE`.
+- **phase:** Cycle 257 keeps focused Navier dynamics `ND251` in
+  production-architecture discovery. The frozen Cycle 255 numerical funnel is
+  retired from production after zero promotions, but its exact certificate and
+  transfer infrastructure remain reusable. Literal full-vorticity
+  `dot H^-1` growth is off the Euler energy shell; the viable target is
+  fixed-`dot H^-1`, variable-`W^(-1,3)` amplification, while `KI240` remains
+  `INCOMPLETE`.
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -2039,7 +2076,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 256
+- **cycle:** 257
 - **announcements:** none
 
 ## immutable target list

@@ -8,6 +8,10 @@ Cycle 255 certificate. No Euler crossing is assumed here. The result is a
 conditional transfer theorem and a formula that the validator can evaluate if
 and only if a strict directed endpoint margin is present.
 
+Hostile audit leaves the constants below unchanged, but makes the replay gates
+explicit: orientation, positivity, and every strict comparison are certificate
+data, and floating-point evidence is never accepted in their place.
+
 All norms and Fourier coefficients below use normalized Haar measure on the
 standard square torus. Put
 
@@ -151,8 +155,22 @@ The normalized `L^2` energy identity, (256.9), and
 
 \[
  {d^+\over dt}\|\theta\|_2
- \le G\|\theta\|_2+\mu H.                             \tag{256.12}
+  \le G\|\theta\|_2+\mu H.                             \tag{256.12}
 \]
+
+In detail, the signed energy identity is
+
+\[
+ {1\over2}{d\over dt}\|\theta\|_2^2+\mu\|\nabla\theta\|_2^2
+ =-\int\theta\,z\mathbin\cdot\nabla\omega
+   +\mu\int\theta\,\Delta\omega .
+\]
+
+Thus the coefficient of `||theta||_2` is exactly the certified scalar-gradient
+bound `G`, not a velocity-gradient bound and not `2G`. The sign of either
+right-hand term is immaterial only after this identity has been formed; both
+terms are then bounded in absolute value. This also records why reversing the
+Euler orbit does not change the estimate.
 
 Consequently
 
@@ -167,7 +185,8 @@ right side of (256.13) come from the certified Euler orbit.
 
 ## 4. Explicit threshold and transfer theorem
 
-If the endpoint gate proves `d>0`, define
+If the endpoint gate proves `d>0`, and the certificate also proves `T>0`,
+`Q>1`, and `M>0`, then `H Phi(G,T)>0` and define
 
 \[
  \boxed{\displaystyle
@@ -202,15 +221,17 @@ may instead include rational numbers `a>0` and `delta>0` satisfying
   a^3\ge C_{\rm in},\qquad (2a+\delta)^3<C_{\rm out}.   \tag{256.16}
 \]
 
-Then `0<delta<d`, and the smaller entirely directed threshold
+Then `0<delta<d`. If the artifact also supplies and verifies a rational upper
+bound `B_Phi>=Phi(G,T)`, with `B_Phi>0`, the entirely rational lower threshold
 
 \[
-  \mu_0^{\rm rat}:={\delta\over4H\Phi(G,T)}             \tag{256.17}
+  \underline\mu_0^{\rm rat}:={\delta\over4H B_\Phi}
+  \le {\delta\over4H\Phi(G,T)}<\mu_0.                 \tag{256.17}
 \]
 
-is valid. The exponential in (256.8) is evaluated by a directed rational upper
-bound when certifying a rational lower bound for `mu_0`; a Taylor remainder or
-an interval exponential is acceptable only if replayed fail-closed.
+This is valid. A Taylor remainder or interval exponential may establish
+`B_Phi` only when its outward direction is replayed fail-closed. Substituting a
+rounded evaluation of the exponential directly into a denominator is invalid.
 
 ## 5. Fixed positive physical viscosity
 
@@ -246,3 +267,30 @@ Amplitude scaling preserves the ratio and only makes the effective viscosity
 smaller. It cannot supply `d>0`. Since no Cycle 255 crossing certificate is
 currently present, this cycle proves only the transfer theorem and no
 Navier--Stokes counterexample, regularity result, or Millennium result.
+
+## 6. Hostile replay gates
+
+The transfer validator must reject, rather than weaken or repair, a certificate
+unless all of the following hold:
+
+1. `T>0`, `Q>1`, `M>0`, `C_in>0`, `C_out>0`, and all encoded quantities are
+   finite and in their declared exact domains;
+2. one orientation is selected before replay, with forward data
+   `(C_in,C_out)=(U_0,L_T)` or reversed data `(U_T,L_0)`; reversal applies
+   simultaneously to the orbit, vorticity, endpoint bounds, and initial datum;
+3. the Wiener cap proves (256.2), after which `G=M kappa_1(Q)` and
+   `H=M kappa_2(Q)` are recomputed rather than trusted as free fields;
+4. the exact strict cubic gate `C_out>8 C_in` passes; equality, overlap, an
+   unoriented maximum/minimum, or a floating cube-root comparison fails;
+5. the viscosity threshold uses either a replayed positive lower enclosure of
+   (256.14), with every denominator bounded outward above, or the rational
+   witnesses (256.16)--(256.17), always as a strict lower threshold; and
+6. for physical viscosity `nu>0`, the exact strict comparison
+   `lambda>nu/mu_0` (or the stronger rational-witness threshold) passes before
+   the time `T/lambda` and datum `lambda v(0)` are emitted.
+
+There is only one endpoint perturbation in (256.15): the viscous and oriented
+Euler initial data are identical. Charging a second perturbation is safe but
+unnecessarily weaker; omitting the terminal perturbation or mixing endpoint
+orientations is invalid. The constant `4` in (256.10) is a replayed upper
+bound, not an asserted sharp norm.

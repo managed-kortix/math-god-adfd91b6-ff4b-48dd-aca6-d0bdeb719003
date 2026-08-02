@@ -1,0 +1,414 @@
+{
+  "cutoff": 42,
+  "dt": 0.00048828125,
+  "family_size": 5184,
+  "final_time_each_direction": 0.5,
+  "pde_certificate": false,
+  "promotion_threshold": 1.05,
+  "resolution": 128,
+  "sample_dt": 0.015625,
+  "shortlist_size": 16,
+  "status": "NUMERICAL_SCOUT_ONLY",
+  "top_results": [
+    {
+      "absolute_initial_log_l3_derivative": 0.02262804461892414,
+      "family_index": 3144,
+      "initial_log_l3_derivative": 0.02262804461892414,
+      "maximum": {
+        "l3": 1.2801670633566549,
+        "time": 0.5
+      },
+      "member": {
+        "alpha": 1.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 2,
+        "phase_seed": 0,
+        "rho": 0.5,
+        "rotation": 1
+      },
+      "minimum": {
+        "l3": 1.258176858947227,
+        "time": -0.5
+      },
+      "relative_energy_drift": 4.890532423473815e-13,
+      "relative_enstrophy_drift": 1.786478742715758e-10,
+      "variation_ratio": 1.0174778325106282
+    },
+    {
+      "absolute_initial_log_l3_derivative": 0.0226280446189241,
+      "family_index": 3160,
+      "initial_log_l3_derivative": 0.0226280446189241,
+      "maximum": {
+        "l3": 1.2801670633566549,
+        "time": 0.5
+      },
+      "member": {
+        "alpha": 1.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 2,
+        "phase_seed": 0,
+        "rho": 0.5,
+        "rotation": 3
+      },
+      "minimum": {
+        "l3": 1.2581768589472269,
+        "time": -0.5
+      },
+      "relative_energy_drift": 4.89164264649844e-13,
+      "relative_enstrophy_drift": 1.786478742715758e-10,
+      "variation_ratio": 1.0174778325106282
+    },
+    {
+      "absolute_initial_log_l3_derivative": 0.02405964818435156,
+      "family_index": 4808,
+      "initial_log_l3_derivative": 0.02405964818435156,
+      "maximum": {
+        "l3": 1.824316159015778,
+        "time": 0.5
+      },
+      "member": {
+        "alpha": 2.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 0,
+        "phase_seed": 0,
+        "rho": 0.5,
+        "rotation": 1
+      },
+      "minimum": {
+        "l3": 1.7936326649560408,
+        "time": -0.5
+      },
+      "relative_energy_drift": 1.3270495813344496e-12,
+      "relative_enstrophy_drift": 2.9001256951488585e-10,
+      "variation_ratio": 1.0171068996786414
+    },
+    {
+      "absolute_initial_log_l3_derivative": 0.024059648184351672,
+      "family_index": 4824,
+      "initial_log_l3_derivative": 0.024059648184351672,
+      "maximum": {
+        "l3": 1.824316159015778,
+        "time": 0.5
+      },
+      "member": {
+        "alpha": 2.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 0,
+        "phase_seed": 0,
+        "rho": 0.5,
+        "rotation": 3
+      },
+      "minimum": {
+        "l3": 1.7936326649560408,
+        "time": -0.5
+      },
+      "relative_energy_drift": 1.3273826482418372e-12,
+      "relative_enstrophy_drift": 2.900124584925834e-10,
+      "variation_ratio": 1.0171068996786414
+    },
+    {
+      "absolute_initial_log_l3_derivative": 0.023651588408318217,
+      "family_index": 4888,
+      "initial_log_l3_derivative": 0.023651588408318217,
+      "maximum": {
+        "l3": 1.8314775898940214,
+        "time": 0.5
+      },
+      "member": {
+        "alpha": 2.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 2,
+        "phase_seed": 0,
+        "rho": 0.5,
+        "rotation": 3
+      },
+      "minimum": {
+        "l3": 1.801036895048785,
+        "time": -0.5
+      },
+      "relative_energy_drift": 2.2645219033279318e-12,
+      "relative_enstrophy_drift": 9.427383318438842e-10,
+      "variation_ratio": 1.0169017608295092
+    },
+    {
+      "absolute_initial_log_l3_derivative": 0.023651588408318235,
+      "family_index": 4872,
+      "initial_log_l3_derivative": 0.023651588408318235,
+      "maximum": {
+        "l3": 1.8314775898940212,
+        "time": 0.5
+      },
+      "member": {
+        "alpha": 2.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 2,
+        "phase_seed": 0,
+        "rho": 0.5,
+        "rotation": 1
+      },
+      "minimum": {
+        "l3": 1.801036895048785,
+        "time": -0.5
+      },
+      "relative_energy_drift": 2.2645219033279318e-12,
+      "relative_enstrophy_drift": 9.427383318438842e-10,
+      "variation_ratio": 1.016901760829509
+    },
+    {
+      "absolute_initial_log_l3_derivative": 0.02257454552202943,
+      "family_index": 1935,
+      "initial_log_l3_derivative": -0.02257454552202943,
+      "maximum": {
+        "l3": 1.2801012217543257,
+        "time": -0.5
+      },
+      "member": {
+        "alpha": 1.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 0,
+        "phase_seed": 7,
+        "rho": -0.5,
+        "rotation": 1
+      },
+      "minimum": {
+        "l3": 1.2594021368355688,
+        "time": 0.5
+      },
+      "relative_energy_drift": 6.630251903061435e-13,
+      "relative_enstrophy_drift": 7.997147388749681e-11,
+      "variation_ratio": 1.0164356437974342
+    },
+    {
+      "absolute_initial_log_l3_derivative": 0.022574545522029376,
+      "family_index": 1951,
+      "initial_log_l3_derivative": -0.022574545522029376,
+      "maximum": {
+        "l3": 1.2801012217543257,
+        "time": -0.5
+      },
+      "member": {
+        "alpha": 1.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 0,
+        "phase_seed": 7,
+        "rho": -0.5,
+        "rotation": 3
+      },
+      "minimum": {
+        "l3": 1.2594021368355688,
+        "time": 0.5
+      },
+      "relative_energy_drift": 6.63136212608606e-13,
+      "relative_enstrophy_drift": 7.997147388749681e-11,
+      "variation_ratio": 1.0164356437974342
+    },
+    {
+      "absolute_initial_log_l3_derivative": 0.02259767496927814,
+      "family_index": 3663,
+      "initial_log_l3_derivative": -0.02259767496927814,
+      "maximum": {
+        "l3": 1.8343804535434165,
+        "time": -0.5
+      },
+      "member": {
+        "alpha": 2.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 0,
+        "phase_seed": 7,
+        "rho": -0.5,
+        "rotation": 1
+      },
+      "minimum": {
+        "l3": 1.804794776297754,
+        "time": 0.5
+      },
+      "relative_energy_drift": 1.3683498778505054e-12,
+      "relative_enstrophy_drift": 2.827369449676098e-10,
+      "variation_ratio": 1.0163928207429505
+    },
+    {
+      "absolute_initial_log_l3_derivative": 0.022597674969278073,
+      "family_index": 3679,
+      "initial_log_l3_derivative": -0.022597674969278073,
+      "maximum": {
+        "l3": 1.8343804535434165,
+        "time": -0.5
+      },
+      "member": {
+        "alpha": 2.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 0,
+        "phase_seed": 7,
+        "rho": -0.5,
+        "rotation": 3
+      },
+      "minimum": {
+        "l3": 1.804794776297754,
+        "time": 0.5
+      },
+      "relative_energy_drift": 1.3685719224554305e-12,
+      "relative_enstrophy_drift": 2.827367229230049e-10,
+      "variation_ratio": 1.0163928207429505
+    },
+    {
+      "absolute_initial_log_l3_derivative": 0.02186906965735527,
+      "family_index": 2536,
+      "initial_log_l3_derivative": 0.02186906965735527,
+      "maximum": {
+        "l3": 1.2461288025853163,
+        "time": 0.46875
+      },
+      "member": {
+        "alpha": 1.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 1,
+        "phase_seed": 0,
+        "rho": 0.0,
+        "rotation": 1
+      },
+      "minimum": {
+        "l3": 1.2261849357810206,
+        "time": -0.5
+      },
+      "relative_energy_drift": 3.50941498084012e-13,
+      "relative_enstrophy_drift": 5.0952131402937084e-11,
+      "variation_ratio": 1.0162649745746488
+    },
+    {
+      "absolute_initial_log_l3_derivative": 0.021869069657355245,
+      "family_index": 2528,
+      "initial_log_l3_derivative": 0.021869069657355245,
+      "maximum": {
+        "l3": 1.2461288025853159,
+        "time": 0.46875
+      },
+      "member": {
+        "alpha": 1.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 1,
+        "phase_seed": 0,
+        "rho": 0.0,
+        "rotation": 0
+      },
+      "minimum": {
+        "l3": 1.2261849357810206,
+        "time": -0.5
+      },
+      "relative_energy_drift": 3.50941498084012e-13,
+      "relative_enstrophy_drift": 5.095202038063462e-11,
+      "variation_ratio": 1.0162649745746484
+    },
+    {
+      "absolute_initial_log_l3_derivative": 0.021869069657355234,
+      "family_index": 2544,
+      "initial_log_l3_derivative": 0.021869069657355234,
+      "maximum": {
+        "l3": 1.2461288025853159,
+        "time": 0.46875
+      },
+      "member": {
+        "alpha": 1.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 1,
+        "phase_seed": 0,
+        "rho": 0.0,
+        "rotation": 2
+      },
+      "minimum": {
+        "l3": 1.2261849357810206,
+        "time": -0.5
+      },
+      "relative_energy_drift": 3.5071945347908695e-13,
+      "relative_enstrophy_drift": 5.095202038063462e-11,
+      "variation_ratio": 1.0162649745746484
+    },
+    {
+      "absolute_initial_log_l3_derivative": 0.021869069657355265,
+      "family_index": 2552,
+      "initial_log_l3_derivative": 0.021869069657355265,
+      "maximum": {
+        "l3": 1.2461288025853159,
+        "time": 0.46875
+      },
+      "member": {
+        "alpha": 1.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 1,
+        "phase_seed": 0,
+        "rho": 0.0,
+        "rotation": 3
+      },
+      "minimum": {
+        "l3": 1.2261849357810206,
+        "time": -0.5
+      },
+      "relative_energy_drift": 3.50941498084012e-13,
+      "relative_enstrophy_drift": 5.0952131402937084e-11,
+      "variation_ratio": 1.0162649745746484
+    },
+    {
+      "absolute_initial_log_l3_derivative": 0.02344396016078854,
+      "family_index": 4856,
+      "initial_log_l3_derivative": 0.02344396016078854,
+      "maximum": {
+        "l3": 1.8317740271317684,
+        "time": 0.5
+      },
+      "member": {
+        "alpha": 2.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 1,
+        "phase_seed": 0,
+        "rho": 0.5,
+        "rotation": 3
+      },
+      "minimum": {
+        "l3": 1.802481599349959,
+        "time": -0.5
+      },
+      "relative_energy_drift": 1.2397860515989123e-12,
+      "relative_enstrophy_drift": 2.8499369530976537e-10,
+      "variation_ratio": 1.0162511660548288
+    },
+    {
+      "absolute_initial_log_l3_derivative": 0.023443960160788663,
+      "family_index": 4840,
+      "initial_log_l3_derivative": 0.023443960160788663,
+      "maximum": {
+        "l3": 1.8317740271317684,
+        "time": 0.5
+      },
+      "member": {
+        "alpha": 2.0,
+        "beta": 0.25,
+        "epsilon": 0.0625,
+        "packet": 1,
+        "phase_seed": 0,
+        "rho": 0.5,
+        "rotation": 1
+      },
+      "minimum": {
+        "l3": 1.8024815993499592,
+        "time": -0.5
+      },
+      "relative_energy_drift": 1.2396750292964498e-12,
+      "relative_enstrophy_drift": 2.8499369530976537e-10,
+      "variation_ratio": 1.0162511660548286
+    }
+  ]
+}
