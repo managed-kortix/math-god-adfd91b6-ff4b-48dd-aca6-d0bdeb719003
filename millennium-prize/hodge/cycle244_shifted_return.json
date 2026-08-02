@@ -1,0 +1,109 @@
+{
+  "arrows": [
+    {
+      "ext_degree": 3,
+      "map": "x_01_0",
+      "shifted_degree": 1,
+      "source": "A",
+      "target": "B"
+    },
+    {
+      "ext_degree": 3,
+      "map": "x_10_0",
+      "shifted_degree": 1,
+      "source": "B",
+      "target": "C"
+    }
+  ],
+  "artifact": "cycle244_shifted_return",
+  "candidate_differential_matrix": [
+    [
+      null,
+      null,
+      null
+    ],
+    [
+      [
+        1,
+        "x_01_0"
+      ],
+      null,
+      null
+    ],
+    [
+      null,
+      [
+        1,
+        "x_10_0"
+      ],
+      null
+    ]
+  ],
+  "cells": [
+    {
+      "name": "A",
+      "object": "F_0",
+      "shift": 0
+    },
+    {
+      "name": "B",
+      "object": "F_1",
+      "shift": 2
+    },
+    {
+      "name": "C",
+      "object": "F_0",
+      "shift": 4
+    }
+  ],
+  "conclusion": {
+    "atiyah_cancellation_demonstrated": false,
+    "ki240_disproved": false,
+    "maurer_cartan_satisfied": false,
+    "support_cycle_inference_refuted": true
+  },
+  "field": "Q(i)",
+  "pair": {
+    "cross_ext_3_dimension": 8,
+    "norm": 2,
+    "u_minus_1": {
+      "im": 1,
+      "re": 1
+    },
+    "vertices": [
+      0,
+      1
+    ]
+  },
+  "return_block": {
+    "ext_degree": 6,
+    "nonzero": true,
+    "same_support": "F_0",
+    "shifted_degree": 2,
+    "source": "A",
+    "target": "C",
+    "value": "+omega_0"
+  },
+  "shift_rule": "Hom^d(F_i[r],F_j[s])=Ext^(d-r+s)(F_i,F_j)",
+  "square_nonzero_entries": {
+    "interpreted_value": "+omega_0",
+    "row_C_column_A": [
+      [
+        [
+          1,
+          "x_10_0"
+        ],
+        [
+          1,
+          "x_01_0"
+        ]
+      ]
+    ]
+  },
+  "version": 1,
+  "yoneda_pairing": {
+    "reason": "normalized perfect Serre pairing; odd-degree cyclicity",
+    "x_01_0*x_10_0": "-omega_1",
+    "x_10_0*x_01_0": "+omega_0"
+  }
+}

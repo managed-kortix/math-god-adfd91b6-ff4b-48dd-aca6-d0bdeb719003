@@ -1,5 +1,70 @@
 # Notebook
 
+## Cycle 246 weight and punctured-support wall
+
+The independent repair terminates at `WALL`. Weight, cell, and bar filtrations
+cannot force survival because `F_i[0] -> F_j[2] -> F_i[4]` has a nonzero
+cross-`Ext^3` return in total degree two. Global punctured restriction is
+stronger: it kills every cross return and, by depth, preserves the graph normal
+`H^1`. But the desired implication from raw Atiyah vanishing to
+`c_k rho_k(v)=0` needs a chain map from the twisted endomorphism complex to
+punctured normal cohomology. Declaring twisting terms trace-zero does not build
+that map, and additive supported Chern characters can forget the raw class.
+Thus Cycle 245 is conditional. The spectral-sequence/weight and leading
+generic-support architecture is terminal `WALL`; the finite theorem and
+`KI240` remain `INCOMPLETE`, not `FAIL`.
+
+## Cycle 245 global punctured-support repair attempt
+
+Weight filtrations alone do not defeat the shifted return
+`F_i[0] -> F_j[2] -> F_i[4]`; they only move it to a later page. The corrected
+finite proof attempt instead restricts to
+`V_k=A_0 minus union_(ell!=k) G_ell`. This kills all other graph cells and all
+cross returns. The deleted points have codimension three in `G_k`, so depth
+identifies the complete and punctured normal `H^1`. On the restricted finite
+twisted complex, the Koszul leading-support edge of the supertraced Atiyah
+obstruction is claimed to be `c_k rho_k(v)`. But the note does not construct a
+chain map from the raw endomorphism-valued obstruction complex to punctured
+normal `H^1`, nor verify compatibility of its conormal edge with the twisting
+differential. Saying twisting terms are supertrace-zero commutators is not yet
+that chain-level lemma. Thus this route is also `INCOMPLETE` and does not
+restore `KI240 PASS`.
+
+## Cycle 244 KI240 status correction
+
+Retract `KI240 PASS`. The Cycle 241 connective Karoubi normal form still gives
+a finite twisted-complex model for every retract, but the reduction stops at
+Cycle 200. For normalized dual classes `x in Ext^3(F_0,F_1)` and
+`y in Ext^3(F_1,F_0)`, the actual pairing is `yx=omega_0` and
+`xy=-omega_1`. Hence `F_0[0] -> F_1[2] -> F_0[4]` has two degree-one arrows
+and a nonzero total-degree-two same-support composite. Acyclic cell ordering
+does not prove survival of the vertex obstruction in total `Ext^2`; refining
+by cell, shift, or bar length only moves this term to a later spectral-sequence
+page and supplies no permanent-cycle argument. The two
+arrows alone have nonzero square and fail Maurer--Cartan, so this refutes the
+proof step but does not exhibit Atiyah cancellation or disprove `KI240`. Thus
+Cycle 200 and `KI240` are `INCOMPLETE`. The active portfolio phase remains
+Navier focused discovery `LA242`, now by the corrected lane comparison rather
+than by terminal Hodge closure. `NB242` is calibration and `F242` remains an
+incomplete inactive scout.
+
+## Cycle 243 F242 structural reduction
+
+Before any `5^54` loop, factor every map as `f_L=M_L phi^3`, where
+`M_L=[L_1 L_2 L_3]:E_i^9 -> E_i^6`, and use the fixed difference scheme
+`D_phi=phi(C)-phi(C)`. Geometric injectivity says that
+`(delta_phi^3)^-1 ker(M_L)` has only the diagonal points; the tangent map
+supplies the unramified test. Equivalently, their scheme fiber product is the
+diagonal. Since `dim D_phi=2`, a closed immersion necessarily has total
+Gaussian rank six and each block has rank at least two. The free universal
+symmetry is `C_4 x S_3`, with exact orbit count
+`(n^3+3n^2+5n+15)/24`, `n=5^18`. The irregularity-nine argument distinguishes
+smooth graph threefolds but does not replace graph-span nonmembership. Embedded
+normal vanishing implies the structure-sheaf Atiyah vanishing, though retaining
+both matrices is a useful exact check. No full-rank universal rejection follows
+without the still-unprinted explicit `phi`, its difference scheme, tangent map,
+and curve class; the scout therefore remains `INCOMPLETE` before enumeration.
+
 ## Cycle 242 Fermat-quartic triple-sum support gate
 
 The next bounded support category uses images of `C_Fermat^3`, not graph
@@ -19,19 +84,21 @@ degree-one/two or previously retired support architecture is used.
 
 ## Cycle 241 connective Karoubi normal form
 
-The Karoubi boundary from Cycles 200--201 closes for these seven generators.
-Their minimal Ext category is connective, with `Hom^0(F_i,F_j)=0` for `i!=j`
+The connective normal form addresses the Karoubi presentation gap for these
+seven generators. Their minimal Ext category is connective, with
+`Hom^0(F_i,F_j)=0` for `i!=j`
 and `End^0(F_i)=C`.  In every finite projector packet, canceling scalar
 contractible pairs terminates; on the resulting minimal packet, degree-zero
 maps preserve the finite shift filtration and have a product-of-matrix-algebras
 symbol.  Splitting that symbol and removing successive strictly triangular
 terms through its nilpotent ideal gives a finite stable normal form
 `1_D direct-sum 0`, even for arbitrary noncentral projectors.  Thus the finite
-twisted-complex category is already idempotent complete.  Generic Euler
-multiplicities recover the seven coefficients of `xi`, and Cycle 200 applied to
-the finite image `D`, followed by Atiyah naturality, produces a nonzero one of
-the nine corners.  This proves `KI240` for the graph-generated support category,
-not the Hodge conjecture.
+twisted-complex category is already idempotent complete. Generic Euler
+multiplicities recover the seven coefficients of `xi`. The proposed final use
+of Cycle 200 requires a missing proof that the associated-graded vertex class
+survives in total `Ext^2`. Thus the normal form is retained but `KI240` is
+`INCOMPLETE`. Cycle 245 later attempts an independent global punctured-support
+proof, but Cycle 246 identifies its missing chain-level comparison.
 
 The homotopy-idempotent step is literal.  For a closed representative `a` with
 `delta=a^2-a=dh`, replace `a` by `a+(1-2a)delta`; the new defect is
@@ -235,13 +302,13 @@ classification of noncentral splitting projectors would be new required input.
 
 ## Cycle 200 graph triangulated-envelope hostile audit
 
-The Cycle 199 cross-Ext computation closes the finite twisted-complex envelope.
-Every cross group lies in degree three; after shifts, a directed cycle of
-degree-one arrows would force `3m=m`. Hence each finite graph-sheaf twisted
-complex has an acyclic vertex filtration, and no cross-path or higher
-`A_infinity` operation can return to alter a diagonal degree-two obstruction.
-The nonzero projector coefficients retain nonzero multiples of the individual
-normal obstructions. A stronger thick-category argument remains unproved:
+The former claim that Cycle 199 closes the finite twisted-complex envelope is
+retracted. Every cross group lies in degree three, and a cycle returning to the
+same shifted cell would force `3m=m`; however,
+`F_i[0] -> F_j[2] -> F_i[4]` returns to the same support at a different shift.
+Its nonzero `Ext^3 Ext^3 -> Ext^6` product has total degree two. Therefore the
+acyclic cell filtration does not establish survival of the individual normal
+obstructions. A stronger thick-category argument remains unproved:
 generic-open restriction can kill the global `H^1(N)` class, and an arbitrary
 Karoubi summand need not preserve the vertex filtration. K-additivity and
 cohomological cancellation alone decide neither raw Atiyah vanishing nor this

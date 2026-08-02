@@ -16,8 +16,8 @@ direct sums of shifts of the seven `F_k`.  Write
  \mathcal C=\operatorname {thick}\langle F_0,\ldots,F_6\rangle.
 \]
 
-The apparent Karoubi gap in Cycles 200--201 closes because the minimal Ext
-category of these generators is connective and has semisimple degree zero.
+The connective splitting result below addresses the Karoubi gap, but it does
+not repair the post-audit failure of the Cycle 200 obstruction theorem.
 
 **Connective Karoubi normal-form theorem.**  Every object of `C` is isomorphic
 to an object of `Tw(F)`.  More precisely, every finite strict projector packet
@@ -39,8 +39,8 @@ Consequently `Tw(F)` is already idempotent complete and
  \operatorname {Kar}(\operatorname {Tw}(F))=\operatorname {Tw}(F).  \tag{241.2}
 \]
 
-Combining (241.2) with the Cycle 200 finite-twisted-complex theorem proves the
-frozen gate
+The former argument combined (241.2) with the Cycle 200 finite-twisted-complex
+claim to assert the frozen gate
 
 \[
  E\in\mathcal C,\quad [E]=\xi
@@ -48,8 +48,24 @@ frozen gate
  \exists v\in T_0S:\ o_v(E)\ne0.                                  \tag{KI240}
 \]
 
-Thus `KI240 PASS` holds.  This is a theorem about the specified support
-category.  It does not prove the Hodge conjecture.
+That inference and `KI240 PASS` are formally retracted.  The exact missed
+channel is
+
+\[
+ F_i[0]\longrightarrow F_j[2]\longrightarrow F_i[4],\qquad i\ne j,
+\]
+
+whose two underlying `Ext^3` classes have a nonzero product in
+`Ext^6(F_i,F_i)`.  It can contribute in total degree two, so Cycle 200 did not
+prove that a diagonal Atiyah class survives in a finite twisted complex.  The
+normal-form theorem may reduce retracts to finite twisted complexes, but the
+needed obstruction theorem for those complexes is now unproved.  This path
+invalidates the proof; it is not a `KI240 FAIL` packet.  The gate status is
+therefore `KI240 INCOMPLETE`, with no Hodge-conjecture claim.
+
+Cycle 245 subsequently proposes a global punctured-support repair, but its
+chain-level trace-and-edge lemma is not established. It therefore does not
+alter this retraction or restore `KI240 PASS`.
 
 ## Abstract finite theorem
 
@@ -255,20 +271,21 @@ There are no negative Ext groups.  Equations (241.7)--(241.8) give
  \operatorname {End}^0(F_i)=\mathbb C.                            \tag{241.9}
 \]
 
-Hence (241.3) holds.  Notice that the very large, nonzero groups in (241.7)
-do not interfere: they have positive degree three and enter only nilpotent
-triangular terms after shifts.  They prevent a central vertex decomposition,
-as Cycle 201 observed, but they do not prevent objectwise finite idempotent
-splitting.
+Hence (241.3) holds.  The very large, nonzero groups in (241.7) do not prevent
+the objectwise finite idempotent splitting proved above.  They do, however,
+interfere with the separate obstruction transfer: opposite `Ext^3` arrows can
+compose nontrivially in self `Ext^6` after the shifts displayed in the
+retraction.
 
-The distinction resolves the earlier concern.  An arbitrary projector need
+The normal-form theorem resolves only the earlier projector-presentation
+concern.  An arbitrary projector need
 not preserve Cycle 200's chosen topological ordering on the original packet.
 The theorem does not claim that it does.  It replaces the packet by a finite
 minimal one and uses the intrinsic shift filtration, whose degree-zero symbol
-is semisimple.  The image itself is then another finite twisted complex, to
-which Cycle 200 applies directly.
+is semisimple.  The image itself is then another finite twisted complex, but
+Cycle 200 no longer supplies a valid obstruction theorem for that image.
 
-## Grothendieck coordinates and obstruction corner
+## Grothendieck coordinates and retracted obstruction transfer
 
 For completeness, the seven coefficients are detected independently of the
 chosen packet.  Localizing at the generic point of `Gamma_k` defines the generic
@@ -290,25 +307,32 @@ coordinates relevant here.  If `[E]=xi`, then
 and every coordinate is nonzero.  Equation (241.10) is used only to certify the
 `K_0` equality; no local restriction of the global Atiyah obstruction is made.
 
-Let `D` be the finite twisted-complex image supplied by Theorem 241.A.  Cycle
-200 applies to `D` and gives a vertex `k` and a PEL basis vector `v_j` for which
-the diagonal class detected by
+Let `D` be the finite twisted-complex image supplied by Theorem 241.A.  The
+retracted argument claimed that Cycle 200 gives a vertex `k` and a PEL basis
+vector `v_j` for which the diagonal class detected by
 
 \[
  c_k\rho_k(v_j),\qquad
  \rho_k(B)=Q^{-1}B^t-N(u^k)B,                                     \tag{241.12}
 \]
 
-is nonzero.  Therefore `o_(v_j)(D)` is not a boundary.  Under the splitting
-maps `D -> C -> D`, Atiyah naturality identifies this class with
+is nonzero and therefore that `o_(v_j)(D)` is not a boundary.  The first fact
+holds on the associated one-vertex graded piece; the second does not follow.
+The shifted return `F_i[0] -> F_j[2] -> F_i[4]` gives a nonzero `Ext^6`
+product and hence a possible higher differential or extension in total degree
+two.  No refinement by cell order, shift, or bar length proves the diagonal
+class is a permanent cycle.  If nonvanishing for `D` were established
+independently, the splitting maps `D -> C -> D` and Atiyah naturality would
+identify it with
 
 \[
  [e[2]o_{v_j}(C)e]\in H^2(e\operatorname {End}(C)e).               \tag{241.13}
 \]
 
-This is the required nonzero one of the nine exact corners.  The same argument
-with a one-cell packet reproduces the known nonzero diagonal obstruction of
-each generator `F_k`.
+one of the nine exact corners.  That conditional naturality statement remains,
+as does the one-cell obstruction of each generator `F_k`; no nonzero corner for
+an arbitrary `D` or retract is proved by the argument in this section alone.
+Cycle 245 later establishes the required nonvanishing independently.
 
 ## Coverage of finite packets
 
@@ -329,9 +353,9 @@ is covered exactly, although no uniform packet-size bound is asserted.
 
 ## Scope
 
-This closes the Cycle 200--201 Karoubi boundary and proves `KI240` for the
-declared graph-generated category.  It rules out this category as a source of
-an object of class `xi` deforming in all nine PEL directions.  It neither rules
-out objects with genuinely new support nor produces an algebraic cycle on a
-very general fiber.  No Hodge or other Millennium Prize Problem is claimed
-solved.
+The connective splitting theorem alone does not close the Cycle 200--201
+obstruction boundary because the original finite-twisted-complex filtration
+proof was retracted. Cycle 245's proposed punctured-support replacement still
+lacks its chain-level trace-and-edge lemma. The normal form here therefore does
+not yield `KI240 PASS`; the gate remains `INCOMPLETE`. No Hodge or other
+Millennium Prize Problem is claimed solved.

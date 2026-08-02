@@ -1,12 +1,18 @@
 # Routes
 
-Cycle 242 applies the stop rule after `KI240 PASS`.  The theorem is terminal for
-the declared graph-generated category and has zero official transfer.  Do not
-enumerate more graph packets, enlarge or vary the graph collection, or revisit
-equivalent additive, Fourier--Mukai, linkage, Ferrand, or projector
-presentations.  Hodge may re-enter only with a genuinely new non-graph support
-or production mechanism.  The six-lane review rotates the portfolio to Navier
-focused discovery `LA242`; see `../cycle-242-strategic-rotation.md`.
+Cycle 244 correctly retracts Cycle 200's filtration proof: the shifted path
+`F_i[0] -> F_j[2] -> F_i[4]` prevents a weight-only permanent-cycle argument.
+Cycle 245 proposes a different method: punctured-branch restriction kills cross
+returns and depth preserves normal `H^1`. But its finite-cell supported Atiyah
+trace-and-edge map is not constructed as a chain map, so the proposed repair
+does not restore `KI240 PASS`. Cycle 246 makes this terminal for weight and
+leading punctured-support methods: they are `WALL`, while the gate remains
+`INCOMPLETE`. Do not
+enumerate more graph packets or revisit equivalent additive, Fourier--Mukai,
+linkage, Ferrand, or projector presentations. A genuinely new non-graph
+mechanism remains separate. The active portfolio remains Navier focused
+discovery `LA242`; see `../cycle-244-portfolio-status-correction.md` and
+`cycle-246-weight-and-punctured-support-wall.md`.
 
 ## Cycle 242 Fermat-product image scout
 
@@ -138,16 +144,17 @@ must be a non-split, nontransverse extension with an explicit locally free
 resolution, since transverse graph extensions
 cannot alter the degree-two obstruction.
 
-Cycles 199--200 upgrade the last statement from ordinary extensions to every
-finite twisted complex on the seven transformed graph vertices. Cross-Ext is
-concentrated in degree three, so the degree-one cross-arrow quiver is acyclic;
-no cross-path or higher `A_infinity` product can return to cancel a diagonal
-degree-two obstruction. The nonzero projector coefficients then force a
-nonzero graph obstruction. This does not yet close arbitrary retracts in the
-idempotent-complete thick category: generic-open localization can kill the
-global `H^1(N)` class, and K-additivity sees only the already-cancelled
-semiregularity image. Finite-cone candidates must add new or nontransverse
-support; closing the Karoubi boundary requires a new categorical theorem.
+Cycles 199--200 were claimed to upgrade the last statement to every finite
+twisted complex on the seven transformed graph vertices. That claim is
+retracted. Although the degree-one shifted-cell quiver is acyclic, its support
+labels admit `F_i[0] -> F_j[2] -> F_i[4]`; the two cross-`Ext^3` classes have
+a nonzero self-`Ext^6` product in total degree two. Thus cell acyclicity does
+not prove diagonal no-cancellation. Cycle 245 bypasses this failure by using
+the entire punctured branch, not a small generic open: depth retains global
+`H^1(N)` while restriction kills all cross returns. Its finite-cell supported
+trace proves the no-go and, with Cycle 241, closes arbitrary retracts in this
+declared category. Finite-cone candidates must therefore add new or
+nontransverse support.
 
 Cycle 201 shows exactly what that theorem cannot be. For a retract
 `E --i--> C --p--> E`, Atiyah naturality gives
@@ -159,18 +166,19 @@ all pairwise `Ext^3` groups are nonzero. Thus only projector-sensitive,
 untraced information could close the boundary, and that information is
 presently just the unknown raw Atiyah corner itself.
 
-Cycle 241 supplies the missing noncentral-projector theorem by changing from
+Cycle 241 supplies a noncentral-projector normal form by changing from
 the packet-dependent vertex ordering to the intrinsic shift filtration in the
 minimal Ext category.  This category is connective and its degree-zero algebra
 is `C^7`.  Scalar cancellation followed by finite nilpotent triangular
 splitting puts every finite strict projector, after harmless contractible
 stabilization, into `1_D direct-sum 0` with `D` another finite graph twisted
-complex.  Therefore the finite twisted-complex category is already Karoubian,
-and Cycle 200 applies to every object of the thick closure.  Generic Euler
+complex. Therefore the finite twisted-complex category is already Karoubian,
+so every object of the thick closure has a finite model. Generic Euler
 multiplicities detect the seven nonzero `xi` coordinates, and Atiyah naturality
-identifies the resulting obstruction with a nonzero projector corner.  This is
-`KI240 PASS` for the specified support category, with no transfer to the full
-Hodge conjecture.  For a cohomological idempotent represented by `a` with
+would identify an independently proved finite-model obstruction with a
+projector corner. Cycle 245's proposed global punctured-support proof lacks the
+chain-level comparison isolated in Cycle 246, so `KI240` remains `INCOMPLETE`.
+For a cohomological idempotent represented by `a` with
 `a^2-a=dh`, Cycle 241 first iterates
 `a -> a+(1-2a)(a^2-a)`: the new defect is
 `-3(a^2-a)^2+4(a^2-a)^3`, with an explicit primitive, so finite nilpotence

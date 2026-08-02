@@ -1,23 +1,97 @@
 # millennium state — dedicated working memory
 
-- 2026-08-02: RH bounded scout clips the clipping architecture itself. Cycle
-  207 remains a valid finite perturbation lemma, but Cycle 208 cannot bypass
-  the Cycle 174/206 equivalence: vanishing positive canonical exhaustions for
-  shifted xi through shifts tending to zero are RH-equivalent. This is a
-  `WALL` for clipped canonical production. The replacement `NB242` gate asks
-  for one finite directed certificate
-  `P_(2N)<=(3/4)P_N` for the explicit logarithmic Nyman--Beurling taper. One
-  block is finite, falsifiable, and non-equivalent. If the same contraction
-  held at every dyadic descendant of a base scale, geometric decay, the
-  unconditional `A_N->0`, and the discrete Nyman--Beurling criterion would
-  prove the official RH statement. No cofinal contraction or RH result is
-  claimed. See
+- 2026-08-02: Cycle 246 assigns terminal `WALL` to the requested weight/
+  spectral-sequence and global punctured-support repair. The exact shifted
+  return `F_i[0] -> F_j[2] -> F_i[4]` has nonzero total-degree-two product, so
+  every reweighting lacks a permanent-cycle argument. Global punctured
+  restriction genuinely kills cross returns and preserves normal `H^1` by
+  depth, but the step from raw Atiyah vanishing to `c_k rho_k(v)=0` requires an
+  unconstructed chain map from the twisted endomorphism complex to punctured
+  normal cohomology. Traced supported Chern characters factor through
+  supported `K_0` and do not supply this untraced comparison. Hence Cycle 245
+  is conditional. This is a method `WALL`, not a bad packet: the finite theorem
+  and `KI240` remain `INCOMPLETE`, not `FAIL`. No Hodge result is claimed. See
+  `millennium-prize/hodge/cycle-246-weight-and-punctured-support-wall.md`.
+
+- 2026-08-02: Cycle 245 proposes a global punctured-support repair of the finite
+  graph twisted-complex obstruction, but does not establish it. For
+  each graph `G_k`, restriction to
+  `V_k=A_0 minus union_(ell!=k) G_ell` kills every other vertex and every shifted
+  cross-return term. Deleting the finite graph intersections preserves the
+  normal `H^1` by depth. The finite-cell Koszul leading-support edge sends the
+  supertraced restricted Atiyah obstruction to `c_k rho_k(v)`; shifts give the
+  Euler signs and twisting corrections are claimed to be trace-zero
+  commutators. However, no chain map from the raw obstruction complex to the
+  punctured normal `H^1` target is constructed, and compatibility of the
+  conormal edge with the twisting differential is not checked. Thus the key
+  finite-cell lemma remains unproved and does not restore `KI240 PASS`.
+  `KI240` remains `INCOMPLETE`; no Hodge result is claimed. See
+  `millennium-prize/hodge/cycle-245-global-punctured-support-repair.md`.
+
+- 2026-08-02: urgent post-audit correction retracts the Cycle 200 boxed
+  finite-twisted-complex theorem and `KI240 PASS`. The missed exact path is
+  `F_i[0] -> F_j[2] -> F_i[4]` for `i!=j`: both arrows come from cross
+  `Ext^3`, and their nonzero product lies in self `Ext^6`, hence has total
+  degree two after the shifts. A cell/shift/bar filtration merely puts this
+  return on a later spectral-sequence page; it supplies no vanishing theorem or
+  permanent-cycle argument for the diagonal Atiyah class. The Cycle 241
+  connective Karoubi normal form may still split retracts into finite twisted
+  complexes, but Cycle 200 no longer obstructs all such complexes. This is a
+  counter-path to the proof, not an all-nine-zero packet: `KI240` is
+  `INCOMPLETE`, not `FAIL`, and no Hodge result is claimed. See
+  `millennium-prize/hodge/cycle-200-graph-triangulated-envelope-hostile-audit.md`
+  and `millennium-prize/hodge/cycle-241-connective-karoubi-normal-form.md`.
+
+- 2026-08-02: Cycle 244 retracts the recorded `KI240 PASS`. Cycle 241 retains
+  its abstract finite connective Karoubi normal form, but its deduction of
+  `KI240` depends on the Cycle 200 finite-twisted-complex obstruction claim.
+  Cycle 200 does not prove that a nonzero vertex obstruction on the associated
+  graded survives in total `Ext^2`; it gives neither a filtered survival theorem
+  nor a chain-level functional excluding total coboundaries. Thus the Cycle 200
+  endpoint and `KI240` are `INCOMPLETE`, and the graph-generated category is not
+  recorded as closed. `NB242` remains only a trivial small-`N` calibration, and
+  `F242` remains `INCOMPLETE` before its explicit geometric input and
+  computation. The portfolio nevertheless preserves focused Navier--Stokes
+  discovery `LA242`: this now follows from the corrected actionable-target
+  comparison, not from a terminal Hodge pass. Graph enumeration stays stopped;
+  the only direct `KI240` continuation is a repair of the Cycle 200
+  obstruction-survival gap. See
+  `millennium-prize/cycle-244-portfolio-status-correction.md`.
+
+- 2026-08-02: Cycle 243 performs the mandatory structural reduction before the
+  F242 `5^54` enumeration. Writing `M=[L_1 L_2 L_3]`, closed immersion is the
+  exact difference-scheme condition that the inverse image of `ker M` under
+  `(C x C)^3 -> E_i^9` has only diagonal points, together with tangent
+  injectivity; equivalently, the scheme fiber product is the diagonal.
+  Since the Fermat Abel--Jacobi difference image has dimension two, every
+  survivor has `rank M=6` and `rank L_r>=2`. The universal gate-preserving
+  symmetry `C_4 x S_3` gives exactly
+  `(n^3+3n^2+5n+15)/24` orbits for `n=5^18`, with a verifier and explicit
+  stabilizer rule. Irregularity nine excludes a smooth graph but does not make
+  the independent seven-graph cohomology test redundant; embedded-normal
+  vanishing does imply structure-sheaf Atiyah vanishing. No universal
+  full-rank obstruction is available before the three elliptic quotient maps,
+  isogeny, `phi`, difference scheme, differential, and `gamma` are printed.
+  Thus F242 is currently `INCOMPLETE` before enumeration, not `FAIL`. See
+  `millennium-prize/hodge/cycle-243-f242-structural-reduction.md`.
+
+- 2026-08-02: hostile RH audit verifies the logarithmic Nyman--Beurling signs,
+  restricted/full tail split, and exact restricted Vasyunin Gram formula.  The
+  proposed `NB242` one-block gate is already passed at `N=3`: a 256-bit directed
+  calculation gives `P_6/P_3` near `0.4865721044160978480<3/4`.  This is only a
+  finite calibration and has zero barrier-crossing and official-transfer score;
+  an isolated block gives no control of later descendants, and the existential
+  statement is not globally finitely falsifiable.  If the contraction held at
+  every dyadic descendant of a base scale, geometric decay, the unconditional
+  `A_N->0`, and the discrete Nyman--Beurling criterion would prove RH.  No
+  cofinal contraction or RH result is claimed. See
   `millennium-prize/riemann-hypothesis/cycle-242-nyman-beurling-finite-transfer-gate.md`.
 
-- 2026-08-02: Cycle 242 applies the stop rule after `KI240 PASS`.  The pass is
-  preserved as closure of the declared graph-generated Karoubi boundary, but
-  its official transfer is zero, so graph packets, enlarged graph sets, and
-  equivalent graph-support presentations are no longer an active Hodge funnel.
+- 2026-08-02: Cycle 242 originally applied the stop rule after a claimed
+  `KI240 PASS`. Cycle 244 retracts that status because the inherited Cycle 200
+  obstruction-survival step is incomplete. Graph packets, enlarged graph sets,
+  and equivalent graph-support presentations nevertheless remain outside the
+  active funnel; only a direct repair of that gap can resume `KI240`.
   The six-lane review again places Navier--Stokes first at `(1,1,0,1)`, but no
   finite production object exists after the finite-support rigidity theorem and
   the two exact Fibonacci-tail obstructions.  The portfolio therefore selects
@@ -65,11 +139,13 @@
   punctured support. This is not formal from additive motives or ordinary
   semiregularity. Therefore the additive-motive route is `WALL` and does not by
   itself decide `KI240`; the separate connective normal-form theorem below
-  claims the gate pass. No Hodge result is claimed. See
+  closes only retract representation, and its former gate pass is retracted by
+  the Cycle 244 shifted-return audit. No Hodge result is claimed. See
   `millennium-prize/hodge/cycle-241-additive-motive-wall-and-punctured-support-gate.md`.
 
-- 2026-08-02: Cycle 241 proves `KI240 PASS` by a connective Karoubi
-  normal-form theorem.  The minimal Ext category of `F_0,...,F_6` has no
+- 2026-08-02: Cycle 241 proves a connective Karoubi normal-form theorem, but
+  Cycle 244 retracts the resulting `KI240 PASS`. The minimal Ext category of
+  `F_0,...,F_6` has no
   negative morphisms and has degree-zero algebra `C^7`: cross Ext is confined
   to degree three and each vertex has scalar degree-zero endomorphisms.  For an
   arbitrary finite noncentral homotopy idempotent, scalar cancellation
@@ -80,11 +156,13 @@
   nilpotent triangular induction gives a finite stable block form
   `1_D direct-sum 0`.  Hence the finite twisted-complex category is already
   idempotent complete, so every retract is represented by a finite twisted
-  complex and the Cycle 200 obstruction theorem applies.  Generic-point Euler
+  complex. The former claim that the Cycle 200 obstruction theorem then applies
+  is retracted. Generic-point Euler
   multiplicities independently detect all seven nonzero coefficients of `xi`,
   while Atiyah naturality identifies the resulting nonzero class with one of
-  the nine projector corners.  This closes only the declared graph-generated
-  support category and has no Hodge-conjecture consequence.  See
+  the nine projector corners only if the incomplete Cycle 200 obstruction-
+  survival assertion is valid. Thus `KI240` is `INCOMPLETE`; no closure of the
+  declared graph-generated support category is claimed. See
   `millennium-prize/hodge/cycle-241-connective-karoubi-normal-form.md`.
 
 - 2026-08-02: Cycle 239 focused discovery exactly rejects the direct infinite
@@ -848,9 +926,9 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 242 focused discovery `LA242` for a Lagrangian
-  critical-velocity amplification family; `KI240 PASS` is terminal at its
-  graph-generated scope and Hodge graph-support enumeration is stopped
+- **phase:** Cycle 246 preserves focused discovery `LA242` for a Lagrangian
+  critical-velocity amplification family; weight and punctured-support repairs
+  are terminal `WALL`, and `KI240` remains `INCOMPLETE`
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -1000,10 +1078,10 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   distinct graph cross-Ext is concentrated in degree three. After shifts, a
   degree-one cross-arrow quiver has no directed cycle: summing degrees around a
   cycle would give `3m=m`. Every finite twisted complex is therefore filtered
-  by an acyclic vertex order, and no cross-path or higher `A_infinity` product
-  can return to cancel a diagonal degree-two obstruction. Since every `c_k` is
-  nonzero and each graph has nonzero normal Kodaira--Spencer map, no finite
-  graph-sheaf cone with projector class has rank-zero Atiyah map. Hostile audit
+  by an acyclic shifted-cell order, but the exact path
+  `F_i[0] -> F_j[2] -> F_i[4]` returns to the same support. Its nonzero
+  `Ext^3 Ext^3 -> Ext^6` product has total degree two, so the claimed diagonal
+  no-cancellation and finite-cone theorem are retracted. Hostile audit
   rejects a stronger localization proof: restriction to a small open can kill
   the global `H^1(N)` obstruction. Thus arbitrary retracts in the Karoubi/thick
   closure are not excluded by K-additivity and the Ext quiver alone. No Hodge
@@ -1682,7 +1760,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 242
+- **cycle:** 246
 - **announcements:** none
 
 ## immutable target list
