@@ -1,5 +1,120 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: Navier Cycle 252 finds no exact factor-two seed among the
+  standard finite-dimensional Euler families. Point-vortex velocity is not in
+  `L^3` and has divergent energy; vortex blobs and Euler-alpha particles change
+  the equation; Kirchhoff ellipses, Stuart vortices, and desingularized
+  relative equilibria have isometry-constant norms; and real solutions in one
+  fixed finite Fourier support are stationary after mean removal by the
+  Elgindi--Hu--Sverak theorem. An exact smooth periodic 2.5D screen gives more:
+  for a steady 2D Euler carrier and a passively transported third component,
+  Minkowski and `(a^2+b^2)^(3/2)>=a^3+b^3` bound every two-time complete
+  velocity-`L^3` ratio by `2^(1/6)<2`. A time-dependent carrier returns to the
+  unresolved 2D gate. This retires the named architectures, not every possible
+  nonlinear finite-dimensional invariant manifold, and no Navier--Stokes or
+  Millennium result is claimed. See
+  `millennium-prize/navier-stokes/cycle-252-explicit-euler-family-scout.md`.
+
+- 2026-08-02: Strategic correction: the Cycle 251 assignment of bounded Hodge
+  campaign `F251` was immediately superseded by the concurrent theorem that
+  every `F242` map fails G0. Record `F242 RETIRED: G0 NO-GO`; do not enumerate
+  `5^54` maps or run G2/G3. This retires only that support architecture and is
+  not a Hodge result; `KI240` remains incomplete. The corrected main funnel is
+  focused Navier dynamics `ND251`: produce one deterministically specified
+  smooth mean-zero 2D Euler orbit with
+  `||K omega(T)||_3>(2+eta)||K omega(0)||_3`, complete self-induced dynamics
+  bounds and exact breakers, then supply the Cycle 211 full-PDE transfer packet.
+  The existing Hamiltonian rearrangement is kinematic only. No Millennium
+  result is claimed. See `millennium-prize/cycle-251-strategic-rotation.md`.
+
+- 2026-08-02: Hodge Cycle 251 gives the exact F242 one-factor deck-collision
+  filter and corrects the tempting overgeneralization of Cycle 250. For
+  `L=(ell_X ell_Y ell_Z)`, identical invariance under `sigma_j` occurs iff the
+  other two columns vanish; avoiding all three such invariances is exactly
+  `|supp(L)|>=2`, already implied by the block-rank gate. The stronger
+  fixed-locus mechanism used in Cycle 250 is avoided exactly when every column
+  is nonzero, equivalently no coordinate elliptic factor lies in `ker L`.
+  Exact enumeration of all `5^18` norm-one `6 x 3` matrices modulo
+  `Q(i)`-row space gives 160 classes, with rank counts `(1,31,127,1)` and matrix
+  counts `(1,484344,3990628320,3810706152960)`. There are 141 full-support
+  classes and `(5^6-1)^3=3813964890624` full-support matrices, so the new filter
+  rejects 732375001 matrices per block. It is only necessary: arbitrary
+  non-deck pairs still require the full difference-scheme test and cannot be
+  decided from column support alone. Full F242 enumeration and all later gates
+  remain `INCOMPLETE`; no Hodge result is claimed. See
+  `millennium-prize/hodge/cycle-251-f242-deck-collision-hostile-filter.md`.
+
+- 2026-08-02: Cycle 251 gives a finite mapping-class rejection of each fixed
+  Cycle 250 instance supplied with the now-explicit Morse/essential-contour
+  certificate.
+  Mean-zero Biot--Savart Euler flows are Hamiltonian and have identity mapping
+  class. If an identity-isotopic `eta` transported the pair, `B_N eta` would
+  stabilize `omega_0` while having hyperbolic class `B_N`, with trace
+  `N^2+2>2`. But a stabilizer of a Morse torus function with an essential
+  regular contour permutes finitely many primitive contour homology classes, so
+  no hyperbolic class can occur. The reverse direction fails as well. Measured
+  Reeb data and Casimirs match, energy was tuned equal, and harmonic impulse is
+  zero; circulation need not be computed because the identity-component gate
+  already fails. This does not reject the separate weak-density Hamiltonian
+  replacement, which changes the endpoint function. For every such replacement,
+  Kelvin's theorem requires exact preservation of the circulation function on
+  a matched measured Reeb graph and of the harmonic impulse; finite `L^2`
+  observable approximation supplies neither. Even matching these coadjoint
+  data is not sufficient: the final gate is an enclosure of the unique
+  self-induced Euler solution. No Euler, Navier--Stokes, or Millennium result is
+  claimed. See
+  `millennium-prize/navier-stokes/cycle-251-mapping-class-accessibility-obstruction.md`.
+
+- 2026-08-02: Cycle 251 removes the Cycle 250 mapping-class defect at the
+  static level. A finite-observable weak-density lemma approximates the action
+  of any area-preserving toral map, including `B_N`, on finitely many scalar
+  profiles by one smooth Hamiltonian diffeomorphism. The approximation is in
+  measure/`L^2`, not `C^0`, so it is compatible with the homotopy obstruction.
+  Strict endpoint energy signs on either side of the Cycle 250 amplitude survive;
+  the intermediate value theorem then retunes the amplitude to exact
+  homogeneous `H^-1` equality, while Sobolev continuity preserves a velocity
+  `L^3` ratio greater than two. Thus an identity-isotopic, indeed Hamiltonian,
+  smooth static pair exists. Its Hamiltonian path is externally generated and
+  is not a self-induced Euler path, so no Navier--Stokes or Millennium result is
+  claimed. See
+  `millennium-prize/navier-stokes/cycle-251-hamiltonian-equal-energy-rearrangement.md`.
+
+- 2026-08-02: Cycle 251 rotates the main funnel from Navier focused discovery
+  `LA242` to a bounded Hodge `F251` campaign on `F242` candidates. Cycle 250
+  passes Navier's static equal-energy/equimeasurable velocity-`L^3` screen, but
+  supplies no self-induced Euler path or PDE transfer packet, so Navier remains
+  `(1,1,0,1)`. F242 now has explicit fixed geometry, an exact exceptional-Weil
+  prefilter, and a corrected finite source-level closed-immersion procedure for
+  each labelled triple; its candidate-admission target scores `(1,1,1,0)` and wins
+  lexicographically. The third coordinate is only per-candidate exact
+  falsifiability, not feasible exhaustion of `5^54`. The assigned campaign must
+  freeze and disposition candidates exactly through rank/Weil, G0, G2, and G3;
+  rejection of any bounded list is not `F242 FAIL`, while a pass only admits one
+  object to a later all-order deformation/algebraization gate. RH's fixed
+  dyadic contraction route is terminal by Cycle 248. No Millennium result is
+  claimed. This assignment was immediately superseded by the F242 G0 no-go and
+  is retained only as chronology; the current decision is the strategic
+  correction at the top of this file. See
+  `millennium-prize/cycle-251-strategic-rotation.md`.
+
+- 2026-08-02: Cycle 251 closes the proposed F242 norm-one enumeration by a
+  source-level no-go. For every full-rank `M`, on the abelian threefold
+  `K=ker(M)^0` the three restricted difference divisors have quartic tangent
+  cones. A common projective tangent zero, including one with zero tangent
+  components, is exactly a failure of tangent injectivity. Without one, `K` is
+  a smooth abelian threefold, the restrictions are nonzero Cartier divisors,
+  and the identity intersection has length `4^3=64`. The proper effective
+  intersection is positive and its classes make it divisible by `8^3=512`;
+  an improper intersection already has nonzero points. Properness of the
+  difference map lifts the forced nonzero point to actual source pairs. Thus every
+  tangent-injective candidate has a nonzero difference collision, and every
+  remaining candidate is non-unramified. No `5^54` search is needed and no
+  F242 triple is a closed immersion. The certified box symmetry is enlarged
+  to `V4^3 semidirect S3`, times ambient `C4`; general `GL6(Z[i])` and arbitrary
+  column operations are not valid combined-gate quotient symmetries. This
+  retires only F242 and is not a Hodge result. See
+  `millennium-prize/hodge/cycle-251-f242-tangent-intersection-no-go.md`.
+
 - 2026-08-02: The Hodge Cycle 250 exact one-witness test resolves the Cycle 249
   sparse `S=-i` candidate. Its twenty tangent minors plus the three Fermat
   equations generate the unit ideal on all 27 projective patches over `Q(i)`,
@@ -1017,10 +1132,11 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 247 preserves focused discovery `LA242` after proving that
-  literal full-vorticity `dot H^-1` growth is off the Euler energy shell; the
-  viable target is fixed-`dot H^-1`, variable-`W^(-1,3)` amplification, while
-  `KI240` remains `INCOMPLETE`
+- **phase:** Cycle 252 runs focused Navier dynamics `ND251` after the exact
+  F242 source-level no-go retired that Hodge support architecture. Literal
+  full-vorticity `dot H^-1` growth is off the Euler energy shell; the viable
+  target is fixed-`dot H^-1`, variable-`W^(-1,3)` amplification, while `KI240`
+  remains `INCOMPLETE`.
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -1852,7 +1968,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 250
+- **cycle:** 252
 - **announcements:** none
 
 ## immutable target list

@@ -1,5 +1,54 @@
 # Routes
 
+Cycle 252 scouts the standard explicit finite-dimensional Euler families and
+finds no factor-two seed. Point vortices have infinite velocity `L^3` and
+energy; regularized particles solve a different equation; Kirchhoff, Stuart,
+and smooth relative equilibria have isometry-constant norms; and real fixed
+finite Fourier support is stationary after mean removal. For the exact smooth
+periodic 2.5D class consisting of a steady 2D carrier and a passively transported
+third component, a new uniform estimate bounds every two-time complete-velocity
+`L^3` ratio by `2^(1/6)`. A time-dependent carrier does not evade the 2D gate.
+The result retires these named architectures but is not a universal
+classification of finite-dimensional invariant manifolds. See
+`cycle-252-explicit-euler-family-scout.md`.
+
+Cycle 251 closes the fixed Cycle 250 endpoint pair once its finite
+Morse/essential-contour certificate is fixed. Every stabilizer mapping class
+then preserves a finite set of primitive contour homology labels and cannot be
+hyperbolic. Any identity-isotopic map transporting the Cycle 250 pair would
+make `B_N eta` stabilize `omega_0`, but its class is `B_N` with trace
+`N^2+2>2`. Thus no identity-isotopic map with the same pullback, and hence no
+Euler flow, joins the certified fixed pair. Measured Reeb data, energy,
+Casimirs, and zero impulse are nondecisive; the finite gate now tests
+mapping-class compatibility before
+Reeb circulation and the self-induced path equation. See
+`cycle-251-mapping-class-accessibility-obstruction.md`. This does not conflict
+with the Hamiltonian weak-density replacement below, which changes the endpoint
+function. That replacement must separately preserve Kelvin circulation on the
+measured Reeb graph; finite-observable `L^2` approximation does not imply this.
+
+Cycle 251 proves that identity isotopy is not a static obstruction to the
+Cycle 250 pair. Hamiltonian diffeomorphisms are weakly dense for any finite
+collection of scalar observables even across mapping classes: localized disc
+permutations reproduce the `B_N` pullbacks in `L^2` while concentrating the
+unavoidable topological seams on vanishing area. The strict energy-defect signs
+on either side of the tuned amplitude and the strict `L^3` gap survive this
+replacement. Retuning by the intermediate value theorem gives exact
+homogeneous-`H^-1` equality and ratio greater than two for one smooth
+Hamiltonian endpoint map. Uniform or `C^0` approximation remains impossible,
+and the Hamiltonian isotopy is not self-induced by its transported vorticity.
+The sole live gate is therefore Euler dynamical accessibility, not mapping
+class. See `cycle-251-hamiltonian-equal-energy-rearrangement.md`.
+
+The concurrent Hodge G0 no-go immediately supersedes the earlier Cycle 251
+rotation to `F242`. Navier therefore retakes the main funnel as focused dynamics
+`ND251`, still scored `(1,1,0,1)`. The exact target is one deterministically
+specified smooth Euler orbit with a directed velocity-`L^3` ratio greater than
+`2+eta`, complete generated-scale bounds and exact breakers, followed by the
+Cycle 211 stability, inviscid-transfer, scaling, and endpoint-enclosure packet.
+The Hamiltonian replacement above is kinematic input only; another static
+rearrangement is insufficient. See `../cycle-251-strategic-rotation.md`.
+
 Cycle 247 rejects the literal homogeneous-`H^-1`-growth version of Lagrangian
 unmixing.
 For mean-zero 2D Euler, `||omega||_(dot H^-1)=||u||_2` is conserved, so every

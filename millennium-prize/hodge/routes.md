@@ -1,5 +1,22 @@
 # Routes
 
+Cycle 251 subsequently closes the entire F242 candidate campaign before
+enumeration. On `K=ker[M_1 M_2 M_3]^0`, tangent injectivity makes the three
+quartic tangent-cone equations, including zero-component tangent relations, a
+regular sequence with identity multiplicity 64. It also makes the restricted
+Cartier divisors nonzero. Their proper effective intersection is positive and,
+because `[D]=8 Theta`, divisible by 512; a positive-dimensional intersection
+already has nonzero points. Properness lifts such a point to source pairs, so every tangent-injective map
+has a nonzero source collision. Every other map is non-unramified. Thus F242
+has no closed-immersion candidate and the `5^54` search is retired; this is not
+a Hodge result. See `cycle-251-f242-tangent-intersection-no-go.md`.
+
+The earlier Cycle 251 promotion of a bounded `F242` campaign was immediately
+superseded by the no-go above. Record `F242 RETIRED: G0 NO-GO`; there are no G0
+survivors to send to G2 or G3. The corrected main funnel is focused Navier
+dynamics. This retires only F242 and leaves `KI240` incomplete. See
+`../cycle-251-strategic-rotation.md`.
+
 Cycle 244 correctly retracts Cycle 200's filtration proof: the shifted path
 `F_i[0] -> F_j[2] -> F_i[4]` prevents a weight-only permanent-cycle argument.
 Cycle 245 proposes a different method: punctured-branch restriction kills cross
@@ -9,9 +26,9 @@ does not restore `KI240 PASS`. Cycle 246 makes this terminal for weight and
 leading punctured-support methods: they are `WALL`, while the gate remains
 `INCOMPLETE`. Do not
 enumerate more graph packets or revisit equivalent additive, Fourier--Mukai,
-linkage, Ferrand, or projector presentations. A genuinely new non-graph
-mechanism remains separate. The active portfolio remains Navier focused
-discovery `LA242`; see `../cycle-244-portfolio-status-correction.md` and
+linkage, Ferrand, or projector presentations. `F242` is the separate bounded
+non-graph mechanism; graph-generated support stays retired. See
+`../cycle-244-portfolio-status-correction.md` and
 `cycle-246-weight-and-punctured-support-wall.md`.
 
 ## Cycle 242 Fermat-product image scout

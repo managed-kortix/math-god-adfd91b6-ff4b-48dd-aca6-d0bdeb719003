@@ -1,5 +1,70 @@
 # Notebook
 
+## Cycle 252 explicit Euler-family scout
+
+The standard finite-dimensional candidates do not supply the fixed-energy
+velocity-`L^3` factor-two orbit. Point-vortex velocity is outside both `L^3`
+and finite energy; blobs and Euler-alpha particles change the equation;
+Kirchhoff ellipses, Stuart vortices, and desingularized relative equilibria
+move by isometries and have constant `L^3`; and exact real finite-Fourier
+motion is stationary by Elgindi--Hu--Sverak rigidity. There is one useful new
+exact screen for smooth periodic 2.5D flow. If a steady 2D Euler carrier
+transports a passive third component, then at every two times the complete
+velocity ratio is at most `2^(1/6)`, by Minkowski in `L^(3/2)` and
+`(a^2+b^2)^(3/2)>=a^3+b^3`. A time-dependent carrier returns to the unresolved
+2D `L^3` problem. This is a no-go for the named families, not a classification
+of every nonlinear finite-dimensional invariant manifold. See
+`cycle-252-explicit-euler-family-scout.md`.
+
+## Cycle 251 mapping-class accessibility obstruction
+
+The fixed Cycle 250 pair is dynamically inaccessible after a finite Morse/
+essential-contour certificate. A mean-zero Biot--Savart Euler flow is
+Hamiltonian, hence
+its endpoint has trivial mapping class. If such an endpoint map `eta`
+transported the pair, `s=B_N eta` would stabilize `omega_0` while representing
+the hyperbolic class `B_N`, whose trace is `N^2+2>2`. A stabilizer of a Morse
+function with an essential regular contour cannot be hyperbolic: a power must
+fix one primitive contour homology class up to sign. This excludes every
+identity-isotopic map with the same pullback, not only the displayed
+automorphism. This does not reject the weak-density Hamiltonian construction,
+which changes the endpoint function and retunes the amplitude. Every such new
+pair must additionally preserve Kelvin circulation on an explicitly matched
+measured Reeb graph; `L^2` pullback approximation gives no contour-integral
+control. The finite admission gate now checks Morse/essential-contour and mapping-class
+compatibility before Reeb circulation and the self-induced path equation. See
+`cycle-251-mapping-class-accessibility-obstruction.md`.
+
+## Cycle 251 Hamiltonian replacement of the Cycle 250 map
+
+The nonidentity mapping class of `B_N` obstructs uniform approximation by flow
+maps but does not obstruct approximation in measure of finitely many scalar
+pullbacks. Finite equal-area disc rearrangements can be implemented by compactly
+supported Hamiltonian motions, making Hamiltonian maps weakly dense for the two
+Cycle 250 profiles. Their transported vorticities converge in `L^2`; the
+Biot--Savart images consequently converge in both `L^2` and `L^3`. Choose two
+amplitudes bracketing the exact Cycle 250 energy root. A sufficiently accurate
+single Hamiltonian rearrangement preserves the opposite energy-defect signs and
+the strict factor-two ratio throughout the bracket. Intermediate-value tuning
+then restores exact energy equality. This gives a smooth identity-isotopic
+static pair but no self-induced Euler path. See
+`cycle-251-hamiltonian-equal-energy-rearrangement.md`.
+
+## Cycle 251 corrected active frontier
+
+Cycle 250 passes the static equal-energy and equimeasurable endpoint screen with
+a directed velocity-`L^3` ratio greater than two. It supplies no self-induced
+Euler path, and its nontrivial `SL(2,Z)` automorphism cannot itself be a
+finite-time flow map. Cycle 251 replaces that endpoint map by a Hamiltonian one,
+but its isotopy is externally prescribed rather than self-induced. Thus `LA242`
+still lacks a finite dynamical production object. The concurrent F242 G0 no-go
+supersedes the attempted Hodge rotation, so Navier retakes the main funnel as
+focused dynamics `ND251`. Its exact target is one actual smooth Euler orbit
+with directed velocity-`L^3` amplification greater than `2+eta`, complete
+generated-scale bounds, exact breakers, and the Cycle 211 PDE transfer packet.
+See
+`../cycle-251-strategic-rotation.md`.
+
 ## Cycle 247 fixed-energy unmixing obstruction
 
 The proposed increase of full-vorticity homogeneous `H^-1` along a 2D Euler

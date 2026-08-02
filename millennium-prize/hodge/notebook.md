@@ -1,5 +1,14 @@
 # Notebook
 
+## Cycle 251 strategic rotation
+
+The initial rotation from `LA242` to a bounded `F242` candidate campaign was
+immediately superseded by the Cycle 251 tangent-intersection no-go. Every F242
+map fails G0, so record `F242 RETIRED: G0 NO-GO`; do not enumerate the box or
+run G2/G3. This is only a support-architecture no-go, not a Hodge result, and
+`KI240` remains incomplete. The corrected main funnel is Navier dynamics
+`ND251`. See `../cycle-251-strategic-rotation.md`.
+
 ## Cycle 250 F242 sparse-witness geometry
 
 The Cycle 249 `S=-i` witness passes tangent injectivity exactly: in homogeneous
@@ -74,6 +83,28 @@ Thus the difference image remains an exact set-theoretic collision gate, but
 closed immersion must be checked on `C^3 times_(E^6) C^3=Delta` before the
 diagonals are contracted.  The exact nullspace/quartic Groebner prefilter is
 implemented in `verify_cycle250_f242_difference_gate.py`.
+
+## Cycle 251 F242 tangent-intersection no-go
+
+The F242 norm-one search is empty before enumeration. For a full-rank
+`M=[L1 L2 L3]`, let `K=ker(M)^0` and restrict the three difference divisors to
+`K`, a smooth abelian threefold in characteristic zero. Tangent injectivity is
+exactly the assertion that their three quartic tangent cones have no common
+projective zero, including tangent relations with zero components. It forces
+all three restrictions to be nonzero Cartier divisors, and their local
+intersection at the identity has length `4^3=64`. Properness makes the total
+intersection positive, while `[D]=8 Theta` makes it divisible by 512; an
+improper intersection already contains nonzero points. Properness of the
+difference map lifts every resulting point of `D^3` to actual source pairs.
+Hence every
+tangent-injective candidate has a nonzero difference collision, while every
+other candidate is non-unramified. No triple can be a closed immersion.
+Certified source deck symmetries enlarge the box-preserving action to
+`V4^3 semidirect S3`, times ambient `C4`, but quotienting is now unnecessary.
+General left `GL6(Z[i])` preserves only the geometric kernel question and gives
+a Gaussian row-Hermite representative, not generally `[I6 A]`; it preserves
+neither the box nor the fixed Weil projector. Arbitrary right column operations
+are not symmetries of `phi`. No Hodge result is claimed.
 
 ## Cycle 249 F242 exact Weil prefilter
 
