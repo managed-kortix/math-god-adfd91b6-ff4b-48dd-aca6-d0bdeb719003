@@ -1,5 +1,44 @@
 # Notebook
 
+## Cycle 264 directed-endpoint midpoint-Galerkin screen
+
+`C264-DE1` generates three fresh Cycle 257 variational centers at
+`rho=6,10,14`, then evolves them to `T=4` with the validated C263 midpoint
+Galerkin mechanism at `N64/128`. No retired Cycle 258 input is used. All local
+nonlinear-residual, invariant, identity, drift, and doubled-cubature gates pass,
+but `0/3` members reach the strict directed endpoint threshold `2.01`. The
+largest `N128` endpoint ratio is `1.004458193`; the largest sampled interior
+increase is `1.046663094` and receives no endpoint credit. This is
+finite-dimensional numerical evidence only. See
+`cycle-264-directed-endpoint-architecture.md` and
+`cycle-264-directed-endpoint-results.md`.
+
+## Cycle 264 strategic retention
+
+After formal closure of the bounded `43a1` side packet and its no-publication
+novelty decision, `ND251` remains the main funnel. `C263-MG1` supplies the
+required invariant-preserving finite Galerkin mechanism but no directed
+`2+eta` crossing and no full-Euler enclosure. The concurrently frozen
+`C264-DE1` directed-endpoint screen is a numerical main-lane campaign with no
+outcome yet recorded, not a theorem certificate. The five non-main lanes
+receive separate bounded scouts and do not displace Navier--Stokes. See
+`../cycle-264-strategic-review.md`.
+
+## Cycle 264 midpoint--tail--Picard interface
+
+`C264-MG255-IE1` gives the exact bridge from C263 midpoint trajectories to the
+Cycle 255 shrinking analytic Euler tail. Rational midpoint nodes define a
+piecewise-affine reference path; Cycle 255 shell sums produce the omitted-mode
+forcing, and recentered interval Picard inclusions enclose the continuous
+retained equations and endpoints. A floating midpoint trajectory is candidate
+generation only, and even interval Newton on the midpoint equation certifies
+only a discrete Galerkin step. Midpoint can be part of the rigorous PDE
+enclosure when its continuous defect, tail forcing, tube, and endpoint chain
+are interval-validated. Its energy/enstrophy identities remain redundant
+nominal integrity gates; retained invariants cannot be imposed as constants
+because of tail exchange. See
+`cycle-264-midpoint-tail-picard-interface.md`.
+
 ## Cycle 263 invariant-preserving Galerkin integrator
 
 `C263-MG1` freezes implicit midpoint on the exact symmetric square Galerkin

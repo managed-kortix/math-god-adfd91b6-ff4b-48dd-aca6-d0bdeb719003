@@ -1,5 +1,15 @@
 # Notebook
 
+## Cycle 264 bounded scout
+
+`R264-NB-DYADIC` freezes one complete dyadic endpoint functional for the actual
+logarithmically tapered Mobius coefficients, retaining constant, linear,
+retained-interval, and oscillatory terms. It must return either an exact signed
+divisor-sum inequality with symbolic scale or an exact counterexample at the
+first admissible scale, then stop without cutoff escalation. Finite positivity
+earns no RH credit. `ND251` remains the main funnel. See
+`../cycle-264-strategic-review.md`.
+
 ## Main-funnel cycles 78--79
 
 Nested Weil-spline Schur positivity is exactly finite Weil positivity and, after

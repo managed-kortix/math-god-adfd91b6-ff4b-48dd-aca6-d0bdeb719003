@@ -1,5 +1,15 @@
 # Notebook
 
+## Cycle 264 bounded scout
+
+`Y264-RG-TAIL` freezes one reflection-positive square-lattice `SU(2)` blocking
+step and its complete character/loop tail. It must prove a representation-
+cutoff-uniform weighted contraction on the induced complement or exhibit a tail
+family violating every declared weight budget, then stop after that blocking
+architecture. Finite truncations and fixed-coupling gaps receive no continuum
+credit. `ND251` remains the main funnel. See
+`../cycle-264-strategic-review.md`.
+
 ## Continuum admission audit cycle 236
 
 `CA235 FAIL` is terminal. The exact Cycle 235 gap is off the asymptotically

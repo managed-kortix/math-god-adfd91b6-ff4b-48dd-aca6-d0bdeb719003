@@ -1,5 +1,31 @@
 # Notebook
 
+## Formal `43a1` packet closure cycle 264
+
+The one Cycle 261 side packet is terminally closed. Its internal theorem target
+succeeds within the explicit PARI/eclib and cited-theorem trust boundary, while
+the independent novelty gate classifies it as `ROUTINE/KNOWN-IN-PRACTICE` and
+forbids publication, contact, OCB, X, manifest, or any other external workflow.
+Retain the packet only as an internal reproducibility case study; do not reopen
+it, repackage it, or move to nearby curves or fields. BSD remains a bounded
+non-main lane. Its next scout is the source-only `B264-DL-AUDIT`, not another
+isolated arithmetic computation. See `../cycle-264-strategic-review.md`.
+
+## Exact `43a1` BSD corollary cycle 264
+
+The Cycle 263 Sha theorem upgrades routinely to the full rank-one BSD formula
+for this specified curve. For the global minimal `-7` twist, the exact plus
+modular symbol at zero is `2`; the real-component factor is also `2`, so
+`L(E^(-7),1)=Omega_(E^(-7))` exactly. The normalized Gross--Zagier formula and
+the Cycle 261 identity `y_K=P` then give
+`L'(E,1)L(E^(-7),1)=Omega_E Omega_(E^(-7)) height(P)`. Cancelling the nonzero
+twist period yields `L'(E,1)=Omega_E height(P)`. Cycle 263 supplies
+`Sha=0`, torsion zero, Tamagawa product one, and `E(Q)=ZP`, so this is exactly
+the BSD arithmetic side. Gross--Zagier is independent of BSD, and the Sha
+proof did not use a BSD quotient, so there is no circularity. This is a
+curve-specific corollary with no novelty and no general BSD implication. See
+`cycle-264-43a1-exact-bsd-corollary.md`.
+
 ## `43a1` Shafarevich--Tate vanishing theorem cycle 263
 
 The bounded packet now proves `Sha(43a1/Q)=0` within its stated theorem-backed

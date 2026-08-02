@@ -1,5 +1,14 @@
 # Notebook
 
+## Cycle 264 bounded scout
+
+`P264-AMT-GADGET` freezes one selector-free MCSP address/data gadget for the
+`AMT(n,s,m)` template. It must prove a one-gate easy/hard circuit-size gap after
+maximizing over every unqueried component or print an explicit shared circuit
+that violates direct sum, then stop with that gadget. A pass remains an MCSP
+transfer checkpoint, not `P != NP`. `ND251` remains the main funnel. See
+`../cycle-264-strategic-review.md`.
+
 ## Cycle 208
 
 The exact selector-free MCSP target is the asymmetric template: at every

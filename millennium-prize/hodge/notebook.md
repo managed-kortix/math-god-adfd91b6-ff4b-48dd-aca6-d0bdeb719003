@@ -1,5 +1,15 @@
 # Notebook
 
+## Cycle 264 bounded scout
+
+`H264-KI-MIN` freezes only the minimal two-vertex shifted-return model for
+`F_i[0] -> F_j[2] -> F_i[4]`. It must compute the total endomorphism complex
+and either exhibit a chain-level cocycle/dual-cocycle preserving the diagonal
+`Ext^2` obstruction or an explicit differential killing it. Stop after this
+model: survival is only a mechanism test, not `KI240 PASS`, and a kill retires
+this repair ansatz. `ND251` remains the main funnel. See
+`../cycle-264-strategic-review.md`.
+
 ## Cycle 258 abelian-fourfold theta-section no-go
 
 A genuinely non-graph support on `E_i^6` is obtained by embedding `E_i^4` as

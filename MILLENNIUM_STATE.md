@@ -1,5 +1,34 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: Cycle 264 formally closes the single bounded `43a1` side packet.
+  Its internal target succeeds: `Sha(43a1/Q)=0` holds within the stated
+  theorem-backed exact-computation trust boundary. Its publication gate is a
+  terminal no-go: `ROUTINE/KNOWN-IN-PRACTICE`, no defensible novelty, and no
+  publication, contact, OCB, X, manifest, or other external workflow action.
+  The packet remains internal and must not expand to nearby curves, fields, or
+  repackaging. `ND251` remains the main funnel; `C263-MG1` is invariant-
+  preserving finite-dimensional infrastructure and the concurrently frozen
+  `C264-DE1` is a numerical screen with no outcome yet recorded. Neither
+  supplies a certified `2+eta` Euler crossing or full-PDE enclosure. The five non-main lanes receive
+  bounded admission scouts `H264-KI-MIN`, `R264-NB-DYADIC`,
+  `P264-AMT-GADGET`, `Y264-RG-TAIL`, and `B264-DL-AUDIT`, each with a single
+  exact pass/wall or pass/counterexample stop and no publication consequence.
+  See `millennium-prize/cycle-264-strategic-review.md`.
+
+- 2026-08-02: Navier Cycle 264 freezes `C264-MG255-IE1`, the exact interface
+  from C263 midpoint trajectories to the Cycle 255 shrinking analytic Euler
+  tail and interval Picard slabs. Rational midpoint nodes define an affine
+  reference on each slab; the verifier recomputes its continuous defect,
+  complete analytic-tail omitted-convolution boxes, recentered Picard tube,
+  endpoint chain, full-tail cubature, and strict rational conclusion. Floating
+  midpoint is candidate generation only. Interval Newton for the midpoint
+  equation proves only a discrete Galerkin step. Midpoint becomes part of a
+  rigorous full-PDE enclosure only when the continuous defect/Picard tests
+  pass. Finite retained energy and enstrophy identities are redundant nominal
+  integrity gates, not PDE conservation constraints, because unresolved modes
+  exchange both quantities. No family was run and no crossing is claimed. See
+  `millennium-prize/navier-stokes/cycle-264-midpoint-tail-picard-interface.md`.
+
 - 2026-08-02: Hostile publication review classifies the Cycle 263 theorem
   `Sha(43a1/Q)=0` as `ROUTINE/KNOWN-IN-PRACTICE`. Although the internal packet
   records a valid curve-specific theorem within its stated trust boundary, the
@@ -1405,7 +1434,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 263 keeps focused Navier dynamics `ND251` in
+- **phase:** Cycle 264 keeps focused Navier dynamics `ND251` in
   production-architecture discovery. The frozen Cycle 258 family is retired
   from production after `C258-V1` promotes `0/4` at its conservation gate. The
   next architecture must preserve Galerkin energy and enstrophy by construction
@@ -2247,7 +2276,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 263
+- **cycle:** 264
 - **announcements:** none
 
 ## immutable target list
