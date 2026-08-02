@@ -1,0 +1,69 @@
+{
+  "candidate": "K-(1/32)F(K)",
+  "coefficient_a_in_cycle265_parameterization": -2,
+  "coefficient_b_in_cycle265_parameterization": 0,
+  "cutoff": 18,
+  "format": "C266-KP1-initial-direction",
+  "grids": [
+    {
+      "analytic_cubature_remainders": {
+        "cube": 67.15446524013936,
+        "cube_first": 439.1905674320682,
+        "cube_second": 4927.729587560672
+      },
+      "candidate_l3_cube": 0.905149277993406,
+      "candidate_l3_cube_derivative": 0.03566000158437775,
+      "candidate_l3_cube_second_derivative": -1.1318037614089174,
+      "candidate_log_l3_derivative": 0.013132272746373639,
+      "candidate_log_l3_second_derivative": -0.4173192494545999,
+      "directional_derivative_at_kida_along_minus_F": 1.1439732900842858,
+      "grid": 64,
+      "quadratic_peak_log_growth": 0.00020662429028918945,
+      "quadratic_turning_time": 0.03146816918590834
+    },
+    {
+      "analytic_cubature_remainders": {
+        "cube": 44.76964349342624,
+        "cube_first": 292.7937116213788,
+        "cube_second": 3285.1530583737817
+      },
+      "candidate_l3_cube": 0.9051474833021876,
+      "candidate_l3_cube_derivative": 0.03564433751020102,
+      "candidate_l3_cube_second_derivative": -1.1317220837278537,
+      "candidate_log_l3_derivative": 0.013126530268180614,
+      "candidate_log_l3_second_derivative": -0.41728954454272993,
+      "directional_derivative_at_kida_along_minus_F": 1.1428617912185741,
+      "grid": 96,
+      "quadratic_peak_log_growth": 0.0002064583202896639,
+      "quadratic_turning_time": 0.031456647883581164
+    },
+    {
+      "analytic_cubature_remainders": {
+        "cube": 33.57723262006968,
+        "cube_first": 219.5952837160341,
+        "cube_second": 2463.864793780336
+      },
+      "candidate_l3_cube": 0.9051473044461699,
+      "candidate_l3_cube_derivative": 0.03564180184446933,
+      "candidate_l3_cube_second_derivative": -1.1317415115365734,
+      "candidate_log_l3_derivative": 0.013125599067096004,
+      "candidate_log_l3_second_derivative": -0.4172967081245875,
+      "directional_derivative_at_kida_along_minus_F": 1.1425957020233901,
+      "grid": 128,
+      "quadratic_peak_log_growth": 0.0002064254851714711,
+      "quadratic_turning_time": 0.03145387637032891
+    }
+  ],
+  "kida_constraint_variations_along_minus_F": {
+    "energy": -9.297267052992386e-19,
+    "enstrophy_like": -1.0226993758291752e-17,
+    "helicity": -1.1475529610586212e-18
+  },
+  "pde_certificate": false,
+  "phase": [
+    0,
+    0,
+    0
+  ],
+  "status": "DETERMINISTIC_NUMERICAL_REPLAY"
+}

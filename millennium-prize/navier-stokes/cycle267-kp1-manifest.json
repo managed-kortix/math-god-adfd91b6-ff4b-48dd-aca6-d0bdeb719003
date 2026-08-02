@@ -1,0 +1,80 @@
+{
+  "format": "C267-KP1-manifest-v1",
+  "status": "FROZEN_BEFORE_TRAJECTORY_COMPUTE",
+  "independence": "single profile selected independently of the resource-stopped C266 family screen",
+  "profile": {
+    "name": "K-F(K)/32",
+    "base": "exact Kida-Pelz trigonometric velocity",
+    "construction": "K-(1/32) times the exact cubic-Galerkin Euler vector field at K",
+    "normalization": "none"
+  },
+  "direction_selection": {
+    "input": "initial derivative only",
+    "replay": "cycle266_kida_direction.py",
+    "observed_sign": "positive forward derivative of velocity L3 cubature",
+    "policy": "forward endpoints only; no reversal or post-output horizon changes"
+  },
+  "directed_horizons": [0.5, 1.0, 2.0],
+  "levels": [
+    {
+      "name": "K7",
+      "cubic_cutoff": 7,
+      "dealiased_fft_side": 29,
+      "steps_per_unit_time": 64,
+      "endpoint_cubature_grids": [48, 96]
+    },
+    {
+      "name": "K10",
+      "cubic_cutoff": 10,
+      "dealiased_fft_side": 41,
+      "steps_per_unit_time": 128,
+      "endpoint_cubature_grids": [64, 128]
+    }
+  ],
+  "integrator": {
+    "method": "implicit_midpoint",
+    "nonlinear_solver": "fixed-point Anderson depth 4",
+    "maximum_iterations_per_step": 80,
+    "unconverged_step": "fail_closed"
+  },
+  "gates": {
+    "nonlinear_residual_ratio_max": 1e-11,
+    "energy_tangency_max": 2e-12,
+    "helicity_tangency_max": 2e-12,
+    "energy_identity_closure_max": 2e-12,
+    "helicity_identity_closure_max": 2e-12,
+    "relative_energy_drift_max": 2e-9,
+    "energy_scaled_helicity_drift_max": 2e-9,
+    "divergence_defect_max": 2e-12,
+    "reality_defect_max": 2e-12,
+    "doubled_cubature_endpoint_ratio_difference_max": 0.002,
+    "cross_resolution_endpoint_ratio_difference_max": 0.02
+  },
+  "promotion": {
+    "objective": "directed endpoint complete velocity L3 ratio",
+    "architecture_signal_threshold": 1.2,
+    "certification_threshold": 2.2,
+    "comparison": "greater than or equal",
+    "required_levels": ["K7", "K10"],
+    "required_gates": "all local and cross-resolution gates"
+  },
+  "resource_policy": {
+    "maximum_cores": 2,
+    "thread_environment": ["OMP_NUM_THREADS=2", "OPENBLAS_NUM_THREADS=2", "MKL_NUM_THREADS=2", "NUMEXPR_NUM_THREADS=2"]
+  },
+  "stop_rules": {
+    "stop_after_declared_profile_levels_and_horizons": true,
+    "forbidden_after_output": [
+      "horizon extension",
+      "direction reversal",
+      "profile modification",
+      "step or resolution substitution",
+      "gate or threshold relaxation",
+      "interior-extremum promotion"
+    ]
+  },
+  "outcome_policy": {
+    "status": "NUMERICAL_ONLY",
+    "pde_certificate": false
+  }
+}

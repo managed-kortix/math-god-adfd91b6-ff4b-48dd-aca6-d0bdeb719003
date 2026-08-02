@@ -1,5 +1,20 @@
 # Notebook
 
+## Cycle 267 finite-dimensional genuine-3D Euler no-go
+
+Kishimoto--Yoneda's 3D finite-mode classification closes the fixed-support
+loophole omitted in the earlier 2D audit: every real mean-zero finite-mode
+Euler solution is stationary, and every one whose support spans three
+dimensions is Beltrami. A conserved mean adds only Galilean translation and
+keeps every velocity `Lp` norm constant. Therefore any invariant family inside
+one finite trigonometric space--linear, Lie-algebraic, nonlinear, singular, or
+coefficient-dependent--has constant `L3`. Periodic affine fields are constants.
+The exact stationary-base 2D3C linked-shear family can have variable `L3`, but
+its support is planar and its universal ratio remains at most `2^(1/6)`. The
+only unclosed finite-dimensional route requires a nonlinear parametrization
+with genuinely infinite Fourier support; no such family is produced. See
+`cycle-267-finite-dimensional-genuine-3d-euler-no-go.md`.
+
 ## Cycle 265 triangular skew-product classification
 
 Every stationary-base triangular 2D3C Euler flow has the exact form

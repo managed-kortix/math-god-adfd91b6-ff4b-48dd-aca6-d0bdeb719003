@@ -1,5 +1,19 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: The finite-dimensional genuine-3D Euler scout proves the exact
+  fixed-support no-go using Kishimoto--Yoneda's 3D classification. Every real
+  mean-zero finite-mode Euler solution is stationary; if its support spans
+  three dimensions it is Beltrami. A mean adds only Galilean translation, so
+  every velocity `Lp`, including `L3`, remains constant. This applies orbit by
+  orbit to every invariant linear, Lie-algebraic, algebraic, singular, or other
+  coefficient family contained in one finite trigonometric space. Nontrivial
+  affine-in-space fields cannot descend to the torus. The exact linked-shear
+  family with variable `L3` remains planar and obeys the sharp norm-only cap
+  `2^(1/6)<2`. A nonlinear finite-parameter family with genuinely infinite
+  Fourier support is not excluded and none is constructed. No Navier--Stokes
+  or Millennium result is claimed. See
+  `millennium-prize/navier-stokes/cycle-267-finite-dimensional-genuine-3d-euler-no-go.md`.
+
 - 2026-08-02: `C266-3DDE1` completes the Section 7 pre-compute freeze for all
   132 exact Kida--Pelz/tangent profiles. It fixes forward horizons `1,2,3,4`,
   cubic levels `K=7,10`, dealiased sides `29,41`, implicit-midpoint steps
@@ -1536,7 +1550,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 266 develops focused Navier dynamics `ND251` through genuine 3D
+- **phase:** Cycle 267 develops focused Navier dynamics `ND251` through genuine 3D
   Euler amplification architecture `C265-3D-ATI1`. The first frozen 3D
   alignment scout stops below its `1.2` gate; a new production manifest must
   use genuine stretching, directed endpoints, energy/helicity integrity, and
@@ -2373,7 +2387,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 266
+- **cycle:** 267
 - **announcements:** none
 
 ## immutable target list

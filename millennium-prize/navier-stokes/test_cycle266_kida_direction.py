@@ -18,8 +18,10 @@ class Cycle266KidaDirectionTests(unittest.TestCase):
             self.assertLess(abs(value), 1e-12)
         for row in data["grids"]:
             self.assertGreater(row["directional_derivative_at_kida_along_minus_F"], 1.12)
-            self.assertGreater(row["candidate_l3_cube_derivative"], 0.035)
-            self.assertGreater(row["candidate_log_l3_derivative"], 0.012)
+            self.assertGreater(row["candidate_l3_cube_derivative"], 0.0356)
+            self.assertGreater(row["candidate_log_l3_derivative"], 0.013)
+            self.assertLess(row["candidate_log_l3_second_derivative"], -0.41)
+            self.assertGreater(row["quadratic_turning_time"], 0.0)
         values = [row["candidate_l3_cube_derivative"] for row in data["grids"]]
         self.assertLess(max(values) - min(values), 2e-5)
 

@@ -1,5 +1,16 @@
 # Routes
 
+Cycle 267 closes every genuinely 3D fixed-Fourier/Lie closure by the
+Kishimoto--Yoneda classification: a real mean-zero Euler solution confined to
+one finite Fourier set is stationary, and if that support spans three
+dimensions it is Beltrami. A mean contributes only a Galilean translate, which
+preserves all velocity `Lp` norms. The argument applies orbit by orbit to any
+linear, algebraic, singular, or coefficient-dependent invariant set inside a
+fixed trigonometric space. Nonconstant periodic affine fields are impossible.
+The linked-shear escape remains planar and capped by `2^(1/6)`. This does not
+classify nonlinear finite-parameter manifolds with infinite Fourier support.
+See `cycle-267-finite-dimensional-genuine-3d-euler-no-go.md`.
+
 Cycle 265 classifies the exact stationary-base triangular/skew-product 2D3C
 architecture. It has form `u=(v,w_0 o Phi_-t)`. Complete velocity `L3` is
 universally constant in the passive datum exactly when

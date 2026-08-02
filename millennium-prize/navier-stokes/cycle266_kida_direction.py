@@ -8,7 +8,10 @@ import numpy as np
 from scout_cycle265_3d_alignment import Galerkin3D
 
 
-CUTOFF = 8
+# K has support 3, F(K) support 6, F(u_*) support 12, and
+# DF(u_*)F(u_*) support 18.  This cutoff therefore retains the complete
+# Fourier time jet used below rather than a Galerkin projection of it.
+CUTOFF = 18
 CANDIDATE_TANGENT_COEFFICIENT = -1.0 / 32.0
 
 
@@ -43,6 +46,73 @@ def rhs_linearization(solver, state, direction):
 
 def initial_l3_cube_derivative(solver, state, grid):
     return cube_first_variation(solver, state, solver.rhs(state), grid)
+
+
+def initial_log_l3_derivatives(solver, state, grid):
+    """Return the exact-in-time first two variations, evaluated by cubature."""
+    velocity = solver.physical(state, grid)
+    tangent = solver.rhs(state)
+    acceleration = solver.physical(tangent, grid)
+    second_tangent = rhs_linearization(solver, state, tangent)
+    jerk = solver.physical(second_tangent, grid)
+
+    speed2 = np.sum(velocity * velocity, axis=0)
+    speed = np.sqrt(speed2)
+    ua = np.sum(velocity * acceleration, axis=0)
+    cube = float(np.mean(speed**3))
+    cube_first = float(3.0 * np.mean(speed * ua))
+    quotient = np.zeros_like(speed)
+    np.divide(ua * ua, speed, out=quotient, where=speed > 0.0)
+    cube_second = float(3.0 * np.mean(
+        quotient
+        + speed * np.sum(acceleration * acceleration, axis=0)
+        + speed * np.sum(velocity * jerk, axis=0)
+    ))
+    log_first = cube_first / (3.0 * cube)
+    log_second = cube_second / (3.0 * cube) - cube_first**2 / (3.0 * cube**2)
+    return {
+        "candidate_l3_cube": cube,
+        "candidate_l3_cube_derivative": cube_first,
+        "candidate_l3_cube_second_derivative": cube_second,
+        "candidate_log_l3_derivative": log_first,
+        "candidate_log_l3_second_derivative": log_second,
+        "quadratic_turning_time": (
+            -log_first / log_second if log_second < 0.0 else None
+        ),
+        "quadratic_peak_log_growth": (
+            -0.5 * log_first**2 / log_second if log_second < 0.0 else None
+        ),
+    }
+
+
+def fourier_sup_bound(solver, state, derivative_axis=None):
+    weights = np.ones_like(solver.k2)
+    if derivative_axis is not None:
+        weights = np.abs(solver.k[derivative_axis])
+    mode_lengths = np.sqrt(np.sum(np.abs(state) ** 2, axis=0))
+    return float(np.sum(weights * mode_lengths))
+
+
+def cubature_remainders(solver, state, grid):
+    """Analytic periodic rectangle-rule errors from Fourier l1 sup norms."""
+    tangent = solver.rhs(state)
+    second_tangent = rhs_linearization(solver, state, tangent)
+    u = fourier_sup_bound(solver, state)
+    a = fourier_sup_bound(solver, tangent)
+    j = fourier_sup_bound(solver, second_tangent)
+    errors = {"cube": 0.0, "cube_first": 0.0, "cube_second": 0.0}
+    for axis in range(3):
+        ux = fourier_sup_bound(solver, state, axis)
+        ax = fourier_sup_bound(solver, tangent, axis)
+        jx = fourier_sup_bound(solver, second_tangent, axis)
+        errors["cube"] += 3.0 * u**2 * ux
+        errors["cube_first"] += 6.0 * u * ux * a + 3.0 * u**2 * ax
+        # |D^3 |u|^3| <= 12 and |D^2 |u|^3| <= 6|u|.
+        errors["cube_second"] += (
+            12.0 * ux * a**2 + 12.0 * u * ax * a
+            + 6.0 * u * ux * j + 3.0 * u**2 * jx
+        )
+    return {key: np.pi * value / grid for key, value in errors.items()}
 
 
 def derivative_of_initial_derivative(solver, state, direction, grid):
@@ -82,16 +152,16 @@ def report():
     candidate = kida + CANDIDATE_TANGENT_COEFFICIENT * euler_tangent
     rows = []
     for grid in (64, 96, 128):
-        cube = l3_cube(solver, candidate, grid)
-        derivative = initial_l3_cube_derivative(solver, candidate, grid)
-        rows.append({
+        row = {
             "grid": grid,
-            "candidate_l3_cube": cube,
-            "candidate_l3_cube_derivative": derivative,
-            "candidate_log_l3_derivative": derivative / (3.0 * cube),
             "directional_derivative_at_kida_along_minus_F":
                 derivative_of_initial_derivative(solver, kida, direction, grid),
-        })
+        }
+        row.update(initial_log_l3_derivatives(solver, candidate, grid))
+        row["analytic_cubature_remainders"] = cubature_remainders(
+            solver, candidate, grid
+        )
+        rows.append(row)
     return {
         "format": "C266-KP1-initial-direction",
         "status": "DETERMINISTIC_NUMERICAL_REPLAY",

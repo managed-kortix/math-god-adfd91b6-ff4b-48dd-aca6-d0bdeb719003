@@ -1,0 +1,157 @@
+{
+  "all_cross_resolution_gates_pass": true,
+  "architecture_signal_promotions": [],
+  "certification_promotions": [],
+  "claim": "Finite-dimensional numerical evidence only; no Euler, Navier-Stokes, or Millennium result.",
+  "cross_resolution": {
+    "0.5": {
+      "absolute_difference": 0.0009759610100429361,
+      "coarse_ratio": 0.9716972511084709,
+      "fine_ratio": 0.970721290098428,
+      "gate_pass": true
+    },
+    "1.0": {
+      "absolute_difference": 0.0018140477847863323,
+      "coarse_ratio": 0.9533249934955628,
+      "fine_ratio": 0.9515109457107764,
+      "gate_pass": true
+    },
+    "2.0": {
+      "absolute_difference": 0.0067692919260226025,
+      "coarse_ratio": 0.9545870127858023,
+      "fine_ratio": 0.9613563047118249,
+      "gate_pass": true
+    }
+  },
+  "format": "C267-KP1-outcome-v1",
+  "levels": {
+    "K10": {
+      "all_local_gates_pass": true,
+      "cutoff": 10,
+      "endpoints": {
+        "0.5": {
+          "cubature_ratio_difference": 6.705113086979964e-07,
+          "directed_ratios": {
+            "128": 0.9707219606097367,
+            "64": 0.970721290098428
+          },
+          "l3": {
+            "128": 0.9390050809463094,
+            "64": 0.9390051147984441
+          }
+        },
+        "1.0": {
+          "cubature_ratio_difference": 1.3162087650897547e-06,
+          "directed_ratios": {
+            "128": 0.9515122619195415,
+            "64": 0.9515109457107764
+          },
+          "l3": {
+            "128": 0.9204230302608476,
+            "64": 0.9204224260070862
+          }
+        },
+        "2.0": {
+          "cubature_ratio_difference": 7.019362025628695e-06,
+          "directed_ratios": {
+            "128": 0.9613492853497992,
+            "64": 0.9613563047118249
+          },
+          "l3": {
+            "128": 0.9299386437497996,
+            "64": 0.9299461096362709
+          }
+        }
+      },
+      "initial_energy": 0.3752482096354167,
+      "initial_helicity": -6.1224477561668786e-18,
+      "initial_l3": {
+        "128": 0.967326504446747,
+        "64": 0.9673272074863342
+      },
+      "maxima": {
+        "divergence_defect": 3.0423940003265346e-15,
+        "energy_identity_closure_max": 6.032394908493787e-13,
+        "energy_scaled_helicity_drift": 2.1866103175155197e-20,
+        "energy_tangency_max": 4.70963740438094e-16,
+        "helicity_identity_closure_max": 3.5455257212929793e-19,
+        "helicity_tangency_max": 3.364342516541366e-17,
+        "iterations_max": 6,
+        "reality_defect": 2.6263687571813566e-16,
+        "relative_energy_drift": 6.557165921350361e-11,
+        "residual_ratio_max": 9.928400046794826e-12
+      },
+      "step_size": 0.0078125,
+      "steps": 256
+    },
+    "K7": {
+      "all_local_gates_pass": true,
+      "cutoff": 7,
+      "endpoints": {
+        "0.5": {
+          "cubature_ratio_difference": 2.5603448625677316e-06,
+          "directed_ratios": {
+            "48": 0.9716972511084709,
+            "96": 0.9716998114533335
+          },
+          "l3": {
+            "48": 0.939951734761792,
+            "96": 0.939951043895773
+          }
+        },
+        "1.0": {
+          "cubature_ratio_difference": 4.9518715103946676e-06,
+          "directed_ratios": {
+            "48": 0.9533249934955628,
+            "96": 0.9533200416240524
+          },
+          "l3": {
+            "48": 0.9221797019655236,
+            "96": 0.9221718042232268
+          }
+        },
+        "2.0": {
+          "cubature_ratio_difference": 7.105243761129643e-07,
+          "directed_ratios": {
+            "48": 0.9545870127858023,
+            "96": 0.9545863022614262
+          },
+          "l3": {
+            "48": 0.9234004908684563,
+            "96": 0.9233966917799749
+          }
+        }
+      },
+      "initial_energy": 0.3752482096354167,
+      "initial_helicity": 7.650339563512826e-18,
+      "initial_l3": {
+        "48": 0.9673298279783492,
+        "96": 0.9673265681609271
+      },
+      "maxima": {
+        "divergence_defect": 1.52351339418087e-15,
+        "energy_identity_closure_max": 4.3020762733464446e-14,
+        "energy_scaled_helicity_drift": 6.786569246227874e-18,
+        "energy_tangency_max": 9.887923813067773e-17,
+        "helicity_identity_closure_max": 4.403015405288548e-19,
+        "helicity_tangency_max": 2.858011491023584e-17,
+        "iterations_max": 6,
+        "reality_defect": 2.384623257803918e-16,
+        "relative_energy_drift": 7.767120280277595e-12,
+        "residual_ratio_max": 3.4042101662341705e-12
+      },
+      "step_size": 0.015625,
+      "steps": 128
+    }
+  },
+  "manifest_sha256": "a88660d50964ada6e7c0f9eedb7eaf4430ee6a8f2ceb86559ffa5d1bf5f16126",
+  "pde_certificate": false,
+  "profile": {
+    "base": "exact Kida-Pelz trigonometric velocity",
+    "construction": "K-(1/32) times the exact cubic-Galerkin Euler vector field at K",
+    "name": "K-F(K)/32",
+    "normalization": "none"
+  },
+  "status": "NUMERICAL_ONLY",
+  "threads_max": 2
+}

@@ -124,15 +124,17 @@ viewed. For the exact rational Fourier candidate (266.1), the deterministic
 replay gives
 
 \[
- G(u_*)\mathrel{\mathop\approx}0.0351456>0,
+ G(u_*)\mathrel{\mathop\approx}0.0356418>0,
  \qquad {d\over dt}\log\|u_*\|_3\big|_0
- \mathrel{\mathop\approx}0.01294.                      \tag{266.12}
+ \mathrel{\mathop\approx}0.01313.                      \tag{266.12}
 \]
 
 All coefficients of `F(K)` are Gaussian rationals because `K` has rational
 trigonometric coefficients and the Leray matrices are rational. Equation
 (266.1) is therefore an exact coefficient specification; decimal fitting is
-not involved.
+not involved. These corrected values retain the complete support through the
+first Euler time derivative. The earlier `0.0351456` replay used cutoff 8 and
+inadvertently projected modes 9 through 12 from `F(u_*)`.
 
 ## Disposition
 
