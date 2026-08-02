@@ -1,5 +1,22 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: Cycle 247 gives an exact obstruction to the proposed literal
+  homogeneous inverse-mixing mechanism. For every smooth mean-zero 2D Euler
+  orbit,
+  `||omega||_(dot H^-1)=||u||_2` is conserved, so a smooth area-preserving
+  separated-sign rearrangement with strictly increased `dot H^-1` cannot be an
+  Euler endpoint. Inhomogeneous `H^-1` may vary but does not bypass this energy
+  condition. The relevant nonconserved target is `W^(-1,3)`, equivalent to
+  velocity `L^3`; it must vary by more than two on one fixed `dot H^-1` energy
+  sphere. Time reversal gives exact accessibility only from an actual smooth
+  Euler orbit with complete-velocity `L^3` decay by more than two. Passive,
+  projected, or perturbative-background mixing does not imply this, and a
+  background perturbation bounded by one third in endpoint `L^3` cannot cross
+  two. The corrected finite object requires exact endpoint energy equality,
+  directed Biot--Savart `L^3` cubature, and the self-induced Lagrangian equation.
+  No crossing is constructed; `LA242` remains focused discovery. See
+  `millennium-prize/navier-stokes/cycle-247-unmixing-energy-shell-obstruction.md`.
+
 - 2026-08-02: Cycle 246 assigns terminal `WALL` to the requested weight/
   spectral-sequence and global punctured-support repair. The exact shifted
   return `F_i[0] -> F_j[2] -> F_i[4]` has nonzero total-degree-two product, so
@@ -41,6 +58,19 @@
   `INCOMPLETE`, not `FAIL`, and no Hodge result is claimed. See
   `millennium-prize/hodge/cycle-200-graph-triangulated-envelope-hostile-audit.md`
   and `millennium-prize/hodge/cycle-241-connective-karoubi-normal-form.md`.
+
+- 2026-08-02: Cycle 248 supplies the missing exact F242 geometry. For
+  `E:v^2=u^3+4u` over `Q(zeta_8)`, the three degree-two Fermat-curve quotients
+  come from `(A,B,C_0)=(X,Y,Z),(Y,X,Z),(Z,zeta_8 X,Y)` via
+  `u=2(C_0^2+A^2)/B^2` and `v=4C_0(C_0^2+A^2)/B^3`. Their invariant
+  differentials form the canonical basis, proving that `J(C)->E^3` is an
+  isogeny; the Klein-four push-pull matrix is `2I`, so its degree is eight. The
+  Abel--Jacobi image has exact class
+  `gamma=2(eta_2 eta_3+eta_1 eta_3+eta_1 eta_2)`. Thus there is no
+  genus/Jacobian obstruction and the missing `phi`, `dphi`, and `gamma` are
+  fixed. F242 remains `INCOMPLETE` only at the projective difference-scheme,
+  finite enumeration, projector, and deformation calculations. See
+  `millennium-prize/hodge/cycle-248-fermat-quartic-explicit-elliptic-splitting.md`.
 
 - 2026-08-02: Cycle 244 retracts the recorded `KI240 PASS`. Cycle 241 retains
   its abstract finite connective Karoubi normal form, but its deduction of
@@ -926,9 +956,10 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 246 preserves focused discovery `LA242` for a Lagrangian
-  critical-velocity amplification family; weight and punctured-support repairs
-  are terminal `WALL`, and `KI240` remains `INCOMPLETE`
+- **phase:** Cycle 247 preserves focused discovery `LA242` after proving that
+  literal full-vorticity `dot H^-1` growth is off the Euler energy shell; the
+  viable target is fixed-`dot H^-1`, variable-`W^(-1,3)` amplification, while
+  `KI240` remains `INCOMPLETE`
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -1760,7 +1791,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 246
+- **cycle:** 248
 - **announcements:** none
 
 ## immutable target list

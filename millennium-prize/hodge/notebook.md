@@ -48,6 +48,21 @@ Navier focused discovery `LA242`, now by the corrected lane comparison rather
 than by terminal Hodge closure. `NB242` is calibration and `F242` remains an
 incomplete inactive scout.
 
+## Cycle 248 explicit Fermat-quartic elliptic splitting
+
+The missing F242 map exists and is now explicit. Over `K=Q(zeta_8)`, use
+`E:v^2=u^3+4u` and, whenever `A^4+B^4=C_0^4`, the quotient `t=B/C_0`,
+`s=A^2/C_0^2`, `u=2(1+s)/t^2`, `v=4(1+s)/t^3`. Applied to `(X,Y,Z)`,
+`(Y,X,Z)`, and `(Z,zeta_8 X,Y)`, these give the three degree-two quotients.
+Their pulled-back invariant differentials are `x dx/y^3`, `-dx/y^2`, and
+`-zeta_8 dx/y^3`, a canonical basis. Hence the induced `J(C)->E^3` is an
+isogeny; orthogonality of the three Klein-four characters gives
+`Psi Psi^vee=[2]` and degree eight. The exact integral curve class is
+`gamma=2(eta_2 eta_3+eta_1 eta_3+eta_1 eta_2)`, so each F242 class has the
+27-term expansion (245.12). There is no genus/Jacobian obstruction. The
+quotient-map defect is closed, while the difference-scheme enumeration and
+deformation gates remain incomplete.
+
 ## Cycle 243 F242 structural reduction
 
 Before any `5^54` loop, factor every map as `f_L=M_L phi^3`, where
@@ -62,8 +77,9 @@ symmetry is `C_4 x S_3`, with exact orbit count
 smooth graph threefolds but does not replace graph-span nonmembership. Embedded
 normal vanishing implies the structure-sheaf Atiyah vanishing, though retaining
 both matrices is a useful exact check. No full-rank universal rejection follows
-without the still-unprinted explicit `phi`, its difference scheme, tangent map,
-and curve class; the scout therefore remains `INCOMPLETE` before enumeration.
+from these structural reductions. Cycle 248 subsequently prints `phi`, its
+tangent map, and its curve class; the projective difference scheme and
+enumeration remain incomplete.
 
 ## Cycle 242 Fermat-quartic triple-sum support gate
 

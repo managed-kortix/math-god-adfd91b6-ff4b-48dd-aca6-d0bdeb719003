@@ -1,5 +1,23 @@
 # Notebook
 
+## Cycle 247 fixed-energy unmixing obstruction
+
+The proposed increase of full-vorticity homogeneous `H^-1` along a 2D Euler
+unmixing orbit is impossible: `||omega||_(dot H^-1)=||u||_2` is exactly the
+conserved kinetic-energy norm. An area-preserving rearrangement with larger
+`dot H^-1` therefore fails dynamical accessibility before any Lagrangian
+realization question. Inhomogeneous `H^-1` may vary, but does not remove the
+separate exact homogeneous-energy constraint.
+Velocity `L^3` instead corresponds to vorticity `W^(-1,3)`, which may vary on
+the fixed `dot H^-1` sphere. Time reversal of an actual smooth orbit with complete
+velocity-`L^3` decay by more than two would be exactly accessible, but passive,
+projected, or perturbative mixing does not provide that estimate; a background
+decomposition cannot cross two while both perturbations are at most one third
+of the background in `L^3`. The corrected admission object must first satisfy
+exact endpoint energy equality, then a directed `W^(-1,3)` ratio, and finally
+the self-induced Lagrangian equation. See
+`cycle-247-unmixing-energy-shell-obstruction.md`.
+
 ## Cycle 177 cubic-flux baseline supplement
 
 For actual receiver flux and orbit energies `x_[j]=2|j||u_j|^2`, the sharp

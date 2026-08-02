@@ -1,5 +1,19 @@
 # Routes
 
+Cycle 247 rejects the literal homogeneous-`H^-1`-growth version of Lagrangian
+unmixing.
+For mean-zero 2D Euler, `||omega||_(dot H^-1)=||u||_2` is conserved, so every
+area-preserving separated-sign rearrangement with strictly larger `dot H^-1` lies
+off the Euler energy shell and is dynamically inaccessible. Inhomogeneous
+`H^-1` may vary but must coexist with exact homogeneous-energy equality. The
+viable target is narrower: vary `W^(-1,3)`, equivalently velocity `L^3`, by
+more than two on one fixed `dot H^-1` sphere and realize the rearrangement by
+the self-induced Euler flow. Time reversal makes accessibility automatic only
+after an actual smooth
+Euler mixing orbit has a same-norm complete-velocity `L^3` decay estimate.
+Passive-scalar, projected, and perturbative-background mixing do not suffice.
+See `cycle-247-unmixing-energy-shell-obstruction.md`.
+
 Cycle 244 preserves focused discovery `LA242` after retracting the claimed
 `KI240 PASS` for the shifted-return gap in Cycle 200. Navier--Stokes leads the
 corrected actionable-target comparison at `(1,1,0,1)`

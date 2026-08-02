@@ -1,6 +1,6 @@
 # Cycle 243: structural reduction before the F242 enumeration
 
-## Scope and missing fixed input
+## Scope and fixed input
 
 Write
 
@@ -9,11 +9,17 @@ Write
  \mathcal L=M_{6\times3}(\mathcal B),\qquad n=|\mathcal L|=5^{18}.
 \]
 
-The Cycle 242 search cannot yet be launched: the three elliptic quotient maps,
-the isogeny to `E_i^3`, and the resulting map `phi` have not been printed.
-This is not cosmetic. The difference scheme, tangent map, curve class `gamma`,
-and every obstruction matrix depend on that choice. The statements below are
-the choice-independent reductions that must precede any enumeration.
+Cycle 248 now prints the three elliptic quotient maps, the degree-eight
+isogeny to `E_i^3`, the resulting map `phi`, its differential, and the integral
+curve class
+
+\[
+ \gamma=2(\eta_2\eta_3+\eta_1\eta_3+\eta_1\eta_2).
+\]
+
+The statements below are the choice-independent reductions that precede the
+enumeration.  The remaining uninstantiated fixed geometric input is the
+projective difference scheme in the chosen charts.
 
 ## Exact classification of the maps
 
@@ -107,8 +113,9 @@ immersion has `ch_1(O_Y)=ch_2(O_Y)=0` and leading Chern character
  c_3(O_{Y_L})=2[Y_L],\qquad P_Wc_3(O_{Y_L})=2P_Wz_L.
 \]
 
-The exceptional test is consequently an exact exterior-algebra calculation,
-but it cannot be instantiated until the fixed maps have supplied `gamma`.
+The exceptional test is consequently an exact exterior-algebra calculation.
+Cycle 248 supplies `gamma` and the sharper 27-term abelian-image expansion
+(245.12), so this part can now be instantiated.
 Full rank is also necessary for a nonzero determinant-sector coordinate, so a
 rank failure may be recorded before the 924-coordinate expansion.
 
@@ -179,14 +186,17 @@ but omitting them would make the asserted action incorrect.
 
 There is no choice-independent universal obstruction that rejects every
 full-rank triple: at rank six the difference intersection is zero-dimensional
-and depends on the unprinted map `phi`. The cheap rigorous preprocessing is:
+and depends on the explicit Cycle 248 map `phi`. The cheap rigorous
+preprocessing is:
 
-1. freeze and certify `phi`, `D_phi`, `dphi`, and `gamma`;
+1. use the certified Cycle 248 `phi`, `dphi`, and `gamma`, and construct its
+   projective difference scheme `D_phi`;
 2. quotient by `C_4 times S_3` (and only then by any certified curve symmetry);
 3. reject total rank below six or a block rank below two;
 4. perform the finite difference-scheme and tangent closed-immersion tests;
 5. only for survivors expand the graph-span and exceptional coordinates, then
    compute the embedded-normal/Atiyah and quadratic systems.
 
-Until item 1 is supplied, F242 is structurally specified but computationally
-`INCOMPLETE`, not `FAIL`.
+The quotient-map defect is closed by Cycle 248.  F242 remains computationally
+`INCOMPLETE`, not `FAIL`, until `D_phi` and the finite enumeration and
+deformation calculations are completed.

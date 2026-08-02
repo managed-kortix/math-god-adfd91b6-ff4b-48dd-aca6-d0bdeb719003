@@ -21,9 +21,10 @@ idempotent factors in `Q[Aut(C)]`, and the resulting Abel--Jacobi map
  \phi:C\longrightarrow E_i^3.
 \]
 
-The idempotents, the isogeny, and `phi` are part of the fixed input and must be
-printed as rational maps before a candidate can pass. This prevents the phrase
-"isogenous to `E_i^3`" from hiding an existence assumption.
+The idempotents, the isogeny, and `phi` are part of the fixed input.  Cycle 248
+prints them over `Q(zeta_8)`, proves that the induced Jacobian isogeny has degree
+eight, and gives `dphi` and `gamma`.  This prevents the phrase "isogenous to
+`E_i^3`" from hiding an existence assumption.
 
 For an ordered triple
 
@@ -55,9 +56,14 @@ deliberately small and immutable for this scout.
 
 ## Exact exceptional class
 
-Put `gamma=phi_*[C] in H^4(E_i^3,Z)`. The fixed rational maps for `phi` compute
-all coordinates of `gamma` by exact pullback and intersection on `C`. Addition
-on the abelian variety gives
+Put `gamma=phi_*[C] in H^4(E_i^3,Z)`.  With `eta_j` the normalized fundamental
+two-class of the `j`th elliptic factor, Cycle 248 computes
+
+\[
+ \gamma=2(\eta_2\eta_3+\eta_1\eta_3+\eta_1\eta_2).
+\]
+
+Addition on the abelian variety gives
 
 \[
  z_L:=(f_L)_*[C^3]
