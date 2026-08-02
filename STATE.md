@@ -17,6 +17,18 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-02: proved the complete rank-five order-six and order-seven kernel
+  theorems. Order six covers 38 kernels, 23208 physical rows / 12810 orbits,
+  and 16478 residual all-length frontier targets as `16451+18+9` (strict
+  rational, exact K55/K61 equality, owner-exact K71 structural); an independent
+  hostile audit returned ACCEPT. Order seven covers 23 kernels, 31112 physical
+  rows / 18026 orbits, and 44640 frontier targets as `44616+24`; the last 24
+  are exact K80 cycle-support equality templates. Both fail-closed theorem
+  verifiers pass normal and `python3 -O`. Thus 102 of the 118 rank-five kernels
+  (orders 2--7) are complete; only the 16 cubic order-eight kernels remain.
+  The order-eight exact census is frozen at 46736 physical rows / 11188 orbits,
+  with 7705 tetrahedral certificates and 3483 residual orbits (45279 frontier
+  targets); the full rational search is not yet complete.
 - 2026-07-31: proved the complete rank-five order-five kernel theorem: all 24
   suppressed kernels on five branch vertices satisfy the pentacyclic target
   after arbitrary subdivision and rooted-tree attachment. The non-`K5-e`

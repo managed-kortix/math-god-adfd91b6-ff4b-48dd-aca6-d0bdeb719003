@@ -55,3 +55,103 @@ python3 -O pentacyclic/research/order5-kernel-family-theorem-verifier.py
 python3 pentacyclic/research/all-odd-k5e-theorem-verifier.py
 python3 -O pentacyclic/research/all-odd-k5e-theorem-verifier.py
 ```
+
+## Complete order-six theorem
+
+`order6-tetra-census-experiment.py` independently reconstructs the 38
+order-six kernels, 23,208 physical rows, and 12,810 automorphism orbits. The
+exact regular-tetrahedron sieve certifies 11,312 orbits and leaves 1,498
+residuals. Every kernel has ten paths, so the canonical-plus-ten-coordinate
+frontier has 16,478 targets.
+
+`order6-dim6-rational-gram-experiment.py` deterministically optimizes six unit
+vectors in dimension six and exactifies accepted witnesses with rational
+stereographic parameters and `Fraction` arithmetic. Its frozen raw output
+contains 16,451 strict exact certificates. The 27 raw-search failures split
+exactly into 18 symbolic equality certificates in kernels 55 and 61 and nine
+structural triangle-plus-attached-`K4` closures in kernel 71. Thus all 16,478
+frontier targets, and by fixed-parity monotonicity every longer subdivision,
+are proved.
+
+The experiment artifacts remain honestly labeled `full_theorem=false`; theorem
+promotion occurs only in `order6-kernel-family-theorem.json`. The standalone
+`order6-kernel-family-theorem-verifier.py` locks the raw result SHA-256,
+independently rebuilds all 16,478 target keys from the 1,498 census residuals,
+rejects duplicates, omissions, and extras, checks the exact nine-key missing
+sets in each of K55/K61/K71, and verifies every certificate. It checks symbolic
+Gram PSD and exact path costs, and reconstructs each K71 physical graph,
+favorable triangle, actual `K4`, owner-exact rooted-tree partition, and rooted
+descendants. The paper note is
+`positive-square-energy/pentacyclic-general/order-six-kernel-family-theorem.md`.
+
+Run:
+
+```text
+python3 pentacyclic/research/order6-tetra-census-experiment.py
+python3 pentacyclic/research/order6-dim6-rational-gram-experiment.py --verify pentacyclic/research/order6-dim6-rational-gram-results.json
+python3 pentacyclic/research/order6-experiment-verifier.py
+python3 pentacyclic/research/order6-kernel-family-theorem-verifier.py
+python3 -O pentacyclic/research/order6-kernel-family-theorem-verifier.py
+```
+
+## Complete order-seven theorem
+
+`order7-tetra-census-experiment.py` independently reconstructs the exact 23
+order-seven kernels. It finds 31,112 physical rows and 18,026 automorphism
+orbits; the regular-tetrahedron sieve certifies 14,306 and leaves 3,720
+residuals. Every kernel has eleven paths, so canonical plus all eleven
+one-coordinate length-plus-two frontiers gives 44,640 exact targets.
+
+`order7-dim7-rational-gram-experiment.py` accepts witnesses only after rational
+stereographic reconstruction and exact `Fraction` verification. Its frozen raw
+output certifies 44,616 targets and leaves 24 equality limits, all in K80: six
+parity rows at each of canonical and path coordinates 0, 3, and 6.
+
+`order7-kernel-family-theorem.json` closes those 24 keys with exact
+cycle-support Gram certificates. The sign-switch construction covers all six
+parity rows, and lengthening coordinates 0, 3, or 6 preserves their zero path
+cost. The theorem verifier reconstructs all 44,640 keys, checks every rational
+certificate, every principal minor and path cost in all 24 symbolic records,
+and the complete one-coordinate descendant cover. It digest-locks the raw
+kernel, census, results, and theorem fixture, and rejects normal and `-O`
+hostile mutations. The paper note is
+`positive-square-energy/pentacyclic-general/order-seven-kernel-family-theorem.md`.
+
+The raw artifacts remain honestly labeled `full_theorem=false`; theorem
+promotion occurs only in the separate theorem fixture and verifier.
+
+Run:
+
+```text
+python3 pentacyclic/research/order7-tetra-census-experiment.py
+python3 pentacyclic/research/order7-dim7-rational-gram-experiment.py --verify pentacyclic/research/order7-dim7-rational-gram-results.json
+python3 pentacyclic/research/order7-experiment-verifier.py
+python3 -O pentacyclic/research/order7-experiment-verifier.py
+python3 pentacyclic/research/order7-kernel-family-theorem-verifier.py
+python3 -O pentacyclic/research/order7-kernel-family-theorem-verifier.py
+```
+
+## Frozen order-eight cubic experiment
+
+`order8-cubic-tetra-census-experiment.py` extracts exactly the 16 order-eight
+cubic kernels (fixture rows 103--118), reconstructs 46,736 physical parity
+rows and 11,188 automorphism orbits, and applies the exact tetrahedral sieve.
+It certifies 7,705 orbits and leaves 3,483 residuals. Each cubic kernel has 12
+paths, so the canonical-plus-twelve-coordinate ledger has 45,279 targets. The
+artifact also marks the unique row-118 all-support cycle equality residual.
+
+`order8-dim8-rational-canonical-frontiers-experiment.py` searches those targets
+with eight-dimensional branch vectors and accepts only exact rational
+stereographic reconstructions. Every failed reconstruction is retained in the
+top-level `unresolved_keys` ledger and printed by the CLI. Both artifacts are
+frozen as experiments with `experiment_fixture_frozen=true` and remain
+fail-closed with `full_theorem=false`; they do not alter a main verifier or
+promote unresolved targets.
+
+Run the exact census and a bounded search slice with:
+
+```text
+python3 pentacyclic/research/order8-cubic-tetra-census-experiment.py
+python3 -O pentacyclic/research/order8-cubic-tetra-census-experiment.py
+python3 pentacyclic/research/order8-dim8-rational-canonical-frontiers-experiment.py --limit 1 --progress
+```
