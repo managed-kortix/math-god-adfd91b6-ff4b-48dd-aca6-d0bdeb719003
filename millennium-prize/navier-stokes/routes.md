@@ -1,13 +1,46 @@
 # Routes
 
+Cycle 255 replaces the viscosity-dependent Cycle 215 tail face by a shrinking
+analytic Euler weight. The exact inequality
+`D^+A_q<=(A_q+q'/q)D_q`, with rational
+`q(t)=q0(1-alpha t)`, gives a complete geometric Fourier tail for smooth
+infinite-support data when `A_q0<=M`, `alpha>=M`, and `q(T)>1`. The retained
+interval equations then reuse Cycle 213 remainder sums and Cycle 215 Picard and
+endpoint cubature, but never the dissipative cap checker. A deterministic
+149,952-member packet/tail/time family, staged floating admission thresholds,
+and the fail-closed exact gate `final L3 cube lower > 8 * initial upper` form a
+finite ND251 production design. No member is claimed to cross two, and no
+obsolete coarse binary is run. See
+`cycle-255-euler-fourier-tail-certificate-design.md`.
+
+Cycle 253 separates fixed-orbit variational geometry from Euler accessibility.
+On one smooth vorticity orbit, Sobolev/Biot--Savart bounds make velocity `L^3`
+bounded above by the fixed vorticity `L^2` norm and, on a positive energy shell,
+bounded below by the fixed velocity `L^2` norm; noncompactness prevents an
+automatic extremum theorem. Regular constrained critical points satisfy the
+exact bracket equation
+`{omega,3A_omega+lambda Delta^-1 omega}=0`. The Cycle 251 endpoints have equal
+energy and lie on one Hamiltonian orbit, but this does not place them in one
+connected component of the orbit's energy level. Their available Hamiltonian
+isotopy need not preserve energy, and amplitude normalization leaves the fixed
+orbit. Even a fixed-energy Hamiltonian path would satisfy only a scalar energy-
+tangency condition, whereas Euler pointwise fixes its generator to
+`Delta^-1 omega`. Thus both connected-level membership and self-induced Euler
+accessibility remain open. See
+`cycle-253-fixed-orbit-energy-level-variational-audit.md`.
+
 Cycle 252 scouts the standard explicit finite-dimensional Euler families and
 finds no factor-two seed. Point vortices have infinite velocity `L^3` and
 energy; regularized particles solve a different equation; Kirchhoff, Stuart,
 and smooth relative equilibria have isometry-constant norms; and real fixed
 finite Fourier support is stationary after mean removal. For the exact smooth
-periodic 2.5D class consisting of a steady 2D carrier and a passively transported
-third component, a new uniform estimate bounds every two-time complete-velocity
-`L^3` ratio by `2^(1/6)`. A time-dependent carrier does not evade the 2D gate.
+periodic, `z`-independent 2D3C class consisting of a steady 2D carrier and a
+passively transported third component, a uniform estimate bounds every two-time
+complete-velocity `L^3` ratio by `2^(1/6)`. The normalization is consistent for
+the 3D lifts, and mean/harmonic components do not evade the estimate.
+`z`-dependent horizontal velocity is outside this class. The constant is sharp
+from separate `L^3` data but is not claimed to be the optimal dynamically
+attainable ratio. A time-dependent carrier does not evade the 2D gate.
 The result retires these named architectures but is not a universal
 classification of finite-dimensional invariant manifolds. See
 `cycle-252-explicit-euler-family-scout.md`.

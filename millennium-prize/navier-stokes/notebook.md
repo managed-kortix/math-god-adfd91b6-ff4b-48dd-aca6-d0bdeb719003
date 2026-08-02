@@ -1,5 +1,73 @@
 # Notebook
 
+## Cycle 255 Euler Fourier-tail certificate design
+
+Cycle 215's geometric shell cap cannot survive the Euler limit by putting
+`mu=0`; its inward face is dissipative. The replacement is the shrinking
+analytic norm `A_q=sum q^|k|_1 |omega_k|`. If
+`q(t)=q0(1-alpha t)`, `A_q0(omega0)<=M`, `alpha>=M`, and `q(T)>1`, then
+`D^+A_q<=(A_q+q'/q)D_q` proves `A_q(t)<=M` and the full tail
+`z_n<=M q(t)^-n`. Rational slab-end weights feed the Cycle 213 low-mode
+remainder sums and Cycle 215 Picard/cubature machinery, with no dissipative cap
+test. A frozen 149,952-member projective packet/tail/time family and strict
+cubed-norm gate `L_T>8U_0` specify the finite optimization and fail-closed
+certificate. No coarse run is made: existing binaries do not enumerate this
+family, and prior screens give no margin justifying surrogate computation. See
+`cycle-255-euler-fourier-tail-certificate-design.md`.
+
+## Cycle 254 zero-circulation patch transfer wall
+
+An equal-area opposite-sign periodic pair of rational ellipses gives a
+deterministic mean-zero patch family, but not an exact finite-dimensional
+ellipse system: the field of either finite patch has higher Taylor terms on the
+other and generically generates boundary modes `|k|>=3`. Relative equilibria
+keep complete `L^3` fixed, while the well-separated regime makes non-affine
+effects perturbative. Full contour dynamics could still produce the target,
+but it needs a posteriori chord-arc/separation bounds, complete periodic
+velocity cubature, and a non-relative shape witness. The smoothing step is
+conditionally complete: if a bounded patch orbit has endpoint ratio at least
+`2+eta`, mollified initial data converge on fixed intervals in `L^2` by
+Yudovich stability, and `||Kf||_3<=C_S^(1/2)||f||_2`; endpoint errors below
+`eta||K omega^P(0)||_3/3` preserve a ratio greater than two. The wall is the
+strict patch production certificate, not patch-to-smooth transfer. See
+`cycle-254-zero-circulation-patch-transfer-wall.md`.
+
+## Cycle 253 fixed-orbit energy-level variational audit
+
+On one smooth Hamiltonian coadjoint orbit, velocity `L^3` is uniformly bounded
+by the orbit's fixed vorticity `L^2` norm; on a positive energy shell it is also
+bounded below by the fixed velocity `L^2` norm. Extrema need not be attained
+because the orbit and energy slice are noncompact. A regular constrained
+critical point satisfies
+`{omega,3A_omega+lambda Delta^-1 omega}=0`, where
+`A_omega=-Delta^-1 curl(|K omega|K omega)`. Cycle 251's equal-energy endpoints
+do not by themselves lie in one connected component of the fixed-orbit energy
+level: an arbitrary Hamiltonian isotopy need not preserve energy, while scalar
+renormalization changes every vorticity Casimir and leaves the orbit. If such a
+connecting path exists, continuity immediately carries the `L^3` gap, but it
+still is not an Euler path. An energy-tangent Hamiltonian generator obeys one
+scalar orthogonality condition; Euler fixes the generator pointwise to
+`Delta^-1 omega`, leaving no control freedom. See
+`cycle-253-fixed-orbit-energy-level-variational-audit.md`.
+
+## Cycle 253 Kolmogorov instability cap
+
+On the standard square torus, the Kolmogorov shear `U_A=(A cos(4y),0)` and
+streamwise frequency `k=3` realize the classical unstable ratio `alpha=3/4`.
+Its exact mode is an infinite tridiagonal Fourier recurrence; no
+three-mode truncation is invariant, and nonlinear evolution generates all
+streamwise classes. An exact energy-shell launch is obtained by replacing the
+base amplitude by `sqrt(A^2-2 epsilon^2)` when the real eigenvelocity has unit
+`L^2` norm. The cubic norm has zero first variation in that nonzero streamwise
+direction. Most importantly, any two states in a common relative `L^3` ball of
+radius `rho<1/3` have norm ratio at most `(1+rho)/(1-rho)<2`. For a launch
+tending to the shear, factor two requires endpoint departure approaching the
+full `L^3` size of the shear. Classical nonlinear-instability bootstraps reach
+only a sufficiently small fixed neighborhood, so instability alone is
+perturbatively capped and does not pass `ND251`. Energy itself imposes no
+global `L^3` cap, and a later order-one unstable-manifold excursion is not
+excluded. See `cycle-253-kolmogorov-instability-cap.md`.
+
 ## Cycle 252 explicit Euler-family scout
 
 The standard finite-dimensional candidates do not supply the fixed-energy
@@ -8,12 +76,18 @@ and finite energy; blobs and Euler-alpha particles change the equation;
 Kirchhoff ellipses, Stuart vortices, and desingularized relative equilibria
 move by isometries and have constant `L^3`; and exact real finite-Fourier
 motion is stationary by Elgindi--Hu--Sverak rigidity. There is one useful new
-exact screen for smooth periodic 2.5D flow. If a steady 2D Euler carrier
-transports a passive third component, then at every two times the complete
-velocity ratio is at most `2^(1/6)`, by Minkowski in `L^(3/2)` and
-`(a^2+b^2)^(3/2)>=a^3+b^3`. A time-dependent carrier returns to the unresolved
-2D `L^3` problem. This is a no-go for the named families, not a classification
-of every nonlinear finite-dimensional invariant manifold. See
+exact screen for smooth periodic, `z`-independent 2D3C flow. If a steady 2D
+Euler carrier transports a passive third component, then at every two times
+the complete velocity ratio is at most `2^(1/6)`, by Minkowski in `L^(3/2)`
+applied to squared magnitudes and
+`(a^2+b^2)^(3/2)>=a^3+b^3`. Three-dimensional lifted norms remove any product-
+measure normalization ambiguity. Vertical means and horizontal harmonic parts
+are included; `z`-dependent horizontal velocity is outside the ansatz. The
+constant is optimal from the two separate `L^3` norms alone, but its dynamical
+sharpness for smooth steady-Euler transport is not proved. A time-dependent
+carrier returns to the unresolved 2D `L^3` problem. This is a no-go for the
+named families, not a classification of every nonlinear finite-dimensional
+invariant manifold. See
 `cycle-252-explicit-euler-family-scout.md`.
 
 ## Cycle 251 mapping-class accessibility obstruction

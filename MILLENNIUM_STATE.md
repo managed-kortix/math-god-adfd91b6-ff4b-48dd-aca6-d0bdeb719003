@@ -1,18 +1,72 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: Navier Cycle 254 isolates the zero-circulation patch route. A
+  deterministic equal-area opposite-sign periodic ellipse pair is an exact
+  Yudovich patch family under full contour dynamics, but not under a closed
+  ellipse ODE: each finite patch produces higher multipoles on the other and
+  generically generates boundary modes `|k|>=3`; relative equilibria have
+  constant complete velocity `L^3`, and the well-separated regime makes shape
+  change perturbative. A strict patch certificate with ratio `2+eta` would
+  transfer to smooth vorticity: fixed-time Yudovich `L^2` stability plus
+  `||Kf||_3<=C_S^(1/2)||f||_2` makes endpoint velocity errors smaller than
+  `eta||K omega^P(0)||_3/3`, preserving a ratio greater than two. No rigorous
+  full-contour/cubature certificate is supplied, so `ND251` remains open at the
+  non-relative shape-production gate, not the smoothing gate. No
+  Navier--Stokes or Millennium result is claimed. See
+  `millennium-prize/navier-stokes/cycle-254-zero-circulation-patch-transfer-wall.md`.
+
+- 2026-08-02: Navier Cycle 253 gives the exact fixed-coadjoint-orbit
+  variational audit. On one smooth orbit, velocity `L^3` is bounded above by
+  the fixed vorticity `L^2` norm and, on a positive energy shell, below by the
+  fixed velocity `L^2` norm; extrema need not be attained because the orbit and
+  shell are noncompact. Regular constrained critical points obey
+  `{omega,3A_omega+lambda Delta^-1 omega}=0`, with
+  `A_omega=-Delta^-1 curl(|K omega|K omega)`. Equal endpoint energy and one
+  Hamiltonian orbit do not imply that the Cycle 251 pair belongs to one
+  connected energy-level component: its Hamiltonian isotopy need not preserve
+  energy, while scalar energy normalization changes Casimirs and leaves the
+  fixed orbit. Even a connecting fixed-energy Hamiltonian path would not be an
+  Euler path: energy tangency is one scalar condition, but Euler fixes the
+  generator pointwise to `Delta^-1 omega`. Connected-level membership and
+  self-induced accessibility both remain open; no Navier--Stokes or Millennium
+  result is claimed. See
+  `millennium-prize/navier-stokes/cycle-253-fixed-orbit-energy-level-variational-audit.md`.
+
+- 2026-08-02: Navier Cycle 253 freezes the periodic Kolmogorov instability
+  architecture on the standard square torus with base wave `4`, streamwise
+  wave `3`, and ratio `alpha=3/4`. The exact unstable mode is a bi-infinite
+  tridiagonal Fourier recurrence, not an invariant three-mode system; nonlinear
+  evolution generates all streamwise classes. Rescaling the base amplitude to
+  `sqrt(A^2-2 epsilon^2)` gives an exact fixed-energy smooth launch for a
+  unit-`L^2` eigenvelocity, and the velocity cubic norm has zero first variation
+  in that streamwise direction. Any two states in a common relative `L^3` ball
+  of radius `rho<1/3` have ratio at most `(1+rho)/(1-rho)<2`; for a launch
+  approaching the shear, a factor-two endpoint must depart by essentially the
+  full `L^3` size of the shear. Classical nonlinear-instability theorems close
+  only in a sufficiently small neighborhood, so they are inherently capped as
+  an `ND251` proof mechanism. Energy gives no global `L^3` cap, and this does
+  not exclude a later order-one excursion on the unstable manifold. No Euler
+  factor-two orbit, Navier--Stokes result, or Millennium result is claimed. See
+  `millennium-prize/navier-stokes/cycle-253-kolmogorov-instability-cap.md`.
+
 - 2026-08-02: Navier Cycle 252 finds no exact factor-two seed among the
   standard finite-dimensional Euler families. Point-vortex velocity is not in
   `L^3` and has divergent energy; vortex blobs and Euler-alpha particles change
   the equation; Kirchhoff ellipses, Stuart vortices, and desingularized
   relative equilibria have isometry-constant norms; and real solutions in one
   fixed finite Fourier support are stationary after mean removal by the
-  Elgindi--Hu--Sverak theorem. An exact smooth periodic 2.5D screen gives more:
-  for a steady 2D Euler carrier and a passively transported third component,
-  Minkowski and `(a^2+b^2)^(3/2)>=a^3+b^3` bound every two-time complete
-  velocity-`L^3` ratio by `2^(1/6)<2`. A time-dependent carrier returns to the
-  unresolved 2D gate. This retires the named architectures, not every possible
-  nonlinear finite-dimensional invariant manifold, and no Navier--Stokes or
-  Millennium result is claimed. See
+  Elgindi--Hu--Sverak theorem. An exact smooth periodic, `z`-independent 2D3C
+  screen gives more: for a steady 2D Euler carrier and a passively transported
+  third component, Minkowski in `L^(3/2)` and
+  `(a^2+b^2)^(3/2)>=a^3+b^3` bound every two-time complete velocity-`L^3` ratio
+  by `2^(1/6)<2`. Norms are those of the 3D lifts, so normalized or
+  unnormalized product measure gives the same ratio. Means/harmonic components
+  are included and do not evade the estimate; `z`-dependent horizontal fields
+  are outside its scope. The constant is sharp from separate `L^3` data alone,
+  but dynamical sharpness for smooth steady-Euler transport is not claimed. A
+  time-dependent carrier returns to the unresolved 2D gate. This retires the
+  named architectures, not every possible nonlinear finite-dimensional
+  invariant manifold, and no Navier--Stokes or Millennium result is claimed. See
   `millennium-prize/navier-stokes/cycle-252-explicit-euler-family-scout.md`.
 
 - 2026-08-02: Strategic correction: the Cycle 251 assignment of bounded Hodge
@@ -1132,7 +1186,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 252 runs focused Navier dynamics `ND251` after the exact
+- **phase:** Cycle 255 runs focused Navier dynamics `ND251` after the exact
   F242 source-level no-go retired that Hodge support architecture. Literal
   full-vorticity `dot H^-1` growth is off the Euler energy shell; the viable
   target is fixed-`dot H^-1`, variable-`W^(-1,3)` amplification, while `KI240`
@@ -1968,7 +2022,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 252
+- **cycle:** 255
 - **announcements:** none
 
 ## immutable target list
