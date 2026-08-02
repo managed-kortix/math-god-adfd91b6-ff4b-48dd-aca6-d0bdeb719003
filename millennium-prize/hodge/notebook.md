@@ -1,5 +1,22 @@
 # Notebook
 
+## Cycle 242 Fermat-quartic triple-sum support gate
+
+The next bounded support category uses images of `C_Fermat^3`, not graph
+sheaves. Fix the explicit elliptic-idempotent isogeny map
+`phi:C_Fermat -> E_i^3` and enumerate norm-at-most-one Gaussian triples
+`L_r in M_(6x3)(Z[i])`. For
+`f_L(p_1,p_2,p_3)=sum L_r phi(p_r)`, a closed immersion has support isomorphic
+to `C^3` and irregularity nine, intrinsically excluding graph threefolds; its
+924-coordinate class must also lie outside the old seven-graph span. The class
+is computed exactly as the triple Pontryagin product of the pushed-forward
+curve class, and `c_3(O_Y)=2[Y]`, so nonzero Weil projection is noncircular.
+The finite `PASS` gate additionally requires zero nine-column Atiyah and
+embedded-normal matrices and exact solutions of all 45 quadratic lift
+equations. Exhaustive rejection of the `5^54` labelled triples, with a witness
+at the first failed gate, is `FAIL`; unfinished computation is `INCOMPLETE`. No Chow
+degree-one/two or previously retired support architecture is used.
+
 ## Cycle 241 connective Karoubi normal form
 
 The Karoubi boundary from Cycles 200--201 closes for these seven generators.

@@ -1,5 +1,17 @@
 # Routes
 
+Cycle 242 selects focused discovery `LA242` after terminal `KI240 PASS` has zero
+official transfer.  Navier--Stokes leads the six-lane comparison at `(1,1,0,1)`
+but is not yet an assigned proof campaign because it lacks a frozen finite
+production object.  A new proposal must specify one deterministic smooth
+Lagrangian vorticity-rearrangement family, prove a signed velocity-`L^3`
+amplification greater than two with complete generated-scale and smoothing
+bounds, attach finite exact breakers to every indispensable inequality, and
+supply the Cycle 211 Euler-stability, inviscid-limit, amplitude, and directed
+cubature data.  Finite Fourier enumeration, Fibonacci rails, unbounded vortex
+searches, and positive-order norm growth without velocity-`L^3` transfer are
+inadmissible.  See `../cycle-242-strategic-rotation.md`.
+
 Cycle 210 promotes the universal factor-two amplification bound for the
 mean-zero `L^3` norm of every maximal smooth periodic solution. Together with
 endpoint `L^infinity_t L^3_x` continuation, it would imply the periodic

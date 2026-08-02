@@ -1,5 +1,33 @@
 # Routes
 
+Cycle 242 applies the stop rule after `KI240 PASS`.  The theorem is terminal for
+the declared graph-generated category and has zero official transfer.  Do not
+enumerate more graph packets, enlarge or vary the graph collection, or revisit
+equivalent additive, Fourier--Mukai, linkage, Ferrand, or projector
+presentations.  Hodge may re-enter only with a genuinely new non-graph support
+or production mechanism.  The six-lane review rotates the portfolio to Navier
+focused discovery `LA242`; see `../cycle-242-strategic-rotation.md`.
+
+## Cycle 242 Fermat-product image scout
+
+After the graph-generated thick category becomes Karoubian and remains
+obstructed, freeze a genuinely different finite category. Let `C` be the Fermat
+quartic with a fixed, explicitly certified Abel--Jacobi isogeny map
+`phi:C -> E_i^3`. Enumerate the `5^54` triples of norm-at-most-one Gaussian
+matrices `L_r in M_(6x3)(Z[i])` and form the images in `E_i^6` of
+`(p_1,p_2,p_3) -> sum L_r phi(p_r)`. Closed immersion makes the support `C^3`,
+whose irregularity nine excludes a graph threefold; exact nonmembership in the
+seven-graph cohomology span excludes the old graph-generated `K_0` category.
+The exceptional class is directly computable from
+`(L_1)_*gamma*(L_2)_*gamma*(L_3)_*gamma`, with
+`c_3(O_Y)=2[Y]`, and therefore does not assume the generic bundle sought in the
+Cycle 198 circular formulation. Admission requires nonzero Weil projection,
+zero Atiyah and embedded-normal obstructions in all nine PEL columns, and 45
+exact quadratic lifts. Failure requires exhaustive exact rejection, with any
+symmetry reduction fully accounted. This scout uses no
+Chow degree-one/two curve and no complete-intersection, Ferrand, liaison,
+Pfaffian, determinantal, graph-cone, Karoubi, or Fourier--Mukai support.
+
 ## Cycle 223 conic-carrier obstruction
 
 For a nonconstant degree-two map `P^1 -> Chow_(r,d)(X)` with geometrically

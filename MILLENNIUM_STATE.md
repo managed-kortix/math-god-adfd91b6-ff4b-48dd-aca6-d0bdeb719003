@@ -1,5 +1,55 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: RH bounded scout clips the clipping architecture itself. Cycle
+  207 remains a valid finite perturbation lemma, but Cycle 208 cannot bypass
+  the Cycle 174/206 equivalence: vanishing positive canonical exhaustions for
+  shifted xi through shifts tending to zero are RH-equivalent. This is a
+  `WALL` for clipped canonical production. The replacement `NB242` gate asks
+  for one finite directed certificate
+  `P_(2N)<=(3/4)P_N` for the explicit logarithmic Nyman--Beurling taper. One
+  block is finite, falsifiable, and non-equivalent. If the same contraction
+  held at every dyadic descendant of a base scale, geometric decay, the
+  unconditional `A_N->0`, and the discrete Nyman--Beurling criterion would
+  prove the official RH statement. No cofinal contraction or RH result is
+  claimed. See
+  `millennium-prize/riemann-hypothesis/cycle-242-nyman-beurling-finite-transfer-gate.md`.
+
+- 2026-08-02: Cycle 242 applies the stop rule after `KI240 PASS`.  The pass is
+  preserved as closure of the declared graph-generated Karoubi boundary, but
+  its official transfer is zero, so graph packets, enlarged graph sets, and
+  equivalent graph-support presentations are no longer an active Hodge funnel.
+  The six-lane review again places Navier--Stokes first at `(1,1,0,1)`, but no
+  finite production object exists after the finite-support rigidity theorem and
+  the two exact Fibonacci-tail obstructions.  The portfolio therefore selects
+  focused discovery `LA242`, not an assigned proof campaign: admit one
+  deterministic smooth Lagrangian vorticity-rearrangement family only after it
+  gives a signed velocity-`L^3` factor-greater-than-two mechanism, complete
+  generated-scale bounds, finite exact breakers, and the Cycle 211 inviscid and
+  full-PDE transfer data.  Do not continue enumerating graph support or launch
+  unbounded vortex/Galerkin searches.  See
+  `millennium-prize/cycle-242-strategic-rotation.md`.
+
+- 2026-08-02: Cycle 242 selects the norm-one Fermat-quartic triple-sum category
+  `F242` as the next bounded Hodge scout after closure of all graph-generated
+  Karoubi objects. For the fixed Abel--Jacobi isogeny map
+  `phi:C_Fermat -> E_i^3`, it enumerates the finite `5^54` triples of Gaussian
+  `6 x 3` matrices and takes scheme-theoretic images of
+  `(p1,p2,p3) -> sum L_r phi(p_r)` in `A_0`. A closed-immersion candidate is
+  intrinsically non-graph because it is `C^3` with irregularity nine; exact
+  cohomology also must put its class outside the seven-graph span. Its
+  exceptional `c_3` is computed, not assumed:
+  `c_3(O_Y)=2[Y]` and `[Y]=(L_1)_*gamma*(L_2)_*gamma*(L_3)_*gamma`, followed by
+  the explicit Weil projector. `PASS` requires one closed immersion, nonzero
+  projected `c_3`, zero nine-column Atiyah and embedded-normal matrices, and
+  exact solutions of all 45 quadratic lift equations. `FAIL` requires
+  exhaustive exact rejection of all `5^54` labelled triples, or a fully
+  accounted finite orbit reduction, with checkable witnesses. This introduces
+  no Chow degree-one/two curve and uses none of the retired graph, complete-
+  intersection, Ferrand, liaison, Pfaffian, determinantal, or Fourier--Mukai
+  architectures. Passage is only admission to an all-order gate, not a Hodge
+  result. See
+  `millennium-prize/hodge/cycle-242-fermat-quartic-triple-sum-support-gate.md`.
+
 - 2026-08-02: Cycle 241 proves a strict `WALL` for every objectwise invariant
   factoring through the universal additive noncommutative motive, including
   arbitrary coefficient changes and ordinary, negative, or periodic cyclic
@@ -798,8 +848,9 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Hodge `KI240` Karoubi-idempotent structural gate assigned after
-  terminal `HK236 WALL` and the Navier Cycle 238--239 architecture obstructions
+- **phase:** Cycle 242 focused discovery `LA242` for a Lagrangian
+  critical-velocity amplification family; `KI240 PASS` is terminal at its
+  graph-generated scope and Hodge graph-support enumeration is stopped
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -1631,7 +1682,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 240
+- **cycle:** 242
 - **announcements:** none
 
 ## immutable target list
