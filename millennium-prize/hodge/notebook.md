@@ -1,5 +1,29 @@
 # Notebook
 
+## Cycle 241 connective Karoubi normal form
+
+The Karoubi boundary from Cycles 200--201 closes for these seven generators.
+Their minimal Ext category is connective, with `Hom^0(F_i,F_j)=0` for `i!=j`
+and `End^0(F_i)=C`.  In every finite projector packet, canceling scalar
+contractible pairs terminates; on the resulting minimal packet, degree-zero
+maps preserve the finite shift filtration and have a product-of-matrix-algebras
+symbol.  Splitting that symbol and removing successive strictly triangular
+terms through its nilpotent ideal gives a finite stable normal form
+`1_D direct-sum 0`, even for arbitrary noncentral projectors.  Thus the finite
+twisted-complex category is already idempotent complete.  Generic Euler
+multiplicities recover the seven coefficients of `xi`, and Cycle 200 applied to
+the finite image `D`, followed by Atiyah naturality, produces a nonzero one of
+the nine corners.  This proves `KI240` for the graph-generated support category,
+not the Hodge conjecture.
+
+The homotopy-idempotent step is literal.  For a closed representative `a` with
+`delta=a^2-a=dh`, replace `a` by `a+(1-2a)delta`; the new defect is
+`-3delta^2+4delta^3`, with primitive `(-3delta+4delta^2)h`.  Repetition doubles
+the nilpotent filtration order and terminates.  If `p` is the diagonal scalar
+symbol, `u=ep+(1-e)(1-p)` conjugates the resulting strict idempotent to `p`, and
+`u^{-1}` is a finite geometric series.  This removes the strictification gap
+identified by the hostile audit without invoking a telescope.
+
 ## Cycle 223 conics on Chow varieties
 
 For a Chow-degree-two map from `P^1` with geometrically integral, generically
@@ -84,6 +108,22 @@ free gap `p`. Hence a zero pure cube is exactly a multiple of a permutation of
 contamination, while three coordinates on one ray have zero `XYZ` coefficient.
 This is an unbounded arithmetic no-go in the free coordinate cone, not for
 effective divisor cones with relations. No Hodge result is claimed.
+
+## Cycle 241 additive-motive wall and punctured-support gate
+
+The universal additive motive proves a strict wall: every natural objectwise
+additive characteristic class, with arbitrary coefficients and including all
+standard cyclic variants, sees an object only through `K_0`. It therefore has
+the same value on all objects of class `xi`, and cannot distinguish the known
+raw-obstructed, trace-zero split object. Geometric restriction is stronger:
+removing the other graphs finitely punctures `G_k`, and depth preserves its
+normal `H^1`; supported/topological K-theory retains multiplicity `c_k`.
+Completion by this route reduces exactly to `PSC`: for every perfect complex supported on
+the punctured regular branch, `o_v(P)=0` must imply `m rho_G(v)=0`. This is
+known for the filtered graph complexes but is not formal for arbitrary Karoubi
+images, because their support may move and ordinary semiregularity has a
+coarser target. Additive motives are `WALL`; this route does not decide
+`KI240`, independently of the connective normal-form argument recorded first.
 
 ## Cycle 203 first Ferrand doubles
 

@@ -131,6 +131,23 @@ all pairwise `Ext^3` groups are nonzero. Thus only projector-sensitive,
 untraced information could close the boundary, and that information is
 presently just the unknown raw Atiyah corner itself.
 
+Cycle 241 supplies the missing noncentral-projector theorem by changing from
+the packet-dependent vertex ordering to the intrinsic shift filtration in the
+minimal Ext category.  This category is connective and its degree-zero algebra
+is `C^7`.  Scalar cancellation followed by finite nilpotent triangular
+splitting puts every finite strict projector, after harmless contractible
+stabilization, into `1_D direct-sum 0` with `D` another finite graph twisted
+complex.  Therefore the finite twisted-complex category is already Karoubian,
+and Cycle 200 applies to every object of the thick closure.  Generic Euler
+multiplicities detect the seven nonzero `xi` coordinates, and Atiyah naturality
+identifies the resulting obstruction with a nonzero projector corner.  This is
+`KI240 PASS` for the specified support category, with no transfer to the full
+Hodge conjecture.  For a cohomological idempotent represented by `a` with
+`a^2-a=dh`, Cycle 241 first iterates
+`a -> a+(1-2a)(a^2-a)`: the new defect is
+`-3(a^2-a)^2+4(a^2-a)^3`, with an explicit primitive, so finite nilpotence
+strictifies it before the triangular splitting.
+
 Cycle 202A shows that Fourier--Mukai transport changes presentation, not this
 gate. Untwisted graph sheaves transform to shifted sheaves on annihilator
 threefolds. After tensoring by a relative ample line bundle they transform to

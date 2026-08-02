@@ -1,0 +1,739 @@
+{
+  "artifact": "cycle241_graph_ext_algebra",
+  "cross_ext": {
+    "basis": "x_(ij,s), 0<=s<L_ij, for every ordered i!=j",
+    "degrees": "all x_(ij,s) have degree 3; every other cross Ext group is zero",
+    "normalization": "dual bases for the perfect degree-3 Serre pairings; the minus sign is graded cyclicity in odd degree",
+    "pair_records": [
+      {
+        "cross_ext_3_dimension": 8,
+        "delta": {
+          "im": 1,
+          "re": 1
+        },
+        "norm": 2,
+        "vertices": [
+          0,
+          1
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 8000,
+        "delta": {
+          "im": 4,
+          "re": 2
+        },
+        "norm": 20,
+        "vertices": [
+          0,
+          2
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 1815848,
+        "delta": {
+          "im": 11,
+          "re": 1
+        },
+        "norm": 122,
+        "vertices": [
+          0,
+          3
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 262144000,
+        "delta": {
+          "im": 24,
+          "re": -8
+        },
+        "norm": 640,
+        "vertices": [
+          0,
+          4
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 32829478408,
+        "delta": {
+          "im": 41,
+          "re": -39
+        },
+        "norm": 3202,
+        "vertices": [
+          0,
+          5
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 3989418056000,
+        "delta": {
+          "im": 44,
+          "re": -118
+        },
+        "norm": 15860,
+        "vertices": [
+          0,
+          6
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 1000,
+        "delta": {
+          "im": 3,
+          "re": 1
+        },
+        "norm": 10,
+        "vertices": [
+          1,
+          2
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 1000000,
+        "delta": {
+          "im": 10,
+          "re": 0
+        },
+        "norm": 100,
+        "vertices": [
+          1,
+          3
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 226981000,
+        "delta": {
+          "im": 23,
+          "re": -9
+        },
+        "norm": 610,
+        "vertices": [
+          1,
+          4
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 32768000000,
+        "delta": {
+          "im": 40,
+          "re": -40
+        },
+        "norm": 3200,
+        "vertices": [
+          1,
+          5
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 4103684801000,
+        "delta": {
+          "im": 43,
+          "re": -119
+        },
+        "norm": 16010,
+        "vertices": [
+          1,
+          6
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 125000,
+        "delta": {
+          "im": 7,
+          "re": -1
+        },
+        "norm": 50,
+        "vertices": [
+          2,
+          3
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 125000000,
+        "delta": {
+          "im": 20,
+          "re": -10
+        },
+        "norm": 500,
+        "vertices": [
+          2,
+          4
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 28372625000,
+        "delta": {
+          "im": 37,
+          "re": -41
+        },
+        "norm": 3050,
+        "vertices": [
+          2,
+          5
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 4096000000000,
+        "delta": {
+          "im": 40,
+          "re": -120
+        },
+        "norm": 16000,
+        "vertices": [
+          2,
+          6
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 15625000,
+        "delta": {
+          "im": 13,
+          "re": -9
+        },
+        "norm": 250,
+        "vertices": [
+          3,
+          4
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 15625000000,
+        "delta": {
+          "im": 30,
+          "re": -40
+        },
+        "norm": 2500,
+        "vertices": [
+          3,
+          5
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 3546578125000,
+        "delta": {
+          "im": 33,
+          "re": -119
+        },
+        "norm": 15250,
+        "vertices": [
+          3,
+          6
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 1953125000,
+        "delta": {
+          "im": 17,
+          "re": -31
+        },
+        "norm": 1250,
+        "vertices": [
+          4,
+          5
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 1953125000000,
+        "delta": {
+          "im": 20,
+          "re": -110
+        },
+        "norm": 12500,
+        "vertices": [
+          4,
+          6
+        ]
+      },
+      {
+        "cross_ext_3_dimension": 244140625000,
+        "delta": {
+          "im": 3,
+          "re": -79
+        },
+        "norm": 6250,
+        "vertices": [
+          5,
+          6
+        ]
+      }
+    ],
+    "products": [
+      "m2(x_(ji,t),x_(ij,s))=delta_(s,t)*omega_i",
+      "m2(x_(ij,s),x_(ji,t))=-delta_(s,t)*omega_j",
+      "all products of cross basis vectors with distinct outer vertices are zero",
+      "positive-degree self classes times cross classes, on either side, are zero",
+      "vertex units act as source and target identities"
+    ]
+  },
+  "field": {
+    "model": "Q[t]/(t^2+1)",
+    "name": "Q(i)",
+    "scalar_encoding": {
+      "im": "rational",
+      "re": "rational"
+    }
+  },
+  "geometry": {
+    "ambient": "E_i^3 x E_i^3",
+    "objects": [
+      "F_0=O_Gamma_(u^0)",
+      "F_1=O_Gamma_(u^1)",
+      "F_2=O_Gamma_(u^2)",
+      "F_3=O_Gamma_(u^3)",
+      "F_4=O_Gamma_(u^4)",
+      "F_5=O_Gamma_(u^5)",
+      "F_6=O_Gamma_(u^6)"
+    ],
+    "powers": [
+      {
+        "im": 0,
+        "re": 1
+      },
+      {
+        "im": 1,
+        "re": 2
+      },
+      {
+        "im": 4,
+        "re": 3
+      },
+      {
+        "im": 11,
+        "re": 2
+      },
+      {
+        "im": 24,
+        "re": -7
+      },
+      {
+        "im": 41,
+        "re": -38
+      },
+      {
+        "im": 44,
+        "re": -117
+      }
+    ],
+    "u": {
+      "im": 1,
+      "re": 2
+    }
+  },
+  "scope": [
+    "This is the exact binary Yoneda algebra, in normalized bases, not a claim of a canonical geometric basis.",
+    "The compressed cross basis avoids materializing up to 4,103,684,801,000 coordinates.",
+    "The rules determine sparse chain-map products, Hom differentials, and Ext^2 obstruction matrices for bounded twisted complexes.",
+    "This bounded classification does not decide arbitrary Karoubi packets or KI240."
+  ],
+  "self_ext": {
+    "basis": [
+      {
+        "degree": 0,
+        "labels": [
+          []
+        ]
+      },
+      {
+        "degree": 1,
+        "labels": [
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ],
+          [
+            4
+          ],
+          [
+            5
+          ],
+          [
+            6
+          ]
+        ]
+      },
+      {
+        "degree": 2,
+        "labels": [
+          [
+            1,
+            2
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ]
+      },
+      {
+        "degree": 3,
+        "labels": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            1,
+            2,
+            4
+          ],
+          [
+            1,
+            2,
+            5
+          ],
+          [
+            1,
+            2,
+            6
+          ],
+          [
+            1,
+            3,
+            4
+          ],
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            1,
+            3,
+            6
+          ],
+          [
+            1,
+            4,
+            5
+          ],
+          [
+            1,
+            4,
+            6
+          ],
+          [
+            1,
+            5,
+            6
+          ],
+          [
+            2,
+            3,
+            4
+          ],
+          [
+            2,
+            3,
+            5
+          ],
+          [
+            2,
+            3,
+            6
+          ],
+          [
+            2,
+            4,
+            5
+          ],
+          [
+            2,
+            4,
+            6
+          ],
+          [
+            2,
+            5,
+            6
+          ],
+          [
+            3,
+            4,
+            5
+          ],
+          [
+            3,
+            4,
+            6
+          ],
+          [
+            3,
+            5,
+            6
+          ],
+          [
+            4,
+            5,
+            6
+          ]
+        ]
+      },
+      {
+        "degree": 4,
+        "labels": [
+          [
+            1,
+            2,
+            3,
+            4
+          ],
+          [
+            1,
+            2,
+            3,
+            5
+          ],
+          [
+            1,
+            2,
+            3,
+            6
+          ],
+          [
+            1,
+            2,
+            4,
+            5
+          ],
+          [
+            1,
+            2,
+            4,
+            6
+          ],
+          [
+            1,
+            2,
+            5,
+            6
+          ],
+          [
+            1,
+            3,
+            4,
+            5
+          ],
+          [
+            1,
+            3,
+            4,
+            6
+          ],
+          [
+            1,
+            3,
+            5,
+            6
+          ],
+          [
+            1,
+            4,
+            5,
+            6
+          ],
+          [
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            2,
+            3,
+            4,
+            6
+          ],
+          [
+            2,
+            3,
+            5,
+            6
+          ],
+          [
+            2,
+            4,
+            5,
+            6
+          ],
+          [
+            3,
+            4,
+            5,
+            6
+          ]
+        ]
+      },
+      {
+        "degree": 5,
+        "labels": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          [
+            1,
+            2,
+            3,
+            4,
+            6
+          ],
+          [
+            1,
+            2,
+            3,
+            5,
+            6
+          ],
+          [
+            1,
+            2,
+            4,
+            5,
+            6
+          ],
+          [
+            1,
+            3,
+            4,
+            5,
+            6
+          ],
+          [
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        ]
+      },
+      {
+        "degree": 6,
+        "labels": [
+          [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        ]
+      }
+    ],
+    "dimensions_degrees_0_to_6": [
+      1,
+      6,
+      15,
+      20,
+      15,
+      6,
+      1
+    ],
+    "presentation": "Lambda_K(a_1,...,a_6), |a_r|=1",
+    "product": {
+      "inv": "number of pairs (p,q) in I x J with p>q",
+      "rule": "a_I*a_J=0 if I intersects J; otherwise (-1)^inv(I,J)*a_(sorted(I union J))",
+      "top_class": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    }
+  },
+  "shift_rule": {
+    "cross_degree": "a cross basis map has shifted degree d=3+r-s",
+    "formula": "Hom^d(F_i[r],F_j[s])=Ext^(d-r+s)(F_i,F_j)"
+  },
+  "smallest_idempotents": {
+    "absolute_two_copy": {
+      "all_nontrivial": "[[a,b],[c,1-a]] with a(1-a)=bc over Q(i)",
+      "object": "F_i[r] direct_sum F_i[r]",
+      "structure": "all are rank-one and noncentral in M_2(Q(i))"
+    },
+    "cross_vertex_two_summand": {
+      "all_nontrivial": [
+        "[[1,x],[0,0]]",
+        "[[0,x],[0,1]]"
+      ],
+      "endomorphism_algebra": "T_L={[[a,x],[0,b]]:a,b in Q(i), x in Q(i)^L}, L=L_ij",
+      "object": "F_i[r] direct_sum F_j[r+3], i!=j",
+      "parameter": "x arbitrary in Q(i)^L",
+      "structure": "every listed projector is noncentral and conjugate by 1+rad(T_L) to its x=0 vertex projector"
+    },
+    "one_arrow_twisted_complex": {
+      "degree_zero_chain_idempotents": [
+        "0",
+        "1"
+      ],
+      "object": "(F_i[r] -> F_j[r+2]) with a nonzero degree-one cross differential",
+      "reason": "degree-zero endomorphisms are diagonal scalars and commuting with the nonzero arrow makes them equal"
+    }
+  },
+  "version": 1
+}

@@ -1,5 +1,42 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: Cycle 241 proves a strict `WALL` for every objectwise invariant
+  factoring through the universal additive noncommutative motive, including
+  arbitrary coefficient changes and ordinary, negative, or periodic cyclic
+  Chern characters: a map out of the motive of `Perf(k)` is exactly a `K_0`
+  class, so all objects of class `xi` have the same additive characteristic
+  class, while the known split object has nonzero raw obstruction and zero
+  traced class. A geometric refinement survives this wall. Removing the other
+  six graphs leaves each graph threefold only finitely punctured, and depth
+  makes its normal `H^1` survive unchanged; supported `K`-theory then retains
+  branch multiplicity `c_k`. Turning this into a raw-corner detector requires
+  the newly isolated `PSC` lemma: vanishing Atiyah obstruction for an arbitrary
+  perfect complex of generic multiplicity `m` must force `m rho_G(v)=0` on the
+  punctured support. This is not formal from additive motives or ordinary
+  semiregularity. Therefore the additive-motive route is `WALL` and does not by
+  itself decide `KI240`; the separate connective normal-form theorem below
+  claims the gate pass. No Hodge result is claimed. See
+  `millennium-prize/hodge/cycle-241-additive-motive-wall-and-punctured-support-gate.md`.
+
+- 2026-08-02: Cycle 241 proves `KI240 PASS` by a connective Karoubi
+  normal-form theorem.  The minimal Ext category of `F_0,...,F_6` has no
+  negative morphisms and has degree-zero algebra `C^7`: cross Ext is confined
+  to degree three and each vertex has scalar degree-zero endomorphisms.  For an
+  arbitrary finite noncentral homotopy idempotent, scalar cancellation
+  terminates, and the defect recursion `delta -> -3 delta^2+4 delta^3` doubles
+  its nilpotent filtration order until it is a strict projector.  The finite
+  conjugator `ep+(1-e)(1-p)` then gives the block splitting.  The intrinsic
+  shift filtration has semisimple degree-zero symbol, and a
+  nilpotent triangular induction gives a finite stable block form
+  `1_D direct-sum 0`.  Hence the finite twisted-complex category is already
+  idempotent complete, so every retract is represented by a finite twisted
+  complex and the Cycle 200 obstruction theorem applies.  Generic-point Euler
+  multiplicities independently detect all seven nonzero coefficients of `xi`,
+  while Atiyah naturality identifies the resulting nonzero class with one of
+  the nine projector corners.  This closes only the declared graph-generated
+  support category and has no Hodge-conjecture consequence.  See
+  `millennium-prize/hodge/cycle-241-connective-karoubi-normal-form.md`.
+
 - 2026-08-02: Cycle 239 focused discovery exactly rejects the direct infinite
   Fibonacci-rail completion of the Cycle 224 architecture. For
   `k_j=(F_(j+1),F_j)`, the doubled mode

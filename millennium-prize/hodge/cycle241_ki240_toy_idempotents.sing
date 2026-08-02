@@ -1,0 +1,32 @@
+// Exact KI240 search in the first actual cross-Ext degree-zero algebra.
+ring r = 0,(a,b,x,t),dp;
+
+// e=[a,x;0,b].  The first three equations are e^2=e.  Variables a and b
+// are also the two independent diagonal raw-obstruction corners.
+ideal I = a^2-a,b^2-b,(a+b-1)*x,a,b;
+
+// Saturate by t*(a+b)-1: require a nonzero diagonal K-class.
+ideal J = I,t*(a+b)-1;
+ideal G = std(J);
+if (reduce(1,G)==0)
+{
+  print("unit ideal: no nonzero-K projector has both raw corners zero");
+}
+else
+{
+  print("ERROR: saturated corner ideal is not the unit ideal");
+  quit(1);
+}
+
+// Verify the noncentral graph family e=[1,x;0,0] survives idempotency.
+ideal H = subst(subst(ideal(a^2-a,b^2-b,(a+b-1)*x),a,1),b,0);
+ideal GH = std(H);
+if (reduce(x,GH)!=0)
+{
+  print("noncentral graph-idempotent parameter x is free");
+}
+else
+{
+  print("ERROR: x was incorrectly killed");
+  quit(1);
+}
