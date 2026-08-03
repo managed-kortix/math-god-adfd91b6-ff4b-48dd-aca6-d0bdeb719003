@@ -131,7 +131,7 @@ python3 pentacyclic/research/order7-kernel-family-theorem-verifier.py
 python3 -O pentacyclic/research/order7-kernel-family-theorem-verifier.py
 ```
 
-## Frozen order-eight cubic experiment
+## Complete order-eight theorem
 
 `order8-cubic-tetra-census-experiment.py` extracts exactly the 16 order-eight
 cubic kernels (fixture rows 103--118), reconstructs 46,736 physical parity
@@ -140,18 +140,38 @@ It certifies 7,705 orbits and leaves 3,483 residuals. Each cubic kernel has 12
 paths, so the canonical-plus-twelve-coordinate ledger has 45,279 targets. The
 artifact also marks the unique row-118 all-support cycle equality residual.
 
-`order8-dim8-rational-canonical-frontiers-experiment.py` searches those targets
-with eight-dimensional branch vectors and accepts only exact rational
-stereographic reconstructions. Every failed reconstruction is retained in the
-top-level `unresolved_keys` ledger and printed by the CLI. Both artifacts are
-frozen as experiments with `experiment_fixture_frozen=true` and remain
-fail-closed with `full_theorem=false`; they do not alter a main verifier or
-promote unresolved targets.
+`order8-dim8-rational-canonical-frontiers-experiment.py` searched those targets
+with eight-dimensional branch vectors and accepted only exact rational
+stereographic reconstructions. Four source-locked chunks contain 45,249 strict
+rational certificates and 30 unresolved keys. The unresolved set is exactly
+six K118 rows at canonical and path frontiers `0,5,6,11`.
+
+`order8-kernel-family-theorem.json` is a compact theorem fixture: it does not
+duplicate the roughly 67 MB of rational records, but stores the 30 exact signed
+cycle closures and locks all four chunks. Its verifier derives all 45,279 keys
+from the census, checks each chunk slice, verifies every rational `Fraction`
+witness, checks every principal minor and path cost for all 30 K118 records,
+and audits all-length coverage and arbitrary rooted-tree attachments. It also
+rejects ten hostile mutations and enforces identical normal and `-O` output.
+
+The raw census and chunks remain honestly labeled `full_theorem=false`;
+promotion occurs only in the separate deterministic theorem fixture. The paper
+note is `positive-square-energy/pentacyclic-general/order-eight-kernel-family-theorem.md`.
 
 Run the exact census and a bounded search slice with:
 
 ```text
 python3 pentacyclic/research/order8-cubic-tetra-census-experiment.py
 python3 -O pentacyclic/research/order8-cubic-tetra-census-experiment.py
-python3 pentacyclic/research/order8-dim8-rational-canonical-frontiers-experiment.py --limit 1 --progress
+python3 pentacyclic/research/order8-kernel-family-theorem-verifier.py
+python3 -O pentacyclic/research/order8-kernel-family-theorem-verifier.py
+python3 research/rank-five-order2-8-master-verifier.py
+python3 -O research/rank-five-order2-8-master-verifier.py
 ```
+
+The implication master composes the independently regenerated exact census
+with every order-two-through-eight theorem owner. Its theorem note is
+`positive-square-energy/pentacyclic-general/rank-five-order2-8-master-theorem.md`.
+This closes all 118 single rank-five suppressed-kernel families after arbitrary
+simple subdivisions and rooted-tree attachments; it does not claim the
+connected pentacyclic multiblock cases.

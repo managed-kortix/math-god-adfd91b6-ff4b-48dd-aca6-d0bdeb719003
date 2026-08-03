@@ -17,6 +17,23 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-02: completed the entire single-block pentacyclic frontier. The 16
+  cubic order-eight kernels have 46736 physical parity rows / 11188 genuine
+  automorphism orbits; 7705 are tetrahedral and 3483 residual orbits generate
+  45279 all-length frontier targets. Exactly 45249 have strict rational Gram
+  certificates and the final 30 are six signed-cycle K118 equality rows. The
+  streaming fail-closed verifier uses ~25MB, passes normal/`-O`, and rejects ten
+  mutations. The master theorem now exhausts all
+  `1+3+13+24+38+23+16=118` rank-five suppressed kernels with arbitrary simple
+  subdivision and rooted-tree attachment; dependency manifest digest
+  `c3203c8f300ee995e55a09f8b1b32b2f973f0475ff54e560738b7e8caac09d0c`.
+  Independent hostile audit returned ACCEPT. This proves every connected
+  pentacyclic graph having one positive-rank block, but deliberately does not
+  claim the remaining multiblock cases. Their exact fail-closed residual is
+  four no-routing rooted packet templates requiring attachment-uniform surplus
+  `>1`; minimal-core and multi-root star asymptotics show worst tested limit
+  `5-sqrt(5)>1`, so the obstruction remains proof-theoretic rather than a found
+  spectral counterexample.
 - 2026-08-02: proved the complete rank-five order-six and order-seven kernel
   theorems. Order six covers 38 kernels, 23208 physical rows / 12810 orbits,
   and 16478 residual all-length frontier targets as `16451+18+9` (strict
