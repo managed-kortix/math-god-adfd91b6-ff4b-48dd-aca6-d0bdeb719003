@@ -1,5 +1,63 @@
 # millennium state — dedicated working memory
 
+- 2026-08-03: Cycle 274 unconditionally synthesizes the verified
+  `ND274-C265-CERTIFICATE-CAPACITY: WALL`. The scalar shrinking-Wiener,
+  displacement, and inviscid-transfer region is nonempty, so the result is not
+  a datum-free no-go; without an actual Fourier datum and enclosed orbit it
+  cannot decide the signed omitted convolutions, strict Picard inclusions, or
+  endpoint cubature and therefore is not a capacity witness. Close the bounded
+  no-datum C265 analysis, preserve `ND251` but leave it inactive, and do not
+  convert the missing payload into a datum campaign. Final scores are Navier--
+  Stokes `(1,1,0,1)`, Hodge `(1,1,0,0)`, RH `(1,0,0,1)`, BSD `(0,1,1,0)`, P
+  versus NP `(0,1,1,0)`, and Yang--Mills `(0,1,0,0)`. Because the leading lane
+  has no stop-rule-compliant active continuation, select focused portfolio
+  packet admission as the next main. `C275-ONE-PACKET-ADMISSION` audits at most
+  one independently supplied complete packet and returns `ADMIT`, `REJECT`,
+  `WALL`, or `NO-INPUT`; it may not fill a missing input, search for a datum, or
+  substitute a second packet. All stopped routes remain stopped. See
+  `millennium-prize/cycle-274-unconditional-wall-synthesis.md`.
+
+- 2026-08-03: Cycle 274 hostilely tests whether the shrinking-Wiener lifespan
+  gates structurally forbid factor-two velocity-`L3` growth. They do not. The
+  direct consequence is `||u(T)-u0||_3` at most
+  `M^2 integral_0^T kappa(q(t))dt`; doubling needs displacement above
+  `||u0||_3`, but energy and `A_q` give only the lower bound
+  `M/||u0||_3>=q0`, not an upper bound. The resulting dimensionless condition
+  is invariant under Euler amplitude scaling and has an exact rational scalar
+  consistency assignment: `q0=2`, `M=alpha=1`, `T=1/4`, `Q=3/2`, `E=1/10`,
+  `U=1/8`, and `d=3/20`; its sharper integrated cap is `1/6`, and `U<d<1/6`.
+  This is not a
+  datum or orbit; it proves only that the proposed datum-free no-go cannot use
+  these controls and `L2` bounds alone. See
+  `millennium-prize/navier-stokes/cycle-274-shrinking-radius-displacement-hostile-audit.md`.
+
+- 2026-08-03: `ND274-C265-CERTIFICATE-CAPACITY` returns `WALL`. Under the
+  bounded grid imported from the frozen C266 manifest (not ranges frozen by
+  the general C265 interface) and no datum, set
+  `m=lambda*A_q0(v0)*T` and `ell=||v0||_3/A_q0(v0)`, with the mandatory bound
+  `0<ell<=1/q0`. Exact Wiener feasibility
+  is `m<1-1/q0`; positive shrinking-Wiener transfer capacity requires the
+  stricter `q0(1-m)^2>1`; and any ratio `gamma` necessarily requires
+  `(gamma-1)ell<m*kappa1(q0(1-m))`, with coefficient `6/5` at the frozen
+  `gamma=11/5`. Amplitude/inverse-time scaling preserves these dimensionless
+  gates and every endpoint ratio. Their scalar region is nonempty, so no
+  datum-free `NOGO` follows. But the signed omitted convolutions, strict Picard
+  inclusions, and endpoint cubature bounds require an actual Fourier datum and
+  enclosed orbit, so no finite allocation `WITNESS` can be emitted. The first
+  missing item is the datum-dependent retained/Picard/cubature payload. See
+  `millennium-prize/navier-stokes/cycle-274-c265-certificate-capacity.md`.
+
+- 2026-08-03: Cycle 274 pre-registers the conditional six-lane rescore for all
+  three possible outputs of the pending `ND251` certificate-capacity analysis:
+  `WITNESS`, `NOGO`, and `WALL`. A witness earns finite-actionability credit but
+  is not an endpoint crossing; a no-go retires only the certificate model
+  covered by its quantifiers; a wall pauses that model at its first named
+  missing item. No branch is assigned in advance. The verified capacity result
+  must be synthesized with all six dossiers before any rotation or next-main
+  declaration. `ND251` is preserved and paused; no computation or Millennium
+  claim is authorized. See
+  `millennium-prize/cycle-274-conditional-capacity-rescore.md`.
+
 - 2026-08-03: Cycle 273 durable repair preserves the original frozen manifest
   at SHA-256 `2a0e301c5e41060d423cf82c8052a3949d96475e924b858ffa4da763abbe4cce`
   and recovers its pinned admission certificate at SHA-256
@@ -1792,9 +1850,10 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 273 closes the admitted P3 singleton by exact analytic
-  rejection before trajectory compute; `ND251` remains main but datum-level
-  production is suspended pending certificate-capacity analysis
+- **phase:** Cycle 274 accepts the C265 no-datum capacity `WALL`, closes that
+  analysis, preserves `ND251` as inactive, and selects
+  `C275-ONE-PACKET-ADMISSION` as the focused portfolio main with one-packet hard
+  bounds and no missing-datum campaign
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -2626,7 +2685,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 273
+- **cycle:** 274
 - **announcements:** none
 
 ## immutable target list

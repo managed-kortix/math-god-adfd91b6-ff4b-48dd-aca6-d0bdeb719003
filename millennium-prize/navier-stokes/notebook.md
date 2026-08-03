@@ -1,5 +1,20 @@
 # Notebook
 
+## Cycle 274 shrinking-radius displacement hostile audit
+
+The datum-free gates `A_q0(u0)<=M`, `alpha>=M`, and `q(T)>1` imply the direct
+cap `||u(T)-u0||_3<=M^2 integral_0^T kappa(q(t))dt`, whereas a ratio above two
+requires displacement greater than `||u0||_3`. Energy and the initial Wiener
+bound give `M>=q0||u0||_3>=q0||u0||_2`, but do not bound
+`M/||u0||_3` from above. In the scale-invariant variables
+`x=M/||u0||_3` and `tau=MT`, this leaves a nonempty region. The exact abstract
+rational consistency assignment `q0=2`, `M=alpha=1`, `T=1/4`, `Q=3/2`, `E=1/10`,
+`U=1/8`, and `d=3/20` has `kappa(q(t))=2/q(t)^2` and exact integrated cap
+`1/6`, so `U<d<1/6`. Thus these controls alone furnish no structural
+no-go. This is a scalar nonemptiness certificate, not a capacity `WITNESS`,
+datum, or orbit. See
+`cycle-274-shrinking-radius-displacement-hostile-audit.md`.
+
 ## Cycle 272 exact short-time growth
 
 Directed replay gives `297/10^6<L'(0)<474/10^6` and `3<L''(0)<4` for
