@@ -1,5 +1,33 @@
 # millennium state — dedicated working memory
 
+- 2026-08-03: Cycle 270 accepts `DG-ALPHA-WALL` and forbids an automatic cover
+  retry. A global line-bundle Koszul resolution repairs the nonprincipality
+  presentation abstractly, but it does not supply common-model Cech
+  representatives for `h_i`, `n_i`, `alpha`, the nine PEL first-order
+  deformations, or the variation-of-arrow map. Consequently no Hodge
+  line-bundle campaign is admitted. The six-lane rescore returns the main
+  funnel to `ND251`, scored `(1,1,0,1)`, while Hodge drops to `(1,1,0,0)` and
+  RH remains `(1,0,0,1)`. The next bounded action is `ND270-ADMISSION`: review
+  one finitely printed genuinely 3D infinite-support Euler architecture before
+  any computation, returning `ND270-ADMIT`, `ND270-ARCH-WALL`, or
+  `ND270-DUPLICATE`. No architecture is currently supplied, so the state is
+  `AWAITING ARCHITECTURE`; no search, rerun, cover refinement, or compute is
+  authorized. See `millennium-prize/cycle-270-strategic-rescore.md`.
+
+- 2026-08-03: Yang--Mills bounded scout `Y270-RECENTER-NORM` tests one
+  coupling-dependent, non-diagonal norm for the exact two-dimensional `SU(2)`
+  map and stops at `EXACT ISOMETRY / STRUCTURAL IRRELEVANCE WALL`. In
+  log-Casimir coordinates `h_j=-log(c_j)/[j(j+1)]`, it removes the anchored
+  `j=1/2` coupling displacement from every shape channel and divides by the
+  running scale `t`. The map `c_j -> c_j^4` multiplies every `h_j`, every
+  recentered difference, and `t` by four, so the moving-reference distance is
+  preserved exactly and cannot have Lipschitz constant below one. Scaling by
+  `t^alpha`, `alpha>1`, manufactures the factor `4^(1-alpha)` only through a
+  UV-singular change of units. Recentring may organize a 4D stability question,
+  but the 2D map has no normal smoothing and 4D generates coupled polymers, so
+  no contraction, continuum, mass-gap, or Millennium claim transfers. See
+  `millennium-prize/yang-mills/cycle-270-recentered-log-casimir-wall.md`.
+
 - 2026-08-03: Hostile algebraic-geometry review terminates
   `H269-DG-DIAG-ALPHA` at the exact output `DG-ALPHA-WALL`. The diagonal
   `E^3 -> E^3 x E^3` is a codimension-three regular immersion, the declared
@@ -1655,8 +1683,8 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 269 runs the frozen direct Cech--Koszul Hodge packet
-  `H269-DG-DIAG-ALPHA`; `ND251` is paused, not retired
+- **phase:** Cycle 270 resumes `ND251` at bounded architecture gate
+  `ND270-ADMISSION`; state is `AWAITING ARCHITECTURE`
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -2488,7 +2516,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 269
+- **cycle:** 270
 - **announcements:** none
 
 ## immutable target list

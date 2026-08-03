@@ -1,5 +1,16 @@
 # Notebook
 
+## Cycle 270 resumed main funnel
+
+The H269 direct-dg packet terminates at its frozen cover wall, and a line-bundle
+Koszul substitution is not admitted without the missing PEL chain
+representatives. `ND251` therefore resumes as the main funnel, but no retired
+Euler family or numerical screen is reopened. The next bounded action is
+`ND270-ADMISSION`: evaluate one finite genuinely 3D infinite-support proposal
+before compute and return `ADMIT`, `ARCH-WALL`, or `DUPLICATE`. No proposal has
+yet been supplied, so the persisted state is `AWAITING ARCHITECTURE`. See
+`../cycle-270-strategic-rescore.md`.
+
 ## Cycle 268 nonlinear infinite-support manifold
 
 The cellular carrier `v=(sin y,-sin x)` and analytic passive component

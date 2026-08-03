@@ -1,5 +1,16 @@
 # Routes
 
+## Cycle 270 resumed main funnel
+
+After the prescribed H269 cover wall, `ND251` again becomes the main funnel.
+No old production family is reopened. The immediate bounded frontier is
+`ND270-ADMISSION`, a pre-compute review of one finitely printed genuinely
+three-dimensional infinite-Fourier-support Euler architecture. It returns
+`ADMIT`, the first architecture wall, or an exact reduction to a retired
+family. No proposal is currently supplied, so the state is `AWAITING
+ARCHITECTURE` and no compute is authorized. See
+`../cycle-270-strategic-rescore.md`.
+
 Cycle 267 closes every genuinely 3D fixed-Fourier/Lie closure by the
 Kishimoto--Yoneda classification: a real mean-zero Euler solution confined to
 one finite Fourier set is stationary, and if that support spans three

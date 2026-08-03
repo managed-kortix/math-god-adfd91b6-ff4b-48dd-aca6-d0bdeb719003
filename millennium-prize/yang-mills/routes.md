@@ -1,5 +1,19 @@
 # Routes
 
+## Cycle 270 recentered norm wall
+
+For the exact 2D map `c_j -> c_j^4`, set
+`h_j=-log(c_j)/[j(j+1)]`, recenter every shape channel by the `j=1/2`
+coupling channel, and divide by its running scale `t`. This is a
+coupling-dependent, non-diagonal full-tail norm. Since all log-Casimir
+differences and `t` multiply by four, its moving-reference distance is exactly
+preserved. A denominator `t^alpha` with `alpha>1` produces a number below one
+only by a UV-singular renormalization of units, not by shape damping. Record
+`Y270-RECENTER-NORM: EXACT ISOMETRY / STRUCTURAL IRRELEVANCE WALL` and stop this
+norm. Four dimensions would require a new strict normal-derivative estimate for
+the generated polymer action; 2D factorization supplies none. See
+`cycle-270-recentered-log-casimir-wall.md`.
+
 ## Cycle 264 one-step RG-tail obstruction
 
 The frozen two-dimensional square-lattice straight-link scale-two pushforward

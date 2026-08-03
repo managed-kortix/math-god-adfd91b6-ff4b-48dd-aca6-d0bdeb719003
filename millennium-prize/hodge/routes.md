@@ -1,8 +1,20 @@
 # Routes
 
+## Cycle 270 frozen disposition
+
+`H269-DG-DIAG-ALPHA` is closed at `DG-ALPHA-WALL`; it is no longer the active
+main funnel. Do not retry it with a refined cover. The canonical line-bundle
+Koszul resolution repairs the chartwise nonprincipality abstractly, but no
+campaign is admitted because the retained dossier still lacks common-model
+representatives for the exterior classes, nine PEL deformations, chain-level
+Atiyah--Kodaira--Spencer maps, and variation of `alpha`. Hodge re-entry requires
+a new packet that supplies those data and a finite disposition gate in advance.
+The main funnel returns to Navier--Stokes `ND251`. See
+`../cycle-270-strategic-rescore.md`.
+
 ## Cycle 269 direct diagonal dg packet
 
-`H269-DG-DIAG-ALPHA` is the active main funnel. The complete seven-graph dg
+`H269-DG-DIAG-ALPHA` was the Cycle 269 main funnel. The complete seven-graph dg
 enhancement is not assigned: it has no frozen cover, contraction, gauge, or
 finite coefficient bound. Instead freeze the mandatory Cycle 266 packet alone,
 `T_alpha=(O_Delta[0] direct-sum O_Delta[1],Q=h_1 wedge h_2)`, in the declared

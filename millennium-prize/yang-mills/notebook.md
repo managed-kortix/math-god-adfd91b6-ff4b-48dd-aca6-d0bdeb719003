@@ -1,5 +1,18 @@
 # Notebook
 
+## Cycle 270 bounded scout
+
+`Y270-RECENTER-NORM` tests one coupling-dependent, non-diagonal norm and stops.
+With `h_j(c)=-log(c_j)/[j(j+1)]`, anchor `r=1/2`, and running scale
+`t=h_r(b)`, the norm measures `delta h_r/t` together with the recentered shape
+channels `(delta h_j-delta h_r)/t`. The exact map `c_j -> c_j^4` sends every
+`h_j` and `t` to four times itself, so the moving-reference distance is an exact
+isometry. Replacing `t` by `t^alpha` gives the formal factor `4^(1-alpha)`;
+`alpha>1` merely inserts contraction through a UV-singular unit change. The
+coordinate quotient may organize a 4D question, but 2D supplies no normal
+smoothing and 4D lacks the factorized map. See
+`cycle-270-recentered-log-casimir-wall.md`.
+
 ## Cycle 264 bounded scout
 
 `Y264-RG-TAIL` terminates with a violating tail family. For the frozen

@@ -1,5 +1,15 @@
 # Notebook
 
+## Cycle 270 strategic disposition
+
+Accept `DG-ALPHA-WALL` without another cover. Although the three canonical
+diagonal line bundles and their sections give a valid global Koszul resolution,
+that change repairs only the scalar-presentation defect. It does not produce
+the missing Cech representatives for `h_i`, `n_i`, `alpha`, the nine PEL
+directions, or the chain-level variation of the arrow. Therefore
+`H270-LB-KOSZUL` is not admitted and the main funnel returns to `ND251` at the
+bounded `ND270-ADMISSION` gate. See `../cycle-270-strategic-rescore.md`.
+
 ## Cycle 269 hostile audit terminal wall
 
 `H269-DG-DIAG-ALPHA` terminates at `DG-ALPHA-WALL` before construction of the
