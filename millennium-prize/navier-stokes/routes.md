@@ -1,5 +1,17 @@
 # Routes
 
+## Cycle 277 one-split disposition
+
+`C276-CEB-ONE-SPLIT` is terminal `CEB-SPLIT-WALL`.  Its first unchargeable
+quantity is the low-amplitude spacetime `L4^4` term, and none of the frozen
+inputs supplies the required scale-sensitive trajectory bound.  Scaling does
+not refute `CEB`: through the exact critical identity it preserves the
+factor-eight `X` excursion condition.  Do not add another split, optimize the
+constant, or search for the missing estimate.  Cycle 278 places the lane on
+cooldown until independently supplied complete novel input arrives.  See
+`cycle-277-ceb-scaling-hostile-audit.md` and
+`../cycle-278-bounded-voi-terminal-review.md`.
+
 ## Cycle 272 short-time theorem
 
 The P3 datum now has an exact trajectory-level lower-growth statement. The

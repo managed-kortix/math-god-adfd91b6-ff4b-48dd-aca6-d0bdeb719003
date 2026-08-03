@@ -1,5 +1,17 @@
 # Notebook
 
+## Cycle 277 terminal one-split wall
+
+The hostile scaling and smooth-jet audit returns `CEB-SPLIT-WALL`.  The exact
+identity makes budget failure equivalent to `X(tau)>=8X(0)`, so scaling can
+compress only a pre-existing factor-two `L3` excursion, not create one.  The
+first one-split obstruction is
+`X(tau)^(1/3)/(4 nu) int ||u||_4^4 dt`; the record maximum controls only `L3`
+and supplies no scale-sensitive spacetime estimate.  The mechanism is terminal
+without proving `CEB` false.  Cycle 278 cools this lane pending independently
+supplied complete novel input.  See `cycle-277-ceb-scaling-hostile-audit.md` and
+`../cycle-278-bounded-voi-terminal-review.md`.
+
 ## Cycle 274 shrinking-radius displacement hostile audit
 
 The datum-free gates `A_q0(u0)<=M`, `alpha>=M`, and `q(T)>1` imply the direct

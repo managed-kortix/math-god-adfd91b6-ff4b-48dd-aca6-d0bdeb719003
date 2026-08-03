@@ -1,5 +1,18 @@
 # millennium state — dedicated working memory
 
+- 2026-08-03: Unconditional Cycle 278 review accepts both terminal walls:
+  `CEB-SPLIT-WALL` retires the frozen Navier--Stokes one-split mechanism, and
+  `B264-DL-WALL` retires the named BSD theorem/class audit. Applying the bounded
+  value-of-information gate rather than the stale milestone ordering leaves no
+  eligible action across the six lanes: every apparent continuation lacks an
+  input, finite separated output, or novelty, and every unchanged repeat has
+  utility and variance intervals `[0,0]` at positive cost. Main execution
+  therefore enters deliberate wait. Navier--Stokes and BSD are cooled until an
+  independently supplied complete novel object changes their state; all other
+  route stops remain in force. No intake, missing-input search, substitute
+  packet, or Millennium claim is authorized. See
+  `millennium-prize/cycle-278-bounded-voi-terminal-review.md`.
+
 - 2026-08-03: The bounded source-only `B264-DL-AUDIT` terminates as
   `B264-DL-WALL`. The named published theorem is the 2017
   Jetchev--Skinner--Wan rank-one `p`-part BSD Main Theorem, tested against the
@@ -1957,9 +1970,9 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 276 accepts `C275-WALL`, closes packet intake, and selects
-  focused discovery `C276-NS-EXCURSION-BUDGET`; no active datum-production or
-  trajectory proof campaign is authorized
+- **phase:** Cycle 278 deliberate wait: eligibility inventory is empty after
+  terminal `CEB-SPLIT-WALL` and `B264-DL-WALL`; monitoring only until an
+  independently supplied complete novel action passes the four-item gate
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -2791,7 +2804,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 276
+- **cycle:** 278
 - **announcements:** none
 
 ## immutable target list
