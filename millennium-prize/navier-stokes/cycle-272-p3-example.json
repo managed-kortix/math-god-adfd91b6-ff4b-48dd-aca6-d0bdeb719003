@@ -1,0 +1,21 @@
+{
+  "analytic_tail": {
+    "gradient_l1": "0",
+    "velocity_l1": "0"
+  },
+  "modes": [
+    {"amplitude": [256, 0, 0], "k": [0, 0, 1], "kind": "sin"},
+    {"amplitude": [0, 256, 0], "k": [0, 0, 1], "kind": "cos"},
+    {"amplitude": [2, -2, -3], "k": [1, 1, 0], "kind": "cos"},
+    {"amplitude": ["-6/5", "12/5", 3], "k": [2, 1, 0], "kind": "sin"},
+    {"amplitude": ["8/3", "2/3", "-10/3"], "k": [1, 1, 1], "kind": "cos"},
+    {"amplitude": [2, 1, -1], "k": [0, 1, 1], "kind": "cos"},
+    {"amplitude": [3, -2, 0], "k": [0, 0, 1], "kind": "sin"}
+  ],
+  "name": "genuine-3d-five-wave-datum",
+  "positive_speed_polynomial": {
+    "degree": 6,
+    "relative_perturbation_bound": "19/125",
+    "speed_squared_center": "65536"
+  }
+}

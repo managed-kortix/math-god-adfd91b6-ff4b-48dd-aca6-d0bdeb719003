@@ -1,5 +1,62 @@
 # millennium state — dedicated working memory
 
+- 2026-08-03: Cycle 272 removes the unjustified requirement that an admitted
+  Euler datum have infinite Fourier support at `t=0`. Kishimoto--Yoneda forbids
+  nonstationary solutions remaining in one fixed finite support; it does not
+  forbid finite launch data followed by generated exterior modes. The rational
+  P3 datum is genuinely 3D, is not Kida--Pelz, and has rigorous complete-field
+  production `mathcal P_3>15000`, which also excludes stationarity modulo
+  translation. The exact Cycle 265 Wiener choice `q0=33/32`,
+  `M=alpha=600`, `T=1/65536` has
+  `A_q0(u0)<=91652781/163840<600` and
+  `q(T)=267861/262144>1`, hence controls every generated shell. It passes
+  corrected admission items 1--4 plus novelty, using the singleton parameter
+  box and interval `[0,1/65536]`. It is not yet a full `ND270-ADMIT`: items 5
+  and 6 require a frozen compute manifest. State is
+  `P3 ARCHITECTURE ADMISSIBLE; COMPUTE MANIFEST NOT YET FROZEN`; no endpoint,
+  Navier--Stokes, or Millennium claim is made. See
+  `millennium-prize/navier-stokes/cycle-272-p3-finite-support-admission-audit.md`.
+
+- 2026-08-03: Cycle 272 hostilely resolves the Kida-tail novelty loophole.
+  Adding an arbitrarily small analytic infinite Fourier tail to a retired
+  Kida--Pelz/tangent profile is not a new architecture when the Kida core still
+  supplies the favorable production or trajectory mechanism and the tail is
+  only an error, symmetry breaker, support certificate, resolution seed, or
+  tuned parameter. Novelty is decided by an exact deletion homotopy and signed
+  mechanism ledger, not by the support token: the proposal must identify an
+  indispensable directed core--tail or tail--tail lemma whose strict margin
+  disappears at zero tail, while enclosing every adverse interaction and the
+  generated tail on fixed times. Mechanism-removable proposals return
+  `ND270-DUPLICATE`; missing essentiality evidence returns the first
+  `ND270-ARCH-WALL`; only a proved essential mechanism proceeds through all six
+  admission items. This remains the disposition of Kida-tail proposals; the
+  independent P3 architecture is admissible but lacks a compute manifest. No
+  Kida compute, tuning, or resource retry is authorized. See
+  `millennium-prize/navier-stokes/cycle-272-kida-tail-duplicate-audit.md`.
+
+- 2026-08-03: Applying revised `ND270-ADMISSION` to the proposed "periodized
+  Gaussian anti-parallel tube family" returns `ND270-ARCH-WALL` at the first
+  item. The description supplies no finite symbolic velocity map, rational
+  parameter box, torus normalization, frozen tube geometry, or incompressible
+  periodization. Those choices determine Fourier support and pressure flux, so
+  inventing them would substitute a new architecture. No witness, interval
+  production evaluation, or trajectory screen is run. See
+  `millennium-prize/navier-stokes/cycle-272-periodized-gaussian-antiparallel-admission-wall.md`.
+
+- 2026-08-03: The proposed rational Gaussian divergence-free tail of the
+  retired `K-F(K)/32` datum is genuinely analytic, infinite-support, and
+  nonplanar: its frequencies `(n,n^2,1)`, `n>=20`, include three spanning
+  vectors, and its exact `A_2` tail majorant is
+  `21*2^-421/(1-2^-41)`. It returns `ND270-DUPLICATE`: along the exact deletion
+  homotopy the Kida core remains the sole claimed production source, while the
+  tail serves only as a support/nonplanarity certificate and continuity error.
+  No indispensable signed tail interaction is printed. Hostilely, the old
+  complete-`L3` derivative `0.0356418` was also floating and uncertified, with
+  crude cubature radius about `219.60`, so the requested interval robustness
+  margin is unavailable even downstream. No compute is authorized, and only
+  this tail architecture is retired. See
+  `millennium-prize/navier-stokes/cycle-272-nd270-kida-tail-admission.md`.
+
 - 2026-08-03: A hostile audit of `ND270-ADMISSION` removes the ambiguous demand
   for a pre-compute mechanism "capable" of factor-two velocity-`L3` growth.
   Factor-two capability is itself a trajectory property: proving it before
@@ -10,8 +67,8 @@
   pressure-flux bounds `sigma mathcal P_3>=q>0`, `||u||_3^3<=M`, with analytic
   tails and a predeclared time direction `sigma`.
   The outward-rounded full-field ratio `>2+eta_0` remains exclusively the
-  promotion gate. State remains `AWAITING ARCHITECTURE`; no compute is
-  authorized. See
+  promotion gate. Cycle 272 later supplies the P3 architecture, but no compute
+  is authorized until its remaining manifest items are frozen. See
   `millennium-prize/navier-stokes/cycle-271-nd270-admission-threshold-audit.md`.
 
 - 2026-08-03: Cycle 270 accepts `DG-ALPHA-WALL` and forbids an automatic cover
@@ -22,11 +79,13 @@
   line-bundle campaign is admitted. The six-lane rescore returns the main
   funnel to `ND251`, scored `(1,1,0,1)`, while Hodge drops to `(1,1,0,0)` and
   RH remains `(1,0,0,1)`. The next bounded action is `ND270-ADMISSION`: review
-  one finitely printed genuinely 3D infinite-support Euler architecture before
-  any computation, returning `ND270-ADMIT`, `ND270-ARCH-WALL`, or
-  `ND270-DUPLICATE`. No architecture is currently supplied, so the state is
-  `AWAITING ARCHITECTURE`; no search, rerun, cover refinement, or compute is
-  authorized. See `millennium-prize/cycle-270-strategic-rescore.md`.
+  one finitely printed genuinely 3D Euler architecture with a full generated-
+  scale majorant before any computation, returning `ND270-ADMIT`,
+  `ND270-ARCH-WALL`, or `ND270-DUPLICATE`. Cycle 272 later supplies the P3
+  datum, which passes corrected items 1--4 but still awaits a frozen items 5
+  and 6 manifest. See
+  `millennium-prize/cycle-270-strategic-rescore.md` and
+  `millennium-prize/navier-stokes/cycle-272-p3-finite-support-admission-audit.md`.
 
 - 2026-08-03: Yang--Mills bounded scout `Y270-RECENTER-NORM` tests one
   coupling-dependent, non-diagonal norm for the exact two-dimensional `SU(2)`
@@ -1697,8 +1756,9 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 271 resumes `ND251` at bounded architecture gate
-  `ND270-ADMISSION`; state is `AWAITING ARCHITECTURE`
+- **phase:** Cycle 272 evaluates the exact P3 singleton at bounded architecture
+  gate `ND270-ADMISSION`; initial finite support is allowed when generated
+  scales have a closed analytic tail
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -2530,7 +2590,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 271
+- **cycle:** 272
 - **announcements:** none
 
 ## immutable target list

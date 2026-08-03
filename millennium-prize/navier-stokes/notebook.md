@@ -1,15 +1,69 @@
 # Notebook
 
+## Cycle 272 P3 finite-support admission correction
+
+The initial infinite-Fourier-support condition is unjustified.
+Kishimoto--Yoneda excludes nonstationary Euler solutions remaining in one fixed
+finite support, not finite launch data whose nonlinearity generates exterior
+modes. The rational P3 datum is genuinely 3D, has certified complete-`L3^3`
+production `P3>15000`, is nonstationary modulo translation, and is not a Kida
+profile. With `q0=33/32`, `M=alpha=600`, and `T=1/65536`, its exact initial
+Wiener bound is at most `91652781/163840<600` and
+`q(T)=267861/262144>1`, controlling every generated shell. It passes corrected
+items 1--4 and novelty, with the datum treated as a singleton family on the
+frozen interval `[0,1/65536]`. Full compute authorization still awaits items 5
+and 6 in a frozen manifest. See
+`cycle-272-p3-finite-support-admission-audit.md`.
+
+## Cycle 272 Kida-tail duplicate audit
+
+An infinite-support decoration does not make the retired Kida--Pelz/tangent
+family new. The exact test deletes the tail along `K+s r` and tracks every
+indispensable signed mechanism inequality. If the Kida core retains the
+favorable logical source and the tail is only error, support certification,
+symmetry breaking, seeding, or tuning, the result is `ND270-DUPLICATE`. A new
+architecture must prove a favorable core--tail or tail--tail lemma whose strict
+margin disappears at `s=0`, with directed control of all adverse interactions
+and generated scales on fixed times. Missing evidence fails at
+`ND270-ARCH-WALL`; no Kida perturbation compute is authorized during review.
+See `cycle-272-kida-tail-duplicate-audit.md`.
+
+## Cycle 272 periodized Gaussian anti-parallel admission wall
+
+The phrase "periodized Gaussian anti-parallel tube family" does not specify a
+velocity family or parameter box: periods, Gaussian role and covariance,
+centrelines, circulation, three-dimensional perturbation, periodization, and
+the incompressible/mean-zero projection are all absent. The fail-closed
+`ND270-ADMISSION` gate therefore returns `ND270-ARCH-WALL` at item 1. Choosing a
+canonical completion would be a forbidden substitution, so no rational
+witness, interval/Fourier-tail production calculation, or trajectory screen is
+run. See `cycle-272-periodized-gaussian-antiparallel-admission-wall.md`.
+
+## Cycle 272 Kida-tail admission wall
+
+The exact tail `sum_(n>=20) 2^(-2(n^2+n+1))(n,-1,0)
+sin((n,n^2,1) dot x)` makes every member of the frozen rational box genuinely
+infinite-support and nonplanar, with a closed analytic Wiener majorant. This is
+nevertheless `ND270-DUPLICATE` under the mechanism deletion test: the Kida core
+is still the sole favorable source and the tail is only a support certificate
+and continuity error. No signed tail-essential lemma is printed. Downstream,
+Cycle 266's positive local complete-`L3` derivative is also floating evidence,
+not a directed interval certificate, so the requested robustness radius is
+unavailable. Retire only this tail and do not compute. See
+`cycle-272-nd270-kida-tail-admission.md`.
+
 ## Cycle 270 resumed main funnel
 
 The H269 direct-dg packet terminates at its frozen cover wall, and a line-bundle
 Koszul substitution is not admitted without the missing PEL chain
 representatives. `ND251` therefore resumes as the main funnel, but no retired
 Euler family or numerical screen is reopened. The next bounded action is
-`ND270-ADMISSION`: evaluate one finite genuinely 3D infinite-support proposal
-before compute and return `ADMIT`, `ARCH-WALL`, or `DUPLICATE`. No proposal has
-yet been supplied, so the persisted state is `AWAITING ARCHITECTURE`. See
-`../cycle-270-strategic-rescore.md`.
+`ND270-ADMISSION`: evaluate one finite genuinely 3D proposal with a full
+generated-scale majorant before compute and return `ADMIT`, `ARCH-WALL`, or
+`DUPLICATE`. Cycle 272 later supplies the P3 datum, which passes corrected
+items 1--4 but still awaits a frozen items 5 and 6 manifest. See
+`../cycle-270-strategic-rescore.md` and
+`cycle-272-p3-finite-support-admission-audit.md`.
 
 ## Cycle 271 ND270 admission-threshold audit
 

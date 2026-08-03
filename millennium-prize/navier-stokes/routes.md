@@ -1,15 +1,51 @@
 # Routes
 
+## Cycle 272 P3 finite-support correction
+
+Finite Fourier support is no longer an initial-data exclusion.
+Kishimoto--Yoneda applies when the Euler solution remains in one fixed finite
+support; generated exterior modes are instead controlled by item 4. The exact
+rational P3 datum is genuinely 3D, has certified complete-field production
+`P3>15000`, is nonstationary modulo translation, and is not a Kida duplicate.
+The Cycle 265 shrinking Wiener estimate with `q0=33/32`, `M=alpha=600`, and
+`T=1/65536` supplies a closed full-Euler bound for all generated shells. The
+architecture passes corrected items 1--4 as a singleton family on
+`[0,1/65536]`, but items 5 and 6 still require a frozen compute manifest before
+`ND270-ADMIT`. See
+`cycle-272-p3-finite-support-admission-audit.md`.
+
+## Cycle 272 Gaussian anti-parallel proposal
+
+The proposed "periodized Gaussian anti-parallel tube family" stops at
+`ND270-ARCH-WALL`, admission item 1. It supplies no finite symbolic map
+`a -> u_a`, rational parameter box, torus normalization, tube geometry, or
+incompressible periodization. These missing choices determine nonplanarity and
+the pressure-flux sign, so the gate may not invent them in order to choose a
+witness. No trajectory screen is run. See
+`cycle-272-periodized-gaussian-antiparallel-admission-wall.md`.
+
+## Cycle 272 Kida-tail disposition
+
+Adding the printed rational Gaussian tail to `K-F(K)/32` genuinely escapes
+finite support and planarity, but not the Cycle 272 deletion test. The Kida core
+remains the sole claimed production mechanism, so the tail is
+mechanism-removable and the proposal returns `ND270-DUPLICATE`. Independently,
+the inherited positive derivative was never interval-certified, so qualitative
+continuity cannot supply the requested rational sign margin. No trajectory
+work is authorized; see `cycle-272-nd270-kida-tail-admission.md`.
+
 ## Cycle 270 resumed main funnel
 
 After the prescribed H269 cover wall, `ND251` again becomes the main funnel.
 No old production family is reopened. The immediate bounded frontier is
 `ND270-ADMISSION`, a pre-compute review of one finitely printed genuinely
-three-dimensional infinite-Fourier-support Euler architecture. It returns
+three-dimensional Euler architecture with a full generated-scale majorant. It
+returns
 `ADMIT`, the first architecture wall, or an exact reduction to a retired
-family. No proposal is currently supplied, so the state is `AWAITING
-ARCHITECTURE` and no compute is authorized. See
-`../cycle-270-strategic-rescore.md`.
+family. Cycle 272 later supplies the P3 architecture; no compute is authorized
+until its remaining manifest items are frozen. See
+`../cycle-270-strategic-rescore.md` and
+`cycle-272-p3-finite-support-admission-audit.md`.
 
 Cycle 271 makes the admission/promotion boundary exact. No finite initial-data
 formula can certify factor-two "capability" without proving information about
@@ -19,6 +55,17 @@ Euler production at one printed member, including pressure and analytic-tail
 enclosures. The full-field ratio `>2+eta_0` remains the frozen promotion test;
 local production is not crossing evidence. See
 `cycle-271-nd270-admission-threshold-audit.md`.
+
+Cycle 272 makes Kida-tail novelty fail closed. An arbitrarily small analytic
+infinite Fourier tail is a prohibited duplicate when deleting it leaves the
+same Kida production argument and the tail serves only as error, symmetry
+breaking, support certification, numerical seeding, or parameter tuning. A
+genuinely new mechanism must print a deletion homotopy and signed ledger, then
+prove an indispensable favorable core--tail or tail--tail inequality whose
+strict margin disappears at zero tail while all adverse interactions and the
+generated tail remain enclosed on fixed times. Removable tails return
+`DUPLICATE`; missing proof returns the first `ARCH-WALL`; support cardinality
+alone never earns admission. See `cycle-272-kida-tail-duplicate-audit.md`.
 
 Cycle 267 closes every genuinely 3D fixed-Fourier/Lie closure by the
 Kishimoto--Yoneda classification: a real mean-zero Euler solution confined to
