@@ -113,3 +113,15 @@ and multiplexing `x_1,x_2` gives an eleven-gate shared circuit. Thus
 unqueried component choices, this explicit joint choice is a complete breaker
 for the frozen gadget. It does not refute abstract `AMT` or imply an MCSP or
 P-versus-NP lower bound.
+
+Cycle 269 closes the immediate possibility of repairing that breaker by local
+gate charging. In an even more permissive fractional omniscient model, each
+physical gate has total unit budget across address components. For
+`f_i=AND_k(y) XOR x_i`, all components have exact cost `k`, but their `t`-way
+multiplexer has a shared circuit of size `k+3t-3`. Thus fixed-slack adequacy
+would force `t(k-delta)<=k+3t-3`, which fails at an explicit finite `k` for
+every fixed `delta`; varying finite `t,k` defeats every positive universal
+constant-factor calibration as well. Any viable measure must therefore debit a
+shared core nonadditively, restrict sharing syntactically, or use a different
+component invariant. This is a proof-interface no-go, not a circuit lower
+bound.

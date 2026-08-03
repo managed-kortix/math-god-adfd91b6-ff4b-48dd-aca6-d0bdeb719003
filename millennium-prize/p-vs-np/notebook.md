@@ -1,5 +1,21 @@
 # Notebook
 
+## Cycle 269 bounded scout
+
+`P269-LOCAL-CHARGE` tests whether the Cycle 264 sharing failure can be repaired
+by assigning each physical gate fractionally among the disjoint address
+components. It cannot. For `t=2^q`, take
+`f_i=AND_k(y) XOR x_i`. Each component has exact circuit cost `k`, while one
+shared circuit has `k+3t-3` gates. Unit-capacity charges with fixed slack
+`delta` would require `t(k-delta)<=k+3t-3`, contradicted by every finite
+`k>3+t delta/(t-1)`. Exact charging already fails at `(t,k)=(2,4)`, and the
+Cycle 264 two-gate-slack baseline fails at `(2,8)`. Varying finite `t,k` also
+rules out every positive universal constant-factor calibration. The charging
+model is fractional and omniscient, so every narrower local allocation rule is
+included. This is only a bounded no-go for additive gate accounting; it is not
+an MCSP or unrestricted lower bound. See
+`cycle-269-local-gate-charging-no-go.md`.
+
 ## Cycle 264 bounded scout
 
 `P264-AMT-GADGET` freezes one selector-free MCSP address/data gadget for the

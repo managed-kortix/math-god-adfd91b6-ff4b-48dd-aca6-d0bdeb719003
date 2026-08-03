@@ -1,5 +1,46 @@
 # millennium state — dedicated working memory
 
+- 2026-08-03: RH bounded scout `R269-NB-TERM-SIGN` polarizes the unresolved
+  Cycle 264 quadratic numerator exactly as
+  `[R_N(k)^2-R_(2N)(k)^2]/alpha`. Complete Mobius identities prove its positive
+  Chebyshev-prefix formula but, after the cutoff, only restore truncated tails
+  and do not order the residual magnitudes. At the bounded scale `N=8`, rigorous
+  256-bit Arb intervals certify opposite signs for the full grouped cells:
+  `B_(8,1)>0` and `B_(8,35)<0`, the latter from cancellation of a positive
+  constant, negative linear piece, and positive quadratic piece. This rules out
+  cellwise positivity for (264.9), but does not furnish a negative quadratic
+  numerator or decide the total endpoint decrement. No larger-scale search,
+  endpoint monotonicity, RH, or Millennium claim is made. See
+  `millennium-prize/riemann-hypothesis/cycle-269-nb-dyadic-termwise-sign-audit.md`.
+
+- 2026-08-03: P-versus-NP bounded scout `P269-LOCAL-CHARGE` proves a finite
+  no-go for repairing the Cycle 264 multiplexer by local gate allocation. The
+  model permits arbitrary fractional, globally optimized charges but gives each
+  physical gate total unit budget across address components. For
+  `f_i=AND_k(y) XOR x_i`, each component has exact cost `k`, while one shared
+  `t`-component circuit has `k+3t-3` gates. Every fixed additive slack `delta`
+  fails at a finite `k>3+t delta/(t-1)`; exact calibration fails already at
+  `(t,k)=(2,4)`, and the prior two-gate-slack baseline fails at `(2,8)`.
+  Varying finite `t,k` also excludes every positive universal constant-factor
+  calibration. Measures with a shared-core correction or syntactic anti-sharing
+  remain possible. This is a bounded proof-interface obstruction, with no MCSP,
+  unrestricted circuit, P-versus-NP, or Millennium claim. See
+  `millennium-prize/p-vs-np/cycle-269-local-gate-charging-no-go.md`.
+
+- 2026-08-03: Cycle 269 accepts the prescribed terminal
+  `MIN2-AKS-WALL` and performs a fresh six-lane rescore. A concrete dg
+  enhancement of all seven graph sheaves is rejected as unbounded: its cover,
+  resolutions, contraction, gauge, and enormous cross-Ext coefficient spaces
+  are not frozen. The main funnel instead becomes the packet-local
+  `H269-DG-DIAG-ALPHA`, which uses the frozen projective Weierstrass
+  `{D_+(Z),D_+(Y)}` cover and its direct Cech--Koszul dg model of
+  `F=O_Delta` to compute the actual nine PEL obstruction classes of
+  `T_alpha=(F[0] direct-sum F[1],Q=h_1 wedge h_2)`, including variation of the
+  arrow. It must terminate with exact cancellation, survival, mixed rank, or
+  the first frozen-model wall; no alternate enhancement, graph, packet, or
+  higher-cell continuation is allowed. `ND251` remains preserved and paused.
+  See `millennium-prize/cycle-269-strategic-review.md`.
+
 - 2026-08-02: `H268-MIN2-AKS` terminates at the exact output
   `MIN2-AKS-WALL`. The seven vertex obstruction classes are now explicit in
   `Ext^2` as
@@ -1595,8 +1636,8 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 268 runs the bounded Hodge chain-level census
-  `H268-MIN2-AKS`; `ND251` is paused, not retired
+- **phase:** Cycle 269 runs the frozen direct Cech--Koszul Hodge packet
+  `H269-DG-DIAG-ALPHA`; `ND251` is paused, not retired
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -2428,7 +2469,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 268
+- **cycle:** 269
 - **announcements:** none
 
 ## immutable target list

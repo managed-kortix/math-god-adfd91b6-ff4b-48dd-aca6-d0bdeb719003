@@ -1,8 +1,20 @@
 # Routes
 
+## Cycle 269 direct diagonal dg packet
+
+`H269-DG-DIAG-ALPHA` is the active main funnel. The complete seven-graph dg
+enhancement is not assigned: it has no frozen cover, contraction, gauge, or
+finite coefficient bound. Instead freeze the mandatory Cycle 266 packet alone,
+`T_alpha=(O_Delta[0] direct-sum O_Delta[1],Q=h_1 wedge h_2)`, in the declared
+direct Cech--Koszul model of the diagonal on `E_i^3 x E_i^3`. Compute all nine
+canonical PEL obstruction cocycles, including variation of the arrow, and stop
+with exact cancellation, survival, mixed rank, or the first frozen-model wall.
+No second enhancement or additional graph is authorized. Full target and stop
+rules: `../cycle-269-strategic-review.md`.
+
 ## Cycle 268 two-cell minimal Atiyah census
 
-`H268-MIN2-AKS` is the active main funnel. The universal H264 diagonal-survival
+`H268-MIN2-AKS` was the Cycle 268 main funnel. The universal H264 diagonal-survival
 mechanism is retired by the Cycle 266 noncontractible minimal counterpacket, but
 that calculation did not evaluate the actual nine PEL Atiyah obstruction
 cocycles. In the actual seven-graph minimal `A_infinity` category, classify all

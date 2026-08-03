@@ -1,8 +1,20 @@
 # Notebook
 
+## Cycle 269 main-funnel target
+
+The terminal H268 wall is accepted without coefficient enumeration or
+higher-cell continuation. A full seven-graph dg enhancement is not a bounded
+assignment. `H269-DG-DIAG-ALPHA` freezes only the mandatory self packet
+`T_alpha=(O_Delta[0] direct-sum O_Delta[1],Q=h_1 wedge h_2)` in one direct
+Cech--Koszul model and computes its nine canonical PEL obstruction classes,
+including deformation of the arrow. Return exact cancellation, survival,
+mixed rank, or the first frozen-model wall, then stop without changing the
+enhancement or adding a graph or packet. See
+`../cycle-269-strategic-review.md`.
+
 ## Cycle 268 main-funnel target
 
-The active main funnel is `H268-MIN2-AKS`. Cycle 266 retires universal H264
+The Cycle 268 main funnel was `H268-MIN2-AKS`. Cycle 266 retires universal H264
 diagonal survival even after scalar-unit cancellation: its noncontractible
 minimal packet makes the model diagonal `a_1a_2` exact. The remaining bounded
 question is whether the actual nine Atiyah--Kodaira--Spencer cocycles survive.
