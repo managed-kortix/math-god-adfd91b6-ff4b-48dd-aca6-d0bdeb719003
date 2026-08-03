@@ -13,6 +13,20 @@ missing higher-product/Atiyah-transfer wall. Stop at two cells; do not assume
 strict formality, sample coefficient boxes, or escalate without a new strategic
 review. See `../cycle-268-strategic-rotation.md`.
 
+Hostile well-posedness review stops this target before coefficient
+enumeration with terminal output `MIN2-AKS-WALL`.  The dossier fixes graded
+Ext spaces and `m_2`, but not a gauge-fixed minimal `A_infinity` transfer or a
+coherent transferred Atiyah--Kodaira--Spencer natural transformation.  A
+one-arrow packet satisfies Maurer--Cartan without higher products, but its
+endomorphism differential can contain the indispensable reverse-corner term
+`m_3(q,f,q)`, and its obstruction cocycle also needs the Taylor components
+encoding deformation of `q`.  Literal higher products, representatives, and
+chain-matrix ranks are gauge dependent; only the canonical cohomology map and
+the dimension of its image are invariant under coherent transport.  Therefore
+the strict Cycle 266 computation cannot be promoted to actual all-nine
+cancellation or survival.  See
+`cycle-268-h268-hostile-well-posedness-audit.md`.
+
 ## Cycle 266 minimal cancellation and counterexample
 
 Finite unit cancellation gives a strict decomposition of every strict packet

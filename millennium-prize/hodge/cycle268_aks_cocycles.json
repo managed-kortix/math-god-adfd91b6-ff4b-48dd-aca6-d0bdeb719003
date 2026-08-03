@@ -1,0 +1,5836 @@
+{
+  "artifact": "H268-MIN2-AKS-vertex-cocycles",
+  "basis": {
+    "ext1": [
+      "h_1",
+      "h_2",
+      "h_3",
+      "n_1",
+      "n_2",
+      "n_3"
+    ],
+    "ext1_meaning": "h_1..h_3 span H^1(O_Gamma_k); n_1..n_3 span H^0(N_Gamma_k/A_0)",
+    "ext2_decomposition": "Lambda^2 H^1(O) + H^1(O) tensor H^0(N) + Lambda^2 H^0(N)",
+    "ext2_rows": [
+      [
+        "h_1",
+        "h_2"
+      ],
+      [
+        "h_1",
+        "h_3"
+      ],
+      [
+        "h_1",
+        "n_1"
+      ],
+      [
+        "h_1",
+        "n_2"
+      ],
+      [
+        "h_1",
+        "n_3"
+      ],
+      [
+        "h_2",
+        "h_3"
+      ],
+      [
+        "h_2",
+        "n_1"
+      ],
+      [
+        "h_2",
+        "n_2"
+      ],
+      [
+        "h_2",
+        "n_3"
+      ],
+      [
+        "h_3",
+        "n_1"
+      ],
+      [
+        "h_3",
+        "n_2"
+      ],
+      [
+        "h_3",
+        "n_3"
+      ],
+      [
+        "n_1",
+        "n_2"
+      ],
+      [
+        "n_1",
+        "n_3"
+      ],
+      [
+        "n_2",
+        "n_3"
+      ]
+    ],
+    "rho_rows": [
+      "N_1,H1_1",
+      "N_1,H1_2",
+      "N_1,H1_3",
+      "N_2,H1_1",
+      "N_2,H1_2",
+      "N_2,H1_3",
+      "N_3,H1_1",
+      "N_3,H1_2",
+      "N_3,H1_3"
+    ],
+    "tangent_columns": [
+      "B_11",
+      "B_12",
+      "B_13",
+      "B_21",
+      "B_22",
+      "B_23",
+      "B_31",
+      "B_32",
+      "B_33"
+    ]
+  },
+  "convention": {
+    "Q": [
+      1,
+      1,
+      3
+    ],
+    "closed_form": "o_(k,pq)=Q_qq^-1*h_p wedge n_q - 5^k*h_q wedge n_p (indices 1..3)",
+    "matrix_orientation": "rows are target coordinates; columns are row-major tangent matrix units B_pq",
+    "representative": "translation-invariant Koszul/Dolbeault minimal representative of the H^1(N) AKS class"
+  },
+  "field": {
+    "model": "Q[t]/(t^2+1)",
+    "name": "Q(i)",
+    "scalar_encoding": {
+      "im": "[numerator,denominator]",
+      "re": "[numerator,denominator]"
+    }
+  },
+  "scope": [
+    "These matrices identify the nine geometric AKS cohomology classes at every graph vertex.",
+    "They do not provide a dg-resolution representative, an A-infinity module cocycle, higher products, or transferred Atiyah homotopies.",
+    "Consequently they are not by themselves sufficient to compute the H268 two-cell transferred obstruction."
+  ],
+  "version": 1,
+  "vertices": [
+    {
+      "cocycles": [
+        {
+          "tangent_basis": "B_11",
+          "tangent_column": 0,
+          "terms": []
+        },
+        {
+          "tangent_basis": "B_12",
+          "tangent_column": 1,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 3,
+              "wedge": [
+                "h_1",
+                "n_2"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              },
+              "ext2_row": 6,
+              "wedge": [
+                "h_2",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_13",
+          "tangent_column": 2,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              },
+              "ext2_row": 4,
+              "wedge": [
+                "h_1",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              },
+              "ext2_row": 9,
+              "wedge": [
+                "h_3",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_21",
+          "tangent_column": 3,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              },
+              "ext2_row": 3,
+              "wedge": [
+                "h_1",
+                "n_2"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 6,
+              "wedge": [
+                "h_2",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_22",
+          "tangent_column": 4,
+          "terms": []
+        },
+        {
+          "tangent_basis": "B_23",
+          "tangent_column": 5,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              },
+              "ext2_row": 8,
+              "wedge": [
+                "h_2",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              },
+              "ext2_row": 10,
+              "wedge": [
+                "h_3",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_31",
+          "tangent_column": 6,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              },
+              "ext2_row": 4,
+              "wedge": [
+                "h_1",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 9,
+              "wedge": [
+                "h_3",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_32",
+          "tangent_column": 7,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              },
+              "ext2_row": 8,
+              "wedge": [
+                "h_2",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 10,
+              "wedge": [
+                "h_3",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_33",
+          "tangent_column": 8,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -2,
+                  3
+                ]
+              },
+              "ext2_row": 11,
+              "wedge": [
+                "h_3",
+                "n_3"
+              ]
+            }
+          ]
+        }
+      ],
+      "ext2_matrix_15x9_sparse": [
+        {
+          "entries": [],
+          "row": 0
+        },
+        {
+          "entries": [],
+          "row": 1
+        },
+        {
+          "entries": [],
+          "row": 2
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 3
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 4
+        },
+        {
+          "entries": [],
+          "row": 5
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 6
+        },
+        {
+          "entries": [],
+          "row": 7
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 8
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 9
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 10
+        },
+        {
+          "entries": [
+            {
+              "column": 8,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -2,
+                  3
+                ]
+              }
+            }
+          ],
+          "row": 11
+        },
+        {
+          "entries": [],
+          "row": 12
+        },
+        {
+          "entries": [],
+          "row": 13
+        },
+        {
+          "entries": [],
+          "row": 14
+        }
+      ],
+      "norm": 1,
+      "power": {
+        "im": 0,
+        "re": 1
+      },
+      "rank": 6,
+      "rho_formula": "rho_k(B)=Q^-1*transpose(B)-norm*B",
+      "rho_matrix_9x9_sparse": [
+        {
+          "entries": [],
+          "row": 0
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 1
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 2
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 3
+        },
+        {
+          "entries": [],
+          "row": 4
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 5
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 6
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 7
+        },
+        {
+          "entries": [
+            {
+              "column": 8,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -2,
+                  3
+                ]
+              }
+            }
+          ],
+          "row": 8
+        }
+      ],
+      "vertex": 0
+    },
+    {
+      "cocycles": [
+        {
+          "tangent_basis": "B_11",
+          "tangent_column": 0,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -4,
+                  1
+                ]
+              },
+              "ext2_row": 2,
+              "wedge": [
+                "h_1",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_12",
+          "tangent_column": 1,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 3,
+              "wedge": [
+                "h_1",
+                "n_2"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              },
+              "ext2_row": 6,
+              "wedge": [
+                "h_2",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_13",
+          "tangent_column": 2,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              },
+              "ext2_row": 4,
+              "wedge": [
+                "h_1",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              },
+              "ext2_row": 9,
+              "wedge": [
+                "h_3",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_21",
+          "tangent_column": 3,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              },
+              "ext2_row": 3,
+              "wedge": [
+                "h_1",
+                "n_2"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 6,
+              "wedge": [
+                "h_2",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_22",
+          "tangent_column": 4,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -4,
+                  1
+                ]
+              },
+              "ext2_row": 7,
+              "wedge": [
+                "h_2",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_23",
+          "tangent_column": 5,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              },
+              "ext2_row": 8,
+              "wedge": [
+                "h_2",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              },
+              "ext2_row": 10,
+              "wedge": [
+                "h_3",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_31",
+          "tangent_column": 6,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              },
+              "ext2_row": 4,
+              "wedge": [
+                "h_1",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 9,
+              "wedge": [
+                "h_3",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_32",
+          "tangent_column": 7,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              },
+              "ext2_row": 8,
+              "wedge": [
+                "h_2",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 10,
+              "wedge": [
+                "h_3",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_33",
+          "tangent_column": 8,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -14,
+                  3
+                ]
+              },
+              "ext2_row": 11,
+              "wedge": [
+                "h_3",
+                "n_3"
+              ]
+            }
+          ]
+        }
+      ],
+      "ext2_matrix_15x9_sparse": [
+        {
+          "entries": [],
+          "row": 0
+        },
+        {
+          "entries": [],
+          "row": 1
+        },
+        {
+          "entries": [
+            {
+              "column": 0,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -4,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 2
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 3
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 4
+        },
+        {
+          "entries": [],
+          "row": 5
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 6
+        },
+        {
+          "entries": [
+            {
+              "column": 4,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -4,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 7
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 8
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 9
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 10
+        },
+        {
+          "entries": [
+            {
+              "column": 8,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -14,
+                  3
+                ]
+              }
+            }
+          ],
+          "row": 11
+        },
+        {
+          "entries": [],
+          "row": 12
+        },
+        {
+          "entries": [],
+          "row": 13
+        },
+        {
+          "entries": [],
+          "row": 14
+        }
+      ],
+      "norm": 5,
+      "power": {
+        "im": 1,
+        "re": 2
+      },
+      "rank": 9,
+      "rho_formula": "rho_k(B)=Q^-1*transpose(B)-norm*B",
+      "rho_matrix_9x9_sparse": [
+        {
+          "entries": [
+            {
+              "column": 0,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -4,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 0
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 1
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 2
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 3
+        },
+        {
+          "entries": [
+            {
+              "column": 4,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -4,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 4
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 5
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 6
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -5,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 7
+        },
+        {
+          "entries": [
+            {
+              "column": 8,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -14,
+                  3
+                ]
+              }
+            }
+          ],
+          "row": 8
+        }
+      ],
+      "vertex": 1
+    },
+    {
+      "cocycles": [
+        {
+          "tangent_basis": "B_11",
+          "tangent_column": 0,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -24,
+                  1
+                ]
+              },
+              "ext2_row": 2,
+              "wedge": [
+                "h_1",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_12",
+          "tangent_column": 1,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 3,
+              "wedge": [
+                "h_1",
+                "n_2"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              },
+              "ext2_row": 6,
+              "wedge": [
+                "h_2",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_13",
+          "tangent_column": 2,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              },
+              "ext2_row": 4,
+              "wedge": [
+                "h_1",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              },
+              "ext2_row": 9,
+              "wedge": [
+                "h_3",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_21",
+          "tangent_column": 3,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              },
+              "ext2_row": 3,
+              "wedge": [
+                "h_1",
+                "n_2"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 6,
+              "wedge": [
+                "h_2",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_22",
+          "tangent_column": 4,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -24,
+                  1
+                ]
+              },
+              "ext2_row": 7,
+              "wedge": [
+                "h_2",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_23",
+          "tangent_column": 5,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              },
+              "ext2_row": 8,
+              "wedge": [
+                "h_2",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              },
+              "ext2_row": 10,
+              "wedge": [
+                "h_3",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_31",
+          "tangent_column": 6,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              },
+              "ext2_row": 4,
+              "wedge": [
+                "h_1",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 9,
+              "wedge": [
+                "h_3",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_32",
+          "tangent_column": 7,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              },
+              "ext2_row": 8,
+              "wedge": [
+                "h_2",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 10,
+              "wedge": [
+                "h_3",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_33",
+          "tangent_column": 8,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -74,
+                  3
+                ]
+              },
+              "ext2_row": 11,
+              "wedge": [
+                "h_3",
+                "n_3"
+              ]
+            }
+          ]
+        }
+      ],
+      "ext2_matrix_15x9_sparse": [
+        {
+          "entries": [],
+          "row": 0
+        },
+        {
+          "entries": [],
+          "row": 1
+        },
+        {
+          "entries": [
+            {
+              "column": 0,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -24,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 2
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 3
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 4
+        },
+        {
+          "entries": [],
+          "row": 5
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 6
+        },
+        {
+          "entries": [
+            {
+              "column": 4,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -24,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 7
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 8
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 9
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 10
+        },
+        {
+          "entries": [
+            {
+              "column": 8,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -74,
+                  3
+                ]
+              }
+            }
+          ],
+          "row": 11
+        },
+        {
+          "entries": [],
+          "row": 12
+        },
+        {
+          "entries": [],
+          "row": 13
+        },
+        {
+          "entries": [],
+          "row": 14
+        }
+      ],
+      "norm": 25,
+      "power": {
+        "im": 4,
+        "re": 3
+      },
+      "rank": 9,
+      "rho_formula": "rho_k(B)=Q^-1*transpose(B)-norm*B",
+      "rho_matrix_9x9_sparse": [
+        {
+          "entries": [
+            {
+              "column": 0,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -24,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 0
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 1
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 2
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 3
+        },
+        {
+          "entries": [
+            {
+              "column": 4,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -24,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 4
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 5
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 6
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -25,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 7
+        },
+        {
+          "entries": [
+            {
+              "column": 8,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -74,
+                  3
+                ]
+              }
+            }
+          ],
+          "row": 8
+        }
+      ],
+      "vertex": 2
+    },
+    {
+      "cocycles": [
+        {
+          "tangent_basis": "B_11",
+          "tangent_column": 0,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -124,
+                  1
+                ]
+              },
+              "ext2_row": 2,
+              "wedge": [
+                "h_1",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_12",
+          "tangent_column": 1,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 3,
+              "wedge": [
+                "h_1",
+                "n_2"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              },
+              "ext2_row": 6,
+              "wedge": [
+                "h_2",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_13",
+          "tangent_column": 2,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              },
+              "ext2_row": 4,
+              "wedge": [
+                "h_1",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              },
+              "ext2_row": 9,
+              "wedge": [
+                "h_3",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_21",
+          "tangent_column": 3,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              },
+              "ext2_row": 3,
+              "wedge": [
+                "h_1",
+                "n_2"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 6,
+              "wedge": [
+                "h_2",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_22",
+          "tangent_column": 4,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -124,
+                  1
+                ]
+              },
+              "ext2_row": 7,
+              "wedge": [
+                "h_2",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_23",
+          "tangent_column": 5,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              },
+              "ext2_row": 8,
+              "wedge": [
+                "h_2",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              },
+              "ext2_row": 10,
+              "wedge": [
+                "h_3",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_31",
+          "tangent_column": 6,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              },
+              "ext2_row": 4,
+              "wedge": [
+                "h_1",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 9,
+              "wedge": [
+                "h_3",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_32",
+          "tangent_column": 7,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              },
+              "ext2_row": 8,
+              "wedge": [
+                "h_2",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 10,
+              "wedge": [
+                "h_3",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_33",
+          "tangent_column": 8,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -374,
+                  3
+                ]
+              },
+              "ext2_row": 11,
+              "wedge": [
+                "h_3",
+                "n_3"
+              ]
+            }
+          ]
+        }
+      ],
+      "ext2_matrix_15x9_sparse": [
+        {
+          "entries": [],
+          "row": 0
+        },
+        {
+          "entries": [],
+          "row": 1
+        },
+        {
+          "entries": [
+            {
+              "column": 0,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -124,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 2
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 3
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 4
+        },
+        {
+          "entries": [],
+          "row": 5
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 6
+        },
+        {
+          "entries": [
+            {
+              "column": 4,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -124,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 7
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 8
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 9
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 10
+        },
+        {
+          "entries": [
+            {
+              "column": 8,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -374,
+                  3
+                ]
+              }
+            }
+          ],
+          "row": 11
+        },
+        {
+          "entries": [],
+          "row": 12
+        },
+        {
+          "entries": [],
+          "row": 13
+        },
+        {
+          "entries": [],
+          "row": 14
+        }
+      ],
+      "norm": 125,
+      "power": {
+        "im": 11,
+        "re": 2
+      },
+      "rank": 9,
+      "rho_formula": "rho_k(B)=Q^-1*transpose(B)-norm*B",
+      "rho_matrix_9x9_sparse": [
+        {
+          "entries": [
+            {
+              "column": 0,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -124,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 0
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 1
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 2
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 3
+        },
+        {
+          "entries": [
+            {
+              "column": 4,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -124,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 4
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 5
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 6
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -125,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 7
+        },
+        {
+          "entries": [
+            {
+              "column": 8,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -374,
+                  3
+                ]
+              }
+            }
+          ],
+          "row": 8
+        }
+      ],
+      "vertex": 3
+    },
+    {
+      "cocycles": [
+        {
+          "tangent_basis": "B_11",
+          "tangent_column": 0,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -624,
+                  1
+                ]
+              },
+              "ext2_row": 2,
+              "wedge": [
+                "h_1",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_12",
+          "tangent_column": 1,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 3,
+              "wedge": [
+                "h_1",
+                "n_2"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              },
+              "ext2_row": 6,
+              "wedge": [
+                "h_2",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_13",
+          "tangent_column": 2,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              },
+              "ext2_row": 4,
+              "wedge": [
+                "h_1",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              },
+              "ext2_row": 9,
+              "wedge": [
+                "h_3",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_21",
+          "tangent_column": 3,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              },
+              "ext2_row": 3,
+              "wedge": [
+                "h_1",
+                "n_2"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 6,
+              "wedge": [
+                "h_2",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_22",
+          "tangent_column": 4,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -624,
+                  1
+                ]
+              },
+              "ext2_row": 7,
+              "wedge": [
+                "h_2",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_23",
+          "tangent_column": 5,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              },
+              "ext2_row": 8,
+              "wedge": [
+                "h_2",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              },
+              "ext2_row": 10,
+              "wedge": [
+                "h_3",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_31",
+          "tangent_column": 6,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              },
+              "ext2_row": 4,
+              "wedge": [
+                "h_1",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 9,
+              "wedge": [
+                "h_3",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_32",
+          "tangent_column": 7,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              },
+              "ext2_row": 8,
+              "wedge": [
+                "h_2",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 10,
+              "wedge": [
+                "h_3",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_33",
+          "tangent_column": 8,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1874,
+                  3
+                ]
+              },
+              "ext2_row": 11,
+              "wedge": [
+                "h_3",
+                "n_3"
+              ]
+            }
+          ]
+        }
+      ],
+      "ext2_matrix_15x9_sparse": [
+        {
+          "entries": [],
+          "row": 0
+        },
+        {
+          "entries": [],
+          "row": 1
+        },
+        {
+          "entries": [
+            {
+              "column": 0,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -624,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 2
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 3
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 4
+        },
+        {
+          "entries": [],
+          "row": 5
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 6
+        },
+        {
+          "entries": [
+            {
+              "column": 4,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -624,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 7
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 8
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 9
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 10
+        },
+        {
+          "entries": [
+            {
+              "column": 8,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1874,
+                  3
+                ]
+              }
+            }
+          ],
+          "row": 11
+        },
+        {
+          "entries": [],
+          "row": 12
+        },
+        {
+          "entries": [],
+          "row": 13
+        },
+        {
+          "entries": [],
+          "row": 14
+        }
+      ],
+      "norm": 625,
+      "power": {
+        "im": 24,
+        "re": -7
+      },
+      "rank": 9,
+      "rho_formula": "rho_k(B)=Q^-1*transpose(B)-norm*B",
+      "rho_matrix_9x9_sparse": [
+        {
+          "entries": [
+            {
+              "column": 0,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -624,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 0
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 1
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 2
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 3
+        },
+        {
+          "entries": [
+            {
+              "column": 4,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -624,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 4
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 5
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 6
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -625,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 7
+        },
+        {
+          "entries": [
+            {
+              "column": 8,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -1874,
+                  3
+                ]
+              }
+            }
+          ],
+          "row": 8
+        }
+      ],
+      "vertex": 4
+    },
+    {
+      "cocycles": [
+        {
+          "tangent_basis": "B_11",
+          "tangent_column": 0,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3124,
+                  1
+                ]
+              },
+              "ext2_row": 2,
+              "wedge": [
+                "h_1",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_12",
+          "tangent_column": 1,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 3,
+              "wedge": [
+                "h_1",
+                "n_2"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              },
+              "ext2_row": 6,
+              "wedge": [
+                "h_2",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_13",
+          "tangent_column": 2,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              },
+              "ext2_row": 4,
+              "wedge": [
+                "h_1",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              },
+              "ext2_row": 9,
+              "wedge": [
+                "h_3",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_21",
+          "tangent_column": 3,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              },
+              "ext2_row": 3,
+              "wedge": [
+                "h_1",
+                "n_2"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 6,
+              "wedge": [
+                "h_2",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_22",
+          "tangent_column": 4,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3124,
+                  1
+                ]
+              },
+              "ext2_row": 7,
+              "wedge": [
+                "h_2",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_23",
+          "tangent_column": 5,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              },
+              "ext2_row": 8,
+              "wedge": [
+                "h_2",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              },
+              "ext2_row": 10,
+              "wedge": [
+                "h_3",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_31",
+          "tangent_column": 6,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              },
+              "ext2_row": 4,
+              "wedge": [
+                "h_1",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 9,
+              "wedge": [
+                "h_3",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_32",
+          "tangent_column": 7,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              },
+              "ext2_row": 8,
+              "wedge": [
+                "h_2",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 10,
+              "wedge": [
+                "h_3",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_33",
+          "tangent_column": 8,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -9374,
+                  3
+                ]
+              },
+              "ext2_row": 11,
+              "wedge": [
+                "h_3",
+                "n_3"
+              ]
+            }
+          ]
+        }
+      ],
+      "ext2_matrix_15x9_sparse": [
+        {
+          "entries": [],
+          "row": 0
+        },
+        {
+          "entries": [],
+          "row": 1
+        },
+        {
+          "entries": [
+            {
+              "column": 0,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3124,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 2
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 3
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 4
+        },
+        {
+          "entries": [],
+          "row": 5
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 6
+        },
+        {
+          "entries": [
+            {
+              "column": 4,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3124,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 7
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 8
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 9
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 10
+        },
+        {
+          "entries": [
+            {
+              "column": 8,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -9374,
+                  3
+                ]
+              }
+            }
+          ],
+          "row": 11
+        },
+        {
+          "entries": [],
+          "row": 12
+        },
+        {
+          "entries": [],
+          "row": 13
+        },
+        {
+          "entries": [],
+          "row": 14
+        }
+      ],
+      "norm": 3125,
+      "power": {
+        "im": 41,
+        "re": -38
+      },
+      "rank": 9,
+      "rho_formula": "rho_k(B)=Q^-1*transpose(B)-norm*B",
+      "rho_matrix_9x9_sparse": [
+        {
+          "entries": [
+            {
+              "column": 0,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3124,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 0
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 1
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 2
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 3
+        },
+        {
+          "entries": [
+            {
+              "column": 4,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3124,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 4
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 5
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 6
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -3125,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 7
+        },
+        {
+          "entries": [
+            {
+              "column": 8,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -9374,
+                  3
+                ]
+              }
+            }
+          ],
+          "row": 8
+        }
+      ],
+      "vertex": 5
+    },
+    {
+      "cocycles": [
+        {
+          "tangent_basis": "B_11",
+          "tangent_column": 0,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15624,
+                  1
+                ]
+              },
+              "ext2_row": 2,
+              "wedge": [
+                "h_1",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_12",
+          "tangent_column": 1,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 3,
+              "wedge": [
+                "h_1",
+                "n_2"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              },
+              "ext2_row": 6,
+              "wedge": [
+                "h_2",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_13",
+          "tangent_column": 2,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              },
+              "ext2_row": 4,
+              "wedge": [
+                "h_1",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              },
+              "ext2_row": 9,
+              "wedge": [
+                "h_3",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_21",
+          "tangent_column": 3,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              },
+              "ext2_row": 3,
+              "wedge": [
+                "h_1",
+                "n_2"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 6,
+              "wedge": [
+                "h_2",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_22",
+          "tangent_column": 4,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15624,
+                  1
+                ]
+              },
+              "ext2_row": 7,
+              "wedge": [
+                "h_2",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_23",
+          "tangent_column": 5,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              },
+              "ext2_row": 8,
+              "wedge": [
+                "h_2",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              },
+              "ext2_row": 10,
+              "wedge": [
+                "h_3",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_31",
+          "tangent_column": 6,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              },
+              "ext2_row": 4,
+              "wedge": [
+                "h_1",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 9,
+              "wedge": [
+                "h_3",
+                "n_1"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_32",
+          "tangent_column": 7,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              },
+              "ext2_row": 8,
+              "wedge": [
+                "h_2",
+                "n_3"
+              ]
+            },
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              },
+              "ext2_row": 10,
+              "wedge": [
+                "h_3",
+                "n_2"
+              ]
+            }
+          ]
+        },
+        {
+          "tangent_basis": "B_33",
+          "tangent_column": 8,
+          "terms": [
+            {
+              "coefficient": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -46874,
+                  3
+                ]
+              },
+              "ext2_row": 11,
+              "wedge": [
+                "h_3",
+                "n_3"
+              ]
+            }
+          ]
+        }
+      ],
+      "ext2_matrix_15x9_sparse": [
+        {
+          "entries": [],
+          "row": 0
+        },
+        {
+          "entries": [],
+          "row": 1
+        },
+        {
+          "entries": [
+            {
+              "column": 0,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15624,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 2
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 3
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 4
+        },
+        {
+          "entries": [],
+          "row": 5
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 6
+        },
+        {
+          "entries": [
+            {
+              "column": 4,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15624,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 7
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 8
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 9
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 10
+        },
+        {
+          "entries": [
+            {
+              "column": 8,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -46874,
+                  3
+                ]
+              }
+            }
+          ],
+          "row": 11
+        },
+        {
+          "entries": [],
+          "row": 12
+        },
+        {
+          "entries": [],
+          "row": 13
+        },
+        {
+          "entries": [],
+          "row": 14
+        }
+      ],
+      "norm": 15625,
+      "power": {
+        "im": 44,
+        "re": -117
+      },
+      "rank": 9,
+      "rho_formula": "rho_k(B)=Q^-1*transpose(B)-norm*B",
+      "rho_matrix_9x9_sparse": [
+        {
+          "entries": [
+            {
+              "column": 0,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15624,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 0
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 1
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 2
+        },
+        {
+          "entries": [
+            {
+              "column": 1,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 3,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 3
+        },
+        {
+          "entries": [
+            {
+              "column": 4,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15624,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 4
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 5
+        },
+        {
+          "entries": [
+            {
+              "column": 2,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 6,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 6
+        },
+        {
+          "entries": [
+            {
+              "column": 5,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "column": 7,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -15625,
+                  1
+                ]
+              }
+            }
+          ],
+          "row": 7
+        },
+        {
+          "entries": [
+            {
+              "column": 8,
+              "value": {
+                "im": [
+                  0,
+                  1
+                ],
+                "re": [
+                  -46874,
+                  3
+                ]
+              }
+            }
+          ],
+          "row": 8
+        }
+      ],
+      "vertex": 6
+    }
+  ]
+}

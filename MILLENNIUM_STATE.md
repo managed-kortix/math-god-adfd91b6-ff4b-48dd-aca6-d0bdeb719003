@@ -1,5 +1,20 @@
 # millennium state — dedicated working memory
 
+- 2026-08-02: `H268-MIN2-AKS` terminates at the exact output
+  `MIN2-AKS-WALL`. The seven vertex obstruction classes are now explicit in
+  `Ext^2` as
+  `o_(k,pq)=Q_qq^-1 h_p wedge n_q-5^k h_q wedge n_p`, with ranks
+  `(6,9,9,9,9,9,9)`. Two-cell shape makes every one-arrow Maurer--Cartan
+  equation automatic and truncates the twisted differential to binary terms
+  plus at most `m_3(q,f,q)`. Degree and strict unitality remove that ternary
+  correction except on the self-`Ext^1` stratum. They do not determine the
+  coherent one-arrow Atiyah transfer `Theta_(v,1)(q)`, equivalently the
+  source-compatible products with one `q`, the Atiyah insertion, and the
+  Kodaira--Spencer insertion. Those gauge-dependent chain data require a common
+  dg enhancement and contraction homotopy absent from the retained geometry.
+  Therefore no two-cell survival, cancellation, mixed, `KI240`, or Hodge claim
+  is admissible. See `millennium-prize/hodge/cycle-268-two-cell-higher-operation-wall.md`.
+
 - 2026-08-02: Cycle 268 rotates the main funnel from open-ended `ND251`
   discovery to the bounded Hodge packet `H268-MIN2-AKS`. The numerical Euler
   screens are weak or resource-stopped; fixed finite Fourier support is exactly
