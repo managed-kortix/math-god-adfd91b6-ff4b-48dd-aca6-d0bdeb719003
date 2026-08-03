@@ -238,6 +238,16 @@ checker validates exact generator identity and projection but does not establish
 the mathematical semantics of each base clause; those semantics retain their
 separate small-instance regression and eventual proof-checking requirements.
 
+The seven uncertified clean-sink parent groups are repartitioned into 57 exact
+`(q,H_CC)` shards with a 500-parent cap by
+`m6_clean_sink_balanced_shards.py`. The certified 2,470-parent `B6-l4` group is
+excluded, and its certificate ledger/verifier are bound alongside the clean
+stream, manifests, and theorems. The canonical table and member hashes are in
+`m6-clean-sink-balanced-shards.tsv`; all CNF dimensions and hashes are in
+`m6-clean-sink-balanced-shard-hashes.tsv`. Run the independent exhaustive gate
+with `python3 test_m6_clean_sink_balanced_shards.py`. This layer only freezes a
+partition and encoding; it does not solve any shard.
+
 After the human elimination of forced B7 `q=0`, the selector-grouped residual is
 frozen by `m6-forced-selector-groups.tsv`: nine `(branch,q,h)` groups cover all
 31,568 remaining forced rows (B6 `q=0..3`, B7 `q=1..5`). Reproduce one group and
@@ -394,6 +404,20 @@ python3 verify_m6_clean_sink_B6_l4_certificate.py \
 The durable proof is `../certificates/m6-clean-sink-B6-l4.lrat.xz`; exact
 identities and stage timings are in `m6-clean-sink-B6-l4-certificate.tsv`. No
 UNSAT claim is made here for the other seven clean-sink groups.
+
+Two exact balanced `B6-l5`, `H_CC=2` shards are also certified UNSAT: q=0 has
+78 parents and q=1 has 26. Their retained `xz -3` LRATs total 943,048 bytes.
+`m6-clean-sink-B6-l5-HCC2-certificates.tsv` binds the frozen shard manifest and
+partition theorem, complete CNF hash ledger, producer/checker, pinned tools,
+CNFs, raw proofs, and durable artifacts. Fresh strict replay is:
+
+```sh
+python3 verify_m6_clean_sink_B6_l5_HCC2_certificates.py \
+  --checker /path/to/pinned/lrat-check
+```
+
+The proof report is `../attempts/tick54-clean-sink-B6-l5-HCC2-certificates.md`.
+No claim is made for the other 55 balanced shards.
 
 ```
 group   parents  variables  clauses   bytes      sha256

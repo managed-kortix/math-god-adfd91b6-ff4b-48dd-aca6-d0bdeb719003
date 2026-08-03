@@ -1523,3 +1523,36 @@ No audits yet.
   `experiments/verify_m6_clean_sink_B6_l4_certificate.py`.
 - This certifies only the complete clean-sink `B6-l4` group. The other seven
   clean-sink groups retain no SAT/UNSAT claim here.
+
+### Exact 57-shard clean-sink partition
+
+- Excluded the certified 2,470-parent `B6-l4` group and partitioned all 16,392
+  parents in the seven uncertified groups first by `(q,H_CC)`, then by the
+  canonical balanced consecutive split with cap 500. The 35 cells produce
+  exactly 57 shards; within each split cell sizes differ by at most one.
+- `experiments/m6-clean-sink-balanced-shards.tsv` is the complete member
+  manifest (8,414 bytes, SHA-256
+  `20f6d04a9e8ca0662efd011ead7804402d3c0dd21e025311cb4485fae8403fdb`).
+  It binds the clean stream/parent and partition manifests, clean-sink and
+  partition theorems, and the excluded B6-l4 certificate ledger/verifier.
+- `experiments/m6-clean-sink-balanced-shard-hashes.tsv` records all 57 exact
+  CNF dimensions and hashes (5,972 bytes, SHA-256
+  `46045d216f32a22b1d618910c4e3fc5528c700b34277be2e17eab89e6ccae125`).
+  The independent checker reconstructs the full disjoint cover and every CNF;
+  the exhaustive regression emits and hashes every shard and tests complete
+  model attribution plus hostile base, ALO, guard, metadata, selector, and
+  bound-identity mutations. No shard was solved and no new theorem is claimed.
+
+### Checked clean-sink B6-l5 H_CC=2 shards
+
+- Regenerated and independently structurally audited exact balanced shards 02
+  (`q=0,H_CC=2`, 78 parents) and 05 (`q=1,H_CC=2`, 26 parents).
+- Pinned CaDiCaL 1.7.3 returned UNSAT with textual LRAT for both shards, and the
+  pinned independent `lrat-check` returned `c VERIFIED` for each proof.
+- The durable `xz -3` proofs total 943,048 bytes. Exact tool, manifest, theorem,
+  producer/checker, CNF, LRAT, and artifact identities are frozen in
+  `experiments/m6-clean-sink-B6-l5-HCC2-certificates.tsv`; strict fresh replay
+  is `experiments/verify_m6_clean_sink_B6_l5_HCC2_certificates.py`.
+- The post-audit proof report is
+  `attempts/tick54-clean-sink-B6-l5-HCC2-certificates.md`. This closes exactly
+  104 `B6-l5,H_CC=2` parents and makes no claim for the other 55 shards.
