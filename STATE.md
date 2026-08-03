@@ -17,6 +17,20 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-02: proved the complete connected pentacyclic theorem: every finite
+  simple connected graph with `|E|=|V|+4` satisfies `s^+(G)>=|V(G)|`. The
+  single-block branch is the complete 118-kernel theorem; the multiblock branch
+  exhausts all seven block-rank partitions and closes the last four owner-aware
+  templates after an explicit noncanonical DNN gate. The 17-page integrated
+  paper is `all-pentacyclic-graphs/paper.pdf`. The global fail-closed verifier
+  passes normal/`python3 -O`, rejects 16 hostile mutations, and has dependency
+  manifest digest
+  `19926bb35e4989b4b18258dddb18659f5b6c38010f5df08a33dee5342fa03bd0`.
+  A first hostile referee rejected the compressed draft with twelve exact
+  blockers; all were repaired by expanding the SDP dual, multiblock sieve,
+  packet scopes, owner constructions, and computer-assisted proof model. A
+  second independent paper/artifact referee returned ACCEPT after a clean PDF
+  rebuild. This is a class-frontier AKMPZ theorem, not the universal conjecture.
 - 2026-08-02: completed the entire single-block pentacyclic frontier. The 16
   cubic order-eight kernels have 46736 physical parity rows / 11188 genuine
   automorphism orbits; 7705 are tetrahedral and 3483 residual orbits generate

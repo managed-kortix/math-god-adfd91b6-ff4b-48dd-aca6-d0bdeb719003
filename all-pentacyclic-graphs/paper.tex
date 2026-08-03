@@ -1,0 +1,988 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,array,longtable}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\spn}{s^+}
+\newcommand{\smn}{s^-}
+\newcommand{\sig}{\sigma}
+\newcommand{\kap}{\kappa}
+\newcommand{\one}{\mathbf 1}
+
+\title{Positive Square Energy of Every Pentacyclic Graph}
+\author{AI-generated manuscript; no human author is claimed}
+\date{3 August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $G$ be a finite simple connected graph with $n$ vertices and $n+4$
+edges.  We prove that the sum $\spn(G)$ of the squares of its positive
+adjacency eigenvalues is at least $n$.  Positive cyclic-block ranks have the
+seven partitions
+$1^5,2+1^3,2+2+1,3+1+1,3+2,4+1,5$.
+For the first six, an exact block-additive doubly nonnegative sieve leaves four
+incidence families.  We give an owner-exact induced-territory closure, including
+positive connector routes, repeated owners, nested shared-cut attachments, and
+the noncanonical all-length gate.  A single rank-five block suppresses to
+exactly 118 loopless no-cut-vertex multigraph kernels, in order counts
+$1,3,13,24,38,23,16$.  Exact finite certificate ledgers, symbolic equality
+templates, and structural packets cover every physical parity orbit and every
+one-coordinate frontier.  Exact path elimination and fixed-parity monotonicity
+promote those frontiers to arbitrary subdivisions; one-vertex additivity
+includes arbitrary rooted trees.  We record the master tables, checksums, and
+the precise scope of every executable dependency.
+\end{abstract}
+
+\section{Statement and analytic foundations}
+
+All graphs are finite, simple, and undirected unless a suppressed kernel is
+explicitly called a multigraph.  If $A(G)$ has eigenvalues
+$\lambda_1,\ldots,\lambda_n$, set
+\[
+ \spn(G)=\sum_{\lambda_i>0}\lambda_i^2,
+ \qquad \smn(G)=\sum_{\lambda_i<0}\lambda_i^2,
+ \qquad \sig(G)=\spn(G)-|V(G)|.
+\]
+Since $\operatorname{tr}A^2=2|E(G)|$, a pentacyclic graph satisfies
+\begin{equation}\label{eq:trace}
+ \spn(G)+\smn(G)=2n+8.
+\end{equation}
+
+\begin{theorem}\label{thm:main}
+If $G$ is a finite simple connected graph with $|V(G)|=n$ and
+$|E(G)|=n+4$, then
+\[
+ \boxed{\spn(G)\ge n}.
+\]
+\end{theorem}
+
+\begin{lemma}[Induced superadditivity]\label{lem:pinch}
+If $V(G)=V_1\mathbin{\dot\cup}\cdots\mathbin{\dot\cup}V_t$, then
+\[
+ \spn(G)\ge\sum_i\spn(G[V_i]),\qquad
+ \sig(G)\ge\sum_i\sig(G[V_i]).
+\]
+\end{lemma}
+\begin{proof}
+For every real symmetric matrix $A$,
+\[
+ \operatorname{tr}(A_+^2)=
+ \max_{X\succeq0}\{2\operatorname{tr}(AX)-\operatorname{tr}(X^2)\}.
+\]
+Insert the block diagonal matrix with blocks $A[V_i]_+$.  Entries of $A$
+between distinct parts do not contribute to the trace.
+\end{proof}
+
+For a graph $H=(V,E)$ with $E\ne\varnothing$, define
+\begin{equation}\label{eq:kappa}
+ \kap(H)=\sup_{\substack{M\succeq0,\ M\ge0\\\one^TM\one>0}}
+ \frac{4(\sum_{uv\in E(H)}\sqrt{M_{uv}})^2}{\one^TM\one}.
+\end{equation}
+Here $M\ge0$ means entrywise nonnegative, and every matrix in this section is
+real symmetric with rows and columns indexed by $V$.  Set $\kap(H)=0$ when
+$E=\varnothing$.
+
+\begin{lemma}[DNN correlation dual]\label{lem:dnn}
+For every graph $H$,
+\begin{equation}\label{eq:dual}
+ \smn(H)\le\kap(H)=
+ \min_{\substack{R\succeq0\\R_{vv}=1}}
+ \sum_{uv\in E(H)}\frac{2}{1-R_{uv}},
+\end{equation}
+where the minimum is over the compact elliptope
+$\mathcal E_V=\{R\in\mathbb S^V:R\succeq0,\ R_{vv}=1\ (v\in V)\}$, and a
+summand is $+\infty$ when $R_{uv}=1$.  If $H=H_1\vee H_2$ is a one-vertex
+sum, then $\kap(H)=\kap(H_1)+\kap(H_2)$.  Hence $\kap(T)=|E(T)|$ for a tree.
+\end{lemma}
+\begin{proof}
+Write $A=P-B$ for its positive and negative spectral parts.  By the Schur
+product theorem $M=B\circ B$ is doubly nonnegative, and
+$\one^TM\one=\operatorname{tr}B^2=\smn(H)$.  Moreover
+\[
+ \smn(H)/2=-\sum_{uv\in E(H)}B_{uv}
+ \le\sum_{uv\in E(H)}\sqrt{M_{uv}},
+\]
+which gives the first inequality.  If $R$ is a correlation matrix, then
+\[
+ \one^TM\one-\sum_{uv\in E(H)}2(1-R_{uv})M_{uv}
+ =\langle R,M\rangle+
+ 2\sum_{uv\notin E(H),\,u<v}(1-R_{uv})M_{uv}\ge0.
+\]
+If $R\in\mathcal E_V$ has $R_{uv}<1$ on $E$, weighted
+Cauchy--Schwarz and the preceding display give
+\[
+ 4\Bigl(\sum_{e\in E}\sqrt{M_e}\Bigr)^2
+ \le \langle J,M\rangle
+       \sum_{uv\in E}\frac{2}{1-R_{uv}}.
+\]
+The assertion is automatic if an edge entry of $R$ is one.  Taking the two
+extrema proves $\kap(H)$ is at most the right side of \eqref{eq:dual}.
+
+We prove the reverse inequality without an infinite-dimensional separation.
+Normalize $\langle J,M\rangle=1$ and put
+\[
+ \mathcal D=\{M\in\mathbb S^V:M\succeq0,\ M\ge0,
+                    \ \langle J,M\rangle=1\},\qquad
+ \Delta_E^\circ=\{a\in\mathbb R^E:a_e>0,\ \sum_ea_e=1\}.
+\]
+The set $\mathcal D$ is compact.  The elementary identity
+\[
+ \Bigl(\sum_e\sqrt{x_e}\Bigr)^2
+   =\inf_{a\in\Delta_E^\circ}\sum_e\frac{x_e}{a_e}
+ \quad(x_e\ge0)
+\]
+and finite-dimensional convex minimax (first on $a_e\ge\varepsilon$, then
+$\varepsilon\downarrow0$) yield
+\begin{equation}\label{eq:minimax}
+ \frac{\kap(H)}4=
+ \inf_{a\in\Delta_E^\circ}\ \max_{M\in\mathcal D}
+       \sum_{e\in E}\frac{M_e}{a_e}.
+\end{equation}
+For fixed $a$, let $C(a)_{uv}=1/(2a_{uv})$ on edges and zero elsewhere,
+with zero diagonal.  The inner problem and its finite-dimensional SDP dual are
+\begin{equation}\label{eq:sdppair}
+ \begin{aligned}
+  \max\;&\langle C(a),M\rangle
+   &\quad& M\succeq0,\ M\ge0,\ \langle J,M\rangle=1,\\
+  \min\;&\lambda
+   && \lambda J-C(a)=S+N,\quad S\succeq0,\ N\ge0.
+ \end{aligned}
+\end{equation}
+There is no closure qualification here.  The primal is strictly feasible with
+a positive multiple of $(1-\delta)I+\delta J$, where $0<\delta<1$; the dual is
+strictly feasible by taking $S=\eta I$ and then $\lambda$ so large that
+$N=\lambda J-C(a)-S$ is entrywise positive.  Slater's theorem therefore gives
+attainment and equality of the two values in \eqref{eq:sdppair}.
+
+Take a dual feasible triple.  Necessarily $\lambda>0$, and
+\[
+ R=\lambda^{-1}S+
+   \operatorname{diag}\bigl(1-\lambda^{-1}S_{vv}:v\in V\bigr)
+\]
+belongs to $\mathcal E_V$: indeed $0\le S_{vv}\le\lambda$.  On an edge,
+$N_{uv}\ge0$ gives
+$1-R_{uv}\ge1/(2\lambda a_{uv})$.  Consequently
+\[
+ \sum_{uv\in E}\frac{2}{1-R_{uv}}
+ \le4\lambda\sum_{e\in E}a_e=4\lambda.
+\]
+Minimize first in \eqref{eq:sdppair} and then in \eqref{eq:minimax}.  This
+proves the missing inequality and hence the exact dual identity.  It also shows
+that the displayed elliptope minimum is attained whenever $E\ne\varnothing$.
+
+For a one-vertex sum, restriction of a correlation matrix proves
+$\kap(H)\ge\kap(H_1)+\kap(H_2)$.  Conversely, choose minimizing Gram
+representations, identify their common unit vector, and place their components
+orthogonal to that vector in mutually orthogonal spaces.  The glued correlation
+has the two prescribed principal submatrices, so the objective adds and gives
+the reverse inequality.  Iterate $\kap(K_2)=1$ for the tree assertion.
+\end{proof}
+
+\begin{lemma}[Exact path elimination]\label{lem:path}
+Replace a kernel edge $uv$ by a path of integer length $\ell\ge1$.  For fixed
+endpoint correlation $r\in[-1,1]$, its exact contribution in excess of $\ell$
+is
+\begin{equation}\label{eq:pathcost}
+ f_\ell(r)=\ell\tan^2\!\left(
+ \frac{\arccos((-1)^\ell r)}{2\ell}\right).
+\end{equation}
+For fixed $r$ and parity, $f_{\ell+2}(r)\le f_\ell(r)$.  Thus if a subdivided
+kernel has total path length $L$,
+\begin{equation}\label{eq:eliminate}
+ \kap(H)-L=\min_R\sum_P f_{|P|}(R_{u_Pv_P}),
+\end{equation}
+with $R$ ranging over the elliptope on the branch vertices.  Formula
+\eqref{eq:pathcost} is extended-valued at the endpoints (in particular, a
+denominator-zero edge cost is $+\infty$), and the minimum in
+\eqref{eq:eliminate} is attained.
+\end{lemma}
+\begin{proof}
+Represent $R$ by unit vectors and alternately negate vectors along the path.
+The transformed endpoint angle is
+$\beta=\arccos((-1)^\ell r)$.  The spherical triangle inequality and convexity
+of $\sec^2(x/2)$ make equal successive angles optimal; equally spaced planar
+vectors attain the value $\ell\sec^2(\beta/(2\ell))=\ell+f_\ell(r)$.
+Different paths are compatible because only endpoint vectors are shared.  For
+$h_s(x)=s\tan^2(x/s)$, where $s>0$ and $0\le x<\pi s/2$,
+differentiation with respect to the path-length variable $s$ gives, for
+$z=x/s$,
+\[
+ \frac{\partial}{\partial s}h_s(x)
+ =\tan z\sec^2z(\sin z\cos z-2z)\le0,
+\]
+with strict inequality when $x>0$.  Apply this with
+$x=\tfrac12\arccos((-1)^\ell r)$; an endpoint value is understood by a
+one-sided limit.  This proves fixed-parity monotonicity.
+\end{proof}
+
+If a rank-five core has $L$ edges, it has $L-4$ vertices.  Consequently
+\begin{equation}\label{eq:budget}
+ \kap(H)\le L+4
+ \Longrightarrow
+ \spn(H)=2L-\smn(H)\ge L-4=|V(H)|.
+\end{equation}
+If a tree is joined to a DNN-certified core at one root, Lemma~\ref{lem:dnn}
+adds exactly one to $\kap$, $L$, and $|V|$ for each new tree edge.  Thus the
+DNN budget is uniform under arbitrary rooted-tree attachments.  This statement
+does not apply to a structural certificate, whose attachments are handled by
+induced-territory ownership instead.
+
+We use the following packet ledger.  Here $T=C_3$, $P=C_5$, and
+$D=\Theta(1,2,2)$; a word records cyclic blocks in one connected induced
+territory, not a formal sum of overlapping subgraphs.  Every line permits
+arbitrary rooted trees, and the mixed words permit arbitrary bridge connectors.
+The extra ``shared'' hypothesis means one bridge-free shared-cut incidence
+tree.
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{p{2.4cm}p{2.5cm}p{7.8cm}}
+\toprule
+packet&credit&proof owner and exact scope\\\midrule
+rank $2,3,4$&$\sig\ge0$&the complete lower-rank graph theorems
+\cite{Bicyclic,Tricyclic,Tetracyclic}\\
+$T$, $P$&$>0$, $\ge2-\sqrt5>-1$&rooted unicyclic cycle calculation
+\cite{Bicyclic,TetracyclicCactus}\\
+$TT$, $TP$&$>1$, $>3-\sqrt5>0$&two-cycle cactus packets; the first also covers
+the attached diamond $D$\\
+$TTP$&$>0$&if separated, use $TT+P$ or $T+TP$; if shared, the rooted
+$TTC_5$ phase gives $>4-\sqrt5$ \cite{Tricyclic,TetracyclicCactus}\\
+shared $T^4$&$>3$&negative Sachs phase when packing is at most two; the sole
+packing-three central-triangle/three-petal type is the exact matching-injection
+calculation of \cite{PentacyclicCactus}\\
+shared $D+T^k$, $0\le k\le2$&$>1+k$&grouped rooted Sachs phase; in particular
+$D+T>2$ and $D+TT>3$ \cite{DiamondTwoTriangles}\\
+attached $K_4$&$>2$&the standalone attached-$K_4$ Sachs packet
+\cite{Tricyclic,Tetracyclic}\\
+\bottomrule
+\end{tabular}
+\caption{Packet inequalities used in the multiblock proof.  A shared cut is
+owned by one displayed territory only.}\label{tab:packets}
+\end{table}
+
+For clarity, the $TTP$ line is not obtained by adding three merely strict
+inequalities.  Its three-block reduced tree either has a separating edge,
+giving the displayed $TT+P$ or $T+TP$ ledger, or is one shared cluster, where
+the cited $TTC_5$ determinant has negative phase.  Likewise the $D+TT$ line is
+the rooted activity proof: after eliminating attached trees, every one-cycle
+term in the normalized Sachs expansion is negative imaginary and the possible
+two-cycle terms are real, so $D(H)=\spn(H)-\smn(H)>0$ and
+$\sig(H)=3+D(H)/2>3$.  The shared $T^4$ proof uses the same phase argument
+except for its one packing-three incidence, treated by the cited injection.
+These are the exact strengths used below; no uniform margin is inferred from
+strict positivity.  A nonempty tree has credit $-1$ because its spectrum is
+symmetric and $\spn(T)=|E(T)|$.
+
+\section{Exhaustive block partitions and the exact multiblock sieve}
+
+Cyclomatic rank is additive over cyclic blocks.  Its positive block ranks
+therefore have exactly the partitions
+\begin{equation}\label{eq:partitions}
+ 1^5,\quad2+1^3,\quad2+2+1,\quad3+1+1,\quad3+2,\quad4+1,\quad5.
+\end{equation}
+A rank-one block is a cycle.  Suppression in a rank-two block and
+$\sum_v(d(v)-2)=2$ show that it is a theta: three parallel kernel paths.
+
+For a cycle define
+\[
+ \epsilon_q=\begin{cases}0,&q\text{ even},\\
+ q\tan^2(\pi/(2q)),&q\text{ odd},\end{cases}
+\]
+so $\epsilon_3=1$, $\epsilon_5=5-2\sqrt5<2/3$, and
+$\epsilon_q<2/5$ for odd $q\ge7$.  If a theta has path lengths $a,b,c$, exact
+path elimination gives an excess $\Delta(a,b,c)$.  The elementary tangent
+classification is
+\begin{equation}\label{eq:theta}
+ \Delta>1\iff(a,b,c)=(1,2,r),\ r\ge2;
+ \quad\max\Delta=\Delta(1,2,2)=\frac{\sqrt{17}-1}{2},
+\end{equation}
+and every other exceptional row has $\Delta<4/3$.  This follows by replacing
+each nonunit odd path by length three and each even path by length two using
+Lemma~\ref{lem:path}; the one-unit objective has
+$\cot^2x+2\tan^2(x/2)\ge1$, with equality analysis leaving precisely
+$(1,2,r)$.  Minimizing the $r=2$ expression
+$1/(4u^2)-1/2+17u^2/4$ gives the displayed maximum.  These details also show
+that physical path lengths, rather than switching classes, are being used.
+
+\begin{proposition}[Exact multiblock sieve]\label{prop:sieve}
+After block additivity of $\kap$ and all available exact lower-rank ledgers,
+the rank partitions with at least two cyclic blocks have precisely the residual
+rows in Table~\ref{tab:multi}; every omitted row has total DNN excess at most
+four.
+\end{proposition}
+
+\begin{table}[p]
+\centering\small
+\begin{tabular}{p{1.25cm}p{3.1cm}p{4.4cm}p{4.5cm}}
+\toprule
+partition&direct DNN test&exact residual before territory repair&provenance of
+the exhaustion\\
+\midrule
+$1^5$&$\sum\epsilon_q\le4$&$T^4Q$ and $T^3P^2$&exact cycle ledger and complete
+pentacyclic-cactus census \cite{PentacyclicCactus}\\
+$2+1^3$&$\Delta+\sum_{i=1}^3\epsilon_{q_i}\le4$&
+$\Theta(1,2,r)+T^3$; $D+T+T+P$&theta classification
+\eqref{eq:theta} and $\epsilon_3,\epsilon_5,\epsilon_{q\ge7}$\\
+$2+2+1$&$\Delta_1+\Delta_2+\epsilon_q\le4$&$D+D+T$&the unique theta
+maximum in \eqref{eq:theta}\\
+$3+1+1$&$e_B+\epsilon_p+\epsilon_q\le4$&canonical doubled-triangle $111$,
+canonical doubled-$C_4$ $111$, or one-long all-odd $K_4$, each with $TT$;
+also $K_4+Q_1+Q_2$ if $\epsilon_1+\epsilon_2>1$&the complete physical
+rank-three ledger, including the four noncanonical rational gates
+\cite{Tetracyclic,OwnerClosure}\\
+$3+2$&$e_B+\Delta\le4$&unsubdivided $K_4+\Theta(1,2,r)$&all other structural
+rank-three rows have $e_B<12/5$\\
+$4+1$&$e_B+\epsilon_q\le4$&the rank-four structural rows plus one cycle&the
+complete rank-four direct/structural ledger \cite{Tetracyclic}\\
+\bottomrule
+\end{tabular}
+\caption{Complete excess-four multiblock residual sieve.}\label{tab:multi}
+\end{table}
+
+\begin{proof}
+For $2+1^3$, order the cycle excesses.  If the third is below one, the bounds
+$\epsilon_5<2/3$ and $\epsilon_{q\ge7}<2/5$, together with
+$\Delta<4/3$ away from $\Theta(1,2,r)$, give the direct inequality.  In the
+exceptional theta family, three triangles survive; replacing one by a
+nontriangle survives only at the unique maximum $D$ and only for $P$.  For
+$2+2+1$, a nonmaximum theta has excess $<4/3$, while
+$2(\sqrt{17}-1)/2+\epsilon_5<4$; hence exactly $D+D+T$ remains.
+
+For rank three, the cited physical ledger has $e_B\le2$ in every direct row.
+In class $111$, lengthening a doubled member gives respectively
+$229/120,31/20,1862/1000,1662/1000<2$; the only canonical structural rows are
+the two doubled families, one-long all-odd $K_4$, and the actual $K_4$.
+Consequently two cycles can survive only as stated.  Against a theta, every
+structural row except the actual $K_4$ has $e_B<12/5$, and
+$12/5+(\sqrt{17}-1)/2<4$.  Finally the rank-four theorem partitions every row
+into a direct certificate with $e_B\le3$ or its displayed structural list, so
+$\epsilon_q\le1$ proves the direct part.  The exact five-cycle calculation and
+the cactus census own $1^5$.  Thus every physical row has exactly one ledger
+owner; switching is never used to change its canonical lengths, and no
+edge-addition monotonicity is used.
+\end{proof}
+
+\begin{proposition}[Multiblock closure]\label{prop:multi}
+Every connected pentacyclic graph with at least two positive-rank cyclic
+blocks satisfies $\spn(G)\ge|V(G)|$.
+\end{proposition}
+\begin{proof}
+The cycle-only row is the complete pentacyclic cactus theorem
+\cite{PentacyclicCactus}.  The remaining routine rows have the following
+ownership ledger.  ``Boundary open'' means that the cut vertex stays with the
+anchor and the cycle minus that vertex, including every branch rooted away
+from the cut, is the other induced territory.  At an actual bridge the whole
+descendant suffix of the rooted block-cut tree, including the bridge-side
+endpoint and all connector vertices, stays together.
+\begin{center}
+\small
+\begin{tabular}{p{2.5cm}p{4.7cm}p{5.9cm}}
+\toprule
+row&territory construction&credit ledger\\\midrule
+$\Theta(1,2,r)+T^3$&open an internal vertex of the long arm, with its complete
+owned descendants; both arm remnants stay with the endpoint side&if it owns a
+triangle, opened side $>0$ and complement $\ge0$; otherwise tree $-1$, while
+the retained $T^4$ side is $>3$ when shared, or bridge-splits as $TT+T+T$ with
+credit $>1+0+0$\\
+$D+D+T$&across a bridge use complete descendant sides; at a shared cut use the
+two cut-vertex orbits of the standard diamond opening, keeping the cut and one
+attached diamond on the anchor side&the second side is a tree $-1$ unless it
+owns $T$, when it is $>0$; otherwise the anchor is shared $D+T$ and is $>2$\\
+$K_4+Q_1+Q_2$&keep the complete attached $K_4$ and root the reduced block tree
+there; each boundary component is kept whole, or its first cycle is boundary
+opened; a component containing both demands is never split at both ends&anchor
+$>2$; each of at most two components has credit $\ge-1$, while a rank-two
+component has $\ge0$\\
+$K_4+\Theta$&keep the complete attached $K_4$; at a shared cut $z$, keep $z$
+with it and put $\Theta-z$ and all theta-side branches together&anchor $>2$;
+the other side is a tree or unicyclic territory, hence $\ge-1$\\
+structural $4+1$&use the physical rank-four opening: its chosen vertex and
+descendants form one tree, while path remnants stay with the favorable
+rank-three anchor; keep the external cycle intact or boundary open it&anchor
+$>2$ pays the opening tree and at most one further $-1$ boundary territory\\
+\bottomrule
+\end{tabular}
+\end{center}
+In each line the described owner classes are disjoint and exhaustive; every
+rooted branch follows its root.  Table~\ref{tab:packets} proves every displayed
+credit, including the packing-four subcase in the first line.  This closes all
+routine residuals without a formal sum over overlapping packets.
+
+It remains to repair, owner-exactly, the four rows
+\begin{equation}\label{eq:four}
+ D+C_3+C_3+C_5,
+ \quad B_{\rm DT}+C_3+C_3,
+ \quad B_{\rm DC4}+C_3+C_3,
+ \quad B_{K_4}+C_3+C_3.
+\end{equation}
+We now define the physical openings and owners used in the four repairs.
+Deleting the edges of $B$, every off-$B$ component meets $B$ in at most one
+vertex; otherwise it and a path in the $2$-connected block $B$ would form a
+larger cyclic block.  Its unique meeting vertex, or the first vertex of $B$ on
+its block-cut route, is its \emph{owner}.  An opening is physical: it deletes
+one actual internal path vertex and all descendants owned there; it does not
+switch a parity row.  The canonical opening and legal first owners are exactly:
+\begin{center}
+\small
+\begin{tabular}{p{3.2cm}p{4.7cm}p{5.2cm}}
+\toprule
+$B$&admissible physical opening&legal first owners after no routed opening\\
+\midrule
+$D$, paths $xy,xay,xby$&$a$ or $b$&the endpoints $x,y$\\
+doubled triangle $111$, canonical pairs, connector length $\ge3$&an internal
+vertex of the odd connector&all branch vertices and all internal vertices
+outside that connector\\
+doubled triangle $111$, direct connector&the internal vertex of either
+canonical even member&the three branch vertices\\
+doubled-$C_4$ $111$, canonical pairs&an internal vertex of every available
+single connector (in particular the normalized even connector)&the four branch
+vertices and interiors of the two canonical even doubled members\\
+one-long all-odd $K_4$&an internal vertex of the unique long path&the four
+branch vertices\\
+\bottomrule
+\end{tabular}
+\end{center}
+The doubled-$C_4$ interior owners are therefore a genuine orbit, not branch
+owners in disguise.  For direct/direct incidence the owner datum is an ordered
+pair, with repetition, from the appropriate legal set.  For direct/nested
+incidence the upstream triangle has such an owner and the downstream owner is
+an arbitrary physical vertex of that triangle.
+
+Call a route \emph{positive} precisely when the minimal block-cut subtree from
+$B$ to the external cyclic blocks contains an actual bridge.  Root that subtree
+at $B$ and choose a farthest bridge.  Its entire descendant suffix is one
+connected induced territory; the complement is connected and lower-rank.  The
+exact positive-route ledger is
+\begin{center}
+\small
+\begin{tabular}{p{3.2cm}p{4.0cm}p{5.8cm}}
+\toprule
+family&descendant profile&credit against complement\\\midrule
+each rank-three $B+TT$&$T$ or $TT$&$>0$ or $>1$, while the rank-four or
+rank-three complement is $\ge0$\\
+$D+TT+P$, triangle below bridge&$T,TT,TP,$ or $TTP$&respectively $>0,>1,>0,>0$;
+the complement contains $D$ and has rank at most four, hence $\ge0$\\
+$D+TT+P$, only $P$ below bridge&$P$&$>-1$, while the retained shared
+$D+TT$ packet is $>3$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The $TP$ and $TTP$ strengths and their separating/shared proofs are exactly the
+ones in Table~\ref{tab:packets}.  This ledger includes separate arms, a common
+positive stem, and nested blocks: the suffix, never a hand-picked cycle list,
+owns every connector and shared cut once.
+
+The bridge-free subtree for a rank-three block with two triangles has only two
+block-level forms:
+direct/direct, allowing repeated owners, and direct/nested.  In the nested form
+the downstream owner is a vertex of the upstream triangle.  Open the second
+triangle $T_2$ at its boundary cut, retaining the cut upstream.  The remainder
+of $T_2$, with all branches rooted away from the cut, is one induced nonempty
+tree $S$, so $\sig(S)=-1$.
+
+For the three rank-three rows, first apply the all-length gate.  In doubled
+triangle class $111$, lengthening a member of either doubled pair has exact
+excess bounds $229/120<2$ or $31/20<2$; in doubled-$C_4$ class $111$ the bounds
+are $1862/1000<2$ or $1662/1000<2$.  Relabelling and fixed-parity monotonicity
+cover every noncanonical member.  Adding two triangle excesses gives at most
+four, so these rows are DNN-closed for every owner.  Hence both doubled pairs
+may now be assumed canonical.
+
+Perform the canonical physical opening of $B$ from the table.  Its owned
+territory $R$ is
+one tree.  The other external triangle $T_1$ remains in the retained anchor
+$A$.  For the doubled triangle, opening a long odd connector retains two
+intrinsic triangles; when that connector is direct, opening a canonical even
+parallel path retains a diamond.  For doubled $C_4$, branch owners give the
+three-triangle anchor, while an owner internal to a canonical even doubled path
+gives the distinct $D+T$ anchor.  For one-long all-odd $K_4$, opening the long
+path retains a diamond.  In every owner orbit, adjoining $T_1$ therefore gives
+either a three-triangle favorable anchor of packing number at most two or an
+attached $D+T$ anchor.  In either case $\sig(A)>2$.  The partition is
+\[
+ V(G)=V(A)\mathbin{\dot\cup}V(R)\mathbin{\dot\cup}V(S),
+ \qquad \sig(G)>2-1-1=0.
+\]
+For equal direct owners the common cut stays only in $A$; for nested incidence
+all of $T_1$, including the downstream cut, stays in $A$.  Structural path
+remnants also stay in $A$, and each rooted branch follows its root.  Thus all
+three territories are connected, induced, disjoint, and exhaustive.
+
+Finally consider the bridge-free diamond row.  Its rooted classification is
+not merely direct/direct versus direct/nested at $D$.  There are exactly two
+possibilities.  First, some triangle is the first block after $D$; retain that
+$D+T$ shared-cut anchor, of credit $>2$, and boundary-open the at most two
+remaining cyclic demands.  A component containing both demands is kept as one
+rank-two territory or is opened once, so the total loss is at most two.
+Second, no triangle is first after $D$; then $P$ is the first external block,
+and relative to $P$ the triangles are direct/direct (owners may repeat) or
+direct/nested.  Let $u$ be the $D$--$P$ cut, $v$ the owner of an upstream
+triangle, and in the direct/direct case let $w$ be the second owner.  Choose
+$z\in V(P)\setminus\{u,v,w\}$, possible because at most three of its five
+vertices are forbidden.  Put $z$ and all descendants owned there in one tree
+$R$; the induced path $P-z$ stays in an attached $D+T$ anchor $A$ of credit
+$>2$.  Boundary-open the other triangle into a tree $S$.  Repeated owners cause
+no duplication: each boundary cut remains only in $A$.  Hence
+$\sig(G)>2-1-1=0$.
+
+In every structural split, ownership is fixed before credit is invoked.  The
+opened vertex and complete descendants form $R$; the boundary cut of $T_2$
+stays in $A$, while $T_2$ minus that cut and descendants rooted there form
+$S$; every remaining core vertex, path remnant, first triangle, and descendant
+belongs to $A$.  These are connected induced, disjoint, exhaustive territories.
+Thus every connector, shared cut, physical-path remnant, and rooted branch has
+exactly one owner.  The full terminal audit is recorded in
+\cite{OwnerClosure,TerminalReduction}.
+\end{proof}
+
+\section{Classification of a single rank-five block}
+
+Suppress each maximal path whose internal vertices have block degree two,
+retaining parallel kernel edges.  Suppression creates no loop: such a loop
+would be a cycle meeting the remainder at one branch vertex, making that vertex
+a cut of the original block.  Simplicity says that at most one path in any
+parallel class has length one.
+
+\begin{proposition}[The 118 kernels]\label{prop:118}
+A loopless multigraph $K$ with at least two vertices, no cut vertex, minimum
+degree at least three, and cyclomatic rank five has order between two and eight
+and is isomorphic to exactly one of 118 canonical kernels.  Their order and
+degree ledgers are Tables~\ref{tab:orders} and \ref{tab:degrees}.
+\end{proposition}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{crrrrrrrr}
+\toprule
+$|V(K)|$&2&3&4&5&6&7&8&total\\\midrule
+kernels&1&3&13&24&38&23&16&118\\\bottomrule
+\end{tabular}
+\caption{Rank-five canonical kernel counts.}\label{tab:orders}
+\end{table}
+
+\begin{table}[ht]
+\centering\small
+\begin{tabular}{lr@{\qquad}lr@{\qquad}lr}
+\toprule
+degrees&count&degrees&count&degrees&count\\\midrule
+$6,6$&1&$6,5,3$&1&$6,4,4$&1\\
+$5,5,4$&1&$6,4,3,3$&2&$5,5,3,3$&4\\
+$5,4,4,3$&4&$4,4,4,4$&3&$6,3,3,3,3$&2\\
+$5,4,3,3,3$&11&$4,4,4,3,3$&11&$5,3,3,3,3,3$&7\\
+$4,4,3,3,3,3$&31&$4,3,3,3,3,3,3$&23&$3,3,3,3,3,3,3,3$&16\\
+\bottomrule
+\end{tabular}
+\caption{Degree-multiset refinement; counts sum to 118.}\label{tab:degrees}
+\end{table}
+
+\begin{proof}
+Writing $v=|V(K)|$ and $e=v+4$ gives
+\[
+ \sum_x(d(x)-2)=2e-2v=8.
+\]
+Every summand is positive, so $2\le v\le8$.  For each positive partition of
+eight, add two to obtain a candidate degree multiset.  Introduce nonnegative
+integer multiplicities $a_{ij}$ and solve
+\[
+ \sum_{j\ne i}a_{\min(i,j),\max(i,j)}=d_i.
+\]
+Reject a solution whose positive support disconnects after deletion of a
+vertex, and quotient by simultaneous row and column permutations.  This gives
+exactly Table~\ref{tab:degrees}, and hence Table~\ref{tab:orders}.  Taking the
+lexicographically least upper-triangle multiplicity vector over every labelling
+proves pairwise distinction and gives the fixture
+\path{research/fixtures/rank-five-kernels.json}, whose SHA-256 is
+\begin{center}\ttfamily\small
+027c84d6dd777a29b3dc93389ab30b5d43f6507eddceb4ea286f1240da95b884.
+\end{center}
+The independent generator reconstructs the incidence solutions before reading
+the fixture and requires exact equality \cite{KernelClassification}.
+\end{proof}
+
+\section{Single-block master tables and all-length closure}
+
+A physical row records the number of odd paths in each parallel bundle; it is
+not a switching class.  For each residual parity orbit, its finite frontier is
+the canonical shortest simple length vector and every vector obtained by adding
+two to one path.  If a general vector differs in some coordinate, choose that
+coordinate frontier and use Lemma~\ref{lem:path} in all coordinates.  If it
+does not differ, use the canonical target.  This is the frontier principle used
+in every line below.
+
+\begin{proposition}[Exact 118-kernel master theorem]\label{prop:master}
+Every simple subdivision $B$ of every kernel in Proposition~\ref{prop:118},
+with arbitrary rooted trees attached at arbitrary vertices, satisfies
+$\spn(G)\ge|V(G)|$.
+\end{proposition}
+
+\begin{proof}
+Tables~\ref{tab:mastera} and \ref{tab:masterb} are the exhaustive proof ledger.
+``Tetra'' denotes the exact regular-tetrahedron three-color sieve.  Rational
+records give explicit stereographic unit vectors; the verifier reconstructs
+every branch and internal vector over $\mathbb Q$, checks each physical path,
+and sums exact step costs $(1-r)/(1+r)<4$.  Equality records check every
+principal minor of the displayed rational or quadratic Gram matrix and every
+path cost.  Structural records invoke Lemma~\ref{lem:pinch}, never a DNN claim.
+
+\begin{table}[p]
+\centering\small
+\begin{tabular}{crrrrp{4.2cm}}
+\toprule
+order&kernels&physical rows&orbits&coarse direct&exact residual closure\\\midrule
+2&1&--&--&analytic&six-path tangent theorem, excess $<4$\\
+3&3&98&74&--&74 exact rational orbit records, maximum $\le4$\\
+4&13&1,281&821&808&13 orbits; 117 targets $=116$ strict rational $+1$ symbolic equality\\
+5&24&6,282&4,238&4,030&207 ordinary residual orbits give 2,070 targets: 2,062 strict, 4 equality, 4 structural; all-odd $K_5-e$ separated\\
+6&38&23,208&12,810&11,312&1,498 orbits, 16,478 targets: 16,451 strict, 18 equality, 9 structural\\
+7&23&31,112&18,026&14,306&3,720 orbits, 44,640 targets: 44,616 strict, 24 equality\\
+8&16&46,736&11,188&7,705&3,483 orbits, 45,279 targets: 45,249 strict, 30 equality\\
+\bottomrule
+\end{tabular}
+\caption{Master exhaustion by kernel order.  Dashes denote a differently
+parameterized analytic or exact orbit ledger, not an omitted case.}\label{tab:mastera}
+\end{table}
+
+\begin{table}[p]
+\centering\small
+\begin{tabular}{p{2cm}p{4.1cm}p{7.1cm}}
+\toprule
+scope&exceptional exact objects&closure and descendant rule\\\midrule
+orders 2--4&six-dipole; 13 four-vertex residuals&six-path convexity; 117-element frontier, with one exact equality\\
+order 5 ordinary&K35 equalities; K22 structural rows&four equality targets; four actual-$K_4$-against-tree targets; all other target coordinates strict rational\\
+all-odd $K_5-e$&19,683 unit/residue states&$18,848$ simplex $+53$ actual $K_4$ $+640$ theta $+142$ residual; the latter form 16 orbits with strict rational records\\
+order 6&K55, K61, K71&9 equality targets each for K55 and K61; 9 K71 triangle-plus-actual-$K_4$ structural targets; other coordinates strict\\
+order 7&K80 signed-cycle support&six parity rows at canonical and coordinates $0,3,6$: 24 equality keys; remaining coordinates strict\\
+order 8&K118 signed-cycle support&six parity rows at canonical and coordinates $0,5,6,11$: 30 equality keys; remaining coordinates strict\\
+\bottomrule
+\end{tabular}
+\caption{Exceptional master objects and exact composition.}\label{tab:masterb}
+\end{table}
+
+For completeness, the analytic low-order line is as follows.  The order-two
+kernel is six parallel paths; endpoint tests after parity reduction, followed
+by the sole interior one-unit minimization, give strict excess below four.
+The three order-three multiplicities are $(1,2,4),(1,3,3),(2,2,3)$; all 98
+physical rows collapse to 74 genuine automorphism orbits and carry exact
+rational correlations.  The 13 order-four kernels have eight paths, so the 13
+coarse residuals give $13(1+8)=117$ targets.
+
+At order five, the separated all-odd $K_5-e$ case is essential: its optimized
+DNN excess is $2\sqrt7-1>4$, so no universal DNN budget is asserted.  Its
+19,683-state disjunction in Table~\ref{tab:masterb} ends with 16 exact residual
+orbits.  In the all-unit structural state an actual attached $K_4$ is retained;
+it is not replaced by an arbitrary all-odd $K_4$ subdivision.  In K22, only
+coordinates whose growth remains on the deleted tree side use the structural
+frontier; every other one-coordinate frontier is rational.  The same
+coordinate-safe rule applies to K71 at order six.
+
+The K80 and K118 equality records use a signed four-cycle Gram matrix: adjacent
+entries have absolute value $1/2$ and opposite entries are zero.  The matrix is
+positive semidefinite (balanced signs give eigenvalues $0,1,1,2$; frustrated
+signs give $1\pm1/\sqrt2$, each twice).  Four doubled support edges each cost
+$1/3+2/3=1$, while the listed singleton coordinates have transformed endpoint
+correlation one and cost zero.  This proves exact total four and explains why
+only the listed coordinate frontiers inherit equality.
+
+The independent implication master digest-locks the 118-row census and all six
+theorem-owner packages, invokes each verifier, checks its acceptance line, and
+requires the exact scope partition
+\[
+ (2\text{--}4),\quad(5\text{ ordinary}),\quad(5\text{ all-odd }K_5-e),
+ \quad6,\quad7,\quad8.
+\]
+Thus every kernel has an owner and the complementary order-five scopes are not
+silently widened.  Every DNN target gives \eqref{eq:budget}; every structural
+target directly gives the same spectral conclusion by induced
+superadditivity.  The frontier principle gives every simple subdivision.
+
+It remains to be explicit about arbitrary trees.  There are two mechanisms,
+and they must not be conflated.  For a DNN target, the subdivided block and each
+rooted tree form iterated one-vertex sums.  Lemma~\ref{lem:dnn} therefore adds
+exactly the number of new tree edges to $\kap$; since the same number is added
+to $L$ and to $|V|$, \eqref{eq:budget} persists.  For a structural target no
+DNN bound is asserted.  Instead its certificate specifies an induced vertex
+partition and an owner for every core path vertex.  Assign each component of
+the forest off the block wholesale to the unique territory containing its
+attachment vertex.  If the structural deletion itself lies in an attached
+tree, take the complete descendant subtree on the deleted side.  These rules
+preserve disjointness, inducedness and exhaustiveness, and the packet lemmas in
+Table~\ref{tab:packets} already allow arbitrary rooted trees.  Induced
+superadditivity then proves the structural descendant.  This proves the
+proposition \cite{RankFiveMaster}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Apply the exhaustive partition \eqref{eq:partitions}.  If at least two cyclic
+blocks occur, Proposition~\ref{prop:multi} applies.  Otherwise suppress the
+unique rank-five block.  Proposition~\ref{prop:118} gives one of the 118
+kernels, and Proposition~\ref{prop:master} covers its subdivision and every
+attached tree.  These alternatives are exhaustive.
+\end{proof}
+
+\appendix
+\section{The finite verification as a computer-assisted proof}
+\label{app:verification}
+
+This appendix specifies the finite part of Proposition~\ref{prop:118} and
+Proposition~\ref{prop:master} as a computer-assisted proof.  The committed JSON
+files named below are proof objects, not illustrative data: together with their
+verifiers they are machine-readable theorem appendices.  Printing their more
+than $10^5$ records would add no logical content.  Completeness is instead
+established by regeneration or exact key-set equality, and byte identity is
+fixed by SHA-256.
+
+The logical model is the standard one for a computer-assisted finite proof.
+The mathematical text proves that acceptance of the stated finite predicates
+implies the theorem; the listed deterministic programs prove those predicates
+by exhaustive integer/rational computation.  The trust base is the displayed
+reduction, the verifier source, Python's specified exact integer semantics, and
+the hardware/interpreter executing it.  SHA-256 is used only to identify the
+audited byte strings, never as evidence that a mathematical predicate is true.
+No randomness, numerical optimizer, floating-point tolerance, network service,
+or unrecorded search output is part of the proof.  A reader may inspect and run
+the programs or independently reimplement the finite predicates from the
+pseudocode and schemas below; the certificate files are witnesses, while fresh
+regeneration and exact key-set comparison establish exhaustion.
+
+\subsection{Algorithms and completeness}
+
+The kernel classifier uses the following finite algorithm.  Here
+$a_{ij}\in\mathbb Z_{\ge0}$ is the upper-triangle multiplicity code.
+\begin{verbatim}
+for v = 2,...,8:
+  for each nonincreasing positive partition (x_1,...,x_v) of 8:
+    d_i = x_i + 2
+    recursively enumerate every nonnegative solution of
+        sum_{j != i} a_ij = d_i  (i=1,...,v)
+    retain exactly those supports connected after deletion of every vertex
+    replace each retained code by the lexicographically least relabelling
+sort, deduplicate, and compare byte-for-byte with rank-five-kernels.json
+\end{verbatim}
+The identity $\sum_i(d_i-2)=8$ proves that this generates every possible
+minimum-degree-three suppressed rank-five kernel; the vertex-deletion test is
+exactly the no-cut-vertex predicate.  For $v=8$ the implementation uses an
+equivalent recursive cubic multigraph generator, fixes the first multiplicity
+row, and canonicalizes over all possible root images and neighbor orders.
+
+For a fixed kernel with bundle multiplicities $m_e$, a \emph{physical row} is
+$o=(o_e)$ with $0\le o_e\le m_e$, where $o_e$ is the number of odd paths in
+bundle $e$.  The order-three through order-eight censuses implement the
+following exhaustive scheme.
+\begin{verbatim}
+for each kernel K in the locked 118-row fixture:
+  generate Cartesian product 0 <= o_e <= m_e
+  quotient only by Aut(K), using the least transported row as key
+  test every coarse exact certificate; retain every failure as a residual
+for each residual key (K,o):
+  generate (K,o,none) and (K,o,j) for every physical path coordinate j
+require generated target keys == certificate keys (no omissions or extras)
+\end{verbatim}
+Thus ``physical row'' does not mean a switching class.  Orbit sizes are summed
+back to the unquotiented Cartesian-product totals.  The canonical length list
+for a bundle is one path of length $1$ and the other odd paths of length $3$,
+with every even path of length $2$; target $j$ adds two to coordinate $j$.
+These are all the finite cases needed: if an arbitrary same-parity length vector
+is canonical, its canonical target applies; otherwise choose any increased
+coordinate $j$, start from target $j$, and decrease all remaining coordinates
+by Lemma~\ref{lem:path}.  This is a proof of the infinite all-length reduction,
+not a graph-order cutoff.
+
+The implication master then checks the disjoint owner registry
+\[
+ \{2,3,4\}\;\dot\cup\;(\{5\}\setminus\{K_5-e\hbox{ all odd}\})
+ \;\dot\cup\;\{K_5-e\hbox{ all odd}\}\;\dot\cup\;\{6\}\;\dot\cup\;\{7\}
+ \;\dot\cup\;\{8\}.
+\]
+It digest-locks and executes every owner, checks a required acceptance line,
+and records a canonical JSON dependency manifest.  Equality of the generated
+and certified key sets proves coverage; distinct canonical keys and the
+disjoint registry prove nonduplication.  Table~\ref{tab:mastera} gives the
+resulting supplemental count ledger, including all $108467$ order-five through
+order-eight frontier targets, so the individual rows need not be typeset.
+
+\subsection{Certificate formats and exact predicates}
+
+All JSON integers are checked to be genuine integers; a rational is stored as a
+reduced pair $[p,q]$ with $q>0$ (the small $K_5-e$ appendix uses an equivalent
+canonical rational string).  Four certificate types occur.
+\begin{enumerate}
+\item A tetrahedral record stores a physical key, orbit size, coloring, and a
+rational upper bound.  The verifier recomputes the automorphism orbit and the
+bound in $\mathbb Q$ and accepts a coarse row exactly when the bound is at most
+$4$.
+\item A strict rational path-vector record stores stereographic parameters
+$t\in\mathbb Q^d$.  The verifier reconstructs
+\[
+ u(t)=\frac{(1-\lVert t\rVert^2,2t)}{1+\lVert t\rVert^2},\qquad
+ c(u,v)=\frac{1-u\cdot v}{1+u\cdot v},
+\]
+checks every branch and internal vector, path width and parity-transformed
+endpoint, recomputes the sum of all step costs in \(\mathbb Q\), requires
+equality with the stored reduced rational, and finally requires the strict
+integer predicate $\operatorname{numerator}(C)<4\operatorname{denominator}(C)$.
+No floating-point comparison is used.
+\item A symbolic equality record stores a rational (or explicitly quadratic)
+Gram matrix.  The verifier checks symmetry, unit diagonal, and every principal
+minor nonnegative by fraction-preserving elimination, then recomputes each path
+cost and the identity $C=4$.  The K80 and K118 signed-cycle records additionally
+reconstruct their sign transport from the parity row.
+\item A structural record stores deleted and retained branch/path indices.  The
+verifier reconstructs the physical simple subdivision, checks incidence,
+connectivity, disjoint induced territories and the claimed retained $K_4$ or
+triangle packet, and then invokes the stated mathematical packet lemma.  Such a
+record is never accepted as a DNN certificate.
+\end{enumerate}
+For every source file the verifier first checks the schema, canonical encoding,
+scope and SHA-256.  It rejects duplicate, absent, extra, malformed or
+out-of-range keys; verifies the displayed count partition; and compares a
+frozen theorem fixture with a fresh deterministic reconstruction wherever that
+fixture is derived from smaller sources.  Order eight streams four disjoint
+chunks and uses a bit vector indexed by residual and frontier to prove that
+every expected key occurs exactly once.
+
+\subsection{Frozen theorem appendices}
+
+The principal committed proof objects and their SHA-256 values are listed in
+Table~\ref{tab:hashes}.  The larger rational-result and order-eight chunk hashes
+are source-locked in the corresponding verifier and are also reported below.
+These paths, schemas and hashes constitute the unabridged appendices.
+
+\begin{table}[ht]
+\centering\scriptsize
+\begin{tabular}{p{0.96\linewidth}}
+\toprule
+machine-readable theorem appendix and SHA-256\\\midrule
+\path{research/fixtures/rank-five-kernels.json}\newline
+\ttfamily 027c84d6dd777a29b3dc93389ab30b5d43f6507eddceb4ea286f1240da95b884\\
+\path{research/fixtures/rank-five-three-vertex-orbits.json}\newline
+\ttfamily e3ec57422ba2d9ca0c25ad2ba7d85b8bc74a5d656ebfe20fdb072a0688d01fa9\\
+\path{research/fixtures/rank-five-four-vertex-tetrahedral-sieve.json}\newline
+\ttfamily 0b8ded3f4dbe0b8de916c085393c5f470bbaf8961deddf4305396e15f1d45588\\
+\path{research/fixtures/rank-five-four-vertex-residual-frontiers.json}\newline
+\ttfamily 09a7b38b1e9f5e18aaddc1f9e0114b8490151f2062d3f51100c52eb314eb56d2\\
+\path{pentacyclic/research/all-odd-k5e-theorem.json}\newline
+\ttfamily 35523cc3be872181e2f343a7e21936f82b14e4a6968896fc2dcfd5f545da1ee1\\
+\path{pentacyclic/research/order5-kernel-family-theorem.json}\newline
+\ttfamily 4d8b826b397dc269c7853b8bd386d00bf469282b52720b8dac96d850e9e616d8\\
+\path{pentacyclic/research/order6-kernel-family-theorem.json}\newline
+\ttfamily 69b236b014aef58c037c610ca01fa62ad82601f7bb34153939ec4ddd3b5f364d\\
+\path{pentacyclic/research/order7-kernel-family-theorem.json}\newline
+\ttfamily 1de37116d406f72abba33f85678be9f2eba38e71347a79c67bad5f159e2f1c16\\
+\path{pentacyclic/research/order8-kernel-family-theorem.json}\newline
+\ttfamily f1c08641de224194d871197454d7056eb0884c8972c535dd8daa5abd08a37a6f\\
+\bottomrule
+\end{tabular}
+\caption{Committed machine-readable theorem appendices.}\label{tab:hashes}
+\end{table}
+
+\subsection{Hostile checks and reproducibility}
+
+Every top-level verifier uses an explicit \verb|require| that raises an
+exception, rather than relying on Python's removable \verb|assert| statement.
+The suites deliberately mutate deleted and duplicated records, multiplicities,
+ordering, counts, parity and frontier keys, rational costs, Gram entries,
+structural ownership, source hashes, and theorem scopes, and require every
+mutation to be rejected.  The classification, low-order and implication
+masters reject respectively $9$, $8$, and $9$ attacks; the lower order-three
+and order-four suites reject $11$, $9$, and $10$; the order-five through
+order-eight owner suites report their own attack totals.  The masters also run
+under \verb|python3 -O| and require byte-identical normal and optimized output,
+so optimization cannot remove a proof predicate.
+
+Run the classification and single-block implication master from the repository
+root with Python 3.10 or newer, using only the standard library, in normal and
+optimized modes:
+\begin{verbatim}
+python3 research/rank-five-kernel-census-verifier.py
+python3 -O research/rank-five-kernel-census-verifier.py
+python3 research/rank-five-order2-8-master-verifier.py
+python3 -O research/rank-five-order2-8-master-verifier.py
+\end{verbatim}
+Each implication-master command recursively invokes the low-order verifier and
+the order-five through order-eight theorem verifiers, including the separate
+all-odd $K_5-e$ owner.  To audit an individual package directly, run:
+\begin{verbatim}
+python3 research/rank-five-low-order-master-verifier.py
+python3 pentacyclic/research/order5-kernel-family-theorem-verifier.py
+python3 pentacyclic/research/all-odd-k5e-theorem-verifier.py
+python3 pentacyclic/research/order6-kernel-family-theorem-verifier.py
+python3 pentacyclic/research/order7-kernel-family-theorem-verifier.py
+python3 pentacyclic/research/order8-kernel-family-theorem-verifier.py
+\end{verbatim}
+Repeat each command with \verb|python3 -O|.  A successful implication-master
+run prints the kernel count $1+3+13+24+38+23+16=118$, the exact owner scopes, a
+dependency-manifest SHA-256, and the number of rejected hostile mutations.
+Order-eight rational chunks additionally have hashes
+\begin{center}\ttfamily\scriptsize
+2b4f2ccdb91c4cb6e8f27da94f99afec24d36c0fd0fc0175683ee9e97cd901f3\par
+4714d80c3e3b5161add1f915378af0a9541181b210bafd64ce531678c6bb0929\par
+291beab34f3d3d3649042eea2ce55c76657aa460d59ace71615fa133b6a2b81a\par
+09e0d6f38b19177b54f7579d14bc05dfc37bfb6f1c5308d870106698130feccf.
+\end{center}
+
+The programs prove exact finite statements: incidence enumeration,
+automorphism-orbit and key exhaustion, rational arithmetic, Gram principal
+minors, symbolic path costs, source hashes, and owner registries.  They do not
+replace Lemmas~\ref{lem:pinch}--\ref{lem:path}, the all-length monotonicity
+argument, the block partition, or the multiblock owner proof.  Conversely, the
+paper does not infer an all-length theorem from a finite graph-order census or
+a floating optimizer.  The multiblock proof is mathematical and its full
+owner-by-owner source is \cite{OwnerClosure}; it has no claimed executable
+verifier.
+
+Build with
+\begin{verbatim}
+bash scripts/build-paper.sh all-pentacyclic-graphs
+\end{verbatim}
+
+\paragraph{Scoped nonclaims.}
+The theorem concerns finite simple connected graphs with exactly $m=n+4$.
+It does not assert edge monotonicity of $\spn$, a universal DNN excess-four
+bound, strict inequality, or a classification of equality.  In particular,
+the all-odd $K_5-e$ family is deliberately structural/disjunctive, and several
+auxiliary DNN certificates attain excess four.
+
+\section*{AI disclosure}
+This manuscript and its proof-object synthesis were generated by an AI coding
+and mathematical reasoning system from the cited repository materials.  No
+human authorship, review, publication, or independent verification is claimed.
+The result should be assessed from the displayed argument and exact local
+dependencies.
+
+\begin{thebibliography}{99}
+\bibitem{Bicyclic} Companion manuscript, \emph{Positive Square Energy of Every
+Bicyclic Graph}, 2026; \path{all-bicyclic-graphs/paper.tex}.
+\bibitem{Tricyclic} Companion manuscript, \emph{Positive Square Energy of Every
+Tricyclic Graph}, 2026; \path{all-tricyclic-graphs/paper.tex}.
+\bibitem{Tetracyclic} Companion manuscript, \emph{Positive Square Energy of
+Every Tetracyclic Graph}, 2026; \path{all-tetracyclic-graphs/paper.tex}.
+\bibitem{TetracyclicCactus} Companion manuscript, \emph{Positive Square Energy
+of Every Tetracyclic Cactus}, 2026; \path{all-tetracyclic-cacti/paper.tex}.
+\bibitem{PentacyclicCactus} Companion manuscript, \emph{Positive Square Energy
+of Every Pentacyclic Cactus}, 2026; \path{all-pentacyclic-cacti/paper.tex}.
+\bibitem{OwnerClosure} \emph{Four multiblock residuals: owner-exact closure},
+proof note, 2026;
+\path{positive-square-energy/pentacyclic-general/four-residual-owner-exact-closure.md}.
+\bibitem{TerminalReduction} \emph{Four residual templates: exact block-cut
+terminal reduction}, proof note, 2026;
+\path{positive-square-energy/pentacyclic-general/four-residual-block-cut-terminal-reduction.md}.
+\bibitem{DiamondTwoTriangles} \emph{Canonical doubled-$C_4$ class $111$ plus
+two triangles}, proof note, 2026;
+\path{positive-square-energy/pentacyclic-general/doubled-c4-111-two-triangles-retained-packet.md}.
+\bibitem{KernelClassification} \emph{Classification of the rank-five
+suppressed kernels}, proof note and exact fixture, 2026;
+\path{positive-square-energy/pentacyclic-general/rank-five-kernel-classification.md}.
+\bibitem{RankFiveMaster} \emph{Master theorem for all 118 rank-five suppressed
+kernels}, proof note and dependency audit, 2026;
+\path{positive-square-energy/pentacyclic-general/rank-five-order2-8-master-theorem.md}.
+\end{thebibliography}
+
+\end{document}
