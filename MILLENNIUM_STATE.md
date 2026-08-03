@@ -1,5 +1,34 @@
 # millennium state — dedicated working memory
 
+- 2026-08-03: Same-packet Cycle 275 resource analysis prices the frozen
+  four-input `INDEX_2` exhaustive repair without admitting new input. Exact
+  `{AND,XOR,NOT}` synthesis can enumerate all syntactic circuits through the
+  ANF depth cap 26 in fewer than `1.182 x 10^65` extensions, but literal BFS
+  has only a pre-metadata canonical-path frontier cap above
+  `6.13 x 10^66` bytes; this cap does not assert that deduplicated BFS needs
+  that space. Once all 65,536 exact complexities exist, all 12,870 balanced
+  cuts and 26 thresholds require at most `10,921,996,800` column-pair tests or
+  `174,751,948,800` 64-bit quadrant-word tests, with under 0.2 MB core
+  working storage. The cut phase fits this two-thread, 4.1 GB host; certified
+  end-to-end execution does not, because exact synthesis has no packet-internal
+  frontier/depth bound making it tractable. No computation or complexity table
+  is claimed. See
+  `millennium-prize/p-vs-np/cycle-275-four-input-index2-threshold-hostile-audit.md`.
+
+- 2026-08-03: The sole Cycle 275 intake `P275-AMT4-EXISTENCE` receives
+  `C275-WALL`. Its target has the correct uniform quantifier order
+  `exists s forall balanced A` and is non-equivalent to the retired Cycle 264
+  literal address/data gadget. The first missing admission item is item 2: no
+  explicit implication connects either outcome of the fixed `AMT(4,s,2)`
+  decision to a quantified part of official P versus NP. A positive result
+  gives only a width-four finite OBDD consequence for fixed `MCSP_(4,s)`, and a
+  negative result refutes only that finite parameter instance. The census is
+  finite in principle (`65536` functions and `12870` balanced cuts), but the
+  packet also omits an exact minimum-circuit certificate format and fixed
+  terminal stop protocol; these later items are not reached under the
+  first-missing-item rule. No census or search was executed. See
+  `millennium-prize/cycle-275-amt4-existence-admission-audit.md`.
+
 - 2026-08-03: Cycle 274 unconditionally synthesizes the verified
   `ND274-C265-CERTIFICATE-CAPACITY: WALL`. The scalar shrinking-Wiener,
   displacement, and inviscid-transfer region is nonempty, so the result is not
@@ -1850,10 +1879,8 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 274 accepts the C265 no-datum capacity `WALL`, closes that
-  analysis, preserves `ND251` as inactive, and selects
-  `C275-ONE-PACKET-ADMISSION` as the focused portfolio main with one-packet hard
-  bounds and no missing-datum campaign
+- **phase:** Cycle 275 closes the sole packet intake at `C275-WALL`; no active
+  proof funnel is selected pending unconditional portfolio synthesis
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -2685,7 +2712,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 274
+- **cycle:** 275
 - **announcements:** none
 
 ## immutable target list
