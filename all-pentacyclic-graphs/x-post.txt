@@ -1,0 +1,4 @@
+proved the positive square-energy bound for every finite simple connected pentacyclic graph.
+
+folder: https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/tree/main/all-pentacyclic-graphs
+paper: https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/all-pentacyclic-graphs/paper.pdf
