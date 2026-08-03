@@ -1,5 +1,36 @@
 # millennium state — dedicated working memory
 
+- 2026-08-03: Cycle 281 accepts `P280-WALL`. The frozen first-merge predicate
+  permits one physical gate to carry arbitrarily many restriction-dependent
+  dyadic scale labels, including on an explicit padded-`3SAT` subcube, so it
+  cannot by itself yield the global cross-scale disjointness needed for the
+  claimed `Omega(N log N)` sum. The first missing item is a separate
+  restriction-independent ownership or anti-sharing theorem for unrestricted
+  SAT circuits. This retires the admitted proof interface, not the full
+  existential lemma and not P versus NP. A bounded inventory restricted to
+  changes caused by this closure finds no complete novel object already present
+  that becomes eligible: repeats have zero information gain, the needed theorem
+  is absent, retired AMT repairs remain stopped, and the other five lanes are
+  unchanged. Deliberate wait is therefore retained without manufacturing a
+  packet, initiating a repair/search, or making a Millennium claim. See
+  `millennium-prize/cycle-281-post-p280-wall-voi-inventory.md`.
+
+- 2026-08-03: Cycle 280 admits the independently supplied P-versus-NP packet
+  `Multiscale SAT Merge Lemma` for hostile proof audit. Its frozen quantifiers
+  require universal constants `c,eta>0`, every sufficiently large canonical
+  `3SAT_N` instance length, every unrestricted fan-in-two circuit, at least
+  `eta log_2 N` scales, at least `cN` SAT-active first-merge gates per scale,
+  and global gate disjointness across distinct scales. The last condition gives
+  the claimed `Omega(N log N)` count; within-scale disjointness alone does not.
+  A fixed three-gate, four-input counterexperiment reuses one OR gate as a
+  first merge at two scales and therefore returns `OVERLAP-CAUGHT` against the
+  weak reading. The target is novel relative to retired Stream-Merge and AMT
+  component-additivity mechanisms. If proved, it is a major superlinear lower
+  bound for an explicit NP-complete family, but remains compatible with
+  polynomial-size circuits and does not prove `P!=NP`. Admission freezes the
+  packet; it does not certify the independently supplied proof. See
+  `millennium-prize/p-vs-np/cycle-280-multiscale-sat-merge-admission.md`.
+
 - 2026-08-03: Cycle 279 bounded monitoring returns `NO-INPUT`. The checked
   adjacent 2025--2026 sources do not supply any complete novel action satisfying
   the four-item eligibility gate: Markman's quartic-CM semiregularity remains
@@ -1980,7 +2011,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 279 deliberate wait: eligibility inventory remains empty after
+- **phase:** Cycle 281 deliberate wait: eligibility inventory remains empty after
   terminal `CEB-SPLIT-WALL` and `B264-DL-WALL`; monitoring only until an
   independently supplied complete novel action passes the four-item gate
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
@@ -2814,7 +2845,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 279
+- **cycle:** 281
 - **announcements:** none
 
 ## immutable target list

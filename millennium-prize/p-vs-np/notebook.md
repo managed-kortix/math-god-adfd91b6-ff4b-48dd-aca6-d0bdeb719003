@@ -1,5 +1,36 @@
 # Notebook
 
+## Cycle 281 closure
+
+`P280-MULTISCALE-MERGE` closes `WALL` at the first missing cross-scale
+ownership or anti-sharing theorem. The reusable-root construction invalidates
+the packet's derivation of global disjointness from `FM_N`; it does not refute
+the full existential lemma. No complete novel follow-on object already present
+becomes eligible, so the bounded-VOI decision retains deliberate wait. See
+`../cycle-281-post-p280-wall-voi-inventory.md`.
+
+## Cycle 280 hostile audit
+
+`P280-MULTISCALE-MERGE` breaks any inference from the frozen `FM_N` predicate
+alone to disjoint physical gate sets across scales. A fixed balanced AND tree
+on sixteen bits has one root gate that is the SAT-active first left--right merge
+after each of four restrictions, with block sizes `1,2,4,8` at frozen scales
+`0,1,2,3`. The same tree occurs on an explicit coordinate subcube of padded `3SAT`:
+private clause packages make satisfiability equal `AND_16` using one free
+literal-sign bit per package. The exact realization fixes `v=16,m=32` for every
+`N>=626` and orients each package relative to the parser's sign convention; no
+equality promise or filler clause is needed. An unrestricted total SAT circuit
+can splice this tree into that subcube and use any complete SAT circuit
+elsewhere. If firstness is recomputed after restriction, the same physical root
+is charged at every scale; if firstness and scale are frozen in the original
+DAG, disjoint buckets
+are definitional and restrictions create no additive demand. Absolute first
+binary merge collapses every intrinsic scale to two. Canonical choice does not
+supply ownership or anti-sharing. This attacks the required proof interface,
+not the full existential lemma by itself: the latter could try to select other
+gates and would need a separate cross-scale ownership theorem. See
+`cycle-280-multiscale-sat-merge-hostile-audit.md`.
+
 ## Cycle 269 bounded scout
 
 `P269-LOCAL-CHARGE` tests whether the Cycle 264 sharing failure can be repaired

@@ -1,5 +1,18 @@
 # Routes
 
+Cycle 280 terminal disposition: `P280-WALL`. The hostile
+breaker does not falsify the full existential Multiscale SAT Merge Lemma,
+because repeated valid witnesses do not rule out every alternative globally
+disjoint selection. It does falsify the unstated inference from semantic
+`FM_N` firstness to cross-scale physical gate disjointness. Certification stops
+at the missing restriction-independent ownership/anti-sharing theorem that
+would have to provide `cN` differently owned gates at each of `eta log N`
+scales for every unrestricted padded-`3SAT` circuit. The supplied proof
+interface is retired; the frozen lemma remains unproved, no `Omega(N log N)`
+lower bound is established, and no repair, model restriction, or expanded
+counterexample campaign is authorized. Deliberate wait remains in force. See
+`../cycle-281-post-p280-wall-voi-inventory.md`.
+
 Scout lemma: polynomial-cardinality anticheckers for dense-encoded 3-COLOR
 against unrestricted fan-in-two circuits of size `N^2`. This gives only a
 quadratic lower bound; a separate all-exponents amplification theorem would
