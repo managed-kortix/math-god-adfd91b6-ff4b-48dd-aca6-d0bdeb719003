@@ -1,5 +1,22 @@
 # Notebook
 
+## Cycle 269 hostile audit terminal wall
+
+`H269-DG-DIAG-ALPHA` terminates at `DG-ALPHA-WALL` before construction of the
+frozen Cech--Koszul complex. The codimension-three regular diagonal, the two
+affine opens, and Cech acyclicity pass, but the cover does not trivialize the
+diagonal Cartier ideal. The four pair ideals have exact presentations
+`(x1-x2,y1-y2)`, `(a2-b2*x1,1-b2*y1)`, its transpose, and
+`(a1-a2,b1-b2)`, but none is principal. Specialization at `Q=(0,0)` proves the
+first case; the exact point `P=(i,1-i)` with `2P=Q` proves the other three by
+Picard-group obstruction. Consequently all 64 sixfold product charts meet the
+big diagonal and carry three nonprincipal factor ideals. The big diagonal is
+still a regular codimension-three immersion after local trivialization, but no
+scalar generators, transition units, or scalar regular sequence exist on the
+frozen charts. Frozen stop rules prohibit refining the cover or replacing the
+model, so `h_i`, `n_i`, `alpha`, and the PEL cochains are not reached. See
+`cycle-269-h269-hostile-algebraic-geometry-audit.md`.
+
 ## Cycle 269 main-funnel target
 
 The terminal H268 wall is accepted without coefficient enumeration or

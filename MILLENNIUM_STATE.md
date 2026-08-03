@@ -1,5 +1,24 @@
 # millennium state — dedicated working memory
 
+- 2026-08-03: Hostile algebraic-geometry review terminates
+  `H269-DG-DIAG-ALPHA` at the exact output `DG-ALPHA-WALL`. The diagonal
+  `E^3 -> E^3 x E^3` is a codimension-three regular immersion, the declared
+  two-open Weierstrass cover is affine, and its product intersections are
+  Cech-acyclic for quasi-coherent sheaves. However, all four pair-chart
+  diagonal ideals are invertible but nonprincipal. Their exact two-generator
+  forms are `(x1-x2,y1-y2)`, `(a2-b2*x1,1-b2*y1)`, the transposed mixed form,
+  and `(a1-a2,b1-b2)`. Specialization at `Q=(0,0)` handles `U_Z x U_Z`; the
+  exact order-four point `P=(i,1-i)`, with `2P=Q`, handles the other pairs by
+  Picard-group certificates. All 64 sixfold product charts meet the diagonal,
+  and every one has three nonprincipal pulled-back factor ideals. Geometric
+  regularity still holds after local trivialization, but no scalar generator,
+  transition unit, or scalar regular sequence exists on the frozen charts.
+  Hence the stipulated length-three chartwise Koszul model cannot be formed.
+  Refining the cover or using line-bundle Koszul data is forbidden, so the
+  `h_i`, `n_i`, `alpha`, and PEL chain calculations are not reached. No
+  cancellation, survival, mixed, Hodge, or Millennium claim is made. See
+  `millennium-prize/hodge/cycle-269-h269-hostile-algebraic-geometry-audit.md`.
+
 - 2026-08-03: RH bounded scout `R269-NB-TERM-SIGN` polarizes the unresolved
   Cycle 264 quadratic numerator exactly as
   `[R_N(k)^2-R_(2N)(k)^2]/alpha`. Complete Mobius identities prove its positive
