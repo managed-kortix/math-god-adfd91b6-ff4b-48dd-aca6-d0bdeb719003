@@ -1,5 +1,40 @@
 # millennium state — dedicated working memory
 
+- 2026-08-03: Hostile selection audit finds that the lexicographic tuple is a
+  sound milestone ledger but an unsafe action policy. Because inactive `ND251`
+  retains `(1,1,0,1)`, while `WALL`/`NO-INPUT` packet outcomes need not change
+  any tuple, the current selector has a state self-loop and no decreasing
+  potential preventing endless admission cycles. Replace action selection by a
+  bounded value-of-information rate over executable packets, with finite
+  ambition-weighted utility, an uncertainty bonus, immutable budgets, terminal
+  retirement, and zero credit for repeated unchanged intake. On current
+  evidence, Hodge and RH have no stop-compliant executable packet; the
+  P-versus-NP intake is walled; and Yang--Mills has no continuum mechanism.
+  Cycle 276's `C276-CEB-ONE-SPLIT` is executable but merely rewrites the desired
+  factor-two bound as an integrated pressure budget and supplies no independent
+  scale-sensitive mechanism, so its expected separated return is low.
+  Recommend one lower-cost, state-changing BSD action:
+  `B264-DL-AUDIT`, the previously specified but unterminated source-only
+  determinant-line applicability audit, returning `B264-DL-IMPLIES` or
+  `B264-DL-WALL` for one named theorem/class pair. See
+  `millennium-prize/cycle-275-lexicographic-loop-hostile-audit.md`.
+
+- 2026-08-03: Cycle 276 unconditionally accepts the sole-intake `C275-WALL`
+  and closes packet admission rather than repairing or replacing the packet.
+  The six-lane scores remain Navier--Stokes `(1,1,0,1)`, Hodge `(1,1,0,0)`,
+  RH `(1,0,0,1)`, BSD and P versus NP `(0,1,1,0)`, and Yang--Mills
+  `(0,1,0,0)`. Navier remains first but has no admissible production object, so
+  the next main is focused discovery `C276-NS-EXCURSION-BUDGET`, not a proof
+  campaign or another intake. Its concrete conjecture bounds integrated
+  pressure work minus viscous payment by `7/8` of the first-excursion
+  velocity-`L3` cube; with the exact `L3` identity this gives the strict
+  factor-two bound and therefore the official periodic existence alternative
+  via endpoint continuation. The sole first experiment is a one-amplitude-split
+  analytic audit returning `PASS`, `NOGO`, or the first `WALL`; it authorizes no
+  datum, trajectory, Fourier, Galerkin, cutoff, or missing-input search. All
+  recorded stops remain stopped. See
+  `millennium-prize/cycle-276-post-wall-six-lane-synthesis.md`.
+
 - 2026-08-03: Same-packet Cycle 275 resource analysis prices the frozen
   four-input `INDEX_2` exhaustive repair without admitting new input. Exact
   `{AND,XOR,NOT}` synthesis can enumerate all syntactic circuits through the
@@ -1879,8 +1914,9 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 275 closes the sole packet intake at `C275-WALL`; no active
-  proof funnel is selected pending unconditional portfolio synthesis
+- **phase:** Cycle 276 accepts `C275-WALL`, closes packet intake, and selects
+  focused discovery `C276-NS-EXCURSION-BUDGET`; no active datum-production or
+  trajectory proof campaign is authorized
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -2712,7 +2748,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 275
+- **cycle:** 276
 - **announcements:** none
 
 ## immutable target list
