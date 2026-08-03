@@ -17,6 +17,21 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-03: after closing and announcing the pentacyclic frontier, advanced
+  to connected hexacyclic graphs (`|E|=|V|+5`). Certified the exact rank-six
+  suppressed-kernel census: 1198 kernels on orders 2--10 with counts
+  `1,4,26,84,216,314,325,162,66`, 30 degree multisets, fixture digest
+  `5a862a0e9ed5dfe91ff6f8491936c8e775eb39b71619df6b8c2a9be2c4643476`;
+  normal/`-O` verifiers and an independent nauty route agree, hostile audit
+  ACCEPT. Proved all 31 low-order kernels (orders 2--4): analytic strict
+  seven-path dipole, 169 physical / 136 orbit three-vertex ledger, and 3652
+  physical / 2564 orbit four-vertex tetrahedral ledger with empty residual.
+  The eleven block-rank partitions are now explicit; the multiblock DNN sieve
+  reduces to seven owner-sensitive packet families. A marked-pentacyclic
+  promotion criterion is `E+2/(1-r)<=6`, equivalently for `E=4-mu`,
+  `r<=mu/(2+mu)`. The alternative sparse-basis compression route survived all
+  4849 connected graphs of orders <=8 at ranks 6--8 plus random/designed tests,
+  but remains conjectural.
 - 2026-08-02: proved the complete connected pentacyclic theorem: every finite
   simple connected graph with `|E|=|V|+4` satisfies `s^+(G)>=|V(G)|`. The
   single-block branch is the complete 118-kernel theorem; the multiblock branch
