@@ -1,5 +1,14 @@
 # Routes
 
+Cycle 277 executes the source-only `B264-DL-AUDIT` and returns
+`B264-DL-WALL`. Jetchev--Skinner--Wan's published 2017 rank-one Main Theorem
+does not apply to the existing two-twist class
+`{433a1^(-1499),433a1^(-29023)}` because it requires semistability and
+square-free conductor, while each twist has additive reduction at its twist
+prime and conductor `433*D^2`. Its normalizations match the dossier, but its
+conclusion is in any event only a `p`-adic valuation equality, not an exact
+complex leading-term identity. See `cycle-277-B264-determinant-line-audit.md`.
+
 Cycle 263 integrates the bounded `43a1` packet into the curve-specific theorem
 `Sha(43a1/Q)=0`. The exact CM certificate gives `y_K=P`, the Mordell--Weil
 certificate gives `E(K)=ZP`, and all residual images are surjective. Therefore

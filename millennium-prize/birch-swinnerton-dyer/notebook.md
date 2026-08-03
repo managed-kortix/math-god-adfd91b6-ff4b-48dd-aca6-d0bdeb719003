@@ -1,5 +1,19 @@
 # Notebook
 
+## `B264-DL-AUDIT` terminal wall cycle 277
+
+The source-only audit returns `B264-DL-WALL` for Jetchev--Skinner--Wan's
+published 2017 rank-one `p`-part BSD Main Theorem against the existing class
+`{433a1^(-1499),433a1^(-29023)}`. Its first failed hypothesis is semistability:
+both twists have conductor `433*D^2` and additive reduction at the twist
+prime, whereas the theorem requires a semistable curve with square-free
+conductor. The Neron period, Neron--Tate regulator, torsion, and Tamagawa
+normalizations otherwise match at `p=7`, and the remaining visible hypotheses
+pass. Independently, the theorem concludes only equality of one `p`-adic
+valuation, not the exact complex leading-term identity. The bounded audit is
+now terminal; no new curve, `43a1` reopening, or general BSD claim follows. See
+`cycle-277-B264-determinant-line-audit.md`.
+
 ## Formal `43a1` packet closure cycle 264
 
 The one Cycle 261 side packet is terminally closed. Its internal theorem target

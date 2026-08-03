@@ -62,7 +62,18 @@ and, using the standard smooth approximation at zeros of `u`, define
  \mathcal D(u)=-\int_{\mathbb T^3}|u|u\mathbin\cdot\Delta u\geq0.
 \]
 
-The exact critical-norm identity is
+Here `Delta u` is the componentwise vector Laplacian. Periodic integration by
+parts gives the pointwise-sign certificate
+
+\[
+ \mathcal D(u)=\int_{\mathbb T^3}|u|
+ \bigl(|\nabla u|^2+|\nabla|u||^2\bigr)\geq0,          \tag{276.0}
+\]
+
+with the identity understood by regularizing `|u|` at its zeros. Dotting the
+equation with `|u|u`, the transport term vanishes and
+`int |u|u dot grad p=-mathcal P(u)`. Thus the factor `3`, both signs, and the
+definitions above give the exact critical-norm identity
 
 \[
  X(t)-X(0)=3\int_0^t\bigl(\mathcal P(u(s))-
@@ -72,8 +83,8 @@ The exact critical-norm identity is
 Freeze the following structural conjecture, rather than a datum-production
 request.
 
-**Critical first-excursion budget conjecture.** For every such solution and
-every `tau` before its maximal smooth time for which
+**Critical first-excursion budget conjecture.** For every such solution with
+`X(0)>0` and every `tau` before its maximal smooth time for which
 `X(t) <= X(tau)` on `[0,tau]`,
 
 \[
@@ -81,12 +92,26 @@ every `tau` before its maximal smooth time for which
  < \frac78 X(\tau).                                \tag{CEB}
 \]
 
-The constant is fixed, not optimizable. Combining `(276.1)` and `(CEB)` gives
-`X(tau)<8X(0)`, hence `||u(tau)||_3<2||u(0)||_3` at every new maximum. The
-standard endpoint `L^infinity_t L^3_x` continuation criterion then gives the
-full unforced periodic smooth-existence alternative in the official
-Navier--Stokes statement. Thus `(CEB)` has an explicit official implication;
-it is not claimed proved, and it may be stronger than regularity.
+The zero datum is excluded only because the strict displayed inequality would
+read `0<0`; its solution is identically zero and is handled separately. The
+constant is fixed, not optimizable. By `(276.1)`, `(CEB)` is exactly
+
+\[
+ X(\tau)-X(0)<\frac78X(\tau),
+ \qquad\text{hence}\qquad X(\tau)<8X(0).              \tag{276.2}
+\]
+
+The constants are therefore `3*(7/24)=7/8` in the proposed pressure charge and
+`8^(1/3)=2` in the norm. For any `T` before the maximal smooth time, continuity
+gives a maximizer `tau` of `X` on `[0,T]`; either `tau=0`, or it satisfies the
+record-maximum hypothesis. Consequently
+`sup_[0,T] ||u(t)||_3<2||u(0)||_3`, uniformly in `T` (and the limiting supremum
+is at most twice the initial norm). The standard endpoint
+`L^infinity_t L^3_x` continuation criterion then gives the full unforced
+periodic smooth-existence alternative in the official Navier--Stokes statement.
+Thus `(CEB)` has an explicit official implication; it is not claimed proved,
+and, after `(276.1)`, it is an exact reformulation of the desired factor-two
+estimate at record maxima rather than independent evidence for that estimate.
 
 This formulation isolates the only source of critical-norm growth--integrated
 pressure work after viscous payment--and is not a new Fourier datum, packet,
@@ -104,7 +129,9 @@ trajectory generation.
    frequency decomposition is allowed.
 2. On the low-amplitude region use the exact maximum normalization. On the
    high-amplitude region, attempt to charge the pressure term to
-   `nu*D(u)` plus at most `7X(tau)/24` after time integration. Every use of a
+   `nu*D(u)` plus strictly less than `7X(tau)/24` after time integration. (A
+   non-strict `at most` bound would prove only the non-strict version of `(CEB)`,
+   though that would still suffice for endpoint continuation.) Every use of a
    Calderon--Zygmund, Holder, interpolation, or truncation estimate must retain
    its explicit constant and direction.
 3. Terminate after the first complete inequality chain or the first

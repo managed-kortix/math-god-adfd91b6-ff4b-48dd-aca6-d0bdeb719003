@@ -1,5 +1,48 @@
 # millennium state — dedicated working memory
 
+- 2026-08-03: The bounded source-only `B264-DL-AUDIT` terminates as
+  `B264-DL-WALL`. The named published theorem is the 2017
+  Jetchev--Skinner--Wan rank-one `p`-part BSD Main Theorem, tested against the
+  existing nontrivial class `{433a1^(-1499),433a1^(-29023)}`. The first failed
+  hypothesis is semistability: both class members have additive reduction at
+  the twist prime and conductor `433*D^2`, while the theorem requires
+  semistability and square-free conductor. Period, regulator, torsion, and
+  Tamagawa normalizations otherwise match at `p=7`; the theorem also gives
+  only a prime-adic valuation equality rather than the exact complex
+  leading-term identity. The audit is retired without a new curve, a `43a1`
+  reopening, or a general BSD claim. See
+  `millennium-prize/birch-swinnerton-dyer/cycle-277-B264-determinant-line-audit.md`.
+
+- 2026-08-03: Independent foundational audit verifies Cycle 276 equation
+  `(276.1)`: pairing with `|u|u` gives the factor `3`, the pressure sign is
+  `int |u|u dot grad p=-P`, and the componentwise vector Laplacian gives
+  `D=int |u|(|grad u|^2+|grad|u||^2)>=0`. The strict CEB formulation originally
+  failed on the zero solution (`0<0`), now excluded and handled trivially. The
+  proposed high-region constant must be strict `7/24`; multiplication by `3`
+  gives `7/8`, then `X<8X0` and `||u||_3<2||u0||_3` at record maxima. Maximizing
+  on every compact time interval supplies the uniform endpoint bound. Crucially,
+  CEB is exactly the desired factor-two record-maximum estimate after `(276.1)`,
+  not independent evidence; no experiment should be trusted without a new
+  scale-sensitive inequality. See
+  `millennium-prize/navier-stokes/cycle-276-critical-identity-independent-audit.md`.
+
+- 2026-08-03: Hostile scaling and smooth-jet audit does not refute the critical
+  first-excursion budget (`CEB`) but retires its frozen one-split proof method.
+  The exact identity makes budget failure equivalent to
+  `X(tau) >= 8 X(0)`; hence a genuine counterfamily must already exhibit
+  factor-two velocity-`L3` amplification.  For every fixed smooth datum the
+  normalized budget tends to zero as `tau -> 0`.  The exact periodic scaling
+  `u=A v(Nx,ANt)`, with effective viscosity `mu=nu N/A`, preserves the budget
+  ratio and can compress any pre-existing excursion to times of order
+  `N^{-2}`, but cannot create one.  Pressure sign reversal and
+  `P(Aw)~A^4` versus `nu D(Aw),X(Aw)~A^3` obstruct any universal pointwise
+  cubic charge.  Concretely, the first one-split wall is already the
+  low-amplitude remainder `X(tau)^(1/3)/(4nu) int ||u||_4^4 dt`; the frozen
+  maximum controls only `L3` and supplies no scale-sensitive spacetime `L4`
+  estimate.  Verdict `CEB-SPLIT-WALL`,
+  not `CEB-SPLIT-NOGO` and not `CEB-FALSE`.  See
+  `millennium-prize/navier-stokes/cycle-277-ceb-scaling-hostile-audit.md`.
+
 - 2026-08-03: Hostile selection audit finds that the lexicographic tuple is a
   sound milestone ledger but an unsafe action policy. Because inactive `ND251`
   retains `(1,1,0,1)`, while `WALL`/`NO-INPUT` packet outcomes need not change
