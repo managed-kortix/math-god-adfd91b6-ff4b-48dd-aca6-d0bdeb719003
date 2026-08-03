@@ -1,5 +1,41 @@
 # millennium state — dedicated working memory
 
+- 2026-08-03: Cycle 273 durable repair preserves the original frozen manifest
+  at SHA-256 `2a0e301c5e41060d423cf82c8052a3949d96475e924b858ffa4da763abbe4cce`
+  and recovers its pinned admission certificate at SHA-256
+  `dff46244d32e8a6476d7cb23cdd5b515484cec9a51c63a164e3503631ed2d4a8`.
+  The hardened certificate remains a separate superseding object. The additive
+  `cycle273-nd270-p3-amendment.json` invalidates compute authorization and binds
+  all frozen, recovered, superseding, and analytic-source objects. The executor
+  verifies every digest before assigning any status. No trajectory is
+  authorized.
+
+- 2026-08-03: A pre-trajectory Cycle 272 Wiener cap rejects the Cycle 273 P3
+  endpoint manifest.  Minkowski, `|u_t|<=6480000`, `T=1/65536`, and the
+  conserved datum norm `||u(0)||_3>=||u(0)||_2>257` give relative `L3`
+  displacement below `50625/131584`.  Hence
+  `|log||u(T)||_3-log||u(0)||_3|<50625/80959<2/3<log 2`.  The same bound holds
+  for every earlier time, so neither doubling nor the stricter `201/100`
+  promotion ratio is reachable on the frozen slab.  No trajectory is needed or
+  authorized for this manifest.  See
+  `millennium-prize/navier-stokes/cycle-272-short-time-growth-audit.md`.
+
+- 2026-08-03: Cycle 273 returns `ND270-ADMIT` for the Cycle 272 P3 singleton
+  after freezing admission items 5--6 before trajectory work. The normalization,
+  forward horizon `T=1/65536`, quarter checkpoints, retained cutoffs `K=4,6`,
+  implicit-midpoint steps, exact analytic-tail/Picard/cubature interfaces, and
+  Cycle 265 inviscid interface are fixed in
+  `cycle273-nd270-p3-manifest.json`. Promotion requires the outward complete-field
+  endpoint ratio strictly above `201/100`; equality, interior extrema, and
+  Galerkin-only values fail. The preflight is bounded to two cores, 1024 MiB,
+  21600 seconds, and one full-Euler certificate attempt; the current host has
+  two logical cores and sufficient available memory. No trajectory was run and
+  no Euler crossing, Navier--Stokes, or Millennium claim is made. The later
+  Cycle 272 analytic precheck recorded immediately above rejects this frozen
+  compute authorization before trajectory while preserving the admission
+  verdict as an items 1--6 specification result. See
+  `millennium-prize/navier-stokes/cycle-273-nd270-p3-items5-6.md`.
+
 - 2026-08-03: Cycle 272 removes the unjustified requirement that an admitted
   Euler datum have infinite Fourier support at `t=0`. Kishimoto--Yoneda forbids
   nonstationary solutions remaining in one fixed finite support; it does not
@@ -1756,9 +1792,9 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 272 evaluates the exact P3 singleton at bounded architecture
-  gate `ND270-ADMISSION`; initial finite support is allowed when generated
-  scales have a closed analytic tail
+- **phase:** Cycle 273 closes the admitted P3 singleton by exact analytic
+  rejection before trajectory compute; `ND251` remains main but datum-level
+  production is suspended pending certificate-capacity analysis
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -2590,7 +2626,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 272
+- **cycle:** 273
 - **announcements:** none
 
 ## immutable target list

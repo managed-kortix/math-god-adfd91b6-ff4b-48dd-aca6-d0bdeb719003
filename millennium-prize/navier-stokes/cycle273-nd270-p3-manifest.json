@@ -1,0 +1,183 @@
+{
+  "format": "ND270-P3-compute-manifest-v1",
+  "status": "FROZEN_BEFORE_TRAJECTORY_COMPUTE",
+  "admission_output": "ND270-ADMIT",
+  "normalization": {
+    "domain": "T3=(R/2*pi*Z)^3",
+    "measure": "normalized Haar measure",
+    "fourier_series": "u(x)=sum_k uhat_k*exp(i*k.x)",
+    "pressure": "mean-zero solution of -Delta p=partial_i partial_j(u_i*u_j)",
+    "mode_norm": "Euclidean vector norm",
+    "analytic_weight": "A_q(u)=sum_k q^|k|_1*|uhat_k|_2",
+    "zero_mode": "zero",
+    "reality": "uhat_-k=conjugate(uhat_k)",
+    "rescaling": "none"
+  },
+  "singleton": {
+    "name": "genuine-3d-five-wave-datum",
+    "parameter_box": ["0", "0"],
+    "selected_parameter": "0",
+    "direction": "forward",
+    "file": "cycle-272-p3-example.json",
+    "sha256": "b1a334e7efa5483eceaa3303682fbd32a6483c6647afbb6ca3e7b0b78bab77b0",
+    "admission_certificate": "cycle-272-p3-certificate.json",
+    "admission_certificate_sha256": "dff46244d32e8a6476d7cb23cdd5b515484cec9a51c63a164e3503631ed2d4a8"
+  },
+  "time": {
+    "T": "1/65536",
+    "role_of_T": "analytic existence/tail and predeclared compute endpoint; not a certified positive-growth horizon",
+    "certified_positive_growth_endpoint": "1/17179869184",
+    "short_time_manifest": "cycle272-short-time-manifest.json",
+    "checkpoints": ["0", "1/262144", "1/131072", "3/262144", "1/65536"],
+    "policy": "one forward trajectory; endpoints and checkpoints only; no interior-extremum promotion"
+  },
+  "analytic_tail": {
+    "interface": "cycle-265 equations (265.5)-(265.8)",
+    "q0": "33/32",
+    "M": "600",
+    "alpha": "600",
+    "q_of_t": "(33/32)*(1-600*t)",
+    "initial_Aq_upper": "91652781/163840",
+    "q_T": "267861/262144",
+    "shell_bound": "sum_{|k|_infinity=n}|uhat_k(t)|_2 <= 600*q(t)^(-n)",
+    "required_exact_gates": [
+      "A_q0(u0) <= 91652781/163840 < 600",
+      "alpha >= M",
+      "q(T)=267861/262144 > 1"
+    ],
+    "failure": "fail closed; no Galerkin substitution and no parameter change"
+  },
+  "retained_levels": [
+    {
+      "name": "K4",
+      "cubic_cutoff": 4,
+      "ordered_modes": "lexicographic k with 0<|k|_infinity<=4",
+      "dealiased_fft_side": 17,
+      "step_size": "1/1048576",
+      "steps": 16,
+      "endpoint_cubature_grids": [24, 48]
+    },
+    {
+      "name": "K6",
+      "cubic_cutoff": 6,
+      "ordered_modes": "lexicographic k with 0<|k|_infinity<=6",
+      "dealiased_fft_side": 25,
+      "step_size": "1/2097152",
+      "steps": 32,
+      "endpoint_cubature_grids": [32, 64]
+    }
+  ],
+  "implicit_midpoint": {
+    "method": "implicit midpoint on the exact Leray-projected symmetric cubic Galerkin system",
+    "nonlinear_solver": "fixed-point Anderson depth 4",
+    "maximum_iterations_per_step": 40,
+    "residual_ratio_max": "1/100000000000",
+    "unconverged_step": "fail closed",
+    "rationalization": "each accepted binary midpoint node is enclosed then replaced by the unique nearest rational with denominator 2^80; ties toward zero",
+    "integrity_replay": "exact finite-residual energy and helicity identities; divergence and Fourier reality",
+    "gates": {
+      "relative_energy_drift_max": "1/1000000000",
+      "energy_scaled_helicity_drift_max": "1/1000000000",
+      "divergence_defect_max": "1/100000000000",
+      "reality_defect_max": "1/100000000000",
+      "doubled_cubature_ratio_difference_max": "1/1000",
+      "cross_cutoff_ratio_difference_max": "1/100"
+    }
+  },
+  "promotion": {
+    "quantity": "complete-field endpoint velocity L3 ratio ||u(T)||_3/||u(0)||_3",
+    "threshold": "201/100",
+    "strict": true,
+    "required_levels": ["K4", "K6"],
+    "numerical_lead_rule": "both levels satisfy all gates and each outward floating ratio lower bound is >201/100",
+    "full_pde_rule": "outward rational cubature bounds satisfy 1000000*L_T > 8120601*U_0, where C_T>=L_T and C_0<=U_0 enclose integral |u|^3",
+    "maximum_promotions": 1,
+    "equality": "reject"
+  },
+  "full_euler_certificate": {
+    "interface": "cycle-265 equations (265.9)-(265.16), specialized to the singleton and K6",
+    "format": "ND270-P3-full-euler-certificate-v1",
+    "partition": "64 equal rational slabs of width 1/4194304",
+    "reference": "piecewise-affine path through the rationalized K6 implicit-midpoint nodes",
+    "omitted_convolution": "componentwise outward boxes for every retained mode, including retained-tail and tail-tail terms, using q at each slab end and 3D shell count 24*n^2+2",
+    "picard": "recentered strict inclusions (265.13) on every slab with exact rational interval arithmetic",
+    "cubature": "64^3 Cartesian cells, directed rational Taylor bounds of fixed total degree 4, with retained endpoint boxes and the complete analytic tail; no trusted point values",
+    "required_sections": [
+      "metadata",
+      "exact_initial_datum",
+      "analytic_tail",
+      "retained_system",
+      "midpoint_reference",
+      "partition",
+      "omitted_convolution_boxes",
+      "picard_slabs",
+      "invariant_replay",
+      "endpoint_cubature",
+      "directed_conclusion",
+      "inviscid_transfer",
+      "digests"
+    ],
+    "parser": "ASCII JSON; exact keys; reduced rational strings; unknown or duplicate keys, missing modes, NaN, infinity, or reversed intervals fail closed"
+  },
+  "inviscid_transfer": {
+    "interface": "cycle-265 equations (265.17)-(265.24)",
+    "Q": "267861/262144",
+    "rho0": "65/64",
+    "beta": "601",
+    "epsilon": "1",
+    "rho_of_t": "(65/64)*(1-601*t)",
+    "required_exact_gates": [
+      "1 < rho0 < Q",
+      "beta >= M+epsilon",
+      "rho(T) > 1"
+    ],
+    "derived_fields": "certificate recomputes exact kappa1,kappa2,G,H and a positive rational outward B_up; it then supplies rational a,delta with a^3>=U_0 and (2*a+delta)^3<L_T",
+    "viscosity_threshold": "nu0_rat=min(epsilon,delta)/B_up",
+    "acceptance": "all transfer gates pass exactly and nu0_rat>0"
+  },
+  "resources": {
+    "maximum_cores": 2,
+    "thread_environment": [
+      "OMP_NUM_THREADS=2",
+      "OPENBLAS_NUM_THREADS=2",
+      "MKL_NUM_THREADS=2",
+      "NUMEXPR_NUM_THREADS=2"
+    ],
+    "maximum_resident_memory_mib": 1024,
+    "maximum_wall_seconds": 21600,
+    "maximum_midpoint_steps": 48,
+    "maximum_nonlinear_iterations": 1920,
+    "maximum_full_euler_certificate_attempts": 1,
+    "preflight": "require at least 2 logical cores and 1024 MiB available memory before any trajectory; otherwise return ND270-RESOURCE-WALL without partial trajectory output",
+    "checkpoint_policy": "atomic write after each declared checkpoint; checkpoint data cannot alter parameters, gates, ordering, or horizon"
+  },
+  "stop_rules": {
+    "no_expansion": true,
+    "forbidden_after_freeze": [
+      "parameter or amplitude change",
+      "direction reversal",
+      "horizon extension",
+      "checkpoint insertion",
+      "cutoff, step, or cubature substitution",
+      "adaptive slab subdivision",
+      "threshold or gate relaxation",
+      "interior-extremum promotion",
+      "second certificate attempt"
+    ],
+    "on_numerical_failure": "stop with bounded negative result for this manifest",
+    "on_certificate_failure": "stop at the first failed exact interface and retain the failure artifact"
+  },
+  "source_digests": {
+    "admission_audit_sha256": "b8f8a851b53ccd904339be0998c1e7b54ee90dabdd4a93c9e41eb95cc88383cb",
+    "full_euler_interface_sha256": "7e2a6f4a0e18699c3a45dc9e8e939f82dbdb12f505cbdb3747beddd78c3d9397",
+    "midpoint_picard_interface_sha256": "ef8efd3a159fe8e2a8b8d03df4cdb52544a23c95606afd5864ff11a321cc602d"
+  },
+  "outcome_policy": {
+    "admission_only": true,
+    "trajectory_generated": false,
+    "euler_crossing_claimed": false,
+    "navier_stokes_claimed": false,
+    "millennium_claimed": false,
+    "factor_two_excluded_by_current_upper_derivative_bound": false
+  }
+}

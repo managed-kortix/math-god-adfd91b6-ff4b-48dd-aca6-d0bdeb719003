@@ -1,0 +1,57 @@
+{
+  "format": "CYCLE272-SHORT-TIME-MANIFEST-v1",
+  "datum": "genuine-3d-five-wave-datum",
+  "normalization": "normalized Haar measure on [0,2*pi]^3",
+  "functional": "L(t)=log(||u(t)||_3)=(1/3)log(integral |u(t)|^3)",
+  "replay": "python verify_cycle272_short_time.py",
+  "initial_intervals": {
+    "F0": ["17089957", "17090032"],
+    "P3": ["15262", "24283"],
+    "L_prime_0": ["297/1000000", "474/1000000"],
+    "L_double_prime_0": ["3", "4"]
+  },
+  "analytic_slab": {
+    "q0": "33/32",
+    "M": "600",
+    "alpha": "600",
+    "T": "1/65536",
+    "Q": "267861/262144",
+    "A_q_bound": "600",
+    "L2_squared": "1990183/30",
+    "C_lower_bound": "511477031/30",
+    "kappa_bounds": {
+      "kappa_1_Q": "18",
+      "kappa_2_Q": "1164",
+      "kappa_3_Q": "133868"
+    },
+    "pointwise_bounds": {
+      "u": "600",
+      "u_t": "6480000",
+      "u_tt": "391392000000",
+      "u_ttt": "46322668800000000"
+    },
+    "functional_derivative_bounds": {
+      "abs_C_prime": "6998400000000",
+      "abs_C_double_prime": "573868800000000000",
+      "abs_C_triple_prime": "< 82643000000000000000000",
+      "abs_L_triple_prime": "< 62000000000000000"
+    }
+  },
+  "certified_short_time_growth": {
+    "t_star": "1/17179869184",
+    "inequality": "L(t_star)-L(0) >= (297/1000000)t_star+(3/2)t_star^2-(62000000000000000/6)t_star^3",
+    "exact_lower_value": "110615187084300373/7253554917687775048237056000000",
+    "simplified_strict_lower_bound": "1/100000000000000",
+    "positive_derivative_lower_bound_at_t_star": "27017106713235541/140737488355328000000"
+  },
+  "factor_two_audit": {
+    "necessary_log_gain": "> 1/2",
+    "L3_norm_displacement_at_T": "50625/512",
+    "relative_displacement_bound": "50625/131584",
+    "absolute_log_change_upper_bound": "50625/80959",
+    "comparison": "50625/80959 < 2/3 < log(2)",
+    "factor_two_excluded_on_frozen_interval": true,
+    "reason": "Minkowski plus the Wiener cap |u_t|<=6480000 and ||u(0)||_3>=||u(0)||_2>257 exclude doubling without trajectory"
+  },
+  "disposition": "The rigorous positive-growth horizon is much smaller than the admission horizon. On the full T=1/65536 slab, the exact rational bound |L(T)-L(0)|<50625/80959<log(2) excludes factor two without trajectory and rejects the Cycle 273 endpoint promotion manifest for this datum and horizon."
+}

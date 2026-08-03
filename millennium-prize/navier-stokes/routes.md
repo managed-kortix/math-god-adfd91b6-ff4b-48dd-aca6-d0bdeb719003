@@ -1,5 +1,28 @@
 # Routes
 
+## Cycle 272 short-time theorem
+
+The P3 datum now has an exact trajectory-level lower-growth statement. The
+initial intervals imply `297/10^6<L'(0)<474/10^6` and `3<L''(0)<4`; the frozen
+analytic majorant implies `|L'''|<62000000000000000`. At
+`t*=1/17179869184`, this gives `L(t*)-L(0)>10^-14` and `L'(t*)>0`. Keep the
+larger `T=1/65536` only for analytic existence and generated-scale control.
+The available upper derivative bound integrates to more than `1/2` on that
+interval, so factor two is not ruled out, and it is not proved. See
+`cycle-272-short-time-growth-audit.md` and
+`cycle272-short-time-manifest.json`.
+
+## Cycle 273 P3 admission freeze
+
+The P3 singleton now returns `ND270-ADMIT`: items 5--6 are frozen before any
+trajectory. The manifest fixes normalized Haar conventions, forward
+`T=1/65536`, quarter checkpoints, retained cutoffs `K=4,6`, implicit midpoint,
+the strict complete-field endpoint threshold `201/100`, exact full-Euler
+tail/Picard/cubature replay, and the Cycle 265 inviscid transfer. Its bounded
+two-core resource preflight is feasible on the current host. This is compute
+authorization only; no trajectory or endpoint claim exists. See
+`cycle-273-nd270-p3-items5-6.md` and `cycle273-nd270-p3-manifest.json`.
+
 ## Cycle 272 P3 finite-support correction
 
 Finite Fourier support is no longer an initial-data exclusion.
@@ -10,7 +33,7 @@ rational P3 datum is genuinely 3D, has certified complete-field production
 The Cycle 265 shrinking Wiener estimate with `q0=33/32`, `M=alpha=600`, and
 `T=1/65536` supplies a closed full-Euler bound for all generated shells. The
 architecture passes corrected items 1--4 as a singleton family on
-`[0,1/65536]`, but items 5 and 6 still require a frozen compute manifest before
+`[0,1/65536]`; Cycle 273 subsequently freezes items 5--6 and returns
 `ND270-ADMIT`. See
 `cycle-272-p3-finite-support-admission-audit.md`.
 

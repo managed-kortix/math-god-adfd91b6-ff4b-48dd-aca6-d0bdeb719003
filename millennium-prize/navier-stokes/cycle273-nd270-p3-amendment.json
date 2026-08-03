@@ -1,0 +1,56 @@
+{
+  "format": "ND270-P3-manifest-amendment-v1",
+  "record_status": "INVALIDATES_COMPUTE_AUTHORIZATION",
+  "frozen_manifest": {
+    "file": "cycle273-nd270-p3-manifest.json",
+    "sha256": "2a0e301c5e41060d423cf82c8052a3949d96475e924b858ffa4da763abbe4cce"
+  },
+  "reason": "The frozen admission-certificate path no longer has the frozen digest; post-freeze conclusions must not be written into the frozen manifest.",
+  "frozen_dependencies": [
+    {
+      "file": "cycle-272-p3-example.json",
+      "sha256": "b1a334e7efa5483eceaa3303682fbd32a6483c6647afbb6ca3e7b0b78bab77b0"
+    },
+    {
+      "file": "cycle-272-p3-finite-support-admission-audit.md",
+      "sha256": "b8f8a851b53ccd904339be0998c1e7b54ee90dabdd4a93c9e41eb95cc88383cb"
+    },
+    {
+      "file": "cycle-265-genuine-3d-euler-pivot-architecture.md",
+      "sha256": "7e2a6f4a0e18699c3a45dc9e8e939f82dbdb12f505cbdb3747beddd78c3d9397"
+    },
+    {
+      "file": "cycle-264-midpoint-tail-picard-interface.md",
+      "sha256": "ef8efd3a159fe8e2a8b8d03df4cdb52544a23c95606afd5864ff11a321cc602d"
+    }
+  ],
+  "recovered_frozen_objects": [
+    {
+      "file": "cycle273-frozen-admission-certificate.json",
+      "sha256": "dff46244d32e8a6476d7cb23cdd5b515484cec9a51c63a164e3503631ed2d4a8"
+    }
+  ],
+  "superseding_objects": [
+    {
+      "file": "cycle-272-p3-certificate.json",
+      "sha256": "6ef30fa74da3b9ccfe56ed1179147d77c5fc9a1ad894722903509c3156b94200"
+    }
+  ],
+  "independent_analytic_rejection": {
+    "source": "cycle272-short-time-manifest.json",
+    "source_sha256": "8103c022cc62bc4b93ec884ac4171eb1016d8daba6074686655df3d8d4594ace",
+    "L3_norm_displacement_at_T": "50625/512",
+    "initial_L3_norm_lower_bound": "257",
+    "relative_displacement_bound": "50625/131584",
+    "absolute_log_ratio_upper_bound": "50625/80959",
+    "comparison": "50625/80959 < 2/3 < log(2) < log(201/100)",
+    "disposition": "reject without trajectory"
+  },
+  "semantics": {
+    "frozen_manifest_rewritten": false,
+    "admission_verdict_preserved_as_historical": true,
+    "compute_authorization_valid": false,
+    "analytic_rejection_independent_of_admission_certificate": true,
+    "trajectory_authorized": false
+  }
+}

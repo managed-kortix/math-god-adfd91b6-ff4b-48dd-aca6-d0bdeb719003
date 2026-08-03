@@ -17,6 +17,10 @@ from itertools import product
 from flint import arb, ctx
 
 
+FORMAT = "P3-ADMISSION-ARB-v2"
+NORMALIZATION = "normalized Haar measure on [0,2*pi]^3"
+
+
 def frac(value):
     return Fraction(str(value))
 
@@ -37,6 +41,12 @@ def fourier_coefficients(modes):
     coefficients = {}
     for mode in modes:
         k = tuple(mode["k"])
+        if len(k) != 3 or any(not isinstance(value, int) for value in k):
+            raise ValueError("each wave vector must contain exactly three integers")
+        if k == (0, 0, 0):
+            raise ValueError("zero-wave modes are not supported")
+        if len(mode["amplitude"]) != 3:
+            raise ValueError("each amplitude must contain exactly three entries")
         amplitude = [frac(x) for x in mode["amplitude"]]
         if mode["kind"] == "cos":
             factors = ((k, (Fraction(1, 2), Fraction(0))),
@@ -106,6 +116,27 @@ def qarb(value):
     return arb(value.numerator) / value.denominator
 
 
+def arb_text(value, digits=40):
+    if not value.is_finite():
+        raise ArithmeticError(f"refusing to serialize non-finite Arb value: {value}")
+    text = value.str(digits)
+    if not arb(text).contains(value):
+        raise ArithmeticError(f"Arb serialization lost enclosure: {text}")
+    return text
+
+
+def require_nonnegative_finite(name, value):
+    if not value.is_finite() or not value >= 0:
+        raise ValueError(f"{name} must be a finite nonnegative bound")
+
+
+def exact_normalized_integral(coefficients):
+    constant = coefficients.get((0, 0, 0), (Fraction(0), Fraction(0)))
+    if constant[1] != 0:
+        raise ArithmeticError("non-real constant Fourier coefficient")
+    return constant[0]
+
+
 def evaluate_real_series(coefficients, point):
     total = arb(0)
     for k, coefficient in coefficients.items():
@@ -152,11 +183,11 @@ def evaluate_box(velocity_half, pressure_half, point, epsilon):
         arb(speed2_upper / 2, speed2_upper / 2) if speed2.contains(0) else speed2
     )
     epsilon2 = epsilon * epsilon
-    denominator2 = speed2 + epsilon2
-    lower = epsilon2.abs_lower() / 2
-    upper = denominator2.abs_upper()
-    denominator2 = arb((lower + upper) / 2, (upper - lower) / 2)
-    regularized = qarb(Fraction(3, 2)) * numerator / denominator2.sqrt()
+    denominator2 = speed2_nonnegative + epsilon2
+    if denominator2.abs_lower() > 0:
+        regularized = qarb(Fraction(3, 2)) * numerator / denominator2.sqrt()
+    else:
+        regularized = None
     speed_upper = sum(interval_abs_upper(value) ** 2 for value in u).sqrt()
     gradient_upper = sum(interval_abs_upper(value) ** 2 for row in derivative for value in row).sqrt()
     near_bound = 3 * interval_abs_upper(pressure) * speed_upper * gradient_upper
@@ -216,6 +247,10 @@ def vector_l2_derivative_norm(coefficients, derivative):
 
 
 def enclose(data, subdivisions, precision, epsilon_string):
+    if subdivisions <= 0:
+        raise ValueError("subdivisions must be positive")
+    if precision < 32:
+        raise ValueError("precision must be at least 32 bits")
     ctx.prec = precision
     modes = data["modes"]
     velocity = fourier_coefficients(modes)
@@ -224,6 +259,16 @@ def enclose(data, subdivisions, precision, epsilon_string):
     velocity_half = positive_half(velocity)
     pressure_half = positive_half(pressure)
     epsilon = arb(epsilon_string)
+    if not epsilon.is_finite() or not epsilon > 0:
+        raise ValueError("epsilon must be finite and strictly positive")
+
+    tail = data.get("analytic_tail", {"velocity_l1": "0", "gradient_l1": "0"})
+    if set(tail) != {"velocity_l1", "gradient_l1"}:
+        raise ValueError("analytic_tail requires exactly velocity_l1 and gradient_l1")
+    r0 = arb(tail["velocity_l1"])
+    r1 = arb(tail["gradient_l1"])
+    require_nonnegative_finite("analytic_tail.velocity_l1", r0)
+    require_nonnegative_finite("analytic_tail.gradient_l1", r1)
     direct_total = arb(0)
     regularized_total = arb(0)
     by_parts_total = arb(0)
@@ -240,7 +285,10 @@ def enclose(data, subdivisions, precision, epsilon_string):
             velocity_half, pressure_half, box, epsilon
         )
         direct_total += direct
-        regularized_total += regularized
+        if regularized is None:
+            regularized_total = None
+        elif regularized_total is not None:
+            regularized_total += regularized
         by_parts_total += by_parts
         _, _, midpoint_value, _, _, _ = evaluate_box(
             velocity_half, pressure_half, midpoint, epsilon
@@ -252,7 +300,8 @@ def enclose(data, subdivisions, precision, epsilon_string):
             near_absolute_mass += near_bound
     box_mass = arb(1) / subdivisions**3
     direct_total *= box_mass
-    regularized_total *= box_mass
+    if regularized_total is not None:
+        regularized_total *= box_mass
     by_parts_total *= box_mass
     midpoint_total *= box_mass
     local_midpoint_error *= box_mass
@@ -283,29 +332,36 @@ def enclose(data, subdivisions, precision, epsilon_string):
     midpoint_lipschitz_error = (arb.pi() / subdivisions) * 3 * lipschitz
     midpoint_total += arb(0, local_midpoint_error)
     regularization_error = 3 * epsilon * pressure_wiener * v1
-    regularized_total += arb(0, regularization_error)
+    if regularized_total is not None:
+        regularized_total += arb(0, regularization_error)
 
-    tail = data.get("analytic_tail", {"velocity_l1": "0", "gradient_l1": "0"})
-    r0 = arb(tail["velocity_l1"])
-    r1 = arb(tail["gradient_l1"])
     full_u0 = v0 + r0
-    full_u1 = v1 + r1
     pressure_tail = 3 * (2 * v0 * r0 + r0 * r0)
-    h_full = full_u0 * full_u1
-    h_difference = full_u0 * r1 + 3 * v1 * r0
-    functional_tail = 3 * (pressure_tail * h_full + pressure_wiener * h_difference)
+    pressure_gradient_tail = 6 * (v1 * r0 + v0 * r1 + r0 * r1)
+    velocity_factor_tail = (2 * v0 + r0) * r0
+    functional_tail = 3 * (
+        velocity_factor_tail * pressure_gradient_wiener
+        + full_u0 * full_u0 * pressure_gradient_tail
+    )
     direct_total += arb(0, functional_tail)
-    regularized_total += arb(0, functional_tail)
+    if regularized_total is not None:
+        regularized_total += arb(0, functional_tail)
     by_parts_total += arb(0, functional_tail)
     midpoint_total += arb(0, functional_tail)
 
     polynomial_total = None
     polynomial_error = None
+    unweighted_h_integral = None
     polynomial = data.get("positive_speed_polynomial")
     if polynomial:
         center = qarb(frac(polynomial["speed_squared_center"]))
         degree = int(polynomial["degree"])
         perturbation_bound = arb(polynomial["relative_perturbation_bound"])
+        if not center.is_finite() or not center > 0:
+            raise ValueError("speed_squared_center must be finite and strictly positive")
+        if degree < 0:
+            raise ValueError("polynomial degree must be nonnegative")
+        require_nonnegative_finite("relative_perturbation_bound", perturbation_bound)
         speed_squared = speed_squared_coefficients(velocity)
         speed_squared[(0, 0, 0)] = add_complex(
             speed_squared.get((0, 0, 0), (Fraction(0), Fraction(0))),
@@ -334,13 +390,12 @@ def enclose(data, subdivisions, precision, epsilon_string):
             )
             for k, value in h_axis.items():
                 h_series[k] = add_complex(h_series.get(k, (Fraction(0), Fraction(0))), value)
+        unweighted_h_integral = exact_normalized_integral(h_series)
         power = {(0, 0, 0): (Fraction(1), Fraction(0))}
         for n in range(degree + 1):
             product_series = scalar_convolution(power, h_series)
-            constant = product_series.get((0, 0, 0), (Fraction(0), Fraction(0)))
-            if constant[1] != 0:
-                raise ArithmeticError("non-real constant Fourier coefficient")
-            polynomial_total += -3 * center.sqrt() * coefficients[n] * qarb(constant[0])
+            constant = exact_normalized_integral(product_series)
+            polynomial_total += -3 * center.sqrt() * coefficients[n] * qarb(constant)
             power = scalar_convolution(power, x_series)
         h_bound = v0 * pressure_gradient_wiener
         polynomial_error = 3 * center.sqrt() * h_bound * (
@@ -352,35 +407,44 @@ def enclose(data, subdivisions, precision, epsilon_string):
     if subdivisions < data.get("minimum_certifying_subdivisions", 1):
         chosen = arb(0, chosen.abs_upper())
     return {
-        "format": "P3-ADMISSION-ARB-v1",
-        "normalization": "normalized Haar measure on [0,2*pi]^3",
+        "format": FORMAT,
+        "normalization": NORMALIZATION,
+        "pressure_convention": "-Delta p = d_i d_j(u_i u_j)",
+        "pressure_fourier_sign": "p_hat(k) = -k_i k_j/|k|^2 (u_i u_j)_hat(k)",
+        "normalized_box_mass": arb_text(box_mass),
         "precision_bits": precision,
         "subdivisions_per_axis": subdivisions,
         "boxes": subdivisions**3,
         "near_zero_boxes": near_boxes,
         "epsilon": epsilon_string,
-        "finite_velocity_wiener_l1": str(v0),
-        "finite_gradient_wiener_l1": str(v1),
-        "pressure_wiener_bound": str(pressure_wiener),
-        "pressure_gradient_wiener": str(pressure_gradient_wiener),
-        "pressure_hessian_wiener": str(pressure_hessian_wiener),
-        "near_box_absolute_mass": str(near_absolute_mass),
-        "regularization_error_bound": str(regularization_error),
-        "fourier_tail_error_bound": str(functional_tail),
-        "domain_partition_P3": str(direct_total),
-        "regularized_P3": str(regularized_total),
-        "integrated_by_parts_P3": str(by_parts_total),
-        "midpoint_lipschitz_error": str(midpoint_lipschitz_error),
-        "local_midpoint_error": str(local_midpoint_error),
-        "midpoint_P3": str(midpoint_total),
-        "polynomial_P3": None if polynomial_total is None else str(polynomial_total),
-        "polynomial_error": None if polynomial_error is None else str(polynomial_error),
+        "finite_velocity_wiener_l1": arb_text(v0),
+        "finite_gradient_wiener_l1": arb_text(v1),
+        "pressure_wiener_bound": arb_text(pressure_wiener),
+        "pressure_gradient_wiener": arb_text(pressure_gradient_wiener),
+        "pressure_hessian_wiener": arb_text(pressure_hessian_wiener),
+        "pressure_tail_bound": arb_text(pressure_tail),
+        "pressure_gradient_tail_bound": arb_text(pressure_gradient_tail),
+        "velocity_factor_tail_bound": arb_text(velocity_factor_tail),
+        "near_box_absolute_mass": arb_text(near_absolute_mass),
+        "regularization_error_bound": arb_text(regularization_error),
+        "fourier_tail_error_bound": arb_text(functional_tail),
+        "domain_partition_P3": arb_text(direct_total),
+        "regularized_P3": None if regularized_total is None else arb_text(regularized_total),
+        "integrated_by_parts_P3": arb_text(by_parts_total),
+        "midpoint_lipschitz_error": arb_text(midpoint_lipschitz_error),
+        "local_midpoint_error": arb_text(local_midpoint_error),
+        "midpoint_P3": arb_text(midpoint_total),
+        "polynomial_P3": None if polynomial_total is None else arb_text(polynomial_total),
+        "polynomial_error": None if polynomial_error is None else arb_text(polynomial_error),
         "computed_speed_perturbation": (
-            None if polynomial_total is None else str(computed_perturbation)
+            None if polynomial_total is None else arb_text(computed_perturbation)
         ),
-        "intersection_P3": str(chosen),
-        "certified_lower_endpoint": str(chosen.lower()),
-        "certified_upper_endpoint": str(chosen.upper()),
+        "exact_unweighted_u_dot_grad_p_integral": (
+            None if unweighted_h_integral is None else str(unweighted_h_integral)
+        ),
+        "intersection_P3": arb_text(chosen),
+        "certified_lower_endpoint": arb_text(chosen.lower()),
+        "certified_upper_endpoint": arb_text(chosen.upper()),
         "proved_positive": bool(chosen.lower() > 0),
         "mode_count": len(modes),
         "pressure_fourier_count": len(pressure),

@@ -1,0 +1,51 @@
+{
+  "amendment_sha256": "73b9da084bfc72305c24751cb380a66f8899211f419a8abebfa63e366c198db5",
+  "analytic_precheck": {
+    "exact_gates": {
+      "log_ratio_below_two_thirds": true,
+      "relative_displacement_identity": true,
+      "source_displacement": true,
+      "source_excludes_factor_two": true,
+      "source_log_bound": true,
+      "source_relative_bound": true,
+      "threshold_exceeds_two": true,
+      "trajectory_disposition_reject": true
+    },
+    "passed": true
+  },
+  "claim": "Bounded manifest execution only; no Euler, Navier-Stokes, or Millennium result.",
+  "durable_integrity": {
+    "actual_sha256": {
+      "cycle-264-midpoint-tail-picard-interface.md": "ef8efd3a159fe8e2a8b8d03df4cdb52544a23c95606afd5864ff11a321cc602d",
+      "cycle-265-genuine-3d-euler-pivot-architecture.md": "7e2a6f4a0e18699c3a45dc9e8e939f82dbdb12f505cbdb3747beddd78c3d9397",
+      "cycle-272-p3-certificate.json": "6ef30fa74da3b9ccfe56ed1179147d77c5fc9a1ad894722903509c3156b94200",
+      "cycle-272-p3-example.json": "b1a334e7efa5483eceaa3303682fbd32a6483c6647afbb6ca3e7b0b78bab77b0",
+      "cycle-272-p3-finite-support-admission-audit.md": "b8f8a851b53ccd904339be0998c1e7b54ee90dabdd4a93c9e41eb95cc88383cb",
+      "cycle272-short-time-manifest.json": "8103c022cc62bc4b93ec884ac4171eb1016d8daba6074686655df3d8d4594ace",
+      "cycle273-frozen-admission-certificate.json": "dff46244d32e8a6476d7cb23cdd5b515484cec9a51c63a164e3503631ed2d4a8",
+      "cycle273-nd270-p3-manifest.json": "2a0e301c5e41060d423cf82c8052a3949d96475e924b858ffa4da763abbe4cce"
+    },
+    "checks": {
+      "analytic_source:cycle272-short-time-manifest.json": true,
+      "frozen_dependencies:cycle-264-midpoint-tail-picard-interface.md": true,
+      "frozen_dependencies:cycle-265-genuine-3d-euler-pivot-architecture.md": true,
+      "frozen_dependencies:cycle-272-p3-example.json": true,
+      "frozen_dependencies:cycle-272-p3-finite-support-admission-audit.md": true,
+      "frozen_manifest": true,
+      "manifest_admission_pin_matches_recovery": true,
+      "manifest_source_pin:admission_audit_sha256": true,
+      "manifest_source_pin:full_euler_interface_sha256": true,
+      "manifest_source_pin:midpoint_picard_interface_sha256": true,
+      "recovered_frozen_objects:cycle273-frozen-admission-certificate.json": true,
+      "superseding_objects:cycle-272-p3-certificate.json": true
+    },
+    "passed": true
+  },
+  "format": "ND270-P3-numerical-outcome-v1",
+  "full_pde_attempted": false,
+  "levels": {},
+  "manifest_sha256": "2a0e301c5e41060d423cf82c8052a3949d96475e924b858ffa4da763abbe4cce",
+  "numerical_promotion": false,
+  "status": "BOUNDED_NEGATIVE_ANALYTIC_CAP",
+  "trajectory_generated": false
+}

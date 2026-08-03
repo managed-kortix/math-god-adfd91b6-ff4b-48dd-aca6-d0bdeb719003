@@ -11,8 +11,8 @@ For normalized Haar measure on `T^3=[0,2 pi]^3`, the script
 \]
 
 It uses exact rational Fourier algebra and Arb outward-rounded balls. It offers
-three independent treatments of zeros: direct box partition, the regularized
-denominator `( |u|^2+epsilon^2 )^(1/2)`, and the nonsingular identity
+three treatments of zeros: direct box partition, the regularized denominator
+`( |u|^2+epsilon^2 )^(1/2)`, and the nonsingular identity
 
 \[
  {\cal P}_3(u)=-3\int |u|\,u\cdot\nabla p.              \tag{272.1}
@@ -21,6 +21,8 @@ denominator `( |u|^2+epsilon^2 )^(1/2)`, and the nonsingular identity
 The last form is the preferred certificate. It is Lipschitz even at `u=0` and
 therefore avoids an illegitimate interval division by a speed interval
 containing zero. The direct and regularized values remain diagnostic breakers.
+A diagnostic is printed as `null` rather than admitted if dependency
+overestimation prevents a finite Arb enclosure.
 
 ## Finite Fourier construction
 
@@ -69,11 +71,12 @@ An infinite-support caller supplies proved bounds
  \|p(u)-p(v)\|_\infty\le3(2V_0R_0+R_0^2)
 \]
 
-and a product estimate for (272.1), yielding the printed fail-closed radius
+and a product estimate for (272.1). Writing
+`G_v=||grad p(v)||_infinity` and
+`G_r=6(V1 R0+V0 R1+R0 R1)`, the printed fail-closed radius is
 
 \[
- 3\{3(2V_0R_0+R_0^2)(V_0+R_0)(V_1+R_1)
- +3V_0^2[(V_0+R_0)R_1+3V_1R_0]\}.                    \tag{272.6}
+ 3\{(2V_0+R_0)R_0G_v+(V_0+R_0)^2G_r\}.               \tag{272.6}
 \]
 
 This deliberately coarse bound is reusable for any independently proved
@@ -104,3 +107,7 @@ The degree-six exact Fourier polynomial and its rigorous remainder give a
 strictly positive lower endpoint. The box, regularization, tail, and polynomial
 error radii are all printed. This certifies a nonzero initial complete-velocity
 `L3^3` derivative only; it is not a trajectory or factor-two certificate.
+
+All certificate Arb fields are decimal balls re-parsed and checked to contain
+the in-memory ball before JSON is written. Non-finite values, negative tail
+bounds, malformed polynomial bounds, and insufficient precision fail closed.

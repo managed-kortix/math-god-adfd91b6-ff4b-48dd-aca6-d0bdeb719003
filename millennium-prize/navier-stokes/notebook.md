@@ -1,5 +1,35 @@
 # Notebook
 
+## Cycle 272 exact short-time growth
+
+Directed replay gives `297/10^6<L'(0)<474/10^6` and `3<L''(0)<4` for
+`L=log ||u||_3`. The existing `q0=33/32`, `M=alpha=600` analytic slab yields
+the exact coarse remainder `|L'''|<62000000000000000`. Therefore, at
+`t*=1/17179869184`, Taylor's theorem certifies
+`L(t*)-L(0)>10^-14` and a positive lower bound for `L'(t*)`. This proves only
+microscopic short-time growth. On the full `T=1/65536` slab, however, applying
+Minkowski before the logarithm to `|u_t|<=6480000` and
+`||u(0)||_3>=||u(0)||_2>257` gives the exact bound
+`|L(T)-L(0)|<50625/80959<2/3<log 2`. Factor two is therefore impossible on the
+frozen slab without trajectory, rejecting the Cycle 273 endpoint promotion
+manifest for this datum and horizon. See `cycle-272-short-time-growth-audit.md`
+and `cycle272-short-time-manifest.json`.
+
+## Cycle 273 ND270 P3 compute freeze
+
+`ND270-ADMIT` is returned after freezing the P3 singleton's remaining items
+5--6 before trajectory generation. The forward endpoint is `T=1/65536`, with
+quarter checkpoints and strict complete-field promotion threshold `2.01`.
+Cutoffs `K=4,6`, midpoint steps, cubature grids, one `K=6` rational
+tail/Picard certificate attempt, and the Cycle 265 inviscid-transfer fields are
+fixed. A two-core, 1024 MiB, six-hour preflight is feasible on the current host.
+No trajectory or crossing claim is present. The subsequent Cycle 272 analytic
+cap independently rejects this compute authorization before trajectory. The
+frozen manifest is preserved; `cycle273-nd270-p3-amendment.json` invalidates it
+and binds the recovered frozen admission certificate plus the hardened
+superseding certificate by digest. See the preceding entry. See
+`cycle-273-nd270-p3-items5-6.md` and `cycle273-nd270-p3-manifest.json`.
+
 ## Cycle 272 P3 finite-support admission correction
 
 The initial infinite-Fourier-support condition is unjustified.
@@ -11,8 +41,8 @@ profile. With `q0=33/32`, `M=alpha=600`, and `T=1/65536`, its exact initial
 Wiener bound is at most `91652781/163840<600` and
 `q(T)=267861/262144>1`, controlling every generated shell. It passes corrected
 items 1--4 and novelty, with the datum treated as a singleton family on the
-frozen interval `[0,1/65536]`. Full compute authorization still awaits items 5
-and 6 in a frozen manifest. See
+frozen interval `[0,1/65536]`. Cycle 273 subsequently freezes items 5--6 and
+returns `ND270-ADMIT`; see the Cycle 273 entry. See
 `cycle-272-p3-finite-support-admission-audit.md`.
 
 ## Cycle 272 Kida-tail duplicate audit
