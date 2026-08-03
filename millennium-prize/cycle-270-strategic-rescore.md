@@ -95,9 +95,12 @@ computation, the proposal must print:
    family of smooth real periodic divergence-free data;
 2. one fixed compact parameter box and one fixed finite set of times or a
    symbolic time interval, with no adaptive horizon choice;
-3. an exact nonstationarity and nonplanarity certificate and a stated mechanism
-   capable of changing the complete velocity `L^3`, not merely vorticity,
-   strain, or a projected norm;
+3. an exact nonstationarity and nonplanarity certificate and the Cycle 271
+   finite local-production certificate: at one printed rational parameter and
+   one direction `sigma in {+1,-1}`, a directed lower bound
+   `sigma mathcal P_3(u_*)>=q>0` and upper bound
+   `||u_*||_3^3<=M`, including pressure and tail enclosures; this certifies
+   active change of the complete velocity `L^3`, not factor-two capability;
 4. a closed analytic-norm majorant for every generated scale on the declared
    interval, together with explicit first-failure inequalities;
 5. a frozen outward-rounded promotion rule requiring a directed complete-field
@@ -119,6 +122,12 @@ Return exactly one admission output:
 `ND270-ADMISSION` is a bounded review gate, not a claim that a qualifying family
 exists. Until a concrete proposal is supplied, its correct state is `AWAITING
 ARCHITECTURE`; no computation is pending.
+
+The phrase "mechanism capable" is not an additional plausibility test. Cycle
+271 proves that factor-two capability is a trajectory property and reserves it
+for the frozen promotion rule in item 5. Admission item 3 tests only exact local
+complete-`L^3` production; see
+`navier-stokes/cycle-271-nd270-admission-threshold-audit.md`.
 
 ## Stop rules
 

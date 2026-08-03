@@ -11,6 +11,15 @@ family. No proposal is currently supplied, so the state is `AWAITING
 ARCHITECTURE` and no compute is authorized. See
 `../cycle-270-strategic-rescore.md`.
 
+Cycle 271 makes the admission/promotion boundary exact. No finite initial-data
+formula can certify factor-two "capability" without proving information about
+its Euler trajectory. Admission therefore requires only a finite directed
+certificate that the complete velocity `L3` has strictly positive initial
+Euler production at one printed member, including pressure and analytic-tail
+enclosures. The full-field ratio `>2+eta_0` remains the frozen promotion test;
+local production is not crossing evidence. See
+`cycle-271-nd270-admission-threshold-audit.md`.
+
 Cycle 267 closes every genuinely 3D fixed-Fourier/Lie closure by the
 Kishimoto--Yoneda classification: a real mean-zero Euler solution confined to
 one finite Fourier set is stationary, and if that support spans three

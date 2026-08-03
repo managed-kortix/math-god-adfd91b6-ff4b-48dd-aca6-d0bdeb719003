@@ -1,5 +1,19 @@
 # millennium state — dedicated working memory
 
+- 2026-08-03: A hostile audit of `ND270-ADMISSION` removes the ambiguous demand
+  for a pre-compute mechanism "capable" of factor-two velocity-`L3` growth.
+  Factor-two capability is itself a trajectory property: proving it before
+  compute collapses admission into `ND251`, while claiming it from stretching,
+  coupling, or absence of a known cap is meaningless plausibility. Revised item
+  3 requires one finite exact local-production witness at a printed rational
+  member: nonplanarity, nonstationarity modulo translation, and directed
+  pressure-flux bounds `sigma mathcal P_3>=q>0`, `||u||_3^3<=M`, with analytic
+  tails and a predeclared time direction `sigma`.
+  The outward-rounded full-field ratio `>2+eta_0` remains exclusively the
+  promotion gate. State remains `AWAITING ARCHITECTURE`; no compute is
+  authorized. See
+  `millennium-prize/navier-stokes/cycle-271-nd270-admission-threshold-audit.md`.
+
 - 2026-08-03: Cycle 270 accepts `DG-ALPHA-WALL` and forbids an automatic cover
   retry. A global line-bundle Koszul resolution repairs the nonprincipality
   presentation abstractly, but it does not supply common-model Cech
@@ -1683,7 +1697,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 270 resumes `ND251` at bounded architecture gate
+- **phase:** Cycle 271 resumes `ND251` at bounded architecture gate
   `ND270-ADMISSION`; state is `AWAITING ARCHITECTURE`
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
@@ -2516,7 +2530,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 270
+- **cycle:** 271
 - **announcements:** none
 
 ## immutable target list

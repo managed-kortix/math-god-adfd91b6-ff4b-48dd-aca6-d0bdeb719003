@@ -11,6 +11,18 @@ before compute and return `ADMIT`, `ARCH-WALL`, or `DUPLICATE`. No proposal has
 yet been supplied, so the persisted state is `AWAITING ARCHITECTURE`. See
 `../cycle-270-strategic-rescore.md`.
 
+## Cycle 271 ND270 admission-threshold audit
+
+A hostile audit rejects "mechanism capable of factor two" as a pre-compute
+predicate: proving it already requires trajectory control, while asserting it
+from stretching or mode coupling is only plausibility. Item 3 is sharpened to a
+finite exact local-production witness for the complete velocity `L3`: one
+printed rational member and time direction must have pressure-flux enclosure
+`sigma mathcal P_3>=q>0` and `||u||_3^3<=M`, with analytic tails controlled by
+item 4.
+The outward-rounded ratio `>2+eta_0` remains exclusively the post-compute
+promotion gate. See `cycle-271-nd270-admission-threshold-audit.md`.
+
 ## Cycle 268 nonlinear infinite-support manifold
 
 The cellular carrier `v=(sin y,-sin x)` and analytic passive component
