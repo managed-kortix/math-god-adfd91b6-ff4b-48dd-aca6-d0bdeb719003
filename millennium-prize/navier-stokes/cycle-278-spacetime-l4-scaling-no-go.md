@@ -19,9 +19,13 @@ gives the sharp available interpolation, but it leaves a time scale. A
 concentrating divergence-free family realizes every exponent in that
 interpolation and makes the missing dimensionless parameter unbounded.
 
-This is a no-go for deriving (278.1) from those scalar inputs. It is not a
-Navier--Stokes counterexample and does not refute `CEB`. No second amplitude
-split is used.
+Precisely, this is a no-go for deriving (278.1) from inequalities involving
+only those scalar quantities: below is an exact family of scalar histories
+that satisfies the record condition, the exact unweighted energy identity,
+and a uniform weighted-dissipation budget, but violates (278.1) by an
+arbitrarily large factor. The histories are not asserted to solve the
+Navier--Stokes equation. Thus this is not a Navier--Stokes counterexample and
+does not refute `CEB`. No second amplitude split is used.
 
 ## The sharp weighted interpolation
 
@@ -100,76 +104,130 @@ whose time integral contains precisely the missing scale-sensitive term.
 
 ## Concentrated test family
 
-Choose a nonzero smooth divergence-free vector field `phi` supported in the
-unit ball, and place its rescalings inside one coordinate chart of the torus.
-For `0<r<r_*` and `M>0`, set
+Choose nonzero `psi in C_c^infinity(B(0,1))` and set
+`phi=(partial_2 psi,-partial_1 psi,0)`. Thus `phi` is smooth, compactly
+supported, nonzero, and divergence-free. Choose `r_*` so that the Euclidean
+ball `B(x_0,r_*)` embeds in a fixed fundamental cube of the flat torus, and
+extend each rescaling by zero and then periodically. This gives a smooth
+periodic divergence-free field. It is also mean-zero: for each component,
+`int phi_i=int div(y_i phi)=0`. For `0<rho<r_*` and `m>0`, set
 
 \[
- u_{M,r}(x)=M^{1/3}r^{-1}\phi((x-x_0)/r),
+ u_{m,\rho}(x)=m^{1/3}\rho^{-1}
+       \phi((x-x_0)/\rho).
 \]
 
-with one fixed normalization of `phi`. Exact change of variables gives fixed
-positive constants `c_j`, independent of `M` and `r`, such that
+Exact change of variables gives fixed positive constants `c_j`, independent
+of `m` and `rho`, such that
 
 \[
 \begin{aligned}
- X(u_{M,r})&=c_3M,\\
- \|u_{M,r}\|_4^4&=c_4M^{4/3}r^{-1},\\
- \|u_{M,r}\|_2^2&=c_2M^{2/3}r,\\
- \|\nabla u_{M,r}\|_2^2&=c_gM^{2/3}r^{-1},\\
- \mathcal D(u_{M,r})&=c_DM r^{-2}.                  \tag{278.7}
+ X(u_{m,\rho})&=c_3m,\\
+ \|u_{m,\rho}\|_4^4&=c_4m^{4/3}\rho^{-1},\\
+ \|u_{m,\rho}\|_2^2&=c_2m^{2/3}\rho,\\
+ \|\nabla u_{m,\rho}\|_2^2&=c_gm^{2/3}\rho^{-1},\\
+ \mathcal D(u_{m,\rho})&=c_Dm\rho^{-2}.             \tag{278.7}
 \end{aligned}
 \]
 
 Thus this family saturates the homogeneous part of (278.2): both sides scale
-as `M^(4/3)/r`.
+as `m^(4/3)/rho`.
 
-Take a smooth path on which the mass parameter increases from `(1-epsilon)M`
-to `M`, for any fixed sufficiently small `epsilon>0`, while the radius decreases
-from `2r` to `r`. Then `X(t)<X(T)` before the endpoint, and the energy scale in
-(278.7) still decreases by `asymp M^(2/3)r`. Choosing the interval length
+There is already an exact static counterexample if the named controls mean
+only their scalar bounds. Hold `u_{M,r}` constant on `[0,T_0]`, where
 
 \[
- T=c_*r^2/\nu                                             \tag{278.8}
+ T_0={c_2r^2\over2c_g\nu}.
 \]
 
-with a sufficiently small fixed `c_*>0` makes both the unweighted energy
-dissipation and the weighted quantities have their natural sizes:
+Then the record bound holds (with equality at every time), and
 
 \[
- \nu\int_0^T\|\nabla u\|_2^2dt\asymp M^{2/3}r,
+ \nu\int_0^{T_0}Gdt={1\over2}E,
  \qquad
- \nu\int_0^T\mathcal D(u)dt\asymp M.                \tag{278.9}
+ \nu\int_0^{T_0}\mathcal Ddt={c_2c_D\over2c_g}M
+ ={c_2c_D\over2c_gc_3}X,                             \tag{278.8}
 \]
 
-Indeed, for fixed `M`, because `E(r)=c_2M^(2/3)r` and
-`G(r)=c_gM^(2/3)r^(-1)`, the scalar energy identity gives
-`r'(t)=-c nu/r(t)` and hence exactly the time scale (278.8). The same ODE,
-with an additional bounded term, has a decreasing-radius solution when the
-mass parameter makes the small relative increase just specified. Thus the
-obstruction is not caused by assigning inconsistent energy and unweighted-
-dissipation sizes.
+whereas
+
+\[
+ {\int_0^{T_0}\|u\|_4^4dt\over\nu X^{2/3}}
+ ={c_2c_4\over2c_gc_3^{2/3}}
+       {rM^{2/3}\over\nu^2}\longrightarrow\infty.  \tag{278.9}
+\]
+
+Thus the supremum energy scale, unweighted dissipation bound, weighted budget,
+and record inequality cannot imply (278.1). This static slab does not satisfy
+the dynamical energy identity, because its energy is constant. The following
+exact history shows that adding that identity and requiring a strict endpoint
+record still does not repair the scalar implication.
+
+Fix `0<r<r_*/2`, put
+
+\[
+ K={4c_g\over c_2},\qquad
+ \rho(t)^2=4r^2-2K\nu t,\qquad
+ m(t)=M\left({r\over\rho(t)}\right)^{3/4},            \tag{278.10}
+\]
+
+and stop at
+
+\[
+ T={3r^2\over2K\nu},
+ \qquad \rho(0)=2r,\quad \rho(T)=r.                 \tag{278.11}
+\]
+
+Set `u(t)=u_{m(t),rho(t)}`. Since `rho` strictly decreases, `m` and hence
+`X` strictly increase; in particular `X(t)<X(T)=c_3M` for `t<T`. Moreover,
+with `E=||u||_2^2` and `G=||grad u||_2^2`, (278.7) and (278.10) give the exact
+scalar energy identity
+
+\[
+ E'(t)=-2\nu G(t).                                    \tag{278.12}
+\]
+
+Indeed `E=c_2M^{2/3}r^{1/2}\rho^{1/2}` and
+`rho'=-K nu/rho`; the definition of `K` then gives (278.12). Direct integration
+also gives
+
+\[
+ \nu\int_0^T G(t)dt
+ ={c_2\over2}(\sqrt2-1)M^{2/3}r,
+ \qquad
+ \nu\int_0^T\mathcal D(u(t))dt
+ ={4c_D\over3K}(1-2^{-3/4})M.                        \tag{278.13}
+\]
+
+Thus the unweighted budget is exactly the energy drop divided by two, while
+the weighted budget is exactly
+`[4c_D(1-2^(-3/4))/(3Kc_3)]X(T)`, uniformly in `M`, `r`, and `nu`. Also
+`sup_t E(t)/X(T)^(2/3)` is a fixed constant times `r`, so no hidden
+amplitude-dependent energy ratio is being discarded.
 
 The spacetime quartic norm, however, is
 
 \[
- \int_0^T\|u\|_4^4dt\asymp {M^{4/3}r\over\nu}.      \tag{278.10}
+ \int_0^T\|u\|_4^4dt
+ ={c_4\log2\over K\nu}M^{4/3}r.                     \tag{278.14}
 \]
 
-Dividing (278.10) by the right side of (278.1) gives
+Dividing (278.14) by the right side of (278.1) gives
 
 \[
  {\int_0^T\|u\|_4^4dt\over \nu X(T)^{2/3}}
- \asymp {rM^{2/3}\over\nu^2}
- =\left({r^{1/2}M^{1/3}\over\nu}\right)^2.          \tag{278.11}
+ ={c_4\log2\over Kc_3^{2/3}}
+      {rM^{2/3}\over\nu^2}.                         \tag{278.15}
 \]
 
 For fixed admissible `r` and `nu`, this tends to infinity as `M` tends to
-infinity, while (278.9) remains exactly at the energy and weighted-dissipation
-scales. The strict increase of the mass parameter makes the endpoint a first
-record; the relative factor `(1-epsilon)` does not change (278.8)--(278.11).
-This construction is purely kinematic: it asserts compatibility with the named
-scalar controls, not with the Navier--Stokes equation.
+infinity, while (278.12)--(278.13) hold exactly and the endpoint is a strict
+first record. Unlike a Navier--Stokes trajectory, this prescribed path need not
+satisfy `partial_t u+(u dot grad)u+grad p=nu Delta u`; the exact energy identity
+alone does not enforce that equation. Thus the construction is purely
+kinematic: it disproves an implication from the named scalar controls, not an
+implication that is additionally allowed to use the full Navier--Stokes equation
+or other trajectory information.
 
 ## Consequence for the one-split chain
 

@@ -1,5 +1,15 @@
 # millennium state — dedicated working memory
 
+- 2026-08-03: Cycle 279 bounded monitoring returns `NO-INPUT`. The checked
+  adjacent 2025--2026 sources do not supply any complete novel action satisfying
+  the four-item eligibility gate: Markman's quartic-CM semiregularity remains
+  open; Perry's real equivariant semiregularity theorem applies to an older
+  genus-three setting but does not provide the missing equivariant/Ext data for
+  the live genus-four object; the audited BSD and Euler papers do not supply the
+  missing determinant-line or velocity-`L^3` packets. An independent sentinel
+  audit finds no overlooked executable repository action. Deliberate wait and
+  narrow monitoring remain justified; no route is reopened.
+
 - 2026-08-03: Unconditional Cycle 278 review accepts both terminal walls:
   `CEB-SPLIT-WALL` retires the frozen Navier--Stokes one-split mechanism, and
   `B264-DL-WALL` retires the named BSD theorem/class audit. Applying the bounded
@@ -1970,7 +1980,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 278 deliberate wait: eligibility inventory is empty after
+- **phase:** Cycle 279 deliberate wait: eligibility inventory remains empty after
   terminal `CEB-SPLIT-WALL` and `B264-DL-WALL`; monitoring only until an
   independently supplied complete novel action passes the four-item gate
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
@@ -2804,7 +2814,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 278
+- **cycle:** 279
 - **announcements:** none
 
 ## immutable target list
