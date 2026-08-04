@@ -17,19 +17,39 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-03: completed and hostile-audited the entire connected hexacyclic
+  multiblock branch (all ten partitions other than the single rank-six block):
+  `s^+(G)>=|V(G)|`. The original seven-family sieve was corrected to include
+  omitted `K4+K4`, `K4+Theta+cycle`, structural `4+2`, and all three rank-five
+  structural owners (`K5-e`, K22, K71). A new arbitrary-shared-cut favorable-
+  theta-plus-triangle Sachs packet proves surplus `>2`. Nontriangle residuals
+  close by exact DNN inequalities. The fail-closed ledger locks exact
+  dispositions/pre-sieve/owners and rejects 22 mutations; ultimate referee
+  ACCEPT after correcting the global conclusion from unsupported strictness to
+  nonstrictness (rank-five equality-four plus a triangle exactly meets budget
+  five). The only hexacyclic frontier now remaining is the single rank-six
+  block, with 331/1198 kernels proved through branch order six.
+- 2026-08-04: repaired the hexacyclic multiblock proof with the true exhaustive
+  eleven-partition ledger. Restored omitted structural pre-sieve owners
+  `K4+K4`, `K4+Theta(1,2,r)+T`, `K4+D+P`, `K4+S3`, and `S4+Theta`; closed the
+  two nontriangle rows by exact rank-four and all-odd-`K5-e` DNN inequalities;
+  and used the proved arbitrary-shared-cut favorable-theta-plus-triangle
+  packet. The multiblock theorem is now unconditional (the single rank-six
+  block branch remains separate). The fail-closed verifier regenerates all 11
+  partitions, locks five proof sources, and rejects 19/19 hostile mutations in
+  normal and optimized modes.
 - 2026-08-03: extended the certified rank-six single-block frontier through
   branch order six. Order five: all 84 kernels, 33151 physical rows / 25168
   orbits, 1133 all-length targets = 1120 rational + 2 exact equality + 11
   structural K110; hostile audit ACCEPT. Order six: all 216 kernels, 207358
   physical rows / 150734 orbits, 31248 targets = 31235 rational + 12 exact
   equality + 1 owner-exact K223 structural; hostile audit ACCEPT. Thus 331 of
-  1198 rank-six kernels (orders 2--6) are complete. The proposed seven-family
-  hexacyclic multiblock sieve was hostile-refuted as incomplete: exact omitted
-  DNN residuals include `K4+K4` and `K4+Theta(1,2,r)+T`/`K4+D+P`; preserve this
-  correction. Items 1--4 owner closure is repaired and audited, while items
-  5--7 still depend on an unproved arbitrary-shared-cut favorable-theta-plus-
-  triangle margin and narrowly scoped rank-four anchors. No global hexacyclic
-  multiblock claim yet.
+  1198 rank-six kernels (orders 2--6) are complete. The proposed seven-template
+  hexacyclic residual was hostile-refuted as an exhaustive sieve because it
+  omitted `K4+K4`, `K4+Theta(1,2,r)+T`, `K4+D+P`, `K4+S3`, and `S4+Theta`.
+  The 2026-08-04 repair retains those rows in a structural pre-sieve, proves
+  the favorable-theta-plus-triangle margin, and closes the exact multiblock
+  ledger unconditionally; do not restore the old seven-family exhaustion.
 - 2026-08-03: after closing and announcing the pentacyclic frontier, advanced
   to connected hexacyclic graphs (`|E|=|V|+5`). Certified the exact rank-six
   suppressed-kernel census: 1198 kernels on orders 2--10 with counts
