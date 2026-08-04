@@ -1,0 +1,86 @@
+{
+  "schema": "rank-six-order-six-kernel-theorem-v1",
+  "rank": 6,
+  "order": 6,
+  "kernel_interval": [116, 331],
+  "kernel_total": 216,
+  "path_count": 11,
+  "physical_total": 207358,
+  "orbit_total": 150734,
+  "coarse_certified_total": 148130,
+  "residual_total": 2604,
+  "frontiers_per_residual": 12,
+  "target_total": 31248,
+  "rational_total": 31235,
+  "equality_total": 12,
+  "structural_total": 1,
+  "pair_order": ["01", "02", "03", "04", "05", "12", "13", "14", "15", "23", "24", "25", "34", "35", "45"],
+  "sources": [
+    {
+      "file": "positive-square-energy/experiments/rank6_order6_dim6_chunk_0000_0025.json",
+      "sha256": "c47de02e3326abf2f81b873dd4a921c861bf425101e66ae56f04e1c37a28d2a5",
+      "start": 0,
+      "residuals": 25,
+      "targets": 300
+    },
+    {
+      "file": "positive-square-energy/experiments/rank6_order6_dim6_chunk_0025_0125.json",
+      "sha256": "6ca5f7f7288d5705b3e83e6d30f0a36d52ec287c8b91f3dc73c942e80d22ae89",
+      "start": 25,
+      "residuals": 100,
+      "targets": 1200
+    },
+    {
+      "file": "positive-square-energy/experiments/rank6_order6_dim6_chunk_0125_2604.json",
+      "sha256": "71812b8a3d85c8f95a9f06b0d9c02cece285890cd9965e4ff7d64db6fb93c8af",
+      "start": 125,
+      "residuals": 2479,
+      "targets": 29748
+    }
+  ],
+  "equality_rows": [
+    {
+      "kernel": 253,
+      "row": "001001011011011",
+      "frontiers": [null, 2],
+      "gram": "K253-even"
+    },
+    {
+      "kernel": 253,
+      "row": "001101011011011",
+      "frontiers": [null, 2],
+      "gram": "K253-odd"
+    },
+    {
+      "kernel": 300,
+      "row": "000010010111111",
+      "frontiers": [null, 0],
+      "gram": "K300-even"
+    },
+    {
+      "kernel": 300,
+      "row": "100010010111111",
+      "frontiers": [null, 0],
+      "gram": "K300-odd"
+    },
+    {
+      "kernel": 302,
+      "row": "000010010101100",
+      "frontiers": [null, 0],
+      "gram": "K302-even"
+    },
+    {
+      "kernel": 302,
+      "row": "100010010101100",
+      "frontiers": [null, 0],
+      "gram": "K302-odd"
+    }
+  ],
+  "structural": {
+    "kernel": 223,
+    "row": "001111011011111",
+    "frontier": null,
+    "k4_vertices": [0, 3, 4, 5],
+    "tree_vertices": [1, 2]
+  }
+}
