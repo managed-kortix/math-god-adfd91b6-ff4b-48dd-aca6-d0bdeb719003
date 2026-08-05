@@ -17,7 +17,7 @@
 
 \title{Positive Square Energy of Every Tricyclic Graph}
 \author{AI-generated manuscript; no human author is claimed}
-\date{31 July 2026}
+\date{5 August 2026}
 
 \begin{document}
 \maketitle
@@ -52,6 +52,11 @@ For a tricyclic graph, $\operatorname{tr}A^2=2|E|$ gives
  \splus(G)+\sminus(G)=2n+4,
  \qquad \splus(G)=n+2+\frac12D(G).
 \end{equation}
+Positive and negative square energies were introduced in connection with
+spectral coloring bounds \cite{AbiadEtAl}.  The general $n-1$ lower bound was
+proved by Liu--Tang--Zhang \cite{LTZ}; the edge-surplus conjecture motivating
+the present statement asks for $\splus(G)\geq n$ when $|E(G)|\geq n+1$
+\cite{AKMPZ}.
 
 \begin{theorem}\label{thm:main}
 Every finite simple connected graph $G$ with $|V(G)|=n$ and
@@ -489,8 +494,8 @@ different first lengths.
 
 \begin{lemma}[Doubled $4$-cycle certificate]\label{lem:dc4}
 Every simple subdivision of the doubled-$4$-cycle kernel satisfies
-$\kappa\leq L+2$, except for the structural rows explicitly repaired in the
-proof; all rows nevertheless satisfy $\splus\geq n$.
+$\splus\geq n$.  The proof establishes $\kappa\leq L+2$ in the DNN rows and
+handles the remaining rows by structural repair.
 \end{lemma}
 
 \begin{proof}
@@ -516,16 +521,19 @@ invariant & first simple row & physical rows & disposition\\
 011&000011&4&DNN\\
 100&010000&4&DNN\\
 101&010001&4&DNN\\
-110&010010&8&DNN, boundary allowed\\
-111&010011&8&DNN or deletion\\
+110&010010&8&four DNN, four DNN or deletion\\
+111&010011&8&four DNN, four DNN or deletion\\
 \bottomrule
 \end{tabular}
 \caption{Doubled-$4$-cycle switching census; the counts total all $36$ simple
 physical parity rows.}\label{tab:dc4}
 \end{table}
 
-For completeness, normalize class $111$ so each doubled side has one even and
-one odd path and the connectors have opposite parity.  If a member of a
+For completeness, the eight rows requiring repair form one orbit under kernel
+automorphisms and interchange of parallel-path names; in the fixed switching
+normalization, four lie in class $110$ and four in class $111$. Normalize this
+orbit so each doubled side has one even and one odd path and the connectors
+have opposite parity. If a member of a
 doubled pair is longer than canonical, the exact planar certificates at
 lengths $(4,1,1,2,1,2)$ and $(2,3,1,2,1,2)$ have respective excesses bounded
 by
@@ -641,13 +649,24 @@ all $56$ rows.  The normalized templates, all eight switch triples, the
 four-type physical substitution table, and these exact inequalities are
 given explicitly in \cite{K4Seven}.
 
-Here is the independent all-length cover of the last class
-\cite{K4Cover}.  Call an odd path
-long when its length is at least three.  With at least three long paths, use
-four regular-simplex vectors, $R_{ij}=-1/3$: a unit path contributes $1/2$
-and a long path contributes at most
-$3\tan^2(\arccos(1/3)/6)<1/6$, so the total is at most two.  With exactly two
-long paths, there are two placements.  Opposite paths use branch angles
+Here is the independent all-length cover of the last switching class
+\cite{K4Cover}.  Its physical parities have the form
+$p_{ij}=1\mathbin\oplus s_i\mathbin\oplus s_j$.  After replacing branch vector
+$u_i$ by $(-1)^{s_i}u_i$, every transformed endpoint angle is the corresponding
+all-odd angle, while the coefficient and denominator remain the physical path
+length.  Call a physical path unit if its length is one and long otherwise.
+Every even physical path is therefore long.  A nonconstant switch has exactly
+three or four even paths, the edges of a nontrivial cut of $K_4$.
+
+With at least three long paths, use four regular-simplex vectors,
+$R_{ij}=-1/3$.  A unit path contributes $1/2$, a long odd path contributes
+less than $1/6$, and a long even path contributes less than $1/4$.  Four or
+more long paths therefore cost less than
+$(6-q)/2+q/4\leq2$.  The sole three-long switched configuration has three even
+paths of length at least two and three unit odd paths; evaluating the physical
+length-two costs more sharply gives less than $3/2+3(1/6)=2$.  If exactly two
+paths are long, the switch must be constant, so all paths are physically odd.
+There are two placements.  Opposite paths use branch angles
 $(0,\pi/4,\pi,5\pi/4)$ and give
 $8\tan^2(\pi/8)=24-16\sqrt2<2$.  Adjacent paths use
 $(0,3\pi/8,13\pi/8,\pi)$ and give
@@ -655,9 +674,11 @@ $(0,3\pi/8,13\pi/8,\pi)$ and give
  6\tan^2\frac{5\pi}{48}+\tan^2\frac\pi8
  +2\tan^2\frac{3\pi}{16}<\frac{71}{40}<2.
 \]
-With one long path, open it at an internal vertex; the complement is an
-attached $\Theta(1,2,2)$ and pays for the deleted tree.  With no long path the
-core is $K_4$.  We include the attached-$K_4$ argument rather than infer it
+With one long path, open it at an internal vertex.  The complement is an
+attached theta whose three path lengths have the same parity, hence is
+bipartite and has credit one; the deleted nonempty tree has credit minus one.
+With no long path every switch is constant and the core is $K_4$.  We include
+the attached-$K_4$ argument rather than infer it
 from the bare spectrum.  For any graph $H$ obtained by attaching rooted trees
 at the four vertices of $K_4$, put
 $Z_F(t)=\sum_jm_j(F)t^{|V(F)|-2j}>0$, where $m_j(F)$ counts the $j$-edge
@@ -684,7 +705,8 @@ argument is the principal one and is negative.  The signed Coulson identity
 \eqref{eq:energy} gives $\splus(H)>|V(H)|+2$, in particular the required
 claim.  This is the attached-$K_4$ lower-half-plane Sachs packet from
 \cite{PackingTwo}; bare $K_4$ has spectrum $\{3,-1,-1,-1\}$ and $\splus=9$.
-Thus all eight classes are covered.
+Thus all eight switching classes, including all eight physical rows in the
+last class, are covered.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:main}]
@@ -788,8 +810,9 @@ remaining simple rows are
 010011,\ 010101,\ 011010,\ 011100,\quad
 100011,\ 100101,\ 101010,\ 101100;
 \]
-these are precisely class $111$ and are closed by the long-path certificates
-and structural deletion in the proof of Lemma~\ref{lem:dc4}.  Thus the displayed
+these are the exceptional automorphism orbit (four rows in class $110$ and four
+in class $111$) and are closed by the long-path certificates and structural
+deletion in the proof of Lemma~\ref{lem:dc4}. Thus the displayed
 $28+8=36$ count is the entire simple physical parity census.
 
 \section{Complete doubled-triangle rational ledger}\label{app:dtri-ledger}
@@ -879,9 +902,12 @@ The finite rational audit checks twelve doubled-triangle type/parity orbits
 (32 labelled physical rows), partitioned accurately as 28 DNN rows and four
 structural class-$111$ rows; it also checks the two exact rational tangent
 certificates used when a class-$111$ parallel path is noncanonical.  It checks
-the doubled-$4$-cycle partition into 28 DNN rows and eight structural
-class-$111$ rows, all 56 physical $K_4$ rows outside the all-odd switching
-class, and explicitly enumerates all 64 all-odd long/unit subsets.  The latter
+the doubled-$4$-cycle partition into 28 DNN rows and an eight-row exceptional
+orbit split equally between classes $110$ and $111$, all 56 physical $K_4$
+rows outside the all-odd switching
+ class.  The separate all-odd-class audit checks all eight physical switching
+ rows and the unit/long lower-length rules.  For the physically all-odd row,
+ the finite audit also enumerates all 64 long/unit subsets.  The latter
 split into 42 DNN-audited subsets with at least three long paths, 12 adjacent
 and three opposite DNN-audited two-long subsets, six one-long structural
 deletions, and one no-long attached-$K_4$ packet.  Thus 57 subsets are audited
@@ -889,25 +915,41 @@ by the displayed DNN bounds and seven have structural dispositions.  The audit
 also checks nine four-path representative symbolic records, including the
 one-unit $e=0$ endpoint case, and the rational tangent bounds occurring in
 those records.  These records do not constitute a machine proof of the
-analytic tangent lemma or its all-length coverage.  The verifier rejects
-thirteen deliberately corrupted certificate payloads.
+analytic tangent lemma or its all-length coverage.  Its canonical payload also
+commits to all audited doubled-$4$-cycle class counts, first and failed rows,
+class-$111$ long records, endpoint definitions and tangent constants, together
+with the $K_4$ endpoint and arithmetic constants.  Numeric leaves are restricted
+to integers and rational strings: floats and all other non-integral numeric
+types are rejected explicitly.  The verifier rejects 21 deliberately corrupted
+certificate payloads, including formerly uncovered constants.
 For the 56-row audit it reconstructs every switching invariant and physical
 sign transport while retaining the physical path parity.  Run the audit both
 normally and with Python assertions disabled:
 \begin{verbatim}
-python3 research/tricyclic-finite-rational-certificates-verifier.py
-python3 -O research/tricyclic-finite-rational-certificates-verifier.py
+ python3 research/tricyclic-finite-rational-certificates-verifier.py
+ python3 -O research/tricyclic-finite-rational-certificates-verifier.py
+ python3 positive-square-energy/experiments/k4_all_odd_exact_verify.py
+ python3 -O positive-square-energy/experiments/k4_all_odd_exact_verify.py
+ python3 research/doubled-triangle-all-length-certificate.py
+ python3 -O research/doubled-triangle-all-length-certificate.py
+ python3 research/tricyclic-gram-obstruction-verifier.py
 \end{verbatim}
-Both runs must report the certificate digest
+The first two commands must report the certificate digest
 \begin{verbatim}
-a34ed2d3898c1a244e861ce11ffb51d84d65eb4409066f0745829de5a8ca58b8
+795f7772618d4f0280da914a85042970492f641909cd093abe9e30b434aa279c
 \end{verbatim}
 This canonical payload digest is embedded in the verifier and mirrored in the
-README manifest.  Both runs must also report thirteen rejected hostile
-mutations.  More generally, the verifier does not
+README manifest.  Those two commands must also report 21 rejected
+hostile mutations.  The standalone $K_4$ audit reports digest
+\texttt{85ccff4a03791e2a5a455a7c350b804982f6ee3fb426233cd5e92c67431466c2}
+and three rejected mutations.  The standalone doubled-triangle audit reports
+digest
+\texttt{b293eef0d7742da6ecd2c7af35882be14e97811922493121900e65a6705f01e8}
+and three rejected mutations.  The final command audits the Gram obstruction.
+More generally, these verifiers do not
 prove DNN duality, path elimination or monotonicity, induced
 superadditivity, the kernel classification, the territory repairs, or the
-attached-$K_4$ Sachs argument.  It is a fail-closed exact audit of only the
+attached-$K_4$ Sachs argument.  They are fail-closed exact audits of only the
 finite records just enumerated.
 Build this manuscript from the repository root with
 \begin{verbatim}
@@ -929,6 +971,21 @@ assessed from the displayed proof and its exact local dependencies.  No
 external publication was performed as part of this work.
 
 \begin{thebibliography}{99}
+\bibitem{AbiadEtAl}
+A.~Abiad, L.~de Lima, D.~N.~Desai, K.~Guo, L.~Hogben, and J.~Madrid,
+\emph{Positive and negative square energies of graphs},
+Electron. J. Linear Algebra 39 (2023), 307--326.
+
+\bibitem{AKMPZ}
+S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and S.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264, 2025.
+
+\bibitem{LTZ}
+Y.~Liu, Q.~Tang, and S.~Zhang,
+\emph{The positive and negative square-energy conjecture},
+arXiv:2607.18031, 2026.
+
 \bibitem{BicyclicCactus}
 Companion manuscript, \emph{Positive Square Energy of Every Bicyclic Cactus},
 2026; \path{all-bicyclic-cacti/paper.tex}.

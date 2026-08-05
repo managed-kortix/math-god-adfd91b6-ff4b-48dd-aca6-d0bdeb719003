@@ -158,3 +158,5 @@ deletion, however, does not by itself extend under arbitrary `+2` changes of a
 path length, because such a change can reverse a cycle residue modulo four.
 Accordingly, the present table is an exhaustive base-row certificate and must
 not be cited alone as an all-length closure of the other thirty parity rows.
+The complete residue-mod-4 and long-path lift is proved independently in
+`doubled-triangle-all-length-residue-cover.md`.

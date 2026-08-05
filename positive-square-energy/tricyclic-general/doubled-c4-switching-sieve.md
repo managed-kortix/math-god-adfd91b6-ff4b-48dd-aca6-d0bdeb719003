@@ -36,6 +36,11 @@ switching changes the canonical lengths, not merely the Gram matrix.  It is
 therefore invalid to verify only one representative of a switching class; all
 simple representatives must be checked.
 
+There is a second bookkeeping caution. Interchanging the names of two parallel
+paths is a genuine kernel automorphism, not switching. It can change the
+displayed switching word because the normalized outer cycle uses the named
+paths `a` and `c`. Thus an automorphism orbit need not be one switching class.
+
 ## 2. Exactly eight switching classes
 
 Record a canonical parity row by a bit string `p_a p_A p_b p_c p_C p_d`, with
@@ -69,8 +74,8 @@ For integers `k=(0,k_1,k_2,k_3)`, let
 
 This is the Gram matrix of the planar unit vectors
 `(cos(pi k_i/6),sin(pi k_i/6))`; in particular it is exactly PSD and has
-unit diagonal.  The following table gives a certificate for every row outside
-the last switching class.  Rows on the same line use the same `k`.  Every
+unit diagonal. The following table gives a certificate for 28 of the 36 rows.
+Rows on the same line use the same `k`. Every
 entry is exact: substitution in (1) uses only standard angles.
 
 | parity rows | `(k_1,k_2,k_3)` | certified excess |
@@ -100,24 +105,27 @@ their six contributions are respectively `2/3,1/3,0,2/3,1/3,0`, in a suitable
 order.  Thus their sum is exactly two.  The other lines have strict slack.
 
 It follows, by the monotonicity preceding (3), that every doubled-C4
-subdivision in the first seven switching classes, with arbitrary lengths and
+subdivision in these 28 physical parity rows, with arbitrary lengths and
 subject to simplicity, satisfies `kappa<=L+2`.  One-vertex additivity of
 `kappa`, and `kappa(T)=|E(T)|`, then gives `s^+(G)>=|V(G)|` after arbitrary
 rooted trees are attached.
 
-## 4. The failed canonical class
+## 4. The exceptional canonical orbit
 
-The eight simple rows in class `111` are
+The eight simple rows not certified above are
 
 `010011, 010101, 011010, 011100,`
 
 `100011, 100101, 101010, 101100`.                             (5)
 
-The matrices above do not certify these rows.  Direct minimization of (2)
+They form one orbit under dihedral kernel automorphisms and interchange of
+parallel-path names. They are not one switching class: the normalization of
+Section 2 puts four in class `110` and four in class `111`. The matrices above
+do not certify these rows. Direct minimization of (2)
 suggests the common canonical value `2.0796037466...`, but that decimal is not
 used as a theorem here: an exact lower-bound certificate for the elliptope
-minimum has not been supplied.  Accordingly, (5) is the precise failed class
-of this Gram-certificate sieve, not a claimed list of counterexamples.
+minimum has not been supplied. Accordingly, (5) is the precise exceptional
+orbit of this Gram-certificate sieve, not a claimed list of counterexamples.
 
 There is, however, a rigorous induced-deletion closure for the canonical rows.
 Each row in (5) has exactly one even connector among `b,d`; its canonical
@@ -133,10 +141,10 @@ strictly greater than one.  Induced superadditivity therefore gives
 This closes all eight canonical failures, including arbitrary rooted-tree
 attachments.
 
-## 5. Closing the failed class at all lengths
+## 5. Closing the exceptional orbit at all lengths
 
 There is a stronger all-length dichotomy.  Up to the automorphisms of the
-kernel and interchange of parallel paths, take the failed parity row to be
+kernel and interchange of parallel paths, take the exceptional parity row to be
 
 `(p_a,p_A,p_b,p_c,p_C,p_d)=(0,1,0,0,1,1)`.                   (7)
 
@@ -170,9 +178,9 @@ either doubled pair, and increasing any length further only decreases its
 term.
 
 It remains that both doubled pairs have exactly the canonical lengths `{1,2}`.
-The connector parities in class `111` are opposite.  Delete an internal vertex
-of the even connector; it exists because that connector has length at least
-two.  The complement is an attached bicyclic cactus whose two cyclic blocks
+In this normal form the connector parities are opposite. Delete an internal
+vertex of the even connector; it exists because that connector has length at
+least two. The complement is an attached bicyclic cactus whose two cyclic blocks
 have lengths
 
 `a+A=c+C=3`,                                                  (10)
@@ -183,7 +191,7 @@ credit `-1`.  This proves (6) for every remaining length row.
 
 Combining Sections 3 and 5 proves the rigorous all-length parity theorem:
 every simple subdivision of the doubled-C4 kernel, with arbitrary rooted-tree
-attachments, satisfies `s^+(G)>=|V(G)|`.  The first seven switching classes
-are closed uniformly by DNN.  In the eighth class, DNN closes the row as soon
-as a doubled path is longer than canonical; otherwise induced deletion leaves
-a favorable `C3`--`C3` bicyclic remainder plus a tree.
+attachments, satisfies `s^+(G)>=|V(G)|`. DNN closes 28 canonical physical rows.
+The remaining eight rows (four each in switching classes `110` and `111`) are
+closed by DNN as soon as a doubled path is longer than canonical; otherwise
+induced deletion leaves a favorable `C3`--`C3` bicyclic remainder plus a tree.

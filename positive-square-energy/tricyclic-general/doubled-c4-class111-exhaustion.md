@@ -1,8 +1,11 @@
-# Doubled-C4 switching class 111: exhaustive all-length closure
+# Doubled-C4 exceptional orbit: exhaustive all-length closure
 
-This note isolates the only switching class not closed by the canonical DNN
-sieve. It does not change the main manuscript. The point is to make explicit
-that arbitrary connector lengths introduce no additional case.
+This note isolates the eight-row automorphism orbit not closed by the canonical
+DNN sieve. The earlier label "switching class 111" was imprecise: under the
+fixed switching normalization, four rows lie in class `110` and four in class
+`111`. Interchanging parallel-path names joins them into one kernel-automorphism
+orbit. The point here is to make explicit that arbitrary connector lengths
+introduce no additional case.
 
 ## 1. Normal form
 
@@ -15,8 +18,8 @@ lengths as
 
 `(a,A',b,c,C',d)`.
 
-In class `111`, each doubled side has one odd and one even path. Choose the even
-member of each doubled side as `a` and `c`. The third class invariant then says
+In the exceptional orbit, each doubled side has one odd and one even path.
+Choose the even member of each doubled side as `a` and `c`. The exceptional-row condition says
 that the two single connectors have opposite parity. A dihedral automorphism
 interchanges the connectors if necessary, so normalize further by making `BC`
 odd. Thus, after also interchanging the parallel-path names when needed,
@@ -155,7 +158,7 @@ If `t` rooted-tree edges are attached, one-vertex additivity gives
 `kappa<=L+2+t`, while the graph has `L+t` edges and `L-2+t` vertices, yielding
 the same inequality.
 
-Thus every arbitrary-length simple subdivision in switching class `111` is
+Thus every arbitrary-length simple subdivision in the exceptional orbit is
 closed: some openable connector deletion leaves a favorable attached cactus,
 or a doubled path is long and one of the exact DNN certificates (8)--(9)
 applies. One-vertex additivity of `kappa`, together with `kappa(T)=|E(T)|`,

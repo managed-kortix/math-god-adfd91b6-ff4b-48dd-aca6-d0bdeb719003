@@ -17,6 +17,20 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-05: completed `all-tricyclic-graphs`: every finite simple connected
+  graph with `|E|=|V|+2` satisfies `s+(G)>=|V(G)|`. Block ranks split as
+  `1+1+1`, `2+1`, or one rank-three block. The first two are closed by the
+  all-cactus theorem and the exact theta-plus-cycle packet. Suppressing a
+  2-connected rank-three block gives exactly four kernels: four-path theta,
+  doubled triangle, `K4`, or doubled `C4`. New all-length proofs close the
+  doubled-triangle residue family and all eight physical rows of the final K4
+  switching class; a hostile audit corrected the doubled-C4 exceptional set
+  from one alleged class to a four-plus-four split across classes 110 and 111.
+  Exact DNN, induced-deletion, physical-length switching, arbitrary path, and
+  rooted-tree coverage exhaust all cases. Hardened exact verifiers reject 21
+  hostile mutations and freeze complete ledger digests. Three independent
+  theorem gates, normal/`-O` scripts, bibliography audit, and PDF build pass.
+  Paper: `all-tricyclic-graphs/`. Publication is next.
 - 2026-08-03: completed and hostile-audited the entire connected hexacyclic
   multiblock branch (all ten partitions other than the single rank-six block):
   `s^+(G)>=|V(G)|`. The original seven-family sieve was corrected to include

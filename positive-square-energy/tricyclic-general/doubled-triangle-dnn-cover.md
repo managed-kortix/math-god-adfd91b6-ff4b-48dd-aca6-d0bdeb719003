@@ -247,6 +247,11 @@ attachment pattern.
 
 ## 4. Audit status
 
+The independent residue table and finite long-path audit are recorded in
+`doubled-triangle-all-length-residue-cover.md` and
+`research/doubled-triangle-all-length-certificate.py`. They make explicit why
+the deletion-only 32-base-row ledger is not being used as an all-length proof.
+
 The class-`111` argument is complete: a noncanonical parallel path has one of
 the exact DNN certificates (9)--(10), while canonical parallel pairs admit an
 induced deletion leaving either a two-triangle bicyclic cactus or

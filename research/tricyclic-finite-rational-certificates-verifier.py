@@ -14,11 +14,12 @@ from fractions import Fraction as F
 from hashlib import sha256
 from itertools import product
 import json
+from numbers import Number
 
 
 PI_LO = F(333, 106)
 PI_HI = F(355, 113)
-EXPECTED_SHA256 = "a34ed2d3898c1a244e861ce11ffb51d84d65eb4409066f0745829de5a8ca58b8"
+EXPECTED_SHA256 = "795f7772618d4f0280da914a85042970492f641909cd093abe9e30b434aa279c"
 
 
 def require(condition, message):
@@ -27,11 +28,33 @@ def require(condition, message):
 
 
 def frac(text):
-    if isinstance(text, int):
+    if type(text) is int:
         return F(text)
     if isinstance(text, F):
         return text
-    return F(text)
+    if isinstance(text, str):
+        return F(text)
+    if isinstance(text, Number):
+        raise RuntimeError("non-integral numeric value is forbidden")
+    raise RuntimeError(f"invalid rational value type: {type(text).__name__}")
+
+
+def validate_payload_types(value, path="certificate"):
+    if value is None or isinstance(value, str) or type(value) is int:
+        return
+    if isinstance(value, Number):
+        raise RuntimeError(f"{path}: non-integral numeric value is forbidden")
+    if isinstance(value, (list, tuple)):
+        for index, item in enumerate(value):
+            validate_payload_types(item, f"{path}[{index}]")
+        return
+    if isinstance(value, dict):
+        require(all(isinstance(key, str) for key in value),
+                f"{path}: dictionary keys must be strings")
+        for key, item in value.items():
+            validate_payload_types(item, f"{path}.{key}")
+        return
+    raise RuntimeError(f"{path}: forbidden payload type {type(value).__name__}")
 
 
 def ftext(value):
@@ -211,6 +234,14 @@ C4_CLASS_FIRST = {"000": "000000", "001": "000001", "010": "000010",
 C4_FAILED = {"010011", "010101", "011010", "011100",
              "100011", "100101", "101010", "101100"}
 C4_ENDPOINTS = ((0, 1), (0, 1), (1, 2), (2, 3), (2, 3), (3, 0))
+C4_CLASS111_LONG = (
+    ((4, 1, 1, 2, 1, 2), (0, 5, 2, 7),
+     ((4, 3, 32), (3, 1, 8), (2, 1, 16), (2, 3, 16))),
+    ((2, 3, 1, 2, 1, 2), (0, 7, 3, 0),
+     ((2, 1, 16), (4, 1, 8), (2, 3, 16))),
+)
+C4_TAN_BOUNDS = ((3, 32, "93/1000"), (1, 8, "172/1000"),
+                 (1, 16, "40/1000"), (3, 16, "447/1000"))
 
 
 def principal_cos_index(index, period):
@@ -223,6 +254,27 @@ def c4_path_angle_index(bit, ku, kv):
     if bit:
         index += 6
     return principal_cos_index(index, 6)
+
+
+def c4_switching_invariant(row):
+    parities = tuple(map(int, row))
+    # Switch successively along the spanning path a,b,c, fixing vertex 0.
+    switches = [0] * 4
+    switches[1] = parities[0]
+    switches[2] = parities[2] ^ switches[1]
+    switches[3] = parities[3] ^ switches[2]
+    normalized = tuple(bit ^ switches[u] ^ switches[v]
+                       for bit, (u, v) in zip(parities, C4_ENDPOINTS))
+    require(normalized[0] == normalized[2] == normalized[3] == 0,
+            f"doubled C4: switching normalization failed for {row}")
+    return "".join(str(normalized[index]) for index in (1, 4, 5))
+
+
+def c4_q4_path_angle_index(length, ku, kv):
+    index = ku - kv
+    if length % 2:
+        index += 4
+    return principal_cos_index(index, 4)
 
 
 def exact_simple_tan_sq(numerator, denominator):
@@ -261,6 +313,17 @@ def audit_doubled_c4(certificates):
         and not (((bits >> 2) & 1) and ((bits >> 1) & 1))
     }
     require(len(simple_rows) == 36, "doubled C4: simple canonical row total changed")
+    class_rows = {word: set() for word in C4_CLASS_COUNTS}
+    for row in simple_rows:
+        class_rows[c4_switching_invariant(row)].add(row)
+    require({word: len(rows) for word, rows in class_rows.items()} == C4_CLASS_COUNTS,
+            "doubled C4: switching-class multiplicities changed")
+    require({word: min(rows) for word, rows in class_rows.items()} == C4_CLASS_FIRST,
+            "doubled C4: switching-class first-row ledger changed")
+    require({word: len(rows & C4_FAILED) for word, rows in class_rows.items()} ==
+            {"000": 0, "001": 0, "010": 0, "011": 0,
+             "100": 0, "101": 0, "110": 4, "111": 4},
+            "doubled C4: exceptional switching-class split changed")
 
     covered = set()
     for rows, k, threshold_text, exact_display in certificates:
@@ -289,9 +352,7 @@ def audit_doubled_c4(certificates):
     require(covered | C4_FAILED == simple_rows,
             "doubled C4: 36-row DNN/structural partition changed")
 
-    rational_bounds = ((3, 32, "93/1000"), (1, 8, "172/1000"),
-                       (1, 16, "40/1000"), (3, 16, "447/1000"))
-    for n, d, bound in rational_bounds:
+    for n, d, bound in C4_TAN_BOUNDS:
         prove_tan_bound(n, d, bound, f"doubled C4 tan^2({n}pi/{d})")
     require(4 * frac("93/1000") + 3 * frac("172/1000") +
             2 * frac("40/1000") + 2 * frac("447/1000") == frac("1862/1000"),
@@ -301,6 +362,23 @@ def audit_doubled_c4(certificates):
             "doubled C4: second long-row rational sum changed")
     require(frac("1862/1000") < 2 and frac("1662/1000") < 2,
             "doubled C4: long-row threshold failed")
+    expected_long_terms = (
+        ((4, 3, 32), (3, 1, 8), (2, 1, 16), (2, 3, 16)),
+        ((2, 1, 16), (4, 1, 8), (2, 3, 16)),
+    )
+    for index, (lengths, angles, displayed_terms) in enumerate(C4_CLASS111_LONG):
+        require(displayed_terms == expected_long_terms[index],
+                f"doubled C4: long certificate {index + 1} term ledger changed")
+        terms = {}
+        for length, (u, v) in zip(lengths, C4_ENDPOINTS):
+            q = c4_q4_path_angle_index(length, angles[u], angles[v])
+            if q:
+                angle = F(q, 8 * length)
+                terms[angle] = terms.get(angle, 0) + length
+        reconstructed = tuple((coefficient, angle.numerator, angle.denominator)
+                              for angle, coefficient in sorted(terms.items()))
+        require(sorted(reconstructed) == sorted(displayed_terms),
+                f"doubled C4: long certificate {index + 1} Gram reconstruction failed")
     return len(covered), len(C4_FAILED)
 
 
@@ -588,10 +666,22 @@ def canonical_payload(certificate):
 
 def certificate_data():
     return {
+        "arithmetic_constants": {
+            "pi_lower": ftext(PI_LO),
+            "pi_upper": ftext(PI_HI),
+        },
         "doubled_triangle": deepcopy(DT_ROWS),
+        "doubled_triangle_orbit_counts": deepcopy(DT_ORBIT_COUNTS),
         "doubled_triangle_class111_long": deepcopy(DT_CLASS111_LONG_CERTIFICATES),
         "doubled_c4": deepcopy(C4_CERTIFICATES),
+        "doubled_c4_class_counts": deepcopy(C4_CLASS_COUNTS),
+        "doubled_c4_class_first": deepcopy(C4_CLASS_FIRST),
+        "doubled_c4_failed": sorted(C4_FAILED),
+        "doubled_c4_endpoints": [list(edge) for edge in C4_ENDPOINTS],
+        "doubled_c4_class111_long": deepcopy(C4_CLASS111_LONG),
+        "doubled_c4_tangent_bounds": deepcopy(C4_TAN_BOUNDS),
         "k4_physical_certificates": deepcopy(K4_PHYSICAL_CERTIFICATES),
+        "k4_edges": [list(edge) for edge in K4_EDGES],
         "k4_tangent_bounds": deepcopy(K4_TAN_BOUNDS),
         "k4_all_odd_dispositions": deepcopy(K4_ALL_ODD_DISPOSITIONS),
         "four_path_representative_records": deepcopy(FOUR_PATH_RECORDS),
@@ -600,12 +690,37 @@ def certificate_data():
 
 def audit(certificate, enforce_digest=True):
     require(isinstance(certificate, dict), "certificate root is not a dictionary")
-    require(set(certificate) == {"doubled_triangle", "doubled_triangle_class111_long",
-                                 "doubled_c4",
+    validate_payload_types(certificate)
+    require(set(certificate) == {"arithmetic_constants", "doubled_triangle",
+                                 "doubled_triangle_orbit_counts",
+                                 "doubled_triangle_class111_long", "doubled_c4",
+                                 "doubled_c4_class_counts", "doubled_c4_class_first",
+                                 "doubled_c4_failed", "doubled_c4_endpoints",
+                                 "doubled_c4_class111_long", "doubled_c4_tangent_bounds",
                                  "k4_physical_certificates", "k4_tangent_bounds",
-                                 "k4_all_odd_dispositions",
+                                 "k4_edges", "k4_all_odd_dispositions",
                                  "four_path_representative_records"},
             "certificate sections changed")
+    require(certificate["arithmetic_constants"] == {
+                "pi_lower": ftext(PI_LO), "pi_upper": ftext(PI_HI)},
+            "rational pi enclosure ledger changed")
+    require(certificate["doubled_triangle_orbit_counts"] == DT_ORBIT_COUNTS,
+            "doubled triangle orbit-count ledger changed")
+    require(certificate["doubled_c4_class_counts"] == C4_CLASS_COUNTS,
+            "doubled C4 class-count ledger changed")
+    require(certificate["doubled_c4_class_first"] == C4_CLASS_FIRST,
+            "doubled C4 first-row ledger changed")
+    require(set(certificate["doubled_c4_failed"]) == C4_FAILED and
+            len(certificate["doubled_c4_failed"]) == len(C4_FAILED),
+            "doubled C4 failed-row ledger changed")
+    require(certificate["doubled_c4_endpoints"] == [list(edge) for edge in C4_ENDPOINTS],
+            "doubled C4 endpoint definitions changed")
+    require(certificate["doubled_c4_class111_long"] == C4_CLASS111_LONG,
+            "doubled C4 class-111 long ledger changed")
+    require(certificate["doubled_c4_tangent_bounds"] == C4_TAN_BOUNDS,
+            "doubled C4 tangent ledger changed")
+    require(certificate["k4_edges"] == [list(edge) for edge in K4_EDGES],
+            "K4 endpoint definitions changed")
     dt_counts = audit_doubled_triangle(
         certificate["doubled_triangle"], certificate["doubled_triangle_class111_long"])
     c4_rows, c4_failed = audit_doubled_c4(certificate["doubled_c4"])
@@ -643,6 +758,19 @@ def hostile_self_checks():
     add("C4 Gram angle", lambda c: c["doubled_c4"][2].__setitem__(1, [0, 0, 0]))
     add("C4 missing row", lambda c: c["doubled_c4"][12][0].pop())
     add("C4 threshold", lambda c: c["doubled_c4"][0].__setitem__(2, "-1/100"))
+    add("floating numeric", lambda c: c["doubled_c4"][0].__setitem__(2, 0.0))
+    add("C4 class count", lambda c: c["doubled_c4_class_counts"].__setitem__("111", 7))
+    add("C4 first row", lambda c: c["doubled_c4_class_first"].__setitem__("111", "010101"))
+    add("C4 failed row", lambda c: c["doubled_c4_failed"].pop())
+    add("C4 endpoint", lambda c: c["doubled_c4_endpoints"][0].__setitem__(1, 2))
+    add("C4 long ledger", lambda c: c.__setitem__(
+        "doubled_c4_class111_long",
+        (((3, 1, 1, 2, 1, 2), *c["doubled_c4_class111_long"][0][1:]),
+         c["doubled_c4_class111_long"][1])))
+    add("C4 tangent constant", lambda c: c.__setitem__(
+        "doubled_c4_tangent_bounds",
+        ((3, 32, "94/1000"), *c["doubled_c4_tangent_bounds"][1:])))
+    add("pi constant", lambda c: c["arithmetic_constants"].__setitem__("pi_upper", "22/7"))
     add("K4 physical parity", lambda c: c["k4_physical_certificates"][0][2][0].__setitem__(0, "011011"))
     add("K4 physical angle", lambda c: c["k4_physical_certificates"][3][1].__setitem__(0, 0))
     add("K4 physical cost", lambda c: c["k4_physical_certificates"][5][2][0].__setitem__(1, 3))
@@ -657,7 +785,7 @@ def hostile_self_checks():
 def main():
     digest, counts = audit(certificate_data())
     mutations = hostile_self_checks()
-    require(mutations == 13, "hostile mutation count changed")
+    require(mutations == 21, "hostile mutation count changed")
     (dt_counts, c4_rows, c4_failed, k4_physical, k4_omitted,
      k4_dispositions, k4_audited, k4_structural, four_cases) = counts
     dt_dnn_orbits, dt_structural_orbits, dt_dnn_rows, dt_structural_rows, dt_long = dt_counts
@@ -665,7 +793,8 @@ def main():
     print(f"doubled_triangle: {dt_dnn_orbits} DNN orbit records ({dt_dnn_rows} labelled rows), "
           f"{dt_structural_orbits} structural orbit ({dt_structural_rows} labelled rows), "
           f"{dt_long} audited class-111 long-path DNN records")
-    print(f"doubled_c4: {c4_rows} DNN rows, {c4_failed} structural class-111 rows")
+    print(f"doubled_c4: {c4_rows} canonical DNN rows, {c4_failed} exceptional rows "
+          "(4 in class 110, 4 in class 111; long-path DNN or structural deletion)")
     print(f"k4_non_all_odd: {k4_physical} exact physical rows, {k4_omitted} all-odd rows omitted")
     print(f"k4_all_odd: 64/64 long/unit subsets enumerated; {k4_audited} DNN-audited, "
           f"{k4_structural} structural ({k4_dispositions})")
