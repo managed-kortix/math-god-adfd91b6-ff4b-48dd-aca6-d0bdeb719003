@@ -322,6 +322,34 @@ python3 verify_m6_residual_group_certificates.py \
 
 No UNSAT claim is made for the other 19 groups.
 
+The 42-parent clean-sink `B7-l6` group also has an exact state refinement. For
+each parent it fixes the ordered root/A-hole vector of C16 and C17, the internal
+C pair state (hole, `16->17`, or `17->16`), the exact two-bit high-C mask, and
+the separate C16-to-B and C17-to-B arc counts. The compatible surviving states
+form exactly 30 leaves and 260 parent/state incidences; all 42 parents occur.
+Each leaf reuses the frozen base variables, adds two seven-input unary counters,
+three state units, and selectors guarded only to the exact parent holes.
+
+```sh
+python3 m6_b7_l6_state_split.py --leaf 0 --output /tmp/b7-l6-leaf.cnf
+python3 check_m6_b7_l6_state_split.py /tmp/b7-l6-leaf.cnf
+python3 test_m6_b7_l6_state_split.py
+```
+
+The complete manifest is `m6-b7-l6-state-split.tsv` (4,382 bytes, SHA-256
+`a3b8f9d17b50dbfccd5f00740b33c6e90f6f10d26a3854dd627a45681e5c890e`);
+`m6-b7-l6-state-leaf-hashes.tsv` freezes all 30 CNF hashes (3,163 bytes,
+SHA-256 `eec464838f7d01e6cf053c7cbf8fa1442068d78738f4bd2772b15a8417543ae4`).
+The independent checker reconstructs the 42 parents from the clean stream and
+cover/filter, independently derives all exact states, checks complete coverage,
+and rebuilds every clause. A post-gate 30-second CaDiCaL scout returned 11
+UNSAT and 19 TIMEOUT leaves, with no SAT result. All eleven UNSAT leaves were
+then certified with retained LRATs accepted by pinned `lrat-check`; they cover
+exactly 90 incidences. The other 19 leaves contain 170 incidences and remain
+uncertified. The exact scout is `m6-b7-l6-state-scout-30s.json`; certificate
+identities are `m6-b7-l6-state-certificates.tsv`, replayed by
+`verify_m6_b7_l6_state_certificates.py --checker /path/to/pinned/lrat-check`.
+
 The rooted clean-sink theorem is a separate post-processing theorem over the
 frozen 23-group membership universe; it does not modify those campaign files or
 claim group UNSAT. A high C vertex with zero internal-C outdegree and zero

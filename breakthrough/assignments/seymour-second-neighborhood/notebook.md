@@ -1556,3 +1556,39 @@ No audits yet.
 - The post-audit proof report is
   `attempts/tick54-clean-sink-B6-l5-HCC2-certificates.md`. This closes exactly
   104 `B6-l5,H_CC=2` parents and makes no claim for the other 55 shards.
+
+### Exact B7-l6 30-leaf state split and scout
+
+- Refined only the committed clean-sink `B7-l6` group: 42 unique parents. Each
+  exact state records the ordered parent root/A-hole vector for C16,C17, the
+  internal C state, the exact high mask, and separate C16-to-B/C17-to-B counts.
+  Removing precisely the clean-sink states already excluded by the theorem
+  leaves 30 state classes and 260 parent/state incidences, covering all 42
+  parents (parent incidence multiplicities are 16x4, 6x6, and 20x8).
+- Each leaf is the immutable 23,616-variable B7 base plus two existing-style
+  seven-input unary counters (56 variables total), three state units, fresh
+  parent selectors, one ALO, and exactly 153 guarded hole clauses per selected
+  parent. Selectors guard no state literal and are guarded only to parent holes.
+- `experiments/m6-b7-l6-state-split.tsv` is the 4,382-byte frozen manifest,
+  SHA-256 `a3b8f9d17b50dbfccd5f00740b33c6e90f6f10d26a3854dd627a45681e5c890e`.
+  The 3,163-byte complete CNF hash ledger is
+  `experiments/m6-b7-l6-state-leaf-hashes.tsv`, SHA-256
+  `eec464838f7d01e6cf053c7cbf8fa1442068d78738f4bd2772b15a8417543ae4`.
+- The independent checker reconstructs the clean parents from the frozen stream
+  and cover/filter, derives all states without importing the producer, proves
+  the 42-parent/260-incidence cover, and reconstructs every base, unit, counter,
+  selector ALO, and hole guard. Exhaustive tests emit/check/hash all 30 CNFs and
+  reject state, base, selector, and complete-model attribution mutations.
+- After that gate passed, a 30-second-per-leaf CaDiCaL scout returned 11 UNSAT
+  and 19 TIMEOUT leaves (90 and 170 incidences respectively), with zero SAT.
+  The exact solver/run record is
+  `experiments/m6-b7-l6-state-scout-30s.json` (6,948 bytes, SHA-256
+  `69c1d56145ec2544702717b252bd1e3796c882c68ca95023488b959e2af2f763`).
+- The eleven scout-UNSAT leaves were subsequently regenerated, structurally
+  checked, solved in LRAT mode, and replayed with pinned `lrat-check`; all eleven
+  returned `c VERIFIED`. Their durable compressed proofs certify exactly 90
+  parent/state incidences. The other 19 leaves, containing 170 incidences,
+  remain uncertified TIMEOUT frontier and are not claimed SAT or UNSAT.
+- Exact CNF/LRAT/xz identities and source bindings are in
+  `experiments/m6-b7-l6-state-certificates.tsv`; fresh replay is
+  `experiments/verify_m6_b7_l6_state_certificates.py`.
