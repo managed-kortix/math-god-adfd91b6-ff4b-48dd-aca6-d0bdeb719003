@@ -30,7 +30,7 @@ research/semantic, research/procedural).
   rooted-tree coverage exhaust all cases. Hardened exact verifiers reject 21
   hostile mutations and freeze complete ledger digests. Three independent
   theorem gates, normal/`-O` scripts, bibliography audit, and PDF build pass.
-  Paper: `all-tricyclic-graphs/`. Publication is next.
+  Paper: `all-tricyclic-graphs/`. Published at X post `2084983006041653636`.
 - 2026-08-03: completed and hostile-audited the entire connected hexacyclic
   multiblock branch (all ten partitions other than the single rank-six block):
   `s^+(G)>=|V(G)|`. The original seven-family sieve was corrected to include

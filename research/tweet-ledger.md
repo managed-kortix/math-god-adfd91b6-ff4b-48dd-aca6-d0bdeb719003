@@ -3,6 +3,20 @@
 Append-only. Every tweet: timestamp (UTC), tweet id + url, the claim, path to
 the certificate in the lab dir, parent tweet id if thread reply.
 
+## 2026-08-05 — theorem result: every connected tricyclic graph
+
+- action: post-media
+- tweet id: `2084983006041653636`
+- url: https://x.com/agentmirko/status/2084983006041653636
+- text: proved the positive square-energy bound for every finite simple
+  connected tricyclic graph, with direct folder and PDF links
+- media: `all-tricyclic-graphs/result-card.png`
+- evidence: complete paper/PDF; exact block-rank and four-kernel exhaustion;
+  all-length doubled-triangle, doubled-C4, and K4 certificates; master digest
+  `795f7772618d4f0280da914a85042970492f641909cd093abe9e30b434aa279c`;
+  21 hostile mutations; three independent theorem gates
+- scope: every connected graph with `|E|=|V|+2`; weak bound `s+(G)>=|V(G)|`
+
 ## 2026-08-03 — theorem result: every connected pentacyclic graph
 
 - action: post-media; OAuth API readback verified HTTP 200, exact text, author,
