@@ -17,6 +17,17 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-06: derived the exact order-eight rank-six frontier. The 325 kernels
+  have 1598512 physical parity rows and 1045292 automorphism orbits; tetrahedral
+  DNN closes 942304, leaving 102988 residual orbits and 1441832 canonical-plus-
+  coordinate targets. A sparse exact pipeline reproduces all counts in seconds,
+  uses support-only rows and binary XZ witness packs, and closed a 1400-target
+  smoke set exactly. Structural audit finds 33 simple kernels, only K744/K756
+  as signed-five-cycle equality candidates (12 orbits, 168 exact targets), and
+  classifies all 3594 supported edge deletions into 19 marked rank-five block
+  profiles. The remaining 1441664 search targets require full rational
+  generation or a marked rank-five one-credit theorem. Order-eight theorem is
+  open; no hexacyclic claim is made.
 - 2026-08-06: completed the order-seven part of the rank-six single-block
   hexacyclic frontier. Exact enumeration covers 314 kernels, 519453 parity
   orbits, and the complete 319202 canonical/coordinate target universe.

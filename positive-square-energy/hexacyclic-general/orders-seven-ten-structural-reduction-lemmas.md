@@ -231,6 +231,17 @@ with signs requires that the sign product around every singleton cycle be
 positive. Here the listed singleton supports are forests, so compatibility is
 automatic for arbitrary singleton parities.
 
+For order eight this projection has now been expanded into an exact finite
+packet ledger in
+`hexacyclic-general/order-eight-rank-six-structural-packets.md`. In particular,
+K744 and K756 give twelve physical-row equality orbits, and all 3,594 supported
+edge openings fall into nineteen exact marked block profiles. Among the 429
+marked edges of the 33 simple excess-two kernels, 420 deletions remain
+2-connected and only nine explicitly listed edges split into multiple cyclic
+blocks. The accompanying verifier checks these statements directly from the
+frozen kernel fixture. The ledger remains a reduction: it does not supply the
+unit spectral credit required in Lemma 3.
+
 ## Lemma 8 (frontier reduction after deletion packets)
 
 Fix a physical parity row. Assume:
