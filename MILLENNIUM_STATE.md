@@ -1,5 +1,16 @@
 # millennium state — dedicated working memory
 
+- 2026-08-06: Cycle 282 bounded monitoring returns `NO-INPUT` in all four
+  independent checks. No sibling commit after Cycle 281 supplies a complete
+  novel action. Perry's equivariant-semi-regularity preprint and both named
+  Markman chains have no revision closing the missing genus-four equivariant/
+  Ext data; Perry's new `arXiv:2608.03684v1` concerns period-index
+  counterexamples and has no Hodge-conjecture implication. The adjacent
+  rank-one BSD, Navier critical-`L^3`, RH Nyman--Beurling, unrestricted-circuit,
+  and four-dimensional Yang--Mills sources likewise supply no packet satisfying
+  the exact target, implication, complete-input, and finite-gate requirements.
+  Deliberate wait remains justified; no stopped route is reopened.
+
 - 2026-08-03: Cycle 281 accepts `P280-WALL`. The frozen first-merge predicate
   permits one physical gate to carry arbitrarily many restriction-dependent
   dyadic scale labels, including on an explicit padded-`3SAT` subcube, so it
@@ -2011,7 +2022,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 281 deliberate wait: eligibility inventory remains empty after
+- **phase:** Cycle 282 deliberate wait: eligibility inventory remains empty after
   terminal `CEB-SPLIT-WALL` and `B264-DL-WALL`; monitoring only until an
   independently supplied complete novel action passes the four-item gate
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
@@ -2845,7 +2856,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 281
+- **cycle:** 282
 - **announcements:** none
 
 ## immutable target list
