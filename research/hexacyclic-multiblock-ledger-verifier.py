@@ -32,7 +32,7 @@ SOURCES = {
     ),
     "rank4-ledger": (
         ROOT / "all-tetracyclic-graphs/paper.tex",
-        "1cd8bc9af6c8ed6ad3c3b99e967b4712dedfcc561f324d991b65798821f8c26b",
+        "ae4b50ba72d1e3e66b2fe8aa95e4851397f1b805a27f904561da68ea4fa6b2da",
     ),
     "k5e-ledger": (
         ROOT / "positive-square-energy/pentacyclic-general/"

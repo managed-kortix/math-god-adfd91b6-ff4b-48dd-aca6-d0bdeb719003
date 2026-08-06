@@ -17,6 +17,21 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-06: advanced the sole remaining hexacyclic frontier, one rank-six
+  block of branch order 7--10. For order seven, exact enumeration gives 314
+  kernels, 700792 physical parity rows, 519453 automorphism orbits, 494899
+  coarse tetrahedral DNN closures, 24554 residual orbits, and a complete
+  319202-target canonical-plus-coordinate frontier. A chunkable exact rational
+  generator and fail-closed verifier are in place, but theorem coverage remains
+  incomplete. Supportwise reduction leaves 19695 antichain rows and 37
+  unproved structural packet candidates. New structural lemmas show orders
+  7--10 have only 93 simple all-unit kernels and identify six signed five-cycle
+  equality-kernel candidates; opening a subdivided edge requires a marked
+  rank-five packet with one unit of credit, so qualitative rank-five positivity
+  cannot be spent. Existing rank-six orders 2--6 and the full hexacyclic
+  multiblock theorem re-audit cleanly after one legitimate rank-four digest
+  update. Order-seven theorem remains open; next step is distributed exact
+  rational closure of the 319202 frontier plus audited structural residuals.
 - 2026-08-05: hardened all seven direct tetracyclic kernel verifiers against
   Python's permissive numeric coercions. Exact integer fields now require
   `type(value) is int`; rational fields accept only validated `Fraction`
