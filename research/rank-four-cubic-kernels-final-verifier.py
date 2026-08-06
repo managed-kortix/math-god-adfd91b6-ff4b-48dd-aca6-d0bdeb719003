@@ -46,6 +46,11 @@ def require(condition, message):
         raise RuntimeError(message)
 
 
+def exact_integer(value, label):
+    require(type(value) is int, label)
+    return value
+
+
 def load_json(path):
     require(path.is_file(), f"missing fixture dependency: {path}")
     value = json.loads(path.read_text(encoding="ascii"))
@@ -94,6 +99,8 @@ def gram3(off_diagonal):
 
 
 def canonical_lengths(multiplicity, odd):
+    exact_integer(multiplicity, "path multiplicity is not an integer")
+    exact_integer(odd, "path odd count is not an integer")
     return {
         (0, 0): (), (1, 0): (2,), (1, 1): (1,),
         (2, 0): (2, 2), (2, 1): (1, 2), (2, 2): (1, 3),
@@ -116,6 +123,10 @@ def audit_kernel14(certificates=KERNEL14_CERTIFICATES):
     covered = set()
     determinants = []
     for row, (epsilons, off_diagonal) in zip(KERNEL14_ROWS, certificates):
+        require(all(type(value) is int for value in epsilons),
+                "kernel-14 parity signs are not integers")
+        require(all(isinstance(value, Fraction) for value in off_diagonal),
+                "kernel-14 Gram entries are not exact fractions")
         ledger = path_ledger(KERNEL14, row)
         require(tuple(name for name, _ in ledger) == KERNEL14_PATHS,
                 "kernel-14 physical coordinate order changed")
@@ -242,7 +253,15 @@ def hostile_self_checks(kernel14_covered):
     frontier["records"].pop()
     expect_rejected(lambda: audit_integrated_frontiers(kernel14_covered, frontier),
                     "deleted strict frontier")
-    return 4
+    for label, value in (("boolean exact payload", True),
+                         ("floating exact payload", 1.0),
+                         ("nonintegral exact payload", Fraction(1, 2))):
+        changed = list(deepcopy(KERNEL14_CERTIFICATES))
+        epsilons = list(changed[0][0])
+        epsilons[0] = value
+        changed[0] = (tuple(epsilons), changed[0][1])
+        expect_rejected(lambda changed=changed: audit_kernel14(tuple(changed)), label)
+    return 7
 
 
 def report(dependencies, targets, strict, equalities, determinants,
@@ -283,7 +302,7 @@ def main():
     targets, strict, equalities = audit_integrated_frontiers(kernel14_covered)
     orbit_size, kernel17_targets, kernel17_rows = audit_kernel17_all_length()
     mutations = hostile_self_checks(kernel14_covered)
-    require(mutations == 4, "hostile mutation count changed")
+    require(mutations == 7, "hostile mutation count changed")
     output = report(len(dependencies), targets, strict, equalities, determinants,
                     orbit_size, kernel17_targets, kernel17_rows, mutations)
     if not args.emit and sys.flags.optimize == 0:

@@ -1,4 +1,8 @@
-proved the positive square-energy bound for every finite simple connected tetracyclic graph.
+AI-generated result: the manuscript proves the weak positive square-energy bound s+(G) >= |V(G)| for every finite simple connected graph with |E(G)| = |V(G)| + 3. It does not claim strictness, equality classification, edge monotonicity, or a result for denser graphs.
+
+This is the tetracyclic frontier of the AKMPZ conjecture (arXiv:2506.07264) and uses the companion tricyclic theorem and exact local certificate audits. No human review, independent verification, peer review, or external publication is claimed.
 
 folder: https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/tree/main/all-tetracyclic-graphs
 paper: https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/all-tetracyclic-graphs/paper.pdf
+
+tricyclic dependency: https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/tree/main/all-tricyclic-graphs

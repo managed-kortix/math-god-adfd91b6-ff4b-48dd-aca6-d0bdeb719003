@@ -47,6 +47,26 @@ def require(condition, message):
         raise RuntimeError(message)
 
 
+def exact_integer(value, label):
+    require(type(value) is int, label)
+    return value
+
+
+def exact_fraction_text(value, label):
+    require(type(value) is str, label)
+    try:
+        return Fraction(value)
+    except (TypeError, ValueError, ZeroDivisionError) as error:
+        raise RuntimeError(label) from error
+
+
+def exact_fraction_pair(value, label):
+    require(isinstance(value, list) and len(value) == 2
+            and all(type(item) is int for item in value), label)
+    require(value[1] != 0, label)
+    return Fraction(value[0], value[1])
+
+
 class Qsqrt3:
     __slots__ = ("rational", "radical")
 
@@ -264,7 +284,9 @@ def audit(payload=None, expected_digest=EXPECTED_SHA256):
         require(set(record) == {"kernel", "row", "frontier_coordinate", "lengths",
                                 "branches", "internals", "cost"},
                 "frontier record schema changed")
-        kernel_number = record["kernel"]
+        kernel_number = exact_integer(record["kernel"], "kernel number is not an integer")
+        require(all(type(value) is int for value in record["row"]),
+                "physical row is not integral")
         row = tuple(record["row"])
         coordinate = record["frontier_coordinate"]
         key = (kernel_number, row, coordinate)
@@ -281,11 +303,15 @@ def audit(payload=None, expected_digest=EXPECTED_SHA256):
             paths[coordinate] = (*path[:-1], path[-1] + 2)
         require(record["lengths"] == [path[4] for path in paths],
                 "frontier length vector changed")
-        branches = tuple(Fraction(value) for value in record["branches"])
-        internals = tuple(tuple(Fraction(value) for value in path)
+        require(all(type(value) is int for value in record["lengths"]),
+                "frontier lengths are not integral")
+        branches = tuple(exact_fraction_text(value, "branch parameter is not exact text")
+                         for value in record["branches"])
+        internals = tuple(tuple(exact_fraction_text(
+            value, "internal parameter is not exact text") for value in path)
                           for path in record["internals"])
         actual = exact_cost(tuple(paths), branches, internals)
-        expected = Fraction(*record["cost"])
+        expected = exact_fraction_pair(record["cost"], "cost is not an integer fraction pair")
         require(actual == expected, "independent exact Fraction cost mismatch")
         require(actual < 3, "frontier certificate exceeds strict DNN budget")
     require(tuple(keys) == expected_keys(), "frontier keys are not exact and ordered")
@@ -353,7 +379,13 @@ def hostile_self_checks():
     angle_mutation["vectors"] = tuple(vectors)
     expect_rejected(lambda: audit_kernel9_row11111(angle_mutation),
                     "changed row 11111 canonical angle")
-    return len(mutations) + 2
+    for label, value in (("boolean exact payload", True),
+                         ("floating exact payload", 1.0),
+                         ("nonintegral exact payload", Fraction(1, 2))):
+        candidate = deepcopy(baseline)
+        candidate["records"][0]["cost"][0] = value
+        expect_rejected(lambda candidate=candidate: audit(candidate), label)
+    return len(mutations) + 5
 
 
 def report(digest, reused, row11111_total, mutations):
@@ -391,7 +423,7 @@ def main():
     reused = audit_kernel9_reuse()
     row11111_total = audit_kernel9_row11111()
     mutations = hostile_self_checks()
-    require(mutations == 10, "hostile mutation count changed")
+    require(mutations == 13, "hostile mutation count changed")
     output = report(digest, reused, row11111_total, mutations)
     if not args.emit and sys.flags.optimize == 0:
         require(optimized_output() == output, "normal and python -O output differ")

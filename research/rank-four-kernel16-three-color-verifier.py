@@ -9,6 +9,7 @@ checks the exhaustive census against immutable ledgers and rejects mutations.
 from collections import Counter
 from copy import deepcopy
 from hashlib import sha256
+from fractions import Fraction
 from itertools import combinations, permutations, product
 
 
@@ -46,9 +47,10 @@ def kernel_edges():
 
 
 def color_score(row, colors):
-    require(len(row) == 9 and all(bit in (0, 1) for bit in row),
+    require(len(row) == 9 and all(type(bit) is int and bit in (0, 1) for bit in row),
             "malformed physical row")
-    require(len(colors) == 6 and all(color in (0, 1, 2) for color in colors),
+    require(len(colors) == 6
+            and all(type(color) is int and color in (0, 1, 2) for color in colors),
             "malformed three-color map")
     for odd, (u, v) in zip(row, EDGES):
         if odd and colors[u] == colors[v]:
@@ -156,13 +158,17 @@ def hostile_self_checks():
         expect_rejected(lambda changes=deepcopy(changes): audit(**changes), label)
     malformed = (0,) * 8 + (2,)
     expect_rejected(lambda: optimize_row(malformed), "nonbinary physical row")
-    return len(mutations) + 1
+    for label, value in (("boolean physical row", True),
+                         ("floating physical row", 1.0),
+                         ("nonintegral physical row", Fraction(1, 2))):
+        expect_rejected(lambda value=value: optimize_row((0,) * 8 + (value,)), label)
+    return len(mutations) + 4
 
 
 def main():
     records, representatives, histogram, digest = audit()
     mutations = hostile_self_checks()
-    require(mutations == 4, "hostile mutation count changed")
+    require(mutations == 7, "hostile mutation count changed")
     print("kernel16 K_3,3 three-color audit: exact exhaustive proof passed")
     print(f"physical_parity_rows: {len(records)} (=2^9; not 3^9)")
     print(f"automorphism_orbits: {len(representatives)}")

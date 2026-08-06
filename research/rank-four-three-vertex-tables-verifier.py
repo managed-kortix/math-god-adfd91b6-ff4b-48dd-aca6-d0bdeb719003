@@ -41,8 +41,13 @@ def require(condition, message):
         raise RuntimeError(message)
 
 
+def exact_fraction(value, label):
+    require(type(value) is int or isinstance(value, Fraction), label)
+    return Fraction(value)
+
+
 def correlation(t):
-    t = Fraction(t)
+    t = exact_fraction(t, "correlation parameter is not exact rational")
     return (1 - 6 * t * t + t ** 4) / (1 + t * t) ** 2
 
 
@@ -54,8 +59,10 @@ def determinant3(off_diagonal):
 def exact_excess(kernel, odd_counts, parameters):
     total = Fraction(0)
     for multiplicity, odd, t in zip(kernel, odd_counts, parameters):
-        t = Fraction(t)
-        require(0 <= odd <= multiplicity, "physical odd count is out of range")
+        t = exact_fraction(t, "DNN parameter is not exact rational")
+        require(type(multiplicity) is int and type(odd) is int
+                and 0 <= odd <= multiplicity,
+                "physical odd count is out of range")
         total += (multiplicity - odd) * 2 * t * t
         if odd:
             require(t != 0, "odd canonical path has infinite cost")
@@ -166,7 +173,22 @@ def hostile_self_checks():
     changed[(2, 2, 2)] = tuple(rows)
     expect_rejected(lambda: audit(changed), "changed rational certificate")
     expect_rejected(lambda: audit(LOW_TABLES, "0" * 64), "digest mutation")
-    return 3
+    for label, value in (("boolean exact payload", True),
+                         ("floating exact payload", 0.5),
+                         ("nonintegral count payload", Fraction(1, 2))):
+        changed = deepcopy(LOW_TABLES)
+        rows = list(changed[(1, 2, 3)])
+        if label == "nonintegral count payload":
+            row = list(rows[0][0])
+            row[0] = value
+            rows[0] = (tuple(row), rows[0][1])
+        else:
+            parameters = list(rows[1][1])
+            parameters[0] = value
+            rows[1] = (rows[1][0], tuple(parameters))
+        changed[(1, 2, 3)] = tuple(rows)
+        expect_rejected(lambda changed=changed: audit(changed), label)
+    return 6
 
 
 def report(payload, digest, mutations):
@@ -198,7 +220,7 @@ def main():
     args = parser.parse_args()
     payload, digest = audit()
     mutations = hostile_self_checks()
-    require(mutations == 3, "hostile mutation count changed")
+    require(mutations == 6, "hostile mutation count changed")
     output = report(payload, digest, mutations)
     if not args.emit and sys.flags.optimize == 0:
         require(optimized_output() == output, "normal and python -O output differ")

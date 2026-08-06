@@ -37,6 +37,30 @@ def require(condition, message):
         raise RuntimeError(message)
 
 
+def require_integral_numbers(value, label="sieve payload"):
+    if isinstance(value, dict):
+        for key, item in value.items():
+            if key in ("sieve_residual", "in_old_96"):
+                require(type(item) is bool,
+                        f"{label} contains a malformed Boolean field")
+            else:
+                require_integral_numbers(item, label)
+    elif isinstance(value, (list, tuple)):
+        for item in value:
+            require_integral_numbers(item, label)
+    elif isinstance(value, (float, Fraction)):
+        raise RuntimeError(f"{label} contains a non-integer numeric value")
+    elif isinstance(value, bool):
+        return
+    elif isinstance(value, int):
+        require(type(value) is int, f"{label} contains a non-integer numeric value")
+
+
+def require_exact_integer(value, label):
+    require(type(value) is int, label)
+    return value
+
+
 def polynomial(value):
     return value ** 3 - 27 * value ** 2 + 99 * value - 9
 
@@ -233,6 +257,7 @@ def serialize(payload):
 
 def audit(payload=None, expected_digest=EXPECTED_SHA256):
     fixture = load_json(FIXTURE) if payload is None else payload
+    require_integral_numbers(fixture)
     generated = regenerate_payload()
     require(fixture == generated, "sieve fixture differs from exact regeneration")
     require(tuple(row["physical_rows"] for row in fixture["kernels"])
@@ -246,6 +271,14 @@ def audit(payload=None, expected_digest=EXPECTED_SHA256):
     require(fixture["residual_total"] == 8, "residual total changed")
     require(fixture["old_96_intersection_total"] == 2,
             "old-96 intersection total changed")
+    for record in fixture["records"]:
+        require_exact_integer(record["kernel"], "kernel is not an integer")
+        require(all(type(value) is int for value in record["row"]),
+                "physical row is not integral")
+        require(all(type(value) is int for value in record["minimum_cost"]),
+                "minimum cost is not integral")
+        require(all(type(value) is int for value in record["first_witness"]),
+                "color witness is not integral")
     keys = [(record["kernel"], tuple(record["row"])) for record in fixture["records"]]
     require(len(keys) == len(set(keys)) == 378, "record keys are not exhaustive")
     digest = hashlib.sha256(serialize(fixture).encode("ascii")).hexdigest()
@@ -286,7 +319,13 @@ def hostile_self_checks():
     for label, candidate in mutations:
         expect_rejected(lambda candidate=candidate: audit(candidate), label)
     expect_rejected(lambda: audit(baseline, "0" * 64), "digest mutation")
-    return len(mutations) + 1
+    for label, value in (("boolean exact payload", True),
+                         ("floating exact payload", 1.0),
+                         ("nonintegral exact payload", Fraction(1, 2))):
+        candidate = deepcopy(baseline)
+        candidate["records"][0]["minimum_cost"][0] = value
+        expect_rejected(lambda candidate=candidate: audit(candidate), label)
+    return len(mutations) + 4
 
 
 def optimized_output():
@@ -321,7 +360,7 @@ def main():
         return 0
     digest = audit()
     mutations = hostile_self_checks()
-    require(mutations == 9, "hostile mutation count changed")
+    require(mutations == 12, "hostile mutation count changed")
     output = report(digest, mutations)
     if not args.emit and sys.flags.optimize == 0:
         require(optimized_output() == output, "normal and python -O output differ")

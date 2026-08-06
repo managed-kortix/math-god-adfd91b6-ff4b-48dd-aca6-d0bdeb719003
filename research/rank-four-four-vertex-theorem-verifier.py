@@ -28,6 +28,11 @@ def require(condition, message):
         raise RuntimeError(message)
 
 
+def exact_int(value, label):
+    require(type(value) is int, label)
+    return value
+
+
 def load(name, filename):
     spec = importlib.util.spec_from_file_location(name, HERE / filename)
     require(spec is not None and spec.loader is not None,
@@ -205,10 +210,13 @@ def verify_gram_classes(records=GRAM_CLASSES):
                        "adjacent": PAIRS.index((0, 2))}
     for record in records:
         require(set(record) == required, "Gram-class schema changed")
+        denominator = exact_int(record["denominator"], "angle denominator is not an integer")
+        require(all(type(value) is int for value in record["angles"]),
+                "planar angles are not integers")
         key = (record["extra"], record["relation"])
         require(key not in actual_keys, "duplicate Gram class")
         actual_keys.add(key)
-        require(record["denominator"] in (3, 5, 7),
+        require(denominator in (3, 5, 7),
                 "nonstandard planar angle denominator")
         require(len(record["angles"]) == 4 and record["angles"][0] == 0,
                 "planar vector witness malformed")
@@ -355,6 +363,10 @@ def hostile_self_checks():
     mutate("lost planar vertex", lambda rows: rows[0].__setitem__("angles", (0, 3, 6)))
     mutate("false high-cost vectors", lambda rows: rows[0].__setitem__("angles", (0, 0, 0, 0)))
     mutate("extra field", lambda rows: rows[0].__setitem__("claim", "trusted"))
+    mutate("boolean angle", lambda rows: rows[0].__setitem__("angles", (False, 3, 6, 7)))
+    mutate("floating angle", lambda rows: rows[0].__setitem__("angles", (0, 3.0, 6, 7)))
+    mutate("nonintegral denominator", lambda rows: rows[0].__setitem__(
+        "denominator", Fraction(5, 2)))
     for label, records in mutations:
         expect_rejected(lambda records=records: audit(records), label)
     return len(mutations)
@@ -364,7 +376,7 @@ def main():
     digest, counts, bounds = audit()
     require(digest == EXPECTED_SHA256, "exact certificate digest changed")
     mutations = hostile_self_checks()
-    require(mutations == 8, "hostile mutation count changed")
+    require(mutations == 11, "hostile mutation count changed")
     print("four-vertex rank-four exact theorem audit passed")
     print("physical_rows: 342 = 270 base + 70 patch + 2 discharged")
     print("residual_binary_states: 128; distinguished23_stabilizer_orbits: 56")

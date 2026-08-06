@@ -17,6 +17,45 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-05: hardened all seven direct tetracyclic kernel verifiers against
+  Python's permissive numeric coercions. Exact integer fields now require
+  `type(value) is int`; rational fields accept only validated `Fraction`
+  objects, canonical rational text, or integer numerator/denominator pairs.
+  Added hostile boolean, float, and nonintegral rational mutations throughout.
+  Expanded the master digest from seven direct files/outputs to the full
+  transitive closure: loaded modules, all fixtures, nested verifier bytes, and
+  nested outputs. The new transitive pin is `9fa7bdf4...`; historical
+  `38b93ad6...` and reconciled direct `fd5fe7d0...` remain explicit provenance.
+- 2026-08-05: reconciled the tetracyclic master manifest drift exactly. The
+  old `38b93ad6...` manifest is reproduced by the historical census file/output
+  digests; replacing only those two fields by the expanded census digests
+  reproduces `fd5fe7d0...`. The canonical 17-kernel payload digest remains
+  `d89e6e60...`; counts, labelled counts, kernel fixture, and simplicity costs
+  are unchanged. The expansion adds pinned automorphism ledgers, explicit
+  minimum simple-subdivision witnesses, per-kernel output, and two hostile
+  mutations (9 to 11), so no acceptance condition was weakened. Deliberately
+  updated the master pin to `fd5fe7d0...`, embedded old/new digest and mutation
+  provenance, and restored green normal/`-O` audits.
+- 2026-08-05: re-audited the requested tetracyclic target against the proved
+  packet library. The exhaustive positive block-rank partitions are
+  `1^4`, `2+1+1`, `2+2`, `3+1`, and `4`; the coarser labels cactus,
+  tricyclic-plus-cycle, bicyclic-plus-bicyclic, and one rank-four block are
+  valid only if tricyclic-plus-cycle retains both `2+1+1` and `3+1` as
+  separate ownership rows. Sharp block DNN closes the direct rows. The exact
+  residuals close by the established tetracyclic-cactus packets, the two
+  theta-plus-two-cycle territory packets, the two-diamond opening, and the
+  canonical rank-three-plus-cycle DNN/induced packets. A single rank-four
+  block suppresses to the independently regenerated 17 kernels with order
+  counts `1,2,5,4,5`, all already closed for arbitrary subdivisions and rooted
+  trees. Updated `positive-square-energy/tetracyclic-general/prompt.md` from a
+  stale bottleneck contract to the exact closure/status record. The theorem
+  remains COMPLETE in `all-tetracyclic-graphs/`; do not reopen it or use an
+  unquantified tricyclic theorem to pay a deleted tree. Artifact status is
+  fail-closed: all seven direct dependencies pass in normal and `-O` modes,
+  but the master now computes manifest digest `fd5fe7d0...` rather than its
+  historical pin `38b93ad6...`. This lock drift is not a mathematical
+  residual, but the master must not be called green until independently
+  reconciled.
 - 2026-08-05: completed `all-tricyclic-graphs`: every finite simple connected
   graph with `|E|=|V|+2` satisfies `s+(G)>=|V(G)|`. Block ranks split as
   `1+1+1`, `2+1`, or one rank-three block. The first two are closed by the

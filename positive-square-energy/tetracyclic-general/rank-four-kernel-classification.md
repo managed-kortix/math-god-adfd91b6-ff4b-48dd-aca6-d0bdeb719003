@@ -27,7 +27,14 @@ lexicographic upper-triangle order
 `01,02,...,0(n-1),12,...,(n-2)(n-1)`.
 
 The displayed representative is the lexicographically least such vector over
-all vertex labellings.  The final column is its simplicity cost
+all vertex labellings.  The column `|Aut_V|` is the order of the usual
+vertex-permutation automorphism group preserving multiplicities.  The column
+`|Aut_I|` also permits arbitrary permutations of the indistinguishable edge
+copies within each parallel class, so
+
+`|Aut_I(K)|=|Aut_V(K)| product_{u<v} m_uv!`.
+
+The final column is its simplicity cost
 
 `sigma(K)=sum_{u<v} max(m_uv-1,0)=|E(K)|-|supp(K)|`.
 
@@ -35,25 +42,25 @@ This is the minimum number of degree-two subdivision vertices required to
 turn all parallel kernel edges into internally disjoint paths in a simple
 subdivision: at most one edge in each parallel class can remain direct.
 
-| No. | `n` | degree multiset | canonical upper triangle | `sigma` |
-|---:|---:|:---|:---|---:|
-| 1 | 2 | `5,5` | `5` | 4 |
-| 2 | 3 | `5,4,3` | `1,2,3` | 3 |
-| 3 | 3 | `4,4,4` | `2,2,2` | 3 |
-| 4 | 4 | `5,3,3,3` | `0,1,2,1,2,1` | 2 |
-| 5 | 4 | `4,4,3,3` | `0,1,2,2,1,1` | 2 |
-| 6 | 4 | `4,4,3,3` | `0,1,2,2,2,0` | 3 |
-| 7 | 4 | `4,4,3,3` | `0,1,2,3,1,0` | 3 |
-| 8 | 4 | `4,4,3,3` | `1,1,1,1,1,2` | 1 |
-| 9 | 5 | `4,3,3,3,3` | `0,0,1,2,1,0,2,2,0,0` | 3 |
-| 10 | 5 | `4,3,3,3,3` | `0,0,1,2,1,1,1,1,1,0` | 1 |
-| 11 | 5 | `4,3,3,3,3` | `0,0,1,2,1,1,1,2,0,0` | 2 |
-| 12 | 5 | `4,3,3,3,3` | `0,1,1,1,1,1,1,0,1,1` | 0 |
-| 13 | 6 | `3,3,3,3,3,3` | `0,0,0,1,2,0,1,1,1,2,1,0,0,0,0` | 2 |
-| 14 | 6 | `3,3,3,3,3,3` | `0,0,0,1,2,0,1,2,0,2,0,1,0,0,0` | 3 |
-| 15 | 6 | `3,3,3,3,3,3` | `0,0,0,1,2,1,1,0,1,1,1,0,1,0,0` | 1 |
-| 16 | 6 | `3,3,3,3,3,3` | `0,0,1,1,1,0,1,1,1,1,1,1,0,0,0` | 0 |
-| 17 | 6 | `3,3,3,3,3,3` | `0,0,1,1,1,1,0,1,1,1,0,1,1,0,0` | 0 |
+| No. | `n` | degree multiset | canonical upper triangle | `|Aut_V|` | `|Aut_I|` | `sigma` |
+|---:|---:|:---|:---|---:|---:|---:|
+| 1 | 2 | `5,5` | `5` | 2 | 240 | 4 |
+| 2 | 3 | `5,4,3` | `1,2,3` | 1 | 12 | 3 |
+| 3 | 3 | `4,4,4` | `2,2,2` | 6 | 48 | 3 |
+| 4 | 4 | `5,3,3,3` | `0,1,2,1,2,1` | 2 | 8 | 2 |
+| 5 | 4 | `4,4,3,3` | `0,1,2,2,1,1` | 2 | 8 | 2 |
+| 6 | 4 | `4,4,3,3` | `0,1,2,2,2,0` | 2 | 16 | 3 |
+| 7 | 4 | `4,4,3,3` | `0,1,2,3,1,0` | 2 | 24 | 3 |
+| 8 | 4 | `4,4,3,3` | `1,1,1,1,1,2` | 4 | 8 | 1 |
+| 9 | 5 | `4,3,3,3,3` | `0,0,1,2,1,0,2,2,0,0` | 2 | 16 | 3 |
+| 10 | 5 | `4,3,3,3,3` | `0,0,1,2,1,1,1,1,1,0` | 2 | 4 | 1 |
+| 11 | 5 | `4,3,3,3,3` | `0,0,1,2,1,1,1,2,0,0` | 1 | 4 | 2 |
+| 12 | 5 | `4,3,3,3,3` | `0,1,1,1,1,1,1,0,1,1` | 8 | 8 | 0 |
+| 13 | 6 | `3,3,3,3,3,3` | `0,0,0,1,2,0,1,1,1,2,1,0,0,0,0` | 4 | 16 | 2 |
+| 14 | 6 | `3,3,3,3,3,3` | `0,0,0,1,2,0,1,2,0,2,0,1,0,0,0` | 6 | 48 | 3 |
+| 15 | 6 | `3,3,3,3,3,3` | `0,0,0,1,2,1,1,0,1,1,1,0,1,0,0` | 4 | 8 | 1 |
+| 16 | 6 | `3,3,3,3,3,3` | `0,0,1,1,1,0,1,1,1,1,1,1,0,0,0` | 72 | 72 | 0 |
+| 17 | 6 | `3,3,3,3,3,3` | `0,0,1,1,1,1,0,1,1,1,0,1,1,0,0` | 12 | 12 | 0 |
 
 For the published checksum, relabel each row first by nondecreasing vertex
 degree and then by the least upper-triangle vector among degree-preserving
@@ -123,9 +130,12 @@ composition of `n+3` over the `n choose 2` unordered pairs.  It then checks
 minimum degree, connectivity after deletion of each vertex, and all `n!`
 vertex relabellings.  It recovers 1, 7, 54, 255, and 550 labelled survivors,
 which collapse to the 17 canonical classes above.  The script also checks the
-rank and degree-excess identities, every simplicity cost, the exact list and
+rank and degree-excess identities, every simplicity cost, both automorphism
+orders, explicit minimum simple-subdivision witnesses, the exact list and
 checksum, hostile mutations, and identical behavior with Python assertions
-disabled.
+disabled.  This is a bounded incidence-equation enumeration forced by (1),
+not a census of simple graphs through some chosen finite order; subdivision
+path lengths remain arbitrary.
 
 Run it with
 
