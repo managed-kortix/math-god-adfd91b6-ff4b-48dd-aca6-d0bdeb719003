@@ -17,6 +17,20 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-06: completed the order-seven part of the rank-six single-block
+  hexacyclic frontier. Exact enumeration covers 314 kernels, 519453 parity
+  orbits, and the complete 319202 canonical/coordinate target universe.
+  Deterministic exact rational Gram chunks certify 319163 targets; the last 39
+  on K469, K511, K534, and K548 have exact cost-five PSD templates
+  (tetrahedron-plus-apex or signed five-cycle). All 319202 targets now have
+  exact certificates, with explicit same-parity length extension and affine
+  rooted-tree lift. The 144MB canonical JSON corpus is pinned and distributed
+  as six deterministic XZ artifacts totaling about 45MB; both compressed and
+  decompressed manifests are locked. Hostile audit repaired partial-audit exit
+  behavior, chunk/engine digest scope, NaN/Inf acceptance, exact integer types,
+  and denominator validation. Equality verifier passes normal/`-O` and reports
+  theorem status PROVED. Rank-six kernels orders 2--7 are now complete (645
+  kernels total); only branch orders 8--10 remain for all hexacyclic graphs.
 - 2026-08-06: advanced the sole remaining hexacyclic frontier, one rank-six
   block of branch order 7--10. For order seven, exact enumeration gives 314
   kernels, 700792 physical parity rows, 519453 automorphism orbits, 494899

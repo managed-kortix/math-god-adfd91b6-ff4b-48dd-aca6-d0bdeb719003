@@ -13,7 +13,9 @@ import hashlib
 import importlib.util
 import itertools
 import json
+import math
 import sys
+import time
 from fractions import Fraction
 from pathlib import Path
 
@@ -31,13 +33,39 @@ BUDGET = Fraction(5)
 PAIRS = tuple(itertools.combinations(range(ORDER), 2))
 
 
+def color_patterns(prefix=(0,)):
+    if len(prefix) == ORDER:
+        yield prefix
+        return
+    for color in range(min(3, max(prefix) + 1) + 1):
+        yield from color_patterns(prefix + (color,))
+
+
+COLORINGS = tuple(color_patterns())
+TETRA_VECTORS = (
+    (1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0),
+    (-1.0 / 3.0, 2.0 * math.sqrt(2.0) / 3.0, 0.0, 0.0, 0.0, 0.0, 0.0),
+    (-1.0 / 3.0, -math.sqrt(2.0) / 3.0, math.sqrt(2.0 / 3.0), 0.0, 0.0, 0.0, 0.0),
+    (-1.0 / 3.0, -math.sqrt(2.0) / 3.0, -math.sqrt(2.0 / 3.0), 0.0, 0.0, 0.0, 0.0),
+)
+
+
 def require(condition, message):
     if not condition:
         raise RuntimeError(message)
 
 
 def canonical_bytes(payload):
-    return (json.dumps(payload, sort_keys=True, separators=(",", ":")) + "\n").encode("ascii")
+    return (json.dumps(payload, sort_keys=True, separators=(",", ":"), allow_nan=False)
+            + "\n").encode("ascii")
+
+
+def reject_constant(value):
+    raise ValueError(f"nonstandard JSON constant: {value}")
+
+
+def load_json(raw):
+    return json.loads(raw.decode("ascii"), parse_constant=reject_constant)
 
 
 def load_engine():
@@ -53,7 +81,8 @@ def load_census():
     raw = CENSUS.read_bytes()
     require(hashlib.sha256(raw).hexdigest() == EXPECTED_CENSUS_SHA256,
             "order-seven census digest changed")
-    payload = json.loads(raw.decode("ascii"))
+    payload = load_json(raw)
+    require(raw == canonical_bytes(payload), "census JSON is not canonical")
     require(payload["full_theorem"] is False and payload["kernel_total"] == 314,
             "census scope changed")
     require(payload["coarse_residual_total"] == 24554 and
@@ -71,9 +100,37 @@ def parse_frontiers(text):
     return result
 
 
-def exact_record(engine, kernel, source, source_index, frontier, vectors, value, denominators):
+def tetra_cost(kernel, row, coloring):
+    total = 0
+    for (u, v), multiplicity, odd in zip(PAIRS, kernel, row):
+        if coloring[u] == coloring[v]:
+            if odd:
+                return None
+            continue
+        if odd:
+            total += 10 + 5 * odd
+        total += 18 * (multiplicity - odd)
+    return total
+
+
+def tetrahedral_start(kernel, row):
+    coloring = min((coloring for coloring in COLORINGS
+                    if tetra_cost(kernel, row, coloring) is not None),
+                   key=lambda coloring: tetra_cost(kernel, row, coloring))
+    vectors = []
+    for vertex, color in enumerate(coloring):
+        vector = list(TETRA_VECTORS[color])
+        vector[vertex] += 0.08
+        norm = math.sqrt(sum(value * value for value in vector))
+        vectors.append(tuple(value / norm for value in vector))
+    return tuple(vectors)
+
+
+def exact_record(engine, kernel, source, source_index, frontier, vectors, value, denominators,
+                 witness=None):
     paths = engine.path_ledger(kernel, tuple(source["row"]), frontier)
-    witness = engine.rationalize(paths, vectors, denominators)
+    if witness is None:
+        witness = engine.rationalize(paths, vectors, denominators)
     return {
         "source_index": source_index,
         "kernel": source["kernel"],
@@ -97,22 +154,36 @@ def run(args):
     denominators = tuple(int(value) for value in args.denominators.split(","))
     require(denominators and all(value > 0 for value in denominators), "bad denominators")
     records = []
+    started = time.perf_counter()
     for local_index, source in enumerate(selected):
         source_index = args.start + local_index
         kernel = kernels[source["kernel"]]
         canonical_paths = engine.path_ledger(kernel, tuple(source["row"]))
+        tetra = tetrahedral_start(kernel, tuple(source["row"]))
         canonical_value, canonical_vectors = engine.optimize(
-            canonical_paths, args.seed + 1009 * source_index, args.restarts, args.iterations)
+            canonical_paths, args.seed + 1009 * source_index, args.restarts, args.iterations,
+            warm=(tetra,))
+        previous_vectors = canonical_vectors
         for frontier in frontiers:
+            paths = (canonical_paths if frontier is None else
+                     engine.path_ledger(kernel, tuple(source["row"]), frontier))
             if frontier is None:
                 value, vectors = canonical_value, canonical_vectors
+                witness = engine.rationalize(paths, vectors, denominators)
             else:
-                paths = engine.path_ledger(kernel, tuple(source["row"]), frontier)
-                value, vectors = engine.optimize(
-                    paths, args.seed + 1009 * source_index + frontier + 1,
-                    args.frontier_restarts, args.iterations, warm=(canonical_vectors,))
+                vectors = previous_vectors
+                value = engine.objective(paths, vectors)
+                witness = engine.rationalize(paths, vectors, denominators)
+                if witness is None:
+                    warm = ((canonical_vectors,) if previous_vectors is canonical_vectors else
+                            (canonical_vectors, previous_vectors))
+                    value, vectors = engine.optimize(
+                        paths, args.seed + 1009 * source_index + frontier + 1,
+                        args.frontier_restarts, args.frontier_iterations, warm=warm)
+                    witness = engine.rationalize(paths, vectors, denominators)
+                    previous_vectors = vectors
             records.append(exact_record(engine, kernel, source, source_index, frontier,
-                                        vectors, value, denominators))
+                                        vectors, value, denominators, witness))
         if args.progress:
             exact = sum(row["exact_dnn_le_5"] for row in records)
             print(f"[{local_index + 1}/{len(selected)}] K{source['kernel']} "
@@ -132,6 +203,15 @@ def run(args):
         "target_total": len(records),
         "exact_certificate_total": sum(row["exact_dnn_le_5"] for row in records),
         "finite_unresolved_total": sum(not row["exact_dnn_le_5"] for row in records),
+        "elapsed_seconds": float(f"{time.perf_counter() - started:.6f}"),
+        "search": {
+            "canonical_restarts": args.restarts,
+            "canonical_iterations": args.iterations,
+            "frontier_restarts": args.frontier_restarts,
+            "frontier_iterations": args.frontier_iterations,
+            "tetrahedral_warm_start": True,
+            "coordinate_warm_start": True,
+        },
         "complete_source_cover": (args.start == 0 and len(selected) == len(residuals)
                                   and frontiers == (None, *range(PATH_COUNT))),
         "records": records,
@@ -174,7 +254,19 @@ def verify(payload):
         require(record["exact_dnn_le_5"] == (witness is not None), "witness status changed")
         if witness is None:
             continue
-        parameters = tuple(tuple(fraction(value, "branch") for value in row)
+        require(type(witness) is dict and set(witness) ==
+                {"denominator", "cost", "branches", "internals"},
+                "witness envelope changed")
+        denominator = witness["denominator"]
+        require(type(denominator) is int and denominator > 0, "bad witness denominator")
+
+        def parameter(raw, label):
+            value = fraction(raw, label)
+            require(denominator % value.denominator == 0,
+                    f"{label} denominator is not authenticated by witness denominator")
+            return value
+
+        parameters = tuple(tuple(parameter(value, "branch") for value in row)
                            for row in witness["branches"])
         branches = tuple(engine.rational_unit(row) for row in parameters)
         require(len(branches) == ORDER and all(len(row) == DIMENSION for row in branches),
@@ -183,7 +275,7 @@ def verify(payload):
         total = Fraction(0)
         for (_, _, u, v, length), raw_path in zip(paths, witness["internals"]):
             require(len(raw_path) == length - 1, "internal path width changed")
-            internal = tuple(tuple(fraction(value, "internal") for value in row)
+            internal = tuple(tuple(parameter(value, "internal") for value in row)
                              for row in raw_path)
             require(all(len(row) == DIMENSION - 1 for row in internal),
                     "internal stereographic dimension changed")
@@ -201,9 +293,10 @@ def main():
     parser.add_argument("--start", type=int, default=0)
     parser.add_argument("--limit", type=int)
     parser.add_argument("--frontiers", default="all")
-    parser.add_argument("--restarts", type=int, default=3)
-    parser.add_argument("--frontier-restarts", type=int, default=1)
-    parser.add_argument("--iterations", type=int, default=600)
+    parser.add_argument("--restarts", type=int, default=1)
+    parser.add_argument("--frontier-restarts", type=int, default=0)
+    parser.add_argument("--iterations", type=int, default=180)
+    parser.add_argument("--frontier-iterations", type=int, default=120)
     parser.add_argument("--denominators", default="256,1024,4096,16384,65536")
     parser.add_argument("--output", type=Path, default=OUTPUT)
     parser.add_argument("--progress", action="store_true")
@@ -217,7 +310,7 @@ def main():
         args.output.write_bytes(canonical_bytes(payload))
     else:
         raw = args.verify.read_bytes()
-        payload = json.loads(raw.decode("ascii"))
+        payload = load_json(raw)
         require(raw == canonical_bytes(payload), "result JSON is not canonical")
         verify(payload)
     print(f"targets={payload['target_total']} exact={payload['exact_certificate_total']} "

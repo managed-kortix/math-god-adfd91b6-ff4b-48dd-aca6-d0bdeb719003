@@ -11,3 +11,6 @@ mathenv/
 positive-square-energy/weighted-paper.aux
 positive-square-energy/weighted-paper.log
 positive-square-energy/weighted-paper.out
+
+# The canonical order-seven certificate is committed in deterministic XZ form.
+positive-square-energy/experiments/rank6_order7_batched_chunks/*.json
