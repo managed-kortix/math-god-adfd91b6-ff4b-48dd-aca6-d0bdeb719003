@@ -1,22 +1,32 @@
 #!/usr/bin/env python3
-"""Search residual support rows for cost-five clique/mixed atom ledgers."""
+"""Search residual supports for exact cost-five simplex/mixed atom ledgers.
+
+A K_m regular-simplex atom has cost C(m-1, 2).  K_2 is therefore exactly an
+odd zero-cost contraction, while K_5 already costs six and cannot occur in a
+cost-five ledger.  The implementation nevertheless derives the search from
+the full m=2,...,5 model rather than hard-coding the K_3/K_4 cases.
+"""
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.util
 import itertools
+import json
 from fractions import Fraction
 from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
 F = Fraction
-EXPECTED_COUNTEREXAMPLES = {
-    8: ((78755, 883), (97350, 942)),
-    9: ((93749, 1060), (169635, 1119), (169965, 1119), (173903, 1123)),
-    10: ((105465, 1188), (124181, 1197)),
+EXPECTED_COUNTS = {
+    8: {(5, ()): 12, (2, (4,)): 185, (1, (3, 4)): 4},
+    9: {(5, ()): 10, (2, (4,)): 249, (1, (3, 4)): 16},
+    10: {(5, ()): 8, (2, (4,)): 152, (1, (3, 4)): 18},
 }
+SIMPLEX_WIDTHS = tuple(range(2, 6))
+ARTIFACT = HERE / "rank6_orders8_10_atom_ledger_classification.json"
 
 
 def require(condition, message):
@@ -59,26 +69,82 @@ def signed_quotient(order, contractions):
     return tuple(classes), tuple(signs), count
 
 
-def clique_partitions(edges):
-    edge_set = frozenset(edges)
-    vertices = sorted(set(itertools.chain.from_iterable(edge_set)))
+def simplex_cost(width):
+    require(width in SIMPLEX_WIDTHS, f"unsupported simplex width {width}")
+    return (width - 1) * (width - 2) // 2
+
+
+def positive_simplex_profiles(cost):
+    """Return all multisets of K_3,...,K_5 atoms having the given cost."""
+    profiles = []
+
+    def visit(width, remaining, chosen):
+        if width == SIMPLEX_WIDTHS[-1] + 1:
+            if remaining == 0:
+                profiles.append(tuple(chosen))
+            return
+        value = simplex_cost(width)
+        for count in range(remaining // value + 1):
+            visit(width + 1, remaining - count * value,
+                  chosen + [width] * count)
+
+    visit(3, cost, [])
+    return tuple(profiles)
+
+
+def clique_partitions(edges, target_cost):
+    """Partition indexed quotient multiedges into regular-simplex atoms."""
+    edge_indices = frozenset(range(len(edges)))
+    vertices = sorted(set(itertools.chain.from_iterable(edge for edge, _ in edges)))
     atoms = []
-    for width, cost in ((3, 1), (4, 3)):
+    for width in SIMPLEX_WIDTHS[1:]:
+        cost = simplex_cost(width)
+        if cost > target_cost:
+            continue
         for subset in itertools.combinations(vertices, width):
-            atom = frozenset(itertools.combinations(subset, 2))
-            if atom <= edge_set:
-                atoms.append((atom, width, cost))
+            pairs = tuple(itertools.combinations(subset, 2))
+            choices = [tuple(index for index, (edge, _) in enumerate(edges) if edge == pair)
+                       for pair in pairs]
+            if all(choices):
+                for occurrence_indices in itertools.product(*choices):
+                    atom = frozenset(occurrence_indices)
+                    if len(atom) == len(pairs):
+                        atoms.append((atom, width, cost))
 
     def visit(remaining, chosen, cost):
         if not remaining:
-            yield tuple(chosen), cost
+            if cost == target_cost:
+                yield tuple(chosen), cost
+            return
+        if cost >= target_cost:
             return
         first = min(remaining)
         for atom, width, value in atoms:
-            if first in atom and atom <= remaining:
+            if first in atom and atom <= remaining and cost + value <= target_cost:
                 yield from visit(remaining - atom, chosen + [(width, atom)], cost + value)
 
-    yield from visit(edge_set, [], 0)
+    yield from visit(edge_indices, [], 0)
+
+
+def prescribed_correlations(mixed, partition, active):
+    """Return consistent signed quotient correlations, or None on conflict."""
+    prescribed = {}
+
+    def assign(edge, value):
+        if edge in prescribed and prescribed[edge] != value:
+            return False
+        prescribed[edge] = value
+        return True
+
+    for edge, switch in mixed:
+        if not assign(edge, F(-switch, 2)):
+            return None
+    for width, occurrence_indices in partition:
+        for index in occurrence_indices:
+            edge, switch = active[index]
+            if not assign(edge, F(-switch, width - 1)):
+                return None
+    return tuple(sorted(prescribed.items()))
 
 
 def determinant(matrix):
@@ -101,15 +167,16 @@ def determinant(matrix):
 
 
 def audit_counterexample(module, source, result):
-    _, _, mixed, partition, contractions, classes, signs = result
+    _, _, mixed, partition, contractions, classes, signs, prescribed_items = result
     require(len(mixed) == 1 and tuple(sorted(width for width, _ in partition)) == (3, 4),
             "not a triangle/tetrahedron/mixed counterexample")
-    blocks = {width: edges for width, edges in partition}
+    blocks = {width: frozenset(edge for edge, _ in occurrences)
+              for width, occurrences in partition}
     triangle, tetrahedron = blocks[3], blocks[4]
     triangle_vertices = set(itertools.chain.from_iterable(triangle))
     tetrahedron_vertices = set(itertools.chain.from_iterable(tetrahedron))
     shared = triangle_vertices & tetrahedron_vertices
-    require(len(shared) == 1 and mixed[0] in triangle,
+    require(len(shared) == 1 and mixed[0][0] in triangle,
             "counterexample is not a one-sum with a repeated mixed support")
     cut = next(iter(shared))
     quotient_order = max(classes) + 1
@@ -117,12 +184,11 @@ def audit_counterexample(module, source, result):
             "unexpected unused quotient class")
     gram = [[F(int(i == j)) for j in range(quotient_order)]
             for i in range(quotient_order)]
-    for edge in triangle:
+    for (u, v), value in prescribed_items:
+        gram[u][v] = gram[v][u] = value
+    for edge in triangle | tetrahedron:
         u, v = edge
-        gram[u][v] = gram[v][u] = F(-1, 2)
-    for edge in tetrahedron:
-        u, v = edge
-        gram[u][v] = gram[v][u] = F(-1, 3)
+        require(gram[u][v], "missing prescribed simplex correlation")
     for u in triangle_vertices - {cut}:
         for v in tetrahedron_vertices - {cut}:
             gram[u][v] = gram[v][u] = gram[u][cut] * gram[cut][v]
@@ -136,7 +202,8 @@ def audit_counterexample(module, source, result):
     else:
         _, support, multiplicities, row, *_ = source
     contraction_set = set(contractions)
-    used_active = triangle | tetrahedron
+    atom_width = {edge: width for width, occurrences in partition
+                  for edge, _ in occurrences}
     totals = {"contraction": 0, "triangle": 0, "tetrahedron": 0, "mixed": 0}
     for index, multiplicity, odd in zip(support, multiplicities, row):
         u, v = module.PAIRS[index]
@@ -148,7 +215,7 @@ def audit_counterexample(module, source, result):
             require(multiplicity == 1 and transformed == 1, "bad zero-cost contraction")
             totals["contraction"] += 1
         elif multiplicity == 2:
-            require(odd == 1 and edge == mixed[0] and correlation == F(-1, 2),
+            require(odd == 1 and edge == mixed[0][0] and correlation == F(-1, 2),
                     "bad mixed-pair atom")
             totals["mixed"] += 1
         elif edge in triangle:
@@ -156,7 +223,7 @@ def audit_counterexample(module, source, result):
                     "bad triangle atom")
             totals["triangle"] += F(1, 3)
         else:
-            require(edge in used_active and edge in tetrahedron and multiplicity == odd == 1
+            require(edge in atom_width and edge in tetrahedron and multiplicity == odd == 1
                     and correlation == F(-1, 3), "bad tetrahedron atom")
             totals["tetrahedron"] += F(1, 2)
     require(totals == {"contraction": module.ORDER - 6, "triangle": F(1),
@@ -185,11 +252,12 @@ def classify(module, source):
         else:
             return ()
 
-    kept_sizes = set()
     remaining_cost = 5 - len(mixed)
-    for tetrahedra in range(remaining_cost // 3 + 1):
-        triangles = remaining_cost - 3 * tetrahedra
-        kept_sizes.add(6 * tetrahedra + 3 * triangles)
+    if remaining_cost < 0:
+        return ()
+    profiles = positive_simplex_profiles(remaining_cost)
+    kept_sizes = {sum(width * (width - 1) // 2 for width in profile)
+                  for profile in profiles}
     results = []
     for kept_size in kept_sizes:
       for kept_indices in itertools.combinations(range(len(active)), kept_size):
@@ -207,61 +275,113 @@ def classify(module, source):
             if not active_mask & (1 << bit):
                 continue
             edge = tuple(sorted((classes[u], classes[v])))
-            if edge[0] == edge[1] or signs[u] * signs[v] != 1 or edge in active_edges:
+            if edge[0] == edge[1]:
                 valid = False
                 break
-            active_edges.append(edge)
+            active_edges.append((edge, signs[u] * signs[v]))
         mixed_edges = []
         for u, v in mixed:
             edge = tuple(sorted((classes[u], classes[v])))
-            if edge[0] == edge[1] or signs[u] * signs[v] != 1 or edge in mixed_edges:
+            if edge[0] == edge[1]:
                 valid = False
                 break
-            mixed_edges.append(edge)
+            mixed_edges.append((edge, signs[u] * signs[v]))
         if not valid:
             continue
-        for partition, clique_cost in clique_partitions(active_edges):
-            if clique_cost + len(mixed_edges) == 5:
-                results.append((number, tuple(row), tuple(mixed_edges), partition,
-                                tuple(local_contractions), classes, signs))
+        for partition, clique_cost in clique_partitions(active_edges, remaining_cost):
+            prescribed = prescribed_correlations(mixed_edges, partition, active_edges)
+            if clique_cost + len(mixed_edges) == 5 and prescribed is not None:
+                atoms = tuple((width, tuple(active_edges[index]
+                                             for index in sorted(occurrence_indices)))
+                              for width, occurrence_indices in partition)
+                results.append((number, tuple(row), tuple(mixed_edges), atoms,
+                                tuple(local_contractions), classes, signs, prescribed))
     return tuple(results)
 
 
-def residuals_by_order():
-    order8 = load("atom_order8", HERE / "rank6_order8_sparse_pipeline.py")
-    _, rows8 = order8.census(collect_residuals=True)
+def residuals_by_order(orders):
+    result = []
+    if 8 in orders:
+        order8 = load("atom_order8", HERE / "rank6_order8_sparse_pipeline.py")
+        _, rows8 = order8.census(collect_residuals=True)
+        result.append((order8, rows8))
+    if 9 in orders:
+        order9 = load("atom_order9", HERE / "rank6_order9_sparse_witness.py")
+        _, rows9 = order9.census(collect_residuals=True)
+        result.append((order9, rows9))
+    if 10 in orders:
+        order10 = load("atom_order10", HERE / "rank6_order10_cubic_exact_rational.py")
+        census10 = order10.load_census_module()
+        order10.PAIRS = census10.PAIRS
+        rows10 = order10.residual_rows(census10)
+        result.append((order10, rows10))
+    return tuple(result)
 
-    order9 = load("atom_order9", HERE / "rank6_order9_sparse_witness.py")
-    _, rows9 = order9.census(collect_residuals=True)
 
-    order10 = load("atom_order10", HERE / "rank6_order10_cubic_exact_rational.py")
-    census10 = order10.load_census_module()
-    order10.PAIRS = census10.PAIRS
-    rows10 = order10.residual_rows(census10)
-    return ((order8, rows8), (order9, rows9), (order10, rows10))
+def audit_atom_model():
+    require(tuple(simplex_cost(width) for width in SIMPLEX_WIDTHS) == (0, 1, 3, 6),
+            "simplex cost ledger changed")
+    require(set(positive_simplex_profiles(5)) == {(3, 3, 3, 3, 3), (3, 3, 4)},
+            "cost-five simplex profiles changed")
+    require(all(5 not in profile for cost in range(6)
+                for profile in positive_simplex_profiles(cost)),
+            "K5 incorrectly entered a cost-at-most-five profile")
+
+
+def result_record(order, source_index, result):
+    number, row, mixed, partition, contractions, classes, signs, prescribed = result
+    return {
+        "order": order,
+        "source_index": source_index,
+        "kernel": number,
+        "row": list(row),
+        "profile": {"mixed": len(mixed),
+                    "simplex_widths": sorted(width for width, _ in partition)},
+        "mixed": [[list(edge), switch] for edge, switch in mixed],
+        "simplexes": [{"width": width,
+                       "edges": [[list(edge), switch] for edge, switch in edges]}
+                      for width, edges in partition],
+        "contractions": [[list(edge), odd] for edge, odd in contractions],
+        "classes": list(classes),
+        "signs": list(signs),
+        "prescribed": [[list(edge), [value.numerator, value.denominator]]
+                       for edge, value in prescribed],
+    }
+
+
+def canonical_json(payload):
+    return (json.dumps(payload, sort_keys=True, separators=(",", ":")) + "\n").encode("ascii")
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--list", action="store_true")
+    parser.add_argument("--orders", default="8,9,10",
+                        help="comma-separated subset of 8,9,10")
+    parser.add_argument("--write-artifact", action="store_true")
+    parser.add_argument("--verify-artifact", action="store_true")
     args = parser.parse_args()
+    orders = tuple(int(value) for value in args.orders.split(",") if value)
+    require(orders and len(set(orders)) == len(orders)
+            and all(order in (8, 9, 10) for order in orders), "invalid --orders")
+    audit_atom_model()
     totals = {}
     alternatives = []
-    for module, rows in residuals_by_order():
+    records = []
+    for module, rows in residuals_by_order(orders):
         counts = {}
         local_alternatives = []
         for source_index, source in enumerate(rows):
             for result in classify(module, source):
+                records.append(result_record(module.ORDER, source_index, result))
                 widths = tuple(sorted(width for width, _ in result[3]))
                 key = (len(result[2]), widths)
                 counts[key] = counts.get(key, 0) + 1
                 if key not in ((5, ()), (2, (4,))):
                     alternatives.append((module.ORDER, source_index, key, result))
                     local_alternatives.append((source_index, source, result))
-        observed = tuple((source_index, result[0])
-                         for source_index, _, result in local_alternatives)
-        require(observed == EXPECTED_COUNTEREXAMPLES[module.ORDER],
-                f"order-{module.ORDER} counterexample ledger changed: {observed}")
+        require(counts == EXPECTED_COUNTS[module.ORDER],
+                f"order-{module.ORDER} atom counts changed: {counts}")
         for _, source, result in local_alternatives:
             audit_counterexample(module, source, result)
         totals[module.ORDER] = counts
@@ -272,6 +392,29 @@ def main():
     if args.list:
         for result in alternatives:
             print(result)
+    payload = {
+        "schema": "rank6-orders8-10-exact-atom-ledger-classification-v1",
+        "scope": {
+            "orders": list(orders),
+            "source": "canonical coarse residual parity-orbit representatives",
+            "atoms": "regular simplexes K_m for 2<=m<=5 and mixed odd/even doubled pairs",
+            "cost": 5,
+            "overlaps": "physical occurrences disjoint; quotient supports may overlap",
+            "contractions": "every unused odd singleton and every non-odd singleton is signed-contracted",
+        },
+        "counts": {str(order): [{"mixed": key[0], "simplex_widths": list(key[1]),
+                                  "decompositions": value}
+                                for key, value in sorted(order_counts.items())]
+                   for order, order_counts in sorted(totals.items())},
+        "decompositions": records,
+    }
+    encoded = canonical_json(payload)
+    digest = hashlib.sha256(encoded).hexdigest()
+    print(f"artifact_sha256={digest} records={len(records)}")
+    if args.write_artifact:
+        ARTIFACT.write_bytes(encoded)
+    if args.verify_artifact:
+        require(ARTIFACT.read_bytes() == encoded, "atom-ledger artifact mismatch")
 
 
 if __name__ == "__main__":

@@ -17,6 +17,18 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-07: completed and exactly audited the full order-eight rank-six
+  residual frontier. Seventeen authenticated `R8G2` chunks cover all 102988
+  residual orbits and all 1441832 canonical-plus-coordinate targets. Rational
+  witnesses certify every target except 24 symbolic targets, all exactly owned
+  by the triangle-simplex plus tetrahedron-simplex plus mixed-pair geometry;
+  normal and `python -O` audits agree. The transitive v2 manifest digest is
+  `dd97ff3059cd637177171cb5d335cc17889a3714459522232e8110c5d79da469`.
+  The full exact atom-ledger artifact has 654 decompositions and finds only the
+  three known profiles inside its sharply stated simplex/mixed-atom model.
+  Initial exact order-nine and order-ten chunks each cover residuals 0--10000
+  with zero unresolved targets and pass normal/optimized verification. Orders
+  nine and ten remain incomplete, so no all-hexacyclic claim is made.
 - 2026-08-07: proved the analytic cost-five equality-locus lemma for the two
   rank-six symbolic geometries. A mixed length-one/length-two pair has cost at
   least one, uniquely at correlation `-1/2`; six odd unit paths on `K4` have
@@ -42,7 +54,7 @@ research/semantic, research/procedural).
   equality targets and 450 strict coordinate targets. The marked rank-five
   one-credit route remains blocked by genuine cost-four DNN records but no
   spectral counterexample. A support-level equality search refuted the proposed
-  two-family exhaustion: eight rows across orders 8--10 use a third exact
+  two-family exhaustion: nine rows across orders 8--10 use a third exact
   geometry, a regular-triangle simplex plus regular-tetrahedron simplex plus
   one mixed pair; K883 and K942 occur at order eight. Order-eight still requires
   the remaining 26988

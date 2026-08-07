@@ -629,7 +629,8 @@ def verify_individual_witness(engine, source, target, witness):
     for (_, _, u, v, length), parameters in zip(paths, internals):
         require(len(parameters) == length - 1, "individual path width changed")
         for value in parameters:
-            require(len(value) == ORDER - 1 and denominator % value.denominator == 0,
+            require(len(value) == ORDER - 1 and
+                    all(denominator % coordinate.denominator == 0 for coordinate in value),
                     "individual internal denominator changed")
         endpoint = branches[v] if length % 2 == 0 else tuple(-x for x in branches[v])
         chain = [branches[u], *(engine.rational_unit(value) for value in parameters), endpoint]

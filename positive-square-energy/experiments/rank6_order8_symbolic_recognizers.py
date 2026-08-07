@@ -17,6 +17,10 @@ PIPELINE = HERE / "rank6_order8_sparse_pipeline.py"
 FIXTURE = HERE / "rank6_order8_symbolic_templates.json"
 F = Fraction
 SCHEMA = "rank-six-order-eight-symbolic-templates-v1"
+EXPECTED_GEOMETRY_COUNTS = {
+    "signed-five-cycle": 12,
+    "tetrahedron-plus-apex": 52,
+}
 
 
 def require(condition, message):
@@ -193,8 +197,10 @@ def tetra_apex_gram(pipeline, structure, row_by_edge):
         other = classes[v] if classes[u] == apex_class else classes[u]
         prescribed[other] = F(-signs[u] * signs[v], 2)
     missing = [vertex for vertex in tetra_classes if vertex not in prescribed]
-    fill = -sum(prescribed.values(), F()) / len(missing)
-    prescribed.update((vertex, fill) for vertex in missing)
+    require(len(missing) == 2, "tetra-apex missing-correlation count changed")
+    switched_sum = sum((switches[vertex] * value for vertex, value in prescribed.items()), F())
+    switched_fill = -switched_sum / len(missing)
+    prescribed.update((vertex, switches[vertex] * switched_fill) for vertex in missing)
     for vertex, value in prescribed.items():
         base[apex_class][vertex] = base[vertex][apex_class] = value
     gram = [[signs[i] * signs[j] * base[classes[i]][classes[j]]
@@ -360,14 +366,18 @@ def derive_payload(pipeline):
                    for target in record["targets"])
     strict = sum(target["relation"] == "lt" for record in records
                  for target in record["targets"])
-    require(len(records) == 45 and equality == 180 and strict == 450,
+    geometry_counts = {geometry: sum(record["geometry"] == geometry for record in records)
+                       for geometry in EXPECTED_GEOMETRY_COUNTS}
+    require(geometry_counts == EXPECTED_GEOMETRY_COUNTS and
+            len(records) == 64 and equality == 256 and strict == 640,
             "symbolic packet totals changed")
     return {
         "schema": SCHEMA,
         "full_theorem": False,
-        "scope": "45 symbolic equality rows and their canonical plus 13 coordinate frontiers",
+        "scope": "64 symbolic equality rows and their canonical plus 13 coordinate frontiers",
         "strictness_lemma": "lengthening a positive-cost path by two strictly lowers its DNN energy; a zero-cost contraction remains zero",
         "row_total": len(records),
+        "geometry_counts": geometry_counts,
         "target_total": equality + strict,
         "exact_cost_five_total": equality,
         "strict_dnn_total": strict,
@@ -380,6 +390,24 @@ def load_fixture():
     payload = json.loads(raw.decode("ascii"))
     require(raw == canonical_bytes(payload), "symbolic fixture is not canonical JSON")
     return raw, payload
+
+
+def verify_payload(payload, derived):
+    require(type(payload) is dict and payload == derived,
+            "symbolic fixture differs from exact derivation")
+    require(set(payload) == {"schema", "full_theorem", "scope", "strictness_lemma",
+                             "row_total", "geometry_counts", "target_total",
+                             "exact_cost_five_total", "strict_dnn_total", "records"},
+            "symbolic fixture fields changed")
+    require(payload["schema"] == SCHEMA and payload["full_theorem"] is False,
+            "symbolic fixture schema changed")
+    require(payload["geometry_counts"] == EXPECTED_GEOMETRY_COUNTS,
+            "symbolic geometry partition changed")
+    require(payload["row_total"] == len(payload["records"]) == 64 and
+            payload["target_total"] == 14 * payload["row_total"] and
+            payload["exact_cost_five_total"] == 4 * payload["row_total"] and
+            payload["strict_dnn_total"] == 10 * payload["row_total"],
+            "symbolic target totals changed")
 
 
 def null_keys(payload):
@@ -427,7 +455,7 @@ def main():
     if args.write_fixture:
         FIXTURE.write_bytes(canonical_bytes(derived))
     raw, fixture = load_fixture()
-    require(fixture == derived, "symbolic fixture differs from exact derivation")
+    verify_payload(fixture, derived)
     expected = null_keys(fixture)
     if args.write_null_set is not None:
         write_null_set(args.write_null_set, expected)
@@ -438,7 +466,9 @@ def main():
             print(f"source={record['source_index']} K{record['kernel']} "
                   f"geometry={record['geometry']} row={tuple(record['row'])} "
                   f"contractions={','.join(record['contractions'])}")
-    print(f"rows={fixture['row_total']} targets={fixture['target_total']} "
+    counts = fixture["geometry_counts"]
+    print(f"rows={fixture['row_total']} signed_cycle={counts['signed-five-cycle']} "
+          f"tetra_apex={counts['tetrahedron-plus-apex']} targets={fixture['target_total']} "
           f"exact_cost5={fixture['exact_cost_five_total']} "
           f"strict_dnn={fixture['strict_dnn_total']}")
     print(f"fixture_sha256={hashlib.sha256(raw).hexdigest()} "

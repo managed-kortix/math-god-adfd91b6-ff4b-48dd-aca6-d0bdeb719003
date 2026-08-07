@@ -15,9 +15,12 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 PIPELINE_PATH = HERE / "rank6_order8_sparse_pipeline.py"
 SYMBOLIC_PATH = HERE / "rank6_order8_symbolic_templates.json"
+RECOGNIZER_PATH = HERE / "rank6_order8_symbolic_recognizers.py"
+ENGINE_PATH = HERE.parents[1] / "pentacyclic" / "research" / \
+    "order8-dim8-rational-canonical-frontiers-experiment.py"
+KERNEL_PATH = HERE.parents[1] / "research" / "fixtures" / "rank-six-kernels.json"
 DEFAULT_MANIFEST = HERE / "rank6_order8_search_manifest.json"
-SCHEMA = "rank-six-order-eight-search-pack-manifest-v1"
-SYMBOLIC_SHA256 = "0511ca60c26dd0a376e09c325b26406dcec0830ca598f747a7b6fd2b4bf03cd3"
+SCHEMA = "rank-six-order-eight-search-pack-manifest-v2"
 FRONTIER_TOTAL = 14
 
 
@@ -48,11 +51,38 @@ def sha256(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
-def load_symbolic_nulls():
+def strict_json(raw, label):
+    def object_pairs(pairs):
+        result = {}
+        for key, value in pairs:
+            require(key not in result, f"duplicate key in {label}: {key}")
+            result[key] = value
+        return result
+
+    try:
+        return json.loads(raw.decode("ascii"), object_pairs_hook=object_pairs)
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise RuntimeError(f"{label} is not canonical ASCII JSON") from error
+
+
+def dependency_digests():
+    paths = {
+        "kernel_source": KERNEL_PATH,
+        "pipeline": PIPELINE_PATH,
+        "rational_engine": ENGINE_PATH,
+        "symbolic_fixture": SYMBOLIC_PATH,
+        "symbolic_recognizer": RECOGNIZER_PATH,
+    }
+    return {name: sha256(path.read_bytes()) for name, path in paths.items()}
+
+
+def load_symbolic_nulls(pipeline):
     raw = SYMBOLIC_PATH.read_bytes()
-    require(sha256(raw) == SYMBOLIC_SHA256, "symbolic fixture digest changed")
-    payload = json.loads(raw.decode("ascii"))
+    payload = strict_json(raw, "symbolic fixture")
     require(raw == canonical_bytes(payload), "symbolic fixture is not canonical JSON")
+    recognizer = load_module("rank6_order8_symbolic_for_pack_audit", RECOGNIZER_PATH)
+    derived = recognizer.derive_payload(pipeline)
+    recognizer.verify_payload(payload, derived)
     result = set()
     for record in payload["records"]:
         source_index = record["source_index"]
@@ -61,16 +91,17 @@ def load_symbolic_nulls():
                 key = (source_index, target["frontier"])
                 require(key not in result, "duplicate symbolic null key")
                 result.add(key)
-    require(len(result) == payload["exact_cost_five_total"] == 180,
+    require(len(result) == payload["exact_cost_five_total"] == 256,
             "symbolic null count changed")
-    return result
+    return result, sha256(raw)
 
 
 def load_manifest(path):
     raw = path.read_bytes()
-    payload = json.loads(raw.decode("ascii"))
+    payload = strict_json(raw, "manifest")
     require(raw == canonical_bytes(payload), "manifest is not canonical JSON")
     require(set(payload) == {"schema", "source_sha256", "symbolic_sha256",
+                             "dependency_sha256",
                              "residual_total", "frontiers_per_residual", "chunks",
                              "covered_residual_range", "covered_target_total",
                              "covered_key_stream_sha256"}, "manifest fields changed")
@@ -93,12 +124,18 @@ def key_digest(residual_rows, stop):
 
 
 def audit(manifest_path, exact=True):
-    pipeline = load_module("rank6_order8_sparse_for_pack_audit", PIPELINE_PATH)
     manifest = load_manifest(manifest_path)
+    dependencies = dependency_digests()
+    require(manifest["dependency_sha256"] == dependencies,
+            "transitive dependency digest changed")
+    pipeline = load_module("rank6_order8_sparse_for_pack_audit", PIPELINE_PATH)
     require(manifest["source_sha256"] == pipeline.SOURCE_SHA256,
             "manifest points to another kernel source")
-    require(manifest["symbolic_sha256"] == SYMBOLIC_SHA256,
-            "manifest points to another symbolic fixture")
+    require(manifest["source_sha256"] == dependencies["kernel_source"],
+            "pipeline and manifest disagree on the kernel source")
+    symbolic_nulls, symbolic_sha256 = load_symbolic_nulls(pipeline)
+    require(manifest["symbolic_sha256"] == symbolic_sha256,
+            "manifest points to another or unverified symbolic fixture")
     require(manifest["frontiers_per_residual"] == FRONTIER_TOTAL,
             "manifest frontier width changed")
     _, residual_rows = pipeline.census(collect_residuals=True)
@@ -117,7 +154,11 @@ def audit(manifest_path, exact=True):
         require(type(start) is int and type(stop) is int and
                 start == expected_start < stop <= residual_total,
                 f"chunk {index} range is not the next ordered interval")
-        path = manifest_path.parent / chunk["path"]
+        path = (manifest_path.parent / chunk["path"]).resolve()
+        try:
+            path.relative_to(manifest_path.parent.resolve())
+        except ValueError as error:
+            raise RuntimeError(f"chunk {index} escapes the manifest directory") from error
         stored = path.read_bytes()
         require(len(stored) == chunk["compressed_bytes"] and
                 sha256(stored) == chunk["compressed_sha256"],
@@ -145,7 +186,7 @@ def audit(manifest_path, exact=True):
     observed_nulls = set()
     symbolic_missing = set()
     symbolic_unexpected = set()
-    expected_nulls = {key for key in load_symbolic_nulls() if key[0] < covered}
+    expected_nulls = {key for key in symbolic_nulls if key[0] < covered}
     if exact:
         engine = pipeline.load_engine()
         for start, records in decoded:
@@ -163,12 +204,11 @@ def audit(manifest_path, exact=True):
 
         symbolic_missing = expected_nulls - unresolved
         symbolic_unexpected = unresolved - expected_nulls
-        if covered == residual_total:
-            require(not symbolic_missing and not symbolic_unexpected,
-                    f"symbolic null comparison failed: missing={len(symbolic_missing)} "
-                    f"unexpected={len(symbolic_unexpected)}")
+        require(not symbolic_unexpected,
+                f"unrecognized unresolved targets: {len(symbolic_unexpected)}")
 
-    complete = exact and covered == residual_total and not unresolved
+    certified_symbolic = unresolved & expected_nulls
+    complete = exact and covered == residual_total and unresolved == certified_symbolic
     status = "complete" if complete else "incomplete"
     report = {
         "status": status,
@@ -176,18 +216,28 @@ def audit(manifest_path, exact=True):
         "residual_total": residual_total,
         "covered_target_total": covered * FRONTIER_TOTAL,
         "unresolved_target_total": len(unresolved),
+        "symbolic_certified_target_total": len(certified_symbolic),
+        "unresolved_keys": [[source, frontier] for source, frontier in
+                            sorted(unresolved, key=lambda key: (key[0], -1 if key[1] is None
+                                                               else key[1]))],
         "exact_cost_five_target_total": len(observed_nulls),
         "symbolic_expected_in_coverage": len(expected_nulls),
-        "symbolic_missing_target_total": len(symbolic_missing),
+        "symbolic_rationally_certified_target_total": len(symbolic_missing),
         "symbolic_unexpected_target_total": len(symbolic_unexpected),
-        "symbolic_null_match": exact and not symbolic_missing and not symbolic_unexpected,
+        "symbolic_coverage_match": exact and not symbolic_unexpected and
+                                   len(certified_symbolic | symbolic_missing) ==
+                                   len(expected_nulls),
         "exact_audit": exact,
     }
     return report, complete
 
 
 def build_manifest(output, paths):
+    require(output.parent.is_dir(), "manifest output parent does not exist")
+    resolved_paths = tuple(path.resolve() for path in paths)
+    require(len(set(resolved_paths)) == len(resolved_paths), "duplicate pack path")
     pipeline = load_module("rank6_order8_sparse_for_manifest", PIPELINE_PATH)
+    _, symbolic_sha256 = load_symbolic_nulls(pipeline)
     _, residual_rows = pipeline.census(collect_residuals=True)
     chunks = []
     for path in paths:
@@ -220,7 +270,8 @@ def build_manifest(output, paths):
     payload = {
         "schema": SCHEMA,
         "source_sha256": pipeline.SOURCE_SHA256,
-        "symbolic_sha256": SYMBOLIC_SHA256,
+        "symbolic_sha256": symbolic_sha256,
+        "dependency_sha256": dependency_digests(),
         "residual_total": len(residual_rows),
         "frontiers_per_residual": FRONTIER_TOTAL,
         "chunks": records,
