@@ -75,3 +75,18 @@ Integer inversion of the memorization bound is piecewise exact. In the regime
 
 The threshold remains quadratic, so this exact rounding does not supply
 all-exponents amplification.
+
+## Bounded scout cycle 43
+
+Finite-union amplification is blocked by the same exact memorization theorem.
+If finitely many same-length anticheckers have a union of `H` distinct examples,
+their labels are consistent and one circuit of size at most
+
+`3(H-1)+min(N,H-1)`
+
+memorizes the whole union. Therefore a finite union of polynomial-size
+anticheckers reaches only the largest polynomial scale represented in that
+union. Defeating every polynomial size by same-length memorization alone would
+require a superpolynomial number of distinct examples. This rules out that
+finite-union mechanism, not amplification using self-reduction, cross-length
+consistency, or other structure.

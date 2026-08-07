@@ -79,6 +79,24 @@ gives
 
 `p_c=ab cos x cos y+c[b cos y+b cos(2x+y)/5-a cos x-a cos(x+2y)/5]`.
 
+## Bounded scout cycle 43
+
+For this first ansatz outside the two-shear parity theorem, the exact remaining
+test is the unprojected integral
+
+`I(a,b,c)=int p_c (u_c.grad |u_c|^2)/(2|u_c|)`.
+
+The rational choice `(a,b,c)=(1,2,1/2)` gives a concrete interval target:
+isolate the common zeros of the two velocity components, use analytic polar
+bounds on their neighborhoods, and interval quadrature on the complementary
+rectangles. The same certificate should enclose
+
+`D=int |u_c| (|grad u_c|^2+|grad |u_c||^2)`,
+
+so the exact initial derivative is `3I-3 nu D`. Even a positive `I` would be
+only an initial critical-norm growth example, not blowup or failure of global
+regularity.
+
 The mixed pressure frequencies `(2,1),(1,2)` and the corresponding cross terms
 in `|u_c|^2` destroy both coordinate-odd factorizations used for two shears.
 This is a structural checkpoint, not a growth certificate: the exact signed

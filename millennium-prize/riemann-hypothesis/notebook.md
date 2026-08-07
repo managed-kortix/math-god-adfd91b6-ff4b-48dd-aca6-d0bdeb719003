@@ -4143,3 +4143,53 @@ is formally weaker, although every-start stopping is itself RH-sufficient.
 Using the RH diagonal or Cycle 40's RH-conditional coefficient assumptions to
 prove RH through this stopping theorem is circular. Details are in
 `cycle-42-affine-cancellation-and-circularity-audit.md`.
+
+## Cycle 43: divisor-probe closure and the one-chain quantifier
+
+The D-side divisor-admission probes reconstruct the complete finite positive
+packet exactly:
+
+\[
+ X=\sum_{a<B}z_a^D,
+ \qquad b_D=G_D{\bf1},
+ \qquad b_D^*G_D^+b_D=\|X\|^2.
+\]
+
+Thus the all-D multiprobe condition is precisely the original packet sign and
+is tautological. The U packet has one additional global affine generator,
+whereas the D packet has none because the `1/a` part of the admission column
+already reconstructs `ell_n`. For a proper selected family `S`, the entire
+projection loss is exactly
+
+\[
+ \|X\|^2-b_S^*G_S^+b_S
+ =\|(I-P_{V_S})\sum_{a\notin S}z_a^D\|^2.
+\]
+
+The complete U- and D-probe Grams are restricted Vasyunin entries multiplied
+by their nested admission tails. Trace-incidence gives explicit upper frame
+constants at most `O(log(B/A))` on bounded-ratio blocks. This favorable scaling
+does not control conditioning or provide the still-missing lower bound for
+signed Mobius correlation numerators. Details are in
+`cycle-43-divisor-probe-closure.md`.
+
+Separately, the renewal quantifier can be reduced exactly from every start to
+one recursively generated consecutive chain. At a current start `a`, after a
+provisional episode `[a,q)`, the minimal debt is
+`(-sum_[a,q) beta_n H_n)_+`; it need only be paid at one finite later crossing.
+Finite payment at every generated endpoint retains every `w_n` once and forces
+bounded weighted energy, hence zero liminf. More generally bounded cumulative
+signed debt suffices, while proportional underpayment requires divergence only
+after the surviving block factors are applied. This is a deterministic
+renewal theorem, not a Mobius compensation estimate or RH result. Details are
+in `cycle-43-one-chain-minimal-debt.md`.
+
+### Next queued main-funnel step
+
+Use the cutoff-free restricted Vasyunin evaluator to test the sharply
+falsifiable dyadic-window passage target: for each `a>=3`, does some
+`a<b<=2a` satisfy `sum_[a,b) beta_n H_n>=0`? In parallel, audit proper,
+non-post-selected divisor-probe subsets on the six certified first-recovery
+blocks and record the exact omitted residual above. One certified start with
+all dyadic-window residuals negative falsifies the first target; needing nearly
+all D columns falsifies the multiprobe route as a genuine simplification.

@@ -69,13 +69,18 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
    affine completion, and zero symmetry do not cancel it; discrete lattice
    aliases also survive; the exact
    variable-block theorem now proves that consecutive complete blocks with
-   fixed fractional dissipation force zero liminf, so the current sublemma is a
-   Möbius-specific adaptive renewal inequality for complete blocks, after
-  global low rank and Farey-neighbor-only splits were falsified but blockwise
-  geometric low rank was numerically validated
+   fixed fractional dissipation force zero liminf; the exact one-chain theorem
+   now shows only debts encountered by one recursively generated consecutive
+   chain need finite payment; the all-D multiprobe projection is proved
+   tautological because its columns reconstruct the positive packet exactly,
+   while proper subsets have an exact omitted orthogonal residual and explicit
+   upper frame constants at most `O(log(B/A))`; the current sublemma is the
+   sharply falsifiable dyadic-window passage target `a<b<=2a`, together with a proper-
+   subset census testing whether multiprobes simplify rather than reconstruct
+   the original sign problem
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 42
+- **cycle:** 43
 - **announcements:** none
 
 ## immutable target list
@@ -94,12 +99,12 @@ waiting process.
 
 ## next exact steps
 
-1. Test the exact residual budgets
-   `P_a-2 kappa sum_(n>=a) w_n P_n`; every-start renewal is equivalent to their
-   nonnegativity plus recurrence at equality.
-2. Attack the compensated Mobius--Chebyshev cell inequality first at the
-   summable `kappa/log a` block strength, then determine the strongest factor
-   available after every loss and whether its effective mass diverges.
+1. Use the cutoff-free restricted Vasyunin evaluator to test whether every
+   `a>=3` has a finite passage `a<b<=2a` with
+   `sum_[a,b) beta_n H_n>=0`; one certified failed start falsifies this target.
+2. Audit arithmetically specified proper divisor-probe subsets on all six
+   certified first-recovery blocks, recording their exact orthogonal deficit;
+   exclude all families whose span algebraically contains `X`.
 3. Fold the full completed smoothed zero expansion to positive ordinates and
    compare its negative diagonal with the same-sign, affine, and endpoint
    channels under one finite cutoff and signed error.
@@ -111,6 +116,21 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-08-07: Cycle 43 closed the geometric part of the RH multiprobe proposal.
+  All D-admission columns reconstruct the positive packet exactly, so their
+  pseudoinverse projection equals its full norm and the resulting sign test is
+  tautologically the original packet inequality. For a proper subset the
+  omitted mass is an exact orthogonal residual; the complete U- and D-Gram
+  entries are restricted Vasyunin entries with nested admission tails, and
+  trace-incidence upper frame constants are at most `O(log(B/A))`. The
+  remaining obstruction is a lower bound for signed Mobius correlations. An
+  exact one-chain minimal-debt
+  theorem also reduces every-start renewal to finite payment only along one
+  recursively generated consecutive chain; bounded cumulative debt and
+  post-loss divergent effective mass are sufficient additive and multiplicative
+  variants. Five bounded scouts advanced once. No RH or Millennium solution
+  is claimed.
 
 - 2026-07-26: Cycle 42 advanced each non-RH bounded scout exactly once. BSD:
   extended the weight/cyclotomic conversion through degree three and exposed

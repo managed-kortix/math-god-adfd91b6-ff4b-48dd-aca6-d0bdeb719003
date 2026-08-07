@@ -69,3 +69,18 @@ The cubic calibration gives an exact local counterexample to treating
 Nakayama gives `m=0`. Hence the plane is a reduced isolated Hilbert point even
 though its standard obstruction space is nonzero. No conclusion follows for
 other Hodge-locus components.
+
+## Bounded scout cycle 43
+
+First-order component dominance for a degree-`d` hypersurface fourfold
+containing a plane can be reduced to an exact finite Jacobian-ring comparison.
+For `gamma=d[P]-h^2`, the infinitesimal Hodge tangent space is the kernel of
+
+`R_d -> R_(2d-6)^*,  v |-> (w |-> <gamma,vw>)`,
+
+while the plane-incidence tangent is obtained from the degree-`d` equations
+modulo the nine-dimensional image of plane deformations. Both are kernels of
+finite matrices over the coefficient field. The next calibration is `d=4`:
+compare these matrices exactly for a Fermat-type quartic containing a coordinate
+plane. Equality would prove only first-order compatibility; it would not give
+completed-local-ring dominance or the Hodge conjecture.

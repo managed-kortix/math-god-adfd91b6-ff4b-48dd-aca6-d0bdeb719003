@@ -71,3 +71,17 @@ strongly. Yet every `T_n` retains eigenvalue one, norm one, and zero
 transfer-Hamiltonian gap. Thus even strong convergence of all fixed continuous
 spectral observables cannot replace cutoff-uniform control of the moving
 spectral edge.
+
+## Bounded scout cycle 43
+
+The escaping-state obstruction extends to every fixed bounded Borel
+functional. For `T_n=qI+(1-q)P_(e_n)` and bounded Borel `f` on `[0,1]`,
+
+`f(T_n)=f(q)I+(f(1)-f(q))P_(e_n) -> f(q)I`
+
+strongly. In particular the fixed spectral projection
+`1_{\{1\}}(T_n)=P_(e_n)` converges strongly to zero although it is nonzero at
+every cutoff. Thus convergence of all fixed bounded spectral observables does
+not control a cutoff-dependent spectral edge. A mass-gap transfer needs a
+uniform spectral-tail or norm estimate on the full vacuum complement, not only
+fixed-observable convergence.

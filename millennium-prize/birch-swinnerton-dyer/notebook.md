@@ -66,3 +66,20 @@ moment:
 
 Higher weight derivatives therefore cannot be read coefficientwise. This is
 only normalization and gives no complex-derivative transfer.
+
+## Bounded scout cycle 43
+
+The triangular conversion has an exact all-order form. If
+`F(T)=sum_(k>=0) a_k T^k`, `T=exp(Ls)-1`, and `G(s)=F(T(s))`, then
+
+`G^(n)(0)/L^n=sum_(k=0)^n k! S(n,k) a_k`,
+
+where `S(n,k)` is a Stirling number of the second kind. Inversion gives
+
+`a_n=(1/n!) sum_(j=0)^n s(n,j) G^(j)(0)/L^j`,
+
+with signed first-kind Stirling numbers `s(n,j)`. Thus the `n`th cyclotomic
+coefficient requires every lower weight derivative unless the corresponding
+lower moments vanish exactly. This proves only the normalization theorem; it
+does not certify modular-symbol vanishings or identify a 5-adic derivative
+with a complex derivative.
