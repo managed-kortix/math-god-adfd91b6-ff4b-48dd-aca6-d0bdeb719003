@@ -1,11 +1,9 @@
-# Order-eight rank-six symbolic equality prediction
+# Order-eight rank-six exact symbolic templates
 
-## Prediction
+## Exact template frontier
 
-The order-eight census and the order-seven terminal geometry suggest that the
-final numerical failures will be a small equality packet rather than a diffuse
-tail. Before a complete search exists, the exact combinatorial recognizer finds
-the following residual-row candidates:
+The exact combinatorial recognizer finds the following equality-template rows
+in the locked order-eight residual stream:
 
 | geometry | kernels | residual rows |
 |:--|:--|--:|
@@ -13,20 +11,21 @@ the following residual-row candidates:
 | tetrahedron plus apex | K706, K717, K737, K762, K817, K822, K835, K842, K946, K949, K953, K954, K958 | 33 |
 | total | 15 kernels | 45 |
 
-The conservative prediction extrapolates the exact order-seven failure pattern:
-the canonical target and the coordinate carried by each zero-cost contraction.
-Order seven had two contractions and three failed targets per equality row;
-order eight has three contractions and therefore predicts four. This gives
-**132 final equality residual targets beyond K744/K756** on the 33 simplex/apex
-rows. If the 12 signed-cycle rows had not already been removed before numerical
-search, the same rule would predict 48 targets there, for 180 total. The
-recognizers actually construct a cost-five Gram and a free `+2` extension for
-every coordinate, so all 630 row-target pairs have symbolic coverage if the
-numerical search leaves more than the predicted contraction frontiers null.
+For each row, the canonical target has exact DNN cost five. Exactly three of its
+13 paths are signed contractions and have local cost zero. Lengthening one of
+those paths by two leaves its local cost zero, so those three coordinate
+frontiers also have exact cost five. Every other path has positive local cost.
+For fixed noncoincident endpoints the equal-step DNN path energy
+`L tan^2(theta/(2L))` strictly decreases when `L` is replaced by `L+2`.
+Indeed, with `y=theta/(2L)`, its derivative in `L` is
+`tan(y)^2-2y tan(y)sec(y)^2<0`: positivity gives
+`tan(y)<2y sec(y)^2`. Consequently all other coordinate frontiers are strict
+DNN witnesses.
 
-This is a prediction, not an identification of the eventual null-witness set.
-Only the completed search can determine whether all 45 candidates survive as
-numerical residuals and whether any noncandidate target remains unresolved.
+Thus the 630 row-target pairs split exactly into 180 cost-five targets and 450
+strict targets. The 180 are the canonical target and three contractions in each
+of 45 rows. This proves the symbolic template frontier; it does not assert that
+the completed global search has no null target outside these 45 rows.
 
 ## DNN budget combinatorics
 
@@ -61,9 +60,9 @@ Gram.
 
 ## Recognizer
 
-`rank6_order8_symbolic_recognizers.py` derives the simplex/apex kernel list from
-the locked kernel fixture. It does not contain an assumed candidate list. It
-then scans the exact 102,988-row residual stream and requires:
+`rank6_order8_symbolic_recognizers.py` derives both template families from the
+locked kernel fixture. It does not contain an assumed candidate-row list. It
+scans the exact 102,988-row residual stream and requires:
 
 1. three acyclic singleton contractions giving five quotient classes;
 2. six singleton quotient supports forming exactly a `K4`;
@@ -73,18 +72,29 @@ then scans the exact 102,988-row residual stream and requires:
 
 Arbitrary singleton parities on contracted supports are handled by switching.
 Rows that violate the apex Schur boundary are rejected even when their unsigned
-support quotient has the right shape.
+support quotient has the right shape. The verifier reconstructs every row and
+Gram, audits all principal minors and the exact canonical budget, rebuilds all
+13 physical path coordinates, and checks that precisely the three contracted
+coordinates have zero local energy.
+
+The canonical fixture
+`rank6_order8_symbolic_templates.json` freezes all 45 source indices, rows,
+templates, contractions, and 630 target classifications. Its SHA-256 is
+`0511ca60c26dd0a376e09c325b26406dcec0830ca598f747a7b6fd2b4bf03cd3`.
 
 Run:
 
 ```sh
 python3 positive-square-energy/experiments/rank6_order8_symbolic_recognizers.py
+python3 -O positive-square-energy/experiments/rank6_order8_symbolic_recognizers.py
 python3 positive-square-energy/experiments/rank6_order8_symbolic_recognizers.py \
-  --targets all --list-rows
+  --list-rows
+python3 positive-square-energy/experiments/rank6_order8_symbolic_recognizers.py \
+  --compare-null-set final-null-set.json
 ```
 
-The first command reports the conservative 132-target prediction beyond the
-preclassified K744/K756 packet (180 including that packet). The second reports
-all 630 targets already covered by the templates. The experiment keeps
-`full_theorem=false`; it neither substitutes for the complete rational search
-nor claims that the prediction is the final null set.
+The comparison input is either a list or an object with a `null_targets` list;
+each entry is exactly `{"source_index": integer, "frontier": null-or-integer}`.
+The comparison fails closed on duplicates, missing targets, or unexpected
+targets. The artifact keeps `full_theorem=false` because identifying the final
+global null set still requires the complete search.

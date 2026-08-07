@@ -1,25 +1,22 @@
 #!/usr/bin/env python3
-"""Predict order-eight equality rows from quotient combinatorics.
-
-This is an experimental recognizer, not a theorem verifier.  It searches the
-locked order-eight census for the two known signed-cycle packets and for the
-order-eight lift of the order-seven tetrahedron-plus-apex packet.  Every match
-is checked by constructing its rational branch Gram matrix, auditing all
-principal minors, and evaluating the canonical DNN budget exactly.
-"""
+"""Verify the exact order-eight symbolic equality-template fixture."""
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.util
 import itertools
+import json
 from fractions import Fraction
 from pathlib import Path
 
 
 HERE = Path(__file__).resolve().parent
 PIPELINE = HERE / "rank6_order8_sparse_pipeline.py"
+FIXTURE = HERE / "rank6_order8_symbolic_templates.json"
 F = Fraction
+SCHEMA = "rank-six-order-eight-symbolic-templates-v1"
 
 
 def require(condition, message):
@@ -68,6 +65,15 @@ def audit_psd(gram):
 
 def edge_name(edge):
     return f"{edge[0]}{edge[1]}"
+
+
+def pair(value):
+    return [value.numerator, value.denominator]
+
+
+def canonical_bytes(payload):
+    return (json.dumps(payload, sort_keys=True, separators=(",", ":"), allow_nan=False)
+            + "\n").encode("ascii")
 
 
 def signed_components(order, contraction_edges, contraction_parities):
@@ -237,51 +243,206 @@ def recognize_tetra_apex_row(pipeline, structure, support, multiplicities, row):
     return gram
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--list-rows", action="store_true")
-    parser.add_argument("--targets", choices=("all", "order7-analogue"),
-                        default="order7-analogue")
-    args = parser.parse_args()
-    pipeline = load_pipeline()
-    sources = pipeline.source_kernels()
+def signed_cycle_gram(pipeline, source):
+    number, support, multiplicities, row, _, _, cycle = source
+    require(cycle, "row is not a signed-cycle template")
+    singles, doubles = pipeline.SIGNED_CYCLE_SUPPORTS[number]
+    contractions = tuple(sorted(tuple(map(int, edge)) for edge in singles))
+    row_by_edge = {pipeline.PAIRS[index]: odd for index, odd in zip(support, row)}
+    classes, signs, count = signed_components(
+        pipeline.ORDER, contractions, tuple(row_by_edge[edge] for edge in contractions))
+    require(count == 5, "signed-cycle quotient width changed")
+    gram = [[F() for _ in range(pipeline.ORDER)] for _ in range(pipeline.ORDER)]
+    for u in range(pipeline.ORDER):
+        for v in range(pipeline.ORDER):
+            if classes[u] == classes[v]:
+                gram[u][v] = F(signs[u] * signs[v])
+    for raw_edge in doubles:
+        u, v = map(int, raw_edge)
+        require(classes[u] != classes[v], "doubled cycle support contracted")
+        for left in range(pipeline.ORDER):
+            if classes[left] != classes[u]:
+                continue
+            for right in range(pipeline.ORDER):
+                if classes[right] == classes[v]:
+                    gram[left][right] = gram[right][left] = F(-signs[left] * signs[right], 2)
+    audit_psd(gram)
+    return gram, contractions
+
+
+def path_ledger(pipeline, support, multiplicities, row):
+    paths = []
+    for index, multiplicity, odd in zip(support, multiplicities, row):
+        edge = pipeline.PAIRS[index]
+        occurrence = 0
+        if odd:
+            paths.append((edge, occurrence, 1))
+            occurrence += 1
+            for _ in range(odd - 1):
+                paths.append((edge, occurrence, 3))
+                occurrence += 1
+        for _ in range(multiplicity - odd):
+            paths.append((edge, occurrence, 2))
+            occurrence += 1
+    require(len(paths) == pipeline.PATH_COUNT, "symbolic path ledger width changed")
+    return tuple(paths)
+
+
+def classify_targets(pipeline, source, gram, contractions):
+    _, support, multiplicities, row, _, _, _ = source
+    contraction_set = set(contractions)
+    paths = path_ledger(pipeline, support, multiplicities, row)
+    zero_cost = []
+    for edge, _, length in paths:
+        correlation = gram[edge[0]][edge[1]]
+        transformed = correlation if length % 2 == 0 else -correlation
+        if edge in contraction_set:
+            require(length in (1, 2) and correlation in (F(-1), F(1)),
+                    "contraction path is not zero-cost")
+            require(transformed == 1,
+                    "contraction parity does not match its Gram entry")
+        else:
+            require(transformed != 1, "noncontraction symbolic path has zero cost")
+        zero_cost.append(transformed == 1)
+    targets = [{"frontier": None, "relation": "eq", "cost": pair(pipeline.BUDGET)}]
+    for coordinate, ((edge, occurrence, length), is_zero) in enumerate(zip(paths, zero_cost)):
+        relation = "eq" if is_zero else "lt"
+        targets.append({
+            "frontier": coordinate,
+            "edge": edge_name(edge),
+            "occurrence": occurrence,
+            "canonical_length": length,
+            "canonical_local_cost_zero": is_zero,
+            "relation": relation,
+        })
+    require(sum(target["relation"] == "eq" for target in targets) == 4,
+            "equality frontier is not canonical plus three contractions")
+    return targets
+
+
+def derive_payload(pipeline):
     structures = []
-    for source in sources:
+    for source in pipeline.source_kernels():
         structures.extend(tetra_apex_structures(pipeline, source))
     by_kernel = {}
     for structure in structures:
         by_kernel.setdefault(structure["kernel"], []).append(structure)
 
     _, residuals = pipeline.census(collect_residuals=True)
-    apex_rows = []
-    cycle_rows = []
+    records = []
     for source_index, source in enumerate(residuals):
         number, support, multiplicities, row, _, _, cycle = source
+        geometry = gram = contractions = None
         if cycle:
-            cycle_rows.append(source_index)
-        for structure in by_kernel.get(number, ()):
-            if recognize_tetra_apex_row(pipeline, structure, support, multiplicities, row):
-                apex_rows.append((source_index, number, row, structure))
-                break
+            geometry = "signed-five-cycle"
+            gram, contractions = signed_cycle_gram(pipeline, source)
+        else:
+            for structure in by_kernel.get(number, ()):
+                candidate = recognize_tetra_apex_row(
+                    pipeline, structure, support, multiplicities, row)
+                if candidate is not None:
+                    require(gram is None, "equality row has multiple symbolic structures")
+                    geometry = "tetrahedron-plus-apex"
+                    gram = candidate
+                    contractions = structure["contractions"]
+        if gram is None:
+            continue
+        targets = classify_targets(pipeline, source, gram, contractions)
+        records.append({
+            "source_index": source_index,
+            "kernel": number,
+            "row": list(row),
+            "geometry": geometry,
+            "contractions": [edge_name(edge) for edge in contractions],
+            "targets": targets,
+        })
+    equality = sum(target["relation"] == "eq" for record in records
+                   for target in record["targets"])
+    strict = sum(target["relation"] == "lt" for record in records
+                 for target in record["targets"])
+    require(len(records) == 45 and equality == 180 and strict == 450,
+            "symbolic packet totals changed")
+    return {
+        "schema": SCHEMA,
+        "full_theorem": False,
+        "scope": "45 symbolic equality rows and their canonical plus 13 coordinate frontiers",
+        "strictness_lemma": "lengthening a positive-cost path by two strictly lowers its DNN energy; a zero-cost contraction remains zero",
+        "row_total": len(records),
+        "target_total": equality + strict,
+        "exact_cost_five_total": equality,
+        "strict_dnn_total": strict,
+        "records": records,
+    }
 
-    print(f"tetra_apex_kernel_structures={len(structures)}")
-    print("tetra_apex_kernels=" + ",".join(f"K{number}" for number in sorted(by_kernel)))
-    print(f"signed_cycle_residual_rows={len(cycle_rows)}")
-    print(f"tetra_apex_residual_rows={len(apex_rows)}")
-    print(f"predicted_symbolic_rows={len(cycle_rows) + len(apex_rows)}")
-    # At order seven the numerical nulls were exactly the canonical target and
-    # the coordinate carried by each zero-cost contraction.  Order eight has
-    # three contractions, so the direct analogue has four targets per row.
-    target_multiplier = 14 if args.targets == "all" else 4
-    print(f"target_policy={args.targets}")
-    print(f"predicted_symbolic_targets={target_multiplier * (len(cycle_rows) + len(apex_rows))}")
-    print(f"predicted_targets_beyond_K744_K756={target_multiplier * len(apex_rows)}")
+
+def load_fixture():
+    raw = FIXTURE.read_bytes()
+    payload = json.loads(raw.decode("ascii"))
+    require(raw == canonical_bytes(payload), "symbolic fixture is not canonical JSON")
+    return raw, payload
+
+
+def null_keys(payload):
+    return {(record["source_index"], target["frontier"])
+            for record in payload["records"] for target in record["targets"]
+            if target["relation"] == "eq"}
+
+
+def compare_null_set(path, expected):
+    payload = json.loads(path.read_text(encoding="ascii"))
+    rows = payload["null_targets"] if type(payload) is dict else payload
+    require(type(rows) is list, "null set must be a list or a null_targets envelope")
+    actual = set()
+    for row in rows:
+        require(type(row) is dict and set(row) == {"source_index", "frontier"},
+                "bad null target record")
+        key = (row["source_index"], row["frontier"])
+        require(type(key[0]) is int and (key[1] is None or type(key[1]) is int),
+                "bad null target key")
+        require(key not in actual, "duplicate null target")
+        actual.add(key)
+    missing, unexpected = expected - actual, actual - expected
+    require(not missing and not unexpected,
+            f"final null set differs: missing={len(missing)} unexpected={len(unexpected)}")
+
+
+def write_null_set(path, expected):
+    payload = {"null_targets": [
+        {"source_index": source_index, "frontier": frontier}
+        for source_index, frontier in sorted(
+            expected, key=lambda item: (item[0], -1 if item[1] is None else item[1]))
+    ]}
+    path.write_bytes(canonical_bytes(payload))
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--list-rows", action="store_true")
+    parser.add_argument("--write-fixture", action="store_true")
+    parser.add_argument("--write-null-set", type=Path)
+    parser.add_argument("--compare-null-set", type=Path)
+    args = parser.parse_args()
+    pipeline = load_pipeline()
+    derived = derive_payload(pipeline)
+    if args.write_fixture:
+        FIXTURE.write_bytes(canonical_bytes(derived))
+    raw, fixture = load_fixture()
+    require(fixture == derived, "symbolic fixture differs from exact derivation")
+    expected = null_keys(fixture)
+    if args.write_null_set is not None:
+        write_null_set(args.write_null_set, expected)
+    if args.compare_null_set is not None:
+        compare_null_set(args.compare_null_set, expected)
     if args.list_rows:
-        for source_index, number, row, structure in apex_rows:
-            print(f"source={source_index} K{number} row={row} "
-                  f"contractions={','.join(map(edge_name, structure['contractions']))} "
-                  f"mixed={','.join(map(edge_name, structure['mixed']))}")
-    print("scope=EXPERIMENTAL_SYMBOLIC_PREDICTION_ONLY full_theorem=false")
+        for record in fixture["records"]:
+            print(f"source={record['source_index']} K{record['kernel']} "
+                  f"geometry={record['geometry']} row={tuple(record['row'])} "
+                  f"contractions={','.join(record['contractions'])}")
+    print(f"rows={fixture['row_total']} targets={fixture['target_total']} "
+          f"exact_cost5={fixture['exact_cost_five_total']} "
+          f"strict_dnn={fixture['strict_dnn_total']}")
+    print(f"fixture_sha256={hashlib.sha256(raw).hexdigest()} "
+          f"null_set_match={str(args.compare_null_set is not None).lower()} full_theorem=false")
 
 
 if __name__ == "__main__":

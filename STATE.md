@@ -25,9 +25,16 @@ research/semantic, research/procedural).
   smoke set exactly. Structural audit finds 33 simple kernels, only K744/K756
   as signed-five-cycle equality candidates (12 orbits, 168 exact targets), and
   classifies all 3594 supported edge deletions into 19 marked rank-five block
-  profiles. The remaining 1441664 search targets require full rational
-  generation or a marked rank-five one-credit theorem. Order-eight theorem is
-  open; no hexacyclic claim is made.
+  profiles. Exact search has now certified the first 28000 residual rows (392000
+  targets) with shared rational witnesses and zero unresolved targets. A proved
+  symbolic recognizer identifies 45 cost-five rows: 180 canonical/contraction
+  equality targets and 450 strict coordinate targets. The marked rank-five
+  one-credit route remains blocked by genuine cost-four DNN records but no
+  spectral counterexample. Order-eight still requires the remaining 74988
+  residual rows; no hexacyclic claim is made. In parallel, exact frontier
+  censuses are complete for order nine (162 kernels, 1108126 orbits, 2794425
+  targets) and order ten (66 cubic kernels, 497572 orbits, 2007312 targets),
+  with signed-five-cycle equality families K971 and K1133 identified.
 - 2026-08-06: completed the order-seven part of the rank-six single-block
   hexacyclic frontier. Exact enumeration covers 314 kernels, 519453 parity
   orbits, and the complete 319202 canonical/coordinate target universe.
