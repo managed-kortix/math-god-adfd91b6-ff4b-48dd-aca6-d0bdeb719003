@@ -110,6 +110,12 @@ nine explicitly named two-block interfaces. This is a structural reduction,
 not yet a unit-credit theorem: an opening still needs `sigma>=1`, or a DNN
 bound with one unit of slack, to pay the deleted nonempty tree.
 
+The exact status of that proposed packet is recorded in
+`marked-rank-five-one-credit-frontier.md`. The complete pentacyclic theorem
+supplies only `sigma>=0`; its exact-budget and structural certificate rows do
+not promote to one unit. In particular K756 can delete to the K118 signed-cycle
+family, so those equality-ledger interfaces are genuinely present here.
+
 ## Exact audit
 
 Run:

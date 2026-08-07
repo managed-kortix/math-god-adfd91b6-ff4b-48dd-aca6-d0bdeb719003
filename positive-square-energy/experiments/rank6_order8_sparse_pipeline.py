@@ -196,9 +196,63 @@ def verify_signed_cycle_template(source):
     singles, doubles = SIGNED_CYCLE_SUPPORTS[number]
     values = {f"{PAIRS[index][0]}{PAIRS[index][1]}": (multiplicity, odd)
               for index, multiplicity, odd in zip(support, multiplicities, row)}
-    require(sum(Fraction() for edge in singles if values[edge][1]) == 0,
-            "singleton symbolic cost changed")
-    cost = sum((Fraction(1, 3) + Fraction(2, 3) for edge in doubles), Fraction())
+    parent = list(range(ORDER))
+    sign = [1] * ORDER
+    for edge in sorted(singles):
+        left, right = map(int, edge)
+        require(parent[right] == right, "bad singleton forest orientation")
+        parent[right] = parent[left]
+        sign[right] = sign[left] * (-1 if values[edge][1] else 1)
+    require(len(set(parent)) == 5, "wrong signed-cycle quotient width")
+    gram = [[Fraction() for _ in range(ORDER)] for _ in range(ORDER)]
+    for left in range(ORDER):
+        for right in range(ORDER):
+            if parent[left] == parent[right]:
+                gram[left][right] = Fraction(sign[left] * sign[right])
+    for edge in sorted(doubles):
+        left, right = map(int, edge)
+        value = Fraction(-sign[left] * sign[right], 2)
+        for u in range(ORDER):
+            if parent[u] != parent[left]:
+                continue
+            for v in range(ORDER):
+                if parent[v] == parent[right]:
+                    gram[u][v] = gram[v][u] = sign[u] * sign[v] * value
+
+    def determinant(matrix):
+        work = [list(values) for values in matrix]
+        result = Fraction(1)
+        for column in range(len(work)):
+            pivot = next((index for index in range(column, len(work))
+                          if work[index][column]), None)
+            if pivot is None:
+                return Fraction()
+            if pivot != column:
+                work[column], work[pivot] = work[pivot], work[column]
+                result = -result
+            value = work[column][column]
+            result *= value
+            for index in range(column + 1, len(work)):
+                scale = work[index][column] / value
+                for offset in range(column + 1, len(work)):
+                    work[index][offset] -= scale * work[column][offset]
+        return result
+
+    require(all(gram[index][index] == 1 for index in range(ORDER)),
+            "signed-cycle Gram diagonal changed")
+    for width in range(1, ORDER + 1):
+        for indices in itertools.combinations(range(ORDER), width):
+            minor = [[gram[left][right] for right in indices] for left in indices]
+            require(determinant(minor) >= 0, "signed-cycle Gram is not PSD")
+    for edge in singles:
+        left, right = map(int, edge)
+        transformed = -gram[left][right] if values[edge][1] else gram[left][right]
+        require(transformed == 1, "singleton symbolic cost changed")
+    for edge in doubles:
+        left, right = map(int, edge)
+        require(gram[left][right] in (Fraction(-1, 2), Fraction(1, 2)),
+                "doubled-bundle correlation changed")
+    cost = sum((Fraction(1, 3) + Fraction(2, 3) for _ in doubles), Fraction())
     require(cost == BUDGET, "signed-cycle symbolic cost changed")
     for frontier in (None, *range(PATH_COUNT)):
         require(frontier is None or 0 <= frontier < PATH_COUNT, "bad template frontier")
@@ -429,6 +483,7 @@ def put_parameters(output, denominator, rows):
 
 
 def encode_search(start, attempts, records):
+    require(attempts == len(records), "search record count changed")
     output = bytearray(MAGIC)
     output.extend(bytes.fromhex(SOURCE_SHA256))
     put_uvarint(output, start)
@@ -450,8 +505,7 @@ def encode_search(start, attempts, records):
                     put_parameters(output, denominator, path)
             continue
         bitmap = sum(1 << target for target, witness in enumerate(payload) if witness is not None)
-        require(bitmap != (1 << (PATH_COUNT + 1)) - 1,
-                "fully shared row must not use individual mode")
+        require(0 < bitmap < 1 << (PATH_COUNT + 1), "bad individual target bitmap")
         put_uvarint(output, bitmap)
         for witness in payload:
             if witness is None:
@@ -506,8 +560,7 @@ def decode_search(raw, residual_rows):
             records.append((mode, (denominator, branches, canonical, extended)))
             continue
         bitmap, position = get_uvarint(raw, position)
-        require(bitmap < 1 << (PATH_COUNT + 1) and bitmap != (1 << (PATH_COUNT + 1)) - 1,
-                "bad individual target bitmap")
+        require(0 < bitmap < 1 << (PATH_COUNT + 1), "bad individual target bitmap")
         witnesses = []
         for target in range(PATH_COUNT + 1):
             if not bitmap & (1 << target):
@@ -585,12 +638,14 @@ def verify_individual_witness(engine, source, target, witness):
 def verify_record(engine, source, record):
     mode, payload = record
     if mode == MODE_TEMPLATE:
+        require(payload is None, "payload on template record")
         verify_signed_cycle_template(source)
     elif mode == MODE_SHARED:
         require(not source[-1], "template stored numerically")
         verify_witness(engine, source, payload)
     elif mode == MODE_INDIVIDUAL:
-        require(not source[-1] and len(payload) == PATH_COUNT + 1,
+        require(not source[-1] and type(payload) is tuple and
+                len(payload) == PATH_COUNT + 1 and any(payload),
                 "bad individual record")
         for target, witness in enumerate(payload):
             if witness is not None:
@@ -640,9 +695,11 @@ def search(args, residual_rows):
                   f"shared_exact={witness is not None} fallback_exact={fallback_exact}", flush=True)
     raw = encode_search(args.start, len(selected), records)
     stored = lzma.compress(raw, format=lzma.FORMAT_XZ, preset=6)
-    args.output.write_bytes(stored)
     for source, record in zip(selected, records):
         verify_record(engine, source, record)
+    temporary = args.output.with_name(args.output.name + ".tmp")
+    temporary.write_bytes(stored)
+    temporary.replace(args.output)
     shared = sum(record[0] == MODE_SHARED for record in records)
     templates = sum(record[0] == MODE_TEMPLATE for record in records)
     fallback = sum(sum(witness is not None for witness in record[1])

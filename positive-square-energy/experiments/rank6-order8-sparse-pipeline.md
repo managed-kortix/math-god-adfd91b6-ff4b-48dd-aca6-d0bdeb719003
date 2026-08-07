@@ -39,11 +39,11 @@ part of the sieve.
 
 ## Certificate format
 
-The search format is binary `R8G1`, then XZ compressed.  A chunk authenticates
+The search format is binary `R8G2`, then XZ compressed.  A chunk authenticates
 the rank-six kernel source hash and records only its residual source range.
 Rows, kernels, path lengths, costs, and 14 target keys are regenerated.
 
-For a successful residual orbit the chunk stores:
+For a shared successful residual orbit the chunk stores:
 
 ```text
 common denominator D
@@ -56,8 +56,11 @@ Integers use zig-zag varints.  Fractions use a shared denominator and therefore
 need no JSON pairs, field names, repeated denominators, or stored costs.  One
 branch realization and the 13 canonical paths serve all 14 targets.  The exact
 auditor reconstructs rational unit vectors and every step cost with `Fraction`.
-Null records remain explicit one-byte search failures.  Symbolic templates are
-kept outside the numerical stream and referenced by regenerated source class.
+When no shared realization succeeds, an individual-mode record stores a
+14-target success bitmap followed by one independently exact witness for each
+successful target. The bitmap may be full because independently successful
+witnesses need not share branch vectors. Null records and symbolic templates
+remain explicit one-byte modes; template data is regenerated from the source.
 
 The signed-five-cycle families `K744` and `K756` are recognized before search.
 Their three singleton contractions and five mixed doubled bundles give exact
@@ -95,7 +98,13 @@ python3 positive-square-energy/experiments/rank6_order8_sparse_pipeline.py \
   --verify-pack /tmp/rank6-order8-00000.r8g.xz
 ```
 
-This is an experimental census/search format, not a theorem fixture.  A full
-pipeline still needs per-target fallback records for rows where one shared
-realization does not close all frontiers, plus exact symbolic classification of
-the final equality residuals.
+For checkpointed runs, use 2,000 residuals per chunk. On the current host this
+keeps each serial process near 60 MB of witness state and limits lost work while
+amortizing the roughly 14-second regenerated census. Run disjoint ranges in
+parallel rather than increasing one chunk; `--restarts 1 --iterations 120`
+with the default fallback and denominator settings is the economical first
+pass. Retry only unresolved targets with stronger settings after exact audit.
+
+This is an experimental census/search format, not a theorem fixture. The
+format supports per-target fallback records, but a full pipeline still needs a
+completed search and exact classification of any final equality residuals.
