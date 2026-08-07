@@ -18,6 +18,12 @@ equality-face certificates.  They do not, by themselves, classify the coarse
 residuals.  An authenticated order-eight row below gives a counterexample to
 that stronger template-only claim.
 
+The matching lower bounds and minimizer-locus descriptions for both constructions
+are proved in `cost-five-equality-face-lemma.md`. In particular, the known
+cost-five Grams are global optima of their canonical objectives, not merely
+feasible points. That lemma also shows that the Gram completion within either
+geometry need not be unique.
+
 ## Lemma (strict real certificates rationalize)
 
 Let `P_1,...,P_m` be paths with prescribed lengths and endpoint signs.  Suppose

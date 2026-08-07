@@ -108,6 +108,27 @@ python3 -O positive-square-energy/experiments/rank6_order10_cubic_frontier_censu
   --verify positive-square-energy/experiments/rank6_order10_cubic_frontier_census.json
 ```
 
+The exact-rational generator implements the residual phase in an `R10G1`
+binary stream compressed with XZ. It regenerates the canonical residual range,
+uses payload-free K1133 tags, stores one realization when all 16 frontiers can
+share branch vectors, and otherwise stores a 16-bit success bitmap followed by
+independent exact witnesses. The verifier decodes the compressed artifact and
+recomputes every rational unit vector and cost using `Fraction`:
+
+```sh
+python3 positive-square-energy/experiments/rank6_order10_cubic_exact_rational.py \
+  --start 0 --count 100 --output /tmp/rank6-order10-00000.r10g.xz
+python3 positive-square-energy/experiments/rank6_order10_cubic_exact_rational.py \
+  --verify-pack /tmp/rank6-order10-00000.r10g.xz
+```
+
+A full run is deliberately not the default: the generator requires an explicit
+positive `--count`. A one-residual smoke run with one restart, 80 iterations,
+and denominators through 4096 took 11.1 seconds including 8.8 seconds to
+regenerate the complete residual stream. Search and exact round-trip audit took
+0.04 seconds, closed all 16 targets with a shared witness, and produced 799 raw
+bytes or 564 XZ bytes. This smoke point is not an unresolved-rate estimate.
+
 The canonical census artifact is
 `positive-square-energy/experiments/rank6_order10_cubic_frontier_census.json`.
 Its SHA-256 is

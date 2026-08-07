@@ -594,6 +594,7 @@ def verify_witness(engine, source, witness):
                         for value in parameters), "parameter denominator changed")
     branches = tuple(engine.rational_unit(value) for value in branch_parameters)
     require(all(len(value) == ORDER for value in branches), "branch dimension changed")
+    costs = []
     for frontier in (None, *range(PATH_COUNT)):
         total = Fraction()
         for index, ((_, _, u, v, length), base, longer) in enumerate(
@@ -606,6 +607,8 @@ def verify_witness(engine, source, witness):
             total += sum((engine.exact_step_cost(a, b) for a, b in zip(chain, chain[1:])),
                          Fraction())
         require(total <= BUDGET, "compact exact cost exceeds five")
+        costs.append(total)
+    return tuple(costs)
 
 
 def verify_individual_witness(engine, source, target, witness):
@@ -633,6 +636,7 @@ def verify_individual_witness(engine, source, target, witness):
         total += sum((engine.exact_step_cost(a, b) for a, b in zip(chain, chain[1:])),
                      Fraction())
     require(total <= BUDGET, "individual exact cost exceeds five")
+    return total
 
 
 def verify_record(engine, source, record):
@@ -640,19 +644,21 @@ def verify_record(engine, source, record):
     if mode == MODE_TEMPLATE:
         require(payload is None, "payload on template record")
         verify_signed_cycle_template(source)
+        return (BUDGET,) * (PATH_COUNT + 1)
     elif mode == MODE_SHARED:
         require(not source[-1], "template stored numerically")
-        verify_witness(engine, source, payload)
+        return verify_witness(engine, source, payload)
     elif mode == MODE_INDIVIDUAL:
         require(not source[-1] and type(payload) is tuple and
                 len(payload) == PATH_COUNT + 1 and any(payload),
                 "bad individual record")
-        for target, witness in enumerate(payload):
-            if witness is not None:
-                verify_individual_witness(engine, source, target, witness)
+        return tuple(None if witness is None else
+                     verify_individual_witness(engine, source, target, witness)
+                     for target, witness in enumerate(payload))
     else:
         require(mode == MODE_UNRESOLVED and payload is None and not source[-1],
                 "bad unresolved record")
+        return (None,) * (PATH_COUNT + 1)
 
 
 def search(args, residual_rows):

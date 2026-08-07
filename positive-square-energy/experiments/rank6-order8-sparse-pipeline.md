@@ -105,6 +105,23 @@ parallel rather than increasing one chunk; `--restarts 1 --iterations 120`
 with the default fallback and denominator settings is the economical first
 pass. Retry only unresolved targets with stronger settings after exact audit.
 
+The manifest/auditor accepts arbitrary chunk widths but requires their embedded
+residual ranges to form the pinned ordered prefix `[0,N)` without gaps,
+overlaps, or reordered packs. It locks both compressed and decompressed bytes,
+derives the complete ordered target-key digest, exactly verifies every covered
+witness, and compares all observed cost-five keys with the symbolic fixture.
+Build or extend the manifest from the complete prefix, then audit it:
+
+```sh
+python3 positive-square-energy/experiments/rank6_order8_pack_auditor.py \
+  --build-manifest positive-square-energy/experiments/rank6_order8_search_ckpt/*.r8g.xz
+python3 positive-square-energy/experiments/rank6_order8_pack_auditor.py
+```
+
+The current manifest pins `[0,28000)`. Until the ordered prefix reaches all
+102,988 residual rows and every target has an exact certificate, the auditor
+prints `status=incomplete` in its JSON report and exits with status 1.
+
 This is an experimental census/search format, not a theorem fixture. The
 format supports per-target fallback records, but a full pipeline still needs a
 completed search and exact classification of any final equality residuals.

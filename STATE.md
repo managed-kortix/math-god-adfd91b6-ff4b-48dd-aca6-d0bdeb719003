@@ -17,6 +17,17 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-07: proved the analytic cost-five equality-locus lemma for the two
+  rank-six symbolic geometries. A mixed length-one/length-two pair has cost at
+  least one, uniquely at correlation `-1/2`; six odd unit paths on `K4` have
+  total cost at least three by the exact tangent/PSD stress
+  `3+(9/16) 1^T R 1`, uniquely at the regular-simplex correlations `-1/3`.
+  Therefore the signed-five-cycle and tetrahedron-plus-apex canonical Grams are
+  global optima, and same-parity lengthening is strict off contraction paths.
+  The apex completion can be nonunique, so geometry rather than one Gram must
+  be classified. The remaining orders 8--10 obligation is the combinatorial
+  separation excluding a third coupled equality ledger; no full theorem claim
+  is made. See `hexacyclic-general/cost-five-equality-face-lemma.md`.
 - 2026-08-06: derived the exact order-eight rank-six frontier. The 325 kernels
   have 1598512 physical parity rows and 1045292 automorphism orbits; tetrahedral
   DNN closes 942304, leaving 102988 residual orbits and 1441832 canonical-plus-
@@ -25,7 +36,7 @@ research/semantic, research/procedural).
   smoke set exactly. Structural audit finds 33 simple kernels, only K744/K756
   as signed-five-cycle equality candidates (12 orbits, 168 exact targets), and
   classifies all 3594 supported edge deletions into 19 marked rank-five block
-  profiles. Exact search has now certified the first 28000 residual rows (392000
+  profiles. Exact search has now certified the first 36000 residual rows (504000
   targets) with shared rational witnesses and zero unresolved targets. A proved
   symbolic recognizer identifies 45 cost-five rows: 180 canonical/contraction
   equality targets and 450 strict coordinate targets. The marked rank-five
