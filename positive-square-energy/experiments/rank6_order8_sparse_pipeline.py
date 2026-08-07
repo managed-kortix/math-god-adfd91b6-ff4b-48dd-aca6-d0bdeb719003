@@ -5,10 +5,11 @@ The census never materializes dense 28-coordinate parity rows or a JSON target
 ledger.  It uses support coordinates, degree-class automorphisms, mixed-radix
 orbit traversal, and a superset-min transform for the tetrahedral sieve.
 
-The optional search writes a binary XZ stream.  A successful source row stores
-one common-denominator stereographic realization for all fourteen targets;
-costs, rows, path lengths, and unchanged metadata are reconstructed, not stored.
-This is an experiment and is not a theorem fixture.
+The optional search writes a binary XZ stream.  It stores a shared realization
+when possible and otherwise a success bitmap plus exact per-target witnesses.
+Symbolic signed-cycle rows have a payload-free template tag.  Costs, rows, path
+lengths, and unchanged metadata are reconstructed, not stored.  This is an
+experiment and is not a theorem fixture.
 """
 
 from __future__ import annotations
@@ -37,8 +38,12 @@ BUDGET = Fraction(RANK - 1)
 BUDGET_SCALED = 30 * (RANK - 1)
 PAIRS = tuple(itertools.combinations(range(ORDER), 2))
 PAIR_INDEX = {edge: index for index, edge in enumerate(PAIRS)}
-MAGIC = b"R8G1"
-SCHEMA = "rank-six-order-eight-sparse-pipeline-experiment-v1"
+MAGIC = b"R8G2"
+SCHEMA = "rank-six-order-eight-sparse-pipeline-experiment-v2"
+MODE_UNRESOLVED = 0
+MODE_SHARED = 1
+MODE_TEMPLATE = 2
+MODE_INDIVIDUAL = 3
 SIGNED_CYCLE_SUPPORTS = {
     744: ({"05", "14", "23"}, {"07", "16", "27", "36", "45"}),
     756: ({"05", "14", "23"}, {"07", "16", "25", "34", "67"}),
@@ -182,6 +187,23 @@ def signed_cycle_template(kernel_number, support, multiplicities, row):
     return (set(values) == singles | doubles
             and all(values[edge][0] == 1 for edge in singles)
             and all(values[edge] == (2, 1) for edge in doubles))
+
+
+def verify_signed_cycle_template(source):
+    number, support, multiplicities, row, _, _, template = source
+    require(template and signed_cycle_template(number, support, multiplicities, row),
+            "bad signed-cycle template tag")
+    singles, doubles = SIGNED_CYCLE_SUPPORTS[number]
+    values = {f"{PAIRS[index][0]}{PAIRS[index][1]}": (multiplicity, odd)
+              for index, multiplicity, odd in zip(support, multiplicities, row)}
+    require(sum(Fraction() for edge in singles if values[edge][1]) == 0,
+            "singleton symbolic cost changed")
+    cost = sum((Fraction(1, 3) + Fraction(2, 3) for edge in doubles), Fraction())
+    require(cost == BUDGET, "signed-cycle symbolic cost changed")
+    for frontier in (None, *range(PATH_COUNT)):
+        require(frontier is None or 0 <= frontier < PATH_COUNT, "bad template frontier")
+        require(cost + (Fraction() if frontier is None else 2 * Fraction(1 - 1, 1 + 1))
+                == BUDGET, "signed-cycle extension cost changed")
 
 
 def kernel_census(source, collect_residuals=False):
@@ -340,6 +362,32 @@ def shared_rationalize(engine, paths, vectors, denominators):
     return None
 
 
+def individual_rationalize(engine, paths, vectors, denominators):
+    vectors = engine.rotate_away_from_pole(vectors)
+    for denominator in denominators:
+        try:
+            branch_parameters = tuple(engine.stereographic(row, denominator) for row in vectors)
+            branches = tuple(engine.rational_unit(row) for row in branch_parameters)
+            internals = []
+            total = Fraction()
+            for _, _, u, v, length in paths:
+                endpoint = vectors[v] if length % 2 == 0 else tuple(-x for x in vectors[v])
+                exact_endpoint = branches[v] if length % 2 == 0 else tuple(-x for x in branches[v])
+                parameters = tuple(engine.stereographic(
+                    engine.slerp(vectors[u], endpoint, step / length), denominator)
+                                   for step in range(1, length))
+                chain = [branches[u], *(engine.rational_unit(value) for value in parameters),
+                         exact_endpoint]
+                total += sum((engine.exact_step_cost(a, b) for a, b in zip(chain, chain[1:])),
+                             Fraction())
+                internals.append(parameters)
+        except (RuntimeError, ZeroDivisionError):
+            continue
+        if total <= BUDGET:
+            return denominator, branch_parameters, tuple(internals)
+    return None
+
+
 def put_uvarint(output, value):
     require(type(value) is int and value >= 0, "bad unsigned varint")
     while value >= 0x80:
@@ -374,25 +422,45 @@ def scaled_numerator(value, denominator):
     return value.numerator * (denominator // value.denominator)
 
 
-def encode_search(start, attempts, witnesses):
+def put_parameters(output, denominator, rows):
+    for row in rows:
+        for value in row:
+            put_svarint(output, scaled_numerator(value, denominator))
+
+
+def encode_search(start, attempts, records):
     output = bytearray(MAGIC)
     output.extend(bytes.fromhex(SOURCE_SHA256))
     put_uvarint(output, start)
     put_uvarint(output, attempts)
-    for witness in witnesses:
-        output.append(witness is not None)
-        if witness is None:
+    for record in records:
+        mode, payload = record
+        require(mode in (MODE_UNRESOLVED, MODE_SHARED, MODE_TEMPLATE, MODE_INDIVIDUAL),
+                "bad search record mode")
+        output.append(mode)
+        if mode in (MODE_UNRESOLVED, MODE_TEMPLATE):
+            require(payload is None, "payload on payload-free record")
             continue
-        denominator, branches, canonical, extended = witness
-        put_uvarint(output, denominator)
-        for row in branches:
-            for value in row:
-                put_svarint(output, scaled_numerator(value, denominator))
-        for family in (canonical, extended):
-            for path in family:
-                for row in path:
-                    for value in row:
-                        put_svarint(output, scaled_numerator(value, denominator))
+        if mode == MODE_SHARED:
+            denominator, branches, canonical, extended = payload
+            put_uvarint(output, denominator)
+            put_parameters(output, denominator, branches)
+            for family in (canonical, extended):
+                for path in family:
+                    put_parameters(output, denominator, path)
+            continue
+        bitmap = sum(1 << target for target, witness in enumerate(payload) if witness is not None)
+        require(bitmap != (1 << (PATH_COUNT + 1)) - 1,
+                "fully shared row must not use individual mode")
+        put_uvarint(output, bitmap)
+        for witness in payload:
+            if witness is None:
+                continue
+            denominator, branches, internals = witness
+            put_uvarint(output, denominator)
+            put_parameters(output, denominator, branches)
+            for path in internals:
+                put_parameters(output, denominator, path)
     return bytes(output)
 
 
@@ -404,27 +472,57 @@ def decode_search(raw, residual_rows):
     require(start + attempts <= len(residual_rows), "pack range exceeds census")
     records = []
     for local in range(attempts):
-        require(position < len(raw) and raw[position] in (0, 1), "bad witness tag")
-        success = bool(raw[position])
+        require(position < len(raw) and raw[position] in
+                (MODE_UNRESOLVED, MODE_SHARED, MODE_TEMPLATE, MODE_INDIVIDUAL),
+                "bad witness tag")
+        mode = raw[position]
         position += 1
-        if not success:
-            records.append(None)
-            continue
-        denominator, position = get_uvarint(raw, position)
-        require(denominator > 0, "zero shared denominator")
-        _, _, multiplicities, row, _, _, _ = residual_rows[start + local]
+        source = residual_rows[start + local]
+        _, _, multiplicities, row, _, _, template = source
         lengths = canonical_path_lengths(multiplicities, row)
-        def vector():
+        if mode == MODE_UNRESOLVED:
+            require(not template, "template encoded as unresolved")
+            records.append((mode, None))
+            continue
+        if mode == MODE_TEMPLATE:
+            require(template, "template tag on numerical row")
+            records.append((mode, None))
+            continue
+        def vector(denominator):
             nonlocal position
             values = []
             for _ in range(ORDER - 1):
                 value, position = get_svarint(raw, position)
                 values.append(Fraction(value, denominator))
             return tuple(values)
-        branches = tuple(vector() for _ in range(ORDER))
-        canonical = tuple(tuple(vector() for _ in range(length - 1)) for length in lengths)
-        extended = tuple(tuple(vector() for _ in range(length + 1)) for length in lengths)
-        records.append((denominator, branches, canonical, extended))
+        if mode == MODE_SHARED:
+            denominator, position = get_uvarint(raw, position)
+            require(denominator > 0, "zero shared denominator")
+            branches = tuple(vector(denominator) for _ in range(ORDER))
+            canonical = tuple(tuple(vector(denominator) for _ in range(length - 1))
+                              for length in lengths)
+            extended = tuple(tuple(vector(denominator) for _ in range(length + 1))
+                             for length in lengths)
+            records.append((mode, (denominator, branches, canonical, extended)))
+            continue
+        bitmap, position = get_uvarint(raw, position)
+        require(bitmap < 1 << (PATH_COUNT + 1) and bitmap != (1 << (PATH_COUNT + 1)) - 1,
+                "bad individual target bitmap")
+        witnesses = []
+        for target in range(PATH_COUNT + 1):
+            if not bitmap & (1 << target):
+                witnesses.append(None)
+                continue
+            denominator, position = get_uvarint(raw, position)
+            require(denominator > 0, "zero individual denominator")
+            target_lengths = list(lengths)
+            if target:
+                target_lengths[target - 1] += 2
+            branches = tuple(vector(denominator) for _ in range(ORDER))
+            internals = tuple(tuple(vector(denominator) for _ in range(length - 1))
+                              for length in target_lengths)
+            witnesses.append((denominator, branches, internals))
+        records.append((mode, tuple(witnesses)))
     require(position == len(raw), "trailing pack bytes")
     return start, attempts, records
 
@@ -457,32 +555,103 @@ def verify_witness(engine, source, witness):
         require(total <= BUDGET, "compact exact cost exceeds five")
 
 
+def verify_individual_witness(engine, source, target, witness):
+    _, support, multiplicities, row, _, _, _ = source
+    kernel = dense_kernel(support, multiplicities)
+    parity = dense_row(support, row)
+    frontier = None if target == 0 else target - 1
+    paths = engine.path_ledger(kernel, parity, frontier)
+    denominator, branch_parameters, internals = witness
+    require(denominator > 0 and len(branch_parameters) == ORDER and
+            len(internals) == PATH_COUNT, "bad individual witness")
+    for parameters in branch_parameters:
+        require(len(parameters) == ORDER - 1 and
+                all(denominator % value.denominator == 0 for value in parameters),
+                "individual branch denominator changed")
+    branches = tuple(engine.rational_unit(value) for value in branch_parameters)
+    total = Fraction()
+    for (_, _, u, v, length), parameters in zip(paths, internals):
+        require(len(parameters) == length - 1, "individual path width changed")
+        for value in parameters:
+            require(len(value) == ORDER - 1 and denominator % value.denominator == 0,
+                    "individual internal denominator changed")
+        endpoint = branches[v] if length % 2 == 0 else tuple(-x for x in branches[v])
+        chain = [branches[u], *(engine.rational_unit(value) for value in parameters), endpoint]
+        total += sum((engine.exact_step_cost(a, b) for a, b in zip(chain, chain[1:])),
+                     Fraction())
+    require(total <= BUDGET, "individual exact cost exceeds five")
+
+
+def verify_record(engine, source, record):
+    mode, payload = record
+    if mode == MODE_TEMPLATE:
+        verify_signed_cycle_template(source)
+    elif mode == MODE_SHARED:
+        require(not source[-1], "template stored numerically")
+        verify_witness(engine, source, payload)
+    elif mode == MODE_INDIVIDUAL:
+        require(not source[-1] and len(payload) == PATH_COUNT + 1,
+                "bad individual record")
+        for target, witness in enumerate(payload):
+            if witness is not None:
+                verify_individual_witness(engine, source, target, witness)
+    else:
+        require(mode == MODE_UNRESOLVED and payload is None and not source[-1],
+                "bad unresolved record")
+
+
 def search(args, residual_rows):
     engine = load_engine()
     selected = residual_rows[args.start:args.start + args.search_count]
     denominators = tuple(int(value) for value in args.denominators.split(","))
     require(denominators and all(value > 0 for value in denominators), "bad denominators")
-    witnesses = []
+    records = []
     for local, source in enumerate(selected):
         _, support, multiplicities, row, _, _, template = source
         if template:
-            witnesses.append(None)
+            records.append((MODE_TEMPLATE, None))
             continue
         paths = engine.path_ledger(dense_kernel(support, multiplicities), dense_row(support, row))
         value, vectors = engine.optimize(paths, args.seed + 1009 * (args.start + local),
                                          args.restarts, args.iterations)
         witness = shared_rationalize(engine, paths, vectors, denominators)
-        witnesses.append(witness)
+        individual = None
+        if witness is None:
+            individual = []
+            for target in range(PATH_COUNT + 1):
+                frontier = None if target == 0 else target - 1
+                target_paths = paths if frontier is None else engine.path_ledger(
+                    dense_kernel(support, multiplicities), dense_row(support, row), frontier)
+                candidate = vectors
+                exact = individual_rationalize(engine, target_paths, candidate, denominators)
+                if exact is None and args.fallback_restarts:
+                    _, candidate = engine.optimize(
+                        target_paths, args.seed + 1009 * (args.start + local) + target + 1,
+                        args.fallback_restarts, args.fallback_iterations, warm=(vectors,))
+                    exact = individual_rationalize(engine, target_paths, candidate, denominators)
+                individual.append(exact)
+            mode = MODE_INDIVIDUAL if any(item is not None for item in individual) else MODE_UNRESOLVED
+            records.append((mode, tuple(individual) if mode == MODE_INDIVIDUAL else None))
+        else:
+            records.append((MODE_SHARED, witness))
         if args.progress:
+            fallback_exact = 0 if individual is None else sum(x is not None for x in individual)
             print(f"[{local + 1}/{len(selected)}] numerical={value:.9f} "
-                  f"shared_exact={witness is not None}", flush=True)
-    raw = encode_search(args.start, len(selected), witnesses)
+                  f"shared_exact={witness is not None} fallback_exact={fallback_exact}", flush=True)
+    raw = encode_search(args.start, len(selected), records)
     stored = lzma.compress(raw, format=lzma.FORMAT_XZ, preset=6)
     args.output.write_bytes(stored)
-    for source, witness in zip(selected, witnesses):
-        if witness is not None:
-            verify_witness(engine, source, witness)
-    print(f"attempts={len(selected)} shared_exact={sum(x is not None for x in witnesses)} "
+    for source, record in zip(selected, records):
+        verify_record(engine, source, record)
+    shared = sum(record[0] == MODE_SHARED for record in records)
+    templates = sum(record[0] == MODE_TEMPLATE for record in records)
+    fallback = sum(sum(witness is not None for witness in record[1])
+                   for record in records if record[0] == MODE_INDIVIDUAL)
+    unresolved = sum(PATH_COUNT + 1 for record in records if record[0] == MODE_UNRESOLVED)
+    unresolved += sum(sum(witness is None for witness in record[1])
+                      for record in records if record[0] == MODE_INDIVIDUAL)
+    print(f"attempts={len(selected)} shared_exact={shared} templates={templates} "
+          f"fallback_exact={fallback} unresolved_targets={unresolved} "
           f"raw_bytes={len(raw)} xz_bytes={len(stored)}")
     print(f"sha256={hashlib.sha256(stored).hexdigest()}")
 
@@ -496,6 +665,8 @@ def main():
     parser.add_argument("--seed", type=int, default=86131)
     parser.add_argument("--restarts", type=int, default=2)
     parser.add_argument("--iterations", type=int, default=260)
+    parser.add_argument("--fallback-restarts", type=int, default=2)
+    parser.add_argument("--fallback-iterations", type=int, default=360)
     parser.add_argument("--denominators", default="256,1024,4096,16384,65536")
     parser.add_argument("--verify-pack", type=Path)
     args = parser.parse_args()
@@ -506,10 +677,15 @@ def main():
         raw = lzma.decompress(args.verify_pack.read_bytes(), format=lzma.FORMAT_XZ)
         start, attempts, records = decode_search(raw, residual_rows)
         engine = load_engine()
-        for source, witness in zip(residual_rows[start:start + attempts], records):
-            if witness is not None:
-                verify_witness(engine, source, witness)
-        print(f"attempts={attempts} shared_exact={sum(x is not None for x in records)} exact_audit=true")
+        selected = residual_rows[start:start + attempts]
+        for source, record in zip(selected, records):
+            verify_record(engine, source, record)
+        shared = sum(record[0] == MODE_SHARED for record in records)
+        templates = sum(record[0] == MODE_TEMPLATE for record in records)
+        fallback = sum(sum(witness is not None for witness in record[1])
+                       for record in records if record[0] == MODE_INDIVIDUAL)
+        print(f"attempts={attempts} shared_exact={shared} templates={templates} "
+              f"fallback_exact={fallback} exact_audit=true")
         return
     if args.search_count:
         require(args.output is not None and args.output.parent.is_dir(), "search output parent missing")
