@@ -8,6 +8,7 @@ import hashlib
 import importlib.util
 import json
 import lzma
+import subprocess
 import sys
 from pathlib import Path
 
@@ -26,6 +27,31 @@ SCHEMA = "rank-six-order-ten-r10g-search-pack-manifest-v1"
 FRONTIER_TOTAL = 16
 PROFILES = ((1, (3, 4)), (2, (4,)), (5, ()))
 EXPECTED_PROFILE_DECOMPOSITIONS = {(1, (3, 4)): 18, (2, (4,)): 152, (5, ()): 8}
+EXPECTED_LEDGER_SCOPE = {
+    "orders": [8, 9, 10],
+    "source": "canonical coarse residual parity-orbit representatives",
+    "atoms": "regular simplexes K_m for 2<=m<=5 and mixed odd/even doubled pairs",
+    "cost": 5,
+    "overlaps": "physical occurrences disjoint; quotient supports may overlap",
+    "contractions": "every unused odd singleton and every non-odd singleton is signed-contracted",
+}
+EXPECTED_LEDGER_COUNTS = {
+    "8": [
+        {"mixed": 1, "simplex_widths": [3, 4], "decompositions": 4},
+        {"mixed": 2, "simplex_widths": [4], "decompositions": 185},
+        {"mixed": 5, "simplex_widths": [], "decompositions": 12},
+    ],
+    "9": [
+        {"mixed": 1, "simplex_widths": [3, 4], "decompositions": 16},
+        {"mixed": 2, "simplex_widths": [4], "decompositions": 249},
+        {"mixed": 5, "simplex_widths": [], "decompositions": 10},
+    ],
+    "10": [
+        {"mixed": 1, "simplex_widths": [3, 4], "decompositions": 18},
+        {"mixed": 2, "simplex_widths": [4], "decompositions": 152},
+        {"mixed": 5, "simplex_widths": [], "decompositions": 8},
+    ],
+}
 
 
 def require(condition, message):
@@ -120,6 +146,10 @@ def symbolic_owners(stream, census, residuals):
             "symbolic ledger top-level fields changed")
     require(payload["schema"] == "rank6-orders8-10-exact-atom-ledger-classification-v1",
             "symbolic ledger schema changed")
+    require(canonical_bytes(payload["scope"]) == canonical_bytes(EXPECTED_LEDGER_SCOPE),
+            "symbolic ledger scope changed")
+    require(canonical_bytes(payload["counts"]) == canonical_bytes(EXPECTED_LEDGER_COUNTS),
+            "symbolic ledger counts changed")
     require(type(payload["decompositions"]) is list, "bad symbolic decomposition list")
     ledger = load_module("rank6_order10_ledger_for_pack_audit", LEDGER_PATH)
     ledger.audit_atom_model()
@@ -132,7 +162,7 @@ def symbolic_owners(stream, census, residuals):
     for source_index, source in enumerate(residuals):
         expected_records.extend(ledger.result_record(10, source_index, result)
                                 for result in ledger.classify(stream, source))
-    require(records == expected_records,
+    require(canonical_bytes(records) == canonical_bytes(expected_records),
             "symbolic ledger differs from exact regenerated order-ten classification")
 
     decomposition_counts = {profile: 0 for profile in PROFILES}
@@ -221,8 +251,17 @@ def load_manifest(path):
                 for field in ("source_sha256", "symbolic_sha256",
                               "covered_key_stream_sha256")),
             "bad manifest digest")
-    require(type(payload["dependency_sha256"]) is dict,
+    require(type(payload["dependency_sha256"]) is dict and
+            set(payload["dependency_sha256"]) == {
+                "census", "equality_recognizer", "equality_recognizer_fixture",
+                "kernel_source", "symbolic_ledger", "symbolic_ledger_fixture",
+                "witness_stream",
+            } and
+            all(type(value) is str and len(value) == 64 and
+                all(character in "0123456789abcdef" for character in value)
+                for value in payload["dependency_sha256"].values()),
             "bad manifest dependency digest map")
+    require(type(payload["chunks"]) is list, "bad manifest chunk list")
     return payload
 
 
@@ -232,6 +271,7 @@ def read_chunks(manifest_path, manifest, stream, census, residuals):
     expected_start = 0
     decoded = []
     root = manifest_path.parent.resolve()
+    seen_paths = set()
     for index, chunk in enumerate(chunks):
         require(type(chunk) is dict and set(chunk) == {
             "path", "residual_range", "compressed_bytes", "compressed_sha256",
@@ -256,6 +296,8 @@ def read_chunks(manifest_path, manifest, stream, census, residuals):
             path.relative_to(root)
         except ValueError as error:
             raise RuntimeError(f"chunk {index} escapes the manifest directory") from error
+        require(path not in seen_paths, f"chunk {index} repeats a pack path")
+        seen_paths.add(path)
         stored = path.read_bytes()
         require(len(stored) == chunk["compressed_bytes"] and
                 sha256(stored) == chunk["compressed_sha256"],
@@ -412,6 +454,7 @@ def main():
     parser.add_argument("--digest-only", action="store_true",
                         help="check dependency, range, byte, key, and symbolic digests only")
     parser.add_argument("--build-manifest", nargs="+", type=Path, metavar="PACK")
+    parser.add_argument("--emit", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
     if args.build_manifest is not None:
         require(not args.digest_only, "--digest-only cannot build a manifest")
@@ -420,7 +463,17 @@ def main():
               f"covered_residual_range=0..{payload['covered_residual_range'][1]}")
         return
     report, complete = audit(args.manifest, not args.digest_only)
-    sys.stdout.write(canonical_bytes(report).decode("ascii"))
+    output = canonical_bytes(report).decode("ascii")
+    if sys.flags.optimize == 0 and not args.emit:
+        command = [sys.executable, "-O", __file__, "--manifest", str(args.manifest), "--emit"]
+        if args.digest_only:
+            command.append("--digest-only")
+        completed = subprocess.run(command, check=False, capture_output=True, text=True)
+        expected_returncode = 0 if complete else 1
+        require(completed.returncode == expected_returncode and completed.stderr == "",
+                "optimized audit failed")
+        require(completed.stdout == output, "normal and optimized outputs differ")
+    sys.stdout.write(output)
     if not complete:
         raise SystemExit(1)
 
