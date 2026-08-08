@@ -1,0 +1,3 @@
+attempts=10000 shared_exact=10000 templates=0 fallback_exact=0 unresolved_targets=0
+raw_bytes=6179047 xz_bytes=4119248 elapsed_seconds=984.210146
+sha256=3f78d6052c758a7b7bd69d6a0b7ce2f995b9745b087fea0ef02907792623ef08
