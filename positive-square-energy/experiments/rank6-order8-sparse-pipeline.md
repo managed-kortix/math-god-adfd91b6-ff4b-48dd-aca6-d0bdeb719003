@@ -118,10 +118,10 @@ python3 positive-square-energy/experiments/rank6_order8_pack_auditor.py \
 python3 positive-square-energy/experiments/rank6_order8_pack_auditor.py
 ```
 
-The current manifest pins `[0,28000)`. Until the ordered prefix reaches all
-102,988 residual rows and every target has an exact certificate, the auditor
-prints `status=incomplete` in its JSON report and exits with status 1.
-
-This is an experimental census/search format, not a theorem fixture. The
-format supports per-target fallback records, but a full pipeline still needs a
-completed search and exact classification of any final equality residuals.
+The current manifest pins all `[0,102988)` residuals. A full audit replays every
+target. For bounded independent replays, use `--chunk-index I` together with
+`--write-chunk-transcript PATH`; all 17 indices can be checked independently and
+in any order. `--aggregate-transcripts ... --write-aggregate PATH` then rejects
+missing, duplicate, foreign-manifest, stale-auditor, or incomplete checkpoints.
+The aggregate is only a coverage index, not proof of execution: independent
+exact verification still requires the verifier to replay each chunk.

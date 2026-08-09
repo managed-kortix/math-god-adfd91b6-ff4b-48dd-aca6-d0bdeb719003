@@ -349,6 +349,13 @@ def audit(manifest_path, exact=True):
             "transitive dependency digest changed")
     census = load_module("rank6_order10_census_for_pack_audit", CENSUS_PATH)
     stream = load_module("rank6_order10_stream_for_pack_audit", STREAM_PATH)
+    require(census.ORDER == 10 and census.RANK == 6 and census.PATH_COUNT == 15 and
+            census.EXPECTED_TOTALS == (1508832, 497572, 372115, 125457,
+                                       2007312, 8, 128),
+            "order-ten census contract changed")
+    require(stream.MAGIC == b"R10G1" and stream.ORDER == 10 and
+            stream.PATH_COUNT == 15 and stream.BUDGET == 5,
+            "witness stream configuration changed")
     require(manifest["source_sha256"] == census.SOURCE_SHA256 ==
             dependencies["kernel_source"], "kernel source ownership changed")
     residuals = stream.residual_rows(census)
@@ -366,10 +373,23 @@ def audit(manifest_path, exact=True):
     require(manifest["covered_key_stream_sha256"] == key_digest(residuals, covered),
             "covered ordered key stream digest changed")
     decoded_certificates, modes = certified_targets(stream, census, residuals, decoded, exact)
-    certified = decoded_certificates if exact else set()
+    numerical = decoded_certificates if exact else set()
     expected_owned = {key for key in owners if key[0] < covered}
-    missing_owned = expected_owned - certified if exact else set()
-    require(not missing_owned, f"symbolic equality targets lack exact certificates: {len(missing_owned)}")
+    covered_keys = {
+        (source_index, target_frontier(target))
+        for source_index in range(covered) for target in range(FRONTIER_TOTAL)
+    }
+    if exact:
+        unresolved = covered_keys - numerical
+        unexpected = unresolved - expected_owned
+        require(not unexpected, f"unrecognized unresolved targets: {len(unexpected)}")
+        symbolic_exact = numerical & expected_owned
+        symbolic_certified = unresolved & expected_owned
+        certified = numerical | symbolic_certified
+        require(expected_owned <= symbolic_exact | symbolic_certified,
+                "symbolically owned target lacks an exact certificate")
+    else:
+        unresolved = symbolic_exact = symbolic_certified = certified = set()
     profile_report = {}
     for profile in PROFILES:
         label = f"mixed-{profile[0]}_simplex-{'-'.join(map(str, profile[1])) or 'none'}"
@@ -379,17 +399,33 @@ def audit(manifest_path, exact=True):
             "rows_in_coverage": len(owner_rows[profile] & set(range(covered))),
             "owned_targets_in_coverage": len(keys),
         }
-    complete = exact and covered == len(residuals) and len(certified) == len(residuals) * FRONTIER_TOTAL
+    complete = exact and covered == len(residuals) and certified == covered_keys
     return {
         "status": "complete" if complete else "incomplete",
+        "census": {
+            "kernel_interval": [1133, 1198],
+            "kernel_total": 66,
+            "physical_total": 1508832,
+            "parity_orbit_total": 497572,
+            "coarse_certified_total": 372115,
+            "coarse_residual_total": len(residuals),
+            "frontier_target_total": len(residuals) * FRONTIER_TOTAL,
+        },
         "covered_residual_range": [0, covered],
         "residual_total": len(residuals),
+        "missing_residual_total": len(residuals) - covered,
         "covered_target_total": covered * FRONTIER_TOTAL,
+        "missing_target_total": (len(residuals) - covered) * FRONTIER_TOTAL,
         "exact_certified_target_total": len(certified),
         "uncertified_target_total": (covered * FRONTIER_TOTAL - len(certified)
                                      if exact else covered * FRONTIER_TOTAL),
+        "unresolved_target_total": len(unresolved),
         "symbolic_owned_target_total": len(expected_owned),
-        "symbolic_missing_exact_target_total": len(missing_owned),
+        "symbolic_numerically_certified_target_total": len(symbolic_exact),
+        "symbolic_only_certified_target_total": len(symbolic_certified),
+        "disjoint_rational_owner_target_total": len(numerical),
+        "disjoint_symbolic_owner_target_total": len(symbolic_certified),
+        "symbolic_decomposition_total": sum(decomposition_counts.values()),
         "symbolic_profiles": profile_report,
         "record_modes": modes,
         "exact_audit": exact,

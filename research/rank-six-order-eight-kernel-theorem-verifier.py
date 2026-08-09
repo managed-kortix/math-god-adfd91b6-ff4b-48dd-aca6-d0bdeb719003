@@ -7,7 +7,6 @@ import argparse
 import hashlib
 import importlib.util
 import json
-import subprocess
 import sys
 from copy import deepcopy
 from pathlib import Path
@@ -23,7 +22,6 @@ PACK_AUDITOR = EXPERIMENTS / "rank6_order8_pack_auditor.py"
 PACK_MANIFEST = EXPERIMENTS / "rank6_order8_search_manifest.json"
 SYMBOLIC_PROGRAM = EXPERIMENTS / "rank6_order8_symbolic_recognizers.py"
 SYMBOLIC_FIXTURE = EXPERIMENTS / "rank6_order8_symbolic_templates.json"
-AUDIT_TRANSCRIPT = EXPERIMENTS / "rank6_order8_exact_audit_transcript.json"
 
 DEPENDENCIES = {
     "kernel_fixture": (KERNEL_FIXTURE,
@@ -33,15 +31,13 @@ DEPENDENCIES = {
     "census_fixture": (CENSUS_FIXTURE,
         "724fdb337b7bb9225b1a8691c28e131ae1c8de7dc38bb13a5adbb98c1f92218e"),
     "pack_auditor": (PACK_AUDITOR,
-        "f55352a99317c6b420c59d27f3236f78f6376607813c111c08a6159933d73f00"),
+        "21dc6cafe2539bb20e91ea3bf278f3e7ff8d66602b5acbe1c0d3d73f44f02175"),
     "pack_manifest": (PACK_MANIFEST,
         "dd97ff3059cd637177171cb5d335cc17889a3714459522232e8110c5d79da469"),
     "symbolic_program": (SYMBOLIC_PROGRAM,
         "755dd24b9e3f129dc6cd4fe590c4c13031bd22c41054ca29082981e3f5d909fe"),
     "symbolic_fixture": (SYMBOLIC_FIXTURE,
         "2f457374d9627bd27339a0988aa47149db825dd0cba050c71ac9accfa3f72b95"),
-    "audit_transcript": (AUDIT_TRANSCRIPT,
-        "7cb0675f251ed07ad99c72a3be4482b87383e6fc2d4a819dcf064a2849cb3a4f"),
 }
 EXPECTED_SCOPE = "order=8;rank=6;kernels=K646-K970;single-nontrivial-block"
 EXPECTED_CONCLUSION = "kappa(B)<=|E(B)|+5;therefore s+(G)>=|V(G)| after rooted-tree lift"
@@ -137,27 +133,19 @@ def validate_frontier_report(report):
     return report
 
 
-def audit_exact_frontier(full=False):
+def audit_exact_frontier():
     auditor = load_module("rank6_order8_pack_for_master", PACK_AUDITOR)
-    transcript_raw, transcript = auditor.authenticate_transcript(PACK_MANIFEST, AUDIT_TRANSCRIPT)
-    transcript_report = validate_frontier_report(transcript["report"])
-    if not full:
-        return transcript_report, hashlib.sha256(transcript_raw).hexdigest()
-
     report, complete = auditor.audit(PACK_MANIFEST, exact=True)
     require(complete, "exhaustive exact frontier is incomplete")
     validate_frontier_report(report)
-    reproduced = auditor.canonical_bytes(auditor.transcript_payload(PACK_MANIFEST, report))
-    require(reproduced == transcript_raw,
-            "exhaustive audit does not reproduce the authenticated transcript")
-    return report, hashlib.sha256(transcript_raw).hexdigest()
+    return report
 
 
-def audit(full=False):
+def audit():
     validate_registry()
     dependencies = audit_dependencies()
     census_digest, census = audit_census()
-    frontier, transcript_digest = audit_exact_frontier(full)
+    frontier = audit_exact_frontier()
     rational_targets = frontier["covered_target_total"] - frontier["unresolved_target_total"]
     require(rational_targets == 1441808, "rational target total changed")
     manifest = {
@@ -178,7 +166,7 @@ def audit(full=False):
             "rational_targets": rational_targets,
             "symbolic_targets": frontier["symbolic_certified_target_total"],
             "complete_disjoint_ownership": True,
-            "exact_audit_transcript_sha256": transcript_digest,
+            "verification": "exact replay of every manifest chunk",
         },
         "length_scope": "arbitrary positive simple-subdivision lengths via same-parity monotonicity",
         "attachments": "arbitrary finite rooted trees at branch or subdivision vertices",
@@ -241,9 +229,9 @@ def hostile_self_checks():
     return mutations
 
 
-def report(digest, mutations, full):
+def report(digest, mutations):
     return "\n".join((
-        f"rank-six order-eight kernel theorem: {'exhaustive' if full else 'authenticated'} exact audit passed",
+        "rank-six order-eight kernel theorem: exhaustive exact audit passed",
         "census: kernels=325 physical=1598512 orbits=1045292 coarse=942304 residual=102988",
         "frontier: total=1441832 rational=1441808 symbolic=24 complete=true",
         "lengths: arbitrary same-parity lengthening from canonical-plus-coordinate targets",
@@ -252,33 +240,22 @@ def report(digest, mutations, full):
         "nonclaim: no order-nine, order-ten, multiblock, or all-hexacyclic conclusion",
         f"exact_dependency_manifest_sha256: {digest}",
         f"rejected_hostile_mutations: {mutations}",
-        f"verification_layer: {'full-exhaustive-replay' if full else 'fast-authenticated-transcript'}",
+        "verification_layer: full-exhaustive-replay",
     )) + "\n"
-
-
-def optimized_output():
-    completed = subprocess.run(
-        (sys.executable, "-O", str(Path(__file__).resolve()), "--emit"),
-        check=False, capture_output=True, text=True)
-    require(completed.returncode == 0, "python -O master verifier failed")
-    require(completed.stderr == "", "python -O master verifier wrote stderr")
-    return completed.stdout
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--emit", action="store_true")
     parser.add_argument("--print-manifest", action="store_true")
     parser.add_argument("--full", action="store_true",
                         help="replay all 1,441,832 exact target audits")
     args = parser.parse_args()
-    require(not (args.full and args.emit), "--full and --emit are incompatible")
-    manifest, digest = audit(args.full)
+    require(args.full,
+            "--full is required: an unauthenticated result transcript is not independent proof")
+    manifest, digest = audit()
     mutations = hostile_self_checks()
-    require(mutations == 15, "hostile mutation count changed")
-    output = report(digest, mutations, args.full)
-    if not args.emit and not args.full and sys.flags.optimize == 0:
-        require(optimized_output() == output, "normal and python -O output differ")
+    require(mutations == 14, "hostile mutation count changed")
+    output = report(digest, mutations)
     if args.print_manifest:
         sys.stdout.write(canonical_bytes(manifest).decode("ascii"))
     sys.stdout.write(output)

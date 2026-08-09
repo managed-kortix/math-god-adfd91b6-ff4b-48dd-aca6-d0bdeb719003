@@ -23,7 +23,16 @@ DEFAULT_MANIFEST = HERE / "rank6_order8_search_manifest.json"
 DEFAULT_TRANSCRIPT = HERE / "rank6_order8_exact_audit_transcript.json"
 SCHEMA = "rank-six-order-eight-search-pack-manifest-v2"
 TRANSCRIPT_SCHEMA = "rank-six-order-eight-exact-audit-transcript-v1"
+CHUNK_TRANSCRIPT_SCHEMA = "rank-six-order-eight-exact-chunk-audit-v1"
+AGGREGATE_SCHEMA = "rank-six-order-eight-chunk-audit-aggregate-v1"
 FRONTIER_TOTAL = 14
+REPORT_FIELDS = {
+    "status", "covered_residual_range", "residual_total", "covered_target_total",
+    "unresolved_target_total", "symbolic_certified_target_total", "unresolved_keys",
+    "exact_cost_five_target_total", "symbolic_expected_in_coverage",
+    "symbolic_rationally_certified_target_total", "symbolic_unexpected_target_total",
+    "symbolic_coverage_match", "exact_audit",
+}
 
 
 def require(condition, message):
@@ -207,8 +216,13 @@ def target_frontier(target):
 
 
 def key_digest(residual_rows, stop):
+    return key_range_digest(residual_rows, 0, stop)
+
+
+def key_range_digest(residual_rows, start, stop):
     digest = hashlib.sha256()
-    for source_index, source in enumerate(residual_rows[:stop]):
+    for source_index in range(start, stop):
+        source = residual_rows[source_index]
         number, _, _, row, _, _, _ = source
         for target in range(FRONTIER_TOTAL):
             digest.update(stream_line(
@@ -216,7 +230,7 @@ def key_digest(residual_rows, stop):
     return digest.hexdigest()
 
 
-def audit(manifest_path, exact=True):
+def audit(manifest_path, exact=True, chunk_index=None):
     manifest = load_manifest(manifest_path)
     dependencies = dependency_digests()
     require(manifest["dependency_sha256"] == dependencies,
@@ -252,6 +266,9 @@ def audit(manifest_path, exact=True):
             path.relative_to(manifest_path.parent.resolve())
         except ValueError as error:
             raise RuntimeError(f"chunk {index} escapes the manifest directory") from error
+        expected_start = stop
+        if chunk_index is not None and index != chunk_index:
+            continue
         stored = path.read_bytes()
         require(len(stored) == chunk["compressed_bytes"] and
                 sha256(stored) == chunk["compressed_sha256"],
@@ -266,20 +283,25 @@ def audit(manifest_path, exact=True):
         require(actual_start == start and attempts == stop - start,
                 f"chunk {index} embedded range changed")
         decoded.append((start, records))
-        expected_start = stop
-
-    covered = expected_start
-    require(manifest["covered_residual_range"] == [0, covered] and
-            manifest["covered_target_total"] == covered * FRONTIER_TOTAL,
+    require(expected_start == residual_total, "manifest does not cover every residual")
+    require(manifest["covered_residual_range"] == [0, residual_total] and
+            manifest["covered_target_total"] == residual_total * FRONTIER_TOTAL,
             "manifest coverage totals changed")
-    require(manifest["covered_key_stream_sha256"] == key_digest(residual_rows, covered),
+    require(manifest["covered_key_stream_sha256"] == key_digest(residual_rows, residual_total),
             "covered ordered key stream digest changed")
+    if chunk_index is None:
+        covered_start, covered_stop = 0, residual_total
+    else:
+        require(type(chunk_index) is int and 0 <= chunk_index < len(chunks),
+                "chunk index is out of range")
+        covered_start, covered_stop = chunks[chunk_index]["residual_range"]
 
     unresolved = set()
     observed_nulls = set()
     symbolic_missing = set()
     symbolic_unexpected = set()
-    expected_nulls = {key for key in symbolic_nulls if key[0] < covered}
+    expected_nulls = {key for key in symbolic_nulls
+                      if covered_start <= key[0] < covered_stop}
     if exact:
         engine = pipeline.load_engine()
         for start, records in decoded:
@@ -301,13 +323,13 @@ def audit(manifest_path, exact=True):
                 f"unrecognized unresolved targets: {len(symbolic_unexpected)}")
 
     certified_symbolic = unresolved & expected_nulls
-    complete = exact and covered == residual_total and unresolved == certified_symbolic
+    complete = exact and unresolved == certified_symbolic
     status = "complete" if complete else "incomplete"
     report = {
         "status": status,
-        "covered_residual_range": [0, covered],
+        "covered_residual_range": [covered_start, covered_stop],
         "residual_total": residual_total,
-        "covered_target_total": covered * FRONTIER_TOTAL,
+        "covered_target_total": (covered_stop - covered_start) * FRONTIER_TOTAL,
         "unresolved_target_total": len(unresolved),
         "symbolic_certified_target_total": len(certified_symbolic),
         "unresolved_keys": [[source, frontier] for source, frontier in
@@ -323,6 +345,140 @@ def audit(manifest_path, exact=True):
         "exact_audit": exact,
     }
     return report, complete
+
+
+def chunk_transcript_payload(manifest_path, chunk_index, report):
+    manifest, manifest_digest = authenticate_artifacts(manifest_path)
+    require(type(chunk_index) is int and 0 <= chunk_index < len(manifest["chunks"]),
+            "chunk index is out of range")
+    chunk = manifest["chunks"][chunk_index]
+    start, stop = chunk["residual_range"]
+    require(report.get("exact_audit") is True and report.get("status") == "complete",
+            "cannot checkpoint an incomplete chunk audit")
+    require(report.get("covered_residual_range") == [start, stop] and
+            report.get("covered_target_total") == (stop - start) * FRONTIER_TOTAL,
+            "chunk report covers another interval")
+    return {
+        "schema": CHUNK_TRANSCRIPT_SCHEMA,
+        "auditor_sha256": auditor_sha256(),
+        "manifest_sha256": manifest_digest,
+        "dependency_sha256": manifest["dependency_sha256"],
+        "covered_key_stream_sha256": manifest["covered_key_stream_sha256"],
+        "chunk_index": chunk_index,
+        "chunk": chunk,
+        "report": report,
+    }
+
+
+def validate_chunk_report(report, start, stop, residual_total):
+    require(type(report) is dict and set(report) == REPORT_FIELDS,
+            "chunk report fields changed")
+    require(report["status"] == "complete" and report["exact_audit"] is True,
+            "chunk transcript is incomplete")
+    require(report["covered_residual_range"] == [start, stop] and
+            report["residual_total"] == residual_total and
+            report["covered_target_total"] == (stop - start) * FRONTIER_TOTAL,
+            "chunk transcript coverage changed")
+    keys = report["unresolved_keys"]
+    require(type(keys) is list and all(type(key) is list and len(key) == 2 and
+            type(key[0]) is int and start <= key[0] < stop and
+            (key[1] is None or type(key[1]) is int and 0 <= key[1] < FRONTIER_TOTAL - 1)
+            for key in keys), "chunk unresolved-key ledger is malformed")
+    require(len({tuple(key) for key in keys}) == len(keys) ==
+            report["unresolved_target_total"] == report["symbolic_certified_target_total"],
+            "chunk unresolved-key totals changed")
+    require(report["symbolic_unexpected_target_total"] == 0 and
+            report["symbolic_coverage_match"] is True and
+            report["symbolic_expected_in_coverage"] ==
+            report["symbolic_certified_target_total"] +
+            report["symbolic_rationally_certified_target_total"],
+            "chunk symbolic partition changed")
+
+
+def authenticate_chunk_transcript(manifest_path, transcript_path, authenticated=None):
+    """Authenticate checkpoint bytes and inputs; do not claim exact replay."""
+    if authenticated is None:
+        manifest, manifest_digest = authenticate_artifacts(manifest_path)
+    else:
+        manifest, manifest_digest = authenticated
+    raw, transcript = load_transcript(transcript_path)
+    require(set(transcript) == {"schema", "auditor_sha256", "manifest_sha256",
+                                "dependency_sha256", "covered_key_stream_sha256",
+                                "chunk_index", "chunk", "report"},
+            "chunk transcript fields changed")
+    require(transcript["schema"] == CHUNK_TRANSCRIPT_SCHEMA,
+            "chunk transcript schema changed")
+    require(transcript["auditor_sha256"] == auditor_sha256(), "attested auditor changed")
+    require(transcript["manifest_sha256"] == manifest_digest, "attested manifest changed")
+    require(transcript["dependency_sha256"] == manifest["dependency_sha256"],
+            "attested transitive dependencies changed")
+    require(transcript["covered_key_stream_sha256"] == manifest["covered_key_stream_sha256"],
+            "attested target key stream changed")
+    index = transcript["chunk_index"]
+    require(type(index) is int and 0 <= index < len(manifest["chunks"]),
+            "attested chunk index is out of range")
+    require(transcript["chunk"] == manifest["chunks"][index], "attested chunk changed")
+    report = transcript["report"]
+    start, stop = transcript["chunk"]["residual_range"]
+    validate_chunk_report(report, start, stop, manifest["residual_total"])
+    return raw, transcript
+
+
+def build_aggregate(manifest_path, transcript_paths):
+    manifest, manifest_digest = authenticate_artifacts(manifest_path)
+    records = []
+    reports = []
+    seen = set()
+    for path in transcript_paths:
+        raw, transcript = authenticate_chunk_transcript(
+            manifest_path, path, (manifest, manifest_digest))
+        index = transcript["chunk_index"]
+        require(index not in seen, f"duplicate chunk transcript: {index}")
+        seen.add(index)
+        records.append({"chunk_index": index, "transcript_sha256": sha256(raw)})
+        reports.append(transcript["report"])
+    require(seen == set(range(len(manifest["chunks"]))),
+            "aggregate requires exactly one transcript for every manifest chunk")
+    records.sort(key=lambda record: record["chunk_index"])
+    unresolved = [key for report in reports for key in report["unresolved_keys"]]
+    total_targets = sum(report["covered_target_total"] for report in reports)
+    require(total_targets == manifest["covered_target_total"],
+            "aggregate target total changed")
+    require(len(unresolved) == 24 and
+            sum(report["symbolic_expected_in_coverage"] for report in reports) == 256 and
+            sum(report["symbolic_rationally_certified_target_total"]
+                for report in reports) == 232 and
+            sum(report["exact_cost_five_target_total"] for report in reports) == 168,
+            "aggregate exact ownership partition changed")
+    report = {
+        "status": "complete",
+        "covered_residual_range": manifest["covered_residual_range"],
+        "residual_total": manifest["residual_total"],
+        "covered_target_total": total_targets,
+        "unresolved_target_total": len(unresolved),
+        "symbolic_certified_target_total": len(unresolved),
+        "unresolved_keys": sorted(unresolved,
+                                  key=lambda key: (key[0], -1 if key[1] is None else key[1])),
+        "exact_cost_five_target_total": sum(
+            report["exact_cost_five_target_total"] for report in reports),
+        "symbolic_expected_in_coverage": sum(
+            report["symbolic_expected_in_coverage"] for report in reports),
+        "symbolic_rationally_certified_target_total": sum(
+            report["symbolic_rationally_certified_target_total"] for report in reports),
+        "symbolic_unexpected_target_total": 0,
+        "symbolic_coverage_match": True,
+        "exact_audit": True,
+    }
+    return {
+        "schema": AGGREGATE_SCHEMA,
+        "auditor_sha256": auditor_sha256(),
+        "manifest_sha256": manifest_digest,
+        "dependency_sha256": manifest["dependency_sha256"],
+        "covered_key_stream_sha256": manifest["covered_key_stream_sha256"],
+        "chunks": records,
+        "report": report,
+        "notice": "checkpoint index only; exact proof requires replay of every listed chunk",
+    }
 
 
 def build_manifest(output, paths):
@@ -385,6 +541,13 @@ def main():
                         help="derive a canonical manifest from ordered-range packs")
     parser.add_argument("--write-transcript", type=Path, metavar="PATH",
                         help="exhaustively audit, then persist a canonical transcript")
+    parser.add_argument("--chunk-index", type=int,
+                        help="exactly replay one manifest chunk independently")
+    parser.add_argument("--write-chunk-transcript", type=Path, metavar="PATH",
+                        help="persist a checkpoint after an exact --chunk-index replay")
+    parser.add_argument("--aggregate-transcripts", nargs="+", type=Path, metavar="PATH",
+                        help="combine one authenticated checkpoint per manifest chunk")
+    parser.add_argument("--write-aggregate", type=Path, metavar="PATH")
     args = parser.parse_args()
     if args.build_manifest is not None:
         require(not args.digest_only, "--digest-only cannot build a manifest")
@@ -392,13 +555,33 @@ def main():
         print(f"manifest_sha256={sha256(canonical_bytes(payload))} "
               f"covered_residual_range=0..{payload['covered_residual_range'][1]}")
         return
-    require(not (args.digest_only and args.write_transcript),
+    require(not (args.digest_only and (args.write_transcript or args.write_chunk_transcript)),
             "--digest-only cannot write an exact transcript")
-    report, complete = audit(args.manifest, not args.digest_only)
+    if args.aggregate_transcripts is not None:
+        require(args.write_aggregate is not None, "--aggregate-transcripts requires --write-aggregate")
+        require(args.chunk_index is None and args.write_transcript is None and
+                args.write_chunk_transcript is None and not args.digest_only,
+                "aggregate mode cannot be combined with replay modes")
+        require(args.write_aggregate.parent.is_dir(), "aggregate output parent does not exist")
+        payload = build_aggregate(args.manifest, args.aggregate_transcripts)
+        args.write_aggregate.write_bytes(canonical_bytes(payload))
+        sys.stdout.write(canonical_bytes(payload).decode("ascii"))
+        return
+    require((args.chunk_index is None) == (args.write_chunk_transcript is None),
+            "--chunk-index and --write-chunk-transcript must be used together")
+    require(not (args.chunk_index is not None and args.write_transcript is not None),
+            "full and chunk transcript modes are incompatible")
+    report, complete = audit(args.manifest, not args.digest_only, args.chunk_index)
     if args.write_transcript is not None:
         require(complete, "cannot write transcript for an incomplete audit")
         require(args.write_transcript.parent.is_dir(), "transcript output parent does not exist")
         args.write_transcript.write_bytes(canonical_bytes(transcript_payload(args.manifest, report)))
+    if args.write_chunk_transcript is not None:
+        require(complete, "cannot write transcript for an incomplete chunk audit")
+        require(args.write_chunk_transcript.parent.is_dir(),
+                "chunk transcript output parent does not exist")
+        payload = chunk_transcript_payload(args.manifest, args.chunk_index, report)
+        args.write_chunk_transcript.write_bytes(canonical_bytes(payload))
     sys.stdout.write(canonical_bytes(report).decode("ascii"))
     if not complete:
         raise SystemExit(1)

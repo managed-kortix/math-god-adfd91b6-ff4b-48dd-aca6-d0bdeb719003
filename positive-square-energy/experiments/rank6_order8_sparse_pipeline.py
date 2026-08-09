@@ -721,6 +721,7 @@ def search(args, residual_rows):
 
 
 def main():
+    global CENSUS_CACHE
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path)
     parser.add_argument("--progress", action="store_true")
@@ -733,7 +734,11 @@ def main():
     parser.add_argument("--fallback-iterations", type=int, default=360)
     parser.add_argument("--denominators", default="256,1024,4096,16384,65536")
     parser.add_argument("--verify-pack", type=Path)
+    parser.add_argument("--census-cache", type=Path)
     args = parser.parse_args()
+    CENSUS_CACHE = args.census_cache
+    require(CENSUS_CACHE is None or CENSUS_CACHE.parent.is_dir(),
+            "census cache parent missing")
     require(args.start >= 0 and args.search_count >= 0, "bad selected range")
     need_rows = args.search_count > 0 or args.verify_pack is not None
     payload, residual_rows = census(need_rows, args.progress and not args.search_count)

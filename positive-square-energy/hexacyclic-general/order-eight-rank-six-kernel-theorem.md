@@ -118,7 +118,10 @@ The exact auditor rejects gaps, overlaps, path escapes, malformed XZ, changed
 compressed or raw bytes, trailing binary data, source-range disagreement,
 malformed rational vectors, incomplete path ledgers, nonunit vectors, endpoint
 disagreement, nonpositive step denominators, costs above five, duplicate keys,
-and any unresolved key outside the independently derived symbolic set.
+and any unresolved key outside the independently derived symbolic set. A stored
+JSON result digest authenticates bytes only: because there is no signature from
+an independently trusted verifier, anyone can fabricate a matching result and
+hash. It is a reproducibility receipt, not independent exact proof.
 
 It reconstructs all arithmetic with `Fraction`. The exact ownership partition
 is
@@ -213,16 +216,38 @@ python3 positive-square-energy/experiments/rank6_order8_symbolic_recognizers.py
 python3 -O positive-square-energy/experiments/rank6_order8_symbolic_recognizers.py
 python3 positive-square-energy/experiments/rank6_order8_pack_auditor.py
 python3 -O positive-square-energy/experiments/rank6_order8_pack_auditor.py
-python3 research/rank-six-order-eight-kernel-theorem-verifier.py
-python3 -O research/rank-six-order-eight-kernel-theorem-verifier.py --emit
+python3 research/rank-six-order-eight-kernel-theorem-verifier.py --full
+python3 -O research/rank-six-order-eight-kernel-theorem-verifier.py --full
 ```
 
-The master performs the complete pack audit itself. In normal mode it reruns
-the whole proof under `python3 -O` and requires byte-identical output; the last
-standalone optimized command is an explicit hostile-audit reproduction. All
-proof premises use exceptions rather than `assert`. The master also rejects ten
-hostile registry mutations: each omitted dependency, an altered manifest
-digest, a widened scope, and a weakened conclusion.
+The master accepts only `--full` and performs the complete pack audit itself; it
+does not promote a stored transcript to proof. All proof premises use exceptions
+rather than `assert`. The normal and optimized commands are separate complete
+replays. The master also rejects hostile registry mutations: each omitted
+dependency, an altered manifest digest, a widened scope, and a weakened
+conclusion.
+
+For practical independent checking, replay the 17 chunks separately. Each
+command regenerates the complete residual census and symbolic fixture, verifies
+the global manifest and key-stream commitment, decodes one pinned chunk, and
+recomputes every exact rational cost in that chunk:
+
+```sh
+mkdir -p /tmp/order8-audit
+python3 positive-square-energy/experiments/rank6_order8_pack_auditor.py \
+  --chunk-index 0 --write-chunk-transcript /tmp/order8-audit/chunk-00.json
+# Repeat indices 1 through 16, independently and in any order.
+python3 positive-square-energy/experiments/rank6_order8_pack_auditor.py \
+  --aggregate-transcripts /tmp/order8-audit/chunk-*.json \
+  --write-aggregate /tmp/order8-audit/aggregate.json
+```
+
+The aggregate is fail-closed bookkeeping: it requires exactly one transcript
+for every manifest chunk and exact global coverage, but it cannot prove that an
+untrusted party actually ran those replays. A stranger obtains independent
+exact proof only by running all 17 chunk commands (possibly across machines),
+or by running the master with `--full`. No theorem claim is made from merely
+authenticating the aggregate or the legacy whole-run transcript.
 
 The principal pinned leaf digests are
 

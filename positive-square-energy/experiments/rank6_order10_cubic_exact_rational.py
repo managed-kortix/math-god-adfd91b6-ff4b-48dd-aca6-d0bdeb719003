@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import importlib.util
+import json
 import lzma
 import math
 import random
@@ -29,6 +30,7 @@ MODE_UNRESOLVED = 0
 MODE_SHARED = 1
 MODE_TEMPLATE = 2
 MODE_FALLBACK = 3
+CENSUS_CACHE_SCHEMA = "rank-six-order-ten-residual-cache-v1"
 
 
 def require(condition, message):
@@ -44,11 +46,38 @@ def load_census_module():
     return module
 
 
-def residual_rows(census, progress=False):
+def residual_rows(census, progress=False, cache_path=None):
     """Regenerate the canonical sparse residual stream without serializing it."""
-    cycle = census.cycle_candidate_audit()[10]
-    result = []
     rows = census.source_rows(ORDER)
+    if cache_path is not None and cache_path.is_file():
+        cached = json.loads(lzma.decompress(cache_path.read_bytes()).decode("ascii"))
+        require(cached.get("schema") == CENSUS_CACHE_SCHEMA and
+                cached.get("source_sha256") == census.SOURCE_SHA256 and
+                cached.get("residual_total") == 125457,
+                "order-ten residual cache changed")
+        result = []
+        for kernel_index, row, orbit_size, cost, template in cached["residuals"]:
+            number, code = rows[kernel_index]
+            support, multiplicities = census.support_data(code)
+            result.append((number, code, support, multiplicities, tuple(row),
+                           orbit_size, cost, template))
+        require(len(result) == 125457 and sum(row[-1] for row in result) == 8,
+                "order-ten cached residual stream changed")
+        expected = {record["kernel"]: record["residual_stream_sha256"]
+                    for record in json.loads(census.OUTPUT.read_text("ascii"))["kernels"]}
+        digests = {number: hashlib.sha256() for number, _ in rows}
+        for number, _, _, _, row, orbit_size, cost, _ in result:
+            raw = (json.dumps([number, list(row), orbit_size, cost],
+                              sort_keys=True, separators=(",", ":")) + "\n").encode("ascii")
+            digests[number].update(raw)
+        require(all(digests[number].hexdigest() == expected[number] for number in digests),
+                "order-ten cached residual stream digest changed")
+        return tuple(result)
+    cycle = {number: census.five_cycle_support(ORDER, code)
+             for number, code in rows if census.five_cycle_support(ORDER, code)}
+    require(tuple(cycle) == census.EXPECTED_CYCLE_KERNELS[ORDER],
+            "order-ten cycle candidates changed")
+    result = []
     for position, (number, code) in enumerate(rows, 1):
         support, multiplicities = census.support_data(code)
         actions = census.support_actions(support, census.automorphisms(code))
@@ -67,7 +96,7 @@ def residual_rows(census, progress=False):
                 tuple(row[source] for source in action), radices) for action in actions}
             for image in orbit:
                 seen[image] = 1
-            representative = census.mixed_radix_decode(min(orbit), radices)
+            representative = row
             cost = census.coarse_cost(representative, multiplicities, crossing)
             if cost > census.BUDGET_SCALED:
                 template = specification is not None and census.candidate_row(
@@ -78,6 +107,19 @@ def residual_rows(census, progress=False):
             print(f"[{position}/66] K{number} residuals={len(result) - before}", flush=True)
     require(len(result) == 125457, "order-ten residual count changed")
     require(sum(row[-1] for row in result) == 8, "K1133 template count changed")
+    if cache_path is not None and not cache_path.exists():
+        kernel_indices = {number: index for index, (number, _) in enumerate(rows)}
+        cached = {
+            "schema": CENSUS_CACHE_SCHEMA,
+            "source_sha256": census.SOURCE_SHA256,
+            "residual_total": len(result),
+            "residuals": [[kernel_indices[row[0]], list(row[4]), row[5], row[6], bool(row[7])]
+                          for row in result],
+        }
+        raw = (json.dumps(cached, sort_keys=True, separators=(",", ":")) + "\n").encode("ascii")
+        temporary = cache_path.with_name(cache_path.name + ".tmp")
+        temporary.write_bytes(lzma.compress(raw, format=lzma.FORMAT_XZ, preset=3))
+        temporary.replace(cache_path)
     return tuple(result)
 
 
@@ -138,7 +180,8 @@ def objective_gradient(paths, vectors):
 
 
 def objective(paths, vectors):
-    return objective_gradient(paths, vectors)[0]
+    return sum(path_cost_derivative(dot(vectors[u], vectors[v]), length)[0]
+               for _, _, u, v, length in paths)
 
 
 def random_vectors(generator):
@@ -561,6 +604,7 @@ def main():
     parser.add_argument("--fallback-iterations", type=int, default=420)
     parser.add_argument("--denominators", default="256,1024,4096,16384,65536")
     parser.add_argument("--verify-pack", type=Path)
+    parser.add_argument("--census-cache", type=Path)
     parser.add_argument("--progress", action="store_true")
     args = parser.parse_args()
     require(args.start >= 0 and args.count >= 0, "bad selected range")
@@ -568,7 +612,10 @@ def main():
             "specify --count or --verify-pack; a full run is intentionally not implicit")
     census = load_census_module()
     started = time.perf_counter()
-    residuals = residual_rows(census, args.progress and args.count == 0)
+    require(args.census_cache is None or args.census_cache.parent.is_dir(),
+            "census cache parent missing")
+    residuals = residual_rows(census, args.progress and args.count == 0,
+                             args.census_cache)
     census_seconds = time.perf_counter() - started
     if args.verify_pack is not None:
         raw = lzma.decompress(args.verify_pack.read_bytes(), format=lzma.FORMAT_XZ)

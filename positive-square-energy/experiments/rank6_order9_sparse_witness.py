@@ -13,6 +13,7 @@ import hashlib
 import importlib.util
 import itertools
 import json
+import lzma
 import math
 import time
 from fractions import Fraction
@@ -43,6 +44,8 @@ EXPECTED_TOTALS = (1726000, 1108126, 921831, 186295, 2794425, 10, 150)
 SIGNED_CYCLE_SUPPORTS = {
     971: ({"07", "16", "25", "34"}, {"08", "18", "27", "36", "45"}),
 }
+CENSUS_CACHE_SCHEMA = "rank-six-order-nine-residual-cache-v1"
+RESIDUAL_STREAM_SHA256 = "2a6f0c88d8c03116096e583235bec1688a64ee5c4af0e2f61114be73b5e31807"
 
 
 def load_module(name, path):
@@ -87,6 +90,15 @@ def load_engine():
     engine.DIMENSION = ORDER
     engine.BUDGET = BUDGET
     engine.PAIRS = PAIRS
+
+    def objective(paths, vectors):
+        total = 0.0
+        for _, _, u, v, length in paths:
+            total += engine.path_cost_and_derivative(
+                engine.dot(vectors[u], vectors[v]), length)[0]
+        return total
+
+    engine.objective = objective
     return engine
 
 
@@ -125,14 +137,35 @@ def census(collect_residuals=False, progress=False):
     ledgers = []
     residual_rows = []
     sources = source_kernels()
-    for index, source in enumerate(sources, 1):
-        ledger, local = base.kernel_census(source, collect_residuals)
-        ledgers.append(ledger)
-        residual_rows.extend(local)
-        if progress:
-            print(f"[{index}/{len(sources)}] K{ledger['kernel']} "
-                  f"orbits={ledger['parity_orbits']} residuals={ledger['coarse_residuals']}",
-                  flush=True)
+    cache_path = getattr(base, "CENSUS_CACHE", None)
+    if collect_residuals and cache_path is not None and cache_path.is_file():
+        cached = json.loads(lzma.decompress(cache_path.read_bytes()).decode("ascii"))
+        require(cached.get("schema") == CENSUS_CACHE_SCHEMA and
+                cached.get("source_sha256") == SOURCE_SHA256 and
+                cached.get("totals") == list(EXPECTED_TOTALS),
+                "order-nine residual cache changed")
+        ledgers = cached["kernels"]
+        for kernel_index, row, orbit_size, cost, template in cached["residuals"]:
+            number, _, support, multiplicities, _ = sources[kernel_index]
+            residual_rows.append((number, support, multiplicities, tuple(row),
+                                  orbit_size, cost, template))
+        require(len(residual_rows) == EXPECTED_TOTALS[3],
+                "order-nine cached residual count changed")
+        digest = hashlib.sha256()
+        for number, _, _, row, orbit_size, cost, _ in residual_rows:
+            digest.update((json.dumps([number, list(row), orbit_size, cost],
+                                      separators=(",", ":")) + "\n").encode("ascii"))
+        require(digest.hexdigest() == RESIDUAL_STREAM_SHA256,
+                "order-nine cached residual stream changed")
+    else:
+        for index, source in enumerate(sources, 1):
+            ledger, local = base.kernel_census(source, collect_residuals)
+            ledgers.append(ledger)
+            residual_rows.extend(local)
+            if progress:
+                print(f"[{index}/{len(sources)}] K{ledger['kernel']} "
+                      f"orbits={ledger['parity_orbits']} residuals={ledger['coarse_residuals']}",
+                      flush=True)
     residual_total = sum(row["coarse_residuals"] for row in ledgers)
     template_total = sum(row["signed_cycle_template_orbits"] for row in ledgers)
     totals = (
@@ -145,6 +178,21 @@ def census(collect_residuals=False, progress=False):
         (PATH_COUNT + 1) * template_total,
     )
     require(totals == EXPECTED_TOTALS, "order-nine census totals changed")
+    if (collect_residuals and cache_path is not None and
+            not cache_path.exists()):
+        kernel_indices = {source[0]: index for index, source in enumerate(sources)}
+        cached = {
+            "schema": CENSUS_CACHE_SCHEMA,
+            "source_sha256": SOURCE_SHA256,
+            "totals": list(totals),
+            "kernels": ledgers,
+            "residuals": [[kernel_indices[row[0]], list(row[3]), row[4], row[5], bool(row[6])]
+                          for row in residual_rows],
+        }
+        raw = (json.dumps(cached, sort_keys=True, separators=(",", ":")) + "\n").encode("ascii")
+        temporary = cache_path.with_name(cache_path.name + ".tmp")
+        temporary.write_bytes(lzma.compress(raw, format=lzma.FORMAT_XZ, preset=3))
+        temporary.replace(cache_path)
     payload = {
         "schema": SCHEMA,
         "status": "census_complete_certificates_open",
