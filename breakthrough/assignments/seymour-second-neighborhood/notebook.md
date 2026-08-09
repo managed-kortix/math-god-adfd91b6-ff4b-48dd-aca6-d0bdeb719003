@@ -1633,3 +1633,29 @@ No audits yet.
   clean-sink sources are in
   `experiments/m6-b7-l6-hard-orbit-certificates.tsv`; fresh replay is
   `experiments/verify_m6_b7_l6_hard_orbit_certificates.py`.
+
+### B7-l6 hard-orbit robust-witness refinement
+
+- Refined only the 28 committed hard-orbit TIMEOUT leaves, containing 252
+  parent/orbit incidences. For each high C deletion `c`, selected a robust
+  witness from `B \\ N+(c)` or from the other C vertex exactly when its fixed
+  internal arc points into `c`.
+- Quotiented simultaneous ordered witness tuples by the full stabilizer of the
+  already fixed ordered C-to-B subset pair. Explicit enumeration gives 117
+  canonical witness leaves and 1,066 parent/witness incidences. This is a
+  complete existential ALO cover; leaves may overlap when a graph has multiple
+  witness tuples, but the disjunction is equisatisfiable with the parent.
+- `experiments/check_m6_b7_l6_hard_witness_orbits.py` independently enumerates
+  all 5,040 labelled `S7` permutations, filters each exact stabilizer, proves
+  the labelled tuple orbits disjoint and complete with lexicographically minimal
+  representatives, and reconstructs all CNFs and hashes without importing the
+  producer. Mutation tests reject witness, orbit-size, cover, and unit changes.
+- The 7,151-byte manifest has SHA-256
+  `0329c78e2f563670c623206daf8b6b143c3813eac2f50d5e6f7c12b6b791186a`;
+  the 11,078-byte complete 117-CNF hash ledger has SHA-256
+  `d38e453e802408fb61b0c8f91641f16e231cfbec875993256b8dfe5acfa59513`.
+- A pinned CaDiCaL 1.7.3 20-second-per-witness-leaf scout returned 117 TIMEOUT,
+  zero SAT, and zero UNSAT, covering all 1,066 incidences. The 48,447-byte
+  scout record has SHA-256
+  `1452d679f8cbb12350ec37564f69303fdbc04b3cecf1c037d66f99d8e72d1a3a`.
+  No proof was requested or retained, and no SAT or UNSAT claim is made.

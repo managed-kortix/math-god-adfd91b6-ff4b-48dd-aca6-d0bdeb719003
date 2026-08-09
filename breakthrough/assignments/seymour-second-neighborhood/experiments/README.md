@@ -498,3 +498,40 @@ solved by pinned CaDiCaL in textual LRAT mode, and accepted by pinned
 are `m6-b7-l6-hard-orbit-certificates.tsv` and
 `verify_m6_b7_l6_hard_orbit_certificates.py`. The other 28 leaves remain
 uncertified TIMEOUT frontier; no SAT or UNSAT claim is made for them.
+
+Those 28 frozen TIMEOUTs (252 parent/orbit incidences) are further split by
+simultaneous robust witnesses for every high C vertex. For deleted `c`, the
+eligible witnesses are exactly `B \\ N+(c)` and the other C vertex when its
+fixed internal arc points into `c`. Ordered choices are quotiented by the full
+stabilizer in `S7(B)` of the already fixed ordered C-to-B subset pair. This
+gives 117 canonical witness leaves and 1,066 parent/witness incidences.
+
+```sh
+python3 m6_b7_l6_hard_witness_orbits.py \
+  --manifest-output m6-b7-l6-hard-witness-orbits.tsv \
+  --hash-output m6-b7-l6-hard-witness-orbit-hashes.tsv --populate-hashes
+python3 test_m6_b7_l6_hard_witness_orbits.py
+python3 m6_b7_l6_hard_witness_orbit_scout.py \
+  --solver /path/to/pinned/cadical --seconds 20 \
+  --output m6-b7-l6-hard-witness-orbit-scout-20s.json
+```
+
+This is an existential ALO cover, not a model partition: a graph can admit
+several robust-witness tuples and hence satisfy several leaves. It is
+equisatisfiable because the base already contains one ALO over all robust
+witnesses for each deletion, and the stabilizer sends every eligible labelled
+tuple to exactly one retained canonical representative while preserving the
+fixed subset pair and parent selector family. The independent checker enumerates
+all 5,040 labelled `S7` permutations, filters the exact stabilizer, verifies the
+disjoint labelled tuple-orbit cover and lexicographic canonical representatives,
+then reconstructs and hashes every CNF without importing the producer.
+
+The manifest is 7,151 bytes with SHA-256
+`0329c78e2f563670c623206daf8b6b143c3813eac2f50d5e6f7c12b6b791186a`;
+the complete 117-CNF ledger is 11,078 bytes with SHA-256
+`d38e453e802408fb61b0c8f91641f16e231cfbec875993256b8dfe5acfa59513`.
+The pinned CaDiCaL 1.7.3 20-second scout returned 117 TIMEOUT, zero SAT, and
+zero UNSAT, representing all 1,066 parent/witness incidences. Its 48,447-byte
+record has SHA-256
+`1452d679f8cbb12350ec37564f69303fdbc04b3cecf1c037d66f99d8e72d1a3a`;
+no proof or satisfiability claim is made.
