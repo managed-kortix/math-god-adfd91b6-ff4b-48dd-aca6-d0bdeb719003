@@ -25,6 +25,22 @@ compression, and next decision.
 
 No audits yet.
 
+## 2026-08-09 — frozen no-gain certificates
+
+- Certified exactly the 75 pinned-scout UNSAT no-gain leaves with textual LRAT
+  from pinned CaDiCaL 1.7.3; every proof was accepted by pinned `lrat-check`.
+- The certificates cover 686 parent/witness incidences. The 42 scout TIMEOUT
+  leaves (380 incidences) and all positive-gain refinements remain outside the
+  claim.
+- The 75 `xz -3` artifacts total 42,951,720 bytes, strictly below the requested
+  250,000,000-byte ceiling. A strict canonical mutual pin binds ledger and
+  verifier, while the ledger also binds all no-gain artifacts, scout, manifest,
+  CNF hash ledger, producer, structural checker, scout/test/certificate sources,
+  and both pinned binaries.
+- Fresh replay regenerated and structurally checked all 75 CNFs, authenticated
+  and decompressed every artifact, matched every raw LRAT hash, and obtained
+  `c VERIFIED` from the pinned checker for every leaf.
+
 ## 2026-07-31 — residual m=6 suite hardening
 
 - The residual regression now generates and independently reconstructs all 23
@@ -1659,3 +1675,30 @@ No audits yet.
   scout record has SHA-256
   `1452d679f8cbb12350ec37564f69303fdbc04b3cecf1c037d66f99d8e72d1a3a`.
   No proof was requested or retained, and no SAT or UNSAT claim is made.
+
+### B7-l6 hard-witness exact no-gain child layer
+
+- Added exactly one no-gain child for each of the 117 committed witness leaves;
+  the layer still represents exactly 1,066 parent/witness incidences. No gain
+  midpoint refinement was generated; gain leaves remain out of scope.
+- For each ordered robust witness `(w,c)`, the child adds every negative unit
+  `-p_w_k_c` with `k` distinct from `w,c`: 16 units for a one-high-C leaf and
+  32 for a two-high-C leaf. There are 12 leaves of the first kind and 105 of
+  the second. The immutable variable maps and selector batches are unchanged.
+- `experiments/check_m6_b7_l6_hard_witness_no_gain.py` independently derives
+  the frozen witness frontier, reconstructs every source CNF and all 16/32 path
+  units, checks dimensions and the complete CNF hash ledger, and validates the
+  committed scout row by row. Tests reject source-hash, unit-count, gain-scope,
+  and path-unit mutations.
+- The 6,831-byte manifest has SHA-256
+  `a464607da5ca77da9beb4d5634ea5bc51036f44cad3f22354abfae0da9fe83f4`;
+  the 11,440-byte complete 117-CNF hash ledger has SHA-256
+  `35ceea03f8b3f9d4cc054da5c3114e8fa9b04d1955f2a9bf64b163750fccab90`.
+  Both bind the source witness manifest, source hash ledger, source scout, and
+  prior hard-orbit certificate ledger by byte count and SHA-256.
+- A reproducible pinned CaDiCaL 1.7.3 20-second-per-leaf scout returned exactly
+  75 UNSAT and 42 TIMEOUT, with zero SAT, representing 686 and 380 incidences.
+  The 48,487-byte committed scout has SHA-256
+  `43bf624d24ca9459bf4de999385ed27367392a174aba46fe95b0773e6d1d7a64`.
+  No LRAT was requested or retained, so the UNSAT results remain scout results,
+  not certificate claims.
