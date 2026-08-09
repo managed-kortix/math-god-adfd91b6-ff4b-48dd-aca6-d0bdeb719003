@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 """Fail-closed audit for the exhaustive hexacyclic multiblock ledger."""
 
+import argparse
 import hashlib
 import importlib.util
 import json
 import math
+import subprocess
+import sys
+from copy import deepcopy
 from pathlib import Path
 
 
@@ -126,10 +130,24 @@ EXPECTED_OWNER_CASES = tuple(
 )
 
 EXPECTED_GLOBAL_CLAIM = {
-    "scope": "rank-six-multiblock",
+    "scope": "finite-simple-connected-rank-six-multiblock",
+    "block_scope": "at-least-two-positive-rank-cyclic-blocks",
     "relation": ">=",
     "conclusion": "s+(G)>=|V(G)|",
 }
+
+EXPECTED_EXCLUDED_CLAIMS = (
+    "single-positive-rank-cyclic-block",
+    "all-connected-hexacyclic-graphs",
+    "strict-inequality-for-the-multiblock-class",
+    "equality-classification",
+    "global-akmpz-conjecture",
+)
+
+MANIFEST_SCHEMA = "hexacyclic-multiblock-scope-conclusion-v1"
+EXPECTED_MANIFEST_SHA256 = "c391247907833695586eac184379a8bd34800bc76d26a851d20dcf9903f85611"
+EXPECTED_NORMAL_OUTPUT_SHA256 = "2c7a76999cf75573512b087ca8af33fc6f8d2e55ee35205c0a3c984ce9744595"
+EXPECTED_OPTIMIZED_OUTPUT_SHA256 = "2c7a76999cf75573512b087ca8af33fc6f8d2e55ee35205c0a3c984ce9744595"
 
 EXPECTED_RANK5_DIRECT_EQUALITY = {
     "partition": (5, 1),
@@ -161,6 +179,10 @@ def require(condition, message):
         raise AuditError(message)
 
 
+def canonical_bytes(payload):
+    return (json.dumps(payload, sort_keys=True, separators=(",", ":")) + "\n").encode("ascii")
+
+
 def integer_partitions(total, maximum=None):
     if total == 0:
         return {()}
@@ -184,6 +206,22 @@ def check_sources(sources):
         require(path.is_file(), f"missing source: {name}")
         actual = hashlib.sha256(path.read_bytes()).hexdigest()
         require(actual == digest, f"source digest mismatch: {name}")
+
+
+def dependency_manifest(sources):
+    check_sources(sources)
+    records = []
+    for name in sorted(sources):
+        path, digest = sources[name]
+        records.append({
+            "name": name,
+            "path": str(path.relative_to(ROOT)),
+            "sha256": digest,
+        })
+    require(len(records) == 9, "transitive dependency lock count changed")
+    require(len({record["path"] for record in records}) == len(records),
+            "transitive dependency paths overlap")
+    return records
 
 
 def check_inequalities(values=None):
@@ -433,6 +471,83 @@ def audit(partitions=None, dispositions=None, packets=None, presieve=None,
     }
 
 
+def scope_conclusion_manifest(report, sources=None, global_claim=None,
+                              excluded_claims=None):
+    if sources is None:
+        sources = SOURCES
+    if global_claim is None:
+        global_claim = EXPECTED_GLOBAL_CLAIM
+    if excluded_claims is None:
+        excluded_claims = EXPECTED_EXCLUDED_CLAIMS
+    require(global_claim == EXPECTED_GLOBAL_CLAIM, "manifest scope or conclusion changed")
+    require(excluded_claims == EXPECTED_EXCLUDED_CLAIMS,
+            "manifest excluded-claim ledger changed")
+    require(report == {
+        "partitions": 11,
+        "multiblock": 10,
+        "packets": 9,
+        "presieve": 5,
+        "sources": 9,
+        "rank5_structural": 3,
+        "owner_cases": 12,
+        "relation": ">=",
+    }, "manifest audit summary changed")
+    return {
+        "schema": MANIFEST_SCHEMA,
+        "scope": {
+            "graph": "finite simple connected",
+            "cyclomatic_rank": 6,
+            "edge_vertex_relation": "|E(G)|=|V(G)|+5",
+            "block_scope": global_claim["block_scope"],
+            "block_rank_partitions": [
+                list(partition) for partition in sorted(EXPECTED_PARTITIONS - {(6,)},
+                                                        reverse=True)
+            ],
+        },
+        "conclusion": {
+            "quantity": "s+(G)",
+            "relation": global_claim["relation"],
+            "bound": "|V(G)|",
+            "statement": global_claim["conclusion"],
+            "strict": False,
+        },
+        "excluded_claims": list(excluded_claims),
+        "ledger": {
+            "integer_partitions": report["partitions"],
+            "multiblock_partitions": report["multiblock"],
+            "packets": report["packets"],
+            "presieve_rows": report["presieve"],
+            "rank5_structural_families": report["rank5_structural"],
+            "owner_cases": report["owner_cases"],
+        },
+        "reproduction": {
+            "normal_command": "python3 research/hexacyclic-multiblock-ledger-verifier.py --emit",
+            "optimized_command": "python3 -O research/hexacyclic-multiblock-ledger-verifier.py --emit",
+            "byte_identical": True,
+        },
+        "exact_transitive_dependencies": dependency_manifest(sources),
+    }
+
+
+def check_manifest_digest(manifest, expected_digest=EXPECTED_MANIFEST_SHA256):
+    require(expected_digest == EXPECTED_MANIFEST_SHA256,
+            "manifest digest pin policy changed")
+    digest = hashlib.sha256(canonical_bytes(manifest)).hexdigest()
+    require(digest == expected_digest, "canonical scope/conclusion manifest changed")
+    return digest
+
+
+def check_output_digest(output, optimized=False, expected_digest=None):
+    pinned = (EXPECTED_OPTIMIZED_OUTPUT_SHA256 if optimized
+              else EXPECTED_NORMAL_OUTPUT_SHA256)
+    if expected_digest is None:
+        expected_digest = pinned
+    require(expected_digest == pinned, "output digest pin policy changed")
+    digest = hashlib.sha256(output.encode("ascii")).hexdigest()
+    require(digest == expected_digest, "canonical verifier output changed")
+    return digest
+
+
 def expect_rejection(name, mutation):
     try:
         mutation()
@@ -548,24 +663,91 @@ def check_mutations():
     }
     mutations.append(("item-G-nontriangle", lambda: audit(values=bad_values)))
 
+    report = audit()
+    widened_claim = dict(EXPECTED_GLOBAL_CLAIM)
+    widened_claim["block_scope"] = "one-or-more-positive-rank-cyclic-blocks"
+    mutations.append(("manifest-widened-block-scope",
+                      lambda: scope_conclusion_manifest(report, global_claim=widened_claim)))
+
+    altered_exclusions = EXPECTED_EXCLUDED_CLAIMS[:-1]
+    mutations.append(("manifest-global-nonclaim-omitted",
+                      lambda: scope_conclusion_manifest(
+                          report, excluded_claims=altered_exclusions)))
+
+    changed_sources = deepcopy(SOURCES)
+    path, digest = changed_sources["k5e-sieve"]
+    changed_sources["k5e-sieve"] = (path, "0" * len(digest))
+    mutations.append(("transitive-dependency-digest",
+                      lambda: scope_conclusion_manifest(report, sources=changed_sources)))
+
+    changed_report = dict(report)
+    changed_report["multiblock"] = 11
+    mutations.append(("manifest-single-block-included",
+                      lambda: scope_conclusion_manifest(changed_report)))
+
+    manifest = scope_conclusion_manifest(report)
+    mutations.append(("manifest-digest-pin",
+                      lambda: check_manifest_digest(manifest, "0" * 64)))
+    output = acceptance_report(EXPECTED_MANIFEST_SHA256, 29)
+    mutations.append(("normal-output-digest-pin",
+                      lambda: check_output_digest(output, expected_digest="0" * 64)))
+    mutations.append(("optimized-output-digest-pin",
+                      lambda: check_output_digest(
+                          output, optimized=True, expected_digest="0" * 64)))
+
     for name, mutation in mutations:
         expect_rejection(name, mutation)
     return len(mutations)
 
 
+def acceptance_report(manifest_digest, rejected):
+    return "\n".join((
+        "hexacyclic multiblock ledger verifier: all fail-closed audits passed",
+        "scope: finite simple connected rank-six graphs with at least two positive-rank cyclic blocks",
+        "block_partition: 10 multiblock partitions covered; partition 6 excluded",
+        "conclusion: s+(G)>=|V(G)|",
+        "nonclaim: no strict, single-block, all-connected-hexacyclic, equality, or global result",
+        "ledger: partitions=11 multiblock=10 packets=9 presieve=5 rank5-structural=3 owner-cases=12",
+        "transitive_dependency_locks: 9",
+        f"canonical_scope_conclusion_manifest_sha256: {manifest_digest}",
+        f"rejected_hostile_mutations: {rejected}",
+    )) + "\n"
+
+
+def optimized_output():
+    completed = subprocess.run(
+        (sys.executable, "-O", str(Path(__file__).resolve()), "--emit"),
+        check=False, capture_output=True, text=True)
+    require(completed.returncode == 0, "python -O verifier failed")
+    require(completed.stderr == "", "python -O verifier wrote stderr")
+    return completed.stdout
+
+
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--emit", action="store_true")
+    parser.add_argument("--print-manifest", action="store_true")
+    args = parser.parse_args()
+
     report = audit()
+    manifest = scope_conclusion_manifest(report)
+    manifest_digest = check_manifest_digest(manifest)
     rejected = check_mutations()
-    print(
-        "hexacyclic multiblock ledger verifier: PASS "
-        f"(partitions={report['partitions']}, multiblock={report['multiblock']}, "
-        f"packets={report['packets']}, presieve={report['presieve']}, "
-        f"rank5-structural={report['rank5_structural']}, "
-        f"conclusion={report['relation']}, "
-        f"owner-cases={report['owner_cases']}, "
-        f"source-locks={report['sources']}, mutations={rejected}/{rejected})"
-    )
+    require(rejected == 29, "hostile mutation count changed")
+    output = acceptance_report(manifest_digest, rejected)
+    check_output_digest(output, optimized=bool(sys.flags.optimize))
+    if not args.emit and not args.print_manifest and sys.flags.optimize == 0:
+        optimized = optimized_output()
+        require(hashlib.sha256(optimized.encode("ascii")).hexdigest()
+                == EXPECTED_OPTIMIZED_OUTPUT_SHA256,
+                "optimized output digest changed")
+        require(optimized == output, "normal and python -O output differ")
+    if args.print_manifest:
+        sys.stdout.write(canonical_bytes(manifest).decode("ascii"))
+    else:
+        sys.stdout.write(output)
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
