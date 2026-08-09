@@ -1765,3 +1765,36 @@ No audits yet.
   no-gain complement manifest/certificate ledger. Fresh replay regenerates and
   checks each CNF, authenticates/decompresses each LRAT, and invokes the pinned
   checker. The other 114 positive-gain leaves remain uncertified.
+
+### B7-l6 sound residual coordinate cover
+
+- Reconstructed all 117 frozen witness sources. The three ancestor certificates
+  close three sources. Each of the eight coordinate LRATs closes only the CNF
+  for that coordinate child; it does not close the child's source. The residual
+  source is its uncertified sibling. The exact remainder is therefore 114
+  sources and 1,036 parent incidences.
+- For each unresolved source, retained one representative when a coordinate CNF
+  is source-equivalent by fixed-unit or structural implication; otherwise
+  retained every uncertified coordinate child. This gives a complete sound
+  residual cover of 153 leaves and 1,382 memberships, including the eight
+  restored sibling keys `o03-w01-c16`, `o03-w04-c16`, `o17-w01-c16`,
+  `o17-w04-c16`, `o33-w01-c16`, `o33-w04-c16`, `o41-w03-c17`, and
+  `o41-w04-c17`.
+- The cover consists of 18 tautological representatives, 42 structural
+  representatives, and 93 proper B-reduced coordinate children. Proper children
+  are normalized only by an exact fixed-unit reduction of their coordinate ALO;
+  no merely easier or stronger child is substituted for its source.
+- `experiments/check_m6_b7_l6_hard_witness_positive_gain_coordinate_residual_cover.py`
+  independently reconstructs each source ALO as the disjunction of its complete
+  coordinate ALOs, applies exactly three ancestor and eight child certificate
+  eliminations, and proves the retained clauses are the resulting source cover.
+  Tests regenerate all 153 CNFs, require all eight siblings, and reject hostile
+  disposition, midpoint, and polarity mutations.
+- The residual manifest, hash ledger, complete 15-second scout result, and their
+  hashes are regenerated together. Their byte counts/SHA-256 values are
+  13,269/`ed2f787c0a10ecb5663479db61446ce36bfb5d75cc39bb3f48e2bb8cddf79706`,
+  17,655/`785268882c06117261f99ab6efabd4e4d61ce9565dc5c87a08273ed47607c96a`,
+  and 62,234/`ca3c2802eccef1e1953973a0f187563c571cc2eb049d88c07cc360a93b569bd1`.
+  The pinned CaDiCaL 1.7.3 scout returned 153 TIMEOUT, zero SAT, and zero
+  UNSAT, covering all 1,382 memberships. These are capped solver results, not
+  certificate claims.
