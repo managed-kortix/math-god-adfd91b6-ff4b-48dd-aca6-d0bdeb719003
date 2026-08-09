@@ -1702,3 +1702,42 @@ No audits yet.
   `43bf624d24ca9459bf4de999385ed27367392a174aba46fe95b0773e6d1d7a64`.
   No LRAT was requested or retained, so the UNSAT results remain scout results,
   not certificate claims.
+
+### B7-l6 hard-witness compact positive-gain child layer
+
+- Added exactly one positive-gain child to each of the 117 committed witness
+  leaves, preserving all 1,066 parent/witness incidences. The child is one ALO
+  over all path variables of the selected robust witness arcs: width 16 for the
+  12 one-high-C leaves and width 32 for the 105 two-high-C leaves.
+- Together with the committed exact no-gain child this is a complete disjoint
+  split. Writing the positive ALO as `P = OR X`, the no-gain units are exactly
+  `NOT P = AND {-x : x in X}`. Exhaustiveness is `P OR NOT P`; disjointness is
+  the propositional contradiction `P AND NOT P`. The independent checker binds
+  source key, ordered witnesses, and the full literal set row by row.
+- `experiments/check_m6_b7_l6_hard_witness_positive_gain.py` independently
+  derives all source leaves and reconstructs every positive CNF and all 117
+  no-gain sibling CNFs without importing either child producer. It verifies the
+  negative units as literalwise ALO complements and pins the exact scout status
+  sequence, totals, UNSAT ordinals, and solver fields. Exhaustive tests apply
+  hostile polarity, substitution, omission, and duplication mutations to both
+  sides, plus witness and source binding mutations.
+- The 7,616-byte manifest has SHA-256
+  `eb0021165e41b9912c92abde3f4b26890075b0faafbabb0ced579ad6bb372ab8`;
+  the 11,695-byte complete 117-CNF hash ledger has SHA-256
+  `57a146838c09dca90e83e1ca19a504967199f3fde15f330769f8867a2068552e`.
+- A sequential pinned CaDiCaL 1.7.3 20-second-per-leaf scout returned exactly
+  3 UNSAT and 114 TIMEOUT, zero SAT, representing 30 and 1,036 incidences. The
+  UNSAT ordinals/keys are 042/`o15-w01`, 095/`o37-w00`, and 097/`o37-w02`.
+  The 53,533-byte scout record has SHA-256
+  `f5ed09b7134a3315a37d20db786fdd7d1675b1edc0ab6ef0969655fb7a6802f7`.
+- Generated exactly three textual LRAT certificates, one for each frozen
+  scout-UNSAT leaf,
+  with pinned CaDiCaL 1.7.3; pinned `lrat-check` accepted all three. Their
+  `xz -3` artifacts total 35,233,748 bytes, below the strict exclusive
+  250,000,000-byte bound, and certify exactly 30 incidences.
+- The strict ledger/verifier binds the positive-gain manifest, complete CNF
+  hash ledger, scout, producer, independent structural/partition checker,
+  scout source, tests, certificate producer, pinned tools, and committed
+  no-gain complement manifest/certificate ledger. Fresh replay regenerates and
+  checks each CNF, authenticates/decompresses each LRAT, and invokes the pinned
+  checker. The other 114 positive-gain leaves remain uncertified.

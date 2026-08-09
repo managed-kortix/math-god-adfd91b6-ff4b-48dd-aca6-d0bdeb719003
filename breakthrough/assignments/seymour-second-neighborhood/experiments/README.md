@@ -583,5 +583,60 @@ python3 verify_m6_b7_l6_hard_witness_no_gain_certificates.py \
   --checker /path/to/pinned/lrat-check
 ```
 
-The other 42 scout-TIMEOUT no-gain leaves remain uncertified. Positive-gain
-refinements remain outside this layer, and no broader UNSAT claim is made.
+The other 42 scout-TIMEOUT no-gain leaves remain uncertified. No broader UNSAT
+claim is made.
+
+The complementary layer now adds exactly one compact positive-gain child to
+each of the same 117 committed witness leaves. If `X` is the exact set of 16
+or 32 path variables `p_w_k_c` for the selected ordered robust witness arcs,
+the new child adds the single clause `OR X`. Its committed no-gain sibling adds
+all units `-x` for `x in X`, which is exactly `NOT (OR X)`. Therefore the two
+children are exhaustive by `P OR NOT P` and disjoint because `P AND NOT P` is
+false. This is a model partition for each fixed witness leaf, not merely an
+equisatisfiable overlapping cover.
+
+```sh
+python3 m6_b7_l6_hard_witness_positive_gain.py \
+  --manifest-output m6-b7-l6-hard-witness-positive-gain.tsv \
+  --hash-output m6-b7-l6-hard-witness-positive-gain-hashes.tsv --populate-hashes
+python3 test_m6_b7_l6_hard_witness_positive_gain.py
+python3 m6_b7_l6_hard_witness_positive_gain_scout.py \
+  --solver /path/to/pinned/cadical --seconds 20 \
+  --output m6-b7-l6-hard-witness-positive-gain-scout-20s.json
+python3 check_m6_b7_l6_hard_witness_positive_gain.py --partition --scout
+```
+
+The producer binds the complete witness and committed no-gain artifact chain.
+The independent checker does not import either child producer: it derives all
+117 source leaves, reconstructs and hashes all 117 no-gain sibling CNFs plus
+each positive CNF, and verifies every negative unit is the literalwise
+complement of the corresponding positive ALO literal. It also pins the exact
+117-entry scout status sequence, 0/3/114 SAT/UNSAT/TIMEOUT totals, 0/30/1,036
+incidence totals, UNSAT ordinals 042/095/097, and every solver identity field.
+Tests apply real polarity, substitution, omission, and duplication mutations to
+the ALO and complement units, as well as witness/source binding mutations.
+
+The 7,616-byte manifest has SHA-256
+`eb0021165e41b9912c92abde3f4b26890075b0faafbabb0ced579ad6bb372ab8`;
+the 11,695-byte complete 117-CNF ledger has SHA-256
+`57a146838c09dca90e83e1ca19a504967199f3fde15f330769f8867a2068552e`.
+A sequential pinned CaDiCaL 1.7.3 scout at exactly 20 seconds per leaf returned
+3 UNSAT and 114 TIMEOUT, with zero SAT, representing 30 and 1,036 incidences.
+The UNSAT leaves are 042 `o15-w01`, 095 `o37-w00`, and 097 `o37-w02`.
+The 53,533-byte scout has SHA-256
+`f5ed09b7134a3315a37d20db786fdd7d1675b1edc0ab6ef0969655fb7a6802f7`.
+
+Exactly those three scout-UNSAT leaves now have three retained textual LRAT
+certificates from
+the pinned CaDiCaL 1.7.3, each accepted by pinned `lrat-check` and compressed
+with `xz -3`. The artifacts total 35,233,748 bytes under a strict exclusive
+250,000,000-byte bound and certify exactly 30 parent/witness incidences. The
+ledger binds the complete positive-gain manifest, CNF hashes, scout, producer,
+independent structural/partition checker, scout source, both tests, certificate
+producer, pinned tools, and the committed no-gain complement manifest and
+certificate ledger. No positive-gain leaf outside 042, 095, and 097 is claimed.
+
+```sh
+python3 verify_m6_b7_l6_hard_witness_positive_gain_certificates.py \
+  --checker /path/to/pinned/lrat-check
+```
