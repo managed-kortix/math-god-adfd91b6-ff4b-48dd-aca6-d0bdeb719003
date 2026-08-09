@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed master verifier for the order-eight rank-six kernel theorem."""
+"""Layered fail-closed verifier for the order-eight rank-six kernel theorem."""
 
 from __future__ import annotations
 
@@ -23,6 +23,7 @@ PACK_AUDITOR = EXPERIMENTS / "rank6_order8_pack_auditor.py"
 PACK_MANIFEST = EXPERIMENTS / "rank6_order8_search_manifest.json"
 SYMBOLIC_PROGRAM = EXPERIMENTS / "rank6_order8_symbolic_recognizers.py"
 SYMBOLIC_FIXTURE = EXPERIMENTS / "rank6_order8_symbolic_templates.json"
+AUDIT_TRANSCRIPT = EXPERIMENTS / "rank6_order8_exact_audit_transcript.json"
 
 DEPENDENCIES = {
     "kernel_fixture": (KERNEL_FIXTURE,
@@ -32,13 +33,15 @@ DEPENDENCIES = {
     "census_fixture": (CENSUS_FIXTURE,
         "724fdb337b7bb9225b1a8691c28e131ae1c8de7dc38bb13a5adbb98c1f92218e"),
     "pack_auditor": (PACK_AUDITOR,
-        "e9f9a4192a01f0fa3a7014b8e869354242dc368031d0ef9ea1dde270cbeb9b8c"),
+        "f55352a99317c6b420c59d27f3236f78f6376607813c111c08a6159933d73f00"),
     "pack_manifest": (PACK_MANIFEST,
         "dd97ff3059cd637177171cb5d335cc17889a3714459522232e8110c5d79da469"),
     "symbolic_program": (SYMBOLIC_PROGRAM,
         "755dd24b9e3f129dc6cd4fe590c4c13031bd22c41054ca29082981e3f5d909fe"),
     "symbolic_fixture": (SYMBOLIC_FIXTURE,
         "2f457374d9627bd27339a0988aa47149db825dd0cba050c71ac9accfa3f72b95"),
+    "audit_transcript": (AUDIT_TRANSCRIPT,
+        "7cb0675f251ed07ad99c72a3be4482b87383e6fc2d4a819dcf064a2849cb3a4f"),
 }
 EXPECTED_SCOPE = "order=8;rank=6;kernels=K646-K970;single-nontrivial-block"
 EXPECTED_CONCLUSION = "kappa(B)<=|E(B)|+5;therefore s+(G)>=|V(G)| after rooted-tree lift"
@@ -110,11 +113,15 @@ def audit_census():
     return hashlib.sha256(raw).hexdigest(), payload
 
 
-def audit_exact_frontier():
-    auditor = load_module("rank6_order8_pack_for_master", PACK_AUDITOR)
-    report, complete = auditor.audit(PACK_MANIFEST, exact=True)
-    require(complete and report["status"] == "complete" and report["exact_audit"] is True,
-            "exact frontier is incomplete")
+def validate_frontier_report(report):
+    require(type(report) is dict and set(report) == {
+        "status", "covered_residual_range", "residual_total", "covered_target_total",
+        "unresolved_target_total", "symbolic_certified_target_total", "unresolved_keys",
+        "exact_cost_five_target_total", "symbolic_expected_in_coverage",
+        "symbolic_rationally_certified_target_total", "symbolic_unexpected_target_total",
+        "symbolic_coverage_match", "exact_audit"}, "exact audit report fields changed")
+    require(report["status"] == "complete" and report["exact_audit"] is True,
+            "exact frontier transcript is incomplete")
     require((report["covered_residual_range"], report["residual_total"],
              report["covered_target_total"]) == ([0, 102988], 102988, 1441832),
             "frontier coverage changed")
@@ -124,16 +131,33 @@ def audit_exact_frontier():
     require(report["symbolic_unexpected_target_total"] == 0 and
             report["symbolic_coverage_match"] is True,
             "symbolic target partition changed")
-    require(len(report["unresolved_keys"]) == 24,
-            "symbolic key ledger width changed")
+    require(len(report["unresolved_keys"]) == 24 and
+            len({tuple(key) for key in report["unresolved_keys"]}) == 24,
+            "symbolic key ledger width or uniqueness changed")
     return report
 
 
-def audit():
+def audit_exact_frontier(full=False):
+    auditor = load_module("rank6_order8_pack_for_master", PACK_AUDITOR)
+    transcript_raw, transcript = auditor.authenticate_transcript(PACK_MANIFEST, AUDIT_TRANSCRIPT)
+    transcript_report = validate_frontier_report(transcript["report"])
+    if not full:
+        return transcript_report, hashlib.sha256(transcript_raw).hexdigest()
+
+    report, complete = auditor.audit(PACK_MANIFEST, exact=True)
+    require(complete, "exhaustive exact frontier is incomplete")
+    validate_frontier_report(report)
+    reproduced = auditor.canonical_bytes(auditor.transcript_payload(PACK_MANIFEST, report))
+    require(reproduced == transcript_raw,
+            "exhaustive audit does not reproduce the authenticated transcript")
+    return report, hashlib.sha256(transcript_raw).hexdigest()
+
+
+def audit(full=False):
     validate_registry()
     dependencies = audit_dependencies()
     census_digest, census = audit_census()
-    frontier = audit_exact_frontier()
+    frontier, transcript_digest = audit_exact_frontier(full)
     rational_targets = frontier["covered_target_total"] - frontier["unresolved_target_total"]
     require(rational_targets == 1441808, "rational target total changed")
     manifest = {
@@ -154,6 +178,7 @@ def audit():
             "rational_targets": rational_targets,
             "symbolic_targets": frontier["symbolic_certified_target_total"],
             "complete_disjoint_ownership": True,
+            "exact_audit_transcript_sha256": transcript_digest,
         },
         "length_scope": "arbitrary positive simple-subdivision lengths via same-parity monotonicity",
         "attachments": "arbitrary finite rooted trees at branch or subdivision vertices",
@@ -193,12 +218,32 @@ def hostile_self_checks():
     expect_rejected(lambda: validate_registry(
         DEPENDENCIES, EXPECTED_SCOPE, "unchecked status flag"), "conclusion weakened")
     mutations += 1
+    valid_report = {
+        "status": "complete", "covered_residual_range": [0, 102988],
+        "residual_total": 102988, "covered_target_total": 1441832,
+        "unresolved_target_total": 24, "symbolic_certified_target_total": 24,
+        "unresolved_keys": [[index, None] for index in range(24)],
+        "exact_cost_five_target_total": 0, "symbolic_expected_in_coverage": 256,
+        "symbolic_rationally_certified_target_total": 232,
+        "symbolic_unexpected_target_total": 0, "symbolic_coverage_match": True,
+        "exact_audit": True,
+    }
+    for label, mutate in (
+            ("transcript completeness forged", lambda row: row.__setitem__("status", "incomplete")),
+            ("transcript target omitted", lambda row: row.__setitem__("covered_target_total", 1441831)),
+            ("transcript symbolic ownership forged",
+             lambda row: row.__setitem__("symbolic_certified_target_total", 23)),
+            ("transcript key duplicated", lambda row: row["unresolved_keys"].__setitem__(1, [0, None]))):
+        changed = deepcopy(valid_report)
+        mutate(changed)
+        expect_rejected(lambda changed=changed: validate_frontier_report(changed), label)
+        mutations += 1
     return mutations
 
 
-def report(digest, mutations):
+def report(digest, mutations, full):
     return "\n".join((
-        "rank-six order-eight kernel theorem: all exact audits passed",
+        f"rank-six order-eight kernel theorem: {'exhaustive' if full else 'authenticated'} exact audit passed",
         "census: kernels=325 physical=1598512 orbits=1045292 coarse=942304 residual=102988",
         "frontier: total=1441832 rational=1441808 symbolic=24 complete=true",
         "lengths: arbitrary same-parity lengthening from canonical-plus-coordinate targets",
@@ -207,6 +252,7 @@ def report(digest, mutations):
         "nonclaim: no order-nine, order-ten, multiblock, or all-hexacyclic conclusion",
         f"exact_dependency_manifest_sha256: {digest}",
         f"rejected_hostile_mutations: {mutations}",
+        f"verification_layer: {'full-exhaustive-replay' if full else 'fast-authenticated-transcript'}",
     )) + "\n"
 
 
@@ -223,12 +269,15 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--emit", action="store_true")
     parser.add_argument("--print-manifest", action="store_true")
+    parser.add_argument("--full", action="store_true",
+                        help="replay all 1,441,832 exact target audits")
     args = parser.parse_args()
-    manifest, digest = audit()
+    require(not (args.full and args.emit), "--full and --emit are incompatible")
+    manifest, digest = audit(args.full)
     mutations = hostile_self_checks()
-    require(mutations == 10, "hostile mutation count changed")
-    output = report(digest, mutations)
-    if not args.emit and sys.flags.optimize == 0:
+    require(mutations == 15, "hostile mutation count changed")
+    output = report(digest, mutations, args.full)
+    if not args.emit and not args.full and sys.flags.optimize == 0:
         require(optimized_output() == output, "normal and python -O output differ")
     if args.print_manifest:
         sys.stdout.write(canonical_bytes(manifest).decode("ascii"))

@@ -20,7 +20,9 @@ ENGINE_PATH = HERE.parents[1] / "pentacyclic" / "research" / \
     "order8-dim8-rational-canonical-frontiers-experiment.py"
 KERNEL_PATH = HERE.parents[1] / "research" / "fixtures" / "rank-six-kernels.json"
 DEFAULT_MANIFEST = HERE / "rank6_order8_search_manifest.json"
+DEFAULT_TRANSCRIPT = HERE / "rank6_order8_exact_audit_transcript.json"
 SCHEMA = "rank-six-order-eight-search-pack-manifest-v2"
+TRANSCRIPT_SCHEMA = "rank-six-order-eight-exact-audit-transcript-v1"
 FRONTIER_TOTAL = 14
 
 
@@ -107,6 +109,97 @@ def load_manifest(path):
                              "covered_key_stream_sha256"}, "manifest fields changed")
     require(payload["schema"] == SCHEMA, "manifest schema changed")
     return payload
+
+
+def auditor_sha256():
+    return sha256(Path(__file__).resolve().read_bytes())
+
+
+def authenticate_artifacts(manifest_path):
+    """Authenticate every exact-audit input without decoding witness payloads."""
+    manifest = load_manifest(manifest_path)
+    dependencies = dependency_digests()
+    require(manifest["dependency_sha256"] == dependencies,
+            "transitive dependency digest changed")
+    require(manifest["source_sha256"] == dependencies["kernel_source"],
+            "manifest points to another kernel source")
+    require(manifest["symbolic_sha256"] == dependencies["symbolic_fixture"],
+            "manifest points to another symbolic fixture")
+    require(manifest["frontiers_per_residual"] == FRONTIER_TOTAL,
+            "manifest frontier width changed")
+
+    expected_start = 0
+    for index, chunk in enumerate(manifest["chunks"]):
+        require(type(chunk) is dict and set(chunk) == {
+            "path", "residual_range", "compressed_bytes", "compressed_sha256",
+            "raw_bytes", "raw_sha256"}, f"bad chunk {index} manifest record")
+        start, stop = chunk["residual_range"]
+        require(type(start) is int and type(stop) is int and
+                start == expected_start < stop <= manifest["residual_total"],
+                f"chunk {index} range is not the next ordered interval")
+        path = (manifest_path.parent / chunk["path"]).resolve()
+        try:
+            path.relative_to(manifest_path.parent.resolve())
+        except ValueError as error:
+            raise RuntimeError(f"chunk {index} escapes the manifest directory") from error
+        require(path.is_file(), f"missing chunk {index}")
+        digest = hashlib.sha256()
+        size = 0
+        with path.open("rb") as source:
+            for block in iter(lambda: source.read(1024 * 1024), b""):
+                size += len(block)
+                digest.update(block)
+        require(size == chunk["compressed_bytes"] and
+                digest.hexdigest() == chunk["compressed_sha256"],
+                f"chunk {index} compressed artifact changed")
+        expected_start = stop
+    require(expected_start == manifest["residual_total"],
+            "manifest does not cover every residual")
+    require(manifest["covered_residual_range"] == [0, expected_start] and
+            manifest["covered_target_total"] == expected_start * FRONTIER_TOTAL,
+            "manifest coverage totals changed")
+    return manifest, sha256(canonical_bytes(manifest))
+
+
+def transcript_payload(manifest_path, report):
+    manifest, manifest_digest = authenticate_artifacts(manifest_path)
+    require(report["exact_audit"] is True and report["status"] == "complete",
+            "cannot attest an incomplete audit")
+    return {
+        "schema": TRANSCRIPT_SCHEMA,
+        "auditor_sha256": auditor_sha256(),
+        "manifest_sha256": manifest_digest,
+        "dependency_sha256": manifest["dependency_sha256"],
+        "covered_key_stream_sha256": manifest["covered_key_stream_sha256"],
+        "report": report,
+    }
+
+
+def load_transcript(path):
+    raw = path.read_bytes()
+    payload = strict_json(raw, "exact audit transcript")
+    require(raw == canonical_bytes(payload), "exact audit transcript is not canonical JSON")
+    return raw, payload
+
+
+def authenticate_transcript(manifest_path, transcript_path):
+    """Bind a persisted exact result to all current inputs; do no exact replay."""
+    manifest, manifest_digest = authenticate_artifacts(manifest_path)
+    raw, transcript = load_transcript(transcript_path)
+    require(set(transcript) == {"schema", "auditor_sha256", "manifest_sha256",
+                                "dependency_sha256", "covered_key_stream_sha256", "report"},
+            "exact audit transcript fields changed")
+    require(transcript["schema"] == TRANSCRIPT_SCHEMA, "exact audit transcript schema changed")
+    require(transcript["auditor_sha256"] == auditor_sha256(), "attested auditor changed")
+    require(transcript["manifest_sha256"] == manifest_digest, "attested manifest changed")
+    require(transcript["dependency_sha256"] == manifest["dependency_sha256"],
+            "attested transitive dependencies changed")
+    require(transcript["covered_key_stream_sha256"] == manifest["covered_key_stream_sha256"],
+            "attested target key stream changed")
+    require(transcript["report"].get("exact_audit") is True and
+            transcript["report"].get("status") == "complete",
+            "transcript does not attest a complete exact audit")
+    return raw, transcript
 
 
 def target_frontier(target):
@@ -290,6 +383,8 @@ def main():
                         help="check ranges and byte/key digests without exact witnesses")
     parser.add_argument("--build-manifest", nargs="+", type=Path, metavar="PACK",
                         help="derive a canonical manifest from ordered-range packs")
+    parser.add_argument("--write-transcript", type=Path, metavar="PATH",
+                        help="exhaustively audit, then persist a canonical transcript")
     args = parser.parse_args()
     if args.build_manifest is not None:
         require(not args.digest_only, "--digest-only cannot build a manifest")
@@ -297,7 +392,13 @@ def main():
         print(f"manifest_sha256={sha256(canonical_bytes(payload))} "
               f"covered_residual_range=0..{payload['covered_residual_range'][1]}")
         return
+    require(not (args.digest_only and args.write_transcript),
+            "--digest-only cannot write an exact transcript")
     report, complete = audit(args.manifest, not args.digest_only)
+    if args.write_transcript is not None:
+        require(complete, "cannot write transcript for an incomplete audit")
+        require(args.write_transcript.parent.is_dir(), "transcript output parent does not exist")
+        args.write_transcript.write_bytes(canonical_bytes(transcript_payload(args.manifest, report)))
     sys.stdout.write(canonical_bytes(report).decode("ascii"))
     if not complete:
         raise SystemExit(1)
