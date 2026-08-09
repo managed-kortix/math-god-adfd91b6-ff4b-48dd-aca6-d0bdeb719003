@@ -1592,3 +1592,44 @@ No audits yet.
 - Exact CNF/LRAT/xz identities and source bindings are in
   `experiments/m6-b7-l6-state-certificates.tsv`; fresh replay is
   `experiments/verify_m6_b7_l6_state_certificates.py`.
+
+### B7-l6 hard-state C-to-B subset-intersection orbit refinement
+
+- Refined only the 19 uncertified committed B7-l6 hard state leaves, containing
+  exactly 170 parent/state incidences. For each state, the simultaneous `S7(B)`
+  orbit of the two exact C-to-B subsets is classified by their intersection
+  size `t`. The exact result is 42 selector-batched orbit leaves and 392
+  parent/orbit incidences; no certified state leaf was reopened.
+- Each CNF keeps the immutable 23,616-variable B7 base and prior three state
+  units, replaces the two unary counters by all 14 signed C-to-B arc units for
+  a canonical orbit representative, and adds parent selectors, one ALO, and
+  153 guarded hole clauses per parent. Dimensions are `(23622,143665)` for the
+  seven six-parent leaves and `(23626,144277)` for the 35 ten-parent leaves.
+- `experiments/check_m6_b7_l6_hard_orbits.py` independently reconstructs the
+  hard frontier and explicitly applies all 5,040 labelled `S7` permutations.
+  It verifies the complete disjoint subset-pair orbit cover, reconstructs every
+  CNF, checks all hashes, and enforces complete exact-one-selector model
+  attribution. Exhaustive tests also reject intersection, subset, arc-unit,
+  selector, partial-model, and multiple-selector mutations.
+- The 5,533-byte manifest `experiments/m6-b7-l6-hard-orbits.tsv` has SHA-256
+  `6c1080c6f97f92e68a9de6bc762145ceac9086f0b87dc4aa4ed73a746861b2d4`.
+  The 4,025-byte complete 42-CNF ledger
+  `experiments/m6-b7-l6-hard-orbit-hashes.tsv` has SHA-256
+  `83fe978c89f6f0c7901924123a322d42c2f31a1a15e931cdb30e861e31497030`.
+- After the exhaustive gate passed, a pinned CaDiCaL 1.7.3 20-second-per-orbit
+  scout returned 14 UNSAT and 28 TIMEOUT leaves, representing 140 and 252
+  parent/orbit incidences, with zero SAT. The 11,413-byte record
+  `experiments/m6-b7-l6-hard-orbit-scout-20s.json` has SHA-256
+  `32fa8260e2efb3cc326bafc2ce2d375ec84bf77ebb2fb5f9efd96b5b995ef31a`.
+  No LRAT was requested or retained during the scout.
+- Subsequently regenerated and structurally checked exactly those 14
+  scout-UNSAT leaves, solved them with pinned CaDiCaL 1.7.3 in textual LRAT
+  mode, and replayed every proof with pinned `lrat-check`; all returned
+  `c VERIFIED`. The 14 durable `xz -3` artifacts total 94,639,000 bytes and
+  certify exactly 140 parent/orbit incidences. The other 28 leaves, containing
+  252 incidences, remain uncertified TIMEOUT frontier.
+- Exact CNF/LRAT/xz identities and strict bindings for the orbit manifest,
+  complete CNF hash ledger, scout, producer/checker, prior state layer, and
+  clean-sink sources are in
+  `experiments/m6-b7-l6-hard-orbit-certificates.tsv`; fresh replay is
+  `experiments/verify_m6_b7_l6_hard_orbit_certificates.py`.
