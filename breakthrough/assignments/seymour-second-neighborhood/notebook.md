@@ -41,6 +41,30 @@ No audits yet.
   and decompressed every artifact, matched every raw LRAT hash, and obtained
   `c VERIFIED` from the pinned checker for every leaf.
 
+## 2026-08-09 — frozen positive-gain coordinate certificates
+
+- Retained exactly eight textual LRAT certificates for coordinate scout-UNSAT
+  leaves 020, 026, 096, 102, 172, 178, 215, and 217. They cover 72
+  parent/witness/coordinate incidence memberships; the other 211 coordinate
+  scout-TIMEOUT leaves remain open, so this is not a claim beyond that scope.
+- The 114 positive-gain TIMEOUT sources split into 219 children by selected
+  deletion coordinate. The child ALOs give an exact existential cover. It is
+  deliberately overlapping rather than a partition: when both coordinate ALOs
+  hold in a two-coordinate source, that model lies in both children.
+- Stabilizers are irrelevant to validity. Every child retains the canonical
+  source leaf and names a coordinate in its frozen labeling; a stabilizer could
+  remove isomorphic redundancy but cannot change the ALO union identity,
+  coverage, generated CNF, or LRAT acceptance.
+- The strict mutual ledger/verifier pin directly binds every tracked Python
+  support script in the transitive coordinate generation/checking chain, all
+  coordinate inputs and eight artifacts, both pinned binaries, and the ancestor
+  positive-gain and complementary no-gain certificate chains and artifact sets.
+- Exact replay scope, run from `experiments/`:
+  `python3 verify_m6_b7_l6_hard_witness_positive_gain_coordinate_certificates.py --checker /path/to/pinned/lrat-check`.
+  Replay regenerates and structurally checks exactly the eight scoped CNFs,
+  authenticates and decompresses their retained LRATs, and requires
+  `c VERIFIED` from the pinned checker for each proof.
+
 ## 2026-07-31 — residual m=6 suite hardening
 
 - The residual regression now generates and independently reconstructs all 23

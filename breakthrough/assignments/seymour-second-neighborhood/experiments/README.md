@@ -640,3 +640,71 @@ certificate ledger. No positive-gain leaf outside 042, 095, and 097 is claimed.
 python3 verify_m6_b7_l6_hard_witness_positive_gain_certificates.py \
   --checker /path/to/pinned/lrat-check
 ```
+
+The 114 committed positive-gain scout-TIMEOUT leaves are split completely by
+selected deletion coordinate. A one-coordinate source has one child; a
+two-coordinate source has two. Child `i` retains the source leaf and replaces
+its 16/32-literal ALO by the 16-literal ALO `P_i` for exactly coordinate `i`.
+Thus the source condition is exactly `OR_i P_i`, and existentially choosing a
+child covers exactly the source models. This is an overlapping cover, not a
+model partition: for a two-coordinate source, a model with both `P_0` and
+`P_1` true belongs to both children. No other overlap is introduced by the
+coordinate split.
+
+```sh
+python3 m6_b7_l6_hard_witness_positive_gain_coordinate.py \
+  --manifest-output m6-b7-l6-hard-witness-positive-gain-coordinate.tsv \
+  --hash-output m6-b7-l6-hard-witness-positive-gain-coordinate-hashes.tsv \
+  --populate-hashes
+python3 test_m6_b7_l6_hard_witness_positive_gain_coordinate.py
+python3 m6_b7_l6_hard_witness_positive_gain_coordinate_scout.py \
+  --solver /path/to/pinned/cadical --seconds 15 \
+  --output m6-b7-l6-hard-witness-positive-gain-coordinate-scout-15s.json
+python3 check_m6_b7_l6_hard_witness_positive_gain_coordinate.py --cover --scout
+```
+
+The exact census is 9 one-coordinate and 105 two-coordinate sources, hence 219
+children and 1,990 parent/witness/coordinate incidence memberships. Every child
+has one 16-literal ALO. The independent checker derives the 114 TIMEOUT sources
+from the bound 20-second scout, verifies that its three omitted source leaves
+are exactly the committed certificate ordinals 042/095/097, derives every
+coordinate without importing the producer, and reconstructs all CNFs and
+hashes. Hostile tests reject an omitted coordinate literal, changed polarity,
+coordinate, deletion, witness, source, scout binding, or certificate binding.
+The 13,557-byte manifest has SHA-256
+`c1ea02ae0127713063efed74eeae84e9c6f22f800b0c6899d293b1a962028b49`;
+the 25,213-byte complete CNF hash ledger has SHA-256
+`aec75e12d82a9ad829dd64b8bce54687f493dbe0d73d5d7665eb965d97f905b6`.
+A pinned CaDiCaL 1.7.3 scout at exactly 15 seconds per child returned 8 UNSAT
+and 211 TIMEOUT, with zero SAT, representing 72 and 1,918 incidence
+memberships. The UNSAT child ordinals are 020, 026, 096, 102, 172, 178, 215,
+and 217. The 92,091-byte scout has SHA-256
+`1ad3075ef0386c8bc8afec26b5a2cd392c140d17d8a69daa025063f4e8f3efab`.
+Exactly those eight scout-UNSAT coordinate leaves now have retained textual
+LRATs from pinned CaDiCaL 1.7.3, accepted by pinned `lrat-check`, and compressed
+with `xz -3`. The artifacts total 3,756,712 bytes and certify exactly 72
+incidence memberships. The strict ledger binds the full coordinate source
+chain, all eight artifacts, and the committed positive-gain ancestor and
+no-gain complement certificate ledgers, verifiers, and artifact sets. It also
+directly binds every tracked Python support script in the transitive coordinate
+generation/checking chain rather than relying only on indirect ancestor pins.
+Fresh replay regenerates and structurally checks every CNF before checking each
+raw LRAT. From
+`breakthrough/assignments/seymour-second-neighborhood/experiments`, the exact
+scope/replay command is:
+
+```sh
+python3 verify_m6_b7_l6_hard_witness_positive_gain_coordinate_certificates.py \
+  --checker /path/to/pinned/lrat-check
+```
+
+No coordinate leaf outside 020, 026, 096, 102, 172, 178, 215, and 217 is
+certified by this ledger; the other 211 scout-TIMEOUT leaves remain open. No
+stabilizer quotient is needed or claimed: each child keeps its already
+canonical source leaf and fixes a named deletion coordinate in that frozen
+labeling. Stabilizers could identify isomorphic children or models and reduce
+redundancy, but they cannot affect the literal identity
+`OR_i (source AND P_i) = source AND OR_i P_i`, the coverage claim, or any LRAT
+check. In particular, the two-coordinate children are an overlapping cover,
+not disjoint orbit cells: a model satisfying both coordinate ALOs is retained
+by both children and is intentionally counted twice for coverage purposes.
