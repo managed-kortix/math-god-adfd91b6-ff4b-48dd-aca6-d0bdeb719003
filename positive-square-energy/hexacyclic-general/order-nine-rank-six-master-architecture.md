@@ -51,6 +51,15 @@ the full range and all 2,794,425 target keys. Thus replacing today's partial
 manifest with a correctly built final manifest is the only data-plane action
 needed to turn the gate green.
 
+The pack auditor also supports segmented exact replay with `--chunk-index I`
+and `--write-chunk-receipt PATH`. These canonical receipts explicitly identify
+themselves as bookkeeping-only and set `theorem_evidence=false`. An aggregate
+built by `--aggregate-receipts ... --write-aggregate PATH` authenticates one
+receipt per manifest chunk and checks additive coverage and ownership totals,
+but remains only an execution index. Neither a chunk receipt nor its aggregate
+is accepted by the completion verifier: theorem promotion still requires a
+fresh exact replay of the full manifest in one verifier invocation.
+
 ## Exact symbolic ownership
 
 The symbolic recognizer independently regenerates 82 exact decompositions on

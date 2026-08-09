@@ -23,7 +23,10 @@ CLASSIFICATION_PATH = HERE / "rank6_orders8_10_atom_ledger_classification.json"
 KERNEL_PATH = ROOT / "research" / "fixtures" / "rank-six-kernels.json"
 DEFAULT_MANIFEST = HERE / "rank6_order9_search_manifest.json"
 SCHEMA = "rank-six-order-nine-r9g-search-pack-manifest-v1"
+CHUNK_RECEIPT_SCHEMA = "rank-six-order-nine-exact-chunk-bookkeeping-receipt-v1"
+AGGREGATE_RECEIPT_SCHEMA = "rank-six-order-nine-chunk-bookkeeping-aggregate-v1"
 FRONTIER_TOTAL = 15
+RECORD_MODE_FIELDS = {"shared", "template", "individual", "unresolved"}
 EXPECTED_SYMBOLIC_REPORT = {
     "classification_sha256": "cc20f4c684ef269297cd7c1d2bc888508fdc31f16cc26e8cb1c2e86792052059",
     "decomposition_total": 82,
@@ -49,6 +52,10 @@ def canonical_bytes(payload):
 
 def sha256(raw):
     return hashlib.sha256(raw).hexdigest()
+
+
+def auditor_sha256():
+    return sha256(Path(__file__).resolve().read_bytes())
 
 
 def strict_json(raw, label):
@@ -164,7 +171,11 @@ def load_manifest(path):
     return payload
 
 
-def read_chunks(manifest_path, manifest, pipeline, residuals):
+def manifest_sha256(manifest):
+    return sha256(canonical_bytes(manifest))
+
+
+def read_chunks(manifest_path, manifest, pipeline, residuals, chunk_index=None):
     chunks = manifest["chunks"]
     require(type(chunks) is list and chunks, "manifest has no chunks")
     expected_start = 0
@@ -196,6 +207,9 @@ def read_chunks(manifest_path, manifest, pipeline, residuals):
         require(len(stored) == chunk["compressed_bytes"] and
                 sha256(stored) == chunk["compressed_sha256"],
                 f"chunk {index} compressed artifact changed")
+        expected_start = stop
+        if chunk_index is not None and index != chunk_index:
+            continue
         try:
             raw = lzma.decompress(stored, format=lzma.FORMAT_XZ)
         except lzma.LZMAError as error:
@@ -206,7 +220,6 @@ def read_chunks(manifest_path, manifest, pipeline, residuals):
         require(actual_start == start and attempts == stop - start and
                 len(records) == attempts, f"chunk {index} embedded range changed")
         decoded.append((start, records))
-        expected_start = stop
     return expected_start, decoded
 
 
@@ -245,7 +258,7 @@ def exact_certificates(pipeline, residuals, decoded, symbolic_keys):
     return certified, unresolved, symbolic_exact, modes
 
 
-def audit(manifest_path, exact=True):
+def audit(manifest_path, exact=True, chunk_index=None):
     manifest = load_manifest(manifest_path)
     dependencies = dependency_digests()
     require(manifest["dependency_sha256"] == dependencies,
@@ -263,14 +276,29 @@ def audit(manifest_path, exact=True):
             "symbolic source index exceeds regenerated census")
     require(manifest["symbolic_sha256"] == symbolic_sha256,
             "symbolic ownership stream digest changed")
-    covered, decoded = read_chunks(manifest_path, manifest, pipeline, residuals)
-    require(manifest["covered_residual_range"] == [0, covered] and
-            manifest["covered_target_total"] == covered * FRONTIER_TOTAL,
+    chunks = manifest["chunks"]
+    if chunk_index is not None:
+        require(type(chunk_index) is int and 0 <= chunk_index < len(chunks),
+                "chunk index is out of range")
+    manifest_covered, decoded = read_chunks(
+        manifest_path, manifest, pipeline, residuals, chunk_index)
+    require(manifest["covered_residual_range"] == [0, manifest_covered] and
+            manifest["covered_target_total"] == manifest_covered * FRONTIER_TOTAL,
             "manifest coverage totals changed")
-    require(manifest["covered_key_stream_sha256"] == key_digest(residuals, covered),
+    require(manifest["covered_key_stream_sha256"] == key_digest(residuals, manifest_covered),
             "covered ordered target key stream digest changed")
 
-    expected_symbolic = {key for key in symbolic_keys if key[0] < covered}
+    if chunk_index is None:
+        covered_start, covered_stop = 0, manifest_covered
+        replay_scope = "full-manifest"
+    else:
+        covered_start, covered_stop = chunks[chunk_index]["residual_range"]
+        replay_scope = "single-chunk"
+    covered = covered_stop - covered_start
+
+    expected_symbolic = {
+        key for key in symbolic_keys if covered_start <= key[0] < covered_stop
+    }
     if exact:
         numerical, unresolved, symbolic_exact, modes = exact_certificates(
             pipeline, residuals, decoded, symbolic_keys)
@@ -281,9 +309,13 @@ def audit(manifest_path, exact=True):
     else:
         numerical = unresolved = symbolic_exact = symbolic_certified = certified = set()
         modes = {"shared": 0, "template": 0, "individual": 0, "unresolved": 0}
-    complete = exact and covered == len(residuals) and len(certified) == covered * FRONTIER_TOTAL
+    replay_complete = exact and len(certified) == covered * FRONTIER_TOTAL
+    complete = replay_complete and (chunk_index is not None or manifest_covered == len(residuals))
     report = {
         "status": "complete" if complete else "incomplete",
+        "replay_scope": replay_scope,
+        "theorem_gate_eligible": bool(
+            complete and chunk_index is None and manifest_covered == len(residuals)),
         "census": {
             "kernel_interval": census_payload["kernel_interval"],
             "kernel_total": census_payload["kernel_total"],
@@ -293,11 +325,12 @@ def audit(manifest_path, exact=True):
             "coarse_residual_total": census_payload["coarse_residual_total"],
             "frontier_target_total": census_payload["frontier_target_total"],
         },
-        "covered_residual_range": [0, covered],
+        "covered_residual_range": [covered_start, covered_stop],
+        "manifest_covered_residual_range": [0, manifest_covered],
         "residual_total": len(residuals),
-        "missing_residual_total": len(residuals) - covered,
+        "missing_residual_total": len(residuals) - manifest_covered,
         "covered_target_total": covered * FRONTIER_TOTAL,
-        "missing_target_total": (len(residuals) - covered) * FRONTIER_TOTAL,
+        "missing_target_total": (len(residuals) - manifest_covered) * FRONTIER_TOTAL,
         "exact_certified_target_total": len(certified),
         "uncertified_target_total": covered * FRONTIER_TOTAL - len(certified),
         "unresolved_target_total": len(unresolved),
@@ -312,6 +345,135 @@ def audit(manifest_path, exact=True):
         "exact_audit": exact,
     }
     return report, complete
+
+
+def chunk_receipt_payload(manifest_path, chunk_index, report):
+    manifest = load_manifest(manifest_path)
+    require(type(chunk_index) is int and 0 <= chunk_index < len(manifest["chunks"]),
+            "chunk index is out of range")
+    chunk = manifest["chunks"][chunk_index]
+    start, stop = chunk["residual_range"]
+    validate_chunk_report(report, start, stop, manifest)
+    return {
+        "schema": CHUNK_RECEIPT_SCHEMA,
+        "receipt_kind": "bookkeeping-only",
+        "theorem_evidence": False,
+        "auditor_sha256": auditor_sha256(),
+        "manifest_sha256": manifest_sha256(manifest),
+        "dependency_sha256": manifest["dependency_sha256"],
+        "covered_key_stream_sha256": manifest["covered_key_stream_sha256"],
+        "chunk_index": chunk_index,
+        "chunk": chunk,
+        "report": report,
+        "notice": "bookkeeping receipt for one exact chunk replay; theorem requires a fresh full-manifest exact replay",
+    }
+
+
+def validate_chunk_report(report, start, stop, manifest):
+    require(type(report) is dict, "chunk report is not an object")
+    require(report.get("status") == "complete" and report.get("exact_audit") is True and
+            report.get("replay_scope") == "single-chunk" and
+            report.get("theorem_gate_eligible") is False,
+            "chunk report is not a bookkeeping-only exact replay")
+    width = stop - start
+    require(report.get("covered_residual_range") == [start, stop] and
+            report.get("manifest_covered_residual_range") ==
+            manifest["covered_residual_range"] and
+            report.get("residual_total") == manifest["residual_total"] and
+            report.get("covered_target_total") == width * FRONTIER_TOTAL,
+            "chunk report coverage changed")
+    require(report.get("missing_residual_total") ==
+            manifest["residual_total"] - manifest["covered_residual_range"][1] and
+            report.get("missing_target_total") ==
+            (manifest["residual_total"] - manifest["covered_residual_range"][1]) *
+            FRONTIER_TOTAL, "chunk report manifest bookkeeping changed")
+    certified = report.get("exact_certified_target_total")
+    rational = report.get("disjoint_rational_owner_target_total")
+    symbolic = report.get("disjoint_symbolic_owner_target_total")
+    require(type(certified) is int and certified == width * FRONTIER_TOTAL and
+            report.get("uncertified_target_total") == 0 and
+            type(rational) is int and type(symbolic) is int and
+            rational + symbolic == certified,
+            "chunk report ownership totals changed")
+    modes = report.get("record_modes")
+    require(type(modes) is dict and set(modes) == RECORD_MODE_FIELDS and
+            all(type(value) is int and value >= 0 for value in modes.values()) and
+            sum(modes.values()) == width, "chunk report mode totals changed")
+
+
+def load_receipt(path, label):
+    raw = path.read_bytes()
+    payload = strict_json(raw, label)
+    require(raw == canonical_bytes(payload), f"{label} is not canonical JSON")
+    return raw, payload
+
+
+def authenticate_chunk_receipt(manifest_path, receipt_path, authenticated=None):
+    """Authenticate bookkeeping bytes and inputs; do not claim replay occurred."""
+    manifest = load_manifest(manifest_path) if authenticated is None else authenticated
+    raw, receipt = load_receipt(receipt_path, "chunk bookkeeping receipt")
+    require(type(receipt) is dict and set(receipt) == {
+        "schema", "receipt_kind", "theorem_evidence", "auditor_sha256",
+        "manifest_sha256", "dependency_sha256", "covered_key_stream_sha256",
+        "chunk_index", "chunk", "report", "notice",
+    }, "chunk receipt fields changed")
+    require(receipt["schema"] == CHUNK_RECEIPT_SCHEMA and
+            receipt["receipt_kind"] == "bookkeeping-only" and
+            receipt["theorem_evidence"] is False,
+            "chunk receipt overstates its evidentiary role")
+    require(receipt["auditor_sha256"] == auditor_sha256(), "receipted auditor changed")
+    require(receipt["manifest_sha256"] == manifest_sha256(manifest),
+            "receipted manifest changed")
+    require(receipt["dependency_sha256"] == manifest["dependency_sha256"],
+            "receipted dependencies changed")
+    require(receipt["covered_key_stream_sha256"] == manifest["covered_key_stream_sha256"],
+            "receipted target key stream changed")
+    index = receipt["chunk_index"]
+    require(type(index) is int and 0 <= index < len(manifest["chunks"]),
+            "receipted chunk index is out of range")
+    require(receipt["chunk"] == manifest["chunks"][index], "receipted chunk changed")
+    start, stop = receipt["chunk"]["residual_range"]
+    validate_chunk_report(receipt["report"], start, stop, manifest)
+    return raw, receipt
+
+
+def build_receipt_aggregate(manifest_path, receipt_paths):
+    manifest = load_manifest(manifest_path)
+    records = []
+    reports = []
+    seen = set()
+    for path in receipt_paths:
+        raw, receipt = authenticate_chunk_receipt(manifest_path, path, manifest)
+        index = receipt["chunk_index"]
+        require(index not in seen, f"duplicate chunk receipt: {index}")
+        seen.add(index)
+        records.append({"chunk_index": index, "receipt_sha256": sha256(raw)})
+        reports.append(receipt["report"])
+    require(seen == set(range(len(manifest["chunks"]))),
+            "aggregate requires exactly one receipt for every manifest chunk")
+    records.sort(key=lambda record: record["chunk_index"])
+    covered_targets = sum(report["covered_target_total"] for report in reports)
+    certified_targets = sum(report["exact_certified_target_total"] for report in reports)
+    require(covered_targets == certified_targets == manifest["covered_target_total"],
+            "aggregate target bookkeeping changed")
+    return {
+        "schema": AGGREGATE_RECEIPT_SCHEMA,
+        "status": "bookkeeping-complete",
+        "receipt_kind": "bookkeeping-only",
+        "theorem_evidence": False,
+        "auditor_sha256": auditor_sha256(),
+        "manifest_sha256": manifest_sha256(manifest),
+        "dependency_sha256": manifest["dependency_sha256"],
+        "covered_key_stream_sha256": manifest["covered_key_stream_sha256"],
+        "chunks": records,
+        "bookkeeping": {
+            "covered_residual_range": manifest["covered_residual_range"],
+            "covered_target_total": covered_targets,
+            "exact_certified_target_total_recorded": certified_targets,
+            "chunk_receipt_total": len(records),
+        },
+        "notice": "authenticated receipt index only; theorem requires a fresh full-manifest exact replay and does not consume this aggregate",
+    }
 
 
 def build_manifest(output, paths):
@@ -374,14 +536,46 @@ def main():
     parser.add_argument("--digest-only", action="store_true",
                         help="check dependencies, ranges, bytes, keys, and symbolic ownership")
     parser.add_argument("--build-manifest", nargs="+", type=Path, metavar="PACK")
+    parser.add_argument("--chunk-index", type=int,
+                        help="exactly replay one manifest chunk independently")
+    parser.add_argument("--write-chunk-receipt", type=Path, metavar="PATH",
+                        help="write a bookkeeping-only receipt for --chunk-index")
+    parser.add_argument("--aggregate-receipts", nargs="+", type=Path, metavar="PATH",
+                        help="index one authenticated bookkeeping receipt per manifest chunk")
+    parser.add_argument("--write-aggregate", type=Path, metavar="PATH")
     args = parser.parse_args()
     if args.build_manifest is not None:
-        require(not args.digest_only, "--digest-only cannot build a manifest")
+        require(not args.digest_only and args.chunk_index is None and
+                args.write_chunk_receipt is None and args.aggregate_receipts is None and
+                args.write_aggregate is None,
+                "manifest build mode cannot be combined with replay or receipt modes")
         payload = build_manifest(args.manifest, args.build_manifest)
         print(f"manifest_sha256={sha256(canonical_bytes(payload))} "
               f"covered_residual_range=0..{payload['covered_residual_range'][1]}")
         return
-    report, complete = audit(args.manifest, not args.digest_only)
+    if args.aggregate_receipts is not None:
+        require(args.write_aggregate is not None,
+                "--aggregate-receipts requires --write-aggregate")
+        require(args.chunk_index is None and args.write_chunk_receipt is None and
+                not args.digest_only,
+                "aggregate mode cannot be combined with replay modes")
+        require(args.write_aggregate.parent.is_dir(), "aggregate output parent does not exist")
+        payload = build_receipt_aggregate(args.manifest, args.aggregate_receipts)
+        args.write_aggregate.write_bytes(canonical_bytes(payload))
+        sys.stdout.write(canonical_bytes(payload).decode("ascii"))
+        return
+    require(args.write_aggregate is None, "--write-aggregate requires --aggregate-receipts")
+    require((args.chunk_index is None) == (args.write_chunk_receipt is None),
+            "--chunk-index and --write-chunk-receipt must be used together")
+    require(not (args.digest_only and args.write_chunk_receipt is not None),
+            "--digest-only cannot write an exact replay receipt")
+    report, complete = audit(args.manifest, not args.digest_only, args.chunk_index)
+    if args.write_chunk_receipt is not None:
+        require(complete, "cannot receipt an incomplete chunk replay")
+        require(args.write_chunk_receipt.parent.is_dir(),
+                "chunk receipt output parent does not exist")
+        payload = chunk_receipt_payload(args.manifest, args.chunk_index, report)
+        args.write_chunk_receipt.write_bytes(canonical_bytes(payload))
     sys.stdout.write(canonical_bytes(report).decode("ascii"))
     if not complete:
         raise SystemExit(1)

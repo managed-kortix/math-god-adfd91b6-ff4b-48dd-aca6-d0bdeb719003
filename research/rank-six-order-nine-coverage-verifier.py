@@ -79,6 +79,8 @@ def completion_payload(manifest_path, exact=True):
     ownership_complete = (
         exact
         and report["exact_audit"] is True
+        and report["replay_scope"] == "full-manifest"
+        and report["theorem_gate_eligible"] is True
         and report["uncertified_target_total"] == 0
         and report["exact_certified_target_total"] == EXPECTED_CENSUS["frontier_target_total"]
         and report["symbolic_owned_target_total"] == EXPECTED_SYMBOLIC_TARGETS
