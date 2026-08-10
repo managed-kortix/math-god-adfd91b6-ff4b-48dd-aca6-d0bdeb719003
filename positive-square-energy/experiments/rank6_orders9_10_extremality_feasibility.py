@@ -9,6 +9,7 @@ import json
 import math
 import random
 from collections import Counter
+from fractions import Fraction
 from pathlib import Path
 
 import networkx as nx
@@ -22,6 +23,7 @@ OUTPUT = HERE / "rank6_orders9_10_extremality_feasibility.json"
 SCHEMA = "rank6-orders9-10-extremality-feasibility-v1"
 SEED = 44420260809
 TRIALS = 64
+RANK_PRIMES = (2_147_483_647, 2_147_483_629, 2_147_483_587)
 
 
 def require(condition, message):
@@ -40,9 +42,11 @@ def source_payload():
 
 
 def primitive(vector):
-    values = [sp.Rational(value) for value in vector]
-    denominator = math.lcm(*(value.q for value in values))
-    integers = [int(value * denominator) for value in values]
+    values = [Fraction(int(value.p), int(value.q)) if isinstance(value, sp.Rational)
+              else Fraction(value) for value in vector]
+    denominator = math.lcm(*(value.denominator for value in values))
+    integers = [value.numerator * (denominator // value.denominator)
+                for value in values]
     divisor = math.gcd(*integers)
     if divisor:
         integers = [value // divisor for value in integers]
@@ -58,6 +62,41 @@ def constraint_row(left, right):
         left[i] * right[j] + (left[j] * right[i] if i != j else 0)
         for i in range(rank) for j in range(i, rank)
     )
+
+
+def rank_modulo(rows, columns, prime):
+    """Compute matrix rank over a prime field using compact Python integers."""
+    matrix = [[value % prime for value in row] for row in rows]
+    rank = 0
+    for column in range(columns):
+        pivot = next((index for index in range(rank, len(matrix))
+                      if matrix[index][column]), None)
+        if pivot is None:
+            continue
+        matrix[rank], matrix[pivot] = matrix[pivot], matrix[rank]
+        pivot_row = matrix[rank]
+        inverse = pow(pivot_row[column], prime - 2, prime)
+        pivot_row[column:] = [(value * inverse) % prime
+                              for value in pivot_row[column:]]
+        for index in range(rank + 1, len(matrix)):
+            row = matrix[index]
+            factor = row[column]
+            if factor:
+                row[column:] = [(left - factor * right) % prime
+                                for left, right in zip(row[column:],
+                                                       pivot_row[column:])]
+        rank += 1
+        if rank == min(len(matrix), columns):
+            break
+    return rank
+
+
+def certified_rank(rows, columns, target):
+    """Prove the requested rational rank via a nonzero modular minor."""
+    if len(rows) < target or columns < target:
+        return False
+    return any(rank_modulo(rows, columns, prime) >= target
+               for prime in RANK_PRIMES)
 
 
 def exact_witness(graph, rank, rng):
@@ -81,12 +120,15 @@ def exact_witness(graph, rank, rng):
         vectors[vertex] = primitive(vector)
 
     rows = [vectors[vertex] for vertex in sorted(graph)]
-    if sp.Matrix(rows).rank() != rank:
+    if not certified_rank(rows, rank, rank):
         return None
     constraints = [constraint_row(rows[left], rows[right])
                    for left, right in nx.non_edges(graph)]
     target = math.comb(rank + 1, 2) - 1
-    if sp.Matrix(constraints).rank() != target:
+    # Every constraint annihilates the identity because its endpoint vectors
+    # are orthogonal. Thus target is an a priori upper bound; a modular minor
+    # of that order proves equality over Q without costly rational elimination.
+    if not certified_rank(constraints, math.comb(rank + 1, 2), target):
         return None
     return rows
 
@@ -199,14 +241,15 @@ def verify(payload, expected):
             require(len(vectors) == len(graph) and
                     all(len(vector) == rank and any(vector) for vector in vectors),
                     "bad witness dimensions")
-            require(sp.Matrix(vectors).rank() == rank, "witness does not span")
+            require(certified_rank(vectors, rank, rank), "witness does not span")
             constraints = [constraint_row(vectors[left], vectors[right])
                            for left, right in nx.non_edges(graph)]
             require(all(sum(vectors[left][index] * vectors[right][index]
                             for index in range(rank)) == 0
                         for left, right in nx.non_edges(graph)),
                     "witness violates a nonedge equation")
-            require(sp.Matrix(constraints).rank() == math.comb(rank + 1, 2) - 1,
+            require(certified_rank(constraints, math.comb(rank + 1, 2),
+                                   math.comb(rank + 1, 2) - 1),
                     "nonedge tensors have wrong rank")
         else:
             require(record["status"] == "unresolved" and

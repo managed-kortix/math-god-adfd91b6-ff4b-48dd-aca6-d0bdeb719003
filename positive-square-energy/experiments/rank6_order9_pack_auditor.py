@@ -175,7 +175,8 @@ def manifest_sha256(manifest):
     return sha256(canonical_bytes(manifest))
 
 
-def read_chunks(manifest_path, manifest, pipeline, residuals, chunk_index=None):
+def read_chunks(manifest_path, manifest, pipeline, residuals, chunk_index=None,
+                consume=None):
     chunks = manifest["chunks"]
     require(type(chunks) is list and chunks, "manifest has no chunks")
     expected_start = 0
@@ -219,7 +220,10 @@ def read_chunks(manifest_path, manifest, pipeline, residuals, chunk_index=None):
         actual_start, attempts, records = pipeline.decode_search(raw, residuals)
         require(actual_start == start and attempts == stop - start and
                 len(records) == attempts, f"chunk {index} embedded range changed")
-        decoded.append((start, records))
+        if consume is None:
+            decoded.append((start, records))
+        else:
+            consume(start, records)
     return expected_start, decoded
 
 
@@ -280,8 +284,41 @@ def audit(manifest_path, exact=True, chunk_index=None):
     if chunk_index is not None:
         require(type(chunk_index) is int and 0 <= chunk_index < len(chunks),
                 "chunk index is out of range")
-    manifest_covered, decoded = read_chunks(
-        manifest_path, manifest, pipeline, residuals, chunk_index)
+    totals = None
+    if chunk_index is None:
+        totals = ({
+            "numerical": 0,
+            "unresolved": 0,
+            "symbolic_exact": set(),
+            "symbolic_certified": set(),
+            "modes": {"shared": 0, "template": 0, "individual": 0, "unresolved": 0},
+        } if exact else {})
+
+        def consume(start, records):
+            if not exact:
+                return
+            numerical, unresolved, symbolic_exact, modes = exact_certificates(
+                pipeline, residuals, [(start, records)], symbolic_keys)
+            stop = start + len(records)
+            expected = {key for key in symbolic_keys if start <= key[0] < stop}
+            symbolic_certified = unresolved & expected
+            require(len(numerical) + len(symbolic_certified) ==
+                    len(records) * FRONTIER_TOTAL,
+                    "chunk exact ownership is incomplete")
+            require(expected <= symbolic_exact | symbolic_certified,
+                    "symbolically owned target lacks an exact certificate")
+            totals["numerical"] += len(numerical)
+            totals["unresolved"] += len(unresolved)
+            totals["symbolic_exact"].update(symbolic_exact)
+            totals["symbolic_certified"].update(symbolic_certified)
+            for mode, count in modes.items():
+                totals["modes"][mode] += count
+
+        manifest_covered, decoded = read_chunks(
+            manifest_path, manifest, pipeline, residuals, consume=consume)
+    else:
+        manifest_covered, decoded = read_chunks(
+            manifest_path, manifest, pipeline, residuals, chunk_index)
     require(manifest["covered_residual_range"] == [0, manifest_covered] and
             manifest["covered_target_total"] == manifest_covered * FRONTIER_TOTAL,
             "manifest coverage totals changed")
@@ -299,17 +336,30 @@ def audit(manifest_path, exact=True, chunk_index=None):
     expected_symbolic = {
         key for key in symbolic_keys if covered_start <= key[0] < covered_stop
     }
-    if exact:
+    if exact and totals is not None:
+        numerical_count = totals["numerical"]
+        unresolved_count = totals["unresolved"]
+        symbolic_exact = totals["symbolic_exact"]
+        symbolic_certified = totals["symbolic_certified"]
+        certified_count = numerical_count + len(symbolic_certified)
+        modes = totals["modes"]
+        require(expected_symbolic <= symbolic_exact | symbolic_certified,
+                "symbolically owned target lacks an exact certificate")
+    elif exact:
         numerical, unresolved, symbolic_exact, modes = exact_certificates(
             pipeline, residuals, decoded, symbolic_keys)
         symbolic_certified = unresolved & expected_symbolic
         certified = numerical | symbolic_certified
         require(expected_symbolic <= symbolic_exact | symbolic_certified,
                 "symbolically owned target lacks an exact certificate")
+        numerical_count = len(numerical)
+        unresolved_count = len(unresolved)
+        certified_count = len(certified)
     else:
         numerical = unresolved = symbolic_exact = symbolic_certified = certified = set()
+        numerical_count = unresolved_count = certified_count = 0
         modes = {"shared": 0, "template": 0, "individual": 0, "unresolved": 0}
-    replay_complete = exact and len(certified) == covered * FRONTIER_TOTAL
+    replay_complete = exact and certified_count == covered * FRONTIER_TOTAL
     complete = replay_complete and (chunk_index is not None or manifest_covered == len(residuals))
     report = {
         "status": "complete" if complete else "incomplete",
@@ -331,13 +381,13 @@ def audit(manifest_path, exact=True, chunk_index=None):
         "missing_residual_total": len(residuals) - manifest_covered,
         "covered_target_total": covered * FRONTIER_TOTAL,
         "missing_target_total": (len(residuals) - manifest_covered) * FRONTIER_TOTAL,
-        "exact_certified_target_total": len(certified),
-        "uncertified_target_total": covered * FRONTIER_TOTAL - len(certified),
-        "unresolved_target_total": len(unresolved),
+        "exact_certified_target_total": certified_count,
+        "uncertified_target_total": covered * FRONTIER_TOTAL - certified_count,
+        "unresolved_target_total": unresolved_count,
         "symbolic_owned_target_total": len(expected_symbolic),
         "symbolic_numerically_certified_target_total": len(symbolic_exact),
         "symbolic_only_certified_target_total": len(symbolic_certified),
-        "disjoint_rational_owner_target_total": len(numerical),
+        "disjoint_rational_owner_target_total": numerical_count,
         "disjoint_symbolic_owner_target_total": len(symbolic_certified),
         "symbolic_decomposition_total": symbolic_report["decomposition_total"],
         "symbolic_geometry_row_counts": symbolic_report["geometry_row_counts"],
