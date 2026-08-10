@@ -1,0 +1,466 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{array,booktabs,longtable}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\spn}{s^+}
+\newcommand{\smn}{s^-}
+\newcommand{\betarank}{\beta}
+\newcommand{\one}{\mathbf 1}
+
+\title{Positive Square Energy of Hexacyclic Graphs\\
+\large Conditional manuscript skeleton---draft, not a theorem announcement}
+\author{AI-generated draft; no human authorship is claimed}
+\date{10 August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\fbox{\parbox{0.92\linewidth}{\textbf{Draft status.}
+The headline implication in Theorem~\ref{thm:conditional-main} is explicitly
+conditional.  This manuscript does not claim that every hexacyclic graph has
+the stated property.  Promotion is blocked until the order-nine and order-ten
+exact owners, the rank-six orders-$2$--$10$ master, and the all-connected
+synthesis master all pass their full normal and optimized replay gates.}}
+\end{center}
+
+\begin{abstract}
+Let $G$ be a finite simple connected graph with $n$ vertices and $n+5$ edges.
+This draft records the verified analytic reduction of the desired inequality
+$\spn(G)\ge n$ to two proof interfaces.  The multiblock interface is covered by
+an existing owner-exact ledger.  In the unique positive-rank cyclic-block
+case, suppression gives one of $1198$ rank-six multigraph kernels, with order
+distribution $1,4,26,84,216,314,325,162,66$ on two through ten branch
+vertices.  Exact path elimination reduces arbitrary subdivisions to physical
+parity orbits and canonical-plus-coordinate frontiers, and one-vertex
+additivity includes arbitrary rooted trees.  The final single-block premise is
+not yet available: in particular, incomplete order-nine or order-ten coverage
+is not a theorem owner, and the orders-$2$--$10$ and all-connected masters are
+not green.  Reproducibility appendices below therefore contain a mixture of
+verified commands and clearly marked promotion placeholders, not a publication
+record or theorem certificate.
+\end{abstract}
+
+\section{Scope and conditional statement}
+
+All graphs in the spectral statements are finite, simple, and undirected.  For
+the adjacency eigenvalues $\lambda_1,\ldots,\lambda_n$ of $G$, put
+\[
+ \spn(G)=\sum_{\lambda_i>0}\lambda_i^2,
+ \qquad
+ \smn(G)=\sum_{\lambda_i<0}\lambda_i^2,
+ \qquad
+ \betarank(G)=|E(G)|-|V(G)|+1.
+\]
+A connected graph with $|E(G)|=|V(G)|+5$ has cyclomatic rank six.
+
+\begin{theorem}[Conditional main implication---draft only]
+\label{thm:conditional-main}
+Assume both of the following premises.
+\begin{enumerate}
+\item The owner-exact multiblock theorem covers every finite simple connected
+rank-six graph having at least two positive-rank cyclic blocks.
+\item For every one of the $1198$ suppressed rank-six kernels, every physical
+parity orbit and every required canonical-plus-coordinate target has an exact,
+disjoint proof owner establishing the budget described in
+Proposition~\ref{prop:conditional-interface}; the order-nine and order-ten
+owners and the orders-$2$--$10$ implication master pass full exact replay in
+both normal and optimized Python modes; and an all-connected synthesis master
+checks the two scopes as disjoint and exhaustive.
+\end{enumerate}
+Then every finite simple connected graph $G$ with $|V(G)|=n$ and
+$|E(G)|=n+5$ satisfies
+\[
+ \spn(G)\ge n.
+\]
+\end{theorem}
+
+\begin{remark}[Current logical status]
+Theorem~\ref{thm:conditional-main} is an implication, not an unconditional
+theorem.  At the time of this draft the required order-nine/order-ten promotion
+owners and master acceptance records are not all present.  A coverage count,
+search-completion field, process exit status, or digest without exact replay
+and exact owner-set equality does not discharge the premise.
+\end{remark}
+
+No strict inequality, equality classification, edge-addition monotonicity,
+one-edge-subdivision monotonicity, result for nonsimple realizations, human
+review, independent verification, peer review, publication, or external
+dissemination is claimed.
+
+\section{Analytic foundations}
+
+For a finite graph $H=(V,E)$ define
+\begin{equation}\label{eq:kappa}
+ \kappa(H)=\min_{\substack{R\succeq0\\R_{vv}=1\ (v\in V)}}
+ \sum_{uv\in E}\frac{2}{1-R_{uv}},
+\end{equation}
+where a summand is $+\infty$ if $R_{uv}=1$.
+
+\begin{lemma}[DNN witness implication]\label{lem:dnn}
+For every finite simple graph $H$,
+\[
+ \smn(H)\le\kappa(H).
+\]
+Consequently, any feasible correlation matrix with objective at most $b$
+proves $\spn(H)\ge2|E(H)|-b$.
+\end{lemma}
+\begin{proof}
+Write the adjacency matrix as $A=P-N$, where $P,N\succeq0$ are its positive
+and negative spectral parts, and put $M=N\circ N$.  The Schur product theorem
+gives $M\succeq0$ and $M\ge0$ entrywise.  Moreover,
+\[
+ \langle J,M\rangle=\operatorname{tr}N^2=\smn(H),
+ \qquad
+ \frac{\smn(H)}2=-\sum_{uv\in E(H)}N_{uv}
+ \le\sum_{uv\in E(H)}\sqrt{M_{uv}}.
+\]
+For every feasible $R$,
+\[
+ \langle J,M\rangle-2\sum_{uv\in E(H)}(1-R_{uv})M_{uv}
+ =\langle R,M\rangle+
+ 2\sum_{\substack{u<v\\uv\notin E(H)}}(1-R_{uv})M_{uv}\ge0.
+\]
+Weighted Cauchy--Schwarz and cancellation when $\smn(H)>0$ give
+\[
+ \smn(H)\le\sum_{uv\in E(H)}\frac{2}{1-R_{uv}}.
+\]
+The zero and infinite-objective cases are immediate.  Minimize over $R$ and
+use $\spn(H)+\smn(H)=\operatorname{tr}A^2=2|E(H)|$.
+\end{proof}
+
+\begin{lemma}[Exact path cost]\label{lem:path}
+If a kernel edge with endpoint correlation $r$ is replaced by a path of length
+$q\ge1$, its least DNN contribution in excess of its $q$ edges is
+\[
+ f_q(r)=q\tan^2\!\left(
+ \frac{\arccos((-1)^q r)}{2q}\right).
+\]
+For fixed $r$ and parity, $f_{q+2}(r)\le f_q(r)$, with endpoint values
+understood in the extended sense.
+\end{lemma}
+\begin{proof}
+Represent the endpoints by unit vectors and alternately negate vectors along
+the path.  The transformed endpoint angle is
+$\gamma=\arccos((-1)^q r)$.  The spherical triangle inequality and convexity
+of $\sec^2(x/2)$ make $q$ equal angles optimal, giving
+$q\sec^2(\gamma/(2q))=q+f_q(r)$.  With $z=\gamma/(2q)$,
+\[
+ \frac{d}{dq}\left[q\tan^2\!\left(\frac\gamma{2q}\right)\right]
+ =\tan z\sec^2z\,(\sin z\cos z-2z)\le0.
+\]
+One-sided limits handle endpoint cases.
+\end{proof}
+
+\begin{lemma}[One-vertex additivity]\label{lem:additivity}
+If $H=H_1\vee H_2$ is a one-vertex sum, then
+$\kappa(H)=\kappa(H_1)+\kappa(H_2)$.  In particular,
+$\kappa(T)=|E(T)|$ for every finite tree $T$.
+\end{lemma}
+\begin{proof}
+Restriction gives one inequality.  For the other, identify the common unit
+vector in minimizing Gram representations and place the two perpendicular
+components in mutually orthogonal subspaces.  The objectives add.  Every tree
+edge costs at least one, and opposite unit vectors on the two bipartition
+classes attain one on each edge.
+\end{proof}
+
+\section{Block decomposition}
+
+\begin{lemma}[Cyclic-block rank additivity]\label{lem:block-rank}
+The cyclomatic rank of a connected graph is the sum of the cyclomatic ranks of
+its positive-rank cyclic blocks.
+\end{lemma}
+\begin{proof}
+Following the block--cut tree, adjoining a block $B$ at one cut vertex adds
+$|V(B)|-1$ vertices and $|E(B)|$ edges, and hence adds
+$|E(B)|-|V(B)|+1=\betarank(B)$ to the rank.  Bridge blocks contribute zero.
+\end{proof}
+
+Thus the positive cyclic-block ranks of a rank-six graph form exactly one of
+\begin{gather}\label{eq:partitions}
+ 1^6,\quad2+1^4,\quad2+2+1+1,\quad2+2+2,\quad3+1+1+1,\quad
+ 3+2+1,\quad3+3,\nonumber\\
+ 4+1+1,\quad4+2,\quad5+1,\quad6.
+\end{gather}
+The first ten rows are the multiblock branch; the final row has one
+positive-rank cyclic block.  This is a structural dichotomy only and does not
+by itself prove either branch.
+
+\section{Verified multiblock interface}
+
+\begin{proposition}[Multiblock branch]\label{prop:multiblock}
+Every finite simple connected rank-six graph with at least two positive-rank
+cyclic blocks satisfies $\spn(G)\ge|V(G)|$.
+\end{proposition}
+
+The proof is the owner-exact ledger in the multiblock audit
+\cite{MultiblockAudit}.  Its scope consists of
+the first ten rows of \eqref{eq:partitions}.  It separates direct DNN rows,
+structural pre-sieve rows, and the packet residuals A--I.  Shared cuts,
+repeated and nested owners, positive bridge connectors, and arbitrary rooted
+branches are assigned before credit is charged.  The direct
+rank-five-equality-plus-triangle boundary is nonstrict and is not promoted to a
+strict claim.  This skeleton cites that verified exposition rather than
+duplicating its long owner-by-owner proof.
+
+\section{Unique positive-rank block}
+
+\begin{lemma}[Rank-six suppression]\label{lem:suppression}
+Let $B$ be a finite simple $2$-connected graph with $\betarank(B)=6$.
+Suppressing every degree-two vertex produces a loopless $2$-connected
+multigraph $K$ of minimum degree at least three such that
+\[
+ |E(K)|=|V(K)|+5,
+ \qquad 2\le|V(K)|\le10.
+\]
+Conversely, $B$ is a simple realization obtained by replacing kernel edges by
+positive-length, internally disjoint paths meeting only at prescribed branch
+endpoints.
+\end{lemma}
+\begin{proof}
+Suppression preserves $|E|-|V|$, connectedness, and rank.  A loop would come
+from a cycle meeting the remainder only at one branch vertex, contradicting
+$2$-connectivity.  If $k=|V(K)|$, minimum degree three and
+$|E(K)|=k+5$ give $3k\le2k+10$, so $k\le10$; loopless $2$-connectivity gives
+$k\ge2$.  Reversing suppression gives the stated path model.  Simplicity is a
+separate required condition, especially in parallel classes.
+\end{proof}
+
+\begin{proposition}[Exact kernel census]\label{prop:census}
+The rank-six suppressed kernels have the following verified distribution.
+\[
+\begin{array}{c|rrrrrrrrr}
+ |V(K)|&2&3&4&5&6&7&8&9&10\\ \hline
+ \#K&1&4&26&84&216&314&325&162&66
+\end{array}
+\]
+There are $1198$ isomorphism classes in total.
+\end{proposition}
+
+The exact integer census regenerates multiplicity vectors, rejects supports
+with a cut vertex, canonicalizes under isomorphism, and compares the complete
+sorted output with \path{research/fixtures/rank-six-kernels.json}.  No
+floating-point or spectral calculation enters this census.  Its reproducible
+command is listed in Appendix~\ref{app:repro}.
+
+\section{Conditional finite interface}
+
+For each parallel class of multiplicity $m$ with $o$ odd replacement paths,
+the canonical simple lengths are
+\[
+ c(m,o)=
+ \begin{cases}
+ (2,\ldots,2),&o=0,\\
+ (1,\underbrace{3,\ldots,3}_{o-1},
+       \underbrace{2,\ldots,2}_{m-o}),&o>0.
+ \end{cases}
+\]
+Simplicity permits at most one unit path in a parallel class.  After permuting
+parallel physical edges, every realization vector $\ell$ in the parity row
+satisfies $c_i\le\ell_i$ and $\ell_i-c_i\in2\mathbb Z_{\ge0}$.
+
+\begin{proposition}[Conditional exact-owner interface]
+\label{prop:conditional-interface}
+Assume every physical parity orbit of every kernel in
+Proposition~\ref{prop:census} is owned either by an exact coarse certificate
+that remains within excess five under every same-parity lengthening, or by
+exact certificates for every target
+\[
+ \mathcal F(c)=\{c\}\cup\{c+2\mathbf e_i:1\le i\le|E(K)|\}.
+\]
+Assume that regenerated target keys equal the disjoint union of checked owner
+keys.  Then every simple subdivision of every rank-six kernel, with arbitrary
+finite rooted trees attached at branch or internal subdivision vertices,
+satisfies $\spn(G)\ge|V(G)|$.
+\end{proposition}
+\begin{proof}
+If $\ell=c$, use the canonical target.  Otherwise choose $i$ with
+$\ell_i\ge c_i+2$ and start from the owner of $c+2\mathbf e_i$.
+Lemma~\ref{lem:path} permits every remaining same-parity coordinate increase
+without increasing excess.  Hence the subdivided core $B$, with $L$ edges,
+has $\kappa(B)\le L+5$.
+
+If attached rooted trees contain $t$ edges, Lemma~\ref{lem:additivity} gives
+$\kappa(G)\le L+5+t$.  Rank six gives $|V(G)|=L-5+t$, and
+Lemma~\ref{lem:dnn} yields
+\[
+ \spn(G)\ge2(L+t)-(L+5+t)=L-5+t=|V(G)|.
+\]
+Different frontier targets may use different Gram matrices.  No parity-changing
+subdivision or spectral monotonicity is used.
+\end{proof}
+
+The premise of Proposition~\ref{prop:conditional-interface} is the open
+promotion gate in this draft.  Orders two through eight having theorem material
+does not authorize silently extending the statement through orders nine and
+ten.  In particular, current coverage verifiers are not substitutes for the
+missing promotion owners or the fail-closed orders-$2$--$10$ master.
+
+\section{Conditional assembly}
+
+\begin{proof}[Proof of Theorem~\ref{thm:conditional-main}]
+By Lemma~\ref{lem:block-rank}, the positive block ranks have exactly the eleven
+forms in \eqref{eq:partitions}.  If there are at least two positive-rank cyclic
+blocks, apply Proposition~\ref{prop:multiblock}.  Otherwise there is one
+rank-six cyclic block.  Lemma~\ref{lem:suppression},
+Proposition~\ref{prop:census}, and the assumed exact-owner premise allow
+Proposition~\ref{prop:conditional-interface}.  The two cases are disjoint and
+exhaustive.  This proves the implication, while making no assertion that its
+currently blocked finite premise has been discharged.
+\end{proof}
+
+\appendix
+\section{Reproducibility ledger and placeholders}\label{app:repro}
+
+\subsection{Commands backed by present verified exposition}
+
+From the repository root, the exact kernel census and multiblock ledger are
+intended to be checked in normal and optimized modes:
+\begin{verbatim}
+python3 research/rank-six-kernel-census-verifier.py
+python3 -O research/rank-six-kernel-census-verifier.py
+python3 research/hexacyclic-multiblock-ledger-verifier.py
+python3 -O research/hexacyclic-multiblock-ledger-verifier.py
+\end{verbatim}
+The lower single-block owner currently exposed by the repository may likewise
+be audited with
+\begin{verbatim}
+python3 research/rank-six-order2-7-master-verifier.py
+python3 -O research/rank-six-order2-7-master-verifier.py
+python3 research/rank-six-order-eight-kernel-theorem-verifier.py --full
+python3 -O research/rank-six-order-eight-kernel-theorem-verifier.py --full
+\end{verbatim}
+
+\subsection{Blocked promotion checks}
+
+The following command is deliberately fail-closed until all required promotion
+owners and frozen outputs exist:
+\begin{verbatim}
+python3 research/rank-six-order2-10-master-verifier.py
+python3 -O research/rank-six-order2-10-master-verifier.py
+\end{verbatim}
+Current nonzero exit is a blocker, not a successful theorem test.  The
+order-nine and order-ten coverage commands may report partial exact progress,
+but their output must not be cited as a theorem owner:
+\begin{verbatim}
+python3 research/rank-six-order-nine-coverage-verifier.py
+python3 -O research/rank-six-order-nine-coverage-verifier.py
+python3 research/rank-six-order-ten-coverage-verifier.py
+python3 -O research/rank-six-order-ten-coverage-verifier.py
+\end{verbatim}
+
+\paragraph{Promotion placeholders (intentionally unresolved).}
+Before the conditional label can be removed, replace each item below with a
+committed, independently regenerated record checked against the manuscript.
+\begin{enumerate}
+\item \texttt{TODO-ORDER9-OWNER}: theorem-owner path, schema, source SHA-256,
+canonical full-replay output SHA-256, exact owner counts, and normal/optimized
+byte-identity record.
+\item \texttt{TODO-ORDER10-OWNER}: theorem-owner path, schema, source SHA-256,
+canonical full-replay output SHA-256, exact owner counts, and normal/optimized
+byte-identity record.
+\item \texttt{TODO-RANK6-MASTER}: green orders-$2$--$10$ implication manifest,
+all four child-owner identities, census identity, transitive root, and hostile
+mutation report.
+\item \texttt{TODO-ALL-CONNECTED-MASTER}: green two-branch synthesis manifest,
+scope-disjointness audit, exact conclusion, transitive root, and hostile
+mutation report.
+\item \texttt{TODO-CLEAN-REPLAY}: interpreter version, platform, commands,
+wall-clock/storage notes, complete logs, and normal versus optimized output
+digests from a clean artifact directory.
+\end{enumerate}
+No placeholder is evidence, and no digest by itself proves a mathematical
+predicate.
+
+\subsection{Build}
+
+This draft is compiled from the repository root with
+\begin{verbatim}
+bash scripts/build-paper.sh all-hexacyclic-graphs
+\end{verbatim}
+Build success checks only the LaTeX artifact.  It does not turn a red finite
+gate green and does not promote Theorem~\ref{thm:conditional-main}.
+
+\section{Certificate schemas to freeze at promotion}
+
+The eventual machine-readable appendix must specify, without relying on prose
+status fields:
+\begin{enumerate}
+\item canonical ASCII encodings and exact kernel/parity/frontier key schemas;
+\item rational Gram-chain records, positive denominator checks, exact unit and
+shared-endpoint identities, and the integer predicate ``excess at most five'';
+\item symbolic records with exact positive-semidefinite and path-cost checks;
+\item structural records with typed induced territories, unique ownership, and
+no relabelling as DNN witnesses;
+\item complete regenerated-key equality, duplicate/extra/missing-key rejection,
+and disjoint final ownership;
+\item source, fixture, chunk, canonical-output, and transitive manifest hashes,
+with a statement that hashes identify bytes rather than prove predicates.
+\end{enumerate}
+This section is a schema checklist only.  It asserts no present order-nine or
+order-ten certificate completion.
+
+\section{Trusted base and limitations}
+
+The analytic trust base consists of the displayed matrix arguments, exact path
+elimination, block decomposition, and finite-kernel reduction.  The
+computer-assisted trust base additionally includes the committed verifier
+sources, exact integer and rational semantics, canonical parsing and labelling,
+the Python runtime, and executing hardware.  Numerical optimization may be used
+to discover witnesses but is not a proof object.  Rooted-tree attachment means
+a genuine one-vertex sum; a connector meeting a core twice is outside that
+lemma.  Kernel parallel edges are permitted only before realization; the graph
+to which the trace identity is applied remains simple.
+
+\section*{AI disclosure and nonpublication notice}
+
+This draft was generated by an AI coding and mathematical reasoning system from
+the repository materials cited below.  No human authorship, human review,
+independent verification, peer review, acceptance, publication, or theorem
+announcement is claimed.  The manuscript is a conditional internal skeleton
+pending the explicit promotion gates in Appendix~\ref{app:repro}.
+
+\begin{thebibliography}{9}
+\bibitem{ExpositionModules}
+\emph{LaTeX exposition modules for the rank-six synthesis}, repository proof
+note, 2026;
+\path{positive-square-energy/hexacyclic-general/latex-exposition-modules.md}.
+
+\bibitem{MultiblockAudit}
+\emph{Hexacyclic multiblock theorem: exhaustive ledger and hostile audit},
+repository proof note, 2026;
+\path{positive-square-energy/hexacyclic-general/}
+\path{multiblock-items1-7-combined-theorem-audit.md}.
+
+\bibitem{SingleBlockAudit}
+\emph{Audit of the rank-six single-block implication}, repository proof note,
+2026;
+\path{positive-square-energy/hexacyclic-general/}
+\path{rank-six-single-block-implication-audit.md}.
+
+\bibitem{MasterArchitecture}
+\emph{Rank-six orders 2--10 master architecture}, promotion-gated repository
+note, 2026;
+\path{positive-square-energy/hexacyclic-general/}
+\path{rank-six-order2-10-master-architecture.md}.
+
+\bibitem{OrderTenArchitecture}
+\emph{Order-ten rank-six master architecture}, completion-gated repository
+note, 2026;
+\path{positive-square-energy/hexacyclic-general/}
+\path{order-ten-rank-six-master-architecture.md}.
+\end{thebibliography}
+
+\end{document}

@@ -291,7 +291,8 @@ def resolve_chunk_path(manifest_path, chunk, index):
     return path
 
 
-def read_chunks(manifest_path, manifest, stream, census, residuals, chunk_index=None):
+def read_chunks(manifest_path, manifest, stream, census, residuals, chunk_index=None,
+                consume=None):
     chunks = manifest["chunks"]
     require(type(chunks) is list and chunks, "manifest has no chunks")
     expected_start = 0
@@ -338,7 +339,11 @@ def read_chunks(manifest_path, manifest, stream, census, residuals, chunk_index=
         actual_start, records = stream.decode_pack(census, raw, residuals)
         require(actual_start == start and len(records) == stop - start,
                 f"chunk {index} embedded range changed")
-        decoded.append((start, records))
+        if consume is None:
+            decoded.append((start, records))
+        else:
+            consume(start, records)
+            del records, raw, stored
     return expected_start, decoded
 
 
@@ -379,6 +384,67 @@ def ownership_digest(start, stop, numerical, symbolic):
     return digest.hexdigest()
 
 
+def accumulate_chunk(stream, census, residuals, start, records, owners, exact,
+                     ownership_stream):
+    counts = {
+        "numerical": 0,
+        "unresolved": 0,
+        "symbolic_exact": 0,
+        "symbolic_certified": 0,
+    }
+    modes = {"shared": 0, "template": 0, "fallback": 0, "unresolved": 0}
+    symbolic_seen = set()
+    for local, record in enumerate(records):
+        source_index = start + local
+        mode, payload = record
+        if exact:
+            stream.verify_record(census, residuals[source_index], record)
+        if mode == stream.MODE_SHARED:
+            modes["shared"] += 1
+            numerical_targets = None
+        elif mode == stream.MODE_TEMPLATE:
+            modes["template"] += 1
+            numerical_targets = None
+        elif mode == stream.MODE_FALLBACK:
+            modes["fallback"] += 1
+            numerical_targets = {target for target, witness in enumerate(payload)
+                                 if witness is not None}
+        else:
+            require(mode == stream.MODE_UNRESOLVED, "unknown decoded mode")
+            modes["unresolved"] += 1
+            numerical_targets = set()
+        if not exact:
+            continue
+        for target in range(FRONTIER_TOTAL):
+            key = (source_index, target_frontier(target))
+            numerical = numerical_targets is None or target in numerical_targets
+            symbolic = key in owners
+            if symbolic:
+                symbolic_seen.add(key)
+            if numerical:
+                counts["numerical"] += 1
+                if symbolic:
+                    counts["symbolic_exact"] += 1
+                owner = "rational"
+            else:
+                counts["unresolved"] += 1
+                require(symbolic, "unrecognized unresolved target")
+                counts["symbolic_certified"] += 1
+                owner = "symbolic"
+            ownership_stream.update(stream_line([source_index, key[1], owner]))
+    if exact:
+        stop = start + len(records)
+        expected_symbolic = {
+            key for key in owners if start <= key[0] < stop
+        }
+        require(symbolic_seen == expected_symbolic,
+                "symbolically owned target lacks an exact certificate")
+        require(counts["numerical"] + counts["symbolic_certified"] ==
+                len(records) * FRONTIER_TOTAL,
+                "chunk exact ownership is incomplete")
+    return counts, modes
+
+
 def audit(manifest_path, exact=True, chunk_index=None):
     manifest = load_manifest(manifest_path)
     dependencies = dependency_digests()
@@ -403,8 +469,26 @@ def audit(manifest_path, exact=True, chunk_index=None):
         stream, census, residuals)
     require(manifest["symbolic_sha256"] == symbolic_sha256,
             "manifest points to another symbolic ownership fixture")
+    totals = {
+        "numerical": 0,
+        "unresolved": 0,
+        "symbolic_exact": 0,
+        "symbolic_certified": 0,
+    }
+    modes = {"shared": 0, "template": 0, "fallback": 0, "unresolved": 0}
+    ownership_stream = hashlib.sha256()
+
+    def consume(start, records):
+        counts, chunk_modes = accumulate_chunk(
+            stream, census, residuals, start, records, owners, exact, ownership_stream)
+        for field, count in counts.items():
+            totals[field] += count
+        for mode, count in chunk_modes.items():
+            modes[mode] += count
+
     manifest_covered, decoded = read_chunks(
-        manifest_path, manifest, stream, census, residuals, chunk_index)
+        manifest_path, manifest, stream, census, residuals, chunk_index, consume)
+    require(not decoded, "streaming chunk audit retained decoded records")
     require(manifest["covered_residual_range"] == [0, manifest_covered] and
             manifest["covered_target_total"] == manifest_covered * FRONTIER_TOTAL,
             "manifest coverage totals changed")
@@ -414,25 +498,18 @@ def audit(manifest_path, exact=True, chunk_index=None):
         covered_start, covered_stop = 0, manifest_covered
     else:
         covered_start, covered_stop = manifest["chunks"][chunk_index]["residual_range"]
-    decoded_certificates, modes = certified_targets(stream, census, residuals, decoded, exact)
-    numerical = decoded_certificates if exact else set()
     expected_owned = {key for key in owners if covered_start <= key[0] < covered_stop}
-    covered_keys = {
-        (source_index, target_frontier(target))
-        for source_index in range(covered_start, covered_stop)
-        for target in range(FRONTIER_TOTAL)
-    }
     if exact:
-        unresolved = covered_keys - numerical
-        unexpected = unresolved - expected_owned
-        require(not unexpected, f"unrecognized unresolved targets: {len(unexpected)}")
-        symbolic_exact = numerical & expected_owned
-        symbolic_certified = unresolved & expected_owned
-        certified = numerical | symbolic_certified
-        require(expected_owned <= symbolic_exact | symbolic_certified,
-                "symbolically owned target lacks an exact certificate")
+        numerical_count = totals["numerical"]
+        unresolved_count = totals["unresolved"]
+        symbolic_exact_count = totals["symbolic_exact"]
+        symbolic_certified_count = totals["symbolic_certified"]
+        certified_count = numerical_count + symbolic_certified_count
+        require(symbolic_exact_count + symbolic_certified_count == len(expected_owned),
+                "symbolic ownership total changed")
     else:
-        unresolved = symbolic_exact = symbolic_certified = certified = set()
+        numerical_count = unresolved_count = symbolic_exact_count = 0
+        symbolic_certified_count = certified_count = 0
     profile_report = {}
     for profile in PROFILES:
         label = f"mixed-{profile[0]}_simplex-{'-'.join(map(str, profile[1])) or 'none'}"
@@ -440,15 +517,15 @@ def audit(manifest_path, exact=True, chunk_index=None):
                 covered_start <= key[0] < covered_stop}
         profile_report[label] = {
             "decompositions": decomposition_counts[profile],
-            "rows_in_coverage": len(owner_rows[profile] &
-                                    set(range(covered_start, covered_stop))),
+            "rows_in_coverage": sum(covered_start <= row < covered_stop
+                                    for row in owner_rows[profile]),
             "owned_targets_in_coverage": len(keys),
         }
-    scope_complete = certified == covered_keys
+    covered_target_total = (covered_stop - covered_start) * FRONTIER_TOTAL
+    scope_complete = exact and certified_count == covered_target_total
     complete = exact and scope_complete and (chunk_index is not None or
                                                covered_stop == len(residuals))
-    ownership_sha256 = ownership_digest(
-        covered_start, covered_stop, numerical, symbolic_certified) if exact else None
+    ownership_sha256 = ownership_stream.hexdigest() if exact else None
     return {
         "status": "complete" if complete else "incomplete",
         "census": {
@@ -464,19 +541,17 @@ def audit(manifest_path, exact=True, chunk_index=None):
         "manifest_covered_residual_range": [0, manifest_covered],
         "residual_total": len(residuals),
         "missing_residual_total": len(residuals) - manifest_covered,
-        "covered_target_total": (covered_stop - covered_start) * FRONTIER_TOTAL,
+        "covered_target_total": covered_target_total,
         "manifest_covered_target_total": manifest_covered * FRONTIER_TOTAL,
         "missing_target_total": (len(residuals) - manifest_covered) * FRONTIER_TOTAL,
-        "exact_certified_target_total": len(certified),
-        "uncertified_target_total": ((covered_stop - covered_start) * FRONTIER_TOTAL -
-                                      len(certified) if exact else
-                                      (covered_stop - covered_start) * FRONTIER_TOTAL),
-        "unresolved_target_total": len(unresolved),
+        "exact_certified_target_total": certified_count,
+        "uncertified_target_total": covered_target_total - certified_count,
+        "unresolved_target_total": unresolved_count,
         "symbolic_owned_target_total": len(expected_owned),
-        "symbolic_numerically_certified_target_total": len(symbolic_exact),
-        "symbolic_only_certified_target_total": len(symbolic_certified),
-        "disjoint_rational_owner_target_total": len(numerical),
-        "disjoint_symbolic_owner_target_total": len(symbolic_certified),
+        "symbolic_numerically_certified_target_total": symbolic_exact_count,
+        "symbolic_only_certified_target_total": symbolic_certified_count,
+        "disjoint_rational_owner_target_total": numerical_count,
+        "disjoint_symbolic_owner_target_total": symbolic_certified_count,
         "symbolic_decomposition_total": sum(decomposition_counts.values()),
         "symbolic_profiles": profile_report,
         "record_modes": modes,
