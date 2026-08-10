@@ -49,6 +49,15 @@ independently requires all 125,457 residual rows and 2,007,312 target keys.
 Replacing today's partial manifest with a correctly built complete manifest is
 the only data-plane action needed to turn the gate green.
 
+The promotion owner at
+`research/rank-six-order-ten-kernel-theorem-verifier.py` adds a second,
+theorem-facing gate. Full mode accepts no receipt or aggregate: it requires the
+selected manifest itself to cover `[0,125457)` and then causes a fresh exact
+streaming replay. Practical mode replays one selected manifest segment exactly,
+but marks that execution as non-theorem evidence and cannot emit a child
+manifest. The owner also pins and invokes the separate conditional analytic
+lift owner, its manifest, and its canonical output.
+
 ## Exact final ownership
 
 The symbolic ledger independently regenerates 178 exact decompositions in the
@@ -104,3 +113,19 @@ exact missing residual and target counts. The unchanged gate exits zero for a
 final manifest only after exact arithmetic establishes complete disjoint
 ownership. Green output still records `theorem_claimed=false`; theorem wording,
 project-state changes, and broader claims are separate future promotion steps.
+
+The promotion owner has the same present fail-closed boundary:
+
+```sh
+python3 research/rank-six-order-ten-kernel-theorem-verifier.py --full
+python3 -O research/rank-six-order-ten-kernel-theorem-verifier.py --full
+```
+
+For a bounded exact replay of an available segment, use:
+
+```sh
+python3 research/rank-six-order-ten-kernel-theorem-verifier.py --practical --chunk-index 0
+```
+
+Practical output is explicitly a nonclaim. No theorem or `STATE.md` promotion
+is made by this architecture.

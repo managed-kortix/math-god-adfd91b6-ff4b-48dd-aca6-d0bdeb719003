@@ -69,6 +69,27 @@ uniform.  The final 18 are valid one-sum spectral embeddings, so allowing the
 standard cut-vertex product completion repairs the apparent overlap between
 the triangle and tetrahedron blocks; it does not broaden the census.
 
+For the remaining search lane `[70000,125457)`, the exact fast-lane coverage is
+65 rows, hence 1040 targets:
+
+- `[70000,100000)`: 47 structural rows and no atom rows;
+- `[100000,125457)`: 4 structural rows and 14 atom rows;
+- structural indices in the second interval: `118149`, `118756`, `118758`,
+  and `124259`;
+- atom indices in the second interval: `105465`, `105470`, `105483`, `105492`,
+  `105515`, `105521`, `124181`, `124188`, `124191`, `124200`, `124203`,
+  `124209`, `124212`, and `124218`.
+
+The 47 structural indices in `[70000,100000)` are `70002`, `70004`, `70045`,
+`70049`, `70056`, `70058`, `70060`, `70104`, `70114`, `70119`, `70123`,
+`70223`, `70228`, `70232`, `70255`, `70259`, `70266`, `70268`, `70270`,
+`71042`, `71094`, `71141`, `71323`, `71545`, `71594`, `71663`, `71700`,
+`71712`, `71714`, `71717`, `71742`, `71771`, `71830`, `71842`, `71844`,
+`71847`, `71872`, `71985`, `72198`, `72257`, `72269`, `72271`, `72274`,
+`72299`, `73947`, `74151`, and `74840`. Thus exact pre-ownership reduces the
+55,457-row tail to 55,392 expensive searches. The atom and structural sets are
+disjoint, so no tie-breaking is required.
+
 The tested structural families therefore do not replace the current general
 search.  The durable gain is an exact, linear-time first lane: apply the
 diagonally dominant Gram test, then the finite simplex ledger, and reserve

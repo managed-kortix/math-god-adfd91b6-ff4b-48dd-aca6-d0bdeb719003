@@ -216,7 +216,20 @@ def symbolic_owners(stream, census, residuals):
                         "recognizer equality profile ownership changed")
     require(set().union(*owner_profiles.values()) == set(PROFILES),
             "not all three symbolic equality profiles are represented")
-    return owner_profiles, owner_rows, decomposition_counts, sha256(raw)
+    atom_rows = set().union(*owner_rows.values())
+    atom_owners = {(source_index, target_frontier(target))
+                   for source_index in atom_rows for target in range(FRONTIER_TOTAL)}
+    structural_rows = {source_index for source_index, source in enumerate(residuals)
+                       if stream.structural_certified(census, source)}
+    structural_owners = {(source_index, target_frontier(target))
+                         for source_index in structural_rows for target in range(FRONTIER_TOTAL)}
+    require(len(atom_rows) == 108 and len(structural_rows) == 824 and
+            atom_owners.isdisjoint(structural_owners),
+            "full-row symbolic fast-lane ownership changed")
+    owners = {key: "atom" for key in atom_owners}
+    owners.update((key, "structural") for key in structural_owners)
+    return (owners, owner_profiles, owner_rows, decomposition_counts, sha256(raw),
+            structural_rows, atom_rows)
 
 
 def target_frontier(target):
@@ -349,7 +362,8 @@ def read_chunks(manifest_path, manifest, stream, census, residuals, chunk_index=
 
 def certified_targets(stream, census, residuals, decoded, exact):
     certified = set()
-    modes = {"shared": 0, "template": 0, "fallback": 0, "unresolved": 0}
+    modes = {"shared": 0, "template": 0, "fallback": 0, "unresolved": 0,
+             "structural": 0, "atom": 0}
     for start, records in decoded:
         for local, record in enumerate(records):
             source_index = start + local
@@ -365,6 +379,12 @@ def certified_targets(stream, census, residuals, decoded, exact):
             elif mode == stream.MODE_FALLBACK:
                 modes["fallback"] += 1
                 targets = (target for target, witness in enumerate(payload) if witness is not None)
+            elif mode == stream.MODE_STRUCTURAL:
+                modes["structural"] += 1
+                targets = range(FRONTIER_TOTAL)
+            elif mode == stream.MODE_ATOM:
+                modes["atom"] += 1
+                targets = range(FRONTIER_TOTAL)
             else:
                 require(mode == stream.MODE_UNRESOLVED, "unknown decoded mode")
                 modes["unresolved"] += 1
@@ -392,7 +412,8 @@ def accumulate_chunk(stream, census, residuals, start, records, owners, exact,
         "symbolic_exact": 0,
         "symbolic_certified": 0,
     }
-    modes = {"shared": 0, "template": 0, "fallback": 0, "unresolved": 0}
+    modes = {"shared": 0, "template": 0, "fallback": 0, "unresolved": 0,
+             "structural": 0, "atom": 0}
     symbolic_seen = set()
     for local, record in enumerate(records):
         source_index = start + local
@@ -409,6 +430,18 @@ def accumulate_chunk(stream, census, residuals, start, records, owners, exact,
             modes["fallback"] += 1
             numerical_targets = {target for target, witness in enumerate(payload)
                                  if witness is not None}
+        elif mode == stream.MODE_STRUCTURAL:
+            modes["structural"] += 1
+            numerical_targets = set()
+            require(all(owners.get((source_index, target_frontier(target))) == "structural"
+                        for target in range(FRONTIER_TOTAL)),
+                    "structural record lacks structural ownership")
+        elif mode == stream.MODE_ATOM:
+            modes["atom"] += 1
+            numerical_targets = set()
+            require(all(owners.get((source_index, target_frontier(target))) == "atom"
+                        for target in range(FRONTIER_TOTAL)),
+                    "atom record lacks atom ownership")
         else:
             require(mode == stream.MODE_UNRESOLVED, "unknown decoded mode")
             modes["unresolved"] += 1
@@ -465,8 +498,8 @@ def audit(manifest_path, exact=True, chunk_index=None):
     require(manifest["residual_total"] == len(residuals), "residual total changed")
     require(manifest["frontiers_per_residual"] == FRONTIER_TOTAL,
             "manifest frontier width changed")
-    owners, owner_rows, decomposition_counts, symbolic_sha256 = symbolic_owners(
-        stream, census, residuals)
+    (owners, owner_profiles, owner_rows, decomposition_counts, symbolic_sha256,
+     structural_rows, atom_rows) = symbolic_owners(stream, census, residuals)
     require(manifest["symbolic_sha256"] == symbolic_sha256,
             "manifest points to another symbolic ownership fixture")
     totals = {
@@ -475,7 +508,8 @@ def audit(manifest_path, exact=True, chunk_index=None):
         "symbolic_exact": 0,
         "symbolic_certified": 0,
     }
-    modes = {"shared": 0, "template": 0, "fallback": 0, "unresolved": 0}
+    modes = {"shared": 0, "template": 0, "fallback": 0, "unresolved": 0,
+             "structural": 0, "atom": 0}
     ownership_stream = hashlib.sha256()
 
     def consume(start, records):
@@ -513,7 +547,7 @@ def audit(manifest_path, exact=True, chunk_index=None):
     profile_report = {}
     for profile in PROFILES:
         label = f"mixed-{profile[0]}_simplex-{'-'.join(map(str, profile[1])) or 'none'}"
-        keys = {key for key, profiles in owners.items() if profile in profiles and
+        keys = {key for key, profiles in owner_profiles.items() if profile in profiles and
                 covered_start <= key[0] < covered_stop}
         profile_report[label] = {
             "decompositions": decomposition_counts[profile],
@@ -553,6 +587,10 @@ def audit(manifest_path, exact=True, chunk_index=None):
         "disjoint_rational_owner_target_total": numerical_count,
         "disjoint_symbolic_owner_target_total": symbolic_certified_count,
         "symbolic_decomposition_total": sum(decomposition_counts.values()),
+        "structural_symbolic_rows_in_coverage": sum(
+            covered_start <= row < covered_stop for row in structural_rows),
+        "atom_symbolic_rows_in_coverage": sum(
+            covered_start <= row < covered_stop for row in atom_rows),
         "symbolic_profiles": profile_report,
         "record_modes": modes,
         "covered_key_stream_sha256": key_range_digest(
@@ -733,7 +771,7 @@ def build_manifest(output, paths):
     census = load_module("rank6_order10_census_for_manifest", CENSUS_PATH)
     stream = load_module("rank6_order10_stream_for_manifest", STREAM_PATH)
     residuals = stream.residual_rows(census)
-    _, _, _, symbolic_sha256 = symbolic_owners(stream, census, residuals)
+    _, _, _, _, symbolic_sha256, _, _ = symbolic_owners(stream, census, residuals)
     chunks = []
     for path in paths:
         stored = path.read_bytes()

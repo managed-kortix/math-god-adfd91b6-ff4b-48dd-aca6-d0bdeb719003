@@ -73,6 +73,12 @@ class FragmentTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "noncanonical"):
             self.stream.exact_decode_pack(self.census, noncanonical, self.residuals)
 
+    def test_symbolic_modes_round_trip_without_payloads(self):
+        records = ((self.stream.MODE_STRUCTURAL, None), (self.stream.MODE_ATOM, None))
+        raw = self.stream.encode_pack(self.census, 1, records)
+        self.assertEqual(self.stream.decode_pack(self.census, raw, self.residuals),
+                         (1, records))
+
 
 if __name__ == "__main__":
     unittest.main()

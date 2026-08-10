@@ -30,16 +30,18 @@
 \fbox{\parbox{0.92\linewidth}{\textbf{Draft status.}
 The headline implication in Theorem~\ref{thm:conditional-main} is explicitly
 conditional.  This manuscript does not claim that every hexacyclic graph has
-the stated property.  Promotion is blocked until the order-nine and order-ten
-exact owners, the rank-six orders-$2$--$10$ master, and the all-connected
-synthesis master all pass their full normal and optimized replay gates.}}
+the stated property.  Its finite premise is not discharged here.  In
+particular, promotion is blocked until the order-nine and order-ten exact
+owners, the rank-six orders-$2$--$10$ master, and the all-connected synthesis
+master all pass their specified full normal and optimized replay gates.}}
 \end{center}
 
 \begin{abstract}
 Let $G$ be a finite simple connected graph with $n$ vertices and $n+5$ edges.
-This draft records the verified analytic reduction of the desired inequality
-$\spn(G)\ge n$ to two proof interfaces.  The multiblock interface is covered by
-an existing owner-exact ledger.  In the unique positive-rank cyclic-block
+This draft records an analytic reduction of the desired inequality
+$\spn(G)\ge n$ to two explicitly stated proof premises.  A repository ledger
+is cited for the multiblock premise, but this manuscript does not reproduce or
+independently validate that ledger.  In the unique positive-rank cyclic-block
 case, suppression gives one of $1198$ rank-six multigraph kernels, with order
 distribution $1,4,26,84,216,314,325,162,66$ on two through ten branch
 vertices.  Exact path elimination reduces arbitrary subdivisions to physical
@@ -48,8 +50,9 @@ additivity includes arbitrary rooted trees.  The final single-block premise is
 not yet available: in particular, incomplete order-nine or order-ten coverage
 is not a theorem owner, and the orders-$2$--$10$ and all-connected masters are
 not green.  Reproducibility appendices below therefore contain a mixture of
-verified commands and clearly marked promotion placeholders, not a publication
-record or theorem certificate.
+commands for present repository artifacts and clearly marked promotion
+placeholders, not a publication record or a certificate of the headline
+conclusion.
 \end{abstract}
 
 \section{Scope and conditional statement}
@@ -65,19 +68,32 @@ the adjacency eigenvalues $\lambda_1,\ldots,\lambda_n$ of $G$, put
 \]
 A connected graph with $|E(G)|=|V(G)|+5$ has cyclomatic rank six.
 
+Positive and negative square energies were introduced in connection with
+spectral coloring bounds by Elphick, Farber, Goldberg, and Wocjan
+\cite{EFGW}.  Liu, Tang, and Zhang proved the conjectured general bound
+$\min\{\spn(G),\smn(G)\}\ge n-1$ for connected $n$-vertex graphs
+\cite{LTZ}.  The conclusion considered here is instead the stronger
+edge-surplus conjecture of Akbari, Kumar, Mohar, Pragada, and Zhang: a connected
+$n$-vertex graph with at least $n+1$ edges should satisfy $\spn(G)\ge n$
+\cite[Conjecture~1.2]{AKMPZ}.  The present draft neither proves that conjecture
+in general nor unconditionally proves its hexacyclic case.
+
 \begin{theorem}[Conditional main implication---draft only]
 \label{thm:conditional-main}
 Assume both of the following premises.
 \begin{enumerate}
-\item The owner-exact multiblock theorem covers every finite simple connected
-rank-six graph having at least two positive-rank cyclic blocks.
+\item The mathematical assertions in the cited owner-exact multiblock ledger
+are correct and cover every finite simple connected rank-six graph having at
+least two positive-rank cyclic blocks.
 \item For every one of the $1198$ suppressed rank-six kernels, every physical
-parity orbit and every required canonical-plus-coordinate target has an exact,
-disjoint proof owner establishing the budget described in
+parity orbit and every required canonical-plus-coordinate target has an exact
+proof owner establishing the budget and certificate semantics described in
 Proposition~\ref{prop:conditional-interface}; the order-nine and order-ten
 owners and the orders-$2$--$10$ implication master pass full exact replay in
 both normal and optimized Python modes; and an all-connected synthesis master
-checks the two scopes as disjoint and exhaustive.
+checks the two scopes as disjoint and exhaustive.  Regenerated target keys must
+equal a disjoint union of final owner-key sets; labels, counts, hashes, and
+successful process exits alone do not satisfy this premise.
 \end{enumerate}
 Then every finite simple connected graph $G$ with $|V(G)|=n$ and
 $|E(G)|=n+5$ satisfies
@@ -94,7 +110,8 @@ search-completion field, process exit status, or digest without exact replay
 and exact owner-set equality does not discharge the premise.
 \end{remark}
 
-No strict inequality, equality classification, edge-addition monotonicity,
+No proof of either premise, strict inequality, equality classification,
+edge-addition monotonicity,
 one-edge-subdivision monotonicity, result for nonsimple realizations, human
 review, independent verification, peer review, publication, or external
 dissemination is claimed.
@@ -178,6 +195,12 @@ classes attain one on each edge.
 
 \section{Block decomposition}
 
+We use the standard block convention: the blocks of a connected graph are its
+maximal $2$-connected subgraphs together with its bridge copies of $K_2$.  A
+\emph{positive-rank cyclic block} is a block $B$ with $\betarank(B)>0$.
+Thus ``a unique positive-rank cyclic block'' does not mean ``one nontrivial
+block'': attached trees contribute nontrivial $K_2$ blocks.
+
 \begin{lemma}[Cyclic-block rank additivity]\label{lem:block-rank}
 The cyclomatic rank of a connected graph is the sum of the cyclomatic ranks of
 its positive-rank cyclic blocks.
@@ -194,26 +217,46 @@ Thus the positive cyclic-block ranks of a rank-six graph form exactly one of
  3+2+1,\quad3+3,\nonumber\\
  4+1+1,\quad4+2,\quad5+1,\quad6.
 \end{gather}
-The first ten rows are the multiblock branch; the final row has one
+The first ten alternatives are the multiblock branch; the final alternative has one
 positive-rank cyclic block.  This is a structural dichotomy only and does not
 by itself prove either branch.
 
-\section{Verified multiblock interface}
+\begin{lemma}[Form of the unique-block branch]\label{lem:unique-block-form}
+If a connected graph has a unique positive-rank cyclic block $B$, then every
+other block is a bridge.  The graph is obtained from $B$ by one-vertex-summing
+finite rooted trees at vertices of $B$.
+\end{lemma}
+\begin{proof}
+Every other block has rank zero.  Under the stated block convention, a
+rank-zero block of a simple graph is a bridge $K_2$.  Delete the node for $B$
+from the block--cut tree.  Each remaining component is a tree of bridge blocks
+attached through exactly one cut vertex of $B$; two attachments to $B$ would
+create a cycle in the block--cut tree.  Expanding its bridge blocks gives the
+asserted rooted tree.  After suppression is reversed, an attachment vertex may
+be an internal vertex of a replacement path.
+\end{proof}
 
-\begin{proposition}[Multiblock branch]\label{prop:multiblock}
+\section{Conditional multiblock interface}
+
+\begin{proposition}[Multiblock branch under Premise 1]\label{prop:multiblock}
+Assume Premise 1 of Theorem~\ref{thm:conditional-main}.
 Every finite simple connected rank-six graph with at least two positive-rank
 cyclic blocks satisfies $\spn(G)\ge|V(G)|$.
 \end{proposition}
 
-The proof is the owner-exact ledger in the multiblock audit
-\cite{MultiblockAudit}.  Its scope consists of
+This proposition is an invocation of the premise, not a proof of the imported
+ledger.  The cited multiblock audit \cite{MultiblockAudit} states the asserted
+scope and supplies the repository argument on which Premise 1 is based.  Its
+scope consists of
 the first ten rows of \eqref{eq:partitions}.  It separates direct DNN rows,
 structural pre-sieve rows, and the packet residuals A--I.  Shared cuts,
 repeated and nested owners, positive bridge connectors, and arbitrary rooted
 branches are assigned before credit is charged.  The direct
 rank-five-equality-plus-triangle boundary is nonstrict and is not promoted to a
-strict claim.  This skeleton cites that verified exposition rather than
-duplicating its long owner-by-owner proof.
+strict claim.  This skeleton cites that internal exposition rather than
+duplicating its long owner-by-owner argument.  A successful ledger replay
+checks the encoded predicates; it does not by itself establish that every
+encoded structural lemma is mathematically sound.
 
 \section{Unique positive-rank block}
 
@@ -239,7 +282,8 @@ separate required condition, especially in parallel classes.
 \end{proof}
 
 \begin{proposition}[Exact kernel census]\label{prop:census}
-The rank-six suppressed kernels have the following verified distribution.
+The rank-six suppressed kernels have the following repository-checked
+distribution.
 \[
 \begin{array}{c|rrrrrrrrr}
  |V(K)|&2&3&4&5&6&7&8&9&10\\ \hline
@@ -256,6 +300,20 @@ floating-point or spectral calculation enters this census.  Its reproducible
 command is listed in Appendix~\ref{app:repro}.
 
 \section{Conditional finite interface}
+
+Here an \emph{exact DNN certificate of excess at most five} means an explicit
+finite record which reconstructs a positive-semidefinite Gram matrix of unit
+vectors on the realized core, verifies every shared-endpoint identity and every
+edge denominator $1-R_{uv}>0$, and proves by exact integer, rational, or
+symbolically justified arithmetic that
+\[
+ \sum_{uv\in E}\frac{2}{1-R_{uv}}\le |E|+5.
+\]
+A structural owner is admissible only if it has a separately stated proof of
+the same final spectral conclusion for its exact scope; it is not a DNN
+certificate merely because a verifier assigns it a target key.  Numerical
+optimization output, a symbolic tag without checked identities, or a stored
+decimal approximation is not an exact certificate.
 
 For each parallel class of multiplicity $m$ with $o$ odd replacement paths,
 the canonical simple lengths are
@@ -274,30 +332,41 @@ satisfies $c_i\le\ell_i$ and $\ell_i-c_i\in2\mathbb Z_{\ge0}$.
 \begin{proposition}[Conditional exact-owner interface]
 \label{prop:conditional-interface}
 Assume every physical parity orbit of every kernel in
-Proposition~\ref{prop:census} is owned either by an exact coarse certificate
-that remains within excess five under every same-parity lengthening, or by
-exact certificates for every target
+Proposition~\ref{prop:census} is owned either by an exact coarse DNN certificate
+at its canonical vector whose fixed branch Gram remains within excess five
+after exact path elimination under every same-parity coordinate lengthening,
+or by exact DNN certificates (or explicitly typed structural owners proving
+the same conclusion) for every target
 \[
  \mathcal F(c)=\{c\}\cup\{c+2\mathbf e_i:1\le i\le|E(K)|\}.
 \]
-Assume that regenerated target keys equal the disjoint union of checked owner
-keys.  Then every simple subdivision of every rank-six kernel, with arbitrary
+For a structural owner, assume additionally an exact all-length and rooted-tree
+lift covering the descendants for which it claims ownership;
+Lemma~\ref{lem:path} may be used only for a DNN owner with a retained branch
+Gram.  Assume that regenerated target keys equal the disjoint union of checked
+final-owner keys, with no missing, duplicate, or extra keys.  Then every simple
+subdivision of every rank-six kernel, with arbitrary
 finite rooted trees attached at branch or internal subdivision vertices,
 satisfies $\spn(G)\ge|V(G)|$.
 \end{proposition}
 \begin{proof}
 If $\ell=c$, use the canonical target.  Otherwise choose $i$ with
-$\ell_i\ge c_i+2$ and start from the owner of $c+2\mathbf e_i$.
-Lemma~\ref{lem:path} permits every remaining same-parity coordinate increase
-without increasing excess.  Hence the subdivided core $B$, with $L$ edges,
-has $\kappa(B)\le L+5$.
+$\ell_i\ge c_i+2$ and start from the owner of $c+2\mathbf e_i$.  For a DNN
+owner, retain its branch vectors, replace the internal vectors independently
+on every lengthened path, and apply Lemma~\ref{lem:path}; the excess cannot
+increase.  A typed structural owner instead uses the all-length and rooted-tree
+implication required in the premise.  Thus in the DNN case the subdivided core
+$B$, with $L$ edges, has $\kappa(B)\le L+5$.
 
-If attached rooted trees contain $t$ edges, Lemma~\ref{lem:additivity} gives
+In that DNN case, if attached rooted trees contain $t$ edges,
+Lemma~\ref{lem:additivity} gives
 $\kappa(G)\le L+5+t$.  Rank six gives $|V(G)|=L-5+t$, and
 Lemma~\ref{lem:dnn} yields
 \[
  \spn(G)\ge2(L+t)-(L+5+t)=L-5+t=|V(G)|.
 \]
+In the structural case, the all-length and rooted-tree conclusion stipulated
+in the premise gives the same inequality directly.
 Different frontier targets may use different Gram matrices.  No parity-changing
 subdivision or spectral monotonicity is used.
 \end{proof}
@@ -314,7 +383,8 @@ missing promotion owners or the fail-closed orders-$2$--$10$ master.
 By Lemma~\ref{lem:block-rank}, the positive block ranks have exactly the eleven
 forms in \eqref{eq:partitions}.  If there are at least two positive-rank cyclic
 blocks, apply Proposition~\ref{prop:multiblock}.  Otherwise there is one
-rank-six cyclic block.  Lemma~\ref{lem:suppression},
+rank-six cyclic block.  Lemma~\ref{lem:unique-block-form},
+Lemma~\ref{lem:suppression},
 Proposition~\ref{prop:census}, and the assumed exact-owner premise allow
 Proposition~\ref{prop:conditional-interface}.  The two cases are disjoint and
 exhaustive.  This proves the implication, while making no assertion that its
@@ -324,10 +394,10 @@ currently blocked finite premise has been discharged.
 \appendix
 \section{Reproducibility ledger and placeholders}\label{app:repro}
 
-\subsection{Commands backed by present verified exposition}
+\subsection{Commands for present repository artifacts}
 
-From the repository root, the exact kernel census and multiblock ledger are
-intended to be checked in normal and optimized modes:
+From the repository root, the kernel census and multiblock ledger can be
+replayed in normal and optimized modes:
 \begin{verbatim}
 python3 research/rank-six-kernel-census-verifier.py
 python3 -O research/rank-six-kernel-census-verifier.py
@@ -415,14 +485,21 @@ order-ten certificate completion.
 \section{Trusted base and limitations}
 
 The analytic trust base consists of the displayed matrix arguments, exact path
-elimination, block decomposition, and finite-kernel reduction.  The
-computer-assisted trust base additionally includes the committed verifier
-sources, exact integer and rational semantics, canonical parsing and labelling,
-the Python runtime, and executing hardware.  Numerical optimization may be used
-to discover witnesses but is not a proof object.  Rooted-tree attachment means
-a genuine one-vertex sum; a connector meeting a core twice is outside that
-lemma.  Kernel parallel edges are permitted only before realization; the graph
-to which the trace identity is applied remains simple.
+elimination, standard block theory, the suppression reduction, and every
+structural lemma imported through Premise 1 or a typed finite owner.  Those
+imported repository notes are mathematical dependencies, not external
+validation.  The computer-assisted trust base additionally includes the
+committed verifier and generator sources, canonical kernel fixtures, every
+certificate and chunk consumed transitively, decompression and parsing code,
+exact integer/rational and validated symbolic semantics, canonical labelling,
+the Python runtime, and executing hardware.  Hashes establish byte identity,
+not truth; normal/optimized agreement detects only some implementation errors;
+hostile mutations are tests, not a completeness proof; and no independent
+implementation is claimed.  Numerical optimization may discover witnesses but
+is not a proof object.  Rooted-tree attachment means a genuine one-vertex sum;
+a connector meeting a core twice is outside that lemma.  Kernel parallel edges
+are permitted only before realization; the graph to which the trace identity
+is applied remains simple.
 
 \section*{AI disclosure and nonpublication notice}
 
@@ -432,7 +509,22 @@ independent verification, peer review, acceptance, publication, or theorem
 announcement is claimed.  The manuscript is a conditional internal skeleton
 pending the explicit promotion gates in Appendix~\ref{app:repro}.
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
+\bibitem{EFGW}
+C.~Elphick, M.~Farber, F.~Goldberg, and P.~Wocjan,
+\emph{Conjectured bounds for the sum of squares of positive eigenvalues of a
+graph}, Discrete Math. 339 (2016), 2215--2223.
+
+\bibitem{AKMPZ}
+S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and S.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264, 2025.
+
+\bibitem{LTZ}
+Y.~Liu, Q.~Tang, and S.~Zhang,
+\emph{The positive and negative square-energy conjecture},
+arXiv:2607.18031, 2026.
+
 \bibitem{ExpositionModules}
 \emph{LaTeX exposition modules for the rank-six synthesis}, repository proof
 note, 2026;
@@ -441,26 +533,22 @@ note, 2026;
 \bibitem{MultiblockAudit}
 \emph{Hexacyclic multiblock theorem: exhaustive ledger and hostile audit},
 repository proof note, 2026;
-\path{positive-square-energy/hexacyclic-general/}
-\path{multiblock-items1-7-combined-theorem-audit.md}.
+\path{positive-square-energy/hexacyclic-general/multiblock-items1-7-combined-theorem-audit.md}.
 
 \bibitem{SingleBlockAudit}
 \emph{Audit of the rank-six single-block implication}, repository proof note,
 2026;
-\path{positive-square-energy/hexacyclic-general/}
-\path{rank-six-single-block-implication-audit.md}.
+\path{positive-square-energy/hexacyclic-general/rank-six-single-block-implication-audit.md}.
 
 \bibitem{MasterArchitecture}
 \emph{Rank-six orders 2--10 master architecture}, promotion-gated repository
 note, 2026;
-\path{positive-square-energy/hexacyclic-general/}
-\path{rank-six-order2-10-master-architecture.md}.
+\path{positive-square-energy/hexacyclic-general/rank-six-order2-10-master-architecture.md}.
 
 \bibitem{OrderTenArchitecture}
 \emph{Order-ten rank-six master architecture}, completion-gated repository
 note, 2026;
-\path{positive-square-energy/hexacyclic-general/}
-\path{order-ten-rank-six-master-architecture.md}.
+\path{positive-square-energy/hexacyclic-general/order-ten-rank-six-master-architecture.md}.
 \end{thebibliography}
 
 \end{document}

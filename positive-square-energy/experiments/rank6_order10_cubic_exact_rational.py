@@ -31,8 +31,13 @@ MODE_UNRESOLVED = 0
 MODE_SHARED = 1
 MODE_TEMPLATE = 2
 MODE_FALLBACK = 3
+MODE_STRUCTURAL = 4
+MODE_ATOM = 5
 CENSUS_CACHE_SCHEMA = "rank-six-order-ten-residual-cache-v1"
 FRAGMENT_PATTERN = re.compile(r"fragment-(\d+)-(\d+)\.r10g\.xz\Z")
+ATOM_FIXTURE_PATH = HERE / "rank6_orders8_10_atom_ledger_classification.json"
+ATOM_SEARCH_PATH = HERE / "rank6_orders8_10_atom_ledger_search.py"
+_ATOM_MODULE = None
 
 
 def require(condition, message):
@@ -142,6 +147,63 @@ def path_ledger(census, source, frontier=None):
         edge, occurrence, u, v, length = paths[frontier]
         paths[frontier] = edge, occurrence, u, v, length + 2
     return tuple(paths)
+
+
+def structural_targets(census, source):
+    correlations = {}
+    absolute_rows = [0] * ORDER
+    for dense, multiplicity, odd in zip(source[2], source[3], source[4]):
+        u, v = census.PAIRS[dense]
+        signed_imbalance = multiplicity - 2 * odd
+        correlations[u, v] = Fraction(signed_imbalance, 3)
+        absolute_rows[u] += abs(signed_imbalance)
+        absolute_rows[v] += abs(signed_imbalance)
+    require(max(absolute_rows) <= 3, "cubic diagonal-dominance identity failed")
+    canonical = []
+    extended = []
+    for _, _, u, v, length in path_ledger(census, source):
+        correlation = correlations[u, v]
+        transformed = -correlation if length & 1 else correlation
+        require(-1 < transformed <= 1, "structural Gram produced an antipodal path")
+        canonical.append((1 - transformed) / (length * (1 + transformed)))
+        extended.append((1 - transformed) / ((length + 2) * (1 + transformed)))
+    base = sum(canonical, Fraction())
+    targets = (base,) + tuple(base - old + new
+                              for old, new in zip(canonical, extended))
+    require(all(frontier <= base for frontier in targets),
+            "plus-two frontier increased the structural bound")
+    return targets
+
+
+def structural_certified(census, source):
+    return max(structural_targets(census, source)) <= BUDGET
+
+
+def atom_source_indices(residuals):
+    payload = json.loads(ATOM_FIXTURE_PATH.read_text("ascii"))
+    indices = set()
+    for record in payload["decompositions"]:
+        if record["order"] != ORDER:
+            continue
+        source_index = record["source_index"]
+        require(0 <= source_index < len(residuals), "atom source index out of range")
+        source = residuals[source_index]
+        require(record["kernel"] == source[0] and tuple(record["row"]) == source[4],
+                "atom fixture does not match residual stream")
+        indices.add(source_index)
+    require(len(indices) == 108, "order-ten atom source total changed")
+    return frozenset(indices)
+
+
+def verify_atom(census, source):
+    global _ATOM_MODULE
+    if _ATOM_MODULE is None:
+        spec = importlib.util.spec_from_file_location("rank6_order10_stream_atom", ATOM_SEARCH_PATH)
+        require(spec is not None and spec.loader is not None, "cannot load atom verifier")
+        _ATOM_MODULE = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(_ATOM_MODULE)
+        _ATOM_MODULE.audit_atom_model()
+    require(_ATOM_MODULE.classify(census, source), "bad atom symbolic record")
 
 
 def dot(left, right):
@@ -363,9 +425,10 @@ def encode_pack(census, start, records):
     put_uvarint(output, start)
     put_uvarint(output, len(records))
     for mode, payload in records:
-        require(mode in (MODE_UNRESOLVED, MODE_SHARED, MODE_TEMPLATE, MODE_FALLBACK), "bad mode")
+        require(mode in (MODE_UNRESOLVED, MODE_SHARED, MODE_TEMPLATE, MODE_FALLBACK,
+                         MODE_STRUCTURAL, MODE_ATOM), "bad mode")
         output.append(mode)
-        if mode in (MODE_UNRESOLVED, MODE_TEMPLATE):
+        if mode in (MODE_UNRESOLVED, MODE_TEMPLATE, MODE_STRUCTURAL, MODE_ATOM):
             require(payload is None, "payload on empty mode")
         elif mode == MODE_SHARED:
             denominator, branches, canonical, extended = payload
@@ -413,7 +476,7 @@ def decode_pack(census, raw, residuals):
         position += 1
         source = residuals[start + local]
         lengths = tuple(path[4] for path in path_ledger(census, source))
-        if mode in (MODE_UNRESOLVED, MODE_TEMPLATE):
+        if mode in (MODE_UNRESOLVED, MODE_TEMPLATE, MODE_STRUCTURAL, MODE_ATOM):
             records.append((mode, None))
             continue
         require(mode in (MODE_SHARED, MODE_FALLBACK), "bad witness mode")
@@ -624,12 +687,23 @@ def verify_record(census, source, record):
         for target, witness in enumerate(payload):
             if witness is not None:
                 verify_individual(census, source, target, witness)
+    elif mode == MODE_STRUCTURAL:
+        require(payload is None and structural_certified(census, source),
+                "bad structural symbolic record")
+    elif mode == MODE_ATOM:
+        require(payload is None, "atom symbolic payload present")
+        verify_atom(census, source)
     else:
         require(mode == MODE_UNRESOLVED and payload is None and not source[-1],
                 "bad unresolved record")
 
 
-def search_record(args, census, source, source_index, denominators):
+def search_record(args, census, source, source_index, denominators, atom_indices=frozenset()):
+    if args.symbolic_fast_lane:
+        if structural_certified(census, source):
+            return (MODE_STRUCTURAL, None), None, None, 0
+        if source_index in atom_indices:
+            return (MODE_ATOM, None), None, None, 0
     if source[-1]:
         return (MODE_TEMPLATE, None), None, None, 0
     paths = path_ledger(census, source)
@@ -664,8 +738,10 @@ def summarize(records):
                    for mode, payload in records if mode == MODE_FALLBACK)
     unresolved = sum(PATH_COUNT + 1 for mode, _ in records if mode == MODE_UNRESOLVED)
     unresolved += sum(sum(item is None for item in payload)
-                      for mode, payload in records if mode == MODE_FALLBACK)
-    return shared, templates, fallback, unresolved
+                       for mode, payload in records if mode == MODE_FALLBACK)
+    structural = sum(mode == MODE_STRUCTURAL for mode, _ in records)
+    atoms = sum(mode == MODE_ATOM for mode, _ in records)
+    return shared, templates, fallback, unresolved, structural, atoms
 
 
 def search(args, census, residuals):
@@ -675,6 +751,7 @@ def search(args, census, residuals):
     fragment_directory = (args.fragment_directory if args.fragment_directory is not None else
                           args.output.with_name(args.output.name + ".fragments"))
     require(args.checkpoint_rows > 0, "checkpoint rows must be positive")
+    atom_indices = atom_source_indices(residuals) if args.symbolic_fast_lane else frozenset()
     fragment_directory.mkdir(exist_ok=True)
     cursor, fragments = load_fragments(
         census, residuals, fragment_directory, args.start, stop, args.checkpoint_rows)
@@ -686,7 +763,7 @@ def search(args, census, residuals):
         records = []
         for source_index in range(cursor, fragment_stop):
             record, value, shared, exact = search_record(
-                args, census, residuals[source_index], source_index, denominators)
+                args, census, residuals[source_index], source_index, denominators, atom_indices)
             records.append(record)
             if args.progress:
                 print(f"[{source_index - args.start + 1}/{args.count}] "
@@ -702,9 +779,10 @@ def search(args, census, residuals):
             print(f"checkpoint={path} rows={len(records)}", flush=True)
     raw, stored, records = merge_fragments(
         census, residuals, fragments, args.start, stop, args.output)
-    shared_count, templates, fallback, unresolved = summarize(records)
+    shared_count, templates, fallback, unresolved, structural, atoms = summarize(records)
     print(f"attempts={len(records)} shared_exact={shared_count} templates={templates} "
-          f"fallback_exact={fallback} unresolved_targets={unresolved}")
+          f"fallback_exact={fallback} structural={structural} atoms={atoms} "
+          f"unresolved_targets={unresolved}")
     print(f"fragments={len(fragments)} checkpoint_rows={args.checkpoint_rows}")
     print(f"raw_bytes={len(raw)} xz_bytes={len(stored)} "
           f"elapsed_seconds={time.perf_counter() - started:.6f}")
@@ -727,6 +805,8 @@ def main():
     parser.add_argument("--verify-pack", type=Path)
     parser.add_argument("--census-cache", type=Path)
     parser.add_argument("--progress", action="store_true")
+    parser.add_argument("--symbolic-fast-lane", action="store_true",
+                        help="emit exact payload-free structural and atom ownership records")
     args = parser.parse_args()
     require(args.start >= 0 and args.count >= 0, "bad selected range")
     require(args.count > 0 or args.verify_pack is not None,
@@ -748,8 +828,15 @@ def main():
         templates = sum(mode == MODE_TEMPLATE for mode, _ in records)
         fallback = sum(sum(item is not None for item in payload)
                        for mode, payload in records if mode == MODE_FALLBACK)
+        structural = sum(mode == MODE_STRUCTURAL for mode, _ in records)
+        atoms = sum(mode == MODE_ATOM for mode, _ in records)
+        atom_indices = atom_source_indices(residuals) if atoms else frozenset()
+        for local, (mode, _) in enumerate(records):
+            if mode == MODE_ATOM:
+                require(start + local in atom_indices, "bad atom symbolic record")
         print(f"attempts={len(records)} shared_exact={shared} templates={templates} "
-              f"fallback_exact={fallback} exact_audit=true census_seconds={census_seconds:.6f}")
+              f"fallback_exact={fallback} structural={structural} atoms={atoms} "
+              f"exact_audit=true census_seconds={census_seconds:.6f}")
         return
     require(args.start < len(residuals) and args.start + args.count <= len(residuals),
             "selected range exceeds residual stream")

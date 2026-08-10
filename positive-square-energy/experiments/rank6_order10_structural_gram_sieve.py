@@ -57,31 +57,7 @@ def path_bound(correlation, length):
 
 
 def audit_row(stream, census, source):
-    gram = [[F(int(u == v)) for v in range(stream.ORDER)]
-            for u in range(stream.ORDER)]
-    absolute_rows = [0] * stream.ORDER
-    for dense, multiplicity, odd in zip(source[2], source[3], source[4]):
-        u, v = census.PAIRS[dense]
-        signed_imbalance = multiplicity - 2 * odd
-        gram[u][v] = gram[v][u] = F(signed_imbalance, 3)
-        absolute_rows[u] += abs(signed_imbalance)
-        absolute_rows[v] += abs(signed_imbalance)
-    require(max(absolute_rows) <= 3, "cubic diagonal-dominance identity failed")
-    require(all(gram[u][u] == 1 and
-                sum(abs(gram[u][v]) for v in range(stream.ORDER) if v != u) <= 1
-                for u in range(stream.ORDER)), "Gram is not diagonally dominant")
-
-    canonical = []
-    extended = []
-    for _, _, u, v, length in stream.path_ledger(census, source):
-        canonical.append(path_bound(gram[u][v], length))
-        extended.append(path_bound(gram[u][v], length + 2))
-    base = sum(canonical, F())
-    targets = (base,) + tuple(base - old + new
-                              for old, new in zip(canonical, extended))
-    require(all(frontier <= base for frontier in targets),
-            "plus-two frontier increased the structural bound")
-    return targets
+    return stream.structural_targets(census, source)
 
 
 def canonical_bytes(payload):
