@@ -122,6 +122,18 @@ python3 positive-square-energy/experiments/rank6_order10_cubic_exact_rational.py
   --verify-pack /tmp/rank6-order10-00000.r10g.xz
 ```
 
+New runs checkpoint every 500 residual rows by default. Each checkpoint is an
+independently canonical, XZ-compressed `R10G1` pack in
+`OUTPUT.fragments/fragment-START-STOP.r10g.xz`; no sidecar state is used. On
+restart, the generator exactly replays the maximal ordered fragment prefix,
+continues at its first missing row, and deterministically merges record bodies
+under one unchanged `R10G1` header. `--checkpoint-rows` changes the interval and
+`--fragment-directory` places the fragments explicitly. The final
+`--verify-pack` path now also rejects noncanonical encodings before exact
+rational replay. Existing running generators retain their already loaded code
+and output behavior; this architecture applies to processes started after the
+change.
+
 A full run is deliberately not the default: the generator requires an explicit
 positive `--count`. A one-residual smoke run with one restart, 80 iterations,
 and denominators through 4096 took 11.1 seconds including 8.8 seconds to

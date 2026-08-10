@@ -230,6 +230,20 @@ def implication_manifest(counts, dependencies):
     require(len(dependencies) == 5, "implication requires the census and all four owners")
     return {
         "schema": "rank-six-order2-10-master-implication-v1",
+        "evidence_kind": "exact-theorem-owner",
+        "scope": {
+            "graph": "finite simple connected",
+            "cyclomatic_rank": 6,
+            "edge_vertex_relation": "|E(G)|=|V(G)|+5",
+            "block_scope": "exactly-one-positive-rank-cyclic-block",
+        },
+        "conclusion": {
+            "quantity": "s+(G)",
+            "relation": ">=",
+            "bound": "|V(G)|",
+            "statement": "s+(G)>=|V(G)|",
+            "strict": False,
+        },
         "kernel_fixture_sha256": KERNEL_SHA256,
         "counts_by_order_2_to_10": list(counts),
         "orders": list(range(2, 11)),

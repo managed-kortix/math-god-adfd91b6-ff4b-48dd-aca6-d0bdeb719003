@@ -15,6 +15,7 @@ import json
 import lzma
 import math
 import random
+import re
 import time
 from fractions import Fraction
 from pathlib import Path
@@ -31,6 +32,7 @@ MODE_SHARED = 1
 MODE_TEMPLATE = 2
 MODE_FALLBACK = 3
 CENSUS_CACHE_SCHEMA = "rank-six-order-ten-residual-cache-v1"
+FRAGMENT_PATTERN = re.compile(r"fragment-(\d+)-(\d+)\.r10g\.xz\Z")
 
 
 def require(condition, message):
@@ -446,6 +448,99 @@ def decode_pack(census, raw, residuals):
     return start, tuple(records)
 
 
+def pack_record_bytes(census, raw):
+    """Return the record section after validating the immutable R10G1 header."""
+    header = len(MAGIC)
+    require(raw[:header] == MAGIC and raw[header:header + 32] ==
+            bytes.fromhex(census.SOURCE_SHA256), "bad pack header")
+    position = header + 32
+    _, position = get_uvarint(raw, position)
+    _, position = get_uvarint(raw, position)
+    return raw[position:]
+
+
+def exact_decode_pack(census, raw, residuals):
+    """Decode, require canonical R10G1 bytes, and replay every exact witness."""
+    start, records = decode_pack(census, raw, residuals)
+    require(raw == encode_pack(census, start, records), "noncanonical R10G1 encoding")
+    for source, record in zip(residuals[start:start + len(records)], records):
+        verify_record(census, source, record)
+    return start, records
+
+
+def compressed_pack(census, residuals, start, records):
+    raw = encode_pack(census, start, records)
+    stored = lzma.compress(raw, format=lzma.FORMAT_XZ, preset=6)
+    decoded_start, decoded = exact_decode_pack(census, lzma.decompress(stored), residuals)
+    require(decoded_start == start and decoded == tuple(records), "pack round-trip changed")
+    return raw, stored
+
+
+def atomic_write(path, raw):
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_bytes(raw)
+    temporary.replace(path)
+
+
+def fragment_path(directory, start, stop):
+    return directory / f"fragment-{start:06d}-{stop:06d}.r10g.xz"
+
+
+def load_fragments(census, residuals, directory, start, stop, checkpoint_rows):
+    """Load the maximal ordered prefix of exact, canonical partial R10G1 packs."""
+    paths = []
+    cursor = start
+    for path in sorted(directory.iterdir()):
+        match = FRAGMENT_PATTERN.fullmatch(path.name)
+        if match is None or not path.is_file():
+            continue
+        fragment_start, fragment_stop = map(int, match.groups())
+        if fragment_stop <= start or fragment_start >= stop:
+            continue
+        require(fragment_start == cursor and
+                fragment_stop == min(cursor + checkpoint_rows, stop),
+                "fragment range leaves a gap, overlaps, or has changed checkpoint width")
+        try:
+            raw = lzma.decompress(path.read_bytes(), format=lzma.FORMAT_XZ)
+        except lzma.LZMAError as error:
+            raise RuntimeError(f"invalid checkpoint fragment: {path.name}") from error
+        actual_start, records = exact_decode_pack(census, raw, residuals)
+        require(actual_start == fragment_start and
+                len(records) == fragment_stop - fragment_start,
+                "checkpoint fragment embedded range changed")
+        paths.append(path)
+        cursor = fragment_stop
+    return cursor, tuple(paths)
+
+
+def merge_fragments(census, residuals, paths, start, stop, output):
+    """Deterministically merge partial packs while preserving the R10G1 wire format."""
+    bodies = []
+    cursor = start
+    for path in paths:
+        try:
+            raw = lzma.decompress(path.read_bytes(), format=lzma.FORMAT_XZ)
+        except lzma.LZMAError as error:
+            raise RuntimeError(f"invalid checkpoint fragment: {path.name}") from error
+        fragment_start, records = exact_decode_pack(census, raw, residuals)
+        require(fragment_start == cursor and records, "fragments are not one ordered interval")
+        cursor += len(records)
+        bodies.append(pack_record_bytes(census, raw))
+    require(cursor == stop, "fragments do not cover the requested output range")
+    raw = bytearray(MAGIC)
+    raw.extend(bytes.fromhex(census.SOURCE_SHA256))
+    put_uvarint(raw, start)
+    put_uvarint(raw, stop - start)
+    raw.extend(b"".join(bodies))
+    merged_raw = bytes(raw)
+    merged_start, merged_records = exact_decode_pack(census, merged_raw, residuals)
+    require(merged_start == start and len(merged_records) == stop - start,
+            "merged pack range changed")
+    stored = lzma.compress(merged_raw, format=lzma.FORMAT_XZ, preset=6)
+    atomic_write(output, stored)
+    return merged_raw, stored, merged_records
+
+
 def audit_parameters(denominator, rows):
     for row in rows:
         require(len(row) == DIMENSION - 1 and
@@ -534,59 +629,83 @@ def verify_record(census, source, record):
                 "bad unresolved record")
 
 
-def search(args, census, residuals):
-    selected = residuals[args.start:args.start + args.count]
-    denominators = tuple(int(value) for value in args.denominators.split(","))
-    require(denominators and all(value > 0 for value in denominators), "bad denominators")
-    records = []
-    started = time.perf_counter()
-    for local, source in enumerate(selected):
-        if source[-1]:
-            records.append((MODE_TEMPLATE, None))
-            continue
-        paths = path_ledger(census, source)
-        value, vectors = optimize(paths, args.seed + 1009 * (args.start + local),
-                                  args.restarts, args.iterations)
-        shared = shared_rationalize(paths, vectors, denominators)
-        fallbacks = None
-        if shared is None:
-            fallbacks = []
-            for target in range(PATH_COUNT + 1):
-                frontier = None if target == 0 else target - 1
-                target_paths = path_ledger(census, source, frontier)
-                witness = individual_rationalize(target_paths, vectors, denominators)
-                if witness is None and args.fallback_restarts:
-                    _, candidate = optimize(
-                        target_paths, args.seed + 1009 * (args.start + local) + target + 1,
-                        args.fallback_restarts, args.fallback_iterations, warm=(vectors,))
-                    witness = individual_rationalize(target_paths, candidate, denominators)
-                fallbacks.append(witness)
-            records.append((MODE_FALLBACK, tuple(fallbacks)) if any(fallbacks)
-                           else (MODE_UNRESOLVED, None))
-        else:
-            records.append((MODE_SHARED, shared))
-        if args.progress:
-            exact = 0 if fallbacks is None else sum(item is not None for item in fallbacks)
-            print(f"[{local + 1}/{len(selected)}] numerical={value:.9f} "
-                  f"shared_exact={shared is not None} fallback_exact={exact}", flush=True)
-    raw = encode_pack(census, args.start, records)
-    stored = lzma.compress(raw, format=lzma.FORMAT_XZ, preset=6)
-    decoded_start, decoded = decode_pack(census, lzma.decompress(stored), residuals)
-    require(decoded_start == args.start, "round-trip start changed")
-    for source, record in zip(selected, decoded):
-        verify_record(census, source, record)
-    temporary = args.output.with_name(args.output.name + ".tmp")
-    temporary.write_bytes(stored)
-    temporary.replace(args.output)
-    shared_count = sum(mode == MODE_SHARED for mode, _ in records)
+def search_record(args, census, source, source_index, denominators):
+    if source[-1]:
+        return (MODE_TEMPLATE, None), None, None, 0
+    paths = path_ledger(census, source)
+    value, vectors = optimize(paths, args.seed + 1009 * source_index,
+                              args.restarts, args.iterations)
+    shared = shared_rationalize(paths, vectors, denominators)
+    fallbacks = None
+    if shared is None:
+        fallbacks = []
+        for target in range(PATH_COUNT + 1):
+            frontier = None if target == 0 else target - 1
+            target_paths = path_ledger(census, source, frontier)
+            witness = individual_rationalize(target_paths, vectors, denominators)
+            if witness is None and args.fallback_restarts:
+                _, candidate = optimize(
+                    target_paths, args.seed + 1009 * source_index + target + 1,
+                    args.fallback_restarts, args.fallback_iterations, warm=(vectors,))
+                witness = individual_rationalize(target_paths, candidate, denominators)
+            fallbacks.append(witness)
+        record = ((MODE_FALLBACK, tuple(fallbacks)) if any(fallbacks)
+                  else (MODE_UNRESOLVED, None))
+    else:
+        record = (MODE_SHARED, shared)
+    exact = 0 if fallbacks is None else sum(item is not None for item in fallbacks)
+    return record, value, shared, exact
+
+
+def summarize(records):
+    shared = sum(mode == MODE_SHARED for mode, _ in records)
     templates = sum(mode == MODE_TEMPLATE for mode, _ in records)
     fallback = sum(sum(item is not None for item in payload)
                    for mode, payload in records if mode == MODE_FALLBACK)
     unresolved = sum(PATH_COUNT + 1 for mode, _ in records if mode == MODE_UNRESOLVED)
     unresolved += sum(sum(item is None for item in payload)
                       for mode, payload in records if mode == MODE_FALLBACK)
+    return shared, templates, fallback, unresolved
+
+
+def search(args, census, residuals):
+    denominators = tuple(int(value) for value in args.denominators.split(","))
+    require(denominators and all(value > 0 for value in denominators), "bad denominators")
+    stop = args.start + args.count
+    fragment_directory = (args.fragment_directory if args.fragment_directory is not None else
+                          args.output.with_name(args.output.name + ".fragments"))
+    require(args.checkpoint_rows > 0, "checkpoint rows must be positive")
+    fragment_directory.mkdir(exist_ok=True)
+    cursor, fragments = load_fragments(
+        census, residuals, fragment_directory, args.start, stop, args.checkpoint_rows)
+    started = time.perf_counter()
+    if args.progress and cursor != args.start:
+        print(f"resumed_rows={cursor - args.start} fragments={len(fragments)}", flush=True)
+    while cursor < stop:
+        fragment_stop = min(cursor + args.checkpoint_rows, stop)
+        records = []
+        for source_index in range(cursor, fragment_stop):
+            record, value, shared, exact = search_record(
+                args, census, residuals[source_index], source_index, denominators)
+            records.append(record)
+            if args.progress:
+                print(f"[{source_index - args.start + 1}/{args.count}] "
+                      f"numerical={'template' if value is None else f'{value:.9f}'} "
+                      f"shared_exact={shared is not None} fallback_exact={exact}", flush=True)
+        _, stored = compressed_pack(census, residuals, cursor, records)
+        path = fragment_path(fragment_directory, cursor, fragment_stop)
+        require(not path.exists(), "refusing to replace an existing checkpoint fragment")
+        atomic_write(path, stored)
+        fragments += (path,)
+        cursor = fragment_stop
+        if args.progress:
+            print(f"checkpoint={path} rows={len(records)}", flush=True)
+    raw, stored, records = merge_fragments(
+        census, residuals, fragments, args.start, stop, args.output)
+    shared_count, templates, fallback, unresolved = summarize(records)
     print(f"attempts={len(records)} shared_exact={shared_count} templates={templates} "
           f"fallback_exact={fallback} unresolved_targets={unresolved}")
+    print(f"fragments={len(fragments)} checkpoint_rows={args.checkpoint_rows}")
     print(f"raw_bytes={len(raw)} xz_bytes={len(stored)} "
           f"elapsed_seconds={time.perf_counter() - started:.6f}")
     print(f"sha256={hashlib.sha256(stored).hexdigest()}")
@@ -603,6 +722,8 @@ def main():
     parser.add_argument("--fallback-restarts", type=int, default=2)
     parser.add_argument("--fallback-iterations", type=int, default=420)
     parser.add_argument("--denominators", default="256,1024,4096,16384,65536")
+    parser.add_argument("--checkpoint-rows", type=int, default=500)
+    parser.add_argument("--fragment-directory", type=Path)
     parser.add_argument("--verify-pack", type=Path)
     parser.add_argument("--census-cache", type=Path)
     parser.add_argument("--progress", action="store_true")
@@ -618,10 +739,11 @@ def main():
                              args.census_cache)
     census_seconds = time.perf_counter() - started
     if args.verify_pack is not None:
-        raw = lzma.decompress(args.verify_pack.read_bytes(), format=lzma.FORMAT_XZ)
-        start, records = decode_pack(census, raw, residuals)
-        for source, record in zip(residuals[start:start + len(records)], records):
-            verify_record(census, source, record)
+        try:
+            raw = lzma.decompress(args.verify_pack.read_bytes(), format=lzma.FORMAT_XZ)
+        except lzma.LZMAError as error:
+            raise RuntimeError("pack is not a valid XZ stream") from error
+        start, records = exact_decode_pack(census, raw, residuals)
         shared = sum(mode == MODE_SHARED for mode, _ in records)
         templates = sum(mode == MODE_TEMPLATE for mode, _ in records)
         fallback = sum(sum(item is not None for item in payload)
