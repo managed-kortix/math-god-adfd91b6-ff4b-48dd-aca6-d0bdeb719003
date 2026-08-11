@@ -1798,3 +1798,52 @@ No audits yet.
   The pinned CaDiCaL 1.7.3 scout returned 153 TIMEOUT, zero SAT, and zero
   UNSAT, covering all 1,382 memberships. These are capped solver results, not
   certificate claims.
+
+### B7-l6 exact singleton-parent residual split
+
+- Split the committed 153-leaf/1,382-membership sound residual cover into
+  exactly 1,382 CNFs, one per membership. Each CNF is the canonical residual
+  leaf plus one positive unit selecting its exact parent selector; there is no
+  grouping, parent substitution, or additional semantic strengthening.
+- The independent checker reconstructs the 153 residual leaves from frozen
+  ancestry, certificates, and hashes, then proves for every leaf that each
+  selector occurs exactly once, the parent-selector ALO is exhaustive, and
+  distinct selectors are disjoint because their complete guarded six-hole
+  projections differ. The parent census is 37 leaves with six parents and 116
+  leaves with ten parents, totaling 1,382 memberships.
+- The singleton manifest directly binds the committed residual manifest/hash
+  ledger and producer/checker plus the coordinate, positive-gain, no-gain,
+  witness-orbit, and state certificate ledgers. Its size/hash is
+  207,703/`953f94ea423c3cd573a3e9bce43ba9fb4d5d6fa80ac2ac1426e7129e6435c0c5`.
+  The 1,382-row CNF hash ledger is
+  181,371/`92929a37dd392cb70161f4ee15fb351d7381cd078fb05734b42babb3cda82bec`.
+- A pinned CaDiCaL 1.7.3 scout ran every membership for five seconds with
+  exactly two recorded jobs, 691 memberships per job. Exact statuses/yields
+  are SAT 0, UNSAT 127, TIMEOUT 1,255. UNSAT solver time sums to 21.848 seconds;
+  TIMEOUT solver time sums to 6,284.754 seconds. The scout ledger is
+  487,540/`c6b506308b52f93214b708fb03053a8f1502d085d13ab751b90fca2ee246efc2`.
+- Tests regenerated and hashed all 1,382 singleton CNFs, independently parsed
+  all six disposition/parent-count shapes, and rejected parent-ordinal,
+  selected-selector, and selector-unit-polarity mutations. No LRAT was
+  generated or retained, and no commit was made; the 127 UNSAT statuses are
+  scout yields only and make no certificate claim.
+- Campaign hardening freezes the scout's exact 1,382-entry status sequence
+  (sequence SHA-256
+  `1c820b0de4e79a0ac355e9603566eca4a77eedf84f15989a124bdccbb30fbf82`),
+  exact SAT/UNSAT/TIMEOUT totals and membership incidences `0/127/1255`, scout
+  bytes/hash, pinned solver path/bytes/hash/version, five-second timeout, two
+  jobs, modulo-two assignment with 691 memberships per job, and status-aware
+  finite timing bounds. The hash ledger now requires its exact canonical ASCII
+  TSV framing; the scout requires exact canonical ASCII JSON framing.
+- Hostile regressions reject SAT injection, equal-total status swaps, scout-byte
+  changes, per-row CNF hash changes, solver path/bytes/hash/version changes,
+  job-count and job-assignment changes, sub-timeout TIMEOUT timing, and hash
+  ledger format/header/noncanonical-hash mutations. Final support-script
+  byte-count/SHA-256 values are checker
+  11,558/`d3ec4e8a2c56ffd4c326ea452d8e3adc6f182b625d65c92d0d01d2cea987bf13`,
+  producer
+  9,968/`a4e2f2413d29a2b927f5c440eeaddb1c11e975acca58097f1d98fbc39586dc2d`,
+  scout producer
+  4,732/`7c4d0c49f02bc1aec6e94c2a78ede5458e20bc52a04781eed6f94732f9d0b4ac`,
+  and tests
+  5,262/`65c60b70ad0abadfc3c3b1f7b04a67e8e05c9e3cf6c4e3e6f3d3a676bfb8c75b`.
