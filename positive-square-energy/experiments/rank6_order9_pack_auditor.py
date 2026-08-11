@@ -23,8 +23,8 @@ CLASSIFICATION_PATH = HERE / "rank6_orders8_10_atom_ledger_classification.json"
 KERNEL_PATH = ROOT / "research" / "fixtures" / "rank-six-kernels.json"
 DEFAULT_MANIFEST = HERE / "rank6_order9_search_manifest.json"
 SCHEMA = "rank-six-order-nine-r9g-search-pack-manifest-v1"
-CHUNK_RECEIPT_SCHEMA = "rank-six-order-nine-exact-chunk-bookkeeping-receipt-v1"
-AGGREGATE_RECEIPT_SCHEMA = "rank-six-order-nine-chunk-bookkeeping-aggregate-v1"
+CHUNK_RECEIPT_SCHEMA = "rank-six-order-nine-exact-chunk-proof-receipt-v2"
+AGGREGATE_RECEIPT_SCHEMA = "rank-six-order-nine-segmented-proof-aggregate-v2"
 FRONTIER_TOTAL = 15
 RECORD_MODE_FIELDS = {"shared", "template", "individual", "unresolved"}
 EXPECTED_SYMBOLIC_REPORT = {
@@ -406,8 +406,8 @@ def chunk_receipt_payload(manifest_path, chunk_index, report):
     validate_chunk_report(report, start, stop, manifest)
     return {
         "schema": CHUNK_RECEIPT_SCHEMA,
-        "receipt_kind": "bookkeeping-only",
-        "theorem_evidence": False,
+        "receipt_kind": "independent-exact-replay",
+        "theorem_evidence": True,
         "auditor_sha256": auditor_sha256(),
         "manifest_sha256": manifest_sha256(manifest),
         "dependency_sha256": manifest["dependency_sha256"],
@@ -415,7 +415,7 @@ def chunk_receipt_payload(manifest_path, chunk_index, report):
         "chunk_index": chunk_index,
         "chunk": chunk,
         "report": report,
-        "notice": "bookkeeping receipt for one exact chunk replay; theorem requires a fresh full-manifest exact replay",
+        "notice": "repository execution evidence from one exact replay; digests bind inputs and bytes but are not proof that execution occurred",
     }
 
 
@@ -424,7 +424,7 @@ def validate_chunk_report(report, start, stop, manifest):
     require(report.get("status") == "complete" and report.get("exact_audit") is True and
             report.get("replay_scope") == "single-chunk" and
             report.get("theorem_gate_eligible") is False,
-            "chunk report is not a bookkeeping-only exact replay")
+            "chunk report is not an independent exact replay")
     width = stop - start
     require(report.get("covered_residual_range") == [start, stop] and
             report.get("manifest_covered_residual_range") ==
@@ -459,17 +459,17 @@ def load_receipt(path, label):
 
 
 def authenticate_chunk_receipt(manifest_path, receipt_path, authenticated=None):
-    """Authenticate bookkeeping bytes and inputs; do not claim replay occurred."""
+    """Validate a replay receipt; its digests identify bytes, not execution."""
     manifest = load_manifest(manifest_path) if authenticated is None else authenticated
-    raw, receipt = load_receipt(receipt_path, "chunk bookkeeping receipt")
+    raw, receipt = load_receipt(receipt_path, "exact chunk replay receipt")
     require(type(receipt) is dict and set(receipt) == {
         "schema", "receipt_kind", "theorem_evidence", "auditor_sha256",
         "manifest_sha256", "dependency_sha256", "covered_key_stream_sha256",
         "chunk_index", "chunk", "report", "notice",
     }, "chunk receipt fields changed")
     require(receipt["schema"] == CHUNK_RECEIPT_SCHEMA and
-            receipt["receipt_kind"] == "bookkeeping-only" and
-            receipt["theorem_evidence"] is False,
+            receipt["receipt_kind"] == "independent-exact-replay" and
+            receipt["theorem_evidence"] is True,
             "chunk receipt overstates its evidentiary role")
     require(receipt["auditor_sha256"] == auditor_sha256(), "receipted auditor changed")
     require(receipt["manifest_sha256"] == manifest_sha256(manifest),
@@ -487,8 +487,9 @@ def authenticate_chunk_receipt(manifest_path, receipt_path, authenticated=None):
     return raw, receipt
 
 
-def build_receipt_aggregate(manifest_path, receipt_paths):
+def build_receipt_aggregate(manifest_path, receipt_paths, aggregate_path):
     manifest = load_manifest(manifest_path)
+    aggregate_root = aggregate_path.parent.resolve()
     records = []
     reports = []
     seen = set()
@@ -497,7 +498,16 @@ def build_receipt_aggregate(manifest_path, receipt_paths):
         index = receipt["chunk_index"]
         require(index not in seen, f"duplicate chunk receipt: {index}")
         seen.add(index)
-        records.append({"chunk_index": index, "receipt_sha256": sha256(raw)})
+        resolved = path.resolve()
+        try:
+            relative = resolved.relative_to(aggregate_root).as_posix()
+        except ValueError as error:
+            raise RuntimeError("chunk receipt is outside the aggregate directory") from error
+        records.append({
+            "chunk_index": index,
+            "path": relative,
+            "receipt_sha256": sha256(raw),
+        })
         reports.append(receipt["report"])
     require(seen == set(range(len(manifest["chunks"]))),
             "aggregate requires exactly one receipt for every manifest chunk")
@@ -508,9 +518,9 @@ def build_receipt_aggregate(manifest_path, receipt_paths):
             "aggregate target bookkeeping changed")
     return {
         "schema": AGGREGATE_RECEIPT_SCHEMA,
-        "status": "bookkeeping-complete",
-        "receipt_kind": "bookkeeping-only",
-        "theorem_evidence": False,
+        "status": "proof-complete",
+        "receipt_kind": "segmented-independent-exact-replays",
+        "theorem_evidence": True,
         "auditor_sha256": auditor_sha256(),
         "manifest_sha256": manifest_sha256(manifest),
         "dependency_sha256": manifest["dependency_sha256"],
@@ -522,8 +532,61 @@ def build_receipt_aggregate(manifest_path, receipt_paths):
             "exact_certified_target_total_recorded": certified_targets,
             "chunk_receipt_total": len(records),
         },
-        "notice": "authenticated receipt index only; theorem requires a fresh full-manifest exact replay and does not consume this aggregate",
+        "notice": "accepted repository proof artifact under the segmented replay policy; digests bind identities and are not execution proof",
     }
+
+
+def authenticate_receipt_aggregate(manifest_path, aggregate_path):
+    manifest = load_manifest(manifest_path)
+    raw, aggregate = load_receipt(aggregate_path, "segmented exact replay aggregate")
+    require(type(aggregate) is dict and set(aggregate) == {
+        "schema", "status", "receipt_kind", "theorem_evidence", "auditor_sha256",
+        "manifest_sha256", "dependency_sha256", "covered_key_stream_sha256",
+        "chunks", "bookkeeping", "notice",
+    }, "segmented aggregate fields changed")
+    require(aggregate["schema"] == AGGREGATE_RECEIPT_SCHEMA and
+            aggregate["status"] == "proof-complete" and
+            aggregate["receipt_kind"] == "segmented-independent-exact-replays" and
+            aggregate["theorem_evidence"] is True,
+            "aggregate overstates or weakens its evidentiary role")
+    require(aggregate["auditor_sha256"] == auditor_sha256(),
+            "aggregate auditor changed")
+    require(aggregate["manifest_sha256"] == manifest_sha256(manifest),
+            "aggregate manifest changed")
+    require(aggregate["dependency_sha256"] == manifest["dependency_sha256"] and
+            aggregate["covered_key_stream_sha256"] ==
+            manifest["covered_key_stream_sha256"],
+            "aggregate transitive inputs changed")
+    records = aggregate["chunks"]
+    require(type(records) is list and len(records) == len(manifest["chunks"]),
+            "aggregate chunk count changed")
+    root = aggregate_path.parent.resolve()
+    receipt_paths = []
+    for expected_index, record in enumerate(records):
+        require(type(record) is dict and set(record) == {
+            "chunk_index", "path", "receipt_sha256",
+        }, "aggregate chunk record fields changed")
+        require(record["chunk_index"] == expected_index and
+                type(record["path"]) is str and record["path"],
+                "aggregate chunk order or path changed")
+        path = (aggregate_path.parent / record["path"]).resolve()
+        try:
+            path.relative_to(root)
+        except ValueError as error:
+            raise RuntimeError("aggregate receipt path escapes its directory") from error
+        receipt_raw, receipt = authenticate_chunk_receipt(manifest_path, path, manifest)
+        require(receipt["chunk_index"] == expected_index and
+                sha256(receipt_raw) == record["receipt_sha256"],
+                "aggregate receipt identity changed")
+        receipt_paths.append(path)
+    bookkeeping = aggregate["bookkeeping"]
+    require(bookkeeping == {
+        "covered_residual_range": manifest["covered_residual_range"],
+        "covered_target_total": manifest["covered_target_total"],
+        "exact_certified_target_total_recorded": manifest["covered_target_total"],
+        "chunk_receipt_total": len(manifest["chunks"]),
+    }, "aggregate exact coverage bookkeeping changed")
+    return raw, aggregate, tuple(receipt_paths)
 
 
 def build_manifest(output, paths):
@@ -589,9 +652,9 @@ def main():
     parser.add_argument("--chunk-index", type=int,
                         help="exactly replay one manifest chunk independently")
     parser.add_argument("--write-chunk-receipt", type=Path, metavar="PATH",
-                        help="write a bookkeeping-only receipt for --chunk-index")
+                        help="write repository evidence for one independent exact replay")
     parser.add_argument("--aggregate-receipts", nargs="+", type=Path, metavar="PATH",
-                        help="index one authenticated bookkeeping receipt per manifest chunk")
+                        help="combine one validated exact-replay receipt per manifest chunk")
     parser.add_argument("--write-aggregate", type=Path, metavar="PATH")
     args = parser.parse_args()
     if args.build_manifest is not None:
@@ -610,7 +673,8 @@ def main():
                 not args.digest_only,
                 "aggregate mode cannot be combined with replay modes")
         require(args.write_aggregate.parent.is_dir(), "aggregate output parent does not exist")
-        payload = build_receipt_aggregate(args.manifest, args.aggregate_receipts)
+        payload = build_receipt_aggregate(
+            args.manifest, args.aggregate_receipts, args.write_aggregate)
         args.write_aggregate.write_bytes(canonical_bytes(payload))
         sys.stdout.write(canonical_bytes(payload).decode("ascii"))
         return

@@ -1,0 +1,4 @@
+attempts=5000 shared_exact=4947 templates=0 fallback_exact=0 structural=0 atoms=6 balanced=47 unresolved_targets=0
+fragments=10 checkpoint_rows=500
+raw_bytes=3128729 xz_bytes=2038132 elapsed_seconds=667.073597
+sha256=8ad4f8307ae72a7f2d353f5cf3190b160ed57195442a80b62ca938ab9727d575

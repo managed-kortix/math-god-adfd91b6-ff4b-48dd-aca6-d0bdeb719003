@@ -87,3 +87,30 @@ order-nine/order-ten promotion owners are reported as blockers before expensive
 child replay. Promotion requires adding those owners and freezing all four
 canonical child-output identities; it does not permit weakening this skeleton
 or substituting completion status for exact ownership.
+
+## Atomic promotion sequence after order ten completes
+
+Promotion is leaf-to-root and each numbered item is one atomic change. A failed
+normal or optimized replay stops the sequence; no parent pin is written from a
+partial, practical, receipt-only, or status-only run.
+
+1. Rebuild the canonical order-ten pack manifest from the exact contiguous
+   chunks covering `[0,125457)`. Commit the chunks and manifest together, with
+   the manifest's transitive digest map matching the current auditor inputs.
+2. Run the order-ten coverage verifier normally and with `python3 -O`. Require
+   full residual and target coverage, complete disjoint ownership,
+   `ready_for_theorem_promotion=true`, and `theorem_claimed=false` in both runs.
+3. Run the order-ten promotion owner with `--full --print-manifest` normally and
+   with `python3 -O`. Require byte-identical canonical output, then freeze the
+   current owner source SHA-256 and that output SHA-256 in the order-2--10
+   master registry in the same change.
+4. In that registry change, freeze any still-unregistered order-eight or
+   order-nine owner only from its own current successful mandatory full replay.
+   Do not copy an old digest or register a practical/segmented status artifact.
+5. Run the order-2--10 master with `--emit --print-manifest` normally and with
+   `python3 -O`. Require byte-identical canonical output and all five direct
+   dependencies (census plus four owners) before freezing its source and output
+   SHA-256 in the all-connected skeleton in one later atomic change.
+6. Leave the all-connected skeleton closed. Its newly pinned single-block owner
+   is dependency preparation only; no all-connected run, theorem wording,
+   `STATE` edit, or project-global claim belongs to this promotion sequence.

@@ -463,24 +463,233 @@ bash scripts/build-paper.sh all-hexacyclic-graphs
 Build success checks only the LaTeX artifact.  It does not turn a red finite
 gate green and does not promote Theorem~\ref{thm:conditional-main}.
 
-\section{Certificate schemas to freeze at promotion}
+\section{Computational certificate specification}
+\label{app:certificate}
 
-The eventual machine-readable appendix must specify, without relying on prose
-status fields:
+This appendix specifies the formats and the acceptance algorithm intended for
+the order-nine and order-ten finite premise.  It documents the current
+experimental streams; it does not assert that their manifests cover the full
+residual ranges, that all decoded targets are owned, or that a promotion master
+has accepted them.  In particular, an \texttt{unresolved} record is a valid
+encoding but is never an accepting proof record.
+
+\subsection{Common conventions and target keys}
+
+All integers below are mathematical integers, not machine words.  A
+\emph{uvarint} writes a nonnegative integer in base $128$, least significant
+group first, with bit $7$ set exactly when another group follows.  A signed
+integer $z$ is first mapped to $2z$ for $z\ge0$ and to $-2z-1$ for $z<0$, then
+written as a uvarint.  Multi-byte integers are therefore independent of host
+endianness.  At promotion the decoder must additionally reject a uvarint with
+a redundant final zero group; the current \texttt{R10G1} decoder enforces this
+by decode--re-encode byte equality, whereas the current \texttt{R9G1} auditor
+does not yet impose that canonicality check.  This difference is a promotion
+blocker, not a license to accept two encodings of one certificate.
+
+The frozen kernel fixture, in its listed order, regenerates the residual source
+stream.  A source index $j$ denotes row $j$ of that stream (zero based), not a
+kernel identifier stored in a pack.  The verifier reconstructs from $j$ the
+kernel, its ordered physical paths, the parity row, canonical lengths, and the
+$p+1$ frontier labels
+\[
+  C, X_0,\ldots,X_{p-1},
+  \qquad p=14\text{ for order nine},\quad p=15\text{ for order ten}.
+\]
+Thus an exact target key is the pair $(j,C)$ or $(j,X_i)$.  A pack owns a
+half-open source interval $[a,a+r)$, encoded by uvarints $a,r$.  Keys are never
+accepted from asserted counts: the master regenerates them and compares sets.
+
+Every stored stereographic parameter vector has dimension $d-1$, where
+$d\in\{9,10\}$.  One positive common denominator $D$ precedes a witness and
+each coordinate is a signed-varint numerator $n$, denoting $n/D$.  Vector and
+path counts are implicit in the regenerated source row; no untrusted dimension
+field controls allocation or verification.
+
+\subsection{The \texttt{R9G1} wire format}
+
+After XZ decompression, an order-nine pack is the following byte concatenation:
+\begin{verbatim}
+"R9G1" | fixture_sha256[32] | uvarint(start) | uvarint(count)
+       | record[0] | ... | record[count-1].
+\end{verbatim}
+The 32-byte digest is binary, not 64 hexadecimal characters.  Here $d=9$,
+$p=14$, and a target bitmap has 15 significant bits.  Record tags are
+\begin{center}
+\begin{tabular}{ccl}
+\toprule
+byte&name&body and meaning\\
+\midrule
+0&\texttt{unresolved}&empty; owns no target\\
+1&\texttt{shared}&one shared rational witness, described below\\
+2&\texttt{template}&empty; invokes the exact K971 signed-five-cycle audit\\
+3&\texttt{individual}&uvarint bitmap, then one witness per set bit\\
+\bottomrule
+\end{tabular}
+\end{center}
+A shared body is $D$, nine branch parameter vectors, then, in physical-path
+order, all canonical internal vectors and all length-plus-two internal vectors.
+For a canonical path of length $q_i$, these two lists have respectively
+$q_i-1$ and $q_i+1$ vectors.  The same branch vectors are used for all 15
+frontiers.  An individual body begins with a nonzero bitmap smaller than
+$2^{15}$; for each set bit in increasing target order it stores a fresh $D$,
+nine branch vectors, and $q_i-1$ internal vectors on each path, except that the
+selected $X_i$ path has $q_i+1$.  The template tag is legal only on the
+regenerated K971 template row.  The decoder rejects bad magic or fixture hash,
+unknown tags, zero denominators, out-of-range intervals or bitmaps, truncation,
+template/tag mismatch, and trailing raw bytes.
+
+\subsection{The \texttt{R10G1} wire format}
+
+The order-ten header is identical with magic \texttt{R10G1}; here $d=10$,
+$p=15$, and the bitmap has 16 significant bits.  Tags 0--3 have the same
+layout, with tag 3 named \texttt{fallback}.  The current version also reserves
+payload-free, source-row-dependent exact recognizers:
+\begin{center}
+\begin{tabular}{ccl}
+\toprule
+byte&name&required independent audit\\
+\midrule
+4&\texttt{structural}&the typed structural Gram sieve\\
+5&\texttt{atom}&the frozen atom-ledger classification and exact atom audit\\
+6&\texttt{balanced}&the balanced rank-one recognizer\\
+\bottomrule
+\end{tabular}
+\end{center}
+Tag 2 invokes only the regenerated K1133 signed-five-cycle row.  Empty tags do
+not mean ``trust the classification'': their recognizers rebuild the required
+combinatorics and exact Gram or structural predicate.  The \texttt{R10G1}
+decoder rejects the malformed cases listed for \texttt{R9G1} and requires the
+raw input to equal its unique re-encoding.  XZ is a transport envelope only;
+acceptance is defined on the decompressed bytes and the exact records they
+denote.
+
+\subsection{Hardware-independent exact arithmetic}
+
+For a parameter row $t=(t_1,\ldots,t_{d-1})\in\mathbb Q^{d-1}$ the verifier
+constructs, without floating point,
+\[
+ u(t)=\frac{(1-\langle t,t\rangle,2t_1,\ldots,2t_{d-1})}
+             {1+\langle t,t\rangle}.
+\]
+Python arbitrary-precision integers and normalized \texttt{Fraction} values
+implement the field operations.  For consecutive unit vectors $x,y$ in the
+alternating-sign path chain it requires $1+\langle x,y\rangle>0$ and adds
+\[
+             \frac{1-\langle x,y\rangle}{1+\langle x,y\rangle}.
+\]
+The final comparison is the exact cross-multiplied rational inequality
+$\sum\mathrm{cost}\le5$.  Endpoint vectors are reconstructed from the common
+branch list, with the terminal branch negated exactly when prescribed by path
+parity.  Consequently unit norm, shared endpoints, path widths, denominator
+signs, and the budget are rational identities or integer comparisons.  Search
+seeds, floating-point optimizer scores, wall-clock times, CPU vector
+instructions, byte order, and native integer overflow cannot affect
+acceptance.  A conforming alternative verifier may use any big-integer
+rational library, but must produce the same accepted key set from the same raw
+bytes.  XZ decompression, SHA-256, and Python itself remain implementation
+dependencies; this arithmetic claim is not a claim of independent software
+verification.
+
+\subsection{Fail-closed verifier algorithm}
+
+For each order, the promotion verifier shall execute the following algorithm.
+Every failure aborts with nonzero status; no \texttt{assert}, status string, or
+stored total is an acceptance condition.
 \begin{enumerate}
-\item canonical ASCII encodings and exact kernel/parity/frontier key schemas;
-\item rational Gram-chain records, positive denominator checks, exact unit and
-shared-endpoint identities, and the integer predicate ``excess at most five'';
-\item symbolic records with exact positive-semidefinite and path-cost checks;
-\item structural records with typed induced territories, unique ownership, and
-no relabelling as DNN witnesses;
-\item complete regenerated-key equality, duplicate/extra/missing-key rejection,
-and disjoint final ownership;
-\item source, fixture, chunk, canonical-output, and transitive manifest hashes,
-with a statement that hashes identify bytes rather than prove predicates.
+\item Hash and parse the pinned kernel fixture, verifier sources, recognizer
+sources, census output, and canonical manifest; reject any unpinned byte
+sequence or noncanonical manifest JSON.
+\item Regenerate the complete ordered residual source stream and, from it, the
+complete expected target-key set.  Compare its count and ordered SHA-256 with
+the pinned values.
+\item Read manifest chunks in increasing half-open ranges.  Require paths to
+remain below the manifest directory, and ranges to be nonempty, contiguous,
+nonoverlapping, and exactly $[0,N)$.  Reject repeated paths.
+\item For each chunk, check compressed byte count and SHA-256, decompress one XZ
+stream, check raw byte count and SHA-256, parse the matching embedded interval,
+and reject malformed or noncanonical records and trailing bytes.
+\item For every rational record, reconstruct every relevant frontier chain and
+perform the exact arithmetic audit above.  For every payload-free record, run
+its named exact recognizer.  Map only successfully checked targets to their
+typed owner; map no target from an unresolved bit or tag.
+\item Regenerate the separately pinned symbolic-owner keys.  Check that each is
+proved by its typed recognizer, that rational and final symbolic ownership are
+disjoint after the prescribed precedence rule, and that their union equals the
+expected target set exactly.  Explicitly reject missing, duplicate, and extra
+keys.
+\item Emit canonical ASCII JSON containing scopes, dependency digests, mode and
+owner counts, ordered key digests, exact partition equality, and the conditional
+finite conclusion.  Replay under \texttt{python3} and \texttt{python3 -O};
+require zero exits and byte-identical reports.  The orders-$2$--$10$ master must
+then validate, rather than copy, these two order conclusions.
 \end{enumerate}
-This section is a schema checklist only.  It asserts no present order-nine or
-order-ten certificate completion.
+Steps 1--4 alone are a digest audit, not certificate verification.  Likewise,
+successful verification of one chunk proves only the records in that chunk;
+aggregating receipts does not replace a fresh full-manifest exact replay.
+
+\subsection{Segmented reproducibility}
+
+Large packs may be replayed independently by manifest chunk.  From the
+repository root, first perform the inexpensive range and byte audit:
+\begin{verbatim}
+python3 positive-square-energy/experiments/rank6_order9_pack_auditor.py \
+  --manifest positive-square-energy/experiments/rank6_order9_search_manifest.json \
+  --digest-only
+python3 positive-square-energy/experiments/rank6_order10_pack_auditor.py \
+  --manifest positive-square-energy/experiments/rank6_order10_search_manifest.json \
+  --digest-only
+\end{verbatim}
+For each manifest chunk index $i=0,1,\ldots,m-1$, use a new output path:
+\begin{verbatim}
+python3 positive-square-energy/experiments/rank6_order9_pack_auditor.py \
+  --manifest positive-square-energy/experiments/rank6_order9_search_manifest.json \
+  --chunk-index i --write-chunk-receipt /tmp/r9-replay/chunk-i.json
+python3 positive-square-energy/experiments/rank6_order10_pack_auditor.py \
+  --manifest positive-square-energy/experiments/rank6_order10_search_manifest.json \
+  --chunk-index i --write-chunk-transcript /tmp/r10-replay/chunk-i.json
+\end{verbatim}
+The literal \texttt{i} is replaced by the decimal index.  The order-ten command
+also launches and compares optimized replay; order nine must be run explicitly
+under both \texttt{python3} and \texttt{python3 -O} until its auditor provides
+the same built-in comparison.  Each segment authenticates the full manifest
+and dependency map before auditing its own raw records, so segment boundaries
+cannot alter certificate semantics.  A clean full replay requires all chunks,
+then the full auditor with no \texttt{--chunk-index}; if coverage is incomplete
+or any target remains unowned, the expected result is nonzero status.  Receipts
+and transcripts are resumability aids only and are not theorem owners.
+
+\subsection{Hash and acceptance placeholders}
+
+The frozen kernel-fixture SHA-256 currently embedded in both streams is
+\texttt{5a862a0e9ed5dfe91ff6f8491936c8e775eb39b71619df6b8c2a9be2c4643476}.
+All other promotion identities below deliberately remain placeholders; they
+must be filled from a clean committed replay and checked by a master, not copied
+from an experimental run.
+\begin{center}
+\begin{tabular}{p{0.34\linewidth}p{0.54\linewidth}}
+\toprule
+identity&required value before promotion\\
+\midrule
+\texttt{R9G1} generator/auditor sources&\texttt{TODO-R9-SOURCE-SHA256-MAP}\\
+\texttt{R9G1} manifest and exact report&\texttt{TODO-R9-MANIFEST-SHA256},
+\texttt{TODO-R9-REPORT-SHA256}\\
+\texttt{R10G1} generator/auditor sources&\texttt{TODO-R10-SOURCE-SHA256-MAP}\\
+\texttt{R10G1} manifest and exact report&\texttt{TODO-R10-MANIFEST-SHA256},
+\texttt{TODO-R10-REPORT-SHA256}\\
+symbolic fixtures and recognizers&\texttt{TODO-SYMBOLIC-SOURCE-AND-FIXTURE-SHA256-MAP}\\
+orders-$2$--$10$ master and transitive root&\texttt{TODO-RANK6-MASTER-SOURCE-SHA256},
+\texttt{TODO-RANK6-TRANSITIVE-ROOT}\\
+all-connected synthesis master&\texttt{TODO-ALL-CONNECTED-SOURCE-SHA256},
+\texttt{TODO-ALL-CONNECTED-REPORT-SHA256}\\
+\bottomrule
+\end{tabular}
+\end{center}
+Each source map must name every relative path and hash its exact bytes; a single
+digest with no leaf listing is insufficient.  Chunk compressed/raw hashes and
+ranges live in the canonical manifests and must be reproduced there rather
+than typeset as a mutable table.  No placeholder, hash, receipt, or present
+partial manifest discharges Premise 2 of
+Theorem~\ref{thm:conditional-main}.
 
 \section{Trusted base and limitations}
 

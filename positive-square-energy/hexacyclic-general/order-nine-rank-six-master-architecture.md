@@ -51,14 +51,20 @@ the full range and all 2,794,425 target keys. Thus replacing today's partial
 manifest with a correctly built final manifest is the only data-plane action
 needed to turn the gate green.
 
-The pack auditor also supports segmented exact replay with `--chunk-index I`
-and `--write-chunk-receipt PATH`. These canonical receipts explicitly identify
-themselves as bookkeeping-only and set `theorem_evidence=false`. An aggregate
-built by `--aggregate-receipts ... --write-aggregate PATH` authenticates one
-receipt per manifest chunk and checks additive coverage and ownership totals,
-but remains only an execution index. Neither a chunk receipt nor its aggregate
-is accepted by the completion verifier: theorem promotion still requires a
-fresh exact replay of the full manifest in one verifier invocation.
+The pack auditor also supports independent segmented exact replay with
+`--chunk-index I` and `--write-chunk-receipt PATH`. Each canonical receipt is
+written only after exact verification of every target in that chunk. An
+aggregate built by `--aggregate-receipts ... --write-aggregate PATH`
+authenticates exactly one receipt per manifest chunk and checks exact additive
+coverage and ownership totals. The complete aggregate and its referenced
+receipts are acceptable repository theorem evidence under
+`research/order-nine-segmented-promotion-semantics.md`; theorem promotion need
+not rerun all chunks in one long-lived process.
+
+SHA-256 commitments bind artifact identities and detect changes. They are not
+evidence that replay execution occurred. Execution evidence is the validated
+receipt emitted after exact chunk verification, and promotion requires the
+complete range-partitioned set rather than hashes alone.
 
 ## Exact symbolic ownership
 

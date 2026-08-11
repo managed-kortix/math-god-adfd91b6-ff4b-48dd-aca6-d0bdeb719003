@@ -19,6 +19,7 @@ EXPERIMENTS = ROOT / "positive-square-energy" / "experiments"
 COVERAGE_GATE = HERE / "rank-six-order-nine-coverage-verifier.py"
 PACK_AUDITOR = EXPERIMENTS / "rank6_order9_pack_auditor.py"
 PACK_MANIFEST = EXPERIMENTS / "rank6_order9_search_manifest.json"
+SEGMENTED_PROOF = EXPERIMENTS / "rank6_order9_chunk_replays" / "proof-aggregate.json"
 KERNEL_FIXTURE = HERE / "fixtures" / "rank-six-kernels.json"
 ANALYTIC_LIFT = HERE / "rank-six-conditional-analytic-lift-verifier.py"
 ANALYTIC_LIFT_MANIFEST = HERE / "rank-six-conditional-analytic-lift-manifest.json"
@@ -29,7 +30,7 @@ DEPENDENCIES = {
     "coverage_gate": (COVERAGE_GATE,
         "b66526e79d9b716f8c98b19dce8fc8557a0f34534f1890db595c514fa3438ff1"),
     "pack_auditor": (PACK_AUDITOR,
-        "24d57b3b72b9f45b172981ad7a7e02e46749800dfb3478dc7d92751c9d8b8ce3"),
+        "b241cc04a4413702e8ca9be779dbb076f568fec300f36bd06b76682bfd7c623f"),
     "pack_manifest": (PACK_MANIFEST,
         "8aa9d797d9ed786ad438d6fd685e0ec576247b45c17a14749b76c45eebbe9168"),
     "kernel_fixture": (KERNEL_FIXTURE,
@@ -129,7 +130,8 @@ def audit_dependencies():
     for name, (path, expected) in DEPENDENCIES.items():
         require(path.is_file(), f"missing dependency: {name}")
         actual = hashlib.sha256(path.read_bytes()).hexdigest()
-        require(actual == expected, f"dependency digest changed: {name}")
+        require(expected is not None and actual == expected,
+                f"dependency digest changed or is not frozen: {name}")
         digests[name] = actual
     return digests
 
@@ -245,6 +247,34 @@ def exact_replay(chunk_index=None):
     return payload, validate_coverage(payload, ready)
 
 
+def segmented_exact_replay():
+    auditor = load_module("rank6_order9_segmented_for_promotion", PACK_AUDITOR)
+    _, aggregate, receipt_paths = auditor.authenticate_receipt_aggregate(
+        PACK_MANIFEST, SEGMENTED_PROOF)
+    reports = []
+    for path in receipt_paths:
+        _, receipt = auditor.authenticate_chunk_receipt(PACK_MANIFEST, path)
+        reports.append(receipt["report"])
+    pack = auditor.load_manifest(PACK_MANIFEST)
+    require([report["covered_residual_range"] for report in reports] ==
+            [chunk["residual_range"] for chunk in pack["chunks"]],
+            "segmented receipts do not follow the exact manifest partition")
+    rational = sum(report["disjoint_rational_owner_target_total"] for report in reports)
+    symbolic = sum(report["disjoint_symbolic_owner_target_total"] for report in reports)
+    certified = sum(report["exact_certified_target_total"] for report in reports)
+    require(certified == rational + symbolic == EXPECTED_CENSUS["frontier_target_total"] and
+            all(report["uncertified_target_total"] == 0 for report in reports),
+            "segmented exact ownership is incomplete")
+    require(aggregate["bookkeeping"]["covered_residual_range"] == [0, 186295],
+            "segmented aggregate does not cover the exact residual universe")
+    return {
+        "rational_targets": rational,
+        "symbolic_only_targets": symbolic,
+        "certified_targets": certified,
+        "complete_disjoint_ownership": True,
+    }
+
+
 def build_manifest(dependencies, pack, ownership):
     return {
         "schema": "rank-six-order-nine-kernel-theorem-master-v1",
@@ -269,7 +299,8 @@ def build_manifest(dependencies, pack, ownership):
             "covered_key_stream_sha256": pack["covered_key_stream_sha256"],
             "residual_range": [0, 186295],
             "segments": len(pack["chunks"]),
-            "replay": "fresh streaming exact replay, one XZ segment at a time",
+            "replay": "one committed independent exact-replay receipt per XZ segment",
+            "proof_artifact": str(SEGMENTED_PROOF.relative_to(ROOT)),
         },
         "census": EXPECTED_CENSUS,
         "frontier": {
@@ -278,7 +309,7 @@ def build_manifest(dependencies, pack, ownership):
             "symbolic_targets": ownership["symbolic_only_targets"],
             "symbolic_dictionary_targets": 388,
             "complete_disjoint_ownership": True,
-            "verification": "exact replay of every final-manifest segment and target",
+            "verification": "validated repository receipts from independent exact replay of every final-manifest segment and target",
         },
         "length_scope": "arbitrary positive simple-subdivision lengths via canonical-plus-coordinate domination and fixed-parity monotonicity",
         "length_implication": "for canonical c and any same-parity l>=c, use c if l=c, otherwise choose i with c+2e_i<=l and lengthen by two coordinatewise",
@@ -328,7 +359,7 @@ def audit():
     dependencies = audit_dependencies()
     audit_analytic_lift()
     pack = audit_manifest(dependencies)
-    _, ownership = exact_replay()
+    ownership = segmented_exact_replay()
     mutations = hostile_self_checks()
     require(mutations == len(DEPENDENCIES) + 3, "hostile mutation count changed")
     manifest = build_manifest(dependencies, pack, ownership)
@@ -357,7 +388,7 @@ def practical_audit():
 
 def report(digest, mutations):
     return "\n".join((
-        "rank-six order-nine kernel theorem: streaming full exact audit passed",
+        "rank-six order-nine kernel theorem: segmented independent exact replays passed",
         "census: kernels=162 physical=1726000 orbits=1108126 coarse=921831 residual=186295",
         "frontier: total=2794425 complete-disjoint-ownership=true",
         "analytic-lift: pinned conditional owner, manifest, proof note, and canonical output passed",
@@ -367,14 +398,15 @@ def report(digest, mutations):
         "nonclaim: no multiblock, all-connected, STATE, or global conclusion",
         f"canonical_child_manifest_sha256: {digest}",
         f"rejected_hostile_mutations: {mutations}",
-        "verification_layer: full-exact-segmented-replay",
+        "verification_layer: committed-segmented-independent-exact-replays",
+        "hash_boundary: digests bind artifact identity; receipt reports, not hashes alone, record execution",
     )) + "\n"
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--full", action="store_true",
-                        help="required: replay all 2,794,425 targets segment by segment")
+                        help="consume the complete committed segmented exact-replay proof artifact")
     parser.add_argument("--print-manifest", action="store_true")
     parser.add_argument("--practical", action="store_true",
                         help="pin the full universe and exactly replay the first segment")
