@@ -708,3 +708,42 @@ redundancy, but they cannot affect the literal identity
 check. In particular, the two-coordinate children are an overlapping cover,
 not disjoint orbit cells: a model satisfying both coordinate ALOs is retained
 by both children and is intentionally counted twice for coverage purposes.
+
+The committed `b7cdeff6816fd29eedc9633aea7d7adb949d55a5` singleton-parent
+campaign refines the residual coordinate cover to one CNF per exact parent
+membership. Its frozen five-second/two-job scout has the exact status totals
+SAT/UNSAT/TIMEOUT `0/127/1255` and status-sequence SHA-256
+`1c820b0de4e79a0ac355e9603566eca4a77eedf84f15989a124bdccbb30fbf82`.
+Exactly those 127 ordered scout-UNSAT memberships now have textual LRATs from
+pinned CaDiCaL 1.7.3, each accepted by pinned `lrat-check` and compressed with
+`xz -3`. The 127 artifacts total 61,646,844 bytes, strictly below the exclusive
+250,000,000-byte campaign limit; no TIMEOUT membership is certified.
+
+The canonical certificate ledger binds each retained artifact by exact path,
+byte count, and SHA-256. Its strict mutual self-pin has canonical ledger SHA-256
+recorded in the verifier and canonical verifier SHA-256 recorded in the ledger;
+the ordinary file hashes are reported by the final replay. The ledger binds the
+base commit, complete residual and singleton
+manifest/hash/scout chain, producer/checker/tests/scout/certificate sources,
+ancestor certificate ledgers and verifier identities, exact ordered scout status
+sequence, pinned solver/checker identities, and all 127 artifacts. The verifier
+computes its local Python import closure and requires the frozen 22-source set;
+every source executed from singleton certificate verification through CNF
+generation and structural checking is pinned directly, including
+`m6_parent_cnf.py`, `check_m6_parent_cnf.py`, and all intervening coordinate,
+witness, orbit, state, clean-sink, residual-group, and `snc_cnf.py` modules.
+Ancestor certificate verifiers are identity-bound but are not recursively
+executed: this package's certificate claim is exactly the 127 singleton LRATs;
+ancestor ledgers and artifacts are authenticated inputs to CNF reconstruction,
+not fresh ancestor-proof replay claims.
+
+Fresh replay regenerates and structurally checks every scoped CNF,
+authenticates and decompresses every artifact, matches every raw LRAT identity,
+and requires `c VERIFIED` from the pinned checker:
+
+```sh
+python3 test_m6_b7_l6_hard_witness_positive_gain_coordinate_residual_singleton_parent.py
+python3 test_m6_b7_l6_hard_witness_positive_gain_coordinate_residual_singleton_parent_certificates.py
+python3 verify_m6_b7_l6_hard_witness_positive_gain_coordinate_residual_singleton_parent_certificates.py \
+  --checker /path/to/pinned/lrat-check
+```

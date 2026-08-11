@@ -1847,3 +1847,35 @@ No audits yet.
   4,732/`7c4d0c49f02bc1aec6e94c2a78ede5458e20bc52a04781eed6f94732f9d0b4ac`,
   and tests
   5,262/`65c60b70ad0abadfc3c3b1f7b04a67e8e05c9e3cf6c4e3e6f3d3a676bfb8c75b`.
+
+### B7 singleton-parent scout-UNSAT certificates
+
+- On committed base `b7cdeff6816fd29eedc9633aea7d7adb949d55a5`, certified
+  exactly the 127 singleton memberships marked UNSAT by the frozen five-second,
+  two-job scout. The other 1,255 memberships remain TIMEOUT; there were zero
+  SAT statuses, and no membership outside the exact ordered scout-UNSAT set is
+  claimed.
+- Pinned CaDiCaL 1.7.3 at source commit
+  `38e073b389a877b0a0d3c91136d2443ab95fdeba` produced textual LRAT with
+  `--lrat --no-binary`; pinned `lrat-check` at
+  `2e3b2dc0ecf938addbd779d42877b6ed69d9a985` accepted all 127 proofs with
+  `c VERIFIED`.
+- The generated corpus totals 1,320,445,141 CNF bytes, 909,397,178 raw LRAT
+  bytes, and 61,646,844 `xz -3` bytes. The retained compressed total is strictly
+  below the exclusive 250,000,000-byte limit.
+- The canonical ledger and verifier mutually pin one another; their canonical
+  and ordinary file hashes are reported by the final replay. The verifier
+  computes and freezes its 22-file local Python runtime import closure and the
+  ledger directly binds every source used from singleton verification through
+  CNF production and structural checking. This includes `m6_parent_cnf.py`,
+  `check_m6_parent_cnf.py`, and all coordinate, witness, orbit, state,
+  clean-sink, residual-group, and `snc_cnf.py` dependencies.
+- The ledger also identity-binds ancestor certificate ledgers, verifiers, and
+  artifacts, but does not recursively execute ancestor verifiers. Its fresh
+  proof claim is narrowly and exactly the 127 singleton LRATs; ancestor
+  certificates are authenticated reconstruction inputs. Fresh replay
+  regenerates and structurally checks all scoped CNFs, authenticates and
+  decompresses every proof, matches all raw hashes, and reruns `lrat-check`.
+  Hostile tests cover canonical pins, dependency identity, artifact path/set,
+  row identity, exact scout status/order, and the exclusive compression limit.
+  No commit was made.
