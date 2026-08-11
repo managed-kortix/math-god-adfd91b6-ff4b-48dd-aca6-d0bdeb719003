@@ -43,6 +43,13 @@ class CanonicalGramTest(unittest.TestCase):
         self.assertEqual(len(canonical), 45)
         self.assertEqual(set(canonical), {(1, 2)})
 
+    def test_balanced_rank_one_recognizer(self):
+        census = type("Census", (), {"PAIRS": ((0, 1), (1, 2), (0, 2))})
+        source = (0, None, (0, 1, 2), (1, 1, 1), (1, 0, 1), 1, 0, False)
+        self.assertTrue(MODULE.load_stream().balanced_rank_one_certified(census, source))
+        source = (0, None, (0, 1, 2), (1, 1, 1), (1, 0, 0), 1, 0, False)
+        self.assertFalse(MODULE.load_stream().balanced_rank_one_certified(census, source))
+
 
 if __name__ == "__main__":
     unittest.main()

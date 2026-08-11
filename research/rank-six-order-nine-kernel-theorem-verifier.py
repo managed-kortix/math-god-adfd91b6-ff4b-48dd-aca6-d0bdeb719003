@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import subprocess
 import sys
 from copy import deepcopy
 from pathlib import Path
@@ -19,6 +20,10 @@ COVERAGE_GATE = HERE / "rank-six-order-nine-coverage-verifier.py"
 PACK_AUDITOR = EXPERIMENTS / "rank6_order9_pack_auditor.py"
 PACK_MANIFEST = EXPERIMENTS / "rank6_order9_search_manifest.json"
 KERNEL_FIXTURE = HERE / "fixtures" / "rank-six-kernels.json"
+ANALYTIC_LIFT = HERE / "rank-six-conditional-analytic-lift-verifier.py"
+ANALYTIC_LIFT_MANIFEST = HERE / "rank-six-conditional-analytic-lift-manifest.json"
+ANALYTIC_LIFT_PROOF_NOTE = (ROOT / "positive-square-energy" / "hexacyclic-general" /
+                            "conditional-analytic-lift-proof-note.md")
 
 DEPENDENCIES = {
     "coverage_gate": (COVERAGE_GATE,
@@ -43,7 +48,15 @@ DEPENDENCIES = {
     "atom_classification": (
         EXPERIMENTS / "rank6_orders8_10_atom_ledger_classification.json",
         "cc20f4c684ef269297cd7c1d2bc888508fdc31f16cc26e8cb1c2e86792052059"),
+    "analytic_lift_owner": (ANALYTIC_LIFT,
+        "97c49fa7d1c9c162f4592e0954d63271eb98416fbab59605a9e58a0ada1043df"),
+    "analytic_lift_manifest": (ANALYTIC_LIFT_MANIFEST,
+        "b6ab90a895fcd7d6ebcf3b32b69676847c35dd7d070e9b8c6c4c13150bda94f6"),
+    "analytic_lift_proof_note": (ANALYTIC_LIFT_PROOF_NOTE,
+        "2ecc321b60ec42ddf1b8980dffc019eaeaa55738dea5ee014596cf3e814692b4"),
 }
+ANALYTIC_LIFT_OUTPUT_SHA256 = \
+    "a86a7dc77ba8d0a6131acb6d457d4a10129615d156cae3de01e5997b61e40d8a"
 MANIFEST_TRANSITIVE_NAMES = {
     "atom_classification", "atom_classifier", "kernel_source", "rational_engine",
     "sparse_base", "symbolic_recognizer", "witness_pipeline",
@@ -119,6 +132,38 @@ def audit_dependencies():
         require(actual == expected, f"dependency digest changed: {name}")
         digests[name] = actual
     return digests
+
+
+def audit_analytic_lift():
+    optimize = ("-O",) if sys.flags.optimize else ()
+    completed = subprocess.run(
+        (sys.executable, *optimize, str(ANALYTIC_LIFT), "--emit", "--print-manifest"),
+        check=False, capture_output=True, text=True,
+    )
+    require(completed.returncode == 0, "pinned conditional analytic lift failed")
+    require(completed.stderr == "", "pinned conditional analytic lift wrote stderr")
+    raw = completed.stdout.encode("ascii")
+    require(hashlib.sha256(raw).hexdigest() == ANALYTIC_LIFT_OUTPUT_SHA256,
+            "conditional analytic lift canonical output changed")
+    first_line, separator, report = completed.stdout.partition("\n")
+    require(separator == "\n" and report, "conditional analytic lift report is missing")
+    try:
+        manifest = json.loads(first_line)
+    except json.JSONDecodeError as error:
+        raise RuntimeError("conditional analytic lift manifest is malformed") from error
+    require(canonical_bytes(manifest) == (first_line + "\n").encode("ascii"),
+            "conditional analytic lift manifest output is not canonical")
+    require(manifest.get("schema") == "rank-six-conditional-analytic-lift-v1" and
+            manifest.get("finite_premise", {}).get("result") ==
+            "kappa(B)<=|E(B)|+5" and
+            manifest.get("conclusion") == "s+(G)>=|V(G)|",
+            "conditional analytic lift contract changed")
+    require(manifest.get("proof_note") == {
+        "path": "positive-square-energy/hexacyclic-general/conditional-analytic-lift-proof-note.md",
+        "sha256": DEPENDENCIES["analytic_lift_proof_note"][1],
+    }, "conditional analytic lift proof-note ownership changed")
+    require("global_claim=false finite_premise_discharged=false" in report,
+            "conditional analytic lift lost its nonclaim boundary")
 
 
 def audit_manifest(dependencies):
@@ -212,6 +257,13 @@ def build_manifest(dependencies, pack, ownership):
         },
         "kernel_fixture_sha256": dependencies["kernel_fixture"],
         "dependencies": dependencies,
+        "analytic_lift_owner": {
+            "source_sha256": dependencies["analytic_lift_owner"],
+            "manifest_sha256": dependencies["analytic_lift_manifest"],
+            "proof_note_sha256": dependencies["analytic_lift_proof_note"],
+            "canonical_output_sha256": ANALYTIC_LIFT_OUTPUT_SHA256,
+            "premise": "kappa(B)<=|E(B)|+5",
+        },
         "final_pack": {
             "manifest_sha256": dependencies["pack_manifest"],
             "covered_key_stream_sha256": pack["covered_key_stream_sha256"],
@@ -274,10 +326,11 @@ def hostile_self_checks():
 def audit():
     validate_registry()
     dependencies = audit_dependencies()
+    audit_analytic_lift()
     pack = audit_manifest(dependencies)
     _, ownership = exact_replay()
     mutations = hostile_self_checks()
-    require(mutations == 13, "hostile mutation count changed")
+    require(mutations == len(DEPENDENCIES) + 3, "hostile mutation count changed")
     manifest = build_manifest(dependencies, pack, ownership)
     return manifest, hashlib.sha256(canonical_bytes(manifest)).hexdigest(), mutations
 
@@ -285,15 +338,17 @@ def audit():
 def practical_audit():
     validate_registry()
     dependencies = audit_dependencies()
+    audit_analytic_lift()
     pack = audit_manifest(dependencies)
     report = exact_replay(chunk_index=0)
     require(report["covered_residual_range"] == pack["chunks"][0]["residual_range"] and
             report["exact_certified_target_total"] == 150000,
             "practical segment coverage changed")
     mutations = hostile_self_checks()
-    require(mutations == 13, "hostile mutation count changed")
+    require(mutations == len(DEPENDENCIES) + 3, "hostile mutation count changed")
     return hashlib.sha256(canonical_bytes({
         "dependencies": dependencies,
+        "analytic_lift_output_sha256": ANALYTIC_LIFT_OUTPUT_SHA256,
         "manifest_sha256": dependencies["pack_manifest"],
         "segment": report["covered_residual_range"],
         "certified_targets": report["exact_certified_target_total"],
@@ -305,6 +360,7 @@ def report(digest, mutations):
         "rank-six order-nine kernel theorem: streaming full exact audit passed",
         "census: kernels=162 physical=1726000 orbits=1108126 coarse=921831 residual=186295",
         "frontier: total=2794425 complete-disjoint-ownership=true",
+        "analytic-lift: pinned conditional owner, manifest, proof note, and canonical output passed",
         "lengths: arbitrary positive simple subdivisions by canonical-plus-coordinate domination",
         "attachments: arbitrary rooted trees at branch and subdivision vertices",
         "conclusion: s+(G)>=|V(G)| for the order-nine single-positive-rank-block class",

@@ -33,6 +33,7 @@ MODE_TEMPLATE = 2
 MODE_FALLBACK = 3
 MODE_STRUCTURAL = 4
 MODE_ATOM = 5
+MODE_BALANCED = 6
 CENSUS_CACHE_SCHEMA = "rank-six-order-ten-residual-cache-v1"
 FRAGMENT_PATTERN = re.compile(r"fragment-(\d+)-(\d+)\.r10g\.xz\Z")
 ATOM_FIXTURE_PATH = HERE / "rank6_orders8_10_atom_ledger_classification.json"
@@ -177,6 +178,33 @@ def structural_targets(census, source):
 
 def structural_certified(census, source):
     return max(structural_targets(census, source)) <= BUDGET
+
+
+def balanced_rank_one_certified(census, source):
+    """Recognize a zero-cost signed rank-one Gram for every path in a row."""
+    adjacency = [[] for _ in range(ORDER)]
+    for dense, multiplicity, odd in zip(source[2], source[3], source[4]):
+        if odd not in (0, multiplicity):
+            return False
+        u, v = census.PAIRS[dense]
+        parity = bool(odd)
+        adjacency[u].append((v, parity))
+        adjacency[v].append((u, parity))
+    signs = [None] * ORDER
+    for root in range(ORDER):
+        if signs[root] is not None:
+            continue
+        signs[root] = 0
+        queue = [root]
+        for vertex in queue:
+            for neighbor, parity in adjacency[vertex]:
+                expected = signs[vertex] ^ parity
+                if signs[neighbor] is None:
+                    signs[neighbor] = expected
+                    queue.append(neighbor)
+                elif signs[neighbor] != expected:
+                    return False
+    return True
 
 
 def atom_source_indices(residuals):
@@ -426,9 +454,10 @@ def encode_pack(census, start, records):
     put_uvarint(output, len(records))
     for mode, payload in records:
         require(mode in (MODE_UNRESOLVED, MODE_SHARED, MODE_TEMPLATE, MODE_FALLBACK,
-                         MODE_STRUCTURAL, MODE_ATOM), "bad mode")
+                         MODE_STRUCTURAL, MODE_ATOM, MODE_BALANCED), "bad mode")
         output.append(mode)
-        if mode in (MODE_UNRESOLVED, MODE_TEMPLATE, MODE_STRUCTURAL, MODE_ATOM):
+        if mode in (MODE_UNRESOLVED, MODE_TEMPLATE, MODE_STRUCTURAL, MODE_ATOM,
+                    MODE_BALANCED):
             require(payload is None, "payload on empty mode")
         elif mode == MODE_SHARED:
             denominator, branches, canonical, extended = payload
@@ -476,7 +505,8 @@ def decode_pack(census, raw, residuals):
         position += 1
         source = residuals[start + local]
         lengths = tuple(path[4] for path in path_ledger(census, source))
-        if mode in (MODE_UNRESOLVED, MODE_TEMPLATE, MODE_STRUCTURAL, MODE_ATOM):
+        if mode in (MODE_UNRESOLVED, MODE_TEMPLATE, MODE_STRUCTURAL, MODE_ATOM,
+                    MODE_BALANCED):
             records.append((mode, None))
             continue
         require(mode in (MODE_SHARED, MODE_FALLBACK), "bad witness mode")
@@ -693,6 +723,9 @@ def verify_record(census, source, record):
     elif mode == MODE_ATOM:
         require(payload is None, "atom symbolic payload present")
         verify_atom(census, source)
+    elif mode == MODE_BALANCED:
+        require(payload is None and balanced_rank_one_certified(census, source),
+                "bad balanced rank-one symbolic record")
     else:
         require(mode == MODE_UNRESOLVED and payload is None and not source[-1],
                 "bad unresolved record")
@@ -700,6 +733,8 @@ def verify_record(census, source, record):
 
 def search_record(args, census, source, source_index, denominators, atom_indices=frozenset()):
     if args.symbolic_fast_lane:
+        if balanced_rank_one_certified(census, source):
+            return (MODE_BALANCED, None), None, None, 0
         if structural_certified(census, source):
             return (MODE_STRUCTURAL, None), None, None, 0
         if source_index in atom_indices:
@@ -741,7 +776,8 @@ def summarize(records):
                        for mode, payload in records if mode == MODE_FALLBACK)
     structural = sum(mode == MODE_STRUCTURAL for mode, _ in records)
     atoms = sum(mode == MODE_ATOM for mode, _ in records)
-    return shared, templates, fallback, unresolved, structural, atoms
+    balanced = sum(mode == MODE_BALANCED for mode, _ in records)
+    return shared, templates, fallback, unresolved, structural, atoms, balanced
 
 
 def search(args, census, residuals):
@@ -779,9 +815,11 @@ def search(args, census, residuals):
             print(f"checkpoint={path} rows={len(records)}", flush=True)
     raw, stored, records = merge_fragments(
         census, residuals, fragments, args.start, stop, args.output)
-    shared_count, templates, fallback, unresolved, structural, atoms = summarize(records)
+    (shared_count, templates, fallback, unresolved, structural, atoms,
+     balanced) = summarize(records)
     print(f"attempts={len(records)} shared_exact={shared_count} templates={templates} "
           f"fallback_exact={fallback} structural={structural} atoms={atoms} "
+          f"balanced={balanced} "
           f"unresolved_targets={unresolved}")
     print(f"fragments={len(fragments)} checkpoint_rows={args.checkpoint_rows}")
     print(f"raw_bytes={len(raw)} xz_bytes={len(stored)} "
@@ -806,7 +844,7 @@ def main():
     parser.add_argument("--census-cache", type=Path)
     parser.add_argument("--progress", action="store_true")
     parser.add_argument("--symbolic-fast-lane", action="store_true",
-                        help="emit exact payload-free structural and atom ownership records")
+                        help="emit exact payload-free balanced, structural, and atom records")
     args = parser.parse_args()
     require(args.start >= 0 and args.count >= 0, "bad selected range")
     require(args.count > 0 or args.verify_pack is not None,
@@ -830,12 +868,14 @@ def main():
                        for mode, payload in records if mode == MODE_FALLBACK)
         structural = sum(mode == MODE_STRUCTURAL for mode, _ in records)
         atoms = sum(mode == MODE_ATOM for mode, _ in records)
+        balanced = sum(mode == MODE_BALANCED for mode, _ in records)
         atom_indices = atom_source_indices(residuals) if atoms else frozenset()
         for local, (mode, _) in enumerate(records):
             if mode == MODE_ATOM:
                 require(start + local in atom_indices, "bad atom symbolic record")
         print(f"attempts={len(records)} shared_exact={shared} templates={templates} "
               f"fallback_exact={fallback} structural={structural} atoms={atoms} "
+              f"balanced={balanced} "
               f"exact_audit=true census_seconds={census_seconds:.6f}")
         return
     require(args.start < len(residuals) and args.start + args.count <= len(residuals),

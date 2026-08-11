@@ -363,7 +363,7 @@ def read_chunks(manifest_path, manifest, stream, census, residuals, chunk_index=
 def certified_targets(stream, census, residuals, decoded, exact):
     certified = set()
     modes = {"shared": 0, "template": 0, "fallback": 0, "unresolved": 0,
-             "structural": 0, "atom": 0}
+             "structural": 0, "atom": 0, "balanced": 0}
     for start, records in decoded:
         for local, record in enumerate(records):
             source_index = start + local
@@ -384,6 +384,9 @@ def certified_targets(stream, census, residuals, decoded, exact):
                 targets = range(FRONTIER_TOTAL)
             elif mode == stream.MODE_ATOM:
                 modes["atom"] += 1
+                targets = range(FRONTIER_TOTAL)
+            elif mode == stream.MODE_BALANCED:
+                modes["balanced"] += 1
                 targets = range(FRONTIER_TOTAL)
             else:
                 require(mode == stream.MODE_UNRESOLVED, "unknown decoded mode")
@@ -413,7 +416,7 @@ def accumulate_chunk(stream, census, residuals, start, records, owners, exact,
         "symbolic_certified": 0,
     }
     modes = {"shared": 0, "template": 0, "fallback": 0, "unresolved": 0,
-             "structural": 0, "atom": 0}
+             "structural": 0, "atom": 0, "balanced": 0}
     symbolic_seen = set()
     for local, record in enumerate(records):
         source_index = start + local
@@ -442,6 +445,9 @@ def accumulate_chunk(stream, census, residuals, start, records, owners, exact,
             require(all(owners.get((source_index, target_frontier(target))) == "atom"
                         for target in range(FRONTIER_TOTAL)),
                     "atom record lacks atom ownership")
+        elif mode == stream.MODE_BALANCED:
+            modes["balanced"] += 1
+            numerical_targets = None
         else:
             require(mode == stream.MODE_UNRESOLVED, "unknown decoded mode")
             modes["unresolved"] += 1
@@ -509,7 +515,7 @@ def audit(manifest_path, exact=True, chunk_index=None):
         "symbolic_certified": 0,
     }
     modes = {"shared": 0, "template": 0, "fallback": 0, "unresolved": 0,
-             "structural": 0, "atom": 0}
+             "structural": 0, "atom": 0, "balanced": 0}
     ownership_stream = hashlib.sha256()
 
     def consume(start, records):

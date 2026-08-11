@@ -190,6 +190,21 @@ def mine(stream, census, residuals, intervals, minimum_occurrences):
     }
 
 
+def balanced_rank_one_future(stream, census, residuals, start, stop):
+    indices = [index for index in range(start, stop)
+               if stream.balanced_rank_one_certified(census, residuals[index])]
+    return {
+        "mode": "balanced_signed_rank_one",
+        "residual_range": [start, stop],
+        "exact_hit_total": len(indices),
+        "exact_hit_rate": [len(indices), stop - start],
+        "certified_target_total": len(indices) * (stream.PATH_COUNT + 1),
+        "source_indices": indices,
+        "payload": "none",
+        "optimization": "none",
+    }
+
+
 def canonical_bytes(payload):
     return (json.dumps(payload, sort_keys=True, separators=(",", ":"), allow_nan=False)
             + "\n").encode("ascii")
@@ -202,6 +217,7 @@ def main():
     parser.add_argument("--census-cache", type=Path)
     parser.add_argument("--minimum-occurrences", type=int, default=2)
     parser.add_argument("--require-covered", type=int, default=0)
+    parser.add_argument("--future-range", nargs=2, type=int, metavar=("START", "STOP"))
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     require(args.minimum_occurrences >= 2, "minimum occurrence count must be at least two")
@@ -214,6 +230,12 @@ def main():
     payload = mine(stream, census, residuals, intervals, args.minimum_occurrences)
     require(payload["covered_residual_total"] >= args.require_covered,
             "completed pack coverage is below the requested threshold")
+    if args.future_range is not None:
+        start, stop = args.future_range
+        require(0 <= start < stop <= len(residuals), "bad future residual range")
+        payload["future_no_optimization_modes"] = [
+            balanced_rank_one_future(stream, census, residuals, start, stop),
+        ]
     raw = canonical_bytes(payload)
     if args.output is not None:
         require(args.output.parent.is_dir(), "output parent does not exist")

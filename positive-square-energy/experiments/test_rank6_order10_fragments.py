@@ -74,7 +74,8 @@ class FragmentTests(unittest.TestCase):
             self.stream.exact_decode_pack(self.census, noncanonical, self.residuals)
 
     def test_symbolic_modes_round_trip_without_payloads(self):
-        records = ((self.stream.MODE_STRUCTURAL, None), (self.stream.MODE_ATOM, None))
+        records = ((self.stream.MODE_STRUCTURAL, None), (self.stream.MODE_ATOM, None),
+                   (self.stream.MODE_BALANCED, None))
         raw = self.stream.encode_pack(self.census, 1, records)
         self.assertEqual(self.stream.decode_pack(self.census, raw, self.residuals),
                          (1, records))
