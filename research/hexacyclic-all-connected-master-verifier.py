@@ -190,13 +190,14 @@ def validate_single_block(manifest):
             manifest.get("kernel_count") == 1198,
             "single-block kernel universe changed")
     dependencies = manifest.get("dependencies")
-    require(type(dependencies) is list and len(dependencies) == 5,
+    require(type(dependencies) is list and len(dependencies) == 6,
             "single-block exact dependency registry changed")
     require([row.get("name") for row in dependencies] ==
-            ["kernel-census", "orders-2-7", "order-8",
+            ["kernel-census", "conditional-analytic-lift", "orders-2-7", "order-8",
              "order-9-promotion", "order-10-promotion"],
             "single-block owner registry changed")
-    require(all(row.get("replay") in {"full-exact", "independent-exact-census"}
+    require(all(row.get("replay") in {"full-exact", "independent-exact-census",
+                                      "exact-conditional-interface"}
                 and isinstance(row.get("source_sha256"), str)
                 and isinstance(row.get("output_sha256"), str)
                 for row in dependencies),
@@ -307,12 +308,36 @@ def hostile_self_checks():
     }
     expect_rejected(lambda: validate_single_block(conditional), "conditional owner")
     checks += 1
+    missing_lift = {
+        "schema": SINGLE_BLOCK["schema"],
+        "evidence_kind": "exact-theorem-owner",
+        "scope": {
+            "graph": "finite simple connected",
+            "cyclomatic_rank": 6,
+            "edge_vertex_relation": "|E(G)|=|V(G)|+5",
+            "block_scope": SINGLE_BLOCK["block_scope"],
+        },
+        "conclusion": EXPECTED_CONCLUSION,
+        "orders": list(range(2, 11)),
+        "counts_by_order_2_to_10": [1, 4, 26, 84, 216, 314, 325, 162, 66],
+        "kernel_interval": [1, 1198],
+        "kernel_count": 1198,
+        "dependencies": [
+            {"name": name, "replay": "full-exact", "source_sha256": "0" * 64,
+             "output_sha256": "0" * 64}
+            for name in ("kernel-census", "orders-2-7", "order-8",
+                         "order-9-promotion", "order-10-promotion")
+        ],
+    }
+    expect_rejected(lambda: validate_single_block(missing_lift),
+                    "conditional analytic lift omitted")
+    checks += 1
     return checks
 
 
 def audit():
     split = analytic_block_split()
-    require(hostile_self_checks() == 15, "hostile mutation count changed")
+    require(hostile_self_checks() == 16, "hostile mutation count changed")
     blockers = [owner["name"] for owner in OWNERS
                 if owner["source_sha256"] is None or owner["output_sha256"] is None
                 or not owner["path"].is_file()]

@@ -461,6 +461,120 @@ All gates are conjunctive.
     release metadata, or project-state promotion be prepared. This plan does
     not perform that promotion.
 
+## Internal eventual-publication checklist
+
+This checklist specializes `research/procedural/PUBLICATION.md` to
+`all-hexacyclic-graphs`. It is a fail-closed record for a possible future
+publication, not authorization to contact anyone, submit anything, create a
+post, or change project state. Every box remains open while the manuscript is
+conditional. Complete the boxes in order and record only committed paths,
+public identifiers, dates, and digests; never store credentials, verification
+tokens or URLs, mailbox contents, or private replies.
+
+### A. Solved-result acceptance
+
+- [ ] **Unconditional theorem.** Gates 1--5 above are green and the final
+  manuscript proves exactly: every finite simple connected graph `G` with
+  `|E(G)|=|V(G)|+5` satisfies `s+(G)>=|V(G)|`. Remove the conditional title,
+  theorem premise, promotion placeholders, and nonpublication language only
+  after the all-connected master accepts the disjoint exhaustive split. Do not
+  promote strictness, equality classification, edge/subdivision monotonicity,
+  nonsimple realizations, or the general `m>=n+1` conjecture.
+- [ ] **All exact replay.** From a clean artifact directory, run every direct
+  and transitive theorem verifier under both `python3` and `python3 -O`,
+  including mandatory full exact replays for orders 8, 9, and 10, the
+  orders-2--10 master, the canonical multiblock owner, and the all-connected
+  master. Require zero exits, byte-identical canonical outputs across modes,
+  exact regenerated target-set equality, and frozen source/output/transitive
+  SHA-256 maps. Digest-only audits, chunk receipts, prior segmented runs,
+  coverage totals, and `ready_for_theorem_promotion` fields do not count.
+- [ ] **Independent reproduction and hostile audit.** Rebuild every canonical
+  manifest from committed sources and certificates; run all malformed-data,
+  omitted/duplicated-owner, scope-widening, parity, simplicity, connector, and
+  strictness mutations. Record the actual independence level without calling
+  a second run of the same implementation independent verification.
+- [ ] **Manuscript-source audit.** Check every headline, theorem, abstract
+  sentence, count, command, digest, citation, disclosure, and scoped nonclaim
+  against the accepted manifests and source files. Confirm all cited
+  certificates are committed and reproducibility instructions start from a
+  clean checkout.
+
+### B. Source and novelty
+
+- [ ] **Exact source readback.** Re-read the current source paper rather than
+  relying on repository prose. The 11 August 2026 audit read back
+  `https://arxiv.org/abs/2506.07264v1` (submitted 8 June 2025), whose abstract
+  states the connected-simple `m>=n+1` conjecture; before publication, verify
+  the current version/history and quote Conjecture 1.2 exactly from the source
+  PDF. Record the public source URL/version/date, not author email data.
+- [ ] **Current-status and novelty audit.** Search current versions of the
+  source paper, arXiv, MathSciNet/zbMATH or available equivalents, citation
+  graphs, and targeted web/scholar queries for the full connected hexacyclic
+  (`m=n+5`) case and for the specific DNN/kernel method. Read plausible hits,
+  distinguish prior cactus and lower-rank results from the claimed scope, and
+  write a dated, query-documented audit. A negative search supports careful
+  wording only; it never proves novelty or priority.
+- [ ] **Claim wording after audit.** If no prior result is found, say only that
+  no prior proof was located in the documented search. If overlapping or prior
+  work is found, cite it and narrow or withdraw the novelty/publication claim
+  before any outreach or dissemination.
+
+### C. Package and PDF readback
+
+- [ ] **Complete package.** Add the final `README.md` and `HOSTILE_AUDIT.md`,
+  retain the AI-assistance disclosure, add the eligible row to
+  `research/publication-manifest.json`, and commit `paper.tex`, `paper.pdf`, all
+  cited certificates, and exact reproduction instructions at one frozen
+  revision. The manifest must classify this as a complete hexacyclic class
+  theorem and partial progress on AKMPZ Conjecture 1.2, not a full resolution
+  of that conjecture.
+- [ ] **Clean build.** Run
+  `bash scripts/build-paper.sh all-hexacyclic-graphs` from a clean artifact
+  directory; reject missing citations, undefined references, stale TODOs,
+  conditional labels, overfull/cropped content that changes readability, and
+  commands that do not match the committed repository.
+- [ ] **PDF readback.** Extract and read back all PDF text, inspect every page
+  visually at normal zoom, and compare title, theorem hypothesis/conclusion,
+  equations, tables, links, disclosures, bibliography, page count, and final
+  PDF SHA-256 against `paper.tex` and the accepted manifests. After permanent
+  public URLs exist, download both folder and direct PDF links anonymously and
+  repeat the readback/hash check on the served bytes; a successful local LaTeX
+  build alone is insufficient.
+
+### D. Contact and destinations, only after solved
+
+- [ ] **No early external action.** Until A--C are complete, do not contact an
+  author or reviewer, prepare/send an OCB write, post on X, create publication
+  text or result cards, or imply that the conditional draft is solved. Drafting
+  an eventual contact decision is internal only and contains no private data.
+- [ ] **Author courtesy contact.** Only after the solved paper and stable public
+  evidence links pass PDF readback, search the mailbox and ledgers for duplicate
+  threads, identify one source/corresponding author from public source metadata,
+  and obtain final message review under the professional-correspondence rules
+  in `PUBLICATION.md`. Send at most one concise courtesy thread using an
+  accountable identity; state the exact hexacyclic scope, distinguish it from
+  the general conjecture, disclose AI involvement, and invite corrections or
+  prior-work pointers without requesting endorsement. Log only date, purpose,
+  role, and message/thread ID; never persist addresses unnecessarily, tokens,
+  private message bodies, or replies without consent. This checklist sends no
+  message.
+- [ ] **OCB eligibility readback.** Only after the theorem is solved and author
+  contact has occurred, read back the Board state idempotently. Do not submit a
+  duplicate of the already pending AKMPZ Conjecture 1.2 entry, do not treat the
+  hexacyclic class theorem as a kill, and do not call `report_resolution`: it
+  does not resolve the source conjecture for all `m>=n+1` graphs. At most add
+  the stable paper as public partial-progress evidence if the Board exposes an
+  appropriate action and the manifest authorizes it. An absent action means no
+  write; an uncertain write is never retried. Store no verification secret.
+- [ ] **X publication and readback.** Only after every preceding applicable box
+  is closed, prepare one flat, scope-exact announcement with rendered card and
+  permanent folder/PDF links. Re-run `python3 scripts/publish-result.py check`
+  for the final slug, inspect the manifest and tweet ledger for duplicates,
+  post once, then verify through API readback the post ID, account, exact text,
+  media, and both links before appending a token-free ledger entry. Failure of
+  readback leaves publication unresolved and does not authorize a duplicate
+  post. This checklist performs no post.
+
 ## Execution order once order nine and ten are green
 
 1. Freeze final order-nine and order-ten manifests and obtain complete exact

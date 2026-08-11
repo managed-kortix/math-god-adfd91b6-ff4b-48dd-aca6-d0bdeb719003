@@ -62,7 +62,7 @@ MANIFEST_TRANSITIVE_NAMES = {
     "atom_classification", "atom_classifier", "kernel_source", "rational_engine",
     "sparse_base", "symbolic_recognizer", "witness_pipeline",
 }
-EXPECTED_SCOPE = "order=9;rank=6;kernels=K971-K1132;single-nontrivial-block"
+EXPECTED_SCOPE = "order=9;rank=6;kernels=K971-K1132;single-positive-rank-cyclic-block"
 EXPECTED_CONCLUSION = "kappa(B)<=|E(B)|+5;therefore s+(G)>=|V(G)| after rooted-tree lift"
 EXPECTED_CENSUS = {
     "kernel_interval": [971, 1132],

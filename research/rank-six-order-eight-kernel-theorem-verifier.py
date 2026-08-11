@@ -39,7 +39,7 @@ DEPENDENCIES = {
     "symbolic_fixture": (SYMBOLIC_FIXTURE,
         "2f457374d9627bd27339a0988aa47149db825dd0cba050c71ac9accfa3f72b95"),
 }
-EXPECTED_SCOPE = "order=8;rank=6;kernels=K646-K970;single-nontrivial-block"
+EXPECTED_SCOPE = "order=8;rank=6;kernels=K646-K970;single-positive-rank-cyclic-block"
 EXPECTED_CONCLUSION = "kappa(B)<=|E(B)|+5;therefore s+(G)>=|V(G)| after rooted-tree lift"
 
 

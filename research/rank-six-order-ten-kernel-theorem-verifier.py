@@ -55,7 +55,7 @@ MANIFEST_TRANSITIVE_NAMES = {
     "census", "equality_recognizer", "equality_recognizer_fixture",
     "symbolic_ledger", "symbolic_ledger_fixture", "witness_stream",
 }
-EXPECTED_SCOPE = "order=10;rank=6;kernels=K1133-K1198;single-nontrivial-block"
+EXPECTED_SCOPE = "order=10;rank=6;kernels=K1133-K1198;single-positive-rank-cyclic-block"
 EXPECTED_CONCLUSION = "kappa(B)<=|E(B)|+5;therefore s+(G)>=|V(G)| after rooted-tree lift"
 EXPECTED_CENSUS = {
     "kernel_interval": [1133, 1198],

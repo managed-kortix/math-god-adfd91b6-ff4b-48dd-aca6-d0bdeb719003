@@ -23,6 +23,15 @@ CENSUS = {
     "source_sha256": "325b78066b626a00deaceb6a026377dd7f898a906c63c597f77831548585e1ee",
     "output_sha256": "784510e470ae004712dc0b1bb8d8419f2daecea4a4b5caed05f7eadaff62a814",
 }
+ANALYTIC_LIFT = {
+    "name": "conditional-analytic-lift",
+    "path": HERE / "rank-six-conditional-analytic-lift-verifier.py",
+    "manifest_path": HERE / "rank-six-conditional-analytic-lift-manifest.json",
+    "source_sha256": "97c49fa7d1c9c162f4592e0954d63271eb98416fbab59605a9e58a0ada1043df",
+    "manifest_sha256": "b6ab90a895fcd7d6ebcf3b32b69676847c35dd7d070e9b8c6c4c13150bda94f6",
+    "output_sha256": "a86a7dc77ba8d0a6131acb6d457d4a10129615d156cae3de01e5997b61e40d8a",
+    "schema": "rank-six-conditional-analytic-lift-v1",
+}
 
 # A promotion owner is registered only after its source and canonical full-replay
 # output have been frozen. None is a deliberate closed gate, never a wildcard.
@@ -45,7 +54,7 @@ OWNERS = (
         "kernel_interval": (646, 970),
         "kernel_count": 325,
         "path": HERE / "rank-six-order-eight-kernel-theorem-verifier.py",
-        "source_sha256": "96f3d75efccbe3da802547bcf2ae2643f506305d1a261115186260db5e29c674",
+        "source_sha256": None,
         "output_sha256": None,
         "arguments": ("--full", "--print-manifest"),
         "schema": "rank-six-order-eight-kernel-theorem-master-v1",
@@ -158,7 +167,7 @@ def validate_child_manifest(owner, manifest):
     else:
         expected_scope = (f"order={owner['orders'][0]};rank=6;kernels="
                           f"K{owner['kernel_interval'][0]}-K{owner['kernel_interval'][1]};"
-                          "single-nontrivial-block")
+                          "single-positive-rank-cyclic-block")
         require(manifest.get("scope") == expected_scope, f"child scope changed: {name}")
         require(manifest.get("conclusion") == FINAL_CONCLUSION,
                 f"child conclusion changed: {name}")
@@ -226,8 +235,48 @@ def invoke_census():
     }
 
 
+def invoke_analytic_lift():
+    for key in ("path", "manifest_path"):
+        require(ANALYTIC_LIFT[key].is_file(), f"missing analytic lift {key}")
+    require(hashlib.sha256(ANALYTIC_LIFT["path"].read_bytes()).hexdigest() ==
+            ANALYTIC_LIFT["source_sha256"], "analytic lift source digest changed")
+    require(hashlib.sha256(ANALYTIC_LIFT["manifest_path"].read_bytes()).hexdigest() ==
+            ANALYTIC_LIFT["manifest_sha256"], "analytic lift manifest digest changed")
+    optimize = ("-O",) if sys.flags.optimize else ()
+    completed = subprocess.run(
+        (sys.executable, *optimize, str(ANALYTIC_LIFT["path"]),
+         "--emit", "--print-manifest"),
+        check=False, capture_output=True, text=True,
+    )
+    require(completed.returncode == 0, "conditional analytic lift failed")
+    require(completed.stderr == "", "conditional analytic lift wrote stderr")
+    require(hashlib.sha256(completed.stdout.encode("ascii")).hexdigest() ==
+            ANALYTIC_LIFT["output_sha256"], "analytic lift output digest changed")
+    first_line, separator, report = completed.stdout.partition("\n")
+    require(separator == "\n" and report, "analytic lift report is missing")
+    manifest = strict_json_bytes((first_line + "\n").encode("ascii"),
+                                 "conditional analytic lift manifest")
+    require(manifest.get("schema") == ANALYTIC_LIFT["schema"],
+            "analytic lift schema changed")
+    require(manifest.get("finite_premise", {}).get("result") ==
+            "kappa(B)<=|E(B)|+5", "analytic lift premise changed")
+    require(manifest.get("conclusion") == "s+(G)>=|V(G)|",
+            "analytic lift conclusion changed")
+    require("global_claim=false finite_premise_discharged=false" in report,
+            "analytic lift nonclaim boundary changed")
+    return {
+        "name": ANALYTIC_LIFT["name"],
+        "source_sha256": ANALYTIC_LIFT["source_sha256"],
+        "manifest_sha256": ANALYTIC_LIFT["manifest_sha256"],
+        "output_sha256": ANALYTIC_LIFT["output_sha256"],
+        "schema": ANALYTIC_LIFT["schema"],
+        "replay": "exact-conditional-interface",
+    }
+
+
 def implication_manifest(counts, dependencies):
-    require(len(dependencies) == 5, "implication requires the census and all four owners")
+    require(len(dependencies) == 6,
+            "implication requires the census, analytic lift, and all four owners")
     return {
         "schema": "rank-six-order2-10-master-implication-v1",
         "evidence_kind": "exact-theorem-owner",
@@ -250,12 +299,13 @@ def implication_manifest(counts, dependencies):
         "kernel_interval": [1, 1198],
         "kernel_count": 1198,
         "dependencies": dependencies,
-        "finite_premise": "kappa(B)<=|E(B)|+5 for every simple subdivision",
+        "finite_premise": "kappa(B)<=|E(B)|+5 for every finite-owner subdivision family",
         "length_scope": "arbitrary positive simple-subdivision lengths",
         "attachments": "arbitrary finite rooted trees at branch or subdivision vertices",
         "implication": (
-            "if every registered owner proves the finite premise, then tree additivity and "
-            "the DNN trace identity give s+(G)>=|V(G)| for its single-block families"
+            "if every registered finite owner discharges the analytic-lift premise, while "
+            "the typed orders-2-7 owner proves its stated spectral implication, then the "
+            "combined owner partition gives s+(G)>=|V(G)| for its single-block families"
         ),
         "excluded_scope": "multiblock and all-connected hexacyclic graphs",
     }
@@ -311,23 +361,29 @@ def hostile_self_checks():
     expect_rejected(lambda: validate_child_manifest(OWNERS[2], altered),
                     "owner conclusion altered")
     mutations += 1
+    mismatched_scope = {
+        "schema": OWNERS[1]["schema"],
+        "kernel_fixture_sha256": KERNEL_SHA256,
+        "scope": "order=8;rank=6;kernels=K646-K970;single-nontrivial-block",
+        "conclusion": FINAL_CONCLUSION,
+        "frontier": {"complete_disjoint_ownership": True},
+    }
+    expect_rejected(lambda: validate_child_manifest(OWNERS[1], mismatched_scope),
+                    "ambiguous nontrivial-block scope")
+    mutations += 1
     return mutations
 
 
 def audit():
     counts = audit_fixture()
     validate_partition()
-    require(hostile_self_checks() == 9, "hostile mutation count changed")
-    promotion_owners = OWNERS[2:]
-    blockers = [owner["name"] for owner in promotion_owners
-                if owner["source_sha256"] is None or owner["output_sha256"] is None
-                or not owner["path"].is_file()]
+    require(hostile_self_checks() == 10, "hostile mutation count changed")
+    blockers = [owner["name"] for owner in OWNERS
+                 if owner["source_sha256"] is None or owner["output_sha256"] is None
+                 or not owner["path"].is_file()]
     require(not blockers, "promotion gate closed: " + ", ".join(blockers))
-    incomplete_existing = [owner["name"] for owner in OWNERS[:2]
-                           if owner["output_sha256"] is None]
-    require(not incomplete_existing,
-            "existing owner output identity not frozen: " + ", ".join(incomplete_existing))
-    dependencies = [invoke_census(), *(invoke(owner) for owner in OWNERS)]
+    dependencies = [invoke_census(), invoke_analytic_lift(),
+                    *(invoke(owner) for owner in OWNERS)]
     return implication_manifest(counts, dependencies)
 
 
