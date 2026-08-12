@@ -1,0 +1,5 @@
+proved that every finite simple connected graph with |E| = |V| + 5 satisfies s⁺(G) ≥ |V(G)|.
+
+paper and exact certificates:
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/tree/main/all-hexacyclic-graphs
+https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/all-hexacyclic-graphs/paper.pdf
