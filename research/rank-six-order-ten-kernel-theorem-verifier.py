@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Completion-gated promotion owner for order-ten rank-six kernels."""
+"""Exact-execution promotion owner for order-ten rank-six kernels."""
 
 from __future__ import annotations
 
@@ -19,15 +19,23 @@ EXPERIMENTS = ROOT / "positive-square-energy" / "experiments"
 COVERAGE_GATE = HERE / "rank-six-order-ten-coverage-verifier.py"
 PACK_AUDITOR = EXPERIMENTS / "rank6_order10_pack_auditor.py"
 DEFAULT_MANIFEST = EXPERIMENTS / "rank6_order10_search_manifest.json"
+SEGMENTED_EVIDENCE = (EXPERIMENTS / "rank6_order10_chunk_replays" / "final" /
+                      "aggregate.json")
 KERNEL_FIXTURE = HERE / "fixtures" / "rank-six-kernels.json"
 ANALYTIC_LIFT = HERE / "rank-six-conditional-analytic-lift-verifier.py"
 ANALYTIC_LIFT_MANIFEST = HERE / "rank-six-conditional-analytic-lift-manifest.json"
+ANALYTIC_LIFT_PROOF_NOTE = (ROOT / "positive-square-energy" / "hexacyclic-general" /
+                            "conditional-analytic-lift-proof-note.md")
 
 DEPENDENCIES = {
     "coverage_gate": (COVERAGE_GATE,
         "30a6341dc7a1763b1b87e465b68f44dc140a8dae4d4bd739f7d9b4285ecb0390"),
     "pack_auditor": (PACK_AUDITOR,
         "c6047843a29b9d6755855d165f9b4dac1ede39c8f1002a5fffa97ca663303d8e"),
+    "pack_manifest": (DEFAULT_MANIFEST,
+        "5162243e0535ca41f72fa0c7bd27e6ee240d485567e56b8c8dfbcf3a4ecbf3b6"),
+    "segmented_evidence": (SEGMENTED_EVIDENCE,
+        "8c48944fc4a657241ed6519b05acb2af0efefee56064f680f92bad9ddc7bcabf"),
     "kernel_fixture": (KERNEL_FIXTURE,
         "5a862a0e9ed5dfe91ff6f8491936c8e775eb39b71619df6b8c2a9be2c4643476"),
     "census": (EXPERIMENTS / "rank6_order10_cubic_frontier_census.py",
@@ -48,6 +56,8 @@ DEPENDENCIES = {
         "97c49fa7d1c9c162f4592e0954d63271eb98416fbab59605a9e58a0ada1043df"),
     "analytic_lift_manifest": (ANALYTIC_LIFT_MANIFEST,
         "b6ab90a895fcd7d6ebcf3b32b69676847c35dd7d070e9b8c6c4c13150bda94f6"),
+    "analytic_lift_proof_note": (ANALYTIC_LIFT_PROOF_NOTE,
+        "2ecc321b60ec42ddf1b8980dffc019eaeaa55738dea5ee014596cf3e814692b4"),
 }
 ANALYTIC_LIFT_OUTPUT_SHA256 = \
     "a86a7dc77ba8d0a6131acb6d457d4a10129615d156cae3de01e5997b61e40d8a"
@@ -152,6 +162,10 @@ def audit_analytic_lift():
             manifest.get("finite_premise", {}).get("result") == "kappa(B)<=|E(B)|+5" and
             manifest.get("conclusion") == "s+(G)>=|V(G)|",
             "conditional analytic lift contract changed")
+    require(manifest.get("proof_note") == {
+        "path": "positive-square-energy/hexacyclic-general/conditional-analytic-lift-proof-note.md",
+        "sha256": DEPENDENCIES["analytic_lift_proof_note"][1],
+    }, "conditional analytic lift proof-note ownership changed")
     require("global_claim=false finite_premise_discharged=false" in report,
             "conditional analytic lift lost its nonclaim boundary")
 
@@ -246,7 +260,106 @@ def exact_full_replay(manifest_path, manifest_sha256):
     return validate_coverage(payload, ready, manifest_sha256)
 
 
-def build_manifest(dependencies, pack, manifest_sha256, ownership):
+def validate_segmented_bookkeeping(aggregate, records, reports, pack):
+    require(aggregate.get("schema") ==
+            "rank-six-order-ten-chunk-audit-aggregate-v1" and
+            aggregate.get("proof_semantics") ==
+            "checkpoint_index_only_no_proof_without_exact_replay" and
+            aggregate.get("exact_proof") is False,
+            "aggregate must remain an index, not an execution claim")
+    require(len(records) == len(reports) == len(pack["chunks"]) == 23,
+            "segmented evidence must contain exactly 23 execution receipts")
+    require([record.get("chunk_index") for record in records] == list(range(23)) and
+            [record.get("residual_range") for record in records] ==
+            [chunk["residual_range"] for chunk in pack["chunks"]],
+            "segmented execution receipt partition changed")
+    require(aggregate.get("covered_residual_range") == [0, 125457] and
+            aggregate.get("covered_target_total") == 2007312 and
+            aggregate.get("manifest_sha256") == DEPENDENCIES["pack_manifest"][1] and
+            aggregate.get("manifest_covered_key_stream_sha256") ==
+            pack["covered_key_stream_sha256"],
+            "segmented aggregate universe changed")
+    rational = sum(report.get("disjoint_rational_owner_target_total", -1)
+                   for report in reports)
+    symbolic = sum(report.get("disjoint_symbolic_owner_target_total", -1)
+                   for report in reports)
+    certified = sum(report.get("exact_certified_target_total", -1)
+                    for report in reports)
+    require(certified == rational + symbolic == 2007312 and
+            rational == aggregate.get("disjoint_rational_owner_target_total") and
+            symbolic == aggregate.get("disjoint_symbolic_owner_target_total") and
+            all(report.get("status") == "complete" and
+                report.get("exact_audit") is True and
+                report.get("uncertified_target_total") == 0
+                for report in reports),
+            "segmented exact-execution ownership is incomplete")
+    return {
+        "rational_targets": rational,
+        "symbolic_only_targets": symbolic,
+        "certified_targets": certified,
+        "complete_disjoint_ownership": True,
+    }
+
+
+def hostile_segmented_self_checks(aggregate, records, reports, pack):
+    mutations = 0
+    for label, mutate in (
+            ("aggregate execution claim forged",
+             lambda row: row.__setitem__("exact_proof", True)),
+            ("aggregate coverage truncated",
+             lambda row: row.__setitem__("covered_residual_range", [0, 125456]))):
+        changed = deepcopy(aggregate)
+        mutate(changed)
+        expect_rejected(
+            lambda changed=changed: validate_segmented_bookkeeping(
+                changed, records, reports, pack), label)
+        mutations += 1
+    changed_records = deepcopy(records)
+    del changed_records[-1]
+    expect_rejected(lambda: validate_segmented_bookkeeping(
+        aggregate, changed_records, reports, pack), "execution receipt omitted")
+    mutations += 1
+    changed_reports = deepcopy(reports)
+    changed_reports[0]["uncertified_target_total"] = 1
+    expect_rejected(lambda: validate_segmented_bookkeeping(
+        aggregate, records, changed_reports, pack), "uncertified target forged")
+    mutations += 1
+    return mutations
+
+
+def segmented_exact_executions(manifest_path, pack):
+    auditor = load_module("rank6_order10_segmented_for_promotion", PACK_AUDITOR)
+    raw, aggregate = strict_json(SEGMENTED_EVIDENCE, "segmented execution aggregate")
+    require(hashlib.sha256(raw).hexdigest() == DEPENDENCIES["segmented_evidence"][1],
+            "segmented aggregate identity changed")
+    require(aggregate.get("auditor_sha256") == DEPENDENCIES["pack_auditor"][1] and
+            aggregate.get("dependency_sha256") == pack["dependency_sha256"],
+            "segmented aggregate transitive identities changed")
+    records = aggregate.get("chunks")
+    require(type(records) is list, "segmented aggregate chunk index is malformed")
+    reports = []
+    root = SEGMENTED_EVIDENCE.parent.resolve()
+    for expected_index, record in enumerate(records):
+        require(type(record) is dict and set(record) == {
+            "chunk_index", "path", "residual_range", "key_stream_sha256",
+            "ownership_stream_sha256", "transcript_sha256",
+        }, "segmented aggregate receipt index fields changed")
+        start, stop = record["residual_range"]
+        receipt_path = root / f"chunk-{start:05d}-{stop:05d}.json"
+        receipt_raw, receipt = auditor.authenticate_chunk_transcript(
+            manifest_path, receipt_path, pack)
+        require(expected_index == record["chunk_index"] and
+                hashlib.sha256(receipt_raw).hexdigest() == record["transcript_sha256"] and
+                receipt["chunk_key_stream_sha256"] == record["key_stream_sha256"] and
+                receipt["ownership_stream_sha256"] == record["ownership_stream_sha256"],
+                "segmented execution receipt identity changed")
+        reports.append(receipt["report"])
+    ownership = validate_segmented_bookkeeping(aggregate, records, reports, pack)
+    mutations = hostile_segmented_self_checks(aggregate, records, reports, pack)
+    return ownership, mutations
+
+
+def build_manifest(dependencies, pack, manifest_sha256, ownership, execution_mode):
     return {
         "schema": "rank-six-order-ten-kernel-theorem-master-v1",
         "scope": EXPECTED_SCOPE,
@@ -261,6 +374,7 @@ def build_manifest(dependencies, pack, manifest_sha256, ownership):
         "analytic_lift_owner": {
             "source_sha256": dependencies["analytic_lift_owner"],
             "manifest_sha256": dependencies["analytic_lift_manifest"],
+            "proof_note_sha256": dependencies["analytic_lift_proof_note"],
             "canonical_output_sha256": ANALYTIC_LIFT_OUTPUT_SHA256,
             "premise": "kappa(B)<=|E(B)|+5",
         },
@@ -269,7 +383,11 @@ def build_manifest(dependencies, pack, manifest_sha256, ownership):
             "covered_key_stream_sha256": pack["covered_key_stream_sha256"],
             "residual_range": [0, 125457],
             "segments": len(pack["chunks"]),
-            "replay": "fresh streaming exact replay of the complete manifest",
+            "replay": ("fresh streaming exact replay of the complete manifest"
+                       if execution_mode == "fresh" else
+                       "authenticated receipts from 23 independent exact segment executions"),
+            "execution_evidence": (None if execution_mode == "fresh" else
+                                   str(SEGMENTED_EVIDENCE.relative_to(ROOT))),
         },
         "census": EXPECTED_CENSUS,
         "frontier": {
@@ -279,7 +397,7 @@ def build_manifest(dependencies, pack, manifest_sha256, ownership):
             "symbolic_dictionary_targets": 692,
             "symbolic_decompositions_by_profile": EXPECTED_SYMBOLIC_PROFILES,
             "complete_disjoint_ownership": True,
-            "verification": "exact replay of every final-manifest segment and target",
+            "verification": "exact execution of every final-manifest segment and target",
         },
         "length_scope": "arbitrary positive simple-subdivision lengths via canonical-plus-coordinate domination and fixed-parity monotonicity",
         "attachments": "arbitrary finite rooted trees at branch or subdivision vertices",
@@ -317,15 +435,24 @@ def hostile_self_checks():
     return mutations
 
 
-def full_audit(manifest_path):
+def full_audit(manifest_path, execution_mode):
     validate_registry()
     dependencies = audit_dependencies()
     audit_analytic_lift()
     manifest_sha256, pack = audit_manifest(manifest_path, dependencies, require_full=True)
-    ownership = exact_full_replay(manifest_path, manifest_sha256)
-    mutations = hostile_self_checks()
-    require(mutations == len(DEPENDENCIES) + 2, "hostile mutation count changed")
-    manifest = build_manifest(dependencies, pack, manifest_sha256, ownership)
+    require(manifest_sha256 == dependencies["pack_manifest"],
+            "theorem owner requires the pinned final manifest")
+    if execution_mode == "fresh":
+        ownership = exact_full_replay(manifest_path, manifest_sha256)
+        execution_mutations = 0
+    else:
+        require(execution_mode == "segmented", "unknown exact-execution mode")
+        ownership, execution_mutations = segmented_exact_executions(manifest_path, pack)
+    mutations = hostile_self_checks() + execution_mutations
+    require(mutations == len(DEPENDENCIES) + 2 + execution_mutations and
+            execution_mutations == (4 if execution_mode == "segmented" else 0),
+            "hostile mutation count changed")
+    manifest = build_manifest(dependencies, pack, manifest_sha256, ownership, execution_mode)
     return manifest, hashlib.sha256(canonical_bytes(manifest)).hexdigest(), mutations
 
 
@@ -352,16 +479,18 @@ def practical_audit(manifest_path, chunk_index):
     return hashlib.sha256(canonical_bytes(payload)).hexdigest(), report, mutations
 
 
-def report(digest, mutations):
+def report(digest, mutations, execution_mode):
     return "\n".join((
-        "rank-six order-ten kernel promotion owner: full exact audit passed",
+        "rank-six order-ten kernel theorem: full exact execution evidence passed",
         "census: kernels=66 physical=1508832 orbits=497572 coarse=372115 residual=125457",
         "frontier: total=2007312 symbolic-dictionary=692 complete-disjoint-ownership=true",
-        "analytic-lift: pinned conditional owner and canonical output passed",
+        "analytic-lift: pinned conditional owner, manifest, proof note, and canonical output passed",
+        "conclusion: s+(G)>=|V(G)| for the order-ten single-positive-rank-block class",
         "nonclaim: no multiblock, all-connected, STATE, or project-global conclusion",
         f"canonical_child_manifest_sha256: {digest}",
         f"rejected_hostile_mutations: {mutations}",
-        "verification_layer: full-exact-manifest-replay",
+        f"verification_layer: {execution_mode}-exact-executions",
+        "hash_boundary: digests authenticate identities; receipt reports record exact executions",
     )) + "\n"
 
 
@@ -369,7 +498,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--full", action="store_true",
-                        help="require and replay all 2,007,312 exact targets")
+                        help="require exact evidence for all 2,007,312 targets")
+    parser.add_argument("--execution-mode", choices=("segmented", "fresh"),
+                        default="segmented",
+                        help="authenticate exact segment receipts or run a fresh full replay")
     parser.add_argument("--print-manifest", action="store_true")
     parser.add_argument("--practical", action="store_true",
                         help="pin the universe and exactly replay one available segment")
@@ -378,6 +510,8 @@ def main():
     require(args.full != args.practical,
             "select exactly one of --full or --practical")
     if args.practical:
+        require(args.execution_mode == "segmented",
+                "--execution-mode is valid only with --full")
         require(not args.print_manifest,
                 "--practical cannot emit a theorem child manifest")
         digest, segment, mutations = practical_audit(args.manifest, args.chunk_index)
@@ -391,10 +525,10 @@ def main():
             "nonclaim: practical mode is not theorem evidence and emits no child manifest\n")
         return 0
     require(args.chunk_index == 0, "--chunk-index is valid only with --practical")
-    manifest, digest, mutations = full_audit(args.manifest)
+    manifest, digest, mutations = full_audit(args.manifest, args.execution_mode)
     if args.print_manifest:
         sys.stdout.write(canonical_bytes(manifest).decode("ascii"))
-    sys.stdout.write(report(digest, mutations))
+    sys.stdout.write(report(digest, mutations, args.execution_mode))
     return 0
 
 

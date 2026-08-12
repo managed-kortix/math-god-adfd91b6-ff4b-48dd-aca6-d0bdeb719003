@@ -3,18 +3,18 @@
 This plan is scoped to exact R10 chunk replay checkpoints. It makes no theorem
 claim. Checkpoints authenticate the selected manifest, current auditor,
 transitive dependencies, chunk bytes, key stream, ownership stream, and exact
-report; they are not substitutes for a fresh exact replay.
+report. The aggregate indexes and authenticates them but is not a substitute for
+their exact-execution claims.
 
 ## Pinned executable
 
 - auditor: `positive-square-energy/experiments/rank6_order10_pack_auditor.py`
 - auditor SHA-256: `c6047843a29b9d6755855d165f9b4dac1ede39c8f1002a5fffa97ca663303d8e`
-- promotion-owner pin: the same digest in
-  `research/rank-six-order-ten-kernel-theorem-verifier.py`
+- promotion owner: `research/rank-six-order-ten-kernel-theorem-verifier.py`
 
-## Current generation
+## Historical partial generation
 
-The current manifest is
+The former partial manifest was
 `positive-square-energy/experiments/rank6_order10_search_manifest.json`, with
 SHA-256 `c75825324beb6d7e7b110a59c1ec9776d0b99522de24b9d6c93a177adf54b5a8`,
 coverage `[0,110000)`, and 19 chunks. One authenticated transcript per chunk is
@@ -65,7 +65,7 @@ python3 positive-square-energy/experiments/rank6_order10_pack_auditor.py \
 
 ## Final generation
 
-Four final packs are in progress. Their expected final-manifest rows are:
+The four final packs complete these final-manifest rows:
 
 | index | residual range | receipt |
 |---:|:---:|:---|
@@ -101,10 +101,20 @@ python3 positive-square-energy/experiments/rank6_order10_pack_auditor.py \
 ```
 
 The final aggregate must authenticate 23 distinct indices, coverage
-`[0,125457)`, and 2,007,312 targets. The theorem-facing mandatory replay remains
-separate and must run both modes after final aggregation:
+`[0,125457)`, and 2,007,312 targets. It remains a no-execution-claim index; the
+23 receipts record the exact executions. The theorem-facing owner accepts this
+complete segmented evidence under that distinction, or a fresh complete replay,
+and must agree in normal and optimized Python:
 
 ```sh
 python3 research/rank-six-order-ten-kernel-theorem-verifier.py --full
 python3 -O research/rank-six-order-ten-kernel-theorem-verifier.py --full
+python3 research/rank-six-order-ten-kernel-theorem-verifier.py --full --execution-mode fresh
 ```
+
+The pinned segmented-mode promotion-owner source SHA-256 is
+`4cb22611448755d1eea984271251b542ab96f519cc052f3aeda8d56c04c61819`.
+Its canonical `--full --print-manifest` output SHA-256 is
+`767bbf4dd142afd7eb5a45dffeb738734948412ca53358c40d3655b28403725e`,
+and the child manifest on the first output line has SHA-256
+`b0511f8974c9a2a30a982ec8e3cf8118ab9e22be22fafe886a25b750c8c599dd`.

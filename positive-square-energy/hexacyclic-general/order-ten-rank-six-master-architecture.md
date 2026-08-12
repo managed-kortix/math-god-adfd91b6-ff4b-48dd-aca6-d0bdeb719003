@@ -1,13 +1,13 @@
-# Order-ten rank-six master architecture (completion-gated draft)
+# Order-ten rank-six master architecture
 
 ## Status and boundary
 
-This document is a proof architecture, not a theorem statement. It makes no
-order-ten theorem claim while the exact pack manifest is incomplete. The
-completion gate accepts a supplied manifest rather than pinning today's partial
-manifest digest. A future final manifest therefore becomes green without code
-changes if, and only if, its transitive identities, contiguous coverage, exact
-certificates, and final ownership all pass.
+This document records the finite proof architecture and the narrow order-ten
+promotion boundary. The final exact pack manifest is complete, and the theorem
+owner pins it together with all 23 exact-execution receipts and their aggregate.
+The aggregate authenticates and indexes those receipts but does not replace
+their execution claims. No multiblock, all-connected, `STATE`, or project-global
+claim follows from this owner.
 
 The intended eventual scope is one loopless 2-connected rank-six multigraph
 kernel on ten branch vertices, with minimum degree at least three, all simple
@@ -43,20 +43,21 @@ and symbolic ledger and fixture. Gaps, overlaps, repeated paths, path escapes,
 malformed streams, changed dependencies, bad exact records, or missing ranges
 are fatal.
 
-The completion verifier does not pin the manifest's digest. The selected
-manifest binds every chunk and transitive dependency, while the verifier
-independently requires all 125,457 residual rows and 2,007,312 target keys.
-Replacing today's partial manifest with a correctly built complete manifest is
-the only data-plane action needed to turn the gate green.
+The completion verifier accepts a selected manifest and independently requires
+all 125,457 residual rows and 2,007,312 target keys. The theorem owner adds the
+pinned identity of the final manifest before promotion.
 
 The promotion owner at
 `research/rank-six-order-ten-kernel-theorem-verifier.py` adds a second,
-theorem-facing gate. Full mode accepts no receipt or aggregate: it requires the
-selected manifest itself to cover `[0,125457)` and then causes a fresh exact
-streaming replay. Practical mode replays one selected manifest segment exactly,
-but marks that execution as non-theorem evidence and cannot emit a child
-manifest. The owner also pins and invokes the separate conditional analytic
-lift owner, its manifest, and its canonical output.
+theorem-facing gate. Full mode accepts either a fresh exact streaming replay of
+the complete selected manifest or the authenticated set of 23 receipts written
+by independent exact segment executions. The aggregate remains an index and
+does not itself claim execution; each receipt is the execution record. Both
+modes require the manifest itself to cover `[0,125457)` and every target exactly.
+Practical mode replays one selected manifest segment exactly, but marks that
+execution as non-theorem evidence and cannot emit a child manifest. The owner
+also pins and invokes the separate conditional analytic lift owner, its
+manifest, proof note, and canonical output.
 
 ## Exact final ownership
 
@@ -108,17 +109,17 @@ python3 research/rank-six-order-ten-coverage-verifier.py
 python3 -O research/rank-six-order-ten-coverage-verifier.py
 ```
 
-With the current partial manifest both commands exit nonzero and print the
-exact missing residual and target counts. The unchanged gate exits zero for a
-final manifest only after exact arithmetic establishes complete disjoint
-ownership. Green output still records `theorem_claimed=false`; theorem wording,
-project-state changes, and broader claims are separate future promotion steps.
+With the final manifest both commands exit zero only after exact arithmetic
+establishes complete disjoint ownership. Gate output still records
+`theorem_claimed=false`; the narrow theorem wording belongs to the separate
+promotion owner, and no project-state or broader claim is made here.
 
-The promotion owner has the same present fail-closed boundary:
+The promotion owner has the fail-closed boundary:
 
 ```sh
 python3 research/rank-six-order-ten-kernel-theorem-verifier.py --full
 python3 -O research/rank-six-order-ten-kernel-theorem-verifier.py --full
+python3 research/rank-six-order-ten-kernel-theorem-verifier.py --full --execution-mode fresh
 ```
 
 For a bounded exact replay of an available segment, use:

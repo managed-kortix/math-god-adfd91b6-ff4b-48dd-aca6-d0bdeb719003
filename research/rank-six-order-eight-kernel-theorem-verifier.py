@@ -33,7 +33,7 @@ DEPENDENCIES = {
     "pack_auditor": (PACK_AUDITOR,
         "21dc6cafe2539bb20e91ea3bf278f3e7ff8d66602b5acbe1c0d3d73f44f02175"),
     "pack_manifest": (PACK_MANIFEST,
-        "dd97ff3059cd637177171cb5d335cc17889a3714459522232e8110c5d79da469"),
+        "9512d8a04c05209d42c0be34d4e1c636d6d8c3b7773cf04768490d1100d46e2d"),
     "symbolic_program": (SYMBOLIC_PROGRAM,
         "755dd24b9e3f129dc6cd4fe590c4c13031bd22c41054ca29082981e3f5d909fe"),
     "symbolic_fixture": (SYMBOLIC_FIXTURE,

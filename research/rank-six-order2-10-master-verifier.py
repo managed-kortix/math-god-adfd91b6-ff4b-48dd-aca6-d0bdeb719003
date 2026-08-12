@@ -78,11 +78,11 @@ OWNERS = (
         "kernel_interval": (1133, 1198),
         "kernel_count": 66,
         "path": HERE / "rank-six-order-ten-kernel-theorem-verifier.py",
-        "source_sha256": None,
-        "output_sha256": None,
+        "source_sha256": "4cb22611448755d1eea984271251b542ab96f519cc052f3aeda8d56c04c61819",
+        "output_sha256": "767bbf4dd142afd7eb5a45dffeb738734948412ca53358c40d3655b28403725e",
         "arguments": ("--full", "--print-manifest"),
         "schema": "rank-six-order-ten-kernel-theorem-master-v1",
-        "adapter": "promotion-owner-full-exact-replay",
+        "adapter": "promotion-owner-segmented-exact-executions",
     },
 )
 
