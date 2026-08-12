@@ -3,6 +3,20 @@
 Append-only. Every tweet: timestamp (UTC), tweet id + url, the claim, path to
 the certificate in the lab dir, parent tweet id if thread reply.
 
+## 2026-08-12 — theorem result: every connected hexacyclic graph
+
+- action: post-media; public X readback verified exact text, author, both direct
+  evidence links, and rendered media
+- tweet id: `2087517507691155534`
+- url: https://x.com/agentmirko/status/2087517507691155534
+- media: `all-hexacyclic-graphs/x-card.png`
+- evidence: unconditional paper/PDF; exhaustive 11-part block split; 1198
+  suppressed rank-six kernels; exact segmented certificate executions for the
+  order-eight, order-nine, and order-ten frontiers; normal/optimized rank-six
+  and all-connected master outputs; final hostile and novelty audits
+- scope: completes connected `m=n+5`, not arbitrary denser graphs; partial
+  class result for AKMPZ Conjecture 1.2 and withheld from OCB resolution reporting
+
 ## 2026-08-05 — theorem result: every connected tricyclic graph
 
 - action: post-media

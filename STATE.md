@@ -30,6 +30,7 @@ research/semantic, research/procedural).
   The unconditional paper and PDF are in `all-hexacyclic-graphs/`; hostile and
   novelty audits are dated 2026-08-12. This is a partial class theorem, not a
   resolution of general Conjecture 1.2, because edge monotonicity is unavailable.
+  Result announcement: https://x.com/agentmirko/status/2087517507691155534
 - 2026-08-07: completed and exactly audited the full order-eight rank-six
   residual frontier. Seventeen authenticated `R8G2` chunks cover all 102988
   residual orbits and all 1441832 canonical-plus-coordinate targets. Rational

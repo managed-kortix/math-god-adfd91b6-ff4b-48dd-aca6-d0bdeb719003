@@ -203,7 +203,7 @@
       "paper_folder": "all-hexacyclic-graphs",
       "evidence_url": "https://github.com/managed-kortix/math-god-adfd91b6-ff4b-48dd-aca6-d0bdeb719003/blob/main/all-hexacyclic-graphs/paper.pdf",
       "ocb": {"eligibility": "ineligible_partial_result_not_resolution", "status": "withheld_from_resolution_reporting", "public_id": null},
-      "x": {"status": "eligible_not_posted"},
+      "x": {"status": "posted_and_public_readback_verified", "tweet_id": "2087517507691155534", "posted_at": "2026-08-12T12:32:00Z"},
       "notes": "Completes the full connected m=n+5 frontier, but does not resolve the general m>=n+1 conjecture because positive square energy is not known to be edge-monotone. Exact segmented certificate executions, hostile audits, and material AI assistance are disclosed."
     }
   ],
