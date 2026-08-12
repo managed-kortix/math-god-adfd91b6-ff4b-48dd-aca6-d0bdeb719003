@@ -17,6 +17,18 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-12: began the full connected heptacyclic frontier after closing and
+  publishing the hexacyclic case. Suppression of one rank-seven cyclic block is
+  now proved to give exactly 17133 loopless 2-connected minimum-degree-three
+  kernels on orders 2--12, with counts
+  `1,6,47,233,914,2270,4015,4495,3396,1391,365`; the removable-ear recursion is
+  complete even with parallel edges. Orders 2--4 (54 kernels) are proved for
+  all simple subdivisions and rooted trees by an exact 76933-target audit.
+  Exact coarse census leaves only 15 residual orbits at order five and 1517 at
+  order six, while higher-order residual counts are currently sampled
+  estimates. The 15 multiblock partitions reduce to 16 residual packet keys;
+  R61 is closed for all DNN-owned rank-six states and reduced to three sharp
+  K110/K223 structural families. No heptacyclic theorem claim is made.
 - 2026-08-12: developed the exact structural reduction for one rank-seven
   block. Suppression gives loopless 2-connected kernels of orders 2--12 and
   budget six; the rank-independent path atom yields the same canonical-plus-

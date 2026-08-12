@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Exact candidate census for the rank-seven suppressed-kernel frontier.
+"""Exact exhaustive census of rank-seven suppressed kernels.
 
 The generator performs one open-ear augmentation of every canonical rank-six
-kernel.  Its mathematical completeness is intentionally a frontier obligation:
-the accompanying note isolates the removable-ear lemma needed to turn this
-candidate census into a proved exhaustive census.
+kernel.  Completeness is Theorem 4 of the accompanying removable-ear audit;
+this verifier links to the independently regenerated rank-six census.
 """
 
 import argparse
@@ -20,6 +19,8 @@ RANK_SIX_PROGRAM = ROOT / "research" / "rank-six-kernel-census-verifier.py"
 RANK_SIX_FIXTURE = ROOT / "research" / "fixtures" / "rank-six-kernels.json"
 OUTPUT = ROOT / "research" / "fixtures" / "rank-seven-kernel-frontier-census.json"
 EXPECTED_COUNTS = (1, 6, 47, 233, 914, 2270, 4015, 4495, 3396, 1391, 365)
+SCHEMA = "rank-seven-loopless-no-cut-kernels-v2"
+STATUS = "complete-proved-removable-ear-exhaustion"
 
 
 def require(condition, message):
@@ -104,7 +105,9 @@ def augmentations(n, code):
 
 
 def generate():
-    rank_six_rows, _ = R6.load_fixture(RANK_SIX_FIXTURE)
+    require(R6.FIXTURE == RANK_SIX_FIXTURE, "rank-six fixture linkage changed")
+    rank_six_rows, _, _, digest = R6.audit()
+    require(digest == R6.EXPECTED_DIGEST, "rank-six exact audit digest changed")
     classes = set()
     for n, code in rank_six_rows:
         classes.update(augmentations(n, code))
@@ -121,13 +124,13 @@ def payload(classes):
         f"n={n},support={sum(value > 0 for value in code)}" for n, code in classes
     )
     return {
-        "schema": "rank-seven-loopless-no-cut-kernel-frontier-v1",
-        "status": "candidate-pending-removable-ear-completeness-lemma",
+        "schema": SCHEMA,
+        "status": STATUS,
         "beta": 7,
         "minimum_degree": 3,
         "orders": [2, 12],
         "encoding": "lexicographic upper-triangle multiplicities",
-        "generator": "one-open-ear-augmentation-of-canonical-rank-six-kernels",
+        "generator": "proved-complete-one-open-ear-augmentation-of-exact-rank-six-census",
         "counts_by_order_n2_to_n12": counts,
         "degree_multiset_counts": dict(sorted(degree_counts.items())),
         "support_edge_counts": dict(sorted(support_counts.items())),
@@ -140,6 +143,16 @@ def canonical_bytes(value):
 
 
 def audit(value, classes):
+    require(set(value) == {
+        "schema", "status", "beta", "minimum_degree", "orders", "encoding",
+        "generator", "counts_by_order_n2_to_n12", "degree_multiset_counts",
+        "support_edge_counts", "kernels",
+    }, "payload fields changed")
+    require(value["schema"] == SCHEMA, "schema changed")
+    require(value["status"] == STATUS, "completeness status changed")
+    require(value["beta"] == 7, "rank policy changed")
+    require(value["minimum_degree"] == 3, "degree policy changed")
+    require(value["orders"] == [2, 12], "order policy changed")
     require(value["counts_by_order_n2_to_n12"] == list(EXPECTED_COUNTS), "counts changed")
     require(len(classes) == sum(EXPECTED_COUNTS), "total changed")
     require(classes == tuple(sorted(set(classes))), "classes are not sorted and unique")
@@ -150,7 +163,7 @@ def audit(value, classes):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--write", action="store_true", help="write the canonical candidate fixture")
+    parser.add_argument("--write", action="store_true", help="write the canonical exhaustive fixture")
     args = parser.parse_args()
     classes = generate()
     value = payload(classes)
@@ -158,9 +171,10 @@ def main():
     raw = canonical_bytes(value)
     if args.write:
         OUTPUT.write_bytes(raw)
-    elif OUTPUT.exists():
-        require(OUTPUT.read_bytes() == raw, "committed candidate fixture differs from regeneration")
-    print("rank-seven kernel frontier census: exact candidate audit passed")
+    else:
+        require(OUTPUT.exists(), "committed exhaustive fixture is missing")
+        require(OUTPUT.read_bytes() == raw, "committed exhaustive fixture differs from regeneration")
+    print("rank-seven kernel census: exact exhaustive audit passed")
     print(f"status: {value['status']}")
     print("canonical_counts_n2_to_n12: " + ",".join(map(str, EXPECTED_COUNTS)))
     print(f"canonical_total: {len(classes)}")
