@@ -17,6 +17,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-12: proved the complete connected hexacyclic case of AKMPZ
+  Conjecture 1.2: every finite simple connected graph with `|E|=|V|+5`
+  satisfies `s^+(G)>=|V(G)|`. The multiblock owner covers the ten positive-rank
+  block partitions other than `(6)`. The single-positive-rank-block branch
+  suppresses to exactly 1198 rank-six kernels on orders 2--10; exact owners now
+  cover all orders, including 1441832 order-eight, 2794425 order-nine, and
+  2007312 order-ten canonical-plus-coordinate targets. All finite segments were
+  replayed exactly and authenticated; the rank-six and all-connected masters
+  pass normal/optimized modes byte-identically, with final all-connected
+  manifest-output SHA-256 `de4f7ff814530bd0a69c4d6a1407cf5583bff8dee3aeab41600b3e971afd127e`.
+  The unconditional paper and PDF are in `all-hexacyclic-graphs/`; hostile and
+  novelty audits are dated 2026-08-12. This is a partial class theorem, not a
+  resolution of general Conjecture 1.2, because edge monotonicity is unavailable.
 - 2026-08-07: completed and exactly audited the full order-eight rank-six
   residual frontier. Seventeen authenticated `R8G2` chunks cover all 102988
   residual orbits and all 1441832 canonical-plus-coordinate targets. Rational
