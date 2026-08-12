@@ -24,13 +24,13 @@ MULTIBLOCK = {
     "block_scope": "at-least-two-positive-rank-cyclic-blocks",
 }
 
-# This owner is deliberately unregistered until the orders 2--10 master has
-# four exact replay owners and its canonical output has been frozen.
 SINGLE_BLOCK = {
     "name": "rank-six-orders2-10-owner",
     "path": HERE / "rank-six-order2-10-master-verifier.py",
-    "source_sha256": None,
-    "output_sha256": None,
+    "source_sha256": "21aabed4eee24f36dc9ddf0460423d0fdd6d20a56e80a60ffed69c796c163bf1",
+    "output_sha256": "e32149c665638e1d9cd08f8050cd4a7c7cae9f76c51b49f9cda3e0cfb2645834",
+    "execution_evidence_path": HERE / "rank-six-order2-10-child-execution-evidence.json",
+    "execution_evidence_sha256": "bbbb8eff45f8009dfb49e926c4952ae0b231ed6e02e708bddfb13b4aac17bb5d",
     "arguments": ("--emit", "--print-manifest"),
     "schema": "rank-six-order2-10-master-implication-v1",
     "block_scope": "exactly-one-positive-rank-cyclic-block",
@@ -196,12 +196,20 @@ def validate_single_block(manifest):
             ["kernel-census", "conditional-analytic-lift", "orders-2-7", "order-8",
              "order-9-promotion", "order-10-promotion"],
             "single-block owner registry changed")
-    require(all(row.get("replay") in {"full-exact", "independent-exact-census",
-                                      "exact-conditional-interface"}
+    expected_replays = [
+        "authenticated-committed-independent-exact-census",
+        "authenticated-committed-exact-conditional-interface",
+        *("authenticated-committed-full-exact-execution" for _ in range(4)),
+    ]
+    require([row.get("replay") for row in dependencies] == expected_replays,
+            "single-block layered replay semantics changed")
+    require(all(row.get("execution_evidence_sha256") ==
+                SINGLE_BLOCK["execution_evidence_sha256"]
+                and row.get("execution_evidence_record") == row.get("name")
                 and isinstance(row.get("source_sha256"), str)
                 and isinstance(row.get("output_sha256"), str)
                 for row in dependencies),
-            "single-block owner lacks frozen exact replay evidence")
+            "single-block owner lacks authenticated committed execution evidence")
     require(not (set(walk_keys(manifest)) & FORBIDDEN_PROMOTION_KEYS),
             "draft, conditional, or status-only promotion field rejected")
 
@@ -226,6 +234,12 @@ def invoke(owner):
     require(owner["path"].is_file(), f"missing theorem owner: {name}")
     require(hashlib.sha256(owner["path"].read_bytes()).hexdigest() ==
             owner["source_sha256"], f"theorem-owner source changed: {name}")
+    if owner is SINGLE_BLOCK:
+        evidence_path = owner["execution_evidence_path"]
+        require(evidence_path.is_file(), "missing single-block child execution evidence")
+        require(hashlib.sha256(evidence_path.read_bytes()).hexdigest() ==
+                owner["execution_evidence_sha256"],
+                "single-block child execution evidence changed")
     optimize = ("-O",) if sys.flags.optimize else ()
     completed = subprocess.run(
         (sys.executable, *optimize, str(owner["path"]), *owner["arguments"]),
@@ -244,6 +258,10 @@ def invoke(owner):
         "source_sha256": owner["source_sha256"],
         "output_sha256": owner["output_sha256"],
         "evidence": "canonical-exact-owner-manifest",
+        **({
+            "child_execution_evidence_sha256": owner["execution_evidence_sha256"],
+            "promotion": "authenticated-committed-exact-child-executions",
+        } if owner is SINGLE_BLOCK else {}),
     }
 
 

@@ -15,6 +15,8 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 KERNEL_FIXTURE = HERE / "fixtures" / "rank-six-kernels.json"
 KERNEL_SHA256 = "5a862a0e9ed5dfe91ff6f8491936c8e775eb39b71619df6b8c2a9be2c4643476"
+CHILD_EXECUTION_EVIDENCE = HERE / "rank-six-order2-10-child-execution-evidence.json"
+CHILD_EXECUTION_EVIDENCE_SHA256 = "bbbb8eff45f8009dfb49e926c4952ae0b231ed6e02e708bddfb13b4aac17bb5d"
 ORDER_COUNTS = (1, 4, 26, 84, 216, 314, 325, 162, 66)
 FINAL_CONCLUSION = "kappa(B)<=|E(B)|+5;therefore s+(G)>=|V(G)| after rooted-tree lift"
 CENSUS = {
@@ -109,6 +111,68 @@ def strict_json_bytes(raw, label):
     return payload
 
 
+def load_child_execution_evidence():
+    raw = CHILD_EXECUTION_EVIDENCE.read_bytes()
+    require(hashlib.sha256(raw).hexdigest() == CHILD_EXECUTION_EVIDENCE_SHA256,
+            "committed child execution evidence digest changed")
+    evidence = strict_json_bytes(raw, "rank-six child execution evidence")
+    require(type(evidence) is dict and set(evidence) == {
+        "schema", "evidence_kind", "execution_mode", "records",
+    }, "child execution evidence fields changed")
+    require(evidence["schema"] == "rank-six-order2-10-child-execution-evidence-v1" and
+            evidence["evidence_kind"] == "committed-canonical-exact-child-executions" and
+            evidence["execution_mode"] ==
+            "python-normal-without-nested-optimized-replay",
+            "child execution evidence semantics changed")
+    records = evidence["records"]
+    require(type(records) is list and
+            [record.get("name") for record in records] == [
+                CENSUS["name"], ANALYTIC_LIFT["name"],
+                *(owner["name"] for owner in OWNERS),
+            ], "child execution evidence registry changed")
+    return records
+
+
+def authenticate_execution_record(record, expected, arguments, manifest_required):
+    require(type(record) is dict and set(record) == {
+        "arguments", "exit_code", "manifest", "manifest_sha256", "name",
+        "output", "output_sha256", "source_path", "source_sha256", "stderr",
+    }, f"execution evidence fields changed: {expected['name']}")
+    require(record["name"] == expected["name"] and
+            record["arguments"] == list(arguments) and
+            record["exit_code"] == 0 and record["stderr"] == "",
+            f"execution semantics changed: {expected['name']}")
+    require(record["source_path"] == expected["path"].name and
+            (HERE / record["source_path"]).resolve() == expected["path"].resolve(),
+            f"execution source path changed: {expected['name']}")
+    source_raw = expected["path"].read_bytes()
+    require(record["source_sha256"] == expected["source_sha256"] ==
+            hashlib.sha256(source_raw).hexdigest(),
+            f"executed source changed: {expected['name']}")
+    output = record["output"]
+    require(type(output) is str, f"execution output is not text: {expected['name']}")
+    try:
+        output_raw = output.encode("ascii")
+    except UnicodeError as error:
+        raise RuntimeError(f"execution output is not ASCII: {expected['name']}") from error
+    require(record["output_sha256"] == expected["output_sha256"] ==
+            hashlib.sha256(output_raw).hexdigest(),
+            f"executed output changed: {expected['name']}")
+    if not manifest_required:
+        require(record["manifest"] is None and record["manifest_sha256"] is None,
+                f"unexpected execution manifest: {expected['name']}")
+        return output
+    first, separator, remainder = output.partition("\n")
+    require(separator == "\n" and remainder,
+            f"stored execution omitted child report: {expected['name']}")
+    manifest_raw = (first + "\n").encode("ascii")
+    manifest = strict_json_bytes(manifest_raw, f"{expected['name']} evidence manifest")
+    require(record["manifest"] == manifest and
+            record["manifest_sha256"] == hashlib.sha256(manifest_raw).hexdigest(),
+            f"stored child manifest changed: {expected['name']}")
+    return output
+
+
 def audit_fixture():
     raw = KERNEL_FIXTURE.read_bytes()
     require(hashlib.sha256(raw).hexdigest() == KERNEL_SHA256,
@@ -179,23 +243,13 @@ def validate_child_manifest(owner, manifest):
             f"status-only promotion record rejected: {name}")
 
 
-def invoke(owner):
+def invoke(owner, record):
     name = owner["name"]
     require(owner["source_sha256"] is not None, f"unregistered promotion source: {name}")
     require(owner["output_sha256"] is not None, f"unregistered canonical output: {name}")
     require(owner["path"].is_file(), f"missing promotion owner: {name}")
-    require(hashlib.sha256(owner["path"].read_bytes()).hexdigest() == owner["source_sha256"],
-            f"owner source digest changed: {name}")
-    optimize = ("-O",) if sys.flags.optimize else ()
-    completed = subprocess.run(
-        (sys.executable, *optimize, str(owner["path"]), *owner["arguments"]),
-        check=False, capture_output=True, text=True,
-    )
-    require(completed.returncode == 0, f"full exact owner failed: {name}")
-    require(completed.stderr == "", f"full exact owner wrote stderr: {name}")
-    actual_output = hashlib.sha256(completed.stdout.encode("utf-8")).hexdigest()
-    require(actual_output == owner["output_sha256"], f"owner output digest changed: {name}")
-    manifest = parse_child_output(completed.stdout, owner)
+    output = authenticate_execution_record(record, owner, owner["arguments"], True)
+    manifest = parse_child_output(output, owner)
     validate_child_manifest(owner, manifest)
     return {
         "name": name,
@@ -204,26 +258,18 @@ def invoke(owner):
         "kernel_count": owner["kernel_count"],
         "source_sha256": owner["source_sha256"],
         "output_sha256": owner["output_sha256"],
+        "execution_evidence_sha256": CHILD_EXECUTION_EVIDENCE_SHA256,
+        "execution_evidence_record": name,
         "schema": owner["schema"],
-        "replay": "full-exact",
+        "replay": "authenticated-committed-full-exact-execution",
     }
 
 
-def invoke_census():
+def invoke_census(record):
     require(CENSUS["path"].is_file(), "missing exact kernel census")
-    require(hashlib.sha256(CENSUS["path"].read_bytes()).hexdigest() ==
-            CENSUS["source_sha256"], "kernel census source digest changed")
-    optimize = ("-O",) if sys.flags.optimize else ()
-    completed = subprocess.run(
-        (sys.executable, *optimize, str(CENSUS["path"])),
-        check=False, capture_output=True, text=True,
-    )
-    require(completed.returncode == 0, "exact kernel census failed")
-    require(completed.stderr == "", "exact kernel census wrote stderr")
-    require(hashlib.sha256(completed.stdout.encode("utf-8")).hexdigest() ==
-            CENSUS["output_sha256"], "kernel census output digest changed")
+    output = authenticate_execution_record(record, CENSUS, (), False)
     require("canonical_counts_n2_to_n10: 1,4,26,84,216,314,325,162,66 (total 1198)"
-            in completed.stdout, "kernel census partition report changed")
+            in output, "kernel census partition report changed")
     return {
         "name": CENSUS["name"],
         "orders": list(range(2, 11)),
@@ -231,28 +277,20 @@ def invoke_census():
         "kernel_count": 1198,
         "source_sha256": CENSUS["source_sha256"],
         "output_sha256": CENSUS["output_sha256"],
-        "replay": "independent-exact-census",
+        "execution_evidence_sha256": CHILD_EXECUTION_EVIDENCE_SHA256,
+        "execution_evidence_record": CENSUS["name"],
+        "replay": "authenticated-committed-independent-exact-census",
     }
 
 
-def invoke_analytic_lift():
+def invoke_analytic_lift(record):
     for key in ("path", "manifest_path"):
         require(ANALYTIC_LIFT[key].is_file(), f"missing analytic lift {key}")
-    require(hashlib.sha256(ANALYTIC_LIFT["path"].read_bytes()).hexdigest() ==
-            ANALYTIC_LIFT["source_sha256"], "analytic lift source digest changed")
     require(hashlib.sha256(ANALYTIC_LIFT["manifest_path"].read_bytes()).hexdigest() ==
             ANALYTIC_LIFT["manifest_sha256"], "analytic lift manifest digest changed")
-    optimize = ("-O",) if sys.flags.optimize else ()
-    completed = subprocess.run(
-        (sys.executable, *optimize, str(ANALYTIC_LIFT["path"]),
-         "--emit", "--print-manifest"),
-        check=False, capture_output=True, text=True,
-    )
-    require(completed.returncode == 0, "conditional analytic lift failed")
-    require(completed.stderr == "", "conditional analytic lift wrote stderr")
-    require(hashlib.sha256(completed.stdout.encode("ascii")).hexdigest() ==
-            ANALYTIC_LIFT["output_sha256"], "analytic lift output digest changed")
-    first_line, separator, report = completed.stdout.partition("\n")
+    output = authenticate_execution_record(
+        record, ANALYTIC_LIFT, ("--emit", "--print-manifest"), True)
+    first_line, separator, report = output.partition("\n")
     require(separator == "\n" and report, "analytic lift report is missing")
     manifest = strict_json_bytes((first_line + "\n").encode("ascii"),
                                  "conditional analytic lift manifest")
@@ -269,8 +307,10 @@ def invoke_analytic_lift():
         "source_sha256": ANALYTIC_LIFT["source_sha256"],
         "manifest_sha256": ANALYTIC_LIFT["manifest_sha256"],
         "output_sha256": ANALYTIC_LIFT["output_sha256"],
+        "execution_evidence_sha256": CHILD_EXECUTION_EVIDENCE_SHA256,
+        "execution_evidence_record": ANALYTIC_LIFT["name"],
         "schema": ANALYTIC_LIFT["schema"],
-        "replay": "exact-conditional-interface",
+        "replay": "authenticated-committed-exact-conditional-interface",
     }
 
 
@@ -382,8 +422,10 @@ def audit():
                  if owner["source_sha256"] is None or owner["output_sha256"] is None
                  or not owner["path"].is_file()]
     require(not blockers, "promotion gate closed: " + ", ".join(blockers))
-    dependencies = [invoke_census(), invoke_analytic_lift(),
-                    *(invoke(owner) for owner in OWNERS)]
+    records = load_child_execution_evidence()
+    dependencies = [invoke_census(records[0]), invoke_analytic_lift(records[1]),
+                    *(invoke(owner, record)
+                      for owner, record in zip(OWNERS, records[2:]))]
     return implication_manifest(counts, dependencies)
 
 
