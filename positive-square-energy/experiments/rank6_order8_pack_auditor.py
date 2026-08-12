@@ -23,9 +23,17 @@ DEFAULT_MANIFEST = HERE / "rank6_order8_search_manifest.json"
 DEFAULT_TRANSCRIPT = HERE / "rank6_order8_exact_audit_transcript.json"
 SCHEMA = "rank-six-order-eight-search-pack-manifest-v2"
 TRANSCRIPT_SCHEMA = "rank-six-order-eight-exact-audit-transcript-v1"
-CHUNK_TRANSCRIPT_SCHEMA = "rank-six-order-eight-exact-chunk-audit-v1"
-AGGREGATE_SCHEMA = "rank-six-order-eight-chunk-audit-aggregate-v1"
+CHUNK_TRANSCRIPT_SCHEMA = "rank-six-order-eight-exact-chunk-audit-v2"
+AGGREGATE_SCHEMA = "rank-six-order-eight-chunk-audit-aggregate-v2"
 FRONTIER_TOTAL = 14
+EXPECTED_SYMBOLIC_ONLY_KEYS = (
+    (100429, None), (100429, 7), (100429, 10), (100429, 11),
+    (100439, None), (100439, 7), (100439, 10), (100439, 11),
+    (100453, None), (100453, 7), (100453, 10), (100453, 11),
+    (100473, None), (100473, 7), (100473, 10), (100473, 11),
+    (100490, None), (100490, 7), (100490, 10), (100490, 11),
+    (100537, None), (100537, 7), (100537, 10), (100537, 11),
+)
 REPORT_FIELDS = {
     "status", "covered_residual_range", "residual_total", "covered_target_total",
     "unresolved_target_total", "symbolic_certified_target_total", "unresolved_keys",
@@ -184,17 +192,17 @@ def transcript_payload(manifest_path, report):
     }
 
 
-def load_transcript(path):
+def load_transcript(path, label="exact audit transcript"):
     raw = path.read_bytes()
-    payload = strict_json(raw, "exact audit transcript")
-    require(raw == canonical_bytes(payload), "exact audit transcript is not canonical JSON")
+    payload = strict_json(raw, label)
+    require(raw == canonical_bytes(payload), f"{label} is not canonical JSON")
     return raw, payload
 
 
 def authenticate_transcript(manifest_path, transcript_path):
     """Bind a persisted exact result to all current inputs; do no exact replay."""
     manifest, manifest_digest = authenticate_artifacts(manifest_path)
-    raw, transcript = load_transcript(transcript_path)
+    raw, transcript = load_transcript(transcript_path, "exact audit transcript")
     require(set(transcript) == {"schema", "auditor_sha256", "manifest_sha256",
                                 "dependency_sha256", "covered_key_stream_sha256", "report"},
             "exact audit transcript fields changed")
@@ -360,6 +368,8 @@ def chunk_transcript_payload(manifest_path, chunk_index, report):
             "chunk report covers another interval")
     return {
         "schema": CHUNK_TRANSCRIPT_SCHEMA,
+        "theorem_evidence": True,
+        "execution_semantics": "independent_exact_chunk_replay_receipt",
         "auditor_sha256": auditor_sha256(),
         "manifest_sha256": manifest_digest,
         "dependency_sha256": manifest["dependency_sha256"],
@@ -387,6 +397,15 @@ def validate_chunk_report(report, start, stop, residual_total):
     require(len({tuple(key) for key in keys}) == len(keys) ==
             report["unresolved_target_total"] == report["symbolic_certified_target_total"],
             "chunk unresolved-key totals changed")
+    count_fields = (
+        "unresolved_target_total", "symbolic_certified_target_total",
+        "exact_cost_five_target_total", "symbolic_expected_in_coverage",
+        "symbolic_rationally_certified_target_total",
+        "symbolic_unexpected_target_total",
+    )
+    require(all(type(report[field]) is int and 0 <= report[field] <=
+                report["covered_target_total"] for field in count_fields),
+            "chunk symbolic totals are malformed")
     require(report["symbolic_unexpected_target_total"] == 0 and
             report["symbolic_coverage_match"] is True and
             report["symbolic_expected_in_coverage"] ==
@@ -395,19 +414,107 @@ def validate_chunk_report(report, start, stop, residual_total):
             "chunk symbolic partition changed")
 
 
+def require_complete_receipt_indices(indices, chunk_total):
+    require(type(indices) is list and all(type(index) is int for index in indices),
+            "aggregate receipt indices are malformed")
+    require(len(indices) == chunk_total, "aggregate is missing a chunk receipt")
+    require(len(set(indices)) == len(indices), "aggregate has a duplicate chunk receipt")
+    require(set(indices) == set(range(chunk_total)),
+            "aggregate requires exactly one receipt for every manifest chunk")
+
+
+def aggregate_report(manifest, reports):
+    unresolved = [key for report in reports for key in report["unresolved_keys"]]
+    total_targets = sum(report["covered_target_total"] for report in reports)
+    exact_cost_five = sum(report["exact_cost_five_target_total"] for report in reports)
+    symbolic_expected = sum(report["symbolic_expected_in_coverage"] for report in reports)
+    symbolic_rational = sum(
+        report["symbolic_rationally_certified_target_total"] for report in reports)
+    require(total_targets == manifest["covered_target_total"],
+            "aggregate target total changed")
+    require(tuple(tuple(key) for key in sorted(
+                unresolved, key=lambda key: (key[0], -1 if key[1] is None else key[1]))) ==
+            EXPECTED_SYMBOLIC_ONLY_KEYS,
+            "aggregate symbolic-only key ledger changed")
+    require(symbolic_expected == 256 and symbolic_rational == 232 and
+            exact_cost_five == 168,
+            "aggregate exact ownership partition changed")
+    return {
+        "status": "complete",
+        "covered_residual_range": manifest["covered_residual_range"],
+        "residual_total": manifest["residual_total"],
+        "covered_target_total": total_targets,
+        "unresolved_target_total": len(unresolved),
+        "symbolic_certified_target_total": len(unresolved),
+        "unresolved_keys": [list(key) for key in EXPECTED_SYMBOLIC_ONLY_KEYS],
+        "exact_cost_five_target_total": exact_cost_five,
+        "symbolic_expected_in_coverage": symbolic_expected,
+        "symbolic_rationally_certified_target_total": symbolic_rational,
+        "symbolic_unexpected_target_total": 0,
+        "symbolic_coverage_match": True,
+        "exact_audit": True,
+    }
+
+
+def aggregate_ownership(report):
+    rational = report["covered_target_total"] - report["symbolic_certified_target_total"]
+    return {
+        "rational_owner_target_total": rational,
+        "symbolic_owner_target_total": report["symbolic_certified_target_total"],
+        "certified_target_total": report["covered_target_total"],
+        "complete_disjoint_ownership": True,
+    }
+
+
+def expect_rejected(action, label):
+    try:
+        action()
+    except (RuntimeError, TypeError, ValueError):
+        return
+    raise RuntimeError(f"hostile aggregate mutation was accepted: {label}")
+
+
+def aggregate_hostile_self_checks(manifest, reports):
+    chunk_total = len(manifest["chunks"])
+    indices = list(range(chunk_total))
+    expect_rejected(lambda: require_complete_receipt_indices(indices[:-1], chunk_total),
+                    "missing receipt")
+    duplicated = indices[:-1] + [indices[0]]
+    expect_rejected(lambda: require_complete_receipt_indices(duplicated, chunk_total),
+                    "duplicate receipt")
+    changed = [dict(report) for report in reports]
+    changed[0]["symbolic_expected_in_coverage"] += 1
+    expect_rejected(lambda: aggregate_report(manifest, changed),
+                    "symbolic expected total")
+    symbolic_report = next(report for report in reports if report["unresolved_keys"])
+    changed = [dict(report) for report in reports]
+    index = reports.index(symbolic_report)
+    changed[index]["unresolved_keys"] = [list(key) for key in
+                                          symbolic_report["unresolved_keys"]]
+    changed[index]["unresolved_keys"][0] = [100429, 0]
+    expect_rejected(lambda: aggregate_report(manifest, changed),
+                    "symbolic-only key ledger")
+    return 4
+
+
 def authenticate_chunk_transcript(manifest_path, transcript_path, authenticated=None):
-    """Authenticate checkpoint bytes and inputs; do not claim exact replay."""
+    """Authenticate a receipt written after an independent exact chunk replay."""
     if authenticated is None:
         manifest, manifest_digest = authenticate_artifacts(manifest_path)
     else:
         manifest, manifest_digest = authenticated
-    raw, transcript = load_transcript(transcript_path)
-    require(set(transcript) == {"schema", "auditor_sha256", "manifest_sha256",
+    raw, transcript = load_transcript(transcript_path, "exact chunk replay receipt")
+    require(set(transcript) == {"schema", "theorem_evidence", "execution_semantics",
+                                "auditor_sha256", "manifest_sha256",
                                 "dependency_sha256", "covered_key_stream_sha256",
                                 "chunk_index", "chunk", "report"},
             "chunk transcript fields changed")
     require(transcript["schema"] == CHUNK_TRANSCRIPT_SCHEMA,
             "chunk transcript schema changed")
+    require(transcript["theorem_evidence"] is True and
+            transcript["execution_semantics"] ==
+            "independent_exact_chunk_replay_receipt",
+            "chunk receipt lost its exact-execution semantics")
     require(transcript["auditor_sha256"] == auditor_sha256(), "attested auditor changed")
     require(transcript["manifest_sha256"] == manifest_digest, "attested manifest changed")
     require(transcript["dependency_sha256"] == manifest["dependency_sha256"],
@@ -424,8 +531,9 @@ def authenticate_chunk_transcript(manifest_path, transcript_path, authenticated=
     return raw, transcript
 
 
-def build_aggregate(manifest_path, transcript_paths):
+def build_aggregate(manifest_path, transcript_paths, aggregate_path):
     manifest, manifest_digest = authenticate_artifacts(manifest_path)
+    aggregate_root = aggregate_path.parent.resolve()
     records = []
     reports = []
     seen = set()
@@ -435,50 +543,119 @@ def build_aggregate(manifest_path, transcript_paths):
         index = transcript["chunk_index"]
         require(index not in seen, f"duplicate chunk transcript: {index}")
         seen.add(index)
-        records.append({"chunk_index": index, "transcript_sha256": sha256(raw)})
+        start, stop = transcript["chunk"]["residual_range"]
+        try:
+            relative = path.resolve().relative_to(aggregate_root).as_posix()
+        except ValueError as error:
+            raise RuntimeError("chunk receipt is outside the aggregate directory") from error
+        records.append({
+            "chunk_index": index,
+            "path": relative,
+            "residual_range": [start, stop],
+            "transcript_sha256": sha256(raw),
+            "rational_owner_target_total":
+                transcript["report"]["covered_target_total"] -
+                transcript["report"]["symbolic_certified_target_total"],
+            "symbolic_owner_target_total":
+                transcript["report"]["symbolic_certified_target_total"],
+        })
         reports.append(transcript["report"])
-    require(seen == set(range(len(manifest["chunks"]))),
-            "aggregate requires exactly one transcript for every manifest chunk")
+    require_complete_receipt_indices([record["chunk_index"] for record in records],
+                                     len(manifest["chunks"]))
     records.sort(key=lambda record: record["chunk_index"])
-    unresolved = [key for report in reports for key in report["unresolved_keys"]]
-    total_targets = sum(report["covered_target_total"] for report in reports)
-    require(total_targets == manifest["covered_target_total"],
-            "aggregate target total changed")
-    require(len(unresolved) == 24 and
-            sum(report["symbolic_expected_in_coverage"] for report in reports) == 256 and
-            sum(report["symbolic_rationally_certified_target_total"]
-                for report in reports) == 232 and
-            sum(report["exact_cost_five_target_total"] for report in reports) == 168,
-            "aggregate exact ownership partition changed")
-    report = {
-        "status": "complete",
-        "covered_residual_range": manifest["covered_residual_range"],
-        "residual_total": manifest["residual_total"],
-        "covered_target_total": total_targets,
-        "unresolved_target_total": len(unresolved),
-        "symbolic_certified_target_total": len(unresolved),
-        "unresolved_keys": sorted(unresolved,
-                                  key=lambda key: (key[0], -1 if key[1] is None else key[1])),
-        "exact_cost_five_target_total": sum(
-            report["exact_cost_five_target_total"] for report in reports),
-        "symbolic_expected_in_coverage": sum(
-            report["symbolic_expected_in_coverage"] for report in reports),
-        "symbolic_rationally_certified_target_total": sum(
-            report["symbolic_rationally_certified_target_total"] for report in reports),
-        "symbolic_unexpected_target_total": 0,
-        "symbolic_coverage_match": True,
-        "exact_audit": True,
-    }
+    report = aggregate_report(manifest, reports)
+    require(aggregate_hostile_self_checks(manifest, reports) == 4,
+            "aggregate hostile mutation count changed")
     return {
         "schema": AGGREGATE_SCHEMA,
+        "proof_semantics": "receipt_index_only_no_proof_by_itself",
+        "exact_proof": False,
         "auditor_sha256": auditor_sha256(),
         "manifest_sha256": manifest_digest,
         "dependency_sha256": manifest["dependency_sha256"],
         "covered_key_stream_sha256": manifest["covered_key_stream_sha256"],
         "chunks": records,
+        "ownership": aggregate_ownership(report),
         "report": report,
-        "notice": "checkpoint index only; exact proof requires replay of every listed chunk",
+        "notice": "aggregate is an authenticated index only; it is no proof by itself; theorem evidence is the complete authenticated receipt set",
     }
+
+
+def authenticate_aggregate(manifest_path, aggregate_path):
+    """Authenticate the aggregate and every exact-execution receipt it indexes."""
+    manifest, manifest_digest = authenticate_artifacts(manifest_path)
+    raw, aggregate = load_transcript(aggregate_path, "chunk receipt aggregate")
+    require(type(aggregate) is dict and set(aggregate) == {
+        "schema", "proof_semantics", "exact_proof", "auditor_sha256",
+        "manifest_sha256", "dependency_sha256", "covered_key_stream_sha256",
+        "chunks", "ownership", "report", "notice",
+    }, "aggregate fields changed")
+    require(aggregate["schema"] == AGGREGATE_SCHEMA and
+            aggregate["proof_semantics"] == "receipt_index_only_no_proof_by_itself" and
+            aggregate["exact_proof"] is False,
+            "aggregate proof semantics changed")
+    require(aggregate["auditor_sha256"] == auditor_sha256() and
+            aggregate["manifest_sha256"] == manifest_digest,
+            "aggregate auditor or manifest changed")
+    require(aggregate["dependency_sha256"] == manifest["dependency_sha256"] and
+            aggregate["covered_key_stream_sha256"] ==
+            manifest["covered_key_stream_sha256"],
+            "aggregate transitive inputs changed")
+    records = aggregate["chunks"]
+    require(type(records) is list, "aggregate chunk ledger is malformed")
+    require_complete_receipt_indices(
+        [record.get("chunk_index") if type(record) is dict else None
+         for record in records], len(manifest["chunks"]))
+    root = aggregate_path.parent.resolve()
+    reports = []
+    receipt_paths = []
+    for expected_index, record in enumerate(records):
+        require(type(record) is dict and set(record) == {
+            "chunk_index", "path", "residual_range", "transcript_sha256",
+            "rational_owner_target_total", "symbolic_owner_target_total",
+        }, "aggregate chunk record fields changed")
+        require(record["chunk_index"] == expected_index and
+                record["residual_range"] == manifest["chunks"][expected_index]["residual_range"] and
+                type(record["path"]) is str and record["path"],
+                "aggregate chunk order, range, or path changed")
+        path = (aggregate_path.parent / record["path"]).resolve()
+        try:
+            path.relative_to(root)
+        except ValueError as error:
+            raise RuntimeError("aggregate receipt path escapes its directory") from error
+        receipt_raw, receipt = authenticate_chunk_transcript(
+            manifest_path, path, (manifest, manifest_digest))
+        report = receipt["report"]
+        require(receipt["chunk_index"] == expected_index and
+                sha256(receipt_raw) == record["transcript_sha256"],
+                "aggregate receipt identity changed")
+        require(record["rational_owner_target_total"] ==
+                report["covered_target_total"] - report["symbolic_certified_target_total"] and
+                record["symbolic_owner_target_total"] ==
+                report["symbolic_certified_target_total"],
+                "aggregate per-chunk ownership changed")
+        reports.append(report)
+        receipt_paths.append(path)
+    expected_report = aggregate_report(manifest, reports)
+    require(aggregate_hostile_self_checks(manifest, reports) == 4,
+            "aggregate hostile mutation count changed")
+    require(aggregate["report"] == expected_report and
+            aggregate["ownership"] == aggregate_ownership(expected_report),
+            "aggregate report or ownership totals changed")
+    return raw, aggregate, tuple(receipt_paths)
+
+
+def promotion_ownership(manifest_path, aggregate_path):
+    """Return theorem-ready ownership only after authenticating all 17 receipts."""
+    _, aggregate, receipt_paths = authenticate_aggregate(manifest_path, aggregate_path)
+    ownership = aggregate["ownership"]
+    require(len(receipt_paths) == 17 and ownership == {
+        "rational_owner_target_total": 1441808,
+        "symbolic_owner_target_total": 24,
+        "certified_target_total": 1441832,
+        "complete_disjoint_ownership": True,
+    }, "order-eight promotion ownership changed")
+    return ownership
 
 
 def build_manifest(output, paths):
@@ -548,6 +725,8 @@ def main():
     parser.add_argument("--aggregate-transcripts", nargs="+", type=Path, metavar="PATH",
                         help="combine one authenticated checkpoint per manifest chunk")
     parser.add_argument("--write-aggregate", type=Path, metavar="PATH")
+    parser.add_argument("--authenticate-aggregate", type=Path, metavar="PATH",
+                        help="authenticate an aggregate and every receipt it indexes")
     args = parser.parse_args()
     if args.build_manifest is not None:
         require(not args.digest_only, "--digest-only cannot build a manifest")
@@ -563,9 +742,20 @@ def main():
                 args.write_chunk_transcript is None and not args.digest_only,
                 "aggregate mode cannot be combined with replay modes")
         require(args.write_aggregate.parent.is_dir(), "aggregate output parent does not exist")
-        payload = build_aggregate(args.manifest, args.aggregate_transcripts)
+        require(args.authenticate_aggregate is None,
+                "aggregate build and authentication modes are incompatible")
+        payload = build_aggregate(
+            args.manifest, args.aggregate_transcripts, args.write_aggregate)
         args.write_aggregate.write_bytes(canonical_bytes(payload))
         sys.stdout.write(canonical_bytes(payload).decode("ascii"))
+        return
+    if args.authenticate_aggregate is not None:
+        require(args.write_aggregate is None and args.chunk_index is None and
+                args.write_transcript is None and args.write_chunk_transcript is None and
+                not args.digest_only,
+                "aggregate authentication cannot be combined with replay modes")
+        _, aggregate, _ = authenticate_aggregate(args.manifest, args.authenticate_aggregate)
+        sys.stdout.write(canonical_bytes(aggregate).decode("ascii"))
         return
     require((args.chunk_index is None) == (args.write_chunk_transcript is None),
             "--chunk-index and --write-chunk-transcript must be used together")

@@ -20,6 +20,8 @@ CENSUS_PROGRAM = EXPERIMENTS / "rank6_order8_orbit_frontier_census.py"
 CENSUS_FIXTURE = EXPERIMENTS / "rank6_order8_orbit_frontier_census.json"
 PACK_AUDITOR = EXPERIMENTS / "rank6_order8_pack_auditor.py"
 PACK_MANIFEST = EXPERIMENTS / "rank6_order8_search_manifest.json"
+SEGMENTED_EVIDENCE = (EXPERIMENTS / "rank6_order8_chunk_replays" /
+                      "aggregate.json")
 SYMBOLIC_PROGRAM = EXPERIMENTS / "rank6_order8_symbolic_recognizers.py"
 SYMBOLIC_FIXTURE = EXPERIMENTS / "rank6_order8_symbolic_templates.json"
 
@@ -31,9 +33,11 @@ DEPENDENCIES = {
     "census_fixture": (CENSUS_FIXTURE,
         "724fdb337b7bb9225b1a8691c28e131ae1c8de7dc38bb13a5adbb98c1f92218e"),
     "pack_auditor": (PACK_AUDITOR,
-        "21dc6cafe2539bb20e91ea3bf278f3e7ff8d66602b5acbe1c0d3d73f44f02175"),
+        "f6a7a673f86999bcd7e2056408450014296ff603eb56f082ac1e87fa256ac857"),
     "pack_manifest": (PACK_MANIFEST,
         "9512d8a04c05209d42c0be34d4e1c636d6d8c3b7773cf04768490d1100d46e2d"),
+    "segmented_evidence": (SEGMENTED_EVIDENCE,
+        "7500b864bb11fcbfd68ae6a05701ed59a3f0bcaf243e93353a9d5605ee64f763"),
     "symbolic_program": (SYMBOLIC_PROGRAM,
         "755dd24b9e3f129dc6cd4fe590c4c13031bd22c41054ca29082981e3f5d909fe"),
     "symbolic_fixture": (SYMBOLIC_FIXTURE,
@@ -54,12 +58,20 @@ def canonical_bytes(payload):
 
 
 def strict_json(path, label):
+    def pairs(rows):
+        result = {}
+        for key, value in rows:
+            require(key not in result, f"duplicate key in {label}: {key}")
+            result[key] = value
+        return result
+
     def reject_constant(value):
         raise ValueError(f"nonstandard JSON constant in {label}: {value}")
 
     raw = path.read_bytes()
     try:
-        payload = json.loads(raw.decode("ascii"), parse_constant=reject_constant)
+        payload = json.loads(raw.decode("ascii"), object_pairs_hook=pairs,
+                             parse_constant=reject_constant)
     except (UnicodeError, json.JSONDecodeError, ValueError) as error:
         raise RuntimeError(f"cannot parse {label}: {error}") from error
     require(raw == canonical_bytes(payload), f"{label} is not canonical ASCII JSON")
@@ -88,7 +100,8 @@ def audit_dependencies():
     for name, (path, expected) in DEPENDENCIES.items():
         require(path.is_file(), f"missing dependency: {name}")
         actual = hashlib.sha256(path.read_bytes()).hexdigest()
-        require(actual == expected, f"dependency digest changed: {name}")
+        require(expected is not None and actual == expected,
+                f"dependency digest changed or is not frozen: {name}")
         result[name] = actual
     return result
 
@@ -133,26 +146,121 @@ def validate_frontier_report(report):
     return report
 
 
-def audit_exact_frontier():
+def audit_exact_frontier(chunk_index=None):
     auditor = load_module("rank6_order8_pack_for_master", PACK_AUDITOR)
-    report, complete = auditor.audit(PACK_MANIFEST, exact=True)
+    report, complete = auditor.audit(PACK_MANIFEST, exact=True, chunk_index=chunk_index)
     require(complete, "exhaustive exact frontier is incomplete")
-    validate_frontier_report(report)
+    if chunk_index is None:
+        validate_frontier_report(report)
     return report
+
+
+def validate_segmented_evidence(aggregate, records, reports, pack):
+    require(aggregate.get("schema") ==
+            "rank-six-order-eight-chunk-audit-aggregate-v2" and
+            aggregate.get("proof_semantics") ==
+            "receipt_index_only_no_proof_by_itself" and
+            aggregate.get("exact_proof") is False,
+            "aggregate must remain an index with no proof by itself")
+    require(len(records) == len(reports) == len(pack["chunks"]) == 17,
+            "segmented evidence must contain exactly 17 receipts")
+    require([record.get("chunk_index") for record in records] == list(range(17)) and
+            [record.get("residual_range") for record in records] ==
+            [chunk["residual_range"] for chunk in pack["chunks"]],
+            "receipt partition is not the exact manifest partition")
+    rational = sum(report["covered_target_total"] -
+                   report["symbolic_certified_target_total"] for report in reports)
+    symbolic = sum(report["symbolic_certified_target_total"] for report in reports)
+    certified = sum(report["covered_target_total"] for report in reports)
+    require((rational, symbolic, certified) == (1441808, 24, 1441832) and
+            aggregate.get("ownership") == {
+                "rational_owner_target_total": rational,
+                "symbolic_owner_target_total": symbolic,
+                "certified_target_total": certified,
+                "complete_disjoint_ownership": True,
+            }, "exact aggregate ownership totals changed")
+    require(all(report["status"] == "complete" and
+                report["exact_audit"] is True and
+                report["unresolved_target_total"] ==
+                report["symbolic_certified_target_total"]
+                for report in reports),
+            "a receipt does not own every target in its exact range")
+    require(aggregate.get("report", {}).get("covered_residual_range") == [0, 102988] and
+            aggregate.get("report", {}).get("covered_target_total") == certified,
+            "aggregate universe changed")
+    return {
+        "rational_targets": rational,
+        "symbolic_targets": symbolic,
+        "certified_targets": certified,
+        "complete_disjoint_ownership": True,
+    }
+
+
+def segmented_exact_replays(pack):
+    auditor = load_module("rank6_order8_segmented_for_promotion", PACK_AUDITOR)
+    raw, aggregate = strict_json(SEGMENTED_EVIDENCE, "order-eight receipt aggregate")
+    require(hashlib.sha256(raw).hexdigest() == DEPENDENCIES["segmented_evidence"][1],
+            "receipt aggregate identity changed")
+    require(aggregate.get("auditor_sha256") == DEPENDENCIES["pack_auditor"][1] and
+            aggregate.get("manifest_sha256") == DEPENDENCIES["pack_manifest"][1] and
+            aggregate.get("dependency_sha256") == pack["dependency_sha256"] and
+            aggregate.get("covered_key_stream_sha256") ==
+            pack["covered_key_stream_sha256"],
+            "receipt aggregate input identities changed")
+    records = aggregate.get("chunks")
+    require(type(records) is list, "receipt aggregate index is malformed")
+    root = SEGMENTED_EVIDENCE.parent.resolve()
+    reports = []
+    for expected_index, record in enumerate(records):
+        require(type(record) is dict and set(record) == {
+            "chunk_index", "path", "residual_range", "transcript_sha256",
+            "rational_owner_target_total", "symbolic_owner_target_total",
+        }, "receipt index fields changed")
+        path = (root / record["path"]).resolve()
+        try:
+            path.relative_to(root)
+        except ValueError as error:
+            raise RuntimeError("receipt path escapes aggregate directory") from error
+        receipt_raw, receipt = auditor.authenticate_chunk_transcript(
+            PACK_MANIFEST, path, (pack, DEPENDENCIES["pack_manifest"][1]))
+        report = receipt["report"]
+        require(expected_index == record["chunk_index"] == receipt["chunk_index"] and
+                hashlib.sha256(receipt_raw).hexdigest() ==
+                record["transcript_sha256"] and
+                record["residual_range"] == receipt["chunk"]["residual_range"] and
+                record["rational_owner_target_total"] ==
+                report["covered_target_total"] -
+                report["symbolic_certified_target_total"] and
+                record["symbolic_owner_target_total"] ==
+                report["symbolic_certified_target_total"],
+                "receipt identity or ownership index changed")
+        reports.append(report)
+    return validate_segmented_evidence(aggregate, records, reports, pack)
 
 
 def audit():
     validate_registry()
     dependencies = audit_dependencies()
     census_digest, census = audit_census()
-    frontier = audit_exact_frontier()
-    rational_targets = frontier["covered_target_total"] - frontier["unresolved_target_total"]
-    require(rational_targets == 1441808, "rational target total changed")
+    auditor = load_module("rank6_order8_pack_for_promotion", PACK_AUDITOR)
+    pack, manifest_digest = auditor.authenticate_artifacts(PACK_MANIFEST)
+    require(manifest_digest == dependencies["pack_manifest"],
+            "promotion owner audited another manifest")
+    ownership = segmented_exact_replays(pack)
     manifest = {
         "schema": "rank-six-order-eight-kernel-theorem-master-v1",
         "scope": EXPECTED_SCOPE,
         "kernel_fixture_sha256": dependencies["kernel_fixture"],
         "dependencies": dependencies,
+        "final_pack": {
+            "manifest_sha256": dependencies["pack_manifest"],
+            "covered_key_stream_sha256": pack["covered_key_stream_sha256"],
+            "residual_range": [0, 102988],
+            "segments": 17,
+            "replay": "authenticated receipts from 17 independent exact chunk replays",
+            "execution_evidence": str(SEGMENTED_EVIDENCE.relative_to(ROOT)),
+            "aggregate_semantics": "authenticated index only; no proof by itself",
+        },
         "census": {
             "fixture_sha256": census_digest,
             "kernels": census["kernel_total"],
@@ -162,11 +270,11 @@ def audit():
             "residual_orbits": census["tetrahedral_residual_total"],
         },
         "frontier": {
-            "targets": frontier["covered_target_total"],
-            "rational_targets": rational_targets,
-            "symbolic_targets": frontier["symbolic_certified_target_total"],
+            "targets": ownership["certified_targets"],
+            "rational_targets": ownership["rational_targets"],
+            "symbolic_targets": ownership["symbolic_targets"],
             "complete_disjoint_ownership": True,
-            "verification": "exact replay of every manifest chunk",
+            "verification": "authenticated execution receipt for independent exact replay of every manifest chunk",
         },
         "length_scope": "arbitrary positive simple-subdivision lengths via same-parity monotonicity",
         "attachments": "arbitrary finite rooted trees at branch or subdivision vertices",
@@ -174,9 +282,34 @@ def audit():
         "excluded_claims": [
             "order-nine or order-ten rank-six kernels",
             "multiblock or all connected hexacyclic graphs",
+            "STATE or project-global promotion",
         ],
     }
     return manifest, hashlib.sha256(canonical_bytes(manifest)).hexdigest()
+
+
+def practical_audit(chunk_index):
+    validate_registry()
+    dependencies = audit_dependencies()
+    census_digest, _ = audit_census()
+    auditor = load_module("rank6_order8_pack_for_practical", PACK_AUDITOR)
+    pack = auditor.load_manifest(PACK_MANIFEST)
+    require(type(chunk_index) is int and 0 <= chunk_index < len(pack["chunks"]),
+            "practical chunk index is out of range")
+    report = audit_exact_frontier(chunk_index)
+    require(report["covered_residual_range"] ==
+            pack["chunks"][chunk_index]["residual_range"],
+            "practical chunk coverage changed")
+    payload = {
+        "dependencies": dependencies,
+        "census_fixture_sha256": census_digest,
+        "pack_manifest_sha256": dependencies["pack_manifest"],
+        "chunk_index": chunk_index,
+        "covered_residual_range": report["covered_residual_range"],
+        "covered_target_total": report["covered_target_total"],
+        "theorem_evidence": False,
+    }
+    return hashlib.sha256(canonical_bytes(payload)).hexdigest()
 
 
 def expect_rejected(action, label):
@@ -231,16 +364,17 @@ def hostile_self_checks():
 
 def report(digest, mutations):
     return "\n".join((
-        "rank-six order-eight kernel theorem: exhaustive exact audit passed",
+        "rank-six order-eight kernel theorem: 17 independent exact replay receipts passed",
         "census: kernels=325 physical=1598512 orbits=1045292 coarse=942304 residual=102988",
         "frontier: total=1441832 rational=1441808 symbolic=24 complete=true",
         "lengths: arbitrary same-parity lengthening from canonical-plus-coordinate targets",
         "attachments: arbitrary rooted trees at branch and subdivision vertices",
         "conclusion: s+(G)>=|V(G)| for the order-eight single-block class",
-        "nonclaim: no order-nine, order-ten, multiblock, or all-hexacyclic conclusion",
+        "nonclaim: no order-nine, order-ten, multiblock, all-connected, STATE, or global conclusion",
         f"exact_dependency_manifest_sha256: {digest}",
         f"rejected_hostile_mutations: {mutations}",
-        "verification_layer: full-exhaustive-replay",
+        "verification_layer: committed-independent-exact-chunk-replays",
+        "hash_boundary: owner authenticates every receipt; aggregate is no proof by itself",
     )) + "\n"
 
 
@@ -249,12 +383,26 @@ def main():
     parser.add_argument("--print-manifest", action="store_true")
     parser.add_argument("--full", action="store_true",
                         help="replay all 1,441,832 exact target audits")
+    parser.add_argument("--practical", action="store_true",
+                        help="pin the full universe and exactly replay one of 17 chunks")
+    parser.add_argument("--chunk-index", type=int, default=0)
     args = parser.parse_args()
-    require(args.full,
-            "--full is required: an unauthenticated result transcript is not independent proof")
+    require(args.full != args.practical,
+            "select exactly one of --full or --practical")
+    if args.practical:
+        require(not args.print_manifest,
+                "--practical cannot emit a theorem child manifest")
+        digest = practical_audit(args.chunk_index)
+        sys.stdout.write(
+            "rank-six order-eight practical audit: pins and exact chunk replay passed\n"
+            f"chunk_index: {args.chunk_index}\n"
+            f"practical_audit_sha256: {digest}\n"
+            "nonclaim: practical mode is not theorem evidence and emits no child manifest\n")
+        return 0
+    require(args.chunk_index == 0, "--chunk-index is valid only with --practical")
     manifest, digest = audit()
     mutations = hostile_self_checks()
-    require(mutations == 14, "hostile mutation count changed")
+    require(mutations == len(DEPENDENCIES) + 7, "hostile mutation count changed")
     output = report(digest, mutations)
     if args.print_manifest:
         sys.stdout.write(canonical_bytes(manifest).decode("ascii"))
