@@ -1925,3 +1925,35 @@ No audits yet.
   Scope remains only this frozen B7 hard-orbit/state refinement. No other
   grouped leaf, B7 state, branch, or full Seymour claim follows. No commit was
   made.
+
+### B7 grouped B-reduced width-two exact partition
+
+- Selected exactly the 15 grouped scout-TIMEOUT leaves whose frozen coordinate
+  disposition is `b-reduced` and whose reduced path ALO has width two. Certified
+  grouped leaf 129 is not in the scope and is explicitly excluded. The selected
+  source ordinals are 000, 002, 004, 006, 008, 010, 012, 014, 016, 022, 024,
+  026, 033, 067, and 071.
+- Split every source with path variables `x,y` and source clause `x OR y` into
+  the two disjoint children adding unit `x` and unit `NOT x`. Their union is the
+  source because the latter child plus `x OR y` implies `y`. This gives exactly
+  30 children while retaining each source's grouped selector ALO, pairwise AMO,
+  selector names, and all guarded parent projections unchanged.
+- The independent checker separately reconstructs all frozen grouped sources,
+  requires their exact B-reduced binary ALO, proves the paired `x`/`NOT x`
+  partition, checks unchanged source clauses/selectors, and reports every exact
+  path variable and its two directed arcs. It also pins the complete scout byte
+  count and SHA-256 and requires the exact all-30-TIMEOUT status sequence and
+  totals (status-sequence SHA-256
+  `9f2d19fb7801da4c7e15d08c92e8abce897ad315bce4ffb3214059fb9f73e59c`).
+  Hostile tests reject split-polarity, split-variable, path-arc metadata,
+  selector-guard, scout-status, Boolean/short timing, row-hash, and
+  scout-byte/hash mutations.
+- Manifest and hash-ledger identities are 3,791 /
+  `59c0f1f2dfbda4fa5f28212996c60e99fbc57635b15929f9c9d9c62f2815544a`
+  and 3,598 /
+  `2fd92c67a960223bdf6f7981f2914fac8413df85571c0413bfc1aec9280288b1`.
+  The 8,393-byte pinned 20-second scout is
+  `73cb4a5d3040764da9c9efb752136f7f1e86224e16819ae54228e5b7b666c901`.
+- Pinned CaDiCaL 1.7.3 returned TIMEOUT on all 30 children (zero SAT and zero
+  UNSAT). These are capped scout results only; no certificate was generated or
+  retained, no mathematical closure is claimed, and no commit was made.
