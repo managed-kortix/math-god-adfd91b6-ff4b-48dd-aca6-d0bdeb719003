@@ -18,44 +18,32 @@
 \newcommand{\betarank}{\beta}
 \newcommand{\one}{\mathbf 1}
 
-\title{Positive Square Energy of Hexacyclic Graphs\\
-\large Conditional manuscript skeleton---draft, not a theorem announcement}
-\author{AI-generated draft; no human authorship is claimed}
-\date{10 August 2026}
+\title{Positive Square Energy of Every Hexacyclic Graph}
+\author{AI-generated manuscript; no human authorship is claimed}
+\date{12 August 2026}
 
 \begin{document}
 \maketitle
 
-\begin{center}
-\fbox{\parbox{0.92\linewidth}{\textbf{Draft status.}
-The headline implication in Theorem~\ref{thm:conditional-main} is explicitly
-conditional.  This manuscript does not claim that every hexacyclic graph has
-the stated property.  Its finite premise is not discharged here.  In
-particular, promotion is blocked until the order-nine and order-ten exact
-owners, the rank-six orders-$2$--$10$ master, and the all-connected synthesis
-master all pass their specified full normal and optimized replay gates.}}
-\end{center}
-
 \begin{abstract}
 Let $G$ be a finite simple connected graph with $n$ vertices and $n+5$ edges.
-This draft records an analytic reduction of the desired inequality
-$\spn(G)\ge n$ to two explicitly stated proof premises.  A repository ledger
-is cited for the multiblock premise, but this manuscript does not reproduce or
-independently validate that ledger.  In the unique positive-rank cyclic-block
-case, suppression gives one of $1198$ rank-six multigraph kernels, with order
-distribution $1,4,26,84,216,314,325,162,66$ on two through ten branch
-vertices.  Exact path elimination reduces arbitrary subdivisions to physical
-parity orbits and canonical-plus-coordinate frontiers, and one-vertex
-additivity includes arbitrary rooted trees.  The final single-block premise is
-not yet available: in particular, incomplete order-nine or order-ten coverage
-is not a theorem owner, and the orders-$2$--$10$ and all-connected masters are
-not green.  Reproducibility appendices below therefore contain a mixture of
-commands for present repository artifacts and clearly marked promotion
-placeholders, not a publication record or a certificate of the headline
-conclusion.
+We prove that the sum $\spn(G)$ of the squares of its positive adjacency
+eigenvalues is at least $n$.  Cyclomatic-rank additivity splits the proof into
+graphs with at least two positive-rank cyclic blocks and graphs with exactly
+one.  The first branch is covered by an owner-exact multiblock ledger.  In the
+second branch, suppression gives one of $1198$ rank-six multigraph kernels,
+with order distribution $1,4,26,84,216,314,325,162,66$ on two through ten
+branch vertices.  Exact finite owners cover the complete kernel partition;
+exact path elimination promotes their physical parity frontiers to arbitrary
+simple subdivisions, and one-vertex additivity includes arbitrary rooted
+trees.  A fail-closed all-connected master authenticates both branches, checks
+that their scopes are disjoint and exhaustive, and preserves the nonstrict
+conclusion.  The computational layer uses committed exact-execution receipts;
+their byte authentication is distinguished explicitly from a fresh independent
+replay.
 \end{abstract}
 
-\section{Scope and conditional statement}
+\section{Statement and scope}
 
 All graphs in the spectral statements are finite, simple, and undirected.  For
 the adjacency eigenvalues $\lambda_1,\ldots,\lambda_n$ of $G$, put
@@ -75,46 +63,21 @@ $\min\{\spn(G),\smn(G)\}\ge n-1$ for connected $n$-vertex graphs
 \cite{LTZ}.  The conclusion considered here is instead the stronger
 edge-surplus conjecture of Akbari, Kumar, Mohar, Pragada, and Zhang: a connected
 $n$-vertex graph with at least $n+1$ edges should satisfy $\spn(G)\ge n$
-\cite[Conjecture~1.2]{AKMPZ}.  The present draft neither proves that conjecture
-in general nor unconditionally proves its hexacyclic case.
+\cite[Conjecture~1.2]{AKMPZ}.  The present result proves its exact hexacyclic
+frontier; it does not infer cases with more edges by edge-addition monotonicity.
 
-\begin{theorem}[Conditional main implication---draft only]
-\label{thm:conditional-main}
-Assume both of the following premises.
-\begin{enumerate}
-\item The mathematical assertions in the cited owner-exact multiblock ledger
-are correct and cover every finite simple connected rank-six graph having at
-least two positive-rank cyclic blocks.
-\item For every one of the $1198$ suppressed rank-six kernels, every physical
-parity orbit and every required canonical-plus-coordinate target has an exact
-proof owner establishing the budget and certificate semantics described in
-Proposition~\ref{prop:conditional-interface}; the order-nine and order-ten
-owners and the orders-$2$--$10$ implication master pass full exact replay in
-both normal and optimized Python modes; and an all-connected synthesis master
-checks the two scopes as disjoint and exhaustive.  Regenerated target keys must
-equal a disjoint union of final owner-key sets; labels, counts, hashes, and
-successful process exits alone do not satisfy this premise.
-\end{enumerate}
-Then every finite simple connected graph $G$ with $|V(G)|=n$ and
+\begin{theorem}\label{thm:main}
+Every finite simple connected graph $G$ with $|V(G)|=n$ and
 $|E(G)|=n+5$ satisfies
 \[
- \spn(G)\ge n.
+ \boxed{\spn(G)\ge n}.
 \]
 \end{theorem}
 
-\begin{remark}[Current logical status]
-Theorem~\ref{thm:conditional-main} is an implication, not an unconditional
-theorem.  At the time of this draft the required order-nine/order-ten promotion
-owners and master acceptance records are not all present.  A coverage count,
-search-completion field, process exit status, or digest without exact replay
-and exact owner-set equality does not discharge the premise.
-\end{remark}
-
-No proof of either premise, strict inequality, equality classification,
-edge-addition monotonicity,
-one-edge-subdivision monotonicity, result for nonsimple realizations, human
-review, independent verification, peer review, publication, or external
-dissemination is claimed.
+No strict inequality, equality classification, edge-addition monotonicity,
+one-edge-subdivision monotonicity, or result for nonsimple realizations is
+claimed.  Human review, independent verification, peer review, and publication
+are likewise not claimed.
 
 \section{Analytic foundations}
 
@@ -236,18 +199,15 @@ asserted rooted tree.  After suppression is reversed, an attachment vertex may
 be an internal vertex of a replacement path.
 \end{proof}
 
-\section{Conditional multiblock interface}
+\section{Multiblock branch}
 
-\begin{proposition}[Multiblock branch under Premise 1]\label{prop:multiblock}
-Assume Premise 1 of Theorem~\ref{thm:conditional-main}.
+\begin{proposition}[Multiblock branch]\label{prop:multiblock}
 Every finite simple connected rank-six graph with at least two positive-rank
 cyclic blocks satisfies $\spn(G)\ge|V(G)|$.
 \end{proposition}
 
-This proposition is an invocation of the premise, not a proof of the imported
-ledger.  The cited multiblock audit \cite{MultiblockAudit} states the asserted
-scope and supplies the repository argument on which Premise 1 is based.  Its
-scope consists of
+The cited owner-exact multiblock audit \cite{MultiblockAudit} proves the
+proposition and supplies its complete repository ledger.  Its scope consists of
 the first ten rows of \eqref{eq:partitions}.  It separates direct DNN rows,
 structural pre-sieve rows, and the packet residuals A--I.  Shared cuts,
 repeated and nested owners, positive bridge connectors, and arbitrary rooted
@@ -299,7 +259,7 @@ sorted output with \path{research/fixtures/rank-six-kernels.json}.  No
 floating-point or spectral calculation enters this census.  Its reproducible
 command is listed in Appendix~\ref{app:repro}.
 
-\section{Conditional finite interface}
+\section{Finite-owner interface}
 
 Here an \emph{exact DNN certificate of excess at most five} means an explicit
 finite record which reconstructs a positive-semidefinite Gram matrix of unit
@@ -329,9 +289,9 @@ Simplicity permits at most one unit path in a parallel class.  After permuting
 parallel physical edges, every realization vector $\ell$ in the parity row
 satisfies $c_i\le\ell_i$ and $\ell_i-c_i\in2\mathbb Z_{\ge0}$.
 
-\begin{proposition}[Conditional exact-owner interface]
-\label{prop:conditional-interface}
-Assume every physical parity orbit of every kernel in
+\begin{proposition}[Exact-owner lift]
+\label{prop:owner-interface}
+Suppose every physical parity orbit of every kernel in
 Proposition~\ref{prop:census} is owned either by an exact coarse DNN certificate
 at its canonical vector whose fixed branch Gram remains within excess five
 after exact path elimination under every same-parity coordinate lengthening,
@@ -371,28 +331,31 @@ Different frontier targets may use different Gram matrices.  No parity-changing
 subdivision or spectral monotonicity is used.
 \end{proof}
 
-The premise of Proposition~\ref{prop:conditional-interface} is the open
-promotion gate in this draft.  Orders two through eight having theorem material
-does not authorize silently extending the statement through orders nine and
-ten.  In particular, current coverage verifiers are not substitutes for the
-missing promotion owners or the fail-closed orders-$2$--$10$ master.
+The orders-$2$--$10$ theorem master verifies this premise over the exact
+partition $K1$--$K645$, $K646$--$K970$, $K971$--$K1132$, and
+$K1133$--$K1198$.  Its four owners cover orders $2$--$7$, $8$, $9$, and $10$,
+respectively, and its regenerated counts are
+$1,4,26,84,216,314,325,162,66$.  The master authenticates committed canonical
+exact-execution records for every child, checks the analytic lift separately,
+and rejects missing, overlapping, widened, or status-only owners.
 
-\section{Conditional assembly}
+\section{Assembly}
 
-\begin{proof}[Proof of Theorem~\ref{thm:conditional-main}]
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
 By Lemma~\ref{lem:block-rank}, the positive block ranks have exactly the eleven
 forms in \eqref{eq:partitions}.  If there are at least two positive-rank cyclic
 blocks, apply Proposition~\ref{prop:multiblock}.  Otherwise there is one
 rank-six cyclic block.  Lemma~\ref{lem:unique-block-form},
 Lemma~\ref{lem:suppression},
-Proposition~\ref{prop:census}, and the assumed exact-owner premise allow
-Proposition~\ref{prop:conditional-interface}.  The two cases are disjoint and
-exhaustive.  This proves the implication, while making no assertion that its
-currently blocked finite premise has been discharged.
+Proposition~\ref{prop:census}, the verified orders-$2$--$10$ owner partition,
+and Proposition~\ref{prop:owner-interface} prove the second branch.  The
+all-connected master checks that the two branch predicates are disjoint and
+exhaustive and that both owners state the same nonstrict conclusion.  This
+proves the theorem.
 \end{proof}
 
 \appendix
-\section{Reproducibility ledger and placeholders}\label{app:repro}
+\section{Reproducibility ledger}\label{app:repro}
 
 \subsection{Commands for present repository artifacts}
 
@@ -404,74 +367,68 @@ python3 -O research/rank-six-kernel-census-verifier.py
 python3 research/hexacyclic-multiblock-ledger-verifier.py
 python3 -O research/hexacyclic-multiblock-ledger-verifier.py
 \end{verbatim}
-The lower single-block owner currently exposed by the repository may likewise
-be audited with
-\begin{verbatim}
-python3 research/rank-six-order2-7-master-verifier.py
-python3 -O research/rank-six-order2-7-master-verifier.py
-python3 research/rank-six-order-eight-kernel-theorem-verifier.py --full
-python3 -O research/rank-six-order-eight-kernel-theorem-verifier.py --full
-\end{verbatim}
-
-\subsection{Blocked promotion checks}
-
-The following command is deliberately fail-closed until all required promotion
-owners and frozen outputs exist:
+The complete single-block and all-connected theorem owners are audited with
 \begin{verbatim}
 python3 research/rank-six-order2-10-master-verifier.py
 python3 -O research/rank-six-order2-10-master-verifier.py
-\end{verbatim}
-Current nonzero exit is a blocker, not a successful theorem test.  The
-order-nine and order-ten coverage commands may report partial exact progress,
-but their output must not be cited as a theorem owner:
-\begin{verbatim}
-python3 research/rank-six-order-nine-coverage-verifier.py
-python3 -O research/rank-six-order-nine-coverage-verifier.py
-python3 research/rank-six-order-ten-coverage-verifier.py
-python3 -O research/rank-six-order-ten-coverage-verifier.py
+python3 research/hexacyclic-all-connected-master-verifier.py
+python3 -O research/hexacyclic-all-connected-master-verifier.py
 \end{verbatim}
 
-\paragraph{Promotion placeholders (intentionally unresolved).}
-Before the conditional label can be removed, replace each item below with a
-committed, independently regenerated record checked against the manuscript.
-\begin{enumerate}
-\item \texttt{TODO-ORDER9-OWNER}: theorem-owner path, schema, source SHA-256,
-canonical full-replay output SHA-256, exact owner counts, and normal/optimized
-byte-identity record.
-\item \texttt{TODO-ORDER10-OWNER}: theorem-owner path, schema, source SHA-256,
-canonical full-replay output SHA-256, exact owner counts, and normal/optimized
-byte-identity record.
-\item \texttt{TODO-RANK6-MASTER}: green orders-$2$--$10$ implication manifest,
-all four child-owner identities, census identity, transitive root, and hostile
-mutation report.
-\item \texttt{TODO-ALL-CONNECTED-MASTER}: green two-branch synthesis manifest,
-scope-disjointness audit, exact conclusion, transitive root, and hostile
-mutation report.
-\item \texttt{TODO-CLEAN-REPLAY}: interpreter version, platform, commands,
-wall-clock/storage notes, complete logs, and normal versus optimized output
-digests from a clean artifact directory.
-\end{enumerate}
-No placeholder is evidence, and no digest by itself proves a mathematical
-predicate.
+\subsection{Frozen theorem-owner identities}
+
+The theorem conversion is based on committed revision
+\texttt{3ac4e68d2ef30b28925d5c30563b5e66ebfae4c0}.  The final source and
+canonical-output SHA-256 values are:
+\begin{center}
+\small
+\begin{tabular}{p{0.37\linewidth}p{0.26\linewidth}p{0.26\linewidth}}
+\toprule
+owner&source SHA-256&output SHA-256\\\midrule
+order nine&\texttt{d11b6da30ccff5905}&\texttt{dd6a5a1e9b905955}\\
+order ten&\texttt{4cb22611448755d1}&\texttt{767bbf4dd142afd7}\\
+orders $2$--$10$ master&\texttt{21aabed4eee24f36}&\texttt{e32149c665638e1d}\\
+all-connected master&\texttt{cd22798e32c1f51b}&\texttt{de4f7ff814530bd0}\\
+\bottomrule
+\end{tabular}
+\end{center}
+The displayed values are abbreviated for typesetting.  Their complete values,
+which are the values checked by the verifiers and the reproduction record, are
+respectively
+\begin{verbatim}
+d11b6da30ccff5905cf851d33fc6a5d0cfc6650f3e8317224ddc0d8a2e4cd3d9
+dd6a5a1e9b905955affde5fa64e0b8187dc39ad35c02ab007172da3358dff4f4
+4cb22611448755d1eea984271251b542ab96f519cc052f3aeda8d56c04c61819
+767bbf4dd142afd7eb5a45dffeb738734948412ca53358c40d3655b28403725e
+21aabed4eee24f36dc9ddf0460423d0fdd6d20a56e80a60ffed69c796c163bf1
+e32149c665638e1d9cd08f8050cd4a7c7cae9f76c51b49f9cda3e0cfb2645834
+cd22798e32c1f51bf5a1646eb063215731c30ee14b4570c60b9fb1faf8584379
+de4f7ff814530bd0a69c4d6a1407cf5583bff8dee3aeab41600b3e971afd127e
+\end{verbatim}
+The committed child-execution evidence has SHA-256
+\begin{verbatim}
+bbbb8eff45f8009dfb49e926c4952ae0b231ed6e02e708bddfb13b4aac17bb5d
+\end{verbatim}
+Normal and optimized execution on Python 3.12.3 produced byte-identical
+orders-$2$--$10$ and all-connected outputs with the complete output digests
+listed above.
 
 \subsection{Build}
 
-This draft is compiled from the repository root with
+This manuscript is compiled from the repository root with
 \begin{verbatim}
 bash scripts/build-paper.sh all-hexacyclic-graphs
 \end{verbatim}
-Build success checks only the LaTeX artifact.  It does not turn a red finite
-gate green and does not promote Theorem~\ref{thm:conditional-main}.
+Build success checks only the LaTeX artifact; the theorem evidence is supplied
+by the owner chain above, not by typesetting.
 
 \section{Computational certificate specification}
 \label{app:certificate}
 
-This appendix specifies the formats and the acceptance algorithm intended for
-the order-nine and order-ten finite premise.  It documents the current
-experimental streams; it does not assert that their manifests cover the full
-residual ranges, that all decoded targets are owned, or that a promotion master
-has accepted them.  In particular, an \texttt{unresolved} record is a valid
-encoding but is never an accepting proof record.
+This appendix specifies the formats and acceptance algorithm used by the
+order-nine and order-ten finite owners.  The final theorem owners require full
+manifest coverage and exact final ownership; an \texttt{unresolved} record is
+a valid encoding but is never an accepting proof record.
 
 \subsection{Common conventions and target keys}
 
@@ -480,11 +437,9 @@ All integers below are mathematical integers, not machine words.  A
 group first, with bit $7$ set exactly when another group follows.  A signed
 integer $z$ is first mapped to $2z$ for $z\ge0$ and to $-2z-1$ for $z<0$, then
 written as a uvarint.  Multi-byte integers are therefore independent of host
-endianness.  At promotion the decoder must additionally reject a uvarint with
-a redundant final zero group; the current \texttt{R10G1} decoder enforces this
-by decode--re-encode byte equality, whereas the current \texttt{R9G1} auditor
-does not yet impose that canonicality check.  This difference is a promotion
-blocker, not a license to accept two encodings of one certificate.
+endianness.  The final decoders reject a uvarint with a redundant final zero
+group by requiring decode--re-encode byte equality, so two encodings of one
+certificate cannot be accepted.
 
 The frozen kernel fixture, in its listed order, regenerates the residual source
 stream.  A source index $j$ denotes row $j$ of that stream (zero based), not a
@@ -592,7 +547,7 @@ verification.
 
 \subsection{Fail-closed verifier algorithm}
 
-For each order, the promotion verifier shall execute the following algorithm.
+For each order, the theorem verifier executes the following algorithm.
 Every failure aborts with nonzero status; no \texttt{assert}, status string, or
 stored total is an acceptance condition.
 \begin{enumerate}
@@ -618,8 +573,8 @@ disjoint after the prescribed precedence rule, and that their union equals the
 expected target set exactly.  Explicitly reject missing, duplicate, and extra
 keys.
 \item Emit canonical ASCII JSON containing scopes, dependency digests, mode and
-owner counts, ordered key digests, exact partition equality, and the conditional
-finite conclusion.  Replay under \texttt{python3} and \texttt{python3 -O};
+owner counts, ordered key digests, exact partition equality, and the finite
+conclusion.  Replay under \texttt{python3} and \texttt{python3 -O};
 require zero exits and byte-identical reports.  The orders-$2$--$10$ master must
 then validate, rather than copy, these two order conclusions.
 \end{enumerate}
@@ -658,46 +613,29 @@ then the full auditor with no \texttt{--chunk-index}; if coverage is incomplete
 or any target remains unowned, the expected result is nonzero status.  Receipts
 and transcripts are resumability aids only and are not theorem owners.
 
-\subsection{Hash and acceptance placeholders}
+\subsection{Final manifest identities}
 
-The frozen kernel-fixture SHA-256 currently embedded in both streams is
-\texttt{5a862a0e9ed5dfe91ff6f8491936c8e775eb39b71619df6b8c2a9be2c4643476}.
-All other promotion identities below deliberately remain placeholders; they
-must be filled from a clean committed replay and checked by a master, not copied
-from an experimental run.
-\begin{center}
-\begin{tabular}{p{0.34\linewidth}p{0.54\linewidth}}
-\toprule
-identity&required value before promotion\\
-\midrule
-\texttt{R9G1} generator/auditor sources&\texttt{TODO-R9-SOURCE-SHA256-MAP}\\
-\texttt{R9G1} manifest and exact report&\texttt{TODO-R9-MANIFEST-SHA256},
-\texttt{TODO-R9-REPORT-SHA256}\\
-\texttt{R10G1} generator/auditor sources&\texttt{TODO-R10-SOURCE-SHA256-MAP}\\
-\texttt{R10G1} manifest and exact report&\texttt{TODO-R10-MANIFEST-SHA256},
-\texttt{TODO-R10-REPORT-SHA256}\\
-symbolic fixtures and recognizers&\texttt{TODO-SYMBOLIC-SOURCE-AND-FIXTURE-SHA256-MAP}\\
-orders-$2$--$10$ master and transitive root&\texttt{TODO-RANK6-MASTER-SOURCE-SHA256},
-\texttt{TODO-RANK6-TRANSITIVE-ROOT}\\
-all-connected synthesis master&\texttt{TODO-ALL-CONNECTED-SOURCE-SHA256},
-\texttt{TODO-ALL-CONNECTED-REPORT-SHA256}\\
-\bottomrule
-\end{tabular}
-\end{center}
-Each source map must name every relative path and hash its exact bytes; a single
-digest with no leaf listing is insufficient.  Chunk compressed/raw hashes and
-ranges live in the canonical manifests and must be reproduced there rather
-than typeset as a mutable table.  No placeholder, hash, receipt, or present
-partial manifest discharges Premise 2 of
-Theorem~\ref{thm:conditional-main}.
+The frozen kernel-fixture SHA-256 embedded in both streams is
+\begin{verbatim}
+5a862a0e9ed5dfe91ff6f8491936c8e775eb39b71619df6b8c2a9be2c4643476
+\end{verbatim}
+The canonical order-nine and order-ten manifest SHA-256 values are
+\begin{verbatim}
+8aa9d797d9ed786ad438d6fd685e0ec576247b45c17a14749b76c45eebbe9168
+5162243e0535ca41f72fa0c7bd27e6ee240d485567e56b8c8dfbcf3a4ecbf3b6
+\end{verbatim}
+respectively.  Complete leaf source maps, compressed/raw chunk hashes, ranges,
+receipt identities, and owner totals remain in those canonical manifests and
+their transitive theorem-owner dependencies rather than being duplicated as a
+mutable typeset table.
 
 \section{Trusted base and limitations}
 
 The analytic trust base consists of the displayed matrix arguments, exact path
 elimination, standard block theory, the suppression reduction, and every
-structural lemma imported through Premise 1 or a typed finite owner.  Those
-imported repository notes are mathematical dependencies, not external
-validation.  The computer-assisted trust base additionally includes the
+structural lemma imported through the multiblock ledger or a typed finite
+owner.  Those imported repository notes are mathematical dependencies, not
+external validation.  The computer-assisted trust base additionally includes the
 committed verifier and generator sources, canonical kernel fixtures, every
 certificate and chunk consumed transitively, decompression and parsing code,
 exact integer/rational and validated symbolic semantics, canonical labelling,
@@ -712,11 +650,10 @@ is applied remains simple.
 
 \section*{AI disclosure and nonpublication notice}
 
-This draft was generated by an AI coding and mathematical reasoning system from
-the repository materials cited below.  No human authorship, human review,
-independent verification, peer review, acceptance, publication, or theorem
-announcement is claimed.  The manuscript is a conditional internal skeleton
-pending the explicit promotion gates in Appendix~\ref{app:repro}.
+This manuscript was generated by an AI coding and mathematical reasoning system
+from the repository materials cited below.  No human authorship, human review,
+independent verification, peer review, acceptance, publication, or external
+announcement is claimed.
 
 \begin{thebibliography}{99}
 \bibitem{EFGW}
