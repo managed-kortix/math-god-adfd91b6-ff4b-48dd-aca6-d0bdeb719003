@@ -17,6 +17,20 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-12: developed the exact structural reduction for one rank-seven
+  block. Suppression gives loopless 2-connected kernels of orders 2--12 and
+  budget six; the rank-independent path atom yields the same canonical-plus-
+  coordinate finite interface as rank six. Proved general simplex cost
+  `(k-1)(k-2)/2`, identifying atomic cost-six geometries (six mixed pairs,
+  regular `K5` four-simplex, and PSD-compatible edge-disjoint assemblies),
+  while explicitly leaving coupled equality faces as an obstruction. A marked
+  rank-six Gram lifts after edge reinsertion exactly when `E0+f_q(r)<=6`; at
+  exact rank-six budget five this is `r<=0` for a unit edge and `r>=-7/9` for a
+  length-two edge. Induced opening instead needs rank-six excess at most four,
+  so ordinary cost-five certificates do not automatically pay one credit. The
+  natural cubic signed-imbalance Gram is PSD but has exact excess nine on every
+  all-odd simple cubic order-twelve row, ruling it out as a uniform theorem.
+  See `heptacyclic-general/rank-seven-single-block-structural-theorem.md`.
 - 2026-08-12: proved the complete connected hexacyclic case of AKMPZ
   Conjecture 1.2: every finite simple connected graph with `|E|=|V|+5`
   satisfies `s^+(G)>=|V(G)|`. The multiblock owner covers the ten positive-rank
