@@ -1879,3 +1879,49 @@ No audits yet.
   Hostile tests cover canonical pins, dependency identity, artifact path/set,
   row identity, exact scout status/order, and the exclusive compression limit.
   No commit was made.
+
+### B7 exact grouped singleton-certified residual
+
+- Measured the current committed singleton certificate ledger and verifier as
+  72,132 bytes / `bdad79d2...0b48ca3d` and 16,978 bytes /
+  `ca3205e9...55e2d08`; the grouped producer refuses any other identities.
+- Removed exactly the 127 checked singleton-certificate disjuncts from their
+  frozen 153 residual leaves. Because each certificate proves its exact parent
+  singleton UNSAT, deleting those and only those false disjuncts preserves each
+  frozen leaf disjunction. All leaves remain nonempty.
+- Replaced the old full parent-selector layer rather than layering selectors:
+  remove its ALO and all guards, then add one surviving ALO, pairwise AMO, and
+  153 exact guarded projection clauses per survivor. The campaign has 1,255
+  selectors with widths `1x1,3x2,2x3,38x4,109x10`.
+- The independent checker does not import the grouped producer. It reparses the
+  checked certificate scope and separately reconstructs source leaves, parent
+  embeddings/projections, removed selector layer, exact-one replacement, all
+  metadata, and every CNF hash. Hostile tests mutate ALO, AMO, projection
+  polarity, selector names, bound identities, certificate scope, and scout.
+- Manifest/hash-ledger identities are 12,775 /
+  `188efce389bbfcca54e6b6d5f881de3d9ae1603f2ecf7d671592abeabc1cd7f1`
+  and 16,431 /
+  `f4cc9738c0a5f40ed2fb213358a7025c72bd9d358d8bc694ad009b6743d93148`.
+- A pinned sequential CaDiCaL 1.7.3 scout ran every leaf for 20 seconds. Leaf
+  129 (width two) returned UNSAT in 12.291 seconds; all other 152 leaves timed
+  out and none returned SAT. The 33,769-byte scout is
+  `0729870deced23f34e87866dea86faac6aafc7740168230c54348b3778f53112`.
+  The other 152 statuses remain scout TIMEOUTs and carry no claim.
+- Retained and freshly replayed leaf 129's textual LRAT. The `xz -3` artifact is
+  15,420,984 bytes with SHA-256
+  `f4387b4de1e4968f17d4031fc73e8286224145cb0ff00b66acae6c3a2088dcec`;
+  its exact CNF is 10,382,345 bytes with SHA-256
+  `e89b0f74972ee8f76f0cda2227523516933f10b13b914b18193beec97ccc664f`.
+- Audit hardening now requires exact old-selector guard count, selector-major
+  and pair order, and literal identity. The strict one-row certificate parser
+  requires canonical metadata order, every exact field/hash, and the sole exact
+  row. Its mutual pin covers the hostile certificate test and exact 22-source
+  transitive runtime closure; mutations of row fields, framing, source identity,
+  and artifact path are rejected.
+- This closes the complete frozen `s28-t0` state: no-gain `o37-w00/w01/w02`
+  were already certified; positive-gain `o37-w00/w02` were already certified;
+  positive-gain `o37-w01` has only the complete `o37-w01-c16` residual, whose
+  grouped survivors 1142 and 1144 are exactly leaf 129 and are now certified.
+  Scope remains only this frozen B7 hard-orbit/state refinement. No other
+  grouped leaf, B7 state, branch, or full Seymour claim follows. No commit was
+  made.

@@ -747,3 +747,56 @@ python3 test_m6_b7_l6_hard_witness_positive_gain_coordinate_residual_singleton_p
 python3 verify_m6_b7_l6_hard_witness_positive_gain_coordinate_residual_singleton_parent_certificates.py \
   --checker /path/to/pinned/lrat-check
 ```
+
+The checked singleton scope now feeds an exact grouped residual campaign. The
+producer verifies the current committed certificate ledger and verifier at
+72,132/`bdad79d28b22d2b48ed0aef779765a6aafed752227c1952da36a8e180b48ca3d`
+and 16,978/`ca3205e94f01b3b6e551373bad75333130a5d82bf3bc7cdf2e00f92be55e2d08`;
+these values were measured from the current committed files, not copied from an
+earlier campaign. It removes each residual CNF's complete old selector ALO and
+guard layer, then rebuilds the exact surviving selector ALO, pairwise AMO, and
+153 pair-ordered guarded parent-projection clauses per survivor.
+
+The 127 checked singleton UNSAT formulas are exactly false disjuncts in their
+frozen residual leaves. Removing precisely those disjuncts therefore preserves
+each leaf's parent disjunction. The result has 153 leaves and 1,255 selectors,
+with widths `1x1,3x2,2x3,38x4,109x10`. The independent checker reparses the
+certificate ledger and separately reconstructs all residual leaves, parent
+embeddings, six-hole projections, old selector layer, new exact-one layer, and
+CNF stream without importing the grouped producer. The manifest is
+12,775/`188efce389bbfcca54e6b6d5f881de3d9ae1603f2ecf7d671592abeabc1cd7f1`;
+the complete CNF hash ledger is
+16,431/`f4cc9738c0a5f40ed2fb213358a7025c72bd9d358d8bc694ad009b6743d93148`.
+
+```sh
+python3 test_m6_b7_l6_hard_witness_positive_gain_coordinate_grouped_residual.py
+python3 m6_b7_l6_hard_witness_positive_gain_coordinate_grouped_residual_scout.py \
+  --solver /tmp/opencode/cadical-1.7.3/build/cadical --seconds 20 \
+  --output m6-b7-l6-hard-witness-positive-gain-coordinate-grouped-residual-scout-20s.json
+python3 check_m6_b7_l6_hard_witness_positive_gain_coordinate_grouped_residual.py --campaign --scout
+```
+
+The pinned sequential 20-second scout ran all 153 grouped leaves and returned
+one UNSAT yield (leaf 129, width two) plus 152 TIMEOUTs, with zero SAT. Its
+33,769-byte canonical record has SHA-256
+`0729870deced23f34e87866dea86faac6aafc7740168230c54348b3778f53112` and
+status-sequence SHA-256
+`2fbf70a2995a1925ae0a969ec9e2b645a6cf8d2d62f332472c7b607afefcaeb6`.
+Exactly that leaf now has a retained `xz -3` LRAT: 15,420,984 bytes, SHA-256
+`f4387b4de1e4968f17d4031fc73e8286224145cb0ff00b66acae6c3a2088dcec`.
+The strict one-row ledger binds every canonical row field, the complete grouped
+campaign, singleton ancestry, hostile tests, and the exact 22-file transitive
+Python runtime closure. Fresh regeneration and pinned proof replay are:
+
+```sh
+python3 test_m6_b7_l6_hard_witness_positive_gain_coordinate_grouped_residual_leaf_129_certificate.py
+python3 verify_m6_b7_l6_hard_witness_positive_gain_coordinate_grouped_residual_leaf_129_certificate.py \
+  --checker /path/to/pinned/lrat-check
+```
+
+Together with the retained no-gain certificates for `o37-w00`, `o37-w01`, and
+`o37-w02`, the positive-gain certificates for `o37-w00` and `o37-w02`, and this
+certificate for the complete surviving positive-gain `o37-w01-c16` residual,
+this excludes the entire frozen `s28-t0` state. The statement is deliberately
+restricted to this frozen B7 hard-orbit/state refinement: it is not a claim
+about any other grouped leaf, B7 state, branch, or Seymour's conjecture.
