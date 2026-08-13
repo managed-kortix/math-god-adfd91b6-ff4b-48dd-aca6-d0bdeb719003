@@ -1,0 +1,7 @@
+usage: rank7_orders9_12_exact_residual_census.py census [-h] --order
+                                                        {9,10,11,12} --start
+                                                        START --stop STOP
+                                                        [--batch-size BATCH_SIZE]
+                                                        --output OUTPUT
+                                                        [--progress]
+rank7_orders9_12_exact_residual_census.py census: error: the following arguments are required: --start, --stop, --output
