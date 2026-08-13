@@ -20,6 +20,7 @@ import importlib.util
 import json
 import lzma
 import os
+import tempfile
 from pathlib import Path
 
 import numpy as np
@@ -260,6 +261,98 @@ def generate_chunk(order, start, stop, batch_size, progress=False):
     }
 
 
+class HashingWriter:
+    def __init__(self, stream):
+        self.stream = stream
+        self.digest = hashlib.sha256()
+        self.size = 0
+
+    def write(self, data):
+        self.digest.update(data)
+        self.size += len(data)
+        return self.stream.write(data)
+
+
+def generate_chunk_streaming(order, start, stop, batch_size, output, progress=False):
+    """Generate a canonical chunk without retaining the full residual payload."""
+    engine = load_engine()
+    items = order_items(engine, order)
+    require(0 <= start < stop <= len(items), "invalid half-open chunk range")
+    kernels = []
+    residual_digest = hashlib.sha256()
+    residual_total = 0
+    with tempfile.TemporaryFile(dir=output.parent) as residual_stream:
+        first = True
+        for position, item in enumerate(items[start:stop], start):
+            ledger, local = census_kernel(engine, item, batch_size)
+            kernels.append(ledger)
+            for row, orbit_size in local:
+                record = {
+                    "global_kernel": ledger["global_kernel"],
+                    "order_kernel": ledger["order_kernel"],
+                    "row": row,
+                    "orbit_size": orbit_size,
+                }
+                encoded = canonical_bytes(record)[:-1]
+                residual_digest.update(encoded + b"\n")
+                if not first:
+                    residual_stream.write(b",")
+                residual_stream.write(encoded)
+                first = False
+                residual_total += 1
+            if progress:
+                print(f"[{position + 1}/{stop}] K{ledger['global_kernel']} "
+                      f"support={ledger['support_edges']} orbits={ledger['parity_orbits']} "
+                      f"residuals={len(local)}", flush=True)
+        path_count = order + RANK - 1
+        payload = {
+            "schema": CHUNK_SCHEMA,
+            "status": "complete-exact-residual-orbit-chunk",
+            "full_theorem": False,
+            "rank": RANK,
+            "order": order,
+            "budget": [RANK - 1, 1],
+            "path_count": path_count,
+            "frontiers_per_residual": path_count + 1,
+            "kernel_range": [start, stop],
+            "source_sha256": SOURCE_SHA256,
+            "kernel_total": len(kernels),
+            "physical_row_total": sum(row["physical_rows"] for row in kernels),
+            "parity_orbit_total": sum(row["parity_orbits"] for row in kernels),
+            "coarse_certified_total": sum(row["coarse_certified_orbits"] for row in kernels),
+            "coarse_residual_total": residual_total,
+            "coarse_residual_physical_total": sum(
+                row["coarse_residual_physical_rows"] for row in kernels),
+            "frontier_target_total": (path_count + 1) * residual_total,
+            "residual_stream_sha256": residual_digest.hexdigest(),
+            "kernels": kernels,
+            "residuals": [],
+        }
+        canonical = canonical_bytes(payload)
+        marker = b'"residuals":[]'
+        require(canonical.count(marker) == 1, "cannot locate residual placeholder")
+        prefix, suffix = canonical.split(marker)
+        temporary = output.with_name(output.name + ".tmp")
+        raw_sink = None
+        try:
+            with temporary.open("wb") as stored_stream:
+                compressed = lzma.LZMAFile(stored_stream, "wb", preset=6) if output.suffix == ".xz" else stored_stream
+                raw_sink = HashingWriter(compressed)
+                raw_sink.write(prefix + b'"residuals":[')
+                residual_stream.seek(0)
+                while block := residual_stream.read(1 << 20):
+                    raw_sink.write(block)
+                raw_sink.write(b"]" + suffix)
+                if compressed is not stored_stream:
+                    compressed.close()
+            temporary.replace(output)
+        finally:
+            if temporary.exists():
+                temporary.unlink()
+    stored = output.read_bytes()
+    return payload, raw_sink.size, raw_sink.digest.hexdigest(), stored
+
+
 def read_payload(path):
     stored = path.read_bytes()
     raw = lzma.decompress(stored) if path.suffix == ".xz" else stored
@@ -396,6 +489,13 @@ def main():
     census.add_argument("--batch-size", type=int, default=262144)
     census.add_argument("--output", type=Path, required=True)
     census.add_argument("--progress", action="store_true")
+    census_stream = subparsers.add_parser("census-stream")
+    census_stream.add_argument("--order", type=int, choices=ORDER_KERNEL_TOTALS, required=True)
+    census_stream.add_argument("--start", type=int, required=True)
+    census_stream.add_argument("--stop", type=int, required=True)
+    census_stream.add_argument("--batch-size", type=int, default=262144)
+    census_stream.add_argument("--output", type=Path, required=True)
+    census_stream.add_argument("--progress", action="store_true")
     verify = subparsers.add_parser("verify")
     verify.add_argument("artifact", type=Path)
     combine = subparsers.add_parser("aggregate")
@@ -414,6 +514,16 @@ def main():
     if args.command == "aggregate":
         require(args.output.parent.is_dir(), "output parent does not exist")
         print_totals(aggregate(args.chunks, args.output))
+        return
+    if args.command == "census-stream":
+        require(args.batch_size >= 1, "batch size must be positive")
+        require(args.output.parent.is_dir(), "output parent does not exist")
+        payload, raw_size, raw_digest, stored = generate_chunk_streaming(
+            args.order, args.start, args.stop, args.batch_size, args.output, args.progress)
+        print_totals(payload)
+        print(f"raw_bytes={raw_size} compressed_bytes={len(stored)} "
+              f"raw_sha256={raw_digest} "
+              f"artifact_sha256={hashlib.sha256(stored).hexdigest()}")
         return
     require(args.batch_size >= 1, "batch size must be positive")
     require(args.output.parent.is_dir(), "output parent does not exist")
