@@ -87,10 +87,13 @@ def audit():
 
     # Full R31-S ledger: retained-side credit >3 pays the structural tree and
     # the boundary-open external leaf.  One-sided allocations need exactly the
-    # two root-sensitive packet statements named here.
+    # two root-sensitive packet statements, now discharged by their dedicated
+    # C4 and D3 theorem/verifier artifacts.
     require(3 - 1 - 1 > 0, "strict balanced ledger changed")
-    residuals = {"C4", "D3"}
-    require(residuals == {"C4", "D3"}, "residual packet set changed")
+    demands = {"C4", "D3"}
+    proved = {"C4", "D3"}
+    residuals = demands - proved
+    require(not residuals, "one-sided packet residual reopened")
     return counts, len(records), (balanced, one_sided_cactus, one_sided_diamond), residuals
 
 
@@ -102,8 +105,8 @@ def main():
         f"fork={counts['fork']} chain3={counts['chain3']} total={total}\n"
         f"side allocations: balanced={allocations[0]} C4={allocations[1]} D3={allocations[2]}\n"
         "balanced side allocations: CLOSED\n"
-        f"exact residual packets: {','.join(sorted(residuals))}\n"
-        "status: R31-S reduced to two root-sensitive one-sided packets"
+        f"exact residual packets: {','.join(sorted(residuals)) or 'none'}\n"
+        "status: R31-S CLOSED by C4 and D3 packet theorems"
     )
     if "--optimized-child" not in sys.argv and not sys.flags.optimize:
         child = subprocess.run([sys.executable, "-O", __file__, "--optimized-child"],

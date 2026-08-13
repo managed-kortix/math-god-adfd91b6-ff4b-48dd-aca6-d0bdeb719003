@@ -94,17 +94,18 @@ unmarked five-triangle cactus loses useful information.
 Only the 56 `3+0` and `0+3` side allocations remain.  Up to exchanging the two
 doubled sides they require one of the following root-sensitive inequalities.
 
-1. **Cactus side.**  An intrinsic triangle together with all three external
+1. **Cactus side (closed).**  An intrinsic triangle together with all three external
    triangles forms the marked four-triangle side, while the opposite intrinsic
    triangle is retained as an actual `K3`.  It is enough to prove
 
    `sigma(C)>2`                                               (C4)
 
-   for the marked four-triangle side with arbitrary rooted trees.  Common-cut
-   clusters already satisfy the stronger bound `>3`; the unresolved records
-   are precisely the nested packing-three shapes for which the existing
-   two-pivot phase lemma gives only `>1`.  This is the 28-record one-sided
-   orbit set with no doubled-path interior owner.
+   for the marked four-triangle side with arbitrary rooted trees.  The marked
+   four-triangle theorem proves the stronger bound `sigma(C)>3`.  Packing at
+   most two has positive spectral imbalance; the sole packing-three core is a
+   central triangle with three disjoint petals, where strict Sachs matching
+   domination survives arbitrary rooted trees.  Thus all 28 records in this
+   orbit are closed.  See `r31-s-c4-marked-four-triangle-theorem.md`.
 
 2. **Interior-owner side.**  A doubled-path interior owner makes that side an
    attached diamond carrying all three external triangles.  The opposite side
@@ -114,15 +115,16 @@ doubled sides they require one of the following root-sensitive inequalities.
 
    uniformly over the induced marked roots and arbitrary rooted trees.
    The established favorable packet stops at `D+T^2`, where it gives `>3`;
-   it does not imply (D3).  This is the complementary 28-record one-sided
-   orbit set containing the doubled-path interior owner.
+   the diamond phase-area and territory packet proves (D3) directly for all
+   28 records.  See `r31-s-d3-diamond-territory-packet.md`.  This is the
+   complementary one-sided orbit set containing the doubled-path interior
+   owner.
 
-Either (C4) and (D3), or one coupled inequality proving (2) directly, closes
-the canonical doubled-`C4` subclass and hence all of `R31-S`.  The obstruction
-is root-sensitive: checking bare cores or coalesced bouquets is insufficient,
-and no edge-addition monotonicity or unquantified rank-five surplus may be
-substituted.  There is no remaining path-length, connector, owner, or balanced
-cut orbit outside these two one-sided packets.
+(C4) and (D3) are now proved.  Therefore the canonical doubled-`C4` subclass,
+and hence all of `R31-S`, is closed.  Both proofs retain the root-sensitive
+data: no edge-addition monotonicity or unquantified rank-five surplus is used.
+There is no remaining path-length, connector, owner, balanced-cut, or one-sided
+orbit.
 
 ## Verification
 
@@ -131,7 +133,12 @@ Run
 ```text
 python3 research/r31-s-doubled-c4-marked-cut-verifier.py
 python3 -O research/r31-s-doubled-c4-marked-cut-verifier.py
+python3 research/r31-s-d3-diamond-packet-verifier.py
+python3 -O research/r31-s-d3-diamond-packet-verifier.py
+python3 research/r31-s-c4-marked-four-triangle-verifier.py
+python3 -O research/r31-s-c4-marked-four-triangle-verifier.py
 ```
 
-The verifier regenerates (4), checks the leaf-opening and rank ledgers, and
-fails closed unless the residual packet set is exactly `{C4,D3}`.
+The marked-cut verifier regenerates (4) and checks the leaf-opening and rank
+ledgers.  The two packet verifiers independently close the exact residual set
+`{C4,D3}`.
