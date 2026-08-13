@@ -101,7 +101,7 @@ uniform maxima in the preceding table.
 | `4+3` | 1 | all rows except a structural `S4` paired with `K4` are DNN | `R43: S4+K4` physical rows with `d(S4)>0` |
 | `5+1+1` | 2 | every rank-five direct row is DNN | `R511-K5e: all-odd K5-e+T^2`; all `K22/K71+Q_1+Q_2` structural rows |
 | `5+2` | 1 | all DNN-owned rows, including all-odd `K5-e`, close by (3) | `R52-NDNN: K22+Theta` and `K71+Theta` structural rows |
-| `6+1` | 1 | every DNN-owned rank-six row plus any cycle, by shared-Gram gluing at the cut | `R61-NDNN: K110-0+Q, K110-1+Q, or K223+Q` |
+| `6+1` | 1 | DNN rows by shared-Gram gluing; K223 by its marked-cycle packet; both K110 rows by the exact attached-`K4` shared-cut inequality | none |
 | `7` | 0 | single-block lane, not multiblock | outside this ledger |
 
 For the `S3` and `S4` rows, the named packet is retained only for physical
@@ -136,12 +136,12 @@ current multiblock obligation is the following disjoint registry.
 | `R511-K71` | `5+1+1` | retain the certified attached `K4` from `K71`; keep its favorable unicyclic side and allocate two external cycles |
 | `R52-K22` | `5+2` | retain the `K22` attached `K4`; allocate the theta at its first boundary |
 | `R52-K71` | `5+2` | retain the `K71` attached `K4` and favorable side; allocate the theta once |
-| `R61` | `6+1` | exact residual is `K110` all-unit, `K110` one-long, or canonical all-unit `K223`, each with one external cycle; see `r61-one-credit-boundary-reduction.md` |
+| `R61` | `6+1` | closed: K110 all-unit and one-long by the exact shared-cut packet for every cut orbit and length; canonical all-unit K223 by `r61-k223-marked-cycle-packet.md` |
 
 This is a packet-template registry, not yet a physical owner ledger. In
 particular, `R331` and `R43` must be expanded from the exact theorem owner
-manifests. The R61 theorem-owner partition has now been expanded to the three
-typed physical families above, but their shared-cut packets remain open.
+manifests. The R61 theorem-owner partition has been expanded to three typed
+physical families, and all three shared-cut packets are closed.
 Rank-six structural targets cannot in general be inferred by subtracting the
 DNN-owned key set unless the final manifest exposes a disjoint typed owner
 partition.

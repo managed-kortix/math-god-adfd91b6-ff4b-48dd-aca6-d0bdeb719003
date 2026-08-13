@@ -17,6 +17,36 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-12: closed exactly the rank-seven order-five single-block frontier.
+  Independent regeneration gives 233 kernels, 132774 physical parity rows,
+  109342 automorphism orbits, and exactly 15 coarse residual orbits. Their
+  canonical-plus-eleven-coordinate universe has 180 targets: 176 exact rational
+  Gram chains and four K269 induced structural targets. The fail-closed theorem
+  verifier checks arbitrary simple subdivisions and rooted-tree attachments,
+  rejects 16 hostile mutations, and agrees byte-for-byte in normal and `-O`
+  modes. This proves kernel order five only; orders 6--12 and every global
+  heptacyclic claim remain open.
+- 2026-08-12: closed `R61-K110-0` and `R61-K110-1`, completing the entire
+  `6+1` multiblock row. The exact shared-cut inequality retains an actual
+  attached K4 of credit `>2` and partitions the complement into at most two
+  induced tree/unicyclic territories, each of credit at least `-1`. For the
+  one-long K5, the marked cuts are the endpoint orbit, the off-edge branch
+  orbit, and the internal distance orbits `1,...,(l-1)/2`; one uniform packet
+  handles every orbit and every odd long-path/cycle length. Together with the
+  K223 marked-cycle packet, R61 has no remaining configuration. No heptacyclic
+  theorem claim is made.
+- 2026-08-12: closed the `R61-K223` heptacyclic multiblock residual: canonical
+  all-unit K223 plus an arbitrary cycle at an arbitrary marked cut, with
+  arbitrary rooted trees. The exact automorphism group has order 16 and two
+  marked-cut orbits, `{0,1,2,3}` and `{4,5}`. In either orbit retain a marked
+  induced K4; the complementary kernel pair is one nonempty tree, and
+  boundary-opening the cycle gives a second nonempty tree. The attached-K4
+  credit ledger is `>2-1-1=0`. The digest-locked verifier reconstructs all
+  automorphisms, transports the representative partitions to all six marks,
+  rejects six hostile mutations, and passes normal/optimized modes. R61 now
+  at that stage retained only the K110 all-unit and one-long structural
+  families, which the subsequent tick closes. See
+  `positive-square-energy/heptacyclic-general/r61-k223-marked-cycle-packet.md`.
 - 2026-08-12: began the full connected heptacyclic frontier after closing and
   publishing the hexacyclic case. Suppression of one rank-seven cyclic block is
   now proved to give exactly 17133 loopless 2-connected minimum-degree-three
@@ -27,8 +57,10 @@ research/semantic, research/procedural).
   Exact coarse census leaves only 15 residual orbits at order five and 1517 at
   order six, while higher-order residual counts are currently sampled
   estimates. The 15 multiblock partitions reduce to 16 residual packet keys;
-  R61 is closed for all DNN-owned rank-six states and reduced to three sharp
-  K110/K223 structural families. No heptacyclic theorem claim is made.
+  R61 is completely closed: DNN-owned rank-six states use shared-Gram gluing;
+  an exact attached-`K4` shared-cut inequality closes K110-0 and K110-1 for
+  every marked-cut orbit and path/cycle length; and the two-orbit marked packet
+  closes canonical K223. No heptacyclic theorem claim is made.
 - 2026-08-12: developed the exact structural reduction for one rank-seven
   block. Suppression gives loopless 2-connected kernels of orders 2--12 and
   budget six; the rank-independent path atom yields the same canonical-plus-

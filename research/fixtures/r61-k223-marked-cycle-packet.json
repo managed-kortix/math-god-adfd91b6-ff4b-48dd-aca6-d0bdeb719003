@@ -1,0 +1,22 @@
+{
+  "schema": "r61-k223-marked-cycle-packet-v1",
+  "pair_order": ["01", "02", "03", "04", "05", "12", "13", "14", "15", "23", "24", "25", "34", "35", "45"],
+  "kernel": 223,
+  "row": "001111011011111",
+  "marked_orbits": [
+    {"representative": 0, "vertices": [0, 1, 2, 3], "degree": 3},
+    {"representative": 4, "vertices": [4, 5], "degree": 5}
+  ],
+  "partitions": [
+    {"marked": 0, "k4_vertices": [0, 3, 4, 5], "tree_vertices": [1, 2]},
+    {"marked": 4, "k4_vertices": [0, 3, 4, 5], "tree_vertices": [1, 2]}
+  ],
+  "packet": {
+    "retained_profile": "actual-K4-at-marked-cut",
+    "retained_credit_strictly_greater_than": 2,
+    "kernel_tree_credit": -1,
+    "boundary_open_cycle_profile": "nonempty-tree",
+    "boundary_open_cycle_credit": -1,
+    "total_credit_strictly_greater_than": 0
+  }
+}
