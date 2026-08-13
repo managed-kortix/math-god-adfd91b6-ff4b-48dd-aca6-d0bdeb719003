@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/workspace/positive-square-energy/experiments/rank7_order7_residual_census.py", line 190, in <module>
+    main()
+  File "/workspace/positive-square-energy/experiments/rank7_order7_residual_census.py", line 174, in main
+    payload = regenerate(args.jobs, args.progress)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/positive-square-energy/experiments/rank7_order7_residual_census.py", line 72, in regenerate
+    items = tuple(item for item in engine.source_kernels() if item[2] == ORDER)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/positive-square-energy/experiments/rank7_parity_coarse_digest_census.py", line 59, in source_kernels
+    require(hashlib.sha256(raw).hexdigest() == SOURCE_SHA256, "rank-seven source changed")
+  File "/workspace/positive-square-energy/experiments/rank7_parity_coarse_digest_census.py", line 40, in require
+    raise RuntimeError(message)
+RuntimeError: rank-seven source changed
