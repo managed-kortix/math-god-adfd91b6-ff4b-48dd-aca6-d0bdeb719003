@@ -127,21 +127,23 @@ current multiblock obligation is the following disjoint registry.
 | `R31-K` | `3+1^4` | retain the actual `K4`; prove the exact number of first-boundary debits paid by its strict credit |
 | `R321` | `3+2+1+1` | retain `K4`, and treat the theta plus two cycles as first-boundary demands, including nested incidence |
 | `R322` | `3+2+2` | retain `K4`; allocate both exceptional theta boundaries exactly once |
-| `R331` | `3+3+1` | split by the two actual physical rank-three owners; canonical structural openings and `K4` anchors require separate subkeys |
+| `R331` | `3+3+1` | closed: `R331-S` and `R331-K` by the actual-`K4` two-debit induced-piece theorem |
 | `R41` | `4+1^3` | perform the physical `S4` opening and allocate the structural owner tree plus the `T^3` or even-state `T^2P` cycle routes |
 | `R421` | `4+2+1` | perform the `S4` opening; treat theta and cycle at their first boundaries, with a nested pair charged once |
-| `R43` | `4+3` | combine the exact rank-four and rank-three structural owners; no coarse theorem margin may be charged |
+| `R43` | `4+3` | closed: exact `S4` opening plus the external actual `K4`; the retained-owner channel boundary-opens it to an actual `K3` |
 | `R511-K5e` | `5+1+1` | use the physical all-odd `K5-e` structural class and two cycle owners; the DNN predicate must be applied first |
 | `R511-K22` | `5+1+1` | retain the certified attached `K4` from `K22`; pay its original owner territory and two external cycle boundaries |
 | `R511-K71` | `5+1+1` | retain the certified attached `K4` from `K71`; keep its favorable unicyclic side and allocate two external cycles |
-| `R52-K22` | `5+2` | retain the `K22` attached `K4`; allocate the theta at its first boundary |
-| `R52-K71` | `5+2` | retain the `K71` attached `K4` and favorable side; allocate the theta once |
+| `R52-K22` | `5+2` | closed: retained actual `K4` pays the exact K22 owner tree and one theta first-boundary debit |
+| `R52-K71` | `5+2` | closed: retained actual `K4`, favorable unicyclic side, and one theta first-boundary debit |
 | `R61` | `6+1` | closed: K110 all-unit and one-long by the exact shared-cut packet for every cut orbit and length; canonical all-unit K223 by `r61-k223-marked-cycle-packet.md` |
 
-This is a packet-template registry, not yet a physical owner ledger. In
-particular, `R331` and `R43` must be expanded from the exact theorem owner
-manifests. The R61 theorem-owner partition has been expanded to three typed
-physical families, and all three shared-cut packets are closed.
+This is a packet-template registry, not yet a complete physical owner ledger.
+The five keys `R331-S`, `R331-K`, `R43`, `R52-K22`, and `R52-K71` are expanded
+and closed in `two-debit-induced-piece-theorem.md`; its persisted exact ledger
+regenerates the four K22 and nine K71 structural targets. The R61 theorem-owner
+partition has been expanded to three typed physical families, and all three
+shared-cut packets are closed.
 Rank-six structural targets cannot in general be inferred by subtracting the
 DNN-owned key set unless the final manifest exposes a disjoint typed owner
 partition.

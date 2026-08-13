@@ -1,0 +1,73 @@
+{
+  "schema": "rank-seven-two-debit-induced-piece-ledger-v1",
+  "scope": "bridge-free-heptacyclic-multiblock-post-dnn-residual",
+  "families": [
+    {
+      "key": "R331-S",
+      "partition": [3, 3, 1],
+      "anchor": "actual-K4",
+      "anchor_credit_strictly_greater_than": 2,
+      "physical_owner": "structural-S3-complete-side",
+      "demands": ["structural-S3", "cycle"],
+      "channels": ["separate", "repeated-cut", "nested"],
+      "worst_debits": [-1, -1],
+      "total_credit_strictly_greater_than": 0
+    },
+    {
+      "key": "R331-K",
+      "partition": [3, 3, 1],
+      "anchor": "actual-K4",
+      "anchor_credit_strictly_greater_than": 2,
+      "physical_owner": "second-actual-K4-complete-side",
+      "demands": ["actual-K4", "cycle"],
+      "channels": ["separate", "repeated-cut", "nested"],
+      "worst_debits": [-1, -1],
+      "total_credit_strictly_greater_than": 0
+    },
+    {
+      "key": "R43",
+      "partition": [4, 3],
+      "anchor": "S4-retained-rank3-packet",
+      "anchor_credit_strictly_greater_than": 2,
+      "physical_owner": "S4-opened-tree",
+      "demands": ["actual-K4"],
+      "channels": ["opened-owner", "retained-owner"],
+      "worst_debits": [-1, 0],
+      "boundary_refinement": "actual-K4-minus-cut-is-actual-K3",
+      "total_credit_strictly_greater_than": 1
+    },
+    {
+      "key": "R52-K22",
+      "partition": [5, 2],
+      "anchor": "K22-retained-actual-K4",
+      "anchor_credit_strictly_greater_than": 2,
+      "physical_owner": "K22-opened-tree",
+      "demands": ["theta"],
+      "channels": ["opened-owner", "retained-owner"],
+      "worst_debits": [-1, -1],
+      "structural_targets": 4,
+      "total_credit_strictly_greater_than": 0
+    },
+    {
+      "key": "R52-K71",
+      "partition": [5, 2],
+      "anchor": "K71-retained-actual-K4",
+      "anchor_credit_strictly_greater_than": 2,
+      "physical_owner": "K71-favorable-unicyclic-side",
+      "demands": ["theta"],
+      "channels": ["opened-owner", "retained-owner"],
+      "worst_debits": [0, -1],
+      "structural_targets": 9,
+      "total_credit_strictly_greater_than": 1
+    }
+  ],
+  "owner_rules": {
+    "boundary_cut": "upstream-only",
+    "nested_demands": "one-complete-first-boundary-territory",
+    "rooted_descendants": "follow-unique-owner",
+    "positive_connectors": "removed-by-bridge-split",
+    "maximum_negative_units": 2
+  },
+  "closed_keys": ["R331-S", "R331-K", "R43", "R52-K22", "R52-K71"],
+  "remaining_registry_keys": ["R21", "R221", "R31-S", "R31-K", "R321", "R322", "R41", "R421", "R511-K5e", "R511-K22", "R511-K71"]
+}
