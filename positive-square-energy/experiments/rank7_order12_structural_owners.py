@@ -1,23 +1,17 @@
 #!/usr/bin/env python3
-"""Exact structural owners for rank-seven/order-twelve residual rows.
+"""Exact payload-free owner scan for rank-seven/order-twelve census chunks.
 
-The principal nonlocal owner is a signed three-ray Gram.  Give each branch
-vertex one of the six vectors ``+/- z_i``, where the three ``z_i`` are unit
-vectors with pairwise inner product ``-1/2``.  A parity signing is owned when
-each edge has transformed correlation 1 (equal rays) or 1/2 (distinct rays).
-
-For simple cubic kernels a second owner uses the signed adjacency square
-
-    G = (a I + b S)^2 / (a^2 + 3 b^2).
-
-Both matrices are reconstructed from the kernel and row and require no stored
-numeric payload.  All acceptance arithmetic is rational and fail-closed.
+Rows are assigned, in order, to balanced rank one, signed imbalance, symbolic
+simplex/mixed atoms, and two simple-cubic nonlocal candidates.  Compressed JSON
+is consumed as a stream: the multi-million-row residual arrays are never held
+in memory.  Every decision uses integer or rational arithmetic.
 """
 
 from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.util
 import json
 import lzma
 from collections import Counter, deque
@@ -25,11 +19,18 @@ from fractions import Fraction
 from pathlib import Path
 
 
+HERE = Path(__file__).resolve().parent
+ATOM_RECOGNIZER = HERE / "rank7_order7_symbolic_atom_recognizer.py"
 F = Fraction
 BUDGET = F(6)
 ORDER = 12
+RANK = 7
 PATH_COUNT = 18
-SCHEMA = "rank-seven-order-twelve-structural-owner-scan-v1"
+TARGETS_PER_ROW = 19
+CHUNK_SCHEMA = "rank-seven-orders9-12-exact-residual-census-chunk-v1"
+SCHEMA = "rank-seven-order-twelve-structural-owner-scan-v2"
+LANES = ("balanced-rank-one", "signed-imbalance-psd", "simplex-mixed-atom",
+         "cubic-cycle-space-candidate")
 
 
 def require(condition, message):
@@ -42,35 +43,169 @@ def canonical_bytes(payload):
                        allow_nan=False) + "\n").encode("ascii")
 
 
-def read_chunk(path):
-    stored = path.read_bytes()
-    raw = lzma.decompress(stored) if path.suffix == ".xz" else stored
-    payload = json.loads(raw.decode("ascii"))
-    require(raw == canonical_bytes(payload), f"noncanonical chunk: {path}")
-    require(payload.get("schema") ==
-            "rank-seven-orders9-12-exact-residual-census-chunk-v1",
-            f"wrong chunk schema: {path}")
-    require(payload.get("order") == ORDER and payload.get("rank") == 7,
-            f"wrong rank or order: {path}")
-    require(payload.get("coarse_residual_total") == len(payload.get("residuals", [])),
-            f"incomplete residual stream: {path}")
-    return payload, hashlib.sha256(raw).hexdigest(), hashlib.sha256(stored).hexdigest()
+def strict_json(raw, label):
+    def pairs(items):
+        result = {}
+        for key, value in items:
+            require(key not in result, f"duplicate key in {label}: {key}")
+            result[key] = value
+        return result
+
+    def reject(value):
+        raise RuntimeError(f"nonstandard constant in {label}: {value}")
+
+    try:
+        return json.loads(raw.decode("ascii"), object_pairs_hook=pairs,
+                          parse_constant=reject)
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise RuntimeError(f"cannot parse {label}") from error
 
 
-def simple_cubic(edges):
-    degree = [0] * ORDER
-    if len(edges) != PATH_COUNT or any(multiplicity != 1 for _, _, multiplicity in edges):
-        return False
-    for u, v, _ in edges:
-        degree[u] += 1
-        degree[v] += 1
-    return degree == [3] * ORDER
+def load_atom_recognizer():
+    spec = importlib.util.spec_from_file_location("rank7_order12_atom_core",
+                                                  ATOM_RECOGNIZER)
+    require(spec is not None and spec.loader is not None,
+            "cannot load symbolic atom recognizer")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    module.ORDER = ORDER
+    module.PATH_COUNT = PATH_COUNT
+    module.BUDGET = RANK - 1
+    return module
 
 
-def canonical_length(multiplicity, odd, occurrence):
-    if occurrence < odd:
-        return 1 if occurrence == 0 else 3
-    return 2
+def _raw_blocks(path, raw_digest):
+    opener = lzma.open if path.suffix == ".xz" else open
+    try:
+        with opener(path, "rb") as stream:
+            while True:
+                block = stream.read(1 << 20)
+                if not block:
+                    break
+                raw_digest.update(block)
+                yield block
+    except lzma.LZMAError as error:
+        raise RuntimeError(f"bad XZ chunk: {path.name}") from error
+
+
+def stream_chunk(path):
+    """Yield ``(header, records, finish)`` without retaining the residual list."""
+    artifact_digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    raw_digest = hashlib.sha256()
+    blocks = iter(_raw_blocks(path, raw_digest))
+    marker = b'"residuals":['
+    prefix = bytearray()
+    pending = b""
+    for block in blocks:
+        pending += block
+        position = pending.find(marker)
+        if position >= 0:
+            prefix.extend(pending[:position])
+            pending = pending[position + len(marker):]
+            break
+        keep = len(marker) - 1
+        prefix.extend(pending[:-keep])
+        pending = pending[-keep:]
+    else:
+        raise RuntimeError(f"missing residual stream: {path.name}")
+
+    header = strict_json(bytes(prefix) + b'"residuals":[]}', path.name + " header")
+    require(list(header) == sorted(header), f"noncanonical key order: {path.name}")
+    state = {"suffix": None}
+
+    def records():
+        nonlocal pending
+        first = True
+        while True:
+            while not pending:
+                try:
+                    pending = next(blocks)
+                except StopIteration as error:
+                    raise RuntimeError(f"truncated residual stream: {path.name}") from error
+            if pending.startswith(b"]"):
+                pending = pending[1:]
+                break
+            expected = b"{" if first else b",{"
+            while len(pending) < len(expected):
+                pending += next(blocks)
+            require(pending.startswith(expected), f"bad residual separator: {path.name}")
+            if not first:
+                pending = pending[1:]
+            first = False
+            end = pending.find(b"},{")
+            array_end = pending.find(b'}],"')
+            while end < 0 and array_end < 0:
+                try:
+                    pending += next(blocks)
+                except StopIteration as error:
+                    raise RuntimeError(f"truncated residual record: {path.name}") from error
+                end = pending.find(b"},{")
+                array_end = pending.find(b'}],"')
+            if array_end >= 0 and (end < 0 or array_end < end):
+                end = array_end + 1
+            else:
+                end += 1
+            encoded, pending = pending[:end], pending[end:]
+            record = strict_json(encoded, path.name + " residual")
+            require(encoded == canonical_bytes(record)[:-1],
+                    f"noncanonical residual record: {path.name}")
+            yield record
+
+        suffix = bytearray(pending)
+        for block in blocks:
+            suffix.extend(block)
+        require(suffix.endswith(b"\n"), f"missing canonical newline: {path.name}")
+        tail = strict_json(b'{"residuals":[]' + bytes(suffix[:-1]), path.name + " tail")
+        tail.pop("residuals")
+        require(not set(header).intersection(tail), f"duplicate split key: {path.name}")
+        header.update(tail)
+        require(list(header) == sorted(header), f"noncanonical key order: {path.name}")
+        state["suffix"] = True
+
+    def finish():
+        require(state["suffix"], f"residual stream not exhausted: {path.name}")
+        require(header.get("schema") == CHUNK_SCHEMA and
+                (header.get("rank"), header.get("order"), header.get("path_count")) ==
+                (RANK, ORDER, PATH_COUNT), f"wrong chunk scope: {path.name}")
+        return raw_digest.hexdigest(), artifact_digest
+
+    return header, records(), finish
+
+
+def path_ledger(edges, row):
+    paths = []
+    for edge_index, ((u, v, multiplicity), odd) in enumerate(zip(edges, row, strict=True)):
+        require(type(odd) is int and 0 <= odd <= multiplicity, "nonphysical parity row")
+        lengths = (([1] + [3] * (odd - 1)) if odd else []) + [2] * (multiplicity - odd)
+        paths.extend((edge_index, occurrence, u, v, length)
+                     for occurrence, length in enumerate(lengths))
+    require(len(paths) == PATH_COUNT, "row does not have eighteen paths")
+    return tuple(paths)
+
+
+def balanced_rank_one(edges, row):
+    adjacency = [[] for _ in range(ORDER)]
+    for (u, v, multiplicity), odd in zip(edges, row, strict=True):
+        if odd not in (0, multiplicity):
+            return False
+        parity = bool(odd)
+        adjacency[u].append((v, parity))
+        adjacency[v].append((u, parity))
+    signs = [None] * ORDER
+    for root in range(ORDER):
+        if signs[root] is not None:
+            continue
+        signs[root] = 0
+        queue = [root]
+        for vertex in queue:
+            for neighbor, parity in adjacency[vertex]:
+                expected = signs[vertex] ^ parity
+                if signs[neighbor] is None:
+                    signs[neighbor] = expected
+                    queue.append(neighbor)
+                elif signs[neighbor] != expected:
+                    return False
+    return True
 
 
 def path_bound(correlation, length):
@@ -80,25 +215,70 @@ def path_bound(correlation, length):
     return (1 - transformed) / (length * (1 + transformed))
 
 
+def signed_imbalance_certificate(edges, row):
+    imbalance = {}
+    absolute_rows = [0] * ORDER
+    weighted_rows = [0] * ORDER
+    for (u, v, multiplicity), odd in zip(edges, row, strict=True):
+        value = multiplicity - 2 * odd
+        imbalance[u, v] = value
+        absolute_rows[u] += abs(value)
+        absolute_rows[v] += abs(value)
+        weighted_rows[u] += multiplicity
+        weighted_rows[v] += multiplicity
+    lower = max(absolute_rows)
+    if lower == 0:
+        return None
+    upper = max(lower, 2 * max(weighted_rows))
+    paths = path_ledger(edges, row)
+    best = None
+    for denominator in range(lower, upper + 1):
+        total = F()
+        for _, _, u, v, length in paths:
+            value = imbalance[u, v]
+            transformed = -value if length & 1 else value
+            if transformed <= -denominator or transformed > denominator:
+                break
+            total += F(denominator - transformed,
+                       length * (denominator + transformed))
+            if total > BUDGET:
+                break
+        else:
+            if best is None or total < best[1]:
+                best = denominator, total
+    return best
+
+
+def atom_profile_candidate(edges, row):
+    """Cheap exact filter for the four cost-six profiles used by this lane."""
+    mixed = optional = 0
+    for (_, _, multiplicity), odd in zip(edges, row, strict=True):
+        if (multiplicity, odd) == (2, 1):
+            mixed += 1
+        elif (multiplicity, odd) == (1, 1):
+            optional += 1
+        elif odd not in (0, multiplicity):
+            return False
+    return (mixed, optional) in ((6, 0), (3, 6), (0, 10), (0, 12))
+
+
+def simple_cubic(edges):
+    degree = [0] * ORDER
+    if len(edges) != PATH_COUNT or any(edge[2] != 1 for edge in edges):
+        return False
+    for u, v, _ in edges:
+        degree[u] += 1
+        degree[v] += 1
+    return degree == [3] * ORDER
+
+
 def signed_three_ray_owner(edges, row):
-    """Decide the six-state signed three-ray constraint exactly.
-
-    State ``2*color+epsilon`` denotes ``(-1)^epsilon z_color``.  For an edge
-    of parity bit p, transformed correlation is positive precisely when
-
-        p = epsilon_u xor epsilon_v xor [color_u != color_v].
-
-    Fixing vertex zero to state zero loses no solutions: global negation and a
-    permutation of the three rays act transitively on the six states.
-    """
     if not simple_cubic(edges) or any(value not in (0, 1) for value in row):
         return False
     adjacency = [[] for _ in range(ORDER)]
     for edge_index, (u, v, _) in enumerate(edges):
-        parity = row[edge_index]
-        adjacency[u].append((v, parity))
-        adjacency[v].append((u, parity))
-
+        adjacency[u].append((v, row[edge_index]))
+        adjacency[v].append((u, row[edge_index]))
     allowed = [[[False] * 6 for _ in range(6)] for _ in range(2)]
     for parity in range(2):
         for left in range(6):
@@ -106,35 +286,25 @@ def signed_three_ray_owner(edges, row):
             for right in range(6):
                 rc, re = divmod(right, 2)
                 allowed[parity][left][right] = parity == (le ^ re ^ (lc != rc))
-
-    domains = [0b111111 for _ in range(ORDER)]
+    domains = [0b111111] * ORDER
     domains[0] = 1
 
-    def propagate(local, seeds):
-        queue = deque(seeds)
+    def solve(local):
+        queue = deque(range(ORDER))
         while queue:
             vertex = queue.popleft()
             source = local[vertex]
             for neighbor, parity in adjacency[vertex]:
                 old = local[neighbor]
-                new = 0
-                for target_state in range(6):
-                    if not old & (1 << target_state):
-                        continue
-                    if any(source & (1 << source_state) and
-                           allowed[parity][source_state][target_state]
-                           for source_state in range(6)):
-                        new |= 1 << target_state
-                if new == 0:
+                new = sum(1 << target for target in range(6)
+                          if old & (1 << target) and any(
+                              source & (1 << state) and allowed[parity][state][target]
+                              for state in range(6)))
+                if not new:
                     return False
                 if new != old:
                     local[neighbor] = new
                     queue.append(neighbor)
-        return True
-
-    def solve(local):
-        if not propagate(local, range(ORDER)):
-            return False
         choices = [(mask.bit_count(), vertex) for vertex, mask in enumerate(local)
                    if mask & (mask - 1)]
         if not choices:
@@ -158,9 +328,7 @@ def signed_adjacency_square_owner(edges, row, radius=8):
         return None
     signed = [[0] * ORDER for _ in range(ORDER)]
     for (u, v, _), parity in zip(edges, row, strict=True):
-        value = -1 if parity else 1
-        signed[u][v] = value
-        signed[v][u] = value
+        signed[u][v] = signed[v][u] = -1 if parity else 1
     square = [[sum(signed[u][w] * signed[w][v] for w in range(ORDER))
                for v in range(ORDER)] for u in range(ORDER)]
     best = None
@@ -183,65 +351,145 @@ def signed_adjacency_square_owner(edges, row, radius=8):
     return best
 
 
-def scan(paths, progress=False):
-    owner_counts = Counter((name, 0) for name in
-                           ("signed-three-ray", "signed-adjacency-square"))
-    support_counts = Counter()
-    residual_by_kernel = Counter()
-    scanned = owned = 0
+def recognize_row(atom, edges, row):
+    if balanced_rank_one(edges, row):
+        return "balanced-rank-one", None
+    imbalance = signed_imbalance_certificate(edges, row)
+    if imbalance is not None:
+        return "signed-imbalance-psd", [imbalance[0], imbalance[1].numerator,
+                                        imbalance[1].denominator]
+    owners = (() if not atom_profile_candidate(edges, row) else
+              tuple(record for record in atom.recognize(edges, row)
+                    if record["status"] == "exact-equality-owner"))
+    if owners:
+        profiles = sorted({(record["profile"]["mixed"],
+                            tuple(record["profile"]["simplex_widths"]))
+                           for record in owners})
+        return "simplex-mixed-atom", [[mixed, list(widths)] for mixed, widths in profiles]
+    if signed_three_ray_owner(edges, row):
+        return "cubic-cycle-space-candidate", ["signed-three-ray"]
+    square = signed_adjacency_square_owner(edges, row)
+    if square is not None:
+        return "cubic-cycle-space-candidate", ["signed-adjacency-square", square[0],
+                                                square[1], square[2].numerator,
+                                                square[2].denominator]
+    return None, None
+
+
+class RemainderWriter:
+    def __init__(self, path):
+        require(path.parent.is_dir(), "remainder output parent does not exist")
+        self.path = path
+        self.stream = path.open("wb")
+        self.stream.write((b'{"schema":"rank-seven-order-twelve-rational-search-indices-v1",'
+                           b'"source_indices":['))
+        self.first = True
+        self.count = 0
+        self.digest = hashlib.sha256()
+
+    def add(self, index):
+        encoded = str(index).encode("ascii")
+        self.stream.write((b"" if self.first else b",") + encoded)
+        self.first = False
+        self.count += 1
+        self.digest.update(encoded + b"\n")
+
+    def close(self):
+        digest = self.digest.hexdigest().encode("ascii")
+        self.stream.write(b'],"source_indices_sha256":"' + digest +
+                          b'","source_indices_total":' + str(self.count).encode("ascii") + b'}\n')
+        self.stream.close()
+        return self.count, digest.decode("ascii"), hashlib.sha256(self.path.read_bytes()).hexdigest()
+
+
+def scan(paths, progress=False, remainder_output=None, limit=None):
+    atom = load_atom_recognizer()
+    owner_counts = Counter({lane: 0 for lane in LANES})
+    cycle_counts = Counter({"signed-three-ray": 0, "signed-adjacency-square": 0})
+    profile_counts = Counter()
     chunks = []
-    stream = hashlib.sha256()
+    classification_digest = hashlib.sha256()
+    remainder_digest = hashlib.sha256()
+    writer = RemainderWriter(remainder_output) if remainder_output else None
+    scanned = 0
+    stop = False
     for path in paths:
-        payload, raw_digest, artifact_digest = read_chunk(path)
+        header, records, finish = stream_chunk(path)
         kernels = {item["order_kernel"]: tuple(map(tuple, item["edges"]))
-                   for item in payload["kernels"]}
+                   for item in header["kernels"]}
         local_counts = Counter()
-        for source in payload["residuals"]:
+        local_scanned = 0
+        residual_stream_digest = hashlib.sha256()
+        for source in records:
+            residual_stream_digest.update(canonical_bytes(source))
+            if limit is not None and scanned >= limit:
+                stop = True
+                continue
             edges = kernels[source["order_kernel"]]
             row = tuple(source["row"])
-            owner = None
-            detail = None
-            if signed_three_ray_owner(edges, row):
-                owner = "signed-three-ray"
-            else:
-                square = signed_adjacency_square_owner(edges, row)
-                if square is not None:
-                    owner = "signed-adjacency-square"
-                    detail = [square[0], square[1], square[2].numerator,
-                              square[2].denominator]
+            owner, detail = recognize_row(atom, edges, row)
+            source_index = scanned
             scanned += 1
-            support_counts[f"support-{len(edges)}-{'owned' if owner else 'residual'}"] += 1
+            local_scanned += 1
             if owner is None:
-                residual_by_kernel[str(source["global_kernel"])] += 1
+                encoded = str(source_index).encode("ascii")
+                remainder_digest.update(encoded + b"\n")
+                if writer:
+                    writer.add(source_index)
             else:
-                owned += 1
                 owner_counts[owner] += 1
                 local_counts[owner] += 1
-            stream.update(canonical_bytes([source["global_kernel"], source["order_kernel"],
-                                           source["row"], owner, detail]))
-        chunks.append({"path": path.name, "kernel_range": payload["kernel_range"],
-                       "residual_total": payload["coarse_residual_total"],
-                       "owner_counts": dict(sorted(local_counts.items())),
-                       "raw_sha256": raw_digest, "artifact_sha256": artifact_digest})
+                if owner == "cubic-cycle-space-candidate":
+                    cycle_counts[detail[0]] += 1
+                elif owner == "simplex-mixed-atom":
+                    profile_counts.update(f"mixed-{mixed}/simplex-{'-'.join(map(str, widths)) or 'none'}"
+                                          for mixed, widths in detail)
+            classification_digest.update(canonical_bytes(
+                [source_index, source["global_kernel"], source["order_kernel"],
+                 source["row"], owner, detail]))
+        raw_digest, artifact_digest = finish()
+        require(residual_stream_digest.hexdigest() == header["residual_stream_sha256"],
+                f"residual digest mismatch: {path.name}")
+        if not stop:
+            require(local_scanned == header["coarse_residual_total"],
+                    f"residual count mismatch: {path.name}")
+        chunks.append({"artifact_sha256": artifact_digest,
+                       "coarse_residual_total": header["coarse_residual_total"],
+                       "kernel_range": header["kernel_range"], "path": path.name,
+                       "raw_sha256": raw_digest,
+                       "scanned_residual_total": local_scanned,
+                       "exclusive_owner_row_counts": dict(sorted(local_counts.items()))})
         if progress:
-            print(f"chunk={path.name} scanned={scanned} owned={owned}", flush=True)
-    minimal = min(residual_by_kernel.values()) if residual_by_kernel else 0
-    minimal_kernels = sorted(int(key) for key, value in residual_by_kernel.items()
-                             if value == minimal)
+            print(f"chunk={path.name} scanned={scanned} recognized={sum(owner_counts.values())}",
+                  flush=True)
+        if stop:
+            break
+    recognized = sum(owner_counts.values())
+    remainder = scanned - recognized
+    index_record = None
+    if writer:
+        count, digest, artifact = writer.close()
+        require((count, digest) == (remainder, remainder_digest.hexdigest()),
+                "remainder output stream changed")
+        index_record = {"artifact_sha256": artifact, "path": remainder_output.name,
+                        "source_indices_sha256": digest, "source_indices_total": count}
     return {
         "schema": SCHEMA,
         "full_theorem": False,
-        "scope": "exact payload-free structural owners over supplied order-twelve residual chunks",
+        "scope": "exact payload-free sufficient owners over supplied rank-seven order-twelve chunks",
         "chunks": chunks,
         "scanned_residual_total": scanned,
-        "owned_residual_total": owned,
-        "residual_total": scanned - owned,
-        "owner_counts": dict(sorted(owner_counts.items())),
-        "support_status_counts": dict(sorted(support_counts.items())),
-        "minimal_positive_kernel_residual": minimal,
-        "minimal_positive_residual_kernels": minimal_kernels,
-        "residual_by_kernel": dict(sorted(residual_by_kernel.items(), key=lambda item: int(item[0]))),
-        "classification_stream_sha256": stream.hexdigest(),
+        "scanned_target_total": scanned * TARGETS_PER_ROW,
+        "exclusive_owner_row_counts": dict(sorted(owner_counts.items())),
+        "cubic_cycle_space_candidate_counts": dict(sorted(cycle_counts.items())),
+        "atom_profile_owner_counts": dict(sorted(profile_counts.items())),
+        "recognized_residual_total": recognized,
+        "recognized_target_total": recognized * TARGETS_PER_ROW,
+        "rational_search_residual_total": remainder,
+        "rational_search_target_total": remainder * TARGETS_PER_ROW,
+        "rational_search_source_indices_sha256": remainder_digest.hexdigest(),
+        "rational_search_index_artifact": index_record,
+        "classification_stream_sha256": classification_digest.hexdigest(),
     }
 
 
@@ -249,9 +497,12 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("chunks", nargs="+", type=Path)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--remainder-output", type=Path)
+    parser.add_argument("--limit", type=int, help="test-only global row limit")
     parser.add_argument("--progress", action="store_true")
     args = parser.parse_args()
-    report = scan(args.chunks, args.progress)
+    require(args.limit is None or args.limit >= 0, "negative row limit")
+    report = scan(args.chunks, args.progress, args.remainder_output, args.limit)
     raw = canonical_bytes(report)
     if args.output is not None:
         require(args.output.parent.is_dir(), "output parent does not exist")
@@ -260,4 +511,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (KeyError, TypeError, ValueError, ZeroDivisionError) as error:
+        raise RuntimeError(f"fail-closed malformed input: {error}") from error
