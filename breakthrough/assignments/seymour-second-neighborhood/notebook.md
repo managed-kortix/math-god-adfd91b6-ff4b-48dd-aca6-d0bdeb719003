@@ -1957,3 +1957,18 @@ No audits yet.
 - Pinned CaDiCaL 1.7.3 returned TIMEOUT on all 30 children (zero SAT and zero
   UNSAT). These are capped scout results only; no certificate was generated or
   retained, no mathematical closure is claimed, and no commit was made.
+
+### Frozen grouped `q` split audit
+
+- Audited the proposed `q`/`not q` split on grouped leaves 000, 022, 038, 065,
+  and 128 before producing campaign artifacts. Here `q_w_d` means that `d` is
+  an exact second neighbor of `w`, so the base encoding contains
+  `q_w_d -> not a_w_d`. Each source also fixes `wit_w_d`, and the robust-witness
+  encoding contains `wit_w_d -> a_w_d`. Hence every source propositionally
+  implies `not q_w_d`.
+- The positive-`q` side is empty and the negative-`q` side is the unchanged
+  source, so this is not a genuine nontrivial partition. No misleading
+  ten-child campaign, manifest, hashes, scout, or certificates were created.
+  The direct simplification and exact five-leaf audit are recorded in
+  `attempts/frozen-grouped-q-split-audit.md`. No broader closure is claimed and
+  no commit was made.
