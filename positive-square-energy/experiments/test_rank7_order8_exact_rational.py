@@ -47,6 +47,34 @@ class ExactRationalEngineTest(unittest.TestCase):
             self.assertEqual(decoded, records)
             self.assertEqual(raw[:6], b"R7O8G1")
 
+    def test_canonical_binary_census_cache(self):
+        raw = self.engine.cache_bytes(self.census, self.residuals)
+        self.assertEqual(self.engine.decode_cache(self.census, raw), self.residuals)
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "census.r7o8c.xz"
+            path.write_bytes(lzma.compress(raw, format=lzma.FORMAT_XZ, preset=3))
+            self.engine._RESIDUALS = None
+            self.assertEqual(self.engine.residual_rows(self.census, cache_path=path), self.residuals)
+
+    def test_accelerated_objective_is_base_identical(self):
+        paths = self.engine.base.path_ledger(self.census, self.residuals[0])
+        vectors = self.engine.base.random_vectors(__import__("random").Random(17))
+        expected_value, expected_gradient = self.engine.base._r10_objective_gradient(paths, vectors)
+        self.assertEqual(self.engine.objective(paths, vectors), self.engine.base._r10_objective(paths, vectors))
+        self.assertEqual(self.engine.objective_gradient(paths, vectors),
+                         (expected_value, expected_gradient))
+
+    def test_shard_expansion(self):
+        arguments = self.engine.expand_shard_arguments(
+            ["--output", "out.xz", "--shard-index", "2", "--shard-count", "99",
+             "--shard-rows", "5000"])
+        self.assertEqual(arguments[-4:], ["--start", "10000", "--count", "5000"])
+
+    def test_baseline_pack_artifact_identity(self):
+        path = PATH.with_name("rank7_order8_chunk_000000_005000.r7o8g.xz")
+        self.assertEqual(__import__("hashlib").sha256(path.read_bytes()).hexdigest(),
+                         "2f3773dc99c930f9aeacff1e3566e037eb6d7d106d866e81a829c1b53797a2ee")
+
 
 if __name__ == "__main__":
     unittest.main()
