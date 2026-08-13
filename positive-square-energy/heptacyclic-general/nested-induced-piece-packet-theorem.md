@@ -134,17 +134,23 @@ in (1) has a cited anchor whose strict integer threshold is at least its maximum
 number of negative territories. The two returned keys fail that comparison for
 specific physical subclasses:
 
-1. `R31-S` contains the canonical doubled-`C4` class `111`. The certified
-   retained packet with two triangles has only `sigma>1`; after its structural
-   tree is paid, two further cycle boundaries remain. No certified packet
-   supplies the missing two units.
+1. `R31-S` contains the canonical doubled-`C4` class `111`.  A sharper pass
+   boundary-opens one external leaf and retains three actual triangles.  The
+   110-record marked-cut census closes every balanced side allocation and
+   leaves exactly two one-sided root-sensitive packets: a marked four-triangle
+   cactus needs `sigma>2`, or an interior-owner `D+T^3` side needs `sigma>3`.
+   See `r31-s-doubled-c4-three-triangle-frontier.md`.  These inequalities are
+   not supplied by the currently pinned packet library.
 2. `R511-K22` has an actual-`K4` anchor of credit greater than two, but its
    original opened tree and two arbitrary external cycle boundaries can require
    three negative units. Neither external cycle is forced to be triangular.
 
-Therefore no larger subset can be accepted from the typed demands and the
-currently pinned packet thresholds. A stronger doubled-`C4` multi-triangle
-packet or a marked K22-plus-cycle packet would enlarge the theorem.
+Therefore no larger key subset can be accepted from the typed demands and the
+currently pinned packet thresholds.  The `R31-S` obstruction is nevertheless
+smaller than the manifest's coarse three-demand record: proving the two exact
+rooted packets above, or one coupled doubled-`C4` plus three-triangle inequality,
+would close it.  A marked K22-plus-cycle packet would enlarge the theorem on
+the other returned key.
 
 ## Fail-closed artifacts
 

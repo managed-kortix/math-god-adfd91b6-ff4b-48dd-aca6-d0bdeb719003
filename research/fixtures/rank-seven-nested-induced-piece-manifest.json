@@ -5,7 +5,7 @@
   "families": [
     {"key": "R21", "partition": [2,1,1,1,1,1], "owner_type": "theta-arm-or-DTT", "anchor_threshold": 1, "negative_territories": 1, "channels": ["opened-owner", "retained-owner", "nested"], "status": "closed"},
     {"key": "R221", "partition": [2,2,1,1,1], "owner_type": "physical-second-diamond", "anchor_threshold": 1, "negative_territories": 1, "channels": ["separate", "repeated-cut", "nested"], "status": "closed"},
-    {"key": "R31-S", "partition": [3,1,1,1,1], "owner_type": "canonical-S3-opening", "anchor_threshold": 1, "negative_territories": 3, "channels": ["opened-owner", "retained-owner", "nested"], "status": "open", "obstruction": "doubled-C4-111-two-triangle-threshold"},
+    {"key": "R31-S", "partition": [3,1,1,1,1], "owner_type": "canonical-S3-opening", "anchor_threshold": 1, "negative_territories": 3, "channels": ["opened-owner", "retained-owner", "nested"], "status": "open", "obstruction": "doubled-C4-111-one-sided-rooted-C4-or-D3"},
     {"key": "R31-K", "partition": [3,1,1,1,1], "owner_type": "actual-K4-plus-selected-triangle", "anchor_threshold": 3, "negative_territories": 3, "channels": ["separate", "repeated-cut", "nested"], "status": "closed"},
     {"key": "R321", "partition": [3,2,1,1], "owner_type": "actual-K4-terminal-triangle", "anchor_threshold": 2, "negative_territories": 2, "channels": ["separate", "repeated-cut", "nested"], "status": "closed"},
     {"key": "R322", "partition": [3,2,2], "owner_type": "actual-K4-two-boundaries", "anchor_threshold": 2, "negative_territories": 2, "channels": ["separate", "repeated-cut", "nested"], "status": "closed"},

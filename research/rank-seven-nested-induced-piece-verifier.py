@@ -15,15 +15,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "research/fixtures/rank-seven-nested-induced-piece-manifest.json"
-MANIFEST_SHA256 = "62d821de00cbd915a06ac935b3e037517557f5fc4757078471775e11f5ee658a"
+MANIFEST_SHA256 = "5d7f95bb710e773a5fc07585708f9a7d1c77482f9f39e4464c20d5584d067548"
 SOURCES = {
     "theorem": (
         ROOT / "positive-square-energy/heptacyclic-general/nested-induced-piece-packet-theorem.md",
-        "c45de1b0232ca22437f87a83cf52c37009e141fdc1b0e77aaf0d062811014495",
+        "c5e93adcdc87aa41d524c04bfb6e1b78cb47628fa5053066b0d47ba741df50d8",
     ),
     "ledger": (
         ROOT / "positive-square-energy/heptacyclic-general/rank-seven-multiblock-debit-ledger.md",
-        "8ad85b9c6f5440f1fd62d5a812e8b1a84394867def0e6b62394d42d0f259e84c",
+        "7637b48974e130b4baa34d64e5fc284394d762364ca514e9158dbdd6e0c78c73",
     ),
     "two-debit": (
         ROOT / "positive-square-energy/heptacyclic-general/two-debit-induced-piece-theorem.md",

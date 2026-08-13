@@ -123,7 +123,7 @@ current multiblock obligation is the following disjoint registry.
 |---|---|---|
 | `R21` | `2+1^5` | closed by the nested induced-piece theorem: theta-arm/six-triangle and `D+TT` typed anchors |
 | `R221` | `2+2+1^3` | closed by the physical second-diamond nested induced-piece packet |
-| `R31-S` | `3+1^4` | use the canonical physical `S3` opening; route an owned cycle with the opened territory or pay its tree from a retained packet |
+| `R31-S` | `3+1^4` | reduced to the canonical doubled-`C4` plus three-triangle packet; all 110 marked incidences close except two one-sided root-sensitive packets `C4` and `D3` |
 | `R31-K` | `3+1^4` | closed by the actual-`K4+T` anchor and three nested first-boundary territories |
 | `R321` | `3+2+1+1` | closed by the actual-`K4` terminal-triangle allocation, including nested theta incidence |
 | `R322` | `3+2+2` | closed by the actual-`K4` two-boundary induced-piece packet |
@@ -187,7 +187,12 @@ The accepting key equality must be
 `= bridge-split keys disjoint union DNN keys disjoint union packet-owner keys`.
 
 The packet-owner keys are now expanded. The exact owner residual is
-`{R31-S, R511-K22}`. Until both returned keys are proved, no complete
+`{R31-S, R511-K22}`.  Inside `R31-S`, the marked-cut census in
+`r31-s-doubled-c4-three-triangle-frontier.md` removes every noncanonical,
+non-doubled-`C4`, positive-route, opened-owner, and balanced-cut row.  Its exact
+remaining statements are the one-sided rooted packets `C4` and `D3`; the old
+coarse description as three independent negative territories is not sharp.
+Until both returned keys are proved, no complete
 multiblock or all-connected rank-seven conclusion follows from this note.
 
 ## Exact debit arithmetic audit
