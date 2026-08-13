@@ -1,0 +1,21 @@
+{
+  "schema": "rank-seven-nested-induced-piece-owner-manifest-v1",
+  "scope": "bridge-free-heptacyclic-multiblock-post-r61-post-two-debit",
+  "input_keys": ["R21", "R221", "R31-S", "R31-K", "R321", "R322", "R41", "R421", "R511-K5e", "R511-K22", "R511-K71"],
+  "families": [
+    {"key": "R21", "partition": [2,1,1,1,1,1], "owner_type": "theta-arm-or-DTT", "anchor_threshold": 1, "negative_territories": 1, "channels": ["opened-owner", "retained-owner", "nested"], "status": "closed"},
+    {"key": "R221", "partition": [2,2,1,1,1], "owner_type": "physical-second-diamond", "anchor_threshold": 1, "negative_territories": 1, "channels": ["separate", "repeated-cut", "nested"], "status": "closed"},
+    {"key": "R31-S", "partition": [3,1,1,1,1], "owner_type": "canonical-S3-opening", "anchor_threshold": 1, "negative_territories": 3, "channels": ["opened-owner", "retained-owner", "nested"], "status": "open", "obstruction": "doubled-C4-111-two-triangle-threshold"},
+    {"key": "R31-K", "partition": [3,1,1,1,1], "owner_type": "actual-K4-plus-selected-triangle", "anchor_threshold": 3, "negative_territories": 3, "channels": ["separate", "repeated-cut", "nested"], "status": "closed"},
+    {"key": "R321", "partition": [3,2,1,1], "owner_type": "actual-K4-terminal-triangle", "anchor_threshold": 2, "negative_territories": 2, "channels": ["separate", "repeated-cut", "nested"], "status": "closed"},
+    {"key": "R322", "partition": [3,2,2], "owner_type": "actual-K4-two-boundaries", "anchor_threshold": 2, "negative_territories": 2, "channels": ["separate", "repeated-cut", "nested"], "status": "closed"},
+    {"key": "R41", "partition": [4,1,1,1], "owner_type": "S4-retained-rank3-plus-triangle", "anchor_threshold": 3, "negative_territories": 3, "channels": ["opened-owner", "retained-owner", "intermediate-cycle", "nested"], "status": "closed"},
+    {"key": "R421", "partition": [4,2,1], "owner_type": "S4-retained-rank3-plus-triangle", "anchor_threshold": 3, "negative_territories": 2, "channels": ["opened-owner", "retained-owner", "intermediate-cycle", "nested"], "status": "closed"},
+    {"key": "R511-K5e", "partition": [5,1,1], "owner_type": "typed-K5e-structural-opening", "anchor_threshold": 2, "negative_territories": 2, "channels": ["opened-owner", "retained-owner", "nested"], "status": "closed", "structural_targets": {"complete-k4": 53, "favorable-theta": 640}},
+    {"key": "R511-K22", "partition": [5,1,1], "owner_type": "K22-retained-actual-K4", "anchor_threshold": 2, "negative_territories": 3, "channels": ["opened-owner", "retained-owner", "nested"], "status": "open", "obstruction": "owner-tree-plus-two-arbitrary-cycle-boundaries"},
+    {"key": "R511-K71", "partition": [5,1,1], "owner_type": "K71-retained-actual-K4-positive-owner", "anchor_threshold": 2, "negative_territories": 2, "channels": ["opened-owner", "retained-owner", "nested"], "status": "closed", "structural_targets": 9}
+  ],
+  "owner_rules": {"boundary_cut": "upstream-only", "nested_demands": "one-complete-first-boundary-territory", "rooted_descendants": "follow-unique-first-owner", "positive_connectors": "removed-by-bridge-split"},
+  "closed_keys": ["R21", "R221", "R31-K", "R321", "R322", "R41", "R421", "R511-K5e", "R511-K71"],
+  "returned_keys": ["R31-S", "R511-K22"]
+}

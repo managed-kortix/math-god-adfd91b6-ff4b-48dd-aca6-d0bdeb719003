@@ -159,6 +159,119 @@ def has_running_intersection(scopes):
     return False
 
 
+def determinant(matrix):
+    work = [list(row) for row in matrix]
+    result = F(1)
+    for column in range(len(work)):
+        pivot = next((row for row in range(column, len(work)) if work[row][column]), None)
+        if pivot is None:
+            return F(0)
+        if pivot != column:
+            work[column], work[pivot] = work[pivot], work[column]
+            result = -result
+        value = work[column][column]
+        result *= value
+        for row in range(column + 1, len(work)):
+            scale = work[row][column] / value
+            for index in range(column + 1, len(work)):
+                work[row][index] -= scale * work[column][index]
+    return result
+
+
+def inverse(matrix):
+    width = len(matrix)
+    work = [list(row) + [F(int(i == j)) for j in range(width)]
+            for i, row in enumerate(matrix)]
+    for column in range(width):
+        pivot = next((row for row in range(column, width) if work[row][column]), None)
+        if pivot is None:
+            return None
+        work[column], work[pivot] = work[pivot], work[column]
+        value = work[column][column]
+        work[column] = [entry / value for entry in work[column]]
+        for row in range(width):
+            if row == column:
+                continue
+            scale = work[row][column]
+            work[row] = [left - scale * right
+                         for left, right in zip(work[row], work[column])]
+    return tuple(tuple(row[width:]) for row in work)
+
+
+def is_psd(matrix):
+    width = len(matrix)
+    if any(len(row) != width for row in matrix):
+        return False
+    if any(matrix[i][j] != matrix[j][i] for i in range(width) for j in range(width)):
+        return False
+    return all(determinant([[matrix[i][j] for j in indices] for i in indices]) >= 0
+               for size in range(1, width + 1)
+               for indices in itertools.combinations(range(width), size))
+
+
+def coupled_k4_three_mixed_completion(mixed, atoms, prescriptions, quotient_width):
+    """Construct the exact six-vertex completions occurring in the order-seven census."""
+    if len(mixed) != 3 or len(atoms) != 1 or atoms[0][0] != 4:
+        return None
+    tetrahedron = tuple(sorted(atoms[0][2]))
+    if len(tetrahedron) != 4 or quotient_width != 6:
+        return None
+    prescribed = dict(prescriptions)
+    base = [[F(int(i == j)) if i == j else prescribed[tuple(sorted((u, v)))]
+             for j, v in enumerate(tetrahedron)] for i, u in enumerate(tetrahedron)]
+    if not is_psd(base):
+        return None
+
+    base_inverse = inverse(base)
+    null = None
+    if base_inverse is None:
+        null = next((signs for signs in itertools.product((-1, 1), repeat=4)
+                     if all(sum(base[i][j] * signs[j] for j in range(4)) == 0
+                            for i in range(4))), None)
+        if null is None or any(base[i][j] != F(4 * int(i == j), 3)
+                               - F(null[i] * null[j], 3)
+                               for i in range(4) for j in range(4)):
+            return None
+
+    outside = tuple(sorted(set(range(quotient_width)) - set(tetrahedron)))
+    columns = []
+    for vertex in outside:
+        column = [prescribed.get(tuple(sorted((vertex, tetrahedron[i]))), F())
+                  for i in range(4)]
+        if null is not None:
+            missing = [i for i, tetra_vertex in enumerate(tetrahedron)
+                       if tuple(sorted((vertex, tetra_vertex))) not in prescribed]
+            if not missing:
+                if sum(null[i] * column[i] for i in range(4)):
+                    return None
+            else:
+                defect = sum(null[i] * column[i] for i in range(4))
+                for i in missing:
+                    column[i] -= F(defect * null[i], len(missing))
+        columns.append(tuple(column))
+
+    def projected(left, right):
+        if base_inverse is None:
+            return F(3, 4) * sum(x * y for x, y in zip(left, right))
+        return sum(left[i] * base_inverse[i][j] * right[j]
+                   for i in range(4) for j in range(4))
+
+    gram = [[F(int(i == j)) for j in range(quotient_width)]
+            for i in range(quotient_width)]
+    for (u, v), value in prescriptions:
+        gram[u][v] = gram[v][u] = value
+    for vertex, column in zip(outside, columns):
+        for tetra_vertex, value in zip(tetrahedron, column):
+            gram[vertex][tetra_vertex] = gram[tetra_vertex][vertex] = value
+    edge = tuple(sorted(outside))
+    if edge not in prescribed:
+        gram[outside[0]][outside[1]] = gram[outside[1]][outside[0]] = projected(
+            columns[0], columns[1])
+    if not is_psd(gram):
+        return None
+    return tuple(tuple(row) for row in gram)
+
+
 def mixed_path_cycle_completion(scopes, mixed_count, atom_count):
     """Recognize the PSD `I-S/2` completion for signed paths and cycles."""
     if atom_count or mixed_count != len(scopes):
@@ -177,6 +290,8 @@ def geometry_name(mixed_count, widths, scopes):
         return "regular-simplex-K5"
     if not widths:
         return "six-mixed-pairs"
+    if widths == (4,) and mixed_count == 3:
+        return "coupled-K4+3M"
     intersections = [set(scopes[i]) & set(scopes[j])
                      for i, j in itertools.combinations(range(len(scopes)), 2)]
     coupled = any(len(value) >= 2 for value in intersections)
@@ -227,7 +342,7 @@ def recognize(edges, row):
             quotient = signed_quotient(ORDER, contractions)
             if quotient is None:
                 continue
-            classes, signs, _ = quotient
+            classes, signs, quotient_width = quotient
             active = []
             mixed = []
             valid = True
@@ -253,12 +368,15 @@ def recognize(edges, row):
                 widths = tuple(sorted(width for width, _, _ in atoms))
                 scopes = tuple(frozenset(edge) for edge, _ in mixed) + tuple(
                     frozenset(vertices) for _, _, vertices in atoms)
+                gram_completion = coupled_k4_three_mixed_completion(
+                    tuple(mixed), atoms, prescriptions, quotient_width)
                 owner = (has_running_intersection(scopes) or
-                         mixed_path_cycle_completion(scopes, len(mixed), len(atoms)))
+                         mixed_path_cycle_completion(scopes, len(mixed), len(atoms)) or
+                         gram_completion is not None)
                 zero_support = {(edge, odd) for edge, odd in contractions}
                 zero_coordinates = tuple(index for index, (_, _, edge, length) in enumerate(
                     path_ledger(edges, row)) if (edge, bool(length % 2)) in zero_support)
-                results.append({
+                record = {
                     "geometry": geometry_name(len(mixed), widths, scopes),
                     "profile": {"mixed": len(mixed), "simplex_widths": list(widths)},
                     "status": "exact-equality-owner" if owner else "coupled-psd-open",
@@ -266,7 +384,12 @@ def recognize(edges, row):
                     "contractions": [[list(edge), odd] for edge, odd in contractions],
                     "prescribed": [[list(edge), [value.numerator, value.denominator]]
                                    for edge, value in prescriptions],
-                })
+                }
+                if gram_completion is not None:
+                    record["gram_completion"] = [
+                        [[value.numerator, value.denominator] for value in row]
+                        for row in gram_completion]
+                results.append(record)
     unique = {json.dumps(record, sort_keys=True, separators=(",", ":")): record
               for record in results}
     return tuple(unique[key] for key in sorted(unique))

@@ -41,10 +41,11 @@ the emerging exact census.  It:
    partition realizing one of the thirteen profiles;
 3. rejects conflicting prescribed correlations exactly over `Fraction`;
 4. proves PSD completion when the atom scopes have a running-intersection join
-   tree, by the Gram-gluing theorem, and for pure mixed path/cycle quotients by
-   the exact spectral bound for signed paths and cycles; and
-5. retains cyclic coupled scope systems as `coupled-psd-open`, rather than
-   silently promoting a merely plausible support to an equality owner.
+   tree, by the Gram-gluing theorem, for pure mixed path/cycle quotients by the
+   exact spectral bound for signed paths and cycles, and for the census's
+   coupled `K4+3M` systems by explicit rational Gram completion; and
+5. retains any other cyclic coupled scope system as `coupled-psd-open`, rather
+   than silently promoting a merely plausible support to an equality owner.
 
 The owner template is the canonical target together with precisely the
 one-coordinate frontiers carried by zero-cost contraction paths.  Every path in
@@ -60,13 +61,14 @@ completion or a separate coupled equality argument.
 ## Completed census snapshot
 
 On the completed 40,964-row coarse residual artifact, the recognizer finds 20
-candidate rows.  Eleven rows have exact atomic owners: nine admit a switched
-regular `K5` quotient and two admit a signed six-cycle mixed-pair quotient.
-These give 12 decompositions because one row has two `K5` contraction choices.
-The remaining nine candidate rows give 11 `K4+3M` decompositions whose scope
-systems are not join-tree assemblies; they remain deliberately typed
-`coupled-psd-open`.  This is an owner-template census, not yet a disjoint owner
-assignment against rational certificates.
+candidate rows, all with exact atomic owners: nine admit a switched regular
+`K5` quotient, two admit a signed six-cycle mixed-pair quotient, and nine admit
+11 coupled `K4+3M` decompositions.  The latter are not join-tree assemblies.
+For each, the recognizer fills every unspecified correlation over `Fraction`
+and checks all principal minors of the resulting unit-diagonal Gram exactly.
+Thus the scan has 23 exact decompositions and no open coupled decomposition.
+This is an owner-template census, not yet a disjoint owner assignment against
+rational certificates, and makes no claim beyond these nine coupled rows.
 
 Run a bounded early scan with
 

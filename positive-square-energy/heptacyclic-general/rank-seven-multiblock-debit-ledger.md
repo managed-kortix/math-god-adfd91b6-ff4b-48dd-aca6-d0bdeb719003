@@ -121,19 +121,19 @@ current multiblock obligation is the following disjoint registry.
 
 | key | block partition | required owner action |
 |---|---|---|
-| `R21` | `2+1^5` | open a theta arm or retain a high-credit theta-cycle anchor; assign all five cycle routes once |
-| `R221` | `2+2+1^3` | boundary-open at most one diamond/theta and account for the three cycle routes without duplicating an intermediate cut |
+| `R21` | `2+1^5` | closed by the nested induced-piece theorem: theta-arm/six-triangle and `D+TT` typed anchors |
+| `R221` | `2+2+1^3` | closed by the physical second-diamond nested induced-piece packet |
 | `R31-S` | `3+1^4` | use the canonical physical `S3` opening; route an owned cycle with the opened territory or pay its tree from a retained packet |
-| `R31-K` | `3+1^4` | retain the actual `K4`; prove the exact number of first-boundary debits paid by its strict credit |
-| `R321` | `3+2+1+1` | retain `K4`, and treat the theta plus two cycles as first-boundary demands, including nested incidence |
-| `R322` | `3+2+2` | retain `K4`; allocate both exceptional theta boundaries exactly once |
+| `R31-K` | `3+1^4` | closed by the actual-`K4+T` anchor and three nested first-boundary territories |
+| `R321` | `3+2+1+1` | closed by the actual-`K4` terminal-triangle allocation, including nested theta incidence |
+| `R322` | `3+2+2` | closed by the actual-`K4` two-boundary induced-piece packet |
 | `R331` | `3+3+1` | closed: `R331-S` and `R331-K` by the actual-`K4` two-debit induced-piece theorem |
-| `R41` | `4+1^3` | perform the physical `S4` opening and allocate the structural owner tree plus the `T^3` or even-state `T^2P` cycle routes |
-| `R421` | `4+2+1` | perform the `S4` opening; treat theta and cycle at their first boundaries, with a nested pair charged once |
+| `R41` | `4+1^3` | closed by the typed `S4` opening, retained rank-three-plus-triangle anchor, and three induced territories |
+| `R421` | `4+2+1` | closed by the typed `S4` opening and nested theta/cycle first-boundary packet |
 | `R43` | `4+3` | closed: exact `S4` opening plus the external actual `K4`; the retained-owner channel boundary-opens it to an actual `K3` |
-| `R511-K5e` | `5+1+1` | use the physical all-odd `K5-e` structural class and two cycle owners; the DNN predicate must be applied first |
+| `R511-K5e` | `5+1+1` | closed after regenerating the 53 actual-`K4` and 640 favorable-theta structural states |
 | `R511-K22` | `5+1+1` | retain the certified attached `K4` from `K22`; pay its original owner territory and two external cycle boundaries |
-| `R511-K71` | `5+1+1` | retain the certified attached `K4` from `K71`; keep its favorable unicyclic side and allocate two external cycles |
+| `R511-K71` | `5+1+1` | closed on all nine targets by the actual `K4`, positive unicyclic owner, and two nested cycle boundaries |
 | `R52-K22` | `5+2` | closed: retained actual `K4` pays the exact K22 owner tree and one theta first-boundary debit |
 | `R52-K71` | `5+2` | closed: retained actual `K4`, favorable unicyclic side, and one theta first-boundary debit |
 | `R61` | `6+1` | closed: K110 all-unit and one-long by the exact shared-cut packet for every cut orbit and length; canonical all-unit K223 by `r61-k223-marked-cycle-packet.md` |
@@ -144,6 +144,18 @@ and closed in `two-debit-induced-piece-theorem.md`; its persisted exact ledger
 regenerates the four K22 and nine K71 structural targets. The R61 theorem-owner
 partition has been expanded to three typed physical families, and all three
 shared-cut packets are closed.
+
+The subsequent `nested-induced-piece-packet-theorem.md` expands all eleven
+keys remaining after those closures into an owner-typed manifest. It proves the
+maximal currently supported nine-key subset
+
+`R21, R221, R31-K, R321, R322, R41, R421, R511-K5e, R511-K71`
+
+and returns exactly `R31-S` and `R511-K22`. The returned doubled-`C4` subclass
+has a pinned retained threshold `>1` against three remaining demands, while the
+K22 row has an anchor threshold `>2` against its owner tree and two arbitrary
+cycle boundaries. Thus the full multiblock theorem remains open on exactly
+those two keys; this ledger no longer has nine unexpanded packet templates.
 Rank-six structural targets cannot in general be inferred by subtracting the
 DNN-owned key set unless the final manifest exposes a disjoint typed owner
 partition.
@@ -174,9 +186,9 @@ The accepting key equality must be
 
 `= bridge-split keys disjoint union DNN keys disjoint union packet-owner keys`.
 
-Until the packet-owner keys are expanded and proved, the residual registry
-above remains open. No all-connected rank-seven conclusion follows from this
-note.
+The packet-owner keys are now expanded. The exact owner residual is
+`{R31-S, R511-K22}`. Until both returned keys are proved, no complete
+multiblock or all-connected rank-seven conclusion follows from this note.
 
 ## Exact debit arithmetic audit
 
