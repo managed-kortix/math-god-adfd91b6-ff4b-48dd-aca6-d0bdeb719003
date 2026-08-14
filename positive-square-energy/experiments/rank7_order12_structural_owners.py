@@ -372,13 +372,16 @@ def simple_signed_three_ray_owner(edges, row):
     return solve(domains)
 
 
-def signed_three_ray_owner(edges, row):
-    """Exact switched three-ray owner for every loopless cubic multikernel."""
-    if not cubic_kernel(edges) or any(type(value) is not int or value < 0 or
-                                      value > edge[2]
-                                      for edge, value in zip(edges, row, strict=True)):
+def _signed_three_ray_owner(edges, row, cubic_only):
+    """Exact switched three-ray owner, optionally restricted to cubic kernels."""
+    if ((cubic_only and not cubic_kernel(edges)) or
+            sum(edge[2] for edge in edges) != PATH_COUNT or
+            any(not (0 <= edge[0] < edge[1] < ORDER and edge[2] > 0)
+                for edge in edges) or
+            any(type(value) is not int or value < 0 or value > edge[2]
+                for edge, value in zip(edges, row, strict=True))):
         return False
-    if simple_signed_three_ray_owner(edges, row):
+    if cubic_only and simple_signed_three_ray_owner(edges, row):
         return True
     tables = []
     incident = [[] for _ in range(ORDER)]
@@ -440,6 +443,16 @@ def signed_three_ray_owner(edges, row):
         return False
 
     return solve(1, 0)
+
+
+def signed_three_ray_owner(edges, row):
+    """Exact switched three-ray owner for every loopless cubic multikernel."""
+    return _signed_three_ray_owner(edges, row, True)
+
+
+def generalized_three_ray_owner(edges, row):
+    """Exact switched three-ray owner for an arbitrary loopless multikernel."""
+    return _signed_three_ray_owner(edges, row, False)
 
 
 def signed_adjacency_square_owner(edges, row, radius=8):

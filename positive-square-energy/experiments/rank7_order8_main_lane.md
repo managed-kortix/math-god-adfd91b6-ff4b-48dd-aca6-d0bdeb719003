@@ -56,3 +56,29 @@ Template-derived warm starts should be introduced only behind an explicit
 experimental option. They must fall through to the current seeded starts and
 must pass a byte-identity benchmark on the first 5,000 rows before entering the
 main lane.
+
+## Exact finite-library experiment
+
+`rank7_order8_exact_gram_library.py` authenticates and exactly replays the
+first-5,000 pack, mines rational branch Grams together with their complete
+canonical and length-plus-two waypoint formulas, and builds support/parity
+keys modulo vertex relabeling.  The full 492,812-row rational-search stream is
+then recognized without floating point.
+
+The mined sample has 1,262 signed-degree signatures, 2,177 refined incidence
+signatures, and 50,932 exact structural orientations.  Their signatures occur
+on 166,072, 66,416, and 5,000 rows respectively.  Exact structural matching
+certifies only the 5,000 source rows: all 5,000 witness formulas are distinct,
+and none transfers to a second row.  Thus the sample supports useful warm-start
+classes but not a reusable certificate library covering a majority.  The exact
+coverage is 5,000 rows and 75,000 targets, leaving 487,812 rows and 7,317,180
+targets.
+
+```text
+python3 positive-square-energy/experiments/rank7_order8_exact_gram_library.py
+python3 positive-square-energy/experiments/rank7_order8_exact_gram_library.py \
+  --audit positive-square-energy/experiments/rank7_order8_exact_gram_library_coverage.json
+```
+
+The committed report reproduces byte-for-byte with SHA-256
+`32a54cf46be560a260bb7b65b53cd6d042390e7f8dec062a894c3b19e32bd094`.
