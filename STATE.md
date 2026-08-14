@@ -17,6 +17,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-14: derived the exact rank-seven-to-rank-six marked edge-opening
+  reduction for kernel orders 8--12.  A deleted-path owner with rank-six excess
+  `E_e`, endpoint correlation `r_e`, and restored length `q_e` closes exactly
+  when `E_e+f_(q_e)(r_e)<=6`; at exact budget five the thresholds are `r_e<=0`
+  for a unit path, `r_e>=-7/9` for length two, and automatic for every length
+  at least three.  Positive weighted average marked credit over any edge set or
+  cycle therefore forces a good edge.  This proves every realization outside
+  the finite support-family union of the canonical short signed supports
+  (`o_uv in {0,1}` for every parallel class) and one-ear extensions of typed
+  non-DNN rank-six owners.  It also identifies why an unmarked rank-six theorem or PSD averaging
+  across different deletion Grams is insufficient.  The short support class
+  remains open; no rank-seven theorem claim is made.  See
+  `positive-square-energy/heptacyclic-general/rank-seven-edge-opening-averaging-reduction.md`.
 - 2026-08-12: closed exactly the rank-seven order-five single-block frontier.
   Independent regeneration gives 233 kernels, 132774 physical parity rows,
   109342 automorphism orbits, and exactly 15 coarse residual orbits. Their

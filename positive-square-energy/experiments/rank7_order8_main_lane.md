@@ -53,9 +53,36 @@ only by validated record bodies in ascending shard order, exactly as fragment
 merge does, then replay the final pack and record both raw and XZ SHA-256.
 
 Template-derived warm starts should be introduced only behind an explicit
-experimental option. They must fall through to the current seeded starts and
-must pass a byte-identity benchmark on the first 5,000 rows before entering the
-main lane.
+experimental option. Cache misses must fall through to the current seeded
+starts, and exact replay must remain mandatory before entering the main lane.
+
+## Refined-signature warm-start experiment
+
+`build-warm-cache` deterministically selects the first solved row for each
+refined incidence signature in an exactly replayed source pack. It stores only
+the branch Gram as canonical hexadecimal binary64 values; Cholesky
+factorization supplies a numerical optimizer start. The search still
+rationalizes the resulting vectors and replays every stored witness exactly.
+Cache misses retain the original seeded starts, and cache hits replace one
+random restart rather than increasing the amount of descent work.
+
+On held-out rows 5,000--9,999, the first-5,000 cache contained 2,177 signatures
+and hit 2,762 rows. Both baseline and warm runs produced 5,000 shared exact
+witnesses with no fallback or unresolved target. Search elapsed time changed
+from 432.453256 seconds to 424.738455 seconds, a 1.78% improvement; wall time
+changed from 436.310 seconds to 428.457 seconds, a 1.80% improvement. The output
+packs differ because the numerical proposals differ, but both pass exact
+`Fraction` replay. This is not a substantial gain, so the cache remains an
+explicit experiment and is not enabled or committed for main-lane shards.
+
+```text
+python3 rank7_order8_exact_rational.py build-warm-cache \
+  --source-pack rank7_order8_chunk_000000_005000.r7o8g.xz \
+  --output rank7_order8_warm_cache.json.xz
+python3 rank7_order8_exact_rational.py \
+  --warm-start-cache rank7_order8_warm_cache.json.xz \
+  --start 5000 --count 5000 --output heldout.r7o8g.xz
+```
 
 ## Exact finite-library experiment
 

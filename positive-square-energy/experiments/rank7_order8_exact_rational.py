@@ -14,10 +14,12 @@ import hashlib
 import importlib.util
 import json
 import lzma
+import math
+import random
 import re
 import sys
 import time
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -35,10 +37,14 @@ EXPECTED_RESIDUALS = 492812
 EXPECTED_MANIFEST_SHA256 = "5d41e78a2f688f4c3064cb88f1d6d475008d36c84f892edc4cba28ade424fe98"
 EXPECTED_INDICES_SHA256 = "245cceaab164ba9c2a604d0db8b09a65598fd52084b1df2363911c6d1d4d3a59"
 CACHE_MAGIC = b"R7O8C1"
+WARM_CACHE_SCHEMA = "rank-seven-order-eight-numerical-gram-cache-v1"
+DEFAULT_WARM_SOURCE = HERE / "rank7_order8_chunk_000000_005000.r7o8g.xz"
 FRAGMENT_PATTERN = re.compile(r"fragment-(\d+)-(\d+)\.r7o8g\.xz\Z")
 _CENSUS = None
 _RESIDUALS = None
 _LANES = None
+_WARM_GRAMS = None
+_WARM_HITS = 0
 
 
 def require(condition, message):
@@ -286,6 +292,155 @@ def template_key(census, source):
             tuple(sorted((multiplicity, odd) for _, _, multiplicity, odd in edges)))
 
 
+def refined_signature(census, source):
+    edges = tuple((*census.PAIRS[dense], multiplicity, odd)
+                  for dense, multiplicity, odd in zip(source[2], source[3], source[4]))
+    incident = [[] for _ in range(ORDER)]
+    for u, v, multiplicity, odd in edges:
+        incident[u].append((multiplicity, odd))
+        incident[v].append((multiplicity, odd))
+    fingerprints = tuple(tuple(sorted(values)) for values in incident)
+    signature = (tuple(sorted((multiplicity, odd)
+                              for _, _, multiplicity, odd in edges)),
+                 tuple(sorted(fingerprints)))
+    order = tuple(sorted(range(ORDER), key=lambda vertex: (fingerprints[vertex], vertex)))
+    return signature, order
+
+
+def source_from_paths(census, paths):
+    grouped = defaultdict(list)
+    for _, _, u, v, length in paths:
+        grouped[min(u, v), max(u, v)].append(length)
+    pairs = {pair: dense for dense, pair in enumerate(census.PAIRS)}
+    edges = sorted(grouped)
+    support = tuple(pairs[edge] for edge in edges)
+    multiplicities = tuple(len(grouped[edge]) for edge in edges)
+    row = tuple(sum(length & 1 for length in grouped[edge]) for edge in edges)
+    return (0, 0, support, multiplicities, row, 1, None, False)
+
+
+def gram_vectors(gram):
+    """Return a deterministic numerical factor of a correlation Gram."""
+    vectors = [[0.0] * DIMENSION for _ in range(ORDER)]
+    for row in range(ORDER):
+        for column in range(row + 1):
+            value = gram[row][column] - sum(
+                vectors[row][k] * vectors[column][k] for k in range(column))
+            if row == column:
+                vectors[row][column] = math.sqrt(max(0.0, value))
+            elif vectors[column][column] > 1e-12:
+                vectors[row][column] = value / vectors[column][column]
+        norm = math.sqrt(sum(value * value for value in vectors[row]))
+        require(norm > 1e-12, "degenerate cached Gram factor")
+        vectors[row] = [value / norm for value in vectors[row]]
+    return tuple(tuple(row) for row in vectors)
+
+
+def warm_cache_payload(census, residuals, pack_path):
+    stored = pack_path.read_bytes()
+    try:
+        raw = lzma.decompress(stored, format=lzma.FORMAT_XZ)
+    except lzma.LZMAError as error:
+        raise RuntimeError("warm source pack is not a valid XZ stream") from error
+    start, records = base.exact_decode_pack(census, raw, residuals)
+    representatives = {}
+    for source_index, ((mode, witness), source) in enumerate(
+            zip(records, residuals[start:start + len(records)]), start):
+        if mode != base.MODE_SHARED:
+            continue
+        signature, order = refined_signature(census, source)
+        if signature in representatives:
+            continue
+        _, parameters, _, _ = witness
+        vectors = tuple(base.rational_unit(row) for row in parameters)
+        gram = tuple(tuple(base.dot(vectors[u], vectors[v]) for v in order) for u in order)
+        representatives[signature] = (source_index, gram)
+    entries = []
+    for signature in sorted(representatives):
+        source_index, gram = representatives[signature]
+        entries.append({
+            "signature": signature,
+            "source_index": source_index,
+            "gram_hex": [[float(value).hex() for value in row] for row in gram],
+        })
+    return {
+        "schema": WARM_CACHE_SCHEMA,
+        "source_stream_sha256": census.SOURCE_SHA256,
+        "source_pack_sha256": hashlib.sha256(stored).hexdigest(),
+        "source_range": [start, start + len(records)],
+        "representative_total": len(entries),
+        "entries": entries,
+    }
+
+
+def canonical_json_bytes(payload):
+    return (json.dumps(payload, sort_keys=True, separators=(",", ":")) + "\n").encode("ascii")
+
+
+def write_warm_cache(census, residuals, pack_path, output):
+    payload = warm_cache_payload(census, residuals, pack_path)
+    temporary = output.with_name(output.name + ".tmp")
+    temporary.write_bytes(lzma.compress(canonical_json_bytes(payload), format=lzma.FORMAT_XZ,
+                                        preset=6))
+    temporary.replace(output)
+    return payload
+
+
+def nested_tuple(value):
+    return tuple(nested_tuple(item) for item in value) if isinstance(value, list) else value
+
+
+def load_warm_cache(census, path):
+    try:
+        raw = lzma.decompress(path.read_bytes(), format=lzma.FORMAT_XZ)
+    except lzma.LZMAError as error:
+        raise RuntimeError("warm-start cache is not a valid XZ stream") from error
+    payload = json.loads(raw.decode("ascii"))
+    require(raw == canonical_json_bytes(payload), "noncanonical warm-start cache")
+    require(payload.get("schema") == WARM_CACHE_SCHEMA and
+            payload.get("source_stream_sha256") == census.SOURCE_SHA256 and
+            payload.get("representative_total") == len(payload.get("entries", ())),
+            "warm-start cache identity changed")
+    result = {}
+    for entry in payload["entries"]:
+        signature = nested_tuple(entry["signature"])
+        require(signature not in result, "duplicate warm-start signature")
+        gram = tuple(tuple(float.fromhex(value) for value in row)
+                     for row in entry["gram_hex"])
+        require(len(gram) == ORDER and all(len(row) == ORDER for row in gram),
+                "bad cached Gram dimensions")
+        result[signature] = gram_vectors(gram)
+    return result
+
+
+def warm_vectors(census, source):
+    if _WARM_GRAMS is None:
+        return None
+    signature, order = refined_signature(census, source)
+    canonical = _WARM_GRAMS.get(signature)
+    if canonical is None:
+        return None
+    position = {vertex: index for index, vertex in enumerate(order)}
+    return tuple(canonical[position[vertex]] for vertex in range(ORDER))
+
+
+def optimize(paths, seed, restarts, iterations, warm=()):
+    global _WARM_HITS
+    cached = None
+    if _WARM_GRAMS is not None:
+        cached = warm_vectors(load_census_module(), source_from_paths(load_census_module(), paths))
+    if cached is not None:
+        _WARM_HITS += 1
+        warm = (cached,) + tuple(warm)
+        generator = random.Random(seed)
+        starts = list(warm) + [base.random_vectors(generator)
+                               for _ in range(max(0, restarts - len(warm)))]
+        require(starts, "optimizer has no starts")
+        return min((base.descend(paths, initial, iterations) for initial in starts),
+                   key=lambda row: row[0])
+    return base._r10_optimize(paths, seed, restarts, iterations, warm)
+
+
 def mine_templates(census, residuals, pack_path, output):
     try:
         raw = lzma.decompress(pack_path.read_bytes(), format=lzma.FORMAT_XZ)
@@ -344,11 +499,15 @@ def fragment_path(directory, start, stop):
 
 def search(args, census, residuals):
     base._summary_start = args.start
-    return base._r10_search(args, census, residuals)
+    result = base._r10_search(args, census, residuals)
+    if _WARM_GRAMS is not None:
+        print(f"warm_cache_signatures={len(_WARM_GRAMS)} warm_start_hits={_WARM_HITS}")
+    return result
 
 
 def configure_base():
     base._r10_search = base.search
+    base._r10_optimize = base.optimize
     base._r10_objective = base.objective
     base._r10_objective_gradient = base.objective_gradient
     values = {
@@ -365,6 +524,7 @@ def configure_base():
         "structural_certified": structural_certified,
         "objective_gradient": objective_gradient,
         "objective": objective,
+        "optimize": optimize,
         "fragment_path": fragment_path,
         "search": search,
     }
@@ -376,6 +536,21 @@ configure_base()
 
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "build-warm-cache":
+        import argparse
+        parser = argparse.ArgumentParser()
+        parser.add_argument("--source-pack", type=Path, default=DEFAULT_WARM_SOURCE)
+        parser.add_argument("--output", type=Path, required=True)
+        parser.add_argument("--census-cache", type=Path)
+        cache_args = parser.parse_args(sys.argv[2:])
+        require(cache_args.output.parent.is_dir(), "warm-cache output parent missing")
+        cache_census = load_census_module()
+        cache_residuals = residual_rows(cache_census, cache_path=cache_args.census_cache)
+        cache_payload = write_warm_cache(cache_census, cache_residuals,
+                                         cache_args.source_pack, cache_args.output)
+        print(f"representatives={cache_payload['representative_total']} "
+              f"source_rows={cache_payload['source_range'][1] - cache_payload['source_range'][0]}")
+        raise SystemExit(0)
     if len(sys.argv) > 1 and sys.argv[1] == "mine-templates":
         import argparse
         parser = argparse.ArgumentParser()
@@ -391,6 +566,15 @@ if __name__ == "__main__":
               f"reused_rows={mining['reused_rows']} maximum_reuse={mining['maximum_reuse']}")
         print("full_theorem=false")
         raise SystemExit(0)
+    warm_path = None
+    if "--warm-start-cache" in sys.argv[1:]:
+        position = sys.argv.index("--warm-start-cache")
+        require(position + 1 < len(sys.argv), "missing value for --warm-start-cache")
+        warm_path = Path(sys.argv[position + 1])
+        del sys.argv[position:position + 2]
     sys.argv[1:] = expand_shard_arguments(sys.argv[1:])
+    if warm_path is not None:
+        require(warm_path.is_file(), "warm-start cache missing")
+        _WARM_GRAMS = load_warm_cache(load_census_module(), warm_path)
     base.main()
     print("full_theorem=false")

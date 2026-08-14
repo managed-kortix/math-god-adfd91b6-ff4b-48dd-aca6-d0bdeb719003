@@ -75,6 +75,27 @@ class ExactRationalEngineTest(unittest.TestCase):
         self.assertEqual(__import__("hashlib").sha256(path.read_bytes()).hexdigest(),
                          "2f3773dc99c930f9aeacff1e3566e037eb6d7d106d866e81a829c1b53797a2ee")
 
+    def test_deterministic_refined_signature_warm_cache(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "warm.json.xz"
+            payload = self.engine.write_warm_cache(
+                self.census, self.residuals, self.engine.DEFAULT_WARM_SOURCE, path)
+            first = path.read_bytes()
+            self.assertGreater(payload["representative_total"], 0)
+            self.engine.write_warm_cache(
+                self.census, self.residuals, self.engine.DEFAULT_WARM_SOURCE, path)
+            self.assertEqual(path.read_bytes(), first)
+            cache = self.engine.load_warm_cache(self.census, path)
+            self.assertEqual(len(cache), payload["representative_total"])
+            self.engine._WARM_GRAMS = cache
+            vectors = self.engine.warm_vectors(self.census, self.residuals[5000])
+            self.assertIsNotNone(vectors)
+            gram = tuple(tuple(self.engine.base.dot(left, right) for right in vectors)
+                         for left in vectors)
+            self.assertTrue(all(abs(gram[index][index] - 1.0) < 1e-12
+                                for index in range(self.engine.ORDER)))
+            self.engine._WARM_GRAMS = None
+
 
 if __name__ == "__main__":
     unittest.main()

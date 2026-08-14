@@ -30,6 +30,27 @@ class ThreeRayOwnerTests(unittest.TestCase):
             OWNERS.PATH_COUNT = 6
             self.assertTrue(OWNERS.cubic_kernel(edges))
             self.assertTrue(OWNERS.signed_three_ray_owner(edges, (0, 0, 0, 0)))
+            witness = OWNERS.signed_three_ray_witness(edges, (0, 0, 0, 0))
+            self.assertEqual(OWNERS.three_ray_witness_cost(
+                edges, (0, 0, 0, 0), witness), 0)
+        finally:
+            OWNERS.ORDER = old_order
+            OWNERS.PATH_COUNT = old_paths
+
+    def test_signed_cut_characterization(self):
+        edges = ((0, 1, 2),)
+        old_order = OWNERS.ORDER
+        old_paths = OWNERS.PATH_COUNT
+        try:
+            OWNERS.ORDER = 2
+            OWNERS.PATH_COUNT = 2
+            for odd in range(3):
+                witness = OWNERS.generalized_three_ray_witness(edges, (odd,))
+                self.assertIsNotNone(witness)
+                self.assertLessEqual(OWNERS.three_ray_witness_cost(
+                    edges, (odd,), witness), 108)
+            self.assertIsNone(OWNERS.three_ray_witness_cost(
+                edges, (0,), (0, 1)))
         finally:
             OWNERS.ORDER = old_order
             OWNERS.PATH_COUNT = old_paths

@@ -320,9 +320,10 @@ def three_ray_edge_cost(multiplicity, odd, left, right):
     return total
 
 
-def simple_signed_three_ray_owner(edges, row):
+def simple_signed_three_ray_witness(edges, row):
+    """Return a six-state witness for the simple-cubic zero-cost case."""
     if not simple_cubic(edges) or any(value not in (0, 1) for value in row):
-        return False
+        return None
     adjacency = [[] for _ in range(ORDER)]
     for edge_index, (u, v, _) in enumerate(edges):
         adjacency[u].append((v, row[edge_index]))
@@ -350,14 +351,14 @@ def simple_signed_three_ray_owner(edges, row):
                               source & (1 << state) and allowed[parity][state][target]
                               for state in range(6)))
                 if not new:
-                    return False
+                    return None
                 if new != old:
                     local[neighbor] = new
                     queue.append(neighbor)
         choices = [(mask.bit_count(), vertex) for vertex, mask in enumerate(local)
                    if mask & (mask - 1)]
         if not choices:
-            return True
+            return tuple(mask.bit_length() - 1 for mask in local)
         _, vertex = min(choices)
         mask = local[vertex]
         while mask:
@@ -365,31 +366,52 @@ def simple_signed_three_ray_owner(edges, row):
             mask -= bit
             child = local.copy()
             child[vertex] = bit
-            if solve(child):
-                return True
-        return False
+            witness = solve(child)
+            if witness is not None:
+                return witness
+        return None
 
     return solve(domains)
 
 
-def _signed_three_ray_owner(edges, row, cubic_only):
-    """Exact switched three-ray owner, optionally restricted to cubic kernels."""
+def simple_signed_three_ray_owner(edges, row):
+    return simple_signed_three_ray_witness(edges, row) is not None
+
+
+def three_ray_witness_cost(edges, row, states):
+    """Return the exact cost scaled by 18, rejecting malformed witnesses."""
+    if (len(states) != ORDER or any(type(state) is not int or not 0 <= state < 6
+                                    for state in states)):
+        return None
+    total = 0
+    for (u, v, multiplicity), odd in zip(edges, row, strict=True):
+        value = three_ray_edge_cost(multiplicity, odd, states[u], states[v])
+        if value is None:
+            return None
+        total += value
+    return total
+
+
+def _signed_three_ray_witness(edges, row, cubic_only):
+    """Find an exact switched three-ray witness, with total cost at most six."""
     if ((cubic_only and not cubic_kernel(edges)) or
             sum(edge[2] for edge in edges) != PATH_COUNT or
             any(not (0 <= edge[0] < edge[1] < ORDER and edge[2] > 0)
                 for edge in edges) or
             any(type(value) is not int or value < 0 or value > edge[2]
                 for edge, value in zip(edges, row, strict=True))):
-        return False
-    if cubic_only and simple_signed_three_ray_owner(edges, row):
-        return True
+        return None
+    if cubic_only:
+        witness = simple_signed_three_ray_witness(edges, row)
+        if witness is not None:
+            return witness
     tables = []
     incident = [[] for _ in range(ORDER)]
     for edge_index, ((u, v, multiplicity), odd) in enumerate(zip(edges, row, strict=True)):
         table = tuple(tuple(three_ray_edge_cost(multiplicity, odd, left, right)
                             for right in range(6)) for left in range(6))
         if all(value is None or value > 108 for values in table for value in values):
-            return False
+            return None
         tables.append(table)
         incident[u].append((edge_index, v, False))
         incident[v].append((edge_index, u, True))
@@ -416,9 +438,9 @@ def _signed_three_ray_owner(edges, row, cubic_only):
 
     def solve(assigned, cost):
         if cost + lower_bound() > 108:
-            return False
+            return None
         if assigned == ORDER:
-            return True
+            return tuple(states)
         vertex = max((v for v in range(ORDER) if states[v] < 0),
                      key=lambda v: sum(states[w] >= 0 for _, w, _ in incident[v]))
         choices = []
@@ -437,22 +459,33 @@ def _signed_three_ray_owner(edges, row, cubic_only):
         for added, state in sorted(choices):
             if cost + added <= 108:
                 states[vertex] = state
-                if solve(assigned + 1, cost + added):
-                    return True
+                witness = solve(assigned + 1, cost + added)
+                if witness is not None:
+                    return witness
                 states[vertex] = -1
-        return False
+        return None
 
     return solve(1, 0)
 
 
+def signed_three_ray_witness(edges, row):
+    """Return a cost-at-most-six witness for a loopless cubic multikernel."""
+    return _signed_three_ray_witness(edges, row, True)
+
+
 def signed_three_ray_owner(edges, row):
     """Exact switched three-ray owner for every loopless cubic multikernel."""
-    return _signed_three_ray_owner(edges, row, True)
+    return signed_three_ray_witness(edges, row) is not None
+
+
+def generalized_three_ray_witness(edges, row):
+    """Return a cost-at-most-six witness for an arbitrary loopless multikernel."""
+    return _signed_three_ray_witness(edges, row, False)
 
 
 def generalized_three_ray_owner(edges, row):
     """Exact switched three-ray owner for an arbitrary loopless multikernel."""
-    return _signed_three_ray_owner(edges, row, False)
+    return generalized_three_ray_witness(edges, row) is not None
 
 
 def signed_adjacency_square_owner(edges, row, radius=8):
