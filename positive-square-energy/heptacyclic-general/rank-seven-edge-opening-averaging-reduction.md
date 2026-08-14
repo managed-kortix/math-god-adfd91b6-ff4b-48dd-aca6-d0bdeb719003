@@ -198,3 +198,86 @@ The remaining theorem-seeking target is consequently sharp: prove (4) on every
 short signed support, preferably cyclewise, or classify the supports on which
 it fails and handle only those supports structurally.  Millions of independent
 rank-seven certificates are not part of this reduced obligation.
+
+## 6. Exact incompatibility inside the canonical short class
+
+There is no universal convex-gluing or minimax theorem that closes (8), even if
+one is allowed to choose an arbitrary excess-at-most-five certificate for each
+DNN-owned deletion rather than the certificate selected by the rank-six
+theorem.
+
+**Proposition 4 (canonical `K5` mixed-pair obstruction).**  Let `K` be `K5`
+with one extra parallel edge on the pair `01`.  Take the canonical simple
+realization `G_*` in which one `01` path has length one, the other has length
+two, and the other nine paths have length one.  Then `G_*` is a rank-seven
+member of `X_short`, but no physical path `P_e` has a marked rank-six DNN owner
+satisfying
+
+```text
+E_e+f_(q_e)(r_e)<=6.                          (9)
+```
+
+**Proof.**  The kernel has five vertices and eleven edges, hence cyclomatic
+rank seven.  The displayed realization is simple and satisfies (6).
+
+For a correlation matrix `R` on the five branch vertices, put
+
+```text
+Phi_5(R)=sum_(ij in E(K5)) f_1(R_ij).
+```
+
+The strict tangent inequality for `f_1(r)=(1+r)/(1-r)` at `r=-1/4` is
+
+```text
+f_1(r)>=23/25+(32/25)r.
+```
+
+Since `1^T R 1>=0`, one has `sum_(i<j)R_ij>=-5/2`, and therefore
+
+```text
+Phi_5(R)>=10(23/25)+(32/25)(-5/2)=6.          (10)
+```
+
+Equality in (10) forces every off-diagonal entry to be `-1/4`; this is the
+regular four-simplex Gram.  The full excess objective of `G_*` is
+
+```text
+Phi_*(R)=Phi_5(R)+f_2(R_01).                  (11)
+```
+
+It is strictly greater than six for every feasible `R`.  Indeed, equality in
+the first term forces `R_01=-1/4`, where `f_2(R_01)>0`, while if the first term
+is greater than six the conclusion is immediate because `f_2>=0`.  Moreover
+the infimum is strictly greater than six: otherwise a minimizing sequence,
+after passage to a convergent subsequence in the compact elliptope, would make
+the nonnegative gap in (10) and `f_2(R_01)` tend to zero.  Strictness in the
+tangent inequalities would force the limit to have `R_01=-1/4`, whereas
+`f_2(R_01)->0` forces `R_01->1`, a contradiction.
+
+Now delete any physical path `P_e` and take any marked Gram certificate for
+the resulting rank-six graph.  Reinstalling the optimal chain on `P_e` gives a
+feasible DNN certificate for the full graph, with excess exactly
+`E_e+f_(q_e)(r_e)`.  Since (11) is the minimum excess after exact elimination
+of all paths at a fixed branch Gram, its strict global lower bound therefore
+gives
+
+```text
+E_e+f_(q_e)(r_e)>6
+```
+
+for every such certificate.  In particular (9) fails on every DNN-owned
+deletion.  Deleting the length-two path leaves the all-unit `K5`, whose own
+minimum excess is six by (10), so that deletion is structural rather than an
+excess-at-most-five owner.  Thus no edge is good. `QED`
+
+The lower bound is an exposed SDP bound: its stress is a positive multiple of
+`11^T`, and its equality Gram is the regular four-simplex.  Consequently dual
+stress, convex averaging, or minimax cannot repair the deletion-certificate
+compatibility problem without an extra hypothesis excluding this support.  If
+a weighted inequality (4) held for all canonical short supports, Lemma 2 would
+produce a good edge in `G_*`, contradicting Proposition 4.  The remaining
+short-support program must therefore classify and handle genuine direct
+rank-seven DNN obstructions such as `G_*` structurally; it cannot consist only
+of gluing rank-six deletion certificates.  This particular obstruction is
+already one of the four structural targets closed by the attached-`K5` packet
+in `rank-seven-order-five-kernel-theorem.md`.

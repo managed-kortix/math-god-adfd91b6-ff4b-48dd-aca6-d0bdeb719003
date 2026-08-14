@@ -1,0 +1,13 @@
+{
+  "completed_at": "2026-08-14T12:40:07.721556+00:00",
+  "exact_audit": true,
+  "output": "rank7_order8_chunk_005000_006000.r7o8g.xz",
+  "output_sha256": "ebb98d15ce6917d958357646ce202333171c181954edff08d8ef23c1bae757dc",
+  "range": [
+    5000,
+    6000
+  ],
+  "rows": 1000,
+  "schema": "rank-seven-order-eight-shard-result-v1",
+  "status": "completed"
+}

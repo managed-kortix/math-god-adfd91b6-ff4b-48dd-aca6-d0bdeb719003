@@ -1,0 +1,14 @@
+[2026-08-14T12:37:31.021603+00:00] shard=005000_006000 adopted_fragments=2
+[2026-08-14T12:37:31.021661+00:00] exec: /opt/kortix/pyfloor/bin/python3 -u /workspace/positive-square-energy/experiments/rank7_order8_exact_rational.py --output /workspace/positive-square-energy/experiments/rank7_order8_chunk_005000_006000.r7o8g.xz --fragment-directory /workspace/positive-square-energy/experiments/rank7_order8_chunk_005000_006000.r7o8g.xz.fragments --census-cache /workspace/positive-square-energy/experiments/rank7_order8_rational_search_cache.r7o8c.xz --start 5000 --count 1000 --checkpoint-rows 500 --progress
+resumed_rows=1000 fragments=2
+attempts=1000 shared_exact=1000 templates=0 fallback_exact=0 structural=0 atoms=0 balanced=0 unresolved_targets=0
+fragments=2 checkpoint_rows=500
+raw_bytes=470625 xz_bytes=294100 elapsed_seconds=60.019401
+sha256=ebb98d15ce6917d958357646ce202333171c181954edff08d8ef23c1bae757dc
+full_theorem=false
+[2026-08-14T12:39:18.423988+00:00] exit: 0
+[2026-08-14T12:39:18.424150+00:00] exec: /opt/kortix/pyfloor/bin/python3 -u /workspace/positive-square-energy/experiments/rank7_order8_exact_rational.py --verify-pack /workspace/positive-square-energy/experiments/rank7_order8_chunk_005000_006000.r7o8g.xz --census-cache /workspace/positive-square-energy/experiments/rank7_order8_rational_search_cache.r7o8c.xz
+attempts=1000 shared_exact=1000 templates=0 fallback_exact=0 structural=0 atoms=0 balanced=0 exact_audit=true census_seconds=20.380683
+full_theorem=false
+[2026-08-14T12:40:07.721111+00:00] exit: 0
+[2026-08-14T12:40:07.722011+00:00] shard=005000_006000 exact_audit=true sha256=ebb98d15ce6917d958357646ce202333171c181954edff08d8ef23c1bae757dc

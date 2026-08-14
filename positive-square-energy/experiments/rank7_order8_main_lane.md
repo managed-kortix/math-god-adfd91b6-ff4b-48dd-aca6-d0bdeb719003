@@ -35,22 +35,25 @@ exact payloads and endpoint branches are all distinct.
 
 ## Completion plan
 
-Use 5,000-row shards: 99 shards cover the stream, with a final 2,812-row shard.
-Each worker should use a private fragment directory and the same read-only
-census cache. For shard `I`:
+Use durable 1,000-row scheduler shards, each retaining two 500-row exact
+checkpoint fragments. Workers use private fragment directories and the same
+authenticated read-only census cache. Atomic per-range locks prevent duplicate
+active work; stale locks are reclaimed, completed result manifests are skipped,
+and interrupted ranges resume from their maximal gap-free fragment prefix.
+Launch the immediate four-shard range with:
 
 ```text
-python3 rank7_order8_exact_rational.py \
-  --output rank7_order8_chunk_${I}.r7o8g.xz \
-  --fragment-directory rank7_order8_fragment_${I} \
-  --census-cache rank7_order8_rational_search_cache.r7o8c.xz \
-  --shard-index ${I} --shard-count 99 --shard-rows 5000
+python3 positive-square-energy/experiments/rank7_order8_scheduler.py launch \
+  --start 5000 --stop 9000 --shard-rows 1000
 ```
 
-Audit every completed shard with `--verify-pack`. Preserve the fragment trees
-until audit succeeds; restart uses the maximal gap-free 500-row prefix. Merge
-only by validated record bodies in ascending shard order, exactly as fragment
-merge does, then replay the final pack and record both raw and XZ SHA-256.
+The scheduler builds the cache once if absent, adopts compatible fragments from
+the interrupted 5,000-row job, runs `--verify-pack` after every merge, and only
+then writes a completed result containing the XZ SHA-256. Logs, PID records,
+state, results, output packs, and fragment trees persist under the experiment
+directory. Reissuing the launch command is safe. Merge larger intervals only by
+validated record bodies in ascending shard order, exactly as fragment merge
+does, then replay the final pack and record both raw and XZ SHA-256.
 
 Template-derived warm starts should be introduced only behind an explicit
 experimental option. Cache misses must fall through to the current seeded
