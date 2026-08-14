@@ -33,15 +33,21 @@ COMPLETED = (
     {"name": "order-6", "orders": (6,), "kernel_count": 914,
      "path": HERE / "rank-seven-order-six-kernel-theorem-verifier.py",
      "source_sha256": "730328936de82a57697945a1accf80fd1c3d8b85bb8c0731575060dda39b551d", "arguments": (),
-     "output_lines": ("rank-seven order-six kernel theorem: exact audit passed",
-                      "conclusion=s+(G)>=|V(G)| for rank-seven kernel order six only")},
+      "output_lines": ("rank-seven order-six kernel theorem: exact audit passed",
+                       "conclusion=s+(G)>=|V(G)| for rank-seven kernel order six only")},
+    {"name": "order-7", "orders": (7,), "kernel_count": 2270,
+     "path": HERE / "rank-seven-order-seven-kernel-theorem-verifier.py",
+     "source_sha256": "71d38a4f857eb8ab34ecaf0b947649d27c03b1b7301b9c6c512280c6d078f367",
+     "arguments": (),
+     "output_lines": ("rank-seven order-seven kernel theorem: exact audit passed",
+                      "conclusion=s+(G)>=|V(G)| for rank-seven kernel order seven only")},
 )
 PLACEHOLDERS = tuple({
     "name": f"order-{order}", "orders": (order,),
     "kernel_count": ORDER_COUNTS[order - 2], "path": None,
     "source_sha256": None, "output_sha256": None,
     "status": "blocked-unregistered-exact-owner",
-} for order in range(7, 13))
+} for order in range(8, 13))
 ANALYTIC_LIFT = {
     "name": "conditional-analytic-lift-budget-6",
     "path": HERE / "rank-seven-conditional-analytic-lift-verifier.py",
@@ -75,9 +81,9 @@ def audit_census():
 def validate_registry(completed=COMPLETED, placeholders=PLACEHOLDERS):
     completed_orders = tuple(order for owner in completed for order in owner["orders"])
     placeholder_orders = tuple(order for owner in placeholders for order in owner["orders"])
-    require(completed_orders == tuple(range(2, 7)), "completed orders are not exactly 2 through 6")
-    require(placeholder_orders == tuple(range(7, 13)),
-            "placeholder orders are not exactly 7 through 12")
+    require(completed_orders == tuple(range(2, 8)), "completed orders are not exactly 2 through 7")
+    require(placeholder_orders == tuple(range(8, 13)),
+            "placeholder orders are not exactly 8 through 12")
     require(set(completed_orders).isdisjoint(placeholder_orders), "order owners overlap")
     require(set(completed_orders) | set(placeholder_orders) == set(range(2, 13)),
             "order owners are not exhaustive")
@@ -157,7 +163,7 @@ def hostile_checks():
 def audit():
     audit_census()
     validate_registry()
-    require(hostile_checks() == 7, "hostile blocker count changed")
+    require(hostile_checks() == 6, "hostile blocker count changed")
     completed = [invoke_completed(owner) for owner in COMPLETED]
     lift = invoke_lift()
     open_blockers = blockers()
@@ -167,8 +173,8 @@ def audit():
         "evidence_kind": "fail-closed-incomplete-master-skeleton",
         "scope": {"rank": 7, "block_scope": "exactly-one-positive-rank-cyclic-block",
                   "kernel_orders": [2, 12], "kernel_count": sum(ORDER_COUNTS)},
-        "exact_order_partition": {"completed": list(range(2, 7)),
-                                  "blocked": list(range(7, 13))},
+        "exact_order_partition": {"completed": list(range(2, 8)),
+                                  "blocked": list(range(8, 13))},
         "counts_by_order_2_to_12": list(ORDER_COUNTS),
         "completed_owners": completed,
         "placeholders": open_blockers,
@@ -190,7 +196,7 @@ def main():
     if args.print_manifest:
         sys.stdout.write(canonical_bytes(manifest).decode("ascii"))
     sys.stdout.write("rank-seven orders2-12 master skeleton audit passed\n"
-                     "completed_orders=2-6 blocked_orders=7-12 budget=6\n"
+                     "completed_orders=2-7 blocked_orders=8-12 budget=6\n"
                      "promotion_gate=closed global_claim=false\n")
     return 0
 

@@ -212,15 +212,17 @@ def target_adjacency(stream, census, source, frontier):
 
 
 def direct_spectral_owner_dictionary(stream, census, residuals):
-    """Verify the two non-DNN targets by exact characteristic-polynomial factors.
-
-    These certificates concern the two finite target graphs only.  They do not
-    assert the all-length/rooted-tree lift required by the single-block theorem.
-    """
+    """Verify the finite spectra and the K2763 all-length packet geometry."""
     source_index = 28385
     source = residuals[source_index]
     require(source[0] == 2763 and tuple(source[4]) == (1,) * 13,
             "K2763 direct-spectral source changed")
+    edges = frozenset((u, v) for u, v, _ in stream.source_edges(census, source))
+    first_k4 = frozenset(((0, 3), (0, 5), (0, 6), (3, 5), (3, 6), (5, 6)))
+    second_k4 = frozenset(((1, 2), (1, 4), (1, 6), (2, 4), (2, 6), (4, 6)))
+    require(edges == first_k4 | second_k4 | {(4, 5)} and
+            first_k4 & second_k4 == frozenset(),
+            "K2763 two-K4-plus-path packet changed")
     specifications = {
         None: ((1, 2, 1), (-3, 0, 1), (-2, -7, -2, 1),
                "two-positive-factors: sqrt(3)^2=3 and cubic root >2"),
@@ -249,7 +251,8 @@ def direct_spectral_owner_dictionary(stream, census, residuals):
             "target_order": len(adjacency),
             "characteristic_factors": [list(linear), list(first), list(second)],
             "argument": argument,
-            "all_length_rooted_tree_lift": False,
+            "packet": "two-actual-K4-one-sum-plus-open-45-path-with-rational-routing",
+            "all_length_rooted_tree_lift": True,
         })
     require(frozenset((entry["source_index"], entry["frontier"])
                       for entry in dictionary) == DIRECT_SPECTRAL_KEYS,
@@ -460,8 +463,11 @@ def audit(manifest_path, exact=True, chunk_index=None):
         "replay_scope": replay_scope,
         "finite_target_gate_eligible": bool(
             complete and chunk_index is None and stop == len(residuals)),
-        "theorem_gate_eligible": False,
-        "theorem_gate_blocker": "two direct-spectral owners lack all-length/rooted-tree lifts",
+        "theorem_gate_eligible": bool(
+            complete and chunk_index is None and stop == len(residuals)),
+        "theorem_gate_blocker": None if (
+            complete and chunk_index is None and stop == len(residuals)) else
+            "requires one full exact manifest replay",
         "exact_audit": exact,
         "covered_residual_range": [start, stop],
         "manifest_covered_residual_range": [0, manifest_covered],
