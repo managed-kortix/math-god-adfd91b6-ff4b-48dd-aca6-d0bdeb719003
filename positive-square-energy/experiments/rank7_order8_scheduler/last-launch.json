@@ -1,0 +1,30 @@
+{
+  "cache": "positive-square-energy/experiments/rank7_order8_rational_search_cache.r7o8c.xz",
+  "checkpoint_rows": 500,
+  "launched": [
+    {
+      "pid": 668,
+      "shard": "009000_010000"
+    },
+    {
+      "pid": 669,
+      "shard": "010000_011000"
+    },
+    {
+      "pid": 670,
+      "shard": "011000_012000"
+    },
+    {
+      "pid": 671,
+      "shard": "012000_013000"
+    }
+  ],
+  "launched_at": "2026-08-14T18:01:54.436931+00:00",
+  "range": [
+    9000,
+    13000
+  ],
+  "schema": "rank-seven-order-eight-scheduler-launch-v1",
+  "shard_rows": 1000,
+  "skipped": []
+}
