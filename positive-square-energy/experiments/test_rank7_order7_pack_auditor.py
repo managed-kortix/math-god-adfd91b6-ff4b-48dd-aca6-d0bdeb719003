@@ -64,6 +64,16 @@ class RankSevenOrderSevenPackAuditorTest(unittest.TestCase):
             self.assertEqual(report["manifest_covered_residual_range"], [0, 3])
             self.assertFalse(report["theorem_gate_eligible"])
 
+    def test_k2763_direct_spectral_frontiers(self):
+        dictionary, keys, digest = self.auditor.direct_spectral_owner_dictionary(
+            self.stream, self.census, self.residuals)
+        self.assertEqual(keys, {(28385, None), (28385, 10)})
+        self.assertEqual([entry["target_order"] for entry in dictionary], [7, 9])
+        self.assertTrue(all(not entry["all_length_rooted_tree_lift"]
+                            for entry in dictionary))
+        self.assertEqual(digest,
+                         "bd064823c1bb430ba4c6218281cde56dc9fdbdf0a043536e4ccdc249890f6bd3")
+
 
 if __name__ == "__main__":
     unittest.main()

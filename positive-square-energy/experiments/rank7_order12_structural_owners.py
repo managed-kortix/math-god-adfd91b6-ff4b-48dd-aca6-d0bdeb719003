@@ -28,9 +28,13 @@ RANK = 7
 PATH_COUNT = 18
 TARGETS_PER_ROW = 19
 CHUNK_SCHEMA = "rank-seven-orders9-12-exact-residual-census-chunk-v1"
-SCHEMA = "rank-seven-order-twelve-structural-owner-scan-v2"
+SCHEMA = "rank-seven-order-twelve-structural-owner-scan-v3"
 LANES = ("balanced-rank-one", "signed-imbalance-psd", "simplex-mixed-atom",
          "cubic-cycle-space-candidate")
+ATOM_OPTIONAL_COUNTS = {
+    0: {10, 12, 15, 18}, 1: {12, 15}, 2: {9, 12}, 3: {6, 9},
+    4: {6}, 5: {3}, 6: {0},
+}
 
 
 def require(condition, message):
@@ -59,6 +63,14 @@ def strict_json(raw, label):
                           parse_constant=reject)
     except (UnicodeDecodeError, json.JSONDecodeError) as error:
         raise RuntimeError(f"cannot parse {label}") from error
+
+
+def file_sha256(path):
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        while block := stream.read(1 << 20):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def load_atom_recognizer():
@@ -90,7 +102,7 @@ def _raw_blocks(path, raw_digest):
 
 def stream_chunk(path):
     """Yield ``(header, records, finish)`` without retaining the residual list."""
-    artifact_digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    artifact_digest = file_sha256(path)
     raw_digest = hashlib.sha256()
     blocks = iter(_raw_blocks(path, raw_digest))
     marker = b'"residuals":['
@@ -250,7 +262,7 @@ def signed_imbalance_certificate(edges, row):
 
 
 def atom_profile_candidate(edges, row):
-    """Cheap exact filter for the four cost-six profiles used by this lane."""
+    """Cheap exact filter for every mixed/simplex profile of total cost six."""
     mixed = optional = 0
     for (_, _, multiplicity), odd in zip(edges, row, strict=True):
         if (multiplicity, odd) == (2, 1):
@@ -259,7 +271,7 @@ def atom_profile_candidate(edges, row):
             optional += 1
         elif odd not in (0, multiplicity):
             return False
-    return (mixed, optional) in ((6, 0), (3, 6), (0, 10), (0, 12))
+    return optional in ATOM_OPTIONAL_COUNTS.get(mixed, ())
 
 
 def simple_cubic(edges):
@@ -272,7 +284,43 @@ def simple_cubic(edges):
     return degree == [3] * ORDER
 
 
-def signed_three_ray_owner(edges, row):
+def cubic_kernel(edges):
+    degree = [0] * ORDER
+    if sum(edge[2] for edge in edges) != PATH_COUNT:
+        return False
+    for u, v, multiplicity in edges:
+        if not (0 <= u < v < ORDER and multiplicity > 0):
+            return False
+        degree[u] += multiplicity
+        degree[v] += multiplicity
+    return degree == [3] * ORDER
+
+
+def three_ray_edge_cost(multiplicity, odd, left, right):
+    """Return 18 times the path cost, or None for an antipodal path.
+
+    State ``2*c+s`` is the signed copy ``(-1)^s`` of ray ``c``.  The three
+    unsigned rays have mutual inner product -1/2.  Scaling by 18 makes every
+    possible length-one, -two, and -three cost integral.
+    """
+    left_color, left_sign = divmod(left, 2)
+    right_color, right_sign = divmod(right, 2)
+    same_sign = left_sign == right_sign
+    if left_color == right_color:
+        correlation = 2 if same_sign else -2
+    else:
+        correlation = -1 if same_sign else 1
+    total = 0
+    lengths = (([1] + [3] * (odd - 1)) if odd else []) + [2] * (multiplicity - odd)
+    for length in lengths:
+        transformed = -correlation if length & 1 else correlation
+        if transformed == -2:
+            return None
+        total += {2: 0, 1: 6 // length, -1: 54 // length}[transformed]
+    return total
+
+
+def simple_signed_three_ray_owner(edges, row):
     if not simple_cubic(edges) or any(value not in (0, 1) for value in row):
         return False
     adjacency = [[] for _ in range(ORDER)]
@@ -282,10 +330,11 @@ def signed_three_ray_owner(edges, row):
     allowed = [[[False] * 6 for _ in range(6)] for _ in range(2)]
     for parity in range(2):
         for left in range(6):
-            lc, le = divmod(left, 2)
+            left_color, left_sign = divmod(left, 2)
             for right in range(6):
-                rc, re = divmod(right, 2)
-                allowed[parity][left][right] = parity == (le ^ re ^ (lc != rc))
+                right_color, right_sign = divmod(right, 2)
+                allowed[parity][left][right] = parity == (
+                    left_sign ^ right_sign ^ (left_color != right_color))
     domains = [0b111111] * ORDER
     domains[0] = 1
 
@@ -321,6 +370,76 @@ def signed_three_ray_owner(edges, row):
         return False
 
     return solve(domains)
+
+
+def signed_three_ray_owner(edges, row):
+    """Exact switched three-ray owner for every loopless cubic multikernel."""
+    if not cubic_kernel(edges) or any(type(value) is not int or value < 0 or
+                                      value > edge[2]
+                                      for edge, value in zip(edges, row, strict=True)):
+        return False
+    if simple_signed_three_ray_owner(edges, row):
+        return True
+    tables = []
+    incident = [[] for _ in range(ORDER)]
+    for edge_index, ((u, v, multiplicity), odd) in enumerate(zip(edges, row, strict=True)):
+        table = tuple(tuple(three_ray_edge_cost(multiplicity, odd, left, right)
+                            for right in range(6)) for left in range(6))
+        if all(value is None or value > 108 for values in table for value in values):
+            return False
+        tables.append(table)
+        incident[u].append((edge_index, v, False))
+        incident[v].append((edge_index, u, True))
+
+    states = [-1] * ORDER
+    states[0] = 0
+
+    def lower_bound():
+        result = 0
+        for edge_index, (u, v, _) in enumerate(edges):
+            if states[u] >= 0 and states[v] >= 0:
+                continue
+            if states[u] >= 0:
+                values = tables[edge_index][states[u]]
+            elif states[v] >= 0:
+                values = tuple(table[states[v]] for table in tables[edge_index])
+            else:
+                values = tuple(value for values in tables[edge_index] for value in values)
+            finite = tuple(value for value in values if value is not None)
+            if not finite:
+                return 109
+            result += min(finite)
+        return result
+
+    def solve(assigned, cost):
+        if cost + lower_bound() > 108:
+            return False
+        if assigned == ORDER:
+            return True
+        vertex = max((v for v in range(ORDER) if states[v] < 0),
+                     key=lambda v: sum(states[w] >= 0 for _, w, _ in incident[v]))
+        choices = []
+        for state in range(6):
+            added = 0
+            for edge_index, neighbor, reversed_edge in incident[vertex]:
+                if states[neighbor] < 0:
+                    continue
+                value = (tables[edge_index][states[neighbor]][state] if reversed_edge else
+                         tables[edge_index][state][states[neighbor]])
+                if value is None:
+                    break
+                added += value
+            else:
+                choices.append((added, state))
+        for added, state in sorted(choices):
+            if cost + added <= 108:
+                states[vertex] = state
+                if solve(assigned + 1, cost + added):
+                    return True
+                states[vertex] = -1
+        return False
+
+    return solve(1, 0)
 
 
 def signed_adjacency_square_owner(edges, row, radius=8):
@@ -493,16 +612,69 @@ def scan(paths, progress=False, remainder_output=None, limit=None):
     }
 
 
+def verify_report(payload):
+    require(type(payload) is dict and set(payload) == {
+        "schema", "full_theorem", "scope", "chunks", "scanned_residual_total",
+        "scanned_target_total", "exclusive_owner_row_counts",
+        "cubic_cycle_space_candidate_counts", "atom_profile_owner_counts",
+        "recognized_residual_total", "recognized_target_total",
+        "rational_search_residual_total", "rational_search_target_total",
+        "rational_search_source_indices_sha256", "rational_search_index_artifact",
+        "classification_stream_sha256",
+    }, "coverage report fields changed")
+    require(payload["schema"] == SCHEMA and payload["full_theorem"] is False,
+            "wrong coverage report schema")
+    require(set(payload["exclusive_owner_row_counts"]) == set(LANES),
+            "lane ledger changed")
+    require(sum(payload["exclusive_owner_row_counts"].values()) ==
+            payload["recognized_residual_total"], "exclusive owner sum changed")
+    require(payload["scanned_residual_total"] == payload["recognized_residual_total"] +
+            payload["rational_search_residual_total"], "row partition changed")
+    for prefix in ("scanned", "recognized", "rational_search"):
+        require(payload[f"{prefix}_target_total"] ==
+                TARGETS_PER_ROW * payload[f"{prefix}_residual_total"],
+                f"{prefix} target total changed")
+
+
+def read_report(path):
+    raw = path.read_bytes()
+    payload = strict_json(raw, "order-twelve owner coverage report")
+    require(raw == canonical_bytes(payload), "coverage report is not canonical JSON")
+    verify_report(payload)
+    return payload, raw
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("chunks", nargs="+", type=Path)
-    parser.add_argument("--output", type=Path)
-    parser.add_argument("--remainder-output", type=Path)
-    parser.add_argument("--limit", type=int, help="test-only global row limit")
-    parser.add_argument("--progress", action="store_true")
+    subparsers = parser.add_subparsers(dest="command")
+    recognize = subparsers.add_parser("recognize")
+    recognize.add_argument("chunks", nargs="+", type=Path)
+    recognize.add_argument("--output", type=Path)
+    recognize.add_argument("--remainder-output", type=Path)
+    recognize.add_argument("--limit", type=int, help="test-only global row limit")
+    recognize.add_argument("--progress", action="store_true")
+    verify = subparsers.add_parser("verify")
+    verify.add_argument("report", type=Path)
+    verify.add_argument("chunks", nargs="+", type=Path)
+    verify.add_argument("--progress", action="store_true")
+    verify.add_argument("--limit", type=int, help="test-only global row limit")
     args = parser.parse_args()
+    if args.command is None:
+        parser.error("a command is required: recognize or verify")
+    if args.command == "verify":
+        require(args.limit is None or args.limit >= 0, "negative row limit")
+        expected, raw = read_report(args.report)
+        require(expected["rational_search_index_artifact"] is None,
+                "verification of an external remainder artifact is not supported")
+        actual = scan(args.chunks, args.progress, limit=args.limit)
+        verify_report(actual)
+        require(canonical_bytes(actual) == raw, "coverage report differs from exact rescan")
+        print(f"audit=passed report_sha256={hashlib.sha256(raw).hexdigest()} "
+              f"recognized_targets={actual['recognized_target_total']}")
+        return
     require(args.limit is None or args.limit >= 0, "negative row limit")
     report = scan(args.chunks, args.progress, args.remainder_output, args.limit)
+    verify_report(report)
     raw = canonical_bytes(report)
     if args.output is not None:
         require(args.output.parent.is_dir(), "output parent does not exist")

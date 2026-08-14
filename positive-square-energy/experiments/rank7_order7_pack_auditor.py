@@ -29,6 +29,7 @@ RESIDUAL_TOTAL = 40964
 FRONTIER_TOTAL = 14
 MODE_FIELDS = {"shared", "template", "fallback", "unresolved", "structural", "atom",
                "balanced"}
+DIRECT_SPECTRAL_KEYS = frozenset({(28385, None), (28385, 10)})
 
 
 def require(condition, message):
@@ -164,6 +165,99 @@ def symbolic_target_records(keys):
                 keys, key=lambda key: (key[0], -1 if key[1] is None else key[1]))]
 
 
+def polynomial_add(left, right):
+    width = max(len(left), len(right))
+    return tuple((left[index] if index < len(left) else 0) +
+                 (right[index] if index < len(right) else 0) for index in range(width))
+
+
+def polynomial_multiply(left, right):
+    result = [0] * (len(left) + len(right) - 1)
+    for i, a in enumerate(left):
+        for j, b in enumerate(right):
+            result[i + j] += a * b
+    return tuple(result)
+
+
+def determinant_polynomial(matrix):
+    """Return det(xI-A), low coefficient first, by exact permutation expansion."""
+    import itertools
+
+    width = len(matrix)
+    total = (0,)
+    for permutation in itertools.permutations(range(width)):
+        inversions = sum(permutation[i] > permutation[j] for i in range(width)
+                         for j in range(i + 1, width))
+        term = (1 if inversions % 2 == 0 else -1,)
+        for row, column in enumerate(permutation):
+            entry = (-matrix[row][column], 1) if row == column else (-matrix[row][column],)
+            term = polynomial_multiply(term, entry)
+        total = polynomial_add(total, term)
+    return total
+
+
+def target_adjacency(stream, census, source, frontier):
+    paths = stream.base.path_ledger(census, source, frontier)
+    order = stream.ORDER + sum(length - 1 for _, _, _, _, length in paths)
+    adjacency = [[0] * order for _ in range(order)]
+    next_vertex = stream.ORDER
+    for _, _, u, v, length in paths:
+        chain = [u, *range(next_vertex, next_vertex + length - 1), v]
+        next_vertex += length - 1
+        for left, right in zip(chain, chain[1:]):
+            require(adjacency[left][right] == 0, "structural target is not simple")
+            adjacency[left][right] = adjacency[right][left] = 1
+    require(next_vertex == order, "structural target order changed")
+    return adjacency
+
+
+def direct_spectral_owner_dictionary(stream, census, residuals):
+    """Verify the two non-DNN targets by exact characteristic-polynomial factors.
+
+    These certificates concern the two finite target graphs only.  They do not
+    assert the all-length/rooted-tree lift required by the single-block theorem.
+    """
+    source_index = 28385
+    source = residuals[source_index]
+    require(source[0] == 2763 and tuple(source[4]) == (1,) * 13,
+            "K2763 direct-spectral source changed")
+    specifications = {
+        None: ((1, 2, 1), (-3, 0, 1), (-2, -7, -2, 1),
+               "two-positive-factors: sqrt(3)^2=3 and cubic root >2"),
+        10: ((1, 2, 1), (-1, -4, 0, 1), (10, 3, -8, -2, 1),
+             "quartic root >3"),
+    }
+    dictionary = []
+    for frontier, (linear, first, second, argument) in specifications.items():
+        adjacency = target_adjacency(stream, census, source, frontier)
+        expected = polynomial_multiply(polynomial_multiply(linear, first), second)
+        require(determinant_polynomial(adjacency) == expected,
+                "K2763 characteristic polynomial changed")
+        if frontier is None:
+            require(sum(coefficient * 2 ** power for power, coefficient in enumerate(first)) > 0
+                    and sum(coefficient * 2 ** power for power, coefficient in enumerate(second)) < 0,
+                    "K2763 canonical root signs changed")
+        else:
+            require(sum(coefficient * 3 ** power for power, coefficient in enumerate(second)) < 0,
+                    "K2763 frontier root sign changed")
+        dictionary.append({
+            "source_index": source_index,
+            "global_kernel": source[0],
+            "order_kernel": stream.census_payload()["residuals"][source_index]["order_kernel"],
+            "row": list(source[4]),
+            "frontier": frontier,
+            "target_order": len(adjacency),
+            "characteristic_factors": [list(linear), list(first), list(second)],
+            "argument": argument,
+            "all_length_rooted_tree_lift": False,
+        })
+    require(frozenset((entry["source_index"], entry["frontier"])
+                      for entry in dictionary) == DIRECT_SPECTRAL_KEYS,
+            "direct-spectral target set changed")
+    raw = canonical_bytes(dictionary)
+    return tuple(dictionary), DIRECT_SPECTRAL_KEYS, sha256(raw)
+
+
 def key_range_digest(residuals, start, stop):
     digest = hashlib.sha256()
     for source_index in range(start, stop):
@@ -292,6 +386,9 @@ def audit(manifest_path, exact=True, chunk_index=None):
             "manifest census scope changed")
     dictionary, symbolic_keys, dictionary_sha256, target_set_sha256 = (
         symbolic_owner_dictionary(stream, census, residuals))
+    structural_dictionary, structural_keys, structural_dictionary_sha256 = (
+        direct_spectral_owner_dictionary(stream, census, residuals))
+    require(symbolic_keys.isdisjoint(structural_keys), "symbolic owner lanes overlap")
     require(manifest["symbolic_owner_dictionary_sha256"] == dictionary_sha256 and
             manifest["symbolic_exact_target_set_sha256"] == target_set_sha256 and
             manifest["symbolic_owners"] == list(dictionary) and
@@ -300,7 +397,8 @@ def audit(manifest_path, exact=True, chunk_index=None):
             manifest["symbolic_exact_target_total"] == len(symbolic_keys),
             "manifest symbolic owner dictionary changed")
 
-    totals = {"rational": 0, "symbolic": 0, "unresolved": 0, "symbolic_numerical": 0}
+    totals = {"rational": 0, "symbolic": 0, "structural": 0, "unresolved": 0,
+              "symbolic_numerical": 0, "structural_numerical": 0}
     modes = {field: 0 for field in MODE_FIELDS}
     ownership = hashlib.sha256()
 
@@ -325,10 +423,15 @@ def audit(manifest_path, exact=True, chunk_index=None):
                     totals["rational"] += 1
                     if key in symbolic_keys:
                         totals["symbolic_numerical"] += 1
+                    if key in structural_keys:
+                        totals["structural_numerical"] += 1
                     owner = "rational"
                 elif key in symbolic_keys:
                     totals["symbolic"] += 1
                     owner = "symbolic"
+                elif key in structural_keys:
+                    totals["structural"] += 1
+                    owner = "structural"
                 else:
                     totals["unresolved"] += 1
                     owner = "none"
@@ -348,13 +451,17 @@ def audit(manifest_path, exact=True, chunk_index=None):
         start, stop = manifest["chunks"][chunk_index]["residual_range"]
         replay_scope = "single-chunk"
     covered_targets = (stop - start) * FRONTIER_TOTAL
-    certified = totals["rational"] + totals["symbolic"] if exact else 0
+    certified = (totals["rational"] + totals["symbolic"] + totals["structural"]
+                 if exact else 0)
     scope_complete = exact and certified == covered_targets and totals["unresolved"] == 0
     complete = scope_complete and (chunk_index is not None or manifest_covered == len(residuals))
     report = {
         "status": "complete" if complete else "incomplete",
         "replay_scope": replay_scope,
-        "theorem_gate_eligible": bool(complete and chunk_index is None and stop == len(residuals)),
+        "finite_target_gate_eligible": bool(
+            complete and chunk_index is None and stop == len(residuals)),
+        "theorem_gate_eligible": False,
+        "theorem_gate_blocker": "two direct-spectral owners lack all-length/rooted-tree lifts",
         "exact_audit": exact,
         "covered_residual_range": [start, stop],
         "manifest_covered_residual_range": [0, manifest_covered],
@@ -367,6 +474,7 @@ def audit(manifest_path, exact=True, chunk_index=None):
         "uncertified_target_total": covered_targets - certified,
         "disjoint_rational_owner_target_total": totals["rational"] if exact else 0,
         "disjoint_symbolic_owner_target_total": totals["symbolic"] if exact else 0,
+        "disjoint_structural_owner_target_total": totals["structural"] if exact else 0,
         "symbolic_numerically_certified_target_total": (
             totals["symbolic_numerical"] if exact else 0),
         "symbolic_owner_row_total": len(dictionary),
@@ -377,6 +485,13 @@ def audit(manifest_path, exact=True, chunk_index=None):
             start <= key[0] < stop for key in symbolic_keys),
         "symbolic_owner_dictionary_sha256": dictionary_sha256,
         "symbolic_exact_target_set_sha256": target_set_sha256,
+        "direct_spectral_owner_target_total": len(structural_keys),
+        "direct_spectral_targets_in_coverage": sum(
+            start <= key[0] < stop for key in structural_keys),
+        "direct_spectral_numerically_certified_target_total": (
+            totals["structural_numerical"] if exact else 0),
+        "direct_spectral_owner_dictionary_sha256": structural_dictionary_sha256,
+        "direct_spectral_owners": list(structural_dictionary),
         "covered_key_stream_sha256": key_range_digest(residuals, start, stop),
         "ownership_stream_sha256": ownership.hexdigest() if exact else None,
         "record_modes": modes,
@@ -449,6 +564,7 @@ def validate_chunk_report(report, manifest, chunk):
     require(type(report) is dict and report.get("status") == "complete" and
             report.get("replay_scope") == "single-chunk" and
             report.get("theorem_gate_eligible") is False and
+            report.get("finite_target_gate_eligible") is False and
             report.get("exact_audit") is True, "chunk transcript is not an exact replay")
     require(report.get("covered_residual_range") == [start, stop] and
             report.get("manifest_covered_residual_range") ==
@@ -458,7 +574,8 @@ def validate_chunk_report(report, manifest, chunk):
             report.get("uncertified_target_total") == 0,
             "chunk transcript coverage changed")
     require(report.get("disjoint_rational_owner_target_total") +
-            report.get("disjoint_symbolic_owner_target_total") == width * FRONTIER_TOTAL,
+            report.get("disjoint_symbolic_owner_target_total") +
+            report.get("disjoint_structural_owner_target_total") == width * FRONTIER_TOTAL,
             "chunk transcript ownership is not exact and disjoint")
     modes = report.get("record_modes")
     require(type(modes) is dict and set(modes) == MODE_FIELDS and
@@ -521,7 +638,7 @@ def build_aggregate(manifest_path, transcript_paths, aggregate_path):
     root = aggregate_path.parent.resolve()
     records = []
     seen = set()
-    rational = symbolic = targets = 0
+    rational = symbolic = structural = targets = 0
     for path in transcript_paths:
         raw, transcript = authenticate_chunk_transcript(manifest_path, path, manifest)
         index = transcript["chunk_index"]
@@ -535,11 +652,12 @@ def build_aggregate(manifest_path, transcript_paths, aggregate_path):
         targets += report["covered_target_total"]
         rational += report["disjoint_rational_owner_target_total"]
         symbolic += report["disjoint_symbolic_owner_target_total"]
+        structural += report["disjoint_structural_owner_target_total"]
         records.append({"chunk_index": index, "path": relative, "transcript_sha256": sha256(raw)})
     require(seen == set(range(len(manifest["chunks"]))),
             "aggregate requires one transcript for every manifest chunk")
     records.sort(key=lambda record: record["chunk_index"])
-    require(targets == rational + symbolic == manifest["covered_target_total"],
+    require(targets == rational + symbolic + structural == manifest["covered_target_total"],
             "aggregate exact ownership bookkeeping changed")
     return {
         "schema": AGGREGATE_SCHEMA,
@@ -553,6 +671,7 @@ def build_aggregate(manifest_path, transcript_paths, aggregate_path):
         "covered_target_total": targets,
         "disjoint_rational_owner_target_total": rational,
         "disjoint_symbolic_owner_target_total": symbolic,
+        "disjoint_structural_owner_target_total": structural,
         "chunks": records,
     }
 
