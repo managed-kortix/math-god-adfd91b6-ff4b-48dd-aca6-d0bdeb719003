@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import multiprocessing
 import os
 import sys
 from collections import Counter
@@ -28,6 +29,8 @@ MANIFEST_SCHEMA = "rank-seven-orders9-12-exact-residual-census-manifest-v1"
 SCHEMA = "rank-seven-order-nine-structural-owner-coverage-v1"
 LANES = ("balanced-rank-one", "signed-imbalance-psd", "simplex-mixed-atom",
          "generalized-ray")
+WORKER_ENGINE = None
+WORKER_ATOM = None
 
 
 def require(condition, message):
@@ -96,7 +99,21 @@ def recognize_row(engine, atom, edges, row):
     return None, None
 
 
-def scan(manifest_path, output_path, progress=False, limit=None):
+def initialize_worker():
+    global WORKER_ENGINE, WORKER_ATOM
+    WORKER_ENGINE = load_engine()
+    WORKER_ATOM = WORKER_ENGINE.load_atom_recognizer()
+
+
+def recognize_task(task):
+    record, edges = task
+    lane, detail = recognize_row(WORKER_ENGINE, WORKER_ATOM, edges,
+                                 tuple(record["row"]))
+    return record, lane, detail
+
+
+def scan(manifest_path, output_path, progress=False, limit=None, jobs=1):
+    require(jobs >= 1, "job count must be positive")
     manifest, manifest_sha256 = load_manifest(manifest_path)
     engine = load_engine()
     atom = engine.load_atom_recognizer()
@@ -110,82 +127,98 @@ def scan(manifest_path, output_path, progress=False, limit=None):
     cursor = 0
     stop = False
 
-    for expected in manifest["chunks"]:
-        path = (manifest_path.parent / expected["path"]).resolve()
-        require(path.parent == manifest_path.parent.resolve(), "chunk path escapes directory")
-        header, records, finish = engine.stream_chunk(path)
-        start, end = header["kernel_range"]
-        require(start == cursor and [start, end] == expected["kernel_range"],
-                f"chunk range changed: {path.name}")
-        cursor = end
-        kernels = {record["order_kernel"]: record for record in header["kernels"]}
-        stream_digest = hashlib.sha256()
-        local_orbits = Counter()
-        local_physical = Counter()
-        local_remainder_orbits = local_remainder_physical = local_count = 0
+    pool = None
+    if jobs > 1:
+        pool = multiprocessing.Pool(jobs, initializer=initialize_worker)
+    try:
+        for expected in manifest["chunks"]:
+            path = (manifest_path.parent / expected["path"]).resolve()
+            require(path.parent == manifest_path.parent.resolve(), "chunk path escapes directory")
+            header, records, finish = engine.stream_chunk(path)
+            start, end = header["kernel_range"]
+            require(start == cursor and [start, end] == expected["kernel_range"],
+                    f"chunk range changed: {path.name}")
+            cursor = end
+            kernels = {record["order_kernel"]: record for record in header["kernels"]}
+            stream_digest = hashlib.sha256()
+            local_orbits = Counter()
+            local_physical = Counter()
+            local_remainder_orbits = local_remainder_physical = local_count = 0
+            submitted = 0
+            chunk_source_index = source_index
 
-        for record in records:
-            stream_digest.update(canonical_bytes(record))
-            if limit is not None and source_index >= limit:
-                stop = True
-                continue
-            kernel = kernels[record["order_kernel"]]
-            require(record["global_kernel"] == kernel["global_kernel"],
-                    f"bad kernel reference: {path.name}")
-            edges = tuple(map(tuple, kernel["edges"]))
-            row = tuple(record["row"])
-            orbit_size = record["orbit_size"]
-            require(type(orbit_size) is int and orbit_size >= 1,
-                    f"bad orbit size: {path.name}")
-            lane, detail = recognize_row(engine, atom, edges, row)
-            classification_digest.update(canonical_bytes(
-                [source_index, record["global_kernel"], record["order_kernel"],
-                 record["row"], orbit_size, lane, detail]))
-            if lane is None:
-                remainder_digest.update(canonical_bytes(
+            def tasks():
+                nonlocal stop, submitted
+                for record in records:
+                    stream_digest.update(canonical_bytes(record))
+                    if limit is not None and chunk_source_index + submitted >= limit:
+                        stop = True
+                        continue
+                    kernel = kernels[record["order_kernel"]]
+                    require(record["global_kernel"] == kernel["global_kernel"],
+                            f"bad kernel reference: {path.name}")
+                    submitted += 1
+                    yield record, tuple(map(tuple, kernel["edges"]))
+
+            results = (map(lambda task: (task[0],) + recognize_row(
+                engine, atom, task[1], tuple(task[0]["row"])), tasks())
+                       if pool is None else pool.imap(recognize_task, tasks(), chunksize=256))
+            for record, lane, detail in results:
+                orbit_size = record["orbit_size"]
+                require(type(orbit_size) is int and orbit_size >= 1,
+                        f"bad orbit size: {path.name}")
+                classification_digest.update(canonical_bytes(
                     [source_index, record["global_kernel"], record["order_kernel"],
-                     record["row"], orbit_size]))
-                local_remainder_orbits += 1
-                local_remainder_physical += orbit_size
-            else:
-                owner_orbits[lane] += 1
-                owner_physical[lane] += orbit_size
-                local_orbits[lane] += 1
-                local_physical[lane] += orbit_size
-                if lane == "simplex-mixed-atom":
-                    profiles.update(f"mixed-{mixed}/simplex-{'-'.join(map(str, widths)) or 'none'}"
-                                    for mixed, widths in detail)
-            source_index += 1
-            local_count += 1
+                     record["row"], orbit_size, lane, detail]))
+                if lane is None:
+                    remainder_digest.update(canonical_bytes(
+                        [source_index, record["global_kernel"], record["order_kernel"],
+                         record["row"], orbit_size]))
+                    local_remainder_orbits += 1
+                    local_remainder_physical += orbit_size
+                else:
+                    owner_orbits[lane] += 1
+                    owner_physical[lane] += orbit_size
+                    local_orbits[lane] += 1
+                    local_physical[lane] += orbit_size
+                    if lane == "simplex-mixed-atom":
+                        profiles.update(f"mixed-{mixed}/simplex-{'-'.join(map(str, widths)) or 'none'}"
+                                        for mixed, widths in detail)
+                source_index += 1
+                local_count += 1
 
-        raw_sha256, artifact_sha256 = finish()
-        require(header.get("schema") == CHUNK_SCHEMA and
-                (header.get("rank"), header.get("order"), header.get("path_count"),
-                 header.get("source_sha256")) ==
-                (RANK, ORDER, PATH_COUNT, SOURCE_SHA256), f"wrong chunk scope: {path.name}")
-        require(stream_digest.hexdigest() == header["residual_stream_sha256"],
-                f"residual digest mismatch: {path.name}")
-        require((raw_sha256, artifact_sha256) ==
-                (expected["raw_sha256"], expected["artifact_sha256"]),
-                f"chunk digest changed: {path.name}")
-        if not stop:
-            require(local_count == expected["coarse_residual_total"],
-                    f"chunk residual count changed: {path.name}")
-        chunks.append({
-            "artifact_sha256": artifact_sha256,
-            "exclusive_owner_orbit_counts": dict(sorted(local_orbits.items())),
-            "exclusive_owner_physical_counts": dict(sorted(local_physical.items())),
-            "kernel_range": [start, end],
-            "path": os.path.relpath(path, output_path.parent),
-            "remainder_orbit_total": local_remainder_orbits,
-            "remainder_physical_total": local_remainder_physical,
-            "scanned_residual_total": local_count,
-        })
-        if progress:
-            print(f"chunk={path.name} scanned={source_index} owned={sum(owner_orbits.values())}",
-                  flush=True)
-        if stop:
-            break
+            raw_sha256, artifact_sha256 = finish()
+            require(header.get("schema") == CHUNK_SCHEMA and
+                    (header.get("rank"), header.get("order"), header.get("path_count"),
+                     header.get("source_sha256")) ==
+                    (RANK, ORDER, PATH_COUNT, SOURCE_SHA256), f"wrong chunk scope: {path.name}")
+            require(stream_digest.hexdigest() == header["residual_stream_sha256"],
+                    f"residual digest mismatch: {path.name}")
+            require((raw_sha256, artifact_sha256) ==
+                    (expected["raw_sha256"], expected["artifact_sha256"]),
+                    f"chunk digest changed: {path.name}")
+            if not stop:
+                require(local_count == expected["coarse_residual_total"],
+                        f"chunk residual count changed: {path.name}")
+            chunks.append({
+                "artifact_sha256": artifact_sha256,
+                "exclusive_owner_orbit_counts": dict(sorted(local_orbits.items())),
+                "exclusive_owner_physical_counts": dict(sorted(local_physical.items())),
+                "kernel_range": [start, end],
+                "path": os.path.relpath(path, output_path.parent),
+                "remainder_orbit_total": local_remainder_orbits,
+                "remainder_physical_total": local_remainder_physical,
+                "scanned_residual_total": local_count,
+            })
+            if progress:
+                print(f"chunk={path.name} scanned={source_index} owned={sum(owner_orbits.values())}",
+                      flush=True)
+            if stop:
+                break
+    finally:
+        if pool is not None:
+            pool.close()
+            pool.join()
 
     if limit is None:
         require(cursor == KERNEL_TOTAL and source_index == manifest["coarse_residual_total"],
@@ -248,15 +281,17 @@ def main():
     build.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     build.add_argument("--output", required=True, type=Path)
     build.add_argument("--progress", action="store_true")
+    build.add_argument("--jobs", type=int, default=1)
     build.add_argument("--limit", type=int, help="test-only global row limit")
     verify = subparsers.add_parser("verify")
     verify.add_argument("report", type=Path)
     verify.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     verify.add_argument("--progress", action="store_true")
+    verify.add_argument("--jobs", type=int, default=1)
     args = parser.parse_args()
     if args.command == "build":
         require(args.output.parent.is_dir(), "output parent does not exist")
-        report = scan(args.manifest, args.output, args.progress, args.limit)
+        report = scan(args.manifest, args.output, args.progress, args.limit, args.jobs)
         verify_report(report)
         args.output.write_bytes(canonical_bytes(report))
         print(canonical_bytes(report).decode("ascii"), end="")
@@ -265,7 +300,7 @@ def main():
     expected = json.loads(raw.decode("ascii"))
     require(raw == canonical_bytes(expected), "report is not canonical JSON")
     verify_report(expected)
-    actual = scan(args.manifest, args.report, args.progress)
+    actual = scan(args.manifest, args.report, args.progress, jobs=args.jobs)
     require(canonical_bytes(actual) == raw, "report differs from exact rescan")
     print(f"audit=passed report_sha256={hashlib.sha256(raw).hexdigest()} "
           f"owned={actual['payload_free_owned_orbit_total']} "

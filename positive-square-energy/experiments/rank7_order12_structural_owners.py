@@ -16,6 +16,7 @@ import json
 import lzma
 from collections import Counter, deque
 from fractions import Fraction
+from functools import lru_cache
 from pathlib import Path
 
 
@@ -296,6 +297,7 @@ def cubic_kernel(edges):
     return degree == [3] * ORDER
 
 
+@lru_cache(maxsize=None)
 def three_ray_edge_cost(multiplicity, odd, left, right):
     """Return 18 times the path cost, or None for an antipodal path.
 
@@ -406,6 +408,7 @@ def _signed_three_ray_witness(edges, row, cubic_only):
         if witness is not None:
             return witness
     tables = []
+    table_bounds = []
     incident = [[] for _ in range(ORDER)]
     for edge_index, ((u, v, multiplicity), odd) in enumerate(zip(edges, row, strict=True)):
         table = tuple(tuple(three_ray_edge_cost(multiplicity, odd, left, right)
@@ -413,6 +416,13 @@ def _signed_three_ray_witness(edges, row, cubic_only):
         if all(value is None or value > 108 for values in table for value in values):
             return None
         tables.append(table)
+        table_bounds.append((
+            min(value for values in table for value in values if value is not None),
+            tuple(min(value for value in values if value is not None)
+                  for values in table),
+            tuple(min(table[left][right] for left in range(6)
+                      if table[left][right] is not None) for right in range(6)),
+        ))
         incident[u].append((edge_index, v, False))
         incident[v].append((edge_index, u, True))
 
@@ -425,15 +435,14 @@ def _signed_three_ray_witness(edges, row, cubic_only):
             if states[u] >= 0 and states[v] >= 0:
                 continue
             if states[u] >= 0:
-                values = tables[edge_index][states[u]]
+                value = table_bounds[edge_index][1][states[u]]
             elif states[v] >= 0:
-                values = tuple(table[states[v]] for table in tables[edge_index])
+                value = table_bounds[edge_index][2][states[v]]
             else:
-                values = tuple(value for values in tables[edge_index] for value in values)
-            finite = tuple(value for value in values if value is not None)
-            if not finite:
-                return 109
-            result += min(finite)
+                value = table_bounds[edge_index][0]
+            result += value
+            if result > 108:
+                return result
         return result
 
     def solve(assigned, cost):
