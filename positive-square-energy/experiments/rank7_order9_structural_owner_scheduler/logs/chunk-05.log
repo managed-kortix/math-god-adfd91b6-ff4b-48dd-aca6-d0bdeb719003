@@ -52,3 +52,7 @@ chunk=rank7_order9_census_2810_3372.json.xz scanned=360000 owned=335513
 chunk=rank7_order9_census_2810_3372.json.xz scanned=370000 owned=344734
 chunk=rank7_order9_census_2810_3372.json.xz scanned=380000 owned=353920
 chunk=rank7_order9_census_2810_3372.json.xz scanned=390000 owned=362686
+chunk=rank7_order9_census_2810_3372.json.xz scanned=400000 owned=370528
+chunk=5 scanned=405394 remainder=30780
+[2026-08-17T06:47:41.330443+00:00] exit: 0
+chunk=5 completed
