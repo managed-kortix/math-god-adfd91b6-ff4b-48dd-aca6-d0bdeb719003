@@ -1,0 +1,22 @@
+rows=25000 covered=20121
+rows=50000 covered=39531
+rows=75000 covered=59317
+rows=100000 covered=78610
+rows=125000 covered=98155
+rows=150000 covered=117573
+rows=175000 covered=136415
+rows=200000 covered=159448
+rows=225000 covered=181973
+rows=250000 covered=202609
+rows=275000 covered=222128
+rows=300000 covered=242457
+rows=325000 covered=263702
+rows=350000 covered=286357
+rows=375000 covered=307258
+rows=400000 covered=326596
+rows=425000 covered=348190
+rows=450000 covered=368463
+rows=475000 covered=387724
+covered=402712 total=492812 first5000=3734 gain=198339
+sha256=88fc494d52a824354368153a1b6cd2f88db12d7a330f67cbc728aac5308c53bd
+full_theorem=false
