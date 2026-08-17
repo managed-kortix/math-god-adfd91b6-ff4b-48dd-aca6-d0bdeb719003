@@ -1,0 +1,50 @@
+{
+  "jobs": [
+    {
+      "chunk": "0000_0348",
+      "coarse_residual_orbit_total": 2493739,
+      "kernel_range": [
+        0,
+        348
+      ],
+      "owned_orbit_total": 58,
+      "scanned_orbit_total": 20000,
+      "status": "running"
+    },
+    {
+      "chunk": "0348_0696",
+      "coarse_residual_orbit_total": 2858688,
+      "kernel_range": [
+        348,
+        696
+      ],
+      "owned_orbit_total": 183,
+      "scanned_orbit_total": 20000,
+      "status": "running"
+    },
+    {
+      "chunk": "0696_1044",
+      "coarse_residual_orbit_total": 3149789,
+      "kernel_range": [
+        696,
+        1044
+      ],
+      "owned_orbit_total": 59,
+      "scanned_orbit_total": 20000,
+      "status": "running"
+    },
+    {
+      "chunk": "1044_1391",
+      "coarse_residual_orbit_total": 2922353,
+      "kernel_range": [
+        1044,
+        1391
+      ],
+      "owned_orbit_total": 15,
+      "scanned_orbit_total": 20000,
+      "status": "running"
+    }
+  ],
+  "schema": "rank-seven-order-twelve-owner-scheduler-status-v1",
+  "updated_at": "2026-08-17T06:57:56.625868+00:00"
+}

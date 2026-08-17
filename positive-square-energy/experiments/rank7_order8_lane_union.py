@@ -22,8 +22,14 @@ SCALAR_PATH = HERE / "rank7_order8_parametric_gram_ansatz.py"
 TYPED_PATH = HERE / "rank7_order8_typed_diagonal_gram_lane.py"
 CACHE_PATH = HERE / "rank7_order8_rational_search_cache.r7o8c.xz"
 OUTPUT_PATH = HERE / "rank7_order8_lane_union.json.xz"
+LEDGER_PATH = HERE / "rank7_order8_combined_owner_ledger.json"
+INDICES_PATH = HERE / "rank7_order8_combined_owner_indices.json.xz"
+PAYLOAD_REPORT_PATH = HERE / "rank7_order8_payload_free_lane_coverage.json"
+SCALAR_REPORT_PATH = HERE / "rank7_order8_parametric_gram_ansatz_coverage.json"
+TYPED_REPORT_PATH = HERE / "rank7_order8_typed_diagonal_gram_coverage.json"
 PAYLOAD_FREE_TOTAL = 605
-COMMITTED_STOP = 21000
+COMMITTED_STOP = 25000
+TARGETS_PER_ROW = 15
 
 
 def require(condition, message):
@@ -69,12 +75,21 @@ def intervals(indices):
     return output
 
 
+def read_canonical(path):
+    raw = path.read_bytes()
+    payload = json.loads(raw.decode("ascii"))
+    require(raw == canonical_bytes(payload), f"noncanonical artifact: {path.name}")
+    return payload, hashlib.sha256(raw).hexdigest()
+
+
 def verify_committed(engine, census, residuals):
     paths = sorted(HERE.glob("rank7_order8_chunk_*.r7o8g.xz"))
     covered = []
+    artifacts = []
     cursor = 0
     for path in paths:
-        raw = lzma.decompress(path.read_bytes(), format=lzma.FORMAT_XZ)
+        stored = path.read_bytes()
+        raw = lzma.decompress(stored, format=lzma.FORMAT_XZ)
         start, records = engine.base.exact_decode_pack(census, raw, residuals)
         if start >= COMMITTED_STOP:
             continue
@@ -83,15 +98,29 @@ def verify_committed(engine, census, residuals):
         require(all(mode == engine.base.MODE_SHARED for mode, _ in records),
                 "committed range contains a non-shared record")
         covered.extend(range(start, start + len(records)))
+        artifacts.append({"path": path.name, "row_range": [start, start + len(records)],
+                          "raw_sha256": hashlib.sha256(raw).hexdigest(),
+                          "xz_sha256": hashlib.sha256(stored).hexdigest()})
         cursor += len(records)
-    require(cursor == COMMITTED_STOP, "committed packs do not cover [0,21000)")
-    return frozenset(covered)
+    require(cursor == COMMITTED_STOP, f"committed packs do not cover [0,{COMMITTED_STOP})")
+    return frozenset(covered), artifacts
+
+
+def write_canonical(path, payload, compressed=False):
+    raw = canonical_bytes(payload)
+    stored = lzma.compress(raw, format=lzma.FORMAT_XZ, preset=6) if compressed else raw
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_bytes(stored)
+    temporary.replace(path)
+    return hashlib.sha256(raw).hexdigest(), hashlib.sha256(stored).hexdigest()
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
+    parser.add_argument("--ledger", type=Path, default=LEDGER_PATH)
+    parser.add_argument("--indices", type=Path, default=INDICES_PATH)
     parser.add_argument("--progress", action="store_true")
     args = parser.parse_args()
     require(args.workers > 0, "workers must be positive")
@@ -132,7 +161,7 @@ def main():
 
     scalar_set = frozenset(scalar_indices)
     typed_set = frozenset(typed_indices)
-    rational_set = verify_committed(engine, census, residuals)
+    rational_set, rational_artifacts = verify_committed(engine, census, residuals)
     universe = frozenset(range(len(residuals)))
     structural_union = scalar_set | typed_set
     full_union = structural_union | rational_set
@@ -152,7 +181,7 @@ def main():
     report = {
         "schema": "rank-seven-order-eight-lane-union-v1",
         "source_stream_sha256": census.SOURCE_SHA256,
-        "precedence": ["payload-free", "scalar-sos", "typed-diagonal", "rational-committed"],
+        "precedence": ["payload-free", "direct-rational", "scalar-sos", "typed-diagonal"],
         "universe": {
             "coarse_residual_total": len(residuals) + PAYLOAD_FREE_TOTAL,
             "rational_search_total": len(residuals),
@@ -162,22 +191,22 @@ def main():
             "payload-free": PAYLOAD_FREE_TOTAL,
             "scalar-sos": len(scalar_set),
             "typed-diagonal": len(typed_set),
-            "rational-committed": len(rational_set),
+            "direct-rational": len(rational_set),
         },
         "pairwise_overlap_counts": {
             "payload-free+scalar-sos": 0,
             "payload-free+typed-diagonal": 0,
-            "payload-free+rational-committed": 0,
+            "payload-free+direct-rational": 0,
             "scalar-sos+typed-diagonal": len(scalar_set & typed_set),
-            "scalar-sos+rational-committed": len(scalar_set & rational_set),
-            "typed-diagonal+rational-committed": len(typed_set & rational_set),
+            "scalar-sos+direct-rational": len(scalar_set & rational_set),
+            "typed-diagonal+direct-rational": len(typed_set & rational_set),
         },
         "venn_atoms_within_rational_search": atoms,
         "precedence_exclusive_counts": {
             "payload-free": PAYLOAD_FREE_TOTAL,
-            "scalar-sos": len(scalar_set),
-            "typed-diagonal": len(typed_set - scalar_set),
-            "rational-committed": len(rational_set - structural_union),
+            "direct-rational": len(rational_set),
+            "scalar-sos": len(scalar_set - rational_set),
+            "typed-diagonal": len(typed_set - scalar_set - rational_set),
         },
         "structural_union_count": PAYLOAD_FREE_TOTAL + len(structural_union),
         "structural_residual_count": len(structural_remaining),
@@ -190,15 +219,78 @@ def main():
         "remaining_stream_indices_sha256": hashlib.sha256(canonical_bytes(remaining)).hexdigest(),
         "remaining_source_indices_sha256": hashlib.sha256(canonical_bytes(source_remaining)).hexdigest(),
     }
-    raw = canonical_bytes(report)
-    stored = lzma.compress(raw, format=lzma.FORMAT_XZ, preset=6)
-    args.output.write_bytes(stored)
+    report["direct_rational_artifacts"] = rational_artifacts
+    indices = {
+        "schema": "rank-seven-order-eight-combined-owner-indices-v1",
+        "source_stream_sha256": census.SOURCE_SHA256,
+        "precedence": report["precedence"],
+        "stream_index_scope": "authenticated 492812-row payload-free complement",
+        "exclusive_stream_indices": {
+            "direct-rational": sorted(rational_set),
+            "scalar-sos": sorted(scalar_set - rational_set),
+            "typed-diagonal": sorted(typed_set - scalar_set - rational_set),
+            "remaining": remaining,
+        },
+        "remaining_source_indices": source_remaining,
+    }
+    indices_raw_sha256, indices_xz_sha256 = write_canonical(args.indices, indices, True)
+    report["combined_indices"] = {"path": args.indices.name,
+                                  "raw_sha256": indices_raw_sha256,
+                                  "xz_sha256": indices_xz_sha256}
+    raw_sha256, xz_sha256 = write_canonical(args.output, report, True)
+
+    payload_report, payload_digest = read_canonical(PAYLOAD_REPORT_PATH)
+    scalar_report, scalar_digest = read_canonical(SCALAR_REPORT_PATH)
+    typed_report, typed_digest = read_canonical(TYPED_REPORT_PATH)
+    require(payload_report["recognized_residual_total"] == PAYLOAD_FREE_TOTAL and
+            scalar_report["covered_residual_total"] == len(scalar_set) and
+            typed_report["covered_residual_total"] == len(typed_set),
+            "recomputed lane count differs from authenticated report")
+    exclusive = report["precedence_exclusive_counts"]
+    owned = sum(exclusive.values())
+    ledger = {
+        "schema": "rank-seven-order-eight-combined-owner-ledger-v1",
+        "full_theorem": False,
+        "source_stream_sha256": census.SOURCE_SHA256,
+        "coarse_residual_total": len(residuals) + PAYLOAD_FREE_TOTAL,
+        "targets_per_residual": TARGETS_PER_ROW,
+        "owner_precedence": report["precedence"],
+        "exclusive_owner_row_counts": exclusive,
+        "exclusive_owner_target_counts": {key: value * TARGETS_PER_ROW
+                                           for key, value in exclusive.items()},
+        "combined_owned_residual_total": owned,
+        "combined_owned_target_total": owned * TARGETS_PER_ROW,
+        "remaining_residual_total": len(remaining),
+        "remaining_target_total": len(remaining) * TARGETS_PER_ROW,
+        "partition_identity": f"{len(residuals) + PAYLOAD_FREE_TOTAL} = " +
+                              " + ".join(str(exclusive[key]) for key in report["precedence"]) +
+                              f" + {len(remaining)}",
+        "authenticated_inputs": {
+            "payload-free-report": payload_digest,
+            "scalar-sos-report": scalar_digest,
+            "typed-diagonal-report": typed_digest,
+        },
+        "direct_rational_artifacts": rational_artifacts,
+        "combined_indices": report["combined_indices"],
+        "union_report": {"path": args.output.name, "raw_sha256": raw_sha256,
+                         "xz_sha256": xz_sha256},
+        "theorem_contract": {
+            "direct-rational": "every pack is canonical and every exact witness is replayed",
+            "structural": "scalar and typed formulas are recomputed with exact acceptance",
+            "precedence": "payload-free, then direct rational, then scalar SOS, then typed diagonal",
+            "partition": "exclusive indices and remainder partition the authenticated stream",
+        },
+    }
+    ledger_sha256, _ = write_canonical(args.ledger, ledger)
     print(json.dumps({key: report[key] for key in (
         "raw_lane_counts", "pairwise_overlap_counts", "venn_atoms_within_rational_search",
         "precedence_exclusive_counts", "structural_union_count", "structural_residual_count",
         "full_union_count", "remaining_count")}, sort_keys=True, indent=2))
-    print(f"raw_sha256={hashlib.sha256(raw).hexdigest()}")
-    print(f"xz_sha256={hashlib.sha256(stored).hexdigest()}")
+    print(f"raw_sha256={raw_sha256}")
+    print(f"xz_sha256={xz_sha256}")
+    print(f"indices_raw_sha256={indices_raw_sha256}")
+    print(f"indices_xz_sha256={indices_xz_sha256}")
+    print(f"ledger_sha256={ledger_sha256}")
 
 
 if __name__ == "__main__":

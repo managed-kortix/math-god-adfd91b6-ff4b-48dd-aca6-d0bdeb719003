@@ -1,0 +1,72 @@
+{
+  "checkpoint_rows": 10000,
+  "jobs": [
+    {
+      "chunk": "0000_0348",
+      "kernel_range": [
+        0,
+        348
+      ],
+      "path": "/workspace/positive-square-energy/experiments/rank7_order11_census_0000_0348.json.xz",
+      "pid": 8390,
+      "status": "launched"
+    },
+    {
+      "chunk": "0348_0696",
+      "kernel_range": [
+        348,
+        696
+      ],
+      "path": "/workspace/positive-square-energy/experiments/rank7_order11_census_0348_0696.json.xz",
+      "pid": 8391,
+      "status": "launched"
+    },
+    {
+      "chunk": "0696_1044",
+      "kernel_range": [
+        696,
+        1044
+      ],
+      "path": "/workspace/positive-square-energy/experiments/rank7_order11_census_0696_1044.json.xz",
+      "pid": 8392,
+      "status": "launched"
+    },
+    {
+      "chunk": "1044_1391",
+      "kernel_range": [
+        1044,
+        1391
+      ],
+      "path": "/workspace/positive-square-energy/experiments/rank7_order11_census_1044_1391.json.xz",
+      "pid": 8393,
+      "status": "launched"
+    }
+  ],
+  "launched": [
+    {
+      "chunk": "0000_0348",
+      "pid": 8390
+    },
+    {
+      "chunk": "0348_0696",
+      "pid": 8391
+    },
+    {
+      "chunk": "0696_1044",
+      "pid": 8392
+    },
+    {
+      "chunk": "1044_1391",
+      "pid": 8393
+    }
+  ],
+  "manifest_tool": "/workspace/positive-square-energy/experiments/rank7_order11_structural_owner_manifest.py",
+  "owner_precedence": [
+    "balanced-rank-one",
+    "signed-imbalance-psd",
+    "simplex-mixed-atom",
+    "cubic-cycle-space-candidate"
+  ],
+  "schema": "rank-seven-order-eleven-owner-scheduler-v1",
+  "updated_at": "2026-08-17T06:56:24.724104+00:00"
+}
