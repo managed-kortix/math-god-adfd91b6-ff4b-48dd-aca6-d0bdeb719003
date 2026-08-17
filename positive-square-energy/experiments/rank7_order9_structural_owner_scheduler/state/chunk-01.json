@@ -1,6 +1,7 @@
 {
   "chunk_index": 1,
-  "pid": 1790,
-  "status": "running",
-  "updated_at": "2026-08-17T06:16:28.039020+00:00"
+  "completed_at": "2026-08-17T06:41:53.624401+00:00",
+  "remainder_orbit_total": 59824,
+  "scanned_residual_total": 320140,
+  "status": "completed"
 }

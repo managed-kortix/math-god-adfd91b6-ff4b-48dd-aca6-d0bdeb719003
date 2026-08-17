@@ -14,3 +14,37 @@ chunk=rank7_order9_census_0000_0562.json.xz scanned=120000 owned=95465
 chunk=rank7_order9_census_0000_0562.json.xz scanned=130000 owned=103026
 chunk=rank7_order9_census_0000_0562.json.xz scanned=140000 owned=109763
 chunk=rank7_order9_census_0000_0562.json.xz scanned=150000 owned=117388
+[2026-08-17T06:16:28.031319+00:00] exec: /opt/kortix/pyfloor/bin/python3 -u /workspace/positive-square-energy/experiments/rank7_order9_structural_owners.py chunk --manifest /workspace/positive-square-energy/experiments/rank7_order9_exact_residual_census_manifest.json --chunk-index 0 --output /workspace/positive-square-energy/experiments/rank7_order9_structural_owner_scheduler/results/chunk-00.json --progress
+chunk=rank7_order9_census_0000_0562.json.xz scanned=10000 owned=7129
+chunk=rank7_order9_census_0000_0562.json.xz scanned=20000 owned=14247
+chunk=rank7_order9_census_0000_0562.json.xz scanned=30000 owned=21885
+chunk=rank7_order9_census_0000_0562.json.xz scanned=40000 owned=28621
+chunk=rank7_order9_census_0000_0562.json.xz scanned=50000 owned=35925
+chunk=rank7_order9_census_0000_0562.json.xz scanned=60000 owned=44817
+chunk=rank7_order9_census_0000_0562.json.xz scanned=70000 owned=54117
+chunk=rank7_order9_census_0000_0562.json.xz scanned=80000 owned=62858
+chunk=rank7_order9_census_0000_0562.json.xz scanned=90000 owned=71917
+chunk=rank7_order9_census_0000_0562.json.xz scanned=100000 owned=81110
+chunk=rank7_order9_census_0000_0562.json.xz scanned=110000 owned=88502
+chunk=rank7_order9_census_0000_0562.json.xz scanned=120000 owned=95465
+chunk=rank7_order9_census_0000_0562.json.xz scanned=130000 owned=103026
+chunk=rank7_order9_census_0000_0562.json.xz scanned=140000 owned=109763
+chunk=rank7_order9_census_0000_0562.json.xz scanned=150000 owned=117388
+chunk=rank7_order9_census_0000_0562.json.xz scanned=160000 owned=126920
+chunk=rank7_order9_census_0000_0562.json.xz scanned=170000 owned=135051
+chunk=rank7_order9_census_0000_0562.json.xz scanned=180000 owned=142241
+chunk=rank7_order9_census_0000_0562.json.xz scanned=190000 owned=150955
+chunk=rank7_order9_census_0000_0562.json.xz scanned=200000 owned=160119
+chunk=rank7_order9_census_0000_0562.json.xz scanned=210000 owned=168728
+chunk=rank7_order9_census_0000_0562.json.xz scanned=220000 owned=177199
+chunk=rank7_order9_census_0000_0562.json.xz scanned=230000 owned=185602
+chunk=rank7_order9_census_0000_0562.json.xz scanned=240000 owned=194294
+chunk=rank7_order9_census_0000_0562.json.xz scanned=250000 owned=202141
+chunk=rank7_order9_census_0000_0562.json.xz scanned=260000 owned=210312
+chunk=rank7_order9_census_0000_0562.json.xz scanned=270000 owned=217604
+chunk=rank7_order9_census_0000_0562.json.xz scanned=280000 owned=226469
+chunk=rank7_order9_census_0000_0562.json.xz scanned=290000 owned=234663
+chunk=rank7_order9_census_0000_0562.json.xz scanned=300000 owned=243911
+chunk=0 scanned=304033 remainder=57142
+[2026-08-17T06:41:01.137372+00:00] exit: 0
+chunk=0 completed
