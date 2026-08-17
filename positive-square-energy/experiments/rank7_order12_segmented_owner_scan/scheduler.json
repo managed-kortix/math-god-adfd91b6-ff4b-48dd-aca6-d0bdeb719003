@@ -1,0 +1,65 @@
+{
+  "checkpoint_rows": 10000,
+  "jobs": [
+    {
+      "chunk": "000_092",
+      "kernel_range": [
+        0,
+        92
+      ],
+      "path": "/workspace/positive-square-energy/experiments/rank7_order12_census_000_092.json.xz",
+      "pid": 3154,
+      "status": "launched"
+    },
+    {
+      "chunk": "092_183",
+      "kernel_range": [
+        92,
+        183
+      ],
+      "path": "/workspace/positive-square-energy/experiments/rank7_order12_census_092_183.json.xz",
+      "pid": 3155,
+      "status": "launched"
+    },
+    {
+      "chunk": "183_274",
+      "kernel_range": [
+        183,
+        274
+      ],
+      "path": "/workspace/positive-square-energy/experiments/rank7_order12_census_183_274.json.xz",
+      "pid": 3156,
+      "status": "launched"
+    },
+    {
+      "chunk": "274_365",
+      "kernel_range": [
+        274,
+        365
+      ],
+      "path": "/workspace/positive-square-energy/experiments/rank7_order12_census_274_365.json.xz",
+      "pid": 3157,
+      "status": "launched"
+    }
+  ],
+  "launched": [
+    {
+      "chunk": "000_092",
+      "pid": 3154
+    },
+    {
+      "chunk": "092_183",
+      "pid": 3155
+    },
+    {
+      "chunk": "183_274",
+      "pid": 3156
+    },
+    {
+      "chunk": "274_365",
+      "pid": 3157
+    }
+  ],
+  "schema": "rank-seven-order-twelve-owner-scheduler-v1",
+  "updated_at": "2026-08-17T00:27:45.836766+00:00"
+}

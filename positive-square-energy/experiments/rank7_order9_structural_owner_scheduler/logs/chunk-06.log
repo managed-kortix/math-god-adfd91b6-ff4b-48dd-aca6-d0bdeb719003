@@ -1,0 +1,15 @@
+[2026-08-17T00:28:27.732292+00:00] exec: /opt/kortix/pyfloor/bin/python3 -u /workspace/positive-square-energy/experiments/rank7_order9_structural_owners.py chunk --manifest /workspace/positive-square-energy/experiments/rank7_order9_exact_residual_census_manifest.json --chunk-index 6 --output /workspace/positive-square-energy/experiments/rank7_order9_structural_owner_scheduler/results/chunk-06.json --progress
+chunk=rank7_order9_census_3372_3934.json.xz scanned=10000 owned=7690
+chunk=rank7_order9_census_3372_3934.json.xz scanned=20000 owned=16752
+chunk=rank7_order9_census_3372_3934.json.xz scanned=30000 owned=25843
+chunk=rank7_order9_census_3372_3934.json.xz scanned=40000 owned=35431
+chunk=rank7_order9_census_3372_3934.json.xz scanned=50000 owned=43551
+chunk=rank7_order9_census_3372_3934.json.xz scanned=60000 owned=52094
+chunk=rank7_order9_census_3372_3934.json.xz scanned=70000 owned=60545
+chunk=rank7_order9_census_3372_3934.json.xz scanned=80000 owned=69314
+chunk=rank7_order9_census_3372_3934.json.xz scanned=90000 owned=75435
+chunk=rank7_order9_census_3372_3934.json.xz scanned=100000 owned=83250
+chunk=rank7_order9_census_3372_3934.json.xz scanned=110000 owned=91131
+chunk=rank7_order9_census_3372_3934.json.xz scanned=120000 owned=100464
+chunk=rank7_order9_census_3372_3934.json.xz scanned=130000 owned=109027
+chunk=rank7_order9_census_3372_3934.json.xz scanned=140000 owned=116620

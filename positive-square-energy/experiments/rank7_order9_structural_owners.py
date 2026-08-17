@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import lzma
 import multiprocessing
 import os
 import sys
@@ -27,6 +28,7 @@ SOURCE_SHA256 = "a241139ab54ce4cce1ab3812887359edb241c0abfb1018e804b4a5f86762cfd
 CHUNK_SCHEMA = "rank-seven-orders9-12-exact-residual-census-chunk-v1"
 MANIFEST_SCHEMA = "rank-seven-orders9-12-exact-residual-census-manifest-v1"
 SCHEMA = "rank-seven-order-nine-structural-owner-coverage-v1"
+CHUNK_RESULT_SCHEMA = "rank-seven-order-nine-structural-owner-chunk-v1"
 LANES = ("balanced-rank-one", "signed-imbalance-psd", "simplex-mixed-atom",
          "generalized-ray")
 WORKER_ENGINE = None
@@ -110,6 +112,119 @@ def recognize_task(task):
     lane, detail = recognize_row(WORKER_ENGINE, WORKER_ATOM, edges,
                                  tuple(record["row"]))
     return record, lane, detail
+
+
+def atomic_bytes(path, payload):
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_bytes(payload)
+    temporary.replace(path)
+
+
+def scan_census_chunk(manifest_path, chunk_index, output_path, progress=False):
+    """Scan one authenticated chunk and persist independently aggregatable output."""
+    manifest, manifest_sha256 = load_manifest(manifest_path)
+    require(0 <= chunk_index < len(manifest["chunks"]), "chunk index is out of range")
+    expected = manifest["chunks"][chunk_index]
+    source_start = sum(row["coarse_residual_total"]
+                       for row in manifest["chunks"][:chunk_index])
+    engine = load_engine()
+    atom = engine.load_atom_recognizer()
+    path = (manifest_path.parent / expected["path"]).resolve()
+    require(path.parent == manifest_path.parent.resolve(), "chunk path escapes directory")
+    header, records, finish = engine.stream_chunk(path)
+    require(header["kernel_range"] == expected["kernel_range"],
+            f"chunk range changed: {path.name}")
+    kernels = {record["order_kernel"]: record for record in header["kernels"]}
+    stream_digest = hashlib.sha256()
+    classification_digest = hashlib.sha256()
+    remainder_digest = hashlib.sha256()
+    owner_orbits = Counter({lane: 0 for lane in LANES})
+    owner_physical = Counter({lane: 0 for lane in LANES})
+    profiles = Counter()
+    remainder_orbits = remainder_physical = scanned = 0
+    classification_path = output_path.with_suffix(".classification.jsonl.xz")
+    remainder_path = output_path.with_suffix(".remainder.jsonl.xz")
+    classification_temporary = classification_path.with_name(classification_path.name + ".tmp")
+    remainder_temporary = remainder_path.with_name(remainder_path.name + ".tmp")
+    try:
+        with lzma.open(classification_temporary, "wb") as classifications, \
+                lzma.open(remainder_temporary, "wb") as remainders:
+            for record in records:
+                stream_digest.update(canonical_bytes(record))
+                kernel = kernels[record["order_kernel"]]
+                require(record["global_kernel"] == kernel["global_kernel"],
+                        f"bad kernel reference: {path.name}")
+                orbit_size = record["orbit_size"]
+                require(type(orbit_size) is int and orbit_size >= 1,
+                        f"bad orbit size: {path.name}")
+                source_index = source_start + scanned
+                lane, detail = recognize_row(engine, atom, tuple(map(tuple, kernel["edges"])),
+                                             tuple(record["row"]))
+                encoded = canonical_bytes(
+                    [source_index, record["global_kernel"], record["order_kernel"],
+                     record["row"], orbit_size, lane, detail])
+                classification_digest.update(encoded)
+                classifications.write(encoded)
+                if lane is None:
+                    encoded = canonical_bytes(
+                        [source_index, record["global_kernel"], record["order_kernel"],
+                         record["row"], orbit_size])
+                    remainder_digest.update(encoded)
+                    remainders.write(encoded)
+                    remainder_orbits += 1
+                    remainder_physical += orbit_size
+                else:
+                    owner_orbits[lane] += 1
+                    owner_physical[lane] += orbit_size
+                    if lane == "simplex-mixed-atom":
+                        profiles.update(
+                            f"mixed-{mixed}/simplex-{'-'.join(map(str, widths)) or 'none'}"
+                            for mixed, widths in detail)
+                scanned += 1
+                if progress and scanned % 10000 == 0:
+                    print(f"chunk={path.name} scanned={scanned} "
+                          f"owned={sum(owner_orbits.values())}", flush=True)
+        raw_sha256, artifact_sha256 = finish()
+        require(header.get("schema") == CHUNK_SCHEMA and
+                (header.get("rank"), header.get("order"), header.get("path_count"),
+                 header.get("source_sha256")) ==
+                (RANK, ORDER, PATH_COUNT, SOURCE_SHA256), f"wrong chunk scope: {path.name}")
+        require(stream_digest.hexdigest() == header["residual_stream_sha256"],
+                f"residual digest mismatch: {path.name}")
+        require((raw_sha256, artifact_sha256) ==
+                (expected["raw_sha256"], expected["artifact_sha256"]),
+                f"chunk digest changed: {path.name}")
+        require(scanned == expected["coarse_residual_total"],
+                f"chunk residual count changed: {path.name}")
+        classification_temporary.replace(classification_path)
+        remainder_temporary.replace(remainder_path)
+        payload = {
+            "schema": CHUNK_RESULT_SCHEMA, "full_theorem": False,
+            "manifest_sha256": manifest_sha256,
+            "owner_engine_sha256": file_sha256(OWNER_ENGINE),
+            "atom_recognizer_sha256": file_sha256(ATOM_RECOGNIZER),
+            "chunk_index": chunk_index, "kernel_range": header["kernel_range"],
+            "source_range": [source_start, source_start + scanned],
+            "census_path": expected["path"],
+            "census_artifact_sha256": artifact_sha256,
+            "scanned_residual_total": scanned,
+            "exclusive_owner_orbit_counts": dict(sorted(owner_orbits.items())),
+            "exclusive_owner_physical_counts": dict(sorted(owner_physical.items())),
+            "atom_profile_owner_counts": dict(sorted(profiles.items())),
+            "remainder_orbit_total": remainder_orbits,
+            "remainder_physical_total": remainder_physical,
+            "classification_stream": {
+                "path": classification_path.name, "sha256": classification_digest.hexdigest(),
+                "artifact_sha256": file_sha256(classification_path)},
+            "remainder_stream": {
+                "path": remainder_path.name, "sha256": remainder_digest.hexdigest(),
+                "artifact_sha256": file_sha256(remainder_path)},
+        }
+        atomic_bytes(output_path, canonical_bytes(payload))
+        return payload
+    finally:
+        classification_temporary.unlink(missing_ok=True)
+        remainder_temporary.unlink(missing_ok=True)
 
 
 def scan(manifest_path, output_path, progress=False, limit=None, jobs=1):
@@ -256,6 +371,103 @@ def scan(manifest_path, output_path, progress=False, limit=None, jobs=1):
     }
 
 
+def aggregate_chunks(manifest_path, report_paths, output_path):
+    """Authenticate and combine completed chunk scans without owner rescanning."""
+    manifest, manifest_sha256 = load_manifest(manifest_path)
+    require(len(report_paths) == len(manifest["chunks"]), "incomplete chunk report set")
+    owner_engine_sha256 = file_sha256(OWNER_ENGINE)
+    atom_recognizer_sha256 = file_sha256(ATOM_RECOGNIZER)
+    owner_orbits = Counter({lane: 0 for lane in LANES})
+    owner_physical = Counter({lane: 0 for lane in LANES})
+    profiles = Counter()
+    classification_digest = hashlib.sha256()
+    remainder_digest = hashlib.sha256()
+    chunks = []
+    source_cursor = 0
+    for chunk_index, report_path in enumerate(report_paths):
+        raw = report_path.read_bytes()
+        payload = json.loads(raw.decode("ascii"))
+        require(raw == canonical_bytes(payload), f"noncanonical chunk report: {report_path.name}")
+        expected = manifest["chunks"][chunk_index]
+        require(payload.get("schema") == CHUNK_RESULT_SCHEMA and
+                payload.get("full_theorem") is False and
+                payload.get("manifest_sha256") == manifest_sha256 and
+                payload.get("owner_engine_sha256") == owner_engine_sha256 and
+                payload.get("atom_recognizer_sha256") == atom_recognizer_sha256,
+                f"stale chunk report: {report_path.name}")
+        require(payload.get("chunk_index") == chunk_index and
+                payload.get("kernel_range") == expected["kernel_range"] and
+                payload.get("source_range") ==
+                [source_cursor, source_cursor + expected["coarse_residual_total"]] and
+                payload.get("census_artifact_sha256") == expected["artifact_sha256"],
+                f"wrong chunk identity: {report_path.name}")
+        for key, digest in (("classification_stream", classification_digest),
+                            ("remainder_stream", remainder_digest)):
+            stream_path = (report_path.parent / payload[key]["path"]).resolve()
+            require(stream_path.parent == report_path.parent.resolve(),
+                    f"stream path escapes directory: {report_path.name}")
+            require(file_sha256(stream_path) == payload[key]["artifact_sha256"],
+                    f"stream artifact changed: {stream_path.name}")
+            local_digest = hashlib.sha256()
+            with lzma.open(stream_path, "rb") as stream:
+                while block := stream.read(1 << 20):
+                    local_digest.update(block)
+                    digest.update(block)
+            require(local_digest.hexdigest() == payload[key]["sha256"],
+                    f"stream digest changed: {stream_path.name}")
+        owner_orbits.update(payload["exclusive_owner_orbit_counts"])
+        owner_physical.update(payload["exclusive_owner_physical_counts"])
+        profiles.update(payload["atom_profile_owner_counts"])
+        chunks.append({
+            "artifact_sha256": expected["artifact_sha256"],
+            "exclusive_owner_orbit_counts": {
+                key: value for key, value in
+                sorted(payload["exclusive_owner_orbit_counts"].items()) if value},
+            "exclusive_owner_physical_counts": {
+                key: value for key, value in
+                sorted(payload["exclusive_owner_physical_counts"].items()) if value},
+            "kernel_range": expected["kernel_range"],
+            "path": os.path.relpath(manifest_path.parent / expected["path"],
+                                    output_path.parent),
+            "remainder_orbit_total": payload["remainder_orbit_total"],
+            "remainder_physical_total": payload["remainder_physical_total"],
+            "scanned_residual_total": payload["scanned_residual_total"],
+        })
+        source_cursor += payload["scanned_residual_total"]
+    require(source_cursor == manifest["coarse_residual_total"], "chunk reports are incomplete")
+    owned_orbits = sum(owner_orbits.values())
+    owned_physical = sum(owner_physical.values())
+    remainder_orbits = source_cursor - owned_orbits
+    report = {
+        "schema": SCHEMA,
+        "status": "complete-exact-streaming-payload-free-owner-scan",
+        "full_theorem": False,
+        "scope": "sufficient structural owners only; no rational search",
+        "rank": RANK, "order": ORDER, "path_count": PATH_COUNT,
+        "frontiers_per_residual": TARGETS_PER_RESIDUAL,
+        "manifest_sha256": manifest_sha256,
+        "owner_engine_sha256": owner_engine_sha256,
+        "atom_recognizer_sha256": atom_recognizer_sha256,
+        "chunks": chunks,
+        "scanned_residual_total": source_cursor,
+        "scanned_target_total": source_cursor * TARGETS_PER_RESIDUAL,
+        "exclusive_owner_orbit_counts": dict(sorted(owner_orbits.items())),
+        "exclusive_owner_physical_counts": dict(sorted(owner_physical.items())),
+        "atom_profile_owner_counts": dict(sorted(profiles.items())),
+        "payload_free_owned_orbit_total": owned_orbits,
+        "payload_free_owned_physical_total": owned_physical,
+        "payload_free_owned_target_total": owned_orbits * TARGETS_PER_RESIDUAL,
+        "remainder_orbit_total": remainder_orbits,
+        "remainder_physical_total": sum(row["remainder_physical_total"] for row in chunks),
+        "remainder_target_total": remainder_orbits * TARGETS_PER_RESIDUAL,
+        "classification_stream_sha256": classification_digest.hexdigest(),
+        "remainder_stream_sha256": remainder_digest.hexdigest(),
+    }
+    verify_report(report)
+    atomic_bytes(output_path, canonical_bytes(report))
+    return report
+
+
 def verify_report(payload):
     require(payload.get("schema") == SCHEMA and payload.get("full_theorem") is False,
             "wrong report schema")
@@ -283,12 +495,33 @@ def main():
     build.add_argument("--progress", action="store_true")
     build.add_argument("--jobs", type=int, default=1)
     build.add_argument("--limit", type=int, help="test-only global row limit")
+    chunk = subparsers.add_parser("chunk")
+    chunk.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
+    chunk.add_argument("--chunk-index", required=True, type=int)
+    chunk.add_argument("--output", required=True, type=Path)
+    chunk.add_argument("--progress", action="store_true")
+    aggregate = subparsers.add_parser("aggregate")
+    aggregate.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
+    aggregate.add_argument("--output", required=True, type=Path)
+    aggregate.add_argument("chunks", nargs="+", type=Path)
     verify = subparsers.add_parser("verify")
     verify.add_argument("report", type=Path)
     verify.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     verify.add_argument("--progress", action="store_true")
     verify.add_argument("--jobs", type=int, default=1)
     args = parser.parse_args()
+    if args.command == "chunk":
+        require(args.output.parent.is_dir(), "output parent does not exist")
+        report = scan_census_chunk(args.manifest, args.chunk_index, args.output, args.progress)
+        print(f"chunk={args.chunk_index} scanned={report['scanned_residual_total']} "
+              f"remainder={report['remainder_orbit_total']}")
+        return
+    if args.command == "aggregate":
+        require(args.output.parent.is_dir(), "output parent does not exist")
+        report = aggregate_chunks(args.manifest, args.chunks, args.output)
+        print(f"aggregated={len(args.chunks)} scanned={report['scanned_residual_total']} "
+              f"remainder={report['remainder_orbit_total']}")
+        return
     if args.command == "build":
         require(args.output.parent.is_dir(), "output parent does not exist")
         report = scan(args.manifest, args.output, args.progress, args.limit, args.jobs)

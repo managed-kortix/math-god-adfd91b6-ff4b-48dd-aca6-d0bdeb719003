@@ -8,6 +8,11 @@ SPEC = importlib.util.spec_from_file_location("order12_owners", PATH)
 OWNERS = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(OWNERS)
 
+SEGMENTED_PATH = Path(__file__).with_name("rank7_order12_segmented_owner_scan.py")
+SEGMENTED_SPEC = importlib.util.spec_from_file_location("order12_segmented", SEGMENTED_PATH)
+SEGMENTED = importlib.util.module_from_spec(SEGMENTED_SPEC)
+SEGMENTED_SPEC.loader.exec_module(SEGMENTED)
+
 
 class ThreeRayOwnerTests(unittest.TestCase):
     def test_simple_edge_table(self):
@@ -89,6 +94,61 @@ class ThreeRayOwnerTests(unittest.TestCase):
         payload["recognized_target_total"] = 18
         with self.assertRaises(RuntimeError):
             OWNERS.verify_report(payload)
+
+
+class SegmentedScannerTests(unittest.TestCase):
+    def test_exact_recognizer_uses_generalized_three_ray_after_other_lanes(self):
+        class Owner:
+            @staticmethod
+            def balanced_rank_one(edges, row):
+                return False
+
+            @staticmethod
+            def signed_imbalance_certificate(edges, row):
+                return None
+
+            @staticmethod
+            def atom_profile_candidate(edges, row):
+                return False
+
+            @staticmethod
+            def generalized_three_ray_witness(edges, row):
+                return (0, 2)
+
+            @staticmethod
+            def three_ray_witness_cost(edges, row, witness):
+                return 54
+
+        lane, detail = SEGMENTED.recognize_exact(Owner, None, (), ())
+        self.assertEqual(lane, "generalized-three-ray")
+        self.assertEqual(detail, [54, [0, 2]])
+
+    def test_segment_aggregation_is_contiguous_and_resumable(self):
+        identity = {"chunk_sha256": "a" * 64}
+        header = {"kernel_range": [0, 1], "coarse_residual_total": 3,
+                  "coarse_residual_physical_total": 5}
+
+        def segment(start, stop, owned, remainder):
+            counts = {lane: 0 for lane in SEGMENTED.LANES}
+            counts["balanced-rank-one"] = owned
+            physical = counts.copy()
+            return {"schema": SEGMENTED.SEGMENT_SCHEMA, "identity": identity,
+                    "row_range": [start, stop],
+                    "exclusive_owner_orbit_counts": counts,
+                    "exclusive_owner_physical_counts": physical,
+                    "remainder_orbit_total": remainder,
+                    "remainder_physical_total": remainder,
+                    "classification_stream_sha256": "0" * 64,
+                    "completed_at": "test"}
+
+        payload = SEGMENTED.aggregate_segments(
+            identity, header, [segment(0, 2, 1, 1), segment(2, 3, 1, 0)], True)
+        self.assertEqual(payload["status"], "completed")
+        self.assertEqual(payload["owned_orbit_total"], 2)
+        self.assertEqual(payload["remainder_orbit_total"], 1)
+        with self.assertRaises(RuntimeError):
+            SEGMENTED.aggregate_segments(
+                identity, header, [segment(0, 1, 1, 0), segment(2, 3, 1, 0)], False)
 
 
 if __name__ == "__main__":

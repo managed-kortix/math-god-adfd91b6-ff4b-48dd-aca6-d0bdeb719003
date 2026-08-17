@@ -112,3 +112,41 @@ python3 positive-square-energy/experiments/rank7_order8_exact_gram_library.py \
 
 The committed report reproduces byte-for-byte with SHA-256
 `32a54cf46be560a260bb7b65b53cd6d042390e7f8dec062a894c3b19e32bd094`.
+
+## Typed-diagonal theorem-owner verification
+
+The typed-diagonal search report owns 402,712 of the 492,812 rational-search
+rows, but rerunning its monolithic `--audit` couples theorem verification to one
+long process. `rank7_order8_typed_diagonal_segmented_verifier.py` separates
+that obligation into independently replayable half-open segments. It does not
+trust the search lane's acceptance bit: for every row it reconstructs
+`X=D0+D1*S` with `Fraction`, checks the exact nonnegative diagonal completion of
+`XX^T/M`, recomputes the canonical cost and all fourteen length-plus-two costs,
+and emits a canonical receipt with an ownership bitmap and coverage digest.
+
+The resumable full command writes 25,000-row receipts, reuses compatible
+completed receipts, and merges them only after exact validation:
+
+```text
+mkdir -p positive-square-energy/experiments/rank7_order8_typed_diagonal_receipts
+python3 positive-square-energy/experiments/rank7_order8_typed_diagonal_segmented_verifier.py \
+  verify-all --workers 8
+```
+
+Each receipt can also be rerun in isolation with `audit-receipt`. The `merge`
+command rejects gaps, overlaps, changed source endpoints, malformed bitmap
+padding, altered exact-check totals, and any owner total other than the
+committed 402,712-row scan. Its coverage digest is recomputed from every
+`(stream index, source index, owner bit)` tuple rather than accepted from a
+receipt.
+
+The resulting `rank7_order8_combined_owner_accounting.json` applies the
+disjoint precedence `payload-free` then `typed-diagonal-rational-gram`: 605 plus
+402,712 owners leave exactly 90,100 of 493,417 coarse rows, or 1,351,500 of
+7,401,255 frontier targets, for later lanes. This is an owner theorem for the
+accepted rows, not a full order-eight theorem.
+
+```text
+python3 positive-square-energy/experiments/rank7_order8_typed_diagonal_segmented_verifier.py \
+  merge positive-square-energy/experiments/rank7_order8_typed_diagonal_receipts/receipt-*.json
+```
