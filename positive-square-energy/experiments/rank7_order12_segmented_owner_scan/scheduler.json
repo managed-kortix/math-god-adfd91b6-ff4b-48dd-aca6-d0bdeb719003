@@ -8,7 +8,7 @@
         92
       ],
       "path": "/workspace/positive-square-energy/experiments/rank7_order12_census_000_092.json.xz",
-      "pid": 3154,
+      "pid": 2808,
       "status": "launched"
     },
     {
@@ -18,7 +18,7 @@
         183
       ],
       "path": "/workspace/positive-square-energy/experiments/rank7_order12_census_092_183.json.xz",
-      "pid": 3155,
+      "pid": 2809,
       "status": "launched"
     },
     {
@@ -28,7 +28,7 @@
         274
       ],
       "path": "/workspace/positive-square-energy/experiments/rank7_order12_census_183_274.json.xz",
-      "pid": 3156,
+      "pid": 2810,
       "status": "launched"
     },
     {
@@ -38,28 +38,28 @@
         365
       ],
       "path": "/workspace/positive-square-energy/experiments/rank7_order12_census_274_365.json.xz",
-      "pid": 3157,
+      "pid": 2811,
       "status": "launched"
     }
   ],
   "launched": [
     {
       "chunk": "000_092",
-      "pid": 3154
+      "pid": 2808
     },
     {
       "chunk": "092_183",
-      "pid": 3155
+      "pid": 2809
     },
     {
       "chunk": "183_274",
-      "pid": 3156
+      "pid": 2810
     },
     {
       "chunk": "274_365",
-      "pid": 3157
+      "pid": 2811
     }
   ],
   "schema": "rank-seven-order-twelve-owner-scheduler-v1",
-  "updated_at": "2026-08-17T00:27:45.836766+00:00"
+  "updated_at": "2026-08-17T06:25:01.926963+00:00"
 }
