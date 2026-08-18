@@ -1,0 +1,8 @@
+[2026-08-18T00:03:25.967875+00:00] exec: /opt/kortix/pyfloor/bin/python3 -u /workspace/positive-square-energy/experiments/rank7_order9_structural_owners.py chunk --manifest /workspace/positive-square-energy/experiments/rank7_order10_exact_residual_census_manifest.json --chunk-index 2 --output /workspace/positive-square-energy/experiments/rank7_order10_structural_owner_scheduler/results/chunk-02.json --progress
+order-nine structural owner audit: FAIL CLOSED: wrong census manifest
+[2026-08-18T00:03:26.077396+00:00] exit: 1
+chunk=2 failed: scan exited 1
+[2026-08-18T00:05:10.995400+00:00] exec: /opt/kortix/pyfloor/bin/python3 -u /workspace/positive-square-energy/experiments/rank7_order9_structural_owners.py chunk --manifest /workspace/positive-square-energy/experiments/rank7_order10_exact_residual_census_manifest.json --chunk-index 2 --output /workspace/positive-square-energy/experiments/rank7_order10_structural_owner_scheduler/results/chunk-02.json --progress
+order-nine structural owner audit: FAIL CLOSED: census scope changed
+[2026-08-18T00:05:11.187016+00:00] exit: 1
+chunk=2 failed: scan exited 1

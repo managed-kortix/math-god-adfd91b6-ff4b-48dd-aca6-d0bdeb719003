@@ -3,22 +3,22 @@
   "launched": [
     {
       "chunk_index": 0,
-      "pid": 909
+      "pid": 1346
     },
     {
       "chunk_index": 1,
-      "pid": 910
+      "pid": 1347
     },
     {
       "chunk_index": 2,
-      "pid": 911
+      "pid": 1348
     },
     {
       "chunk_index": 3,
-      "pid": 912
+      "pid": 1349
     }
   ],
-  "launched_at": "2026-08-18T00:03:25.910836+00:00",
+  "launched_at": "2026-08-18T00:05:10.967844+00:00",
   "manifest": "/workspace/positive-square-energy/experiments/rank7_order10_exact_residual_census_manifest.json",
   "run_directory": "/workspace/positive-square-energy/experiments/rank7_order10_structural_owner_scheduler",
   "schema": "rank-seven-order-nine-structural-owner-scheduler-v1",
