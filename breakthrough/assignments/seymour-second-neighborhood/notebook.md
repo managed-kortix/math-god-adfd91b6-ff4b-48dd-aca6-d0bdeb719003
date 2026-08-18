@@ -1972,3 +1972,44 @@ No audits yet.
   The direct simplification and exact five-leaf audit are recorded in
   `attempts/frozen-grouped-q-split-audit.md`. No broader closure is claimed and
   no commit was made.
+
+### Frozen B7-l6 ordered C-to-B `(3,1)` elimination
+
+- Built a new campaign directly on the immutable B7 base for ordered C row
+  sizes `(3,1)`, internal arc `17>16`, high mask `10`, and both complete
+  intersection orbits `t=0,1`. It imports no state, witness, coordinate, or
+  gain/no-gain units.
+- Exhaustively reconstructed all 42 committed `B7-l6` parents from the bound
+  placement cover/filter and clean parent stream. Direct rooted-cell degree
+  accounting leaves exactly ten compatible parents for the profile and rejects
+  the other 32. Their canonical payload SHA-256 is
+  `0062dc3e08d197650e7f1e23e07e98746901c62786327c7521c2a5b458d83dc2`;
+  each grouped CNF contains the exact ten-way support ALO and no narrower
+  selected support family.
+- The genuinely independent checker does not import the campaign producer or
+  state/witness/gain modules. It separately rebuilds the committed clean parent
+  family, proves the 42-to-10 exhaustion, reconstructs the immutable B7 base,
+  profile units, all 14 signed C-to-B units, and all 1,530 guarded projections,
+  and enforces exact manifest/CNF hash identities. It also enumerates all 245
+  ordered `(3,1)` subset pairs under all 5,040 `S7` permutations, deriving the
+  two disjoint complete orbits of sizes 140 and 105 and checking both canonical
+  representatives. Hostile tests mutate orbit representatives, profile units,
+  selector ALOs, guarded projections, artifacts, ledger rows, and runtime pins.
+- The 1,020-byte manifest is
+  `9ca5f13d10b740a2c6caef730d272c4c407bc5c340bf9fda11b2668ad63389ae`;
+  the 397-byte two-CNF hash ledger is
+  `1d4a99023eab6a06ba85ac21e91b2e1af93454d016dc6463b6191d53df4f9305`.
+  Both CNFs have 23,626 variables and 144,277 clauses, with SHA-256 values
+  `0c06a73c...048b5f` (`t=0`) and `d6bc88cf...5eae2a` (`t=1`).
+- Pinned CaDiCaL 1.7.3 solved both grouped CNFs UNSAT and pinned `lrat-check`
+  accepted both textual LRATs. The retained `xz -3` proofs are 22,000,348 and
+  14,403,780 bytes (36,404,128 total, strictly below 250MB), with hashes
+  `9d136d53...ab9282` and `db833fb6...972be3`. The exact theorem scope and
+  replay details are in `attempts/frozen-b7-l6-c-to-b-31-elimination.md`.
+- The base retains the global robust-witness and arc-minimal clause families but
+  adds no selected witness units. The canonical ledger/verifier mutually pin
+  each other and bind the exact transitive local Python closure, producer,
+  checker, tests, certificate producer, artifacts, and solver/checker binaries.
+- Result: both exact `(3,1)` intersection orbits are eliminated under this
+  frozen B7-l6 base and exact ten-parent support disjunction. This is not a full
+  B7-l6, m=6, or Seymour claim. No commit was made.

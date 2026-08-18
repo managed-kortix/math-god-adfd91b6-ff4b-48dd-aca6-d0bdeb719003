@@ -1,0 +1,22 @@
+m6-b7-l6-c-to-b-31-orbits-v1
+placement-cover-bytes	6659672
+placement-cover-sha256	22d7744f1eecee3ea22527e4beec645ae999c912184f1f23c1a7f701e966ed5e
+placement-filter-bytes	95083
+placement-filter-sha256	9bfd2fadda610dde6cef7c13956edba6b0fa763e2ffc31226c0ddf1323fd1d0c
+clean-parent-manifest-bytes	1838
+clean-parent-manifest-sha256	6e7eee0ddd5b4c7ef02cdf459c9a0647f720513e7ee4987a3a8b0c17af37eeda
+clean-remaining-stream-bytes	2262190
+clean-remaining-stream-sha256	416b7e51a73637784342a374be8e15a1a58032b61fc1140f39f0768d1ff4b642
+branch	B7
+lambda	6
+committed-B7-l6-parents	42
+ordered-C-row-sizes	3,1
+internal-C	17>16
+high-mask	10
+compatible-parents	10
+compatible-parent-sha256	0062dc3e08d197650e7f1e23e07e98746901c62786327c7521c2a5b458d83dc2
+exhaustion	filter all 42 committed B7-l6 parents by direct rooted-cell degree accounting; exactly these 10 admit required ordered C-to-B counts (3,1)
+orbits	2
+columns	orbit,t,C16-subset,C17-subset,parents,variables,clauses
+0	0	9,10,11	12	10	23626	144277
+1	1	9,10,11	9	10	23626	144277

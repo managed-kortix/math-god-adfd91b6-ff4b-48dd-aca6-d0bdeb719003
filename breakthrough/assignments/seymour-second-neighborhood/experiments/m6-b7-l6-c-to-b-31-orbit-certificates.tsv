@@ -1,0 +1,52 @@
+m6-b7-l6-c-to-b-31-orbit-certificates-v2
+generated-utc	2026-08-18
+scope	frozen-B7-l6-ordered-C-to-B-(3,1)-only
+base	global robust-witness and arc-minimal families; no selected witness units
+orbit-manifest-bytes	1020
+orbit-manifest-sha256	9ca5f13d10b740a2c6caef730d272c4c407bc5c340bf9fda11b2668ad63389ae
+cnf-hash-ledger-bytes	397
+cnf-hash-ledger-sha256	1d4a99023eab6a06ba85ac21e91b2e1af93454d016dc6463b6191d53df4f9305
+producer-bytes	9141
+producer-sha256	f717a05bca323a192c425a11dd262640392486c874e1947d2a3b5336585e7143
+structural-checker-bytes	13971
+structural-checker-sha256	41ad3d12ac28077ca8fddcc469cb199efe85579b4d6dec8ea3e6a1a81de0e001
+test-source-bytes	4586
+test-source-sha256	ca68ccf0a64705de88eadec13111e28dc087154acd53c3df97da70202f2656f8
+certificate-producer-bytes	4065
+certificate-producer-sha256	342b873b95e1a801ff81abd1566b452408c2e5969e6c80eb95f35c5f08c6044e
+runtime-check-m6-b7-l6-c-to-b-31-orbits-bytes	13971
+runtime-check-m6-b7-l6-c-to-b-31-orbits-sha256	41ad3d12ac28077ca8fddcc469cb199efe85579b4d6dec8ea3e6a1a81de0e001
+runtime-check-m6-clean-sink-group-cnf-bytes	14918
+runtime-check-m6-clean-sink-group-cnf-sha256	07d2ac0802c8d9fc854e8c5e10ef0e1a67f54dda2c06c1a71bf69465390ee536
+runtime-check-m6-clean-sink-manifest-bytes	8864
+runtime-check-m6-clean-sink-manifest-sha256	8fb7164f71f3e6ba6c616a0709481b839e7c135ba0c7c45dd4c84f2cde42bbb0
+runtime-check-m6-parent-cnf-bytes	12776
+runtime-check-m6-parent-cnf-sha256	26af1932432445b0ce70e82634a9db651471e92b1528ac28de8564f3ab548b96
+runtime-m6-b7-l6-c-to-b-31-orbits-bytes	9141
+runtime-m6-b7-l6-c-to-b-31-orbits-sha256	f717a05bca323a192c425a11dd262640392486c874e1947d2a3b5336585e7143
+runtime-m6-clean-sink-group-cnf-bytes	11550
+runtime-m6-clean-sink-group-cnf-sha256	9eb6455daf71a2127f76a197012c2e0f4a7c7f42021ddfcfbe244f9f733ed817
+runtime-m6-clean-sink-manifest-bytes	8200
+runtime-m6-clean-sink-manifest-sha256	5d5b5545ff31eb719ce2f4eb8ad27bb0a9ccd6546bd35ad1fe6ace871ad8232f
+runtime-m6-parent-cnf-bytes	10958
+runtime-m6-parent-cnf-sha256	0b6c69aca85a627a676ae604b9a3c417e69a9d9cf359de05d7a56a11199f3147
+runtime-m6-residual-group-cnf-bytes	16054
+runtime-m6-residual-group-cnf-sha256	f15a8fe30e51b7d61d273901c0b5f140151bb1a58ec910ad0c21c84e96c535a3
+runtime-snc-cnf-bytes	7969
+runtime-snc-cnf-sha256	adab04953d3697ec004e28ad145dda5b0f04d07ee8dd20d95655f6e32877d68e
+verifier-canonical-sha256	74394cc62d26cec1a883279eaff82432db72e7e8ac28b32c1e94111c3ecf8275
+solver	CaDiCaL 1.7.3
+solver-binary-sha256	108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292
+solver-command	cadical --lrat --no-binary -q CNF LRAT
+solver-required-exit	20
+checker	lrat-check
+checker-binary-sha256	e9e71c96b68dc9ed22db35d7581e613e6b161ffbc82c20cba5699f8320a065b8
+checker-required-output	c VERIFIED
+compression	xz -3
+compressed-limit-bytes-exclusive	250000000
+groups	2
+artifacts	2
+total-xz-bytes	36404128
+columns	t,cnf-bytes,cnf-sha256,lrat-bytes,lrat-sha256,xz-bytes,xz-sha256,solve-nanoseconds,check-nanoseconds,artifact
+0	10402527	0c06a73c9308bae4eee1b309362485d24ed6508c7de8e64bf87c647805048b5f	112111657	5ea2cb24af68ab9bfd8ad208da63277a2647c4cca50031244e8ef0fce22071c0	22000348	9d136d538658ad44326dba02c554fec6cf13ee845e3c8c0d6a0baacc9bab9282	21196117042	2331729804	certificates/m6-b7-l6-c-to-b-31-t0.lrat.xz
+1	10402526	d6bc88cf265db8aaaf5ff6f93160c0ca24bb7c1ba9341ad5704c9f29795eae2a	77217064	d40c40103b31cd9798768992f6eaaf09caecf34809adf7d7f7697b45256ad20f	14403780	db833fb632b84917217ebd68d98ee7381f8a9332c5620bded2d1c6b928972be3	10280325285	1656620000	certificates/m6-b7-l6-c-to-b-31-t1.lrat.xz
