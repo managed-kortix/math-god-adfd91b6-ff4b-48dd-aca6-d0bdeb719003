@@ -27,9 +27,12 @@ INDICES_PATH = HERE / "rank7_order8_combined_owner_indices.json.xz"
 PAYLOAD_REPORT_PATH = HERE / "rank7_order8_payload_free_lane_coverage.json"
 SCALAR_REPORT_PATH = HERE / "rank7_order8_parametric_gram_ansatz_coverage.json"
 TYPED_REPORT_PATH = HERE / "rank7_order8_typed_diagonal_gram_coverage.json"
+TYPED_RECEIPTS_PATH = HERE / "rank7_order8_typed_diagonal_receipts"
+SCHEDULER_RESULTS_PATH = HERE / "rank7_order8_scheduler" / "results"
 PAYLOAD_FREE_TOTAL = 605
-COMMITTED_STOP = 25000
+COMMITTED_STOP = 29000
 TARGETS_PER_ROW = 15
+BASELINE_PACK_SHA256 = "2f3773dc99c930f9aeacff1e3566e037eb6d7d106d866e81a829c1b53797a2ee"
 
 
 def require(condition, message):
@@ -75,9 +78,24 @@ def intervals(indices):
     return output
 
 
+def strict_json(raw, label):
+    def pairs(items):
+        result = {}
+        for key, value in items:
+            require(key not in result, f"duplicate key in {label}: {key}")
+            result[key] = value
+        return result
+    try:
+        return json.loads(raw.decode("ascii"), object_pairs_hook=pairs,
+                          parse_constant=lambda value: (_ for _ in ()).throw(
+                              RuntimeError(f"nonstandard constant in {label}: {value}")))
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise RuntimeError(f"cannot parse {label}") from error
+
+
 def read_canonical(path):
     raw = path.read_bytes()
-    payload = json.loads(raw.decode("ascii"))
+    payload = strict_json(raw, path.name)
     require(raw == canonical_bytes(payload), f"noncanonical artifact: {path.name}")
     return payload, hashlib.sha256(raw).hexdigest()
 
@@ -97,13 +115,42 @@ def verify_committed(engine, census, residuals):
                 "committed packs leave a gap, overlap, or exceed the requested range")
         require(all(mode == engine.base.MODE_SHARED for mode, _ in records),
                 "committed range contains a non-shared record")
+        xz_sha256 = hashlib.sha256(stored).hexdigest()
+        if start == 0:
+            require(start + len(records) == 5000 and xz_sha256 == BASELINE_PACK_SHA256,
+                    "baseline pack is not the authenticated committed artifact")
+            authentication = {"kind": "pinned-baseline-sha256"}
+        else:
+            manifest_path = SCHEDULER_RESULTS_PATH / f"shard-{start:06d}_{start + len(records):06d}.json"
+            manifest = strict_json(manifest_path.read_bytes(), manifest_path.name)
+            require(manifest.get("schema") == "rank-seven-order-eight-shard-result-v1" and
+                    manifest.get("status") == "completed" and
+                    manifest.get("exact_audit") is True and
+                    manifest.get("range") == [start, start + len(records)] and
+                    manifest.get("rows") == len(records) and
+                    manifest.get("output") == path.name and
+                    manifest.get("output_sha256") == xz_sha256,
+                    f"scheduler result does not authenticate {path.name}")
+            authentication = {"kind": "scheduler-result", "path": manifest_path.name,
+                              "sha256": hashlib.sha256(manifest_path.read_bytes()).hexdigest()}
         covered.extend(range(start, start + len(records)))
         artifacts.append({"path": path.name, "row_range": [start, start + len(records)],
-                          "raw_sha256": hashlib.sha256(raw).hexdigest(),
-                          "xz_sha256": hashlib.sha256(stored).hexdigest()})
+                           "raw_sha256": hashlib.sha256(raw).hexdigest(),
+                           "xz_sha256": xz_sha256, "authentication": authentication})
         cursor += len(records)
     require(cursor == COMMITTED_STOP, f"committed packs do not cover [0,{COMMITTED_STOP})")
     return frozenset(covered), artifacts
+
+
+def typed_receipt_status():
+    paths = sorted(TYPED_RECEIPTS_PATH.glob("receipt-*.json")) if TYPED_RECEIPTS_PATH.is_dir() else []
+    return {
+        "status": "theorem-evidence" if paths else "candidate-exact-search-acceptance",
+        "segmented_receipts_present": bool(paths),
+        "segmented_receipt_count": len(paths),
+        "theorem_evidence_count": None if paths else 0,
+        "candidate_count_note": "typed ownership is candidate accounting until a gap-free full receipt partition is independently merged",
+    }
 
 
 def write_canonical(path, payload, compressed=False):
@@ -115,12 +162,99 @@ def write_canonical(path, payload, compressed=False):
     return hashlib.sha256(raw).hexdigest(), hashlib.sha256(stored).hexdigest()
 
 
+def read_canonical_xz(path, label):
+    stored = path.read_bytes()
+    try:
+        raw = lzma.decompress(stored, format=lzma.FORMAT_XZ)
+    except lzma.LZMAError as error:
+        raise RuntimeError(f"cannot decompress {label}") from error
+    payload = strict_json(raw, label)
+    require(raw == canonical_bytes(payload), f"noncanonical {label}")
+    return payload, hashlib.sha256(raw).hexdigest(), hashlib.sha256(stored).hexdigest()
+
+
+def audit_outputs(engine, census, residuals, output_path, ledger_path, indices_path):
+    report, report_raw, report_xz = read_canonical_xz(output_path, "union report")
+    indices, indices_raw, indices_xz = read_canonical_xz(indices_path, "owner indices")
+    ledger, ledger_digest = read_canonical(ledger_path)
+    require(report.get("schema") == "rank-seven-order-eight-lane-union-v1" and
+            indices.get("schema") == "rank-seven-order-eight-combined-owner-indices-v1" and
+            ledger.get("schema") == "rank-seven-order-eight-combined-owner-ledger-v1",
+            "wrong output schema")
+    require(report.get("source_stream_sha256") == census.SOURCE_SHA256 ==
+            indices.get("source_stream_sha256") == ledger.get("source_stream_sha256"),
+            "output source stream changed")
+    require(report.get("precedence") == indices.get("precedence") ==
+            ledger.get("owner_precedence") ==
+            ["payload-free", "direct-rational", "scalar-sos", "typed-diagonal"],
+            "strict precedence changed")
+    linked_indices = report.get("combined_indices", {})
+    require(linked_indices == {"path": indices_path.name, "raw_sha256": indices_raw,
+                               "xz_sha256": indices_xz}, "report/index link changed")
+    require(ledger.get("combined_indices") == linked_indices and
+            ledger.get("union_report") == {"path": output_path.name,
+                                            "raw_sha256": report_raw,
+                                            "xz_sha256": report_xz},
+            "ledger artifact links changed")
+    groups = indices.get("exclusive_stream_indices", {})
+    require(set(groups) == {"direct-rational", "scalar-sos", "typed-diagonal", "remaining"},
+            "exclusive index groups changed")
+    sets = {}
+    for name, values in groups.items():
+        require(isinstance(values, list) and values == sorted(values) and
+                len(values) == len(set(values)) and
+                all(type(value) is int and 0 <= value < len(residuals) for value in values),
+                f"malformed {name} indices")
+        sets[name] = frozenset(values)
+    require(sum(len(values) for values in sets.values()) == len(set().union(*sets.values())) ==
+            len(residuals), "exclusive indices do not partition the rational-search stream")
+    require(len(sets["direct-rational"]) == COMMITTED_STOP and
+            sets["direct-rational"] == frozenset(range(COMMITTED_STOP)),
+            "committed rational index range changed")
+    require(groups["remaining"] == report.get("remaining_stream_indices") and
+            report.get("remaining_count") == len(groups["remaining"]) and
+            indices.get("remaining_source_indices") == report.get("remaining_source_indices") ==
+            [residuals[index][1] for index in groups["remaining"]],
+            "remaining index accounting changed")
+    exclusive = ledger.get("exclusive_owner_row_counts", {})
+    require(exclusive == report.get("precedence_exclusive_counts") and
+            exclusive == {"payload-free": PAYLOAD_FREE_TOTAL,
+                          "direct-rational": len(sets["direct-rational"]),
+                          "scalar-sos": len(sets["scalar-sos"]),
+                          "typed-diagonal": len(sets["typed-diagonal"])},
+            "exclusive owner counts changed")
+    owned = sum(exclusive.values())
+    require(ledger.get("combined_owned_residual_total") == owned and
+            ledger.get("remaining_residual_total") == len(sets["remaining"]) and
+            owned + len(sets["remaining"]) == len(residuals) + PAYLOAD_FREE_TOTAL and
+            ledger.get("remaining_target_total") == len(sets["remaining"]) * TARGETS_PER_ROW,
+            "ledger partition arithmetic changed")
+    rational_set, rational_artifacts = verify_committed(engine, census, residuals)
+    require(rational_set == sets["direct-rational"] and
+            rational_artifacts == report.get("direct_rational_artifacts") ==
+            ledger.get("direct_rational_artifacts"), "committed artifact authentication changed")
+    for name, path in (("payload-free-report", PAYLOAD_REPORT_PATH),
+                       ("scalar-sos-report", SCALAR_REPORT_PATH),
+                       ("typed-diagonal-report", TYPED_REPORT_PATH)):
+        _, digest = read_canonical(path)
+        require(ledger.get("authenticated_inputs", {}).get(name) == digest,
+                f"authenticated input changed: {name}")
+    typed_evidence = ledger.get("evidence_accounting", {}).get("typed-diagonal", {})
+    require(typed_evidence.get("status") == "candidate-exact-search-acceptance" and
+            typed_evidence.get("segmented_receipts_present") is False and
+            ledger.get("accounting_status") == "candidate-union-not-typed-theorem-evidence",
+            "typed candidate/theorem-evidence boundary changed")
+    return {"ledger_sha256": ledger_digest, "remaining_count": len(sets["remaining"]),
+            "remaining_target_count": len(sets["remaining"]) * TARGETS_PER_ROW}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
     parser.add_argument("--ledger", type=Path, default=LEDGER_PATH)
     parser.add_argument("--indices", type=Path, default=INDICES_PATH)
+    parser.add_argument("--audit", action="store_true")
     parser.add_argument("--progress", action="store_true")
     args = parser.parse_args()
     require(args.workers > 0, "workers must be positive")
@@ -130,6 +264,10 @@ def main():
     typed = load("rank7_order8_union_typed", TYPED_PATH)
     census = engine.load_census_module()
     residuals = engine.residual_rows(census, cache_path=CACHE_PATH)
+    if args.audit:
+        result = audit_outputs(engine, census, residuals, args.output, args.ledger, args.indices)
+        print(json.dumps(result, sort_keys=True, indent=2))
+        return
 
     candidates = scalar.coefficients(32, 4)
     values = np.asarray([float(value) for value in candidates])
@@ -218,6 +356,13 @@ def main():
         "remaining_source_indices": source_remaining,
         "remaining_stream_indices_sha256": hashlib.sha256(canonical_bytes(remaining)).hexdigest(),
         "remaining_source_indices_sha256": hashlib.sha256(canonical_bytes(source_remaining)).hexdigest(),
+        "evidence_accounting": {
+            "payload-free": {"status": "theorem-evidence", "rows": PAYLOAD_FREE_TOTAL},
+            "direct-rational": {"status": "theorem-evidence", "rows": len(rational_set),
+                                "committed_half_open_range": [0, COMMITTED_STOP]},
+            "scalar-sos": {"status": "theorem-evidence", "rows": len(scalar_set)},
+            "typed-diagonal": {**typed_receipt_status(), "candidate_rows": len(typed_set)},
+        },
     }
     report["direct_rational_artifacts"] = rational_artifacts
     indices = {
@@ -251,6 +396,7 @@ def main():
     ledger = {
         "schema": "rank-seven-order-eight-combined-owner-ledger-v1",
         "full_theorem": False,
+        "accounting_status": "candidate-union-not-typed-theorem-evidence",
         "source_stream_sha256": census.SOURCE_SHA256,
         "coarse_residual_total": len(residuals) + PAYLOAD_FREE_TOTAL,
         "targets_per_residual": TARGETS_PER_ROW,
@@ -280,6 +426,7 @@ def main():
             "precedence": "payload-free, then direct rational, then scalar SOS, then typed diagonal",
             "partition": "exclusive indices and remainder partition the authenticated stream",
         },
+        "evidence_accounting": report["evidence_accounting"],
     }
     ledger_sha256, _ = write_canonical(args.ledger, ledger)
     print(json.dumps({key: report[key] for key in (

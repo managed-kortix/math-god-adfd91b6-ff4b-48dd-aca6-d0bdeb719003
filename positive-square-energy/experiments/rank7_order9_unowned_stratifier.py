@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import lzma
 import os
 import sys
 from collections import Counter, defaultdict
@@ -15,9 +16,10 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 OWNER_SCAN = HERE / "rank7_order9_structural_owners.py"
+KERNEL_SOURCE = HERE / "rank7_parity_coarse_digest_census.py"
 DEFAULT_CENSUS = HERE / "rank7_order9_exact_residual_census_manifest.json"
 DEFAULT_OWNER_MANIFEST = HERE / "rank7_order9_structural_owner_manifest.json"
-SCHEMA = "rank-seven-order-nine-unowned-structural-stratification-v1"
+SCHEMA = "rank-seven-order-nine-unowned-structural-stratification-v2"
 INDEX_SCHEMA = "rank-seven-order-nine-unowned-search-indices-v1"
 
 
@@ -62,6 +64,65 @@ def signature_id(prefix, payload):
     return f"{prefix}-{digest[:20]}"
 
 
+def graph_invariants(edges, row, order):
+    adjacency = [set() for _ in range(order)]
+    signed_adjacency = [set() for _ in range(order)]
+    for (u, v, _), odd in zip(edges, row, strict=True):
+        adjacency[u].add(v)
+        adjacency[v].add(u)
+        if odd:
+            signed_adjacency[u].add(v)
+            signed_adjacency[v].add(u)
+
+    components = []
+    unseen = set(range(order))
+    while unseen:
+        todo = [min(unseen)]
+        unseen.remove(todo[0])
+        component = []
+        for vertex in todo:
+            component.append(vertex)
+            for neighbor in sorted(adjacency[vertex] & unseen):
+                unseen.remove(neighbor)
+                todo.append(neighbor)
+        components.append(component)
+
+    bridges = 0
+    timer = 0
+    discovery = [-1] * order
+    low = [0] * order
+
+    def visit(vertex, parent):
+        nonlocal bridges, timer
+        discovery[vertex] = low[vertex] = timer
+        timer += 1
+        for neighbor in adjacency[vertex]:
+            if neighbor == parent:
+                continue
+            if discovery[neighbor] < 0:
+                visit(neighbor, vertex)
+                low[vertex] = min(low[vertex], low[neighbor])
+                bridges += low[neighbor] > discovery[vertex]
+            else:
+                low[vertex] = min(low[vertex], discovery[neighbor])
+
+    for vertex in range(order):
+        if discovery[vertex] < 0:
+            visit(vertex, -1)
+    triangles = sum(len(adjacency[u] & adjacency[v])
+                    for u in range(order) for v in adjacency[u] if u < v) // 3
+    odd_support_edges = sum(bool(odd) for odd in row)
+    return {
+        "component_order_partition": sorted((len(value) for value in components), reverse=True),
+        "cycle_rank": len(edges) - order + len(components),
+        "bridge_total": bridges,
+        "triangle_total": triangles,
+        "odd_support_edge_total": odd_support_edges,
+        "odd_support_degree_partition": sorted((len(value) for value in signed_adjacency),
+                                                 reverse=True),
+    }
+
+
 def graph_data(edges, row, order):
     support_degrees = [0] * order
     weighted_degrees = [0] * order
@@ -104,7 +165,54 @@ def graph_data(edges, row, order):
         "vertex_parity_fingerprints": sorted(
             (sorted(values, reverse=True) for values in parity_incidence), reverse=True),
     }
-    return support, parity
+    return support, parity, graph_invariants(edges, row, order)
+
+
+def kernel_dictionary(engine):
+    spec = importlib.util.spec_from_file_location("rank7_order9_stratifier_kernels",
+                                                  KERNEL_SOURCE)
+    require(spec is not None and spec.loader is not None, "cannot load kernel source")
+    source = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(source)
+    require(source.SOURCE_SHA256 == engine.SOURCE_SHA256, "kernel source pin changed")
+    items = tuple(item for item in source.source_kernels() if item[2] == engine.ORDER)
+    require(len(items) == engine.KERNEL_TOTAL, "kernel source total changed")
+    result = {}
+    for global_kernel, order_kernel, order, edges in items:
+        require(order_kernel not in result and order == engine.ORDER,
+                "duplicate or wrong-order kernel")
+        result[order_kernel] = (global_kernel, tuple(map(tuple, edges)))
+    return result
+
+
+def remainder_records(owner_path, owner_manifest):
+    result_dir = owner_path.parent / "rank7_order9_structural_owner_scheduler" / "results"
+    for chunk_index, expected in enumerate(owner_manifest["chunks"]):
+        receipt_path = result_dir / f"chunk-{chunk_index:02d}.json"
+        receipt, _ = strict_canonical_json(receipt_path, "structural owner chunk receipt")
+        require(receipt["chunk_index"] == chunk_index and
+                receipt["remainder_orbit_total"] == expected["remainder_orbit_total"],
+                f"wrong remainder receipt: {receipt_path.name}")
+        stream = receipt["remainder_stream"]
+        path = result_dir / stream["path"]
+        require(file_sha256(path) == stream["artifact_sha256"],
+                f"remainder artifact changed: {path.name}")
+        digest = hashlib.sha256()
+        count = 0
+        try:
+            with lzma.open(path, "rb") as rows:
+                for raw in rows:
+                    record = json.loads(raw.decode("ascii"))
+                    require(raw == canonical_bytes(record) and len(record) == 5,
+                            f"noncanonical remainder row: {path.name}")
+                    digest.update(raw)
+                    count += 1
+                    yield record
+        except (lzma.LZMAError, UnicodeDecodeError, json.JSONDecodeError) as error:
+            raise RuntimeError(f"cannot read remainder stream: {path.name}") from error
+        require(count == receipt["remainder_orbit_total"] and
+                digest.hexdigest() == stream["sha256"],
+                f"remainder stream authentication failed: {path.name}")
 
 
 def family_tags(edges, support, parity):
@@ -154,10 +262,11 @@ def scan(census_path, owner_path, index_path, top, limit=None, progress=False):
             "owner manifest does not reference this census")
     require(owner_manifest.get("owner_engine_sha256") == file_sha256(engine.OWNER_ENGINE),
             "owner engine changed since owner manifest")
-    owner_core = engine.load_engine()
-    atom = owner_core.load_atom_recognizer()
+    kernels = kernel_dictionary(engine)
 
-    counts = {name: Counter() for name in ("kernel", "support", "parity", "joint")}
+    counts = {name: Counter() for name in
+              ("kernel", "support", "parity", "signed_degree", "graph",
+               "dominant_family", "joint")}
     physical = {name: Counter() for name in counts}
     descriptions = {name: {} for name in counts}
     family_indices = defaultdict(list)
@@ -166,71 +275,59 @@ def scan(census_path, owner_path, index_path, top, limit=None, progress=False):
     remainder_digest = hashlib.sha256()
     source_index = 0
     unowned_physical = 0
-    cursor = 0
-    stop = False
-
-    for expected in census["chunks"]:
-        path = census_path.parent / expected["path"]
-        header, records, finish = owner_core.stream_chunk(path)
-        start, end = header["kernel_range"]
-        require(start == cursor and [start, end] == expected["kernel_range"],
-                f"chunk order changed: {path.name}")
-        cursor = end
-        kernels = {item["order_kernel"]: item for item in header["kernels"]}
-        stream_digest = hashlib.sha256()
-        for source in records:
-            stream_digest.update(canonical_bytes(source))
-            if limit is not None and source_index >= limit:
-                stop = True
-                continue
-            kernel = kernels[source["order_kernel"]]
-            edges = tuple(map(tuple, kernel["edges"]))
-            row = tuple(source["row"])
-            lane, _ = engine.recognize_row(owner_core, atom, edges, row)
-            if lane is None:
-                orbit_size = source["orbit_size"]
-                support, parity = graph_data(edges, row, engine.ORDER)
-                kernel_description = {
-                    "global_kernel": source["global_kernel"],
-                    "edges": [list(edge) for edge in edges],
-                }
-                payloads = {
-                    "kernel": kernel_description,
-                    "support": support,
-                    "parity": parity,
-                    "joint": {"support": support, "parity": parity},
-                }
-                for name, payload in payloads.items():
-                    key = (f"k-{source['global_kernel']:04d}" if name == "kernel" else
-                           signature_id(name[0], payload))
-                    counts[name][key] += 1
-                    physical[name][key] += orbit_size
-                    descriptions[name].setdefault(key, payload)
-                    signature_indices[name][key].append(source_index)
-                for family in family_tags(edges, support, parity):
-                    family_indices[family].append(source_index)
-                unowned_indices.append(source_index)
-                unowned_physical += orbit_size
-                remainder_digest.update(canonical_bytes(
-                    [source_index, source["global_kernel"], source["order_kernel"],
-                     source["row"], orbit_size]))
-            source_index += 1
-        raw_sha256, artifact_sha256 = finish()
-        require(stream_digest.hexdigest() == header["residual_stream_sha256"] and
-                raw_sha256 == expected["raw_sha256"] and
-                artifact_sha256 == expected["artifact_sha256"],
-                f"chunk authentication failed: {path.name}")
-        if progress:
-            print(f"chunk={path.name} scanned={source_index} unowned={len(unowned_indices)}",
-                  flush=True)
-        if stop:
+    for record in remainder_records(owner_path, owner_manifest):
+        if limit is not None and source_index >= limit:
             break
+        original_source_index, global_kernel, order_kernel, raw_row, orbit_size = record
+        expected_global, edges = kernels[order_kernel]
+        require(global_kernel == expected_global, "remainder kernel reference changed")
+        row = tuple(raw_row)
+        support, parity, graph = graph_data(edges, row, engine.ORDER)
+        signed_degree = {
+            "signed_imbalance_degree_partition":
+                parity["signed_imbalance_degree_partition"],
+            "absolute_imbalance_degree_partition":
+                parity["absolute_imbalance_degree_partition"],
+        }
+        dominant_family = {
+            "multiplicity_partition": support["multiplicity_partition"],
+            "bundle_types": parity["bundle_types"],
+            "cycle_rank": graph["cycle_rank"],
+            "triangle_total": graph["triangle_total"],
+        }
+        kernel_description = {
+            "global_kernel": global_kernel,
+            "edges": [list(edge) for edge in edges],
+        }
+        payloads = {
+            "kernel": kernel_description,
+            "support": support,
+            "parity": parity,
+            "signed_degree": signed_degree,
+            "graph": graph,
+            "dominant_family": dominant_family,
+            "joint": {"support": support, "parity": parity,
+                      "signed_degree": signed_degree, "graph": graph},
+        }
+        for name, payload in payloads.items():
+            key = (f"k-{global_kernel:04d}" if name == "kernel" else
+                   signature_id(name[0], payload))
+            counts[name][key] += 1
+            physical[name][key] += orbit_size
+            descriptions[name].setdefault(key, payload)
+            signature_indices[name][key].append(source_index)
+        for family in family_tags(edges, support, parity):
+            family_indices[family].append(source_index)
+        unowned_indices.append(original_source_index)
+        unowned_physical += orbit_size
+        remainder_digest.update(canonical_bytes(record))
+        source_index += 1
+        if progress and source_index % 50000 == 0:
+            print(f"remainder_rows={source_index}", flush=True)
 
     if limit is None:
-        require(cursor == engine.KERNEL_TOTAL and
-                source_index == owner_manifest["scanned_residual_total"],
-                "scan does not cover the owner manifest universe")
-        require(len(unowned_indices) == owner_manifest["remainder_orbit_total"] and
+        require(source_index == owner_manifest["remainder_orbit_total"] and
+                len(unowned_indices) == owner_manifest["remainder_orbit_total"] and
                 unowned_physical == owner_manifest["remainder_physical_total"] and
                 remainder_digest.hexdigest() == owner_manifest["remainder_stream_sha256"],
                 "unowned stream differs from owner manifest")
@@ -256,7 +353,8 @@ def scan(census_path, owner_path, index_path, top, limit=None, progress=False):
         "scope": "exact structural-owner remainder stratification; no rational brute force",
         "census_manifest_sha256": census_sha256,
         "owner_manifest_sha256": owner_sha256,
-        "scanned_residual_total": source_index,
+        "scanned_remainder_total": source_index,
+        "source_universe_residual_total": owner_manifest["scanned_residual_total"],
         "unowned_orbit_total": len(unowned_indices),
         "unowned_physical_total": unowned_physical,
         "unowned_target_total": len(unowned_indices) * engine.TARGETS_PER_RESIDUAL,
@@ -300,7 +398,7 @@ def main():
     report = scan(args.census, args.owner_manifest, args.index_output,
                   args.top, args.limit, args.progress)
     args.output.write_bytes(canonical_bytes(report))
-    print(f"scanned={report['scanned_residual_total']} "
+    print(f"scanned={report['scanned_remainder_total']} "
           f"unowned={report['unowned_orbit_total']} "
           f"joint_signatures={report['concentration']['joint']['class_total']} "
           f"index_sha256={report['search_index_artifact']['artifact_sha256']}")
