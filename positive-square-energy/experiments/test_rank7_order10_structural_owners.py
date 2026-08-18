@@ -37,6 +37,44 @@ class StructuralOwnerTest(unittest.TestCase):
                           core.KERNEL_TOTAL), (10, 16, 17, 3396))
         self.assertEqual(core.LANES[-1], "cubic-cycle-space-candidate")
 
+    def test_census_header_validation_is_fail_closed(self):
+        module = load_module()
+        core = module.load_core()
+        kernel = {
+            "automorphisms": 2,
+            "coarse_certified_orbits": 2,
+            "coarse_residual_orbits": 1,
+            "coarse_residual_physical_rows": 2,
+            "edges": [[0, 1, 1]],
+            "global_kernel": 100,
+            "order_kernel": 1,
+            "parity_orbits": 3,
+            "physical_rows": 4,
+        }
+        header = {
+            "schema": core.CHUNK_SCHEMA,
+            "full_theorem": False,
+            "rank": 7,
+            "order": 10,
+            "budget": [6, 1],
+            "path_count": 16,
+            "frontiers_per_residual": 17,
+            "source_sha256": module.SOURCE_SHA256,
+            "kernel_range": [0, 1],
+            "kernel_total": 1,
+            "kernels": [kernel],
+            "physical_row_total": 4,
+            "parity_orbit_total": 3,
+            "coarse_certified_total": 2,
+            "coarse_residual_total": 1,
+            "coarse_residual_physical_total": 2,
+            "frontier_target_total": 17,
+        }
+        module.validate_census_header(core, header, Path("chunk.json.xz"))
+        header["frontier_target_total"] = 16
+        with self.assertRaisesRegex(RuntimeError, "frontier total mismatch"):
+            module.validate_census_header(core, header, Path("chunk.json.xz"))
+
 
 if __name__ == "__main__":
     unittest.main()
