@@ -1,7 +1,7 @@
 {
   "chunk_index": 0,
-  "error": "scan exited 1",
-  "pid": 1346,
-  "status": "failed",
-  "updated_at": "2026-08-18T00:05:11.168110+00:00"
+  "completed_at": "2026-08-18T00:34:22.959809+00:00",
+  "remainder_orbit_total": 1756878,
+  "scanned_residual_total": 1761052,
+  "status": "completed"
 }

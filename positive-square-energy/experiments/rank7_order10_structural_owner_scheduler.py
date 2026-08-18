@@ -18,6 +18,9 @@ def load_core():
         raise RuntimeError("cannot load structural owner scheduler core")
     core = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(core)
+    # Workers must re-enter this wrapper so its order-ten configuration survives
+    # the subprocess boundary.
+    core.__file__ = str(Path(__file__).resolve())
     core.ENGINE = HERE / "rank7_order10_structural_owners.py"
     core.DEFAULT_MANIFEST = HERE / "rank7_order10_exact_residual_census_manifest.json"
     core.DEFAULT_OUTPUT = HERE / "rank7_order10_structural_owner_manifest.json"
