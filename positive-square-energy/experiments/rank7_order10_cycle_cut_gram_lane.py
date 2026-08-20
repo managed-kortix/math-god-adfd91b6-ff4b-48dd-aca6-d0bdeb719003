@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact physical-incidence cut/cycle Gram pilot for the order-ten remainder."""
+"""Exact physical-incidence cut/cycle Gram lane for the order-ten remainder."""
 
 from __future__ import annotations
 
@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+from collections import Counter
 from functools import lru_cache
 from fractions import Fraction
 from pathlib import Path
@@ -15,13 +16,17 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 SOURCE = HERE / "rank7_order10_near_cubic_gram_lane.py"
 OUTPUT = HERE / "rank7_order10_cycle_cut_gram_lane.json"
-SCHEMA = "rank-seven-order-ten-cycle-cut-gram-lane-v1"
+SCHEMA = "rank-seven-order-ten-cycle-cut-gram-lane-v2"
 F = Fraction
 ORDER = 10
 BUDGET = F(6)
 WEIGHT_RATIOS = (F(0), F(1, 16), F(1, 8), F(1, 4), F(1, 2), F(1),
                  F(2), F(4), F(8), F(16))
-PARAMETERS = tuple((F(1), ratio, F(2, 3)) for ratio in WEIGHT_RATIOS)
+CYCLE_PROFILES = ("projector", "short", "resistance", "flow", "hybrid")
+DEFECT_SCALES = (F(1, 3), F(1, 2), F(2, 3), F(3, 4), F(1))
+PARAMETERS = tuple((F(1), ratio, defect, profile)
+                   for profile in CYCLE_PROFILES for defect in DEFECT_SCALES
+                   for ratio in WEIGHT_RATIOS)
 
 
 def require(condition, message):
@@ -162,23 +167,72 @@ def embedding_components(edges, row):
     cut_vectors = [[sum(signed_incidence[u][left] * cut_projector[left][right]
                         for left in range(len(paths)))
                     for right in range(len(paths))] for u in range(ORDER)]
-    cycle_vectors = [[signed_incidence[u][column] - cut_vectors[u][column]
-                      for column in range(len(paths))] for u in range(ORDER)]
     cut_core = [[F() for _ in range(ORDER)] for _ in range(ORDER)]
-    cycle_core = [[F() for _ in range(ORDER)] for _ in range(ORDER)]
     for u in range(ORDER):
         for v in range(u, ORDER):
             cut_value = sum(x * y for x, y in zip(cut_vectors[u], cut_vectors[v]))
-            cycle_value = sum(x * y for x, y in zip(cycle_vectors[u], cycle_vectors[v]))
             cut_core[u][v] = cut_core[v][u] = cut_value
-            cycle_core[u][v] = cycle_core[v][u] = cycle_value
-    return cut_core, cycle_core, paths
+    cycle_cores = cycle_metric_cores(signed_incidence, paths, cut_projector)
+    return cut_core, cycle_cores, paths
 
 
-def gram_from_components(cut_core, cycle_core, degrees, cut_weight, cycle_weight,
-                         defect_scale):
+def cycle_metric_cores(signed_incidence, paths, cut_projector):
+    """Return exact PSD cycle metrics indexed by intrinsic flow descriptors."""
+    basis = cycle_basis(paths)
+    tree = set(spanning_tree_columns(paths))
+    chords = tuple(column for column in range(len(paths)) if column not in tree)
+    require(len(chords) == len(basis), "cycle/chord indexing changed")
+    profiles = {name: [[F() for _ in range(ORDER)] for _ in range(ORDER)]
+                for name in CYCLE_PROFILES}
+    profiles.update({f"fundamental_{index}":
+                     [[F() for _ in range(ORDER)] for _ in range(ORDER)]
+                     for index in range(len(basis))})
+
+    cycle_vectors = [[signed_incidence[u][column] - sum(
+        signed_incidence[u][left] * cut_projector[left][column]
+        for left in range(len(paths))) for column in range(len(paths))]
+        for u in range(ORDER)]
+    for u in range(ORDER):
+        for v in range(u, ORDER):
+            value = sum(x * y for x, y in zip(cycle_vectors[u], cycle_vectors[v]))
+            profiles["projector"][u][v] = profiles["projector"][v][u] = value
+
+    for index, (vector, chord) in enumerate(zip(basis, chords, strict=True)):
+        support = sum(value * value for value in vector)
+        physical_length = sum(abs(value) * paths[column][3]
+                              for column, value in enumerate(vector))
+        resistance = cut_projector[chord][chord]
+        require(support > 0 and physical_length > 0 and resistance > 0,
+                "invalid fundamental-flow descriptor")
+        diagonal_weights = {
+            "short": F(1, physical_length),
+            "resistance": (1 - resistance) / resistance,
+            "flow": F(1, support),
+            "hybrid": (1 - resistance) / (physical_length * resistance),
+        }
+        endpoint_flow = [sum(signed_incidence[u][column] * vector[column]
+                             for column in range(len(paths)))
+                         for u in range(ORDER)]
+        singleton = profiles[f"fundamental_{index}"]
+        for u in range(ORDER):
+            for v in range(u, ORDER):
+                value = endpoint_flow[u] * endpoint_flow[v]
+                singleton[u][v] = singleton[v][u] = value
+        for name, weight in diagonal_weights.items():
+            for u in range(ORDER):
+                for v in range(u, ORDER):
+                    value = weight * endpoint_flow[u] * endpoint_flow[v]
+                    profiles[name][u][v] += value
+                    if u != v:
+                        profiles[name][v][u] += value
+    return profiles
+
+
+def gram_from_components(cut_core, cycle_cores, degrees, cut_weight, cycle_weight,
+                         defect_scale, cycle_profile):
     """Build D A(a P_cut+b P_cycle)A^T D and complete its diagonal."""
     scales = [F(1) if degree == 3 else defect_scale for degree in degrees]
+    cycle_core = cycle_cores[cycle_profile]
     core = [[scales[u] * scales[v] *
              (cut_weight * cut_core[u][v] + cycle_weight * cycle_core[u][v])
              for v in range(ORDER)] for u in range(ORDER)]
@@ -189,10 +243,12 @@ def gram_from_components(cut_core, cycle_core, degrees, cut_weight, cycle_weight
     return gram, normalizer
 
 
-def embedding_gram(edges, degrees, row, cut_weight, cycle_weight, defect_scale):
-    cut_core, cycle_core, paths = embedding_components(edges, row)
+def embedding_gram(edges, degrees, row, cut_weight, cycle_weight, defect_scale,
+                   cycle_profile="projector"):
+    cut_core, cycle_cores, paths = embedding_components(edges, row)
     gram, normalizer = gram_from_components(
-        cut_core, cycle_core, degrees, cut_weight, cycle_weight, defect_scale)
+        cut_core, cycle_cores, degrees, cut_weight, cycle_weight, defect_scale,
+        cycle_profile)
     return gram, paths, normalizer
 
 
@@ -208,9 +264,10 @@ def gram_cost(gram, paths):
 
 def search(edges, degrees, row):
     best = None
-    cut_core, cycle_core, paths = embedding_components(edges, row)
+    cut_core, cycle_cores, paths = embedding_components(edges, row)
     for parameters in PARAMETERS:
-        gram, normalizer = gram_from_components(cut_core, cycle_core, degrees, *parameters)
+        gram, normalizer = gram_from_components(cut_core, cycle_cores, degrees,
+                                                *parameters)
         cost = gram_cost(gram, paths)
         if cost is not None and (best is None or cost < best[0]):
             best = cost, parameters, normalizer
@@ -252,11 +309,13 @@ def scan(sample_size=10000, progress=False, representative_stride=1):
             "degree_pattern": partition,
             "cost": pair(cost),
             "owned": cost <= BUDGET,
-            "parameters": [pair(value) for value in parameters],
+            "parameters": [pair(value) for value in parameters[:3]] + [parameters[3]],
             "normalizer": pair(normalizer),
         })
         if progress and tested % 1000 == 0:
             print(f"tested={tested} owned={owned}", flush=True)
+    selected_profiles = Counter(record["parameters"][3] for record in records
+                                if record["owned"])
     return {
         "schema": SCHEMA,
         "full_theorem": False,
@@ -265,23 +324,40 @@ def scan(sample_size=10000, progress=False, representative_stride=1):
         "sampling": {"requested": sample_size, "start": 0, "source_stop": visited,
                      "representative_stride": representative_stride, "tested": tested},
         "family": {
-            "formula": "G=H/M+diag(1-diag(H)/M), H=DA(a P_cut+b P_cycle)A^T D",
+            "formula": "G=H/M+diag(1-diag(H)/M), H=DA(a P_cut+b Z diag(w) Z^T)A^T D",
             "signed_incidence": "A has entries 1 at the first endpoint and (-1)^L at the second endpoint of each physical path",
             "cut_projector": "P_cut=B^T(BB^T)^-1B for reduced oriented physical incidence B",
-            "cycle_projector": "P_cycle=I-P_cut=Z(Z^TZ)^-1Z^T for any fundamental cycle basis Z",
-            "psd_proof": "P_cut and P_cycle are orthogonal rational projectors; H is the sum of the Gram squares a(DA P_cut)(DA P_cut)^T and b(DA P_cycle)(DA P_cycle)^T; M dominates its diagonal and the completion is a sum of nonnegative coordinate squares",
-            "parameter_order": ["cut_weight", "cycle_weight", "defect_scale"],
-            "parameters": [[pair(value) for value in row] for row in PARAMETERS],
+            "cycle_projector": "P_cycle=I-P_cut; the projector profile retains this intrinsic scalar metric",
+            "cycle_decomposition": "the other profiles use the canonical spanning-tree fundamental flows Z with positive rational diagonal weights determined by physical cycle length, chord effective resistance, and flow support",
+            "diagonal_weight_profiles": {
+                "short": "w_i=1/L_i",
+                "resistance": "w_i=(1-R_i)/R_i",
+                "flow": "w_i=1/s_i",
+                "hybrid": "w_i=(1-R_i)/(L_i R_i)",
+                "fundamental_i": "w_i=1 and w_j=0 for j!=i"
+            },
+            "psd_proof": "P_cut is an orthogonal rational projector. Each non-scalar cycle term is Z diag(w) Z^T with exact nonnegative rational w, hence a sum of weighted fundamental-flow outer products. Congruence by DA preserves PSD; M dominates the diagonal, so completion adds nonnegative coordinate squares.",
+            "parameter_order": ["cut_weight", "cycle_weight", "defect_scale", "cycle_profile"],
+            "parameters": [[pair(value) for value in row[:3]] + [row[3]]
+                           for row in PARAMETERS],
         },
         "result": {
             "owned": owned,
             "failed": tested - owned,
+            "coverage": pair(F(owned, tested)),
+            "baseline_owned": 16 if tested == 1000 and representative_stride == 1 else None,
+            "baseline_coverage": pair(F(2, 125)) if tested == 1000 and representative_stride == 1 else None,
+            "relative_coverage_gain": pair(F(9, 16)) if tested == 1000 and representative_stride == 1 else None,
+            "selected_cycle_profile_counts": dict(sorted(selected_profiles.items())),
+            "non_scalar_incremental_owner_total": sum(
+                count for profile, count in selected_profiles.items()
+                if profile != "projector"),
             "degree_pattern_counts": degree_counts,
             "minimum_cost": pair(min(F(*record["cost"]) for record in records)),
             "obstruction": "no sampled representative reaches the exact budget" if not owned else None,
         },
         "records": records,
-        "claim_boundary": "PSD and each displayed cost are exact; failure applies to this finite basis-weight family and sampled records, not to all cycle/cut Grams",
+        "claim_boundary": "PSD and each displayed cost are exact; sampled coverage applies only to the displayed projector and canonical diagonal cycle metrics, not to all cycle/cut Grams",
     }
 
 

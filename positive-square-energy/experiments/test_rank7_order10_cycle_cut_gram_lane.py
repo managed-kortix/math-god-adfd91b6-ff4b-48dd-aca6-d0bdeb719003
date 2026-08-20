@@ -38,6 +38,22 @@ class CycleCutGramLaneTests(unittest.TestCase):
         self.assertEqual(sum(cut[i][i] for i in range(size)), 9)
         self.assertEqual(size - sum(cut[i][i] for i in range(size)), 7)
 
+    def test_non_scalar_cycle_metrics_are_exact_psd_sums(self):
+        row = tuple(0 for _ in self.kernel["edges"])
+        cut_core, cycle_cores, paths = MODULE.embedding_components(
+            self.kernel["edges"], row)
+        self.assertEqual(len(paths), 16)
+        self.assertEqual(set(MODULE.CYCLE_PROFILES) - set(cycle_cores), set())
+        for profile in MODULE.CYCLE_PROFILES[1:]:
+            core = cycle_cores[profile]
+            self.assertTrue(all(isinstance(value, Fraction)
+                                for matrix_row in core for value in matrix_row))
+            for shift in range(10):
+                vector = [Fraction((index + shift) % 5 - 2) for index in range(10)]
+                quadratic = sum(vector[u] * core[u][v] * vector[v]
+                                for u in range(10) for v in range(10))
+                self.assertGreaterEqual(quadratic, 0, profile)
+
     def test_gram_and_cost_are_exact(self):
         row = tuple(0 for _ in self.kernel["edges"])
         gram, paths, normalizer = MODULE.embedding_gram(
