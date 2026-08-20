@@ -128,3 +128,36 @@ certificates for the Gram ansatz or mathematical obstructions.
 The scalar and typed lanes are merged only under explicit scalar-first
 precedence. The 272,520-row updated remainder is unclassified, so no full
 rank-seven/order-nine theorem is claimed.
+
+## Leading-family structural Gram lane
+
+The next exact lane scans all 272,520 after-SOS rows and targets the leading
+family `2^3 1^9`, bundle types `(3,3,6)`, cycle rank four, and one triangle.
+For the signed bundle matrix `S`, vertices are typed by
+
+```text
+(signed degree, sorted incident (multiplicity, odd-count) pairs).
+```
+
+It uses `X=D0+D1*S`, with both diagonals constant on these exact local types,
+and the correlation Gram
+
+```text
+G = XX^T/M + diag(1-diag(XX^T)/M),  M=max_i (XX^T)_ii.
+```
+
+Thus every certificate is structurally PSD: the first term is a Gram square
+and the completion is a nonnegative sum of coordinate squares. A deterministic
+binary64 Powell proposal is rounded entrywise to rationals of denominator at
+most 256, after which the complete cost is recomputed with `Fraction`.
+
+The authenticated full scan finds 21,074 family rows and exactly owns 1,128
+of them (1,173 physical rows and 18,048 canonical-plus-frontier targets). It
+leaves 19,946 rows in the target family and 271,392 rows overall. These are
+optimizer/grid failures, not obstructions to this Gram family. The report
+replays byte-for-byte with SHA-256
+`7346c593bd98880ca9599f44ae26c69d20225342d361804740742caccdc75169`.
+
+- `experiments/rank7_order9_dominant_family_gram_lane.py` implements and audits the lane.
+- `experiments/rank7_order9_dominant_family_gram_lane.json` persists the full-remainder coverage ledger.
+- `experiments/rank7_order9_dominant_family_gram_owners.jsonl.xz` stores all 1,128 exact rational owners.

@@ -27,6 +27,13 @@ research/semantic, research/procedural).
   8208285 rows, so new cycle/cut-space geometry is the main obstruction. Four
   durable structural scans each are active for orders eleven and twelve. No
   all-heptacyclic theorem claim is made.
+- 2026-08-20: attacked the largest order-nine after-SOS family in the requested
+  order: `2^3 1^9`, bundle types `(3,3,6)`, cycle rank four, one triangle.
+  A local-type structural Gram `X=D0+D1*S`, followed by exact rational replay,
+  scans all 272520 remainder rows and owns 1128 of the 21074 target-family
+  orbits (1173 physical rows, 18048 targets). The authenticated coverage ledger
+  leaves 271392 rows overall and 19946 in this family; it reproduces at digest
+  `7346c593...`. No order-nine or all-heptacyclic theorem claim is made.
 - 2026-08-14: derived the exact rank-seven-to-rank-six marked edge-opening
   reduction for kernel orders 8--12.  A deleted-path owner with rank-six excess
   `E_e`, endpoint correlation `r_e`, and restored length `q_e` closes exactly

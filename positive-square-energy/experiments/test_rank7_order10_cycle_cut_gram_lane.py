@@ -24,6 +24,20 @@ class CycleCutGramLaneTests(unittest.TestCase):
         basis = MODULE.cycle_basis(paths)
         self.assertEqual((len(paths), len(basis)), (16, 7))
 
+    def test_cut_and_cycle_metrics_are_complementary_projectors(self):
+        row = tuple(0 for _ in self.kernel["edges"])
+        paths = MODULE.physical_paths(self.kernel["edges"], row)
+        endpoints = tuple((u, v) for _, u, v, _ in paths)
+        cut = MODULE.cut_metric(endpoints)
+        size = len(cut)
+        for i in range(size):
+            for j in range(size):
+                square = sum(cut[i][k] * cut[k][j] for k in range(size))
+                self.assertEqual(square, cut[i][j])
+                self.assertEqual(cut[i][j], cut[j][i])
+        self.assertEqual(sum(cut[i][i] for i in range(size)), 9)
+        self.assertEqual(size - sum(cut[i][i] for i in range(size)), 7)
+
     def test_gram_and_cost_are_exact(self):
         row = tuple(0 for _ in self.kernel["edges"])
         gram, paths, normalizer = MODULE.embedding_gram(
