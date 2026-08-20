@@ -3,9 +3,10 @@
 
 Each census chunk is one independently resumable job.  A worker streams its
 compressed chunk once, writes an atomic summary after every row segment, and
-resumes at the first uncommitted segment after interruption.  Owner decisions
-are exact and payload-free: balanced rank one, signed imbalance, symbolic
-atoms, then the generalized switched three-ray search.
+resumes at the first uncommitted segment after interruption.  The finalizer
+aggregates those summaries without reopening the residual streams.  Owner
+decisions are exact and payload-free: balanced rank one, signed imbalance,
+symbolic atoms, then the generalized switched three-ray search.
 """
 
 from __future__ import annotations
@@ -27,6 +28,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 OWNER_ENGINE = HERE / "rank7_order12_structural_owners.py"
 RUN_DIRECTORY = HERE / "rank7_order12_segmented_owner_scan"
+DEFAULT_MANIFEST = HERE / "rank7_order12_exact_owner_remainder_manifest.json"
 CHUNK_PATTERN = re.compile(r"rank7_order12_census_(\d{3})_(\d{3})\.json\.xz\Z")
 DEFAULT_CHUNKS = tuple(
     HERE / f"rank7_order12_census_{start:03d}_{stop:03d}.json.xz"
@@ -36,6 +38,7 @@ SCHEMA = "rank-seven-order-twelve-segmented-owner-scan-v1"
 SEGMENT_SCHEMA = "rank-seven-order-twelve-owner-segment-v1"
 LANES = ("balanced-rank-one", "signed-imbalance-psd", "simplex-mixed-atom",
          "generalized-three-ray")
+MANIFEST_SCHEMA = "rank-seven-order-twelve-exact-owner-remainder-manifest-v1"
 
 
 def require(condition, message):
@@ -428,6 +431,139 @@ def status(args):
     return 0
 
 
+def finalize(args):
+    require(args.output.parent.is_dir(), "output parent does not exist")
+    owner = load_owner_engine()
+    implementation_identity = (file_sha256(OWNER_ENGINE),
+                               file_sha256(owner.ATOM_RECOGNIZER))
+    owner_orbits = Counter({lane: 0 for lane in LANES})
+    owner_physical = Counter({lane: 0 for lane in LANES})
+    coarse_orbits = coarse_physical = remainder_orbits = remainder_physical = 0
+    classification_digest = hashlib.sha256()
+    chunks = []
+    expected_start = 0
+    shared_identity = None
+
+    for chunk in DEFAULT_CHUNKS:
+        identifier, kernel_range = chunk_id(chunk)
+        require(kernel_range[0] == expected_start, "chunk ranges have a gap or overlap")
+        expected_start = kernel_range[1]
+        paths = job_paths(args.run_directory, identifier)
+        require(paths["result"].is_file(), f"segmented scan is incomplete: {identifier}")
+        result = load_json(paths["result"])
+        require(result.get("schema") == SCHEMA and result.get("status") == "completed",
+                f"segmented result is not complete: {identifier}")
+        require(result.get("full_theorem") is False, f"theorem boundary changed: {identifier}")
+        require(result.get("kernel_range") == kernel_range,
+                f"result range changed: {identifier}")
+        require(set(result["exclusive_owner_orbit_counts"]) == set(LANES) and
+                set(result["exclusive_owner_physical_counts"]) == set(LANES),
+                f"owner lanes changed: {identifier}")
+        identity = result["identity"]
+        current_identity = {
+            "atom_recognizer_sha256": implementation_identity[1],
+            "chunk_path": str(chunk.resolve()),
+            "chunk_sha256": file_sha256(chunk),
+            "owner_engine_sha256": implementation_identity[0],
+        }
+        require(identity == current_identity, f"result input identity changed: {identifier}")
+        engine_identity = (identity["owner_engine_sha256"],
+                           identity["atom_recognizer_sha256"])
+        if shared_identity is None:
+            shared_identity = engine_identity
+        require(engine_identity == shared_identity, "owner implementation changed between chunks")
+
+        local_orbits = Counter({lane: 0 for lane in LANES})
+        local_physical = Counter({lane: 0 for lane in LANES})
+        local_remainder_orbits = local_remainder_physical = 0
+        segment_cursor = 0
+        segment_digest = hashlib.sha256()
+        for segment in result["segments"]:
+            segment_cursor = validate_segment(
+                {**segment, "schema": SEGMENT_SCHEMA, "identity": identity},
+                identity, segment_cursor)
+            local_orbits.update(segment["exclusive_owner_orbit_counts"])
+            local_physical.update(segment["exclusive_owner_physical_counts"])
+            local_remainder_orbits += segment["remainder_orbit_total"]
+            local_remainder_physical += segment["remainder_physical_total"]
+            digest = bytes.fromhex(segment["classification_stream_sha256"])
+            require(len(digest) == 32, f"bad segment digest: {identifier}")
+            segment_digest.update(digest)
+        require(segment_cursor == result["coarse_residual_orbit_total"] ==
+                result["scanned_orbit_total"], f"incomplete result stream: {identifier}")
+        require(dict(sorted(local_orbits.items())) == result["exclusive_owner_orbit_counts"] and
+                dict(sorted(local_physical.items())) ==
+                result["exclusive_owner_physical_counts"],
+                f"segment owner totals changed: {identifier}")
+        require(local_remainder_orbits == result["remainder_orbit_total"] and
+                local_remainder_physical == result["remainder_physical_total"],
+                f"segment remainder totals changed: {identifier}")
+        require(segment_digest.hexdigest() == result["segment_digest_sha256"],
+                f"segment digest changed: {identifier}")
+        require(result["owned_orbit_total"] + result["remainder_orbit_total"] ==
+                result["coarse_residual_orbit_total"] and
+                result["owned_physical_total"] + result["remainder_physical_total"] ==
+                result["coarse_residual_physical_total"],
+                f"owner/remainder partition changed: {identifier}")
+
+        owner_orbits.update(local_orbits)
+        owner_physical.update(local_physical)
+        coarse_orbits += result["coarse_residual_orbit_total"]
+        coarse_physical += result["coarse_residual_physical_total"]
+        remainder_orbits += local_remainder_orbits
+        remainder_physical += local_remainder_physical
+        classification_digest.update(bytes.fromhex(result["segment_digest_sha256"]))
+        chunks.append({
+            "artifact_sha256": result["artifact_sha256"],
+            "coarse_residual_orbit_total": result["coarse_residual_orbit_total"],
+            "coarse_residual_physical_total": result["coarse_residual_physical_total"],
+            "exclusive_owner_orbit_counts": dict(sorted(local_orbits.items())),
+            "exclusive_owner_physical_counts": dict(sorted(local_physical.items())),
+            "kernel_range": kernel_range,
+            "path": os.path.relpath(chunk, args.output.parent),
+            "raw_sha256": result["raw_sha256"],
+            "remainder_orbit_total": local_remainder_orbits,
+            "remainder_physical_total": local_remainder_physical,
+            "result_path": os.path.relpath(paths["result"], args.output.parent),
+            "result_sha256": file_sha256(paths["result"]),
+            "segment_digest_sha256": result["segment_digest_sha256"],
+        })
+
+    require(expected_start == 365, "chunks do not exactly cover all order-twelve kernels")
+    owned_orbits = sum(owner_orbits.values())
+    owned_physical = sum(owner_physical.values())
+    require(owned_orbits + remainder_orbits == coarse_orbits and
+            owned_physical + remainder_physical == coarse_physical,
+            "aggregate owner/remainder partition changed")
+    payload = {
+        "schema": MANIFEST_SCHEMA,
+        "status": "complete-exact-owner-remainder-aggregation",
+        "full_theorem": False,
+        "scope": "exact segmented residual owner/remainder aggregation only",
+        "rank": 7,
+        "order": 12,
+        "budget": [6, 1],
+        "owner_precedence": list(LANES),
+        "owner_engine_sha256": shared_identity[0],
+        "atom_recognizer_sha256": shared_identity[1],
+        "chunks": chunks,
+        "coarse_residual_orbit_total": coarse_orbits,
+        "coarse_residual_physical_total": coarse_physical,
+        "exclusive_owner_orbit_counts": dict(sorted(owner_orbits.items())),
+        "exclusive_owner_physical_counts": dict(sorted(owner_physical.items())),
+        "owned_orbit_total": owned_orbits,
+        "owned_physical_total": owned_physical,
+        "remainder_orbit_total": remainder_orbits,
+        "remainder_physical_total": remainder_physical,
+        "chunk_classification_digest_sha256": classification_digest.hexdigest(),
+    }
+    atomic_json(args.output, payload, canonical=True)
+    print(f"order-twelve owner/remainder manifest built: owned_orbits={owned_orbits} "
+          f"remainder_orbits={remainder_orbits} remainder_physical={remainder_physical}")
+    print("full_theorem=false")
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -442,11 +578,16 @@ def main():
     worker_parser.add_argument("--token", required=True)
     status_parser = subparsers.add_parser("status")
     status_parser.add_argument("--run-directory", type=Path, default=RUN_DIRECTORY)
+    finalize_parser = subparsers.add_parser("finalize")
+    finalize_parser.add_argument("--run-directory", type=Path, default=RUN_DIRECTORY)
+    finalize_parser.add_argument("--output", type=Path, default=DEFAULT_MANIFEST)
     args = parser.parse_args()
     if args.command == "launch":
         return launch(args)
     if args.command == "worker":
         return worker(args)
+    if args.command == "finalize":
+        return finalize(args)
     return status(args)
 
 

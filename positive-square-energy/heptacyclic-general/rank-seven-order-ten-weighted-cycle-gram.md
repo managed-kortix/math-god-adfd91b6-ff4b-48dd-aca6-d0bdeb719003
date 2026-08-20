@@ -62,15 +62,32 @@ and triangle count.  None of the 25 most frequent signatures contributes an
 owner.  Owner-focused signatures are individually sharp (the largest has
 26/26 sampled owners), but each has fewer than 100 sampled rows; no signature
 therefore reaches the predeclared promising-family gate of at least 5%
-ownership on at least 100 sampled rows.  A multi-million-row full-family scan
-was not launched.  This is a representative exact owner lane, not a full
-remainder theorem.
+ownership on at least 100 sampled rows.
+
+A follow-up promotion scan uses the sharper empirical gate `owned=tested>0`.
+It selects 19 owner-bearing signatures, authenticates the complete 8,192,460
+row structural remainder, and finds 4,279 rows in those families.  Exact replay
+owns 4,277 of them.  Eighteen signatures are uniform on the full remainder;
+the remaining signature owns 57 of 59 rows.  Thus the original non-scalar
+effective-resistance/length metrics already separate the promoted families;
+no additional metric is needed for this pass.
+
+After deduplication with the 132 pilot owners, the exact union contains 4,281
+rows and 5,143 physical orbits, giving 72,777 frontier certificates.  Of these,
+4,149 rows are new.  The two full-family failures and every row outside the
+promoted signatures remain explicit: the updated remainder has 8,188,179 rows
+and 11,130,021 physical orbits.  This remains a partial exact owner lane, not a
+full remainder theorem.
 
 ## Artifacts and reproduction
 
 - `experiments/rank7_order10_weighted_cycle_gram_lane.py` implements the exact lane.
 - `experiments/rank7_order10_weighted_cycle_gram_lane.json` is the canonical report.
 - `experiments/rank7_order10_weighted_cycle_gram_owners.jsonl.xz` stores all 132 owners and certificates.
+- `experiments/rank7_order10_weighted_cycle_family_scan.py` stratifies the pilot and replays selected families completely.
+- `experiments/rank7_order10_weighted_cycle_family_scan.json` records exact promoted-family coverage.
+- `experiments/rank7_order10_weighted_cycle_family_owners.jsonl.xz` stores the deduplicated 4,281-owner union.
+- `experiments/rank7_order10_after_weighted_cycle_remainder.jsonl.xz` stores the exact 8,188,179-row remainder.
 
 From the repository root:
 
@@ -80,4 +97,10 @@ python3 -m unittest \
 
 python3 positive-square-energy/experiments/rank7_order10_weighted_cycle_gram_lane.py \
   --sample-size 10000 --workers 32 --progress
+
+python3 -m unittest \
+  positive-square-energy/experiments/test_rank7_order10_weighted_cycle_family_scan.py
+
+python3 positive-square-energy/experiments/rank7_order10_weighted_cycle_family_scan.py \
+  --workers 32 --progress
 ```

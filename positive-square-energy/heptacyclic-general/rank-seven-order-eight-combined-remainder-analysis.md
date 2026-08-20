@@ -214,3 +214,55 @@ python3 positive-square-energy/experiments/rank7_order8_theorem_boundary_closure
 The v2 packet/spectral report remains a finite-target result. The separate DNN
 replacement ledger is theorem-eligible but does not mark the full order-eight
 theorem complete.
+
+## Leading-family structural cycle-Gram lane
+
+The next theorem-eligible lane authenticates and stratifies the complete
+83,856-row remainder. It records all 318 exact dominant-family classes. The
+leading class has 6,929 orbits and 7,620 physical rows, with multiplicity
+partition `2^3 1^8`, bundle types `(2,3,6)`, support cycle rank four, and two
+triangles.
+
+Every row in that leading class is scanned with the structural Gram
+
+```text
+H = XX^T + w A P_cycle A^T,
+X = D0 + D1 S,
+G = H/M + diag(1-diag(H)/M).
+```
+
+Here `S` is the signed bundle matrix, `D0,D1` are constant on the exact local
+type `(signed degree, sorted incident (multiplicity,odd-count) pairs)`, `A` is
+the parity-signed physical-path incidence matrix, and
+`P_cycle=I-B^T(BB^T)^-1B`. Both terms of `H` are explicit Gram squares for
+`w>=0`; the diagonal completion is another nonnegative coordinate-square sum.
+Numerical optimization only proposes parameters. Every parameter is rounded to
+a rational of denominator at most 256, and every accepted cost is recomputed
+exactly.
+
+The full 6,929-row family scan owns 112 orbits, 128 physical rows, and 1,680
+canonical-plus-coordinate targets. For each accepted Gram, every path summand
+
+```text
+(1-t)/(L(1+t)),  t=(-1)^L G_uv,
+```
+
+is nonnegative and weakly decreases under `L -> L+2`. The certificate therefore
+owns all same-parity path lengths directly, rather than only the fifteen finite
+frontiers. DNN one-vertex additivity supplies arbitrary rooted-tree
+attachments. These 112 records are consequently exact induced owners with the
+required all-length and rooted-tree lift.
+
+The reduced theorem-eligible remainder has 83,744 rows. The 6,817 unsuccessful
+rows in the target family and every non-target family remain unclassified;
+optimizer failure is not treated as an obstruction.
+
+- `experiments/rank7_order8_structural_cycle_gram_lane.py` implements the authenticated full-family scan and exact replay.
+- `experiments/rank7_order8_structural_cycle_gram_lane.json` stores all 318 family strata and the exact coverage ledger.
+- `experiments/rank7_order8_structural_cycle_gram_owners.jsonl.xz` stores the 112 rational owner certificates.
+- `experiments/rank7_order8_after_structural_cycle_gram_remainder.jsonl.xz` stores the exact 83,744-row complement.
+
+```text
+python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --workers 8
+python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --workers 8 --audit
+```
