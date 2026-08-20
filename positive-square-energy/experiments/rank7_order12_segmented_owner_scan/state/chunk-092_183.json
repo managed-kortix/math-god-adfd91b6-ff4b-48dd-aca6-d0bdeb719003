@@ -1,16 +1,18 @@
 {
+  "artifact_sha256": "4da6726ebc1affcd4402c097b069396405bc0c3f845ca3dd410cbf2d4e46d5d8",
   "coarse_residual_orbit_total": 1126408,
   "coarse_residual_physical_total": 2041190,
+  "completed_at": "2026-08-20T08:00:51.291782+00:00",
   "exclusive_owner_orbit_counts": {
-    "balanced-rank-one": 1288,
-    "generalized-three-ray": 599382,
-    "signed-imbalance-psd": 15002,
+    "balanced-rank-one": 2421,
+    "generalized-three-ray": 999228,
+    "signed-imbalance-psd": 19393,
     "simplex-mixed-atom": 52
   },
   "exclusive_owner_physical_counts": {
-    "balanced-rank-one": 2034,
-    "generalized-three-ray": 1066871,
-    "signed-imbalance-psd": 26947,
+    "balanced-rank-one": 3758,
+    "generalized-three-ray": 1810679,
+    "signed-imbalance-psd": 35000,
     "simplex-mixed-atom": 127
   },
   "full_theorem": false,
@@ -24,13 +26,14 @@
     92,
     183
   ],
-  "owned_orbit_total": 615724,
-  "owned_physical_total": 1095979,
-  "remainder_orbit_total": 100376,
-  "remainder_physical_total": 181139,
-  "scanned_orbit_total": 716100,
+  "owned_orbit_total": 1021094,
+  "owned_physical_total": 1849564,
+  "raw_sha256": "be31699a8565ed6e7f1bccb545fc6ac3754fce967acae208f192fa8a1cbb38eb",
+  "remainder_orbit_total": 105314,
+  "remainder_physical_total": 191626,
+  "scanned_orbit_total": 1126408,
   "schema": "rank-seven-order-twelve-segmented-owner-scan-v1",
-  "segment_digest_sha256": "8cd721ecbcd44b4091da649e9c477a39f7ed3021bf3ad86eb3ecfbcb72162887",
+  "segment_digest_sha256": "5b09fd92120a46e7b09c6fe5291183e0af00d851a1fb307b4ef4787cbdf88959",
   "segments": [
     {
       "classification_stream_sha256": "5fffd0d8b972ee50703487e81ae00b796689673fcd87822d0a13d5d7aa3fbc6c",
@@ -2803,8 +2806,890 @@
         706100,
         716100
       ]
+    },
+    {
+      "classification_stream_sha256": "95c026c7525b5062c95252d474093f4be1864a1149ca9ba1e003f33e18cc8ce4",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 29,
+        "generalized-three-ray": 9831,
+        "signed-imbalance-psd": 83,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 83,
+        "generalized-three-ray": 40865,
+        "signed-imbalance-psd": 354,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 57,
+      "remainder_physical_total": 90,
+      "row_range": [
+        716100,
+        726100
+      ]
+    },
+    {
+      "classification_stream_sha256": "9827436f09f1d7d81176dc964616b114af276f7a31101e20a9bbe161b3592087",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 47,
+        "generalized-three-ray": 9755,
+        "signed-imbalance-psd": 153,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 148,
+        "generalized-three-ray": 64886,
+        "signed-imbalance-psd": 776,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 45,
+      "remainder_physical_total": 164,
+      "row_range": [
+        726100,
+        736100
+      ]
+    },
+    {
+      "classification_stream_sha256": "8ce6cbe09e22abc8858728eca7eef7a526ab8d979835a46e33494798e4d116b2",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 35,
+        "generalized-three-ray": 8580,
+        "signed-imbalance-psd": 119,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 100,
+        "generalized-three-ray": 40449,
+        "signed-imbalance-psd": 403,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 1266,
+      "remainder_physical_total": 5017,
+      "row_range": [
+        736100,
+        746100
+      ]
+    },
+    {
+      "classification_stream_sha256": "19b1b6f98034424f9286b2cb5505141509165830e404ea65d8eb4268fdaeb59a",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 26,
+        "generalized-three-ray": 8517,
+        "signed-imbalance-psd": 257,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 34,
+        "generalized-three-ray": 16541,
+        "signed-imbalance-psd": 405,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 1200,
+      "remainder_physical_total": 2037,
+      "row_range": [
+        746100,
+        756100
+      ]
+    },
+    {
+      "classification_stream_sha256": "c61dd370b52f5333f8a6b69ebec662014b899d550a70a7b996f6037d86b0101b",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 22,
+        "generalized-three-ray": 9603,
+        "signed-imbalance-psd": 116,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 37,
+        "generalized-three-ray": 27705,
+        "signed-imbalance-psd": 267,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 259,
+      "remainder_physical_total": 476,
+      "row_range": [
+        756100,
+        766100
+      ]
+    },
+    {
+      "classification_stream_sha256": "e4aaa611529f4a16b6295428455067d58441346635dc1e8c11b911fb39c57129",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 14,
+        "generalized-three-ray": 9854,
+        "signed-imbalance-psd": 83,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 36,
+        "generalized-three-ray": 13361,
+        "signed-imbalance-psd": 83,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 49,
+      "remainder_physical_total": 94,
+      "row_range": [
+        766100,
+        776100
+      ]
+    },
+    {
+      "classification_stream_sha256": "9aefd50c15162494d341a37ea5dbc34e7e2289fd08f05159d9f2c95305b5a274",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 29,
+        "generalized-three-ray": 9924,
+        "signed-imbalance-psd": 34,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 29,
+        "generalized-three-ray": 9924,
+        "signed-imbalance-psd": 34,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 13,
+      "remainder_physical_total": 13,
+      "row_range": [
+        776100,
+        786100
+      ]
+    },
+    {
+      "classification_stream_sha256": "fffeeb6485ea84eed1eea39566e4333c784cb792fe7d4aa06eff4a7980df9287",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 42,
+        "generalized-three-ray": 9862,
+        "signed-imbalance-psd": 49,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 42,
+        "generalized-three-ray": 9862,
+        "signed-imbalance-psd": 49,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 47,
+      "remainder_physical_total": 47,
+      "row_range": [
+        786100,
+        796100
+      ]
+    },
+    {
+      "classification_stream_sha256": "5298e63add40538d17d23b9b6591272e700a4eff8bdc27572c31f659f474062e",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 10,
+        "generalized-three-ray": 9828,
+        "signed-imbalance-psd": 162,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 10,
+        "generalized-three-ray": 9828,
+        "signed-imbalance-psd": 162,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 0,
+      "remainder_physical_total": 0,
+      "row_range": [
+        796100,
+        806100
+      ]
+    },
+    {
+      "classification_stream_sha256": "64277f5df8ed7e082cee1eb956f12416c44f2da1f73a1508d364e210123fb2bf",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 45,
+        "generalized-three-ray": 9857,
+        "signed-imbalance-psd": 98,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 45,
+        "generalized-three-ray": 9857,
+        "signed-imbalance-psd": 98,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 0,
+      "remainder_physical_total": 0,
+      "row_range": [
+        806100,
+        816100
+      ]
+    },
+    {
+      "classification_stream_sha256": "84c5345d9616aae30cc54aa8ffe756c2e12241236ea9d0d4651798381c870a8f",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 17,
+        "generalized-three-ray": 9950,
+        "signed-imbalance-psd": 20,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 17,
+        "generalized-three-ray": 11132,
+        "signed-imbalance-psd": 38,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 13,
+      "remainder_physical_total": 13,
+      "row_range": [
+        816100,
+        826100
+      ]
+    },
+    {
+      "classification_stream_sha256": "71714ca83340159a833be56d9763a9634fdc396fc67f6128666ba7315adde541",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 28,
+        "generalized-three-ray": 9955,
+        "signed-imbalance-psd": 17,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 33,
+        "generalized-three-ray": 18329,
+        "signed-imbalance-psd": 34,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 0,
+      "remainder_physical_total": 0,
+      "row_range": [
+        826100,
+        836100
+      ]
+    },
+    {
+      "classification_stream_sha256": "806ab420f0414cfd4fe7b53b507277fd8e63ec54f998b4869de6ca9bdd1dc76c",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 49,
+        "generalized-three-ray": 9804,
+        "signed-imbalance-psd": 62,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 51,
+        "generalized-three-ray": 15324,
+        "signed-imbalance-psd": 82,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 85,
+      "remainder_physical_total": 87,
+      "row_range": [
+        836100,
+        846100
+      ]
+    },
+    {
+      "classification_stream_sha256": "eb3a2b00037627df291052468bfd563da1c4f9742c83de82f996d541ae310e56",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 38,
+        "generalized-three-ray": 9840,
+        "signed-imbalance-psd": 79,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 53,
+        "generalized-three-ray": 16241,
+        "signed-imbalance-psd": 96,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 43,
+      "remainder_physical_total": 47,
+      "row_range": [
+        846100,
+        856100
+      ]
+    },
+    {
+      "classification_stream_sha256": "9d3786c38aa0967ec5e75c63f6330e28a42e309f7772257aaf1ad3fe653af6c0",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 31,
+        "generalized-three-ray": 9793,
+        "signed-imbalance-psd": 71,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 74,
+        "generalized-three-ray": 30634,
+        "signed-imbalance-psd": 265,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 105,
+      "remainder_physical_total": 123,
+      "row_range": [
+        856100,
+        866100
+      ]
+    },
+    {
+      "classification_stream_sha256": "30daeb7b2051e12efd236f80ade5bd825023bb7bcd7029e444c6e07626a5fa3d",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 22,
+        "generalized-three-ray": 9921,
+        "signed-imbalance-psd": 57,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 22,
+        "generalized-three-ray": 9921,
+        "signed-imbalance-psd": 57,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 0,
+      "remainder_physical_total": 0,
+      "row_range": [
+        866100,
+        876100
+      ]
+    },
+    {
+      "classification_stream_sha256": "45397385da84e6199a4a4cbec93978a229d20d2502aa0f69b24e2ff689a9077c",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 18,
+        "generalized-three-ray": 9967,
+        "signed-imbalance-psd": 15,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 18,
+        "generalized-three-ray": 9967,
+        "signed-imbalance-psd": 15,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 0,
+      "remainder_physical_total": 0,
+      "row_range": [
+        876100,
+        886100
+      ]
+    },
+    {
+      "classification_stream_sha256": "79561f274d7ecb7eeafab8b55971fbc1e9bc158a010798cea2beb203677993e9",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 42,
+        "generalized-three-ray": 9917,
+        "signed-imbalance-psd": 41,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 45,
+        "generalized-three-ray": 14516,
+        "signed-imbalance-psd": 81,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 0,
+      "remainder_physical_total": 0,
+      "row_range": [
+        886100,
+        896100
+      ]
+    },
+    {
+      "classification_stream_sha256": "c9b0fd9103a730b423e76b5d3fd7a48709218ba93f6a532d2bd0c52486967f01",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 37,
+        "generalized-three-ray": 9822,
+        "signed-imbalance-psd": 133,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 63,
+        "generalized-three-ray": 21064,
+        "signed-imbalance-psd": 412,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 8,
+      "remainder_physical_total": 16,
+      "row_range": [
+        896100,
+        906100
+      ]
+    },
+    {
+      "classification_stream_sha256": "3771f0fdb621c6700d33e852be9335062cc7608c8aaee4c5ff64406cccf202d4",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 23,
+        "generalized-three-ray": 9557,
+        "signed-imbalance-psd": 190,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 56,
+        "generalized-three-ray": 29385,
+        "signed-imbalance-psd": 525,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 230,
+      "remainder_physical_total": 496,
+      "row_range": [
+        906100,
+        916100
+      ]
+    },
+    {
+      "classification_stream_sha256": "dfb670000bd96b3d0e36bc96e5a8b87bed0fb276973c787c08d660e9db3e947b",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 4,
+        "generalized-three-ray": 9415,
+        "signed-imbalance-psd": 230,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 4,
+        "generalized-three-ray": 14627,
+        "signed-imbalance-psd": 313,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 351,
+      "remainder_physical_total": 417,
+      "row_range": [
+        916100,
+        926100
+      ]
+    },
+    {
+      "classification_stream_sha256": "266d67cbf91d6b5fecf90a3288b0f4cceca1869ffd57dc6ad343fc3d5e0d5832",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 42,
+        "generalized-three-ray": 9642,
+        "signed-imbalance-psd": 46,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 59,
+        "generalized-three-ray": 16227,
+        "signed-imbalance-psd": 82,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 270,
+      "remainder_physical_total": 339,
+      "row_range": [
+        926100,
+        936100
+      ]
+    },
+    {
+      "classification_stream_sha256": "317e24c730eb9d27d60e9d3e59f7dcf600f75aa237388272c82a3bdcdedde094",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 9,
+        "generalized-three-ray": 9847,
+        "signed-imbalance-psd": 79,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 9,
+        "generalized-three-ray": 9972,
+        "signed-imbalance-psd": 79,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 65,
+      "remainder_physical_total": 65,
+      "row_range": [
+        936100,
+        946100
+      ]
+    },
+    {
+      "classification_stream_sha256": "e4d162debce7a5694af3236c2368ec07de65c184e2fcee7f23b1a475f11cc111",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 16,
+        "generalized-three-ray": 9929,
+        "signed-imbalance-psd": 33,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 16,
+        "generalized-three-ray": 9929,
+        "signed-imbalance-psd": 33,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 22,
+      "remainder_physical_total": 22,
+      "row_range": [
+        946100,
+        956100
+      ]
+    },
+    {
+      "classification_stream_sha256": "3df856ac2e4873f729a1b30633d45d6d0241a603da02ab15e8999f3a7a85c6cb",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 41,
+        "generalized-three-ray": 9838,
+        "signed-imbalance-psd": 113,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 41,
+        "generalized-three-ray": 10742,
+        "signed-imbalance-psd": 177,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 8,
+      "remainder_physical_total": 8,
+      "row_range": [
+        956100,
+        966100
+      ]
+    },
+    {
+      "classification_stream_sha256": "1bfc44fed2bc7d45c5e0a0e08c7dfdc8b7dc38304d111a097bd98495ab114950",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 12,
+        "generalized-three-ray": 9490,
+        "signed-imbalance-psd": 334,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 17,
+        "generalized-three-ray": 14952,
+        "signed-imbalance-psd": 526,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 164,
+      "remainder_physical_total": 183,
+      "row_range": [
+        966100,
+        976100
+      ]
+    },
+    {
+      "classification_stream_sha256": "569bae447c0d81a5bfadbc662669ebd499f7acc3150f5aa2da50e8cce4baa33a",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 14,
+        "generalized-three-ray": 9630,
+        "signed-imbalance-psd": 173,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 22,
+        "generalized-three-ray": 15843,
+        "signed-imbalance-psd": 263,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 183,
+      "remainder_physical_total": 226,
+      "row_range": [
+        976100,
+        986100
+      ]
+    },
+    {
+      "classification_stream_sha256": "4176c60c0893da8ae98226d7405f0087567b1fa6fbb31211800e741d2571e2a9",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 20,
+        "generalized-three-ray": 9636,
+        "signed-imbalance-psd": 279,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 20,
+        "generalized-three-ray": 10036,
+        "signed-imbalance-psd": 279,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 65,
+      "remainder_physical_total": 71,
+      "row_range": [
+        986100,
+        996100
+      ]
+    },
+    {
+      "classification_stream_sha256": "9b7f70e49220d1f17c31940ea3ca1e6c3a60fd0e694f4ce8e4f0f8f8e7c2d89d",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 19,
+        "generalized-three-ray": 9827,
+        "signed-imbalance-psd": 132,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 19,
+        "generalized-three-ray": 9827,
+        "signed-imbalance-psd": 132,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 22,
+      "remainder_physical_total": 22,
+      "row_range": [
+        996100,
+        1006100
+      ]
+    },
+    {
+      "classification_stream_sha256": "041b4850fd59be6bcbda85ff7cb4d2fe2bab3415c3d01759b88c8a264c0c15af",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 20,
+        "generalized-three-ray": 9860,
+        "signed-imbalance-psd": 96,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 20,
+        "generalized-three-ray": 9860,
+        "signed-imbalance-psd": 96,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 24,
+      "remainder_physical_total": 24,
+      "row_range": [
+        1006100,
+        1016100
+      ]
+    },
+    {
+      "classification_stream_sha256": "da53162405f682d141721f1f59b7a55fa7b38a74390061cbad67acf5be2a0e3b",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 57,
+        "generalized-three-ray": 9891,
+        "signed-imbalance-psd": 26,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 97,
+        "generalized-three-ray": 26004,
+        "signed-imbalance-psd": 68,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 26,
+      "remainder_physical_total": 26,
+      "row_range": [
+        1016100,
+        1026100
+      ]
+    },
+    {
+      "classification_stream_sha256": "b42192e6dd8ffc4eff4dc735ba20874a119b932836c9aa1dec489c8223d6b612",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 10,
+        "generalized-three-ray": 9847,
+        "signed-imbalance-psd": 139,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 19,
+        "generalized-three-ray": 20348,
+        "signed-imbalance-psd": 268,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 4,
+      "remainder_physical_total": 8,
+      "row_range": [
+        1026100,
+        1036100
+      ]
+    },
+    {
+      "classification_stream_sha256": "bec0fa6199ed653d0cb0b96b6922455679dd289d0bf73e64aef53240c9e720f7",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 35,
+        "generalized-three-ray": 9927,
+        "signed-imbalance-psd": 36,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 50,
+        "generalized-three-ray": 18459,
+        "signed-imbalance-psd": 69,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 2,
+      "remainder_physical_total": 4,
+      "row_range": [
+        1036100,
+        1046100
+      ]
+    },
+    {
+      "classification_stream_sha256": "845f81fc743d448a1656ab55e00830e1517223aa456f0fb8d481d7161be47399",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 34,
+        "generalized-three-ray": 9898,
+        "signed-imbalance-psd": 68,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 66,
+        "generalized-three-ray": 19660,
+        "signed-imbalance-psd": 134,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 0,
+      "remainder_physical_total": 0,
+      "row_range": [
+        1046100,
+        1056100
+      ]
+    },
+    {
+      "classification_stream_sha256": "0dcec6207d44e016b5d3fd8d8a2522058b37d28461632a5bad986f7f11ffc76d",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 16,
+        "generalized-three-ray": 9907,
+        "signed-imbalance-psd": 74,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 31,
+        "generalized-three-ray": 19526,
+        "signed-imbalance-psd": 141,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 3,
+      "remainder_physical_total": 5,
+      "row_range": [
+        1056100,
+        1066100
+      ]
+    },
+    {
+      "classification_stream_sha256": "379558e758b511f4088d177b443ed02144cd4428c0d667381382dffbba1425f4",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 21,
+        "generalized-three-ray": 9732,
+        "signed-imbalance-psd": 243,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 41,
+        "generalized-three-ray": 19286,
+        "signed-imbalance-psd": 472,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 4,
+      "remainder_physical_total": 7,
+      "row_range": [
+        1066100,
+        1076100
+      ]
+    },
+    {
+      "classification_stream_sha256": "2ed886eaca014fbb6a3af844c636fadaaf979f9341974c080c2e4db9c1914cc8",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 27,
+        "generalized-three-ray": 9895,
+        "signed-imbalance-psd": 36,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 52,
+        "generalized-three-ray": 20258,
+        "signed-imbalance-psd": 74,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 42,
+      "remainder_physical_total": 76,
+      "row_range": [
+        1076100,
+        1086100
+      ]
+    },
+    {
+      "classification_stream_sha256": "41bd6e44f274b45ebf6ab9f00095f994b0dfc1be95fdfc31739f3a72437d85f4",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 61,
+        "generalized-three-ray": 9845,
+        "signed-imbalance-psd": 88,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 74,
+        "generalized-three-ray": 28808,
+        "signed-imbalance-psd": 284,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 6,
+      "remainder_physical_total": 7,
+      "row_range": [
+        1086100,
+        1096100
+      ]
+    },
+    {
+      "classification_stream_sha256": "3a140cd32f0abe84d6b6155fae1de899fe5b64b515029c9d62eae338f013a6e5",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 4,
+        "generalized-three-ray": 9696,
+        "signed-imbalance-psd": 187,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 4,
+        "generalized-three-ray": 9696,
+        "signed-imbalance-psd": 187,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 113,
+      "remainder_physical_total": 113,
+      "row_range": [
+        1096100,
+        1106100
+      ]
+    },
+    {
+      "classification_stream_sha256": "ac89e08e6c19cf0bdb74fe1ad17e57182580e9949dd179f66f6580be8ca25dc7",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 26,
+        "generalized-three-ray": 9831,
+        "signed-imbalance-psd": 103,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 26,
+        "generalized-three-ray": 9831,
+        "signed-imbalance-psd": 103,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 40,
+      "remainder_physical_total": 40,
+      "row_range": [
+        1106100,
+        1116100
+      ]
+    },
+    {
+      "classification_stream_sha256": "ad8f498fd99776d01edc073bb09edb1edd8f7df5967269d35f72bc993ad0aea3",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 30,
+        "generalized-three-ray": 9829,
+        "signed-imbalance-psd": 37,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 30,
+        "generalized-three-ray": 9829,
+        "signed-imbalance-psd": 37,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 104,
+      "remainder_physical_total": 104,
+      "row_range": [
+        1116100,
+        1126100
+      ]
+    },
+    {
+      "classification_stream_sha256": "3e9d0cd1d24e1cb408d6eebfc5831b8bd7e4731e38da805caede6956ce9a7981",
+      "exclusive_owner_orbit_counts": {
+        "balanced-rank-one": 11,
+        "generalized-three-ray": 297,
+        "signed-imbalance-psd": 0,
+        "simplex-mixed-atom": 0
+      },
+      "exclusive_owner_physical_counts": {
+        "balanced-rank-one": 11,
+        "generalized-three-ray": 297,
+        "signed-imbalance-psd": 0,
+        "simplex-mixed-atom": 0
+      },
+      "remainder_orbit_total": 0,
+      "remainder_physical_total": 0,
+      "row_range": [
+        1126100,
+        1126408
+      ]
     }
   ],
-  "status": "running",
-  "updated_at": "2026-08-18T12:59:58.717117+00:00"
+  "status": "completed",
+  "updated_at": "2026-08-20T08:00:51.291779+00:00"
 }

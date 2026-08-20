@@ -7,8 +7,8 @@
         0,
         92
       ],
-      "owned_orbit_total": 275441,
-      "scanned_orbit_total": 275800,
+      "owned_orbit_total": 605441,
+      "scanned_orbit_total": 605800,
       "status": "running"
     },
     {
@@ -18,9 +18,9 @@
         92,
         183
       ],
-      "owned_orbit_total": 615724,
-      "scanned_orbit_total": 716100,
-      "status": "running"
+      "owned_orbit_total": 1021094,
+      "scanned_orbit_total": 1126408,
+      "status": "completed"
     },
     {
       "chunk": "183_274",
@@ -29,8 +29,8 @@
         183,
         274
       ],
-      "owned_orbit_total": 684953,
-      "scanned_orbit_total": 687300,
+      "owned_orbit_total": 1312249,
+      "scanned_orbit_total": 1317300,
       "status": "running"
     },
     {
@@ -40,11 +40,11 @@
         274,
         365
       ],
-      "owned_orbit_total": 606000,
-      "scanned_orbit_total": 606000,
+      "owned_orbit_total": 1215985,
+      "scanned_orbit_total": 1216000,
       "status": "running"
     }
   ],
   "schema": "rank-seven-order-twelve-owner-scheduler-status-v1",
-  "updated_at": "2026-08-20T06:14:37.596894+00:00"
+  "updated_at": "2026-08-20T08:15:57.205009+00:00"
 }
