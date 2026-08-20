@@ -17,6 +17,16 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-08-20: the connected heptacyclic program is reduced to one rank-seven
+  block on kernel orders 8--12; the complete multiblock theorem and single-block
+  orders 2--7 are proved. Exact order-eight owner accounting now authenticates
+  payload-free, typed-diagonal SOS, and committed rational lanes and leaves
+  84152 residual rows (1262280 targets). The complete order-nine structural scan
+  left 385829 rows; exact scalar/typed SOS lanes close 113309 more, leaving
+  272520 rows (4360320 targets). The order-ten scan currently owns only 15825 of
+  8208285 rows, so new cycle/cut-space geometry is the main obstruction. Four
+  durable structural scans each are active for orders eleven and twelve. No
+  all-heptacyclic theorem claim is made.
 - 2026-08-14: derived the exact rank-seven-to-rank-six marked edge-opening
   reduction for kernel orders 8--12.  A deleted-path owner with rank-six excess
   `E_e`, endpoint correlation `r_e`, and restored length `q_e` closes exactly
