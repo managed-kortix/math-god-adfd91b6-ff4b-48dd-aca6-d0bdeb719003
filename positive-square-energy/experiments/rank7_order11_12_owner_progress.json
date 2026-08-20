@@ -1,185 +1,185 @@
 {
-  "captured_at": "2026-08-18T12:04:17Z",
+  "captured_at": "2026-08-20T06:16:11.889465Z",
   "full_theorem": false,
   "orders": {
     "11": {
       "coarse_residual_orbit_total": 11424569,
       "combined_partial_owner_rate": {
-        "denominator": 490000,
-        "numerator": 1367
+        "denominator": 57500,
+        "numerator": 159
       },
       "jobs": [
         {
           "chunk": "0000_0348",
           "coarse_residual_orbit_total": 2493739,
-          "owned_orbit_total": 1435,
+          "owned_orbit_total": 2976,
           "partial_owner_rate": {
-            "denominator": 2000,
-            "numerator": 7
+            "denominator": 8750,
+            "numerator": 31
           },
-          "pid": 1807,
-          "scanned_orbit_total": 410000,
-          "status": "relaunched"
+          "pid": 2620,
+          "scanned_orbit_total": 840000,
+          "status": "running"
         },
         {
           "chunk": "0348_0696",
           "coarse_residual_orbit_total": 2858688,
-          "owned_orbit_total": 1498,
+          "owned_orbit_total": 2552,
           "partial_owner_rate": {
-            "denominator": 225000,
-            "numerator": 749
+            "denominator": 113750,
+            "numerator": 319
           },
-          "pid": 1808,
-          "scanned_orbit_total": 450000,
-          "status": "relaunched"
+          "pid": 2622,
+          "scanned_orbit_total": 910000,
+          "status": "running"
         },
         {
           "chunk": "0696_1044",
           "coarse_residual_orbit_total": 3149789,
-          "owned_orbit_total": 522,
+          "owned_orbit_total": 1119,
           "partial_owner_rate": {
-            "denominator": 35000,
-            "numerator": 87
+            "denominator": 140000,
+            "numerator": 373
           },
-          "pid": 1809,
-          "scanned_orbit_total": 210000,
-          "status": "relaunched"
+          "pid": 2624,
+          "scanned_orbit_total": 420000,
+          "status": "running"
         },
         {
           "chunk": "1044_1391",
           "coarse_residual_orbit_total": 2922353,
-          "owned_orbit_total": 646,
+          "owned_orbit_total": 1621,
           "partial_owner_rate": {
-            "denominator": 200000,
-            "numerator": 323
+            "denominator": 820000,
+            "numerator": 1621
           },
-          "pid": 1810,
-          "scanned_orbit_total": 400000,
-          "status": "relaunched"
+          "pid": 2625,
+          "scanned_orbit_total": 820000,
+          "status": "running"
         }
       ],
+      "owned_orbit_total": 8268,
       "owner_orbit_counts": {
-        "balanced-rank-one": 2109,
+        "balanced-rank-one": 4980,
         "cubic-cycle-space-candidate": 0,
-        "signed-imbalance-psd": 1744,
-        "simplex-mixed-atom": 248
+        "signed-imbalance-psd": 2576,
+        "simplex-mixed-atom": 712
       },
       "owner_orbit_rates": {
         "balanced-rank-one": {
-          "denominator": 490000,
-          "numerator": 703
+          "denominator": 149500,
+          "numerator": 249
         },
         "cubic-cycle-space-candidate": {
           "denominator": 1,
           "numerator": 0
         },
         "signed-imbalance-psd": {
-          "denominator": 91875,
-          "numerator": 109
+          "denominator": 8125,
+          "numerator": 7
         },
         "simplex-mixed-atom": {
-          "denominator": 183750,
-          "numerator": 31
+          "denominator": 373750,
+          "numerator": 89
         }
       },
-      "owned_orbit_total": 4101,
       "scan_progress": {
         "denominator": 11424569,
-        "numerator": 1470000
+        "numerator": 2990000
       },
-      "scanned_orbit_total": 1470000,
+      "scanned_orbit_total": 2990000,
       "status": "running"
     },
     "12": {
       "coarse_residual_orbit_total": 6138723,
       "combined_partial_owner_rate": {
-        "denominator": 578400,
-        "numerator": 550787
+        "denominator": 1142600,
+        "numerator": 1091059
       },
       "jobs": [
         {
           "chunk": "000_092",
           "coarse_residual_orbit_total": 1485684,
-          "owned_orbit_total": 205441,
+          "owned_orbit_total": 275441,
           "partial_owner_rate": {
-            "denominator": 205800,
-            "numerator": 205441
+            "denominator": 275800,
+            "numerator": 275441
           },
-          "pid": 1842,
-          "scanned_orbit_total": 205800,
-          "status": "relaunched"
+          "pid": 2618,
+          "scanned_orbit_total": 275800,
+          "status": "running"
         },
         {
           "chunk": "092_183",
           "coarse_residual_orbit_total": 1126408,
-          "owned_orbit_total": 474955,
+          "owned_orbit_total": 615724,
           "partial_owner_rate": {
-            "denominator": 111220,
-            "numerator": 94991
+            "denominator": 179025,
+            "numerator": 153931
           },
-          "pid": 1843,
-          "scanned_orbit_total": 556100,
-          "status": "relaunched"
+          "pid": 2619,
+          "scanned_orbit_total": 716100,
+          "status": "running"
         },
         {
           "chunk": "183_274",
           "coarse_residual_orbit_total": 1551708,
-          "owned_orbit_total": 515965,
+          "owned_orbit_total": 684953,
           "partial_owner_rate": {
-            "denominator": 103460,
-            "numerator": 103193
+            "denominator": 687300,
+            "numerator": 684953
           },
-          "pid": 1844,
-          "scanned_orbit_total": 517300,
-          "status": "relaunched"
+          "pid": 2621,
+          "scanned_orbit_total": 687300,
+          "status": "running"
         },
         {
           "chunk": "274_365",
           "coarse_residual_orbit_total": 1974923,
-          "owned_orbit_total": 456000,
+          "owned_orbit_total": 606000,
           "partial_owner_rate": {
             "denominator": 1,
             "numerator": 1
           },
-          "pid": 1845,
-          "scanned_orbit_total": 456000,
-          "status": "relaunched"
+          "pid": 2623,
+          "scanned_orbit_total": 606000,
+          "status": "running"
         }
       ],
+      "owned_orbit_total": 2182118,
       "owner_orbit_counts": {
-        "balanced-rank-one": 4521,
-        "generalized-three-ray": 1631456,
-        "signed-imbalance-psd": 15746,
-        "simplex-mixed-atom": 638
+        "balanced-rank-one": 5902,
+        "generalized-three-ray": 2153104,
+        "signed-imbalance-psd": 21966,
+        "simplex-mixed-atom": 1146
       },
       "owner_orbit_rates": {
         "balanced-rank-one": {
-          "denominator": 578400,
-          "numerator": 1507
+          "denominator": 1142600,
+          "numerator": 2951
         },
         "generalized-three-ray": {
-          "denominator": 54225,
-          "numerator": 50983
+          "denominator": 142825,
+          "numerator": 134569
         },
         "signed-imbalance-psd": {
-          "denominator": 867600,
-          "numerator": 7873
+          "denominator": 1142600,
+          "numerator": 10983
         },
         "simplex-mixed-atom": {
-          "denominator": 867600,
-          "numerator": 319
+          "denominator": 1142600,
+          "numerator": 573
         }
       },
-      "owned_orbit_total": 1652361,
       "scan_progress": {
-        "denominator": 2046241,
-        "numerator": 578400
+        "denominator": 6138723,
+        "numerator": 2285200
       },
-      "scanned_orbit_total": 1735200,
+      "scanned_orbit_total": 2285200,
       "status": "running"
     }
   },
-  "rate_basis": "owned_orbit_total/scanned_orbit_total over committed segments only",
+  "rate_basis": "owned_orbit_total/scanned_orbit_total over persisted segments",
   "schema": "rank-seven-order-eleven-twelve-owner-progress-v1",
   "theorem_claim": false
 }
