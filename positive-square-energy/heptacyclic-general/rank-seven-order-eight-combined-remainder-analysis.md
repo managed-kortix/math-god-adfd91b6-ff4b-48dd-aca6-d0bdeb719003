@@ -266,3 +266,32 @@ optimizer failure is not treated as an obstruction.
 python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --workers 8
 python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --workers 8 --audit
 ```
+
+## Second-family structural cycle-Gram lane
+
+The same exact structural owner is applied next to the full 83,744-row
+theorem-eligible remainder.  The second-largest dominant family has 4,316
+orbits and 4,764 physical rows, with multiplicity partition `2^3 1^8`, bundle
+types `(3,3,5)`, support cycle rank four, and two triangles.
+
+All 4,316 rows are scanned.  As in the first lane, binary64 optimization only
+proposes the typed coefficients and cycle weight; acceptance uses bounded
+rational parameters and exact replay of the cycle projector, Gram entries, and
+path-chain cost.  The Gram formula and its PSD proof are unchanged.  Each
+accepted path summand is nonnegative and weakly decreases under `L -> L+2`, so
+the owner covers every same-parity subdivision length.  DNN one-vertex
+additivity again supplies arbitrary rooted-tree attachments.
+
+The scan owns 97 orbits, 108 physical rows, and 1,455 canonical-plus-coordinate
+targets.  The exact theorem-eligible remainder is therefore reduced from
+83,744 to 83,647 rows.  The other 4,219 rows in this family and every other
+family remain unclassified.
+
+- `experiments/rank7_order8_next_structural_cycle_gram_lane.json` stores the exact family scan and coverage ledger.
+- `experiments/rank7_order8_next_structural_cycle_gram_owners.jsonl.xz` stores the 97 rational all-length owner certificates.
+- `experiments/rank7_order8_after_next_structural_cycle_gram_remainder.jsonl.xz` stores the exact 83,647-row complement.
+
+```text
+python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --next-family --workers 8
+python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --next-family --workers 8 --audit
+```

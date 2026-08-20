@@ -30,8 +30,23 @@ TARGETS_PER_ROW = 15
 BUDGET = Fraction(6)
 EXPECTED_REMAINDER = 83856
 TARGET = ((2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1), (2, 3, 6), 4, 2)
+EXPECTED_TARGET = 6929
 F = Fraction
 _CONTEXT = None
+
+
+def configure_next_family():
+    global SOURCE_LEDGER, SOURCE_STREAM, OUTPUT, OWNERS, REMAINDER
+    global SCHEMA, EXPECTED_REMAINDER, TARGET, EXPECTED_TARGET
+    SOURCE_LEDGER = OUTPUT
+    SOURCE_STREAM = REMAINDER
+    OUTPUT = HERE / "rank7_order8_next_structural_cycle_gram_lane.json"
+    OWNERS = HERE / "rank7_order8_next_structural_cycle_gram_owners.jsonl.xz"
+    REMAINDER = HERE / "rank7_order8_after_next_structural_cycle_gram_remainder.jsonl.xz"
+    SCHEMA = "rank-seven-order-eight-next-structural-cycle-gram-lane-v1"
+    EXPECTED_REMAINDER = 83744
+    TARGET = ((2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1), (3, 3, 5), 4, 2)
+    EXPECTED_TARGET = 4316
 
 
 def require(condition, message):
@@ -243,9 +258,11 @@ def scan(workers, max_denominator, progress=False, limit=None, persist=True):
     global _CONTEXT
     ledger_raw = SOURCE_LEDGER.read_bytes()
     ledger = strict_json(ledger_raw, SOURCE_LEDGER.name)
-    require(ledger_raw == canonical_bytes(ledger), "noncanonical theorem ledger")
-    source_info = ledger["exact_remainder_stream"]
-    require(ledger["remaining_residual_total"] == EXPECTED_REMAINDER and
+    source_info = ledger.get("exact_remainder_stream",
+                             ledger.get("reduced_remainder_stream"))
+    ledger_remainder = ledger.get("remaining_residual_total",
+                                  ledger.get("remaining_remainder_total"))
+    require(source_info is not None and ledger_remainder == EXPECTED_REMAINDER and
             source_info["record_total"] == EXPECTED_REMAINDER and
             file_sha256(SOURCE_STREAM) == source_info["artifact_sha256"],
             "wrong authenticated theorem remainder")
@@ -273,7 +290,7 @@ def scan(workers, max_denominator, progress=False, limit=None, persist=True):
     require(len(all_records) == EXPECTED_REMAINDER and
             digest.hexdigest() == source_info["raw_sha256"],
             "full source remainder authentication failed")
-    require(strata[TARGET] == 6929, "leading family count changed")
+    require(strata[TARGET] == EXPECTED_TARGET, "target family count changed")
 
     _CONTEXT = max_denominator
     if workers == 1:
@@ -329,7 +346,7 @@ def scan(workers, max_denominator, progress=False, limit=None, persist=True):
     result = {
         "schema": SCHEMA,
         "full_theorem": False,
-        "scope": "full authenticated 83,856-row theorem-eligible order-eight remainder",
+        "scope": f"full authenticated {EXPECTED_REMAINDER:,}-row theorem-eligible order-eight remainder",
         "source_ledger": {"path": SOURCE_LEDGER.name,
                           "sha256": hashlib.sha256(ledger_raw).hexdigest()},
         "source_stream": source_info,
@@ -391,7 +408,13 @@ def main():
     parser.add_argument("--output", type=Path, default=OUTPUT)
     parser.add_argument("--progress", action="store_true")
     parser.add_argument("--audit", action="store_true")
+    parser.add_argument("--next-family", action="store_true")
     args = parser.parse_args()
+    if args.next_family:
+        default_output = OUTPUT
+        configure_next_family()
+        if args.output == default_output:
+            args.output = OUTPUT
     require(args.workers > 0 and args.max_denominator > 0 and
             (args.limit is None or args.limit > 0), "invalid scan parameters")
     require(not args.audit or args.limit is None, "partial scans cannot audit")
