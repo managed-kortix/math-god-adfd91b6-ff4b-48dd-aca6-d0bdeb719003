@@ -7,8 +7,8 @@
         0,
         92
       ],
-      "owned_orbit_total": 915441,
-      "scanned_orbit_total": 915800,
+      "owned_orbit_total": 985441,
+      "scanned_orbit_total": 985800,
       "status": "running"
     },
     {
@@ -40,11 +40,11 @@
         274,
         365
       ],
-      "owned_orbit_total": 1845938,
-      "scanned_orbit_total": 1846000,
-      "status": "running"
+      "owned_orbit_total": 1974489,
+      "scanned_orbit_total": 1974923,
+      "status": "completed"
     }
   ],
   "schema": "rank-seven-order-twelve-owner-scheduler-status-v1",
-  "updated_at": "2026-08-20T10:30:12.002648+00:00"
+  "updated_at": "2026-08-20T10:34:20.094523+00:00"
 }
