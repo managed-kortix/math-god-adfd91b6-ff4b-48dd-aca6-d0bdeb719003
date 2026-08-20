@@ -1,0 +1,10 @@
+{
+  "completed_at": "2026-08-18T12:21:27.712654+00:00",
+  "range": [
+    450000,
+    475000
+  ],
+  "receipt": "receipt-450000-475000.json",
+  "receipt_sha256": "1330c1823da2f0c119e6337359078b72799db745a0eb2d367451752e04de8bb2",
+  "status": "completed"
+}

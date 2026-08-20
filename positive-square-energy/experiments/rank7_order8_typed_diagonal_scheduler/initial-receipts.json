@@ -1,0 +1,166 @@
+{
+  "receipts": [
+    {
+      "range": [
+        0,
+        25000
+      ],
+      "receipt": "receipt-000000-025000.json",
+      "sha256": "27df28b5c7726198495d4cf429397fdd0a34744fe04a16a590c7cd36345263e0"
+    },
+    {
+      "range": [
+        25000,
+        50000
+      ],
+      "receipt": "receipt-025000-050000.json",
+      "sha256": "d8a9bf42149766d43d94a177987ece30f696235f3c1322e928bc9ebe11ae307d"
+    },
+    {
+      "range": [
+        50000,
+        75000
+      ],
+      "receipt": "receipt-050000-075000.json",
+      "sha256": "993a25245e754e24c8cd05bc2e539760bcbeaa73b3edb5a5aad6df898ba6b37a"
+    },
+    {
+      "range": [
+        75000,
+        100000
+      ],
+      "receipt": "receipt-075000-100000.json",
+      "sha256": "a2a1735f3b95181d64f9b51db8dccf27b743ef948ba1d07e6633b9ba75f1be83"
+    },
+    {
+      "range": [
+        100000,
+        125000
+      ],
+      "receipt": "receipt-100000-125000.json",
+      "sha256": "9bcfa6428b4be1a4f8c00e6145c1c2e5b298ea9001d0773f421201fc6252636c"
+    },
+    {
+      "range": [
+        125000,
+        150000
+      ],
+      "receipt": "receipt-125000-150000.json",
+      "sha256": "4a0ca78faa5ace03e804060258ce968ad96d476a1d85e1dc91c516b60711e0e1"
+    },
+    {
+      "range": [
+        150000,
+        175000
+      ],
+      "receipt": "receipt-150000-175000.json",
+      "sha256": "85ffc54217d734410aa498b16b7b2c5187aebddc4b07aded92ea9e697795f8b1"
+    },
+    {
+      "range": [
+        175000,
+        200000
+      ],
+      "receipt": "receipt-175000-200000.json",
+      "sha256": "6023959cc456828de82efc8e4cfad66b3de361db88a97ae2a2258a9b79601b46"
+    },
+    {
+      "range": [
+        200000,
+        225000
+      ],
+      "receipt": "receipt-200000-225000.json",
+      "sha256": "ee91250e20687418d1b19028b58b9f5f64bf671b7d4633bf6af712904e26215c"
+    },
+    {
+      "range": [
+        225000,
+        250000
+      ],
+      "receipt": "receipt-225000-250000.json",
+      "sha256": "cf7f1073472d39dbf88e314814b17b9e9fea00020f490d30d68904e29c84cd02"
+    },
+    {
+      "range": [
+        250000,
+        275000
+      ],
+      "receipt": "receipt-250000-275000.json",
+      "sha256": "4fd5aa1c0024f09458716bcbf2590608e6cda5fff4656128a51fe4130a8e5989"
+    },
+    {
+      "range": [
+        275000,
+        300000
+      ],
+      "receipt": "receipt-275000-300000.json",
+      "sha256": "0c9894658e794d4228ddfb373a761e80c8655680b1e769568bbaecfb0316805d"
+    },
+    {
+      "range": [
+        300000,
+        325000
+      ],
+      "receipt": "receipt-300000-325000.json",
+      "sha256": "985a79ceab479d113468a81677211bdf3b88f918cd0875b111cbbce7fce1f140"
+    },
+    {
+      "range": [
+        325000,
+        350000
+      ],
+      "receipt": "receipt-325000-350000.json",
+      "sha256": "182a2989e284b84e80f65ea270fbe3aa3eb08c58957bda9f1952b21183b0709f"
+    },
+    {
+      "range": [
+        350000,
+        375000
+      ],
+      "receipt": "receipt-350000-375000.json",
+      "sha256": "08ef75f57cb0eb7e85be81fd408f65ddc555dd6749b8e67e986cff944f5e4077"
+    },
+    {
+      "range": [
+        375000,
+        400000
+      ],
+      "receipt": "receipt-375000-400000.json",
+      "sha256": "a38fade5a084a881ba4d50bfd3ca6ac8d866e0945f5bd1701a3a6c89f10b9993"
+    },
+    {
+      "range": [
+        400000,
+        425000
+      ],
+      "receipt": "receipt-400000-425000.json",
+      "sha256": "e34fe7ad8a9887be0566f441b43a40e0adb56f5fd19b0017a62f3bc716883c66"
+    },
+    {
+      "range": [
+        425000,
+        450000
+      ],
+      "receipt": "receipt-425000-450000.json",
+      "sha256": "0066237905198c0c0708f721f4befe0543b792474ff19148b89bbda928c89a48"
+    },
+    {
+      "range": [
+        450000,
+        475000
+      ],
+      "receipt": "receipt-450000-475000.json",
+      "sha256": "1330c1823da2f0c119e6337359078b72799db745a0eb2d367451752e04de8bb2"
+    },
+    {
+      "range": [
+        475000,
+        492812
+      ],
+      "receipt": "receipt-475000-492812.json",
+      "sha256": "1d29bcfd494ccd69d6f3c655a313ae82cd12f64aef2940c03d0d6d737ecf713a"
+    }
+  ],
+  "recorded_at": "2026-08-18T12:31:13.216010+00:00",
+  "schema": "rank-seven-order-eight-typed-diagonal-initial-receipts-v1"
+}

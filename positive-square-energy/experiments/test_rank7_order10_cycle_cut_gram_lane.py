@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+
+import importlib.util
+import unittest
+from fractions import Fraction
+from pathlib import Path
+
+
+PATH = Path(__file__).with_name("rank7_order10_cycle_cut_gram_lane.py")
+SPEC = importlib.util.spec_from_file_location("rank7_order10_cycle_cut_tested", PATH)
+MODULE = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(MODULE)
+
+
+class CycleCutGramLaneTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        source = MODULE.load_source()
+        cls.kernel = source.kernel_dictionary()[1]
+
+    def test_fundamental_cycle_basis_has_rank_seven(self):
+        row = tuple(0 for _ in self.kernel["edges"])
+        paths = MODULE.physical_paths(self.kernel["edges"], row)
+        basis = MODULE.cycle_basis(paths)
+        self.assertEqual((len(paths), len(basis)), (16, 7))
+
+    def test_gram_and_cost_are_exact(self):
+        row = tuple(0 for _ in self.kernel["edges"])
+        gram, paths, normalizer = MODULE.embedding_gram(
+            self.kernel["edges"], self.kernel["degrees"], row,
+            Fraction(1), Fraction(1), Fraction(1))
+        self.assertTrue(all(value == 1 for value in (gram[i][i] for i in range(10))))
+        self.assertIsInstance(normalizer, Fraction)
+        self.assertIsInstance(MODULE.gram_cost(gram, paths), Fraction)
+
+    def test_small_representative_scan_is_fail_closed(self):
+        report = MODULE.scan(4)
+        self.assertEqual(report["sampling"]["tested"], 4)
+        self.assertEqual(report["result"]["owned"] + report["result"]["failed"], 4)
+
+
+if __name__ == "__main__":
+    unittest.main()

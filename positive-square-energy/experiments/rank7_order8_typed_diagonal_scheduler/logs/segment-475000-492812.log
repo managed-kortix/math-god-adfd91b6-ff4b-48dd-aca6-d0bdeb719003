@@ -1,0 +1,6 @@
+[2026-08-18T12:06:08.111676+00:00] exec: /opt/kortix/pyfloor/bin/python3 -u /workspace/positive-square-energy/experiments/rank7_order8_typed_diagonal_segmented_verifier.py verify-segment --start 475000 --stop 492812 --output /workspace/positive-square-energy/experiments/rank7_order8_typed_diagonal_receipts/receipt-475000-492812.json --workers 8 --passes 3 --max-denominator 8 --maximum 4 --progress
+segment=475000:492812 rows=5000 owners=4170
+segment=475000:492812 rows=10000 owners=8478
+segment=475000:492812 rows=15000 owners=12683
+receipt=/workspace/positive-square-energy/experiments/rank7_order8_typed_diagonal_receipts/receipt-475000-492812.json rows=17812 owners=14988 sha256=1d29bcfd494ccd69d6f3c655a313ae82cd12f64aef2940c03d0d6d737ecf713a
+[2026-08-18T12:17:50.612343+00:00] exit: 0
