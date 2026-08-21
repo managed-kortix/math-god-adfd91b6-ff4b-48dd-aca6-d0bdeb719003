@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact structural cycle-Gram lane for the leading order-eight remainder family."""
+"""Exact structural cycle-Gram lanes for dominant order-eight remainder families."""
 
 from __future__ import annotations
 
@@ -47,6 +47,20 @@ def configure_next_family():
     EXPECTED_REMAINDER = 83744
     TARGET = ((2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1), (3, 3, 5), 4, 2)
     EXPECTED_TARGET = 4316
+
+
+def configure_third_family():
+    global SOURCE_LEDGER, SOURCE_STREAM, OUTPUT, OWNERS, REMAINDER
+    global SCHEMA, EXPECTED_REMAINDER, TARGET, EXPECTED_TARGET
+    SOURCE_LEDGER = HERE / "rank7_order8_next_structural_cycle_gram_lane.json"
+    SOURCE_STREAM = HERE / "rank7_order8_after_next_structural_cycle_gram_remainder.jsonl.xz"
+    OUTPUT = HERE / "rank7_order8_third_structural_cycle_gram_lane.json"
+    OWNERS = HERE / "rank7_order8_third_structural_cycle_gram_owners.jsonl.xz"
+    REMAINDER = HERE / "rank7_order8_after_third_structural_cycle_gram_remainder.jsonl.xz"
+    SCHEMA = "rank-seven-order-eight-third-structural-cycle-gram-lane-v1"
+    EXPECTED_REMAINDER = 83647
+    TARGET = ((2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1), (2, 3, 6), 4, 1)
+    EXPECTED_TARGET = 3801
 
 
 def require(condition, message):
@@ -409,10 +423,18 @@ def main():
     parser.add_argument("--progress", action="store_true")
     parser.add_argument("--audit", action="store_true")
     parser.add_argument("--next-family", action="store_true")
+    parser.add_argument("--third-family", action="store_true")
     args = parser.parse_args()
+    require(not (args.next_family and args.third_family),
+            "choose at most one family selector")
     if args.next_family:
         default_output = OUTPUT
         configure_next_family()
+        if args.output == default_output:
+            args.output = OUTPUT
+    elif args.third_family:
+        default_output = OUTPUT
+        configure_third_family()
         if args.output == default_output:
             args.output = OUTPUT
     require(args.workers > 0 and args.max_denominator > 0 and

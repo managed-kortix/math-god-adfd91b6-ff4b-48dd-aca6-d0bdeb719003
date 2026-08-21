@@ -295,3 +295,30 @@ family remain unclassified.
 python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --next-family --workers 8
 python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --next-family --workers 8 --audit
 ```
+
+## Third-family structural cycle-Gram lane
+
+The same exact typed/cycle Gram is applied to the full 83,647-row remainder
+after the first two cycle-Gram lanes.  Its third-largest dominant family has
+3,801 orbits and 3,952 physical rows, with multiplicity partition `2^3 1^8`,
+bundle types `(2,3,6)`, support cycle rank four, and one triangle.
+
+All 3,801 rows are scanned.  Numerical optimization again only proposes the
+typed coefficients and cycle weight; every accepted certificate is rounded to
+denominator at most 256 and replayed exactly.  The Gram-square decomposition,
+nonnegative diagonal completion, same-parity all-length monotonicity, and DNN
+rooted-tree lift are unchanged.
+
+The lane owns 36 orbits, 36 physical rows, and 540 canonical-plus-coordinate
+targets.  The exact theorem-eligible remainder is reduced from 83,647 to
+83,611 rows.  The other 3,765 rows in the target family and every non-target
+family remain unclassified.
+
+- `experiments/rank7_order8_third_structural_cycle_gram_lane.json` stores the exact full-family scan and coverage ledger.
+- `experiments/rank7_order8_third_structural_cycle_gram_owners.jsonl.xz` stores the 36 rational all-length owner certificates.
+- `experiments/rank7_order8_after_third_structural_cycle_gram_remainder.jsonl.xz` stores the exact 83,611-row complement.
+
+```text
+python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --third-family --workers 8
+python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --third-family --workers 8 --audit
+```

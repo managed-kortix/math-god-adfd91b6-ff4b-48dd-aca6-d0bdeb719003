@@ -79,6 +79,31 @@ promoted signatures remain explicit: the updated remainder has 8,188,179 rows
 and 11,130,021 physical orbits.  This remains a partial exact owner lane, not a
 full remainder theorem.
 
+## Expanded metric and family scan
+
+The next pass starts from that exact remainder rather than rescanning rows
+already owned.  It uses an evenly spaced 12,000-row pilot with positions
+`floor(iN/12000)`, avoiding the leading-prefix bias of the first pilot.  For each
+row it searches 120 exact parameter choices: five cycle/cut ratios, three defect
+scales, and eight non-scalar diagonal cycle metrics.  The four added metrics are
+inverse squared length, squared leverage, resistance ratio per unit length, and
+resistance ratio per squared unit length.
+
+A candidate signature must have at least two pilot observations, at least one
+owner, and pilot precision at least `19/20`.  Five signatures pass.  Their full
+families contain 6,373 rows.  Exact replay uses, separately for each signature,
+the union of parameter rows that won on its pilot owners; this keeps the replay
+small while every final acceptance still recomputes the rational PSD Gram and
+exact cost bound.
+
+The full replay owns 3,526 new rows (4,328 physical orbits).  Pilot precision is
+only a candidate-ranking device: three promoted signatures are less uniform on
+the full family, and all 2,847 exact failures remain in the persisted remainder.
+One family is exactly uniform at 786/786 and another is 268/271.  Combining the
+new owners with the prior exact union gives 7,807 rows, 9,471 physical orbits,
+and 132,719 frontier certificates.  The exact remainder contains 8,184,653 rows
+and 11,125,693 physical orbits.
+
 ## Artifacts and reproduction
 
 - `experiments/rank7_order10_weighted_cycle_gram_lane.py` implements the exact lane.
@@ -88,6 +113,10 @@ full remainder theorem.
 - `experiments/rank7_order10_weighted_cycle_family_scan.json` records exact promoted-family coverage.
 - `experiments/rank7_order10_weighted_cycle_family_owners.jsonl.xz` stores the deduplicated 4,281-owner union.
 - `experiments/rank7_order10_after_weighted_cycle_remainder.jsonl.xz` stores the exact 8,188,179-row remainder.
+- `experiments/rank7_order10_expanded_weighted_family_scan.py` mines the larger evenly spaced pilot and exactly replays selected families.
+- `experiments/rank7_order10_expanded_weighted_family_scan.json` records the expanded grid, pilot selection, and exact replay ledger.
+- `experiments/rank7_order10_expanded_weighted_family_owners.jsonl.xz` stores the exact 7,807-owner union.
+- `experiments/rank7_order10_after_expanded_weighted_remainder.jsonl.xz` stores the exact 8,184,653-row remainder.
 
 From the repository root:
 
@@ -103,4 +132,11 @@ python3 -m unittest \
 
 python3 positive-square-energy/experiments/rank7_order10_weighted_cycle_family_scan.py \
   --workers 32 --progress
+
+python3 -m unittest \
+  positive-square-energy/experiments/test_rank7_order10_expanded_weighted_family_scan.py
+
+python3 positive-square-energy/experiments/rank7_order10_expanded_weighted_family_scan.py \
+  --pilot-size 12000 --workers 40 --minimum-tested 2 \
+  --minimum-precision 19/20 --progress
 ```
