@@ -28,7 +28,7 @@ HASHES = HERE / f"{PREFIX}-hashes.tsv"
 SCOUT = HERE / f"{PREFIX}-scout.json"
 PROVENANCE = HERE / f"{PREFIX}-provenance.tsv"
 PROVENANCE_FORMAT = f"{PREFIX}-provenance-v1"
-PROVENANCE_CANONICAL_SHA256 = "b7a42034ec5bfeb5c0a0bf7769c867bcbccb7dcf13d77cc27b78431eb1706f46"
+PROVENANCE_CANONICAL_SHA256 = "310cedd399a92a9b1755e362810c3a538eb46fbdde3510672b06b339262bb591"
 B = tuple(range(9, 16))
 C = (16, 17)
 SOURCE_PATHS = {
@@ -408,7 +408,15 @@ def check_provenance():
         "experiments/m6-b7-l6-early-c-profile-census.tsv",
         "experiments/m6-b7-l6-early-c-profile-hashes.tsv",
         "experiments/m6-b7-l6-early-c-profile-scout.json",
-        "attempts/frozen-b7-l6-early-c-profile-census.md", "experiments/README.md", "notebook.md",
+        "attempts/frozen-b7-l6-early-c-profile-census.md",
+        "attempts/frozen-b7-l6-early-c-profile-remaining-certificates.md",
+        "experiments/certify_m6_b7_l6_early_c_profile_remaining_scout_unsat.py",
+        "certificates/m6-b7-l6-early-c-profile-orbit-04.lrat.xz",
+        "certificates/m6-b7-l6-early-c-profile-orbit-05.lrat.xz",
+        "certificates/m6-b7-l6-early-c-profile-orbit-31.lrat.xz",
+        "certificates/m6-b7-l6-early-c-profile-orbit-32.lrat.xz",
+        "certificates/m6-b7-l6-early-c-profile-orbit-33.lrat.xz",
+        "experiments/README.md", "notebook.md",
     })
     if set(rows) != expected_paths:
         raise RuntimeError("provenance ledger does not equal the transitive runtime/artifact closure")
@@ -458,7 +466,8 @@ def check_exhaustion():
                 raise RuntimeError(f"regenerated orbit {ordinal:02d} differs from hash ledger")
     print(f"PASS states=30 incidences=260 parents=42 orbits=60 orbit_incidences=544 "
           f"SCOUT-UNSAT=31 SCOUT-TIMEOUT=27 SCOUT-SAT=0 eliminated=33 CERTIFIED=34,35 "
-          f"uncertified=31 manifest_sha256={hashlib.sha256(manifest).hexdigest()}")
+          f"retained_certificates=33 unresolved=27 scout_unsat_uncertified=0 "
+          f"manifest_sha256={hashlib.sha256(manifest).hexdigest()}")
 
 
 def main():
