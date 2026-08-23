@@ -2013,3 +2013,32 @@ No audits yet.
 - Result: both exact `(3,1)` intersection orbits are eliminated under this
   frozen B7-l6 base and exact ten-parent support disjunction. This is not a full
   B7-l6, m=6, or Seymour claim. No commit was made.
+
+### Authoritative frozen early C-profile census
+
+- Replaced the partial hard-state view with one exact census of every early C
+  profile over all 30 states, 260 parent/state incidences, and all 42 committed
+  `B7-l6` parents. The canonical ordering
+  `(internal,high,(cb16,cb17),(h16,h17),t)` gives exactly 60 `S7(B)` orbits and
+  544 parent/orbit incidences.
+- The producer and layer-derived checker separately reconstruct all parents and
+  compatible states and separately apply all 5,040 `S7` permutations to every
+  labelled ordered subset-pair universe. They agree on all representatives,
+  orbit sizes, parent compatibility, CNF dimensions, and hashes.
+- In the authoritative numbering, orbits 34 and 35 are exactly the existing
+  certified ordered `(3,1)` cases with `t=0,1`; their frozen certificate ledger
+  is bound as a source. Orbit 31 is `(2,2),t=0` in `h24-cr-m10-b22` and remains
+  explicitly uncertified.
+- The reproducible scout projects the frozen 30-second state scout and frozen
+  20-second hard-orbit scout onto exactly the other 58 rows. It records 31
+  UNSAT, 27 TIMEOUT, and zero SAT outcomes; all projected state UNSAT runs had
+  already finished within 20 seconds. Including cells 34/35 gives 33 eliminated
+  cells, but only those two have retained certificates. These are scout results
+  only; no additional certification, especially none for orbit 31, is claimed.
+- Exact artifacts, hashes, checker commands, and scope are recorded in
+  `attempts/frozen-b7-l6-early-c-profile-census.md`. The checker is independently
+  derived at this layer, not fully implementation-independent; it now verifies
+  all 60 CNF hashes and full `S7` closure of every parent-support disjunction.
+  Manifest statuses are exactly `CERTIFIED`, `SCOUT-UNSAT`, and
+  `SCOUT-TIMEOUT`; a self-pinned transitive provenance ledger binds the complete
+  census chain. No certificate or commit was made.

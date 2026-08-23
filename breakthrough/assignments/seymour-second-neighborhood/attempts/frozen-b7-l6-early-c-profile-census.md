@@ -1,0 +1,66 @@
+# Frozen B7-l6 early C-profile census
+
+## Scope
+
+This is the authoritative early C-profile partition of Frozen Seymour's exact
+`m=6`, `B7-l6` clean-parent frontier. It refines all 30 exact C states and all
+260 parent/state incidences over the complete set of 42 committed parents. It
+does not import witness, coordinate, gain, no-gain, or residual units.
+
+## Exact census
+
+The canonical ordering is
+`(internal-C, high-mask, (cb16,cb17), (h16,h17), intersection-t)`. For each
+state, the ordered C-to-B subsets are partitioned under the full `S7(B)` action
+by their intersection size. This gives exactly 60 orbits and 544
+parent/orbit incidences.
+
+The producer applies all 5,040 permutations to every encountered ordered row
+size. The checker is independently derived at this layer: it reconstructs the
+42 parents from lower-layer checker routines, independently derives all 30
+states, and separately exhausts every labelled ordered subset-pair universe
+under all 5,040 permutations. It is not fully implementation-independent
+because it shares the frozen base CNF generator and audited lower-layer
+parsing/checking code. The layer-level derivations agree on representatives,
+orbit sizes, parent compatibility, dimensions, manifest, and CNF stream.
+
+For every one of the 30 states, the checker also applies all 5,040 permutations
+of `B` to every guarded parent hole support and verifies that the complete
+parent-support disjunction is invariant and closed. This checks the grouped CNF
+symmetry needed to use one C-row representative, not only closure of the C-row
+subset pair itself.
+
+Under this ordering, orbits 34 and 35 have status `CERTIFIED` and are exactly
+the certified ordered `(3,1)`
+orbits with `t=0,1`. Their existing checked LRAT campaign is bound into the
+census. Orbit 31 is the `(2,2),t=0` orbit in state `h24-cr-m10-b22`; it remains
+uncertified.
+
+## Scout and status
+
+The reproducible scout covers exactly the other 58 orbits, whose manifest
+statuses are explicitly `SCOUT-UNSAT` or `SCOUT-TIMEOUT`. It projects the
+already frozen 30-second state scout for states proved UNSAT there, and the
+already frozen 20-second hard-orbit scout for unresolved state children. This
+is a deterministic provenance projection, not a new solver run. It reports 31
+UNSAT, 27 TIMEOUT, and zero SAT rows. The 18 projected state UNSAT outcomes all
+finished in under 20 seconds; the other 40 rows use the exact frozen 20-second
+hard-orbit sequence. Together with the two existing certified cells, this is 33
+eliminated cells, of which only two have retained certificates. Scout UNSAT is
+timing evidence only and is not promoted to certification by this census.
+
+The census therefore records exactly two certified orbits, 34 and 35. No
+certificate is claimed or generated for orbit 31. This remains a profile-level
+partition, not a complete `B7-l6`, `m=6`, or Seymour result.
+
+The existing certificate CNFs and census CNFs for orbits 34 and 35 are
+serialization-equivalent in the proof-relevant sense: they have the identical
+numbered variable map and identical ordered DIMACS clause stream. Their comment
+metadata intentionally differs, so their whole-file SHA-256 identities do not.
+
+Exhaustion independently regenerates and compares every one of the 60 complete
+CNF file hashes. A strict self-pinned provenance ledger binds the producer,
+layer checker, regression test, scout, census, hash ledger, documentation, and
+the full transitive local Python runtime-source closure. This is a census and
+integrity gate only; it creates no certificate and makes no additional
+certification claim.

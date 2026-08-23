@@ -499,6 +499,37 @@ are `m6-b7-l6-hard-orbit-certificates.tsv` and
 `verify_m6_b7_l6_hard_orbit_certificates.py`. The other 28 leaves remain
 uncertified TIMEOUT frontier; no SAT or UNSAT claim is made for them.
 
+The authoritative early C-profile census extends the same simultaneous
+`S7(B)` intersection partition to all 30 compatible states, not only the 19
+hard states. Its checker is independently derived at this layer, rather than
+fully implementation-independent: it reuses the frozen base generator and
+lower-layer checker code. It exhausts all 42 clean `B7-l6` parents, 260
+parent/state incidences, all 5,040 permutations for every ordered subset-pair
+universe, and the full `S7` closure of every state's guarded parent-support
+disjunction, obtaining exactly 60 orbits and 544 parent/orbit incidences:
+
+```sh
+python3 m6_b7_l6_early_c_profile_census.py \
+  --manifest-output m6-b7-l6-early-c-profile-census.tsv \
+  --hash-output m6-b7-l6-early-c-profile-hashes.tsv --populate-hashes
+python3 check_m6_b7_l6_early_c_profile_census.py --exhaustion
+python3 m6_b7_l6_early_c_profile_scout.py \
+  --check m6-b7-l6-early-c-profile-scout.json
+python3 test_m6_b7_l6_early_c_profile_census.py
+```
+
+Authoritative orbits 34 and 35 have status `CERTIFIED` and map exactly to the
+retained certified `(3,1)`, `t=0,1` campaign. Their numbered variable maps and
+ordered DIMACS clause streams equal the certificate CNFs; comment metadata and
+whole-file hashes intentionally differ. The other 58 rows have explicit status
+`SCOUT-UNSAT` (31) or `SCOUT-TIMEOUT` (27), with zero SAT. Only 34 and 35 are
+certified; scout rows have no generated certificate and are not promoted to
+proof claims. Exhaustion regenerates and compares all 60 CNF hashes, and a
+self-pinned provenance ledger binds every artifact, document, entry-point
+source, and transitive local runtime source. Orbit 31 remains explicitly
+uncertified. The exact scope and interpretation are recorded in
+`../attempts/frozen-b7-l6-early-c-profile-census.md`.
+
 Those 28 frozen TIMEOUTs (252 parent/orbit incidences) are further split by
 simultaneous robust witnesses for every high C vertex. For deleted `c`, the
 eligible witnesses are exactly `B \\ N+(c)` and the other C vertex when its
