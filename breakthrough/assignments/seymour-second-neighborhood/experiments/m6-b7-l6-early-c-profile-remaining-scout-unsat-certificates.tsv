@@ -1,0 +1,68 @@
+m6-b7-l6-early-c-profile-remaining-scout-unsat-certificates-v1
+generated-utc	2026-08-23
+scope	frozen-B7-l6-early-C-profile-remaining-five-SCOUT-UNSAT-orbits-only
+base-commit	3e176b4675a4d4676cae9eeab8399a74ef19f265
+scope-orbits	04,05,31,32,33
+census-orbits	60
+census-scout-unsat	31
+certified-orbits	5
+prior-certified-orbits	26
+total-scout-unsat-certified-orbits	31
+prior-certificate-ledger-bytes	11954
+prior-certificate-ledger-sha256	c37dd197fe1a95aa27cde09b1fd16975c7c6b78eeb5aca9091fcb2efe44acd8b
+census-manifest-bytes	10271
+census-manifest-sha256	985a558c3b831994ed2febbb3e4569cf7df4869919f897c3ab6e0e96dbdce5f9
+census-hash-ledger-bytes	6018
+census-hash-ledger-sha256	55e4f57f988d7bf005f3921e45fe4c9c5bad322599e5be6e0c9acafcbd6813a3
+census-scout-bytes	19197
+census-scout-sha256	e01d43461fb064545ec8db9abb7a4bdda4820fe17d9e7d7cbcae4d33d44a06d8
+census-provenance-bytes	3403
+census-provenance-sha256	60c3775569ca764cb66c2666b1ea6fa868ee294519605f6e646da59e77ac4bfc
+certificate-producer-bytes	5534
+certificate-producer-sha256	263eb1ef994b92cc83fa799b2a6649d6b40ebb2b24845ea2b020b9253a0a911f
+certificate-documentation-bytes	1558
+certificate-documentation-sha256	977098e064c86c845f37d4ba37845f8b68bf2be22ecd5b07a5203443d3fb0eb3
+runtime-check-m6-b7-l6-early-c-profile-census-bytes	25272
+runtime-check-m6-b7-l6-early-c-profile-census-sha256	4a411b7ad461ddb94adecba5e1c9b0a0e68c814a61ca20f092a8178a0772684d
+runtime-check-m6-clean-sink-group-cnf-bytes	14918
+runtime-check-m6-clean-sink-group-cnf-sha256	07d2ac0802c8d9fc854e8c5e10ef0e1a67f54dda2c06c1a71bf69465390ee536
+runtime-check-m6-clean-sink-manifest-bytes	8864
+runtime-check-m6-clean-sink-manifest-sha256	8fb7164f71f3e6ba6c616a0709481b839e7c135ba0c7c45dd4c84f2cde42bbb0
+runtime-check-m6-parent-cnf-bytes	12776
+runtime-check-m6-parent-cnf-sha256	26af1932432445b0ce70e82634a9db651471e92b1528ac28de8564f3ab548b96
+runtime-m6-b7-l6-early-c-profile-census-bytes	15144
+runtime-m6-b7-l6-early-c-profile-census-sha256	a8e77596ec10c26b3b0f93204d8f3c2b2efa5f83c4d8a1a33ca0fd4af667100d
+runtime-m6-b7-l6-state-split-bytes	15948
+runtime-m6-b7-l6-state-split-sha256	544de152f692fc9f2b781f81de320e1d35a24a38d3225147212aa5d9609d2d1f
+runtime-m6-clean-sink-group-cnf-bytes	11550
+runtime-m6-clean-sink-group-cnf-sha256	9eb6455daf71a2127f76a197012c2e0f4a7c7f42021ddfcfbe244f9f733ed817
+runtime-m6-clean-sink-manifest-bytes	8200
+runtime-m6-clean-sink-manifest-sha256	5d5b5545ff31eb719ce2f4eb8ad27bb0a9ccd6546bd35ad1fe6ace871ad8232f
+runtime-m6-parent-cnf-bytes	10958
+runtime-m6-parent-cnf-sha256	0b6c69aca85a627a676ae604b9a3c417e69a9d9cf359de05d7a56a11199f3147
+runtime-m6-residual-group-cnf-bytes	16054
+runtime-m6-residual-group-cnf-sha256	f15a8fe30e51b7d61d273901c0b5f140151bb1a58ec910ad0c21c84e96c535a3
+runtime-snc-cnf-bytes	7969
+runtime-snc-cnf-sha256	adab04953d3697ec004e28ad145dda5b0f04d07ee8dd20d95655f6e32877d68e
+verifier-canonical-sha256	a494e6be3fedc1f26b8045ebd73afe209cd6de54e6d5e36a89613a548159981f
+solver	CaDiCaL 1.7.3
+solver-binary-sha256	108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292
+solver-command	cadical --lrat --no-binary -q CNF LRAT
+solver-required-exit	20
+checker	lrat-check
+checker-binary-sha256	e9e71c96b68dc9ed22db35d7581e613e6b161ffbc82c20cba5699f8320a065b8
+checker-required-output	c VERIFIED
+compression	xz -3
+compressor-binary	/usr/bin/xz
+compressor-binary-sha256	b5b163eb273291934556377ab883b4b2a5d4da50bd0dc0a91774ecc234ccd8d0
+compressed-limit-bytes	250000000
+prior-xz-bytes	13906564
+new-lrat-bytes	382731330
+new-xz-bytes	76286284
+combined-xz-bytes	90192848
+columns	orbit,key,parents,variables,clauses,cnf-bytes,cnf-sha256,lrat-bytes,lrat-sha256,xz-bytes,xz-sha256,solve-nanoseconds,check-nanoseconds,artifact
+04	o04	10	23626	144277	10402036	65caaa2d5a36fe6b70ae2ce36477cffe5db9ced5aaf5ea4504f1f6a54bd72153	72102454	c49899c9f99f5f1187add2b19749997d61e091c3db797007127934f289b7d59c	14011152	9df3e70c34d15aa5cc3c17d712b818f81f2309124ca6f668cd9692c08a51d26e	10675894442	1558532105	certificates/m6-b7-l6-early-c-profile-orbit-04.lrat.xz
+05	o05	10	23626	144277	10402035	09f2c34c1795586097dc4768beb2e8df79820fa6882e8036b3b83c07b1831b55	46019874	f470b5b753f6a1377b1adbf1aa6c750dd91f48561d506331527c981ac791f6aa	8977268	b2e70022f5dafe66762a4e5677d21c5364c5426173b655d09fe36da1f0ea4166	6049123468	1115898259	certificates/m6-b7-l6-early-c-profile-orbit-05.lrat.xz
+31	o31	10	23626	144277	10402037	61856f7f6256b7b7b3205aea6fe9fb0cc9f0fc732aef602ceca5b8ca152934ca	99615917	bfa989add6bffdd51bc548129760983464f88dd2f773b32662b39e4d75eb13bb	19764600	ca2705166be7782a7f0a62b30585030915a58ff46ffd1c33ad373fa01179bcd3	18993339283	2084410522	certificates/m6-b7-l6-early-c-profile-orbit-31.lrat.xz
+32	o32	10	23626	144277	10402036	8dcb0581ea6cd19b3f12623c5baa36d25215f0e72d6e941757b530156b8c7948	113809731	fd8e9071d8a68de5744976d9a86ce18562a7df82322f046a0c15906bf05f2863	23607652	898c1761f71dd21852ebcf4e57fec065de31a2169fea6b661daf47d8249abe7e	20333873638	2362089818	certificates/m6-b7-l6-early-c-profile-orbit-32.lrat.xz
+33	o33	10	23626	144277	10402035	5c64f11016a457f46feaf225b912123e707153251eb4c3e989efe2c6ba9d1a55	51183354	fd3d044339cbb3f3ed30dd11184579eb3ccbe8e5dd575886975a65debb5bdeba	9925612	6ac311815d02f86db47b4f5ce655ddaf217c1b435775642b29f040347ae1faf8	6738513560	1173831791	certificates/m6-b7-l6-early-c-profile-orbit-33.lrat.xz

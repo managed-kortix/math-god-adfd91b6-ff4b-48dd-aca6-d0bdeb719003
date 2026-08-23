@@ -46,12 +46,17 @@ is a deterministic provenance projection, not a new solver run. It reports 31
 UNSAT, 27 TIMEOUT, and zero SAT rows. The 18 projected state UNSAT outcomes all
 finished in under 20 seconds; the other 40 rows use the exact frozen 20-second
 hard-orbit sequence. Together with the two existing certified cells, this is 33
-eliminated cells, of which only two have retained certificates. Scout UNSAT is
-timing evidence only and is not promoted to certification by this census.
+eliminated cells, of which only two had retained certificates at census commit
+`3e176b4675a4d4676cae9eeab8399a74ef19f265`. A later campaign promotes exactly
+the 26 fast cells
+`00,01,02,06,07,08,09,10,18,19,20,21,22,24,26,27,29,30,44,45,46,48,50,51,52,53`.
+The second package certifies the other scout-UNSAT cells `04,05,31,32,33`.
 
-The census therefore records exactly two certified orbits, 34 and 35. No
-certificate is claimed or generated for orbit 31. This remains a profile-level
-partition, not a complete `B7-l6`, `m=6`, or Seymour result.
+The census itself records exactly two certified orbits, 34 and 35. With both
+later packages, exactly 33 of the 60 profile cells have retained certificates:
+those two plus all 31 scout-UNSAT cells. The unresolved set is exactly the 27
+scout-TIMEOUT cells, and no scout-UNSAT cell remains uncertified. This remains a
+profile-level partition, not a complete `B7-l6`, `m=6`, or Seymour result.
 
 The existing certificate CNFs and census CNFs for orbits 34 and 35 are
 serialization-equivalent in the proof-relevant sense: they have the identical
@@ -64,3 +69,18 @@ layer checker, regression test, scout, census, hash ledger, documentation, and
 the full transitive local Python runtime-source closure. This is a census and
 integrity gate only; it creates no certificate and makes no additional
 certification claim.
+
+## Selected scout-UNSAT certificates
+
+Pinned CaDiCaL 1.7.3 generated textual LRAT for exactly the listed 26 cells,
+and pinned `lrat-check` accepted every proof. The retained `xz -3` artifacts
+total 13,906,564 bytes, below the 250,000,000-byte cap. The strict canonical
+certificate ledger and verifier bind each CNF, raw LRAT, compressed artifact,
+the committed census provenance chain, the complete transitive local Python
+runtime closure, documentation, and pinned producer/checker binaries. Fresh
+replay regenerates and structurally checks each CNF, authenticates and
+decompresses each artifact, checks the raw LRAT identity, and invokes the
+pinned checker. No orbit outside the exact 26-cell scope is certified by this
+campaign. The separate five-cell package covers `04,05,31,32,33`; together the
+packages cover all 31 scout-UNSAT cells. Their combined compressed size is
+90,192,848 bytes.

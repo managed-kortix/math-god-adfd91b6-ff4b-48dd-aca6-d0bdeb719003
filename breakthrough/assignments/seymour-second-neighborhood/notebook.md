@@ -2042,3 +2042,26 @@ No audits yet.
   Manifest statuses are exactly `CERTIFIED`, `SCOUT-UNSAT`, and
   `SCOUT-TIMEOUT`; a self-pinned transitive provenance ledger binds the complete
   census chain. No certificate or commit was made.
+
+### Fast early C-profile LRAT certification
+
+- Certified exactly the 26 fast `SCOUT-UNSAT` profile cells
+  `00,01,02,06,07,08,09,10,18,19,20,21,22,24,26,27,29,30,44,45,46,48,50,51,52,53`
+  from the committed 60-orbit census at `3e176b4675a4d4676cae9eeab8399a74ef19f265`.
+- Pinned CaDiCaL 1.7.3 emitted textual LRAT and pinned `lrat-check` accepted all
+  26. Their `xz -3` artifacts total 13,906,564 bytes, below the 250,000,000-byte
+  cap. This first package does not cover the five other census `SCOUT-UNSAT`
+  cells `04,05,31,32,33`.
+- A second package certifies the five other census `SCOUT-UNSAT` cells
+  `04,05,31,32,33`; thus no scout-UNSAT cell remains uncertified. Both package
+  producers authenticate exact `/usr/bin/xz`, and replay uses an explicit
+  canonical path to the SHA-256-pinned checker.
+- The canonical ledger/verifier bind the exact census provenance, full
+  transitive local runtime closure, tools, CNFs, raw LRATs, compressed
+  artifacts, and documentation. A fresh replay regenerated and structurally
+  checked every CNF, decompressed and authenticated every LRAT, and obtained
+  `c VERIFIED` for all 26 in the first package and all five in the second.
+  Together with census cells 34/35, exactly 33 of the 60 early profile cells now
+  have retained certificates; the unresolved set is exactly the 27
+  scout-TIMEOUT cells. This is not a broader
+  `B7-l6`, `m=6`, or Seymour claim. No commit was made.

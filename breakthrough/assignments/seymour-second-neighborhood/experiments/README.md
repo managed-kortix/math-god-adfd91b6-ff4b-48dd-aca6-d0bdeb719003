@@ -617,6 +617,34 @@ python3 verify_m6_b7_l6_hard_witness_no_gain_certificates.py \
 The other 42 scout-TIMEOUT no-gain leaves remain uncertified. No broader UNSAT
 claim is made.
 
+The committed 60-orbit early C-profile census has a first narrow certificate
+package for exactly cells
+`00,01,02,06,07,08,09,10,18,19,20,21,22,24,26,27,29,30,44,45,46,48,50,51,52,53`.
+Pinned CaDiCaL 1.7.3 produced textual LRAT and pinned `lrat-check` accepted all
+26. Their `xz -3` artifacts total 13,906,564 bytes under the 250,000,000-byte
+cap. Fresh replay is:
+
+```sh
+python3 verify_m6_b7_l6_early_c_profile_scout_unsat_certificates.py \
+  --checker /path/to/pinned/lrat-check
+```
+
+The canonical ledger/verifier bind the census provenance, exact scope, complete
+transitive local Python runtime closure, tools, CNFs, raw LRATs, compressed
+artifacts, and documentation. A second package certifies the remaining census
+`SCOUT-UNSAT` cells `04,05,31,32,33`; replay it with the same explicit pinned
+checker path:
+
+```sh
+python3 verify_m6_b7_l6_early_c_profile_remaining_scout_unsat_certificates.py \
+  --checker /absolute/path/to/pinned/lrat-check
+```
+
+Both producers authenticate and invoke exactly `/usr/bin/xz` for compression.
+Together with existing certified cells 34/35, the status is 33/60 certified and
+27 unresolved scout-TIMEOUT cells; no scout-UNSAT cell remains uncertified. No
+broader claim is made.
+
 The complementary layer now adds exactly one compact positive-gain child to
 each of the same 117 committed witness leaves. If `X` is the exact set of 16
 or 32 path variables `p_w_k_c` for the selected ordered robust witness arcs,
