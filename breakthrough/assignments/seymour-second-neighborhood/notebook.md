@@ -2043,6 +2043,31 @@ No audits yet.
   `SCOUT-TIMEOUT`; a self-pinned transitive provenance ledger binds the complete
   census chain. No certificate or commit was made.
 
+### Frozen early C inaccessible-pair cover
+
+- Restricted to unresolved one-high profile cells `03,11,23,25,28,47,49,54`,
+  every model's unique low C vertex has exactly nine nonoutneighbors and at
+  least two are not exact second neighbors. Canonical inaccessible-pair orbits
+  therefore give an exhaustive 192-child cover with 746 compatible
+  parent-pair memberships.
+- The cover is existential and overlapping, not a partition: a model with more
+  than two inaccessible nonoutneighbors may occur in several pair children.
+  Each child retains only compatible parent selectors and adds exactly the two
+  negative `q` endpoint units.
+- Independence is layer-local. The checker separately enumerates all 5,040 B
+  permutations, parent supports, pair orbits, selector restrictions, and CNF
+  streams, while intentionally reusing the frozen B7 generator and checked
+  early-profile census rather than rederiving the complete ancestry.
+- Audit hardening pins the scout's whole 47,594-byte identity
+  `1c324d6ce3b73ebdb9abdc8bafcaed1a3373541b208c7ef22002d1556bd3a480`,
+  solver path/bytes/hash/version, exact 192-status sequence and sequence hash
+  `07e6e6e189544bede5004996a7bcb70db3ad4ed99bd20de5b1632e86388d2434`,
+  and complete ledger support/variable/clause dimensions. Hostile tests cover
+  `-q` polarity and endpoint, selector restriction, ledger dimensions,
+  equal-total status swaps, and solver provenance mutations.
+- The scout remains observational: 172 UNSAT, 20 TIMEOUT, zero SAT. No proof
+  artifact, certificate, broad Frozen Seymour conclusion, or commit is made.
+
 ### Fast early C-profile LRAT certification
 
 - Certified exactly the 26 fast `SCOUT-UNSAT` profile cells

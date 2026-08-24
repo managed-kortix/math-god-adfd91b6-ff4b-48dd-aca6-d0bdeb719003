@@ -859,3 +859,18 @@ certificate for the complete surviving positive-gain `o37-w01-c16` residual,
 this excludes the entire frozen `s28-t0` state. The statement is deliberately
 restricted to this frozen B7 hard-orbit/state refinement: it is not a claim
 about any other grouped leaf, B7 state, branch, or Seymour's conjecture.
+
+The eight one-high early C profiles `03,11,23,25,28,47,49,54` have a separate
+exact low-C inaccessible-pair cover. It carries parent compatibility through
+the profile-stabilizer quotient and adds two exact-distance `-q` units plus
+negative units for incompatible parent selectors. The result is 192 children
+and 746 memberships; the pinned one-second scout returns 172 UNSAT and 20
+TIMEOUT, with no SAT and no retained certificate. This is an overlapping
+existential cover, not a partition: a model may satisfy several pair children.
+Checker independence is local to this layer; it separately derives the pair
+orbits, support compatibility, and child clauses while reusing the frozen base
+and checked profile-census interfaces. Run
+`test_m6_b7_l6_early_c_inaccessible_pair_orbits.py` and
+`check_m6_b7_l6_early_c_inaccessible_pair_orbits.py --exhaustion`. Full proof,
+reproduction commands, hashes, and scope are in
+`../attempts/frozen-b7-l6-early-c-inaccessible-pair-cover.md`.
