@@ -3,8 +3,10 @@
 ## Scope
 
 This layer covers only the eight unresolved one-high early C profiles
-`03,11,23,25,28,47,49,54`. It creates no certificate and makes no claim about
-the other early profiles or the full Frozen Seymour instance.
+`03,11,23,25,28,47,49,54`. The certification package closes exactly the 172
+children marked UNSAT by the committed scout; it makes no claim about the 20
+scout-TIMEOUT children, other early profiles, or the full Frozen Seymour
+instance.
 
 ## Exact-distance lemma
 
@@ -54,8 +56,10 @@ entire Frozen Seymour ancestry.
 
 The result is exactly 192 children and 746 compatible parent-pair memberships.
 A pinned CaDiCaL 1.7.3 one-second scout reports 172 UNSAT and 20 TIMEOUT, with
-zero SAT. Scout UNSAT is observational only: no proof artifact is retained and
-no row is promoted to a certified claim.
+zero SAT. Exactly the ordered 172 scout-UNSAT rows now have retained textual
+LRAT proofs from pinned CaDiCaL 1.7.3, independently accepted by pinned
+`lrat-check`. The 172 `xz -3` artifacts total 81,964,720 bytes, strictly below
+the 250,000,000-byte cap; their raw LRAT streams total 1,226,909,466 bytes.
 
 ## Reproduction and identities
 
@@ -68,6 +72,9 @@ python3 m6_b7_l6_early_c_inaccessible_pair_scout.py \
   --solver /path/to/pinned/cadical --seconds 1 \
   --output m6-b7-l6-early-c-inaccessible-pair-scout-1s.json
 python3 check_m6_b7_l6_early_c_inaccessible_pair_orbits.py --exhaustion
+python3 test_m6_b7_l6_early_c_inaccessible_pair_scout_unsat_certificates.py
+python3 verify_m6_b7_l6_early_c_inaccessible_pair_scout_unsat_certificates.py \
+  --checker /path/to/pinned/lrat-check
 ```
 
 The 8,714-byte manifest has SHA-256
@@ -81,3 +88,18 @@ Its exact 192-entry status sequence has SHA-256
 Its pinned solver is the 1,002,216-byte binary with SHA-256
 `108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292`,
 at path `/tmp/opencode/cadical-1.7.3/build/cadical`, version `1.7.3`.
+
+The 61,761-byte canonical certificate ledger has SHA-256
+`85a74a1a11f5abc169fc91a9ea61ea9068258a2bb0435d097709ec80c825e42e`.
+Its self-pin-normalized hash is
+`4f2b65a51f1b46d25d54af5af43e382e069b2c529fd96b7987b035dabfb90253`;
+the verifier's reciprocal canonical hash is
+`a061e3b9b15e01c47dbbb78f20848a469c9238e06f3152d6fe98bcf2a8d2003d`.
+The strict ledger/verifier pair binds the exact 192-status sequence, frozen
+cover manifest/hash ledger/scout, ordered 172-row scope, all transitive local
+runtime sources, pinned producer/checker/compressor identities, regenerated
+CNFs, raw LRAT identities, compressed artifacts, timings, and exact safe
+artifact paths. Hostile mutations of count, status sequence, scope order,
+artifact path/hash, size cap, duplicate rows, and verifier bytes are rejected.
+A fresh replay regenerated and structurally checked every CNF, decompressed and
+authenticated every LRAT, and obtained `c VERIFIED` on all 172 proofs.

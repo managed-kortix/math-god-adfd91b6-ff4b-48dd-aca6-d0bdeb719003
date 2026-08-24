@@ -865,12 +865,21 @@ exact low-C inaccessible-pair cover. It carries parent compatibility through
 the profile-stabilizer quotient and adds two exact-distance `-q` units plus
 negative units for incompatible parent selectors. The result is 192 children
 and 746 memberships; the pinned one-second scout returns 172 UNSAT and 20
-TIMEOUT, with no SAT and no retained certificate. This is an overlapping
+TIMEOUT, with no SAT. Exactly those 172 scout-UNSAT children now have pinned
+CaDiCaL 1.7.3 textual LRATs independently accepted by pinned `lrat-check`.
+Their 172 `xz -3` artifacts total 81,964,720 bytes (raw LRAT 1,226,909,466
+bytes), strictly below the 250,000,000-byte cap. This is an overlapping
 existential cover, not a partition: a model may satisfy several pair children.
 Checker independence is local to this layer; it separately derives the pair
 orbits, support compatibility, and child clauses while reusing the frozen base
 and checked profile-census interfaces. Run
 `test_m6_b7_l6_early_c_inaccessible_pair_orbits.py` and
-`check_m6_b7_l6_early_c_inaccessible_pair_orbits.py --exhaustion`. Full proof,
-reproduction commands, hashes, and scope are in
+`check_m6_b7_l6_early_c_inaccessible_pair_orbits.py --exhaustion`. Certificate
+hostile tests and fresh replay are
+`test_m6_b7_l6_early_c_inaccessible_pair_scout_unsat_certificates.py` and
+`verify_m6_b7_l6_early_c_inaccessible_pair_scout_unsat_certificates.py
+--checker /path/to/pinned/lrat-check`. The reciprocal canonical ledger/verifier
+bind the exact scout status sequence, ordered scope, full transitive runtime,
+tools, CNFs, proofs, compressed artifacts, and timings. Full proof,
+reproduction commands, bytes, hashes, and narrow scope are in
 `../attempts/frozen-b7-l6-early-c-inaccessible-pair-cover.md`.

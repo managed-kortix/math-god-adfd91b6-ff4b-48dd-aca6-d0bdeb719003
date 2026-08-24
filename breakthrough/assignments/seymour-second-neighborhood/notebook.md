@@ -2065,8 +2065,21 @@ No audits yet.
   and complete ledger support/variable/clause dimensions. Hostile tests cover
   `-q` polarity and endpoint, selector restriction, ledger dimensions,
   equal-total status swaps, and solver provenance mutations.
-- The scout remains observational: 172 UNSAT, 20 TIMEOUT, zero SAT. No proof
-  artifact, certificate, broad Frozen Seymour conclusion, or commit is made.
+- Certified exactly the ordered 172 scout-UNSAT children from committed cover
+  `f47a032`; the 20 scout-TIMEOUT children remain open. Pinned CaDiCaL 1.7.3
+  emitted textual LRAT and pinned `lrat-check` accepted all 172.
+- The 172 `xz -3` artifacts total 81,964,720 bytes, strictly below the
+  250,000,000-byte cap; the raw LRAT streams total 1,226,909,466 bytes. The
+  package represents 645 compatible parent incidences.
+- A reciprocal canonical ledger/verifier binds the exact 192-status sequence,
+  ordered 172-child scope, frozen cover inputs, 13-file transitive local runtime
+  closure, tool identities, CNFs, raw LRATs, compressed artifacts, timings, and
+  safe artifact paths. Hostile count/status/order/path/hash/cap/duplicate/self
+  mutations are rejected.
+- Fresh replay regenerated and structurally checked all 172 CNFs, authenticated
+  every compressed and raw proof, and obtained `c VERIFIED` 172 times. This is
+  not a claim about the 20 TIMEOUT children, another cover, B7 generally, or
+  Seymour's conjecture. No commit was made.
 
 ### Fast early C-profile LRAT certification
 
