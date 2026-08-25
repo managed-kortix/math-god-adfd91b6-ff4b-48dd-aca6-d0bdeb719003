@@ -103,3 +103,46 @@ artifact paths. Hostile mutations of count, status sequence, scope order,
 artifact path/hash, size cap, duplicate rows, and verifier bytes are rejected.
 A fresh replay regenerated and structurally checked every CNF, decompressed and
 authenticated every LRAT, and obtained `c VERIFIED` on all 172 proofs.
+
+## Certificate-relative residual
+
+Subtracting the committed 172 certified pair orbits from the original
+192-orbit cover leaves exactly the 20 former scout-TIMEOUT orbits. These cells
+have 101 cell-parent memberships but occupy 55 distinct compatible
+profile-parent graphs. The checker traverses all 72 profile parents, including
+the 17 whose residual graph is empty. For a fixed parent let `J` be its
+inaccessible nonoutneighbors. Survival after subtraction means every pair in
+`J` is uncertified. The independently reconstructed residual pair graph is
+triangle-free on all 72 profile parents. Since the badness lemma gives
+`|J| >= 2`, while `|J| >= 3` would put all three edges of a triangle in the
+residual graph, every surviving model has exactly `|J| = 2`.
+
+Thus each residual pair is a disjoint exact-pair cell. Its CNF preserves the
+original compatible selector set and the two negative `q` units. For each
+compatible parent selector it additionally guards seven positive `q` literals,
+one for every other low-C nonoutneighbor. This is selector-relative because
+the nine-element nonoutneighbor set can vary between compatible parents.
+
+The producer, independent checker, canonical manifest/hash ledger, hostile
+tests, and pinned ten-second scout are:
+
+```sh
+python3 m6_b7_l6_early_c_certificate_residual_exact_pairs.py \
+  --manifest-output m6-b7-l6-early-c-certificate-residual-exact-pair-orbits.tsv \
+  --hash-output m6-b7-l6-early-c-certificate-residual-exact-pair-hashes.tsv \
+  --populate-hashes
+python3 check_m6_b7_l6_early_c_certificate_residual_exact_pairs.py --exhaustion
+python3 test_m6_b7_l6_early_c_certificate_residual_exact_pairs.py
+python3 m6_b7_l6_early_c_certificate_residual_exact_pair_scout.py \
+  --solver /tmp/opencode/cadical-1.7.3/build/cadical --seconds 10 \
+  --output m6-b7-l6-early-c-certificate-residual-exact-pair-scout-10s.json
+```
+
+The 1,666-byte manifest has SHA-256
+`ca7dd34a8382f5c5ff7d250c38daa1914f8cec6bde9efeb4945d9c8a1ef1b5d4`.
+The 2,361-byte complete CNF hash ledger has SHA-256
+`0c719c2798c78c00c03c013396fa2d359d16abeacb9e9adc397527bead453455`.
+The 6,090-byte pinned ten-second scout has SHA-256
+`f0013bdcd704fc34450be9c3ffcdf2c94038786e2d6de6e7018dcb02ef3c001e`;
+all 20 cells TIMEOUT, and its exact status-sequence hash is
+`558cf81bde85f8ec4400eac223eb1747b742ae83610083017868b24d7136ddb6`.

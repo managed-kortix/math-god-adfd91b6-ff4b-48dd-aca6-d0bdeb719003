@@ -883,3 +883,14 @@ bind the exact scout status sequence, ordered scope, full transitive runtime,
 tools, CNFs, proofs, compressed artifacts, and timings. Full proof,
 reproduction commands, bytes, hashes, and narrow scope are in
 `../attempts/frozen-b7-l6-early-c-inaccessible-pair-cover.md`.
+
+`m6_b7_l6_early_c_certificate_residual_exact_pairs.py` subtracts the committed
+172 certified inaccessible-pair orbits and turns the surviving 20 orbits into
+disjoint exact-pair cells. There are exactly 101 cell-parent memberships across
+55 distinct compatible profile-parent graphs. Each compatible selector gets
+seven guarded positive `q` clauses for the other low-C nonoutneighbors. The
+independent checker reconstructs the certificate scope, traverses all 72
+profile parents, proves every residual profile-parent graph triangle-free, and
+verifies that the original pair profile minus the certified union is exactly
+the disjoint exact-pair cover. See the same attempt note for commands and
+identities.
