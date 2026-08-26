@@ -2081,6 +2081,30 @@ No audits yet.
   not a claim about the 20 TIMEOUT children, another cover, B7 generally, or
   Seymour's conjecture. No commit was made.
 
+### Frozen exact-pair singleton certificates
+
+- On exact committed campaign base
+  `6068e283fc21fadc73c1317db1b5625886904cad`, retained proofs for exactly the
+  ordered 68 memberships marked UNSAT by the frozen five-second singleton
+  scout. Its complete 101-membership status totals remain SAT 0, UNSAT 68, and
+  TIMEOUT 33; none of the 33 TIMEOUT memberships is claimed.
+- Pinned CaDiCaL 1.7.3 produced textual LRAT with `--lrat --no-binary`, and
+  pinned `lrat-check` accepted all 68 with `c VERIFIED`. Regenerated scoped CNFs
+  total 707,414,473 bytes; raw LRATs total 484,924,019 bytes; retained `xz -3`
+  artifacts total 32,389,520 bytes, strictly below the exclusive
+  250,000,000-byte cap.
+- The canonical ledger/verifier mutually pin one another and freeze the ordered
+  scout scope, complete row identities and artifact set, local transitive Python
+  runtime closure, grouped and singleton manifests/hash ledgers, and the
+  inaccessible-pair ancestor ledger/verifier plus every ancestor compressed
+  proof used as reconstruction ancestry.
+- Hostile tests reject scope/order, reciprocal-pin, artifact path/set/hash,
+  transitive-runtime, duplicate-row, equal-total status-swap, and exclusive-cap
+  mutations. Fresh replay regenerated and structurally checked all 68 CNFs,
+  authenticated compressed and raw identities, and reran the pinned checker 68
+  times. The scope is only these exact frozen memberships, not the 33 TIMEOUTs,
+  another B7 campaign, or Seymour's conjecture. No commit was made.
+
 ### Fast early C-profile LRAT certification
 
 - Certified exactly the 26 fast `SCOUT-UNSAT` profile cells

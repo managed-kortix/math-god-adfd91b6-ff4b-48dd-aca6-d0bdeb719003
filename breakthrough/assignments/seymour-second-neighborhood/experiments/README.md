@@ -894,3 +894,26 @@ profile parents, proves every residual profile-parent graph triangle-free, and
 verifies that the original pair profile minus the certified union is exactly
 the disjoint exact-pair cover. See the same attempt note for commands and
 identities.
+
+On exact committed base `6068e283fc21fadc73c1317db1b5625886904cad`, the
+101 exact-pair cell-parent singleton CNFs have frozen scout totals SAT 0, UNSAT
+68, and TIMEOUT 33. Exactly the ordered 68 scout-UNSAT memberships now have
+pinned CaDiCaL 1.7.3 textual LRATs accepted by pinned `lrat-check`; no claim is
+made for the 33 TIMEOUT memberships. The regenerated CNFs total 707,414,473
+bytes, raw LRATs total 484,924,019 bytes, and the retained `xz -3` corpus totals
+32,389,520 bytes, strictly below the exclusive 250,000,000-byte cap.
+
+The canonical ledger and verifier reciprocally pin one another. They bind the
+exact scout order, all 68 rows and artifacts, the complete local transitive
+Python import closure, grouped/singleton manifests and hash ledgers, and the
+ancestor inaccessible-pair certificate ledger, verifier, and every ancestor
+compressed artifact used in reconstruction. Hostile tests reject scope/order,
+path/set, hash, transitive-source, reciprocal-pin, and cap mutations. Fresh
+proof replay is:
+
+```sh
+python3 test_m6_b7_l6_early_c_certificate_residual_exact_pair_singleton_parent.py
+python3 test_m6_b7_l6_early_c_certificate_residual_exact_pair_singleton_parent_scout_unsat_certificates.py
+python3 verify_m6_b7_l6_early_c_certificate_residual_exact_pair_singleton_parent_scout_unsat_certificates.py \
+  --checker /path/to/pinned/lrat-check
+```
