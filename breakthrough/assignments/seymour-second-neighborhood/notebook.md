@@ -2127,3 +2127,19 @@ No audits yet.
   have retained certificates; the unresolved set is exactly the 27
   scout-TIMEOUT cells. This is not a broader
   `B7-l6`, `m=6`, or Seymour claim. No commit was made.
+
+### Exact-pair TIMEOUT complete-cut census
+
+- Restricted exactly to the 33 committed singleton scout-TIMEOUT memberships,
+  preserving each parent selector and its exact two-negative/seven-positive `q`
+  pattern. The complete orientations from both inaccessible endpoints into
+  `S=N+(low C)` are already implied by exact `q`, arc exclusivity, and hole
+  equivalence, so no redundant CNF or fake split was emitted.
+- Independently reconstructed all six-hole projections and validated every
+  endpoint-cut and global hole-load identity. Membership `000` is exceptional;
+  the other 32 root/A-C packets form 15 exact `(epsilon,b,chi)` classes, recorded
+  in `attempts/frozen-b7-l6-exact-pair-timeout-complete-cut.md`.
+- Pinned CaDiCaL 1.7.3 at ten seconds per unchanged singleton parent returned 33
+  TIMEOUT, zero SAT, and zero UNSAT. This is a branching-basis classification
+  and timing observation only, with no certificate or broader claim. No commit
+  was made.

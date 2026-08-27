@@ -1,5 +1,20 @@
 # Exact baseline experiments
 
+The frozen 33-membership exact-pair TIMEOUT complete-cut census is regenerated
+and independently checked with:
+
+```sh
+python3 m6_b7_l6_exact_pair_timeout_complete_cut.py --output m6-b7-l6-exact-pair-timeout-complete-cut.tsv
+python3 check_m6_b7_l6_exact_pair_timeout_complete_cut.py --scout
+python3 test_m6_b7_l6_exact_pair_timeout_complete_cut.py
+```
+
+It classifies 32 root/A-to-C packets by `(epsilon,b,chi)` plus exceptional
+membership `000`. All endpoint-to-`S=N+(low C)` orientations are already logical
+consequences of exact `q`, hole equivalence, and arc exclusivity, so no fake
+orientation split or redundant CNF is emitted. The pinned ten-second scout keeps
+the original singleton parents and exact `q` patterns unchanged.
+
 Commands (Python 3 and Node.js 18+):
 
 ```sh
