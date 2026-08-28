@@ -2143,3 +2143,34 @@ No audits yet.
   TIMEOUT, zero SAT, and zero UNSAT. This is a branching-basis classification
   and timing observation only, with no certificate or broader claim. No commit
   was made.
+
+### Exact-pair TIMEOUT Hall-failure extension
+
+- Extended exactly the ordered 33 committed singleton TIMEOUT memberships with
+  an independently reconstructible Hall witness. It selects arbitrary nonempty
+  `K subset U` for seven `q`-positive vertices, defines the exact neighborhood
+  `Gamma(K)` in the eight vertices `S=N+(low C)` through the original `s->u`
+  arc variables, and enforces `|Gamma(K)|<|K|`.
+- The compact encoding adds exactly 142 variables and 480 clauses to every CNF.
+  Layer-local checker reconstruction agrees on all hashes without importing the
+  Hall campaign producer; it intentionally reuses the checked singleton and
+  complete-cut lower layers. An exhaustive 3-by-3 audit evaluated the actual
+  compact clauses with a local DPLL evaluator on all 512 incidence graphs and
+  3,584 graph/subset assignments, and independently matched existential Hall
+  deficiency to failure of a saturating bipartite matching.
+- Pinned CaDiCaL 1.7.3 with the frozen options and a 180-second cap returned 29
+  UNSAT and 4 TIMEOUT, with zero SAT. The structural checker pins both the whole
+  11,240-byte scout identity
+  `f2b1c935a985b3e73428e8c9b3b4e0c87264a519fe0bb6a421ffcd5a14dc7d93`
+  and exact status-sequence digest
+  `bce3c926a1d6db19ec646f6aa373743423fd6b6fb71b6cfd4a46f8865577b29b`;
+  equal-total UNSAT/TIMEOUT swaps are rejected.
+- Retained exactly those ordered 29 scout-UNSAT textual LRATs. Fresh replay with
+  the explicit pinned checker path regenerated and structurally checked every
+  CNF and accepted all proofs. CNFs total 301,992,379 bytes, raw LRATs
+  400,986,758 bytes, and `xz -3` artifacts 47,771,536 bytes, below the exclusive
+  250,000,000-byte cap. The canonical ledger/verifier bind the exact package,
+  transitive runtime and ancestry, tools, hostile tests, and all proof identities.
+- Hall synchronization is not yet a theorem until complements/residual cases are
+  handled. This is not a broader B7, order-18, or Seymour claim. No commit was
+  made.

@@ -932,3 +932,42 @@ python3 test_m6_b7_l6_early_c_certificate_residual_exact_pair_singleton_parent_s
 python3 verify_m6_b7_l6_early_c_certificate_residual_exact_pair_singleton_parent_scout_unsat_certificates.py \
   --checker /path/to/pinned/lrat-check
 ```
+
+The authoritative Hall-failure extension applies only to the ordered 33
+committed singleton TIMEOUT memberships. It selects an arbitrary nonempty
+`K subset U`, where `|U|=7`, defines the exact neighborhood
+`Gamma(K)={s in S: s->u for some u in K}` on the eight vertices
+`S=N+(low C)`, and requires `|Gamma(K)|<|K|`. The compact encoding adds exactly
+142 variables and 480 clauses to every membership. Independence is layer-local:
+the checker does not import this campaign producer and separately emits the Hall
+extension, manifest, metadata, and dimensions, while reusing checked lower-layer
+singleton and complete-cut derivations. Its exhaustive 3-by-3 audit evaluates
+the emitted compact CNF with a local DPLL evaluator on all 512 incidence graphs
+and 3,584 graph/subset assignments, then also compares existential deficiency
+with an independently implemented maximum-matching blocker.
+
+Pinned CaDiCaL 1.7.3 at a 180-second cap returned 29 UNSAT and 4 TIMEOUT, with
+zero SAT. Exactly those ordered 29 scout-UNSAT memberships have retained textual
+LRATs generated with the frozen per-position scout options and independently
+accepted by pinned `lrat-check`. Their CNFs total 301,992,379 bytes, raw LRATs
+total 400,986,758 bytes, and `xz -3` artifacts total 47,771,536 bytes, strictly
+below the exclusive 250,000,000-byte cap. Run:
+
+```sh
+python3 check_m6_b7_l6_exact_pair_timeout_hall_failure.py --cover --truth-table --scout
+python3 test_m6_b7_l6_exact_pair_timeout_hall_failure.py
+python3 test_m6_b7_l6_exact_pair_timeout_hall_failure_scout_unsat_certificates.py
+python3 verify_m6_b7_l6_exact_pair_timeout_hall_failure_scout_unsat_certificates.py \
+  --checker /tmp/opencode/seymour-lrat-pilots/drat-trim/lrat-check
+```
+
+The canonical ledger and verifier reciprocally pin one another and bind exact
+scope/order, transitive Python runtime, the checked singleton ancestry and its
+compressed artifacts, tools, CNFs, proofs, retained artifacts, and timings.
+Hostile tests cover canonical framing, scope/order, paths, hashes, transitive
+ancestry, reciprocal pins, artifact-set equality, equal-total scout status
+swaps, non-explicit checker paths, and the exclusive cap. The checker pins the
+whole scout identity and the independently fixed status-sequence digest. Hall
+synchronization is not yet a theorem until the four TIMEOUT complements/residual
+cases are handled. This
+campaign makes no broader B7, order-18, or Seymour claim.
