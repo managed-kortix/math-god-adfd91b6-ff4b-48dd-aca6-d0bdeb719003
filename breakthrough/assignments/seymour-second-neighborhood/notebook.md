@@ -2174,3 +2174,44 @@ No audits yet.
 - Hall synchronization is not yet a theorem until complements/residual cases are
   handled. This is not a broader B7, order-18, or Seymour claim. No commit was
   made.
+
+### Frozen Hall TIMEOUT exact-cardinality completion
+
+- Kept the committed Hall encoding unchanged and split only TIMEOUT memberships
+  `028,054,069,070`. For each parent, the seven exact unary `hall_K` threshold
+  outputs define children `|K|=1,...,7`, giving exactly 28 children. The
+  independent checker reconstructs the units without importing the split
+  producer and enumerates all 127 nonempty assignments per parent, proving the
+  children pairwise disjoint and exhaustive over nonempty `K`.
+- Pinned Kissat 4.0.4 and CaDiCaL 1.7.3 scouts found every child UNSAT. The final
+  CaDiCaL configuration `--restart=false --phase=false --seed=3` solved all 28;
+  direct unsplit CaDiCaL with defaults still timed out at 300 seconds on all four
+  parents, so the reproducible split proofs were retained.
+- Generated textual CaDiCaL-compatible LRATs for all 28 children and accepted
+  every proof with pinned `lrat-check`. Fresh replay regenerated and independently
+  checked each CNF before decompression and proof checking. CNFs total
+  291,619,772 bytes, raw LRATs 229,856,177 bytes, and `xz -3` artifacts 17,456,956
+  bytes, below the exclusive 250,000,000-byte cap.
+- The strict canonical ledger binds the exact child order, cardinalities, hashes,
+  tools, lower Hall certificate ledger/verifier, split sources, and all artifacts;
+  the ledger and verifier reciprocally pin canonical hashes. Consequently Hall
+  failure is excluded for all 33 frozen memberships: 29 by the prior direct
+  certificates and the remaining four by the checked exhaustive 28-child cover.
+  This is still only the Frozen Seymour Hall-failure statement, not a broader B7,
+  order-18, or Seymour theorem. No commit was made.
+- Hall completion audit minors: removed the leaked `hall-cardinality-check-*`
+  scratch directory; strengthened each split ledger row against reconstructed
+  parent position, membership, key, dimensions, and canonical artifact ancestry;
+  bound the Hall producer/checker and hostile tests; and added hostile row,
+  source, reciprocal-pin, and compressed-artifact mutations. The split ledger
+  canonical SHA-256 is
+  `28e00f90e24b84b2034c452f28c4a7673fb8852a8ff6979ca419b38d7d46bb5e`
+  and the verifier canonical SHA-256 is
+  `3ea7a677d9f205b82c091ad09b585335a571e4b4c69f11f6dd3b4f676d79fabb`.
+- Added `verify_m6_b7_l6_exact_pair_timeout_hall_failure_all33.py`. It invokes
+  the prior-29 and split-28 fresh replay verifiers and independently proves that
+  their 29 direct rows and four split parents are unique, disjoint, canonically
+  ordered, and exhaustive over all 33 campaign rows. The final fresh run passed
+  all 29 direct LRATs, all 28 split LRATs, the four-by-127 exact-cardinality
+  partition audit, the mechanical `29+4=33` scope audit, and all eight split
+  regression/hostile tests. No commit was made.

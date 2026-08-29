@@ -971,3 +971,43 @@ whole scout identity and the independently fixed status-sequence digest. Hall
 synchronization is not yet a theorem until the four TIMEOUT complements/residual
 cases are handled. This
 campaign makes no broader B7, order-18, or Seymour claim.
+
+The four Hall TIMEOUT memberships `028,054,069,070` are now completed by an
+exact `|K|=1,...,7` split atop the unchanged committed Hall encoding. There are
+28 children. The independent checker separately reconstructs every cardinality
+unit and enumerates all 127 nonempty `K` assignments per parent to require a
+pairwise-disjoint, exhaustive partition. Pinned Kissat 4.0.4 and CaDiCaL 1.7.3
+scouts returned UNSAT for all children; pinned CaDiCaL with
+`--restart=false --phase=false --seed=3` generated all retained textual LRATs.
+Unsplit default CaDiCaL still timed out at 300 seconds for all four parents.
+
+Fresh replay independently reconstructs all CNFs and accepts all 28 proofs with
+pinned `lrat-check`. The package totals 291,619,772 CNF bytes, 229,856,177 raw
+LRAT bytes, and 17,456,956 compressed bytes, strictly below the exclusive
+250,000,000-byte cap. Run:
+
+```sh
+python3 check_m6_b7_l6_exact_pair_timeout_hall_failure_cardinality_split.py --cover
+python3 test_m6_b7_l6_exact_pair_timeout_hall_failure_cardinality_split.py
+python3 verify_m6_b7_l6_exact_pair_timeout_hall_failure_cardinality_split_certificates.py \
+  --checker /tmp/opencode/seymour-lrat-pilots/drat-trim/lrat-check
+python3 verify_m6_b7_l6_exact_pair_timeout_hall_failure_all33.py \
+  --checker /tmp/opencode/seymour-lrat-pilots/drat-trim/lrat-check
+```
+
+Hall failure is excluded for all 33 frozen memberships only after combining the
+prior 29 direct certificates with this checked exhaustive 28-child cover. This
+is the Frozen Seymour Hall-failure theorem only; it is not a broader B7,
+order-18, or Seymour theorem.
+
+The completion audit also checks every split-ledger row's parent position,
+membership, key, dimensions, and canonical artifact name against reconstructed
+ancestry. It binds the Hall producer/checker and hostile tests, checks compressed
+artifact identities before replay, and rejects ledger ancestry, source, pin, and
+artifact mutations. The combined verifier invokes both proof verifiers and
+mechanically requires the prior 29 rows and four split parents to be unique,
+disjoint, canonically ordered, and exhaustive over the independently reconstructed
+33-row campaign. The split ledger canonical SHA-256 is
+`28e00f90e24b84b2034c452f28c4a7673fb8852a8ff6979ca419b38d7d46bb5e`;
+its reciprocally pinned verifier canonical SHA-256 is
+`3ea7a677d9f205b82c091ad09b585335a571e4b4c69f11f6dd3b4f676d79fabb`.
