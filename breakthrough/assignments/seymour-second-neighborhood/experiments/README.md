@@ -1011,3 +1011,24 @@ disjoint, canonically ordered, and exhaustive over the independently reconstruct
 `28e00f90e24b84b2034c452f28c4a7673fb8852a8ff6979ca419b38d7d46bb5e`;
 its reciprocally pinned verifier canonical SHA-256 is
 `3ea7a677d9f205b82c091ad09b585335a571e4b4c69f11f6dd3b4f676d79fabb`.
+
+The certificate-relative binary all-different layer uses the committed all33
+Hall verifier as ancestry. Three bits for each of seven `U` vertices encode all
+eight values `0..7`, mapped in order to `S`; channel clauses require the selected
+`S[i]->u` arc, and exact bitwise XOR clauses require pairwise disequality. Seven
+Hall-entailed row-support clauses give exact dimensions `+84` variables and
+`+336` clauses. Hall's theorem supplies an extension from every synchronized
+graph, while channeling and disequality decode every extension to an injective
+arc matching. The independent checker exhausts small domains and includes a
+counterexample proving that forbidding value 7 is unsound.
+
+The pinned 30-second CaDiCaL scout for this sound encoding returned 33 TIMEOUT,
+not the anticipated eight UNSAT results. The earlier temporary benchmark's
+eight-UNSAT result came from a clause forbidding binary word `111`, contrary to
+the required `0..7` domain. No LRATs were generated because the robust result
+gate failed. See `attempts/frozen-b7-l6-exact-pair-hall-binary-alldifferent.md`.
+
+```sh
+python3 check_m6_b7_l6_exact_pair_hall_binary_alldifferent.py --cover --semantic --excluded-value-counterexample --scout
+python3 test_m6_b7_l6_exact_pair_hall_binary_alldifferent.py
+```

@@ -2215,3 +2215,23 @@ No audits yet.
   all 29 direct LRATs, all 28 split LRATs, the four-by-127 exact-cardinality
   partition audit, the mechanical `29+4=33` scope audit, and all eight split
   regression/hostile tests. No commit was made.
+
+### Certificate-relative binary all-different matching
+
+- Added a matching extension over exactly the committed Hall-synchronized all33
+  scope. Each of seven `U` vertices receives a three-bit value in `0..7` mapping
+  to the ordered eight-element `S`; channels select original `S[i]->u` arcs and
+  exact pairwise bit-vector disequalities make the map injective.
+- The sound exact dimensions are `+84` variables and `+336` clauses: 56 channel,
+  seven Hall-entailed row-support, and 273 exact disequality clauses. The all33
+  verifier and both Hall certificate ledgers are bound in the manifest.
+- Proved both directions precisely: Hall gives a saturating matching whose
+  indices satisfy the extension; every satisfying extension decodes through its
+  channels and exact XORs to an injective arc matching. The independent checker
+  exhausts 294 small incidence graphs and 4,234 value assignments and separately
+  exhibits a Hall graph whose unique matching requires value 7.
+- The sound pinned 30-second CaDiCaL scout returned 33 TIMEOUT, zero UNSAT, and
+  zero SAT. The expected eight UNSAT memberships were traced to a temporary
+  benchmark clause that forbade `111`, contradicting the required valid domain
+  `0..7`; the value-7 counterexample rejects that shortcut. The robust gate did
+  not pass, so no LRATs or certificate ledger were generated. No commit was made.
