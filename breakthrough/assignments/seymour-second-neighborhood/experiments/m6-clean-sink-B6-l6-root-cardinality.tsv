@@ -1,0 +1,26 @@
+m6-clean-sink-B6-l6-root-cardinality-manifest-v1
+scope	exact-clean-B6-l6-parent-group
+group	B6-l6
+parents	220
+branch	B6
+lambda	6
+layers	R:0;A:1-8;B:9-14;C:15-17
+layer-sizes	R:1;A:8;B:6;C:3
+A-to-C	absent
+global-arcs	147
+global-high	3
+root-identity	e(A,B)=36+H(A)+high(A)
+root-proof	sum_A d+=64+high(A);e(A,A)=28-H(A);A cannot send to R or C
+added-variables	2013
+added-clauses	7899
+variables	25849
+clauses	184296
+clean-parent-manifest-bytes	1838
+clean-parent-manifest-sha256	6e7eee0ddd5b4c7ef02cdf459c9a0647f720513e7ee4987a3a8b0c17af37eeda
+clean-remaining-stream-bytes	2262190
+clean-remaining-stream-sha256	416b7e51a73637784342a374be8e15a1a58032b61fc1140f39f0768d1ff4b642
+clean-partition-manifest-bytes	2104
+clean-partition-manifest-sha256	733e06c8aa9881e0006409efff23729f1bf88d8af7b1a70e8a78fd3775b53217
+clean-sink-theorem-bytes	4156
+clean-sink-theorem-sha256	bd0631529bb4658061663460b718ef2ee3186d02fdc599fb2673d3cff3b94ee2
+member-sha256	ec529204cdcc960318c97b19cfee13154dec2730481893cdfefcd5ab0312e16f
