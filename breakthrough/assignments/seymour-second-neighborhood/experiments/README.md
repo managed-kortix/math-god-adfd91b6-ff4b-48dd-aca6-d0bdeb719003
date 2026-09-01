@@ -1032,3 +1032,10 @@ gate failed. See `attempts/frozen-b7-l6-exact-pair-hall-binary-alldifferent.md`.
 python3 check_m6_b7_l6_exact_pair_hall_binary_alldifferent.py --cover --semantic --excluded-value-counterexample --scout
 python3 test_m6_b7_l6_exact_pair_hall_binary_alldifferent.py
 ```
+
+The authoritative cardinality layer derives exactly three high vertices from
+147 arcs and degrees 8/9, and proves `e(S,U)=36+H(S)+high(S)`. Fresh counters make
+all 33 unsplit CNFs UNSAT with checked LRATs totaling 47,134,964 compressed bytes.
+The overlap-safe composition uses the exact 20-cell residual of the 192-pair
+cover; prior 68 plus new 33 memberships exhaust all 101 and close profile orbits
+`03,11,23,25,28,47,49,54`.

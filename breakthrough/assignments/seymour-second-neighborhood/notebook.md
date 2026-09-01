@@ -2235,3 +2235,13 @@ No audits yet.
   benchmark clause that forbade `111`, contradicting the required valid domain
   `0..7`; the value-7 counterexample rejects that shortcut. The robust gate did
   not pass, so no LRATs or certificate ledger were generated. No commit was made.
+
+### Authoritative Hall-relative cardinality closure
+
+- Six holes give 147 arcs; degrees 8/9 imply exactly three high vertices.
+- Exact-pair semantics proves `e(S,U)=36+H(S)+high(S)` for every Hall cut.
+- Fresh counters add 2,433 variables and 9,571 clauses per membership. All 33
+  unsplit CNFs are UNSAT with checked LRATs totaling 47,134,964 compressed bytes.
+- Overlap-safe composition uses the exact 20-cell/101-membership residual of the
+  192-pair cover. Prior 68 and new 33 memberships are disjoint and exhaustive,
+  closing profile orbits `03,11,23,25,28,47,49,54`. No commit was made.
