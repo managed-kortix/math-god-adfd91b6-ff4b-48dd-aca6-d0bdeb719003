@@ -66,7 +66,7 @@ triggers:
     session_id: a10f0b25-6c8a-488e-b880-c54c9f7aaa98
     cron: 0 0 3/6 * * *
     timezone: UTC
-    prompt: "LANE=millennium. CORE=math-god-millennium. This exact pinned root
+    prompt: LANE=millennium. CORE=math-god-millennium. This exact pinned root
       session permanently owns only the six unsolved Clay problems. Read
       MILLENNIUM_STATE.md and millennium-prize/PROGRAM.md first; do not adopt
       STATE.md or BREAKTHROUGH_STATE.md as working memory. Do not spawn Kortix
@@ -74,7 +74,7 @@ triggers:
       Continue the active exact frontier, maintain bounded scouts, and never
       call a partial result a solution. Pull --rebase, commit, and push durable
       work. Apply research/procedural/PUBLICATION.md only after every
-      official-resolution gate passes. Never stop."
+      official-resolution gate passes. Never stop.
   - slug: breakthrough-heartbeat
     name: math-god breakthrough lane heartbeat
     type: cron
@@ -84,7 +84,7 @@ triggers:
     session_id: 02e4f7af-a0b4-4240-8f2b-81db562e11a4
     cron: 0 0 1 * * *
     timezone: UTC
-    prompt: "LANE=breakthrough. CORE=math-god-breakthrough. This exact pinned root
+    prompt: LANE=breakthrough. CORE=math-god-breakthrough. This exact pinned root
       session permanently owns only the frozen assignment in
       BREAKTHROUGH_STATE.md. Read that file, breakthrough/PROGRAM.md, and the
       assignment prompt first; do not adopt STATE.md or MILLENNIUM_STATE.md as
@@ -93,7 +93,7 @@ triggers:
       or switch targets. Select a new target only after a solved or formally
       retired assignment has completed its publication/state closeout. Pull
       --rebase, commit, and push durable work. Apply
-      research/procedural/PUBLICATION.md to a verified result. Never stop."
+      research/procedural/PUBLICATION.md to a verified result. Never stop.
 connectors:
   - slug: google_drive
     provider: pipedream
