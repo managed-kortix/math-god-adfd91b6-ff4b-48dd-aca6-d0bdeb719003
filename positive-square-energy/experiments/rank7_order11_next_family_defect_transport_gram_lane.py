@@ -17,12 +17,16 @@ LANE_PATH = HERE / "rank7_order11_defect_transport_gram_lane.py"
 SOURCE_REPORT = HERE / "rank7_order11_defect_transport_gram_lane.json"
 SOURCE_STREAM = HERE / "rank7_order11_after_defect_transport_remainder.jsonl.xz"
 PRIOR_SEGMENTS = HERE / "rank7_order11_defect_transport_gram_scan"
+PRIOR_SEGMENT_DIRECTORIES = (PRIOR_SEGMENTS,)
+EXPECTED_CACHE_SEED_ROWS = 319522
 OUTPUT = HERE / "rank7_order11_next_family_defect_transport_gram_lane.json"
 OWNERS = HERE / "rank7_order11_next_family_defect_transport_gram_owners.jsonl.xz"
 FAILURES = HERE / "rank7_order11_next_family_defect_transport_gram_failures.jsonl.xz"
 REMAINDER = HERE / "rank7_order11_after_next_family_defect_transport_remainder.jsonl.xz"
 SEGMENTS = HERE / "rank7_order11_next_family_defect_transport_gram_scan"
 SCHEMA = "rank-seven-order-eleven-next-family-defect-transport-gram-lane-v1"
+SCOPE = "full exact cached defect-transport/cycle Gram replay of the next-largest order-eleven remainder family"
+PARAMETER_CACHE_DESCRIPTION = "accepted rational parameters keyed by exact local-type signature, seeded from the complete leading-family scan"
 TARGET = ((2,) + (1,) * 15, (6, 1, 9), 6, 1)
 EXPECTED_SOURCE_TOTAL = 11075112
 EXPECTED_TARGET_TOTAL = 300610
@@ -147,23 +151,25 @@ def collect_source():
 def load_parameter_cache(completed):
     cache = {}
     prior_rows = 0
-    for path in sorted(PRIOR_SEGMENTS.glob("rows-*.json.xz")):
-        with lzma.open(path, "rb") as source:
-            payload = json.load(source)
-        for row in payload["rows"]:
-            prior_rows += 1
-            if row[1][1]:
-                encoded = [row[1][4], row[1][5]]
-                bucket = cache.setdefault(row[2], [])
-                if encoded not in bucket:
-                    bucket.append(encoded)
+    for directory in PRIOR_SEGMENT_DIRECTORIES:
+        for path in sorted(directory.glob("rows-*.json.xz")):
+            with lzma.open(path, "rb") as source:
+                payload = json.load(source)
+            for row in payload["rows"]:
+                prior_rows += 1
+                if row[1][1]:
+                    encoded = [row[1][4], row[1][5]]
+                    bucket = cache.setdefault(row[2], [])
+                    if encoded not in bucket:
+                        bucket.append(encoded)
     for row in completed:
         if row[1][1]:
             encoded = [row[1][4], row[1][5]]
             bucket = cache.setdefault(row[2], [])
             if encoded not in bucket:
                 bucket.append(encoded)
-    require(prior_rows == 319522, "leading-family parameter cache is incomplete")
+    require(prior_rows == EXPECTED_CACHE_SEED_ROWS,
+            "prior-family parameter cache is incomplete")
     return cache, prior_rows
 
 
@@ -275,7 +281,7 @@ def scan(max_denominator, checkpoint_rows, directory, progress):
 
     report = {
         "schema": SCHEMA, "full_theorem": False,
-        "scope": "full exact cached defect-transport/cycle Gram replay of the next-largest order-eleven remainder family",
+        "scope": SCOPE,
         "source_report_sha256": source_report_sha256,
         "source_stream": source_info,
         "target_family": {**family_payload(), "orbit_total": len(targets),
@@ -283,7 +289,7 @@ def scan(max_denominator, checkpoint_rows, directory, progress):
         "gram": {
             "formula": "H=XX^T+w A P_cycle A^T; G=H/M+diag(1-diag(H)/M)",
             "local_type": "(degree defect,signed degree,sorted incident bundles)",
-            "parameter_cache": "accepted rational parameters keyed by exact local-type signature, seeded from the complete leading-family scan",
+            "parameter_cache": PARAMETER_CACHE_DESCRIPTION,
             "exact_acceptance": "fresh Fraction projector, Gram, correlation, and path-cost replay on every row, including cache hits; no family extrapolation",
             "maximum_denominator": max_denominator,
         },

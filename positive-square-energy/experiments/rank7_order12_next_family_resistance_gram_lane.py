@@ -37,6 +37,7 @@ TARGET = ((2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
           (6, 3, 6), 4, 0, 0)
 EXPECTED_SOURCE_TOTAL = 122505
 EXPECTED_TARGET_TOTAL = 9801
+EXPECTED_STRATIFIED_TOTAL = None
 _CONTEXT = None
 
 
@@ -275,8 +276,12 @@ def scan(workers, max_denominator, progress=False, limit=None, persist=True):
                      if item["signature"] == target_signature), None)
     require(expected is not None, "target stratified family changed")
     if limit is None:
-        require(len(records) == expected["orbit_total"] == EXPECTED_TARGET_TOTAL,
-                "target family count changed")
+        expected_stratified_total = (EXPECTED_TARGET_TOTAL if EXPECTED_STRATIFIED_TOTAL is None
+                                     else EXPECTED_STRATIFIED_TOTAL)
+        require(expected["orbit_total"] == expected_stratified_total,
+                "stratified target family count changed")
+        require(len(records) == EXPECTED_TARGET_TOTAL,
+                "source target family count changed")
 
     _CONTEXT = packet, kernels, max_denominator
     if workers == 1:

@@ -215,6 +215,37 @@ The v2 packet/spectral report remains a finite-target result. The separate DNN
 replacement ledger is theorem-eligible but does not mark the full order-eight
 theorem complete.
 
+## Global theorem-owner skeleton
+
+The standalone induced-packet shared-Gram closure is now incorporated into a
+global theorem-owner skeleton after the 83,856-row boundary closure. Its 2,928
+owners are exactly replayed on the canonical target and all fourteen coordinate
+frontiers. They are disjoint from the prior structural cycle-Gram lanes, whose
+exclusive counts are 112, 97, and 36. All 3,173 downstream owner indices lie in
+the authenticated 83,856-row theorem remainder.
+
+The exact global update is
+
+```text
+83856 = 112 + 97 + 36 + 2928 + 80683,
+1257840 = 1680 + 1455 + 540 + 43920 + 1210245.
+```
+
+Fixed-parity path-cost monotonicity supplies the all-length lift for every
+listed exact Gram, and DNN one-vertex additivity supplies arbitrary rooted-tree
+attachments. The global precedence-aware ledger therefore theorem-owns 412,734
+of 493,417 coarse rows and leaves the exact remainder **80,683** rows, or
+1,210,245 canonical-plus-coordinate targets. This remains a partial theorem.
+
+- `experiments/rank7_order8_theorem_owner_skeleton.py` authenticates the lanes, replays the 2,928 packet Grams, proves disjointness, and audits the complement.
+- `experiments/rank7_order8_theorem_owner_skeleton.json` records owner artifacts, lift contracts, and the disjointness receipt.
+- `experiments/rank7_order8_global_theorem_eligible_ledger.json` records the global precedence-aware theorem accounting.
+- `experiments/rank7_order8_global_theorem_remainder.jsonl.xz` stores the exact 80,683-row complement.
+
+```text
+python3 positive-square-energy/experiments/rank7_order8_theorem_owner_skeleton.py --audit
+```
+
 ## Leading-family structural cycle-Gram lane
 
 The next theorem-eligible lane authenticates and stratifies the complete
