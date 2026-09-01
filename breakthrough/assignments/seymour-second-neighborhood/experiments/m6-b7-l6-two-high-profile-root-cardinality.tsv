@@ -1,0 +1,40 @@
+m6-b7-l6-two-high-profile-root-cardinality-manifest-v1
+scope-orbits	12,13,14,15,16,17,36,37,38,39,40,41,42,43,55,56,57,58,59
+profiles	19
+profile-high-mask	11
+global-arcs	147
+global-high	3
+root-A	1,2,3,4,5,6,7,8
+root-B	9,10,11,12,13,14,15
+root-identity	e(A,B)=36+H(A)+high(A)
+root-proof	sum_A d+=64+high(A); e(A,A)=28-H(A); A cannot send to root or C
+fresh-counters	18 global-high, 56 A-to-B arcs, 28 A-holes plus eight A-high indicators
+added-variables	2433
+added-clauses	9571
+proof-status	checked-LRAT
+census-manifest-bytes	10271
+census-manifest-sha256	985a558c3b831994ed2febbb3e4569cf7df4869919f897c3ab6e0e96dbdce5f9
+census-hashes-bytes	6018
+census-hashes-sha256	55e4f57f988d7bf005f3921e45fe4c9c5bad322599e5be6e0c9acafcbd6813a3
+census-provenance-bytes	3403
+census-provenance-sha256	60c3775569ca764cb66c2666b1ea6fa868ee294519605f6e646da59e77ac4bfc
+columns	position,orbit,key,state-key,t,parents,variables,clauses
+00	12	o12	h15-cf-m11-b05	0	6	26055	153236
+01	13	o13	h24-cf-m11-b14	0	10	26059	153848
+02	14	o14	h24-cf-m11-b14	1	10	26059	153848
+03	15	o15	h33-cf-m11-b23	0	10	26059	153848
+04	16	o16	h33-cf-m11-b23	1	10	26059	153848
+05	17	o17	h33-cf-m11-b23	2	10	26059	153848
+06	36	o36	h15-cr-m11-b14	0	6	26055	153236
+07	37	o37	h15-cr-m11-b14	1	6	26055	153236
+08	38	o38	h24-cr-m11-b23	0	10	26059	153848
+09	39	o39	h24-cr-m11-b23	1	10	26059	153848
+10	40	o40	h24-cr-m11-b23	2	10	26059	153848
+11	41	o41	h33-cr-m11-b32	0	10	26059	153848
+12	42	o42	h33-cr-m11-b32	1	10	26059	153848
+13	43	o43	h33-cr-m11-b32	2	10	26059	153848
+14	55	o55	h14-ch-m11-b14	0	6	26055	153236
+15	56	o56	h14-ch-m11-b14	1	6	26055	153236
+16	57	o57	h23-ch-m11-b23	0	10	26059	153848
+17	58	o58	h23-ch-m11-b23	1	10	26059	153848
+18	59	o59	h23-ch-m11-b23	2	10	26059	153848

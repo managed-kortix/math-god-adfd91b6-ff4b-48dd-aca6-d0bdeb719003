@@ -2245,3 +2245,22 @@ No audits yet.
 - Overlap-safe composition uses the exact 20-cell/101-membership residual of the
   192-pair cover. Prior 68 and new 33 memberships are disjoint and exhaustive,
   closing profile orbits `03,11,23,25,28,47,49,54`. No commit was made.
+
+### Authoritative two-high root-cardinality closure
+
+- Restricted exactly to remaining two-high early cells
+  `12-17,36-43,55-59`. Six holes and degree-eight/nine force exactly three
+  global highs; root normalization gives `e(A,B)=36+H(A)+high(A)`.
+- Fresh counters add 2,433 variables and 9,571 clauses per profile. A
+  producer-independent checker reconstructs every clause and audits all 262,144
+  degree vectors plus 116 root-cut arithmetic cases.
+- Pinned CaDiCaL 1.7.3 produced 19 textual LRATs and pinned `lrat-check`
+  accepted all 19. Raw proofs total 217,996,726 bytes; `xz -3` artifacts total
+  20,979,196 bytes, strictly below the exclusive 250,000,000-byte cap. Strict
+  ledger verification and fresh replay passed.
+- The composition verifier combines the original 33 certified cells, eight
+  one-high closures, and these 19 cells as disjoint scopes exhausting all 60.
+  It independently recovers 42 parents, 30 states, 60 orbits, 544 incidences,
+  and full 5,040-permutation support closure. Therefore the entire frozen clean
+  `B7-l6` parent campaign is closed, but no other residual B7 group is closed.
+  No commit was made.

@@ -9,7 +9,7 @@ certified-orbits	5
 prior-certified-orbits	26
 total-scout-unsat-certified-orbits	31
 prior-certificate-ledger-bytes	11954
-prior-certificate-ledger-sha256	c37dd197fe1a95aa27cde09b1fd16975c7c6b78eeb5aca9091fcb2efe44acd8b
+prior-certificate-ledger-sha256	de92e197037c0d601b4553c83f33a34a4c465d915c7d9d58873d94a9d8d52e67
 census-manifest-bytes	10271
 census-manifest-sha256	985a558c3b831994ed2febbb3e4569cf7df4869919f897c3ab6e0e96dbdce5f9
 census-hash-ledger-bytes	6018

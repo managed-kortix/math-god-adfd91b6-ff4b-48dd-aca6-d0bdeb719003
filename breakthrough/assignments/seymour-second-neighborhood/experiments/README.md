@@ -1039,3 +1039,25 @@ all 33 unsplit CNFs UNSAT with checked LRATs totaling 47,134,964 compressed byte
 The overlap-safe composition uses the exact 20-cell residual of the 192-pair
 cover; prior 68 plus new 33 memberships exhaust all 101 and close profile orbits
 `03,11,23,25,28,47,49,54`.
+
+The exact remaining two-high profile scope is
+`12-17,36-43,55-59`. A producer-independent root-cardinality layer derives
+exactly three global high vertices and
+`e(A,B)=36+H(A)+high(A)`, then adds fresh counters (`+2433` variables and
+`+9571` clauses per CNF). All 19 CNFs are UNSAT with checked textual LRATs;
+the retained `xz -3` package is 20,979,196 bytes, below the exclusive 250MB cap.
+
+```sh
+python3 check_m6_b7_l6_two_high_profile_root_cardinality.py --cover --semantic
+python3 test_m6_b7_l6_two_high_profile_root_cardinality.py
+python3 verify_m6_b7_l6_two_high_profile_root_cardinality_certificates.py \
+  --checker /tmp/opencode/seymour-lrat-pilots/drat-trim/lrat-check
+python3 verify_m6_b7_l6_early_c_profile_all60_closure.py
+```
+
+The final composition is disjoint and exhaustive: the original 33 certified
+cells, eight one-high cells, and 19 two-high cells cover all 60 early profile
+orbits. Its independent census verifies 42 clean `B7-l6` parents, 30 states,
+544 parent/orbit incidences, and every support orbit under all 5,040 `S7(B)`
+permutations. This closes the entire frozen clean `B7-l6` parent campaign, but
+does not close any other residual B7 group.

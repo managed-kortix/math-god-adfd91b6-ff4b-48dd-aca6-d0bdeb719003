@@ -17,7 +17,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 LEDGER = HERE / "m6-b7-l6-early-c-profile-scout-unsat-certificates.tsv"
 FORMAT = "m6-b7-l6-early-c-profile-scout-unsat-certificates-v1"
-LEDGER_CANONICAL_SHA256 = "abb0238b8aaff6898df65976025dc7e6a5ba9b75f3437744b6ff9612808ac515"
+LEDGER_CANONICAL_SHA256 = "1bb88e4b16e9d2ae39a3308141be7a7232412e35f14e23f857ac3b6b221ca0fd"
 SELF_TOKEN = b'LEDGER_CANONICAL_SHA256 = "' + b"0" * 64 + b'"'
 CHECKER_SHA256 = "e9e71c96b68dc9ed22db35d7581e613e6b161ffbc82c20cba5699f8320a065b8"
 LIMIT = 250_000_000

@@ -18,10 +18,10 @@ certificate-producer-bytes	5410
 certificate-producer-sha256	841099f17387dedd0571f3e24558b24f9fe9b8ea8f0917f3b81323333faeccf5
 census-documentation-bytes	4832
 census-documentation-sha256	7d896a6eb7e0009bcb7f6ff3c06f61f5bb85e0c8c5f61b5a4e3cf7ddd669c518
-experiments-documentation-bytes	47859
-experiments-documentation-sha256	787a71817c657bf86903e51363710272854519736e44595333469724e00c6a43
-notebook-bytes	125614
-notebook-sha256	19c2ac8fdf6d50821032df5ffe72a09fc394656d978f094433872e5745bd3171
+experiments-documentation-bytes	59987
+experiments-documentation-sha256	45637eb5d7c760eea21d378abd4cd8e2fcf1b7b4249b935e7a5b6abb024e0811
+notebook-bytes	138482
+notebook-sha256	7db2cbb90f42f5c75aaffe9e825f223ca5af52d705614c1e25f20f5aba5e7585
 runtime-check-m6-b7-l6-early-c-profile-census-bytes	25272
 runtime-check-m6-b7-l6-early-c-profile-census-sha256	4a411b7ad461ddb94adecba5e1c9b0a0e68c814a61ca20f092a8178a0772684d
 runtime-check-m6-clean-sink-group-cnf-bytes	14918
