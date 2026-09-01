@@ -27,8 +27,13 @@ REMAINDER_PATH = HERE / "rank7_order11_after_leading_family_closure_remainder.js
 REPORT_PATH = HERE / "rank7_order11_leading_family_closure.json"
 SCHEMA = "rank-seven-order-eleven-leading-family-closure-v1"
 OWNER_SCHEMA = "rank-seven-order-eleven-leading-family-shared-gram-owners-v1"
+RESCUE_OWNER_METHOD = "direct-shared-rational-correlation-gram"
 EXPECTED_FAILURES = 9
 EXPECTED_FAMILY = 319522
+FAMILY_LABEL = "leading"
+STATUS = "leading-family-completely-closed"
+SCOPE = "all 319522 rows in the leading order-eleven defect-transport family"
+CLAIM_BOUNDARY = "the leading 319522-row family is completely theorem-owned; rows outside this family remain in the exact updated remainder"
 DENOMINATORS = (64, 128, 256, 512, 1024, 2048, 4096)
 DIMENSION = 11
 F = Fraction
@@ -303,7 +308,7 @@ def make_owners(failures, kernels, progress=False):
             "order_kernel": record[2], "row": record[3],
             "orbit_size": record[4], "family": LANE.family_payload(family),
             "displaced_method": "defect-transport-typed-sos-gram",
-            "owner_method": "direct-shared-rational-correlation-gram",
+            "owner_method": RESCUE_OWNER_METHOD,
             "witness": witness,
         })
         if progress:
@@ -394,8 +399,8 @@ def report_payload(scan, scan_raw, failure_raw, failure_xz, owner_artifact,
             "defect-transport scan boundary changed")
     return {
         "schema": SCHEMA, "full_theorem": False,
-        "status": "leading-family-completely-closed",
-        "scope": "all 319522 rows in the leading order-eleven defect-transport family",
+        "status": STATUS,
+        "scope": SCOPE,
         "authenticated_inputs": {
             "defect_transport_scan": {"path": SCAN_PATH.name, "raw_sha256": scan_raw},
             "failure_stream": {"path": FAILURES_PATH.name, "record_total": EXPECTED_FAILURES,
@@ -409,7 +414,7 @@ def report_payload(scan, scan_raw, failure_raw, failure_xz, owner_artifact,
         "combined_family_owner_total": prior_owned + EXPECTED_FAILURES,
         "remaining_family_total": 0,
         "owner_precedence": ["defect-transport-typed-sos-gram",
-                             "direct-shared-rational-correlation-gram"],
+                              RESCUE_OWNER_METHOD],
         "rescue_owner_artifact": owner_artifact,
         "updated_remainder_stream": remainder_artifact,
         "theorem_contract": {
@@ -418,7 +423,7 @@ def report_payload(scan, scan_raw, failure_raw, failure_xz, owner_artifact,
             "all_length_lift": "canonical-plus-coordinate domination and fixed-parity path-cost monotonicity cover every path length of the prescribed parity",
             "rooted_tree_lift": "one-vertex DNN additivity assigns arbitrary rooted-tree attachments their tree Gram",
         },
-        "claim_boundary": "the leading 319522-row family is completely theorem-owned; rows outside this family remain in the exact updated remainder",
+        "claim_boundary": CLAIM_BOUNDARY,
     }
 
 
@@ -480,4 +485,4 @@ if __name__ == "__main__":
         main()
     except (KeyError, OSError, RuntimeError, TypeError, ValueError,
             ZeroDivisionError, lzma.LZMAError, json.JSONDecodeError) as error:
-        raise SystemExit(f"order-eleven leading-family closure: FAIL CLOSED: {error}")
+        raise SystemExit(f"order-eleven {FAMILY_LABEL}-family closure: FAIL CLOSED: {error}")
