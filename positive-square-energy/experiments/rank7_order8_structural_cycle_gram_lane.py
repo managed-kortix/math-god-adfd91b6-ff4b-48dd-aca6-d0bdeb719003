@@ -63,6 +63,20 @@ def configure_third_family():
     EXPECTED_TARGET = 3801
 
 
+def configure_fourth_family():
+    global SOURCE_LEDGER, SOURCE_STREAM, OUTPUT, OWNERS, REMAINDER
+    global SCHEMA, EXPECTED_REMAINDER, TARGET, EXPECTED_TARGET
+    SOURCE_LEDGER = HERE / "rank7_order8_third_structural_cycle_gram_lane.json"
+    SOURCE_STREAM = HERE / "rank7_order8_after_third_structural_cycle_gram_remainder.jsonl.xz"
+    OUTPUT = HERE / "rank7_order8_fourth_structural_cycle_gram_lane.json"
+    OWNERS = HERE / "rank7_order8_fourth_structural_cycle_gram_owners.jsonl.xz"
+    REMAINDER = HERE / "rank7_order8_after_fourth_structural_cycle_gram_remainder.jsonl.xz"
+    SCHEMA = "rank-seven-order-eight-fourth-structural-cycle-gram-lane-v1"
+    EXPECTED_REMAINDER = 83611
+    TARGET = ((2, 2, 2, 2, 1, 1, 1, 1, 1, 1), (2, 4, 4), 3, 1)
+    EXPECTED_TARGET = 2928
+
+
 def require(condition, message):
     if not condition:
         raise RuntimeError(message)
@@ -321,9 +335,9 @@ def scan(workers, max_denominator, progress=False, limit=None, persist=True):
         source_index, cost, normalizer, parameters, cycle_weight, type_keys, numerical = result
         accepted = cost is not None and cost <= BUDGET
         certificate = [source_index, accepted, None if cost is None else pair(cost),
-                       pair(normalizer),
-                       [[pair(left), pair(right)] for left, right in parameters],
-                       pair(cycle_weight)]
+                        pair(normalizer),
+                        [[pair(left), pair(right)] for left, right in parameters],
+                        pair(cycle_weight)]
         classification.update(canonical_bytes(certificate))
         if accepted:
             denominator_counts.update([cycle_weight.denominator] +
@@ -424,8 +438,9 @@ def main():
     parser.add_argument("--audit", action="store_true")
     parser.add_argument("--next-family", action="store_true")
     parser.add_argument("--third-family", action="store_true")
+    parser.add_argument("--fourth-family", action="store_true")
     args = parser.parse_args()
-    require(not (args.next_family and args.third_family),
+    require(sum((args.next_family, args.third_family, args.fourth_family)) <= 1,
             "choose at most one family selector")
     if args.next_family:
         default_output = OUTPUT
@@ -435,6 +450,11 @@ def main():
     elif args.third_family:
         default_output = OUTPUT
         configure_third_family()
+        if args.output == default_output:
+            args.output = OUTPUT
+    elif args.fourth_family:
+        default_output = OUTPUT
+        configure_fourth_family()
         if args.output == default_output:
             args.output = OUTPUT
     require(args.workers > 0 and args.max_denominator > 0 and

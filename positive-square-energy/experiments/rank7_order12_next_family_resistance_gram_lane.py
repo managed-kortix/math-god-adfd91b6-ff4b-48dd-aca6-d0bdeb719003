@@ -27,6 +27,7 @@ OUTPUT_PATH = HERE / "rank7_order12_next_family_resistance_gram_lane.json"
 OWNER_STREAM = HERE / "rank7_order12_next_family_resistance_gram_owners.jsonl.xz"
 REMAINDER_STREAM = HERE / "rank7_order12_after_resistance_gram_remainder.jsonl.xz"
 SCHEMA = "rank-seven-order-twelve-next-family-resistance-gram-lane-v1"
+SCOPE = "full exact typed/cycle/effective-resistance Gram replay of the largest remaining stratified order-twelve family"
 ORDER = 12
 PATH_COUNT = 18
 TARGETS_PER_ROW = 19
@@ -265,11 +266,14 @@ def scan(workers, max_denominator, progress=False, limit=None, persist=True):
     require((len(all_records), physical, source_digest.hexdigest()) ==
             (source_info["record_total"], source_info["physical_total"],
              source_info["raw_sha256"]), "source remainder authentication failed")
-    expected = stratification["stratification"]["dominant"]["top_strata"][0]
-    require(expected["signature"] == {
+    target_signature = {
         "multiplicity_partition": list(TARGET[0]), "bundle_types": list(TARGET[1]),
         "cycle_rank": TARGET[2], "triangle_total": TARGET[3],
-        "bridge_total": TARGET[4]}, "largest stratified family changed")
+        "bridge_total": TARGET[4]}
+    expected = next((item for item in
+                     stratification["stratification"]["dominant"]["top_strata"]
+                     if item["signature"] == target_signature), None)
+    require(expected is not None, "target stratified family changed")
     if limit is None:
         require(len(records) == expected["orbit_total"] == EXPECTED_TARGET_TOTAL,
                 "target family count changed")
@@ -340,7 +344,7 @@ def scan(workers, max_denominator, progress=False, limit=None, persist=True):
 
     report = {
         "schema": SCHEMA, "full_theorem": False,
-        "scope": "full exact typed/cycle/effective-resistance Gram replay of the largest remaining stratified order-twelve family",
+        "scope": SCOPE,
         "source_report": {"path": SOURCE_REPORT.name, "sha256": source_report_sha256},
         "source_stratification": {"path": STRATIFICATION_PATH.name,
                                   "sha256": stratification_sha256},

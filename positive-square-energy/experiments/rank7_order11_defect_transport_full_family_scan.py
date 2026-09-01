@@ -17,6 +17,7 @@ HERE = Path(__file__).resolve().parent
 LANE_PATH = HERE / "rank7_order11_defect_transport_gram_lane.py"
 OUTPUT = HERE / "rank7_order11_defect_transport_gram_lane.json"
 OWNERS = HERE / "rank7_order11_defect_transport_gram_owners.jsonl.xz"
+FAILURES = HERE / "rank7_order11_defect_transport_gram_failures.jsonl.xz"
 REMAINDER = HERE / "rank7_order11_after_defect_transport_remainder.jsonl.xz"
 SEGMENTS = HERE / "rank7_order11_defect_transport_gram_scan"
 SCHEMA = "rank-seven-order-eleven-defect-transport-full-family-scan-v1"
@@ -240,6 +241,21 @@ def scan(max_denominator, checkpoint_rows, directory, progress, workers):
             owner_raw.update(raw)
     temporary.replace(OWNERS)
 
+    failure_raw = hashlib.sha256()
+    failure_total = failure_physical = 0
+    temporary = FAILURES.with_name(FAILURES.name + ".tmp")
+    with lzma.open(temporary, "wb", format=lzma.FORMAT_XZ, preset=6) as output:
+        for record, certificate, _, type_keys in completed:
+            if certificate[1]:
+                continue
+            raw = canonical_bytes([record, certificate, type_keys,
+                                   LANE.family_payload(TARGET)])
+            output.write(raw)
+            failure_raw.update(raw)
+            failure_total += 1
+            failure_physical += record[4]
+    temporary.replace(FAILURES)
+
     remainder_raw = hashlib.sha256()
     remainder_total = remainder_physical = 0
     temporary = REMAINDER.with_name(REMAINDER.name + ".tmp")
@@ -275,11 +291,9 @@ def scan(max_denominator, checkpoint_rows, directory, progress, workers):
             "maximum_denominator": max_denominator,
         },
         "execution": {"checkpoint_rows": checkpoint_rows,
-                      "segment_directory": directory.name,
-                      "segment_total": len(list(directory.glob("rows-*.json.xz"))),
-                      "cache_signature_total": len(cache),
-                      "cache_hits_this_run": cache_hits,
-                      "optimized_this_run": optimized},
+                       "segment_directory": directory.name,
+                       "segment_total": len(list(directory.glob("rows-*.json.xz"))),
+                       "cache_signature_total": len(cache)},
         "owned_orbit_total": len(owner_indices),
         "owned_physical_total": owner_physical,
         "owned_target_total": len(owner_indices) * LANE.TARGETS_PER_ROW,
@@ -288,9 +302,13 @@ def scan(max_denominator, checkpoint_rows, directory, progress, workers):
         "remaining_remainder_physical_total": remainder_physical,
         "classification_stream_sha256": classification.hexdigest(),
         "owner_stream": {"path": OWNERS.name, "record_total": len(owner_indices),
-                         "physical_total": owner_physical,
-                         "raw_sha256": owner_raw.hexdigest(),
-                         "artifact_sha256": file_sha256(OWNERS)},
+                          "physical_total": owner_physical,
+                          "raw_sha256": owner_raw.hexdigest(),
+                          "artifact_sha256": file_sha256(OWNERS)},
+        "failure_stream": {"path": FAILURES.name, "record_total": failure_total,
+                           "physical_total": failure_physical,
+                           "raw_sha256": failure_raw.hexdigest(),
+                           "artifact_sha256": file_sha256(FAILURES)},
         "updated_remainder_stream": {
             "path": REMAINDER.name, "record_total": remainder_total,
             "physical_total": remainder_physical,
@@ -302,6 +320,99 @@ def scan(max_denominator, checkpoint_rows, directory, progress, workers):
     return report
 
 
+def audit(directory, workers):
+    report, report_sha256 = LANE.strict_json(OUTPUT)
+    require(report.get("schema") == SCHEMA and report.get("full_theorem") is False,
+            "wrong report schema or theorem boundary")
+    (manifest, manifest_sha256, owner, targets,
+     source_total, source_physical) = collect_source(workers)
+    require(report["source_manifest_sha256"] == manifest_sha256 and
+            report["source_remainder_orbit_total"] == source_total and
+            report["source_remainder_physical_total"] == source_physical,
+            "report source changed")
+    identity = {"source_manifest_sha256": manifest_sha256,
+                "target_family": LANE.family_payload(TARGET),
+                "max_denominator": report["gram"]["maximum_denominator"]}
+    completed = read_segments(directory, identity)
+    require(len(completed) == EXPECTED_TARGET_TOTAL == len(targets),
+            "full target scan is incomplete")
+
+    classification = hashlib.sha256()
+    owner_raw = hashlib.sha256()
+    failure_raw = hashlib.sha256()
+    owner_indices = set()
+    owner_physical = failure_physical = 0
+    with lzma.open(OWNERS, "rb") as owner_stream, lzma.open(FAILURES, "rb") as failure_stream:
+        for position, ((record, certificate, local_signature, type_keys),
+                       (expected_record, kernel)) in enumerate(zip(completed, targets, strict=True)):
+            require(record == expected_record and certificate[0] == record[0],
+                    f"source/segment disagreement at target {position}")
+            row = tuple(record[3])
+            _, _, expected_keys, _, family = LANE.paths_types_family(kernel, row)
+            require(family == TARGET and local_signature == signature(expected_keys) and
+                    type_keys == json.loads(signature(expected_keys)),
+                    f"type/family disagreement at target {position}")
+            parameters, cycle_weight = decode(certificate)
+            cost, normalizer, replay_keys, replay_family = exact_replay(
+                kernel, row, parameters, cycle_weight)
+            accepted = cost is not None and cost <= LANE.BUDGET
+            require(replay_family == TARGET and signature(replay_keys) == local_signature and
+                    certificate[1] == accepted and
+                    certificate[2] == (None if cost is None else pair(cost)) and
+                    certificate[3] == pair(normalizer),
+                    f"exact certificate replay failed at target {position}")
+            classification.update(canonical_bytes(certificate))
+            payload = canonical_bytes([record, certificate, type_keys,
+                                       LANE.family_payload(TARGET)])
+            stream = owner_stream if accepted else failure_stream
+            require(stream.readline() == payload,
+                    f"persisted {'owner' if accepted else 'failure'} stream changed")
+            (owner_raw if accepted else failure_raw).update(payload)
+            if accepted:
+                owner_indices.add(record[0])
+                owner_physical += record[4]
+            else:
+                failure_physical += record[4]
+        require(owner_stream.read(1) == b"" and failure_stream.read(1) == b"",
+                "owner or failure stream has trailing records")
+
+    require(classification.hexdigest() == report["classification_stream_sha256"],
+            "classification digest changed")
+    for path, digest, count, physical, key in (
+            (OWNERS, owner_raw, len(owner_indices), owner_physical, "owner_stream"),
+            (FAILURES, failure_raw, len(targets) - len(owner_indices), failure_physical,
+             "failure_stream")):
+        info = report[key]
+        require(info == {"path": path.name, "record_total": count,
+                         "physical_total": physical, "raw_sha256": digest.hexdigest(),
+                         "artifact_sha256": file_sha256(path)},
+                f"{key} aggregate changed")
+
+    remainder_raw = hashlib.sha256()
+    remainder_total = remainder_physical = 0
+    with lzma.open(REMAINDER, "rb") as remainder_stream:
+        for record, _ in LANE.stream_rows(manifest, owner, exclude_owned=True):
+            if record[0] in owner_indices:
+                continue
+            raw = canonical_bytes(record)
+            require(remainder_stream.readline() == raw,
+                    f"persisted remainder changed at source row {record[0]}")
+            remainder_raw.update(raw)
+            remainder_total += 1
+            remainder_physical += record[4]
+        require(remainder_stream.read(1) == b"", "remainder stream has trailing records")
+    remainder_info = report["updated_remainder_stream"]
+    require(remainder_info == {
+        "path": REMAINDER.name, "record_total": remainder_total,
+        "physical_total": remainder_physical, "raw_sha256": remainder_raw.hexdigest(),
+        "artifact_sha256": file_sha256(REMAINDER)},
+        "updated remainder aggregate changed")
+    require(remainder_total + len(owner_indices) == source_total and
+            remainder_physical + owner_physical == source_physical,
+            "audited owner/remainder partition changed")
+    return report, report_sha256
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--max-denominator", type=int, default=128)
@@ -309,8 +420,17 @@ def main():
     parser.add_argument("--segment-directory", type=Path, default=SEGMENTS)
     parser.add_argument("--progress", action="store_true")
     parser.add_argument("--workers", type=int, default=4)
+    parser.add_argument("--audit", action="store_true")
     args = parser.parse_args()
     require(args.workers > 0, "worker total must be positive")
+    if args.audit:
+        report, digest = audit(args.segment_directory, args.workers)
+        print(f"audited={report['target_family']['orbit_total']} "
+              f"owned={report['owned_orbit_total']} "
+              f"failures={report['failure_stream']['record_total']} "
+              f"remaining={report['remaining_remainder_orbit_total']}")
+        print(f"sha256={digest}")
+        return
     report = scan(args.max_denominator, args.checkpoint_rows,
                   args.segment_directory, args.progress, args.workers)
     print(f"target={report['target_family']['orbit_total']} "

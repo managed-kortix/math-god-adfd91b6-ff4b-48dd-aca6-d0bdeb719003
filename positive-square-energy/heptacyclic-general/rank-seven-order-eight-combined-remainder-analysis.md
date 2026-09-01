@@ -322,3 +322,34 @@ family remain unclassified.
 python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --third-family --workers 8
 python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --third-family --workers 8 --audit
 ```
+
+## Fourth-family structural cycle-Gram scan
+
+The same exact typed/cycle Gram is tested on the full 83,611-row theorem-
+eligible remainder after the first three cycle-Gram lanes.  The fourth-largest
+dominant family has 2,928 orbits and 3,060 physical rows, with multiplicity
+partition `2^4 1^6`, bundle types `(2,4,4)`, support cycle rank three, and one
+triangle.
+
+All 2,928 rows are scanned.  Binary64 Powell optimization only proposes the
+typed coefficients and cycle weight; the classification of every row is made
+by denominator-256 rational replay of every Gram entry and path-chain cost.
+No proposed certificate has exact cost at most six.  Thus this pass owns no
+rows: it is an exact negative result for this ansatz, not a structural
+counterexample and not a proof that a richer Gram cannot own the family.
+
+The all-length and rooted-tree statements remain proved at the certificate
+level: any accepted row would have nonnegative path summands
+`(1-t)/(L(1+t))` decreasing under `L -> L+2`, and DNN one-vertex additivity
+would supply arbitrary rooted-tree attachments.  Since the accepted set is
+empty, the induced-owner lift is vacuous here.  The persisted theorem-eligible
+remainder consequently remains exactly 83,611 rows.
+
+- `experiments/rank7_order8_fourth_structural_cycle_gram_lane.json` stores the exact full-family classification and zero-owner ledger.
+- `experiments/rank7_order8_fourth_structural_cycle_gram_owners.jsonl.xz` is the authenticated empty owner stream.
+- `experiments/rank7_order8_after_fourth_structural_cycle_gram_remainder.jsonl.xz` stores the authenticated 83,611-row complement.
+
+```text
+python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --fourth-family --workers 8
+python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --fourth-family --workers 8 --audit
+```
