@@ -63,7 +63,7 @@ triggers:
     agent: math-god
     enabled: true
     session_mode: pinned
-    session_id: a10f0b25-6c8a-488e-b880-c54c9f7aaa98
+    session_id: 011a1b6c-95b0-418a-8011-762183d8fe05
     cron: 0 0 3/6 * * *
     timezone: UTC
     prompt: LANE=millennium. CORE=math-god-millennium. This exact pinned root
