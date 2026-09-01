@@ -82,7 +82,7 @@ triggers:
     enabled: true
     session_mode: pinned
     session_id: 02e4f7af-a0b4-4240-8f2b-81db562e11a4
-    cron: 0 0 1 * * *
+    cron: 0 0 1/6 * * *
     timezone: UTC
     prompt: LANE=breakthrough. CORE=math-god-breakthrough. This exact pinned root
       session permanently owns only the frozen assignment in
