@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Emit the exact 20-leaf terminal refinement of B7-l3 profile position 14."""
+"""Emit the exact 60-leaf terminal refinement of B7-l3 profile position 14."""
 
 import argparse
 import hashlib
@@ -192,7 +192,7 @@ def main():
         args.hash_output.write_bytes(hash_payload(leaves, manifest, identities))
     if args.output:
         if args.leaf is None or not 0 <= args.leaf < LEAVES:
-            parser.error("--output requires --leaf in 0..19")
+            parser.error("--output requires --leaf in 0..59")
         write_cnf(args.output, args.leaf, leaves[args.leaf], *build(leaves[args.leaf]), manifest)
     print(f"PASS position=14 parents={PARENTS} intersections=5 leaves={LEAVES} manifest_sha256={hashlib.sha256(manifest).hexdigest()}")
 
