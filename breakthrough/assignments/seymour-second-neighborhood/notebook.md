@@ -1568,6 +1568,23 @@ No audits yet.
   intersection orbits, and 3,387 profile/parent incidences. This closes exactly
   the frozen clean `B7-l5` parent campaign and no broader branch.
 
+### Complete clean B7-l4 root-cardinality certificates
+
+- Certified all 40 scout-UNSAT exact C-state/`S7(B)` profiles frozen at
+  `e0419f0`, spanning all 1,649 clean `B7-l4` parents. Pinned CaDiCaL 1.7.3
+  emitted textual LRAT for every profile, and pinned `lrat-check` accepted all
+  40 with `c VERIFIED`.
+- Exact totals are 462,367,384 CNF bytes, 1,713,258,694 raw LRAT bytes, and
+  242,442,740 retained `xz -3` bytes. The package ledger splits artifacts into
+  90,679,000, 85,516,660, and 66,247,080 bytes, all strictly below the exclusive
+  250,000,000-byte cap.
+- The canonical ledger/verifier pair binds the frozen inputs, exact artifacts,
+  all campaign tools, and every transitively imported local Python source.
+  Hostile tests reject profile/order, path, counter, and runtime mutations.
+- The closure verifier composes 1,649 parents, 28 states, 10,036 state/parent
+  incidences, all 40 row-pair orbits, and 14,464 profile/parent incidences. This
+  closes exactly the frozen clean `B7-l4` parent campaign and no broader group.
+
 ### Checked clean-sink B6-l4 certificate
 
 - Regenerated the exact clean-sink `B6-l4` CNF from the frozen selector

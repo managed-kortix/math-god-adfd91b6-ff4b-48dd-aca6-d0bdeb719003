@@ -1082,3 +1082,27 @@ orbits. Its independent census verifies 42 clean `B7-l6` parents, 30 states,
 544 parent/orbit incidences, and every support orbit under all 5,040 `S7(B)`
 permutations. This closes the entire frozen clean `B7-l6` parent campaign, but
 does not close any other residual B7 group.
+
+## Complete clean B7-l4 profile root-cardinality certificates
+
+All 40 scout-UNSAT exact C-state/`S7(B)` profiles frozen at `e0419f0` have
+textual LRATs emitted by pinned CaDiCaL 1.7.3 and accepted by pinned
+`lrat-check`. Retained `xz -3` artifacts total 242,442,740 bytes. The package
+ledger splits them into 90,679,000, 85,516,660, and 66,247,080 bytes, each below
+the exclusive 250MB cap.
+
+The reciprocal ledger/verifier binds the frozen inputs, exact artifact set,
+campaign tools, and complete transitive local Python runtime closure. The
+composition audit exhausts 1,649 parents, 28 states, 10,036 state/parent
+incidences, all 40 row-pair orbits, and 14,464 profile/parent incidences.
+
+```sh
+python3 test_m6_b7_l4_profile_root_cardinality.py
+python3 verify_m6_b7_l4_profile_root_cardinality_certificates.py \
+  --checker /tmp/opencode/seymour-lrat-pilots/drat-trim/lrat-check
+python3 verify_m6_b7_l4_profile_root_cardinality_closure.py --replay \
+  --checker /tmp/opencode/seymour-lrat-pilots/drat-trim/lrat-check
+```
+
+This closes exactly the frozen clean `B7-l4` parent campaign and no other
+residual group.
