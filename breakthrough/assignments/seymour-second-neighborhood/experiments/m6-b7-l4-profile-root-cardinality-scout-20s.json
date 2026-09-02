@@ -1,0 +1,338 @@
+{
+  "profiles": 40,
+  "rows": [
+    {
+      "cnf_bytes": 12064633,
+      "cnf_sha256": "8b21498034cb0fbefb2d271391b53c806d4f33419355afb42bd15fd7bba4ee26",
+      "key": "p00",
+      "nanoseconds": 7667020545,
+      "position": 0,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 10745097,
+      "cnf_sha256": "e051bcdc9c1e7ffc553a105e8dd7c55497a873e361266a76d0dd9d1a84bd45a2",
+      "key": "p01",
+      "nanoseconds": 332802304,
+      "position": 1,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12064635,
+      "cnf_sha256": "9d85ef468f2f38fc69793025e1e364b8d3dfcdfa24aad59269339b24229c0d5b",
+      "key": "p02",
+      "nanoseconds": 4519738877,
+      "position": 2,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 10745098,
+      "cnf_sha256": "4928710925ce695e5285bc394d81eb3b3d670a7062baab69c185feeb66073098",
+      "key": "p03",
+      "nanoseconds": 250575505,
+      "position": 3,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 10745096,
+      "cnf_sha256": "e49dd40865c2b481bc1f8d0bd7d1be5ce8db694479e4812b102e759363b20825",
+      "key": "p04",
+      "nanoseconds": 337807070,
+      "position": 4,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12042269,
+      "cnf_sha256": "d06c4565f31c5e46275005f7459eb99a543f364ff00c4c1684910e4392169893",
+      "key": "p05",
+      "nanoseconds": 8429335478,
+      "position": 5,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12064634,
+      "cnf_sha256": "5a98b1d4656d81e8b70f5e0f37de1924b48614b7563837a027dce324eb309cc5",
+      "key": "p06",
+      "nanoseconds": 3142845896,
+      "position": 6,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12064632,
+      "cnf_sha256": "a80a1998fbdf8cf96944c627af6e8711ee024d988ffdad67a3833e0309aafdfc",
+      "key": "p07",
+      "nanoseconds": 12382192595,
+      "position": 7,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 10745099,
+      "cnf_sha256": "705158640d75b52bd7a44f62b1219bcfbc8b1e1e640db21bfd8daf7418ef6019",
+      "key": "p08",
+      "nanoseconds": 1831335652,
+      "position": 8,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12042270,
+      "cnf_sha256": "2d6928b21860ae0aef1e252018db8f0fc666abf752004fd8f182a551f14582af",
+      "key": "p09",
+      "nanoseconds": 1123035992,
+      "position": 9,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12064637,
+      "cnf_sha256": "d304dbfe2ac36e4c0d650dd0ea5470bcfa119743d45c22023cde8cce42c0c2f5",
+      "key": "p10",
+      "nanoseconds": 1098440325,
+      "position": 10,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12064635,
+      "cnf_sha256": "c8f7931cfd060615cc6e1001b4c63c466033115e0fd6054fcb613da6df9c648c",
+      "key": "p11",
+      "nanoseconds": 3050943571,
+      "position": 11,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 10745101,
+      "cnf_sha256": "9b0ff58fdf121b14e28bf06beefa7cf54193c4ab4671fbdd186dcce2ff5939d8",
+      "key": "p12",
+      "nanoseconds": 535307247,
+      "position": 12,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 10745099,
+      "cnf_sha256": "2bd0685ff808a1c6bc4cf69c3b17a71c93935c8d225ecbe08f907b725f5da457",
+      "key": "p13",
+      "nanoseconds": 989681299,
+      "position": 13,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12042268,
+      "cnf_sha256": "e38b45b12923a22e47f2efd475fe65e1a6b4750319239309468a2d9617b4dc10",
+      "key": "p14",
+      "nanoseconds": 4111685376,
+      "position": 14,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12064634,
+      "cnf_sha256": "d09dc575ca22e71f1e55dcd1ef55760a92e28d89201b6065d347d9276288bf9f",
+      "key": "p15",
+      "nanoseconds": 9441161082,
+      "position": 15,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12042270,
+      "cnf_sha256": "b80034d40bb2f534fa203dfe6701a9041bacc2b8ab1a0bfe42abd6f8f271ce48",
+      "key": "p16",
+      "nanoseconds": 4548586996,
+      "position": 16,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12064635,
+      "cnf_sha256": "6fefbb2b91e8948ffb5deb9d8d4279cedf135d96442ff66430ef4d97a7ff3fe9",
+      "key": "p17",
+      "nanoseconds": 6651579579,
+      "position": 17,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12064633,
+      "cnf_sha256": "e23a8e1d5caa62094ec8a89228d510ca1366db2191c17057fb6250da13dc2063",
+      "key": "p18",
+      "nanoseconds": 10544539066,
+      "position": 18,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 10745100,
+      "cnf_sha256": "5e5be55e289d3cc15706b29c0b6b52a8226f833392cdf86bf2d727beefcb303c",
+      "key": "p19",
+      "nanoseconds": 1012464039,
+      "position": 19,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12042269,
+      "cnf_sha256": "d482b393f18721cfd0ba4cd430926ace69572457fc95fff2718a47d8c584c89c",
+      "key": "p20",
+      "nanoseconds": 1268192390,
+      "position": 20,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12042267,
+      "cnf_sha256": "0fcd57dee675523a158143f23d999705a09f750e0d73e293718d827ad4a0020d",
+      "key": "p21",
+      "nanoseconds": 1311492137,
+      "position": 21,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12064636,
+      "cnf_sha256": "777f9cf448b23ea50716af21d3e72e9543b3d9778a7958df37101a72d811cb39",
+      "key": "p22",
+      "nanoseconds": 4901676715,
+      "position": 22,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12042271,
+      "cnf_sha256": "85c3c0e5eb8bc0028234c6b31b1c5191617ae571e432a334ec2ff9d116c238e0",
+      "key": "p23",
+      "nanoseconds": 996409340,
+      "position": 23,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12042269,
+      "cnf_sha256": "7db637c9347566dd7ce00ae74092f586618be29aeb466f8f546dd3782c971b2d",
+      "key": "p24",
+      "nanoseconds": 1817991098,
+      "position": 24,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12064637,
+      "cnf_sha256": "8564ec397923fe841899bb95d33f462acd34b78adc538d75f4f61f838db470a7",
+      "key": "p25",
+      "nanoseconds": 1374398736,
+      "position": 25,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 12064635,
+      "cnf_sha256": "eae544cac76fc65df5b4461449ae4769634bb8747ef7f4db25ba3be8bd16e2fb",
+      "key": "p26",
+      "nanoseconds": 2079394879,
+      "position": 26,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 10745101,
+      "cnf_sha256": "55f2a9a8b3cc4b3a3ea7a241649545c421540cb6707d4911cb2f5a25c05f2883",
+      "key": "p27",
+      "nanoseconds": 587752580,
+      "position": 27,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 11778856,
+      "cnf_sha256": "e238ec501b39d3fb6078e237b191483cbb5410895d8593835676ebc9f0e3dd4c",
+      "key": "p28",
+      "nanoseconds": 10617653360,
+      "position": 28,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 10769946,
+      "cnf_sha256": "9cb9c342286f1bfbb5d55960de3e36241031f69936cca987a06033b6771a9b8a",
+      "key": "p29",
+      "nanoseconds": 3338511440,
+      "position": 29,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 11778858,
+      "cnf_sha256": "fe79ec2645f6ceec80e40fc81755ca1f13736190fe7dde76608ed014b7f45f64",
+      "key": "p30",
+      "nanoseconds": 3347824337,
+      "position": 30,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 10769947,
+      "cnf_sha256": "eb7fc86f5a116f36d50c3c9930b1d7c9b2f79fb6cc3d95bb2f878cc9c0a0dc80",
+      "key": "p31",
+      "nanoseconds": 2027300679,
+      "position": 31,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 10769945,
+      "cnf_sha256": "fbe2cc8470948fce33fa67e756ed6d41ba45c4ba5fc32e9010550262e2ef9311",
+      "key": "p32",
+      "nanoseconds": 1001928591,
+      "position": 32,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 11778857,
+      "cnf_sha256": "edf33c3d4675c2e422735312cb46425972a40b5046fcd7cc08dc26298af0e397",
+      "key": "p33",
+      "nanoseconds": 2989258217,
+      "position": 33,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 11778855,
+      "cnf_sha256": "edccfb1cc44fecf9198806b43da5a7114e7ed7d35e2c5e075c41c72578fbdd54",
+      "key": "p34",
+      "nanoseconds": 5156080667,
+      "position": 34,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 10769948,
+      "cnf_sha256": "c1b7b7d15055b97c44970ecc97c1169b69c1eb9ca072afe3d5585bc013318ccd",
+      "key": "p35",
+      "nanoseconds": 2433591165,
+      "position": 35,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 11778859,
+      "cnf_sha256": "803bd0c6262a3ba798bdd7741358e62be04a66ad7c62d3c7b7ee370affc35a9e",
+      "key": "p36",
+      "nanoseconds": 1014858936,
+      "position": 36,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 11778857,
+      "cnf_sha256": "e35fa6cb7d4ed3e1f3d66658dc0897be0ae6bf9a0417da51a305fc87866d1954",
+      "key": "p37",
+      "nanoseconds": 1457061729,
+      "position": 37,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 10769949,
+      "cnf_sha256": "ac00ec937ba4e6ef6caff50cb5bd7269c9444d631c66eacc1d35a823cc2548b9",
+      "key": "p38",
+      "nanoseconds": 619148885,
+      "position": 38,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_bytes": 10769947,
+      "cnf_sha256": "ae28f1dd80b091d5ca3acc80e51baa7bc4b2deda3ea5ff59dece8dad67f02fbd",
+      "key": "p39",
+      "nanoseconds": 683163971,
+      "position": 39,
+      "status": "UNSAT"
+    }
+  ],
+  "sat": 0,
+  "schema": "m6-b7-l4-profile-root-cardinality-scout-v1",
+  "seconds_per_profile": 20,
+  "solver_bytes": 1002216,
+  "solver_options": [
+    "--restart=false",
+    "--phase=false",
+    "--seed=3"
+  ],
+  "solver_sha256": "108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292",
+  "solver_version": "1.7.3",
+  "timeout": 0,
+  "unsat": 40
+}
