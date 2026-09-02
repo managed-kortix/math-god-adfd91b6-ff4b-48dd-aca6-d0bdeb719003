@@ -19,12 +19,12 @@ STEM = f"{producer.PREFIX}-except-position14"
 LEDGER = HERE / f"{STEM}-certificates.tsv"
 PACKAGES = HERE / f"{STEM}-packages.tsv"
 FORMAT = f"{STEM}-certificates-v1"
-LEDGER_CANONICAL_SHA256 = "9fd8b6b20ca9384a5fa3b430e205af9e6a881bc57c5533752e510fda57a59c72"
+LEDGER_CANONICAL_SHA256 = "9f367b95dab5564ecba2da2bc9af12fb2abbecf4f715f60e2dfd2ab80cd1efce"
 SELF_TOKEN = b'LEDGER_CANONICAL_SHA256 = "' + b"0" * 64 + b'"'
 CHECKER_SHA256 = "e9e71c96b68dc9ed22db35d7581e613e6b161ffbc82c20cba5699f8320a065b8"
 LIMIT = 250_000_000
 POSITIONS = tuple(position for position in range(19) if position != 14)
-TOTALS = {"cnf-bytes": 269699633, "lrat-bytes": 5620810828, "xz-bytes": 517279184}
+TOTALS = {"cnf-bytes": 269699633, "lrat-bytes": 5620810828, "xz-bytes": 485931620}
 COLUMNS = ("position", "key", "state-key", "t", "parents", "variables", "clauses", "cnf-bytes",
            "cnf-sha256", "lrat-bytes", "lrat-sha256", "xz-bytes", "xz-sha256", "solve-nanoseconds",
            "check-nanoseconds", "artifact")
