@@ -17,7 +17,7 @@ FORMAT = f"{PREFIX}-cnf-v1"
 MANIFEST_FORMAT = f"{PREFIX}-manifest-v1"
 HASH_FORMAT = f"{PREFIX}-hashes-v1"
 POSITION = 14
-LEAVES = 20
+LEAVES = 60
 PARENTS = 1269
 HIGH_VALUES = tuple(range(4))
 SOURCE_PATHS = {
@@ -69,9 +69,11 @@ def load_leaves():
         raise RuntimeError("five q,H_CC shard intersections are not an exact position-14 cover")
     leaves = []
     for shard_ordinal, shard, members in intersections:
-        for high_a in HIGH_VALUES:
-            key = f"p14-{shard[0]}-ha{high_a}"
-            leaves.append((key, shard_ordinal, shard[0], shard[2], shard[3], shard[4], high_a, members))
+        chunks = tuple(members[i:i + 100] for i in range(0, len(members), 100))
+        for chunk, selected in enumerate(chunks):
+            for high_a in HIGH_VALUES:
+                key = f"p14-{shard[0]}-c{chunk:02d}-ha{high_a}"
+                leaves.append((key, shard_ordinal, shard[0], shard[2], shard[3], chunk, high_a, selected))
     if len(leaves) != LEAVES:
         raise RuntimeError("terminal leaf count changed")
     return tuple(leaves)
@@ -116,8 +118,8 @@ def manifest_payload(leaves):
     for name, item in SOURCE_IDENTITIES.items():
         lines.extend((f"{name}-bytes\t{item[0]}", f"{name}-sha256\t{item[1]}"))
     lines.extend(("parent-profile-position\t14", "parent-profile-key\tp14", f"parents\t{PARENTS}",
-                  "q-hcc-intersections\t5", "high-A-values\t0,1,2,3", f"leaves\t{LEAVES}",
-                  "cover\tdisjoint-and-exhaustive", "ordering\tbalanced-shard-ordinal,high(A)",
+                  "q-hcc-intersections\t5", "parent-chunk-cap\t100", "high-A-values\t0,1,2,3", f"leaves\t{LEAVES}",
+                  "cover\tdisjoint-and-exhaustive", "ordering\tbalanced-shard-ordinal,parent-chunk,high(A)",
                   "columns\tleaf-ordinal,key,shard-ordinal,shard-key,q,H_CC,chunk,high-A,parents,variables,clauses,member-sha256"))
     for ordinal, leaf in enumerate(leaves):
         cnf, _, _, _ = build(leaf)

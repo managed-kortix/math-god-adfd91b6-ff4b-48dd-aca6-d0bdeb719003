@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit the exact 20-leaf B7-l3 position-14 terminal refinement."""
+"""Audit the exact 60-leaf B7-l3 position-14 terminal refinement."""
 
 import argparse
 import hashlib
@@ -34,14 +34,16 @@ def derive_cover():
                 raise RuntimeError("independent q,H_CC intersection changed")
             intersections.append((ordinal, shard, members))
     base = [(member[0], member[1]) for _, _, members in intersections for member in members]
-    leaves = [(ordinal, shard, high_a, members) for ordinal, shard, members in intersections
+    leaves = [(ordinal, shard, chunk, high_a, selected)
+              for ordinal, shard, members in intersections
+              for chunk, selected in enumerate(tuple(members[i:i + 100] for i in range(0, len(members), 100)))
               for high_a in range(4)]
-    assignments = [(accepted, cover, high_a) for _, _, high_a, members in leaves
-                   for accepted, cover, _ in members]
+    assignments = [(accepted, cover, high_a) for _, _, _, high_a, members in leaves
+                    for accepted, cover, _ in members]
     expected = {(accepted, cover, high_a) for accepted, cover in parent for high_a in range(4)}
     if len(intersections) != 5 or len(base) != 1269 or set(base) != set(parent) or \
-            len(leaves) != 20 or len(assignments) != 5076 or set(assignments) != expected:
-        raise RuntimeError("independent 20-leaf cover is not disjoint and exhaustive")
+            len(leaves) != 60 or len(assignments) != 5076 or set(assignments) != expected:
+        raise RuntimeError("independent 60-leaf cover is not disjoint and exhaustive")
     return tuple(leaves)
 
 
@@ -50,7 +52,7 @@ def load_manifest():
     lines = data.decode("ascii").splitlines()
     columns = "columns\tleaf-ordinal,key,shard-ordinal,shard-key,q,H_CC,chunk,high-A,parents,variables,clauses,member-sha256"
     if data != ("\n".join(lines) + "\n").encode("ascii") or lines[0] != producer.MANIFEST_FORMAT or \
-            lines.count(columns) != 1 or len(lines[lines.index(columns) + 1:]) != 20:
+            lines.count(columns) != 1 or len(lines[lines.index(columns) + 1:]) != 60:
         raise RuntimeError("terminal manifest framing differs")
     return data, lines[lines.index(columns) + 1:]
 
@@ -58,9 +60,9 @@ def load_manifest():
 def load_hashes(manifest):
     lines = HASHES.read_text(encoding="ascii").splitlines()
     expected = [producer.HASH_FORMAT, f"manifest-bytes\t{len(manifest)}",
-                f"manifest-sha256\t{hashlib.sha256(manifest).hexdigest()}", "leaves\t20",
+                 f"manifest-sha256\t{hashlib.sha256(manifest).hexdigest()}", "leaves\t60",
                 "columns\tleaf-ordinal,key,parents,variables,clauses,cnf-bytes,cnf-sha256"]
-    if lines[:5] != expected or len(lines) != 25:
+    if lines[:5] != expected or len(lines) != 65:
         raise RuntimeError("terminal hash ledger framing differs")
     result = []
     for ordinal, line in enumerate(lines[5:]):
@@ -77,9 +79,9 @@ def audit(regenerate=True):
     leaves = producer.load_leaves()
     manifest, rows = load_manifest()
     hashes = load_hashes(manifest)
-    observed = [(shard_ordinal, shard[0], high_a, len(members))
-                for leaf, (shard_ordinal, shard, high_a, members) in zip(leaves, independent)]
-    expected = [(leaf[1], leaf[2], leaf[6], len(leaf[-1])) for leaf in leaves]
+    observed = [(shard_ordinal, shard[0], chunk, high_a, len(members))
+                for leaf, (shard_ordinal, shard, chunk, high_a, members) in zip(leaves, independent)]
+    expected = [(leaf[1], leaf[2], leaf[5], leaf[6], len(leaf[-1])) for leaf in leaves]
     if observed != expected or tuple(row.split("\t")[1] for row in rows) != tuple(leaf[0] for leaf in leaves):
         raise RuntimeError("producer and independent terminal covers differ")
     if regenerate:
@@ -89,7 +91,7 @@ def audit(regenerate=True):
                 producer.write_cnf(path, ordinal, leaf, *producer.build(leaf), manifest)
                 if identity(path) != hashes[ordinal]:
                     raise RuntimeError(f"regenerated terminal leaf differs: {ordinal:02d}")
-    print("PASS position=14 parents=1269 intersections=5 leaves=20 disjoint=yes exhaustive=yes")
+    print("PASS position=14 parents=1269 intersections=5 leaves=60 disjoint=yes exhaustive=yes")
 
 
 def check(path):
@@ -99,8 +101,8 @@ def check(path):
     hashes = load_hashes(manifest)
     metadata, variables, clauses, declared = parse_cnf(path)
     ordinal = int(dict(metadata).get("leaf-ordinal", "-1"))
-    if not 0 <= ordinal < 20:
-        raise RuntimeError("leaf ordinal outside 0..19")
+    if not 0 <= ordinal < 60:
+        raise RuntimeError("leaf ordinal outside 0..59")
     cnf, selectors, root_delta, split_delta = producer.build(leaves[ordinal])
     expected_metadata = producer.metadata(ordinal, leaves[ordinal], manifest, selectors, root_delta, split_delta)
     if metadata != expected_metadata or variables != list(cnf.names) or clauses != list(cnf.clauses) or \
