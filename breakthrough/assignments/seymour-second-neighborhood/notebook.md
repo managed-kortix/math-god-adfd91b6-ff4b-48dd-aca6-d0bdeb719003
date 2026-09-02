@@ -1883,6 +1883,29 @@ No audits yet.
   and tests
   5,262/`65c60b70ad0abadfc3c3b1f7b04a67e8e05c9e3cf6c4e3e6f3d3a676bfb8c75b`.
 
+### Complete clean B7-l2 parent-chunk certificates
+
+- Bound the exact four-profile, 8,119-parent chunk cover frozen at `721249a`:
+  163 ordered cap-50 chunks per profile, 652 leaves total, and 32,476
+  profile/parent incidences. The chunks are disjoint and exhaustive within each
+  profile and compose to the complete clean `B7-l2` parent campaign.
+- Pinned CaDiCaL 1.7.3 generated textual LRAT for every frozen scout-UNSAT
+  leaf, and pinned `lrat-check` accepted all 652 before staging. The retained
+  `xz -3` corpus totals 4,409,362,076 bytes.
+- The package ledger splits the ordered corpus into 52 consecutive packages;
+  every package is strictly below the exclusive 90,000,000-byte cap and is
+  bound by the hash of its complete ordered artifact-identity set.
+- The strict certificate ledger and verifier reciprocally pin one another and
+  bind the `721249a` commit/tree, cover manifest, CNF hashes, scout, all direct
+  tools, and the complete transitive local Python runtime. Full verification
+  authenticated all 652 compressed and decompressed LRAT identities.
+- Representative fresh replay regenerated, structurally audited, and checked
+  the first and last chunk of every profile (leaves 000, 162, 163, 325, 326,
+  488, 489, and 651). The independent closure verifier then proved the exact
+  652-leaf/8,119-parent composition. Details are in
+  `attempts/frozen-b7-l2-parent-chunk-certificates.md`; no broader group or
+  Seymour claim is made, and no commit was made.
+
 ### B7 singleton-parent scout-UNSAT certificates
 
 - On committed base `b7cdeff6816fd29eedc9633aea7d7adb949d55a5`, certified
