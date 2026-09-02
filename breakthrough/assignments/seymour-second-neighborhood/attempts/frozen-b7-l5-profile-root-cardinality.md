@@ -22,9 +22,18 @@ reconstructs the frozen base, state/profile units, parent disjunction, and fresh
 counters without importing the producer. Its semantic audit checks all 262,144
 degree vectors and 261 root-cut arithmetic cases.
 
-## Current status
+## Certificates and implication
 
-This is a campaign freeze only. The manifest and every emitted CNF explicitly
-record `certificate-status=not-started`. The scout entrypoint is pinned to the
-same CaDiCaL 1.7.3 identity and options as the committed B7-l6 campaign, but no
-LRATs, certificate ledger, certificate verifier, or closure claim is included.
+Pinned CaDiCaL 1.7.3 produced 53 textual LRATs, and pinned `lrat-check` accepted
+all 53. The raw proofs total 1,004,531,865 bytes; retained `xz -3` artifacts total
+121,021,160 bytes, strictly below the exclusive 250,000,000-byte cap. The strict
+ledger and verifier reciprocally pin their canonical forms, bind all direct and
+transitive runtime sources, authenticate the exact artifact set, regenerate all
+CNFs, decompress every proof, and rerun `lrat-check`.
+
+The composition verifier independently reconstructs all 322 parents, 30 states,
+1,920 parent/state incidences, 53 exact `S7(B)` profiles, and 3,387
+parent/profile incidences. For every state it exhausts the intersection orbits
+of both exact C-to-B rows. Since all 53 profile disjunctions are certified UNSAT,
+the complete frozen clean `B7-l5` parent campaign is closed. This does not close
+another residual group, order 18 generally, or Seymour's conjecture.

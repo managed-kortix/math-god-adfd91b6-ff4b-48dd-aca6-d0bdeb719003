@@ -1550,6 +1550,24 @@ No audits yet.
   `(5016,28632,910178)`, B7-l4 `(1649,25265,395027)`, B7-l5
   `(322,23938,191996)`, and B7-l6 `(42,23658,149156)`.
 
+### Complete clean B7-l5 root-cardinality certificates
+
+- Certified all 53 frozen exact C-state/`S7(B)` profiles spanning all 322 clean
+  `B7-l5` parents. Pinned CaDiCaL 1.7.3 emitted textual LRAT for every profile,
+  and pinned `lrat-check` accepted all 53 with `c VERIFIED`.
+- The exact package totals 573,429,055 CNF bytes, 1,004,531,865 raw LRAT bytes,
+  and 121,021,160 retained `xz -3` bytes. The strict certificate ledger is
+  `experiments/m6-b7-l5-profile-root-cardinality-certificates.tsv`; fresh replay
+  is `experiments/verify_m6_b7_l5_profile_root_cardinality_certificates.py`.
+- The canonical ledger and verifier reciprocally pin one another and bind the
+  manifest, CNF hashes, 53-result scout, all direct campaign files, and every
+  transitively imported local Python source. Hostile tests reject profile/order,
+  path, counter, and source-binding mutations.
+- `experiments/verify_m6_b7_l5_profile_root_cardinality_closure.py` independently
+  composes 322 parents, 30 states, 1,920 state/parent incidences, all 53 row-pair
+  intersection orbits, and 3,387 profile/parent incidences. This closes exactly
+  the frozen clean `B7-l5` parent campaign and no broader branch.
+
 ### Checked clean-sink B6-l4 certificate
 
 - Regenerated the exact clean-sink `B6-l4` CNF from the frozen selector

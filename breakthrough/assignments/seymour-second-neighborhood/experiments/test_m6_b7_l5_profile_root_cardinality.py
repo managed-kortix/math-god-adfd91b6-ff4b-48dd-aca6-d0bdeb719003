@@ -7,6 +7,7 @@ from pathlib import Path
 
 import check_m6_b7_l5_profile_root_cardinality as checker
 import m6_b7_l5_profile_root_cardinality as producer
+import verify_m6_b7_l5_profile_root_cardinality_certificates as verifier
 
 
 class B7L5ProfileRootCardinalityTest(unittest.TestCase):
@@ -31,6 +32,32 @@ class B7L5ProfileRootCardinalityTest(unittest.TestCase):
 
     def test_semantics(self):
         checker.semantic_audit()
+
+    def test_strict_certificate_ledger(self):
+        metadata, rows = verifier.load_ledger()
+        verifier.verify_bindings(metadata)
+        verifier.artifact_paths(rows)
+        verifier.verify_artifact_identities(rows)
+
+    def test_rejects_ledger_profile_mutation(self):
+        data = verifier.LEDGER.read_text(encoding="ascii")
+        mutated = data.replace("00\tp00\t", "01\tp00\t", 1)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "bad.tsv"
+            path.write_text(mutated, encoding="ascii", newline="\n")
+            with self.assertRaises(RuntimeError):
+                verifier.load_ledger(path)
+
+    def test_rejects_noncanonical_artifact_path(self):
+        data = verifier.LEDGER.read_text(encoding="ascii")
+        mutated = data.replace("certificates/m6-b7-l5-profile-root-cardinality-profile-00.lrat.xz",
+                               "certificates/../hostile.lrat.xz", 1)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "bad.tsv"
+            path.write_text(mutated, encoding="ascii", newline="\n")
+            _, rows = verifier.load_ledger(path)
+            with self.assertRaises(RuntimeError):
+                verifier.artifact_paths(rows)
 
     def test_representative_reconstructions(self):
         manifest, _ = checker.load_manifest()

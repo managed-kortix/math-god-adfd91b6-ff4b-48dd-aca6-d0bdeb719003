@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Run the pinned-solver scout for all 53 B7-l5 root-cardinality profiles."""
+"""Reproduce the canonical 53-profile B7-l5 root-cardinality scout."""
 
 import argparse
 import hashlib
 import json
+from pathlib import Path
 import subprocess
 import tempfile
 import time
-from pathlib import Path
 
 import m6_b7_l5_profile_root_cardinality as producer
 
@@ -44,16 +44,12 @@ def main():
             if status is None:
                 raise RuntimeError(f"unexpected solver exit {result.returncode}")
             size, digest = identity(path)
-            rows.append({"position": position, "key": profile[0], "state": profile[1],
-                         "state_key": profile[2], "intersection_t": profile[4],
-                         "parents": len(profile[7]), "cnf_bytes": size, "cnf_sha256": digest,
-                         "status": status, "nanoseconds": elapsed})
-            print(f"PASS {position + 1:02d}/53 profile={position:02d} status={status}", flush=True)
-    payload = {"schema": f"{producer.PREFIX}-scout-v1",
-               "manifest_sha256": hashlib.sha256(manifest).hexdigest(),
-               "seconds_per_profile": args.seconds, "solver_bytes": identity(solver)[0],
-               "solver_sha256": SOLVER_SHA256, "solver_version": "1.7.3",
-               "solver_options": list(OPTIONS), "profiles": 53,
+            rows.append({"position": position, "key": profile[0], "cnf_bytes": size,
+                         "cnf_sha256": digest, "status": status, "nanoseconds": elapsed})
+            print(f"PASS {position + 1:02d}/53 profile={profile[0]} status={status}", flush=True)
+    payload = {"schema": f"{producer.PREFIX}-scout-v1", "seconds_per_profile": args.seconds,
+               "solver_bytes": identity(solver)[0], "solver_sha256": SOLVER_SHA256,
+               "solver_version": "1.7.3", "solver_options": list(OPTIONS), "profiles": 53,
                "unsat": sum(row["status"] == "UNSAT" for row in rows),
                "sat": sum(row["status"] == "SAT" for row in rows),
                "timeout": sum(row["status"] == "TIMEOUT" for row in rows), "rows": rows}

@@ -1,5 +1,26 @@
 # Exact baseline experiments
 
+The complete clean `B7-l5` root-cardinality package contains 53 independently
+checked LRATs for all 322 frozen parents. Its compressed proofs total
+121,021,160 bytes. Strict CNF regeneration and raw-proof authentication, fresh
+proof replay, and the independent 53-profile composition closure are:
+
+```sh
+python3 verify_m6_b7_l5_profile_root_cardinality_certificates.py --no-replay
+python3 verify_m6_b7_l5_profile_root_cardinality_certificates.py \
+  --checker /path/to/pinned/lrat-check
+python3 verify_m6_b7_l5_profile_root_cardinality_closure.py \
+  --replay --checker /path/to/pinned/lrat-check
+python3 test_m6_b7_l5_profile_root_cardinality.py
+```
+
+The certificate ledger/verifier use reciprocal canonical hashes and bind the
+manifest, CNF hash ledger, scout, producers, checker, hostile tests, composition
+verifier, and complete transitive Python runtime closure. Even `--no-replay`
+regenerates and structurally checks every CNF and decompresses every artifact to
+authenticate its raw LRAT size and hash; it only skips invoking `lrat-check`.
+The closure claim is only the exact clean `B7-l5` parent group.
+
 The frozen 33-membership exact-pair TIMEOUT complete-cut census is regenerated
 and independently checked with:
 
