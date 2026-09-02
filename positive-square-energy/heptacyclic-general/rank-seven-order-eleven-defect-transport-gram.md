@@ -107,3 +107,18 @@ Additional authenticated artifacts are:
 - `experiments/rank7_order11_third_family_closure.py` extracts, verifies, and removes exactly the two third-family exceptions.
 - `experiments/rank7_order11_third_family_closure_owners.json.xz` stores the two stronger rational Gram packets.
 - `experiments/rank7_order11_after_third_family_closure_remainder.jsonl.xz` is the updated exact global remainder.
+
+The fourth family has multiplicities `1^17`, bundle types `(6,0,11)`, support
+cycle rank seven, and two triangles. Typed defect transport owns `283,643` of
+its `283,644` rows. The sole failure is source row `3906482`, kernel identity
+`(15929,552)`, with orbit size two. Its closure stores a stronger direct
+spectral/packet rational Gram with exact canonical and every one-path `+2`
+frontier costs at most six. Exact rational replay, fixed-parity all-length
+monotonicity, and one-vertex DNN tree additivity therefore close the complete
+family. Carrying the two authenticated third-family rescues forward leaves
+`10,193,461` remainder orbits and `14,571,048` physical rows.
+
+The authenticated fourth-family closure artifacts are
+`experiments/rank7_order11_fourth_family_closure.py`,
+`experiments/rank7_order11_fourth_family_closure_owners.json.xz`, and
+`experiments/rank7_order11_after_fourth_family_closure_remainder.jsonl.xz`.

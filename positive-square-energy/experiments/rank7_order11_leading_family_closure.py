@@ -34,6 +34,7 @@ FAMILY_LABEL = "leading"
 STATUS = "leading-family-completely-closed"
 SCOPE = "all 319522 rows in the leading order-eleven defect-transport family"
 CLAIM_BOUNDARY = "the leading 319522-row family is completely theorem-owned; rows outside this family remain in the exact updated remainder"
+PRIOR_CLOSURE_OWNER_PATHS = ()
 DENOMINATORS = (64, 128, 256, 512, 1024, 2048, 4096)
 DIMENSION = 11
 F = Fraction
@@ -329,7 +330,27 @@ def verify_owners(owners, failures, kernels):
         verify_witness(paths, owner["witness"])
 
 
+def prior_closure_indices():
+    indices = set()
+    artifacts = []
+    for path in PRIOR_CLOSURE_OWNER_PATHS:
+        payload, raw_sha256, artifact_sha256 = read_json(path, True)
+        owners = payload.get("owners")
+        require(isinstance(owners, list), "malformed prior closure owner artifact")
+        incoming = {owner["source_index"] for owner in owners}
+        require(len(incoming) == len(owners) and indices.isdisjoint(incoming),
+                "prior closure owner identities overlap")
+        indices.update(incoming)
+        artifacts.append({"path": path.name, "owner_total": len(owners),
+                          "raw_sha256": raw_sha256,
+                          "artifact_sha256": artifact_sha256})
+    return indices, artifacts
+
+
 def write_remainder(owner_indices):
+    prior_indices, _ = prior_closure_indices()
+    require(owner_indices.isdisjoint(prior_indices), "rescue and prior owners overlap")
+    removal_indices = owner_indices | prior_indices
     digest = hashlib.sha256()
     total = physical = removed = removed_physical = 0
     temporary = REMAINDER_PATH.with_name(REMAINDER_PATH.name + ".tmp")
@@ -340,7 +361,7 @@ def write_remainder(owner_indices):
             require(raw.startswith(b"[") and first_comma > 1,
                     "malformed source remainder record")
             source_index = int(raw[1:first_comma])
-            if source_index in owner_indices:
+            if source_index in removal_indices:
                 record = strict_json(raw, SOURCE_REMAINDER_PATH.name)
                 removed += 1
                 removed_physical += record[4]
@@ -352,7 +373,8 @@ def write_remainder(owner_indices):
     physical = (source_report["remaining_remainder_physical_total"] -
                 removed_physical)
     temporary.replace(REMAINDER_PATH)
-    require(removed == EXPECTED_FAILURES, "closure rows not found exactly once in remainder")
+    require(removed == len(removal_indices),
+            "closure rows not found exactly once in remainder")
     return {"path": REMAINDER_PATH.name, "record_total": total,
             "physical_total": physical, "removed_record_total": removed,
             "removed_physical_total": removed_physical,
@@ -360,6 +382,9 @@ def write_remainder(owner_indices):
 
 
 def verify_remainder(owner_indices, expected):
+    prior_indices, _ = prior_closure_indices()
+    require(owner_indices.isdisjoint(prior_indices), "rescue and prior owners overlap")
+    removal_indices = owner_indices | prior_indices
     digest = hashlib.sha256()
     total = physical = removed = removed_physical = 0
     with lzma.open(SOURCE_REMAINDER_PATH, "rb") as source, lzma.open(
@@ -369,7 +394,7 @@ def verify_remainder(owner_indices, expected):
             require(raw.startswith(b"[") and first_comma > 1,
                     "malformed source remainder record")
             source_index = int(raw[1:first_comma])
-            if source_index in owner_indices:
+            if source_index in removal_indices:
                 record = strict_json(raw, SOURCE_REMAINDER_PATH.name)
                 removed += 1
                 removed_physical += record[4]
@@ -397,7 +422,8 @@ def report_payload(scan, scan_raw, failure_raw, failure_xz, owner_artifact,
             scan["updated_remainder_stream"]["artifact_sha256"] ==
             file_sha256(SOURCE_REMAINDER_PATH),
             "defect-transport scan boundary changed")
-    return {
+    prior_indices, prior_artifacts = prior_closure_indices()
+    report = {
         "schema": SCHEMA, "full_theorem": False,
         "status": STATUS,
         "scope": SCOPE,
@@ -425,6 +451,10 @@ def report_payload(scan, scan_raw, failure_raw, failure_xz, owner_artifact,
         },
         "claim_boundary": CLAIM_BOUNDARY,
     }
+    if prior_artifacts:
+        report["carried_prior_closures"] = prior_artifacts
+        report["carried_prior_closure_owner_total"] = len(prior_indices)
+    return report
 
 
 def run(audit=False, progress=False, existing_owners=False):

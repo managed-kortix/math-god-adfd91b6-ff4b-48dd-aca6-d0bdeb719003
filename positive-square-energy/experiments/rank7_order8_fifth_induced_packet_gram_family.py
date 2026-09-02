@@ -22,6 +22,8 @@ OUTPUT = HERE / "rank7_order8_fifth_induced_packet_gram_family.json"
 OWNERS = HERE / "rank7_order8_fifth_induced_packet_gram_family_owners.jsonl.xz"
 REMAINDER = HERE / "rank7_order8_after_fifth_induced_packet_gram_family_remainder.jsonl.xz"
 SCHEMA = "rank-seven-order-eight-fifth-induced-packet-gram-family-v1"
+SCOPE = "full authenticated 80,683-row remainder after complete fourth induced-packet closure"
+DOMINANCE_RANK = 5
 SOURCE_REMAINDER = 83611
 CLOSED_FAMILY_TOTAL = 2928
 EXPECTED_REMAINDER = 80683
@@ -197,7 +199,7 @@ def scan(workers, restarts, iterations, progress=False, limit=None, persist=True
     report = {
         "schema": SCHEMA,
         "full_theorem": len(owners) == EXPECTED_TARGET,
-        "scope": "full authenticated 80,683-row remainder after complete fourth induced-packet closure",
+        "scope": SCOPE,
         "source_report": {"path": SOURCE_REPORT.name,
                           "sha256": hashlib.sha256(report_raw).hexdigest()},
         "source_stream": source_info,
@@ -212,7 +214,7 @@ def scan(workers, restarts, iterations, progress=False, limit=None, persist=True
             "physical_total": physical_strata[key],
         } for key in ranked],
         "target_family": {
-            "dominance_rank": 5,
+            "dominance_rank": DOMINANCE_RANK,
             "multiplicity_partition": list(TARGET[0]),
             "bundle_types": list(TARGET[1]),
             "cycle_rank": TARGET[2],
