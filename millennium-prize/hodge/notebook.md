@@ -1,5 +1,29 @@
 # Notebook
 
+## Cycle 284 external generalized-Kummer corollary
+
+Version-pinned theorem matching gives one newly recorded external special
+family. Foster `arXiv:2512.04114v2`, Theorem 1.7/8.15, proves the full
+Lefschetz standard conjecture for every projective generalized-Kummer-type
+IHSM of complex dimension `4d`. Floccari--Fu `arXiv:2610.31740v1`, Theorem
+1.4, assumes that conjecture for a `Kum^n`-type variety with even `n>=2` and
+concludes the rational Hodge conjecture for it and every self-power. Since
+`4d=2n` means `n=2d`, the theorems compose with no prime condition: rational
+Hodge holds externally, in every codimension, for every self-power of every
+projective generalized-Kummer-type IHSM of complex dimension divisible by
+four.
+
+This is a direct external corollary of two recent preprints, not our theorem
+and not a novelty claim. Foster v2 postdates Floccari--Fu v1 by five days and
+removes the semiregularity contingency described in the latter's Remark 1.5.
+The audit found no remaining Fourier--Mukai, stability, polarization, degree,
+or powers hypothesis in the specialized composition. It does not address
+arbitrary smooth projective varieties, other deformation types, dimensions
+`4d+2`, or mixed products. Nor does it produce the abelian-sixfold cycle or
+chain-level PEL data missing from the stopped graph route. Record this leaf as
+externally covered; do not reopen a route or trigger publication. See
+`../cycle-284-generalized-kummer-external-corollary.md`.
+
 ## Cycle 270 strategic disposition
 
 Accept `DG-ALPHA-WALL` without another cover. Although the three canonical

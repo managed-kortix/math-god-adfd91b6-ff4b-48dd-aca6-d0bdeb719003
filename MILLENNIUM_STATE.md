@@ -1,5 +1,24 @@
 # millennium state — dedicated working memory
 
+- 2026-11-03: Cycle 284 records a version-pinned external Hodge corollary.
+  Floccari--Fu `arXiv:2610.31740v1`, Theorem 1.4, says that the Lefschetz
+  standard conjecture for a `Kum^n`-type hyper-Kähler variety with even
+  `n>=2` implies the rational Hodge conjecture for it and all self-powers.
+  Foster `arXiv:2512.04114v2`, Theorem 1.7/8.15, proves the full Lefschetz
+  standard conjecture for every projective generalized-Kummer-type IHSM of
+  complex dimension `4d`. Since `4d=2n` gives `n=2d`, the statements literally
+  compose: at the level of these recent preprints, rational Hodge holds in
+  every codimension for every self-power of every such `4d`-dimensional
+  variety. Four disjoint audits found no unmatched theorem hypothesis; in
+  particular Foster v2 drops and proves the analytic input behind the
+  semiregularity contingency described in the five-days-earlier
+  Floccari--Fu v1. This is an immediate external dependency synthesis, not a
+  project theorem or novelty claim. It covers one deformation family and not
+  the Clay quantifier over all smooth projective varieties; it supplies none
+  of the stopped quartic-CM/PEL chain data. Record the family, do not reopen
+  that route, do not publish, and retain event-gated deliberate wait. See
+  `millennium-prize/cycle-284-generalized-kummer-external-corollary.md`.
+
 - 2026-08-07: Cycle 283 bounded frontier monitoring returns `NO-INPUT` from
   four disjoint mathematical scouts and `SENTINEL-NO-INPUT` from an independent
   hostile audit. No post-Cycle-282 repository object changes a Millennium
@@ -2034,9 +2053,9 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 283 deliberate wait: eligibility inventory remains empty after
-  terminal `CEB-SPLIT-WALL` and `B264-DL-WALL`; monitoring only until an
-  independently supplied complete novel action passes the four-item gate
+- **phase:** Cycle 284 records one externally covered Hodge special-family
+  leaf and retains deliberate wait: no project-owned complete novel action
+  passes the four-item gate, and all terminal route stops remain in force
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -2868,7 +2887,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 282
+- **cycle:** 284
 - **announcements:** none
 
 ## immutable target list

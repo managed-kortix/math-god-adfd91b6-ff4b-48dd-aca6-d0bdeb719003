@@ -1,5 +1,22 @@
 # Routes
 
+## Cycle 284 external special-family closure
+
+Mark the following leaf as externally covered, version-pinned to the stated
+preprints: every projective generalized-Kummer-type IHSM of complex dimension
+`4d`, and every self-power of it, satisfies the rational Hodge conjecture in
+all codimensions by Foster `arXiv:2512.04114v2`, Theorem 1.7/8.15, composed
+with Floccari--Fu `arXiv:2610.31740v1`, Theorem 1.4. This is an external
+corollary, not a project theorem, and both inputs remain recent preprints.
+
+Do not use this leaf to reopen the stopped quartic-CM/PEL/graph architecture.
+The composition supplies no cycle on its retained abelian sixfold and no
+common-model PEL or chain-level Atiyah--Kodaira--Spencer data. It also does not
+weaken the official quantifier over every smooth projective complex variety.
+Hodge re-entry still requires an independently supplied finite packet with a
+new official-facing implication. See
+`../cycle-284-generalized-kummer-external-corollary.md`.
+
 ## Cycle 270 frozen disposition
 
 `H269-DG-DIAG-ALPHA` is closed at `DG-ALPHA-WALL`; it is no longer the active
