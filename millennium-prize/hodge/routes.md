@@ -1,5 +1,23 @@
 # Routes
 
+## Cycle 286 boundary closure
+
+Retain the Cycle 284 self-power leaf and close the proposed automatic
+extensions. Mixed products of distinct covered varieties require control of
+mixed powers of their distinct intermediate Jacobians; separate self-power
+Hodge does not supply the cross-Hodge correspondences. Admit only a genuinely
+common algebraic motivic generator, such as isogenous Jacobians, together with
+Hodge for all its powers. Direct sums, disjoint unions, products, polarization,
+deformation, or Andre motivated cycles do not bypass this requirement.
+
+Do not add arbitrary abelian varieties, since that would contain the general
+abelian Hodge conjecture. Do not infer a `4d+2` family theorem: both Foster's
+full-standard-conjecture range and Floccari--Fu's non-invariant-motive argument
+have independent parity walls. The known six-dimensional `Kum^3` base case is
+separate and is not, on the checked source statement alone, an all-self-powers
+leaf. No new official-facing packet is admitted. See
+`../cycle-286-generalized-kummer-boundary-audit.md`.
+
 ## Cycle 284 external special-family closure
 
 Mark the following leaf as externally covered, version-pinned to the stated

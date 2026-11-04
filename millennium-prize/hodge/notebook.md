@@ -1,5 +1,26 @@
 # Notebook
 
+## Cycle 286 generalized-Kummer boundary audit
+
+The Cycle 284 theorem composition survives renewed source audit. Its exact
+formal enlargement is the common-generator lemma: if the motives of all
+factors are algebraic-correspondence retracts of tensor constructions from one
+`Y`, and rational Hodge holds for every `Y^m`, then it holds for every mixed
+product of those factors. This gives `K^a x J_K^b` and products whose
+intermediate Jacobians share an isogeny generator.
+
+It does not give arbitrary mixed `K_i`: tensoring separate retractions produces
+mixed powers of the distinct `J_i`, and separate self-power fullness does not
+control cross-Hodge tensors. Disjoint-union, direct-sum, polarization,
+deformation, and Andre-motive shortcuts all stop at that same wall. An
+arbitrary abelian factor would already imply Hodge for all abelian varieties.
+For dimensions `4d+2`, Foster's odd range stops before degree `n+1`, exactly
+where the order-two character summand first appears, and Floccari--Fu's
+canonical-cycle upgrade independently requires even `n`. Preserve the known
+six-dimensional `Kum^3` base case as a separate theorem, not a family or
+self-power extrapolation. See
+`../cycle-286-generalized-kummer-boundary-audit.md`.
+
 ## Cycle 284 external generalized-Kummer corollary
 
 Version-pinned theorem matching gives one newly recorded external special
