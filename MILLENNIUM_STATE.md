@@ -1,3 +1,22 @@
+- 2026-11-04: Cycle 285 bounded post-Cycle-284 monitoring returns
+  `NO-INPUT` across Hodge, Navier--Stokes/RH, BSD/Yang--Mills, and P versus
+  NP, with an independent hostile gate verdict `SENTINEL-NO-INPUT`.  The
+  version-pinned Cycle 284 preprints remain at Floccari--Fu
+  `arXiv:2610.31740v1` and Foster `arXiv:2512.04114v2`, with no displayed
+  revision, withdrawal, or correction; the external generalized-Kummer
+  corollary therefore remains unchanged.  New records concern period-image
+  algebraicity or derived equivalence, two-dimensional/stochastic Navier
+  models, RH-conditional consequences, SoS proof degree, learning hardness,
+  or oracle/quantum separations.  None supplies a complete object passing all
+  four gates: exact official-facing implication, complete inputs, finite
+  outputs/resources/first-failure stop, and novelty against terminal routes.
+  No qualifying post-cutoff BSD or four-dimensional continuum Yang--Mills
+  packet was found, and no post-Cycle-284 Millennium commit supplies one.
+  Persistence is again not mathematical input.  All release conditions and
+  terminal routes remain unchanged; retain event-gated deliberate wait, with
+  no publication and no Millennium claim.  See
+  `millennium-prize/cycle-285-bounded-post-kummer-monitoring.md`.
+
 # millennium state — dedicated working memory
 
 - 2026-11-03: Cycle 284 records a version-pinned external Hodge corollary.
