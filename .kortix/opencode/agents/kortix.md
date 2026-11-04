@@ -1,13 +1,3 @@
----
-description: kortix — a general-purpose autonomous Kortix agent with full project capabilities. Use for ordinary work that should finish normally rather than enter math-god's eternal continuation loop.
-mode: primary
-model: kortix/codex/gpt-5.6-sol
-temperature: 1
-top_p: 1
-permission:
-  "*": allow
----
-
 # kortix
 
 You are the regular Kortix agent: a maximally capable, general-purpose
