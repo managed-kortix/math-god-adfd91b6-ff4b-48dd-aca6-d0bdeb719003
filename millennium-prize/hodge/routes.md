@@ -1,5 +1,30 @@
 # Routes
 
+## Cycle 287 full-`SU` mixed-product leaf
+
+Admit one derived mixed-product subfamily and no more.  For discriminant-one
+Weil fourfolds whose Hodge group equals the full expected special unitary group
+in its natural rational representation, first consolidate isogeny classes.
+Any remaining common `A_3` Lie quotient would identify the standard-plus-dual
+weight-one modules, producing a rational Hodge morphism and hence an isogeny.
+Thus the joint Hodge group is a product, so the self-power theorem extends to
+all mixed powers.  Transfer this only through the explicit theorem chain:
+Floccari--Fu `arXiv:2610.31740v1`, Theorem 1.4, gives motivation by the
+intermediate Jacobian conditional on Lefschetz standard, and Foster
+`arXiv:2512.04114v2`, Theorem 1.7/8.15, proves that condition for projective
+`4d`-dimensional generalized-Kummer varieties. Tensor the resulting algebraic
+split retractions to cover mixed products whose intermediate Jacobians all
+have full expected `SU`.  Treat isogenous repetitions as one motivic
+generator; the separately valid case in which all Jacobians are isogenous to
+one common generator needs no full-`SU` hypothesis.
+
+Do not infer the full-`SU` hypothesis from discriminant one.  Special points
+with smaller groups, extra endomorphisms, decompositions, or CM tori retain the
+Cycle 286 cross-tensor wall.  Simple-factor dimension at most four is not total
+dimension at most four, and separate self-power results remain insufficient.
+This is a restricted formal synthesis, not a novelty or official-facing
+packet.  See `../cycle-287-kummer-mixed-product-classification.md`.
+
 ## Cycle 286 boundary closure
 
 Retain the Cycle 284 self-power leaf and close the proposed automatic

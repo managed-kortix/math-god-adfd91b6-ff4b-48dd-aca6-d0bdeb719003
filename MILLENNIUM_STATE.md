@@ -1,3 +1,27 @@
+- 2026-11-04: Cycle 287 classifies the proposed Kummer-Jacobian
+  mixed-product escape hatch. O'Grady/Markman give a discriminant-one
+  Weil-type abelian fourfold `J_K`, but its Weil field depends on the
+  polarization, special members may decompose, and a product having only
+  simple factors of dimension at most four is not an abelian variety of total
+  dimension at most four. Moonen--Zarhin section 3.1 explicitly identifies
+  common-quotient Hodge-group couplings as the source of additional mixed
+  tensors; their low-dimensional classification and the separate
+  Floccari--Fu self-power theorem do not settle arbitrary special-point mixed
+  products. A precise positive subcase survives: after consolidating isogeny
+  classes, full expected `SU` Hodge groups are independent, because an `A_3`
+  graph coupling preserves the unordered standard/dual pair in `H^1` and
+  would force a weight-one Hodge morphism, hence an isogeny. Product-group
+  invariants plus the exact Floccari--Fu Theorem 1.4/Foster Theorem 1.7--8.15
+  algebraic-motive transfer therefore prove rational Hodge for mixed products
+  of `4d`-dimensional generalized-Kummer varieties whose intermediate
+  Jacobians all have full expected `SU`; isogenous repetitions are treated as
+  one generator, and an all-common-generator family needs no full-`SU` input.
+  This is a restricted
+  derived external synthesis, not a novelty or Clay claim. Arbitrary special
+  Jacobians remain walled by unclassified semisimple/toric couplings and
+  cross-tensor algebraicity; deliberate wait remains. See
+  `millennium-prize/cycle-287-kummer-mixed-product-classification.md`.
+
 - 2026-11-04: Cycle 286 re-verifies the exact Cycle 284 external corollary
   and closes its nearest proposed overextensions. A common-generator lemma
   transfers Hodge through algebraic-correspondence retracts when all factors
@@ -2090,9 +2114,11 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 284 records one externally covered Hodge special-family
-  leaf and retains deliberate wait: no project-owned complete novel action
-  passes the four-item gate, and all terminal route stops remain in force
+- **phase:** Cycle 287 records a restricted full-`SU` mixed-product extension
+  of the externally covered Hodge special-family leaf and retains deliberate
+  wait: arbitrary special-point cross tensors remain unclassified, no
+  project-owned complete novel action passes the four-item gate, and all
+  terminal route stops remain in force
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
   rotates to the selector-free all-order INDEX scout.  The exact lexicographic
@@ -2924,7 +2950,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 284
+- **cycle:** 287
 - **announcements:** none
 
 ## immutable target list

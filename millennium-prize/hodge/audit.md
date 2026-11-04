@@ -1,5 +1,33 @@
 # Hostile audit
 
+## Cycle 287 mixed-product guard
+
+Do not confuse an abelian variety whose simple isogeny factors have dimension
+at most four with an abelian variety of total dimension at most four.
+Moonen--Zarhin's low-dimensional theorem does not apply to an arbitrary
+product of Kummer intermediate Jacobians. Likewise,
+`forall A forall r HC(A^r)` is not the same quantifier as Hodge for mixed
+products of different `A`; common semisimple or toric Hodge-group quotients can
+create cross tensors. A common Weil field, pairwise nonisogeny, or separate
+algebraicity of each factor's Weil classes does not by itself remove them.
+
+The recorded full-`SU` subcase uses every hypothesis. Consolidate isogeny
+classes first; require the full expected special unitary Hodge group in the
+natural rational representation, not just a Weil action or discriminant one;
+use the standard-plus-dual representation to turn any `A_3` graph coupling
+into a weight-one Hodge morphism; and use discriminant one for the
+all-self-powers Hodge input.  Its generalized-Kummer transfer additionally
+uses Floccari--Fu `arXiv:2610.31740v1`, Theorem 1.4, conditional on Lefschetz
+standard, composed literally with Foster `arXiv:2512.04114v2`, Theorem
+1.7/8.15, which proves that condition in complex dimension `4d`.  The
+homological-motive conclusion must be used as algebraic split summands before
+Hodge classes are mapped out and back.  Repeated isogeny classes are common
+motivic generators, not independent factors. Do not extend this proof to
+special points with extra endomorphisms, CM tori, decompositions, or smaller
+Hodge groups, except for the separately precise case in which all Jacobians
+are isogenous to one common generator. See
+`../cycle-287-kummer-mixed-product-classification.md`.
+
 ## Cycle 286 boundary guard
 
 Cycle 284 remains valid exactly as stated, but its formal closure is narrow.

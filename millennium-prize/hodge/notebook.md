@@ -1,5 +1,33 @@
 # Notebook
 
+## Cycle 287 Kummer-Jacobian mixed products
+
+The proposed low-dimensional escape only partially closes. Every projective
+`Kum^n` intermediate Jacobian is a discriminant-one Weil abelian fourfold, but
+the Weil field depends on the polarization, special Jacobians can decompose,
+and `all simple factors have dimension <=4` is not Moonen--Zarhin's
+`total dimension <=4` hypothesis. Their section 3.1 explicitly says that the
+joint Hodge group can be a graph over a common quotient, producing mixed
+Hodge tensors absent from the individual self-power rings. Thus separate
+Floccari--Fu self-power results do not prove arbitrary mixed products.
+
+There is an exact positive subcase. If all Jacobians have full expected
+`SU` Hodge group, consolidate isogenous factors. Any remaining Goursat graph
+couples two `A_3` factors; over `Qbar`, `H^1` is standard plus dual, and every
+`A_3` automorphism preserves that unordered pair. The graph therefore creates
+a nonzero rational weight-one Hodge morphism, hence an abelian homomorphism and
+an isogeny, contradiction. The joint group is a product; Kunneth plus the
+self-power theorem gives Hodge for all mixed Jacobian powers.  Floccari--Fu
+`arXiv:2610.31740v1`, Theorem 1.4, makes each Kummer motive a split summand of
+tensor constructions from its Jacobian conditional on Lefschetz standard, and
+Foster `arXiv:2512.04114v2`, Theorem 1.7/8.15, proves that condition for every
+covered `4d`-dimensional variety.  Tensoring the algebraic split retractions
+therefore transfers mixed Jacobian Hodge to the mixed Kummer products.
+Isogenous Jacobians are first replaced by one common motivic generator; if all
+Jacobians share that generator, no full-`SU` assumption is needed. Other
+special smaller/CM/decomposed Hodge groups remain unclassified. See
+`../cycle-287-kummer-mixed-product-classification.md`.
+
 ## Cycle 286 generalized-Kummer boundary audit
 
 The Cycle 284 theorem composition survives renewed source audit. Its exact
