@@ -121,16 +121,15 @@ triggers:
     agent: math-god
     enabled: true
     session_mode: pinned
-    session_id: 02e4f7af-a0b4-4240-8f2b-81db562e11a4
+    session_id: c22270d5-0299-4140-bfe6-f4d338860353
     cron: 0 0 1/6 * * *
     timezone: UTC
     prompt: LANE=breakthrough. CORE=math-god-breakthrough. This exact pinned root
-      session permanently owns only the frozen assignment in
-      BREAKTHROUGH_STATE.md. Read that file, breakthrough/PROGRAM.md, and the
-      assignment prompt first; do not adopt STATE.md or MILLENNIUM_STATE.md as
-      working memory. Do not spawn Kortix root sessions; maximize entropy with
-      Task subagents on the frozen target. If status is active, never resurvey
-      or switch targets. Select a new target only after a solved or formally
-      retired assignment has completed its publication/state closeout. Pull
-      --rebase, commit, and push durable work. Apply
-      research/procedural/PUBLICATION.md to a verified result. Never stop.
+      session permanently owns only the frozen assignment in BREAKTHROUGH_STATE.md.
+      Read that file, breakthrough/PROGRAM.md, and the assignment prompt first; do
+      not adopt STATE.md or MILLENNIUM_STATE.md as working memory. Do not spawn
+      Kortix root sessions; maximize entropy with Task subagents on the frozen
+      target. If status is active, never resurvey or switch targets. Select a new
+      target only after a solved or formally retired assignment has completed its
+      publication/state closeout. Pull --rebase, commit, and push durable work.
+      Apply research/procedural/PUBLICATION.md to a verified result. Never stop.
