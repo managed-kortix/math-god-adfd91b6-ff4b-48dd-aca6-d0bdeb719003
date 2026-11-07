@@ -79,23 +79,22 @@ triggers:
     agent: math-god
     enabled: true
     session_mode: pinned
-    session_id: 83b3d6ce-b10c-40f6-9092-f17180820099
+    session_id: f7e524b9-9b43-4c2e-9ff5-a969681e0eaf
     cron: 0 0 */6 * * *
     timezone: UTC
     prompt: "LANE=main. CORE=math-god-main. This exact pinned root session
       permanently owns only the main lane. Read STATE.md first; do not adopt
-      MILLENNIUM_STATE.md or BREAKTHROUGH_STATE.md as working memory. Run
-      `python3 scripts/check-core-sessions.py`; reconcile any extra autonomous
-      math-god root before research, but never create a new root unless a
-      registered core is irrecoverably dead and the registry plus pinned trigger
-      are atomically replaced. Continue the exact frontier. Run `bash
-      scripts/setup-harness.sh` when fresh. Pull --rebase, commit, and push
-      durable work. Once per UTC day, run the publication inbox/OCB review in
-      research/procedural/PUBLICATION.md: process relevant replies in their
-      existing threads, check pending Board records, maintain inbox zero under
-      research/procedural/EMAIL.md, and update token-free ledgers without
-      spamming. Apply the complete publication workflow in
-      research/procedural/PUBLICATION.md to every verified result. Never stop."
+      MILLENNIUM_STATE.md or BREAKTHROUGH_STATE.md as working memory. Run `python3
+      scripts/check-core-sessions.py`; reconcile any extra autonomous math-god root
+      before research, but never create a new root unless a registered core is
+      irrecoverably dead and the registry plus pinned trigger are atomically
+      replaced. Continue the exact frontier. Run `bash scripts/setup-harness.sh`
+      when fresh. Pull --rebase, commit, and push durable work. Once per UTC day,
+      run the publication inbox/OCB review in research/procedural/PUBLICATION.md:
+      process relevant replies in their existing threads, check pending Board
+      records, maintain inbox zero under research/procedural/EMAIL.md, and update
+      token-free ledgers without spamming. Apply the complete publication workflow
+      in research/procedural/PUBLICATION.md to every verified result. Never stop."
   - slug: millennium-heartbeat
     name: math-god Millennium lane heartbeat
     type: cron
