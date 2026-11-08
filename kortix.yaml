@@ -120,8 +120,9 @@ triggers:
     type: cron
     agent: math-god
     enabled: true
+    overlap: skip
     session_mode: pinned
-    session_id: c22270d5-0299-4140-bfe6-f4d338860353
+    session_id: 02e4f7af-a0b4-4240-8f2b-81db562e11a4
     cron: 0 0 1/6 * * *
     timezone: UTC
     prompt: LANE=breakthrough. CORE=math-god-breakthrough. This exact pinned root
