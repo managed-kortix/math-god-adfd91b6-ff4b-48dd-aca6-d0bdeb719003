@@ -5,6 +5,7 @@ __pycache__/
 *.out.tmp
 *.partial
 mathenv/
+.venv/
 .DS_Store
 .kortix/link.json
 .claude/

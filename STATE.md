@@ -17,6 +17,19 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-11-08: extended the exact rank-seven order-eight induced-packet Gram
+  chain through five further dominant families (the historical ordinals VII--XI
+  count earlier structural family passes). The authenticated passes own
+  every row of families `2^3 1^8/(2,3,6)/r4/t2` (6817),
+  `2^3 1^8/(3,3,5)/r4/t2` (4219),
+  `2^3 1^8/(2,3,6)/r4/t1` (3765),
+  `2^3 1^8/(1,3,7)/r4/t2` (2731), and
+  `2^2 1^10/(2,2,8)/r5/t3` (2167): 19699 orbit rows, 21307 physical rows,
+  and 295485 canonical-plus-coordinate targets. Exact `Fraction` replay of a
+  shared rational branch Gram plus fourteen coordinate frontiers gives the
+  established all-length/rooted-tree lift. The chained remainder falls from
+  76085 to 56386 rows in 310 families. Independent hostile audit is active;
+  no order-eight or all-heptacyclic theorem claim is made.
 - 2026-08-20: the connected heptacyclic program is reduced to one rank-seven
   block on kernel orders 8--12; the complete multiblock theorem and single-block
   orders 2--7 are proved. Exact order-eight owner accounting now authenticates

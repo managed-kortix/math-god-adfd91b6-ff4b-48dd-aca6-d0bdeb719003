@@ -384,3 +384,75 @@ remainder consequently remains exactly 83,611 rows.
 python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --fourth-family --workers 8
 python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --fourth-family --workers 8 --audit
 ```
+
+
+## Dominant-family exact rational packet closures VII--XI
+
+The authenticated remainder after the sixth induced-packet Gram family has
+76,085 coarse rows.  Five further disjoint finite-family passes now use the
+same exact shared rational waypoint-packet verifier.  Each pass authenticates
+the previous report, owner stream, and reduced-remainder stream before reading
+one row; reconstructs the rank-seven residual row from the frozen rational-
+search census; and accepts a row only after `Fraction` replay of one common
+branch Gram on the canonical target and all fourteen one-coordinate
+length-plus-two frontiers.  Binary64 descent only proposes stereographic
+parameters and is not part of acceptance.
+
+In remainder order the closed families are:
+
+| Pass | Input rows | Multiplicities | Bundle types | Support rank | Triangles | Orbits | Physical | Targets | Output rows |
+| ---: | ---: | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| VII | 76,085 | `2^3 1^8` | `(2,3,6)` | 4 | 2 | 6,817 | 7,492 | 102,255 | 69,268 |
+| VIII | 69,268 | `2^3 1^8` | `(3,3,5)` | 4 | 2 | 4,219 | 4,656 | 63,285 | 65,049 |
+| IX | 65,049 | `2^3 1^8` | `(2,3,6)` | 4 | 1 | 3,765 | 3,916 | 56,475 | 61,284 |
+| X | 61,284 | `2^3 1^8` | `(1,3,7)` | 4 | 2 | 2,731 | 2,968 | 40,965 | 58,553 |
+| XI | 58,553 | `2^2 1^10` | `(2,2,8)` | 5 | 3 | 2,167 | 2,275 | 32,505 | 56,386 |
+
+Thus these five passes own exactly
+
+```text
+19,699 orbit rows,
+21,307 physical rows,
+295,485 canonical-plus-coordinate targets,
+```
+
+and reduce the authenticated order-eight theorem remainder from 76,085 to
+**56,386** rows.  Together with the preceding three induced-packet family closures, the chained
+packet program has removed 27,225 rows from its 83,611-row input.  (The
+historical ordinal names `fifth` through `eleventh` count earlier structural
+family passes, not eleven packet closures.)  This is still not the complete
+order-eight theorem: 56,386 rows
+remain, in 310 finite family strata, and kernel orders 9--12 are separate open
+branches of the connected heptacyclic program.
+
+The theorem lift is exactly the established canonical-plus-coordinate
+reduction.  A canonical realization uses the shortest simple physical lengths
+for its parity state.  If a realization is not canonical, choose a physical
+path whose length has increased and use that path's stored `+2` frontier; the
+realization coordinatewise dominates it.  Retaining the frontier branch Gram
+and repeatedly lengthening paths cannot increase the nonnegative eliminated
+path-chain cost.  DNN one-vertex additivity supplies arbitrary rooted-tree
+attachments.  The stored waypoint chains certify the fifteen frontiers.  The
+all-length assertion retains the selected frontier's rational branch Gram and replaces
+each path that grows by an equal-angle chain; Lemma 2 of the structural theorem
+proves that the eliminated path cost weakly decreases.  It does not interpolate
+the stored waypoint chains.
+
+Artifacts:
+
+- `experiments/rank7_order8_{seventh,eighth,ninth,tenth,eleventh}_induced_packet_gram_family.py` are the fail-closed chained scanners.
+- The matching `.json` files store exact scope, family counts, proposal parameters,
+  classification digests, and lift contracts.
+- The matching `_owners.jsonl.xz` files store exact shared rational witnesses.
+- `experiments/rank7_order8_after_{seventh,eighth,ninth,tenth,eleventh}_induced_packet_gram_family_remainder.jsonl.xz`
+  store each authenticated complement.
+
+Reproduction uses the same deterministic command for each ordinal, replacing
+`ORDINAL` below by `seventh`, `eighth`, `ninth`, `tenth`, or `eleventh`:
+
+```text
+python3 positive-square-energy/experiments/rank7_order8_ORDINAL_induced_packet_gram_family.py --workers 2 --restarts 2 --iterations 300 --audit
+python3 -O positive-square-energy/experiments/rank7_order8_ORDINAL_induced_packet_gram_family.py --workers 2 --restarts 2 --iterations 300 --audit
+```
+
+No order-eight or all-heptacyclic theorem claim is made here.
