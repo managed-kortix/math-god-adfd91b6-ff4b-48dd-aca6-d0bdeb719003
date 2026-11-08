@@ -70,7 +70,7 @@ agents:
     secrets: all
     kortix_permissions: all
     workspace:
-      project_repository: false
+      project_repository: true
 
 triggers:
   - slug: math-heartbeat
