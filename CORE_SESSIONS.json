@@ -5,7 +5,7 @@
     {
       "lane": "main",
       "name": "Math-God — Main Research",
-      "session_id": "83b3d6ce-b10c-40f6-9092-f17180820099",
+      "session_id": "4c2d5cce-0fbb-4a52-8a9d-36b3ef6701b3",
       "trigger": "math-heartbeat",
       "state_file": "STATE.md"
     },
