@@ -17,6 +17,18 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-11-08: replaced the order-eight VII--XI packet chain's hash-only
+  identity test by a read-only semantic verifier. It hard-pins the sixth-stage
+  trust root, regenerates all 492812 rational-search residuals, binds every
+  six-field source row, replays all 19699 stored witnesses with exact
+  `Fraction` arithmetic, and proves unique target ownership plus ordered
+  byte-for-byte remainder complementation through the five identities ending
+  at 56386 rows. Hostile mutations had shown the former gate accepted a
+  duplicated owner and a zero denominator after coherent digest rewriting;
+  those routes and two later trust-root/report laundering routes are now
+  closed. Normal and `python -O` audits pass and an ultimate hostile referee
+  returned ACCEPT. This authenticates the existing partial order-eight chain;
+  it makes no order-eight or all-heptacyclic theorem claim.
 - 2026-11-08: extended the exact rank-seven order-eight induced-packet Gram
   chain through five further dominant families (the historical ordinals VII--XI
   count earlier structural family passes). The authenticated passes own

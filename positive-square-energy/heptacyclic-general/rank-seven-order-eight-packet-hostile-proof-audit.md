@@ -134,3 +134,39 @@ be orthogonal to branch vectors or to other paths.
 
 No inference here verifies the completeness of VII--XI ownership counts,
 their chained remainder identities, or any full kernel-order theorem.
+
+## Follow-up exact artifact audit
+
+The initial isolated review above deliberately did not authenticate the then-
+unavailable VII--XI artifacts.  That limitation is now removed by
+`experiments/tests/test_rank7_order8_induced_packet_chain.py`.
+
+The strengthened gate is read-only and uses no numerical search.  It hard-pins
+the sixth-stage report and compressed remainder as its trust root, regenerates
+the complete 492,812-row rational-search stream from the authenticated census
+chunks and index artifact, and compares all six fields of every chained source
+row with that regeneration.  For each of the 19,699 VII--XI owners it enforces
+strict canonical JSON and exact types, uniqueness, exact target-family
+membership, source metadata, and permitted packet dimensions/denominators,
+then decodes to `Fraction` and invokes the inherited exact `verify_shared`.
+It independently recomputes each physical total and classification digest and
+requires each next remainder to be the ordered byte-for-byte source complement.
+The five hard-coded partition identities are
+
+```
+76085 = 6817 + 69268
+69268 = 4219 + 65049
+65049 = 3765 + 61284
+61284 = 2731 + 58553
+58553 = 2167 + 56386.
+```
+
+Hostile review first reproduced two coherent false accepts in the former fast
+identity test (a duplicated owner and a zero witness denominator after digest
+rewriting), then required this full semantic replay.  A second review found and
+repaired two remaining laundering routes by pinning the sixth trust root and
+checking the complete hard-coded target-family reports plus authenticated orbit
+sums.  The ultimate re-review returned ACCEPT.  Both the exact chain audit and
+the dependency-free hostile contract test pass under ordinary and optimized
+Python; the latter now uses explicit runtime checks rather than optimization-
+removable `assert` statements.
