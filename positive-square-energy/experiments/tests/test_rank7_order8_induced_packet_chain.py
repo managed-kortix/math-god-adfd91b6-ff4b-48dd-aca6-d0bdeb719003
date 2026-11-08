@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only exact verifier for order-eight packet lanes VII--XI.
+"""Read-only exact verifier for order-eight packet lanes VII--XII.
 
 This test starts at the authenticated sixth-family remainder.  For each later
 lane it replays every stored shared witness with ``Fraction``, proves that the
@@ -28,7 +28,7 @@ EXPERIMENTS = HERE.parent
 if str(EXPERIMENTS) not in sys.path:
     sys.path.insert(0, str(EXPERIMENTS))
 
-ORDINALS = ("seventh", "eighth", "ninth", "tenth", "eleventh")
+ORDINALS = ("seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth")
 EXPECTED = {
     "seventh": {
         "counts": (76085, 6817, 69268),
@@ -59,6 +59,12 @@ EXPECTED = {
         "target": ((2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), (2, 2, 8), 5, 3),
         "schema": "rank-seven-order-eight-eleventh-induced-packet-gram-family-v1",
         "physical": 2275,
+    },
+    "twelfth": {
+        "counts": (56386, 1788, 54598),
+        "target": ((2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1), (2, 3, 6), 4, 3),
+        "schema": "rank-seven-order-eight-twelfth-induced-packet-gram-family-v1",
+        "physical": 1958,
     },
 }
 OWNER_FIELDS = {

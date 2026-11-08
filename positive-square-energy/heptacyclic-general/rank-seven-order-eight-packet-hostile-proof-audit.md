@@ -141,11 +141,12 @@ The initial isolated review above deliberately did not authenticate the then-
 unavailable VII--XI artifacts.  That limitation is now removed by
 `experiments/tests/test_rank7_order8_induced_packet_chain.py`.
 
-The strengthened gate is read-only and uses no numerical search.  It hard-pins
+The strengthened gate is read-only and uses no numerical search.  Its original
+VII--XI audit was subsequently extended through the accepted XII lane. It hard-pins
 the sixth-stage report and compressed remainder as its trust root, regenerates
 the complete 492,812-row rational-search stream from the authenticated census
 chunks and index artifact, and compares all six fields of every chained source
-row with that regeneration.  For each of the 19,699 VII--XI owners it enforces
+row with that regeneration.  For each of the 21,487 VII--XII owners it enforces
 strict canonical JSON and exact types, uniqueness, exact target-family
 membership, source metadata, and permitted packet dimensions/denominators,
 then decodes to `Fraction` and invokes the inherited exact `verify_shared`.
@@ -158,7 +159,8 @@ The five hard-coded partition identities are
 69268 = 4219 + 65049
 65049 = 3765 + 61284
 61284 = 2731 + 58553
-58553 = 2167 + 56386.
+58553 = 2167 + 56386
+56386 = 1788 + 54598.
 ```
 
 Hostile review first reproduced two coherent false accepts in the former fast

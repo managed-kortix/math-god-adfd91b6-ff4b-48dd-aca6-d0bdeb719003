@@ -386,7 +386,7 @@ python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_la
 ```
 
 
-## Dominant-family exact rational packet closures VII--XI
+## Dominant-family exact rational packet closures VII--XII
 
 The authenticated remainder after the sixth induced-packet Gram family has
 76,085 coarse rows.  Five further disjoint finite-family passes now use the
@@ -407,22 +407,23 @@ In remainder order the closed families are:
 | IX | 65,049 | `2^3 1^8` | `(2,3,6)` | 4 | 1 | 3,765 | 3,916 | 56,475 | 61,284 |
 | X | 61,284 | `2^3 1^8` | `(1,3,7)` | 4 | 2 | 2,731 | 2,968 | 40,965 | 58,553 |
 | XI | 58,553 | `2^2 1^10` | `(2,2,8)` | 5 | 3 | 2,167 | 2,275 | 32,505 | 56,386 |
+| XII | 56,386 | `2^3 1^8` | `(2,3,6)` | 4 | 3 | 1,788 | 1,958 | 26,820 | 54,598 |
 
-Thus these five passes own exactly
+Thus these six passes own exactly
 
 ```text
-19,699 orbit rows,
-21,307 physical rows,
-295,485 canonical-plus-coordinate targets,
+21,487 orbit rows,
+23,265 physical rows,
+322,305 canonical-plus-coordinate targets,
 ```
 
 and reduce the authenticated order-eight theorem remainder from 76,085 to
-**56,386** rows.  Together with the preceding three induced-packet family closures, the chained
-packet program has removed 27,225 rows from its 83,611-row input.  (The
-historical ordinal names `fifth` through `eleventh` count earlier structural
-family passes, not eleven packet closures.)  This is still not the complete
-order-eight theorem: 56,386 rows
-remain, in 310 finite family strata, and kernel orders 9--12 are separate open
+**54,598** rows.  Together with the preceding three induced-packet family closures, the chained
+packet program has removed 29,013 rows from its 83,611-row input.  (The
+historical ordinal names `fifth` through `twelfth` count earlier structural
+family passes, not twelve packet closures.)  This is still not the complete
+order-eight theorem: 54,598 rows
+remain, in 309 finite family strata, and kernel orders 9--12 are separate open
 branches of the connected heptacyclic program.
 
 The theorem lift is exactly the established canonical-plus-coordinate
@@ -440,15 +441,16 @@ the stored waypoint chains.
 
 Artifacts:
 
-- `experiments/rank7_order8_{seventh,eighth,ninth,tenth,eleventh}_induced_packet_gram_family.py` are the fail-closed chained scanners.
+- `experiments/rank7_order8_{seventh,eighth,ninth,tenth,eleventh,twelfth}_induced_packet_gram_family.py` are the fail-closed chained scanners.
 - The matching `.json` files store exact scope, family counts, proposal parameters,
   classification digests, and lift contracts.
 - The matching `_owners.jsonl.xz` files store exact shared rational witnesses.
-- `experiments/rank7_order8_after_{seventh,eighth,ninth,tenth,eleventh}_induced_packet_gram_family_remainder.jsonl.xz`
+- `experiments/rank7_order8_after_{seventh,eighth,ninth,tenth,eleventh,twelfth}_induced_packet_gram_family_remainder.jsonl.xz`
   store each authenticated complement.
 
 Reproduction uses the same deterministic command for each ordinal, replacing
-`ORDINAL` below by `seventh`, `eighth`, `ninth`, `tenth`, or `eleventh`:
+`ORDINAL` below by `seventh`, `eighth`, `ninth`, `tenth`, `eleventh`, or
+`twelfth`:
 
 ```text
 python3 positive-square-energy/experiments/rank7_order8_ORDINAL_induced_packet_gram_family.py --workers 2 --restarts 2 --iterations 300 --audit

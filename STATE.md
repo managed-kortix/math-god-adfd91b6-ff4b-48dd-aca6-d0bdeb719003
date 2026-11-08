@@ -17,6 +17,15 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-11-08: closed and hostile-audited the next dominant order-eight family,
+  `2^3 1^8/(2,3,6)/r4/t3`. The XII pass owns all 1788 orbit rows,
+  1958 physical rows, and 26820 canonical-plus-coordinate targets by shared
+  exact rational waypoint Grams, reducing the authenticated remainder from
+  56386 to 54598 rows in 309 families. The read-only chain gate now replays all
+  21487 VII--XII witnesses and exact ordered complements from the pinned sixth
+  trust root; normal and optimized audits pass, and an independent ultimate
+  referee returned ACCEPT. This is a partial family closure only; no order-eight
+  or all-heptacyclic theorem claim is made.
 - 2026-11-08: replaced the order-eight VII--XI packet chain's hash-only
   identity test by a read-only semantic verifier. It hard-pins the sixth-stage
   trust root, regenerates all 492812 rational-search residuals, binds every
