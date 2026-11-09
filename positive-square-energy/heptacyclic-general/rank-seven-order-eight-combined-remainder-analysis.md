@@ -458,3 +458,59 @@ python3 -O positive-square-energy/experiments/rank7_order8_ORDINAL_induced_packe
 ```
 
 No order-eight or all-heptacyclic theorem claim is made here.
+
+## Global post-XII shared-packet lane
+
+A final authenticated shared-packet pass was run over the complete 54,598-row
+XII remainder, without restricting to one finite family.  The generator uses
+binary64 descent only to propose one branch Gram and its path waypoints; every
+accepted owner is replayed with exact `Fraction` arithmetic on the canonical
+target and all fourteen one-coordinate frontiers.  The read-only verifier
+regenerates the 492,812-row rational-search residual census from the pinned
+chunks, reconstructs every six-field XII source row, replays every stored
+witness, and proves that the persisted remainder is the ordered byte-for-byte
+source complement.
+
+The exact partition is
+
+```text
+54598 = 54597 shared-packet owners + 1 unresolved orbit,
+60881 = 60879 owned physical rows + 2 unresolved physical rows,
+818970 = 818955 owned frontier targets + 15 unresolved targets.
+```
+
+All 54,597 owners use denominator 256.  Retaining each accepted branch Gram,
+fixed-parity optimized path-cost monotonicity gives every same-parity
+subdivision, and assigning each attached tree vertex the negative of its parent
+supplies arbitrary finite rooted-tree attachments.  The unique complement is
+stream index `416536`, source index `416987`, global kernel `6832`, orbit size
+two.  Its support is two vertex-disjoint copies of `K4`, on
+`{0,3,6,7}` and `{1,2,4,5}`, joined by the two edges `47` and `56`; all paths
+are odd except `56`, which is even.
+
+The source report and stream are immutably pinned by compressed and raw SHA-256,
+and the audit freezes the scope, search, certificate, and nonclaim contracts.
+An independent exact replay checked all 54,597 owners.  The canonical report
+and artifacts have SHA-256 values
+
+```text
+report:      2d94c557a8a74845098d5ced351acb474e6f950ffb9072919db11e95e7b3cdb0
+owners xz:   9e50f7eb752f1a03eedf395550328c755216346badb5df77ae1b0fe03ef411e0
+remainder xz:bbadc801837908ada49cdb53a83fb1afa46a5a240a77ecb18c66fbb0a06a6340
+```
+
+Artifacts:
+
+- `experiments/rank7_order8_post_xii_shared_packet_lane.py` is the frozen
+  generator and read-only exact verifier;
+- `experiments/rank7_order8_post_xii_shared_packet_lane.json` is the canonical
+  report;
+- `experiments/rank7_order8_post_xii_shared_packet_owners.jsonl.xz` stores the
+  54,597 exact shared packets;
+- `experiments/rank7_order8_after_post_xii_shared_packet_remainder.jsonl.xz`
+  stores the unique complement;
+- `experiments/tests/test_rank7_order8_post_xii_shared_packet_lane.py` invokes
+  the hostile read-only gate.
+
+This lane is still a partial closure: the singleton requires an independent
+all-length owner before the order-eight kernel theorem can be promoted.
