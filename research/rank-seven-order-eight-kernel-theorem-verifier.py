@@ -565,8 +565,16 @@ def _python_registry_paths() -> dict[str, Path]:
 
 def _category_maps(category_overrides: dict[str, str] | None = None
                    ) -> tuple[dict[str, str], dict[str, Path]]:
+    """Return all labels but only the public Python source domain.
+
+    The frozen hostile-audit adapter builds syntax trees from
+    ``_python_registry_paths()`` and requires this second return value to be that
+    same mapping.  Fixed data remain category-labelled targets; the pure
+    observation routine augments the Python paths with their separately pinned
+    data registry before resolving edges.
+    """
     categories = {}
-    paths = {}
+    all_paths = {}
     for category, registry in (
         (CAT_EXECUTED_PYTHON, EXECUTED_PYTHON_PATHS),
         (CAT_EXECUTED_DATA, EXECUTED_DATA_PATHS),
@@ -574,17 +582,22 @@ def _category_maps(category_overrides: dict[str, str] | None = None
         (CAT_CALLABLE_DATA, CALLABLE_DATA_PATHS),
     ):
         for name, path in registry.items():
-            require(name not in categories and path not in paths.values(),
+            require(name not in categories and path not in all_paths.values(),
                     "dependency category registry collision")
             categories[name] = category
-            paths[name] = path
+            all_paths[name] = path
     for name, category in (category_overrides or {}).items():
         require(name in categories and category in {
             CAT_EXECUTED_PYTHON, CAT_EXECUTED_DATA,
             CAT_CALLABLE_PYTHON, CAT_CALLABLE_DATA,
         }, "invalid dependency category override")
         categories[name] = category
-    return categories, paths
+    python_paths = _python_registry_paths()
+    require(set(python_paths) ==
+            set(EXECUTED_PYTHON_PATHS) | set(CALLABLE_PYTHON_PATHS) and
+            all(all_paths[name] == path for name, path in python_paths.items()),
+            "public Python registry changed during category derivation")
+    return categories, python_paths
 
 
 def _call_name(call: ast.Call) -> str:
@@ -826,6 +839,16 @@ def _dynamic_caller_records(source: str, loader_span: Span,
 
 def _derive_observed_records(trees: dict[str, ast.AST], categories: dict[str, str],
                              paths: dict[str, Path]) -> set[EdgeRecord]:
+    """Derive edges from Python trees with privately pinned fixed-data targets."""
+    python_paths = _python_registry_paths()
+    require(paths == python_paths and set(trees) == set(python_paths),
+            "observation domain is not the exact public Python registry")
+    data_paths = {**EXECUTED_DATA_PATHS, **CALLABLE_DATA_PATHS}
+    require(set(categories) == set(python_paths) | set(data_paths) and
+            set(python_paths).isdisjoint(data_paths) and
+            set(data_paths) == set(EXECUTED_DATA_SHA256) | set(CALLABLE_DATA_SHA256),
+            "fixed-data observation registry changed")
+    paths = {**python_paths, **data_paths}
     admitted_sites = set(EDGE_SITE_POLICY)
     result = set()
     for source, tree in trees.items():
