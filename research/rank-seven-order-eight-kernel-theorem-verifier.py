@@ -31,6 +31,7 @@ BASE = EXPERIMENTS / "rank7_order8_typed_precedence_bridge.py"
 STRUCTURAL = EXPERIMENTS / "rank7_order8_structural_exact_verifier.py"
 PACKETS = EXPERIMENTS / "verify_rank7_order8_packet_chain.py"
 POST_XII = EXPERIMENTS / "rank7_order8_post_xii_shared_packet_lane.py"
+SEMANTIC_CENSUS = EXPERIMENTS / "rank7_order8_semantic_census_verifier.py"
 POST_REPORT = EXPERIMENTS / "rank7_order8_post_xii_shared_packet_lane.json"
 POST_SOURCE = (EXPERIMENTS /
                "rank7_order8_after_twelfth_induced_packet_gram_family_remainder.jsonl.xz")
@@ -53,6 +54,7 @@ SOURCE_SHA256 = {
     "structural_verifier": "46851a4aa58d0b0ed0a3f63d0b0839755c057c0c4c671acf204011bd312b9415",
     "packet_verifier": "4410a45fb514831a0828e9064d091f0c6ee1ff17d037ee4cf611af0e4f3f7a87",
     "post_xii_verifier": "a8903c69287a531d5a4aa62fa514318daad0583c3690a7dcb20d62384ac60fd1",
+    "semantic_census_verifier": "99df428285afd65986ebd76d8eab0b305167d952bb40d292c99d57e559882027",
     "rank_seven_reduction": "f1daf9109f4843aa2db149c974fb21c847bb6f8144275201aebabed7fe4ea516",
     "singleton_territory": "9d7385473e5a2f32700f44aed86e7a06039012932b75f6812c28717c04b25238",
     "tricyclic_tex": "13f8f8c7996c0f58f764c52b4a5b915132038e2ce38d3e56285f1bf952990fc1",
@@ -69,6 +71,7 @@ SOURCE_PATHS = {
     "structural_verifier": STRUCTURAL,
     "packet_verifier": PACKETS,
     "post_xii_verifier": POST_XII,
+    "semantic_census_verifier": SEMANTIC_CENSUS,
     "rank_seven_reduction": REDUCTION,
     "singleton_territory": TERRITORY,
     "tricyclic_tex": TRICYCLIC_TEX,
@@ -98,6 +101,7 @@ CHILD_OUTPUT_SHA256 = {
     "finite": "86f4ad87b1cc5a84817d630f2fb448045ce207d345c185c7b96bf38895c4a617",
     "k4": "cb5434669fd3aacea9ca07e7a4d75f076a63a19f718806b394234996f52b95f7",
     "doubled_triangle": "a0b9311d8173972c4ac529c326366391ae5df9928079824ff5c0a6c601848222",
+    "semantic_census": "847e36ebdd5419ba7b482b7f2bb7ca2eb427ae2097e036cc35a1f630ef781bec",
 }
 
 CERTIFICATE_SHA256 = {
@@ -203,7 +207,7 @@ def audit_source_pins() -> None:
 
 
 def audit_no_asserts() -> int:
-    checked = [SELF, BASE, STRUCTURAL, PACKETS, POST_XII, FINITE, K4,
+    checked = [SELF, BASE, STRUCTURAL, PACKETS, POST_XII, SEMANTIC_CENSUS, FINITE, K4,
                DOUBLED_TRIANGLE, GRAM]
     for path in checked:
         try:
@@ -382,6 +386,7 @@ def run_children(full: bool) -> tuple[int, int]:
             "finite": "86f4ad87b1cc5a84817d630f2fb448045ce207d345c185c7b96bf38895c4a617",
             "k4": "cb5434669fd3aacea9ca07e7a4d75f076a63a19f718806b394234996f52b95f7",
             "doubled_triangle": "a0b9311d8173972c4ac529c326366391ae5df9928079824ff5c0a6c601848222",
+            "semantic_census": "847e36ebdd5419ba7b482b7f2bb7ca2eb427ae2097e036cc35a1f630ef781bec",
         }, "quick-mode child output receipt registry changed")
         return 0, 0
 
@@ -393,6 +398,8 @@ def run_children(full: bool) -> tuple[int, int]:
         ("k4", K4, (), CHILD_OUTPUT_SHA256["k4"], None),
         ("doubled_triangle", DOUBLED_TRIANGLE, (),
          CHILD_OUTPUT_SHA256["doubled_triangle"], None),
+        ("semantic_census", SEMANTIC_CENSUS, ("--hostile",),
+         CHILD_OUTPUT_SHA256["semantic_census"], None),
     )
     executions = 0
     for name, path, arguments, output_digest, validator in children:
