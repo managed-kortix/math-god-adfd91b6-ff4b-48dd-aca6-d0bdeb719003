@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import concurrent.futures
 import hashlib
+import importlib.util
 import json
 import lzma
 import math
@@ -24,10 +25,9 @@ from types import SimpleNamespace
 
 sys.dont_write_bytecode = True
 
-import rank7_order8_induced_packet_gram_family as packet
-import rank7_order8_structural_cycle_gram_lane as structural
-
 HERE = Path(__file__).resolve().parent
+ENGINE_PATH = HERE / "rank7_order8_exact_rational.py"
+CACHE_PATH = HERE / "rank7_order8_rational_search_cache.r7o8c.xz"
 SOURCE_REPORT = HERE / "rank7_order8_twelfth_induced_packet_gram_family.json"
 SOURCE_STREAM = HERE / "rank7_order8_after_twelfth_induced_packet_gram_family_remainder.jsonl.xz"
 OUTPUT = HERE / "rank7_order8_post_xii_shared_packet_lane.json"
@@ -37,7 +37,22 @@ SCHEMA = "rank-seven-order-eight-post-xii-global-shared-packet-lane-v1"
 SOURCE_SCHEMA = "rank-seven-order-eight-twelfth-induced-packet-gram-family-v1"
 SOURCE_TOTAL = 54598
 TARGETS_PER_ROW = 15
-DENOMINATORS = packet.DENOMINATORS
+DENOMINATORS = (256, 1024, 4096, 16384, 65536)
+EXPECTED_REPORT_SHA256 = (
+    "2d94c557a8a74845098d5ced351acb474e6f950ffb9072919db11e95e7b3cdb0"
+)
+EXPECTED_OWNER_ARTIFACT_SHA256 = (
+    "9e50f7eb752f1a03eedf395550328c755216346badb5df77ae1b0fe03ef411e0"
+)
+EXPECTED_OWNER_RAW_SHA256 = (
+    "8ae95c887177a0c4a3db346e063249518f876e16a06f11fcf07d1e0ea3b84e07"
+)
+EXPECTED_REMAINDER_ARTIFACT_SHA256 = (
+    "bbadc801837908ada49cdb53a83fb1afa46a5a240a77ecb18c66fbb0a06a6340"
+)
+EXPECTED_REMAINDER_RAW_SHA256 = (
+    "619ec23ae2435f06140ff94a98b56acc16571c71206fab132c71cdecc950229b"
+)
 EXPECTED_SOURCE_REPORT_SHA256 = (
     "dc4e868dae60db6b9504b2288f983ef1d98cbfa36245178e95f778fa277293c5"
 )
@@ -123,10 +138,58 @@ def exact_list(value, label):
     return value
 
 
+def strict_json(raw, label):
+    def no_duplicate_pairs(pairs):
+        result = {}
+        for key, value in pairs:
+            require(key not in result, f"duplicate JSON key in {label}: {key}")
+            result[key] = value
+        return result
+
+    try:
+        text = raw.decode("ascii")
+        return json.loads(
+            text,
+            object_pairs_hook=no_duplicate_pairs,
+            parse_constant=lambda value: (_ for _ in ()).throw(
+                ValueError(f"non-finite JSON constant {value}")),
+        )
+    except (UnicodeDecodeError, json.JSONDecodeError, ValueError) as error:
+        raise RuntimeError(f"invalid JSON in {label}") from error
+
+
 def strict_canonical(raw, label):
-    payload = structural.strict_json(raw, label)
+    payload = strict_json(raw, label)
     require(raw == canonical_bytes(payload), f"{label} is not canonical JSON")
     return payload
+
+
+def load_engine():
+    spec = importlib.util.spec_from_file_location("rank7_order8_post_xii_engine", ENGINE_PATH)
+    require(spec is not None and spec.loader is not None, "cannot load exact witness engine")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def integer_rows(rows, denominator):
+    result = []
+    for row in rows:
+        require(all(denominator % value.denominator == 0 for value in row),
+                "non-shared witness denominator")
+        result.append([value.numerator * (denominator // value.denominator)
+                       for value in row])
+    return result
+
+
+def encode_witness(witness):
+    denominator, branches, canonical, extended = witness
+    return {
+        "denominator": denominator,
+        "branches": integer_rows(branches, denominator),
+        "canonical": [integer_rows(path, denominator) for path in canonical],
+        "extended": [integer_rows(path, denominator) for path in extended],
+    }
 
 
 def authenticated_source_report():
@@ -266,16 +329,16 @@ def worker(record):
     if result[0] != engine.base.MODE_SHARED or shared is None:
         return stream_index, numerical, None
     engine.base.verify_shared(census, residuals[stream_index], shared)
-    return stream_index, numerical, packet.encode_witness(shared)
+    return stream_index, numerical, encode_witness(shared)
 
 
 def scan(workers, restarts, iterations, progress=False):
     global _CONTEXT
     started = time.perf_counter()
     source_report_raw, _, source_info = authenticated_source_report()
-    engine = packet.load_engine()
+    engine = load_engine()
     census = engine.load_census_module()
-    residuals = engine.residual_rows(census, cache_path=packet.CACHE_PATH)
+    residuals = engine.residual_rows(census, cache_path=CACHE_PATH)
     records = read_source(residuals, census)
     source_load_seconds = time.perf_counter() - started
     _CONTEXT = engine, census, residuals, restarts, iterations
@@ -401,6 +464,8 @@ def scan(workers, restarts, iterations, progress=False):
 def audit(*, hostile=False):
     started = time.perf_counter()
     report_raw = OUTPUT.read_bytes()
+    require(hashlib.sha256(report_raw).hexdigest() == EXPECTED_REPORT_SHA256,
+            "pinned post-XII report changed")
     report = strict_canonical(report_raw, OUTPUT.name)
     require(type(report) is dict and set(report) == {
         "accepted_denominator_histogram", "certificate", "claim_boundary",
@@ -436,7 +501,7 @@ def audit(*, hostile=False):
     } and report.get("source_stream") == source_info,
             "report is not pinned to the authenticated XII source")
 
-    engine = packet.load_engine()
+    engine = load_engine()
     census = engine.load_census_module()
     # Deliberately regenerate from source chunks; audit never trusts the convenience cache.
     residuals = engine.materialize_residuals(census)
@@ -446,9 +511,13 @@ def audit(*, hostile=False):
             "authenticated source indices are not unique")
 
     owner_info = exact_mapping(report.get("owner_stream"), "owner_stream")
-    require(owner_info.get("path") == OWNERS.name and
-            file_sha256(OWNERS) == owner_info.get("artifact_sha256"),
-            "owner artifact digest changed")
+    require(owner_info == {
+                "path": OWNERS.name,
+                "record_total": 54597,
+                "raw_sha256": EXPECTED_OWNER_RAW_SHA256,
+                "artifact_sha256": EXPECTED_OWNER_ARTIFACT_SHA256,
+            } and file_sha256(OWNERS) == EXPECTED_OWNER_ARTIFACT_SHA256,
+            "pinned owner artifact identity changed")
     owner_expected = exact_int(owner_info.get("record_total"),
                                "owner_stream.record_total", 0)
     owner_digest = hashlib.sha256()
@@ -499,9 +568,13 @@ def audit(*, hostile=False):
     owner_set = set(owner_indices)
     remainder_info = exact_mapping(report.get("reduced_remainder_stream"),
                                    "reduced_remainder_stream")
-    require(remainder_info.get("path") == REMAINDER.name and
-            file_sha256(REMAINDER) == remainder_info.get("artifact_sha256"),
-            "remainder artifact digest changed")
+    require(remainder_info == {
+                "path": REMAINDER.name,
+                "record_total": 1,
+                "raw_sha256": EXPECTED_REMAINDER_RAW_SHA256,
+                "artifact_sha256": EXPECTED_REMAINDER_ARTIFACT_SHA256,
+            } and file_sha256(REMAINDER) == EXPECTED_REMAINDER_ARTIFACT_SHA256,
+            "pinned remainder artifact identity changed")
     remainder_expected = exact_int(remainder_info.get("record_total"),
                                    "remainder_stream.record_total", 0)
     remainder_digest = hashlib.sha256()
