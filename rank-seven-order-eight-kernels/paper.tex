@@ -1,0 +1,468 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{array,booktabs,longtable}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\splus}{s^+}
+\newcommand{\sminus}{s^-}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\kappad}{\kappa}
+
+\title{Positive Square Energy for Rank-Seven Kernels of Order Eight}
+\author{AI-generated manuscript; no human author is claimed}
+\date{10 November 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $G$ be a finite simple connected graph of cyclomatic rank seven whose
+block decomposition has exactly one positive-rank cyclic block.  Suppose that,
+after suppressing the degree-two vertices of that block, its loopless
+$2$-connected multigraph kernel has eight vertices.  We prove
+$\splus(G)\geq |V(G)|$, where $\splus$ is the sum of the squares of the
+positive adjacency eigenvalues.  The proof combines an exact census of the
+$4{,}015$ order-eight kernels and their $26{,}426{,}026$ physical parity
+orbits with analytic coarse certificates and a disjoint exact certificate
+partition of the $493{,}417$ residual orbits.  The last residual is handled by
+an induced partition into two tricyclic territories.  The executable theorem
+gate pins every proof source and artifact and offers a quick integrity mode and
+a full read-only replay mode.  Four expensive historical base-producer
+outputs remain explicit immutable trust roots; the theorem gate does not
+misrepresent them as freshly recomputed searches.  No claim is made for
+kernel orders nine through twelve, for multiblock rank-seven graphs, or for
+all connected heptacyclic graphs.
+\end{abstract}
+
+\section{Statement, scope, and spectral tools}
+
+All graphs in this paper are finite, simple, and undirected.  If the adjacency
+eigenvalues of a graph $H$ are $\lambda_1,\ldots,\lambda_n$, write
+\[
+ \splus(H)=\sum_{\lambda_i>0}\lambda_i^2,
+ \qquad
+ \sminus(H)=\sum_{\lambda_i<0}\lambda_i^2.
+\]
+A connected graph has cyclomatic rank
+$\beta(H)=|E(H)|-|V(H)|+1$.  A \emph{cyclic block} means a maximal
+$2$-connected block of positive cyclomatic rank; bridges are rank-zero blocks.
+
+\begin{theorem}[Scoped order-eight kernel theorem]\label{thm:main}
+Let $G$ be a finite simple connected graph with $\beta(G)=7$.  Assume that
+$G$ has exactly one positive-rank cyclic block $B$.  Suppress every degree-two
+vertex of $B$, and let $K$ be the resulting loopless $2$-connected multigraph.
+If $|V(K)|=8$, then
+\[
+ \boxed{\splus(G)\geq |V(G)|}.
+\]
+Equivalently, the conclusion holds for every simple subdivision of every
+rank-seven order-eight kernel, with arbitrary finite rooted trees attached at
+branch vertices or subdivision vertices.
+\end{theorem}
+
+The hypotheses in Theorem~\ref{thm:main} are indispensable to the scope of
+this manuscript.  They do not include rank-seven graphs with two or more
+positive-rank blocks, and they do not include kernels of orders nine through
+twelve.  In particular, the theorem is not a theorem about all connected
+graphs with $|E|=|V|+6$.
+
+We use two standard spectral devices.  First, positive square energy is
+superadditive over induced vertex territories.
+
+\begin{lemma}[Induced superadditivity]\label{lem:super}
+If $V(H)=V_1\mathbin{\dot\cup}\cdots\mathbin{\dot\cup}V_r$, then
+\[
+ \splus(H)\geq\sum_{j=1}^r\splus(H[V_j]).
+\]
+\end{lemma}
+
+\begin{proof}
+For a real symmetric matrix $A$,
+\[
+ \operatorname{tr}(A_+^2)
+ =\max_{X\succeq0}\bigl(2\operatorname{tr}(AX)-\operatorname{tr}(X^2)\bigr).
+\]
+For $A=A(H)$, test this variational formula with the block-diagonal matrix
+whose blocks are $A(H[V_j])_+$.  Cross-territory entries of $A$ do not
+contribute, and the displayed inequality follows.
+\end{proof}
+
+Second, for an edge-containing graph $H$, define the DNN constant
+\[
+ \kappad(H)=
+ \min_{\substack{R\succeq0\\R_{vv}=1}}
+ \sum_{uv\in E(H)}\frac{2}{1-R_{uv}},                       \tag{1}
+\]
+with boundary values interpreted by limits.  The correlation dual for the
+optimized doubly nonnegative bound gives
+\begin{equation}
+ \sminus(H)\leq\kappad(H).                                  \tag{2}
+\end{equation}
+Moreover, $\kappad$ is additive under one-vertex sums and
+$\kappad(T)=|E(T)|$ for every tree $T$; proofs are recorded in the companion
+tricyclic manuscript~\cite{Tricyclic}.  These statements may also be obtained
+from the primal DNN formulation by orthogonally gluing the Gram data at a cut
+vertex.
+
+\section{Suppression and the finite frontier}
+
+Let $B$ be a $2$-connected graph of cyclomatic rank seven.  Suppressing its
+degree-two vertices gives a loopless $2$-connected multigraph $K$ of minimum
+degree at least three, and
+\[
+ |E(K)|=|V(K)|+6,
+ \qquad
+ 3|V(K)|\leq2|E(K)|.
+\]
+Consequently $2\leq |V(K)|\leq12$.  Conversely, $B$ is obtained by replacing
+each physical edge of $K$ by a positive-length path, with pairwise disjoint
+interiors.  Simplicity permits at most one unit path in each parallel class.
+Every part of $G$ outside $B$ is a rooted tree attached at one vertex of $B$.
+The complete removable-ear generation theorem and its exact audit give
+$4{,}015$ order-eight kernels~\cite{CensusTheorem}.
+
+Fix a rank-seven kernel $K$ of order eight.  It has fourteen physical edges.
+For a parallel class of multiplicity $m$ containing $o$ odd replacement
+paths, define its canonical simple lengths, up to permutation within the
+class, by
+\[
+ o=0:\ (2,\ldots,2),
+ \qquad
+ o>0:\ (1,3,\ldots,3,2,\ldots,2).                          \tag{3}
+\]
+Thus every simple realization in the same physical parity orbit can be
+ordered as $\ell=c+2d$ with $d\geq0$ coordinatewise.  For a canonical vector
+$c=(c_1,\ldots,c_{14})$, put
+\[
+ \mathcal F(c)=\{c\}\cup\{c+2e_i:1\leq i\leq14\}.          \tag{4}
+\]
+
+The exact path atom explains both the DNN budget and the all-length lift.
+
+\begin{lemma}[Exact path elimination]\label{lem:path}
+Fix unit branch vectors with correlation $r$ at the endpoints of a path of
+length $q\geq1$.  Its least excess over the baseline contribution $q$ in
+(1) is
+\[
+ f_q(r)=q\tan^2\!\left(
+ \frac{\arccos((-1)^q r)}{2q}\right).                       \tag{5}
+\]
+For fixed $r$ and fixed parity,
+$f_{q+2}(r)\leq f_q(r)$, with strict inequality unless the transformed
+endpoint angle vanishes.
+\end{lemma}
+
+\begin{proof}
+Alternately negate the vectors along the path.  The transformed endpoints
+have angular distance $\beta=\arccos((-1)^q r)$.  The spherical triangle
+inequality and convexity of $\tan^2(x/2)$ show that $q$ equal angular steps
+minimize the sum, yielding (5).  For real $q>0$, differentiation of
+$q\tan^2(\beta/(2q))$ has the sign of
+$\sin z\cos z-2z$, where $z=\beta/(2q)$; this is negative for $z>0$.
+Endpoint cases follow by limits.
+\end{proof}
+
+Suppose a retained branch Gram has total path excess at most six.  If its
+subdivision core has $L$ edges, then $\kappad(B)\leq L+6$.  If $t$ tree edges
+are attached, one-vertex additivity gives
+$\kappad(G)\leq L+6+t$.  Since rank seven implies $|V(B)|=L-6$, equations
+(2) and $\splus(G)+\sminus(G)=2|E(G)|$ give
+\begin{equation}
+ \splus(G)\geq2(L+t)-(L+6+t)=L-6+t=|V(G)|.                  \tag{6}
+\end{equation}
+Lemma~\ref{lem:path} promotes a canonical or coordinate-frontier Gram to every
+same-parity realization that dominates it.  A structural owner is admitted
+only when it supplies its own all-length and rooted-tree argument.
+
+\section{Exact census and owner partition}
+
+The order-eight census enumerates all physical parity rows and quotients them
+by the full multigraph automorphism group.  It independently checks every
+materialized orbit count with Burnside's lemma.  The resulting totals are
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+quantity & exact count\\
+\midrule
+order-eight kernels & $4{,}015$\\
+physical parity rows & $33{,}006{,}092$\\
+automorphism orbits & $26{,}426{,}026$\\
+coarse-certified orbits & $25{,}932{,}609$\\
+coarse residual orbits & $493{,}417$\\
+residual targets in (4) & $7{,}401{,}255$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The exact manifest and its eight authenticated chunks satisfy
+$25{,}932{,}609+493{,}417=26{,}426{,}026$.  The coarse certificate is a
+four-color regular-tetrahedron Gram whose exact scaled cost is at most the
+rank-seven excess budget six; hence its accepted rows are already DNN owners.
+The remaining $493{,}417$ rows are partitioned by the theorem gate as follows.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+exclusive owner & residual orbits & targets\\
+\midrule
+payload-free symbolic lanes & $605$ & $9{,}075$\\
+direct rational witness packs & $29{,}000$ & $435{,}000$\\
+scalar SOS, after precedence & $194{,}351$ & $2{,}915{,}265$\\
+typed-diagonal Gram, after precedence & $185{,}309$ & $2{,}779{,}635$\\
+boundary shared-Gram rescue & $296$ & $4{,}440$\\
+structural cycle-Gram lanes I--III & $245$ & $3{,}675$\\
+packet lanes IV--XII & $29{,}013$ & $435{,}195$\\
+global post-XII shared packets & $54{,}597$ & $818{,}955$\\
+final induced-territory owner & $1$ & $15$\\
+\midrule
+exact total & $493{,}417$ & $7{,}401{,}255$\\
+\bottomrule
+\end{tabular}
+\caption{Disjoint precedence partition of the coarse residual frontier.}
+\label{tab:owners}
+\end{table}
+
+The row identity in Table~\ref{tab:owners} is
+\begin{equation}\tag{7}
+\begin{split}
+493{,}417={}&605+29{,}000+194{,}351+185{,}309+296\\
+            &+245+29{,}013+54{,}597+1.
+\end{split}
+\end{equation}
+The first five lanes leave $83{,}856$ rows.  Structural lanes I--III leave
+$83{,}611$.  Packet lanes IV--XII leave $54{,}598$, and the global post-XII
+lane leaves one.  Thus the exact remainder chain used by the master gate is
+\[
+ 83{,}856\longrightarrow83{,}611\longrightarrow54{,}598
+ \longrightarrow1.                                         \tag{8}
+\]
+
+We summarize why the entries are theorem owners rather than merely successful
+numerical searches.
+
+\begin{itemize}
+\item The payload-free lanes use rank-one signings, diagonally dominant signed
+imbalance Grams, or exact simplex/mixed-atom PSD completions.
+\item The scalar and typed-diagonal lanes express every accepted Gram as an
+exact sum of rational Gram squares and a nonnegative diagonal completion.
+Twenty gap-free typed receipts cover all $492{,}812$ rows after the
+payload-free lane; the precedence bridge verifies the exact exclusive sets.
+\item Every direct, rescue, structural, and packet witness is accepted only
+after exact rational replay.  For a shared packet, numerical optimization is
+proposal-only; acceptance verifies the unit branch Gram and each path-chain
+cost with rational arithmetic.
+\item The structural verifier replays all $245$ stored owners and all
+$3{,}675$ frontier costs.  The packet-chain verifier replays the nine exact
+complements IV--XII, whose owner counts sum to $29{,}013$.
+\item Each DNN or packet owner retains a branch Gram and invokes
+Lemma~\ref{lem:path}, so every same-parity length vector is covered.  New tree
+vertices can be assigned the negative of their parent vector, adding one to
+both $\kappad$ and the edge count.  This gives arbitrary rooted-tree
+attachments.
+\end{itemize}
+
+The immutable trust boundary is important.  The base precedence bridge pins,
+but does not freshly regenerate, four expensive historical producer outputs:
+(1) the payload-free recognizer semantics, (2) raw scalar-SOS membership
+semantics, (3) the $492{,}812$ typed searches behind the twenty receipts, and
+(4) the $29{,}000$ direct-rational witness packs.  It does semantically check
+the receipt contracts, exclusive set equations, all $296$ boundary witnesses,
+and the exact output complement.  Downstream structural and packet witnesses
+are replayed by separate read-only verifiers.  The final claim is therefore a
+complete exact certificate chain relative to those four explicitly named and
+byte-pinned base producers, not a claim that the entire historical search was
+rerun in one process.
+
+\section{The unique residual orbit}
+
+After the post-XII replay, the unique residual is the six-field row
+\[
+ [416536,416987,6832,E,p,2],                                  \tag{9}
+\]
+where
+\begin{align*}
+ E={}&\{03,06,07,12,14,15,24,25,36,37,45,47,56,67\},\\
+ p={}&(1,1,1,1,1,1,1,1,1,1,1,1,0,1).
+\end{align*}
+The first two entries are respectively its stream index and residual source
+index, $6832$ is the global kernel index, and the orbit size is two.  Its
+support consists of two vertex-disjoint copies of $K_4$, on
+\[
+ A=\{0,3,6,7\},\qquad C=\{1,2,4,5\},
+\]
+joined by the two physical paths $P_{74}$ and $P_{65}$.  The following
+proposition is stronger than the fifteen finite obligations in (4).
+
+\begin{proposition}[Two tricyclic territories]\label{prop:singleton}
+Start with the two displayed copies of $K_4$, replace all twelve internal
+$K_4$ edges and the two connectors $74,65$ by arbitrary positive-length
+paths with pairwise disjoint interiors, and attach arbitrary finite rooted
+trees at branch or subdivision vertices.  The resulting graph $H$ satisfies
+$\splus(H)\geq|V(H)|$, with no parity restriction on any path.
+\end{proposition}
+
+\begin{proof}
+Let $C_A$ and $C_C$ be the two $K_4$ subdivisions.  Orient both connector
+paths from the $A$ side to the $C$ side.  Put in $U_0$ all vertices of $C_A$
+and all internal connector vertices, and put in $W_0$ all vertices of $C_C$.
+Every attached rooted tree follows its root, producing a vertex partition
+$V(H)=U\mathbin{\dot\cup}W$.
+
+The induced graph $H[U]$ consists of $C_A$, the two connector stubs obtained by
+deleting their terminal $C$-side branch vertices, and rooted forests meeting
+this cyclic core in one root.  The graph $H[W]$ consists of $C_C$ and its
+assigned rooted forests.  Both induced graphs are connected.  This description
+also covers a unit connector: then its sole edge crosses the partition and it
+has no internal stub.
+
+If $C_A$ has $L_A$ edges and its retained forest has $t_A$ edges, then a
+subdivision of $K_4$ has $L_A-2$ vertices, whence
+\[
+ |E(H[U])|=L_A+t_A=|V(H[U])|+2.
+\]
+The identical calculation holds for $H[W]$.  The tricyclic theorem says that
+every finite simple connected graph $J$ with
+$|E(J)|=|V(J)|+2$ satisfies $\splus(J)\geq|V(J)|$
+\cite{Tricyclic}.  Therefore Lemma~\ref{lem:super} gives
+\[
+ \splus(H)\geq\splus(H[U])+\splus(H[W])
+ \geq|U|+|W|=|V(H)|.
+\]
+No edge-addition monotonicity, connector debit, or DNN gluing is used.
+\end{proof}
+
+The singleton artifact binds (9) byte-for-byte to
+Proposition~\ref{prop:singleton}.  Because the proposition covers all lengths,
+all parities, and arbitrary rooted trees, it supplies the last owner in (7).
+
+\section{Proof of the theorem}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Suppress $B$ to its rank-seven order-eight kernel $K$.  The exhaustive kernel
+census and physical automorphism quotient place every parity state of $K$ in
+exactly one of two sets.
+
+If it is coarse-certified, its tetrahedral correlation Gram has excess at most
+six and equation (6) applies.  Otherwise it is one of the $493{,}417$ residual
+orbits.  The disjoint exact identity (7) assigns it to exactly one row of
+Table~\ref{tab:owners}.  Every owner except the last supplies an exact DNN or
+packet certificate together with the all-length and rooted-tree lift described
+above, so again (6) applies.  The unique last orbit is covered uniformly by
+Proposition~\ref{prop:singleton}.  These alternatives exhaust every kernel,
+physical parity orbit, simple subdivision length, and rooted-tree attachment
+within the stated scope.  Hence $\splus(G)\geq|V(G)|$.
+\end{proof}
+
+\section{Executable verification and integrity boundary}
+
+The authoritative integration gate is
+\begin{verbatim}
+research/rank-seven-order-eight-kernel-theorem-verifier.py
+\end{verbatim}
+with SHA-256
+\begin{verbatim}
+02f5176cbb51477a9755c633e6aae7790e618b99eca1bb22000399c59dc7c6a1
+\end{verbatim}
+on the theorem commit imported from source commit
+\texttt{6487337e4b41b3186e31c165601bb7e243300157}.  From the repository root,
+run
+\begin{verbatim}
+python3 -B research/rank-seven-order-eight-kernel-theorem-verifier.py
+python3 -O -B research/rank-seven-order-eight-kernel-theorem-verifier.py
+python3 -B research/rank-seven-order-eight-kernel-theorem-verifier.py \
+  --print-manifest
+\end{verbatim}
+The quick text-only output has SHA-256
+\begin{verbatim}
+d330cc817f2e999828d95e661a696d779f524ae79feadd98728c23cf9266dcd4
+\end{verbatim}
+and the quick manifest-plus-text output has SHA-256
+\begin{verbatim}
+9963af971382e296adeff3905cc1df7e50a8f2362851c819205f047799375932.
+\end{verbatim}
+The gate executes its own optimized master child, requires byte-identical
+normal and \texttt{-O} output, rejects twelve focused hostile mutations, and
+checks that nine proof-critical Python sources contain no
+optimization-removable \texttt{assert}.
+
+Quick mode is an integrity and composition gate: it hashes every child source
+and mathematical dependency, authenticates the post-XII compressed and raw
+streams, validates strict schemas and the singleton bytes, and pins receipts
+from prior exact normal/\texttt{-O} child runs.  It deliberately does not
+rerun the expensive semantic children.  To do so, run
+\begin{verbatim}
+python3 -B research/rank-seven-order-eight-kernel-theorem-verifier.py --full
+\end{verbatim}
+Full mode executes the base bridge, structural replay, packet-chain replay,
+post-XII replay, and the imported tricyclic finite gates both normally and
+under \texttt{-O}.  The post-XII normalized proof receipt is pinned as
+\begin{verbatim}
+1dbd2337043e283e4b8913b89151da6b000cbc516a822f3b5f24bbf94e89eb4b.
+\end{verbatim}
+The distinction between quick integrity verification, full read-only replay,
+and fresh producer recomputation is part of the theorem contract.
+
+Build this manuscript with
+\begin{verbatim}
+bash scripts/build-paper.sh rank-seven-order-eight-kernels
+\end{verbatim}
+
+\paragraph{Scoped nonclaim.}
+Theorem~\ref{thm:main} concerns only cyclomatic-rank-seven graphs with exactly
+one positive-rank cyclic block and with suppressed kernel order eight.  It
+makes no claim for kernel orders nine through twelve, for any multiblock
+rank-seven graph, or for all connected heptacyclic graphs.  It does not claim
+a fresh recomputation of the four historical base producers.  It uses neither
+parity-changing subdivision monotonicity nor edge-addition monotonicity.
+
+\section*{AI disclosure}
+This manuscript and its proof-object synthesis were generated by an AI coding
+and mathematical reasoning system from the cited repository proofs and exact
+certificate artifacts.  No human authorship, human review, or human
+verification is claimed.  The result should be assessed from the displayed
+arguments, explicit trust boundary, frozen sources, and reproducible checks.
+No external publication was performed as part of this manuscript build.
+
+\begin{thebibliography}{99}
+\bibitem{Tricyclic}
+Companion manuscript, \emph{Positive Square Energy of Every Tricyclic Graph},
+2026; \path{all-tricyclic-graphs/paper.tex}.  The final gate pins the
+manuscript, PDF, README, hostile audit, and finite dependency verifiers by
+SHA-256.
+
+\bibitem{CensusTheorem}
+\emph{Rank-seven removable-ear census theorem and exact audit}, 2026;
+\path{positive-square-energy/heptacyclic-general/rank-seven-removable-ear-census-theorem.md}
+and \path{research/rank-seven-kernel-frontier-census.py}.
+
+\bibitem{Reduction}
+\emph{Rank-seven single-block structural theorem: exact reduction and
+obstructions}, 2026;
+\path{positive-square-energy/heptacyclic-general/rank-seven-single-block-structural-theorem.md}.
+
+\bibitem{BaseBridge}
+Exact base-owner precedence bridge and hostile audit,
+\path{positive-square-energy/experiments/rank7_order8_typed_precedence_bridge.py}.
+
+\bibitem{StructuralReplay}
+Exact read-only replay for structural lanes I--III,
+\path{positive-square-energy/experiments/rank7_order8_structural_exact_verifier.py}.
+
+\bibitem{PacketReplay}
+Exact read-only replay for packet lanes IV--XII,
+\path{positive-square-energy/experiments/verify_rank7_order8_packet_chain.py}.
+
+\bibitem{Singleton}
+\emph{Final order-eight residual: two induced tricyclic territories}, 2026;
+\path{positive-square-energy/heptacyclic-general/rank-seven-order-eight-final-two-k4-territory.md}.
+\end{thebibliography}
+
+\end{document}
