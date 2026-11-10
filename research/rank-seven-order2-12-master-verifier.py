@@ -37,7 +37,7 @@ COMPLETED = (
                        "conclusion=s+(G)>=|V(G)| for rank-seven kernel order six only")},
     {"name": "order-7", "orders": (7,), "kernel_count": 2270,
      "path": HERE / "rank-seven-order-seven-kernel-theorem-verifier.py",
-     "source_sha256": "71d38a4f857eb8ab34ecaf0b947649d27c03b1b7301b9c6c512280c6d078f367",
+     "source_sha256": "3cdbc8373b6b022beb888ee24b12daf16b2117d7d1cd91eae46193e253d3f9b9",
      "arguments": (),
      "output_lines": ("rank-seven order-seven kernel theorem: exact audit passed",
                       "conclusion=s+(G)>=|V(G)| for rank-seven kernel order seven only")},

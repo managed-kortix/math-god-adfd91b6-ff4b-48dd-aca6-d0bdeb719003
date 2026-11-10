@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import importlib.util
+import json
 import lzma
 import tempfile
 import unittest
@@ -74,6 +75,42 @@ class RankSevenOrderSevenPackAuditorTest(unittest.TestCase):
         self.assertTrue(all(entry["packet"] ==
                             "two-actual-K4-one-sum-plus-open-45-path-with-rational-routing"
                             for entry in dictionary))
+
+    def assert_forged_transcript_rejected(self, mutate, message):
+        manifest_path = self.auditor.DEFAULT_MANIFEST
+        source = PATH.with_name("rank7_order7_chunk_00000_05000.replay.json")
+        payload = json.loads(source.read_text(encoding="ascii"))
+        payload["auditor_sha256"] = self.auditor.auditor_sha256()
+        mutate(payload)
+        with tempfile.TemporaryDirectory() as temporary:
+            forged = Path(temporary) / "forged.json"
+            forged.write_bytes(self.auditor.canonical_bytes(payload))
+            with self.assertRaisesRegex(RuntimeError, message):
+                self.auditor.authenticate_chunk_transcript(manifest_path, forged)
+
+    def test_authentication_replays_receipt_semantics(self):
+        self.assert_forged_transcript_rejected(
+            lambda payload: payload["report"].__setitem__(
+                "ownership_stream_sha256", "0" * 64),
+            "fresh exact replay")
+
+    def test_authentication_rejects_equal_valued_json_type_laundering(self):
+        mutations = (
+            lambda payload: payload["report"].__setitem__(
+                "covered_target_total", 70000.0),
+            lambda payload: payload["report"].__setitem__(
+                "exact_certified_target_total", 70000.0),
+            lambda payload: payload["report"].__setitem__(
+                "disjoint_rational_owner_target_total", 70000.0),
+            lambda payload: payload["report"].__setitem__(
+                "covered_residual_range", [0.0, 5000.0]),
+            lambda payload: payload["report"]["direct_spectral_owners"][0].__setitem__(
+                "all_length_rooted_tree_lift", 1),
+        )
+        for mutate in mutations:
+            with self.subTest(mutate=mutate):
+                self.assert_forged_transcript_rejected(
+                    mutate, "byte-semantically identical to fresh exact replay")
 
 
 if __name__ == "__main__":

@@ -1,20 +1,26 @@
 # Hostile audit of the tricyclic assembly
 
-Date: 5 August 2026
+Dates: initial audit 5 August 2026; final hostile re-audit 9 November 2026
 
 ## Verdict
 
-The six requested pieces are complete after two bookkeeping repairs found in
-the hostile pass:
+The six requested pieces are complete after four repairs found across the two
+hostile passes:
 
 1. The exceptional doubled-`C4` orbit is not one switching class. It contains
    four physical rows in class `110` and four in class `111`.
 2. The all-odd `K4` argument must cover the entire eight-row switching class,
    not only the physically all-odd row. The repaired argument does so without
    switching physical lengths.
+3. The regular-simplex estimate formerly asserted for the switched three-even
+   cut is false; the exact physical Gram recorded below replaces it.
+4. The one-long-path deletion leaves an attached `Theta(1,2,2)`, not a
+   bipartite theta. Its established strict credit still pays the deleted tree.
 
 With those repairs, the kernel classification and global block proof are
-exhaustive. No tricyclic family remains open in the current assembly.
+exhaustive. No tricyclic family remains open in the current assembly. The
+9 November re-audit also hardened both finite verifiers against tuple-for-list
+schema laundering.
 
 ## Piece-by-piece audit
 
@@ -98,16 +104,21 @@ Status: complete after extending the last-class proof to all physical rows.
 - Every even physical path is long. A nonconstant switch produces exactly
   three or four even paths, namely a nontrivial `K4` cut.
 - With at least four long paths, the simplex costs less than
-  `(6-q)/2+q/4 <= 2`. With exactly three, the sole switched case has three even
-  length-two paths and three odd units; its sharper simplex cost is less than
-  `3/2+3/6=2`.
+  `(6-q)/2+q/4 <= 2`. The sole three-long switched shape has a three-edge
+  even cut and an odd unit triangle. The former regular-simplex estimate for
+  this shape was false; hostile re-audit found the exact physical Gram with
+  cut correlations `1/6` and triangle correlations `-11/24`. Its spectrum is
+  `35/24,35/24,13/12,0`, and its total excess is
+  `(837-168 sqrt(21))/35<2`, with radical gap `4415` after squaring.
 - Exactly two long paths forces the switch to be constant, reducing to the
-  adjacent/opposite all-odd certificates. Exactly one long path opens to a
-  bipartite theta of credit one plus a tree of credit minus one. Zero long
-  paths is the attached-`K4` packet.
+  adjacent/opposite all-odd certificates. Exactly one long path also forces a
+  constant switch; opening it leaves an attached `Theta(1,2,2)` of strict
+  credit greater than one plus a tree of credit minus one. (The former claim
+  that this theta was bipartite was a parity error.) Zero long paths is the
+  attached-`K4` packet.
 
 This case split covers all eight physical parity rows in the switching class
-and all path lengths. Remaining gap: none.
+and all path lengths. Remaining gap: none after the exact physical-Gram and `Theta(1,2,2)` repairs.
 
 ## Exhaustive kernel classification
 
@@ -166,7 +177,8 @@ bash scripts/build-paper.sh all-tricyclic-graphs
 ```
 
 The main finite audit reports digest
-`795f7772618d4f0280da914a85042970492f641909cd093abe9e30b434aa279c`
-and rejects all 21 hostile mutations. These scripts audit the finite
+`6d499af761ffa7317a431e5150dac59317618f508896be2c3ed77b250b43c901`
+and rejects all 27 hostile mutations. The standalone all-odd-`K4` audit
+rejects eight hostile mutations. These scripts audit the finite
 records; the analytic duality, monotonicity, structural deletions, and block
 classification remain mathematical arguments in the proof notes and paper.

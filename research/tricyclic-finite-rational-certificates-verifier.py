@@ -19,7 +19,7 @@ from numbers import Number
 
 PI_LO = F(333, 106)
 PI_HI = F(355, 113)
-EXPECTED_SHA256 = "795f7772618d4f0280da914a85042970492f641909cd093abe9e30b434aa279c"
+EXPECTED_SHA256 = "6d499af761ffa7317a431e5150dac59317618f508896be2c3ed77b250b43c901"
 
 
 def require(condition, message):
@@ -44,7 +44,7 @@ def validate_payload_types(value, path="certificate"):
         return
     if isinstance(value, Number):
         raise RuntimeError(f"{path}: non-integral numeric value is forbidden")
-    if isinstance(value, (list, tuple)):
+    if type(value) is list:
         for index, item in enumerate(value):
             validate_payload_types(item, f"{path}[{index}]")
         return
@@ -397,6 +397,22 @@ K4_ALL_ODD_DISPOSITIONS = {
     "q_0_packet": 1,
 }
 
+K4_THREE_EVEN_CUT_GRAM = [
+    ["1", "1/6", "1/6", "1/6"],
+    ["1/6", "1", "-11/24", "-11/24"],
+    ["1/6", "-11/24", "1", "-11/24"],
+    ["1/6", "-11/24", "-11/24", "1"],
+]
+
+K4_THREE_EVEN_CUT_PRINCIPAL_MINORS = {
+    "1": ["1", "1", "1", "1"],
+    "2": ["35/36", "35/36", "35/36", "455/576", "455/576", "455/576"],
+    "3": ["1225/1728", "1225/1728", "1225/1728", "1225/6912"],
+    "4": ["0"],
+}
+
+K4_THREE_EVEN_CUT_TOTAL = [837, 168, 21, 35]
+
 # Angles are multiples of pi/3.  Each physical row records the exact number of
 # even-path a=2*tan^2(pi/12) terms and odd-path b=tan^2(pi/6) terms.
 K4_PHYSICAL_CERTIFICATES = [
@@ -533,8 +549,96 @@ def audit_k4_physical(certificates):
     return len(covered), len(all_odd_class)
 
 
-def audit_k4_all_odd(bounds, expected_dispositions):
+def exact_determinant(matrix):
+    work = [[frac(value) for value in row] for row in matrix]
+    value = F(1)
+    for column in range(len(work)):
+        pivot = next((row for row in range(column, len(work))
+                      if work[row][column] != 0), None)
+        if pivot is None:
+            return F(0)
+        if pivot != column:
+            work[column], work[pivot] = work[pivot], work[column]
+            value = -value
+        diagonal = work[column][column]
+        value *= diagonal
+        for row in range(column + 1, len(work)):
+            multiplier = work[row][column] / diagonal
+            for entry in range(column + 1, len(work)):
+                work[row][entry] -= multiplier * work[column][entry]
+    return value
+
+
+def audit_k4_three_even_cut(gram_data, minor_data, total_data):
+    require(gram_data == K4_THREE_EVEN_CUT_GRAM,
+            "K4: three-even-cut Gram ledger changed")
+    require(minor_data == K4_THREE_EVEN_CUT_PRINCIPAL_MINORS,
+            "K4: three-even-cut principal-minor ledger changed")
+    require(total_data == K4_THREE_EVEN_CUT_TOTAL,
+            "K4: three-even-cut total ledger changed")
+    gram = [[frac(value) for value in row] for row in gram_data]
+    require(len(gram) == 4 and all(len(row) == 4 for row in gram),
+            "K4: three-even-cut Gram dimension changed")
+    require(all(gram[i][j] == gram[j][i] for i in range(4) for j in range(4)) and
+            all(gram[i][i] == 1 for i in range(4)),
+            "K4: three-even-cut Gram is not a correlation matrix")
+    from itertools import combinations
+    for order in range(1, 5):
+        actual = []
+        for indices in combinations(range(4), order):
+            principal = [[gram[row][column] for column in indices]
+                         for row in indices]
+            actual.append(exact_determinant(principal))
+        expected = [frac(value) for value in minor_data[str(order)]]
+        require(sorted(actual) == sorted(expected) and all(value >= 0 for value in actual),
+                f"K4: three-even-cut order-{order} PSD ledger failed")
+    kernel = (-1, 2, 2, 2)
+    require(all(sum(gram[row][column] * kernel[column] for column in range(4)) == 0
+                for row in range(4)), "K4: three-even-cut kernel failed")
+
+    # Reconstruct the path costs and radical total directly from the Gram.
+    # For an even path of length two, f_2(r)=2(1-s)/(1+s) with
+    # s^2=(1+r)/2; for an odd unit path, f_1(t)=(1+t)/(1-t).
+    cut = (gram[0][1], gram[0][2], gram[0][3])
+    triangle = (gram[1][2], gram[1][3], gram[2][3])
+    require(len(set(cut)) == len(set(triangle)) == 1,
+            "K4: three-even-cut correlations lost orbit symmetry")
+    r, t = cut[0], triangle[0]
+    square = (1 + r) / 2
+    require(square == F(21, 36), "K4: three-even-cut half-angle square changed")
+    radical, root_denominator = 21, 6
+    denominator = root_denominator**2 - radical
+    even_constant = 2 * F(root_denominator**2 + radical, denominator)
+    even_radical = -4 * F(root_denominator, denominator)
+    odd_cost = (1 + t) / (1 - t)
+    require((even_constant, even_radical, odd_cost) ==
+            (F(38, 5), F(-8, 5), F(13, 35)),
+            "K4: three-even-cut path costs changed")
+    total_constant = 3 * even_constant + 3 * odd_cost
+    total_radical = 3 * even_radical
+    common_denominator = total_constant.denominator
+    radical_coefficient = -total_radical * common_denominator
+    require(radical_coefficient.denominator == 1,
+            "K4: three-even-cut radical coefficient is not integral")
+    derived_total = [total_constant.numerator, radical_coefficient.numerator,
+                     radical, common_denominator]
+    require(all(type(value) is int for value in derived_total) and
+            derived_total == total_data == K4_THREE_EVEN_CUT_TOTAL,
+            "K4: three-even-cut radical total is not derived from the Gram")
+    numerator, coefficient, radicand, total_denominator = derived_total
+    gap = numerator - 2 * total_denominator
+    require(coefficient > 0 and gap > 0 and
+            coefficient**2 * radicand - gap**2 == 4415 > 0,
+            "K4: three-even-cut radical comparison failed")
+    require(59**2 - 24**2 * 6 == 25 > 0 and
+            2 * 169 - 3 * 121 == -25 < 0,
+            "K4: former false simplex regression gate failed")
+    return len(gram)
+
+
+def audit_k4_all_odd(bounds, expected_dispositions, gram_data, minor_data, total_data):
     require(bounds == K4_TAN_BOUNDS, "K4: rational tangent ledger changed")
+    audit_k4_three_even_cut(gram_data, minor_data, total_data)
     for n, d, bound in bounds:
         prove_tan_bound(n, d, bound, f"K4 tan^2({n}pi/{d})")
     adjacent = 6 * frac(bounds[0][2]) + frac(bounds[1][2]) + 2 * frac(bounds[2][2])
@@ -554,6 +658,22 @@ def audit_k4_all_odd(bounds, expected_dispositions):
             "K4: all-odd disposition labels changed")
     dispositions = {key: 0 for key in K4_ALL_ODD_DISPOSITIONS}
     seen = set()
+    switching_cut_sizes = {0: 0, 3: 0, 4: 0}
+    switching_rows = set()
+    for bits in product((0, 1), repeat=3):
+        switches = bits + (0,)
+        parity = tuple(1 ^ switches[i] ^ switches[j] for i, j in K4_EDGES)
+        require(parity not in switching_rows, "K4: duplicate physical switching row")
+        switching_rows.add(parity)
+        even_edges = [K4_EDGES[index] for index, value in enumerate(parity) if value == 0]
+        even_count = len(even_edges)
+        require(even_count in switching_cut_sizes, "K4: switching cut-size classification failed")
+        if even_count == 3:
+            common = set(even_edges[0]).intersection(*map(set, even_edges[1:]))
+            require(len(common) == 1, "K4: three-edge cut is not a relabelled star")
+        switching_cut_sizes[even_count] += 1
+    require(len(switching_rows) == 8 and switching_cut_sizes == {0: 1, 3: 4, 4: 3},
+            "K4: physical rows do not split as one constant, four three-cuts, three four-cuts")
     for mask in range(64):
         long_edges = {index for index in range(6) if mask & (1 << index)}
         q = len(long_edges)
@@ -678,12 +798,15 @@ def certificate_data():
         "doubled_c4_class_first": deepcopy(C4_CLASS_FIRST),
         "doubled_c4_failed": sorted(C4_FAILED),
         "doubled_c4_endpoints": [list(edge) for edge in C4_ENDPOINTS],
-        "doubled_c4_class111_long": deepcopy(C4_CLASS111_LONG),
-        "doubled_c4_tangent_bounds": deepcopy(C4_TAN_BOUNDS),
+        "doubled_c4_class111_long": json.loads(json.dumps(C4_CLASS111_LONG)),
+        "doubled_c4_tangent_bounds": json.loads(json.dumps(C4_TAN_BOUNDS)),
         "k4_physical_certificates": deepcopy(K4_PHYSICAL_CERTIFICATES),
         "k4_edges": [list(edge) for edge in K4_EDGES],
         "k4_tangent_bounds": deepcopy(K4_TAN_BOUNDS),
         "k4_all_odd_dispositions": deepcopy(K4_ALL_ODD_DISPOSITIONS),
+        "k4_three_even_cut_gram": deepcopy(K4_THREE_EVEN_CUT_GRAM),
+        "k4_three_even_cut_principal_minors": deepcopy(K4_THREE_EVEN_CUT_PRINCIPAL_MINORS),
+        "k4_three_even_cut_total": deepcopy(K4_THREE_EVEN_CUT_TOTAL),
         "four_path_representative_records": deepcopy(FOUR_PATH_RECORDS),
     }
 
@@ -699,6 +822,9 @@ def audit(certificate, enforce_digest=True):
                                  "doubled_c4_class111_long", "doubled_c4_tangent_bounds",
                                  "k4_physical_certificates", "k4_tangent_bounds",
                                  "k4_edges", "k4_all_odd_dispositions",
+                                 "k4_three_even_cut_gram",
+                                 "k4_three_even_cut_principal_minors",
+                                 "k4_three_even_cut_total",
                                  "four_path_representative_records"},
             "certificate sections changed")
     require(certificate["arithmetic_constants"] == {
@@ -715,9 +841,11 @@ def audit(certificate, enforce_digest=True):
             "doubled C4 failed-row ledger changed")
     require(certificate["doubled_c4_endpoints"] == [list(edge) for edge in C4_ENDPOINTS],
             "doubled C4 endpoint definitions changed")
-    require(certificate["doubled_c4_class111_long"] == C4_CLASS111_LONG,
+    require(certificate["doubled_c4_class111_long"] ==
+            json.loads(json.dumps(C4_CLASS111_LONG)),
             "doubled C4 class-111 long ledger changed")
-    require(certificate["doubled_c4_tangent_bounds"] == C4_TAN_BOUNDS,
+    require(certificate["doubled_c4_tangent_bounds"] ==
+            json.loads(json.dumps(C4_TAN_BOUNDS)),
             "doubled C4 tangent ledger changed")
     require(certificate["k4_edges"] == [list(edge) for edge in K4_EDGES],
             "K4 endpoint definitions changed")
@@ -726,7 +854,10 @@ def audit(certificate, enforce_digest=True):
     c4_rows, c4_failed = audit_doubled_c4(certificate["doubled_c4"])
     k4_physical, k4_omitted = audit_k4_physical(certificate["k4_physical_certificates"])
     k4_dispositions, k4_audited, k4_structural = audit_k4_all_odd(
-        certificate["k4_tangent_bounds"], certificate["k4_all_odd_dispositions"])
+        certificate["k4_tangent_bounds"], certificate["k4_all_odd_dispositions"],
+        certificate["k4_three_even_cut_gram"],
+        certificate["k4_three_even_cut_principal_minors"],
+        certificate["k4_three_even_cut_total"])
     four_path_cases = audit_four_path(certificate["four_path_representative_records"])
     digest = sha256(canonical_payload(certificate).encode("ascii")).hexdigest()
     if enforce_digest:
@@ -776,7 +907,15 @@ def hostile_self_checks():
     add("K4 physical cost", lambda c: c["k4_physical_certificates"][5][2][0].__setitem__(1, 3))
     add("K4 tangent bound", lambda c: c["k4_tangent_bounds"][0].__setitem__(2, "1/10"))
     add("K4 all-odd disposition", lambda c: c["k4_all_odd_dispositions"].__setitem__("q_1_structural", 5))
+    add("K4 three-even Gram", lambda c: c["k4_three_even_cut_gram"][0].__setitem__(1, "1/5"))
+    add("K4 three-even minor", lambda c: c["k4_three_even_cut_principal_minors"]["3"].__setitem__(0, "1/2"))
+    add("K4 three-even total", lambda c: c["k4_three_even_cut_total"].__setitem__(0, 838))
+    add("extra certificate section", lambda c: c.__setitem__("junk", 0))
+    add("boolean rational numerator", lambda c: c["k4_three_even_cut_total"].__setitem__(0, True))
     add("four-path e=0 logic", lambda c: c["four_path_representative_records"][5].__setitem__(3, "1"))
+    add("tuple array", lambda c: c.__setitem__(
+        "four_path_representative_records",
+        tuple(c["four_path_representative_records"])))
     for label, candidate in mutations:
         expect_rejected(lambda candidate=candidate: audit(candidate, enforce_digest=False), label)
     return len(mutations)
@@ -785,7 +924,7 @@ def hostile_self_checks():
 def main():
     digest, counts = audit(certificate_data())
     mutations = hostile_self_checks()
-    require(mutations == 21, "hostile mutation count changed")
+    require(mutations == 27, "hostile mutation count changed")
     (dt_counts, c4_rows, c4_failed, k4_physical, k4_omitted,
      k4_dispositions, k4_audited, k4_structural, four_cases) = counts
     dt_dnn_orbits, dt_structural_orbits, dt_dnn_rows, dt_structural_rows, dt_long = dt_counts

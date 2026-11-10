@@ -591,6 +591,12 @@ def validate_chunk_report(report, manifest, chunk):
         digest_string(report.get(field), f"chunk report {field}")
 
 
+def fresh_chunk_report(manifest_path, chunk_index):
+    report, complete = audit(manifest_path, exact=True, chunk_index=chunk_index)
+    require(complete, "fresh chunk replay is incomplete")
+    return report
+
+
 def chunk_transcript_payload(manifest_path, chunk_index, report):
     manifest = load_manifest(manifest_path)
     require(type(chunk_index) is int and 0 <= chunk_index < len(manifest["chunks"]),
@@ -627,13 +633,20 @@ def authenticate_chunk_transcript(manifest_path, transcript_path, manifest=None)
             transcript["full_theorem"] is False, "chunk transcript semantics changed")
     require(transcript["auditor_sha256"] == auditor_sha256() and
             transcript["manifest_sha256"] == manifest_sha256(manifest) and
-            transcript["dependency_sha256"] == manifest["dependency_sha256"] ==
-            dependency_digests(), "chunk transcript transitive identity changed")
+            canonical_bytes(transcript["dependency_sha256"]) ==
+            canonical_bytes(manifest["dependency_sha256"]) ==
+            canonical_bytes(dependency_digests()),
+            "chunk transcript transitive identity changed")
     index = transcript["chunk_index"]
     require(type(index) is int and 0 <= index < len(manifest["chunks"]),
             "transcript chunk index is out of range")
-    require(transcript["chunk"] == manifest["chunks"][index], "transcript chunk changed")
+    require(canonical_bytes(transcript["chunk"]) ==
+            canonical_bytes(manifest["chunks"][index]),
+            "transcript chunk is not byte-semantically identical to the manifest")
     validate_chunk_report(transcript["report"], manifest, transcript["chunk"])
+    replayed = fresh_chunk_report(manifest_path, index)
+    require(canonical_bytes(transcript["report"]) == canonical_bytes(replayed),
+            "chunk transcript is not byte-semantically identical to fresh exact replay")
     return raw, transcript
 
 
