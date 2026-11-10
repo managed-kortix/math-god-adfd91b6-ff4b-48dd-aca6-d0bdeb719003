@@ -60,11 +60,26 @@ def main() -> None:
             "agent": session.get("agent"),
         })
 
+    # Task/agent workers legitimately run the same configured agent in bounded
+    # child sessions.  The API marks those with a nonempty agent_handle (and,
+    # for team workers, may also expose team_lead_session_id).  They are not
+    # autonomous roots and must not be counted against the exactly-three core
+    # invariant.  A running unregistered math-god session with neither marker
+    # remains a fail-closed extra root.
+    running_math_workers = [
+        session for session in sessions
+        if session.get("status") == "running"
+        and session.get("agent") == "math-god"
+        and session.get("session_id") not in ids
+        and (session.get("agent_handle") or session.get("team_lead_session_id"))
+    ]
     extra_math_roots = [
         session for session in sessions
         if session.get("status") == "running"
         and session.get("agent") == "math-god"
         and session.get("session_id") not in ids
+        and not session.get("agent_handle")
+        and not session.get("team_lead_session_id")
     ]
     if extra_math_roots:
         failures.append(
@@ -74,6 +89,7 @@ def main() -> None:
 
     print(json.dumps({
         "registered_cores": report,
+        "running_math_task_workers": running_math_workers,
         "extra_running_math_god_roots": extra_math_roots,
         "ordinary_running_sessions": [
             {key: session.get(key) for key in ("session_id", "name", "agent", "status")}
