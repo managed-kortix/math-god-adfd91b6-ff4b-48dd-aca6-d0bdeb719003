@@ -49,7 +49,7 @@ types are rejected explicitly. The four-path output describes nine
 representative symbolic records, including
 the one-unit `e=0` endpoint case; it does not claim to reprove the analytic
 inequalities that turn those records into all-length coverage. The verifier
-rejects 21 deliberately corrupted certificate variants:
+rejects 27 deliberately corrupted certificate variants:
 
 ```sh
 python3 research/tricyclic-finite-rational-certificates-verifier.py
@@ -58,8 +58,10 @@ python3 -O research/tricyclic-finite-rational-certificates-verifier.py
 
 Both main-audit runs print `tricyclic finite rational certificates: exact audit
 passed` and digest
-`795f7772618d4f0280da914a85042970492f641909cd093abe9e30b434aa279c`.
-The all-odd-switching-class audit checks all eight physical parity rows:
+`6d499af761ffa7317a431e5150dac59317618f508896be2c3ed77b250b43c901`.
+The all-odd-switching-class audit checks all eight physical parity rows,
+including the exact PSD Gram for the four three-edge even cuts and hostile
+regressions against the former false simplex estimate:
 
 ```sh
 python3 positive-square-energy/experiments/k4_all_odd_exact_verify.py
@@ -67,11 +69,16 @@ python3 -O positive-square-energy/experiments/k4_all_odd_exact_verify.py
 ```
 
 Both runs report digest
-`85ccff4a03791e2a5a455a7c350b804982f6ee3fb426233cd5e92c67431466c2`
-and three rejected hostile mutations.
+`b0c4ed64a12ccabe0a8a38cb9fdb85622d8f7c2d07bdf53f75eb1700a684fa39`
+and eight rejected hostile mutations.
 
 The audits are corroborative; the paper proves the analytic and structural
-reductions separately. See `HOSTILE_AUDIT.md` for the piece-by-piece review.
+reductions separately. A 9 November 2026 hostile re-audit found and repaired
+two errors in the earlier `K4` write-up: a false regular-simplex estimate for
+the three-even-cut row and an incorrect bipartiteness assertion in the
+one-long-path deletion. The replacement physical Gram and
+`Theta(1,2,2)` opening are exact and are now regression-tested. See
+`HOSTILE_AUDIT.md` for the piece-by-piece review.
 
 The doubled-triangle all-length residue split has a focused finite audit. It
 checks the 32-row census, distinguishes long from canonical pairs in the

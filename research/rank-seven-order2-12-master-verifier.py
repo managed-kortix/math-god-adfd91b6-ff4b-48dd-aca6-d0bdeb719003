@@ -37,17 +37,30 @@ COMPLETED = (
                        "conclusion=s+(G)>=|V(G)| for rank-seven kernel order six only")},
     {"name": "order-7", "orders": (7,), "kernel_count": 2270,
      "path": HERE / "rank-seven-order-seven-kernel-theorem-verifier.py",
-     "source_sha256": "71d38a4f857eb8ab34ecaf0b947649d27c03b1b7301b9c6c512280c6d078f367",
+     "source_sha256": "3cdbc8373b6b022beb888ee24b12daf16b2117d7d1cd91eae46193e253d3f9b9",
      "arguments": (),
      "output_lines": ("rank-seven order-seven kernel theorem: exact audit passed",
                       "conclusion=s+(G)>=|V(G)| for rank-seven kernel order seven only")},
+    {"name": "order-8", "orders": (8,), "kernel_count": 4015,
+     "path": HERE / "rank-seven-order-eight-kernel-theorem-verifier.py",
+     "source_sha256": "8e2baed4455f0721a1f670bef2f5a97d937fc0baa2f5f5f88ee38d6709565255",
+     # Aggregate invocation is the exact pinned quick release gate.  The
+     # standalone package records the successful full replay on these source
+     # bytes; its three residual historical producer roots remain explicit.
+     "output_sha256": "193981b59dde97ba0dfd680e2ffd7477f02663c0645fb024ffa120a38fbb9afe",
+     "arguments": (),
+     "output_lines": ("rank-seven order-eight kernel theorem gate: exact audit passed",
+                      "mode=quick scope=single-positive-rank-block kernel_order=8 rank=7",
+                      "trust_boundary=three residual pinned base producer outputs; direct packs freshly exact-replayed",
+                      "conclusion=s+(G)>=|V(G)| for rank-seven kernel order eight only")},
 )
+ORDER8_NAME = "order-8"
 PLACEHOLDERS = tuple({
     "name": f"order-{order}", "orders": (order,),
     "kernel_count": ORDER_COUNTS[order - 2], "path": None,
     "source_sha256": None, "output_sha256": None,
     "status": "blocked-unregistered-exact-owner",
-} for order in range(8, 13))
+} for order in range(9, 13))
 ANALYTIC_LIFT = {
     "name": "conditional-analytic-lift-budget-6",
     "path": HERE / "rank-seven-conditional-analytic-lift-verifier.py",
@@ -81,9 +94,9 @@ def audit_census():
 def validate_registry(completed=COMPLETED, placeholders=PLACEHOLDERS):
     completed_orders = tuple(order for owner in completed for order in owner["orders"])
     placeholder_orders = tuple(order for owner in placeholders for order in owner["orders"])
-    require(completed_orders == tuple(range(2, 8)), "completed orders are not exactly 2 through 7")
-    require(placeholder_orders == tuple(range(8, 13)),
-            "placeholder orders are not exactly 8 through 12")
+    require(completed_orders == tuple(range(2, 9)), "completed orders are not exactly 2 through 8")
+    require(placeholder_orders == tuple(range(9, 13)),
+            "placeholder orders are not exactly 9 through 12")
     require(set(completed_orders).isdisjoint(placeholder_orders), "order owners overlap")
     require(set(completed_orders) | set(placeholder_orders) == set(range(2, 13)),
             "order owners are not exhaustive")
@@ -108,10 +121,17 @@ def invoke_completed(owner):
             f"completed owner failed: {owner['name']}")
     require(all(line in completed.stdout for line in owner["output_lines"]),
             f"completed owner output changed: {owner['name']}")
+    output_digest = hashlib.sha256(completed.stdout.encode("ascii")).hexdigest()
+    if owner["name"] == ORDER8_NAME:
+        require(set(owner) == {"name", "orders", "kernel_count", "path",
+                               "source_sha256", "output_sha256", "arguments",
+                               "output_lines"},
+                "order-eight release-owner schema changed")
+        require(owner["output_sha256"] == output_digest,
+                "order-eight exact quick-output receipt changed")
     return {"name": owner["name"], "orders": list(owner["orders"]),
             "kernel_count": owner["kernel_count"], "status": "completed-exact-owner",
-            "source_sha256": digest,
-            "output_sha256": hashlib.sha256(completed.stdout.encode("ascii")).hexdigest()}
+            "source_sha256": digest, "output_sha256": output_digest}
 
 
 def invoke_lift():
@@ -157,6 +177,15 @@ def hostile_checks():
         count += 1
     else:
         raise RuntimeError("silent placeholder promotion accepted")
+    forged_order8 = deepcopy(next(owner for owner in COMPLETED
+                                  if owner["name"] == ORDER8_NAME))
+    forged_order8["output_sha256"] = "0" * 64
+    try:
+        invoke_completed(forged_order8)
+    except (RuntimeError, TypeError):
+        count += 1
+    else:
+        raise RuntimeError("forged order-eight quick-output receipt accepted")
     return count
 
 
@@ -173,8 +202,8 @@ def audit():
         "evidence_kind": "fail-closed-incomplete-master-skeleton",
         "scope": {"rank": 7, "block_scope": "exactly-one-positive-rank-cyclic-block",
                   "kernel_orders": [2, 12], "kernel_count": sum(ORDER_COUNTS)},
-        "exact_order_partition": {"completed": list(range(2, 8)),
-                                  "blocked": list(range(8, 13))},
+        "exact_order_partition": {"completed": list(range(2, 9)),
+                                  "blocked": list(range(9, 13))},
         "counts_by_order_2_to_12": list(ORDER_COUNTS),
         "completed_owners": completed,
         "placeholders": open_blockers,
@@ -196,8 +225,8 @@ def main():
     if args.print_manifest:
         sys.stdout.write(canonical_bytes(manifest).decode("ascii"))
     sys.stdout.write("rank-seven orders2-12 master skeleton audit passed\n"
-                     "completed_orders=2-7 blocked_orders=8-12 budget=6\n"
-                     "promotion_gate=closed global_claim=false\n")
+                     "completed_orders=2-8 blocked_orders=9-12 budget=6\n"
+                     "scope=single-positive-rank-block promotion_gate=closed global_claim=false\n")
     return 0
 
 

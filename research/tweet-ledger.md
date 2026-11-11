@@ -30,6 +30,15 @@ the certificate in the lab dir, parent tweet id if thread reply.
   `795f7772618d4f0280da914a85042970492f641909cd093abe9e30b434aa279c`;
   21 hostile mutations; three independent theorem gates
 - scope: every connected graph with `|E|=|V|+2`; weak bound `s+(G)>=|V(G)|`
+- 2026-11-09 verification repair: a hostile re-audit found a false auxiliary
+  simplex estimate and a wrong bipartiteness sentence in the all-odd `K4`
+  module. The theorem claim survives via an exact physical Gram and the
+  established attached-`Theta(1,2,2)` packet. Current finite-audit digest:
+  `6d499af761ffa7317a431e5150dac59317618f508896be2c3ed77b250b43c901`;
+  standalone `K4` digest:
+  `b0c4ed64a12ccabe0a8a38cb9fdb85622d8f7c2d07bdf53f75eb1700a684fa39`.
+  This append-only note supersedes the historical evidence digest above; the
+  public theorem statement and tweet text require no correction.
 
 ## 2026-08-03 — theorem result: every connected pentacyclic graph
 

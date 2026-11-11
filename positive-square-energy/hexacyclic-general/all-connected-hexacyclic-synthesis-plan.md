@@ -62,12 +62,17 @@ The paper must prove this block-decomposition implication. An executable master
 can audit the owner registry and scopes, but cannot replace the standard block
 theory argument.
 
-## Dependency DAG and current identity locks
+## Dependency DAG and mixed-time identity notes
 
-All SHA-256 values in this section identify the repository bytes inspected for
-this plan. Final publication roots must be regenerated after the order-nine and
-order-ten manifests and promotion owners are frozen; these current values are
-not final theorem roots.
+This section began as a 9 August 2026 synthesis snapshot and has been amended
+selectively as downstream gates were hardened.  A hash explicitly labelled
+``current`` below identifies the present repository bytes; other hashes are
+historical identities or values pinned by the named verifier.  Do not treat
+the table as one coherent dependency manifest.  The executable all-connected
+master is the current authority.  Final publication roots must be regenerated
+whenever a leaf changes.  The 9 November K4 repair has been propagated through
+the tetracyclic leaf, multiblock manifest, and all-connected master; the
+identities immediately below are the post-repair current values.
 
 ### Multiblock owner
 
@@ -76,12 +81,18 @@ Direct verifier:
 ```text
 research/hexacyclic-multiblock-ledger-verifier.py
 current source SHA-256:
-1ca6a90c763f5f9339143e729767a026225cad331ccf81888a8dc8f490a117ca
+1c6155f323d16726556f6b592608d08b582bec13ef138594cebba542010ddde2
+
+current canonical scope/conclusion manifest SHA-256:
+9b2513f411f21092b9761a65eb59bc16a851bebe077abf798d415b2488f8dffa
+
+current normal/optimized report SHA-256:
+30225e01ae04aad4018c1b4b8ed0b5c45cfef72f3b10da8ab456c049966cb56e
 ```
 
 It generates all eleven partitions, selects the ten multiblock partitions,
 locks nine sources, regenerates the three rank-five structural families, checks
-12 owner-incidence cases, and rejects 19 hostile mutations. Its locked leaves
+12 owner-incidence cases, and rejects 29 hostile mutations. Its locked leaves
 are:
 
 | logical owner | path | SHA-256 pinned by verifier |
@@ -90,7 +101,7 @@ are:
 | items 1--4 | `positive-square-energy/hexacyclic-general/multiblock-items1-4-owner-exact-closure.md` | `49a24ebe705aecd9248224cc39c748041c0d6d4981a137f6daad6d93019a1cb1` |
 | items 5--7 | `positive-square-energy/hexacyclic-general/multiblock-items5-7-owner-exact-closure.md` | `1c5722565e874ebf04533e908c5bf335f7be0b56a5665f5b607cfdef14ac8c67` |
 | theta--triangle packet | `positive-square-energy/hexacyclic-general/favorable-theta-triangle-shared-cut-packet.md` | `d222e09a20dce19703f8386c6a3a3699e0621b63f761e553fee3215adf8e2446` |
-| rank-four ledger | `all-tetracyclic-graphs/paper.tex` | `ae4b50ba72d1e3e66b2fe8aa95e4851397f1b805a27f904561da68ea4fa6b2da` |
+| rank-four ledger | `all-tetracyclic-graphs/paper.tex` | `7d8174e64095e5cccf90776ccac92d2dd2ca3f73d500e2518461f5dfb907b93b` |
 | all-odd K5-e ledger | `positive-square-energy/pentacyclic-general/all-odd-k5e-induced-territory-frontier.md` | `e43bbd97566ab5ea28b360311a2e3e1bc40397c3f40f250e954d1c016d94e6a5` |
 | K5-e sieve | `pentacyclic/research/all-odd-k5e-territory-sieve.py` | `047a472d4e1af46850198dc68b5780f98b930618f79b51174f11460afcc0334d` |
 | K22 fixture | `pentacyclic/research/order5-kernel-family-theorem.json` | `4d8b826b397dc269c7853b8bd386d00bf469282b52720b8dac96d850e9e616d8` |
@@ -168,30 +179,33 @@ The theorem owner is already separate from its non-theorem census ingredients:
 ```text
 research/rank-six-order-eight-kernel-theorem-verifier.py --full
 current source SHA-256:
-96f3d75efccbe3da802547bcf2ae2643f506305d1a261115186260db5e29c674
+247fc797251f19ce1fde2824f24543e2eaa7d3d3dfe4411bcc6eb829aa3e9703
 ```
 
-Its seven pinned leaves are:
+Its eight pinned leaves are:
 
 | leaf | SHA-256 |
 |:--|:--|
 | `research/fixtures/rank-six-kernels.json` | `5a862a0e9ed5dfe91ff6f8491936c8e775eb39b71619df6b8c2a9be2c4643476` |
 | `positive-square-energy/experiments/rank6_order8_orbit_frontier_census.py` | `83527bb0b5dba2cd19040fc23c3c9f02fe4c6bed21620eb1ca7c571b70cb3407` |
 | `positive-square-energy/experiments/rank6_order8_orbit_frontier_census.json` | `724fdb337b7bb9225b1a8691c28e131ae1c8de7dc38bb13a5adbb98c1f92218e` |
-| `positive-square-energy/experiments/rank6_order8_pack_auditor.py` | `21dc6cafe2539bb20e91ea3bf278f3e7ff8d66602b5acbe1c0d3d73f44f02175` |
-| `positive-square-energy/experiments/rank6_order8_search_manifest.json` | `dd97ff3059cd637177171cb5d335cc17889a3714459522232e8110c5d79da469` |
+| `positive-square-energy/experiments/rank6_order8_pack_auditor.py` | `f6a7a673f86999bcd7e2056408450014296ff603eb56f082ac1e87fa256ac857` |
+| `positive-square-energy/experiments/rank6_order8_search_manifest.json` | `9512d8a04c05209d42c0be34d4e1c636d6d8c3b7773cf04768490d1100d46e2d` |
+| `positive-square-energy/experiments/rank6_order8_chunk_replays/aggregate.json` | `7500b864bb11fcbfd68ae6a05701ed59a3f0bcaf243e93353a9d5605ee64f763` |
 | `positive-square-energy/experiments/rank6_order8_symbolic_recognizers.py` | `755dd24b9e3f129dc6cd4fe590c4c13031bd22c41054ca29082981e3f5d909fe` |
 | `positive-square-energy/experiments/rank6_order8_symbolic_templates.json` | `2f457374d9627bd27339a0988aa47149db825dd0cba050c71ac9accfa3f72b95` |
 
-The v2 pack manifest transitively owns the 17 XZ chunk identities. The theorem
+The v2 pack manifest transitively owns the 17 XZ chunk identities, and the
+segmented aggregate pins the 17 exact replay receipts. The theorem
 owner requires full exact replay, 325 kernels `K646`--`K970`, 1,441,832 target
 keys, and disjoint ownership `1,441,808` rational plus `24` symbolic.
 
 ### Orders nine and ten: green is necessary, not promotion
 
-Current completion gates and current partial-manifest identities are:
+Historical completion-gate and partial-manifest identities recorded when this
+plan was drafted are:
 
-| order | completion gate | current gate SHA-256 | current manifest SHA-256 |
+| order | completion gate | historical gate SHA-256 | historical manifest SHA-256 |
 |:--|:--|:--|:--|
 | 9 | `research/rank-six-order-nine-coverage-verifier.py` | `8fe862c11355a46f052e8be2b37fe7ab531a7dc5a81afe1a2277533a50d7c5f7` | `4c4eaab658d02e66378da1d81c51227808196746171691353582e38623e0f409` |
 | 10 | `research/rank-six-order-ten-coverage-verifier.py` | `30a6341dc7a1763b1b87e465b68f44dc140a8dae4d4bd739f7d9b4285ecb0390` | `6620fcfc28a979b6d95b379e1a08bc1e4c6a97c21cec9a576be18a33e56196f8` |

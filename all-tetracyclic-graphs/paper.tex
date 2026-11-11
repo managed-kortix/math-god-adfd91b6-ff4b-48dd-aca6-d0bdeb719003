@@ -456,7 +456,9 @@ doubled $C_4$&outside class $111$&$28$ labelled rows, DNN&$e_B\leq2$ from the ph
 doubled $C_4$, class $111$&a doubled path noncanonical&either pair and either parity, DNN&even-long $e_B<1862/1000<2$; odd-long $e_B<1662/1000<2$\\
 doubled $C_4$, class $111$&both doubled pairs canonical&eight labelled rows, structural&hostile-cycle certificate $e_B<9/4$\\
 $K_4$, non-all-odd&all physical rows&$56$ labelled rows, DNN&$e_B\leq5/3<2$\\
-$K_4$, all odd&$j\geq3$&all subsets, DNN&simplex: $e_B<3-j/3\leq2$\\
+$K_4$, all odd&physically all odd, $j\geq3$&all subsets, DNN&simplex: $e_B<3-j/3\leq2$\\
+$K_4$, all odd&switched, $j\geq4$&three four-edge cuts, DNN&simplex: $e_B<3-j/4\leq2$\\
+$K_4$, all odd&switched, $j=3$&four three-edge cuts, DNN&physical Gram: $e_B=(837-168\sqrt{21})/35<2$\\
 $K_4$, all odd&$j=2$, opposite&three placements, DNN&$e_B\leq24-16\sqrt2<2$\\
 $K_4$, all odd&$j=2$, adjacent&twelve placements, DNN&$e_B<71/40<2$\\
 $K_4$, all odd&$j=1$&six placements, structural&hostile-cycle certificate $e_B<12/5$\\
@@ -471,14 +473,36 @@ $Q(0,3,2,5)$ and $Q(0,1,1,4)$ at $(4,1,2,2,1,1)$ and
 $(2,3,2,2,1,1)$.  Reflection and interchange within a doubled pair cover
 every labelled placement, and fixed-parity monotonicity covers every further
 length increase.  For all-odd $K_4$, the two-long paths are either adjacent or
-opposite, and the $j\geq3$ simplex estimate covers every remaining subset.
-Thus the $j=0,1$ rows, and only those all-odd rows, require structural
-ownership.  This also verifies directly that an external triangle closes by
-DNN every newly listed noncanonical state: each of
+opposite.  A nonconstant physical switch makes exactly three or four paths
+even, the edges of a nontrivial $K_4$ cut, and every even path is long.
+The regular simplex covers the physically all-odd $j\geq3$ rows and every
+switched row with $j\geq4$.  The only remaining DNN row is a three-edge even
+cut and the complementary odd unit triangle.  Relabel the cut as the star
+from vertex $0$ and use
+\[
+ R=\begin{pmatrix}
+ 1&1/6&1/6&1/6\\
+ 1/6&1&-11/24&-11/24\\
+ 1/6&-11/24&1&-11/24\\
+ 1/6&-11/24&-11/24&1
+ \end{pmatrix}.
+\]
+Its eigenvalues are $35/24,35/24,13/12,0$.  At the worst physical
+lengths, the three even cut paths have length two and the three triangle
+paths are odd units, giving
+\[
+ 3\frac{38-8\sqrt{21}}5+3\frac{13}{35}
+ =\frac{837-168\sqrt{21}}{35}<2,
+\]
+because $168^2\cdot21-767^2=4415>0$; fixed-physical-parity monotonicity
+covers all longer descendants.  Hence the $j=0,1$ rows, and only those
+all-odd rows, require structural ownership.  This also verifies directly that
+an external triangle closes by DNN every newly listed noncanonical state:
+each of
 \[
  \frac{229}{120},\quad\frac{31}{20},\quad\frac{1862}{1000},
  \quad\frac{1662}{1000},\quad\frac{71}{40},\quad
- 24-16\sqrt2
+ 24-16\sqrt2,\quad\frac{837-168\sqrt{21}}{35}
 \]
 is strictly below two, and $\epsilon_3=1$.
 
@@ -814,9 +838,9 @@ python3 -O research/tetracyclic-master-verifier.py
 The tricyclic audits reconstruct the finite physical-row ledgers used by the
 companion theorem.  Their expected canonical payload digests are, respectively,
 \begin{center}\ttfamily\small
-795f7772618d4f0280da914a85042970492f641909cd093abe9e30b434aa279c
+6d499af761ffa7317a431e5150dac59317618f508896be2c3ed77b250b43c901
 
-85ccff4a03791e2a5a455a7c350b804982f6ee3fb426233cd5e92c67431466c2.
+b0c4ed64a12ccabe0a8a38cb9fdb85622d8f7c2d07bdf53f75eb1700a684fa39.
 \end{center}
 They are dependencies of the multiblock proof, not part of the seven-verifier
 rank-four master manifest.  The census verifier independently enumerates weak edge-multiplicity

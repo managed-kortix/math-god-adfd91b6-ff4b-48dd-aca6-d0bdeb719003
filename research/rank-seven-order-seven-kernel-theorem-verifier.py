@@ -20,11 +20,11 @@ K4_THEOREM = (ROOT / "positive-square-energy/tricyclic-general"
               / "k4-all-odd-dnn-cover.md")
 K4_VERIFIER = ROOT / "positive-square-energy/experiments/k4_all_odd_exact_verify.py"
 EXPECTED_SHA256 = {
-    "auditor": "a4b93e385886b687718160e2f45fca250602f8048484da0e7c710d80f80c431b",
+    "auditor": "7a028696970e287b421423f9e95e02fe72717f5c4aed67d9d4ba5323e9346058",
     "manifest": "7c1d57be8cdf1f859272b100f25f9dfcb598d944efd40b774a155e52bb651b5a",
     "packet": "0bc8e36f5793983bf338503eea67244bb8ad7429a9a6e19f72f50ecc91ae9515",
-    "k4_theorem": "5c2b9b2b981807a82451edb0a6e26a3d960147801798b4b4cbccdd79ffdc8ec4",
-    "k4_verifier": "2c5f943534a20e07655be2af75235b27fcfec05eb6e9750338a9fdc2b7615e42",
+    "k4_theorem": "44c0391e492dc07216fa45e7095c58fdaca802e972f618068d29774d24140333",
+    "k4_verifier": "0e4ef323a076c807a5aba0c80f0e385e5c3cee18ebd4d7e249928b345e6745a4",
 }
 
 

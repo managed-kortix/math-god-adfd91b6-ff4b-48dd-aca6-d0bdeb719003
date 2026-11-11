@@ -384,3 +384,133 @@ remainder consequently remains exactly 83,611 rows.
 python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --fourth-family --workers 8
 python3 positive-square-energy/experiments/rank7_order8_structural_cycle_gram_lane.py --fourth-family --workers 8 --audit
 ```
+
+
+## Dominant-family exact rational packet closures VII--XII
+
+The authenticated remainder after the sixth induced-packet Gram family has
+76,085 coarse rows.  Five further disjoint finite-family passes now use the
+same exact shared rational waypoint-packet verifier.  Each pass authenticates
+the previous report, owner stream, and reduced-remainder stream before reading
+one row; reconstructs the rank-seven residual row from the frozen rational-
+search census; and accepts a row only after `Fraction` replay of one common
+branch Gram on the canonical target and all fourteen one-coordinate
+length-plus-two frontiers.  Binary64 descent only proposes stereographic
+parameters and is not part of acceptance.
+
+In remainder order the closed families are:
+
+| Pass | Input rows | Multiplicities | Bundle types | Support rank | Triangles | Orbits | Physical | Targets | Output rows |
+| ---: | ---: | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| VII | 76,085 | `2^3 1^8` | `(2,3,6)` | 4 | 2 | 6,817 | 7,492 | 102,255 | 69,268 |
+| VIII | 69,268 | `2^3 1^8` | `(3,3,5)` | 4 | 2 | 4,219 | 4,656 | 63,285 | 65,049 |
+| IX | 65,049 | `2^3 1^8` | `(2,3,6)` | 4 | 1 | 3,765 | 3,916 | 56,475 | 61,284 |
+| X | 61,284 | `2^3 1^8` | `(1,3,7)` | 4 | 2 | 2,731 | 2,968 | 40,965 | 58,553 |
+| XI | 58,553 | `2^2 1^10` | `(2,2,8)` | 5 | 3 | 2,167 | 2,275 | 32,505 | 56,386 |
+| XII | 56,386 | `2^3 1^8` | `(2,3,6)` | 4 | 3 | 1,788 | 1,958 | 26,820 | 54,598 |
+
+Thus these six passes own exactly
+
+```text
+21,487 orbit rows,
+23,265 physical rows,
+322,305 canonical-plus-coordinate targets,
+```
+
+and reduce the authenticated order-eight theorem remainder from 76,085 to
+**54,598** rows.  Together with the preceding three induced-packet family closures, the chained
+packet program has removed 29,013 rows from its 83,611-row input.  (The
+historical ordinal names `fifth` through `twelfth` count earlier structural
+family passes, not twelve packet closures.)  This is still not the complete
+order-eight theorem: 54,598 rows
+remain, in 309 finite family strata, and kernel orders 9--12 are separate open
+branches of the connected heptacyclic program.
+
+The theorem lift is exactly the established canonical-plus-coordinate
+reduction.  A canonical realization uses the shortest simple physical lengths
+for its parity state.  If a realization is not canonical, choose a physical
+path whose length has increased and use that path's stored `+2` frontier; the
+realization coordinatewise dominates it.  Retaining the frontier branch Gram
+and repeatedly lengthening paths cannot increase the nonnegative eliminated
+path-chain cost.  DNN one-vertex additivity supplies arbitrary rooted-tree
+attachments.  The stored waypoint chains certify the fifteen frontiers.  The
+all-length assertion retains the selected frontier's rational branch Gram and replaces
+each path that grows by an equal-angle chain; Lemma 2 of the structural theorem
+proves that the eliminated path cost weakly decreases.  It does not interpolate
+the stored waypoint chains.
+
+Artifacts:
+
+- `experiments/rank7_order8_{seventh,eighth,ninth,tenth,eleventh,twelfth}_induced_packet_gram_family.py` are the fail-closed chained scanners.
+- The matching `.json` files store exact scope, family counts, proposal parameters,
+  classification digests, and lift contracts.
+- The matching `_owners.jsonl.xz` files store exact shared rational witnesses.
+- `experiments/rank7_order8_after_{seventh,eighth,ninth,tenth,eleventh,twelfth}_induced_packet_gram_family_remainder.jsonl.xz`
+  store each authenticated complement.
+
+Reproduction uses the same deterministic command for each ordinal, replacing
+`ORDINAL` below by `seventh`, `eighth`, `ninth`, `tenth`, `eleventh`, or
+`twelfth`:
+
+```text
+python3 positive-square-energy/experiments/rank7_order8_ORDINAL_induced_packet_gram_family.py --workers 2 --restarts 2 --iterations 300 --audit
+python3 -O positive-square-energy/experiments/rank7_order8_ORDINAL_induced_packet_gram_family.py --workers 2 --restarts 2 --iterations 300 --audit
+```
+
+No order-eight or all-heptacyclic theorem claim is made here.
+
+## Global post-XII shared-packet lane
+
+A final authenticated shared-packet pass was run over the complete 54,598-row
+XII remainder, without restricting to one finite family.  The generator uses
+binary64 descent only to propose one branch Gram and its path waypoints; every
+accepted owner is replayed with exact `Fraction` arithmetic on the canonical
+target and all fourteen one-coordinate frontiers.  The read-only verifier
+regenerates the 492,812-row rational-search residual census from the pinned
+chunks, reconstructs every six-field XII source row, replays every stored
+witness, and proves that the persisted remainder is the ordered byte-for-byte
+source complement.
+
+The exact partition is
+
+```text
+54598 = 54597 shared-packet owners + 1 unresolved orbit,
+60881 = 60879 owned physical rows + 2 unresolved physical rows,
+818970 = 818955 owned frontier targets + 15 unresolved targets.
+```
+
+All 54,597 owners use denominator 256.  Retaining each accepted branch Gram,
+fixed-parity optimized path-cost monotonicity gives every same-parity
+subdivision, and assigning each attached tree vertex the negative of its parent
+supplies arbitrary finite rooted-tree attachments.  The unique complement is
+stream index `416536`, source index `416987`, global kernel `6832`, orbit size
+two.  Its support is two vertex-disjoint copies of `K4`, on
+`{0,3,6,7}` and `{1,2,4,5}`, joined by the two edges `47` and `56`; all paths
+are odd except `56`, which is even.
+
+The source report and stream are immutably pinned by compressed and raw SHA-256,
+and the audit freezes the scope, search, certificate, and nonclaim contracts.
+An independent exact replay checked all 54,597 owners.  The canonical report
+and artifacts have SHA-256 values
+
+```text
+report:      2d94c557a8a74845098d5ced351acb474e6f950ffb9072919db11e95e7b3cdb0
+owners xz:   9e50f7eb752f1a03eedf395550328c755216346badb5df77ae1b0fe03ef411e0
+remainder xz:bbadc801837908ada49cdb53a83fb1afa46a5a240a77ecb18c66fbb0a06a6340
+```
+
+Artifacts:
+
+- `experiments/rank7_order8_post_xii_shared_packet_lane.py` is the frozen
+  generator and read-only exact verifier;
+- `experiments/rank7_order8_post_xii_shared_packet_lane.json` is the canonical
+  report;
+- `experiments/rank7_order8_post_xii_shared_packet_owners.jsonl.xz` stores the
+  54,597 exact shared packets;
+- `experiments/rank7_order8_after_post_xii_shared_packet_remainder.jsonl.xz`
+  stores the unique complement;
+- `experiments/tests/test_rank7_order8_post_xii_shared_packet_lane.py` invokes
+  the hostile read-only gate.
+
+This lane is still a partial closure: the singleton requires an independent
+all-length owner before the order-eight kernel theorem can be promoted.

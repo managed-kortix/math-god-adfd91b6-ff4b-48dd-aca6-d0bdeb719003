@@ -129,18 +129,56 @@ at least four paths in total are long, the simplex excess is strictly below
 The only case not yet strict is exactly three long paths consisting of a
 three-edge physical even cut and three unit odd paths.
 
-There is one useful strengthening for the later switching audit. If precisely
-three paths are long and the physical switch in (5) makes all three long paths
-even and all three unit paths odd, (12) by itself has only comparison value
-two. In that row use the simplex matrix (9) again, but evaluate its physical
-length-two costs rather than bounding them by length-three odd costs. The three
-unit odd paths contribute `3/2`. Each long even path contributes at most
+The only case left by (12)--(14) has exactly three long paths: a
+three-edge physical even cut, together with three unit odd paths on the
+complementary triangle.  Relabel its cut as the star from branch vertex `0`
+to `1,2,3`, and use the physical correlation matrix
 
-`2tan^2(acos(1/3)/4)<1/6`,
+```text
+R = [[1,   1/6,    1/6,    1/6],
+     [1/6, 1,    -11/24, -11/24],
+     [1/6,-11/24, 1,    -11/24],
+     [1/6,-11/24,-11/24, 1]].                         (15)
+```
 
-because the half-angle identity reduces the strict inequality to
-`sqrt(8/9)>11/13`, whose square is `8/9>121/169`. Thus the total excess is
-strictly below `3/2+3/6=2`.                                (15)
+On the two-dimensional triangle subspace perpendicular to `(1,1,1)`, its
+eigenvalue is `35/24`.  On the span of the centre coordinate and
+`(1,1,1)/sqrt(3)`, its matrix is
+
+```text
+[[1, sqrt(3)/6], [sqrt(3)/6, 1/12]],
+```
+
+with eigenvalues `13/12` and zero.  Hence `R` is positive semidefinite.
+Equivalently, its eigenvalues are `35/24,35/24,13/12,0`, and
+`(-1,2,2,2)` spans its kernel.
+
+For an even cut path at its worst physical length two, the exact cost is
+
+```text
+f_2(1/6)
+ = 2 (1-sqrt(21)/6)/(1+sqrt(21)/6)
+ = (38-8sqrt(21))/5.
+```
+
+For an odd unit triangle path, the exact cost is
+
+```text
+f_1(-11/24)=(1-11/24)/(1+11/24)=13/35.
+```
+
+Thus the six-path excess is
+
+```text
+3 f_2(1/6)+3 f_1(-11/24)
+ = (837-168sqrt(21))/35 < 2,                         (16)
+```
+
+because `168^2*21-767^2=4415>0`.  Fixed-physical-parity path
+monotonicity retains this same Gram for every longer realization of the row.
+This strict physical certificate replaces the tempting regular-simplex
+estimate for this cut: that estimate would require
+`sqrt(2/3)>11/13`, which is false.
 
 ## 4. Exactly two long paths: the two edge orbits
 
@@ -227,21 +265,25 @@ entire rooted tree attached at `v`. Then `T` is a nonempty induced tree, so
 
 `sigma(T):=s^+(T)-|V(T)|=-1`.                              (22)
 
+Since a nonconstant switch makes the three or four edges of a nontrivial
+`K4` cut even, and every even path is long, exactly one long path forces the
+switch to be constant.  Hence all six physical paths are odd, `P_ab` has
+length at least three, and the other five paths are units.
+
 The induced complement `H=G-V(T)` is connected. The two remnants of `P_ab`
-are rooted trees, and the unique cyclic block of `H` is the theta between the
-complementary branch vertices `c,d`, with path lengths
+are rooted trees, while its cyclic block is the theta between the complementary
+branch vertices `c,d` with physical path lengths
 
-`l_cd,  l_ca+l_ad,  l_cb+l_bd`.                             (23)
+`1, 2, 2`.                                                  (23)
 
-After applying (5), all three numbers in (23) have the same parity: each has
-parity `1 xor s_c xor s_d`. Thus the theta is bipartite. An attached bipartite
-theta has
+Thus the cyclic block is `Theta(1,2,2)`, not a bipartite theta.  The strict
+attached-`Theta(1,2,2)` packet in the bicyclic-credits lemma gives
 
-`sigma(H)=1`.                                               (24)
+`sigma(H)>1`.                                               (24)
 
 Induced square-energy superadditivity now gives
 
-`sigma(G)>=sigma(T)+sigma(H)=0`.                            (25)
+`sigma(G)>=sigma(T)+sigma(H)>-1+1=0`.                       (25)
 
 This deletion is physical: it does not replace the long path by a switched
 path, and it assigns every attached branch to exactly one induced territory.
@@ -272,7 +314,10 @@ constant is additive over one-vertex sums, and a tree with `t` edges has
 rooted trees through exact induced territories and the attached-`K4` packet.
 
 The four cases -- at least three, exactly two, exactly one, or zero physical
-long paths -- are exhaustive. Therefore every arbitrary subdivision in the
+long paths -- are exhaustive.  In the at-least-three case, nonconstant
+switches split into the four three-edge cuts owned by (15)--(16) and the three
+four-edge cuts owned by the regular simplex; constant switching is the
+physically all-odd row. Therefore every arbitrary subdivision in the
 all-odd switching class, with arbitrary rooted-tree attachments, satisfies
 `s^+(G)>=|V(G)|`.
 

@@ -88,8 +88,8 @@ The current transitive rank-four master manifest digest is
 it pins seven direct verifier outputs, eleven transitive files, and three nested
 verifier outputs.
 The tricyclic finite-ledger and all-odd-`K4` digests are
-`795f7772618d4f0280da914a85042970492f641909cd093abe9e30b434aa279c` and
-`85ccff4a03791e2a5a455a7c350b804982f6ee3fb426233cd5e92c67431466c2`.
+`6d499af761ffa7317a431e5150dac59317618f508896be2c3ed77b250b43c901` and
+`b0c4ed64a12ccabe0a8a38cb9fdb85622d8f7c2d07bdf53f75eb1700a684fa39`.
 The appendix states each verifier's exact scope and what remains mathematical
 rather than executable.
 
@@ -99,7 +99,7 @@ rather than executable.
 bash scripts/build-paper.sh all-tetracyclic-graphs
 ```
 
-This produces `all-tetracyclic-graphs/paper.pdf` (15 pages in the current
+This produces `all-tetracyclic-graphs/paper.pdf` (16 pages in the current
 build). The manuscript and proof-object synthesis are AI-generated. No human
 authorship, human review, independent verification, conventional peer review,
 or external publication is claimed; scripts audit finite proof objects but do

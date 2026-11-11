@@ -17,6 +17,65 @@ research/semantic, research/procedural).
   ledgered posts
 
 ## last ticks
+- 2026-11-11: completed the rank-seven, single-positive-rank-block kernel-order-eight theorem. The exact order-eight census has 4,015 kernels and 26,426,026 physical parity orbits; 25,932,609 are coarse-certified and the remaining 493,417 have the disjoint owner partition `605+29000+194351+185309+296+245+29013+54597+1`. The singleton is closed for all path lengths, parities, and rooted-tree attachments by an induced partition into two connected tricyclic territories. The portable full gate passed on unchanged source bytes in normal and optimized Python after regenerating the kernel/parity census, linking the 492,812 selected tuples field-for-field, and exact-replaying all 29,000 direct packs; three historical producer searches remain explicit trust roots. Independent theorem reconstruction returned ACCEPT in this exact scope. The aggregate single-block master now registers orders 2--8 as complete and leaves orders 9--12 blocked; `global_claim=false`, so this is not an all-connected rank-seven theorem. Release documentation and the compiled order-eight paper were reconciled to the final gate identities. No external announcement is claimed in this tick.
+- 2026-11-09: completed a fail-closed repair audit of inherited theorem
+  dependencies. The tricyclic all-odd `K4` module now replaces a false
+  three-even-cut simplex estimate by an exact PSD physical Gram of cost
+  `(837-168 sqrt(21))/35<2`, corrects the one-long deletion to the attached
+  `Theta(1,2,2)` packet, and rejects tuple-for-list schema laundering. The
+  repaired finite gates pass byte-identically in normal and optimized modes;
+  tricyclic and propagated tetracyclic PDFs were rebuilt. The rank-seven
+  order-seven segmented evidence now contains all eight receipts, covers all
+  40964 residual rows and 573496 targets exactly once, and authenticates each
+  receipt by a fresh exact replay rather than selected-field checks; at that
+  tick the orders-2--12 master remained scoped to completed orders 2--7 (the
+  2026-11-11 tick above subsequently registers order eight). Downstream
+  hexacyclic identities and PDF were refreshed without changing theorem
+  scope. A final independent hostile re-audit found and forced two further
+  fail-closed repairs: canonical-byte comparison now rejects equal-valued
+  JSON float/boolean laundering in segmented receipts, and the hexacyclic
+  paper distinguishes the historical theorem-conversion revision from the
+  current repaired content identities. All eight receipts were regenerated,
+  the aggregate and full replay agree, normal/optimized theorem gates pass,
+  and the ultimate referee returned ACCEPT. The daily publication review was
+  attempted; Gmail remained blocked by plan-level 403 on both component and
+  proxy routes, while the Board remained HTTP 503, so no external action or
+  status inference was made. No new mathematical theorem or announcement is
+  claimed.
+- 2026-11-08: closed and hostile-audited the next dominant order-eight family,
+  `2^3 1^8/(2,3,6)/r4/t3`. The XII pass owns all 1788 orbit rows,
+  1958 physical rows, and 26820 canonical-plus-coordinate targets by shared
+  exact rational waypoint Grams, reducing the authenticated remainder from
+  56386 to 54598 rows in 309 families. The read-only chain gate now replays all
+  21487 VII--XII witnesses and exact ordered complements from the pinned sixth
+  trust root; normal and optimized audits pass, and an independent ultimate
+  referee returned ACCEPT. This is a partial family closure only; no order-eight
+  or all-heptacyclic theorem claim is made.
+- 2026-11-08: replaced the order-eight VII--XI packet chain's hash-only
+  identity test by a read-only semantic verifier. It hard-pins the sixth-stage
+  trust root, regenerates all 492812 rational-search residuals, binds every
+  six-field source row, replays all 19699 stored witnesses with exact
+  `Fraction` arithmetic, and proves unique target ownership plus ordered
+  byte-for-byte remainder complementation through the five identities ending
+  at 56386 rows. Hostile mutations had shown the former gate accepted a
+  duplicated owner and a zero denominator after coherent digest rewriting;
+  those routes and two later trust-root/report laundering routes are now
+  closed. Normal and `python -O` audits pass and an ultimate hostile referee
+  returned ACCEPT. This authenticates the existing partial order-eight chain;
+  it makes no order-eight or all-heptacyclic theorem claim.
+- 2026-11-08: extended the exact rank-seven order-eight induced-packet Gram
+  chain through five further dominant families (the historical ordinals VII--XI
+  count earlier structural family passes). The authenticated passes own
+  every row of families `2^3 1^8/(2,3,6)/r4/t2` (6817),
+  `2^3 1^8/(3,3,5)/r4/t2` (4219),
+  `2^3 1^8/(2,3,6)/r4/t1` (3765),
+  `2^3 1^8/(1,3,7)/r4/t2` (2731), and
+  `2^2 1^10/(2,2,8)/r5/t3` (2167): 19699 orbit rows, 21307 physical rows,
+  and 295485 canonical-plus-coordinate targets. Exact `Fraction` replay of a
+  shared rational branch Gram plus fourteen coordinate frontiers gives the
+  established all-length/rooted-tree lift. The chained remainder falls from
+  76085 to 56386 rows in 310 families. Independent hostile audit is active;
+  no order-eight or all-heptacyclic theorem claim is made.
 - 2026-08-20: the connected heptacyclic program is reduced to one rank-seven
   block on kernel orders 8--12; the complete multiblock theorem and single-block
   orders 2--7 are proved. Exact order-eight owner accounting now authenticates

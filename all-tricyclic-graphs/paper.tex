@@ -658,15 +658,35 @@ length.  Call a physical path unit if its length is one and long otherwise.
 Every even physical path is therefore long.  A nonconstant switch has exactly
 three or four even paths, the edges of a nontrivial cut of $K_4$.
 
-With at least three long paths, use four regular-simplex vectors,
+With at least three long paths, first use four regular-simplex vectors,
 $R_{ij}=-1/3$.  A unit path contributes $1/2$, a long odd path contributes
-less than $1/6$, and a long even path contributes less than $1/4$.  Four or
-more long paths therefore cost less than
-$(6-q)/2+q/4\leq2$.  The sole three-long switched configuration has three even
-paths of length at least two and three unit odd paths; evaluating the physical
-length-two costs more sharply gives less than $3/2+3(1/6)=2$.  If exactly two
-paths are long, the switch must be constant, so all paths are physically odd.
-There are two placements.  Opposite paths use branch angles
+less than $1/6$, and a long even path contributes less than $1/4$.  Thus the
+physically all-odd row with at least three long paths and every switched row
+with at least four long paths cost less than two.  The only row left by this
+estimate is a three-edge even cut and the complementary odd unit triangle.
+Relabel the cut as the star from vertex $0$ and use the physical correlation
+matrix
+\[
+ R=\begin{pmatrix}
+ 1&1/6&1/6&1/6\\
+ 1/6&1&-11/24&-11/24\\
+ 1/6&-11/24&1&-11/24\\
+ 1/6&-11/24&-11/24&1
+ \end{pmatrix}.
+\]
+Its eigenvalues are $35/24,35/24,13/12,0$, so it is positive semidefinite.
+The three even length-two cut paths and three odd unit triangle paths have
+exact total excess
+\[
+ 3\frac{38-8\sqrt{21}}5+3\frac{13}{35}
+ =\frac{837-168\sqrt{21}}{35}<2;
+\]
+the last inequality follows from
+$168^2\cdot21-767^2=4415>0$.  Fixed-physical-parity path monotonicity retains
+this Gram for every longer realization of the row.
+
+If exactly two paths are long, the switch must be constant, so all paths are
+physically odd.  There are two placements.  Opposite paths use branch angles
 $(0,\pi/4,\pi,5\pi/4)$ and give
 $8\tan^2(\pi/8)=24-16\sqrt2<2$.  Adjacent paths use
 $(0,3\pi/8,13\pi/8,\pi)$ and give
@@ -674,9 +694,11 @@ $(0,3\pi/8,13\pi/8,\pi)$ and give
  6\tan^2\frac{5\pi}{48}+\tan^2\frac\pi8
  +2\tan^2\frac{3\pi}{16}<\frac{71}{40}<2.
 \]
-With one long path, open it at an internal vertex.  The complement is an
-attached theta whose three path lengths have the same parity, hence is
-bipartite and has credit one; the deleted nonempty tree has credit minus one.
+Exactly one long path also forces the switch to be constant.  Hence all paths
+are odd, the unique long path has length at least three, and the other five
+are units.  Open the long path at an internal vertex.  The complement is an
+attached $\Theta(1,2,2)$ with strict credit greater than one by
+Lemma~\ref{lem:credits}; the deleted nonempty tree has credit minus one.
 With no long path every switch is constant and the core is $K_4$.  We include
 the attached-$K_4$ argument rather than infer it
 from the bare spectrum.  For any graph $H$ obtained by attaching rooted trees
@@ -906,12 +928,13 @@ the doubled-$4$-cycle partition into 28 DNN rows and an eight-row exceptional
 orbit split equally between classes $110$ and $111$, all 56 physical $K_4$
 rows outside the all-odd switching
  class.  The separate all-odd-class audit checks all eight physical switching
- rows and the unit/long lower-length rules.  For the physically all-odd row,
- the finite audit also enumerates all 64 long/unit subsets.  The latter
-split into 42 DNN-audited subsets with at least three long paths, 12 adjacent
-and three opposite DNN-audited two-long subsets, six one-long structural
-deletions, and one no-long attached-$K_4$ packet.  Thus 57 subsets are audited
-by the displayed DNN bounds and seven have structural dispositions.  The audit
+rows, the unit/long lower-length rules, and the exact physical Gram for the
+four three-edge-cut rows.  For the physically all-odd row, the finite audit
+also enumerates all 64 long/unit subsets.  The latter split into 42
+DNN-audited subsets with at least three long paths, 12 adjacent and three
+opposite DNN-audited two-long subsets, six one-long structural deletions, and
+one no-long attached-$K_4$ packet.  Thus 57 subsets are audited by the
+displayed DNN bounds and seven have structural dispositions.  The audit
 also checks nine four-path representative symbolic records, including the
 one-unit $e=0$ endpoint case, and the rational tangent bounds occurring in
 those records.  These records do not constitute a machine proof of the
@@ -920,7 +943,7 @@ commits to all audited doubled-$4$-cycle class counts, first and failed rows,
 class-$111$ long records, endpoint definitions and tangent constants, together
 with the $K_4$ endpoint and arithmetic constants.  Numeric leaves are restricted
 to integers and rational strings: floats and all other non-integral numeric
-types are rejected explicitly.  The verifier rejects 21 deliberately corrupted
+types are rejected explicitly.  The verifier rejects 27 deliberately corrupted
 certificate payloads, including formerly uncovered constants.
 For the 56-row audit it reconstructs every switching invariant and physical
 sign transport while retaining the physical path parity.  Run the audit both
@@ -936,13 +959,13 @@ normally and with Python assertions disabled:
 \end{verbatim}
 The first two commands must report the certificate digest
 \begin{verbatim}
-795f7772618d4f0280da914a85042970492f641909cd093abe9e30b434aa279c
+6d499af761ffa7317a431e5150dac59317618f508896be2c3ed77b250b43c901
 \end{verbatim}
 This canonical payload digest is embedded in the verifier and mirrored in the
-README manifest.  Those two commands must also report 21 rejected
+README manifest.  Those two commands must also report 27 rejected
 hostile mutations.  The standalone $K_4$ audit reports digest
-\texttt{85ccff4a03791e2a5a455a7c350b804982f6ee3fb426233cd5e92c67431466c2}
-and three rejected mutations.  The standalone doubled-triangle audit reports
+\texttt{b0c4ed64a12ccabe0a8a38cb9fdb85622d8f7c2d07bdf53f75eb1700a684fa39}
+and eight rejected mutations.  The standalone doubled-triangle audit reports
 digest
 \texttt{b293eef0d7742da6ecd2c7af35882be14e97811922493121900e65a6705f01e8}
 and three rejected mutations.  The final command audits the Gram obstruction.
