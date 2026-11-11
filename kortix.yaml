@@ -67,7 +67,7 @@ triggers:
     enabled: true
     overlap: skip
     session_mode: pinned
-    session_id: ca7a72d9-a85e-4e39-a74d-f100c87db0c1
+    session_id: d8de2cf8-0b3d-457c-944e-182daf372343
     cron: 0 0 */6 * * *
     timezone: UTC
     prompt: "LANE=main. CORE=math-god-main. This exact pinned root session
