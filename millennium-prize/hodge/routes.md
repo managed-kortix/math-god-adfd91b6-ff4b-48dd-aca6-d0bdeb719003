@@ -1,5 +1,18 @@
 # Routes
 
+## Cycle 288 special-point boundary
+
+After common isogeny supports are consolidated, the semisimple extension is
+closed: full outer-`A_3` and rational full-`D_2` graph couplings force
+weight-one Hodge maps, while the apparent one-`A_1` type-III coupling is not a
+rational Hodge quotient. Products whose entire simple support is CM are
+independently covered by van Hoften--Sempliner Theorem I
+(`hexagon:2610.00259v2`). Retain exactly one residual target: common
+Galois-saturated central-torus quotients involving at least one non-CM special
+factor, especially in decomposable `3+1`, `2+2`, and `2+1+1` rows, and the
+algebraicity of the mixed invariants they create. See
+`../cycle-288-special-weil-mixed-product-audit.md`.
+
 ## Cycle 287 full-`SU` mixed-product leaf
 
 Admit one derived mixed-product subfamily and no more.  For discriminant-one

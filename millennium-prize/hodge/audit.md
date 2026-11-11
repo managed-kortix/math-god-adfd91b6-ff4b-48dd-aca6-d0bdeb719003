@@ -1,5 +1,20 @@
 # Hostile audit
 
+## Cycle 288 special-product guard
+
+Do not infer arbitrary-product Hodge from separate self-power theorems.
+After consolidating common simple isogeny factors, the semisimple graph cases
+for the relevant simple Weil fourfolds close: a full outer-`A_3` or rational
+full-`D_2` graph forces a weight-one Hodge map, while the apparent one-`A_1`
+type-III graph is not a rational Hodge quotient. This does not eliminate common
+central-torus quotients. Van Hoften--Sempliner covers products whose entire
+simple support is CM; it does not cover a product containing a non-CM special
+factor. The abstract doubled-`Spin_4` calculation has nine mixed quadratic
+Casimirs but is not Hodge-realizable for nonisogenous simple type-III
+fourfolds, so it is not a counterexample. Integral `C_4` toy quotients must be
+saturated before they count. See
+`../cycle-288-special-weil-mixed-product-audit.md`.
+
 ## Cycle 287 mixed-product guard
 
 Do not confuse an abelian variety whose simple isogeny factors have dimension

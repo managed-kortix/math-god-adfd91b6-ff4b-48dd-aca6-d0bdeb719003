@@ -1,5 +1,33 @@
 # Notebook
 
+## Cycle 288 special Weil-fourfold mixed products
+
+The special-point extension closes semisimply but not torically. For simple
+IV(1,1), a proper full `A_3` graph identifies the standard/dual weight-one
+pair and forces an isogeny. For simple type III, the group is an outer rational
+`D_2`; its split and compact real `A_1` factors are Galois-conjugate and the
+Hodge circle is trivial on the compact one. Projected-circle minimality rules
+out a Hodge-inactive rational quotient, so a one-`A_1` graph cannot occur; a
+full `D_2` graph again forces isogeny. The exact abstract doubled-`Spin_4`
+representation has nine Hom-free Casimir contractions in
+`H^2 tensor H^2`, but is therefore only a formal obstruction model, not a
+geometric counterexample. Integral saturation retracts every `C_4` toy, and a
+cyclic-octic CM model contains no imaginary quadratic field and lies outside
+the Weil locus.
+
+Decompositions are governed blockwise by
+`K -> M_m(End^0(X))`. The `3+1` case has a genuine internal determinant/norm
+fiber product and mixed Weil class; elliptic-only supports are divisor-
+generated. Van Hoften--Sempliner Theorem I covers arbitrary products whose
+entire simple support is CM. Floccari--Fu's theorem covers every self-power of
+each individual discriminant-one fourfold, while the audited Milne, Hazama,
+Abdulali, and OG6 product statements retain explicit independence, Albert-
+type, or common-generator hypotheses. The remaining cross-fourfold issue is
+the central-torus character lattice involving at least one non-CM special
+factor: the next missing theorem must classify those common Galois-stable
+saturated quotients and algebraize their mixed invariants. See
+`../cycle-288-special-weil-mixed-product-audit.md`.
+
 ## Cycle 287 Kummer-Jacobian mixed products
 
 The proposed low-dimensional escape only partially closes. Every projective

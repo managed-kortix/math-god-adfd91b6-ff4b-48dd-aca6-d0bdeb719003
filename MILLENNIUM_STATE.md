@@ -1,3 +1,25 @@
+- 2026-11-11: Cycle 288 hostilely classifies the remaining special-point
+  mixed-product extension for discriminant-one Weil fourfolds. After common
+  simple isogeny factors are consolidated, all proposed semisimple couplings
+  close: a full outer-`A_3` graph forces a weight-one Hodge map; for simple
+  type III, the tempting one-`A_1` graph is not a rational quotient because
+  the compact factor is Hodge-inactive and the two `D_2` vertices are
+  Galois-conjugate, while a full rational `D_2` graph again forces isogeny;
+  low-dimensional decomposable semisimple graphs reduce to common supports.
+  An exact abstract `D_2` model nevertheless has no `H^1` Hom and nine genuine
+  mixed `H^2 tensor H^2` Casimirs, proving that Hom-freeness alone is not a
+  formal higher-tensor theorem, but this model is not Hodge-realizable for
+  nonisogenous simple type-III fourfolds. The cyclic-octic CM warning is
+  outside the Weil locus, and all exploratory `C_4` toys collapse after
+  integral saturation. Van Hoften--Sempliner Theorem I now covers every
+  all-CM product, so the unrestricted extension is walled more narrowly by
+  common central-torus quotients involving at least one non-CM special factor
+  and algebraicity of their mixed invariants. Floccari--Fu proves all
+  self-powers of each individual discriminant-one Weil fourfold, not arbitrary
+  products of unrelated non-CM special factors. No novelty, publication, or
+  Clay claim; event-gated deliberate wait remains. See
+  `millennium-prize/cycle-288-special-weil-mixed-product-audit.md`.
+
 - 2026-11-04: Cycle 287 classifies the proposed Kummer-Jacobian
   mixed-product escape hatch. O'Grady/Markman give a discriminant-one
   Weil-type abelian fourfold `J_K`, but its Weil field depends on the
@@ -2114,10 +2136,11 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
 
 - **mission:** pursue complete resolutions of all six unsolved Clay Millennium
   Prize Problems without confusing partial advances with official solutions
-- **phase:** Cycle 287 records a restricted full-`SU` mixed-product extension
-  of the externally covered Hodge special-family leaf and retains deliberate
-  wait: arbitrary special-point cross tensors remain unclassified, no
-  project-owned complete novel action passes the four-item gate, and all
+- **phase:** Cycle 288 closes the semisimple and all-CM portions of the
+  externally covered Hodge special-family mixed-product leaf and retains
+  deliberate wait: central-torus couplings involving at least one non-CM
+  special factor and algebraicity of their mixed invariants remain unresolved,
+  no project-owned complete novel action passes the four-item gate, and all
   terminal route stops remain in force
 - **Cycle 206 strategic rotation:** after the exact Cycle 205 unit-ideal
   certificate retires the frozen Navier two-jet architecture, the main funnel
@@ -2950,7 +2973,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   independent projector data.  Fixed extra Peirce data define a proper ambient
   special locus, but strict containment in every component of `Z_16` still
   needs a relative generic-endomorphism argument.
-- **cycle:** 287
+- **cycle:** 288
 - **announcements:** none
 
 ## immutable target list
