@@ -1,4 +1,4 @@
-proved that if a finite simple connected graph has β=7, exactly one positive-rank cyclic block, and an 8-vertex suppressed kernel, then s⁺(G) ≥ |V(G)|, including arbitrary rooted-tree attachments.
+proved s⁺(G) ≥ |V(G)| for connected graphs with β=7, one positive-rank cyclic block, and an 8-vertex suppressed kernel, with arbitrary rooted-tree attachments.
 
 restricted case—not all heptacyclic graphs.
 

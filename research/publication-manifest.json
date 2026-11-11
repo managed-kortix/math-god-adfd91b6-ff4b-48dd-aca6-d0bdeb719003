@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-08-12",
+  "updated": "2026-11-11",
   "results": [
     {
       "id": "akmpz-conjecture-1-2",
@@ -30,7 +30,8 @@
         "all-octacyclic-cacti",
         "all-nonacyclic-cacti",
         "all-decacyclic-cacti",
-        "all-rank-eleven-cacti"
+        "all-rank-eleven-cacti",
+        "rank-seven-order-eight-kernels"
       ],
       "notes": "All listed papers are partial class results; none resolves the general conjecture."
     },
@@ -205,6 +206,21 @@
       "ocb": {"eligibility": "ineligible_partial_result_not_resolution", "status": "withheld_from_resolution_reporting", "public_id": null},
       "x": {"status": "posted_and_public_readback_verified", "tweet_id": "2087517507691155534", "posted_at": "2026-08-12T12:32:00Z"},
       "notes": "Completes the full connected m=n+5 frontier, but does not resolve the general m>=n+1 conjecture because positive square energy is not known to be edge-monotone. Exact segmented certificate executions, hostile audits, and material AI assistance are disclosed."
+    },
+    {
+      "id": "rank-seven-order-eight-kernels",
+      "kind": "partial_class_theorem",
+      "statement": "Every finite simple connected graph G of cyclomatic rank seven with exactly one positive-rank cyclic block B, whose loopless 2-connected multigraph kernel obtained by suppressing the degree-two vertices of B has eight vertices, satisfies s^+(G)>=|V(G)|.",
+      "source_url": "https://arxiv.org/abs/2506.07264v1",
+      "source_label": "Restricted single-block, kernel-order-eight case of Akbari--Kumar--Mohar--Pragada--Zhang Conjecture 1.2",
+      "year": 2026,
+      "area": "Spectral graph theory",
+      "scope_status": "verified_restricted_partial_class_result",
+      "paper_folder": "rank-seven-order-eight-kernels",
+      "evidence_url_status": "pending_final_immutable_evidence_commit",
+      "ocb": {"eligibility": "ineligible_partial_result_not_resolution", "status": "withheld_from_resolution_reporting", "public_id": null},
+      "x": {"status": "withheld_pending_final_immutable_evidence_and_readback_gates"},
+      "notes": "Restricted partial progress on AKMPZ Conjecture 1.2 only; not an all-heptacyclic theorem. Tree-free instances are already covered by broader 2026 results. Three historical producer outputs remain explicit byte-pinned trust roots; full mode freshly exact-replays the 29,000 direct-rational packs. Material AI assistance and the absence of claimed human review are disclosed. No external action is authorized until final immutable folder/PDF URLs are recorded, checked, and read back."
     }
   ],
   "withheld_groups": [
@@ -224,7 +240,8 @@
         "all-octacyclic-cacti",
         "all-nonacyclic-cacti",
         "all-decacyclic-cacti",
-        "all-rank-eleven-cacti"
+        "all-rank-eleven-cacti",
+        "rank-seven-order-eight-kernels"
       ]
     },
     {
