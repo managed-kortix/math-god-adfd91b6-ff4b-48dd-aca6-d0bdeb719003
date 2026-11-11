@@ -1,12 +1,7 @@
 # yaml-language-server: $schema=https://kortix.com/schema/kortix.schema.json
 project:
   name: math-god
-  description: "A high-entropy autonomous mathematics laboratory. One math-god
-    agent runs exactly three isolated pinned lanes: the main trajectory, the six
-    unsolved Clay problems, and one frozen certificate-shaped breakthrough
-    target. Kortix remains the ordinary finite-purpose agent. Public claims are
-    exact, adversarially audited, reproducible, and distributed through the
-    committed publication workflow."
+  description: "A high-entropy autonomous mathematics laboratory. One math-god agent runs exactly three isolated pinned lanes: the main trajectory, the six unsolved Clay problems, and one frozen certificate-shaped breakthrough target. Kortix remains the ordinary finite-purpose agent. Public claims are exact, adversarially audited, reproducible, and distributed through the committed publication workflow."
 
 default_agent: math-god
 
@@ -33,9 +28,7 @@ connectors:
 
 agents:
   kortix:
-    description: kortix — a general-purpose autonomous Kortix agent with full
-      project capabilities. Use for ordinary work that should finish normally
-      rather than enter math-god's eternal continuation loop.
+    description: kortix — a general-purpose autonomous Kortix agent with full project capabilities. Use for ordinary work that should finish normally rather than enter math-god's eternal continuation loop.
     mode: primary
     model: kortix/codex/gpt-5.6-sol
     temperature: 1
@@ -49,13 +42,9 @@ agents:
     connectors: all
     secrets: all
     kortix_permissions: all
-    workspace:
-      project_repository: false
 
   math-god:
-    description: math-god — one autonomous mathematician operating isolated main,
-      Millennium, and breakthrough keyed lanes, with exact verification and
-      end-to-end publication.
+    description: math-god — one autonomous mathematician operating isolated main, Millennium, and breakthrough keyed lanes, with exact verification and end-to-end publication.
     mode: primary
     model: kortix/codex/gpt-5.6-sol
     temperature: 1
@@ -69,8 +58,6 @@ agents:
     connectors: all
     secrets: all
     kortix_permissions: all
-    workspace:
-      project_repository: false
 
 triggers:
   - slug: math-heartbeat
@@ -80,7 +67,7 @@ triggers:
     enabled: true
     overlap: skip
     session_mode: pinned
-    session_id: 4c2d5cce-0fbb-4a52-8a9d-36b3ef6701b3
+    session_id: d8de2cf8-0b3d-457c-944e-182daf372343
     cron: 0 0 */6 * * *
     timezone: UTC
     prompt: "LANE=main. CORE=math-god-main. This exact pinned root session
@@ -106,15 +93,7 @@ triggers:
     session_id: a10f0b25-6c8a-488e-b880-c54c9f7aaa98
     cron: 0 0 3/6 * * *
     timezone: UTC
-    prompt: LANE=millennium. CORE=math-god-millennium. This exact pinned root
-      session permanently owns only the six unsolved Clay problems. Read
-      MILLENNIUM_STATE.md and millennium-prize/PROGRAM.md first; do not adopt
-      STATE.md or BREAKTHROUGH_STATE.md as working memory. Do not spawn Kortix
-      root sessions; maximize entropy with Task subagents inside this core.
-      Continue the active exact frontier, maintain bounded scouts, and never
-      call a partial result a solution. Pull --rebase, commit, and push durable
-      work. Apply research/procedural/PUBLICATION.md only after every
-      official-resolution gate passes. Never stop.
+    prompt: LANE=millennium. CORE=math-god-millennium. This exact pinned root session permanently owns only the six unsolved Clay problems. Read MILLENNIUM_STATE.md and millennium-prize/PROGRAM.md first; do not adopt STATE.md or BREAKTHROUGH_STATE.md as working memory. Do not spawn Kortix root sessions; maximize entropy with Task subagents inside this core. Continue the active exact frontier, maintain bounded scouts, and never call a partial result a solution. Pull --rebase, commit, and push durable work. Apply research/procedural/PUBLICATION.md only after every official-resolution gate passes. Never stop.
   - slug: breakthrough-heartbeat
     name: math-god breakthrough lane heartbeat
     type: cron
@@ -125,12 +104,4 @@ triggers:
     session_id: 02e4f7af-a0b4-4240-8f2b-81db562e11a4
     cron: 0 0 1/6 * * *
     timezone: UTC
-    prompt: LANE=breakthrough. CORE=math-god-breakthrough. This exact pinned root
-      session permanently owns only the frozen assignment in BREAKTHROUGH_STATE.md.
-      Read that file, breakthrough/PROGRAM.md, and the assignment prompt first; do
-      not adopt STATE.md or MILLENNIUM_STATE.md as working memory. Do not spawn
-      Kortix root sessions; maximize entropy with Task subagents on the frozen
-      target. If status is active, never resurvey or switch targets. Select a new
-      target only after a solved or formally retired assignment has completed its
-      publication/state closeout. Pull --rebase, commit, and push durable work.
-      Apply research/procedural/PUBLICATION.md to a verified result. Never stop.
+    prompt: LANE=breakthrough. CORE=math-god-breakthrough. This exact pinned root session permanently owns only the frozen assignment in BREAKTHROUGH_STATE.md. Read that file, breakthrough/PROGRAM.md, and the assignment prompt first; do not adopt STATE.md or MILLENNIUM_STATE.md as working memory. Do not spawn Kortix root sessions; maximize entropy with Task subagents on the frozen target. If status is active, never resurvey or switch targets. Select a new target only after a solved or formally retired assignment has completed its publication/state closeout. Pull --rebase, commit, and push durable work. Apply research/procedural/PUBLICATION.md to a verified result. Never stop.
