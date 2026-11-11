@@ -26,6 +26,25 @@ receipts. Those byte-pinned outputs are an explicit part of the computational
 trust boundary. The 29,000 direct-rational packs are not a fourth trust root:
 full mode freshly exact-replays all of them.
 
+## Literature boundary
+
+This theorem is a restricted partial result on AKMPZ Conjecture 1.2
+([arXiv:2506.07264v1](https://arxiv.org/abs/2506.07264v1)), not a resolution of
+that conjecture. The tree-free instances are already covered by broader 2026
+theorems for every 2-connected noncycle
+([arXiv:2609.04069v1](https://arxiv.org/abs/2609.04069v1)) and every connected
+noncycle of minimum degree at least two
+([arXiv:2609.06778v1](https://arxiv.org/abs/2609.06778v1)). The additional
+scope here relative to those results is the uniform allowance of arbitrary
+rooted-tree attachments, including leaf-bearing instances, inside this exact
+rank-seven/order-eight-kernel frontier.
+
+The dated source/status audit is
+`research/rank-seven-order-eight-source-status-audit-2026-11-11.md`. It found no
+public theorem with the full combined scope in the sources searched, but that
+negative search does not establish novelty or priority. No firstness claim is
+made.
+
 ## Proof map
 
 1. Suppression reduces the unique rank-seven block to a loopless

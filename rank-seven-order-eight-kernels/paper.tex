@@ -17,7 +17,7 @@
 
 \title{Positive Square Energy for Rank-Seven Kernels of Order Eight}
 \author{AI-generated manuscript; no human author is claimed}
-\date{10 November 2026}
+\date{11 November 2026}
 
 \begin{document}
 \maketitle
@@ -28,18 +28,20 @@ block decomposition has exactly one positive-rank cyclic block.  Suppose that,
 after suppressing the degree-two vertices of that block, its loopless
 $2$-connected multigraph kernel has eight vertices.  We prove
 $\splus(G)\geq |V(G)|$, where $\splus$ is the sum of the squares of the
-positive adjacency eigenvalues.  The proof combines an exact census of the
-$4{,}015$ order-eight kernels and their $26{,}426{,}026$ physical parity
-orbits with analytic coarse certificates and a disjoint exact certificate
-partition of the $493{,}417$ residual orbits.  The last residual is handled by
-an induced partition into two tricyclic territories.  The executable theorem
-gate pins every proof source and artifact and offers a quick integrity mode and
-a full read-only replay mode.  Three expensive historical base-producer
-outputs remain explicit immutable trust roots; full mode freshly exact-replays
-the 29,000 direct-rational witness records rather than retaining them as a
-fourth root.  No claim is made for
-kernel orders nine through twelve, for multiblock rank-seven graphs, or for
-all connected heptacyclic graphs.
+positive adjacency eigenvalues.  Recent general theorems already cover every
+tree-free member of this class; the additional scope here is the uniform
+allowance of arbitrary rooted-tree attachments, including leaf-bearing
+instances.  The proof combines an exact census of the $4{,}015$ order-eight
+kernels and their $26{,}426{,}026$ physical parity orbits with analytic coarse
+certificates and a disjoint exact certificate partition of the $493{,}417$
+residual orbits.  The last residual is handled by an induced partition into two
+tricyclic territories.  The executable theorem gate pins every proof source
+and artifact and offers a quick integrity mode and a full read-only replay
+mode.  Three expensive historical base-producer outputs remain explicit
+immutable trust roots; full mode freshly exact-replays the 29,000
+direct-rational witness records rather than retaining them as a fourth root.
+No claim is made for kernel orders nine through twelve, for multiblock
+rank-seven graphs, or for all connected heptacyclic graphs.
 \end{abstract}
 
 \section{Statement, scope, and spectral tools}
@@ -74,7 +76,27 @@ positive-rank blocks, and they do not include kernels of orders nine through
 twelve.  In particular, the theorem is not a theorem about all connected
 graphs with $|E|=|V|+6$.
 
-We use two standard spectral devices.  First, positive square energy is
+\paragraph{Relation to the square-energy literature.}
+Akbari, Kumar, Mohar, Pragada, and Zhang conjectured that every connected graph
+of order $n$ and size $m\geq n+1$ satisfies $\splus(G)\geq n$
+\cite{AKMPZ}.  A connected graph of cyclomatic rank seven has $m=n+6$, so
+Theorem~\ref{thm:main} verifies only the restricted class stated above.
+Akbari, Hu, and Liu subsequently proved the conclusion for every
+$2$-connected noncycle \cite{AHLTwoConnected} and, more generally, for every
+connected noncycle of minimum degree at least two \cite{AHLMinDegree}.
+Consequently every tree-free member of our class is already covered by those
+results.  Within the one-cyclic-block class considered here, any nontrivial
+finite rooted-tree attachment has a non-root leaf, so the resulting graph has
+minimum degree one and is outside the latter theorem.  The certificate
+argument below treats all such attachments uniformly.  The general
+$n-1$ square-energy theorem \cite{LTZ} gives a baseline one unit below the
+claim here.  We make no claim of firstness: the dated search audit
+\cite{NoveltyAudit} located no previous theorem with the full combined scope,
+but a negative search does not establish novelty or priority.
+
+We use two standard spectral devices.  The first is the induced partition
+inequality established in the square- and $p$-energy literature
+\cite{LinearLowerBound,VertexPartitioning}: positive square energy is
 superadditive over induced vertex territories.
 
 \begin{lemma}[Induced superadditivity]\label{lem:super}
@@ -427,9 +449,14 @@ bash scripts/build-paper.sh rank-seven-order-eight-kernels
 Theorem~\ref{thm:main} concerns only cyclomatic-rank-seven graphs with exactly
 one positive-rank cyclic block and with suppressed kernel order eight.  It
 makes no claim for kernel orders nine through twelve, for any multiblock
-rank-seven graph, or for all connected heptacyclic graphs.  It does not claim
-fresh reruns of the three residual historical base producer searches.  It uses neither
-parity-changing subdivision monotonicity nor edge-addition monotonicity.
+rank-seven graph, or for all connected heptacyclic graphs.  Its tree-free
+subfamily was already covered by \cite{AHLTwoConnected,AHLMinDegree}; this
+paper's additional scope relative to those results is the uniform treatment of
+arbitrary rooted-tree attachments within the stated finite kernel frontier.
+It makes no firstness or unconditional novelty claim.  It does not claim fresh
+reruns of the three residual historical base producer searches.  It uses
+neither parity-changing subdivision monotonicity nor edge-addition
+monotonicity.
 
 \section*{AI disclosure}
 This manuscript and its proof-object synthesis were generated by an AI coding
@@ -440,6 +467,54 @@ arguments, explicit trust boundary, frozen sources, and reproducible checks.
 No external publication was performed as part of this manuscript build.
 
 \begin{thebibliography}{99}
+\bibitem{AKMPZ}
+S.~Akbari, H.~Kumar, B.~Mohar, S.~Pragada, and S.~Zhang,
+\emph{Refinement of a conjecture on positive square energy of graphs},
+arXiv:2506.07264v1, 2025.
+
+\bibitem{AHLTwoConnected}
+S.~Akbari, F.-T.~Hu, and Y.-Y.~Liu,
+\emph{Positive and negative square energies of $2$-connected graphs},
+arXiv:2609.04069v1, 2026.
+
+\bibitem{AHLMinDegree}
+S.~Akbari, F.-T.~Hu, and Y.-Y.~Liu,
+\emph{Positive square energy of graphs with minimum degree at least two},
+arXiv:2609.06778v1, 2026.
+
+\bibitem{LTZ}
+Y.~Liu, Q.~Tang, and S.~Zhang,
+\emph{The positive and negative square-energy conjecture},
+arXiv:2607.18031v1, 2026.
+
+\bibitem{VertexPartitioning}
+S.~Akbari, H.~Kumar, B.~Mohar, and S.~Pragada,
+\emph{Vertex partitioning and $p$-energy of graphs},
+arXiv:2503.16882v2, 2025.
+
+\bibitem{LinearLowerBound}
+S.~Akbari, H.~Kumar, B.~Mohar, and S.~Pragada,
+\emph{A linear lower bound for the square energy of graphs},
+Electron. J. Combin. \textbf{32}(3) (2025), Paper P3.53;
+doi:10.37236/13467.
+
+\bibitem{EFGW}
+C.~Elphick, M.~Farber, F.~Goldberg, and P.~Wocjan,
+\emph{Conjectured bounds for the sum of squares of positive eigenvalues of a
+graph}, Discrete Math. \textbf{339} (2016), 2215--2223;
+doi:10.1016/j.disc.2016.01.021.
+
+\bibitem{AbiadEtAl}
+A.~Abiad, L.~de Lima, D.~N.~Desai, K.~Guo, L.~Hogben, and J.~Madrid,
+\emph{Positive and negative square energies of graphs},
+Electron. J. Linear Algebra \textbf{39} (2023), 307--326.
+
+\bibitem{NoveltyAudit}
+\emph{Rank-seven order-eight kernel source and status audit}, 11 November 2026;
+\path{research/rank-seven-order-eight-source-status-audit-2026-11-11.md}.
+
+\subsection*{Proof artifacts and reproducibility}
+
 \bibitem{Tricyclic}
 Companion manuscript, \emph{Positive Square Energy of Every Tricyclic Graph},
 2026; \path{all-tricyclic-graphs/paper.tex}.  The final gate pins the
