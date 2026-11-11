@@ -110,8 +110,9 @@ scope above:
    `min{s+(G),s-(G)} >= n-1`. This general theorem misses the present threshold
    by one.
 2. S. Akbari, H. Kumar, B. Mohar, and S. Pragada, *Vertex Partitioning and
-   p-Energy of Graphs*, arXiv:2503.16882v2, prove the relevant induced-block
-   superadditivity for positive and negative `p`-energy.
+   p-Energy of Graphs*, Linear Algebra Appl. 724 (2025), 96--107,
+   doi:10.1016/j.laa.2025.06.009; arXiv:2503.16882v2, prove the relevant
+   induced-block superadditivity for positive and negative `p`-energy.
 3. The same four authors, *A Linear Lower Bound for the Square Energy of
    Graphs*, Electron. J. Combin. 32(3) (2025), P3.53,
    doi:10.37236/13467, establish induced-subgraph superadditivity and the
@@ -126,9 +127,9 @@ scope above:
    (2016), 2215--2223, doi:10.1016/j.disc.2016.01.021, is the source of the
    original `n-1` square-energy conjecture.
 
-These sources mean that induced superadditivity, DNN/conic methods, kernel
-suppression, enumeration, and computer-assisted exact certification must not
-be advertised individually as novel techniques.
+The cited literature supplies clear prior art for induced-superadditivity and
+DNN/conic methods. This audit makes no priority determination about kernel
+suppression, enumeration, or computer-assisted exact certification.
 
 ## Search record
 
@@ -142,10 +143,12 @@ Searches were run and public records read on 2026-11-11. Queries combined:
 - `subdivision`, `2-connected`, and `minimum degree at least two`.
 
 The search covered the versioned arXiv records and HTML for 2506.07264,
-2609.04069, 2609.06778, 2607.18031, and 2503.16882; general web searches for
-exact-scope terminology and pendant/rooted-tree variants; the Electronic
-Journal of Combinatorics record for P3.53; the Electronic Journal of Linear
-Algebra record for the 2023 paper; and DOI/title records for the 2016 paper.
+2609.04069, 2609.06778, 2607.18031, and 2503.16882; the published Linear
+Algebra and its Applications record for volume 724 (2025), pages 96--107,
+doi:10.1016/j.laa.2025.06.009; general web searches for exact-scope terminology
+and pendant/rooted-tree variants; the Electronic Journal of Combinatorics
+record for P3.53; the Electronic Journal of Linear Algebra record for the 2023
+paper; and DOI/title records for the 2016 paper.
 No exact-scope predecessor or broad theorem plainly covering arbitrary rooted
 trees was located.
 
