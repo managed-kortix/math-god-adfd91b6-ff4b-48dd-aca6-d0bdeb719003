@@ -1,0 +1,6 @@
+m6-clean-sink-B6-l6-root-cardinality-hashes-v1
+manifest-bytes	1003
+manifest-sha256	4dfe9fbb8ad8ab416d65a4cebe3d589507602cc87cd64962d3a82262a85b285a
+groups	1
+columns	group,parents,variables,clauses,cnf-bytes,cnf-sha256
+B6-l6	220	25849	184296	11162121	561fdd90e28fcc3c2fd2bbe79e55c42fd3ba2a520c55ddc84a9ee52557bb07cb

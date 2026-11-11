@@ -25,6 +25,56 @@ compression, and next decision.
 
 No audits yet.
 
+## 2026-08-09 — frozen no-gain certificates
+
+- Certified exactly the 75 pinned-scout UNSAT no-gain leaves with textual LRAT
+  from pinned CaDiCaL 1.7.3; every proof was accepted by pinned `lrat-check`.
+- The certificates cover 686 parent/witness incidences. The 42 scout TIMEOUT
+  leaves (380 incidences) and all positive-gain refinements remain outside the
+  claim.
+- The 75 `xz -3` artifacts total 42,951,720 bytes, strictly below the requested
+  250,000,000-byte ceiling. A strict canonical mutual pin binds ledger and
+  verifier, while the ledger also binds all no-gain artifacts, scout, manifest,
+  CNF hash ledger, producer, structural checker, scout/test/certificate sources,
+  and both pinned binaries.
+- Fresh replay regenerated and structurally checked all 75 CNFs, authenticated
+  and decompressed every artifact, matched every raw LRAT hash, and obtained
+  `c VERIFIED` from the pinned checker for every leaf.
+
+## 2026-08-09 — frozen positive-gain coordinate certificates
+
+- Retained exactly eight textual LRAT certificates for coordinate scout-UNSAT
+  leaves 020, 026, 096, 102, 172, 178, 215, and 217. They cover 72
+  parent/witness/coordinate incidence memberships; the other 211 coordinate
+  scout-TIMEOUT leaves remain open, so this is not a claim beyond that scope.
+- The 114 positive-gain TIMEOUT sources split into 219 children by selected
+  deletion coordinate. The child ALOs give an exact existential cover. It is
+  deliberately overlapping rather than a partition: when both coordinate ALOs
+  hold in a two-coordinate source, that model lies in both children.
+- Stabilizers are irrelevant to validity. Every child retains the canonical
+  source leaf and names a coordinate in its frozen labeling; a stabilizer could
+  remove isomorphic redundancy but cannot change the ALO union identity,
+  coverage, generated CNF, or LRAT acceptance.
+- The strict mutual ledger/verifier pin directly binds every tracked Python
+  support script in the transitive coordinate generation/checking chain, all
+  coordinate inputs and eight artifacts, both pinned binaries, and the ancestor
+  positive-gain and complementary no-gain certificate chains and artifact sets.
+- Exact replay scope, run from `experiments/`:
+  `python3 verify_m6_b7_l6_hard_witness_positive_gain_coordinate_certificates.py --checker /path/to/pinned/lrat-check`.
+  Replay regenerates and structurally checks exactly the eight scoped CNFs,
+  authenticates and decompresses their retained LRATs, and requires
+  `c VERIFIED` from the pinned checker for each proof.
+
+## 2026-07-31 — residual m=6 suite hardening
+
+- The residual regression now generates and independently reconstructs all 23
+  selector-group CNFs before checking their frozen hashes; it no longer samples
+  only the two branch boundary files while comparing hash dictionaries.
+- The producer and independent checker both derive and enforce authoritative
+  membership subtotals B6=19,911 and B7=61,063, now recorded in the manifest.
+- Added hostile mutations inside both exact-cardinality counters of a B6 CNF.
+  This is test-suite hardening only.
+
 ## 2026-07-25 — tick 1
 
 - **Control state:** accepted exclusive ownership; status changed from `ready`
@@ -695,3 +745,1580 @@ No audits yet.
 - **Next queued attack:** apply lambda to the remaining 50 placement parents,
   beginning with beta<=2 where lambda has at most three values. Refine unique
   degree-three hubs only after lambda leaves time out.
+
+## 2026-07-26 — tick 35
+
+- A hostile audit found that `--lambda-k` was silently ignored when supplied
+  without `--kappa/--eta`, and that negative lambda values reached Python's
+  negative indexing. The emitter now rejects incomplete refinement coordinates,
+  enforces the sharp placement-dependent range
+  `max(0,beta-(7-kappa)) <= lambda <= min(beta,kappa)`, and prints every active
+  split coordinate in its deterministic log line.
+- Added an independent finite partition audit. It reproduces all 165 permissive
+  placement leaves over 33 shape parents and checks 21,450,240 direct
+  `(K,four B-holes,marked-set)` coordinate evaluations. The independent
+  coordinate census passes, and the generic threshold-counter semantics pass
+  the existing exhaustive tests; this does not by itself test the emitted
+  placement-specific `K/HK/LK` gates.
+- Proved the exact endpoint-packing inequality
+  `q(t)+q(u)+1[tu hole]>=3` for two vertices inaccessible from one robust
+  predecessor. It recovers the four-matching proof but is sharp for the
+  `P3+2K2` shape; a three-hole local counterconfiguration shows that packing
+  alone cannot synchronize predecessor sets. See
+  `attempts/tick35-k4-packing-barrier.md`.
+- The earlier 87-leaf and 580-cell scout totals are not independently
+  reproducible from a committed parent/child manifest. They remain exploratory
+  timing observations, not a cover theorem. Before any branch-level claim, the
+  unresolved-parent list, every child key, CNF/LRAT hashes, and a complete
+  independently checked ledger must be committed.
+- **Next queued attack:** freeze that manifest and rerun the residual lambda
+  cover with the repaired CLI. On any remaining hard child, split by membership
+  of the unique degree-three/four hub in K and by the exact inaccessible
+  three-hole packet type, rather than repeating an unchanged timeout.
+
+## 2026-07-26 — tick 36
+
+- Replaced the unreproducible scout-parent bookkeeping with a complete 2,925-key
+  hierarchy for every `rho`, four-hole shape, rooted placement, `kappa`, `eta`,
+  and valid `lambda` value in the entire isolated-root `m=9,k=4` normal form.
+- An exact four-color support enumeration proves 1,785 terminal cells
+  structurally empty at the missing-graph level and leaves 1,140 feasible CNF
+  jobs. The converse construction fills unused cells with hole-isolated
+  vertices, so this filter is complete for missing-graph compatibility.
+- Production and separately implemented subset-based cross-checkers agree
+  byte-for-byte on `experiments/m9-k4-cover.tsv`; this is not an independent
+  derivation of the hierarchy. The key-stream SHA-256 is
+  `51700d5b...b61195`; the ledger SHA-256 is `9e8ebba3...9f1cae`. See
+  `attempts/tick36-k4-cover.md` for the proof and commands.
+- No prior scout UNSAT status is imported. The 1,140 survivors are all `UNRUN`
+  until regenerated with the repaired CLI and independently LRAT-checked.
+- **Next queued attack:** rank the 1,140 surviving cells by shape and
+  `eta/lambda`, rebuild the pinned CaDiCaL 1.7.3 and `lrat-check` toolchain, and
+  run a small certificate-producing pilot across every shape before scheduling
+  the complete content-addressed campaign.
+
+## 2026-07-26 — tick 37
+
+- Rebuilt CaDiCaL 1.7.3 from source commit `38e073b...` and `lrat-check` from
+  `2e3b2dc...`. The checker binary reproduces the historical hash; the new
+  CaDiCaL binary hash differs from the historical build, so both source commit
+  and current binary hash are recorded rather than pretending binary identity.
+- Added a solver-blind deterministic selector choosing one maximally
+  concentrated feasible cell per shape. All eleven pilots returned UNSAT and
+  were independently accepted by `lrat-check`; exact CNF/LRAT hashes and sizes
+  are in `experiments/m9-k4-pilot-certificates.md`.
+- The LRAT files total roughly 0.94 GB and currently live only in temporary
+  storage. Therefore these are explicitly regression observations, not durable
+  certificate rows: all 1,140 campaign cells remain `UNRUN` for cover purposes.
+- **Next queued attack:** implement content-addressed proof retention before
+  any bulk run. Begin with the 138 feasible C4 cells, where the pilot was fast,
+  and commit a machine-readable completion ledger whose `UNSAT_VERIFIED` state
+  requires accessible proof bytes, matching hashes, and checker readback.
+
+## 2026-07-26 — tick 38
+
+- Replaced the planned 138-cell C4 campaign with a uniform human contradiction;
+  see `attempts/tick38-c4-human-proof.md`.
+- The five or six common C-dominators require at least four distinct A'
+  predecessor sources by an exact B-row degree count and the four-hole budget.
+  For each source, badness forces exactly two inaccessible cycle vertices. An
+  adjacent pair determines the source's closed outneighborhood and fixes both
+  cycle diagonals; an opposite pair also determines it via the intersection of
+  two exact outneighborhoods. At most one adjacent template and the two opposite
+  templates coexist, giving at most three sources, a contradiction.
+- Three hostile audits independently checked the degree identity, exact-second
+  count, opposite-pair intersection, source uniqueness, and diagonal table. No
+  computational certificate is needed for this shape.
+- This eliminates the C4 shape uniformly in rho but remains a restricted branch
+  theorem inside `n=18,m=9,k=4`, not an order-18 result or SNC resolution.
+- **Next queued attack:** apply the same predecessor-source lower bound to paw
+  and triangle-plus-edge. Classify inaccessible packets by the four-hole support
+  and seek a compatibility cap below four; preserve a sharp local breaker if
+  either shape admits four source templates.
+
+## 2026-07-26 — ticks 39--40
+
+- Human-eliminated the paw and triangle-plus-disjoint-edge T-hole shapes; see
+  `attempts/tick39-paw-human-proof.md` and
+  `attempts/tick40-triangle-edge-human-proof.md`.
+- In both shapes, the shape-independent B-row count requires at least four A'
+  predecessor sources. Exact inaccessible-packet classification and saturated
+  outneighborhood rows allow at most three sources. For the paw, five packet
+  types reduce through the two present orientations incident with the pendant
+  vertex. For triangle-plus-edge, packets are either two triangle vertices or
+  one triangle vertex plus one isolated-edge endpoint; two distinct triangle
+  packets exclude every mixed packet.
+- Hostile finite analysis exposed why saturation matters: a weaker census that
+  records only forced positive arcs reports spurious four-source paw and
+  triangle-edge templates. Recording the complete degree-eight rows destroys
+  them. Both final proofs received independent line-by-line audits.
+- Together with C4 and the previously human-eliminated matching and star-like
+  shapes, five of the eleven four-edge shapes now have human contradictions in
+  this normal form. No claim is made for the six remaining shapes.
+- **Next queued attack:** rigorously audit the proposed common cut/template
+  argument for P5 and fork. It currently claims the same source cap but lacks a
+  written packet table; first demand either a complete table with saturated
+  negative orientations or an explicit four-source breaker.
+
+## 2026-07-26 — ticks 41--42
+
+- Human-eliminated the fork and P5 T-hole shapes; see
+  `attempts/tick41-fork-human-proof.md` and
+  `attempts/tick42-p5-human-proof.md`.
+- Fork has exactly four saturated packet types. Each reconstructs the source's
+  closed outneighborhood, and all four cannot coexist; hence at most three
+  predecessor sources, contradicting the universal lower bound four.
+- P5 has seven packet labels. Their complete compatibility depends only on the
+  six orientations of present pairs on the five-vertex support. The exact
+  Boolean table has maximum two compatible labels; the 64-case transparent
+  checker is `experiments/check_p5_packets.py`. A hostile audit separately
+  reconstructed the table from crossing-hole capacities.
+- A competing exploratory claim that P5 had compatibility maximum one was
+  false; an exact two-source local witness exists. The audited theorem uses the
+  sharp maximum two and does not inherit that overclaim.
+- Eight of the eleven four-edge shapes now have human contradictions in this
+  normal form: C4, paw, triangle-plus-edge, fork, P5, four-matching, and the two
+  previously handled star-like shapes (`K1,4` and claw-plus-edge, counted there
+  as separate profiles). The remaining human frontier is P4-plus-edge,
+  two-P3, and P3-plus-two-edges; checked CNF evidence exists but does not replace
+  proofs.
+- **Next queued attack:** start P4-plus-edge with a complete saturated packet
+  table. Its disconnected spare edge admits the sharp `(2,1)` packet from the
+  tick-35 barrier, so the next lemma must synchronize multiple sources rather
+  than rely on a single-source cut count.
+
+## 2026-07-26 — ticks 43--44
+
+- Eliminated the three disconnected residual shapes P4-plus-edge, two-P3, and
+  P3-plus-two-edges by saturated packet compatibility; see
+  `attempts/tick43-disconnected-shapes.md`. The sharp source caps are 3, 2, and
+  2, below the shape-independent lower bound 4.
+- Added `experiments/check_disconnected_packets.py`, which independently
+  enumerates 2,048, 2,048, and 131,072 support orientations and verifies the
+  three caps and cut multiplicity one. Hostile audit caught and repaired two
+  polarity errors in the displayed P4 formulas; the checker-derived caps were
+  unaffected.
+- A coverage audit found that K1,4 and claw-plus-edge had only notebook
+  assertions, not reconstructible proof files. Added both proofs in
+  `attempts/tick44-star-shapes.md`: K1,4 admits no inaccessible pair, while
+  claw-plus-edge has only two packet labels and therefore at most two sources.
+- The independent 20,475-graph shape census confirms these eleven profiles are
+  disjoint and exhaustive. All eleven now have written human contradictions,
+  so the complete isolated-root `m=9,k=4` strip is human-eliminated uniformly
+  over rho, placements, kappa, eta, and lambda.
+- This is not an order-18 elimination: other missing counts `m=5,6,7` remain,
+  while `m=8` and `m=9` residual bookkeeping must be reconciled carefully.
+- **Next queued attack:** update the m=9 campaign ledger to remove the entire
+  k4 strip, then inspect whether all other k strips were already closed by the
+  k<=3 and final-row arguments. If so, promote the full m=9 branch only after a
+  hostile coverage audit; otherwise isolate the exact remaining cells.
+
+## 2026-07-26 — tick 45
+
+- A durability audit found that the historical LRATs for all four `k=3` rows
+  and the three final `k=5,6` rows are absent; hashes alone are not currently
+  checkable certificates. Thus the complete m=9 branch cannot yet be promoted
+  from those ledgers.
+- Replaced the full `k=3` certificate dependence by a human proof; see
+  `attempts/tick45-k3-human-proof.md`. The three-hole B-row count requires at
+  least three predecessor sources. Matching, P3-plus-edge, P4, and claw admit
+  at most 0, 2, 2, and 0 sources. Triangle admits three packet labels, but the
+  tight all-label case synchronizes the triangle outneighborhoods, forces the
+  three sources to be the triangle vertices, and makes four common dominators
+  have at most four internal B-arcs against the required six.
+- Therefore the entire isolated-root `m=9,k=3` strip is now human-eliminated,
+  uniformly in rho. Together with ticks 25 and 30--44, all `k=0,...,4` rows
+  are durable human theorems.
+- The exact durable residual for m=9 is now only `(rho,k)=(0,5),(1,5),(0,6)`.
+  Historical checked-LRAT claims cover their 25 final shards, but no proof bytes
+  are retained. **Next queued attack:** derive a human final-row contradiction,
+  starting with k=6 where all six residual holes lie in T and the source lower
+  bound is strongest; use saturated packet compatibility rather than regenerate
+  bulk certificates.
+
+## 2026-07-26 — tick 46
+
+- Compressed the k=6 final row to seven simultaneous bad A' source rows. Layer
+  capacity forces `P=A'`, and exact row sums require
+  `e(A',B)=29+h(A')+Q>=29`.
+- Temporary tests reject a solver-inspired lemma claiming every bad source has
+  at most four B-outneighbors: a relaxed one-source model reportedly has five
+  B-outneighbors and a sharp three-hole packet. No witness artifact was retained,
+  so this remains an unverified breaker observation. Likewise, reported
+  six-of-seven badness tests are exploratory rather than durable conclusions.
+- Derived the exact packet pressure: inaccessible triples avoid B and consume
+  all six holes; inaccessible pairs contain at most one B vertex and consume at
+  least three holes, or at least five when they contain B. Hole loads cannot be
+  summed without controlling reuse.
+- A tentative arc-minimal charging route appears vulnerable to gain cycles but
+  has no retained exact breaker. See `attempts/tick46-k6-frontier.md`.
+- **Next queued attack:** classify the maximal six-bad relaxations. Test whether
+  their six-hole graph is necessarily `2K3` and whether the omitted Seymour
+  source is forced by a triangle-row synchronization theorem. If false,
+  enumerate the exact finite family of hole-support cores rather than all
+  six-edge graphs.
+
+### Reduced-model sharp fixture
+
+- Added a deterministic 16-vertex relaxation with exact reduced degrees and
+  existential inaccessible witnesses. It removes C and all full-CNF path,
+  deletion, and arc-minimality machinery while preserving every genuine k=6
+  counterexample as a model.
+- A directly verified six-of-seven witness has holes exactly `2K3` on the six
+  selected A' vertices. Each selected source has the other two triangle vertices
+  inaccessible; the omitted source has none. This sharp fixture is committed
+  with SHA-256 `c6f958a...979c7e` and prevents overclaiming from six rows.
+- The all-seven reduced CNF is only 3,105 variables/12,128 clauses but remains
+  solver-hard under current direct runs. No reduced UNSAT claim or 2K3-forcing
+  theorem is accepted: packet-only censuses admit many spurious cross packets,
+  and full closed-row/rooted coupling is essential.
+- **Next queued attack:** cube the reduced CNF first by six-hole support, retain
+  explicit SAT leaves and LRAT for UNSAT leaves, and build an assumption-cover
+  checker. This is the smallest currently proved-sound finite terminal model.
+
+### Canonical primary cube cover
+
+- Replaced the raw hole-support split by a stronger 65-leaf semantic symmetry
+  cover fixing one complete A' source row and its two selected inaccessible
+  witnesses. The stabilizer `S6(A'\{2}) x S7(B)` reduces 63,063 labelled
+  row/witness objects to 65 keys.
+- `check_k6_reduced_cubes.py` independently enumerates every labelled object,
+  reproduces all orbit multiplicities, and matches manifest SHA-256
+  `3936f5da...b4a7ab`. Each cube fixes all fifteen source-row arc decisions and
+  two selectors, giving stronger propagation than coarse hole counts.
+- This is semantic graph symmetry: sequential-counter auxiliaries receive fresh
+  satisfying extensions after relabelling and are not treated as syntactic CNF
+  automorphisms.
+- **Next queued experiment:** scout all 65 leaves under a fixed cap. Refine only
+  hard leaves by the incoming-versus-hole status of the seven non-outneighbors,
+  yielding at most 1,110 complete-cut orbits rather than a raw six-hole census.
+
+### Primary cube scout
+
+- Ran all 65 canonical leaves with CaDiCaL 1.7.3 under a deterministic 20-second
+  cap. Twenty-nine returned UNSAT and 36 timed out; no SAT leaf appeared. The
+  unresolved leaves represent labelled multiplicity 39,339 of 63,063.
+- Results are frozen in `experiments/k6-reduced-scout-20s.json`. They are timing
+  observations only: no LRAT was retained and no leaf is mathematically closed
+  by this scout.
+- Easy UNSAT is strongly concentrated when z is one of source 2's selected
+  inaccessible witnesses, or when source 2 has very high A'-outdegree. The hard
+  set includes every low-A/high-B profile and most witnesses involving w.
+- **Next queued attack:** implement the 1,110 complete-cut orbit enumerator and
+  restrict it to the 36 hard parents. Distinguishing incoming arcs from holes is
+  the missing propagation in those leaves; preserve the independent labelled
+  orbit-multiplicity audit before any certification campaign.
+
+### Complete-cut refinement
+
+- Added the full incoming-versus-hole refinement of the source-2 cube cover.
+  There are exactly 1,110 semantic orbits representing 3,171,168 labelled
+  complete source cuts with two selected witnesses.
+- Production and independently implemented labelled enumeration agree on every
+  key, orbit multiplicity, and canonical representative; manifest SHA-256 is
+  `3979f9dc...abbb970`.
+- Each complete cube fixes outgoing, incoming, and hole status for all fifteen
+  source pairs, plus the two witness selectors. This is the frozen secondary
+  split for the 36 hard primary leaves.
+- **Next queued experiment:** map complete-cut children to their primary parent,
+  run short scouts only below the 36 hard parents, and retain the first LRAT
+  pilots to measure whether per-leaf proofs are small enough for durable Git or
+  require external content-addressed storage.
+
+### Packet-pressure breakthrough in the complete-cut split
+
+- Exactly 671 of the 1,110 complete-cut orbits refine the 36 hard primary
+  parents. A naive two-second scout left every child unresolved, confirming that
+  merely fixing one full source cut does not expose the collective obstruction.
+- Derived a new exact selected-pair identity. For source `a`, selected
+  inaccessible witnesses `t,u`, eight outneighbors `O`, five remaining vertices
+  `R`, and `h` holes incident with `a`, let `i_v` indicate `v->a` and `b_v`
+  indicate `v in B`. Then
+  `e+({t,u},R)+h_other = 5-h-i_t-i_u-2b_t-2b_u`, where `h_other` counts holes
+  outside the source/witness support. This follows by summing the exact witness
+  outdegrees and the global exact six-hole count.
+- Immediate consequence: `h+i_t+i_u+2b_t+2b_u <= 5`. This rejects 279 of the
+  671 hard children structurally, representing labelled multiplicity 969,048.
+  The sound upper-bound half was added as redundant propagation clauses.
+- With those clauses, a one-second CaDiCaL scout returns UNSAT on 430 children
+  and leaves 241 UNKNOWN. These remain scout statuses except for the retained
+  pilot below.
+- Retained and independently checked the first compact LRAT pilot, complete-cut
+  index 1, key `(0,1,7,0,0,0,2)`: CNF SHA-256
+  `e386e22a...6736cb20`, LRAT SHA-256 `d9922feb...73845cf9`; `lrat-check`
+  returned `c VERIFIED`. Files are `k6-pressure-pilot-0001.{cnf,lrat}`.
+- **Next queued attack:** encode the exact identity rather than only its
+  outgoing-arc upper bound by introducing explicit semantic hole variables and
+  a redundant exact-six-hole cardinality. Then rescout the 241 residual leaves
+  and retain LRATs for all compact terminal leaves.
+
+### Reduced k=6 certificate closure
+
+- Encoded the exact packet identity with explicit hole variables and a
+  redundant exact-six-hole cardinality. Independent hostile audit verified the
+  support partition, formula, hole equivalence, and exact-cardinality semantics.
+- Certified every one of the 1,110 complete-cut orbit representatives. Each
+  leaf was generated deterministically, solved by pinned CaDiCaL, accepted by
+  pinned `lrat-check`, compressed into a content-addressed object, then freshly
+  regenerated and rechecked by `k6_exact_verify.py`.
+- Fresh readback result: `PASS leaves=1110 labelled=3171168`. The archive has
+  SHA-256 `e44f8ff8...4bb80402`, size 103,486,540 bytes, and represents
+  602,210,046 uncompressed LRAT bytes in 651 deduplicated proof objects.
+- Therefore the 16-vertex all-seven reduced model is now durably UNSAT. Combined
+  with the written forward reduction, this closes the remaining `(rho,k)=(0,6)`
+  isolated-root `m=9` row.
+- **Next queued attack:** return to the two exact durable residuals
+  `(rho,k)=(0,5)` and `(1,5)`. Reconstruct their strongest reduced collective
+  models and require retained proof bytes rather than historical checked-run
+  hashes.
+
+### Common k=5 reduction and direct-proof recovery
+
+- The two residual rows project to the same 16-vertex degree sequence:
+  `8^9,7^1,6^6`, hence exactly five holes. The exceptional B vertex has degree
+  seven; the other six dominate both deleted C vertices and have degree six.
+- Every A' row requires at least one inaccessible T vertex, and rows pointing
+  to a degree-six B vertex require at least two. This conditional model was
+  independently audited and encoded in `k5_reduced_cnf.py` (3,112 variables,
+  12,177 clauses). A direct 600-second scout remained unresolved.
+- In parallel, `k5_final_campaign.py` regenerated all sixteen historical full
+  shards byte-for-byte, and every retained LRAT was independently checked. The
+  direct proof objects compress to about 3.88 GB, too large for ordinary Git;
+  they remain local recovery evidence until immutable external storage is
+  arranged. Historical LRAT hashes were reproduced exactly.
+- **Next queued attack:** add explicit five-hole variables and the exact
+  defect-weighted pair/singleton packet identities to the common reduced model;
+  then construct a canonical source-cut cover under `S7(A') x S6(K)` and retain
+  compact LRAT objects from inception.
+
+### k=5 defect-packet orbit cover
+
+- Added explicit semantic holes and exact-five propagation to the common model,
+  then classified a canonical source's complete cut and required singleton/pair
+  packet under `S6(A'\\{a}) x S6(K)`.
+- The packet-pressure filter leaves exactly 931 semantic orbits representing
+  758,181 labelled source-cut/witness objects. Independent exhaustive labelled
+  enumeration agrees key-by-key; payload SHA-256 is
+  `020cbf13...9f45deb5`.
+- Each leaf encodes the full defect-weighted packet identity, not only its
+  nonnegative bound. A two-second CaDiCaL scout returned UNSAT on 928 leaves and
+  timed out on only indices 915, 918, and 921; all three solve UNSAT under a
+  longer cap. These are not yet certificate claims.
+- **Next queued attack:** launch a content-addressed LRAT campaign across all
+  931 leaves, first piloting the three hard singleton leaves and a stratified
+  sample to bound proof storage. Independently regenerate and fresh-check every
+  retained object before closing both k=5 rows.
+
+### Reduced k=5 certificate closure
+
+- Completed all 931 packet leaves. The campaign represents 917,003,695 raw LRAT
+  bytes and compresses to a 120,197,280-byte archive with SHA-256
+  `d3f845d9...137c0f1d`.
+- Fresh deterministic CNF regeneration, object hash readback, decompression, and
+  pinned `lrat-check` acceptance succeeded for every leaf:
+  `PASS leaves=931 labelled=758181`.
+- Together with the independently audited common projection, this durably closes
+  both final isolated-root rows `(rho,k)=(0,5)` and `(1,5)`. Thus every row in
+  the isolated-root `m=9` aggregate is now eliminated.
+- Combining the isolated-hole closure with the earlier perfect-matching theorem
+  closes the complete `m=9` branch: a nine-edge missing graph on 18 vertices
+  without an isolate has average and minimum degree one, hence is exactly
+  `9K2`. The normalization and complement argument are consolidated in
+  `attempts/tick48-complete-m9-closure.md`.
+- Scope remains restricted: the exact order-18 residual is `m in {5,6,7}`; this
+  is not all order 18 and not SNC.
+- **Next queued attack:** complete the existing 170-ledger `m=5`, B6 frontier
+  by adding exact A-B incidence, simultaneous badness, and arc-deletion private
+  endpoint constraints. In parallel, construct the currently missing six-edge
+  support census for `m=6`.
+
+### Fresh m=5 B6 placement cover
+
+- The historical 170-ledger boundary is not reproducible from committed files:
+  its scratch enumerator and at least one immediate filter were never retained.
+  Replaced it with a broader first-principles cover that does not trust those
+  counts.
+- The five uncovered support shapes have exactly 4,355 canonical rooted-layer
+  placements under support automorphisms and layer permutations, with counts
+  `688,1459,283,194,1731`. Independent enumeration agrees; payload SHA-256 is
+  `e5873a71...7d305ed9`.
+- Every placement emits a standalone full order-18 CNF containing exact first
+  and second neighborhoods, badness, all robust deletion witnesses, full arc
+  minimality, and every missing-pair unit. A one-second scout eliminated 4,332
+  parents and left only 23 hard placements.
+- Splitting each hard parent by the exact number of high vertices in C and the
+  exact C-to-B arc count leaves one hard child per parent: either `(highC,r)=(1,0)`
+  or `(2,1)`. All other children solve immediately. This recovers the structural
+  hinge without relying on the missing old ledger filters.
+- **Next queued attack:** refine those 23 children by the three C-pair states
+  and robust-witness location for high C vertices; freeze a complete child cover
+  and retain LRATs only after an independent partition audit.
+
+### m=5 B6 internal hinge
+
+- Exhaustively refined the 23 hard `(highC,r)` cells by the exact high mask,
+  three internal-C pair states, and (when `r=1`) the unique C-to-B tail modulo
+  `S6(B)`. Independent audit confirms exactly 155 disjoint exhaustive cases.
+- A five-second scout eliminates 120 cases. The remaining 35 collapse to only
+  three human templates: 24 transitive-C rows with two high vertices and the
+  middle as unique B-tail; nine one-high source rows with the other C-pair
+  missing; and two one-high transitive-C rows.
+- A robust witness for a high C vertex lies in B or its internal C-inneighbors.
+  Normalizing selected witnesses yields one B-witness leaf in the one-high rows
+  and three leaves in two-high rows (internal middle witness, same B witness,
+  distinct B witnesses). Twenty-four of the resulting 83 witness leaves solve
+  in 20 seconds; 59 remain hard, concentrated in the internal and distinct-B
+  branches.
+- The first easy-parent LRAT pilot is compact: 6,635,496 raw bytes and 462,504
+  bytes under xz-3, independently accepted by pinned `lrat-check`.
+- **Next queued attack:** freeze a hierarchical cover consisting of easy
+  parents, easy `(highC,r)` children, easy internal-C children, and witness
+  refinements for the 35 residuals. Split the 59 hard witness leaves by the
+  exact gain/private-loss status of the distinguished B-to-C witness arc.
+
+### m=5 B6 direct certificate execution
+
+- Longer direct runs closed all 35 hard internal templates; after witness
+  normalization only two leaves required more than ten minutes, and both solved
+  UNSAT within one hour. This made a direct parent campaign preferable to a
+  complicated hierarchical certificate.
+- Generated, retained, and independently checked LRATs for all 4,355 canonical
+  placement parents. Raw proof bytes total 55,802,829,675; xz-3 content-addressed
+  objects total 7,655,223,816 bytes. The largest raw proof is 2,443,975,391
+  bytes (parent 2339). All leaf metadata states are `UNSAT_VERIFIED`.
+- The campaign is locally complete but not yet durable in Git: the 6.6 GB object
+  set exceeds practical repository storage. Do not promote branch closure until
+  immutable external/archive storage and a fresh complete readback are secured.
+- **Next queued action:** construct a deterministic archive/manifest, verify all
+  4,355 object and CNF hashes with a fresh checker pass, and place proof bytes in
+  immutable content-addressed storage. If no suitable external destination is
+  available, retain a formally audited hierarchical subset campaign compact
+  enough for Git rather than reverting to hash-only evidence.
+
+### m=5 B6 hostile certificate repair
+
+- A hostile orbit audit found that the proposed two-high witness refinement was
+  incomplete: fixing the unique `C->B` head distinguishes that B vertex from a
+  generic source witness.  The old three rows omitted three genuine equality
+  orbits and included one contradictory row.  The corrected scout has five
+  feasible witness orbits; see `attempts/tick49-m5-certificate-audit.md`.
+- Proved two simplifying facts for the corrected hierarchy: a selected robust
+  witness arc has no private second-neighbor loss, and every gain midpoint for
+  a B-to-source-C witness lies in B.  These delete the positive-loss and
+  root/A/C-gain children.
+- Hardened the direct campaign so existing metadata is never trusted by
+  filename, persisted compressed LRATs are freshly decompressed and checked,
+  the cover identity is unconditional, and any missing/failed leaf makes the
+  command fail.  Hardened malformed refinement arguments as well.
+- **Status:** no branch closure is promoted.  The local 7.66 GB object set is not
+  a durable certificate and the old compact hierarchy was incomplete.
+- **Next queued attack:** selector-batch the 4,332 easy parents by support shape,
+  pilot LRAT size, and independently prove exact batch coverage.  In parallel,
+  build the first-principles 68-shape six-edge support census for `m=6`.
+
+### First-principles m=6 support census
+
+- Added a standard-library-only census of all isolate-free simple missing
+  graphs with exactly six edges.  There are exactly 68 isomorphism types, with
+  support-order distribution `1,5,15,20,15,7,3,1,1` for orders 4 through 12.
+- The production generator uses one-edge canonical augmentation for connected
+  components followed by component multisets.  A materially independent checker
+  uses arbitrary-neighborhood vertex augmentation and degree-constrained
+  backtracking isomorphism.  Both reproduce the frozen 934-byte payload with
+  SHA-256 `e97de806...471c8be`; see `experiments/m6-support-census.txt`.
+- A hostile audit separately reproduced the order counts by Burnside counting
+  and found no mathematical gap.  The payload convention is component-canonical
+  rather than globally lexicographically graph6-canonical; this is explicit and
+  does not affect uniqueness or coverage.
+- **Scope:** this freezes only the undirected support universe, not rooted
+  placements or orientations, and is not a branch elimination.
+- **Next queued attack:** enumerate canonical rooted-cell colorings of all 68
+  supports for both B6 capacities `(1,8,6,3)` and B7 capacities `(1,8,7,2)`,
+  forbidding only root-A missing edges.  Require an independent orbit-weight
+  checker before emitting full parent CNFs.
+
+### Complete m=6 rooted-placement cover
+
+- Froze all rooted-cell color orbits of the 68 six-edge supports, imposing only
+  cell capacities and the necessary prohibition on a root-A missing pair.  The
+  cover has 112,220 B6 rows and 75,104 B7 rows, total 187,324; its 6,659,672-byte
+  payload has SHA-256 `22d7744f...966ed5e`.
+- An independent checker reconstructs each full support automorphism group,
+  verifies every representative is the true orbit minimum, verifies its orbit
+  weight, and compares weighted sums with direct raw-coloring counts.  The raw
+  totals are 1,862,693 for B6 and 1,022,346 for B7, including repeated-component
+  symmetries such as the order-46,080 group of `6K2`.
+- Hostile audit found one implementation precondition but no payload defect:
+  the fast producer's component assembly assumes the hashed support census's
+  component-canonical labeling and is not invariant under arbitrary relabeling.
+  This is now explicit in code.  The independent full-group checker is the gate
+  that makes every frozen row genuinely canonical.
+- **Scope:** this is an exact support-placement cover, not an orientation search
+  or branch elimination.
+- **Next queued attack:** apply separately proved placement-only degree filters
+  (especially the B6 requirement that at least three holes meet C through
+  `R-C`, `A-C`, or `C-C`) with an independent rejected-orbit ledger, then emit
+  full B6/B7 parent CNFs for survivors.
+
+### Frozen m=6 rooted-cell placement cover
+
+- Decoded all 68 frozen six-edge supports and enumerated colorings by the four
+  rooted cells `R,A,B,C`, imposing only the stated capacities and the prohibition
+  on `R-A` support edges. Quotienting uses the full automorphism group of each
+  uncolored support, including permutations of isomorphic components.
+- The canonical cover has 187,324 rows: 112,220 in B6 and 75,104 in B7. By
+  support order 4 through 12, the B6 counts are
+  `18,880,8439,26632,37076,26211,10311,2347,306`; the B7 counts are
+  `15,722,6412,18784,24533,16541,6404,1487,206`.
+- The deterministic 6,659,672-byte payload is
+  `experiments/m6-placement-cover.txt`, SHA-256
+  `22d7744f1eecee3ea22527e4beec645ae999c912184f1f23c1a7f701e966ed5e`.
+  Each row includes its raw-coloring orbit weight.
+- A materially separate checker parses the payload, independently reconstructs
+  full support automorphism groups, verifies canonicality and exact orbit size,
+  and counts raw valid colorings directly by constrained backtracking. The orbit
+  weights reproduce 1,862,693 B6 and 1,022,346 B7 raw colorings.
+- Exact commands are documented in `experiments/README.md`; both the original
+  support-census regression and the new producer/checker regression pass.
+- **Scope:** this is a complete rooted-cell placement cover, not an orientation
+  cover, SAT/CNF campaign, branch elimination, or result on SNC. The next step
+  is to add exact present-pair orientations and full order-18 constraints per
+  canonical parent without weakening this cover identity.
+
+### Exact m=6 placement-only filter
+
+- Applied only five proved necessary placement tests to the frozen 187,324-row
+  cover: B-to-A support, per-A outgoing capacity, per-C local capacity, the B6
+  three-C-hole aggregate, and exact existential C-degree feasibility for both
+  branches. Exact formulas and reproduction commands are in
+  `experiments/README.md`.
+- The status artifact is a packed three-bit partition keyed by frozen cover row,
+  not a second copy of the placement rows. A separate checker reparses graph6
+  holes, materializes the omitted vertices to form the full 18-vertex coloring,
+  tests pair presence directly, brute-enumerates C-C directions and C degree
+  targets, verifies reason totals, and verifies the complete ordered partition.
+- The C checks range over every actual C vertex up to the branch capacity,
+  including C vertices isolated from the six-hole support, and orient exactly
+  the present internal C pairs. Frozen row 17 (`B6`, `BCCC`, K4 hole support)
+  is an explicit feasible regression: its three missing C-C pairs are not
+  oriented and its three C vertices may all target degree nine.
+- The filter accepts 76,361 rows and rejects 110,963. First-failure counts are
+  `B_NO_PRESENT_A=0`, `A_OUT_CAPACITY=7`, `C_LOCAL_CAPACITY=0`,
+  `B6_C_HOLES=85134`, and `C_DEGREE_DP=25822`. The 95,083-byte ledger SHA-256 is
+  `9bfd2fadda610dde6cef7c13956edba6b0fa763e2ffc31226c0ddf1323fd1d0c`.
+  By branch, B6 accepts 23,578 and rejects 88,642; B7 accepts 52,783 and rejects
+  22,321.
+- **Scope:** rejection is only by necessary placement conditions. Acceptance
+  asserts no orientation completion, bad local model, or branch feasibility;
+  the filter is not a B6/B7 elimination or an SNC result.
+
+### Full m=6 parent CNF projection
+
+- Added `experiments/m6_parent_cnf.py`, which refuses non-frozen cover/filter
+  payloads and selects either a zero-based accepted ordinal or an accepted
+  original cover index. The mapping is deterministic first-label embedding in
+  each rooted cell, with the distinct B6/B7 boundaries made explicit.
+- Every parent calls the complete order-18 `snc_cnf.generate` model with six
+  missing pairs, robust deletion witnesses, and full arc-minimality, then fixes
+  all 153 semantic hole variables. Six units are positive and 147 negative;
+  comments retain both selectors and the complete support projection.
+- Hardened the checker as a hostile-input gate. It strictly decodes short-form
+  graph6 length, alphabet, and padding; requires metadata in its exact canonical
+  order and set; permits no post-header comments; and requires unique variable
+  names numbered consecutively `1..N`. It reconstructs the selected B6/B7 base
+  and requires exact ordered equality before an exact 153-unit suffix in graph6
+  pair order. Mutation tests alter, delete, append, and reorder both base
+  clauses and units, and cover duplicate names, variable zero/gaps, metadata,
+  post-header comments, selector negatives/bounds, and malformed graph6.
+- Frozen generator fingerprints use `<number> <name>\n` variable records and
+  ordinary DIMACS clause lines. The common 23,616-variable map hash is
+  `cff4c18a4425f26c188790871da51a58b13569764bf89c83d1c736d5f9db070e`.
+  B6 has 142,736 base clauses and hash
+  `22b118674d05045d0a1c8628ccb5b9a7f72fbcd53f6086ecab1b2ab369ca12c1`;
+  B7 has 142,729 and hash
+  `a21d68c9a70642ad15b836d162996779d0b4ee4590a7bccd7f3af54f394341ab`.
+  The harmless units `-1` (`a_0_0`) and `-325` (`q_0_0`) each occur twice in
+  both historical base streams. They are deliberately frozen rather than
+  removed; `snc_cnf.py` is unchanged for compatibility with certified runs.
+- Regression fixtures include accepted ordinal zero, frozen row 17, last B6,
+  first B7, final accepted, order-12 endpoints, and support vertices omitted
+  from cells with hole-isolated full-graph vertices. Direct embedding checks run
+  over all accepted rows and cover every support type/observed occupancy; only
+  five full CNFs are built, avoiding a 76,361-parent test explosion.
+- **Scope:** this is a deterministic parent emitter and exact generator/projection
+  identity gate. It performs no SAT campaign, creates no proof artifact, does
+  not prove clause semantics independently, and does not close either branch.
+
+### Exact m=6 C-layer funnel and scout correction
+
+- The complete scalar notation is now frozen as
+  `lambda=H_RC+H_AC+H_CC`, `q=H_CB`, and `h` equal to holes wholly outside C,
+  so `lambda+q+h=6`.  In B6, summing C degrees gives
+  `highC=6-lambda+e(C,B)`.  Thus `lambda=3` forces `e(C,B)=0` and all three C
+  vertices high.
+- This B6 forced regime has 14,649 canonical rows, partitioned by `(q,h)` as
+  `(0,3):6286`, `(1,2):5541`, `(2,1):2410`, `(3,0):412`.  The analogous large
+  forced B7 regime is exactly `lambda=1`; it has 25,766 rows, `r=0`, and both C
+  vertices high.  Its `(q,h)` cells run from `(0,5)` through `(5,0)`; `h=5`
+  alone is only the 8,847-row `q=0` subcell.
+- A temporary 48-parent solver scout had no certificate status. Hostile audit
+  found that its B6 selector accidentally used `h=3`, selecting only the 6,286
+  rows with `q=0`, rather than all 14,649 rows with `lambda=3`.  The observation
+  is explicitly discarded as branch evidence; no proof object was retained.
+- Full definitions, identities, and the required versioned child-shard contract
+  are in `attempts/tick50-m6-parent-frontier.md`.
+- **Next queued attack:** implement an independently checked `(lambda,r)` child
+  emitter.  Begin with B6 `lambda=3,r=0` and B7 `lambda=1,r=0`, and retain only
+  LRAT-verified outcomes keyed to the exact child CNF hash.
+
+### Versioned forced C-layer children
+
+- Added an exact child gate for the complete B6 `lambda=3` and B7 `lambda=1`
+  regimes.  It inherits the authenticated parent base and 153 hole units, then
+  appends only forced units: every `C->B` arc false and every C degree-nine bit
+  true.  The independent checker reconstructs eligibility and authenticates the
+  ordered parent prefix and complete child suffix.
+- The child manifest has 40,415 rows: 14,649 B6 and 25,766 B7.  It is 1,131,918
+  bytes with SHA-256 `751da64e...cc1950`.  All 68 support types and 353 eligible
+  occupancy classes occur.  B6 children have 142,910 clauses; B7 children have
+  142,898, with the same 23,616-variable map.
+- Eight stratified pilots spanning every B6 `q=0,1,2,3` and B7
+  `q=0,1,3,5` cell produced LRATs accepted by pinned `lrat-check`.  These are
+  operational pilot observations only: the artifacts remain temporary and do
+  not eliminate a child family.
+- A hostile human-proof audit rejected an attempted `q<=1` inference and an
+  attempted exclusion of inaccessible B vertices.  The valid core is narrower:
+  for a low `a in A`, if it acquires `k` exact C second neighbors, at least `k`
+  vertices of `T` are inaccessible from `a`, and each requires a distinct hole
+  crossing from that inaccessible endpoint into `{a} union N_T^+(a)`.  Charges
+  cannot yet be synchronized across different A rows.
+- **Next queued attack:** freeze a content-addressed forced-child campaign and
+  scout all 40,415 rows for proof-size distribution.  Before bulk retention,
+  derive grouping/cube cuts from the exact `(q,h,H_CC)` C-pattern classes so the
+  certificate archive remains repository-sized.
+
+### Human closure of B7 lambda=1, q=0
+
+- Proved that the entire 8,847-parent B7 cell `lambda=1,q=0,r=0` is impossible;
+  see `attempts/tick51-b7-q0-human-proof.md`.  A C vertex with no internal
+  outneighbor has `N+=R union A` and exact `N++=B`; deleting its arc to the root
+  leaves it bad, contradicting arc minimality.
+- Two independent proof routes and a hostile audit verified the exact-distance
+  semantics, the presence of the C-to-root arc, and the deletion inequality.
+  Exhaustive CNF regression independently found all 8,847 contradictions by
+  propagation using only the relevant C-to-root arc-minimality blocks.
+- The residual forced-child campaign now has 31,568 canonical parents: all
+  14,649 B6 parents and B7 `q=1,...,5` totaling 16,919.  This remains only a
+  restricted m=6 frontier, not an order-18 or SNC result.
+- A 200-child checked-LRAT scout found every sampled forced child UNSAT, with
+  projected direct compressed proof storage near 16 GiB.  The leading durable
+  route is therefore selector-grouped certification by `(branch,q,h)`, while
+  human work targets compatibility of saturated inaccessible packets across A
+  rows.
+
+### Frozen residual forced-child selector groups
+
+- Added nine selector-grouped CNFs after removing only the human-closed B7
+  `q=0` cell. They partition exactly 31,568 rows: B6 `q=0,1,2,3` and B7
+  `q=1,2,3,4,5`. The manifest and CNF metadata bind the exclusion to the exact
+  3,055-byte human proof. The 1,611-byte manifest SHA-256 is
+  `6cf29f05bc2d76437c10b8c19e173c6d8c666f8001a3b1504ab1cf108932a29c`.
+- Every group consists of the frozen branch base, common forced C suffix, fresh
+  selectors from 23,617, one ALO, and 153 guarded pair-ordered hole clauses per
+  row. After existentially quantifying the selectors, this is equisatisfiable
+  with the disjunction of member CNFs. A separately implemented checker asserts
+  all member projections are unique, reconstructs the exact stream, and accepts
+  model attribution only after a complete assignment satisfies every clause and
+  has exactly one true selector. Boundary, hostile model, proof-identity, and
+  CNF mutation tests pass.
+- A fresh complete nine-group campaign generated and structurally checked every
+  frozen CNF, solved each with pinned CaDiCaL 1.7.3 in textual LRAT mode, and
+  obtained `c VERIFIED` from pinned `lrat-check` for every proof. Timings use
+  Python `time.monotonic`, not `/usr/bin/time`.
+- The nine `xz -3` artifacts total 9,444,352 bytes and are retained under
+  `certificates/`. Exact uncompressed/compressed hashes, byte counts, stage
+  timings, tool commits, and executable hashes are frozen in
+  `experiments/m6-forced-group-certificates.tsv`. The fresh verifier regenerates
+  and structurally checks every CNF before authenticating, decompressing, and
+  independently checking every durable LRAT.
+- Together with the separately audited B7 `q=0` human proof, this eliminates the
+  full 40,415-row forced-child frontier. It remains a restricted `m=6` result,
+  not by itself an order-18 or SNC theorem.
+
+### Frozen exact residual m=6 selector groups
+
+- Removed exactly the already certified forced regimes B6 `lambda=3` and B7
+  `lambda=1`. The new manifest and every generated CNF bind this exclusion to
+  the committed forced selector manifest, nine-group certificate ledger, and
+  fresh certificate verifier by exact byte counts and SHA-256 identities.
+- Independently enumerating every present internal-C orientation and every
+  pointwise C degree target in `{8,9}` derives the feasible exact pairs
+  `(r,t)=(e(C,B),highC)`. The residual is exactly 23
+  `(branch,lambda,r,t)` groups with 80,974 memberships, split authoritatively as
+  B6=19,911 and B7=61,063; overlap is intentional when one parent admits
+  multiple exact pointwise C states.
+- Each group CNF is the frozen branch base followed by deterministic unary
+  exact-cardinality counters for `r` and `highC`, fresh selectors, one ALO, and
+  exactly 153 pair-ordered guarded hole clauses per member. The independent
+  checker separately derives the C states and reconstructs the entire variable
+  and clause stream.
+- The frozen 3,915-byte manifest is
+  `experiments/m6-residual-selector-groups.tsv`, SHA-256
+  `b55f0b8e69a77b64254285b9134262cedb961e18a13ad10e4ce350bd04caa85a`.
+  All 23 deterministic CNFs are generated, independently reconstructed and
+  checked, and pinned by hash in both producer and checker.
+- Strict attribution rejects partial assignments, contradictory assignments,
+  any falsified clause, and zero or multiple true selectors before reporting a
+  parent. Exhaustive partition, boundary, identity, counter, guard, and hostile
+  mutation tests are in `experiments/test_m6_residual_group_cnf.py`.
+- **Scope at freeze:** the 23 groups were initially a campaign target. Four
+  complete groups have since received durable checked certificates, as recorded
+  below; no claim applies to the other 19 groups.
+
+### Rooted clean-sink theorem over the frozen residual
+
+- Proved the local rooted clean-sink theorem in
+  `attempts/tick52-rooted-clean-sink-theorem.md`: a degree-nine C vertex with
+  zero internal-C and zero C-to-B outdegree dominates `R union A`, has exact
+  second neighborhood B, and remains bad after deleting its root arc,
+  contradicting arc minimality.
+- Exhaustively classified each frozen `(parent,r,t)` membership by enumerating
+  every present internal-C orientation and every compatible pointwise degree
+  assignment. A membership is eliminated only when every realization has a
+  clean sink. This removes 34,810 of 80,974 memberships and leaves 46,164.
+- Memberships are not parents. The eliminated and remaining streams contain
+  17,084 and 18,862 distinct parents, respectively (35,946 total, no mixed
+  parent). Branch membership partitions are B6 `11,072/8,839` and B7
+  `23,738/37,325`, eliminated/remaining.
+- Frozen artifacts are `experiments/m6-clean-sink-eliminated.tsv` (1,705,845
+  bytes, SHA-256 `df4cbe41...f153b6`),
+  `experiments/m6-clean-sink-remaining.tsv` (2,262,190 bytes, SHA-256
+  `416b7e51...f4b642`), and `experiments/m6-clean-sink-manifest.tsv` (2,104
+  bytes, SHA-256 `733e06c8...b53217`). The manifest includes branch and all
+  23 group count rows and binds the unchanged source manifest and theorem.
+- `experiments/check_m6_clean_sink_manifest.py` independently reconstructs all
+  80,974 memberships from the placement cover/filter and reimplements the
+  universal pointwise predicate. Hostile tests cover count, stream, truncation,
+  group movement, duplicate, source-identity, and theorem-identity mutations.
+- **Campaign hygiene and scope:** the clean-sink theorem did not change the
+  frozen 23-group CNFs. Four complete groups were later certified UNSAT; among
+  their 15,310 memberships, 9,304 were already clean-sink eliminated and 6,006
+  came from the clean-sink remaining stream. Other remaining memberships are not
+  claimed satisfiable, and this remains a restricted order-18 `m=6` result.
+
+### First checked residual-group certificates
+
+- Retained independently checked LRATs for four complete frozen groups:
+  `B6-l4-r0-t2`, `B6-l4-r1-t3`, `B6-l5-r2-t3`, and `B7-l6-r3-t0`.
+  They cover 15,310 residual memberships. The exact 23-group CNFs were
+  regenerated and structurally checked before each retained proof was replayed
+  with pinned `lrat-check` and returned `c VERIFIED`.
+- The four `xz -3` artifacts total 23,309,904 bytes. CNF, raw LRAT, and
+  compressed identities, stage timings, and tool hashes are frozen in
+  `experiments/m6-residual-group-certificates.tsv`; complete fresh readback is
+  `experiments/verify_m6_residual_group_certificates.py`.
+- This certification subsumes the clean-sink disposition for those four groups
+  but does not alter the theorem's exact stream audit. Nineteen residual groups
+  remain uncertified; no order-18 or SNC closure is claimed.
+
+### Exact clean-sink remaining parent selector groups
+
+- Exploited the independently verified zero-mixed-parent fact to project the
+  46,164 clean-sink remaining memberships to exactly 18,862 unique parents.
+  Grouping only by `(branch,lambda)` gives eight groups with counts B6
+  `l4=2470,l5=1024,l6=220` and B7
+  `l2=8119,l3=5016,l4=1649,l5=322,l6=42`.
+- Each deterministic CNF is exactly its frozen 23,616-variable branch base,
+  one selector per unique parent, one ALO, and 153 pair-ordered guarded hole
+  clauses per parent. It deliberately has zero `r`/`highC` counter variables
+  and clauses: each surviving parent encompasses every feasible state and the
+  clean-sink theorem removed whole parents rather than selected states.
+- Every manifest/CNF binds the clean-sink remaining stream, partition manifest,
+  theorem report, and prior forced certificate ledger/verifier/selector
+  manifest by exact byte count and SHA-256. The 1,838-byte eight-group manifest
+  is `experiments/m6-clean-sink-selector-groups.tsv`, SHA-256
+  `6e7eee0ddd5b4c7ef02cdf459c9a0647f720513e7ee4987a3a8b0c17af37eeda`.
+- `experiments/check_m6_clean_sink_group_cnf.py` independently reparses the
+  clean stream and cover/filter, establishes the exact parent projection and
+  no-mixed property, reconstructs the immutable base/ALO/all guards, and only
+  attributes complete satisfying models with exactly one selector. The
+  regression emits and checks all eight hashes and mutates both branch bases,
+  ALO, guards, metadata, selector names, and all six bound identities.
+- Exact `(parents,variables,clauses)` dimensions are B6-l4
+  `(2470,26086,520647)`, B6-l5 `(1024,24640,299409)`, B6-l6
+  `(220,23836,176397)`, B7-l2 `(8119,31735,1384937)`, B7-l3
+  `(5016,28632,910178)`, B7-l4 `(1649,25265,395027)`, B7-l5
+  `(322,23938,191996)`, and B7-l6 `(42,23658,149156)`.
+
+### Complete clean B7-l5 root-cardinality certificates
+
+- Certified all 53 frozen exact C-state/`S7(B)` profiles spanning all 322 clean
+  `B7-l5` parents. Pinned CaDiCaL 1.7.3 emitted textual LRAT for every profile,
+  and pinned `lrat-check` accepted all 53 with `c VERIFIED`.
+- The exact package totals 573,429,055 CNF bytes, 1,004,531,865 raw LRAT bytes,
+  and 121,021,160 retained `xz -3` bytes. The strict certificate ledger is
+  `experiments/m6-b7-l5-profile-root-cardinality-certificates.tsv`; fresh replay
+  is `experiments/verify_m6_b7_l5_profile_root_cardinality_certificates.py`.
+- The canonical ledger and verifier reciprocally pin one another and bind the
+  manifest, CNF hashes, 53-result scout, all direct campaign files, and every
+  transitively imported local Python source. Hostile tests reject profile/order,
+  path, counter, and source-binding mutations.
+- `experiments/verify_m6_b7_l5_profile_root_cardinality_closure.py` independently
+  composes 322 parents, 30 states, 1,920 state/parent incidences, all 53 row-pair
+  intersection orbits, and 3,387 profile/parent incidences. This closes exactly
+  the frozen clean `B7-l5` parent campaign and no broader branch.
+
+### Complete clean B7-l4 root-cardinality certificates
+
+- Certified all 40 scout-UNSAT exact C-state/`S7(B)` profiles frozen at
+  `e0419f0`, spanning all 1,649 clean `B7-l4` parents. Pinned CaDiCaL 1.7.3
+  emitted textual LRAT for every profile, and pinned `lrat-check` accepted all
+  40 with `c VERIFIED`.
+- Exact totals are 462,367,384 CNF bytes, 1,713,258,694 raw LRAT bytes, and
+  242,442,740 retained `xz -3` bytes. The package ledger splits artifacts into
+  90,679,000, 85,516,660, and 66,247,080 bytes, all strictly below the exclusive
+  250,000,000-byte cap.
+- The canonical ledger/verifier pair binds the frozen inputs, exact artifacts,
+  all campaign tools, and every transitively imported local Python source.
+  Hostile tests reject profile/order, path, counter, and runtime mutations.
+- The closure verifier composes 1,649 parents, 28 states, 10,036 state/parent
+  incidences, all 40 row-pair orbits, and 14,464 profile/parent incidences. This
+  closes exactly the frozen clean `B7-l4` parent campaign and no broader group.
+
+### Checked clean-sink B6-l4 certificate
+
+- Regenerated the exact clean-sink `B6-l4` CNF from the frozen selector
+  manifest/theorem/remaining stream and independently checked its canonical
+  shape: 2,470 parents, 26,086 variables, and 520,647 clauses.
+- Pinned CaDiCaL 1.7.3 returned UNSAT and emitted a textual LRAT; pinned
+  `lrat-check` returned `c VERIFIED`. The durable `xz -3` proof is
+  `certificates/m6-clean-sink-B6-l4.lrat.xz`.
+- `experiments/m6-clean-sink-B6-l4-certificate.tsv` records exact source, tool,
+  CNF, LRAT, and compressed identities. The strict fresh verifier is
+  `experiments/verify_m6_clean_sink_B6_l4_certificate.py`.
+- This certifies only the complete clean-sink `B6-l4` group. The other seven
+  clean-sink groups retain no SAT/UNSAT claim here.
+
+### Exact 57-shard clean-sink partition
+
+- Excluded the certified 2,470-parent `B6-l4` group and partitioned all 16,392
+  parents in the seven uncertified groups first by `(q,H_CC)`, then by the
+  canonical balanced consecutive split with cap 500. The 35 cells produce
+  exactly 57 shards; within each split cell sizes differ by at most one.
+- `experiments/m6-clean-sink-balanced-shards.tsv` is the complete member
+  manifest (8,414 bytes, SHA-256
+  `20f6d04a9e8ca0662efd011ead7804402d3c0dd21e025311cb4485fae8403fdb`).
+  It binds the clean stream/parent and partition manifests, clean-sink and
+  partition theorems, and the excluded B6-l4 certificate ledger/verifier.
+- `experiments/m6-clean-sink-balanced-shard-hashes.tsv` records all 57 exact
+  CNF dimensions and hashes (5,972 bytes, SHA-256
+  `46045d216f32a22b1d618910c4e3fc5528c700b34277be2e17eab89e6ccae125`).
+  The independent checker reconstructs the full disjoint cover and every CNF;
+  the exhaustive regression emits and hashes every shard and tests complete
+  model attribution plus hostile base, ALO, guard, metadata, selector, and
+  bound-identity mutations. No shard was solved and no new theorem is claimed.
+
+### Checked clean-sink B6-l5 H_CC=2 shards
+
+- Regenerated and independently structurally audited exact balanced shards 02
+  (`q=0,H_CC=2`, 78 parents) and 05 (`q=1,H_CC=2`, 26 parents).
+- Pinned CaDiCaL 1.7.3 returned UNSAT with textual LRAT for both shards, and the
+  pinned independent `lrat-check` returned `c VERIFIED` for each proof.
+- The durable `xz -3` proofs total 943,048 bytes. Exact tool, manifest, theorem,
+  producer/checker, CNF, LRAT, and artifact identities are frozen in
+  `experiments/m6-clean-sink-B6-l5-HCC2-certificates.tsv`; strict fresh replay
+  is `experiments/verify_m6_clean_sink_B6_l5_HCC2_certificates.py`.
+- The post-audit proof report is
+  `attempts/tick54-clean-sink-B6-l5-HCC2-certificates.md`. This closes exactly
+  104 `B6-l5,H_CC=2` parents and makes no claim for the other 55 shards.
+
+### Exact B7-l6 30-leaf state split and scout
+
+- Refined only the committed clean-sink `B7-l6` group: 42 unique parents. Each
+  exact state records the ordered parent root/A-hole vector for C16,C17, the
+  internal C state, the exact high mask, and separate C16-to-B/C17-to-B counts.
+  Removing precisely the clean-sink states already excluded by the theorem
+  leaves 30 state classes and 260 parent/state incidences, covering all 42
+  parents (parent incidence multiplicities are 16x4, 6x6, and 20x8).
+- Each leaf is the immutable 23,616-variable B7 base plus two existing-style
+  seven-input unary counters (56 variables total), three state units, fresh
+  parent selectors, one ALO, and exactly 153 guarded hole clauses per selected
+  parent. Selectors guard no state literal and are guarded only to parent holes.
+- `experiments/m6-b7-l6-state-split.tsv` is the 4,382-byte frozen manifest,
+  SHA-256 `a3b8f9d17b50dbfccd5f00740b33c6e90f6f10d26a3854dd627a45681e5c890e`.
+  The 3,163-byte complete CNF hash ledger is
+  `experiments/m6-b7-l6-state-leaf-hashes.tsv`, SHA-256
+  `eec464838f7d01e6cf053c7cbf8fa1442068d78738f4bd2772b15a8417543ae4`.
+- The independent checker reconstructs the clean parents from the frozen stream
+  and cover/filter, derives all states without importing the producer, proves
+  the 42-parent/260-incidence cover, and reconstructs every base, unit, counter,
+  selector ALO, and hole guard. Exhaustive tests emit/check/hash all 30 CNFs and
+  reject state, base, selector, and complete-model attribution mutations.
+- After that gate passed, a 30-second-per-leaf CaDiCaL scout returned 11 UNSAT
+  and 19 TIMEOUT leaves (90 and 170 incidences respectively), with zero SAT.
+  The exact solver/run record is
+  `experiments/m6-b7-l6-state-scout-30s.json` (6,948 bytes, SHA-256
+  `69c1d56145ec2544702717b252bd1e3796c882c68ca95023488b959e2af2f763`).
+- The eleven scout-UNSAT leaves were subsequently regenerated, structurally
+  checked, solved in LRAT mode, and replayed with pinned `lrat-check`; all eleven
+  returned `c VERIFIED`. Their durable compressed proofs certify exactly 90
+  parent/state incidences. The other 19 leaves, containing 170 incidences,
+  remain uncertified TIMEOUT frontier and are not claimed SAT or UNSAT.
+- Exact CNF/LRAT/xz identities and source bindings are in
+  `experiments/m6-b7-l6-state-certificates.tsv`; fresh replay is
+  `experiments/verify_m6_b7_l6_state_certificates.py`.
+
+### B7-l6 hard-state C-to-B subset-intersection orbit refinement
+
+- Refined only the 19 uncertified committed B7-l6 hard state leaves, containing
+  exactly 170 parent/state incidences. For each state, the simultaneous `S7(B)`
+  orbit of the two exact C-to-B subsets is classified by their intersection
+  size `t`. The exact result is 42 selector-batched orbit leaves and 392
+  parent/orbit incidences; no certified state leaf was reopened.
+- Each CNF keeps the immutable 23,616-variable B7 base and prior three state
+  units, replaces the two unary counters by all 14 signed C-to-B arc units for
+  a canonical orbit representative, and adds parent selectors, one ALO, and
+  153 guarded hole clauses per parent. Dimensions are `(23622,143665)` for the
+  seven six-parent leaves and `(23626,144277)` for the 35 ten-parent leaves.
+- `experiments/check_m6_b7_l6_hard_orbits.py` independently reconstructs the
+  hard frontier and explicitly applies all 5,040 labelled `S7` permutations.
+  It verifies the complete disjoint subset-pair orbit cover, reconstructs every
+  CNF, checks all hashes, and enforces complete exact-one-selector model
+  attribution. Exhaustive tests also reject intersection, subset, arc-unit,
+  selector, partial-model, and multiple-selector mutations.
+- The 5,533-byte manifest `experiments/m6-b7-l6-hard-orbits.tsv` has SHA-256
+  `6c1080c6f97f92e68a9de6bc762145ceac9086f0b87dc4aa4ed73a746861b2d4`.
+  The 4,025-byte complete 42-CNF ledger
+  `experiments/m6-b7-l6-hard-orbit-hashes.tsv` has SHA-256
+  `83fe978c89f6f0c7901924123a322d42c2f31a1a15e931cdb30e861e31497030`.
+- After the exhaustive gate passed, a pinned CaDiCaL 1.7.3 20-second-per-orbit
+  scout returned 14 UNSAT and 28 TIMEOUT leaves, representing 140 and 252
+  parent/orbit incidences, with zero SAT. The 11,413-byte record
+  `experiments/m6-b7-l6-hard-orbit-scout-20s.json` has SHA-256
+  `32fa8260e2efb3cc326bafc2ce2d375ec84bf77ebb2fb5f9efd96b5b995ef31a`.
+  No LRAT was requested or retained during the scout.
+- Subsequently regenerated and structurally checked exactly those 14
+  scout-UNSAT leaves, solved them with pinned CaDiCaL 1.7.3 in textual LRAT
+  mode, and replayed every proof with pinned `lrat-check`; all returned
+  `c VERIFIED`. The 14 durable `xz -3` artifacts total 94,639,000 bytes and
+  certify exactly 140 parent/orbit incidences. The other 28 leaves, containing
+  252 incidences, remain uncertified TIMEOUT frontier.
+- Exact CNF/LRAT/xz identities and strict bindings for the orbit manifest,
+  complete CNF hash ledger, scout, producer/checker, prior state layer, and
+  clean-sink sources are in
+  `experiments/m6-b7-l6-hard-orbit-certificates.tsv`; fresh replay is
+  `experiments/verify_m6_b7_l6_hard_orbit_certificates.py`.
+
+### B7-l6 hard-orbit robust-witness refinement
+
+- Refined only the 28 committed hard-orbit TIMEOUT leaves, containing 252
+  parent/orbit incidences. For each high C deletion `c`, selected a robust
+  witness from `B \\ N+(c)` or from the other C vertex exactly when its fixed
+  internal arc points into `c`.
+- Quotiented simultaneous ordered witness tuples by the full stabilizer of the
+  already fixed ordered C-to-B subset pair. Explicit enumeration gives 117
+  canonical witness leaves and 1,066 parent/witness incidences. This is a
+  complete existential ALO cover; leaves may overlap when a graph has multiple
+  witness tuples, but the disjunction is equisatisfiable with the parent.
+- `experiments/check_m6_b7_l6_hard_witness_orbits.py` independently enumerates
+  all 5,040 labelled `S7` permutations, filters each exact stabilizer, proves
+  the labelled tuple orbits disjoint and complete with lexicographically minimal
+  representatives, and reconstructs all CNFs and hashes without importing the
+  producer. Mutation tests reject witness, orbit-size, cover, and unit changes.
+- The 7,151-byte manifest has SHA-256
+  `0329c78e2f563670c623206daf8b6b143c3813eac2f50d5e6f7c12b6b791186a`;
+  the 11,078-byte complete 117-CNF hash ledger has SHA-256
+  `d38e453e802408fb61b0c8f91641f16e231cfbec875993256b8dfe5acfa59513`.
+- A pinned CaDiCaL 1.7.3 20-second-per-witness-leaf scout returned 117 TIMEOUT,
+  zero SAT, and zero UNSAT, covering all 1,066 incidences. The 48,447-byte
+  scout record has SHA-256
+  `1452d679f8cbb12350ec37564f69303fdbc04b3cecf1c037d66f99d8e72d1a3a`.
+  No proof was requested or retained, and no SAT or UNSAT claim is made.
+
+### B7-l6 hard-witness exact no-gain child layer
+
+- Added exactly one no-gain child for each of the 117 committed witness leaves;
+  the layer still represents exactly 1,066 parent/witness incidences. No gain
+  midpoint refinement was generated; gain leaves remain out of scope.
+- For each ordered robust witness `(w,c)`, the child adds every negative unit
+  `-p_w_k_c` with `k` distinct from `w,c`: 16 units for a one-high-C leaf and
+  32 for a two-high-C leaf. There are 12 leaves of the first kind and 105 of
+  the second. The immutable variable maps and selector batches are unchanged.
+- `experiments/check_m6_b7_l6_hard_witness_no_gain.py` independently derives
+  the frozen witness frontier, reconstructs every source CNF and all 16/32 path
+  units, checks dimensions and the complete CNF hash ledger, and validates the
+  committed scout row by row. Tests reject source-hash, unit-count, gain-scope,
+  and path-unit mutations.
+- The 6,831-byte manifest has SHA-256
+  `a464607da5ca77da9beb4d5634ea5bc51036f44cad3f22354abfae0da9fe83f4`;
+  the 11,440-byte complete 117-CNF hash ledger has SHA-256
+  `35ceea03f8b3f9d4cc054da5c3114e8fa9b04d1955f2a9bf64b163750fccab90`.
+  Both bind the source witness manifest, source hash ledger, source scout, and
+  prior hard-orbit certificate ledger by byte count and SHA-256.
+- A reproducible pinned CaDiCaL 1.7.3 20-second-per-leaf scout returned exactly
+  75 UNSAT and 42 TIMEOUT, with zero SAT, representing 686 and 380 incidences.
+  The 48,487-byte committed scout has SHA-256
+  `43bf624d24ca9459bf4de999385ed27367392a174aba46fe95b0773e6d1d7a64`.
+  No LRAT was requested or retained, so the UNSAT results remain scout results,
+  not certificate claims.
+
+### B7-l6 hard-witness compact positive-gain child layer
+
+- Added exactly one positive-gain child to each of the 117 committed witness
+  leaves, preserving all 1,066 parent/witness incidences. The child is one ALO
+  over all path variables of the selected robust witness arcs: width 16 for the
+  12 one-high-C leaves and width 32 for the 105 two-high-C leaves.
+- Together with the committed exact no-gain child this is a complete disjoint
+  split. Writing the positive ALO as `P = OR X`, the no-gain units are exactly
+  `NOT P = AND {-x : x in X}`. Exhaustiveness is `P OR NOT P`; disjointness is
+  the propositional contradiction `P AND NOT P`. The independent checker binds
+  source key, ordered witnesses, and the full literal set row by row.
+- `experiments/check_m6_b7_l6_hard_witness_positive_gain.py` independently
+  derives all source leaves and reconstructs every positive CNF and all 117
+  no-gain sibling CNFs without importing either child producer. It verifies the
+  negative units as literalwise ALO complements and pins the exact scout status
+  sequence, totals, UNSAT ordinals, and solver fields. Exhaustive tests apply
+  hostile polarity, substitution, omission, and duplication mutations to both
+  sides, plus witness and source binding mutations.
+- The 7,616-byte manifest has SHA-256
+  `eb0021165e41b9912c92abde3f4b26890075b0faafbabb0ced579ad6bb372ab8`;
+  the 11,695-byte complete 117-CNF hash ledger has SHA-256
+  `57a146838c09dca90e83e1ca19a504967199f3fde15f330769f8867a2068552e`.
+- A sequential pinned CaDiCaL 1.7.3 20-second-per-leaf scout returned exactly
+  3 UNSAT and 114 TIMEOUT, zero SAT, representing 30 and 1,036 incidences. The
+  UNSAT ordinals/keys are 042/`o15-w01`, 095/`o37-w00`, and 097/`o37-w02`.
+  The 53,533-byte scout record has SHA-256
+  `f5ed09b7134a3315a37d20db786fdd7d1675b1edc0ab6ef0969655fb7a6802f7`.
+- Generated exactly three textual LRAT certificates, one for each frozen
+  scout-UNSAT leaf,
+  with pinned CaDiCaL 1.7.3; pinned `lrat-check` accepted all three. Their
+  `xz -3` artifacts total 35,233,748 bytes, below the strict exclusive
+  250,000,000-byte bound, and certify exactly 30 incidences.
+- The strict ledger/verifier binds the positive-gain manifest, complete CNF
+  hash ledger, scout, producer, independent structural/partition checker,
+  scout source, tests, certificate producer, pinned tools, and committed
+  no-gain complement manifest/certificate ledger. Fresh replay regenerates and
+  checks each CNF, authenticates/decompresses each LRAT, and invokes the pinned
+  checker. The other 114 positive-gain leaves remain uncertified.
+
+### B7-l6 sound residual coordinate cover
+
+- Reconstructed all 117 frozen witness sources. The three ancestor certificates
+  close three sources. Each of the eight coordinate LRATs closes only the CNF
+  for that coordinate child; it does not close the child's source. The residual
+  source is its uncertified sibling. The exact remainder is therefore 114
+  sources and 1,036 parent incidences.
+- For each unresolved source, retained one representative when a coordinate CNF
+  is source-equivalent by fixed-unit or structural implication; otherwise
+  retained every uncertified coordinate child. This gives a complete sound
+  residual cover of 153 leaves and 1,382 memberships, including the eight
+  restored sibling keys `o03-w01-c16`, `o03-w04-c16`, `o17-w01-c16`,
+  `o17-w04-c16`, `o33-w01-c16`, `o33-w04-c16`, `o41-w03-c17`, and
+  `o41-w04-c17`.
+- The cover consists of 18 tautological representatives, 42 structural
+  representatives, and 93 proper B-reduced coordinate children. Proper children
+  are normalized only by an exact fixed-unit reduction of their coordinate ALO;
+  no merely easier or stronger child is substituted for its source.
+- `experiments/check_m6_b7_l6_hard_witness_positive_gain_coordinate_residual_cover.py`
+  independently reconstructs each source ALO as the disjunction of its complete
+  coordinate ALOs, applies exactly three ancestor and eight child certificate
+  eliminations, and proves the retained clauses are the resulting source cover.
+  Tests regenerate all 153 CNFs, require all eight siblings, and reject hostile
+  disposition, midpoint, and polarity mutations.
+- The residual manifest, hash ledger, complete 15-second scout result, and their
+  hashes are regenerated together. Their byte counts/SHA-256 values are
+  13,269/`ed2f787c0a10ecb5663479db61446ce36bfb5d75cc39bb3f48e2bb8cddf79706`,
+  17,655/`785268882c06117261f99ab6efabd4e4d61ce9565dc5c87a08273ed47607c96a`,
+  and 62,234/`ca3c2802eccef1e1953973a0f187563c571cc2eb049d88c07cc360a93b569bd1`.
+  The pinned CaDiCaL 1.7.3 scout returned 153 TIMEOUT, zero SAT, and zero
+  UNSAT, covering all 1,382 memberships. These are capped solver results, not
+  certificate claims.
+
+### B7-l6 exact singleton-parent residual split
+
+- Split the committed 153-leaf/1,382-membership sound residual cover into
+  exactly 1,382 CNFs, one per membership. Each CNF is the canonical residual
+  leaf plus one positive unit selecting its exact parent selector; there is no
+  grouping, parent substitution, or additional semantic strengthening.
+- The independent checker reconstructs the 153 residual leaves from frozen
+  ancestry, certificates, and hashes, then proves for every leaf that each
+  selector occurs exactly once, the parent-selector ALO is exhaustive, and
+  distinct selectors are disjoint because their complete guarded six-hole
+  projections differ. The parent census is 37 leaves with six parents and 116
+  leaves with ten parents, totaling 1,382 memberships.
+- The singleton manifest directly binds the committed residual manifest/hash
+  ledger and producer/checker plus the coordinate, positive-gain, no-gain,
+  witness-orbit, and state certificate ledgers. Its size/hash is
+  207,703/`953f94ea423c3cd573a3e9bce43ba9fb4d5d6fa80ac2ac1426e7129e6435c0c5`.
+  The 1,382-row CNF hash ledger is
+  181,371/`92929a37dd392cb70161f4ee15fb351d7381cd078fb05734b42babb3cda82bec`.
+- A pinned CaDiCaL 1.7.3 scout ran every membership for five seconds with
+  exactly two recorded jobs, 691 memberships per job. Exact statuses/yields
+  are SAT 0, UNSAT 127, TIMEOUT 1,255. UNSAT solver time sums to 21.848 seconds;
+  TIMEOUT solver time sums to 6,284.754 seconds. The scout ledger is
+  487,540/`c6b506308b52f93214b708fb03053a8f1502d085d13ab751b90fca2ee246efc2`.
+- Tests regenerated and hashed all 1,382 singleton CNFs, independently parsed
+  all six disposition/parent-count shapes, and rejected parent-ordinal,
+  selected-selector, and selector-unit-polarity mutations. No LRAT was
+  generated or retained, and no commit was made; the 127 UNSAT statuses are
+  scout yields only and make no certificate claim.
+- Campaign hardening freezes the scout's exact 1,382-entry status sequence
+  (sequence SHA-256
+  `1c820b0de4e79a0ac355e9603566eca4a77eedf84f15989a124bdccbb30fbf82`),
+  exact SAT/UNSAT/TIMEOUT totals and membership incidences `0/127/1255`, scout
+  bytes/hash, pinned solver path/bytes/hash/version, five-second timeout, two
+  jobs, modulo-two assignment with 691 memberships per job, and status-aware
+  finite timing bounds. The hash ledger now requires its exact canonical ASCII
+  TSV framing; the scout requires exact canonical ASCII JSON framing.
+- Hostile regressions reject SAT injection, equal-total status swaps, scout-byte
+  changes, per-row CNF hash changes, solver path/bytes/hash/version changes,
+  job-count and job-assignment changes, sub-timeout TIMEOUT timing, and hash
+  ledger format/header/noncanonical-hash mutations. Final support-script
+  byte-count/SHA-256 values are checker
+  11,558/`d3ec4e8a2c56ffd4c326ea452d8e3adc6f182b625d65c92d0d01d2cea987bf13`,
+  producer
+  9,968/`a4e2f2413d29a2b927f5c440eeaddb1c11e975acca58097f1d98fbc39586dc2d`,
+  scout producer
+  4,732/`7c4d0c49f02bc1aec6e94c2a78ede5458e20bc52a04781eed6f94732f9d0b4ac`,
+  and tests
+  5,262/`65c60b70ad0abadfc3c3b1f7b04a67e8e05c9e3cf6c4e3e6f3d3a676bfb8c75b`.
+
+### Complete clean B7-l2 parent-chunk certificates
+
+- Bound the exact four-profile, 8,119-parent chunk cover frozen at `721249a`:
+  163 ordered cap-50 chunks per profile, 652 leaves total, and 32,476
+  profile/parent incidences. The chunks are disjoint and exhaustive within each
+  profile and compose to the complete clean `B7-l2` parent campaign.
+- Pinned CaDiCaL 1.7.3 generated textual LRAT for every frozen scout-UNSAT
+  leaf, and pinned `lrat-check` accepted all 652 before staging. The retained
+  `xz -3` corpus totals 4,409,362,076 bytes.
+- The package ledger splits the ordered corpus into 52 consecutive packages;
+  every package is strictly below the exclusive 90,000,000-byte cap and is
+  bound by the hash of its complete ordered artifact-identity set.
+- The strict certificate ledger and verifier reciprocally pin one another and
+  bind the `721249a` commit/tree, cover manifest, CNF hashes, scout, all direct
+  tools, and the complete transitive local Python runtime. Full verification
+  authenticated all 652 compressed and decompressed LRAT identities.
+- Representative fresh replay regenerated, structurally audited, and checked
+  the first and last chunk of every profile (leaves 000, 162, 163, 325, 326,
+  488, 489, and 651). The independent closure verifier then proved the exact
+  652-leaf/8,119-parent composition. Details are in
+  `attempts/frozen-b7-l2-parent-chunk-certificates.md`; no broader group or
+  Seymour claim is made, and no commit was made.
+
+### B7 singleton-parent scout-UNSAT certificates
+
+- On committed base `b7cdeff6816fd29eedc9633aea7d7adb949d55a5`, certified
+  exactly the 127 singleton memberships marked UNSAT by the frozen five-second,
+  two-job scout. The other 1,255 memberships remain TIMEOUT; there were zero
+  SAT statuses, and no membership outside the exact ordered scout-UNSAT set is
+  claimed.
+- Pinned CaDiCaL 1.7.3 at source commit
+  `38e073b389a877b0a0d3c91136d2443ab95fdeba` produced textual LRAT with
+  `--lrat --no-binary`; pinned `lrat-check` at
+  `2e3b2dc0ecf938addbd779d42877b6ed69d9a985` accepted all 127 proofs with
+  `c VERIFIED`.
+- The generated corpus totals 1,320,445,141 CNF bytes, 909,397,178 raw LRAT
+  bytes, and 61,646,844 `xz -3` bytes. The retained compressed total is strictly
+  below the exclusive 250,000,000-byte limit.
+- The canonical ledger and verifier mutually pin one another; their canonical
+  and ordinary file hashes are reported by the final replay. The verifier
+  computes and freezes its 22-file local Python runtime import closure and the
+  ledger directly binds every source used from singleton verification through
+  CNF production and structural checking. This includes `m6_parent_cnf.py`,
+  `check_m6_parent_cnf.py`, and all coordinate, witness, orbit, state,
+  clean-sink, residual-group, and `snc_cnf.py` dependencies.
+- The ledger also identity-binds ancestor certificate ledgers, verifiers, and
+  artifacts, but does not recursively execute ancestor verifiers. Its fresh
+  proof claim is narrowly and exactly the 127 singleton LRATs; ancestor
+  certificates are authenticated reconstruction inputs. Fresh replay
+  regenerates and structurally checks all scoped CNFs, authenticates and
+  decompresses every proof, matches all raw hashes, and reruns `lrat-check`.
+  Hostile tests cover canonical pins, dependency identity, artifact path/set,
+  row identity, exact scout status/order, and the exclusive compression limit.
+  No commit was made.
+
+### B7 exact grouped singleton-certified residual
+
+- Measured the current committed singleton certificate ledger and verifier as
+  72,132 bytes / `bdad79d2...0b48ca3d` and 16,978 bytes /
+  `ca3205e9...55e2d08`; the grouped producer refuses any other identities.
+- Removed exactly the 127 checked singleton-certificate disjuncts from their
+  frozen 153 residual leaves. Because each certificate proves its exact parent
+  singleton UNSAT, deleting those and only those false disjuncts preserves each
+  frozen leaf disjunction. All leaves remain nonempty.
+- Replaced the old full parent-selector layer rather than layering selectors:
+  remove its ALO and all guards, then add one surviving ALO, pairwise AMO, and
+  153 exact guarded projection clauses per survivor. The campaign has 1,255
+  selectors with widths `1x1,3x2,2x3,38x4,109x10`.
+- The independent checker does not import the grouped producer. It reparses the
+  checked certificate scope and separately reconstructs source leaves, parent
+  embeddings/projections, removed selector layer, exact-one replacement, all
+  metadata, and every CNF hash. Hostile tests mutate ALO, AMO, projection
+  polarity, selector names, bound identities, certificate scope, and scout.
+- Manifest/hash-ledger identities are 12,775 /
+  `188efce389bbfcca54e6b6d5f881de3d9ae1603f2ecf7d671592abeabc1cd7f1`
+  and 16,431 /
+  `f4cc9738c0a5f40ed2fb213358a7025c72bd9d358d8bc694ad009b6743d93148`.
+- A pinned sequential CaDiCaL 1.7.3 scout ran every leaf for 20 seconds. Leaf
+  129 (width two) returned UNSAT in 12.291 seconds; all other 152 leaves timed
+  out and none returned SAT. The 33,769-byte scout is
+  `0729870deced23f34e87866dea86faac6aafc7740168230c54348b3778f53112`.
+  The other 152 statuses remain scout TIMEOUTs and carry no claim.
+- Retained and freshly replayed leaf 129's textual LRAT. The `xz -3` artifact is
+  15,420,984 bytes with SHA-256
+  `f4387b4de1e4968f17d4031fc73e8286224145cb0ff00b66acae6c3a2088dcec`;
+  its exact CNF is 10,382,345 bytes with SHA-256
+  `e89b0f74972ee8f76f0cda2227523516933f10b13b914b18193beec97ccc664f`.
+- Audit hardening now requires exact old-selector guard count, selector-major
+  and pair order, and literal identity. The strict one-row certificate parser
+  requires canonical metadata order, every exact field/hash, and the sole exact
+  row. Its mutual pin covers the hostile certificate test and exact 22-source
+  transitive runtime closure; mutations of row fields, framing, source identity,
+  and artifact path are rejected.
+- This closes the complete frozen `s28-t0` state: no-gain `o37-w00/w01/w02`
+  were already certified; positive-gain `o37-w00/w02` were already certified;
+  positive-gain `o37-w01` has only the complete `o37-w01-c16` residual, whose
+  grouped survivors 1142 and 1144 are exactly leaf 129 and are now certified.
+  Scope remains only this frozen B7 hard-orbit/state refinement. No other
+  grouped leaf, B7 state, branch, or full Seymour claim follows. No commit was
+  made.
+
+### B7 grouped B-reduced width-two exact partition
+
+- Selected exactly the 15 grouped scout-TIMEOUT leaves whose frozen coordinate
+  disposition is `b-reduced` and whose reduced path ALO has width two. Certified
+  grouped leaf 129 is not in the scope and is explicitly excluded. The selected
+  source ordinals are 000, 002, 004, 006, 008, 010, 012, 014, 016, 022, 024,
+  026, 033, 067, and 071.
+- Split every source with path variables `x,y` and source clause `x OR y` into
+  the two disjoint children adding unit `x` and unit `NOT x`. Their union is the
+  source because the latter child plus `x OR y` implies `y`. This gives exactly
+  30 children while retaining each source's grouped selector ALO, pairwise AMO,
+  selector names, and all guarded parent projections unchanged.
+- The independent checker separately reconstructs all frozen grouped sources,
+  requires their exact B-reduced binary ALO, proves the paired `x`/`NOT x`
+  partition, checks unchanged source clauses/selectors, and reports every exact
+  path variable and its two directed arcs. It also pins the complete scout byte
+  count and SHA-256 and requires the exact all-30-TIMEOUT status sequence and
+  totals (status-sequence SHA-256
+  `9f2d19fb7801da4c7e15d08c92e8abce897ad315bce4ffb3214059fb9f73e59c`).
+  Hostile tests reject split-polarity, split-variable, path-arc metadata,
+  selector-guard, scout-status, Boolean/short timing, row-hash, and
+  scout-byte/hash mutations.
+- Manifest and hash-ledger identities are 3,791 /
+  `59c0f1f2dfbda4fa5f28212996c60e99fbc57635b15929f9c9d9c62f2815544a`
+  and 3,598 /
+  `2fd92c67a960223bdf6f7981f2914fac8413df85571c0413bfc1aec9280288b1`.
+  The 8,393-byte pinned 20-second scout is
+  `73cb4a5d3040764da9c9efb752136f7f1e86224e16819ae54228e5b7b666c901`.
+- Pinned CaDiCaL 1.7.3 returned TIMEOUT on all 30 children (zero SAT and zero
+  UNSAT). These are capped scout results only; no certificate was generated or
+  retained, no mathematical closure is claimed, and no commit was made.
+
+### Frozen grouped `q` split audit
+
+- Audited the proposed `q`/`not q` split on grouped leaves 000, 022, 038, 065,
+  and 128 before producing campaign artifacts. Here `q_w_d` means that `d` is
+  an exact second neighbor of `w`, so the base encoding contains
+  `q_w_d -> not a_w_d`. Each source also fixes `wit_w_d`, and the robust-witness
+  encoding contains `wit_w_d -> a_w_d`. Hence every source propositionally
+  implies `not q_w_d`.
+- The positive-`q` side is empty and the negative-`q` side is the unchanged
+  source, so this is not a genuine nontrivial partition. No misleading
+  ten-child campaign, manifest, hashes, scout, or certificates were created.
+  The direct simplification and exact five-leaf audit are recorded in
+  `attempts/frozen-grouped-q-split-audit.md`. No broader closure is claimed and
+  no commit was made.
+
+### Frozen B7-l6 ordered C-to-B `(3,1)` elimination
+
+- Built a new campaign directly on the immutable B7 base for ordered C row
+  sizes `(3,1)`, internal arc `17>16`, high mask `10`, and both complete
+  intersection orbits `t=0,1`. It imports no state, witness, coordinate, or
+  gain/no-gain units.
+- Exhaustively reconstructed all 42 committed `B7-l6` parents from the bound
+  placement cover/filter and clean parent stream. Direct rooted-cell degree
+  accounting leaves exactly ten compatible parents for the profile and rejects
+  the other 32. Their canonical payload SHA-256 is
+  `0062dc3e08d197650e7f1e23e07e98746901c62786327c7521c2a5b458d83dc2`;
+  each grouped CNF contains the exact ten-way support ALO and no narrower
+  selected support family.
+- The genuinely independent checker does not import the campaign producer or
+  state/witness/gain modules. It separately rebuilds the committed clean parent
+  family, proves the 42-to-10 exhaustion, reconstructs the immutable B7 base,
+  profile units, all 14 signed C-to-B units, and all 1,530 guarded projections,
+  and enforces exact manifest/CNF hash identities. It also enumerates all 245
+  ordered `(3,1)` subset pairs under all 5,040 `S7` permutations, deriving the
+  two disjoint complete orbits of sizes 140 and 105 and checking both canonical
+  representatives. Hostile tests mutate orbit representatives, profile units,
+  selector ALOs, guarded projections, artifacts, ledger rows, and runtime pins.
+- The 1,020-byte manifest is
+  `9ca5f13d10b740a2c6caef730d272c4c407bc5c340bf9fda11b2668ad63389ae`;
+  the 397-byte two-CNF hash ledger is
+  `1d4a99023eab6a06ba85ac21e91b2e1af93454d016dc6463b6191d53df4f9305`.
+  Both CNFs have 23,626 variables and 144,277 clauses, with SHA-256 values
+  `0c06a73c...048b5f` (`t=0`) and `d6bc88cf...5eae2a` (`t=1`).
+- Pinned CaDiCaL 1.7.3 solved both grouped CNFs UNSAT and pinned `lrat-check`
+  accepted both textual LRATs. The retained `xz -3` proofs are 22,000,348 and
+  14,403,780 bytes (36,404,128 total, strictly below 250MB), with hashes
+  `9d136d53...ab9282` and `db833fb6...972be3`. The exact theorem scope and
+  replay details are in `attempts/frozen-b7-l6-c-to-b-31-elimination.md`.
+- The base retains the global robust-witness and arc-minimal clause families but
+  adds no selected witness units. The canonical ledger/verifier mutually pin
+  each other and bind the exact transitive local Python closure, producer,
+  checker, tests, certificate producer, artifacts, and solver/checker binaries.
+- Result: both exact `(3,1)` intersection orbits are eliminated under this
+  frozen B7-l6 base and exact ten-parent support disjunction. This is not a full
+  B7-l6, m=6, or Seymour claim. No commit was made.
+
+### Authoritative frozen early C-profile census
+
+- Replaced the partial hard-state view with one exact census of every early C
+  profile over all 30 states, 260 parent/state incidences, and all 42 committed
+  `B7-l6` parents. The canonical ordering
+  `(internal,high,(cb16,cb17),(h16,h17),t)` gives exactly 60 `S7(B)` orbits and
+  544 parent/orbit incidences.
+- The producer and layer-derived checker separately reconstruct all parents and
+  compatible states and separately apply all 5,040 `S7` permutations to every
+  labelled ordered subset-pair universe. They agree on all representatives,
+  orbit sizes, parent compatibility, CNF dimensions, and hashes.
+- In the authoritative numbering, orbits 34 and 35 are exactly the existing
+  certified ordered `(3,1)` cases with `t=0,1`; their frozen certificate ledger
+  is bound as a source. Orbit 31 is `(2,2),t=0` in `h24-cr-m10-b22` and remains
+  explicitly uncertified.
+- The reproducible scout projects the frozen 30-second state scout and frozen
+  20-second hard-orbit scout onto exactly the other 58 rows. It records 31
+  UNSAT, 27 TIMEOUT, and zero SAT outcomes; all projected state UNSAT runs had
+  already finished within 20 seconds. Including cells 34/35 gives 33 eliminated
+  cells, but only those two have retained certificates. These are scout results
+  only; no additional certification, especially none for orbit 31, is claimed.
+- Exact artifacts, hashes, checker commands, and scope are recorded in
+  `attempts/frozen-b7-l6-early-c-profile-census.md`. The checker is independently
+  derived at this layer, not fully implementation-independent; it now verifies
+  all 60 CNF hashes and full `S7` closure of every parent-support disjunction.
+  Manifest statuses are exactly `CERTIFIED`, `SCOUT-UNSAT`, and
+  `SCOUT-TIMEOUT`; a self-pinned transitive provenance ledger binds the complete
+  census chain. No certificate or commit was made.
+
+### Frozen early C inaccessible-pair cover
+
+- Restricted to unresolved one-high profile cells `03,11,23,25,28,47,49,54`,
+  every model's unique low C vertex has exactly nine nonoutneighbors and at
+  least two are not exact second neighbors. Canonical inaccessible-pair orbits
+  therefore give an exhaustive 192-child cover with 746 compatible
+  parent-pair memberships.
+- The cover is existential and overlapping, not a partition: a model with more
+  than two inaccessible nonoutneighbors may occur in several pair children.
+  Each child retains only compatible parent selectors and adds exactly the two
+  negative `q` endpoint units.
+- Independence is layer-local. The checker separately enumerates all 5,040 B
+  permutations, parent supports, pair orbits, selector restrictions, and CNF
+  streams, while intentionally reusing the frozen B7 generator and checked
+  early-profile census rather than rederiving the complete ancestry.
+- Audit hardening pins the scout's whole 47,594-byte identity
+  `1c324d6ce3b73ebdb9abdc8bafcaed1a3373541b208c7ef22002d1556bd3a480`,
+  solver path/bytes/hash/version, exact 192-status sequence and sequence hash
+  `07e6e6e189544bede5004996a7bcb70db3ad4ed99bd20de5b1632e86388d2434`,
+  and complete ledger support/variable/clause dimensions. Hostile tests cover
+  `-q` polarity and endpoint, selector restriction, ledger dimensions,
+  equal-total status swaps, and solver provenance mutations.
+- Certified exactly the ordered 172 scout-UNSAT children from committed cover
+  `f47a032`; the 20 scout-TIMEOUT children remain open. Pinned CaDiCaL 1.7.3
+  emitted textual LRAT and pinned `lrat-check` accepted all 172.
+- The 172 `xz -3` artifacts total 81,964,720 bytes, strictly below the
+  250,000,000-byte cap; the raw LRAT streams total 1,226,909,466 bytes. The
+  package represents 645 compatible parent incidences.
+- A reciprocal canonical ledger/verifier binds the exact 192-status sequence,
+  ordered 172-child scope, frozen cover inputs, 13-file transitive local runtime
+  closure, tool identities, CNFs, raw LRATs, compressed artifacts, timings, and
+  safe artifact paths. Hostile count/status/order/path/hash/cap/duplicate/self
+  mutations are rejected.
+- Fresh replay regenerated and structurally checked all 172 CNFs, authenticated
+  every compressed and raw proof, and obtained `c VERIFIED` 172 times. This is
+  not a claim about the 20 TIMEOUT children, another cover, B7 generally, or
+  Seymour's conjecture. No commit was made.
+
+### Frozen exact-pair singleton certificates
+
+- On exact committed campaign base
+  `6068e283fc21fadc73c1317db1b5625886904cad`, retained proofs for exactly the
+  ordered 68 memberships marked UNSAT by the frozen five-second singleton
+  scout. Its complete 101-membership status totals remain SAT 0, UNSAT 68, and
+  TIMEOUT 33; none of the 33 TIMEOUT memberships is claimed.
+- Pinned CaDiCaL 1.7.3 produced textual LRAT with `--lrat --no-binary`, and
+  pinned `lrat-check` accepted all 68 with `c VERIFIED`. Regenerated scoped CNFs
+  total 707,414,473 bytes; raw LRATs total 484,924,019 bytes; retained `xz -3`
+  artifacts total 32,389,520 bytes, strictly below the exclusive
+  250,000,000-byte cap.
+- The canonical ledger/verifier mutually pin one another and freeze the ordered
+  scout scope, complete row identities and artifact set, local transitive Python
+  runtime closure, grouped and singleton manifests/hash ledgers, and the
+  inaccessible-pair ancestor ledger/verifier plus every ancestor compressed
+  proof used as reconstruction ancestry.
+- Hostile tests reject scope/order, reciprocal-pin, artifact path/set/hash,
+  transitive-runtime, duplicate-row, equal-total status-swap, and exclusive-cap
+  mutations. Fresh replay regenerated and structurally checked all 68 CNFs,
+  authenticated compressed and raw identities, and reran the pinned checker 68
+  times. The scope is only these exact frozen memberships, not the 33 TIMEOUTs,
+  another B7 campaign, or Seymour's conjecture. No commit was made.
+
+### Fast early C-profile LRAT certification
+
+- Certified exactly the 26 fast `SCOUT-UNSAT` profile cells
+  `00,01,02,06,07,08,09,10,18,19,20,21,22,24,26,27,29,30,44,45,46,48,50,51,52,53`
+  from the committed 60-orbit census at `3e176b4675a4d4676cae9eeab8399a74ef19f265`.
+- Pinned CaDiCaL 1.7.3 emitted textual LRAT and pinned `lrat-check` accepted all
+  26. Their `xz -3` artifacts total 13,906,564 bytes, below the 250,000,000-byte
+  cap. This first package does not cover the five other census `SCOUT-UNSAT`
+  cells `04,05,31,32,33`.
+- A second package certifies the five other census `SCOUT-UNSAT` cells
+  `04,05,31,32,33`; thus no scout-UNSAT cell remains uncertified. Both package
+  producers authenticate exact `/usr/bin/xz`, and replay uses an explicit
+  canonical path to the SHA-256-pinned checker.
+- The canonical ledger/verifier bind the exact census provenance, full
+  transitive local runtime closure, tools, CNFs, raw LRATs, compressed
+  artifacts, and documentation. A fresh replay regenerated and structurally
+  checked every CNF, decompressed and authenticated every LRAT, and obtained
+  `c VERIFIED` for all 26 in the first package and all five in the second.
+  Together with census cells 34/35, exactly 33 of the 60 early profile cells now
+  have retained certificates; the unresolved set is exactly the 27
+  scout-TIMEOUT cells. This is not a broader
+  `B7-l6`, `m=6`, or Seymour claim. No commit was made.
+
+### Exact-pair TIMEOUT complete-cut census
+
+- Restricted exactly to the 33 committed singleton scout-TIMEOUT memberships,
+  preserving each parent selector and its exact two-negative/seven-positive `q`
+  pattern. The complete orientations from both inaccessible endpoints into
+  `S=N+(low C)` are already implied by exact `q`, arc exclusivity, and hole
+  equivalence, so no redundant CNF or fake split was emitted.
+- Independently reconstructed all six-hole projections and validated every
+  endpoint-cut and global hole-load identity. Membership `000` is exceptional;
+  the other 32 root/A-C packets form 15 exact `(epsilon,b,chi)` classes, recorded
+  in `attempts/frozen-b7-l6-exact-pair-timeout-complete-cut.md`.
+- Pinned CaDiCaL 1.7.3 at ten seconds per unchanged singleton parent returned 33
+  TIMEOUT, zero SAT, and zero UNSAT. This is a branching-basis classification
+  and timing observation only, with no certificate or broader claim. No commit
+  was made.
+
+### Exact-pair TIMEOUT Hall-failure extension
+
+- Extended exactly the ordered 33 committed singleton TIMEOUT memberships with
+  an independently reconstructible Hall witness. It selects arbitrary nonempty
+  `K subset U` for seven `q`-positive vertices, defines the exact neighborhood
+  `Gamma(K)` in the eight vertices `S=N+(low C)` through the original `s->u`
+  arc variables, and enforces `|Gamma(K)|<|K|`.
+- The compact encoding adds exactly 142 variables and 480 clauses to every CNF.
+  Layer-local checker reconstruction agrees on all hashes without importing the
+  Hall campaign producer; it intentionally reuses the checked singleton and
+  complete-cut lower layers. An exhaustive 3-by-3 audit evaluated the actual
+  compact clauses with a local DPLL evaluator on all 512 incidence graphs and
+  3,584 graph/subset assignments, and independently matched existential Hall
+  deficiency to failure of a saturating bipartite matching.
+- Pinned CaDiCaL 1.7.3 with the frozen options and a 180-second cap returned 29
+  UNSAT and 4 TIMEOUT, with zero SAT. The structural checker pins both the whole
+  11,240-byte scout identity
+  `f2b1c935a985b3e73428e8c9b3b4e0c87264a519fe0bb6a421ffcd5a14dc7d93`
+  and exact status-sequence digest
+  `bce3c926a1d6db19ec646f6aa373743423fd6b6fb71b6cfd4a46f8865577b29b`;
+  equal-total UNSAT/TIMEOUT swaps are rejected.
+- Retained exactly those ordered 29 scout-UNSAT textual LRATs. Fresh replay with
+  the explicit pinned checker path regenerated and structurally checked every
+  CNF and accepted all proofs. CNFs total 301,992,379 bytes, raw LRATs
+  400,986,758 bytes, and `xz -3` artifacts 47,771,536 bytes, below the exclusive
+  250,000,000-byte cap. The canonical ledger/verifier bind the exact package,
+  transitive runtime and ancestry, tools, hostile tests, and all proof identities.
+- Hall synchronization is not yet a theorem until complements/residual cases are
+  handled. This is not a broader B7, order-18, or Seymour claim. No commit was
+  made.
+
+### Frozen Hall TIMEOUT exact-cardinality completion
+
+- Kept the committed Hall encoding unchanged and split only TIMEOUT memberships
+  `028,054,069,070`. For each parent, the seven exact unary `hall_K` threshold
+  outputs define children `|K|=1,...,7`, giving exactly 28 children. The
+  independent checker reconstructs the units without importing the split
+  producer and enumerates all 127 nonempty assignments per parent, proving the
+  children pairwise disjoint and exhaustive over nonempty `K`.
+- Pinned Kissat 4.0.4 and CaDiCaL 1.7.3 scouts found every child UNSAT. The final
+  CaDiCaL configuration `--restart=false --phase=false --seed=3` solved all 28;
+  direct unsplit CaDiCaL with defaults still timed out at 300 seconds on all four
+  parents, so the reproducible split proofs were retained.
+- Generated textual CaDiCaL-compatible LRATs for all 28 children and accepted
+  every proof with pinned `lrat-check`. Fresh replay regenerated and independently
+  checked each CNF before decompression and proof checking. CNFs total
+  291,619,772 bytes, raw LRATs 229,856,177 bytes, and `xz -3` artifacts 17,456,956
+  bytes, below the exclusive 250,000,000-byte cap.
+- The strict canonical ledger binds the exact child order, cardinalities, hashes,
+  tools, lower Hall certificate ledger/verifier, split sources, and all artifacts;
+  the ledger and verifier reciprocally pin canonical hashes. Consequently Hall
+  failure is excluded for all 33 frozen memberships: 29 by the prior direct
+  certificates and the remaining four by the checked exhaustive 28-child cover.
+  This is still only the Frozen Seymour Hall-failure statement, not a broader B7,
+  order-18, or Seymour theorem. No commit was made.
+- Hall completion audit minors: removed the leaked `hall-cardinality-check-*`
+  scratch directory; strengthened each split ledger row against reconstructed
+  parent position, membership, key, dimensions, and canonical artifact ancestry;
+  bound the Hall producer/checker and hostile tests; and added hostile row,
+  source, reciprocal-pin, and compressed-artifact mutations. The split ledger
+  canonical SHA-256 is
+  `28e00f90e24b84b2034c452f28c4a7673fb8852a8ff6979ca419b38d7d46bb5e`
+  and the verifier canonical SHA-256 is
+  `3ea7a677d9f205b82c091ad09b585335a571e4b4c69f11f6dd3b4f676d79fabb`.
+- Added `verify_m6_b7_l6_exact_pair_timeout_hall_failure_all33.py`. It invokes
+  the prior-29 and split-28 fresh replay verifiers and independently proves that
+  their 29 direct rows and four split parents are unique, disjoint, canonically
+  ordered, and exhaustive over all 33 campaign rows. The final fresh run passed
+  all 29 direct LRATs, all 28 split LRATs, the four-by-127 exact-cardinality
+  partition audit, the mechanical `29+4=33` scope audit, and all eight split
+  regression/hostile tests. No commit was made.
+
+### Certificate-relative binary all-different matching
+
+- Added a matching extension over exactly the committed Hall-synchronized all33
+  scope. Each of seven `U` vertices receives a three-bit value in `0..7` mapping
+  to the ordered eight-element `S`; channels select original `S[i]->u` arcs and
+  exact pairwise bit-vector disequalities make the map injective.
+- The sound exact dimensions are `+84` variables and `+336` clauses: 56 channel,
+  seven Hall-entailed row-support, and 273 exact disequality clauses. The all33
+  verifier and both Hall certificate ledgers are bound in the manifest.
+- Proved both directions precisely: Hall gives a saturating matching whose
+  indices satisfy the extension; every satisfying extension decodes through its
+  channels and exact XORs to an injective arc matching. The independent checker
+  exhausts 294 small incidence graphs and 4,234 value assignments and separately
+  exhibits a Hall graph whose unique matching requires value 7.
+- The sound pinned 30-second CaDiCaL scout returned 33 TIMEOUT, zero UNSAT, and
+  zero SAT. The expected eight UNSAT memberships were traced to a temporary
+  benchmark clause that forbade `111`, contradicting the required valid domain
+  `0..7`; the value-7 counterexample rejects that shortcut. The robust gate did
+  not pass, so no LRATs or certificate ledger were generated. No commit was made.
+
+### Authoritative Hall-relative cardinality closure
+
+- Six holes give 147 arcs; degrees 8/9 imply exactly three high vertices.
+- Exact-pair semantics proves `e(S,U)=36+H(S)+high(S)` for every Hall cut.
+- Fresh counters add 2,433 variables and 9,571 clauses per membership. All 33
+  unsplit CNFs are UNSAT with checked LRATs totaling 47,134,964 compressed bytes.
+- Overlap-safe composition uses the exact 20-cell/101-membership residual of the
+  192-pair cover. Prior 68 and new 33 memberships are disjoint and exhaustive,
+  closing profile orbits `03,11,23,25,28,47,49,54`. No commit was made.
+
+### Authoritative two-high root-cardinality closure
+
+- Restricted exactly to remaining two-high early cells
+  `12-17,36-43,55-59`. Six holes and degree-eight/nine force exactly three
+  global highs; root normalization gives `e(A,B)=36+H(A)+high(A)`.
+- Fresh counters add 2,433 variables and 9,571 clauses per profile. A
+  producer-independent checker reconstructs every clause and audits all 262,144
+  degree vectors plus 116 root-cut arithmetic cases.
+- Pinned CaDiCaL 1.7.3 produced 19 textual LRATs and pinned `lrat-check`
+  accepted all 19. Raw proofs total 217,996,726 bytes; `xz -3` artifacts total
+  20,979,196 bytes, strictly below the exclusive 250,000,000-byte cap. Strict
+  ledger verification and fresh replay passed.
+- The composition verifier combines the original 33 certified cells, eight
+  one-high closures, and these 19 cells as disjoint scopes exhausting all 60.
+  It independently recovers 42 parents, 30 states, 60 orbits, 544 incidences,
+  and full 5,040-permutation support closure. Therefore the entire frozen clean
+  `B7-l6` parent campaign is closed, but no other residual B7 group is closed.
+  No commit was made.

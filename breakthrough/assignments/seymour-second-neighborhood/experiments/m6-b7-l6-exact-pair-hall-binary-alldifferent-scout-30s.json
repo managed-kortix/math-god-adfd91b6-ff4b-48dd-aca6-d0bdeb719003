@@ -1,0 +1,285 @@
+{
+  "hash_ledger_bytes": 3938,
+  "hash_ledger_sha256": "a0a804c3cd2610477828300163e975f94ac5299bd744f0921a29673ab3b137c4",
+  "jobs": 8,
+  "manifest_bytes": 3979,
+  "manifest_sha256": "cb123e87430b3f0d4a50f050012068434afe0c3893cd37b9455048276d80a611",
+  "rows": [
+    {
+      "cnf_sha256": "f0dd14df051d801901e7c2f2aa145d3df01b8c5024108ef8a7055b1b25df2c5f",
+      "job": 0,
+      "membership": 0,
+      "position": 0,
+      "seconds": 30.036,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "3680a0297a6d455a9ca160c267d7c8ff34022acfff2dd3e3a9785d8005ca0da1",
+      "job": 1,
+      "membership": 3,
+      "position": 1,
+      "seconds": 30.025,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "520e7a94892a10e4f6f89e5e922bd988001e3bff2c36286ee2fcc17e62ed96d2",
+      "job": 2,
+      "membership": 5,
+      "position": 2,
+      "seconds": 30.046,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "29f8ac464297bcb5c098f54bda3a7b7fd4ae599edb79e8ae8563747cd58bc993",
+      "job": 3,
+      "membership": 6,
+      "position": 3,
+      "seconds": 30.04,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "cd95277a09f44daf3a43b4f24eefb2e980d4dfb8faa0cfdeb32724a22f70c093",
+      "job": 4,
+      "membership": 10,
+      "position": 4,
+      "seconds": 30.032,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "8de7c00552389c1c8bc610c9faf3b18713db737a655fc67670b29386d1827cb4",
+      "job": 5,
+      "membership": 11,
+      "position": 5,
+      "seconds": 30.016,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "cc7f293abaeda82f229c3529d1c4fda76751c10ffdafc588d2e9adcc70e1ec1c",
+      "job": 6,
+      "membership": 14,
+      "position": 6,
+      "seconds": 30.073,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "e9ab65f7f49aa35fd4727dc3224ab7b5c0c17deaf503885f9f9a1360509bc0d9",
+      "job": 7,
+      "membership": 15,
+      "position": 7,
+      "seconds": 30.074,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "e29ffb569e64f840e91a2a4dddda3e17d1c8f6105e590bc4175a58e3cd247338",
+      "job": 0,
+      "membership": 19,
+      "position": 8,
+      "seconds": 30.044,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "81a253ad61b884f89e6b659622d790fb8612b223409c052fa89d445c25cdebfb",
+      "job": 1,
+      "membership": 22,
+      "position": 9,
+      "seconds": 30.02,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "badd5b326b1580c8549c6db6c58af5dfe05982a453f1a569d37b692b653be236",
+      "job": 2,
+      "membership": 23,
+      "position": 10,
+      "seconds": 30.021,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "1ed264852929a767481b5313221f1230b384610d5a5dc467dc561f2a73b735bb",
+      "job": 3,
+      "membership": 24,
+      "position": 11,
+      "seconds": 30.014,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "b51d45acb29e726d964817cded6fabec23d03eb5795893d5de0ab54b182e88cf",
+      "job": 4,
+      "membership": 28,
+      "position": 12,
+      "seconds": 30.026,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "7c1b46735c63f53757fe746efd4f240c5247ee96cac7a022429c13969352c192",
+      "job": 5,
+      "membership": 33,
+      "position": 13,
+      "seconds": 30.024,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "834d4f6a910f9f94a9c0c066392d7ca4bfb28028efcc7f32ec9b208e07c345d0",
+      "job": 6,
+      "membership": 34,
+      "position": 14,
+      "seconds": 30.061,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "67c92ca59f06495ce579d40af8ab44be08ddd53ccb46bf76c7a42744e3b82510",
+      "job": 7,
+      "membership": 39,
+      "position": 15,
+      "seconds": 30.018,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "a11ca4aab270582ae34fa02ecde2612627be9946c8d10bd458a73a02cd4476f7",
+      "job": 0,
+      "membership": 44,
+      "position": 16,
+      "seconds": 30.021,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "153879ab5e3d29b2b5eae65ebe67259c63e2ba11e3acde6b4f57211d416e515a",
+      "job": 1,
+      "membership": 47,
+      "position": 17,
+      "seconds": 30.047,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "57eb7fb1cd0c53a91f16c82378c340d566439d28e960e6055c73954feda1496c",
+      "job": 2,
+      "membership": 51,
+      "position": 18,
+      "seconds": 30.031,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "79439423fc6f5922c2aea9688caecba3fa173de6cfdadfa2a51a9e0956e38f83",
+      "job": 3,
+      "membership": 54,
+      "position": 19,
+      "seconds": 30.024,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "c85c3dfdba7d053d868f3ce45856d7a9738d9b9f63f31fda94f141ecf4cb6395",
+      "job": 4,
+      "membership": 59,
+      "position": 20,
+      "seconds": 30.044,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "5e85ce961461a941a36c68dfbc7460f7f33efc892ebdcb4c86dd7f9c6e02e9df",
+      "job": 5,
+      "membership": 61,
+      "position": 21,
+      "seconds": 30.058,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "6549e9140db997fe3d96b75c6fabf19524121e3ebe7749eb76901cbe1f4de596",
+      "job": 6,
+      "membership": 62,
+      "position": 22,
+      "seconds": 30.038,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "2b33fa52e831bf09f6cf58df5d473dc61347497498d3178ca9d57d268d32b49e",
+      "job": 7,
+      "membership": 64,
+      "position": 23,
+      "seconds": 30.062,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "d50c2a888cd470b6fff378ff257cc2cbbed9499baedd84054666a2db7ae82e6b",
+      "job": 0,
+      "membership": 69,
+      "position": 24,
+      "seconds": 30.045,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "d4b30160c43471db3b8b7dc6e36cd8e102bbbc1d67a7105dc91702a5f747d015",
+      "job": 1,
+      "membership": 70,
+      "position": 25,
+      "seconds": 30.086,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "f92e7cf30b8f8b42c0828d6cae003abc519445bdc20b4bc08cbe2d0b2126e24f",
+      "job": 2,
+      "membership": 75,
+      "position": 26,
+      "seconds": 30.025,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "34478af99c50eb52a55233fdb9580e74d44a22fcb87a6e44eb600d991d1daf87",
+      "job": 3,
+      "membership": 80,
+      "position": 27,
+      "seconds": 30.025,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "54c8c5e1b105d460aacf8e32ece18d03f1caa685439ab152ec19a5173e6bdd6c",
+      "job": 4,
+      "membership": 82,
+      "position": 28,
+      "seconds": 30.097,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "aba396dedf183c2a99a5ddfc8d9263614305bca7121e8317156d4f986fd60d44",
+      "job": 5,
+      "membership": 84,
+      "position": 29,
+      "seconds": 30.029,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "08e7cef42fc2cedf67306b32927f76d2adccd1b4a29a57f8b3dc82e5ca04acb3",
+      "job": 6,
+      "membership": 91,
+      "position": 30,
+      "seconds": 30.021,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "b476308ed4e5a7c9d54b45d2e6cd47445ee578f823bac4e1f1acec662a1415f1",
+      "job": 7,
+      "membership": 93,
+      "position": 31,
+      "seconds": 30.026,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "5a113d0d13ff59f26dba0833674e6af17b6cd4a8edbc9e353534f50f9f3f0d06",
+      "job": 0,
+      "membership": 97,
+      "position": 32,
+      "seconds": 30.005,
+      "status": "TIMEOUT"
+    }
+  ],
+  "schema": "m6-b7-l6-exact-pair-hall-binary-alldifferent-scout-v1",
+  "seconds_per_membership": 30,
+  "solver": "/tmp/opencode/cadical-1.7.3/build/cadical",
+  "solver_bytes": 1002216,
+  "solver_options": [
+    "--restart=false",
+    "--phase=false",
+    "--seed=3"
+  ],
+  "solver_sha256": "108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292",
+  "solver_version": "1.7.3",
+  "status_sequence_sha256": "bd9b1304bdb82648e6b6ce592d2b25a73b7813f87c4ae473be9eacfbf5808397"
+}

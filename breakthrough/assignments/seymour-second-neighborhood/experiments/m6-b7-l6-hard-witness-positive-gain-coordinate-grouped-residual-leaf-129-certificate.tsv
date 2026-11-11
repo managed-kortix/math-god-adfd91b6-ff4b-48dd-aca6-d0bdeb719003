@@ -1,0 +1,77 @@
+m6-b7-l6-hard-witness-positive-gain-coordinate-grouped-residual-leaf-129-certificate-v1
+generated-utc	2026-08-12
+scope	frozen-grouped-residual-leaf-129-only
+grouped-campaign	153-leaf/1255-selector singleton-certified residual
+singleton-ancestry	exactly the bound 127-row checked singleton certificate ledger/verifier
+grouped-manifest-bytes	12775
+grouped-manifest-sha256	188efce389bbfcca54e6b6d5f881de3d9ae1603f2ecf7d671592abeabc1cd7f1
+grouped-hash-ledger-bytes	16431
+grouped-hash-ledger-sha256	f4cc9738c0a5f40ed2fb213358a7025c72bd9d358d8bc694ad009b6743d93148
+grouped-scout-bytes	33769
+grouped-scout-sha256	0729870deced23f34e87866dea86faac6aafc7740168230c54348b3778f53112
+grouped-producer-bytes	11068
+grouped-producer-sha256	eff0fd6d2502fdb7bd394b8fe8a72f0ba7dfcb919c92a3cbf78689d9cccc632a
+grouped-structural-checker-bytes	15100
+grouped-structural-checker-sha256	185d332cb11b27a5dfda844694496f5a17bc02310eaa6d2c9d7f457b994d8884
+grouped-test-source-bytes	4229
+grouped-test-source-sha256	f04955590880f5fcf1bd52d616ecc10b55e2eac51e3cd4125f4a15701d426c87
+certificate-test-source-bytes	2394
+certificate-test-source-sha256	d862bcfaf5e16a04ca7f0a86af5d1cfea35994f13a59de36615b7a6f4ddf36fa
+singleton-certificate-ledger-bytes	72132
+singleton-certificate-ledger-sha256	bdad79d28b22d2b48ed0aef779765a6aafed752227c1952da36a8e180b48ca3d
+singleton-certificate-verifier-bytes	16978
+singleton-certificate-verifier-sha256	ca3205e94f01b3b6e551373bad75333130a5d82bf3bc7cdf2e00f92be55e2d08
+runtime-check-m6-b7-l6-hard-orbits-bytes	11606
+runtime-check-m6-b7-l6-hard-orbits-sha256	651ab47529e584ff2b0ae339a5c6268d796d8d1e07f2df3f9e1cbe4146c1f760
+runtime-check-m6-b7-l6-hard-witness-orbits-bytes	10869
+runtime-check-m6-b7-l6-hard-witness-orbits-sha256	00a4d2a6113ba21479357331fad2c179f9fe0e2209b7467377a79f535517004e
+runtime-check-m6-b7-l6-hard-witness-positive-gain-bytes	19732
+runtime-check-m6-b7-l6-hard-witness-positive-gain-sha256	fdcb3749dfd4b303e0094f52a570d1c3d33eeb56332c95c891252de810976938
+runtime-check-m6-b7-l6-hard-witness-positive-gain-coordinate-bytes	15868
+runtime-check-m6-b7-l6-hard-witness-positive-gain-coordinate-sha256	2eb998a50e1bbd1179d766385d07634ae37aa83c5dc6cc672fae58146243cdf5
+runtime-check-m6-b7-l6-hard-witness-positive-gain-coordinate-grouped-residual-bytes	15100
+runtime-check-m6-b7-l6-hard-witness-positive-gain-coordinate-grouped-residual-sha256	185d332cb11b27a5dfda844694496f5a17bc02310eaa6d2c9d7f457b994d8884
+runtime-check-m6-b7-l6-hard-witness-positive-gain-coordinate-residual-cover-bytes	12276
+runtime-check-m6-b7-l6-hard-witness-positive-gain-coordinate-residual-cover-sha256	53d9e62e6fd4c99a9891785f50242087a630fe9ef9dafba82d15db722f5cbe8e
+runtime-check-m6-b7-l6-state-split-bytes	14637
+runtime-check-m6-b7-l6-state-split-sha256	a21959f914193fdb15f56f9b92ab4cddb2fed7cf6386a5ecc8c852c148925bb3
+runtime-check-m6-clean-sink-group-cnf-bytes	14918
+runtime-check-m6-clean-sink-group-cnf-sha256	07d2ac0802c8d9fc854e8c5e10ef0e1a67f54dda2c06c1a71bf69465390ee536
+runtime-check-m6-clean-sink-manifest-bytes	8864
+runtime-check-m6-clean-sink-manifest-sha256	8fb7164f71f3e6ba6c616a0709481b839e7c135ba0c7c45dd4c84f2cde42bbb0
+runtime-check-m6-parent-cnf-bytes	12776
+runtime-check-m6-parent-cnf-sha256	26af1932432445b0ce70e82634a9db651471e92b1528ac28de8564f3ab548b96
+runtime-m6-b7-l6-hard-orbits-bytes	9141
+runtime-m6-b7-l6-hard-orbits-sha256	baa12dd0375fed6b3a1427238cf342501ad666f2f15e7c5b1612ef939d6fbe0d
+runtime-m6-b7-l6-hard-witness-orbits-bytes	9874
+runtime-m6-b7-l6-hard-witness-orbits-sha256	70fa31c3f1599044b946c33d2f3e9278c19ca19a79aaaf4e809c310391467271
+runtime-m6-b7-l6-hard-witness-positive-gain-bytes	8231
+runtime-m6-b7-l6-hard-witness-positive-gain-sha256	653f5eee05b8a4f2fff4e49a6bb9ad8e6139135c5936e99f8b46d7ec5915dd16
+runtime-m6-b7-l6-hard-witness-positive-gain-coordinate-bytes	9839
+runtime-m6-b7-l6-hard-witness-positive-gain-coordinate-sha256	1228d2787c7a3065cf96002b59c963478ccadc3eaa4749fba80c75de1ea11352
+runtime-m6-b7-l6-hard-witness-positive-gain-coordinate-grouped-residual-bytes	11068
+runtime-m6-b7-l6-hard-witness-positive-gain-coordinate-grouped-residual-sha256	eff0fd6d2502fdb7bd394b8fe8a72f0ba7dfcb919c92a3cbf78689d9cccc632a
+runtime-m6-b7-l6-hard-witness-positive-gain-coordinate-residual-cover-bytes	10609
+runtime-m6-b7-l6-hard-witness-positive-gain-coordinate-residual-cover-sha256	b4359639f46a2eff5a99a41b43f268d02af17749a88187d81cc31a69b31c8d52
+runtime-m6-b7-l6-state-split-bytes	15948
+runtime-m6-b7-l6-state-split-sha256	544de152f692fc9f2b781f81de320e1d35a24a38d3225147212aa5d9609d2d1f
+runtime-m6-clean-sink-group-cnf-bytes	11550
+runtime-m6-clean-sink-group-cnf-sha256	9eb6455daf71a2127f76a197012c2e0f4a7c7f42021ddfcfbe244f9f733ed817
+runtime-m6-clean-sink-manifest-bytes	8200
+runtime-m6-clean-sink-manifest-sha256	5d5b5545ff31eb719ce2f4eb8ad27bb0a9ccd6546bd35ad1fe6ace871ad8232f
+runtime-m6-parent-cnf-bytes	10958
+runtime-m6-parent-cnf-sha256	0b6c69aca85a627a676ae604b9a3c417e69a9d9cf359de05d7a56a11199f3147
+runtime-m6-residual-group-cnf-bytes	16054
+runtime-m6-residual-group-cnf-sha256	f15a8fe30e51b7d61d273901c0b5f140151bb1a58ec910ad0c21c84e96c535a3
+runtime-snc-cnf-bytes	7969
+runtime-snc-cnf-sha256	adab04953d3697ec004e28ad145dda5b0f04d07ee8dd20d95655f6e32877d68e
+verifier-canonical-sha256	bcf26cf5c82a3a99b5307ffe642cb1308518ab1b9c63e49b820e81bdd6312500
+solver	CaDiCaL 1.7.3
+solver-binary-sha256	108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292
+solver-command	cadical --lrat --no-binary -q CNF LRAT
+checker	lrat-check
+checker-binary-sha256	e9e71c96b68dc9ed22db35d7581e613e6b161ffbc82c20cba5699f8320a065b8
+checker-required-output	c VERIFIED
+compression	xz -3
+columns	leaf-ordinal,key,width,surviving-memberships,variables,clauses,cnf-bytes,cnf-sha256,lrat-bytes,lrat-sha256,xz-bytes,xz-sha256,artifact
+129	o37-w01-c16	2	1142,1144	23618	143056	10382345	e89b0f74972ee8f76f0cda2227523516933f10b13b914b18193beec97ccc664f	79502883	747540b5714e32e4164ae41dd852ae1ab360c36f3001abde4824ad2ca862b23e	15420984	f4387b4de1e4968f17d4031fc73e8286224145cb0ff00b66acae6c3a2088dcec	certificates/m6-b7-l6-hard-witness-positive-gain-coordinate-grouped-residual-leaf-129.lrat.xz

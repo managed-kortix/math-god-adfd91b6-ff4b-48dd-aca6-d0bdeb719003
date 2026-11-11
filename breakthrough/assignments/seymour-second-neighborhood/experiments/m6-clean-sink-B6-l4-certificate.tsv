@@ -1,0 +1,40 @@
+m6-clean-sink-B6-l4-certificate-v1
+generated-utc	2026-08-02
+group	B6-l4
+parents	2470
+solver	CaDiCaL 1.7.3
+solver-source-commit	38e073b389a877b0a0d3c91136d2443ab95fdeba
+solver-binary-sha256	108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292
+solver-command	cadical --lrat --no-binary -q CNF LRAT
+solver-required-exit	20
+checker	lrat-check
+checker-source-commit	2e3b2dc0ecf938addbd779d42877b6ed69d9a985
+checker-binary-sha256	e9e71c96b68dc9ed22db35d7581e613e6b161ffbc82c20cba5699f8320a065b8
+checker-required-output	c VERIFIED
+compression	xz -3
+selector-manifest-bytes	1838
+selector-manifest-sha256	6e7eee0ddd5b4c7ef02cdf459c9a0647f720513e7ee4987a3a8b0c17af37eeda
+remaining-stream-bytes	2262190
+remaining-stream-sha256	416b7e51a73637784342a374be8e15a1a58032b61fc1140f39f0768d1ff4b642
+clean-sink-manifest-bytes	2104
+clean-sink-manifest-sha256	733e06c8aa9881e0006409efff23729f1bf88d8af7b1a70e8a78fd3775b53217
+clean-sink-theorem-bytes	4156
+clean-sink-theorem-sha256	bd0631529bb4658061663460b718ef2ee3186d02fdc599fb2673d3cff3b94ee2
+producer-bytes	11550
+producer-sha256	9eb6455daf71a2127f76a197012c2e0f4a7c7f42021ddfcfbe244f9f733ed817
+structural-checker-bytes	14918
+structural-checker-sha256	07d2ac0802c8d9fc854e8c5e10ef0e1a67f54dda2c06c1a71bf69465390ee536
+cnf-variables	26086
+cnf-clauses	520647
+cnf-bytes	16535716
+cnf-sha256	f576b3b590135c41ca1cf1eddf11338d3dddc58a9ca9d13bf92283e2def96e19
+lrat-bytes	40592810
+lrat-sha256	736b931b78d2c305f00b3482990cea7769944737eb81a6dd42da18c17d936fa0
+xz-bytes	5185308
+xz-sha256	a532fcbe254ca54922c9c1eb190d547dff948bb61cb6aa55d92ce5546a39f996
+generate-seconds	21.519409617001656
+structure-seconds	13.76689963300305
+solve-seconds	4.6980842529883375
+check-seconds	1.1073410249955487
+compress-seconds	6.261971332001849
+artifact	certificates/m6-clean-sink-B6-l4.lrat.xz

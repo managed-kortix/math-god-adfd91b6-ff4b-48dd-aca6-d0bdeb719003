@@ -1,0 +1,121 @@
+m6-b7-l6-hard-witness-positive-gain-coordinate-certificates-v1
+generated-utc	2026-08-09
+scope	frozen-B7-l6-hard-witness-positive-gain-coordinate-scout-UNSAT-only-020,026,096,102,172,178,215,217
+coordinate-manifest-bytes	13557
+coordinate-manifest-sha256	c1ea02ae0127713063efed74eeae84e9c6f22f800b0c6899d293b1a962028b49
+coordinate-hash-ledger-bytes	25213
+coordinate-hash-ledger-sha256	aec75e12d82a9ad829dd64b8bce54687f493dbe0d73d5d7665eb965d97f905b6
+coordinate-scout-bytes	92091
+coordinate-scout-sha256	1ad3075ef0386c8bc8afec26b5a2cd392c140d17d8a69daa025063f4e8f3efab
+coordinate-producer-bytes	9839
+coordinate-producer-sha256	1228d2787c7a3065cf96002b59c963478ccadc3eaa4749fba80c75de1ea11352
+coordinate-structural-checker-bytes	15868
+coordinate-structural-checker-sha256	2eb998a50e1bbd1179d766385d07634ae37aa83c5dc6cc672fae58146243cdf5
+coordinate-scout-source-bytes	4238
+coordinate-scout-source-sha256	afda899f9fa20aa119b0ce40d263e9fdb1247ef8a22b221172b1cbcfae6a19c9
+coordinate-test-source-bytes	4022
+coordinate-test-source-sha256	d19b2381e29d18b479e88aba93b865ccc7caab074257c8cf7084aaf72fdbd88d
+certificate-producer-bytes	5469
+certificate-producer-sha256	4bf35ada1214a1f952ac2b58207979a2c4b3705f754cd330cbf929b85c41e292
+certificate-test-source-bytes	1462
+certificate-test-source-sha256	b52e3a4acfd554b1e1797b42bb9737ff8b9c020b7d3c060d7d38b2ba9b9fc9b1
+ancestor-manifest-bytes	7616
+ancestor-manifest-sha256	eb0021165e41b9912c92abde3f4b26890075b0faafbabb0ced579ad6bb372ab8
+ancestor-hash-ledger-bytes	11695
+ancestor-hash-ledger-sha256	57a146838c09dca90e83e1ca19a504967199f3fde15f330769f8867a2068552e
+ancestor-scout-bytes	53533
+ancestor-scout-sha256	f5ed09b7134a3315a37d20db786fdd7d1675b1edc0ab6ef0969655fb7a6802f7
+ancestor-certificates-bytes	3687
+ancestor-certificates-sha256	ab44c6fccf70dc5bae6b30b82f9e3983fe9c065b82d8301db3fc76bac13e5b59
+ancestor-certificate-verifier-bytes	11324
+ancestor-certificate-verifier-sha256	67895a3265d7649c54fddf88010b39d33be49ee4fd0a844d729983e020dc5479
+complement-manifest-bytes	6831
+complement-manifest-sha256	a464607da5ca77da9beb4d5634ea5bc51036f44cad3f22354abfae0da9fe83f4
+complement-hash-ledger-bytes	11440
+complement-hash-ledger-sha256	35ceea03f8b3f9d4cc054da5c3114e8fa9b04d1955f2a9bf64b163750fccab90
+complement-scout-bytes	48487
+complement-scout-sha256	43bf624d24ca9459bf4de999385ed27367392a174aba46fe95b0773e6d1d7a64
+complement-certificates-bytes	26475
+complement-certificates-sha256	f780c44424d7925b3b2a1e3d7ee1cbc757a7fc0b1daf14264d9699cc9d1532ec
+complement-certificate-verifier-bytes	10248
+complement-certificate-verifier-sha256	8040cf7502a569599cd121290aaeca0dfdc77b3b44c585aed714284c4217d12b
+base-snc-cnf-bytes	7969
+base-snc-cnf-sha256	adab04953d3697ec004e28ad145dda5b0f04d07ee8dd20d95655f6e32877d68e
+base-parent-producer-bytes	10958
+base-parent-producer-sha256	0b6c69aca85a627a676ae604b9a3c417e69a9d9cf359de05d7a56a11199f3147
+base-parent-checker-bytes	12776
+base-parent-checker-sha256	26af1932432445b0ce70e82634a9db651471e92b1528ac28de8564f3ab548b96
+base-residual-producer-bytes	16054
+base-residual-producer-sha256	f15a8fe30e51b7d61d273901c0b5f140151bb1a58ec910ad0c21c84e96c535a3
+base-clean-manifest-producer-bytes	8200
+base-clean-manifest-producer-sha256	5d5b5545ff31eb719ce2f4eb8ad27bb0a9ccd6546bd35ad1fe6ace871ad8232f
+base-clean-manifest-checker-bytes	8864
+base-clean-manifest-checker-sha256	8fb7164f71f3e6ba6c616a0709481b839e7c135ba0c7c45dd4c84f2cde42bbb0
+base-clean-group-producer-bytes	11550
+base-clean-group-producer-sha256	9eb6455daf71a2127f76a197012c2e0f4a7c7f42021ddfcfbe244f9f733ed817
+base-clean-group-checker-bytes	14918
+base-clean-group-checker-sha256	07d2ac0802c8d9fc854e8c5e10ef0e1a67f54dda2c06c1a71bf69465390ee536
+base-state-producer-bytes	15948
+base-state-producer-sha256	544de152f692fc9f2b781f81de320e1d35a24a38d3225147212aa5d9609d2d1f
+base-state-checker-bytes	14637
+base-state-checker-sha256	a21959f914193fdb15f56f9b92ab4cddb2fed7cf6386a5ecc8c852c148925bb3
+base-hard-orbit-producer-bytes	9141
+base-hard-orbit-producer-sha256	baa12dd0375fed6b3a1427238cf342501ad666f2f15e7c5b1612ef939d6fbe0d
+base-hard-orbit-checker-bytes	11606
+base-hard-orbit-checker-sha256	651ab47529e584ff2b0ae339a5c6268d796d8d1e07f2df3f9e1cbe4146c1f760
+base-witness-orbit-producer-bytes	9874
+base-witness-orbit-producer-sha256	70fa31c3f1599044b946c33d2f3e9278c19ca19a79aaaf4e809c310391467271
+base-witness-orbit-checker-bytes	10869
+base-witness-orbit-checker-sha256	00a4d2a6113ba21479357331fad2c179f9fe0e2209b7467377a79f535517004e
+ancestor-producer-bytes	8231
+ancestor-producer-sha256	653f5eee05b8a4f2fff4e49a6bb9ad8e6139135c5936e99f8b46d7ec5915dd16
+ancestor-structural-checker-bytes	19732
+ancestor-structural-checker-sha256	fdcb3749dfd4b303e0094f52a570d1c3d33eeb56332c95c891252de810976938
+ancestor-scout-source-bytes	4205
+ancestor-scout-source-sha256	14bffe81015ccb4518322520876ad74dc4968495b4b6cf987b48a7963cd79e8f
+ancestor-test-source-bytes	5707
+ancestor-test-source-sha256	8456cf5daedcb5b31cfdeee64c444dbb8c34c8b3e5e490adb063f070ce6b298f
+ancestor-certificate-producer-bytes	5107
+ancestor-certificate-producer-sha256	56dd6772e2239530e5ff9fdc79281fcca57435749bc90a7903b267b445d3b2fc
+ancestor-certificate-test-source-bytes	1434
+ancestor-certificate-test-source-sha256	927c19b04fb62b37b45c154165c4b58b9bf34c1839609327a3f3267a6d97a21f
+complement-producer-bytes	7351
+complement-producer-sha256	e240399db772439e0f3325d103fcdcee613aec1291268542e6d296135a9c639c
+complement-structural-checker-bytes	10998
+complement-structural-checker-sha256	e14a8d48f58d07a55a81d584939775db5eb02f1f721e28dd5d17a600d3b7494b
+complement-scout-source-bytes	3229
+complement-scout-source-sha256	da0494548224140e5c57e95af2e3386f2e0b4630cd00eef8b5b21aa72a47313a
+complement-test-source-bytes	5324
+complement-test-source-sha256	5958ac30f0df9942338fd3b13f2325968894b8d02b9b8815dea01027221a649b
+complement-certificate-producer-bytes	5071
+complement-certificate-producer-sha256	6a5d521de7d700ea2eadd4e1d757da25bfc76a1c6e1b5b6926bc3dc29bae16b1
+verifier-canonical-sha256	bd4f30366473ac851e1ba362885eb112fd376f663e47a553dfd8ed5377196d25
+solver	CaDiCaL 1.7.3
+solver-source-commit	38e073b389a877b0a0d3c91136d2443ab95fdeba
+solver-binary-sha256	108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292
+solver-command	cadical --lrat --no-binary -q CNF LRAT
+solver-required-exit	20
+checker	lrat-check
+checker-source-commit	2e3b2dc0ecf938addbd779d42877b6ed69d9a985
+checker-binary-sha256	e9e71c96b68dc9ed22db35d7581e613e6b161ffbc82c20cba5699f8320a065b8
+checker-required-output	c VERIFIED
+compression	xz -3
+compressed-limit-bytes-exclusive	250000000
+leaves	8
+leaf-ordinals	020,026,096,102,172,178,215,217
+source-leaf-ordinals	010,013,051,054,090,093,115,116
+parents-incidences	72
+total-cnf-bytes	83200933
+total-lrat-bytes	56828147
+total-xz-bytes	3756712
+ancestor-certificate-scope	042,095,097
+complement-certificate-scope	75-scout-UNSAT-leaves
+columns	leaf-ordinal,key,source-leaf-ordinal,source-key,coordinate,deleted,witness,parents,variables,clauses,cnf-bytes,cnf-sha256,lrat-bytes,lrat-sha256,xz-bytes,xz-sha256,solve-nanoseconds,check-nanoseconds,artifact
+020	o03-w01-c17	010	o03-w01	1	17	16	6	23622	143668	10392648	b3d2c363644add3e4f09790468e2cdab4d63c47d71afcbc7d97d9c0e4e478869	7104348	0f9ab708a841468fbd8138593b09387c95380db73b505a957cb6113bc658661a	469188	c8cc2323dde9fd1022790115e20c2867ce52eff39db0d30d3e3ef4aed9eb4ade	403044988	516851143	certificates/m6-b7-l6-hard-witness-positive-gain-coordinate-leaf-020.lrat.xz
+026	o03-w04-c17	013	o03-w04	1	17	16	6	23622	143668	10392648	ea0b4e9170335e0ebdf8689ccda70a102836da5f359728bd6dcdeb6c5cb0faab	7103689	f8d4aba3a91507fd3f7963cd0fe4f6813e168db73f532d25a67bc77ea304f8f4	468960	fb7195800f9b956135fef3936dd6ceebe87c30d3df33bad09d7bcabce1378154	372677973	426942935	certificates/m6-b7-l6-hard-witness-positive-gain-coordinate-leaf-026.lrat.xz
+096	o17-w01-c17	051	o17-w01	1	17	16	10	23626	144280	10402605	e552a77b1c63cf03cb3d6430046f081deb1b8ca5cc9c7f1e75ebdddd9ec2653b	7103838	d6c0702ff3fc7fd0f44c5ba647ab7d2602985b863e128565badb5700e6da8b4d	470000	9aa5ca3dc0c2f499c48d08fcc5fd78d61e9c3a4626ce58172d899370b2af2c57	239039054	333721059	certificates/m6-b7-l6-hard-witness-positive-gain-coordinate-leaf-096.lrat.xz
+102	o17-w04-c17	054	o17-w04	1	17	16	10	23626	144280	10402606	25c5f5e653441f68262bf9e32496f30df8f1b6b2e551d4e4d7415730ee364522	7103171	b40ba59760fcf663882bd6ea9d13fa3d853e008db5636f627113b0e51d09fc32	469780	afb3eb9725e5b8112f6fe06204dd89879c0fb8a30d9c3ccc388914b7bb665702	319159825	421118266	certificates/m6-b7-l6-hard-witness-positive-gain-coordinate-leaf-102.lrat.xz
+172	o33-w01-c17	090	o33-w01	1	17	16	10	23626	144280	10402606	ce8f3f6d5efc42581cae9093a28c16124acaeccd8534dce293a7765382a68dae	7103745	c99e74d61185541dfce06a20cbb6536b190e3523428abfeedea3133a48ada0e0	469848	cf95fbdaf1aa38a87fed14985e66f75926f3330d6655cac1beef6cf2613e94bc	358006572	504653042	certificates/m6-b7-l6-hard-witness-positive-gain-coordinate-leaf-172.lrat.xz
+178	o33-w04-c17	093	o33-w04	1	17	16	10	23626	144280	10402606	74c070152b56cac21457b40045444f924a12626646e5432b7cacac7a5c0cccb2	7102840	4fccf8b2133e95392e73f62062fbf5595a17488974b71ee8ea2fcd9871fa0ae8	469560	e8ae46f841b2dbe3e827b453144120c69aab48e6e6f61a3e91dc74edf705d2ab	434853018	412198883	certificates/m6-b7-l6-hard-witness-positive-gain-coordinate-leaf-178.lrat.xz
+215	o41-w03-c16	115	o41-w03	0	16	17	10	23626	144280	10402607	ebaaa56f03941162c33ec0d36630be00cd1657d7dcbc1834220527830d27107a	7103710	76c0376215f5d29069bd7ac11249d3bb0928a695e6cf49fd6b4e86b9db643fc8	469832	453a16fc95964538c5e7d74b22206274a730d0d69b778b0d01cbbbdba2aad361	351937663	438842408	certificates/m6-b7-l6-hard-witness-positive-gain-coordinate-leaf-215.lrat.xz
+217	o41-w04-c16	116	o41-w04	0	16	17	10	23626	144280	10402607	b25e3c4122061c593585a96d7a7708cd108242655dce14d66c7c24399e572d33	7102806	b267bcd9d34dc8129143d563ee712b404fe5f7a24c786f85902076f0b84c1290	469544	9fc72cf39da988f2d8c45934f167d153a55dd8e237e4b90905438d6f95a70542	361390088	565099566	certificates/m6-b7-l6-hard-witness-positive-gain-coordinate-leaf-217.lrat.xz

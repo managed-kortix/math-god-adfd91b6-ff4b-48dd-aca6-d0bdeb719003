@@ -1,0 +1,37 @@
+m6-clean-sink-B6-l6-root-cardinality-certificate-v1
+generated-utc	2026-09-01
+scope	exact-clean-B6-l6-parent-group-root-cardinality
+groups	1
+parents	220
+certified-groups	1
+scout-unsat	1
+solver	CaDiCaL 1.7.3
+solver-binary-sha256	108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292
+solver-command	cadical --lrat --no-binary -q --restart=false --phase=false --seed=3 CNF LRAT
+checker	lrat-check
+checker-binary-sha256	e9e71c96b68dc9ed22db35d7581e613e6b161ffbc82c20cba5699f8320a065b8
+compression	xz -3
+compressor-binary	/usr/bin/xz
+compressor-binary-sha256	b5b163eb273291934556377ab883b4b2a5d4da50bd0dc0a91774ecc234ccd8d0
+compressed-limit-bytes-exclusive	250000000
+verifier-canonical-sha256	fdc5af724e9631515d85100474e05af258d7309a5db4947c9e2eff5320f7f849
+manifest-bytes	1003
+manifest-sha256	4dfe9fbb8ad8ab416d65a4cebe3d589507602cc87cd64962d3a82262a85b285a
+hash-ledger-bytes	315
+hash-ledger-sha256	aabf652d30fdfb0cd444d5bf38d6751cb4cb02d28ccf5de63291c3a700444519
+scout-bytes	634
+scout-sha256	a5f1dc9e79240eb590751769cf563788acb26132a17407276025f09c8a2ef5f2
+producer-bytes	5590
+producer-sha256	698ebeab80db4509a578cfd39212153cd44aea7156662d011ae17b71ef16ad89
+checker-bytes	9307
+checker-sha256	a25e1e26af20c201eec044c2dc223d58dfc181956e79a5bbaaec396d70ff6ddd
+scout-producer-bytes	2566
+scout-producer-sha256	175ce5263a2576ad9ad0bf7b85b1ff941522872ab2172902735defff0e0aeb16
+certificate-producer-bytes	3726
+certificate-producer-sha256	55167c6b59fe9089b625b467eeb18be43f1d49c6dc60716918158c676eb33228
+hostile-tests-bytes	1337
+hostile-tests-sha256	5fc48d89654f15660816df70d62a99116209a20c3c15d052ed25e3a88a0d032b
+group-source-bytes	11550
+group-source-sha256	9eb6455daf71a2127f76a197012c2e0f4a7c7f42021ddfcfbe244f9f733ed817
+columns	group,parents,variables,clauses,cnf-bytes,cnf-sha256,lrat-bytes,lrat-sha256,xz-bytes,xz-sha256,solve-nanoseconds,check-nanoseconds,artifact
+B6-l6	220	25849	184296	11162121	561fdd90e28fcc3c2fd2bbe79e55c42fd3ba2a520c55ddc84a9ee52557bb07cb	60393853	548b9e951616b49fc9c11c2da3febef9a6744cda93136a509e3875e8c652d43a	10147004	2d684357b51ec905c53288acaedd3421c4b29f8390c575bfa2f0b35a7000d9d7	0	0	certificates/m6-clean-sink-B6-l6-root-cardinality.lrat.xz

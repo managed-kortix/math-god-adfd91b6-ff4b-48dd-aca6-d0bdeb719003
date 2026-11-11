@@ -1,0 +1,314 @@
+{
+  "hash_ledger_bytes": 3598,
+  "hash_ledger_sha256": "2fd92c67a960223bdf6f7981f2914fac8413df85571c0413bfc1aec9280288b1",
+  "manifest_bytes": 3791,
+  "manifest_sha256": "59c0f1f2dfbda4fa5f28212996c60e99fbc57635b15929f9c9d9c62f2815544a",
+  "rows": [
+    {
+      "branch": 0,
+      "child": 0,
+      "cnf_sha256": "3ab514fb6d178f8ef8a95342c94f28f1385c0994a85caa685385f1fda7873589",
+      "key": "o00-w00-c17",
+      "seconds": 20.006,
+      "source_leaf": 0,
+      "status": "TIMEOUT",
+      "width": 2
+    },
+    {
+      "branch": 1,
+      "child": 1,
+      "cnf_sha256": "58b435550f1a03c90431026b49261a1f10f8ee9d2f28872dda399d1a11498c01",
+      "key": "o00-w00-c17",
+      "seconds": 20.005,
+      "source_leaf": 0,
+      "status": "TIMEOUT",
+      "width": 2
+    },
+    {
+      "branch": 0,
+      "child": 2,
+      "cnf_sha256": "8df40fc8b0bea65cb17d9d1b791eb02ecb579c10889154a4212d6945e2c562dc",
+      "key": "o01-w00-c17",
+      "seconds": 20.005,
+      "source_leaf": 2,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 1,
+      "child": 3,
+      "cnf_sha256": "cc3b6ce9d91637739e3ee9857646f9a7cca198dec584bf05395b1fcb2d39b1c1",
+      "key": "o01-w00-c17",
+      "seconds": 20.006,
+      "source_leaf": 2,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 0,
+      "child": 4,
+      "cnf_sha256": "3426bb239ed111940e51c451be181b54b807c6a451f96eb3b47675e011534626",
+      "key": "o01-w01-c17",
+      "seconds": 20.006,
+      "source_leaf": 4,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 1,
+      "child": 5,
+      "cnf_sha256": "c6128513232cfb683c0305622bacfa8e266c0d9011f0bc5cbb34f57363707578",
+      "key": "o01-w01-c17",
+      "seconds": 20.005,
+      "source_leaf": 4,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 0,
+      "child": 6,
+      "cnf_sha256": "62d79456ec87a25ad93a5408f65e58b814f2addffc6f01c8a3c2e923bf8d567a",
+      "key": "o01-w02-c17",
+      "seconds": 20.006,
+      "source_leaf": 6,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 1,
+      "child": 7,
+      "cnf_sha256": "bcf0c079e81d62b6f97c77ed6cb722536f8cda736a33c412860cacc7e4db58fa",
+      "key": "o01-w02-c17",
+      "seconds": 20.006,
+      "source_leaf": 6,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 0,
+      "child": 8,
+      "cnf_sha256": "b742f5fbd7acbb9da1e6f192b6e103648da20e6a93acf6da229db08141475997",
+      "key": "o01-w03-c17",
+      "seconds": 20.005,
+      "source_leaf": 8,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 1,
+      "child": 9,
+      "cnf_sha256": "6186d16bbe7ba5f8c0720b794c019393c3f7e5909e273316f823c8146caaeadb",
+      "key": "o01-w03-c17",
+      "seconds": 20.005,
+      "source_leaf": 8,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 0,
+      "child": 10,
+      "cnf_sha256": "5ae1f90e82799e828908e82d5d4bcb0dc51a92968cd186343904bc119bc52690",
+      "key": "o01-w04-c17",
+      "seconds": 20.005,
+      "source_leaf": 10,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 1,
+      "child": 11,
+      "cnf_sha256": "feb79a863eeeff27ad215fd50f8621c7e92c4516b81703da3dfdf540d6c3042b",
+      "key": "o01-w04-c17",
+      "seconds": 20.005,
+      "source_leaf": 10,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 0,
+      "child": 12,
+      "cnf_sha256": "6121ece79ec1336f7dbb53d40dac4d6e7564086845b8bd25429ff7e082bf6f8a",
+      "key": "o02-w00-c17",
+      "seconds": 20.005,
+      "source_leaf": 12,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 1,
+      "child": 13,
+      "cnf_sha256": "29d92bd492c7f97978543c21b91eface4a7adecd594ab741712eaab6f9b16456",
+      "key": "o02-w00-c17",
+      "seconds": 20.006,
+      "source_leaf": 12,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 0,
+      "child": 14,
+      "cnf_sha256": "a8f2c37cef840b80707e687a5e294f4431bff5fb7b0252b3ab412a7bb4e90115",
+      "key": "o02-w01-c17",
+      "seconds": 20.005,
+      "source_leaf": 14,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 1,
+      "child": 15,
+      "cnf_sha256": "63e70aef006599c258be969748cd9ff4a5a675aea154e8b73269576a4dbec3e3",
+      "key": "o02-w01-c17",
+      "seconds": 20.005,
+      "source_leaf": 14,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 0,
+      "child": 16,
+      "cnf_sha256": "b17857e20c51b29b62591c30bfa2e9bc88ea0f6ab7fe7e3033c91264bdbc023d",
+      "key": "o02-w02-c17",
+      "seconds": 20.006,
+      "source_leaf": 16,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 1,
+      "child": 17,
+      "cnf_sha256": "32283b777bcff03f62d40e88b417965d8fe24e815c3bfc0356703a1027364044",
+      "key": "o02-w02-c17",
+      "seconds": 20.005,
+      "source_leaf": 16,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 0,
+      "child": 18,
+      "cnf_sha256": "c2efc7900b7c399b4c0c1ae051bcbc7483e541e2177723b4b6cca711aa4c4ecc",
+      "key": "o04-w00-c17",
+      "seconds": 20.006,
+      "source_leaf": 22,
+      "status": "TIMEOUT",
+      "width": 2
+    },
+    {
+      "branch": 1,
+      "child": 19,
+      "cnf_sha256": "238f0a274c639e7ca8523c867f638520034834ea8a87d7a746b460e3afb6b6be",
+      "key": "o04-w00-c17",
+      "seconds": 20.006,
+      "source_leaf": 22,
+      "status": "TIMEOUT",
+      "width": 2
+    },
+    {
+      "branch": 0,
+      "child": 20,
+      "cnf_sha256": "f76505bf19f47c05d84574d15c2c332e5cc0a4a8e7f673b21444b965be95f472",
+      "key": "o05-w00-c17",
+      "seconds": 20.005,
+      "source_leaf": 24,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 1,
+      "child": 21,
+      "cnf_sha256": "bd26685b1466b808018ade466fab34c81d47bd9577486664af63a0e1f6c97645",
+      "key": "o05-w00-c17",
+      "seconds": 20.006,
+      "source_leaf": 24,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 0,
+      "child": 22,
+      "cnf_sha256": "af73e79b180753945498cf85f66fafee5cd1f08dd6fab547306e38d07b7e3c47",
+      "key": "o05-w01-c17",
+      "seconds": 20.005,
+      "source_leaf": 26,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 1,
+      "child": 23,
+      "cnf_sha256": "4ab4f560a154dc85f33e38be652f6cc37119cd34616e5fedb54434234b73fc26",
+      "key": "o05-w01-c17",
+      "seconds": 20.006,
+      "source_leaf": 26,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 0,
+      "child": 24,
+      "cnf_sha256": "da4636fbb038696de664b5001fc986a0bae65af3135633eca969b01d376d2976",
+      "key": "o06-w00-c17",
+      "seconds": 20.005,
+      "source_leaf": 33,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 1,
+      "child": 25,
+      "cnf_sha256": "4f8489208fbba3aa6dc3b2747060613295370169c43890aa83b174538ac7dd91",
+      "key": "o06-w00-c17",
+      "seconds": 20.006,
+      "source_leaf": 33,
+      "status": "TIMEOUT",
+      "width": 4
+    },
+    {
+      "branch": 0,
+      "child": 26,
+      "cnf_sha256": "d4786ed2f65bf792ab608e8c44b2b79674294b89544894b4297445d2d0ec145b",
+      "key": "o16-w00-c17",
+      "seconds": 20.005,
+      "source_leaf": 67,
+      "status": "TIMEOUT",
+      "width": 10
+    },
+    {
+      "branch": 1,
+      "child": 27,
+      "cnf_sha256": "f914228dd5a2d0eb7488032843180149e62453c6930a7a5bc6413264e2b49070",
+      "key": "o16-w00-c17",
+      "seconds": 20.006,
+      "source_leaf": 67,
+      "status": "TIMEOUT",
+      "width": 10
+    },
+    {
+      "branch": 0,
+      "child": 28,
+      "cnf_sha256": "81b417311183b3d8daa477cee30ce3ca38c18ef615c3867637b036d3cdae518c",
+      "key": "o16-w03-c17",
+      "seconds": 20.005,
+      "source_leaf": 71,
+      "status": "TIMEOUT",
+      "width": 10
+    },
+    {
+      "branch": 1,
+      "child": 29,
+      "cnf_sha256": "a8b74ccee7823f70c1539949f706c97456a452d7658af899d6d2c1650658e730",
+      "key": "o16-w03-c17",
+      "seconds": 20.006,
+      "source_leaf": 71,
+      "status": "TIMEOUT",
+      "width": 10
+    }
+  ],
+  "schema": "m6-b7-l6-hard-witness-positive-gain-coordinate-grouped-residual-b2-split-scout-v1",
+  "seconds_per_child": 20,
+  "solver": "/tmp/opencode/cadical-1.7.3/build/cadical",
+  "solver_bytes": 1002216,
+  "solver_sha256": "108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292",
+  "solver_version": "1.7.3"
+}

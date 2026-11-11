@@ -1,0 +1,1743 @@
+{
+  "hash_ledger_bytes": 19648,
+  "hash_ledger_sha256": "150b7a86960078f78d64cb82f499403bf8e9359ec24c936838f99dc6b299a358",
+  "manifest_bytes": 8714,
+  "manifest_sha256": "b9488ecb3cd8f734d213ef891ccd5e3695b3415319806f7e5190fa26f3f45c11",
+  "rows": [
+    {
+      "child": 0,
+      "cnf_sha256": "54eb2207e6b62fbe2d4e0a8cda86ab229b2dcf0456622669f0d596c60cc0a742",
+      "compatible_parents": 1,
+      "key": "o03-i00",
+      "profile": 3,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 1,
+      "cnf_sha256": "c00ae7ff119877b52474f090d05ce18bdc385fcf82cef54b1b0dc98389d50484",
+      "compatible_parents": 1,
+      "key": "o03-i01",
+      "profile": 3,
+      "seconds": 1.004,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 2,
+      "cnf_sha256": "f3225ed7ef4d58b028cd98993770c93b165e8c00036feaa62082d372f5a9b81b",
+      "compatible_parents": 2,
+      "key": "o03-i02",
+      "profile": 3,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 3,
+      "cnf_sha256": "49f139e5e97c62f3b3e5645136e7b8f430e747d6e5c3e1f6d72b08b373690374",
+      "compatible_parents": 4,
+      "key": "o03-i03",
+      "profile": 3,
+      "seconds": 0.161,
+      "status": "UNSAT"
+    },
+    {
+      "child": 4,
+      "cnf_sha256": "4f28aec8d23f6483122aef5bd1db520ef33c80e92db6260b25014fb23d1431ed",
+      "compatible_parents": 4,
+      "key": "o03-i04",
+      "profile": 3,
+      "seconds": 0.165,
+      "status": "UNSAT"
+    },
+    {
+      "child": 5,
+      "cnf_sha256": "d5c923d1af1eaa89f54d80e8ee474af2a5463c05f401a9afc99891dde36b8eb7",
+      "compatible_parents": 2,
+      "key": "o03-i05",
+      "profile": 3,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 6,
+      "cnf_sha256": "463ec4c04f1f9c4f54eb97033ad94d9ac29df8b008784a5b9235eba6278f72a7",
+      "compatible_parents": 3,
+      "key": "o03-i06",
+      "profile": 3,
+      "seconds": 0.165,
+      "status": "UNSAT"
+    },
+    {
+      "child": 7,
+      "cnf_sha256": "3c206170d5a9a46817820ee14f2ad0fcc734cefde9c3850d393fa2895d42e034",
+      "compatible_parents": 3,
+      "key": "o03-i07",
+      "profile": 3,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 8,
+      "cnf_sha256": "0859e47ac5d2418888dcad60effdbabb87c5af2fc2ecf498055cb1c28bd7143b",
+      "compatible_parents": 1,
+      "key": "o03-i08",
+      "profile": 3,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 9,
+      "cnf_sha256": "aadb49aee52733deaa209584f175dcca5ebaa392d141e2730ff9cc0bdb356d22",
+      "compatible_parents": 3,
+      "key": "o03-i09",
+      "profile": 3,
+      "seconds": 0.16,
+      "status": "UNSAT"
+    },
+    {
+      "child": 10,
+      "cnf_sha256": "ba6a9ce761640539588106aabf2e7f7bf91b70d09b809518c67a6666ebc03687",
+      "compatible_parents": 3,
+      "key": "o03-i10",
+      "profile": 3,
+      "seconds": 0.169,
+      "status": "UNSAT"
+    },
+    {
+      "child": 11,
+      "cnf_sha256": "5b7e7052786d04909d8777c7d62a0704a886a5ca7dfbeacc35fd8e3fdb7bc60c",
+      "compatible_parents": 2,
+      "key": "o03-i11",
+      "profile": 3,
+      "seconds": 0.169,
+      "status": "UNSAT"
+    },
+    {
+      "child": 12,
+      "cnf_sha256": "2e8015416da0b1a4475833def870442bbae7648601f42fac8a1f7490aa7395b6",
+      "compatible_parents": 4,
+      "key": "o03-i12",
+      "profile": 3,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 13,
+      "cnf_sha256": "7a72eb9c1340ffffe3db90f1f1b28d03cf89d76fbf1a10c97ca36d04322e6b7a",
+      "compatible_parents": 4,
+      "key": "o03-i13",
+      "profile": 3,
+      "seconds": 0.167,
+      "status": "UNSAT"
+    },
+    {
+      "child": 14,
+      "cnf_sha256": "b09ef48ce146ef5fc9f32e1b48d8ead66651dece9b88be329bcbe49fcb37c2c6",
+      "compatible_parents": 1,
+      "key": "o03-i14",
+      "profile": 3,
+      "seconds": 0.173,
+      "status": "UNSAT"
+    },
+    {
+      "child": 15,
+      "cnf_sha256": "ec72ee64e76d3cb9d76db42091cfca700d69fc5f8ad8b4d17016c232f5513ad8",
+      "compatible_parents": 5,
+      "key": "o03-i15",
+      "profile": 3,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 16,
+      "cnf_sha256": "e62dc8c18083bc163089cf69c03b6f1c13940a33e945839cebce6cdb69745e70",
+      "compatible_parents": 5,
+      "key": "o03-i16",
+      "profile": 3,
+      "seconds": 0.165,
+      "status": "UNSAT"
+    },
+    {
+      "child": 17,
+      "cnf_sha256": "3faf5c2962d029a13ec4a668e57aee2b0b211a56b6cf51a8b76544fdaa99b570",
+      "compatible_parents": 1,
+      "key": "o03-i17",
+      "profile": 3,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 18,
+      "cnf_sha256": "b251c91c515cff8f2aa4a0c451056b9571fb9e719aab82c98ca249751348c7d5",
+      "compatible_parents": 1,
+      "key": "o03-i18",
+      "profile": 3,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 19,
+      "cnf_sha256": "f2d19291f4b5f95aa32f473046be46b2e3251eb133da20ecd3928f3194161cf6",
+      "compatible_parents": 10,
+      "key": "o03-i19",
+      "profile": 3,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 20,
+      "cnf_sha256": "9a533c84ec786e1135996693f402f2c097caaab42f9aa49c1bd9d5ed65e209ff",
+      "compatible_parents": 10,
+      "key": "o03-i20",
+      "profile": 3,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 21,
+      "cnf_sha256": "d0730249e6a5e8a3c344dbb96d4039e93ff6e7b9ffac760272b935a9be272a0c",
+      "compatible_parents": 10,
+      "key": "o03-i21",
+      "profile": 3,
+      "seconds": 0.169,
+      "status": "UNSAT"
+    },
+    {
+      "child": 22,
+      "cnf_sha256": "3be4962101e56efabee925adec7ffbc75fedaf2ef45d765d51cdcda709cf2fef",
+      "compatible_parents": 4,
+      "key": "o11-i00",
+      "profile": 11,
+      "seconds": 0.165,
+      "status": "UNSAT"
+    },
+    {
+      "child": 23,
+      "cnf_sha256": "6abd6e8a40c31dce752a1719bf397a366c204787500550bb41164d2949e4b5b7",
+      "compatible_parents": 3,
+      "key": "o11-i01",
+      "profile": 11,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 24,
+      "cnf_sha256": "e3f75269c6df92937332f46de8ebd3457ea8a990c02c0a8665a51b6031b17d4c",
+      "compatible_parents": 2,
+      "key": "o11-i02",
+      "profile": 11,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 25,
+      "cnf_sha256": "22190ce7e9a379ed5285765c7f7ffc84dda22ac59a785ea69dd84b02f4e35fb3",
+      "compatible_parents": 1,
+      "key": "o11-i03",
+      "profile": 11,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 26,
+      "cnf_sha256": "7bc58fbdbbca5e9412a6848486b8bef7f258cbbba07c0ad7b70e0021969ca429",
+      "compatible_parents": 5,
+      "key": "o11-i04",
+      "profile": 11,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 27,
+      "cnf_sha256": "d02e449248396df4668bd032bd7a7bfe71412175c396c3f8b78b9f0a5e502e93",
+      "compatible_parents": 5,
+      "key": "o11-i05",
+      "profile": 11,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 28,
+      "cnf_sha256": "9c47ddecf505c4100ff19e2faa7dcc63df8693328fa3dc8d1b2ce86dade48ee4",
+      "compatible_parents": 4,
+      "key": "o11-i06",
+      "profile": 11,
+      "seconds": 0.17,
+      "status": "UNSAT"
+    },
+    {
+      "child": 29,
+      "cnf_sha256": "0bdf9b3fcc3da7c16620cbf87f8e30ec02111b5f9cc5aebaf160fcc8b0764390",
+      "compatible_parents": 3,
+      "key": "o11-i07",
+      "profile": 11,
+      "seconds": 0.173,
+      "status": "UNSAT"
+    },
+    {
+      "child": 30,
+      "cnf_sha256": "ece81cf256ac6a386b471817692f6137f4c13bdcf4e5f603c37ba555ca55609c",
+      "compatible_parents": 2,
+      "key": "o11-i08",
+      "profile": 11,
+      "seconds": 0.168,
+      "status": "UNSAT"
+    },
+    {
+      "child": 31,
+      "cnf_sha256": "fbc77388f09f9b4cfec57de25fb0be81466675ed0181870784459d5911f35ed2",
+      "compatible_parents": 1,
+      "key": "o11-i09",
+      "profile": 11,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 32,
+      "cnf_sha256": "6a8cd76c74d325dbb357cdb70051a97e8fd63a26ed0fe5600acfa869e4cc786c",
+      "compatible_parents": 7,
+      "key": "o11-i10",
+      "profile": 11,
+      "seconds": 0.17,
+      "status": "UNSAT"
+    },
+    {
+      "child": 33,
+      "cnf_sha256": "d208941798225a0b6f3c5a99a9eede0270323fedabbb2893ea6e1f34a0d5f712",
+      "compatible_parents": 7,
+      "key": "o11-i11",
+      "profile": 11,
+      "seconds": 1.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 34,
+      "cnf_sha256": "ba6f03ee2f2235d19c8779ec80fe59588a11561d8aa3155739f944c27580bbf1",
+      "compatible_parents": 2,
+      "key": "o11-i12",
+      "profile": 11,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 35,
+      "cnf_sha256": "fe84f2b6634afce2db1597385af54f52a29d911b639aefb2fdbe835de6e1cc50",
+      "compatible_parents": 1,
+      "key": "o11-i13",
+      "profile": 11,
+      "seconds": 0.161,
+      "status": "UNSAT"
+    },
+    {
+      "child": 36,
+      "cnf_sha256": "8ed9b81055229dcd03db89cd9cda941b7932992052f62a25637e2cb5f2f2c0d1",
+      "compatible_parents": 5,
+      "key": "o11-i14",
+      "profile": 11,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 37,
+      "cnf_sha256": "ede6819dffad49cea52dc759ce06561cbb0f8c1486a3bfe62994413aae35c097",
+      "compatible_parents": 5,
+      "key": "o11-i15",
+      "profile": 11,
+      "seconds": 1.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 38,
+      "cnf_sha256": "a231226632cc34553d2839697648fe673f40936fa6204fa50addc27ac695ae25",
+      "compatible_parents": 2,
+      "key": "o11-i16",
+      "profile": 11,
+      "seconds": 0.165,
+      "status": "UNSAT"
+    },
+    {
+      "child": 39,
+      "cnf_sha256": "21f5e059b20dcaec53df9796fef07f457ecaffdfc689de4512a66ee4972946bc",
+      "compatible_parents": 1,
+      "key": "o11-i17",
+      "profile": 11,
+      "seconds": 0.161,
+      "status": "UNSAT"
+    },
+    {
+      "child": 40,
+      "cnf_sha256": "cee93b396bc4de5689be69638593cdf00e5b8ce92c5883a69eee15394b82e320",
+      "compatible_parents": 5,
+      "key": "o11-i18",
+      "profile": 11,
+      "seconds": 0.168,
+      "status": "UNSAT"
+    },
+    {
+      "child": 41,
+      "cnf_sha256": "7c0ee22899e0b43ec4217b1ac746d18bed4ce7d011b3047ef14db1ff4861ec6c",
+      "compatible_parents": 5,
+      "key": "o11-i19",
+      "profile": 11,
+      "seconds": 1.006,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 42,
+      "cnf_sha256": "7c5dd0267d1cdf617cbf147ca6169611a2087ef6b3901639eed941e9264e1808",
+      "compatible_parents": 2,
+      "key": "o11-i20",
+      "profile": 11,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 43,
+      "cnf_sha256": "6ca97de3a316ec90588c13273c631ddfe1df2542a00558b5768757fef3dc6ed5",
+      "compatible_parents": 1,
+      "key": "o11-i21",
+      "profile": 11,
+      "seconds": 0.167,
+      "status": "UNSAT"
+    },
+    {
+      "child": 44,
+      "cnf_sha256": "cc53024ca519a08d91d5b274203b63ac2cead8cdbaa8c122d922bc4d1e63ba09",
+      "compatible_parents": 4,
+      "key": "o11-i22",
+      "profile": 11,
+      "seconds": 0.165,
+      "status": "UNSAT"
+    },
+    {
+      "child": 45,
+      "cnf_sha256": "ca6c015defc03aed6377e774e9079b6f1a7cb4a2c28c318d95353c67c6545ee3",
+      "compatible_parents": 4,
+      "key": "o11-i23",
+      "profile": 11,
+      "seconds": 1.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 46,
+      "cnf_sha256": "14fd65422c04303057c9765afadbee97f2fd000086fccefb61c4381ce028eaff",
+      "compatible_parents": 1,
+      "key": "o11-i24",
+      "profile": 11,
+      "seconds": 0.168,
+      "status": "UNSAT"
+    },
+    {
+      "child": 47,
+      "cnf_sha256": "268a2603d7e4ce66f96ec62a5db808d1cb1221dfa4a858fa79941af5a9356684",
+      "compatible_parents": 3,
+      "key": "o11-i25",
+      "profile": 11,
+      "seconds": 0.173,
+      "status": "UNSAT"
+    },
+    {
+      "child": 48,
+      "cnf_sha256": "8076635f51dcafe16d0c4d2cfd2c3ccff6e707de9c625d5b67a569e8b8015618",
+      "compatible_parents": 3,
+      "key": "o11-i26",
+      "profile": 11,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 49,
+      "cnf_sha256": "d94a9cbaeebf2e62935637cb55dcdbff73adebf865988b57245f077a093bf956",
+      "compatible_parents": 1,
+      "key": "o11-i27",
+      "profile": 11,
+      "seconds": 0.176,
+      "status": "UNSAT"
+    },
+    {
+      "child": 50,
+      "cnf_sha256": "0e71e20d15684c2a687adf70ce96e5a8747b2c61425edf4e70d53b5eb22695f1",
+      "compatible_parents": 1,
+      "key": "o11-i28",
+      "profile": 11,
+      "seconds": 0.16,
+      "status": "UNSAT"
+    },
+    {
+      "child": 51,
+      "cnf_sha256": "9e3177cdf999c748f9d54b9079de73092d3d8fb325f5520a2d7ffc72ee4ec320",
+      "compatible_parents": 10,
+      "key": "o11-i29",
+      "profile": 11,
+      "seconds": 0.165,
+      "status": "UNSAT"
+    },
+    {
+      "child": 52,
+      "cnf_sha256": "2b153d0650af398106caa52cf30e95809bb497f1d308a7d58bf68eade556e384",
+      "compatible_parents": 10,
+      "key": "o11-i30",
+      "profile": 11,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 53,
+      "cnf_sha256": "40d116da7aba9c1506162dc1f25f7b9044e8887f188be9b237669d8e9e555046",
+      "compatible_parents": 2,
+      "key": "o23-i00",
+      "profile": 23,
+      "seconds": 0.161,
+      "status": "UNSAT"
+    },
+    {
+      "child": 54,
+      "cnf_sha256": "be4a865b34cff16ca7f66bb05792bf97c4c12b57ef6f8f32c9315a29ed1988ae",
+      "compatible_parents": 2,
+      "key": "o23-i01",
+      "profile": 23,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 55,
+      "cnf_sha256": "0c8962f03a9d5d3db49cb678a9295b7936c59e0a74dfb03d41c0c8548a5cfbf7",
+      "compatible_parents": 2,
+      "key": "o23-i02",
+      "profile": 23,
+      "seconds": 1.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 56,
+      "cnf_sha256": "116a7affd36c906c737cab68143652f16e0abd0e06ffac16c1d0ddc1a1869081",
+      "compatible_parents": 2,
+      "key": "o23-i03",
+      "profile": 23,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 57,
+      "cnf_sha256": "8f05509a9f555fab9fbf03963150f36c3bc7f43f4b573836c7fb669ce15ef146",
+      "compatible_parents": 2,
+      "key": "o23-i04",
+      "profile": 23,
+      "seconds": 0.165,
+      "status": "UNSAT"
+    },
+    {
+      "child": 58,
+      "cnf_sha256": "6e35e45411926cc6a0f82903fcc8774048fe765391cbe6150ae7137edd30079b",
+      "compatible_parents": 2,
+      "key": "o23-i05",
+      "profile": 23,
+      "seconds": 0.167,
+      "status": "UNSAT"
+    },
+    {
+      "child": 59,
+      "cnf_sha256": "6baefcf42a8012d5a1549a762b15d00f1faf522605cbb5826d47a8bfe93be4ad",
+      "compatible_parents": 1,
+      "key": "o23-i06",
+      "profile": 23,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 60,
+      "cnf_sha256": "a3a6ffe98ee72f00b6564c487d3f23fd08ed3d979c0128c9d3aa7753a17980e6",
+      "compatible_parents": 1,
+      "key": "o23-i07",
+      "profile": 23,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 61,
+      "cnf_sha256": "3301e392f7549b69be26dface4bb28afdeff1099c6b97c57d2bece3abb6c1b52",
+      "compatible_parents": 1,
+      "key": "o23-i08",
+      "profile": 23,
+      "seconds": 0.161,
+      "status": "UNSAT"
+    },
+    {
+      "child": 62,
+      "cnf_sha256": "62f62da8a09611efe17b7fbe917f00d7cbae3bfe4ffbe0643f84be925ae80dbb",
+      "compatible_parents": 1,
+      "key": "o23-i09",
+      "profile": 23,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 63,
+      "cnf_sha256": "e243f62396dbb943ca342fcac35a7df2a8e0e80f2f653d3b926970a345be723d",
+      "compatible_parents": 1,
+      "key": "o23-i10",
+      "profile": 23,
+      "seconds": 0.161,
+      "status": "UNSAT"
+    },
+    {
+      "child": 64,
+      "cnf_sha256": "217544277d2f563e8edc4108cd471b36dc6f2436fe666dba12f80dbd93fb5d04",
+      "compatible_parents": 1,
+      "key": "o23-i11",
+      "profile": 23,
+      "seconds": 0.161,
+      "status": "UNSAT"
+    },
+    {
+      "child": 65,
+      "cnf_sha256": "dc28b55998360de72753e84dc0686bccd4e3792e27cb0372e969ecffc2759c3e",
+      "compatible_parents": 6,
+      "key": "o23-i12",
+      "profile": 23,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 66,
+      "cnf_sha256": "b14b4d823642abc1f769529f4efcaf42f219a545bfa4b4c92220a7472669cebd",
+      "compatible_parents": 6,
+      "key": "o23-i13",
+      "profile": 23,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 67,
+      "cnf_sha256": "b5b2d716fb6c5ab2b26e1fd50ac0c38d29e8135daa9f2f76e62944d3016662dd",
+      "compatible_parents": 6,
+      "key": "o23-i14",
+      "profile": 23,
+      "seconds": 0.168,
+      "status": "UNSAT"
+    },
+    {
+      "child": 68,
+      "cnf_sha256": "3ea5dd678b44ed7305ff68f81300e3ec37bfca6fef6ed6edccbbfafcaab95ffe",
+      "compatible_parents": 6,
+      "key": "o23-i15",
+      "profile": 23,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 69,
+      "cnf_sha256": "5ad40550354046b8f2fc624ff66d565624fb5b038bdb727bae69b1c746e33e0b",
+      "compatible_parents": 6,
+      "key": "o23-i16",
+      "profile": 23,
+      "seconds": 0.168,
+      "status": "UNSAT"
+    },
+    {
+      "child": 70,
+      "cnf_sha256": "2a70c561b99b1f109e12ebf89947cd4553c43b059d6a6c6650123b442e76e6b7",
+      "compatible_parents": 1,
+      "key": "o25-i00",
+      "profile": 25,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 71,
+      "cnf_sha256": "9d6c30a478166599bf191a95c8ec7ee73faa6792879a80a8cb25fd4542f392ca",
+      "compatible_parents": 1,
+      "key": "o25-i01",
+      "profile": 25,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 72,
+      "cnf_sha256": "42e0ee8dd0e82b64d8977ba73f674a1a2b473fde3616ac2e50f8b7fdf69a204c",
+      "compatible_parents": 2,
+      "key": "o25-i02",
+      "profile": 25,
+      "seconds": 0.167,
+      "status": "UNSAT"
+    },
+    {
+      "child": 73,
+      "cnf_sha256": "3ee3c7a0aed9dcc5796b0ebf99a03f8269853b31811eaa5123bbcf89a5c24807",
+      "compatible_parents": 4,
+      "key": "o25-i03",
+      "profile": 25,
+      "seconds": 0.165,
+      "status": "UNSAT"
+    },
+    {
+      "child": 74,
+      "cnf_sha256": "d2e6b66d9fe0458d3327ce6b554de0f159537e9e979423164f42b24c424427fd",
+      "compatible_parents": 4,
+      "key": "o25-i04",
+      "profile": 25,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 75,
+      "cnf_sha256": "00842c3ea1eebf5732c99ad554f58051a927e48a1f4facc5d3c4ee914c00a0e1",
+      "compatible_parents": 4,
+      "key": "o25-i05",
+      "profile": 25,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 76,
+      "cnf_sha256": "f48777f37e9ea466a70dd9c80e7447c631deb6400e917945b18c0db690fe7771",
+      "compatible_parents": 2,
+      "key": "o25-i06",
+      "profile": 25,
+      "seconds": 0.17,
+      "status": "UNSAT"
+    },
+    {
+      "child": 77,
+      "cnf_sha256": "78d95c2b54b0c7aae88ab57bb9eaf69e96f6eb5ed1108f72deb667c6e25fb803",
+      "compatible_parents": 3,
+      "key": "o25-i07",
+      "profile": 25,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 78,
+      "cnf_sha256": "3bf19d8b3cd436cfde8c8971aabc5ee7db6c56f2f2cc453b90aae1ea58800473",
+      "compatible_parents": 3,
+      "key": "o25-i08",
+      "profile": 25,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 79,
+      "cnf_sha256": "3c48315f09a3c121a67054a7cf04e30dc726c03e7f41397cb4aa8d2f9db1a777",
+      "compatible_parents": 3,
+      "key": "o25-i09",
+      "profile": 25,
+      "seconds": 1.006,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 80,
+      "cnf_sha256": "707792f9e50abfa63561c57366fca643bcd15390ca859c77d73e030665d658e7",
+      "compatible_parents": 1,
+      "key": "o25-i10",
+      "profile": 25,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 81,
+      "cnf_sha256": "329eb183ac13e696828e36ca1e27c5b6cda469c891b9e82e56c1b6e1f7443847",
+      "compatible_parents": 3,
+      "key": "o25-i11",
+      "profile": 25,
+      "seconds": 0.167,
+      "status": "UNSAT"
+    },
+    {
+      "child": 82,
+      "cnf_sha256": "3045ae44102f244014920c9d37d5b6f6382cf49485d2ebcbebdc84f5cb11af6e",
+      "compatible_parents": 3,
+      "key": "o25-i12",
+      "profile": 25,
+      "seconds": 0.161,
+      "status": "UNSAT"
+    },
+    {
+      "child": 83,
+      "cnf_sha256": "aae465a2efca80496722b94e3adf88bde8f5b367500634a70f461c5cfa7ef55a",
+      "compatible_parents": 3,
+      "key": "o25-i13",
+      "profile": 25,
+      "seconds": 0.168,
+      "status": "UNSAT"
+    },
+    {
+      "child": 84,
+      "cnf_sha256": "e2607a17e8d4ade3a22f538b4cabeedbfafd9a68a34bd6962873dd2e235acac4",
+      "compatible_parents": 2,
+      "key": "o25-i14",
+      "profile": 25,
+      "seconds": 0.172,
+      "status": "UNSAT"
+    },
+    {
+      "child": 85,
+      "cnf_sha256": "44b6894fe9d992aeb106d6073486a3f40fa7c883572f7dec38a7e97f23d9cdd4",
+      "compatible_parents": 4,
+      "key": "o25-i15",
+      "profile": 25,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 86,
+      "cnf_sha256": "641c5d4fe2f2a02520d1bb42b88b3aaa1240a03b4d8dd827c5550363e2840b4a",
+      "compatible_parents": 4,
+      "key": "o25-i16",
+      "profile": 25,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 87,
+      "cnf_sha256": "613eabbea41a49c7afc39846735f159d78f6794e51064dbfce0ddb89d60acfff",
+      "compatible_parents": 4,
+      "key": "o25-i17",
+      "profile": 25,
+      "seconds": 1.008,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 88,
+      "cnf_sha256": "f0022c0e5a6eb2a0cd51e8f50770629f497779afe2a84ee4b8de7fac6912536d",
+      "compatible_parents": 1,
+      "key": "o25-i18",
+      "profile": 25,
+      "seconds": 0.16,
+      "status": "UNSAT"
+    },
+    {
+      "child": 89,
+      "cnf_sha256": "21f131ff70a2727d01e5b2f71037c6c334a98d08d401e0245d551bd1f7a69fea",
+      "compatible_parents": 5,
+      "key": "o25-i19",
+      "profile": 25,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 90,
+      "cnf_sha256": "323a4ecda14960780019c396e421f0aae7f0efa90be1c82d3f50352865643b33",
+      "compatible_parents": 5,
+      "key": "o25-i20",
+      "profile": 25,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 91,
+      "cnf_sha256": "dee00838309426989f0b154f5d42db25a189c30dac9e07e9722baf8e60210968",
+      "compatible_parents": 5,
+      "key": "o25-i21",
+      "profile": 25,
+      "seconds": 1.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 92,
+      "cnf_sha256": "e56ffe82742d3065de6b9b4eaf7d53f3aaf888ee1b6a03d7076e3008953d9dbb",
+      "compatible_parents": 1,
+      "key": "o25-i22",
+      "profile": 25,
+      "seconds": 0.16,
+      "status": "UNSAT"
+    },
+    {
+      "child": 93,
+      "cnf_sha256": "c79cf11c90c914eefb4b90e38888a17b95b93f5a8762126530936fe0ee392e88",
+      "compatible_parents": 1,
+      "key": "o25-i23",
+      "profile": 25,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 94,
+      "cnf_sha256": "160dabc5361bf744278a84376d09f6ebdeb5ef834b5beb9a31136673c3ffa771",
+      "compatible_parents": 1,
+      "key": "o25-i24",
+      "profile": 25,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 95,
+      "cnf_sha256": "941af06092298970d1d8ed189ba3542b46c95c1399c66d2286b6007cf714cab3",
+      "compatible_parents": 10,
+      "key": "o25-i25",
+      "profile": 25,
+      "seconds": 0.171,
+      "status": "UNSAT"
+    },
+    {
+      "child": 96,
+      "cnf_sha256": "e2af1f4cedfc49ca5bc9f672b7b10ce055ca19188496bb1ac070019f32fc3079",
+      "compatible_parents": 10,
+      "key": "o25-i26",
+      "profile": 25,
+      "seconds": 0.169,
+      "status": "UNSAT"
+    },
+    {
+      "child": 97,
+      "cnf_sha256": "cdf4662e3f1c2a2f6d0301e4171772f9d337f165dd1f3a919ecd9625272a5176",
+      "compatible_parents": 10,
+      "key": "o25-i27",
+      "profile": 25,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 98,
+      "cnf_sha256": "b9c24287e3dcbe420328e2affd9958dd0e560ba2648cee9dc0bbbdea1cfde79e",
+      "compatible_parents": 10,
+      "key": "o25-i28",
+      "profile": 25,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 99,
+      "cnf_sha256": "29ddd5533dd0a73a030c277868b501c0c158c19931ecac8193a416e2d7fa976e",
+      "compatible_parents": 10,
+      "key": "o25-i29",
+      "profile": 25,
+      "seconds": 0.167,
+      "status": "UNSAT"
+    },
+    {
+      "child": 100,
+      "cnf_sha256": "5cfdd998d5385908f10743a690775fbe6dfc9d1d4bd46cecce5ef32525cef6d3",
+      "compatible_parents": 2,
+      "key": "o28-i00",
+      "profile": 28,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 101,
+      "cnf_sha256": "8fbb3e525fb7ddc20632f584140f50d41fb68dbb019ef9b82a752caa6b88713e",
+      "compatible_parents": 3,
+      "key": "o28-i01",
+      "profile": 28,
+      "seconds": 0.165,
+      "status": "UNSAT"
+    },
+    {
+      "child": 102,
+      "cnf_sha256": "258e0363dfe0a04e88ff45511ffe93c3da9450af4a8b5be9bc1557aff5e16f4d",
+      "compatible_parents": 2,
+      "key": "o28-i02",
+      "profile": 28,
+      "seconds": 0.169,
+      "status": "UNSAT"
+    },
+    {
+      "child": 103,
+      "cnf_sha256": "ab6030b6b19ee2750e99569d0c18312b69da0ede754f231efd37016dfcfa7b24",
+      "compatible_parents": 1,
+      "key": "o28-i03",
+      "profile": 28,
+      "seconds": 0.161,
+      "status": "UNSAT"
+    },
+    {
+      "child": 104,
+      "cnf_sha256": "a05071f10bade2e341ce4b0cca787f505379c06916a371f00423715741cf57c3",
+      "compatible_parents": 4,
+      "key": "o28-i04",
+      "profile": 28,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 105,
+      "cnf_sha256": "80e91789798b0fe56aec6768b5fd652a9a33867e0926fa2cbf2141105a39dc09",
+      "compatible_parents": 4,
+      "key": "o28-i05",
+      "profile": 28,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 106,
+      "cnf_sha256": "7b2f2f71f4e69d16c480c8b27b8cdcd50ca633029f1c69d01d7bfde2cdb8cb5b",
+      "compatible_parents": 5,
+      "key": "o28-i06",
+      "profile": 28,
+      "seconds": 0.169,
+      "status": "UNSAT"
+    },
+    {
+      "child": 107,
+      "cnf_sha256": "754ad01632d92ba6c08069361625d9f4bfc0f65eca68ff664dd03293589cf014",
+      "compatible_parents": 3,
+      "key": "o28-i07",
+      "profile": 28,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 108,
+      "cnf_sha256": "c0c935ab30c349cdb41b20c18868daa5d19da1639beda18da65d274fd0a9a3d9",
+      "compatible_parents": 5,
+      "key": "o28-i08",
+      "profile": 28,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 109,
+      "cnf_sha256": "8758f5fd3deac476127250cf3b2f2864a33a9c7b8b590f99248eeb016b36cecd",
+      "compatible_parents": 5,
+      "key": "o28-i09",
+      "profile": 28,
+      "seconds": 1.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 110,
+      "cnf_sha256": "9d617c4c2f9cf49c90c003d466bc3cfc8664b2c546181d8b1584f1b51312c1a9",
+      "compatible_parents": 6,
+      "key": "o28-i10",
+      "profile": 28,
+      "seconds": 0.165,
+      "status": "UNSAT"
+    },
+    {
+      "child": 111,
+      "cnf_sha256": "abaa065d972a9b8b9c953c1db930d0de5aff1833dc8aebf7ac763887cea50531",
+      "compatible_parents": 2,
+      "key": "o28-i11",
+      "profile": 28,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 112,
+      "cnf_sha256": "4e1d47affa5ef6342de46a5e99882a41d84291e8c03a8f93db1a0b60ceee6ecd",
+      "compatible_parents": 8,
+      "key": "o28-i12",
+      "profile": 28,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 113,
+      "cnf_sha256": "67d5edcfbaf409239f1da78d7fccc62ef978bae16d0702daad35db714d66cc64",
+      "compatible_parents": 8,
+      "key": "o28-i13",
+      "profile": 28,
+      "seconds": 1.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 114,
+      "cnf_sha256": "1907bd997ab77256fd1f18cacefc4a135fa9b0b89a9e424c3548d47f98582190",
+      "compatible_parents": 4,
+      "key": "o28-i14",
+      "profile": 28,
+      "seconds": 0.182,
+      "status": "UNSAT"
+    },
+    {
+      "child": 115,
+      "cnf_sha256": "2f9ad2353043187a8749ffbf7db53611e78d83de732849ce3db975c50803dd08",
+      "compatible_parents": 1,
+      "key": "o28-i15",
+      "profile": 28,
+      "seconds": 0.16,
+      "status": "UNSAT"
+    },
+    {
+      "child": 116,
+      "cnf_sha256": "030d5f86f14855355de4b7cbb4b611255a2adf307e8425d944261a3e558dee8c",
+      "compatible_parents": 8,
+      "key": "o28-i16",
+      "profile": 28,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 117,
+      "cnf_sha256": "8d2665f7ee433005ed0b0d7356954ccbfb60debf0fbd0c764db1fd53834d7498",
+      "compatible_parents": 8,
+      "key": "o28-i17",
+      "profile": 28,
+      "seconds": 1.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 118,
+      "cnf_sha256": "692456c6eefb17aa96a4ea9e6e62f40d2240bc07cd4033ff25e7b6ed86f4fa48",
+      "compatible_parents": 1,
+      "key": "o28-i18",
+      "profile": 28,
+      "seconds": 0.168,
+      "status": "UNSAT"
+    },
+    {
+      "child": 119,
+      "cnf_sha256": "0e843a236333f82805ee6176cc5a39d2cd5133c8b39168847d367c7a3c69aa0f",
+      "compatible_parents": 4,
+      "key": "o28-i19",
+      "profile": 28,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 120,
+      "cnf_sha256": "43a7b1007b72d51561f70264eb29078f1be7d7f18ea34465b7401f94a0cfb9ad",
+      "compatible_parents": 4,
+      "key": "o28-i20",
+      "profile": 28,
+      "seconds": 1.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 121,
+      "cnf_sha256": "a959112c9cfca16243f44a86e4fd8a676bfeb37ae5dfeef5ec67d11859b1f980",
+      "compatible_parents": 1,
+      "key": "o28-i21",
+      "profile": 28,
+      "seconds": 0.16,
+      "status": "UNSAT"
+    },
+    {
+      "child": 122,
+      "cnf_sha256": "1a0404ecf275fc12f6e453550e79bbe62cf4d990272a6b052f9bfec624439486",
+      "compatible_parents": 1,
+      "key": "o28-i22",
+      "profile": 28,
+      "seconds": 0.161,
+      "status": "UNSAT"
+    },
+    {
+      "child": 123,
+      "cnf_sha256": "6f010419349ff16e60f3b8d74aa5b184e459432e20f4630ec78d9b888dc91352",
+      "compatible_parents": 10,
+      "key": "o28-i23",
+      "profile": 28,
+      "seconds": 0.165,
+      "status": "UNSAT"
+    },
+    {
+      "child": 124,
+      "cnf_sha256": "3cd3600f0336dd60150f2845f13673fda9961bc17728203502e6a830de135180",
+      "compatible_parents": 10,
+      "key": "o28-i24",
+      "profile": 28,
+      "seconds": 0.175,
+      "status": "UNSAT"
+    },
+    {
+      "child": 125,
+      "cnf_sha256": "4760c2c05724db8819077adb2f3530c5898f8fee74b23e60d5fc9f3c9cb209c0",
+      "compatible_parents": 2,
+      "key": "o47-i00",
+      "profile": 47,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 126,
+      "cnf_sha256": "9ca3aaed45d2647cbdc78c811ab9ccb500b1399cb7a8b8ee74b4af155d7fe07c",
+      "compatible_parents": 2,
+      "key": "o47-i01",
+      "profile": 47,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 127,
+      "cnf_sha256": "1c169d5127ed7ce2cfbba421c967d7128da87296af385f8d05c64dccc9b9b86a",
+      "compatible_parents": 2,
+      "key": "o47-i02",
+      "profile": 47,
+      "seconds": 1.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 128,
+      "cnf_sha256": "601b99afafebe9e49fa547fd181b8f204904c77153fc25c33029cd8a8df4bc64",
+      "compatible_parents": 1,
+      "key": "o47-i03",
+      "profile": 47,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 129,
+      "cnf_sha256": "11c7a438b08fab7c7bfecd58cb00f2e8ad3cd2caae910f170b5c792b1af51a7f",
+      "compatible_parents": 1,
+      "key": "o47-i04",
+      "profile": 47,
+      "seconds": 0.18,
+      "status": "UNSAT"
+    },
+    {
+      "child": 130,
+      "cnf_sha256": "085718991040b9871569b57c148194e6ceeaa8b9b59db077ede271ae06531d4e",
+      "compatible_parents": 1,
+      "key": "o47-i05",
+      "profile": 47,
+      "seconds": 0.161,
+      "status": "UNSAT"
+    },
+    {
+      "child": 131,
+      "cnf_sha256": "dd57cd2bc2013dfb0eaa33f37aa99cc8f34a29687f0556ce41b50dcdca819a10",
+      "compatible_parents": 2,
+      "key": "o47-i06",
+      "profile": 47,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 132,
+      "cnf_sha256": "7fdfb8b635a48bed07cdc9f87cce942cd2211d6c04244f1b27a3e46c9bbd159b",
+      "compatible_parents": 2,
+      "key": "o47-i07",
+      "profile": 47,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 133,
+      "cnf_sha256": "592dd65f12643453c31f2b3014821fac95687e54471294113cb806d5cf88d85c",
+      "compatible_parents": 2,
+      "key": "o47-i08",
+      "profile": 47,
+      "seconds": 0.169,
+      "status": "UNSAT"
+    },
+    {
+      "child": 134,
+      "cnf_sha256": "a03e9ee8781f37dce5588f8ff708fee7e4ab1575079171a07d97df15ef37ec36",
+      "compatible_parents": 1,
+      "key": "o47-i09",
+      "profile": 47,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 135,
+      "cnf_sha256": "f3eab88740e9953039562bdbc83760a23fb5d96b9c9b99bb6949ec1903239e98",
+      "compatible_parents": 1,
+      "key": "o47-i10",
+      "profile": 47,
+      "seconds": 0.161,
+      "status": "UNSAT"
+    },
+    {
+      "child": 136,
+      "cnf_sha256": "71cb9777d8324f3b090c3721056fd068dbf52edf0d46a4792b21c7c3156537b6",
+      "compatible_parents": 1,
+      "key": "o47-i11",
+      "profile": 47,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 137,
+      "cnf_sha256": "92054d355613113e7b4e397c47858e01e8a671f95466bc5152319e02e1cac1a5",
+      "compatible_parents": 6,
+      "key": "o47-i12",
+      "profile": 47,
+      "seconds": 0.171,
+      "status": "UNSAT"
+    },
+    {
+      "child": 138,
+      "cnf_sha256": "8bf623f58a2634f8fda30a8ed6606147683676e03ac844ed411451cb3d84df1a",
+      "compatible_parents": 6,
+      "key": "o47-i13",
+      "profile": 47,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 139,
+      "cnf_sha256": "e686b144e51a85383e3c581ad314d1549f7188911a0538a745356c97e04a3b34",
+      "compatible_parents": 6,
+      "key": "o47-i14",
+      "profile": 47,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 140,
+      "cnf_sha256": "1a32afd4e4518bfb0209eaf561cdf753d772dc94c2cc34cd002b2e5338497db4",
+      "compatible_parents": 6,
+      "key": "o47-i15",
+      "profile": 47,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 141,
+      "cnf_sha256": "379cf61f0302b6722af475f65286514f76023512fd339ed3b60ca0576f10b04e",
+      "compatible_parents": 6,
+      "key": "o47-i16",
+      "profile": 47,
+      "seconds": 0.17,
+      "status": "UNSAT"
+    },
+    {
+      "child": 142,
+      "cnf_sha256": "01506b705ab2cda05594531f6a7276f7af2ba10f11b0a1ac71a23bc80835b28a",
+      "compatible_parents": 1,
+      "key": "o49-i00",
+      "profile": 49,
+      "seconds": 0.173,
+      "status": "UNSAT"
+    },
+    {
+      "child": 143,
+      "cnf_sha256": "c36dfddb35b1c85402a57820fc5d5e0aecaa8a883fdf23c5d91d6dfddced0cd2",
+      "compatible_parents": 2,
+      "key": "o49-i01",
+      "profile": 49,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 144,
+      "cnf_sha256": "800844ffb20973a91cdeb8c2f58c961f3d753d499852eb475be5b0cd653e818a",
+      "compatible_parents": 1,
+      "key": "o49-i02",
+      "profile": 49,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 145,
+      "cnf_sha256": "377c100937ed6c8dd5e918ae9ff4fc5fc4949f02e5780c62f2f6a901391eaffe",
+      "compatible_parents": 4,
+      "key": "o49-i03",
+      "profile": 49,
+      "seconds": 0.161,
+      "status": "UNSAT"
+    },
+    {
+      "child": 146,
+      "cnf_sha256": "ef5e944519674c15dc95b01fc6aa1695ebadf7fb73aa2168d36a07dcb3aec667",
+      "compatible_parents": 4,
+      "key": "o49-i04",
+      "profile": 49,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 147,
+      "cnf_sha256": "6123917cb65b4deea1267c9a7eda6b4a456ed4b2263f7a83c2a51b731370df89",
+      "compatible_parents": 4,
+      "key": "o49-i05",
+      "profile": 49,
+      "seconds": 0.165,
+      "status": "UNSAT"
+    },
+    {
+      "child": 148,
+      "cnf_sha256": "ba61105e0e92c4e145dc33b7735dc6f0855ebe5a090c8159b30b3ed9794f07f0",
+      "compatible_parents": 1,
+      "key": "o49-i06",
+      "profile": 49,
+      "seconds": 0.199,
+      "status": "UNSAT"
+    },
+    {
+      "child": 149,
+      "cnf_sha256": "6c3dab61c92e1bb212f6499afb8fba05fab4ca868d2c38cc9328824a457425f6",
+      "compatible_parents": 1,
+      "key": "o49-i07",
+      "profile": 49,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 150,
+      "cnf_sha256": "8df5dc636efc6e14c7ebcf3ca4504ef882765375ddbc858bad51889117746bdb",
+      "compatible_parents": 1,
+      "key": "o49-i08",
+      "profile": 49,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 151,
+      "cnf_sha256": "81ff8103a4410c1ac7403e0b49c5147d1b52770fed98554e1019cce5b837d0a2",
+      "compatible_parents": 1,
+      "key": "o49-i09",
+      "profile": 49,
+      "seconds": 0.173,
+      "status": "UNSAT"
+    },
+    {
+      "child": 152,
+      "cnf_sha256": "ad181851f40e1302b732e14e9935ceb6c4039c5f25ab8624b0982aa5a80efd90",
+      "compatible_parents": 2,
+      "key": "o49-i10",
+      "profile": 49,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 153,
+      "cnf_sha256": "e2ede3830e59d6cf646f10fc1382c6b20c008198640d47b096c391af85f474cd",
+      "compatible_parents": 4,
+      "key": "o49-i11",
+      "profile": 49,
+      "seconds": 0.181,
+      "status": "UNSAT"
+    },
+    {
+      "child": 154,
+      "cnf_sha256": "f601cd5d906d82e47463328cf9530417fd729c42cfd8b78914952563cbac873e",
+      "compatible_parents": 4,
+      "key": "o49-i12",
+      "profile": 49,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 155,
+      "cnf_sha256": "11a5ce3c417dd7bd1ac14e5c6a96b337dd4ee55970ab2456a60feac82bf0e07e",
+      "compatible_parents": 4,
+      "key": "o49-i13",
+      "profile": 49,
+      "seconds": 1.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 156,
+      "cnf_sha256": "8fc0b5955cba706c2431bf2cfe2c7fc9a6c24de1c18fa96aac2b3b7d036f3e27",
+      "compatible_parents": 2,
+      "key": "o49-i14",
+      "profile": 49,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 157,
+      "cnf_sha256": "9dad2e6dd1b696fcd44d129eaade7fbf67965fd2f7f570701504b5d2e986d775",
+      "compatible_parents": 6,
+      "key": "o49-i15",
+      "profile": 49,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 158,
+      "cnf_sha256": "e5ca7043cc84e8362aa8f58098406e4d1eb588225e96022e9d1f7744ebbec204",
+      "compatible_parents": 6,
+      "key": "o49-i16",
+      "profile": 49,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 159,
+      "cnf_sha256": "f29768f0a588af5f5794372c6281febda165ec7398ecbbb5c42d7e9675ea1759",
+      "compatible_parents": 6,
+      "key": "o49-i17",
+      "profile": 49,
+      "seconds": 1.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 160,
+      "cnf_sha256": "b7d4f46235987df68ce25b312f32397984d9d27a73040174c3493b40f335b60e",
+      "compatible_parents": 1,
+      "key": "o49-i18",
+      "profile": 49,
+      "seconds": 0.165,
+      "status": "UNSAT"
+    },
+    {
+      "child": 161,
+      "cnf_sha256": "0fcff2273db496e0c5b346368f814da6d84562d28a01f5054031c7ed7c7142ae",
+      "compatible_parents": 4,
+      "key": "o49-i19",
+      "profile": 49,
+      "seconds": 0.162,
+      "status": "UNSAT"
+    },
+    {
+      "child": 162,
+      "cnf_sha256": "35b848a6fbc798c7d4229fd23a2e27bd8c51442a2845c2bd2909cab2510a8b62",
+      "compatible_parents": 4,
+      "key": "o49-i20",
+      "profile": 49,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 163,
+      "cnf_sha256": "5d76e176ee5256f3e2e19e5ebcdd58851da393be35b805df70b073a1765994ea",
+      "compatible_parents": 4,
+      "key": "o49-i21",
+      "profile": 49,
+      "seconds": 1.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 164,
+      "cnf_sha256": "cbf1b675ebbe2085b07991d56b5733f134a237e1dd8b6c29423b14e1e772fa79",
+      "compatible_parents": 1,
+      "key": "o49-i22",
+      "profile": 49,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 165,
+      "cnf_sha256": "53ccc0421a0e6f41951f4f801b9b773fdc4355a648bc3f34d68bfd009a47cbd5",
+      "compatible_parents": 1,
+      "key": "o49-i23",
+      "profile": 49,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 166,
+      "cnf_sha256": "7c278b7780d15b607eb80a19d56c40f00cefdc94d34c7d7aac018e2559f61dbd",
+      "compatible_parents": 1,
+      "key": "o49-i24",
+      "profile": 49,
+      "seconds": 0.161,
+      "status": "UNSAT"
+    },
+    {
+      "child": 167,
+      "cnf_sha256": "3b3ebc165edbd045eea23749502e986f258cbc87e75221964ebc70259c34b8c8",
+      "compatible_parents": 10,
+      "key": "o49-i25",
+      "profile": 49,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 168,
+      "cnf_sha256": "1b97b622da7690f22c59abcea6dcc0f68b47d3e6c1972a1e3678aafd4098539f",
+      "compatible_parents": 10,
+      "key": "o49-i26",
+      "profile": 49,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 169,
+      "cnf_sha256": "fb8d3f4536f01361df57d82a1aac9e7b80d764121719f3aec842d558d6d1a085",
+      "compatible_parents": 10,
+      "key": "o49-i27",
+      "profile": 49,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 170,
+      "cnf_sha256": "adea69aecad6c8b4d04d693902674b12501ffe0ec7e89236de114244f93bf9a3",
+      "compatible_parents": 10,
+      "key": "o49-i28",
+      "profile": 49,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 171,
+      "cnf_sha256": "1d8397faa8dbd5640a9f6945570b39825788f8c568a738e8f0287a4cf87268f8",
+      "compatible_parents": 10,
+      "key": "o49-i29",
+      "profile": 49,
+      "seconds": 0.168,
+      "status": "UNSAT"
+    },
+    {
+      "child": 172,
+      "cnf_sha256": "f898bda4531ed0f93dea05b9764cb96392cc335e77c83751e3a4d8421f06dbc8",
+      "compatible_parents": 5,
+      "key": "o54-i00",
+      "profile": 54,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 173,
+      "cnf_sha256": "028f7467e19679d36ce23f5f4d5587385e267c3e52b204f3aac89c41d7fa070e",
+      "compatible_parents": 4,
+      "key": "o54-i01",
+      "profile": 54,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 174,
+      "cnf_sha256": "5115ef56c74df0d29d48698d1977ad646ca6d63639bce5b3a3dedaca045d1ab2",
+      "compatible_parents": 1,
+      "key": "o54-i02",
+      "profile": 54,
+      "seconds": 0.161,
+      "status": "UNSAT"
+    },
+    {
+      "child": 175,
+      "cnf_sha256": "10405bfeecf7b566b21e7012822e27722570d813f26974d5f0dc642a1355e162",
+      "compatible_parents": 5,
+      "key": "o54-i03",
+      "profile": 54,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 176,
+      "cnf_sha256": "e2718d22b49277fce97b47756b43a1d8aa827925affbf4c1796faa21731e17a7",
+      "compatible_parents": 5,
+      "key": "o54-i04",
+      "profile": 54,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 177,
+      "cnf_sha256": "d0032aca9117e06f917a7c49c1410fa1f9b56a99f166599bf872d49a9c5390e6",
+      "compatible_parents": 9,
+      "key": "o54-i05",
+      "profile": 54,
+      "seconds": 0.172,
+      "status": "UNSAT"
+    },
+    {
+      "child": 178,
+      "cnf_sha256": "960cc719b5a3f6b9563ec234e9ecda2737931abc968370c5ac79e63158558b1c",
+      "compatible_parents": 5,
+      "key": "o54-i06",
+      "profile": 54,
+      "seconds": 0.17,
+      "status": "UNSAT"
+    },
+    {
+      "child": 179,
+      "cnf_sha256": "024cfebc379dd68f539fb2718151385173d5da27b5284fd3097ca7882d8835ca",
+      "compatible_parents": 1,
+      "key": "o54-i07",
+      "profile": 54,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 180,
+      "cnf_sha256": "753828618a698bae19109f3b84e0cb7e9b0a98683f69ea520f9256d1503ed907",
+      "compatible_parents": 10,
+      "key": "o54-i08",
+      "profile": 54,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 181,
+      "cnf_sha256": "3554fbf37872ccdc83d23ee64c2fb1e8866a3816d7be851be3b1a70eef003557",
+      "compatible_parents": 10,
+      "key": "o54-i09",
+      "profile": 54,
+      "seconds": 1.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 182,
+      "cnf_sha256": "980416f4a4fd6ac03f5780fb7e287e282895b9cd487876607a548899fea0eae4",
+      "compatible_parents": 4,
+      "key": "o54-i10",
+      "profile": 54,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 183,
+      "cnf_sha256": "207c0c7cc4c95a1decaf3209e9890c3b87d501382eb24ea887fc094f322b8b2b",
+      "compatible_parents": 1,
+      "key": "o54-i11",
+      "profile": 54,
+      "seconds": 0.166,
+      "status": "UNSAT"
+    },
+    {
+      "child": 184,
+      "cnf_sha256": "59d7aff4b0cc6ef6552c7fa56a2dffc9c9c653da0bb7d0115a8de7f1451fe984",
+      "compatible_parents": 9,
+      "key": "o54-i12",
+      "profile": 54,
+      "seconds": 0.164,
+      "status": "UNSAT"
+    },
+    {
+      "child": 185,
+      "cnf_sha256": "5cc2e7bc16c87a74f119654c583b7080335b4371ab984bf4258d2c9592bbf1a4",
+      "compatible_parents": 9,
+      "key": "o54-i13",
+      "profile": 54,
+      "seconds": 1.006,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 186,
+      "cnf_sha256": "a3d9021551655235ed3300c658427e0e69dc3bc4d4a5d28e1efbc41b4fd021c0",
+      "compatible_parents": 5,
+      "key": "o54-i14",
+      "profile": 54,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 187,
+      "cnf_sha256": "35fe25a30931cf737a41a69adab5287522296001396ee224237a4e7a5ed79307",
+      "compatible_parents": 5,
+      "key": "o54-i15",
+      "profile": 54,
+      "seconds": 1.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "child": 188,
+      "cnf_sha256": "837e6231c7e484e2639bc33e4c05aac957e1fb96fea40b9b4c9b057475d7e609",
+      "compatible_parents": 1,
+      "key": "o54-i16",
+      "profile": 54,
+      "seconds": 0.163,
+      "status": "UNSAT"
+    },
+    {
+      "child": 189,
+      "cnf_sha256": "6889cb3bcb1fd7f80943fc52c847af8920f0b247f92cf2d1db328c002f8951be",
+      "compatible_parents": 1,
+      "key": "o54-i17",
+      "profile": 54,
+      "seconds": 0.165,
+      "status": "UNSAT"
+    },
+    {
+      "child": 190,
+      "cnf_sha256": "0c90d5079ced77681c3242761ee7d50271035ed6695dbc5b05fd29928a2a54ec",
+      "compatible_parents": 10,
+      "key": "o54-i18",
+      "profile": 54,
+      "seconds": 0.168,
+      "status": "UNSAT"
+    },
+    {
+      "child": 191,
+      "cnf_sha256": "2e3ae4cc6442c20ee4b795535ed002a92e72237a9a40d3ae90ec390343b5fcdd",
+      "compatible_parents": 10,
+      "key": "o54-i19",
+      "profile": 54,
+      "seconds": 0.169,
+      "status": "UNSAT"
+    }
+  ],
+  "schema": "m6-b7-l6-early-c-inaccessible-pair-scout-v1",
+  "seconds_per_child": 1,
+  "solver": "/tmp/opencode/cadical-1.7.3/build/cadical",
+  "solver_bytes": 1002216,
+  "solver_sha256": "108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292",
+  "solver_version": "1.7.3",
+  "status_sequence_sha256": "07e6e6e189544bede5004996a7bcb70db3ad4ed99bd20de5b1632e86388d2434"
+}

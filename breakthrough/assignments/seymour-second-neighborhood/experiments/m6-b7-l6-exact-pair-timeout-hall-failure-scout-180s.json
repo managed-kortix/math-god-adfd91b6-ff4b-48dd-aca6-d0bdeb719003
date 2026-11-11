@@ -1,0 +1,453 @@
+{
+  "default_solver_options": [
+    "--restart=false",
+    "--phase=false",
+    "--seed=3"
+  ],
+  "hash_ledger_bytes": 3934,
+  "hash_ledger_sha256": "c0fc19a534aff25289c48cb2b3abe86808ee5ddcbea1cf4bcc421a0bec7f5531",
+  "jobs": 2,
+  "manifest_bytes": 3565,
+  "manifest_sha256": "374fac20fd3668b591f8a78dd7a642d18402de65a0e9efbfa8cf8090107bb635",
+  "position_options": {
+    "10": [
+      "--restart=false"
+    ]
+  },
+  "rows": [
+    {
+      "cnf_sha256": "87c5352bf527166c88cc8f4a73d59be6751023df441d1fe5f5bd6c9f2e4191bb",
+      "job": 0,
+      "membership": 0,
+      "position": 0,
+      "seconds": 0.651,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "57b1e2b12dfcabd56bac8774377d74cdf5c71a9cbde403d86d45c08f87e66c59",
+      "job": 1,
+      "membership": 3,
+      "position": 1,
+      "seconds": 0.273,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "0a63d4d9c8c08cd8ac6944abf84fae46c54dd32a2f026feb9b69a0a40d5809d1",
+      "job": 0,
+      "membership": 5,
+      "position": 2,
+      "seconds": 0.295,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "c2df768301013883fec1221587d51d839b6d7c5a586edb9ce213a3a762c9208f",
+      "job": 1,
+      "membership": 6,
+      "position": 3,
+      "seconds": 0.294,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "67aef93b043dba22150ad7f25d6790be6c8f7deff829aa5e219dd77561c89e08",
+      "job": 0,
+      "membership": 10,
+      "position": 4,
+      "seconds": 0.302,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "fbe691f42529d423bb4e21b851c18a37953fa692f0ba46cb6316d8bf31fd74e0",
+      "job": 1,
+      "membership": 11,
+      "position": 5,
+      "seconds": 0.329,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "38c473bf3c558a0b3143ec9b9d98674c87b691ef8b00ca2b497eb54e4d3128e4",
+      "job": 0,
+      "membership": 14,
+      "position": 6,
+      "seconds": 0.317,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "4b13df586b662da07e37b2cb656a3270df7e16daa471adf83fb10ba62663c4d1",
+      "job": 1,
+      "membership": 15,
+      "position": 7,
+      "seconds": 0.287,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "6251f5769fd5a4a06584a911de28e352e83050cc04fccf0928dc2218b532a4ad",
+      "job": 0,
+      "membership": 19,
+      "position": 8,
+      "seconds": 0.31,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "9731abea1dde712422537e3ecaec69117b6c9cfb749cfd4cdd8399a5e690aa73",
+      "job": 1,
+      "membership": 22,
+      "position": 9,
+      "seconds": 5.285,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "0f563ee5771ea1d93baf94cc27dfad90a113d553b8f64c9a4d94ec07e254af66",
+      "job": 0,
+      "membership": 23,
+      "position": 10,
+      "seconds": 4.815,
+      "solver_options": [
+        "--restart=false"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "17d9eb6b9bdd1ca65f5d25ac3bc99358a5e509e45afae7c0983d7f26e9ce9a49",
+      "job": 1,
+      "membership": 24,
+      "position": 11,
+      "seconds": 0.376,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "fecf9c21dd6ab7d2ed1ed1098abac2c429afbc4aaa1219bf6839ce0ea6cbd005",
+      "job": 0,
+      "membership": 28,
+      "position": 12,
+      "seconds": 180.024,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "db9da0426dd0bb0f782e873b5e339043f823e3468395a1662f2ae4d605d4b032",
+      "job": 1,
+      "membership": 33,
+      "position": 13,
+      "seconds": 0.379,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "d85c503728a4d2a7ffaeafa4ce5478d1df6d6a7fa517e44280616125006646ab",
+      "job": 0,
+      "membership": 34,
+      "position": 14,
+      "seconds": 0.37,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "756869fdae11373edd76500256875401207b576c8f7c6e128a46146f103bb14e",
+      "job": 1,
+      "membership": 39,
+      "position": 15,
+      "seconds": 0.274,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "7202acdf8b5fb01f51d069b29be5b4ab8c98bc71b64a238cdf439aaedb196a60",
+      "job": 0,
+      "membership": 44,
+      "position": 16,
+      "seconds": 0.309,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "3c1cefb9ee19c4284dbf0c33b70b31e0168a145c9ab9ebbeb75f9f7b18809d9e",
+      "job": 1,
+      "membership": 47,
+      "position": 17,
+      "seconds": 0.299,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "343afabcfb82e850a9e77364beeedf2b328b544969313670d323416533966859",
+      "job": 0,
+      "membership": 51,
+      "position": 18,
+      "seconds": 0.3,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "5c21af20ac07a11cad540c3413504579f613e0448226e3d4eb9e2cdf527d2c88",
+      "job": 1,
+      "membership": 54,
+      "position": 19,
+      "seconds": 180.02,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "1c4f4977874b1f3d022f4366dca997073592832321f957a677cb7b2eaecc901b",
+      "job": 0,
+      "membership": 59,
+      "position": 20,
+      "seconds": 0.293,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "0975f8d4e8dbfe2f3b1925fbff437f5feba092d9d5794f858e4f2a8e18d9150d",
+      "job": 1,
+      "membership": 61,
+      "position": 21,
+      "seconds": 5.818,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "ddff7b44a5d991d1e23e6e6f1f7942a27b20f6e255b12c25f4778204dde6619f",
+      "job": 0,
+      "membership": 62,
+      "position": 22,
+      "seconds": 6.531,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "bba63b65cd3944cbb56a7f904c6fbec7325c2bd9aeec7d01a6ef03b80b7d1163",
+      "job": 1,
+      "membership": 64,
+      "position": 23,
+      "seconds": 0.299,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "3bdbe2a9130a1083b1c9685a7909c22ff015f90ef28d976deced8dd51fce0543",
+      "job": 0,
+      "membership": 69,
+      "position": 24,
+      "seconds": 180.009,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "1527697c1983933bb6073271cb2a3090a195373b3cf18c6c10bee42d4d2fd3c3",
+      "job": 1,
+      "membership": 70,
+      "position": 25,
+      "seconds": 180.009,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "b37099ae64593c97584eabae5ae15063d3f8421fbaab9211e34abedbcda0e5c1",
+      "job": 0,
+      "membership": 75,
+      "position": 26,
+      "seconds": 0.373,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "53f039153e454defb191532d830abf375795be0e6822f4331c55332d7798617c",
+      "job": 1,
+      "membership": 80,
+      "position": 27,
+      "seconds": 0.311,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "0c622a5ca88b8e3e8568c159efff8acbb188d2b77469005c9a526b9c1a879139",
+      "job": 0,
+      "membership": 82,
+      "position": 28,
+      "seconds": 0.288,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "7dfa214c056dee840cee2771f73ce23ba99eb3757a1146dcc58c61331dfe70a2",
+      "job": 1,
+      "membership": 84,
+      "position": 29,
+      "seconds": 0.337,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "053210e5d65c001fe6de145da4134b37b1641ac7e26e16576356c72608c4e76f",
+      "job": 0,
+      "membership": 91,
+      "position": 30,
+      "seconds": 0.253,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "5a5d620ee87f5e421e0e3b5f25783fc33985af9db848c9c8bf28fb39ed93e718",
+      "job": 1,
+      "membership": 93,
+      "position": 31,
+      "seconds": 0.282,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "22690741870cba3c8e8494c71ce5b515f7fadfd7a99714325259d58cf31ad665",
+      "job": 0,
+      "membership": 97,
+      "position": 32,
+      "seconds": 0.279,
+      "solver_options": [
+        "--restart=false",
+        "--phase=false",
+        "--seed=3"
+      ],
+      "status": "UNSAT"
+    }
+  ],
+  "schema": "m6-b7-l6-exact-pair-timeout-hall-failure-scout-v1",
+  "seconds_per_membership": 180,
+  "solver": "/tmp/opencode/cadical-1.7.3/build/cadical",
+  "solver_bytes": 1002216,
+  "solver_sha256": "108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292",
+  "solver_version": "1.7.3",
+  "status_sequence_sha256": "bce3c926a1d6db19ec646f6aa373743423fd6b6fb71b6cfd4a46f8865577b29b"
+}
