@@ -32,10 +32,10 @@ SOURCES = (
      "8fdc10a3e0200e1bda471dff3c4f7d56e477cfd84b16ce97cef1fbdfd76d76fc"),
     ("doubled-triangle-gate", ROOT / "positive-square-energy" / "tricyclic-general"
      / "doubled-triangle-dnn-cover.md",
-     "032c79461a8f36e54917a2349be87292b41d5a3bc07167862311e4db2f0cfd48"),
+     "d2aa1f7ae2a2abc825cef0f7da82af15523e66c5bec9b4cc4fe8e3a042ee91dc"),
     ("doubled-c4-gate", ROOT / "positive-square-energy" / "tricyclic-general"
      / "doubled-c4-switching-sieve.md",
-     "86a484208a0931aa20cf35d9ac875574be6fd51d240e9d71e4b48c7d9239815d"),
+     "7d2b77857c9f90514ceda84e6acb01d4c752a7aecf39a1f553601b5376164d84"),
 )
 
 BLOCK_PARTITIONS = (
@@ -81,7 +81,7 @@ RANK5_REQUIRED = (
     "exact_dependency_manifest_sha256: c3203c8f300ee995e55a09f8b1b32b2f973f0475ff54e560738b7e8caac09d0c",
     "rejected_hostile_mutations: 9",
 )
-EXPECTED_MANIFEST_SHA256 = "19926bb35e4989b4b18258dddb18659f5b6c38010f5df08a33dee5342fa03bd0"
+EXPECTED_MANIFEST_SHA256 = "6c105832ee324e3a3e4567560a1c9ce23e435f115654f1a22ce6006f26f485eb"
 
 
 def require(condition, message):
