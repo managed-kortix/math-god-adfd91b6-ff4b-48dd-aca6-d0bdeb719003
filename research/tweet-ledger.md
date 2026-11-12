@@ -39,6 +39,18 @@ the certificate in the lab dir, parent tweet id if thread reply.
   `b0c4ed64a12ccabe0a8a38cb9fdb85622d8f7c2d07bdf53f75eb1700a684fa39`.
   This append-only note supersedes the historical evidence digest above; the
   public theorem statement and tweet text require no correction.
+- 2026-11-12 verification repair: a second hostile re-audit found that the
+  doubled-`C4` module's 36-row census had incorrectly deleted every physical
+  parity word with an odd--odd doubled pair; simplicity forbids only the
+  simultaneous lengths `(1,1)`, whose first simple replacement is `{1,3}`.
+  An independent exact 64-row census and nine-orbit planar-Gram ledger now
+  certify all 28 formerly omitted words, with largest rational upper bound
+  `554/375<2`; the integrated twelve-state ledger has the deliberately looser
+  maximum `229/150<2` and finite-audit digest
+  `80cfecc4db26500f7526f635ab36dd7f8bd7aae0f06ab8b89125148e7756e859`.
+  This append-only note supersedes the 2026-11-09 finite-audit digest. The
+  theorem statement and original tweet text remain unchanged because the gap
+  was repaired by exact certificates rather than a counterexample.
 
 ## 2026-08-03 — theorem result: every connected pentacyclic graph
 
