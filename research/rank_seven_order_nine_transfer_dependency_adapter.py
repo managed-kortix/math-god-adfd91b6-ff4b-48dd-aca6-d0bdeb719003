@@ -17,7 +17,6 @@ from __future__ import annotations
 import hashlib
 import itertools
 import json
-import os
 import subprocess
 import sys
 from collections import Counter
@@ -223,11 +222,17 @@ UNEXECUTED_FINITE_GATE_FIELDS = frozenset({
 })
 EXECUTED_FINITE_GATE_FIELDS = frozenset({
     "id", "evidence_kind", "source_path", "source_sha256", "normal_output_sha256",
-    "optimized_output_sha256", "normal_optimized_byte_identical",
+    "optimized_output_sha256", "normal_optimized_byte_identical", "executions",
     "child_analytic_dependencies_authenticated", "applicable_kernels",
     "obstruction_kernels", "owned_rows", "owned_physical_rows", "owned_targets",
     "finite_gate_passed", "analytic_implication_established",
 })
+EXECUTION_RECEIPT_SCHEMA = "rank-seven-order-nine-transfer-child-execution-v1"
+EXECUTION_RECEIPT_FIELDS = frozenset({
+    "schema", "mode", "command", "cwd", "environment", "returncode",
+    "stdout_sha256", "stderr_sha256", "stderr_empty", "source_path", "source_sha256",
+})
+EMPTY_SHA256 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 
 
 def fail(message: str) -> NoReturn:
@@ -301,6 +306,38 @@ def registered_unexecuted_finite_gate() -> dict[str, Json]:
     }
 
 
+def absolute_python_executable() -> str:
+    require(type(sys.executable) is str and bool(sys.executable) and
+            Path(sys.executable).is_absolute(),
+            "current Python executable is not an absolute path")
+    return sys.executable
+
+
+def transfer_command(*, optimized: bool) -> list[str]:
+    exact_bool(optimized, "transfer child optimization mode")
+    command = [absolute_python_executable(), "-I", "-S", "-B"]
+    if optimized:
+        command.append("-O")
+    return [*command, str(TRANSFER_VERIFIER)]
+
+
+def expected_execution_receipt(*, optimized: bool) -> dict[str, Json]:
+    mode = "optimized" if optimized else "normal"
+    return {
+        "schema": EXECUTION_RECEIPT_SCHEMA,
+        "mode": mode,
+        "command": transfer_command(optimized=optimized),
+        "cwd": str(ROOT),
+        "environment": {},
+        "returncode": 0,
+        "stdout_sha256": TRANSFER_OUTPUT_SHA256,
+        "stderr_sha256": EMPTY_SHA256,
+        "stderr_empty": True,
+        "source_path": str(TRANSFER_VERIFIER),
+        "source_sha256": SOURCE_PINS[TRANSFER_VERIFIER],
+    }
+
+
 def expected_executed_finite_gate() -> dict[str, Json]:
     """Return the exact admissible receipt for a completed normal/-O child pair."""
     return {
@@ -311,6 +348,8 @@ def expected_executed_finite_gate() -> dict[str, Json]:
         "normal_output_sha256": TRANSFER_OUTPUT_SHA256,
         "optimized_output_sha256": TRANSFER_OUTPUT_SHA256,
         "normal_optimized_byte_identical": True,
+        "executions": [expected_execution_receipt(optimized=False),
+                       expected_execution_receipt(optimized=True)],
         "child_analytic_dependencies_authenticated": False,
         "applicable_kernels": EXPECTED_TRANSFER["applicable_kernels"],
         "obstruction_kernels": EXPECTED_TRANSFER["obstruction_kernels"],
@@ -403,29 +442,47 @@ def parse_transfer_output(raw: bytes) -> dict[str, Json]:
     return validate_transfer_result(result)
 
 
-def run_transfer_once(*, optimized: bool) -> tuple[bytes, dict[str, Json]]:
-    # Isolated mode ignores ambient PYTHON* startup variables and excludes the
-    # script directory/user site from sys.path.  The transfer child is stdlib-only,
-    # so no site initialization or repository import path is required.
-    command = [sys.executable, "-I", "-B"]
-    if optimized:
-        command.append("-O")
-    command.append(str(TRANSFER_VERIFIER))
-    environment = {key: value for key, value in os.environ.items()
-                   if not key.startswith("PYTHON")}
-    environment["PYTHONDONTWRITEBYTECODE"] = "1"
+def run_transfer_once(*, optimized: bool) -> tuple[bytes, dict[str, Json], dict[str, Json]]:
+    # Isolated/no-site mode ignores ambient Python startup configuration; the
+    # literally empty environment also excludes loader and shell injection.
+    command = transfer_command(optimized=optimized)
+    mode = "optimized" if optimized else "normal"
+    require(command.count("-O") == (1 if optimized else 0) and
+            command[:4] == [absolute_python_executable(), "-I", "-S", "-B"] and
+            command[-1] == str(TRANSFER_VERIFIER.resolve()) and
+            Path(command[0]).is_absolute() and str(ROOT) == str(ROOT.resolve()),
+            f"finite transfer {mode} command/mode/path binding changed")
     completed = subprocess.run(command, cwd=ROOT, check=False, capture_output=True,
-                               env=environment)
-    require(completed.returncode == 0,
-            f"finite transfer {'optimized' if optimized else 'normal'} execution failed")
-    require(completed.stderr == b"",
-            f"finite transfer {'optimized' if optimized else 'normal'} wrote stderr")
-    return completed.stdout, parse_transfer_output(completed.stdout)
+                               env={})
+    require(type(completed.returncode) is int and completed.returncode == 0,
+            f"finite transfer {mode} execution failed")
+    require(type(completed.stdout) is bytes and type(completed.stderr) is bytes and
+            completed.stderr == b"",
+            f"finite transfer {mode} wrote stderr or non-byte output")
+    result = parse_transfer_output(completed.stdout)
+    receipt = {
+        "schema": EXECUTION_RECEIPT_SCHEMA,
+        "mode": mode,
+        "command": command,
+        "cwd": str(ROOT),
+        "environment": {},
+        "returncode": completed.returncode,
+        "stdout_sha256": sha256_bytes(completed.stdout),
+        "stderr_sha256": sha256_bytes(completed.stderr),
+        "stderr_empty": True,
+        "source_path": str(TRANSFER_VERIFIER),
+        "source_sha256": SOURCE_PINS[TRANSFER_VERIFIER],
+    }
+    require(set(receipt) == EXECUTION_RECEIPT_FIELDS and
+            canonical_bytes(receipt) == canonical_bytes(
+                expected_execution_receipt(optimized=optimized)),
+            f"finite transfer {mode} execution receipt changed")
+    return completed.stdout, result, receipt
 
 
 def execute_transfer_pair() -> dict[str, Json]:
-    normal_raw, normal = run_transfer_once(optimized=False)
-    optimized_raw, optimized = run_transfer_once(optimized=True)
+    normal_raw, normal, normal_execution = run_transfer_once(optimized=False)
+    optimized_raw, optimized, optimized_execution = run_transfer_once(optimized=True)
     require(normal_raw == optimized_raw and
             canonical_bytes(normal) == canonical_bytes(optimized),
             "finite transfer normal and -O outputs differ")
@@ -437,6 +494,7 @@ def execute_transfer_pair() -> dict[str, Json]:
         "normal_output_sha256": sha256_bytes(normal_raw),
         "optimized_output_sha256": sha256_bytes(optimized_raw),
         "normal_optimized_byte_identical": True,
+        "executions": [normal_execution, optimized_execution],
         "child_analytic_dependencies_authenticated": False,
         "applicable_kernels": normal["applicable_kernels"],
         "obstruction_kernels": normal["obstruction_kernels"],

@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import importlib.util
+import itertools
 import json
 import lzma
 import math
@@ -20,9 +20,12 @@ from functools import lru_cache
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-BASE_PATH = HERE / "rank7_order9_unowned_stratifier.py"
+ROOT = HERE.parents[1]
+KERNEL_FIXTURE = ROOT / "research" / "fixtures" / "rank-seven-kernel-frontier-census.json"
 SOURCE_REPORT = HERE / "rank7_order9_typed_sos_owner_manifest.json"
 SOURCE_STREAM = HERE / "rank7_order9_after_sos_remainder.jsonl.xz"
+EXPECTED_KERNEL_SHA256 = "a241139ab54ce4cce1ab3812887359edb241c0abfb1018e804b4a5f86762cfd5"
+EXPECTED_KERNEL_COUNTS = (1, 6, 47, 233, 914, 2270, 4015, 4495, 3396, 1391, 365)
 ORDER = 9
 PATH_COUNT = 15
 TARGETS_PER_ROW = 16
@@ -193,12 +196,39 @@ def family(edges, row):
             len(edges) - ORDER + 1, triangles)
 
 
-def load(name, path):
-    spec = importlib.util.spec_from_file_location(name, path)
-    require(spec is not None and spec.loader is not None, f"cannot load {path.name}")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+def strict_canonical_json(path, label):
+    raw = path.read_bytes()
+    payload = strict_json(raw, label)
+    require(raw == canonical_bytes(payload), f"{label} is not canonical JSON")
+    return payload, hashlib.sha256(raw).hexdigest()
+
+
+def kernel_dictionary():
+    """Load the exact order-nine sparse kernels without third-party imports."""
+    raw = KERNEL_FIXTURE.read_bytes()
+    require(hashlib.sha256(raw).hexdigest() == EXPECTED_KERNEL_SHA256,
+            "rank-seven kernel fixture changed")
+    payload = strict_json(raw, KERNEL_FIXTURE.name)
+    require(tuple(payload["counts_by_order_n2_to_n12"]) == EXPECTED_KERNEL_COUNTS,
+            "rank-seven kernel counts changed")
+    result = {}
+    local = 0
+    for global_kernel, record in enumerate(payload["kernels"], 1):
+        require(type(record) is dict and type(record.get("n")) is int and
+                type(record.get("code")) is list,
+                "malformed kernel fixture record")
+        if record["n"] != ORDER:
+            continue
+        local += 1
+        pairs = itertools.combinations(range(ORDER), 2)
+        edges = tuple((u, v, multiplicity)
+                      for (u, v), multiplicity in zip(pairs, record["code"], strict=True)
+                      if multiplicity)
+        require(sum(edge[2] for edge in edges) == ORDER + 6,
+                "order-nine path count changed")
+        result[local] = (global_kernel, edges)
+    require(len(result) == 4495, "order-nine kernel total changed")
+    return result
 
 
 def rational_pair(raw, label, maximum_denominator=None):
@@ -217,9 +247,7 @@ def rational_pair(raw, label, maximum_denominator=None):
 
 def authenticate_source():
     """Authenticate the complete after-SOS stream and index every exact row."""
-    base = load("rank7_order9_cycle_source", BASE_PATH)
-    report, report_sha = base.strict_canonical_json(SOURCE_REPORT,
-                                                     "SOS owner report")
+    report, report_sha = strict_canonical_json(SOURCE_REPORT, "SOS owner report")
     source_info = report["updated_remainder_stream"]
     require(source_info["path"] == SOURCE_STREAM.name and
             file_sha256(SOURCE_STREAM) == source_info["artifact_sha256"],
@@ -240,7 +268,7 @@ def authenticate_source():
     require(len(records) == source_info["record_total"] and
             digest.hexdigest() == source_info["raw_sha256"],
             "after-SOS source identity changed")
-    kernels = base.kernel_dictionary(base.load_scan_engine())
+    kernels = kernel_dictionary()
     strata = Counter()
     physical_strata = Counter()
     for record in records.values():
@@ -250,7 +278,7 @@ def authenticate_source():
         key = family(edges, tuple(record[3]))
         strata[key] += 1
         physical_strata[key] += record[4]
-    return (base, kernels, report_sha, source_info, records, physical,
+    return (None, kernels, report_sha, source_info, records, physical,
             strata, physical_strata)
 
 

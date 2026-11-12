@@ -53,26 +53,36 @@ class TransferDependencyAdapterHostileTest(unittest.TestCase):
             commands.append((list(command), dict(kwargs["env"]), kwargs["cwd"]))
             return completed
 
-        with mock.patch.dict(self.m.os.environ,
-                             {"PYTHONOPTIMIZE": "2"}, clear=False):
+        with mock.patch.dict(
+                os.environ,
+                {"PYTHONOPTIMIZE": "2", "LD_PRELOAD": "/hostile/preload.so",
+                 "LD_AUDIT": "/hostile/audit.so", "LOCPATH": "/hostile/locale"},
+                clear=False):
             with mock.patch.object(self.m.subprocess, "run", side_effect=capture):
-                normal_raw, normal = self.m.run_transfer_once(optimized=False)
-                optimized_raw, optimized = self.m.run_transfer_once(optimized=True)
+                normal_raw, normal, normal_receipt = \
+                    self.m.run_transfer_once(optimized=False)
+                optimized_raw, optimized, optimized_receipt = \
+                    self.m.run_transfer_once(optimized=True)
         self.assertEqual(normal_raw, raw)
         self.assertEqual(optimized_raw, raw)
         self.assertEqual(normal, result)
         self.assertEqual(optimized, result)
-        self.assertEqual(commands[0][0], [sys.executable, "-I", "-B",
+        self.assertEqual(normal_receipt,
+                         self.m.expected_execution_receipt(optimized=False))
+        self.assertEqual(optimized_receipt,
+                         self.m.expected_execution_receipt(optimized=True))
+        self.assertEqual(commands[0][0], [sys.executable, "-I", "-S", "-B",
                          str(self.m.TRANSFER_VERIFIER)])
-        self.assertEqual(commands[1][0], [sys.executable, "-I", "-B", "-O",
+        self.assertEqual(commands[1][0], [sys.executable, "-I", "-S", "-B", "-O",
                          str(self.m.TRANSFER_VERIFIER)])
         for command, environment, cwd in commands:
             with self.subTest(command=command):
-                self.assertEqual(
-                    {key for key in environment if key.startswith("PYTHON")},
-                    {"PYTHONDONTWRITEBYTECODE"})
-                self.assertEqual(environment["PYTHONDONTWRITEBYTECODE"], "1")
+                self.assertEqual(environment, {})
                 self.assertEqual(cwd, self.m.ROOT)
+        self.assertTrue(Path(sys.executable).is_absolute())
+        with mock.patch.object(self.m.sys, "executable", "relative-python"):
+            with self.assertRaisesRegex(RuntimeError, "not an absolute path"):
+                self.m.run_transfer_once(optimized=False)
 
     def test_adapter_process_isolated_mode_suppresses_ambient_startup_hook(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -86,12 +96,13 @@ class TransferDependencyAdapterHostileTest(unittest.TestCase):
             environment.update({
                 "PYTHONPATH": directory,
                 "PYTHONHOME": directory,
+                "PYTHONSTARTUP": str(Path(directory, "sitecustomize.py")),
+                "PYTHONINSPECT": "1",
                 "PYTHONOPTIMIZE": "2",
-                "PYTHONDONTWRITEBYTECODE": "1",
             })
             outputs = []
             for optimized in (False, True):
-                command = [sys.executable, "-I", "-B"]
+                command = [sys.executable, "-I", "-S", "-B"]
                 if optimized:
                     command.append("-O")
                 command.append(str(PATH))
@@ -190,6 +201,10 @@ class TransferDependencyAdapterHostileTest(unittest.TestCase):
         self.assertEqual(gate["normal_output_sha256"], self.m.TRANSFER_OUTPUT_SHA256)
         self.assertEqual(gate["optimized_output_sha256"], self.m.TRANSFER_OUTPUT_SHA256)
         self.assertIs(gate["normal_optimized_byte_identical"], True)
+        self.assertEqual(gate["executions"], [
+            self.m.expected_execution_receipt(optimized=False),
+            self.m.expected_execution_receipt(optimized=True),
+        ])
         self.assertIs(gate["child_analytic_dependencies_authenticated"], False)
         self.assertIs(gate["finite_gate_passed"], True)
         self.assertIs(gate["analytic_implication_established"], False)
@@ -206,6 +221,7 @@ class TransferDependencyAdapterHostileTest(unittest.TestCase):
             ("normal_output_sha256", "0" * 64),
             ("optimized_output_sha256", "0" * 64),
             ("normal_optimized_byte_identical", False),
+            ("executions", []),
             ("child_analytic_dependencies_authenticated", True),
             ("owned_rows", 268109),
             ("finite_gate_passed", False),
@@ -229,6 +245,20 @@ class TransferDependencyAdapterHostileTest(unittest.TestCase):
         hostile["executed_finite_gates"][0]["expected_output_sha256"] = \
             self.m.TRANSFER_OUTPUT_SHA256
         self.rejected(hostile, "executed finite gate schema changed")
+
+        for index, field, value in (
+                (0, "mode", "optimized"),
+                (0, "command", self.m.transfer_command(optimized=True)),
+                (1, "cwd", "/hostile"),
+                (1, "environment", {"LD_PRELOAD": "/hostile.so"}),
+                (1, "returncode", 1),
+                (1, "stderr_sha256", "0" * 64),
+                (1, "stdout_sha256", "0" * 64),
+                (1, "source_sha256", "0" * 64)):
+            with self.subTest(execution=index, field=field):
+                hostile = copy.deepcopy(executed)
+                hostile["executed_finite_gates"][0]["executions"][index][field] = value
+                self.rejected(hostile)
 
     def test_any_attempted_aggregate_promotion_rejected(self):
         fields = (

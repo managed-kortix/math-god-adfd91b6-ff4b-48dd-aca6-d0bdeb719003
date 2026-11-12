@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -51,7 +52,7 @@ class OrderNineMasterHostileTest(unittest.TestCase):
     def test_dependency_registry_is_exact_complete_and_disjoint(self):
         self.assertEqual(len(self.master.PYTHON_PINS), 14)
         self.assertEqual(len(self.master.DATA_PINS), 44)
-        self.assertEqual(len(self.master.DOCUMENT_PINS), 7)
+        self.assertEqual(len(self.master.DOCUMENT_PINS), 8)
         registries = tuple(map(set, (self.master.PYTHON_PINS,
                                      self.master.DATA_PINS,
                                      self.master.DOCUMENT_PINS)))
@@ -60,7 +61,7 @@ class OrderNineMasterHostileTest(unittest.TestCase):
         self.assertEqual(frozenset(self.master.DATA_PINS),
                          self.master.EXPECTED_DATA_PATHS)
         observed = self.master.audit_pins()
-        self.assertEqual(len(observed), 65)
+        self.assertEqual(len(observed), 66)
 
     def test_partition_rejects_gap_overlap_physical_and_type_laundering(self):
         mutations = []
@@ -235,6 +236,17 @@ class OrderNineMasterHostileTest(unittest.TestCase):
         self.assert_rejected(lambda:
             self.master.validate_structural(missing, predicates=True, census=True))
 
+    def test_corrected_switched_ray_dependency_is_forward_only(self):
+        source = self.master.SWITCHED_THREE_RAY_NOTE.read_text("ascii")
+        self.assertEqual(
+            self.master.sha256(source.encode("ascii")),
+            self.master.DOCUMENT_PINS[self.master.SWITCHED_THREE_RAY_NOTE])
+        self.assertIn("rigorous fixed-parity-monotone bound", source)
+        self.assertIn("No converse is claimed for arbitrary switched-three-ray\nGrams", source)
+        self.assertIn("forward implication to structural ownership", source)
+        self.assertNotIn("This proves both\ndirections", source)
+        self.assertNotIn("linear Gram-chain construction has excess", source)
+
     def test_exact_downstream_schemas_reject_partial_extra_and_bool(self):
         bad_values = (
             (self.master.validate_upstream,
@@ -305,22 +317,18 @@ class OrderNineMasterHostileTest(unittest.TestCase):
             commands.append((list(command), dict(kwargs["env"]), kwargs["cwd"]))
             return real_run(command, **kwargs)
 
-        with mock.patch.dict(self.master.os.environ,
-                             {"PYTHONOPTIMIZE": "2"}, clear=False):
+        with mock.patch.dict(os.environ, {"PYTHONOPTIMIZE": "2"}, clear=False):
             with mock.patch.object(self.master.subprocess, "run", side_effect=capture):
                 self.master.run_transfer_dependency_adapter()
         self.assertEqual(len(commands), 2)
         normal, optimized = commands
-        self.assertEqual(normal[0], [sys.executable, "-I", "-B",
+        self.assertEqual(normal[0], [sys.executable, "-I", "-S", "-B",
                          str(self.master.TRANSFER_DEPENDENCY_ADAPTER)])
-        self.assertEqual(optimized[0], [sys.executable, "-I", "-B", "-O",
+        self.assertEqual(optimized[0], [sys.executable, "-I", "-S", "-B", "-O",
                          str(self.master.TRANSFER_DEPENDENCY_ADAPTER)])
         for command, environment, cwd in commands:
             with self.subTest(command=command):
-                self.assertEqual(
-                    {key for key in environment if key.startswith("PYTHON")},
-                    {"PYTHONDONTWRITEBYTECODE"})
-                self.assertEqual(environment["PYTHONDONTWRITEBYTECODE"], "1")
+                self.assertEqual(environment, {})
                 self.assertEqual(cwd, self.master.ROOT)
 
     def test_transfer_adapter_isolated_mode_suppresses_ambient_startup_hook(self):
@@ -333,9 +341,12 @@ class OrderNineMasterHostileTest(unittest.TestCase):
                 encoding="ascii",
             )
             with mock.patch.dict(
-                    self.master.os.environ,
+                    os.environ,
                     {"PYTHONPATH": directory, "PYTHONHOME": directory,
-                     "PYTHONOPTIMIZE": "2"}, clear=False):
+                     "PYTHONSTARTUP": str(hook), "PYTHONINSPECT": "1",
+                     "PYTHONOPTIMIZE": "2", "LD_PRELOAD": "/hostile/preload.so",
+                     "LD_AUDIT": "/hostile/audit.so", "BASH_ENV": str(hook),
+                     "ENV": str(hook), "LOCPATH": directory}, clear=False):
                 receipt = self.master.run_transfer_dependency_adapter()
             self.assertFalse(sentinel.exists())
             self.assertEqual(receipt["normal_output_sha256"],
@@ -343,6 +354,40 @@ class OrderNineMasterHostileTest(unittest.TestCase):
             self.assertEqual(receipt["optimized_output_sha256"],
                              self.master.TRANSFER_DEPENDENCY_ADAPTER_OUTPUT_SHA256)
             self.assertIs(receipt["normal_optimized_byte_identical"], True)
+
+    def test_transfer_adapter_no_site_mode_suppresses_prefix_sitecustomize(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            created = subprocess.run(
+                [sys.executable, "-m", "venv", "--without-pip", str(root / "venv")],
+                check=False, capture_output=True)
+            self.assertEqual(created.returncode, 0, created.stderr.decode())
+            venv_python = root / "venv" / "bin" / "python"
+            site_packages = (root / "venv" / "lib" /
+                             f"python{sys.version_info.major}.{sys.version_info.minor}" /
+                             "site-packages")
+            site_packages.mkdir(parents=True, exist_ok=True)
+            sentinel = root / "prefix-sitecustomize-executed"
+            (site_packages / "sitecustomize.py").write_text(
+                "from pathlib import Path\n"
+                f"Path({str(sentinel)!r}).write_text('executed', encoding='ascii')\n",
+                encoding="ascii",
+            )
+            baseline = subprocess.run(
+                [str(venv_python), "-I", "-B", "-c", "pass"],
+                check=False, capture_output=True,
+                env={"LANG": "C", "LC_ALL": "C",
+                     "PYTHONDONTWRITEBYTECODE": "1"})
+            self.assertEqual(baseline.returncode, 0, baseline.stderr.decode())
+            self.assertTrue(sentinel.is_file())
+            sentinel.unlink()
+            with mock.patch.object(self.master.sys, "executable", str(venv_python)):
+                receipt = self.master.run_transfer_dependency_adapter()
+            self.assertFalse(sentinel.exists())
+            self.assertEqual(receipt["normal_output_sha256"],
+                             self.master.TRANSFER_DEPENDENCY_ADAPTER_OUTPUT_SHA256)
+            self.assertEqual(receipt["optimized_output_sha256"],
+                             self.master.TRANSFER_DEPENDENCY_ADAPTER_OUTPUT_SHA256)
 
     def test_transfer_adapter_hostile_promotion_and_gate_schema_rejected(self):
         receipt = self.master.run_transfer_dependency_adapter()
@@ -392,14 +437,132 @@ class OrderNineMasterHostileTest(unittest.TestCase):
                 "upstream-sos-dominant", self.master.UPSTREAM, (),
                 self.master.UPSTREAM_OUTPUT_SHA256, self.master.validate_upstream))
 
-    def test_child_command_propagates_optimizer_mode_and_disables_bytecode(self):
-        command = self.master.child_command(self.master.UPSTREAM, ())
-        self.assertEqual(command[0], sys.executable)
-        self.assertIn("-B", command)
-        if sys.flags.optimize:
-            self.assertIn("-O", command)
-        else:
-            self.assertNotIn("-O", command)
+    def test_child_command_and_environment_are_isolated_and_mode_explicit(self):
+        self.assertEqual(
+            self.master.child_command(self.master.UPSTREAM, (), optimized=False),
+            [sys.executable, "-I", "-S", "-B", str(self.master.UPSTREAM)])
+        self.assertEqual(
+            self.master.child_command(self.master.UPSTREAM, (), optimized=True),
+            [sys.executable, "-I", "-S", "-B", "-O", str(self.master.UPSTREAM)])
+        with self.assertRaises(TypeError):
+            self.master.child_command(self.master.UPSTREAM, ())
+        with mock.patch.object(self.master.sys, "executable", "relative-python"):
+            self.assert_rejected(lambda: self.master.child_command(
+                self.master.UPSTREAM, (), optimized=False))
+        with mock.patch.dict(
+                os.environ,
+                {"PYTHONPATH": "/hostile", "PYTHONHOME": "/hostile",
+                 "PYTHONSTARTUP": "/hostile/start.py", "PYTHONINSPECT": "1",
+                 "PYTHONOPTIMIZE": "2", "LD_PRELOAD": "/hostile/preload.so",
+                 "LD_AUDIT": "/hostile/audit.so", "BASH_ENV": "/hostile/bash-env",
+                 "ENV": "/hostile/env", "LOCPATH": "/hostile/locale"}, clear=False):
+            environment = self.master.child_environment()
+        self.assertEqual(environment, {})
+        self.assertTrue(Path(sys.executable).is_absolute())
+
+    def test_run_python_pair_binds_returncode_stderr_and_exact_modes(self):
+        ok = subprocess.CompletedProcess(args=[], returncode=0,
+                                        stdout=b"same\n", stderr=b"")
+        commands = []
+
+        def capture(command, **kwargs):
+            commands.append((list(command), dict(kwargs["env"]), kwargs["cwd"]))
+            return ok
+
+        with mock.patch.object(self.master.subprocess, "run", side_effect=capture):
+            output, receipt = self.master.run_python_pair(
+                "synthetic", self.master.UPSTREAM, ("--synthetic",))
+        self.assertEqual(output, b"same\n")
+        self.assertEqual(set(receipt), self.master.PYTHON_PAIR_RECEIPT_FIELDS)
+        self.assertEqual(receipt["schema"], self.master.PYTHON_PAIR_RECEIPT_SCHEMA)
+        self.assertEqual(receipt["source_path"], str(self.master.UPSTREAM))
+        self.assertEqual(receipt["source_sha256"],
+                         self.master.PYTHON_PINS[self.master.UPSTREAM])
+        self.assertEqual(receipt["arguments"], ["--synthetic"])
+        self.assertEqual(receipt["normal"]["mode"], "normal")
+        self.assertEqual(receipt["optimized"]["mode"], "optimized")
+        self.assertEqual(receipt["normal"]["command"], commands[0][0])
+        self.assertEqual(receipt["optimized"]["command"], commands[1][0])
+        self.assertEqual(receipt["normal"]["cwd"], str(self.master.ROOT))
+        self.assertEqual(receipt["normal"]["environment"], {})
+        self.assertEqual(receipt["normal"]["returncode"], 0)
+        self.assertEqual(receipt["normal"]["stderr_sha256"], self.master.EMPTY_SHA256)
+        self.assertIs(receipt["normal_optimized_stdout_byte_identical"], True)
+        self.assertEqual(commands, [
+            ([sys.executable, "-I", "-S", "-B", str(self.master.UPSTREAM),
+              "--synthetic"], {}, self.master.ROOT),
+            ([sys.executable, "-I", "-S", "-B", "-O", str(self.master.UPSTREAM),
+              "--synthetic"], {}, self.master.ROOT),
+        ])
+        for hostile in (
+                subprocess.CompletedProcess(args=[], returncode=1,
+                                            stdout=b"same\n", stderr=b""),
+                subprocess.CompletedProcess(args=[], returncode=0,
+                                            stdout=b"same\n", stderr=b"hostile")):
+            with self.subTest(hostile=hostile):
+                with mock.patch.object(self.master.subprocess, "run",
+                                       return_value=hostile):
+                    self.assert_rejected(lambda: self.master.run_python_pair(
+                        "synthetic", self.master.UPSTREAM, ()))
+        differing = [
+            subprocess.CompletedProcess(args=[], returncode=0,
+                                        stdout=b"normal\n", stderr=b""),
+            subprocess.CompletedProcess(args=[], returncode=0,
+                                        stdout=b"optimized\n", stderr=b""),
+        ]
+        with mock.patch.object(self.master.subprocess, "run", side_effect=differing):
+            self.assert_rejected(lambda: self.master.run_python_pair(
+                "synthetic", self.master.UPSTREAM, ()))
+
+    def test_noncanonical_or_trailing_child_stdout_is_rejected(self):
+        bad_outputs = (
+            b'{"status":"passed"}\ntrailing\n',
+            b'{ "status":"passed"}\n',
+            b'{"status":1.0}\n',
+            b'{"status":"passed","status":"passed"}\n',
+        )
+        for raw in bad_outputs:
+            with self.subTest(raw=raw):
+                completed = subprocess.CompletedProcess(
+                    args=[], returncode=0, stdout=raw, stderr=b"")
+                with mock.patch.object(self.master.subprocess, "run",
+                                       return_value=completed):
+                    self.assert_rejected(lambda: self.master.run_child(
+                        "upstream-sos-dominant", self.master.UPSTREAM, (), None,
+                        lambda result: None))
+
+    def test_structural_live_key_sink_remains_explicitly_unresolved(self):
+        with self.assertRaisesRegex(RuntimeError,
+                                    "current-process.*not theorem-eligible"):
+            self.master.run_structural_combined_with_keys()
+
+    def test_coarse_atom_runs_explicit_isolated_pair_without_nested_child(self):
+        real_run = self.master.subprocess.run
+        commands = []
+
+        def capture(command, **kwargs):
+            commands.append((list(command), dict(kwargs["env"]), kwargs["cwd"]))
+            return real_run(command, **kwargs)
+
+        with mock.patch.object(self.master.subprocess, "run", side_effect=capture):
+            receipt = self.master.run_coarse_atom()
+        self.assertEqual(receipt["normal_O_byte_identity"],
+                         "enforced by isolated master pair")
+        execution = receipt["execution"]
+        self.assertEqual(execution["normal"]["mode"], "normal")
+        self.assertEqual(execution["optimized"]["mode"], "optimized")
+        self.assertEqual(execution["normal"]["source_path"],
+                         str(self.master.COARSE_ATOM))
+        self.assertEqual(execution["normal"]["returncode"], 0)
+        self.assertIs(execution["normal"]["stderr_empty"], True)
+        self.assertEqual(commands[0][0], [sys.executable, "-I", "-S", "-B",
+                         str(self.master.COARSE_ATOM), "--emit"])
+        self.assertEqual(commands[1][0], [sys.executable, "-I", "-S", "-B", "-O",
+                         str(self.master.COARSE_ATOM), "--emit"])
+        for command, environment, cwd in commands:
+            with self.subTest(command=command):
+                self.assertEqual(environment, {})
+                self.assertEqual(cwd, self.master.ROOT)
 
     def test_quick_manifest_is_never_theorem_eligible(self):
         manifest = self.master.audit(full=False)
@@ -408,6 +571,13 @@ class OrderNineMasterHostileTest(unittest.TestCase):
         self.assertEqual(manifest["mode"], "quick")
         self.assertEqual(manifest["evidence_kind"],
                          "fail-closed-authentication-only")
+        boundary = manifest["runtime_trust_boundary"]
+        self.assertIn("already-started parent Python interpreter", boundary)
+        self.assertIn("current-process imports", boundary)
+        self.assertIn("explicit normal and -O executions", boundary)
+        self.assertIn("literal env={}", boundary)
+        self.assertIn("structural live key sink remains unresolved", boundary)
+        self.assertIn("full/theorem mode is hard-blocked", boundary)
 
     def test_full_gate_is_explicitly_blocked_before_any_expensive_child(self):
         names = ("run_structural_combined_with_keys", "run_child", "run_cycle",
@@ -416,7 +586,7 @@ class OrderNineMasterHostileTest(unittest.TestCase):
         children = [patch.start() for patch in patches]
         try:
             with self.assertRaisesRegex(
-                    RuntimeError, "authenticated StageLedger receipts"):
+                    RuntimeError, "isolated structural key sink.*authenticated StageLedger"):
                 self.master.audit(full=True)
         finally:
             for patch in reversed(patches):

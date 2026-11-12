@@ -25,7 +25,6 @@ import importlib.util
 import itertools
 import json
 import lzma
-import os
 import subprocess
 import sys
 from collections import Counter
@@ -60,6 +59,7 @@ STRUCTURAL_NOTE = HEPTACYCLIC / "rank-seven-single-block-structural-theorem.md"
 COARSE_ATOM_NOTE = HEPTACYCLIC / "rank-seven-orders2-4-kernel-theorem.md"
 TRANSFER_NOTE = HEPTACYCLIC / "rank-seven-order-nine-induced-partition-transfer.md"
 OBSTRUCTION_NOTE = HEPTACYCLIC / "rank-seven-order-nine-obstruction-branch-gram-theorem.md"
+SWITCHED_THREE_RAY_NOTE = HEPTACYCLIC / "cubic-rank-seven-switched-three-ray-theorem.md"
 BICYCLIC = ROOT / "all-bicyclic-graphs" / "paper.tex"
 TRICYCLIC = ROOT / "all-tricyclic-graphs" / "paper.tex"
 TETRACYCLIC = ROOT / "all-tetracyclic-graphs" / "paper.tex"
@@ -70,12 +70,12 @@ Json = Any
 PYTHON_PINS = {
     STRUCTURAL: "34b43bd2c5a6b9b487c841f74e524f06dd1adb16328c3b321b6510bd9d2987b8",
     UPSTREAM: "f8d05d43a31b10058cf37176ceaa14c2562b1e845495ebc210232db0fce6f56c",
-    CYCLE: "f9267ac9b2d41a4a09254e71e66f39fd78ffaadd334a4761c44c1a51ca59072e",
+    CYCLE: "872912069cb6a9737bb74ad65335d001bdcb92d62873fb8d3111748996ab698a",
     CYCLE_SOURCE: "be64c55437421cac434c0b610dac62784e89a0e9a9fc2b401139c98dc266de76",
     STRUCTURAL_SCANNER: "bca85e48a018e7b7c998216e6e14dca38db82e4970709e51571de3aee2d089c7",
     TRANSFER: "4b9cb58aeb68b869b9c254a21ae7bd3cf18fc7360e7afb0a47fd8e570c40b2fe",
     TRANSFER_DEPENDENCY_ADAPTER:
-        "05a7b35ca34cdb1e30d124f3647bebd4444e13fa07aeb22297afa2b1204930c9",
+        "6a68fcb62b53b1b50fb1fadb90b840c5f3947ce401044e6d2e8ec2af3e85d5a6",
     OBSTRUCTION: "21acdb25b08b89ce9a5241932bc23d5fbdfec4c76333ab50c78d9371cf79e0b8",
     ANALYTIC_LIFT: "55e7d67a670f22a7b872b122f3aadcd2036ba922993f5faac1c5b72e2232e611",
     CENSUS_PRODUCER: "c6dcc792c7899c3f494a3beb521c94da972a01a392cd77be78b0956bbee3b921",
@@ -135,6 +135,8 @@ DOCUMENT_PINS = {
     TRICYCLIC: "13f8f8c7996c0f58f764c52b4a5b915132038e2ce38d3e56285f1bf952990fc1",
     TETRACYCLIC: "7d8174e64095e5cccf90776ccac92d2dd2ca3f73d500e2518461f5dfb907b93b",
     COARSE_ATOM_NOTE: "25e84efe5cba507e3ad0287a83505b544bbb8b40a401f7a45373d025b1bff399",
+    SWITCHED_THREE_RAY_NOTE:
+        "731a9e8fe41e870ee6a7bc8d3bf0cf2517128077f38bd36ec5904e2ec98480f8",
 }
 
 STRUCTURAL_FAST_OUTPUT_SHA256 = "cf8cebf6a9b0ccd4360eaaad57c10c0c5a5b058104aa583d4ac855a5717af552"
@@ -145,6 +147,19 @@ TRANSFER_DEPENDENCY_ADAPTER_OUTPUT_SHA256 = \
     "f15f429f6ab8a1a8d5e9816a1da535caacfc2da75b5c45ed6cc48b750fb32126"
 OBSTRUCTION_OUTPUT_SHA256 = "9e9bacf32b73627db45c092acfa785d1aafe465e4c8743f7054f74cf967d9770"
 COARSE_ATOM_OUTPUT_SHA256 = "019aeb2fc058b61cebd2a98a0ee0025b345cca4b18fb706369a92e1f5ca81a02"
+ANALYTIC_LIFT_OUTPUT_SHA256 = "99782a95008fdcceaf74efbe869917d5321c974d886e76460711faca09135e6d"
+
+PYTHON_EXECUTION_RECEIPT_SCHEMA = "rank-seven-order-nine-python-execution-receipt-v1"
+PYTHON_PAIR_RECEIPT_SCHEMA = "rank-seven-order-nine-python-pair-receipt-v1"
+PYTHON_EXECUTION_RECEIPT_FIELDS = {
+    "schema", "name", "mode", "command", "cwd", "environment", "returncode",
+    "stdout_sha256", "stderr_sha256", "stderr_empty", "source_path", "source_sha256",
+}
+PYTHON_PAIR_RECEIPT_FIELDS = {
+    "schema", "name", "source_path", "source_sha256", "arguments", "normal",
+    "optimized", "stdout_sha256", "normal_optimized_stdout_byte_identical",
+}
+EMPTY_SHA256 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 
 RESIDUAL_ORBITS = 2_835_895
 RESIDUAL_PHYSICAL = 3_518_609
@@ -371,7 +386,7 @@ def audit_pins() -> dict[str, str]:
                 for right in registries[index + 1:]), "dependency registries overlap")
     require(frozenset(DATA_PINS) == EXPECTED_DATA_PATHS and len(DATA_PINS) == 44,
             "complete data registry path set changed")
-    require(len(PYTHON_PINS) == 14 and len(DOCUMENT_PINS) == 7 and len(CHUNK_SPECS) == 8,
+    require(len(PYTHON_PINS) == 14 and len(DOCUMENT_PINS) == 8 and len(CHUNK_SPECS) == 8,
             "dependency registry cardinality changed")
     observed = {}
     for path, expected in {**PYTHON_PINS, **DATA_PINS, **DOCUMENT_PINS}.items():
@@ -739,13 +754,14 @@ def validate_coarse_application_chunks() -> dict[str, Json]:
 
 
 def run_coarse_atom() -> dict[str, Json]:
-    command = child_command(COARSE_ATOM, ())
-    completed = subprocess.run(command, check=False, capture_output=True,
-                               env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"})
-    require(completed.returncode == 0 and completed.stderr == b"" and
-            sha256(completed.stdout) == COARSE_ATOM_OUTPUT_SHA256,
+    # `--emit` suppresses the child's own historical nested -O launch.  Execute
+    # the explicit isolated pair here instead, with no ambient child environment.
+    require(sha256(COARSE_ATOM.read_bytes()) == PYTHON_PINS[COARSE_ATOM],
+            "coarse atom source changed")
+    output, execution = run_python_pair("coarse atom", COARSE_ATOM, ("--emit",))
+    require(sha256(output) == COARSE_ATOM_OUTPUT_SHA256,
             "coarse atom exact normal/-O audit changed")
-    lines = completed.stdout.decode("ascii").splitlines()
+    lines = output.decode("ascii").splitlines()
     require(lines == [
         "rank-seven orders2-4 kernel theorem: exact hostile audit passed",
         "direct_kernel_census: counts=1+6+47=54",
@@ -763,7 +779,8 @@ def run_coarse_atom() -> dict[str, Json]:
             "source_sha256": PYTHON_PINS[COARSE_ATOM],
             "note_sha256": DOCUMENT_PINS[COARSE_ATOM_NOTE],
             "output_sha256": COARSE_ATOM_OUTPUT_SHA256,
-            "normal_O_byte_identity": "enforced by child"}
+            "normal_O_byte_identity": "enforced by isolated master pair",
+            "execution": execution}
 
 
 def expected_chunks() -> list[dict[str, Json]]:
@@ -970,62 +987,143 @@ def validate_obstruction(result: Json) -> None:
         "switched_three_ray_rows": 1614, "witness_stream_sha256":
         "912058dbc7f22d33bd777c4b848aaba7168f8dd280a1605871403eb22a213d4c"},
         "obstruction exact output changed")
+    # The 1,614 switched-three-ray rows use only the forward rational-majorant
+    # certificate; no converse claim about arbitrary optimal Grams is consumed.
+    require(SWITCHED_THREE_RAY_NOTE in DOCUMENT_PINS and
+            sha256(SWITCHED_THREE_RAY_NOTE.read_bytes()) ==
+                DOCUMENT_PINS[SWITCHED_THREE_RAY_NOTE],
+            "corrected switched-three-ray forward certificate changed")
 
 
-def child_command(path: Path, arguments: tuple[str, ...]) -> list[str]:
-    command = [sys.executable, "-B"]
-    if sys.flags.optimize:
+def child_environment() -> dict[str, str]:
+    """Return the literally empty environment used by every Python child."""
+    # No loader, shell-startup, locale-path, HOME, temp, or Python variable is
+    # required.  `-I -S -B` below independently fixes interpreter startup.
+    return {}
+
+
+def absolute_python_executable() -> str:
+    """Return the already-started interpreter only when its path is absolute."""
+    require(type(sys.executable) is str and bool(sys.executable) and
+            Path(sys.executable).is_absolute(),
+            "current Python executable is not an absolute path")
+    return sys.executable
+
+
+def child_command(path: Path, arguments: tuple[str, ...], *,
+                  optimized: bool) -> list[str]:
+    require(type(optimized) is bool, "child optimization mode is not Boolean")
+    require(path.is_absolute(), "child script path is not absolute")
+    require(type(arguments) is tuple and all(type(item) is str for item in arguments),
+            "child arguments are not an exact string tuple")
+    command = [absolute_python_executable(), "-I", "-S", "-B"]
+    if optimized:
         command.append("-O")
     return [*command, str(path), *arguments]
 
 
+def execution_receipt(name: str, path: Path, arguments: tuple[str, ...], *,
+                      optimized: bool, completed: subprocess.CompletedProcess) -> dict[str, Json]:
+    """Bind the exact process boundary without embedding potentially large stdout."""
+    mode = "optimized" if optimized else "normal"
+    command = child_command(path, arguments, optimized=optimized)
+    require(Path(command[0]).is_absolute() and
+            command.count("-O") == (1 if optimized else 0) and
+            command[:4] == [absolute_python_executable(), "-I", "-S", "-B"] and
+            command[4 + int(optimized)] == str(path.resolve()) and
+            str(path) == str(path.resolve()) and str(ROOT) == str(ROOT.resolve()),
+            f"Python child command/mode/path binding changed: {name}/{mode}")
+    require(type(completed.returncode) is int and completed.returncode == 0,
+            f"Python child failed: {name}/{mode}")
+    require(type(completed.stdout) is bytes, f"Python child stdout is not bytes: {name}/{mode}")
+    require(type(completed.stderr) is bytes and completed.stderr == b"",
+            f"Python child wrote stderr: {name}/{mode}")
+    receipt = {
+        "schema": PYTHON_EXECUTION_RECEIPT_SCHEMA,
+        "name": name,
+        "mode": mode,
+        "command": command,
+        "cwd": str(ROOT),
+        "environment": {},
+        "returncode": completed.returncode,
+        "stdout_sha256": sha256(completed.stdout),
+        "stderr_sha256": sha256(completed.stderr),
+        "stderr_empty": True,
+        "source_path": str(path),
+        "source_sha256": PYTHON_PINS[path],
+    }
+    require(set(receipt) == PYTHON_EXECUTION_RECEIPT_FIELDS and
+            receipt["stderr_sha256"] == EMPTY_SHA256,
+            f"Python execution receipt schema changed: {name}/{mode}")
+    return receipt
+
+
+def run_python_pair(name: str, path: Path,
+                    arguments: tuple[str, ...]) -> tuple[bytes, dict[str, Json]]:
+    """Run explicit normal/-O children and return a closed exact-boundary receipt."""
+    require(path in PYTHON_PINS and sha256(path.read_bytes()) == PYTHON_PINS[path],
+            f"Python pair source changed: {name}")
+    outputs: list[bytes] = []
+    executions: list[dict[str, Json]] = []
+    for optimized in (False, True):
+        command = child_command(path, arguments, optimized=optimized)
+        completed = subprocess.run(command, cwd=ROOT, check=False,
+                                   capture_output=True, env={})
+        executions.append(execution_receipt(
+            name, path, arguments, optimized=optimized, completed=completed))
+        outputs.append(completed.stdout)
+    require(outputs[0] == outputs[1], f"normal/-O Python child output differs: {name}")
+    pair = {
+        "schema": PYTHON_PAIR_RECEIPT_SCHEMA,
+        "name": name,
+        "source_path": str(path),
+        "source_sha256": PYTHON_PINS[path],
+        "arguments": list(arguments),
+        "normal": executions[0],
+        "optimized": executions[1],
+        "stdout_sha256": sha256(outputs[0]),
+        "normal_optimized_stdout_byte_identical": True,
+    }
+    require(set(pair) == PYTHON_PAIR_RECEIPT_FIELDS and
+            pair["normal"]["mode"] == "normal" and
+            pair["optimized"]["mode"] == "optimized" and
+            pair["normal"]["stdout_sha256"] == pair["stdout_sha256"] ==
+                pair["optimized"]["stdout_sha256"],
+            f"Python pair receipt binding changed: {name}")
+    return outputs[0], pair
+
+
 def run_structural_combined_with_keys() -> tuple[dict[str, Json], dict[str, list]]:
-    """Run the public combined API once and collect its live canonical key sink."""
-    module = load_pinned_module(STRUCTURAL, "rank7_o9_master_structural_api")
-    partitions: dict[str, list] = {"owner": [], "remainder": []}
+    """Remain fail-closed until the structural live key sink is process-isolated.
 
-    def sink(partition: str, key: tuple[int, int, int, tuple[int, ...], int]) -> None:
-        require(type(partition) is str and partition in partitions,
-                "structural key sink emitted an unknown partition")
-        partitions[partition].append(canonical_key(key, "structural live key"))
-
-    result = module.replay_all_predicates(
-        key_sink=sink, reconstruct_fresh_census=True)
-    validate_structural(result, predicates=True, census=True)
-    require(result["complete"] is True and
-            result["predicate_replay_eligible"] is True and
-            result["census_reconstruction_eligible"] is True and
-            result["combined_replay_eligible"] is True,
-            "live structural combined API is ineligible")
-    return ({"name": "structural-combined",
-             "arguments": ["--full-rescan", "--reconstruct-census"],
-             "source_sha256": PYTHON_PINS[STRUCTURAL],
-             "output_sha256": sha256(canonical_bytes(result)), "result": result},
-            partitions)
+    The CLI can emit the aggregate replay result but not the 2,835,895 canonical
+    partition keys consumed by composition.  Importing its callback API in the
+    already-started parent would leave those proof-bearing keys outside the child
+    isolation receipt.  Full mode therefore cannot call or consume this boundary.
+    """
+    fail("structural live key sink remains current-process and is not theorem-eligible")
 
 
 def run_child(name: str, path: Path, arguments: tuple[str, ...], output_sha256: str | None,
               validator, report_line: str | None = None) -> dict[str, Json]:
-    require(path in PYTHON_PINS and sha256(path.read_bytes()) == PYTHON_PINS[path],
-            f"child source changed: {name}")
-    command = child_command(path, arguments)
-    environment = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
-    completed = subprocess.run(command, check=False, capture_output=True, env=environment)
-    require(completed.returncode == 0 and completed.stderr == b"", f"child failed: {name}")
+    """Execute one proof lane as an explicit isolated normal/-O process pair."""
+    output, execution = run_python_pair(name, path, arguments)
     if output_sha256 is not None:
         exact_sha256(output_sha256, f"{name} output pin")
-        require(sha256(completed.stdout) == output_sha256, f"child output changed: {name}")
+        require(sha256(output) == output_sha256,
+                f"child output changed: {name}")
     if report_line is None:
-        result = parse_one_json(completed.stdout, name)
+        result = parse_one_json(output, name)
     else:
-        lines = completed.stdout.splitlines(keepends=True)
+        lines = output.splitlines(keepends=True)
         require(len(lines) == 2 and lines[1] == (report_line + "\n").encode("ascii"),
                 f"{name}: report line changed")
         result = strict_json(lines[0], name)
     validator(result)
     return {"name": name, "arguments": list(arguments),
-            "source_sha256": PYTHON_PINS[path], "output_sha256": sha256(completed.stdout),
-            "result": result}
+            "source_sha256": PYTHON_PINS[path], "output_sha256": sha256(output),
+            "normal_optimized_byte_identical": True,
+            "execution": execution, "result": result}
 
 
 def canonical_key(record: list[Json] | tuple[Json, ...], label: str) -> tuple[int, int, int, tuple[int, ...], int]:
@@ -1222,54 +1320,35 @@ def owner_stream_keys(path: Path, label: str) -> list[tuple[int, int, int, tuple
 
 
 def run_cycle() -> dict[str, Json]:
-    import importlib.util
-    require(sha256(CYCLE.read_bytes()) == PYTHON_PINS[CYCLE], "cycle source changed")
-    spec = importlib.util.spec_from_file_location("rank7_order9_master_cycle", CYCLE)
-    require(spec is not None and spec.loader is not None, "cannot load cycle verifier")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    authenticated = cycle_authenticated_source(module)
-    result = {}
-    all_indices = set()
-    for name in ("third", "fourth"):
-        lane = module.HISTORICAL_LANES[name]
-        replay = module.replay_owner_stream(lane["owners"], lane["target"], lane,
-                                            lane["report"], authenticated)
-        report = module.strict_json(lane["report"].read_bytes(), lane["report"].name)
-        if name == "third":
-            require(report["prior_lane"] == {"owned_orbit_total": 1018,
-                    "remainder_total": 270374,
-                    "report_sha256": "79a0fd27298125d9ac1a776b9b144f5cafb3e55e03d0c4615eb5c0d3f026b921"} and
-                    report["remaining_remainder_total"] == 269743,
-                    "historical missing-1018 metadata changed")
-        else:
-            require(report["prior_lane"] == {"owned_orbit_total": 631,
-                    "remainder_total": 269743,
-                    "report_sha256": module.HISTORICAL_LANES["third"]["report_sha256"]} and
-                    report["remaining_remainder_total"] == 268707,
-                    "fourth historical chain metadata changed")
-        indices = set()
-        previous_source_index = -1
-        with lzma.open(lane["owners"], "rb") as stream:
-            for raw in stream:
-                payload = module.strict_json(raw, lane["owners"].name)
-                require(type(payload) is list and len(payload) == 4 and
-                        type(payload[0]) is list and len(payload[0]) == 5 and
-                        type(payload[0][0]) is int,
-                        "historical cycle owner row malformed")
-                record = payload[0]
-                require(record[0] > previous_source_index and record[0] not in indices and
-                        record[0] not in all_indices,
-                        "historical cycle streams overlap or are out of order")
-                previous_source_index = record[0]
-                indices.add(record[0])
-        all_indices.update(indices)
-        result[name] = replay
-    validate_cycle(result)
-    raw = canonical_bytes(result)
-    require(sha256(raw) == CYCLE_OUTPUT_SHA256, "cycle output digest changed")
-    return {"name": "third-fourth-cycle-grams", "arguments": ["third", "fourth"],
-            "source_sha256": PYTHON_PINS[CYCLE], "output_sha256": sha256(raw), "result": result}
+    """Replay both historical cycle lanes in an isolated normal/-O pair."""
+    return run_child(
+        "third-fourth-cycle-grams", CYCLE,
+        ("--audit-historical", "third", "fourth"), CYCLE_OUTPUT_SHA256,
+        validate_cycle)
+
+
+def isolated_full_lane_registry() -> dict[str, dict[str, Json]]:
+    """Execute-bind every standalone full-mode lane without promoting the theorem.
+
+    This helper is intentionally not called by ``audit(full=True)`` while the
+    structural key-sink boundary and independent StageLedger receipts are absent.
+    It exists so each otherwise standalone proof child has one uniform paired
+    isolation implementation and can be audited without weakening the full gate.
+    """
+    return {
+        "upstream": run_child(
+            "upstream-sos-dominant", UPSTREAM, (), UPSTREAM_OUTPUT_SHA256,
+            validate_upstream),
+        "cycle": run_cycle(),
+        "transfer": run_child(
+            "induced-transfer", TRANSFER, (), TRANSFER_OUTPUT_SHA256,
+            validate_transfer,
+            "rank-seven order-nine induced-partition transfer verifier: PASS"),
+        "obstruction": run_child(
+            "obstruction-branch-gram", OBSTRUCTION, (), OBSTRUCTION_OUTPUT_SHA256,
+            validate_obstruction,
+            "rank-seven order-nine obstruction branch-Gram verifier: PASS"),
+    }
 
 
 def compose_exact_stage_keys(
@@ -1422,7 +1501,9 @@ def compose_exact_stage_keys(
             "rooted_tree_attachments": True},
         "obstruction": {
             "kind": "uniform-all-descendant-branch-Gram-owner",
-            "authenticated_by": "exact switched-three-ray/direct Gram replay",
+            "authenticated_by": (
+                "forward switched-three-ray rational-majorant certificate plus direct Gram replay"
+            ),
             "all_target_indices": True, "all_lengths": True,
             "rooted_tree_attachments": True},
     }
@@ -1599,45 +1680,26 @@ def validate_transfer_dependency_adapter(result: Json, adapter_module=None) -> d
 
 
 def run_transfer_dependency_adapter() -> dict[str, Json]:
-    """Execute the cheap default adapter in normal and -O modes and bind exact bytes."""
+    """Execute the cheap default adapter as an isolated pair and bind exact bytes."""
     require(TRANSFER_DEPENDENCY_ADAPTER in PYTHON_PINS and
             sha256(TRANSFER_DEPENDENCY_ADAPTER.read_bytes()) ==
                 PYTHON_PINS[TRANSFER_DEPENDENCY_ADAPTER],
             "transfer dependency adapter source changed")
     adapter_module = load_pinned_module(
         TRANSFER_DEPENDENCY_ADAPTER, "rank7_o9_master_transfer_dependency_adapter")
-    outputs = []
-    # Isolated mode ignores every PYTHON* startup variable and excludes the script
-    # directory and user site from sys.path.  This prevents ambient sitecustomize,
-    # usercustomize, or a PYTHONPATH shadow module from executing in either replay.
-    # Strip inherited PYTHON* variables as a second, explicit guard; -B below
-    # independently fixes bytecode behavior after PYTHONDONTWRITEBYTECODE is reset.
-    environment = {key: value for key, value in os.environ.items()
-                   if not key.startswith("PYTHON")}
-    environment["PYTHONDONTWRITEBYTECODE"] = "1"
-    for optimized in (False, True):
-        command = [sys.executable, "-I", "-B"]
-        if optimized:
-            command.append("-O")
-        command.append(str(TRANSFER_DEPENDENCY_ADAPTER))
-        completed = subprocess.run(command, cwd=ROOT, check=False,
-                                   capture_output=True, env=environment)
-        require(completed.returncode == 0 and completed.stderr == b"",
-                "transfer dependency adapter execution failed")
-        require(sha256(completed.stdout) == TRANSFER_DEPENDENCY_ADAPTER_OUTPUT_SHA256,
-                "transfer dependency adapter output changed")
-        validate_transfer_dependency_adapter(
-            parse_one_json(completed.stdout, "transfer dependency adapter"),
-            adapter_module=adapter_module)
-        outputs.append(completed.stdout)
-    require(outputs[0] == outputs[1],
-            "transfer dependency adapter normal and -O outputs differ")
+    output, execution = run_python_pair(
+        "transfer dependency adapter", TRANSFER_DEPENDENCY_ADAPTER, ())
+    require(sha256(output) == TRANSFER_DEPENDENCY_ADAPTER_OUTPUT_SHA256,
+            "transfer dependency adapter output changed")
+    result = parse_one_json(output, "transfer dependency adapter")
+    validate_transfer_dependency_adapter(result, adapter_module=adapter_module)
     return {
         "schema": "rank-seven-order-nine-transfer-dependency-adapter-receipt-v1",
         "source_sha256": PYTHON_PINS[TRANSFER_DEPENDENCY_ADAPTER],
-        "normal_output_sha256": sha256(outputs[0]),
-        "optimized_output_sha256": sha256(outputs[1]),
+        "normal_output_sha256": sha256(output),
+        "optimized_output_sha256": sha256(output),
         "normal_optimized_byte_identical": True,
+        "execution": execution,
         "execution_mode": "default-registered-unexecuted-finite-gate",
         "claim_boundary": "source-byte-authenticated-nonpromotional-registry-only",
         "finite_gate_passed": False,
@@ -1646,16 +1708,18 @@ def run_transfer_dependency_adapter() -> dict[str, Json]:
         "bounded_transfer_implication_discharged": False,
         "theorem_eligible": False,
         "global_claim": False,
-        "result": parse_one_json(outputs[0], "transfer dependency adapter receipt"),
+        "result": result,
     }
 
 
 def validate_analytic_sources() -> dict[str, Json]:
-    completed = subprocess.run(child_command(ANALYTIC_LIFT, ("--print-manifest",)),
-                               check=False, capture_output=True,
-                               env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"})
-    require(completed.returncode == 0 and completed.stderr == b"", "analytic lift failed")
-    lines = completed.stdout.splitlines(keepends=True)
+    require(sha256(ANALYTIC_LIFT.read_bytes()) == PYTHON_PINS[ANALYTIC_LIFT],
+            "conditional analytic lift source changed")
+    output, execution = run_python_pair(
+        "conditional analytic lift", ANALYTIC_LIFT, ("--print-manifest",))
+    require(sha256(output) == ANALYTIC_LIFT_OUTPUT_SHA256,
+            "conditional analytic lift exact output changed")
+    lines = output.splitlines(keepends=True)
     require(len(lines) == 2 and lines[1] ==
             b"rank-seven conditional analytic lift: exact contract audit passed; budget=6; global_claim=false; finite_premise_discharged=false\n",
             "analytic lift report changed")
@@ -1671,9 +1735,9 @@ def validate_analytic_sources() -> dict[str, Json]:
             DOCUMENT_PINS[STRUCTURAL_NOTE], "rank": 7,
             "schema": "rank-seven-conditional-analytic-lift-v1"},
             "analytic lift contract changed")
-    # The order-nine master discharges only its bounded order-nine premise.  The
-    # child remains globally conditional, so false/false above is required.
-    return manifest
+    # The child remains globally conditional, so false/false above is required.
+    return {"contract": manifest, "output_sha256": ANALYTIC_LIFT_OUTPUT_SHA256,
+            "execution": execution}
 
 
 def hostile_self_checks() -> int:
@@ -1818,6 +1882,15 @@ def quick_manifest(dependencies: dict[str, str], analytic: dict[str, Json],
     return {"schema": SCHEMA, "evidence_kind": "fail-closed-authentication-only",
             "mode": "quick", "theorem_eligible": False, "global_claim": False,
             "reason": "quick mode does not execute the exact finite theorem partition",
+            "runtime_trust_boundary": (
+                "the already-started parent Python interpreter, its current-process imports, "
+                "and in-process validation code are trusted; each spawned Python lane that this "
+                "quick audit executes is bound by explicit normal and -O executions using absolute "
+                "sys.executable, -I -S -B, literal env={}, fixed cwd, return code zero, empty "
+                "stderr, exact command/mode/source/schema/stdout receipts, and cross-mode byte "
+                "identity; the current-process structural live key sink remains unresolved and "
+                "is never consumed because full/theorem mode is hard-blocked"
+            ),
             "dependency_sha256": dependencies, "analytic_contract": analytic,
             "coarse_atom_contract": coarse_contract,
             "coarse_atom_audit": coarse_atom,
@@ -1857,7 +1930,7 @@ def audit(full: bool) -> dict[str, Json]:
     # not an authenticator: caller-supplied digests/booleans must never discharge
     # a premise.  No full path exists until immutable expected receipts and every
     # lane proof/verifier/output have been independently executed and matched.
-    fail("full mode blocked pending independently authenticated StageLedger receipts and lane implications")
+    fail("full mode blocked pending isolated structural key sink, independently authenticated StageLedger receipts, and lane implications")
 
 
 def main(argv: list[str] | None = None) -> int:
