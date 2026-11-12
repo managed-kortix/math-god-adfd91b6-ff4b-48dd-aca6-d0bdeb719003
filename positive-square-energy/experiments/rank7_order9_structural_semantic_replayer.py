@@ -7,13 +7,14 @@ their ordered remainder complements.  It validates row identity, order,
 counts, physical mass, lanes, stored details, and all global digests.  It does
 *not* call an ownership predicate and therefore is not a semantic owner replay.
 
-``replay_all_predicates`` first performs that complete zip and then freshly
-runs the precedence-ordered exact recognizer on every row.  In particular it
-reruns ``generalized_three_ray_owner`` wherever the first three lanes fail;
-the stored generalized-ray detail contains no state witness and is never used
-as one.  This slow mode is the semantic owner replay intended for a master
-gate.  Both modes are read-only, use exact integer/Fraction arithmetic through
-the pinned existing engine, and fail closed.
+``replay_all_predicates`` performs that complete zip while freshly running the
+precedence-ordered exact recognizer on every row.  Wherever the first three
+lanes fail, it calls ``generalized_three_ray_witness`` and exactly replays the
+returned witness cost with ``three_ray_witness_cost``; the stored generalized
+ray detail contains no state witness and is never used as one.  This slow mode
+is the semantic owner replay intended for a master gate.  Both modes are
+read-only, use exact integer/Fraction arithmetic through the pinned existing
+engine, and fail closed.
 """
 
 from __future__ import annotations
@@ -21,12 +22,14 @@ from __future__ import annotations
 import argparse
 import hashlib
 import importlib.util
+import itertools
 import json
 import lzma
+import math
 import sys
 from collections import Counter
 from pathlib import Path
-from typing import Any, NoReturn
+from typing import Any, Callable, NoReturn
 
 sys.dont_write_bytecode = True
 
@@ -149,6 +152,85 @@ CHUNK_SPECS = (
 )
 SCHEMA = "rank-seven-order-nine-structural-semantic-replay-v1"
 Json = Any
+KeySink = Callable[[str, tuple[int, int, int, tuple[int, ...], int]], None]
+
+CENSUS_MANIFEST_FIELDS = {
+    "budget", "chunks", "coarse_certified_total", "coarse_residual_physical_total",
+    "coarse_residual_total", "frontier_target_total", "frontiers_per_residual",
+    "full_theorem", "kernel_total", "order", "parity_orbit_total", "path_count",
+    "physical_row_total", "rank", "schema", "source_sha256", "status",
+}
+CENSUS_MANIFEST_CHUNK_FIELDS = {
+    "artifact_sha256", "coarse_residual_total", "kernel_range", "path", "raw_sha256",
+}
+OWNER_MANIFEST_FIELDS = {
+    "atom_profile_owner_counts", "atom_recognizer_sha256", "chunks",
+    "classification_stream_sha256", "exclusive_owner_orbit_counts",
+    "exclusive_owner_physical_counts", "frontiers_per_residual", "full_theorem",
+    "manifest_sha256", "order", "owner_engine_sha256", "path_count",
+    "payload_free_owned_orbit_total", "payload_free_owned_physical_total",
+    "payload_free_owned_target_total", "rank", "remainder_orbit_total",
+    "remainder_physical_total", "remainder_stream_sha256", "remainder_target_total",
+    "scanned_residual_total", "scanned_target_total", "schema", "scope", "status",
+}
+OWNER_MANIFEST_CHUNK_FIELDS = {
+    "artifact_sha256", "exclusive_owner_orbit_counts", "exclusive_owner_physical_counts",
+    "kernel_range", "path", "remainder_orbit_total", "remainder_physical_total",
+    "scanned_residual_total",
+}
+CHUNK_REPORT_FIELDS = {
+    "atom_profile_owner_counts", "atom_recognizer_sha256", "census_artifact_sha256",
+    "census_path", "chunk_index", "classification_stream",
+    "exclusive_owner_orbit_counts", "exclusive_owner_physical_counts", "full_theorem",
+    "kernel_range", "manifest_sha256", "owner_engine_sha256", "remainder_orbit_total",
+    "remainder_physical_total", "remainder_stream", "scanned_residual_total", "schema",
+    "source_range",
+}
+STREAM_RECEIPT_FIELDS = {"artifact_sha256", "path", "sha256"}
+CENSUS_CHUNK_FIELDS = {
+    "budget", "coarse_certified_total", "coarse_residual_physical_total",
+    "coarse_residual_total", "frontier_target_total", "frontiers_per_residual",
+    "full_theorem", "kernel_range", "kernel_total", "kernels", "order",
+    "parity_orbit_total", "path_count", "physical_row_total", "rank",
+    "residual_stream_sha256", "residuals", "schema", "source_sha256", "status",
+}
+KERNEL_FIELDS = {
+    "automorphisms", "coarse_certified_orbits", "coarse_residual_orbits",
+    "coarse_residual_physical_rows", "edges", "global_kernel", "order_kernel",
+    "parity_orbits", "physical_rows", "support_edges",
+}
+RESIDUAL_FIELDS = {"global_kernel", "orbit_size", "order_kernel", "row"}
+FIXTURE_FIELDS = {
+    "beta", "counts_by_order_n2_to_n12", "degree_multiset_counts", "encoding",
+    "generator", "kernels", "minimum_degree", "orders", "schema", "status",
+    "support_edge_counts",
+}
+FIXTURE_KERNEL_FIELDS = {"code", "n"}
+EXPECTED_PREDICATE_CALLS = {
+    "balanced-rank-one": RESIDUAL_TOTAL,
+    "signed-imbalance-psd": RESIDUAL_TOTAL - EXPECTED_OWNER_COUNTS["balanced-rank-one"],
+    "simplex-mixed-atom": (RESIDUAL_TOTAL - EXPECTED_OWNER_COUNTS["balanced-rank-one"] -
+                           EXPECTED_OWNER_COUNTS["signed-imbalance-psd"]),
+    "generalized-ray": EXPECTED_OWNER_COUNTS["generalized-ray"] + REMAINDER_TOTAL,
+}
+EXPECTED_PREDICATE_CALL_TOTAL = sum(EXPECTED_PREDICATE_CALLS.values())
+
+# Canonical identity streams are part of the replay contract, not dynamically
+# trusted receipts.  Their encodings are documented in the returned result.
+EXPECTED_SOURCE_IDENTITY = {
+    "universe_source_index_sha256":
+        "e3d0066cdcb88cec40ce67e50f1252064f8532a876b17d88ee9f5a283146c86a",
+    "universe_key_sha256":
+        "cf1ff383eaf48c64d02cf106a6a5c7cd8420fbed3f68194962ef335c8adc12c4",
+    "owner_source_index_sha256":
+        "42380a735ddd66e819adf1c58bb19c039fdc6033bae80172903a49fba0ee12be",
+    "owner_key_sha256":
+        "48b5094918a3e921167ed4f3bc2397edb8c003a410262151752569f78ca4b8e2",
+    "remainder_source_index_sha256":
+        "7d87a4a548a0d613f39ebf657e350ab7a8a6c22e055d20b0d959bd27441a322a",
+    "remainder_key_sha256":
+        "0442d023ca3401f692fcb7866129ad83758753027dcac373a16da3b170c53a3e",
+}
 
 
 def fail(message: str) -> NoReturn:
@@ -156,8 +238,47 @@ def fail(message: str) -> NoReturn:
 
 
 def require(condition: bool, message: str) -> None:
-    if not condition:
+    if type(condition) is not bool or not condition:
         fail(message)
+
+
+def exact_int(value: Json, label: str, *, minimum: int | None = None) -> int:
+    """Return an exact JSON integer, rejecting bool and numeric lookalikes."""
+    require(type(value) is int, f"{label}: exact integer required")
+    if minimum is not None:
+        require(value >= minimum, f"{label}: integer below minimum {minimum}")
+    return value
+
+
+def exact_str(value: Json, label: str) -> str:
+    require(type(value) is str, f"{label}: exact string required")
+    return value
+
+
+def exact_bool(value: Json, label: str) -> bool:
+    require(type(value) is bool, f"{label}: exact boolean required")
+    return value
+
+
+def exact_int_list(value: Json, length: int, label: str,
+                   *, minimum: int | None = None) -> list[int]:
+    require(type(value) is list and len(value) == length,
+            f"{label}: exact integer list required")
+    for index, item in enumerate(value):
+        exact_int(item, f"{label}[{index}]", minimum=minimum)
+    return value
+
+
+def exact_str_int_map(value: Json, keys: set[str] | None, label: str,
+                      *, minimum: int = 0, allow_sparse: bool = False) -> dict[str, int]:
+    require(type(value) is dict and all(type(key) is str for key in value),
+            f"{label}: exact string-keyed counter required")
+    if keys is not None:
+        require(set(value).issubset(keys) if allow_sparse else set(value) == keys,
+                f"{label}: exact counter keys required")
+    for key, item in value.items():
+        exact_int(item, f"{label}.{key}", minimum=minimum)
+    return value
 
 
 def sha256(raw: bytes) -> str:
@@ -170,6 +291,14 @@ def canonical_bytes(value: Json) -> bytes:
 
 
 def strict_json(raw: bytes, label: str, canonical: bool = True) -> Json:
+    """Parse canonical, duplicate-free, integer-only JSON.
+
+    ``parse_float`` rejects the token before Python can round it or turn an
+    overflowing exponent such as ``1e999`` into infinity.  The recursive walk
+    is a second, parser-independent guard against every float entering a trust
+    boundary (including values supplied by a monkey-patched decoder in tests).
+    Booleans remain legal JSON scalars and are validated field-by-field.
+    """
     def pairs(items: list[tuple[str, Json]]) -> dict[str, Json]:
         result: dict[str, Json] = {}
         for key, value in items:
@@ -178,13 +307,30 @@ def strict_json(raw: bytes, label: str, canonical: bool = True) -> Json:
             result[key] = value
         return result
 
+    def reject_float(token: str) -> NoReturn:
+        fail(f"{label}: JSON floats are forbidden: {token}")
+
+    def reject_constant(token: str) -> NoReturn:
+        fail(f"{label}: nonstandard JSON constant: {token}")
+
+    def validate_json_types(value: Json) -> None:
+        require(type(value) in (dict, list, str, int, bool, type(None)),
+                f"{label}: non-JSON value reached trust boundary")
+        if type(value) is list:
+            for item in value:
+                validate_json_types(item)
+        elif type(value) is dict:
+            for item in value.values():
+                validate_json_types(item)
+
     try:
         value = json.loads(
             raw.decode("ascii"), object_pairs_hook=pairs,
-            parse_constant=lambda token: fail(f"{label}: non-finite token {token}"),
+            parse_float=reject_float, parse_constant=reject_constant,
         )
     except (UnicodeDecodeError, json.JSONDecodeError) as error:
         raise RuntimeError(f"{label}: invalid strict JSON") from error
+    validate_json_types(value)
     if canonical:
         require(raw == canonical_bytes(value), f"{label}: noncanonical JSON")
     return value
@@ -237,6 +383,103 @@ def audit_pins() -> None:
         read_pinned(path, expected)
 
 
+def exact_fields(value: Json, fields: set[str], label: str) -> None:
+    require(type(value) is dict and set(value) == fields, f"{label}: exact schema changed")
+
+
+def update_index_digest(digest: Any, source_index: int) -> None:
+    digest.update(f"{source_index}\n".encode("ascii"))
+
+
+def update_key_digest(digest: Any, key: tuple[int, int, int, tuple[int, ...], int]) -> None:
+    source_index, global_kernel, order_kernel, row, orbit_size = key
+    digest.update(canonical_bytes(
+        [source_index, global_kernel, order_kernel, list(row), orbit_size]))
+
+
+def automorphism_actions(edges: tuple[tuple[int, int, int], ...]) -> tuple[tuple[int, ...], ...]:
+    """Derive exact sparse-edge actions from weighted-graph automorphisms.
+
+    Vertex candidates are partitioned by their weighted degree and sorted
+    incident-multiplicity signature.  Exhausting permutations inside these
+    invariant cells is complete, while avoiding any optional graph package.
+    """
+    matrix = [[0] * ORDER for _ in range(ORDER)]
+    degree = [0] * ORDER
+    for u, v, multiplicity in edges:
+        matrix[u][v] = matrix[v][u] = multiplicity
+        degree[u] += multiplicity
+        degree[v] += multiplicity
+    signatures = tuple((degree[vertex], tuple(sorted(matrix[vertex])))
+                       for vertex in range(ORDER))
+    cells = tuple(tuple(vertex for vertex, value in enumerate(signatures) if value == signature)
+                  for signature in sorted(set(signatures)))
+    sparse_index = {(u, v): index for index, (u, v, _) in enumerate(edges)}
+    actions = []
+    for images in itertools.product(*(itertools.permutations(cell) for cell in cells)):
+        permutation = list(range(ORDER))
+        for cell, image in zip(cells, images, strict=True):
+            for source, target in zip(cell, image, strict=True):
+                permutation[source] = target
+        if all(matrix[u][v] == matrix[permutation[u]][permutation[v]]
+               for u in range(ORDER) for v in range(u + 1, ORDER)):
+            actions.append(tuple(sparse_index[tuple(sorted((permutation[u], permutation[v])))]
+                                 for u, v, _ in edges))
+    require(bool(actions) and len(set(actions)) == len(actions),
+            "automorphism action derivation failed")
+    return tuple(sorted(actions))
+
+
+def action_cycles(action: tuple[int, ...]) -> tuple[tuple[int, ...], ...]:
+    unseen = set(range(len(action)))
+    cycles = []
+    while unseen:
+        value = min(unseen)
+        cycle = []
+        while value in unseen:
+            unseen.remove(value)
+            cycle.append(value)
+            value = action[value]
+        cycles.append(tuple(cycle))
+    return tuple(cycles)
+
+
+def burnside_orbits(edges: tuple[tuple[int, int, int], ...],
+                    actions: tuple[tuple[int, ...], ...]) -> int:
+    fixed_sum = 0
+    for action in actions:
+        fixed = 1
+        for cycle in action_cycles(action):
+            multiplicities = {edges[index][2] for index in cycle}
+            require(len(multiplicities) == 1,
+                    "automorphism action changes edge multiplicity")
+            fixed *= multiplicities.pop() + 1
+        fixed_sum += fixed
+    require(fixed_sum % len(actions) == 0, "nonintegral Burnside orbit count")
+    return fixed_sum // len(actions)
+
+
+def recompute_orbit(row: tuple[int, ...], edges: tuple[tuple[int, int, int], ...],
+                    actions: tuple[tuple[int, ...], ...]) -> tuple[int, int]:
+    """Return the minimum mixed-radix image code and exact orbit size."""
+    strides = []
+    stride = 1
+    for _, _, multiplicity in edges:
+        strides.append(stride)
+        stride *= multiplicity + 1
+    image_codes = {
+        sum(row[image] * strides[index] for index, image in enumerate(action))
+        for action in actions
+    }
+    stabilizer = sum(all(row[index] == row[image]
+                         for index, image in enumerate(action))
+                     for action in actions)
+    require(stabilizer > 0 and len(actions) % stabilizer == 0 and
+            len(image_codes) == len(actions) // stabilizer,
+            "orbit image/stabilizer identity failed")
+    return min(image_codes), len(image_codes)
+
+
 def expected_detail(owner: Any, atom: Any, lane: str, edges: tuple[tuple[int, int, int], ...],
                     row: tuple[int, ...]) -> tuple[Json, bool]:
     """Replay one stored lane predicate and return canonical detail plus acceptance."""
@@ -257,11 +500,10 @@ def expected_detail(owner: Any, atom: Any, lane: str, edges: tuple[tuple[int, in
         return [[mixed, list(widths)] for mixed, widths in profiles], bool(records)
     require(lane == "generalized-ray", f"unknown lane: {lane}")
     # The stored detail has no states.  Acceptance comes only from a fresh
-    # search; independently recompute and validate the returned exact witness.
+    # search followed by one independent exact replay of the returned witness.
     witness = owner.generalized_three_ray_witness(edges, row)
-    accepted = (witness is not None and
-                owner.three_ray_witness_cost(edges, row, witness) is not None and
-                owner.three_ray_witness_cost(edges, row, witness) <= 18 * (RANK - 1))
+    cost = None if witness is None else owner.three_ray_witness_cost(edges, row, witness)
+    accepted = cost is not None and cost <= 18 * (RANK - 1)
     return ["signed-three-ray"], accepted
 
 
@@ -271,8 +513,42 @@ def _load_common() -> tuple[dict[str, Json], dict[str, Json]]:
                                   CENSUS_MANIFEST.name)
     owner_manifest = strict_json(read_pinned(OWNER_MANIFEST, PINS[OWNER_MANIFEST]),
                                  OWNER_MANIFEST.name)
-    require(type(census_manifest) is dict and type(owner_manifest) is dict,
-            "manifest top-level objects required")
+    exact_fields(census_manifest, CENSUS_MANIFEST_FIELDS, "census manifest")
+    exact_fields(owner_manifest, OWNER_MANIFEST_FIELDS, "owner manifest")
+    require(type(census_manifest["chunks"]) is list and
+            all(type(item) is dict and set(item) == CENSUS_MANIFEST_CHUNK_FIELDS
+                for item in census_manifest["chunks"]),
+            "census manifest chunk exact schema changed")
+    require(type(owner_manifest["chunks"]) is list and
+            all(type(item) is dict and set(item) == OWNER_MANIFEST_CHUNK_FIELDS
+                for item in owner_manifest["chunks"]),
+            "owner manifest chunk exact schema changed")
+    for key in ("rank", "order", "path_count", "frontiers_per_residual", "kernel_total",
+                "parity_orbit_total", "coarse_certified_total", "coarse_residual_total",
+                "coarse_residual_physical_total", "physical_row_total",
+                "frontier_target_total"):
+        exact_int(census_manifest[key], f"census manifest.{key}", minimum=0)
+    exact_int_list(census_manifest["budget"], 2, "census manifest.budget", minimum=0)
+    exact_bool(census_manifest["full_theorem"], "census manifest.full_theorem")
+    for key in ("schema", "status", "source_sha256"):
+        exact_str(census_manifest[key], f"census manifest.{key}")
+    for key in ("rank", "order", "path_count", "frontiers_per_residual",
+                "scanned_residual_total", "scanned_target_total",
+                "payload_free_owned_orbit_total", "payload_free_owned_physical_total",
+                "payload_free_owned_target_total", "remainder_orbit_total",
+                "remainder_physical_total", "remainder_target_total"):
+        exact_int(owner_manifest[key], f"owner manifest.{key}", minimum=0)
+    exact_bool(owner_manifest["full_theorem"], "owner manifest.full_theorem")
+    for key in ("schema", "status", "scope", "manifest_sha256", "owner_engine_sha256",
+                "atom_recognizer_sha256", "classification_stream_sha256",
+                "remainder_stream_sha256"):
+        exact_str(owner_manifest[key], f"owner manifest.{key}")
+    exact_str_int_map(owner_manifest["exclusive_owner_orbit_counts"], set(LANES),
+                      "owner manifest.exclusive_owner_orbit_counts")
+    exact_str_int_map(owner_manifest["exclusive_owner_physical_counts"], set(LANES),
+                      "owner manifest.exclusive_owner_physical_counts")
+    exact_str_int_map(owner_manifest["atom_profile_owner_counts"], set(EXPECTED_PROFILES),
+                      "owner manifest.atom_profile_owner_counts")
     require(census_manifest.get("schema") ==
             "rank-seven-orders9-12-exact-residual-census-manifest-v1" and
             census_manifest.get("status") == "complete-exact-residual-orbit-decomposition" and
@@ -280,7 +556,9 @@ def _load_common() -> tuple[dict[str, Json], dict[str, Json]]:
             (census_manifest.get("rank"), census_manifest.get("order"),
              census_manifest.get("path_count"), census_manifest.get("frontiers_per_residual"),
              census_manifest.get("kernel_total")) ==
-            (RANK, ORDER, PATH_COUNT, FRONTIERS, KERNEL_TOTAL),
+            (RANK, ORDER, PATH_COUNT, FRONTIERS, KERNEL_TOTAL) and
+            census_manifest.get("budget") == [RANK - 1, 1] and
+            census_manifest.get("source_sha256") == PINS[KERNEL_FIXTURE],
             "census manifest scope changed")
     require(census_manifest.get("parity_orbit_total") == PARITY_ORBIT_TOTAL and
             census_manifest.get("coarse_certified_total") == COARSE_CERTIFIED_TOTAL and
@@ -295,7 +573,11 @@ def _load_common() -> tuple[dict[str, Json], dict[str, Json]]:
             owner_manifest.get("full_theorem") is False and
             (owner_manifest.get("rank"), owner_manifest.get("order"),
              owner_manifest.get("path_count"), owner_manifest.get("frontiers_per_residual")) ==
-            (RANK, ORDER, PATH_COUNT, FRONTIERS),
+            (RANK, ORDER, PATH_COUNT, FRONTIERS) and
+            owner_manifest.get("scope") == "sufficient structural owners only; no rational search" and
+            owner_manifest.get("manifest_sha256") == PINS[CENSUS_MANIFEST] and
+            owner_manifest.get("owner_engine_sha256") == PINS[OWNER_ENGINE] and
+            owner_manifest.get("atom_recognizer_sha256") == PINS[ATOM_RECOGNIZER],
             "owner manifest scope changed")
     require(owner_manifest.get("scanned_residual_total") == RESIDUAL_TOTAL and
             owner_manifest.get("exclusive_owner_orbit_counts") == EXPECTED_OWNER_COUNTS and
@@ -304,22 +586,69 @@ def _load_common() -> tuple[dict[str, Json], dict[str, Json]]:
             owner_manifest.get("payload_free_owned_orbit_total") == OWNER_TOTAL and
             owner_manifest.get("payload_free_owned_physical_total") == OWNER_PHYSICAL_TOTAL and
             owner_manifest.get("remainder_orbit_total") == REMAINDER_TOTAL and
-            owner_manifest.get("remainder_physical_total") == REMAINDER_PHYSICAL_TOTAL,
+            owner_manifest.get("remainder_physical_total") == REMAINDER_PHYSICAL_TOTAL and
+            owner_manifest.get("scanned_target_total") == RESIDUAL_TOTAL * FRONTIERS and
+            owner_manifest.get("payload_free_owned_target_total") == OWNER_TOTAL * FRONTIERS and
+            owner_manifest.get("remainder_target_total") == REMAINDER_TOTAL * FRONTIERS,
             "owner manifest exact ledger changed")
     return census_manifest, owner_manifest
 
 
 def _verify(*, replay_predicates: bool, progress: bool = False,
-            chunk_limit: int | None = None) -> dict[str, Json]:
+            chunk_limit: int | None = None, key_sink: KeySink | None = None,
+            reconstruct_census: bool = True) -> dict[str, Json]:
     census_manifest, owner_manifest = _load_common()
     census_records = census_manifest.get("chunks")
     owner_records = owner_manifest.get("chunks")
     require(type(census_records) is list and type(owner_records) is list and
             len(census_records) == len(owner_records) == len(CHUNK_SPECS),
             "eight-chunk ledger changed")
-    require(chunk_limit is None or type(chunk_limit) is int and
-            1 <= chunk_limit <= len(CHUNK_SPECS), "invalid test-only chunk limit")
+    require(chunk_limit is None or (type(chunk_limit) is int and
+            1 <= chunk_limit <= len(CHUNK_SPECS)), "invalid test-only chunk limit")
     selected = len(CHUNK_SPECS) if chunk_limit is None else chunk_limit
+
+    fixture = strict_json(read_pinned(KERNEL_FIXTURE, PINS[KERNEL_FIXTURE]),
+                          KERNEL_FIXTURE.name)
+    exact_fields(fixture, FIXTURE_FIELDS, "kernel fixture")
+    for key in ("schema", "status", "generator", "encoding"):
+        exact_str(fixture[key], f"kernel fixture.{key}")
+    exact_int(fixture["beta"], "kernel fixture.beta", minimum=0)
+    exact_int(fixture["minimum_degree"], "kernel fixture.minimum_degree", minimum=0)
+    exact_int_list(fixture["orders"], 2, "kernel fixture.orders", minimum=0)
+    exact_int_list(fixture["counts_by_order_n2_to_n12"], 11,
+                   "kernel fixture.counts_by_order_n2_to_n12", minimum=0)
+    require(fixture["schema"] == "rank-seven-loopless-no-cut-kernels-v2" and
+            fixture["status"] == "complete-proved-removable-ear-exhaustion" and
+            fixture["generator"] ==
+            "proved-complete-one-open-ear-augmentation-of-exact-rank-six-census" and
+            fixture["beta"] == RANK and fixture["minimum_degree"] == 3 and
+            fixture["orders"] == [2, 12] and
+            fixture["encoding"] == "lexicographic upper-triangle multiplicities" and
+            fixture["counts_by_order_n2_to_n12"] ==
+            [1, 6, 47, 233, 914, 2270, 4015, 4495, 3396, 1391, 365],
+            "kernel fixture semantics changed")
+    fixture_kernels = fixture["kernels"]
+    require(type(fixture_kernels) is list and len(fixture_kernels) == 17133 and
+            all(type(item) is dict and set(item) == FIXTURE_KERNEL_FIELDS
+                for item in fixture_kernels),
+            "kernel fixture record schema changed")
+    order_nine_fixture = tuple((global_index, item) for global_index, item in
+                               enumerate(fixture_kernels, 1) if item["n"] == ORDER)
+    require(len(order_nine_fixture) == KERNEL_TOTAL,
+            "kernel fixture order-nine slice changed")
+
+    producer = None
+    if reconstruct_census:
+        producer = load_module(CENSUS_PRODUCER, "rank7_order9_fresh_census_producer")
+        require(producer.CHUNK_SCHEMA ==
+                "rank-seven-orders9-12-exact-residual-census-chunk-v1" and
+                producer.MANIFEST_SCHEMA ==
+                "rank-seven-orders9-12-exact-residual-census-manifest-v1" and
+                producer.ORDER_KERNEL_TOTALS[ORDER] == KERNEL_TOTAL and
+                producer.SOURCE_SHA256 == PINS[KERNEL_FIXTURE] and
+                producer.RANK == RANK and producer.BUDGET_SCALED == 180,
+                "census producer semantics changed")
+        producer.SOURCE_ENGINE = SOURCE_ENGINE
 
     owner = atom = None
     if replay_predicates:
@@ -341,7 +670,15 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
     predicate_passes = Counter({lane: 0 for lane in LANES})
     global_classification = hashlib.sha256()
     global_remainder = hashlib.sha256()
+    universe_source_indices = hashlib.sha256()
+    universe_keys = hashlib.sha256()
+    owner_source_indices = hashlib.sha256()
+    owner_keys = hashlib.sha256()
+    remainder_source_indices = hashlib.sha256()
+    remainder_keys = hashlib.sha256()
     source_cursor = 0
+    orbit_recomputations = 0
+    burnside_recomputations = 0
     remainder_count = remainder_mass = 0
     kernel_cursor = 0
     independent_totals = Counter()
@@ -351,10 +688,34 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
         pin = CHUNK_SPECS[chunk_index]
         census_spec = census_records[chunk_index]
         owner_spec = owner_records[chunk_index]
-        require(type(census_spec) is dict and type(owner_spec) is dict,
-                f"chunk {chunk_index}: malformed manifest ledger")
-        start, stop = census_spec.get("kernel_range", [None, None])
-        require(start == kernel_cursor and owner_spec.get("kernel_range") == [start, stop],
+        exact_fields(census_spec, CENSUS_MANIFEST_CHUNK_FIELDS,
+                     f"chunk {chunk_index} census manifest record")
+        exact_fields(owner_spec, OWNER_MANIFEST_CHUNK_FIELDS,
+                     f"chunk {chunk_index} owner manifest record")
+        start, stop = exact_int_list(census_spec["kernel_range"], 2,
+                                     f"chunk {chunk_index} census kernel_range", minimum=0)
+        exact_int(census_spec["coarse_residual_total"],
+                  f"chunk {chunk_index} census coarse_residual_total", minimum=0)
+        for key in ("path", "raw_sha256", "artifact_sha256"):
+            exact_str(census_spec[key], f"chunk {chunk_index} census {key}")
+        exact_int_list(owner_spec["kernel_range"], 2,
+                       f"chunk {chunk_index} owner kernel_range", minimum=0)
+        exact_int(owner_spec["scanned_residual_total"],
+                  f"chunk {chunk_index} owner scanned_residual_total", minimum=0)
+        exact_int(owner_spec["remainder_orbit_total"],
+                  f"chunk {chunk_index} owner remainder_orbit_total", minimum=0)
+        exact_int(owner_spec["remainder_physical_total"],
+                  f"chunk {chunk_index} owner remainder_physical_total", minimum=0)
+        exact_str(owner_spec["path"], f"chunk {chunk_index} owner path")
+        exact_str(owner_spec["artifact_sha256"],
+                  f"chunk {chunk_index} owner artifact_sha256")
+        exact_str_int_map(owner_spec["exclusive_owner_orbit_counts"], set(LANES),
+                          f"chunk {chunk_index} owner orbit counts", allow_sparse=True)
+        exact_str_int_map(owner_spec["exclusive_owner_physical_counts"], set(LANES),
+                          f"chunk {chunk_index} owner physical counts", allow_sparse=True)
+        expected_stop = min(KERNEL_TOTAL, (chunk_index + 1) * 562)
+        require(start == kernel_cursor and stop == expected_stop and
+                owner_spec["kernel_range"] == [start, stop],
                 f"chunk {chunk_index}: kernel ranges gap, overlap, or disagree")
         kernel_cursor = stop
         census_path = (HERE / census_spec.get("path", "")).resolve()
@@ -363,8 +724,33 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
         report_path = RESULTS / f"chunk-{chunk_index:02d}.json"
         report_raw = read_pinned(report_path, pin[2])
         report = strict_json(report_raw, report_path.name)
-        require(type(report) is dict and
-                report.get("schema") == "rank-seven-order-nine-structural-owner-chunk-v1" and
+        exact_fields(report, CHUNK_REPORT_FIELDS, f"chunk {chunk_index} report")
+        exact_fields(report["classification_stream"], STREAM_RECEIPT_FIELDS,
+                     f"chunk {chunk_index} classification receipt")
+        exact_fields(report["remainder_stream"], STREAM_RECEIPT_FIELDS,
+                     f"chunk {chunk_index} remainder receipt")
+        for receipt_name in ("classification_stream", "remainder_stream"):
+            for key in STREAM_RECEIPT_FIELDS:
+                exact_str(report[receipt_name][key],
+                          f"chunk {chunk_index} {receipt_name}.{key}")
+        for key in ("chunk_index", "scanned_residual_total", "remainder_orbit_total",
+                    "remainder_physical_total"):
+            exact_int(report[key], f"chunk {chunk_index} report.{key}", minimum=0)
+        exact_int_list(report["kernel_range"], 2,
+                       f"chunk {chunk_index} report.kernel_range", minimum=0)
+        exact_int_list(report["source_range"], 2,
+                       f"chunk {chunk_index} report.source_range", minimum=0)
+        exact_bool(report["full_theorem"], f"chunk {chunk_index} report.full_theorem")
+        for key in ("schema", "census_path", "census_artifact_sha256", "owner_engine_sha256",
+                    "atom_recognizer_sha256", "manifest_sha256"):
+            exact_str(report[key], f"chunk {chunk_index} report.{key}")
+        exact_str_int_map(report["exclusive_owner_orbit_counts"], set(LANES),
+                          f"chunk {chunk_index} report orbit counts")
+        exact_str_int_map(report["exclusive_owner_physical_counts"], set(LANES),
+                          f"chunk {chunk_index} report physical counts")
+        exact_str_int_map(report["atom_profile_owner_counts"], set(EXPECTED_PROFILES),
+                          f"chunk {chunk_index} report atom profiles", allow_sparse=True)
+        require(report.get("schema") == "rank-seven-order-nine-structural-owner-chunk-v1" and
                 report.get("full_theorem") is False and
                 report.get("chunk_index") == chunk_index and
                 report.get("kernel_range") == [start, stop] and
@@ -381,6 +767,7 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
                 owner_spec.get("artifact_sha256") == pin[1],
                 f"chunk {chunk_index}: census digest ledgers disagree")
         census = read_xz_json(census_path, pin[1], pin[0])
+        exact_fields(census, CENSUS_CHUNK_FIELDS, f"chunk {chunk_index} census")
         classification_path = RESULTS / f"chunk-{chunk_index:02d}.classification.jsonl.xz"
         remainder_path = RESULTS / f"chunk-{chunk_index:02d}.remainder.jsonl.xz"
         require(report.get("classification_stream") == {
@@ -401,10 +788,23 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
                 census_spec.get("coarse_residual_total") ==
                 report.get("scanned_residual_total") == owner_spec.get("scanned_residual_total"),
                 f"chunk {chunk_index}: row counts disagree")
+        for key in ("rank", "order", "path_count", "frontiers_per_residual", "kernel_total",
+                    "physical_row_total", "parity_orbit_total", "coarse_certified_total",
+                    "coarse_residual_total", "coarse_residual_physical_total",
+                    "frontier_target_total"):
+            exact_int(census[key], f"chunk {chunk_index} census.{key}", minimum=0)
+        exact_int_list(census["budget"], 2, f"chunk {chunk_index} census.budget", minimum=0)
+        exact_int_list(census["kernel_range"], 2,
+                       f"chunk {chunk_index} census.kernel_range", minimum=0)
+        exact_bool(census["full_theorem"], f"chunk {chunk_index} census.full_theorem")
+        for key in ("schema", "status", "source_sha256", "residual_stream_sha256"):
+            exact_str(census[key], f"chunk {chunk_index} census.{key}")
         require(census.get("schema") ==
                 "rank-seven-orders9-12-exact-residual-census-chunk-v1" and
                 census.get("full_theorem") is False and
                 census.get("status") == "complete-exact-residual-orbit-chunk" and
+                census.get("source_sha256") == PINS[KERNEL_FIXTURE] and
+                census.get("budget") == [RANK - 1, 1] and
                 (census.get("rank"), census.get("order"), census.get("path_count"),
                  census.get("frontiers_per_residual"), census.get("kernel_range")) ==
                 (RANK, ORDER, PATH_COUNT, FRONTIERS, [start, stop]),
@@ -412,6 +812,30 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
         require(census.get("coarse_certified_total") + census.get("coarse_residual_total") ==
                 census.get("parity_orbit_total"),
                 f"chunk {chunk_index}: base partition identity changed")
+        if reconstruct_census:
+            regenerated = producer.generate_chunk(ORDER, start, stop, 262144, progress=False)
+            require(canonical_bytes(regenerated) == canonical_bytes(census),
+                    f"chunk {chunk_index}: fresh census reconstruction differs")
+
+        expected_fixture_kernels = {}
+        for local_offset, (global_kernel, fixture_item) in enumerate(
+                order_nine_fixture[start:stop], start + 1):
+            dense = fixture_item["code"]
+            require(type(dense) is list and len(dense) == ORDER * (ORDER - 1) // 2 and
+                    all(type(value) is int and value >= 0 for value in dense),
+                    f"chunk {chunk_index}: malformed fixture kernel")
+            pair_cursor = 0
+            edges = []
+            for u in range(ORDER):
+                for v in range(u + 1, ORDER):
+                    multiplicity = dense[pair_cursor]
+                    pair_cursor += 1
+                    if multiplicity:
+                        edges.append((u, v, multiplicity))
+            require(sum(edge[2] for edge in edges) == PATH_COUNT,
+                    f"chunk {chunk_index}: fixture path total changed")
+            expected_fixture_kernels[local_offset] = (global_kernel, tuple(edges))
+
         independent_totals.update({
             "kernel_total": census.get("kernel_total"),
             "physical_row_total": census.get("physical_row_total"),
@@ -423,10 +847,19 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
         })
         kernels = {}
         previous_kernel = start
+        kernel_physical = kernel_orbits = kernel_certified = 0
+        kernel_residuals = kernel_residual_physical = 0
         for item in kernels_raw:
-            require(type(item) is dict and type(item.get("order_kernel")) is int and
+            exact_fields(item, KERNEL_FIELDS, f"chunk {chunk_index} kernel")
+            for key in ("order_kernel", "global_kernel", "support_edges", "automorphisms",
+                        "physical_rows", "parity_orbits", "coarse_certified_orbits",
+                        "coarse_residual_orbits", "coarse_residual_physical_rows"):
+                exact_int(item[key], f"chunk {chunk_index} kernel.{key}", minimum=0)
+            require(type(item.get("order_kernel")) is int and
+                    item["order_kernel"] == previous_kernel + 1 and
                     item["order_kernel"] not in kernels,
-                    f"chunk {chunk_index}: malformed or duplicate kernel")
+                    f"chunk {chunk_index}: malformed, duplicate, or unordered kernel")
+            previous_kernel = item["order_kernel"]
             edges_raw = item.get("edges")
             require(type(edges_raw) is list, f"chunk {chunk_index}: malformed edges")
             edges = tuple(tuple(edge) for edge in edges_raw)
@@ -434,14 +867,53 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
                         0 <= edge[0] < edge[1] < ORDER and edge[2] > 0 for edge in edges) and
                     sum(edge[2] for edge in edges) == PATH_COUNT,
                     f"chunk {chunk_index}: nonphysical kernel edges")
-            kernels[item["order_kernel"]] = (item["global_kernel"], edges)
-        require(len(kernels) == stop - start,
-                f"chunk {chunk_index}: incomplete kernel ledger")
+            require(item["global_kernel"] >= 1 and
+                    (item["global_kernel"], edges) ==
+                    expected_fixture_kernels[item["order_kernel"]],
+                    f"chunk {chunk_index}: kernel differs from canonical fixture order")
+            require(type(item["automorphisms"]) is int and item["automorphisms"] >= 1 and
+                    type(item["support_edges"]) is int and
+                    item["support_edges"] == len(edges) and
+                    all(type(item[key]) is int and item[key] >= 0 for key in (
+                        "physical_rows", "parity_orbits", "coarse_certified_orbits",
+                        "coarse_residual_orbits", "coarse_residual_physical_rows")) and
+                    item["parity_orbits"] == item["coarse_certified_orbits"] +
+                    item["coarse_residual_orbits"] and
+                    item["physical_rows"] == math.prod(edge[2] + 1 for edge in edges),
+                    f"chunk {chunk_index}: kernel ledger semantics changed")
+            actions = automorphism_actions(edges)
+            require(len(actions) == item["automorphisms"],
+                    f"chunk {chunk_index}: fresh automorphism count differs")
+            require(burnside_orbits(edges, actions) == item["parity_orbits"],
+                    f"chunk {chunk_index}: fresh Burnside orbit total differs")
+            burnside_recomputations += 1
+            kernels[item["order_kernel"]] = {
+                "global_kernel": item["global_kernel"],
+                "edges": edges,
+                "actions": actions,
+                "expected_residual_orbits": item["coarse_residual_orbits"],
+                "expected_residual_physical": item["coarse_residual_physical_rows"],
+                "observed_residual_orbits": 0,
+                "observed_residual_physical": 0,
+            }
+            kernel_physical += item["physical_rows"]
+            kernel_orbits += item["parity_orbits"]
+            kernel_certified += item["coarse_certified_orbits"]
+            kernel_residuals += item["coarse_residual_orbits"]
+            kernel_residual_physical += item["coarse_residual_physical_rows"]
+        require(len(kernels) == stop - start and previous_kernel == stop and
+                (kernel_physical, kernel_orbits, kernel_certified, kernel_residuals,
+                 kernel_residual_physical) ==
+                (census["physical_row_total"], census["parity_orbit_total"],
+                 census["coarse_certified_total"], census["coarse_residual_total"],
+                 census["coarse_residual_physical_total"]),
+                f"chunk {chunk_index}: incomplete or inconsistent kernel ledger")
 
         local_counts = Counter({lane: 0 for lane in LANES})
         local_masses = Counter({lane: 0 for lane in LANES})
         local_profiles: Counter[str] = Counter()
         local_remainder_count = local_remainder_mass = 0
+        local_source_mass = 0
         remainder_iterator = iter(remainders)
         next_remainder = next(remainder_iterator, None)
         previous_key = None
@@ -452,14 +924,15 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
         for local_index, (residual, classification) in enumerate(
                 zip(residuals, classifications, strict=True)):
             source_index = source_cursor + local_index
-            require(type(residual) is dict and set(residual) == {
-                        "global_kernel", "orbit_size", "order_kernel", "row"},
-                    f"chunk {chunk_index} row {local_index}: residual fields changed")
+            exact_fields(residual, RESIDUAL_FIELDS,
+                         f"chunk {chunk_index} row {local_index} residual")
             local_kernel = residual["order_kernel"]
             require(type(local_kernel) is int and local_kernel in kernels and
-                    residual["global_kernel"] == kernels[local_kernel][0],
+                    type(residual["global_kernel"]) is int and
+                    residual["global_kernel"] == kernels[local_kernel]["global_kernel"],
                     f"chunk {chunk_index} row {local_index}: bad kernel reference")
-            edges = kernels[local_kernel][1]
+            edges = kernels[local_kernel]["edges"]
+            actions = kernels[local_kernel]["actions"]
             row_raw = residual["row"]
             orbit_size = residual["orbit_size"]
             require(type(row_raw) is list and len(row_raw) == len(edges) and
@@ -467,11 +940,21 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
                         for value, edge in zip(row_raw, edges, strict=True)) and
                     type(orbit_size) is int and orbit_size >= 1,
                     f"chunk {chunk_index} row {local_index}: nonphysical row")
+            row = tuple(row_raw)
             code = 0
             stride = 1
             for value, edge in zip(row_raw, edges, strict=True):
                 code += value * stride
                 stride *= edge[2] + 1
+            minimum_image_code, fresh_orbit_size = recompute_orbit(row, edges, actions)
+            require(code == minimum_image_code,
+                    f"chunk {chunk_index} row {local_index}: noncanonical mixed-radix representative")
+            require(fresh_orbit_size == orbit_size,
+                    f"chunk {chunk_index} row {local_index}: fresh orbit size differs")
+            orbit_recomputations += 1
+            kernels[local_kernel]["observed_residual_orbits"] += 1
+            kernels[local_kernel]["observed_residual_physical"] += orbit_size
+            local_source_mass += orbit_size
             key = (local_kernel, code)
             require(previous_key is None or previous_key < key,
                     f"chunk {chunk_index} row {local_index}: census order/uniqueness changed")
@@ -479,7 +962,17 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
             census_digest.update(canonical_bytes(residual))
             expected_key = [source_index, residual["global_kernel"], local_kernel,
                             row_raw, orbit_size]
+            canonical_key = (source_index, residual["global_kernel"], local_kernel,
+                             tuple(row_raw), orbit_size)
+            update_index_digest(universe_source_indices, source_index)
+            update_key_digest(universe_keys, canonical_key)
             require(type(classification) is list and len(classification) == 7 and
+                    type(classification[0]) is int and classification[0] >= 0 and
+                    type(classification[1]) is int and classification[1] >= 1 and
+                    type(classification[2]) is int and classification[2] >= 1 and
+                    type(classification[3]) is list and
+                    all(type(value) is int and value >= 0 for value in classification[3]) and
+                    type(classification[4]) is int and classification[4] >= 1 and
                     classification[:5] == expected_key,
                     f"chunk {chunk_index} row {local_index}: classification/census zip failed")
             lane, detail = classification[5:]
@@ -489,15 +982,30 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
             local_classification.update(encoded_classification)
             global_classification.update(encoded_classification)
             if lane is None:
-                require(detail is None and next_remainder == expected_key,
+                require(type(next_remainder) is list and len(next_remainder) == 5 and
+                        type(next_remainder[0]) is int and next_remainder[0] >= 0 and
+                        type(next_remainder[1]) is int and next_remainder[1] >= 1 and
+                        type(next_remainder[2]) is int and next_remainder[2] >= 1 and
+                        type(next_remainder[3]) is list and
+                        all(type(value) is int and value >= 0 for value in next_remainder[3]) and
+                        type(next_remainder[4]) is int and next_remainder[4] >= 1 and
+                        detail is None and next_remainder == expected_key,
                         f"chunk {chunk_index} row {local_index}: ordered complement mismatch")
                 encoded_remainder = canonical_bytes(next_remainder)
                 local_remainder.update(encoded_remainder)
                 global_remainder.update(encoded_remainder)
                 next_remainder = next(remainder_iterator, None)
+                update_index_digest(remainder_source_indices, source_index)
+                update_key_digest(remainder_keys, canonical_key)
+                if key_sink is not None:
+                    key_sink("remainder", canonical_key)
                 local_remainder_count += 1
                 local_remainder_mass += orbit_size
             else:
+                update_index_digest(owner_source_indices, source_index)
+                update_key_digest(owner_keys, canonical_key)
+                if key_sink is not None:
+                    key_sink("owner", canonical_key)
                 local_counts[lane] += 1
                 local_masses[lane] += orbit_size
                 if lane == "balanced-rank-one":
@@ -509,9 +1017,12 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
                             detail[2] > 0,
                             f"chunk {chunk_index} row {local_index}: bad imbalance detail")
                 elif lane == "simplex-mixed-atom":
-                    require(type(detail) is list and detail,
+                    require(type(detail) is list and bool(detail),
                             f"chunk {chunk_index} row {local_index}: bad atom detail")
-                    for mixed, widths in detail:
+                    for profile in detail:
+                        require(type(profile) is list and len(profile) == 2,
+                                f"chunk {chunk_index} row {local_index}: bad atom profile")
+                        mixed, widths = profile
                         require(type(mixed) is int and type(widths) is list and
                                 all(type(width) is int for width in widths),
                                 f"chunk {chunk_index} row {local_index}: bad atom profile")
@@ -522,7 +1033,6 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
                             f"chunk {chunk_index} row {local_index}: bad generalized detail")
 
             if replay_predicates:
-                row = tuple(row_raw)
                 observed_lane = None
                 observed_detail: Json = None
                 for candidate in LANES:
@@ -536,8 +1046,13 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
                 require((observed_lane, observed_detail) == (lane, detail),
                         f"chunk {chunk_index} row {local_index}: fresh predicate replay differs")
 
-        require(next_remainder is None,
-                f"chunk {chunk_index}: remainder stream has trailing rows")
+        require(next_remainder is None and
+                local_source_mass == census["coarse_residual_physical_total"],
+                f"chunk {chunk_index}: remainder tail or residual physical ledger differs")
+        require(all(kernel["observed_residual_orbits"] == kernel["expected_residual_orbits"] and
+                    kernel["observed_residual_physical"] == kernel["expected_residual_physical"]
+                    for kernel in kernels.values()),
+                f"chunk {chunk_index}: fresh per-kernel residual ledger differs")
         require(census_digest.hexdigest() == census.get("residual_stream_sha256"),
                 f"chunk {chunk_index}: census residual digest changed")
         require(local_classification.hexdigest() == pin[3] and
@@ -565,11 +1080,16 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
         receipts.append({
             "chunk_index": chunk_index,
             "kernel_range": [start, stop],
-            "source_range": report["source_range"],
+            "source_range": [source_cursor - len(residuals), source_cursor],
             "rows": len(residuals),
+            "census_raw_sha256": pin[0],
+            "census_artifact_sha256": pin[1],
+            "report_sha256": pin[2],
             "classification_sha256": pin[3],
+            "classification_artifact_sha256": pin[4],
             "remainder_rows": local_remainder_count,
             "remainder_sha256": pin[5],
+            "remainder_artifact_sha256": pin[6],
         })
         if progress:
             print(f"chunk={chunk_index} rows={source_cursor} generalized="
@@ -605,14 +1125,23 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
                 owner_manifest["classification_stream_sha256"] and
                 global_remainder.hexdigest() == owner_manifest["remainder_stream_sha256"],
                 "global stream digests differ")
+        observed_source_identity = {
+            "universe_source_index_sha256": universe_source_indices.hexdigest(),
+            "universe_key_sha256": universe_keys.hexdigest(),
+            "owner_source_index_sha256": owner_source_indices.hexdigest(),
+            "owner_key_sha256": owner_keys.hexdigest(),
+            "remainder_source_index_sha256": remainder_source_indices.hexdigest(),
+            "remainder_key_sha256": remainder_keys.hexdigest(),
+        }
+        require(observed_source_identity == EXPECTED_SOURCE_IDENTITY,
+                "canonical source identity digests differ")
         if replay_predicates:
             # A None classification means every predicate failed; accepted lanes
             # alone therefore sum to OWNER_TOTAL, not the full residual universe.
             require(dict(predicate_passes) == EXPECTED_OWNER_COUNTS,
                     "fresh predicate pass ledger differs")
-            require(predicate_calls["balanced-rank-one"] == RESIDUAL_TOTAL and
-                    predicate_calls["generalized-ray"] ==
-                    EXPECTED_OWNER_COUNTS["generalized-ray"] + REMAINDER_TOTAL,
+            require(dict(predicate_calls) == EXPECTED_PREDICATE_CALLS and
+                    sum(predicate_calls.values()) == EXPECTED_PREDICATE_CALL_TOTAL,
                     "fresh predicate call ledger differs")
 
     mode = "fresh-full-predicate-replay" if replay_predicates else "authenticated-stored-stream-zip"
@@ -656,7 +1185,36 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
         "remainder_physical_total": remainder_mass,
         "remainder_stream_sha256": global_remainder.hexdigest(),
         "ordered_complement_validated": True,
+        "orbit_recomputations": orbit_recomputations,
+        "automorphism_recomputations": burnside_recomputations,
+        "burnside_recomputations": burnside_recomputations,
+        "mixed_radix_canonicality_validated": True,
+        "per_kernel_residual_ledgers_validated": True,
+        "source_identity": {
+            "encoding": "sha256(concatenated canonical JSON [source_index,global_kernel,order_kernel,row,orbit_size] lines)",
+            "source_index_encoding": "sha256(concatenated ASCII decimal source_index plus newline)",
+            "source_index_range": [0, source_cursor],
+            "universe_orbit_total": source_cursor,
+            "universe_physical_total": independent_totals["coarse_residual_physical_total"],
+            "universe_source_index_sha256": universe_source_indices.hexdigest(),
+            "universe_key_sha256": universe_keys.hexdigest(),
+            "owner_orbit_total": sum(counts.values()),
+            "owner_physical_total": sum(masses.values()),
+            "owner_source_index_sha256": owner_source_indices.hexdigest(),
+            "owner_key_sha256": owner_keys.hexdigest(),
+            "remainder_orbit_total": remainder_count,
+            "remainder_physical_total": remainder_mass,
+            "remainder_source_index_sha256": remainder_source_indices.hexdigest(),
+            "remainder_key_sha256": remainder_keys.hexdigest(),
+            "partition_validated": source_cursor == sum(counts.values()) + remainder_count,
+        },
+        "row_recognition_calls": source_cursor if replay_predicates else 0,
+        "predicate_replay_eligible": bool(replay_predicates and complete),
+        "predicate_call_total": sum(predicate_calls.values()),
+        "predicate_pass_total": sum(predicate_passes.values()),
+        "predicate_unowned_rows": remainder_count if replay_predicates else 0,
         "recognition_calls": source_cursor if replay_predicates else 0,
+        "recognition_calls_definition": "rows classified through the precedence chain; not total predicate invocations",
         "predicate_calls": dict(predicate_calls),
         "predicate_passes": dict(predicate_passes),
         "generalized_three_ray_calls": predicate_calls["generalized-ray"],
@@ -667,15 +1225,29 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
 
 
 def verify_stored_semantic_zip(*, progress: bool = False,
-                               _chunk_limit: int | None = None) -> dict[str, Json]:
-    """Authenticate and zip every stored row without claiming predicate replay."""
-    return _verify(replay_predicates=False, progress=progress, chunk_limit=_chunk_limit)
+                               key_sink: KeySink | None = None,
+                               _chunk_limit: int | None = None,
+                               _reconstruct_census: bool = False) -> dict[str, Json]:
+    """Authenticate and zip every stored row without claiming predicate replay.
+
+    ``key_sink`` is called in canonical source order as ``(partition, key)``,
+    where partition is ``"owner"`` or ``"remainder"`` and key is
+    ``(source_index, global_kernel, order_kernel, row_tuple, orbit_size)``.
+    The callback is observational only; this module never publishes lane state.
+    The private ``_reconstruct_census`` switch is test/forensics-only; it is not
+    part of the quick zip's semantic claim.
+    """
+    return _verify(replay_predicates=False, progress=progress, chunk_limit=_chunk_limit,
+                   key_sink=key_sink, reconstruct_census=_reconstruct_census)
 
 
 def replay_all_predicates(*, progress: bool = False,
-                          _chunk_limit: int | None = None) -> dict[str, Json]:
+                          key_sink: KeySink | None = None,
+                          _chunk_limit: int | None = None,
+                          _reconstruct_census: bool = False) -> dict[str, Json]:
     """Run the full read-only semantic replay, including fresh ray searches."""
-    return _verify(replay_predicates=True, progress=progress, chunk_limit=_chunk_limit)
+    return _verify(replay_predicates=True, progress=progress, chunk_limit=_chunk_limit,
+                   key_sink=key_sink, reconstruct_census=_reconstruct_census)
 
 
 def main(argv: list[str] | None = None) -> int:
