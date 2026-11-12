@@ -1,3 +1,28 @@
+- 2026-11-12: Cycle 291 retracts the proposed unconditional mixed-product
+  theorem for discriminant-one Weil fourfolds and records a fail-closed
+  conditional closure.  Separate all-self-powers results, the low-dimensional
+  Moonen--Zarhin classification, and the CM theorem do not establish literal
+  finite-family derived independence.  The first unresolved graph is between
+  two simple type-III outer-`D_2` packets: absolute
+  `2(2 box-times 2)` matching does not by itself descend the rational
+  eight-dimensional `H^1` module and its Tits data.  The second is outer
+  `A_2/A_2`: the standard/dual matching, quadratic Galois descent, and lifted
+  parametrized Hodge generator remain unproved.  Packet-level Goursat,
+  type-II(2), type-IV(2,1), and the limited scope of MZ section 2.5(ii) must be
+  explicit.  The local quotient gate is now discharged for every identified
+  `3+1` row: the whole rational Weil plane gives a conjugate-`K`-linear
+  isomorphism from the complementary CM elliptic submotive to the Tate-twisted
+  determinant packet, and the normalized algebraic projector
+  `f(f^dagger f)^(-1)f^dagger` retains the primitive determinant and finite
+  `mu_3` overlap.  The actual aggregate CM torus handles all multiway quotient
+  relations by an exact Tannakian pullback lemma.  Two independent hostile
+  reconstructions certified these steps.  Thus the sole mathematical gate is
+  literal embedded derived equality, together with the exhaustive support
+  census defining its coordinates.  No categorical argument bypasses a
+  missing semisimple graph: the graph-induced adjoint isomorphism is already an
+  extra mixed Hodge tensor.  This is a wall dossier, not a theorem, novelty claim,
+  Clay claim, or publication trigger.  See
+  `millennium-prize/cycle-291-weil-fourfold-mixed-products.md`.
 - 2026-11-11: Cycle 288 hostilely classifies the remaining special-point
   mixed-product extension for discriminant-one Weil fourfolds. After common
   simple isogeny factors are consolidated, all proposed semisimple couplings
