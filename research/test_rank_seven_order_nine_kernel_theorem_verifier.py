@@ -241,11 +241,15 @@ class OrderNineMasterHostileTest(unittest.TestCase):
         self.assertEqual(
             self.master.sha256(source.encode("ascii")),
             self.master.DOCUMENT_PINS[self.master.SWITCHED_THREE_RAY_NOTE])
-        self.assertIn("rigorous fixed-parity-monotone bound", source)
+        self.assertIn("insert the internal\nvectors at equal angular increments", source)
+        self.assertIn("convexity of\n`tan`", source)
+        self.assertIn("tan(y/l) <= tan(y)/l", source)
+        self.assertIn("it is not asserted to be the exact path-chain cost", source)
         self.assertIn("No converse is claimed for arbitrary switched-three-ray\nGrams", source)
-        self.assertIn("forward implication to structural ownership", source)
+        self.assertIn("forward\nimplication to structural ownership", source)
         self.assertNotIn("This proves both\ndirections", source)
         self.assertNotIn("linear Gram-chain construction has excess", source)
+        self.assertNotIn("retained rational chain", source)
 
     def test_exact_downstream_schemas_reject_partial_extra_and_bool(self):
         bad_values = (

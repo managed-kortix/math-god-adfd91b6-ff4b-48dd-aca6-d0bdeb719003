@@ -70,27 +70,41 @@ path-optimal DNN excess is
 f_l(t) = l tan^2(acos(t)/(2l)).
 ```
 
-The retained rational chain supplies the rigorous fixed-parity-monotone bound
+Here is both the path construction and the promised rational bound. Alternately
+negate consecutive path vectors, let `beta=acos(t)`, and insert the internal
+vectors at equal angular increments `beta/l` on the endpoint great-circle arc.
+The Gram of these actual unit vectors is PSD, has the prescribed endpoints, and
+has exact path excess `f_l(t)`. Put `y=beta/2`. For `-1<t<=1`, convexity of
+`tan` on `[0,pi/2)` and `tan(0)=0` give
 
 ```text
-f_l(t) <= (1-t)/(l(1+t)),                                  (2)
+tan(y/l) <= tan(y)/l,
+
+f_l(t) = l tan^2(y/l)
+       <= tan^2(y)/l
+        = (1-t)/(l(1+t)).                                  (2)
 ```
 
-with equality at `l=1` and generally strict inequality for `l>1`. For example,
+All finite `x_e=1` table states have `t` equal to `1/2` or `-1/2`, so (2)
+applies. Its right side is a rational certificate charge when `t` is rational;
+it is not asserted to be the exact path-chain cost. Equality holds at `l=1`
+and the bound is strict for `l>1` in these finite table states. For example,
 `t=1/2,l=2` gives exact cost `14-8sqrt(3)<1/6`, while (2) is `1/6`.
+
 After multiplication by `18`, the rational upper charge is `6/l` in the cheap
 state and `54/l` in the expensive state. For `q>0`, the reciprocal-length sum
 over odd paths is `1+(q-1)/3=(q+2)/3`, while the even paths contribute
 `(m-q)/2`. Summing these upper charges gives the four finite table weights.
-Bundle interiors can be put in mutually orthogonal auxiliary spaces, so the
-retained rational chain costs add. Thus a state assignment satisfying (1)
-constructs a Gram of exact excess at most the tabulated majorant, hence at most
-six. Conversely, a six-state assignment using this retained table-bound
-certificate family determines its colors, switch cut, and the same tabulated
-sum. This proves the stated equivalence only for table-bound certificates and
-the forward implication to structural ownership.
+Install the equal-angle chains simultaneously; only their already fixed branch
+endpoints are shared, so their union is a unit-vector Gram and the path excesses
+add. Thus a state assignment satisfying (1) constructs a Gram whose exact
+excess is at most the tabulated majorant, hence at most six. Conversely, a
+six-state assignment using this retained table-bound certificate family
+determines its colors, switch cut, and the same tabulated sum. This proves the
+stated equivalence only for table-bound certificates and the forward
+implication to structural ownership.
 
-Increasing any path length by two weakly decreases the retained-chain bound.
+Increasing any path length by two weakly decreases the rational bound in (2).
 The branch Gram therefore proves every same-parity descendant. One-vertex
 additivity assigns each rooted tree its ordinary tree Gram, proving the stated
 rooted-tree closure.
