@@ -145,16 +145,24 @@ def _freeze_rows(values: Iterable[object], label: str) -> tuple[RowKey, ...]:
         raise RuntimeError(f"{label}: row sequence is not iterable") from error
     seen_rows: set[RowKey] = set()
     seen_indices: set[int] = set()
+    # Excluding source_index prevents one semantic row from being counted twice
+    # under two fabricated indices.  The canonical census producer is expected
+    # to make this tuple injective; StageLedger enforces that expectation.
+    seen_semantic_rows: set[tuple[int, int, tuple[int, ...], int]] = set()
     previous_index: int | None = None
     for position, row in enumerate(rows):
         source_index = row[0]
+        semantic_row = row[1:]
         require(row not in seen_rows, f"{label}[{position}]: duplicate full row key")
         require(source_index not in seen_indices,
                 f"{label}[{position}]: duplicate source-index metadata")
+        require(semantic_row not in seen_semantic_rows,
+                f"{label}[{position}]: duplicate semantic row under distinct source indices")
         require(previous_index is None or previous_index < source_index,
                 f"{label}[{position}]: source-index order changed")
         seen_rows.add(row)
         seen_indices.add(source_index)
+        seen_semantic_rows.add(semantic_row)
         previous_index = source_index
     return rows
 

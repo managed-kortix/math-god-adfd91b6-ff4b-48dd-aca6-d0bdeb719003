@@ -94,6 +94,11 @@ class StageLedgerHostileTest(unittest.TestCase):
         self.assertFalse(accounting["bounded_order_nine_finite_premise_discharged"])
         self.assertIn("finite row/target identities only", accounting["claim_boundary"])
 
+    def test_semantic_row_cannot_be_reindexed_and_counted_twice(self):
+        reindexed = (37, *self.rows[0][1:])
+        self.assert_rejected(lambda: self.m.StageLedger((self.rows[0], reindexed)),
+                             "duplicate semantic row")
+
     def test_key_swap_rejected_even_when_counts_and_mass_match(self):
         ledger = self.m.StageLedger(self.rows)
         receipt = ledger.advance("structural", self.rows[:2], self.rows[2:])
