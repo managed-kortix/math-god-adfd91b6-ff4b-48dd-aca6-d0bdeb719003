@@ -186,6 +186,132 @@ class StructuralSemanticReplayerHostileTest(unittest.TestCase):
         self.assertNotEqual(synthetic_fast["predicate_calls"],
                             self.replayer.EXPECTED_PREDICATE_CALLS)
 
+    def test_census_reconstruction_ledger_is_execution_derived_and_fail_closed(self):
+        expected_hashes = [pin[0] for pin in self.replayer.CHUNK_SPECS]
+        expected_totals = {
+            key: (self.replayer.KERNEL_TOTAL if key == "kernel_total" else
+                  self.replayer.RESIDUAL_TOTAL if key == "coarse_residual_total" else
+                  self.replayer.RESIDUAL_PHYSICAL_TOTAL
+                  if key == "coarse_residual_physical_total" else
+                  self.replayer.PARITY_ORBIT_TOTAL if key == "parity_orbit_total" else
+                  self.replayer.COARSE_CERTIFIED_TOTAL
+                  if key == "coarse_certified_total" else
+                  self.replayer.RESIDUAL_TOTAL * self.replayer.FRONTIERS
+                  if key == "frontier_target_total" else 81_885_688)
+            for key in self.replayer.CENSUS_TOTAL_FIELDS
+        }
+        manifest = dict(expected_totals)
+        ledger = self.replayer.empty_census_reconstruction_ledger()
+        ledger.update({
+            "producer_loads": 1,
+            "generate_chunk_calls": 8,
+            "chunks_reconstructed": 8,
+            "kernels_reconstructed": self.replayer.KERNEL_TOTAL,
+            "residual_rows_reconstructed": self.replayer.RESIDUAL_TOTAL,
+            "totals": dict(expected_totals),
+            "raw_chunk_sha256": list(expected_hashes),
+        })
+        result = self.replayer.census_reconstruction_result(True, True, ledger, manifest)
+        self.assertIs(result["census_reconstruction"], True)
+        self.assertIs(result["census_reconstruction_eligible"], True)
+        self.assertEqual(result["census_reconstruction_generate_calls"], 8)
+        self.assertEqual(result["census_reconstructed_raw_sha256"], expected_hashes)
+
+        mutations = (
+            {"producer_loads": 0},
+            {"generate_chunk_calls": 0},
+            {"generate_chunk_calls": 7},
+            {"chunks_reconstructed": 7},
+            {"kernels_reconstructed": self.replayer.KERNEL_TOTAL - 1},
+            {"residual_rows_reconstructed": self.replayer.RESIDUAL_TOTAL - 1},
+            {"raw_chunk_sha256": expected_hashes[:-1]},
+            {"raw_chunk_sha256": ["0" * 64, *expected_hashes[1:]]},
+        )
+        for mutation in mutations:
+            with self.subTest(mutation=mutation):
+                hostile = dict(ledger)
+                hostile.update(mutation)
+                with self.assertRaises(RuntimeError):
+                    self.replayer.census_reconstruction_result(
+                        True, True, hostile, manifest)
+        hostile = dict(ledger)
+        hostile["totals"] = dict(expected_totals)
+        hostile["totals"]["coarse_residual_total"] -= 1
+        with self.assertRaises(RuntimeError):
+            self.replayer.census_reconstruction_result(True, True, hostile, manifest)
+        with self.assertRaises(RuntimeError):
+            self.replayer.census_reconstruction_result(False, True, ledger, manifest)
+
+    def test_census_record_counts_only_exact_actual_producer_returns(self):
+        stored = {key: 0 for key in self.replayer.CENSUS_CHUNK_FIELDS}
+        stored.update({
+            "kernel_total": 1,
+            "coarse_residual_total": 1,
+            "kernels": [{}],
+            "residuals": [{}],
+        })
+        for key in self.replayer.CENSUS_TOTAL_FIELDS:
+            stored[key] = 1
+        expected = hashlib.sha256(self.replayer.canonical_bytes(stored)).hexdigest()
+        ledger = self.replayer.empty_census_reconstruction_ledger()
+        self.replayer.record_census_reconstruction(
+            ledger, stored, stored, expected, "synthetic")
+        self.assertEqual(ledger["generate_chunk_calls"], 1)
+        self.assertEqual(ledger["kernels_reconstructed"], 1)
+        self.assertEqual(ledger["residual_rows_reconstructed"], 1)
+
+        for mutant in (
+            None,
+            stored | {"extra": 0},
+            stored | {"residuals": []},
+            stored | {"kernel_total": True},
+            stored | {"coarse_residual_total": 1.0},
+        ):
+            with self.subTest(mutant=mutant):
+                before = self.replayer.empty_census_reconstruction_ledger()
+                with self.assertRaises((RuntimeError, TypeError, ValueError)):
+                    self.replayer.record_census_reconstruction(
+                        before, mutant, stored, expected, "hostile")
+                self.assertEqual(before, self.replayer.empty_census_reconstruction_ledger())
+
+    def test_public_census_api_rejects_bool_laundering(self):
+        with self.assertRaises(RuntimeError):
+            self.replayer.reconstruct_census(replay_predicates=1, _chunk_limit=1)
+        with self.assertRaises(RuntimeError):
+            self.replayer.replay_all_predicates(reconstruct_fresh_census=1,
+                                                _chunk_limit=1)
+
+    def test_public_census_path_requires_real_producer_generate_call(self):
+        class StopAtGenerate(RuntimeError):
+            pass
+
+        class FakeProducer:
+            CHUNK_SCHEMA = "rank-seven-orders9-12-exact-residual-census-chunk-v1"
+            MANIFEST_SCHEMA = "rank-seven-orders9-12-exact-residual-census-manifest-v1"
+            ORDER_KERNEL_TOTALS = {self.replayer.ORDER: self.replayer.KERNEL_TOTAL}
+            SOURCE_SHA256 = self.replayer.PINS[self.replayer.KERNEL_FIXTURE]
+            RANK = self.replayer.RANK
+            BUDGET_SCALED = 180
+
+            @staticmethod
+            def load_engine():
+                raise AssertionError("test should stop before source-engine load")
+
+            @staticmethod
+            def generate_chunk(*args, **kwargs):
+                raise StopAtGenerate("actual generate_chunk reached")
+
+        original_loader = self.replayer.load_module
+
+        def fake_loader(path, name):
+            if path == self.replayer.CENSUS_PRODUCER:
+                return FakeProducer
+            return original_loader(path, name)
+
+        with mock.patch.object(self.replayer, "load_module", side_effect=fake_loader):
+            with self.assertRaisesRegex(StopAtGenerate, "actual generate_chunk reached"):
+                self.replayer.reconstruct_census(_chunk_limit=1)
+
 
 if __name__ == "__main__":
     unittest.main()
