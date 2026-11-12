@@ -161,3 +161,83 @@ replays byte-for-byte with SHA-256
 - `experiments/rank7_order9_dominant_family_gram_lane.py` implements and audits the lane.
 - `experiments/rank7_order9_dominant_family_gram_lane.json` persists the full-remainder coverage ledger.
 - `experiments/rank7_order9_dominant_family_gram_owners.jsonl.xz` stores all 1,128 exact rational owners.
+
+## Historical cycle-space witness streams
+
+Two later commits persisted witness streams for the third and fourth largest
+after-SOS families, but the shared producer module and named predecessor
+artifacts are absent from the current tree and fetched reachable history.  The
+full optimization runs and rejected classifications therefore cannot be
+reproduced from the committed artifacts.  The surviving accepted witnesses
+can, however, be authenticated and checked without trusting that optimizer.
+
+`experiments/rank7_order9_cycle_gram_engine.py` is a fail-closed verifier for
+that surviving certificate language.  It authenticates the complete 272,520-row
+after-SOS source stream, requires every stored owner row to equal its uniquely
+indexed source row field-for-field, pins both historical report identities,
+and checks the reports' source, family, owner, denominator, and immediate-chain
+accounting.  On the 15 physical paths it forms the rational cycle projector
+
+```text
+P_cycle = I - B^T(BB^T)^(-1)B
+```
+
+and, for signed endpoint incidence `A`, verifies
+
+```text
+H = XX^T + w A P_cycle A^T,
+G = H/M + diag(1-diag(H)/M),
+X = D0 + D1 S.
+```
+
+Every stored rational pair is required to be reduced with positive
+denominator; every Gram parameter and cycle weight is additionally required to
+have denominator at most 256.  Every parameter and every entry of `P_cycle`,
+`H`, and the path-chain cost is then recomputed with `Fraction`; no
+floating-point value participates in mathematical ownership acceptance.  The
+stored numerical diagnostic is required only to be finite.  The PSD proof is
+explicit:
+`XX^T` and `w(A P_cycle)(A P_cycle)^T` are Gram squares for `w>=0`, and the
+diagonal completion is a sum of nonnegative coordinate squares.  The verifier
+also binds source kernel, parity row, family, local-type ordering, unique source
+index, physical multiplicity, canonical witness bytes, compressed and raw
+SHA-256 identities, exact family totals from the source, and report owner and
+denominator totals.
+
+The authenticated owner totals are:
+
+| Family | Exact owners | Physical rows | Canonical-plus-frontier targets |
+| --- | ---: | ---: | ---: |
+| `2^3 1^9`, `(3,3,6)`, rank 4, 2 triangles | 631 | 748 | 10,096 |
+| `2^3 1^9`, `(4,3,5)`, rank 4, 2 triangles | 1,036 | 1,283 | 16,576 |
+
+The raw owner-stream SHA-256 identities are respectively
+`2f35c2a76ce054be0d5b2ed18c0bfd77f163c1429af35ca48b91313ba77d0154`
+and
+`a347d2d7891609156692d0bf0614783d79a9b84c6f4e0902ef6672f1cb4c96f5`.
+The two streams are disjoint.  The fourth report's immediate predecessor link
+is authenticated against the pinned third-report identity.  The third report,
+however, only *asserts* an earlier 1,018-owner lane and a 270,374-row remainder:
+its referenced report, owner stream, and producer are absent.  Consequently the
+later figure 268,707 is preserved only as unauthenticated historical metadata,
+not established as a remainder by this verifier.  This audit establishes only
+the 1,667 witnesses persisted in these two cycle-space streams.  It does not
+reproduce their optimizer failure sets, authenticate the missing predecessor,
+prove a full family, or prove the order-nine theorem.
+
+Reproduce the exact replay with:
+
+```bash
+uv run --with networkx \
+  python3 positive-square-energy/experiments/rank7_order9_cycle_gram_engine.py \
+  --audit-historical
+```
+
+The regression suite additionally mutates source identity and multiplicity,
+exact cost, rational canonicality, and report identity, and requires fail-closed
+rejection in every case:
+
+```bash
+uv run --with networkx --with pytest \
+  pytest -q positive-square-energy/experiments/test_rank7_order9_cycle_gram_engine.py
+```
