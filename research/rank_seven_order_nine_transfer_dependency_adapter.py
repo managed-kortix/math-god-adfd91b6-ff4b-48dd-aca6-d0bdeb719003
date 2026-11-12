@@ -216,6 +216,17 @@ CONTRACT_FIELDS = frozenset({
     "bounded_transfer_implication_discharged", "theorem_eligible", "global_claim",
     "claim_boundary",
 })
+UNEXECUTED_FINITE_GATE_FIELDS = frozenset({
+    "id", "evidence_kind", "source_path", "source_sha256", "expected_output_sha256",
+    "finite_gate_passed", "analytic_implication_established",
+})
+EXECUTED_FINITE_GATE_FIELDS = frozenset({
+    "id", "evidence_kind", "source_path", "source_sha256", "normal_output_sha256",
+    "optimized_output_sha256", "normal_optimized_byte_identical",
+    "child_analytic_dependencies_authenticated", "applicable_kernels",
+    "obstruction_kernels", "owned_rows", "owned_physical_rows", "owned_targets",
+    "finite_gate_passed", "analytic_implication_established",
+})
 
 
 def fail(message: str) -> NoReturn:
@@ -274,6 +285,63 @@ def relative(path: Path) -> str:
         return path.relative_to(ROOT).as_posix()
     except ValueError as error:
         raise RuntimeError("dependency path escaped repository root") from error
+
+
+def registered_unexecuted_finite_gate() -> dict[str, Json]:
+    """Return the one exact record permitted when the finite child was not run."""
+    return {
+        "id": "order-nine-induced-partition-finite-classifier",
+        "evidence_kind": "registered-unexecuted-finite-gate",
+        "source_path": relative(TRANSFER_VERIFIER),
+        "source_sha256": SOURCE_PINS[TRANSFER_VERIFIER],
+        "expected_output_sha256": TRANSFER_OUTPUT_SHA256,
+        "finite_gate_passed": False,
+        "analytic_implication_established": False,
+    }
+
+
+def expected_executed_finite_gate() -> dict[str, Json]:
+    """Return the exact admissible receipt for a completed normal/-O child pair."""
+    return {
+        "id": "order-nine-induced-partition-finite-classifier",
+        "evidence_kind": "executed-finite-gate",
+        "source_path": relative(TRANSFER_VERIFIER),
+        "source_sha256": SOURCE_PINS[TRANSFER_VERIFIER],
+        "normal_output_sha256": TRANSFER_OUTPUT_SHA256,
+        "optimized_output_sha256": TRANSFER_OUTPUT_SHA256,
+        "normal_optimized_byte_identical": True,
+        "child_analytic_dependencies_authenticated": False,
+        "applicable_kernels": EXPECTED_TRANSFER["applicable_kernels"],
+        "obstruction_kernels": EXPECTED_TRANSFER["obstruction_kernels"],
+        "owned_rows": EXPECTED_TRANSFER["partition_owned_orbits"],
+        "owned_physical_rows": EXPECTED_TRANSFER["partition_owned_physical"],
+        "owned_targets": EXPECTED_TRANSFER["target_orbits"]["partition"],
+        "finite_gate_passed": True,
+        "analytic_implication_established": False,
+    }
+
+
+def validate_finite_gate_record(record: object) -> dict[str, Json]:
+    """Authenticate the exact closed schema and values for either execution mode."""
+    require(type(record) is dict, "finite gate record is not an exact object")
+    evidence_kind = record.get("evidence_kind")
+    if evidence_kind == "registered-unexecuted-finite-gate":
+        expected = registered_unexecuted_finite_gate()
+        expected_fields = UNEXECUTED_FINITE_GATE_FIELDS
+        mode = "registered-unexecuted"
+    elif evidence_kind == "executed-finite-gate":
+        expected = expected_executed_finite_gate()
+        expected_fields = EXECUTED_FINITE_GATE_FIELDS
+        mode = "executed"
+    else:
+        fail("finite gate evidence kind changed or is missing")
+    require(set(record) == expected_fields,
+            f"{mode} finite gate schema changed")
+    require(record["analytic_implication_established"] is False,
+            "finite gate crossed the analytic boundary")
+    require(canonical_bytes(record) == canonical_bytes(expected),
+            f"{mode} finite gate receipt values changed")
+    return record
 
 
 def audit_sources(pins: dict[Path, str] = SOURCE_PINS) -> dict[str, str]:
@@ -353,7 +421,7 @@ def execute_transfer_pair() -> dict[str, Json]:
     require(normal_raw == optimized_raw and
             canonical_bytes(normal) == canonical_bytes(optimized),
             "finite transfer normal and -O outputs differ")
-    return {
+    record = {
         "id": "order-nine-induced-partition-finite-classifier",
         "evidence_kind": "executed-finite-gate",
         "source_path": relative(TRANSFER_VERIFIER),
@@ -370,6 +438,7 @@ def execute_transfer_pair() -> dict[str, Json]:
         "finite_gate_passed": True,
         "analytic_implication_established": False,
     }
+    return validate_finite_gate_record(record)
 
 
 def rank_type_exhaustion() -> dict[str, Json]:
@@ -447,15 +516,7 @@ def build_contract(*, execute_finite_gate: bool) -> dict[str, Json]:
     if execute_finite_gate:
         gates = [execute_transfer_pair()]
     else:
-        gates = [{
-            "id": "order-nine-induced-partition-finite-classifier",
-            "evidence_kind": "registered-unexecuted-finite-gate",
-            "source_path": relative(TRANSFER_VERIFIER),
-            "source_sha256": SOURCE_PINS[TRANSFER_VERIFIER],
-            "expected_output_sha256": TRANSFER_OUTPUT_SHA256,
-            "finite_gate_passed": False,
-            "analytic_implication_established": False,
-        }]
+        gates = [registered_unexecuted_finite_gate()]
     contract = {
         "schema": SCHEMA,
         "scope": "rank-seven order-nine induced-partition transfer dependency boundary",
@@ -545,9 +606,9 @@ def validate_contract(contract: object) -> None:
                 "generated row-times-0..15 contract; not observed child evidence",
         }, "transfer scope changed")
     require(type(contract["executed_finite_gates"]) is list and
-            len(contract["executed_finite_gates"]) == 1 and
-            contract["executed_finite_gates"][0]["analytic_implication_established"] is False,
-            "finite gate crossed the analytic boundary")
+            len(contract["executed_finite_gates"]) == 1,
+            "finite gate registry schema changed")
+    validate_finite_gate_record(contract["executed_finite_gates"][0])
     require(contract["all_analytic_dependencies_executed"] is False and
             contract["analytic_dependencies_authenticated"] is False and
             contract["reviewed_axioms_accepted"] is False and
@@ -615,9 +676,36 @@ def hostile_contract_checks(contract: dict[str, Json]) -> int:
     candidate["executed_finite_gates"][0]["analytic_implication_established"] = True
     mutations.append(("promoted finite child to analytic proof", candidate))
 
+    gate = contract["executed_finite_gates"][0]
+    executed = gate["evidence_kind"] == "executed-finite-gate"
+
+    candidate = json.loads(canonical_bytes(contract))
+    candidate["executed_finite_gates"][0]["evidence_kind"] = (
+        "registered-unexecuted-finite-gate" if executed else "executed-finite-gate"
+    )
+    mutations.append(("relabeled finite execution mode", candidate))
+
+    candidate = json.loads(canonical_bytes(contract))
+    candidate["executed_finite_gates"][0]["finite_gate_passed"] = not executed
+    mutations.append(("forged finite execution status", candidate))
+
+    candidate = json.loads(canonical_bytes(contract))
+    candidate["executed_finite_gates"][0]["invented_nested_field"] = False
+    mutations.append(("added finite gate field", candidate))
+
+    candidate = json.loads(canonical_bytes(contract))
+    missing_field = "normal_output_sha256" if executed else "expected_output_sha256"
+    candidate["executed_finite_gates"][0].pop(missing_field)
+    mutations.append(("omitted finite gate field", candidate))
+
+    candidate = json.loads(canonical_bytes(contract))
+    cross_mode_field = "expected_output_sha256" if executed else "normal_output_sha256"
+    candidate["executed_finite_gates"][0][cross_mode_field] = TRANSFER_OUTPUT_SHA256
+    mutations.append(("mixed finite gate execution schemas", candidate))
+
     for label, candidate in mutations:
         expect_rejected(lambda candidate=candidate: validate_contract(candidate), label)
-    require(len(mutations) == 15, "hostile adapter mutation ledger changed")
+    require(len(mutations) == 20, "hostile adapter mutation ledger changed")
     return len(mutations)
 
 

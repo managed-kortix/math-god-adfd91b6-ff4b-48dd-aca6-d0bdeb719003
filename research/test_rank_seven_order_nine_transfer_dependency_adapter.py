@@ -87,6 +87,78 @@ class TransferDependencyAdapterHostileTest(unittest.TestCase):
         hostile["executed_finite_gates"][0]["analytic_implication_established"] = True
         self.rejected(hostile, "finite gate crossed the analytic boundary")
 
+    def test_default_gate_execution_claim_reproductions_rejected(self):
+        hostile = copy.deepcopy(self.contract)
+        hostile["executed_finite_gates"][0]["evidence_kind"] = "executed-finite-gate"
+        self.rejected(hostile, "executed finite gate schema changed")
+
+        hostile = copy.deepcopy(self.contract)
+        hostile["executed_finite_gates"][0]["finite_gate_passed"] = True
+        self.rejected(hostile, "registered-unexecuted finite gate receipt values changed")
+
+        hostile = copy.deepcopy(self.contract)
+        hostile["executed_finite_gates"][0]["invented_nested_field"] = False
+        self.rejected(hostile, "registered-unexecuted finite gate schema changed")
+
+    def test_default_gate_missing_and_cross_mode_fields_rejected(self):
+        hostile = copy.deepcopy(self.contract)
+        hostile["executed_finite_gates"][0].pop("expected_output_sha256")
+        self.rejected(hostile, "registered-unexecuted finite gate schema changed")
+
+        hostile = copy.deepcopy(self.contract)
+        hostile["executed_finite_gates"][0]["normal_output_sha256"] = \
+            self.m.TRANSFER_OUTPUT_SHA256
+        self.rejected(hostile, "registered-unexecuted finite gate schema changed")
+
+    def test_executed_gate_has_exact_closed_schema_and_values(self):
+        executed = copy.deepcopy(self.contract)
+        executed["executed_finite_gates"] = [self.m.expected_executed_finite_gate()]
+        self.m.validate_contract(executed)
+        gate = executed["executed_finite_gates"][0]
+        self.assertEqual(set(gate), self.m.EXECUTED_FINITE_GATE_FIELDS)
+        self.assertEqual(gate["normal_output_sha256"], self.m.TRANSFER_OUTPUT_SHA256)
+        self.assertEqual(gate["optimized_output_sha256"], self.m.TRANSFER_OUTPUT_SHA256)
+        self.assertIs(gate["normal_optimized_byte_identical"], True)
+        self.assertIs(gate["child_analytic_dependencies_authenticated"], False)
+        self.assertIs(gate["finite_gate_passed"], True)
+        self.assertIs(gate["analytic_implication_established"], False)
+        self.assertEqual(gate["applicable_kernels"], 4022)
+        self.assertEqual(gate["obstruction_kernels"], 473)
+        self.assertEqual(gate["owned_rows"], 268110)
+        self.assertEqual(gate["owned_physical_rows"], 302177)
+        self.assertEqual(gate["owned_targets"], 4289760)
+
+    def test_executed_gate_hostile_values_missing_extra_and_cross_mode_rejected(self):
+        executed = copy.deepcopy(self.contract)
+        executed["executed_finite_gates"] = [self.m.expected_executed_finite_gate()]
+        mutations = (
+            ("normal_output_sha256", "0" * 64),
+            ("optimized_output_sha256", "0" * 64),
+            ("normal_optimized_byte_identical", False),
+            ("child_analytic_dependencies_authenticated", True),
+            ("owned_rows", 268109),
+            ("finite_gate_passed", False),
+            ("analytic_implication_established", True),
+        )
+        for field, value in mutations:
+            with self.subTest(field=field):
+                hostile = copy.deepcopy(executed)
+                hostile["executed_finite_gates"][0][field] = value
+                self.rejected(hostile)
+
+        hostile = copy.deepcopy(executed)
+        hostile["executed_finite_gates"][0].pop("optimized_output_sha256")
+        self.rejected(hostile, "executed finite gate schema changed")
+
+        hostile = copy.deepcopy(executed)
+        hostile["executed_finite_gates"][0]["invented_nested_field"] = False
+        self.rejected(hostile, "executed finite gate schema changed")
+
+        hostile = copy.deepcopy(executed)
+        hostile["executed_finite_gates"][0]["expected_output_sha256"] = \
+            self.m.TRANSFER_OUTPUT_SHA256
+        self.rejected(hostile, "executed finite gate schema changed")
+
     def test_any_attempted_aggregate_promotion_rejected(self):
         fields = (
             "all_analytic_dependencies_executed",
@@ -159,7 +231,10 @@ class TransferDependencyAdapterHostileTest(unittest.TestCase):
         )
 
     def test_bundled_hostile_ledger_is_exact(self):
-        self.assertEqual(self.m.hostile_contract_checks(self.contract), 15)
+        self.assertEqual(self.m.hostile_contract_checks(self.contract), 20)
+        executed = copy.deepcopy(self.contract)
+        executed["executed_finite_gates"] = [self.m.expected_executed_finite_gate()]
+        self.assertEqual(self.m.hostile_contract_checks(executed), 20)
 
 
 if __name__ == "__main__":
