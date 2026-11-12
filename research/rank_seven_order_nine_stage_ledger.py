@@ -17,6 +17,15 @@ A canonical artifact row identity is the full five-field tuple
 proper subset is treated as the identity.  The ``source_index`` field is also
 checked separately as unique, strictly source-ordered metadata, but it need
 not be consecutive.
+
+Target receipts have two explicitly different meanings.  With a supplied
+target stream they authenticate that observed stream.  Without one they are
+generated row-times-``0..15`` contracts; they must not be represented as
+observed child evidence.  In either case this module remains an accounting
+primitive: digest strings and Boolean verdicts passed to
+``derive_bounded_premise`` are not made trustworthy merely by their shape.  A
+release master must compare them with its own pinned proof/verifier/output
+bytes and expected receipts before calling the composer.
 """
 
 from __future__ import annotations
@@ -48,8 +57,8 @@ BOUNDARY_FIELDS = frozenset({
 TARGET_FIELDS = frozenset({
     "schema", "scope", "row_total", "row_key_sha256", "target_indices",
     "per_row_target_cardinality", "per_row_cardinality_validated",
-    "target_total", "target_key_sha256", "encoding",
-    "analytic_ownership_established",
+    "target_total", "target_key_sha256", "encoding", "evidence_kind",
+    "observed_target_stream_validated", "analytic_ownership_established",
 })
 IMPLICATION_FIELDS = frozenset({
     "lane", "implication_kind", "row_total", "row_key_sha256", "target_indices",
@@ -286,7 +295,8 @@ def _target_receipt(rows: Sequence[RowKey], scope: str,
             "target scope must be a nonempty ASCII string")
     target_digest = hashlib.sha256()
     target_total = 0
-    supplied = iter(targets) if targets is not None else None
+    observed_stream = targets is not None
+    supplied = iter(targets) if observed_stream else None
     for row_position, row in enumerate(rows):
         row_target_total = 0
         for target_index in TARGET_INDICES:
@@ -330,6 +340,9 @@ def _target_receipt(rows: Sequence[RowKey], scope: str,
             "sha256(concatenated canonical ASCII JSON lines "
             "[full_five_field_row_key,target_index] in row-major order)"
         ),
+        "evidence_kind": ("observed-exact-target-stream" if observed_stream else
+                          "generated-row-times-target-index-contract"),
+        "observed_target_stream_validated": observed_stream,
         "analytic_ownership_established": False,
     }
 
@@ -395,7 +408,7 @@ class StageLedger:
 
     def stage_target_contract(self, stage: str, *, targets: Iterable[object] | None = None,
                               expected: Mapping[str, Json] | None = None) -> dict[str, Json]:
-        """Validate/hash ``owners(stage) x tuple(range(16))`` in exact order."""
+        """Observe or generate ``owners(stage) x tuple(range(16))`` exactly."""
         require(type(stage) is str and stage in self._stages, "unknown target stage")
         receipt = _target_receipt(self._stages[stage].owners, stage, targets)
         require(set(receipt) == TARGET_FIELDS, "internal target receipt schema changed")
@@ -405,7 +418,7 @@ class StageLedger:
 
     def universe_target_contract(self, *, targets: Iterable[object] | None = None,
                                  expected: Mapping[str, Json] | None = None) -> dict[str, Json]:
-        """Validate/hash the original residual universe x ``0..15``."""
+        """Observe or generate the residual universe times ``0..15`` exactly."""
         receipt = _target_receipt(self._universe, "residual-universe", targets)
         require(set(receipt) == TARGET_FIELDS, "internal universe target schema changed")
         _validate_expected(receipt, expected, TARGET_FIELDS,

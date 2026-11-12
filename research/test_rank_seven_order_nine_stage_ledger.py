@@ -83,6 +83,9 @@ class StageLedgerHostileTest(unittest.TestCase):
         self.assertEqual(target["target_indices"], list(range(16)))
         self.assertEqual(target["per_row_target_cardinality"], 16)
         self.assertEqual(target["target_total"], 3 * 16)
+        self.assertEqual(target["evidence_kind"],
+                         "generated-row-times-target-index-contract")
+        self.assertFalse(target["observed_target_stream_validated"])
         self.assertFalse(target["analytic_ownership_established"])
 
         accounting = ledger.finite_key_accounting()
@@ -159,6 +162,14 @@ class StageLedgerHostileTest(unittest.TestCase):
             "lane", targets=targets[:-1]), "ended early")
         self.assert_rejected(lambda: ledger.stage_target_contract(
             "lane", targets=targets + [targets[-1]]), "surplus")
+
+    def test_supplied_target_stream_is_explicitly_observed_evidence(self):
+        ledger = self.m.StageLedger(self.rows)
+        ledger.advance("lane", (self.rows[0],), self.rows[1:])
+        targets = tuple(self.m.iter_target_keys((self.rows[0],)))
+        receipt = ledger.stage_target_contract("lane", targets=targets)
+        self.assertEqual(receipt["evidence_kind"], "observed-exact-target-stream")
+        self.assertTrue(receipt["observed_target_stream_validated"])
 
     def test_target_digest_uses_full_row_key_and_exact_index_order(self):
         ledger = self.m.StageLedger(self.rows)
