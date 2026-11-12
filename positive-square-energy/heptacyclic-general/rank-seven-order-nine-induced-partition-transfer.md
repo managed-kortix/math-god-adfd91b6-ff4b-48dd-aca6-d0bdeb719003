@@ -8,10 +8,16 @@ Write
 sigma(X) = s+(X) - |V(X)|.
 ```
 
-Let `G` be obtained from a loopless 2-connected rank-seven multigraph kernel
-`K` on nine branch vertices by replacing every physical edge with a positive-
-length path whose interiors are mutually disjoint, and then attaching arbitrary
-finite rooted trees at branch or path vertices.  The result is simple.
+Let `K` be a loopless 2-connected rank-seven multigraph kernel on nine branch
+vertices.  Let `G` be a **finite simple graph** obtained by replacing every
+physical edge of `K` by a positive-length path, with distinct replacement-path
+interiors mutually disjoint and disjoint from all branch vertices.  Simplicity
+is equivalent to requiring at most one unit replacement path in each parallel
+class.  Finally, one may attach finite rooted trees at branch or path vertices:
+each designated root is identified with exactly one realization vertex, every
+nonroot tree vertex is new, the nonroot vertex sets of distinct attached trees
+are disjoint, and there are no further edges between a tree and the realization
+or between distinct trees.
 
 The following criterion gives a uniform theorem owner.
 
@@ -29,19 +35,37 @@ cyclomatic ranks at least two.  Then
 s+(G) >= |V(G)|.                                      (1)
 ```
 
-This applies to every path length and parity and every allowed rooted-tree
-attachment.  It is independent of the order-eight rank-seven finite package:
-the actual theorem inputs are the completed connected rank-at-most-six
-results.  In the order-nine census the two territory ranks can only be
+This applies to every path-length vector and parity pattern that yields a
+simple realization, and every rooted-tree attachment satisfying the preceding
+one-root/disjointness conditions.  It is independent of the order-eight rank-
+seven finite package.  Its exact analytic inputs are the connected finite
+simple rank-two, rank-three, and rank-four theorems in
+
+```text
+all-bicyclic-graphs/paper.tex
+all-tricyclic-graphs/paper.tex
+all-tetracyclic-graphs/paper.tex
+```
+
+with current SHA-256 values, respectively,
+
+```text
+56a2b521ed0fee18d7e34ebb330e5b181e00979805fca951398f7a33d35b19da
+13f8f8c7996c0f58f764c52b4a5b915132038e2ce38d3e56285f1bf952990fc1
+7d8174e64095e5cccf90776ccac92d2dd2ca3f73d500e2518461f5dfb907b93b
+```
+
+The finite verifier below does not authenticate these three analytic
+source dependencies; the hashes state the exact versions imported by this
+note.  In the order-nine census the two territory ranks can only be
 
 ```text
 (4,2), (3,3), (3,2), or (2,2),
 ```
 
-with respectively `2,2,3,4` crossing physical edges.  Thus no territory has
-rank seven; every positive-rank territory is covered by an already-proved
-rank-two through rank-four theorem (and hence also by the stated rank-at-most-
-six package).
+with respectively `2,2,3,4` crossing physical edges.  Thus every territory
+has rank two, three, or four and is covered by the corresponding exact theorem
+owner above.
 
 ## Sharp transfer inequality
 
@@ -52,8 +76,9 @@ sigma(G) >= sigma(G[U]) + sigma(G[W]).               (2)
 ```
 
 Here `U,W` are induced vertex territories constructed below.  Since each
-territory is connected, has cyclomatic rank between two and six, and contains
-all trees assigned to it, the completed lower-rank theorem gives
+territory is finite, simple, connected, has cyclomatic rank two, three, or
+four, and contains all trees assigned to it, the corresponding exact theorem
+owner cited above gives
 
 ```text
 sigma(G[U]) >= 0,    sigma(G[W]) >= 0.                (3)
@@ -100,12 +125,24 @@ connectivity of `K[S]` and `K[T]` gives the exact identity
 beta(K[S]) + beta(K[T]) + c - 1 = beta(K) = 7.       (4)
 ```
 
-Because both ranks are at least two, (4) forces the four types listed above.
-Conversely, the proof uses exactly connectedness and the two rank inequalities;
-those are the criterion's complete combinatorial hypotheses.
+Because `K` is 2-connected, it has no bridge.  If `c=1`, the unique physical
+edge crossing `S,T` would be a bridge (the two induced sides are nonempty), a
+contradiction.  Hence `c>=2`.  Combining this with (4) and both induced ranks
+being at least two gives
 
-The same construction shows why arbitrary subdivisions and rooted trees cause
-no hidden debit: subdivision preserves rank, and every connector remnant or
+```text
+beta(K[S]) + beta(K[T]) = 8-c <= 6,
+c in {2,3,4}.
+```
+
+The unordered possibilities are therefore exactly `(4,2)` and `(3,3)` for
+`c=2`, `(3,2)` for `c=3`, and `(2,2)` for `c=4`.  Thus the four types use
+2-connectivity essentially; the two rank lower bounds alone would not force
+this list.
+
+The same construction shows why all subdivisions yielding a simple realization
+and all rooted trees satisfying the stated attachment conditions cause no
+hidden debit: subdivision preserves rank, and every connector remnant or
 attached-tree edge belongs to a forest meeting one territory core at one root.
 
 ## Exact order-nine census
@@ -134,8 +171,8 @@ bit mask) has this exact kernel distribution:
 | **total** |  | **4,022** |
 
 The criterion is a kernel property, so it owns every physical parity row and
-every canonical-plus-coordinate target on those kernels, not merely the
-currently persisted residue.
+every canonical-plus-coordinate target on those kernels that yields a simple
+realization, not merely the currently persisted residue.
 
 For a direct test against the exact residual frontier, the verifier authenticates
 `rank7_order9_after_sos_remainder.jsonl.xz` and the three persisted Gram-owner
@@ -195,13 +232,15 @@ is exactly
 ```
 
 on `115` represented kernels (among `473` obstruction kernels globally).
-Every such row is canonically short: no parallel bundle has more than one odd
-physical path, so every canonical physical path has length one or two.  Thus
-all `1,615` canonical targets are a rigorous obstruction to the automatic
-`q>=3` clause of the marked edge-opening lemma.  Each of the fifteen coordinate
-frontiers does contain a length-at-least-three path, but ordinary rank-six
-ownership is still insufficient: the opening lemma needs a marked rank-six DNN
-owner carrying its exact excess `E_e` and endpoint correlation `r_e`, with
+The verifier fail-closed checks all `1,615` obstruction rows: every raw bundle
+odd total is at most one and every canonical physical-path length is at most
+two.  Thus all `1,615` canonical targets are a rigorous obstruction to the
+automatic `q>=3` clause of the marked edge-opening lemma.  It also checks all
+`1,615*15=24,225` coordinate frontiers, each of which has a length-at-least-
+three path after its selected coordinate is increased by two.  Ordinary rank-
+six ownership is nevertheless insufficient: the opening lemma needs a marked
+rank-six DNN owner carrying its exact excess `E_e` and endpoint correlation
+`r_e`, with
 
 ```text
 E_e + f_q(r_e) <= 6.
@@ -243,9 +282,11 @@ python3 -O research/rank-seven-order-nine-induced-partition-transfer-verifier.py
 
 Both runs use exact integer combinatorics and authenticated canonical JSONL
 bytes; no floating-point arithmetic enters any accepted count or theorem
-claim.  The verifier is not an order-nine theorem gate.  It proves the induced-
-partition owner's exact scope and the stated finite obstruction/incidence
-classification only.  It does not replay or validate the mathematical Gram
-payloads of the three excluded owner streams, promote any deletion class,
-close the residual targets, cover multiblock graphs, or claim an all-
-heptacyclic theorem.
+claim.  The verifier does **not** authenticate the three cited analytic theorem
+sources or prove induced superadditivity; those dependencies and their current
+hashes are stated explicitly above.  It is not an order-nine theorem gate.  It
+proves the finite induced-partition scope and the stated finite obstruction/
+incidence classification only.  It does not replay or validate the
+mathematical Gram payloads of the three excluded owner streams, promote any
+deletion class, close the residual targets, cover multiblock graphs, or claim a
+full order-nine or all-heptacyclic theorem.

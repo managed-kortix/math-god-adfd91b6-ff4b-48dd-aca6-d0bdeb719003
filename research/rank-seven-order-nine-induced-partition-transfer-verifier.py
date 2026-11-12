@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Exact census for the rank-seven/order-nine induced-partition transfer.
 
-This verifier proves only finite combinatorial classification statements.  The
-spectral implication is proved in the companion note from induced
-superadditivity and the completed lower-rank theorems.  Its cubic-vertex
-statistics are exploratory incidence data, not a deletion theorem owner.
+This verifier proves only finite combinatorial classification statements.  It
+does not authenticate the analytic theorem dependencies cited by the companion
+note.  The spectral implication there uses induced superadditivity and the
+completed connected simple rank-two through rank-four theorems.  Cubic-vertex
+statistics here are exploratory incidence data, not a deletion theorem owner.
 """
 
 from __future__ import annotations
@@ -251,6 +252,8 @@ def scan_rows(kernels, witnesses, deletion_vertices):
     target_physical = Counter()
     short_per_row = Counter()
     represented_obstruction_kernels = set()
+    canonical_short_obstruction_rows = 0
+    coordinate_long_frontiers = 0
 
     for record in rows:
         source_index, _, local_kernel, raw_row, orbit_size = record
@@ -270,11 +273,20 @@ def scan_rows(kernels, witnesses, deletion_vertices):
         obstruction_physical += orbit_size
         edges = kernels[local_kernel][1]
         paths = canonical_paths(edges, raw_row)
+        require(all(type(value) is int and 0 <= value <= 1 for value in raw_row),
+                "obstruction row has raw odd total greater than one")
+        canonical_lengths = [length for _, length in paths]
+        require(all(length <= 2 for length in canonical_lengths),
+                "obstruction row has a long canonical path")
+        canonical_short_obstruction_rows += 1
         short_targets = 0
         for frontier in range(16):
-            lengths = [length for _, length in paths]
+            lengths = list(canonical_lengths)
             if frontier:
                 lengths[frontier - 1] += 2
+                require(any(length >= 3 for length in lengths),
+                        "coordinate frontier has no long physical path")
+                coordinate_long_frontiers += 1
             # This is an incidence classification only.  Deleting the branch
             # vertex is not the proved marked physical-edge deletion, which
             # leaves rank six; no target in this branch is theorem-owned here.
@@ -304,6 +316,10 @@ def scan_rows(kernels, witnesses, deletion_vertices):
     }), "canonical transfer-type physical counts changed")
     require((obstruction_orbits, obstruction_physical, len(represented_obstruction_kernels))
             == (1615, 1945, 115), "represented obstruction counts changed")
+    require(canonical_short_obstruction_rows == 1615,
+            "canonical-short obstruction row count changed")
+    require(coordinate_long_frontiers == 1615 * 15 == 24225,
+            "long coordinate-frontier count changed")
     require(target_orbits == Counter({
         "partition": 4289760,
         "cubic-vertex-long-incidence": 22742,
@@ -328,6 +344,8 @@ def scan_rows(kernels, witnesses, deletion_vertices):
         "obstruction_orbits": obstruction_orbits,
         "obstruction_physical": obstruction_physical,
         "represented_obstruction_kernels": len(represented_obstruction_kernels),
+        "canonical_short_obstruction_rows": canonical_short_obstruction_rows,
+        "coordinate_long_frontiers": coordinate_long_frontiers,
         "target_orbits": dict(sorted(target_orbits.items())),
         "target_physical": dict(sorted(target_physical.items())),
         "short_targets_per_row": dict(sorted(short_per_row.items())),
@@ -349,6 +367,7 @@ def main() -> None:
         "deletion_choice_counts": dict(sorted(deletion_counts.items())),
         "post_lane_orbits": 269725,
         "post_lane_physical": 304122,
+        "analytic_dependencies_authenticated": False,
     })
     print(json.dumps(result, sort_keys=True, separators=(",", ":")))
     print("rank-seven order-nine induced-partition transfer verifier: PASS")
