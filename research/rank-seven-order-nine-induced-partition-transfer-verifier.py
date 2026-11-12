@@ -195,6 +195,55 @@ def load_lane_indices(source_rows: dict[int, list]) -> set[int]:
     return indices
 
 
+def automorphism_actions(edges):
+    """Return exact support-multigraph edge actions using only the stdlib."""
+    edge_index = {}
+    multiplicities = []
+    for index, edge in enumerate(edges):
+        require(isinstance(edge, tuple) and len(edge) == 3,
+                "invalid sparse kernel edge")
+        u, v, multiplicity = edge
+        require(type(u) is int and type(v) is int and 0 <= u < v < 9 and
+                type(multiplicity) is int and multiplicity >= 1,
+                "invalid sparse kernel edge")
+        require((u, v) not in edge_index, "duplicate sparse kernel edge")
+        edge_index[(u, v)] = index
+        multiplicities.append(multiplicity)
+    actions = set()
+    for permutation in itertools.permutations(range(9)):
+        action = []
+        for u, v, multiplicity in edges:
+            target = edge_index.get(tuple(sorted((permutation[u], permutation[v]))))
+            if target is None or multiplicities[target] != multiplicity:
+                break
+            action.append(target)
+        else:
+            actions.add(tuple(action))
+    require(actions, "kernel automorphism group is empty")
+    return tuple(sorted(actions))
+
+
+def verify_canonical_orbit(raw_row, edges, actions):
+    """Authenticate the stored representative and its physical orbit size."""
+    require(isinstance(raw_row, list) and len(raw_row) == len(edges),
+            "row width changed")
+    require(all(type(value) is int and 0 <= value <= edges[index][2]
+                for index, value in enumerate(raw_row)),
+            "invalid odd-count entry")
+    row = tuple(raw_row)
+    images = {tuple(row[index] for index in action) for action in actions}
+    strides = []
+    stride = 1
+    for _, _, multiplicity in edges:
+        strides.append(stride)
+        stride *= multiplicity + 1
+    code = lambda image: sum(value * place
+                             for value, place in zip(image, strides, strict=True))
+    require(code(row) == min(map(code, images)),
+            "source row is not the canonical mixed-radix orbit representative")
+    return len(images)
+
+
 def canonical_paths(edges, raw_row):
     paths = []
     require(len(edges) == len(raw_row), "row width changed")
@@ -225,6 +274,10 @@ def scan_rows(kernels, witnesses, deletion_vertices):
     source_digest = hashlib.sha256()
     rows = []
     source_rows = {}
+    actions_by_kernel = {
+        local_kernel: automorphism_actions(edges)
+        for local_kernel, (_, edges) in kernels.items()
+    }
     with lzma.open(SOURCE, "rb") as stream:
         for raw in stream:
             source_digest.update(raw)
@@ -238,7 +291,11 @@ def scan_rows(kernels, witnesses, deletion_vertices):
                     "invalid local kernel")
             require(kernels[local_kernel][0] == global_kernel, "global/local kernel mismatch")
             require(type(orbit_size) is int and orbit_size > 0, "invalid orbit size")
-            canonical_paths(kernels[local_kernel][1], raw_row)
+            edges = kernels[local_kernel][1]
+            require(orbit_size == verify_canonical_orbit(
+                raw_row, edges, actions_by_kernel[local_kernel]),
+                "stored orbit size does not match exact automorphism orbit")
+            canonical_paths(edges, raw_row)
             source_rows[source_index] = record
             rows.append(record)
     require(source_digest.hexdigest() == EXPECTED["source_raw"], "source raw bytes changed")
@@ -346,6 +403,7 @@ def scan_rows(kernels, witnesses, deletion_vertices):
         "represented_obstruction_kernels": len(represented_obstruction_kernels),
         "canonical_short_obstruction_rows": canonical_short_obstruction_rows,
         "coordinate_long_frontiers": coordinate_long_frontiers,
+        "source_orbits_recomputed": len(rows),
         "target_orbits": dict(sorted(target_orbits.items())),
         "target_physical": dict(sorted(target_physical.items())),
         "short_targets_per_row": dict(sorted(short_per_row.items())),
