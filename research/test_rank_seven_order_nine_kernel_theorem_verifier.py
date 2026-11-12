@@ -48,7 +48,7 @@ class OrderNineMasterHostileTest(unittest.TestCase):
                                      self.master.exact_int(value, "integer"))
 
     def test_dependency_registry_is_exact_complete_and_disjoint(self):
-        self.assertEqual(len(self.master.PYTHON_PINS), 13)
+        self.assertEqual(len(self.master.PYTHON_PINS), 14)
         self.assertEqual(len(self.master.DATA_PINS), 44)
         self.assertEqual(len(self.master.DOCUMENT_PINS), 7)
         registries = tuple(map(set, (self.master.PYTHON_PINS,
@@ -59,7 +59,7 @@ class OrderNineMasterHostileTest(unittest.TestCase):
         self.assertEqual(frozenset(self.master.DATA_PINS),
                          self.master.EXPECTED_DATA_PATHS)
         observed = self.master.audit_pins()
-        self.assertEqual(len(observed), 64)
+        self.assertEqual(len(observed), 65)
 
     def test_partition_rejects_gap_overlap_physical_and_type_laundering(self):
         mutations = []
@@ -250,6 +250,115 @@ class OrderNineMasterHostileTest(unittest.TestCase):
                 self.assert_rejected(lambda validator=validator, payload=payload:
                                      validator(payload))
 
+    def test_transfer_adapter_is_executed_but_remains_nonpromotional(self):
+        receipt = self.master.run_transfer_dependency_adapter()
+        self.assertEqual(receipt["source_sha256"],
+                         self.master.PYTHON_PINS[
+                             self.master.TRANSFER_DEPENDENCY_ADAPTER])
+        self.assertEqual(receipt["normal_output_sha256"],
+                         self.master.TRANSFER_DEPENDENCY_ADAPTER_OUTPUT_SHA256)
+        self.assertEqual(receipt["optimized_output_sha256"],
+                         self.master.TRANSFER_DEPENDENCY_ADAPTER_OUTPUT_SHA256)
+        self.assertIs(receipt["normal_optimized_byte_identical"], True)
+        self.assertEqual(receipt["execution_mode"],
+                         "default-registered-unexecuted-finite-gate")
+        self.assertEqual(receipt["claim_boundary"],
+                         "source-byte-authenticated-nonpromotional-registry-only")
+        for field in ("finite_gate_passed", "analytic_dependencies_authenticated",
+                      "reviewed_axioms_accepted",
+                      "bounded_transfer_implication_discharged",
+                      "theorem_eligible", "global_claim"):
+            with self.subTest(field=field):
+                self.assertIs(receipt[field], False)
+        result = receipt["result"]
+        self.assertEqual(set(result), {"contract", "hostile_mutations_rejected", "status"})
+        self.assertEqual(result["status"], "PASS-NONPROMOTIONAL")
+        self.assertEqual(result["hostile_mutations_rejected"], 20)
+        contract = result["contract"]
+        gate = contract["executed_finite_gates"]
+        self.assertEqual(len(gate), 1)
+        self.assertEqual(gate[0]["evidence_kind"],
+                         "registered-unexecuted-finite-gate")
+        self.assertIs(gate[0]["finite_gate_passed"], False)
+        self.assertIs(gate[0]["analytic_implication_established"], False)
+        self.assertEqual([row["id"] for row in contract["reviewed_analytic_axioms"]],
+                         list(self.master.TRANSFER_ADAPTER_AXIOM_IDS))
+        self.assertTrue(all(row["status"] == "review-required" and
+                            row["semantic_proof_executed"] is False
+                            for row in contract["reviewed_analytic_axioms"]))
+        for field in ("all_analytic_dependencies_executed",
+                      "analytic_dependencies_authenticated",
+                      "reviewed_axioms_accepted",
+                      "bounded_transfer_implication_discharged",
+                      "theorem_eligible", "global_claim"):
+            with self.subTest(contract_field=field):
+                self.assertIs(contract[field], False)
+        self.assertIs(contract["rank_type_exhaustion"]
+                      ["analytic_theorem_application_established"], False)
+
+    def test_transfer_adapter_runs_explicit_normal_and_optimized_commands(self):
+        real_run = self.master.subprocess.run
+        commands = []
+
+        def capture(command, **kwargs):
+            commands.append((list(command), dict(kwargs["env"]), kwargs["cwd"]))
+            return real_run(command, **kwargs)
+
+        with mock.patch.dict(self.master.os.environ,
+                             {"PYTHONOPTIMIZE": "2"}, clear=False):
+            with mock.patch.object(self.master.subprocess, "run", side_effect=capture):
+                self.master.run_transfer_dependency_adapter()
+        self.assertEqual(len(commands), 2)
+        normal, optimized = commands
+        self.assertEqual(normal[0], [sys.executable, "-B",
+                         str(self.master.TRANSFER_DEPENDENCY_ADAPTER)])
+        self.assertEqual(optimized[0], [sys.executable, "-B", "-O",
+                         str(self.master.TRANSFER_DEPENDENCY_ADAPTER)])
+        for command, environment, cwd in commands:
+            with self.subTest(command=command):
+                self.assertNotIn("PYTHONOPTIMIZE", environment)
+                self.assertEqual(environment["PYTHONDONTWRITEBYTECODE"], "1")
+                self.assertEqual(cwd, self.master.ROOT)
+
+    def test_transfer_adapter_hostile_promotion_and_gate_schema_rejected(self):
+        receipt = self.master.run_transfer_dependency_adapter()
+        result = receipt["result"]
+        mutations = []
+        for field in ("all_analytic_dependencies_executed",
+                      "analytic_dependencies_authenticated",
+                      "reviewed_axioms_accepted",
+                      "bounded_transfer_implication_discharged",
+                      "theorem_eligible", "global_claim"):
+            hostile = deepcopy(result)
+            hostile["contract"][field] = True
+            mutations.append(hostile)
+        hostile = deepcopy(result)
+        hostile["contract"]["executed_finite_gates"][0]["finite_gate_passed"] = True
+        mutations.append(hostile)
+        hostile = deepcopy(result)
+        hostile["contract"]["executed_finite_gates"][0]["extra"] = False
+        mutations.append(hostile)
+        hostile = deepcopy(result)
+        hostile["contract"]["reviewed_analytic_axioms"][0]["status"] = "accepted"
+        mutations.append(hostile)
+        hostile = deepcopy(result)
+        hostile["contract"]["rank_type_exhaustion"][
+            "analytic_theorem_application_established"] = True
+        mutations.append(hostile)
+        for hostile in mutations:
+            with self.subTest(hostile=hostile):
+                self.assert_rejected(lambda hostile=hostile:
+                    self.master.validate_transfer_dependency_adapter(hostile))
+
+    def test_quick_manifest_reports_transfer_review_block_not_authentication(self):
+        manifest = self.master.audit(full=False)
+        receipt = manifest["transfer_dependency_adapter"]
+        self.assertIs(receipt["analytic_dependencies_authenticated"], False)
+        self.assertIs(receipt["reviewed_axioms_accepted"], False)
+        self.assertIs(receipt["bounded_transfer_implication_discharged"], False)
+        self.assertIs(receipt["theorem_eligible"], False)
+        self.assertNotIn("adapter_authenticated", receipt)
+
     def test_run_child_rejects_output_only_forgery_before_validation(self):
         completed = subprocess.CompletedProcess(
             args=[], returncode=0,
@@ -277,15 +386,28 @@ class OrderNineMasterHostileTest(unittest.TestCase):
                          "fail-closed-authentication-only")
 
     def test_full_gate_is_explicitly_blocked_before_any_expensive_child(self):
-        with mock.patch.object(self.master, "run_structural_combined_with_keys") as child:
+        names = ("run_structural_combined_with_keys", "run_child", "run_cycle",
+                 "compose_exact_stage_keys")
+        patches = [mock.patch.object(self.master, name) for name in names]
+        children = [patch.start() for patch in patches]
+        try:
             with self.assertRaisesRegex(
                     RuntimeError, "authenticated StageLedger receipts"):
                 self.master.audit(full=True)
+        finally:
+            for patch in reversed(patches):
+                patch.stop()
+        for child in children:
             child.assert_not_called()
 
-    def test_legacy_local_premise_discharge_cannot_promote(self):
-        with self.assertRaisesRegex(RuntimeError, "discharge disabled"):
-            self.master.discharge_finite_premise({}, {}, {}, {}, {}, {})
+    def test_legacy_local_premise_discharge_path_is_deleted(self):
+        self.assertFalse(hasattr(self.master, "validate_transfer_analytic_adapter"))
+        self.assertFalse(hasattr(self.master, "discharge_finite_premise"))
+        self.assertFalse(hasattr(self.master, "full_manifest"))
+        source = self.master.Path(self.master.__file__).read_text("ascii")
+        self.assertNotIn("validate_transfer_analytic_adapter", source)
+        self.assertNotIn("adapter_authenticated", source)
+        self.assertNotIn("finite_premise_discharged\": True", source)
 
     def test_master_and_registered_sources_contain_no_assert_statement(self):
         self.assertEqual(self.master.audit_no_asserts(),

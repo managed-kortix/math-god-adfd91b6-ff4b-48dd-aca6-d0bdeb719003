@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """Fail-closed master gate for the rank-seven/order-nine single-block theorem.
 
-``--quick`` authenticates the complete registered code/data/proof inventory and
-runs inexpensive contract checks, but is deliberately theorem-ineligible.
-``--full`` additionally runs the exact census reconstruction together with all
-precedence-ordered structural predicates and then replays every downstream
-persisted certificate, induced-transfer classification, and obstruction Gram.
+``--quick`` authenticates the complete registered code/data/proof inventory,
+runs inexpensive contract checks, and executes the transfer dependency adapter
+in normal and optimized modes, but is deliberately theorem-ineligible.
+``--full`` currently fails closed before any expensive census or downstream
+execution: immutable expected StageLedger receipts, independently authenticated
+lane implications, and explicit review acceptance for five transfer axioms do
+not yet exist.
 
 The master never treats a stored execution transcript, a caller-supplied
-snapshot, a mode label, or aggregate sums as proof.  Eligibility comes only
-from successful child executions on the currently pinned bytes.  All accepted
-arithmetic is integral or rational; historical binary64 diagnostics are parsed
-only inside certificate replayers and are never proof inputs.
+snapshot, a mode label, aggregate sums, source hashes, or review-required prose
+as proof.  All accepted arithmetic is integral or rational; historical binary64
+diagnostics are parsed only inside certificate replayers and are never proof
+inputs.
 """
 
 from __future__ import annotations
@@ -44,6 +46,7 @@ CYCLE = EXPERIMENTS / "rank7_order9_cycle_gram_engine.py"
 CYCLE_SOURCE = EXPERIMENTS / "rank7_order9_unowned_stratifier.py"
 STRUCTURAL_SCANNER = EXPERIMENTS / "rank7_order9_structural_owners.py"
 TRANSFER = HERE / "rank-seven-order-nine-induced-partition-transfer-verifier.py"
+TRANSFER_DEPENDENCY_ADAPTER = HERE / "rank_seven_order_nine_transfer_dependency_adapter.py"
 OBSTRUCTION = HERE / "rank-seven-order-nine-obstruction-branch-gram-verifier.py"
 ANALYTIC_LIFT = HERE / "rank-seven-conditional-analytic-lift-verifier.py"
 CENSUS_PRODUCER = EXPERIMENTS / "rank7_orders9_12_exact_residual_census.py"
@@ -71,6 +74,8 @@ PYTHON_PINS = {
     CYCLE_SOURCE: "be64c55437421cac434c0b610dac62784e89a0e9a9fc2b401139c98dc266de76",
     STRUCTURAL_SCANNER: "bca85e48a018e7b7c998216e6e14dca38db82e4970709e51571de3aee2d089c7",
     TRANSFER: "4b9cb58aeb68b869b9c254a21ae7bd3cf18fc7360e7afb0a47fd8e570c40b2fe",
+    TRANSFER_DEPENDENCY_ADAPTER:
+        "ad39b97f1a7a838b91ab79b8d4ba72400562c3f075899bbc956a6d3bde8365b5",
     OBSTRUCTION: "21acdb25b08b89ce9a5241932bc23d5fbdfec4c76333ab50c78d9371cf79e0b8",
     ANALYTIC_LIFT: "55e7d67a670f22a7b872b122f3aadcd2036ba922993f5faac1c5b72e2232e611",
     CENSUS_PRODUCER: "c6dcc792c7899c3f494a3beb521c94da972a01a392cd77be78b0956bbee3b921",
@@ -136,6 +141,8 @@ STRUCTURAL_FAST_OUTPUT_SHA256 = "cf8cebf6a9b0ccd4360eaaad57c10c0c5a5b058104aa583
 UPSTREAM_OUTPUT_SHA256 = "8975de0c41137973452e5699cd4eb339f520b7a8f8863a06e9d5f2a74192425b"
 CYCLE_OUTPUT_SHA256 = "aa0f11d2a5f7e2bd49bba6d93bdd6b97de03eace705a98fd4c8cf7b636a6fb24"
 TRANSFER_OUTPUT_SHA256 = "70154fd4dbded871ae77ffdc6a8ffdf7dc23ac86b8411aba983a90029fb642cd"
+TRANSFER_DEPENDENCY_ADAPTER_OUTPUT_SHA256 = \
+    "f15f429f6ab8a1a8d5e9816a1da535caacfc2da75b5c45ed6cc48b750fb32126"
 OBSTRUCTION_OUTPUT_SHA256 = "9e9bacf32b73627db45c092acfa785d1aafe465e4c8743f7054f74cf967d9770"
 COARSE_ATOM_OUTPUT_SHA256 = "019aeb2fc058b61cebd2a98a0ee0025b345cca4b18fb706369a92e1f5ca81a02"
 
@@ -248,6 +255,32 @@ TRANSFER_FIELDS = {"analytic_dependencies_authenticated", "applicable_kernels",
                    "post_lane_physical", "represented_obstruction_kernels",
                    "short_targets_per_row", "source_orbits_recomputed", "target_orbits",
                    "target_physical"}
+TRANSFER_ADAPTER_FIELDS = {
+    "contract", "hostile_mutations_rejected", "status",
+}
+TRANSFER_ADAPTER_CONTRACT_FIELDS = {
+    "schema", "scope", "source_bytes_authenticated", "source_sha256",
+    "executed_finite_gates", "reviewed_analytic_axioms", "reviewed_axiom_registry_sha256",
+    "rank_type_exhaustion", "transfer_scope", "all_analytic_dependencies_executed",
+    "analytic_dependencies_authenticated", "reviewed_axioms_accepted",
+    "bounded_transfer_implication_discharged", "theorem_eligible", "global_claim",
+    "claim_boundary",
+}
+TRANSFER_ADAPTER_UNEXECUTED_GATE_FIELDS = {
+    "id", "evidence_kind", "source_path", "source_sha256", "expected_output_sha256",
+    "finite_gate_passed", "analytic_implication_established",
+}
+TRANSFER_ADAPTER_AXIOM_FIELDS = {
+    "id", "status", "statement", "hypotheses", "source_path", "source_sha256",
+    "source_locator", "semantic_proof_executed",
+}
+TRANSFER_ADAPTER_AXIOM_IDS = (
+    "positive-part-variational-induced-superadditivity",
+    "connected-simple-cyclomatic-rank-two-theorem",
+    "connected-simple-cyclomatic-rank-three-theorem",
+    "connected-simple-cyclomatic-rank-four-theorem",
+    "uniform-induced-territory-construction",
+)
 
 # Independently fixed totals for the eight order-nine kernel chunks.  These are
 # deliberately per-kernel-ledger totals, not a digest of nonexistent materialized
@@ -338,7 +371,7 @@ def audit_pins() -> dict[str, str]:
                 for right in registries[index + 1:]), "dependency registries overlap")
     require(frozenset(DATA_PINS) == EXPECTED_DATA_PATHS and len(DATA_PINS) == 44,
             "complete data registry path set changed")
-    require(len(PYTHON_PINS) == 13 and len(DOCUMENT_PINS) == 7 and len(CHUNK_SPECS) == 8,
+    require(len(PYTHON_PINS) == 14 and len(DOCUMENT_PINS) == 7 and len(CHUNK_SPECS) == 8,
             "dependency registry cardinality changed")
     observed = {}
     for path, expected in {**PYTHON_PINS, **DATA_PINS, **DOCUMENT_PINS}.items():
@@ -1471,65 +1504,147 @@ def validate_partition(orbits: dict[str, int] | None = None,
             "precedence physical complements changed")
 
 
-def validate_transfer_analytic_adapter(transfer_result: dict[str, Json]) -> dict[str, Json]:
-    """Authenticate the analytic implication intentionally omitted by the finite child.
+def validate_transfer_dependency_adapter(result: Json, adapter_module=None) -> dict[str, Json]:
+    """Validate the adapter as a nonpromotional registry, never as an analytic proof."""
+    if adapter_module is None:
+        adapter_module = load_pinned_module(
+            TRANSFER_DEPENDENCY_ADAPTER, "rank7_o9_master_transfer_dependency_adapter")
+    require(getattr(adapter_module, "SCHEMA", None) ==
+                "rank-seven-order-nine-transfer-dependency-adapter-v1" and
+            callable(getattr(adapter_module, "validate_contract", None)),
+            "transfer dependency adapter API changed")
+    exact_fields(result, TRANSFER_ADAPTER_FIELDS, "transfer dependency adapter output")
+    require(result["status"] == "PASS-NONPROMOTIONAL" and
+            result["hostile_mutations_rejected"] == 20,
+            "transfer dependency adapter status changed")
+    contract = exact_fields(
+        result["contract"], TRANSFER_ADAPTER_CONTRACT_FIELDS,
+        "transfer dependency adapter contract")
+    adapter_module.validate_contract(contract)
+    require(contract["schema"] == "rank-seven-order-nine-transfer-dependency-adapter-v1" and
+            contract["scope"] ==
+                "rank-seven order-nine induced-partition transfer dependency boundary" and
+            contract["source_bytes_authenticated"] is True and
+            contract["claim_boundary"] == (
+                "source-byte authentication plus executed finite gates only; five exact "
+                "analytic axioms remain review-required and are not made true by this adapter"),
+            "transfer dependency adapter identity changed")
 
-    The transfer child reports ``analytic_dependencies_authenticated=false`` because
-    it proves only the finite kernel/row classification.  This adapter consumes that
-    explicit nonclaim, the pinned transfer proof, and the exact rank-two through
-    rank-four theorem statements needed for each classified territory rank.
-    """
-    require(transfer_result["analytic_dependencies_authenticated"] is False and
-            transfer_result["canonical_kernel_types"] == {
-                "2-cross-4": 1122, "3-cross-2": 400,
-                "3-cross-3": 1689, "4-cross-2": 811} and
-            transfer_result["partition_owned_orbits"] == 268_110 and
-            transfer_result["target_orbits"]["partition"] == 4_289_760,
-            "finite transfer interface changed")
-    note = TRANSFER_NOTE.read_text("ascii")
-    required_note = (
-        "**Induced-partition transfer theorem.**",
-        "V(K) = S disjoint_union T",
-        "both induced multigraphs `K[S]` and `K[T]` are connected and have",
-        "cyclomatic ranks at least two",
-        "sigma(G) >= sigma(G[U]) + sigma(G[W]).",
-        "The crossing edges are simply omitted by the",
-        "principal-block pinching; no edge-addition monotonicity is asserted.",
-        "tr(A_+^2) = max_(X psd) {2 tr(AX) - tr(X^2)}.",
-        "beta(K[S]) + beta(K[T]) + c - 1 = beta(K) = 7.",
-        "(4,2), (3,3), (3,2), or (2,2)",
-        "This applies to every path-length vector and parity pattern that yields a",
-        "simple realization, and every rooted-tree attachment",
-    )
-    require(all(fragment in note for fragment in required_note),
-            "induced-transfer analytic theorem contract changed")
-    theorem_contracts = {
-        BICYCLIC: ("$|E(G)|=n+1$", "\\boxed{\\splus(G)>n}"),
-        TRICYCLIC: ("$|E(G)|=n+2$", "\\boxed{\\splus(G)\\geq n}"),
-        TETRACYCLIC: ("$|E(G)|=n+3$", "\\boxed{\\splus(G)\\geq n}"),
+    expected_source_pins = {
+        TRANSFER.relative_to(ROOT).as_posix(): PYTHON_PINS[TRANSFER],
+        KERNEL_FIXTURE.relative_to(ROOT).as_posix(): DATA_PINS[KERNEL_FIXTURE],
+        (EXPERIMENTS / "rank7_order9_after_sos_remainder.jsonl.xz").relative_to(ROOT).as_posix():
+            DATA_PINS[EXPERIMENTS / "rank7_order9_after_sos_remainder.jsonl.xz"],
+        (EXPERIMENTS / "rank7_order9_dominant_family_gram_owners.jsonl.xz").relative_to(ROOT).as_posix():
+            DATA_PINS[EXPERIMENTS / "rank7_order9_dominant_family_gram_owners.jsonl.xz"],
+        (EXPERIMENTS / "rank7_order9_third_family_cycle_gram_owners.jsonl.xz").relative_to(ROOT).as_posix():
+            DATA_PINS[EXPERIMENTS / "rank7_order9_third_family_cycle_gram_owners.jsonl.xz"],
+        (EXPERIMENTS / "rank7_order9_fourth_family_cycle_gram_owners.jsonl.xz").relative_to(ROOT).as_posix():
+            DATA_PINS[EXPERIMENTS / "rank7_order9_fourth_family_cycle_gram_owners.jsonl.xz"],
+        TRANSFER_NOTE.relative_to(ROOT).as_posix(): DOCUMENT_PINS[TRANSFER_NOTE],
+        BICYCLIC.relative_to(ROOT).as_posix(): DOCUMENT_PINS[BICYCLIC],
+        TRICYCLIC.relative_to(ROOT).as_posix(): DOCUMENT_PINS[TRICYCLIC],
+        TETRACYCLIC.relative_to(ROOT).as_posix(): DOCUMENT_PINS[TETRACYCLIC],
     }
-    for path, fragments in theorem_contracts.items():
-        text = path.read_text("ascii")
-        require("Every finite simple connected graph $G$" in text and
-                all(fragment in text for fragment in fragments),
-                f"imported lower-rank theorem contract changed: {path.parent.name}")
-    tricyclic = TRICYCLIC.read_text("ascii")
-    require("\\begin{lemma}[Induced superadditivity]\\label{lem:super}" in tricyclic and
-            "\\splus(G)\\geq\\sum_{j=1}^r\\splus(G[V_j])" in tricyclic,
-            "induced superadditivity source contract changed")
+    require(contract["source_sha256"] == expected_source_pins,
+            "transfer dependency adapter source registry changed")
+
+    gates = contract["executed_finite_gates"]
+    require(type(gates) is list and len(gates) == 1,
+            "transfer adapter finite gate registry changed")
+    gate = exact_fields(gates[0], TRANSFER_ADAPTER_UNEXECUTED_GATE_FIELDS,
+                        "transfer adapter unexecuted finite gate")
+    require(gate == {
+        "id": "order-nine-induced-partition-finite-classifier",
+        "evidence_kind": "registered-unexecuted-finite-gate",
+        "source_path": TRANSFER.relative_to(ROOT).as_posix(),
+        "source_sha256": PYTHON_PINS[TRANSFER],
+        "expected_output_sha256": TRANSFER_OUTPUT_SHA256,
+        "finite_gate_passed": False,
+        "analytic_implication_established": False,
+    }, "transfer adapter default finite gate changed")
+
+    axioms = contract["reviewed_analytic_axioms"]
+    require(type(axioms) is list and len(axioms) == 5,
+            "transfer reviewed axiom registry cardinality changed")
+    require(tuple(axiom.get("id") if type(axiom) is dict else None for axiom in axioms) ==
+            TRANSFER_ADAPTER_AXIOM_IDS,
+            "transfer reviewed axiom identities changed")
+    for index, axiom in enumerate(axioms):
+        exact_fields(axiom, TRANSFER_ADAPTER_AXIOM_FIELDS,
+                     f"transfer reviewed axiom {index}")
+        require(axiom["status"] == "review-required" and
+                axiom["semantic_proof_executed"] is False and
+                type(axiom["statement"]) is str and bool(axiom["statement"]) and
+                type(axiom["hypotheses"]) is list and bool(axiom["hypotheses"]) and
+                all(type(item) is str and bool(item) for item in axiom["hypotheses"]) and
+                type(axiom["source_locator"]) is str and bool(axiom["source_locator"]) and
+                expected_source_pins.get(axiom["source_path"]) == axiom["source_sha256"],
+                f"transfer reviewed axiom {index} crossed its review boundary")
+    require(contract["reviewed_axiom_registry_sha256"] ==
+                "726e8844eed0acdb9df5b1139f39278293e0948874d5cd2aaed36c6b0b65f6b8",
+            "transfer reviewed axiom registry digest changed")
+    rank_types = contract["rank_type_exhaustion"]
+    require(type(rank_types) is dict and
+            rank_types.get("analytic_theorem_application_established") is False,
+            "transfer rank-type gate crossed the analytic boundary")
+    require(contract["all_analytic_dependencies_executed"] is False and
+            contract["analytic_dependencies_authenticated"] is False and
+            contract["reviewed_axioms_accepted"] is False and
+            contract["bounded_transfer_implication_discharged"] is False and
+            contract["theorem_eligible"] is False and
+            contract["global_claim"] is False,
+            "transfer dependency adapter promoted an analytic or theorem claim")
+    return result
+
+
+def run_transfer_dependency_adapter() -> dict[str, Json]:
+    """Execute the cheap default adapter in normal and -O modes and bind exact bytes."""
+    require(TRANSFER_DEPENDENCY_ADAPTER in PYTHON_PINS and
+            sha256(TRANSFER_DEPENDENCY_ADAPTER.read_bytes()) ==
+                PYTHON_PINS[TRANSFER_DEPENDENCY_ADAPTER],
+            "transfer dependency adapter source changed")
+    adapter_module = load_pinned_module(
+        TRANSFER_DEPENDENCY_ADAPTER, "rank7_o9_master_transfer_dependency_adapter")
+    outputs = []
+    # A parent launched through PYTHONOPTIMIZE must not turn the nominally normal
+    # replay into a second optimized replay.  Preserve unrelated process context,
+    # but remove this mode-changing variable and set bytecode behavior explicitly.
+    environment = {key: value for key, value in os.environ.items()
+                   if key != "PYTHONOPTIMIZE"}
+    environment["PYTHONDONTWRITEBYTECODE"] = "1"
+    for optimized in (False, True):
+        command = [sys.executable, "-B"]
+        if optimized:
+            command.append("-O")
+        command.append(str(TRANSFER_DEPENDENCY_ADAPTER))
+        completed = subprocess.run(command, cwd=ROOT, check=False,
+                                   capture_output=True, env=environment)
+        require(completed.returncode == 0 and completed.stderr == b"",
+                "transfer dependency adapter execution failed")
+        require(sha256(completed.stdout) == TRANSFER_DEPENDENCY_ADAPTER_OUTPUT_SHA256,
+                "transfer dependency adapter output changed")
+        validate_transfer_dependency_adapter(
+            parse_one_json(completed.stdout, "transfer dependency adapter"),
+            adapter_module=adapter_module)
+        outputs.append(completed.stdout)
+    require(outputs[0] == outputs[1],
+            "transfer dependency adapter normal and -O outputs differ")
     return {
-        "schema": "rank-seven-order-nine-transfer-analytic-adapter-v1",
-        "finite_child_reported_dependencies_authenticated": False,
-        "adapter_authenticated": True,
-        "transfer_note_sha256": DOCUMENT_PINS[TRANSFER_NOTE],
-        "induced_superadditivity_source_sha256": DOCUMENT_PINS[TRICYCLIC],
-        "lower_rank_theorem_sha256": {
-            "rank_2": DOCUMENT_PINS[BICYCLIC],
-            "rank_3": DOCUMENT_PINS[TRICYCLIC],
-            "rank_4": DOCUMENT_PINS[TETRACYCLIC]},
-        "classified_territory_ranks": [2, 3, 4],
-        "owned_rows": 268_110, "owned_targets": 4_289_760,
-        "all_lengths": True, "rooted_tree_attachments": True,
+        "schema": "rank-seven-order-nine-transfer-dependency-adapter-receipt-v1",
+        "source_sha256": PYTHON_PINS[TRANSFER_DEPENDENCY_ADAPTER],
+        "normal_output_sha256": sha256(outputs[0]),
+        "optimized_output_sha256": sha256(outputs[1]),
+        "normal_optimized_byte_identical": True,
+        "execution_mode": "default-registered-unexecuted-finite-gate",
+        "claim_boundary": "source-byte-authenticated-nonpromotional-registry-only",
+        "finite_gate_passed": False,
+        "analytic_dependencies_authenticated": False,
+        "reviewed_axioms_accepted": False,
+        "bounded_transfer_implication_discharged": False,
+        "theorem_eligible": False,
+        "global_claim": False,
+        "result": parse_one_json(outputs[0], "transfer dependency adapter receipt"),
     }
 
 
@@ -1696,7 +1811,8 @@ def quick_manifest(dependencies: dict[str, str], analytic: dict[str, Json],
                    coarse_application: dict[str, Json],
                    coarse_atom: dict[str, Json],
                    dual_predicates: dict[str, Json],
-                   target_accounting: dict[str, Json]) -> dict[str, Json]:
+                   target_accounting: dict[str, Json],
+                   transfer_dependency_adapter: dict[str, Json]) -> dict[str, Json]:
     return {"schema": SCHEMA, "evidence_kind": "fail-closed-authentication-only",
             "mode": "quick", "theorem_eligible": False, "global_claim": False,
             "reason": "quick mode does not execute the exact finite theorem partition",
@@ -1706,143 +1822,17 @@ def quick_manifest(dependencies: dict[str, str], analytic: dict[str, Json],
             "dual_coarse_predicate_contract": dual_predicates,
             "stored_coarse_application_ledger": coarse_application,
             "target_accounting": target_accounting,
+            "transfer_dependency_adapter": transfer_dependency_adapter,
             "residual_partition_orbits": PARTITION_ORBITS,
             "residual_partition_physical": PARTITION_PHYSICAL,
-            "full_requirements": ["fresh order-nine coarse/residual reconstruction",
+            "full_requirements": ["immutable expected StageLedger boundary receipts",
+                "independently authenticated lane proof/verifier/output records",
+                "fresh order-nine coarse/residual reconstruction",
                 "fresh combined census and structural predicate replay",
                 "exact scalar/typed-SOS and dominant Gram replay",
-                "exact third/fourth Gram replay", "induced transfer gate",
+                "exact third/fourth Gram replay", "executed induced transfer finite gate",
+                "explicit review-policy acceptance for five transfer analytic axioms",
                 "obstruction branch-Gram gate"]}
-
-
-def discharge_finite_premise(analytic: dict[str, Json],
-                             coarse_contract: dict[str, Json],
-                             coarse_application: dict[str, Json],
-                             dual_predicates: dict[str, Json],
-                             key_composition: dict[str, Json],
-                             transfer_adapter: dict[str, Json]) -> dict[str, Json]:
-    """Blocked legacy draft; never promote locally manufactured contracts.
-
-    Release discharge must instead flow through hardened ``StageLedger`` with
-    independently pinned exact boundary receipts and master-authenticated lane
-    implication proof/verifier/output bytes.  Generated target contracts and
-    caller-supplied true flags are not theorem evidence.
-    """
-    fail("finite-premise discharge disabled pending independently authenticated StageLedger integration")
-    require(analytic["evidence_kind"] == "conditional-analytic-implication" and
-            analytic["finite_premise_discharged"] is False and
-            analytic["global_claim"] is False and analytic["rank"] == 7 and
-            analytic["budget"] == 6 and analytic["kernel_orders"] == [2, 12] and
-            analytic["finite_premise"] ==
-                "every canonical-plus-coordinate key has an exact budget-six owner" and
-            analytic["conclusion_if_premise_discharged"] == "s+(G)>=|V(G)|",
-            "conditional analytic interface changed")
-    require(coarse_contract == COARSE_ATOM_CONTRACT and
-            coarse_contract["owner_semantics"] ==
-                "one retained branch Gram per parity orbit; fixed-parity coordinatewise path lengthening" and
-            coarse_contract["attachments"] ==
-                "arbitrary finite rooted trees by one-vertex additivity" and
-            dual_predicates["vectorized_and_source_engine_equivalent"] is True and
-            coarse_application["producer_rerun_and_byte_equality_validated"] is True and
-            coarse_application["kernel_total"] == 4495 and
-            coarse_application["coarse_owner_orbits"] == COARSE_ORBITS and
-            coarse_application["residual_orbits"] == RESIDUAL_ORBITS and
-            coarse_application["parity_orbits"] == PARITY_ORBITS and
-            coarse_application["coarse_owner_orbits"] +
-                coarse_application["residual_orbits"] ==
-                coarse_application["parity_orbits"] and
-            coarse_application["per_kernel_complements_validated"] is True,
-            "coarse finite alternative is incomplete")
-    universe = key_composition["universe"]
-    require(key_composition["exact_disjoint_union"] is True and
-            key_composition["all_sixteen_frontiers_expanded"] is True and
-            key_composition["target_index_semantics"]["indices"] == list(range(16)) and
-            set(key_composition["lane_implication_contracts"]) ==
-                set(key_composition["lanes"]) and
-            all(contract["all_target_indices"] is True and
-                contract["all_lengths"] is True and
-                contract["rooted_tree_attachments"] is True
-                for contract in key_composition["lane_implication_contracts"].values()) and
-            universe["orbit_total"] == RESIDUAL_ORBITS and
-            universe["target_total"] == RESIDUAL_TARGETS and
-            exact_sha256(universe["target_key_sha256"], "residual target digest") and
-            transfer_adapter["adapter_authenticated"] is True and
-            transfer_adapter["owned_rows"] == 268_110 and
-            transfer_adapter["owned_targets"] == 4_289_760 and
-            transfer_adapter["all_lengths"] is True and
-            transfer_adapter["rooted_tree_attachments"] is True,
-            "residual finite alternative is incomplete")
-    lane_target_totals = {name: row["target_total"]
-                          for name, row in key_composition["lanes"].items()}
-    require(lane_target_totals == {
-        "structural": 39_201_056, "sos": 1_812_944,
-        "dominant_gram": 18_048, "third_cycle_gram": 10_096,
-        "fourth_cycle_gram": 16_576, "transfer": 4_289_760,
-        "obstruction": 25_840,
-    } and sum(lane_target_totals.values()) == RESIDUAL_TARGETS,
-            "lane target alternatives changed")
-    return {"schema": "rank-seven-order-nine-finite-premise-discharge-v1",
-            "conditional_interface_schema": analytic["schema"],
-            "conditional_interface_reported_discharge": False,
-            "scope": "rank-seven order-nine single-positive-rank-block only",
-            "coarse_alternative": "one retained tetrahedral branch Gram per coarse orbit; all same-parity descendants",
-            "coarse_owner_orbits": COARSE_ORBITS,
-            "coarse_target_equivalent_bookkeeping": COARSE_TARGET_EQUIVALENT,
-            "coarse_semantic_contract_authenticated": True,
-            "producer_rerun_and_byte_equality_validated": True,
-            "residual_alternative": "exact disjoint owner lane for every canonical-plus-coordinate target",
-            "residual_target_total": RESIDUAL_TARGETS,
-            "residual_target_key_sha256": universe["target_key_sha256"],
-            "target_indices": list(range(16)),
-            "lane_target_totals": lane_target_totals,
-            "transfer_analytic_adapter": transfer_adapter,
-            "full_parity_orbit_identity": [COARSE_ORBITS, RESIDUAL_ORBITS, PARITY_ORBITS],
-            "finite_premise_discharged": True,
-            "conclusion": analytic["conclusion_if_premise_discharged"],
-            "global_claim": False}
-
-
-def full_manifest(dependencies: dict[str, str], analytic: dict[str, Json],
-                  coarse_contract: dict[str, Json], coarse_application: dict[str, Json],
-                  coarse_atom: dict[str, Json], dual_predicates: dict[str, Json],
-                  target_accounting: dict[str, Json], key_composition: dict[str, Json],
-                  transfer_adapter: dict[str, Json], premise: dict[str, Json],
-                  structural: dict[str, Json], downstream: list[dict[str, Json]]) -> dict[str, Json]:
-    fail("full theorem manifest disabled pending authenticated finite-premise integration")
-    return {"schema": SCHEMA, "evidence_kind": "current-process-exact-theorem-gate",
-            "mode": "full", "theorem_eligible": theorem_eligible, "global_claim": False,
-            "scope": {"kernel": "loopless 2-connected rank-seven multigraph of order nine",
-                "realization": "finite simple positive-length subdivision; at most one unit path per parallel class",
-                "block_scope": "exactly one positive-rank cyclic block",
-                "attachments": "finite one-root/disjoint rooted trees at branch or subdivision vertices"},
-            "conclusion": "s+(G)>=|V(G)|",
-            "base_universe": {"kernel_total": 4495, "physical_rows": PARITY_PHYSICAL,
-                "parity_orbits": PARITY_ORBITS, "coarse_owner_orbits": COARSE_ORBITS,
-                "residual_orbits": RESIDUAL_ORBITS, "residual_physical": RESIDUAL_PHYSICAL},
-            "coarse_atom_contract": coarse_contract,
-            "coarse_atom_audit": coarse_atom,
-            "dual_coarse_predicate_contract": dual_predicates,
-            "producer_rerun_and_stored_complement_ledger": coarse_application,
-            "target_accounting": target_accounting,
-            "exact_key_composition": key_composition,
-            "transfer_analytic_adapter": transfer_adapter,
-            "finite_premise_discharge": premise,
-            "precedence": ["structural", "sos", "dominant-gram", "third-cycle-gram",
-                           "fourth-cycle-gram", "transfer", "obstruction"],
-            "residual_partition_orbits": PARTITION_ORBITS,
-            "residual_partition_physical": PARTITION_PHYSICAL,
-            "structural_combined_replay": structural, "downstream_exact_replays": downstream,
-            "dependency_sha256": dependencies, "analytic_contract": analytic,
-            "analytic_dependency_sha256": {"structural_reduction": DOCUMENT_PINS[STRUCTURAL_NOTE],
-                "coarse_tetrahedral_atom_note": DOCUMENT_PINS[COARSE_ATOM_NOTE],
-                "induced_transfer_note": DOCUMENT_PINS[TRANSFER_NOTE],
-                "obstruction_note": DOCUMENT_PINS[OBSTRUCTION_NOTE],
-                "rank_two_theorem": DOCUMENT_PINS[BICYCLIC],
-                "rank_three_theorem": DOCUMENT_PINS[TRICYCLIC],
-                "rank_four_theorem": DOCUMENT_PINS[TETRACYCLIC]},
-            "excluded_scope": ["kernel orders other than nine",
-                "multiple positive-rank cyclic blocks", "non-simple or looped realizations",
-                "STATE or project-global promotion"]}
 
 
 def audit(full: bool) -> dict[str, Json]:
@@ -1852,56 +1842,29 @@ def audit(full: bool) -> dict[str, Json]:
     dependencies = audit_pins()
     require(audit_no_asserts() == len(PYTHON_PINS) + 1, "AST source count changed")
     analytic = validate_analytic_sources()
+    transfer_dependency_adapter = run_transfer_dependency_adapter()
     coarse_contract = audit_coarse_source_contract()
     coarse_atom = run_coarse_atom()
     dual_predicates = validate_dual_coarse_predicates()
     coarse_application = validate_coarse_application_chunks()
     if not full:
         return quick_manifest(dependencies, analytic, coarse_contract, coarse_application,
-                              coarse_atom, dual_predicates, target_accounting)
-    # Fail before any hour-scale replay: the present downstream composition is
-    # retained only as reviewable WIP and cannot produce theorem eligibility.
+                              coarse_atom, dual_predicates, target_accounting,
+                              transfer_dependency_adapter)
+    # Fail before any hour-scale replay.  StageLedger is an accounting composer,
+    # not an authenticator: caller-supplied digests/booleans must never discharge
+    # a premise.  No full path exists until immutable expected receipts and every
+    # lane proof/verifier/output have been independently executed and matched.
     fail("full mode blocked pending independently authenticated StageLedger receipts and lane implications")
-    structural, structural_partition = run_structural_combined_with_keys()
-    upstream = run_child("upstream-sos-dominant", UPSTREAM, (), UPSTREAM_OUTPUT_SHA256,
-                         validate_upstream)
-    cycle = run_cycle()
-    transfer = run_child("induced-transfer", TRANSFER, (), TRANSFER_OUTPUT_SHA256,
-                         validate_transfer,
-                         "rank-seven order-nine induced-partition transfer verifier: PASS")
-    obstruction = run_child("obstruction-branch-gram", OBSTRUCTION, (),
-                            OBSTRUCTION_OUTPUT_SHA256, validate_obstruction,
-                            "rank-seven order-nine obstruction branch-Gram verifier: PASS")
-    require(structural["result"]["census_coarse_certified_total_reconstructed"] ==
-            coarse_application["coarse_owner_orbits"] and
-            structural["result"]["census_coarse_residual_total_reconstructed"] ==
-            coarse_application["residual_orbits"] and
-            structural["result"]["per_kernel_residual_ledgers_validated"] is True,
-            "fresh census and independent coarse application ledgers disagree")
-    coarse_application = {**coarse_application,
-                          "producer_rerun_and_byte_equality_validated": True,
-                          "fresh_coarse_owner_keys_materialized": False,
-                          "producer_sha256": PYTHON_PINS[CENSUS_PRODUCER],
-                          "source_engine_sha256": PYTHON_PINS[COARSE_ENGINE],
-                          "fixture_sha256": DATA_PINS[KERNEL_FIXTURE]}
-    key_composition = compose_exact_stage_keys(structural_partition)
-    transfer_adapter = validate_transfer_analytic_adapter(transfer["result"])
-    premise = discharge_finite_premise(
-        analytic, coarse_contract, coarse_application, dual_predicates,
-        key_composition, transfer_adapter)
-    require(premise["finite_premise_discharged"] is True,
-            "order-nine finite premise remains conditional")
-    return full_manifest(dependencies, analytic, coarse_contract, coarse_application,
-                         coarse_atom, dual_predicates, target_accounting,
-                         key_composition, transfer_adapter, premise, structural,
-                         [upstream, cycle, transfer, obstruction])
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--quick", action="store_true", help="authenticate only; never theorem-eligible")
-    modes.add_argument("--full", action="store_true", help="run every exact theorem gate")
+    modes.add_argument(
+        "--full", action="store_true",
+        help="request the full gate (currently fails closed before expensive execution)")
     parser.add_argument("--print-manifest", action="store_true")
     args = parser.parse_args(argv)
     try:
