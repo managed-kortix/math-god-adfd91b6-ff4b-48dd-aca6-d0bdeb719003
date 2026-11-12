@@ -7,6 +7,7 @@ import hashlib
 import importlib.util
 import json
 import lzma
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -311,6 +312,103 @@ class StructuralSemanticReplayerHostileTest(unittest.TestCase):
         with mock.patch.object(self.replayer, "load_module", side_effect=fake_loader):
             with self.assertRaisesRegex(StopAtGenerate, "actual generate_chunk reached"):
                 self.replayer.reconstruct_census(_chunk_limit=1)
+
+
+    def test_stdlib_producer_is_byte_equivalent_on_bounded_real_kernels(self):
+        vector = self.replayer.load_module(
+            self.replayer.CENSUS_PRODUCER, "rank7_order9_vector_equivalence_test")
+        receipt = self.replayer.validate_stdlib_producer_equivalence(
+            vector, ((0, 1), (4453, 4454)))
+        self.assertEqual(receipt["bounded_kernel_total"], 2)
+        self.assertIs(receipt["byte_identical"], True)
+        self.assertEqual([row["physical_row_total"] for row in receipt["ranges"]],
+                         [7776, 32768])
+        self.assertEqual([row["residual_orbit_total"] for row in receipt["ranges"]],
+                         [297, 629])
+        self.assertTrue(all(row["byte_identical"] is True
+                            for row in receipt["ranges"]))
+        self.assertIn("not full-census or theorem evidence",
+                      receipt["claim_boundary"])
+
+    def test_stdlib_producer_equivalence_rejects_vector_mutation(self):
+        vector = self.replayer.load_module(
+            self.replayer.CENSUS_PRODUCER, "rank7_order9_vector_mutation_test")
+        original = vector.generate_chunk
+
+        def hostile(*args, **kwargs):
+            result = original(*args, **kwargs)
+            result["coarse_residual_total"] += 1
+            return result
+
+        vector.generate_chunk = hostile
+        with self.assertRaisesRegex(RuntimeError, "stdlib/vector census producer differs"):
+            self.replayer.validate_stdlib_producer_equivalence(vector, ((0, 1),))
+
+    def test_partition_tag_sink_has_exact_framing_and_ledgers(self):
+        r = self.replayer
+        with tempfile.TemporaryDirectory(dir="/workspace") as directory:
+            os.chmod(directory, 0o700)
+            path = Path(directory) / "partition.bin"
+            with mock.patch.object(r, "RESIDUAL_TOTAL", 3), \
+                 mock.patch.object(
+                     r, "PARTITION_STREAM_BYTE_TOTAL",
+                     len(r.PARTITION_STREAM_HEADER) + 3 + len(r.PARTITION_STREAM_TRAILER)):
+                sink = r.PartitionTagFileSink(path, "synthetic")
+                sink.write_partition("owner", (0, 9, 1, (0, 1), 2))
+                sink.write_partition("remainder", (1, 9, 1, (1, 0), 1))
+                sink.write_partition("owner", (2, 10, 2, (1,), 3))
+                receipt = sink.close()
+            raw = path.read_bytes()
+            self.assertEqual(
+                raw,
+                r.PARTITION_STREAM_HEADER + b"ORO" + r.PARTITION_STREAM_TRAILER)
+            self.assertEqual(path.stat().st_mode & 0o777, 0o600)
+            self.assertEqual(receipt["record_total"], 3)
+            self.assertEqual(receipt["owner_orbit_total"], 2)
+            self.assertEqual(receipt["owner_physical_total"], 5)
+            self.assertEqual(receipt["remainder_orbit_total"], 1)
+            self.assertEqual(receipt["remainder_physical_total"], 1)
+            self.assertEqual(receipt["stream_sha256"], hashlib.sha256(raw).hexdigest())
+
+    def test_partition_tag_sink_rejects_nonconsecutive_and_unknown_partition(self):
+        r = self.replayer
+        with tempfile.TemporaryDirectory(dir="/workspace") as directory:
+            os.chmod(directory, 0o700)
+            path = Path(directory) / "partition.bin"
+            sink = r.PartitionTagFileSink(path, "synthetic")
+            with self.assertRaisesRegex(RuntimeError, "nonconsecutive"):
+                sink.write_partition("owner", (1, 9, 1, (0,), 1))
+            with self.assertRaisesRegex(RuntimeError, "unknown key partition"):
+                sink.write_partition("hostile", (0, 9, 1, (0,), 1))
+            sink.abort()
+
+    def test_partition_sink_path_rejects_stale_symlink_and_nonprivate_parent(self):
+        r = self.replayer
+        with tempfile.TemporaryDirectory(dir="/workspace") as directory:
+            root = Path(directory)
+            os.chmod(root, 0o700)
+            stale = root / "stale.bin"
+            stale.write_bytes(b"stale")
+            with self.assertRaises(RuntimeError):
+                r.validate_sink_path(str(stale.resolve()), "stale")
+            target = root / "target.bin"
+            target.write_bytes(b"target")
+            link = root / "link.bin"
+            link.symlink_to(target)
+            with self.assertRaises(RuntimeError):
+                r.validate_sink_path(str(link), "symlink")
+            open_parent = root / "open"
+            open_parent.mkdir(mode=0o755)
+            with self.assertRaises(RuntimeError):
+                r.validate_sink_path(str((open_parent / "new.bin").resolve()), "open")
+
+    def test_partition_cli_rejects_any_callback_fallback_or_output_without_mode(self):
+        with self.assertRaises(TypeError):
+            self.replayer.emit_combined_partition_stream(
+                "/workspace/does-not-exist/partition.bin", lambda *_: None)
+        self.assertNotIn("--callback", PATH.read_text("ascii"))
+        self.assertNotIn("--emit-key-sink", PATH.read_text("ascii"))
+
 
 
 if __name__ == "__main__":

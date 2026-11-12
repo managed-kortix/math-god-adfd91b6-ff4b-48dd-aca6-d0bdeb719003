@@ -7,6 +7,7 @@ never launches the hour-scale combined structural replay or downstream census.
 
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
 import os
@@ -538,9 +539,245 @@ class OrderNineMasterHostileTest(unittest.TestCase):
                         "upstream-sos-dominant", self.master.UPSTREAM, (), None,
                         lambda result: None))
 
+    def synthetic_partition_case(self, directory: Path, tags: bytes = b"ORO"):
+        m = self.master
+        keys = (
+            (0, 91, 1, (0, 1), 2),
+            (1, 91, 1, (1, 0), 1),
+            (2, 92, 2, (1,), 3),
+        )
+        ledgers = {
+            name: {"indices": hashlib.sha256(), "keys": hashlib.sha256(),
+                   "targets": hashlib.sha256(), "orbits": 0, "physical": 0}
+            for name in ("owner", "remainder", "universe")
+        }
+        for tag, key in zip(tags, keys, strict=True):
+            partition = "owner" if tag == ord("O") else "remainder"
+            for name in ("universe", partition):
+                row = ledgers[name]
+                m.update_index_digest(row["indices"], key[0])
+                m.update_key_digest(row["keys"], key)
+                m.update_target_digest(row["targets"], key)
+                row["orbits"] += 1
+                row["physical"] += key[4]
+        raw = m.PARTITION_STREAM_HEADER + tags + m.PARTITION_STREAM_TRAILER
+        path = directory / "synthetic.partition"
+        descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        try:
+            os.write(descriptor, raw)
+        finally:
+            os.close(descriptor)
+        expected = {
+            "record_total": len(keys),
+            "owner_orbit_total": ledgers["owner"]["orbits"],
+            "owner_physical_total": ledgers["owner"]["physical"],
+            "owner_source_index_sha256": ledgers["owner"]["indices"].hexdigest(),
+            "owner_key_sha256": ledgers["owner"]["keys"].hexdigest(),
+            "owner_target_key_sha256": ledgers["owner"]["targets"].hexdigest(),
+            "remainder_orbit_total": ledgers["remainder"]["orbits"],
+            "remainder_physical_total": ledgers["remainder"]["physical"],
+            "remainder_source_index_sha256":
+                ledgers["remainder"]["indices"].hexdigest(),
+            "remainder_key_sha256": ledgers["remainder"]["keys"].hexdigest(),
+            "remainder_target_key_sha256": ledgers["remainder"]["targets"].hexdigest(),
+            "universe_orbit_total": ledgers["universe"]["orbits"],
+            "universe_physical_total": ledgers["universe"]["physical"],
+            "universe_source_index_sha256": ledgers["universe"]["indices"].hexdigest(),
+            "universe_key_sha256": ledgers["universe"]["keys"].hexdigest(),
+            "universe_target_key_sha256": ledgers["universe"]["targets"].hexdigest(),
+            "partition_validated": True,
+        }
+        pins = {name: hashlib.sha256(name.encode("ascii")).hexdigest()
+                for name in ("source", "producer", "source-engine", "owner-engine", "atom")}
+        replay = {"synthetic": True}
+        manifest = {
+            "schema": m.PARTITION_STREAM_SCHEMA,
+            "replay_schema": "synthetic-replay-v1",
+            "mode": "fresh-census-plus-fresh-full-predicate-replay",
+            "source_sha256": pins["source"],
+            "producer_sha256": pins["producer"],
+            "source_engine_sha256": pins["source-engine"],
+            "owner_engine_sha256": pins["owner-engine"],
+            "atom_recognizer_sha256": pins["atom"],
+            "record_total": len(keys), "stream_byte_total": len(raw),
+            "stream_sha256": hashlib.sha256(raw).hexdigest(),
+            "owner_orbit_total": expected["owner_orbit_total"],
+            "owner_physical_total": expected["owner_physical_total"],
+            "owner_source_index_sha256": expected["owner_source_index_sha256"],
+            "owner_key_sha256": expected["owner_key_sha256"],
+            "remainder_orbit_total": expected["remainder_orbit_total"],
+            "remainder_physical_total": expected["remainder_physical_total"],
+            "remainder_source_index_sha256": expected["remainder_source_index_sha256"],
+            "remainder_key_sha256": expected["remainder_key_sha256"],
+            "replay": replay,
+            "replay_sha256": hashlib.sha256(m.canonical_bytes(replay)).hexdigest(),
+        }
+        def validate_synthetic_replay(value, *, predicates, census):
+            self.assertEqual(value, replay)
+            self.assertIs(predicates, True)
+            self.assertIs(census, True)
+
+        kwargs = {
+            "key_source": iter(keys),
+            "_test_contract": {
+                "record_total": len(keys), "identity": expected,
+                "source_sha256": pins["source"],
+                "producer_sha256": pins["producer"],
+                "source_engine_sha256": pins["source-engine"],
+                "owner_engine_sha256": pins["owner-engine"],
+                "atom_recognizer_sha256": pins["atom"],
+                "replay_schema": "synthetic-replay-v1",
+                "replay_validator": validate_synthetic_replay,
+            },
+        }
+        metadata = os.lstat(path)
+        return path, (metadata.st_dev, metadata.st_ino), manifest, expected, kwargs, keys, raw
+
+    def test_compact_partition_stream_validates_exact_framing_and_all_ledgers(self):
+        with tempfile.TemporaryDirectory(dir=self.master.ROOT) as directory:
+            os.chmod(directory, 0o700)
+            case = self.synthetic_partition_case(Path(directory))
+            path, identity, manifest, expected, kwargs, _, _ = case
+            ledger = self.master.validate_partition_stream(
+                path, identity, manifest, "synthetic", **kwargs)
+            self.assertEqual({key: ledger[key] for key in expected}, expected)
+            self.assertEqual(ledger["stream_sha256"], manifest["stream_sha256"])
+            self.assertEqual(ledger["stream_byte_total"], manifest["stream_byte_total"])
+
+    def test_compact_partition_rejects_tag_mutation_and_swap_preserving_counts(self):
+        for hostile_tags in (b"XRO", b"OOR"):
+            with self.subTest(hostile_tags=hostile_tags):
+                with tempfile.TemporaryDirectory(dir=self.master.ROOT) as directory:
+                    os.chmod(directory, 0o700)
+                    case = self.synthetic_partition_case(Path(directory))
+                    path, identity, manifest, _, kwargs, _, raw = case
+                    hostile = (self.master.PARTITION_STREAM_HEADER + hostile_tags +
+                               self.master.PARTITION_STREAM_TRAILER)
+                    path.write_bytes(hostile)
+                    os.chmod(path, 0o600)
+                    manifest = dict(manifest, stream_sha256=hashlib.sha256(hostile).hexdigest())
+                    self.assert_rejected(lambda: self.master.validate_partition_stream(
+                        path, identity, manifest, "hostile-tag", **kwargs))
+
+    def test_compact_partition_rejects_truncation_surplus_and_bad_framing(self):
+        mutations = (
+            lambda raw: raw[:-1],
+            lambda raw: raw + b"X",
+            lambda raw: b"BAD" + raw[len(self.master.PARTITION_STREAM_HEADER):],
+            lambda raw: raw[:-len(self.master.PARTITION_STREAM_TRAILER)] + b"BAD-TRAILER",
+        )
+        for position, mutate in enumerate(mutations):
+            with self.subTest(position=position):
+                with tempfile.TemporaryDirectory(dir=self.master.ROOT) as directory:
+                    os.chmod(directory, 0o700)
+                    case = self.synthetic_partition_case(Path(directory))
+                    path, identity, manifest, _, kwargs, _, raw = case
+                    hostile = mutate(raw)
+                    path.write_bytes(hostile)
+                    os.chmod(path, 0o600)
+                    manifest = dict(manifest, stream_byte_total=len(hostile),
+                                    stream_sha256=hashlib.sha256(hostile).hexdigest())
+                    self.assert_rejected(lambda: self.master.validate_partition_stream(
+                        path, identity, manifest, "hostile-frame", **kwargs))
+
+    def test_compact_partition_rejects_manifest_and_key_source_mismatch(self):
+        with tempfile.TemporaryDirectory(dir=self.master.ROOT) as directory:
+            os.chmod(directory, 0o700)
+            case = self.synthetic_partition_case(Path(directory))
+            path, identity, manifest, _, kwargs, keys, _ = case
+            hostile = dict(manifest, owner_physical_total=manifest["owner_physical_total"] + 1)
+            self.assert_rejected(lambda: self.master.validate_partition_stream(
+                path, identity, hostile, "manifest-mismatch", **kwargs))
+            bad_kwargs = dict(kwargs, key_source=iter((keys[1], keys[0], keys[2])))
+            self.assert_rejected(lambda: self.master.validate_partition_stream(
+                path, identity, manifest, "key-swap", **bad_kwargs))
+            short_kwargs = dict(kwargs, key_source=iter(keys[:-1]))
+            self.assert_rejected(lambda: self.master.validate_partition_stream(
+                path, identity, manifest, "key-truncation", **short_kwargs))
+            extra_kwargs = dict(kwargs, key_source=iter((*keys, (3, 93, 3, (0,), 1))))
+            self.assert_rejected(lambda: self.master.validate_partition_stream(
+                path, identity, manifest, "key-surplus", **extra_kwargs))
+
+    def test_compact_partition_rejects_stale_symlink_hardlink_and_replacement(self):
+        with tempfile.TemporaryDirectory(dir=self.master.ROOT) as directory:
+            root = Path(directory)
+            os.chmod(root, 0o700)
+            stale = root / "normal.partition"
+            stale.write_bytes(b"stale")
+            os.chmod(stale, 0o600)
+            self.assert_rejected(lambda: self.master._new_partition_stream_path(root, "normal"))
+            stale.unlink()
+            target = root / "target"
+            target.write_bytes(b"target")
+            link = root / "normal.partition"
+            link.symlink_to(target)
+            self.assert_rejected(lambda: self.master._new_partition_stream_path(root, "normal"))
+        with tempfile.TemporaryDirectory(dir=self.master.ROOT) as directory:
+            os.chmod(directory, 0o700)
+            case = self.synthetic_partition_case(Path(directory))
+            path, identity, manifest, _, kwargs, _, _ = case
+            hardlink = Path(directory) / "hardlink"
+            os.link(path, hardlink)
+            self.assert_rejected(lambda: self.master.validate_partition_stream(
+                path, identity, manifest, "hardlink", **kwargs))
+            hardlink.unlink()
+            # Keep the original inode alive through an open descriptor so the
+            # replacement cannot accidentally reuse its numeric inode.
+            original = os.open(path, os.O_RDONLY)
+            try:
+                path.unlink()
+                path.write_bytes(self.master.PARTITION_STREAM_HEADER + b"ORO" +
+                                 self.master.PARTITION_STREAM_TRAILER)
+                os.chmod(path, 0o600)
+                self.assert_rejected(lambda: self.master.validate_partition_stream(
+                    path, identity, manifest, "replacement", **kwargs))
+            finally:
+                os.close(original)
+
+    def test_partition_pair_rejects_nonzero_stderr_and_cross_mode_mismatch(self):
+        m = self.master
+        with mock.patch.object(m, "PYTHON_PINS", dict(m.PYTHON_PINS) | {
+                m.STRUCTURAL: hashlib.sha256(m.STRUCTURAL.read_bytes()).hexdigest()}):
+            for hostile in (
+                    subprocess.CompletedProcess([], 1, b"{}\n", b""),
+                    subprocess.CompletedProcess([], 0, b"{}\n", b"stderr")):
+                with self.subTest(hostile=hostile):
+                    with mock.patch.object(m, "subprocess") as fake_subprocess:
+                        fake_subprocess.run.return_value = hostile
+                        self.assert_rejected(lambda: m.run_structural_partition_pair_nonpromotional())
+
+        def synthetic_runner(command, **kwargs):
+            path = Path(command[-1])
+            mode = "optimized" if "-O" in command else "normal"
+            tags = b"ORO" if mode == "normal" else b"OOR"
+            raw = m.PARTITION_STREAM_HEADER + tags + m.PARTITION_STREAM_TRAILER
+            descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+            try:
+                os.write(descriptor, raw)
+            finally:
+                os.close(descriptor)
+            # Deliberately not a production manifest; this reaches parsing but
+            # cannot masquerade as a valid replay.
+            return subprocess.CompletedProcess(command, 0, b"{}\n", b"")
+
+        with mock.patch.object(m, "PYTHON_PINS", dict(m.PYTHON_PINS) | {
+                m.STRUCTURAL: hashlib.sha256(m.STRUCTURAL.read_bytes()).hexdigest()}):
+            self.assert_rejected(lambda:
+                m.run_structural_partition_pair_nonpromotional(runner=synthetic_runner))
+
+    def test_partition_transport_has_no_callback_or_inprocess_fallback(self):
+        source = PATH.read_text("ascii")
+        body = source[source.index("def run_structural_partition_pair_nonpromotional"):
+                      source.index("def run_structural_combined_with_keys")]
+        self.assertNotIn("load_pinned_module(STRUCTURAL", body)
+        self.assertNotIn("key_sink=", body)
+        self.assertNotIn("replay_all_predicates(", body)
+        with self.assertRaisesRegex(RuntimeError, "nonpromotional isolated"):
+            self.master.run_structural_combined_with_keys()
+
     def test_structural_live_key_sink_remains_explicitly_unresolved(self):
         with self.assertRaisesRegex(RuntimeError,
-                                    "current-process.*not theorem-eligible"):
+                                    "nonpromotional isolated.*not wired"):
             self.master.run_structural_combined_with_keys()
 
     def test_coarse_atom_runs_explicit_isolated_pair_without_nested_child(self):

@@ -115,7 +115,7 @@ class TransferDependencyAdapterHostileTest(unittest.TestCase):
             self.assertFalse(sentinel.exists())
             self.assertEqual(outputs[0], outputs[1])
             self.assertEqual(self.m.sha256_bytes(outputs[0]),
-                             "b285979f6ec3ba05e48e0aede2644ef877a484371d46e1d9faa4461c7bd96bf9")
+                             "4640bd74f669885d9a848d37c0e278603369df556dbfdf901a52f26cadeebfdd")
 
     def test_contract_separates_executed_and_reviewed_evidence(self):
         contract = self.contract
@@ -330,6 +330,22 @@ class TransferDependencyAdapterHostileTest(unittest.TestCase):
                 {"ranks": [2, 2], "crossing_physical_edges": 4},
             ],
         )
+
+    def test_registry_states_exact_theorems_and_oriented_stub_assignment(self):
+        axioms = self.contract["reviewed_analytic_axioms"]
+        for rank, record in zip((2, 3, 4), axioms[1:4], strict=True):
+            self.assertEqual(
+                record["statement"],
+                f"Every finite simple connected graph H of cyclomatic rank {['zero', 'one', 'two', 'three', 'four'][rank]} satisfies s+(H)>=|V(H)|.",
+            )
+            self.assertNotIn("attachment", record["statement"])
+            self.assertEqual(record["hypotheses"], [
+                "H is finite, simple, and connected",
+                f"|E(H)|=|V(H)|+{rank - 1}",
+            ])
+        territory = axioms[4]["statement"]
+        self.assertIn("U receives every crossing-path interior as a pendant stub", territory)
+        self.assertIn("W receives none", territory)
 
     def test_bundled_hostile_ledger_is_exact(self):
         self.assertEqual(self.m.hostile_contract_checks(self.contract), 20)

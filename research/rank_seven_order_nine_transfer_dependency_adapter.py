@@ -130,14 +130,12 @@ REVIEWED_AXIOMS = (
         "id": "connected-simple-cyclomatic-rank-two-theorem",
         "status": "review-required",
         "statement": (
-            "Every finite simple connected graph H of cyclomatic rank two, "
-            "including arbitrary finite rooted one-root tree attachments, satisfies "
-            "s+(H)>=|V(H)|."
+            "Every finite simple connected graph H of cyclomatic rank two "
+            "satisfies s+(H)>=|V(H)|."
         ),
         "hypotheses": [
             "H is finite, simple, and connected",
             "|E(H)|=|V(H)|+1",
-            "each attached tree meets the realization at exactly one root",
         ],
         "source_path": "all-bicyclic-graphs/paper.tex",
         "source_sha256": SOURCE_PINS[BICYCLIC_PAPER],
@@ -148,14 +146,12 @@ REVIEWED_AXIOMS = (
         "id": "connected-simple-cyclomatic-rank-three-theorem",
         "status": "review-required",
         "statement": (
-            "Every finite simple connected graph H of cyclomatic rank three, "
-            "including arbitrary finite rooted one-root tree attachments, satisfies "
-            "s+(H)>=|V(H)|."
+            "Every finite simple connected graph H of cyclomatic rank three "
+            "satisfies s+(H)>=|V(H)|."
         ),
         "hypotheses": [
             "H is finite, simple, and connected",
             "|E(H)|=|V(H)|+2",
-            "each attached tree meets the realization at exactly one root",
         ],
         "source_path": "all-tricyclic-graphs/paper.tex",
         "source_sha256": SOURCE_PINS[TRICYCLIC_PAPER],
@@ -166,14 +162,12 @@ REVIEWED_AXIOMS = (
         "id": "connected-simple-cyclomatic-rank-four-theorem",
         "status": "review-required",
         "statement": (
-            "Every finite simple connected graph H of cyclomatic rank four, "
-            "including arbitrary finite rooted one-root tree attachments, satisfies "
-            "s+(H)>=|V(H)|."
+            "Every finite simple connected graph H of cyclomatic rank four "
+            "satisfies s+(H)>=|V(H)|."
         ),
         "hypotheses": [
             "H is finite, simple, and connected",
             "|E(H)|=|V(H)|+3",
-            "each attached tree meets the realization at exactly one root",
         ],
         "source_path": "all-tetracyclic-graphs/paper.tex",
         "source_sha256": SOURCE_PINS[TETRACYCLIC_PAPER],
@@ -186,8 +180,9 @@ REVIEWED_AXIOMS = (
         "statement": (
             "For every simple subdivision of a qualifying rank-seven kernel and every "
             "permitted rooted one-root attachment, the oriented crossing-path rule gives "
-            "an exact induced vertex partition U,W; both territories are finite, simple, "
-            "and connected, and their cyclomatic ranks equal those of K[S],K[T]."
+            "an exact induced vertex partition U,W: U receives every crossing-path "
+            "interior as a pendant stub, W receives none, both territories are finite, "
+            "simple, and connected, and their cyclomatic ranks equal those of K[S],K[T]."
         ),
         "hypotheses": [
             "replacement-path interiors are mutually disjoint and avoid branch vertices",

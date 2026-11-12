@@ -25,8 +25,11 @@ import importlib.util
 import itertools
 import json
 import lzma
+import os
+import stat
 import subprocess
 import sys
+import tempfile
 from collections import Counter
 from copy import deepcopy
 from pathlib import Path
@@ -68,14 +71,16 @@ SCHEMA = "rank-seven-order-nine-kernel-theorem-master-v2"
 Json = Any
 
 PYTHON_PINS = {
-    STRUCTURAL: "34b43bd2c5a6b9b487c841f74e524f06dd1adb16328c3b321b6510bd9d2987b8",
+    # Checkpoint-local pin for the nonpromotional compact sink implementation.
+    # No full partition replay digest or promotion receipt is pinned here.
+    STRUCTURAL: "338dcd613a14e83f3475b58853f9073a33e50cc814b2ddba2633ec2abc8383c8",
     UPSTREAM: "f8d05d43a31b10058cf37176ceaa14c2562b1e845495ebc210232db0fce6f56c",
     CYCLE: "872912069cb6a9737bb74ad65335d001bdcb92d62873fb8d3111748996ab698a",
     CYCLE_SOURCE: "be64c55437421cac434c0b610dac62784e89a0e9a9fc2b401139c98dc266de76",
     STRUCTURAL_SCANNER: "bca85e48a018e7b7c998216e6e14dca38db82e4970709e51571de3aee2d089c7",
     TRANSFER: "4b9cb58aeb68b869b9c254a21ae7bd3cf18fc7360e7afb0a47fd8e570c40b2fe",
     TRANSFER_DEPENDENCY_ADAPTER:
-        "e6ecaa4e3ddbcd457e1ccfe1a623ef04e20deb91102b37c6e0fa23dbbd3ab59a",
+        "80a85a6923bd1dc8505d1067b60d9a9042211528eb6554c7311cab21e87ab939",
     OBSTRUCTION: "21acdb25b08b89ce9a5241932bc23d5fbdfec4c76333ab50c78d9371cf79e0b8",
     ANALYTIC_LIFT: "55e7d67a670f22a7b872b122f3aadcd2036ba922993f5faac1c5b72e2232e611",
     CENSUS_PRODUCER: "c6dcc792c7899c3f494a3beb521c94da972a01a392cd77be78b0956bbee3b921",
@@ -144,7 +149,7 @@ UPSTREAM_OUTPUT_SHA256 = "8975de0c41137973452e5699cd4eb339f520b7a8f8863a06e9d5f2
 CYCLE_OUTPUT_SHA256 = "aa0f11d2a5f7e2bd49bba6d93bdd6b97de03eace705a98fd4c8cf7b636a6fb24"
 TRANSFER_OUTPUT_SHA256 = "70154fd4dbded871ae77ffdc6a8ffdf7dc23ac86b8411aba983a90029fb642cd"
 TRANSFER_DEPENDENCY_ADAPTER_OUTPUT_SHA256 = \
-    "b285979f6ec3ba05e48e0aede2644ef877a484371d46e1d9faa4461c7bd96bf9"
+    "4640bd74f669885d9a848d37c0e278603369df556dbfdf901a52f26cadeebfdd"
 OBSTRUCTION_OUTPUT_SHA256 = "9e9bacf32b73627db45c092acfa785d1aafe465e4c8743f7054f74cf967d9770"
 COARSE_ATOM_OUTPUT_SHA256 = "019aeb2fc058b61cebd2a98a0ee0025b345cca4b18fb706369a92e1f5ca81a02"
 ANALYTIC_LIFT_OUTPUT_SHA256 = "99782a95008fdcceaf74efbe869917d5321c974d886e76460711faca09135e6d"
@@ -160,6 +165,52 @@ PYTHON_PAIR_RECEIPT_FIELDS = {
     "optimized", "stdout_sha256", "normal_optimized_stdout_byte_identical",
 }
 EMPTY_SHA256 = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+
+PARTITION_STREAM_SCHEMA = "rank-seven-order-nine-structural-partition-stream-v1"
+PARTITION_STREAM_HEADER = b"R7O9-STRUCTURAL-PARTITION-V1\n"
+PARTITION_STREAM_TRAILER = b"\nEND-R7O9-STRUCTURAL-PARTITION-V1\n"
+PARTITION_STREAM_MANIFEST_FIELDS = {
+    "schema", "replay_schema", "mode", "source_sha256", "producer_sha256",
+    "source_engine_sha256", "owner_engine_sha256", "atom_recognizer_sha256",
+    "record_total", "stream_byte_total", "stream_sha256", "owner_orbit_total",
+    "owner_physical_total", "owner_source_index_sha256", "owner_key_sha256",
+    "remainder_orbit_total", "remainder_physical_total",
+    "remainder_source_index_sha256", "remainder_key_sha256", "replay",
+    "replay_sha256",
+}
+PARTITION_LEDGER_FIELDS = {
+    "record_total", "stream_byte_total", "stream_sha256", "owner_orbit_total",
+    "owner_physical_total", "owner_source_index_sha256", "owner_key_sha256",
+    "owner_target_key_sha256", "remainder_orbit_total", "remainder_physical_total",
+    "remainder_source_index_sha256", "remainder_key_sha256",
+    "remainder_target_key_sha256", "universe_orbit_total", "universe_physical_total",
+    "universe_source_index_sha256", "universe_key_sha256",
+    "universe_target_key_sha256", "partition_validated",
+}
+PARTITION_EXPECTED_FIELDS = {
+    "record_total", "owner_orbit_total", "owner_physical_total",
+    "owner_source_index_sha256", "owner_key_sha256", "owner_target_key_sha256",
+    "remainder_orbit_total", "remainder_physical_total",
+    "remainder_source_index_sha256", "remainder_key_sha256",
+    "remainder_target_key_sha256", "universe_orbit_total",
+    "universe_physical_total", "universe_source_index_sha256",
+    "universe_key_sha256", "universe_target_key_sha256", "partition_validated",
+}
+PARTITION_EXECUTION_RECEIPT_SCHEMA = \
+    "rank-seven-order-nine-structural-partition-execution-receipt-v1"
+PARTITION_EXECUTION_RECEIPT_FIELDS = {
+    "schema", "mode", "command", "cwd", "environment", "returncode",
+    "stdout_sha256", "stderr_sha256", "stderr_empty", "source_path",
+    "source_sha256", "stream_path", "stream_device", "stream_inode",
+    "stream_mode", "stream_link_count", "stream_byte_total", "stream_sha256",
+}
+PARTITION_PAIR_RECEIPT_SCHEMA = \
+    "rank-seven-order-nine-structural-partition-pair-receipt-v1"
+PARTITION_PAIR_RECEIPT_FIELDS = {
+    "schema", "source_path", "source_sha256", "arguments", "normal", "optimized",
+    "manifest_sha256", "stream_byte_total", "stream_sha256",
+    "normal_optimized_stdout_byte_identical", "normal_optimized_stream_byte_identical",
+}
 
 RESIDUAL_ORBITS = 2_835_895
 RESIDUAL_PHYSICAL = 3_518_609
@@ -222,6 +273,41 @@ SOURCE_IDENTITY = {
     "remainder_key_sha256": "0442d023ca3401f692fcb7866129ad83758753027dcac373a16da3b170c53a3e",
     "partition_validated": True,
 }
+PARTITION_TARGET_IDENTITY = {
+    "owner_target_key_sha256":
+        "b6fbc41077b7382691baebfbcedcd016f9220d5b14a656b738a7ccb26311602a",
+    "remainder_target_key_sha256":
+        "b1380ed9db2fed87d4d2eb883b9d1d9013b44caa6854405351d89b3b26738fec",
+    "universe_target_key_sha256":
+        "7cdff26ea81a1e1084c8a1af22ce912290a393cb0941cf43ced1ecb020c4fb53",
+}
+
+
+def _expected_partition_identity() -> dict[str, Json]:
+    """Return the immutable compact-partition identity expected in production."""
+    return {
+        "record_total": RESIDUAL_ORBITS,
+        "owner_orbit_total": SOURCE_IDENTITY["owner_orbit_total"],
+        "owner_physical_total": SOURCE_IDENTITY["owner_physical_total"],
+        "owner_source_index_sha256": SOURCE_IDENTITY["owner_source_index_sha256"],
+        "owner_key_sha256": SOURCE_IDENTITY["owner_key_sha256"],
+        "owner_target_key_sha256": PARTITION_TARGET_IDENTITY["owner_target_key_sha256"],
+        "remainder_orbit_total": SOURCE_IDENTITY["remainder_orbit_total"],
+        "remainder_physical_total": SOURCE_IDENTITY["remainder_physical_total"],
+        "remainder_source_index_sha256":
+            SOURCE_IDENTITY["remainder_source_index_sha256"],
+        "remainder_key_sha256": SOURCE_IDENTITY["remainder_key_sha256"],
+        "remainder_target_key_sha256":
+            PARTITION_TARGET_IDENTITY["remainder_target_key_sha256"],
+        "universe_orbit_total": SOURCE_IDENTITY["universe_orbit_total"],
+        "universe_physical_total": SOURCE_IDENTITY["universe_physical_total"],
+        "universe_source_index_sha256":
+            SOURCE_IDENTITY["universe_source_index_sha256"],
+        "universe_key_sha256": SOURCE_IDENTITY["universe_key_sha256"],
+        "universe_target_key_sha256":
+            PARTITION_TARGET_IDENTITY["universe_target_key_sha256"],
+        "partition_validated": True,
+    }
 STRUCTURAL_FIELDS = {
     "automorphism_recomputations", "base_identity", "burnside_recomputations",
     "census_chunks_reconstructed", "census_coarse_certified_total_reconstructed",
@@ -1093,15 +1179,423 @@ def run_python_pair(name: str, path: Path,
     return outputs[0], pair
 
 
-def run_structural_combined_with_keys() -> tuple[dict[str, Json], dict[str, list]]:
-    """Remain fail-closed until the structural live key sink is process-isolated.
+def _partition_arguments(path: Path) -> tuple[str, ...]:
+    require(path.is_absolute() and path == path.resolve(strict=False),
+            "partition stream path is not absolute and resolved")
+    return ("--full-rescan", "--reconstruct-census", "--emit-partition-stream",
+            "--partition-output", str(path))
 
-    The CLI can emit the aggregate replay result but not the 2,835,895 canonical
-    partition keys consumed by composition.  Importing its callback API in the
-    already-started parent would leave those proof-bearing keys outside the child
-    isolation receipt.  Full mode therefore cannot call or consume this boundary.
+
+def _partition_command(path: Path, *, optimized: bool) -> list[str]:
+    return child_command(STRUCTURAL, _partition_arguments(path), optimized=optimized)
+
+
+def _new_partition_stream_path(directory: Path, mode: str) -> Path:
+    """Return a fresh resolved child-owned basename in an exact 0700 directory.
+
+    The child creates the stream itself with ``O_EXCL|O_NOFOLLOW`` and mode
+    0600.  Pre-creating and unlinking a reservation is intentionally avoided:
+    filesystems may immediately reuse that inode, making identity comparisons
+    ambiguous.  Freshness is instead bound before launch and again by the
+    child's exclusive create plus the parent's lstat/open/fstat checks.
     """
-    fail("structural live key sink remains current-process and is not theorem-eligible")
+    require(type(mode) is str and mode in ("normal", "optimized"),
+            "invalid partition execution mode")
+    directory_metadata = os.lstat(directory)
+    require(directory.is_absolute() and directory == directory.resolve() and
+            stat.S_ISDIR(directory_metadata.st_mode) and
+            stat.S_IMODE(directory_metadata.st_mode) == 0o700,
+            "partition directory is not a resolved private directory")
+    path = directory / f"{mode}.partition"
+    require(path == path.resolve(strict=False) and
+            not path.exists() and not path.is_symlink(),
+            "partition path is stale or unresolved")
+    return path
+
+
+def _read_partition_tags(path: Path, expected_identity: tuple[int, int],
+                         manifest: dict[str, Json], label: str, *,
+                         record_total: int = RESIDUAL_ORBITS):
+    """Yield tags from the exact child inode already authenticated by parent."""
+    require(type(expected_identity) is tuple and len(expected_identity) == 2 and
+            all(type(value) is int and value >= 0 for value in expected_identity),
+            f"{label}: malformed child inode identity")
+    path_metadata = os.lstat(path)
+    require(stat.S_ISREG(path_metadata.st_mode) and path_metadata.st_nlink == 1 and
+            stat.S_IMODE(path_metadata.st_mode) == 0o600 and
+            (path_metadata.st_dev, path_metadata.st_ino) == expected_identity,
+            f"{label}: stream path is linked, replaced, or not private")
+    flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+    descriptor = os.open(path, flags)
+    stream = os.fdopen(descriptor, "rb", closefd=True)
+    metadata = os.fstat(descriptor)
+    require(stat.S_ISREG(metadata.st_mode) and metadata.st_nlink == 1 and
+            stat.S_IMODE(metadata.st_mode) == 0o600 and
+            (metadata.st_dev, metadata.st_ino) ==
+            (path_metadata.st_dev, path_metadata.st_ino) and
+            metadata.st_size == manifest["stream_byte_total"],
+            f"{label}: stream file changed during open")
+    try:
+        header = stream.read(len(PARTITION_STREAM_HEADER))
+        require(header == PARTITION_STREAM_HEADER,
+                f"{label}: partition stream header changed")
+        yield from _bounded_partition_tags(stream, record_total, label)
+        trailer = stream.read(len(PARTITION_STREAM_TRAILER))
+        require(trailer == PARTITION_STREAM_TRAILER and stream.read(1) == b"",
+                f"{label}: partition stream trailer/EOF changed")
+    finally:
+        stream.close()
+
+
+def _bounded_partition_tags(stream, record_total: int, label: str):
+    """Yield exactly ``record_total`` O/R bytes and reject truncation/surplus."""
+    exact_int(record_total, f"{label}.record_total")
+    for source_index in range(record_total):
+        raw = stream.read(1)
+        require(raw in (b"O", b"R"),
+                f"{label}: malformed/truncated tag at source {source_index}")
+        yield raw
+
+
+def _fresh_partition_key_source():
+    """Independently yield authenticated canonical census keys in source order.
+
+    This source is distinct from the child tag stream.  It authenticates all
+    stored census chunks and their exact raw digests, validates full row types,
+    and yields one key at a time; no 2.84-million-row list is materialized.
+    """
+    cursor = 0
+    for chunk_index, file_name in enumerate(CENSUS_FILES):
+        path = EXPERIMENTS / file_name
+        expected_artifact = CHUNK_SPECS[chunk_index][1]
+        expected_raw = CHUNK_SPECS[chunk_index][0]
+        require(path in DATA_PINS and DATA_PINS[path] == expected_artifact and
+                sha256(path.read_bytes()) == expected_artifact,
+                f"partition source chunk {chunk_index}: artifact changed")
+        try:
+            raw = lzma.decompress(path.read_bytes(), format=lzma.FORMAT_XZ)
+        except lzma.LZMAError as error:
+            raise RuntimeError(f"partition source chunk {chunk_index}: invalid XZ") from error
+        require(sha256(raw) == expected_raw,
+                f"partition source chunk {chunk_index}: raw digest changed")
+        payload = strict_json(raw, f"partition source chunk {chunk_index}")
+        require(type(payload) is dict and type(payload.get("residuals")) is list and
+                payload.get("coarse_residual_total") == len(payload["residuals"]),
+                f"partition source chunk {chunk_index}: residual payload changed")
+        for residual in payload["residuals"]:
+            require(type(residual) is dict and set(residual) ==
+                    {"global_kernel", "orbit_size", "order_kernel", "row"},
+                    f"partition source row {cursor}: exact schema changed")
+            key = canonical_key([
+                cursor, residual["global_kernel"], residual["order_kernel"],
+                residual["row"], residual["orbit_size"]],
+                f"partition source row {cursor}")
+            yield key
+            cursor += 1
+    require(cursor == RESIDUAL_ORBITS,
+            "partition source residual cardinality changed")
+
+
+def validate_partition_stream(path: Path, expected_identity: tuple[int, int],
+                              manifest: dict[str, Json], label: str,
+                              *, key_source=None,
+                              _test_contract: dict[str, Json] | None = None
+                              ) -> dict[str, Json]:
+    """Zip child tags with independent keys and recompute every compact receipt.
+
+    Production has no caller-controlled expectations: all identities and replay
+    semantics come from immutable module constants.  The single private override
+    is accepted only for a bounded synthetic record count and is never used by
+    the nonpromotional pair runner or by ``audit(full=True)``.
+    """
+    if _test_contract is None:
+        record_total = RESIDUAL_ORBITS
+        expected_values = _expected_partition_identity()
+        expected_source_sha256 = DATA_PINS[KERNEL_FIXTURE]
+        expected_producer_sha256 = PYTHON_PINS[CENSUS_PRODUCER]
+        expected_source_engine_sha256 = PYTHON_PINS[COARSE_ENGINE]
+        expected_owner_engine_sha256 = PYTHON_PINS[STRUCTURAL_OWNER]
+        expected_atom_recognizer_sha256 = PYTHON_PINS[ATOM_RECOGNIZER]
+        expected_replay_schema = "rank-seven-order-nine-structural-semantic-replay-v1"
+        replay_validator = validate_structural
+    else:
+        exact_fields(_test_contract, {
+            "record_total", "identity", "source_sha256", "producer_sha256",
+            "source_engine_sha256", "owner_engine_sha256",
+            "atom_recognizer_sha256", "replay_schema", "replay_validator",
+        }, f"{label} bounded test contract")
+        record_total = _test_contract["record_total"]
+        exact_int(record_total, f"{label}.test_record_total")
+        require(0 < record_total <= 32 and key_source is not None and
+                callable(_test_contract["replay_validator"]),
+                f"{label}: invalid bounded test contract")
+        expected_values = _test_contract["identity"]
+        expected_source_sha256 = _test_contract["source_sha256"]
+        expected_producer_sha256 = _test_contract["producer_sha256"]
+        expected_source_engine_sha256 = _test_contract["source_engine_sha256"]
+        expected_owner_engine_sha256 = _test_contract["owner_engine_sha256"]
+        expected_atom_recognizer_sha256 = _test_contract["atom_recognizer_sha256"]
+        expected_replay_schema = _test_contract["replay_schema"]
+        replay_validator = _test_contract["replay_validator"]
+    exact_fields(expected_values, PARTITION_EXPECTED_FIELDS,
+                 f"{label} expected partition identity")
+    exact_fields(manifest, PARTITION_STREAM_MANIFEST_FIELDS, f"{label} manifest")
+    replay_validator(manifest["replay"], predicates=True, census=True)
+    exact_int(manifest["record_total"], f"{label}.record_total")
+    exact_int(manifest["stream_byte_total"], f"{label}.stream_byte_total")
+    for field in ("stream_sha256", "replay_sha256", "source_sha256",
+                  "producer_sha256", "source_engine_sha256", "owner_engine_sha256",
+                  "atom_recognizer_sha256", "owner_source_index_sha256",
+                  "owner_key_sha256", "remainder_source_index_sha256",
+                  "remainder_key_sha256"):
+        exact_sha256(manifest[field], f"{label}.{field}")
+    expected_size = (len(PARTITION_STREAM_HEADER) + record_total +
+                     len(PARTITION_STREAM_TRAILER))
+    require(manifest["schema"] == PARTITION_STREAM_SCHEMA and
+            manifest["replay_schema"] == expected_replay_schema and
+            manifest["mode"] == "fresh-census-plus-fresh-full-predicate-replay" and
+            manifest["source_sha256"] == expected_source_sha256 and
+            manifest["producer_sha256"] == expected_producer_sha256 and
+            manifest["source_engine_sha256"] == expected_source_engine_sha256 and
+            manifest["owner_engine_sha256"] == expected_owner_engine_sha256 and
+            manifest["atom_recognizer_sha256"] == expected_atom_recognizer_sha256 and
+            manifest["record_total"] == record_total and
+            manifest["stream_byte_total"] == expected_size and
+            manifest["replay_sha256"] == sha256(canonical_bytes(manifest["replay"])),
+            f"{label}: partition stream manifest identity changed")
+
+    path_metadata = os.lstat(path)
+    require(stat.S_ISREG(path_metadata.st_mode) and path_metadata.st_nlink == 1 and
+            stat.S_IMODE(path_metadata.st_mode) == 0o600 and
+            (path_metadata.st_dev, path_metadata.st_ino) == expected_identity and
+            path_metadata.st_size == expected_size,
+            f"{label}: stream inode/size changed before hashing")
+    flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+    descriptor = os.open(path, flags)
+    try:
+        metadata = os.fstat(descriptor)
+        require(stat.S_ISREG(metadata.st_mode) and metadata.st_nlink == 1 and
+                stat.S_IMODE(metadata.st_mode) == 0o600 and
+                (metadata.st_dev, metadata.st_ino) == expected_identity and
+                metadata.st_size == expected_size,
+                f"{label}: stream changed during hash open")
+        raw_digest = hashlib.sha256()
+        while block := os.read(descriptor, 1 << 20):
+            raw_digest.update(block)
+        metadata_after = os.fstat(descriptor)
+        require((metadata_after.st_dev, metadata_after.st_ino, metadata_after.st_size,
+                 metadata_after.st_nlink, stat.S_IMODE(metadata_after.st_mode)) ==
+                (metadata.st_dev, metadata.st_ino, metadata.st_size, 1, 0o600),
+                f"{label}: stream changed during hashing")
+    finally:
+        os.close(descriptor)
+    require(raw_digest.hexdigest() == manifest["stream_sha256"],
+            f"{label}: partition stream hash/manifest mismatch")
+
+    names = ("owner", "remainder", "universe")
+    ledgers = {name: {"indices": hashlib.sha256(), "keys": hashlib.sha256(),
+                      "targets": hashlib.sha256(), "orbits": 0, "physical": 0}
+               for name in names}
+    tags = _read_partition_tags(path, expected_identity, manifest, label,
+                                record_total=record_total)
+    keys = iter(_fresh_partition_key_source() if key_source is None else key_source)
+    for source_index in range(record_total):
+        try:
+            tag = next(tags)
+            key = canonical_key(next(keys), f"{label} independent key {source_index}")
+        except StopIteration as error:
+            raise RuntimeError(f"{label}: tag/key source ended early") from error
+        require(key[0] == source_index,
+                f"{label}: independent key source reindexed")
+        partition = "owner" if tag == b"O" else "remainder"
+        for name in ("universe", partition):
+            ledger = ledgers[name]
+            update_index_digest(ledger["indices"], source_index)
+            update_key_digest(ledger["keys"], key)
+            update_target_digest(ledger["targets"], key)
+            ledger["orbits"] += 1
+            ledger["physical"] += key[4]
+    for iterator, description in ((tags, "tag stream"), (keys, "independent key source")):
+        try:
+            next(iterator)
+        except StopIteration:
+            pass
+        else:
+            fail(f"{label}: {description} has surplus records")
+    result = {
+        "record_total": record_total,
+        "stream_byte_total": manifest["stream_byte_total"],
+        "stream_sha256": manifest["stream_sha256"],
+        "owner_orbit_total": ledgers["owner"]["orbits"],
+        "owner_physical_total": ledgers["owner"]["physical"],
+        "owner_source_index_sha256": ledgers["owner"]["indices"].hexdigest(),
+        "owner_key_sha256": ledgers["owner"]["keys"].hexdigest(),
+        "owner_target_key_sha256": ledgers["owner"]["targets"].hexdigest(),
+        "remainder_orbit_total": ledgers["remainder"]["orbits"],
+        "remainder_physical_total": ledgers["remainder"]["physical"],
+        "remainder_source_index_sha256": ledgers["remainder"]["indices"].hexdigest(),
+        "remainder_key_sha256": ledgers["remainder"]["keys"].hexdigest(),
+        "remainder_target_key_sha256": ledgers["remainder"]["targets"].hexdigest(),
+        "universe_orbit_total": ledgers["universe"]["orbits"],
+        "universe_physical_total": ledgers["universe"]["physical"],
+        "universe_source_index_sha256": ledgers["universe"]["indices"].hexdigest(),
+        "universe_key_sha256": ledgers["universe"]["keys"].hexdigest(),
+        "universe_target_key_sha256": ledgers["universe"]["targets"].hexdigest(),
+        "partition_validated": True,
+    }
+    exact_fields(result, PARTITION_LEDGER_FIELDS, f"{label} recomputed ledger")
+    require(all(result[key] == value for key, value in expected_values.items()) and
+            manifest["owner_orbit_total"] == result["owner_orbit_total"] and
+            manifest["owner_physical_total"] == result["owner_physical_total"] and
+            manifest["owner_source_index_sha256"] ==
+                result["owner_source_index_sha256"] and
+            manifest["owner_key_sha256"] == result["owner_key_sha256"] and
+            manifest["remainder_orbit_total"] == result["remainder_orbit_total"] and
+            manifest["remainder_physical_total"] == result["remainder_physical_total"] and
+            manifest["remainder_source_index_sha256"] ==
+                result["remainder_source_index_sha256"] and
+            manifest["remainder_key_sha256"] == result["remainder_key_sha256"],
+            f"{label}: partition receipt differs from immutable expected identity")
+    return result
+
+
+
+def _partition_execution_receipt(mode: str, command: list[str], completed,
+                                 path: Path, metadata: os.stat_result,
+                                 manifest: dict[str, Json]) -> dict[str, Json]:
+    optimized = mode == "optimized"
+    require(mode in ("normal", "optimized") and
+            command == _partition_command(path, optimized=optimized) and
+            type(completed.returncode) is int and completed.returncode == 0 and
+            type(completed.stdout) is bytes and type(completed.stderr) is bytes and
+            completed.stderr == b"",
+            f"structural partition child failed or execution vector changed: {mode}")
+    receipt = {
+        "schema": PARTITION_EXECUTION_RECEIPT_SCHEMA,
+        "mode": mode, "command": command, "cwd": str(ROOT), "environment": {},
+        "returncode": completed.returncode,
+        "stdout_sha256": sha256(completed.stdout),
+        "stderr_sha256": sha256(completed.stderr), "stderr_empty": True,
+        "source_path": str(STRUCTURAL), "source_sha256": PYTHON_PINS[STRUCTURAL],
+        "stream_path": str(path), "stream_device": metadata.st_dev,
+        "stream_inode": metadata.st_ino, "stream_mode": stat.S_IMODE(metadata.st_mode),
+        "stream_link_count": metadata.st_nlink,
+        "stream_byte_total": metadata.st_size,
+        "stream_sha256": manifest["stream_sha256"],
+    }
+    exact_fields(receipt, PARTITION_EXECUTION_RECEIPT_FIELDS,
+                 f"structural partition {mode} execution receipt")
+    return receipt
+
+
+def _compare_partition_streams(left: Path, left_identity: tuple[int, int],
+                               right: Path, right_identity: tuple[int, int],
+                               expected_size: int) -> None:
+    """Byte-compare two already validated private stream inodes with a hard cap."""
+    exact_int(expected_size, "partition stream comparison size")
+    descriptors = []
+    try:
+        for path, identity, label in ((left, left_identity, "normal"),
+                                      (right, right_identity, "optimized")):
+            descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0))
+            metadata = os.fstat(descriptor)
+            require(stat.S_ISREG(metadata.st_mode) and metadata.st_nlink == 1 and
+                    stat.S_IMODE(metadata.st_mode) == 0o600 and
+                    (metadata.st_dev, metadata.st_ino) == identity and
+                    metadata.st_size == expected_size,
+                    f"{label} partition stream changed before byte comparison")
+            descriptors.append(descriptor)
+        remaining = expected_size
+        while remaining:
+            block_size = min(1 << 20, remaining)
+            left_raw = os.read(descriptors[0], block_size)
+            right_raw = os.read(descriptors[1], block_size)
+            require(bool(left_raw) and left_raw == right_raw,
+                    "normal/-O structural partition streams differ")
+            remaining -= len(left_raw)
+        require(os.read(descriptors[0], 1) == os.read(descriptors[1], 1) == b"",
+                "normal/-O structural partition streams have surplus bytes")
+    finally:
+        for descriptor in descriptors:
+            os.close(descriptor)
+
+
+def run_structural_partition_pair_nonpromotional(*, runner=None) -> dict[str, Json]:
+    """Execute/validate the isolated structural sink pair without promotion.
+
+    This helper is deliberately not called by ``audit(full=True)`` and returns
+    no theorem-eligibility or bounded-premise bit.  It exists for the separately
+    reviewed, expensive process-isolated sink checkpoint only.
+    """
+    require(sha256(STRUCTURAL.read_bytes()) == PYTHON_PINS[STRUCTURAL],
+            "structural source changed before partition pair")
+    runner = subprocess.run if runner is None else runner
+    outputs = []
+    paths = []
+    identities = []
+    ledgers = []
+    executions = []
+    with tempfile.TemporaryDirectory(prefix="rank7-o9-partition-", dir=ROOT) as raw_directory:
+        directory = Path(raw_directory).resolve()
+        os.chmod(directory, 0o700)
+        require(stat.S_IMODE(os.lstat(directory).st_mode) == 0o700,
+                "partition temporary directory is not private")
+        for mode, optimized in (("normal", False), ("optimized", True)):
+            path = _new_partition_stream_path(directory, mode)
+            command = _partition_command(path, optimized=optimized)
+            completed = runner(command, cwd=ROOT, check=False, capture_output=True, env={})
+            require(type(completed.stdout) is bytes and type(completed.stderr) is bytes,
+                    f"structural partition {mode}: child output is not bytes")
+            require(type(completed.returncode) is int and completed.returncode == 0 and
+                    completed.stderr == b"",
+                    f"structural partition child failed or wrote stderr: {mode}")
+            manifest = parse_one_json(completed.stdout, f"structural partition {mode}")
+            metadata = os.lstat(path)
+            identity = (metadata.st_dev, metadata.st_ino)
+            receipt = _partition_execution_receipt(
+                mode, command, completed, path, metadata, manifest)
+            ledger = validate_partition_stream(
+                path, identity, manifest, f"structural partition {mode}")
+            outputs.append(completed.stdout)
+            paths.append(path)
+            identities.append(identity)
+            ledgers.append(ledger)
+            executions.append(receipt)
+        require(outputs[0] == outputs[1],
+                "normal/-O structural partition manifests differ")
+        _compare_partition_streams(
+            paths[0], identities[0], paths[1], identities[1],
+            ledgers[0]["stream_byte_total"])
+        require(ledgers[0] == ledgers[1],
+                "normal/-O structural partition ledgers differ")
+    pair = {
+        "schema": PARTITION_PAIR_RECEIPT_SCHEMA,
+        "source_path": str(STRUCTURAL), "source_sha256": PYTHON_PINS[STRUCTURAL],
+        "arguments": ["--full-rescan", "--reconstruct-census",
+                      "--emit-partition-stream", "--partition-output",
+                      "<fresh-mode-specific-absolute-path>"],
+        "normal": executions[0], "optimized": executions[1],
+        "manifest_sha256": sha256(outputs[0]),
+        "stream_byte_total": ledgers[0]["stream_byte_total"],
+        "stream_sha256": ledgers[0]["stream_sha256"],
+        "normal_optimized_stdout_byte_identical": True,
+        "normal_optimized_stream_byte_identical": True,
+    }
+    exact_fields(pair, PARTITION_PAIR_RECEIPT_FIELDS,
+                 "structural partition pair receipt")
+    return {"evidence_kind": "nonpromotional-isolated-structural-partition-pair",
+            "theorem_eligible": False, "global_claim": False,
+            "pair": pair, "ledger": ledgers[0],
+            "claim_boundary": (
+                "isolated structural partition transport only; audit(full=True) remains "
+                "hard-blocked and no StageLedger/lane implication is discharged")}
+
+
+
+def run_structural_combined_with_keys() -> tuple[dict[str, Json], dict[str, list]]:
+    """Remain hard-blocked: the compact runner has no promotional full-gate path."""
+    fail("nonpromotional isolated structural partition runner is not wired to the theorem gate")
+
 
 
 def run_child(name: str, path: Path, arguments: tuple[str, ...], output_sha256: str | None,
@@ -1663,7 +2157,7 @@ def validate_transfer_dependency_adapter(result: Json, adapter_module=None) -> d
                 expected_source_pins.get(axiom["source_path"]) == axiom["source_sha256"],
                 f"transfer reviewed axiom {index} crossed its review boundary")
     require(contract["reviewed_axiom_registry_sha256"] ==
-                "da323f503ad3cc88917c79cdd4ae80af5c3c2f09070cb7285e6cdd39db224811",
+                "d9f627201b27bc8eb30a664a2e385bf5f3b2178429c2a6b6acb063f03ed09899",
             "transfer reviewed axiom registry digest changed")
     rank_types = contract["rank_type_exhaustion"]
     require(type(rank_types) is dict and

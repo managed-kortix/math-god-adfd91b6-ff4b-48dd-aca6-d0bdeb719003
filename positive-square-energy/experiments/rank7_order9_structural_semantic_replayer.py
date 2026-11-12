@@ -28,6 +28,8 @@ import itertools
 import json
 import lzma
 import math
+import os
+import stat
 import sys
 from collections import Counter
 from pathlib import Path
@@ -153,6 +155,22 @@ CHUNK_SPECS = (
      "8a5579f6b608b69e8223b6f24127e511614f9424141a12ec75198453b82c40f5"),
 )
 SCHEMA = "rank-seven-order-nine-structural-semantic-replay-v1"
+PARTITION_STREAM_SCHEMA = "rank-seven-order-nine-structural-partition-stream-v1"
+PARTITION_STREAM_HEADER = b"R7O9-STRUCTURAL-PARTITION-V1\n"
+PARTITION_STREAM_TRAILER = b"\nEND-R7O9-STRUCTURAL-PARTITION-V1\n"
+PARTITION_TAG_OWNER = ord("O")
+PARTITION_TAG_REMAINDER = ord("R")
+PARTITION_STREAM_BYTE_TOTAL = (len(PARTITION_STREAM_HEADER) + RESIDUAL_TOTAL +
+                               len(PARTITION_STREAM_TRAILER))
+PARTITION_STREAM_MANIFEST_FIELDS = {
+    "schema", "replay_schema", "mode", "source_sha256", "producer_sha256",
+    "source_engine_sha256", "owner_engine_sha256", "atom_recognizer_sha256",
+    "record_total", "stream_byte_total", "stream_sha256", "owner_orbit_total",
+    "owner_physical_total", "owner_source_index_sha256", "owner_key_sha256",
+    "remainder_orbit_total", "remainder_physical_total",
+    "remainder_source_index_sha256", "remainder_key_sha256", "replay",
+    "replay_sha256",
+}
 Json = Any
 KeySink = Callable[[str, tuple[int, int, int, tuple[int, ...], int]], None]
 
@@ -408,6 +426,192 @@ def update_key_digest(digest: Any, key: tuple[int, int, int, tuple[int, ...], in
         [source_index, global_kernel, order_kernel, list(row), orbit_size]))
 
 
+class PartitionTagFileSink:
+    """Write the exact O/R tag stream to a new private regular file.
+
+    The stream has a fixed ASCII header, exactly one byte for each canonical
+    source index in order, and a fixed ASCII trailer.  Full row keys never cross
+    this transport boundary; the parent must independently zip the tags with an
+    authenticated canonical-key source before it can use them.
+    """
+
+    def __init__(self, path: Path, label: str):
+        self.path = path
+        self.label = label
+        self.digest = hashlib.sha256()
+        self.byte_total = 0
+        self.record_total = 0
+        self.owner_orbit_total = 0
+        self.owner_physical_total = 0
+        self.owner_index_digest = hashlib.sha256()
+        self.owner_key_digest = hashlib.sha256()
+        self.remainder_orbit_total = 0
+        self.remainder_physical_total = 0
+        self.remainder_index_digest = hashlib.sha256()
+        self.remainder_key_digest = hashlib.sha256()
+        flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL
+        flags |= getattr(os, "O_NOFOLLOW", 0)
+        self.fd = os.open(path, flags, 0o600)
+        metadata = os.fstat(self.fd)
+        require(stat.S_ISREG(metadata.st_mode) and metadata.st_nlink == 1 and
+                stat.S_IMODE(metadata.st_mode) == 0o600,
+                f"{label}: sink is not a private regular file")
+        self._write(PARTITION_STREAM_HEADER)
+
+    def _write(self, raw: bytes) -> None:
+        require(type(raw) is bytes and bool(raw), f"{self.label}: invalid sink bytes")
+        view = memoryview(raw)
+        while view:
+            written = os.write(self.fd, view)
+            require(type(written) is int and written > 0,
+                    f"{self.label}: short sink write")
+            view = view[written:]
+        self.digest.update(raw)
+        self.byte_total += len(raw)
+
+    def write_partition(self, partition: str,
+                        key: tuple[int, int, int, tuple[int, ...], int]) -> None:
+        source_index, global_kernel, order_kernel, row, orbit_size = key
+        require(source_index == self.record_total and
+                type(global_kernel) is int and global_kernel >= 1 and
+                type(order_kernel) is int and order_kernel >= 1 and
+                type(row) is tuple and bool(row) and
+                all(type(value) is int and value >= 0 for value in row) and
+                type(orbit_size) is int and orbit_size >= 1,
+                f"{self.label}: malformed or nonconsecutive canonical key")
+        if partition == "owner":
+            tag = PARTITION_TAG_OWNER
+            self.owner_orbit_total += 1
+            self.owner_physical_total += orbit_size
+            update_index_digest(self.owner_index_digest, source_index)
+            update_key_digest(self.owner_key_digest, key)
+        elif partition == "remainder":
+            tag = PARTITION_TAG_REMAINDER
+            self.remainder_orbit_total += 1
+            self.remainder_physical_total += orbit_size
+            update_index_digest(self.remainder_index_digest, source_index)
+            update_key_digest(self.remainder_key_digest, key)
+        else:
+            fail(f"{self.label}: unknown key partition")
+        self._write(bytes((tag,)))
+        self.record_total += 1
+
+    def close(self) -> dict[str, Json]:
+        require(self.fd >= 0 and self.record_total == RESIDUAL_TOTAL,
+                f"{self.label}: incomplete partition stream")
+        self._write(PARTITION_STREAM_TRAILER)
+        require(self.byte_total == PARTITION_STREAM_BYTE_TOTAL,
+                f"{self.label}: partition stream framing changed")
+        os.fsync(self.fd)
+        metadata = os.fstat(self.fd)
+        require(stat.S_ISREG(metadata.st_mode) and metadata.st_nlink == 1 and
+                stat.S_IMODE(metadata.st_mode) == 0o600 and
+                metadata.st_size == self.byte_total,
+                f"{self.label}: sink file changed before close")
+        path_metadata = os.lstat(self.path)
+        require(stat.S_ISREG(path_metadata.st_mode) and path_metadata.st_nlink == 1 and
+                stat.S_IMODE(path_metadata.st_mode) == 0o600 and
+                (path_metadata.st_dev, path_metadata.st_ino) ==
+                (metadata.st_dev, metadata.st_ino),
+                f"{self.label}: sink path was replaced")
+        os.close(self.fd)
+        self.fd = -1
+        return {
+            "record_total": self.record_total,
+            "stream_byte_total": self.byte_total,
+            "stream_sha256": self.digest.hexdigest(),
+            "owner_orbit_total": self.owner_orbit_total,
+            "owner_physical_total": self.owner_physical_total,
+            "owner_source_index_sha256": self.owner_index_digest.hexdigest(),
+            "owner_key_sha256": self.owner_key_digest.hexdigest(),
+            "remainder_orbit_total": self.remainder_orbit_total,
+            "remainder_physical_total": self.remainder_physical_total,
+            "remainder_source_index_sha256": self.remainder_index_digest.hexdigest(),
+            "remainder_key_sha256": self.remainder_key_digest.hexdigest(),
+        }
+
+    def abort(self) -> None:
+        if self.fd >= 0:
+            os.close(self.fd)
+            self.fd = -1
+        try:
+            metadata = os.lstat(self.path)
+            if stat.S_ISREG(metadata.st_mode) and metadata.st_nlink == 1:
+                self.path.unlink()
+        except FileNotFoundError:
+            pass
+
+
+def validate_sink_path(raw_path: str, label: str) -> Path:
+    """Require a resolved new basename directly inside a private directory."""
+    require(type(raw_path) is str and bool(raw_path), f"{label}: output path required")
+    path = Path(raw_path)
+    require(path.is_absolute() and path == path.resolve(strict=False),
+            f"{label}: output path must be absolute and resolved")
+    parent = path.parent
+    parent_metadata = os.lstat(parent)
+    require(stat.S_ISDIR(parent_metadata.st_mode) and
+            stat.S_IMODE(parent_metadata.st_mode) == 0o700 and
+            path.name not in ("", ".", "..") and not path.exists() and
+            not path.is_symlink(),
+            f"{label}: output parent/path is not a new private sink")
+    return path
+
+
+def emit_combined_partition_stream(output_path: str) -> dict[str, Json]:
+    """Run the combined replay and emit one fixed-framing O/R tag stream."""
+    output = validate_sink_path(output_path, "partition sink")
+    sink = PartitionTagFileSink(output, "partition sink")
+    try:
+        replay = _verify(
+            replay_predicates=True, reconstruct_census=True, progress=False,
+            key_sink=sink.write_partition)
+        require(replay["combined_replay_eligible"] is True and
+                replay["complete"] is True and
+                replay["row_zip_total"] == RESIDUAL_TOTAL,
+                "combined replay did not become eligible")
+        receipt = sink.close()
+        require(receipt == {
+            "record_total": RESIDUAL_TOTAL,
+            "stream_byte_total": PARTITION_STREAM_BYTE_TOTAL,
+            "stream_sha256": receipt["stream_sha256"],
+            "owner_orbit_total": OWNER_TOTAL,
+            "owner_physical_total": OWNER_PHYSICAL_TOTAL,
+            "owner_source_index_sha256":
+                EXPECTED_SOURCE_IDENTITY["owner_source_index_sha256"],
+            "owner_key_sha256": EXPECTED_SOURCE_IDENTITY["owner_key_sha256"],
+            "remainder_orbit_total": REMAINDER_TOTAL,
+            "remainder_physical_total": REMAINDER_PHYSICAL_TOTAL,
+            "remainder_source_index_sha256":
+                EXPECTED_SOURCE_IDENTITY["remainder_source_index_sha256"],
+            "remainder_key_sha256": EXPECTED_SOURCE_IDENTITY["remainder_key_sha256"],
+        }, "partition stream ledger changed")
+        manifest = {
+            "schema": PARTITION_STREAM_SCHEMA,
+            "replay_schema": SCHEMA,
+            "mode": "fresh-census-plus-fresh-full-predicate-replay",
+            "source_sha256": PINS[KERNEL_FIXTURE],
+            "producer_sha256": PINS[CENSUS_PRODUCER],
+            "source_engine_sha256": PINS[SOURCE_ENGINE],
+            "owner_engine_sha256": PINS[OWNER_ENGINE],
+            "atom_recognizer_sha256": PINS[ATOM_RECOGNIZER],
+            **receipt,
+            "replay": replay,
+            "replay_sha256": sha256(canonical_bytes(replay)),
+        }
+        exact_fields(manifest, PARTITION_STREAM_MANIFEST_FIELDS,
+                     "partition stream manifest")
+        return manifest
+    except BaseException:
+        sink.abort()
+        try:
+            output.unlink()
+        except FileNotFoundError:
+            pass
+        raise
+
+
+
 def automorphism_actions(edges: tuple[tuple[int, int, int], ...]) -> tuple[tuple[int, ...], ...]:
     """Derive exact sparse-edge actions from weighted-graph automorphisms.
 
@@ -534,6 +738,254 @@ def record_census_reconstruction(ledger: dict[str, Json], regenerated: Json,
     for key in CENSUS_TOTAL_FIELDS:
         ledger["totals"][key] += regenerated[key]
     ledger["raw_chunk_sha256"].append(sha256(raw))
+
+
+class StdlibCensusProducer:
+    """Pinned order-nine census producer implemented with Python's stdlib only.
+
+    This mirrors the pinned vectorized producer's exact integer predicates but
+    uses bounded batches of mixed-radix codes.  It exists specifically for the
+    isolated ``-I -S`` child, where optional NumPy/networkx are unavailable.
+    """
+
+    CHUNK_SCHEMA = "rank-seven-orders9-12-exact-residual-census-chunk-v1"
+    MANIFEST_SCHEMA = "rank-seven-orders9-12-exact-residual-census-manifest-v1"
+    ORDER_KERNEL_TOTALS = {ORDER: KERNEL_TOTAL}
+    SOURCE_SHA256 = PINS[KERNEL_FIXTURE]
+    RANK = RANK
+    BUDGET_SCALED = 180
+
+    _COLOR_CACHE: dict[tuple[int, int], tuple[tuple[int, ...], ...]] = {}
+    _ORDER_ITEMS: tuple[tuple[int, int, int,
+                              tuple[tuple[int, int, int], ...]], ...] | None = None
+
+    @classmethod
+    def reset_cache(cls) -> None:
+        cls._ORDER_ITEMS = None
+
+    @classmethod
+    def restricted_colorings(cls, order: int, limit: int = 4
+                             ) -> tuple[tuple[int, ...], ...]:
+        key = (order, limit)
+        cached = cls._COLOR_CACHE.get(key)
+        if cached is not None:
+            return cached
+        require(type(order) is int and order >= 1 and type(limit) is int and limit >= 1,
+                "invalid stdlib restricted-coloring request")
+        colors = [0] * order
+        rows = []
+
+        def visit(position: int, maximum: int) -> None:
+            if position == order:
+                rows.append(tuple(colors))
+                return
+            for color in range(min(maximum + 1, limit - 1) + 1):
+                colors[position] = color
+                visit(position + 1, max(maximum, color))
+
+        visit(1, 0)
+        result = tuple(rows)
+        cls._COLOR_CACHE[key] = result
+        return result
+
+    @classmethod
+    def coarse_sieve(cls, edges: tuple[tuple[int, int, int], ...]) -> list[int]:
+        support_count = len(edges)
+        infinity = 10 ** 9
+        minimum = [infinity] * (1 << support_count)
+        for colors in cls.restricted_colorings(ORDER):
+            crossing = 0
+            cost = 0
+            for index, (u, v, multiplicity) in enumerate(edges):
+                if colors[u] != colors[v]:
+                    crossing |= 1 << index
+                    cost += 18 * multiplicity
+            if cost < minimum[crossing]:
+                minimum[crossing] = cost
+        for bit in range(support_count):
+            flag = 1 << bit
+            for mask in range(1 << support_count):
+                if not mask & flag and minimum[mask | flag] < minimum[mask]:
+                    minimum[mask] = minimum[mask | flag]
+        return minimum
+
+    @classmethod
+    def residual_orbits(cls, edges: tuple[tuple[int, int, int], ...],
+                        actions: tuple[tuple[int, ...], ...], minimum: list[int],
+                        batch_size: int):
+        # Preserve the vector producer's mixed-radix code order.  The batch
+        # argument remains part of its pinned API; an order-nine kernel has at
+        # most 32,768 physical rows, so this fallback keeps only one row and
+        # its finite automorphism image set live at a time.
+        require(type(batch_size) is int and batch_size >= 1,
+                "invalid stdlib census batch size")
+        radices = tuple(multiplicity + 1 for _, _, multiplicity in edges)
+        strides = []
+        physical_rows = 1
+        for radix in radices:
+            strides.append(physical_rows)
+            physical_rows *= radix
+        residuals = []
+        residual_physical = 0
+        orbit_mass = 0
+        for code in range(physical_rows):
+            row = tuple((code // stride) % radix
+                        for stride, radix in zip(strides, radices, strict=True))
+            support = 0
+            odd_sum = 0
+            for index, value in enumerate(row):
+                if value:
+                    support |= 1 << index
+                    odd_sum += value
+            threshold = cls.BUDGET_SCALED - 10 * support.bit_count() + 13 * odd_sum
+            if minimum[support] <= threshold:
+                continue
+            residual_physical += 1
+            image_codes = tuple(
+                sum(row[image] * strides[index]
+                    for index, image in enumerate(action))
+                for action in actions
+            )
+            if code != min(image_codes):
+                continue
+            stabilizer = sum(image == code for image in image_codes)
+            orbit_size = len(set(image_codes))
+            require(stabilizer >= 1 and len(actions) % stabilizer == 0 and
+                    orbit_size == len(actions) // stabilizer,
+                    "stdlib producer orbit-stabilizer identity failed")
+            residuals.append((list(row), orbit_size))
+            orbit_mass += orbit_size
+        require(orbit_mass == residual_physical,
+                "stdlib producer residual orbits do not partition residual rows")
+        return physical_rows, len(residuals), residual_physical, residuals
+
+    @classmethod
+    def generate_chunk(cls, order: int, start: int, stop: int,
+                       batch_size: int, progress: bool = False) -> dict[str, Json]:
+        require(order == ORDER and type(start) is int and type(stop) is int and
+                0 <= start < stop <= KERNEL_TOTAL and type(batch_size) is int and
+                batch_size >= 1 and progress is False,
+                "invalid stdlib census producer request")
+        engine = census_source_engine_adapter()
+        if cls._ORDER_ITEMS is None:
+            cls._ORDER_ITEMS = tuple(
+                item for item in engine.source_kernels() if item[2] == order)
+        items = cls._ORDER_ITEMS
+        require(len(items) == KERNEL_TOTAL, "stdlib producer source count changed")
+        kernels = []
+        residual_records = []
+        residual_digest = hashlib.sha256()
+        for global_index, local_index, item_order, edges in items[start:stop]:
+            actions = engine.automorphism_actions(item_order, edges)
+            minimum = cls.coarse_sieve(edges)
+            physical, residual_count, residual_physical, residuals = cls.residual_orbits(
+                edges, actions, minimum, batch_size)
+            parity_orbits = burnside_orbits(edges, actions)
+            ledger = {
+                "global_kernel": global_index,
+                "order_kernel": local_index,
+                "edges": [list(edge) for edge in edges],
+                "support_edges": len(edges),
+                "automorphisms": len(actions),
+                "physical_rows": physical,
+                "parity_orbits": parity_orbits,
+                "coarse_certified_orbits": parity_orbits - residual_count,
+                "coarse_residual_orbits": residual_count,
+                "coarse_residual_physical_rows": residual_physical,
+            }
+            kernels.append(ledger)
+            for row, orbit_size in residuals:
+                record = {
+                    "global_kernel": global_index,
+                    "order_kernel": local_index,
+                    "row": row,
+                    "orbit_size": orbit_size,
+                }
+                residual_digest.update(canonical_bytes(record))
+                residual_records.append(record)
+        return {
+            "schema": cls.CHUNK_SCHEMA,
+            "status": "complete-exact-residual-orbit-chunk",
+            "full_theorem": False,
+            "rank": RANK,
+            "order": order,
+            "budget": [RANK - 1, 1],
+            "path_count": PATH_COUNT,
+            "frontiers_per_residual": FRONTIERS,
+            "kernel_range": [start, stop],
+            "source_sha256": cls.SOURCE_SHA256,
+            "kernel_total": len(kernels),
+            "physical_row_total": sum(row["physical_rows"] for row in kernels),
+            "parity_orbit_total": sum(row["parity_orbits"] for row in kernels),
+            "coarse_certified_total": sum(row["coarse_certified_orbits"] for row in kernels),
+            "coarse_residual_total": len(residual_records),
+            "coarse_residual_physical_total": sum(
+                row["coarse_residual_physical_rows"] for row in kernels),
+            "frontier_target_total": FRONTIERS * len(residual_records),
+            "residual_stream_sha256": residual_digest.hexdigest(),
+            "kernels": kernels,
+            "residuals": residual_records,
+        }
+
+
+def validate_stdlib_producer_equivalence(vector_producer: Any,
+                                           ranges: tuple[tuple[int, int], ...]
+                                           ) -> dict[str, Json]:
+    """Compare bounded stdlib chunks byte-for-byte with the pinned vector producer.
+
+    This is a diagnostic/preflight helper for a site-enabled test process.  The
+    isolated ``-I -S`` production child cannot import NumPy and never calls it.
+    """
+    require(type(ranges) is tuple and bool(ranges),
+            "stdlib/vector equivalence ranges must be a nonempty tuple")
+    require(sha256(CENSUS_PRODUCER.read_bytes()) == PINS[CENSUS_PRODUCER],
+            "vector census producer changed before equivalence probe")
+    adapter = census_source_engine_adapter()
+    original_load_engine = vector_producer.load_engine
+    vector_producer.load_engine = lambda: adapter
+    receipts = []
+    try:
+        for position, interval in enumerate(ranges):
+            require(type(interval) is tuple and len(interval) == 2 and
+                    all(type(value) is int for value in interval),
+                    f"stdlib/vector equivalence range {position} malformed")
+            start, stop = interval
+            require(0 <= start < stop <= KERNEL_TOTAL and stop - start <= 16,
+                    f"stdlib/vector equivalence range {position} is not bounded")
+            scalar = StdlibCensusProducer.generate_chunk(
+                ORDER, start, stop, 257, progress=False)
+            vector = vector_producer.generate_chunk(
+                ORDER, start, stop, 257, progress=False)
+            scalar_raw = canonical_bytes(scalar)
+            vector_raw = canonical_bytes(vector)
+            require(scalar_raw == vector_raw,
+                    f"stdlib/vector census producer differs on [{start},{stop})")
+            receipts.append({
+                "kernel_range": [start, stop],
+                "kernel_total": stop - start,
+                "physical_row_total": scalar["physical_row_total"],
+                "residual_orbit_total": scalar["coarse_residual_total"],
+                "canonical_sha256": sha256(scalar_raw),
+                "byte_identical": True,
+            })
+    finally:
+        vector_producer.load_engine = original_load_engine
+    return {
+        "schema": "rank-seven-order-nine-stdlib-vector-equivalence-v1",
+        "bounded_kernel_total": sum(stop - start for start, stop in ranges),
+        "ranges": receipts,
+        "byte_identical": True,
+        "claim_boundary": "bounded preflight only; not full-census or theorem evidence",
+    }
+
+
+def load_census_producer() -> Any:
+    """Load the pinned producer, falling back only on absent optional NumPy."""
+    try:
+        return load_module(CENSUS_PRODUCER, "rank7_order9_fresh_census_producer")
+    except ModuleNotFoundError as error:
+        require(error.name == "numpy", "unexpected missing census producer dependency")
+        return StdlibCensusProducer
 
 
 def census_source_engine_adapter() -> Any:
@@ -802,7 +1254,7 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
     producer = None
     census_reconstruction = empty_census_reconstruction_ledger()
     if reconstruct_census:
-        producer = load_module(CENSUS_PRODUCER, "rank7_order9_fresh_census_producer")
+        producer = load_census_producer()
         census_reconstruction["producer_loads"] += 1
         require(producer.CHUNK_SCHEMA ==
                 "rank-seven-orders9-12-exact-residual-census-chunk-v1" and
@@ -812,25 +1264,23 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
                 producer.SOURCE_SHA256 == PINS[KERNEL_FIXTURE] and
                 producer.RANK == RANK and producer.BUDGET_SCALED == 180,
                 "census producer semantics changed")
-        source_adapter = census_source_engine_adapter()
-        original_load_engine = producer.load_engine
+        if producer is not StdlibCensusProducer:
+            source_adapter = census_source_engine_adapter()
+            original_load_engine = producer.load_engine
 
-        def load_pinned_source_engine() -> Any:
-            # Execute the producer's real pinned loader when its dependency is
-            # available; the stdlib adapter is only a deterministic fallback
-            # for installations without optional networkx.  In either case the
-            # producer itself still performs every generate_chunk call.
-            try:
-                engine = original_load_engine()
-            except ModuleNotFoundError as error:
-                require(error.name == "networkx",
-                        "unexpected missing census source dependency")
-                return source_adapter
-            require(engine.SOURCE_SHA256 == PINS[KERNEL_FIXTURE],
-                    "census source engine fixture pin changed")
-            return engine
+            def load_pinned_source_engine() -> Any:
+                # The vectorized producer's source imports optional networkx.
+                try:
+                    engine = original_load_engine()
+                except ModuleNotFoundError as error:
+                    require(error.name == "networkx",
+                            "unexpected missing census source dependency")
+                    return source_adapter
+                require(engine.SOURCE_SHA256 == PINS[KERNEL_FIXTURE],
+                        "census source engine fixture pin changed")
+                return engine
 
-        producer.load_engine = load_pinned_source_engine
+            producer.load_engine = load_pinned_source_engine
 
     owner = atom = None
     if replay_predicates:
@@ -1478,11 +1928,21 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--reconstruct-census", action="store_true",
                         help="freshly regenerate and compare every exact census chunk")
     parser.add_argument("--progress", action="store_true")
+    parser.add_argument("--emit-partition-stream", action="store_true",
+                        help="run the combined replay and emit a fixed-framing O/R stream")
+    parser.add_argument("--partition-output")
     args = parser.parse_args(argv)
     try:
-        result = _verify(replay_predicates=args.full_rescan,
-                         reconstruct_census=args.reconstruct_census,
-                         progress=args.progress)
+        if args.emit_partition_stream:
+            require(args.full_rescan and args.reconstruct_census and not args.progress,
+                    "partition stream requires --full-rescan --reconstruct-census without progress")
+            result = emit_combined_partition_stream(args.partition_output)
+        else:
+            require(args.partition_output is None,
+                    "partition output path requires --emit-partition-stream")
+            result = _verify(replay_predicates=args.full_rescan,
+                             reconstruct_census=args.reconstruct_census,
+                             progress=args.progress)
         sys.stdout.buffer.write(canonical_bytes(result))
         return 0
     except (KeyError, OSError, RuntimeError, TypeError, ValueError,
