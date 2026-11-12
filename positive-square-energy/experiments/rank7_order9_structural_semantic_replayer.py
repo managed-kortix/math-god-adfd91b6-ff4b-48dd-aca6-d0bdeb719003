@@ -6,6 +6,8 @@ input and zips all 2,835,895 census rows to the eight classification streams and
 their ordered remainder complements.  It validates row identity, order,
 counts, physical mass, lanes, stored details, and all global digests.  It does
 *not* call an ownership predicate and therefore is not a semantic owner replay.
+``reconstruct_census`` additionally invokes the pinned exact producer once per
+chunk and requires each fresh canonical payload to equal the stored census.
 
 ``replay_all_predicates`` performs that complete zip while freshly running the
 precedence-ordered exact recognizer on every row.  Wherever the first three
@@ -214,6 +216,15 @@ EXPECTED_PREDICATE_CALLS = {
     "generalized-ray": EXPECTED_OWNER_COUNTS["generalized-ray"] + REMAINDER_TOTAL,
 }
 EXPECTED_PREDICATE_CALL_TOTAL = sum(EXPECTED_PREDICATE_CALLS.values())
+CENSUS_TOTAL_FIELDS = (
+    "kernel_total",
+    "physical_row_total",
+    "parity_orbit_total",
+    "coarse_certified_total",
+    "coarse_residual_total",
+    "coarse_residual_physical_total",
+    "frontier_target_total",
+)
 
 # Canonical identity streams are part of the replay contract, not dynamically
 # trusted receipts.  Their encodings are documented in the returned result.
@@ -480,6 +491,157 @@ def recompute_orbit(row: tuple[int, ...], edges: tuple[tuple[int, int, int], ...
     return min(image_codes), len(image_codes)
 
 
+def empty_census_reconstruction_ledger() -> dict[str, Json]:
+    """Create an execution ledger; no requested count is pre-populated."""
+    return {
+        "producer_loads": 0,
+        "generate_chunk_calls": 0,
+        "chunks_reconstructed": 0,
+        "kernels_reconstructed": 0,
+        "residual_rows_reconstructed": 0,
+        "totals": {key: 0 for key in CENSUS_TOTAL_FIELDS},
+        "raw_chunk_sha256": [],
+    }
+
+
+def record_census_reconstruction(ledger: dict[str, Json], regenerated: Json,
+                                 stored: dict[str, Json], expected_raw_sha256: str,
+                                 label: str) -> None:
+    """Validate one actual producer return before recording any success counters."""
+    require(type(regenerated) is dict, f"{label}: producer did not return an object")
+    raw = canonical_bytes(regenerated)
+    require(sha256(raw) == expected_raw_sha256,
+            f"{label}: reconstructed canonical raw digest differs")
+    require(raw == canonical_bytes(stored),
+            f"{label}: fresh census reconstruction differs")
+    exact_fields(regenerated, CENSUS_CHUNK_FIELDS, f"{label} regenerated census")
+    kernels = regenerated["kernels"]
+    residuals = regenerated["residuals"]
+    require(type(kernels) is list and type(residuals) is list,
+            f"{label}: regenerated arrays malformed")
+    for key in CENSUS_TOTAL_FIELDS:
+        exact_int(regenerated[key], f"{label} regenerated.{key}", minimum=0)
+    require(regenerated["kernel_total"] == len(kernels) and
+            regenerated["coarse_residual_total"] == len(residuals),
+            f"{label}: regenerated materialization counts differ")
+
+    # These increments occur only after generate_chunk returned exact canonical
+    # content.  They are therefore execution-derived, never request-derived.
+    ledger["generate_chunk_calls"] += 1
+    ledger["chunks_reconstructed"] += 1
+    ledger["kernels_reconstructed"] += len(kernels)
+    ledger["residual_rows_reconstructed"] += len(residuals)
+    for key in CENSUS_TOTAL_FIELDS:
+        ledger["totals"][key] += regenerated[key]
+    ledger["raw_chunk_sha256"].append(sha256(raw))
+
+
+def census_source_engine_adapter() -> Any:
+    """Return the pinned producer interface with a stdlib exact source engine.
+
+    The historical pinned source module imports optional ``networkx``.  The
+    adapter instead reads the already authenticated fixture and supplies the
+    only two source-engine operations used by ``generate_chunk``.  Its
+    automorphism implementation is this replayer's independently tested exact
+    weighted-multigraph enumerator.
+    """
+    class Adapter:
+        SOURCE_SHA256 = PINS[KERNEL_FIXTURE]
+
+        @staticmethod
+        def source_kernels() -> tuple[tuple[int, int, int,
+                                            tuple[tuple[int, int, int], ...]], ...]:
+            fixture = strict_json(read_pinned(KERNEL_FIXTURE, PINS[KERNEL_FIXTURE]),
+                                  KERNEL_FIXTURE.name)
+            local = {order: 0 for order in range(2, 13)}
+            records = []
+            for global_index, item in enumerate(fixture["kernels"], 1):
+                order = exact_int(item["n"], "source adapter kernel order", minimum=2)
+                local[order] += 1
+                dense = item["code"]
+                require(type(dense) is list and
+                        len(dense) == order * (order - 1) // 2 and
+                        all(type(value) is int and value >= 0 for value in dense),
+                        "source adapter dense kernel malformed")
+                edges = []
+                cursor = 0
+                for u in range(order):
+                    for v in range(u + 1, order):
+                        multiplicity = dense[cursor]
+                        cursor += 1
+                        if multiplicity:
+                            edges.append((u, v, multiplicity))
+                records.append((global_index, local[order], order, tuple(edges)))
+            require(local[ORDER] == KERNEL_TOTAL, "source adapter order-nine count changed")
+            return tuple(records)
+
+        @staticmethod
+        def automorphism_actions(order: int, edges: tuple[tuple[int, int, int], ...]
+                                 ) -> tuple[tuple[int, ...], ...]:
+            require(type(order) is int and order == ORDER,
+                    "source adapter called outside order nine")
+            return automorphism_actions(edges)
+
+    return Adapter
+
+
+def census_reconstruction_result(requested: bool, complete: bool,
+                                 ledger: dict[str, Json],
+                                 census_manifest: dict[str, Json]) -> dict[str, Json]:
+    """Return and enforce the execution-derived fresh-census contract."""
+    expected_hashes = [pin[0] for pin in CHUNK_SPECS]
+    expected_totals = {key: census_manifest[key] for key in CENSUS_TOTAL_FIELDS}
+    eligible = bool(
+        requested and complete and
+        ledger["producer_loads"] == 1 and
+        ledger["generate_chunk_calls"] == len(CHUNK_SPECS) and
+        ledger["chunks_reconstructed"] == len(CHUNK_SPECS) and
+        ledger["kernels_reconstructed"] == KERNEL_TOTAL and
+        ledger["residual_rows_reconstructed"] == RESIDUAL_TOTAL and
+        ledger["totals"] == expected_totals and
+        ledger["raw_chunk_sha256"] == expected_hashes
+    )
+    if requested and complete:
+        require(eligible, "complete census reconstruction execution ledger differs")
+    if not requested:
+        require(ledger == empty_census_reconstruction_ledger(),
+                "census reconstruction counters changed without execution")
+    return {
+        "census_reconstruction": requested,
+        "census_reconstruction_requested": requested,
+        "census_reconstruction_eligible": eligible,
+        "census_producer_loads": ledger["producer_loads"],
+        "census_generate_chunk_calls": ledger["generate_chunk_calls"],
+        "census_reconstruction_generate_calls": ledger["generate_chunk_calls"],
+        "census_chunks_reconstructed": ledger["chunks_reconstructed"],
+        "census_reconstruction_chunks": ledger["chunks_reconstructed"],
+        "census_kernels_reconstructed": ledger["kernels_reconstructed"],
+        "census_reconstruction_kernel_total": ledger["kernels_reconstructed"],
+        "census_residual_rows_reconstructed": ledger["residual_rows_reconstructed"],
+        "census_reconstruction_residual_orbit_total":
+            ledger["residual_rows_reconstructed"],
+        "census_physical_row_total_reconstructed": ledger["totals"]["physical_row_total"],
+        "census_parity_orbit_total_reconstructed": ledger["totals"]["parity_orbit_total"],
+        "census_coarse_certified_total_reconstructed":
+            ledger["totals"]["coarse_certified_total"],
+        "census_coarse_residual_total_reconstructed":
+            ledger["totals"]["coarse_residual_total"],
+        "census_coarse_residual_physical_total_reconstructed":
+            ledger["totals"]["coarse_residual_physical_total"],
+        "census_reconstruction_residual_physical_total":
+            ledger["totals"]["coarse_residual_physical_total"],
+        "census_frontier_target_total_reconstructed":
+            ledger["totals"]["frontier_target_total"],
+        "census_reconstructed_raw_chunk_sha256": ledger["raw_chunk_sha256"],
+        "census_reconstructed_raw_sha256": ledger["raw_chunk_sha256"],
+        "census_producer_sha256": PINS[CENSUS_PRODUCER],
+        "census_source_engine_sha256": PINS[SOURCE_ENGINE],
+        "census_fixture_sha256": PINS[KERNEL_FIXTURE],
+        "census_source_adapter":
+            "pinned fixture order plus local exact weighted-automorphism actions",
+    }
+
+
 def expected_detail(owner: Any, atom: Any, lane: str, edges: tuple[tuple[int, int, int], ...],
                     row: tuple[int, ...]) -> tuple[Json, bool]:
     """Replay one stored lane predicate and return canonical detail plus acceptance."""
@@ -596,7 +758,7 @@ def _load_common() -> tuple[dict[str, Json], dict[str, Json]]:
 
 def _verify(*, replay_predicates: bool, progress: bool = False,
             chunk_limit: int | None = None, key_sink: KeySink | None = None,
-            reconstruct_census: bool = True) -> dict[str, Json]:
+            reconstruct_census: bool = False) -> dict[str, Json]:
     census_manifest, owner_manifest = _load_common()
     census_records = census_manifest.get("chunks")
     owner_records = owner_manifest.get("chunks")
@@ -638,8 +800,10 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
             "kernel fixture order-nine slice changed")
 
     producer = None
+    census_reconstruction = empty_census_reconstruction_ledger()
     if reconstruct_census:
         producer = load_module(CENSUS_PRODUCER, "rank7_order9_fresh_census_producer")
+        census_reconstruction["producer_loads"] += 1
         require(producer.CHUNK_SCHEMA ==
                 "rank-seven-orders9-12-exact-residual-census-chunk-v1" and
                 producer.MANIFEST_SCHEMA ==
@@ -648,7 +812,25 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
                 producer.SOURCE_SHA256 == PINS[KERNEL_FIXTURE] and
                 producer.RANK == RANK and producer.BUDGET_SCALED == 180,
                 "census producer semantics changed")
-        producer.SOURCE_ENGINE = SOURCE_ENGINE
+        source_adapter = census_source_engine_adapter()
+        original_load_engine = producer.load_engine
+
+        def load_pinned_source_engine() -> Any:
+            # Execute the producer's real pinned loader when its dependency is
+            # available; the stdlib adapter is only a deterministic fallback
+            # for installations without optional networkx.  In either case the
+            # producer itself still performs every generate_chunk call.
+            try:
+                engine = original_load_engine()
+            except ModuleNotFoundError as error:
+                require(error.name == "networkx",
+                        "unexpected missing census source dependency")
+                return source_adapter
+            require(engine.SOURCE_SHA256 == PINS[KERNEL_FIXTURE],
+                    "census source engine fixture pin changed")
+            return engine
+
+        producer.load_engine = load_pinned_source_engine
 
     owner = atom = None
     if replay_predicates:
@@ -814,8 +996,8 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
                 f"chunk {chunk_index}: base partition identity changed")
         if reconstruct_census:
             regenerated = producer.generate_chunk(ORDER, start, stop, 262144, progress=False)
-            require(canonical_bytes(regenerated) == canonical_bytes(census),
-                    f"chunk {chunk_index}: fresh census reconstruction differs")
+            record_census_reconstruction(
+                census_reconstruction, regenerated, census, pin[0], f"chunk {chunk_index}")
 
         expected_fixture_kernels = {}
         for local_offset, (global_kernel, fixture_item) in enumerate(
@@ -1144,7 +1326,42 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
                     sum(predicate_calls.values()) == EXPECTED_PREDICATE_CALL_TOTAL,
                     "fresh predicate call ledger differs")
 
-    mode = "fresh-full-predicate-replay" if replay_predicates else "authenticated-stored-stream-zip"
+    reconstruction_result = census_reconstruction_result(
+        reconstruct_census, complete, census_reconstruction, census_manifest)
+    predicate_eligible = bool(
+        replay_predicates and complete and source_cursor == RESIDUAL_TOTAL and
+        dict(predicate_calls) == EXPECTED_PREDICATE_CALLS and
+        dict(predicate_passes) == EXPECTED_OWNER_COUNTS
+    )
+    require(not replay_predicates or not complete or predicate_eligible,
+            "complete predicate execution ledger is ineligible")
+    combined_eligible = bool(
+        complete and predicate_eligible and
+        reconstruction_result["census_reconstruction_eligible"]
+    )
+    mode = {
+        (False, False): "authenticated-stored-stream-zip",
+        (False, True): "fresh-census-plus-authenticated-stored-stream-zip",
+        (True, False): "authenticated-census-plus-fresh-full-predicate-replay",
+        (True, True): "fresh-census-plus-fresh-full-predicate-replay",
+    }[(replay_predicates, reconstruct_census)]
+    trust_boundary = {
+        (False, False):
+            "stored census/classification/remainder rows are authenticated and zipped; "
+            "census generation and ownership predicates are not replayed",
+        (False, True):
+            "the exact census is freshly reconstructed and matched chunk-for-chunk; stored "
+            "classification/remainder rows are authenticated and zipped; ownership predicates "
+            "are not replayed",
+        (True, False):
+            "stored census/classification/remainder rows are authenticated and zipped; every "
+            "orbit, Burnside ledger, and precedence-ordered exact ownership predicate is freshly "
+            "replayed; census generation is not replayed",
+        (True, True):
+            "the exact census is freshly reconstructed and matched chunk-for-chunk, then every "
+            "orbit, Burnside ledger, and precedence-ordered exact ownership predicate is freshly "
+            "replayed; stored generalized detail is not a witness",
+    }[(replay_predicates, reconstruct_census)]
     return {
         "schema": SCHEMA,
         "status": "passed",
@@ -1153,13 +1370,9 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
         "read_only": True,
         "writes": 0,
         "complete": complete,
-        "trust_boundary": (
-            "all stored census/classification/remainder rows are authenticated and zipped; "
-            "ownership predicates are not called in this mode"
-            if not replay_predicates else
-            "all stored rows are authenticated and zipped, then every precedence-ordered exact "
-            "ownership predicate is freshly replayed; stored generalized detail is not a witness"
-        ),
+        "trust_boundary": trust_boundary,
+        **reconstruction_result,
+        "combined_replay_eligible": combined_eligible,
         "base_identity": {
             "kernel_total": (KERNEL_TOTAL if complete else independent_totals["kernel_total"]),
             "physical_row_total": independent_totals["physical_row_total"],
@@ -1209,7 +1422,7 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
             "partition_validated": source_cursor == sum(counts.values()) + remainder_count,
         },
         "row_recognition_calls": source_cursor if replay_predicates else 0,
-        "predicate_replay_eligible": bool(replay_predicates and complete),
+        "predicate_replay_eligible": predicate_eligible,
         "predicate_call_total": sum(predicate_calls.values()),
         "predicate_pass_total": sum(predicate_passes.values()),
         "predicate_unowned_rows": remainder_count if replay_predicates else 0,
@@ -1226,39 +1439,50 @@ def _verify(*, replay_predicates: bool, progress: bool = False,
 
 def verify_stored_semantic_zip(*, progress: bool = False,
                                key_sink: KeySink | None = None,
-                               _chunk_limit: int | None = None,
-                               _reconstruct_census: bool = False) -> dict[str, Json]:
+                               _chunk_limit: int | None = None) -> dict[str, Json]:
     """Authenticate and zip every stored row without claiming predicate replay.
 
     ``key_sink`` is called in canonical source order as ``(partition, key)``,
     where partition is ``"owner"`` or ``"remainder"`` and key is
     ``(source_index, global_kernel, order_kernel, row_tuple, orbit_size)``.
     The callback is observational only; this module never publishes lane state.
-    The private ``_reconstruct_census`` switch is test/forensics-only; it is not
-    part of the quick zip's semantic claim.
     """
     return _verify(replay_predicates=False, progress=progress, chunk_limit=_chunk_limit,
-                   key_sink=key_sink, reconstruct_census=_reconstruct_census)
+                   key_sink=key_sink, reconstruct_census=False)
+
+
+def reconstruct_census(*, replay_predicates: bool = False, progress: bool = False,
+                       key_sink: KeySink | None = None,
+                       _chunk_limit: int | None = None) -> dict[str, Json]:
+    """Freshly reconstruct the exact census, optionally replaying all predicates."""
+    require(type(replay_predicates) is bool, "replay_predicates must be an exact boolean")
+    return _verify(replay_predicates=replay_predicates, progress=progress,
+                   chunk_limit=_chunk_limit, key_sink=key_sink, reconstruct_census=True)
 
 
 def replay_all_predicates(*, progress: bool = False,
                           key_sink: KeySink | None = None,
-                          _chunk_limit: int | None = None,
-                          _reconstruct_census: bool = False) -> dict[str, Json]:
-    """Run the full read-only semantic replay, including fresh ray searches."""
+                          reconstruct_fresh_census: bool = False,
+                          _chunk_limit: int | None = None) -> dict[str, Json]:
+    """Run fresh predicates over an authenticated or freshly reconstructed census."""
+    require(type(reconstruct_fresh_census) is bool,
+            "reconstruct_fresh_census must be an exact boolean")
     return _verify(replay_predicates=True, progress=progress, chunk_limit=_chunk_limit,
-                   key_sink=key_sink, reconstruct_census=_reconstruct_census)
+                   key_sink=key_sink, reconstruct_census=reconstruct_fresh_census)
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--full-rescan", action="store_true",
                         help="freshly rerun every precedence-ordered ownership predicate")
+    parser.add_argument("--reconstruct-census", action="store_true",
+                        help="freshly regenerate and compare every exact census chunk")
     parser.add_argument("--progress", action="store_true")
     args = parser.parse_args(argv)
     try:
-        result = (replay_all_predicates(progress=args.progress) if args.full_rescan else
-                  verify_stored_semantic_zip(progress=args.progress))
+        result = _verify(replay_predicates=args.full_rescan,
+                         reconstruct_census=args.reconstruct_census,
+                         progress=args.progress)
         sys.stdout.buffer.write(canonical_bytes(result))
         return 0
     except (KeyError, OSError, RuntimeError, TypeError, ValueError,
