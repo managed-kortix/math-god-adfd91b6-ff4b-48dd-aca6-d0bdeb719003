@@ -253,6 +253,63 @@ class StageLedgerHostileTest(unittest.TestCase):
             implications, dependencies, global_analytic_child_claim=0),
             "invalid exact boolean")
 
+    def test_mutable_private_receipts_and_stage_rows_are_recomputed(self):
+        def prepared():
+            ledger = self.complete_ledger()
+            implications, dependencies = self.authenticated_registries(ledger)
+            ledger.finite_key_accounting()  # materialize every lazy receipt
+            return ledger, implications, dependencies
+
+        cases = []
+
+        ledger, implications, dependencies = prepared()
+        forged = "0" * 64
+        ledger._stages["structural"].boundary["owner_key_sha256"] = forged
+        ledger._target_receipts["structural"]["row_key_sha256"] = forged
+        implications["structural"]["row_key_sha256"] = forged
+        cases.append(("matching forged row digests", ledger, implications,
+                      dependencies))
+
+        ledger, implications, dependencies = prepared()
+        ledger._stages["structural"].boundary["exact_disjoint_union"] = False
+        cases.append(("false boundary semantic bit", ledger, implications,
+                      dependencies))
+
+        ledger, implications, dependencies = prepared()
+        ledger._target_receipts["structural"][
+            "per_row_cardinality_validated"] = False
+        cases.append(("false target semantic bit", ledger, implications,
+                      dependencies))
+
+        ledger, implications, dependencies = prepared()
+        ledger._universe_target_receipt["target_key_sha256"] = forged
+        cases.append(("forged universe target digest", ledger, implications,
+                      dependencies))
+
+        ledger, implications, dependencies = prepared()
+        state = ledger._stages["structural"]
+        ledger._stages["structural"] = self.m._StageState(
+            state.boundary, (), ())
+        cases.append(("replaced owner and remainder rows", ledger, implications,
+                      dependencies))
+
+        ledger, implications, dependencies = prepared()
+        wrong_chain = self.m.StageLedger(self.rows)
+        wrong_chain.advance("sos", (self.rows[0],), self.rows[1:])
+        ledger._stages["sos"] = wrong_chain._stages["sos"]
+        cases.append(("later stage no longer consumes prior remainder", ledger,
+                      implications, dependencies))
+
+        ledger, implications, dependencies = prepared()
+        ledger._current = (self.rows[3],)
+        cases.append(("current remainder no longer closes stage chain", ledger,
+                      implications, dependencies))
+
+        for label, ledger, implications, dependencies in cases:
+            with self.subTest(label=label):
+                self.assert_rejected(lambda: ledger.derive_bounded_premise(
+                    implications, dependencies))
+
     def test_failed_expected_pin_does_not_advance_state(self):
         ledger = self.m.StageLedger(self.rows)
         baseline = self.m.StageLedger(self.rows).advance(
