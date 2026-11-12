@@ -69,7 +69,8 @@ SOS_SOURCE_TOTAL = 385829
 SOS_REMAINDER_TOTAL = 272520
 DOMINANT_TOTAL = 1128
 DOMINANT_PHYSICAL = 1173
-UPSTREAM_OWNER_PHYSICAL = sum(SOS_PHYSICAL_COUNTS.values())
+SOS_OWNER_PHYSICAL = sum(SOS_PHYSICAL_COUNTS.values())
+UPSTREAM_OWNER_PHYSICAL = SOS_OWNER_PHYSICAL + DOMINANT_PHYSICAL
 DOMINANT_TARGET = (
     (2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1), (3, 3, 6), 4, 1,
 )
@@ -670,6 +671,7 @@ def replay():
      dominant_owner_key_sha256) = replay_dominant(kernels, sos_report, after_sos)
     result = {
         "arithmetic": "fractions.Fraction",
+        "combined_sos_dominant_physical": UPSTREAM_OWNER_PHYSICAL,
         "dominant_family": {
             "owner_key_sha256": dominant_owner_key_sha256,
             "owner_orbits": len(dominant_owners),
@@ -684,12 +686,12 @@ def replay():
             "exclusive_owner_physical": dict(sorted(physical.items())),
             "owner_key_sha256": sos_owner_key_sha256,
             "owner_orbits": len(sos_owners),
-            "owner_physical": sum(physical.values()),
+            "owner_physical": SOS_OWNER_PHYSICAL,
             "owner_targets": len(sos_owners) * TARGETS_PER_ROW,
             "structural_remainder_orbits": len(source_records),
         },
+        "sos_owner_physical": SOS_OWNER_PHYSICAL,
         "status": "exact-upstream-owner-replay-passed",
-        "upstream_owner_physical": UPSTREAM_OWNER_PHYSICAL,
     }
     return result
 
