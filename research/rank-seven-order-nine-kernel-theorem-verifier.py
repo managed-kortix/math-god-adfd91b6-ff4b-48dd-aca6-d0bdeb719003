@@ -450,6 +450,20 @@ def audit_coarse_source_contract(
     return deepcopy(contract)
 
 
+def _load_source_coarse_predicate(source: str | None = None):
+    """Compile the pinned scalar predicate without importing optional networkx."""
+    source = COARSE_ENGINE.read_text("ascii") if source is None else source
+    tree = ast.parse(source, filename=str(COARSE_ENGINE))
+    predicate_node = next((node for node in tree.body
+                           if isinstance(node, ast.FunctionDef) and
+                           node.name == "is_coarse_residual"), None)
+    require(predicate_node is not None, "source-engine coarse predicate missing")
+    namespace: dict[str, Json] = {"BUDGET_SCALED": 180}
+    exec(compile(ast.Module(body=[predicate_node], type_ignores=[]),
+                 str(COARSE_ENGINE), "exec"), namespace)
+    return namespace["is_coarse_residual"]
+
+
 def reference_coarse_residual(order: int, edges: tuple[tuple[int, int, int], ...],
                               row: tuple[int, ...]) -> bool:
     """Small independent exact oracle for both coarse predicate implementations.
@@ -492,28 +506,97 @@ def reference_coarse_residual(order: int, edges: tuple[tuple[int, int, int], ...
     return not visit(1, 0, 0)
 
 
-def validate_dual_coarse_predicates() -> dict[str, Json]:
-    """Bind both implementations to an independent exact finite contract.
+K403_EDGES = (
+    (0, 7, 1), (0, 8, 2), (1, 5, 1), (1, 6, 1), (1, 8, 1),
+    (2, 3, 1), (2, 4, 1), (2, 8, 1), (3, 4, 1), (3, 5, 1),
+    (4, 5, 1), (6, 7, 3),
+)
+K403_LOCAL_KERNEL_INDEX = 403
+K403_PHYSICAL_ROWS = 12_288
+K403_RESIDUAL_ROWS = 658
+# Exact receipt encoding: for every physical row in itertools.product order,
+# append canonical_bytes([403, list(row), scalar_decision]).  This covers all
+# 12,288 decisions (including false decisions), not only residual rows.
+K403_DECISION_SHA256 = "b158f2bf7245c5ae613b77f56b454531070e95791305d11a1cf5aa04bfee9bb8"
 
-    Exhaustive tests cover all rows on several deliberately asymmetric small
-    weighted supports.  They exercise positive/zero odd classes, up to four
-    colors, the support-superset minimum direction, and unequal radices without
-    rerunning the 65-million-orbit order-nine census a second time.
+
+def validate_live_coarse_equivalence(*, producer=None,
+                                     scalar_predicate=None) -> dict[str, Json]:
+    """Execute-bind the scalar, vector SOS-min, and residual-orbit paths.
+
+    K403 is a real order-nine fixture kernel with twelve support edges and
+    unequal radices.  The identity action makes every selected physical row its
+    own orbit, so ``residual_orbits`` must return exactly the same row set as
+    the live scalar and vector decisions.  (Its vectorized batching emits a
+    different deterministic order from ``itertools.product``.)  This tests the
+    production selector, not a duplicated implementation of it.
     """
+    producer = (load_pinned_module(
+        CENSUS_PRODUCER, "rank7_o9_master_live_coarse_producer")
+        if producer is None else producer)
+    scalar_predicate = (_load_source_coarse_predicate()
+                        if scalar_predicate is None else scalar_predicate)
+    require(callable(scalar_predicate) and
+            all(callable(getattr(producer, name, None)) for name in
+                ("coarse_sieve", "residual_orbits")),
+            "live coarse implementation API changed")
+    edges = K403_EDGES
+    minimum = producer.coarse_sieve(9, edges)
+    residual_rows: list[tuple[int, ...]] = []
+    decision_receipt = hashlib.sha256()
+    row_total = 0
+    for raw_row in itertools.product(*(range(multiplicity + 1)
+                                       for _, _, multiplicity in edges)):
+        row = tuple(raw_row)
+        scalar = scalar_predicate(9, edges, row)
+        require(type(scalar) is bool, "live scalar coarse predicate returned non-Boolean")
+        support = sum(1 << index for index, odd in enumerate(row) if odd)
+        threshold = 180 - 10 * support.bit_count() + 13 * sum(row)
+        vector = int(minimum[support]) > threshold
+        require(scalar is vector, "live scalar/vector coarse decisions disagree")
+        decision_receipt.update(canonical_bytes(
+            [K403_LOCAL_KERNEL_INDEX, list(row), scalar]))
+        if scalar:
+            residual_rows.append(row)
+        row_total += 1
+    require(row_total == K403_PHYSICAL_ROWS and
+            len(residual_rows) == K403_RESIDUAL_ROWS and
+            decision_receipt.hexdigest() == K403_DECISION_SHA256,
+            "live K403 scalar/vector decision receipt changed")
+
+    identity = (tuple(range(len(edges))),)
+    physical, orbit_total, residual_physical, orbit_rows = \
+        producer.residual_orbits(edges, identity, minimum, K403_PHYSICAL_ROWS)
+    normalized = {(tuple(row), size) for row, size in orbit_rows}
+    expected = {(row, 1) for row in residual_rows}
+    require(physical == K403_PHYSICAL_ROWS and
+            orbit_total == residual_physical == K403_RESIDUAL_ROWS and
+            len(normalized) == len(orbit_rows) and normalized == expected,
+            "live K403 residual_orbits path differs from scalar/vector decisions")
+    return {
+        "fixture": "real order-nine local kernel K403",
+        "support_edges": len(edges),
+        "identity_action_only": True,
+        "physical_row_total": row_total,
+        "residual_row_total": len(residual_rows),
+        "decision_receipt_encoding":
+            "sha256(concatenated canonical ASCII JSON lines [403,row,decision] for every physical row in mixed-radix product order)",
+        "decision_sha256": decision_receipt.hexdigest(),
+        "live_scalar_vector_and_residual_orbits_equivalent": True,
+        "producer_sha256": PYTHON_PINS[CENSUS_PRODUCER],
+        "source_engine_sha256": PYTHON_PINS[COARSE_ENGINE],
+    }
+
+
+def validate_dual_coarse_predicates() -> dict[str, Json]:
+    """Run the production K403 three-path gate plus a tiny independent oracle."""
     producer = load_pinned_module(CENSUS_PRODUCER, "rank7_o9_master_coarse_producer")
-    # The source engine imports optional networkx only for graph actions.  Load
-    # its exact predicate definition into a dependency-free namespace so this
-    # contract check exercises the pinned implementation itself even when that
-    # optional package is absent.
-    engine_tree = ast.parse(COARSE_ENGINE.read_text("ascii"), filename=str(COARSE_ENGINE))
-    predicate_node = next((node for node in engine_tree.body
-                           if isinstance(node, ast.FunctionDef) and
-                           node.name == "is_coarse_residual"), None)
-    require(predicate_node is not None, "source-engine coarse predicate missing")
-    namespace: dict[str, Json] = {"BUDGET_SCALED": 180}
-    exec(compile(ast.Module(body=[predicate_node], type_ignores=[]),
-                 str(COARSE_ENGINE), "exec"), namespace)
-    engine_predicate = namespace["is_coarse_residual"]
+    engine_predicate = _load_source_coarse_predicate()
+    live = validate_live_coarse_equivalence(
+        producer=producer, scalar_predicate=engine_predicate)
+
+    # Retain two small, independent fixtures as an algebraic cross-check.  The
+    # theorem gate above is the execution-binding check for the real path.
     cases = (
         (4, ((0, 1, 4), (0, 3, 4), (1, 3, 4), (2, 3, 4))),
         (5, ((0, 1, 3), (1, 2, 1), (2, 3, 2), (3, 4, 1),
@@ -541,6 +624,7 @@ def validate_dual_coarse_predicates() -> dict[str, Json]:
             "fixture_total": len(cases), "row_total": row_total,
             "residual_row_total": residual_total,
             "vectorized_and_source_engine_equivalent": True,
+            "live_execution_contract": live,
             "producer_sha256": PYTHON_PINS[CENSUS_PRODUCER],
             "source_engine_sha256": PYTHON_PINS[COARSE_ENGINE]}
 

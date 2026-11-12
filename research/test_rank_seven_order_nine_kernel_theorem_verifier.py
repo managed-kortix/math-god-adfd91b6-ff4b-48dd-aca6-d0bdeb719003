@@ -98,6 +98,60 @@ class OrderNineMasterHostileTest(unittest.TestCase):
         self.assertTrue(application["per_kernel_complements_validated"])
         self.assertFalse(application["coarse_owner_keys_materialized"])
 
+    def test_live_k403_gate_executes_scalar_vector_and_residual_orbits_paths(self):
+        receipt = self.master.validate_live_coarse_equivalence()
+        self.assertEqual(receipt["fixture"], "real order-nine local kernel K403")
+        self.assertEqual(receipt["physical_row_total"], 12_288)
+        self.assertEqual(receipt["residual_row_total"], 658)
+        self.assertEqual(receipt["decision_sha256"],
+                         self.master.K403_DECISION_SHA256)
+        self.assertEqual(receipt["decision_receipt_encoding"],
+                         "sha256(concatenated canonical ASCII JSON lines "
+                         "[403,row,decision] for every physical row in "
+                         "mixed-radix product order)")
+        self.assertTrue(
+            receipt["live_scalar_vector_and_residual_orbits_equivalent"])
+
+    def test_live_k403_gate_rejects_executed_semantic_mutations(self):
+        producer = self.master.load_pinned_module(
+            self.master.CENSUS_PRODUCER, "rank7_o9_hostile_live_coarse")
+        original_scalar = self.master.COARSE_ENGINE.read_text("ascii")
+        original_producer = self.master.CENSUS_PRODUCER.read_text("ascii")
+        mutations = (
+            ("scalar-18-to-17", "18 * multiplicity", "17 * multiplicity", True),
+            ("scalar-plus-10", "10 - 13 * odd", "9 - 13 * odd", True),
+            ("scalar-minus-13", "10 - 13 * odd", "10 - 12 * odd", True),
+            ("scalar-same-color", "if required and color == other_color:",
+             "if False and required and color == other_color:", True),
+            ("scalar-color-cap", "limit = min(used + 1, 4)",
+             "limit = min(used + 1, 3)", True),
+            ("producer-superset-to-subset",
+             "np.minimum(view[:, :block], view[:, block:], out=view[:, :block])",
+             "np.minimum(view[:, block:], view[:, :block], out=view[:, block:])", False),
+            ("producer-strict-to-nonstrict", "selected = minimum[support] > threshold",
+             "selected = minimum[support] >= threshold", False),
+            ("producer-budget", "BUDGET_SCALED = 180", "BUDGET_SCALED = 181", False),
+        )
+        for label, old, new, scalar_side in mutations:
+            with self.subTest(label=label):
+                source = original_scalar if scalar_side else original_producer
+                hostile = source.replace(old, new, 1)
+                self.assertNotEqual(hostile, source)
+                if scalar_side:
+                    predicate = self.master._load_source_coarse_predicate(hostile)
+                    candidate = producer
+                else:
+                    candidate = mock.Mock(wraps=producer)
+                    namespace = dict(producer.__dict__)
+                    exec(compile(hostile, str(self.master.CENSUS_PRODUCER), "exec"),
+                         namespace)
+                    candidate.coarse_sieve = namespace["coarse_sieve"]
+                    candidate.residual_orbits = namespace["residual_orbits"]
+                    predicate = self.master._load_source_coarse_predicate()
+                self.assert_rejected(lambda candidate=candidate, predicate=predicate:
+                    self.master.validate_live_coarse_equivalence(
+                        producer=candidate, scalar_predicate=predicate))
+
     def test_coarse_semantic_constant_and_retained_gram_mutations_fail(self):
         mutations = (
             lambda x: x["different_color_scaled_cost"].__setitem__(
