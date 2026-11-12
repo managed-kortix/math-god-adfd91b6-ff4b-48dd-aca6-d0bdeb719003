@@ -88,7 +88,7 @@ The current transitive rank-four master manifest digest is
 it pins seven direct verifier outputs, eleven transitive files, and three nested
 verifier outputs.
 The tricyclic finite-ledger and all-odd-`K4` digests are
-`6d499af761ffa7317a431e5150dac59317618f508896be2c3ed77b250b43c901` and
+`80cfecc4db26500f7526f635ab36dd7f8bd7aae0f06ab8b89125148e7756e859` and
 `b0c4ed64a12ccabe0a8a38cb9fdb85622d8f7c2d07bdf53f75eb1700a684fa39`.
 The appendix states each verifier's exact scope and what remains mathematical
 rather than executable.

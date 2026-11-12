@@ -75,7 +75,7 @@ PYTHON_PINS = {
     STRUCTURAL_SCANNER: "bca85e48a018e7b7c998216e6e14dca38db82e4970709e51571de3aee2d089c7",
     TRANSFER: "4b9cb58aeb68b869b9c254a21ae7bd3cf18fc7360e7afb0a47fd8e570c40b2fe",
     TRANSFER_DEPENDENCY_ADAPTER:
-        "6a68fcb62b53b1b50fb1fadb90b840c5f3947ce401044e6d2e8ec2af3e85d5a6",
+        "e6ecaa4e3ddbcd457e1ccfe1a623ef04e20deb91102b37c6e0fa23dbbd3ab59a",
     OBSTRUCTION: "21acdb25b08b89ce9a5241932bc23d5fbdfec4c76333ab50c78d9371cf79e0b8",
     ANALYTIC_LIFT: "55e7d67a670f22a7b872b122f3aadcd2036ba922993f5faac1c5b72e2232e611",
     CENSUS_PRODUCER: "c6dcc792c7899c3f494a3beb521c94da972a01a392cd77be78b0956bbee3b921",
@@ -129,11 +129,11 @@ EXPECTED_DATA_PATHS = frozenset(DATA_PINS)
 
 DOCUMENT_PINS = {
     STRUCTURAL_NOTE: "f1daf9109f4843aa2db149c974fb21c847bb6f8144275201aebabed7fe4ea516",
-    TRANSFER_NOTE: "3069961fe0937eabf3281685bcc04dd4e77de20150ddd49b57f1fa0eeb6c58ad",
+    TRANSFER_NOTE: "3747a62c63c8ebb37a1937f2e3aa97ddf2cae719d7fbac9da3d8ae7171d55499",
     OBSTRUCTION_NOTE: "69d9a6d7a061ee8b9ef029d560799f51e19c3d6c199da9258f5929f684862899",
     BICYCLIC: "56a2b521ed0fee18d7e34ebb330e5b181e00979805fca951398f7a33d35b19da",
-    TRICYCLIC: "13f8f8c7996c0f58f764c52b4a5b915132038e2ce38d3e56285f1bf952990fc1",
-    TETRACYCLIC: "7d8174e64095e5cccf90776ccac92d2dd2ca3f73d500e2518461f5dfb907b93b",
+    TRICYCLIC: "4abf3ffa1e09148c060969f4055d878334af9b7358d0764ac42f5e0ffb236b02",
+    TETRACYCLIC: "89e9b27d188e9e9f28f702d13799549218473eaac1805434a6fbb91a22af7374",
     COARSE_ATOM_NOTE: "25e84efe5cba507e3ad0287a83505b544bbb8b40a401f7a45373d025b1bff399",
     SWITCHED_THREE_RAY_NOTE:
         "3bc17599ca17b6fef1407e66275822350e548305d295c66a7de7457cb068ace5",
@@ -144,7 +144,7 @@ UPSTREAM_OUTPUT_SHA256 = "8975de0c41137973452e5699cd4eb339f520b7a8f8863a06e9d5f2
 CYCLE_OUTPUT_SHA256 = "aa0f11d2a5f7e2bd49bba6d93bdd6b97de03eace705a98fd4c8cf7b636a6fb24"
 TRANSFER_OUTPUT_SHA256 = "70154fd4dbded871ae77ffdc6a8ffdf7dc23ac86b8411aba983a90029fb642cd"
 TRANSFER_DEPENDENCY_ADAPTER_OUTPUT_SHA256 = \
-    "f15f429f6ab8a1a8d5e9816a1da535caacfc2da75b5c45ed6cc48b750fb32126"
+    "b285979f6ec3ba05e48e0aede2644ef877a484371d46e1d9faa4461c7bd96bf9"
 OBSTRUCTION_OUTPUT_SHA256 = "9e9bacf32b73627db45c092acfa785d1aafe465e4c8743f7054f74cf967d9770"
 COARSE_ATOM_OUTPUT_SHA256 = "019aeb2fc058b61cebd2a98a0ee0025b345cca4b18fb706369a92e1f5ca81a02"
 ANALYTIC_LIFT_OUTPUT_SHA256 = "99782a95008fdcceaf74efbe869917d5321c974d886e76460711faca09135e6d"
@@ -1663,7 +1663,7 @@ def validate_transfer_dependency_adapter(result: Json, adapter_module=None) -> d
                 expected_source_pins.get(axiom["source_path"]) == axiom["source_sha256"],
                 f"transfer reviewed axiom {index} crossed its review boundary")
     require(contract["reviewed_axiom_registry_sha256"] ==
-                "726e8844eed0acdb9df5b1139f39278293e0948874d5cd2aaed36c6b0b65f6b8",
+                "da323f503ad3cc88917c79cdd4ae80af5c3c2f09070cb7285e6cdd39db224811",
             "transfer reviewed axiom registry digest changed")
     rank_types = contract["rank_type_exhaustion"]
     require(type(rank_types) is dict and

@@ -36,7 +36,7 @@ SOURCES = {
     ),
     "rank4-ledger": (
         ROOT / "all-tetracyclic-graphs/paper.tex",
-        "7d8174e64095e5cccf90776ccac92d2dd2ca3f73d500e2518461f5dfb907b93b",
+        "89e9b27d188e9e9f28f702d13799549218473eaac1805434a6fbb91a22af7374",
     ),
     "k5e-ledger": (
         ROOT / "positive-square-energy/pentacyclic-general/"
@@ -145,9 +145,9 @@ EXPECTED_EXCLUDED_CLAIMS = (
 )
 
 MANIFEST_SCHEMA = "hexacyclic-multiblock-scope-conclusion-v1"
-EXPECTED_MANIFEST_SHA256 = "9b2513f411f21092b9761a65eb59bc16a851bebe077abf798d415b2488f8dffa"
-EXPECTED_NORMAL_OUTPUT_SHA256 = "30225e01ae04aad4018c1b4b8ed0b5c45cfef72f3b10da8ab456c049966cb56e"
-EXPECTED_OPTIMIZED_OUTPUT_SHA256 = "30225e01ae04aad4018c1b4b8ed0b5c45cfef72f3b10da8ab456c049966cb56e"
+EXPECTED_MANIFEST_SHA256 = "9539ecc104c0fa54c0292f4db7dcef2ed0f5f5227ecbac4f7e266d0c1179ccf7"
+EXPECTED_NORMAL_OUTPUT_SHA256 = "c5c363e788da0999c98e1ee428b2484a9b70f7ce3a36a8096e536b52cbde4f96"
+EXPECTED_OPTIMIZED_OUTPUT_SHA256 = "c5c363e788da0999c98e1ee428b2484a9b70f7ce3a36a8096e536b52cbde4f96"
 
 EXPECTED_RANK5_DIRECT_EQUALITY = {
     "partition": (5, 1),

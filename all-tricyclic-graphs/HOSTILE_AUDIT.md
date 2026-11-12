@@ -4,17 +4,22 @@ Dates: initial audit 5 August 2026; final hostile re-audit 9 November 2026
 
 ## Verdict
 
-The six requested pieces are complete after four repairs found across the two
+The six requested pieces are complete after five repairs found across the
 hostile passes:
 
-1. The exceptional doubled-`C4` orbit is not one switching class. It contains
+1. The former doubled-`C4` 36-row census wrongly excluded every parity word
+   with an odd--odd doubled pair. Simplicity excludes only lengths `(1,1)`;
+   the first simple realization is `{1,3}`. A twelve-state exact planar-Gram
+   ledger now covers all 28 formerly omitted labelled words and all longer
+   lengths.
+2. The exceptional doubled-`C4` orbit is not one switching class. It contains
    four physical rows in class `110` and four in class `111`.
-2. The all-odd `K4` argument must cover the entire eight-row switching class,
+3. The all-odd `K4` argument must cover the entire eight-row switching class,
    not only the physically all-odd row. The repaired argument does so without
    switching physical lengths.
-3. The regular-simplex estimate formerly asserted for the switched three-even
+4. The regular-simplex estimate formerly asserted for the switched three-even
    cut is false; the exact physical Gram recorded below replaces it.
-4. The one-long-path deletion leaves an attached `Theta(1,2,2)`, not a
+5. The one-long-path deletion leaves an attached `Theta(1,2,2)`, not a
    bipartite theta. Its established strict credit still pays the deleted tree.
 
 With those repairs, the kernel classification and global block proof are
@@ -81,8 +86,13 @@ Remaining gap: none.
 
 Status: complete after correcting the switching label.
 
-- The explicit 28-row DNN ledger and eight-row exceptional automorphism orbit
-  partition all 36 simple physical parity rows.
+- All 64 labelled parity words are realizable. The old explicit 28-row DNN
+  ledger and eight-row exceptional automorphism orbit partition only the
+  36-word slice with no odd--odd doubled pair.
+- The other 28 words normalize to twelve first-simple states with one doubled
+  pair `(1,3)`. Exact planar `pi/3` Gram records give excess at most
+  `229/150<2`; fixed-parity monotonicity covers arbitrary longer lengths and
+  one-vertex additivity covers every rooted-tree attachment.
 - The exceptional orbit contains four rows in class `110` and four in class
   `111`; it must not be called a unique failed switching class.
 - A noncanonical doubled member is covered by one of two exact long-path DNN
@@ -177,8 +187,8 @@ bash scripts/build-paper.sh all-tricyclic-graphs
 ```
 
 The main finite audit reports digest
-`6d499af761ffa7317a431e5150dac59317618f508896be2c3ed77b250b43c901`
-and rejects all 27 hostile mutations. The standalone all-odd-`K4` audit
+`80cfecc4db26500f7526f635ab36dd7f8bd7aae0f06ab8b89125148e7756e859`
+and rejects all 29 hostile mutations. The standalone all-odd-`K4` audit
 rejects eight hostile mutations. These scripts audit the finite
 records; the analytic duality, monotonicity, structural deletions, and block
 classification remain mathematical arguments in the proof notes and paper.

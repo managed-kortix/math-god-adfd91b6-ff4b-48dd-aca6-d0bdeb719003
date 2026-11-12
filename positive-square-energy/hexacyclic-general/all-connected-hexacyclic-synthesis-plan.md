@@ -81,13 +81,13 @@ Direct verifier:
 ```text
 research/hexacyclic-multiblock-ledger-verifier.py
 current source SHA-256:
-1c6155f323d16726556f6b592608d08b582bec13ef138594cebba542010ddde2
+63b99daadbb01fc5d96dfe986e67dc5fe20c341172500a74c954bc5af9d845ea
 
 current canonical scope/conclusion manifest SHA-256:
-9b2513f411f21092b9761a65eb59bc16a851bebe077abf798d415b2488f8dffa
+9539ecc104c0fa54c0292f4db7dcef2ed0f5f5227ecbac4f7e266d0c1179ccf7
 
 current normal/optimized report SHA-256:
-30225e01ae04aad4018c1b4b8ed0b5c45cfef72f3b10da8ab456c049966cb56e
+c5c363e788da0999c98e1ee428b2484a9b70f7ce3a36a8096e536b52cbde4f96
 ```
 
 It generates all eleven partitions, selects the ten multiblock partitions,
@@ -101,7 +101,7 @@ are:
 | items 1--4 | `positive-square-energy/hexacyclic-general/multiblock-items1-4-owner-exact-closure.md` | `49a24ebe705aecd9248224cc39c748041c0d6d4981a137f6daad6d93019a1cb1` |
 | items 5--7 | `positive-square-energy/hexacyclic-general/multiblock-items5-7-owner-exact-closure.md` | `1c5722565e874ebf04533e908c5bf335f7be0b56a5665f5b607cfdef14ac8c67` |
 | theta--triangle packet | `positive-square-energy/hexacyclic-general/favorable-theta-triangle-shared-cut-packet.md` | `d222e09a20dce19703f8386c6a3a3699e0621b63f761e553fee3215adf8e2446` |
-| rank-four ledger | `all-tetracyclic-graphs/paper.tex` | `7d8174e64095e5cccf90776ccac92d2dd2ca3f73d500e2518461f5dfb907b93b` |
+| rank-four ledger | `all-tetracyclic-graphs/paper.tex` | `89e9b27d188e9e9f28f702d13799549218473eaac1805434a6fbb91a22af7374` |
 | all-odd K5-e ledger | `positive-square-energy/pentacyclic-general/all-odd-k5e-induced-territory-frontier.md` | `e43bbd97566ab5ea28b360311a2e3e1bc40397c3f40f250e954d1c016d94e6a5` |
 | K5-e sieve | `pentacyclic/research/all-odd-k5e-territory-sieve.py` | `047a472d4e1af46850198dc68b5780f98b930618f79b51174f11460afcc0334d` |
 | K22 fixture | `pentacyclic/research/order5-kernel-family-theorem.json` | `4d8b826b397dc269c7853b8bd386d00bf469282b52720b8dac96d850e9e616d8` |

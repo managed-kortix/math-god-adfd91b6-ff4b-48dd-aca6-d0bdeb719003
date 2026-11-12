@@ -115,7 +115,7 @@ class TransferDependencyAdapterHostileTest(unittest.TestCase):
             self.assertFalse(sentinel.exists())
             self.assertEqual(outputs[0], outputs[1])
             self.assertEqual(self.m.sha256_bytes(outputs[0]),
-                             "f15f429f6ab8a1a8d5e9816a1da535caacfc2da75b5c45ed6cc48b750fb32126")
+                             "b285979f6ec3ba05e48e0aede2644ef877a484371d46e1d9faa4461c7bd96bf9")
 
     def test_contract_separates_executed_and_reviewed_evidence(self):
         contract = self.contract

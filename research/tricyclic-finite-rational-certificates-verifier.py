@@ -19,7 +19,7 @@ from numbers import Number
 
 PI_LO = F(333, 106)
 PI_HI = F(355, 113)
-EXPECTED_SHA256 = "6d499af761ffa7317a431e5150dac59317618f508896be2c3ed77b250b43c901"
+EXPECTED_SHA256 = "80cfecc4db26500f7526f635ab36dd7f8bd7aae0f06ab8b89125148e7756e859"
 
 
 def require(condition, message):
@@ -243,6 +243,31 @@ C4_CLASS111_LONG = (
 C4_TAN_BOUNDS = ((3, 32, "93/1000"), (1, 8, "172/1000"),
                  (1, 16, "40/1000"), (3, 16, "447/1000"))
 
+# Canonical states for a doubled side.  OO must be (1,3): simplicity excludes
+# only (1,1), not the entire odd--odd physical parity state.
+C4_PAIR_LENGTHS = {"EE": (2, 2), "EO": (1, 2), "OO": (1, 3)}
+
+# Rows with the first doubled side normalized to OO=(1,3).  The second side
+# ranges over EE, EO, OO and the two connectors independently over O,E.
+# Angles are integer multiples of pi/3.  The final three integers count the
+# exact positive terms beta=tan^2(pi/6)=1/3,
+# alpha=2*tan^2(pi/12)=14-8*sqrt(3), and
+# gamma=3*tan^2(pi/18).  All other path terms are zero.
+C4_OO_CANONICAL_CERTIFICATES = (
+    ("EE", "O", "O", (0, 3, 5, 4), (2, 2, 0)),
+    ("EE", "O", "E", (0, 3, 0, 0), (0, 0, 0)),
+    ("EE", "E", "O", (0, 3, 3, 3), (0, 0, 0)),
+    ("EE", "E", "E", (0, 3, 2, 1), (0, 4, 0)),
+    ("EO", "O", "O", (0, 3, 0, 4), (4, 0, 0)),
+    ("EO", "O", "E", (0, 3, 1, 5), (4, 1, 0)),
+    ("EO", "E", "O", (0, 3, 2, 4), (4, 1, 0)),
+    ("EO", "E", "E", (0, 3, 3, 1), (3, 1, 0)),
+    ("OO", "O", "O", (0, 3, 0, 3), (0, 0, 0)),
+    ("OO", "O", "E", (0, 3, 1, 5), (2, 1, 1)),
+    ("OO", "E", "O", (0, 3, 2, 4), (2, 1, 1)),
+    ("OO", "E", "E", (0, 3, 3, 0), (0, 0, 0)),
+)
+
 
 def principal_cos_index(index, period):
     index %= 2 * period
@@ -303,18 +328,128 @@ def c4_contributions(row, k):
     return values, exact
 
 
-def audit_doubled_c4(certificates):
+def c4_length_contributions(lengths, angles, period=3):
+    require(len(lengths) == 6 and len(angles) == 4,
+            "doubled C4 OO: malformed length/angle record")
+    values = []
+    for length, (u, v) in zip(lengths, C4_ENDPOINTS):
+        require(type(length) is int and length > 0,
+                "doubled C4 OO: nonpositive path length")
+        q = principal_cos_index(angles[u] - angles[v] +
+                                (period if length % 2 else 0), period)
+        values.append(length * tan_sq_upper_pi_multiple(q, 2 * period * length))
+    return values
+
+
+def audit_doubled_c4_oo(certificates):
+    require(len(certificates) == 12,
+            "doubled C4 OO: canonical certificate count changed")
+    expected_states = set(product(C4_PAIR_LENGTHS, ("O", "E"), ("O", "E")))
+    seen = set()
+    alpha_upper = 2 * tan_sq_upper_pi_multiple(1, 12)
+    beta_upper = tan_sq_upper_pi_multiple(1, 6)
+    gamma_upper = 3 * tan_sq_upper_pi_multiple(1, 18)
+    # beta is elementary.  For alpha use tan^2(pi/12)=7-4*sqrt(3)<1/12,
+    # equivalent after positive squaring to 48^2*3>83^2.  For gamma, put
+    # x=tan(pi/18): tan(3*pi/18)^2=1/3.  If x^2>=1/30, the increasing triple-
+    # angle square is at least 7921/21870>1/3, a contradiction.
+    require(beta_upper < F(17, 50) and
+            48 ** 2 * 3 > 83 ** 2 and
+            F(1, 30) * (3 - F(1, 30)) ** 2 /
+            (1 - 3 * F(1, 30)) ** 2 > F(1, 3),
+            "doubled C4 OO: elementary strict bounds failed")
+    simple_alpha = F(1, 6)
+    simple_beta = F(17, 50)
+    simple_gamma = F(1, 10)
+    require(alpha_upper < simple_alpha and gamma_upper < simple_gamma,
+            "doubled C4 OO: Taylor corroboration changed")
+    worst_simple = F(0)
+    for second, left_connector, right_connector, angles, counts in certificates:
+        label = f"doubled C4 OO/{second}/{left_connector}{right_connector}"
+        require(second in C4_PAIR_LENGTHS and
+                left_connector in {"O", "E"} and right_connector in {"O", "E"},
+                f"{label}: malformed state")
+        state = (second, left_connector, right_connector)
+        require(state not in seen, f"{label}: duplicate state")
+        seen.add(state)
+        require(len(angles) == 4 and angles[0] == 0 and
+                all(type(value) is int for value in angles),
+                f"{label}: malformed planar angles")
+        lengths = ((1, 3) +
+                   (1 if left_connector == "O" else 2,) +
+                   C4_PAIR_LENGTHS[second] +
+                   (1 if right_connector == "O" else 2,))
+        values = c4_length_contributions(lengths, angles)
+        beta_count, alpha_count, gamma_count = counts
+        require(all(type(value) is int and value >= 0 for value in counts),
+                f"{label}: malformed term counts")
+        # The only nonzero elementary terms in this pi/3 ledger are beta,
+        # alpha, and gamma.  Compare their rational Taylor upper bounds.
+        displayed_upper = (beta_count * beta_upper + alpha_count * alpha_upper +
+                           gamma_count * gamma_upper)
+        require(sum(values) == displayed_upper,
+                f"{label}: contribution reconstruction changed")
+        simple_upper = (beta_count * simple_beta + alpha_count * simple_alpha +
+                        gamma_count * simple_gamma)
+        require(displayed_upper <= simple_upper < 2,
+                f"{label}: canonical OO certificate exceeds two")
+        worst_simple = max(worst_simple, simple_upper)
+    require(seen == expected_states,
+            "doubled C4 OO: physical state census is incomplete")
+    # Every physical parity row with at least one OO doubled side is represented:
+    # choose one OO side, reflect it to the first side, and interchange members
+    # so its first-simple realization is (1,3).  The 12 normalized states are
+    # disjoint and exhaustive after that normalization.
+    all_states = set(product(C4_PAIR_LENGTHS, C4_PAIR_LENGTHS,
+                             ("O", "E"), ("O", "E")))
+    omitted = {state for state in all_states if "OO" in state[:2]}
+    type_multiplicity = {"EE": 1, "EO": 2, "OO": 1}
+    labelled_rows = sum(type_multiplicity[first] * type_multiplicity[second]
+                        for first, second, _, _ in omitted)
+    require(len(all_states) == 36 and len(omitted) == 20 and labelled_rows == 28,
+            "doubled C4 OO: 36/20/28 type and labelled census changed")
+    normalized = {(second, left, right)
+                  for first, second, left, right in omitted
+                  if first == "OO"}
+    normalized |= {(first, right, left)
+                   for first, second, left, right in omitted
+                   if first != "OO" and second == "OO"}
+    require(normalized == expected_states,
+            "doubled C4 OO: reflection normalization is incomplete")
+    require(worst_simple == F(229, 150),
+            "doubled C4 OO: simple rational maximum changed")
+    return len(certificates), len(omitted), labelled_rows, worst_simple
+
+
+def audit_doubled_c4(certificates, oo_certificates):
     require(sum(C4_CLASS_COUNTS.values()) == 36 and
             set(C4_CLASS_COUNTS) == set(C4_CLASS_FIRST),
             "doubled C4: switching census ledger changed")
-    simple_rows = {
+    # Historical 1/2-canonical slice: this is not the full set of realizable
+    # simple parity words.  The other 28 words have an OO side and are audited
+    # below at first-simple length (1,3).
+    no_oo_rows = {
         f"{bits:06b}" for bits in range(64)
         if not (((bits >> 5) & 1) and ((bits >> 4) & 1))
         and not (((bits >> 2) & 1) and ((bits >> 1) & 1))
     }
-    require(len(simple_rows) == 36, "doubled C4: simple canonical row total changed")
+    all_parity_rows = {f"{bits:06b}" for bits in range(64)}
+    oo_parity_rows = all_parity_rows - no_oo_rows
+    require(len(no_oo_rows) == 36 and len(oo_parity_rows) == 28,
+            "doubled C4: 36+28 physical parity partition changed")
+    all_class_rows = {word: set() for word in C4_CLASS_COUNTS}
+    for row in all_parity_rows:
+        all_class_rows[c4_switching_invariant(row)].add(row)
+    require({word: len(rows) for word, rows in all_class_rows.items()} ==
+            {word: 8 for word in C4_CLASS_COUNTS},
+            "doubled C4: full 64-row switching census changed")
+    require({word: len(rows & oo_parity_rows)
+             for word, rows in all_class_rows.items()} ==
+            {"000": 6, "001": 6, "010": 4, "011": 4,
+             "100": 4, "101": 4, "110": 0, "111": 0},
+            "doubled C4: omitted OO switching distribution changed")
     class_rows = {word: set() for word in C4_CLASS_COUNTS}
-    for row in simple_rows:
+    for row in no_oo_rows:
         class_rows[c4_switching_invariant(row)].add(row)
     require({word: len(rows) for word, rows in class_rows.items()} == C4_CLASS_COUNTS,
             "doubled C4: switching-class multiplicities changed")
@@ -349,8 +484,8 @@ def audit_doubled_c4(certificates):
                             f"doubled C4: displayed boundary contributions changed for {row}")
             covered.add(row)
     require(covered.isdisjoint(C4_FAILED), "doubled C4: DNN/structural overlap")
-    require(covered | C4_FAILED == simple_rows,
-            "doubled C4: 36-row DNN/structural partition changed")
+    require(covered | C4_FAILED == no_oo_rows,
+            "doubled C4: old 36-row DNN/structural partition changed")
 
     for n, d, bound in C4_TAN_BOUNDS:
         prove_tan_bound(n, d, bound, f"doubled C4 tan^2({n}pi/{d})")
@@ -379,7 +514,8 @@ def audit_doubled_c4(certificates):
                               for angle, coefficient in sorted(terms.items()))
         require(sorted(reconstructed) == sorted(displayed_terms),
                 f"doubled C4: long certificate {index + 1} Gram reconstruction failed")
-    return len(covered), len(C4_FAILED)
+    oo_records, oo_type_states, oo_rows, oo_worst = audit_doubled_c4_oo(oo_certificates)
+    return len(covered), len(C4_FAILED), oo_records, oo_type_states, oo_rows, oo_worst
 
 
 K4_TAN_BOUNDS = [
@@ -800,6 +936,7 @@ def certificate_data():
         "doubled_c4_endpoints": [list(edge) for edge in C4_ENDPOINTS],
         "doubled_c4_class111_long": json.loads(json.dumps(C4_CLASS111_LONG)),
         "doubled_c4_tangent_bounds": json.loads(json.dumps(C4_TAN_BOUNDS)),
+        "doubled_c4_oo_canonical": json.loads(json.dumps(C4_OO_CANONICAL_CERTIFICATES)),
         "k4_physical_certificates": deepcopy(K4_PHYSICAL_CERTIFICATES),
         "k4_edges": [list(edge) for edge in K4_EDGES],
         "k4_tangent_bounds": deepcopy(K4_TAN_BOUNDS),
@@ -820,7 +957,7 @@ def audit(certificate, enforce_digest=True):
                                  "doubled_c4_class_counts", "doubled_c4_class_first",
                                  "doubled_c4_failed", "doubled_c4_endpoints",
                                  "doubled_c4_class111_long", "doubled_c4_tangent_bounds",
-                                 "k4_physical_certificates", "k4_tangent_bounds",
+                                 "doubled_c4_oo_canonical", "k4_physical_certificates", "k4_tangent_bounds",
                                  "k4_edges", "k4_all_odd_dispositions",
                                  "k4_three_even_cut_gram",
                                  "k4_three_even_cut_principal_minors",
@@ -847,11 +984,15 @@ def audit(certificate, enforce_digest=True):
     require(certificate["doubled_c4_tangent_bounds"] ==
             json.loads(json.dumps(C4_TAN_BOUNDS)),
             "doubled C4 tangent ledger changed")
+    require(certificate["doubled_c4_oo_canonical"] ==
+            json.loads(json.dumps(C4_OO_CANONICAL_CERTIFICATES)),
+            "doubled C4 OO canonical ledger changed")
     require(certificate["k4_edges"] == [list(edge) for edge in K4_EDGES],
             "K4 endpoint definitions changed")
     dt_counts = audit_doubled_triangle(
         certificate["doubled_triangle"], certificate["doubled_triangle_class111_long"])
-    c4_rows, c4_failed = audit_doubled_c4(certificate["doubled_c4"])
+    c4_counts = audit_doubled_c4(certificate["doubled_c4"],
+                                  certificate["doubled_c4_oo_canonical"])
     k4_physical, k4_omitted = audit_k4_physical(certificate["k4_physical_certificates"])
     k4_dispositions, k4_audited, k4_structural = audit_k4_all_odd(
         certificate["k4_tangent_bounds"], certificate["k4_all_odd_dispositions"],
@@ -862,7 +1003,7 @@ def audit(certificate, enforce_digest=True):
     digest = sha256(canonical_payload(certificate).encode("ascii")).hexdigest()
     if enforce_digest:
         require(digest == EXPECTED_SHA256, "finite certificate digest changed")
-    return digest, (dt_counts, c4_rows, c4_failed, k4_physical, k4_omitted,
+    return digest, (dt_counts, c4_counts, k4_physical, k4_omitted,
                     k4_dispositions, k4_audited, k4_structural, four_path_cases)
 
 
@@ -901,6 +1042,9 @@ def hostile_self_checks():
     add("C4 tangent constant", lambda c: c.__setitem__(
         "doubled_c4_tangent_bounds",
         ((3, 32, "94/1000"), *c["doubled_c4_tangent_bounds"][1:])))
+    add("C4 omitted OO state", lambda c: c["doubled_c4_oo_canonical"].pop())
+    add("C4 OO length-three angle", lambda c:
+        c["doubled_c4_oo_canonical"][9][3].__setitem__(3, 4))
     add("pi constant", lambda c: c["arithmetic_constants"].__setitem__("pi_upper", "22/7"))
     add("K4 physical parity", lambda c: c["k4_physical_certificates"][0][2][0].__setitem__(0, "011011"))
     add("K4 physical angle", lambda c: c["k4_physical_certificates"][3][1].__setitem__(0, 0))
@@ -924,16 +1068,21 @@ def hostile_self_checks():
 def main():
     digest, counts = audit(certificate_data())
     mutations = hostile_self_checks()
-    require(mutations == 27, "hostile mutation count changed")
-    (dt_counts, c4_rows, c4_failed, k4_physical, k4_omitted,
+    require(mutations == 29, "hostile mutation count changed")
+    (dt_counts, c4_counts, k4_physical, k4_omitted,
      k4_dispositions, k4_audited, k4_structural, four_cases) = counts
+    (c4_rows, c4_failed, c4_oo_records, c4_oo_type_states,
+     c4_oo_rows, c4_oo_worst) = c4_counts
     dt_dnn_orbits, dt_structural_orbits, dt_dnn_rows, dt_structural_rows, dt_long = dt_counts
     print("tricyclic finite rational certificates: exact audit passed")
     print(f"doubled_triangle: {dt_dnn_orbits} DNN orbit records ({dt_dnn_rows} labelled rows), "
           f"{dt_structural_orbits} structural orbit ({dt_structural_rows} labelled rows), "
           f"{dt_long} audited class-111 long-path DNN records")
-    print(f"doubled_c4: {c4_rows} canonical DNN rows, {c4_failed} exceptional rows "
+    print(f"doubled_c4: {c4_rows} old 1/2-canonical DNN rows, {c4_failed} exceptional rows "
           "(4 in class 110, 4 in class 111; long-path DNN or structural deletion)")
+    print(f"doubled_c4_OO_repair: {c4_oo_records} normalized exact Gram records cover "
+          f"all {c4_oo_type_states} type states / {c4_oo_rows} labelled parity rows "
+          f"with an OO pair; worst rational-Taylor upper={ftext(c4_oo_worst)}<2")
     print(f"k4_non_all_odd: {k4_physical} exact physical rows, {k4_omitted} all-odd rows omitted")
     print(f"k4_all_odd: 64/64 long/unit subsets enumerated; {k4_audited} DNN-audited, "
           f"{k4_structural} structural ({k4_dispositions})")

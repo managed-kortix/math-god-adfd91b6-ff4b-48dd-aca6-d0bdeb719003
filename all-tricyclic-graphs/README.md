@@ -38,18 +38,23 @@ opposite two-long placements); `6` one-long subsets use structural deletion and
 the no-long subset uses the attached-`K4` packet. The doubled-triangle audit
 separates its `28` DNN physical rows from its `4` structural class-`111` rows
 and checks the two noncanonical class-`111` long-path tangent certificates.
-The doubled-`C4` audit reconstructs all eight switching classes and separates
-`28` canonical DNN rows from the exceptional eight-row automorphism orbit,
-which contains four rows in class `110` and four in class `111`.
+The doubled-`C4` audit reconstructs all eight switching classes and all `64`
+realizable labelled parity words. The old no-odd--odd slice separates `28`
+canonical DNN rows from the exceptional eight-row automorphism orbit, which
+contains four rows in class `110` and four in class `111`. The repaired
+odd--odd branch uses `12` normalized planar-Gram records to cover the other
+`28` labelled words (all `20` first-simple type states with an `OO=(1,3)`
+pair), with worst rational upper bound `229/150<2`; monotonicity and
+one-vertex additivity cover all longer paths and rooted trees.
 The canonical digest also commits to every audited doubled-`C4` class count,
-first row, failed row, class-`111` long ledger, endpoint definition, and tangent
-constant, plus the `K4` endpoints and arithmetic constants. Numeric payload
-leaves are integers or rational strings; floats and other non-integral numeric
+first row, failed row, class-`111` long ledger, endpoint definition, tangent
+constant, and odd--odd ledger, plus the `K4` endpoints and arithmetic
+constants. Numeric payload leaves are integers or rational strings; floats and other non-integral numeric
 types are rejected explicitly. The four-path output describes nine
 representative symbolic records, including
 the one-unit `e=0` endpoint case; it does not claim to reprove the analytic
 inequalities that turn those records into all-length coverage. The verifier
-rejects 27 deliberately corrupted certificate variants:
+rejects 29 deliberately corrupted certificate variants:
 
 ```sh
 python3 research/tricyclic-finite-rational-certificates-verifier.py
@@ -58,7 +63,7 @@ python3 -O research/tricyclic-finite-rational-certificates-verifier.py
 
 Both main-audit runs print `tricyclic finite rational certificates: exact audit
 passed` and digest
-`6d499af761ffa7317a431e5150dac59317618f508896be2c3ed77b250b43c901`.
+`80cfecc4db26500f7526f635ab36dd7f8bd7aae0f06ab8b89125148e7756e859`.
 The all-odd-switching-class audit checks all eight physical parity rows,
 including the exact PSD Gram for the four three-edge even cuts and hostile
 regressions against the former false simplex estimate:

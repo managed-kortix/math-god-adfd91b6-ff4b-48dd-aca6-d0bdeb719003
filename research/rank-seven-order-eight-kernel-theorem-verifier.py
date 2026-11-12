@@ -110,7 +110,7 @@ EXECUTED_PYTHON_SHA256 = {
     "kernel_census_verifier": "220b2a10b8328509897bd7a130837058541f007e83365ddf1719d084baae86ca",
     "rank_six_census_verifier": "325b78066b626a00deaceb6a026377dd7f898a906c63c597f77831548585e1ee",
     "singleton_reconstruction_verifier": "51aa44bbf67e0c01aef186bee7c9bd547e5c1b63eeb1af33df5378a92d3b7c42",
-    "finite_verifier": "fe272e94ee5d1ad549fe29b498f785df9fc298352ccfb3e67a1e4967461fde16",
+    "finite_verifier": "37aa5b45f98d1a6f0848d578e2f345609be4bc42af940d63ad7b0d0428c1f300",
     "k4_verifier": "0e4ef323a076c807a5aba0c80f0e385e5c3cee18ebd4d7e249928b345e6745a4",
     "doubled_triangle_verifier": "a27981b5bf6381edf6a8760477e6c99828bc9934d1d135d488670c35493b199d",
 }
@@ -205,10 +205,10 @@ DOCUMENTARY_PROOF_SHA256 = {
     "removable_ear_theorem": "f50afbd13f29e9374969b69087a73d5f1b6b3ef8c6b18bb08b46ebd97cee6a2e",
     "rank_seven_reduction": "f1daf9109f4843aa2db149c974fb21c847bb6f8144275201aebabed7fe4ea516",
     "singleton_territory": "9d7385473e5a2f32700f44aed86e7a06039012932b75f6812c28717c04b25238",
-    "tricyclic_tex": "13f8f8c7996c0f58f764c52b4a5b915132038e2ce38d3e56285f1bf952990fc1",
-    "tricyclic_pdf": "57c876516e891cd74b016da495ed26200a137cd073296961b3170c95e84a76cc",
-    "tricyclic_audit": "6e5bee956c412454fd9dc59e020b5dfe35205c336a6c0e740aea96f0f90fa92f",
-    "tricyclic_readme": "4de20b0a78f7598dc8172a118eaf178272494a9ee13cfbabc3fbabfa688a3f15",
+    "tricyclic_tex": "4abf3ffa1e09148c060969f4055d878334af9b7358d0764ac42f5e0ffb236b02",
+    "tricyclic_pdf": "e01cfdfc0e1423f812f7df81772be8d9060f8bab52acdac841b9548f7b3375cb",
+    "tricyclic_audit": "50b5868f7297a2cd07cb06c043f6a43c04673b52dcdbe4b0b1df93bb98dc4b1d",
+    "tricyclic_readme": "d5bbc81735a7d75faf6a5c4563544895d3693336abfa1139cf8c226ffc4a81a2",
     "gram_verifier_not_executed": "aeec6f4471a0a78b6807275217ee22e9909f07a8e356d8126c03ea175d9a8126",
     "coarse_networkx_engine_not_loaded": "d285a1c29cace4cb30882662e786cf1e5086ebc579676a3aa114a18e2365b2a5",
 }
@@ -364,7 +364,7 @@ CHILD_OUTPUT_SHA256 = {
     "base": "fd5a5bc5434af1e8c1f82da7f69b5c71e6b8234826d73bdc4c08e3c7cfd874fa",
     "structural": "412fbe20b7435c19897363cd3263f7b4080b79886e5cd811a4ecdbb6a147ad57",
     "packets": "0d15bd6d6addc534b160ae624555620e37a76a3e023d2c2f04e9696d23f3dd78",
-    "finite": "86f4ad87b1cc5a84817d630f2fb448045ce207d345c185c7b96bf38895c4a617",
+    "finite": "97b472caaf586753eb00ca17973c8c10957ae0c887e3b4cbbcd71693d0a0a7d8",
     "k4": "cb5434669fd3aacea9ca07e7a4d75f076a63a19f718806b394234996f52b95f7",
     "doubled_triangle": "a0b9311d8173972c4ac529c326366391ae5df9928079824ff5c0a6c601848222",
     "semantic_census": "5e8b566f541aab9362d71cbf46f51f90a8c0161c148cb11a7698b77b7f4fa1a2",
@@ -375,7 +375,7 @@ CHILD_OUTPUT_SHA256 = {
 
 CERTIFICATE_SHA256 = {
     "base_hostile_audit": "0dcb739c00f7b06f54a9430b8dede9019ac6c0a1abd57c5a1322b4229723f398",
-    "tricyclic_finite": "6d499af761ffa7317a431e5150dac59317618f508896be2c3ed77b250b43c901",
+    "tricyclic_finite": "80cfecc4db26500f7526f635ab36dd7f8bd7aae0f06ab8b89125148e7756e859",
     "tricyclic_k4": "b0c4ed64a12ccabe0a8a38cb9fdb85622d8f7c2d07bdf53f75eb1700a684fa39",
     "tricyclic_doubled_triangle": "b293eef0d7742da6ecd2c7af35882be14e97811922493121900e65a6705f01e8",
 }
@@ -1426,7 +1426,7 @@ def run_children(full: bool) -> tuple[int, int]:
         "base": "fd5a5bc5434af1e8c1f82da7f69b5c71e6b8234826d73bdc4c08e3c7cfd874fa",
         "structural": "412fbe20b7435c19897363cd3263f7b4080b79886e5cd811a4ecdbb6a147ad57",
         "packets": "0d15bd6d6addc534b160ae624555620e37a76a3e023d2c2f04e9696d23f3dd78",
-        "finite": "86f4ad87b1cc5a84817d630f2fb448045ce207d345c185c7b96bf38895c4a617",
+        "finite": "97b472caaf586753eb00ca17973c8c10957ae0c887e3b4cbbcd71693d0a0a7d8",
         "k4": "cb5434669fd3aacea9ca07e7a4d75f076a63a19f718806b394234996f52b95f7",
         "doubled_triangle": "a0b9311d8173972c4ac529c326366391ae5df9928079824ff5c0a6c601848222",
         "semantic_census": "5e8b566f541aab9362d71cbf46f51f90a8c0161c148cb11a7698b77b7f4fa1a2",

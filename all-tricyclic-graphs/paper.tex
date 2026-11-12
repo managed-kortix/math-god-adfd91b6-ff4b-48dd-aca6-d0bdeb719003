@@ -500,14 +500,14 @@ handles the remaining rows by structural repair.
 
 \begin{proof}
 Write the paths as $a,A:01$, $b:12$, $c,C:23$, $d:30$.
-The eight switching invariants and the complete numbers of simple physical
-rows are shown in Table~\ref{tab:dc4}.  Exact planar Gram vectors
-$u_j=(\cos(\pi k_j/6),\sin(\pi k_j/6))$ give excess at most two in the first
-seven classes; all simple representatives are checked separately.  The two
-boundary certificate types have contributions, in a suitable order,
-$2/3,1/3,0,2/3,1/3,0$, summing to two; all other listed certificates have
-strict slack.  This is the finite table proved by direct substitution in
-\eqref{eq:path} in \cite{DoubledC4}.
+There are eight switching invariants and $64$ realizable labelled parity
+words.  Table~\ref{tab:dc4} records the old $36$-word slice having no odd--odd
+doubled pair.  Exact planar Gram vectors
+$u_j=(\cos(\pi k_j/6),\sin(\pi k_j/6))$ give excess at most two in $28$ of
+these rows.  The two boundary certificate types have contributions, in a
+suitable order, $2/3,1/3,0,2/3,1/3,0$, summing to two; all other listed
+certificates have strict slack.  This finite table is proved by direct
+substitution in \eqref{eq:path} in \cite{DoubledC4}.
 
 \begin{table}[ht]
 \centering\small
@@ -525,12 +525,30 @@ invariant & first simple row & physical rows & disposition\\
 111&010011&8&four DNN, four DNN or deletion\\
 \bottomrule
 \end{tabular}
-\caption{Doubled-$4$-cycle switching census; the counts total all $36$ simple
-physical parity rows.}\label{tab:dc4}
+\caption{Doubled-$4$-cycle no-odd--odd slice; the counts total $36$ of the
+$64$ realizable labelled parity words.}\label{tab:dc4}
 \end{table}
 
-For completeness, the eight rows requiring repair form one orbit under kernel
-automorphisms and interchange of parallel-path names; in the fixed switching
+The missing $28$ words have at least one odd--odd doubled side.  Normalize one
+such side to first-simple lengths $(1,3)$.  The other doubled side has type
+$EE=(2,2)$, $EO=(1,2)$, or $OO=(1,3)$, and the two connectors have independent
+parities, leaving twelve normalized states.  The complete planar
+$\pi/3$-angle ledger in \cite{DoubledC4} has exact costs among
+\[
+ 0,\quad 2\beta+2\alpha,\quad4\alpha,\quad4\beta,
+ \quad4\beta+\alpha,\quad3\beta+\alpha,
+ \quad2\beta+\alpha+\gamma,
+\]
+where $\alpha=2\tan^2(\pi/12)$, $\beta=\tan^2(\pi/6)$, and
+$\gamma=3\tan^2(\pi/18)$.  Exact radical and triple-angle comparisons give
+$\alpha<1/6$, $\beta<17/50$, and $\gamma<1/10$; the finite checker also
+reconstructs the terms by rational Taylor enclosures.  The largest resulting
+upper bound is $4(17/50)+1/6=229/150<2$.  Fixed-physical-parity monotonicity
+therefore covers arbitrary longer lengths in all $28$ formerly omitted words,
+and one-vertex additivity covers every rooted-tree attachment.
+
+For completeness, the eight rows requiring repair in the old slice form one
+orbit under kernel automorphisms and interchange of parallel-path names; in the fixed switching
 normalization, four lie in class $110$ and four in class $111$. Normalize this
 orbit so each doubled side has one even and one odd path and the connectors
 have opposite parity. If a member of a
@@ -547,8 +565,8 @@ by
 \]
 If both doubled pairs are canonical, open an internal vertex of the even
 connector.  The deleted territory is a tree of credit $-1$; the complement is
-a two-triangle cactus of credit $>1$.  This exhausts class $111$ and includes
-all attachments.
+a two-triangle cactus of credit $>1$.  Together with the odd--odd ledger this
+exhausts all $64$ parity words and includes all attachments.
 \end{proof}
 
 \begin{lemma}[Doubled-triangle certificate]\label{lem:dtri}
@@ -744,10 +762,12 @@ attachment.  The alternatives are exhaustive, proving $\splus(G)\geq n$.
 \appendix
 \section{Complete doubled-$C_4$ Gram ledger}\label{app:dc4-ledger}
 
-This appendix makes Lemma~\ref{lem:dc4} reconstructible without consulting
-the proof note.  The path order is $(a,A,b,c,C,d)$ and a parity word uses zero
-for even and one for odd.  In Table~\ref{tab:dc4-complete}, $\ell$ is the
-canonical physical length vector (replace zero by two and one by one), and
+This appendix records the old no-odd--odd part of Lemma~\ref{lem:dc4}; the
+additional twelve-state odd--odd ledger is stated in the lemma and given in
+full in \cite{DoubledC4}.  The path order is $(a,A,b,c,C,d)$ and a parity word
+uses zero for even and one for odd.  In Table~\ref{tab:dc4-complete}, $\ell$ is
+the physical length vector on this restricted slice (replace zero by two and
+one by one), and
 $k=(k_1,k_2,k_3)$ means that the four branch vectors have arguments
 $\pi(0,k_1,k_2,k_3)/6$.  Thus
 \[
@@ -769,7 +789,7 @@ bound unless equality is printed.
 
 \begin{landscape}
 \begin{longtable}{ccccc}
-\caption{The complete $28$-row doubled-$C_4$ DNN Gram ledger.}
+\caption{The $28$-row no-odd--odd doubled-$C_4$ DNN Gram ledger.}
 \label{tab:dc4-complete}\\
 \toprule
 parity row&canonical $\ell$&$(k_1,k_2,k_3)$&$(q_a,q_A,q_b,q_c,q_C,q_d)$&exact bound for $E$\\
@@ -825,17 +845,18 @@ up to exchanging members within a doubled pair,
 \[
  (2/3,1/3,0,2/3,1/3,0),
 \]
-so equality is exact.  The ledger contains $2+2+4+4+4+4+8=28$ rows, namely
-all simple physical rows in switching classes $000$ through $110$.  The eight
-remaining simple rows are
+so equality is exact.  The ledger contains $2+2+4+4+4+4+8=28$ rows from the
+old $36$-word no-odd--odd slice.  Its eight remaining rows are
 \[
 010011,\ 010101,\ 011010,\ 011100,\quad
 100011,\ 100101,\ 101010,\ 101100;
 \]
 these are the exceptional automorphism orbit (four rows in class $110$ and four
 in class $111$) and are closed by the long-path certificates and structural
-deletion in the proof of Lemma~\ref{lem:dc4}. Thus the displayed
-$28+8=36$ count is the entire simple physical parity census.
+deletion in the proof of Lemma~\ref{lem:dc4}.  The other $28$ realizable
+parity words, each having an odd--odd doubled side, are closed by the strict
+twelve-state DNN ledger in that proof.  Thus the complete census is
+$28+8+28=64$, not $36$.
 
 \section{Complete doubled-triangle rational ledger}\label{app:dtri-ledger}
 
@@ -924,9 +945,11 @@ The finite rational audit checks twelve doubled-triangle type/parity orbits
 (32 labelled physical rows), partitioned accurately as 28 DNN rows and four
 structural class-$111$ rows; it also checks the two exact rational tangent
 certificates used when a class-$111$ parallel path is noncanonical.  It checks
-the doubled-$4$-cycle partition into 28 DNN rows and an eight-row exceptional
-orbit split equally between classes $110$ and $111$, all 56 physical $K_4$
-rows outside the all-odd switching
+the doubled-$4$-cycle old slice into 28 DNN rows and an eight-row exceptional
+orbit split equally between classes $110$ and $111$, plus the twelve normalized
+odd--odd Gram records covering all 20 relevant type states and all 28 formerly
+omitted labelled words.  It checks the strict upper bound $229/150<2$ for that
+repair and all 56 physical $K_4$ rows outside the all-odd switching
  class.  The separate all-odd-class audit checks all eight physical switching
 rows, the unit/long lower-length rules, and the exact physical Gram for the
 four three-edge-cut rows.  For the physically all-odd row, the finite audit
@@ -940,11 +963,12 @@ one-unit $e=0$ endpoint case, and the rational tangent bounds occurring in
 those records.  These records do not constitute a machine proof of the
 analytic tangent lemma or its all-length coverage.  Its canonical payload also
 commits to all audited doubled-$4$-cycle class counts, first and failed rows,
-class-$111$ long records, endpoint definitions and tangent constants, together
-with the $K_4$ endpoint and arithmetic constants.  Numeric leaves are restricted
-to integers and rational strings: floats and all other non-integral numeric
-types are rejected explicitly.  The verifier rejects 27 deliberately corrupted
-certificate payloads, including formerly uncovered constants.
+class-$111$ long records, endpoint definitions, tangent constants, and the
+odd--odd ledger, together with the $K_4$ endpoint and arithmetic constants.
+Numeric leaves are restricted to integers and rational strings: floats and all
+other non-integral numeric types are rejected explicitly.  The verifier rejects
+29 deliberately corrupted certificate payloads, including an omitted
+odd--odd state and a changed length-three angle.
 For the 56-row audit it reconstructs every switching invariant and physical
 sign transport while retaining the physical path parity.  Run the audit both
 normally and with Python assertions disabled:
@@ -959,10 +983,10 @@ normally and with Python assertions disabled:
 \end{verbatim}
 The first two commands must report the certificate digest
 \begin{verbatim}
-6d499af761ffa7317a431e5150dac59317618f508896be2c3ed77b250b43c901
+80cfecc4db26500f7526f635ab36dd7f8bd7aae0f06ab8b89125148e7756e859
 \end{verbatim}
 This canonical payload digest is embedded in the verifier and mirrored in the
-README manifest.  Those two commands must also report 27 rejected
+README manifest.  Those two commands must also report 29 rejected
 hostile mutations.  The standalone $K_4$ audit reports digest
 \texttt{b0c4ed64a12ccabe0a8a38cb9fdb85622d8f7c2d07bdf53f75eb1700a684fa39}
 and eight rejected mutations.  The standalone doubled-triangle audit reports
