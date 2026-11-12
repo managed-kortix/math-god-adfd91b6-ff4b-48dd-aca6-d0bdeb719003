@@ -5,8 +5,13 @@ from __future__ import annotations
 
 import copy
 import importlib.util
+import os
+import subprocess
+import sys
+import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 PATH = Path(__file__).with_name(
     "rank_seven_order_nine_transfer_dependency_adapter.py")
@@ -34,6 +39,72 @@ class TransferDependencyAdapterHostileTest(unittest.TestCase):
             self.assertRaisesRegex(RuntimeError, message)
         with context:
             self.m.validate_contract(candidate)
+
+    def test_optional_transfer_child_commands_are_isolated_and_mode_explicit(self):
+        result = copy.deepcopy(self.m.EXPECTED_TRANSFER)
+        raw = (self.m.canonical_bytes(result) +
+               (self.m.TRANSFER_PASS_LINE + "\n").encode("ascii"))
+        self.assertEqual(self.m.sha256_bytes(raw), self.m.TRANSFER_OUTPUT_SHA256)
+        completed = subprocess.CompletedProcess(
+            args=[], returncode=0, stdout=raw, stderr=b"")
+        commands = []
+
+        def capture(command, **kwargs):
+            commands.append((list(command), dict(kwargs["env"]), kwargs["cwd"]))
+            return completed
+
+        with mock.patch.dict(self.m.os.environ,
+                             {"PYTHONOPTIMIZE": "2"}, clear=False):
+            with mock.patch.object(self.m.subprocess, "run", side_effect=capture):
+                normal_raw, normal = self.m.run_transfer_once(optimized=False)
+                optimized_raw, optimized = self.m.run_transfer_once(optimized=True)
+        self.assertEqual(normal_raw, raw)
+        self.assertEqual(optimized_raw, raw)
+        self.assertEqual(normal, result)
+        self.assertEqual(optimized, result)
+        self.assertEqual(commands[0][0], [sys.executable, "-I", "-B",
+                         str(self.m.TRANSFER_VERIFIER)])
+        self.assertEqual(commands[1][0], [sys.executable, "-I", "-B", "-O",
+                         str(self.m.TRANSFER_VERIFIER)])
+        for command, environment, cwd in commands:
+            with self.subTest(command=command):
+                self.assertEqual(
+                    {key for key in environment if key.startswith("PYTHON")},
+                    {"PYTHONDONTWRITEBYTECODE"})
+                self.assertEqual(environment["PYTHONDONTWRITEBYTECODE"], "1")
+                self.assertEqual(cwd, self.m.ROOT)
+
+    def test_adapter_process_isolated_mode_suppresses_ambient_startup_hook(self):
+        with tempfile.TemporaryDirectory() as directory:
+            sentinel = Path(directory) / "sitecustomize-executed"
+            Path(directory, "sitecustomize.py").write_text(
+                "from pathlib import Path\n"
+                f"Path({str(sentinel)!r}).write_text('executed', encoding='ascii')\n",
+                encoding="ascii",
+            )
+            environment = dict(os.environ)
+            environment.update({
+                "PYTHONPATH": directory,
+                "PYTHONHOME": directory,
+                "PYTHONOPTIMIZE": "2",
+                "PYTHONDONTWRITEBYTECODE": "1",
+            })
+            outputs = []
+            for optimized in (False, True):
+                command = [sys.executable, "-I", "-B"]
+                if optimized:
+                    command.append("-O")
+                command.append(str(PATH))
+                completed = subprocess.run(
+                    command, cwd=self.m.ROOT, check=False, capture_output=True,
+                    env=environment)
+                self.assertEqual(completed.returncode, 0)
+                self.assertEqual(completed.stderr, b"")
+                outputs.append(completed.stdout)
+            self.assertFalse(sentinel.exists())
+            self.assertEqual(outputs[0], outputs[1])
+            self.assertEqual(self.m.sha256_bytes(outputs[0]),
+                             "f15f429f6ab8a1a8d5e9816a1da535caacfc2da75b5c45ed6cc48b750fb32126")
 
     def test_contract_separates_executed_and_reviewed_evidence(self):
         contract = self.contract

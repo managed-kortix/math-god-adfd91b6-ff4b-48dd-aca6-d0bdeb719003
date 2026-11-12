@@ -75,7 +75,7 @@ PYTHON_PINS = {
     STRUCTURAL_SCANNER: "bca85e48a018e7b7c998216e6e14dca38db82e4970709e51571de3aee2d089c7",
     TRANSFER: "4b9cb58aeb68b869b9c254a21ae7bd3cf18fc7360e7afb0a47fd8e570c40b2fe",
     TRANSFER_DEPENDENCY_ADAPTER:
-        "ad39b97f1a7a838b91ab79b8d4ba72400562c3f075899bbc956a6d3bde8365b5",
+        "05a7b35ca34cdb1e30d124f3647bebd4444e13fa07aeb22297afa2b1204930c9",
     OBSTRUCTION: "21acdb25b08b89ce9a5241932bc23d5fbdfec4c76333ab50c78d9371cf79e0b8",
     ANALYTIC_LIFT: "55e7d67a670f22a7b872b122f3aadcd2036ba922993f5faac1c5b72e2232e611",
     CENSUS_PRODUCER: "c6dcc792c7899c3f494a3beb521c94da972a01a392cd77be78b0956bbee3b921",
@@ -1607,14 +1607,16 @@ def run_transfer_dependency_adapter() -> dict[str, Json]:
     adapter_module = load_pinned_module(
         TRANSFER_DEPENDENCY_ADAPTER, "rank7_o9_master_transfer_dependency_adapter")
     outputs = []
-    # A parent launched through PYTHONOPTIMIZE must not turn the nominally normal
-    # replay into a second optimized replay.  Preserve unrelated process context,
-    # but remove this mode-changing variable and set bytecode behavior explicitly.
+    # Isolated mode ignores every PYTHON* startup variable and excludes the script
+    # directory and user site from sys.path.  This prevents ambient sitecustomize,
+    # usercustomize, or a PYTHONPATH shadow module from executing in either replay.
+    # Strip inherited PYTHON* variables as a second, explicit guard; -B below
+    # independently fixes bytecode behavior after PYTHONDONTWRITEBYTECODE is reset.
     environment = {key: value for key, value in os.environ.items()
-                   if key != "PYTHONOPTIMIZE"}
+                   if not key.startswith("PYTHON")}
     environment["PYTHONDONTWRITEBYTECODE"] = "1"
     for optimized in (False, True):
-        command = [sys.executable, "-B"]
+        command = [sys.executable, "-I", "-B"]
         if optimized:
             command.append("-O")
         command.append(str(TRANSFER_DEPENDENCY_ADAPTER))

@@ -11,6 +11,7 @@ import importlib.util
 import json
 import subprocess
 import sys
+import tempfile
 import unittest
 from copy import deepcopy
 from pathlib import Path
@@ -310,15 +311,38 @@ class OrderNineMasterHostileTest(unittest.TestCase):
                 self.master.run_transfer_dependency_adapter()
         self.assertEqual(len(commands), 2)
         normal, optimized = commands
-        self.assertEqual(normal[0], [sys.executable, "-B",
+        self.assertEqual(normal[0], [sys.executable, "-I", "-B",
                          str(self.master.TRANSFER_DEPENDENCY_ADAPTER)])
-        self.assertEqual(optimized[0], [sys.executable, "-B", "-O",
+        self.assertEqual(optimized[0], [sys.executable, "-I", "-B", "-O",
                          str(self.master.TRANSFER_DEPENDENCY_ADAPTER)])
         for command, environment, cwd in commands:
             with self.subTest(command=command):
-                self.assertNotIn("PYTHONOPTIMIZE", environment)
+                self.assertEqual(
+                    {key for key in environment if key.startswith("PYTHON")},
+                    {"PYTHONDONTWRITEBYTECODE"})
                 self.assertEqual(environment["PYTHONDONTWRITEBYTECODE"], "1")
                 self.assertEqual(cwd, self.master.ROOT)
+
+    def test_transfer_adapter_isolated_mode_suppresses_ambient_startup_hook(self):
+        with tempfile.TemporaryDirectory() as directory:
+            sentinel = Path(directory) / "sitecustomize-executed"
+            hook = Path(directory) / "sitecustomize.py"
+            hook.write_text(
+                "from pathlib import Path\n"
+                f"Path({str(sentinel)!r}).write_text('executed', encoding='ascii')\n",
+                encoding="ascii",
+            )
+            with mock.patch.dict(
+                    self.master.os.environ,
+                    {"PYTHONPATH": directory, "PYTHONHOME": directory,
+                     "PYTHONOPTIMIZE": "2"}, clear=False):
+                receipt = self.master.run_transfer_dependency_adapter()
+            self.assertFalse(sentinel.exists())
+            self.assertEqual(receipt["normal_output_sha256"],
+                             self.master.TRANSFER_DEPENDENCY_ADAPTER_OUTPUT_SHA256)
+            self.assertEqual(receipt["optimized_output_sha256"],
+                             self.master.TRANSFER_DEPENDENCY_ADAPTER_OUTPUT_SHA256)
+            self.assertIs(receipt["normal_optimized_byte_identical"], True)
 
     def test_transfer_adapter_hostile_promotion_and_gate_schema_rejected(self):
         receipt = self.master.run_transfer_dependency_adapter()

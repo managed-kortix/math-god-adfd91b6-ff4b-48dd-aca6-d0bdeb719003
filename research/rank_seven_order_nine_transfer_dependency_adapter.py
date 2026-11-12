@@ -17,6 +17,7 @@ from __future__ import annotations
 import hashlib
 import itertools
 import json
+import os
 import subprocess
 import sys
 from collections import Counter
@@ -403,11 +404,18 @@ def parse_transfer_output(raw: bytes) -> dict[str, Json]:
 
 
 def run_transfer_once(*, optimized: bool) -> tuple[bytes, dict[str, Json]]:
-    command = [sys.executable]
+    # Isolated mode ignores ambient PYTHON* startup variables and excludes the
+    # script directory/user site from sys.path.  The transfer child is stdlib-only,
+    # so no site initialization or repository import path is required.
+    command = [sys.executable, "-I", "-B"]
     if optimized:
         command.append("-O")
-    command.extend(("-B", str(TRANSFER_VERIFIER)))
-    completed = subprocess.run(command, cwd=ROOT, check=False, capture_output=True)
+    command.append(str(TRANSFER_VERIFIER))
+    environment = {key: value for key, value in os.environ.items()
+                   if not key.startswith("PYTHON")}
+    environment["PYTHONDONTWRITEBYTECODE"] = "1"
+    completed = subprocess.run(command, cwd=ROOT, check=False, capture_output=True,
+                               env=environment)
     require(completed.returncode == 0,
             f"finite transfer {'optimized' if optimized else 'normal'} execution failed")
     require(completed.stderr == b"",
