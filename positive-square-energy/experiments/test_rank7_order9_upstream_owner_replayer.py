@@ -159,6 +159,8 @@ class UpstreamOwnerReplayerTests(unittest.TestCase):
         m = self.module
         payload = {"z": 1, "a": [2, 3]}
         self.assertEqual(m.canonical_bytes(payload), b'{"a":[2,3],"z":1}\n')
+        self.assertEqual(m.SOS_OWNER_PHYSICAL, 134899)
+        self.assertEqual(m.UPSTREAM_OWNER_PHYSICAL, 136072)
         source = MODULE.read_text(encoding="utf-8")
         self.assertNotIn("numpy", source)
         self.assertNotIn("scipy", source)
