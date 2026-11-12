@@ -19,12 +19,14 @@ from __future__ import annotations
 import argparse
 import ast
 import hashlib
+import importlib.util
 import itertools
 import json
 import lzma
 import os
 import subprocess
 import sys
+from collections import Counter
 from copy import deepcopy
 from pathlib import Path
 from typing import Any, NoReturn
@@ -279,6 +281,16 @@ def sha256(raw: bytes) -> str:
     return hashlib.sha256(raw).hexdigest()
 
 
+def load_pinned_module(path: Path, name: str):
+    require(path in PYTHON_PINS and sha256(path.read_bytes()) == PYTHON_PINS[path],
+            f"module source changed: {path.name}")
+    spec = importlib.util.spec_from_file_location(name, path)
+    require(spec is not None and spec.loader is not None, f"cannot load {path.name}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 def exact_sha256(value: Json, label: str) -> str:
     require(type(value) is str and len(value) == 64 and
             all(character in "0123456789abcdef" for character in value),
@@ -351,7 +363,8 @@ def audit_no_asserts() -> int:
 def audit_coarse_source_contract(
         contract: dict[str, Json] | None = None,
         atom_source: str | None = None,
-        producer_source: str | None = None) -> dict[str, Json]:
+        producer_source: str | None = None,
+        engine_source: str | None = None) -> dict[str, Json]:
     """Bind the reusable atom separately from its order-nine application.
 
     The orders2--4 child audits the exact tetrahedral inequalities on its own 47
@@ -365,6 +378,8 @@ def audit_coarse_source_contract(
     atom_source = COARSE_ATOM.read_text("ascii") if atom_source is None else atom_source
     producer_source = (CENSUS_PRODUCER.read_text("ascii") if producer_source is None
                        else producer_source)
+    engine_source = (COARSE_ENGINE.read_text("ascii") if engine_source is None
+                     else engine_source)
     atom_fragments = (
         "if coloring[u] == coloring[v]:\n            if odd:\n                return None",
         "Fraction(1, 2) + (odd - 1) * Fraction(1, 6)",
@@ -377,17 +392,32 @@ def audit_coarse_source_contract(
     producer_fragments = (
         "BUDGET_SCALED = 180",
         "def restricted_colorings(order, limit=4):",
+        "for color in range(min(maximum + 1, limit - 1) + 1):",
         "crossing = colors[:, u] != colors[:, v]",
         "costs[crossing] += np.int16(18 * multiplicity)",
+        "np.minimum(view[:, :block], view[:, block:], out=view[:, :block])",
         "support = np.bitwise_or.reduce(np.where(nonzero, support_bits, 0), axis=1)",
         "threshold = BUDGET_SCALED - 10 * np.bitwise_count(support) + 13 * odd_sum",
         "selected = minimum[support] > threshold",
         '"coarse_certified_orbits": expected_orbits - residual_orbit_count',
     )
+    engine_fragments = (
+        "COST_SCALE = 30",
+        "BUDGET_SCALED = COST_SCALE * (RANK - 1)",
+        "def is_coarse_residual(n, edges, row):",
+        "weight = 18 * multiplicity + (10 - 13 * odd if odd else 0)",
+        "if required and color == other_color:",
+        "if color != other_color:\n                    added += weight",
+        "limit = min(used + 1, 4)",
+        "if cost > BUDGET_SCALED:\n            return False",
+        "return not visit(1, 1, 0)",
+    )
     require(all(fragment in atom_source for fragment in atom_fragments),
             "coarse atom exact semantic source contract changed")
     require(all(fragment in producer_source for fragment in producer_fragments),
-            "order-nine coarse-sieve source contract changed")
+            "order-nine vectorized coarse-sieve source contract changed")
+    require(all(fragment in engine_source for fragment in engine_fragments),
+            "order-nine source-engine coarse predicate contract changed")
     require(contract == {
         "atom_proof_scope": "47 order-four kernels; reusable exact tetrahedral inequalities only",
         "application_scope": "all 4,495 order-nine kernels and their parity orbits",
@@ -418,6 +448,101 @@ def audit_coarse_source_contract(
             require((odd == 0) is (not bool(odd)),
                     "same-color odd-support legality changed")
     return deepcopy(contract)
+
+
+def reference_coarse_residual(order: int, edges: tuple[tuple[int, int, int], ...],
+                              row: tuple[int, ...]) -> bool:
+    """Small independent exact oracle for both coarse predicate implementations.
+
+    This deliberately does not call either upstream implementation.  It
+    enumerates restricted-growth colorings and evaluates the per-class atom
+    `18m+(10-13o if o>0 else 0)` directly.
+    """
+    exact_int(order, "coarse oracle order", 1)
+    require(type(edges) is tuple and type(row) is tuple and len(edges) == len(row),
+            "coarse oracle malformed row")
+    colors = [0] * order
+
+    def visit(position: int, maximum: int, cost: int) -> bool:
+        if cost > 180:
+            return False
+        if position == order:
+            return True
+        for color in range(min(maximum + 1, 3) + 1):
+            colors[position] = color
+            added = 0
+            valid = True
+            for index, (u, v, multiplicity) in enumerate(edges):
+                if v != position and u != position:
+                    continue
+                other = u if v == position else v
+                if other >= position:
+                    continue
+                odd = row[index]
+                if odd and color == colors[other]:
+                    valid = False
+                    break
+                if color != colors[other]:
+                    added += 18 * multiplicity + (10 - 13 * odd if odd else 0)
+            if valid and visit(position + 1, max(maximum, color), cost + added):
+                return True
+        return False
+
+    colors[0] = 0
+    return not visit(1, 0, 0)
+
+
+def validate_dual_coarse_predicates() -> dict[str, Json]:
+    """Bind both implementations to an independent exact finite contract.
+
+    Exhaustive tests cover all rows on several deliberately asymmetric small
+    weighted supports.  They exercise positive/zero odd classes, up to four
+    colors, the support-superset minimum direction, and unequal radices without
+    rerunning the 65-million-orbit order-nine census a second time.
+    """
+    producer = load_pinned_module(CENSUS_PRODUCER, "rank7_o9_master_coarse_producer")
+    # The source engine imports optional networkx only for graph actions.  Load
+    # its exact predicate definition into a dependency-free namespace so this
+    # contract check exercises the pinned implementation itself even when that
+    # optional package is absent.
+    engine_tree = ast.parse(COARSE_ENGINE.read_text("ascii"), filename=str(COARSE_ENGINE))
+    predicate_node = next((node for node in engine_tree.body
+                           if isinstance(node, ast.FunctionDef) and
+                           node.name == "is_coarse_residual"), None)
+    require(predicate_node is not None, "source-engine coarse predicate missing")
+    namespace: dict[str, Json] = {"BUDGET_SCALED": 180}
+    exec(compile(ast.Module(body=[predicate_node], type_ignores=[]),
+                 str(COARSE_ENGINE), "exec"), namespace)
+    engine_predicate = namespace["is_coarse_residual"]
+    cases = (
+        (4, ((0, 1, 4), (0, 3, 4), (1, 3, 4), (2, 3, 4))),
+        (5, ((0, 1, 3), (1, 2, 1), (2, 3, 2), (3, 4, 1),
+             (0, 4, 2), (0, 2, 1), (1, 4, 1))),
+    )
+    row_total = residual_total = 0
+    for order, raw_edges in cases:
+        edges = tuple(raw_edges)
+        minimum = producer.coarse_sieve(order, edges)
+        for row in itertools.product(*(range(multiplicity + 1)
+                                       for _, _, multiplicity in edges)):
+            expected = reference_coarse_residual(order, edges, row)
+            support = sum((1 << index) for index, odd in enumerate(row) if odd)
+            threshold = 180 - 10 * support.bit_count() + 13 * sum(row)
+            vectorized = int(minimum[support]) > threshold
+            source_engine = engine_predicate(order, edges, row)
+            require(type(source_engine) is bool and vectorized is expected and
+                    source_engine is expected,
+                    "dual coarse predicates disagree with exact oracle")
+            row_total += 1
+            residual_total += expected
+    require(row_total == 1201 and residual_total == 248,
+            "dual coarse predicate fixture coverage changed")
+    return {"independent_oracle": "direct restricted-growth atom enumeration",
+            "fixture_total": len(cases), "row_total": row_total,
+            "residual_row_total": residual_total,
+            "vectorized_and_source_engine_equivalent": True,
+            "producer_sha256": PYTHON_PINS[CENSUS_PRODUCER],
+            "source_engine_sha256": PYTHON_PINS[COARSE_ENGINE]}
 
 
 def validate_coarse_application_chunks() -> dict[str, Json]:
@@ -737,6 +862,31 @@ def child_command(path: Path, arguments: tuple[str, ...]) -> list[str]:
     return [*command, str(path), *arguments]
 
 
+def run_structural_combined_with_keys() -> tuple[dict[str, Json], dict[str, list]]:
+    """Run the public combined API once and collect its live canonical key sink."""
+    module = load_pinned_module(STRUCTURAL, "rank7_o9_master_structural_api")
+    partitions: dict[str, list] = {"owner": [], "remainder": []}
+
+    def sink(partition: str, key: tuple[int, int, int, tuple[int, ...], int]) -> None:
+        require(type(partition) is str and partition in partitions,
+                "structural key sink emitted an unknown partition")
+        partitions[partition].append(canonical_key(key, "structural live key"))
+
+    result = module.replay_all_predicates(
+        key_sink=sink, reconstruct_fresh_census=True)
+    validate_structural(result, predicates=True, census=True)
+    require(result["complete"] is True and
+            result["predicate_replay_eligible"] is True and
+            result["census_reconstruction_eligible"] is True and
+            result["combined_replay_eligible"] is True,
+            "live structural combined API is ineligible")
+    return ({"name": "structural-combined",
+             "arguments": ["--full-rescan", "--reconstruct-census"],
+             "source_sha256": PYTHON_PINS[STRUCTURAL],
+             "output_sha256": sha256(canonical_bytes(result)), "result": result},
+            partitions)
+
+
 def run_child(name: str, path: Path, arguments: tuple[str, ...], output_sha256: str | None,
               validator, report_line: str | None = None) -> dict[str, Json]:
     require(path in PYTHON_PINS and sha256(path.read_bytes()) == PYTHON_PINS[path],
@@ -759,6 +909,75 @@ def run_child(name: str, path: Path, arguments: tuple[str, ...], output_sha256: 
     return {"name": name, "arguments": list(arguments),
             "source_sha256": PYTHON_PINS[path], "output_sha256": sha256(completed.stdout),
             "result": result}
+
+
+def canonical_key(record: list[Json] | tuple[Json, ...], label: str) -> tuple[int, int, int, tuple[int, ...], int]:
+    require(type(record) in (list, tuple) and len(record) == 5,
+            f"{label}: malformed canonical key")
+    source_index, global_kernel, order_kernel, raw_row, orbit_size = record
+    exact_int(source_index, f"{label}.source_index")
+    exact_int(global_kernel, f"{label}.global_kernel", 1)
+    exact_int(order_kernel, f"{label}.order_kernel", 1)
+    exact_int(orbit_size, f"{label}.orbit_size", 1)
+    require(type(raw_row) in (list, tuple) and
+            all(type(value) is int and value >= 0 for value in raw_row),
+            f"{label}: malformed parity row")
+    return source_index, global_kernel, order_kernel, tuple(raw_row), orbit_size
+
+
+def update_index_digest(digest: Any, source_index: int) -> None:
+    digest.update(f"{source_index}\n".encode("ascii"))
+
+
+def update_key_digest(digest: Any,
+                      key: tuple[int, int, int, tuple[int, ...], int]) -> None:
+    source_index, global_kernel, order_kernel, row, orbit_size = key
+    digest.update(canonical_bytes(
+        [source_index, global_kernel, order_kernel, list(row), orbit_size]))
+
+
+def update_target_digest(digest: Any,
+                         key: tuple[int, int, int, tuple[int, ...], int]) -> None:
+    """Hash all 16 canonical target keys without allocating JSON objects."""
+    source_index, global_kernel, order_kernel, row, orbit_size = key
+    row_text = ",".join(str(value) for value in row)
+    prefix = f"[{source_index},{global_kernel},{order_kernel},[{row_text}],{orbit_size},"
+    for coordinate in range(TARGETS_PER_RESIDUAL_ORBIT):
+        raw = (prefix + str(coordinate) + "]\n").encode("ascii")
+        # Keep this optimized encoding tied to the public canonical definition.
+        require(raw == canonical_bytes([source_index, global_kernel, order_kernel,
+                                        list(row), orbit_size, coordinate]),
+                "target-key encoding changed")
+        digest.update(raw)
+
+
+def key_ledger(keys: list[tuple[int, int, int, tuple[int, ...], int]],
+               label: str, *, require_order: bool = True,
+               include_targets: bool = True) -> dict[str, Json]:
+    index_digest = hashlib.sha256()
+    key_digest = hashlib.sha256()
+    target_digest = hashlib.sha256()
+    seen: set[int] = set()
+    previous = -1
+    physical = 0
+    for key in keys:
+        source_index = key[0]
+        require(source_index not in seen and
+                (not require_order or source_index > previous),
+                f"{label}: duplicate or out-of-order source key")
+        seen.add(source_index)
+        previous = source_index
+        physical += key[4]
+        update_index_digest(index_digest, source_index)
+        update_key_digest(key_digest, key)
+        if include_targets:
+            update_target_digest(target_digest, key)
+    return {"orbit_total": len(keys), "physical_total": physical,
+            "target_total": len(keys) * TARGETS_PER_RESIDUAL_ORBIT,
+            "source_index_sha256": index_digest.hexdigest(),
+            "key_sha256": key_digest.hexdigest(),
+            "target_key_sha256": (target_digest.hexdigest() if include_targets else None),
+            "source_indices": seen}
 
 
 def source_kernels_stdlib() -> dict[int, tuple[int, tuple[tuple[int, int, int], ...]]]:
@@ -830,6 +1049,61 @@ def cycle_authenticated_source(module) -> tuple[Json, ...]:
     return (None, kernels, report_sha, source_info, records, physical, strata, physical_strata)
 
 
+def structural_remainder_keys() -> list[tuple[int, int, int, tuple[int, ...], int]]:
+    """Read the exact structural complement in canonical source order."""
+    keys = []
+    for chunk_index in range(8):
+        path = (EXPERIMENTS / "rank7_order9_structural_owner_scheduler" / "results" /
+                f"chunk-{chunk_index:02d}.remainder.jsonl.xz")
+        require(path in DATA_PINS and sha256(path.read_bytes()) == DATA_PINS[path],
+                f"structural remainder artifact changed: {path.name}")
+        try:
+            with lzma.open(path, "rb") as stream:
+                for raw in stream:
+                    payload = strict_json(raw, path.name)
+                    require(raw == canonical_bytes(payload),
+                            f"{path.name}: noncanonical source row")
+                    keys.append(canonical_key(payload, path.name))
+        except lzma.LZMAError as error:
+            raise RuntimeError(f"cannot decompress {path.name}") from error
+    return keys
+
+
+def after_sos_keys() -> list[tuple[int, int, int, tuple[int, ...], int]]:
+    path = EXPERIMENTS / "rank7_order9_after_sos_remainder.jsonl.xz"
+    require(path in DATA_PINS and sha256(path.read_bytes()) == DATA_PINS[path],
+            "after-SOS artifact changed")
+    keys = []
+    try:
+        with lzma.open(path, "rb") as stream:
+            for raw in stream:
+                payload = strict_json(raw, path.name)
+                require(raw == canonical_bytes(payload), "after-SOS row is noncanonical")
+                keys.append(canonical_key(payload, path.name))
+    except lzma.LZMAError as error:
+        raise RuntimeError("cannot decompress after-SOS source") from error
+    return keys
+
+
+def owner_stream_keys(path: Path, label: str) -> list[tuple[int, int, int, tuple[int, ...], int]]:
+    require(path in DATA_PINS and sha256(path.read_bytes()) == DATA_PINS[path],
+            f"{label}: owner artifact changed")
+    keys = []
+    try:
+        with lzma.open(path, "rb") as stream:
+            for raw in stream:
+                # The dominant and cycle legacy payloads contain one permitted
+                # diagnostic float.  No value from that field enters key composition.
+                payload = json.loads(raw.decode("ascii"), parse_constant=lambda token: fail(
+                    f"{label}: nonstandard number {token}"))
+                require(type(payload) is list and len(payload) == 4,
+                        f"{label}: malformed owner payload")
+                keys.append(canonical_key(payload[0], label))
+    except (UnicodeError, json.JSONDecodeError, lzma.LZMAError) as error:
+        raise RuntimeError(f"cannot decode {label}") from error
+    return keys
+
+
 def run_cycle() -> dict[str, Json]:
     import importlib.util
     require(sha256(CYCLE.read_bytes()) == PYTHON_PINS[CYCLE], "cycle source changed")
@@ -879,6 +1153,182 @@ def run_cycle() -> dict[str, Json]:
     require(sha256(raw) == CYCLE_OUTPUT_SHA256, "cycle output digest changed")
     return {"name": "third-fourth-cycle-grams", "arguments": ["third", "fourth"],
             "source_sha256": PYTHON_PINS[CYCLE], "output_sha256": sha256(raw), "result": result}
+
+
+def compose_exact_stage_keys(
+        structural_partition: dict[str, list[tuple[int, int, int, tuple[int, ...], int]]]
+        | None = None) -> dict[str, Json]:
+    """Derive every residual boundary and all 16 target keys in the master.
+
+    In full mode ``structural_partition`` comes directly from the live combined
+    replayer's key sink.  Tests may inject a bounded synthetic partition.  Every
+    later lane is then reconstructed from exact authenticated source rows rather
+    than accepting child-supplied aggregate digests.
+    """
+    if structural_partition is None:
+        structural_partition = {"owner": [], "remainder": structural_remainder_keys()}
+    require(type(structural_partition) is dict and
+            set(structural_partition) == {"owner", "remainder"} and
+            all(type(value) is list for value in structural_partition.values()),
+            "structural key partition schema changed")
+    structural_owner = structural_partition["owner"]
+    structural_remainder = structural_partition["remainder"]
+    structural_all = sorted([*structural_owner, *structural_remainder])
+    structural_ledger = key_ledger(structural_owner, "structural owners")
+    structural_remainder_ledger = key_ledger(
+        structural_remainder, "structural remainder", include_targets=False)
+    universe_ledger = key_ledger(structural_all, "residual universe")
+    require(set(structural_owner).isdisjoint(structural_remainder) and
+            len(structural_all) == len(set(structural_all)),
+            "structural owner/remainder keys overlap")
+
+    # Replay APIs bind all SOS and dominant certificates to exact source rows.
+    upstream = load_pinned_module(UPSTREAM, "rank7_o9_master_upstream_api")
+    kernels = upstream.load_kernels()
+    _, structural_records = upstream.structural_source(kernels)
+    sos_report, sos_indices, after_records, _, _, _ = upstream.replay_sos(
+        kernels, structural_records)
+    _, dominant_indices, _ = upstream.replay_dominant(kernels, sos_report, after_records)
+    source_by_index = {key[0]: key for key in structural_remainder}
+    require(len(source_by_index) == len(structural_remainder) and
+            set(structural_records) == set(source_by_index) and
+            all(canonical_key(record, "upstream structural source row") ==
+                source_by_index[source_index]
+                for source_index, record in structural_records.items()),
+            "live structural remainder differs from upstream source universe")
+    sos_keys = [source_by_index[index] for index in sorted(sos_indices)]
+    after_sos = [canonical_key(record, "after-SOS API row")
+                 for _, record in sorted(after_records.items())]
+    require(after_sos == after_sos_keys() and
+            set(sos_keys).isdisjoint(after_sos) and
+            set(sos_keys) | set(after_sos) == set(structural_remainder),
+            "SOS owner/remainder boundary identity changed")
+    dominant_keys = [source_by_index[index] for index in sorted(dominant_indices)]
+
+    third_path = EXPERIMENTS / "rank7_order9_third_family_cycle_gram_owners.jsonl.xz"
+    fourth_path = EXPERIMENTS / "rank7_order9_fourth_family_cycle_gram_owners.jsonl.xz"
+    # Exact certificate replay is performed separately by run_cycle; here the
+    # master derives its source-key set directly from the pinned owner streams.
+    third_keys = owner_stream_keys(third_path, "third cycle owner")
+    fourth_keys = owner_stream_keys(fourth_path, "fourth cycle owner")
+    gram_keys = sorted([*dominant_keys, *third_keys, *fourth_keys])
+    after_sos_set = set(after_sos)
+    require(all(key in after_sos_set for key in gram_keys) and
+            len(gram_keys) == len(set(gram_keys)),
+            "Gram owner lanes overlap or escape the after-SOS universe")
+    gram_set = set(gram_keys)
+    post_gram = [key for key in after_sos if key not in gram_set]
+    require(gram_set.isdisjoint(post_gram) and
+            gram_set | set(post_gram) == after_sos_set,
+            "Gram owner/post-Gram boundary identity changed")
+
+    transfer = load_pinned_module(TRANSFER, "rank7_o9_master_transfer_api")
+    transfer_kernels = transfer.load_kernels()
+    witnesses, _, _, _ = transfer.classify_kernels(transfer_kernels)
+    transfer_keys = [key for key in post_gram if key[2] in witnesses]
+    obstruction_keys = [key for key in post_gram if key[2] not in witnesses]
+    require(set(transfer_keys).isdisjoint(obstruction_keys) and
+            set(transfer_keys) | set(obstruction_keys) == set(post_gram),
+            "transfer/obstruction boundary identity changed")
+
+    lanes = {
+        "structural": structural_owner, "sos": sos_keys,
+        "dominant_gram": dominant_keys, "third_cycle_gram": third_keys,
+        "fourth_cycle_gram": fourth_keys, "transfer": transfer_keys,
+        "obstruction": obstruction_keys,
+    }
+    ledgers = {name: key_ledger(keys, name) for name, keys in lanes.items()}
+    remainder_ledgers = {
+        "after_structural": structural_remainder_ledger,
+        "after_sos": key_ledger(after_sos, "after SOS", include_targets=False),
+        "after_gram": key_ledger(post_gram, "after Gram", include_targets=False),
+        "after_transfer": key_ledger(obstruction_keys, "after transfer",
+                                     include_targets=False),
+    }
+    expected_counts = {
+        "structural": 2_450_066, "sos": 113_309, "dominant_gram": 1128,
+        "third_cycle_gram": 631, "fourth_cycle_gram": 1036,
+        "transfer": 268_110, "obstruction": 1615,
+    }
+    expected_physical = {
+        "structural": 3_076_384, "sos": 134_899, "dominant_gram": 1173,
+        "third_cycle_gram": 748, "fourth_cycle_gram": 1283,
+        "transfer": 302_177, "obstruction": 1945,
+    }
+    require({name: ledger["orbit_total"] for name, ledger in ledgers.items()} ==
+            expected_counts and
+            {name: ledger["physical_total"] for name, ledger in ledgers.items()} ==
+            expected_physical,
+            "exact stage key ledgers changed")
+    all_lane_keys = [key for name in expected_counts for key in lanes[name]]
+    require(len(all_lane_keys) == RESIDUAL_ORBITS and
+            len(set(all_lane_keys)) == RESIDUAL_ORBITS and
+            set(all_lane_keys) == set(structural_all),
+            "residual stage keys have a gap, overlap, or substitution")
+    require(universe_ledger["orbit_total"] == RESIDUAL_ORBITS and
+            universe_ledger["physical_total"] == RESIDUAL_PHYSICAL and
+            sum(ledger["target_total"] for ledger in ledgers.values()) ==
+            RESIDUAL_TARGETS,
+            "residual target expansion changed")
+    for ledger in (*ledgers.values(), *remainder_ledgers.values(), universe_ledger):
+        ledger.pop("source_indices")
+    lane_implications = {
+        "structural": {
+            "kind": "structural-all-length-rooted-tree-owner",
+            "authenticated_by": "fresh structural predicate replay",
+            "all_target_indices": True, "all_lengths": True,
+            "rooted_tree_attachments": True},
+        "sos": {
+            "kind": "retained-branch-Gram-fixed-parity-owner",
+            "authenticated_by": "exact scalar/typed SOS Fraction replay",
+            "all_target_indices": True, "all_lengths": True,
+            "rooted_tree_attachments": True},
+        "dominant_gram": {
+            "kind": "retained-branch-Gram-fixed-parity-owner",
+            "authenticated_by": "exact dominant Gram Fraction replay",
+            "all_target_indices": True, "all_lengths": True,
+            "rooted_tree_attachments": True},
+        "third_cycle_gram": {
+            "kind": "retained-branch-Gram-fixed-parity-owner",
+            "authenticated_by": "exact third cycle-space Gram Fraction replay",
+            "all_target_indices": True, "all_lengths": True,
+            "rooted_tree_attachments": True},
+        "fourth_cycle_gram": {
+            "kind": "retained-branch-Gram-fixed-parity-owner",
+            "authenticated_by": "exact fourth cycle-space Gram Fraction replay",
+            "all_target_indices": True, "all_lengths": True,
+            "rooted_tree_attachments": True},
+        "transfer": {
+            "kind": "kernel-wide-induced-territory-spectral-owner",
+            "authenticated_by": "finite classifier plus transfer analytic adapter",
+            "all_target_indices": True, "all_lengths": True,
+            "rooted_tree_attachments": True},
+        "obstruction": {
+            "kind": "uniform-all-descendant-branch-Gram-owner",
+            "authenticated_by": "exact switched-three-ray/direct Gram replay",
+            "all_target_indices": True, "all_lengths": True,
+            "rooted_tree_attachments": True},
+    }
+    require(set(lane_implications) == set(lanes) and
+            all(contract["all_target_indices"] is True and
+                contract["all_lengths"] is True and
+                contract["rooted_tree_attachments"] is True
+                for contract in lane_implications.values()),
+            "per-lane implication contracts changed")
+    return {"schema": "rank-seven-order-nine-exact-key-composition-v1",
+            "row_key_encoding":
+                "[source_index,global_kernel,order_kernel,row,orbit_size]",
+            "target_index_semantics": {
+                "indices": list(range(TARGETS_PER_RESIDUAL_ORBIT)),
+                "index_0": "canonical simple length vector c",
+                "indices_1_through_15":
+                    "c+2e_i for the ordered fifteen physical kernel edges",
+                "target_key_encoding": "canonical row key followed by target_index"},
+            "universe": universe_ledger, "lanes": ledgers,
+            "lane_implication_contracts": lane_implications,
+            "remainders": remainder_ledgers,
+            "exact_disjoint_union": True, "all_sixteen_frontiers_expanded": True,
+            "finite_premise_row_targets": RESIDUAL_TARGETS}
 
 
 def validate_target_accounting(coarse_orbits: int = COARSE_ORBITS,
@@ -935,6 +1385,68 @@ def validate_partition(orbits: dict[str, int] | None = None,
             307326 - physical["gram"] == 304122 and
             304122 == physical["transfer"] + physical["obstruction"],
             "precedence physical complements changed")
+
+
+def validate_transfer_analytic_adapter(transfer_result: dict[str, Json]) -> dict[str, Json]:
+    """Authenticate the analytic implication intentionally omitted by the finite child.
+
+    The transfer child reports ``analytic_dependencies_authenticated=false`` because
+    it proves only the finite kernel/row classification.  This adapter consumes that
+    explicit nonclaim, the pinned transfer proof, and the exact rank-two through
+    rank-four theorem statements needed for each classified territory rank.
+    """
+    require(transfer_result["analytic_dependencies_authenticated"] is False and
+            transfer_result["canonical_kernel_types"] == {
+                "2-cross-4": 1122, "3-cross-2": 400,
+                "3-cross-3": 1689, "4-cross-2": 811} and
+            transfer_result["partition_owned_orbits"] == 268_110 and
+            transfer_result["target_orbits"]["partition"] == 4_289_760,
+            "finite transfer interface changed")
+    note = TRANSFER_NOTE.read_text("ascii")
+    required_note = (
+        "**Induced-partition transfer theorem.**",
+        "V(K) = S disjoint_union T",
+        "both induced multigraphs `K[S]` and `K[T]` are connected and have",
+        "cyclomatic ranks at least two",
+        "sigma(G) >= sigma(G[U]) + sigma(G[W]).",
+        "The crossing edges are simply omitted by the",
+        "principal-block pinching; no edge-addition monotonicity is asserted.",
+        "tr(A_+^2) = max_(X psd) {2 tr(AX) - tr(X^2)}.",
+        "beta(K[S]) + beta(K[T]) + c - 1 = beta(K) = 7.",
+        "(4,2), (3,3), (3,2), or (2,2)",
+        "This applies to every path-length vector and parity pattern that yields a",
+        "simple realization, and every rooted-tree attachment",
+    )
+    require(all(fragment in note for fragment in required_note),
+            "induced-transfer analytic theorem contract changed")
+    theorem_contracts = {
+        BICYCLIC: ("$|E(G)|=n+1$", "\\boxed{\\splus(G)>n}"),
+        TRICYCLIC: ("$|E(G)|=n+2$", "\\boxed{\\splus(G)\\geq n}"),
+        TETRACYCLIC: ("$|E(G)|=n+3$", "\\boxed{\\splus(G)\\geq n}"),
+    }
+    for path, fragments in theorem_contracts.items():
+        text = path.read_text("ascii")
+        require("Every finite simple connected graph $G$" in text and
+                all(fragment in text for fragment in fragments),
+                f"imported lower-rank theorem contract changed: {path.parent.name}")
+    tricyclic = TRICYCLIC.read_text("ascii")
+    require("\\begin{lemma}[Induced superadditivity]\\label{lem:super}" in tricyclic and
+            "\\splus(G)\\geq\\sum_{j=1}^r\\splus(G[V_j])" in tricyclic,
+            "induced superadditivity source contract changed")
+    return {
+        "schema": "rank-seven-order-nine-transfer-analytic-adapter-v1",
+        "finite_child_reported_dependencies_authenticated": False,
+        "adapter_authenticated": True,
+        "transfer_note_sha256": DOCUMENT_PINS[TRANSFER_NOTE],
+        "induced_superadditivity_source_sha256": DOCUMENT_PINS[TRICYCLIC],
+        "lower_rank_theorem_sha256": {
+            "rank_2": DOCUMENT_PINS[BICYCLIC],
+            "rank_3": DOCUMENT_PINS[TRICYCLIC],
+            "rank_4": DOCUMENT_PINS[TETRACYCLIC]},
+        "classified_territory_ranks": [2, 3, 4],
+        "owned_rows": 268_110, "owned_targets": 4_289_760,
+        "all_lengths": True, "rooted_tree_attachments": True,
+    }
 
 
 def validate_analytic_sources() -> dict[str, Json]:
@@ -1072,6 +1584,26 @@ def hostile_self_checks() -> int:
         count += 1
     else:
         fail("hostile same-color positive-odd source mutation accepted")
+    engine_mutations = (
+        ("engine-weight", "18 * multiplicity + (10 - 13 * odd if odd else 0)",
+         "17 * multiplicity + (10 - 13 * odd if odd else 0)"),
+        ("engine-required-crossing", "if required and color == other_color:",
+         "if False and required and color == other_color:"),
+        ("engine-color-limit", "limit = min(used + 1, 4)",
+         "limit = min(used + 1, 5)"),
+        ("engine-budget-direction", "if cost > BUDGET_SCALED:",
+         "if cost >= BUDGET_SCALED:"),
+    )
+    original_engine = COARSE_ENGINE.read_text("ascii")
+    for label, old, new in engine_mutations:
+        hostile = original_engine.replace(old, new, 1)
+        require(hostile != original_engine, f"hostile setup failed: {label}")
+        try:
+            audit_coarse_source_contract(engine_source=hostile)
+        except RuntimeError:
+            count += 1
+        else:
+            fail(f"hostile coarse source-engine mutation accepted: {label}")
     return count
 
 
@@ -1079,6 +1611,7 @@ def quick_manifest(dependencies: dict[str, str], analytic: dict[str, Json],
                    coarse_contract: dict[str, Json],
                    coarse_application: dict[str, Json],
                    coarse_atom: dict[str, Json],
+                   dual_predicates: dict[str, Json],
                    target_accounting: dict[str, Json]) -> dict[str, Json]:
     return {"schema": SCHEMA, "evidence_kind": "fail-closed-authentication-only",
             "mode": "quick", "theorem_eligible": False, "global_claim": False,
@@ -1086,6 +1619,7 @@ def quick_manifest(dependencies: dict[str, str], analytic: dict[str, Json],
             "dependency_sha256": dependencies, "analytic_contract": analytic,
             "coarse_atom_contract": coarse_contract,
             "coarse_atom_audit": coarse_atom,
+            "dual_coarse_predicate_contract": dual_predicates,
             "stored_coarse_application_ledger": coarse_application,
             "target_accounting": target_accounting,
             "residual_partition_orbits": PARTITION_ORBITS,
@@ -1097,12 +1631,96 @@ def quick_manifest(dependencies: dict[str, str], analytic: dict[str, Json],
                 "obstruction branch-Gram gate"]}
 
 
+def discharge_finite_premise(analytic: dict[str, Json],
+                             coarse_contract: dict[str, Json],
+                             coarse_application: dict[str, Json],
+                             dual_predicates: dict[str, Json],
+                             key_composition: dict[str, Json],
+                             transfer_adapter: dict[str, Json]) -> dict[str, Json]:
+    """Consume the conditional theorem interface and construct its order-9 premise."""
+    require(analytic["evidence_kind"] == "conditional-analytic-implication" and
+            analytic["finite_premise_discharged"] is False and
+            analytic["global_claim"] is False and analytic["rank"] == 7 and
+            analytic["budget"] == 6 and analytic["kernel_orders"] == [2, 12] and
+            analytic["finite_premise"] ==
+                "every canonical-plus-coordinate key has an exact budget-six owner" and
+            analytic["conclusion_if_premise_discharged"] == "s+(G)>=|V(G)|",
+            "conditional analytic interface changed")
+    require(coarse_contract == COARSE_ATOM_CONTRACT and
+            coarse_contract["owner_semantics"] ==
+                "one retained branch Gram per parity orbit; fixed-parity coordinatewise path lengthening" and
+            coarse_contract["attachments"] ==
+                "arbitrary finite rooted trees by one-vertex additivity" and
+            dual_predicates["vectorized_and_source_engine_equivalent"] is True and
+            coarse_application["producer_rerun_and_byte_equality_validated"] is True and
+            coarse_application["kernel_total"] == 4495 and
+            coarse_application["coarse_owner_orbits"] == COARSE_ORBITS and
+            coarse_application["residual_orbits"] == RESIDUAL_ORBITS and
+            coarse_application["parity_orbits"] == PARITY_ORBITS and
+            coarse_application["coarse_owner_orbits"] +
+                coarse_application["residual_orbits"] ==
+                coarse_application["parity_orbits"] and
+            coarse_application["per_kernel_complements_validated"] is True,
+            "coarse finite alternative is incomplete")
+    universe = key_composition["universe"]
+    require(key_composition["exact_disjoint_union"] is True and
+            key_composition["all_sixteen_frontiers_expanded"] is True and
+            key_composition["target_index_semantics"]["indices"] == list(range(16)) and
+            set(key_composition["lane_implication_contracts"]) ==
+                set(key_composition["lanes"]) and
+            all(contract["all_target_indices"] is True and
+                contract["all_lengths"] is True and
+                contract["rooted_tree_attachments"] is True
+                for contract in key_composition["lane_implication_contracts"].values()) and
+            universe["orbit_total"] == RESIDUAL_ORBITS and
+            universe["target_total"] == RESIDUAL_TARGETS and
+            exact_sha256(universe["target_key_sha256"], "residual target digest") and
+            transfer_adapter["adapter_authenticated"] is True and
+            transfer_adapter["owned_rows"] == 268_110 and
+            transfer_adapter["owned_targets"] == 4_289_760 and
+            transfer_adapter["all_lengths"] is True and
+            transfer_adapter["rooted_tree_attachments"] is True,
+            "residual finite alternative is incomplete")
+    lane_target_totals = {name: row["target_total"]
+                          for name, row in key_composition["lanes"].items()}
+    require(lane_target_totals == {
+        "structural": 39_201_056, "sos": 1_812_944,
+        "dominant_gram": 18_048, "third_cycle_gram": 10_096,
+        "fourth_cycle_gram": 16_576, "transfer": 4_289_760,
+        "obstruction": 25_840,
+    } and sum(lane_target_totals.values()) == RESIDUAL_TARGETS,
+            "lane target alternatives changed")
+    return {"schema": "rank-seven-order-nine-finite-premise-discharge-v1",
+            "conditional_interface_schema": analytic["schema"],
+            "conditional_interface_reported_discharge": False,
+            "scope": "rank-seven order-nine single-positive-rank-block only",
+            "coarse_alternative": "one retained tetrahedral branch Gram per coarse orbit; all same-parity descendants",
+            "coarse_owner_orbits": COARSE_ORBITS,
+            "coarse_target_equivalent_bookkeeping": COARSE_TARGET_EQUIVALENT,
+            "coarse_semantic_contract_authenticated": True,
+            "producer_rerun_and_byte_equality_validated": True,
+            "residual_alternative": "exact disjoint owner lane for every canonical-plus-coordinate target",
+            "residual_target_total": RESIDUAL_TARGETS,
+            "residual_target_key_sha256": universe["target_key_sha256"],
+            "target_indices": list(range(16)),
+            "lane_target_totals": lane_target_totals,
+            "transfer_analytic_adapter": transfer_adapter,
+            "full_parity_orbit_identity": [COARSE_ORBITS, RESIDUAL_ORBITS, PARITY_ORBITS],
+            "finite_premise_discharged": True,
+            "conclusion": analytic["conclusion_if_premise_discharged"],
+            "global_claim": False}
+
+
 def full_manifest(dependencies: dict[str, str], analytic: dict[str, Json],
                   coarse_contract: dict[str, Json], coarse_application: dict[str, Json],
-                  coarse_atom: dict[str, Json], target_accounting: dict[str, Json],
+                  coarse_atom: dict[str, Json], dual_predicates: dict[str, Json],
+                  target_accounting: dict[str, Json], key_composition: dict[str, Json],
+                  transfer_adapter: dict[str, Json], premise: dict[str, Json],
                   structural: dict[str, Json], downstream: list[dict[str, Json]]) -> dict[str, Json]:
+    theorem_eligible = premise.get("finite_premise_discharged") is True
+    require(theorem_eligible, "composed finite premise is not discharged")
     return {"schema": SCHEMA, "evidence_kind": "current-process-exact-theorem-gate",
-            "mode": "full", "theorem_eligible": True, "global_claim": False,
+            "mode": "full", "theorem_eligible": theorem_eligible, "global_claim": False,
             "scope": {"kernel": "loopless 2-connected rank-seven multigraph of order nine",
                 "realization": "finite simple positive-length subdivision; at most one unit path per parallel class",
                 "block_scope": "exactly one positive-rank cyclic block",
@@ -1113,8 +1731,12 @@ def full_manifest(dependencies: dict[str, str], analytic: dict[str, Json],
                 "residual_orbits": RESIDUAL_ORBITS, "residual_physical": RESIDUAL_PHYSICAL},
             "coarse_atom_contract": coarse_contract,
             "coarse_atom_audit": coarse_atom,
-            "fresh_coarse_application_ledger": coarse_application,
+            "dual_coarse_predicate_contract": dual_predicates,
+            "producer_rerun_and_stored_complement_ledger": coarse_application,
             "target_accounting": target_accounting,
+            "exact_key_composition": key_composition,
+            "transfer_analytic_adapter": transfer_adapter,
+            "finite_premise_discharge": premise,
             "precedence": ["structural", "sos", "dominant-gram", "third-cycle-gram",
                            "fourth-cycle-gram", "transfer", "obstruction"],
             "residual_partition_orbits": PARTITION_ORBITS,
@@ -1136,21 +1758,18 @@ def full_manifest(dependencies: dict[str, str], analytic: dict[str, Json],
 def audit(full: bool) -> dict[str, Json]:
     validate_partition()
     target_accounting = validate_target_accounting()
-    require(hostile_self_checks() == 19, "hostile self-check count changed")
+    require(hostile_self_checks() == 23, "hostile self-check count changed")
     dependencies = audit_pins()
     require(audit_no_asserts() == len(PYTHON_PINS) + 1, "AST source count changed")
     analytic = validate_analytic_sources()
     coarse_contract = audit_coarse_source_contract()
     coarse_atom = run_coarse_atom()
+    dual_predicates = validate_dual_coarse_predicates()
     coarse_application = validate_coarse_application_chunks()
     if not full:
         return quick_manifest(dependencies, analytic, coarse_contract, coarse_application,
-                              coarse_atom, target_accounting)
-    structural = run_child("structural-combined", STRUCTURAL,
-                           ("--full-rescan", "--reconstruct-census"), None,
-                           lambda result: validate_structural(result, predicates=True, census=True))
-    require(structural["result"]["combined_replay_eligible"] is True,
-            "combined structural replay is ineligible")
+                              coarse_atom, dual_predicates, target_accounting)
+    structural, structural_partition = run_structural_combined_with_keys()
     upstream = run_child("upstream-sos-dominant", UPSTREAM, (), UPSTREAM_OUTPUT_SHA256,
                          validate_upstream)
     cycle = run_cycle()
@@ -1167,12 +1786,21 @@ def audit(full: bool) -> dict[str, Json]:
             structural["result"]["per_kernel_residual_ledgers_validated"] is True,
             "fresh census and independent coarse application ledgers disagree")
     coarse_application = {**coarse_application,
-                          "fresh_producer_reconstruction_validated": True,
+                          "producer_rerun_and_byte_equality_validated": True,
+                          "fresh_coarse_owner_keys_materialized": False,
                           "producer_sha256": PYTHON_PINS[CENSUS_PRODUCER],
                           "source_engine_sha256": PYTHON_PINS[COARSE_ENGINE],
                           "fixture_sha256": DATA_PINS[KERNEL_FIXTURE]}
+    key_composition = compose_exact_stage_keys(structural_partition)
+    transfer_adapter = validate_transfer_analytic_adapter(transfer["result"])
+    premise = discharge_finite_premise(
+        analytic, coarse_contract, coarse_application, dual_predicates,
+        key_composition, transfer_adapter)
+    require(premise["finite_premise_discharged"] is True,
+            "order-nine finite premise remains conditional")
     return full_manifest(dependencies, analytic, coarse_contract, coarse_application,
-                         coarse_atom, target_accounting, structural,
+                         coarse_atom, dual_predicates, target_accounting,
+                         key_composition, transfer_adapter, premise, structural,
                          [upstream, cycle, transfer, obstruction])
 
 
