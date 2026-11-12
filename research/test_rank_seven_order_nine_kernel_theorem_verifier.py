@@ -241,7 +241,10 @@ class OrderNineMasterHostileTest(unittest.TestCase):
         self.assertEqual(
             self.master.sha256(source.encode("ascii")),
             self.master.DOCUMENT_PINS[self.master.SWITCHED_THREE_RAY_NOTE])
-        self.assertIn("insert the internal\nvectors at equal angular increments", source)
+        self.assertIn("original path vectors `v_0=z_u,v_l=z_v`, set `w_i=(-1)^i v_i`", source)
+        self.assertIn("`f_l(-1)=l tan^2(pi/(2l))`: finite for `l>1` and infinite for `l=1`", source)
+        self.assertIn("restricted family nevertheless deliberately assigns it charge `+infinity`", source)
+        self.assertIn("insert the internal `w_i` at equal angular\nincrements", source)
         self.assertIn("convexity of\n`tan`", source)
         self.assertIn("tan(y/l) <= tan(y)/l", source)
         self.assertIn("it is not asserted to be the exact path-chain cost", source)

@@ -58,10 +58,14 @@ other switched-three-ray Gram exists; they require another owner lane.
 Take equilateral unit vectors `a_0,a_1,a_2`, so
 `<a_i,a_j>=-1/2` for `i!=j`, and assign
 `z_v=(-1)^{s_v}a_{c_v}`. If `x_e=0`, the endpoint correlation is
-`(-1)^{d_e}`. A canonical path is finite only when its parity agrees with
-`d_e`. Hence a monochromatic bundle is possible precisely in the two pure
-cases in the first line of the table, and then all of its paths are signed
-zero-cost contractions.
+`(-1)^{d_e}`. In this retained table-bound family, an `x_e=0` path is
+assigned finite charge only when its parity agrees with `d_e`; then it is a
+signed zero-cost contraction. A parity mismatch has transformed correlation
+`t=-1`, whose actual optimum is
+`f_l(-1)=l tan^2(pi/(2l))`: finite for `l>1` and infinite for `l=1`. This
+restricted family nevertheless deliberately assigns it charge `+infinity`.
+Hence a monochromatic bundle is admitted only in the two pure cases in the
+first table line.
 
 If `x_e=1`, put `t=(-1)^l<z_u,z_v>` for a path of length `l`. Its exact
 path-optimal DNN excess is
@@ -70,9 +74,10 @@ path-optimal DNN excess is
 f_l(t) = l tan^2(acos(t)/(2l)).
 ```
 
-Here is both the path construction and the promised rational bound. Alternately
-negate consecutive path vectors, let `beta=acos(t)`, and insert the internal
-vectors at equal angular increments `beta/l` on the endpoint great-circle arc.
+Here is both the path construction and the promised rational bound. For the
+original path vectors `v_0=z_u,v_l=z_v`, set `w_i=(-1)^i v_i`; then
+`<w_0,w_l>=t`. Let `beta=acos(t)` and insert the internal `w_i` at equal angular
+increments `beta/l` on the endpoint great-circle arc.
 The Gram of these actual unit vectors is PSD, has the prescribed endpoints, and
 has exact path excess `f_l(t)`. Put `y=beta/2`. For `-1<t<=1`, convexity of
 `tan` on `[0,pi/2)` and `tan(0)=0` give
