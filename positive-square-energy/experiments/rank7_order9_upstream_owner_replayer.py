@@ -179,7 +179,8 @@ def strict_xz_rows(path: Path, info: dict, validator):
             {"path", "record_total", "raw_sha256", "artifact_sha256"} and
             info["path"] == path.name and type(info["record_total"]) is int and
             info["record_total"] >= 0 and
-            all(isinstance(info[key], str) and len(info[key]) == 64
+            all(isinstance(info[key], str) and len(info[key]) == 64 and
+                all(character in "0123456789abcdef" for character in info[key])
                 for key in ("raw_sha256", "artifact_sha256")),
             f"malformed stream descriptor: {path.name}")
     require(sha256(path) == info["artifact_sha256"],
@@ -331,6 +332,7 @@ def replay_sos(kernels, source_records):
             report.get("remaining_target_total") == SOS_REMAINDER_TOTAL * TARGETS_PER_ROW,
             "SOS report semantics changed")
     owner_seen = set()
+    owner_key_digest = hashlib.sha256()
     counts = Counter()
     physical = Counter()
     last_remainder_index = -1
@@ -383,6 +385,7 @@ def replay_sos(kernels, source_records):
             cost, _, _ = gram_cost(signed, paths, type_ids, tuple(parameters))
             require(cost is not None and cost == stored_cost and cost <= BUDGET,
                     "typed SOS exact cost mismatch")
+        owner_key_digest.update(f"{source_index}\n".encode("ascii"))
         counts[lane] += 1
         physical[lane] += orbit_size
 
@@ -406,7 +409,8 @@ def replay_sos(kernels, source_records):
             owner_seen.isdisjoint(remainder_seen) and
             owner_seen | remainder_seen == set(source_records),
             "SOS owner/remainder complement changed")
-    return report, owner_seen, remainder_records, counts, physical
+    return (report, owner_seen, remainder_records, counts, physical,
+            owner_key_digest.hexdigest())
 
 
 def replay_dominant(kernels, sos_report, after_sos_records):
@@ -428,6 +432,7 @@ def replay_dominant(kernels, sos_report, after_sos_records):
             "dominant-family report semantics changed")
     maximum_denominator = report["gram"]["maximum_denominator"]
     owners = set()
+    owner_key_digest = hashlib.sha256()
     physical = 0
     denominators = Counter()
 
@@ -475,6 +480,7 @@ def replay_dominant(kernels, sos_report, after_sos_records):
         cost, _, _ = gram_cost(signed, paths, type_ids, tuple(parameters))
         require(cost is not None and cost == stored_cost and cost <= BUDGET,
                 "dominant owner exact cost mismatch")
+        owner_key_digest.update(f"{source_index}\n".encode("ascii"))
         physical += orbit_size
 
     strict_xz_rows(DOMINANT_OWNERS, report["owner_stream"], owner)
@@ -482,18 +488,20 @@ def replay_dominant(kernels, sos_report, after_sos_records):
             report.get("used_denominators") ==
             {str(key): value for key, value in sorted(denominators.items())},
             "dominant owner/report accounting changed")
-    return report, owners
+    return report, owners, owner_key_digest.hexdigest()
 
 
 def replay():
     kernels = load_kernels()
     _, source_records = structural_source(kernels)
-    sos_report, sos_owners, after_sos, counts, physical = replay_sos(
-        kernels, source_records)
-    _, dominant_owners = replay_dominant(kernels, sos_report, after_sos)
+    (sos_report, sos_owners, after_sos, counts, physical,
+     sos_owner_key_sha256) = replay_sos(kernels, source_records)
+    (_, dominant_owners,
+     dominant_owner_key_sha256) = replay_dominant(kernels, sos_report, after_sos)
     result = {
         "arithmetic": "fractions.Fraction",
         "dominant_family": {
+            "owner_key_sha256": dominant_owner_key_sha256,
             "owner_orbits": len(dominant_owners),
             "owner_physical": DOMINANT_PHYSICAL,
             "owner_targets": len(dominant_owners) * TARGETS_PER_ROW,
@@ -503,6 +511,7 @@ def replay():
             "after_sos_orbits": len(after_sos),
             "exclusive_owner_orbits": dict(sorted(counts.items())),
             "exclusive_owner_physical": dict(sorted(physical.items())),
+            "owner_key_sha256": sos_owner_key_sha256,
             "owner_orbits": len(sos_owners),
             "owner_targets": len(sos_owners) * TARGETS_PER_ROW,
             "structural_remainder_orbits": len(source_records),
