@@ -12,10 +12,11 @@ requires an exact lane-implication registry and a separately authenticated
 analytic-dependency registry.  It derives only the bounded order-nine finite
 premise; it never emits theorem eligibility or a global analytic claim.
 
-A canonical row key is the full five-field tuple
-``(source_index, global_kernel, order_kernel, row_tuple, orbit_size)``.
-``source_index`` is checked separately as unique, strictly source-ordered
-metadata.  It is not the row identity, and it need not be consecutive.
+A canonical artifact row identity is the full five-field tuple
+``(source_index, global_kernel, order_kernel, row_tuple, orbit_size)``; no
+proper subset is treated as the identity.  The ``source_index`` field is also
+checked separately as unique, strictly source-ordered metadata, but it need
+not be consecutive.
 """
 
 from __future__ import annotations
@@ -173,6 +174,84 @@ def _is_sha256(value: object) -> bool:
             all(character in "0123456789abcdef" for character in value))
 
 
+def _boundary_receipt(stage: str, source_values: Iterable[object],
+                      owner_values: Iterable[object],
+                      remainder_values: Iterable[object]) -> tuple[
+                          dict[str, Json], tuple[RowKey, ...], tuple[RowKey, ...],
+                          tuple[RowKey, ...]]:
+    """Revalidate a partition and derive its receipt only from canonical rows."""
+    require(type(stage) is str and bool(stage) and stage.isascii(),
+            "stage must be a nonempty ASCII string")
+    source_rows = _freeze_rows(source_values, f"{stage}.source")
+    owner_rows = _freeze_rows(owner_values, f"{stage}.owners")
+    remainder_rows = _freeze_rows(remainder_values, f"{stage}.remainder")
+
+    source_by_index = {row[0]: row for row in source_rows}
+    for partition, rows in (("owner", owner_rows), ("remainder", remainder_rows)):
+        for position, row in enumerate(rows):
+            require(source_by_index.get(row[0]) == row,
+                    f"{stage}.{partition}[{position}]: full row key is not in source")
+
+    owner_set = set(owner_rows)
+    remainder_set = set(remainder_rows)
+    require(owner_set.isdisjoint(remainder_set),
+            f"{stage}: owner/remainder overlap")
+
+    owner_position = remainder_position = 0
+    for source_position, source_row in enumerate(source_rows):
+        if (owner_position < len(owner_rows) and
+                owner_rows[owner_position] == source_row):
+            owner_position += 1
+        elif (remainder_position < len(remainder_rows) and
+              remainder_rows[remainder_position] == source_row):
+            remainder_position += 1
+        else:
+            raise RuntimeError(
+                f"{stage}: owner/remainder merge omits or changes source row "
+                f"{source_position}"
+            )
+    require(owner_position == len(owner_rows) and
+            remainder_position == len(remainder_rows),
+            f"{stage}: owner/remainder streams contain surplus rows")
+    require(len(owner_rows) + len(remainder_rows) == len(source_rows),
+            f"{stage}: owner/remainder cardinality changed")
+    require(_physical_mass(owner_rows) + _physical_mass(remainder_rows) ==
+            _physical_mass(source_rows),
+            f"{stage}: owner/remainder physical mass changed")
+
+    receipt = {
+        "schema": BOUNDARY_SCHEMA,
+        "stage": stage,
+        "source_row_total": len(source_rows),
+        "source_physical_total": _physical_mass(source_rows),
+        "source_key_sha256": _row_digest(source_rows),
+        "source_index_sha256": _index_digest(source_rows),
+        "owner_row_total": len(owner_rows),
+        "owner_physical_total": _physical_mass(owner_rows),
+        "owner_key_sha256": _row_digest(owner_rows),
+        "owner_index_sha256": _index_digest(owner_rows),
+        "owner_target_total": len(owner_rows) * len(TARGET_INDICES),
+        "remainder_row_total": len(remainder_rows),
+        "remainder_physical_total": _physical_mass(remainder_rows),
+        "remainder_key_sha256": _row_digest(remainder_rows),
+        "remainder_index_sha256": _index_digest(remainder_rows),
+        "ordered_subsequences": True,
+        "exact_disjoint_union": True,
+        "analytic_ownership_established": False,
+    }
+    require(set(receipt) == BOUNDARY_FIELDS,
+            "internal boundary receipt schema changed")
+    return receipt, source_rows, owner_rows, remainder_rows
+
+
+def _require_stored_receipt(stored: object, recomputed: dict[str, Json],
+                            fields: frozenset[str], label: str) -> None:
+    require(type(stored) is dict and set(stored) == fields,
+            f"{label}: stored receipt schema changed")
+    require(canonical_bytes(stored) == canonical_bytes(recomputed),
+            f"{label}: stored receipt integrity changed")
+
+
 def iter_target_keys(rows: Iterable[object]) -> Iterator[TargetKey]:
     """Yield the exact row-major target universe for indices ``0..15``."""
     frozen = _freeze_rows(rows, "target source rows")
@@ -304,63 +383,10 @@ class StageLedger:
         require(type(stage) is str and bool(stage) and stage.isascii(),
                 "stage must be a nonempty ASCII string")
         require(stage not in self._stages, f"duplicate stage: {stage}")
-        owner_rows = _freeze_rows(owners, f"{stage}.owners")
-        remainder_rows = _freeze_rows(remainder, f"{stage}.remainder")
-
-        source_by_index = {row[0]: row for row in self._current}
-        for partition, rows in (("owner", owner_rows), ("remainder", remainder_rows)):
-            for position, row in enumerate(rows):
-                require(source_by_index.get(row[0]) == row,
-                        f"{stage}.{partition}[{position}]: full row key is not in source")
-
-        owner_set = set(owner_rows)
-        remainder_set = set(remainder_rows)
-        require(owner_set.isdisjoint(remainder_set),
-                f"{stage}: owner/remainder overlap")
-
-        owner_position = remainder_position = 0
-        for source_position, source_row in enumerate(self._current):
-            if (owner_position < len(owner_rows) and
-                    owner_rows[owner_position] == source_row):
-                owner_position += 1
-            elif (remainder_position < len(remainder_rows) and
-                  remainder_rows[remainder_position] == source_row):
-                remainder_position += 1
-            else:
-                raise RuntimeError(
-                    f"{stage}: owner/remainder merge omits or changes source row "
-                    f"{source_position}"
-                )
-        require(owner_position == len(owner_rows) and
-                remainder_position == len(remainder_rows),
-                f"{stage}: owner/remainder streams contain surplus rows")
-        require(len(owner_rows) + len(remainder_rows) == len(self._current),
-                f"{stage}: owner/remainder cardinality changed")
-        require(_physical_mass(owner_rows) + _physical_mass(remainder_rows) ==
-                _physical_mass(self._current),
-                f"{stage}: owner/remainder physical mass changed")
-
-        receipt = {
-            "schema": BOUNDARY_SCHEMA,
-            "stage": stage,
-            "source_row_total": len(self._current),
-            "source_physical_total": _physical_mass(self._current),
-            "source_key_sha256": _row_digest(self._current),
-            "source_index_sha256": _index_digest(self._current),
-            "owner_row_total": len(owner_rows),
-            "owner_physical_total": _physical_mass(owner_rows),
-            "owner_key_sha256": _row_digest(owner_rows),
-            "owner_index_sha256": _index_digest(owner_rows),
-            "owner_target_total": len(owner_rows) * len(TARGET_INDICES),
-            "remainder_row_total": len(remainder_rows),
-            "remainder_physical_total": _physical_mass(remainder_rows),
-            "remainder_key_sha256": _row_digest(remainder_rows),
-            "remainder_index_sha256": _index_digest(remainder_rows),
-            "ordered_subsequences": True,
-            "exact_disjoint_union": True,
-            "analytic_ownership_established": False,
-        }
-        require(set(receipt) == BOUNDARY_FIELDS, "internal boundary receipt schema changed")
+        receipt, source_rows, owner_rows, remainder_rows = _boundary_receipt(
+            stage, self._current, owners, remainder)
+        require(source_rows == self._current,
+                f"{stage}: current source rows are not canonical")
         _validate_expected(receipt, expected, BOUNDARY_FIELDS, f"{stage} boundary")
 
         self._stages[stage] = _StageState(deepcopy(receipt), owner_rows, remainder_rows)
@@ -387,20 +413,68 @@ class StageLedger:
         self._universe_target_receipt = deepcopy(receipt)
         return deepcopy(receipt)
 
+    def _recompute_and_validate_receipts(self) -> tuple[
+            list[dict[str, Json]], dict[str, dict[str, Json]], dict[str, Json]]:
+        """Recompute every receipt from rows and reject mutable-state drift."""
+        require(type(self._stages) is dict, "stored stage registry type changed")
+        require(type(self._target_receipts) is dict,
+                "stored target receipt registry type changed")
+        universe = _freeze_rows(self._universe, "stored source")
+        require(type(self._universe) is tuple and universe == self._universe,
+                "stored source rows are not canonical")
+        require(set(self._target_receipts).issubset(set(self._stages)),
+                "stored target receipt exists for an unknown stage")
+
+        source = universe
+        boundaries: list[dict[str, Json]] = []
+        target_receipts: dict[str, dict[str, Json]] = {}
+        for stage, state in self._stages.items():
+            require(type(state) is _StageState, f"{stage}: stored stage type changed")
+            recomputed, recomputed_source, owners, remainder = _boundary_receipt(
+                stage, source, state.owners, state.remainder)
+            require(recomputed_source == source,
+                    f"{stage}: stored boundary source changed")
+            require(type(state.owners) is tuple and owners == state.owners and
+                    type(state.remainder) is tuple and remainder == state.remainder,
+                    f"{stage}: stored owner/remainder rows are not canonical")
+            _require_stored_receipt(state.boundary, recomputed, BOUNDARY_FIELDS,
+                                    f"{stage} boundary")
+            boundaries.append(recomputed)
+
+            target = _target_receipt(owners, stage)
+            if stage in self._target_receipts:
+                _require_stored_receipt(self._target_receipts[stage], target,
+                                        TARGET_FIELDS, f"{stage} target")
+            target_receipts[stage] = target
+            source = remainder
+
+        current = _freeze_rows(self._current, "stored current remainder")
+        require(type(self._current) is tuple and current == self._current,
+                "stored current remainder rows are not canonical")
+        require(current == source,
+                "stored current remainder does not match the stage chain")
+
+        universe_target = _target_receipt(universe, "residual-universe")
+        if self._universe_target_receipt is not None:
+            _require_stored_receipt(self._universe_target_receipt, universe_target,
+                                    TARGET_FIELDS, "residual-universe target")
+        return boundaries, target_receipts, universe_target
+
     def finite_key_accounting(self, *, require_complete: bool = True) -> dict[str, Json]:
         """Return finite accounting, explicitly making no analytic owner claim."""
+        boundaries, target_receipts, universe_target = \
+            self._recompute_and_validate_receipts()
         if require_complete:
             require(not self._current,
                     "finite-key accounting has an unowned final remainder")
-        for stage in self._stages:
-            if stage not in self._target_receipts:
-                self.stage_target_contract(stage)
-        if self._universe_target_receipt is None:
-            self.universe_target_contract()
         complete = (not self._current and
-                    set(self._target_receipts) == set(self._stages) and
-                    sum(state.boundary["owner_row_total"]
-                        for state in self._stages.values()) == len(self._universe))
+                    len(target_receipts) == len(self._stages) and
+                    sum(boundary["owner_row_total"] for boundary in boundaries) ==
+                    len(self._universe))
+        # Cache only exact recomputations, and only after all pre-existing
+        # mutable receipts have survived exact comparison.
+        self._target_receipts = deepcopy(target_receipts)
+        self._universe_target_receipt = deepcopy(universe_target)
         accounting = {
             "schema": ACCOUNTING_SCHEMA,
             "source_row_total": len(self._universe),
@@ -408,10 +482,9 @@ class StageLedger:
             "source_key_sha256": _row_digest(self._universe),
             "source_index_sha256": _index_digest(self._universe),
             "stage_order": list(self._stages),
-            "stage_boundaries": [deepcopy(state.boundary)
-                                 for state in self._stages.values()],
-            "lane_target_contracts": deepcopy(self._target_receipts),
-            "universe_target_contract": deepcopy(self._universe_target_receipt),
+            "stage_boundaries": deepcopy(boundaries),
+            "lane_target_contracts": deepcopy(target_receipts),
+            "universe_target_contract": deepcopy(universe_target),
             "final_remainder_row_total": len(self._current),
             "final_remainder_physical_total": _physical_mass(self._current),
             "finite_key_accounting_complete": complete,
@@ -443,7 +516,15 @@ class StageLedger:
         require(global_analytic_child_claim is False,
                 "this bounded composer requires the global analytic child to remain false")
         accounting = self.finite_key_accounting(require_complete=True)
-        stage_names = self.stage_names
+        stage_names = tuple(accounting["stage_order"])
+        boundary_by_stage = {
+            boundary["stage"]: boundary
+            for boundary in accounting["stage_boundaries"]
+        }
+        target_by_stage = accounting["lane_target_contracts"]
+        require(set(boundary_by_stage) == set(stage_names) and
+                set(target_by_stage) == set(stage_names),
+                "recomputed accounting registry is not exact")
         require(type(lane_implications) is dict and
                 set(lane_implications) == set(stage_names),
                 "lane implication registry is not exact")
@@ -456,8 +537,8 @@ class StageLedger:
         dependency_flags: list[bool] = []
         lane_kinds: dict[str, str] = {}
         for stage in stage_names:
-            target = self._target_receipts[stage]
-            boundary = self._stages[stage].boundary
+            target = target_by_stage[stage]
+            boundary = boundary_by_stage[stage]
             implication = lane_implications[stage]
             require(type(implication) is dict and set(implication) == IMPLICATION_FIELDS,
                     f"{stage}: lane implication schema changed")
