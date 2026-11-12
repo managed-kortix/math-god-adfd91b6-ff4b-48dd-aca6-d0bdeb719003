@@ -1637,7 +1637,14 @@ def discharge_finite_premise(analytic: dict[str, Json],
                              dual_predicates: dict[str, Json],
                              key_composition: dict[str, Json],
                              transfer_adapter: dict[str, Json]) -> dict[str, Json]:
-    """Consume the conditional theorem interface and construct its order-9 premise."""
+    """Blocked legacy draft; never promote locally manufactured contracts.
+
+    Release discharge must instead flow through hardened ``StageLedger`` with
+    independently pinned exact boundary receipts and master-authenticated lane
+    implication proof/verifier/output bytes.  Generated target contracts and
+    caller-supplied true flags are not theorem evidence.
+    """
+    fail("finite-premise discharge disabled pending independently authenticated StageLedger integration")
     require(analytic["evidence_kind"] == "conditional-analytic-implication" and
             analytic["finite_premise_discharged"] is False and
             analytic["global_claim"] is False and analytic["rank"] == 7 and
@@ -1717,8 +1724,7 @@ def full_manifest(dependencies: dict[str, str], analytic: dict[str, Json],
                   target_accounting: dict[str, Json], key_composition: dict[str, Json],
                   transfer_adapter: dict[str, Json], premise: dict[str, Json],
                   structural: dict[str, Json], downstream: list[dict[str, Json]]) -> dict[str, Json]:
-    theorem_eligible = premise.get("finite_premise_discharged") is True
-    require(theorem_eligible, "composed finite premise is not discharged")
+    fail("full theorem manifest disabled pending authenticated finite-premise integration")
     return {"schema": SCHEMA, "evidence_kind": "current-process-exact-theorem-gate",
             "mode": "full", "theorem_eligible": theorem_eligible, "global_claim": False,
             "scope": {"kernel": "loopless 2-connected rank-seven multigraph of order nine",
@@ -1769,6 +1775,9 @@ def audit(full: bool) -> dict[str, Json]:
     if not full:
         return quick_manifest(dependencies, analytic, coarse_contract, coarse_application,
                               coarse_atom, dual_predicates, target_accounting)
+    # Fail before any hour-scale replay: the present downstream composition is
+    # retained only as reviewable WIP and cannot produce theorem eligibility.
+    fail("full mode blocked pending independently authenticated StageLedger receipts and lane implications")
     structural, structural_partition = run_structural_combined_with_keys()
     upstream = run_child("upstream-sos-dominant", UPSTREAM, (), UPSTREAM_OUTPUT_SHA256,
                          validate_upstream)

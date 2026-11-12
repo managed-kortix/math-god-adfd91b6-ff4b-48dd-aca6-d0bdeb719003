@@ -222,19 +222,16 @@ class OrderNineMasterHostileTest(unittest.TestCase):
         self.assertEqual(manifest["evidence_kind"],
                          "fail-closed-authentication-only")
 
-    def test_full_gate_invokes_combined_structural_mode_first(self):
-        sentinel = RuntimeError("combined structural reached")
-
-        def stop(name, path, arguments, output_sha256, validator, report_line=None):
-            self.assertEqual(name, "structural-combined")
-            self.assertEqual(path, self.master.STRUCTURAL)
-            self.assertEqual(arguments, ("--full-rescan", "--reconstruct-census"))
-            self.assertIsNone(output_sha256)
-            raise sentinel
-
-        with mock.patch.object(self.master, "run_child", side_effect=stop):
-            with self.assertRaisesRegex(RuntimeError, "combined structural reached"):
+    def test_full_gate_is_explicitly_blocked_before_any_expensive_child(self):
+        with mock.patch.object(self.master, "run_structural_combined_with_keys") as child:
+            with self.assertRaisesRegex(
+                    RuntimeError, "authenticated StageLedger receipts"):
                 self.master.audit(full=True)
+            child.assert_not_called()
+
+    def test_legacy_local_premise_discharge_cannot_promote(self):
+        with self.assertRaisesRegex(RuntimeError, "discharge disabled"):
+            self.master.discharge_finite_premise({}, {}, {}, {}, {}, {})
 
     def test_master_and_registered_sources_contain_no_assert_statement(self):
         self.assertEqual(self.master.audit_no_asserts(),
