@@ -43,11 +43,11 @@ COMPLETED = (
                       "conclusion=s+(G)>=|V(G)| for rank-seven kernel order seven only")},
     {"name": "order-8", "orders": (8,), "kernel_count": 4015,
      "path": HERE / "rank-seven-order-eight-kernel-theorem-verifier.py",
-     "source_sha256": "8e2baed4455f0721a1f670bef2f5a97d937fc0baa2f5f5f88ee38d6709565255",
+     "source_sha256": "334e963b36e88549716e772374c4bf2729b3757b013ebc5482deaf821ab47ee2",
      # Aggregate invocation is the exact pinned quick release gate.  The
      # standalone package records the successful full replay on these source
      # bytes; its three residual historical producer roots remain explicit.
-     "output_sha256": "193981b59dde97ba0dfd680e2ffd7477f02663c0645fb024ffa120a38fbb9afe",
+     "output_sha256": "c9a4b73d64f4aa4ee141541d97897516b58f25019228d359490b321b7f815319",
      "arguments": (),
      "output_lines": ("rank-seven order-eight kernel theorem gate: exact audit passed",
                       "mode=quick scope=single-positive-rank-block kernel_order=8 rank=7",

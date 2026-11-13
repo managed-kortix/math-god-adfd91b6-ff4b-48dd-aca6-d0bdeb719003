@@ -86,19 +86,19 @@ python3 -B research/rank-seven-order-eight-kernel-theorem-verifier.py --print-ma
 Pinned gate source SHA-256:
 
 ```text
-8e2baed4455f0721a1f670bef2f5a97d937fc0baa2f5f5f88ee38d6709565255
+334e963b36e88549716e772374c4bf2729b3757b013ebc5482deaf821ab47ee2
 ```
 
 Expected quick text-only output SHA-256:
 
 ```text
-193981b59dde97ba0dfd680e2ffd7477f02663c0645fb024ffa120a38fbb9afe
+c9a4b73d64f4aa4ee141541d97897516b58f25019228d359490b321b7f815319
 ```
 
 Expected manifest-plus-text output SHA-256:
 
 ```text
-b5922982b4c14ef9a80ed5c71bbb01cbfdc887daf94bd662774b9339415de041
+d153738d36a43d8178598c52de2067453dca1cefce056bf7d911466ce0211ccd
 ```
 
 Quick mode authenticates sources, artifacts, schemas, exact accounting,
