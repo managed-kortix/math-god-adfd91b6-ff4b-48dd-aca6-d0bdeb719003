@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Exact Sachs-phase verifier for the 28 R31-S interior-owner D3 records."""
+"""Fail-closed diagnostic for the 28 R31-S interior-owner D3 records.
+
+The exact audit below proves only an imaginary-carrier coefficient lemma.  It
+does not authenticate the missing real-part or continuous-phase implication,
+so this program deliberately exits nonzero.
+"""
 
 from __future__ import annotations
 
@@ -206,17 +211,23 @@ def audit():
 def main():
     rows, signatures, total_coefficients = audit()
     output = (
-        "R31-S D3 diamond-packet verifier: exact audit passed\n"
+        "R31-S D3 diagnostic: exact imaginary-carrier audit passed\n"
         f"one-side records: {len(rows)}; reflected marked records: {2 * len(rows)}\n"
         f"exact activity-carrier coefficient checks: {total_coefficients}\n"
-        "certificate: negative territories plus at most one controlled +6*y diamond defect\n"
-        "conclusion (diamond phase-area lemma): sigma(D+T^3)>3"
+        "established lemma: imaginary coefficients are negative except at most one "
+        "controlled +6*y defect\n"
+        "unverified implication: I>=0 => R<0 and the required continuous-phase area bound\n"
+        "conclusion: sigma(D+T^3)>3 NOT ESTABLISHED\n"
+        "status: OPEN; FAIL CLOSED"
     )
     if "--optimized-child" not in sys.argv and not sys.flags.optimize:
         child = subprocess.run([sys.executable, "-O", __file__, "--optimized-child"],
-                               check=True, capture_output=True, text=True)
+                               check=False, capture_output=True, text=True)
+        require(child.returncode == 1, "optimized diagnostic did not fail closed")
+        require(child.stderr == "", "optimized diagnostic wrote stderr")
         require(child.stdout.rstrip() == output, "normal/optimized output mismatch")
     print(output)
+    raise SystemExit(1)
 
 
 if __name__ == "__main__":

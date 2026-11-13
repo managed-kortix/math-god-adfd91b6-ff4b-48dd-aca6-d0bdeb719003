@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Fail-closed master for the complete rank-seven multiblock theorem."""
+"""Fail-closed audit of the still-open rank-seven multiblock program.
+
+The audit authenticates the exact partition/owner reduction and every closed
+child packet.  It deliberately exits nonzero while the D3 analytic implication
+inside R31-S is unproved; a zero exit must never be mistaken for a theorem
+receipt.
+"""
 
 from __future__ import annotations
 
@@ -13,22 +19,22 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "research/fixtures/heptacyclic-multiblock-owner-ledger.json"
-LEDGER_SHA256 = "5e118f91c7be63070161ac3788ed445b882bfb026c97a8cd9c47651c8fccc4af"
+LEDGER_SHA256 = "0630cd96fd341b9017b31d6a36341cfead0c6bca64517c1073797ffc14747f42"
 SOURCES = {
     "theorem": (ROOT / "positive-square-energy/heptacyclic-general/complete-multiblock-theorem.md",
-                "53b361452b569da2a641b46afe3f75849c8aab99dc228c4d9c45705e38723a08"),
+                "f7a3e009b9b617b0ea5f245702e7e93d2f74116ef7d388d65222069cb06ac347"),
     "debit-ledger": (ROOT / "positive-square-energy/heptacyclic-general/rank-seven-multiblock-debit-ledger.md",
                      "7637b48974e130b4baa34d64e5fc284394d762364ca514e9158dbdd6e0c78c73"),
     "two-debit": (ROOT / "positive-square-energy/heptacyclic-general/two-debit-induced-piece-theorem.md",
                   "29304b8c920c6efd43d05ce0e8f2c21f44e2656ded0c3ce69ea79b5271454213"),
     "nested": (ROOT / "positive-square-energy/heptacyclic-general/nested-induced-piece-packet-theorem.md",
-               "c5e93adcdc87aa41d524c04bfb6e1b78cb47628fa5053066b0d47ba741df50d8"),
+               "79b44180ff2d3ca44b5537e2913709fa6c2334b2e475990b34508475592a000b"),
     "r31-frontier": (ROOT / "positive-square-energy/heptacyclic-general/r31-s-doubled-c4-three-triangle-frontier.md",
-                     "0a0c245994e00fd271e62391c8ecc0f8b0407f5969d2e98742eecd1de8b559bd"),
+                     "ef6f646a0a4416a161dae588940c271a73104c6e86a243baba22928234a082d6"),
     "r31-c4": (ROOT / "positive-square-energy/heptacyclic-general/r31-s-c4-marked-four-triangle-theorem.md",
                "78344337226ae5c5b42645dd563390eec9eb462824e78fd4e42d7fa54051309d"),
-    "r31-d3": (ROOT / "positive-square-energy/heptacyclic-general/r31-s-d3-diamond-territory-packet.md",
-               "b89fcdb4272fb410a9e1ce72204f732f192a88407d02d865bd52d38013b28279"),
+    "r31-d3-open": (ROOT / "positive-square-energy/heptacyclic-general/r31-s-d3-diamond-territory-packet.md",
+                    "60bd38e8da7d68ef0fd0cbdf89b43be96a9a43ec0796d195dd8fab37f83f98fc"),
     "r511-k22": (ROOT / "positive-square-energy/heptacyclic-general/r511-k22-last-multiblock-key.md",
                  "b6c5c8a91326295bfafb83e7aacf3c761183de23ec316cf0e120c0f7fcba842f"),
     "r61": (ROOT / "positive-square-energy/heptacyclic-general/r61-one-credit-boundary-reduction.md",
@@ -41,17 +47,14 @@ CHILDREN = {
         "f37e31be0d7888d43a7d8f752642fde04a71f1e1abc5317e94da7e0d7436a501",
         "0ac8b98c0abf5487577a65fabe386434f52d9bc05706bff146102a23f5ecace2"),
     "rank-seven-nested": ("rank-seven-nested-induced-piece-verifier.py",
-        "f9e7d023c72c786d32b381b55e30b0826aad14a1a518c8459516f05e12868ad7",
+        "228812c6578dc54376905490050535a39366a27eb790f7ec7b0c88a69a5d6188",
         "d19e6d5961a47cc47ab14cf6308c7b90948ee64860a1119e969514395d3aec5d"),
     "r31-s-marked-cut": ("r31-s-doubled-c4-marked-cut-verifier.py",
-        "95373442b786f269c52165d325f7c81a2110a3e41cb7220fb97a11f1f70ed658",
-        "1f5cf00d63ae3b8c96e6f34b7292ff3abdd24422b2b73a2a42233a69c7ac7d8e"),
+        "b14e7544bd8f5298fd425c68228e5fb4f5c49071dd3a7ec773ee5de610630c71",
+        "676f2be24fda77b0642f7cf243385c84d9bd92266a74b73178c185a697bf3eed"),
     "r31-s-c4": ("r31-s-c4-marked-four-triangle-verifier.py",
         "d405f644467ab59e615a4cf6fdf5ada1a3ba8c21eadcd1ee7035b3fa37d159e0",
         "15c8a1e8880762ce0fb8ad314f026a877982098ebade9f58fc6b8a574a118804"),
-    "r31-s-d3": ("r31-s-d3-diamond-packet-verifier.py",
-        "257f646e3089a0d6d5be109af8d5ab5c11caffe1efb9ee1adf5eab3033ce0f10",
-        "c8bf4b784a5b65343d69ba62b4d3c5555682f76fcf0c9ffe84d6db86a8b74fa9"),
     "r511-k22": ("r511-k22-last-multiblock-key-verifier.py",
         "c76ad76df0db79d2a4acc2a7cc16c7d924d0d322064bf612e5a4078b7e1b0c93",
         "a8149532f0f5b92ff33bb6657df302e3ffda8ea6d177a61676c5fd206082df56"),
@@ -124,7 +127,7 @@ def load_ledger():
 
 def check_sources():
     require(set(SOURCES) == {"theorem", "debit-ledger", "two-debit", "nested",
-            "r31-frontier", "r31-c4", "r31-d3", "r511-k22", "r61", "r61-k223"},
+            "r31-frontier", "r31-c4", "r31-d3-open", "r511-k22", "r61", "r61-k223"},
             "source registry changed")
     for name, (path, expected) in SOURCES.items():
         require(path.is_file(), f"missing source: {name}")
@@ -161,7 +164,8 @@ def audit(payload):
     require(tuple(payload["packet_keys"]) == PACKET_KEYS, "packet key registry changed")
     require(len(flattened) == len(set(flattened)), "packet key has two partition owners")
     require(set(flattened) == set(PACKET_KEYS), "partition packet ownership is not exact")
-    require(payload["final_residual"] == [], "final owner residual is not empty")
+    require(payload["final_residual"] == ["R31-S"],
+            "open owner residual is not exactly R31-S")
     require(payload["owner_rules"] == {
         "boundary_cut": "upstream-only",
         "nested_demands": "one-complete-first-boundary-territory",
@@ -172,10 +176,17 @@ def audit(payload):
     owners = payload["verifier_owners"]
     require(set(owners) == set(CHILDREN), "child scope registry changed")
     primary = [key for keys in owners.values() for key in keys if ":" not in key]
-    require(set(primary) == set(PACKET_KEYS), "packet verifier ownership is not exhaustive")
+    closed_keys = set(PACKET_KEYS) - set(payload["final_residual"])
+    require(set(primary) == closed_keys,
+            "closed packet verifier ownership is not exhaustive")
     require(len(primary) == len(set(primary)), "packet key has multiple primary verifiers")
+    require(set(primary).isdisjoint(payload["final_residual"]),
+            "open packet was assigned a primary closure verifier")
     require(owners["r31-s-c4"] == ["R31-S:C4"] and
-            owners["r31-s-d3"] == ["R31-S:D3"], "R31-S subpacket scopes changed")
+            owners["r31-s-marked-cut"] == ["R31-S:orbit-prerequisite"],
+            "R31-S verified prerequisite scopes changed")
+    require("r31-s-d3" not in owners,
+            "unproved R31-S:D3 was assigned an executable closure owner")
     require(set(owners["rank-seven-nested"]) == {
         "R21", "R221", "R31-K", "R321", "R322", "R41", "R421",
         "R511-K5e", "R511-K71"}, "nested historical closed set changed")
@@ -229,7 +240,8 @@ def hostile_tests(payload):
         lambda value: value["rows"][4]["packet_keys"].remove("R31-S"),
         lambda value: value["verifier_owners"]["r61-k223"].append("R61-K110-0"),
         lambda value: value["verifier_owners"]["r31-s-c4"].clear(),
-        lambda value: value["final_residual"].append("R31-S"),
+        lambda value: value["verifier_owners"].update(**{"r31-s-d3": ["R31-S:D3"]}),
+        lambda value: value["final_residual"].clear(),
         lambda value: value["owner_rules"].update(boundary_cut="both-sides"),
     )
     for mutation in mutations:
@@ -243,19 +255,25 @@ def main():
     outputs = run_children()
     rejected = hostile_tests(payload)
     output = (
-        "heptacyclic multiblock master verifier: exact audit passed\n"
+        "heptacyclic multiblock master audit: exact reduction passed\n"
         "partition scope: 14 non-(7) partitions; excluded single-block partition: (7)\n"
-        f"owner ledger: {len(PACKET_KEYS)} packet keys; final residual: empty\n"
-        f"packet verifiers: {len(outputs)}; executions: {2 * len(outputs)} normal/-O\n"
+        f"owner ledger: {len(PACKET_KEYS)} packet keys; open residual: R31-S\n"
+        f"closed/prerequisite verifiers: {len(outputs)}; "
+        f"executions: {2 * len(outputs)} normal/-O\n"
         f"hostile mutations rejected: {rejected}\n"
-        "conclusion: s+(G)>=|V(G)| for connected rank-seven multiblock graphs only\n"
-        "status: COMPLETE MULTIBLOCK THEOREM; NO ALL-HEPTACYCLIC CLAIM"
+        "blocked implication: D3 imaginary-carrier signs do not prove the required "
+        "real-part/continuous-phase bound\n"
+        "conclusion: NOT ESTABLISHED for all connected rank-seven multiblock graphs\n"
+        "status: OPEN; FAIL CLOSED PENDING R31-S:D3"
     )
     if "--optimized-master-child" not in sys.argv and not sys.flags.optimize:
         child = subprocess.run([sys.executable, "-O", __file__, "--optimized-master-child"],
-                               check=True, capture_output=True, text=True)
+                               check=False, capture_output=True, text=True)
+        require(child.returncode == 1, "optimized master did not fail closed")
+        require(child.stderr == "", "optimized master wrote stderr")
         require(child.stdout.rstrip() == output, "normal/optimized master output mismatch")
     print(output)
+    raise SystemExit(1)
 
 
 if __name__ == "__main__":

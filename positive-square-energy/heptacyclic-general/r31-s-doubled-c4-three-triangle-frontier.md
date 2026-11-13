@@ -1,130 +1,116 @@
-# `R31-S`: canonical doubled-`C4` plus three retained triangles
+# `R31-S`: doubled-`C4` orbit reduction with one open D3 packet
 
-## Exact reduction
+## Exact reduction and present status
 
 Put `sigma(X)=s^+(X)-|V(X)|`.  In the `R31-S` residual all four external
-cycles are triangles.  The noncanonical doubled-path rows already pass the
-rank-seven DNN gate, and the canonical doubled-triangle and one-long all-odd
-`K4` rows retain an anchor of credit greater than four.  The only physical
-block still requiring a new packet is therefore the canonical doubled-`C4`
-class `111`.
+cycles are triangles.  Boundary-open one external triangle leaf `Q_0`; the
+cut stays upstream and the opened side is a nonempty induced tree `S`, so
+`sigma(S)=-1`.  The retained graph `H` is a doubled-`C4` block plus three
+triangular blocks.  The parent row would close if
 
-Positive connector routes and a triangle owned by an admissible structural
-opening close exactly as in the rank-six `S3+T^3` theorem.  In the remaining
-bridge-free incidence choose an external triangle leaf `Q_0` and boundary-open
-it.  The cut stays upstream; `Q_0` minus that cut, with all descendants rooted
-away from the cut, is one nonempty induced tree `S`, so
+`sigma(H)>1`.                                                 (1)
 
-`sigma(S)=-1`.                                                (1)
+The finite orbit and owner transport needed to state (1) uniformly is now
+exactly authenticated.  The analytic one-sided packet `D3` is not.  Therefore
+`R31-S` remains open and is the final residual in the authoritative
+heptacyclic multiblock ledger.
 
-The retained induced graph `H` is exactly a canonical doubled-`C4` class
-`111` block plus three triangular blocks.  Consequently the exact missing
-statement is
+## Physical exceptional orbit
 
-`sigma(H)>1`.                                                 (2)
+Write the six suppressed paths in order `a,A,b,c,C,d`, with doubled fibres
+`{a,A}` and `{c,C}` and connectors `{b,d}`.  A bit is the parity of the
+physical path.  The old description as one canonical switching class was too
+coarse: switching equivalence need not preserve a marked physical owner,
+connector, or rooted descendant.
 
-Equation (2), not a packet of threshold three, closes the original row by
-`sigma(G)>=sigma(H)+sigma(S)>0`.  This saves two units relative to the coarse
-ledger in the preceding nested-packet theorem.
+The first-simple structural frontier is exactly the genuine multigraph-
+automorphism orbit
 
-## Marked-cut census
+```text
+010011  010101  011010  011100
+100011  100101  101010  101100.
+```
 
-Normalize the doubled sides as in the two-triangle packet.  The legal owner
-set for a retained external triangle is
+It contains four switching-class-`110` rows and four class-`111` rows.  No row
+has an odd--odd doubled fibre.  The doubled-`C4` kernel has 16 genuine
+`(vertex map, edge map)` automorphism pairs.  Exactly two pairs carry the base
+row `010011` to each target row: one preserves the two doubled sides and one
+exchanges them globally.
 
-`L={A,B,C,D,x,y}`,                                           (3)
+For every witness the audit transports, rather than renames abstractly:
 
-where `x,y` are the internal vertices of the two canonical even doubled
-paths.  Owners in the interior of either single connector have already been
-removed by the structural-owner branch.  No kernel symmetry may be assumed:
-arbitrary connector lengths and rooted branches can mark all six elements of
-`L` differently.
+* the full first-simple length vector;
+* the even opening connector and odd cut connector;
+* all six physical owners (four branch vertices and the two interiors of the
+  even doubled paths);
+* exact symbolic connector lengths, endpoint orientations, opening/cut
+  positions, and both path remnants; and
+* every decorated rooted block-cut record, including fresh-child markers and
+  fork same/split data.
 
-After quotienting only by permutations of indistinguishable external triangle
-blocks and by the reflection exchanging the two new vertices of a bare
-triangle, the three retained block nodes have four rooted incidence shapes.
+Thus arbitrary connector lengths are not silently reset to their first-simple
+values, and a switching quotient is never used as a graph isomorphism.
+
+## Marked-cut census and recordwise transport
+
+For any physical anchor the legal owner set has six elements.  After
+quotienting only by permutations of indistinguishable external triangles and
+by reflection of each bare triangle, the three retained block nodes have four
+rooted incidence shapes:
 
 | shape | marked records |
 |---|---:|
-| three direct children of the doubled-`C4` | `C(6+3-1,3)=56` |
-| one direct child and one length-two triangle chain | `6*6=36` |
+| three direct children | `C(8,3)=56` |
+| one length-two chain plus one direct child | `6*6=36` |
 | one direct triangle with two children | `6*2=12` |
-| one length-three triangle chain | `6` |
+| one length-three chain | `6` |
 
-The fork factor two records whether its two children use the same fresh vertex
-of their parent or the two different fresh vertices.  Thus there are exactly
+Hence there are exactly `110` records.  Classification is performed after the
+physical transport on every individual record, not merely by comparing total
+counts.  For every one of the eight anchors and both genuine witnesses the
+result is
 
-`56+36+12+6=110`                                             (4)
+`110 = 54 balanced + 28 C4 + 28 D3`.                          (2)
 
-marked incidence records.  Equality of direct owner cuts is allowed.  A child
-placed at its parent's upstream cut is not a nested block-cut record: it is a
-repeated direct child at the same cut and is already in an earlier shape.
-These 110 records include every repeated-cut and direct/nested configuration.
-After opening `d` and cutting `b`, the legal owner sides are
-`{A,B,x}` and `{C,D,y}`.  Exactly 54 records split the retained external
-triangles `2+1` or `1+2`; the other 56 are one-sided.  Among the latter,
-exactly 28 use the interior owner of their side and 28 do not.  Thus the two
-last packet types below each represent 28 marked records, not an unspecified
-incidence family.
+The side map is required to be one global preserve/swap.  In particular an
+abstract owner permutation that preserves the aggregate numbers in (2) but is
+not induced by a kernel automorphism is rejected.
 
-## Structural split and proved records
+## Arbitrary path lengths
 
-Write the doubled sides as `a,A':A--B` and `c,C':C--D`, with single
-connectors `b:B--C` odd and `d:D--A` even.  Open an internal vertex `v` of
-`d`, together with its complete owner class.  In the present residual this is
-a nonempty tree `T`, so `sigma(T)=-1`.  Cut one actual edge of `b` and put each
-complete descendant class on the side of its owner.  This gives two connected
-induced sides whose ranks sum to five.
+The structural orbit applies only while all four doubled members are
+first-simple.  If one is lengthened first by two, there are exactly 32 cases
+(eight anchors times four members).  Each has exactly one genuine
+automorphism to representative row `011010` with the selected member in the
+canonical slot:
 
-Every marked record closes by already proved packets unless all three external
-triangles land on one side of this split.  Indeed, when the external split is
-`2+1`, each side contains its intrinsic `K3`; the established attached packets
-with at most three triangular blocks give side credits greater than two and
-greater than one.  Their sum is greater than three, so after charging `T` and
-`S` the original graph is strict.  The splits `1+2` are symmetric.  Interior
-owners with at most two external triangles produce the already proved
-`D+T^k`, `k<=2`, packet and satisfy the same ledger.
+* even member: full vector `(4,1,1,2,1,2)`, exact bound `1862/1000<2`;
+* odd member: full vector `(2,3,1,2,1,2)`, exact bound `1662/1000<2`.
 
-Thus retaining the actual intrinsic cycles and enumerating marked cuts removes
-every balanced record.  It also shows why treating the retained graph as an
-unmarked five-triangle cactus loses useful information.
+The full vector, not just the parity bit, is checked.  Larger additions by two
+on any physical path are covered by the established componentwise
+fixed-parity DNN monotonicity.  Connector variables remain exact symbolic
+lengths and transport with their endpoint orientation and cut/open position.
+This proves the finite all-length scope reduction without importing the
+analytic one-sided packet.
 
-## Exact last obstruction
+## Analytic dispositions
 
-Only the 56 `3+0` and `0+3` side allocations remain.  Up to exchanging the two
-doubled sides they require one of the following root-sensitive inequalities.
+The balanced records are owned by the previously established two-side packet
+ledger.  The 28 `C4` records are closed by
+`r31-s-c4-marked-four-triangle-theorem.md`, which proves the stronger bound
+`sigma(C)>3>2`.
 
-1. **Cactus side (closed).**  An intrinsic triangle together with all three external
-   triangles forms the marked four-triangle side, while the opposite intrinsic
-   triangle is retained as an actual `K3`.  It is enough to prove
+The complementary 28 interior-owner records require
 
-   `sigma(C)>2`                                               (C4)
+`sigma(D+T^3)>3`,                                              (D3)
 
-   for the marked four-triangle side with arbitrary rooted trees.  The marked
-   four-triangle theorem proves the stronger bound `sigma(C)>3`.  Packing at
-   most two has positive spectral imbalance; the sole packing-three core is a
-   central triangle with three disjoint petals, where strict Sachs matching
-   domination survives arbitrary rooted trees.  Thus all 28 records in this
-   orbit are closed.  See `r31-s-c4-marked-four-triangle-theorem.md`.
-
-2. **Interior-owner side.**  A doubled-path interior owner makes that side an
-   attached diamond carrying all three external triangles.  The opposite side
-   can be a tree.  It is enough to prove
-
-   `sigma(D+T^3)>3`                                          (D3)
-
-   uniformly over the induced marked roots and arbitrary rooted trees.
-   The established favorable packet stops at `D+T^2`, where it gives `>3`;
-   the diamond phase-area and territory packet proves (D3) directly for all
-   28 records.  See `r31-s-d3-diamond-territory-packet.md`.  This is the
-   complementary one-sided orbit set containing the doubled-path interior
-   owner.
-
-(C4) and (D3) are now proved.  Therefore the canonical doubled-`C4` subclass,
-and hence all of `R31-S`, is closed.  Both proofs retain the root-sensitive
-data: no edge-addition monotonicity or unquantified rank-five surplus is used.
-There is no remaining path-length, connector, owner, balanced-cut, or one-sided
-orbit.
+where `D=Theta(1,2,2)`, uniformly over the marked rooted incidence and all
+rooted trees.  The diagnostic D3 program proves an exact imaginary Sachs
+carrier lemma, but does not construct the real Sachs polynomial, prove
+`I>=0 => R<0`, track the continuous argument, or establish the required
+phase-area integral.  Accordingly (D3), (1), and all of `R31-S` remain open.
+No counterexample to (D3) is claimed.
 
 ## Verification
 
@@ -133,12 +119,12 @@ Run
 ```text
 python3 research/r31-s-doubled-c4-marked-cut-verifier.py
 python3 -O research/r31-s-doubled-c4-marked-cut-verifier.py
-python3 research/r31-s-d3-diamond-packet-verifier.py
-python3 -O research/r31-s-d3-diamond-packet-verifier.py
 python3 research/r31-s-c4-marked-four-triangle-verifier.py
 python3 -O research/r31-s-c4-marked-four-triangle-verifier.py
+python3 research/r31-s-d3-diamond-packet-verifier.py
+python3 -O research/r31-s-d3-diamond-packet-verifier.py
 ```
 
-The marked-cut verifier regenerates (4) and checks the leaf-opening and rank
-ledgers.  The two packet verifiers independently close the exact residual set
-`{C4,D3}`.
+The orbit and C4 programs exit zero.  Both D3 invocations deliberately exit
+nonzero after printing their exact diagnostic result.  The multiblock master
+also exits nonzero while `R31-S:D3` is open.

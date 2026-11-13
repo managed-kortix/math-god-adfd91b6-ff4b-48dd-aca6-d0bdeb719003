@@ -134,13 +134,16 @@ in (1) has a cited anchor whose strict integer threshold is at least its maximum
 number of negative territories. The two returned keys fail that comparison for
 specific physical subclasses:
 
-1. `R31-S` contains the canonical doubled-`C4` class `111`.  A sharper pass
-   boundary-opens one external leaf and retains three actual triangles.  The
-   110-record marked-cut census closes every balanced side allocation and
-   leaves exactly two one-sided root-sensitive packets: a marked four-triangle
-   cactus needs `sigma>2`, or an interior-owner `D+T^3` side needs `sigma>3`.
-   See `r31-s-doubled-c4-three-triangle-frontier.md`.  These inequalities are
-   not supplied by the currently pinned packet library.
+1. `R31-S` contains the full eight-row first-simple doubled-`C4` genuine-
+   automorphism orbit: four switching-class-`110` and four class-`111` rows.
+   A sharper pass boundary-opens one external leaf and retains three actual
+   triangles.  Its recordwise physical transport gives 110 marked records on
+   every anchor and leaves exactly two one-sided root-sensitive packets: a
+   marked four-triangle cactus needs `sigma>2`, or an interior-owner `D+T^3`
+   side needs `sigma>3`.  See
+   `r31-s-doubled-c4-three-triangle-frontier.md`.  These inequalities are not
+   supplied by this nested packet library.  The later `C4` packet closes the
+   former obligation; the `D3` obligation remains open.
 2. `R511-K22` has an actual-`K4` anchor of credit greater than two, but its
    original opened tree and two arbitrary external cycle boundaries can require
    three negative units. Neither external cycle is forced to be triangular.
