@@ -34,6 +34,20 @@ IUNIT = ZERO[:-1] + (1,)
 ROOTS = ("p", "q", "r", "s")
 DIAMOND_EDGES = frozenset({("p", "q"), ("p", "r"), ("q", "r"),
                             ("p", "s"), ("q", "s")})
+EXPECTED_DIAMOND_EDGES = frozenset({("p", "q"), ("p", "r"), ("q", "r"),
+                                     ("p", "s"), ("q", "s")})
+EXPECTED_DIAMOND_CYCLES = frozenset({
+    frozenset(("p", "q", "r")),
+    frozenset(("p", "q", "s")),
+    frozenset(("p", "q", "r", "s")),
+})
+EXPECTED_DIAMOND_DEGREES = {"p": 3, "q": 3, "r": 2, "s": 2}
+EXPECTED_DIAMOND_AUTOMORPHISMS = frozenset({
+    ("p", "q", "r", "s"),
+    ("q", "p", "r", "s"),
+    ("p", "q", "s", "r"),
+    ("q", "p", "s", "r"),
+})
 
 
 def clean(poly):
@@ -282,11 +296,102 @@ def univariate_coefficients(poly):
     return clean(result)
 
 
+def encoded_terms(*terms):
+    """Build an exact polynomial from (coefficient, variable-names) terms."""
+    return add(*(scale(monomial(*names), coefficient) for coefficient, names in terms))
+
+
+def graph_rank(graph):
+    vertices, edges, _ = graph
+    components = 0
+    unseen = set(vertices)
+    graph_adjacency = adjacency(vertices, edges)
+    while unseen:
+        components += 1
+        stack = [unseen.pop()]
+        while stack:
+            for neighbor in graph_adjacency[stack.pop()] & unseen:
+                unseen.remove(neighbor)
+                stack.append(neighbor)
+    return len(edges) - len(vertices) + components
+
+
+def diamond_automorphisms():
+    canonical = {frozenset(edge) for edge in EXPECTED_DIAMOND_EDGES}
+    result = set()
+    for image in itertools.permutations(ROOTS):
+        relabel = dict(zip(ROOTS, image))
+        mapped = {frozenset((relabel[left], relabel[right]))
+                  for left, right in EXPECTED_DIAMOND_EDGES}
+        if mapped == canonical:
+            result.add(image)
+    return frozenset(result)
+
+
+def exact_host_locks():
+    require(DIAMOND_EDGES == EXPECTED_DIAMOND_EDGES,
+            "diamond edge specification changed")
+    graph_adjacency = adjacency(ROOTS, DIAMOND_EDGES)
+    require({vertex: len(graph_adjacency[vertex]) for vertex in ROOTS}
+            == EXPECTED_DIAMOND_DEGREES, "diamond degree classes changed")
+    cycles = frozenset(simple_cycles(ROOTS, DIAMOND_EDGES))
+    require(cycles == EXPECTED_DIAMOND_CYCLES,
+            "diamond cycle census is not two C3 plus one C4")
+    require(diamond_automorphisms() == EXPECTED_DIAMOND_AUTOMORPHISMS,
+            "diamond automorphism group changed")
+
+    expected_states = {
+        frozenset(): complex_pair(
+            encoded_terms((1, ("p", "q", "r", "s")),
+                          (1, ("p", "r")), (1, ("p", "s")),
+                          (1, ("q", "r")), (1, ("q", "s")),
+                          (1, ("r", "s"))),
+            encoded_terms((-2, ("r",)), (-2, ("s",)))),
+        frozenset(("p",)): complex_pair(
+            encoded_terms((1, ("q", "r", "s")),
+                          (1, ("r",)), (1, ("s",))), constant(0)),
+        frozenset(("q",)): complex_pair(
+            encoded_terms((1, ("p", "r", "s")),
+                          (1, ("r",)), (1, ("s",))), constant(0)),
+        frozenset(("r",)): complex_pair(
+            encoded_terms((1, ("p", "q", "s")),
+                          (1, ("p",)), (1, ("q",)), (1, ("s",))),
+            constant(-2)),
+        frozenset(("s",)): complex_pair(
+            encoded_terms((1, ("p", "q", "r")),
+                          (1, ("p",)), (1, ("q",)), (1, ("r",))),
+            constant(-2)),
+        frozenset(("p", "q")): complex_pair(monomial("r", "s"), constant(0)),
+        frozenset(("p", "r")): complex_pair(
+            add(monomial("q", "s"), constant(1)), constant(0)),
+        frozenset(("p", "s")): complex_pair(
+            add(monomial("q", "r"), constant(1)), constant(0)),
+        frozenset(("q", "r")): complex_pair(
+            add(monomial("p", "s"), constant(1)), constant(0)),
+        frozenset(("q", "s")): complex_pair(
+            add(monomial("p", "r"), constant(1)), constant(0)),
+        frozenset(("r", "s")): complex_pair(
+            add(monomial("p", "q"), constant(1)), constant(0)),
+    }
+    require(set(expected_states) == {
+        frozenset(), *(frozenset((root,)) for root in ROOTS),
+        *(frozenset(pair) for pair in itertools.combinations(ROOTS, 2))
+    }, "exact host-state lock registry changed")
+    for deleted, expected in expected_states.items():
+        require(diamond_state(deleted) == expected,
+                f"exact diamond state changed: deleted={sorted(deleted)}")
+    return len(cycles), len(expected_states), len(EXPECTED_DIAMOND_AUTOMORPHISMS)
+
+
 def audit(cross_coefficient=1, pendant_coefficient=1, omit_nested=False,
           drop_root=None, require_strict=True, host_imaginary_sign=1,
           one_sum_root_coefficient=-1, triangle_imaginary=-2,
-          demand_full_real_positive=False, rank=4):
-    # Formula (3), checked on two independent weighted triangles at a shared
+          demand_full_real_positive=False, expected_rank=4,
+          expected_edges=DIAMOND_EDGES):
+    require(expected_edges == EXPECTED_DIAMOND_EDGES,
+            "diamond edge input changed")
+    exact_host_locks()
+    # Formula (4), checked on two independent weighted triangles at a shared
     # root.  Mutating its subtraction must fail as a sparse identity.
     z = variable("p")
     left = sachs_polynomial(("p", "A", "B"),
@@ -349,6 +454,8 @@ def audit(cross_coefficient=1, pendant_coefficient=1, omit_nested=False,
     for first_root, second_root in direct_records:
         formula = direct_formula(first_root, second_root, cross_coefficient)
         graph = realize_direct(first_root, second_root)
+        require(graph_rank(graph) == expected_rank,
+                f"computed direct rank changed: {first_root},{second_root}")
         exact = sachs_polynomial(*graph)
         require(formula == exact,
                 f"direct one-sum formula failed: {first_root},{second_root}")
@@ -365,6 +472,8 @@ def audit(cross_coefficient=1, pendant_coefficient=1, omit_nested=False,
     for root in nested_records:
         formula = nested_formula(root, pendant_coefficient)
         graph = realize_nested(root)
+        require(graph_rank(graph) == expected_rank,
+                f"computed nested rank changed: {root}")
         exact = sachs_polynomial(*graph)
         require(formula == exact, f"nested one-sum formula failed: {root}")
         _, imaginary = split_complex(exact)
@@ -390,11 +499,18 @@ def audit(cross_coefficient=1, pendant_coefficient=1, omit_nested=False,
             "negative-real regression imaginary polynomial changed")
     require(real_t[0] < 0 and all(value < 0 for value in imaginary_t.values()),
             "negative-real/lower-half-plane regression lost")
-    require(not demand_full_real_positive,
-            "false full-real-positivity premise was enabled")
+    if demand_full_real_positive:
+        require(all_positive(counterexample_real),
+                "false full-real-positivity premise rejected by exact polynomial")
     require(require_strict, "continuous branch requires strict imaginary sign")
-    cyclomatic_rank = rank
-    require(cyclomatic_rank == 4, "D+TT rank ledger changed")
+    realized_ranks = {
+        *(graph_rank(realize_direct(left, right))
+          for left, right in itertools.combinations_with_replacement(ROOTS, 2)),
+        *(graph_rank(realize_nested(root)) for root in ROOTS),
+    }
+    require(realized_ranks == {expected_rank} == {4},
+            "D+TT computed rank ledger changed")
+    cyclomatic_rank = next(iter(realized_ranks))
     # Im Psi<0 keeps the continuous argument in (-pi,0), with limit zero at
     # infinity. Signed Coulson gives Delta=s+ - s- >0. Since m=n+3,
     # sigma=s+-n=3+Delta/2>3.
@@ -424,7 +540,9 @@ def hostile_self_checks():
         ("wrong one-sum root subtraction",
          lambda: audit(one_sum_root_coefficient=1)),
         ("wrong triangle imaginary sign", lambda: audit(triangle_imaginary=2)),
-        ("wrong rank ledger", lambda: audit(rank=3)),
+        ("wrong rank ledger", lambda: audit(expected_rank=3)),
+        ("wrong diamond edge lock",
+         lambda: audit(expected_edges=DIAMOND_EDGES - {("p", "q")})),
     )
     for label, function in mutations:
         expect_rejected(label, function)
@@ -433,13 +551,17 @@ def hostile_self_checks():
 
 def main():
     direct_same, direct_distinct, nested, terms = audit()
+    cycles, states, automorphisms = exact_host_locks()
     mutations = hostile_self_checks()
-    require(mutations == 10, "hostile mutation count changed")
+    require(mutations == 11, "hostile mutation count changed")
     output = (
         "diamond-plus-two-triangles exact packet verifier: PASS\n"
         f"incidences: direct-same={direct_same} direct-distinct={direct_distinct} "
         f"nested={nested} total={direct_same + direct_distinct + nested}\n"
         f"strict negative imaginary Sachs coefficients checked: {terms}\n"
+        f"diamond locks: cycles={cycles} exact-states={states} "
+        f"automorphisms={automorphisms}\n"
+        "computed graph ranks: all 14 records have beta=4\n"
         "one-sum identities: direct-same, direct-distinct, nested verified exactly\n"
         "tree-message scope: arbitrary positive core activities\n"
         "continuous phase: Theta(t) in (-pi,0), Delta=s+-s->0\n"

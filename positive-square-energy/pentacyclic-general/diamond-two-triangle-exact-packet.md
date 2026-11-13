@@ -51,15 +51,31 @@ setting every `z_v=t` recovers (2).  Its grouped Sachs expansion has positive
 matching weights, while a selected cycle `C` contributes
 `-2 i^(-|C|)`.  This fixes all normalization and sign conventions below.
 
-Orient every off-core tree edge toward the core.  For the subtree
-`T_(u->v)` below an oriented edge `u->v`, let
+For a forest `F` define its positive weighted matching partition by
 
 ```text
-Q_(u->v)=Z_(T_(u->v))/Z_(T_(u->v)-u),
+Z_F(z)=sum_(M matching of F) product_(v uncovered by M) z_v.
 ```
 
-where `Z` is the positive matching partition.  Splitting a matching according
-to the status of `u` gives
+When all activities equal `t`, this is
+`Z_F(t)=sum_M t^(|V(F)|-2|M|)`.  Orient every off-core tree edge toward the
+core.  For the subtree `T_(u->v)` below an oriented edge `u->v`, let
+
+```text
+Q_(u->v)=Z_(T_(u->v))/Z_(T_(u->v)-u).
+```
+
+If the children of `u` are `w`, splitting a matching according to whether `u`
+is uncovered or is matched to one child gives
+
+```text
+Z_(T_(u->v))
+ =t product_w Z_(T_(w->u))
+  +sum_w Z_(T_(w->u)-w) product_(x!=w) Z_(T_(x->u)),
+Z_(T_(u->v)-u)=product_w Z_(T_(w->u)).
+```
+
+Thus
 
 ```text
 Q_(u->v)=t+sum_(w child of u) 1/Q_(w->u)>=t>0.
@@ -96,10 +112,11 @@ Psi_(X vee_w Y)
 
 Here is a direct derivation.  In a grouped Sachs subgraph, every cycle lies
 wholly in `X` or wholly in `Y`, and at the shared vertex `w` there are three
-exclusive states: `w` is left unmatched (weight `z_w`), it is matched through
-an edge of `X`, or it is matched through an edge of `Y`.  The product
-`Psi_X Psi_(Y-w)` contains the first and `X`-matched states, while
-`Psi_(X-w)Psi_Y` contains the first and `Y`-matched states.  Their common
+exclusive states: `w` is left unmatched (weight `z_w`), `w` is occupied by a
+nontrivial Sachs component of `X` (a matching edge or a selected cycle), or
+`w` is occupied by a nontrivial Sachs component of `Y`.  The product
+`Psi_X Psi_(Y-w)` contains the first and `X`-occupied states, while
+`Psi_(X-w)Psi_Y` contains the first and `Y`-occupied states.  Their common
 unmatched class is `z_w Psi_(X-w)Psi_(Y-w)` and has been counted twice;
 subtracting it once proves (4).  Equivalently, this is the determinant
 one-vertex-sum identity applied term by term to the grouped Sachs expansion.
@@ -164,10 +181,11 @@ R_u>0,        I_u<=0.                                         (8)
 ```
 
 For distinct `u,v`, `D-{u,v}` is a forest and its matching state
-`F_uv=Psi_(D-{u,v})` is strictly positive.  Explicitly the six states are
+`F_uv=Psi_(D-{u,v})` is strictly positive.  Explicitly, with the deleted pair shown, the six states are
 
 ```text
-rs, qs+1, qr+1, ps+1, pr+1, pq+1.                             (9)
+F_pq=rs,      F_pr=qs+1,    F_ps=qr+1,
+F_qr=ps+1,    F_qs=pr+1,    F_rs=pq+1.                        (9)
 ```
 
 All inequalities (6)--(9) are coefficientwise in arbitrary positive
@@ -249,7 +267,11 @@ Im Psi_G
  =(d_1d_2+be_2)I-2bR+(d_2e_1+e_2)I_u-2(d_2+1)R_u<0.         (16)
 ```
 
-The other private vertex is symmetric.  If the second triangle uses the
+If the second triangle is rooted at `b` instead, delete `b`: the coefficient
+`b` in (14)--(16) is replaced by `a`, and the same strict sign proof follows.
+Thus the eight marked private-child positions reduce, by swapping the names
+`a,b` together with their independent activities and rooted branches, to the
+four labelled representatives checked here.  If the second triangle uses the
 entry cut `u` of the upstream triangle, all three block nodes meet the same cut
 node; this is repeated-owner direct/direct incidence, not a new nested chain.
 Hence the genuinely nested case uses one of the two private vertices, which
@@ -358,9 +380,21 @@ python3 -O research/diamond-two-triangle-packet-verifier.py
 ```
 
 The standard-library verifier independently regenerates the Sachs polynomial
-for all 10 direct and 4 nested records.  It checks (4)--(16) as exact sparse
-integer-polynomial identities, strict negativity of every imaginary
-coefficient, and the rank/energy ledger.  It also locks the explicit negative-real direct-`r,s` specialization above
-as a regression.  It rejects hostile one-sum, triangle-sign, cross-term,
-pendant, incidence, owner, strictness, host-sign, full-real-positivity, and
-rank mutations, and requires identical normal/optimized output.
+for all 10 direct and 4 normalized nested records.  It compares the displayed
+one-sum/direct/nested formulas with those full weighted core polynomials,
+locks the explicit diamond/deleted-diamond states (6)--(9), derives the core
+rank from the realized graphs, checks coefficientwise strict negativity of the
+imaginary parts, and retains the explicit negative-real direct-`r,s`
+specialization as a regression.  It rejects hostile one-sum, triangle-sign,
+cross-term, pendant, incidence, owner, strictness, host-sign,
+full-real-positivity, rank, and diamond-edge mutations, and requires identical
+normal/optimized output.
+
+The executable is a finite weighted-core certificate, not a replacement for
+the whole theorem proof.  The arbitrary-tree factorization, the reflection
+transport from the four normalized nested records to the other four marked
+private-child positions, the continuous phase lift, and the signed Coulson
+integration are the mathematical arguments in Sections 1, 4, and 5.  A
+transitive dependency gate must therefore lock this theorem note separately
+from the child executable and must not describe the executable alone as an
+end-to-end proof of arbitrary attachments or square energy.
