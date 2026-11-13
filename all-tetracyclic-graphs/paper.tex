@@ -368,8 +368,8 @@ $\Theta(1,2,2)+C_3+C_5$\\
 $2+2$&$\Delta_1+\Delta_2\leq3$&
 two copies of $\Theta(1,2,2)$\\
 $3+1$&$e_B+\epsilon_q\leq3$ for each rank-three certificate&
-the canonical doubled-triangle and doubled-$C_4$ class $111$ rows, and the
-all-odd $K_4$ rows with at most one long path\\
+the canonical doubled-triangle row, the eight-row exceptional doubled-$C_4$
+automorphism orbit, and the all-odd $K_4$ rows with at most one long path\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -437,11 +437,11 @@ $\sig(H)+\sig(T)>1-1=0$.  This is the complete two-diamond argument
 \cite{TwoDiamonds}.
 
 For $3+1$, use the complete rank-three ledgers from the tricyclic proof
-\cite{TricyclicGraphs}.  The following table makes the canonical/noncanonical
+\cite{TricyclicGraphs}.  The following table makes the first-simple/descendant
 split exhaustive.  Here $j$ is the number of long paths in the all-odd
-$K_4$ class; ``canonical pair'' means lengths $\{1,2\}$ in each doubled
-pair.  Every number in the fourth column is an exact rational upper bound,
-not a decimal optimization.
+$K_4$ class; a ``first-simple doubled pair'' has unordered lengths
+$\{1,2\}$.  Every number in the fourth column is an exact rational upper
+bound, not a decimal optimization.
 \begin{center}
 \small
 \begin{tabular}{p{2.4cm}p{3.3cm}p{3.0cm}p{3.2cm}}
@@ -452,9 +452,10 @@ four-path theta&all simple rows&all DNN&$e_B\leq2$; equality only at $(1,2,2,2)$
 doubled triangle&outside class $111$&$28$ labelled rows, DNN&$e_B\leq2$ from the physical Gram ledger\\
 doubled triangle, class $111$&a parallel path noncanonical&four relabelled choices, DNN&even-long $e_B<229/120<2$; odd-long $e_B<31/20<2$\\
 doubled triangle, class $111$&both doubled pairs canonical&four labelled rows, structural&hostile-cycle certificate $e_B<221/100$\\
-doubled $C_4$&outside class $111$&$28$ labelled rows, DNN&$e_B\leq2$ from the physical Gram ledger\\
-doubled $C_4$, class $111$&a doubled path noncanonical&either pair and either parity, DNN&even-long $e_B<1862/1000<2$; odd-long $e_B<1662/1000<2$\\
-doubled $C_4$, class $111$&both doubled pairs canonical&eight labelled rows, structural&hostile-cycle certificate $e_B<9/4$\\
+doubled $C_4$, odd--odd repair&at least one doubled side has type $OO=(1,3)$&$28$ labelled rows, DNN&uniform $e_B<229/150<2$ from the twelve-state planar ledger\\
+doubled $C_4$, old no-$OO$ slice&ordinary rows&$28$ labelled rows, DNN&$e_B\leq2$ from the physical Gram ledger\\
+doubled $C_4$, exceptional orbit&at least one doubled path is longer than first-simple&descendants of eight anchors: four class $110$, four class $111$&even-long $e_B<1862/1000<2$; odd-long $e_B<1662/1000<2$\\
+doubled $C_4$, exceptional orbit&both doubled pairs first-simple; connectors arbitrary in fixed parity&eight parity anchors and their connector descendants&$q\equiv1\pmod4$: $e_B<9/4$ by witness/monotonicity; $q=3$ or $q\equiv3\pmod4$: induced deletion; even $q$: $e_B<9/4$, $\epsilon_q=0$\\
 $K_4$, non-all-odd&all physical rows&$56$ labelled rows, DNN&$e_B\leq5/3<2$\\
 $K_4$, all odd&physically all odd, $j\geq3$&all subsets, DNN&simplex: $e_B<3-j/3\leq2$\\
 $K_4$, all odd&switched, $j\geq4$&three four-edge cuts, DNN&simplex: $e_B<3-j/4\leq2$\\
@@ -468,11 +469,27 @@ $K_4$, all odd&$j=0$&the unsubdivided $K_4$, structural&attached-$K_4$ Sachs pac
 \end{center}
 The two doubled-triangle bounds come from the planar angle records
 $(12;16,7)$ and $(6;2,8)$ at physical lengths $(4,1,2,1,1)$ and
-$(2,3,2,1,1)$.  The doubled-$C_4$ bounds come from
-$Q(0,3,2,5)$ and $Q(0,1,1,4)$ at $(4,1,2,2,1,1)$ and
-$(2,3,2,2,1,1)$.  Reflection and interchange within a doubled pair cover
-every labelled placement, and fixed-parity monotonicity covers every further
-length increase.  For all-odd $K_4$, the two-long paths are either adjacent or
+$(2,3,2,1,1)$.  For doubled $C_4$, the $28$ odd--odd rows are first normalized by reflecting
+the kernel and interchanging parallel members so that one doubled side has
+lengths $(1,3)$.  The twelve-state exact planar $\pi/3$-angle ledger gives the
+uniform strict bound $229/150$.  The old no-$OO$ slice has $28$ further DNN
+rows and one eight-row exceptional automorphism orbit; under the fixed
+switching normalization that orbit splits four rows in class $110$ and four
+in class $111$.  Its eight first-simple parity anchors include the
+representative $010011$ with length vector $(2,1,2,2,1,1)$.  The four vertex
+automorphisms, together with compatible exchanges inside the two parallel
+fibres, induce sixteen genuine edge permutations; they transport the row and
+its planar Gram witness through all eight anchors without changing cost.  If
+both doubled pairs retain their first-simple lengths, the two connectors may
+have arbitrary lengths of their fixed opposite parities: the transported
+first-simple witness and componentwise fixed-parity monotonicity preserve
+$e_B<9/4$.  If a doubled member is longer than first-simple, use
+$Q(0,3,2,5)$ or $Q(0,1,1,4)$ at $(4,1,2,2,1,1)$ or
+$(2,3,2,2,1,1)$; reflection and parallel-fibre exchanges cover every labelled
+placement, and monotonicity covers every further increase.  Thus the exact
+doubled-$C_4$ accounting is $64=28+28+8$, with no switching class mistaken
+for the exceptional orbit.
+For all-odd $K_4$, the two-long paths are either adjacent or
 opposite.  A nonconstant physical switch makes exactly three or four paths
 even, the edges of a nontrivial $K_4$ cut, and every even path is long.
 The regular simplex covers the physically all-odd $j\geq3$ rows and every
@@ -500,8 +517,8 @@ all-odd rows, require structural ownership.  This also verifies directly that
 an external triangle closes by DNN every newly listed noncanonical state:
 each of
 \[
- \frac{229}{120},\quad\frac{31}{20},\quad\frac{1862}{1000},
- \quad\frac{1662}{1000},\quad\frac{71}{40},\quad
+ \frac{229}{120},\quad\frac{31}{20},\quad\frac{229}{150},
+ \quad\frac{1862}{1000},\quad\frac{1662}{1000},\quad\frac{71}{40},\quad
  24-16\sqrt2,\quad\frac{837-168\sqrt{21}}{35}
 \]
 is strictly below two, and $\epsilon_3=1$.
@@ -511,7 +528,7 @@ For a hostile cycle $Q=C_q$, where $q\equiv1\pmod4$ and $q\geq5$,
  \epsilon_q\leq5-2\sqrt5<\frac35.
 \]
 All DNN rows in the table have $e_B\leq2$, so $e_B+\epsilon_q<3$.
-For the three non-$K_4$ structural types and the one-long all-odd $K_4$ type,
+For the two non-$K_4$ structural types and the one-long all-odd $K_4$ type,
 the displayed bounds give respectively
 $221/100+3/5<3$, $9/4+3/5<3$, and $12/5+3/5=3$ with strictness in both
 constituent estimates.  The attached $K_4$ packet has credit $>2$; an actual
@@ -522,9 +539,13 @@ and every branch rooted on its side, while the other territory owns $Q-z$ and
 its branches; the latter is one nonempty tree, so the total is $>2-1>0$.
 
 It remains to specify ownership for the structural rows when $Q$ is a triangle
-or has length $3\pmod4$.  For a canonical doubled-triangle or doubled-$C_4$
-row, open exactly the internal path vertex used in its tricyclic repair; for a
-one-long all-odd $K_4$ row, open an internal vertex of the long path.  Give the
+or has length $3\pmod4$.  For a first-simple doubled-triangle row, open the
+internal path vertex used in its tricyclic repair.  For the exceptional
+doubled-$C_4$ orbit with both doubled pairs first-simple, open an internal
+vertex of its even connector; this exists at every even connector length, and
+the arbitrary other connector does not affect the complementary cycle lengths
+$a+A=c+C=3$.  For a one-long all-odd $K_4$ row, open an internal vertex of the
+long path.  Give the
 opened vertex every component whose unique block-cut route first meets the
 rank-three block there.  The complementary territory contains the same
 attached two-triangle or diamond packet as in the tricyclic proof.  If the

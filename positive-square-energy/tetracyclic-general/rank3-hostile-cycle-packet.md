@@ -9,11 +9,14 @@ Let `G` be connected and let its positive-rank cyclic blocks be
 - one unicyclic block `Q=C_q`, where `q=1 mod 4`.
 
 Arbitrary bridge connectors and arbitrary rooted trees are allowed. Assume
-that the physical row of `B` is one of the canonical structural rows left by
-the tricyclic rank-three proof:
+that the physical row of `B` is one of the following rank-three residual
+families:
 
-1. doubled triangle: class `111`, both doubled pairs canonical;
-2. doubled `C4`: class `111`, both doubled pairs canonical;
+1. doubled triangle: class `111`, both doubled pairs first-simple;
+2. doubled `C4`: the exceptional eight-row kernel-automorphism orbit, with
+   both doubled pairs first-simple and the two connectors arbitrary in their
+   fixed opposite parities (four anchors in switching class `110` and four in
+   class `111`);
 3. all-odd `K4`: exactly one long path or no long path.
 
 Then
@@ -131,7 +134,14 @@ Write
 
 `a,A:01`, `b:12`, `c,C:23`, `d:30`.
 
-In class `111`, normalize the canonical physical lengths to
+The tricyclic ledger has exactly `64` labelled parity words. Twenty-eight
+words containing an odd--odd doubled side are DNN with the uniform rational
+upper bound `229/150<2`. The old no-`OO` slice has `28` further DNN words and
+one exceptional eight-row automorphism orbit. Under the fixed switching
+normalization, that orbit contains four rows in class `110` and four in class
+`111`; it is not one switching class. After a genuine kernel automorphism and
+compatible interchanges within the parallel fibres, normalize one first-simple
+parity anchor to
 
 `(a,A,b,c,C,d)=(2,1,2,2,1,1)`.                             (12)
 
@@ -148,9 +158,24 @@ half-angle step gives `tan^2(pi/24)<1/20`. Therefore the left side of (14) is
 strictly smaller than `2+1/10+3/40=87/40<9/4`. Each radical inequality is
 verified by one squaring of positive sides.
 
-Kernel automorphisms and interchanges within the doubled pairs send all eight
-labelled class-`111` canonical rows to (12), without changing physical path
-lengths. Hence (14) covers the complete structural class. By (3),
+The four vertex automorphisms, together with compatible exchanges inside the
+two parallel fibres, induce `16` genuine edge permutations. Their orbit of the
+parity row `010011` is exactly
+
+`010011, 010101, 011010, 011100,`
+
+`100011, 100101, 101010, 101100`.
+
+Transporting the planar vectors (13) along the same physical kernel
+isomorphism merely permutes the six path contributions, so every transported
+Gram matrix has the same cost (14). This is automorphism transport, never
+switching transport. If both doubled pairs retain their first-simple lengths,
+the two connectors may have arbitrary lengths of their fixed parities:
+componentwise fixed-parity monotonicity applied to the transported witness
+preserves (14). If instead a doubled member is longer than first-simple, the
+separate exact bounds `1862/1000` or `1662/1000` apply. Hence one first-simple
+witness covers the complete eight-anchor orbit and all connector-only
+descendants, with its four-plus-four switching-class split. By (3),
 
 `e_DC4+epsilon_q<9/4+3/5=57/20<3`.                          (15)
 
@@ -230,7 +255,7 @@ credit `-1`; the first has credit `>2` by (20). Hence
 `sigma(G)>2-1=1`.                                          (22)
 
 The territories are induced and own each branch exactly once. This argument
-does not drop the mixed `Q`--`C4` Sachs terms; it avoids them by an actual
+does not drop the mixed `Q`--`K4` Sachs terms; it avoids them by an actual
 vertex partition.
 
 ## 6. Complete canonical census
@@ -238,15 +263,19 @@ vertex partition.
 | kernel | canonical physical rows | certificate | rank-four balance |
 |---|---:|---|---:|
 | doubled triangle class `111` | `4` | angles (9), `e_B<221/100` | `<281/100` |
-| doubled `C4` class `111` | `8` | angles (13), `e_B<9/4` | `<57/20` |
+| doubled `C4` exceptional orbit: doubled pairs first-simple, connectors arbitrary in fixed parity (`4` anchors class `110`, `4` class `111`) | `8` parity anchors | one representative, genuine-automorphism transport, and connector monotonicity, angles (13), `e_B<9/4` | `<57/20` |
 | all-odd `K4`, one long path | `6` edge orbits | angles (17), `e_B<12/5` | `<3` |
 | all-odd `K4`, no long path | `1` | `K4 | Q` or `K4 | (Q-z)` | `>0` surplus |
 
-The first three counts are labelled canonical rows after the simplicity
-constraints; longer paths of the same physical parity are covered by
-fixed-parity monotonicity. The no-long row is exactly the unsubdivided `K4`.
-Together these alternatives are the complete canonical structural payload
-from the doubled-triangle, doubled-`C4`, and all-odd `K4` tricyclic ledgers.
+The first three counts are labelled first-simple structural anchors after the
+simplicity constraints. For doubled `C4`, the eight parity anchors form one
+genuine-kernel-automorphism orbit, not one switching class. If both doubled
+pairs retain first-simple lengths, connector paths may have arbitrary lengths
+of their fixed parities: (14) and fixed-parity monotonicity cover them. If
+either doubled pair is longer, the `1862/1000` or `1662/1000` descendant bound
+applies. The no-long row is exactly the unsubdivided `K4`. Together these
+alternatives are the complete rank-three payload needed for this hostile-cycle
+packet.
 
 ## 7. Audit boundary
 
@@ -254,8 +283,11 @@ This note does not replace the nonstructural rank-three ledgers. The complete
 rank-`3+1` block-type proof combines this packet with
 
 - the 28 doubled-triangle DNN rows outside class `111`;
-- the first seven doubled-`C4` switching classes and the noncanonical
-  class-`111` certificates;
+- all `28` doubled-`C4` odd--odd rows (uniform `e_B<229/150`), the `28`
+  DNN rows in the old no-`OO` slice, the exceptional eight-anchor orbit with
+  first-simple doubled pairs and arbitrary fixed-parity connectors, and the
+  longer-doubled-path certificates for its remaining descendants (four anchors
+  class `110`, four class `111`);
 - the 56 non-all-odd `K4` rows; and
 - the all-odd `K4` certificates with at least two long paths.
 
