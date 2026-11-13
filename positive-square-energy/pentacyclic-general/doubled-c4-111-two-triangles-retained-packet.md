@@ -45,11 +45,11 @@ variable at `v` by an activity
 `a_v=t+sum 1/Q_(u->v)>=t>0`.
 
 The same factor is present after cycle vertices are deleted, so the grouped
-Sachs expansion may be read directly with these positive activities. Every
-triangle contributes `-2i`. If the triangle packing number is at most two, the
-zero- and two-cycle terms are real and every one-cycle term has negative
-imaginary part. Hence `Im Psi(t)<0` for every `t>0`, and the signed Coulson
-identity gives
+Sachs expansion may be read directly with these positive activities.  Because
+every cyclic block in `A_r` is a triangle, each selected cycle contributes
+`-2i`. If the triangle packing number is at most two, the zero- and two-cycle
+terms are real and every one-cycle term has negative imaginary part. Hence
+`Im Psi(t)<0` for every `t>0`, and the signed Coulson identity gives
 
 `D(A_r)=s^+(A_r)-s^-(A_r)>0`.                                 (2)
 
@@ -59,17 +59,32 @@ Since an attached `r`-triangle cluster has cyclomatic rank `r`,
 
 and `|E(A_r)|-|V(A_r)|=r-1`. Equation (2) proves (1).
 
-We also need the following established favorable-packet version of (1). Let
-`J` be an attached diamond together with `k<=2` triangular blocks in one
-bridge-free shared-cut incidence tree, and put `r=2+k`. Then
+We also need the following favorable-packet version of (1). Let `J` be a
+diamond together with `k<=2` triangular blocks in one bridge-free shared-cut
+incidence tree, with arbitrary one-root tree branches, and put `r=2+k`. Then
 
 `sigma(J)>r-1`.                                               (2a)
 
-For `k=0` this is the attached-diamond estimate. For `k=1` it is the
-concentrated `D+T` favorable rank-three estimate, and for `k=2` it is the
-favorable rank-four `D+T+T` estimate. In each case the grouped normalized Sachs
-phase is negative for every positive activity assignment, so arbitrary rooted
-trees and either direct or nested shared-cut incidence are included. Hence
+The scope excludes an acyclic connector meeting several cyclic cores.  For
+`k=0`, the positive-activity diamond state is `Psi_D=R+iI`, with `R>0` and
+`I=-2(r+s)<0`, so the lower-half-plane/Coulson argument gives the attached-
+diamond estimate.  For `k=1`, if the triangle has private activities `a,b` at
+physical shared cut `u`, put `d=ab+1` and `e=a+b`.  The exact one-sum identity
+is
+
+`Psi_(D+T)=d Psi_D+(e-2i)Psi_(D-u)`.
+
+Writing `Psi_(D-u)=R_u+iI_u`, the explicit deleted-diamond states have
+`R_u>0`, `I_u<=0`, and hence
+
+`Im Psi_(D+T)=dI+eI_u-2R_u<0`.
+
+For `k=2`, the aggregate direct/direct and direct/nested formulas---not a
+triangle-packing shortcut in the presence of the diamond's four-cycle---are
+the exact theorem in
+`diamond-two-triangle-exact-packet.md`.  That theorem proves strict negative
+imaginary part for every positive core activity and covers arbitrary one-root
+branches.  In all three cases the signed Coulson identity gives
 `D(J)=s^+(J)-s^-(J)>0`; since `J` has rank `r`,
 `sigma(J)=r-1+D(J)/2>r-1`. The strict credits supplied by (2a) are therefore
 respectively `>1`, `>2`, and `>3`. This is the only noncactus side packet used

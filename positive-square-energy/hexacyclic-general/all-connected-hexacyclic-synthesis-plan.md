@@ -1,13 +1,24 @@
-# All-connected hexacyclic synthesis plan
+# Historical all-connected hexacyclic synthesis plan
 
-## Status and promotion boundary
+## Archival status and promotion boundary
 
-This is a file plan and dependency contract for the main-lane synthesis after
-the order-nine and order-ten exact coverage gates are green. It is not a
-theorem artifact, does not promote either coverage gate, and does not support a
-claim that the all-connected theorem is complete.
+> **Historical planning record (9 August 2026).** This file is retained to show
+> the pre-promotion design and is neither a current roadmap nor a publication
+> authority. Its future-tense sections, open checkboxes, proposed file list,
+> and execution order record what was still required when the plan was written;
+> they are not current status. The completed theorem, executable authorities,
+> and reproduction instructions now live in `all-hexacyclic-graphs/paper.tex`,
+> `positive-square-energy/hexacyclic-general/multiblock-items1-7-combined-theorem-audit.md`,
+> `positive-square-energy/hexacyclic-general/multiblock-items1-4-owner-exact-closure.md`,
+> `research/hexacyclic-multiblock-ledger-verifier.py`, and
+> `research/hexacyclic-all-connected-master-verifier.py`. Every digest below is
+> historical and must not be copied as a live repository identity.
 
-The final target is:
+This was a file plan and dependency contract for the main-lane synthesis after
+the order-nine and order-ten exact coverage gates became green. It was not a
+theorem artifact and did not itself promote either coverage gate.
+
+The target was:
 
 > Let `G` be a finite simple connected graph with `|V(G)|=n` and
 > `|E(G)|=n+5`. Then `s+(G)>=n`.
@@ -64,15 +75,12 @@ theory argument.
 
 ## Dependency DAG and mixed-time identity notes
 
-This section began as a 9 August 2026 synthesis snapshot and has been amended
-selectively as downstream gates were hardened.  A hash explicitly labelled
-``current`` below identifies the present repository bytes; other hashes are
-historical identities or values pinned by the named verifier.  Do not treat
-the table as one coherent dependency manifest.  The executable all-connected
-master is the current authority.  Final publication roots must be regenerated
-whenever a leaf changes.  The 9 November K4 repair has been propagated through
-the tetracyclic leaf, multiblock manifest, and all-connected master; the
-identities immediately below are the post-repair current values.
+This section began as a 9 August 2026 synthesis snapshot and was amended
+selectively as downstream gates were hardened. Every hash in this archival file
+is now historical, even where nearby prose described it as current when written.
+Do not treat the table as one coherent dependency manifest or use any digest in
+it as present repository status. The executable all-connected master and the
+completed package named in the archival banner are the current authorities.
 
 ### Multiblock owner
 
@@ -80,25 +88,26 @@ Direct verifier:
 
 ```text
 research/hexacyclic-multiblock-ledger-verifier.py
-current source SHA-256:
-8d80369b95d4c2b87fd36ea592981d0e799a3635513deb50d647971cad3899b7
+historical snapshot source SHA-256:
+6a6b41be9fbfb8ebbd4b59f62fd83b4d4867b8f39a0b0830c2c2bec002a77ea4
 
-current canonical scope/conclusion manifest SHA-256:
-4b4b483c3f019827d2e795dac77ea789765784a10da9496024c5f617e1ddbbb8
+historical snapshot canonical scope/conclusion manifest SHA-256:
+8a08c6bfc3ee359817467b48c2f383c9b94d19d2d4a3171693ac50fb0352b8cc
 
-current normal/optimized report SHA-256:
-ae41d55e2cd8d498462d2c43073ebc7bdc3e978fb15363a9423d1b96ebfcf769
+historical snapshot normal/optimized report SHA-256:
+124410ade497c028846a402ec490d3bc5c513a82d87f7aa0c178e669b31142a0
 ```
 
-It generates all eleven partitions, selects the ten multiblock partitions,
-locks ten sources, regenerates the three rank-five structural families, checks
-12 owner-incidence cases, and rejects 29 hostile mutations. Its locked leaves
-are:
+At the last local amendment it generated all eleven partitions, selected the ten
+multiblock partitions, locked thirteen sources, regenerated the three rank-five
+structural families, checked 12 owner-incidence cases, executed the narrow exact
+`D+T+T` child and exact `D+C5+3C3` pentagon-sector child, and rejected 36
+hostile mutations. The then-locked leaves were:
 
 | logical owner | path | SHA-256 pinned by verifier |
 |:--|:--|:--|
 | combined theorem | `positive-square-energy/hexacyclic-general/multiblock-items1-7-combined-theorem-audit.md` | `b25ec464400a99464f03d1f2c528b542307697140a6a29496dc3be92020fbd58` |
-| items 1--4 | `positive-square-energy/hexacyclic-general/multiblock-items1-4-owner-exact-closure.md` | `4319c568f17f612fd0ba71ba57250e15c3f352a772d87b1ae13c6b36f41c7c13` |
+| items 1--4 | `positive-square-energy/hexacyclic-general/multiblock-items1-4-owner-exact-closure.md` | `c14f43df98ff09acb35ac1bff52a6f36648f5c4ad729003784a7837142372bdb` |
 | items 5--7 | `positive-square-energy/hexacyclic-general/multiblock-items5-7-owner-exact-closure.md` | `1c5722565e874ebf04533e908c5bf335f7be0b56a5665f5b607cfdef14ac8c67` |
 | theta--triangle packet | `positive-square-energy/hexacyclic-general/favorable-theta-triangle-shared-cut-packet.md` | `d222e09a20dce19703f8386c6a3a3699e0621b63f761e553fee3215adf8e2446` |
 | rank-four ledger | `all-tetracyclic-graphs/paper.tex` | `70a931c28c8a8817e2c02818200885f73c532d9afe2c065831f2b3884d61160f` |
@@ -106,12 +115,15 @@ are:
 | K5-e sieve | `pentacyclic/research/all-odd-k5e-territory-sieve.py` | `047a472d4e1af46850198dc68b5780f98b930618f79b51174f11460afcc0334d` |
 | K22 fixture | `pentacyclic/research/order5-kernel-family-theorem.json` | `4d8b826b397dc269c7853b8bd386d00bf469282b52720b8dac96d850e9e616d8` |
 | K71 fixture | `pentacyclic/research/order6-kernel-family-theorem.json` | `69b236b014aef58c037c610ca01fa62ad82601f7bb34153939ec4ddd3b5f364d` |
-| doubled-`C4` owner transport | `research/doubled-c4-exceptional-owner-transport-verifier.py` | `15288382816208fd46c7e85eb3171f724739ba794b98c3b618e7fed7154fbe54` |
+| doubled-`C4` owner transport | `research/doubled-c4-exceptional-owner-transport-verifier.py` | `bbf843422b28b744abf823c4852a665d77ac8ca054e647d8e7449a31ce7f1165` |
+| exact `D+T+T` theorem | `positive-square-energy/pentacyclic-general/diamond-two-triangle-exact-packet.md` | `9107ef2821d441da401079982ae8d0b6c98cee17ae7e52268a9b6ad895b8e11b` |
+| exact `D+T+T` verifier | `research/diamond-two-triangle-packet-verifier.py` | `24da5324c6695de4795fbd7885fbeadf986fabe1b52e2aec2082c92223addc9a` |
+| exact `D+C5+3C3` pentagon-sector verifier | `research/pentagon-sector-partition-verifier.py` | historical local identity; consult the executable owner for the live pin |
 
-Publication contract: promote this verifier to emit a canonical scope/conclusion
-manifest, pin both normal and optimized output digests, and make the final
-all-connected master consume that manifest. Preserve the nonstrict relation:
-the rank-five excess-four plus triangle row meets budget five exactly.
+Historical promotion contract: emit a canonical scope/conclusion manifest, pin
+both normal and optimized output digests, and make the final all-connected
+master consume that manifest. The completed verifier preserves the nonstrict
+relation: the rank-five excess-four plus triangle row meets budget five exactly.
 
 ### Kernel census
 
@@ -121,7 +133,7 @@ fixture SHA-256:
 5a862a0e9ed5dfe91ff6f8491936c8e775eb39b71619df6b8c2a9be2c4643476
 
 verifier: research/rank-six-kernel-census-verifier.py
-current source SHA-256:
+historical snapshot source SHA-256:
 325b78066b626a00deaceb6a026377dd7f898a906c63c597f77831548585e1ee
 ```
 
@@ -131,11 +143,11 @@ order partition `1+4+26+84+216+314+325+162+66`.
 
 ### Orders two through seven
 
-Current implication owner:
+Implication owner recorded at this historical snapshot:
 
 ```text
 research/rank-six-order2-7-master-verifier.py
-current source SHA-256:
+historical snapshot source SHA-256:
 a84d100a61433eae1944db1036693a0eec136c53343192d6c238392335cf742f
 ```
 
@@ -179,7 +191,7 @@ The theorem owner is already separate from its non-theorem census ingredients:
 
 ```text
 research/rank-six-order-eight-kernel-theorem-verifier.py --full
-current source SHA-256:
+historical snapshot source SHA-256:
 247fc797251f19ce1fde2824f24543e2eaa7d3d3dfe4411bcc6eb829aa3e9703
 ```
 
@@ -240,7 +252,8 @@ research/fixtures/rank-six-kernels.json
 every ordered R10G1 XZ chunk and raw stream
 ```
 
-After green, add theorem-promotion owners rather than weakening the gates:
+The plan required adding theorem-promotion owners after green rather than
+weakening the gates:
 
 ```text
 research/rank-six-order-nine-kernel-theorem-verifier.py
@@ -264,7 +277,7 @@ The wrappers must not accept `ready_for_theorem_promotion` as a status-only
 shortcut. They must cause or inherit the exact replay and bind its canonical
 output.
 
-## Files to add after both completion gates are green
+## Historical proposed file list (partly superseded)
 
 ```text
 research/
@@ -285,9 +298,16 @@ all-hexacyclic-graphs/
   HOSTILE_AUDIT.md
 ```
 
-Do not create `post.txt`, result cards, or publication text until every
-publication gate below passes. They are dissemination artifacts, not proof
-dependencies.
+This was a proposal, not a promise that every named explanatory wrapper would
+be created. The four executable owners and `all-hexacyclic-graphs/paper.tex`
+exist; several proposed stand-alone notes, README, and hostile-audit wrappers
+were superseded by theorem-owner manifests and other repository ledgers. File
+existence and current scope must therefore be checked in the live tree rather
+than inferred from this historical list.
+
+The plan prohibited creating dissemination artifacts before its publication
+gates passed; the current publication ledger, not this archive, records what was
+later released.
 
 ### `rank-six-order2-10-master-verifier.py`
 
@@ -316,8 +336,10 @@ Required predicates:
    status-only owners, widened multiblock scope, changed dependency digests,
    and normal/optimized output drift.
 
-Expected theorem scope after all checks is exactly 1,198 single-block kernel
-families. It is not yet the all-connected theorem.
+The planned theorem scope after all checks was exactly 1,198 single-block
+kernel families. At that stage of the plan it was not yet the all-connected
+theorem; the later completed synthesis is documented by the current authorities
+named in the archival banner.
 
 ### `hexacyclic-all-connected-master-verifier.py`
 
@@ -344,13 +366,15 @@ Required predicates:
    multiblock equality row, changed single-block kernel total, theorem claim
    based directly on a coverage gate, or normal/optimized drift.
 
-This is the missing executable theorem layer between the two already separate
-branches and the paper's headline theorem.
+At the planning date this was the missing executable theorem layer between the
+two already separate branches and the proposed paper's headline theorem. It has
+since been added; the current executable is named in the archival banner.
 
-## Paper skeleton and claim ledger
+## Historical paper skeleton and claim ledger
 
-Create `all-hexacyclic-graphs/paper.tex` only after the two new order owners and
-the orders-2--10 master are green. Suggested structure:
+The plan proposed creating `all-hexacyclic-graphs/paper.tex` only after the two
+new order owners and the orders-2--10 master were green. That manuscript now
+exists; the following skeleton is retained only as design history:
 
 ```text
 Title / AI authorship line / date
@@ -440,9 +464,10 @@ math-interface attacks: parity change, non-simple realization, connector as tree
 known nonclaims and independent-reimplementation guidance
 ```
 
-## Publication gates
+## Historical publication-gate design
 
-All gates are conjunctive.
+The following were conjunctive gates in the pre-promotion plan. They are not a
+live checklist; current evidence is recorded in the completed package.
 
 1. **Order-nine finite gate.** Final manifest covers `[0,186295)`, all
    2,794,425 targets have exact disjoint owners, normal and optimized full
@@ -476,15 +501,12 @@ All gates are conjunctive.
     release metadata, or project-state promotion be prepared. This plan does
     not perform that promotion.
 
-## Internal eventual-publication checklist
+## Historical eventual-publication checklist
 
-This checklist specializes `research/procedural/PUBLICATION.md` to
-`all-hexacyclic-graphs`. It is a fail-closed record for a possible future
-publication, not authorization to contact anyone, submit anything, create a
-post, or change project state. Every box remains open while the manuscript is
-conditional. Complete the boxes in order and record only committed paths,
-public identifiers, dates, and digests; never store credentials, verification
-tokens or URLs, mailbox contents, or private replies.
+This unchecked checklist captured pre-promotion requirements. It is frozen as
+history and must not be read as current theorem, manuscript, or dissemination
+status. Current publication records are governed by
+`research/procedural/PUBLICATION.md` and the append-only ledgers it names.
 
 ### A. Solved-result acceptance
 
@@ -590,7 +612,7 @@ tokens or URLs, mailbox contents, or private replies.
   readback leaves publication unresolved and does not authorize a duplicate
   post. This checklist performs no post.
 
-## Execution order once order nine and ten are green
+## Historical execution order (completed; not current instructions)
 
 1. Freeze final order-nine and order-ten manifests and obtain complete exact
    normal/optimized reports.

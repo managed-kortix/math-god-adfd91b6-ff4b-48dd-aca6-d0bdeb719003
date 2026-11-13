@@ -29,10 +29,11 @@ subtree containing `B` and the external cyclic blocks at `B`. Deleting the
 edges of `B` shows that every component off `B` meets it in at most one vertex.
 Thus every external block has a unique first owner in `V(B)`.
 
-If the rooted subtree contains an actual bridge, choose a bridge farthest from
-`B`. Its descendant cyclic set is a complete suffix of the rooted subtree, not
-a list of independently chosen cycles. In a rank-three-plus-two-triangles row
-that suffix has profile `T` or `TT`. In the diamond row it has one of
+If the rooted subtree contains an actual bridge, choose one farthest from
+`B` among the bridges whose descendant side contains a cyclic block.  Its
+descendant cyclic set is a complete suffix of the rooted subtree, not a list
+of independently chosen cycles.  In a rank-three-plus-two-triangles row that
+suffix has profile `T` or `TT`.  In the diamond row it has one of
 
 `T, TT, P, TP, TTP`.
 
@@ -44,8 +45,11 @@ complement close strictly. The same argument closes `TP` and `TTP` by the
 established favorable cactus packets. If a diamond-row bridge cuts off only
 `P`, that unicyclic territory has credit greater than `-1`, while the retained
 `D+T+T` packet has credit greater than three, so this case is strict as well.
-Hence every positive-route realization is closed, including separate arms, a
-common positive stem, and one cyclic block nested beyond another.
+Thus every route containing a bridge between cyclic blocks is closed,
+including separate arms, a common positive stem, and one cyclic block nested
+beyond another.  Bridges belonging only to off-core rooted trees remain inside
+the corresponding packet and are handled by its arbitrary one-root-tree scope;
+they are not ``positive routes'' in this cyclic-hull reduction.
 
 It remains to classify the bridge-free subtree. With two external triangles,
 there are exactly two block-level forms:
@@ -269,33 +273,71 @@ Thus the total boundary loss is at most two, with every boundary cut kept only
 by `A`, and the strict anchor margin closes the graph.
 
 Assume finally that no triangle is directly incident with `D`. The first block
-after `D` must then be the pentagon `P`. Relative to `P`, the two triangles have
-exactly the direct/direct or direct/nested forms of Section 1. Let `T_1` be a
-direct triangle (the upstream one in the nested form), and let `u` be the
-`D-P` cut and `v` the `P-T_1` cut.
+after `D` must then be the pentagon `P`; equivalently, `P` is an internal block
+of the minimal subtree on `D,T_1,T_2`.  Delete all five edges of `P`, retaining
+its vertices.  For each `v in V(P)`, let `F_v` be the component of `G-E(P)`
+containing `v`.  Every component meets `P`: stop a shortest route to `P` at its
+first pentagon vertex.  No component meets two distinct pentagon vertices,
+because a path between them with no internal pentagon vertex would be an ear
+that enlarges the 2-connected block `P`.  Thus the five `F_v` are well-defined,
+disjoint, exhaustive owner components.
 
-Choose a vertex `z` of `P` distinct from `u`, from `v`, and, in the
-direct/direct form, from the owner in `P` of the second triangle. Such a vertex
-exists because these are at most three of the five vertices of `P`. Put `z`
-and every rooted tree based at `z` in a territory `R`, while retaining the path
-`P-z` in the anchor. No cyclic block is owned by `z`, by the choice of `z` and
-the present incidence classification. Hence `R` is a nonempty tree. Branches
-at all retained cuts stay with the anchor. The induced anchor `A` has exactly
-the cyclic blocks `D` and `T_1`, joined by the tree `P-z`, and hence is again
-an attached diamond-plus-triangle packet with
+Mark `v` when `F_v` contains one of `D,T_1,T_2`.  Several cyclic blocks at the
+same physical cut, or nested beyond it, give one mark.  List the distinct marks
+in cyclic order as `c_0,...,c_(q-1)`, with `F_(c_0)` containing `D`.  Let `k`
+be the number of triangles in `F_(c_0)`, and for `i>0` let `r_i>=1` be the
+number in `F_(c_i)`.  Then
 
-`sigma(A)>2`, `sigma(R)=-1`.                                 (5)
+`k+sum_(i=1)^(q-1) r_i=2`.                                   (5)
 
-Open the other triangle `T_2` at its boundary cut, retaining that cut in `A`.
-This produces one further nonempty tree `S`, whether `T_2` is a second direct
-child of `P` or is nested beyond `T_1`. All branches rooted away from the cut
-go with `S`, so `sigma(S)=-1`. The three territories are induced, disjoint,
-and exhaustive. Therefore
+Because `P` lies between `D` and at least one triangle in the minimal cyclic
+hull, deleting the block node `P` separates their block nodes.  Hence `q>=2`;
+obviously `q<=3` and `0<=k<=1`.  The excluded value `q=1` would put all three
+cyclic blocks in one component of `G-E(P)`, contradicting that `P` is the first
+external block on this minimal hull.
 
-`sigma(G)>=sigma(A)+sigma(R)+sigma(S)>2-1-1=0`.               (6)
+Choose one pentagon edge in every cyclic arc from `c_i` to `c_(i+1)` and cut
+those `q` edges.  The remaining pentagon vertices form `q` nonempty consecutive
+path intervals `I_i`, each containing exactly one mark.  Put
 
-This closes the genuinely nested `D-P` incidence that cannot be relabelled as
-a direct `D+T` attachment.
+`W_i=union_(v in I_i) V(F_v),       A_i=G[W_i]`.              (6)
+
+These territories are connected, induced, disjoint, and exhaustive.  Indeed,
+each `F_v` is connected and contains its owner; the internal pentagon edges of
+`I_i` connect them; an edge outside `E(P)` cannot join two owner components;
+and the only cross-sector edges are the selected pentagon boundary edges.
+Every unmarked pentagon vertex, every pentagon cut, and every acyclic branch
+therefore belongs to exactly one interval sector.  Each cyclic block remains
+whole in the sector of its owner, including repeated-owner and nested cases.
+
+The minimal hull on the displayed cyclic blocks is bridge-free here, because
+routes containing a bridge between cyclic blocks were disposed of in Section
+1.  Therefore each sector's cyclic owner component is one shared-cut incidence
+subtree.  The path interval based at its mark and every component based at an
+unmarked interval vertex form a forest attached to that cyclic packet at
+individual roots.  A component outside the displayed cyclic packet cannot
+meet two of its core vertices: its block-cut path would then furnish a second
+route and place those vertices in a larger positive-rank block.  Hence the
+remaining material is genuinely a collection of one-root branches.  The `D`
+sector is thus a narrow bridge-free shared-cut `D+T^k` packet with arbitrary
+one-root branches, not a packet joined through a multi-interface path.  The
+weighted diamond phase gives `sigma(A_0)>1` for `k=0` and the exact shared-cut
+`D+T` one-sum phase gives `sigma(A_0)>2` for `k=1`; equivalently
+
+`sigma(A_0)>1+k`.                                             (7)
+
+Every other sector is a shared-cut cluster of `r_i` triangles.  Its weighted
+Sachs polynomial is strictly lower-half-plane, so
+`sigma(A_i)>r_i-1`.  Set `h=q-1`; this is the number of non-`D` cyclic owner
+marks, not a count of empty sectors.  There are no tree-sector charges.  By
+induced square-energy superadditivity and (5)--(7),
+
+`sigma(G)>=sum_(i=0)^h sigma(A_i)`
+
+`        >(1+k)+sum_(i=1)^h(r_i-1)=3-h=4-q>=1>0`.             (8)
+
+This owner-sector partition closes the rooted `D-P` incidence without the
+invalid assertion that the multi-interface path `P-z` is a one-root attachment.
 
 ## 5. Exact residual
 
@@ -311,7 +353,7 @@ disjunction, the four previously retained multiblock families are exhausted:
 
 | family | bridge-free forms | disposition |
 |---|---|---|
-| `D+T+T+P` | direct `D-T`, or rooted `D-P` with direct/direct or direct/nested triangles | closed by a `D+T` anchor against at most two trees |
+| `D+T+T+P` | direct `D-T`, or rooted `D-P` with direct/direct or direct/nested triangles | direct anchor when available; otherwise the exact pentagon owner-sector partition |
 | doubled triangle `111` plus `TT` | longer doubled member; otherwise first-simple direct/direct or direct/nested | all-length DNN; otherwise a rank-three triangular anchor against two trees |
 | exceptional doubled `C4` orbit plus `TT` | longer doubled member; otherwise first-simple direct/direct or direct/nested, connectors arbitrary in fixed opposite parities | all-length DNN; otherwise the transported favorable rank-three anchor (triangular or `D+T`) against two trees |
 | one-long all-odd `K4` plus `TT` | direct/direct, direct/nested | closed by a diamond-plus-triangle anchor against two trees |

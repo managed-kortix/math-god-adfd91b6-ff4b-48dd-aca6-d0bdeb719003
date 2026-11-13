@@ -67,7 +67,14 @@ execution, so correctness does not depend on removable `assert` statements.
 Run from the repository root with Python 3.10 or newer; the proof verifiers use
 only the standard library:
 
+The exact `D+T+T` child covers only the fourteen bridge-free shared-cut
+incidences with arbitrary one-root tree branches; it excludes multi-interface
+acyclic connectors, positive-rank connector blocks, and `D+T^3`.
+
 ```sh
+python3 research/diamond-two-triangle-packet-verifier.py
+python3 -O research/diamond-two-triangle-packet-verifier.py
+
 python3 research/doubled-c4-exceptional-owner-transport-verifier.py
 python3 -O research/doubled-c4-exceptional-owner-transport-verifier.py
 

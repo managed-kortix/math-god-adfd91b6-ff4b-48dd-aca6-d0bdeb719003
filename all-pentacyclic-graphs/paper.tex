@@ -239,9 +239,10 @@ induced-territory ownership instead.
 We use the following packet ledger.  Here $T=C_3$, $P=C_5$, and
 $D=\Theta(1,2,2)$; a word records cyclic blocks in one connected induced
 territory, not a formal sum of overlapping subgraphs.  Every line permits
-arbitrary rooted trees, and the mixed words permit arbitrary bridge connectors.
-The extra ``shared'' hypothesis means one bridge-free shared-cut incidence
-tree.
+arbitrary one-root tree branches.  A mixed word permits a bridge connector only
+when its row says so; ``shared'' means one bridge-free shared-cut incidence
+tree.  In particular, these bounds do not silently absorb an acyclic router
+meeting several cyclic cores.
 \begin{table}[ht]
 \centering\small
 \begin{tabular}{p{2.4cm}p{2.5cm}p{7.8cm}}
@@ -258,8 +259,9 @@ $TTC_5$ phase gives $>4-\sqrt5$ \cite{Tricyclic,TetracyclicCactus}\\
 shared $T^4$&$>3$&negative Sachs phase when packing is at most two; the sole
 packing-three central-triangle/three-petal type is the exact matching-injection
 calculation of \cite{PentacyclicCactus}\\
-shared $D+T^k$, $0\le k\le2$&$>1+k$&grouped rooted Sachs phase; in particular
-$D+T>2$ and $D+TT>3$ \cite{DiamondTwoTriangles}\\
+shared $D+T^k$, $0\le k\le2$&$>1+k$&weighted diamond phase for $k=0$,
+exact one-sum phase for $k=1$, and the aggregate direct/nested theorem for
+$k=2$ \cite{DiamondTwoTriangles}\\
 attached $K_4$&$>2$&the standalone attached-$K_4$ Sachs packet
 \cite{Tricyclic,Tetracyclic}\\
 \bottomrule
@@ -271,15 +273,22 @@ owned by one displayed territory only.}\label{tab:packets}
 For clarity, the $TTP$ line is not obtained by adding three merely strict
 inequalities.  Its three-block reduced tree either has a separating edge,
 giving the displayed $TT+P$ or $T+TP$ ledger, or is one shared cluster, where
-the cited $TTC_5$ determinant has negative phase.  Likewise the $D+TT$ line is
-the rooted activity proof: after eliminating attached trees, every one-cycle
-term in the normalized Sachs expansion is negative imaginary and the possible
-two-cycle terms are real, so $D(H)=\spn(H)-\smn(H)>0$ and
-$\sig(H)=3+D(H)/2>3$.  The shared $T^4$ proof uses the same phase argument
-except for its one packing-three incidence, treated by the cited injection.
-These are the exact strengths used below; no uniform margin is inferred from
-strict positivity.  A nonempty tree has credit $-1$ because its spectrum is
-symmetric and $\spn(T)=|E(T)|$.
+the cited $TTC_5$ determinant has negative phase.  For the diamond write the
+weighted states as $\Psi_D=R+iI$ and
+$\Psi_{D-u}=R_u+iI_u$, where $R,R_u>0$, $I<0$, and $I_u\le0$.
+The $k=0$ line follows directly.  For one triangle, with private activities
+$a,b$, $d=ab+1$, and $e=a+b$, the exact one-sum formula
+$\Psi_{D+T}=d\Psi_D+(e-2i)\Psi_{D-u}$ gives
+$\Im\Psi_{D+T}=dI+eI_u-2R_u<0$.  For two triangles, the cited exact theorem
+checks all direct and nested aggregate formulas; it does not infer their sign
+termwise from triangle packing in the presence of the diamond's four-cycle.
+Positive matching-message compression handles one-root branches, and the
+continuous lower-half-plane Coulson identity gives respectively credits
+$>1,>2,>3$.  The shared $T^4$ proof uses the all-triangle phase argument except
+for its one packing-three incidence, treated by the cited injection.  These are
+the exact strengths used below; no uniform margin is inferred from strict
+positivity.  A nonempty tree has credit $-1$ because its spectrum is symmetric
+and $\spn(T)=|E(T)|$.
 
 \section{Exhaustive block partitions and the exact multiblock sieve}
 
@@ -461,10 +470,11 @@ incidence the upstream triangle has such an owner and the downstream owner is
 an arbitrary physical vertex of that triangle.
 
 Call a route \emph{positive} precisely when the minimal block-cut subtree from
-$B$ to the external cyclic blocks contains an actual bridge.  Root that subtree
-at $B$ and choose a farthest bridge.  Its entire descendant suffix is one
-connected induced territory; the complement is connected and lower-rank.  The
-exact positive-route ledger is
+$B$ to the external cyclic blocks contains an actual bridge between cyclic
+blocks.  (Bridges in off-core rooted trees remain part of the corresponding
+arbitrary-tree packet.)  Root the cyclic hull at $B$ and choose a farthest such
+bridge.  Its entire descendant suffix is one connected induced territory; the
+complement is connected and lower-rank.  The exact positive-route ledger is
 \begin{center}
 \small
 \begin{tabular}{p{3.2cm}p{4.0cm}p{5.8cm}}
@@ -533,16 +543,37 @@ possibilities.  First, some triangle is the first block after $D$; retain that
 $D+T$ shared-cut anchor, of credit $>2$, and boundary-open the at most two
 remaining cyclic demands.  A component containing both demands is kept as one
 rank-two territory or is opened once, so the total loss is at most two.
-Second, no triangle is first after $D$; then $P$ is the first external block,
-and relative to $P$ the triangles are direct/direct (owners may repeat) or
-direct/nested.  Let $u$ be the $D$--$P$ cut, $v$ the owner of an upstream
-triangle, and in the direct/direct case let $w$ be the second owner.  Choose
-$z\in V(P)\setminus\{u,v,w\}$, possible because at most three of its five
-vertices are forbidden.  Put $z$ and all descendants owned there in one tree
-$R$; the induced path $P-z$ stays in an attached $D+T$ anchor $A$ of credit
-$>2$.  Boundary-open the other triangle into a tree $S$.  Repeated owners cause
-no duplication: each boundary cut remains only in $A$.  Hence
-$\sig(G)>2-1-1=0$.
+Second, no triangle is first after $D$; then $P$ is the first external block
+and is internal in the minimal subtree on $D,T_1,T_2$.  Delete the five edges
+of $P$.  Each component of $G-E(P)$ meets $P$ in one unique vertex: existence
+follows by stopping a shortest route to $P$, while two meetings would give an
+ear enlarging the $2$-connected block $P$.  Mark a pentagon vertex when its
+component contains $D,T_1$, or $T_2$; repeated or nested cyclic owners at one
+cut give one mark.  Let the distinct marks be $c_0,\ldots,c_{q-1}$ in cyclic
+order, with $c_0$ owning $D$.  If $k$ triangles share that component and the
+other marks own $r_i\ge1$ triangles, then
+$k+\sum_{i>0}r_i=2$.  Since $P$ lies between $D$ and a triangle,
+$2\le q\le3$.
+
+Cut one pentagon edge in every cyclic arc between consecutive marks.  The
+remaining vertices are $q$ nonempty consecutive intervals, each with one mark.
+Adjoin to an interval every $G-E(P)$ component owned by one of its vertices.
+These induced territories are connected, disjoint, and exhaustive; every
+unmarked pentagon vertex and branch is assigned once, and their only cross
+edges are the selected pentagon edges.  Since all bridges between cyclic
+blocks were already split, the cyclic blocks in each sector form one
+bridge-free shared-cut packet.  Everything else in that sector is a forest of
+one-root branches: an off-packet component meeting two core vertices would
+create a second route and enlarge a positive-rank block.  Thus the $D$ sector
+is a genuine bridge-free shared-cut $D+T^k$ packet, not a multi-interface
+router, and has credit $>1+k$.  Every other sector is a shared-cut cluster of
+$r_i$ triangles
+and has credit $>r_i-1$.  With $h=q-1$, superadditivity gives
+\[
+ \sig(G)>1+k+\sum_{i=1}^{h}(r_i-1)=3-h=4-q\ge1.
+\]
+Thus repeated owners, nested triangles, and every pentagon-owned acyclic branch
+are covered without treating $P-z$ as a one-root attachment.
 
 In every structural split, ownership is fixed before credit is invoked.  The
 opened vertex and complete descendants form $R$; the boundary cut of $T_2$
@@ -912,10 +943,14 @@ Run the classification and single-block implication master from the repository
 root with Python 3.10 or newer, using only the standard library, in normal and
 optimized modes:
 \begin{verbatim}
+python3 research/diamond-two-triangle-packet-verifier.py
+python3 -O research/diamond-two-triangle-packet-verifier.py
 python3 research/rank-five-kernel-census-verifier.py
 python3 -O research/rank-five-kernel-census-verifier.py
 python3 research/rank-five-order2-8-master-verifier.py
 python3 -O research/rank-five-order2-8-master-verifier.py
+python3 research/pentacyclic-master-verifier.py
+python3 -O research/pentacyclic-master-verifier.py
 \end{verbatim}
 Each implication-master command recursively invokes the low-order verifier and
 the order-five through order-eight theorem verifiers, including the separate
@@ -941,13 +976,14 @@ Order-eight rational chunks additionally have hashes
 
 The programs prove exact finite statements: incidence enumeration,
 automorphism-orbit and key exhaustion, rational arithmetic, Gram principal
-minors, symbolic path costs, source hashes, and owner registries.  They do not
-replace Lemmas~\ref{lem:pinch}--\ref{lem:path}, the all-length monotonicity
-argument, the block partition, or the multiblock owner proof.  Conversely, the
-paper does not infer an all-length theorem from a finite graph-order census or
-a floating optimizer.  The multiblock proof is mathematical and its full
-owner-by-owner source is \cite{OwnerClosure}; it has no claimed executable
-verifier.
+minors, symbolic path costs, source hashes, and owner registries.  The
+$D+TT$ child additionally certifies all fourteen weighted direct/nested cores;
+its theorem note supplies tree-message compression and the continuous Coulson
+argument, both separately source-locked by the pentacyclic master.  The
+programs do not replace Lemmas~\ref{lem:pinch}--\ref{lem:path}, the all-length
+monotonicity argument, the block partition, or the conceptual owner-sector
+proof.  Conversely, the paper does not infer an all-length theorem from a
+finite graph-order census or a floating optimizer.
 
 Build with
 \begin{verbatim}
@@ -985,9 +1021,10 @@ proof note, 2026;
 \bibitem{TerminalReduction} \emph{Four residual templates: exact block-cut
 terminal reduction}, proof note, 2026;
 \path{positive-square-energy/pentacyclic-general/four-residual-block-cut-terminal-reduction.md}.
-\bibitem{DiamondTwoTriangles} \emph{Exceptional doubled-$C_4$ orbit plus
-two triangles}, proof note, 2026;
-\path{positive-square-energy/pentacyclic-general/doubled-c4-111-two-triangles-retained-packet.md}.
+\bibitem{DiamondTwoTriangles} \emph{Exact attached $D+T+T$ packet}, proof
+note and semantic verifier, 2026;
+\path{positive-square-energy/pentacyclic-general/diamond-two-triangle-exact-packet.md};
+\path{research/diamond-two-triangle-packet-verifier.py}.
 \bibitem{KernelClassification} \emph{Classification of the rank-five
 suppressed kernels}, proof note and exact fixture, 2026;
 \path{positive-square-energy/pentacyclic-general/rank-five-kernel-classification.md}.

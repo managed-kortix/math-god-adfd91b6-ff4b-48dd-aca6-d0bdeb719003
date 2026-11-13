@@ -29,9 +29,15 @@ attachment-uniform facts.
 2. A nonempty tree has credit `-1`; a triangular territory has positive
    credit; a territory containing only triangles and one pentagon, and at
    least one triangle, has positive credit.
-3. `sigma(TT)>1`, `sigma(D)>1`, `sigma(D+T)>2`, and
-   `sigma(D+TT)>3` for the corresponding connected attached packets. The last
-   two bounds include direct and nested shared-cut incidence.
+3. `sigma(TT)>1` and `sigma(D)>1`.  More narrowly, a bridge-free
+   shared-cut `D+T` packet with arbitrary one-root tree branches has
+   `sigma(D+T)>2`, and the exact bridge-free shared-cut `D+TT` packet has
+   `sigma(D+TT)>3`.  These statements do **not** allow an acyclic connector
+   meeting several cyclic cores.  The `D+TT` input is the exact weighted-core
+   theorem in
+   `pentacyclic-general/diamond-two-triangle-exact-packet.md`; its direct and
+   nested incidence forms and its arbitrary one-root branches are part of that
+   theorem's stated scope.
 4. A connected four-triangle shared-cut packet has credit greater than three.
 5. The canonical opening of a doubled triangle or a one-long all-odd `K4`
    deletes one physical internal path vertex and its owned descendants as a
@@ -157,24 +163,153 @@ the resulting territory is either a tree or has one intact cycle, and has
 credit at least `-1`; no second charge is needed. Hence there are at most two
 units of boundary loss against `sigma(A)>3`.
 
-If `P` is a block of `K`, orient `P` away from `D`. Its entry cut and the first
-exit cuts on the routes to `T_1,T_2` occupy at most three vertices of `P`.
-Choose a fourth vertex `z`. Delete `z` with its complete owner class and retain
-the path `P-z` in `A`. If the owner class of `z` contains `T_3`, it is a strict
-triangular territory. Otherwise it is a nonempty tree `R`, with
-`sigma(R)=-1`, and `T_3` is boundary-opened at its first cut from `A` as one
-further tree `S`. In both alternatives `A` is an attached `D+TT` packet: the
-pentagon has been replaced by an acyclic connector joining the selected
-triangles to `D`. Therefore
+If `P` is a block of `K`, do not retain `P-z` as a connector. Delete the five
+edges of `P`, but retain all vertices, and for each `v in V(P)` let `F_v` be
+the component of `G-E(P)` containing `v`. These five components are well
+defined and partition `V(G)`. Indeed, every component of `G-E(P)` meets `P`,
+because a shortest route from any of its vertices to `P`, stopped at its first
+vertex of `P`, uses no edge of `P`. No component can meet `P` in two distinct
+vertices `x,y`: choose an `x-y` path in that component with no internal vertex
+on `P`; adjoining this ear (a chord is allowed) to the 2-connected block `P`
+produces a strictly larger 2-connected subgraph, contradicting maximality of
+the block `P`. Thus every component has one unique owner in `V(P)`.
 
-`sigma(G)>3-1-1>0`.                                           (4)
+Mark `v` when `F_v` contains at least one of the four other cyclic blocks
+`D,T_1,T_2,T_3`. If several cyclic blocks use the same cut of `P`, or are
+nested beyond one another from that cut, they lie in the same `F_v` and give
+one mark; their triangle counts are aggregated. Let the distinct marked
+vertices, in cyclic order, be `c_0,...,c_(q-1)`, where `F_(c_0)` contains `D`.
+Let `k` be the number of triangular blocks in `F_(c_0)`, and for `i>0` let
+`r_i>=1` be the number in `F_(c_i)`. Since there are only the four blocks
+`D,T_1,T_2,T_3`, `q<=4`, and
 
-This also covers the pentagon-between-triangles configuration. Only the entry
-and the two selected exits are forbidden; there is no need to forbid the owner
-of `T_3`, because if it equals `z` the opened territory improves from a tree to
-a triangular territory. Repeated exits share their cut only in `A`. Every
-boundary cut, connector remnant, and rooted descendant follows exactly one
-owner, so all territories used above are induced, disjoint, and exhaustive.
+`k+sum_(i=1)^(q-1) r_i=3`.                                  (4a)
+
+Moreover, `P in K` makes `P` an internal block on a route from `D` to at least
+one selected triangle. Deleting the block node `P` therefore separates `D`
+from that selected triangle. Hence `q>=2` and `0<=k<=2`.
+
+Choose one edge of `P` in each of the `q` cyclic edge-arcs from `c_i` to
+`c_(i+1)` (indices modulo `q`) and cut those `q` edges. The remaining graph on
+`V(P)` has `q` nonempty consecutive path intervals `I_0,...,I_(q-1)`, each
+containing exactly one marked vertex, say `c_i in I_i`. Put
+
+`W_i=union_(v in I_i) V(F_v),        A_i=G[W_i]`.             (4b)
+
+The sets `W_i` are disjoint and exhaustive. Each `A_i` is connected: every
+`F_v` is connected and contains `v`, and the internal edges of the path
+`P[I_i]` join their owners. Each is induced by definition. More explicitly,
+an edge outside `E(P)` cannot join two different `F_v`, while the edges of `P`
+with both ends in `I_i` are exactly the internal path edges of `A_i`; every
+`P`-edge crossing two intervals has its endpoints in different territories
+and is omitted automatically. Thus every unmarked `P` vertex and every rooted
+branch owned by it occurs in exactly one territory, and no shared cut or
+connector remnant is copied.
+
+Let `H` be the minimal block-cut subtree on `D,P,T_1,T_2,T_3`. The present
+case has no bridge between cyclic blocks. Deleting the block node `P` from `H`
+shows that the cyclic blocks in each marked `F_(c_i)` form one bridge-free
+shared-cut incidence subtree; any bridge on a route between two of them would
+already be a bridge of `H` between cyclic blocks. Every displayed cyclic block
+stays whole inside the unique sector containing its owner mark, even when
+several blocks share that mark. All other material in `A_i`---including
+`P[I_i]` and components based at its unmarked vertices---is a forest attached
+to that shared-cut packet at individual roots.  Indeed, a component outside
+the displayed cyclic packet cannot meet two of its core vertices: together
+with a path inside the packet it would make a cycle and hence enlarge a
+positive-rank block.  Bridges internal to those one-root trees are harmless
+and are not being excluded by the cyclic-hull assumption.
+
+Consequently `A_0` lies in the *narrow* bridge-free shared-cut `D+T^k` scope,
+with arbitrary one-root tree branches, for `0<=k<=2`. There is no retained
+multi-interface `P-z` router. For clarity, the three inputs are authenticated
+separately and the first two are rederived here.  Orient every off-core tree
+branch toward its root.  Its positive matching-partition ratio satisfies
+`Q=t+sum 1/Q_child>0`; extracting all branch partitions leaves one common
+positive real factor and replaces each core diagonal variable by an
+independent positive activity.  Thus it is enough to analyze the weighted
+core.
+
+Label the diamond by edges `pq,pr,qr,ps,qs`, with `r,s` of degree two. Its
+weighted normalized determinant and any one-root deletion have the forms
+
+`Psi_D=R+iI,             Psi_(D-u)=R_u+iI_u`,
+
+where
+
+`R=pqrs+pr+ps+qr+qs+rs>0,       I=-2(r+s)<0`,
+
+and, for every physical vertex `u`, `R_u>0` and `I_u<=0` (the four states are
+`qrs+r+s`, `prs+r+s`, `pqs+p+q+s-2i`, and
+`pqr+p+q+r-2i`).  For `k=0`, therefore, the weighted diamond curve remains in
+the open lower half-plane.  Its continuous argument tends to zero at infinity;
+the signed Coulson identity gives `Delta=s^+-s^->0`.  Since the diamond sector
+has cyclomatic rank two, `sigma(A_0)=1+Delta/2>1`.
+
+For `k=1`, if the triangle private activities are positive and `d=ab+1`,
+`e=a+b`, the exact one-sum identity gives
+
+`Psi_(D+T)=d Psi_D+(e-2i)Psi_(D-u)`,
+
+and hence
+
+`Im Psi_(D+T)=dI+eI_u-2R_u<0`
+
+for every physical shared cut `u`.  The same branch compression and continuous
+lower-half-plane Coulson argument gives `Delta>0`; rank three now yields
+`sigma(A_0)=2+Delta/2>2`.  Because the sector hull is bridge-free, no hidden
+path joins `D` to `T`: this is a shared-cut calculation, not the disputed use
+of the same name for a graph joined through `P-z`.  For `k=2`, the exact
+attached-`D+T+T` theorem cited in input 3 gives `sigma(A_0)>3`.  Thus in all
+three cases
+
+`sigma(A_0)>1+k`.                                             (4c)
+
+For `i>0`, `A_i` is a bridge-free shared-cut cluster of `r_i` triangles with
+arbitrary one-root tree branches.  Here `1<=r_i<=3`.  Eliminating those
+branches gives independent positive activities and a positive common factor.
+Every selected triangle contributes `-2i`; packing is at most two, so every
+one-cycle term is negative imaginary while the zero- and two-cycle terms are
+real.  The same lower-half-plane/Coulson argument therefore yields
+
+`sigma(A_i)>r_i-1`.                                           (4d)
+
+Set `h=q-1`.  Thus `h`, unlike an empty-sector count, is exactly the number of
+non-`D` cyclic owner marks.  There are no empty sectors and no separate tree
+charges: every one of the `q` cyclic intervals is nonempty and contains one
+mark. Induced square-energy superadditivity and (4a)--(4d) now give
+
+`sigma(G)>=sum_(i=0)^h sigma(A_i)`
+
+`        >(1+k)+sum_(i=1)^h(r_i-1)=4-h=5-q>=1>0`.             (4)
+
+Here `h in {1,2,3}`; the respective strict lower bounds are `>3`, `>2`, and
+`>1`.  This includes repeated exits, several cyclic blocks at one cut,
+direct or nested triangles, the pentagon-between-triangles configuration, and
+the case in which `D` and `P` share their entry cut. In the last case that
+physical cut and `D` simply belong to the single component `F_(c_0)`. Every
+pentagon vertex, including a shared cut, is assigned to exactly one interval;
+all edges between distinct sectors are precisely the selected boundary edges
+of `P`; and every off-`P` component has its unique owner in one sector.
+
+The rejected alternative is worth recording.  Retaining `P-z` produces an
+acyclic graph with several cyclic-core interfaces, not a one-root tree
+attachment.  The proposed universal lower-half-plane router extension is
+false: a corrected all-subsets exact determinant expansion finds positive
+independent-activity imaginary coefficients in 36 of the 84 bare router
+isomorphism types (63 positive versus 9,010 negative coefficients); after
+`z_v=t+y_v`, 81 positive coefficients survive.  Fifteen cores have a positive
+activity-free constant (twelve `+6i`, three `+4i`).  Concretely, for the path
+`P_4=x_0x_1x_2x_3`, identify the diamond degree-two vertex `r` with `x_0` and
+attach one triangle at each of `x_0,x_3`.  At equal activity `t`, exact
+expansion gives
+
+`Im Psi(t)=6-86t^2-150t^4-66t^6-8t^8`,
+
+whose activity-free term is `+6i` and whose sign changes.  This refutes that
+proposed phase certificate, not by itself the router's square-energy
+inequality.  Neither this proof nor any cited packet uses the false extension;
+the sector partition is essential.
 
 ## 5. Item 3: `D+D+T^2`
 

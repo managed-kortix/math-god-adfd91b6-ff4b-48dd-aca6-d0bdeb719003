@@ -17,8 +17,8 @@ HERE = Path(__file__).resolve().parent
 MULTIBLOCK = {
     "name": "canonical-multiblock-owner",
     "path": HERE / "hexacyclic-multiblock-ledger-verifier.py",
-    "source_sha256": "8d80369b95d4c2b87fd36ea592981d0e799a3635513deb50d647971cad3899b7",
-    "output_sha256": "4b4b483c3f019827d2e795dac77ea789765784a10da9496024c5f617e1ddbbb8",
+    "source_sha256": "37d544d1dcbcdac0b154d2f6008f3aa3a81bf805ee87e807a4f1b98ffbbc2b30",
+    "output_sha256": "60fbcbae34101b17d429dc202a463e7d9c08c6486055ac88e4c15b41898c3c0a",
     "arguments": ("--print-manifest",),
     "schema": "hexacyclic-multiblock-scope-conclusion-v1",
     "block_scope": "at-least-two-positive-rank-cyclic-blocks",
@@ -167,6 +167,46 @@ def validate_multiblock(manifest):
         "rank5_structural_families": 3,
         "owner_cases": 12,
     }, "multiblock owner-exact ledger changed")
+    sector = manifest.get("pentagon_sector_execution_m3")
+    require(type(sector) is dict, "multiblock m=3 sector receipt omitted")
+    require(sector.get("file_sha256") ==
+            "9c143530e6ffa2b9c1255236927fa3c75e9bc54a7fa77b6fcdd6c83b665340da",
+            "multiblock m=3 sector verifier receipt changed")
+    require(sector.get("output_sha256") ==
+            "0f765321830d96f0d84845ee6961a158177d003df0f84d10a5b13ce3236b7030",
+            "multiblock m=3 sector output receipt changed")
+    require(sector.get("scope") ==
+            "bridge-free D+C5+3C3 pentagon sectors (m=3)",
+            "multiblock m=3 sector scope receipt changed")
+    require(sector.get("block_node_trees") == 125 and
+            sector.get("weighted_encodings") == 3149280 and
+            sector.get("relevant_encodings") == 1667520 and
+            sector.get("leaf_encodings") == 1481760,
+            "multiblock m=3 sector census receipt changed")
+    sector_required = sector.get("required_lines")
+    require(type(sector_required) is list and
+            "credit lower endpoint min(4-h) 1" in sector_required and
+            "EXACT SECTOR CHECK: PASS" in sector_required,
+            "multiblock m=3 sector acceptance ledger changed")
+    receipt = manifest.get("diamond_two_triangle_execution")
+    require(type(receipt) is dict, "multiblock DTT execution receipt omitted")
+    require(receipt.get("note_sha256") ==
+            "9107ef2821d441da401079982ae8d0b6c98cee17ae7e52268a9b6ad895b8e11b",
+            "multiblock DTT note receipt changed")
+    require(receipt.get("file_sha256") ==
+            "24da5324c6695de4795fbd7885fbeadf986fabe1b52e2aec2082c92223addc9a",
+            "multiblock DTT verifier receipt changed")
+    require(receipt.get("output_sha256") ==
+            "a6f61bdafa04dcc1705634ab7b026b7ce5c0cf1b9d7809cf0f5e7b94b7034ff2",
+            "multiblock DTT output receipt changed")
+    require(receipt.get("scope") ==
+            "scope exclusions: one-root tree attachments only; no multi-interface acyclic connectors; no positive-rank connector blocks; no D+T^3",
+            "multiblock DTT scope receipt changed")
+    required = receipt.get("required_lines")
+    require(type(required) is list and
+            "uniform packet bound: sigma(D+TT)=3+Delta/2>3" in required and
+            "rejected hostile mutations: 11" in required,
+            "multiblock DTT required-line receipt changed")
 
 
 def validate_single_block(manifest):
@@ -178,8 +218,13 @@ def validate_single_block(manifest):
         "graph": "finite simple connected",
         "cyclomatic_rank": 6,
         "edge_vertex_relation": "|E(G)|=|V(G)|+5",
-        "block_scope": SINGLE_BLOCK["block_scope"],
+        "block_scope": "exactly-one-positive-rank-cyclic-block",
     }, "single-block scope changed")
+    require(SINGLE_BLOCK["block_scope"] == "exactly-one-positive-rank-cyclic-block",
+            "parent single-block branch contract widened")
+    require(manifest.get("excluded_scope") ==
+            "multiblock and all-connected hexacyclic graphs",
+            "single-block exclusion ledger changed")
     validate_conclusion(manifest.get("conclusion"), SINGLE_BLOCK["name"])
     require(manifest.get("orders") == list(range(2, 11)),
             "single-block orders are not exactly 2 through 10")
@@ -266,7 +311,38 @@ def invoke(owner):
 
 
 def root_manifest(dependencies, split):
-    require(len(dependencies) == 2, "both proof branches are mandatory")
+    require(type(dependencies) is list and len(dependencies) == 2,
+            "both proof branches are mandatory")
+    expected = [
+        {
+            "name": MULTIBLOCK["name"],
+            "schema": MULTIBLOCK["schema"],
+            "block_scope": "at-least-two-positive-rank-cyclic-blocks",
+            "source_sha256": MULTIBLOCK["source_sha256"],
+            "output_sha256": MULTIBLOCK["output_sha256"],
+            "evidence": "canonical-exact-owner-manifest",
+        },
+        {
+            "name": SINGLE_BLOCK["name"],
+            "schema": SINGLE_BLOCK["schema"],
+            "block_scope": "exactly-one-positive-rank-cyclic-block",
+            "source_sha256": SINGLE_BLOCK["source_sha256"],
+            "output_sha256": SINGLE_BLOCK["output_sha256"],
+            "evidence": "canonical-exact-owner-manifest",
+            "child_execution_evidence_sha256":
+                SINGLE_BLOCK["execution_evidence_sha256"],
+            "promotion": "authenticated-committed-exact-child-executions",
+        },
+    ]
+    require(dependencies == expected,
+            "proof receipts are not the ordered, unique multiblock/single-block pair")
+    require(split["branch_predicates"] == [
+        dependencies[0]["block_scope"], dependencies[1]["block_scope"]
+    ], "proof receipts do not match the analytic branch predicates")
+    require(split["multiblock_partitions"] == [
+        list(row) for row in sorted(PARTITIONS - {(6,)}, reverse=True)
+    ] and split["single_block_partitions"] == [[6]],
+            "proof receipts do not match the analytic partition split")
     return {
         "schema": "hexacyclic-all-connected-master-v1",
         "evidence_kind": "exact-two-branch-theorem",
@@ -320,6 +396,87 @@ def hostile_self_checks():
     }
     expect_rejected(lambda: validate_single_block(status_only), "status-only owner")
     checks += 1
+    valid_multiblock = {
+        "schema": MULTIBLOCK["schema"],
+        "scope": {
+            "graph": "finite simple connected", "cyclomatic_rank": 6,
+            "edge_vertex_relation": "|E(G)|=|V(G)|+5",
+            "block_scope": MULTIBLOCK["block_scope"],
+            "block_rank_partitions": [
+                list(row) for row in sorted(PARTITIONS - {(6,)}, reverse=True)
+            ],
+        },
+        "conclusion": EXPECTED_CONCLUSION,
+        "ledger": {"integer_partitions": 11, "multiblock_partitions": 10,
+                   "packets": 9, "presieve_rows": 5,
+                   "rank5_structural_families": 3, "owner_cases": 12},
+        "pentagon_sector_execution_m3": {
+            "file_sha256": "9c143530e6ffa2b9c1255236927fa3c75e9bc54a7fa77b6fcdd6c83b665340da",
+            "output_sha256": "0f765321830d96f0d84845ee6961a158177d003df0f84d10a5b13ce3236b7030",
+            "scope": "bridge-free D+C5+3C3 pentagon sectors (m=3)",
+            "block_node_trees": 125,
+            "weighted_encodings": 3149280,
+            "relevant_encodings": 1667520,
+            "leaf_encodings": 1481760,
+            "required_lines": ["credit lower endpoint min(4-h) 1",
+                               "EXACT SECTOR CHECK: PASS"],
+        },
+        "diamond_two_triangle_execution": {
+            "note_sha256": "9107ef2821d441da401079982ae8d0b6c98cee17ae7e52268a9b6ad895b8e11b",
+            "file_sha256": "24da5324c6695de4795fbd7885fbeadf986fabe1b52e2aec2082c92223addc9a",
+            "output_sha256": "a6f61bdafa04dcc1705634ab7b026b7ce5c0cf1b9d7809cf0f5e7b94b7034ff2",
+            "scope": "scope exclusions: one-root tree attachments only; no multi-interface acyclic connectors; no positive-rank connector blocks; no D+T^3",
+            "required_lines": ["uniform packet bound: sigma(D+TT)=3+Delta/2>3",
+                               "rejected hostile mutations: 11"],
+        },
+    }
+    missing_sector = deepcopy(valid_multiblock)
+    del missing_sector["pentagon_sector_execution_m3"]
+    expect_rejected(lambda: validate_multiblock(missing_sector),
+                    "m=3 sector receipt omitted")
+    checks += 1
+    wrong_sector = deepcopy(valid_multiblock)
+    wrong_sector["pentagon_sector_execution_m3"]["scope"] = (
+        "bridge-free D+C5+2C3 pentagon sectors (m=2)")
+    expect_rejected(lambda: validate_multiblock(wrong_sector),
+                    "m=3 sector receipt mis-scoped")
+    checks += 1
+    missing_receipt = deepcopy(valid_multiblock)
+    del missing_receipt["diamond_two_triangle_execution"]
+    expect_rejected(lambda: validate_multiblock(missing_receipt), "DTT receipt omitted")
+    checks += 1
+    changed_receipt = deepcopy(valid_multiblock)
+    changed_receipt["diamond_two_triangle_execution"]["scope"] = "D+T^3 allowed"
+    expect_rejected(lambda: validate_multiblock(changed_receipt), "DTT receipt widened")
+    checks += 1
+    multiblock_receipt = invoke(MULTIBLOCK)
+    single_block_receipt = invoke(SINGLE_BLOCK)
+    canonical_split = analytic_block_split()
+    expect_rejected(
+        lambda: root_manifest([single_block_receipt, single_block_receipt],
+                              canonical_split),
+        "multiblock branch replaced by duplicate single-block receipt")
+    checks += 1
+    expect_rejected(
+        lambda: root_manifest([multiblock_receipt, multiblock_receipt],
+                              canonical_split),
+        "single-block branch replaced by duplicate multiblock receipt")
+    checks += 1
+    expect_rejected(
+        lambda: root_manifest([single_block_receipt, multiblock_receipt],
+                              canonical_split),
+        "proof receipts reordered")
+    checks += 1
+    expect_rejected(
+        lambda: root_manifest([multiblock_receipt], canonical_split),
+        "single-block receipt omitted")
+    checks += 1
+    widened_single = deepcopy(single_block_receipt)
+    widened_single["block_scope"] = "all-positive-rank-block-configurations"
+    expect_rejected(
+        lambda: root_manifest([multiblock_receipt, widened_single], canonical_split),
+        "single-block receipt widened independently of partition contract")
+    checks += 1
     conditional = {
         "schema": SINGLE_BLOCK["schema"],
         "evidence_kind": "conditional-implication",
@@ -355,7 +512,7 @@ def hostile_self_checks():
 
 def audit():
     split = analytic_block_split()
-    require(hostile_self_checks() == 16, "hostile mutation count changed")
+    require(hostile_self_checks() == 25, "hostile mutation count changed")
     blockers = [owner["name"] for owner in OWNERS
                 if owner["source_sha256"] is None or owner["output_sha256"] is None
                 or not owner["path"].is_file()]

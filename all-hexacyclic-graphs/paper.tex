@@ -368,6 +368,10 @@ replayed in normal and optimized modes:
 \begin{verbatim}
 python3 research/rank-six-kernel-census-verifier.py
 python3 -O research/rank-six-kernel-census-verifier.py
+python3 research/diamond-two-triangle-packet-verifier.py
+python3 -O research/diamond-two-triangle-packet-verifier.py
+python3 research/pentagon-sector-partition-verifier.py
+python3 -O research/pentagon-sector-partition-verifier.py
 python3 research/doubled-c4-exceptional-owner-transport-verifier.py
 python3 -O research/doubled-c4-exceptional-owner-transport-verifier.py
 python3 research/hexacyclic-multiblock-ledger-verifier.py
@@ -396,7 +400,7 @@ owner&source SHA-256&output SHA-256\\\midrule
 order nine&\texttt{d11b6da30ccff5905}&\texttt{dd6a5a1e9b905955}\\
 order ten&\texttt{4cb22611448755d1}&\texttt{767bbf4dd142afd7}\\
 orders $2$--$10$ master&\texttt{21aabed4eee24f36}&\texttt{e32149c665638e1d}\\
-all-connected master&\texttt{e0f9162941cef63b}&\texttt{f244139b70ebdfb2}\\
+all-connected master&\texttt{f043dcce7c6f158b}&\texttt{f244139b70ebdfb2}\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -410,13 +414,13 @@ dd6a5a1e9b905955affde5fa64e0b8187dc39ad35c02ab007172da3358dff4f4
 767bbf4dd142afd7eb5a45dffeb738734948412ca53358c40d3655b28403725e
 21aabed4eee24f36dc9ddf0460423d0fdd6d20a56e80a60ffed69c796c163bf1
 e32149c665638e1d9cd08f8050cd4a7c7cae9f76c51b49f9cda3e0cfb2645834
-e0f9162941cef63b1eea3e2268343db3e6cc74b27f6976a01a97d8e83ede6997
+f043dcce7c6f158bc5613aa1e14a7fccd3fc9ccf4aa93c9fef1e95e2cca8fd6b
 f244139b70ebdfb2d375389a1b72c1c8d80bdee5980b78d606b475f0e53bfa8a
 \end{verbatim}
 For the all-connected master, the canonical manifest-plus-text output produced
 by \texttt{--print-manifest} has SHA-256
 \begin{verbatim}
-f5494593c500cde76de0ec09f48c207ef94f3be4cdfa91baac2ddcea213d7a6d
+7c22e881a1dbb6cfda766023ae0d6d51d2a70a93ab6b3800717ec226fd056b30
 \end{verbatim}
 The committed child-execution evidence has SHA-256
 \begin{verbatim}

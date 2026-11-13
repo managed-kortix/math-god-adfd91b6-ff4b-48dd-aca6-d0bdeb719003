@@ -13,6 +13,35 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+DTT_VERIFIER = ROOT / "research/diamond-two-triangle-packet-verifier.py"
+SECTOR_M3_VERIFIER = ROOT / "research/pentagon-sector-partition-verifier.py"
+DTT_NOTE_SHA256 = "9107ef2821d441da401079982ae8d0b6c98cee17ae7e52268a9b6ad895b8e11b"
+DTT_FILE_SHA256 = "24da5324c6695de4795fbd7885fbeadf986fabe1b52e2aec2082c92223addc9a"
+DTT_OUTPUT_SHA256 = "a6f61bdafa04dcc1705634ab7b026b7ce5c0cf1b9d7809cf0f5e7b94b7034ff2"
+SECTOR_M3_FILE_SHA256 = "9c143530e6ffa2b9c1255236927fa3c75e9bc54a7fa77b6fcdd6c83b665340da"
+SECTOR_M3_OUTPUT_SHA256 = "0f765321830d96f0d84845ee6961a158177d003df0f84d10a5b13ce3236b7030"
+SECTOR_M3_REQUIRED = (
+    "block-node trees 125",
+    "weighted Cayley expected 3149280",
+    "labelled incidence encodings checked 3149280",
+    "P-relevant encodings (>=2 cyclic marks) 1667520",
+    "P-leaf encodings 1481760",
+    "failures 0",
+    "credit lower endpoint min(4-h) 1",
+    "EXACT SECTOR CHECK: PASS",
+)
+DTT_REQUIRED = (
+    "diamond-plus-two-triangles exact packet verifier: PASS",
+    "incidences: direct-same=4 direct-distinct=6 nested=4 total=14",
+    "computed graph ranks: all 14 records have beta=4",
+    "one-sum identities: direct-same, direct-distinct, nested verified exactly",
+    "tree-message scope: arbitrary positive core activities",
+    "scope exclusions: one-root tree attachments only; no multi-interface acyclic connectors; no positive-rank connector blocks; no D+T^3",
+    "continuous phase: Theta(t) in (-pi,0), Delta=s+-s->0",
+    "real-part regression: direct(r,s) has Re Psi(0)=-12; no Re>0 premise",
+    "uniform packet bound: sigma(D+TT)=3+Delta/2>3",
+    "rejected hostile mutations: 11",
+)
 SOURCES = {
     "combined-theorem": (
         ROOT / "positive-square-energy/hexacyclic-general/"
@@ -22,12 +51,18 @@ SOURCES = {
     "items1-4": (
         ROOT / "positive-square-energy/hexacyclic-general/"
         "multiblock-items1-4-owner-exact-closure.md",
-        "4319c568f17f612fd0ba71ba57250e15c3f352a772d87b1ae13c6b36f41c7c13",
+        "c14f43df98ff09acb35ac1bff52a6f36648f5c4ad729003784a7837142372bdb",
     ),
     "doubled-c4-owner-transport": (
         ROOT / "research/doubled-c4-exceptional-owner-transport-verifier.py",
-        "15288382816208fd46c7e85eb3171f724739ba794b98c3b618e7fed7154fbe54",
+        "bbf843422b28b744abf823c4852a665d77ac8ca054e647d8e7449a31ce7f1165",
     ),
+    "diamond-two-triangle-note": (
+        ROOT / "positive-square-energy/pentacyclic-general/"
+        "diamond-two-triangle-exact-packet.md", DTT_NOTE_SHA256,
+    ),
+    "diamond-two-triangle-verifier": (DTT_VERIFIER, DTT_FILE_SHA256),
+    "pentagon-sector-m3-verifier": (SECTOR_M3_VERIFIER, SECTOR_M3_FILE_SHA256),
     "items5-7": (
         ROOT / "positive-square-energy/hexacyclic-general/"
         "multiblock-items5-7-owner-exact-closure.md",
@@ -149,9 +184,9 @@ EXPECTED_EXCLUDED_CLAIMS = (
 )
 
 MANIFEST_SCHEMA = "hexacyclic-multiblock-scope-conclusion-v1"
-EXPECTED_MANIFEST_SHA256 = "4b4b483c3f019827d2e795dac77ea789765784a10da9496024c5f617e1ddbbb8"
-EXPECTED_NORMAL_OUTPUT_SHA256 = "ae41d55e2cd8d498462d2c43073ebc7bdc3e978fb15363a9423d1b96ebfcf769"
-EXPECTED_OPTIMIZED_OUTPUT_SHA256 = "ae41d55e2cd8d498462d2c43073ebc7bdc3e978fb15363a9423d1b96ebfcf769"
+EXPECTED_MANIFEST_SHA256 = "60fbcbae34101b17d429dc202a463e7d9c08c6486055ac88e4c15b41898c3c0a"
+EXPECTED_NORMAL_OUTPUT_SHA256 = "9e08d4b1f4799c7262cd553ebba143f0c67de9b24558de37e8f5d9516064a280"
+EXPECTED_OPTIMIZED_OUTPUT_SHA256 = "9e08d4b1f4799c7262cd553ebba143f0c67de9b24558de37e8f5d9516064a280"
 
 EXPECTED_RANK5_DIRECT_EQUALITY = {
     "partition": (5, 1),
@@ -204,6 +239,8 @@ def check_sources(sources):
         "combined-theorem", "items1-4", "items5-7", "theta-triangle",
         "rank4-ledger", "k5e-ledger", "k5e-sieve", "k22-fixture",
         "k71-fixture", "doubled-c4-owner-transport",
+        "diamond-two-triangle-note", "diamond-two-triangle-verifier",
+        "pentagon-sector-m3-verifier",
     },
             "source lock key set changed")
     for name, (path, digest) in sources.items():
@@ -222,10 +259,74 @@ def dependency_manifest(sources):
             "path": str(path.relative_to(ROOT)),
             "sha256": digest,
         })
-    require(len(records) == 10, "transitive dependency lock count changed")
+    require(len(records) == 13, "transitive dependency lock count changed")
     require(len({record["path"] for record in records}) == len(records),
             "transitive dependency paths overlap")
     return records
+
+
+def invoke_sector_m3(path=SECTOR_M3_VERIFIER, digest=SECTOR_M3_FILE_SHA256,
+                     output_digest=SECTOR_M3_OUTPUT_SHA256,
+                     required=SECTOR_M3_REQUIRED):
+    require(path == SECTOR_M3_VERIFIER, "m=3 sector verifier path changed")
+    require(digest == SECTOR_M3_FILE_SHA256,
+            "m=3 sector verifier digest policy changed")
+    require(output_digest == SECTOR_M3_OUTPUT_SHA256,
+            "m=3 sector verifier output policy changed")
+    require(required == SECTOR_M3_REQUIRED,
+            "m=3 sector acceptance ledger changed")
+    require(path.is_file(), "missing m=3 sector verifier")
+    require(hashlib.sha256(path.read_bytes()).hexdigest() == digest,
+            "m=3 sector verifier changed")
+    optimize = ("-O",) if sys.flags.optimize else ()
+    completed = subprocess.run((sys.executable, *optimize, str(path)),
+                               check=False, capture_output=True, text=True)
+    require(completed.returncode == 0, "m=3 sector verifier failed")
+    require(completed.stderr == "", "m=3 sector verifier wrote stderr")
+    require(hashlib.sha256(completed.stdout.encode("ascii")).hexdigest() ==
+            output_digest, "m=3 sector canonical output changed")
+    require(all(line in completed.stdout for line in required),
+            "m=3 sector acceptance ledger changed")
+    return {"file_sha256": digest, "output_sha256": output_digest,
+            "scope": "bridge-free D+C5+3C3 pentagon sectors (m=3)",
+            "block_node_trees": 125,
+            "weighted_encodings": 3149280,
+            "relevant_encodings": 1667520,
+            "leaf_encodings": 1481760,
+            "required_lines": list(required)}
+
+
+def invoke_dtt(path=DTT_VERIFIER, digest=DTT_FILE_SHA256,
+               output_digest=DTT_OUTPUT_SHA256, required=DTT_REQUIRED):
+    require(path == DTT_VERIFIER, "DTT verifier path changed")
+    require(digest == DTT_FILE_SHA256, "DTT verifier digest policy changed")
+    require(output_digest == DTT_OUTPUT_SHA256, "DTT output digest policy changed")
+    require(required == DTT_REQUIRED, "DTT acceptance ledger changed")
+    require(path.is_file(), "missing DTT verifier")
+    require(hashlib.sha256(path.read_bytes()).hexdigest() == digest,
+            "DTT verifier changed")
+    optimize = ("-O",) if sys.flags.optimize else ()
+    completed = subprocess.run((sys.executable, *optimize, str(path)),
+                               check=False, capture_output=True, text=True)
+    require(completed.returncode == 0, "DTT verifier failed")
+    require(completed.stderr == "", "DTT verifier wrote stderr")
+    require(hashlib.sha256(completed.stdout.encode("ascii")).hexdigest() == output_digest,
+            "DTT canonical output changed")
+    require(all(line in completed.stdout for line in required),
+            "DTT acceptance ledger changed")
+    note_path, note_digest = SOURCES["diamond-two-triangle-note"]
+    verifier_path, verifier_digest = SOURCES["diamond-two-triangle-verifier"]
+    require(note_path == ROOT / "positive-square-energy" / "pentacyclic-general"
+            / "diamond-two-triangle-exact-packet.md" and
+            note_digest == DTT_NOTE_SHA256,
+            "DTT note source-lock record changed")
+    require(verifier_path == path and verifier_digest == digest,
+            "DTT verifier execution is not source-lock symmetric")
+    return {"path": str(path.relative_to(ROOT)),
+            "note_path": str(note_path.relative_to(ROOT)),
+            "note_sha256": note_digest, "file_sha256": digest,
+            "output_sha256": output_digest, "scope": required[5],
+            "required_lines": list(required)}
 
 
 def check_inequalities(values=None):
@@ -298,7 +399,7 @@ def check_conclusion(sources, global_claim=None, direct_equality=None):
     require(completed.returncode == 0 and completed.stderr == "",
             "doubled-C4 owner-transport verifier failed")
     require(hashlib.sha256(completed.stdout.encode("ascii")).hexdigest() ==
-            "2b11fb34c05eace618796558f1220cd3e17d1aaac4c173609a04f7b18a6ce2b0",
+            "7a567620bff5447809ae3cca3bd679775b30e32d46ba50b974aed8b798cb38b0",
             "doubled-C4 owner-transport output changed")
     require("switching_split: class 110=4; class 111=4" in completed.stdout and
             "no switching operation" in completed.stdout,
@@ -505,7 +606,7 @@ def scope_conclusion_manifest(report, sources=None, global_claim=None,
         "multiblock": 10,
         "packets": 9,
         "presieve": 5,
-        "sources": 10,
+        "sources": 13,
         "rank5_structural": 3,
         "owner_cases": 12,
         "relation": ">=",
@@ -544,6 +645,8 @@ def scope_conclusion_manifest(report, sources=None, global_claim=None,
             "byte_identical": True,
         },
         "exact_transitive_dependencies": dependency_manifest(sources),
+        "pentagon_sector_execution_m3": invoke_sector_m3(),
+        "diamond_two_triangle_execution": invoke_dtt(),
     }
 
 
@@ -692,6 +795,24 @@ def check_mutations():
                       lambda: scope_conclusion_manifest(
                           report, excluded_claims=altered_exclusions)))
 
+    mutations.append(("m3-sector-verifier-file-digest",
+                      lambda: invoke_sector_m3(digest="0" * 64)))
+    mutations.append(("m3-sector-verifier-output-digest",
+                      lambda: invoke_sector_m3(output_digest="0" * 64)))
+    mutations.append(("m3-sector-required-line",
+                      lambda: invoke_sector_m3(required=SECTOR_M3_REQUIRED[:-1])))
+
+    mutations.append(("DTT-verifier-file-digest",
+                      lambda: invoke_dtt(digest="0" * 64)))
+    mutations.append(("DTT-verifier-output-digest",
+                      lambda: invoke_dtt(output_digest="0" * 64)))
+    mutations.append(("DTT-required-line",
+                      lambda: invoke_dtt(required=DTT_REQUIRED[:-1])))
+    changed_scope = list(DTT_REQUIRED)
+    changed_scope[5] = changed_scope[5].replace("no D+T^3", "D+T^3 allowed")
+    mutations.append(("DTT-scope-widening",
+                      lambda: invoke_dtt(required=tuple(changed_scope))))
+
     changed_sources = deepcopy(SOURCES)
     path, digest = changed_sources["k5e-sieve"]
     changed_sources["k5e-sieve"] = (path, "0" * len(digest))
@@ -706,7 +827,7 @@ def check_mutations():
     manifest = scope_conclusion_manifest(report)
     mutations.append(("manifest-digest-pin",
                       lambda: check_manifest_digest(manifest, "0" * 64)))
-    output = acceptance_report(EXPECTED_MANIFEST_SHA256, 29)
+    output = acceptance_report(EXPECTED_MANIFEST_SHA256, 36)
     mutations.append(("normal-output-digest-pin",
                       lambda: check_output_digest(output, expected_digest="0" * 64)))
     mutations.append(("optimized-output-digest-pin",
@@ -726,7 +847,9 @@ def acceptance_report(manifest_digest, rejected):
         "conclusion: s+(G)>=|V(G)|",
         "nonclaim: no strict, single-block, all-connected-hexacyclic, equality, or global result",
         "ledger: partitions=11 multiblock=10 packets=9 presieve=5 rank5-structural=3 owner-cases=12",
-        "transitive_dependency_locks: 10",
+        "transitive_dependency_locks: 13",
+        "pentagon_sector_execution_m3: 3149280 exact incidences; 1667520 relevant; minimum credit endpoint 1",
+        "DTT_execution: 14 bridge-free incidences; one-root trees only; connectors and D+T^3 excluded",
         f"canonical_scope_conclusion_manifest_sha256: {manifest_digest}",
         f"rejected_hostile_mutations: {rejected}",
     )) + "\n"
@@ -751,7 +874,7 @@ def main():
     manifest = scope_conclusion_manifest(report)
     manifest_digest = check_manifest_digest(manifest)
     rejected = check_mutations()
-    require(rejected == 29, "hostile mutation count changed")
+    require(rejected == 36, "hostile mutation count changed")
     output = acceptance_report(manifest_digest, rejected)
     check_output_digest(output, optimized=bool(sys.flags.optimize))
     if not args.emit and not args.print_manifest and sys.flags.optimize == 0:

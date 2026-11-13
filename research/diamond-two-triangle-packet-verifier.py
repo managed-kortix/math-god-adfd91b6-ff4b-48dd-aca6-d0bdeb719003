@@ -564,6 +564,7 @@ def main():
         "computed graph ranks: all 14 records have beta=4\n"
         "one-sum identities: direct-same, direct-distinct, nested verified exactly\n"
         "tree-message scope: arbitrary positive core activities\n"
+        "scope exclusions: one-root tree attachments only; no multi-interface acyclic connectors; no positive-rank connector blocks; no D+T^3\n"
         "continuous phase: Theta(t) in (-pi,0), Delta=s+-s->0\n"
         "real-part regression: direct(r,s) has Re Psi(0)=-12; no Re>0 premise\n"
         "uniform packet bound: sigma(D+TT)=3+Delta/2>3\n"
