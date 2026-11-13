@@ -1,31 +1,36 @@
 #!/usr/bin/env python3
-"""Exact reusable row/target composition ledger for rank seven, order nine.
+"""Fail-closed finite-key accounting for rank seven, order nine.
 
-This module has a deliberately narrow claim boundary.  :class:`StageLedger`
-checks identities between an ordered row universe and successive owner/remainder
-boundaries.  It also hashes the canonical target contract
-``[full_row_key, target_index]`` for every target index in ``0..15``.
+:class:`StageLedger` checks only exact identities between an ordered row
+universe and successive owner/remainder boundaries.  It also defines one
+versioned target wire encoding:
 
-Those checks are *finite-key accounting only*.  A partition does not prove that
-a lane's certificate owns any row.  ``derive_bounded_premise`` therefore also
-requires an exact lane-implication registry and a separately authenticated
-analytic-dependency registry.  It derives only the bounded order-nine finite
-premise; it never emits theorem eligibility or a global analytic claim.
+``[source_index,global_kernel,order_kernel,row,orbit_size,coordinate]\n``
 
-A canonical artifact row identity is the full five-field tuple
-``(source_index, global_kernel, order_kernel, row_tuple, orbit_size)``; no
-proper subset is treated as the identity.  The ``source_index`` field is also
-checked separately as unique, strictly source-ordered metadata, but it need
-not be consecutive.
+Each target is one compact canonical ASCII JSON line, rows are in source order,
+and ``coordinate`` runs through ``0..15`` in increasing order for every row.
+Every external wire container, including ``target_indices``, is a JSON list.
 
-Target receipts have two explicitly different meanings.  With a supplied
-target stream they authenticate that observed stream.  Without one they are
-generated row-times-``0..15`` contracts; they must not be represented as
-observed child evidence.  In either case this module remains an accounting
-primitive: digest strings and Boolean verdicts passed to
-``derive_bounded_premise`` are not made trustworthy merely by their shape.  A
-release master must compare them with its own pinned proof/verifier/output
-bytes and expected receipts before calling the composer.
+This module deliberately separates three things which must not be conflated:
+
+* a boundary receipt says that one supplied source is the exact ordered,
+  disjoint union of supplied owner and remainder streams;
+* a target *identity* is deterministically generated from authenticated row
+  identities and is not evidence that any child emitted those targets;
+* an observed-target receipt is created only after an explicit supplied target
+  stream has been consumed and exact-matched record by record.
+
+Every state-advancing boundary call and every target-observation call requires
+an exact expected semantic receipt.  Generated identities are exposed through
+separately named, non-observational methods.  Stored observations are
+idempotent and cannot be replaced by generated identities or by a different
+observation.
+
+The ledger has no implication/dependency authentication constructor and never
+emits a bounded-premise, theorem-eligibility, or global-claim verdict.  It also
+does not authenticate the committed 2,835,895-row order-nine universe root;
+a release master must exact-match that independently reviewed root and exact
+child process receipts before interpreting this generic accounting layer.
 """
 
 from __future__ import annotations
@@ -37,14 +42,15 @@ from typing import Any, Iterable, Iterator, Mapping, NamedTuple, Sequence
 
 Json = Any
 RowKey = tuple[int, int, int, tuple[int, ...], int]
-TargetKey = tuple[RowKey, int]
+TargetKey = tuple[int, int, int, tuple[int, ...], int, int]
 
 TARGET_INDICES = tuple(range(16))
-IMPLICATION_KINDS = frozenset({"uniform-all-descendant", "explicit-frontier"})
-BOUNDARY_SCHEMA = "rank-seven-order-nine-stage-boundary-v1"
-TARGET_SCHEMA = "rank-seven-order-nine-row-target-contract-v1"
-ACCOUNTING_SCHEMA = "rank-seven-order-nine-finite-key-accounting-v1"
-PREMISE_SCHEMA = "rank-seven-order-nine-bounded-premise-composition-v1"
+TARGET_ENCODING = "rank-seven-order-nine-flat-six-field-target-jsonl-v1"
+UNIVERSE_SCOPE = "ledger-universe"
+BOUNDARY_SCHEMA = "rank-seven-order-nine-stage-boundary-v2"
+TARGET_IDENTITY_SCHEMA = "rank-seven-order-nine-target-identity-v2"
+TARGET_OBSERVATION_SCHEMA = "rank-seven-order-nine-target-observation-v1"
+ACCOUNTING_SCHEMA = "rank-seven-order-nine-finite-key-accounting-v2"
 
 BOUNDARY_FIELDS = frozenset({
     "schema", "stage", "source_row_total", "source_physical_total",
@@ -54,19 +60,19 @@ BOUNDARY_FIELDS = frozenset({
     "remainder_key_sha256", "remainder_index_sha256", "ordered_subsequences",
     "exact_disjoint_union", "analytic_ownership_established",
 })
-TARGET_FIELDS = frozenset({
+TARGET_IDENTITY_FIELDS = frozenset({
     "schema", "scope", "row_total", "row_key_sha256", "target_indices",
-    "per_row_target_cardinality", "per_row_cardinality_validated",
-    "target_total", "target_key_sha256", "encoding", "evidence_kind",
-    "observed_target_stream_validated", "analytic_ownership_established",
+    "per_row_target_cardinality", "target_total", "target_key_sha256",
+    "encoding", "identity_kind", "observed_target_stream_validated",
+    "analytic_ownership_established",
 })
-IMPLICATION_FIELDS = frozenset({
-    "lane", "implication_kind", "row_total", "row_key_sha256", "target_indices",
-    "target_total", "target_key_sha256", "proof_contract_sha256",
-    "verifier_sha256", "verification_output_sha256", "authenticated",
-    "lane_implication_verified",
+TARGET_OBSERVATION_FIELDS = frozenset({
+    "schema", "scope", "target_identity_sha256", "row_total",
+    "row_key_sha256", "target_indices", "per_row_target_cardinality",
+    "target_total", "observed_target_key_sha256", "encoding",
+    "evidence_kind", "observed_target_stream_validated",
+    "analytic_ownership_established",
 })
-DEPENDENCY_FIELDS = frozenset({"authenticated", "dependency_sha256"})
 
 
 def require(condition: bool, message: str) -> None:
@@ -78,11 +84,6 @@ def require(condition: bool, message: str) -> None:
 def exact_int(value: object, label: str, *, minimum: int = 0) -> int:
     """Return an exact integer, rejecting booleans and numeric lookalikes."""
     require(type(value) is int and value >= minimum, f"{label}: invalid exact integer")
-    return value
-
-
-def exact_bool(value: object, label: str) -> bool:
-    require(type(value) is bool, f"{label}: invalid exact boolean")
     return value
 
 
@@ -103,7 +104,11 @@ def _validate_json(value: object, label: str) -> None:
 
 
 def canonical_bytes(value: Json) -> bytes:
-    """Canonical ASCII JSON line, with floats and non-JSON values rejected."""
+    """Encode one compact canonical ASCII JSON line.
+
+    Floats, non-JSON values, non-string object keys, and non-ASCII output are
+    rejected.  Tuples are accepted internally but encode as JSON arrays.
+    """
     _validate_json(value, "canonical value")
     try:
         encoded = json.dumps(value, sort_keys=True, separators=(",", ":"),
@@ -113,16 +118,26 @@ def canonical_bytes(value: Json) -> bytes:
         raise RuntimeError("cannot encode canonical JSON") from error
 
 
+def _decode_receipt(data: object, fields: frozenset[str], label: str) -> dict[str, Json]:
+    """Decode an internally stored canonical receipt and reject byte drift."""
+    require(type(data) is bytes, f"{label}: stored receipt is not immutable bytes")
+    try:
+        value = json.loads(data.decode("ascii"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise RuntimeError(f"{label}: stored receipt is not canonical JSON") from error
+    require(type(value) is dict and set(value) == fields,
+            f"{label}: stored receipt schema changed")
+    require(canonical_bytes(value) == data,
+            f"{label}: stored receipt bytes are not canonical")
+    return value
+
+
 def _row_json(key: RowKey) -> list[Json]:
     return [key[0], key[1], key[2], list(key[3]), key[4]]
 
 
 def canonical_row_key(value: object, label: str = "row key") -> RowKey:
-    """Validate and normalize a full five-field row identity.
-
-    Lists are accepted at artifact boundaries, but the returned identity is
-    always a tuple whose fourth field is itself a tuple.
-    """
+    """Validate and normalize a full five-field row identity."""
     require(type(value) in (list, tuple) and len(value) == 5,
             f"{label}: expected a five-field row key")
     source_index = exact_int(value[0], f"{label}.source_index")
@@ -146,8 +161,8 @@ def _freeze_rows(values: Iterable[object], label: str) -> tuple[RowKey, ...]:
     seen_rows: set[RowKey] = set()
     seen_indices: set[int] = set()
     # Excluding source_index prevents one semantic row from being counted twice
-    # under two fabricated indices.  The canonical census producer is expected
-    # to make this tuple injective; StageLedger enforces that expectation.
+    # under fabricated indices.  The canonical producer must make this tuple
+    # injective; StageLedger checks that invariant rather than assuming it.
     seen_semantic_rows: set[tuple[int, int, tuple[int, ...], int]] = set()
     previous_index: int | None = None
     for position, row in enumerate(rows):
@@ -182,13 +197,14 @@ def _index_digest(rows: Sequence[RowKey]) -> str:
 
 
 def _physical_mass(rows: Sequence[RowKey]) -> int:
-    # The mass is derived only from the authenticated full key's fifth field.
     return sum(row[4] for row in rows)
 
 
-def _is_sha256(value: object) -> bool:
-    return (type(value) is str and len(value) == 64 and
-            all(character in "0123456789abcdef" for character in value))
+def _validate_stage_name(stage: object) -> str:
+    require(type(stage) is str and bool(stage) and stage.isascii(),
+            "stage must be a nonempty ASCII string")
+    require(stage != UNIVERSE_SCOPE, "stage uses reserved universe scope")
+    return stage
 
 
 def _boundary_receipt(stage: str, source_values: Iterable[object],
@@ -196,9 +212,8 @@ def _boundary_receipt(stage: str, source_values: Iterable[object],
                       remainder_values: Iterable[object]) -> tuple[
                           dict[str, Json], tuple[RowKey, ...], tuple[RowKey, ...],
                           tuple[RowKey, ...]]:
-    """Revalidate a partition and derive its receipt only from canonical rows."""
-    require(type(stage) is str and bool(stage) and stage.isascii(),
-            "stage must be a nonempty ASCII string")
+    """Revalidate a partition and derive its stable semantic receipt."""
+    _validate_stage_name(stage)
     source_rows = _freeze_rows(source_values, f"{stage}.source")
     owner_rows = _freeze_rows(owner_values, f"{stage}.owners")
     remainder_rows = _freeze_rows(remainder_values, f"{stage}.remainder")
@@ -261,102 +276,156 @@ def _boundary_receipt(stage: str, source_values: Iterable[object],
     return receipt, source_rows, owner_rows, remainder_rows
 
 
-def _require_stored_receipt(stored: object, recomputed: dict[str, Json],
-                            fields: frozenset[str], label: str) -> None:
-    require(type(stored) is dict and set(stored) == fields,
-            f"{label}: stored receipt schema changed")
-    require(canonical_bytes(stored) == canonical_bytes(recomputed),
-            f"{label}: stored receipt integrity changed")
+def _target_json(row: RowKey, coordinate: int) -> list[Json]:
+    """Return the sole canonical six-field target representation."""
+    return [row[0], row[1], row[2], list(row[3]), row[4], coordinate]
 
 
 def iter_target_keys(rows: Iterable[object]) -> Iterator[TargetKey]:
-    """Yield the exact row-major target universe for indices ``0..15``."""
+    """Yield normalized flat six-field targets in canonical row-major order."""
     frozen = _freeze_rows(rows, "target source rows")
     for row in frozen:
-        for target_index in TARGET_INDICES:
-            yield row, target_index
+        for coordinate in TARGET_INDICES:
+            yield row[0], row[1], row[2], row[3], row[4], coordinate
 
 
 def _canonical_target(value: object, label: str) -> TargetKey:
-    require(type(value) in (list, tuple) and len(value) == 2,
-            f"{label}: expected [full_row_key,target_index]")
-    row = canonical_row_key(value[0], f"{label}.row_key")
-    target_index = exact_int(value[1], f"{label}.target_index")
-    require(target_index in TARGET_INDICES, f"{label}: target index outside 0..15")
-    return row, target_index
+    require(type(value) in (list, tuple) and len(value) == 6,
+            f"{label}: expected a flat six-field target key")
+    row = canonical_row_key(value[:5], f"{label}.row_key")
+    coordinate = exact_int(value[5], f"{label}.coordinate")
+    require(coordinate in TARGET_INDICES, f"{label}: coordinate outside 0..15")
+    return row[0], row[1], row[2], row[3], row[4], coordinate
 
 
-def _validate_expected(receipt: dict[str, Json], expected: Mapping[str, Json] | None,
-                       fields: frozenset[str], label: str) -> None:
-    if expected is None:
-        return
-    require(type(expected) is dict and set(expected) == fields,
-            f"{label}: expected receipt schema changed")
-    # Canonical bytes, rather than Python equality, reject True/1 laundering.
-    require(canonical_bytes(expected) == canonical_bytes(receipt),
-            f"{label}: exact receipt changed")
+def canonical_target_bytes(value: object, label: str = "target") -> bytes:
+    """Validate one target and return its versioned canonical JSONL bytes."""
+    target = _canonical_target(value, label)
+    row: RowKey = target[0], target[1], target[2], target[3], target[4]
+    return canonical_bytes(_target_json(row, target[5]))
 
 
-def _target_receipt(rows: Sequence[RowKey], scope: str,
-                    targets: Iterable[object] | None = None) -> dict[str, Json]:
+def iter_target_jsonl(rows: Iterable[object]) -> Iterator[bytes]:
+    """Yield the exact bytes hashed by target identity receipts."""
+    for target in iter_target_keys(rows):
+        yield canonical_target_bytes(target)
+
+
+def _target_identity(rows: Sequence[RowKey], scope: str) -> dict[str, Json]:
     require(type(scope) is str and bool(scope) and scope.isascii(),
             "target scope must be a nonempty ASCII string")
-    target_digest = hashlib.sha256()
+    digest = hashlib.sha256()
     target_total = 0
-    observed_stream = targets is not None
-    supplied = iter(targets) if observed_stream else None
-    for row_position, row in enumerate(rows):
-        row_target_total = 0
-        for target_index in TARGET_INDICES:
-            expected_target = (row, target_index)
-            if supplied is not None:
-                try:
-                    observed = _canonical_target(
-                        next(supplied),
-                        f"{scope}.target[{target_total}]",
-                    )
-                except StopIteration as error:
-                    raise RuntimeError(f"{scope}: target stream ended early") from error
-                require(observed == expected_target,
-                        f"{scope}: target duplicate, omission, or order change at "
-                        f"row {row_position} index {target_index}")
-            target_digest.update(canonical_bytes([_row_json(row), target_index]))
-            target_total += 1
-            row_target_total += 1
-        require(row_target_total == len(TARGET_INDICES),
-                f"{scope}: per-row target cardinality changed")
-    if supplied is not None:
-        try:
-            next(supplied)
-        except StopIteration:
-            pass
-        else:
-            raise RuntimeError(f"{scope}: target stream has a surplus record")
+    for line in iter_target_jsonl(rows):
+        digest.update(line)
+        target_total += 1
     require(target_total == len(rows) * len(TARGET_INDICES),
             f"{scope}: aggregate target cardinality changed")
-    return {
-        "schema": TARGET_SCHEMA,
+    receipt = {
+        "schema": TARGET_IDENTITY_SCHEMA,
         "scope": scope,
         "row_total": len(rows),
         "row_key_sha256": _row_digest(rows),
         "target_indices": list(TARGET_INDICES),
         "per_row_target_cardinality": len(TARGET_INDICES),
-        "per_row_cardinality_validated": True,
         "target_total": target_total,
-        "target_key_sha256": target_digest.hexdigest(),
-        "encoding": (
-            "sha256(concatenated canonical ASCII JSON lines "
-            "[full_five_field_row_key,target_index] in row-major order)"
-        ),
-        "evidence_kind": ("observed-exact-target-stream" if observed_stream else
-                          "generated-row-times-target-index-contract"),
-        "observed_target_stream_validated": observed_stream,
+        "target_key_sha256": digest.hexdigest(),
+        "encoding": TARGET_ENCODING,
+        "identity_kind": "generated-deterministic-row-times-coordinate",
+        "observed_target_stream_validated": False,
         "analytic_ownership_established": False,
     }
+    require(set(receipt) == TARGET_IDENTITY_FIELDS,
+            "internal target identity schema changed")
+    return receipt
+
+
+def _observation_from_identity(identity: Mapping[str, Json]) -> dict[str, Json]:
+    require(type(identity) is dict and set(identity) == TARGET_IDENTITY_FIELDS,
+            "target identity schema changed before observation")
+    receipt = {
+        "schema": TARGET_OBSERVATION_SCHEMA,
+        "scope": identity["scope"],
+        "target_identity_sha256": hashlib.sha256(
+            canonical_bytes(identity)).hexdigest(),
+        "row_total": identity["row_total"],
+        "row_key_sha256": identity["row_key_sha256"],
+        "target_indices": list(TARGET_INDICES),
+        "per_row_target_cardinality": identity["per_row_target_cardinality"],
+        "target_total": identity["target_total"],
+        "observed_target_key_sha256": identity["target_key_sha256"],
+        "encoding": TARGET_ENCODING,
+        "evidence_kind": "observed-exact-target-stream",
+        "observed_target_stream_validated": True,
+        "analytic_ownership_established": False,
+    }
+    require(set(receipt) == TARGET_OBSERVATION_FIELDS,
+            "internal target observation schema changed")
+    return receipt
+
+
+def _observe_target_stream(rows: Sequence[RowKey], scope: str,
+                           targets: Iterable[object]) -> dict[str, Json]:
+    """Consume and exact-match an externally supplied target stream."""
+    identity = _target_identity(rows, scope)
+    try:
+        supplied = iter(targets)
+    except TypeError as error:
+        raise RuntimeError(f"{scope}: target stream is not iterable") from error
+    observed_digest = hashlib.sha256()
+    target_total = 0
+    for row_position, row in enumerate(rows):
+        for coordinate in TARGET_INDICES:
+            expected_target: TargetKey = (
+                row[0], row[1], row[2], row[3], row[4], coordinate
+            )
+            try:
+                observed = _canonical_target(
+                    next(supplied), f"{scope}.target[{target_total}]"
+                )
+            except StopIteration as error:
+                raise RuntimeError(f"{scope}: target stream ended early") from error
+            require(observed == expected_target,
+                    f"{scope}: target duplicate, omission, or order change at "
+                    f"row {row_position} coordinate {coordinate}")
+            observed_digest.update(canonical_target_bytes(observed))
+            target_total += 1
+    try:
+        next(supplied)
+    except StopIteration:
+        pass
+    else:
+        raise RuntimeError(f"{scope}: target stream has a surplus record")
+    require(target_total == identity["target_total"] and
+            observed_digest.hexdigest() == identity["target_key_sha256"],
+            f"{scope}: observed target digest changed")
+    return _observation_from_identity(identity)
+
+
+def _validate_expected(receipt: dict[str, Json], expected: Mapping[str, Json] | None,
+                       fields: frozenset[str], label: str) -> None:
+    """Require an exact external semantic pin; absence never self-blesses."""
+    require(expected is not None, f"{label}: immutable expected receipt is required")
+    require(type(expected) is dict and set(expected) == fields,
+            f"{label}: expected receipt schema changed")
+    if "target_indices" in fields:
+        require(type(expected["target_indices"]) is list,
+                f"{label}: target_indices wire type must be a JSON list")
+    # Canonical bytes, rather than Python equality, reject True/1 laundering.
+    require(canonical_bytes(expected) == canonical_bytes(receipt),
+            f"{label}: exact receipt changed")
+
+
+def _require_stored_receipt(data: object, recomputed: dict[str, Json],
+                            fields: frozenset[str], label: str) -> dict[str, Json]:
+    stored = _decode_receipt(data, fields, label)
+    require(canonical_bytes(stored) == canonical_bytes(recomputed),
+            f"{label}: stored receipt integrity changed")
+    return stored
 
 
 class _StageState(NamedTuple):
-    boundary: dict[str, Json]
+    boundary_bytes: bytes
     owners: tuple[RowKey, ...]
     remainder: tuple[RowKey, ...]
 
@@ -369,8 +438,10 @@ class StageLedger:
         require(bool(self._universe), "source: empty row universe")
         self._current = self._universe
         self._stages: dict[str, _StageState] = {}
-        self._target_receipts: dict[str, dict[str, Json]] = {}
-        self._universe_target_receipt: dict[str, Json] | None = None
+        # Values are immutable canonical receipt bytes.  Presence means an
+        # explicit stream was consumed; generated identities never write here.
+        self._observed_target_receipts: dict[str, bytes] = {}
+        self._observed_universe_target_receipt: bytes | None = None
 
     @property
     def source_rows(self) -> tuple[RowKey, ...]:
@@ -386,7 +457,10 @@ class StageLedger:
 
     def boundary(self, stage: str) -> dict[str, Json]:
         require(type(stage) is str and stage in self._stages, "unknown stage")
-        return deepcopy(self._stages[stage].boundary)
+        return deepcopy(_decode_receipt(
+            self._stages[stage].boundary_bytes, BOUNDARY_FIELDS,
+            f"{stage} boundary",
+        ))
 
     def owner_rows(self, stage: str) -> tuple[RowKey, ...]:
         require(type(stage) is str and stage in self._stages, "unknown stage")
@@ -394,15 +468,13 @@ class StageLedger:
 
     def advance(self, stage: str, owners: Iterable[object], remainder: Iterable[object],
                 *, expected: Mapping[str, Json] | None = None) -> dict[str, Json]:
-        """Validate one exact source = owners disjoint-union remainder boundary.
+        """Advance one pinned exact source = owners disjoint-union remainder stage.
 
-        Owner and remainder streams must each be source-ordered subsequences.
-        Their row-by-row merge must reproduce the current source exactly.  An
-        optional exact receipt pin detects count/mass-preserving lane swaps.
-        State advances only after every check (including the pin) succeeds.
+        ``expected`` is mandatory.  It must be an independently reviewed stable
+        semantic receipt; omitting it is a hard failure.  State changes only
+        after both the partition and pin have been checked exactly.
         """
-        require(type(stage) is str and bool(stage) and stage.isascii(),
-                "stage must be a nonempty ASCII string")
+        _validate_stage_name(stage)
         require(stage not in self._stages, f"duplicate stage: {stage}")
         receipt, source_rows, owner_rows, remainder_rows = _boundary_receipt(
             stage, self._current, owners, remainder)
@@ -410,45 +482,106 @@ class StageLedger:
                 f"{stage}: current source rows are not canonical")
         _validate_expected(receipt, expected, BOUNDARY_FIELDS, f"{stage} boundary")
 
-        self._stages[stage] = _StageState(deepcopy(receipt), owner_rows, remainder_rows)
+        self._stages[stage] = _StageState(
+            canonical_bytes(receipt), owner_rows, remainder_rows
+        )
         self._current = remainder_rows
         return deepcopy(receipt)
 
-    def stage_target_contract(self, stage: str, *, targets: Iterable[object] | None = None,
-                              expected: Mapping[str, Json] | None = None) -> dict[str, Json]:
-        """Observe or generate ``owners(stage) x tuple(range(16))`` exactly."""
+    def stage_target_identity(self, stage: str) -> dict[str, Json]:
+        """Return a generated identity, explicitly not observational evidence.
+
+        In particular, this identity cannot discharge an ``explicit-frontier``
+        implication.  Such a lane must present an independently authenticated
+        observed target receipt to a release master.  A
+        ``uniform-all-descendant`` proof may bind this deterministic digest, but
+        only after that separate proof and its isolated execution are
+        authenticated outside StageLedger.
+        """
         require(type(stage) is str and stage in self._stages, "unknown target stage")
-        receipt = _target_receipt(self._stages[stage].owners, stage, targets)
-        require(set(receipt) == TARGET_FIELDS, "internal target receipt schema changed")
-        _validate_expected(receipt, expected, TARGET_FIELDS, f"{stage} target contract")
-        self._target_receipts[stage] = deepcopy(receipt)
+        return _target_identity(self._stages[stage].owners, stage)
+
+    def universe_target_identity(self) -> dict[str, Json]:
+        """Return the generated generic ledger-universe target identity."""
+        return _target_identity(self._universe, UNIVERSE_SCOPE)
+
+    def observe_stage_targets(
+            self, stage: str, targets: Iterable[object], *,
+            expected: Mapping[str, Json] | None = None,
+    ) -> dict[str, Json]:
+        """Consume, pin, and remember one exact stage-owner target stream.
+
+        Replaying the same observation is idempotent.  Any attempt to replace a
+        stored observation with different receipt bytes fails before mutation.
+        """
+        require(type(stage) is str and stage in self._stages, "unknown target stage")
+        receipt = _observe_target_stream(self._stages[stage].owners, stage, targets)
+        _validate_expected(receipt, expected, TARGET_OBSERVATION_FIELDS,
+                           f"{stage} target observation")
+        receipt_bytes = canonical_bytes(receipt)
+        if stage in self._observed_target_receipts:
+            require(self._observed_target_receipts[stage] == receipt_bytes,
+                    f"{stage}: observed target receipt cannot be overwritten")
+            return deepcopy(receipt)
+        self._observed_target_receipts[stage] = receipt_bytes
         return deepcopy(receipt)
 
-    def universe_target_contract(self, *, targets: Iterable[object] | None = None,
-                                 expected: Mapping[str, Json] | None = None) -> dict[str, Json]:
-        """Observe or generate the residual universe times ``0..15`` exactly."""
-        receipt = _target_receipt(self._universe, "residual-universe", targets)
-        require(set(receipt) == TARGET_FIELDS, "internal universe target schema changed")
-        _validate_expected(receipt, expected, TARGET_FIELDS,
-                           "residual-universe target contract")
-        self._universe_target_receipt = deepcopy(receipt)
+    def observe_universe_targets(
+            self, targets: Iterable[object], *,
+            expected: Mapping[str, Json] | None = None,
+    ) -> dict[str, Json]:
+        """Consume, pin, and remember the exact generic-universe target stream."""
+        receipt = _observe_target_stream(self._universe, UNIVERSE_SCOPE, targets)
+        _validate_expected(receipt, expected, TARGET_OBSERVATION_FIELDS,
+                           "ledger-universe target observation")
+        receipt_bytes = canonical_bytes(receipt)
+        if self._observed_universe_target_receipt is not None:
+            require(self._observed_universe_target_receipt == receipt_bytes,
+                    "ledger-universe observed target receipt cannot be overwritten")
+            return deepcopy(receipt)
+        self._observed_universe_target_receipt = receipt_bytes
         return deepcopy(receipt)
+
+    def observed_stage_target_receipt(self, stage: str) -> dict[str, Json] | None:
+        """Return an existing observation without manufacturing one."""
+        require(type(stage) is str and stage in self._stages, "unknown target stage")
+        data = self._observed_target_receipts.get(stage)
+        if data is None:
+            return None
+        identity = self.stage_target_identity(stage)
+        return deepcopy(_require_stored_receipt(
+            data, _observation_from_identity(identity), TARGET_OBSERVATION_FIELDS,
+            f"{stage} target observation",
+        ))
+
+    def observed_universe_target_receipt(self) -> dict[str, Json] | None:
+        """Return an existing universe observation without manufacturing one."""
+        if self._observed_universe_target_receipt is None:
+            return None
+        identity = self.universe_target_identity()
+        return deepcopy(_require_stored_receipt(
+            self._observed_universe_target_receipt,
+            _observation_from_identity(identity), TARGET_OBSERVATION_FIELDS,
+            "ledger-universe target observation",
+        ))
 
     def _recompute_and_validate_receipts(self) -> tuple[
-            list[dict[str, Json]], dict[str, dict[str, Json]], dict[str, Json]]:
-        """Recompute every receipt from rows and reject mutable-state drift."""
+            list[dict[str, Json]], dict[str, dict[str, Json]],
+            dict[str, dict[str, Json]], dict[str, Json], dict[str, Json] | None]:
+        """Recompute identities while preserving and checking observations."""
         require(type(self._stages) is dict, "stored stage registry type changed")
-        require(type(self._target_receipts) is dict,
-                "stored target receipt registry type changed")
+        require(type(self._observed_target_receipts) is dict,
+                "stored target-observation registry type changed")
         universe = _freeze_rows(self._universe, "stored source")
         require(type(self._universe) is tuple and universe == self._universe,
                 "stored source rows are not canonical")
-        require(set(self._target_receipts).issubset(set(self._stages)),
-                "stored target receipt exists for an unknown stage")
+        require(set(self._observed_target_receipts).issubset(set(self._stages)),
+                "stored target observation exists for an unknown stage")
 
         source = universe
         boundaries: list[dict[str, Json]] = []
-        target_receipts: dict[str, dict[str, Json]] = {}
+        identities: dict[str, dict[str, Json]] = {}
+        observations: dict[str, dict[str, Json]] = {}
         for stage, state in self._stages.items():
             require(type(state) is _StageState, f"{stage}: stored stage type changed")
             recomputed, recomputed_source, owners, remainder = _boundary_receipt(
@@ -458,15 +591,19 @@ class StageLedger:
             require(type(state.owners) is tuple and owners == state.owners and
                     type(state.remainder) is tuple and remainder == state.remainder,
                     f"{stage}: stored owner/remainder rows are not canonical")
-            _require_stored_receipt(state.boundary, recomputed, BOUNDARY_FIELDS,
-                                    f"{stage} boundary")
+            _require_stored_receipt(state.boundary_bytes, recomputed,
+                                    BOUNDARY_FIELDS, f"{stage} boundary")
             boundaries.append(recomputed)
 
-            target = _target_receipt(owners, stage)
-            if stage in self._target_receipts:
-                _require_stored_receipt(self._target_receipts[stage], target,
-                                        TARGET_FIELDS, f"{stage} target")
-            target_receipts[stage] = target
+            identity = _target_identity(owners, stage)
+            identities[stage] = identity
+            if stage in self._observed_target_receipts:
+                observations[stage] = _require_stored_receipt(
+                    self._observed_target_receipts[stage],
+                    _observation_from_identity(identity),
+                    TARGET_OBSERVATION_FIELDS,
+                    f"{stage} target observation",
+                )
             source = remainder
 
         current = _freeze_rows(self._current, "stored current remainder")
@@ -475,211 +612,65 @@ class StageLedger:
         require(current == source,
                 "stored current remainder does not match the stage chain")
 
-        universe_target = _target_receipt(universe, "residual-universe")
-        if self._universe_target_receipt is not None:
-            _require_stored_receipt(self._universe_target_receipt, universe_target,
-                                    TARGET_FIELDS, "residual-universe target")
-        return boundaries, target_receipts, universe_target
+        universe_identity = _target_identity(universe, UNIVERSE_SCOPE)
+        universe_observation = None
+        if self._observed_universe_target_receipt is not None:
+            universe_observation = _require_stored_receipt(
+                self._observed_universe_target_receipt,
+                _observation_from_identity(universe_identity),
+                TARGET_OBSERVATION_FIELDS,
+                "ledger-universe target observation",
+            )
+        return (boundaries, identities, observations, universe_identity,
+                universe_observation)
 
     def finite_key_accounting(self, *, require_complete: bool = True) -> dict[str, Json]:
-        """Return finite accounting, explicitly making no analytic owner claim."""
-        boundaries, target_receipts, universe_target = \
-            self._recompute_and_validate_receipts()
+        """Return generic finite accounting with no theorem/premise semantics."""
+        (boundaries, identities, observations, universe_identity,
+         universe_observation) = self._recompute_and_validate_receipts()
         if require_complete:
             require(not self._current,
                     "finite-key accounting has an unowned final remainder")
-        complete = (not self._current and
-                    len(target_receipts) == len(self._stages) and
-                    sum(boundary["owner_row_total"] for boundary in boundaries) ==
-                    len(self._universe))
-        # Cache only exact recomputations, and only after all pre-existing
-        # mutable receipts have survived exact comparison.
-        self._target_receipts = deepcopy(target_receipts)
-        self._universe_target_receipt = deepcopy(universe_target)
+        complete = (
+            not self._current and
+            len(identities) == len(self._stages) and
+            sum(boundary["owner_row_total"] for boundary in boundaries) ==
+            len(self._universe)
+        )
         accounting = {
             "schema": ACCOUNTING_SCHEMA,
+            "scope": "generic finite-key accounting; order-nine root not authenticated",
             "source_row_total": len(self._universe),
             "source_physical_total": _physical_mass(self._universe),
             "source_key_sha256": _row_digest(self._universe),
             "source_index_sha256": _index_digest(self._universe),
             "stage_order": list(self._stages),
             "stage_boundaries": deepcopy(boundaries),
-            "lane_target_contracts": deepcopy(target_receipts),
-            "universe_target_contract": deepcopy(universe_target),
+            "lane_target_identities": deepcopy(identities),
+            "observed_lane_target_receipts": deepcopy(observations),
+            "universe_target_identity": deepcopy(universe_identity),
+            "observed_universe_target_receipt": deepcopy(universe_observation),
             "final_remainder_row_total": len(self._current),
             "final_remainder_physical_total": _physical_mass(self._current),
             "finite_key_accounting_complete": complete,
+            "all_stage_target_streams_observed": (
+                set(observations) == set(self._stages)
+            ),
+            "universe_target_stream_observed": universe_observation is not None,
+            "order_nine_universe_root_authenticated": False,
             "analytic_lane_ownership_established": False,
             "bounded_order_nine_finite_premise_discharged": False,
             "claim_boundary": (
-                "exact finite row/target identities only; lane implications and analytic "
-                "dependencies are not established by StageLedger"
+                "exact generic row/target identities and in-process stream observations "
+                "only; no child-process authentication, lane implication, committed "
+                "order-nine scope root, analytic dependency, theorem eligibility, or "
+                "global claim is established"
             ),
         }
         if require_complete:
             require(complete, "finite-key accounting is incomplete")
         return accounting
 
-    def derive_bounded_premise(
-            self,
-            lane_implications: Mapping[str, Mapping[str, Json]],
-            analytic_dependencies: Mapping[str, Mapping[str, Json]],
-            *,
-            global_analytic_child_claim: bool = False,
-    ) -> dict[str, Json]:
-        """Derive the bounded finite premise from keys *and* analytic contracts.
-
-        A well-formed registry may carry a false verification/authentication bit;
-        the result is then false rather than laundered into success.  Missing,
-        extra, malformed, or unbound registry entries fail closed.
-        """
-        exact_bool(global_analytic_child_claim, "global analytic child claim")
-        require(global_analytic_child_claim is False,
-                "this bounded composer requires the global analytic child to remain false")
-        accounting = self.finite_key_accounting(require_complete=True)
-        stage_names = tuple(accounting["stage_order"])
-        boundary_by_stage = {
-            boundary["stage"]: boundary
-            for boundary in accounting["stage_boundaries"]
-        }
-        target_by_stage = accounting["lane_target_contracts"]
-        require(set(boundary_by_stage) == set(stage_names) and
-                set(target_by_stage) == set(stage_names),
-                "recomputed accounting registry is not exact")
-        require(type(lane_implications) is dict and
-                set(lane_implications) == set(stage_names),
-                "lane implication registry is not exact")
-        require(type(analytic_dependencies) is dict and
-                set(analytic_dependencies) == set(stage_names),
-                "analytic dependency registry is not exact")
-
-        implication_authentication_flags: list[bool] = []
-        implication_flags: list[bool] = []
-        dependency_flags: list[bool] = []
-        lane_kinds: dict[str, str] = {}
-        for stage in stage_names:
-            target = target_by_stage[stage]
-            boundary = boundary_by_stage[stage]
-            implication = lane_implications[stage]
-            require(type(implication) is dict and set(implication) == IMPLICATION_FIELDS,
-                    f"{stage}: lane implication schema changed")
-            require(implication["lane"] == stage and type(implication["lane"]) is str,
-                    f"{stage}: implication lane identity changed")
-            kind = implication["implication_kind"]
-            require(type(kind) is str and kind in IMPLICATION_KINDS,
-                    f"{stage}: unknown lane implication kind")
-            exact_int(implication["row_total"], f"{stage}.implication.row_total")
-            exact_int(implication["target_total"], f"{stage}.implication.target_total")
-            require(_is_sha256(implication["row_key_sha256"]) and
-                    _is_sha256(implication["target_key_sha256"]),
-                    f"{stage}: malformed implication digest")
-            require(type(implication["target_indices"]) is tuple and
-                    implication["target_indices"] == TARGET_INDICES,
-                    f"{stage}: implication target-index contract changed")
-            require(all(_is_sha256(implication[field]) for field in
-                        ("proof_contract_sha256", "verifier_sha256",
-                         "verification_output_sha256")),
-                    f"{stage}: malformed implication authentication digest")
-            authenticated = exact_bool(implication["authenticated"],
-                                       f"{stage}.implication.authenticated")
-            verified = exact_bool(implication["lane_implication_verified"],
-                                  f"{stage}.lane_implication_verified")
-            require(implication["row_total"] == boundary["owner_row_total"] and
-                    implication["row_key_sha256"] == boundary["owner_key_sha256"] and
-                    implication["row_total"] == target["row_total"] and
-                    implication["row_key_sha256"] == target["row_key_sha256"] and
-                    implication["target_total"] == target["target_total"] and
-                    implication["target_key_sha256"] == target["target_key_sha256"],
-                    f"{stage}: implication is not bound to exact owner rows/targets")
-            implication_authentication_flags.append(authenticated)
-            implication_flags.append(verified)
-            lane_kinds[stage] = kind
-
-            dependency = analytic_dependencies[stage]
-            require(type(dependency) is dict and set(dependency) == DEPENDENCY_FIELDS,
-                    f"{stage}: analytic dependency schema changed")
-            authenticated = exact_bool(dependency["authenticated"],
-                                       f"{stage}.dependency.authenticated")
-            digests = dependency["dependency_sha256"]
-            require(type(digests) is tuple and bool(digests) and
-                    len(set(digests)) == len(digests) and
-                    all(_is_sha256(digest) for digest in digests),
-                    f"{stage}: malformed analytic dependency digest tuple")
-            dependency_flags.append(authenticated)
-
-        implication_contracts_authenticated = all(implication_authentication_flags)
-        implications_verified = all(implication_flags)
-        dependencies_authenticated = all(dependency_flags)
-        bounded = (accounting["finite_key_accounting_complete"] is True and
-                   implication_contracts_authenticated and implications_verified and
-                   dependencies_authenticated)
-        return {
-            "schema": PREMISE_SCHEMA,
-            "scope": "rank-seven order-nine bounded finite-key premise only",
-            "finite_key_accounting_sha256": hashlib.sha256(
-                canonical_bytes(accounting)).hexdigest(),
-            "universe_row_key_sha256": accounting["source_key_sha256"],
-            "universe_target_key_sha256":
-                accounting["universe_target_contract"]["target_key_sha256"],
-            "target_indices": list(TARGET_INDICES),
-            "lane_implication_kinds": lane_kinds,
-            "lane_implication_registry_sha256": hashlib.sha256(
-                canonical_bytes(lane_implications)).hexdigest(),
-            "analytic_dependency_registry_sha256": hashlib.sha256(
-                canonical_bytes(analytic_dependencies)).hexdigest(),
-            "finite_key_accounting_complete":
-                accounting["finite_key_accounting_complete"],
-            "lane_implication_contracts_authenticated":
-                implication_contracts_authenticated,
-            "lane_implications_verified": implications_verified,
-            "analytic_dependencies_authenticated": dependencies_authenticated,
-            "bounded_order_nine_finite_premise_discharged": bounded,
-            "global_analytic_child_claim": False,
-            "claim_boundary": (
-                "does not establish theorem eligibility or any kernel order outside nine"
-            ),
-        }
-
-
-def implication_record(
-        ledger: StageLedger,
-        stage: str,
-        implication_kind: str,
-        *,
-        proof_contract_sha256: str,
-        verifier_sha256: str,
-        verification_output_sha256: str,
-        authenticated: bool,
-        verified: bool,
-) -> dict[str, Json]:
-    """Build a row/target-bound lane implication authentication record.
-
-    Digests identify the lane-specific mathematical contract, executable
-    verifier, and exact verification output.  This helper does not manufacture
-    their truth: callers must independently authenticate those bytes and pass
-    both exact boolean verdicts.
-    """
-    require(type(implication_kind) is str and implication_kind in IMPLICATION_KINDS,
-            "unknown implication kind")
-    require(all(_is_sha256(digest) for digest in
-                (proof_contract_sha256, verifier_sha256,
-                 verification_output_sha256)),
-            "malformed implication authentication digest")
-    exact_bool(authenticated, "lane implication authentication verdict")
-    exact_bool(verified, "lane implication verification verdict")
-    boundary = ledger.boundary(stage)
-    target = ledger.stage_target_contract(stage)
-    return {
-        "lane": stage,
-        "implication_kind": implication_kind,
-        "row_total": boundary["owner_row_total"],
-        "row_key_sha256": boundary["owner_key_sha256"],
-        "target_indices": TARGET_INDICES,
-        "target_total": target["target_total"],
-        "target_key_sha256": target["target_key_sha256"],
-        "proof_contract_sha256": proof_contract_sha256,
-        "verifier_sha256": verifier_sha256,
-        "verification_output_sha256": verification_output_sha256,
-        "authenticated": authenticated,
-        "lane_implication_verified": verified,
-    }
+    # Intentionally absent: implication_record, dependency authentication, and
+    # derive_bounded_premise.  Those verdicts can only be constructed by a
+    # release master from exact lane registries and pinned isolated executions.
