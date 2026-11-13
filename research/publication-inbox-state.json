@@ -2,7 +2,7 @@
   "schema_version": 1,
   "owner": "main",
   "cadence": "at most once per UTC day unless a known urgent reply is pending",
-  "last_checked_at": "2026-11-12T18:08:50Z",
+  "last_checked_at": "2026-11-13T01:54:00Z",
   "gmail": {
     "tracked_threads": [
       "19f9eb42c3b5a084",
@@ -11,7 +11,7 @@
     "substantive_unhandled_replies": 0,
     "inbox_zero_policy": "handled mail is archived, never bulk-deleted; tracked threads are searched directly",
     "inbox_count_after_maintenance": 0,
-    "latest_review": "2026-11-12: Consolidated review retried after the earlier pass. The legacy Gmail component was attempted for INBOX and failed with HTTP 502 because Pipedream is not configured; the documented gmail.request fallback was then attempted against the Gmail messages endpoint and failed with the same HTTP 502 proxy configuration error. No mailbox state was inferred, no labels changed, and no message was sent. The prior verified inbox-zero state is retained pending a connector-capable review.",
+    "latest_review": "2026-11-13: Consolidated review attempted at 01:54 UTC. All six documented component searches (profile, both tracked mathematical threads, OCB sender, unread human mail, and INBOX) failed with HTTP 502 because Pipedream is not configured. The documented gmail.request API fallback was attempted for the same six reads and also failed with HTTP 502 at the proxy layer. No mailbox state was inferred, no labels changed, and no message was sent. The prior verified inbox-zero state is retained pending a connector-capable review.",
     "archived_without_deletion_during_initial_cleanup": 756,
     "noise_filters": [
       "notifications@github.com",
@@ -26,7 +26,7 @@
       "akmpz-conjecture-9-2-i"
     ],
     "public_ids": {},
-    "latest_public_readback": "2026-11-12: A second fail-closed complete Board readback at 18:08 UTC returned HTTP 503 Service Unavailable before its first page. No status change could be established; both records remain verified_pending_review without resubmission or resolution reporting."
+    "latest_public_readback": "2026-11-13: Fail-closed complete Board readback at 01:51 UTC returned HTTP 503 Service Unavailable before its first page. No status change could be established; both records remain verified_pending_review without resubmission or resolution reporting."
   },
   "notes": "Verification-email tokens and private message bodies are never stored."
 }
