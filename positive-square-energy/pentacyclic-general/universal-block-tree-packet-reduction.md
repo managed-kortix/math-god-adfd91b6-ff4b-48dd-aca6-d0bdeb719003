@@ -18,7 +18,7 @@ packet theorem below except the following two incidence families:
    triangle is owned by any admissible structural opening. The rank-three block
    is one of:
    - canonical doubled-triangle class `111`;
-   - canonical doubled-`C4` class `111`;
+   - the exceptional doubled-`C4` eight-row automorphism orbit with first-simple doubled pairs;
    - an all-odd `K4` subdivision with exactly one long path.
 
 The following formerly listed rows are completely closed, with no incidence
@@ -144,7 +144,7 @@ credit `>1`:
 
 - doubled triangle class `111`: open the odd connector when it is long, or an
   even member of a canonical doubled pair when the connector is direct;
-- doubled-`C4` class `111`: open an internal vertex of an available connector;
+- exceptional doubled-`C4` orbit: transport to the normalized anchor and open an internal vertex of its even connector;
 - one-long all-odd `K4`: open an internal vertex of the unique long path.
 
 If an external triangle is owned by any admissible opening, Rule A makes the

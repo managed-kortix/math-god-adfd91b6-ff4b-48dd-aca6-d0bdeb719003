@@ -334,9 +334,10 @@ $\Theta(1,2,r)+T^3$; $D+T+T+P$&theta classification
 $2+2+1$&$\Delta_1+\Delta_2+\epsilon_q\le4$&$D+D+T$&the unique theta
 maximum in \eqref{eq:theta}\\
 $3+1+1$&$e_B+\epsilon_p+\epsilon_q\le4$&canonical doubled-triangle $111$,
-canonical doubled-$C_4$ $111$, or one-long all-odd $K_4$, each with $TT$;
-also $K_4+Q_1+Q_2$ if $\epsilon_1+\epsilon_2>1$&the complete physical
-rank-three ledger, including the four noncanonical rational gates
+the exceptional doubled-$C_4$ eight-row automorphism orbit with both doubled
+pairs first-simple, or one-long all-odd $K_4$, each with $TT$; also
+$K_4+Q_1+Q_2$ if $\epsilon_1+\epsilon_2>1$&the complete physical rank-three
+ledger, including the four longer-doubled-member rational gates
 \cite{Tetracyclic,OwnerClosure}\\
 $3+2$&$e_B+\Delta\le4$&unsubdivided $K_4+\Theta(1,2,r)$&all other structural
 rank-three rows have $e_B<12/5$\\
@@ -357,9 +358,11 @@ $2+2+1$, a nonmaximum theta has excess $<4/3$, while
 $2(\sqrt{17}-1)/2+\epsilon_5<4$; hence exactly $D+D+T$ remains.
 
 For rank three, the cited physical ledger has $e_B\le2$ in every direct row.
-In class $111$, lengthening a doubled member gives respectively
-$229/120,31/20,1862/1000,1662/1000<2$; the only canonical structural rows are
-the two doubled families, one-long all-odd $K_4$, and the actual $K_4$.
+For the doubled triangle in class $111$, lengthening a doubled member gives
+$229/120,31/20<2$.  For the exceptional doubled-$C_4$ orbit, which has four
+anchors in class $110$ and four in class $111$, the corresponding bounds are
+$1862/1000,1662/1000<2$.  Thus the only first-simple structural rows are the
+two doubled families, one-long all-odd $K_4$, and the actual $K_4$.
 Consequently two cycles can survive only as stated.  Against a theta, every
 structural row except the actual $K_4$ has $e_B<12/5$, and
 $12/5+(\sqrt{17}-1)/2<4$.  Finally the rank-four theorem partitions every row
@@ -429,7 +432,8 @@ vertex; otherwise it and a path in the $2$-connected block $B$ would form a
 larger cyclic block.  Its unique meeting vertex, or the first vertex of $B$ on
 its block-cut route, is its \emph{owner}.  An opening is physical: it deletes
 one actual internal path vertex and all descendants owned there; it does not
-switch a parity row.  The canonical opening and legal first owners are exactly:
+switch a parity row.  The prescribed physical opening and legal first owners
+are exactly:
 \begin{center}
 \small
 \begin{tabular}{p{3.2cm}p{4.7cm}p{5.2cm}}
@@ -437,14 +441,14 @@ switch a parity row.  The canonical opening and legal first owners are exactly:
 $B$&admissible physical opening&legal first owners after no routed opening\\
 \midrule
 $D$, paths $xy,xay,xby$&$a$ or $b$&the endpoints $x,y$\\
-doubled triangle $111$, canonical pairs, connector length $\ge3$&an internal
+doubled triangle $111$, first-simple pairs, connector length $\ge3$&an internal
 vertex of the odd connector&all branch vertices and all internal vertices
 outside that connector\\
 doubled triangle $111$, direct connector&the internal vertex of either
-canonical even member&the three branch vertices\\
-doubled-$C_4$ $111$, canonical pairs&an internal vertex of every available
-single connector (in particular the normalized even connector)&the four branch
-vertices and interiors of the two canonical even doubled members\\
+first-simple even member&the three branch vertices\\
+exceptional doubled-$C_4$ orbit, first-simple pairs&transport to the normalized
+anchor and open the even connector&the four branch vertices and interiors of
+the two transported even doubled members\\
 one-long all-odd $K_4$&an internal vertex of the unique long path&the four
 branch vertices\\
 \bottomrule
@@ -490,21 +494,28 @@ tree $S$, so $\sig(S)=-1$.
 
 For the three rank-three rows, first apply the all-length gate.  In doubled
 triangle class $111$, lengthening a member of either doubled pair has exact
-excess bounds $229/120<2$ or $31/20<2$; in doubled-$C_4$ class $111$ the bounds
-are $1862/1000<2$ or $1662/1000<2$.  Relabelling and fixed-parity monotonicity
-cover every noncanonical member.  Adding two triangle excesses gives at most
-four, so these rows are DNN-closed for every owner.  Hence both doubled pairs
-may now be assumed canonical.
+excess bounds $229/120<2$ or $31/20<2$.  In the exceptional doubled-$C_4$
+orbit the corresponding bounds are $1862/1000<2$ or $1662/1000<2$.
+Genuine kernel automorphisms, compatible interchanges inside the parallel
+fibres, and fixed-parity monotonicity cover every longer doubled member of all
+eight anchors; no switching operation is used.  Adding two triangle excesses
+gives at most four, so these rows are DNN-closed for every owner.  Hence both
+doubled pairs may now be assumed first-simple; the doubled-$C_4$ connectors
+remain arbitrary in their fixed opposite parities.
 
-Perform the canonical physical opening of $B$ from the table.  Its owned
-territory $R$ is
-one tree.  The other external triangle $T_1$ remains in the retained anchor
-$A$.  For the doubled triangle, opening a long odd connector retains two
-intrinsic triangles; when that connector is direct, opening a canonical even
-parallel path retains a diamond.  For doubled $C_4$, branch owners give the
-three-triangle anchor, while an owner internal to a canonical even doubled path
-gives the distinct $D+T$ anchor.  For one-long all-odd $K_4$, opening the long
-path retains a diamond.  In every owner orbit, adjoining $T_1$ therefore gives
+Perform the prescribed physical opening of $B$ from the table.  Its owned
+territory $R$ is one tree.  The other external triangle $T_1$ remains in the
+retained anchor $A$.  For the doubled triangle, opening a long odd connector
+retains two intrinsic triangles; when that connector is direct, opening a
+first-simple even parallel path retains a diamond.  For doubled $C_4$, first
+transport by a genuine kernel isomorphism to the normalized anchor and open
+its even connector.  Branch owners give the three-triangle anchor, while an
+owner internal to either transported even doubled member gives the distinct
+$D+T$ anchor.  The inverse isomorphism transports the opening, owner class,
+incidence form, and induced territories back to every one of the eight
+anchors, including the four in class $110$.  For one-long all-odd $K_4$,
+opening the long path retains a diamond.  In every owner orbit, adjoining
+$T_1$ therefore gives
 either a three-triangle favorable anchor of packing number at most two or an
 attached $D+T$ anchor.  In either case $\sig(A)>2$.  The partition is
 \[
@@ -974,7 +985,7 @@ proof note, 2026;
 \bibitem{TerminalReduction} \emph{Four residual templates: exact block-cut
 terminal reduction}, proof note, 2026;
 \path{positive-square-energy/pentacyclic-general/four-residual-block-cut-terminal-reduction.md}.
-\bibitem{DiamondTwoTriangles} \emph{Canonical doubled-$C_4$ class $111$ plus
+\bibitem{DiamondTwoTriangles} \emph{Exceptional doubled-$C_4$ orbit plus
 two triangles}, proof note, 2026;
 \path{positive-square-energy/pentacyclic-general/doubled-c4-111-two-triangles-retained-packet.md}.
 \bibitem{KernelClassification} \emph{Classification of the rank-five

@@ -17,8 +17,8 @@ HERE = Path(__file__).resolve().parent
 MULTIBLOCK = {
     "name": "canonical-multiblock-owner",
     "path": HERE / "hexacyclic-multiblock-ledger-verifier.py",
-    "source_sha256": "63b99daadbb01fc5d96dfe986e67dc5fe20c341172500a74c954bc5af9d845ea",
-    "output_sha256": "9539ecc104c0fa54c0292f4db7dcef2ed0f5f5227ecbac4f7e266d0c1179ccf7",
+    "source_sha256": "8d80369b95d4c2b87fd36ea592981d0e799a3635513deb50d647971cad3899b7",
+    "output_sha256": "4b4b483c3f019827d2e795dac77ea789765784a10da9496024c5f617e1ddbbb8",
     "arguments": ("--print-manifest",),
     "schema": "hexacyclic-multiblock-scope-conclusion-v1",
     "block_scope": "at-least-two-positive-rank-cyclic-blocks",

@@ -25,8 +25,11 @@ every odd cycle of length at least seven has excess below `2/5`. For a
 bicyclic block, `Delta<=d`; `Delta>1` occurs exactly for
 `Theta(1,2,r)`, and `Delta>2-p` occurs only for `D`. The exact rank-three
 ledger has two kinds of rows: the actual `K4`, of DNN excess three, and the
-canonical structural rows `S3`, each of excess below `12/5`; every other row
-has excess at most two. The exact rank-four ledger has direct rows of excess at
+first-simple structural rows `S3`, each of excess below `12/5`; every other
+row has excess at most two.  The doubled-`C4` member of `S3` is the exceptional
+eight-row kernel-automorphism orbit, four anchors in class `110` and four in
+class `111`, with its two doubled pairs first-simple and its connectors
+arbitrary in their fixed opposite parities. The exact rank-four ledger has direct rows of excess at
 most three and exactly two structural no-long states. Their six `K4` support
 paths use the regular tetrahedron Gram: the even-extra state has excess below
 `18/5`, and the odd-extra state has excess below `19/6`. The exact rank-five
@@ -138,7 +141,7 @@ packet templates:
 | A | `2+1^4` | `Theta(1,2,r)+T^4`, `r>=2` |
 | B | `2+1^4` | `D+T^3+P` |
 | C | `2+2+1+1` | `D+D+T^2` |
-| D | `3+1+1+1` | canonical `S3+T^3` |
+| D | `3+1+1+1` | first-simple structural `S3+T^3` |
 | E | `3+1+1+1` | actual `K4+Q1+Q2+Q3`, `sum epsilon(Qi)>2` |
 | F | `4+1+1` | structural `S4+Q1+Q2`, at least one `Qi=T` |
 | G | `5+1` | favorable-theta structural all-odd `K5-e+T` |
@@ -161,8 +164,9 @@ and one cycle boundary.
 Templates A--D are closed owner-exactly in
 `multiblock-items1-4-owner-exact-closure.md`. The proof opens the long theta
 arm for A, retains `D+TT` for B, physically boundary-opens the second diamond
-for C, and uses the canonical structural opening (including the separate
-doubled-`C4` retained-packet theorem) for D.
+for C, and uses the prescribed structural opening (including genuine
+kernel-isomorphism transport of the separate exceptional-orbit doubled-`C4`
+retained-packet theorem) for D.
 
 Templates E--I are closed owner-exactly in
 `multiblock-items5-7-owner-exact-closure.md`. For E, the actual `K4` credit

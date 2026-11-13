@@ -13,8 +13,11 @@ s+(G) >= n.
   `3+1+1`, `3+2`, `4+1`, or `5`.
 - The exact multiblock DNN sieve leaves four hard incidence families. The
   repaired owner-exact closure handles positive routes, repeated owners,
-  direct/nested shared cuts, the doubled-C4 interior-owner orbit, all connector
-  remnants, and arbitrary rooted branches.
+  direct/nested shared cuts, and the full exceptional doubled-`C4` physical
+  automorphism orbit: four anchors in switching class `110` and four in class
+  `111`. A genuine-isomorphism audit transports the connector opening, the
+  two even-doubled-member interior-owner classes, all connector remnants, and
+  arbitrary rooted branches; no switching operation is used.
 - A single rank-five block suppresses to exactly 118 loopless no-cut-vertex
   multigraph kernels, with order counts `1,3,13,24,38,23,16` on 2 through 8
   branch vertices.
@@ -65,6 +68,12 @@ Run from the repository root with Python 3.10 or newer; the proof verifiers use
 only the standard library:
 
 ```sh
+python3 research/doubled-c4-exceptional-owner-transport-verifier.py
+python3 -O research/doubled-c4-exceptional-owner-transport-verifier.py
+
+python3 research/pentacyclic-master-verifier.py
+python3 -O research/pentacyclic-master-verifier.py
+
 python3 research/rank-five-kernel-census-verifier.py
 python3 -O research/rank-five-kernel-census-verifier.py
 

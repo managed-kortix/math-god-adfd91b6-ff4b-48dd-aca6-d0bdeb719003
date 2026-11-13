@@ -8,7 +8,7 @@ the following exact block/physical-row families:
 
 1. `Theta(1,2,2)+C3+C3+C5`;
 2. a canonical structural rank-three block plus `C3+C3`, namely canonical
-   doubled triangle class `111`, canonical doubled-`C4` class `111`, or
+   doubled triangle class `111`, the exceptional doubled-`C4` eight-row automorphism orbit with first-simple doubled pairs, or
    all-odd `K4` with exactly one long path.                 (R)
 
 Thus the block-rank partitions
@@ -69,7 +69,7 @@ following rows and no others before structural packets are used:
 |---|---|
 | `2+1+1+1` | `Theta(1,2,r)+C3+C3+C3`; and `Theta(1,2,2)+C3+C3+C5` |
 | `2+2+1` | `Theta(1,2,2)+Theta(1,2,2)+C3` |
-| `3+1+1` | the canonical doubled-triangle, doubled-`C4`, and one-long all-odd `K4` structural rows with two triangles; and `K4+Q_1+Q_2`, where `epsilon(Q_1)+epsilon(Q_2)>1` |
+| `3+1+1` | the first-simple doubled-triangle, exceptional doubled-`C4` orbit, and one-long all-odd `K4` structural rows with two triangles; and `K4+Q_1+Q_2`, where `epsilon(Q_1)+epsilon(Q_2)>1` |
 | `3+2` | `K4+Theta(1,2,r)` |
 | `4+1` | only the structural rank-four rows from the tetracyclic theorem, with one cycle |
 
@@ -144,8 +144,8 @@ a strict triangle. Either version pays the tree strictly.
 
 ## Closure of `3+1+1`
 
-For the canonical doubled-triangle, doubled-`C4`, and one-long all-odd `K4`
-rows, use the same internal path opening as in the tricyclic proof. It produces
+For the first-simple doubled-triangle, exceptional doubled-`C4` orbit, and
+one-long all-odd `K4` rows, use the same internal path opening as in the tricyclic proof. It produces
 one tree and a favorable bicyclic remainder of credit `>1`. If an external
 triangle follows the opened side, that side becomes strict and the remaining
 side is a connected tetracyclic or tricyclic graph, so this incidence closes.

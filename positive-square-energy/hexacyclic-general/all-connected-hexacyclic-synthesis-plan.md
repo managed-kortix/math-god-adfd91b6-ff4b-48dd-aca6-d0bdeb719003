@@ -81,31 +81,32 @@ Direct verifier:
 ```text
 research/hexacyclic-multiblock-ledger-verifier.py
 current source SHA-256:
-63b99daadbb01fc5d96dfe986e67dc5fe20c341172500a74c954bc5af9d845ea
+8d80369b95d4c2b87fd36ea592981d0e799a3635513deb50d647971cad3899b7
 
 current canonical scope/conclusion manifest SHA-256:
-9539ecc104c0fa54c0292f4db7dcef2ed0f5f5227ecbac4f7e266d0c1179ccf7
+4b4b483c3f019827d2e795dac77ea789765784a10da9496024c5f617e1ddbbb8
 
 current normal/optimized report SHA-256:
-c5c363e788da0999c98e1ee428b2484a9b70f7ce3a36a8096e536b52cbde4f96
+ae41d55e2cd8d498462d2c43073ebc7bdc3e978fb15363a9423d1b96ebfcf769
 ```
 
 It generates all eleven partitions, selects the ten multiblock partitions,
-locks nine sources, regenerates the three rank-five structural families, checks
+locks ten sources, regenerates the three rank-five structural families, checks
 12 owner-incidence cases, and rejects 29 hostile mutations. Its locked leaves
 are:
 
 | logical owner | path | SHA-256 pinned by verifier |
 |:--|:--|:--|
-| combined theorem | `positive-square-energy/hexacyclic-general/multiblock-items1-7-combined-theorem-audit.md` | `7c9e6a371000283958d4d1eb7db0a181b4968fe50cf4a37fd8d7d26eddc43378` |
-| items 1--4 | `positive-square-energy/hexacyclic-general/multiblock-items1-4-owner-exact-closure.md` | `49a24ebe705aecd9248224cc39c748041c0d6d4981a137f6daad6d93019a1cb1` |
+| combined theorem | `positive-square-energy/hexacyclic-general/multiblock-items1-7-combined-theorem-audit.md` | `b25ec464400a99464f03d1f2c528b542307697140a6a29496dc3be92020fbd58` |
+| items 1--4 | `positive-square-energy/hexacyclic-general/multiblock-items1-4-owner-exact-closure.md` | `4319c568f17f612fd0ba71ba57250e15c3f352a772d87b1ae13c6b36f41c7c13` |
 | items 5--7 | `positive-square-energy/hexacyclic-general/multiblock-items5-7-owner-exact-closure.md` | `1c5722565e874ebf04533e908c5bf335f7be0b56a5665f5b607cfdef14ac8c67` |
 | theta--triangle packet | `positive-square-energy/hexacyclic-general/favorable-theta-triangle-shared-cut-packet.md` | `d222e09a20dce19703f8386c6a3a3699e0621b63f761e553fee3215adf8e2446` |
-| rank-four ledger | `all-tetracyclic-graphs/paper.tex` | `89e9b27d188e9e9f28f702d13799549218473eaac1805434a6fbb91a22af7374` |
+| rank-four ledger | `all-tetracyclic-graphs/paper.tex` | `70a931c28c8a8817e2c02818200885f73c532d9afe2c065831f2b3884d61160f` |
 | all-odd K5-e ledger | `positive-square-energy/pentacyclic-general/all-odd-k5e-induced-territory-frontier.md` | `e43bbd97566ab5ea28b360311a2e3e1bc40397c3f40f250e954d1c016d94e6a5` |
 | K5-e sieve | `pentacyclic/research/all-odd-k5e-territory-sieve.py` | `047a472d4e1af46850198dc68b5780f98b930618f79b51174f11460afcc0334d` |
 | K22 fixture | `pentacyclic/research/order5-kernel-family-theorem.json` | `4d8b826b397dc269c7853b8bd386d00bf469282b52720b8dac96d850e9e616d8` |
 | K71 fixture | `pentacyclic/research/order6-kernel-family-theorem.json` | `69b236b014aef58c037c610ca01fa62ad82601f7bb34153939ec4ddd3b5f364d` |
+| doubled-`C4` owner transport | `research/doubled-c4-exceptional-owner-transport-verifier.py` | `15288382816208fd46c7e85eb3171f724739ba794b98c3b618e7fed7154fbe54` |
 
 Publication contract: promote this verifier to emit a canonical scope/conclusion
 manifest, pin both normal and optimized output digests, and make the final

@@ -6,7 +6,7 @@ reduction:
 
 1. `Theta(1,2,2)+C3+C3+C5`;
 2. canonical doubled-triangle class `111` plus `C3+C3`;
-3. canonical doubled-`C4` class `111` plus `C3+C3`;
+3. the exceptional doubled-`C4` eight-row automorphism orbit with first-simple doubled pairs plus `C3+C3`;
 4. one-long all-odd `K4` plus `C3+C3`.
 
 The conclusion is that "no routed cycle" is only a restriction on the owner
@@ -67,11 +67,11 @@ path interiors, so an unsubdivided path contributes no internal terminal.
 | diamond, with paths `xy,xay,xby` | `{a,b}` | `{x,y}` |
 | doubled triangle, odd connector `c>=3` | `Int(c)` | `V(B)-Int(c)` |
 | doubled triangle, direct connector `c=1` | the internal vertices of the two canonical even parallel paths | the three branch vertices |
-| doubled `C4` class `111` | interiors of every openable single connector | the branch vertices and the interiors of the two canonical even doubled paths |
+| exceptional doubled `C4` orbit, first-simple doubled pairs | interiors of every openable single connector (in particular the transported even connector) | the branch vertices and the interiors of the two transported even doubled paths |
 | one-long all-odd `K4` | interior of the unique long path `P` | the four branch vertices |
 
-For the doubled `C4`, the canonical even connector is always openable and the
-odd connector is also openable when it is long. Hence the legal-owner formula
+For the doubled `C4`, the transported even connector is always openable and the
+transported odd connector is also openable when it is long. Hence the legal-owner formula
 excludes both connector interiors when both exist. For the one-long `K4`, the
 stabilizer of `P` has two terminal orbits: endpoints of `P` and the other two
 branch vertices. For the direct doubled triangle there are likewise two
@@ -169,7 +169,7 @@ uniform over those two incidence families, for each rank-three template:
 | rank-three template | bridge-free analytic packet |
 |---|---|
 | doubled triangle class `111` | doubled triangle plus two triangles in one shared-cut incidence tree |
-| doubled `C4` class `111` | doubled `C4` plus two triangles in one shared-cut incidence tree |
+| exceptional doubled `C4` orbit | doubled `C4` plus two triangles in one shared-cut incidence tree |
 | one-long all-odd `K4` | one-long `K4` plus two triangles in one shared-cut incidence tree |
 
 In the first incidence family, each packet must be proved uniformly over every
@@ -192,7 +192,7 @@ The exact connector ledger is consequently:
 |---|---|---|
 | `D+T+T+P` | one of (2), plus a rank-at-most-four complement | one bridge-free four-block incidence packet; direct-`D+T` members close by (3) |
 | doubled triangle `111` plus `TT` | `T` or `TT`, plus a lower-rank complement | one shared-cut packet, direct/direct and nested incidences |
-| doubled `C4` `111` plus `TT` | `T` or `TT`, plus a lower-rank complement | one shared-cut packet, direct/direct and nested incidences |
+| exceptional doubled `C4` orbit plus `TT` | `T` or `TT`, plus a lower-rank complement | one shared-cut packet, direct/direct and nested incidences |
 | one-long all-odd `K4` plus `TT` | `T` or `TT`, plus a lower-rank complement | one shared-cut packet, direct/direct and nested incidences |
 
 Thus no-routing does not itself force direct attachment. Block-cut ownership

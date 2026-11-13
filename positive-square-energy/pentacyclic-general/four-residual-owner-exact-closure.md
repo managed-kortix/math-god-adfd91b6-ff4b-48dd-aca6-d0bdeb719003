@@ -67,9 +67,9 @@ the following physical vertex sets:
 
 | distinguished block | legal first owners |
 |---|---|
-| doubled triangle `111`, canonical doubled pairs, long odd connector | every branch vertex and every internal vertex outside that connector |
-| doubled triangle `111`, canonical doubled pairs, direct odd connector | the three branch vertices |
-| doubled `C4` `111`, canonical doubled pairs | the four branch vertices and the interiors of the two canonical even doubled paths |
+| doubled triangle `111`, first-simple doubled pairs, long odd connector | every branch vertex and every internal vertex outside that connector |
+| doubled triangle `111`, first-simple doubled pairs, direct odd connector | the three branch vertices |
+| exceptional doubled `C4` orbit, first-simple doubled pairs | the four branch vertices and the interiors of the two even doubled members transported from the normalized anchor |
 | one-long all-odd `K4` | the four branch vertices |
 
 For direct/direct incidence the exact datum is an ordered pair, with
@@ -87,9 +87,11 @@ every shared cut and every rooted vertex exactly once.
 
 ## 2. All-length DNN gate for the doubled families
 
-Before using an owner-exact structural opening, dispose of every physical
-class-`111` row in which either doubled pair is noncanonical. This is an
-all-length statement, not a shortest-row assumption.
+Before using an owner-exact structural opening, dispose of every doubled-
+triangle class-`111` row, or exceptional doubled-`C4`-orbit row, in which a
+member of either doubled pair is longer than first-simple. This is an all-
+length statement, not a shortest-row assumption and not a claim that the
+exceptional doubled-`C4` orbit is one switching class.
 
 For the doubled triangle, Section 3.1, equations (9)--(10), of
 `tricyclic-general/doubled-triangle-dnn-cover.md` treats the two ways to
@@ -98,22 +100,25 @@ lengthen a member of a doubled pair. Its exact rational upper bounds are
 `229/120<2` and `31/20<2`.
 
 Relabeling covers all four members of the two doubled pairs, and fixed-parity
-monotonicity covers every further increase by two. Thus every labelled
-class-`111` physical row with a noncanonical doubled path has DNN excess
-strictly below two. Section 1 of that note, especially its attachment argument
-following equation (3), shows that the certificate remains valid after
-arbitrary rooted trees are attached.
+monotonicity covers every further increase by two. Thus every labelled doubled-
+triangle class-`111` physical row with a longer-than-first-simple doubled path
+has DNN excess strictly below two. Section 1 of that note, especially its
+attachment argument following equation (3), shows that the certificate remains
+valid after arbitrary rooted trees are attached.
 
-For the doubled `C4`, Section 5, equations (8)--(9), of
+For the doubled `C4`, Section 6, equations (8)--(9), of
 `tricyclic-general/doubled-c4-switching-sieve.md` gives the corresponding two
 all-length certificates. The exact rational estimates recorded there are
 
 `1862/1000<2` and `1662/1000<2`.
 
-Again, doubled-pair interchange, member interchange, and kernel automorphisms
-cover every one of the eight labelled class-`111` parity rows and either
-doubled pair; monotonicity covers all longer physical lengths. Sections 3 and
-5 of that note include arbitrary rooted-tree attachments by one-vertex
+The exceptional set consists of eight parity anchors in one genuine kernel-
+automorphism orbit: four are in switching class `110` and four in class `111`.
+Doubled-pair interchange, compatible member interchange, and the sixteen
+induced incidence automorphisms transport the two certificates to either
+doubled pair of every anchor; no switching operation is used. Fixed-parity
+monotonicity covers every further physical length increase. Sections 3 and 6
+of the cited note include arbitrary rooted-tree attachments by one-vertex
 additivity of `kappa`.
 
 These are also compatible with the two external triangles and with every
@@ -135,11 +140,13 @@ owner-exact structural argument below have, respectively,
 `{a,A}={b,B}={1,2}` and `{a,A}={c,C}={1,2}`,
 
 up to the labels used in the two cited notes. Only connector lengths remain
-arbitrary subject to class `111`.
+arbitrary. The doubled triangle remains in class `111`; the doubled-`C4`
+connectors have fixed opposite parities in the exceptional eight-anchor orbit.
 
-## 3. Canonical rank-three block plus two triangles
+## 3. First-simple structural rank-three block plus two triangles
 
-Let `B` be one of the three canonical structural rank-three blocks and suppose
+Let `B` be one of the three structural rank-three blocks left after the DNN
+gate and suppose
 the incidence is bridge-free. Choose the upstream triangle `T_1` in the
 direct/nested form, and choose either triangle in the direct/direct form. Open
 the other triangle `T_2` as described above; call the resulting nonempty tree
@@ -147,7 +154,7 @@ the other triangle `T_2` as described above; call the resulting nonempty tree
 
 `sigma(S)=-1`.                                                (1)
 
-Now perform the canonical structural opening of `B`. The opened vertex and its
+Now perform the prescribed physical structural opening of `B`. The opened vertex and its
 owned rooted branches form one nonempty tree `R`; the two open-path remnants
 stay on the retained side as attached trees. Thus
 
@@ -157,29 +164,31 @@ The residual hypothesis says that neither external triangle is owned by an
 admissible opening. Therefore all of `T_1` remains on the retained side. The
 retained rank-three anchor `A` is as follows.
 
-### Doubled triangle, class `111`, canonical doubled pairs
+### Doubled triangle, class `111`, first-simple doubled pairs
 
 If the odd connector has length at least three, opening it leaves the two
-canonical intrinsic triangles. The legal owner of `T_1` lies on one of those
+first-simple intrinsic triangles. The legal owner of `T_1` lies on one of those
 triangles, so `T_1` shares a vertex with it. Hence the three-triangle anchor has
 packing number at most two and
 
 `sigma(A)>2`.                                                 (3)
 
-If the connector is direct, open the internal vertex of either canonical even
+If the connector is direct, open the internal vertex of either first-simple even
 parallel path. The retained bicyclic core is a diamond. Every legal owner is a
 retained branch vertex, so adjoining `T_1` gives an attached
 `Theta(1,2,2)+C3` anchor and again (3) holds.
 
-### Doubled `C4`, class `111`, canonical doubled pairs
+### Exceptional doubled-`C4` orbit, first-simple doubled pairs
 
-Open the normalized even connector. The retained bicyclic core consists of the
-two canonical intrinsic triangles joined by the other connector path. There
+Transport the physical packet by a genuine kernel automorphism to the
+normalized anchor `010011`, and open its even connector. The retained bicyclic
+core consists of the two first-simple intrinsic triangles joined by the other
+connector path. There
 are two legal-owner orbits, and they must be treated separately.
 
 - At a branch owner, adjoining `T_1` gives the usual three-triangle favorable
   anchor. Its triangle packing number is at most two, so (3) follows.
-- At an internal vertex of either canonical even doubled path, the induced
+- At an internal vertex of either even doubled member, the induced
   cyclic side is not a cactus: the second route through that doubled side makes
   a diamond. With `T_1` retained, the anchor is an attached
   `Theta(1,2,2)+C3` packet. Attached-packet bound 4 above gives
@@ -226,10 +235,15 @@ remnant, interior owner, or rooted branch is duplicated or omitted. Equations
 
 `sigma(G)>=sigma(A)+sigma(R)+sigma(S)>2-1-1=0`.               (4)
 
-This closes all three canonical rank-three rows, for both bridge-free incidence
-types and every legal owner. For the two doubled families, "canonical" here
-means exactly the doubled-pair equalities displayed at the end of Section 2;
-no owner-exact claim is being made for a noncanonical doubled pair.
+This closes all three first-simple structural rank-three families, for both
+bridge-free incidence types and every legal owner. For the exceptional doubled-
+`C4` orbit, a genuine graph isomorphism transports the even-connector opening,
+the legal-owner set, direct/direct and direct/nested incidence, repeated cuts,
+rooted branches, and all three induced territories from the normalized anchor
+to each of the other seven anchors. Four anchors lie in switching class `110`
+and four in class `111`; switching is never used. For both doubled families,
+"first-simple" means exactly the doubled-pair equalities displayed at the end
+of Section 2; no owner-exact claim is made for a longer doubled member.
 
 ## 4. Diamond plus two triangles and a pentagon
 
@@ -285,10 +299,11 @@ a direct `D+T` attachment.
 
 ## 5. Exact residual
 
-The required exhaustion is the following disjunction. In either doubled
-class-`111` family, a noncanonical member of a doubled pair is closed by the
-all-length DNN gate of Section 2; otherwise both doubled pairs are canonical.
-For a canonical doubled family, the one-long all-odd `K4` family, or the
+The required exhaustion is the following disjunction. In the doubled-triangle
+class-`111` family or the exceptional doubled-`C4` orbit, a longer-than-first-
+simple member of a doubled pair is closed by the all-length DNN gate of
+Section 2; otherwise both doubled pairs are first-simple. For a first-simple
+doubled family, the one-long all-odd `K4` family, or the
 diamond family, an actual positive route is closed by Section 1. If there is
 no positive route, Section 1 leaves exactly the listed bridge-free incidence
 forms, which Sections 3--4 close owner-exactly. Thus, and only after this
@@ -297,13 +312,13 @@ disjunction, the four previously retained multiblock families are exhausted:
 | family | bridge-free forms | disposition |
 |---|---|---|
 | `D+T+T+P` | direct `D-T`, or rooted `D-P` with direct/direct or direct/nested triangles | closed by a `D+T` anchor against at most two trees |
-| doubled triangle `111` plus `TT` | noncanonical doubled pair; otherwise canonical direct/direct or direct/nested | all-length DNN; otherwise a rank-three triangular anchor against two trees |
-| doubled `C4` `111` plus `TT` | noncanonical doubled pair; otherwise canonical direct/direct or direct/nested | all-length DNN; otherwise a favorable rank-three anchor (triangular or `D+T`) against two trees |
+| doubled triangle `111` plus `TT` | longer doubled member; otherwise first-simple direct/direct or direct/nested | all-length DNN; otherwise a rank-three triangular anchor against two trees |
+| exceptional doubled `C4` orbit plus `TT` | longer doubled member; otherwise first-simple direct/direct or direct/nested, connectors arbitrary in fixed opposite parities | all-length DNN; otherwise the transported favorable rank-three anchor (triangular or `D+T`) against two trees |
 | one-long all-odd `K4` plus `TT` | direct/direct, direct/nested | closed by a diamond-plus-triangle anchor against two trees |
 
-Consequently the multiblock residual is empty: its noncanonical doubled rows
-are DNN-closed, and every row left for owner-exact closure is canonical and is
-closed above. Together with the existing DNN and induced-territory rows, all
+Consequently the multiblock residual is empty: its longer-doubled-member rows
+are DNN-closed, and every row left for owner-exact closure has first-simple
+doubled pairs and is closed above. Together with the existing DNN and induced-territory rows, all
 positive block-rank partitions of five with at least two cyclic blocks are
 closed. The only remaining part of the pentacyclic program, if any, lies in the
 separate single rank-five block classification; no multiblock incidence,

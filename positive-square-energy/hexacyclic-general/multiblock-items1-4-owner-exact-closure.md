@@ -6,9 +6,10 @@ rank-six multiblock ledger:
 1. `Theta(1,2,r)+T^4`, `r>=2`;
 2. `D+T^3+P`, where `D=Theta(1,2,2)`;
 3. `D+D+T^2`;
-4. `S_3+T^3`, where `S_3` is one of the canonical structural rank-three
-   blocks (canonical doubled triangle class `111`, canonical doubled-`C4`
-   class `111`, or one-long all-odd `K4`).
+4. `S_3+T^3`, where `S_3` is one of the structural rank-three blocks
+   left after the all-length gate (first-simple doubled triangle class `111`,
+   the exceptional doubled-`C4` eight-row automorphism orbit with first-simple
+   doubled pairs, or one-long all-odd `K4`).
 
 Here `T=C3`, `P=C5`, and arbitrary bridge connectors and arbitrary rooted
 trees are allowed. For a graph `X`, put
@@ -36,22 +37,28 @@ attachment-uniform facts.
    deletes one physical internal path vertex and its owned descendants as a
    tree. With two retained external triangles, the retained anchor has credit
    greater than three: it is respectively a four-triangle packet or `D+TT`.
-6. A canonical doubled-`C4` class `111` block together with two triangles in
-   arbitrary bridge-free direct/direct or direct/nested incidence has credit
-   greater than one. This is the owner-exact retained-packet theorem proved in
-   `pentacyclic-general/doubled-c4-111-two-triangles-retained-packet.md`: after
-   opening the even connector, cutting the opposite connector separates the
-   two doubled sides, and the two side credits total greater than two before
-   the structural tree is charged. It includes opposite-side owners and an
-   interior owner whose side is a diamond rather than a cactus.
+6. An exceptional doubled-`C4`-orbit block with first-simple doubled pairs,
+   together with two triangles in arbitrary bridge-free direct/direct or
+   direct/nested incidence, has credit greater than one. This is the
+   owner-exact retained-packet theorem proved in
+   `pentacyclic-general/doubled-c4-111-two-triangles-retained-packet.md`: a
+   genuine kernel isomorphism first transports the packet to normalized anchor
+   `010011`; opening its even connector and cutting the opposite connector
+   separates the two doubled sides, and the two side credits total greater
+   than two before the structural tree is charged. The inverse isomorphism
+   transports the legal-owner set and induced territories to all eight
+   anchors, four in class `110` and four in class `111`. It includes
+   opposite-side owners and an interior owner whose side is a diamond rather
+   than a cactus; no switching operation is used.
 
 For the two doubled families in item 4, the all-length DNN gate is applied
-first. If a member of a doubled pair is noncanonical, the exact excess bounds
-`229/120`, `31/20`, `1862/1000`, and `1662/1000`, together with the three
-external triangle excesses, put the row at or below the rank-six DNN budget
-five. Thus the structural argument below is invoked only after both doubled
-pairs have their canonical physical lengths. No switching operation is used
-to alter a physical length.
+first. If a member of a doubled pair is longer than first-simple, the exact
+excess bounds `229/120`, `31/20`, `1862/1000`, and `1662/1000`, together with
+the three external triangle excesses, put the row at or below the rank-six DNN
+budget five. Thus the structural argument below is invoked only after both
+doubled pairs have their first-simple physical lengths. For doubled `C4`, the
+two connectors remain arbitrary in their fixed opposite parities. No
+switching operation is used to alter a physical length.
 
 Fix a distinguished cyclic block `B`. Delete its edges. Every remaining
 component meets `B` in at most one vertex; otherwise a route in that component
@@ -209,15 +216,15 @@ rooted branch occurs only in `U`.
 
 ## 6. Item 4: `S_3+T^3`
 
-After the noncanonical DNN gate in Section 1, first inspect the minimal subtree
+After the longer-doubled-member DNN gate in Section 1, first inspect the minimal subtree
 from `S_3` to the triangles. If it contains an actual bridge, choose a farthest
 one before making any structural opening. Its complete descendant suffix is a
 nonempty all-triangle territory and is strict; its connected complement has
 rank at most five and is nonnegative. Hence every positive-route incidence is
 closed without paying a structural tree.
 
-Now the subtree is bridge-free. Inspect the owner class of a canonical physical
-opening of `S_3`. If it contains a triangle, performing that opening makes the
+Now the subtree is bridge-free. Inspect the owner class of the prescribed
+physical opening of `S_3`. If it contains a triangle, performing that opening makes the
 class a strict triangular territory and leaves a connected rank-at-most-five
 nonnegative complement. Thus we may assume that no external triangle is owned
 by an admissible structural opening.
@@ -228,8 +235,8 @@ leaves the other two triangle nodes connected to `S_3`. Boundary-open `T_3`,
 keeping its boundary cut upstream. The remainder of `T_3`, with every branch
 rooted away from that cut, is a nonempty tree `S` with `sigma(S)=-1`.
 
-For the canonical doubled triangle and the one-long all-odd `K4`, now perform
-the canonical structural opening. The opened vertex and its complete
+For the first-simple doubled triangle and the one-long all-odd `K4`, now
+perform the prescribed structural opening. The opened vertex and its complete
 descendant set form a nonempty tree `R`; physical path remnants stay with the
 retained side. The retained anchor `A` is respectively a four-triangle packet
 or a `D+TT` packet, so `sigma(A)>3`. Thus
@@ -241,8 +248,9 @@ have owners on opposite doubled sides. After the even connector is opened, the
 result is then neither one four-triangle shared-cut cluster nor one `D+TT`
 anchor; its available side estimate is only greater than two and cannot be
 charged for two trees a second time. Instead, before making the structural
-opening, let `H=G-S`. The graph `H` is exactly a canonical doubled-`C4` class
-`111` block plus two triangles in bridge-free direct/direct or direct/nested
+opening, let `H=G-S`. The graph `H` is exactly an exceptional-orbit
+doubled-`C4` block with first-simple doubled pairs and arbitrary fixed-parity
+connectors, plus two triangles in bridge-free direct/direct or direct/nested
 incidence. The owner-exact retained-packet theorem in input 6 applies to the
 whole induced territory and gives
 

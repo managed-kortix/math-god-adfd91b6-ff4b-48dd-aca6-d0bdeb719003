@@ -17,12 +17,16 @@ SOURCES = {
     "combined-theorem": (
         ROOT / "positive-square-energy/hexacyclic-general/"
         "multiblock-items1-7-combined-theorem-audit.md",
-        "7c9e6a371000283958d4d1eb7db0a181b4968fe50cf4a37fd8d7d26eddc43378",
+        "b25ec464400a99464f03d1f2c528b542307697140a6a29496dc3be92020fbd58",
     ),
     "items1-4": (
         ROOT / "positive-square-energy/hexacyclic-general/"
         "multiblock-items1-4-owner-exact-closure.md",
-        "49a24ebe705aecd9248224cc39c748041c0d6d4981a137f6daad6d93019a1cb1",
+        "4319c568f17f612fd0ba71ba57250e15c3f352a772d87b1ae13c6b36f41c7c13",
+    ),
+    "doubled-c4-owner-transport": (
+        ROOT / "research/doubled-c4-exceptional-owner-transport-verifier.py",
+        "15288382816208fd46c7e85eb3171f724739ba794b98c3b618e7fed7154fbe54",
     ),
     "items5-7": (
         ROOT / "positive-square-energy/hexacyclic-general/"
@@ -36,7 +40,7 @@ SOURCES = {
     ),
     "rank4-ledger": (
         ROOT / "all-tetracyclic-graphs/paper.tex",
-        "89e9b27d188e9e9f28f702d13799549218473eaac1805434a6fbb91a22af7374",
+        "70a931c28c8a8817e2c02818200885f73c532d9afe2c065831f2b3884d61160f",
     ),
     "k5e-ledger": (
         ROOT / "positive-square-energy/pentacyclic-general/"
@@ -145,9 +149,9 @@ EXPECTED_EXCLUDED_CLAIMS = (
 )
 
 MANIFEST_SCHEMA = "hexacyclic-multiblock-scope-conclusion-v1"
-EXPECTED_MANIFEST_SHA256 = "9539ecc104c0fa54c0292f4db7dcef2ed0f5f5227ecbac4f7e266d0c1179ccf7"
-EXPECTED_NORMAL_OUTPUT_SHA256 = "c5c363e788da0999c98e1ee428b2484a9b70f7ce3a36a8096e536b52cbde4f96"
-EXPECTED_OPTIMIZED_OUTPUT_SHA256 = "c5c363e788da0999c98e1ee428b2484a9b70f7ce3a36a8096e536b52cbde4f96"
+EXPECTED_MANIFEST_SHA256 = "4b4b483c3f019827d2e795dac77ea789765784a10da9496024c5f617e1ddbbb8"
+EXPECTED_NORMAL_OUTPUT_SHA256 = "ae41d55e2cd8d498462d2c43073ebc7bdc3e978fb15363a9423d1b96ebfcf769"
+EXPECTED_OPTIMIZED_OUTPUT_SHA256 = "ae41d55e2cd8d498462d2c43073ebc7bdc3e978fb15363a9423d1b96ebfcf769"
 
 EXPECTED_RANK5_DIRECT_EQUALITY = {
     "partition": (5, 1),
@@ -199,7 +203,7 @@ def check_sources(sources):
     require(set(sources) == {
         "combined-theorem", "items1-4", "items5-7", "theta-triangle",
         "rank4-ledger", "k5e-ledger", "k5e-sieve", "k22-fixture",
-        "k71-fixture",
+        "k71-fixture", "doubled-c4-owner-transport",
     },
             "source lock key set changed")
     for name, (path, digest) in sources.items():
@@ -218,7 +222,7 @@ def dependency_manifest(sources):
             "path": str(path.relative_to(ROOT)),
             "sha256": digest,
         })
-    require(len(records) == 9, "transitive dependency lock count changed")
+    require(len(records) == 10, "transitive dependency lock count changed")
     require(len({record["path"] for record in records}) == len(records),
             "transitive dependency paths overlap")
     return records
@@ -285,6 +289,20 @@ def check_conclusion(sources, global_claim=None, direct_equality=None):
             "combined theorem omits the rank-five equality-plus-triangle case")
     require("a closed direct row and contributes no packet residual" in theorem_text,
             "combined theorem leaves an equality-row residual")
+    transport_path, transport_digest = sources["doubled-c4-owner-transport"]
+    require(hashlib.sha256(transport_path.read_bytes()).hexdigest() == transport_digest,
+            "doubled-C4 owner-transport verifier changed")
+    optimize = ("-O",) if sys.flags.optimize else ()
+    completed = subprocess.run((sys.executable, *optimize, str(transport_path), "--emit"),
+                               check=False, capture_output=True, text=True)
+    require(completed.returncode == 0 and completed.stderr == "",
+            "doubled-C4 owner-transport verifier failed")
+    require(hashlib.sha256(completed.stdout.encode("ascii")).hexdigest() ==
+            "2b11fb34c05eace618796558f1220cd3e17d1aaac4c173609a04f7b18a6ce2b0",
+            "doubled-C4 owner-transport output changed")
+    require("switching_split: class 110=4; class 111=4" in completed.stdout and
+            "no switching operation" in completed.stdout,
+            "doubled-C4 owner-isomorphism acceptance ledger changed")
 
 
 def load_python(path):
@@ -487,7 +505,7 @@ def scope_conclusion_manifest(report, sources=None, global_claim=None,
         "multiblock": 10,
         "packets": 9,
         "presieve": 5,
-        "sources": 9,
+        "sources": 10,
         "rank5_structural": 3,
         "owner_cases": 12,
         "relation": ">=",
@@ -708,7 +726,7 @@ def acceptance_report(manifest_digest, rejected):
         "conclusion: s+(G)>=|V(G)|",
         "nonclaim: no strict, single-block, all-connected-hexacyclic, equality, or global result",
         "ledger: partitions=11 multiblock=10 packets=9 presieve=5 rank5-structural=3 owner-cases=12",
-        "transitive_dependency_locks: 9",
+        "transitive_dependency_locks: 10",
         f"canonical_scope_conclusion_manifest_sha256: {manifest_digest}",
         f"rejected_hostile_mutations: {rejected}",
     )) + "\n"
