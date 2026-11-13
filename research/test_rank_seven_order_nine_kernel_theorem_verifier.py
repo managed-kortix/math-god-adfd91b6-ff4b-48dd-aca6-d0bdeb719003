@@ -51,7 +51,7 @@ class OrderNineMasterHostileTest(unittest.TestCase):
                                      self.master.exact_int(value, "integer"))
 
     def test_dependency_registry_is_exact_complete_and_disjoint(self):
-        self.assertEqual(len(self.master.PYTHON_PINS), 14)
+        self.assertEqual(len(self.master.PYTHON_PINS), 15)
         self.assertEqual(len(self.master.DATA_PINS), 44)
         self.assertEqual(len(self.master.DOCUMENT_PINS), 8)
         registries = tuple(map(set, (self.master.PYTHON_PINS,
@@ -62,7 +62,7 @@ class OrderNineMasterHostileTest(unittest.TestCase):
         self.assertEqual(frozenset(self.master.DATA_PINS),
                          self.master.EXPECTED_DATA_PATHS)
         observed = self.master.audit_pins()
-        self.assertEqual(len(observed), 66)
+        self.assertEqual(len(observed), 67)
 
     def test_partition_rejects_gap_overlap_physical_and_type_laundering(self):
         mutations = []
@@ -190,6 +190,73 @@ class OrderNineMasterHostileTest(unittest.TestCase):
         self.assert_rejected(lambda:
                              self.master.audit_coarse_source_contract(
                                  atom_source=hostile))
+
+    def test_order_nine_scope_root_binds_residual_digests_and_complement(self):
+        root = self.master.validate_order_nine_scope_root(
+            deepcopy(self.master.ORDER_NINE_SCOPE_ROOT),
+            coarse_application=self.master.validate_coarse_application_chunks())
+        self.assertEqual(root["residual_row_total"], 2_835_895)
+        self.assertEqual(root["residual_physical_total"], 3_518_609)
+        self.assertEqual(root["coarse_owner_orbit_total"], 62_331_675)
+        self.assertEqual(root["parity_orbit_total"], 65_167_570)
+        self.assertEqual(root["residual_target_total"], 45_374_320)
+        self.assertEqual(root["target_encoding"],
+                         "rank-seven-order-nine-flat-six-field-target-jsonl-v1")
+        self.assertIs(type(root["target_indices"]), list)
+        self.assertEqual(root["target_indices"], list(range(16)))
+        self.assertTrue(root["coarse_residual_exact_complement"])
+
+    def test_scope_root_rejects_digest_complement_and_wire_mutations(self):
+        application = self.master.validate_coarse_application_chunks()
+        mutations = []
+        for field, value in (
+                ("residual_row_total", 1),
+                ("residual_source_index_sha256", "0" * 64),
+                ("residual_key_sha256", "0" * 64),
+                ("residual_flat_target_sha256", "0" * 64),
+                ("coarse_owner_orbit_total", 62_331_674),
+                ("parity_orbit_total", 65_167_569),
+                ("coarse_residual_exact_complement", False)):
+            hostile = deepcopy(self.master.ORDER_NINE_SCOPE_ROOT)
+            hostile[field] = value
+            mutations.append(hostile)
+        hostile = deepcopy(self.master.ORDER_NINE_SCOPE_ROOT)
+        hostile["target_indices"] = tuple(range(16))
+        mutations.append(hostile)
+        hostile = deepcopy(self.master.ORDER_NINE_SCOPE_ROOT)
+        hostile["extra"] = 0
+        mutations.append(hostile)
+        for hostile in mutations:
+            with self.subTest(hostile=hostile):
+                self.assert_rejected(lambda hostile=hostile:
+                    self.master.validate_order_nine_scope_root(
+                        hostile, coarse_application=application))
+
+    def test_generic_stage_ledger_cannot_self_label_synthetic_scope_root(self):
+        module = self.master.load_pinned_module(
+            self.master.STAGE_LEDGER, "rank7_o9_scope_root_hostile_stage_ledger")
+        row = (0, 1, 1, (0,), 1)
+        ledger = module.StageLedger((row,))
+        pin = module._boundary_receipt("lane", (row,), (row,), ())[0]
+        ledger.advance("lane", (row,), (), expected=pin)
+        accounting = ledger.finite_key_accounting()
+        self.assertFalse(accounting["order_nine_universe_root_authenticated"])
+        self.assertEqual(accounting["source_row_total"], 1)
+        self.assert_rejected(lambda:
+            self.master.validate_order_nine_scope_root(
+                accounting,
+                coarse_application=self.master.validate_coarse_application_chunks(),
+                stage_ledger_module=module))
+
+    def test_quick_manifest_separates_finite_and_analytic_statuses(self):
+        manifest = self.master.audit(full=False)
+        self.assertFalse(manifest["finite_order_nine_partition_authenticated"])
+        self.assertFalse(manifest["analytic_theorem_dependencies_reviewed"])
+        self.assertIn("scope root", manifest["finite_partition_status_reason"])
+        self.assertIn("review-policy artifact",
+                      manifest["analytic_review_status_reason"])
+        self.assertFalse(manifest["theorem_eligible"])
+        self.assertFalse(manifest["global_claim"])
 
     def test_target_equivalent_is_bookkeeping_not_materialized_keys(self):
         accounting = self.master.validate_target_accounting()

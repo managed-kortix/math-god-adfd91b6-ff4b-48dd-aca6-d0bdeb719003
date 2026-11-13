@@ -53,6 +53,7 @@ OBSTRUCTION = HERE / "rank-seven-order-nine-obstruction-branch-gram-verifier.py"
 ANALYTIC_LIFT = HERE / "rank-seven-conditional-analytic-lift-verifier.py"
 CENSUS_PRODUCER = EXPERIMENTS / "rank7_orders9_12_exact_residual_census.py"
 COARSE_ENGINE = EXPERIMENTS / "rank7_parity_coarse_digest_census.py"
+STAGE_LEDGER = HERE / "rank_seven_order_nine_stage_ledger.py"
 STRUCTURAL_OWNER = EXPERIMENTS / "rank7_order12_structural_owners.py"
 ATOM_RECOGNIZER = EXPERIMENTS / "rank7_order7_symbolic_atom_recognizer.py"
 COARSE_ATOM = HERE / "rank-seven-orders2-4-kernel-theorem-verifier.py"
@@ -88,6 +89,9 @@ PYTHON_PINS = {
     STRUCTURAL_OWNER: "ffd76058b58344ea066777bdfd6d29eaed154c8d8d243d2c37ddf942f9558c45",
     ATOM_RECOGNIZER: "10de4fb714c15756341a7dbddb5a4da9f8ce5e0393aacc9e9434d619ebce9734",
     COARSE_ATOM: "7332b98f7f0780faff038e758451bb53cdebbb6f4c90c3f0785649be5064ec7d",
+    # Generic accounting only.  Importing this source does not authenticate
+    # the order-nine scope root or any analytic lane implication.
+    STAGE_LEDGER: "d49027b2632d9f98ccfba32ca06ca524ba5ca6f977db17247432e2a7ae17f9bf",
 }
 
 CHUNK_SPECS = (
@@ -397,6 +401,136 @@ COARSE_CHUNK_TOTALS = (
     (10_142_304, 7_451_320, 7_104_226, 347_094, 465_235),
 )
 
+# Stable semantic registry for the exact order-nine residual scope.  This is a
+# closed expected value, not a receipt manufactured by StageLedger and not an
+# accepting-run output.  The three residual digests were derived independently
+# from the eight authenticated census chunks.  The chunk-registry digest binds
+# those exact raw/artifact sources and all per-chunk parity/coarse/residual
+# complement totals.  Physical coarse ownership is derived by the same exact
+# complement identity checked per kernel; it is not a materialized key stream.
+ORDER_NINE_SCOPE_ROOT_SCHEMA = "rank-seven-order-nine-residual-scope-root-v1"
+ORDER_NINE_SCOPE_ROOT_FIELDS = {
+    "schema", "kernel_order", "kernel_total", "parity_orbit_total",
+    "parity_physical_total", "coarse_owner_orbit_total",
+    "coarse_owner_physical_total", "residual_row_total",
+    "residual_physical_total", "residual_source_index_sha256",
+    "residual_key_sha256", "residual_target_total",
+    "residual_flat_target_sha256", "target_encoding",
+    "target_indices", "coarse_residual_exact_complement",
+    "per_kernel_complements_validated", "census_chunk_registry_sha256",
+}
+ORDER_NINE_SCOPE_ROOT = {
+    "schema": ORDER_NINE_SCOPE_ROOT_SCHEMA,
+    "kernel_order": 9,
+    "kernel_total": 4_495,
+    "parity_orbit_total": 65_167_570,
+    "parity_physical_total": 81_885_688,
+    "coarse_owner_orbit_total": 62_331_675,
+    "coarse_owner_physical_total": 78_367_079,
+    "residual_row_total": 2_835_895,
+    "residual_physical_total": 3_518_609,
+    "residual_source_index_sha256":
+        "e3d0066cdcb88cec40ce67e50f1252064f8532a876b17d88ee9f5a283146c86a",
+    "residual_key_sha256":
+        "cf1ff383eaf48c64d02cf106a6a5c7cd8420fbed3f68194962ef335c8adc12c4",
+    "residual_target_total": 45_374_320,
+    "residual_flat_target_sha256":
+        "7cdff26ea81a1e1084c8a1af22ce912290a393cb0941cf43ced1ecb020c4fb53",
+    "target_encoding": "rank-seven-order-nine-flat-six-field-target-jsonl-v1",
+    "target_indices": list(range(16)),
+    "coarse_residual_exact_complement": True,
+    "per_kernel_complements_validated": True,
+    "census_chunk_registry_sha256":
+        "91892eb7f6d4784e60c069888937f3385378a7f80bb08a12e9f9116f8a1ab711",
+}
+
+
+def expected_scope_chunk_registry() -> list[dict[str, Json]]:
+    """Return the independently fixed eight-chunk semantic source registry."""
+    ranges = ((0, 562), (562, 1124), (1124, 1686), (1686, 2248),
+              (2248, 2810), (2810, 3372), (3372, 3934), (3934, 4495))
+    result = []
+    for chunk_index, (kernel_range, totals) in enumerate(
+            zip(ranges, COARSE_CHUNK_TOTALS, strict=True)):
+        result.append({
+            "census_artifact_sha256": CHUNK_SPECS[chunk_index][1],
+            "census_raw_sha256": CHUNK_SPECS[chunk_index][0],
+            "chunk_index": chunk_index,
+            "coarse_owner_orbit_total": totals[2],
+            "kernel_range": list(kernel_range),
+            "kernel_total": kernel_range[1] - kernel_range[0],
+            "parity_orbit_total": totals[1],
+            "physical_row_total": totals[0],
+            "residual_orbit_total": totals[3],
+            "residual_physical_total": totals[4],
+        })
+    return result
+
+
+def validate_order_nine_scope_root(
+        observed: dict[str, Json], *,
+        coarse_application: dict[str, Json],
+        stage_ledger_module=None) -> dict[str, Json]:
+    """Exact-match the committed scope root against independently checked data.
+
+    The root is interpreted only after the complete per-kernel coarse/residual
+    application ledger has been validated.  Loading StageLedger is a separate
+    source/API pin: no generated StageLedger identity is accepted here as
+    evidence and this function constructs no StageLedger instance.
+    """
+    exact_fields(observed, ORDER_NINE_SCOPE_ROOT_FIELDS, "order-nine scope root")
+    require(canonical_bytes(observed) == canonical_bytes(ORDER_NINE_SCOPE_ROOT),
+            "order-nine scope root differs from immutable registry")
+    require(type(observed["target_indices"]) is list and
+            observed["target_indices"] == list(range(TARGETS_PER_RESIDUAL_ORBIT)),
+            "order-nine scope-root target-index wire type changed")
+    registry = expected_scope_chunk_registry()
+    require(sha256(canonical_bytes(registry)) ==
+            observed["census_chunk_registry_sha256"],
+            "order-nine scope chunk registry changed")
+    exact_fields(coarse_application, {
+        "kernel_total", "per_kernel_complements_validated", "physical_rows",
+        "parity_orbits", "coarse_owner_orbits", "residual_orbits",
+        "residual_physical_rows", "coarse_owner_keys_materialized",
+    }, "order-nine coarse application receipt")
+    require(coarse_application == {
+        "kernel_total": observed["kernel_total"],
+        "per_kernel_complements_validated": True,
+        "physical_rows": observed["parity_physical_total"],
+        "parity_orbits": observed["parity_orbit_total"],
+        "coarse_owner_orbits": observed["coarse_owner_orbit_total"],
+        "residual_orbits": observed["residual_row_total"],
+        "residual_physical_rows": observed["residual_physical_total"],
+        "coarse_owner_keys_materialized": False,
+    }, "order-nine scope root/coarse application mismatch")
+    require(observed["coarse_owner_orbit_total"] +
+            observed["residual_row_total"] == observed["parity_orbit_total"] and
+            observed["coarse_owner_physical_total"] +
+            observed["residual_physical_total"] == observed["parity_physical_total"] and
+            observed["residual_target_total"] ==
+            TARGETS_PER_RESIDUAL_ORBIT * observed["residual_row_total"] and
+            observed["residual_source_index_sha256"] ==
+            SOURCE_IDENTITY["universe_source_index_sha256"] and
+            observed["residual_key_sha256"] ==
+            SOURCE_IDENTITY["universe_key_sha256"] and
+            observed["residual_flat_target_sha256"] ==
+            PARTITION_TARGET_IDENTITY["universe_target_key_sha256"],
+            "order-nine scope root exact complement or residual identity changed")
+
+    if stage_ledger_module is None:
+        stage_ledger_module = load_pinned_module(
+            STAGE_LEDGER, "rank7_o9_master_generic_stage_ledger")
+    require(getattr(stage_ledger_module, "TARGET_ENCODING", None) ==
+            observed["target_encoding"] and
+            getattr(stage_ledger_module, "TARGET_INDICES", None) ==
+            tuple(observed["target_indices"]) and
+            getattr(stage_ledger_module, "ACCOUNTING_SCHEMA", None) ==
+            "rank-seven-order-nine-finite-key-accounting-v2" and
+            not hasattr(stage_ledger_module.StageLedger, "derive_bounded_premise") and
+            not hasattr(stage_ledger_module, "implication_record"),
+            "generic StageLedger source/API contract changed")
+    return deepcopy(observed)
+
 
 def fail(message: str) -> NoReturn:
     raise RuntimeError(message)
@@ -472,7 +606,7 @@ def audit_pins() -> dict[str, str]:
                 for right in registries[index + 1:]), "dependency registries overlap")
     require(frozenset(DATA_PINS) == EXPECTED_DATA_PATHS and len(DATA_PINS) == 44,
             "complete data registry path set changed")
-    require(len(PYTHON_PINS) == 14 and len(DOCUMENT_PINS) == 8 and len(CHUNK_SPECS) == 8,
+    require(len(PYTHON_PINS) == 15 and len(DOCUMENT_PINS) == 8 and len(CHUNK_SPECS) == 8,
             "dependency registry cardinality changed")
     observed = {}
     for path, expected in {**PYTHON_PINS, **DATA_PINS, **DOCUMENT_PINS}.items():
@@ -2390,6 +2524,23 @@ def quick_manifest(dependencies: dict[str, str], analytic: dict[str, Json],
             "coarse_atom_audit": coarse_atom,
             "dual_coarse_predicate_contract": dual_predicates,
             "stored_coarse_application_ledger": coarse_application,
+            "order_nine_scope_root": validate_order_nine_scope_root(
+                ORDER_NINE_SCOPE_ROOT, coarse_application=coarse_application),
+            "stage_ledger_dependency": {
+                "source_path": STAGE_LEDGER.relative_to(ROOT).as_posix(),
+                "source_sha256": PYTHON_PINS[STAGE_LEDGER],
+                "role": "pinned generic nonpromotional accounting dependency",
+                "order_nine_semantics_conferred": False,
+            },
+            "finite_order_nine_partition_authenticated": False,
+            "finite_partition_status_reason": (
+                "stable scope root and coarse/residual complement are authenticated, but "
+                "the isolated normal/-O structural pair and every pinned sequential "
+                "StageLedger boundary have not yet been executed by the master"),
+            "analytic_theorem_dependencies_reviewed": False,
+            "analytic_review_status_reason": (
+                "no accepted repository review-policy artifact exists; paper/source hashes "
+                "and external referee verdicts are not executable semantic proof nodes"),
             "target_accounting": target_accounting,
             "transfer_dependency_adapter": transfer_dependency_adapter,
             "residual_partition_orbits": PARTITION_ORBITS,
