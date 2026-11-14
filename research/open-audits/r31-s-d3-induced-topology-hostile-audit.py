@@ -66,7 +66,7 @@ SOURCES = {
     "pentacyclic_owner_model": (
         ROOT / "positive-square-energy/pentacyclic-general"
         / "four-residual-owner-exact-closure.md",
-        "b182d37b472808cc2c000e61958471bc6c998ade17e02ec8ea14f7329653cd46",
+        "22e7a9609e9cf70068ee2b511dfc084ffc4d6cfc1a436b76387a417efa740431",
     ),
 }
 
