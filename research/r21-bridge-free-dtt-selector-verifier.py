@@ -4,13 +4,26 @@
 The input contract is deliberately narrow: after the hostile rank-one side and
 all cyclic-hull K2 blocks have been handled elsewhere, the connected physical
 complement has exactly one diamond block D and four triangle blocks T0,...,T3.
-This verifier enumerates every possible block-cut incidence tree on those five
-labelled blocks, modulo rooted colour-preserving isomorphism, and finds a pair
-of triangles whose D--triangle hull contains no other cyclic block.  Since the
-contract is bridge-free, that hull also contains no K2 block.
+Payload-only block-cut branches have already been pruned from the minimal
+cyclic hull.  Physical port assignments project to the incidence skeleton and
+are immaterial to the selector; this program does not count port orbits.
 
-This does not prove the preceding bridge cascade, any spectral packet bound, or
-a rank-seven closure.
+Completeness of the finite generator is elementary.  If c cut nodes remain,
+the bipartite incidence tree has 5+c nodes and 4+c edges.  Every retained cut
+has degree at least two, while the sum of cut degrees is 4+c; hence c<=4.
+Connectedness of five blocks gives c>=1.  Conversely, every state is a
+connected (4+c)-edge subset of K_(5,c), subject only to cut degree at least two
+and the physical port capacities deg(D)<=4 and deg(T_i)<=3.  Such a connected
+subgraph has |V|-1 edges and is therefore a tree.  The generator enumerates
+exactly these subsets.  Rooted AHU recursion with unique marked-block colours
+and one common cut colour is a complete rooted colour-preserving isomorphism
+invariant, so set-deduplication by its code loses only cut-node relabellings.
+
+For each canonical state the verifier finds a pair of triangles whose minimal
+D--triangle hull contains no other cyclic block.  Since the contract is
+bridge-free, that hull also contains no K2 block.  This does not prove the
+preceding bridge cascade, any spectral packet bound, induced territory
+ownership, or a rank-seven closure.
 """
 
 from __future__ import annotations
@@ -79,9 +92,19 @@ def canonical_code(parent: tuple[int, ...], labels: tuple[str, ...]) -> str:
 
 def valid_incidence_tree(labels: tuple[str, ...],
                          graph: tuple[tuple[int, ...], ...]) -> bool:
-    # A physical block-cut graph is bipartite between block and cut nodes.
+    if (len(labels) < 6 or len(labels) > 9 or labels[:len(MARKED)] != MARKED
+            or any(label != CUT for label in labels[len(MARKED):])
+            or len(graph) != len(labels)):
+        return False
+    # A physical block-cut graph is undirected, simple, and bipartite between
+    # block and cut nodes.  Check symmetry explicitly so a malformed adjacency
+    # table cannot serve as a hostile witness.
     for node, neighbors in enumerate(graph):
+        if len(neighbors) != len(set(neighbors)):
+            return False
         for neighbor in neighbors:
+            if not (0 <= neighbor < len(graph)) or node not in graph[neighbor]:
+                return False
             if (labels[node] == CUT) == (labels[neighbor] == CUT):
                 return False
     # Suppress degree-one cuts: they are not articulation vertices.  Every cut
@@ -200,22 +223,24 @@ def expect_rejected(action, label: str) -> None:
 
 
 def hostile_checks(states: dict[str, tuple[tuple[int, ...], tuple[str, ...]]]) -> int:
-    # 1. Remove one marked triangle from the required inventory.
-    omitted_labels = ("D", "T0", "T1", "T2", CUT)
-    expect_rejected(
-        lambda: require(omitted_labels[:len(MARKED)] == MARKED,
-                        "marked cyclic inventory changed"),
-        "marked triangle omitted")
+    # 1. Replace one required triangle by an untyped block while retaining a
+    # syntactically valid star adjacency.
+    labels = ("D", "T0", "T1", "T2", "X", CUT)
+    star = ((5,), (5,), (5,), (5,), (5,), (0, 1, 2, 3, 4))
+    expect_rejected(lambda: require(valid_incidence_tree(labels, star),
+                                    "marked cyclic inventory changed"),
+                    "marked triangle omitted")
 
-    # 2. Admit a cut node of degree one.
-    labels = (*MARKED, CUT)
-    graph = ((5,), (5,), (5,), (5,), (5,), (0,))
+    # 2. Admit a symmetric connected tree with a cut node of degree one.
+    labels = (*MARKED, CUT, CUT)
+    graph = ((5, 6), (6,), (6,), (6,), (6,), (0,), (0, 1, 2, 3, 4))
     expect_rejected(lambda: require(valid_incidence_tree(labels, graph),
                                     "degree-one cut admitted"),
                     "degree-one cut")
 
     # 3. Admit a block--block edge (the common way a K2 connector is laundered
     # into a purported shared-cut skeleton).
+    labels = (*MARKED, CUT)
     graph = ((1, 5), (0,), (5,), (5,), (5,), (0, 2, 3, 4))
     expect_rejected(lambda: require(valid_incidence_tree(labels, graph),
                                     "non-bipartite incidence admitted"),
