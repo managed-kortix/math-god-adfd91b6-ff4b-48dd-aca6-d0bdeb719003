@@ -76,14 +76,14 @@ The only odd-cardinality collections of pairwise vertex-disjoint cycles are
 the four singleton triangles and the collection of all three petals.  The
 grouped Sachs expansion therefore gives
 
-`Im Psi_(A_4)(t)=-2 sum_(j=0)^3 Z_(A_4-Tj)(t)+8 Z_F(t)`.         (2)
+`Im Psi_(A_4)(t)=-2 sum_(j=0)^3 Z_(A_4-V(Tj))(t)+8 Z_F(t)`.         (2)
 
 Deleting `T0` leaves the three independent private petal edges.  They are
 pairwise disjoint and disjoint from `F`.  Given any matching counted by
 `Z_F(t)`, adjoin an arbitrary subset of those three edges.  This is a
 weight-preserving injection and gives the exact bound
 
-`Z_(A_4-T0)(t)>=(1+t^2)^3 Z_F(t)>Z_F(t)`.                       (3)
+`Z_(A_4-V(T0))(t)>=(1+t^2)^3 Z_F(t)>Z_F(t)`.                       (3)
 
 For `i in {1,2,3}`, let `H_i` be the subgraph induced by
 
@@ -96,7 +96,7 @@ and the empty matching supplies the positive term `t^6`).  Taking the union of
 a matching of `H_i` and a matching of `F` gives a weight-preserving product
 injection, and therefore
 
-`Z_(A_4-Ti)(t)>=Z_(H_i)(t)Z_F(t)>Z_F(t)` for `i=1,2,3`.          (4)
+`Z_(A_4-V(Ti))(t)>=Z_(H_i)(t)Z_F(t)>Z_F(t)` for `i=1,2,3`.          (4)
 
 Additional edges from the displayed subgraphs to arbitrary one-root forests
 are simply ignored; they cannot destroy an injected matching.  Thus no forest
@@ -130,15 +130,22 @@ tree.
 **Proof.**  A component meets `B` because `G` is connected.  Suppose a
 component `K` met `B` in distinct vertices.  Take a path in `K` whose endpoints
 `a,b` are two consecutive visits to `B` and whose internal vertices lie
-outside `B`.  This is a nontrivial `B`-ear.  Two internally disjoint `a`--`b`
-paths in the vertex-biconnected block `B`, together with that ear, lie in one
-larger vertex-biconnected subgraph.  This contradicts the maximality of the
-physical block `B`.  Hence every component meets `B` exactly once.  This
-proves uniqueness, the partition, and induced connectedness.  Since `B` is
-2-connected, `B-x` is connected; every other fibre stays attached at its
-unique vertex of `B-x`, so `G-F_x` is connected.  Finally a connected fibre
-with no positive-rank maximal block is acyclic and nonempty because it
-contains `x`; hence it is a tree.  QED.
+outside `B`.  This is a nontrivial open `B`-ear.  Adjoining an open ear to a
+vertex-biconnected graph preserves vertex-biconnectivity, so `B` together with
+that ear would be a vertex-biconnected subgraph strictly containing the
+maximal physical block `B`, a contradiction.  Hence every component meets
+`B` exactly once.
+
+A component is induced in `G-E(B)`.  If an edge of `G` with both endpoints in
+`F_x` were absent there, it would lie in `E(B)`, so both endpoints would lie in
+`V(B)`.  But `F_x ∩ V(B)={x}`, and the graph is loopless.  Thus the component
+is exactly the connected induced graph `G[F_x]`, and the fibres form a vertex
+partition.  Moreover `V(G)-F_x` is the union of the other fibres.  Each is
+connected and contains its unique owner `y in V(B)-{x}`, while the
+vertex-biconnected graph `B-x` is connected.  Their union is therefore exactly
+the connected induced complement `G-F_x`.  Finally a connected fibre with no
+positive-rank maximal block is acyclic and nonempty because it contains `x`;
+hence it is a tree.  QED.
 
 The complete fibre in Lemma 2 is the only object called an owner fibre below.
 A boundary-open triangle territory is different: its entry cut remains on the
@@ -198,7 +205,7 @@ induced complement is connected by Lemma 2 and has rank
 
 `beta(G-F_x)=2+(4-q)=6-q in {2,3,4,5}`.                         (6)
 
-The completed connected theorem through rank six gives
+The applicable connected nonnegativity theorem for ranks two through six gives
 `sigma(G-F_x)>=0`.  Superadditivity with (5) closes the row strictly:
 
 `sigma(G)>=sigma(G[F_x])+sigma(G-F_x)>0`.                       (7)
@@ -235,15 +242,17 @@ induced tree, so
 
 The first `B`-owner of `Q` is not in `I`, for otherwise its fibre would contain
 `Q` and Case B would apply.  Hence `S` lies in a fibre different from `T`; in
-particular `S cap T` is empty.  Lemma 2 and the boundary construction show
+particular `S ∩ T` is empty.  Lemma 2 and the boundary construction show
 that
 
 `R=G-(S union T)`
 
 is connected.  The two remnants of `E` remain in `R`, not in `T`.
 
-Now choose any actual edge `e` of the odd connector `O`.  In `R`, the two
-remnants of `E` end at `v` and hence no longer join its endpoint sides.  Thus
+Now choose any actual edge `e` of the odd connector `O`.  After `v` is
+deleted, `E-v` has two endpoint-rooted remnants terminating at the neighbours
+formerly adjacent to `v`; those remnants no longer join its endpoint sides.
+Thus
 `O` is the sole route in `B-v` between the two doubled fibres.  No off-`B`
 component supplies another route, by Lemma 2.  Therefore `e` is a bridge of
 `R`.  Delete `e` only to identify its two vertex components and call their
@@ -316,25 +325,58 @@ QED.
 
 ## Verification contract
 
-Run
+Run the independent full-parent combinatorial prerequisite and then the
+analytic adjacency verifier:
 
 ```text
+python3 research/r31-s-physical-parent-gate-verifier.py
+python3 -O research/r31-s-physical-parent-gate-verifier.py
 python3 research/r31-s-physical-parent-verifier.py
 python3 -O research/r31-s-physical-parent-verifier.py
 ```
 
-The executable starts from physical adjacency.  It reconstructs Tarjan edge
-blocks, the unique rank-three block and four actual triangle blocks, the full
-block--cut tree, the cyclic hull, complete first-`B` fibres, the deepest
-boundary-open `S`, the complete even-connector fibre `T`, and the two components
-`U,V` of an actual odd-connector bridge after `T` is opened.  It explicitly generates the 423 canonical no-hull-bridge four-triangle
+The first executable is imported byte-for-byte from standalone commit
+`937ec059a3819fb87517b014012f9397b529c1d1` (source SHA-256
+`05c070f7552b804d9ca23a8987bc83e8547105266ca0f2e7756dd5034136f09c`).
+It physically realizes all 423 bridge-free clean parents before the 110-output
+quotient, dispatches 423 bridge-route variants, proves the arbitrary-site count
+`N(m)=[z^4](1+z+2z^2+5z^3+13z^4)^m`, and checks recursive `TREE` and
+`BRIDGE_ROUTE` payload invariants.  Its scope remains combinatorial: it makes
+no spectral closure claim.
+
+The second executable starts from physical adjacency.  After Tarjan it independently
+suppresses every maximal internally-degree-two path of the unique rank-three
+block, checks the exact six-path edge and vertex partition, reconstructs the
+four degree-three branch vertices and doubled-`C4` endpoint multiplicities,
+requires doubled lengths `{1,2}`, derives the eight-row isomorphism orbit, and
+derives both connector roles from their actual unbounded lengths.  There is no
+total-edge whitelist: the connector quantifier is the parametric statement
+`E=2+2a`, `O=1+2b`, with every `1<=j<E` opening and `0<=k<O` odd-edge cut.
+No reconstructed geometry is accepted back from a caller: connector interiors,
+connector-fibre dispatch, and the residual split each receive the authenticated
+physical block and rederive its geometry internally.  Thus every accepted
+geometry-sensitive API has no row, path-list, branch-label, owner-label, or
+prebuilt-geometry parameter.  Fixture-only constructors are outside that
+surface.  A hostile fixed-adjacency replay fabricates stale row/path side data,
+leaves it statically unreachable, and requires the adjacency-derived geometry,
+connector-fibre dispatch, and `S/T/U/V` interpretation to be byte-identical.  The executable also reconstructs the
+four actual triangle blocks, the full block--cut tree, the
+cyclic hull, complete first-`B` fibres, the deepest boundary-open `S`, the
+complete even-connector fibre `T`, and the two components `U,V` of an actual
+odd-connector bridge after `T` is opened.  It explicitly generates the 423
+canonical no-hull-bridge four-triangle
 parent incidences over the six clean physical owners, applies the deterministic
 deepest-`Q` opening, and recomputes the 110 outputs and their preimage
 multiplicities.  It then realizes every output on all eight physical anchors,
 reruns Tarjan on those adjacencies, transports actual rooted-tree probes, and
-checks arbitrary connector remnants.  Its hostile adjacency
-fixtures force Case A and Case B before Case C and distinguish the rank formulas
-`7-q` and `6-q`.
+checks arbitrary connector remnants, including the valid connector lengths
+`12` and `11`.  Separate otherwise-valid hostiles authenticate the two inverse
+predicates: one has a doubled pair of lengths `{2,2}` while retaining opposite
+connector parity, and one retains both doubled pairs `{1,2}` while making the
+connectors the same parity.  A combined masked mutation is checked in addition,
+not in place of those independent tests.  Other hostile adjacency fixtures
+force Case A and Case B before Case C and distinguish the rank formulas `7-q`
+and `6-q`.
 
 This theorem closes the physical `R31-S` packet.  It does not by itself repair
 or certify generic hull-bridge sentences elsewhere in the rank-seven
@@ -351,7 +393,11 @@ The proof uses exactly the following established inputs.
    cyclomatic rank over positive-rank blocks.
 3. Induced square-energy superadditivity and `sigma(tree)=-1` for every
    nonempty tree.
-4. The completed connected nonnegativity theorem through cyclomatic rank six.
+4. The completed connected nonnegativity theorems for cyclomatic ranks two
+   through six.  In particular the rank-two Case-B complement imports
+   `all-bicyclic-graphs/paper.tex` at SHA-256
+   `56a2b521ed0fee18d7e34ebb330e5b181e00979805fca951398f7a33d35b19da`;
+   the executable pins it alongside the rank-three through rank-six sources.
 5. Positive credit for a connected triangular block graph containing a
    triangle (used in the two early dispatches).
 6. The packing-two half-plane theorem, grouped Sachs expansion, continuous

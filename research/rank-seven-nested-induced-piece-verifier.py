@@ -23,7 +23,7 @@ SOURCES = {
     ),
     "ledger": (
         ROOT / "positive-square-energy/heptacyclic-general/rank-seven-multiblock-debit-ledger.md",
-        "c7d10f3d22938bb43436531254cd8f3d5ebc5841411475827a13d023368f55e4",
+        "3f8bb3a397125782dd6c9cae26ce52f9c6bf826e3136dfee62781048e65c18a5",
     ),
     "two-debit": (
         ROOT / "positive-square-energy/heptacyclic-general/two-debit-induced-piece-theorem.md",

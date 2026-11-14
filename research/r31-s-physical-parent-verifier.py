@@ -11,10 +11,12 @@ connector claims are checked only after the finite physical adjacency gate.
 from __future__ import annotations
 
 import hashlib
+import inspect
 import itertools
 import subprocess
 import sys
 from collections import Counter, defaultdict
+from dataclasses import dataclass
 from pathlib import Path
 
 
@@ -35,6 +37,75 @@ def expect_rejection(action, label):
     raise AuditError(f"hostile physical mutation accepted: {label}")
 
 
+@dataclass(frozen=True)
+class BGeometry:
+    """Private adjacency-derived geometry of the physical rank-three block."""
+
+    branches: frozenset
+    doubled: tuple
+    even_doubled: tuple
+    connectors: tuple
+    even_connector: tuple
+    odd_connector: tuple
+    owners: frozenset
+    all_paths: tuple
+    path_edge_sets: frozenset
+    anchor_rows: tuple
+    anchor_multiplicities: tuple
+
+
+@dataclass(frozen=True)
+class ParentInventory:
+    """Private fresh Tarjan inventory; never accepted from a caller."""
+
+    vertices: frozenset
+    edges: frozenset
+    B: frozenset
+    triangles: tuple
+    blocks: tuple
+    geometry: BGeometry
+
+
+@dataclass(frozen=True)
+class BoundaryCandidate:
+    """One member of the full adjacency-derived deepest-triangle set."""
+
+    triangle: frozenset
+    cut: object
+    S: frozenset
+    retained_triangles: tuple
+
+
+@dataclass(frozen=True)
+class SplitOutcome:
+    """Private physical split used by equivariance hostiles."""
+
+    opened_vertex: object
+    T: frozenset
+    sides: tuple
+    ranks: tuple
+
+
+@dataclass(frozen=True)
+class ParentCertificate:
+    """Label-free result of the sole accepted production API."""
+
+    case: str
+    geometry: tuple
+    eligible: int
+    outcomes: tuple
+
+
+@dataclass(frozen=True)
+class ImportedTheorem:
+    """One semantically named analytic input, not an inert hash entry."""
+
+    theorem_id: str
+    source_path: str
+    sha256: str
+    used_by: tuple
+
+
 ROOT = Path(__file__).resolve().parents[1]
 ENDPOINTS = ((0, 1), (0, 1), (1, 2), (2, 3), (2, 3), (3, 0))
 DOUBLED = ((0, 1), (3, 4))
@@ -44,36 +115,94 @@ ANCHORS = (
     "010011", "010101", "011010", "011100",
     "100011", "100101", "101010", "101100",
 )
-# The proof bytes authenticated by this structural gate.  The universal
-# rank<=4 statement is proved in the new theorem note itself; the first source
-# below supplies its exact packing-two and central/petal matching injections.
-PINNED_SOURCES = {
-    "packing-two-square-energy/paper.tex":
+# Every imported analytic theorem has a semantic identifier and an explicit
+# use site in the three-way dispatch.  Hashing this registry is not a proof of
+# those theorems, but it prevents an unrelated prose file from masquerading as
+# the named dependency.  Structural facts proved in this note/gate (Tarjan,
+# owner fibres, rank arithmetic, and the r<=4 injection lemma) are not imports.
+IMPORTED_THEOREMS = (
+    ImportedTheorem(
+        "packing-two-half-plane",
+        "packing-two-square-energy/paper.tex",
         "9638f6847892e8a043454d945e7945418ec96e393b639dfd65f664670dba8791",
-    "all-rank-triangle-hostile-cacti/paper.tex":
+        ("Lemma1:r<=3", "Lemma1:r=4-packing<=2", "Lemma1:central-petal-injections"),
+    ),
+    ImportedTheorem(
+        "triangular-cactus-strict-credit",
+        "all-rank-triangle-hostile-cacti/paper.tex",
         "caa2c85d0416bd12bbbfd179f04bef9fe3293b83bca025acc6a2e83e53037230",
-    "all-tricyclic-graphs/paper.tex":
+        ("CaseA:away-side", "CaseB:connector-fibre"),
+    ),
+    ImportedTheorem(
+        "connected-rank-two-nonnegativity",
+        "all-bicyclic-graphs/paper.tex",
+        "56a2b521ed0fee18d7e34ebb330e5b181e00979805fca951398f7a33d35b19da",
+        ("CaseB:complement-rank2",),
+    ),
+    ImportedTheorem(
+        "connected-rank-three-nonnegativity",
+        "all-tricyclic-graphs/paper.tex",
         "4abf3ffa1e09148c060969f4055d878334af9b7358d0764ac42f5e0ffb236b02",
-    "all-tetracyclic-graphs/paper.tex":
+        ("CaseA:B-side-rank3", "CaseB:complement-rank3"),
+    ),
+    ImportedTheorem(
+        "connected-rank-four-nonnegativity",
+        "all-tetracyclic-graphs/paper.tex",
         "70a931c28c8a8817e2c02818200885f73c532d9afe2c065831f2b3884d61160f",
-    "all-pentacyclic-graphs/paper.tex":
-        "37d8f872b52b780944287ccc4dd62cb791140cc4416de5f723e170944bbef9ca",
-    "all-hexacyclic-graphs/paper.tex":
-        "d58aac0a5af738a2de5a17ccde9351706f30500314d849e8fbc8159c1821b8a3",
-    "research/r31-s-doubled-c4-marked-cut-verifier.py":
+        ("CaseA:B-side-rank4", "CaseB:complement-rank4"),
+    ),
+    ImportedTheorem(
+        "connected-rank-five-nonnegativity",
+        "all-pentacyclic-graphs/paper.tex",
+        "8ce140b07dc1428656b4ffd914305f2b14b49a0555cd13a6fc87be0fd4246a18",
+        ("CaseA:B-side-rank5", "CaseB:complement-rank5"),
+    ),
+    ImportedTheorem(
+        "connected-rank-six-nonnegativity",
+        "all-hexacyclic-graphs/paper.tex",
+        "0e7a2db2932d38a4b4909831c34050553afc0973869fe937eb510cb59421bda7",
+        ("CaseA:B-side-rank6",),
+    ),
+    ImportedTheorem(
+        "r31-marked-cut-structural-prerequisite",
+        "research/r31-s-doubled-c4-marked-cut-verifier.py",
         "b14e7544bd8f5298fd425c68228e5fb4f5c49071dd3a7ec773ee5de610630c71",
+        ("R31-S:upstream-DNN-route",),
+    ),
+)
+
+EXPECTED_IMPORT_USES = {
+    "Lemma1:r<=3", "Lemma1:r=4-packing<=2",
+    "Lemma1:central-petal-injections", "CaseA:away-side",
+    "CaseA:B-side-rank3", "CaseA:B-side-rank4",
+    "CaseA:B-side-rank5", "CaseA:B-side-rank6",
+    "CaseB:connector-fibre", "CaseB:complement-rank2",
+    "CaseB:complement-rank3", "CaseB:complement-rank4",
+    "CaseB:complement-rank5", "R31-S:upstream-DNN-route",
 }
+
 
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def audit_pins():
-    for relative, expected in PINNED_SOURCES.items():
-        path = ROOT / relative
-        require(path.is_file() and digest(path) == expected,
-                f"pinned source changed: {relative}")
+def audit_imported_theorems():
+    theorem_ids = [entry.theorem_id for entry in IMPORTED_THEOREMS]
+    source_paths = [entry.source_path for entry in IMPORTED_THEOREMS]
+    uses = [use for entry in IMPORTED_THEOREMS for use in entry.used_by]
+    require(len(theorem_ids) == len(set(theorem_ids)),
+            "imported theorem identifier duplicated")
+    require(len(source_paths) == len(set(source_paths)),
+            "one source ambiguously owns two imported theorem records")
+    require(set(uses) == EXPECTED_IMPORT_USES and len(uses) == len(set(uses)),
+            "semantic theorem-use registry is incomplete or ambiguous")
+    for entry in IMPORTED_THEOREMS:
+        require(entry.used_by and all(type(use) is str and use for use in entry.used_by),
+                f"imported theorem has no semantic use: {entry.theorem_id}")
+        path = ROOT / entry.source_path
+        require(path.is_file() and digest(path) == entry.sha256,
+                f"imported theorem source changed: {entry.theorem_id}")
 
 
 def edge(u, v):
@@ -180,7 +309,13 @@ def block_beta(block):
     return len(block) - len(vertices) + 1
 
 
-def physical_core(row, connector_increments=(0, 0)):
+def fixture_build_core_adjacency(row, connector_increments=(0, 0)):
+    """Test-fixture constructor; return only physical adjacency.
+
+    ``row`` is used to manufacture a graph, never accepted by inventory or any
+    dispatch.  In particular, the local path ordering is intentionally not
+    exposed to the verification pipeline.
+    """
     require(row in ANCHORS, "row outside the physical exceptional orbit")
     require(len(connector_increments) == 2 and
             all(type(x) is int and x >= 0 for x in connector_increments),
@@ -189,29 +324,223 @@ def physical_core(row, connector_increments=(0, 0)):
     for i, e in enumerate(CONNECTORS):
         base[e] += 2 * connector_increments[i]
     vertices = {("branch", v) for v in range(4)}
-    edges, paths = set(), []
+    edges = set()
     for e, ((u, v), length) in enumerate(zip(ENDPOINTS, base)):
         path = [("branch", u)]
         path += [("path", e, j) for j in range(1, length)]
         path += [("branch", v)]
         vertices.update(path)
         edges.update(edge(x, y) for x, y in zip(path, path[1:]))
-        paths.append(tuple(path))
-    return set(vertices), set(edges), tuple(paths), tuple(base)
+    return set(vertices), set(edges)
 
 
-def row_geometry(row, paths):
-    even_doubled = tuple(next(e for e in pair if row[e] == "0") for pair in DOUBLED)
-    require(all(sum(row[e] == "0" for e in pair) == 1 for pair in DOUBLED),
-            "doubled fibre is not first-simple odd/even")
-    even_connector = next(e for e in CONNECTORS if row[e] == "0")
-    require(sum(row[e] == "0" for e in CONNECTORS) == 1,
-            "connectors do not have opposite parity")
-    odd_connector = next(e for e in CONNECTORS if e != even_connector)
-    owners = {("branch", v) for v in range(4)} | {
-        paths[e][1] for e in even_doubled
+def fixture_path(index, length):
+    """Builder-only path name formula; never a verifier input."""
+    u, v = ENDPOINTS[index]
+    return (("branch", u),) + tuple(("path", index, j)
+                                    for j in range(1, length)) + (("branch", v),)
+
+
+def fixture_lengths(row, connector_increments=(0, 0)):
+    base = [1 if bit == "1" else 2 for bit in row]
+    for i, index in enumerate(CONNECTORS):
+        base[index] += 2 * connector_increments[i]
+    return tuple(base)
+
+
+def fixture_clean_owners(row):
+    """Construction-only roots for realizing the finite incidence fixtures."""
+    even_doubled = tuple(next(index for index in pair if row[index] == "0")
+                         for pair in DOUBLED)
+    return {("branch", v) for v in range(4)} | {
+        ("path", index, 1) for index in even_doubled
     }
-    return even_doubled, even_connector, odd_connector, owners
+
+
+def trace_B_path(Badj, start, neighbor, branches):
+    """Trace one maximal branch-to-branch path in the actual Tarjan block."""
+    path = [start, neighbor]
+    previous, current = start, neighbor
+    while current not in branches:
+        require(len(Badj[current]) == 2, "B path interior does not have degree two")
+        following = next(iter(Badj[current] - {previous}))
+        require(following not in path, "B path repeats a vertex")
+        path.append(following)
+        previous, current = current, following
+    require(current != start, "B path returns to its initial branch")
+    return tuple(path)
+
+
+def path_edge_set(path):
+    return frozenset(edge(a, b) for a, b in zip(path, path[1:]))
+
+
+def path_length(path):
+    return len(path) - 1
+
+
+def canonical_path(path):
+    reverse = tuple(reversed(path))
+    return min((tuple(path), reverse), key=repr)
+
+
+def abstract_geometry_signature(geometry):
+    """Label-free doubled/connector role signature."""
+    require(type(geometry) is BGeometry, "signature received non-B geometry")
+    doubled_lengths = tuple(sorted(
+        tuple(sorted(path_length(path) for path in members))
+        for members in geometry.doubled))
+    return (
+        doubled_lengths,
+        path_length(geometry.even_connector),
+        path_length(geometry.odd_connector),
+        geometry.anchor_rows,
+        geometry.anchor_multiplicities,
+    )
+
+
+
+def _reconstruct_B_geometry(B):
+    """Authenticate the exceptional doubled-C4 geometry from ``B`` alone.
+
+    ``B`` must be the maximal rank-three block returned by Tarjan.  No row,
+    path list, branch label, or owner label is accepted as theorem input.
+    (The suppressed doubled-C4 kernel is cubic, so its four branch vertices
+    have degree three in the simple physical subdivision.)
+    """
+    Bvertices = block_vertices(B)
+    Badj = adjacency(Bvertices, B)
+    branches = {v for v in Bvertices if len(Badj[v]) != 2}
+    require(len(branches) == 4 and all(len(Badj[v]) == 3 for v in branches),
+            "B does not have exactly four degree-three branch vertices")
+    require(all(len(Badj[v]) in (2, 3) for v in Bvertices),
+            "B has a non-path internal degree")
+
+    # Trace each branch half-edge.  Canonicalize an undirected path by its
+    # physical edge set, so this does not depend on vertex names or sorting.
+    by_edges = {}
+    for start in branches:
+        for neighbor in Badj[start]:
+            path = trace_B_path(Badj, start, neighbor, branches)
+            key = path_edge_set(path)
+            require(key not in by_edges or by_edges[key] == tuple(reversed(path)),
+                    "B path was not traced consistently from both endpoints")
+            by_edges.setdefault(key, path)
+    paths = tuple(by_edges.values())
+    require(len(paths) == 6, "B does not decompose into six branch paths")
+    path_edges = tuple(path_edge_set(path) for path in paths)
+    require(set().union(*(set(es) for es in path_edges)) == set(B) and
+            sum(map(len, path_edges)) == len(B),
+            "six B paths do not partition the actual B edges")
+    interiors = [set(path[1:-1]) for path in paths]
+    require(not any(interiors[i] & interiors[j] for i in range(6)
+                    for j in range(i)), "B path interiors overlap")
+    require(set().union(*interiors, branches) == set(Bvertices),
+            "branch paths do not partition the actual B vertices")
+
+    by_pair = defaultdict(list)
+    for path in paths:
+        by_pair[frozenset((path[0], path[-1]))].append(path)
+    require(all(len(pair) == 2 for pair in by_pair),
+            "a kernel path does not have two distinct branch endpoints")
+    doubled = {pair: tuple(members) for pair, members in by_pair.items()
+               if len(members) == 2}
+    singles = {pair: members[0] for pair, members in by_pair.items()
+               if len(members) == 1}
+    require(len(by_pair) == 4 and len(doubled) == 2 and len(singles) == 2 and
+            sorted(map(len, by_pair.values())) == [1, 1, 2, 2],
+            "B kernel multiplicities are not two doubled/two singleton")
+    doubled_pairs = tuple(doubled)
+    require(doubled_pairs[0].isdisjoint(doubled_pairs[1]) and
+            set().union(*(set(pair) for pair in doubled_pairs)) == branches,
+            "doubled kernel pairs are not opposite")
+    singleton_pairs = tuple(singles)
+    require(singleton_pairs[0].isdisjoint(singleton_pairs[1]) and
+            set().union(*(set(pair) for pair in singleton_pairs)) == branches,
+            "singleton connectors are not the complementary matching")
+    # This also proves that the suppressed endpoint multigraph is the required
+    # four-cycle with the two opposite sides doubled.
+    require(all(sum(branch in pair for pair in by_pair) == 2
+                for branch in branches),
+            "kernel endpoint pairs do not form a four-cycle")
+
+    require(all(sorted(path_length(path) for path in members) == [1, 2]
+                for members in doubled.values()),
+            "a doubled fibre is not exactly first-simple lengths {1,2}")
+    connector_paths = tuple(singles.values())
+    connector_lengths = tuple(path_length(path) for path in connector_paths)
+    require(sum(length % 2 == 0 for length in connector_lengths) == 1,
+            "actual singleton connectors do not have opposite parity")
+    even_connector = next(path for path in connector_paths
+                          if path_length(path) % 2 == 0)
+    odd_connector = next(path for path in connector_paths
+                         if path_length(path) % 2 == 1)
+    require(path_length(even_connector) >= 2,
+            "even connector has no internal vertex")
+    even_doubled_paths = tuple(
+        next(path for path in members if path_length(path) == 2)
+        for members in doubled.values())
+    owners = branches | {path[1] for path in even_doubled_paths}
+    require(len(owners) == 6, "derived clean-owner set is not six vertices")
+
+    # Derive, rather than trust, the labelled eight-anchor orbit.  Enumerate
+    # every endpoint-compatible isomorphism from the canonical doubled-C4
+    # multigraph.  Parallel members are deliberately distinguishable here.
+    rows = set()
+    branch_tuple = tuple(branches)
+    witnesses = []
+    for branch_image in itertools.permutations(branch_tuple):
+        choices = []
+        for u, v in ENDPOINTS:
+            pair = frozenset((branch_image[u], branch_image[v]))
+            choices.append(tuple(by_pair.get(pair, ())))
+        if any(not choice for choice in choices):
+            continue
+        for labelled_paths in itertools.product(*choices):
+            if len({path_edge_set(path) for path in labelled_paths}) != 6:
+                continue
+            row = "".join(str(path_length(path) % 2) for path in labelled_paths)
+            rows.add(row)
+            witnesses.append((branch_image, labelled_paths, row))
+    require(rows == set(ANCHORS),
+            "adjacency-derived anchor orbit is not the genuine eight-row orbit")
+    require(len(witnesses) == 16 and
+            all(sum(witness[2] == row for witness in witnesses) == 2
+                for row in ANCHORS),
+            "adjacency-derived anchor isomorphism multiplicities changed")
+
+    return BGeometry(
+        branches=frozenset(branches),
+        doubled=tuple(doubled.values()),
+        even_doubled=even_doubled_paths,
+        connectors=connector_paths,
+        even_connector=even_connector,
+        odd_connector=odd_connector,
+        owners=frozenset(owners),
+        all_paths=paths,
+        path_edge_sets=frozenset(path_edges),
+        anchor_rows=tuple(sorted(rows)),
+        anchor_multiplicities=tuple(sorted(
+            (row, sum(witness[2] == row for witness in witnesses))
+            for row in rows)),
+    )
+
+
+def raw_kernel_groups(B):
+    """Hostile-test observation before length/parity predicates are applied."""
+    Badj = adjacency(block_vertices(B), B)
+    branches = {v for v in block_vertices(B) if len(Badj[v]) == 3}
+    require(len(branches) == 4 and
+            all(len(Badj[v]) in (2, 3) for v in block_vertices(B)),
+            "raw hostile kernel does not have the cubic subdivision profile")
+    paths = {path_edge_set(path): path
+             for start in branches for neighbor in Badj[start]
+             for path in (trace_B_path(Badj, start, neighbor, branches),)}
+    require(len(paths) == 6, "raw hostile kernel does not have six paths")
+    groups = defaultdict(list)
+    for path in paths.values():
+        groups[frozenset((path[0], path[-1]))].append(path)
+    return groups
 
 
 def attach_triangle(vertices, edges, root, label):
@@ -235,7 +564,10 @@ def canonical_triangle_block(block):
     return len(block) == 3 and len(block_vertices(block)) == 3 and block_beta(block) == 1
 
 
-def identify_inventory(vertices, edges):
+def _reconstruct_parent(vertices, edges):
+    """Private fresh Tarjan reconstruction from physical adjacency only."""
+    vertices = frozenset(vertices)
+    edges = frozenset(edges)
     blocks = tarjan_edge_blocks(vertices, edges)
     positive = [b for b in blocks if block_beta(b) > 0]
     rank3 = [b for b in positive if block_beta(b) == 3]
@@ -244,8 +576,9 @@ def identify_inventory(vertices, edges):
             "physical positive-block inventory is not B+four K3s")
     require(beta(vertices, edges) == 7, "full parent is not rank seven")
     B = rank3[0]
-    require(len(B) in (9, 11, 13, 15, 17), "unexpected subdivided B edge count")
-    return B, tuple(triangles), blocks
+    geometry = _reconstruct_B_geometry(B)
+    return ParentInventory(vertices, edges, B, tuple(triangles), blocks, geometry)
+
 
 
 def block_cut_graph(vertices, edges):
@@ -286,7 +619,7 @@ def tree_path(nodes, links, source, target):
     return tuple(reversed(result))
 
 
-def cyclic_hull(vertices, edges, B, triangles):
+def _cyclic_hull(vertices, edges, B, triangles):
     blocks, cuts, nodes, links = block_cut_graph(vertices, edges)
     bindex = blocks.index(B)
     terminals = {("block", bindex)} | {("block", blocks.index(t)) for t in triangles}
@@ -299,7 +632,7 @@ def cyclic_hull(vertices, edges, B, triangles):
     return blocks, cuts, nodes, links, frozenset(hull_nodes), tuple(hull_bridges)
 
 
-def first_B_fibres(vertices, edges, B):
+def _first_B_fibres(vertices, edges, B):
     Bv = block_vertices(B)
     remaining = set(edges) - set(B)
     comps = components(vertices, remaining)
@@ -327,7 +660,7 @@ def triangle_count_in(part, triangles):
     return sum(block_vertices(t) <= set(part) for t in triangles)
 
 
-def orient_hull_bridge(vertices, edges, B, triangles, bridge_block):
+def _orient_hull_bridge(vertices, edges, B, triangles, bridge_block):
     require(len(bridge_block) == 1, "nonbridge block in bridge dispatch")
     bridge_edge = next(iter(bridge_block))
     sides = components(vertices, set(edges) - {bridge_edge})
@@ -351,15 +684,38 @@ def orient_hull_bridge(vertices, edges, B, triangles, bridge_block):
     return q, 7 - q
 
 
-def connector_interior(paths, even_connector, odd_connector):
-    return tuple(paths[even_connector][1:-1] + paths[odd_connector][1:-1])
+def _connector_interior(B):
+    """Return connector interiors from an actual block (private diagnostic)."""
+    geometry = _reconstruct_B_geometry(B)
+    return tuple(geometry.even_connector[1:-1] +
+                 geometry.odd_connector[1:-1])
 
 
-def connector_fibre_dispatch(vertices, edges, B, triangles, paths,
-                              even_connector, odd_connector):
-    fibres, _ = first_B_fibres(vertices, edges, B)
+def _authenticated_geometry(inventory):
+    """Validate the sealed fresh inventory before any downstream use."""
+    require(type(inventory) is ParentInventory and
+            type(inventory.geometry) is BGeometry,
+            "structural helper received an unsealed inventory")
+    require(inventory.B in inventory.blocks,
+            "sealed inventory B is not one of its fresh Tarjan blocks")
+    require(inventory.geometry.path_edge_sets ==
+            frozenset(path_edge_set(path) for path in inventory.geometry.all_paths) and
+            set().union(*(set(item) for item in inventory.geometry.path_edge_sets)) ==
+            set(inventory.B),
+            "sealed geometry no longer partitions its authenticated B")
+    return inventory.geometry
+
+
+def _connector_fibre_dispatch(inventory):
+    """Private Case-B dispatch consuming only a sealed fresh inventory."""
+    geometry = _authenticated_geometry(inventory)
+    vertices, edges = inventory.vertices, inventory.edges
+    B, triangles = inventory.B, inventory.triangles
+    fibres, _ = _first_B_fibres(vertices, edges, B)
+    interiors = tuple(geometry.even_connector[1:-1] +
+                      geometry.odd_connector[1:-1])
     dispatched = []
-    for x in connector_interior(paths, even_connector, odd_connector):
+    for x in interiors:
         fibre = fibres[x]
         q = triangle_count_in(fibre, triangles)
         if q:
@@ -378,7 +734,7 @@ def connector_fibre_dispatch(vertices, edges, B, triangles, paths,
     return tuple(dispatched)
 
 
-def rooted_block_data(vertices, edges, B, triangles):
+def _rooted_block_data(vertices, edges, B, triangles):
     blocks, cuts, nodes, links = block_cut_graph(vertices, edges)
     root = ("block", blocks.index(B))
     adj = adjacency(nodes, links)
@@ -396,32 +752,50 @@ def rooted_block_data(vertices, edges, B, triangles):
     return blocks, nodes, links, parent, depth, tri_nodes
 
 
-def boundary_open_deepest(vertices, edges, B, triangles):
-    blocks, nodes, links, parent, depth, tri_nodes = rooted_block_data(
+def _boundary_open_candidates(inventory):
+    """Return every maximum-depth boundary opening from a sealed inventory."""
+    _authenticated_geometry(inventory)
+    vertices, edges = inventory.vertices, inventory.edges
+    B, triangles = inventory.B, inventory.triangles
+    blocks, nodes, links, parent, depth, tri_nodes = _rooted_block_data(
         vertices, edges, B, triangles)
-    qnode = min(tri_nodes, key=lambda n: (-depth[n], repr(block_vertices(blocks[n[1]]))))
-    cnode = parent[qnode]
-    require(cnode is not None and cnode[0] == "cut", "deepest triangle has no parent cut")
-    c = cnode[1]
-    qvertices = block_vertices(blocks[qnode[1]])
-    private = set(qvertices) - {c}
-    require(len(private) == 2, "deepest K3 does not have two private vertices")
-    # Deleting c, take the component containing Q-c.  This is the complete
-    # boundary-open away territory; c and all siblings stay upstream.
-    without = set(vertices) - {c}
-    comps = components(without, induced_edges(without, edges))
-    containing = [part for part in comps if private <= part]
-    require(len(containing) == 1, "Q-c private vertices separated")
-    S = containing[0]
-    require(connected(S, induced_edges(S, edges)) and
-            beta(S, induced_edges(S, edges)) == 0,
-            "deepest boundary-open territory is not a nonempty induced tree")
-    complement = set(vertices) - set(S)
-    require(connected(complement, induced_edges(complement, edges)),
-            "boundary-open complement disconnected")
-    retained = tuple(t for t in triangles if not (block_vertices(t) <= set(S) | {c}))
-    require(len(retained) == 3, "boundary opening did not remove exactly one triangle")
-    return qnode, c, S, retained
+    max_depth = max(depth[node] for node in tri_nodes)
+    result = []
+    for qnode in tri_nodes:
+        if depth[qnode] != max_depth:
+            continue
+        cnode = parent[qnode]
+        require(cnode is not None and cnode[0] == "cut",
+                "deepest triangle has no parent cut")
+        c = cnode[1]
+        triangle = blocks[qnode[1]]
+        qvertices = block_vertices(triangle)
+        private = set(qvertices) - {c}
+        require(len(private) == 2, "deepest K3 does not have two private vertices")
+        # Deleting c, take the component containing Q-c.  This is the complete
+        # boundary-open away territory; c and all siblings stay upstream.
+        without = set(vertices) - {c}
+        comps = components(without, induced_edges(without, edges))
+        containing = [part for part in comps if private <= part]
+        require(len(containing) == 1, "Q-c private vertices separated")
+        S = containing[0]
+        require(connected(S, induced_edges(S, edges)) and
+                beta(S, induced_edges(S, edges)) == 0,
+                "deepest boundary-open territory is not a nonempty induced tree")
+        complement = set(vertices) - set(S)
+        require(connected(complement, induced_edges(complement, edges)),
+                "boundary-open complement disconnected")
+        retained = tuple(t for t in triangles
+                         if not (block_vertices(t) <= set(S) | {c}))
+        require(len(retained) == 3,
+                "boundary opening did not remove exactly one triangle")
+        result.append(BoundaryCandidate(triangle, c, S, retained))
+    require(result, "no deepest boundary candidate reconstructed")
+    # Edge sets are label-independent identities; order is semantically inert.
+    require(len({candidate.triangle for candidate in result}) == len(result),
+            "deepest boundary candidate duplicated")
+    return tuple(result)
+
 
 
 def triangle_blocks_of(vertices, edges):
@@ -453,38 +827,51 @@ def shared_cut_certificate(vertices, edges, expected_rank):
     return len(positive)
 
 
-def residual_split(vertices, edges, B, triangles, paths, even_connector,
-                   odd_connector, S, retained_triangles, open_position=None,
-                   cut_position=None):
-    fibres, owner = first_B_fibres(vertices, edges, B)
-    even_path = paths[even_connector]
-    odd_path = paths[odd_connector]
-    open_position = (len(even_path) // 2 if open_position is None else open_position)
-    require(1 <= open_position < len(even_path) - 1, "opening is not connector-internal")
-    v = even_path[open_position]
-    T = fibres[v]
-    require(set(S).isdisjoint(T), "boundary-open S overlaps complete connector fibre T")
+def _residual_split(inventory, candidate, opened_vertex, odd_edge):
+    """Private split on actual vertex/edge witnesses from fresh reconstruction."""
+    require(type(inventory) is ParentInventory and
+            type(candidate) is BoundaryCandidate,
+            "private split received non-inventory objects")
+    geometry = _authenticated_geometry(inventory)
+    vertices, edges = inventory.vertices, inventory.edges
+    B, triangles = inventory.B, inventory.triangles
+    even_path = geometry.even_connector
+    odd_path = geometry.odd_connector
+    even_internal = frozenset(even_path[1:-1])
+    odd_edges = frozenset(edge(a, b) for a, b in zip(odd_path, odd_path[1:]))
+    require(opened_vertex in even_internal,
+            "opening witness is not an actual even-connector interior vertex")
+    require(type(odd_edge) is frozenset and odd_edge in odd_edges,
+            "cut witness is not an actual odd-connector edge")
+    require(candidate in _boundary_open_candidates(inventory),
+            "boundary candidate is not in the fresh adjacency-derived eligible set")
+    S = candidate.S
+    retained_triangles = candidate.retained_triangles
+    fibres, _ = _first_B_fibres(vertices, edges, B)
+    T = fibres[opened_vertex]
+    require(set(S).isdisjoint(T),
+            "boundary-open S overlaps complete connector fibre T")
     require(beta(T, induced_edges(T, edges)) == 0 and
             connected(T, induced_edges(T, edges)),
             "connector-clean complete fibre T is not a nonempty induced tree")
     R = set(vertices) - set(S) - set(T)
     require(connected(R, induced_edges(R, edges)), "G-(S union T) disconnected")
 
-    cut_position = (0 if cut_position is None else cut_position)
-    require(0 <= cut_position < len(odd_path) - 1, "bad actual odd-edge position")
-    cut = edge(odd_path[cut_position], odd_path[cut_position + 1])
-    require(cut in edges and cut <= R, "odd cut is not an actual retained edge")
+    require(odd_edge in edges and odd_edge <= R,
+            "odd cut is not an actual retained edge")
     redges = induced_edges(R, edges)
-    require(cut in bridges(R, redges), "odd connector edge is not a bridge after opening T")
-    sides = components(R, redges - {cut})
+    require(odd_edge in bridges(R, redges),
+            "odd connector edge is not a bridge after opening T")
+    sides = components(R, redges - {odd_edge})
     require(len(sides) == 2, "odd-edge cut did not produce exactly U,V")
     # The components of deleting a bridge are induced vertex sides in the
     # original graph; reinserted cut crosses them and no other edge is omitted.
     require(all(induced_edges(side, edges) == induced_edges(side, redges)
                 for side in sides), "U/V side is not induced")
     require(set().union(*map(set, sides), set(S), set(T)) == set(vertices) and
-            set(S).isdisjoint(T) and all(set(S).isdisjoint(side) and set(T).isdisjoint(side)
-                                        for side in sides),
+            set(S).isdisjoint(T) and
+            all(set(S).isdisjoint(side) and set(T).isdisjoint(side)
+                for side in sides),
             "S,T,U,V are not disjoint and exhaustive")
     ranks = tuple(beta(side, induced_edges(side, edges)) for side in sides)
     require(all(1 <= r <= 4 for r in ranks) and sum(ranks) == 5,
@@ -493,8 +880,82 @@ def residual_split(vertices, edges, B, triangles, paths, even_connector,
             "retained external triangles lost before U/V split")
     for side, rank in zip(sides, ranks):
         shared_cut_certificate(side, induced_edges(side, edges), rank)
-    return v, T, tuple(sides), ranks
+    return SplitOutcome(opened_vertex, T, tuple(sides), ranks)
 
+
+def _case_c_witness_records(inventory):
+    """Enumerate the full witness product, retaining witness identities."""
+    require(type(inventory) is ParentInventory,
+            "Case-C witnesses require a fresh private inventory")
+    geometry = _authenticated_geometry(inventory)
+    candidates = _boundary_open_candidates(inventory)
+    openings = tuple(geometry.even_connector[1:-1])
+    cuts = tuple(edge(a, b) for a, b in
+                 zip(geometry.odd_connector, geometry.odd_connector[1:]))
+    require(openings and cuts, "Case-C witness set is empty")
+    records = tuple(
+        (candidate, opened_vertex, odd_edge,
+         _residual_split(inventory, candidate, opened_vertex, odd_edge))
+        for candidate in candidates
+        for opened_vertex in openings
+        for odd_edge in cuts
+    )
+    require(len(records) == len(candidates) * len(openings) * len(cuts),
+            "Case-C witness product was not exhaustive")
+    return candidates, records
+
+
+def _case_c_outcomes(inventory):
+    """Check every deepest Q, even opening vertex, and odd connector edge."""
+    candidates, records = _case_c_witness_records(inventory)
+    return candidates, tuple(record[3] for record in records)
+
+
+def _label_free_case_c_summary(inventory, candidates, outcomes):
+    """Canonical multiset of eligible outcomes; contains no vertex identity."""
+    geometry = inventory.geometry
+    rank_profiles = Counter(tuple(sorted(outcome.ranks)) for outcome in outcomes)
+    side_orders = Counter(tuple(sorted(map(len, outcome.sides))) for outcome in outcomes)
+    tree_orders = Counter(len(outcome.T) for outcome in outcomes)
+    boundary_orders = Counter(len(candidate.S) for candidate in candidates)
+    return (
+        abstract_geometry_signature(geometry),
+        len(candidates),
+        tuple(sorted(boundary_orders.items())),
+        len(outcomes),
+        tuple(sorted(rank_profiles.items())),
+        tuple(sorted(side_orders.items())),
+        tuple(sorted(tree_orders.items())),
+    )
+
+
+def verify_parent(vertices, edges):
+    """Sole accepted production API: adjacency in, label-free certificate out.
+
+    No block, triangle list, row, path, owner, side, geometry object, opening
+    index, or cut index can cross this boundary.  A fresh Tarjan inventory
+    dominates every private interpretation below.
+    """
+    inventory = _reconstruct_parent(vertices, edges)
+    hull = _cyclic_hull(inventory.vertices, inventory.edges,
+                        inventory.B, inventory.triangles)
+    hull_bridges = hull[-1]
+    if hull_bridges:
+        profiles = tuple(sorted(
+            _orient_hull_bridge(inventory.vertices, inventory.edges,
+                                inventory.B, inventory.triangles, bridge)
+            for bridge in hull_bridges))
+        return ParentCertificate("A", abstract_geometry_signature(inventory.geometry),
+                                 len(hull_bridges), profiles)
+    dispatched = _connector_fibre_dispatch(inventory)
+    if dispatched:
+        profiles = tuple(sorted((q, cr) for _, q, cr in dispatched))
+        return ParentCertificate("B", abstract_geometry_signature(inventory.geometry),
+                                 len(dispatched), profiles)
+    candidates, outcomes = _case_c_outcomes(inventory)
+    summary = _label_free_case_c_summary(inventory, candidates, outcomes)
+    return ParentCertificate("C", abstract_geometry_signature(inventory.geometry),
+                             len(candidates), summary)
 
 
 def forest_size(forest):
@@ -673,66 +1134,71 @@ def audit_case_c_records():
     profiles = Counter()
     physical_checks = 0
     rooted_probe_checks = 0
+    eligible_boundaries = 0
+    witness_checks = 0
     for row in ANCHORS:
         for record in canonical_records():
-            # Build the full physical B+four-triangle parent.  First realize
-            # the requested three-node output and then attach a fourth actual
-            # K3 below one deepest private vertex.  The boundary procedure must
-            # recover a deepest leaf from adjacency; no S payload is supplied.
+            # Build the full physical B+four-triangle parent.  Fixture labels
+            # are generation coordinates only and never cross verify_parent.
             retained = attachments_from_record(record)
-            vertices, edges, paths, lengths = physical_core(row)
-            _, even_connector, odd_connector, legal = row_geometry(row, paths)
+            vertices, edges = fixture_build_core_adjacency(row)
+            construction_legal = fixture_clean_owners(row)
             triangles = []
             roots = []
             actual = []
             for i, item in enumerate(retained):
                 if item[0] == "owner":
-                    root = sorted(legal, key=repr)[item[1]]
+                    root = sorted(construction_legal, key=repr)[item[1]]
                 else:
                     root = ("triangle", item[1], item[2])
                 roots.append(root)
                 triangles.append(attach_triangle(vertices, edges, root, i))
                 actual.append((root, i))
-            # Choose a deepest existing external block and attach Q below one
-            # private vertex.  This realizes every output shape as a physical
-            # full parent; the broader 423-parent census is audited separately.
-            # Compute depths in the current B+three graph using its actual
-            # Tarjan block-cut tree, then attach Q to a private vertex of one
-            # maximum-depth triangle.
+            # Fixture-only choice used to realize each historical output.  The
+            # production checker later enumerates every tied deepest block.
             blocks = tarjan_edge_blocks(vertices, edges)
             B = next(b for b in blocks if block_beta(b) == 3)
-            _, _, _, parent, depth, tri_nodes = rooted_block_data(
+            _, _, _, parent, depth, tri_nodes = _rooted_block_data(
                 vertices, edges, B, tuple(triangles))
-            target = min(tri_nodes, key=lambda n: (-depth[n], repr(block_vertices(blocks[n[1]]))))
+            target = min(tri_nodes,
+                         key=lambda n: (-depth[n],
+                                        repr(block_vertices(blocks[n[1]]))))
             target_block = blocks[target[1]]
             parent_cut = parent[target][1]
             qroot = min(set(block_vertices(target_block)) - {parent_cut}, key=repr)
             triangles.append(attach_triangle(vertices, edges, qroot, 3))
 
-            # Attach physical rooted-tree probes at every core/triangle owner;
-            # Tarjan/fibre/boundary logic must transport the entire branches.
-            for p, root in enumerate(sorted(set(legal) | {r for r, _ in actual} | {qroot}, key=repr)):
+            # Attach actual rooted-tree probes at every fixture owner.
+            probe_roots = sorted(set(construction_legal) |
+                                 {r for r, _ in actual} | {qroot}, key=repr)
+            for p, root in enumerate(probe_roots):
                 add_probe_tree(vertices, edges, root, (row, repr(record), p))
                 rooted_probe_checks += 1
 
-            B, found_triangles, _ = identify_inventory(vertices, edges)
-            _, _, _, _, _, hull_bridges = cyclic_hull(vertices, edges, B, found_triangles)
-            require(not hull_bridges, "shared-cut fixture unexpectedly has a hull bridge")
-            dispatched = connector_fibre_dispatch(
-                vertices, edges, B, found_triangles, paths, even_connector, odd_connector)
-            # The canonical retained records use only six nonconnector owners.
-            require(not dispatched, "clean 110 fixture entered connector dispatch")
-            _, _, S, retained_triangles = boundary_open_deepest(
-                vertices, edges, B, found_triangles)
-            _, T, sides, ranks = residual_split(
-                vertices, edges, B, found_triangles, paths, even_connector,
-                odd_connector, S, retained_triangles)
-            profiles[ranks] += 1
+            inventory = _reconstruct_parent(vertices, edges)
+            require(not _cyclic_hull(inventory.vertices, inventory.edges,
+                                     inventory.B, inventory.triangles)[-1],
+                    "shared-cut fixture unexpectedly has a hull bridge")
+            require(not _connector_fibre_dispatch(inventory),
+                    "clean 110 fixture entered connector dispatch")
+            candidates, outcomes = _case_c_outcomes(inventory)
+            eligible_boundaries += len(candidates)
+            witness_checks += len(outcomes)
+            for outcome in outcomes:
+                profiles[outcome.ranks] += 1
+            certificate = verify_parent(vertices, edges)
+            require(certificate.case == "C" and
+                    certificate.eligible == len(candidates),
+                    "production Case-C certificate changed")
             physical_checks += 1
-    require(physical_checks == 8 * 110, "physical Case-C record count changed")
-    require(all(a + b == 5 and 1 <= a <= 4 and 1 <= b <= 4 for a, b in profiles),
+    require(physical_checks == 8 * 110,
+            "physical Case-C record count changed")
+    require(all(a + b == 5 and 1 <= a <= 4 and 1 <= b <= 4
+                for a, b in profiles),
             "Case-C rank profile escaped 1+4/2+3/3+2/4+1")
-    return physical_checks, profiles, rooted_probe_checks
+    return (physical_checks, profiles, rooted_probe_checks,
+            eligible_boundaries, witness_checks)
+
 
 
 def count_full_parent_incidence():
@@ -746,17 +1212,16 @@ def count_full_parent_incidence():
 
 
 def make_connector_hostile():
-    V, E, paths, lengths = physical_core(BASE)
-    _, ec, oc, legal = row_geometry(BASE, paths)
-    v = paths[ec][1]
+    V, E = fixture_build_core_adjacency(BASE)
+    ec = next(index for index in CONNECTORS if BASE[index] == "0")
+    v = ("path", ec, 1)
     triangles = tuple(attach_triangle(V, E, v, i) for i in range(4))
-    return V, E, paths, triangles, ec, oc
+    return V, E, triangles
 
 
 def make_bridge_hostile():
-    V, E, paths, lengths = physical_core(BASE)
-    _, ec, oc, legal = row_geometry(BASE, paths)
-    y = paths[3][1]
+    V, E = fixture_build_core_adjacency(BASE)
+    y = ("path", 3, 1)
     z = ("bridge-hostile", "z")
     V.add(z); E.add(edge(y, z))
     t0 = attach_triangle(V, E, z, 0)
@@ -765,45 +1230,381 @@ def make_bridge_hostile():
     t1 = attach_triangle(V, E, a1, 1)
     t2 = attach_triangle(V, E, b1, 2)
     t3 = attach_triangle(V, E, y, 3)
-    return V, E, paths, (t0, t1, t2, t3), ec, oc
+    return V, E, (t0, t1, t2, t3)
+
+
+def subdivide_edge(vertices, edges, old_edge, count, label):
+    require(old_edge in edges and count >= 1, "bad hostile subdivision request")
+    u, v = tuple(old_edge)
+    new = [("hostile-subdivision", label, i) for i in range(count)]
+    require(not (set(new) & vertices), "hostile subdivision vertex collision")
+    vertices.update(new)
+    edges.remove(old_edge)
+    edges.update(edge(a, b) for a, b in zip([u] + new, new + [v]))
+
+
+def opaque_relabel(vertices, edges, seed):
+    """Relabel before production entry with opaque, hashable vertex objects."""
+    ordered = sorted(vertices, key=repr)
+    n = len(ordered)
+    # A seed-dependent affine permutation avoids preserving generation order.
+    step = next(k for k in range(2, n + 2)
+                if __import__("math").gcd(k, n) == 1)
+    shift = (7 * seed + 3) % n
+    permuted = [ordered[(step * i + shift) % n] for i in range(n)]
+    opaque = [OpaqueVertex(seed, i) for i in range(n)]
+    mapping = dict(zip(permuted, opaque))
+    relabelled_vertices = set(mapping.values())
+    original_edges = sorted(edges, key=lambda item: sorted(map(repr, item)))
+    if seed % 2:
+        original_edges.reverse()
+    relabelled_edges = {edge(mapping[u], mapping[v])
+                        for physical_edge in original_edges
+                        for u, v in (tuple(physical_edge),)}
+    require(len(relabelled_vertices) == len(vertices) and
+            len(relabelled_edges) == len(edges),
+            "opaque relabelling was not bijective")
+    return relabelled_vertices, relabelled_edges, mapping
+
+
+@dataclass(frozen=True)
+class OpaqueVertex:
+    """Hostile label with no tuple tags, subscripts, or constructor metadata."""
+
+    salt: int
+    serial: int
+
+
+def mapped_geometry_signature(original, relabelled, mapping):
+    """Compare semantic chain roles equivariantly, not by repr selection."""
+    def map_path(path):
+        return frozenset(mapping[vertex] for vertex in path)
+
+    original_doubled = frozenset(
+        frozenset(map_path(path) for path in members)
+        for members in original.doubled)
+    relabelled_doubled = frozenset(
+        frozenset(frozenset(path) for path in members)
+        for members in relabelled.doubled)
+    return (
+        frozenset(mapping[v] for v in original.branches) == relabelled.branches,
+        original_doubled == relabelled_doubled,
+        map_path(original.even_connector) == frozenset(relabelled.even_connector),
+        map_path(original.odd_connector) == frozenset(relabelled.odd_connector),
+        frozenset(mapping[v] for v in original.owners) == relabelled.owners,
+    )
+
+
+def mapped_candidate_counter(candidates, mapping):
+    """Map every eligible boundary object, including retained block identities."""
+    def map_block(block):
+        return frozenset(frozenset(mapping[v] for v in physical_edge)
+                         for physical_edge in block)
+
+    return Counter(
+        (map_block(candidate.triangle), mapping[candidate.cut],
+         frozenset(mapping[v] for v in candidate.S),
+         frozenset(map_block(block) for block in candidate.retained_triangles))
+        for candidate in candidates
+    )
+
+
+def mapped_witness_counter(records, mapping):
+    """Map the full deepest/open/cut product and all resulting S/T/U/V data."""
+    def map_edge(physical_edge):
+        return frozenset(mapping[v] for v in physical_edge)
+
+    def map_block(block):
+        return frozenset(map_edge(physical_edge) for physical_edge in block)
+
+    def map_candidate(candidate):
+        return (
+            map_block(candidate.triangle),
+            mapping[candidate.cut],
+            frozenset(mapping[v] for v in candidate.S),
+            frozenset(map_block(block) for block in candidate.retained_triangles),
+        )
+
+    return Counter(
+        (map_candidate(candidate), mapping[opened_vertex], map_edge(odd_edge),
+         frozenset(mapping[v] for v in outcome.T),
+         frozenset((frozenset(mapping[v] for v in side), rank)
+                   for side, rank in zip(outcome.sides, outcome.ranks)))
+        for candidate, opened_vertex, odd_edge, outcome in records
+    )
+
+
+def static_contract_audit():
+    """Reject alternate adjacency-bypassing routes in the executable AST."""
+    import ast
+
+    tree = ast.parse(Path(__file__).read_text(encoding="utf-8"))
+    functions = {node.name: node for node in tree.body
+                 if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))}
+    require(set(name for name in functions if name == "verify_parent") ==
+            {"verify_parent"}, "production verifier definition changed")
+    accepted = functions["verify_parent"]
+    require([arg.arg for arg in accepted.args.args] == ["vertices", "edges"] and
+            not accepted.args.defaults and not accepted.args.kw_defaults and
+            accepted.args.vararg is None and accepted.args.kwarg is None,
+            "production verifier gained hidden/default/variadic input")
+    calls = [node for node in ast.walk(accepted) if isinstance(node, ast.Call)]
+    reconstruct_calls = [node for node in calls
+                         if isinstance(node.func, ast.Name) and
+                         node.func.id == "_reconstruct_parent"]
+    require(len(reconstruct_calls) == 1 and
+            all(isinstance(arg, ast.Name) and arg.id in {"vertices", "edges"}
+                for arg in reconstruct_calls[0].args) and
+            not reconstruct_calls[0].keywords,
+            "production verifier is not dominated by one fresh adjacency reconstruction")
+    forbidden_calls = {"fixture_build_core_adjacency", "fixture_path",
+                       "fixture_lengths", "fixture_clean_owners", "opaque_relabel"}
+    require(not any(isinstance(node.func, ast.Name) and
+                    node.func.id in forbidden_calls for node in calls),
+            "production verifier calls a fixture/label constructor")
+    # Mutable defaults and closure-based caches are forbidden on the accepted
+    # transitive structural route.  The only memoized defaults are in the
+    # wholly separate finite incidence generator below.
+    structural = {"verify_parent", "_reconstruct_parent", "_reconstruct_B_geometry",
+                  "_connector_interior", "_authenticated_geometry",
+                  "_connector_fibre_dispatch",
+                  "_boundary_open_candidates", "_residual_split",
+                  "_case_c_witness_records", "_case_c_outcomes"}
+    for name in structural:
+        node = functions[name]
+        require(not node.args.defaults and not node.args.kw_defaults and
+                node.args.vararg is None and node.args.kwarg is None,
+                f"structural route has hidden/default/variadic input: {name}")
+    return len(structural)
+
+
+
+def audit_B_geometry_hostiles():
+    rejected = 0
+
+    # Contract A has one public theorem boundary.  Every other structural
+    # routine is private and receives an object created below that boundary.
+    require(tuple(inspect.signature(verify_parent).parameters) ==
+            ("vertices", "edges"),
+            "production parent API gained side metadata")
+    public_functions = [name for name, value in globals().items()
+                        if inspect.isfunction(value) and
+                        value.__module__ == __name__ and
+                        not name.startswith("_")]
+    require("verify_parent" in public_functions and
+            all(name not in {"reconstruct_parent", "connector_interior",
+                             "connector_fibre_dispatch", "residual_split",
+                             "boundary_open_deepest", "geometry_signature"}
+                for name in public_functions),
+            "a stale accepted structural wrapper was reintroduced")
+
+    # A length-one member of a doubled pair is changed physically to length
+    # three.  Inventory/rank alone still sees beta-three B + four K3s; the
+    # adjacency-derived six-path decomposition must reject the input.
+    V, E = fixture_build_core_adjacency(BASE)
+    triangles = tuple(attach_triangle(V, E, ("branch", 0), i) for i in range(4))
+    long_member = fixture_path(1, fixture_lengths(BASE)[1])
+    subdivide_edge(V, E, edge(long_member[0], long_member[-1]), 2,
+                   "long-doubled")
+    expect_rejection(lambda: verify_parent(V, E),
+                     "length-three doubled member accepted")
+    rejected += 1
+
+    # Independent doubled-length predicate: change only the length-one member
+    # to length two, leaving connector parity untouched.
+    V, E = fixture_build_core_adjacency(BASE)
+    triangles = tuple(attach_triangle(V, E, ("branch", 0), i) for i in range(4))
+    short_doubled = fixture_path(1, fixture_lengths(BASE)[1])
+    subdivide_edge(V, E, edge(short_doubled[0], short_doubled[-1]), 1,
+                   "independent-wrong-doubled")
+    rank3 = next(b for b in tarjan_edge_blocks(V, E) if block_beta(b) == 3)
+    endpoint_groups = raw_kernel_groups(rank3)
+    singleton_lengths = sorted(path_length(members[0])
+                               for members in endpoint_groups.values()
+                               if len(members) == 1)
+    require(singleton_lengths == [1, 2],
+            "independent doubled hostile changed connector parity")
+    expect_rejection(lambda: verify_parent(V, E),
+                     "independent {2,2} doubled pair accepted")
+    rejected += 1
+
+    # Independent connector-parity predicate: make both connectors even while
+    # keeping both doubled length multisets exactly {1,2}.
+    V, E = fixture_build_core_adjacency(BASE)
+    triangles = tuple(attach_triangle(V, E, ("branch", 0), i) for i in range(4))
+    wrong_parity_path = fixture_path(5, fixture_lengths(BASE)[5])
+    subdivide_edge(V, E, edge(wrong_parity_path[0], wrong_parity_path[-1]), 1,
+                   "wrong-parity")
+    rank3 = next(b for b in tarjan_edge_blocks(V, E) if block_beta(b) == 3)
+    endpoint_groups = raw_kernel_groups(rank3)
+    doubled_lengths = sorted(sorted(path_length(path) for path in members)
+                             for members in endpoint_groups.values()
+                             if len(members) == 2)
+    require(doubled_lengths == [[1, 2], [1, 2]],
+            "independent parity hostile changed doubled lengths")
+    expect_rejection(lambda: verify_parent(V, E),
+                     "same-parity connectors accepted")
+    rejected += 1
+
+    # Keep the old total edge count plausible while corrupting both roles.
+    V, E = fixture_build_core_adjacency(BASE)
+    triangles = tuple(attach_triangle(V, E, ("branch", 0), i) for i in range(4))
+    odd_connector = fixture_path(5, fixture_lengths(BASE)[5])
+    odd_doubled = fixture_path(1, fixture_lengths(BASE)[1])
+    subdivide_edge(V, E, edge(odd_connector[0], odd_connector[-1]), 1,
+                   "masked-wrong-parity")
+    subdivide_edge(V, E, edge(odd_doubled[0], odd_doubled[-1]), 1,
+                   "masked-wrong-doubled")
+    require(len(next(b for b in tarjan_edge_blocks(V, E)
+                     if block_beta(b) == 3)) == 11,
+            "masked malformed B edge count changed")
+    expect_rejection(lambda: verify_parent(V, E),
+                     "simultaneous {2,2} doubled/even-even connectors accepted")
+    rejected += 1
+
+    # Side metadata are absent, not reject-oracles.  Fabricating them cannot
+    # affect either invocation because only fixed adjacency crosses the public
+    # boundary.  This also compares the complete label-free Case-C certificate.
+    V, E = fixture_build_core_adjacency(BASE)
+    roots = sorted(fixture_clean_owners(BASE), key=repr)
+    triangles = tuple(attach_triangle(V, E, roots[i], i) for i in range(4))
+    stale_row = "not-an-anchor"
+    stale_paths = (("fabricated", "connector", "path"),) * 6
+    require(stale_row not in ANCHORS and stale_paths,
+            "stale metadata hostile was not actually corrupted")
+    certificate1 = verify_parent(V, E)
+    certificate2 = verify_parent(set(reversed(tuple(V))),
+                                 set(reversed(tuple(E))))
+    require(certificate1 == certificate2,
+            "absent stale metadata or insertion order changed the certificate")
+    rejected += 1
+
+    # Place an opaque-label barrier before the first production checker.  Use
+    # four tied deepest triangles and nontrivial connectors, then compare the
+    # mapped *full* deepest/open/cut witness multiset, not one repr-min choice.
+    # No constructor tuple, branch index, triangle ordering, or repr order may
+    # survive this barrier.
+    V, E = fixture_build_core_adjacency(BASE, (1, 1))
+    roots = sorted(fixture_clean_owners(BASE), key=repr)
+    triangles = tuple(attach_triangle(V, E, roots[i], i) for i in range(4))
+    original_inventory = _reconstruct_parent(V, E)
+    original_candidates, original_records = _case_c_witness_records(
+        original_inventory)
+    require(len(original_candidates) == 4 and len(original_records) == 4 * 3 * 3,
+            "opaque hostile does not exercise the full tied witness product")
+    original = verify_parent(V, E)
+    for seed in range(7):
+        relabelled_V, relabelled_E, mapping = opaque_relabel(V, E, seed)
+        relabelled_inventory = _reconstruct_parent(relabelled_V, relabelled_E)
+        relabelled_candidates, relabelled_records = _case_c_witness_records(
+            relabelled_inventory)
+        identity = {vertex: vertex for vertex in relabelled_V}
+        relabelled = verify_parent(relabelled_V, relabelled_E)
+        require(original == relabelled and
+                all(mapped_geometry_signature(original_inventory.geometry,
+                                              relabelled_inventory.geometry,
+                                              mapping)) and
+                mapped_candidate_counter(original_candidates, mapping) ==
+                mapped_candidate_counter(relabelled_candidates, identity) and
+                mapped_witness_counter(original_records, mapping) ==
+                mapped_witness_counter(relabelled_records, identity),
+                "opaque relabelling changed chain roles or full witness sets")
+    rejected += 1
+
+    # An added internal B chord changes the maximal Tarjan block/kernel shape.
+    V, E = fixture_build_core_adjacency(BASE)
+    triangles = tuple(attach_triangle(V, E, ("branch", 0), i) for i in range(4))
+    E.add(edge(fixture_path(0, fixture_lengths(BASE)[0])[1],
+               fixture_path(2, fixture_lengths(BASE)[2])[1]))
+    expect_rejection(lambda: verify_parent(V, E),
+                     "extra internal B edge/nonmaximal selected kernel accepted")
+    rejected += 1
+
+    # A subdivided K4 has the old rank/edge count but the wrong endpoint
+    # multigraph (six singleton pairs rather than 2,2,1,1).
+    V = {("hostile-k4", i) for i in range(4)}
+    E = {edge(("hostile-k4", i), ("hostile-k4", j))
+         for i in range(4) for j in range(i + 1, 4)}
+    for i, old_edge in enumerate(tuple(E)[:3]):
+        subdivide_edge(V, E, old_edge, 1, ("subdivided-k4", i))
+    triangles = tuple(attach_triangle(V, E, ("hostile-k4", i), i)
+                      for i in range(4))
+    rank3 = next(b for b in tarjan_edge_blocks(V, E) if block_beta(b) == 3)
+    require(len(rank3) == 9, "subdivided K4 hostile edge count changed")
+    expect_rejection(lambda: verify_parent(V, E),
+                     "subdivided K4 accepted as doubled-C4 B")
+    rejected += 1
+
+    # Removing an internal B edge must not select a nonmaximal subkernel.
+    V, E = fixture_build_core_adjacency(BASE)
+    triangles = tuple(attach_triangle(V, E, ("branch", 0), i) for i in range(4))
+    first_path = fixture_path(0, fixture_lengths(BASE)[0])
+    E.remove(edge(first_path[0], first_path[1]))
+    expect_rejection(lambda: verify_parent(V, E),
+                     "missing internal B edge/nonmaximal selected kernel accepted")
+    rejected += 1
+
+    # Valid lengths (12,11), hence |E(B)|=29, refute any finite whitelist.
+    V, E = fixture_build_core_adjacency(BASE, (5, 5))
+    triangles = tuple(attach_triangle(V, E, ("branch", 0), i) for i in range(4))
+    inventory = _reconstruct_parent(V, E)
+    geometry = inventory.geometry
+    require(len(inventory.B) == 29 and
+            sorted(map(path_length, geometry.connectors)) == [11, 12] and
+            path_length(geometry.even_connector) == 12 and
+            path_length(geometry.odd_connector) == 11 and
+            verify_parent(V, E).case == "C",
+            "unbounded valid connector geometry was not accepted")
+    return rejected
+
 
 
 def audit_priority_hostiles():
-    # Exact connector-owner mutation: n=15,m=21,beta=7.  Tarjan and actual
-    # first-B fibres must route q=4 before any deepest-Q/tree debit.
-    V, E, paths, triangles, ec, oc = make_connector_hostile()
+    # Exact connector-owner mutation: Tarjan and actual first-B fibres must
+    # route Case B before any boundary/tree debit.
+    V, E, triangles = make_connector_hostile()
     require((len(V), len(E), beta(V, E)) == (15, 21, 7),
             "connector hostile order/size/rank changed")
-    B, triangles, _ = identify_inventory(V, E)
-    _, _, _, _, _, hull_bridges = cyclic_hull(V, E, B, triangles)
-    require(not hull_bridges, "connector hostile invented a hull bridge")
-    dispatch = connector_fibre_dispatch(V, E, B, triangles, paths, ec, oc)
-    require(len(dispatch) == 1 and dispatch[0][1:] == (4, 2),
+    inventory = _reconstruct_parent(V, E)
+    require(not _cyclic_hull(inventory.vertices, inventory.edges,
+                             inventory.B, inventory.triangles)[-1],
+            "connector hostile invented a hull bridge")
+    dispatch = _connector_fibre_dispatch(inventory)
+    require(len(dispatch) == 1 and dispatch[0][1:] == (4, 2) and
+            verify_parent(V, E) == ParentCertificate(
+                "B", abstract_geometry_signature(inventory.geometry),
+                1, ((4, 2),)),
             "connector hostile was not dispatched as q=4/complement rank2")
+    candidates = _boundary_open_candidates(inventory)
+    opening = inventory.geometry.even_connector[1]
+    odd_cut = edge(inventory.geometry.odd_connector[0],
+                   inventory.geometry.odd_connector[1])
     expect_rejection(
-        lambda: residual_split(V, E, B, triangles, paths, ec, oc,
-                               boundary_open_deepest(V, E, B, triangles)[2],
-                               boundary_open_deepest(V, E, B, triangles)[3]),
+        lambda: _residual_split(inventory, candidates[0], opening, odd_cut),
         "partial connector fibre laundered as tree")
 
-    # Exact hull-bridge mutation: n=16,m=22,beta=7.  It must route the y-z
-    # adjacency edge first, with q=3 triangular away side and rank4 B side.
-    V, E, paths, triangles, ec, oc = make_bridge_hostile()
+    # Exact hull-bridge mutation must route Case A first, with q=3 and root 4.
+    V, E, triangles = make_bridge_hostile()
     require((len(V), len(E), beta(V, E)) == (16, 22, 7),
             "bridge hostile order/size/rank changed")
-    B, triangles, _ = identify_inventory(V, E)
-    _, _, _, _, _, hull_bridges = cyclic_hull(V, E, B, triangles)
-    require(len(hull_bridges) == 1, "bridge hostile hull bridge not reconstructed")
-    require(orient_hull_bridge(V, E, B, triangles, hull_bridges[0]) == (3, 4),
-            "bridge hostile ranks are not q=3/root4")
-    # Skipping Case A must fail the one-shared-cut-side check after a boundary
-    # opening; this mutation physically separates triangle clusters by y-z.
-    _, _, S, retained = boundary_open_deepest(V, E, B, triangles)
+    inventory = _reconstruct_parent(V, E)
+    hull_bridges = _cyclic_hull(inventory.vertices, inventory.edges,
+                                inventory.B, inventory.triangles)[-1]
+    require(len(hull_bridges) == 1 and
+            _orient_hull_bridge(inventory.vertices, inventory.edges,
+                                inventory.B, inventory.triangles,
+                                hull_bridges[0]) == (3, 4) and
+            verify_parent(V, E).case == "A",
+            "bridge hostile was not dispatched q=3/root4")
+    candidates = _boundary_open_candidates(inventory)
+    opening = inventory.geometry.even_connector[1]
+    odd_cut = edge(inventory.geometry.odd_connector[0],
+                   inventory.geometry.odd_connector[1])
     expect_rejection(
-        lambda: residual_split(V, E, B, triangles, paths, ec, oc, S, retained),
+        lambda: _residual_split(inventory, candidates[0], opening, odd_cut),
         "hull bridge skipped before shared-cut Case C")
 
-    # Swap the two rank formulas explicitly: both hostile graphs must reject.
+    # Swap the two rank formulas explicitly: both hostile assertions reject.
     expect_rejection(lambda: require(4 == 6 - 3, "swapped bridge formula"),
                      "bridge q/7-q replaced by q/6-q")
     expect_rejection(lambda: require(2 == 7 - 4, "swapped fibre formula"),
@@ -811,48 +1612,81 @@ def audit_priority_hostiles():
     return 4
 
 
-def audit_arbitrary_connectors():
+
+def audit_symbolic_connector_argument():
+    """Record the affine identities in the parametric Case-C proof.
+
+    Put ``E=2+2a`` and ``O=1+2b``, with arbitrary integers ``a,b>=0``.  If the
+    internal vertex at distance ``j`` from an endpoint of the E-edge path is
+    removed (``1<=j<E``), the two path remnants have ``j-1`` and ``E-j-1``
+    edges.  If odd-path edge ``k`` is removed (``0<=k<O``), its remnants have
+    ``k`` and ``O-k-1`` edges.  They are nonnegative on exactly those domains,
+    and their sums are respectively ``E-2`` and ``O-1``.  These formal affine
+    equalities contain no finite connector upper bound.
+
+    The executable does not pretend a finite loop proves that quantifier.  It
+    authenticates the graph-theoretic hypotheses physically in
+    ``residual_split``: complete even owner fibre, one B owner per off-B
+    component, and an actual odd-edge bridge for every tested position.
+    """
+    return "E=2+2a,O=1+2b; 1<=j<E; 0<=k<O"
+
+
+def audit_connector_regressions():
     checks = 0
+    certificate_checks = 0
     records = canonical_records()
-    # One representative of every shape on every anchor, +2 on both connector
-    # paths.  Every internal opening and every actual odd edge are checked.
     shape_rep = {kind: next(r for r in records if r[0] == kind)
                  for kind in ("direct3", "chain2+direct", "fork", "chain3")}
-    for row in ANCHORS:
-        for record in shape_rep.values():
-            retained = attachments_from_record(record)
-            vertices, edges, paths, lengths = physical_core(row, (1, 1))
-            _, ec, oc, legal = row_geometry(row, paths)
-            triangles = []
-            for i, item in enumerate(retained):
-                root = (sorted(legal, key=repr)[item[1]] if item[0] == "owner"
-                        else ("triangle", item[1], item[2]))
-                triangles.append(attach_triangle(vertices, edges, root, i))
-            # Add deepest Q as in the finite gate.
-            B = next(b for b in tarjan_edge_blocks(vertices, edges) if block_beta(b) == 3)
-            blocks, _, _, parent, depth, tri_nodes = rooted_block_data(
-                vertices, edges, B, tuple(triangles))
-            target = min(tri_nodes, key=lambda n: (-depth[n], repr(block_vertices(blocks[n[1]]))))
-            qroot = min(set(block_vertices(blocks[target[1]])) - {parent[target][1]}, key=repr)
-            triangles.append(attach_triangle(vertices, edges, qroot, 3))
-            B, triangles, _ = identify_inventory(vertices, edges)
-            _, _, S, retained_triangles = boundary_open_deepest(vertices, edges, B, triangles)
-            for open_position in range(1, len(paths[ec]) - 1):
-                for cut_position in range(len(paths[oc]) - 1):
-                    residual_split(vertices, edges, B, triangles, paths, ec, oc,
-                                   S, retained_triangles, open_position, cut_position)
-                    checks += 1
-    require(checks == 8 * 4 * 3 * 3,
-            "arbitrary connector-remnant check count changed")
-    return checks
+    # Include the old +2/+2 fixture and a long asymmetric 12/11 fixture.  The
+    # private witness product is taken only after fresh adjacency reconstruction.
+    for increments in ((1, 1), (5, 5)):
+        for row in ANCHORS:
+            for record in shape_rep.values():
+                retained = attachments_from_record(record)
+                vertices, edges = fixture_build_core_adjacency(row, increments)
+                construction_legal = fixture_clean_owners(row)
+                triangles = []
+                for i, item in enumerate(retained):
+                    root = (sorted(construction_legal, key=repr)[item[1]]
+                            if item[0] == "owner"
+                            else ("triangle", item[1], item[2]))
+                    triangles.append(attach_triangle(vertices, edges, root, i))
+                B = next(b for b in tarjan_edge_blocks(vertices, edges)
+                         if block_beta(b) == 3)
+                blocks, _, _, parent, depth, tri_nodes = _rooted_block_data(
+                    vertices, edges, B, tuple(triangles))
+                target = min(tri_nodes,
+                             key=lambda n: (-depth[n],
+                                            repr(block_vertices(blocks[n[1]]))))
+                qroot = min(set(block_vertices(blocks[target[1]])) -
+                            {parent[target][1]}, key=repr)
+                triangles.append(attach_triangle(vertices, edges, qroot, 3))
+                inventory = _reconstruct_parent(vertices, edges)
+                candidates, outcomes = _case_c_outcomes(inventory)
+                checks += len(outcomes)
+                certificate = verify_parent(vertices, edges)
+                require(certificate.case == "C" and
+                        certificate.eligible == len(candidates),
+                        "connector regression production certificate changed")
+                certificate_checks += 1
+    expected = 8 * 4 * (3 * 3 + 11 * 11)
+    require(checks == expected and certificate_checks == 2 * 8 * 4,
+            "connector regression check count changed")
+    return checks, certificate_checks
+
 
 
 def audit(run_hostile=True):
-    audit_pins()
+    audit_imported_theorems()
+    static_routes = static_contract_audit()
     parent_count, output_count, multiplicities = count_full_parent_incidence()
-    physical_checks, profiles, rooted_probes = audit_case_c_records()
-    remnant_checks = audit_arbitrary_connectors()
-    hostile_count = audit_priority_hostiles() if run_hostile else 0
+    (physical_checks, profiles, rooted_probes,
+     eligible_boundaries, case_c_witnesses) = audit_case_c_records()
+    connector_formula = audit_symbolic_connector_argument()
+    remnant_checks, connector_certificates = audit_connector_regressions()
+    hostile_count = (audit_priority_hostiles() + audit_B_geometry_hostiles()
+                     if run_hostile else 0)
     # Final strict ledger: S and T are nonempty trees of credit -1 each;
     # universal r<=4 shared-cut cluster credit is >r-1 on U,V; ranks sum 5.
     require((5 - 2) - 1 - 1 == 1 and 1 > 0,
@@ -861,7 +1695,11 @@ def audit(run_hostile=True):
         "parents": parent_count, "outputs": output_count,
         "multiplicities": multiplicities, "physical": physical_checks,
         "profiles": profiles, "probes": rooted_probes,
-        "remnants": remnant_checks, "hostiles": hostile_count,
+        "eligible": eligible_boundaries, "witnesses": case_c_witnesses,
+        "remnants": remnant_checks,
+        "connector_certificates": connector_certificates,
+        "connector_formula": connector_formula, "hostiles": hostile_count,
+        "imports": len(IMPORTED_THEOREMS), "static_routes": static_routes,
     }
 
 
@@ -873,15 +1711,25 @@ def main():
         f"{result['outputs']}; multiplicities={dict(sorted(result['multiplicities'].items()))}\n"
         "output shape census: direct3=56 chain2+direct=36 fork=12 chain3=6\n"
         f"Tarjan full-parent Case-C checks: {result['physical']}; "
-        f"rank profiles={dict(sorted(result['profiles'].items()))}\n"
-        f"rooted physical tree probes: {result['probes']}; arbitrary connector-remnant checks: "
-        f"{result['remnants']}\n"
+        f"eligible deepest boundaries: {result['eligible']}; exhaustive witness checks: "
+        f"{result['witnesses']}; rank profiles={dict(sorted(result['profiles'].items()))}\n"
+        f"rooted physical tree probes: {result['probes']}; connector regression checks: "
+        f"{result['remnants']}; production certificates: {result['connector_certificates']}\n"
+        f"unbounded connector argument: {result['connector_formula']}\n"
+        "adjacency-derived doubled-C4 inverse: six paths; doubled lengths {1,2}; opposite connector parity; "
+        "valid unbounded connector regression=12/11 (29 B edges)\n"
+        f"semantic theorem imports: {result['imports']}; accepted structural routes statically audited: "
+        f"{result['static_routes']}; rank-two Case-B owner=all-bicyclic-graphs/paper.tex\n"
         "priority dispatches: hull bridge q/(7-q); connector fibre q/(6-q); "
-        "then deepest S, complete T, odd-edge U/V\n"
+        "then every deepest S, every complete T opening, every odd-edge U/V cut\n"
         "every U,V side: induced, connected, actual K3 blocks, one shared-cut incidence tree, "
         "positive ranks summing to 5\n"
         f"hostile physical adjacency/rank-priority mutations rejected: {result['hostiles']}\n"
-        "scope: R31-S physical closure gate only; no global multiblock COMPLETE claim"
+        "discriminating hostiles: subdivided-K4; independent doubled-length; independent connector-parity; "
+        "masked geometry; extra/missing B edge; metadata/order; 7 opaque relabels/full tied witness sets\n"
+        "metadata contract: sole production API is adjacency-only; no row/path/B/triangle/S/geometry/default/cache input; "
+        "all deepest/open/cut witnesses are enumerated\n"
+        "scope: R31-S physical closure gate only; global multiblock master is expected OPEN/exit 1"
     )
     if "--optimized-child" not in sys.argv and not sys.flags.optimize:
         child = subprocess.run([sys.executable, "-O", __file__, "--optimized-child"],

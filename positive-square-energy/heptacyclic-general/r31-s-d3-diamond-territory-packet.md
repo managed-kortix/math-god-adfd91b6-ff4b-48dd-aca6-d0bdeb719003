@@ -1,15 +1,18 @@
-# The `R31-S` interior-owner diamond plus three triangles: open analytic packet
+# Withdrawn synthetic `R31-S:D3` diagnostic packet
 
-Put `D=Theta(1,2,2)` and `sigma(X)=s^+(X)-|V(X)|`.  The remaining
-interior-owner obligation in the doubled-`C4` frontier is
+Put `D=Theta(1,2,2)` and `sigma(X)=s^+(X)-|V(X)|`.  This note records the
+historical synthetic diagnostic inequality
 
 `sigma(D+T^3)>3`.                                             (D3)
 
-The incidence hull is bridge-free, the three triangular blocks may be direct,
-repeated at one cut, or nested, and arbitrary finite rooted trees are allowed
-at every vertex.  **This packet is open in the committed proof system.**  The
-coefficient audit described below is useful exact evidence, but it does not
-prove (D3).
+It is **not** a remaining physical `R31-S` obligation.  Full-parent adjacency
+reconstruction showed that the purported second degree-two diamond vertex has
+no physical preimage: each first-simple doubled fibre contributes one actual
+triangle.  The physical packet is closed instead by
+`r31-s-physical-shared-triangle-closure.md` and
+`research/r31-s-physical-parent-verifier.py`.  The coefficient audit below
+remains useful evidence about a separate synthetic graph family, but it is not
+a closure owner, theorem dependency, or transitive residual.
 
 ## Exact finite result that is established
 
@@ -41,7 +44,7 @@ and owner-free companions include
 Those exact integer identities are retained as a diagnostic lemma.  They are
 not a phase-area certificate.
 
-## The missing implication
+## The missing implication in the synthetic diagnostic
 
 For
 
@@ -72,7 +75,7 @@ No graph counterexample to (D3) is asserted here.  The obstruction is a proof
 and verification gap: the finite coefficient data are compatible with a true
 theorem, but they do not establish it.
 
-## What would close the packet
+## What would prove the synthetic inequality
 
 Any replacement must prove the uniform rooted-tree statement, not merely bare
 cores or sampled activities.  Acceptable routes include:
@@ -85,9 +88,10 @@ cores or sampled activities.  Acceptable routes include:
 4. a coupled doubled-`C4` packet that proves the parent `R31-S` inequality
    directly and thereby makes (D3) unnecessary.
 
-Until one of these is committed and adversarially verified, the authoritative
-owner ledger has final residual `R31-S`, and the multiblock master exits
-nonzero.
+None of these routes is required for the physical `R31-S` theorem.  The
+multiblock master still exits nonzero for a different reason: other packet
+families have an uncensused, unoriented actual-hull-bridge lane, and the old
+generic bridge split is false for rank-one pentagon sides.
 
 ## Diagnostic verifier
 
@@ -100,5 +104,6 @@ python3 -O research/r31-s-d3-diamond-packet-verifier.py
 
 The program must itself exit nonzero.  Its output authenticates the 28-record
 census and imaginary-carrier identities, then reports that the real-part and
-continuous-phase obligations are unverified.  A zero exit would be a semantic
-failure, not a theorem receipt.
+continuous-phase obligations for the synthetic inequality are unverified.  A
+zero exit would be a semantic failure, not a theorem receipt.  This deliberate
+failure is diagnostic only and does not reopen physical `R31-S`.

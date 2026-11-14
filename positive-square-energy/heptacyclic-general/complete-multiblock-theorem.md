@@ -78,12 +78,13 @@ The nested induced-piece theorem closes
 
 `R21, R221, R31-K, R321, R322, R41, R421, R511-K5e, R511-K71`.
 
-The later exact packets close `R511-K22` and all three `R61` keys.  In `R31-S`, the historical balanced/`C4`/`D3` labels are superseded by
-physical adjacency reconstruction.  The ordered hull-bridge, connector-fibre,
-and two-shared-cut-cactus dispatch closes that packet.  The conservative
-machine ledger still records `{R31-S}` as its global fail-closed residual until
-the upstream bridge cascade is repaired; it must not be interpreted as a
-remaining `D3` analytic obligation.
+The later exact packets close `R511-K22` and all three `R61` keys.  In
+`R31-S`, the historical balanced/`C4`/`D3` labels are superseded by physical
+adjacency reconstruction.  The ordered hull-bridge, connector-fibre, and
+two-shared-cut-cactus dispatch closes that packet.  The machine ledger records
+an empty bridge-free packet residual and a separate `OPEN`, `UNAUTHENTICATED`
+unoriented hull-bridge lane for the other packet families.  It deliberately
+records no finite global residual or census for that lane.
 
 ## Why the global master is still open
 

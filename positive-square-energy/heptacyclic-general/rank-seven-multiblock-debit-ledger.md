@@ -183,16 +183,21 @@ before charging credit:
 4. nested cyclic demands remain one complete first-boundary territory until an
    explicit second opening is made; the intermediate cut is never charged
    twice;
-5. every positive connector was already removed by the connected-theorem
-   split, so no shared-cut packet may silently absorb one;
+5. this bridge-free packet pass contains no actual cyclic-hull bridge; no
+   shared-cut packet may silently absorb one, and every excluded bridge
+   incidence stays in the separate unauthenticated bridge lane;
 6. rooted trees, connector remnants, and deeper descendants follow exactly one
    owner.
 
-The accepting key equality must be
+The authenticated key equality in this note is only
 
-`all multiblock physical keys`
+`bridge-free multiblock physical keys`
 
-`= bridge-split keys disjoint union DNN keys disjoint union packet-owner keys`.
+`= DNN keys disjoint union bridge-free packet-owner keys`.
+
+There is deliberately no asserted finite equality for all multiblock physical
+keys: the unoriented actual-bridge lane is `OPEN` with census
+`UNAUTHENTICATED`.
 
 The bridge-free packet-owner keys are now expanded and their later exact
 packets close the former residuals `R511-K22` and `R31-S`.  In `R31-S`, the
