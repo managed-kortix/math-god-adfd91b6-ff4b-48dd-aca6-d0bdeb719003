@@ -1,9 +1,10 @@
-R31-S D3 full Sachs diagnostic: exact finite audit passed
-one-side records: 14; reflected marked records: 28
+ABSTRACT diamond+T^3 Sachs diagnostic: exact finite audit passed
+physical R31-S interpretation: WITHDRAWN / NONPHYSICAL
+synthetic records: 14; formal reflected duplicates: 28
 raw real Sachs terms by record: min=151 max=196
 activity terms checked: R=39959 I=11504
 exceptional +6y records: 5
 AQ-BP mixed coefficients: positive=179605 negative=42651
 unverified: I>=0 => R<0; continuous branch; Coulson phase-area bound
-conclusion: sigma(D+T^3)>3 NOT ESTABLISHED
-status: OPEN; FAIL CLOSED
+conclusion: no abstract energy theorem and no R31-S statement established
+status: ARCHIVAL ONLY; FAIL CLOSED

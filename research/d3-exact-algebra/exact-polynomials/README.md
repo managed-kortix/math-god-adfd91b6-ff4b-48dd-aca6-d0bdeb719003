@@ -1,4 +1,6 @@
-# D3 exact polynomial export
+# Abstract diamond-plus-three-triangles polynomial export
+
+**Archival scope:** these are explicit synthetic graphs, not physical `R31-S` retained graphs.
 
 Normalization: `Psi_G(z)=i^{-|V(G)|} det(i diag(z)-A(G))=R_G(z)+i I_G(z)`.
 

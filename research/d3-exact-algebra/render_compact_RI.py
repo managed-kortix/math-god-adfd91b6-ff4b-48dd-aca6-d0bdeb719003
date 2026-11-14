@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Emit exact compact R/I formulas for all 14 D3 incidence records.
+"""Emit exact compact R/I formulas for 14 synthetic abstract records.
 
 Notation: D_S=R_S+i I_S; d_j=a_j b_j+1; e_j=a_j+b_j;
 q_j=e_j-2i. Output expands q-products into real and imaginary parts but
-leaves the diamond deletion states symbolic.  The u=v chain record uses the
+leaves the explicit abstract diamond deletion states symbolic.  The u=v chain record uses the
 explicit private branch response.
 """
 import itertools

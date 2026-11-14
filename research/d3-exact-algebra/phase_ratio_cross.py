@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact leaf-deletion phase-ratio cross products for every D3 record."""
+"""Leaf-deletion phase cross products for every synthetic abstract record."""
 import importlib.util
 from collections import defaultdict
 P=str(__import__('pathlib').Path(__file__).with_name('r31-s-d3-full-sachs-diagnostic.py'));sp=importlib.util.spec_from_file_location('d3',P);d3=importlib.util.module_from_spec(sp);sp.loader.exec_module(d3)

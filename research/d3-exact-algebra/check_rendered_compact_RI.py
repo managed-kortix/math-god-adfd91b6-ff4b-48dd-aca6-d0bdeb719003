@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Independently evaluate render_compact_RI formulas and compare all 14 to Sachs."""
 import contextlib,io,runpy,importlib.util
-with contextlib.redirect_stdout(io.StringIO()):g=runpy.run_path('/workspace/d3-artifacts/render_compact_RI.py')
+HERE=__import__('pathlib').Path(__file__).resolve().parent
+with contextlib.redirect_stdout(io.StringIO()):g=runpy.run_path(str(HERE/'render_compact_RI.py'))
 P=str(__import__('pathlib').Path(__file__).with_name('r31-s-d3-full-sachs-diagnostic.py'));sp=importlib.util.spec_from_file_location('d3',P);d3=importlib.util.module_from_spec(sp);sp.loader.exec_module(d3)
 from collections import defaultdict
 
@@ -31,7 +32,7 @@ def expand_real(p):
   out=add(out,cur)
  return out
 def host_state(name,V,E):
- # Host state is always the four-vertex diamond, not the full record.
+ # Synthetic host state is the explicit four-vertex diamond, not the full record.
  part=name.split('_',1);side=part[0];deleted=tuple(part[1]) if len(part)>1 else ()
  DV=('A','B','x','z');DE=frozenset({('A','B'),('A','x'),('B','x'),('A','z'),('B','z')})
  W=tuple(v for v in DV if v not in deleted);F=frozenset(e for e in DE if not(set(e)&set(deleted)))

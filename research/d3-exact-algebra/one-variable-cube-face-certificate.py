@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact low-dimensional obstruction search for the five D3 defect records.
+"""Exact low-dimensional search for five synthetic abstract defect records.
 
 For every choice of one free nondefect activity x and every assignment of the
 other eight nondefect activities to {0,1}, prove H(x)<0 and B(x)<=0 throughout x>=0,Q(x)>0,

@@ -1,5 +1,6 @@
 {
-  "schema": "D3-exact-polynomials-v1",
+  "schema": "abstract-diamond-T3-exact-polynomials-v2",
+  "scope": "synthetic abstract graphs; nonphysical for R31-S",
   "normalization": "Psi=i^(-n)det(i diag(z)-A)=R+iI; z_v=t+y_v",
   "records": [
     {

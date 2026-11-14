@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Fail-closed full-R/I diagnostic for the 14 one-side R31-S:D3 records.
+"""Fail-closed R/I diagnostic for 14 explicit synthetic abstract graphs.
 
-This establishes exact finite Sachs data and a corrected signed-dictionary
-elimination obstruction.  It deliberately exits nonzero: it proves neither
-the half-plane implication nor the continuous-phase area bound for D+T^3.
+Historical warning: these diamond-plus-three-triangle graphs are not the
+physical R31-S retained graphs.  The exact finite Sachs calculations survive
+only as standalone abstract algebra.  The program deliberately exits nonzero:
+it proves neither the global half-plane implication nor an energy theorem.
 """
 
 from __future__ import annotations
@@ -24,6 +25,7 @@ def require(condition, message):
         raise AuditError(message)
 
 
+# Synthetic attachment roots; this is not a physical R31-S owner map.
 DIAMOND_OWNERS = ("A", "B", "x")
 
 
@@ -44,7 +46,7 @@ def records():
     result = direct | chain_direct | fork | chain
     require(Counter(row[0] for row in result) == Counter({
         "direct3": 6, "chain2+direct": 5, "fork": 2, "chain3": 1,
-    }), "one-side D3 incidence census changed")
+    }), "synthetic abstract incidence census changed")
     return result
 
 
@@ -330,7 +332,7 @@ def audit():
         ("chain3", "x"),
         ("fork", "x", "split"),
     }
-    require(set(defect_rows) == expected_defects, "D3 defect-record set changed")
+    require(set(defect_rows) == expected_defects, "synthetic defect-record set changed")
     require(min(real_ranges) == 151 and max(real_ranges) == 196,
             "full real Sachs term range changed")
     require(elimination_positive > 0 and elimination_negative > 0,
@@ -345,16 +347,17 @@ def report(result):
      real_activity, imaginary_activity, boundary_positive,
      boundary_negative) = result
     return (
-        "R31-S D3 full Sachs diagnostic: exact finite audit passed\n"
-        f"one-side records: {row_count}; reflected marked records: {2 * row_count}\n"
+        "ABSTRACT diamond+T^3 Sachs diagnostic: exact finite audit passed\n"
+        "physical R31-S interpretation: WITHDRAWN / NONPHYSICAL\n"
+        f"synthetic records: {row_count}; formal reflected duplicates: {2 * row_count}\n"
         f"raw real Sachs terms by record: min={real_minimum} max={real_maximum}\n"
         f"activity terms checked: R={real_activity} I={imaginary_activity}\n"
         f"exceptional +6y records: {defect_count}\n"
         f"AQ-BP mixed coefficients: positive={boundary_positive} "
         f"negative={boundary_negative}\n"
         "unverified: I>=0 => R<0; continuous branch; Coulson phase-area bound\n"
-        "conclusion: sigma(D+T^3)>3 NOT ESTABLISHED\n"
-        "status: OPEN; FAIL CLOSED"
+        "conclusion: no abstract energy theorem and no R31-S statement established\n"
+        "status: ARCHIVAL ONLY; FAIL CLOSED"
     )
 
 
@@ -363,8 +366,8 @@ def main():
     if "--optimized-child" not in sys.argv and not sys.flags.optimize:
         child = subprocess.run([sys.executable, "-O", __file__, "--optimized-child"],
                                check=False, capture_output=True, text=True)
-        require(child.returncode == 1, "optimized D3 diagnostic did not fail closed")
-        require(child.stderr == "", "optimized D3 diagnostic wrote stderr")
+        require(child.returncode == 1, "optimized abstract diagnostic did not fail closed")
+        require(child.stderr == "", "optimized abstract diagnostic wrote stderr")
         require(child.stdout.rstrip() == output, "normal/optimized output mismatch")
     print(output)
     raise SystemExit(1)

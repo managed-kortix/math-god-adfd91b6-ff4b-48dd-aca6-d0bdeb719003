@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact CAD/QE attempts for D3 boundary implications on selected faces/slices."""
+"""CAD/QE attempts for synthetic abstract boundary slices."""
 import sympy as s
 import importlib.util,json,time
 P=str(__import__('pathlib').Path(__file__).with_name('r31-s-d3-full-sachs-diagnostic.py'));sp=importlib.util.spec_from_file_location('d3',P);d3=importlib.util.module_from_spec(sp);sp.loader.exec_module(d3)

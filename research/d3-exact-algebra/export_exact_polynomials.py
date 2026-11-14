@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Export every exact raw and activity-expanded R/I polynomial for 14 D3 records."""
+"""Export R/I polynomials for 14 explicit synthetic abstract graphs."""
 import importlib.util,json,hashlib,os
 P=str(__import__('pathlib').Path(__file__).with_name('r31-s-d3-full-sachs-diagnostic.py'))
 sp=importlib.util.spec_from_file_location('d3',P);d3=importlib.util.module_from_spec(sp);sp.loader.exec_module(d3)
 OUT=str(__import__('pathlib').Path(__file__).with_name('exact-polynomials'));os.makedirs(OUT,exist_ok=True)
-README='''# D3 exact polynomial export
+README='''# Abstract diamond-plus-three-triangles polynomial export
+
+**Archival scope:** these are explicit synthetic graphs, not physical `R31-S` retained graphs.
 
 Normalization: `Psi_G(z)=i^{-|V(G)|} det(i diag(z)-A(G))=R_G(z)+i I_G(z)`.
 
@@ -27,7 +29,7 @@ def slug(rec):
  s=repr(rec)
  for a,b in [("'",''),('(','_'),(')',''),(',','_'),(' ','')]:s=s.replace(a,b)
  return s.strip('_').replace('+','plus')
-manifest={'schema':'D3-exact-polynomials-v1','normalization':'Psi=i^(-n)det(i diag(z)-A)=R+iI; z_v=t+y_v','records':[]}
+manifest={'schema':'abstract-diamond-T3-exact-polynomials-v2','scope':'synthetic abstract graphs; nonphysical for R31-S','normalization':'Psi=i^(-n)det(i diag(z)-A)=R+iI; z_v=t+y_v','records':[]}
 for rec in sorted(d3.records(),key=repr):
  V,E=d3.graph_for(rec);R,I,C=d3.full_sachs_polynomial(V,E);Ra,Ia=d3.activity_expansion(R),d3.activity_expansion(I)
  name=slug(rec)+'.txt';path=os.path.join(OUT,name)
