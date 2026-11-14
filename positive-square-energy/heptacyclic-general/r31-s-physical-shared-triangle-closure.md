@@ -12,10 +12,14 @@ the historical labels `C4` and `D3`: those labels came from a rooted-record
 classifier, not from the biconnected topology of the induced sides.
 
 The physical input is a finite simple connected graph `G` of cyclomatic rank
-seven whose positive-rank blocks are
+seven whose positive-rank maximal vertex-biconnected blocks are exactly
 
 * one rank-three doubled-`C4` block `B`; and
-* four triangle blocks.
+* four external triangle blocks.
+
+Here `B` is the actual maximal vertex-biconnected physical block, not merely a
+chosen kernel subgraph, and the four external `K3` blocks are all the other
+positive-rank maximal blocks of `G`.
 
 Write the four branch vertices of `B` cyclically as `A,B,C,D`.  Its doubled
 fibres join `A` to `B` and `C` to `D`, while its single connectors join `B` to
@@ -120,16 +124,21 @@ block `B` are deleted.
 **Lemma 2 (owner fibres).**  Every component of `G-E(B)` meets `B` in exactly
 one vertex.  Consequently the sets `F_x`, `x in V(B)`, partition `V(G)`;
 each `G[F_x]` is connected and induced.  Moreover `G-F_x` is connected, and
-if `F_x` contains no positive-rank block, then `G[F_x]` is a nonempty tree.
+if `F_x` contains no positive-rank maximal block, then `G[F_x]` is a nonempty
+tree.
 
-**Proof.**  A component meets `B` because `G` is connected.  If one met `B` in
-distinct vertices `a,b`, an off-`B` path between `a,b`, together with paths in
-the 2-connected block `B`, would put that path in the same 2-connected block
-as `B`, contrary to maximality of `B`.  This proves uniqueness, the partition,
-and induced connectedness.  Since `B` is 2-connected, `B-x` is connected;
-every other fibre stays attached at its unique vertex of `B-x`, so `G-F_x` is
-connected.  Finally a connected fibre with no positive-rank block is acyclic
-and nonempty because it contains `x`; hence it is a tree.  QED.
+**Proof.**  A component meets `B` because `G` is connected.  Suppose a
+component `K` met `B` in distinct vertices.  Take a path in `K` whose endpoints
+`a,b` are two consecutive visits to `B` and whose internal vertices lie
+outside `B`.  This is a nontrivial `B`-ear.  Two internally disjoint `a`--`b`
+paths in the vertex-biconnected block `B`, together with that ear, lie in one
+larger vertex-biconnected subgraph.  This contradicts the maximality of the
+physical block `B`.  Hence every component meets `B` exactly once.  This
+proves uniqueness, the partition, and induced connectedness.  Since `B` is
+2-connected, `B-x` is connected; every other fibre stays attached at its
+unique vertex of `B-x`, so `G-F_x` is connected.  Finally a connected fibre
+with no positive-rank maximal block is acyclic and nonempty because it
+contains `x`; hence it is a tree.  QED.
 
 The complete fibre in Lemma 2 is the only object called an owner fibre below.
 A boundary-open triangle territory is different: its entry cut remains on the
@@ -149,17 +158,24 @@ More precisely, exactly the following structural dispatch is needed.
 
 ### Case A: an actual bridge lies in the cyclic hull
 
-Delete such a bridge edge.  Its two vertex sides induce connected graphs of
-positive cyclomatic ranks `a` and `7-a`, where `1<=a<=6`.  By the completed
-connected results through rank six, both sides have nonnegative credit.
-Induced square-energy superadditivity therefore gives `sigma(G)>=0`.
+Root the block-cut tree at `B` and orient any bridge edge `e` in the cyclic
+hull away from `B`.  The two components of `G-e` have disjoint vertex sets;
+their induced subgraphs are connected, and the only edge crossing the
+partition is `e`.
 
-This already proves the required nonstrict heptacyclic conclusion.  If the
-strict formulation `sigma(G)>0` is desired in this case, choose a bridge
-farthest from `B`: its downstream side contains at least one external triangle
-and only triangular cyclic blocks, so the universal triangular block-graph
-theorem gives it positive credit, while the complementary side has rank at
-most six and nonnegative credit.  Thus `sigma(G)>0`.
+The away component contains `q` of the four external triangle blocks, for some
+`q in {1,2,3,4}`, and does not contain `B`.  Since those triangles are exactly
+all positive-rank blocks away from `B`, this component is a connected
+triangular block graph with arbitrary bridge and tree material.  The universal
+triangular block-graph theorem gives it strict positive credit.  The root
+component contains the intact rank-three block `B` and the other `4-q`
+triangles, so its exact cyclomatic rank is
+
+`3+(4-q)=7-q in {3,4,5,6}`.
+
+It is connected, and the completed connected theorem through rank six gives
+it nonnegative credit.  Induced square-energy superadditivity therefore gives
+`sigma(G)>0` directly.
 
 Hence the residual may be assumed to have a bridge-free cyclic hull: all
 successive positive blocks meet through shared cut vertices.
@@ -321,6 +337,16 @@ The proof uses exactly the following established inputs.
    `central-deletion-bound` through `petal-deletion-bound`; the universal
    formulation here uses those injections directly rather than the narrower
    record statement in `r31-s-c4-marked-four-triangle-theorem.md`.
+
+For exact provenance, the source bytes used for item 6 are
+`packing-two-square-energy/paper.tex` at SHA-256
+`9638f6847892e8a043454d945e7945418ec96e393b639dfd65f664670dba8791`
+and the narrower comparison note
+`positive-square-energy/heptacyclic-general/r31-s-c4-marked-four-triangle-theorem.md`
+at SHA-256
+`78344337226ae5c5b42645dd563390eec9eb462824e78fd4e42d7fa54051309d`.
+The proof above imports the former's exact matching injections, not the latter's
+28-record scope restriction or its unsupported forest-factor sentence.
 
 No diamond determinant, `D3` phase inequality, switching-class quotient, or
 historical 28-record `C4` restriction is a dependency.
