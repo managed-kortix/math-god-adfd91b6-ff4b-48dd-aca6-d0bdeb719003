@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
-"""OPEN exact hostile audit of the physical induced topology behind R31-S.
+"""Archival hostile reconstruction of the withdrawn synthetic R31-S:D3 model.
 
-This is deliberately not an authoritative theorem verifier.  It pins the
-committed transport/cactus sources, independently realizes every transported
-record, performs the actual vertex opening and edge cut, and checks the
-resulting induced vertex territories.  Connector paths are reduced through the
-complete five-by-five symbolic remnant classes; arbitrary additional vertices
-are subdivisions of one-root path remnants and cannot change a cyclic block,
-cyclomatic rank, or owner.
+This is deliberately not an authoritative theorem verifier.  It pins the exact
+historical source snapshot on which the semantic failure was discovered,
+independently realizes every transported record, performs the actual vertex
+opening and edge cut, and checks the resulting induced vertex territories.
+The authoritative physical closure now lives in
+``research/r31-s-physical-parent-{gate-,}verifier.py``.
 """
 
 from __future__ import annotations
 
 import hashlib
-import importlib.util
 import itertools
 import subprocess
 import sys
@@ -22,6 +20,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
+ARCHIVE_COMMIT = "36541490b04c901580308077f61a13daa5fe1284"
 SOURCES = {
     "transport": (
         ROOT / "research/r31-s-doubled-c4-marked-cut-verifier.py",
@@ -88,24 +87,36 @@ def require(condition, message):
         raise AuditError(message)
 
 
-def digest(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+def digest_bytes(payload):
+    return hashlib.sha256(payload).hexdigest()
+
+
+def archived_bytes(path):
+    relative = path.relative_to(ROOT).as_posix()
+    completed = subprocess.run(
+        ["git", "show", f"{ARCHIVE_COMMIT}:{relative}"],
+        cwd=ROOT,
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    return completed.stdout
 
 
 def audit_sources():
     for label, (path, expected) in SOURCES.items():
-        require(path.is_file(), f"missing pinned source: {label}")
-        require(digest(path) == expected, f"pinned source changed: {label}")
+        payload = archived_bytes(path)
+        require(digest_bytes(payload) == expected,
+                f"archived source changed: {label}")
 
 
 def load_transport_module():
     path = SOURCES["transport"][0]
-    spec = importlib.util.spec_from_file_location("marked_transport", path)
-    require(spec is not None and spec.loader is not None,
-            "cannot load marked transport verifier")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+    payload = archived_bytes(path)
+    namespace = {"__file__": f"{ARCHIVE_COMMIT}:{path.relative_to(ROOT)}",
+                 "__name__": "marked_transport"}
+    exec(compile(payload, namespace["__file__"], "exec"), namespace)
+    return type("ArchivedTransport", (), namespace)
 
 
 M = load_transport_module()
@@ -817,8 +828,8 @@ def audit():
 
 def report(result):
     lines = [
-        "R31-S OPEN induced-topology hostile audit: physical audit passed; closure BLOCKED",
-        "pinned sources: transport/D3/C4 executables + packing-two/C4 theorems + frontier/upstream owner prose",
+        "R31-S archival induced-topology hostile audit: historical reconstruction passed",
+        f"pinned snapshot: {ARCHIVE_COMMIT}; transport/D3/C4 executables + packing-two/C4 theorems + frontier/upstream owner prose",
         "symbolic connector remnants: 5 open classes * 5 cut classes; arbitrary positive segments are one-root path subdivisions",
         f"physical split audits: {result['audits']} = 8 anchors * 2 witnesses * 110 records * 25 remnant classes",
         "old labels: balanced=21600 C4=11200 D3=11200",
@@ -831,8 +842,8 @@ def report(result):
         "semantic verdict: D3 diamond vertex z has no physical preimage; the old C4/D3 distinction is not an induced-topology distinction",
         f"hostile topology/remnant mutations rejected: {result['rejected']}",
         "conditional ledger only: if upstream derives distinct induced trees S,T, then side sum >3 gives sigma(H)>2 and sigma(G)>1",
-        "blocker: this checker models T and imports S from prose; it does not derive either owner class from the full parent graph",
-        "status: OPEN physical audit; BLOCKED as R31-S closure; no theorem/ledger promotion",
+        "historical blocker: this checker modeled T and imported S from prose; it did not derive either owner class from the full parent graph",
+        "status: archival semantic-failure witness only; superseded by the full-parent physical closure verifier",
     ]
     return "\n".join(lines)
 

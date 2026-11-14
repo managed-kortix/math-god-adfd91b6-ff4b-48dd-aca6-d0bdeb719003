@@ -1,9 +1,18 @@
-# OPEN hostile audit and candidate repair: the `R31-S:D3` topology is not physical
+# Archival hostile audit: the inherited `R31-S:D3` topology is not physical
 
-## Referee verdict
+## Current status and historical verdict
 
-**FAIL for the inherited `D3` topology; PASS for the conditional physical split;
-BLOCK for promotion as an `R31-S` closure.**
+**Current status: superseded archival semantic-failure witness.** The later
+full-parent physical reconstruction and adjacency gate close the physical
+`R31-S` packet; see
+`positive-square-energy/heptacyclic-general/r31-s-physical-shared-triangle-closure.md`,
+`research/r31-s-physical-parent-gate-verifier.py`, and
+`research/r31-s-physical-parent-verifier.py`. The global rank-seven multiblock
+program nevertheless remains open at its separate generic hull-bridge lane.
+
+The verdict at the frozen pre-repair snapshot was: **FAIL for the inherited
+`D3` topology; PASS for the conditional physical split; BLOCK for promotion as
+an `R31-S` closure.**
 
 The committed finite transport correctly enumerates and transports 110 rooted
 three-triangle incidence records. It does **not** reconstruct either induced
@@ -38,7 +47,7 @@ rank-four side is separately checked to have exactly four triangle blocks in
 one connected shared-cut cluster, so the existing marked four-triangle theorem
 gives `sigma(U_i)>3`. Hence the side sum is strictly greater than three.
 
-Promotion is blocked because the audit checker begins from the already retained
+Promotion was blocked at that snapshot because the audit checker begins from the already retained
 three-triangle incidence model and **models** the complete structural owner
 class `T` as a tree; it does not derive that class from the full upstream graph.
 The separately boundary-opened external-leaf territory `S` is not present in the
@@ -55,15 +64,18 @@ sigma(G) >= sigma(H)+sigma(S)                   > 2-1 = 1 > 0.
 
 This is enough to close the frontier target `sigma(H)>1` and the parent target
 `sigma(G)>0` **if and only if** the upstream owner antecedents are supplied.
-This file and its checker are OPEN artifacts only; they do not change a theorem,
-master verifier, state ledger, or publication.
+At that snapshot this file and its checker were OPEN artifacts only; they did
+not change a theorem, master verifier, state ledger, or publication. They are
+now retained solely to reproduce the semantic failure that motivated the
+full-parent repair.
 
 ## 1. Pinned source boundary
 
-The audit pins the theorem bytes inherited from base commit `72b978271828`,
-except that the pentacyclic owner model is pinned at merged commit
-`36541490b04c`; that later change repairs an independent staged-bridge selection
-and does not alter the doubled-`C4` split audited here:
+The checker reads all listed bytes from the immutable archival commit
+`36541490b04c901580308077f61a13daa5fe1284` via `git show`; it intentionally
+does not pin the current working-tree versions, which have been superseded by
+the repair. Most theorem bytes originated at `72b978271828`; the pentacyclic
+owner model in this snapshot includes the independent staged-bridge repair:
 
 | source | SHA-256 |
 |---|---|
@@ -450,10 +462,12 @@ sigma(G) >= sigma(H)+sigma(S)                   > 2-1 = 1 > 0.
 ```
 
 The strict endpoint is `sigma(G)>1`; `>0` is merely the target. No territory is
-charged twice in this notation. But the audit must remain **BLOCKED for
-closure** until an upstream owner-exact reconstruction proves that `S` and `T`
-are the actual, distinct, induced, nonempty tree territories represented by
-this hierarchy. Merely asserting the generic owner convention is insufficient.
+charged twice in this notation. At that snapshot the audit had to remain
+**BLOCKED for closure** until an upstream owner-exact reconstruction proved that
+`S` and `T` were the actual, distinct, induced, nonempty tree territories
+represented by this hierarchy. The subsequent full-parent verifier supplies
+that missing reconstruction; merely asserting the generic owner convention
+would still be insufficient.
 
 ## 8. Hostile tests and residual caveats
 
@@ -477,7 +491,7 @@ The physical argument above indicates a conservative downstream repair: after
 the analogous split, the two sides are triangular cacti of ranks summing four,
 so their credits total `>2`, and the opened tree leaves `>1`. That file and all
 dependent consumers should be audited before any publication claim changes.
-This OPEN artifact does not itself promote that repair.
+This archival artifact did not itself promote that repair.
 
 ## 9. Candidate patch surface (do not apply blindly)
 
@@ -495,9 +509,10 @@ After independent replay, an authoritative repair should:
 6. audit the inherited pentacyclic and downstream hexacyclic consumers before
    changing master status.
 
-**Firm referee conclusion:** the D3 packet is not merely analytically
-unfinished; it is the wrong graph. The physical coupled-cactus topology passes
+**Historical referee conclusion:** the D3 packet was not merely analytically
+unfinished; it was the wrong graph. The physical coupled-cactus topology passed
 for all 110 modeled retained records, including genuine `3+2/2+3` profiles, but
-`R31-S` closure remains **BLOCKED**: both tree-territory antecedents must be
-derived from the actual upstream graph rather than imported or synthetically
-modeled.
+this archival checker could not close `R31-S`: both tree-territory antecedents
+still had to be derived from the actual upstream graph. The subsequent
+full-parent reconstruction now derives those antecedents and supersedes this
+blocker within the physical `R31-S` scope.
