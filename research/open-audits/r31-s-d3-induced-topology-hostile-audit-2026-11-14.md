@@ -60,8 +60,10 @@ master verifier, state ledger, or publication.
 
 ## 1. Pinned source boundary
 
-The audit pins these committed bytes (all at base commit
-`72b978271828`):
+The audit pins the theorem bytes inherited from base commit `72b978271828`,
+except that the pentacyclic owner model is pinned at merged commit
+`36541490b04c`; that later change repairs an independent staged-bridge selection
+and does not alter the doubled-`C4` split audited here:
 
 | source | SHA-256 |
 |---|---|
@@ -74,7 +76,7 @@ The audit pins these committed bytes (all at base commit
 | `positive-square-energy/heptacyclic-general/complete-multiblock-theorem.md` | `f7a3e009b9b617b0ea5f245702e7e93d2f74116ef7d388d65222069cb06ac347` |
 | `positive-square-energy/heptacyclic-general/nested-induced-piece-packet-theorem.md` | `79b44180ff2d3ca44b5537e2913709fa6c2334b2e475990b34508475592a000b` |
 | `research/fixtures/heptacyclic-multiblock-owner-ledger.json` | `0630cd96fd341b9017b31d6a36341cfead0c6bca64517c1073797ffc14747f42` |
-| `positive-square-energy/pentacyclic-general/four-residual-owner-exact-closure.md` | `b182d37b472808cc2c000e61958471bc6c998ade17e02ec8ea14f7329653cd46` |
+| `positive-square-energy/pentacyclic-general/four-residual-owner-exact-closure.md` | `22e7a9609e9cf70068ee2b511dfc084ffc4d6cfc1a436b76387a417efa740431` |
 
 
 The transport verifier itself warns that it authenticates only finite transport,
