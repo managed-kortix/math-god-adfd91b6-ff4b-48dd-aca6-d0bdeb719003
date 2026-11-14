@@ -29,22 +29,32 @@ subtree containing `B` and the external cyclic blocks at `B`. Deleting the
 edges of `B` shows that every component off `B` meets it in at most one vertex.
 Thus every external block has a unique first owner in `V(B)`.
 
-If the rooted subtree contains an actual bridge, choose one farthest from
-`B` among the bridges whose descendant side contains a cyclic block.  Its
-descendant cyclic set is a complete suffix of the rooted subtree, not a list
-of independently chosen cycles.  In a rank-three-plus-two-triangles row that
-suffix has profile `T` or `TT`.  In the diamond row it has one of
+Whenever the rooted cyclic hull contains an actual bridge having a triangle
+on its descendant side, choose such a bridge farthest from `B`.  Its descendant
+cyclic set is a complete suffix of the rooted subtree, not a list of
+independently chosen cycles.  In a rank-three-plus-two-triangles row the suffix
+has profile `T` or `TT`; in the diamond row it has profile `T`, `TT`, `TP`, or
+`TTP`.
 
-`T, TT, P, TP, TTP`.
+The selected bridge edge is the only edge between its two vertex sides. Assign
+each endpoint, every connector vertex, and every rooted descendant to its own
+side.  The resulting territories are connected, induced, disjoint, and
+exhaustive.  For suffix `T` or `TT`, its positive credit and the nonnegative
+lower-rank complement close strictly.  The same argument closes `TP` and `TTP`
+by the established favorable cactus packets.
 
-The bridge edge is the only edge between its two vertex sides. Assign each
-endpoint, every connector vertex, and every rooted descendant to its own side.
-The resulting territories are connected, induced, disjoint, and exhaustive.
-For suffix `T` or `TT`, its positive credit and the nonnegative lower-rank
-complement close strictly. The same argument closes `TP` and `TTP` by the
-established favorable cactus packets. If a diamond-row bridge cuts off only
-`P`, that unicyclic territory has credit greater than `-1`, while the retained
-`D+T+T` packet has credit greater than three, so this case is strict as well.
+Only if no bridge anywhere in the diamond-row cyclic hull has a triangle on
+its descendant side do we inspect a bridge whose descendant cyclic suffix is
+only `P`.  Cut off that complete pentagonal territory, whose credit is greater
+than `-1`.  The complementary cyclic hull contains exactly `D+T+T`.  If that
+hull still had a bridge between cyclic blocks, then, when rooted at `D`, its
+descendant side would contain one of the two triangles.  It would therefore
+have been a triangle-descendant bridge in the original hull, contrary to the
+explicit global absence hypothesis.  Hence the retained `D+T+T` cyclic hull is
+bridge-free.  Only with this bridge-free conclusion do we invoke the exact
+shared-cut packet, which has credit greater than three.  If there is no cyclic
+bridge at all, the bridge-free owner analysis below applies instead.
+
 Thus every route containing a bridge between cyclic blocks is closed,
 including separate arms, a common positive stem, and one cyclic block nested
 beyond another.  Bridges belonging only to off-core rooted trees remain inside

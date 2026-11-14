@@ -472,9 +472,13 @@ an arbitrary physical vertex of that triangle.
 Call a route \emph{positive} precisely when the minimal block-cut subtree from
 $B$ to the external cyclic blocks contains an actual bridge between cyclic
 blocks.  (Bridges in off-core rooted trees remain part of the corresponding
-arbitrary-tree packet.)  Root the cyclic hull at $B$ and choose a farthest such
-bridge.  Its entire descendant suffix is one connected induced territory; the
-complement is connected and lower-rank.  The exact positive-route ledger is
+arbitrary-tree packet.)  Root the cyclic hull at $B$.  If any bridge anywhere
+in that hull has a triangle on its descendant side, choose such a bridge
+farthest from $B$.  Its entire descendant suffix is one connected induced
+territory; the complement is connected and lower-rank.  Only under the explicit
+global hypothesis that no triangle-descendant bridge exists anywhere in the
+whole cyclic hull may the diamond row cut a bridge with only the pentagon below
+it.  The exact positive-route ledger is
 \begin{center}
 \small
 \begin{tabular}{p{3.2cm}p{4.0cm}p{5.8cm}}
@@ -484,15 +488,23 @@ each rank-three $B+TT$&$T$ or $TT$&$>0$ or $>1$, while the rank-four or
 rank-three complement is $\ge0$\\
 $D+TT+P$, triangle below bridge&$T,TT,TP,$ or $TTP$&respectively $>0,>1,>0,>0$;
 the complement contains $D$ and has rank at most four, hence $\ge0$\\
-$D+TT+P$, only $P$ below bridge&$P$&$>-1$, while the retained shared
-$D+TT$ packet is $>3$\\
+$D+TT+P$, no triangle-descendant bridge anywhere and only $P$ below the
+selected bridge&$P$&$>-1$; if the retained $D+TT$ hull had a cyclic bridge, its
+descendant side rooted at $D$ would contain a triangle, so the global absence
+hypothesis makes that hull bridge-free; only then is the exact shared-cut
+packet invoked, giving $>3$\\
 \bottomrule
 \end{tabular}
 \end{center}
 The $TP$ and $TTP$ strengths and their separating/shared proofs are exactly the
-ones in Table~\ref{tab:packets}.  This ledger includes separate arms, a common
-positive stem, and nested blocks: the suffix, never a hand-picked cycle list,
-owns every connector and shared cut once.
+ones in Table~\ref{tab:packets}.  The staged choice is essential: a merely
+farthest cyclic bridge could cut off only $P$ while leaving a bridge on a
+triangle route, where the shared-cut $D+TT$ packet would not apply.  The
+$P$-only branch is therefore conditional on absence of \emph{every}
+triangle-descendant bridge, not merely absence on the selected arm.  This
+ledger includes separate arms, a common positive stem, and nested blocks: the
+suffix, never a hand-picked cycle list, owns every connector and shared cut
+once.
 
 The bridge-free subtree for a rank-three block with two triangles has only two
 block-level forms:

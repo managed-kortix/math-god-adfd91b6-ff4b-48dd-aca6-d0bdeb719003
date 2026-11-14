@@ -46,12 +46,12 @@ SOURCES = {
     "combined-theorem": (
         ROOT / "positive-square-energy/hexacyclic-general/"
         "multiblock-items1-7-combined-theorem-audit.md",
-        "b25ec464400a99464f03d1f2c528b542307697140a6a29496dc3be92020fbd58",
+        "25ab7e6af9629df5054660d15a67d54192a20b511f8a36f932f157922ff472f1",
     ),
     "items1-4": (
         ROOT / "positive-square-energy/hexacyclic-general/"
         "multiblock-items1-4-owner-exact-closure.md",
-        "c14f43df98ff09acb35ac1bff52a6f36648f5c4ad729003784a7837142372bdb",
+        "7ffe92c30ae098cdec9fdc06061c2f5e391ea6c4f5e24be1cc707f34e14612e1",
     ),
     "doubled-c4-owner-transport": (
         ROOT / "research/doubled-c4-exceptional-owner-transport-verifier.py",
@@ -138,6 +138,23 @@ DISPOSITIONS = {
 
 PACKETS = dict(EXPECTED_PACKET_RECORDS)
 
+ITEMS14_REQUIRED = (
+    "If an actual bridge has a triangle\non its descendant side, cut the farthest such bridge.",
+    "We may therefore assume that no actual bridge has a triangle on its descendant",
+    "The exact ledger is",
+    "| 0 | `>1` | `>=0` | `>0` |",
+    "| 1 | `>2` | `>0` | `>0` |",
+    "| 2 | `>3` | `-1` | `>2` |",
+)
+COMBINED_REQUIRED = (
+    "first cuts a farthest triangle-descendant bridge",
+    "absence of every triangle-descendant bridge",
+    "split off a\n`P`-only suffix",
+    "closed by a `D+TT` anchor",
+    "closed by the exact `C5` owner-sector partition",
+    "`k=0:(>1,>=0)`, `k=1:(>2,>0)`, `k=2:(>3,-1)`",
+)
+
 EXPECTED_RANK5_STRUCTURAL = {
     "K5e": {
         "disposition": "triangle-only-after-nontriangle-dnn-gate",
@@ -184,9 +201,9 @@ EXPECTED_EXCLUDED_CLAIMS = (
 )
 
 MANIFEST_SCHEMA = "hexacyclic-multiblock-scope-conclusion-v1"
-EXPECTED_MANIFEST_SHA256 = "60fbcbae34101b17d429dc202a463e7d9c08c6486055ac88e4c15b41898c3c0a"
-EXPECTED_NORMAL_OUTPUT_SHA256 = "9e08d4b1f4799c7262cd553ebba143f0c67de9b24558de37e8f5d9516064a280"
-EXPECTED_OPTIMIZED_OUTPUT_SHA256 = "9e08d4b1f4799c7262cd553ebba143f0c67de9b24558de37e8f5d9516064a280"
+EXPECTED_MANIFEST_SHA256 = "c245701d02045e15d1e875bf8b72b61a259fb53d3344a30c4d392da71f3f5006"
+EXPECTED_NORMAL_OUTPUT_SHA256 = "06524cf9cc24af665fdf8f6c6e2e6a071637ec01db2493bad56952d793ac20e8"
+EXPECTED_OPTIMIZED_OUTPUT_SHA256 = "06524cf9cc24af665fdf8f6c6e2e6a071637ec01db2493bad56952d793ac20e8"
 
 EXPECTED_RANK5_DIRECT_EQUALITY = {
     "partition": (5, 1),
@@ -543,6 +560,20 @@ def check_owner_exact_routes(cases=None):
     return checked
 
 
+def check_packet_semantics(sources, items14_required=ITEMS14_REQUIRED,
+                           combined_required=COMBINED_REQUIRED):
+    require(items14_required == ITEMS14_REQUIRED,
+            "items1-4 semantic acceptance ledger changed")
+    require(combined_required == COMBINED_REQUIRED,
+            "combined template-B/C acceptance ledger changed")
+    items14_text = sources["items1-4"][0].read_text(encoding="ascii")
+    require(all(token in items14_text for token in items14_required),
+            "items1-4 staged-bridge or D+D+T^2 semantic ledger changed")
+    combined_text = sources["combined-theorem"][0].read_text(encoding="ascii")
+    require(all(token in combined_text for token in combined_required),
+            "combined template-B/C semantic summary changed")
+
+
 def audit(partitions=None, dispositions=None, packets=None, presieve=None,
           sources=None, values=None, rank5_dispositions=None,
           global_claim=None, direct_equality=None):
@@ -574,6 +605,7 @@ def audit(partitions=None, dispositions=None, packets=None, presieve=None,
         require(partition in multiblock, f"pre-sieve row {key} has invalid partition")
 
     check_sources(sources)
+    check_packet_semantics(sources)
     check_inequalities(values)
     check_conclusion(sources, global_claim, direct_equality)
     rank5 = regenerate_rank5_structural(sources, rank5_dispositions)
@@ -749,6 +781,13 @@ def check_mutations():
     mutations.append(("rank5-equality-strict-promotion",
                       lambda: audit(direct_equality=strict_equality)))
 
+    mutations.append(("items1-4-semantic-ledger",
+                      lambda: check_packet_semantics(
+                          SOURCES, items14_required=ITEMS14_REQUIRED[:-1])))
+    mutations.append(("combined-template-BC-summary",
+                      lambda: check_packet_semantics(
+                          SOURCES, combined_required=COMBINED_REQUIRED[:-1])))
+
     bad_sources = dict(SOURCES)
     path, digest = bad_sources["theta-triangle"]
     bad_sources["theta-triangle"] = (path, "0" * len(digest))
@@ -827,7 +866,7 @@ def check_mutations():
     manifest = scope_conclusion_manifest(report)
     mutations.append(("manifest-digest-pin",
                       lambda: check_manifest_digest(manifest, "0" * 64)))
-    output = acceptance_report(EXPECTED_MANIFEST_SHA256, 36)
+    output = acceptance_report(EXPECTED_MANIFEST_SHA256, 38)
     mutations.append(("normal-output-digest-pin",
                       lambda: check_output_digest(output, expected_digest="0" * 64)))
     mutations.append(("optimized-output-digest-pin",
@@ -874,7 +913,7 @@ def main():
     manifest = scope_conclusion_manifest(report)
     manifest_digest = check_manifest_digest(manifest)
     rejected = check_mutations()
-    require(rejected == 36, "hostile mutation count changed")
+    require(rejected == 38, "hostile mutation count changed")
     output = acceptance_report(manifest_digest, rejected)
     check_output_digest(output, optimized=bool(sys.flags.optimize))
     if not args.emit and not args.print_manifest and sys.flags.optimize == 0:

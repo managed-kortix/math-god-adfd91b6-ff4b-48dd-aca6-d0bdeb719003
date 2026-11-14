@@ -163,10 +163,17 @@ and one cycle boundary.
 
 Templates A--D are closed owner-exactly in
 `multiblock-items1-4-owner-exact-closure.md`. The proof opens the long theta
-arm for A, retains `D+TT` for B, physically boundary-opens the second diamond
-for C, and uses the prescribed structural opening (including genuine
-kernel-isomorphism transport of the separate exceptional-orbit doubled-`C4`
-retained-packet theorem) for D.
+arm for A. For B it first cuts a farthest triangle-descendant bridge; only after
+establishing the absence of every triangle-descendant bridge may it split off a
+`P`-only suffix. The resulting bridge-free side is closed by a `D+TT` anchor
+when the pentagon is outside that anchor, while the no-direct-`D-T`, rooted
+`D-P` branch is closed by the exact `C5` owner-sector partition. Its diamond
+sector is the narrow bridge-free shared-cut `D+T^k` packet (`0<=k<=2`), not a
+multi-interface `D+TT` router. For C the proof physically boundary-opens the
+second diamond and uses the corrected upstream-triangle ledger
+`k=0:(>1,>=0)`, `k=1:(>2,>0)`, `k=2:(>3,-1)`. For D it uses the prescribed
+structural opening, including genuine kernel-isomorphism transport of the
+separate exceptional-orbit doubled-`C4` retained-packet theorem.
 
 Templates E--I are closed owner-exactly in
 `multiblock-items5-7-owner-exact-closure.md`. For E, the actual `K4` credit

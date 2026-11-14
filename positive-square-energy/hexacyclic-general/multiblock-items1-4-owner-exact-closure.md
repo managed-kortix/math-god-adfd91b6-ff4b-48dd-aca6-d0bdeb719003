@@ -332,15 +332,18 @@ the standard two-diamond opening, applied at the physical boundary of `D_2`.
 Let `k` be the number of external triangles on the upstream side, so
 `0<=k<=2`. The upstream territory `A` is an attached `D_1+T^k` packet and has
 credit greater than `1+k`. The downstream territory `U` is connected and
-induced. If it contains no triangle, it is a nonempty tree and has credit
-`-1`. If it contains one or two triangles, its only cyclic blocks after the
-opening are those triangles, so it has nonnegative credit (indeed it is
-strict). Therefore
+induced and contains exactly `2-k` external triangles after the diamond is
+opened. If `k=2`, it contains no triangle, so it is a nonempty tree and has
+credit `-1`. If `k=1`, it contains one triangle and is strict. If `k=0`, it
+contains two triangles and has nonnegative credit. The exact ledger is
 
-`k=0: sigma(A)+sigma(U)>1-1=0`,
+| `k` | `sigma(A)` | `sigma(U)` | total |
+|---:|---:|---:|---:|
+| 0 | `>1` | `>=0` | `>0` |
+| 1 | `>2` | `>0` | `>0` |
+| 2 | `>3` | `-1` | `>2` |
 
-while for `k=1,2` the sum is already strict from `sigma(A)>1+k` and
-`sigma(U)>=0`. This proves
+Thus in every case
 
 `sigma(G)>0`.                                                  (5)
 

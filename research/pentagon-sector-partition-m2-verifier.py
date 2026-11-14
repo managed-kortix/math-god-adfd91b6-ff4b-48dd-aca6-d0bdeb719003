@@ -173,6 +173,7 @@ for code in product(range(4),repeat=2):
      failures.append(('induced-cross',code,labs,cross,q));continue
 
 weighted=(4*5*3**2)*(sum(sizes)**2)
+print('semantic receipt pentagon-sector-m2:bridge-free-D+C5+2C3:exact-owner-sectors:v1')
 print('block-node trees',16)
 print('weighted Cayley expected',weighted)
 print('labelled incidence encodings checked',total)

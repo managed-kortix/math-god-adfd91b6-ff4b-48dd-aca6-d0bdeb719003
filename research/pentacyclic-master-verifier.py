@@ -20,7 +20,7 @@ SECTOR_M2_VERIFIER = HERE / "pentagon-sector-partition-m2-verifier.py"
 
 SOURCES = (
     ("paper", PAPER,
-     "017e297e9af909568cfe061fc7164577feb15e3b649c61d34ece1246d9e589f8"),
+     "8ce140b07dc1428656b4ffd914305f2b14b49a0555cd13a6fc87be0fd4246a18"),
     ("multiblock-sieve", ROOT / "positive-square-energy" / "pentacyclic-general"
      / "multiblock-induced-territory-theorem.md",
      "45be1db908392dfc046955f8649be09cb90a3e79ae309dfe8e1c36ccac4a4b84"),
@@ -32,7 +32,7 @@ SOURCES = (
      "08c4d9b151a93ddeeb19e6e2e7239317342e72171a555158b22b2f2977986edc"),
     ("owner-closure", ROOT / "positive-square-energy" / "pentacyclic-general"
      / "four-residual-owner-exact-closure.md",
-     "b182d37b472808cc2c000e61958471bc6c998ade17e02ec8ea14f7329653cd46"),
+     "22e7a9609e9cf70068ee2b511dfc084ffc4d6cfc1a436b76387a417efa740431"),
     ("doubled-c4-retained-packet", ROOT / "positive-square-energy"
      / "pentacyclic-general"
      / "doubled-c4-111-two-triangles-retained-packet.md",
@@ -43,7 +43,7 @@ SOURCES = (
     ("diamond-two-triangle-verifier", DTT_VERIFIER,
      "24da5324c6695de4795fbd7885fbeadf986fabe1b52e2aec2082c92223addc9a"),
     ("pentagon-sector-m2-verifier", SECTOR_M2_VERIFIER,
-     "fe15ef1639a3f0aca33326fa1d5de799069fd9394d7a5c211a0ff80375b75a1d"),
+     "ef7493898a7e5ed2ab970d478cd4dfd5cc4e6d718ac23a8388e341e906885660"),
     ("doubled-triangle-gate", ROOT / "positive-square-energy" / "tricyclic-general"
      / "doubled-triangle-dnn-cover.md",
      "d2aa1f7ae2a2abc825cef0f7da82af15523e66c5bec9b4cc4fe8e3a042ee91dc"),
@@ -72,7 +72,7 @@ ALL_LENGTH_GATES = (
 )
 
 FOUR_RESIDUALS = (
-    ("D+T+T+P", "positive-route-or-bridge-free", "D+T-anchor-minus-at-most-two-trees"),
+    ("D+T+T+P", "positive-route-or-bridge-free", "direct-anchor-or-exact-sector"),
     ("doubled-triangle-111+T+T", "longer-or-first-simple", "dnn-gate-or-owner-anchor"),
     ("doubled-c4-exceptional-orbit+T+T", "longer-or-first-simple",
      "dnn-gate-or-owner-isomorphism-anchor"),
@@ -103,9 +103,11 @@ OWNER_TRANSPORT_OUTPUT_SHA256 = "7a567620bff5447809ae3cca3bd679775b30e32d46ba50b
 OWNER_TRANSPORT_MANIFEST_SHA256 = "a64f10c020895e93e4b7a79503d72e3af42917479cda29d699000a487ab22f60"
 DTT_FILE_SHA256 = "24da5324c6695de4795fbd7885fbeadf986fabe1b52e2aec2082c92223addc9a"
 DTT_OUTPUT_SHA256 = "a6f61bdafa04dcc1705634ab7b026b7ce5c0cf1b9d7809cf0f5e7b94b7034ff2"
-SECTOR_M2_FILE_SHA256 = "fe15ef1639a3f0aca33326fa1d5de799069fd9394d7a5c211a0ff80375b75a1d"
-SECTOR_M2_OUTPUT_SHA256 = "8219a04a5ec4b39da189672ea96c6389d1af966e11ce5bc9fd3c6b3cd8431221"
+SECTOR_M2_FILE_SHA256 = "ef7493898a7e5ed2ab970d478cd4dfd5cc4e6d718ac23a8388e341e906885660"
+SECTOR_M2_OUTPUT_SHA256 = "83aba772eb28f7dfeecd66026b861440d9c37613923ef278e428c4eb247ab621"
+SECTOR_M2_SEMANTIC_TOKEN = "pentagon-sector-m2:bridge-free-D+C5+2C3:exact-owner-sectors:v1"
 SECTOR_M2_REQUIRED = (
+    "semantic receipt " + SECTOR_M2_SEMANTIC_TOKEN,
     "block-node trees 16",
     "weighted Cayley expected 40500",
     "labelled incidence encodings checked 40500",
@@ -138,7 +140,7 @@ OWNER_TRANSPORT_REQUIRED = (
     "canonical_transport_manifest_sha256: " + OWNER_TRANSPORT_MANIFEST_SHA256,
     "rejected_hostile_mutations: 5",
 )
-EXPECTED_MANIFEST_SHA256 = "121739e13dad2a712326f5dfb990e588e97255a0fb9046206fcaf72824dda396"
+EXPECTED_MANIFEST_SHA256 = "d19e58cf7568dcc642263c38aee29187774211c5131f5e90e1160d394941d475"
 
 
 def require(condition, message):
@@ -208,17 +210,47 @@ def all_length_gate_ledger(entries=ALL_LENGTH_GATES, source_entries=SOURCES):
     return records
 
 
-def residual_ledger(entries=FOUR_RESIDUALS):
+def residual_ledger(sector_receipt, entries=FOUR_RESIDUALS):
     require(entries == FOUR_RESIDUALS, "four-residual closure ledger changed")
     require(len(entries) == 4 and len({entry[0] for entry in entries}) == 4,
             "four-residual closure is not exact")
     closure = (ROOT / "positive-square-energy" / "pentacyclic-general"
                / "four-residual-owner-exact-closure.md").read_text(encoding="ascii")
     required = ("multiblock residual is empty", "direct/direct", "direct/nested",
-                "positive route", "interior-owner orbit")
+                "positive route", "interior-owner orbit",
+                "no bridge anywhere in the diamond-row cyclic hull has a triangle",
+                "Only with this bridge-free conclusion do we invoke the exact",
+                "exact pentagon owner-sector partition")
     require(all(token in closure for token in required), "owner-exact closure ledger changed")
-    return [{"family": family, "split": split, "closure": owner}
-            for family, split, owner in entries]
+    require(type(sector_receipt) is dict,
+            "four-residual D+T+T+P row omitted m=2 semantic child receipt")
+    require(sector_receipt.get("semantic_token") == SECTOR_M2_SEMANTIC_TOKEN,
+            "four-residual D+T+T+P row has wrong m=2 semantic token")
+    require(sector_receipt.get("scope") ==
+            "bridge-free D+C5+2C3 pentagon sectors (m=2)",
+            "four-residual D+T+T+P row has wrong m=2 semantic scope")
+    require(sector_receipt.get("file_sha256") == SECTOR_M2_FILE_SHA256 and
+            sector_receipt.get("output_sha256") == SECTOR_M2_OUTPUT_SHA256,
+            "four-residual D+T+T+P row has unauthenticated m=2 receipt")
+    require(("semantic receipt " + SECTOR_M2_SEMANTIC_TOKEN) in
+            sector_receipt.get("required_lines", ()),
+            "four-residual D+T+T+P row lacks executed m=2 semantic token")
+    records = []
+    for family, split, owner in entries:
+        record = {"family": family, "split": split, "closure": owner}
+        if family == "D+T+T+P":
+            require(owner == "direct-anchor-or-exact-sector",
+                    "D+T+T+P closure is not direct-anchor-or-exact-sector")
+            record["required_child_semantic_token"] = SECTOR_M2_SEMANTIC_TOKEN
+            record["child_receipt"] = {
+                "path": sector_receipt["path"],
+                "file_sha256": sector_receipt["file_sha256"],
+                "output_sha256": sector_receipt["output_sha256"],
+                "scope": sector_receipt["scope"],
+                "semantic_token": sector_receipt["semantic_token"],
+            }
+        records.append(record)
+    return records
 
 
 def paper_gates(required=PAPER_REQUIRED):
@@ -250,9 +282,12 @@ def invoke_sector_m2(path=SECTOR_M2_VERIFIER, digest=SECTOR_M2_FILE_SHA256,
             output_digest, "m=2 sector canonical output changed")
     require(all(line in completed.stdout for line in required),
             "m=2 sector acceptance ledger changed")
+    require(("semantic receipt " + SECTOR_M2_SEMANTIC_TOKEN) in completed.stdout,
+            "m=2 sector semantic receipt missing from executed output")
     return {"path": str(path.relative_to(ROOT)),
             "file_sha256": digest, "output_sha256": output_digest,
             "scope": "bridge-free D+C5+2C3 pentagon sectors (m=2)",
+            "semantic_token": SECTOR_M2_SEMANTIC_TOKEN,
             "block_node_trees": 16,
             "weighted_encodings": 40500,
             "relevant_encodings": 18720,
@@ -344,15 +379,16 @@ def invoke_rank5(path=RANK5_MASTER, digest=RANK5_FILE_SHA256,
 def audit(sources=SOURCES, partitions=BLOCK_PARTITIONS, gates=ALL_LENGTH_GATES,
           residuals=FOUR_RESIDUALS, expected_digest=EXPECTED_MANIFEST_SHA256):
     require(expected_digest == EXPECTED_MANIFEST_SHA256, "manifest digest policy changed")
+    sector_receipt = invoke_sector_m2()
     manifest = {
         "schema": "pentacyclic-master-fail-closed-v1",
         "paper_sha256": SOURCES[0][2],
         "source_locks": source_locks(sources),
         "block_rank_partition": partition_ledger(partitions),
         "all_length_gates": all_length_gate_ledger(gates, sources),
-        "four_residual_closure": residual_ledger(residuals),
+        "four_residual_closure": residual_ledger(sector_receipt, residuals),
         "paper_required_ledger": paper_gates(),
-        "pentagon_sector_partition_m2": invoke_sector_m2(),
+        "pentagon_sector_partition_m2": sector_receipt,
         "diamond_two_triangle": invoke_dtt(),
         "doubled_c4_owner_transport": invoke_owner_transport(),
         "rank_five_master": invoke_rank5(),
@@ -421,8 +457,20 @@ def hostile_self_checks():
     expect_rejected(lambda: all_length_gate_ledger(tuple(changed_gates)),
                     "gate bound omitted")
     mutations += 1
+    sector_receipt = invoke_sector_m2()
     changed_residuals = FOUR_RESIDUALS[:-1]
-    expect_rejected(lambda: residual_ledger(changed_residuals), "residual family omitted")
+    expect_rejected(lambda: residual_ledger(sector_receipt, changed_residuals),
+                    "residual family omitted")
+    mutations += 1
+    missing_sector_receipt = dict(sector_receipt)
+    missing_sector_receipt.pop("semantic_token")
+    expect_rejected(lambda: residual_ledger(missing_sector_receipt),
+                    "D+T+T+P m=2 semantic receipt omitted")
+    mutations += 1
+    wrong_sector_receipt = dict(sector_receipt)
+    wrong_sector_receipt["scope"] = "bridge-free D+C5+3C3 pentagon sectors (m=3)"
+    expect_rejected(lambda: residual_ledger(wrong_sector_receipt),
+                    "D+T+T+P m=2 semantic receipt mis-scoped")
     mutations += 1
     expect_rejected(lambda: paper_gates(PAPER_REQUIRED[:-1]), "paper conclusion omitted")
     mutations += 1
@@ -474,7 +522,7 @@ def report(digest, mutations):
         "retained_packet: eight doubled-C4 anchors locked; owner-isomorphism transport checked",
         "DTT_packet: 14 bridge-free incidences authenticated; multi-interface connectors and D+T^3 excluded",
         "pentagon_sectors_m2: 40500 exact incidences checked; 18720 relevant; minimum credit endpoint 1",
-        "four_residuals: exact ledger closed; multiblock residual empty",
+        "four_residuals: exact ledger closed; D+T+T+P row binds executed m=2 semantic receipt; multiblock residual empty",
         "rank_five_master: 1+3+13+24+38+23+16=118 kernels accepted",
         "global_scope: every finite simple connected graph with |E|=|V|+4",
         "conclusion: s+(G)>=|V(G)|",
@@ -498,7 +546,7 @@ def main():
     args = parser.parse_args()
     manifest, digest = audit()
     mutations = hostile_self_checks()
-    require(mutations == 33, "hostile mutation count changed")
+    require(mutations == 35, "hostile mutation count changed")
     output = report(digest, mutations)
     if not args.emit and sys.flags.optimize == 0:
         require(optimized_output() == output, "normal and python -O output differ")
