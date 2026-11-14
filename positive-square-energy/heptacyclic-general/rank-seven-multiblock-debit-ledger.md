@@ -6,7 +6,8 @@ This is a fail-closed analysis note for the main lane. It makes no theorem
 claim. It classifies the positive block-rank partitions of seven, records the
 rows already discharged by existing connected rank-at-most-six results or by
 block-additive DNN certificates, and isolates the packets that still need an
-owner-exact argument.
+owner-exact argument.  It also records the discovered global hull-bridge
+blocker; it is not a complete reduction receipt.
 
 Write
 
@@ -33,19 +34,25 @@ be assigned a debit unless it separately supplies a DNN certificate.
 
 ## Immediate connected-theorem split
 
-Let the cyclic hull be the minimal block-cut subtree containing all cyclic
-blocks. If an actual bridge occurs in this hull, deleting that bridge partitions
-the vertices into two connected induced graphs of positive ranks `a` and
-`7-a`, where `1<=a<=6`. The complete connected theorems through rank six give
-nonnegative credit on both sides. Hence every such incidence is already
-closed. The bridge edge crosses the induced vertex partition and needs no
-owner; every connector vertex, other connector edge, and rooted branch remains
-with its unique side.
+Let the cyclic hull be the minimal block--cut subtree containing all cyclic
+blocks.  An actual bridge in this hull partitions the vertices into two
+connected induced positive-rank sides.  **This fact alone does not close the
+row.**  The completed rank-two through rank-six theorems give nonnegative
+credit, but rank one is unicyclic and may be negative; in particular
+`sigma(C5)=2-sqrt(5)<0`.
 
-Consequently every packet retained below is restricted to a bridge-free cyclic
-hull: cyclic blocks meet through shared cut vertices. This restriction is
-essential. The unquantified conclusion `sigma>=0` on a rank-six side cannot pay
-a cycle-minus-cut tree of credit `-1`.
+A packet may therefore pass to a bridge-free hull only after an oriented,
+packet-specific bridge argument certifies the rank-one side (or after another
+exact debit certificate pays it).  The repaired `R31-S` packet does this by
+orienting away from its rank-three block: the away side is a strict-positive
+triangular cactus of rank `q`, and the root side has rank `7-q in {3,4,5,6}`.
+No such repair is asserted here for every other packet.  The bridge edge itself
+crosses the induced partition and needs no owner; every connector vertex,
+other connector edge, and rooted branch remains with its unique side.
+
+Consequently the bridge-free ledger below is conditional on the appropriate
+packet-specific bridge dispatch.  Treating it as a generic theorem is a known
+global blocker.
 
 ## Exact debit inputs
 
@@ -116,14 +123,15 @@ every DNN predicate is closed and is not a packet residual.
 
 ## Owner-exact packet registry
 
-After removing actual-bridge incidences and all rows satisfying (2), the
-current multiblock obligation is the following disjoint registry.
+Conditionally after packet-specific actual-bridge dispatches, and after all
+rows satisfying (2), the bridge-free multiblock obligation is the following
+disjoint registry.
 
 | key | block partition | required owner action |
 |---|---|---|
 | `R21` | `2+1^5` | closed by the nested induced-piece theorem: theta-arm/six-triangle and `D+TT` typed anchors |
 | `R221` | `2+2+1^3` | closed by the physical second-diamond nested induced-piece packet |
-| `R31-S` | `3+1^4` | reduced to the canonical doubled-`C4` plus three-triangle packet; all 110 marked incidences close except two one-sided root-sensitive packets `C4` and `D3` |
+| `R31-S` | `3+1^4` | physical closure proved by the ordered hull-bridge / connector-fibre / rank-sum-five shared-triangle dispatch; the old `C4`/`D3` labels are classifier outputs, not physical side topologies |
 | `R31-K` | `3+1^4` | closed by the actual-`K4+T` anchor and three nested first-boundary territories |
 | `R321` | `3+2+1+1` | closed by the actual-`K4` terminal-triangle allocation, including nested theta incidence |
 | `R322` | `3+2+2` | closed by the actual-`K4` two-boundary induced-piece packet |
@@ -151,16 +159,16 @@ maximal currently supported nine-key subset
 
 `R21, R221, R31-K, R321, R322, R41, R421, R511-K5e, R511-K71`
 
-and returns exactly `R31-S` and `R511-K22`. The returned doubled-`C4` subclass
-has a pinned retained threshold `>1` against three remaining demands, while the
-K22 row has an anchor threshold `>2` against its owner tree and two arbitrary
-cycle boundaries. Thus the full multiblock theorem remains open on exactly
-those two keys; this ledger no longer has nine unexpanded packet templates.
-Rank-six structural targets cannot in general be inferred by subtracting the
-DNN-owned key set unless the final manifest exposes a disjoint typed owner
-partition.
+and originally returned exactly `R31-S` and `R511-K22`.  The K22 row was
+subsequently closed by its exact packet.  The physical `R31-S` theorem now
+supersedes the synthetic one-sided `C4`/`D3` interpretation and closes that
+bridge-free packet as well.  These packet closures do **not** make the global
+ledger complete: the conditional bridge removal above remains unauthenticated
+for the other packet families.  Rank-six structural targets cannot in general
+be inferred by subtracting the DNN-owned key set unless the final manifest
+exposes a disjoint typed owner partition.
 
-## Ownership contract for the next pass
+## Ownership contract for the bridge-free packet pass
 
 For each retained physical row, root the bridge-free block-cut incidence tree
 at its distinguished structural block. The final ledger must assign vertices
@@ -186,14 +194,16 @@ The accepting key equality must be
 
 `= bridge-split keys disjoint union DNN keys disjoint union packet-owner keys`.
 
-The packet-owner keys are now expanded. The exact owner residual is
-`{R31-S, R511-K22}`.  Inside `R31-S`, the marked-cut census in
-`r31-s-doubled-c4-three-triangle-frontier.md` removes every noncanonical,
-non-doubled-`C4`, positive-route, opened-owner, and balanced-cut row.  Its exact
-remaining statements are the one-sided rooted packets `C4` and `D3`; the old
-coarse description as three independent negative territories is not sharp.
-Until both returned keys are proved, no complete
-multiblock or all-connected rank-seven conclusion follows from this note.
+The bridge-free packet-owner keys are now expanded and their later exact
+packets close the former residuals `R511-K22` and `R31-S`.  In `R31-S`, the
+marked-cut census is now used only as the exact DNN/structural input sieve; the
+physical full-parent gate proves the ordered three-way disposition without
+laundering the historical `C4`/`D3` labels into side topologies.
+
+The remaining obligation is upstream: every packet family excluded by the
+phrase "bridge-free" needs a valid oriented or packet-specific actual-bridge
+argument.  Until that bridge cascade is audited, no complete multiblock or
+all-connected rank-seven conclusion follows from this note.
 
 ## Exact debit arithmetic audit
 

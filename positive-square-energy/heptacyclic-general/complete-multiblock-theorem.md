@@ -1,4 +1,4 @@
-# Heptacyclic multiblock program: exact reduction with one open packet
+# Heptacyclic multiblock program: fail-closed reduction with a bridge blocker
 
 ## Current status and scope
 
@@ -16,19 +16,25 @@ incidence, arbitrary bridge connectors, repeated or nested attachment cuts,
 and arbitrary finite rooted-tree attachments.  The partition `(7)` is outside
 this multiblock program.
 
-**Status: open.**  The exact owner reduction leaves one key, `R31-S`.  Its
-finite doubled-`C4` orbit transport and its `C4` subpacket are verified, but the
-analytic `D3` subpacket is not.  Therefore this note is not a theorem and makes
-no all-multiblock or all-heptacyclic conclusion.
+**Status: open.**  The physical `R31-S` packet is now closed by
+`r31-s-physical-shared-triangle-closure.md` and its full-parent adjacency gate.
+The old `D3` obstruction was a synthetic topology and is not used.  However,
+the global reduction still contains an invalid generic hull-bridge sentence:
+a positive rank-one side need not have nonnegative credit (`C5` has
+`sigma(C5)=2-sqrt(5)<0`).  Until every other packet's hull-bridge case receives
+an oriented or packet-specific repair, this note makes no all-multiblock or
+all-heptacyclic conclusion.
 
 ## Block split and ownership contract
 
 Cyclomatic rank is additive over positive-rank blocks, so their ranks form one
 of the fifteen integer partitions of seven.  Exactly fourteen have at least
-two parts.  If the cyclic hull contains an actual bridge, deleting it gives
-two connected induced sides of positive ranks at most six, owned by the
-completed lower-rank theorems.  Otherwise all retained incidences are through
-shared cuts.
+two parts.  An actual bridge in the cyclic hull always gives two connected induced
+sides, but positive rank alone does not certify both credits: rank one is the
+unicyclic exception.  A packet may discard its bridge row only after orienting
+the bridge and proving that any rank-one side is strict positive (as the
+triangular away side is in `R31-S`) or after supplying another exact debit
+argument.  Otherwise all retained incidences are through shared cuts.
 
 Every packet assigns vertices before charging credit:
 
@@ -72,35 +78,29 @@ The nested induced-piece theorem closes
 
 `R21, R221, R31-K, R321, R322, R41, R421, R511-K5e, R511-K71`.
 
-The later exact packets close `R511-K22` and all three `R61` keys.  In
-`R31-S`, balanced marked records and the `C4` one-sided records are closed.
-The `D3` one-sided records are not.  Hence the authoritative final residual is
-exactly
+The later exact packets close `R511-K22` and all three `R61` keys.  In `R31-S`, the historical balanced/`C4`/`D3` labels are superseded by
+physical adjacency reconstruction.  The ordered hull-bridge, connector-fibre,
+and two-shared-cut-cactus dispatch closes that packet.  The conservative
+machine ledger still records `{R31-S}` as its global fail-closed residual until
+the upstream bridge cascade is repaired; it must not be interpreted as a
+remaining `D3` analytic obligation.
 
-`{R31-S}`.                                                    (1)
+## Why the global master is still open
 
-## Why `R31-S` is still open
+The physical `R31-S` closure reconstructs the full parent graph before making
+any debit.  If a hull bridge occurs, it is oriented away from the rank-three
+block; the away side is a strict-positive triangular cactus of rank `q`, while
+the root side has rank `7-q in {3,4,5,6}`.  If a connector-interior complete
+fibre contains `q` triangles, it is strict positive and its complement has rank
+`6-q in {2,3,4,5}`.  Only after both dispatches are excluded are the two exact
+tree charges and the rank-sum-five triangular split used.
 
-The physical first-simple doubled-`C4` exceptional set consists of eight rows,
-one genuine kernel-automorphism orbit, split as four switching-class-`110` and
-four switching-class-`111` rows.  Every physical owner, exact symbolic
-connector path, cut/open position, path remnant, and decorated rooted
-block-cut record is transported recordwise.  The census on every target is
-
-`110 = 54 balanced + 28 C4 + 28 D3`.
-
-Every first non-simple doubled member has one of two exact DNN routes, with
-bounds `1862/1000<2` or `1662/1000<2`, so no arbitrary-length orbit is omitted.
-This finite transport result is only a prerequisite.
-
-The 28 `D3` records require the uniform inequality
-
-`sigma(Theta(1,2,2)+T^3)>3`.
-
-The old diagnostic checks only the imaginary Sachs activity coefficients.  It
-does not prove the claimed real-part implication, control the continuous phase,
-or establish the signed Coulson area bound.  That executable therefore exits
-nonzero, and no verifier owns `R31-S:D3`.
+That argument is specific to `R31-S`.  The previous master sentence treated
+*every* actual hull bridge as two nonnegative positive-rank sides.  This is
+false when one side has rank one: for example `C5` has negative credit.  The
+other packet proofs were developed downstream of that sentence and have not
+all been audited with an oriented strict-positive rank-one side.  Promoting the
+master now would therefore overclaim beyond the passing `R31-S` gate.
 
 ## Fail-closed audit
 
@@ -112,7 +112,8 @@ python3 -O research/heptacyclic-multiblock-master-verifier.py
 ```
 
 Both invocations authenticate the exact fourteen-partition ledger, run every
-closed packet and finite prerequisite in normal and optimized mode, reject
-hostile scope/ownership mutations, print `open residual: R31-S`, and exit with
-status `1`.  The nonzero exit is intentional.  A passing `COMPLETE` receipt or
-an empty residual would contradict (1).
+closed packet and finite prerequisite (including the passing physical `R31-S`
+gate) in normal and optimized mode, reject hostile scope/ownership mutations,
+and exit with status `1`.  The output names the global hull-bridge repair as
+the blocker.  The nonzero exit is intentional; a global `COMPLETE` receipt
+would currently overclaim.

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Fail-closed audit of the still-open rank-seven multiblock program.
+"""Fail-closed audit of the rank-seven multiblock reduction.
 
-The audit authenticates the exact partition/owner reduction and every closed
-child packet.  It deliberately exits nonzero while the D3 analytic implication
-inside R31-S is unproved; a zero exit must never be mistaken for a theorem
-receipt.
+The physical R31-S packet has a passing adjacency/Tarjan gate.  This master
+still exits nonzero: the upstream generic hull-bridge reduction is false for
+rank-one sides, and the other packet bridge cases lack a uniform repair.  A
+zero exit must never be mistaken for a theorem receipt.
 """
 
 from __future__ import annotations
@@ -22,15 +22,17 @@ LEDGER = ROOT / "research/fixtures/heptacyclic-multiblock-owner-ledger.json"
 LEDGER_SHA256 = "0630cd96fd341b9017b31d6a36341cfead0c6bca64517c1073797ffc14747f42"
 SOURCES = {
     "theorem": (ROOT / "positive-square-energy/heptacyclic-general/complete-multiblock-theorem.md",
-                "f7a3e009b9b617b0ea5f245702e7e93d2f74116ef7d388d65222069cb06ac347"),
+                "5beaea68724b6dfbccc50a6864c38cc3e76e1941957227f6a948dd5bd0be2bbb"),
     "debit-ledger": (ROOT / "positive-square-energy/heptacyclic-general/rank-seven-multiblock-debit-ledger.md",
-                     "7637b48974e130b4baa34d64e5fc284394d762364ca514e9158dbdd6e0c78c73"),
+                     "c7d10f3d22938bb43436531254cd8f3d5ebc5841411475827a13d023368f55e4"),
     "two-debit": (ROOT / "positive-square-energy/heptacyclic-general/two-debit-induced-piece-theorem.md",
                   "29304b8c920c6efd43d05ce0e8f2c21f44e2656ded0c3ce69ea79b5271454213"),
     "nested": (ROOT / "positive-square-energy/heptacyclic-general/nested-induced-piece-packet-theorem.md",
                "79b44180ff2d3ca44b5537e2913709fa6c2334b2e475990b34508475592a000b"),
     "r31-frontier": (ROOT / "positive-square-energy/heptacyclic-general/r31-s-doubled-c4-three-triangle-frontier.md",
-                     "ef6f646a0a4416a161dae588940c271a73104c6e86a243baba22928234a082d6"),
+                     "9575016821113e7873a26de25dda36c48c53309f29fcab89dbde50c7c017aa18"),
+    "r31-physical": (ROOT / "positive-square-energy/heptacyclic-general/r31-s-physical-shared-triangle-closure.md",
+                     "8ca1f2ae4e5cd7a6bc81136378ca1351c886deacfefbef638b316a6af5522e1f"),
     "r31-c4": (ROOT / "positive-square-energy/heptacyclic-general/r31-s-c4-marked-four-triangle-theorem.md",
                "78344337226ae5c5b42645dd563390eec9eb462824e78fd4e42d7fa54051309d"),
     "r31-d3-open": (ROOT / "positive-square-energy/heptacyclic-general/r31-s-d3-diamond-territory-packet.md",
@@ -47,7 +49,7 @@ CHILDREN = {
         "f37e31be0d7888d43a7d8f752642fde04a71f1e1abc5317e94da7e0d7436a501",
         "0ac8b98c0abf5487577a65fabe386434f52d9bc05706bff146102a23f5ecace2"),
     "rank-seven-nested": ("rank-seven-nested-induced-piece-verifier.py",
-        "228812c6578dc54376905490050535a39366a27eb790f7ec7b0c88a69a5d6188",
+        "ddfd6ff7f99859f413c70bad912b4b67e126adb72082a60460ffa7fab0de9961",
         "d19e6d5961a47cc47ab14cf6308c7b90948ee64860a1119e969514395d3aec5d"),
     "r31-s-marked-cut": ("r31-s-doubled-c4-marked-cut-verifier.py",
         "b14e7544bd8f5298fd425c68228e5fb4f5c49071dd3a7ec773ee5de610630c71",
@@ -55,6 +57,9 @@ CHILDREN = {
     "r31-s-c4": ("r31-s-c4-marked-four-triangle-verifier.py",
         "d405f644467ab59e615a4cf6fdf5ada1a3ba8c21eadcd1ee7035b3fa37d159e0",
         "15c8a1e8880762ce0fb8ad314f026a877982098ebade9f58fc6b8a574a118804"),
+    "r31-s-physical": ("r31-s-physical-parent-verifier.py",
+        "2d7325c89fbd6e23f98d115c8245cfe8fbbf5fcf25dc9dca19b591d1ba231faa",
+        "0e59488e0a89bb485e9186e1b25d0ba0952bf604de5879784297db0d7ddf3c09"),
     "r511-k22": ("r511-k22-last-multiblock-key-verifier.py",
         "c76ad76df0db79d2a4acc2a7cc16c7d924d0d322064bf612e5a4078b7e1b0c93",
         "a8149532f0f5b92ff33bb6657df302e3ffda8ea6d177a61676c5fd206082df56"),
@@ -127,7 +132,7 @@ def load_ledger():
 
 def check_sources():
     require(set(SOURCES) == {"theorem", "debit-ledger", "two-debit", "nested",
-            "r31-frontier", "r31-c4", "r31-d3-open", "r511-k22", "r61", "r61-k223"},
+            "r31-frontier", "r31-physical", "r31-c4", "r31-d3-open", "r511-k22", "r61", "r61-k223"},
             "source registry changed")
     for name, (path, expected) in SOURCES.items():
         require(path.is_file(), f"missing source: {name}")
@@ -174,7 +179,7 @@ def audit(payload):
     }, "owner rules changed")
 
     owners = payload["verifier_owners"]
-    require(set(owners) == set(CHILDREN), "child scope registry changed")
+    require(set(owners) == set(CHILDREN) - {"r31-s-physical"}, "child scope registry changed")
     primary = [key for keys in owners.values() for key in keys if ":" not in key]
     closed_keys = set(PACKET_KEYS) - set(payload["final_residual"])
     require(set(primary) == closed_keys,
@@ -257,14 +262,15 @@ def main():
     output = (
         "heptacyclic multiblock master audit: exact reduction passed\n"
         "partition scope: 14 non-(7) partitions; excluded single-block partition: (7)\n"
-        f"owner ledger: {len(PACKET_KEYS)} packet keys; open residual: R31-S\n"
+        f"owner ledger: {len(PACKET_KEYS)} packet keys; conservative global residual: R31-S\n"
         f"closed/prerequisite verifiers: {len(outputs)}; "
         f"executions: {2 * len(outputs)} normal/-O\n"
         f"hostile mutations rejected: {rejected}\n"
-        "blocked implication: D3 imaginary-carrier signs do not prove the required "
-        "real-part/continuous-phase bound\n"
+        "R31-S physical adjacency gate: PASSED; synthetic D3 implication not used\n"
+        "blocked implication: generic positive-rank hull-bridge sides are not both "
+        "automatically nonnegative (rank-one C5 is negative)\n"
         "conclusion: NOT ESTABLISHED for all connected rank-seven multiblock graphs\n"
-        "status: OPEN; FAIL CLOSED PENDING R31-S:D3"
+        "status: OPEN; FAIL CLOSED PENDING GLOBAL HULL-BRIDGE REPAIR"
     )
     if "--optimized-master-child" not in sys.argv and not sys.flags.optimize:
         child = subprocess.run([sys.executable, "-O", __file__, "--optimized-master-child"],

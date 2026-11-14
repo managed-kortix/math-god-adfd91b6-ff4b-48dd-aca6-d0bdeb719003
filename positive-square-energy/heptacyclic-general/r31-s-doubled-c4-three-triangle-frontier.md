@@ -1,19 +1,19 @@
-# `R31-S`: doubled-`C4` orbit reduction with one open D3 packet
+# `R31-S`: doubled-`C4` orbit reduction and physical closure
 
 ## Exact reduction and present status
 
-Put `sigma(X)=s^+(X)-|V(X)|`.  In the `R31-S` residual all four external
-cycles are triangles.  Boundary-open one external triangle leaf `Q_0`; the
-cut stays upstream and the opened side is a nonempty induced tree `S`, so
-`sigma(S)=-1`.  The retained graph `H` is a doubled-`C4` block plus three
-triangular blocks.  The parent row would close if
+Put `sigma(X)=s^+(X)-|V(X)|`.  The finite orbit reduction below remains the
+exact input sieve, but its old `D3` interpretation was not physical: the
+purported second degree-two diamond vertex has no preimage in the doubled
+fibre.  The full parent-graph theorem
+`r31-s-physical-shared-triangle-closure.md`, authenticated from adjacency by
+`research/r31-s-physical-parent-verifier.py`, now closes the physical `R31-S`
+packet via an ordered bridge / connector-fibre / two-triangular-side dispatch.
 
-`sigma(H)>1`.                                                 (1)
-
-The finite orbit and owner transport needed to state (1) uniformly is now
-exactly authenticated.  The analytic one-sided packet `D3` is not.  Therefore
-`R31-S` remains open and is the final residual in the authoritative
-heptacyclic multiblock ledger.
+This is an `R31-S` closure receipt only.  The global multiblock master remains
+fail-closed because the generic hull-bridge sentence in the upstream reduction
+has not been repaired for every other packet; a rank-one pentagon already
+shows why rank `1..6` cannot uniformly be called nonnegative.
 
 ## Physical exceptional orbit
 
@@ -94,23 +94,27 @@ lengths and transport with their endpoint orientation and cut/open position.
 This proves the finite all-length scope reduction without importing the
 analytic one-sided packet.
 
-## Analytic dispositions
+## Physical disposition (superseding the synthetic `D3` label)
 
-The balanced records are owned by the previously established two-side packet
-ledger.  The 28 `C4` records are closed by
-`r31-s-c4-marked-four-triangle-theorem.md`, which proves the stronger bound
-`sigma(C)>3>2`.
+The balanced/`C4`/`D3` labels in (2) are retained only as historical finite
+classifier outputs.  They are not biconnected topologies.  Reconstructing the
+actual first-simple parent shows that each doubled side contains one intrinsic
+triangle.  After the ordered full-parent dispatch and one deepest boundary
+opening, deleting a complete clean even-connector fibre and cutting an actual
+odd-connector edge leaves two connected induced shared-cut triangular cacti
+of positive ranks `r_0,r_1<=4` with
 
-The complementary 28 interior-owner records require
+`r_0+r_1=5`.
 
-`sigma(D+T^3)>3`,                                              (D3)
+The universal shared-cut cluster corollary gives each side credit `>r_i-1`, so
+their sum is `>3`.  The boundary-open tree and the connector-fibre tree each
+cost exactly one, giving total credit `>1>0`.  If a hull bridge or a cyclic
+connector fibre occurs, it is dispatched strictly before this tree ledger.
+See the physical theorem note for the proof and exact dependency list.
 
-where `D=Theta(1,2,2)`, uniformly over the marked rooted incidence and all
-rooted trees.  The diagnostic D3 program proves an exact imaginary Sachs
-carrier lemma, but does not construct the real Sachs polynomial, prove
-`I>=0 => R<0`, track the continuous argument, or establish the required
-phase-area integral.  Accordingly (D3), (1), and all of `R31-S` remain open.
-No counterexample to (D3) is claimed.
+The standalone diamond diagnostic remains useful only as an audit of a
+synthetic graph family.  It is not a premise of, and supplies no obstruction
+to, the physical `R31-S` theorem.
 
 ## Verification
 
@@ -119,12 +123,13 @@ Run
 ```text
 python3 research/r31-s-doubled-c4-marked-cut-verifier.py
 python3 -O research/r31-s-doubled-c4-marked-cut-verifier.py
-python3 research/r31-s-c4-marked-four-triangle-verifier.py
-python3 -O research/r31-s-c4-marked-four-triangle-verifier.py
-python3 research/r31-s-d3-diamond-packet-verifier.py
-python3 -O research/r31-s-d3-diamond-packet-verifier.py
+python3 research/r31-s-physical-parent-verifier.py
+python3 -O research/r31-s-physical-parent-verifier.py
 ```
 
-The orbit and C4 programs exit zero.  Both D3 invocations deliberately exit
-nonzero after printing their exact diagnostic result.  The multiblock master
-also exits nonzero while `R31-S:D3` is open.
+The first program authenticates the exact finite input orbit and all-length DNN
+routes.  The second starts from full physical adjacency, reruns Tarjan blocks,
+first-owner fibres and the ordered dispatch, checks all 110 retained incidence
+outputs on all eight anchors, and rejects bridge-priority, connector-fibre and
+rank-formula mutations.  Neither program launders the synthetic diamond as a
+physical side.
