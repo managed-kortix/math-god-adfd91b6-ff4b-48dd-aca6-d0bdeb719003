@@ -1,0 +1,6 @@
+PASS ('chain2+direct', 'A', 'x') rays 2304
+PASS ('chain2+direct', 'B', 'x') rays 2304
+PASS ('chain2+direct', 'x', 'x') rays 2304
+PASS ('chain3', 'x') rays 2304
+PASS ('fork', 'x', 'split') rays 2304
+TOTAL exact certified rays 11520

@@ -1,0 +1,1350 @@
+{
+  "schema": "D3-exact-polynomials-v1",
+  "normalization": "Psi=i^(-n)det(i diag(z)-A)=R+iI; z_v=t+y_v",
+  "records": [
+    {
+      "record": "('chain2+direct', 'A', 'x')",
+      "file": "chain2plusdirect_A_x.txt",
+      "vertices": [
+        "A",
+        "B",
+        "T1a",
+        "T1b",
+        "T2a",
+        "T2b",
+        "T3a",
+        "T3b",
+        "x",
+        "z"
+      ],
+      "edges": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "T1a"
+        ],
+        [
+          "A",
+          "T1b"
+        ],
+        [
+          "A",
+          "x"
+        ],
+        [
+          "A",
+          "z"
+        ],
+        [
+          "B",
+          "x"
+        ],
+        [
+          "B",
+          "z"
+        ],
+        [
+          "T1a",
+          "T1b"
+        ],
+        [
+          "T1a",
+          "T2a"
+        ],
+        [
+          "T1a",
+          "T2b"
+        ],
+        [
+          "T2a",
+          "T2b"
+        ],
+        [
+          "T3a",
+          "T3b"
+        ],
+        [
+          "T3a",
+          "x"
+        ],
+        [
+          "T3b",
+          "x"
+        ]
+      ],
+      "cycles": 6,
+      "raw_R_terms": 189,
+      "raw_I_terms": 93,
+      "activity_R_terms": 2885,
+      "activity_I_terms": 850,
+      "raw_R_signs": [
+        172,
+        17
+      ],
+      "raw_I_signs": [
+        1,
+        92
+      ],
+      "activity_R_signs": [
+        2853,
+        32
+      ],
+      "activity_I_signs": [
+        1,
+        849
+      ],
+      "sha256": "22361ae6bb5c0f033f1824582ffd03116336a3c03d04fd4a6163e5d709ba397e"
+    },
+    {
+      "record": "('chain2+direct', 'B', 'x')",
+      "file": "chain2plusdirect_B_x.txt",
+      "vertices": [
+        "A",
+        "B",
+        "T1a",
+        "T1b",
+        "T2a",
+        "T2b",
+        "T3a",
+        "T3b",
+        "x",
+        "z"
+      ],
+      "edges": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "x"
+        ],
+        [
+          "A",
+          "z"
+        ],
+        [
+          "B",
+          "T1a"
+        ],
+        [
+          "B",
+          "T1b"
+        ],
+        [
+          "B",
+          "x"
+        ],
+        [
+          "B",
+          "z"
+        ],
+        [
+          "T1a",
+          "T1b"
+        ],
+        [
+          "T1a",
+          "T2a"
+        ],
+        [
+          "T1a",
+          "T2b"
+        ],
+        [
+          "T2a",
+          "T2b"
+        ],
+        [
+          "T3a",
+          "T3b"
+        ],
+        [
+          "T3a",
+          "x"
+        ],
+        [
+          "T3b",
+          "x"
+        ]
+      ],
+      "cycles": 6,
+      "raw_R_terms": 189,
+      "raw_I_terms": 93,
+      "activity_R_terms": 2885,
+      "activity_I_terms": 850,
+      "raw_R_signs": [
+        172,
+        17
+      ],
+      "raw_I_signs": [
+        1,
+        92
+      ],
+      "activity_R_signs": [
+        2853,
+        32
+      ],
+      "activity_I_signs": [
+        1,
+        849
+      ],
+      "sha256": "c90677fa0c57e6ef76f8cb3b88e1d1c722606676019345e88bc16406f7dd92d3"
+    },
+    {
+      "record": "('chain2+direct', 'x', 'A')",
+      "file": "chain2plusdirect_x_A.txt",
+      "vertices": [
+        "A",
+        "B",
+        "T1a",
+        "T1b",
+        "T2a",
+        "T2b",
+        "T3a",
+        "T3b",
+        "x",
+        "z"
+      ],
+      "edges": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "T3a"
+        ],
+        [
+          "A",
+          "T3b"
+        ],
+        [
+          "A",
+          "x"
+        ],
+        [
+          "A",
+          "z"
+        ],
+        [
+          "B",
+          "x"
+        ],
+        [
+          "B",
+          "z"
+        ],
+        [
+          "T1a",
+          "T1b"
+        ],
+        [
+          "T1a",
+          "T2a"
+        ],
+        [
+          "T1a",
+          "T2b"
+        ],
+        [
+          "T1a",
+          "x"
+        ],
+        [
+          "T1b",
+          "x"
+        ],
+        [
+          "T2a",
+          "T2b"
+        ],
+        [
+          "T3a",
+          "T3b"
+        ]
+      ],
+      "cycles": 6,
+      "raw_R_terms": 187,
+      "raw_I_terms": 85,
+      "activity_R_terms": 2884,
+      "activity_I_terms": 834,
+      "raw_R_signs": [
+        176,
+        11
+      ],
+      "raw_I_signs": [
+        0,
+        85
+      ],
+      "activity_R_signs": [
+        2855,
+        29
+      ],
+      "activity_I_signs": [
+        0,
+        834
+      ],
+      "sha256": "c59aab3bdecd65b8cd675c2bddfc9068fd38e93e1c02eb19547362c0846f6fb8"
+    },
+    {
+      "record": "('chain2+direct', 'x', 'B')",
+      "file": "chain2plusdirect_x_B.txt",
+      "vertices": [
+        "A",
+        "B",
+        "T1a",
+        "T1b",
+        "T2a",
+        "T2b",
+        "T3a",
+        "T3b",
+        "x",
+        "z"
+      ],
+      "edges": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "x"
+        ],
+        [
+          "A",
+          "z"
+        ],
+        [
+          "B",
+          "T3a"
+        ],
+        [
+          "B",
+          "T3b"
+        ],
+        [
+          "B",
+          "x"
+        ],
+        [
+          "B",
+          "z"
+        ],
+        [
+          "T1a",
+          "T1b"
+        ],
+        [
+          "T1a",
+          "T2a"
+        ],
+        [
+          "T1a",
+          "T2b"
+        ],
+        [
+          "T1a",
+          "x"
+        ],
+        [
+          "T1b",
+          "x"
+        ],
+        [
+          "T2a",
+          "T2b"
+        ],
+        [
+          "T3a",
+          "T3b"
+        ]
+      ],
+      "cycles": 6,
+      "raw_R_terms": 187,
+      "raw_I_terms": 85,
+      "activity_R_terms": 2884,
+      "activity_I_terms": 834,
+      "raw_R_signs": [
+        176,
+        11
+      ],
+      "raw_I_signs": [
+        0,
+        85
+      ],
+      "activity_R_signs": [
+        2855,
+        29
+      ],
+      "activity_I_signs": [
+        0,
+        834
+      ],
+      "sha256": "cfb7c908690e8acd8f0d9ef724988c16f6b18729e82c2f67ec7d5e07cde14252"
+    },
+    {
+      "record": "('chain2+direct', 'x', 'x')",
+      "file": "chain2plusdirect_x_x.txt",
+      "vertices": [
+        "A",
+        "B",
+        "T1a",
+        "T1b",
+        "T2a",
+        "T2b",
+        "T3a",
+        "T3b",
+        "x",
+        "z"
+      ],
+      "edges": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "x"
+        ],
+        [
+          "A",
+          "z"
+        ],
+        [
+          "B",
+          "x"
+        ],
+        [
+          "B",
+          "z"
+        ],
+        [
+          "T1a",
+          "T1b"
+        ],
+        [
+          "T1a",
+          "T2a"
+        ],
+        [
+          "T1a",
+          "T2b"
+        ],
+        [
+          "T1a",
+          "x"
+        ],
+        [
+          "T1b",
+          "x"
+        ],
+        [
+          "T2a",
+          "T2b"
+        ],
+        [
+          "T3a",
+          "T3b"
+        ],
+        [
+          "T3a",
+          "x"
+        ],
+        [
+          "T3b",
+          "x"
+        ]
+      ],
+      "cycles": 6,
+      "raw_R_terms": 180,
+      "raw_I_terms": 92,
+      "activity_R_terms": 2860,
+      "activity_I_terms": 846,
+      "raw_R_signs": [
+        163,
+        17
+      ],
+      "raw_I_signs": [
+        1,
+        91
+      ],
+      "activity_R_signs": [
+        2818,
+        42
+      ],
+      "activity_I_signs": [
+        1,
+        845
+      ],
+      "sha256": "d5d6fdb003e23e779db782d2999cb3e3820d8855291e823ecc9040e38ae8f173"
+    },
+    {
+      "record": "('chain3', 'x')",
+      "file": "chain3_x.txt",
+      "vertices": [
+        "A",
+        "B",
+        "T1a",
+        "T1b",
+        "T2a",
+        "T2b",
+        "T3a",
+        "T3b",
+        "x",
+        "z"
+      ],
+      "edges": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "x"
+        ],
+        [
+          "A",
+          "z"
+        ],
+        [
+          "B",
+          "x"
+        ],
+        [
+          "B",
+          "z"
+        ],
+        [
+          "T1a",
+          "T1b"
+        ],
+        [
+          "T1a",
+          "T2a"
+        ],
+        [
+          "T1a",
+          "T2b"
+        ],
+        [
+          "T1a",
+          "x"
+        ],
+        [
+          "T1b",
+          "x"
+        ],
+        [
+          "T2a",
+          "T2b"
+        ],
+        [
+          "T2a",
+          "T3a"
+        ],
+        [
+          "T2a",
+          "T3b"
+        ],
+        [
+          "T3a",
+          "T3b"
+        ]
+      ],
+      "cycles": 6,
+      "raw_R_terms": 193,
+      "raw_I_terms": 103,
+      "activity_R_terms": 2897,
+      "activity_I_terms": 876,
+      "raw_R_signs": [
+        174,
+        19
+      ],
+      "raw_I_signs": [
+        1,
+        102
+      ],
+      "activity_R_signs": [
+        2850,
+        47
+      ],
+      "activity_I_signs": [
+        1,
+        875
+      ],
+      "sha256": "68bf96643e8fbac96c47a9bbed090e153c2c010350118b0d58b9df3d263fd87f"
+    },
+    {
+      "record": "('direct3', ('A', 'A', 'x'))",
+      "file": "direct3__A_A_x.txt",
+      "vertices": [
+        "A",
+        "B",
+        "T1a",
+        "T1b",
+        "T2a",
+        "T2b",
+        "T3a",
+        "T3b",
+        "x",
+        "z"
+      ],
+      "edges": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "T1a"
+        ],
+        [
+          "A",
+          "T1b"
+        ],
+        [
+          "A",
+          "T2a"
+        ],
+        [
+          "A",
+          "T2b"
+        ],
+        [
+          "A",
+          "x"
+        ],
+        [
+          "A",
+          "z"
+        ],
+        [
+          "B",
+          "x"
+        ],
+        [
+          "B",
+          "z"
+        ],
+        [
+          "T1a",
+          "T1b"
+        ],
+        [
+          "T2a",
+          "T2b"
+        ],
+        [
+          "T3a",
+          "T3b"
+        ],
+        [
+          "T3a",
+          "x"
+        ],
+        [
+          "T3b",
+          "x"
+        ]
+      ],
+      "cycles": 6,
+      "raw_R_terms": 164,
+      "raw_I_terms": 64,
+      "activity_R_terms": 2810,
+      "activity_I_terms": 761,
+      "raw_R_signs": [
+        157,
+        7
+      ],
+      "raw_I_signs": [
+        0,
+        64
+      ],
+      "activity_R_signs": [
+        2798,
+        12
+      ],
+      "activity_I_signs": [
+        0,
+        761
+      ],
+      "sha256": "8ddd6a3ad3f57db1eeac662d2d670f042e464255127bf53f7e017adb08b4ea28"
+    },
+    {
+      "record": "('direct3', ('A', 'B', 'x'))",
+      "file": "direct3__A_B_x.txt",
+      "vertices": [
+        "A",
+        "B",
+        "T1a",
+        "T1b",
+        "T2a",
+        "T2b",
+        "T3a",
+        "T3b",
+        "x",
+        "z"
+      ],
+      "edges": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "T1a"
+        ],
+        [
+          "A",
+          "T1b"
+        ],
+        [
+          "A",
+          "x"
+        ],
+        [
+          "A",
+          "z"
+        ],
+        [
+          "B",
+          "T2a"
+        ],
+        [
+          "B",
+          "T2b"
+        ],
+        [
+          "B",
+          "x"
+        ],
+        [
+          "B",
+          "z"
+        ],
+        [
+          "T1a",
+          "T1b"
+        ],
+        [
+          "T2a",
+          "T2b"
+        ],
+        [
+          "T3a",
+          "T3b"
+        ],
+        [
+          "T3a",
+          "x"
+        ],
+        [
+          "T3b",
+          "x"
+        ]
+      ],
+      "cycles": 6,
+      "raw_R_terms": 180,
+      "raw_I_terms": 87,
+      "activity_R_terms": 2856,
+      "activity_I_terms": 826,
+      "raw_R_signs": [
+        164,
+        16
+      ],
+      "raw_I_signs": [
+        0,
+        87
+      ],
+      "activity_R_signs": [
+        2828,
+        28
+      ],
+      "activity_I_signs": [
+        0,
+        826
+      ],
+      "sha256": "e09775e8fe448ae52de5456c08f8bb96bc903a1d8ca559b3f8fc17938d37e738"
+    },
+    {
+      "record": "('direct3', ('A', 'x', 'x'))",
+      "file": "direct3__A_x_x.txt",
+      "vertices": [
+        "A",
+        "B",
+        "T1a",
+        "T1b",
+        "T2a",
+        "T2b",
+        "T3a",
+        "T3b",
+        "x",
+        "z"
+      ],
+      "edges": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "T1a"
+        ],
+        [
+          "A",
+          "T1b"
+        ],
+        [
+          "A",
+          "x"
+        ],
+        [
+          "A",
+          "z"
+        ],
+        [
+          "B",
+          "x"
+        ],
+        [
+          "B",
+          "z"
+        ],
+        [
+          "T1a",
+          "T1b"
+        ],
+        [
+          "T2a",
+          "T2b"
+        ],
+        [
+          "T2a",
+          "x"
+        ],
+        [
+          "T2b",
+          "x"
+        ],
+        [
+          "T3a",
+          "T3b"
+        ],
+        [
+          "T3a",
+          "x"
+        ],
+        [
+          "T3b",
+          "x"
+        ]
+      ],
+      "cycles": 6,
+      "raw_R_terms": 174,
+      "raw_I_terms": 74,
+      "activity_R_terms": 2844,
+      "activity_I_terms": 804,
+      "raw_R_signs": [
+        165,
+        9
+      ],
+      "raw_I_signs": [
+        0,
+        74
+      ],
+      "activity_R_signs": [
+        2823,
+        21
+      ],
+      "activity_I_signs": [
+        0,
+        804
+      ],
+      "sha256": "772b6b35fb633a5d0196d746235994893169c996529788ea44382866c8c2e154"
+    },
+    {
+      "record": "('direct3', ('B', 'B', 'x'))",
+      "file": "direct3__B_B_x.txt",
+      "vertices": [
+        "A",
+        "B",
+        "T1a",
+        "T1b",
+        "T2a",
+        "T2b",
+        "T3a",
+        "T3b",
+        "x",
+        "z"
+      ],
+      "edges": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "x"
+        ],
+        [
+          "A",
+          "z"
+        ],
+        [
+          "B",
+          "T1a"
+        ],
+        [
+          "B",
+          "T1b"
+        ],
+        [
+          "B",
+          "T2a"
+        ],
+        [
+          "B",
+          "T2b"
+        ],
+        [
+          "B",
+          "x"
+        ],
+        [
+          "B",
+          "z"
+        ],
+        [
+          "T1a",
+          "T1b"
+        ],
+        [
+          "T2a",
+          "T2b"
+        ],
+        [
+          "T3a",
+          "T3b"
+        ],
+        [
+          "T3a",
+          "x"
+        ],
+        [
+          "T3b",
+          "x"
+        ]
+      ],
+      "cycles": 6,
+      "raw_R_terms": 164,
+      "raw_I_terms": 64,
+      "activity_R_terms": 2810,
+      "activity_I_terms": 761,
+      "raw_R_signs": [
+        157,
+        7
+      ],
+      "raw_I_signs": [
+        0,
+        64
+      ],
+      "activity_R_signs": [
+        2798,
+        12
+      ],
+      "activity_I_signs": [
+        0,
+        761
+      ],
+      "sha256": "77b50cbcf5f16590cf3e451233800546b9db9687be05685aeb08ed5ccd9925f0"
+    },
+    {
+      "record": "('direct3', ('B', 'x', 'x'))",
+      "file": "direct3__B_x_x.txt",
+      "vertices": [
+        "A",
+        "B",
+        "T1a",
+        "T1b",
+        "T2a",
+        "T2b",
+        "T3a",
+        "T3b",
+        "x",
+        "z"
+      ],
+      "edges": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "x"
+        ],
+        [
+          "A",
+          "z"
+        ],
+        [
+          "B",
+          "T1a"
+        ],
+        [
+          "B",
+          "T1b"
+        ],
+        [
+          "B",
+          "x"
+        ],
+        [
+          "B",
+          "z"
+        ],
+        [
+          "T1a",
+          "T1b"
+        ],
+        [
+          "T2a",
+          "T2b"
+        ],
+        [
+          "T2a",
+          "x"
+        ],
+        [
+          "T2b",
+          "x"
+        ],
+        [
+          "T3a",
+          "T3b"
+        ],
+        [
+          "T3a",
+          "x"
+        ],
+        [
+          "T3b",
+          "x"
+        ]
+      ],
+      "cycles": 6,
+      "raw_R_terms": 174,
+      "raw_I_terms": 74,
+      "activity_R_terms": 2844,
+      "activity_I_terms": 804,
+      "raw_R_signs": [
+        165,
+        9
+      ],
+      "raw_I_signs": [
+        0,
+        74
+      ],
+      "activity_R_signs": [
+        2823,
+        21
+      ],
+      "activity_I_signs": [
+        0,
+        804
+      ],
+      "sha256": "333e12ed438c9fe5978193f6b13d3c29d255b7c17415b0cafc2e08a5e010b45a"
+    },
+    {
+      "record": "('direct3', ('x', 'x', 'x'))",
+      "file": "direct3__x_x_x.txt",
+      "vertices": [
+        "A",
+        "B",
+        "T1a",
+        "T1b",
+        "T2a",
+        "T2b",
+        "T3a",
+        "T3b",
+        "x",
+        "z"
+      ],
+      "edges": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "x"
+        ],
+        [
+          "A",
+          "z"
+        ],
+        [
+          "B",
+          "x"
+        ],
+        [
+          "B",
+          "z"
+        ],
+        [
+          "T1a",
+          "T1b"
+        ],
+        [
+          "T1a",
+          "x"
+        ],
+        [
+          "T1b",
+          "x"
+        ],
+        [
+          "T2a",
+          "T2b"
+        ],
+        [
+          "T2a",
+          "x"
+        ],
+        [
+          "T2b",
+          "x"
+        ],
+        [
+          "T3a",
+          "T3b"
+        ],
+        [
+          "T3a",
+          "x"
+        ],
+        [
+          "T3b",
+          "x"
+        ]
+      ],
+      "cycles": 6,
+      "raw_R_terms": 151,
+      "raw_I_terms": 61,
+      "activity_R_terms": 2775,
+      "activity_I_terms": 754,
+      "raw_R_signs": [
+        144,
+        7
+      ],
+      "raw_I_signs": [
+        0,
+        61
+      ],
+      "activity_R_signs": [
+        2749,
+        26
+      ],
+      "activity_I_signs": [
+        0,
+        754
+      ],
+      "sha256": "5d7a7f352611a77fded78f9483bd2519e2d36c47dc72d244bca383c9f235ecde"
+    },
+    {
+      "record": "('fork', 'x', 'same')",
+      "file": "fork_x_same.txt",
+      "vertices": [
+        "A",
+        "B",
+        "T1a",
+        "T1b",
+        "T2a",
+        "T2b",
+        "T3a",
+        "T3b",
+        "x",
+        "z"
+      ],
+      "edges": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "x"
+        ],
+        [
+          "A",
+          "z"
+        ],
+        [
+          "B",
+          "x"
+        ],
+        [
+          "B",
+          "z"
+        ],
+        [
+          "T1a",
+          "T1b"
+        ],
+        [
+          "T1a",
+          "T2a"
+        ],
+        [
+          "T1a",
+          "T2b"
+        ],
+        [
+          "T1a",
+          "T3a"
+        ],
+        [
+          "T1a",
+          "T3b"
+        ],
+        [
+          "T1a",
+          "x"
+        ],
+        [
+          "T1b",
+          "x"
+        ],
+        [
+          "T2a",
+          "T2b"
+        ],
+        [
+          "T3a",
+          "T3b"
+        ]
+      ],
+      "cycles": 6,
+      "raw_R_terms": 167,
+      "raw_I_terms": 78,
+      "activity_R_terms": 2815,
+      "activity_I_terms": 810,
+      "raw_R_signs": [
+        157,
+        10
+      ],
+      "raw_I_signs": [
+        0,
+        78
+      ],
+      "activity_R_signs": [
+        2786,
+        29
+      ],
+      "activity_I_signs": [
+        0,
+        810
+      ],
+      "sha256": "9896f5b05ad0ade4aa3468bb888c7bd21a14b4b80fae1c71500ef7b3ac368c14"
+    },
+    {
+      "record": "('fork', 'x', 'split')",
+      "file": "fork_x_split.txt",
+      "vertices": [
+        "A",
+        "B",
+        "T1a",
+        "T1b",
+        "T2a",
+        "T2b",
+        "T3a",
+        "T3b",
+        "x",
+        "z"
+      ],
+      "edges": [
+        [
+          "A",
+          "B"
+        ],
+        [
+          "A",
+          "x"
+        ],
+        [
+          "A",
+          "z"
+        ],
+        [
+          "B",
+          "x"
+        ],
+        [
+          "B",
+          "z"
+        ],
+        [
+          "T1a",
+          "T1b"
+        ],
+        [
+          "T1a",
+          "T2a"
+        ],
+        [
+          "T1a",
+          "T2b"
+        ],
+        [
+          "T1a",
+          "x"
+        ],
+        [
+          "T1b",
+          "T3a"
+        ],
+        [
+          "T1b",
+          "T3b"
+        ],
+        [
+          "T1b",
+          "x"
+        ],
+        [
+          "T2a",
+          "T2b"
+        ],
+        [
+          "T3a",
+          "T3b"
+        ]
+      ],
+      "cycles": 6,
+      "raw_R_terms": 196,
+      "raw_I_terms": 115,
+      "activity_R_terms": 2910,
+      "activity_I_terms": 894,
+      "raw_R_signs": [
+        170,
+        26
+      ],
+      "raw_I_signs": [
+        1,
+        114
+      ],
+      "activity_R_signs": [
+        2852,
+        58
+      ],
+      "activity_I_signs": [
+        1,
+        893
+      ],
+      "sha256": "8892cec460ed70372708bbc1e7ec0283f556da75af7c83fe9f1651bdba6dcfa2"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+('chain2+direct', 'A', 'x') T2 root T1a host_cross (39, 168) (338, 3154) host_terms 3492 full_cross (39, 519) (1014, 17432) full_terms 18446
+('chain2+direct', 'A', 'x') T3 root x host_cross (10, 70) (213, 2730) host_terms 2943 full_cross (10, 524) (639, 16393) full_terms 17032
+('chain2+direct', 'B', 'x') T2 root T1a host_cross (39, 168) (338, 3154) host_terms 3492 full_cross (39, 519) (1014, 17432) full_terms 18446
+('chain2+direct', 'B', 'x') T3 root x host_cross (10, 70) (213, 2730) host_terms 2943 full_cross (10, 524) (639, 16393) full_terms 17032
+('chain2+direct', 'x', 'A') T2 root T1a host_cross (10, 188) (213, 3192) host_terms 3405 full_cross (10, 513) (639, 17484) full_terms 18123
+('chain2+direct', 'x', 'A') T3 root A host_cross (10, 255) (213, 4095) host_terms 4308 full_cross (10, 577) (639, 20186) full_terms 20825
+('chain2+direct', 'x', 'B') T2 root T1a host_cross (10, 188) (213, 3192) host_terms 3405 full_cross (10, 513) (639, 17484) full_terms 18123
+('chain2+direct', 'x', 'B') T3 root B host_cross (10, 255) (213, 4095) host_terms 4308 full_cross (10, 577) (639, 20186) full_terms 20825
+('chain2+direct', 'x', 'x') T2 root T1a host_cross (24, 134) (334, 3063) host_terms 3397 full_cross (24, 453) (1002, 17029) full_terms 18031
+('chain2+direct', 'x', 'x') T3 root x host_cross (18, 131) (167, 4167) host_terms 4334 full_cross (18, 362) (501, 20223) full_terms 20724
+('chain3', 'x') T3 root T2a host_cross (30, 178) (269, 3182) host_terms 3451 full_cross (30, 539) (807, 17558) full_terms 18365
+('direct3', ('A', 'A', 'x')) T1 root A host_cross (2, 138) (75, 4660) host_terms 4735 full_cross (2, 288) (225, 21351) full_terms 21576
+('direct3', ('A', 'A', 'x')) T2 root A host_cross (2, 138) (75, 4660) host_terms 4735 full_cross (2, 288) (225, 21351) full_terms 21576
+('direct3', ('A', 'A', 'x')) T3 root x host_cross (8, 42) (270, 2511) host_terms 2781 full_cross (8, 401) (810, 15389) full_terms 16199
+('direct3', ('A', 'B', 'x')) T1 root A host_cross (39, 185) (324, 3885) host_terms 4209 full_cross (41, 487) (974, 19466) full_terms 20440
+('direct3', ('A', 'B', 'x')) T2 root B host_cross (39, 185) (324, 3885) host_terms 4209 full_cross (41, 487) (974, 19466) full_terms 20440
+('direct3', ('A', 'B', 'x')) T3 root x host_cross (39, 54) (576, 2520) host_terms 3096 full_cross (41, 505) (1730, 15760) full_terms 17490
+('direct3', ('A', 'x', 'x')) T1 root A host_cross (8, 213) (270, 3966) host_terms 4236 full_cross (8, 495) (810, 19641) full_terms 20451
+('direct3', ('A', 'x', 'x')) T2 root x host_cross (2, 147) (75, 4157) host_terms 4232 full_cross (2, 354) (225, 20103) full_terms 20328
+('direct3', ('A', 'x', 'x')) T3 root x host_cross (2, 147) (75, 4157) host_terms 4232 full_cross (2, 354) (225, 20103) full_terms 20328
+('direct3', ('B', 'B', 'x')) T1 root B host_cross (2, 138) (75, 4660) host_terms 4735 full_cross (2, 288) (225, 21351) full_terms 21576
+('direct3', ('B', 'B', 'x')) T2 root B host_cross (2, 138) (75, 4660) host_terms 4735 full_cross (2, 288) (225, 21351) full_terms 21576
+('direct3', ('B', 'B', 'x')) T3 root x host_cross (8, 42) (270, 2511) host_terms 2781 full_cross (8, 401) (810, 15389) full_terms 16199
+('direct3', ('B', 'x', 'x')) T1 root B host_cross (8, 213) (270, 3966) host_terms 4236 full_cross (8, 495) (810, 19641) full_terms 20451
+('direct3', ('B', 'x', 'x')) T2 root x host_cross (2, 147) (75, 4157) host_terms 4232 full_cross (2, 354) (225, 20103) full_terms 20328
+('direct3', ('B', 'x', 'x')) T3 root x host_cross (2, 147) (75, 4157) host_terms 4232 full_cross (2, 354) (225, 20103) full_terms 20328
+('direct3', ('x', 'x', 'x')) T1 root x host_cross (0, 90) (0, 4541) host_terms 4541 full_cross (0, 189) (0, 20751) full_terms 20751
+('direct3', ('x', 'x', 'x')) T2 root x host_cross (0, 90) (0, 4541) host_terms 4541 full_cross (0, 189) (0, 20751) full_terms 20751
+('direct3', ('x', 'x', 'x')) T3 root x host_cross (0, 90) (0, 4541) host_terms 4541 full_cross (0, 189) (0, 20751) full_terms 20751
+('fork', 'x', 'same') T2 root T1a host_cross (2, 135) (75, 4349) host_terms 4424 full_cross (2, 294) (225, 20481) full_terms 20706
+('fork', 'x', 'same') T3 root T1a host_cross (2, 135) (75, 4349) host_terms 4424 full_cross (2, 294) (225, 20481) full_terms 20706
+('fork', 'x', 'split') T2 root T1a host_cross (63, 162) (549, 3073) host_terms 3622 full_cross (65, 573) (1649, 17439) full_terms 19088
+('fork', 'x', 'split') T3 root T1b host_cross (63, 162) (549, 3073) host_terms 3622 full_cross (65, 573) (1649, 17439) full_terms 19088

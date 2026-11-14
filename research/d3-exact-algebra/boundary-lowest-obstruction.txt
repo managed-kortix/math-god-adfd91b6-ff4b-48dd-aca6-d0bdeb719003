@@ -1,0 +1,8 @@
+Lowest-degree mixed-sign witnesses in H=AQ-BP (activity expansion):
+chain2+direct(A,x):      -72 + 8 y_A y_T1a + higher/mixed terms
+chain2+direct(B,x):      -72 + 8 y_A y_T1a + higher/mixed terms
+chain2+direct(x,x):      -72 + 8 y_T1a y_T3a + higher/mixed terms
+chain3(x):               -72 + 8 y_T1a y_T2a + higher/mixed terms
+fork(x,split):           -72 + 8 y_T1a y_T1b + higher/mixed terms
+These witnesses prove only failure of coefficientwise negativity, not failure
+of H<0 on the constrained region Q>0.

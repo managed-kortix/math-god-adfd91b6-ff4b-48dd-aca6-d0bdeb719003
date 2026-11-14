@@ -1,0 +1,45 @@
+
+## ('chain2+direct', 'A', 'x') defect T1b
+A terms 1532 signs (1521, 11) constant -12 t-only [(0, -12), (2, -29), (4, 60), (6, 58), (8, 14), (10, 1)]
+B terms 1353 signs (1332, 21) constant None t-only [(1, -36), (3, 26), (5, 41), (7, 12), (9, 1)]
+ positives [('1*t^3', 26), ('1*t^5', 41), ('1*t^7', 12), ('1*t^9', 1), ('y_A*t^2', 8), ('y_A*t^4', 19), ('y_A*t^6', 8), ('y_A*t^8', 1), ('y_A*y_B*t^3', 9), ('y_A*y_B*t^5', 6), ('y_A*y_B*t^7', 1), ('y_A*y_B*y_T1a*t^2', 3), ('y_A*y_B*y_T1a*t^4', 4), ('y_A*y_B*y_T1a*t^6', 1), ('y_A*y_B*y_T1a*y_T2a*t^3', 3), ('y_A*y_B*y_T1a*y_T2a*t^5', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*t^2', 3), ('y_A*y_B*y_T1a*y_T2a*y_T2b*t^4', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*t^1', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*t^3', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_T3b*t^2', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_T3b*y_x*t^1', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_T3b*y_x*y_z', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_T3b*y_z*t^1', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_x*t^2', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_x*y_z*t^1', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_z', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_z*t^2', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3b*t^1', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3b*t^3', 1)] count 1332
+P terms 486 signs (0, 486) constant None t-only [(1, -30), (3, -124), (5, -72), (7, -10)]
+Q terms 364 signs (1, 363) constant 6 t-only [(0, 6), (2, -68), (4, -50), (6, -8)]
+ positives [('1', 6)] count 1
+A positives 1521 B positives 1332
+
+## ('chain2+direct', 'B', 'x') defect T1b
+A terms 1532 signs (1521, 11) constant -12 t-only [(0, -12), (2, -29), (4, 60), (6, 58), (8, 14), (10, 1)]
+B terms 1353 signs (1332, 21) constant None t-only [(1, -36), (3, 26), (5, 41), (7, 12), (9, 1)]
+ positives [('1*t^3', 26), ('1*t^5', 41), ('1*t^7', 12), ('1*t^9', 1), ('y_A*t^2', 11), ('y_A*t^4', 23), ('y_A*t^6', 9), ('y_A*t^8', 1), ('y_A*y_B*t^3', 9), ('y_A*y_B*t^5', 6), ('y_A*y_B*t^7', 1), ('y_A*y_B*y_T1a*t^2', 3), ('y_A*y_B*y_T1a*t^4', 4), ('y_A*y_B*y_T1a*t^6', 1), ('y_A*y_B*y_T1a*y_T2a*t^3', 3), ('y_A*y_B*y_T1a*y_T2a*t^5', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*t^2', 3), ('y_A*y_B*y_T1a*y_T2a*y_T2b*t^4', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*t^1', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*t^3', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_T3b*t^2', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_T3b*y_x*t^1', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_T3b*y_x*y_z', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_T3b*y_z*t^1', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_x*t^2', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_x*y_z*t^1', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_z', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_z*t^2', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3b*t^1', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3b*t^3', 1)] count 1332
+P terms 486 signs (0, 486) constant None t-only [(1, -30), (3, -124), (5, -72), (7, -10)]
+Q terms 364 signs (1, 363) constant 6 t-only [(0, 6), (2, -68), (4, -50), (6, -8)]
+ positives [('1', 6)] count 1
+A positives 1521 B positives 1332
+
+## ('chain2+direct', 'x', 'x') defect T1b
+A terms 1516 signs (1495, 21) constant -12 t-only [(0, -12), (2, -33), (4, 54), (6, 56), (8, 14), (10, 1)]
+B terms 1344 signs (1323, 21) constant None t-only [(1, -37), (3, 24), (5, 40), (7, 12), (9, 1)]
+ positives [('1*t^3', 24), ('1*t^5', 40), ('1*t^7', 12), ('1*t^9', 1), ('y_A*t^2', 11), ('y_A*t^4', 22), ('y_A*t^6', 9), ('y_A*t^8', 1), ('y_A*y_B*t^3', 11), ('y_A*y_B*t^5', 7), ('y_A*y_B*t^7', 1), ('y_A*y_B*y_T1a*t^2', 3), ('y_A*y_B*y_T1a*t^4', 4), ('y_A*y_B*y_T1a*t^6', 1), ('y_A*y_B*y_T1a*y_T2a*t^3', 3), ('y_A*y_B*y_T1a*y_T2a*t^5', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*t^2', 3), ('y_A*y_B*y_T1a*y_T2a*y_T2b*t^4', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*t^1', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*t^3', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_T3b*t^2', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_T3b*y_x*t^1', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_T3b*y_x*y_z', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_T3b*y_z*t^1', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_x*t^2', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_x*y_z*t^1', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_z', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3a*y_z*t^2', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3b*t^1', 1), ('y_A*y_B*y_T1a*y_T2a*y_T2b*y_T3b*t^3', 1)] count 1323
+P terms 481 signs (0, 481) constant None t-only [(1, -26), (3, -118), (5, -70), (7, -10)]
+Q terms 365 signs (1, 364) constant 6 t-only [(0, 6), (2, -68), (4, -50), (6, -8)]
+ positives [('1', 6)] count 1
+A positives 1495 B positives 1323
+
+## ('chain3', 'x') defect T2b
+A terms 1540 signs (1515, 25) constant -12 t-only [(0, -12), (2, -41), (4, 58), (6, 60), (8, 14), (10, 1)]
+B terms 1357 signs (1335, 22) constant None t-only [(1, -37), (3, 26), (5, 42), (7, 12), (9, 1)]
+ positives [('1*t^3', 26), ('1*t^5', 42), ('1*t^7', 12), ('1*t^9', 1), ('y_A*t^2', 12), ('y_A*t^4', 23), ('y_A*t^6', 9), ('y_A*t^8', 1), ('y_A*y_B*t^3', 11), ('y_A*y_B*t^5', 7), ('y_A*y_B*t^7', 1), ('y_A*y_B*y_T1a*t^2', 3), ('y_A*y_B*y_T1a*t^4', 4), ('y_A*y_B*y_T1a*t^6', 1), ('y_A*y_B*y_T1a*y_T1b*t^3', 3), ('y_A*y_B*y_T1a*y_T1b*t^5', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*t^2', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*t^4', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T3a*t^3', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T3a*y_T3b*t^2', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T3a*y_T3b*y_x*t^1', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T3a*y_T3b*y_x*y_z', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T3a*y_T3b*y_z*t^1', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T3a*y_x*t^2', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T3a*y_x*y_z*t^1', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T3a*y_z*t^2', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T3b*t^3', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T3b*y_x*t^2', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T3b*y_x*y_z*t^1', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T3b*y_z*t^2', 1)] count 1335
+P terms 510 signs (0, 510) constant None t-only [(1, -26), (3, -134), (5, -78), (7, -10)]
+Q terms 366 signs (1, 365) constant 6 t-only [(0, 6), (2, -70), (4, -52), (6, -8)]
+ positives [('1', 6)] count 1
+A positives 1515 B positives 1335
+
+## ('fork', 'x', 'split') defect x
+A terms 1586 signs (1550, 36) constant -12 t-only [(0, -12), (2, -61), (4, 62), (6, 60), (8, 14), (10, 1)]
+B terms 1324 signs (1302, 22) constant None t-only [(1, -33), (3, 22), (5, 32), (7, 10), (9, 1)]
+ positives [('1*t^3', 22), ('1*t^5', 32), ('1*t^7', 10), ('1*t^9', 1), ('y_A*t^2', 8), ('y_A*t^4', 18), ('y_A*t^6', 8), ('y_A*t^8', 1), ('y_A*y_B*t^3', 11), ('y_A*y_B*t^5', 7), ('y_A*y_B*t^7', 1), ('y_A*y_B*y_T1a*t^2', 3), ('y_A*y_B*y_T1a*t^4', 4), ('y_A*y_B*y_T1a*t^6', 1), ('y_A*y_B*y_T1a*y_T1b*t^1', 1), ('y_A*y_B*y_T1a*y_T1b*t^3', 2), ('y_A*y_B*y_T1a*y_T1b*t^5', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*t^2', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*t^4', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T2b*t^1', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T2b*t^3', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T2b*y_T3a*t^2', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T2b*y_T3a*y_T3b*t^1', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T2b*y_T3a*y_T3b*y_z', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T2b*y_T3a*y_z*t^1', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T2b*y_T3b*t^2', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T2b*y_T3b*y_z*t^1', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T2b*y_z', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T2b*y_z*t^2', 1), ('y_A*y_B*y_T1a*y_T1b*y_T2a*y_T3a*t^3', 1)] count 1302
+P terms 563 signs (0, 563) constant None t-only [(1, -18), (3, -150), (5, -78), (7, -10)]
+Q terms 331 signs (1, 330) constant 6 t-only [(0, 6), (2, -58), (4, -38), (6, -6)]
+ positives [('1', 6)] count 1
+A positives 1550 B positives 1302

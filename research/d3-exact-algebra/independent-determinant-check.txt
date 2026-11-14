@@ -1,0 +1,14 @@
+PASS ('chain2+direct', 'A', 'x') 189 93
+PASS ('chain2+direct', 'B', 'x') 189 93
+PASS ('chain2+direct', 'x', 'A') 187 85
+PASS ('chain2+direct', 'x', 'B') 187 85
+PASS ('chain2+direct', 'x', 'x') 180 92
+PASS ('chain3', 'x') 193 103
+PASS ('direct3', ('A', 'A', 'x')) 164 64
+PASS ('direct3', ('A', 'B', 'x')) 180 87
+PASS ('direct3', ('A', 'x', 'x')) 174 74
+PASS ('direct3', ('B', 'B', 'x')) 164 64
+PASS ('direct3', ('B', 'x', 'x')) 174 74
+PASS ('direct3', ('x', 'x', 'x')) 151 61
+PASS ('fork', 'x', 'same') 167 78
+PASS ('fork', 'x', 'split') 196 115

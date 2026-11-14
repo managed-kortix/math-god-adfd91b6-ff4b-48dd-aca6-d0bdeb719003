@@ -1,0 +1,42 @@
+record ('direct3', ('A', 'A', 'x'))
+  R = -4*R_Ax*d1 - 4*R_Ax*d2 + 2*I_A*d1*d3 + 2*I_A*d2*d3 + 2*I_Ax*d1*e2 + 2*I_Ax*d1*e3 + 2*I_Ax*d2*e1 + 2*I_Ax*d2*e3 + 2*I_x*d1*d2 + R*d1*d2*d3 + R_A*d1*d3*e2 + R_A*d2*d3*e1 + R_Ax*d1*e2*e3 + R_Ax*d2*e1*e3 + R_x*d1*d2*e3
+  I = -4*I_Ax*d1 - 4*I_Ax*d2 - 2*R_A*d1*d3 - 2*R_A*d2*d3 - 2*R_Ax*d1*e2 - 2*R_Ax*d1*e3 - 2*R_Ax*d2*e1 - 2*R_Ax*d2*e3 - 2*R_x*d1*d2 + I*d1*d2*d3 + I_A*d1*d3*e2 + I_A*d2*d3*e1 + I_Ax*d1*e2*e3 + I_Ax*d2*e1*e3 + I_x*d1*d2*e3
+record ('direct3', ('A', 'B', 'x'))
+  R = -8*I_ABx - 4*R_AB*d3 - 4*R_ABx*e1 - 4*R_ABx*e2 - 4*R_ABx*e3 - 4*R_Ax*d2 - 4*R_Bx*d1 + 2*I_A*d2*d3 + 2*I_AB*d3*e1 + 2*I_AB*d3*e2 + 2*I_ABx*e1*e2 + 2*I_ABx*e1*e3 + 2*I_ABx*e2*e3 + 2*I_Ax*d2*e1 + 2*I_Ax*d2*e3 + 2*I_B*d1*d3 + 2*I_Bx*d1*e2 + 2*I_Bx*d1*e3 + 2*I_x*d1*d2 + R*d1*d2*d3 + R_A*d2*d3*e1 + R_AB*d3*e1*e2 + R_ABx*e1*e2*e3 + R_Ax*d2*e1*e3 + R_B*d1*d3*e2 + R_Bx*d1*e2*e3 + R_x*d1*d2*e3
+  I = 8*R_ABx - 4*I_AB*d3 - 4*I_ABx*e1 - 4*I_ABx*e2 - 4*I_ABx*e3 - 4*I_Ax*d2 - 4*I_Bx*d1 - 2*R_A*d2*d3 - 2*R_AB*d3*e1 - 2*R_AB*d3*e2 - 2*R_ABx*e1*e2 - 2*R_ABx*e1*e3 - 2*R_ABx*e2*e3 - 2*R_Ax*d2*e1 - 2*R_Ax*d2*e3 - 2*R_B*d1*d3 - 2*R_Bx*d1*e2 - 2*R_Bx*d1*e3 - 2*R_x*d1*d2 + I*d1*d2*d3 + I_A*d2*d3*e1 + I_AB*d3*e1*e2 + I_ABx*e1*e2*e3 + I_Ax*d2*e1*e3 + I_B*d1*d3*e2 + I_Bx*d1*e2*e3 + I_x*d1*d2*e3
+record ('direct3', ('A', 'x', 'x'))
+  R = -4*R_Ax*d2 - 4*R_Ax*d3 + 2*I_A*d2*d3 + 2*I_Ax*d2*e1 + 2*I_Ax*d2*e3 + 2*I_Ax*d3*e1 + 2*I_Ax*d3*e2 + 2*I_x*d1*d2 + 2*I_x*d1*d3 + R*d1*d2*d3 + R_A*d2*d3*e1 + R_Ax*d2*e1*e3 + R_Ax*d3*e1*e2 + R_x*d1*d2*e3 + R_x*d1*d3*e2
+  I = -4*I_Ax*d2 - 4*I_Ax*d3 - 2*R_A*d2*d3 - 2*R_Ax*d2*e1 - 2*R_Ax*d2*e3 - 2*R_Ax*d3*e1 - 2*R_Ax*d3*e2 - 2*R_x*d1*d2 - 2*R_x*d1*d3 + I*d1*d2*d3 + I_A*d2*d3*e1 + I_Ax*d2*e1*e3 + I_Ax*d3*e1*e2 + I_x*d1*d2*e3 + I_x*d1*d3*e2
+record ('direct3', ('B', 'B', 'x'))
+  R = -4*R_Bx*d1 - 4*R_Bx*d2 + 2*I_B*d1*d3 + 2*I_B*d2*d3 + 2*I_Bx*d1*e2 + 2*I_Bx*d1*e3 + 2*I_Bx*d2*e1 + 2*I_Bx*d2*e3 + 2*I_x*d1*d2 + R*d1*d2*d3 + R_B*d1*d3*e2 + R_B*d2*d3*e1 + R_Bx*d1*e2*e3 + R_Bx*d2*e1*e3 + R_x*d1*d2*e3
+  I = -4*I_Bx*d1 - 4*I_Bx*d2 - 2*R_B*d1*d3 - 2*R_B*d2*d3 - 2*R_Bx*d1*e2 - 2*R_Bx*d1*e3 - 2*R_Bx*d2*e1 - 2*R_Bx*d2*e3 - 2*R_x*d1*d2 + I*d1*d2*d3 + I_B*d1*d3*e2 + I_B*d2*d3*e1 + I_Bx*d1*e2*e3 + I_Bx*d2*e1*e3 + I_x*d1*d2*e3
+record ('direct3', ('B', 'x', 'x'))
+  R = -4*R_Bx*d2 - 4*R_Bx*d3 + 2*I_B*d2*d3 + 2*I_Bx*d2*e1 + 2*I_Bx*d2*e3 + 2*I_Bx*d3*e1 + 2*I_Bx*d3*e2 + 2*I_x*d1*d2 + 2*I_x*d1*d3 + R*d1*d2*d3 + R_B*d2*d3*e1 + R_Bx*d2*e1*e3 + R_Bx*d3*e1*e2 + R_x*d1*d2*e3 + R_x*d1*d3*e2
+  I = -4*I_Bx*d2 - 4*I_Bx*d3 - 2*R_B*d2*d3 - 2*R_Bx*d2*e1 - 2*R_Bx*d2*e3 - 2*R_Bx*d3*e1 - 2*R_Bx*d3*e2 - 2*R_x*d1*d2 - 2*R_x*d1*d3 + I*d1*d2*d3 + I_B*d2*d3*e1 + I_Bx*d2*e1*e3 + I_Bx*d3*e1*e2 + I_x*d1*d2*e3 + I_x*d1*d3*e2
+record ('direct3', ('x', 'x', 'x'))
+  R = 2*I_x*d1*d2 + 2*I_x*d1*d3 + 2*I_x*d2*d3 + R*d1*d2*d3 + R_x*d1*d2*e3 + R_x*d1*d3*e2 + R_x*d2*d3*e1
+  I = -2*R_x*d1*d2 - 2*R_x*d1*d3 - 2*R_x*d2*d3 + I*d1*d2*d3 + I_x*d1*d2*e3 + I_x*d1*d3*e2 + I_x*d2*d3*e1
+record ('chain2+direct', 'A', 'x')
+  R = -4*R_Ax + 2*I_A*d3 + 2*I_Ax*e2 + 2*I_Ax*e3 - 4*R_Ax*d2 - 4*R_x*b1 + 2*I*b1*d3 + 2*I_A*d2*d3 + 2*I_Ax*d2*e1 + 2*I_Ax*d2*e3 + 2*I_x*b1*e2 + 2*I_x*b1*e3 + 2*I_x*d1*d2 + R_A*d3*e2 + R_Ax*e2*e3 + R*b1*d3*e2 + R*d1*d2*d3 + R_A*d2*d3*e1 + R_Ax*d2*e1*e3 + R_x*b1*e2*e3 + R_x*d1*d2*e3
+  I = -4*I_Ax - 4*I_Ax*d2 - 4*I_x*b1 - 2*R_A*d3 - 2*R_Ax*e2 - 2*R_Ax*e3 + I_A*d3*e2 + I_Ax*e2*e3 - 2*R*b1*d3 - 2*R_A*d2*d3 - 2*R_Ax*d2*e1 - 2*R_Ax*d2*e3 - 2*R_x*b1*e2 - 2*R_x*b1*e3 - 2*R_x*d1*d2 + I*b1*d3*e2 + I*d1*d2*d3 + I_A*d2*d3*e1 + I_Ax*d2*e1*e3 + I_x*b1*e2*e3 + I_x*d1*d2*e3
+record ('chain2+direct', 'B', 'x')
+  R = -4*R_Bx + 2*I_B*d3 + 2*I_Bx*e2 + 2*I_Bx*e3 - 4*R_Bx*d2 - 4*R_x*b1 + 2*I*b1*d3 + 2*I_B*d2*d3 + 2*I_Bx*d2*e1 + 2*I_Bx*d2*e3 + 2*I_x*b1*e2 + 2*I_x*b1*e3 + 2*I_x*d1*d2 + R_B*d3*e2 + R_Bx*e2*e3 + R*b1*d3*e2 + R*d1*d2*d3 + R_B*d2*d3*e1 + R_Bx*d2*e1*e3 + R_x*b1*e2*e3 + R_x*d1*d2*e3
+  I = -4*I_Bx - 4*I_Bx*d2 - 4*I_x*b1 - 2*R_B*d3 - 2*R_Bx*e2 - 2*R_Bx*e3 + I_B*d3*e2 + I_Bx*e2*e3 - 2*R*b1*d3 - 2*R_B*d2*d3 - 2*R_Bx*d2*e1 - 2*R_Bx*d2*e3 - 2*R_x*b1*e2 - 2*R_x*b1*e3 - 2*R_x*d1*d2 + I*b1*d3*e2 + I*d1*d2*d3 + I_B*d2*d3*e1 + I_Bx*d2*e1*e3 + I_x*b1*e2*e3 + I_x*d1*d2*e3
+record ('chain2+direct', 'x', 'A')
+  R = -4*R_Ax + 2*I_Ax*e2 + 2*I_Ax*e3 + 2*I_x*d3 - 4*R_A*b1 - 4*R_Ax*d2 + 2*I*b1*d3 + 2*I_A*b1*e2 + 2*I_A*b1*e3 + 2*I_A*d1*d2 + 2*I_Ax*d2*e1 + 2*I_Ax*d2*e3 + 2*I_x*d2*d3 + R_Ax*e2*e3 + R_x*d3*e2 + R*b1*d3*e2 + R*d1*d2*d3 + R_A*b1*e2*e3 + R_A*d1*d2*e3 + R_Ax*d2*e1*e3 + R_x*d2*d3*e1
+  I = -4*I_Ax - 4*I_A*b1 - 4*I_Ax*d2 - 2*R_Ax*e2 - 2*R_Ax*e3 - 2*R_x*d3 + I_Ax*e2*e3 + I_x*d3*e2 - 2*R*b1*d3 - 2*R_A*b1*e2 - 2*R_A*b1*e3 - 2*R_A*d1*d2 - 2*R_Ax*d2*e1 - 2*R_Ax*d2*e3 - 2*R_x*d2*d3 + I*b1*d3*e2 + I*d1*d2*d3 + I_A*b1*e2*e3 + I_A*d1*d2*e3 + I_Ax*d2*e1*e3 + I_x*d2*d3*e1
+record ('chain2+direct', 'x', 'B')
+  R = -4*R_Bx + 2*I_Bx*e2 + 2*I_Bx*e3 + 2*I_x*d3 - 4*R_B*b1 - 4*R_Bx*d2 + 2*I*b1*d3 + 2*I_B*b1*e2 + 2*I_B*b1*e3 + 2*I_B*d1*d2 + 2*I_Bx*d2*e1 + 2*I_Bx*d2*e3 + 2*I_x*d2*d3 + R_Bx*e2*e3 + R_x*d3*e2 + R*b1*d3*e2 + R*d1*d2*d3 + R_B*b1*e2*e3 + R_B*d1*d2*e3 + R_Bx*d2*e1*e3 + R_x*d2*d3*e1
+  I = -4*I_Bx - 4*I_B*b1 - 4*I_Bx*d2 - 2*R_Bx*e2 - 2*R_Bx*e3 - 2*R_x*d3 + I_Bx*e2*e3 + I_x*d3*e2 - 2*R*b1*d3 - 2*R_B*b1*e2 - 2*R_B*b1*e3 - 2*R_B*d1*d2 - 2*R_Bx*d2*e1 - 2*R_Bx*d2*e3 - 2*R_x*d2*d3 + I*b1*d3*e2 + I*d1*d2*d3 + I_B*b1*e2*e3 + I_B*d1*d2*e3 + I_Bx*d2*e1*e3 + I_x*d2*d3*e1
+record ('chain2+direct', 'x', 'x')
+  R = 2*I_x + 2*I_x*d3 - 4*R_x*b1 + R_x*e3 + 2*I*b1*d3 + 2*I_x*a1*b1 + 2*I_x*a2*b1 + 2*I_x*a2*b2 + 2*I_x*b1*b2 + 2*I_x*b1*e3 + 2*I_x*d2*d3 + R_x*d3*e2 + R*b1*d3*e2 + R*d1*d2*d3 + R_x*a1*b1*e3 + R_x*a2*b1*e3 + R_x*a2*b2*e3 + R_x*b1*b2*e3 + R_x*d2*d3*e1 + 2*I_x*a1*a2*b1*b2 + R_x*a1*a2*b1*b2*e3
+  I = -2*R_x - 4*I_x*b1 + I_x*e3 - 2*R_x*d3 + I_x*d3*e2 - 2*R*b1*d3 - 2*R_x*a1*b1 - 2*R_x*a2*b1 - 2*R_x*a2*b2 - 2*R_x*b1*b2 - 2*R_x*b1*e3 - 2*R_x*d2*d3 + I*b1*d3*e2 + I*d1*d2*d3 + I_x*a1*b1*e3 + I_x*a2*b1*e3 + I_x*a2*b2*e3 + I_x*b1*b2*e3 + I_x*d2*d3*e1 - 2*R_x*a1*a2*b1*b2 + I_x*a1*a2*b1*b2*e3
+record ('fork', 'x', 'same')
+  R = 2*I_x*d2 + 2*I_x*d3 + 2*I*b1*d2 + 2*I*b1*d3 + 2*I_x*d2*d3 + R_x*d2*e3 + R_x*d3*e2 + R*b1*d2*e3 + R*b1*d3*e2 + R*d1*d2*d3 + R_x*d2*d3*e1
+  I = -2*R_x*d2 - 2*R_x*d3 + I_x*d2*e3 + I_x*d3*e2 - 2*R*b1*d2 - 2*R*b1*d3 - 2*R_x*d2*d3 + I*b1*d2*e3 + I*b1*d3*e2 + I*d1*d2*d3 + I_x*d2*d3*e1
+record ('fork', 'x', 'split')
+  R = -4*R + 2*I*e2 + 2*I*e3 + 2*I_x*d2 + 2*I_x*d3 + 2*I*a1*d2 + 2*I*b1*d3 + 2*I_x*d2*d3 + R*e2*e3 + R_x*d2*e3 + R_x*d3*e2 + R*a1*d2*e3 + R*b1*d3*e2 + R*d1*d2*d3 + R_x*d2*d3*e1
+  I = -4*I - 2*R*e2 - 2*R*e3 - 2*R_x*d2 - 2*R_x*d3 + I*e2*e3 + I_x*d2*e3 + I_x*d3*e2 - 2*R*a1*d2 - 2*R*b1*d3 - 2*R_x*d2*d3 + I*a1*d2*e3 + I*b1*d3*e2 + I*d1*d2*d3 + I_x*d2*d3*e1
+record ('chain3', 'x')
+  R = 2*I_x + 2*I*b1 + 2*I_x*d3 - 4*R_x*b2 + R_x*e3 + 2*I*b1*d3 + 2*I*b2*d1 + 2*I_x*b2*e1 + 2*I_x*b2*e3 + 2*I_x*d2*d3 + R*b1*e3 + R_x*d3*e2 + R*b1*d3*e2 + R*b2*d1*e3 + R*d1*d2*d3 + R_x*b2*e1*e3 + R_x*d2*d3*e1
+  I = -2*R_x - 4*I_x*b2 + I_x*e3 - 2*R*b1 - 2*R_x*d3 + I*b1*e3 + I_x*d3*e2 - 2*R*b1*d3 - 2*R*b2*d1 - 2*R_x*b2*e1 - 2*R_x*b2*e3 - 2*R_x*d2*d3 + I*b1*d3*e2 + I*b2*d1*e3 + I*d1*d2*d3 + I_x*b2*e1*e3 + I_x*d2*d3*e1

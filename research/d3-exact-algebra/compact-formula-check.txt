@@ -1,0 +1,14 @@
+PASS ('chain2+direct', 'A', 'x') complex_terms 282
+PASS ('chain2+direct', 'B', 'x') complex_terms 282
+PASS ('chain2+direct', 'x', 'A') complex_terms 272
+PASS ('chain2+direct', 'x', 'B') complex_terms 272
+PASS ('chain2+direct', 'x', 'x') complex_terms 272
+PASS ('chain3', 'x') complex_terms 296
+PASS ('direct3', ('A', 'A', 'x')) complex_terms 228
+PASS ('direct3', ('A', 'B', 'x')) complex_terms 267
+PASS ('direct3', ('A', 'x', 'x')) complex_terms 248
+PASS ('direct3', ('B', 'B', 'x')) complex_terms 228
+PASS ('direct3', ('B', 'x', 'x')) complex_terms 248
+PASS ('direct3', ('x', 'x', 'x')) complex_terms 212
+PASS ('fork', 'x', 'same') complex_terms 245
+PASS ('fork', 'x', 'split') complex_terms 311

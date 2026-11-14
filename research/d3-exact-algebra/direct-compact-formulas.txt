@@ -1,0 +1,6 @@
+direct ('A', 'A', 'x') : d1 d2 d3 D + q1 d2 d3 D_{A} + d1 q2 d3 D_{A} + d1 d2 q3 D_{x} + q1 d2 q3 D_{A,x} + d1 q2 q3 D_{A,x}
+direct ('A', 'B', 'x') : d1 d2 d3 D + q1 d2 d3 D_{A} + d1 q2 d3 D_{B} + q1 q2 d3 D_{A,B} + d1 d2 q3 D_{x} + q1 d2 q3 D_{A,x} + d1 q2 q3 D_{B,x} + q1 q2 q3 D_{A,B,x}
+direct ('A', 'x', 'x') : d1 d2 d3 D + q1 d2 d3 D_{A} + d1 q2 d3 D_{x} + q1 q2 d3 D_{A,x} + d1 d2 q3 D_{x} + q1 d2 q3 D_{A,x}
+direct ('B', 'B', 'x') : d1 d2 d3 D + q1 d2 d3 D_{B} + d1 q2 d3 D_{B} + d1 d2 q3 D_{x} + q1 d2 q3 D_{B,x} + d1 q2 q3 D_{B,x}
+direct ('B', 'x', 'x') : d1 d2 d3 D + q1 d2 d3 D_{B} + d1 q2 d3 D_{x} + q1 q2 d3 D_{B,x} + d1 d2 q3 D_{x} + q1 d2 q3 D_{B,x}
+direct ('x', 'x', 'x') : d1 d2 d3 D + q1 d2 d3 D_{x} + d1 q2 d3 D_{x} + d1 d2 q3 D_{x}

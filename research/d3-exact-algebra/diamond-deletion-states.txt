@@ -1,0 +1,19 @@
+For D on {A,B,x,z} with edges AB,Ax,Bx,Az,Bz and
+D_S = i^{-|V(D-S)|} det(i diag(z)-A(D-S)):
+
+D_empty = A*B*x*z + A*x + A*z + B*x + B*z + x*z - 2*i*x - 2*i*z
+D_A     = B*x*z + x + z
+D_B     = A*x*z + x + z
+D_AB    = x*z
+D_x     = A*B*z + A + B + z - 2*i
+D_Ax    = B*z + 1
+D_Bx    = A*z + 1
+D_ABx   = z
+D_z     = A*B*x + A + B + x - 2*i
+D_Az    = B*x + 1
+D_Bz    = A*x + 1
+D_ABz   = x
+D_xz    = A*B + 1
+D_Axz   = B
+D_Bxz   = A
+D_ABxz  = 1
