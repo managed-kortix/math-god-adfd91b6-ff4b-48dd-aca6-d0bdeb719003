@@ -455,6 +455,22 @@ def authenticate_r21(graph: PhysicalGraph) -> R21Inventory:
                         7)
 
 
+def exact_dnn_witness(inventory: R21Inventory) -> str:
+    """Check the exact integer brackets for the two DNN-open rows.
+
+    The radical identities and the Delta-classification are pinned analytic
+    inputs; only the final integer brackets are checked here, matching the
+    parent literal-cycle typing certificate.
+    """
+    if inventory.family == "THETA_PLUS_T5":
+        require(17 > 9, "exact q=3 witness 17>9 failed")
+        return ("Delta(1,2,r)>1 for every r>=2 by the pinned classification; "
+                "q=3: (sqrt(17)-3)/2>0 because 17>9")
+    require(425 > 361, "exact q=5 witness 425>361 failed")
+    return ("literal D: (sqrt(17)+5-4sqrt(5))/2>0 because "
+            "sqrt(17)+5>4sqrt(5), squared twice to 425>361")
+
+
 # ---------------------------------------------------------------------------
 # Small deterministic utilities
 # ---------------------------------------------------------------------------
@@ -1427,6 +1443,7 @@ def verify_theta_parent(graph: PhysicalGraph, inventory: R21Inventory | None = N
         "status": "NONPROMOTIONAL_ADJACENCY_AND_OWNERSHIP_VERIFIED",
         "theta_r": inventory.theta.r,
         "theta_lengths": list(inventory.theta.lengths),
+        "exact_dnn_witness": exact_dnn_witness(inventory),
         "theta_branch_vertices": [repr(v) for v in inventory.theta.branch],
         "opening_candidates": [repr(v) for v in candidates],
         "chosen_opening": repr(chosen.opening_vertex),
@@ -1496,6 +1513,7 @@ def verify_c5_parent(graph: PhysicalGraph,
         "status": "NONPROMOTIONAL_ADJACENCY_AND_OWNERSHIP_VERIFIED",
         "theta_lengths": list(inventory.theta.lengths),
         "cycle_lengths": list(inventory.cycle_lengths),
+        "exact_dnn_witness": exact_dnn_witness(inventory),
         "c5_bridge": sorted(repr(vertex) for vertex in split.bridge),
         "c5_side_vertices": len(split.p_side),
         "h_side_vertices": len(split.h_side),
