@@ -173,14 +173,25 @@ For fixed `x`, division of (3)--(4) by `t` gives coefficientwise convergence
 `g_t(x)/t -> -r(x)f(x)`.                                        (10)
 
 The two roots of `r` and the three roots of `f` are real and simple:
-`disc(r)=5`, `disc(f)=1616`, and `Res(r,f)=-41`. Hence disjoint small
-intervals around these five roots have nonzero boundary values for the limit
-polynomials. Uniform convergence on their boundaries, followed by the
-intermediate value theorem, gives one root of the relevant polynomial in each
-interval for all sufficiently large `t`. Degree then leaves exactly two roots
-of `p_t` and exactly two roots of `g_t` outside every fixed bounded interval.
-Because the matrices are real symmetric, all roots are real. Thus the bounded
-roots converge, with multiplicity, exactly as follows:
+`disc(r)=5`, `disc(f)=1616`, and `Res(r,f)=-41`. Choose pairwise disjoint
+closed complex disks around these roots, with no zero of the relevant limit
+polynomial on any boundary. Coefficientwise convergence is uniform on those
+boundaries. Rouché's theorem therefore gives exactly one root, counted with
+multiplicity, of the relevant normalized polynomial in each disk for all
+sufficiently large `t`.
+
+No other root can remain bounded. Otherwise a bounded sequence of remaining
+roots would have a convergent subsequence; uniform convergence on compact sets
+would make its limit a root of `r` or `r f`, hence put the sequence eventually
+inside one of the disks that already contains exactly one root. Therefore
+exactly two roots of `p_t` and exactly two roots of `g_t` escape every bounded
+set. The divisor matrices are similar to symmetric quotient matrices (and the
+polynomials are factors of real symmetric adjacency characteristic
+polynomials), so all their roots are real. Finally, the sum of all roots and
+the sum of the bounded limiting roots are both `1` for `p_t` and both `4` for
+`g_t`; the two escaping roots consequently have sum tending to zero. They
+cannot escape with the same sign. Thus the bounded roots converge, with
+multiplicity, exactly as follows:
 
 * the two bounded roots of `p_t` converge to the roots of `r`;
 * five bounded roots of `g_t` converge to the roots of `r f`; and
