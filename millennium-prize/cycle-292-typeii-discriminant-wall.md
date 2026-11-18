@@ -104,14 +104,15 @@ derived action, so `Delta` lies in the full represented derived commutant
 Only then do both `J_1` and `J_2'` commute with all of `C_1`, making `Delta`
 central.  Merely knowing `Delta` lies in the commutant, or merely knowing the
 commutants are abstractly isomorphic, would not prove centrality.  In the
-Type-II rows below, Moonen--Zarhin Theorem 0.1(iv) says that the actual Hodge
-group is semisimple and equals the image of its derived/simply connected
-cover, while Theorem 1.2 gives
-`End_Hg(V_i)=End_HS(V_i)=End^0(A_i)` (up to the homology/cohomology opposite
-convention).  Hence the full centralizer of the represented simply connected
-action really is
-`C_i=End_Hg(V_i)=End_HS(V_i)`, not merely a larger derived centralizer.  The
-intertwiner identifies these full centralizers by conjugation, and their center
+Type-II rows below, Moonen--Zarhin Theorem 0.1(iv) gives
+`Hg=Sp_D(V,phi)`.  Together with section 1.2---semisimplicity in the absence
+of Type-IV factors and
+`End_Q(V)^{Hg}=End^0(A)` as represented subalgebras---this implies that `Hg`
+is the represented image of its derived/simply connected cover and that the
+full centralizer of the represented simply connected action really is
+`C_i=End_Hg(V_i)=End_HS(V_i)=End^0(A_i)`, not merely a larger derived
+centralizer.  The intertwiner identifies these full centralizers by
+conjugation, and their center
 is `Q` or a totally real field `F`.  Componentwise `Delta=cI` for a real scalar
 `c`; then
 
@@ -218,7 +219,8 @@ convention).  For the individual Type-II(1) support,
 \]
 
 The real group is split `Sp_4(R)`, while the `omega_1` Tits algebra has Brauer
-class `[D]`.  The full derived commutant on `V` is `D^op`: geometrically it is
+class `[D]`.  The full derived commutant on `V` is the represented image of
+`D` (or `D^op` in the dual/right-module convention): geometrically it is
 `M_2`, and both sides have rational dimension four.
 
 If an actual rational same-row adjoint graph occurs and transports the exact
@@ -233,7 +235,8 @@ An `End^0=Q` surface also has split real `Sp_4` and geometric standard packet,
 so real form does **not** exclude a graph.  The rational Tits class does:
 its `omega_1` algebra is split, whereas the II(1) class is $[D]\ne0$.
 Equivalently a compatible rational standard form would force
-`D^op=M_2(Q)`.  If `D` is allowed to split, the boundary fourfold is isogenous
+`D\simeq M_2(Q)`, or `[D]=0`.  If `D` is allowed to split, the boundary
+fourfold is isogenous
 to the square of the surface and the graph can occur; this is not a simple
 Type-II support.
 
@@ -352,10 +355,11 @@ really exist.
 ### 4.2 Group, packet, and graph rows
 
 Moonen--Zarhin Theorem 0.1(iv) likewise applies uniformly to every simple
-Type-II(2) fourfold, so the actual Hodge group is `Sp_D(V,phi)`, semisimple,
-with the full represented commutant supplied by Theorem 1.2.  Its rational
-form and complex packet may then be reconstructed as follows.  For a simple
-II(2) support,
+Type-II(2) fourfold and gives `Hg=Sp_D(V,phi)`.  Together with section 1.2
+(semisimplicity and `End_Q(V)^{Hg}=End^0(A)`), this identifies `Hg` with the
+represented derived/simply connected image and identifies the full represented
+commutant with `End^0(A)`.  Its rational form and complex packet may then be
+reconstructed as follows.  For a simple II(2) support,
 
 \[
  G^{\mathrm{sc}}=\operatorname{Res}_{F/\mathbb Q}\operatorname{SL}_1(D),
@@ -368,8 +372,9 @@ which is `Q`-simple but becomes `SL_2 times SL_2` over `Qbar`.  Its packet is
  =2(U_1\boxtimes1)\oplus2(1\boxtimes U_2), \tag{292.6}
 \]
 
-and its derived commutant is `D^op`, of rational dimension eight and center
-`F`.  If an actual same-row rational adjoint graph occurs and transports the
+and its derived commutant is the represented image of `D` (or `D^op` in the
+dual/right-module convention), of rational dimension eight and center `F`.
+If an actual same-row rational adjoint graph occurs and transports the
 exact parametrized projected Hodge circle, it identifies the Lie-algebra
 centroids and quaternion Brauer classes, lifts to simply connected covers,
 and on `Qbar` is inner up to swapping the two factors.  The packet (292.6) is
