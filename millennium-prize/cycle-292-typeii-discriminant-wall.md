@@ -11,9 +11,10 @@ requirements:
 2. exact algebraic quotient bridges (`QB`) for every nonsemisimple support.
 
 The `QB` construction and conditional Lemma 291.C survive audit.  This cycle
-repairs the same-Type-III outer-`D_2`, outer-`A_2`, and standard outer-`A_3`
-graph lemmas, corrects the reading of Moonen--Zarhin section 2.5(ii), and
-settles the omitted Type-II determinant and same-row graph calculations.
+records conditional fixed-graph implications for the identified Type-III
+outer-`D_2`, outer-`A_2`, standard outer-`A_3`, II(1), and II(2) packets,
+corrects the reading of Moonen--Zarhin section 2.5(ii), and settles the omitted
+Type-II determinant calculations.
 
 **Binary verdict: the mixed-product theorem is still not proved.**  Two
 families omitted from the old support inventory really survive the balanced
@@ -26,14 +27,18 @@ discriminant-one locus:
   has discriminant class equal to the corestriction class of its quaternion
   algebra, and explicit division supports with split corestriction exist.
 
-The same-Type-II(1) and same-Type-II(2) graph-rigidity lemmas pass, and their
-obvious surface cross-graphs are blocked by rational Tits classes.  These
-repairs still do not constitute an exhaustive uniform support/packet census
-for every possibly special simple member and every isotypic matrix embedding
-of the Weil field.  Therefore `DI` remains fail-closed until that census is
-finished and every surviving same/cross packet row is checked.  Nothing here
-proves a new mixed Hodge-conjecture case, a Clay result, or a publication
-result.
+For each identified Type-II packet, an actual rational adjoint graph carrying
+the exact parametrized projected Hodge circle forces isogeny; the obvious
+simple-division/surface cross-graphs are blocked by rational Tits classes.  Moonen--
+Zarhin Theorem 0.1(iv) supplies the expected actual Hodge group uniformly for
+every simple Type-II fourfold, including special members; this is not a
+generic-PEL assertion.  What is still missing is an exhaustive rational
+support/packet census for every possible simple support and every isotypic
+matrix embedding of the Weil field, together with independently checked
+rational Tits/packet descent and projected-circle data in each surviving row.
+Therefore `DI` remains fail-closed until that census is finished and every
+same/cross rational packet coincidence is checked.  Nothing here proves a new
+mixed Hodge-conjecture case, a Clay result, or a publication result.
 
 ## 1. Correct reading of Moonen--Zarhin
 
@@ -87,28 +92,39 @@ restricted to the rational vector space `H` is then a nonzero rational
 polynomial.  Since `Q` is infinite, it has a rational nonvanishing point, so
 there is a rational invertible derived intertwiner `f`.
 
-Put `J_2'=f^{-1}J_2f` and `Delta=J_2'-J_1`.  Exact equality of parametrized
-projected circles places `Delta` in the full derived commutant.  Algebraic
-endomorphisms are Hodge, so both complex structures commute with that
-commutant; hence `Delta` is central in it.  Componentwise it is a real scalar
-`c`, and
+Put `J_2'=f^{-1}J_2f` and `Delta=J_2'-J_1`.  Differentiating exact equality
+of parametrized projected circles shows that `Delta` commutes with the lifted
+derived action, so `Delta` lies in the full represented derived commutant
+`C_1`.  One must also prove, as represented subalgebras,
+
+\[
+ f^{-1}C_2f=C_1=\operatorname{End}_{\mathrm{HS}}(V_1).
+\]
+
+Only then do both `J_1` and `J_2'` commute with all of `C_1`, making `Delta`
+central.  Merely knowing `Delta` lies in the commutant, or merely knowing the
+commutants are abstractly isomorphic, would not prove centrality.  In the
+Type-II rows below, Moonen--Zarhin Theorem 1.2 supplies the represented
+commutant/Hodge-endomorphism equality, and its center is `Q` or a totally real
+field `F`.  Componentwise `Delta=cI` for a real scalar `c`; then
 
 \[
  (J_1+cI)^2=J_1^2=-I
 \]
 
-forces `c=0`.  Thus `f` is a rational weight-one Hodge isomorphism and the two
-simple abelian supports are isogenous.
+forces `c=0`.  Thus, for each identified Type-II packet, any actual rational
+adjoint graph transporting the parametrized projected Hodge circle forces a
+rational weight-one Hodge isomorphism and hence an isogeny.
 
-This mechanism repairs:
-
-- same Type III, whose geometric packet is $2(\mathrm{Std}_2\boxtimes\mathrm{Std}_2)$ and is
-  fixed by the `D_2` node swap;
-- the non-CM imaginary-quadratic threefold row, whose packet
-  `Std_3 plus Std_3^dual` is fixed by the outer `A_2` involution;
-- the standard Type-IV(1,1) row, whose packet
-  `Std_4 plus Std_4^dual` is fixed by the outer `A_3` involution;
-- both Type-II rows treated below.
+The same determinant-open strategy applies to the previously audited
+same-Type-III, outer-`A_2`, and standard outer-`A_3` rows only after their own
+represented commutant centers and central-correction equations are checked;
+they do not inherit the Type-II real-scalar sentence formally.  Their geometric
+packets are respectively
+`2(Std_2 boxtimes Std_2)`, `Std_3 plus Std_3^dual`, and
+`Std_4 plus Std_4^dual`, invariant under the allowed node actions.  Every such
+statement is a fixed-graph implication, not an assertion that the exhaustive
+support census has already produced or eliminated all graphs.
 
 The argument uses the fixed rational graph and the actual rational modules; it
 does not infer descent merely from absolute root type.
@@ -182,7 +198,11 @@ rank-one Type-II(2) corestriction formula.
 
 ### 3.1 Group, packet, and graph rows
 
-For the individual Type-II(1) support,
+Moonen--Zarhin Theorem 0.1(iv) applies to every simple Type-II(1)
+fourfold: it is in none of their exceptional cases (a)--(d).  Hence the
+actual Hodge group is uniformly `Sp_D(V,phi)`, is semisimple, and its represented
+commutant is `End^0(A)` (up to the explicit homology/cohomology opposite
+convention).  For the individual Type-II(1) support,
 
 \[
  G_{\overline{\mathbb Q}}^{\mathrm{sc}}\simeq\operatorname{Sp}_4,
@@ -194,11 +214,13 @@ The real group is split `Sp_4(R)`, while the `omega_1` Tits algebra has Brauer
 class `[D]`.  The full derived commutant on `V` is `D^op`: geometrically it is
 `M_2`, and both sides have rational dimension four.
 
-A rational same-row adjoint graph lifts uniquely.  The `C_2` Dynkin diagram
-has no automorphism, so the fixed pulled-back geometric module remains
+If an actual rational same-row adjoint graph occurs and transports the exact
+parametrized projected Hodge circle, it lifts uniquely.  The `C_2` Dynkin
+diagram has no automorphism, so the fixed pulled-back geometric module remains
 `Std_4^2`.  Section 2 gives a rational invertible derived intertwiner; the
 center of the commutant is `Q`, so the exact projected circle upgrades it to a
-Hodge isomorphism.  Thus two nonisogenous simple II(1) supports cannot graph.
+Hodge isomorphism.  Thus such a graph between two nonisogenous simple II(1)
+supports is impossible.
 
 An `End^0=Q` surface also has split real `Sp_4` and geometric standard packet,
 so real form does **not** exclude a graph.  The rational Tits class does:
@@ -322,7 +344,11 @@ really exist.
 
 ### 4.2 Group, packet, and graph rows
 
-For a simple II(2) support,
+Moonen--Zarhin Theorem 0.1(iv) likewise applies uniformly to every simple
+Type-II(2) fourfold, so the actual Hodge group is `Sp_D(V,phi)`, semisimple,
+with the full represented commutant supplied by Theorem 1.2.  Its rational
+form and complex packet may then be reconstructed as follows.  For a simple
+II(2) support,
 
 \[
  G^{\mathrm{sc}}=\operatorname{Res}_{F/\mathbb Q}\operatorname{SL}_1(D),
@@ -336,12 +362,13 @@ which is `Q`-simple but becomes `SL_2 times SL_2` over `Qbar`.  Its packet is
 \]
 
 and its derived commutant is `D^op`, of rational dimension eight and center
-`F`.  A same-row rational adjoint graph identifies the Lie-algebra centroids
-and the quaternion Brauer classes, lifts to simply connected covers, and on
-`Qbar` is inner up to swapping the two factors.  The packet (292.6) is
+`F`.  If an actual same-row rational adjoint graph occurs and transports the
+exact parametrized projected Hodge circle, it identifies the Lie-algebra
+centroids and quaternion Brauer classes, lifts to simply connected covers,
+and on `Qbar` is inner up to swapping the two factors.  The packet (292.6) is
 swap-invariant.  Section 2 therefore yields a rational derived-module
-isomorphism, and centrality in $F\otimes_{\mathbb Q}\mathbb R$ plus `J^2=-1` makes it Hodge.  An
-exact graph between nonisogenous simple II(2) supports is impossible.
+isomorphism, and centrality in $F\otimes_{\mathbb Q}\mathbb R$ plus `J^2=-1` makes it Hodge.  Such
+an exact graph between nonisogenous simple II(2) supports is impossible.
 
 The principal cross-rows are:
 
@@ -383,9 +410,12 @@ The following Cycle-291 components now survive audit:
 3. the aggregate CM Hodge torus records simultaneous quotient relations;
 4. Lemma 291.C correctly turns literal `DI` plus exact `QB` into joint
    fullness;
-5. same-Type-III, outer-`A_2`, standard outer-`A_3`, same-II(1), and
-   same-II(2) graph rigidity pass, and the displayed Type-II/surface cross
-   rows are excluded.
+5. for each identified same-Type-III, outer-`A_2`, standard outer-`A_3`,
+   II(1), and II(2) packet, an actual rational adjoint graph transporting the
+   exact parametrized projected Hodge circle forces isogeny after the
+   row-specific represented-commutant check; the displayed Type-II/surface
+   cross rows are excluded for simple division supports, while the split
+   cases are decomposable surface-square boundaries.
 
 This still is not an exhaustive proof of `DI`.  The required final census must
 start from every possible isotypic matrix embedding
@@ -396,11 +426,15 @@ start from every possible isotypic matrix embedding
 
 inside a Weil fourfold, consolidate repeated isogeny supports, and for every
 simple support prove the actual rational derived group, rational `H^1` packet,
-full derived commutant, and projected Hodge circle.  These assertions must be
-uniform for special members, not merely Hodge-generic PEL points.  It must then
-check every same/cross rational packet coincidence, including any remaining
-outer or restriction-of-scalars rows.  Only after that table is complete may
-one invoke finite-family Goursat and instantiate Lemma 291.C.
+full derived commutant, and projected Hodge circle.  Moonen--Zarhin already
+supplies the uniform actual-group and commutant statements for simple II(1),
+II(2), and III(1) fourfolds; it does not by itself supply every finer rational
+Tits-module identification or exact transport by an arbitrary graph.  The
+remaining rows must likewise be uniform for special members, not merely
+Hodge-generic PEL points.  The census must then check every same/cross rational
+packet coincidence, including any remaining outer or restriction-of-scalars
+rows.  Only after that table is complete may one invoke finite-family Goursat
+and instantiate Lemma 291.C.
 
 Accordingly:
 
@@ -409,7 +443,8 @@ Accordingly:
 - do not use real form alone for II(1) versus a split `Sp_4` surface;
 - do not generalize the explicit II(2) discriminant-one example to all II(2)
   supports;
-- do not claim generic PEL group data for every special member without proof;
+- use Moonen--Zarhin 0.1(ii),(iv), not a generic PEL argument, for the
+  uniform actual Hodge groups of simple III(1) and Type-II fourfolds;
 - do not replace exact parametrized-circle equality by equality of images;
 - do not infer rational module descent from absolute highest weights alone.
 
@@ -431,7 +466,12 @@ Accordingly:
   hexagon:2610.00259v2, Theorem I.
 
 The Type-II determinant formulas and the fixed-graph rigidity arguments above
-were independently reconstructed and hostilely audited.  The remaining
-limitation is not either displayed Type-II calculation; it is the absence, at
-this checkpoint, of a complete citation-grade uniform support/packet census
-covering every special member and every isotypic Weil-field embedding.
+were independently reconstructed and hostilely audited.  Moonen--Zarhin
+Theorem 0.1(iv) proves the expected actual Hodge group uniformly for the two
+simple Type-II rows; Lombardo's complexified packet descriptions support the
+stated geometric multiplicities but do not, alone, prove all finer rational
+Tits descent or arbitrary exact-circle transport.  The remaining limitation
+is the absence, at this checkpoint, of a complete citation-grade rational
+support/packet and matrix-embedding census.  The secondary source also states
+that simple Type III(2) fourfolds do not exist, but the primary Shimura
+pinpoint for that exact nonexistence was not located in this audit.
