@@ -463,9 +463,12 @@ def exact_dnn_witness(inventory: R21Inventory) -> str:
     parent literal-cycle typing certificate.
     """
     if inventory.family == "THETA_PLUS_T5":
-        require(17 > 9, "exact q=3 witness 17>9 failed")
-        return ("Delta(1,2,r)>1 for every r>=2 by the pinned classification; "
-                "q=3: (sqrt(17)-3)/2>0 because 17>9")
+        if inventory.theta.r == 2:
+            require(17 > 9, "exact r=2 witness 17>9 failed")
+            return ("Delta(1,2,2)=(sqrt(17)-1)/2>1 because 17>9; "
+                    "Delta+5-6>0")
+        return ("Delta(1,2,r)>1 for r>=3 by the pinned exact "
+                "Delta-classification; Delta+5-6>0")
     require(425 > 361, "exact q=5 witness 425>361 failed")
     return ("literal D: (sqrt(17)+5-4sqrt(5))/2>0 because "
             "sqrt(17)+5>4sqrt(5), squared twice to 425>361")
