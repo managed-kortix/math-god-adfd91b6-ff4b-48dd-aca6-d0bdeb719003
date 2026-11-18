@@ -93,16 +93,31 @@ def main():
     # to audit implementation and all sign arguments are then formula-level in
     # the note. No floating point or assert is used.
     rows = [audit(t) for t in (1,2,3,5,10,101)]
-    # Cyclomatic ranks from exact counts.
+    # Cyclomatic ranks and the dark leaf zero-projector diagonal.  On the
+    # t-dimensional leaf-coordinate space, the zero eigenspace is 1^perp and
+    # its projector is I-J/t, with every diagonal entry 1-1/t.
     for t in (1,2,101):
         h_n, h_m = 5+t, 5+t
         k_n, k_m = 5+t, 10+t
         if h_m-h_n+1 != 1 or k_m-k_n+1 != 6:
             raise SystemExit("rank count failed")
+        zero_projector = [[F(i == j)-F(1, t) for j in range(t)]
+                          for i in range(t)]
+        ones = [F(1)] * t
+        if any(sum(zero_projector[i][j]*ones[j] for j in range(t))
+               for i in range(t)):
+            raise SystemExit(f"dark leaf projector does not kill constants at t={t}")
+        if any(sum(zero_projector[i][k]*zero_projector[k][j]
+                   for k in range(t)) != zero_projector[i][j]
+               for i in range(t) for j in range(t)):
+            raise SystemExit(f"dark leaf projector is not idempotent at t={t}")
+        if any(zero_projector[i][i] != F(t-1, t) for i in range(t)):
+            raise SystemExit(f"dark leaf projector diagonal failed at t={t}")
     print("PASS fixed-rank bridge projector obstruction")
     print("H quotient: x^4-x^3-(t+3)x^2+(t+2)x+t; inertia (3,3,t-1)")
     print("K quotient: x^3-3x^2-(t+4)x+3t; inertia (2,4,t-1)")
-    print("leaf projector product <= 1/t^2 -> 0")
+    print("positive-projector leaf product <= 1/t^2 -> 0")
+    print("nonnegative-projector leaf factors >= 1-1/t (not obstructed)")
 
 
 if __name__ == "__main__":

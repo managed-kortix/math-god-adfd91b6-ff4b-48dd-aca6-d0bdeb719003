@@ -6,14 +6,18 @@ For a real symmetric matrix `A`, write
 
 `A_+=sum_(lambda>0) lambda uu^T`,
 
-`Pi_+(A)=sum_(lambda>0) uu^T`, and
+`Pi_+(A)=sum_(lambda>0) uu^T`,
+
+`Pi_(>=0)(A)=sum_(lambda>=0) uu^T`, and
 
 `s^+(A)=tr(A_+^2)`.
 
 This note proves an exact lower bound for restoring one omitted bridge and
 shows that fixed total cyclomatic rank seven gives no positive lower bound on
-that particular correction.  It does **not** assert that the full bridge gain
-has no lower bound, and it does not prove or refute the heptacyclic theorem.
+the particular **positive-positive** correction in (1).  It does **not** give
+an obstruction for the stronger nonnegative-projector correction, assert that
+the full bridge gain has no lower bound, or prove or refute the heptacyclic
+theorem.
 
 ## 1. Exact positive-projector bridge correction
 
@@ -61,10 +65,22 @@ singular values of `D`.  This proves (2).  For one bridge,
 
 which proves (1).
 
+There is a stronger version that is important for delimiting the obstruction
+below.  Put `widehat(Pi)_H=Pi_(>=0)(A(H))` and similarly for `K`.  The same
+proof may take `Z` supported on their nonnegative spectral subspaces: on that
+support `A_0-R=0`, including on the zero eigenspace.  Therefore
+
+`s^+([[A(H),E],[E^T,A(K)]])`
+` >=s^+(H)+s^+(K)+||widehat(Pi)_H E widehat(Pi)_K||_F^2`,       (6a)
+
+and for one bridge its last term is
+`(widehat(Pi)_H)_(uu)(widehat(Pi)_K)_(vv)`.  Thus (1) is a valid but
+potentially weaker positive-projector certificate.
+
 For connected nontrivial `H,K`, both factors in (6) are positive: the Perron
 unit eigenvector belongs to the positive subspace and has a nonzero coordinate
-at every vertex.  This gives strictness graph by graph, but not a uniform
-margin.
+at every vertex.  This gives strictness graph by graph for (1), but not a
+uniform margin for the positive-positive correction in (1).
 
 ## 2. Exact fixed-rank obstruction family
 
@@ -190,6 +206,27 @@ sides.  In either form,
 
 Positivity in (16) follows from Perron--Frobenius, as noted after (6).
 
+### The zero eigenspace reverses the nonnegative-projector conclusion
+
+For either graph, let `W_t` be the subspace of vectors supported on the `t`
+leaves whose leaf coordinates sum to zero.  All those leaves have the same
+single neighbor, so `W_t` lies in the zero eigenspace.  Its dimension is
+`t-1`; (12)--(13) show that this is the full zero eigenspace.  The orthogonal
+projector onto `W_t` is `I_t-J_t/t` on the leaf coordinates.  Consequently,
+for every selected leaf,
+
+`(Pi_0(H_t))_(u_tu_t)=(Pi_0(K_t))_(v_tv_t)=1-1/t`.             (17)
+
+The positive and zero spectral subspaces are orthogonal, so
+
+`(Pi_(>=0)(H_t))_(u_tu_t)=1-1/t+(Pi_+(H_t))_(u_tu_t) >= 1-1/t`,
+
+`(Pi_(>=0)(K_t))_(v_tv_t)=1-1/t+(Pi_+(K_t))_(v_tv_t) >= 1-1/t`. (18)
+
+In particular, the one-bridge correction certified by (6a) lies between
+`(1-1/t)^2` and `1` for this family, so it tends to one rather than zero.
+Thus `H_t,K_t` do **not** obstruct the nonnegative-projector correction.
+
 ## 3. Consequence and stopping point
 
 Equations (7) and (16) prove:
@@ -200,13 +237,15 @@ Equations (7) and (16) prove:
 > false in the specific split `(1,6)`, with cores `C5` and `K5` and only rooted
 > tree attachments.
 
-This is an obstruction to a **projector-correction-only** replacement for the
-false both-sides-nonnegative sentence.  It says nothing adverse about the full
-bridge restoration gain
+This is an obstruction only to a **positive-projector-correction-only**
+replacement for the false both-sides-nonnegative sentence.  By (17)--(18), it
+is not an obstruction to the stronger nonnegative-projector certificate (6a).
+It also says nothing adverse about the full bridge restoration gain
 
 `s^+(G)-s^+(H)-s^+(K)`,
 
-which can be much larger than the lower bound (1).  A successful rank-seven
-bridge proof must therefore use packet-specific surplus, fuller rooted
-characteristic-polynomial/phase data, or a stronger variational witness that
-also mixes positive and nonpositive spectral directions.
+which can be much larger than the lower bound (1).  The fixed-rank question of
+whether (6a), or the actual full bridge gain, uniformly pays the remaining
+hostile packet debit is left open.  Possible next routes include proving such
+a nonnegative-projector/full-gain debit bound, using packet-specific surplus,
+or exploiting fuller rooted characteristic-polynomial/phase data.
