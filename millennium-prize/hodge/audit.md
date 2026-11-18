@@ -81,3 +81,13 @@ Do not confuse rational with integral Hodge, algebraicity of the Hodge locus
 with algebraicity of its class, or tangent-space equality with global
 dominance. Audit monodromy, nonreduced Hilbert components, specialization, and
 whether the cycle has exactly the prescribed primitive class.
+
+## Cycle 292 Type-II and graph-census guard
+
+Do not read Moonen--Zarhin section 2.5(ii) as excluding every balanced imaginary-quadratic action outside Types III, IV(1,1), and IV(4,1). Its antecedent is the exceptional-Weil phenomenon in which Weil classes are needed beyond divisors. Type II can act balanced while its Weil classes are divisor-generated.
+
+Keep II(1) and II(2) distinct. In II(1), `H_1` has quaternionic rank two and every compatible determinant is a norm square; its rational `C_2` form has nontrivial standard-weight Tits class `[D]`, so real split `Sp_4` alone does not permit a graph to an `End^0=Q` surface. In II(2), `H_1` has rank one over a quaternion algebra with real-quadratic center and discriminant class `[Cor_{F/Q}D]`; only split-corestriction supports survive, but explicit division examples do. Do not generalize one cyclic example to all supports, and do not call its indefinite Weil Hermitian form a positive Riemann form without the alternating trace form and compatible complex structure.
+
+A fixed-graph rigidity proof requires: the actual rational adjoint graph; its unique simply connected lift; invariance of the pulled-back geometric `H^1` packet under every allowed diagram action; equivariant-Hom flat base change plus the determinant-open argument; the full rational derived commutant; and equality of the parametrized projected Hodge circles. Absolute root type, real conjugacy, equality of circle images, or a nonzero rather than invertible Hom does not suffice.
+
+Even after the displayed same-row lemmas pass, do not instantiate `DI` until an exhaustive uniform support/packet census covers every special simple member and every isotypic matrix embedding of the Weil field. See `../cycle-292-typeii-discriminant-wall.md`.

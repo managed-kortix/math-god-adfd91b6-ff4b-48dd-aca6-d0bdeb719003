@@ -1038,3 +1038,11 @@ data give a proper ambient locus; an unspecified extra Hom condition is only a
 countable union until bounded.  Ambient properness follows from generic
 endomorphism field `Q(i)`, but strictness inside every component of `Z_16`
 remains unproved.  No Hodge-conjecture result is claimed.
+
+## Cycle 292: Type-II repair and the remaining census wall
+
+The fixed-graph method now closes the same-Type-III, outer-`A_2`, standard outer-`A_3`, same-Type-II(1), and same-Type-II(2) rows. After lifting a rational adjoint graph to simply connected covers, invariant geometric packets and flat base change for equivariant Hom make the determinant nonzero on a rational Hom space; a rational invertible intertwiner follows. Exact equality of parametrized projected circles leaves the transported complex-structure difference in the full derived commutant. Since both complex structures commute with the algebraic endomorphism algebra, that difference is central, and `J^2=-1` kills it componentwise.
+
+The old support reduction was not exhaustive. Type-II(1) fourfolds survive: for a general skew-Hermitian coefficient matrix on `D^2`, the associated four-dimensional `K`-Hermitian determinant is an explicit rational square, so every compatible polarization has discriminant one. Their rational `C_2` form has packet `Std_4^2` and `omega_1` Tits class `[D]`; this blocks the apparent graph to a split `Sp_4` surface although the real forms coincide. Type-II(2) has rank one over a quaternion algebra with real-quadratic center; its discriminant is `[Cor_{F/Q}D]`, so precisely split-corestriction supports survive. An explicit cyclic division example has Gram $T\oplus(-pT)$ and determinant `p^2 det(T)^2`, with a nonempty two-upper-half-plane PEL domain and generic endomorphism algebra `D`. Genuine IV(2,1) restricts as `(3,1)`, not `(2,2)`.
+
+This still does not prove derived independence. The next exact target is a uniform, citation-grade support/packet table beginning with every matrix embedding of the Weil field and valid for every special simple member, followed by every remaining rational packet coincidence. No mixed Hodge-conjecture result is claimed.

@@ -404,3 +404,9 @@ determinantal class. The incidence is empty before its tangent or quadratic-jet
 systems; such a pair also has zero exceptional Weil projection. Nonsplit
 bundles with a genuinely new exceptional Chern class remain outside the
 obstruction.
+
+## Cycle 292 mixed-Weil support gate
+
+The fixed-graph method now repairs the same-Type-III, outer-`A_2`, standard outer-`A_3`, same-Type-II(1), and same-Type-II(2) rows. It also excludes II(1)/split-surface and II(2)/RM-surface graphs by rational Tits classes, not merely real form.
+
+The support census expands rather than closes. Every II(1) compatible polarization has discriminant one; II(2) survives exactly when its quaternion corestriction is split, and explicit simple division supports exist. Genuine IV(2,1) has imaginary-quadratic signature `(3,1)` and is absent. The active route is therefore a uniform rational support/packet census derived from every isotypic matrix embedding of the Weil field, valid for all special members. Only after every remaining packet coincidence is checked may literal derived independence be combined with the already audited quotient bridges and Lemma 291.C. Until then the arbitrary mixed-product theorem is fail-closed.
