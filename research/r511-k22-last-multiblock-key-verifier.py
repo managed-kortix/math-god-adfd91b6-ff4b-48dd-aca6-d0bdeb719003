@@ -65,20 +65,21 @@ def require(condition, message):
 
 
 def unit(parameters):
-    square = sum(value * value for value in parameters)
-    denominator = 1 + square
-    return ((1 - square) / denominator,) + tuple(
+    one = Fraction(1)
+    square = sum((value * value for value in parameters), Fraction(0))
+    denominator = one + square
+    return ((one - square) / denominator,) + tuple(
         2 * value / denominator for value in parameters)
 
 
 def dot(left, right):
-    return sum(x * y for x, y in zip(left, right))
+    return sum((x * y for x, y in zip(left, right)), Fraction(0))
 
 
 def step_cost(left, right):
     correlation = dot(left, right)
     require(correlation != -1, "antipodal Gram step")
-    return (1 - correlation) / (1 + correlation)
+    return (Fraction(1) - correlation) / (Fraction(1) + correlation)
 
 
 def exact_cost(lengths, branch_parameters, internal_parameters):
@@ -161,6 +162,7 @@ def audit():
     costs = []
     for name, _, _, lengths, branches, internals in RECORDS:
         cost = exact_cost(lengths, branches, internals)
+        require(type(cost) is Fraction, f"{name} Gram cost is not exact Fraction")
         require(cost < BOUND, f"{name} lost strict 21/5 Gram bound")
         costs.append(cost)
 
