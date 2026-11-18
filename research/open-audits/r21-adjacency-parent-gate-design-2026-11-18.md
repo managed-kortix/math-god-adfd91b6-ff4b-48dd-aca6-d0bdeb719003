@@ -269,6 +269,11 @@ The prototype's `run()` is organised as follows.
 * Authenticate all rank-one blocks as literal cycles.
 * Accept only `(3,3,3,3,3)` (theta + five triangles) or
   `(3,3,3,3,5)` (D + four triangles + C5).
+* Check the final exact integer brackets: `q=3` uses `17>9`
+  (`(sqrt(17)-3)/2>0`); `q=5` uses `425>361`
+  (`sqrt(17)+5>4sqrt(5)` after two squarings). The radical identities and the
+  `Delta`-classification are pinned analytic inputs; only these brackets are
+  recomputed.
 
 ### Stage 1: family dispatch
 
