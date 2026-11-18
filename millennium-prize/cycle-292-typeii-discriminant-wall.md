@@ -104,9 +104,16 @@ derived action, so `Delta` lies in the full represented derived commutant
 Only then do both `J_1` and `J_2'` commute with all of `C_1`, making `Delta`
 central.  Merely knowing `Delta` lies in the commutant, or merely knowing the
 commutants are abstractly isomorphic, would not prove centrality.  In the
-Type-II rows below, Moonen--Zarhin Theorem 1.2 supplies the represented
-commutant/Hodge-endomorphism equality, and its center is `Q` or a totally real
-field `F`.  Componentwise `Delta=cI` for a real scalar `c`; then
+Type-II rows below, Moonen--Zarhin Theorem 0.1(iv) says that the actual Hodge
+group is semisimple and equals the image of its derived/simply connected
+cover, while Theorem 1.2 gives
+`End_Hg(V_i)=End_HS(V_i)=End^0(A_i)` (up to the homology/cohomology opposite
+convention).  Hence the full centralizer of the represented simply connected
+action really is
+`C_i=End_Hg(V_i)=End_HS(V_i)`, not merely a larger derived centralizer.  The
+intertwiner identifies these full centralizers by conjugation, and their center
+is `Q` or a totally real field `F`.  Componentwise `Delta=cI` for a real scalar
+`c`; then
 
 \[
  (J_1+cI)^2=J_1^2=-I
