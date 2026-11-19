@@ -1,0 +1,950 @@
+{
+  "schema": "m7-family-d-common-c-v1",
+  "cells": [
+    [
+      0,
+      0,
+      2
+    ],
+    [
+      0,
+      1,
+      1
+    ],
+    [
+      1,
+      0,
+      1
+    ]
+  ],
+  "types": [
+    "oriented-both",
+    "oriented-one",
+    "root-hole"
+  ],
+  "leaves": 9,
+  "solver_source_commit": "38e073b389a877b0a0d3c91136d2443ab95fdeba",
+  "solver_sha256": "dcb642215dcd680d2ca670b0a4805d6b2dfe6cc6d71067baa273adb82d1ad175",
+  "drat_trim_source_commit": "2e3b2dc0ecf938addbd779d42877b6ed69d9a985",
+  "drat_trim_sha256": "92f0aa9575ed519d66a99b8b1b3dde6ece4618ae4c202a3a4b200265dda0aa7a",
+  "entries": [
+    {
+      "index": 0,
+      "cell": [
+        0,
+        0,
+        2
+      ],
+      "kind": "oriented-both",
+      "meta": {
+        "cell": [
+          0,
+          0,
+          2
+        ],
+        "kind": "oriented-both",
+        "u": 0,
+        "v": 3,
+        "r": 1,
+        "q": 2,
+        "A_u": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "B_u": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "A_v": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "B_v": [
+          0,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "C": [
+          16,
+          17
+        ],
+        "S_intersection": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "S_union": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "W": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "vars": 41906,
+      "clauses": 161364,
+      "cnf_bytes": 4005798,
+      "cnf_sha256": "d71201a0a84f219877203b685bb174cd883cfaaaf4a6b55832a3f5e82df1e921",
+      "proof_file": "m7-family-d-common-c-002-oriented-both.drat.xz",
+      "proof_bytes": 341720,
+      "proof_sha256": "8da16804831a59c77d953dbda712f9f5f9370be0dc4788e79bd8db7b0ed1f855",
+      "compressed_proof_bytes": 64284,
+      "compressed_proof_sha256": "ba2ac34a442060ea5f0e0a4d68d7dba86f8df2d8180daad1b95a684a57802a56"
+    },
+    {
+      "index": 1,
+      "cell": [
+        0,
+        0,
+        2
+      ],
+      "kind": "oriented-one",
+      "meta": {
+        "cell": [
+          0,
+          0,
+          2
+        ],
+        "kind": "oriented-one",
+        "u": 0,
+        "v": 3,
+        "r": 1,
+        "q": 2,
+        "A_u": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "B_u": [
+          2,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "A_v": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "B_v": [
+          0,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "C": [
+          16,
+          17
+        ],
+        "S_intersection": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "S_union": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "W": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "vars": 41899,
+      "clauses": 161307,
+      "cnf_bytes": 4004844,
+      "cnf_sha256": "fee0541deccbd8da7a678731761b094af51e1489f0f67987c9bca05fbac9df8a",
+      "proof_file": "m7-family-d-common-c-002-oriented-one.drat.xz",
+      "proof_bytes": 738543,
+      "proof_sha256": "c7f3f09fcb6e07777f0a7338556a3cad1419b329fa9418073e7c0a4de3f224be",
+      "compressed_proof_bytes": 134664,
+      "compressed_proof_sha256": "9732b890e28b7f211cced79743e71f615697daff90c4630c0a7e37c8fe0e0a29"
+    },
+    {
+      "index": 2,
+      "cell": [
+        0,
+        0,
+        2
+      ],
+      "kind": "root-hole",
+      "meta": {
+        "cell": [
+          0,
+          0,
+          2
+        ],
+        "kind": "root-hole",
+        "u": 0,
+        "v": 9,
+        "r": 1,
+        "q": 2,
+        "A_u": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "B_u": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "A_v": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "B_v": [
+          0,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "C": [
+          16,
+          17
+        ],
+        "S_intersection": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "S_union": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "W": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "vars": 41906,
+      "clauses": 161364,
+      "cnf_bytes": 4005803,
+      "cnf_sha256": "3f709521ee39fb91b8db8053c3473ddd1a9ad5961524ce15b606a3f892c73ef5",
+      "proof_file": "m7-family-d-common-c-002-root-hole.drat.xz",
+      "proof_bytes": 738429,
+      "proof_sha256": "306c9aa406343cb3a33714e58ca8ac5ee289c6b8cb44ad57d8a0357bd0a453a6",
+      "compressed_proof_bytes": 134532,
+      "compressed_proof_sha256": "524cfafea0f48fda12827ddc231eb32708085dba9e77eaed28329ba1e4b6fb25"
+    },
+    {
+      "index": 3,
+      "cell": [
+        0,
+        1,
+        1
+      ],
+      "kind": "oriented-both",
+      "meta": {
+        "cell": [
+          0,
+          1,
+          1
+        ],
+        "kind": "oriented-both",
+        "u": 0,
+        "v": 3,
+        "r": 1,
+        "q": 2,
+        "A_u": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "B_u": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "A_v": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "B_v": [
+          0,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "C": [
+          16,
+          17
+        ],
+        "S_intersection": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "S_union": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "W": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "vars": 41906,
+      "clauses": 161365,
+      "cnf_bytes": 4005806,
+      "cnf_sha256": "e790f2de12e8bcbdf2fc7b317436489aea6200d49063b993f0d0f491bb2ab587",
+      "proof_file": "m7-family-d-common-c-011-oriented-both.drat.xz",
+      "proof_bytes": 340908,
+      "proof_sha256": "42ff4857d6aed39cbd4b3c48e1ae953a126cc50d669bb6e67d1b1bfc31ea36db",
+      "compressed_proof_bytes": 63696,
+      "compressed_proof_sha256": "01d58c53d0fbb79a0edaf4309a65e3259478587016242f1830779bd180809a9d"
+    },
+    {
+      "index": 4,
+      "cell": [
+        0,
+        1,
+        1
+      ],
+      "kind": "oriented-one",
+      "meta": {
+        "cell": [
+          0,
+          1,
+          1
+        ],
+        "kind": "oriented-one",
+        "u": 0,
+        "v": 3,
+        "r": 1,
+        "q": 2,
+        "A_u": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "B_u": [
+          2,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "A_v": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "B_v": [
+          0,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "C": [
+          16,
+          17
+        ],
+        "S_intersection": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "S_union": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "W": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "vars": 41899,
+      "clauses": 161308,
+      "cnf_bytes": 4004852,
+      "cnf_sha256": "79485da8bcc3c313d616c3a58fe0bea4769b1d3a407fe41cd044e5bd0abdd2c6",
+      "proof_file": "m7-family-d-common-c-011-oriented-one.drat.xz",
+      "proof_bytes": 738548,
+      "proof_sha256": "f0296ea568d467323aba4225d3c777cfa864c8506e4f2882ac3f93af9825ad88",
+      "compressed_proof_bytes": 134640,
+      "compressed_proof_sha256": "c8f4be9e42168f8a1112b4413dda87759d7e0b78e1b3b2012ee20d597dfb0288"
+    },
+    {
+      "index": 5,
+      "cell": [
+        0,
+        1,
+        1
+      ],
+      "kind": "root-hole",
+      "meta": {
+        "cell": [
+          0,
+          1,
+          1
+        ],
+        "kind": "root-hole",
+        "u": 0,
+        "v": 9,
+        "r": 1,
+        "q": 2,
+        "A_u": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "B_u": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "A_v": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "B_v": [
+          0,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "C": [
+          16,
+          17
+        ],
+        "S_intersection": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "S_union": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "W": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "vars": 41906,
+      "clauses": 161365,
+      "cnf_bytes": 4005811,
+      "cnf_sha256": "79e3f36ef3d9acffbd8b35d982e1ff41f8d692eff16a629cf838614d7b4f213d",
+      "proof_file": "m7-family-d-common-c-011-root-hole.drat.xz",
+      "proof_bytes": 738434,
+      "proof_sha256": "57e74aa712ad4ee2411a72d9422acd56e7a41e80fc16935aef55b3e3de342320",
+      "compressed_proof_bytes": 134448,
+      "compressed_proof_sha256": "bef2363abc88bb78f541cdba6dd34c3e5363ec051e10a29ab5105218e4b4df72"
+    },
+    {
+      "index": 6,
+      "cell": [
+        1,
+        0,
+        1
+      ],
+      "kind": "oriented-both",
+      "meta": {
+        "cell": [
+          1,
+          0,
+          1
+        ],
+        "kind": "oriented-both",
+        "u": 0,
+        "v": 3,
+        "r": 1,
+        "q": 2,
+        "A_u": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "B_u": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "A_v": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "B_v": [
+          0,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "C": [
+          16,
+          17
+        ],
+        "S_intersection": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "S_union": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "W": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "vars": 41906,
+      "clauses": 161365,
+      "cnf_bytes": 4005806,
+      "cnf_sha256": "15abc31326b2da131fec9283d36829a501e823f12d872e879a5ad2720945d14a",
+      "proof_file": "m7-family-d-common-c-101-oriented-both.drat.xz",
+      "proof_bytes": 343330,
+      "proof_sha256": "81a00542eef54305a4f5dc14ecec33a6665cc17a1404bf3f9028b627f43eb015",
+      "compressed_proof_bytes": 64904,
+      "compressed_proof_sha256": "082c75d64e90d0bc8563bc6ef45f32ddb8607b9cb1dad1a964c9203a50f64d9e"
+    },
+    {
+      "index": 7,
+      "cell": [
+        1,
+        0,
+        1
+      ],
+      "kind": "oriented-one",
+      "meta": {
+        "cell": [
+          1,
+          0,
+          1
+        ],
+        "kind": "oriented-one",
+        "u": 0,
+        "v": 3,
+        "r": 1,
+        "q": 2,
+        "A_u": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "B_u": [
+          2,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "A_v": [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "B_v": [
+          0,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "C": [
+          16,
+          17
+        ],
+        "S_intersection": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "S_union": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "W": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "vars": 41899,
+      "clauses": 161308,
+      "cnf_bytes": 4004852,
+      "cnf_sha256": "6e40507d07662fafd646aa2889bba896f9189b813c0ff0829a30e2f86e9d9098",
+      "proof_file": "m7-family-d-common-c-101-oriented-one.drat.xz",
+      "proof_bytes": 738548,
+      "proof_sha256": "936793b12921192bbf1c0ed9cb725d343a248799a76b44336d2ec1f66b00339b",
+      "compressed_proof_bytes": 134700,
+      "compressed_proof_sha256": "d62d8142fea829990fe7040ed20c9b2caf00fe4a3e9026072db62139569e4237"
+    },
+    {
+      "index": 8,
+      "cell": [
+        1,
+        0,
+        1
+      ],
+      "kind": "root-hole",
+      "meta": {
+        "cell": [
+          1,
+          0,
+          1
+        ],
+        "kind": "root-hole",
+        "u": 0,
+        "v": 9,
+        "r": 1,
+        "q": 2,
+        "A_u": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "B_u": [
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "A_v": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "B_v": [
+          0,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "C": [
+          16,
+          17
+        ],
+        "S_intersection": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "S_union": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "W": [
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "vars": 41906,
+      "clauses": 161365,
+      "cnf_bytes": 4005811,
+      "cnf_sha256": "1c62aefeb337de2c9d998e38a95757f2eb2162f74433341983476ec9a97c7519",
+      "proof_file": "m7-family-d-common-c-101-root-hole.drat.xz",
+      "proof_bytes": 738434,
+      "proof_sha256": "ef0adef99a8b0073cd4cc78392b9abd00ba4cf0232ffb27db3fc8d32e559af5f",
+      "compressed_proof_bytes": 134440,
+      "compressed_proof_sha256": "ffd3412d2386fdec7e10f752673c12cd9c455ebe957d982289d280b4d31398d7"
+    }
+  ]
+}
