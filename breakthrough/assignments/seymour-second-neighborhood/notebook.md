@@ -2280,3 +2280,25 @@ scopes; this recovery is not a claim of Seymour's conjecture.
   and full 5,040-permutation support closure. Therefore the entire frozen clean
   `B7-l6` parent campaign is closed, but no other residual B7 group is closed.
   No commit was made.
+
+## 2026-11-19 — common-inaccessible-pair reduction in m=7 family D
+
+- In the distinct-low-witness family, synchronized the branch
+  `C_u=C_v=C`.  With `S_s={s} union N+(s)`, `t=|S_u intersect S_v|`,
+  `W=V\(C union S_u union S_v)`, `x=e(C,W)`, `z=h(C,W)`, and
+  `h=h(D-C)`, exact C-degree and seven-hole accounting gives
+  `2t=14+x+z+h`; hence `t` is 7 or 8.
+- Proved the `t=7` row impossible and proved `h>=1` when `t=8`.  The proof
+  uses a tournament-source lemma plus the failure of cross-robustness forced by
+  the disjoint witness-family definition.  The branch is reduced to exactly
+  `(x,z,h)=(0,0,2),(0,1,1),(1,0,1)`.
+- A hostile independent audit found one terse distinctness gap for the two
+  private endpoints; repaired it directly from their incompatible sole-
+  predecessor signatures.  The same audit verified the strengthened tournament
+  lemma and all remaining root-intersection/private-endpoint steps.
+- Added a transparent arithmetic/set checker.  This is a sharp structural
+  reduction only, not an elimination of family D or `m=7`.
+- **Next queued attack:** exact-complete the three residual common-C cells, in
+  parallel with the family-S global-badness refinement.  Keep global badness
+  and both deletion-witness systems explicit; do not infer pruning from local
+  degree completion alone.
