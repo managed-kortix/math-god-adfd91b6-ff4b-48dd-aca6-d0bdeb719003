@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
-"""Adjacency-only fail-closed semantic verifier for the physical R31-K lane.
+"""Full adjacency-only semantic verifier for the complete physical R31-K lane.
 
-The sole production input is a finite simple graph encoded by its vertex set
-and unordered adjacency edges.  Tarjan blocks, ports, the block-cut tree,
-physical K2 bridges, residual profile, dispatch, and original-vertex pieces
-are all reconstructed.  No caller supplies a profile, channel, owner, packet
-threshold, or claimed partition.
+The production API is ``verify(vertices, edges)``.  Its only input is a finite
+simple graph represented by a nonempty frozenset of original vertices and a
+frozenset of unordered two-vertex frozenset edges.  The verifier reconstructs
+all blocks, cuts, physical bridges, rooted block-cut ancestry, side ownership,
+piece topology, charges, and the final integer ledger.  It accepts no claimed
+profile, packet, owner, charge, rank, threshold, or partition.
+
+This candidate is intentionally scoped to R31-K.  It neither edits nor imports
+state from the repository; analytic dependencies are authenticated as pinned
+read-only source bytes below.  Its generic adjacency API and finite generated
+suite corroborate the implementation but do not by themselves prove the
+universal theorem over arbitrary block-cut trees; that proof is external.
 """
 from __future__ import annotations
 
@@ -14,14 +21,15 @@ import itertools
 import subprocess
 import sys
 from collections import Counter, deque
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+
+SOURCE_ROOT = Path(__file__).resolve().parents[1]
 
 
 class VerifyError(RuntimeError):
-    pass
+    """Fail-closed semantic rejection."""
 
 
 def require(condition, message):
@@ -34,49 +42,110 @@ def expect_rejection(action, label):
         action()
     except (VerifyError, KeyError, TypeError, ValueError, IndexError, StopIteration):
         return label
-    raise VerifyError(f"hostile adjacency accepted: {label}")
+    raise VerifyError(f"hostile mutation accepted: {label}")
 
 
-def digest(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+def sha256_bytes(data):
+    return hashlib.sha256(data).hexdigest()
 
 
-# Fixed theorem IDs and source bytes.  Numeric thresholds are selected only
-# from this private table after an adjacency-derived dispatch; input records
-# have no analytic fields.
-ANALYTIC_CONTRACTS = {
-    "R31K-K4-ROOTED-v1": {
-        "source": "packing-two-square-energy/paper.tex",
-        "sha256": "9638f6847892e8a043454d945e7945418ec96e393b639dfd65f664670dba8791",
-        "strict_floor": 2,
-    },
-    "R31K-K4-T-SHARED-v1": {
-        "source": "positive-square-energy/hexacyclic-general/multiblock-items5-7-owner-exact-closure.md",
-        "sha256": "1c5722565e874ebf04533e908c5bf335f7be0b56a5665f5b607cfdef14ac8c67",
-        "strict_floor": 3,
-    },
-    "R31K-UNICYCLIC-LOWER-v1": {
-        "source": "all-tricyclic-cacti/paper.tex",
-        "sha256": "d928a56b0257936fcc326ddc2c85e40593117a7749b55502bb42379c805e71e8",
-        "strict_floor": -1,
-    },
-    "R31K-CONNECTED-RANK2-6-v1": {
-        "source": "positive-square-energy/heptacyclic-general/complete-multiblock-theorem.md",
-        "sha256": "27c6a4736125d821f21fd1ebc7a30580068535826c8fcc6f72ea172cbb6a7399",
-        "strict_floor": 0,
-    },
-    "R31K-INDUCED-SUPERADD-v1": {
-        "source": "packing-two-square-energy/paper.tex",
-        "sha256": "9638f6847892e8a043454d945e7945418ec96e393b639dfd65f664670dba8791",
-        "strict_floor": None,
-    },
-    "R31K-RESIDUAL-SIEVE-v1": {
-        "source": "positive-square-energy/heptacyclic-general/rank-seven-multiblock-debit-ledger.md",
-        "sha256": "3f8bb3a397125782dd6c9cae26ce52f9c6bf826e3136dfee62781048e65c18a5",
-        "strict_floor": None,
-    },
-}
-EXPECTED_CONTRACT_IDS = frozenset(ANALYTIC_CONTRACTS)
+def file_digest(path):
+    return sha256_bytes(path.read_bytes())
+
+
+# ---------------------------------------------------------------------------
+# Fixed analytic contracts.  No numeric analytic field is accepted through
+# verify().  Repeated source paths are deliberate: each semantic use is named
+# separately, while audit_sources() independently authenticates the bytes.
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class Contract:
+    source: str
+    sha256: str
+    claim: str
+    floor: int | None
+    strict: bool
+
+
+CONTRACT_SPECS = (
+    ("R31K-RESIDUAL-SIEVE-v2", Contract(
+        "positive-square-energy/heptacyclic-general/rank-seven-multiblock-debit-ledger.md",
+        "3f8bb3a397125782dd6c9cae26ce52f9c6bf826e3136dfee62781048e65c18a5",
+        "exact R31-K residual sieve/classification input; not a full-lane theorem", None, False)),
+    ("R31K-INDUCED-SUPERADD-v2", Contract(
+        "all-tricyclic-graphs/paper.tex",
+        "4abf3ffa1e09148c060969f4055d878334af9b7358d0764ac42f5e0ffb236b02",
+        "positive-square-energy induced superadditivity", None, False)),
+    ("R31K-TREE-EXACT-v2", Contract(
+        "all-tricyclic-graphs/paper.tex",
+        "4abf3ffa1e09148c060969f4055d878334af9b7358d0764ac42f5e0ffb236b02",
+        "nonempty tree has sigma=-1", -1, False)),
+    ("R31K-ODD-UNICYCLIC-LOWER-v2", Contract(
+        "all-tricyclic-cacti/paper.tex",
+        "d928a56b0257936fcc326ddc2c85e40593117a7749b55502bb42379c805e71e8",
+        "odd unicyclic cactus has sigma>-1", -1, True)),
+    ("R31K-TRIANGULAR-BLOCK-v2", Contract(
+        "packing-two-square-energy/paper.tex",
+        "9638f6847892e8a043454d945e7945418ec96e393b639dfd65f664670dba8791",
+        "non-tree triangular block graph has sigma>0", 0, True)),
+    ("R31K-CACTUS-RANK2PLUS-v2", Contract(
+        "all-nonunicyclic-cacti/paper.tex",
+        "26939326e2ad71062617503e106dbd46d99f3d8fe82a98fca858fd3f2f8323f9",
+        "connected cactus of rank at least two has sigma>0", 0, True)),
+    ("R31K-K4-ROOTED-v2", Contract(
+        "packing-two-square-energy/paper.tex",
+        "9638f6847892e8a043454d945e7945418ec96e393b639dfd65f664670dba8791",
+        "literal K4 with bridge trees has sigma>2", 2, True)),
+    ("R31K-K4-T-SHARED-v2", Contract(
+        "packing-two-square-energy/paper.tex",
+        "9638f6847892e8a043454d945e7945418ec96e393b639dfd65f664670dba8791",
+        "direct shared-cut literal K4 plus triangle has sigma>3", 3, True)),
+)
+CONTRACTS = dict(CONTRACT_SPECS)
+EXPECTED_CONTRACT_IDS = frozenset(name for name, _ in CONTRACT_SPECS)
+
+
+def contract_manifest_digest():
+    rows = sorted({f"{item.source}\t{item.sha256}" for _, item in CONTRACT_SPECS})
+    return sha256_bytes(("\n".join(rows) + "\n").encode())
+
+
+def audit_contract_table():
+    require(frozenset(CONTRACTS) == EXPECTED_CONTRACT_IDS,
+            "analytic contract ID set changed")
+    canonical = dict(CONTRACT_SPECS)
+    require(CONTRACTS == canonical, "analytic contract record changed")
+    for contract_id, item in CONTRACTS.items():
+        require(type(item) is Contract, f"malformed contract: {contract_id}")
+        require(type(item.strict) is bool, f"nonstrict flag malformed: {contract_id}")
+        require(item.floor is None or type(item.floor) is int,
+                f"contract floor malformed: {contract_id}")
+
+
+def authenticate_source_blob(blob, expected, label):
+    require(sha256_bytes(blob) == expected, f"analytic source changed: {label}")
+
+
+def audit_sources():
+    audit_contract_table()
+    require(SOURCE_ROOT.is_dir(), "read-only source repository is absent")
+    checked = set()
+    for contract_id, item in CONTRACTS.items():
+        key = (item.source, item.sha256)
+        if key in checked:
+            continue
+        path = SOURCE_ROOT / item.source
+        require(path.is_file(), f"analytic source missing: {contract_id}")
+        authenticate_source_blob(path.read_bytes(), item.sha256, contract_id)
+        checked.add(key)
+    return len(checked)
+
+
+# ---------------------------------------------------------------------------
+# Physical adjacency, Tarjan blocks, and the full block-cut tree.
+# ---------------------------------------------------------------------------
 
 
 @dataclass(frozen=True)
@@ -105,17 +174,20 @@ class Inventory:
     k4: int
     cycles: tuple[int, ...]
     bridge_blocks: tuple[int, ...]
+    parent: dict
+    depth: dict
+    root_order: tuple
 
 
 @dataclass(frozen=True)
-class Certificate:
-    profile: str
-    dispatch: str
-    contracts: tuple[str, ...]
-    pieces: tuple[frozenset, ...]
-    piece_kinds: tuple[str, ...]
-    ports: tuple[tuple[int, object], ...]
-    boundary_blocks: tuple[int, ...]
+class LocalAnalysis:
+    vertices: frozenset
+    edges: frozenset
+    blocks: tuple[Block, ...]
+    rank: int
+    positive_ids: tuple[int, ...]
+    positive_kinds: tuple[str, ...]
+    cycle_lengths: tuple[int, ...]
 
 
 def edge(left, right):
@@ -133,8 +205,8 @@ def normalize_graph(vertices, edges):
                 "malformed unordered edge")
         require(current <= vertices, "edge endpoint outside vertex set")
         normalized.add(current)
-    require(len(normalized) == len(edges), "duplicate edge")
-    return PhysicalGraph(vertices, edges)
+    require(len(normalized) == len(edges), "duplicate edge representation")
+    return PhysicalGraph(vertices, frozenset(normalized))
 
 
 def adjacency(vertices, edges):
@@ -152,11 +224,14 @@ def induced_edges(edges, vertices):
 
 
 def components(vertices, edges):
+    vertices = frozenset(vertices)
+    require(all(current <= vertices for current in edges),
+            "component edge escapes supplied vertices")
     graph = adjacency(vertices, edges)
     unseen = set(vertices)
     answer = []
     while unseen:
-        root = min(unseen, key=repr)
+        root = next(iter(unseen))
         seen = {root}
         stack = [root]
         while stack:
@@ -178,64 +253,106 @@ def graph_rank(vertices, edges):
 
 
 def biconnected_edge_blocks(vertices, edges):
-    """Tarjan edge-stack decomposition; every physical bridge is one block."""
+    """Iterative Tarjan edge-stack decomposition.
+
+    Iteration rather than Python recursion is intentional: a physically long
+    K2 connector must not change acceptance merely by crossing a recursion
+    limit.  Every bridge is returned as its own one-edge block.
+    """
     graph = adjacency(vertices, edges)
     discovery = {}
     low = {}
     parent = {}
-    stack = []
+    parent_edge = {}
+    edge_stack = []
     blocks = []
     clock = 0
 
-    def visit(current):
-        nonlocal clock
+    for root in vertices:
+        if root in discovery:
+            continue
         clock += 1
-        discovery[current] = low[current] = clock
-        for neighbor in sorted(graph[current], key=repr):
+        discovery[root] = low[root] = clock
+        frames = [(root, iter(graph[root]))]
+        while frames:
+            current, iterator = frames[-1]
+            try:
+                neighbor = next(iterator)
+            except StopIteration:
+                frames.pop()
+                if current in parent:
+                    upstream = parent[current]
+                    low[upstream] = min(low[upstream], low[current])
+                    if low[current] >= discovery[upstream]:
+                        boundary = parent_edge[current]
+                        current_block = set()
+                        while True:
+                            require(edge_stack, "Tarjan edge stack underflow")
+                            popped = edge_stack.pop()
+                            current_block.add(popped)
+                            if popped == boundary:
+                                break
+                        blocks.append(frozenset(current_block))
+                else:
+                    require(not edge_stack, "Tarjan stack leaked at DFS root")
+                continue
+
             current_edge = edge(current, neighbor)
             if neighbor not in discovery:
                 parent[neighbor] = current
-                stack.append(current_edge)
-                visit(neighbor)
-                low[current] = min(low[current], low[neighbor])
-                if low[neighbor] >= discovery[current]:
-                    block = set()
-                    while True:
-                        require(stack, "Tarjan stack underflow")
-                        popped = stack.pop()
-                        block.add(popped)
-                        if popped == current_edge:
-                            break
-                    blocks.append(frozenset(block))
+                parent_edge[neighbor] = current_edge
+                edge_stack.append(current_edge)
+                clock += 1
+                discovery[neighbor] = low[neighbor] = clock
+                frames.append((neighbor, iter(graph[neighbor])))
             elif parent.get(current) != neighbor and discovery[neighbor] < discovery[current]:
-                stack.append(current_edge)
+                edge_stack.append(current_edge)
                 low[current] = min(low[current], discovery[neighbor])
 
-    for root in sorted(vertices, key=repr):
-        if root not in discovery:
-            visit(root)
-            require(not stack, "Tarjan stack leaked between components")
-    require((set().union(*blocks) if blocks else set()) == set(edges),
-            "Tarjan blocks do not exhaust edges")
+    union = set().union(*blocks) if blocks else set()
+    require(union == set(edges), "Tarjan blocks do not exhaust physical edges")
     require(sum(map(len, blocks)) == len(edges), "Tarjan blocks duplicate edges")
     return tuple(blocks)
 
 
 def classify_block(index, edges):
+    require(edges, "empty edge block")
     vertices = frozenset().union(*edges)
     rank = len(edges) - len(vertices) + 1
     degrees = {vertex: sum(vertex in current for current in edges)
                for vertex in vertices}
     if len(edges) == 1:
-        require(rank == 0 and len(vertices) == 2, "malformed bridge block")
+        require(rank == 0 and len(vertices) == 2, "malformed physical bridge")
         return Block(index, edges, vertices, rank, "bridge", None)
-    if len(vertices) == 4 and len(edges) == 6 and all(value == 3 for value in degrees.values()):
-        require(rank == 3, "K4 rank changed")
+    if (len(vertices) == 4 and len(edges) == 6 and
+            all(value == 3 for value in degrees.values())):
+        require(rank == 3, "literal K4 rank changed")
         return Block(index, edges, vertices, rank, "K4", None)
-    if len(vertices) >= 3 and len(edges) == len(vertices) and all(value == 2 for value in degrees.values()):
-        require(rank == 1, "cycle rank changed")
+    if (len(vertices) >= 3 and len(edges) == len(vertices) and
+            all(value == 2 for value in degrees.values())):
+        require(rank == 1, "literal cycle rank changed")
         return Block(index, edges, vertices, rank, "cycle", len(vertices))
     raise VerifyError("unsupported positive-rank block type")
+
+
+def rooted_tree(tree, root):
+    require(root in tree, "block-cut root absent")
+    parent = {root: None}
+    depth = {root: 0}
+    order = [root]
+    queue = deque([root])
+    while queue:
+        current = queue.popleft()
+        for neighbor in tree[current]:
+            if neighbor == parent[current]:
+                continue
+            require(neighbor not in parent, "block-cut incidence contains a cycle")
+            parent[neighbor] = current
+            depth[neighbor] = depth[current] + 1
+            order.append(neighbor)
+            queue.append(neighbor)
+    require(set(parent) == set(tree), "block-cut topology disconnected")
+    return parent, depth, tuple(order)
 
 
 def reconstruct(vertices, edges):
@@ -243,460 +360,812 @@ def reconstruct(vertices, edges):
     require(connected(graph.vertices, graph.edges), "input graph disconnected")
     require(graph_rank(graph.vertices, graph.edges) == 7,
             "input graph does not have cyclomatic rank seven")
-    raw = biconnected_edge_blocks(graph.vertices, graph.edges)
-    blocks = tuple(classify_block(index, current)
-                   for index, current in enumerate(raw))
-    positive = tuple(block for block in blocks if block.rank)
-    k4s = tuple(block.index for block in positive if block.kind == "K4")
-    cycles = tuple(block.index for block in positive if block.kind == "cycle")
-    require(len(k4s) == 1 and len(cycles) == 4 and len(positive) == 5,
-            "positive blocks are not one K4 and four cycles")
-    require(sum(block.rank for block in positive) == 7,
-            "positive block ranks are not 3+1+1+1+1")
 
-    membership = {vertex: tuple(block.index for block in blocks
-                                if vertex in block.vertices)
+    raw_blocks = biconnected_edge_blocks(graph.vertices, graph.edges)
+    blocks = tuple(classify_block(index, current)
+                   for index, current in enumerate(raw_blocks))
+    positive = tuple(item for item in blocks if item.rank)
+    k4s = tuple(item.index for item in positive if item.kind == "K4")
+    cycles = tuple(item.index for item in positive if item.kind == "cycle")
+    require(len(k4s) == 1 and len(cycles) == 4 and len(positive) == 5,
+            "positive blocks are not one literal K4 and four literal cycles")
+    require(sum(item.rank for item in positive) == 7,
+            "positive block ranks are not exactly 3+1+1+1+1")
+
+    membership = {vertex: tuple(item.index for item in blocks
+                                if vertex in item.vertices)
                   for vertex in graph.vertices}
     cuts = frozenset(vertex for vertex, owners in membership.items()
                      if len(owners) >= 2)
-    # Full block-cut topology, including bridge blocks and articulation nodes.
-    tree = {("B", block.index): set() for block in blocks}
+    tree = {("B", item.index): set() for item in blocks}
     for cut in cuts:
-        node = ("C", cut)
-        tree[node] = set()
-        for block_index in membership[cut]:
-            block_node = ("B", block_index)
-            tree[node].add(block_node)
-            tree[block_node].add(node)
+        cut_node = ("C", cut)
+        tree[cut_node] = set()
+        for owner in membership[cut]:
+            block_node = ("B", owner)
+            tree[cut_node].add(block_node)
+            tree[block_node].add(cut_node)
+    require(tree, "empty block-cut incidence")
     require(sum(map(len, tree.values())) // 2 == len(tree) - 1,
             "block-cut incidence is not a tree")
-    seen = {next(iter(tree))}
-    stack = list(seen)
-    while stack:
-        current = stack.pop()
-        for neighbor in tree[current] - seen:
-            seen.add(neighbor)
-            stack.append(neighbor)
-    require(seen == set(tree), "block-cut topology disconnected")
-    # A non-cut endpoint of a bridge is implicit in its neighboring block; the
-    # block-cut graph still records every physical K2 and every shared port.
-    bridge_blocks = tuple(block.index for block in blocks if block.kind == "bridge")
-    return Inventory(graph, adjacency(graph.vertices, graph.edges), blocks, cuts,
-                     tree, k4s[0], cycles, bridge_blocks)
+    root = ("B", k4s[0])
+    parent, depth, order = rooted_tree(tree, root)
+    bridges = tuple(item.index for item in blocks if item.kind == "bridge")
+    return Inventory(graph, adjacency(graph.vertices, graph.edges), blocks,
+                     cuts, tree, k4s[0], cycles, bridges,
+                     parent, depth, order)
 
 
 def block(inventory, index):
     return inventory.blocks[index]
 
 
-def tree_path(tree, start, finish):
-    previous = {start: None}
-    queue = deque([start])
-    while queue and finish not in previous:
-        current = queue.popleft()
-        for neighbor in sorted(tree[current], key=repr):
-            if neighbor not in previous:
-                previous[neighbor] = current
-                queue.append(neighbor)
-    require(finish in previous, "block-cut route disconnected")
+def path_from_root(inventory, node):
+    require(node in inventory.parent, "block-cut path target absent")
     result = []
-    current = finish
+    current = node
     while current is not None:
         result.append(current)
-        current = previous[current]
-    return tuple(reversed(result))
+        current = inventory.parent[current]
+    result.reverse()
+    return tuple(result)
+
+
+def is_ancestor(inventory, ancestor, descendant, strict=False):
+    if strict and ancestor == descendant:
+        return False
+    current = descendant
+    while current is not None and inventory.depth[current] >= inventory.depth[ancestor]:
+        if current == ancestor:
+            return True
+        current = inventory.parent[current]
+    return False
+
+
+def upstream_cut(inventory, block_index):
+    node = ("B", block_index)
+    require(node != ("B", inventory.k4), "K4 has no upstream articulation")
+    parent = inventory.parent[node]
+    require(parent is not None and parent[0] == "C",
+            "positive block lacks immediate upstream cut")
+    cut = parent[1]
+    require(cut in block(inventory, block_index).vertices,
+            "upstream cut is outside its block")
+    return cut
+
+
+def canonical_subtree_ids(inventory):
+    """Exact label-free IDs for rooted colored block-cut subtrees."""
+    signatures = {}
+    intern = {}
+    next_id = 0
+    levels = sorted(set(inventory.depth.values()), reverse=True)
+    for level in levels:
+        keys = {}
+        for node in (item for item in inventory.root_order
+                     if inventory.depth[item] == level):
+            if node[0] == "C":
+                color = ("cut",)
+            else:
+                item = block(inventory, node[1])
+                color = ("block", item.kind, item.cycle_length)
+            child_ids = tuple(sorted(signatures[child]
+                                     for child in inventory.tree[node]
+                                     if inventory.parent.get(child) == node))
+            keys[node] = (color, child_ids)
+        new_keys = sorted({key for key in keys.values() if key not in intern},
+                          key=repr)
+        for key in new_keys:
+            intern[key] = next_id
+            next_id += 1
+        for node, key in keys.items():
+            signatures[node] = intern[key]
+    require(set(signatures) == set(inventory.tree),
+            "canonical rooted signatures incomplete")
+    return signatures
+
+
+def analyze_piece(inventory, vertices):
+    require(type(vertices) is frozenset and vertices,
+            "piece is empty or not a frozenset")
+    require(vertices <= inventory.graph.vertices, "piece has foreign vertex")
+    edges = induced_edges(inventory.graph.edges, vertices)
+    require(connected(vertices, edges), "piece is not connected")
+    raw = biconnected_edge_blocks(vertices, edges)
+    local_blocks = tuple(classify_block(index, current)
+                         for index, current in enumerate(raw))
+    rank = graph_rank(vertices, edges)
+    require(rank == sum(item.rank for item in local_blocks),
+            "piece block ranks do not sum to its graph rank")
+
+    local_positive = tuple(item for item in local_blocks if item.rank)
+    intact_ids = tuple(sorted(index for index in (inventory.k4, *inventory.cycles)
+                              if block(inventory, index).vertices <= vertices))
+    local_edge_blocks = frozenset(item.edges for item in local_positive)
+    expected_edge_blocks = frozenset(block(inventory, index).edges
+                                     for index in intact_ids)
+    require(local_edge_blocks == expected_edge_blocks and
+            len(local_positive) == len(intact_ids),
+            "piece has a split, merged, or newly manufactured positive block")
+    kinds = tuple(block(inventory, index).kind for index in intact_ids)
+    lengths = tuple(sorted(block(inventory, index).cycle_length
+                           for index in intact_ids
+                           if block(inventory, index).kind == "cycle"))
+    return LocalAnalysis(vertices, edges, local_blocks, rank,
+                         intact_ids, kinds, lengths)
+
+
+def require_cactus(analysis, label):
+    require(all(kind == "cycle" for kind in analysis.positive_kinds),
+            f"{label} is not a cactus")
+    require(analysis.rank == len(analysis.positive_ids),
+            f"{label} cactus rank does not equal its cyclic-block count")
+    return True
+
+
+def verify_partition(inventory, target, pieces, label):
+    require(type(target) is frozenset and target,
+            f"{label} target is malformed")
+    require(pieces and all(type(side) is frozenset and side for side in pieces),
+            f"{label} contains an empty or malformed piece")
+    union = set().union(*pieces)
+    require(union == set(target), f"{label} is not exhaustive")
+    require(sum(map(len, pieces)) == len(union), f"{label} pieces overlap")
+    for side in pieces:
+        require(side <= target, f"{label} piece escapes target")
+        current_edges = induced_edges(inventory.graph.edges, side)
+        require(connected(side, current_edges), f"{label} piece is disconnected")
+        # Edges are never supplied with a piece.  They are always recomputed as
+        # E(G[side]), so inducedness is constructive rather than a trusted flag.
+        require(current_edges == frozenset(current for current in inventory.graph.edges
+                                           if current <= side),
+                f"{label} piece edge set is not induced")
+    return True
+
+
+# ---------------------------------------------------------------------------
+# Residual profile, first bridges, and original-vertex boundary openings.
+# ---------------------------------------------------------------------------
 
 
 def derive_profile(inventory):
     lengths = tuple(sorted(block(inventory, index).cycle_length
                            for index in inventory.cycles))
-    require(all(length >= 3 for length in lengths), "cycle length below three")
-    # epsilon_3=1; every nontriangle epsilon <= epsilon_5<3/5; odd excess
-    # decreases and even excess is zero.  Hence sum epsilon>3 leaves exactly
-    # these three length profiles.
+    require(all(type(length) is int and length >= 3 for length in lengths),
+            "cycle length below three")
     if lengths == (3, 3, 3, 3):
-        return "T4"
-    if lengths[:3] == (3, 3, 3) and lengths[3] >= 5 and lengths[3] % 2 == 1:
-        return "T3+odd>=5"
-    if lengths == (3, 3, 5, 5):
-        return "T2+C5+C5"
-    raise VerifyError("adjacency-derived profile is not an R31-K residual")
-
-
-def cyclic_hull_nodes(inventory):
-    marked = [("B", inventory.k4), *(('B', index) for index in inventory.cycles)]
-    hull = {marked[0]}
-    for target in marked[1:]:
-        hull.update(tree_path(inventory.tree, marked[0], target))
-    return frozenset(hull)
-
-
-def hull_bridge_blocks(inventory):
-    hull = cyclic_hull_nodes(inventory)
-    return tuple(index for index in inventory.bridge_blocks if ("B", index) in hull)
-
-
-def component_after_edge(inventory, bridge_index, away_from_k4=True):
-    current = block(inventory, bridge_index)
-    require(current.kind == "bridge", "physical split requested on nonbridge")
-    bridge_edge = next(iter(current.edges))
-    sides = components(inventory.graph.vertices,
-                       frozenset(inventory.graph.edges - {bridge_edge}))
-    require(len(sides) == 2, "Tarjan K2 did not split physical graph")
-    k4_vertices = block(inventory, inventory.k4).vertices
-    if away_from_k4:
-        matches = [side for side in sides if not k4_vertices <= side]
+        profile = "T4"
+    elif lengths[:3] == (3, 3, 3) and lengths[3] >= 5 and lengths[3] % 2 == 1:
+        profile = "T3+odd>=5"
+    elif lengths == (3, 3, 5, 5):
+        profile = "T2+C5+C5"
     else:
-        matches = [side for side in sides if k4_vertices <= side]
-    require(len(matches) == 1, "bridge orientation is ambiguous")
-    return matches[0]
+        raise VerifyError("adjacency-derived cycle profile is not an R31-K residual")
+    h = sum(length != 3 for length in lengths)
+    require(h <= 2 and lengths.count(3) == 4 - h,
+            "residual nontriangle count is inconsistent")
+    return profile, h
 
 
-def cyclic_blocks_in(inventory, vertices):
-    return tuple(item for item in (inventory.k4, *inventory.cycles)
-                 if block(inventory, item).vertices <= vertices)
+def cycle_ids_in(inventory, vertices):
+    return tuple(index for index in inventory.cycles
+                 if block(inventory, index).vertices <= vertices)
 
 
 def first_hull_bridges(inventory):
-    root = ("B", inventory.k4)
-    result = set()
+    chosen = set()
     for cycle_index in inventory.cycles:
-        route = tree_path(inventory.tree, root, ("B", cycle_index))
-        candidates = [node[1] for node in route
-                      if node[0] == "B" and block(inventory, node[1]).kind == "bridge"]
-        if candidates:
-            result.add(candidates[0])
-    return tuple(sorted(result))
-
-
-def first_nontriangle(inventory):
-    """First C_(odd>=5) after the K4 in the bridge-free block-cut tree."""
-    root = ("B", inventory.k4)
-    nontriangles = [index for index in inventory.cycles
-                    if block(inventory, index).cycle_length != 3]
-    require(nontriangles, "first-nontriangle requested in T4")
-    depths = {index: len(tree_path(inventory.tree, root, ("B", index)))
-              for index in nontriangles}
-    chosen = min(nontriangles, key=lambda index: (depths[index], repr(block(inventory, index).vertices)))
-    route = tree_path(inventory.tree, root, ("B", chosen))
-    require(not any(block(inventory, node[1]).kind == "bridge"
-                    for node in route if node[0] == "B"),
-            "first-nontriangle route contains an undispatched bridge")
-    return chosen, route
-
-
-def port_toward(inventory, upstream_block, downstream_block):
-    route = tree_path(inventory.tree, ("B", upstream_block), ("B", downstream_block))
-    cuts = [node[1] for node in route if node[0] == "C"]
-    require(cuts, "blocks have no physical articulation port")
-    port = cuts[0]
-    require(port in block(inventory, upstream_block).vertices,
-            "physical port not in upstream block")
-    return port
-
-
-def boundary_open(inventory, boundary_block, upstream_port, protected):
-    """Open one block at its upstream port and return original downstream vertices.
-
-    Delete all edges of the boundary block, take every owner component based at
-    a vertex other than the upstream port, and unite them with those block
-    vertices.  The protected upstream vertex is never copied.
-    """
-    boundary = block(inventory, boundary_block)
-    require(boundary.kind == "cycle", "boundary opening requires a cycle")
-    require(upstream_port in boundary.vertices, "opening port outside cycle")
-    residual_edges = frozenset(inventory.graph.edges - boundary.edges)
-    owner_components = components(inventory.graph.vertices, residual_edges)
-    by_vertex = {}
-    for side in owner_components:
-        hits = side & boundary.vertices
-        require(len(hits) == 1, "cycle owner component meets two block vertices")
-        by_vertex[next(iter(hits))] = side
-    result = frozenset().union(*(by_vertex[vertex]
-                                for vertex in boundary.vertices - {upstream_port}))
-    result = frozenset(set(result) - set(protected))
-    require(upstream_port not in result and result,
-            "boundary-open side is empty or copied its port")
+        route = path_from_root(inventory, ("B", cycle_index))
+        bridges = [node[1] for node in route
+                   if node[0] == "B" and block(inventory, node[1]).kind == "bridge"]
+        if bridges:
+            chosen.add(bridges[0])
+    result = tuple(sorted(chosen))
+    nodes = [("B", index) for index in result]
+    for left, right in itertools.permutations(nodes, 2):
+        require(not is_ancestor(inventory, left, right, strict=True),
+                "deduplicated first physical bridges are not an antichain")
     return result
 
 
-def nearest_anchor_partition(inventory, anchor_blocks):
-    """Partition every original vertex by nearest expanded anchor owner.
-
-    Anchor seeds are full block vertex sets.  Multi-source BFS on physical
-    adjacency uses a deterministic anchor order.  A class can only cross a
-    physical bridge away from its seed; block-cut uniqueness proves it remains
-    connected.  This routine is used only after the dispatch has selected
-    pairwise compatible anchor blocks.
-    """
-    anchors = tuple(sorted(anchor_blocks))
-    seed_owner = {}
-    for anchor in anchors:
-        for vertex in block(inventory, anchor).vertices:
-            seed_owner.setdefault(vertex, anchor)
-    require(seed_owner, "empty anchor set")
-    distance = {vertex: 0 for vertex in seed_owner}
-    owner = dict(seed_owner)
-    queue = deque(sorted(seed_owner, key=repr))
-    while queue:
-        current = queue.popleft()
-        for neighbor in sorted(inventory.adjacency[current], key=repr):
-            proposal = distance[current] + 1
-            candidate = owner[current]
-            if (neighbor not in distance or proposal < distance[neighbor] or
-                    (proposal == distance[neighbor] and candidate < owner[neighbor])):
-                distance[neighbor] = proposal
-                owner[neighbor] = candidate
-                queue.append(neighbor)
-    require(set(owner) == set(inventory.graph.vertices), "BFS ownership omitted vertices")
-    pieces = tuple(frozenset(vertex for vertex, value in owner.items() if value == anchor)
-                   for anchor in anchors)
-    return pieces
+def bridge_away_component(inventory, bridge_index):
+    current = block(inventory, bridge_index)
+    require(current.kind == "bridge" and len(current.edges) == 1,
+            "away split requested on a nonbridge block")
+    physical_edge = next(iter(current.edges))
+    sides = components(inventory.graph.vertices,
+                       frozenset(inventory.graph.edges - {physical_edge}))
+    require(len(sides) == 2, "Tarjan bridge did not split physical adjacency")
+    k4_vertices = block(inventory, inventory.k4).vertices
+    root_sides = [side for side in sides if k4_vertices <= side]
+    require(len(root_sides) == 1, "physical bridge orientation is ambiguous")
+    return next(side for side in sides if side != root_sides[0])
 
 
-def verify_piece_partition(inventory, pieces):
-    require(pieces and all(type(piece) is frozenset and piece for piece in pieces),
-            "empty/malformed piece")
-    union = set().union(*pieces)
-    require(union == set(inventory.graph.vertices), "pieces are not exhaustive")
-    require(sum(map(len, pieces)) == len(union), "pieces overlap")
-    for piece in pieces:
-        current_edges = induced_edges(inventory.graph.edges, piece)
-        require(connected(piece, current_edges), "piece is not connected")
-        # Inducedness is constructive: the checker always recomputes E(G[piece]).
-        require(current_edges == frozenset(edge(u, v) for u in piece
-                                           for v in inventory.adjacency[u]
-                                           if repr(u) < repr(v) and v in piece),
-                "piece edge set is not induced")
+def boundary_open(inventory, current_vertices, boundary_index, cut):
+    """Return Q-c plus every current descendant owner on original vertices."""
+    boundary = block(inventory, boundary_index)
+    require(boundary.kind == "cycle", "boundary opening requires a cycle")
+    require(boundary.vertices <= current_vertices,
+            "boundary cycle is not intact in current territory")
+    require(cut in boundary.vertices, "upstream articulation outside boundary")
+    current_edges = induced_edges(inventory.graph.edges, current_vertices)
+    require(boundary.edges <= current_edges, "boundary edges missing from territory")
+    owner_components = components(current_vertices,
+                                  frozenset(current_edges - boundary.edges))
+    by_vertex = {}
+    for side in owner_components:
+        hits = side & boundary.vertices
+        require(len(hits) == 1,
+                "outside owner component meets a cycle at multiple vertices")
+        owner = next(iter(hits))
+        require(owner not in by_vertex, "cycle vertex has duplicate owner component")
+        by_vertex[owner] = side
+    require(set(by_vertex) == set(boundary.vertices),
+            "cycle owner decomposition omitted a boundary vertex")
+    result = frozenset().union(*(by_vertex[vertex]
+                                for vertex in boundary.vertices if vertex != cut))
+    require(result and cut not in result,
+            "opened side is empty or copied its upstream articulation")
+    require(boundary.vertices - {cut} <= result,
+            "opened side omitted Q-c")
+    require(connected(result, induced_edges(inventory.graph.edges, result)),
+            "Q-c descendant side is disconnected")
+    return result
+
+
+def ancestor_minimal_cycles(inventory, candidates):
+    candidate_set = set(candidates)
+    selected = []
+    for index in candidates:
+        route = path_from_root(inventory, ("B", index))
+        earlier = [node[1] for node in route[:-1]
+                   if node[0] == "B" and node[1] in candidate_set]
+        if not earlier:
+            selected.append(index)
+    nodes = [("B", index) for index in selected]
+    for left, right in itertools.permutations(nodes, 2):
+        require(not is_ancestor(inventory, left, right, strict=True),
+                "ancestor-minimal cycle boundaries are not an antichain")
+    return tuple(sorted(selected))
+
+
+# ---------------------------------------------------------------------------
+# Structural partition plan.  This stage performs no analytic charging.
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class BridgeSide:
+    bridge_block: int
+    vertices: frozenset
+
+
+@dataclass(frozen=True)
+class OpenSide:
+    boundary_block: int
+    upstream_cut: object
+    vertices: frozenset
+
+
+@dataclass(frozen=True)
+class PartitionPlan:
+    profile: str
+    h: int
+    phase1: tuple[BridgeSide, ...]
+    root_vertices: frozenset
+    phase2: tuple[OpenSide, ...]
+    core_vertices: frozenset
+    anchor_triangle: int | None
+    phase3: tuple[OpenSide, ...]
+    anchor_vertices: frozenset
+
+
+def choose_nearest_triangle(inventory, core_triangles):
+    require(core_triangles, "nearest triangle requested from triangle-free core")
+    minimum = min(inventory.depth[("B", index)] for index in core_triangles)
+    nearest = [index for index in core_triangles
+               if inventory.depth[("B", index)] == minimum]
+    canonical = canonical_subtree_ids(inventory)
+    # Do not use Tarjan discovery indices as a semantic tie-break.  Any
+    # nearest choice has the same proof contract; canonical subtree ID makes
+    # the choice label-free, and equal IDs are deliberately left unordered.
+    best_id = min(canonical[("B", index)] for index in nearest)
+    return next(index for index in nearest
+                if canonical[("B", index)] == best_id)
+
+
+def construct_plan(inventory, profile, h):
+    # Phase 1: simultaneously remove every deduplicated first physical bridge.
+    first = first_hull_bridges(inventory)
+    phase1 = tuple(BridgeSide(index, bridge_away_component(inventory, index))
+                   for index in first)
+    away_sets = tuple(item.vertices for item in phase1)
+    if away_sets:
+        require(sum(map(len, away_sets)) == len(set().union(*away_sets)),
+                "first-bridge away components overlap")
+        removed_edges = frozenset(next(iter(block(inventory, index).edges))
+                                  for index in first)
+        simultaneous = components(inventory.graph.vertices,
+                                  frozenset(inventory.graph.edges - removed_edges))
+        root_matches = [side for side in simultaneous
+                        if block(inventory, inventory.k4).vertices <= side]
+        require(len(root_matches) == 1, "simultaneous bridge root is ambiguous")
+        root_vertices = root_matches[0]
+        require(frozenset(simultaneous) == frozenset((root_vertices, *away_sets)),
+                "individual first-bridge sides disagree with simultaneous split")
+    else:
+        root_vertices = inventory.graph.vertices
+    verify_partition(inventory, inventory.graph.vertices,
+                     (root_vertices, *away_sets), "phase-1 first-bridge partition")
+    require(block(inventory, inventory.k4).vertices <= root_vertices,
+            "literal K4 escaped the root component")
+    for side in phase1:
+        require(cycle_ids_in(inventory, side.vertices),
+                "selected first bridge has no cycle in its away component")
+        analysis = analyze_piece(inventory, side.vertices)
+        require_cactus(analysis, "first-bridge away component")
+        require(analysis.rank >= 1, "first-bridge away cactus has rank zero")
+    for cycle_index in cycle_ids_in(inventory, root_vertices):
+        route = path_from_root(inventory, ("B", cycle_index))
+        require(not any(node[0] == "B" and
+                        block(inventory, node[1]).kind == "bridge"
+                        for node in route),
+                "a root cycle still has a physical bridge on its K4 route")
+
+    # Phase 2: open every ancestor-minimal nontriangle still in the root.
+    root_nontriangles = tuple(index for index in cycle_ids_in(inventory, root_vertices)
+                              if block(inventory, index).cycle_length != 3)
+    phase2_boundaries = ancestor_minimal_cycles(inventory, root_nontriangles)
+    phase2 = tuple(OpenSide(index, upstream_cut(inventory, index),
+                            boundary_open(inventory, root_vertices, index,
+                                          upstream_cut(inventory, index)))
+                   for index in phase2_boundaries)
+    phase2_sets = tuple(item.vertices for item in phase2)
+    if phase2_sets:
+        require(sum(map(len, phase2_sets)) == len(set().union(*phase2_sets)),
+                "ancestor-minimal nontriangle sides overlap")
+        core_vertices = frozenset(set(root_vertices) - set().union(*phase2_sets))
+    else:
+        core_vertices = root_vertices
+    verify_partition(inventory, root_vertices, (core_vertices, *phase2_sets),
+                     "phase-2 nontriangle partition")
+    require(block(inventory, inventory.k4).vertices <= core_vertices,
+            "nontriangle opening split the literal K4")
+
+    core_analysis = analyze_piece(inventory, core_vertices)
+    require(core_analysis.positive_kinds.count("K4") == 1,
+            "retained core lost or duplicated its K4")
+    require(all(length == 3 for length in core_analysis.cycle_lengths),
+            "retained core still has a nontriangle cycle")
+    core_triangles = tuple(index for index in inventory.cycles
+                           if block(inventory, index).vertices <= core_vertices)
+    require(set(core_analysis.positive_ids) == {inventory.k4, *core_triangles},
+            "core positive blocks are not K4 plus intact triangles")
+    require(core_analysis.rank == 3 + len(core_triangles),
+            "K4+kT core rank is incorrect")
+    require(len(core_triangles) <= 4 - h,
+            "retained triangle count exceeds the global residual count")
+
+    # Phase 3: retain K4 alone when k=0; otherwise retain one nearest direct T.
+    if not core_triangles:
+        anchor_triangle = None
+        phase3 = ()
+        anchor_vertices = core_vertices
+    else:
+        anchor_triangle = choose_nearest_triangle(inventory, core_triangles)
+        route = path_from_root(inventory, ("B", anchor_triangle))
+        require(len(route) == 3 and route[0] == ("B", inventory.k4) and
+                route[1][0] == "C" and route[2] == ("B", anchor_triangle),
+                "nearest retained triangle does not share a cut directly with K4")
+        shared_cut = route[1][1]
+        require(block(inventory, inventory.k4).vertices &
+                block(inventory, anchor_triangle).vertices == {shared_cut},
+                "purported K4+T anchor does not have one physical shared cut")
+
+        others = tuple(index for index in core_triangles if index != anchor_triangle)
+        phase3_boundaries = ancestor_minimal_cycles(inventory, others)
+        phase3 = tuple(OpenSide(index, upstream_cut(inventory, index),
+                                boundary_open(inventory, core_vertices, index,
+                                              upstream_cut(inventory, index)))
+                       for index in phase3_boundaries)
+        phase3_sets = tuple(item.vertices for item in phase3)
+        if phase3_sets:
+            require(sum(map(len, phase3_sets)) == len(set().union(*phase3_sets)),
+                    "ancestor-minimal triangle sides overlap")
+            anchor_vertices = frozenset(set(core_vertices) - set().union(*phase3_sets))
+        else:
+            anchor_vertices = core_vertices
+        verify_partition(inventory, core_vertices,
+                         (anchor_vertices, *phase3_sets),
+                         "phase-3 triangle partition")
+        require(len(phase3) <= len(core_triangles) - 1,
+                "more triangle sides than unretained triangles")
+
+    plan = PartitionPlan(profile, h, phase1, root_vertices, phase2,
+                         core_vertices, anchor_triangle, phase3, anchor_vertices)
+    audit_plan(inventory, plan)
+    return plan
+
+
+def final_piece_sets(plan):
+    return (plan.anchor_vertices,
+            *(item.vertices for item in plan.phase3),
+            *(item.vertices for item in plan.phase2),
+            *(item.vertices for item in plan.phase1))
+
+
+def audit_plan(inventory, plan):
+    """Re-derive every boundary and owner set; trust no stored plan claim."""
+    profile, h = derive_profile(inventory)
+    require((plan.profile, plan.h) == (profile, h),
+            "plan profile/nontriangle count is not adjacency-derived")
+
+    expected_first = first_hull_bridges(inventory)
+    require(tuple(item.bridge_block for item in plan.phase1) == expected_first,
+            "plan first-bridge set changed")
+    for item in plan.phase1:
+        require(item.vertices == bridge_away_component(inventory, item.bridge_block),
+                "stored first-bridge side is not the complete physical component")
+    away = tuple(item.vertices for item in plan.phase1)
+    expected_root = (inventory.graph.vertices if not away else
+                     frozenset(set(inventory.graph.vertices) - set().union(*away)))
+    require(plan.root_vertices == expected_root, "stored phase-1 root changed")
+    verify_partition(inventory, inventory.graph.vertices,
+                     (plan.root_vertices, *away), "audited phase-1 partition")
+
+    root_nontriangles = tuple(index for index in cycle_ids_in(inventory, plan.root_vertices)
+                              if block(inventory, index).cycle_length != 3)
+    expected_phase2 = ancestor_minimal_cycles(inventory, root_nontriangles)
+    require(tuple(item.boundary_block for item in plan.phase2) == expected_phase2,
+            "plan nontriangle boundary set changed")
+    for item in plan.phase2:
+        require(item.upstream_cut == upstream_cut(inventory, item.boundary_block),
+                "nontriangle upstream articulation changed")
+        require(item.vertices == boundary_open(inventory, plan.root_vertices,
+                                               item.boundary_block,
+                                               item.upstream_cut),
+                "stored nontriangle side is not Q-c plus all descendants")
+    phase2_sets = tuple(item.vertices for item in plan.phase2)
+    expected_core = (plan.root_vertices if not phase2_sets else
+                     frozenset(set(plan.root_vertices) - set().union(*phase2_sets)))
+    require(plan.core_vertices == expected_core, "stored K4+kT core changed")
+    verify_partition(inventory, plan.root_vertices,
+                     (plan.core_vertices, *phase2_sets),
+                     "audited phase-2 partition")
+
+    core_triangles = tuple(index for index in inventory.cycles
+                           if block(inventory, index).vertices <= plan.core_vertices)
+    if not core_triangles:
+        require(plan.anchor_triangle is None and not plan.phase3 and
+                plan.anchor_vertices == plan.core_vertices,
+                "k=0 plan manufactured a triangle anchor or side")
+    else:
+        expected_anchor = choose_nearest_triangle(inventory, core_triangles)
+        require(plan.anchor_triangle == expected_anchor,
+                "stored anchor is not the canonical nearest triangle")
+        others = tuple(index for index in core_triangles if index != expected_anchor)
+        expected_phase3 = ancestor_minimal_cycles(inventory, others)
+        require(tuple(item.boundary_block for item in plan.phase3) == expected_phase3,
+                "plan triangle boundary set changed")
+        for item in plan.phase3:
+            require(item.upstream_cut == upstream_cut(inventory, item.boundary_block),
+                    "triangle upstream articulation changed")
+            require(item.vertices == boundary_open(inventory, plan.core_vertices,
+                                                   item.boundary_block,
+                                                   item.upstream_cut),
+                    "stored triangle side is not Q-c plus all descendants")
+        phase3_sets = tuple(item.vertices for item in plan.phase3)
+        expected_anchor_vertices = (plan.core_vertices if not phase3_sets else
+                                    frozenset(set(plan.core_vertices) -
+                                              set().union(*phase3_sets)))
+        require(plan.anchor_vertices == expected_anchor_vertices,
+                "stored anchor owner set changed")
+        verify_partition(inventory, plan.core_vertices,
+                         (plan.anchor_vertices, *phase3_sets),
+                         "audited phase-3 partition")
+
+    final = final_piece_sets(plan)
+    verify_partition(inventory, inventory.graph.vertices, final,
+                     "final original-vertex partition")
     for cut in inventory.cuts:
-        require(sum(cut in piece for piece in pieces) == 1,
-                "articulation vertex has nonunique owner")
+        require(sum(cut in side for side in final) == 1,
+                "physical articulation has nonunique final owner")
     return True
 
 
-def triangle_blocks(inventory):
-    return tuple(index for index in inventory.cycles
-                 if block(inventory, index).cycle_length == 3)
+# ---------------------------------------------------------------------------
+# Independent topology-to-ledger derivation.
+# ---------------------------------------------------------------------------
 
 
-def k4_triangle_anchor(inventory, triangle_index):
-    """Return the cut-closed K4--T route as one narrow shared-cut packet."""
-    route = tree_path(inventory.tree, ("B", inventory.k4), ("B", triangle_index))
-    interior_positive = [node[1] for node in route[1:-1]
-                         if node[0] == "B" and block(inventory, node[1]).rank]
-    require(not interior_positive, "purported K4+T anchor contains an intermediate cycle")
-    require(not any(block(inventory, node[1]).kind == "bridge"
-                    for node in route if node[0] == "B"),
-            "purported shared anchor contains a physical bridge")
-    # With no K2 node on the block-cut route, the blocks are consecutive at a
-    # shared physical cut.  The analytic K4+T packet permits arbitrary one-root
-    # trees, so take the two full blocks and every rank-zero component whose
-    # unique route reaches one of them before another positive block.
-    seeds = set(block(inventory, inventory.k4).vertices |
-                block(inventory, triangle_index).vertices)
-    forbidden = set().union(*(block(inventory, index).vertices - seeds
-                              for index in inventory.cycles
-                              if index != triangle_index))
-    allowed = set(inventory.graph.vertices) - forbidden
-    anchor = next(side for side in components(frozenset(allowed),
-                                              induced_edges(inventory.graph.edges, allowed))
-                  if block(inventory, inventory.k4).vertices <= side)
-    require(block(inventory, triangle_index).vertices <= anchor and
-            connected(anchor, induced_edges(inventory.graph.edges, anchor)),
-            "K4+T anchor disconnected")
-    return anchor
+@dataclass(frozen=True)
+class PieceReceipt:
+    phase: str
+    category: str
+    vertices: frozenset
+    rank: int
+    cycle_ids: tuple[int, ...]
+    cycle_lengths: tuple[int, ...]
+    owned_original_cycles: tuple[int, ...]
+    floor: int
+    strict: bool
+    contract: str
+    charge_block: int | None
 
 
-def _component_kinds(inventory, pieces, anchor_label):
-    kinds = [anchor_label]
-    for side in pieces[1:]:
-        owned = cyclic_blocks_in(inventory, side)
-        kinds.append("boundary-tree" if not owned else
-                     ("boundary-unicycle" if len(owned) == 1 else
-                      "boundary-rank>=2"))
-    return tuple(kinds)
+@dataclass(frozen=True)
+class Ledger:
+    profile: str
+    h: int
+    k: int
+    anchor_kind: str
+    anchor_floor: int
+    s: int
+    b: int
+    value: int
+    strict: bool
+    receipts: tuple[PieceReceipt, ...]
+    charge_blocks: tuple[int, ...]
+    contracts: tuple[str, ...]
 
 
-def _contracts_for_kinds(kinds, anchor_contract):
-    contracts = [anchor_contract, "R31K-INDUCED-SUPERADD-v1"]
-    for kind in kinds[1:]:
-        if kind in {"boundary-tree", "boundary-unicycle"}:
-            contracts.append("R31K-UNICYCLIC-LOWER-v1")
+def side_receipt(inventory, phase, vertices, boundary_block=None):
+    analysis = analyze_piece(inventory, vertices)
+    require_cactus(analysis, f"{phase} side")
+
+    if phase == "phase1":
+        require(analysis.rank >= 1, "phase-1 away side unexpectedly has rank zero")
+        if analysis.rank == 1:
+            cycle_id = analysis.positive_ids[0]
+            length = block(inventory, cycle_id).cycle_length
+            require(length % 2 == 1, "phase-1 unicycle is not residual odd")
+            if length == 3:
+                category = "triangle-positive"
+                contract = "R31K-TRIANGULAR-BLOCK-v2"
+                floor, strict, charge = 0, True, None
+            else:
+                category = "charged-odd-unicycle"
+                contract = "R31K-ODD-UNICYCLIC-LOWER-v2"
+                floor, strict, charge = -1, True, cycle_id
         else:
-            require(kind == "boundary-rank>=2",
-                    "unknown boundary kind for lower-rank contract")
-            contracts.append("R31K-CONNECTED-RANK2-6-v1")
-    return tuple(contracts)
+            category = "cactus-rank>=2-positive"
+            contract = "R31K-CACTUS-RANK2PLUS-v2"
+            floor, strict, charge = 0, True, None
+
+    elif phase == "phase2":
+        require(boundary_block is not None and
+                block(inventory, boundary_block).kind == "cycle" and
+                block(inventory, boundary_block).cycle_length != 3,
+                "phase-2 side lacks its selected original nontriangle")
+        if analysis.rank == 0:
+            category = "charged-tree"
+            contract = "R31K-TREE-EXACT-v2"
+            floor, strict, charge = -1, False, boundary_block
+        elif analysis.rank == 1:
+            cycle_id = analysis.positive_ids[0]
+            length = block(inventory, cycle_id).cycle_length
+            require(length % 2 == 1, "phase-2 unicycle is not residual odd")
+            if length == 3:
+                category = "triangle-positive"
+                contract = "R31K-TRIANGULAR-BLOCK-v2"
+                floor, strict, charge = 0, True, None
+            else:
+                category = "charged-odd-unicycle"
+                contract = "R31K-ODD-UNICYCLIC-LOWER-v2"
+                floor, strict, charge = -1, True, boundary_block
+        else:
+            category = "cactus-rank>=2-positive"
+            contract = "R31K-CACTUS-RANK2PLUS-v2"
+            floor, strict, charge = 0, True, None
+
+    elif phase == "phase3":
+        require(boundary_block is not None and
+                block(inventory, boundary_block).kind == "cycle" and
+                block(inventory, boundary_block).cycle_length == 3,
+                "phase-3 side lacks its selected original triangle")
+        require(all(length == 3 for length in analysis.cycle_lengths),
+                "phase-3 side is not a triangular block graph/tree")
+        if analysis.rank == 0:
+            category = "triangle-open-tree"
+            contract = "R31K-TREE-EXACT-v2"
+            floor, strict, charge = -1, False, None
+        else:
+            category = "triangular-block-positive"
+            contract = "R31K-TRIANGULAR-BLOCK-v2"
+            floor, strict, charge = 0, True, None
+    else:
+        raise VerifyError("unknown ledger phase")
+
+    owned_original_cycles = tuple(index for index in inventory.cycles
+                                  if block(inventory, index).edges & analysis.edges)
+    return PieceReceipt(phase, category, vertices, analysis.rank,
+                        analysis.positive_ids, analysis.cycle_lengths,
+                        owned_original_cycles, floor, strict, contract, charge)
 
 
-def _split_by_anchor(inventory, anchor, label):
-    remaining = frozenset(set(inventory.graph.vertices) - set(anchor))
-    remainder = (() if not remaining else
-                 components(remaining, induced_edges(inventory.graph.edges, remaining)))
-    pieces = (anchor, *remainder)
-    verify_piece_partition(inventory, pieces)
-    return pieces, _component_kinds(inventory, pieces, label)
+def anchor_receipt(inventory, plan):
+    analysis = analyze_piece(inventory, plan.anchor_vertices)
+    if plan.anchor_triangle is None:
+        require(analysis.positive_ids == (inventory.k4,) and analysis.rank == 3,
+                "k=0 anchor is not a rooted literal K4 territory")
+        contract = "R31K-K4-ROOTED-v2"
+        category = "strict-rooted-K4-anchor"
+    else:
+        require(set(analysis.positive_ids) == {inventory.k4, plan.anchor_triangle} and
+                analysis.rank == 4 and analysis.cycle_lengths == (3,),
+                "k>=1 anchor is not exactly literal K4 plus one triangle")
+        route = path_from_root(inventory, ("B", plan.anchor_triangle))
+        require(len(route) == 3 and route[1][0] == "C",
+                "K4+T analytic anchor is not a direct shared-cut packet")
+        contract = "R31K-K4-T-SHARED-v2"
+        category = "strict-shared-K4+T-anchor"
+    item = CONTRACTS[contract]
+    require(item.floor in (2, 3) and item.strict,
+            "anchor contract lost its strict fixed floor")
+    owned_original_cycles = tuple(index for index in inventory.cycles
+                                  if block(inventory, index).edges & analysis.edges)
+    return PieceReceipt("anchor", category, plan.anchor_vertices, analysis.rank,
+                        analysis.positive_ids, analysis.cycle_lengths,
+                        owned_original_cycles, item.floor, item.strict, contract, None)
 
 
-def _crossing_ports(inventory, pieces):
-    result = []
-    for index, side in enumerate(pieces[1:], 1):
-        crossing = {current for current in inventory.graph.edges
-                    if bool(current & side) and not current <= side}
-        require(crossing, f"piece {index} has no physical boundary")
-        result.append((index, tuple(sorted((tuple(sorted(current, key=repr))
-                                           for current in crossing), key=repr))))
-    return tuple(result)
+def derive_ledger(inventory, plan):
+    # This function receives only structural owner sets/boundaries.  It
+    # independently reconstructs every induced piece before assigning floors.
+    audit_plan(inventory, plan)
+    receipts = [anchor_receipt(inventory, plan)]
+    receipts.extend(side_receipt(inventory, "phase3", item.vertices,
+                                 item.boundary_block)
+                    for item in plan.phase3)
+    receipts.extend(side_receipt(inventory, "phase2", item.vertices,
+                                 item.boundary_block)
+                    for item in plan.phase2)
+    receipts.extend(side_receipt(inventory, "phase1", item.vertices)
+                    for item in plan.phase1)
+    receipts = tuple(receipts)
+
+    h = sum(block(inventory, index).cycle_length != 3
+            for index in inventory.cycles)
+    k = sum(block(inventory, index).vertices <= plan.core_vertices
+            for index in inventory.cycles)
+    require(all(block(inventory, index).cycle_length == 3
+                for index in inventory.cycles
+                if block(inventory, index).vertices <= plan.core_vertices),
+            "ledger core count includes a nontriangle")
+    charges = tuple(item.charge_block for item in receipts
+                    if item.charge_block is not None)
+    nontriangles = {index for index in inventory.cycles
+                    if block(inventory, index).cycle_length != 3}
+    require(len(charges) == len(set(charges)),
+            "two potentially negative phase-1/2 pieces share a charge")
+    require(set(charges) <= nontriangles,
+            "a potentially negative piece is charged outside original nontriangles")
+    charged_receipts = tuple(item for item in receipts
+                             if item.charge_block is not None)
+    for item in charged_receipts:
+        require(item.charge_block in item.owned_original_cycles,
+                "negative piece does not physically own its charged nontriangle")
+    for left, right in itertools.combinations(charged_receipts, 2):
+        require(not (set(left.owned_original_cycles) &
+                     set(right.owned_original_cycles) & nontriangles),
+                "two negative pieces physically own the same original nontriangle")
+
+    # Every original positive block must have exactly one final owner even when
+    # an opening destroys that block inside the owner's induced subgraph.  The
+    # edge-intersection owner relation is derived independently of intact rank.
+    positive_originals = (inventory.k4, *inventory.cycles)
+    for original in positive_originals:
+        owners = [item for item in receipts
+                  if block(inventory, original).edges &
+                     induced_edges(inventory.graph.edges, item.vertices)]
+        require(len(owners) == 1,
+                "original positive block has zero or multiple final owners")
+    s = len(charges)
+    require(s <= h <= 2, "nontriangle charge injection s<=h failed")
+
+    b = sum(item.phase == "phase3" and item.category == "triangle-open-tree"
+            for item in receipts)
+    phase3_count = sum(item.phase == "phase3" for item in receipts)
+    require(b <= phase3_count, "tree-side count exceeds triangle sides")
+    if k == 0:
+        require(plan.anchor_triangle is None and b == 0,
+                "triangle-free core has a K4+T charge")
+        anchor_floor = 2
+        lower_chain = 2 - h
+    else:
+        require(plan.anchor_triangle is not None,
+                "nonempty triangle core lacks its retained triangle")
+        require(phase3_count <= k - 1 and b <= k - 1,
+                "b<=k-1 triangle-side injection failed")
+        require(k <= 4 - h, "k<=4-h residual injection failed")
+        anchor_floor = 3
+        lower_chain = 4 - k - h
+    require(lower_chain >= 0, "symbolic integer ledger lower chain is negative")
+
+    anchor = receipts[0]
+    require(anchor.floor == anchor_floor and anchor.strict,
+            "strictness does not come from the authenticated anchor")
+    value_from_pieces = sum(item.floor for item in receipts)
+    value = anchor_floor - s - b
+    require(value_from_pieces == value,
+            "piece floors disagree with anchor-s-b ledger")
+    require(value >= lower_chain >= 0,
+            "exact integer ledger anchor-s-b is negative")
+
+    used_contracts = {
+        "R31K-RESIDUAL-SIEVE-v2",
+        "R31K-INDUCED-SUPERADD-v2",
+        "R31K-TREE-EXACT-v2",
+        "R31K-ODD-UNICYCLIC-LOWER-v2",
+        "R31K-TRIANGULAR-BLOCK-v2",
+        "R31K-CACTUS-RANK2PLUS-v2",
+        "R31K-K4-ROOTED-v2",
+        "R31K-K4-T-SHARED-v2",
+    }
+    require(used_contracts == EXPECTED_CONTRACT_IDS,
+            "complete R31-K contract manifest changed")
+    require(used_contracts <= EXPECTED_CONTRACT_IDS,
+            "ledger selected an unknown analytic contract")
+    strict = anchor.strict
+    require(strict and value >= 0,
+            "final positivity is not strict at a nonnegative integer floor")
+    ledger = Ledger(plan.profile, h, k, anchor.category, anchor_floor,
+                    s, b, value, strict, receipts, charges,
+                    tuple(sorted(used_contracts)))
+    audit_ledger(inventory, plan, ledger)
+    return ledger
 
 
-
-def first_bridge_dispatch(inventory, profile):
-    first = first_hull_bridges(inventory)
-    if not first:
-        return None
-    # Authenticate the simultaneous first-bridge antichain on original
-    # vertices before selecting the packet.  Every later connector, nested
-    # cycle, and rooted payload remains in one complete away component.
-    away = tuple(component_after_edge(inventory, index) for index in first)
-    require(sum(map(len, away)) == len(set().union(*away)),
-            "first-bridge away territories overlap (not an antichain)")
-    root_vertices = frozenset(set(inventory.graph.vertices) - set().union(*away))
-    verify_piece_partition(inventory, (root_vertices, *away))
-    require(inventory.k4 in cyclic_blocks_in(inventory, root_vertices),
-            "K4 escaped first-bridge root")
-
-    # The accepted R31-K bridge reduction requires an actual root-side
-    # triangle directly shared-cut reachable from K4.  Derive that condition
-    # from adjacency; never infer it from the profile.
-    root_triangles = [index for index in triangle_blocks(inventory)
-                      if block(inventory, index).vertices <= root_vertices]
-    direct = []
-    for index in root_triangles:
-        route = tree_path(inventory.tree, ("B", inventory.k4), ("B", index))
-        if not any(block(inventory, node[1]).kind == "bridge"
-                   for node in route if node[0] == "B") and not any(
-                       block(inventory, node[1]).rank
-                       for node in route[1:-1] if node[0] == "B"):
-            direct.append(index)
-    require(direct,
-            "R31-K first-bridge row lacks an authenticated direct root triangle")
-    selected = min(direct, key=lambda index: repr(block(inventory, index).vertices))
-    anchor = k4_triangle_anchor(inventory, selected)
-    pieces, kinds = _split_by_anchor(inventory, anchor, "K4+T-anchor")
-    require(len(pieces) - 1 <= 3,
-            "first-bridge K4+T core has more than three territories")
-    return Certificate(
-        profile, "first-bridge+K4+kT-core",
-        _contracts_for_kinds(kinds, "R31K-K4-T-SHARED-v1"),
-        pieces, kinds,
-        tuple((index, next(iter(block(inventory, index).edges))) for index in first),
-        first)
-
-def bridge_free_dispatch(inventory, profile):
-    require(not hull_bridge_blocks(inventory), "bridge-free dispatcher saw hull bridge")
-    triangles = triangle_blocks(inventory)
-    require(len(triangles) >= 2, "R31-K residual lacks two triangles")
-    root = ("B", inventory.k4)
-    direct = []
-    for index in triangles:
-        route = tree_path(inventory.tree, root, ("B", index))
-        if not any(block(inventory, node[1]).rank
-                   for node in route[1:-1] if node[0] == "B"):
-            direct.append(index)
-
-    if direct:
-        selected = min(direct,
-                       key=lambda index: (len(tree_path(inventory.tree, root, ('B', index))),
-                                          repr(block(inventory, index).vertices)))
-        anchor = k4_triangle_anchor(inventory, selected)
-        pieces, kinds = _split_by_anchor(inventory, anchor, "K4+T-anchor")
-        require(len(pieces) - 1 <= 3,
-                "K4+T anchor generated more than three first-boundary territories")
-        dispatch = "K4+kT-core:" + profile
-        return Certificate(
-            profile, dispatch,
-            _contracts_for_kinds(kinds, "R31K-K4-T-SHARED-v1"),
-            pieces, kinds, _crossing_ports(inventory, pieces), ())
-
-    # No triangle is directly reachable.  The first positive block on every
-    # K4--triangle route is a nontriangle.  Open every distinct first such
-    # block simultaneously.  Complete downstream sides keep all nesting and
-    # rooted payloads together; their original vertices cannot overlap because
-    # first positive block nodes form an antichain in the block-cut tree.
-    require(profile != "T4", "T4 has no first nontriangle")
-    first_nontriangles = set()
-    for triangle in triangles:
-        route = tree_path(inventory.tree, root, ("B", triangle))
-        positive = [node[1] for node in route[1:-1]
-                    if node[0] == "B" and block(inventory, node[1]).rank]
-        require(positive and block(inventory, positive[0]).kind == "cycle" and
-                block(inventory, positive[0]).cycle_length != 3,
-                "first obstruction before triangle is not a nontriangle")
-        first_nontriangles.add(positive[0])
-    downstream = []
-    ports = []
-    for index in sorted(first_nontriangles):
-        port = port_toward(inventory, inventory.k4, index)
-        side = boundary_open(inventory, index, port,
-                             block(inventory, inventory.k4).vertices)
-        downstream.append(side)
-        ports.append((index, port))
-    require(sum(map(len, downstream)) == len(set().union(*downstream)),
-            "first-nontriangle downstream territories overlap")
-    root_piece = frozenset(set(inventory.graph.vertices) - set().union(*downstream))
-    pieces = (root_piece, *downstream)
-    verify_piece_partition(inventory, pieces)
-    kinds = _component_kinds(inventory, pieces, "K4-root")
-    require(all(kind == "boundary-rank>=2" for kind in kinds[1:]),
-            "opened first-nontriangle side is not a strict rank>=2 cactus")
-    return Certificate(
-        profile, "first-nontriangle-cascade",
-        _contracts_for_kinds(kinds, "R31K-K4-ROOTED-v1"),
-        pieces, kinds, tuple(ports), tuple(sorted(first_nontriangles)))
-
-def verify_contracts(certificate):
-    require(set(certificate.contracts) <= EXPECTED_CONTRACT_IDS,
-            "unknown analytic contract ID")
-    require("R31K-INDUCED-SUPERADD-v1" in certificate.contracts,
-            "induced superadditivity contract omitted")
-    for contract_id in certificate.contracts:
-        floor = ANALYTIC_CONTRACTS[contract_id]["strict_floor"]
-        require(floor is None or type(floor) is int,
-                "analytic floor is not a fixed integer/None")
-    if "K4+kT-core" in certificate.dispatch:
-        require(certificate.contracts.count("R31K-K4-T-SHARED-v1") == 1,
-                "K4+T threshold contract missing or duplicated")
-        floor = ANALYTIC_CONTRACTS["R31K-K4-T-SHARED-v1"]["strict_floor"]
-        require(type(floor) is int and floor == 3,
-                "fixed K4+T contract threshold changed")
-        require(len(certificate.pieces) - 1 <= floor,
-                "K4+T anchor cannot pay boundary territories")
-    if certificate.dispatch == "first-bridge+K4-core":
-        require(certificate.boundary_blocks,
-                "first-bridge certificate omitted its physical K2 blocks")
-    if certificate.dispatch == "first-nontriangle-cascade":
-        require(certificate.boundary_blocks,
-                "cascade certificate omitted first nontriangle blocks")
+def audit_ledger(inventory, plan, ledger):
+    """Second arithmetic pass from piece topology, not stored s/b/value."""
+    require(ledger.profile == derive_profile(inventory)[0],
+            "ledger profile changed")
+    anchor = anchor_receipt(inventory, plan)
+    fresh = []
+    fresh.extend(side_receipt(inventory, "phase3", item.vertices,
+                              item.boundary_block) for item in plan.phase3)
+    fresh.extend(side_receipt(inventory, "phase2", item.vertices,
+                              item.boundary_block) for item in plan.phase2)
+    fresh.extend(side_receipt(inventory, "phase1", item.vertices)
+                 for item in plan.phase1)
+    fresh = tuple(fresh)
+    fresh_charges = tuple(item.charge_block for item in fresh
+                          if item.charge_block is not None)
+    fresh_s = len(fresh_charges)
+    fresh_b = sum(item.phase == "phase3" and item.floor == -1 for item in fresh)
+    fresh_value = anchor.floor + sum(item.floor for item in fresh)
+    require((ledger.anchor_floor, ledger.s, ledger.b, ledger.value) ==
+            (anchor.floor, fresh_s, fresh_b, fresh_value),
+            "independent ledger replay disagrees")
+    require(ledger.charge_blocks == fresh_charges,
+            "independent charge replay disagrees")
+    require(ledger.receipts == (anchor, *fresh),
+            "stored piece receipts disagree with topology replay")
+    expected_contracts = tuple(sorted(EXPECTED_CONTRACT_IDS))
+    require(ledger.contracts == expected_contracts,
+            "independent contract replay disagrees")
+    require(ledger.value >= 0 and ledger.strict,
+            "replayed strict integer ledger does not prove sigma>0")
     return True
 
 
 def verify(vertices, edges):
     inventory = reconstruct(vertices, edges)
-    profile = derive_profile(inventory)
-    certificate = first_bridge_dispatch(inventory, profile)
-    if certificate is None:
-        certificate = bridge_free_dispatch(inventory, profile)
-    require(certificate.profile == profile, "certificate profile not adjacency-derived")
-    verify_piece_partition(inventory, certificate.pieces)
-    verify_contracts(certificate)
-    return inventory, certificate
+    profile, h = derive_profile(inventory)
+    plan = construct_plan(inventory, profile, h)
+    ledger = derive_ledger(inventory, plan)
+    return inventory, plan, ledger
 
 
-# -------------------------- independent fixture generator ------------------
+# ---------------------------------------------------------------------------
+# Independent adjacency fixture generator.
+# ---------------------------------------------------------------------------
 
 
 def add_clique(edges, vertices):
-    edges.update(edge(left, right) for left, right in itertools.combinations(vertices, 2))
+    edges.update(edge(left, right)
+                 for left, right in itertools.combinations(vertices, 2))
 
 
 def add_cycle(edges, vertices):
@@ -711,12 +1180,14 @@ class Builder:
         self.vertices = set()
         self.edges = set()
         self.serial = 0
+        self.cycles = []
+        self.routing = []
 
     def fresh(self, prefix):
-        value = (prefix, self.serial)
+        vertex = (prefix, self.serial)
         self.serial += 1
-        self.vertices.add(value)
-        return value
+        self.vertices.add(vertex)
+        return vertex
 
     def k4(self):
         vertices = tuple(self.fresh("K") for _ in range(4))
@@ -725,24 +1196,35 @@ class Builder:
 
     def cycle(self, length, port=None):
         vertices = ([port] if port is not None else [])
-        vertices += [self.fresh(f"C{length}") for _ in range(length - len(vertices))]
+        vertices += [self.fresh(f"C{length}")
+                     for _ in range(length - len(vertices))]
         add_cycle(self.edges, vertices)
-        return tuple(vertices)
+        result = tuple(vertices)
+        self.cycles.append(result)
+        return result
 
     def bridge_path(self, left, right, length):
-        require(length >= 1, "bridge path length below one")
+        require(type(length) is int and length >= 1,
+                "generated bridge length below one")
         internal = [self.fresh("R") for _ in range(length - 1)]
-        sequence = [left, *internal, right]
+        sequence = (left, *internal, right)
         self.edges.update(edge(a, b) for a, b in zip(sequence, sequence[1:]))
-        return tuple(sequence)
+        self.routing.extend(internal)
+        return sequence
 
-    def tree_payload(self, root, parent_map):
+    def tree_payload(self, root, count):
+        require(type(count) is int and count >= 0, "bad payload size")
         made = []
-        for parent_index in parent_map:
-            require(type(parent_index) is int and -1 <= parent_index < len(made),
-                    "bad generated tree parent")
+        for index in range(count):
+            if index == 0:
+                parent = root
+            elif index % 4 == 0:
+                parent = root
+            elif index % 3 == 0:
+                parent = made[index // 3 - 1]
+            else:
+                parent = made[index - 1]
             vertex = self.fresh("P")
-            parent = root if parent_index == -1 else made[parent_index]
             self.edges.add(edge(parent, vertex))
             made.append(vertex)
         return tuple(made)
@@ -751,274 +1233,420 @@ class Builder:
         return frozenset(self.vertices), frozenset(self.edges)
 
 
-def fixture(profile, topology, route_length=1, payload_depth=0):
-    """Generate adjacency only; labels are not consumed by verify()."""
-    lengths = {
+def profile_lengths(profile, odd_length=7):
+    require(type(odd_length) is int and odd_length >= 5 and odd_length % 2 == 1,
+            "generated odd nontriangle is invalid")
+    return {
         "T4": (3, 3, 3, 3),
-        "T3+odd>=5": (3, 3, 3, 7),
+        "T3+odd>=5": (3, 3, 3, odd_length),
         "T2+C5+C5": (3, 3, 5, 5),
     }[profile]
+
+
+def fixture(profile, topology, route_length=3, payload_depth=0, odd_length=7):
+    lengths = list(profile_lengths(profile, odd_length))
     builder = Builder()
     k4 = builder.k4()
-    cycles = []
+
     if topology == "shared-star":
         for length in lengths:
-            cycles.append(builder.cycle(length, k4[0]))
+            builder.cycle(length, k4[0])
+
     elif topology == "repeated-cuts":
-        # Two independent repeated physical cuts on K4, no strings in verifier.
         for index, length in enumerate(lengths):
-            cycles.append(builder.cycle(length, k4[index // 2]))
+            builder.cycle(length, k4[index // 2])
+
     elif topology == "nested":
         parent = k4[0]
         for length in lengths:
             current = builder.cycle(length, parent)
-            cycles.append(current)
             parent = current[1]
-    elif topology == "first-nontriangle":
-        require(profile != "T4", "nontriangle fixture requested for T4")
-        non = next(length for length in lengths if length != 3)
-        rest = list(lengths); rest.remove(non)
-        q = builder.cycle(non, k4[0]); cycles.append(q)
-        # Put every triangle beyond the first nontriangle.  Then no direct
-        # K4--triangle shared packet exists and the cascade branch is forced.
-        parent = q[2]
-        for length in rest:
+
+    elif topology == "nontriangle-front":
+        nontriangles = [length for length in lengths if length != 3]
+        require(nontriangles, "nontriangle-front requested for T4")
+        remaining = list(lengths)
+        first_length = nontriangles[0]
+        remaining.remove(first_length)
+        current = builder.cycle(first_length, k4[0])
+        parent = current[1]
+        for length in remaining:
             current = builder.cycle(length, parent)
-            cycles.append(current)
             parent = current[1]
-    elif topology == "long-bridge":
-        # Vertex-disjoint cycle core joined by an arbitrary physical K2 chain.
+
+    elif topology == "four-arms":
         for index, length in enumerate(lengths):
             current = builder.cycle(length)
-            cycles.append(current)
-            parent = k4[0] if index == 0 else cycles[index - 1][1]
-            builder.bridge_path(parent, current[0], route_length + index)
+            builder.bridge_path(k4[index], current[0], route_length + index)
+
+    elif topology == "one-bridge-nest":
+        current = builder.cycle(lengths[0])
+        builder.bridge_path(k4[0], current[0], route_length)
+        parent = current[1]
+        for length in lengths[1:]:
+            current = builder.cycle(length, parent)
+            parent = current[1]
+
     elif topology == "mixed-bridge-shared":
-        first = builder.cycle(lengths[0])
-        builder.bridge_path(k4[0], first[0], route_length)
-        cycles.append(first)
+        triangles = [length for length in lengths if length == 3]
+        nontriangles = [length for length in lengths if length != 3]
+        if nontriangles:
+            detached = builder.cycle(nontriangles.pop())
+            builder.bridge_path(k4[0], detached[0], route_length)
+        else:
+            detached = builder.cycle(triangles.pop())
+            builder.bridge_path(k4[0], detached[0], route_length)
+        first = builder.cycle(triangles.pop(0), k4[1])
         parent = first[1]
-        cycles.append(builder.cycle(lengths[1], parent))
-        for length in lengths[2:]:
-            cycles.append(builder.cycle(length, k4[1]))
+        if triangles:
+            nested = builder.cycle(triangles.pop(0), parent)
+            parent = nested[1]
+        for length in triangles:
+            builder.cycle(length, k4[2])
+        for length in nontriangles:
+            builder.cycle(length, k4[3])
+
+    elif topology == "deep-bridge":
+        # A first physical bridge below an already retained positive block.
+        first = builder.cycle(3, k4[0])
+        lengths.remove(3)
+        detached_length = next((length for length in reversed(lengths)
+                                if length != 3), lengths[-1])
+        lengths.remove(detached_length)
+        detached = builder.cycle(detached_length)
+        builder.bridge_path(first[1], detached[0], route_length)
+        parent = detached[1]
+        if lengths:
+            nested = builder.cycle(lengths.pop(0), parent)
+            parent = nested[1]
+        for length in lengths:
+            builder.cycle(length, k4[2])
+
     else:
-        raise VerifyError("unknown generator topology")
+        raise VerifyError("unknown generated topology")
+
     if payload_depth:
-        builder.tree_payload(k4[2], tuple([-1] + list(range(payload_depth - 1))))
-        for index, current in enumerate(cycles):
-            builder.tree_payload(current[-1], (-1, 0, 0, 2, 1)[:1 + index])
+        builder.tree_payload(k4[2], payload_depth)
+        for index, current in enumerate(tuple(builder.cycles)):
+            builder.tree_payload(current[-1], min(payload_depth, index + 3))
+        for index, current in enumerate(tuple(builder.routing)[:4]):
+            builder.tree_payload(current, min(payload_depth, index + 1))
     return builder.graph()
 
 
-def relabel(vertices, edges):
+def opaque_relabel(vertices, edges, salt):
     ordered = sorted(vertices, key=repr)
-    mapping = {vertex: ("opaque", 1009 * index + 17) for index, vertex in enumerate(reversed(ordered))}
+    count = len(ordered)
+    permutation = list(reversed(range(count)))
+    if count:
+        shift = salt % count
+        permutation = permutation[shift:] + permutation[:shift]
+    mapping = {vertex: ("opaque", salt, 1009 * permutation[index] + 17)
+               for index, vertex in enumerate(ordered)}
     return (frozenset(mapping[vertex] for vertex in vertices),
             frozenset(edge(mapping[left], mapping[right])
                       for current in edges for left, right in [tuple(current)]))
 
 
-def certificate_signature(certificate):
-    # Vertex counts can move between equally near one-root tree payloads under
-    # opaque tie-breaking without changing the proved owner semantics.  The
-    # invariant receipt is the derived branch, piece ranks/types and contracts.
-    return (certificate.profile, certificate.dispatch,
-            tuple(sorted(certificate.piece_kinds)),
-            tuple(sorted(certificate.contracts)), len(certificate.pieces))
+def semantic_signature(plan, ledger):
+    piece_rows = tuple(sorted((item.phase, item.category, item.rank,
+                               item.cycle_lengths, len(item.owned_original_cycles),
+                               item.floor)
+                              for item in ledger.receipts))
+    return (plan.profile, plan.h, len(plan.phase1), len(plan.phase2),
+            len(plan.phase3), ledger.k, ledger.anchor_kind,
+            ledger.s, ledger.b, ledger.value, piece_rows,
+            ledger.contracts)
 
 
-def expansion_invariance_audit():
-    """Executable witnesses for the proved quotient/expansion contract.
+def expansion_signature(plan, ledger):
+    # Vertex counts deliberately do not appear: K2 subdivision and one-root
+    # tree growth preserve this semantic receipt.
+    return (plan.profile, len(plan.phase1), len(plan.phase2), len(plan.phase3),
+            ledger.k, ledger.anchor_kind, ledger.s, ledger.b, ledger.value,
+            tuple(sorted((item.phase, item.category, item.rank,
+                          item.cycle_lengths)
+                         for item in ledger.receipts)))
 
-    Subdividing a physical bridge replaces one K2 node by a K2 chain in the
-    full block-cut tree; every new degree-two routing vertex remains in the
-    same first-bridge territory.  Adding a one-root tree adds only rank-zero
-    leaf blocks below its unique root.  Neither operation changes positive
-    blocks, their ports, residual profile, or dispatch.  Induction on the
-    number of inserted K2/tree leaves proves arbitrary finite expansion; the
-    probes below check independent concrete depths and both operations at once.
-    """
+
+# ---------------------------------------------------------------------------
+# Audits: broad topology coverage, opaque replay, expansion, and mutations.
+# ---------------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class AuditResult:
+    generated: int
+    relabeled: int
+    profiles: tuple[tuple[str, int], ...]
+    anchors: tuple[tuple[str, int], ...]
+    categories: tuple[tuple[str, int], ...]
+    four_arm_cases: int
+    expansion_cases: int
+    hostile_rejections: tuple[str, ...]
+    rewires_distinguished: int
+    source_files: int
+
+
+def expansion_audit():
     signatures = set()
     sizes = []
-    for length in (1, 2, 5, 13):
-        vertices, edges = fixture("T3+odd>=5", "mixed-bridge-shared",
-                                  route_length=length, payload_depth=length)
-        _, certificate = verify(vertices, edges)
-        require(certificate.dispatch == "first-bridge+K4+kT-core",
-                "bridge expansion changed dispatch")
-        signatures.add((certificate.profile, certificate.dispatch,
-                        certificate.piece_kinds, certificate.contracts))
+    for length, payload in ((1, 0), (2, 4), (9, 11), (41, 19)):
+        vertices, edges = fixture("T3+odd>=5", "four-arms",
+                                  route_length=length,
+                                  payload_depth=payload,
+                                  odd_length=9)
+        _, plan, ledger = verify(vertices, edges)
+        signatures.add(expansion_signature(plan, ledger))
         sizes.append(len(vertices))
     require(len(signatures) == 1 and sizes == sorted(sizes),
-            "bridge/tree expansion invariance failed")
-    return len(sizes)
+            "K2/tree expansion changed the semantic ledger")
+
+    # Explicitly cross the usual recursive-DFS depth to authenticate that the
+    # physical verifier itself, not only the theorem prose, handles long K2s.
+    vertices, edges = fixture("T4", "one-bridge-nest",
+                              route_length=1401, payload_depth=0)
+    _, plan, ledger = verify(vertices, edges)
+    require(plan.phase1 and ledger.value >= 0,
+            "very-long physical connector was not verified")
+    return 5
+
+
+def graph_with_lengths(lengths):
+    builder = Builder()
+    k4 = builder.k4()
+    for length in lengths:
+        builder.cycle(length, k4[0])
+    return builder.graph()
 
 
 def hostile_tests():
     rejected = []
-    base_vertices, base_edges = fixture("T2+C5+C5", "first-nontriangle", payload_depth=4)
-    inventory, baseline = verify(base_vertices, base_edges)
-    require(baseline.dispatch == "first-nontriangle-cascade",
-            "hostile baseline missed cascade")
-
-    # Add a chord to C5: exact block type must fail.
+    base_vertices, base_edges = fixture("T2+C5+C5", "shared-star",
+                                        payload_depth=7)
+    inventory, _, _ = verify(base_vertices, base_edges)
+    k4 = block(inventory, inventory.k4)
     c5 = next(block(inventory, index) for index in inventory.cycles
               if block(inventory, index).cycle_length == 5)
-    nonedges = [edge(left, right) for left, right in itertools.combinations(c5.vertices, 2)
-                if edge(left, right) not in base_edges]
+
+    # Chord: no longer a literal cycle block.
+    chord = next(edge(left, right)
+                 for left, right in itertools.combinations(c5.vertices, 2)
+                 if edge(left, right) not in base_edges)
     rejected.append(expect_rejection(
-        lambda: verify(base_vertices, frozenset(set(base_edges) | {nonedges[0]})),
-        "C5 chord / wrong block type"))
+        lambda: verify(base_vertices, frozenset(set(base_edges) | {chord})),
+        "cycle chord / unsupported block"))
 
-    # Rewire one cycle edge to a K4 vertex: merges blocks or breaks cycle.
-    shared_k4 = c5.vertices & block(inventory, inventory.k4).vertices
-    private_edges = [current for current in c5.edges if not (current & shared_k4)]
-    require(private_edges, "hostile C5 has no private edge")
-    current = private_edges[0]; left, right = tuple(current)
-    kvertex = next(vertex for vertex in block(inventory, inventory.k4).vertices
-                   if vertex not in c5.vertices)
-    rewired = set(base_edges); rewired.remove(current); rewired.add(edge(left, kvertex))
-    rejected.append(expect_rejection(lambda: verify(base_vertices, frozenset(rewired)),
-                                     "hostile cycle-to-K4 rewire"))
-
-    # Add two cross-block edges: this creates a hidden positive connector and
-    # merges nominal blocks into an unsupported biconnected block.
-    triangle = block(inventory, triangle_blocks(inventory)[0])
-    tprivate = [vertex for vertex in triangle.vertices
-                if vertex not in block(inventory, inventory.k4).vertices]
-    cprivate = [vertex for vertex in c5.vertices
-                if vertex not in block(inventory, inventory.k4).vertices and
-                vertex not in triangle.vertices]
-    require(len(cprivate) >= 2, "hostile blocks do not have private endpoints")
-    extras = {edge(tprivate[0], cprivate[0]), edge(tprivate[1], cprivate[1])}
+    # Subdivide one literal K4 edge: rank is preserved, literal topology is not.
+    kedge = next(iter(k4.edges))
+    left, right = tuple(kedge)
+    subdivision = ("hostile-subdivision", 1)
+    subdivided_vertices = frozenset(set(base_vertices) | {subdivision})
+    subdivided_edges = set(base_edges)
+    subdivided_edges.remove(kedge)
+    subdivided_edges.update({edge(left, subdivision), edge(subdivision, right)})
     rejected.append(expect_rejection(
-        lambda: verify(base_vertices, frozenset(set(base_edges) | extras)),
-        "hidden positive connector"))
+        lambda: verify(subdivided_vertices, frozenset(subdivided_edges)),
+        "subdivided K4 edge"))
 
-    # Delete payload edge (disconnect), duplicate semantic vertex via malformed edge,
-    # and manufacture a sixth positive block.
+    # Two cross-block ears merge nominal blocks into an unsupported block.
+    triangle = next(block(inventory, index) for index in inventory.cycles
+                    if block(inventory, index).cycle_length == 3)
+    shared = triangle.vertices & k4.vertices
+    tprivate = list(triangle.vertices - shared)
+    cprivate = list(c5.vertices - k4.vertices - triangle.vertices)
+    require(len(tprivate) >= 2 and len(cprivate) >= 2,
+            "hostile fixture lacks private endpoints")
+    ears = {edge(tprivate[0], cprivate[0]), edge(tprivate[1], cprivate[1])}
+    rejected.append(expect_rejection(
+        lambda: verify(base_vertices, frozenset(set(base_edges) | ears)),
+        "hidden cross-block positive connector"))
+
+    # Delete a payload edge while retaining its endpoint: disconnected input.
     payload_edge = next(current for current in base_edges
-                        if any(isinstance(v, tuple) and v[0] == "P" for v in current))
+                        if any(isinstance(vertex, tuple) and vertex[0] == "P"
+                               for vertex in current))
     rejected.append(expect_rejection(
         lambda: verify(base_vertices, frozenset(set(base_edges) - {payload_edge})),
-        "omitted rooted payload"))
+        "omitted rooted payload edge"))
+
     rejected.append(expect_rejection(
-        lambda: verify(base_vertices, frozenset(set(base_edges) | {frozenset({kvertex})})),
-        "loop/malformed edge"))
+        lambda: verify(base_vertices,
+                       frozenset(set(base_edges) | {frozenset({left})})),
+        "malformed loop edge"))
+    outsider = ("outside", 999)
+    rejected.append(expect_rejection(
+        lambda: verify(base_vertices,
+                       frozenset(set(base_edges) | {frozenset({left, outsider})})),
+        "foreign adjacency endpoint"))
+    rejected.append(expect_rejection(
+        lambda: verify(set(base_vertices), base_edges),
+        "mutable vertex-set API injection"))
 
-    # Non-residual profiles: even, C7+C5 with only two triangles, and four C5.
-    for lengths_label, mutate in (
-        ("even cycle", (3, 3, 3, 4)),
-        ("two long unequal", (3, 3, 5, 7)),
-        ("four pentagons", (5, 5, 5, 5)),
+    for label, lengths in (
+        ("even residual cycle", (3, 3, 3, 4)),
+        ("nonpentagon residual pair", (3, 3, 5, 7)),
+        ("three residual nontriangles", (3, 5, 5, 5)),
+        ("four residual nontriangles", (5, 5, 5, 5)),
     ):
-        builder = Builder(); k4 = builder.k4()
-        for length in mutate: builder.cycle(length, k4[0])
-        rejected.append(expect_rejection(lambda g=builder.graph(): verify(*g), lengths_label))
+        rejected.append(expect_rejection(
+            lambda current=lengths: verify(*graph_with_lengths(current)), label))
 
-    # Threshold injection is impossible at API level; mutation of the private
-    # fixed table must fail the exact value check.
-    original = ANALYTIC_CONTRACTS["R31K-K4-T-SHARED-v1"]["strict_floor"]
-    ANALYTIC_CONTRACTS["R31K-K4-T-SHARED-v1"]["strict_floor"] = 99
+    rejected.append(expect_rejection(
+        lambda: verify(*graph_with_lengths((3, 3, 3, 3, 3))),
+        "fifth cycle / rank-eight graph"))
+
+    # Fixed threshold/contract mutation must fail before use.
+    contract_id = "R31K-K4-T-SHARED-v2"
+    original = CONTRACTS[contract_id]
+    CONTRACTS[contract_id] = replace(original, floor=99)
     try:
-        vertices, edges = fixture("T4", "shared-star")
-        rejected.append(expect_rejection(lambda: verify(vertices, edges),
-                                         "analytic threshold mutation"))
+        rejected.append(expect_rejection(audit_contract_table,
+                                         "analytic threshold-table mutation"))
     finally:
-        ANALYTIC_CONTRACTS["R31K-K4-T-SHARED-v1"]["strict_floor"] = original
+        CONTRACTS[contract_id] = original
 
-    # Four independent rank-one first-bridge arms have no proved payment in
-    # this artifact.  The graph has a valid residual profile, but must be
-    # rejected rather than laundered through the rooted K4 bound.
-    four_arms = Builder()
-    arm_k4 = four_arms.k4()
-    for index, length in enumerate((3, 3, 5, 5)):
-        current_cycle = four_arms.cycle(length)
-        four_arms.bridge_path(arm_k4[index], current_cycle[0], 3 + index)
-    rejected.append(expect_rejection(lambda: verify(*four_arms.graph()),
-                                     "four independent rank-one bridge arms"))
+    # Mutated source bytes are tested in memory; repository bytes are untouched.
+    source_contract = CONTRACTS["R31K-RESIDUAL-SIEVE-v2"]
+    source_blob = (SOURCE_ROOT / source_contract.source).read_bytes()
+    rejected.append(expect_rejection(
+        lambda: authenticate_source_blob(source_blob + b"\nHOSTILE",
+                                         source_contract.sha256,
+                                         "synthetic source mutation"),
+        "analytic source-byte mutation"))
 
-    # Same-label topology rewires must change adjacency-derived branch.
-    star = fixture("T3+odd>=5", "shared-star")
-    bridge = fixture("T3+odd>=5", "mixed-bridge-shared", route_length=4)
-    _, star_certificate = verify(*star)
-    _, bridge_certificate = verify(*bridge)
-    require(star_certificate.dispatch != bridge_certificate.dispatch,
-            "same profile bridge rewire did not change dispatch")
+    # The public verifier must not trust a caller-mutated structural plan or
+    # independently stored arithmetic receipt.  Replay both from adjacency.
+    _, baseline_plan, baseline_ledger = verify(base_vertices, base_edges)
+    rejected.append(expect_rejection(
+        lambda: audit_plan(inventory, replace(baseline_plan, h=99)),
+        "forged structural-plan field"))
+    rejected.append(expect_rejection(
+        lambda: audit_ledger(inventory, baseline_plan,
+                             replace(baseline_ledger, value=99)),
+        "forged ledger value"))
+
+    # Four independent arms are now required to pass, not a hostile rejection.
+    _, four_plan, four_ledger = verify(*fixture("T2+C5+C5", "four-arms",
+                                                route_length=13,
+                                                payload_depth=5))
+    require(len(four_plan.phase1) == 4 and four_ledger.s == 2 and
+            four_ledger.k == 0 and four_ledger.value == 0,
+            "four-independent-arm closure was not authenticated")
+
+    # Same profile, physically different bridge topology must remain visible.
+    _, star_plan, star_ledger = verify(*fixture("T2+C5+C5", "shared-star"))
+    _, arm_plan, arm_ledger = verify(*fixture("T2+C5+C5", "four-arms"))
+    require((len(star_plan.phase1), len(star_plan.phase2), star_ledger.k) !=
+            (len(arm_plan.phase1), len(arm_plan.phase2), arm_ledger.k),
+            "same-profile physical bridge rewire was not distinguished")
     return tuple(rejected), 1
 
 
-def audit_sources():
-    require(frozenset(ANALYTIC_CONTRACTS) == EXPECTED_CONTRACT_IDS,
-            "analytic contract ID set changed")
-    for contract_id, record in ANALYTIC_CONTRACTS.items():
-        require(set(record) == {"source", "sha256", "strict_floor"},
-                f"malformed analytic contract: {contract_id}")
-        path = ROOT / record["source"]
-        require(path.is_file() and digest(path) == record["sha256"],
-                f"analytic source changed: {contract_id}")
-
-
 def audit():
-    audit_sources()
-    counts = Counter()
-    signatures = Counter()
-    generated = 0
-    # Independently generated adjacency witnesses authenticate every profile
-    # and every dispatch branch, plus long connectors, nesting, repeated cuts,
-    # arbitrary labels, and rooted payloads.  They are not trusted fixtures.
+    source_files = audit_sources()
     plans = (
-        ("T4", "shared-star"), ("T4", "repeated-cuts"),
-        ("T4", "nested"),
-        ("T3+odd>=5", "shared-star"), ("T3+odd>=5", "nested"),
-        ("T3+odd>=5", "first-nontriangle"),
-        ("T3+odd>=5", "mixed-bridge-shared"),
-        ("T2+C5+C5", "shared-star"), ("T2+C5+C5", "repeated-cuts"),
-        ("T2+C5+C5", "nested"), ("T2+C5+C5", "first-nontriangle"),
+        ("T4", "shared-star", 3, 0, 7),
+        ("T4", "repeated-cuts", 3, 5, 7),
+        ("T4", "nested", 3, 3, 7),
+        ("T4", "four-arms", 11, 4, 7),
+        ("T4", "one-bridge-nest", 8, 6, 7),
+        ("T4", "deep-bridge", 9, 5, 7),
+        ("T3+odd>=5", "shared-star", 3, 4, 5),
+        ("T3+odd>=5", "repeated-cuts", 3, 5, 7),
+        ("T3+odd>=5", "nested", 3, 6, 9),
+        ("T3+odd>=5", "nontriangle-front", 3, 7, 11),
+        ("T3+odd>=5", "four-arms", 13, 5, 13),
+        ("T3+odd>=5", "one-bridge-nest", 7, 4, 9),
+        ("T3+odd>=5", "mixed-bridge-shared", 10, 6, 7),
+        ("T3+odd>=5", "deep-bridge", 12, 5, 5),
+        ("T2+C5+C5", "shared-star", 3, 4, 7),
+        ("T2+C5+C5", "repeated-cuts", 3, 6, 7),
+        ("T2+C5+C5", "nested", 3, 5, 7),
+        ("T2+C5+C5", "nontriangle-front", 3, 7, 7),
+        ("T2+C5+C5", "four-arms", 15, 6, 7),
+        ("T2+C5+C5", "one-bridge-nest", 9, 5, 7),
+        ("T2+C5+C5", "mixed-bridge-shared", 11, 7, 7),
+        ("T2+C5+C5", "deep-bridge", 14, 5, 7),
     )
-    for index, (profile, topology) in enumerate(plans):
-        vertices, edges = fixture(profile, topology, route_length=7,
-                                  payload_depth=(index % 6))
-        inventory, certificate = verify(vertices, edges)
-        require(certificate.profile == profile, "generated profile misclassified")
-        counts[(profile, certificate.dispatch)] += 1
-        signatures[certificate.dispatch] += 1
+    profile_counts = Counter()
+    anchor_counts = Counter()
+    category_counts = Counter()
+    generated = 0
+    relabeled = 0
+    four_arm_cases = 0
+
+    for index, (profile, topology, route_length, payload_depth, odd_length) in enumerate(plans):
+        vertices, edges = fixture(profile, topology,
+                                  route_length=route_length,
+                                  payload_depth=payload_depth,
+                                  odd_length=odd_length)
+        inventory, plan, ledger = verify(vertices, edges)
+        require(plan.profile == profile and ledger.profile == profile,
+                "generated residual profile misclassified")
+        require(sum(block(inventory, item).rank for item in
+                    (inventory.k4, *inventory.cycles)) == 7,
+                "generated physical block-rank sum changed")
+        profile_counts[profile] += 1
+        anchor_counts[ledger.anchor_kind] += 1
+        category_counts.update(item.category for item in ledger.receipts)
         generated += 1
-        # Opaque relabeling must preserve semantic receipt up to vertex names.
-        relabeled = relabel(vertices, edges)
-        _, relabeled_certificate = verify(*relabeled)
-        require(certificate_signature(certificate) ==
-                certificate_signature(relabeled_certificate),
-                "opaque relabeling changed semantic certificate")
-        require(sum(block.rank for block in inventory.blocks) == 7,
-                "generated block-rank sum changed")
-    require({key[0] for key in counts} == {"T4", "T3+odd>=5", "T2+C5+C5"},
-            "profile branch coverage incomplete")
-    require({"first-bridge+K4+kT-core", "first-nontriangle-cascade",
-             "K4+kT-core:T4",
-             "K4+kT-core:T3+odd>=5", "K4+kT-core:T2+C5+C5"}
-            <= set(signatures), "dispatch branch coverage incomplete")
-    expansions = expansion_invariance_audit()
+        if topology == "four-arms":
+            require(len(plan.phase1) == 4,
+                    "four-arm fixture did not produce four first bridges")
+            four_arm_cases += 1
+
+        relabeled_graph = opaque_relabel(vertices, edges, 31 + 17 * index)
+        _, relabeled_plan, relabeled_ledger = verify(*relabeled_graph)
+        require(semantic_signature(plan, ledger) ==
+                semantic_signature(relabeled_plan, relabeled_ledger),
+                "opaque relabeling changed the semantic certificate")
+        relabeled += 1
+
+    require(set(profile_counts) == {"T4", "T3+odd>=5", "T2+C5+C5"},
+            "residual profile coverage incomplete")
+    require({"strict-rooted-K4-anchor", "strict-shared-K4+T-anchor"}
+            <= set(anchor_counts), "anchor branch coverage incomplete")
+    required_categories = {
+        "strict-rooted-K4-anchor", "strict-shared-K4+T-anchor",
+        "triangle-positive", "charged-odd-unicycle", "charged-tree",
+        "cactus-rank>=2-positive", "triangle-open-tree",
+        "triangular-block-positive",
+    }
+    require(required_categories <= set(category_counts),
+            "piece/charge category coverage incomplete")
+    require(four_arm_cases == 3, "four-independent-arm profile coverage incomplete")
+
+    expansion_cases = expansion_audit()
     rejected, rewires = hostile_tests()
-    return generated, counts, signatures, expansions, rejected, rewires
+    return AuditResult(generated, relabeled,
+                       tuple(sorted(profile_counts.items())),
+                       tuple(sorted(anchor_counts.items())),
+                       tuple(sorted(category_counts.items())),
+                       four_arm_cases, expansion_cases, rejected, rewires,
+                       source_files)
 
 
 def report(result):
-    generated, counts, signatures, expansions, rejected, rewires = result
     return "\n".join((
-        "R31-K adjacency semantic verifier: exact audit passed",
-        "scope: R31-K only; no global or full-multiblock theorem",
-        "input contract: finite simple adjacency only; no supplied profile/channel/owner/threshold",
-        "Tarjan: exact K4 + four literal cycle blocks; full block-cut tree, K2 bridges and physical ports reconstructed",
-        "residual profiles: T4; T3+odd>=5; T2+C5+C5",
-        "dispatches: " + repr(dict(sorted(signatures.items()))),
-        f"independently generated fixtures: {generated}; opaque relabel replay: {generated}",
-        "profile/dispatch matrix: " + repr(dict(sorted(counts.items()))),
-        f"quotient expansion probes: {expansions}; arbitrary finite K2/tree expansion proved by leaf/subdivision induction",
-        "ownership: original vertices; connected induced disjoint exhaustive pieces; unique articulation/payload owner",
+        "R31-K full adjacency semantic verifier: finite corroboration passed",
+        "scope: complete physical R31-K only; no global/full-multiblock/single-block claim",
+        "input: finite simple adjacency only; no supplied profile, topology, owner, charge, threshold, or partition",
+        "reconstruction: iterative Tarjan; literal K4 + four literal cycles; full rooted block-cut tree and every K2",
+        "ownership: original vertices; induced connected disjoint exhaustive pieces; unique cut/payload owner",
+        "strategy: simultaneous first bridges; ancestor-minimal nontriangles; K4 or direct shared-cut K4+T anchor",
+        "ledger: finite implementation replay checks integer anchor-s-b>=0; proof strictness comes from the pinned anchor contract",
+        f"analytic source files pinned: {result.source_files}; manifest sha256: {contract_manifest_digest()}",
+        f"generated adjacency fixtures: {result.generated}; opaque relabel replays: {result.relabeled}",
+        "profiles: " + repr(dict(result.profiles)),
+        "anchors: " + repr(dict(result.anchors)),
+        "piece categories: " + repr(dict(result.categories)),
+        f"four-independent-arm cases accepted: {result.four_arm_cases}",
+        f"K2/tree expansion probes (including 1401-edge connector): {result.expansion_cases}",
+        f"hostile mutations rejected: {len(result.hostile_rejections)}; same-profile rewires distinguished: {result.rewires_distinguished}",
         "analytic contracts: " + repr(tuple(sorted(EXPECTED_CONTRACT_IDS))),
-        f"hostile adjacency mutations rejected: {len(rejected)}; same-profile rewires distinguished: {rewires}",
-        "status: accepted R31-K physical sublane authenticated; four-arm/global bridge ledger open",
+        "verifier sha256: " + file_digest(Path(__file__)),
+        "status: finite corroboration/static implementation replay passed; universal proof is external",
     ))
 
 
@@ -1028,10 +1656,11 @@ def main():
     if "--optimized-child" not in sys.argv and not sys.flags.optimize:
         child = subprocess.run([sys.executable, "-O", __file__, "--optimized-child"],
                                check=False, capture_output=True, text=True)
-        require(child.returncode == 0, "optimized child failed: " + child.stderr)
+        require(child.returncode == 0,
+                "optimized child failed: " + child.stderr)
         require(child.stderr == "", "optimized child wrote stderr")
-        require(child.stdout.rstrip() == output,
-                "normal and -O receipts are not byte-identical")
+        require(child.stdout == output + "\n",
+                "normal and -O outputs are not byte-identical")
     print(output)
 
 
