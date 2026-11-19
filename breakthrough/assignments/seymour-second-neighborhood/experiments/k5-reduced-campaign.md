@@ -25,12 +25,18 @@ mkdir -p /tmp/k5-reduced
 cat ../certificates/k5-reduced-campaign.tar.xz.part-* > /tmp/k5-reduced.tar.xz
 tar -xJf /tmp/k5-reduced.tar.xz \
   -C /tmp/k5-reduced --strip-components=1
-mkdir -p /tmp/k5-reduced/work
 python3 check_k5_reduced_cuts.py
 python3 k5_reduced_verify.py \
   --root /tmp/k5-reduced \
-  --checker /path/to/pinned/lrat-check
+  --checker /path/to/source-authenticated/lrat-check
 ```
+
+The cover checker performs an independent labelled census and exact key-set,
+multiplicity, byte-length, and payload-hash comparison against production. The
+proof verifier creates `work/`, keeps every integrity gate active under
+`python -O`, and requires exactly one literal `c VERIFIED`. Authenticate the
+checker source against the commit recorded above; current compiler output need
+not be bit-identical to the historical ELF.
 
 Expected final lines:
 

@@ -37,8 +37,14 @@ tar -xJf ../certificates/k6-exact-campaign.tar.xz -C /tmp/k6-exact \
   --strip-components=1
 python3 k6_exact_verify.py \
   --root /tmp/k6-exact \
-  --checker /path/to/pinned/lrat-check
+  --checker /path/to/source-authenticated/lrat-check
 ```
+
+The verifier creates its `work/` directory, checks every metadata and digest
+condition with explicit exceptions (also under `python -O`), and requires
+exactly one literal `c VERIFIED` from the checker. Authenticate the checker
+source against the commit recorded above; current compiler output need not be
+bit-identical to the historical ELF.
 
 Expected final line:
 
