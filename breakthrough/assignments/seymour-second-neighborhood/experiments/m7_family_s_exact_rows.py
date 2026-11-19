@@ -11,7 +11,6 @@ It is an exact necessary projection, not a graph-completion cover.  In
 particular it does not yet orient T or synchronize A--B row degrees.
 """
 from collections import Counter
-from itertools import combinations
 from math import comb
 
 # Row data:

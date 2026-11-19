@@ -7,7 +7,7 @@ C incidence extends to an oriented graph having the order-18 degree sequence,
 seven holes, root N+(0)={1,...,8}, and simultaneous shared-low B-column
 robustness.  Exact global badness and arc minimality are omitted.
 """
-import sys,time
+import time
 from m7_family_s_type_rows import rows
 try:
     import z3

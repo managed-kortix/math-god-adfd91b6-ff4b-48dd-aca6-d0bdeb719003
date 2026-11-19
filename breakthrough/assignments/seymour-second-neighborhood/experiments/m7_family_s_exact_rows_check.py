@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Independent generating-function check of m7_family_s_exact_rows.py."""
 from collections import Counter
-from itertools import combinations
 
 W,A,B=0,tuple(range(1,9)),tuple(range(9,16))
 U=(W,)+A
