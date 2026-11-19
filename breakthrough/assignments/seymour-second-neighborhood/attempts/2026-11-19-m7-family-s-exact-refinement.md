@@ -199,6 +199,15 @@ Any future pruning of those cells must explicitly use global badness,
 arc-minimality, or another additional hypothesis and must survive these
 countermodels.
 
+As a broader hostile scout, `m7_family_s_local_extend.py` tested every one of
+the 26,060 pre-C-swap type rows.  All 26,060 extend to an oriented graph with
+the exact degree sequence, seven holes, fixed root row, and simultaneous
+shared-low B-column robustness.  This is an uncertified Z3 observation (no
+global badness or arc minimality), not a proof that every row is nonempty.
+Its legitimate conclusion is strategic: the local package alone showed no
+additional pruning at all, so the next model must add a genuinely global
+condition rather than more local wishful counting.
+
 ## Reproducibility
 
 Run
@@ -209,9 +218,12 @@ python3 experiments/m7_family_s_exact_rows_check.py
 python3 experiments/m7_family_s_type_rows.py
 python3 experiments/m7_family_s_type_rows_check.py
 python3 experiments/m7_family_s_countermodels.py
+# Optional observation; requires z3-solver:
+python3 experiments/m7_family_s_local_extend.py
 ```
 
 The first two scripts independently evaluate the fully labelled row sum and
 Burnside fixed set.  The next two independently enumerate the 13,117 exact type
-orbits.  The final script checks the three fixed hostile graphs directly.  No
-SAT/UNSAT claim or proof certificate is made.
+orbits.  The countermodel script checks three fixed hostile graphs directly.
+The optional final scout reports solver observations only.  No UNSAT claim or
+proof certificate is made.
