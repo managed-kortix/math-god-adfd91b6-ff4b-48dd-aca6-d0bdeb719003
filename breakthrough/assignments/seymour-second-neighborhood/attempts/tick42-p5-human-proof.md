@@ -50,13 +50,15 @@ and `{0,2,4}`; resolving the orientation of its present internal pair gives
 exactly the disjunction displayed in (2).
 
 Every label supports at most one source. Except for 13, a saturated inaccessible
-row reconstructs S immediately. For 13, the global values of B,D,E identify
-which of the three support intersections occurs; the tail of the oriented pair
-13 is saturated and reconstructs the remaining seven vertices of S. A fixed S
-cannot support two sources without a digon.
+row reconstructs S immediately. For 13, the global values of B,D,E identify which support intersection
+occurs.  More explicitly, if `D=[1->3]=1`, then
+`S=(N+(1)\{3}) union {0,2}`; if D=0, then
+`S=(N+(3)\{1}) union {2,4}`.  In either case the tail of the oriented pair is
+saturated, so this reconstructs S.  A fixed S cannot support two sources
+without a digon.
 
 Finally, no assignment to the six orientation bits satisfies three conditions
-in (2). This is a transparent 64-case Boolean check, implemented independently
+in (2). This is a transparent 64-case Boolean check, implemented as a direct truth-table audit of (2)
 in `experiments/check_p5_packets.py`. Equivalently, splitting on `(D,F)` and
 substituting the remaining four bits leaves only compatible pairs and no
 triple. The check prints

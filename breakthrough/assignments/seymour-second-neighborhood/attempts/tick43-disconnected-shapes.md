@@ -23,12 +23,20 @@ but only four exist. Thus every source has exactly two inaccessible vertices.
 The finite support calculation below is independently reproduced by
 `experiments/check_disconnected_packets.py`. It enumerates every orientation of
 present support pairs, every inaccessible pair I, and every support cut
-`R=S intersect H`; it imposes all forced positive arcs and the at-most remaining
-support capacity. Every vertex outside H is hole-isolated. Such a vertex cannot
-lie outside S while inaccessible, and all non-inaccessible support-isolated
-vertices are determined by the source row; equivalently the saturated support
-calculation has cut multiplicity one. Thus the unique R together with the fixed
-global rows reconstructs S. Hence each label supports at most one source.
+`R=S intersect H`; it imposes all forced crossing arcs and exact remaining row
+capacity.  The checker establishes both that R is unique for a fixed packet and
+support orientation and that some inaccessible endpoint t is saturated.  If
+`Q_t` is the set of its holes into R and `W_t` its support outneighbors outside
+S, saturation gives
+
+```
+N+(t)=(S\Q_t) union W_t,
+S=(N+(t)\W_t) union Q_t.                           (3)
+```
+
+Thus the unique R, support orientation, and fixed global outrow really do
+reconstruct the full S, including vertices outside H; uniqueness of the support
+cut alone would not suffice.  Hence each label supports at most one source.
 
 ## `P4 + K2`
 
@@ -54,10 +62,10 @@ saturation gives
 14: !C & F & G & !H & (E!=J)
 15: !D & F & G & !I & (E!=K)
 24: !F & H & I & !J & (A=C)
-25: !G & H & I & !K & (A=D).                       (3)
+25: !G & H & I & !K & (A=D).                       (4)
 ```
 
-The compatibility graph of (3) has maximum cliques
+The compatibility graph of (4) has maximum cliques
 
 ```
 {02,14,15}, {13,24,25},
@@ -80,7 +88,7 @@ support cut, supports only one source. Therefore at most two labels and sources
 coexist:
 
 ```
-|P|<=2.                                             (4)
+|P|<=2.                                             (5)
 ```
 
 The bound is sharp at packet level but contradicts (1).
@@ -98,15 +106,15 @@ For `x in {3,4,5,6}`, with matching-hole mate `x*`, packet P1x forces
 ```
 0,2,x* in S,
 N+(x)=S\{x*},
-N+(1)=(S\{0,2}) union {x}.                        (5)
+N+(1)=(S\{0,2}) union {x}.                        (6)
 ```
 
 Thus each packet reconstructs S. If P1x and P1y coexist and xy is present,
-equation (5) forces both `x->y` and `y->x`. Hence compatibility occurs only
+equation (6) forces both `x->y` and `y->x`. Hence compatibility occurs only
 along holes 34 or 56. The packet graph is two disjoint edges, so
 
 ```
-|P|<=2,                                             (6)
+|P|<=2,                                             (7)
 ```
 
 again contradicting (1). This explains the tick-35 local breaker: one sharp
