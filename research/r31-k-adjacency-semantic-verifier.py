@@ -20,6 +20,7 @@ import hashlib
 import itertools
 import subprocess
 import sys
+import tempfile
 from collections import Counter, deque
 from dataclasses import dataclass, replace
 from pathlib import Path
@@ -1151,6 +1152,8 @@ def audit_ledger(inventory, plan, ledger):
 
 
 def verify(vertices, edges):
+    """Authenticate every analytic contract, then verify one adjacency input."""
+    audit_sources()
     inventory = reconstruct(vertices, edges)
     profile, h = derive_profile(inventory)
     plan = construct_plan(inventory, profile, h)
@@ -1421,6 +1424,7 @@ def graph_with_lengths(lengths):
 
 
 def hostile_tests():
+    global SOURCE_ROOT
     rejected = []
     base_vertices, base_edges = fixture("T2+C5+C5", "shared-star",
                                         payload_depth=7)
@@ -1496,24 +1500,41 @@ def hostile_tests():
         lambda: verify(*graph_with_lengths((3, 3, 3, 3, 3))),
         "fifth cycle / rank-eight graph"))
 
-    # Fixed threshold/contract mutation must fail before use.
+    # The public production entry must authenticate the fixed contract table,
+    # rather than relying on main()->audit() to have run first.
     contract_id = "R31K-K4-T-SHARED-v2"
     original = CONTRACTS[contract_id]
-    CONTRACTS[contract_id] = replace(original, floor=99)
+    CONTRACTS[contract_id] = replace(
+        original, floor=99, claim=original.claim + " [HOSTILE]",
+        sha256="0" * 64)
     try:
-        rejected.append(expect_rejection(audit_contract_table,
-                                         "analytic threshold-table mutation"))
+        rejected.append(expect_rejection(
+            lambda: verify(base_vertices, base_edges),
+            "public API analytic contract mutation"))
     finally:
         CONTRACTS[contract_id] = original
 
-    # Mutated source bytes are tested in memory; repository bytes are untouched.
-    source_contract = CONTRACTS["R31K-RESIDUAL-SIEVE-v2"]
-    source_blob = (SOURCE_ROOT / source_contract.source).read_bytes()
-    rejected.append(expect_rejection(
-        lambda: authenticate_source_blob(source_blob + b"\nHOSTILE",
-                                         source_contract.sha256,
-                                         "synthetic source mutation"),
-        "analytic source-byte mutation"))
+    # Likewise, direct verify() must reject mutated source bytes.  Build a
+    # complete temporary shadow of the five pinned files, mutate one shadow
+    # byte stream, and restore SOURCE_ROOT before the directory is removed.
+    original_root = SOURCE_ROOT
+    with tempfile.TemporaryDirectory(prefix="r31k-hostile-source-") as directory:
+        shadow_root = Path(directory)
+        for item in {contract.source: contract
+                     for contract in CONTRACTS.values()}.values():
+            target = shadow_root / item.source
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((original_root / item.source).read_bytes())
+        source_contract = CONTRACTS["R31K-RESIDUAL-SIEVE-v2"]
+        hostile_source = shadow_root / source_contract.source
+        hostile_source.write_bytes(hostile_source.read_bytes() + b"\nHOSTILE")
+        SOURCE_ROOT = shadow_root
+        try:
+            rejected.append(expect_rejection(
+                lambda: verify(base_vertices, base_edges),
+                "public API analytic source-byte mutation"))
+        finally:
+            SOURCE_ROOT = original_root
 
     # The public verifier must not trust a caller-mutated structural plan or
     # independently stored arithmetic receipt.  Replay both from adjacency.
