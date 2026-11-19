@@ -19,10 +19,13 @@ N++_{D-h}(w)=N++_D(w).                               (1)
 
 Indeed a Seymour vertex of `D-h` must point to `h`; restoring `h` increases its
 first degree by one and cannot remove an exact second neighbor. Strict badness
-in `D` makes every inequality tight. Conversely, (1) is stronger than merely
-requiring every old exact second neighbor to keep a two-walk: deletion can also
-create a new exact second endpoint, so equality must be derived from the
-vertex-minimal argument before the one-sided preservation clauses are used.
+in `D` makes every inequality tight. For this **vertex deletion**, exact second neighborhoods can only shrink:
+paths are removed, while direct arcs between surviving vertices are unchanged;
+moreover `h` was a first neighbor, not an exact second neighbor.  Consequently
+(1) is equivalent here to every old exact-second endpoint retaining a two-walk
+that avoids `h`.  The possibility of creating a new exact-second endpoint
+belongs to **arc deletion** (when the deleted head ceases to be a first
+neighbor), not vertex deletion.
 
 Arc minimality is separate. For an arc `x->y`, if `g_xy` records that `y`
 becomes an exact second neighbor after deletion and `L_xy` is the set of old
