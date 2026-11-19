@@ -1,0 +1,33 @@
+m6-b7-l6-early-c-certificate-residual-exact-pair-orbits-v1
+source-scout-bytes	47594
+source-scout-sha256	1c324d6ce3b73ebdb9abdc8bafcaed1a3373541b208c7ef22002d1556bd3a480
+certificate-ledger-bytes	61761
+certificate-ledger-sha256	85a74a1a11f5abc169fc91a9ea61ea9068258a2bb0435d097709ec80c825e42e
+committed-certified-children	172
+children	20
+cell-parent-memberships	101
+distinct-compatible-profile-parent-graphs	55
+profile-parents-traversed	72
+semantics	each compatible selector adds seven guarded positive q clauses, leaving exactly its inaccessible pair
+cover	original 192-pair profile cover minus the certified 172-orbit union equals this disjoint exact-pair cover
+columns	cell,source-child,key,profile,low-C,pair,compatible-parents,positive-q-clauses,variables,clauses
+000	001	o03-i01	03	16	0,3	1	7	23626	144295
+001	033	o11-i11	11	17	1,16	7	49	23626	144331
+002	037	o11-i15	11	17	2,16	5	35	23626	144319
+003	041	o11-i19	11	17	3,16	5	35	23626	144319
+004	045	o11-i23	11	17	4,16	4	28	23626	144313
+005	055	o23-i02	23	16	0,17	2	14	23622	143685
+006	079	o25-i09	25	16	1,17	3	21	23626	144307
+007	087	o25-i17	25	16	3,17	4	28	23626	144313
+008	091	o25-i21	25	16	4,17	5	35	23626	144319
+009	109	o28-i09	28	16	1,17	5	35	23626	144319
+010	113	o28-i13	28	16	2,17	8	56	23626	144337
+011	117	o28-i17	28	16	3,17	8	56	23626	144337
+012	120	o28-i20	28	16	4,17	4	28	23626	144313
+013	127	o47-i02	47	16	0,17	2	14	23622	143685
+014	155	o49-i13	49	16	2,17	4	28	23626	144313
+015	159	o49-i17	49	16	3,17	6	42	23626	144325
+016	163	o49-i21	49	16	4,17	4	28	23626	144313
+017	181	o54-i09	54	17	1,16	10	70	23626	144349
+018	185	o54-i13	54	17	2,16	9	63	23626	144343
+019	187	o54-i15	54	17	3,16	5	35	23626	144319

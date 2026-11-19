@@ -1,0 +1,8 @@
+m6-b7-l4-profile-root-cardinality-packages-v1
+compressed-limit-bytes-exclusive	250000000
+packages	3
+profiles	40
+columns	package,first-position,last-position,profiles,xz-bytes,artifact-set-sha256
+00	00	14	15	90679000	23d32f3ef380d420fd32fd3440d8687304d2ba9bb962740055182ee44a1eaecf
+01	15	27	13	85516660	cd23235d4264a8dc9fde93c630922387f843cd535fea7e73b967302331685890
+02	28	39	12	66247080	b88b1f7339b35ba0bcadd610e43e59c6f00045e2988464d6a791274dbd58f082

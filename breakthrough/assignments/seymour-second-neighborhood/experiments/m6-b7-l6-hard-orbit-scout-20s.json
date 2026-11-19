@@ -1,0 +1,430 @@
+{
+  "manifest_sha256": "6c1080c6f97f92e68a9de6bc762145ceac9086f0b87dc4aa4ed73a746861b2d4",
+  "rows": [
+    {
+      "cnf_sha256": "55efac0f25d87ea553c0a526e75df4466c00167ccb5418ff8bdbd8c10cdf5285",
+      "intersection_t": 0,
+      "key": "s01-t0",
+      "leaf": 0,
+      "parents": 6,
+      "seconds": 20.005,
+      "state_leaf": 1,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "54e7dcd27220c48fa09d75600f67e983834835b6a1043c89e7649249516654ad",
+      "intersection_t": 0,
+      "key": "s03-t0",
+      "leaf": 1,
+      "parents": 6,
+      "seconds": 20.006,
+      "state_leaf": 3,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "9417218c502f1aa173fb91bb244f54e48035ede287c2fa14dd41cf419492e427",
+      "intersection_t": 1,
+      "key": "s03-t1",
+      "leaf": 2,
+      "parents": 6,
+      "seconds": 20.007,
+      "state_leaf": 3,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "ff3da21e285f6a995b1719680b6a413f9ac4849239ac3097731bfa122640139e",
+      "intersection_t": 0,
+      "key": "s05-t0",
+      "leaf": 3,
+      "parents": 6,
+      "seconds": 20.007,
+      "state_leaf": 5,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "ab9f2254d1d0cbb447477cd0c1512007d7057959c3ef17fa8de340d92a87c334",
+      "intersection_t": 0,
+      "key": "s07-t0",
+      "leaf": 4,
+      "parents": 6,
+      "seconds": 20.006,
+      "state_leaf": 7,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "17cd2bd69f40598e2e462b1e2ae5df5d174766018a2771a298a02af85e2ce8a0",
+      "intersection_t": 0,
+      "key": "s09-t0",
+      "leaf": 5,
+      "parents": 6,
+      "seconds": 20.005,
+      "state_leaf": 9,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "89b4a872664978583ec2fc6b09cb669483d61df65adc35da942e6e13ba193f14",
+      "intersection_t": 1,
+      "key": "s09-t1",
+      "leaf": 6,
+      "parents": 6,
+      "seconds": 20.007,
+      "state_leaf": 9,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "9a15b5254ff772233f2f787e2b7794a9f25c49f06cf35daffe0bde6d32b83f62",
+      "intersection_t": 0,
+      "key": "s11-t0",
+      "leaf": 7,
+      "parents": 10,
+      "seconds": 0.18,
+      "state_leaf": 11,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "097e672f2f25c5b69f7fae6628a7e2d8bbb746bdddca1df24f8e4a18f54d7585",
+      "intersection_t": 1,
+      "key": "s11-t1",
+      "leaf": 8,
+      "parents": 10,
+      "seconds": 20.006,
+      "state_leaf": 11,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "47f38cb2a1c50f994804aee629d423b1f65c4d6ab97f423d13fbaf3e88640e86",
+      "intersection_t": 0,
+      "key": "s12-t0",
+      "leaf": 9,
+      "parents": 10,
+      "seconds": 0.236,
+      "state_leaf": 12,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "6190c1b42a724b21d464ba6cd18c80aaa1cca75a0b265e34ae87057d81d56df5",
+      "intersection_t": 1,
+      "key": "s12-t1",
+      "leaf": 10,
+      "parents": 10,
+      "seconds": 0.187,
+      "state_leaf": 12,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "2c8774d2ef2a4d86f8293ebfc98543dfa52193ffeff87519a53823147d33bb7d",
+      "intersection_t": 2,
+      "key": "s12-t2",
+      "leaf": 11,
+      "parents": 10,
+      "seconds": 20.006,
+      "state_leaf": 12,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "385d70505cc2a32968bafcb93a2f21b664ffdaa5d0a6d475e0a93b7390136116",
+      "intersection_t": 0,
+      "key": "s13-t0",
+      "leaf": 12,
+      "parents": 10,
+      "seconds": 20.006,
+      "state_leaf": 13,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "877ef8ad8a6a0a00f85e5d7a10b668c681cd90aaf257fbea5d11858c2ad3234a",
+      "intersection_t": 1,
+      "key": "s13-t1",
+      "leaf": 13,
+      "parents": 10,
+      "seconds": 20.006,
+      "state_leaf": 13,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "1e09b605c1edaa8e71882f99a6180e0f837c47e38bf5fc974ef1be458e7ec48b",
+      "intersection_t": 2,
+      "key": "s13-t2",
+      "leaf": 14,
+      "parents": 10,
+      "seconds": 20.006,
+      "state_leaf": 13,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "7a9dc616a3f01a8d43ec00a8e7f719469fc568d0b6d809fb1121023501028e7f",
+      "intersection_t": 0,
+      "key": "s15-t0",
+      "leaf": 15,
+      "parents": 10,
+      "seconds": 20.007,
+      "state_leaf": 15,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "18ea5e8cc10b148e064a386aa89e57a93d7935815afaff14cda03f01b510f576",
+      "intersection_t": 0,
+      "key": "s17-t0",
+      "leaf": 16,
+      "parents": 10,
+      "seconds": 20.007,
+      "state_leaf": 17,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "f44f66210cc02f8b5d735d44c8eafa3a9c73cc4f799cacfb1bb4522c22a633c5",
+      "intersection_t": 1,
+      "key": "s17-t1",
+      "leaf": 17,
+      "parents": 10,
+      "seconds": 20.008,
+      "state_leaf": 17,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "be136a310e35cebe04be07fb655f56c4355e5b78e5ae7bb71cf6fa745ac58333",
+      "intersection_t": 0,
+      "key": "s19-t0",
+      "leaf": 18,
+      "parents": 10,
+      "seconds": 0.186,
+      "state_leaf": 19,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "5e5f6591057aac59c7b7ea8aebdf4660aa1fd633596feefe1ba5ff1c431008cf",
+      "intersection_t": 1,
+      "key": "s19-t1",
+      "leaf": 19,
+      "parents": 10,
+      "seconds": 20.006,
+      "state_leaf": 19,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "0fb7cbf5ae744b3d41f2998b481313bd70798190c66f7b8badd7b2d3480b6fa2",
+      "intersection_t": 0,
+      "key": "s20-t0",
+      "leaf": 20,
+      "parents": 10,
+      "seconds": 18.419,
+      "state_leaf": 20,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "a329deb82df6f3c3bdf9e1f9e34cf8b7b49d602517250d23b8208b6cac6d4b0f",
+      "intersection_t": 1,
+      "key": "s20-t1",
+      "leaf": 21,
+      "parents": 10,
+      "seconds": 19.277,
+      "state_leaf": 20,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "d57e7d6e34a51d6de12ce634c3f182d3d5082d2185abab3697aecb4451be3bec",
+      "intersection_t": 2,
+      "key": "s20-t2",
+      "leaf": 22,
+      "parents": 10,
+      "seconds": 6.34,
+      "state_leaf": 20,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "9749d40cbfa01d42f2bdeb9485eef7fdc3cb1a33c7b2145b21aacef037ca1865",
+      "intersection_t": 0,
+      "key": "s21-t0",
+      "leaf": 23,
+      "parents": 10,
+      "seconds": 20.005,
+      "state_leaf": 21,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "b9a49ed77017944a86f9f7312530184f5c3dfc637e4f6cc72d8a135bafeac84f",
+      "intersection_t": 1,
+      "key": "s21-t1",
+      "leaf": 24,
+      "parents": 10,
+      "seconds": 20.006,
+      "state_leaf": 21,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "6de5b335bdf5cdde929ab4776093edfa1146ee31635c4e151e5d6d8bfaaefbee",
+      "intersection_t": 2,
+      "key": "s21-t2",
+      "leaf": 25,
+      "parents": 10,
+      "seconds": 20.006,
+      "state_leaf": 21,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "3a82967538dea86367a4373e4dc2fd9c7eb9a3ef0b83e493fb180a6e5a8282ee",
+      "intersection_t": 0,
+      "key": "s23-t0",
+      "leaf": 26,
+      "parents": 10,
+      "seconds": 10.072,
+      "state_leaf": 23,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "77b37aaee0965d7b3709cbfcc04583fec7f0043c0e3de6efa882e200a7360cfb",
+      "intersection_t": 1,
+      "key": "s23-t1",
+      "leaf": 27,
+      "parents": 10,
+      "seconds": 5.482,
+      "state_leaf": 23,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "f15f0d79a43482f6101ebd1b7ebae32521abc718daf2a85a6467852dc9ad8607",
+      "intersection_t": 0,
+      "key": "s24-t0",
+      "leaf": 28,
+      "parents": 10,
+      "seconds": 0.196,
+      "state_leaf": 24,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "d338019acb7748aa614605510182abab817a57bcf94efc6f2ffed38979cac8b1",
+      "intersection_t": 1,
+      "key": "s24-t1",
+      "leaf": 29,
+      "parents": 10,
+      "seconds": 0.187,
+      "state_leaf": 24,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "8abd09d5c66589831d10e82af46d85edd8deb49e469dae31912f7e94e356e9ed",
+      "intersection_t": 2,
+      "key": "s24-t2",
+      "leaf": 30,
+      "parents": 10,
+      "seconds": 20.006,
+      "state_leaf": 24,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "83c8824851e25b4e6e7a09a2689ccd54fb4783bc6dcf490b0c2063b96ab0a05f",
+      "intersection_t": 0,
+      "key": "s25-t0",
+      "leaf": 31,
+      "parents": 10,
+      "seconds": 20.009,
+      "state_leaf": 25,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "3da7659a4b3114b67085f6d8ed535e70b44b37bee5957463a6a8c73190154a58",
+      "intersection_t": 1,
+      "key": "s25-t1",
+      "leaf": 32,
+      "parents": 10,
+      "seconds": 20.006,
+      "state_leaf": 25,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "24483894645febc76c6559e26645713949536d499a44bef14407836a3501a5f3",
+      "intersection_t": 2,
+      "key": "s25-t2",
+      "leaf": 33,
+      "parents": 10,
+      "seconds": 20.007,
+      "state_leaf": 25,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "fd186717ae571de21b3b7ad50c58b337b171c7f97d5d7ad2ad0a8d41686dc365",
+      "intersection_t": 0,
+      "key": "s27-t0",
+      "leaf": 34,
+      "parents": 10,
+      "seconds": 0.205,
+      "state_leaf": 27,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "de1c4e139f13049d59a11015831ff112f6ebdf8a19ee97e1e0803fa760ea2c76",
+      "intersection_t": 1,
+      "key": "s27-t1",
+      "leaf": 35,
+      "parents": 10,
+      "seconds": 0.187,
+      "state_leaf": 27,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "ca1eb164cd1c6c9ec96dc802a079dde9cbb3002a391053d079d7d0cb6977e977",
+      "intersection_t": 2,
+      "key": "s27-t2",
+      "leaf": 36,
+      "parents": 10,
+      "seconds": 20.008,
+      "state_leaf": 27,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "de7d53cd5d3b5b0d32655eb85a8ac9f7f45688cd5d28097359e675dfed6ea5bf",
+      "intersection_t": 0,
+      "key": "s28-t0",
+      "leaf": 37,
+      "parents": 10,
+      "seconds": 20.006,
+      "state_leaf": 28,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "4e70c192ae21151f8784a2215ca63d95b08a96efe566d582092147fb72413928",
+      "intersection_t": 1,
+      "key": "s28-t1",
+      "leaf": 38,
+      "parents": 10,
+      "seconds": 9.76,
+      "state_leaf": 28,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "a3f0f114b885501ecc36a74a229abf6fbe8e3b02fedf4befbba37ce880ef74e5",
+      "intersection_t": 0,
+      "key": "s29-t0",
+      "leaf": 39,
+      "parents": 10,
+      "seconds": 20.008,
+      "state_leaf": 29,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "c36bba808aab42be9a7d3e96639af019f40d059571ee3b7e11dcc72e601750b5",
+      "intersection_t": 1,
+      "key": "s29-t1",
+      "leaf": 40,
+      "parents": 10,
+      "seconds": 20.008,
+      "state_leaf": 29,
+      "status": "TIMEOUT"
+    },
+    {
+      "cnf_sha256": "4797a6e394285f4a4d6ca40ee689b27073b31725eb56e94efcca075f5a186525",
+      "intersection_t": 2,
+      "key": "s29-t2",
+      "leaf": 41,
+      "parents": 10,
+      "seconds": 20.007,
+      "state_leaf": 29,
+      "status": "TIMEOUT"
+    }
+  ],
+  "schema": "m6-b7-l6-hard-orbit-scout-v1",
+  "seconds_per_leaf": 20,
+  "solver": "/tmp/opencode/cadical-1.7.3/build/cadical",
+  "solver_bytes": 1002216,
+  "solver_sha256": "108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292"
+}

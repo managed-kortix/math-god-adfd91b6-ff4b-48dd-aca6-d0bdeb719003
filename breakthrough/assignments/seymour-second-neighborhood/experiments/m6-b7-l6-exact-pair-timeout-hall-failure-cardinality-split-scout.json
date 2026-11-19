@@ -1,0 +1,303 @@
+{
+  "cadical": {
+    "bytes": 1002216,
+    "name": "CaDiCaL 1.7.3",
+    "options": [
+      "--restart=false",
+      "--phase=false",
+      "--seed=3"
+    ],
+    "sha256": "108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292"
+  },
+  "children": 28,
+  "kissat": {
+    "bytes": 566856,
+    "name": "Kissat 4.0.4",
+    "options": [],
+    "sha256": "aa511b55186449eaaa6b421510a8aaa8660d879f50924ce9c45606e7df7ab41f"
+  },
+  "manifest_sha256": "3b4dfec75a3b87759a82096f2f8809895326b57bceacd80a2bc5f051a3df6695",
+  "rows": [
+    {
+      "cadical_nanoseconds": 163505157,
+      "cadical_status": "UNSAT",
+      "cardinality": 1,
+      "child": 0,
+      "cnf_sha256": "a5ff2b32b35c8269b3e30397c461a90a27a572d0c3d9ff6b0204519274d1a6ae",
+      "kissat_nanoseconds": 84136126,
+      "kissat_status": "UNSAT",
+      "membership": 28
+    },
+    {
+      "cadical_nanoseconds": 174413878,
+      "cadical_status": "UNSAT",
+      "cardinality": 2,
+      "child": 1,
+      "cnf_sha256": "d1efee2185bbe9cf63399393cb570bb581f794be088b63681d88527ffdaf9426",
+      "kissat_nanoseconds": 191598763,
+      "kissat_status": "UNSAT",
+      "membership": 28
+    },
+    {
+      "cadical_nanoseconds": 188403411,
+      "cadical_status": "UNSAT",
+      "cardinality": 3,
+      "child": 2,
+      "cnf_sha256": "1eb37079e2bb707c562d582cc1b8dbac55b68fbccab653aa08e8e568d42e0e0a",
+      "kissat_nanoseconds": 193507870,
+      "kissat_status": "UNSAT",
+      "membership": 28
+    },
+    {
+      "cadical_nanoseconds": 220942448,
+      "cadical_status": "UNSAT",
+      "cardinality": 4,
+      "child": 3,
+      "cnf_sha256": "c75d6466f2df70881e2b3a7b7f4907807385a81e20aae0e0cf9f8d2ec0903c16",
+      "kissat_nanoseconds": 226804926,
+      "kissat_status": "UNSAT",
+      "membership": 28
+    },
+    {
+      "cadical_nanoseconds": 335564003,
+      "cadical_status": "UNSAT",
+      "cardinality": 5,
+      "child": 4,
+      "cnf_sha256": "0ea5651ab4d1cbeeb3badd02b3d3743e7ab10e4f506d82c7cf3b94c4b9886eaa",
+      "kissat_nanoseconds": 820755768,
+      "kissat_status": "UNSAT",
+      "membership": 28
+    },
+    {
+      "cadical_nanoseconds": 170664891,
+      "cadical_status": "UNSAT",
+      "cardinality": 6,
+      "child": 5,
+      "cnf_sha256": "07a3b6f9f9ba3ebc3617dcc95d1178606ef97a0d6f135bf8b0746e03abc6f493",
+      "kissat_nanoseconds": 191853244,
+      "kissat_status": "UNSAT",
+      "membership": 28
+    },
+    {
+      "cadical_nanoseconds": 165679156,
+      "cadical_status": "UNSAT",
+      "cardinality": 7,
+      "child": 6,
+      "cnf_sha256": "afc9759f703dc6e1fb22367b2eb2bebf2b185ff16a7b910189a907144e0210ab",
+      "kissat_nanoseconds": 186701558,
+      "kissat_status": "UNSAT",
+      "membership": 28
+    },
+    {
+      "cadical_nanoseconds": 162764493,
+      "cadical_status": "UNSAT",
+      "cardinality": 1,
+      "child": 7,
+      "cnf_sha256": "48c8637f60852d7dcdbbd801f6f4ae628e8096aeab4e2fe2fc92c2c5f9848074",
+      "kissat_nanoseconds": 86278758,
+      "kissat_status": "UNSAT",
+      "membership": 54
+    },
+    {
+      "cadical_nanoseconds": 174796649,
+      "cadical_status": "UNSAT",
+      "cardinality": 2,
+      "child": 8,
+      "cnf_sha256": "07900d50f35c8c76997297c7cc120368b13ae65157baf95b48c00e0232d678d5",
+      "kissat_nanoseconds": 189089934,
+      "kissat_status": "UNSAT",
+      "membership": 54
+    },
+    {
+      "cadical_nanoseconds": 182793960,
+      "cadical_status": "UNSAT",
+      "cardinality": 3,
+      "child": 9,
+      "cnf_sha256": "ec08c3a94c939f87e692a2aa20e9bc6dea025edf4919e2b22c6ae35c2b691efd",
+      "kissat_nanoseconds": 191519313,
+      "kissat_status": "UNSAT",
+      "membership": 54
+    },
+    {
+      "cadical_nanoseconds": 218818622,
+      "cadical_status": "UNSAT",
+      "cardinality": 4,
+      "child": 10,
+      "cnf_sha256": "de6b6fea73a0311badfcebc3988412132de180f39f72bc46e7c05aee0d46c976",
+      "kissat_nanoseconds": 258912084,
+      "kissat_status": "UNSAT",
+      "membership": 54
+    },
+    {
+      "cadical_nanoseconds": 256929231,
+      "cadical_status": "UNSAT",
+      "cardinality": 5,
+      "child": 11,
+      "cnf_sha256": "18341cc2f0ad665441c79c1d5cd68d01178366752c87b43fb1483a84bca729c5",
+      "kissat_nanoseconds": 247155004,
+      "kissat_status": "UNSAT",
+      "membership": 54
+    },
+    {
+      "cadical_nanoseconds": 170680577,
+      "cadical_status": "UNSAT",
+      "cardinality": 6,
+      "child": 12,
+      "cnf_sha256": "d43ad9284d38dcf62efda98716826870cd45b9c863f8ea86f74afcfb90534651",
+      "kissat_nanoseconds": 194454968,
+      "kissat_status": "UNSAT",
+      "membership": 54
+    },
+    {
+      "cadical_nanoseconds": 166925913,
+      "cadical_status": "UNSAT",
+      "cardinality": 7,
+      "child": 13,
+      "cnf_sha256": "179a627e9d02cba1c56865dd05c97418b7ee7ab4872236e03ca5c16a5fe12a97",
+      "kissat_nanoseconds": 192101288,
+      "kissat_status": "UNSAT",
+      "membership": 54
+    },
+    {
+      "cadical_nanoseconds": 166366571,
+      "cadical_status": "UNSAT",
+      "cardinality": 1,
+      "child": 14,
+      "cnf_sha256": "2b6fbc7b7f4d989f1dbef2a877432728b90f65a586e944287ccc371db64d0515",
+      "kissat_nanoseconds": 86617534,
+      "kissat_status": "UNSAT",
+      "membership": 69
+    },
+    {
+      "cadical_nanoseconds": 174244335,
+      "cadical_status": "UNSAT",
+      "cardinality": 2,
+      "child": 15,
+      "cnf_sha256": "472dde827eab8eb6879d62a46090caeed337c76e22accf615a0edc8c99827af9",
+      "kissat_nanoseconds": 192068147,
+      "kissat_status": "UNSAT",
+      "membership": 69
+    },
+    {
+      "cadical_nanoseconds": 187468891,
+      "cadical_status": "UNSAT",
+      "cardinality": 3,
+      "child": 16,
+      "cnf_sha256": "836989d9b3c9d859dd297688e27ae4171c82906b32bb3583205c317047253844",
+      "kissat_nanoseconds": 193915812,
+      "kissat_status": "UNSAT",
+      "membership": 69
+    },
+    {
+      "cadical_nanoseconds": 221871447,
+      "cadical_status": "UNSAT",
+      "cardinality": 4,
+      "child": 17,
+      "cnf_sha256": "740d542b23d7df86d5250a01bae0b8d571cd7fa0cedd2610090064e1a14fee15",
+      "kissat_nanoseconds": 220546763,
+      "kissat_status": "UNSAT",
+      "membership": 69
+    },
+    {
+      "cadical_nanoseconds": 328139867,
+      "cadical_status": "UNSAT",
+      "cardinality": 5,
+      "child": 18,
+      "cnf_sha256": "d5a3b9604118bd0477dbdd528a5a80b155a3e607581aee11abebe6a38757da0c",
+      "kissat_nanoseconds": 316779681,
+      "kissat_status": "UNSAT",
+      "membership": 69
+    },
+    {
+      "cadical_nanoseconds": 170328110,
+      "cadical_status": "UNSAT",
+      "cardinality": 6,
+      "child": 19,
+      "cnf_sha256": "eaf2716deb62ed50b69e884c54610f2557b134ef5531845005a214298b79ae31",
+      "kissat_nanoseconds": 192965985,
+      "kissat_status": "UNSAT",
+      "membership": 69
+    },
+    {
+      "cadical_nanoseconds": 163269669,
+      "cadical_status": "UNSAT",
+      "cardinality": 7,
+      "child": 20,
+      "cnf_sha256": "04d751e0cedacd83934c54dee6bd41e477cdbf5b39ca95ec05e86dba2a5b22e7",
+      "kissat_nanoseconds": 186727778,
+      "kissat_status": "UNSAT",
+      "membership": 69
+    },
+    {
+      "cadical_nanoseconds": 167339142,
+      "cadical_status": "UNSAT",
+      "cardinality": 1,
+      "child": 21,
+      "cnf_sha256": "1454698d01a1c459e6e7771cfbbf0a809603c625decad72b1c50c683e1933029",
+      "kissat_nanoseconds": 84592492,
+      "kissat_status": "UNSAT",
+      "membership": 70
+    },
+    {
+      "cadical_nanoseconds": 175715816,
+      "cadical_status": "UNSAT",
+      "cardinality": 2,
+      "child": 22,
+      "cnf_sha256": "81ec7f9e587d856b519a11084ff06cf7f78aa6c7129c13da72d341c40ab6411a",
+      "kissat_nanoseconds": 192497160,
+      "kissat_status": "UNSAT",
+      "membership": 70
+    },
+    {
+      "cadical_nanoseconds": 187801328,
+      "cadical_status": "UNSAT",
+      "cardinality": 3,
+      "child": 23,
+      "cnf_sha256": "1ee22207300b092ff0b1bd2fcab40883ee59d023b99a3d67aeb04ec390dfbd50",
+      "kissat_nanoseconds": 194340129,
+      "kissat_status": "UNSAT",
+      "membership": 70
+    },
+    {
+      "cadical_nanoseconds": 222217910,
+      "cadical_status": "UNSAT",
+      "cardinality": 4,
+      "child": 24,
+      "cnf_sha256": "b85eb68ec10485bce1b915e11694d8ea542824d526e8f2ef52094632b9b4e012",
+      "kissat_nanoseconds": 225822095,
+      "kissat_status": "UNSAT",
+      "membership": 70
+    },
+    {
+      "cadical_nanoseconds": 339734771,
+      "cadical_status": "UNSAT",
+      "cardinality": 5,
+      "child": 25,
+      "cnf_sha256": "381dde658fd943c207812540e690e70ddd60ce69b8b124693d352dc066c5ce1b",
+      "kissat_nanoseconds": 350353785,
+      "kissat_status": "UNSAT",
+      "membership": 70
+    },
+    {
+      "cadical_nanoseconds": 170605545,
+      "cadical_status": "UNSAT",
+      "cardinality": 6,
+      "child": 26,
+      "cnf_sha256": "dc6afe168677489a952bbba8411e60e81369b11d0515ce6057d6ddd5ff2a08f8",
+      "kissat_nanoseconds": 192846329,
+      "kissat_status": "UNSAT",
+      "membership": 70
+    },
+    {
+      "cadical_nanoseconds": 164536736,
+      "cadical_status": "UNSAT",
+      "cardinality": 7,
+      "child": 27,
+      "cnf_sha256": "e40ebd124fc83455cc92c597e92b26e57394379f75583dac3e28fda829ebd94c",
+      "kissat_nanoseconds": 187629870,
+      "kissat_status": "UNSAT",
+      "membership": 70
+    }
+  ],
+  "schema": "m6-b7-l6-exact-pair-timeout-hall-failure-cardinality-split-scout-v1"
+}

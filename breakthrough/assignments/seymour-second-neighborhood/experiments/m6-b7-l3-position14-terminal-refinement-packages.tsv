@@ -1,0 +1,11 @@
+m6-b7-l3-position14-terminal-refinement-packages-v1
+compressed-limit-bytes-exclusive	150000000
+packages	5
+leaves	60
+artifact-set-hash-format	sha256(leaf-tab-xz-bytes-tab-xz-sha256-tab-artifact-newline)
+columns	package,leaf-range,leaves,xz-bytes,artifact-set-sha256
+00	00-14	15	146504520	a72cc0d55b2d8dfad00e058098a215b126480c69c4c4169541570d1fd296bab4
+01	15-28	14	148087124	b78d874550c846dab907144e44363b6fb8a309a9dde0f2b867abe12177c062eb
+02	29-40	12	147215456	6800949c745337b647998c7754d15336b5738c455fbbe9b250db97c81182277c
+03	41-56	16	149063808	4bbfcf69d427d645ffcd18379dd420e0a2aefb5fe0372881dfaace992fe020a9
+04	57-59	3	13221872	3fb2f92dc0ef06c972f8c525f9bd5c8f93b2b4707e6a8ef024d077cffcbe1542

@@ -1,0 +1,278 @@
+{
+  "census_bytes": 5512,
+  "census_sha256": "b5f6175c44561af0cdf59aa1b799e2e1b279cd962c0117bf22e2a33d8bbbf82d",
+  "jobs": 2,
+  "rows": [
+    {
+      "class": "exceptional-membership000",
+      "cnf_sha256": "05ca2d16ea81986f151f34002dffae4f50168b7c61f1136cbafe3e6c914e6888",
+      "job": 0,
+      "membership": 0,
+      "seconds": 10.008,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b2-chi1",
+      "cnf_sha256": "7640f49338426e0795aa5fe5edfdb7c90aa2d8e92a7c614171bd491b978ba20d",
+      "job": 1,
+      "membership": 3,
+      "seconds": 10.009,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b2-chi2",
+      "cnf_sha256": "5220906c4c773d7bf6821311a9dccddf884b5598052f55a6fbb4469ff61178ad",
+      "job": 0,
+      "membership": 5,
+      "seconds": 10.009,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b2-chi2",
+      "cnf_sha256": "deafcad2902179855fe9a2c2a6f6b9e60bf52186725be1cc5f82a3334d07ec46",
+      "job": 1,
+      "membership": 6,
+      "seconds": 10.01,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon1-b2-chi1",
+      "cnf_sha256": "88f32d6eb98bf9092e3d856e0862f21e5e90fcc88cde99f5a3230322dca42eed",
+      "job": 0,
+      "membership": 10,
+      "seconds": 10.007,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b2-chi2",
+      "cnf_sha256": "1a41ff60f196faf0c9df58ef7800bd5a1f85dc3d540870df87a3fffe21337774",
+      "job": 1,
+      "membership": 11,
+      "seconds": 10.005,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon1-b2-chi1",
+      "cnf_sha256": "a9c96a11d2de62ff1dc69b69356fbec3ab8740bc188d2cf27940f386d3c6bbd3",
+      "job": 0,
+      "membership": 14,
+      "seconds": 10.011,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon1-b2-chi1",
+      "cnf_sha256": "13f3dede6588750c2f688938a694786f787899345d1a80c2a5fe6798ae2e630c",
+      "job": 1,
+      "membership": 15,
+      "seconds": 10.008,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon1-b2-chi2",
+      "cnf_sha256": "b5d5e2dc4a20392f6711aae83d5b2499f71e394046eb1c39ec7bf05ed59e6981",
+      "job": 0,
+      "membership": 19,
+      "seconds": 10.013,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon1-b0-chi4",
+      "cnf_sha256": "d6695395b5f5de0a0eb9b50bba644eb40ad6eb89fa14a6968ddc69a57d463cc7",
+      "job": 1,
+      "membership": 22,
+      "seconds": 10.009,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b0-chi5",
+      "cnf_sha256": "11375f9e6f4891d5ce085a23ff7488cbfe969cfd364619b5a394bda91e90f6e0",
+      "job": 0,
+      "membership": 23,
+      "seconds": 10.029,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b1-chi4",
+      "cnf_sha256": "9bd96ad9a25eed329c5f5f68c17a88d29cbd3e3dcf1cd79ef664094691b5eeb6",
+      "job": 1,
+      "membership": 24,
+      "seconds": 10.007,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon1-b1-chi2",
+      "cnf_sha256": "17a23fc38577e99460175a066a4525bf752ce0bc76ea6f8408f13e7bcb3f999a",
+      "job": 0,
+      "membership": 28,
+      "seconds": 10.018,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon1-b1-chi3",
+      "cnf_sha256": "8fcf55e1827b7f47c8525c4b4ba4fcd72992ccfd01333aa77efe929f8364bac9",
+      "job": 1,
+      "membership": 33,
+      "seconds": 10.007,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b1-chi3",
+      "cnf_sha256": "5c60a267aef1fb14826d6d615e086a01a88a1475461ca0352aafbdbc5ad3aba5",
+      "job": 0,
+      "membership": 34,
+      "seconds": 10.017,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b2-chi3",
+      "cnf_sha256": "8106cf4897ab129c7f417a1a7784be652af3edf16aff6001bf7c4de19f8da05c",
+      "job": 1,
+      "membership": 39,
+      "seconds": 10.007,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b2-chi1",
+      "cnf_sha256": "d36b15e33dc63acf455843937997b2d3c150bd6eada5d62de5a287130f53d46f",
+      "job": 0,
+      "membership": 44,
+      "seconds": 10.021,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b2-chi3",
+      "cnf_sha256": "e5c1604c32b8409f6b05ef5ed443a26ad9bcf3f86fb25492a7cb74f41c5a31ca",
+      "job": 1,
+      "membership": 47,
+      "seconds": 10.009,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon1-b2-chi1",
+      "cnf_sha256": "5e57f63aade2c08d65f3bb289dba1365846226445b9563239b9f2173e99b14b9",
+      "job": 0,
+      "membership": 51,
+      "seconds": 10.017,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b2-chi2",
+      "cnf_sha256": "f615374add30ec308c47154384e0598990607b689a28075dbb30825ccfc14394",
+      "job": 1,
+      "membership": 54,
+      "seconds": 10.013,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b2-chi2",
+      "cnf_sha256": "e86e22db25328761cae636f502b7c1959c53f801edd047d65585609a5625ade4",
+      "job": 0,
+      "membership": 59,
+      "seconds": 10.007,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon1-b0-chi3",
+      "cnf_sha256": "2ec11c79867ba8b036bef75f6c436f4bc56ed89e1afd5e31a83c2a361d694697",
+      "job": 1,
+      "membership": 61,
+      "seconds": 10.006,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b0-chi4",
+      "cnf_sha256": "a92904f8b70b86a32efd04e7cfb8a1e367b9e1968f916c35f59a0685a593dbb1",
+      "job": 0,
+      "membership": 62,
+      "seconds": 10.009,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon1-b1-chi1",
+      "cnf_sha256": "b28f190c8beeaf169676d133df29aa6dc4369e154a325e1797a48ff89eb7c404",
+      "job": 1,
+      "membership": 64,
+      "seconds": 10.007,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon1-b1-chi2",
+      "cnf_sha256": "bb2dd45f821217f9fa637479ddbc2aae5f2a35e7e4238a389219c643a68988c9",
+      "job": 0,
+      "membership": 69,
+      "seconds": 10.006,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b1-chi2",
+      "cnf_sha256": "b3844855558855d382f889b251342fcaee93a57dcb2b57e53aaaa45ed5308846",
+      "job": 1,
+      "membership": 70,
+      "seconds": 10.006,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b1-chi3",
+      "cnf_sha256": "8526127d05506bc0f4b5d875bcbc5f2eba1abd530dbaea16c08a618d48301743",
+      "job": 0,
+      "membership": 75,
+      "seconds": 10.021,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b2-chi1",
+      "cnf_sha256": "f352dfaf55698ce260290b287a61fdf25eb6026b1e03f72523c15d35b753b3ae",
+      "job": 1,
+      "membership": 80,
+      "seconds": 10.014,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b2-chi1",
+      "cnf_sha256": "0dbace292e226ba46cd4103ede8bd4144649c66387a6dea619a62e1ea100d7d2",
+      "job": 0,
+      "membership": 82,
+      "seconds": 10.051,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b2-chi2",
+      "cnf_sha256": "58239bb03835cbfc5c0d2d1ecda12bb9088cf306f64c515ec8768f4cecd155d6",
+      "job": 1,
+      "membership": 84,
+      "seconds": 10.007,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b2-chi1",
+      "cnf_sha256": "d8f9b617344e3001a761599d5591c20feadf258778b09510a1608950362cc3fb",
+      "job": 0,
+      "membership": 91,
+      "seconds": 10.026,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon0-b2-chi2",
+      "cnf_sha256": "42ba8149941e10dca2f600905a272e2a68bb00d970c0d6e87ccf872b9cbe793c",
+      "job": 1,
+      "membership": 93,
+      "seconds": 10.006,
+      "status": "TIMEOUT"
+    },
+    {
+      "class": "epsilon1-b2-chi1",
+      "cnf_sha256": "ad5ed17e30f5e673b70def97be7b90ebc15321d0e6dcd018c09f294b4f8fc403",
+      "job": 0,
+      "membership": 97,
+      "seconds": 10.005,
+      "status": "TIMEOUT"
+    }
+  ],
+  "schema": "m6-b7-l6-exact-pair-timeout-complete-cut-scout-v1",
+  "seconds_per_membership": 10,
+  "solver": "/tmp/opencode/cadical-1.7.3/build/cadical",
+  "solver_bytes": 1002216,
+  "solver_sha256": "108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292",
+  "solver_version": "1.7.3",
+  "status_sequence_sha256": "bd9b1304bdb82648e6b6ce592d2b25a73b7813f87c4ae473be9eacfbf5808397"
+}

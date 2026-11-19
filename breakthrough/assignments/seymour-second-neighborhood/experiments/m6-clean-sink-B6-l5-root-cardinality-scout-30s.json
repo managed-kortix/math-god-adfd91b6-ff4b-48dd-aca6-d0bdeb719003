@@ -1,0 +1,27 @@
+{
+  "groups": 1,
+  "parents": 1024,
+  "rows": [
+    {
+      "cnf_bytes": 13166494,
+      "cnf_sha256": "79a5a83b449ca4c422e7a7156d11b418ca6b47f6c172ec00a1afd818782094ae",
+      "group": "B6-l5",
+      "nanoseconds": 12619569318,
+      "parents": 1024,
+      "status": "UNSAT"
+    }
+  ],
+  "sat": 0,
+  "schema": "m6-clean-sink-B6-l5-root-cardinality-scout-v1",
+  "seconds": 30,
+  "solver_bytes": 1002216,
+  "solver_options": [
+    "--restart=false",
+    "--phase=false",
+    "--seed=3"
+  ],
+  "solver_sha256": "108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292",
+  "solver_version": "1.7.3",
+  "timeout": 0,
+  "unsat": 1
+}

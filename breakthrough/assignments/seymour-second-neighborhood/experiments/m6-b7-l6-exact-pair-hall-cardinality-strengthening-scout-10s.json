@@ -1,0 +1,285 @@
+{
+  "hash_ledger_bytes": 3944,
+  "hash_ledger_sha256": "982b9bcb49fc9632c8b659cf3e518e539f53827971c1c8ee7131d0a639c5c58a",
+  "jobs": 8,
+  "manifest_bytes": 3914,
+  "manifest_sha256": "39925120a007afa29ff5c1c09e46651bea122c508752e7544a67e8bbe41e711b",
+  "rows": [
+    {
+      "cnf_sha256": "fb1af36e5a130a878b3a5e3c7c402119a7429d70a63b0648d01931c67d4a122e",
+      "job": 0,
+      "membership": 0,
+      "position": 0,
+      "seconds": 1.283,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "70cc6752f86564030517569a0593e11ca162e6bc6153785b2ff9eb4b4d30a5e5",
+      "job": 1,
+      "membership": 3,
+      "position": 1,
+      "seconds": 2.922,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "2ae97e926b2031db6be50b073240ba416393f5f044cf33054f5209a09b0ebafc",
+      "job": 2,
+      "membership": 5,
+      "position": 2,
+      "seconds": 3.011,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "174c364ced7671a4359042c991560e39353de23bcb5a54c84ad26fc989a17d5e",
+      "job": 3,
+      "membership": 6,
+      "position": 3,
+      "seconds": 2.829,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "2718d89fd5966aa5d4bb285a875aaa56e859775b5ddd13c1e71df72713c25103",
+      "job": 4,
+      "membership": 10,
+      "position": 4,
+      "seconds": 2.849,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "8f508a9dba02db40379101a8ecf5e001df4c22241796cbc9e09bf5fa200b50e5",
+      "job": 5,
+      "membership": 11,
+      "position": 5,
+      "seconds": 1.91,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "c7233b1db84c7a4265b9c1750235f67470fa0dae2ee71de21ffd84b66899bcb6",
+      "job": 6,
+      "membership": 14,
+      "position": 6,
+      "seconds": 1.994,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "70d9660d81bc616df6b94e88fea6190c3f326bc2a25261cc335027751d97c9d4",
+      "job": 7,
+      "membership": 15,
+      "position": 7,
+      "seconds": 1.805,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "edc7aa980aa78e59039c7f11cb1c6bf1ed0a2b1005af42a2c7e1047433f886aa",
+      "job": 0,
+      "membership": 19,
+      "position": 8,
+      "seconds": 2.063,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "27f2e5f0c74f009d8656e71bd191327a8ef50d0e1112d2609dc75ead0fb4ba8a",
+      "job": 1,
+      "membership": 22,
+      "position": 9,
+      "seconds": 2.563,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "d0cf0c36a7cbfae9ad5b0f9ba2bcc6066745b3b918c81c6a14706f7241879277",
+      "job": 2,
+      "membership": 23,
+      "position": 10,
+      "seconds": 2.813,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "6f164af0fce77a451190ab04c8ab526ad3776ae45ef794bec6e87b0b99f9e425",
+      "job": 3,
+      "membership": 24,
+      "position": 11,
+      "seconds": 1.83,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "54f5d7aafeb19d15fa98c3bce192722d54d92d7591f9daeaf57f7e83e33cbad0",
+      "job": 4,
+      "membership": 28,
+      "position": 12,
+      "seconds": 1.802,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "aeb7514814464b2ac808f809f2ed05c3f6fdf7c70a4eadac52639e2ce01212c2",
+      "job": 5,
+      "membership": 33,
+      "position": 13,
+      "seconds": 1.66,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "ca619966573eb3cafb46d954aec744aae41318881070ed773cd7e059f1a5b1ff",
+      "job": 6,
+      "membership": 34,
+      "position": 14,
+      "seconds": 1.445,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "e5f976e3260813e5b0f630b7f1e6e326620d3888dda85073f4d1e166279b5fde",
+      "job": 7,
+      "membership": 39,
+      "position": 15,
+      "seconds": 2.112,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "61fb36e02efe85c12c74ef3110fea5837721b00a2570e3d88ec814b7f87819b7",
+      "job": 0,
+      "membership": 44,
+      "position": 16,
+      "seconds": 3.085,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "a5ae308d5992890fa0423c2336cf6d40dbe97e211bca1efd817cde435b1e9e07",
+      "job": 1,
+      "membership": 47,
+      "position": 17,
+      "seconds": 1.822,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "dbc3f48feef6d67d36cc16919cb25bbd8fc3afc8f6f24d4d1b214e2fa2610675",
+      "job": 2,
+      "membership": 51,
+      "position": 18,
+      "seconds": 2.386,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "00484ef783e6f9f9e4f5e13bf159d7391f6930cc3bd719c772679b5b8c78ae29",
+      "job": 3,
+      "membership": 54,
+      "position": 19,
+      "seconds": 1.973,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "82cb4e279c46729df8dc37ec37e9ec43c6826b6bed58bc74afd687f3230a351f",
+      "job": 4,
+      "membership": 59,
+      "position": 20,
+      "seconds": 2.247,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "7a1a0a47b5275001d7f675dbb69b23a3db3ab56bbea2f5fba419ae529cee7a3f",
+      "job": 5,
+      "membership": 61,
+      "position": 21,
+      "seconds": 2.845,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "6ca412681a7ff176cd05d4e6e9423fd0fdb485307310085bf05bc51704659793",
+      "job": 6,
+      "membership": 62,
+      "position": 22,
+      "seconds": 3.071,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "03b28256054394ba8dd9dcf10024ceb5acafbfe14ed1a054c747a7ea37f1cec2",
+      "job": 7,
+      "membership": 64,
+      "position": 23,
+      "seconds": 0.779,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "49160feff69bdfddc73877182b35ef1b5dbd23a6d44744be3e0b80520191df20",
+      "job": 0,
+      "membership": 69,
+      "position": 24,
+      "seconds": 1.66,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "b5ea42f1bb8158ff8fa1f7416f33111d11a64048be7ccbad2ff76f2d54eb52d4",
+      "job": 1,
+      "membership": 70,
+      "position": 25,
+      "seconds": 1.541,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "21278c83081bd6923dc561ffe6e8d9458e875ce411a3360f301c4bf3f9fd030b",
+      "job": 2,
+      "membership": 75,
+      "position": 26,
+      "seconds": 1.454,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "9af09aaabd5a0b7fd5b3222b6ec0a524cb97a1a2e9abf96681577c0b40ccdfb6",
+      "job": 3,
+      "membership": 80,
+      "position": 27,
+      "seconds": 2.391,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "a4f6b8820fd3f46db3702d5f972d03b9ab42340a84b444981d5f40968c7accba",
+      "job": 4,
+      "membership": 82,
+      "position": 28,
+      "seconds": 1.697,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "695ecfae6ffe8d33fcc94f44b1417672c2064cdda8a589eb057b67e766cb385c",
+      "job": 5,
+      "membership": 84,
+      "position": 29,
+      "seconds": 2.265,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "e6b38e3fbc56427e18721bca9b964574567e1fd430b0a0e083435dd95f1f2430",
+      "job": 6,
+      "membership": 91,
+      "position": 30,
+      "seconds": 1.905,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "ea66d323c3412891be9c479fcbb49670425c86f525d8ced8741c7c68d3fce5f2",
+      "job": 7,
+      "membership": 93,
+      "position": 31,
+      "seconds": 0.518,
+      "status": "UNSAT"
+    },
+    {
+      "cnf_sha256": "c1027c5bca43cd99d3d7f7ff94e47e8c97594f63ff9d538b4cf56f1e2ebac237",
+      "job": 0,
+      "membership": 97,
+      "position": 32,
+      "seconds": 0.428,
+      "status": "UNSAT"
+    }
+  ],
+  "schema": "m6-b7-l6-exact-pair-hall-cardinality-strengthening-scout-v1",
+  "seconds_per_membership": 10,
+  "solver": "/tmp/opencode/cadical-1.7.3/build/cadical",
+  "solver_bytes": 1002216,
+  "solver_options": [
+    "--restart=false",
+    "--phase=false",
+    "--seed=3"
+  ],
+  "solver_sha256": "108d1042b38ceae5cb71e4a806870c4f4d4b8ffdb48a124f2e1fb7b23d3a8292",
+  "solver_version": "1.7.3",
+  "status_sequence_sha256": "a9c2ff11008b72cfadcc9ff93d0a86d1e7b0551644c3f0e0b3010975ffc84a99"
+}
