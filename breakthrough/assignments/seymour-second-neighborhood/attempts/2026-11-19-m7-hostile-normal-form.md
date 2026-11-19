@@ -160,5 +160,8 @@ A sound cover begins with three witness patterns, not the two-zone assumption:
    or 2 vertices; tick-12's `2x2` statement applies only to overlap 0);
 3. a low witness `v->q` and a high witness `q->r` (or the symmetric ordering).
 
-Inside each pattern, first split by high location `q in A,B,C` and the 108/378
-C-row orbits above. Only then is a witness-zone overlap cover complete.
+The location refinement is pattern-specific: the shared root has the other high
+in `A`; two distinct low roots each require the other-high `A/B/C` split; and
+in the mixed chain `v->q->r`, the other high lies in `A_v` or `B_v`.
+The exhaustive coarse cover is recorded separately in
+`2026-11-19-m7-witness-pattern-cover.md`.
