@@ -18,6 +18,8 @@ from __future__ import annotations
 
 import hashlib
 import itertools
+import json
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -71,6 +73,10 @@ class Contract:
 
 
 CONTRACT_SPECS = (
+    ("R31K-PACKET-PROOF-v2", Contract(
+        "positive-square-energy/heptacyclic-general/r31-k-complete-physical-closure.md",
+        "1fb4e69f2e1c5a48a3a1da65ca274d473c4a968cf17916076cb24b55433a4428",
+        "reviewed universal proof of the complete physical R31-K packet", None, False)),
     ("R31K-RESIDUAL-SIEVE-v2", Contract(
         "positive-square-energy/heptacyclic-general/rank-seven-multiblock-debit-ledger.md",
         "3f8bb3a397125782dd6c9cae26ce52f9c6bf826e3136dfee62781048e65c18a5",
@@ -105,24 +111,116 @@ CONTRACT_SPECS = (
         "direct shared-cut literal K4 plus triangle has sigma>3", 3, True)),
 )
 CONTRACTS = dict(CONTRACT_SPECS)
-EXPECTED_CONTRACT_IDS = frozenset(name for name, _ in CONTRACT_SPECS)
+
+# Independent canonical anchors.  None is derived from either mutable runtime
+# view above, so simultaneous rebinding of CONTRACT_SPECS and CONTRACTS cannot
+# authenticate altered claim text, floors, strictness, paths, or source hashes.
+EXPECTED_CONTRACT_IDS = frozenset({
+    "R31K-PACKET-PROOF-v2",
+    "R31K-RESIDUAL-SIEVE-v2",
+    "R31K-INDUCED-SUPERADD-v2",
+    "R31K-TREE-EXACT-v2",
+    "R31K-ODD-UNICYCLIC-LOWER-v2",
+    "R31K-TRIANGULAR-BLOCK-v2",
+    "R31K-CACTUS-RANK2PLUS-v2",
+    "R31K-K4-ROOTED-v2",
+    "R31K-K4-T-SHARED-v2",
+})
+EXPECTED_SOURCE_ROWS = frozenset({
+    ("positive-square-energy/heptacyclic-general/r31-k-complete-physical-closure.md",
+     "1fb4e69f2e1c5a48a3a1da65ca274d473c4a968cf17916076cb24b55433a4428"),
+    ("positive-square-energy/heptacyclic-general/rank-seven-multiblock-debit-ledger.md",
+     "3f8bb3a397125782dd6c9cae26ce52f9c6bf826e3136dfee62781048e65c18a5"),
+    ("all-tricyclic-graphs/paper.tex",
+     "4abf3ffa1e09148c060969f4055d878334af9b7358d0764ac42f5e0ffb236b02"),
+    ("all-tricyclic-cacti/paper.tex",
+     "d928a56b0257936fcc326ddc2c85e40593117a7749b55502bb42379c805e71e8"),
+    ("packing-two-square-energy/paper.tex",
+     "9638f6847892e8a043454d945e7945418ec96e393b639dfd65f664670dba8791"),
+    ("all-nonunicyclic-cacti/paper.tex",
+     "26939326e2ad71062617503e106dbd46d99f3d8fe82a98fca858fd3f2f8323f9"),
+})
 
 
-def contract_manifest_digest():
-    rows = sorted({f"{item.source}\t{item.sha256}" for _, item in CONTRACT_SPECS})
+def source_manifest_digest(specs=None):
+    specs = CONTRACT_SPECS if specs is None else specs
+    rows = sorted({f"{item.source}\t{item.sha256}" for _, item in specs})
     return sha256_bytes(("\n".join(rows) + "\n").encode())
 
 
+def full_contract_manifest_bytes(specs=None):
+    specs = CONTRACT_SPECS if specs is None else specs
+    records = []
+    for name, item in specs:
+        floor = ({"kind": "null"} if item.floor is None else
+                 {"kind": "integer", "value": item.floor})
+        records.append({
+            "id": name,
+            "path": item.source,
+            "sha256": item.sha256,
+            "claim": item.claim,
+            "floor": floor,
+            "strict": item.strict,
+        })
+    payload = {"schema": "r31k-contract-manifest-v2", "records": records}
+    return json.dumps(payload, ensure_ascii=True,
+                      separators=(",", ":")).encode("utf-8")
+
+
+def full_contract_manifest_digest(specs=None):
+    return sha256_bytes(full_contract_manifest_bytes(specs))
+
+
+# Filled with independently computed literal digests after defining the exact
+# encoding above.  These constants are never recomputed from mutated globals.
+EXPECTED_FULL_CONTRACT_MANIFEST_SHA256 = "f8a498d4223cdfd0b5c2df08f4fe18234002ecf64861daed57c112b8c307c630"
+EXPECTED_SOURCE_MANIFEST_SHA256 = "65f65068a657c37cad18ecfc0b8104955d81a2e72af614f344f14209ebf1bb0b"
+
+
+def contract_manifest_digest():
+    """Backward-compatible name for the complete full-record manifest."""
+    return full_contract_manifest_digest()
+
+
 def audit_contract_table():
-    require(frozenset(CONTRACTS) == EXPECTED_CONTRACT_IDS,
+    require(type(CONTRACT_SPECS) is tuple,
+            "analytic contract specification container changed")
+    require(all(type(row) is tuple and len(row) == 2 and
+                type(row[0]) is str and type(row[1]) is Contract
+                for row in CONTRACT_SPECS),
+            "analytic contract specification row changed")
+    require(frozenset(name for name, _ in CONTRACT_SPECS) ==
+            EXPECTED_CONTRACT_IDS and len(CONTRACT_SPECS) ==
+            len(EXPECTED_CONTRACT_IDS),
             "analytic contract ID set changed")
-    canonical = dict(CONTRACT_SPECS)
-    require(CONTRACTS == canonical, "analytic contract record changed")
-    for contract_id, item in CONTRACTS.items():
-        require(type(item) is Contract, f"malformed contract: {contract_id}")
-        require(type(item.strict) is bool, f"nonstrict flag malformed: {contract_id}")
+    require(type(CONTRACTS) is dict and frozenset(CONTRACTS) ==
+            EXPECTED_CONTRACT_IDS,
+            "analytic contract lookup changed")
+    require(CONTRACTS == dict(CONTRACT_SPECS),
+            "analytic contract tuple/lookup disagree")
+    for contract_id, item in CONTRACT_SPECS:
+        require(type(contract_id) is str and contract_id,
+                "malformed contract ID")
+        require(type(item.source) is str and item.source,
+                f"malformed source path: {contract_id}")
+        require(type(item.sha256) is str and len(item.sha256) == 64 and
+                all(character in "0123456789abcdef" for character in item.sha256),
+                f"malformed source digest: {contract_id}")
+        require(type(item.claim) is str and item.claim,
+                f"malformed contract claim: {contract_id}")
+        require(type(item.strict) is bool,
+                f"strict flag malformed: {contract_id}")
         require(item.floor is None or type(item.floor) is int,
                 f"contract floor malformed: {contract_id}")
+    require(full_contract_manifest_digest() ==
+            EXPECTED_FULL_CONTRACT_MANIFEST_SHA256,
+            "analytic full contract manifest changed")
+    rows = frozenset((item.source, item.sha256)
+                     for _, item in CONTRACT_SPECS)
+    require(rows == EXPECTED_SOURCE_ROWS,
+            "analytic source path/digest manifest changed")
+    require(source_manifest_digest() == EXPECTED_SOURCE_MANIFEST_SHA256,
+            "analytic source manifest digest changed")
 
 
 def authenticate_source_blob(blob, expected, label):
@@ -131,15 +229,22 @@ def authenticate_source_blob(blob, expected, label):
 
 def audit_sources():
     audit_contract_table()
-    require(SOURCE_ROOT.is_dir(), "read-only source repository is absent")
+    require(SOURCE_ROOT.is_dir(),
+            "analytic source authentication failed: repository absent")
     checked = set()
     for contract_id, item in CONTRACTS.items():
         key = (item.source, item.sha256)
         if key in checked:
             continue
         path = SOURCE_ROOT / item.source
-        require(path.is_file(), f"analytic source missing: {contract_id}")
-        authenticate_source_blob(path.read_bytes(), item.sha256, contract_id)
+        require(path.is_file(),
+                f"analytic source authentication failed: missing {contract_id}")
+        try:
+            blob = path.read_bytes()
+        except OSError as error:
+            raise VerifyError(
+                f"analytic source authentication failed: unreadable {contract_id}") from error
+        authenticate_source_blob(blob, item.sha256, contract_id)
         checked.add(key)
     return len(checked)
 
@@ -1095,6 +1200,7 @@ def derive_ledger(inventory, plan):
             "exact integer ledger anchor-s-b is negative")
 
     used_contracts = {
+        "R31K-PACKET-PROOF-v2",
         "R31K-RESIDUAL-SIEVE-v2",
         "R31K-INDUCED-SUPERADD-v2",
         "R31K-TREE-EXACT-v2",
@@ -1514,17 +1620,41 @@ def hostile_tests():
     finally:
         CONTRACTS[contract_id] = original
 
-    # Likewise, direct verify() must reject mutated source bytes.  Build a
-    # complete temporary shadow of the five pinned files, mutate one shadow
-    # byte stream, and restore SOURCE_ROOT before the directory is removed.
+    # Simultaneously replacing both runtime views must not bypass provenance,
+    # even for a contract whose numeric fields are not consulted on this graph.
+    specs_original = globals()["CONTRACT_SPECS"]
+    lookup_original = globals()["CONTRACTS"]
+    unused_id = "R31K-ODD-UNICYCLIC-LOWER-v2"
+    unused_original = dict(specs_original)[unused_id]
+    def rebound_specs(replacement):
+        return tuple((name, replacement if name == unused_id else item)
+                     for name, item in specs_original)
+    for replacement in (
+            replace(unused_original, floor=99),
+            replace(unused_original, claim="HOSTILE altered analytic claim"),
+            replace(unused_original, strict=False),
+            replace(unused_original, floor=True)):
+        mutated_specs = rebound_specs(replacement)
+        globals()["CONTRACT_SPECS"] = mutated_specs
+        globals()["CONTRACTS"] = dict(mutated_specs)
+        try:
+            rejected.append(expect_rejection(
+                lambda: verify(base_vertices, base_edges),
+                "simultaneous full-record contract mutation"))
+        finally:
+            globals()["CONTRACT_SPECS"] = specs_original
+            globals()["CONTRACTS"] = lookup_original
+
+    # Likewise, direct verify() must reject mutated source bytes and must
+    # authenticate the companion universal proof note itself.  Build a complete
+    # temporary shadow and restore SOURCE_ROOT before it is removed.
     original_root = SOURCE_ROOT
     with tempfile.TemporaryDirectory(prefix="r31k-hostile-source-") as directory:
         shadow_root = Path(directory)
-        for item in {contract.source: contract
-                     for contract in CONTRACTS.values()}.values():
-            target = shadow_root / item.source
+        for source, _ in EXPECTED_SOURCE_ROWS:
+            target = shadow_root / source
             target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes((original_root / item.source).read_bytes())
+            shutil.copyfile(original_root / source, target)
         source_contract = CONTRACTS["R31K-RESIDUAL-SIEVE-v2"]
         hostile_source = shadow_root / source_contract.source
         hostile_source.write_bytes(hostile_source.read_bytes() + b"\nHOSTILE")
@@ -1533,6 +1663,27 @@ def hostile_tests():
             rejected.append(expect_rejection(
                 lambda: verify(base_vertices, base_edges),
                 "public API analytic source-byte mutation"))
+        finally:
+            SOURCE_ROOT = original_root
+
+        note_contract = CONTRACTS["R31K-PACKET-PROOF-v2"]
+        shutil.copyfile(original_root / source_contract.source, hostile_source)
+        note_path = shadow_root / note_contract.source
+        note_path.unlink()
+        SOURCE_ROOT = shadow_root
+        try:
+            rejected.append(expect_rejection(
+                lambda: verify(base_vertices, base_edges),
+                "public API missing companion proof note"))
+        finally:
+            SOURCE_ROOT = original_root
+        shutil.copyfile(original_root / note_contract.source, note_path)
+        note_path.write_bytes(note_path.read_bytes() + b"\nHOSTILE NOTE MUTATION\n")
+        SOURCE_ROOT = shadow_root
+        try:
+            rejected.append(expect_rejection(
+                lambda: verify(base_vertices, base_edges),
+                "public API mutated companion proof note"))
         finally:
             SOURCE_ROOT = original_root
 
@@ -1657,7 +1808,8 @@ def report(result):
         "ownership: original vertices; induced connected disjoint exhaustive pieces; unique cut/payload owner",
         "strategy: simultaneous first bridges; ancestor-minimal nontriangles; K4 or direct shared-cut K4+T anchor",
         "ledger: finite implementation replay checks integer anchor-s-b>=0; proof strictness comes from the pinned anchor contract",
-        f"analytic source files pinned: {result.source_files}; manifest sha256: {contract_manifest_digest()}",
+        f"analytic source files pinned: {result.source_files}; source manifest sha256: {source_manifest_digest()}",
+        f"authenticated contract records: {len(EXPECTED_CONTRACT_IDS)}; full manifest sha256: {full_contract_manifest_digest()}",
         f"generated adjacency fixtures: {result.generated}; opaque relabel replays: {result.relabeled}",
         "profiles: " + repr(dict(result.profiles)),
         "anchors: " + repr(dict(result.anchors)),
