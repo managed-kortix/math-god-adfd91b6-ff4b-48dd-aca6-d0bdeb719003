@@ -67,8 +67,16 @@ def main():
     require(isinstance(entries,list) and len(entries)==9,"manifest entries are not exactly nine")
     expected_files={f"m7-family-d-common-c-{''.join(map(str,c))}-{k}.drat.xz" for c,k in expected_pairs}
     require(x.proof_dir.is_dir(),"proof directory absent")
-    actual_files={z.name for z in x.proof_dir.iterdir() if z.is_file()}
-    require(actual_files==expected_files,f"artifact-set mismatch extra={actual_files-expected_files} missing={expected_files-actual_files}")
+    proof_dir=x.proof_dir.resolve(strict=True)
+    manifest=x.manifest.resolve(strict=True)
+    allowed_files=set(expected_files)
+    if manifest.parent==proof_dir:
+        allowed_files.add(manifest.name)
+    actual_entries={z.name for z in proof_dir.iterdir()}
+    require(actual_entries==allowed_files,
+            f"artifact-set mismatch extra={actual_entries-allowed_files} missing={allowed_files-actual_entries}")
+    require(all((proof_dir/name).is_file() for name in allowed_files),
+            "artifact set contains a non-regular entry")
     entry_keys={"index","cell","kind","meta","vars","clauses","cnf_bytes","cnf_sha256","proof_file","proof_bytes","proof_sha256","compressed_proof_bytes","compressed_proof_sha256"}
     with tempfile.TemporaryDirectory(prefix="m7d-common-c-verify-") as td:
         td=Path(td)
