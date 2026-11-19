@@ -1132,3 +1132,28 @@ checker, authenticates compressed and raw proof hashes/sizes, pins the
 replays all 43 DRATs.  The 43 rows arise from 81 pre-C-swap type rows (five fixed), not from
 26,060 labelled rows.  Full scope and the symmetry argument are in
 `../attempts/2026-11-19-m7-family-s-h4-badness.md`.
+
+## Order-18 `m=7` shared-low `h=3` exact-badness package
+
+This standalone package excludes all 218 canonical C-incidence type rows in the
+family-S cell with exactly three holes internal to `T`.  It does not cover
+`h=0,1,2`, any other `m=7` family, or impose arc minimality.
+
+```sh
+python3 m7_family_s_h3_universe_check.py
+python3 test_m7_family_s_h3_semantics.py
+python3 -O verify_m7_family_s_h3_campaign.py \
+  --manifest m7-family-s-badness-h3-manifest.json \
+  --proof-dir ../certificates/m7-family-s-badness-h3 \
+  --drat-trim /path/to/pinned/drat-trim \
+  --cnf-checker ./check_m7_family_s_badness_cnf.py \
+  --universe-checker ./m7_family_s_h3_universe_check.py
+```
+
+The independent universe is 436 pre-C-swap type rows, no fixed rows, 218
+canonical rows, and weighted coverage of 43,470 labelled states or 21,735
+labelled-state C-swap orbits.  The strict verifier regenerates every CNF,
+authenticates all compressed/raw proof hashes, rejects missing/orphan files,
+pins `drat-trim`, and requires checked empty-clause derivation for all 218
+rows.  Exact scope, bridge, tool identities, and totals are in
+`../attempts/2026-11-19-m7-family-s-h3-badness.md`.

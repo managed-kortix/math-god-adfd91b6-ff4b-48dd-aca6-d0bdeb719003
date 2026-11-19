@@ -99,7 +99,7 @@ def parse_row(text):
         raise ValueError('malformed row')
     if any(type(z)is not int or z<0 for z in dist+ac+bc+[h]) or any(z>3 for z in dist):
         raise ValueError('invalid row entry')
-    if sum(ac)!=6 or sum(bc)!=7 or h!=4:raise ValueError('not an h=4 type row')
+    if sum(ac)!=6 or sum(bc)!=7 or not 0<=h<=4:raise ValueError('not a family-S type row')
     # Independent degree/hole-margin validation of the exact C incidence.
     m=int(state=='M');d=(0,0)if m else((1,0)if state=='01'else(0,1))
     aa=[sum(ATYPES[t][k]for t in dist)+sum(ac[t]*ATYPES[t][k]for t in range(4))for k in range(2)]

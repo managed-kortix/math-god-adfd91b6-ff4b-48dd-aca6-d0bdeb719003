@@ -25,10 +25,11 @@ def read_model(path):
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--solver',required=True)
+    p.add_argument('--h',type=int,choices=range(5),default=4)
     p.add_argument('--index',type=int,required=True);p.add_argument('--graph')
     p.add_argument('--timeout',type=int,default=300)
-    x=p.parse_args();data=canonical_rows(False)
-    if not 0<=x.index<len(data):p.error('index outside the 43-row h=4 pilot')
+    x=p.parse_args();data=canonical_rows(False,x.h)
+    if not 0<=x.index<len(data):p.error(f'index outside the {len(data)}-row h={x.h} pilot')
     row=data[x.index];c,a,_=build(row)
     with tempfile.TemporaryDirectory(prefix='m7bad-') as d:
         cnf=Path(d)/'row.cnf';model=Path(d)/'model.out';write_cnf(c,cnf)

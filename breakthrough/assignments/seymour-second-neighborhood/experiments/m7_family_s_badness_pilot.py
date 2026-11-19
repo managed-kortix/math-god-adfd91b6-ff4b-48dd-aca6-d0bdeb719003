@@ -7,8 +7,9 @@ seven holes, the shared-low root and its simultaneous robustness, and exact
 SNC badness d++(v)<d+(v) for every vertex.  No vertex/arc-minimality clauses
 are included.
 
-Default pilot subset: all 43 canonical rows with h=4.  Use --all for all 13,117
-canonical rows, or --index for one row in the selected ordered subset.
+The default subset is h=4 for backward compatibility.  Use --h to select any
+residual-T-hole cell, --all for all 13,117 canonical rows, or --index for one
+row in the selected ordered subset.
 """
 import argparse,hashlib,json
 from pathlib import Path
@@ -23,9 +24,9 @@ def exact(c,lits,k,tag):
     if k: c.add(out[k-1])
     if k<len(lits): c.add(-out[k])
 
-def canonical_rows(all_rows=False):
+def canonical_rows(all_rows=False,h=4):
     data=sorted({min(x,swap_row(x)) for x in rows()})
-    return data if all_rows else [x for x in data if x[-1]==4]
+    return data if all_rows else [x for x in data if x[-1]==h]
 
 def build_base():
     c=CNF();a=[[c.var(f'a_{i}_{j}') for j in range(N)]for i in range(N)]
@@ -93,11 +94,12 @@ def write_cnf(c,path):
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--all',action='store_true')
+    p.add_argument('--h',type=int,choices=range(5),default=4)
     p.add_argument('--index',type=int);p.add_argument('--base',action='store_true')
     p.add_argument('--output',required=True)
-    x=p.parse_args();data=canonical_rows(x.all)
+    x=p.parse_args();data=canonical_rows(x.all,x.h)
     if x.base:
-        if x.index is not None or x.all:p.error('--base cannot be combined with --index/--all')
+        if x.index is not None or x.all or x.h!=4:p.error('--base cannot be combined with --index/--all/--h')
         c,_,_=build_base();write_cnf(c,x.output);raw=Path(x.output).read_bytes()
         print(f'PASS base vars={len(c.names)} clauses={len(c.clauses)} sha256={hashlib.sha256(raw).hexdigest()}')
         return
