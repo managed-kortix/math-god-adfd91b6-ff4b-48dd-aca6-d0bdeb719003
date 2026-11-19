@@ -303,6 +303,18 @@ python3 -O research/r31-k-adjacency-semantic-verifier.py
 
 Passing this finite gate corroborates the implementation and replays the stated
 contracts on its exact suite; it does not replace the universal proof in Sections
-1--6.  Those sections establish the complete physical `R31-K` lane only.  Other
+1--6.  A separate reproducibility bundle at
+
+```text
+positive-square-energy/experiments/r31k-counter-scout/
+```
+
+preserves a nauty-deduplicated bridge-bound-three census of 379,043 cores, an
+independent replay of the three-case ownership ledger, and exact rational Sturm
+certificates for 11 targeted topology minima.  Its ledger output is byte-for-byte
+reproducible from the included scripts.  This is additional finite corroboration,
+not an exhaustion of arbitrary connector lengths or rooted payloads.
+
+Sections 1--6 establish the complete physical `R31-K` lane only.  Other
 unauthenticated rank-seven hull-bridge packet families and the separate
 single-block program remain open.  No global theorem is claimed.

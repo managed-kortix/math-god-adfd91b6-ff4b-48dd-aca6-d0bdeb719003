@@ -1,0 +1,550 @@
+{
+  "T2C5C5": {
+    "case_records": [
+      {
+        "case": "I",
+        "count": 8181,
+        "data": {
+          "a": 0,
+          "r": 1,
+          "slack": 3
+        }
+      },
+      {
+        "case": "I",
+        "count": 1674,
+        "data": {
+          "a": 0,
+          "r": 2,
+          "slack": 2
+        }
+      },
+      {
+        "case": "I",
+        "count": 333,
+        "data": {
+          "a": 0,
+          "r": 3,
+          "slack": 1
+        }
+      },
+      {
+        "case": "I",
+        "count": 123,
+        "data": {
+          "a": 0,
+          "r": 4,
+          "slack": 0
+        }
+      },
+      {
+        "case": "I",
+        "count": 2310,
+        "data": {
+          "a": 1,
+          "r": 1,
+          "slack": 2
+        }
+      },
+      {
+        "case": "I",
+        "count": 1026,
+        "data": {
+          "a": 1,
+          "r": 2,
+          "slack": 1
+        }
+      },
+      {
+        "case": "I",
+        "count": 384,
+        "data": {
+          "a": 1,
+          "r": 3,
+          "slack": 0
+        }
+      },
+      {
+        "case": "I",
+        "count": 693,
+        "data": {
+          "a": 2,
+          "r": 1,
+          "slack": 1
+        }
+      },
+      {
+        "case": "I",
+        "count": 273,
+        "data": {
+          "a": 2,
+          "r": 2,
+          "slack": 0
+        }
+      },
+      {
+        "case": "II",
+        "count": 980,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "first_nontriangles": 1,
+          "r": 2,
+          "u": 0,
+          "u_plus_a": 0
+        }
+      },
+      {
+        "case": "II",
+        "count": 408,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "first_nontriangles": 1,
+          "r": 3,
+          "u": 0,
+          "u_plus_a": 0
+        }
+      },
+      {
+        "case": "II",
+        "count": 114,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "first_nontriangles": 1,
+          "r": 3,
+          "u": 1,
+          "u_plus_a": 1
+        }
+      },
+      {
+        "case": "II",
+        "count": 78,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "first_nontriangles": 1,
+          "r": 4,
+          "u": 0,
+          "u_plus_a": 0
+        }
+      },
+      {
+        "case": "II",
+        "count": 16,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "first_nontriangles": 1,
+          "r": 4,
+          "u": 1,
+          "u_plus_a": 1
+        }
+      },
+      {
+        "case": "II",
+        "count": 6,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "first_nontriangles": 2,
+          "r": 4,
+          "u": 0,
+          "u_plus_a": 0
+        }
+      },
+      {
+        "case": "II",
+        "count": 918,
+        "data": {
+          "a": 1,
+          "claimed_ok": true,
+          "first_nontriangles": 1,
+          "r": 2,
+          "u": 0,
+          "u_plus_a": 1
+        }
+      },
+      {
+        "case": "II",
+        "count": 174,
+        "data": {
+          "a": 1,
+          "claimed_ok": true,
+          "first_nontriangles": 1,
+          "r": 3,
+          "u": 0,
+          "u_plus_a": 1
+        }
+      },
+      {
+        "case": "III",
+        "count": 111445,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "r": 0,
+          "r_plus_a": 0
+        }
+      },
+      {
+        "case": "III",
+        "count": 11566,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "r": 1,
+          "r_plus_a": 1
+        }
+      },
+      {
+        "case": "III",
+        "count": 1698,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "r": 2,
+          "r_plus_a": 2
+        }
+      },
+      {
+        "case": "III",
+        "count": 13884,
+        "data": {
+          "a": 1,
+          "claimed_ok": true,
+          "r": 0,
+          "r_plus_a": 1
+        }
+      },
+      {
+        "case": "III",
+        "count": 3834,
+        "data": {
+          "a": 1,
+          "claimed_ok": true,
+          "r": 1,
+          "r_plus_a": 2
+        }
+      },
+      {
+        "case": "III",
+        "count": 1278,
+        "data": {
+          "a": 2,
+          "claimed_ok": true,
+          "r": 0,
+          "r_plus_a": 2
+        }
+      }
+    ],
+    "cases": {
+      "I": 14997,
+      "II": 2694,
+      "III": 143705
+    },
+    "distinct_case_records": 23,
+    "graphs": 161396
+  },
+  "T3C5": {
+    "case_records": [
+      {
+        "case": "I",
+        "count": 7677,
+        "data": {
+          "a": 0,
+          "r": 1,
+          "slack": 3
+        }
+      },
+      {
+        "case": "I",
+        "count": 1869,
+        "data": {
+          "a": 0,
+          "r": 2,
+          "slack": 2
+        }
+      },
+      {
+        "case": "I",
+        "count": 384,
+        "data": {
+          "a": 0,
+          "r": 3,
+          "slack": 1
+        }
+      },
+      {
+        "case": "I",
+        "count": 86,
+        "data": {
+          "a": 0,
+          "r": 4,
+          "slack": 0
+        }
+      },
+      {
+        "case": "I",
+        "count": 1749,
+        "data": {
+          "a": 1,
+          "r": 1,
+          "slack": 2
+        }
+      },
+      {
+        "case": "I",
+        "count": 486,
+        "data": {
+          "a": 1,
+          "r": 2,
+          "slack": 1
+        }
+      },
+      {
+        "case": "I",
+        "count": 120,
+        "data": {
+          "a": 1,
+          "r": 3,
+          "slack": 0
+        }
+      },
+      {
+        "case": "II",
+        "count": 934,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "first_nontriangles": 1,
+          "r": 2,
+          "u": 0,
+          "u_plus_a": 0
+        }
+      },
+      {
+        "case": "II",
+        "count": 174,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "first_nontriangles": 1,
+          "r": 3,
+          "u": 0,
+          "u_plus_a": 0
+        }
+      },
+      {
+        "case": "II",
+        "count": 24,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "first_nontriangles": 1,
+          "r": 4,
+          "u": 0,
+          "u_plus_a": 0
+        }
+      },
+      {
+        "case": "III",
+        "count": 62778,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "r": 0,
+          "r_plus_a": 0
+        }
+      },
+      {
+        "case": "III",
+        "count": 4666,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "r": 1,
+          "r_plus_a": 1
+        }
+      },
+      {
+        "case": "III",
+        "count": 4674,
+        "data": {
+          "a": 1,
+          "claimed_ok": true,
+          "r": 0,
+          "r_plus_a": 1
+        }
+      }
+    ],
+    "cases": {
+      "I": 12371,
+      "II": 1132,
+      "III": 72118
+    },
+    "distinct_case_records": 13,
+    "graphs": 85621
+  },
+  "T3C7": {
+    "case_records": [
+      {
+        "case": "I",
+        "count": 11454,
+        "data": {
+          "a": 0,
+          "r": 1,
+          "slack": 3
+        }
+      },
+      {
+        "case": "I",
+        "count": 2826,
+        "data": {
+          "a": 0,
+          "r": 2,
+          "slack": 2
+        }
+      },
+      {
+        "case": "I",
+        "count": 669,
+        "data": {
+          "a": 0,
+          "r": 3,
+          "slack": 1
+        }
+      },
+      {
+        "case": "I",
+        "count": 118,
+        "data": {
+          "a": 0,
+          "r": 4,
+          "slack": 0
+        }
+      },
+      {
+        "case": "II",
+        "count": 2034,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "first_nontriangles": 1,
+          "r": 2,
+          "u": 0,
+          "u_plus_a": 0
+        }
+      },
+      {
+        "case": "II",
+        "count": 414,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "first_nontriangles": 1,
+          "r": 3,
+          "u": 0,
+          "u_plus_a": 0
+        }
+      },
+      {
+        "case": "II",
+        "count": 55,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "first_nontriangles": 1,
+          "r": 4,
+          "u": 0,
+          "u_plus_a": 0
+        }
+      },
+      {
+        "case": "III",
+        "count": 89912,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "r": 0,
+          "r_plus_a": 0
+        }
+      },
+      {
+        "case": "III",
+        "count": 7255,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "r": 1,
+          "r_plus_a": 1
+        }
+      }
+    ],
+    "cases": {
+      "I": 15067,
+      "II": 2503,
+      "III": 97167
+    },
+    "distinct_case_records": 9,
+    "graphs": 114737
+  },
+  "T4": {
+    "case_records": [
+      {
+        "case": "I",
+        "count": 2803,
+        "data": {
+          "a": 0,
+          "r": 1,
+          "slack": 3
+        }
+      },
+      {
+        "case": "I",
+        "count": 625,
+        "data": {
+          "a": 0,
+          "r": 2,
+          "slack": 2
+        }
+      },
+      {
+        "case": "I",
+        "count": 120,
+        "data": {
+          "a": 0,
+          "r": 3,
+          "slack": 1
+        }
+      },
+      {
+        "case": "I",
+        "count": 24,
+        "data": {
+          "a": 0,
+          "r": 4,
+          "slack": 0
+        }
+      },
+      {
+        "case": "III",
+        "count": 13717,
+        "data": {
+          "a": 0,
+          "claimed_ok": true,
+          "r": 0,
+          "r_plus_a": 0
+        }
+      }
+    ],
+    "cases": {
+      "I": 3572,
+      "III": 13717
+    },
+    "distinct_case_records": 5,
+    "graphs": 17289
+  },
+  "violations": []
+}
