@@ -1,0 +1,25 @@
+R322 adjacency semantic verifier: finite corroboration passed
+scope: literal K4+D+D physical R322 only; no global, other-packet, or single-block claim
+proof boundary: universal theorem is the pinned companion note; this program is a finite suite plus public adjacency gate
+API: verify(vertices:frozenset, edges:frozenset); no supplied profile, block, route, owner, rank, charge, threshold, or partition
+reconstruction: iterative Tarjan; physical K2 blocks retained; literal K4+D+D; total rank 7; full block-cut tree
+phase 1: deduplicated first-K2 antichain; complete away owners have exact rank 2 or 4
+phase 2: ancestor-minimal retained-diamond frontier; boundary-open original-vertex pieces; exact rank delta+2*eta
+ownership: every final piece is original-vertex, induced, connected, disjoint, and exhaustive; every cut has one owner
+ledger: rooted literal K4 >2; only delta=eta=0 tree sides debit; sigma(G)>2-t>=0 with t<=2
+analytic source files pinned: 7; source manifest sha256: e9100edd1e98f68b124e2c619df966e4742d11c3cca3f03ce3300586bff1b0dc
+authenticated contract records: 10; full manifest sha256: 1976483ed5f4cd69a40fb8b01ec97885b441f1425ee04977ad205c63d039b126
+generated topology fixtures: 9; opaque relabel replays: 9
+topologies: {'bridge-after-outer': 1, 'common-cut': 1, 'direct-separate': 2, 'nested': 2, 'one-away-one-root': 1, 'separate-bridges': 1, 'shared-prefix': 1}
+away ranks: {2: 4, 4: 1}
+delta/eta pairs: {(0, 0): 7, (0, 1): 1, (1, 0): 1, (1, 1): 1}
+piece categories: {'rank2-away-nonnegative': 4, 'rank2-descendant-diamond-positive': 1, 'rank3-triangle-plus-diamond-nonnegative': 1, 'rank4-away-nonnegative': 1, 'strict-rooted-K4': 9, 'tree-debit': 7, 'triangle-positive': 1}
+K2/tree expansion probes: 5; longest connector: 1601 physical edges
+shared-first-K2-prefix rank-four probes: 3
+hostile mutations rejected: 28; same-inventory rewires distinguished: 1
+production API parameters: ('vertices', 'edges')
+assert statements in verifier AST: 0
+analytic contracts: ('R322-CONNECTED-RANK2-v1', 'R322-CONNECTED-RANK3-v1', 'R322-CONNECTED-RANK4-v1', 'R322-INDUCED-SUPERADD-v1', 'R322-K4-ROOTED-v1', 'R322-PACKET-PROOF-v1', 'R322-RESIDUAL-SIEVE-v1', 'R322-THETA-CLASSIFICATION-v1', 'R322-TREE-EXACT-v1', 'R322-TRIANGLE-UNICYCLIC-v1')
+companion note sha256: 6a546aecc3e879854a6d178a8a845a9b696bf35528be192283dbf2132d2b2908
+verifier sha256: 2c520c6e744ac20275b4b44f927f7c4c3b0a0e6706f8cac53b2e2019b1738347
+status: R322 finite corroboration and independent semantic replay passed
