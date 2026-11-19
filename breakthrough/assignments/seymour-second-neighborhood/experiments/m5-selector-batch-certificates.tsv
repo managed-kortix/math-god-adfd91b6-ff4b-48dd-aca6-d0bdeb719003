@@ -1,0 +1,19 @@
+m5-selector-batch-certificates-v1
+generated-utc	2026-11-19
+scope	retained pilot only; no complete m=5 branch closure
+manifest-format	m5-selector-batches-v1
+manifest-bytes	10925
+manifest-sha256	c0d5bab4be917a9f68141713f348359cf58f73bb530df785bbc875a7eba60ecc
+solver	CaDiCaL 1.7.3
+solver-binary-sha256	e2a164ab490c49deb55dab4fb4d2704f7496f7653291106f88d0ddced2f820cd
+solver-command	cadical --lrat --no-binary -q CNF LRAT
+solver-required-exit	20
+checker	lrat-check
+checker-binary-sha256	e9e71c96b68dc9ed22db35d7581e613e6b161ffbc82c20cba5699f8320a065b8
+checker-required-output	c VERIFIED
+compression	xz -9
+artifacts	1
+covered-B6-parents	100
+covered-B7-parents	0
+columns	batch-key,batch-ordinal,branch,members,cnf-bytes,cnf-sha256,lrat-bytes,lrat-sha256,xz-bytes,xz-sha256,artifact
+B6-main-P6-00	0	B6	100	10625508	9d551c0a2f94c57a8fb26f2718b5ea4f0b01fcb6b95adf1e845a24d4f58724d1	6685485	0b4e4558b1b76fdf855909cf65168dd16e6ebebc18ff38ada709aac42727ecfa	349896	5bb24d655defab83107046abca6635f575a3b4f9e1a4cd3b42a635ad92b215f1	certificates/m5-selector-B6-main-P6-00.lrat.xz
