@@ -1,6 +1,30 @@
 {
-  "schema": "m7-family-s-badness-h4-v1",
-  "rows": 43,
+  "schema": "m7-family-s-badness-h4-v2",
+  "h": 4,
+  "universe_rows": 43,
+  "ordered_universe_sha256": "0286a4f2d926565c1a4c545052b1657e66b1ea5cc2b32389e55a68cc8e92ed80",
+  "toolchain": {
+    "proof_checker": {
+      "name": "drat-trim",
+      "source_url": "https://github.com/marijnheule/drat-trim.git",
+      "source_commit": "2e3b2dc0ecf938addbd779d42877b6ed69d9a985",
+      "source_tree": "b4e75a5f8c89d664652727458369cb5e0b610e31",
+      "source_blob": "cf8a676ffcc7ef5a47124bbafc9b680a2df333e0",
+      "source_sha256": "d834b649f437e091597f5347f259b9f681087f89ca0844d0cee250a1a1a0c2ee",
+      "build_command": "gcc drat-trim.c -std=c99 -O2 -o drat-trim",
+      "compiler": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+      "elf_build_id": "83768248f9562e7a5b87b8530e078148fe0b62a6",
+      "binary_sha256": "92f0aa9575ed519d66a99b8b1b3dde6ece4618ae4c202a3a4b200265dda0aa7a"
+    },
+    "compression": {
+      "format": "xz",
+      "python_lzma_preset": 9
+    }
+  },
+  "sources": {
+    "m7_family_s_badness_pilot.py": "f68c0edd09e43971572fb325e2ba963bc8f79e3cc6751a274ff777be652a4257",
+    "check_m7_family_s_badness_cnf.py": "5dfa458b87f70be9cc2bd66f33c18b7c7060534804fed795e331809558b3615a"
+  },
   "entries": [
     {
       "index": 0,

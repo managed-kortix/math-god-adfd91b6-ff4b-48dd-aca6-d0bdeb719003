@@ -1117,20 +1117,30 @@ family S or all `m=7`.  No arc-minimality clause is used.
 ```sh
 python3 m7_family_s_badness_pilot.py --base --output /tmp/m7s-base.cnf
 python3 check_m7_family_s_badness_cnf.py /tmp/m7s-base.cnf --base
-python3 test_m7_family_s_badness.py
-python3 verify_m7_family_s_badness_campaign.py \
+python3 -O test_m7_family_s_badness.py
+python3 -O test_m7_family_s_h4_semantic_checker.py
+M7_H4_DRAT_TRIM=/path/to/pinned/drat-trim \
+  python3 -O test_m7_family_s_h4_verifier_mutations.py
+python3 -O verify_m7_family_s_badness_campaign.py \
   --manifest m7-family-s-badness-h4-manifest.json \
   --proof-dir ../certificates/m7-family-s-badness-h4 \
   --drat-trim /path/to/pinned/drat-trim \
   --cnf-checker ./check_m7_family_s_badness_cnf.py
 ```
 
-The verifier regenerates every CNF, invokes the independent exact structural
-checker, authenticates compressed and raw proof hashes/sizes, pins the
-`drat-trim` executable to SHA-256
-`92f0aa9575ed519d66a99b8b1b3dde6ece4618ae4c202a3a4b200265dda0aa7a`, and
-replays all 43 DRATs.  The 43 rows arise from 81 pre-C-swap type rows (five fixed), not from
-26,060 labelled rows.  Full scope and the symmetry argument are in
+The fail-closed verifier regenerates every CNF, invokes the independent exact
+structural checker, enforces the strict manifest schema and exact ordered row
+universe, authenticates the complete artifact set plus compressed/raw proof
+hashes and sizes, and requires both `c detected empty clause` and `s VERIFIED`
+from every replay.  It pins `drat-trim` to source commit
+`2e3b2dc0ecf938addbd779d42877b6ed69d9a985`, tree
+`b4e75a5f8c89d664652727458369cb5e0b610e31`, source blob
+`cf8a676ffcc7ef5a47124bbafc9b680a2df333e0`, source SHA-256
+`d834b649f437e091597f5347f259b9f681087f89ca0844d0cee250a1a1a0c2ee`, and
+locally reproduced binary SHA-256
+`92f0aa9575ed519d66a99b8b1b3dde6ece4618ae4c202a3a4b200265dda0aa7a`.
+The 43 rows arise from 81 pre-C-swap type rows (five fixed), not from 26,060
+labelled rows.  Full scope and the symmetry argument are in
 `../attempts/2026-11-19-m7-family-s-h4-badness.md`.
 
 ## Order-18 `m=7` shared-low `h=3` exact-badness package

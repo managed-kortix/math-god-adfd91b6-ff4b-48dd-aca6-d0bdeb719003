@@ -89,16 +89,25 @@ identities, and requires byte equality.
 `m7_family_s_badness_campaign.py` solves all 43 rows, checks every CaDiCaL DRAT
 with `drat-trim`, and can retain compressed proofs plus a content-hash manifest.
 `verify_m7_family_s_badness_campaign.py` regenerates every CNF, reruns the
-independent checker, authenticates compressed and raw proof hashes/sizes, and
-replays all proofs.  SAT output, if any, is checked clause-by-clause and by a
-producer-independent direct graph-semantic checker.
+independent checker, enforces a strict manifest schema and exact ordered row
+universe, authenticates the complete artifact set plus compressed/raw proof
+hashes and sizes, and requires both the checked empty clause and final verified
+status from every replay.  All trusted-path checks are explicit exceptions and
+remain active under `python3 -O`.  SAT output, if any, is checked clause-by-clause
+and by a producer-independent direct graph-semantic checker.
 
 The audited run used CaDiCaL 1.7.3 at source commit
-`38e073b389a877b0a0d3c91136d2443ab95fdeba`.  Proof replay is pinned to the
-`drat-trim` binary SHA-256
-`92f0aa9575ed519d66a99b8b1b3dde6ece4618ae4c202a3a4b200265dda0aa7a`, built
-from source commit `2e3b2dc0ecf938addbd779d42877b6ed69d9a985`.  The strict verifier rejects
-a different proof-checker binary.
+`38e073b389a877b0a0d3c91136d2443ab95fdeba`.  Proof replay is pinned to
+`drat-trim` source commit `2e3b2dc0ecf938addbd779d42877b6ed69d9a985`, tree
+`b4e75a5f8c89d664652727458369cb5e0b610e31`, source blob
+`cf8a676ffcc7ef5a47124bbafc9b680a2df333e0`, source SHA-256
+`d834b649f437e091597f5347f259b9f681087f89ca0844d0cee250a1a1a0c2ee`, and
+binary SHA-256
+`92f0aa9575ed519d66a99b8b1b3dde6ece4618ae4c202a3a4b200265dda0aa7a`.
+The binary was reproduced locally with GCC 13.3.0 using
+`gcc drat-trim.c -std=c99 -O2 -o drat-trim`; its ELF build ID is
+`83768248f9562e7a5b87b8530e078148fe0b62a6`.  The strict verifier rejects a
+different proof-checker binary.
 
 In the audited run all 43 rows were certified UNSAT.  The raw proofs total
 96,667,825 bytes; XZ-compressed proofs total 30,052,332 bytes.  These proof
