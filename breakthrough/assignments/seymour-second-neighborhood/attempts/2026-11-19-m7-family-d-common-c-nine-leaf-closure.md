@@ -126,9 +126,21 @@ is
 92f0aa9575ed519d66a99b8b1b3dde6ece4618ae4c202a3a4b200265dda0aa7a.
 ```
 
-The manifest authenticates the exact nine-file set, regenerated CNF bytes,
+The manifest authenticates the exact nine proof files, regenerated CNF bytes,
 compressed proof bytes, and decompressed raw proof bytes.  The verifier uses
 explicit exceptions rather than Python `assert` and replays all nine proofs.
+The natural in-tree replay command is, from the `experiments` directory,
+
+```
+python3 verify_m7_family_d_common_c_campaign.py \
+  --manifest ../certificates/m7-family-d-common-c/manifest.json \
+  --proof-dir ../certificates/m7-family-d-common-c \
+  --drat-trim /path/to/pinned/drat-trim \
+  --cnf-checker ./check_m7_family_d_common_c_cnf.py
+```
+
+When the manifest is inside the proof directory, it is the sole permitted
+non-proof file; every other unexpected directory entry is rejected.
 
 Thus all nine leaves are UNSAT, conditionally eliminating exactly the three
 common-`C` family-D residual cells and nothing beyond them.
