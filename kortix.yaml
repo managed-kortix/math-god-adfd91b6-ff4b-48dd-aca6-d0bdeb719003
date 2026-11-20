@@ -90,7 +90,7 @@ triggers:
     enabled: true
     overlap: skip
     session_mode: pinned
-    session_id: a10f0b25-6c8a-488e-b880-c54c9f7aaa98
+    session_id: aab788c2-b5aa-4320-bdfd-42a49bbe1fd4
     cron: 0 0 3/6 * * *
     timezone: UTC
     prompt: LANE=millennium. CORE=math-god-millennium. This exact pinned root session permanently owns only the six unsolved Clay problems. Read MILLENNIUM_STATE.md and millennium-prize/PROGRAM.md first; do not adopt STATE.md or BREAKTHROUGH_STATE.md as working memory. Do not spawn Kortix root sessions; maximize entropy with Task subagents inside this core. Continue the active exact frontier, maintain bounded scouts, and never call a partial result a solution. Pull --rebase, commit, and push durable work. Apply research/procedural/PUBLICATION.md only after every official-resolution gate passes. Never stop.
