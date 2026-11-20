@@ -2414,3 +2414,48 @@ handled analytically.
 
 Two final hostile gates passed after repairing both proof details.  Paper:
 `all-tetracyclic-cacti/`.
+# 2026-11-20: physical-hull bridge tree reduced to hostile marked `1|6` schemas
+
+For a connected rank-seven graph, delete every actual bridge and weight each
+bridge-free component by its cyclomatic rank.  The quotient is a tree of total
+weight seven.  If its positive hull has at least two positive vertices, then a
+weighted-centroid argument gives an exact dichotomy: either some hull bridge
+has side ranks `2|5` or `3|4`, or the reduced hull is a star whose leaves all
+have rank one and whose center has the remaining weight.  The first alternative
+dispatches by the completed connected rank-two through rank-six theorems and
+induced square-energy superadditivity.
+
+A rank-one bridge side is unicyclic with arbitrary rooted trees.  Its uniform
+receipt is `0` for an even cycle, strict `0` for cycle length `3 mod 4`, and
+`1-sec(pi/q)` for cycle length `q=1 mod 4`.  Hence every unit-star state with an
+even or favorable arm dispatches.  The exact outer remainder is a marked hostile arm `U` joined at a physical
+port to a connected rank-six complement `R` that inherits the remaining
+unit-star topology.  The weakest instance-exact obligation is
+`sigma(R)+Gamma(R,x;U,y)>=-sigma(U)`; the cycle-only target
+`sigma(R)+Gamma>=delta_q=sec(pi/q)-1` is sufficient but stronger.  Qualitative
+`sigma(R)>0` cannot be spent against this deficit.
+
+The reduction is intentionally relative to simultaneous physical-bridge cut
+partitions.  For a fixed graph, all such partitions are exactly the edge
+subsets of the full physical bridge quotient.  Compressing zero-rank branches and chains to at most eleven reduced edges is
+sound only for receipt libraries proved stable under iterated multi-port tree
+absorption at every bridge endpoint restored by the reduction.  The `2^11`
+bound counts projected outer topologies only; cut positions and owner, port,
+or message data remain parameters without a proved finite equivalence typing.
+Nested or entry-sensitive packet openings do not inherit that normalization.  The
+one-positive-component hull case is also outside the theorem.
+
+The dependency-free verifier checks all 691 legal reduced weighted-tree states
+and 2,073 explicit zero-chain expansions; normal and optimized output is
+byte-identical with SHA-256
+`6e940617e6a8ce38ba0e3d638c4bd5073fcd8344e8dd5cc88294e1cd2b388e22`.
+A separate rank-`(1,6)` finite scout found no negative `sigma(G)` value in its
+Atlas, canonical-short kernel, generated unit-star, or sparse structured
+slices, and no negative bridge-payment `F` in the three slices that compute it
+(Atlas, kernel, unit-star).  The verifier re-enumerates Atlas side/root
+eligibility and exactly replays selected/extremal receipts; it does not exactly
+recompare every Atlas join or regenerate every kernel/unit-star row.  Broad
+no-negative counts remain persisted numerical census data, not universal
+theorem evidence.  The global physical-hull lane therefore
+remains open exactly at the hostile marked `1|6` schemas (and the separate
+one-positive-component case); no promotion or publication is authorized.

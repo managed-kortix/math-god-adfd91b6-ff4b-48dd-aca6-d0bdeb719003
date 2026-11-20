@@ -1,0 +1,3394 @@
+{
+  "counts": {
+    "joins": 163954,
+    "negative_sigma_G": 0,
+    "rooted_H": 686,
+    "rooted_U": 239
+  },
+  "negative": [],
+  "scope": {
+    "atlas_n": 7,
+    "atlas_statement": "all connected unlabeled graph-atlas sides through stated order; all vertex automorphism orbits",
+    "cycle_n": 5,
+    "generated_statement": "selected named cores and every nonisomorphic tree through tree_n; not exhaustive beyond atlas",
+    "leaves": 0,
+    "path": 0,
+    "tree_n": 1
+  },
+  "seconds": 101.09743118286133,
+  "tops": {
+    "F": [
+      {
+        "F": 5.264116384688249,
+        "G_g6": "[wSGGcO?G?a@C???_?G_@C????G??G_?CO?????G???a??@C???????_???G_??@",
+        "Gamma": 0.8996444688855956,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Bw",
+          "label": "C3+tree1.0@d1",
+          "m": 3,
+          "n": 3,
+          "root": 1,
+          "source": "generated-unicyclic-tree"
+        },
+        "nG": 28,
+        "payment": 1.8996444688855938,
+        "sigma_G": 6.500184362188037,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.9999999999999982
+      },
+      {
+        "F": 5.264116384688284,
+        "G_g6": "[wcGGcO?G?a@C???_?G_@C????G??G_?CO?????G???a??@C???????_???G_??@",
+        "Gamma": 0.8996444688856311,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Bw",
+          "label": "atlas-U-n3-Bw-o0",
+          "m": 3,
+          "n": 3,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 28,
+        "payment": 1.8996444688856293,
+        "sigma_G": 6.500184362188072,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.9999999999999982
+      },
+      {
+        "F": 5.27130803960415,
+        "G_g6": "_iO`G?D?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.9068361238014964,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FiO`G",
+          "label": "atlas-U-n7-FiO`G-o5",
+          "m": 7,
+          "n": 7,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.8464929976938258,
+        "sigma_G": 6.447032890996269,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.9396568738923294
+      },
+      {
+        "F": 5.273184385811103,
+        "G_g6": "^sCW?S@?GC_O?@??_OGC???C??GC?GC????@???GC??_O?????@????_O??GC???????C????GC???G",
+        "Gamma": 0.9087124700084495,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "EsCW",
+          "label": "atlas-U-n6-EsCW-o4",
+          "m": 6,
+          "n": 6,
+          "root": 4,
+          "source": "atlas"
+        },
+        "nG": 31,
+        "payment": 1.8355044527921898,
+        "sigma_G": 6.436044346094633,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.9267919827837403
+      },
+      {
+        "F": 5.274956580517931,
+        "G_g6": "_Io`G?D?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.9104846647152778,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FIo`G",
+          "label": "atlas-U-n7-FIo`G-o5",
+          "m": 7,
+          "n": 7,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.8262671706440408,
+        "sigma_G": 6.426807063946484,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.915782505928763
+      },
+      {
+        "F": 5.276850961826416,
+        "G_g6": "]JcAGC@@GG?@?@@?__??@??CC?GG????C??@@??GG?????@???@@???__??????@????CC???G",
+        "Gamma": 0.9123790460237631,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "DJc",
+          "label": "atlas-U-n5-DJc-o1",
+          "m": 5,
+          "n": 5,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 30,
+        "payment": 1.8155909719353112,
+        "sigma_G": 6.416130865237754,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.9032119259115481
+      },
+      {
+        "F": 5.278163369684051,
+        "G_g6": "_iO`G?`?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.9136914538813974,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FiO`G",
+          "label": "atlas-U-n7-FiO`G-o2",
+          "m": 7,
+          "n": 7,
+          "root": 2,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.8533483277737268,
+        "sigma_G": 6.45388822107617,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.9396568738923294
+      },
+      {
+        "F": 5.2796102005703505,
+        "G_g6": "_Ic`G?D?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.9151382847676972,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FIc`G",
+          "label": "atlas-U-n7-FIc`G-o5",
+          "m": 7,
+          "n": 7,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.8021839508545092,
+        "sigma_G": 6.402723844156952,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.887045666086812
+      },
+      {
+        "F": 5.281524262413928,
+        "G_g6": "^sCW?c@?GC_O?@??_OGC???C??GC?GC????@???GC??_O?????@????_O??GC???????C????GC???G",
+        "Gamma": 0.9170523466112748,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "EsCW",
+          "label": "atlas-U-n6-EsCW-o3",
+          "m": 6,
+          "n": 6,
+          "root": 3,
+          "source": "atlas"
+        },
+        "nG": 31,
+        "payment": 1.843844329395015,
+        "sigma_G": 6.444384222697458,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.9267919827837403
+      },
+      {
+        "F": 5.284504218817603,
+        "G_g6": "_Io`G?`?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.92003230301495,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FIo`G",
+          "label": "atlas-U-n7-FIo`G-o2",
+          "m": 7,
+          "n": 7,
+          "root": 2,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.835814808943713,
+        "sigma_G": 6.436354702246156,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.915782505928763
+      },
+      {
+        "F": 5.285396943602417,
+        "G_g6": "^Je?AC@?GC_O?@??_OGC???C??GC?GC????@???GC??_O?????@????_O??GC???????C????GC???G",
+        "Gamma": 0.9209250277997638,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "EJe?",
+          "label": "atlas-U-n6-EJe?-o1",
+          "m": 6,
+          "n": 6,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 31,
+        "payment": 1.7716385923540479,
+        "sigma_G": 6.372178485656491,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.850713564554284
+      },
+      {
+        "F": 5.287249407628007,
+        "G_g6": "_hoGGA@?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.9227774918253537,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FhoGG",
+          "label": "atlas-U-n7-FhoGG-o0",
+          "m": 7,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.7403052359501352,
+        "sigma_G": 6.340845129252578,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.8175277441247815
+      },
+      {
+        "F": 5.287271859140082,
+        "G_g6": "[wEGGcO?G?a@C???_?G_@C????G??G_?CO?????G???a??@C???????_???G_??@",
+        "Gamma": 0.922799943337429,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Bw",
+          "label": "atlas-U-n3-Bw-o0",
+          "m": 3,
+          "n": 3,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 28,
+        "payment": 1.9227999433374272,
+        "sigma_G": 6.52333983663987,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.9999999999999982
+      },
+      {
+        "F": 5.287271859140111,
+        "G_g6": "[wDGGcO?G?a@C???_?G_@C????G??G_?CO?????G???a??@C???????_???G_??@",
+        "Gamma": 0.9227999433374574,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Bw",
+          "label": "C3+tree1.0@d1",
+          "m": 3,
+          "n": 3,
+          "root": 1,
+          "source": "generated-unicyclic-tree"
+        },
+        "nG": 28,
+        "payment": 1.9227999433374556,
+        "sigma_G": 6.523339836639899,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.9999999999999982
+      },
+      {
+        "F": 5.2873366103812645,
+        "G_g6": "_pq?G@@?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.9228646945786112,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Fpq?G",
+          "label": "atlas-U-n7-Fpq?G-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.751291819324802,
+        "sigma_G": 6.351831712627245,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.8284271247461907
+      },
+      {
+        "F": 5.2877037536217815,
+        "G_g6": "]Jc?gC@@GG?@?@@?__??@??CC?GG????C??@@??GG?????@???@@???__??????@????CC???G",
+        "Gamma": 0.9232318378191282,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "DJc",
+          "label": "atlas-U-n5-DJc-o3",
+          "m": 5,
+          "n": 5,
+          "root": 3,
+          "source": "atlas"
+        },
+        "nG": 30,
+        "payment": 1.8264437637306763,
+        "sigma_G": 6.426983657033119,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.9032119259115481
+      },
+      {
+        "F": 5.287920164287869,
+        "G_g6": "_k_`G?D?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.923448248485216,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Fk_`G",
+          "label": "atlas-U-n7-Fk_`G-o5",
+          "m": 7,
+          "n": 7,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.7603450278887287,
+        "sigma_G": 6.360884921191172,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.8368967794035127
+      },
+      {
+        "F": 5.291915006045156,
+        "G_g6": "_Ic`G?`?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.9274430902425026,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FIc`G",
+          "label": "atlas-U-n7-FIc`G-o2",
+          "m": 7,
+          "n": 7,
+          "root": 2,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.8144887563293146,
+        "sigma_G": 6.415028649631758,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.887045666086812
+      },
+      {
+        "F": 5.293140407291246,
+        "G_g6": "_iO`G?@@G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.928668491488593,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FiO`G",
+          "label": "atlas-U-n7-FiO`G-o5",
+          "m": 7,
+          "n": 7,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.8683253653809224,
+        "sigma_G": 6.4688652586833655,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.9396568738923294
+      },
+      {
+        "F": 5.293377097117914,
+        "G_g6": "\\N@GGCHA??_@A@A???G?@A?CG????G??CG?@A??????_??@A??@A???????G???@A???C",
+        "Gamma": 0.9289051813152609,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "CN",
+          "label": "atlas-U-n4-CN-o1",
+          "m": 4,
+          "n": 4,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 29,
+        "payment": 1.7349686148406285,
+        "sigma_G": 6.3355085081430715,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.8060634335253676
+      },
+      {
+        "F": 5.294598275705685,
+        "G_g6": "^sCW?CH?GC_O?@??_OGC???C??GC?GC????@???GC??_O?????@????_O??GC???????C????GC???G",
+        "Gamma": 0.9301263599030314,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "EsCW",
+          "label": "atlas-U-n6-EsCW-o4",
+          "m": 6,
+          "n": 6,
+          "root": 4,
+          "source": "atlas"
+        },
+        "nG": 31,
+        "payment": 1.8569183426867717,
+        "sigma_G": 6.457458235989215,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.9267919827837403
+      },
+      {
+        "F": 5.295888301273082,
+        "G_g6": "_Io`G?@@G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.9314163854704285,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FIo`G",
+          "label": "atlas-U-n7-FIo`G-o5",
+          "m": 7,
+          "n": 7,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.8471988913991915,
+        "sigma_G": 6.4477387847016345,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.915782505928763
+      },
+      {
+        "F": 5.297382366283554,
+        "G_g6": "]Jc?IC@@GG?@?@@?__??@??CC?GG????C??@@??GG?????@???@@???__??????@????CC???G",
+        "Gamma": 0.9329104504809012,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "DJc",
+          "label": "atlas-U-n5-DJc-o1",
+          "m": 5,
+          "n": 5,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 30,
+        "payment": 1.8361223763924492,
+        "sigma_G": 6.436662269694892,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.9032119259115481
+      },
+      {
+        "F": 5.298223526563046,
+        "G_g6": "_hoGG@@?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.9337516107603925,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FhoGG",
+          "label": "atlas-U-n7-FhoGG-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.751279354885174,
+        "sigma_G": 6.351819248187617,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.8175277441247815
+      },
+      {
+        "F": 5.298653291352152,
+        "G_g6": "_iO`G?@GG?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.9341813755494988,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FiO`G",
+          "label": "atlas-U-n7-FiO`G-o2",
+          "m": 7,
+          "n": 7,
+          "root": 2,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.8738382494418282,
+        "sigma_G": 6.474378142744271,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.9396568738923294
+      },
+      {
+        "F": 5.299032607739622,
+        "G_g6": "^Je??c@?GC_O?@??_OGC???C??GC?GC????@???GC??_O?????@????_O??GC???????C????GC???G",
+        "Gamma": 0.9345606919369684,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "EJe?",
+          "label": "atlas-U-n6-EJe?-o3",
+          "m": 6,
+          "n": 6,
+          "root": 3,
+          "source": "atlas"
+        },
+        "nG": 31,
+        "payment": 1.7852742564912525,
+        "sigma_G": 6.3858141497936955,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.850713564554284
+      },
+      {
+        "F": 5.299158803311549,
+        "G_g6": "_iG`G?D?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.9346868875088958,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FiG`G",
+          "label": "atlas-U-n7-FiG`G-o5",
+          "m": 7,
+          "n": 7,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.695373212581412,
+        "sigma_G": 6.295913105883855,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.7606863250725162
+      },
+      {
+        "F": 5.299254208647864,
+        "G_g6": "_ko`??H?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.9347822928452105,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Fko`?",
+          "label": "atlas-U-n7-Fko`?-o4",
+          "m": 7,
+          "n": 7,
+          "root": 4,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.6834968397335182,
+        "sigma_G": 6.284036733035961,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.7487145468883076
+      },
+      {
+        "F": 5.29936842112964,
+        "G_g6": "_Ic`G?@@G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 0.9348965053269866,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FIc`G",
+          "label": "atlas-U-n7-FIc`G-o5",
+          "m": 7,
+          "n": 7,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 1.8219421714137987,
+        "sigma_G": 6.422482064716242,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.887045666086812
+      },
+      {
+        "F": 5.301193633743462,
+        "G_g6": "^G}?AC@?GC_O?@??_OGC???C??GC?GC????@???GC??_O?????@????_O??GC???????C????GC???G",
+        "Gamma": 0.9367217179408085,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "EG}?",
+          "label": "atlas-U-n6-EG}?-o1",
+          "m": 6,
+          "n": 6,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 31,
+        "payment": 1.685436264829118,
+        "sigma_G": 6.285976158131561,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": 0.7487145468883094
+      }
+    ],
+    "Gamma": [
+      {
+        "F": 11.445683665239006,
+        "G_g6": "Jhd?GCB?wF_",
+        "Gamma": 0.6817516427387957,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 11,
+        "payment": 0.5365515629841546,
+        "sigma_G": 11.536551562984155,
+        "sigma_H": 11.0,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 11.447694963176579,
+        "G_g6": "Kpa?i?@?WB_N",
+        "Gamma": 0.6837629406763686,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Fpa?g",
+          "label": "atlas-U-n7-Fpa?g-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 0.5720803950013114,
+        "sigma_G": 11.572080395001311,
+        "sigma_H": 11.0,
+        "sigma_U": -0.1116825456750572
+      },
+      {
+        "F": 11.449521330154186,
+        "G_g6": "K?Bc{?@?WB_N",
+        "Gamma": 0.6855893076539754,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "F?Bcw",
+          "label": "atlas-U-n7-F?Bcw-o0",
+          "m": 7,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 1.2471421204628115,
+        "sigma_G": 12.247142120462811,
+        "sigma_H": 11.0,
+        "sigma_U": 0.5615528128088361
+      },
+      {
+        "F": 11.451820713951054,
+        "G_g6": "KiO`K?@?WB_N",
+        "Gamma": 0.6878886914508442,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FiO`G",
+          "label": "atlas-U-n7-FiO`G-o0",
+          "m": 7,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 1.6275455653431736,
+        "sigma_G": 12.627545565343173,
+        "sigma_H": 11.0,
+        "sigma_U": 0.9396568738923294
+      },
+      {
+        "F": 11.242546622802628,
+        "G_g6": "Lhd?GCB?wF_??P",
+        "Gamma": 0.6892303360866734,
+        "H": {
+          "beta": 6,
+          "g6": "F~{AG",
+          "label": "atlas-H-n7-F~{AG-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5440302563320323,
+        "sigma_G": 11.333414520547777,
+        "sigma_H": 10.789384264215744,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 11.453227295536852,
+        "G_g6": "KsaCa?@?WB_N",
+        "Gamma": 0.6892952730366417,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FsaC_",
+          "label": "atlas-U-n7-FsaC_-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 1.2910878428997163,
+        "sigma_G": 12.291087842899717,
+        "sigma_H": 11.0,
+        "sigma_U": 0.6017925698630746
+      },
+      {
+        "F": 11.453384712305677,
+        "G_g6": "KMpA@?@?WB_N",
+        "Gamma": 0.6894526898054671,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FMpA?",
+          "label": "atlas-U-n7-FMpA?-o2",
+          "m": 7,
+          "n": 7,
+          "root": 2,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 0.6894526898054609,
+        "sigma_G": 11.68945268980546,
+        "sigma_H": 11.0,
+        "sigma_U": -6.217248937900877e-15
+      },
+      {
+        "F": 11.455422759903652,
+        "G_g6": "JC{S?CB?wF_",
+        "Gamma": 0.6914907374034414,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "EC{O",
+          "label": "atlas-U-n6-EC{O-o0",
+          "m": 6,
+          "n": 6,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 11,
+        "payment": 1.3082793233428696,
+        "sigma_G": 12.30827932334287,
+        "sigma_H": 11.0,
+        "sigma_U": 0.6167885859394282
+      },
+      {
+        "F": 11.245013712520903,
+        "G_g6": "Mpa?i?@?WB_N???G_",
+        "Gamma": 0.6916974258049482,
+        "H": {
+          "beta": 6,
+          "g6": "F~{AG",
+          "label": "atlas-H-n7-F~{AG-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Fpa?g",
+          "label": "atlas-U-n7-Fpa?g-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 14,
+        "payment": 0.580014880129891,
+        "sigma_G": 11.369399144345635,
+        "sigma_H": 10.789384264215744,
+        "sigma_U": -0.1116825456750572
+      },
+      {
+        "F": 11.245843387506829,
+        "G_g6": "M?Bc{?@?WB_N???G_",
+        "Gamma": 0.6925271007908744,
+        "H": {
+          "beta": 6,
+          "g6": "F~{AG",
+          "label": "atlas-H-n7-F~{AG-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "F?Bcw",
+          "label": "atlas-U-n7-F?Bcw-o0",
+          "m": 7,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 14,
+        "payment": 1.2540799135997105,
+        "sigma_G": 12.043464177815455,
+        "sigma_H": 10.789384264215744,
+        "sigma_U": 0.5615528128088361
+      },
+      {
+        "F": 11.456587851155493,
+        "G_g6": "Ix`?GKF@w",
+        "Gamma": 0.6926558286552833,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Dx_",
+          "label": "atlas-U-n5-Dx_-o1",
+          "m": 5,
+          "n": 5,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 10,
+        "payment": 1.377397477637385,
+        "sigma_G": 12.377397477637384,
+        "sigma_H": 11.0,
+        "sigma_U": 0.6847416489821017
+      },
+      {
+        "F": 11.456606202814005,
+        "G_g6": "KItA?_@?WB_N",
+        "Gamma": 0.6926741803137944,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FItA?",
+          "label": "atlas-U-n7-FItA?-o3",
+          "m": 7,
+          "n": 7,
+          "root": 3,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 1.2624287843101696,
+        "sigma_G": 12.26242878431017,
+        "sigma_H": 11.0,
+        "sigma_U": 0.5697546039963752
+      },
+      {
+        "F": 11.4572555710245,
+        "G_g6": "KhoIC?@?WB_N",
+        "Gamma": 0.6933235485242903,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FhoI?",
+          "label": "atlas-U-n7-FhoI?-o0",
+          "m": 7,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 1.3328757891452447,
+        "sigma_G": 12.332875789145245,
+        "sigma_H": 11.0,
+        "sigma_U": 0.6395522406209544
+      },
+      {
+        "F": 11.45893988096475,
+        "G_g6": "KItA@?@?WB_N",
+        "Gamma": 0.6950078584645389,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FItA?",
+          "label": "atlas-U-n7-FItA?-o2",
+          "m": 7,
+          "n": 7,
+          "root": 2,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 1.2647624624609142,
+        "sigma_G": 12.264762462460915,
+        "sigma_H": 11.0,
+        "sigma_U": 0.5697546039963752
+      },
+      {
+        "F": 11.249205019160307,
+        "G_g6": "MiO`K?@?WB_N???G_",
+        "Gamma": 0.6958887324443523,
+        "H": {
+          "beta": 6,
+          "g6": "F~{AG",
+          "label": "atlas-H-n7-F~{AG-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FiO`G",
+          "label": "atlas-U-n7-FiO`G-o0",
+          "m": 7,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 14,
+        "payment": 1.6355456063366818,
+        "sigma_G": 12.424929870552425,
+        "sigma_H": 10.789384264215744,
+        "sigma_U": 0.9396568738923294
+      },
+      {
+        "F": 11.460454577878423,
+        "G_g6": "KbW`?G@?WB_N",
+        "Gamma": 0.6965225553782126,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FbW`?",
+          "label": "atlas-U-n7-FbW`?-o5",
+          "m": 7,
+          "n": 7,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 0.6965225553782117,
+        "sigma_G": 11.696522555378213,
+        "sigma_H": 11.0,
+        "sigma_U": -8.881784197001252e-16
+      },
+      {
+        "F": 11.250825378374397,
+        "G_g6": "MMpA@?@?WB_N???G_",
+        "Gamma": 0.6975090916584428,
+        "H": {
+          "beta": 6,
+          "g6": "F~{AG",
+          "label": "atlas-H-n7-F~{AG-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FMpA?",
+          "label": "atlas-U-n7-FMpA?-o2",
+          "m": 7,
+          "n": 7,
+          "root": 2,
+          "source": "atlas"
+        },
+        "nG": 14,
+        "payment": 0.6975090916584366,
+        "sigma_G": 11.48689335587418,
+        "sigma_H": 10.789384264215744,
+        "sigma_U": -6.217248937900877e-15
+      },
+      {
+        "F": 11.25094041831689,
+        "G_g6": "MsaCa?@?WB_N???G_",
+        "Gamma": 0.6976241316009357,
+        "H": {
+          "beta": 6,
+          "g6": "F~{AG",
+          "label": "atlas-H-n7-F~{AG-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FsaC_",
+          "label": "atlas-U-n7-FsaC_-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 14,
+        "payment": 1.2994167014640103,
+        "sigma_G": 12.088800965679756,
+        "sigma_H": 10.789384264215744,
+        "sigma_U": 0.6017925698630746
+      },
+      {
+        "F": 11.461672164306444,
+        "G_g6": "KhoGc?@?WB_N",
+        "Gamma": 0.6977401418062339,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FhoG_",
+          "label": "atlas-U-n7-FhoG_-o0",
+          "m": 7,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 1.4085715953579232,
+        "sigma_G": 12.408571595357923,
+        "sigma_H": 11.0,
+        "sigma_U": 0.7108314535516893
+      },
+      {
+        "F": 11.251363623162785,
+        "G_g6": "LC{S?CB?wF_??P",
+        "Gamma": 0.6980473364468303,
+        "H": {
+          "beta": 6,
+          "g6": "F~{AG",
+          "label": "atlas-H-n7-F~{AG-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "EC{O",
+          "label": "atlas-U-n6-EC{O-o0",
+          "m": 6,
+          "n": 6,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 1.3148359223862585,
+        "sigma_G": 12.104220186602003,
+        "sigma_H": 10.789384264215744,
+        "sigma_U": 0.6167885859394282
+      },
+      {
+        "F": 11.108724464948082,
+        "G_g6": "Khd?GCB?wF_G",
+        "Gamma": 0.6981638109207857,
+        "H": {
+          "beta": 6,
+          "g6": "E~|?",
+          "label": "atlas-H-n6-E~|?-o0",
+          "m": 11,
+          "n": 6,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 0.5529637311661446,
+        "sigma_G": 11.199592362693231,
+        "sigma_H": 10.646628631527086,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 11.252211402244185,
+        "G_g6": "Kx`?GKF@w??P",
+        "Gamma": 0.6988951155282308,
+        "H": {
+          "beta": 6,
+          "g6": "F~{AG",
+          "label": "atlas-H-n7-F~{AG-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Dx_",
+          "label": "atlas-U-n5-Dx_-o1",
+          "m": 5,
+          "n": 5,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 1.3836367645103325,
+        "sigma_G": 12.173021028726076,
+        "sigma_H": 10.789384264215744,
+        "sigma_U": 0.6847416489821017
+      },
+      {
+        "F": 11.10966183886058,
+        "G_g6": "Lpa?i?@?WB_N?G",
+        "Gamma": 0.6991011848332835,
+        "H": {
+          "beta": 6,
+          "g6": "E~|?",
+          "label": "atlas-H-n6-E~|?-o0",
+          "m": 11,
+          "n": 6,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Fpa?g",
+          "label": "atlas-U-n7-Fpa?g-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5874186391582263,
+        "sigma_G": 11.234047270685313,
+        "sigma_H": 10.646628631527086,
+        "sigma_U": -0.1116825456750572
+      },
+      {
+        "F": 11.109798522879755,
+        "G_g6": "L?Bc{?@?WB_N?G",
+        "Gamma": 0.6992378688524585,
+        "H": {
+          "beta": 6,
+          "g6": "E~|?",
+          "label": "atlas-H-n6-E~|?-o0",
+          "m": 11,
+          "n": 6,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "F?Bcw",
+          "label": "atlas-U-n7-F?Bcw-o0",
+          "m": 7,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 1.2607906816612946,
+        "sigma_G": 11.907419313188381,
+        "sigma_H": 10.646628631527086,
+        "sigma_U": 0.5615528128088361
+      },
+      {
+        "F": 11.252708211629262,
+        "G_g6": "MItA?_@?WB_N???G_",
+        "Gamma": 0.6993919249133072,
+        "H": {
+          "beta": 6,
+          "g6": "F~{AG",
+          "label": "atlas-H-n7-F~{AG-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FItA?",
+          "label": "atlas-U-n7-FItA?-o3",
+          "m": 7,
+          "n": 7,
+          "root": 3,
+          "source": "atlas"
+        },
+        "nG": 14,
+        "payment": 1.2691465289096824,
+        "sigma_G": 12.058530793125428,
+        "sigma_H": 10.789384264215744,
+        "sigma_U": 0.5697546039963752
+      },
+      {
+        "F": 11.25302598254774,
+        "G_g6": "MhoIC?@?WB_N???G_",
+        "Gamma": 0.6997096958317854,
+        "H": {
+          "beta": 6,
+          "g6": "F~{AG",
+          "label": "atlas-H-n7-F~{AG-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FhoI?",
+          "label": "atlas-U-n7-FhoI?-o0",
+          "m": 7,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 14,
+        "payment": 1.3392619364527398,
+        "sigma_G": 12.128646200668484,
+        "sigma_H": 10.789384264215744,
+        "sigma_U": 0.6395522406209544
+      },
+      {
+        "F": 11.463960885981134,
+        "G_g6": "KXAGi?@?WB_N",
+        "Gamma": 0.7000288634809237,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FXAGg",
+          "label": "atlas-U-n7-FXAGg-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 0.5983665645211849,
+        "sigma_G": 11.598366564521186,
+        "sigma_H": 11.0,
+        "sigma_U": -0.10166229895973888
+      },
+      {
+        "F": 11.464704097785152,
+        "G_g6": "J?F{?CB?wF_",
+        "Gamma": 0.7007720752849416,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "E?Fw",
+          "label": "atlas-U-n6-E?Fw-o0",
+          "m": 6,
+          "n": 6,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 11,
+        "payment": 1.348832873731479,
+        "sigma_G": 12.348832873731478,
+        "sigma_H": 11.0,
+        "sigma_U": 0.6480607984465374
+      },
+      {
+        "F": 11.464926786321954,
+        "G_g6": "JsCY?CB?wF_",
+        "Gamma": 0.7009947638217433,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "EsCW",
+          "label": "atlas-U-n6-EsCW-o1",
+          "m": 6,
+          "n": 6,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 11,
+        "payment": 1.6277867466054836,
+        "sigma_G": 12.627786746605484,
+        "sigma_H": 11.0,
+        "sigma_U": 0.9267919827837403
+      },
+      {
+        "F": 11.465959606922436,
+        "G_g6": "KMo`?G@?WB_N",
+        "Gamma": 0.7020275844222255,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FMo`?",
+          "label": "atlas-U-n7-FMo`?-o5",
+          "m": 7,
+          "n": 7,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 0.7020275844222228,
+        "sigma_G": 11.702027584422222,
+        "sigma_H": 11.0,
+        "sigma_U": -2.6645352591003757e-15
+      }
+    ],
+    "payment": [
+      {
+        "F": 11.445683665239006,
+        "G_g6": "Jhd?GCB?wF_",
+        "Gamma": 0.6817516427387957,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 11,
+        "payment": 0.5365515629841546,
+        "sigma_G": 11.536551562984155,
+        "sigma_H": 11.0,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 11.242546622802628,
+        "G_g6": "Lhd?GCB?wF_??P",
+        "Gamma": 0.6892303360866734,
+        "H": {
+          "beta": 6,
+          "g6": "F~{AG",
+          "label": "atlas-H-n7-F~{AG-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5440302563320323,
+        "sigma_G": 11.333414520547777,
+        "sigma_H": 10.789384264215744,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 11.108724464948082,
+        "G_g6": "Khd?GCB?wF_G",
+        "Gamma": 0.6981638109207857,
+        "H": {
+          "beta": 6,
+          "g6": "E~|?",
+          "label": "atlas-H-n6-E~|?-o0",
+          "m": 11,
+          "n": 6,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 0.5529637311661446,
+        "sigma_G": 11.199592362693231,
+        "sigma_H": 10.646628631527086,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 10.926164055162953,
+        "G_g6": "Lhd?GCB?wF_G?O",
+        "Gamma": 0.7042333639268392,
+        "H": {
+          "beta": 6,
+          "g6": "F~|A?",
+          "label": "atlas-H-n7-F~|A?-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5590332841721981,
+        "sigma_G": 11.017031952908102,
+        "sigma_H": 10.457998668735904,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 9.913603399507533,
+        "G_g6": "Lhd??KB?wB?M?A",
+        "Gamma": 0.7151936478219305,
+        "H": {
+          "beta": 6,
+          "g6": "F~XoO",
+          "label": "atlas-H-n7-F~XoO-o1",
+          "m": 12,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5699935680672894,
+        "sigma_G": 10.004471297252682,
+        "sigma_H": 9.434477729185392,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 11.536880398100838,
+        "G_g6": "KPq?i?@?WB_N",
+        "Gamma": 0.7729483756006275,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 0.5700026487473417,
+        "sigma_G": 11.57000264874734,
+        "sigma_H": 11.0,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 10.137563707181563,
+        "G_g6": "Khd??KB?OA_^",
+        "Gamma": 0.7167774351889697,
+        "H": {
+          "beta": 6,
+          "g6": "EyVw",
+          "label": "atlas-H-n6-EyVw-o1",
+          "m": 11,
+          "n": 6,
+          "root": 1,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 0.5715773554343286,
+        "sigma_G": 10.228431604926712,
+        "sigma_H": 9.656854249492383,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 10.483588957423564,
+        "G_g6": "Lhd??K@?wF_O?`",
+        "Gamma": 0.7171734253365223,
+        "H": {
+          "beta": 6,
+          "g6": "Fn}CG",
+          "label": "atlas-H-n7-Fn}CG-o1",
+          "m": 12,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5719733455818812,
+        "sigma_G": 10.574456855168712,
+        "sigma_H": 10.002483509586831,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 11.447694963176579,
+        "G_g6": "Kpa?i?@?WB_N",
+        "Gamma": 0.6837629406763686,
+        "H": {
+          "beta": 6,
+          "g6": "D~{",
+          "label": "atlas-H-n5-D~{-o0",
+          "m": 10,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Fpa?g",
+          "label": "atlas-U-n7-Fpa?g-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 0.5720803950013114,
+        "sigma_G": 11.572080395001311,
+        "sigma_H": 11.0,
+        "sigma_U": -0.1116825456750572
+      },
+      {
+        "F": 8.670047016230267,
+        "G_g6": "Khd??KB?oB_X",
+        "Gamma": 0.7200787397052899,
+        "H": {
+          "beta": 6,
+          "g6": "E}^G",
+          "label": "atlas-H-n6-E}^G-o1",
+          "m": 11,
+          "n": 6,
+          "root": 1,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 0.5748786599506488,
+        "sigma_G": 8.760914913975416,
+        "sigma_H": 8.186036254024767,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 10.795474453956697,
+        "G_g6": "Lhd?GCB?wF_A?A",
+        "Gamma": 0.7211945084518199,
+        "H": {
+          "beta": 6,
+          "g6": "F~{OO",
+          "label": "atlas-H-n7-F~{OO-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5759944286971788,
+        "sigma_G": 10.886342351701845,
+        "sigma_H": 10.310347923004667,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 11.332616319454292,
+        "G_g6": "MPq?i?@?WB_N???G_",
+        "Gamma": 0.7793000327383375,
+        "H": {
+          "beta": 6,
+          "g6": "F~{AG",
+          "label": "atlas-H-n7-F~{AG-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 14,
+        "payment": 0.5763543058850518,
+        "sigma_G": 11.365738570100795,
+        "sigma_H": 10.789384264215744,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 10.006092966529035,
+        "G_g6": "Lhd??C@?wN_P?@",
+        "Gamma": 0.7216511021866481,
+        "H": {
+          "beta": 6,
+          "g6": "Fn}GG",
+          "label": "atlas-H-n7-Fn}GG-o4",
+          "m": 12,
+          "n": 7,
+          "root": 4,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.576451022432007,
+        "sigma_G": 10.096960864274184,
+        "sigma_H": 9.520509841842177,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 9.461295268070351,
+        "G_g6": "Lhd?GCB?wF?B?@",
+        "Gamma": 0.7234774738470549,
+        "H": {
+          "beta": 6,
+          "g6": "F~wWG",
+          "label": "atlas-H-n7-F~wWG-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5782773940924137,
+        "sigma_G": 9.5521631658155,
+        "sigma_H": 8.973885771723086,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 9.301484185904147,
+        "G_g6": "Lhd??K@?GC_[?x",
+        "Gamma": 0.7237915496499454,
+        "H": {
+          "beta": 6,
+          "g6": "FhffG",
+          "label": "atlas-H-n7-FhffG-o1",
+          "m": 12,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5785914698953043,
+        "sigma_G": 9.392352083649296,
+        "sigma_H": 8.813760613753992,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 8.630188972759932,
+        "G_g6": "Lhd??KB?o??X?\\",
+        "Gamma": 0.724793603763251,
+        "H": {
+          "beta": 6,
+          "g6": "F}BJg",
+          "label": "atlas-H-n7-F}BJg-o1",
+          "m": 12,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5795935240086099,
+        "sigma_G": 8.72105687050508,
+        "sigma_H": 8.14146334649647,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 9.98050386670861,
+        "G_g6": "Lhd??KB?OA_^?G",
+        "Gamma": 0.7248165530607871,
+        "H": {
+          "beta": 6,
+          "g6": "FyVx?",
+          "label": "atlas-H-n7-FyVx?-o1",
+          "m": 12,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.579616473306146,
+        "sigma_G": 10.071371764453758,
+        "sigma_H": 9.491755291147612,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 9.271016632764095,
+        "G_g6": "Khd???A?WN_\\",
+        "Gamma": 0.7250650603879869,
+        "H": {
+          "beta": 6,
+          "g6": "ER~g",
+          "label": "atlas-H-n6-ER~g-o4",
+          "m": 11,
+          "n": 6,
+          "root": 4,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 0.5798649806333458,
+        "sigma_G": 9.361884530509244,
+        "sigma_H": 8.782019549875898,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 11.245013712520903,
+        "G_g6": "Mpa?i?@?WB_N???G_",
+        "Gamma": 0.6916974258049482,
+        "H": {
+          "beta": 6,
+          "g6": "F~{AG",
+          "label": "atlas-H-n7-F~{AG-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Fpa?g",
+          "label": "atlas-U-n7-Fpa?g-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 14,
+        "payment": 0.580014880129891,
+        "sigma_G": 11.369399144345635,
+        "sigma_H": 10.789384264215744,
+        "sigma_U": -0.1116825456750572
+      },
+      {
+        "F": 11.194445930880036,
+        "G_g6": "LPq?i?@?WB_N?G",
+        "Gamma": 0.7838852768527396,
+        "H": {
+          "beta": 6,
+          "g6": "E~|?",
+          "label": "atlas-H-n6-E~|?-o0",
+          "m": 11,
+          "n": 6,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5809395499994539,
+        "sigma_G": 11.22756818152654,
+        "sigma_H": 10.646628631527086,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 9.173226552129648,
+        "G_g6": "Lhd???A?WN_\\?_",
+        "Gamma": 0.7272851161360538,
+        "H": {
+          "beta": 6,
+          "g6": "FR~k?",
+          "label": "atlas-H-n7-FR~k?-o4",
+          "m": 12,
+          "n": 7,
+          "root": 4,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5820850363814127,
+        "sigma_G": 9.264094449874797,
+        "sigma_H": 8.682009413493384,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 9.273391189320552,
+        "G_g6": "Lhd???A?WN_\\?C",
+        "Gamma": 0.7295014269622442,
+        "H": {
+          "beta": 6,
+          "g6": "FR~g_",
+          "label": "atlas-H-n7-FR~g_-o4",
+          "m": 12,
+          "n": 7,
+          "root": 4,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5843013472076031,
+        "sigma_G": 9.364259087065701,
+        "sigma_H": 8.779957739858098,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 11.010907331888347,
+        "G_g6": "MPq?i?@?WB_N?G?G?",
+        "Gamma": 0.7889766406522334,
+        "H": {
+          "beta": 6,
+          "g6": "F~|A?",
+          "label": "atlas-H-n7-F~|A?-o0",
+          "m": 12,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 14,
+        "payment": 0.5860309137989477,
+        "sigma_G": 11.04402958253485,
+        "sigma_H": 10.457998668735904,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 8.739534020580457,
+        "G_g6": "LPq?g@@?WB?F?X",
+        "Gamma": 0.78956574405548,
+        "H": {
+          "beta": 6,
+          "g6": "E}^G",
+          "label": "atlas-H-n6-E}^G-o1",
+          "m": 11,
+          "n": 6,
+          "root": 1,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5866200172021943,
+        "sigma_G": 8.77265627122696,
+        "sigma_H": 8.186036254024767,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 8.598148127407438,
+        "G_g6": "Lhd??KB?oC?W?\\",
+        "Gamma": 0.731927279033485,
+        "H": {
+          "beta": 6,
+          "g6": "F}bBg",
+          "label": "atlas-H-n7-F}bBg-o1",
+          "m": 12,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5867271992788439,
+        "sigma_G": 8.689016025152586,
+        "sigma_H": 8.102288825873742,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 10.016418298341435,
+        "G_g6": "Lhd??K@?wF_P?@",
+        "Gamma": 0.7319764339990478,
+        "H": {
+          "beta": 6,
+          "g6": "Fn}GG",
+          "label": "atlas-H-n7-Fn}GG-o1",
+          "m": 12,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5867763542444067,
+        "sigma_G": 10.107286196086584,
+        "sigma_H": 9.520509841842177,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 9.826178137840905,
+        "G_g6": "Khd??KB?wB?M",
+        "Gamma": 0.7325479728318101,
+        "H": {
+          "beta": 6,
+          "g6": "E~Xo",
+          "label": "atlas-H-n6-E~Xo-o1",
+          "m": 11,
+          "n": 6,
+          "root": 1,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 0.587347893077169,
+        "sigma_G": 9.917046035586054,
+        "sigma_H": 9.329698142508885,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 11.10966183886058,
+        "G_g6": "Lpa?i?@?WB_N?G",
+        "Gamma": 0.6991011848332835,
+        "H": {
+          "beta": 6,
+          "g6": "E~|?",
+          "label": "atlas-H-n6-E~|?-o0",
+          "m": 11,
+          "n": 6,
+          "root": 0,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Fpa?g",
+          "label": "atlas-U-n7-Fpa?g-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5874186391582263,
+        "sigma_G": 11.234047270685313,
+        "sigma_H": 10.646628631527086,
+        "sigma_U": -0.1116825456750572
+      },
+      {
+        "F": 9.99699489784259,
+        "G_g6": "Khd??C@?wN_P",
+        "Gamma": 0.7344678378922449,
+        "H": {
+          "beta": 6,
+          "g6": "En}G",
+          "label": "atlas-H-n6-En}G-o4",
+          "m": 11,
+          "n": 6,
+          "root": 4,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 12,
+        "payment": 0.5892677581376038,
+        "sigma_G": 10.08786279558774,
+        "sigma_H": 9.498595037450135,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 10.155598710639065,
+        "G_g6": "Lhd??CB@_C_R?e",
+        "Gamma": 0.7348124386464754,
+        "H": {
+          "beta": 6,
+          "g6": "F{e[o",
+          "label": "atlas-H-n7-F{e[o-o3",
+          "m": 12,
+          "n": 7,
+          "root": 3,
+          "source": "atlas"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 13,
+        "payment": 0.5896123588918343,
+        "sigma_G": 10.246466608384214,
+        "sigma_H": 9.65685424949238,
+        "sigma_U": -0.1452000797546411
+      }
+    ],
+    "sigma_G": [
+      {
+        "F": 5.3893358432069975,
+        "G_g6": "]hd?GC@@GG?@?@@?__??@??CC?GG????C??@@??GG?????@???@@???__??????@????CC???G",
+        "Gamma": 1.0248639274043443,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o0",
+          "m": 30,
+          "n": 25,
+          "root": 0,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Dhc",
+          "label": "C5+tree1.0@d1",
+          "m": 5,
+          "n": 5,
+          "root": 1,
+          "source": "generated-unicyclic-tree"
+        },
+        "nG": 30,
+        "payment": 0.78879594990455,
+        "sigma_G": 5.389335843206993,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.23606797749979425
+      },
+      {
+        "F": 5.389335843207026,
+        "G_g6": "]hc_GC@@GG?@?@@?__??@??CC?GG????C??@@??GG?????@???@@???__??????@????CC???G",
+        "Gamma": 1.0248639274043727,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o0",
+          "m": 30,
+          "n": 25,
+          "root": 0,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Dhc",
+          "label": "C5+tree1.0@d2",
+          "m": 5,
+          "n": 5,
+          "root": 2,
+          "source": "generated-unicyclic-tree"
+        },
+        "nG": 30,
+        "payment": 0.7887959499045785,
+        "sigma_G": 5.3893358432070215,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.23606797749979425
+      },
+      {
+        "F": 5.38933584320704,
+        "G_g6": "]he?GC@@GG?@?@@?__??@??CC?GG????C??@@??GG?????@???@@???__??????@????CC???G",
+        "Gamma": 1.024863927404387,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o0",
+          "m": 30,
+          "n": 25,
+          "root": 0,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Dhc",
+          "label": "atlas-U-n5-Dhc-o0",
+          "m": 5,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 30,
+        "payment": 0.7887959499045927,
+        "sigma_G": 5.389335843207036,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.23606797749979425
+      },
+      {
+        "F": 5.365354550248976,
+        "G_g6": "_Pq?g?H?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 1.0008826344463229,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o4",
+          "m": 7,
+          "n": 7,
+          "root": 4,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 0.7979369075930371,
+        "sigma_G": 5.39847680089548,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 5.368626906534085,
+        "G_g6": "_Pq?g?@AG?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 1.0041549907314318,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o4",
+          "m": 7,
+          "n": 7,
+          "root": 4,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 0.8012092638781461,
+        "sigma_G": 5.401749157180589,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 5.402466771418209,
+        "G_g6": "]hc?KC@@GG?@?@@?__??@??CC?GG????C??@@??GG?????@???@@???__??????@????CC???G",
+        "Gamma": 1.0379948556155556,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Dhc",
+          "label": "atlas-U-n5-Dhc-o0",
+          "m": 5,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 30,
+        "payment": 0.8019268781157614,
+        "sigma_G": 5.402466771418204,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.23606797749979425
+      },
+      {
+        "F": 5.40246677141823,
+        "G_g6": "]hc?IC@@GG?@?@@?__??@??CC?GG????C??@@??GG?????@???@@???__??????@????CC???G",
+        "Gamma": 1.037994855615577,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Dhc",
+          "label": "C5+tree1.0@d1",
+          "m": 5,
+          "n": 5,
+          "root": 1,
+          "source": "generated-unicyclic-tree"
+        },
+        "nG": 30,
+        "payment": 0.8019268781157827,
+        "sigma_G": 5.402466771418226,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.23606797749979425
+      },
+      {
+        "F": 5.402466771418237,
+        "G_g6": "]hc?HC@@GG?@?@@?__??@??CC?GG????C??@@??GG?????@???@@???__??????@????CC???G",
+        "Gamma": 1.037994855615584,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Dhc",
+          "label": "C5+tree1.0@d2",
+          "m": 5,
+          "n": 5,
+          "root": 2,
+          "source": "generated-unicyclic-tree"
+        },
+        "nG": 30,
+        "payment": 0.8019268781157898,
+        "sigma_G": 5.402466771418233,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.23606797749979425
+      },
+      {
+        "F": 5.410882143073953,
+        "G_g6": "]hc@GC@@GG?@?@@?__??@??CC?GG????C??@@??GG?????@???@@???__??????@????CC???G",
+        "Gamma": 1.0464102272712994,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Dhc",
+          "label": "C5+tree1.0@d2",
+          "m": 5,
+          "n": 5,
+          "root": 2,
+          "source": "generated-unicyclic-tree"
+        },
+        "nG": 30,
+        "payment": 0.8103422497715052,
+        "sigma_G": 5.410882143073948,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.23606797749979425
+      },
+      {
+        "F": 5.410882143073967,
+        "G_g6": "]hcCGC@@GG?@?@@?__??@??CC?GG????C??@@??GG?????@???@@???__??????@????CC???G",
+        "Gamma": 1.0464102272713136,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Dhc",
+          "label": "atlas-U-n5-Dhc-o0",
+          "m": 5,
+          "n": 5,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 30,
+        "payment": 0.8103422497715194,
+        "sigma_G": 5.410882143073962,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.23606797749979425
+      },
+      {
+        "F": 5.410882143073967,
+        "G_g6": "]hcAGC@@GG?@?@@?__??@??CC?GG????C??@@??GG?????@???@@???__??????@????CC???G",
+        "Gamma": 1.0464102272713136,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Dhc",
+          "label": "C5+tree1.0@d1",
+          "m": 5,
+          "n": 5,
+          "root": 1,
+          "source": "generated-unicyclic-tree"
+        },
+        "nG": 30,
+        "payment": 0.8103422497715194,
+        "sigma_G": 5.410882143073962,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.23606797749979425
+      },
+      {
+        "F": 5.3781803091068054,
+        "G_g6": "_Pq?gO@?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 1.0137083933041522,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o0",
+          "m": 30,
+          "n": 25,
+          "root": 0,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o4",
+          "m": 7,
+          "n": 7,
+          "root": 4,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 0.8107626664508665,
+        "sigma_G": 5.4113025597533095,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 5.3841105056647605,
+        "G_g6": "_Pq?g?@OG?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 1.0196385898621072,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 0.8166928630088215,
+        "sigma_G": 5.4172327563112646,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 5.385035621382957,
+        "G_g6": "_Pq?g@@?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 1.0205637055803036,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 0.8176179787270179,
+        "sigma_G": 5.418157872029461,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 5.3850499813119965,
+        "G_g6": "_Pq?k?@?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 1.0205780655093433,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o0",
+          "m": 30,
+          "n": 25,
+          "root": 0,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o0",
+          "m": 7,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 0.8176323386560576,
+        "sigma_G": 5.418172231958501,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 5.387329708224089,
+        "G_g6": "_Pq?i?@?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 1.0228577924214362,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o0",
+          "m": 30,
+          "n": 25,
+          "root": 0,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o1",
+          "m": 7,
+          "n": 7,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 0.8199120655681504,
+        "sigma_G": 5.4204519588705935,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 5.387981278761653,
+        "G_g6": "_Pq?g_@?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 1.0235093629589995,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o0",
+          "m": 30,
+          "n": 25,
+          "root": 0,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o3",
+          "m": 7,
+          "n": 7,
+          "root": 3,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 0.8205636361057138,
+        "sigma_G": 5.421103529408157,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 5.389351055056596,
+        "G_g6": "_Pq?h?@?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 1.024879139253943,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o0",
+          "m": 30,
+          "n": 25,
+          "root": 0,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o2",
+          "m": 7,
+          "n": 7,
+          "root": 2,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 0.8219334124006572,
+        "sigma_G": 5.4224733057031,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 5.393988397331472,
+        "G_g6": "_Pq?g?@_G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 1.0295164815288187,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o0",
+          "m": 7,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 0.826570754675533,
+        "sigma_G": 5.427110647977976,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 5.397819208691305,
+        "G_g6": "_Pq?g?@CG?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 1.033347292888652,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o3",
+          "m": 7,
+          "n": 7,
+          "root": 3,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 0.8304015660353663,
+        "sigma_G": 5.430941459337809,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 5.399826042526587,
+        "G_g6": "_Pq?g?@GG?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 1.0353541267239335,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o2",
+          "m": 7,
+          "n": 7,
+          "root": 2,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 0.8324083998706477,
+        "sigma_G": 5.432948293173091,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 5.400268754414365,
+        "G_g6": "_Pq?gA@?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 1.035796838611712,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o0",
+          "m": 7,
+          "n": 7,
+          "root": 0,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 0.8328511117584263,
+        "sigma_G": 5.433391005060869,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 5.404557121775599,
+        "G_g6": "_Pq?g?P?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 1.0400852059729457,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o3",
+          "m": 7,
+          "n": 7,
+          "root": 3,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 0.83713947911966,
+        "sigma_G": 5.437679372422103,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 5.3473071084231165,
+        "G_g6": "^hd??K@?GC_O?@??_OGC???C??GC?GC????@???GC??_O?????@????_O??GC???????C????GC???G",
+        "Gamma": 0.9828351926204633,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 31,
+        "payment": 0.8376351128658222,
+        "sigma_G": 5.438175006168265,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 5.40686699055833,
+        "G_g6": "_Pq?g?`?G?_H?O??_?GA@?O???G??GA?C@?????G???_G?@?O??????_???GA??@?O???????G????GA???C",
+        "Gamma": 1.0423950747556772,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o1",
+          "m": 30,
+          "n": 25,
+          "root": 1,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "FPq?g",
+          "label": "atlas-U-n7-FPq?g-o2",
+          "m": 7,
+          "n": 7,
+          "root": 2,
+          "source": "atlas"
+        },
+        "nG": 32,
+        "payment": 0.8394493479023915,
+        "sigma_G": 5.4399892412048345,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.2029457268532857
+      },
+      {
+        "F": 5.3589902461242005,
+        "G_g6": "^hd??CD?GC_O?@??_OGC???C??GC?GC????@???GC??_O?????@????_O??GC???????C????GC???G",
+        "Gamma": 0.9945183303215472,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 31,
+        "payment": 0.8493182505669061,
+        "sigma_G": 5.449858143869349,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 5.380866114826524,
+        "G_g6": "^hdA?C@?GC_O?@??_OGC???C??GC?GC????@???GC??_O?????@????_O??GC???????C????GC???G",
+        "Gamma": 1.0163941990238712,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o0",
+          "m": 30,
+          "n": 25,
+          "root": 0,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o1",
+          "m": 6,
+          "n": 6,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 31,
+        "payment": 0.8711941192692301,
+        "sigma_G": 5.471734012571673,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 5.383976512854879,
+        "G_g6": "^hd??D@?GC_O?@??_OGC???C??GC?GC????@???GC??_O?????@????_O??GC???????C????GC???G",
+        "Gamma": 1.0195045970522258,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o2",
+          "m": 30,
+          "n": 25,
+          "root": 2,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o1",
+          "m": 6,
+          "n": 6,
+          "root": 1,
+          "source": "atlas"
+        },
+        "nG": 31,
+        "payment": 0.8743045172975847,
+        "sigma_G": 5.474844410600028,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 5.384835935185521,
+        "G_g6": "^hd?GC@?GC_O?@??_OGC???C??GC?GC????@???GC??_O?????@????_O??GC???????C????GC???G",
+        "Gamma": 1.0203640193828676,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o0",
+          "m": 30,
+          "n": 25,
+          "root": 0,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o5",
+          "m": 6,
+          "n": 6,
+          "root": 5,
+          "source": "atlas"
+        },
+        "nG": 31,
+        "payment": 0.8751639396282265,
+        "sigma_G": 5.4757038329306695,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.1452000797546411
+      },
+      {
+        "F": 5.386234995750485,
+        "G_g6": "^hd?_C@?GC_O?@??_OGC???C??GC?GC????@???GC??_O?????@????_O??GC???????C????GC???G",
+        "Gamma": 1.0217630799478314,
+        "H": {
+          "beta": 6,
+          "g6": "Xhe?GE@_??_@_@_???G?@_?E?????G??E??@_??????_??@_??@",
+          "label": "six-C5-bouquet-o0",
+          "m": 30,
+          "n": 25,
+          "root": 0,
+          "source": "generated-rank6-core"
+        },
+        "U": {
+          "beta": 1,
+          "g6": "Ehd?",
+          "label": "atlas-U-n6-Ehd?-o3",
+          "m": 6,
+          "n": 6,
+          "root": 3,
+          "source": "atlas"
+        },
+        "nG": 31,
+        "payment": 0.8765630001931903,
+        "sigma_G": 5.477102893495633,
+        "sigma_H": 4.600539893302443,
+        "sigma_U": -0.1452000797546411
+      }
+    ]
+  },
+  "versions": {
+    "networkx": "3.6",
+    "numpy": "2.5.5",
+    "python": "3.12.13 (main, Jul 18 2026, 17:02:19) [Clang 22.1.3 ]"
+  }
+}

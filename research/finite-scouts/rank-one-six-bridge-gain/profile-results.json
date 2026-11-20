@@ -1,0 +1,196 @@
+{
+  "counts_by_profile": {
+    "(3, 3)": 34,
+    "(5, 1)": 175,
+    "(6,)": 17108
+  },
+  "minima": [
+    {
+      "F": 10.544512654383524,
+      "G_n": 14,
+      "Gamma": 0.7805806318833071,
+      "R_g6": "GK|koO",
+      "R_n": 8,
+      "R_root": 0,
+      "R_source": "leaf",
+      "U": "C5+leaf",
+      "U_g6": "Ehe?",
+      "U_root": 5,
+      "metric": "sigma_G",
+      "profile": [
+        3,
+        3
+      ],
+      "sigma_G": 10.635380552128677,
+      "sigma_R": 10.000000000000007,
+      "sigma_U": -0.14520007975463667,
+      "unit_star_eligible": true
+    },
+    {
+      "F": 10.822056931448817,
+      "G_n": 13,
+      "Gamma": 0.7666222868194126,
+      "R_g6": "FK|ko",
+      "R_n": 7,
+      "R_root": 4,
+      "R_source": "atlas",
+      "U": "C5+leaf",
+      "U_g6": "Ehe?",
+      "U_root": 5,
+      "metric": "Gamma",
+      "profile": [
+        3,
+        3
+      ],
+      "sigma_G": 10.912924829193969,
+      "sigma_R": 10.291502622129194,
+      "sigma_U": -0.14520007975463667,
+      "unit_star_eligible": true
+    },
+    {
+      "F": 10.544512654383524,
+      "G_n": 14,
+      "Gamma": 0.7805806318833071,
+      "R_g6": "GK|koO",
+      "R_n": 8,
+      "R_root": 0,
+      "R_source": "leaf",
+      "U": "C5+leaf",
+      "U_g6": "Ehe?",
+      "U_root": 5,
+      "metric": "F",
+      "profile": [
+        3,
+        3
+      ],
+      "sigma_G": 10.635380552128677,
+      "sigma_R": 10.000000000000007,
+      "sigma_U": -0.14520007975463667,
+      "unit_star_eligible": true
+    },
+    {
+      "F": 9.89932819542397,
+      "G_n": 14,
+      "Gamma": 0.7819070979592126,
+      "R_g6": "G{e[o_",
+      "R_n": 8,
+      "R_root": 4,
+      "R_source": "leaf",
+      "U": "C5+leaf",
+      "U_g6": "Ehe?",
+      "U_root": 5,
+      "metric": "sigma_G",
+      "profile": [
+        5,
+        1
+      ],
+      "sigma_G": 9.990196093169121,
+      "sigma_R": 9.353489074964546,
+      "sigma_U": -0.14520007975463667,
+      "unit_star_eligible": true
+    },
+    {
+      "F": 10.326249501229501,
+      "G_n": 14,
+      "Gamma": 0.7160215077424148,
+      "R_g6": "Gn}CGG",
+      "R_n": 8,
+      "R_root": 1,
+      "R_source": "leaf",
+      "U": "C5+leaf",
+      "U_g6": "Ehe?",
+      "U_root": 5,
+      "metric": "Gamma",
+      "profile": [
+        5,
+        1
+      ],
+      "sigma_G": 10.417117398974653,
+      "sigma_R": 9.846295970986876,
+      "sigma_U": -0.14520007975463667,
+      "unit_star_eligible": true
+    },
+    {
+      "F": 9.89932819542397,
+      "G_n": 14,
+      "Gamma": 0.7819070979592126,
+      "R_g6": "G{e[o_",
+      "R_n": 8,
+      "R_root": 4,
+      "R_source": "leaf",
+      "U": "C5+leaf",
+      "U_g6": "Ehe?",
+      "U_root": 5,
+      "metric": "F",
+      "profile": [
+        5,
+        1
+      ],
+      "sigma_G": 9.990196093169121,
+      "sigma_R": 9.353489074964546,
+      "sigma_U": -0.14520007975463667,
+      "unit_star_eligible": true
+    },
+    {
+      "F": 5.788364384729307,
+      "G_n": 14,
+      "Gamma": 1.0244323622290823,
+      "R_g6": "HreRY?@",
+      "R_n": 9,
+      "R_root": 7,
+      "R_source": "path2",
+      "U": "C5",
+      "U_g6": "Dhc",
+      "U_root": 0,
+      "metric": "sigma_G",
+      "profile": [
+        6
+      ],
+      "sigma_G": 5.788364384729302,
+      "sigma_R": 5.000000000000014,
+      "sigma_U": -0.23606797749979425,
+      "unit_star_eligible": true
+    },
+    {
+      "F": 11.445683665238946,
+      "G_n": 11,
+      "Gamma": 0.6817516427387353,
+      "R_g6": "D~{",
+      "R_n": 5,
+      "R_root": 0,
+      "R_source": "atlas",
+      "U": "C5+leaf",
+      "U_g6": "Ehe?",
+      "U_root": 5,
+      "metric": "Gamma",
+      "profile": [
+        6
+      ],
+      "sigma_G": 11.536551562984098,
+      "sigma_R": 11.0,
+      "sigma_U": -0.14520007975463667,
+      "unit_star_eligible": true
+    },
+    {
+      "F": 5.710652628047099,
+      "G_n": 14,
+      "Gamma": 0.9467206055468802,
+      "R_g6": "GreR[?",
+      "R_n": 8,
+      "R_root": 1,
+      "R_source": "leaf",
+      "U": "C5+leaf",
+      "U_g6": "Ehe?",
+      "U_root": 5,
+      "metric": "F",
+      "profile": [
+        6
+      ],
+      "sigma_G": 5.801520525792252,
+      "sigma_R": 5.000000000000009,
+      "sigma_U": -0.14520007975463667,
+      "unit_star_eligible": true
+    }
+  ],
+  "scope": "all rooted graph-atlas rank-six graphs (order<=7), plus one-leaf/P2/P4 attachments at each atlas root and all resulting root orbits; U=C5 or C5+one leaf; nonexhaustive payload extension"
+}

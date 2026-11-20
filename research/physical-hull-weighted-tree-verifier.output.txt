@@ -1,0 +1,47 @@
+{
+  "balanced_states_by_positive_vertices": {
+    "2": 4,
+    "3": 29,
+    "4": 99,
+    "5": 194,
+    "6": 233,
+    "7": 124
+  },
+  "checked_weighted_states": 691,
+  "exceptional_profiles_(positive_vertices,center_weight,leaves,order)": {
+    "(2, 6, 1, 2)": 2,
+    "(3, 5, 2, 3)": 1,
+    "(4, 4, 3, 4)": 1,
+    "(5, 3, 4, 5)": 1,
+    "(6, 2, 5, 6)": 1,
+    "(7, 0, 7, 8)": 1,
+    "(7, 1, 6, 7)": 1
+  },
+  "free_tree_counts_orders_1_through_12": [
+    1,
+    1,
+    1,
+    2,
+    3,
+    6,
+    11,
+    23,
+    47,
+    106,
+    235,
+    551
+  ],
+  "k2_chain_expansion_and_suppression_checks": 2073,
+  "states_by_positive_vertices": {
+    "2": 6,
+    "3": 30,
+    "4": 100,
+    "5": 195,
+    "6": 234,
+    "7": 126
+  },
+  "states_with_zero_weight_branching": 538,
+  "total_weight": 7
+}
+payload_sha256=896b855e0f26b563548a0361ba5eea38353361e6623878ecb0522c517c59bb5f
+weighted-tree classification: PASS
