@@ -1,4 +1,4 @@
-# Cycle 293 candidate: universal discriminant-one Weil structures on even self-products
+# Cycle 293 candidate: universal Weil structures on even self-products
 
 ## Status
 
@@ -11,7 +11,7 @@ Let `(X,lambda)` be any polarized complex abelian variety of dimension `g`, let 
 1. a unital action `K -> End^0(A)`;
 2. a polarization whose Rosati involution restricts to complex conjugation on `K`;
 3. balanced signature `(gr,gr)` on `H^{1,0}(A)`; and
-4. trivial signed Weil discriminant in `Q^x/N_{K/Q}(K^x)`.
+4. ordinary Weil discriminant class `(-1)^(gr)` in `Q^x/N_{K/Q}(K^x)`; in particular, it is trivial for abelian fourfolds, where `gr=2`.
 
 All data are explicit.
 
@@ -37,31 +37,33 @@ This also records an important qualification: an algebra embedding need not be c
 
 Let `W=H_1(X,Q)`, let `S` be the alternating matrix of the original polarization, and identify the multiplicity space with `K^r` using the basis `(1,eta)` on each pair. Up to a positive rational scalar, the new alternating form is
 
-`E(w tensor u,w' tensor v)=E_X(w,w') Tr_{K/Q}(u bar(v))`.
+`E(w tensor u,w' tensor v)=E_X(w,w') Tr_{K/Q}(bar(u)v)`.
 
-With the convention `E=Tr_{K/Q}(eta h)`, its associated Hermitian form is, again up to a rational scalar,
+Following van Geemen's convention,
 
-`h(w tensor u,w' tensor v)=eta^{-1} E_X(w,w') u bar(v)`.
+`H(x,y)=E(x,eta y)+eta E(x,y)`
+
+is conjugate-linear in the first variable and `K`-linear in the second. Hence, up to the harmless rational factor coming from whether the trace is normalized by two,
+
+`H(w tensor u,w' tensor v)=eta E_X(w,w') bar(u)v`.
 
 Its `K`-dimension is `N=2gr`. In a rational basis of `W` and the standard `K`-basis of `K^r`,
 
-`det_K(h)=eta^{-N} det(S)^r`
+`det_K(H)=eta^N det(S)^r`
 
-up to a rational `N`th power. Write `N=2q`, so `q=gr`. Since `det(S)=Pf(S)^2`, the signed determinant is
+up to a rational `N`th power. Write `N=2q`, so `q=gr`. Since `det(S)=Pf(S)^2`,
 
-`(-1)^{N(N-1)/2} det_K(h)
- = (-1)^q eta^{-2q} Pf(S)^{2r}
- = d^{-q} Pf(S)^{2r}`
+`det_K(H)=(-1)^q d^q Pf(S)^(2r)`.
 
-up to a rational even power. This is
+The last two factors are norms: `d^q=N_{K/Q}(eta^q)` and `Pf(S)^(2r)=N_{K/Q}(Pf(S)^r)`. Therefore the ordinary Weil discriminant used by van Geemen is exactly the class
 
-`N_{K/Q}(eta^{-q} Pf(S)^r)`
+`[det_K(H)]=[(-1)^q]=[(-1)^(gr)]`.
 
-up to the same harmless rational norm (the displayed expression uses `N(eta)=d`; signs cancel in the signed convention). Hence the signed Weil discriminant is one. Changing between the standard determinant conventions only inserts the already displayed signed factor.
+This sign is essential. Norms from an imaginary quadratic field are positive, so `[-1]` is nontrivial. Thus the general even self-product has trivial discriminant exactly when `gr` is even; for an abelian fourfold `2gr=4`, this always holds. An earlier draft incorrectly inserted a signed-determinant convention and thereby claimed triviality in all dimensions; that claim is retracted.
 
 ## Census consequence
 
-For any isotypic support `X^m`, every even `m` is automatically admitted at the algebra-action, compatible-polarization, balanced-signature, and discriminant-one gates, without any assumption on `End^0(X)`. In an abelian fourfold this universally handles
+For any isotypic support `X^m`, every even `m` is automatically admitted at the algebra-action, compatible-polarization, and balanced-signature gates, without any assumption on `End^0(X)`. Its constructed discriminant is `(-1)^(m dim(X)/2)`. In an abelian fourfold the total half-dimension is two, and the construction universally gives discriminant one for
 
 - `E^4`;
 - `E_1^2 x E_2^2` factorwise;
