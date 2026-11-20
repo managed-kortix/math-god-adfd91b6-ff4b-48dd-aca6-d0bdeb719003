@@ -315,6 +315,147 @@ interval.  Since `h` is differentiable, nondecreasing, and concave, the
 single condition `tr(P(H_t)_-)=0` (equivalently `h'(t)=0`) at the left
 endpoint already forces the later plateau.
 
+The tangent bound has a sharper exact equality statement.  Put
+
+```text
+R_t=(H_t)_-,       q_t=tr(P R_t).
+```
+
+Firm nonexpansiveness of orthogonal projection onto the positive-semidefinite
+cone gives, for `s>t`,
+
+```text
+(s-t)(q_t-q_s)
+ =<R_t-R_s,(-H_t)-(-H_s)> >= ||R_t-R_s||_F^2.              (15a)
+```
+
+Thus `q_t` is nonincreasing.  If `R_t=R_s=R`, then the positive/negative
+spectral decomposition gives
+
+```text
+tr(R H_t)=-tr(R^2)=tr(R H_s),
+```
+
+so `(s-t)tr(PR)=0`.  Hence `q_t>0` forces `q_s<q_t` for every `s>t`, whereas
+`q_t=0` forces `q_s=0` thereafter.  Since
+`h(1)-h(t)=2 integral_t^1 q_u du`, for every `0<=t<1` one therefore has
+
+```text
+q_t=0  ==>  Gamma=h(t),
+q_t>0  ==>  0<Gamma-h(t)<2(1-t)q_t.                        (15b)
+```
+
+In particular, if `W=Z_+`,
+
+```text
+c=tr(W^2)=Phi(Z),       a=tr(PW),
+```
+
+then `tr(PZ)=0` implies `q_0=tr(PZ_-)=a`.  Consequently
+
+```text
+0<=Gamma-c<=2a,                                          (15c)
+```
+
+with equality throughout exactly when `a=0`; if `a>0`, both inequalities in
+`0<Gamma-c<2a` are strict.  The identity `c=rho^2` in this paragraph retains
+the single-edge (or, more generally, at-most-one-positive-eigenvalue) scope
+stated above.
+
+There is also an exact lower tail envelope.  Projection nonexpansiveness and
+Cauchy--Schwarz give, for `u>=t`,
+
+```text
+q_u >= max(0,q_t-b(u-t)).                                  (15d)
+```
+
+For `L=1-t`, define, when `b>0`,
+
+```text
+Psi_L(q,b) = q^2/b                 if 0<=q<=bL,
+             2qL-bL^2             if q>=bL.
+```
+
+If `b=0`, then `P=0` and `q=0`, and set `Psi_L(0,0)=0`.  Integrating (15d)
+and combining it with (15b) gives the nonsmooth-safe sandwich
+
+```text
+h(t)+Psi_(1-t)(q_t,b) <= Gamma <= h(t)+2(1-t)q_t.          (15e)
+```
+
+Equality in the lower inequality is equivalent to
+`q_u=max(0,q_t-b(u-t))` throughout `[t,1]`.  No eigenvalue-crossing
+regularity beyond continuity is being assumed.
+
+At `t=0`, this tail estimate has a useful elementary form.  The fixed trial
+`W` in (5), and the tangent at zero from concavity, give for `0<=t<=1`
+
+```text
+c+2at-bt^2 <= h(t) <= c+2at.                               (15f)
+```
+
+Equivalently, the lower trial may be transported to the actual matrix `Z+P`
+as `X=W+(1-t)P`.  Maximizing the lower quadratic over `0<=t<=1` yields
+
+```text
+Gamma >= c+psi(a,b),
+psi(a,b) = a^2/b       if b>0 and 0<=a<=b,
+           2a-b        if b>0 and a>=b,
+           0           if b=0.                             (15g)
+```
+
+The `b=0` case has `P=0` and `a=0`.  Formula (15g) is a lower certificate,
+not an identity; optimizing the full two-ray cone below may be stronger.
+
+### Exact marked cyclic-space compression
+
+All of these quantities admit a potentially much smaller exact baseline than
+`b=Phi(D)`.  Write `D=A_U direct_sum A_R`, let `e_y,e_x` be the two marked
+coordinate vectors, and define the sidewise cyclic spaces
+
+```text
+K_U=span{A_U^k e_y:k>=0},       K_R=span{A_R^k e_x:k>=0},
+K=K_U direct_sum K_R.
+```
+
+Because the side matrices are symmetric, `K` is reducing for `D`; because the
+coupling is the single marked edge, `E` acts only on `K`.  Hence on
+`K direct_sum K^perp`,
+
+```text
+D=D_* direct_sum D_0,       E=E_* direct_sum 0.
+```
+
+The passive block `D_0` occurs identically before and after gluing, so the
+bridge gain is exactly the gain of the active block.  If
+`P=P_* direct_sum P_0` and `N=N_* direct_sum N_0`, then
+
+```text
+Z=Z_* direct_sum (-N_0),
+H_t=H_(t,*) direct_sum (tP_0-N_0),       H_(t,*)=Z_*+tP_*,
+Phi(H_t)=Phi(H_(t,*))+t^2 Phi(D_0),
+Z_+=(Z_*)_+ direct_sum 0,
+(H_t)_-=(H_(t,*))_- direct_sum N_0.                         (15h)
+```
+
+It follows that `Gamma`, `h(t)`, `c`, `a`, and `q_t` are exactly unchanged,
+while every occurrence of `b` in (15d)--(15g) may be replaced by
+
+```text
+b_*=Phi(D_*)
+   =sum_{lambda>0, Pi^U_lambda e_y !=0} lambda^2
+    +sum_{mu>0, Pi^R_mu e_x !=0} mu^2.                     (15i)
+```
+
+Each supported distinct eigenvalue is counted once on each side.  A repeated
+eigenspace on one side contributes only its marked cyclic direction, while a
+numerically equal eigenvalue occurring on both sides is counted twice.  This
+compression is exact, not a truncation: it removes only reducing spectral
+modes invisible to the marked bridge.  Thus `c+psi(a,b_*)` and the tail bound
+with `b_*` are always at least as strong as their uncompressed versions.
+For a coupling of higher rank, the same argument uses the minimal
+`D`-reducing space containing the range of `E`.
+
 Consequently every fixed `t in [0,1]` gives the rigorous bridge certificate
 
 ```text
@@ -324,7 +465,17 @@ Gamma >= Phi(E-D_-+tD_+)-t^2 Phi(D).                        (15)
 For `t=0` this is (4); for `t=1` it is the identity `Gamma=Gamma`.  Thus
 maximizing over the whole closed interval is tautological.  To close the
 hostile remainder, one still needs a usable lower estimate at some `t<1`
-that, together with `sigma(R)`, pays the arm deficit.
+that, together with `sigma(R)`, pays the arm deficit.  Conversely, (15c) is
+an exact counterexample test when compared with the **actual** deficit: if
+`d_U=-sigma(U)` and
+
+```text
+c+2a < d_U-sigma(R),
+```
+
+then `sigma(G)<0`.  If `d_U` is replaced by the larger uniform envelope
+`delta_q`, the same strict inequality only refutes closure against that
+stronger sufficient target; it does not imply a graph counterexample.
 
 A different reusable strengthening is obtained from any finite collection of
 positive-semidefinite rays `X_1,...,X_m`.  With
@@ -371,10 +522,11 @@ one of those joins.  They are reconnaissance, not evidence for (2) in full.
 ## Next theorem
 
 Prove (2) for every actual marked hostile rank-`(1,6)` bridge, prove that the
-marked condition (8), an interpolation certificate (15), or a stronger
-finite-cone certificate (16) always pays
-the instance deficit on the inherited unit-star residue, or derive a strictly
-stronger packet-specific induced owner partition that pays the same deficit.
+marked condition (8), the active cyclic-space bound (15g)--(15i), an
+interpolation/tail certificate (15e), or a stronger finite-cone certificate
+(16) always pays the instance deficit on the inherited unit-star residue, or
+derive a strictly stronger packet-specific induced owner partition that pays
+the same deficit.
 Reserve and bridge gain must be treated jointly.  Any projector, moment,
 resolvent, or Coulson-phase inequality is useful only after it is
 quantitatively compared with `-sigma(U)-sigma(R)` for all marked ports and
