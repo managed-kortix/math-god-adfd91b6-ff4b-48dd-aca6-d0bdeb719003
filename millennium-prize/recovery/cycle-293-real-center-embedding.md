@@ -1,4 +1,6 @@
-# Cycle 293: a real-center matrix-embedding filter
+# Cycle 293 candidate: a real-center matrix-embedding filter
+
+Status: candidate pending independent audit.
 
 Scope: one necessary-and-sufficient algebra embedding filter for the outstanding Cycle 292 support census. This is elementary algebra, not a completed census, new Hodge case, or Millennium resolution.
 

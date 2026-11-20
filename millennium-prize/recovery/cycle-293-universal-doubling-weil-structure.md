@@ -2,7 +2,7 @@
 
 ## Status
 
-This is a self-contained construction that consolidates the even-multiplicity rows of the outstanding abelian-fourfold support census. It is not a Hodge-conjecture theorem: it constructs a Weil-type action and computes its elementary signed discriminant, but says nothing about algebraicity of Weil classes or mixed tensors.
+This is a self-contained candidate construction, pending independent audit, that consolidates the even-multiplicity rows of the outstanding abelian-fourfold support census. It is not a Hodge-conjecture theorem: it constructs a Weil-type action and computes its ordinary Hermitian discriminant, but says nothing about algebraicity of Weil classes or mixed tensors.
 
 ## Theorem
 
