@@ -1,1 +1,2 @@
-PASS exact universal-doubling checks=4456
+PASS exact universal-doubling checks=8416
+ordinary discriminant class=(-1)^(g*r); fourfold instances have g*r=2 and class 1

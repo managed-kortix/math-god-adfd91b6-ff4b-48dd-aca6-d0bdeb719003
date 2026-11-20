@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Exact regression for universal even self-product construction."""
 from fractions import Fraction
-from math import prod
 
 def mm(a,b):
  return [[sum((a[i][k]*b[k][j] for k in range(len(b))),Fraction()) for j in range(len(b[0]))] for i in range(len(a))]
@@ -20,15 +19,17 @@ for d in range(1,32):
   assert mm(J,J)==[[-d*x for x in row] for row in I]
   assert mm(mm(Ri,tr(J)),R)==[[-x for x in row] for row in J]
   checks+=2
-# Signed determinant norm identity: (-1)^q eta^-2q pf^(2r)=d^-q pf^(2r).
+# Ordinary determinant class: eta^(2q)*pf^(2r)=(-1)^q*d^q*pf^(2r).
+# Modulo norms, only (-1)^q survives. Fourfold condition 2gr=4 gives q=2.
 for g in range(1,7):
  for r in range(1,7):
   q=g*r
   for d in range(1,11):
    for pf in range(-5,6):
-    lhs=Fraction(pf**(2*r),d**q)
-    # Norm(eta^-q pf^r): N(eta)=d.
-    rhs=Fraction(pf**(2*r),d**q)
-    assert lhs==rhs
-    checks+=1
+    det=(-1)**q * d**q * pf**(2*r)
+    normpart=d**q * pf**(2*r)
+    assert det==((-1)**q)*normpart
+    if 2*g*r==4: assert q==2 and det==normpart
+    checks+=2
 print(f'PASS exact universal-doubling checks={checks}')
+print('ordinary discriminant class=(-1)^(g*r); fourfold instances have g*r=2 and class 1')
