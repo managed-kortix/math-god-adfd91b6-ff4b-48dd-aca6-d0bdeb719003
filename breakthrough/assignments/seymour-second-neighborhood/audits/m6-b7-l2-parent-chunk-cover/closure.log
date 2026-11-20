@@ -1,0 +1,3 @@
+PASS closure=652/652 leaves profiles=4 disjoint=yes exhaustive=yes
+PASS parents=8119 profile_parent_incidences=32476
+PASS implication=entire-clean-B7-l2-parent-campaign-closed other-residual-groups=not-claimed
