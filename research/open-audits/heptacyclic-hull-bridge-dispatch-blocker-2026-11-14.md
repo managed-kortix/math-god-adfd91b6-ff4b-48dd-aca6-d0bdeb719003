@@ -1,6 +1,14 @@
 # Heptacyclic hull-bridge dispatch: exact blocker and next semantic gate
 
-Date: 2026-11-14.  Status: **OPEN / NONPROMOTIONAL**.
+Date: 2026-11-14.  Status: **PARTIALLY SUPERSEDED / REMAINDER OPEN**.
+
+Update, 2026-11-20: `universal-hull-k2-theorem.md` and its adjacency-only gate
+close every graph in this lane having exactly two positive blocks of ranks
+`(4,3)` or `(5,2)` and a physical `K2` on their full block–cut-tree path.  The
+physical `R31-S` dispatch remains another registered owner.  This historical
+note and its semantic-gate requirements still govern the residual actual-hull-
+bridge complement, whose census remains `UNAUTHENTICATED`; they must not be
+read as saying the newly registered universal slice is still open.
 
 ## Scope
 
@@ -113,11 +121,12 @@ or splitting cut vertices, swapping the diamond entry orbit, and omitting or
 duplicating a connector payload.  Each mutation must change the derived branch
 or be rejected.
 
-Until such a replay and its analytic dependencies are independently audited,
-the only honest global status is:
+Until the residual complement receives such a replay and independently
+audited analytic dependencies, the only honest current global status is:
 
 ```text
-bridge-free packet registry: candidate packet proofs available
-non-R31-S actual-hull-bridge lane: OPEN / census UNAUTHENTICATED
+bridge-free packet registry: packet proofs closed
+universal exactly-two-positive (4,3)/(5,2) hull-K2 slice: CLOSED
+remaining actual-hull-bridge complement: OPEN / census UNAUTHENTICATED
 global multiblock theorem: OPEN
 ```

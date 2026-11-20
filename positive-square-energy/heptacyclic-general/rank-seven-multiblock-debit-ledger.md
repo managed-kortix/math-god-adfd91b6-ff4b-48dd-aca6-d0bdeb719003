@@ -46,13 +46,22 @@ packet-specific bridge argument certifies the rank-one side (or after another
 exact debit certificate pays it).  The repaired `R31-S` packet does this by
 orienting away from its rank-three block: the away side is a strict-positive
 triangular cactus of rank `q`, and the root side has rank `7-q in {3,4,5,6}`.
-No such repair is asserted here for every other packet.  The bridge edge itself
-crosses the induced partition and needs no owner; every connector vertex,
-other connector edge, and rooted branch remains with its unique side.
 
-Consequently the bridge-free ledger below is conditional on the appropriate
-packet-specific bridge dispatch.  Treating it as a generic theorem is a known
-global blocker.
+There is now one universal additional owner.  If the graph has exactly two
+positive blocks of ranks `(4,3)` or `(5,2)`, a physical `K2` on their unique
+full block–cut-tree path separates them into connected induced sides of those
+exact ranks.  The completed lower-rank theorems plus induced superadditivity
+close the `(4,3)` slice non-strictly and the `(5,2)` slice strictly.  The
+adjacency-only theorem and gate are
+`universal-hull-k2-theorem.md` and
+`research/universal-hull-k2-verifier.py`.
+
+No such repair is asserted for every remaining packet or partition.  The
+bridge edge itself crosses the induced partition and needs no owner; every
+connector vertex, other connector edge, and rooted branch remains with its
+unique side.  Consequently the bridge-free ledger below is conditional on the
+appropriate registered bridge dispatch.  Treating the residual complement as
+a generic theorem remains the global blocker.
 
 ## Exact debit inputs
 
@@ -162,11 +171,14 @@ maximal currently supported nine-key subset
 and originally returned exactly `R31-S` and `R511-K22`.  The K22 row was
 subsequently closed by its exact packet.  The physical `R31-S` theorem now
 supersedes the synthetic one-sided `C4`/`D3` interpretation and closes that
-bridge-free packet as well.  These packet closures do **not** make the global
-ledger complete: the conditional bridge removal above remains unauthenticated
-for the other packet families.  Rank-six structural targets cannot in general
-be inferred by subtracting the DNN-owned key set unless the final manifest
-exposes a disjoint typed owner partition.
+bridge-free packet as well.  Separately, the universal hull–`K2` theorem closes
+the exact two-positive `(4,3)` and `(5,2)` bridge slices without assigning
+packet keys or changing their bridge-free owners.  These closures do **not**
+make the global ledger complete: conditional bridge removal remains
+unauthenticated outside the registered `R31-S` and universal hull–`K2` owner
+slices.  Rank-six structural targets cannot in general be inferred by
+subtracting the DNN-owned key set unless the final manifest exposes a disjoint
+typed owner partition.
 
 ## Ownership contract for the bridge-free packet pass
 
@@ -196,7 +208,8 @@ The authenticated key equality in this note is only
 `= DNN keys disjoint union bridge-free packet-owner keys`.
 
 There is deliberately no asserted finite equality for all multiblock physical
-keys: the unoriented actual-bridge lane is `OPEN` with census
+keys.  The ledger records the universal two-positive `(4,3)/(5,2)` hull–`K2`
+slice separately; the residual actual-bridge complement is `OPEN` with census
 `UNAUTHENTICATED`.
 
 The bridge-free packet-owner keys are now expanded and their later exact
@@ -205,10 +218,12 @@ marked-cut census is now used only as the exact DNN/structural input sieve; the
 physical full-parent gate proves the ordered three-way disposition without
 laundering the historical `C4`/`D3` labels into side topologies.
 
-The remaining obligation is upstream: every packet family excluded by the
-phrase "bridge-free" needs a valid oriented or packet-specific actual-bridge
-argument.  Until that bridge cascade is audited, no complete multiblock or
-all-connected rank-seven conclusion follows from this note.
+The remaining obligation is upstream: every actual-bridge incidence excluded
+by the phrase "bridge-free" and not already in the physical `R31-S` or
+universal two-positive hull–`K2` owner slices needs a valid oriented or
+packet-specific argument.  Until that residual bridge cascade is audited, no
+complete multiblock or all-connected rank-seven conclusion follows from this
+note.
 
 ## Exact debit arithmetic audit
 

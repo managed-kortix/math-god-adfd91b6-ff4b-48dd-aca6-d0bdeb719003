@@ -1,0 +1,3 @@
+external NetworkX cross-check: passed
+connected graphs compared: 630; valid theorem graphs: 60
+comparison: exact maximal-block edge sets, acceptance, partition, hull-edge set

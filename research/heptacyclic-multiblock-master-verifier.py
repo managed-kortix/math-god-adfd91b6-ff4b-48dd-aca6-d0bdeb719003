@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Fail-closed audit of the rank-seven multiblock reduction.
 
-The physical R31-S packet has a passing adjacency/Tarjan gate.  This master
-still exits nonzero: the upstream generic hull-bridge reduction is false for
-rank-one sides, and the other packet bridge cases lack a uniform repair.  A
-zero exit must never be mistaken for a theorem receipt.
+The physical R31-S packet and the universal exactly-two-positive (4,3)/(5,2)
+hull-K2 slice have passing adjacency/Tarjan gates.  This master still exits
+nonzero: the upstream generic hull-bridge reduction is false for rank-one
+sides, and the residual bridge complement lacks a uniform repair.  A zero
+exit must never be mistaken for a theorem receipt.
 """
 
 from __future__ import annotations
@@ -19,12 +20,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "research/fixtures/heptacyclic-multiblock-owner-ledger.json"
-LEDGER_SHA256 = "9fc85a8a94021d998a28fcbc1ceed3cf3c516c87dba6148277fb32ead836a1ef"
+LEDGER_SHA256 = "a039385c0faf95f164e4a47959862bf11637b7ee7c84d5146f551cd220d72738"
 SOURCES = {
     "theorem": (ROOT / "positive-square-energy/heptacyclic-general/complete-multiblock-theorem.md",
-                "27c6a4736125d821f21fd1ebc7a30580068535826c8fcc6f72ea172cbb6a7399"),
+                "540a267b5b4c6196a96ab8b2abf5a6569fa30a14bea735ba08c4b2574e3f0987"),
     "debit-ledger": (ROOT / "positive-square-energy/heptacyclic-general/rank-seven-multiblock-debit-ledger.md",
-                     "3f8bb3a397125782dd6c9cae26ce52f9c6bf826e3136dfee62781048e65c18a5"),
+                     "f45d60cbeefdf523e5aab053af708a388687f05b64a3d569bd1ddda885396ac2"),
+    "universal-hull-k2": (ROOT / "positive-square-energy/heptacyclic-general/universal-hull-k2-theorem.md",
+                          "c469a4991df034b040f6aee49f1e81b8513a18e59f86edf3c38ee4c318b0e9a5"),
     "two-debit": (ROOT / "positive-square-energy/heptacyclic-general/two-debit-induced-piece-theorem.md",
                   "29304b8c920c6efd43d05ce0e8f2c21f44e2656ded0c3ce69ea79b5271454213"),
     "nested": (ROOT / "positive-square-energy/heptacyclic-general/nested-induced-piece-packet-theorem.md",
@@ -45,11 +48,14 @@ SOURCES = {
                  "698c6b25f5ad76ad94a66b31bd30990e2a7e9246e9a53dc99b53992e67ee670b"),
 }
 CHILDREN = {
+    "universal-hull-k2": ("universal-hull-k2-verifier.py",
+        "d35b9ce0d466f9ad535cfc6c116c6803656465f505215ba14e44914f18682fe1",
+        "5f91e157c4fa1f0c941d526499743c159d807d193691a2080a261e0594e8964a"),
     "rank-seven-two-debit": ("rank-seven-two-debit-induced-piece-verifier.py",
         "f37e31be0d7888d43a7d8f752642fde04a71f1e1abc5317e94da7e0d7436a501",
         "0ac8b98c0abf5487577a65fabe386434f52d9bc05706bff146102a23f5ecace2"),
     "rank-seven-nested": ("rank-seven-nested-induced-piece-verifier.py",
-        "9995120078f406906064eaf99f6d8ee6fb510df32049c9f5a8580e1e37c7d3b9",
+        "139ef572db48c7bc358648321d234015a36618bd7abbc23edf2fc1b4c99f6bec",
         "d19e6d5961a47cc47ab14cf6308c7b90948ee64860a1119e969514395d3aec5d"),
     "r31-s-marked-cut": ("r31-s-doubled-c4-marked-cut-verifier.py",
         "b14e7544bd8f5298fd425c68228e5fb4f5c49071dd3a7ec773ee5de610630c71",
@@ -67,7 +73,7 @@ CHILDREN = {
         "a8e73f0e749705558aefa21bb6e0cdc361be8a3a437d0d889fb50a9c41b26bb9",
         "e2da1bdd114c8770765b3c0b36938fb7d6cc2e25fe249304a80241bb1d4e9f2f"),
     "r511-k22": ("r511-k22-last-multiblock-key-verifier.py",
-        "c76ad76df0db79d2a4acc2a7cc16c7d924d0d322064bf612e5a4078b7e1b0c93",
+        "15325973275aef32b93df32a32dd5b9afaeb2d1c95a6d11dc510312e2761907c",
         "a8149532f0f5b92ff33bb6657df302e3ffda8ea6d177a61676c5fd206082df56"),
     "r61-k110": ("r61-k110-shared-cut-packet-verifier.py",
         "be0552093f21fc53359e1f558ce6620414809923369dff7336964f3b4a5d7518",
@@ -137,8 +143,9 @@ def load_ledger():
 
 
 def check_sources():
-    require(set(SOURCES) == {"theorem", "debit-ledger", "two-debit", "nested",
-            "r31-frontier", "r31-physical", "r31-c4", "r31-d3-open", "r511-k22", "r61", "r61-k223"},
+    require(set(SOURCES) == {"theorem", "debit-ledger", "universal-hull-k2",
+            "two-debit", "nested", "r31-frontier", "r31-physical", "r31-c4",
+            "r31-d3-open", "r511-k22", "r61", "r61-k223"},
             "source registry changed")
     for name, (path, expected) in SOURCES.items():
         require(path.is_file(), f"missing source: {name}")
@@ -148,15 +155,15 @@ def check_sources():
 def audit(payload):
     check_sources()
     require(integer_partitions(7) == PARTITIONS, "partition generation changed")
-    require(payload["schema"] == "heptacyclic-multiblock-owner-ledger-v2", "schema changed")
+    require(payload["schema"] == "heptacyclic-multiblock-owner-ledger-v3", "schema changed")
     require(payload["scope"] == {
         "block_predicate": "at-least-two-positive-rank-cyclic-blocks",
         "graph": "finite-simple-connected",
         "includes": ["arbitrary-legal-subdivisions", "arbitrary-block-cut-incidence",
                      "repeated-or-nested-cuts", "arbitrary-finite-rooted-trees"],
-        "excludes": ["unoriented-cyclic-hull-bridge-incidences"],
+        "excludes": ["remaining-unoriented-cyclic-hull-bridge-incidences"],
         "rank": 7,
-    }, "bridge-free theorem scope changed")
+    }, "registered theorem scope changed")
     require(payload["excluded_partitions"] == [[7]], "single-block exclusion changed")
     require(payload["conclusion"] == {"bound": "|V(G)|", "quantity": "s+(G)",
             "relation": ">=", "statement": "s+(G)>=|V(G)|", "strict": False},
@@ -179,17 +186,31 @@ def audit(payload):
     require(set(flattened) == set(PACKET_KEYS), "partition packet ownership is not exact")
     require(payload["bridge_free_packet_residual"] == [],
             "bridge-free packet residual is not empty")
-    require("final_residual" not in payload,
-            "obsolete finite global residual was reintroduced")
-    require(payload["unoriented_bridge_cases"] == {
+    require("final_residual" not in payload and
+            "unoriented_bridge_cases" not in payload,
+            "obsolete global bridge residual was reintroduced")
+    require(payload["hull_bridge_owner_slices"] == {
+        "universal-hull-k2": {
+            "exactly_two_positive_blocks": True,
+            "partitions": [[4, 3], [5, 2]],
+            "requires": "physical-K2-on-positive-block-path",
+            "conclusion_by_partition": {
+                "4+3": "sigma>=0",
+                "5+2": "sigma>0",
+            },
+        },
+    }, "universal hull-K2 owner slice changed")
+    require(payload["remaining_unoriented_bridge_cases"] == {
         "status": "OPEN",
         "census": "UNAUTHENTICATED",
-        "scope": "all-non-R31-S-packet-families-with-an-actual-cyclic-hull-bridge",
+        "scope": ("actual-cyclic-hull-bridge incidences not authenticated by "
+                  "registered R31-S or universal-hull-k2 owners"),
         "forbid_finite_residual": True,
-    }, "unoriented bridge blocker semantics changed")
-    require(type(payload["unoriented_bridge_cases"]) is dict and
-            payload["unoriented_bridge_cases"]["census"] == "UNAUTHENTICATED",
-            "unoriented bridge lane was laundered into a finite residual")
+    }, "remaining bridge blocker semantics changed")
+    require(type(payload["remaining_unoriented_bridge_cases"]) is dict and
+            payload["remaining_unoriented_bridge_cases"]["census"] ==
+            "UNAUTHENTICATED",
+            "remaining bridge lane was laundered into a finite residual")
     require(payload["owner_rules"] == {
         "boundary_cut": "upstream-only",
         "nested_demands": "one-complete-first-boundary-territory",
@@ -198,8 +219,11 @@ def audit(payload):
     }, "owner rules changed")
 
     owners = payload["verifier_owners"]
-    require(set(owners) == set(CHILDREN) - {"r31-s-parent-gate"},
-            "child scope registry changed")
+    require(set(owners) == set(CHILDREN) - {
+        "r31-s-parent-gate", "universal-hull-k2"
+    }, "child scope registry changed")
+    require("universal-hull-k2" not in owners,
+            "universal hull slice was laundered into packet-key ownership")
     primary = [key for keys in owners.values() for key in keys if ":" not in key]
     require(set(primary) == set(PACKET_KEYS),
             "bridge-free packet verifier ownership is not exhaustive")
@@ -269,9 +293,22 @@ def hostile_tests(payload):
         lambda value: value["verifier_owners"].update(**{"r31-s-d3": ["R31-S"]}),
         lambda value: value["bridge_free_packet_residual"].append("R31-S"),
         lambda value: value.update(final_residual=["R31-S"]),
-        lambda value: value["unoriented_bridge_cases"].update(status="CLOSED"),
-        lambda value: value["unoriented_bridge_cases"].update(census=[]),
-        lambda value: value["unoriented_bridge_cases"].update(
+        lambda value: value["hull_bridge_owner_slices"]["universal-hull-k2"][
+            "partitions"].pop(),
+        lambda value: value["hull_bridge_owner_slices"]["universal-hull-k2"][
+            "partitions"].append([6, 1]),
+        lambda value: value["hull_bridge_owner_slices"]["universal-hull-k2"].update(
+            exactly_two_positive_blocks=False),
+        lambda value: value["hull_bridge_owner_slices"]["universal-hull-k2"].update(
+            requires="any-K2-anywhere"),
+        lambda value: value["hull_bridge_owner_slices"]["universal-hull-k2"][
+            "conclusion_by_partition"].update(**{"4+3": "sigma>0"}),
+        lambda value: value["verifier_owners"].update(
+            **{"universal-hull-k2": ["R43", "R52-K22", "R52-K71"]}),
+        lambda value: value["remaining_unoriented_bridge_cases"].update(
+            status="CLOSED"),
+        lambda value: value["remaining_unoriented_bridge_cases"].update(census=[]),
+        lambda value: value["remaining_unoriented_bridge_cases"].update(
             scope=["R21", "R221"]),
         lambda value: value["owner_rules"].update(boundary_cut="both-sides"),
     )
@@ -289,16 +326,18 @@ def main():
         "heptacyclic multiblock master audit: exact reduction passed\n"
         "partition scope: 14 non-(7) partitions; excluded single-block partition: (7)\n"
         f"bridge-free owner ledger: {len(PACKET_KEYS)} packet keys; packet residual: empty\n"
-        "unoriented non-R31-S hull-bridge lane: OPEN; census: UNAUTHENTICATED\n"
+        "universal two-positive hull-K2 slice: CLOSED for (4,3) and (5,2)\n"
+        "remaining actual-hull-bridge lane: OPEN; census: UNAUTHENTICATED\n"
         f"closed/prerequisite verifiers: {len(outputs)}; "
         f"executions: {2 * len(outputs)} normal/-O\n"
         f"hostile mutations rejected: {rejected}\n"
         "R31-S full-parent combinatorial gate: PASSED; analytic adjacency gate: PASSED; "
         "synthetic D3 implication not used\n"
-        "blocked implication: generic positive-rank hull-bridge sides are not both "
-        "automatically nonnegative (rank-one C5 is negative); no finite bridge residual accepted\n"
+        "blocked implication: outside registered owners, generic positive-rank hull-bridge "
+        "sides are not both automatically nonnegative (rank-one C5 is negative); "
+        "no finite bridge residual accepted\n"
         "conclusion: NOT ESTABLISHED for all connected rank-seven multiblock graphs\n"
-        "status: OPEN; FAIL CLOSED PENDING GLOBAL HULL-BRIDGE REPAIR"
+        "status: OPEN; FAIL CLOSED PENDING REMAINING HULL-BRIDGE REPAIR"
     )
     if "--optimized-master-child" not in sys.argv and not sys.flags.optimize:
         child = subprocess.run([sys.executable, "-O", __file__, "--optimized-master-child"],

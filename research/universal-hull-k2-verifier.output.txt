@@ -1,0 +1,10 @@
+universal hull-K2 beta-seven theorem: exact audit passed
+scope: exactly two positive maximal blocks; partitions (4,3) or (5,2); hull K2 required
+sources: current rank-2..6 papers authenticated; family fixtures/source rows used=0
+reconstruction: iterative edge-stack Tarjan; full unsuppressed block-cut tree; no label ordering key
+quotient: all hull K2s deleted simultaneously; physical path and every exact side split replayed
+stress: connector lengths 1,1401,10000,20000 in both partitions; deep arms=12000; off-hull payload=20000
+accepted connector cases: 8; heterogeneous relabel replays: 2; nonreflexive relabel replays: 2; caller-order replays: 1
+hostile adjacency/source cases rejected: 11; hostile receipts rejected: 9
+conclusion: partition (4,3) gives sigma>=0; partition (5,2) gives sigma>0
+status: theorem artifact passed for the universal hull-K2 lane only
