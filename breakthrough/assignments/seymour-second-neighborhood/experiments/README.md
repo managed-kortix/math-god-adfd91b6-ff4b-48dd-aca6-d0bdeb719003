@@ -1167,3 +1167,36 @@ authenticates all compressed/raw proof hashes, rejects missing/orphan files,
 pins `drat-trim`, and requires checked empty-clause derivation for all 218
 rows.  Exact scope, bridge, tool identities, and totals are in
 `../attempts/2026-11-19-m7-family-s-h3-badness.md`.
+
+## Order-18 `m=7` shared-low `h=2` exact-badness package
+
+This package excludes the exact family-S cell with two holes internal to
+`T={w} union N+(w) union N++(w)`.  It imposes global badness and both
+shared-low deletion-witness conditions but no vertex- or arc-minimality
+clauses.  It does not cover `h=0,1`, another `m=7` family, all order 18, or
+Seymour's conjecture.
+
+```sh
+python3 m7_family_s_h2_universe_check.py
+python3 test_m7_family_s_h2_semantics.py
+python3 -O verify_m7_family_s_h2_campaign.py \
+  --manifest m7-family-s-badness-h2-manifest.json \
+  --proof-dir ../certificates/m7-family-s-badness-h2 \
+  --drat-trim /path/to/pinned/drat-trim \
+  --cnf-checker ./check_m7_family_s_badness_cnf.py \
+  --universe-checker ./m7_family_s_h2_universe_check.py
+python3 -O test_m7_family_s_h2_verifier_mutations.py \
+  --drat-trim /path/to/pinned/drat-trim
+```
+
+The independent census has 1,964 pre-C-swap type rows, 34 fixed rows, and
+999 canonical rows.  Its weighted cover has 1,065,015 labelled states, 315
+pointwise fixed labelled states, and 532,665 labelled-state C-swap orbits.
+(The 34 type-fixed rows have multiplicity weight 18,375, which is not a
+pointwise fixed-state count.)  The 999 checked refutations total 735,323,691 raw bytes and 154,581,588
+XZ-compressed bytes, below the exclusive 250,000,000-byte logical-package
+cap.  The strict verifier regenerates and independently checks every CNF,
+authenticates every compressed and raw proof, rejects missing/orphan files,
+pins `drat-trim`, and requires checked empty-clause derivation for every row.
+Exact scope, bridge, hashes, provenance, and caveats are in
+`../attempts/2026-11-20-m7-family-s-h2-badness.md`.

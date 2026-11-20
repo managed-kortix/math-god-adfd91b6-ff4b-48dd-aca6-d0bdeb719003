@@ -2302,3 +2302,27 @@ scopes; this recovery is not a claim of Seymour's conjecture.
   parallel with the family-S global-badness refinement.  Keep global badness
   and both deletion-witness systems explicit; do not infer pruning from local
   degree completion alone.
+
+## 2026-11-20 — family-S exact global-badness exclusion at `h=2`
+
+- Extended the shared-low family-S exact-badness cover from the retained
+  `h=4,3` cells to the full `h=2` cell, still without vertex- or arc-minimality.
+  An independent sorted-word census finds 1,964 pre-C-swap type rows, 34 fixed
+  rows, and 999 canonical rows; multiplicity expansion gives 1,065,015 labelled
+  states, 315 pointwise fixed states, and 532,665 labelled C-swap orbits.  The
+  34 type-fixed rows have multiplicity weight 18,375, not 18,375 pointwise
+  fixed states.
+- All 999 canonical CNFs have checked DRAT refutations.  The strict package
+  verifier reconstructs the independent universe, byte-checks independently
+  reconstructed CNFs, authenticates every compressed and decompressed proof,
+  pins the checker, enforces an exclusive 250,000,000-byte cap, and requires
+  `c detected empty clause` plus `s VERIFIED` for every row.  The raw proofs
+  total 735,323,691 bytes and the retained XZ artifacts 154,581,588 bytes.
+- This proves only that no globally bad order-18 seven-hole shared-low family-S
+  completion has exactly two holes internal to `T={w} union N+(w) union
+  N++(w)`.  The `h=0,1` cells and every other family remain open; this is not an
+  `m=7`, order-18, or Seymour closure.
+- **Next queued attack:** combine the family-S `h=2,3,4` exclusions with the
+  structural normal form and attack `h=1`, while independently completing the
+  residual mixed/distinct-low families.  Do not extrapolate finite-cell UNSAT
+  beyond the exact bridge.
