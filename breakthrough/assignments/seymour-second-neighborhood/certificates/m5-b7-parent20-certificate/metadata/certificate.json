@@ -1,0 +1,247 @@
+{
+  "ancestry": {
+    "ledger_is_staging_head": true,
+    "parent_cover_is_ancestor_of_ledger": true
+  },
+  "bridge": {
+    "arcs": 148,
+    "degree_values": [
+      8,
+      9
+    ],
+    "high_vertices": 4,
+    "holes": 5,
+    "pairs": 153,
+    "remaining_high_domain": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "root_degree": 8,
+    "root_is_low": true,
+    "root_outneighbors": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "semantic_transport": "graph variables relabelled; witness variables mapped/reselected; threshold/mu2/missing auxiliaries recomputed from permuted inputs; no literal-CNF-automorphism claim",
+    "vertices": 18
+  },
+  "canonical_parent": {
+    "branch": "B7",
+    "holes": [
+      [
+        0,
+        9
+      ],
+      [
+        1,
+        9
+      ],
+      [
+        1,
+        16
+      ],
+      [
+        2,
+        16
+      ],
+      [
+        2,
+        17
+      ]
+    ],
+    "ordinal": 20,
+    "placement": "RBACAC",
+    "rooted_cell_labelled_hole_vectors": 784,
+    "shape": "P6",
+    "support_color_orbit_weight": 2
+  },
+  "checker": {
+    "binary_bytes": 22144,
+    "binary_sha256": "0be49f28bf4247cccf4cf168f2acf2a27a1d394d9f54a704fa520543ca636d35",
+    "name": "lrat-check",
+    "required_exit": 0,
+    "required_output": "exactly one line c VERIFIED",
+    "role": "proof validity",
+    "source_bytes": 17682,
+    "source_commit": "2e3b2dc0ecf938addbd779d42877b6ed69d9a985",
+    "source_sha256": "bf07c2ac96b9035da1ebcc578cb95e956a2b795629d613154cdb307f8a8f4a95"
+  },
+  "cnf": {
+    "clauses": 188312,
+    "selector_amo": 0,
+    "selectors": 1346,
+    "strata": {
+      "common_base": 142729,
+      "guarded_hard_high_literals": 19980,
+      "guarded_packet_literals": 22882,
+      "guarded_witness_literals": 2567,
+      "parent_hole_units": 153,
+      "refinement_suffix_total": 45430,
+      "selector_alo": 1
+    },
+    "variables": 24962
+  },
+  "common_base": {
+    "clause_stream_sha256": "5af8262714f3e42a595fb19f437f7a87042715056a3735e61e0d06b918db2ccb",
+    "clauses": 142729,
+    "independence_boundary": "structural verifier independently reconstructs parent/packet/witness/high orbit bridge and 45,430-clause post-parent refinement suffix (45,583 clauses including the 153 parent-hole units), but imports the pinned shared snc_cnf.generate common-base encoder; hashes bind that common base; this is not a second base implementation",
+    "variable_map_sha256": "cff4c18a4425f26c188790871da51a58b13569764bf89c83d1c736d5f9db070e",
+    "variables": 23616
+  },
+  "compression_cap_bytes": 250000000,
+  "format": "seymour-snc-b7-parent20-certificate-v1",
+  "identities": {
+    "checker_binary": {
+      "bytes": 22144,
+      "sha256": "0be49f28bf4247cccf4cf168f2acf2a27a1d394d9f54a704fa520543ca636d35"
+    },
+    "checker_source": {
+      "bytes": 17682,
+      "sha256": "bf07c2ac96b9035da1ebcc578cb95e956a2b795629d613154cdb307f8a8f4a95"
+    },
+    "cnf": {
+      "bytes": 10416530,
+      "sha256": "ca82baa1376d4c2ba8fd5018b67039817fb4d3f65447fcf637763653666a6033"
+    },
+    "common_encoder_source": {
+      "bytes": 7969,
+      "sha256": "adab04953d3697ec004e28ad145dda5b0f04d07ee8dd20d95655f6e32877d68e"
+    },
+    "cover_checker_source": {
+      "bytes": 16109,
+      "sha256": "7268cb8a84df1a552314e22dc33ffcfa9c5c17295899f9e1fd33b086a166aa05"
+    },
+    "hostile_mutations_source": {
+      "bytes": 5460,
+      "sha256": "d10fc15484db885ec95c11d5628de668950e8777198e04f5386765b69f00ec92"
+    },
+    "ledger": {
+      "bytes": 3152,
+      "sha256": "e3807a2c5ca3ae8347f71ae0daa295a7d6f0f996155c06f2de4e86a413886595"
+    },
+    "lrat_xz": {
+      "bytes": 5679740,
+      "sha256": "5453d9ecba1ac5c26aaf18a3d87f28d68b6a35ba3e2143933fb112de0d5270e9"
+    },
+    "package_verifier_source": {
+      "bytes": 16399,
+      "sha256": "26735c7fa3cf5f845b0c27944306c7c0ae666421e521571d12ca2117100118f6"
+    },
+    "solver_binary": {
+      "bytes": 1002216,
+      "sha256": "ff471d3c6b54fbbc161d65545a5f788d0032ad05b9aff4e2c748d9639400e951"
+    },
+    "structural_verifier_source": {
+      "bytes": 22294,
+      "sha256": "5836964c0f19f7b9400389d2ef743f0f4a92b4487f954df64abff5216fc3bb80"
+    }
+  },
+  "producer": {
+    "binary_bytes": 1002216,
+    "binary_sha256": "ff471d3c6b54fbbc161d65545a5f788d0032ad05b9aff4e2c748d9639400e951",
+    "command": "tools/cadical-1.7.3 -q --lrat --no-binary artifacts/parent20.cnf artifacts/parent20.lrat",
+    "name": "CaDiCaL",
+    "observed_exit": 20,
+    "required_exit": 20,
+    "role": "provenance only; not used to establish proof validity",
+    "source_commit": "38e073b389a877b0a0d3c91136d2443ab95fdeba",
+    "version": "1.7.3"
+  },
+  "proof": {
+    "raw_bytes": 51087439,
+    "raw_sha256": "f40ccf3fe14c06c3eb5a1b56adec1706c8be1ae7ec1957bbc05cf7abc4047f2e",
+    "xz_bytes": 5679740,
+    "xz_preset": 3,
+    "xz_sha256": "5453d9ecba1ac5c26aaf18a3d87f28d68b6a35ba3e2143933fb112de0d5270e9"
+  },
+  "repo": {
+    "ledger_commit": "fe0c02ae22efe59d95e8439bcad03427092b21e7",
+    "parent_cover_commit": "eb2930553b6e4078c5c7f677bd1d2468846d0f03",
+    "staging_head_observed": "fe0c02ae22efe59d95e8439bcad03427092b21e7"
+  },
+  "safe_artifact_paths": [
+    "artifacts/parent20.cnf",
+    "artifacts/parent20.lrat.xz"
+  ],
+  "scope": "exact canonical B7/P6 parent ordinal 20 only",
+  "universes": {
+    "b_stabilizer_orders": [
+      2,
+      4,
+      6,
+      12,
+      24,
+      48,
+      120
+    ],
+    "easy_selector_rows": 14,
+    "hard_first_signatures": [
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      12,
+      13
+    ],
+    "hard_high_profile_rows": 1332,
+    "hard_labelled_assignments": 323400,
+    "hard_labelled_by_first": {
+      "12": 26460,
+      "13": 66150,
+      "3": 2730,
+      "4": 16380,
+      "6": 26460,
+      "7": 26460,
+      "8": 26460,
+      "9": 132300
+    },
+    "hard_rows_by_first": {
+      "12": 156,
+      "13": 239,
+      "3": 32,
+      "4": 81,
+      "6": 156,
+      "7": 156,
+      "8": 156,
+      "9": 356
+    },
+    "hard_witness_rows": 54,
+    "high_orbit_count_distribution": {
+      "17": 8,
+      "18": 2,
+      "23": 24,
+      "24": 4,
+      "30": 11,
+      "31": 1,
+      "32": 2,
+      "38": 1,
+      "49": 1
+    },
+    "packet_labelled": 92,
+    "packet_orbits": 14,
+    "selectors": 1346,
+    "weighted_packet_witness": 3081,
+    "witness_rows": 68
+  }
+}
