@@ -2,7 +2,7 @@
 
 ## Status
 
-This is an independently reconstructed conditional lemma for the graph step in the untrusted Cycle 291/292 mixed-product route. It does not assert that any required graph exists, that the preserved support census is exhaustive, that its rational packets match, or that a new Hodge case follows. It applies to the **entire connected semisimple Hodge groups**, not automatically to one geometric Dynkin node or to a quotient with untracked complementary factors.
+This is a candidate independently reconstructed conditional lemma, pending independent audit, for the graph step in the untrusted Cycle 291/292 mixed-product route. It does not assert that any required graph exists, that the preserved support census is exhaustive, that its rational packets match, or that a new Hodge case follows. It applies to the **entire connected semisimple Hodge groups**, not automatically to one geometric Dynkin node or to a quotient with untracked complementary factors.
 
 ## Theorem
 

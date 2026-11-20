@@ -2,7 +2,7 @@
 
 ## Status
 
-This is the algebra-embedding layer of the outstanding abelian-fourfold support census. It is independent of the unvetted Type-II discriminant formulas in preserved Cycle 292. It does not prove compatibility of a multiplicity-one action with a positive involution, calculate its Weil discriminant, identify its actual Hodge group, or prove any Hodge-conjecture case.
+This is a candidate algebra-embedding layer, pending independent audit, of the outstanding abelian-fourfold support census. It is independent of the unvetted Type-II discriminant formulas in preserved Cycle 292. It does not prove compatibility of a multiplicity-one action with a positive involution, calculate its Weil discriminant, identify its actual Hodge group, or prove any Hodge-conjecture case.
 
 Let `F` be totally real, let `D/F` be a quaternion algebra, let `K=Q(sqrt(-d))` be imaginary quadratic, and set `L=FK`. Since `F` is totally real, `F intersect K=Q`, so `L/F` is a quadratic field extension.
 

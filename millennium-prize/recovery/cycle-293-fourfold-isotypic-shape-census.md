@@ -2,7 +2,7 @@
 
 ## Scope
 
-This is an exact isogeny-decomposition census at the level of a unital imaginary-quadratic action. It does not classify the action inside each matrix algebra, impose balanced signature or discriminant one, identify Hodge groups, or prove algebraicity of any Hodge class. It is therefore a skeleton for, not a completion of, the missing Cycle 292 support/packet census.
+This is a candidate exact isogeny-decomposition census, pending independent audit, at the level of a unital imaginary-quadratic action. It does not classify the action inside each matrix algebra, impose balanced signature or discriminant one, identify Hodge groups, or prove algebraicity of any Hodge class. It is therefore a skeleton for, not a completion of, the missing Cycle 292 support/packet census.
 
 ## Theorem
 

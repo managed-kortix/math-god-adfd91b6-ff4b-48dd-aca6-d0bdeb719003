@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-This is a direct algebraic filter and construction for the totally-real-field (Albert Type I) part of the outstanding abelian-fourfold support census. It does **not** certify that Cycles 288/291/292 are correct, complete the rational packet census, prove a new Hodge-conjecture case, or resolve the Hodge conjecture. It deliberately does not alter `MILLENNIUM_STATE.md`.
+This is a candidate direct algebraic filter and construction, pending independent audit, for the totally-real-field (Albert Type I) part of the outstanding abelian-fourfold support census. It does **not** certify that Cycles 288/291/292 are correct, complete the rational packet census, prove a new Hodge-conjecture case, or resolve the Hodge conjecture. It deliberately does not alter `MILLENNIUM_STATE.md`.
 
 Let `K=Q(eta)` with `eta^2=-d`, `d in Q_{>0}`, and let `F` be a totally real number field.
 
