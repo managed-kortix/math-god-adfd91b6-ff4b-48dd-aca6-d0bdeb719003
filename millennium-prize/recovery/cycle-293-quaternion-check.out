@@ -1,0 +1,2 @@
+PASS exact central-block checks=216
+hostile example in note: Hamilton D, K=Q(sqrt(-7)); local invariant proof is analytic, not this regression
