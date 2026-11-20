@@ -1,0 +1,139 @@
+{
+  "cnf": {
+    "bytes": 5891576,
+    "clauses": 330705,
+    "sha256": "31db9866c15372555f9c102b3126fb4e8730f879b5e82ca5f6791318398d4e43",
+    "variables": 25211
+  },
+  "exclusions": [
+    "family-S h=0",
+    "other m=7 families",
+    "all order-18 oriented graphs",
+    "Seymour's Second Neighborhood Conjecture"
+  ],
+  "identities": {
+    "cnf": {
+      "bytes": 5891576,
+      "sha256": "31db9866c15372555f9c102b3126fb4e8730f879b5e82ca5f6791318398d4e43"
+    },
+    "composite_bridge_source": {
+      "bytes": 12824,
+      "sha256": "417a606654634f5b6d782b0786f6b040230b0947c5079ed13c7c6400058b7feb"
+    },
+    "hostile_mutations_source": {
+      "bytes": 14236,
+      "sha256": "fc5a9926d80c5d97ed333c71393c15c64f06f658cfbf7b6f2012ea1b2d1dc92b"
+    },
+    "independent_checker_source": {
+      "bytes": 22425,
+      "sha256": "c45b90180dd9884c7e543b413b9a29435237c433aad5cab330afc8957f617844"
+    },
+    "ordered_ledger": {
+      "bytes": 89912,
+      "sha256": "9c82a2a1fbe44872278cc4d6fe71abd53c359d6cbf9e85eac9262986721e61fe"
+    },
+    "package_verifier_source": {
+      "bytes": 22646,
+      "sha256": "c0bd8e8ae07fe3a310544e8e66cd6daa5755ba2a864ad8021e34be357a6444e2"
+    },
+    "proof_checker_binary": {
+      "bytes": 51216,
+      "sha256": "92f0aa9575ed519d66a99b8b1b3dde6ece4618ae4c202a3a4b200265dda0aa7a"
+    },
+    "proof_checker_source": {
+      "bytes": 59546,
+      "sha256": "d834b649f437e091597f5347f259b9f681087f89ca0844d0cee250a1a1a0c2ee"
+    },
+    "proof_reproducer_source": {
+      "bytes": 4001,
+      "sha256": "6c7393f4131425e7141c085f507d4aeca332b55bf4a1aacdeda07ad481de4978"
+    },
+    "proof_xz": {
+      "bytes": 2471364,
+      "sha256": "089e6ded1354db86151092c0603ca1d8aa5397bf7b4b7916c71ad6830375eaba"
+    },
+    "solver_binary": {
+      "bytes": 1002216,
+      "sha256": "ff471d3c6b54fbbc161d65545a5f788d0032ad05b9aff4e2c748d9639400e951"
+    }
+  },
+  "mathematical_counts": {
+    "composite_cases": 742320,
+    "composite_mapping_witnesses": 921120,
+    "full_canonicalizing_map_sha256": "c8b8cc8696ac80cb89f6774cdf1a7ea1cd051c9516d3e0be809aa5fe4d37bcc2",
+    "guarded_nonrepresentatives": 168584,
+    "labelled_states": 14428260,
+    "labelled_v4_orbits": 4763052,
+    "pair_orbit_sha256": "922c184dcfaa6dc2fc2ae613b93b7e2b092a797faeeab9956f8865e44bdabb98",
+    "pair_orbits": 61696,
+    "pre_v4_rows": 6186,
+    "v4_rows": 1919
+  },
+  "ordered_ledger": {
+    "bytes": 89912,
+    "ordered_universe_sha256": "d713ca11b98de20010c923bf1cbe756230d2c9728834ffab51fb65c39068131f",
+    "sha256": "9c82a2a1fbe44872278cc4d6fe71abd53c359d6cbf9e85eac9262986721e61fe"
+  },
+  "proof": {
+    "format": "binary DRAT compressed as deterministic Python lzma XZ preset 9",
+    "raw": {
+      "bytes": 30989483,
+      "sha256": "32f35d5b3b0458c05f59bcf4467f3bb40103294e0100d7ba8276c2972cfa9de9"
+    },
+    "xz": {
+      "bytes": 2471364,
+      "sha256": "089e6ded1354db86151092c0603ca1d8aa5397bf7b4b7916c71ad6830375eaba"
+    }
+  },
+  "proof_checker": {
+    "binary": {
+      "bytes": 51216,
+      "sha256": "92f0aa9575ed519d66a99b8b1b3dde6ece4618ae4c202a3a4b200265dda0aa7a"
+    },
+    "elf_build_id": "83768248f9562e7a5b87b8530e078148fe0b62a6",
+    "name": "drat-trim",
+    "required_exit": 0,
+    "required_markers": [
+      "c detected empty clause",
+      "s VERIFIED"
+    ],
+    "role": "proof validity",
+    "source": {
+      "bytes": 59546,
+      "sha256": "d834b649f437e091597f5347f259b9f681087f89ca0844d0cee250a1a1a0c2ee"
+    },
+    "source_blob": "cf8a676ffcc7ef5a47124bbafc9b680a2df333e0",
+    "source_commit": "2e3b2dc0ecf938addbd779d42877b6ed69d9a985",
+    "source_tree": "b4e75a5f8c89d664652727458369cb5e0b610e31"
+  },
+  "proof_producer": {
+    "binary": {
+      "bytes": 1002216,
+      "sha256": "ff471d3c6b54fbbc161d65545a5f788d0032ad05b9aff4e2c748d9639400e951"
+    },
+    "elf_build_id": "560ab92678327747ed4dae62010a6481075fe9b5",
+    "name": "CaDiCaL",
+    "required_unsat_exit": 20,
+    "role": "optional deterministic proof reproduction; not used by default verifier",
+    "source_commit": "38e073b389a877b0a0d3c91136d2443ab95fdeba",
+    "version": "1.7.3"
+  },
+  "requirements": {
+    "architecture": "x86-64",
+    "bash": "required only for the documented command wrapper/build recipe",
+    "libc": "glibc",
+    "os": "GNU/Linux",
+    "python": ">=3.10"
+  },
+  "safe_artifact_paths": [
+    "artifacts/h1-parent.cnf",
+    "artifacts/h1-parent.drat.xz"
+  ],
+  "schema": "seymour-family-s-h1-certificate-v1",
+  "scope": "order-18 seven-hole shared-low family-S h=1 cell only; no vertex or arc minimality",
+  "status": "retained-finite-certificate",
+  "trust": {
+    "external_anchor": "Git commit/tree containing this package; SHA256SUMS is an internal integrity map, not a signature",
+    "independence_boundary": "the independent checker reconstructs the full h=1 row universe and complete CNF without importing a producer; the composite checker separately exhausts the V4-to-row-stabilizer bridge with full ordinary-A/B type-sorting relabelling under C exchange"
+  }
+}

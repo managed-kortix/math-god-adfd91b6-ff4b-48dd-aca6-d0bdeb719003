@@ -2326,3 +2326,28 @@ scopes; this recovery is not a claim of Seymour's conjecture.
   structural normal form and attack `h=1`, while independently completing the
   residual mixed/distinct-low families.  Do not extrapolate finite-cell UNSAT
   beyond the exact bridge.
+
+## 2026-11-20 — family-S exact global-badness exclusion at `h=1`
+
+- Retained the self-contained exact certificate package for the order-18,
+  seven-hole, shared-low family-S `h=1` cell.  A hostile pre-integration audit
+  rejected an earlier bridge that treated C exchange as fixing all ordinary T
+  labels.  The final bridge instead uses full type-sorting canonicalizing
+  permutations and pins the row-3 hole regression `{0,13}->{0,14}`.
+- The independent cover has 6,186 pre-V4 rows and 1,919 canonical rows.  The
+  corrected bridge exhausts 742,320 pre-row/pair cases and 921,120
+  canonicalizer witnesses; its full-map digest is
+  `c8b8cc8696ac80cb89f6774cdf1a7ea1cd051c9516d3e0be809aa5fe4d37bcc2`.
+  An independent hostile reconstruction also exhausts all endpoint-image
+  choices inside transformed type blocks.
+- The exact selector parent has 25,211 variables and 330,705 clauses.  Its
+  SHA-256 is `31db9866c15372555f9c102b3126fb4e8730f879b5e82ca5f6791318398d4e43`;
+  package-local pinned DRAT replay verifies UNSAT, and optional CaDiCaL replay
+  reproduces the exact proof bytes.  The strict package rejects all 29 hostile
+  mutations.
+- This is only the `h=1` finite cell, with no vertex- or arc-minimality clauses.
+  Family-S `h=0`, families D/H, other `m=7` families, all order 18, and SNC
+  remain outside scope.  No announcement or publication action is authorized.
+- **Next family-S frontier:** attack the remaining `h=0` cell while continuing
+  the mixed/distinct-low families independently.  Do not infer an `m=7`,
+  order-18, or SNC closure.

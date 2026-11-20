@@ -1200,3 +1200,38 @@ authenticates every compressed and raw proof, rejects missing/orphan files,
 pins `drat-trim`, and requires checked empty-clause derivation for every row.
 Exact scope, bridge, hashes, provenance, and caveats are in
 `../attempts/2026-11-20-m7-family-s-h2-badness.md`.
+
+## Order-18 `m=7` shared-low `h=1` exact-badness package
+
+The self-contained package excludes exactly the shared-low family-S cell with
+one hole internal to `T={w} union N+(w) union N++(w)`.  It imposes global
+strict badness and both shared-low deletion-witness conditions, but no vertex-
+or arc-minimality clauses.  It does not cover `h=0`, another `m=7` family, all
+order 18, or Seymour's conjecture.
+
+```sh
+H1=../certificates/m7-family-s-h1-certificate
+(
+  cd "$H1"
+  python3 -O -B verifier/verify_h1_package.py
+  python3 -O -B verifier/hostile_mutations.py
+)
+```
+
+Optional proof-production reproduction, not part of proof validity:
+
+```sh
+(
+  cd "$H1"
+  python3 -O -B verifier/reproduce_proof.py
+)
+```
+
+The default verifier independently reconstructs the ordered V4 universe and
+complete CNF, checks the corrected full-label V4/unique-hole bridge,
+authenticates the compressed and raw proof, and replays it with package-local
+pinned `drat-trim`.  The full-label repair is material: C exchange re-sorts
+ordinary-A/B labels by transformed complete C-incidence type; the package pins
+pre-row 3 at `{0,13}->{0,14}` and exhausts all 742,320 bridge cases.  Exact
+scope, identities and hostile-audit history are in
+`../attempts/2026-11-20-m7-family-s-h1-badness.md`.
