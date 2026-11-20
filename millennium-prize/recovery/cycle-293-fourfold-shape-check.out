@@ -1,0 +1,8 @@
+PASS seven exact consolidated shapes
+1 X4
+2 X3 x E
+3 S1 x S2
+4 S^2
+5 S x E^2
+6 E^4
+7 E1^2 x E2^2
