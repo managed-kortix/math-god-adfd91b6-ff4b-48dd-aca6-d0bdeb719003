@@ -234,8 +234,100 @@ sigma(R)+rho^2 >= -sigma(U).                               (8)
 The true `Gamma` can be strictly larger than `rho^2`; no proof currently shows
 that (8) holds automatically for every inherited unit-star residue.
 
-A reusable strengthening is obtained from any finite collection of positive-
-semidefinite rays `X_1,...,X_m`.  With
+### Monotone interpolation between the negative-part certificate and the gain
+
+The endpoint certificate in (4) belongs to a continuous exact family.  Keep
+
+```text
+P=D_+,       N=D_-,       Z=E-N,       b=tr(P^2)=Phi(D),
+H_t=Z+tP,
+h(t)=Phi(H_t)-t^2 b                 (t>=0).
+```
+
+Because `P,N` are block diagonal spectral parts, `PN=0`; because `E` is block
+off diagonal, `tr(EP)=0`.  Hence
+
+```text
+tr(ZP)=0.                                                   (9)
+```
+
+Then `h` is continuously differentiable, nondecreasing, and concave on
+`[0,infinity)`, with the exact formulas
+
+```text
+h'(t)=2 tr(P(H_t)_-) >= 0,                                 (10)
+h(s)-h(t)=2 integral_t^s tr(P(H_u)_-) du     (0<=t<=s),    (11)
+h(t)=tr(Z^2)-Phi(-H_t).                                    (12)
+```
+
+Indeed, the scalar function `(x_+)^2` is continuously differentiable even at
+zero, so spectral trace differentiation gives
+
+```text
+d/dt Phi(H_t)=2 tr(P(H_t)_+).
+```
+
+Since `tr(PH_t)=tb` and `H_t=(H_t)_+-(H_t)_-`, subtracting `2tb` proves
+(10), and integration proves (11).  Alternatively, for `s>=t`, the positive-
+semidefinite trial
+
+```text
+X=(H_t)_+ +(s-t)P
+```
+
+in (5) gives directly
+
+```text
+Phi(H_s)>=Phi(H_t)+(s^2-t^2)b.
+```
+
+For (12), use (9) to write
+
+```text
+tr(H_t^2)=tr(Z^2)+t^2b
+         =Phi(H_t)+Phi(-H_t).
+```
+
+The map `H -> Phi(H)` is convex by (5), so (12) also proves concavity of
+`h`.  This scalar trace-functional argument does not assert the false operator
+claim that the negative-part matrix is Loewner monotone.
+
+At the endpoints,
+
+```text
+h(0)=Phi(E-D_-)=rho^2,
+h(1)=Phi(D+E)-Phi(D)=Gamma.                                 (13)
+```
+
+The first equality in (13) uses the single-edge fact that `E-D_-` has at most
+one positive eigenvalue.  More generally `h(0)=Phi(E-D_-)`, not necessarily
+the square of its largest eigenvalue.  For one unweighted graph bridge,
+`tr(E^2)=2` and `tr(EN)=0`, so (12) also becomes
+
+```text
+h(t)=2+tr(N^2)-Phi(-H_t).                                   (14)
+```
+
+For a nontrivial interval `0<=t<s`, equality `h(s)=h(t)` holds exactly when
+`tr(P(H_u)_-)=0` for every `u in [t,s]`, equivalently when the range of `P` is
+orthogonal to the negative spectral subspace of `H_u` throughout that
+interval.  Since `h` is differentiable, nondecreasing, and concave, the
+single condition `tr(P(H_t)_-)=0` (equivalently `h'(t)=0`) at the left
+endpoint already forces the later plateau.
+
+Consequently every fixed `t in [0,1]` gives the rigorous bridge certificate
+
+```text
+Gamma >= Phi(E-D_-+tD_+)-t^2 Phi(D).                        (15)
+```
+
+For `t=0` this is (4); for `t=1` it is the identity `Gamma=Gamma`.  Thus
+maximizing over the whole closed interval is tautological.  To close the
+hostile remainder, one still needs a usable lower estimate at some `t<1`
+that, together with `sigma(R)`, pays the arm deficit.
+
+A different reusable strengthening is obtained from any finite collection of
+positive-semidefinite rays `X_1,...,X_m`.  With
 
 ```text
 h_i=tr(M X_i),       G_ij=tr(X_i X_j),
@@ -245,7 +337,7 @@ h_i=tr(M X_i),       G_ij=tr(X_i X_j),
 
 ```text
 Gamma >= sup_{z_i>=0}
-         {2 h^T z-z^T G z-Phi(D)}.                         (9)
+         {2 h^T z-z^T G z-Phi(D)}.                         (16)
 ```
 
 The Gram matrix `G` is positive semidefinite.  This is only a lower bound on
@@ -260,7 +352,7 @@ b=tr(P^2),       a=tr(PW),       c=tr(W^2)=rho^2,
 then the two-ray objective at `(s,t)` is
 
 ```text
-2bs+2(a+c)t-bs^2-2ast-ct^2-b,       s,t>=0,               (10)
+2bs+2(a+c)t-bs^2-2ast-ct^2-b,       s,t>=0.                (17)
 ```
 
 and its value at `(1,1)` is exactly `c`.
@@ -279,7 +371,8 @@ one of those joins.  They are reconnaissance, not evidence for (2) in full.
 ## Next theorem
 
 Prove (2) for every actual marked hostile rank-`(1,6)` bridge, prove that the
-marked condition (8) (or a stronger finite-cone certificate (9)) always pays
+marked condition (8), an interpolation certificate (15), or a stronger
+finite-cone certificate (16) always pays
 the instance deficit on the inherited unit-star residue, or derive a strictly
 stronger packet-specific induced owner partition that pays the same deficit.
 Reserve and bridge gain must be treated jointly.  Any projector, moment,
