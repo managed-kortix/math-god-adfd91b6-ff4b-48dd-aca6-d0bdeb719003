@@ -20,11 +20,11 @@ Proof. The polynomial `T^2+d` is irreducible over `F`: a root in `F` would have 
 
 Any two embeddings give two `L`-vector-space structures of the same dimension `r` on `F^m`. An `L`-linear isomorphism between them is an element of `GL_m(F)` conjugating one embedding to the other. This also shows why total reality matters: if `K` is already contained in the center, odd `m` is possible.
 
-If `A` is isogenous to `product_i X_i^{m_i}` with the `X_i` pairwise nonisogenous and `End^0(X_i)=F_i` totally real, then
+Let `A` have its genuine isotypic decomposition `A ~ product_i X_i^{m_i}`, where every `X_i` is simple, the `X_i` are pairwise nonisogenous, every `m_i>=1`, and `End^0(X_i)=F_i` is a totally real field. Then
 
 `End^0(A)=product_i M_{m_i}(F_i)`.
 
-Every coordinate of a unital embedding of the field `K` into this product is itself unital, hence injective. Therefore every `m_i` is even separately. This is not merely a parity condition on their sum. Opposite-ring conventions do not change the conclusion because each `F_i` is commutative and `M_m(F_i)^op` is isomorphic to `M_m(F_i)`.
+Every coordinate of a unital embedding of the field `K` into this rational endomorphism algebra is itself unital, hence injective. Therefore every `m_i` is even separately. This is not merely a parity condition on their sum. Opposite-ring conventions do not change the conclusion because each `F_i` is commutative and `M_m(F_i)^op` is isomorphic to `M_m(F_i)`.
 
 ## 2. Compatible polarization exists, but need not be the fixed product polarization
 

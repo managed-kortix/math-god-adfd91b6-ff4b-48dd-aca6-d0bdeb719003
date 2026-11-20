@@ -61,7 +61,7 @@ For `m=2`, the universal doubling construction gives more than the algebra actio
 
 `J=[[0,-d],[1,0]],   R=diag(1,d)`.
 
-Then `R^-1 J^t R=-J`, so the polarization modified by the positive matrix `R` is `K`-compatible. If `X` is a surface, `X^2` has balanced signature `(2,2)` and trivial signed Weil discriminant. Thus decomposable quaternionic surface squares belong to the discriminant-one locus regardless of whether `K` embeds in `D` itself.
+Then `R^-1 J^t R=-J`, so the polarization modified by the positive matrix `R` is `K`-compatible. If `X` is a surface, `X^2` has balanced signature `(2,2)` and ordinary Weil discriminant one by the corrected universal-doubling determinant calculation (here `g=2,r=1`). Thus decomposable quaternionic surface squares belong to the discriminant-one locus regardless of whether `K` embeds in `D` itself.
 
 For `m=1`, splitting is only the algebraic gate. Type II versus Type III positive-involution constraints, signatures, and discriminants remain separate. In particular this note neither accepts nor rejects preserved Cycle 292's claims for simple II(1), II(2), or Type III fourfolds.
 
