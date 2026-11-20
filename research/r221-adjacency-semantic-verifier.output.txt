@@ -1,0 +1,18 @@
+R221 ADJACENCY-ONLY SEMANTIC VERIFIER CANDIDATE
+status: FINITE CANDIDATE AUDIT PASS; UNIVERSAL/PUBLICATION CLAIM WITHHELD
+scope: physical rank-seven R221 only; exactly two literal diamonds plus three literal triangles
+input: immutable canonical adjacency only; no caller profile, root, block, route, owner, rank, threshold, partition, or charge
+contract records: 14; authenticated source files: 9
+full contract manifest SHA-256: 686aa99b3f07223ed8f241be2480490b0afe3f1ad83d937f8dfced3dc2031b67
+source manifest SHA-256: 18383070b4eb253b634e3fb9be8dbd716d9ceedfa618e6c1ed5e4ab15c404679
+generated physical fixtures: 31; opaque relabel replays: 31; root-diamond replays: 62
+complete-away ranks covered: 1,2,3,4,5
+diamond entry deltas covered: 0,1; opened eta covered: 0,1,2,3
+anchor triangle counts covered: 0,1,2,3; tree debits covered: 0,1
+longest explicit K2 connector: 2049
+semantic fixture-suite SHA-256: 5d935df8935874b39e229acea5bb9cda56c0d67356f69553792515f8c864f857
+hostile mutations rejected: 29
+static fail-closed checks: 3; Python assert statements: 0
+ledger: every root replay conditionally derives sigma(G) > 1-tree_debit >= 0 from pinned contracts
+proof boundary: source hashes authenticate bytes, not mathematical truth; finite fixtures do not exhaust arbitrary block-cut trees or payload sizes
+normal/-O policy: this deterministic report must be compared byte-for-byte by the external release command
