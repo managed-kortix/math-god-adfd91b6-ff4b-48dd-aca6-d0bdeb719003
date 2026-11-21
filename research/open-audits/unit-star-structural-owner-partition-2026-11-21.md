@@ -14,10 +14,15 @@ it is a star with `k` unit-rank leaves and center rank
 c=7-k,             1<=k<=7.
 ```
 
-Assume every leaf component is hostile: it is connected unicyclic and its
-unique cycle has length `1 mod 4`; arbitrary finite rooted trees and arbitrary
-physical bridge-chain lengths are allowed.  The center is the actual complete
-bridge-free component of rank `c`, not owner metadata supplied by a packet.
+Each positive leaf vertex of the all-physical-bridge quotient is an actual
+bridge-free component of rank one, hence is exactly a cycle; assume that every
+such cycle is hostile, with length `1 mod 4`.  This quotient component must be
+distinguished from a **complete detachable arm side** `U_i`: after cutting a
+physical bridge on the corresponding arm, `U_i` may contain arbitrary bridge
+chains and rooted trees and is a connected unicyclic graph whose unique cycle
+is that leaf component.  Its marked external port may lie anywhere, including
+inside an off-cycle tree.  The center is the actual complete bridge-free
+component of rank `c`, not owner metadata supplied by a packet.
 
 The following is a literal subfamily theorem.  It neither closes arbitrary
 centers of ranks `2,...,6` nor the full rank-`(1,6)` marked bridge theorem.
@@ -45,20 +50,24 @@ sigma(R)+Gamma(R,x;U,y) > -sigma(U).
 
 ### Proof
 
-Every unit leaf side is unicyclic.  Every off-cycle edge of that side is a
-physical bridge of `G`: deleting it separates an off-cycle tree, and the sole
-external connection of the leaf side lies on the other side of that edge.
-Thus its sole positive bridge-free component is its unique cycle; all of its
-other blocks are bridges.  The same is true of every suppressed hull chain and
-every off-hull tree branch.
+Work directly in the quotient obtained by deleting all physical bridges.
+Every positive rank-one leaf component is a cycle.  Every rank-zero quotient
+component is a single vertex, since a nontrivial connected rank-zero graph is
+a tree and has a bridge.  By hypothesis every maximal block inside the center
+component is a cycle.  Finally, every edge joining quotient components is one
+of the deleted physical bridges.  It follows that every maximal block of `G`
+is a center cycle, a leaf cycle, or a bridge.  Hence `G` is a cactus.  Its
+cyclomatic rank is `c+k=7>=2`, so the established all-rank
+nonunicyclic-cactus theorem gives `sigma(G)>0`.
 
-By hypothesis every positive block inside the center is a cycle and, because
-the center is a component obtained after deleting all physical bridges, the
-center itself contains no bridge block.  Reattaching the arm components and
-all zero-rank material only adds bridge blocks.  Hence every maximal block of
-`G` is a cycle or a bridge: `G` is a cactus.  Its cyclomatic rank is
-`c+k=7>=2`.  The established all-rank nonunicyclic-cactus theorem then gives
-`sigma(G)>0`.
+Equivalently, this conclusion is insensitive to the marked arm ports.  If
+`e_i` is a physical bridge whose deletion produces a complete arm side `U_i`,
+then `delta_G(U_i)={e_i}`.  Every edge `f` of `U_i` outside its unique cycle is
+a bridge of `U_i`.  Were `f` not a bridge of `G`, an alternate path between
+its endpoints would have to leave and re-enter `U_i`, crossing the one-edge
+cut `delta_G(U_i)` at least twice, which is impossible.  Thus all such edges
+remain physical bridges of `G` even when the marked port lies in the
+corresponding off-cycle tree.
 
 For any selected arm `U`, let `R` be the complete induced complement and let
 `Gamma=s+(G)-s+(R)-s+(U)`.  The exact identity
@@ -114,19 +123,22 @@ only one can do so. `QED`
 
 This proves a method limitation: an induced owner partition using only
 physical bridge openings cannot pair each of several hostile arms with a
-separate piece of center reserve.  It has only two possibilities:
+separate piece of center reserve.  At the level of positive quotient
+components, one owner contains the center and some subset of the arm cycles;
+every other positive-rank owner contains exactly one arm cycle, together with
+whatever zero-rank material remains attached to it.  Further owners, created
+by cuts inside rooted trees or by multiple cuts on suppressed chains, may be
+trees.
 
-1. retain the center with any chosen subset of arms in one owner and detach
-   every other arm as a complete unicyclic owner; or
-2. retain all arms in the same center owner.
-
-Every detached hostile arm has only the weak receipt
-`sigma(U)>=-delta_q<0`.  Qualitative strictness elsewhere is not spendable.
-Therefore multiplicity of hostile arms gives no new nonnegative ledger under
-the existing lower-rank and unicyclic receipts.  A successful noncactus
-partition must open **inside the actual center component** and prove a new
-packet-specific owner theorem; the inherited star topology alone does not
-supply one.
+Each single-arm positive owner is still hostile unicyclic and has only the
+weak receipt `sigma(U)>=-delta_q<0`; each tree-only owner has exactly
+`sigma=-1`.  Qualitative strictness elsewhere is not spendable.  Therefore no
+certificate using only physical-bridge openings and the existing lower-rank
+and unicyclic receipt library follows from arm multiplicity.  Further progress
+requires a new mixed receipt for one retained center owner carrying several
+arms, a certified opening inside the actual center component with exact debit
+accounting, or marked bridge-gain analysis.  The inherited star topology alone
+does not supply any of these.
 
 ## 4. Exact obstruction to the tempting `c<=5` center-opening lemma
 
@@ -148,12 +160,15 @@ physical bridges (or arbitrary bridge chains) at arbitrary center vertices.
 The inherited positive hull is the required unit-star.
 
 The center `K_(2,c+1)` is 2-connected.  More generally, in any 2-connected
-center, no vertex partition can put a **complete** center positive block in
+center, no vertex partition can put the **complete** center positive block in
 more than one territory: retaining that block literally requires every center
-vertex.  Distinct induced territories cannot duplicate those vertices.  Thus
-there is no topology-only operation that manufactures one intact center guard
-for each arm.  For the displayed family the arm ports may all coincide or may
-be distinct; the obstruction is unchanged.
+vertex, and distinct induced territories cannot duplicate vertices.  The
+displayed family has a stronger obstruction.  Every cycle of `K_(2,c+1)` uses
+both vertices in its size-two bipartition class, so at most one disjoint
+territory can retain even positive center rank.  Thus there is no
+topology-only operation that manufactures one center-cycle guard for each
+arm.  The arm ports may all coincide or may be distinct; the obstruction is
+unchanged.
 
 This does **not** show `sigma(G)<0`, and in fact these graphs are not offered as
 spectral counterexamples.  It refutes only the proposed center-rank/arm-count
