@@ -43,7 +43,7 @@ SOURCES = {
     "r511-k22": (ROOT / "positive-square-energy/heptacyclic-general/r511-k22-last-multiblock-key.md",
                  "b6c5c8a91326295bfafb83e7aacf3c761183de23ec316cf0e120c0f7fcba842f"),
     "r61": (ROOT / "positive-square-energy/heptacyclic-general/r61-one-credit-boundary-reduction.md",
-            "4e5e519dc52630b00cae618f2d80aeb27251bb2c6af8874e59a94d3850b6c9f4"),
+            "96ca1526c8ee1a60fd9cbf42e8ce9bc20eae2911ec0f133448ee0ce69dc1d5cb"),
     "r61-k223": (ROOT / "positive-square-energy/heptacyclic-general/r61-k223-marked-cycle-packet.md",
                  "698c6b25f5ad76ad94a66b31bd30990e2a7e9246e9a53dc99b53992e67ee670b"),
 }
@@ -76,7 +76,7 @@ CHILDREN = {
         "15325973275aef32b93df32a32dd5b9afaeb2d1c95a6d11dc510312e2761907c",
         "a8149532f0f5b92ff33bb6657df302e3ffda8ea6d177a61676c5fd206082df56"),
     "r61-k110": ("r61-k110-shared-cut-packet-verifier.py",
-        "be0552093f21fc53359e1f558ce6620414809923369dff7336964f3b4a5d7518",
+        "dd866270f8285b7ff7c82e845e3f46e14e89bc7012241652f3a9a6dbe4baec1b",
         "1a40d38acc8ee94ae69f4031cf85c7dafa6d87d6885120b744df54e242cabb5e"),
     "r61-k223": ("r61-k223-marked-cycle-packet-verifier.py",
         "5098c37f0e92f93f59d62e8fadba0252cc2e9031c7d6a2db22ae5827861fe0cf",

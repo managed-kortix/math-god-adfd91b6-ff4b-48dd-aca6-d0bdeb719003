@@ -1,22 +1,31 @@
 # R61 one-credit boundary reduction
 
-## Exact result
+## Exact bridge-free result and open physical-bridge boundary
 
 Let `G` be a finite simple connected graph whose positive cyclic blocks are a
 rank-six block `B` and one cycle `Q`. Write
 
 `sigma(X)=s^+(X)-|V(X)|`.
 
-The rank-six theorem closes `G` in either of the following two cases.
+This note proves the `R61` packet only when the cyclic hull is **bridge-free**:
+`B` and `Q` meet at a shared cut vertex.  Its historical first version also
+asserted that an actual bridge between the two sides was automatically closed
+by the rank-six theorem.  That assertion is false as a proof step.  Deleting
+such a bridge leaves a rank-six side with only `sigma>=0` and a rank-one side
+which may be a hostile `C5`, with `sigma(C5)=2-sqrt(5)<0`; those two receipts do
+not sum to a nonnegative number.  The physical rank-`(6,1)` bridge lane is now
+part of the open marked hostile remainder in
+`physical-hull-bridge-reduction/theorem-note.md` and
+`research/open-audits/rank-one-six-hostile-bridge-remainder-2026-11-20.md`.
+Nothing below closes that lane.
 
-1. The cyclic hull contains an actual bridge.
-2. The hull is bridge-free, `B` and `Q` meet at a shared cut `x`, and the
-   complete rank-six owner of `B` supplies a DNN certificate
+In the bridge-free shared-cut case, if the complete rank-six owner of `B`
+supplies a DNN certificate
 
-   `kappa(B)<=|E(B)|+5`.
+`kappa(B)<=|E(B)|+5`,
 
-In case 2 the certificate and the sharp cycle Gram glue at `x`; no vertex is
-deleted. Consequently
+the certificate and the sharp cycle Gram glue at the common cut `x`; no vertex
+is deleted. Consequently
 
 `kappa(B vee_x Q)<=|E(B vee_x Q)|+6`,
 
@@ -24,9 +33,9 @@ and arbitrary rooted trees can then be attached at every vertex. Thus
 
 `s^+(G)>=|V(G)|`.
 
-After applying these two gates, the exact R61 residual initially consists of the
-non-DNN structural rank-six owner states at their canonical physical
-realizations:
+After applying this **shared-cut DNN gate**, the exact bridge-free `R61`
+residual initially consists of the non-DNN structural rank-six owner states at
+their canonical physical realizations:
 
 ```text
 R61-K110-0: all-unit K5 + Q;
@@ -38,7 +47,9 @@ Here `Q` may have any length and its shared cut may be any vertex of the
 displayed rank-six realization, including the interior of the unique long path
 in `R61-K110-1`. The K223 family is now closed by the exact two-orbit coupled
 packet in `r61-k223-marked-cycle-packet.md`. The two K110 families are closed by
-the shared-cut spectral packet below. Thus R61 has no remaining configuration.
+the shared-cut spectral packet below. Thus the bridge-free shared-cut `R61`
+registry has no remaining configuration. The physical-bridge lane excluded
+above remains open.
 
 ## Exact shared-cut K110 packet
 
@@ -164,7 +175,9 @@ unit of margin.
 
 The two K110 rows are closed by a shared-cut spectral packet with every rooted
 tree assigned once. No step deletes `Q-x` and invokes only the nonstrict
-rank-six theorem.
+rank-six theorem.  This completed obligation is exactly the bridge-free
+shared-cut `R61` packet; it does not include a physical bridge between `B` and
+`Q`.
 
 For completeness, `R61-K223` has exactly two marked-cut orbits,
 `{0,1,2,3}` and `{4,5}`. In every orbit a marked actual `K4` can be retained;
@@ -174,8 +187,10 @@ pays the complementary kernel tree and the cycle-minus-cut tree strictly.
 
 ## Ledger update
 
-The owner registry entry `R61-NDNN: B_6^struct+Q` is the disjoint union of the
-three typed keys above. `R61-K223` is closed by its marked-cycle packet and both
-K110 keys are closed by (1). All other physical R61 states are owned by the
-bridge split or the shared-Gram DNN gate. Therefore the complete `R61` row is
-closed.
+Within the **bridge-free shared-cut registry**, the owner entry
+`R61-NDNN: B_6^struct+Q` is the disjoint union of the three typed keys above.
+`R61-K223` is closed by its marked-cycle packet and both K110 keys are closed by
+(1). All other bridge-free shared-cut `R61` states are owned by the shared-Gram
+DNN gate. Therefore the bridge-free `R61` packet row is closed.  Actual physical
+rank-`(6,1)` bridge incidences remain outside this registry and open; they must
+not be laundered into any of the three shared-cut keys.

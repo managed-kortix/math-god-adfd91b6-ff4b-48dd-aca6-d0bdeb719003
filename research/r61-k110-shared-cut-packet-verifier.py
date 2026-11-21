@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "positive-square-energy/heptacyclic-general/r61-one-credit-boundary-reduction.md"
-SOURCE_SHA256 = "4e5e519dc52630b00cae618f2d80aeb27251bb2c6af8874e59a94d3850b6c9f4"
+SOURCE_SHA256 = "96ca1526c8ee1a60fd9cbf42e8ce9bc20eae2911ec0f133448ee0ce69dc1d5cb"
 EXPECTED_KEYS = ("R61-K110-0", "R61-K110-1")
 
 
@@ -28,6 +28,16 @@ def k5_edges():
 def audit():
     require(hashlib.sha256(SOURCE.read_bytes()).hexdigest() == SOURCE_SHA256,
             "R61 source changed")
+    source = SOURCE.read_text(encoding="ascii")
+    require("only when the cyclic hull is **bridge-free**" in source,
+            "bridge-free R61 scope missing")
+    require("Nothing below closes that lane." in source,
+            "physical-bridge exclusion missing")
+    require("rank-`(6,1)` bridge incidences remain outside this registry and open" in source,
+            "open physical-bridge ledger missing")
+    require("all physical R61 states" not in source and
+            "complete `R61` row is closed" not in source,
+            "stale physical R61 closure wording returned")
     edges = k5_edges()
     require(len(edges) == 10, "K5 edge set changed")
 

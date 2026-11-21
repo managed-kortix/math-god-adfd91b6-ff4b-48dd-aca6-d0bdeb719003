@@ -126,15 +126,17 @@ research/semantic, research/procedural).
   rejects 16 hostile mutations, and agrees byte-for-byte in normal and `-O`
   modes. This proves kernel order five only; orders 6--12 and every global
   heptacyclic claim remain open.
-- 2026-08-12: closed `R61-K110-0` and `R61-K110-1`, completing the entire
-  `6+1` multiblock row. The exact shared-cut inequality retains an actual
-  attached K4 of credit `>2` and partitions the complement into at most two
-  induced tree/unicyclic territories, each of credit at least `-1`. For the
-  one-long K5, the marked cuts are the endpoint orbit, the off-edge branch
+- 2026-08-12 (scope corrected 2026-11-21): closed `R61-K110-0` and
+  `R61-K110-1`, completing the bridge-free shared-cut `6+1` packet registry,
+  not the physical-bridge row. The exact shared-cut inequality retains an
+  actual attached K4 of credit `>2` and partitions the complement into at most
+  two induced tree/unicyclic territories, each of credit at least `-1`. For
+  the one-long K5, the marked cuts are the endpoint orbit, the off-edge branch
   orbit, and the internal distance orbits `1,...,(l-1)/2`; one uniform packet
   handles every orbit and every odd long-path/cycle length. Together with the
-  K223 marked-cycle packet, R61 has no remaining configuration. No heptacyclic
-  theorem claim is made.
+  K223 marked-cycle packet, the bridge-free R61 registry has no remaining
+  configuration. The physical rank-`(6,1)` bridge lane remains in the open
+  marked hostile remainder. No heptacyclic theorem claim is made.
 - 2026-08-12: closed the `R61-K223` heptacyclic multiblock residual: canonical
   all-unit K223 plus an arbitrary cycle at an arbitrary marked cut, with
   arbitrary rooted trees. The exact automorphism group has order 16 and two
@@ -157,10 +159,12 @@ research/semantic, research/procedural).
   Exact coarse census leaves only 15 residual orbits at order five and 1517 at
   order six, while higher-order residual counts are currently sampled
   estimates. The 15 multiblock partitions reduce to 16 residual packet keys;
-  R61 is completely closed: DNN-owned rank-six states use shared-Gram gluing;
-  an exact attached-`K4` shared-cut inequality closes K110-0 and K110-1 for
-  every marked-cut orbit and path/cycle length; and the two-orbit marked packet
-  closes canonical K223. No heptacyclic theorem claim is made.
+  within the bridge-free shared-cut registry, R61 is completely closed:
+  DNN-owned rank-six states use shared-Gram gluing; an exact attached-`K4`
+  shared-cut inequality closes K110-0 and K110-1 for every marked-cut orbit and
+  path/cycle length; and the two-orbit marked packet closes canonical K223.
+  This does not close a physical bridge between the rank-six and rank-one
+  sides. No heptacyclic theorem claim is made.
 - 2026-08-12: developed the exact structural reduction for one rank-seven
   block. Suppression gives loopless 2-connected kernels of orders 2--12 and
   budget six; the rank-independent path atom yields the same canonical-plus-
