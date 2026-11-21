@@ -9,12 +9,18 @@ and exact spectral-projector formulas, using interval matrix arithmetic.
 from fractions import Fraction as F
 
 
+def require(condition, message):
+    if not condition:
+        raise RuntimeError(message)
+
+
 def add(a,b): return (a[0]+b[0],a[1]+b[1])
 def sub(a,b): return (a[0]-b[1],a[1]-b[0])
 def mul(a,b):
     z=(a[0]*b[0],a[0]*b[1],a[1]*b[0],a[1]*b[1]); return (min(z),max(z))
 def inv(a):
-    assert not (a[0] <= 0 <= a[1]); return (1/a[1],1/a[0]) if a[0]>0 else (1/a[1],1/a[0])
+    require(not (a[0] <= 0 <= a[1]), "attempted inversion of an interval containing zero")
+    return (1/a[1],1/a[0])
 def div(a,b): return mul(a,inv(b))
 def sq(a):
     if a[0] <= 0 <= a[1]: return (F(0),max(a[0]*a[0],a[1]*a[1]))
@@ -101,14 +107,15 @@ cert=add(base,Vsum)
 # Root/sign checks for all nonquadratic isolating intervals.
 def p3(t):return t*t*t-4*t+2
 for I in (c0,c1,c2):
-    assert p3(I[0])*p3(I[1])<0
+    require(p3(I[0])*p3(I[1])<0, "cubic interval does not bracket a root")
 # The intervals are disjoint and cubic derivative has fixed sign on each; hence unique.
 # p' = 3x^2-4: fixed signs on c0,c1,c2 using rational square checks.
-assert 3*c0[1]*c0[1] > 4
-assert 3*c1[1]*c1[1] < 4
-assert 3*c2[0]*c2[0] > 4
-assert s5[0]*s5[0] < 5 < s5[1]*s5[1]
-assert r13[0]*r13[0]-r13[0]-3 < 0 < r13[1]*r13[1]-r13[1]-3
+require(3*c0[1]*c0[1] > 4, "left cubic interval is not monotone")
+require(3*c1[1]*c1[1] < 4, "middle cubic interval is not monotone")
+require(3*c2[0]*c2[0] > 4, "right cubic interval is not monotone")
+require(s5[0]*s5[0] < 5 < s5[1]*s5[1], "sqrt(5) interval is invalid")
+require(r13[0]*r13[0]-r13[0]-3 < 0 < r13[1]*r13[1]-r13[1]-3,
+        "positive quadratic-root interval is invalid")
 
 def outward_decimal(I, digits=12):
     scale=10**digits
@@ -118,7 +125,7 @@ def outward_decimal(I, digits=12):
 print("base interval:",outward_decimal(base))
 print("variance interval:",outward_decimal(Vsum))
 print("uniform certificate interval:",outward_decimal(cert))
-assert cert[1] < 0
-assert cert[1] < F(-64,1000)
+require(cert[1] < 0, "certificate upper bound is not negative")
+require(cert[1] < F(-64,1000), "certificate upper bound is not below -8/125")
 print("exact comparison: certificate upper bound < -8/125")
 print("PASS: exact rational interval upper bound is negative")
