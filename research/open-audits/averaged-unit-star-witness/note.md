@@ -121,8 +121,8 @@ several owners that duplicate a center.
 ### Exact optimal weights for a fixed finite instance
 
 Let `b_i=sigma(U_i)+sigma(R_i)` and
-`d_ij=||X_i-X_j||_F^2`. The strongest certificate obtainable from these
-specific cut optimizers is
+`d_ij=||X_i-X_j||_F^2`. The strongest certificate obtainable by taking a
+convex barycentre of these specific cut optimizers is
 
 ```text
 max { sum_i w_i b_i + sum_{i<j} w_i w_j d_ij :
