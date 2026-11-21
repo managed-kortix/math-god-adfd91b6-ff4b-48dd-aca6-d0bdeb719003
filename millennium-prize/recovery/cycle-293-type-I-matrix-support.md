@@ -77,7 +77,7 @@ For one consolidated Type-I isotypic support `X^m` of dimension at most four, th
 If the whole abelian fourfold has only Type-I simple supports, consolidation and the requirement on every coordinate leave the following shapes:
 
 1. `E^4`;
-2. `E_1^2 x E_2^2` with `E_1,E_2` nonisogenous;
+2. `E_1^2 x E_2^2` with `E_1,E_2` nonisogenous; under the displayed doubling construction each factor has class `[-1]`, while the global discriminant is one because `[-1]·[-1]=[1]`, not because either factor is trivial;
 3. `S^2` for a simple Type-I abelian surface `S`.
 
 Mixed products may combine a Type-I `E^2` support with a two-dimensional support of another Albert type; this note says nothing about that other coordinate. A simple Type-I threefold or fourfold, or a multiplicity-one Type-I surface, cannot acquire the required unital `K` action inside its own isotypic matrix algebra.

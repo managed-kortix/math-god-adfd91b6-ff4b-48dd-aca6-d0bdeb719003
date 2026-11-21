@@ -13,6 +13,9 @@ def invdiag(a):
     return [[Fraction(1,a[i][i]) if i==j else Fraction(0) for j in range(len(a))]
             for i in range(len(a))]
 def eq(a,b): return a==b
+def validate(condition, context):
+    if not condition:
+        raise RuntimeError(f"validation failed: {context!r}")
 
 checks=0
 for d in range(1,24):
@@ -21,27 +24,32 @@ for d in range(1,24):
     I=[[Fraction(1),Fraction(0)],[Fraction(0),Fraction(1)]]
     negdI=[[Fraction(-d)*x for x in row] for row in I]
     negJ=[[-x for x in row] for row in J]
-    assert eq(mm(J,J),negdI)
-    assert eq(mm(mm(invdiag(R),tr(J)),R),negJ)
-    checks += 2
+    validate(eq(mm(J,J),negdI), ("square",d))
+    checks += 1
+    validate(eq(mm(mm(invdiag(R),tr(J)),R),negJ), ("Rosati",d))
+    checks += 1
 
 # A rational 2x2 matrix skew for ordinary transpose has square -a^2 I.
 for a in range(-20,21):
     Q=[[Fraction(0),Fraction(a)],[Fraction(-a),Fraction(0)]]
-    assert mm(Q,Q)==[[Fraction(-a*a),Fraction(0)],[Fraction(0),Fraction(-a*a)]]
-    assert a*a != 2
-    checks += 2
+    validate(mm(Q,Q)==[[Fraction(-a*a),Fraction(0)],[Fraction(0),Fraction(-a*a)]],
+             ("ordinary skew square",a))
+    checks += 1
+    validate(a*a != 2, ("rational square obstruction",a))
+    checks += 1
 
 # Dimension <=4 isotypic possibilities and whole-Type-I dimension-four partitions.
 pairs=[(g,m) for g in range(1,5) for m in range(1,5) if g*m<=4 and m%2==0]
-assert pairs==[(1,2),(1,4),(2,2)]
+validate(pairs==[(1,2),(1,4),(2,2)], ("isotypic pairs",pairs))
+checks += 1
 whole=[]
 # consolidated dimensions g*m, Type-I rows only, total 4
 for n in range(1,4):
     for tup in product(pairs, repeat=n):
         if sum(g*m for g,m in tup)==4 and list(tup)==sorted(tup): whole.append(tup)
-assert sorted(set(whole))==[((1,2),(1,2)),((1,4),),((2,2),)]
-checks += 2
+validate(sorted(set(whole))==[((1,2),(1,2)),((1,4),),((2,2),)],
+         ("whole Type-I shapes",whole))
+checks += 1
 
 # For a 2g-dimensional alternating S and r with 2gr=4,
 # eta^-4 det(S)^r = (Pf(S)^r/d)^2. Check symbolic integer samples.
@@ -51,7 +59,7 @@ for g,r in ((1,2),(2,1)):
             detS=pf*pf
             lhs=Fraction(detS**r,d*d)
             rhs=Fraction(pf**(2*r),d*d)
-            assert lhs==rhs
+            validate(lhs==rhs, ("determinant square",g,r,d,pf))
             checks += 1
 
 print(f"PASS exact checks={checks}")
