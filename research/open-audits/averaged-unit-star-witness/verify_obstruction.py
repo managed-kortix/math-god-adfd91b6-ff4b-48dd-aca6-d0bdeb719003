@@ -79,6 +79,11 @@ def poly_mul(p,q):
         for j,b in enumerate(q):out[i+j]+=a*b
     return out
 
+def poly_eval(p,x):
+    out=F(0)
+    for c in p:out=out*x+c
+    return out
+
 def embed(P,I,n):
     Z=[[pt(0) for _ in range(n)] for _ in range(n)]
     for a,i in enumerate(I):
@@ -106,17 +111,23 @@ require(sum(A[i][j] for i in U1 for j in R1) == 1, "first cut is not one bridge"
 require(sum(A[i][j] for i in U2 for j in R2) == 1, "second cut is not one bridge")
 def principal(I):return [[A[i][j] for j in I] for i in I]
 
-# Check the complete spectral factorizations used below:
-# chi_U=(x-2)(x^2+x-1)^2 and
-# chi_R=x^2(x^2-x-3)(x^2+x-1)(x^3-4x+2).
-expected_U=poly_mul(poly_mul([1,-2],[1,1,-1]),[1,1,-1])
+# Check the complete spectral factorizations used below, as well as the full
+# graph factorization used to verify that this is not a target counterexample:
+# chi_U=(x-2)(x^2+x-1)^2,
+# chi_R=x^2(x^2-x-3)(x^2+x-1)(x^3-4x+2), and
+# chi_G=x^2(x-2)(x^2+x-1)^3(x^5-x^4-8x^3+7x^2+11x-6).
+quadratic=[1,1,-1]; quintic=[1,-1,-8,7,11,-6]
+expected_U=poly_mul(poly_mul([1,-2],quadratic),quadratic)
 expected_R=poly_mul([1,0],[1,0])
-for factor in ([1,-1,-3],[1,1,-1],[1,0,-4,2]):expected_R=poly_mul(expected_R,factor)
+for factor in ([1,-1,-3],quadratic,[1,0,-4,2]):expected_R=poly_mul(expected_R,factor)
 expected_tree=poly_mul(poly_mul([1,0],[1,0]),[1,0,-3])
+expected_G=poly_mul(poly_mul([1,0],[1,0]),[1,-2])
+for factor in (quadratic,quadratic,quadratic,quintic):expected_G=poly_mul(expected_G,factor)
 require(charpoly_coeffs(principal(U1)) == expected_U, "C5 characteristic polynomial mismatch")
 require(charpoly_coeffs(principal(R1)) == expected_R, "complement characteristic polynomial mismatch")
 require(charpoly_coeffs(principal([0,1,2,3])) == expected_tree,
         "central K1,3 characteristic polynomial mismatch")
+require(charpoly_coeffs(A) == expected_G, "full-graph characteristic polynomial mismatch")
 
 # Rational isolating intervals.  Their signs and uniqueness are checked below.
 s5=(F(2236067,1000000),F(2236068,1000000))
@@ -125,6 +136,18 @@ r13=(F(2302775,1000000),F(2302776,1000000)); m13=sub(pt(1),r13)
 c0=(F(-2214320,1000000),F(-2214319,1000000))
 c1=(F(539188,1000000),F(539189,1000000))
 c2=(F(1675130,1000000),F(1675131,1000000))
+qroots=[(F(-2482,1000),F(-2481,1000)),(F(-1194,1000),F(-1193,1000)),
+        (F(481,1000),F(482,1000)),(F(1657,1000),F(1658,1000)),
+        (F(2536,1000),F(2537,1000))]
+require(all(qroots[i][1] < qroots[i+1][0] for i in range(4)),
+        "quintic root intervals overlap")
+require(all(poly_eval(quintic,I[0])*poly_eval(quintic,I[1]) < 0 for I in qroots),
+        "quintic interval does not bracket a root")
+# Five disjoint sign-changing intervals exhaust the degree-five factor.  Its
+# last three roots and the three repeated positive quadratic roots give an
+# exact lower bound on Phi(A), proving that the graph itself is no counterexample.
+graph_phi_lower=F(4)+3*sq(a)[0]+sum(I[0]*I[0] for I in qroots[2:])
+require(graph_phi_lower > 14, "full graph is not certified to have positive surplus")
 # C5 positive part is polynomial p(C) interpolating values at its three distinct eigenvalues.
 C=principal(U1)
 # p(x)=alpha*x^2+beta*x+gamma, solved exactly over intervals by Lagrange projectors.
