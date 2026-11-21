@@ -99,7 +99,10 @@ def main():
             "mutate-no-digon": (mutate_clause_literal(base, 36), "A", "bare"),
             "mutate-npp-biconditional": (mutate_clause_literal(base, 190), "A", "bare"),
             "mutate-high-mask": (mutate_clause_literal(base, 79300), "A", "bare"),
-            "mutate-hole-cardinality": (mutate_clause_literal(base, 90380), "A", "bare"),
+            "mutate-hole-at-least-seven": (
+                mutate_clause_literal(base, 90342), "A", "bare"),
+            "mutate-hole-at-most-seven": (
+                mutate_clause_literal(base, 90343), "A", "bare"),
             "mutate-v-rob": (mutate_clause_literal(base, 90403), "A", "bare"),
             "mutate-q-to-r": (mutate_clause_literal(base, 90410), "A", "bare"),
             "mutate-q-rob": (mutate_clause_literal(base, 90411), "A", "bare"),

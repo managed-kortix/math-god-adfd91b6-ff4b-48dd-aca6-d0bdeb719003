@@ -412,12 +412,8 @@ def exact_second(vertices, arcs, source):
     }
 
 
-def audit_q_robustness():
-    # Exhaust all oriented graphs on four vertices with q->r.  The emitted
-    # preservation predicate must be equivalent to exact N++ equality after r
-    # is deleted, on surviving vertices.
-    vertices = tuple(range(4))
-    q_vertex, r_vertex = 0, 1
+def oriented_graphs(vertices):
+    """Yield every loop-free oriented graph, with a third hole state."""
     pairs = tuple((i, j) for i in vertices for j in vertices if i < j)
     for states in itertools.product((0, 1, 2), repeat=len(pairs)):
         arcs = set()
@@ -426,6 +422,42 @@ def audit_q_robustness():
                 arcs.add((left, right))
             elif state == 1:
                 arcs.add((right, left))
+        yield arcs
+
+
+def audit_v_robustness():
+    # Exhaust all oriented graphs on four vertices with v->q.  The direct
+    # A\{q}->B support predicate used by V-Rob must be equivalent to equality
+    # of the surviving exact second neighborhood after q is deleted.
+    vertices = tuple(range(4))
+    v_vertex, q_vertex = 0, 1
+    for arcs in oriented_graphs(vertices):
+        if (v_vertex, q_vertex) not in arcs:
+            continue
+        first = {endpoint for endpoint in vertices
+                 if (v_vertex, endpoint) in arcs}
+        old = exact_second(vertices, arcs, v_vertex)
+        surviving = tuple(vertex for vertex in vertices if vertex != q_vertex)
+        reduced = {(left, right) for left, right in arcs
+                   if left != q_vertex and right != q_vertex}
+        new = exact_second(surviving, reduced, v_vertex)
+        equality = old - {q_vertex} == new
+        clause_predicate = all(
+            any((middle, endpoint) in arcs
+                for middle in first - {q_vertex})
+            for endpoint in old
+            if endpoint != q_vertex
+        )
+        require(equality == clause_predicate, "V-Rob semantic audit failed")
+
+
+def audit_q_robustness():
+    # Exhaust all oriented graphs on four vertices with q->r.  The emitted
+    # path-variable preservation predicate must be equivalent to exact N++
+    # equality after r is deleted, on surviving vertices.
+    vertices = tuple(range(4))
+    q_vertex, r_vertex = 0, 1
+    for arcs in oriented_graphs(vertices):
         if (q_vertex, r_vertex) not in arcs:
             continue
         old = exact_second(vertices, arcs, q_vertex)
@@ -449,6 +481,7 @@ def audit_semantics():
     audit_pair_trichotomy()
     audit_threshold()
     audit_mu2_link()
+    audit_v_robustness()
     audit_q_robustness()
 
 

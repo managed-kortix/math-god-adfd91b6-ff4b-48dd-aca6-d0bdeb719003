@@ -232,8 +232,8 @@ The semantic self-audit independently truth-tables or exhausts:
 - oriented-pair trichotomy;
 - exact unary counters through width four, including all auxiliary assignments;
 - the deficit-two linkage for every relevant degree pair at width seventeen;
-- Q-Rob versus exact second-neighborhood equality after deletion on all
-  four-vertex oriented graphs with `q->r`.
+- V-Rob and Q-Rob versus exact second-neighborhood equality after deletion on
+  all four-vertex oriented graphs with the respective witness arc.
 
 Hostile candidates alter dimensions, envelope form, newlines, clause count,
 loops/digons, exact-N++ linkage, high mask, hole cardinality, V-Rob, `q->r`,
