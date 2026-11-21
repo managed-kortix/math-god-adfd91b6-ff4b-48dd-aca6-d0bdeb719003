@@ -4144,6 +4144,32 @@ Using the RH diagonal or Cycle 40's RH-conditional coefficient assumptions to
 prove RH through this stopping theorem is circular. Details are in
 `cycle-42-affine-cancellation-and-circularity-audit.md`.
 
+## Cycle 44: finite boundary-envelope gate
+
+At fixed `theta=2/5`, define the affine-free nested span
+
+\[
+ \mathcal E(a,h)=\operatorname{span}\{p_q:a-h\le q<2a,\ \mu(q)^2=1\}.
+\]
+
+Complete restricted-Gram calculations at 192-bit Arb precision give current-
+only failure at `a=128,256,512`, failure of `h=ceil(a/log a)` at `a=256,512`,
+and exact least passing widths
+
+\[
+ h_*(128)=19,\qquad h_*(256)=53,\qquad h_*(512)=361.
+\]
+
+Minimality follows from nested projection monotonicity and strict adjacent
+interval signs; an independent assembly reproduced the delicate signs at 256
+bits.  Hence every cohort contained in the corresponding failed full span also
+fails on that finite block.  No asymptotic conclusion follows.  In particular,
+equal-`u^2` current bins balance only diagonal trace; the leading moving Gram is
+the Brownian support kernel Hadamard the spatial Vasyunin kernel, so the next
+sublemma must control the full correlation vector and inverse Gram.  See
+`cycle-44-boundary-envelope-no-go.md` and
+`cycle44-boundary-envelope-results.json`.  No RH result is claimed.
+
 ## Cycle 43: critical Hardy quadrature and scalar no-go results
 
 Put `x_n=1/log n`, `h_n=x_n-x_(n+1)`, `w_n=h_n log n`, and

@@ -79,11 +79,15 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   192/256-bit multiprobe censuses show one or two old columns repair the tested
   finite hard blocks, yet a proved asymptotic no-go now shows every prescribed
   fixed finite affine/old-divisor family captures only `O(log^-3 a)` against an
-  unconditional `Omega(log^-2 a)` Burnol budget, so the active projection
-  search must use moving labels, growing rank, or current-admission structure
+  unconditional `Omega(log^-2 a)` Burnol budget; a fixed-strength
+  boundary-envelope scan then proves that the full current-admission span fails
+  at dyadic starts `128,256,512`, that width `ceil(a/log a)` fails at `256,512`,
+  and that the exact least historical widths are `19,53,361` there, so the
+  active projection search must first understand the full moving
+  Gram/correlation kernel before any low-rank cohort compression
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 43
+- **cycle:** 44
 - **announcements:** none
 
 ## immutable target list
@@ -104,11 +108,11 @@ waiting process.
 
 1. Attack the physical killed-Hardy inequality
    `Delta_a >= sum_(n>=a) h_n x_n Delta_n/x_a^2`, retaining the equality-zero
-   recurrence if the bound is non-strict.  The fixed-finite-old-probe asymptotic
-   theorem is now complete and negative; formulate the next exact moving-probe
-   theorem for labels `q=q(a)`, growing rank, or current-admission support, with
-   a uniform Gram/correlation bound strong enough to make the effective leverage
-   grow at least on the order of `log a`.
+   recurrence if the bound is non-strict.  The fixed-finite-old-probe theorem and
+   the finite boundary-envelope gate are now negative.  Derive the exact moving
+   Gram/correlation limit, including the Brownian support factor Hadamard the
+   spatial Vasyunin kernel, before testing any predeclared cohort compression;
+   diagonal trace balancing alone is not a projection theorem.
 2. Treat `kappa/log a` only as a finite diagnostic: its post-loss effective mass
    is provably summable under polynomial stopping.  Search instead for an
    explicit fixed subcritical chained-block coefficient (the certified dyadic
@@ -126,6 +130,15 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-11-21: Cycle 44 certified the fixed-`theta=2/5` affine-free boundary
+  envelope on dyadic starts `32,64,128,256,512`.  The full current span fails at
+  `128,256,512`; `h=ceil(a/log a)` fails at `256,512`; and nested-family
+  monotonicity plus adjacent 192-bit signs gives exact least passing widths
+  `h_*=19,53,361` (independently reproduced at 256 bits).  The normalized widths
+  are `0.720223...,1.148025...,4.398506...`; five finite samples prove neither
+  stabilization nor divergence.  This is a finite architecture no-go only, not
+  an eventual theorem or RH result.
 
 - 2026-11-21: Cycle 43 certified the finite divisor-multiprobe packet at 192 bits
   and independently reproduced its selected claims at 256 bits.  The tested

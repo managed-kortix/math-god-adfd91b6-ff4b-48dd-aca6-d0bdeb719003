@@ -26,6 +26,17 @@ arXiv:1211.5191.
 
 ## Current sharpened bottleneck
 
+The latest projection gate is `cycle-44-boundary-envelope-no-go.md`.  At fixed
+`theta=2/5`, complete restricted-Gram certificates show that the entire
+current-admission span fails at dyadic starts `128,256,512`; adding every
+squarefree old label in a window of width `ceil(a/log a)` still fails at
+`256,512`.  The least passing affine-free historical widths are exactly
+`19,53,361` at those starts.  This kills those finite local architectures, not
+an eventual theorem.  The next moving-probe analysis must retain the full
+leading Gram kernel: the Brownian triangular-support factor is Hadamard-
+multiplied by the spatial Vasyunin scaling kernel.  Equal diagonal-mass bins are
+therefore only trace balancing, not correlation-preserving compression.
+
 The exact reduced-rational Fourier representation exposes the needed signed
 Möbius cancellation but creates a dense weighted sine kernel. Global low rank,
 common-period bounds, and Farey-neighbor-only near fields have been falsified.
