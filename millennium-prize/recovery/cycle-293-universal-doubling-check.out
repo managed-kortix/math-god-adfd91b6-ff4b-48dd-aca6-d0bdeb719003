@@ -1,2 +1,3 @@
-PASS exact universal-doubling checks=8416
-ordinary discriminant class=(-1)^(g*r); fourfold instances have g*r=2 and class 1
+PASS exact universal-doubling checks=4823
+ordinary discriminant class=(-1)^(g*r); orthogonal factors add exponents
+fourfold all-doubling exponent=2; E1^2 and E2^2 each class -1, product +1

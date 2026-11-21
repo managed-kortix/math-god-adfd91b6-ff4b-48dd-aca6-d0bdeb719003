@@ -31,7 +31,7 @@ and direct multiplication gives
 
 Thus Rosati acts as `eta -> -eta`. The two complex eigenvalues of each `J` occur once on the multiplicity pair, so each occurs on `H^{1,0}` with multiplicity `gr`.
 
-This also records an important qualification: an algebra embedding need not be compatible with a preassigned product polarization. For `d=2`, a rational matrix skew under ordinary transpose cannot square to `-2I`; the modified positive matrix `R` is essential.
+This also records an important qualification: an algebra embedding need not be compatible with a preassigned product polarization. For `d=2`, no rational `2 by 2` matrix skew under ordinary transpose can square to `-2I`; thus the displayed `2 by 2` block requires the modified positive matrix `R`. This does not assert necessity for all embeddings in higher multiplicity dimensions.
 
 ## Exact discriminant computation
 
@@ -63,11 +63,17 @@ This sign is essential. Norms from an imaginary quadratic field are positive, so
 
 ## Census consequence
 
-For any isotypic support `X^m`, every even `m` is automatically admitted at the algebra-action, compatible-polarization, and balanced-signature gates, without any assumption on `End^0(X)`. Its constructed discriminant is `(-1)^(m dim(X)/2)`. In an abelian fourfold the total half-dimension is two, and the construction universally gives discriminant one for
+For any isotypic support `X^m`, every even `m=2r` is automatically admitted at the algebra-action, compatible-polarization, and balanced-signature gates, without any assumption on `End^0(X)`. Its constructed discriminant is `[(-1)^(r dim(X))]`.
 
-- `E^4`;
-- `E_1^2 x E_2^2` factorwise;
-- `S^2` for an arbitrary abelian surface `S`;
-- and an `E^2` coordinate inside a mixed product, provided every other coordinate separately carries the same unital `K` action.
+For an orthogonal product of independently doubled supports, multiplicativity of the Hermitian determinant gives the explicit formula
 
-It does not classify odd multiplicities. Those require an internal quadratic action in the relevant endomorphism algebra and a separate positive-involution/signature/discriminant analysis. Nor does the construction establish the actual Hodge group, graph independence, or algebraicity of the resulting exceptional classes.
+`delta(direct_sum_i X_i^(2r_i))=[(-1)^(sum_i r_i dim(X_i))]`.
+
+Consequently:
+
+- `E^4` has class `[(-1)^2]=[1]` for this construction;
+- in `E_1^2 x E_2^2`, each doubled elliptic factor contributes `[-1]`, and their product is `[+1]`; this is global cancellation, not factorwise triviality;
+- `S^2` for an arbitrary abelian surface `S` has class `[(-1)^2]=[1]`;
+- for a mixed product `E^2 x B`, the doubled elliptic factor contributes `[-1]`; global discriminant one requires `B` itself to carry a separately `K`-compatible balanced polarization with `delta(B)=[-1]`. A unital `K` action on `B` alone is insufficient.
+
+More generally, if the total product is an abelian fourfold and every support uses this doubling construction, then `sum_i r_i dim(X_i)=2`, so the global class is one. The theorem does not classify odd multiplicities or mixed products in which another factor uses a different action or polarization. Those require an internal quadratic action in the relevant endomorphism algebra and a separate positive-involution/signature/discriminant analysis. Nor does the construction establish the actual Hodge group, graph independence, or algebraicity of the resulting exceptional classes.
