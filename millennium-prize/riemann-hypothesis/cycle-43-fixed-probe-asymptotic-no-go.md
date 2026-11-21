@@ -263,9 +263,30 @@ Consequently, for a constant \(\kappa_q\),
  \tag{43.48}
 \]
 
-The remainder is retained throughout.  More precisely, with the periodically
-extended Bernoulli polynomial \(B_2(x)=x^2-x+1/6\), a second integration by
-parts gives
+The remainder is retained throughout.  More precisely, let
+\(B_1(x)=\{x\}-1/2\), let \(B_2(x)=x^2-x+1/6\) be extended periodically, and
+put \(F_q(t)=qB_2(\{t/q\})/2\), so that \(F_q'=B_1(t/q)\) away from the
+integers.  Stieltjes integration by parts gives
+
+\[
+ \int_1^d\frac{B_1(t/q)}t\,dt
+ =\kappa_q^{(1)}+\frac{F_q(d)}d+O_q(d^{-2}).
+\]
+
+For the second integral put \(h(u)=\{u\}/u^2\) and
+\(A_d(u)=qB_2(\{du/q\})/(2d)\), so that
+\(A_d'=B_1(du/q)\).  The jumps of \(dh\) at integers \(k\geq2\) are
+\(-1/k^2\); pairing its absolutely continuous part with the mean-zero
+high-frequency function \(A_d\) contributes \(O_q(d^{-2})\).  Hence
+
+\[
+ \int_1^\infty h(u)B_1(du/q)\,du
+ =\frac q{2d}\sum_{k\geq2}
+   \frac{B_2(\{dk/q\})}{k^2}+O_q(d^{-2}).
+\]
+
+After the outer factor \(1/d\) in (43.45), the first formula supplies the
+\(k=1\) term and the second supplies the terms \(k\geq2\).  Therefore
 
 \[
  R_q(d)=\frac{\beta_q(d)}{d^2}+O_q(d^{-3}),
@@ -743,8 +764,8 @@ For a divisor singleton,
  \tag{43.85}
 \]
 
-If \(\delta_q=0\), the leading coefficient vanishes; this is not a Gram
-degeneracy and only makes the projection smaller.
+If \(\delta_q=0\), (43.85) gives
+\(\Pi_q=o_{q,\theta}((\log a)^{-3})\); this is not a Gram degeneracy.
 
 ## 7. Burnol's lower bound and the restricted negative budget
 
@@ -767,7 +788,9 @@ Burnol's Theorem 1.3 is stated for the continuous Nyman--Beurling distance
 \(D(\lambda)\).  Under the Mellin unitary normalization corresponding to
 (43.86a), the discrete span with labels \(1\leq d\leq n\) is a subspace of
 the continuous span with parameters \(\lambda\leq\theta\leq1\), for
-\(\lambda=1/n\).  Hence
+\(\lambda=1/n\): explicitly,
+\(\rho_d(x)=\{1/(dx)\}=\rho((1/d)/x)\).  Mellin--Plancherel in the stated
+normalization therefore gives
 
 \[
  d_n\geq D(1/n).
