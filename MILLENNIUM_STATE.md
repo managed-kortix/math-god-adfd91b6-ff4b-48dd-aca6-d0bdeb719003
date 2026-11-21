@@ -69,13 +69,16 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
    affine completion, and zero symmetry do not cancel it; discrete lattice
    aliases also survive; the exact
    variable-block theorem now proves that consecutive complete blocks with
-   fixed fractional dissipation force zero liminf, so the current sublemma is a
-   Möbius-specific adaptive renewal inequality for complete blocks, after
-  global low rank and Farey-neighbor-only splits were falsified but blockwise
-  geometric low rank was numerically validated
+  fixed fractional dissipation force zero liminf; the critical residual is now
+  rewritten as an exact killed-Hardy quadrature for the effective second
+  coefficient, and abstract scalar countermodels show bounded second-scale
+  control alone is insufficient, so the current sublemma is a one-sided
+  Möbius--Vasyunin Hardy estimate (or a fixed subcritical chained-block
+  inequality) after global low rank and Farey-neighbor-only splits were
+  falsified but blockwise geometric low rank was numerically validated
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 42
+- **cycle:** 43
 - **announcements:** none
 
 ## immutable target list
@@ -94,15 +97,20 @@ waiting process.
 
 ## next exact steps
 
-1. Test the exact residual budgets
-   `P_a-2 kappa sum_(n>=a) w_n P_n`; every-start renewal is equivalent to their
-   nonnegativity plus recurrence at equality.
-2. Attack the compensated Mobius--Chebyshev cell inequality first at the
-   summable `kappa/log a` block strength, then determine the strongest factor
-   available after every loss and whether its effective mass diverges.
-3. Fold the full completed smoothed zero expansion to positive ordinates and
-   compare its negative diagonal with the same-sign, affine, and endpoint
-   channels under one finite cutoff and signed error.
+1. Attack the physical killed-Hardy inequality
+   `Delta_a >= sum_(n>=a) h_n x_n Delta_n/x_a^2`, retaining the equality-zero
+   recurrence if the bound is non-strict; test exact divisor-admission
+   multiprobes on the hard recovery blocks before attempting an asymptotic
+   theorem.
+2. Treat `kappa/log a` only as a finite diagnostic: its post-loss effective mass
+   is provably summable under polynomial stopping.  Search instead for an
+   explicit fixed subcritical chained-block coefficient (the certified dyadic
+   data currently support `4/5`) or another factor whose effective mass
+   diverges, while labeling any such physical theorem RH-sufficient.
+3. Use the completed finite-zero folding only with one common cutoff and signed
+   affine/endpoint remainder: its exact discrete zero block is positive and
+   cannot be separated termwise, while the continuous negative anti-diagonal
+   belongs to a different incomplete Mellin representation.
 4. Keep bounded scouts live: BSD exact modular-symbol moment certification;
    Hodge component-dominance obstruction; Navier--Stokes diagonal-mode signed
    integral; P-vs-NP all-exponents amplification obstruction; Yang--Mills
@@ -111,6 +119,8 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-11-21: Cycle 43 rewrote the critical residual budget as an exact killed-Hardy quadrature for the effective second coefficient `Delta_n=log(n)^2 P_n-C log n`; its future kernel has asymptotic mass one half, and an exact two-term profile has residual `D sum h_n/log(n+1)`. The physical complete cell sum is the adjacent difference of `x_n Delta_n`, while exact scalar countermodels show that bounded second-scale control does not force budgets and positive late budgets do not force singleton positivity without difference regularity. The current RH sublemma is therefore a one-sided Mobius--Vasyunin Hardy estimate, with equality recurrence retained for non-strict every-start stopping. These are exact identities and abstract no-go results, not an RH result.
 
 - 2026-07-26: Cycle 42 advanced each non-RH bounded scout exactly once. BSD:
   extended the weight/cyclotomic conversion through degree three and exposed

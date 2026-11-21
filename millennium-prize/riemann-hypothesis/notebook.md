@@ -4143,3 +4143,47 @@ is formally weaker, although every-start stopping is itself RH-sufficient.
 Using the RH diagonal or Cycle 40's RH-conditional coefficient assumptions to
 prove RH through this stopping theorem is circular. Details are in
 `cycle-42-affine-cancellation-and-circularity-audit.md`.
+
+## Cycle 43: critical Hardy quadrature and scalar no-go results
+
+Put `x_n=1/log n`, `h_n=x_n-x_(n+1)`, `w_n=h_n log n`, and
+`Delta_n=log(n)^2 P_n-C log n`.  The critical tail budget has the exact form
+
+\[
+ P_a-\sum_{n\ge a}w_nP_n
+ =x_a^2\left(\Delta_a-\sum_{n\ge a}
+ {h_nx_n\over x_a^2}\Delta_n\right).
+\]
+
+The future kernel has mass
+
+\[
+ {1\over2}\left(1+{\sum_{n\ge a}h_n^2\over x_a^2}\right)\to{1\over2}.
+\]
+
+Thus an exact two-term profile
+`P_n=C/log n+D/log^2 n` has residual
+`D sum_(n>=a)h_nx_(n+1)`, explaining the formal `D/2` reserve without a
+difference-stability hypothesis.  For the physical sequence, the complete
+Cycle 41 packet sum satisfies
+
+\[
+ H_n={x_n\Delta_n-x_{n+1}\Delta_{n+1}\over h_n},
+\]
+
+and the corresponding finite block has an exact endpoint-minus-Hardy-sum
+formula.
+
+Two exact scalar models delimit the route.  The bounded oscillatory coefficient
+`Delta_n=(-1)^n/2` makes the critical budgets alternate sign and gives no
+renewal from any odd start.  Conversely,
+`Delta_n=1+(-1)^n/n` gives positive late budgets while its formal singleton
+defect is negative at every odd index.  Therefore bounded second-scale control
+alone does not imply budgets, while a positive limiting coefficient need not
+imply singleton positivity without difference regularity.  These scalar models
+are not claimed to arise from the physical Mobius--Vasyunin path.  The surviving
+target is the one-sided killed-Hardy inequality for the physical `Delta`, with
+the equality-boundary recurrence appended if only non-strict positivity is
+proved.  Details and a hostile re-audit are in
+`cycle-43-critical-hardy-quadrature-and-cell-no-go.md`.  No RH result is
+claimed.
