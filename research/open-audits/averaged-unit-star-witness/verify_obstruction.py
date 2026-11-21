@@ -101,8 +101,11 @@ def principal(I):return [[A[i][j] for j in I] for i in I]
 expected_U=poly_mul(poly_mul([1,-2],[1,1,-1]),[1,1,-1])
 expected_R=poly_mul([1,0],[1,0])
 for factor in ([1,-1,-3],[1,1,-1],[1,0,-4,2]):expected_R=poly_mul(expected_R,factor)
+expected_tree=poly_mul(poly_mul([1,0],[1,0]),[1,0,-3])
 require(charpoly_coeffs(principal(U1)) == expected_U, "C5 characteristic polynomial mismatch")
 require(charpoly_coeffs(principal(R1)) == expected_R, "complement characteristic polynomial mismatch")
+require(charpoly_coeffs(principal([0,1,2,3])) == expected_tree,
+        "central K1,3 characteristic polynomial mismatch")
 
 # Rational isolating intervals.  Their signs and uniqueness are checked below.
 s5=(F(2236067,1000000),F(2236068,1000000))
