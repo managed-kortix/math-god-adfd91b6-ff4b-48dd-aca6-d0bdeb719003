@@ -75,7 +75,12 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   control alone is insufficient, so the current sublemma is a one-sided
   Möbius--Vasyunin Hardy estimate (or a fixed subcritical chained-block
   inequality) after global low rank and Farey-neighbor-only splits were
-  falsified but blockwise geometric low rank was numerically validated
+  falsified but blockwise geometric low rank was numerically validated; exact
+  192/256-bit multiprobe censuses show one or two old columns repair the tested
+  finite hard blocks, yet a proved asymptotic no-go now shows every prescribed
+  fixed finite affine/old-divisor family captures only `O(log^-3 a)` against an
+  unconditional `Omega(log^-2 a)` Burnol budget, so the active projection
+  search must use moving labels, growing rank, or current-admission structure
 - **parallel scouts:** one bounded route each for the other five problems;
   scouts return exact candidate lemmas, falsifications, or literature conflicts
 - **cycle:** 43
@@ -99,9 +104,11 @@ waiting process.
 
 1. Attack the physical killed-Hardy inequality
    `Delta_a >= sum_(n>=a) h_n x_n Delta_n/x_a^2`, retaining the equality-zero
-   recurrence if the bound is non-strict; test exact divisor-admission
-   multiprobes on the hard recovery blocks before attempting an asymptotic
-   theorem.
+   recurrence if the bound is non-strict.  The fixed-finite-old-probe asymptotic
+   theorem is now complete and negative; formulate the next exact moving-probe
+   theorem for labels `q=q(a)`, growing rank, or current-admission support, with
+   a uniform Gram/correlation bound strong enough to make the effective leverage
+   grow at least on the order of `log a`.
 2. Treat `kappa/log a` only as a finite diagnostic: its post-loss effective mass
    is provably summable under polynomial stopping.  Search instead for an
    explicit fixed subcritical chained-block coefficient (the certified dyadic
@@ -119,6 +126,19 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-11-21: Cycle 43 certified the finite divisor-multiprobe packet at 192 bits
+  and independently reproduced its selected claims at 256 bits.  The tested
+  complete blocks `[39,42)`, `[95,103)`, and `[219,231)` admit rank `1,1,2`
+  certificates in the full old-column family, while the columns first admitted
+  inside each block fail even at full local rank.  A separate unconditional
+  theorem now proves that every prescribed fixed finite family of affine and
+  fixed squarefree old-divisor probes has projection `Pi_S=O(log^-3 a)`, whereas
+  Burnol's optimal-distance lower bound forces the negative dyadic budget to be
+  `Omega(log^-2 a)`.  The proof includes the oscillatory `d^-2` fixed-Gram term,
+  a two-cutoff/BV Abel argument for conditional Mobius contractions, and the
+  continuous-to-discrete Burnol transfer.  Thus the finite successes cannot
+  stabilize at fixed rank; no RH result is claimed.
 
 - 2026-11-21: Cycle 43 rewrote the critical residual budget as an exact killed-Hardy quadrature for the effective second coefficient `Delta_n=log(n)^2 P_n-C log n`; its future kernel has asymptotic mass one half, and an exact two-term profile has residual `D sum h_n/log(n+1)`. The physical complete cell sum is the adjacent difference of `x_n Delta_n`, while exact scalar countermodels show that bounded second-scale control does not force budgets and positive late budgets do not force singleton positivity without difference regularity. The current RH sublemma is therefore a one-sided Mobius--Vasyunin Hardy estimate, with equality recurrence retained for non-strict every-start stopping. These are exact identities and abstract no-go results, not an RH result.
 
