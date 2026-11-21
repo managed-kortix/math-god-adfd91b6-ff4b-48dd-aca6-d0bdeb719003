@@ -133,21 +133,26 @@ This is an exact finite concave quadratic program because squared Euclidean
 distance matrices are conditionally negative semidefinite. Formula (10) is
 an instance certificate, not a rank-only theorem.
 
-## 3. Sharp obstruction to closure by this identity alone
+## 3. Exact obstruction to full closure from arm averaging alone
 
-There is no arm choice and hence no averaging when `k=1`. Then `V_w=0`, and
-(6) reduces exactly to the already known single-cut bound
+The inherited unit-star residue permits `k=1`, including the subcase in which
+the rank-one arm is joined directly to the rank-six component by a single
+physical bridge.  For that allowed subcase there is exactly one rank-`(1,6)`
+arm cut among the cut optimizers considered here.  Thus `V_w=0`, and (6)
+reduces exactly to the already known single-cut bound
 
 ```text
 sigma(G)>=sigma(U_1)+sigma(R_1).                            (11)
 ```
 
-The inherited unit-star residue explicitly permits `k=1`: one hostile
-rank-one component joined by a bridge chain to a bridge-free rank-six
-component. Therefore Theorem 1, without an additional quantified theorem for
-`sigma(R_1)` or the actual bridge gain, cannot close the full hostile
-unit-star remainder. This is an exact structural obstruction, not a numerical
-counterexample to the target graph inequality.
+A longer suppressed bridge chain can provide several cut positions, and this
+argument does not rule out gaining variance by averaging those cuts.  It does
+show that arm-cut averaging alone cannot uniformly close the full hostile
+unit-star remainder, because the one-physical-bridge `k=1` subcase is allowed.
+Closing that subcase requires an additional quantified theorem for
+`sigma(R_1)`, the actual bridge gain, or a different witness.  This is a
+structural obstruction to this proof scheme, not a numerical counterexample
+to the target graph inequality.
 
 Even for `k>=2`, (8) is an additional analytic obligation; (2) supplies the
 variance term exactly but gives no universal lower bound on it. A finite exact
