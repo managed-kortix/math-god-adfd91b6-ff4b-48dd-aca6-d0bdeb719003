@@ -2351,3 +2351,32 @@ scopes; this recovery is not a claim of Seymour's conjecture.
 - **Next family-S frontier:** attack the remaining `h=0` cell while continuing
   the mixed/distinct-low families independently.  Do not infer an `m=7`,
   order-18, or SNC closure.
+
+## 2026-11-21 — family-S `h=0` human exclusion and family closure
+
+- Proved a computation-free terminal theorem excluding the globally strict-bad,
+  order-18, seven-hole, shared-low family-S cell with `h(T)=0`.  Tournament
+  score transport gives `e(B,C)=10`; a common `C`-dominator, exact-second
+  saturation at any ordinary predecessor, and the high-high tournament arc
+  force a degree contradiction.
+- Repaired the upstream presentation of the degree census: arc minimality gives
+  `mu(v)=d+(v)-d++(v)<=2`, and disjointness of `{v}`, `N+(v)`, `N++(v)` on 18
+  vertices gives `Delta+<=9`; only then do 146 arcs force `9,9,8^16`.
+- Independent hostile reconstruction checked the `U not-> C` barrier,
+  `e(B,C)=10` without cut completeness, the inaccessible-inneighbor lemma,
+  saturation to exactly `{r,q}`, the high-high arc, and the terminal nine-target
+  count.  The dependency-free audit script checks the finite arithmetic/local
+  logic; no h0 SAT/DRAT package is needed.
+- The exact family-S refinement proves that every configuration in the
+  committed order-18, seven-hole, vertex-minimal-then-arc-minimal normal form
+  has `h(T) in {0,1,2,3,4}`.  The `h=0` corollary together with the retained
+  `h=1,2,3,4` exclusions therefore eliminates only that shared-low family-S
+  branch.  Families D and H remain; this is not an `m=7`, order-18, or Seymour
+  closure.  See
+  `attempts/2026-11-21-m7-family-s-h0-human-proof.md`,
+  `agents/2026-11-21-m7-family-s-h0-hostile-audit.md`, and
+  `experiments/verify_m7_family_s_h0_human.py`.
+- **Next queued attack:** use the family-D common-inaccessible-pair reduction
+  and its three residual `(x,z,h)` cells in parallel with the mixed family H.
+  Preserve exact family scope and do not infer full seven-hole closure from the
+  completed family-S branch.

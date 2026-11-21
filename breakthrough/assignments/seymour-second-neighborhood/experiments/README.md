@@ -1235,3 +1235,28 @@ ordinary-A/B labels by transformed complete C-incidence type; the package pins
 pre-row 3 at `{0,13}->{0,14}` and exhausts all 742,320 bridge cases.  Exact
 scope, identities and hostile-audit history are in
 `../attempts/2026-11-20-m7-family-s-h1-badness.md`.
+
+## Order-18 `m=7` shared-low `h=0` human proof
+
+The normal-form corollary of a computation-free theorem excludes exactly the
+globally strict-bad, order-18, seven-hole, shared-low family-S cell in which
+`T={w} union N+(w) union N++(w)` has no internal hole.  The tiny script below
+checks only the integer transport and finite local logic of the proof, with
+fail-closed checks under both normal and optimized Python:
+
+```sh
+python3 -B verify_m7_family_s_h0_human.py
+python3 -O -B verify_m7_family_s_h0_human.py
+```
+
+It is an audit aid, not an order-18 graph search and not a certificate for the
+upstream vertex-minimal-then-arc-minimal normal-form reduction.  The exact
+proof, corrected degree-cap dependency, hostile audit, and scope guards are in
+`../attempts/2026-11-21-m7-family-s-h0-human-proof.md` and
+`../agents/2026-11-21-m7-family-s-h0-hostile-audit.md`.
+
+By the exact family-S refinement, every configuration in the committed
+order-18, seven-hole, vertex-minimal-then-arc-minimal normal form has
+`h(T) in {0,1,2,3,4}`.  The `h=0` corollary together with the retained
+`h=1,2,3,4` exclusions therefore eliminates only that family-S branch.
+Families D and H remain; no broader `m=7`, order-18, or SNC conclusion follows.
