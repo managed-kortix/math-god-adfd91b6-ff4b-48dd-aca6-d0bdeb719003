@@ -905,5 +905,9 @@ No Riemann-hypothesis result is claimed.
 - L. Báez-Duarte, M. Balazard, B. Landreau, and E. Saias, *Notes sur la
   fonction zêta de Riemann, 3*, Advances in Mathematics **149** (2000),
   130--144, DOI 10.1006/aima.1999.1861.
+- S. Bettin, J. B. Conrey, and D. W. Farmer, *An optimal choice of Dirichlet
+  polynomials for the Nyman--Beurling criterion*, Proceedings of the Steklov
+  Institute of Mathematics **280** (Suppl. 2) (2013), 30--36,
+  DOI 10.1134/S0081543813030036, arXiv:1211.5191.
 - The Cycle 39--40 notes in this dossier for the exact full/restricted
   normalization and the literature audit of Burnol's constant.
