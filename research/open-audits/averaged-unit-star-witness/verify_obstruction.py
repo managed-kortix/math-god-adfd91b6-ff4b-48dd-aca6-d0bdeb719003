@@ -92,7 +92,18 @@ edges=[(0,3),(1,3),(2,3)]
 for o in (4,9):
     edges += [(o+i,o+(i+1)%5) for i in range(5)] + [(3,o)]
 A=matrix(edges,14)
+edge_set={tuple(sorted(e)) for e in edges}
+require(len(edge_set) == len(edges), "duplicate graph edge")
+seen={0}; todo=[0]
+while todo:
+    i=todo.pop()
+    for j in range(14):
+        if A[i][j] and j not in seen:seen.add(j);todo.append(j)
+require(len(seen) == 14, "obstruction graph is disconnected")
+require(len(edge_set)-14+1 == 2, "obstruction graph is not rank two")
 U1=list(range(4,9));U2=list(range(9,14));R1=[i for i in range(14) if i not in U1];R2=[i for i in range(14) if i not in U2]
+require(sum(A[i][j] for i in U1 for j in R1) == 1, "first cut is not one bridge")
+require(sum(A[i][j] for i in U2 for j in R2) == 1, "second cut is not one bridge")
 def principal(I):return [[A[i][j] for j in I] for i in I]
 
 # Check the complete spectral factorizations used below:
@@ -127,6 +138,8 @@ X1=matadd(embed(PU,U1,14),embed(PR,R1,14))
 # Swap the two cycles to obtain X2.
 perm={i:i for i in range(14)}
 for i in range(5):perm[4+i]=9+i;perm[9+i]=4+i
+require(all(A[i][j] == A[perm[i]][perm[j]] for i in range(14) for j in range(14)),
+        "cycle swap is not a graph automorphism")
 X2=[[X1[perm[i]][perm[j]] for j in range(14)] for i in range(14)]
 V=matscale([[sq(sub(X1[i][j],X2[i][j])) for j in range(14)] for i in range(14)],pt(F(1,4)))
 Vsum=sum_iv(x for row in V for x in row)
