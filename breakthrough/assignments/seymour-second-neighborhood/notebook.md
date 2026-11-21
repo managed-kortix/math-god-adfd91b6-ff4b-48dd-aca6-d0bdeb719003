@@ -2376,7 +2376,12 @@ scopes; this recovery is not a claim of Seymour's conjecture.
   `attempts/2026-11-21-m7-family-s-h0-human-proof.md`,
   `agents/2026-11-21-m7-family-s-h0-hostile-audit.md`, and
   `experiments/verify_m7_family_s_h0_human.py`.
-- **Next queued attack:** use the family-D common-inaccessible-pair reduction
-  and its three residual `(x,z,h)` cells in parallel with the mixed family H.
-  Preserve exact family scope and do not infer full seven-hole closure from the
-  completed family-S branch.
+- The already-retained common-`C` package closes the three family-D residual
+  cells `(x,z,h)=(0,0,2),(0,1,1),(1,0,1)` after crossing them with the three
+  exact root-overlap types.  Its strict verifier independently regenerates all
+  nine CNFs, authenticates the compressed and raw DRATs, and replays every
+  refutation.  This closes only `C_u=C_v`; the family-D overlap cases
+  `|C_u intersect C_v| in {0,1}` remain.
+- **Next queued attack:** retain a self-contained certificate for mixed family H
+  and finish the non-common family-D overlap cover.  Preserve exact family scope
+  and do not infer full seven-hole closure from family S or common `C` alone.

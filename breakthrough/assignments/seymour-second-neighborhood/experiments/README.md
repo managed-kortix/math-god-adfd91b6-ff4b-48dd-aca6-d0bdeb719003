@@ -1236,6 +1236,43 @@ pre-row 3 at `{0,13}->{0,14}` and exhausts all 742,320 bridge cases.  Exact
 scope, identities and hostile-audit history are in
 `../attempts/2026-11-20-m7-family-s-h1-badness.md`.
 
+## Order-18 `m=7` family-D common-`C` certificate package
+
+The retained nine-leaf package excludes exactly the common inaccessible-pair
+branch `C_u=C_v` of distinct-low family D after the structural reduction to
+
+```text
+(x,z,h)=(0,0,2), (0,1,1), (1,0,1).
+```
+
+Each cell is crossed with the exact overlap types `oriented-both`,
+`oriented-one`, and `root-hole`.  The formulas impose global strict badness,
+both chosen deletion-witness systems, and the universal disjoint-family
+condition, but no arc-minimality clauses.  They do not cover the family-D cases
+`|C_u intersect C_v| in {0,1}`, family H, all seven-hole graphs, all order 18,
+or Seymour's conjecture.
+
+From this directory, using any executable whose SHA-256 is the pinned
+`92f0aa9575ed519d66a99b8b1b3dde6ece4618ae4c202a3a4b200265dda0aa7a`:
+
+```sh
+python3 -O -B verify_m7_family_d_common_c_campaign.py \
+  --manifest ../certificates/m7-family-d-common-c/manifest.json \
+  --proof-dir ../certificates/m7-family-d-common-c \
+  --drat-trim ../certificates/m7-family-s-h1-certificate/tools/drat-trim \
+  --cnf-checker ./check_m7_family_d_common_c_cnf.py
+python3 -O -B test_verify_m7_family_d_common_c_artifact_set.py \
+  --drat-trim ../certificates/m7-family-s-h1-certificate/tools/drat-trim
+python3 -O -B test_m7_family_d_common_c.py
+python3 -O -B m7_family_d_common_c_semantic_tests.py
+```
+
+The package verifier regenerates every CNF, requires byte equality from the
+producer-independent checker, rejects missing/orphan/non-regular entries,
+authenticates compressed and decompressed proofs, and requires one checked
+`VERIFIED` marker per leaf.  Exact scope and bridge are in
+`../attempts/2026-11-19-m7-family-d-common-c-nine-leaf-closure.md`.
+
 ## Order-18 `m=7` shared-low `h=0` human proof
 
 The normal-form corollary of a computation-free theorem excludes exactly the
