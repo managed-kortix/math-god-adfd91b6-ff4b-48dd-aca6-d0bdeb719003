@@ -1260,3 +1260,26 @@ order-18, seven-hole, vertex-minimal-then-arc-minimal normal form has
 `h(T) in {0,1,2,3,4}`.  The `h=0` corollary together with the retained
 `h=1,2,3,4` exclusions therefore eliminates only that family-S branch.
 Families D and H remain; no broader `m=7`, order-18, or SNC conclusion follows.
+
+## Provisional order-18 `m=7` mixed family-H CNF reduction
+
+The standalone producer `m7_family_h_cnf.py` encodes the two exhaustive
+locations of the high vertex `r` in the low root's exact layers for the chain
+`v->q->r`.  It includes exact graph/distance-two semantics, the seven-hole
+degree census, both selected deletion-robustness systems, and global badness.
+It intentionally omits arc-minimality and strong connectivity, so UNSAT is a
+sound elimination of this family while SAT would only be a relaxation model.
+No proof artifact is retained; solver and DRAT observations in the attempt note
+remain provisional pending independent replay.
+
+```sh
+python3 -B test_m7_family_h_cnf.py
+python3 -B m7_family_h_cnf.py --case A \
+  --output /tmp/m7-family-h-A.cnf --map-output /tmp/m7-family-h-A.map
+python3 -B m7_family_h_cnf.py --case B \
+  --output /tmp/m7-family-h-B.cnf --map-output /tmp/m7-family-h-B.map
+```
+
+See `../attempts/2026-11-21-m7-family-h-cnf-reduction.md` for the quantified
+reduction, expected dimensions/hashes, negative control, pinned-tool commands,
+and the carefully delimited partial-badness/clause-family scout.
