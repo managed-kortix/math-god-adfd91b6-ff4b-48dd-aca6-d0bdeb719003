@@ -58,6 +58,27 @@ def matrix(edges,n):
     for i,j in edges:A[i][j]=A[j][i]=1
     return A
 
+def int_mm(A,B):
+    return [[sum(A[i][k]*B[k][j] for k in range(len(B)))
+             for j in range(len(B[0]))] for i in range(len(A))]
+
+def charpoly_coeffs(A):
+    """Exact descending coefficients via Faddeev--LeVerrier."""
+    n=len(A); B=[[int(i==j) for j in range(n)] for i in range(n)]; out=[1]
+    for k in range(1,n+1):
+        AB=int_mm(A,B); tr=sum(AB[i][i] for i in range(n))
+        require(tr % k == 0, "nonintegral characteristic-polynomial coefficient")
+        c=-tr//k; out.append(c)
+        B=[[AB[i][j]+(c if i==j else 0) for j in range(n)] for i in range(n)]
+    require(all(x==0 for row in B for x in row), "Cayley--Hamilton check failed")
+    return out
+
+def poly_mul(p,q):
+    out=[0]*(len(p)+len(q)-1)
+    for i,a in enumerate(p):
+        for j,b in enumerate(q):out[i+j]+=a*b
+    return out
+
 def embed(P,I,n):
     Z=[[pt(0) for _ in range(n)] for _ in range(n)]
     for a,i in enumerate(I):
@@ -74,20 +95,27 @@ A=matrix(edges,14)
 U1=list(range(4,9));U2=list(range(9,14));R1=[i for i in range(14) if i not in U1];R2=[i for i in range(14) if i not in U2]
 def principal(I):return [[A[i][j] for j in I] for i in I]
 
+# Check the complete spectral factorizations used below:
+# chi_U=(x-2)(x^2+x-1)^2 and
+# chi_R=x^2(x^2-x-3)(x^2+x-1)(x^3-4x+2).
+expected_U=poly_mul(poly_mul([1,-2],[1,1,-1]),[1,1,-1])
+expected_R=poly_mul([1,0],[1,0])
+for factor in ([1,-1,-3],[1,1,-1],[1,0,-4,2]):expected_R=poly_mul(expected_R,factor)
+require(charpoly_coeffs(principal(U1)) == expected_U, "C5 characteristic polynomial mismatch")
+require(charpoly_coeffs(principal(R1)) == expected_R, "complement characteristic polynomial mismatch")
+
 # Rational isolating intervals.  Their signs and uniqueness are checked below.
 s5=(F(2236067,1000000),F(2236068,1000000))
 a=div(sub(s5,pt(1)),pt(2)); mphi=mul(pt(-1),div(add(s5,pt(1)),pt(2)))
-r13=(F(2302775,1000000),F(2302776,1000000)); m13=(F(-1302776,1000000),F(-1302775,1000000))
+r13=(F(2302775,1000000),F(2302776,1000000)); m13=sub(pt(1),r13)
 c0=(F(-2214320,1000000),F(-2214319,1000000))
 c1=(F(539188,1000000),F(539189,1000000))
 c2=(F(1675130,1000000),F(1675131,1000000))
-rootsU=[pt(2),a,a,mphi,mphi]  # multiplicities prevent projector use; C5 formula below
 # C5 positive part is polynomial p(C) interpolating values at its three distinct eigenvalues.
 C=principal(U1)
 # p(x)=alpha*x^2+beta*x+gamma, solved exactly over intervals by Lagrange projectors.
 distinct=[pt(2),a,mphi]
 PU=pospart(C,[pt(2),a],distinct)
-rootsR=[pt(0),pt(0),m13,r13,mphi,a,c0,c1,c2]
 # Zero is repeated; remove its nullspace factor by using distinct eigenvalues only: spectral
 # projectors depend on the distinct minimal-polynomial roots.
 distR=[pt(0),m13,r13,mphi,a,c0,c1,c2]
@@ -113,15 +141,22 @@ for I in (c0,c1,c2):
 require(3*c0[1]*c0[1] > 4, "left cubic interval is not monotone")
 require(3*c1[1]*c1[1] < 4, "middle cubic interval is not monotone")
 require(3*c2[0]*c2[0] > 4, "right cubic interval is not monotone")
-require(s5[0]*s5[0] < 5 < s5[1]*s5[1], "sqrt(5) interval is invalid")
-require(r13[0]*r13[0]-r13[0]-3 < 0 < r13[1]*r13[1]-r13[1]-3,
-        "positive quadratic-root interval is invalid")
+require(c0[1] < 0 < c1[0] < c1[1] < c2[0], "cubic root signs/order are invalid")
+require(s5[0] > 0 and s5[0]*s5[0] < 5 < s5[1]*s5[1], "sqrt(5) interval is invalid")
+require(r13[0] > 0 and r13[0]*r13[0]-r13[0]-3 < 0
+        < r13[1]*r13[1]-r13[1]-3, "positive quadratic-root interval is invalid")
+require(m13[1] < 0, "negative quadratic-root interval is invalid")
+
+def decimal_from_scaled_integer(value,digits):
+    sign="-" if value < 0 else ""
+    whole,frac=divmod(abs(value),10**digits)
+    return f"{sign}{whole}.{frac:0{digits}d}"
 
 def outward_decimal(I, digits=12):
     scale=10**digits
     lo=I[0].numerator*scale//I[0].denominator
     hi=-((-I[1].numerator*scale)//I[1].denominator)
-    return f"[{lo/scale:.{digits}f}, {hi/scale:.{digits}f}]"
+    return f"[{decimal_from_scaled_integer(lo,digits)}, {decimal_from_scaled_integer(hi,digits)}]"
 print("base interval:",outward_decimal(base))
 print("variance interval:",outward_decimal(Vsum))
 print("uniform certificate interval:",outward_decimal(cert))
