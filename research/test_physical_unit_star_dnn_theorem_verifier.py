@@ -167,6 +167,43 @@ class PhysicalUnitStarDNNTests(unittest.TestCase):
         with self.assertRaises(v.VerificationError):
             v.check_instance(graph)
 
+    def test_instance_json_rejects_integer_aliases_and_booleans(self):
+        graph = materialize_unit_star(4, [5, 5, 5])
+        payload = {str(vertex): neighbours for vertex, neighbours in graph.items()}
+        payload["01"] = list(payload["1"])
+        alias_path = ROOT / "research" / "fixtures" / ".hostile-alias-instance.json"
+        boolean_path = ROOT / "research" / "fixtures" / ".hostile-boolean-instance.json"
+        try:
+            alias_path.write_bytes(v.canonical_bytes(payload))
+            completed = subprocess.run(
+                [sys.executable, "-I", "-B", str(VERIFIER_PATH),
+                 "--instance", str(alias_path)], cwd=ROOT,
+                check=False, capture_output=True)
+            self.assertNotEqual(completed.returncode, 0)
+            self.assertIn(b"FAIL CLOSED", completed.stderr)
+
+            payload = {str(vertex): list(neighbours)
+                       for vertex, neighbours in graph.items()}
+            for neighbours in payload.values():
+                for index, neighbour in enumerate(neighbours):
+                    if neighbour == 1:
+                        neighbours[index] = True
+            boolean_path.write_bytes(v.canonical_bytes(payload))
+            completed = subprocess.run(
+                [sys.executable, "-I", "-B", str(VERIFIER_PATH),
+                 "--instance", str(boolean_path)], cwd=ROOT,
+                check=False, capture_output=True)
+            self.assertNotEqual(completed.returncode, 0)
+            self.assertIn(b"FAIL CLOSED", completed.stderr)
+        finally:
+            alias_path.unlink(missing_ok=True)
+            boolean_path.unlink(missing_ok=True)
+
+    def test_public_instance_checker_has_no_scope_override(self):
+        with self.assertRaises(TypeError):
+            v.check_instance(materialize_unit_star(6, [5]),
+                             allowed_rows=(0, 1, 2, 3, 4, 5, 6))
+
     def test_scope_widening_mutations_fail(self):
         manifest = v.load_manifest()
         mutations = []
@@ -193,7 +230,7 @@ class PhysicalUnitStarDNNTests(unittest.TestCase):
                 v.strict_json_bytes(raw, "hostile parser")
 
     def test_built_in_hostile_suite_width(self):
-        self.assertEqual(len(v.hostile_self_checks(v.load_manifest())), 12)
+        self.assertEqual(len(v.hostile_self_checks(v.load_manifest())), 13)
 
 
 if __name__ == "__main__":

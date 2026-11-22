@@ -22,7 +22,10 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 MANIFEST = HERE / "fixtures" / "physical-unit-star-dnn-theorem-manifest.json"
-MANIFEST_SHA256 = "9c862a41302367197e09218de4ee546efc0b89de045523780137b79b283b60c4"
+MANIFEST_SHA256 = "40ac7795de6a4e636bacf128bbcf9d41ef567db18ff14cb83be6951fbb103366"
+THEOREM_SOURCE = (ROOT / "positive-square-energy" / "heptacyclic-general" /
+                  "physical-unit-star-dnn-theorem.md")
+THEOREM_SOURCE_SHA256 = "83ee6eb77987f712f29a32e7a4f396492608f7af8ab5eabb3030c8ed726a051e"
 DNN_SOURCE = ROOT / "sharp-cactus-dnn" / "paper.tex"
 DNN_SOURCE_SHA256 = "79dcffc6eb49d35951d6e8b7778de7f6de838239a467d99f4747bca3f57c0cbb"
 STRUCTURAL_SOURCE = (ROOT / "positive-square-energy" / "heptacyclic-general" /
@@ -93,13 +96,18 @@ def load_manifest():
 
 def validate_manifest(manifest):
     require(set(manifest) == {
-        "schema", "theorem_id", "scope", "hostile_cycle", "closed_rows",
-        "residual_rows", "conclusion", "proof_contract", "analytic_import",
-        "structural_source", "verification_boundary", "nonclaims",
+        "schema", "theorem_id", "theorem_source", "scope", "hostile_cycle",
+        "closed_rows", "residual_rows", "conclusion", "proof_contract",
+        "analytic_import", "structural_source", "verification_boundary",
+        "nonclaims",
     }, "manifest fields changed")
     require(manifest["schema"] == "physical-unit-star-dnn-theorem-v1" and
             manifest["theorem_id"] == "PHYSICAL-UNIT-STAR-DNN",
             "theorem identity changed")
+    require(manifest["theorem_source"] == {
+        "path": "positive-square-energy/heptacyclic-general/physical-unit-star-dnn-theorem.md",
+        "sha256": THEOREM_SOURCE_SHA256,
+    }, "theorem source identity changed")
     require(manifest["scope"] == exact_scope(), "theorem scope changed")
     require(manifest["hostile_cycle"] == {
         "length_congruence": "1 mod 4", "minimum_length": 5,
@@ -144,7 +152,7 @@ def validate_manifest(manifest):
     }, "structural source changed")
     require(manifest["verification_boundary"] == {
         "exactly_checked": [
-            "canonical manifest identity and dependency digests",
+            "canonical manifest identity, theorem identity, and dependency digests",
             "symbolic coefficient ledger", "exact integer radical certificates",
             "dependency-free finite-instance Tarjan structure and edge ledger",
             "hostile mutation rejection",
@@ -164,6 +172,8 @@ def validate_manifest(manifest):
 
 
 def authenticate_imports():
+    require(sha256_file(THEOREM_SOURCE) == THEOREM_SOURCE_SHA256,
+            "theorem source digest changed")
     require(sha256_file(DNN_SOURCE) == DNN_SOURCE_SHA256,
             "DNN analytic source digest changed")
     require(sha256_file(STRUCTURAL_SOURCE) == STRUCTURAL_SOURCE_SHA256,
@@ -209,6 +219,8 @@ def normalize_adjacency(adjacency):
     graph = {}
     for vertex, neighbours in adjacency.items():
         row = list(neighbours)
+        require(all(type(neighbour) is int and neighbour >= 0 for neighbour in row),
+                "neighbours must be nonnegative integers, not booleans or aliases")
         require(len(row) == len(set(row)), "parallel edge or duplicate neighbour")
         require(vertex not in row, "loop detected")
         require(set(row) <= vertices, "edge endpoint missing from adjacency")
@@ -355,7 +367,7 @@ def reduce_positive_hull(tree, ranks):
     return {vertex: reduced[vertex] & active for vertex in active}
 
 
-def check_instance(adjacency, allowed_rows=(0, 1, 2, 3, 4, 5)):
+def check_instance(adjacency):
     graph = normalize_adjacency(adjacency)
     vertices = len(graph)
     edges = len(graph_edges(graph))
@@ -388,7 +400,8 @@ def check_instance(adjacency, allowed_rows=(0, 1, 2, 3, 4, 5)):
                 if vertex != center), "reduced positive hull is not a star")
     require(len(reduced[center]) == len(unit_leaves), "star has a non-unit leaf")
     center_rank = ranks[center]
-    require(center_rank in allowed_rows, "center rank is outside the checked rows")
+    require(center_rank in (0, 1, 2, 3, 4, 5),
+            "center rank is outside the checked rows")
     require(len(unit_leaves) == 7 - center_rank,
             "unit leaf count does not equal seven minus center rank")
     cycle_lengths = []
@@ -428,6 +441,8 @@ def hostile_self_checks(manifest):
         mutations.append((label, candidate))
 
     add("rank widened", lambda value: value["scope"].update(cyclomatic_rank=8))
+    add("theorem source changed", lambda value: value["theorem_source"].update(
+        sha256="0" * 64))
     add("nonstar hull", lambda value: value["scope"].update(
         reduced_positive_hull="arbitrary-weighted-tree"))
     add("center classified", lambda value: value["scope"].update(
@@ -461,7 +476,7 @@ def audit():
     authenticate_imports()
     ledger = audit_symbolic_ledger()
     rejected = hostile_self_checks(manifest)
-    require(len(rejected) == 12, "hostile mutation ledger changed")
+    require(len(rejected) == 13, "hostile mutation ledger changed")
     return {
         "schema": "physical-unit-star-dnn-theorem-receipt-v1",
         "theorem": "PHYSICAL-UNIT-STAR-DNN",
@@ -471,7 +486,7 @@ def audit():
         "strict": True,
         "symbolic_ledger": ledger,
         "instance_checker": "dependency-free Tarjan derivation; adjacency supplied at call time",
-        "analytic_import_count": 2,
+        "authenticated_source_count": 3,
         "hostile_mutations_rejected": list(rejected),
         "nonclaim": "c=6, one-component rank seven, non-unit-stars, and all-heptacyclic closure remain open",
     }
@@ -497,10 +512,17 @@ def main():
         if args.instance is not None:
             raw = args.instance.read_bytes()
             adjacency = strict_json_bytes(raw, "instance adjacency")
+            require(type(adjacency) is dict and adjacency,
+                    "instance JSON adjacency must be a nonempty object")
+            require(all(type(key) is str and key == str(int(key)) and int(key) >= 0
+                        for key in adjacency),
+                    "instance vertex keys must be canonical nonnegative decimal integers")
             require(all(type(value) is list for value in adjacency.values()),
                     "instance JSON adjacency rows must be lists")
-            adjacency = {int(key): value for key, value in adjacency.items()}
-            output = canonical_bytes(check_instance(adjacency))
+            integer_adjacency = {int(key): value for key, value in adjacency.items()}
+            require(len(integer_adjacency) == len(adjacency),
+                    "instance vertex keys collide after integer conversion")
+            output = canonical_bytes(check_instance(integer_adjacency))
         else:
             receipt = audit()
             output = canonical_bytes(receipt) if args.print_manifest else (
