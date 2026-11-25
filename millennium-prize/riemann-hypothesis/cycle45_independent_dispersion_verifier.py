@@ -13,13 +13,34 @@ import argparse
 from flint import arb, ctx
 
 from certify_complete_gram import RestrictedGram, mobius_sieve
+from cycle45_runtime import require_exact_runtime
 
 
 def arb_sum(values):
     return sum(values, arb(0))
 
 
+def require_finite(value, label):
+    if not isinstance(value, arb) or not value.is_finite():
+        raise RuntimeError(("nonfinite Arb value", label, value))
+    return value
+
+
+def certify_zero_error(value, label, bits):
+    require_finite(value, label)
+    if not value.contains(0):
+        raise RuntimeError(("identity interval excludes zero", label, value))
+    upper = abs(value).upper()
+    require_finite(upper, f"{label} absolute upper bound")
+    ceiling = arb(2) ** (-(bits // 2))
+    if not upper <= ceiling:
+        raise RuntimeError(("identity interval too wide", label, value,
+                            "ceiling", ceiling))
+    return upper
+
+
 def verify(start, bits=256):
+    require_exact_runtime()
     if bits < 192:
         raise ValueError("independent verification requires at least 192 bits")
     ctx.prec = bits
@@ -36,10 +57,15 @@ def verify(start, bits=256):
     }
     eta = {n: tau / A[n] for n in range(start, stop)}
     for n in range(start, stop):
+        for label, value in (("w", w[n]), ("A", A[n]),
+                             ("eta", eta[n])):
+            require_finite(value, f"{label}[{n}]")
         if not A[n] > 0:
             raise RuntimeError(f"unresolved/nonpositive A at n={n}")
     squarefree = [d for d in range(1, stop) if mu[d]]
     rows = [q for q in squarefree if start <= q < stop]
+    if not rows:
+        raise RuntimeError(("empty squarefree row set", start))
 
     D = arb(0)
     Delta = arb(0)
@@ -77,20 +103,34 @@ def verify(start, bits=256):
             for n in range(max(start, q), stop)
         )
         error = hat_c - direct
-        if not error.contains(0):
-            raise RuntimeError(("independent direct identity failed", q, error))
-        if abs(error).upper() > max_error:
-            max_error = abs(error).upper()
+        error_upper = certify_zero_error(
+            error, f"independent direct identity a={start}, q={q}", bits
+        )
+        if error_upper > max_error:
+            max_error = error_upper
+        for label, value in (("beta", beta), ("signed_W", signed_W),
+                             ("W2", W2), ("hat_c", hat_c),
+                             ("direct", direct)):
+            require_finite(value, f"{label}, a={start}, q={q}")
         D += hat_c * hat_c
         Delta += beta * beta + W2
 
     L = logs[start]
-    return {
-        "a": start,
-        "rank": len(rows),
+    require_finite(D, f"D, a={start}")
+    require_finite(Delta, f"Delta, a={start}")
+    if not Delta > 0:
+        raise RuntimeError(("nonpositive or unresolved Delta", start, Delta))
+    outputs = {
         "L3D": L ** 3 * D,
         "L2Delta": L ** 2 * Delta,
         "LD_over_Delta": L * D / Delta,
+    }
+    for label, value in outputs.items():
+        require_finite(value, f"{label}, a={start}")
+    return {
+        "a": start,
+        "rank": len(rows),
+        **outputs,
         "direct_identity_error_upper_bound": max_error,
     }
 

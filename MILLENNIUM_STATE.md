@@ -97,7 +97,11 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   explicit left and right layers of Section 10, are `o(log^-3/2 a)` only in
   norm, so no `o(log^-3 a)` energy removal follows without an independent
   upper bound; the physical dispersion is exactly
-  `D_a(I)=||M_a x_a||_2^2`, and the surviving open checkpoint is
+  `D_a(I)=||M_a x_a||_2^2`; a fail-closed 192-bit census on
+  `a=32,64,128,256,512,1024` finds strong signed off-diagonal cancellation,
+  with `log(a)D_a/Delta_a` as small as `0.0470752...` on `[1,2]` and
+  `0.0411209...` on `[1,3/2]` at `a=1024`, but is nonmonotone and finite only;
+  the surviving open checkpoint is
   `liminf log(a) D_a(I)/Delta_a(I)>0`, equivalently
   `D_a(I) >> log^-3 a`; no moving projection limit, completed-square budget,
   or RH result is proved
@@ -171,6 +175,19 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-11-25: Cycle 45 completed and independently re-audited a fail-closed
+  fixed-strength correlation-dispersion census at 192-bit Arb precision for
+  `a=32,64,128,256,512,1024` on `[1,2]` and `[1,3/2]`.  It certifies the exact
+  normalization `D_a=||M_a x_a||_2^2` and `Delta_a=||M_a||_F^2`, including
+  direct-contraction, existing-probe, and decomposition identities.  At
+  `a=1024`, `log(a)D_a/Delta_a` is `0.0470752...` and `0.0411209...` on the two
+  intervals; neither this ratio nor `log(a)^3D_a` is monotone over the six
+  scales.  The exact runtime is pinned, the full artifact reproduces byte for
+  byte, selected rows were reconstructed independently at 256 bits, and an
+  exact-rational sign audit passes.  These twelve rows are finite diagnostics
+  only and prove no positive liminf, asymptotic estimate, projection theorem,
+  or RH consequence.
 
 - 2026-11-25: Cycle 45 accepted the moving Gram kernel audit. After squarefree
   sign stripping, `a log(a) W_a(q,r)` converges locally uniformly in the bulk

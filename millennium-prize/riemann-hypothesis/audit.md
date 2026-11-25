@@ -33,3 +33,11 @@
     is `D_a(I) >> log^-3 a`. That target is sufficient only for the stated
     trace-based projection lower bound; it is neither necessary for every
     projection argument nor sufficient by itself for the physical budget.
+12. The Cycle 45 dispersion census has only six dyadic scales and two
+    post-selected row intervals. Its small, nonmonotone values of
+    `log(a)D_a/Delta_a` certify finite Möbius cancellation, not convergence or
+    failure of a positive liminf. Every use of the artifact must preserve the
+    unsigned definition of `W`, the affine `beta` column, all squarefree
+    divisor columns, and the outer relation
+    `hat_c(q)=mu(q) CompensatedBlock.correlation(q)`; adding another `mu(d)` to
+    the already signed legacy Gram rows recreates the double-signing error.

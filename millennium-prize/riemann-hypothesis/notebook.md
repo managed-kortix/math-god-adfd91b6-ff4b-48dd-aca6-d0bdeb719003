@@ -4305,3 +4305,59 @@ support, gcd, and Vasyunin weights retained. Even that estimate would give
 only a trace-based moving-projection lower bound; the physical budget still
 needs constants and an upper bound of the required order. No RH result is
 claimed. See `moving-gram-kernel-audit-2026-11-25.md`.
+
+### Fixed-strength correlation-dispersion census
+
+A fail-closed 192-bit Arb census tests the physical selected vector without
+replacing its Möbius signs by a random or unsigned model.  At fixed
+`theta=2/5`, for
+
+```text
+a = 32, 64, 128, 256, 512, 1024
+I = [1,2] and [1,3/2],
+```
+
+it reconstructs the unsigned matrix columns `W_a(q,d)`, the affine column
+`beta_a(q)`, and
+
+```text
+hat_c_a(q) = beta_a(q) + sum_d mu(d) W_a(q,d),
+D_a(I)     = sum_q hat_c_a(q)^2,
+Delta_a(I) = sum_q (beta_a(q)^2 + sum_d W_a(q,d)^2).
+```
+
+The driver certifies a direct contraction of the underlying `X` expression,
+comparison with the existing signed `CompensatedBlock.correlation(q)`, and the
+full diagonal/cross/off-diagonal recombination identity.  The exact runtime is
+pinned to CPython 3.12.13, python-flint 0.9.0, and FLINT 3.6.0.  A canonical
+rerun reproduced all twelve committed rows byte for byte; a separately coded
+256-bit reconstruction reproduced selected full-interval rows, and an exact
+rational sign audit isolates the Möbius placement.
+
+The finite data exhibit strong signed cancellation.  On `[1,2]`,
+`log(a) D_a/Delta_a` takes approximately
+
+```text
+0.5764, 0.4342, 0.1415, 0.1716, 0.03305, 0.04708,
+```
+
+and on `[1,3/2]` it takes approximately
+
+```text
+0.5878, 0.4201, 0.1506, 0.1568, 0.03481, 0.04112.
+```
+
+Thus neither this normalized ratio nor `log(a)^3 D_a` is monotone over the six
+scales.  At `a=1024` the signed off-diagonal term cancels more than `99%` of
+`Delta_a` on the full interval.  This decisively warns against a diagonal or
+random-sign heuristic, but twelve finite rows establish no limit, positive
+liminf, asymptotic bound, projection theorem, or RH consequence.  The open
+checkpoint remains the arithmetic inequality
+
+```text
+liminf_(a->infinity) log(a) D_a(I) / Delta_a(I) > 0.
+```
+
+See `cycle-45-correlation-dispersion-census-audit.md` and the committed JSON,
+validator, exact runtime manifest, tests, independent verifier, and rational
+sign audit named there.

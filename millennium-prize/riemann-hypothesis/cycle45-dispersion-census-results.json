@@ -2,6 +2,22 @@
   "scope": "certified finite diagnostic only; no convergence, asymptotic lower bound, or RH claim",
   "anchor_commit": "4306d7ce",
   "arb_precision_bits": 192,
+  "runtime": {
+    "python": "3.12.13",
+    "python_flint": "0.9.0",
+    "flint": "3.6.0",
+    "python_implementation": "cpython",
+    "generator": "cycle45_dispersion_census.py",
+    "generator_sha256": "9f24a6630a8804996590732d8a6f6389557a296eacb7daedc5fc56cb38152ade",
+    "environment_manifest": "cycle45-dispersion-environment.json",
+    "environment_manifest_sha256": "a88cfbecae577f3cfb206769458113494b5bb2b4b783fdd4e46b71542434456b"
+  },
+  "environment_manifest": "cycle45-dispersion-environment.json",
+  "identity_error_policy": {
+    "must_be_finite": true,
+    "must_contain_zero": true,
+    "absolute_upper_bound_at_most": "[1.262177448353618888658766e-29 +/- 2.96e-54]"
+  },
   "theta": "2/5",
   "starts": [
     32,
@@ -21,17 +37,17 @@
       1.5
     ]
   ],
-  "row_rule": "squarefree q with q/a in the closed declared interval",
+  "row_rule": "squarefree q with q/a in the closed census interval",
   "normalization": {
     "W": "<rho_q,rho_d> H(q,d), unsigned in q and d",
     "beta": "-g_q H0(q)",
     "hat_c": "mu(q)c_q = beta(q) + sum_d mu(d)W(q,d)",
-    "D": "||M_a x_a||_2^2 = sum_{q in I} hat_c(q)^2",
-    "Delta": "||M_a||_F^2 = sum_{q in I}(beta(q)^2 + sum_d W(q,d)^2)",
     "x_a": "(1,(mu(d))_d)",
-    "M_a": "rows q in S_a(I), affine column beta(q), squarefree columns W(q,d)"
+    "M_a": "rows q in S_a(I), affine column beta(q), squarefree columns W(q,d)",
+    "D": "||M_a x_a||_2^2 = sum_{q in I} hat_c(q)^2",
+    "Delta": "||M_a||_F^2 = sum_{q in I}(beta(q)^2 + sum_d W(q,d)^2)"
   },
-  "verdict_policy": "outward 192-bit Arb intervals; failed identities abort",
+  "verdict_policy": "finite outward Arb intervals; nonfinite, empty, nonpositive-denominator, or wide/failed identity checks abort",
   "rows": [
     {
       "a": 32,
@@ -49,9 +65,10 @@
       "W2": "[0.001934084890714263669162749 +/- 3.20e-28]",
       "beta_signedW_cross": "[0.0001564199483268098641404569 +/- 1.28e-29]",
       "signedW_offdiag": "[-0.001812487492817753711848750 +/- 2.83e-28]",
-      "recombination_error": "[+/- 2.67e-56]",
-      "direct_identity_max_error_ball": "[+/- 1.69e-56]",
-      "existing_probe_identity_max_error_ball": "[+/- 1.69e-56]",
+      "recombination_error": "[+/- 4.10e-57]",
+      "recombination_abs_error_upper_bound": "[4.096171269899306051211835e-57 +/- 8.17e-84]",
+      "direct_identity_abs_error_upper_bound": "[1.689653554971755127746175e-56 +/- 4.75e-81]",
+      "existing_probe_identity_abs_error_upper_bound": "[1.690615512957807069918087e-56 +/- 7.6e-84]",
       "ranges": [
         {
           "lo": 1,
@@ -99,9 +116,10 @@
       "W2": "[0.001864049872250183515705774 +/- 8.43e-29]",
       "beta_signedW_cross": "[0.0001537213746365222379431107 +/- 1.30e-29]",
       "signedW_offdiag": "[-0.001743836314489623723388915 +/- 1.21e-28]",
-      "recombination_error": "[+/- 2.27e-56]",
-      "direct_identity_max_error_ball": "[+/- 1.69e-56]",
-      "existing_probe_identity_max_error_ball": "[+/- 1.69e-56]",
+      "recombination_error": "[+/- 3.92e-57]",
+      "recombination_abs_error_upper_bound": "[3.915893875881980451196688e-57 +/- 4.38e-82]",
+      "direct_identity_abs_error_upper_bound": "[1.689653554971755127746175e-56 +/- 4.75e-81]",
+      "existing_probe_identity_abs_error_upper_bound": "[1.690615512957807069918087e-56 +/- 7.6e-84]",
       "ranges": [
         {
           "lo": 1,
@@ -149,9 +167,10 @@
       "W2": "[0.001580859677337171416445781 +/- 2.40e-28]",
       "beta_signedW_cross": "[7.813616922595818337151105e-5 +/- 1.57e-30]",
       "signedW_offdiag": "[-0.001516733246020140329607189 +/- 1.23e-28]",
-      "recombination_error": "[+/- 1.34e-55]",
-      "direct_identity_max_error_ball": "[+/- 4.09e-56]",
-      "existing_probe_identity_max_error_ball": "[+/- 4.09e-56]",
+      "recombination_error": "[+/- 9.32e-57]",
+      "recombination_abs_error_upper_bound": "[9.315507092824053987744406e-57 +/- 1.66e-82]",
+      "direct_identity_abs_error_upper_bound": "[4.296800398420192129612896e-56 +/- 2.28e-81]",
+      "existing_probe_identity_abs_error_upper_bound": "[4.297690535730042242971001e-56 +/- 3.63e-81]",
       "ranges": [
         {
           "lo": 1,
@@ -199,9 +218,10 @@
       "W2": "[0.001479738711022002074685902 +/- 3.74e-28]",
       "beta_signedW_cross": "[7.182556625837888865413555e-5 +/- 3.81e-30]",
       "signedW_offdiag": "[-0.001423830479287858054511883 +/- 4.59e-28]",
-      "recombination_error": "[+/- 1.01e-55]",
-      "direct_identity_max_error_ball": "[+/- 4.09e-56]",
-      "existing_probe_identity_max_error_ball": "[+/- 4.09e-56]",
+      "recombination_error": "[+/- 8.43e-57]",
+      "recombination_abs_error_upper_bound": "[8.429814088501666045845038e-57 +/- 1.25e-82]",
+      "direct_identity_abs_error_upper_bound": "[4.296800398420192129612896e-56 +/- 2.28e-81]",
+      "existing_probe_identity_abs_error_upper_bound": "[4.297690535730042242971001e-56 +/- 3.63e-81]",
       "ranges": [
         {
           "lo": 1,
@@ -249,9 +269,10 @@
       "W2": "[0.001269843432941483260528165 +/- 2.78e-28]",
       "beta_signedW_cross": "[1.691135572811916998976884e-5 +/- 1.82e-30]",
       "signedW_offdiag": "[-0.001261370439221684120893854 +/- 2.15e-28]",
-      "recombination_error": "[+/- 6.51e-55]",
-      "direct_identity_max_error_ball": "[+/- 7.85e-56]",
-      "existing_probe_identity_max_error_ball": "[+/- 7.85e-56]",
+      "recombination_error": "[+/- 1.29e-56]",
+      "recombination_abs_error_upper_bound": "[1.283559385692854674878141e-56 +/- 8.41e-82]",
+      "direct_identity_abs_error_upper_bound": "[8.364349502262314549869360e-56 +/- 8.65e-82]",
+      "existing_probe_identity_abs_error_upper_bound": "[8.365648435158300917475302e-56 +/- 2.70e-81]",
       "ranges": [
         {
           "lo": 1,
@@ -299,9 +320,10 @@
       "W2": "[0.001168392420197945788110380 +/- 1.39e-28]",
       "beta_signedW_cross": "[1.776112314079116975852421e-5 +/- 4.97e-30]",
       "signedW_offdiag": "[-0.001160781470414244116905480 +/- 4.53e-28]",
-      "recombination_error": "[+/- 3.91e-55]",
-      "direct_identity_max_error_ball": "[+/- 7.85e-56]",
-      "existing_probe_identity_max_error_ball": "[+/- 7.85e-56]",
+      "recombination_error": "[+/- 1.18e-56]",
+      "recombination_abs_error_upper_bound": "[1.179956901812451628266978e-56 +/- 3.15e-81]",
+      "direct_identity_abs_error_upper_bound": "[8.364349502262314549869360e-56 +/- 8.65e-82]",
+      "existing_probe_identity_abs_error_upper_bound": "[8.365648435158300917475302e-56 +/- 2.70e-81]",
       "ranges": [
         {
           "lo": 1,
@@ -349,9 +371,10 @@
       "W2": "[0.001065849363967438839421007 +/- 1.03e-28]",
       "beta_signedW_cross": "[1.526549550353555804879738e-5 +/- 1.20e-30]",
       "signedW_offdiag": "[-0.001053767528809100721044315 +/- 1.32e-28]",
-      "recombination_error": "[+/- 3.56e-54]",
-      "direct_identity_max_error_ball": "[+/- 1.61e-55]",
-      "existing_probe_identity_max_error_ball": "[+/- 1.61e-55]",
+      "recombination_error": "[+/- 2.86e-56]",
+      "recombination_abs_error_upper_bound": "[2.859862422782336244888542e-56 +/- 4.79e-81]",
+      "direct_identity_abs_error_upper_bound": "[1.625303684575540580637603e-55 +/- 2.89e-80]",
+      "existing_probe_identity_abs_error_upper_bound": "[1.625415934340622176031341e-55 +/- 1.82e-80]",
       "ranges": [
         {
           "lo": 1,
@@ -399,9 +422,10 @@
       "W2": "[0.0009804069470136664367065330 +/- 2.88e-30]",
       "beta_signedW_cross": "[1.327011037083886310368973e-5 +/- 4.54e-30]",
       "signedW_offdiag": "[-0.0009712462373159448659156551 +/- 9.62e-30]",
-      "recombination_error": "[+/- 1.59e-54]",
-      "direct_identity_max_error_ball": "[+/- 1.61e-55]",
-      "existing_probe_identity_max_error_ball": "[+/- 1.61e-55]",
+      "recombination_error": "[+/- 2.48e-56]",
+      "recombination_abs_error_upper_bound": "[2.474595068353338575505397e-56 +/- 4.00e-81]",
+      "direct_identity_abs_error_upper_bound": "[1.625303684575540580637603e-55 +/- 2.89e-80]",
+      "existing_probe_identity_abs_error_upper_bound": "[1.625415934340622176031341e-55 +/- 1.82e-80]",
       "ranges": [
         {
           "lo": 1,
@@ -449,9 +473,10 @@
       "W2": "[0.0009235421354872187996251927 +/- 2.70e-29]",
       "beta_signedW_cross": "[-1.196460523300235373918818e-7 +/- 8.99e-33]",
       "signedW_offdiag": "[-0.0009214026153622018506784948 +/- 2.21e-29]",
-      "recombination_error": "[+/- 1.65e-53]",
-      "direct_identity_max_error_ball": "[+/- 3.04e-55]",
-      "existing_probe_identity_max_error_ball": "[+/- 3.04e-55]",
+      "recombination_error": "[+/- 3.89e-56]",
+      "recombination_abs_error_upper_bound": "[3.880371268399715105003790e-56 +/- 4.48e-82]",
+      "direct_identity_abs_error_upper_bound": "[3.209426513893946519094876e-55 +/- 4.54e-80]",
+      "existing_probe_identity_abs_error_upper_bound": "[3.209613110156250315408886e-55 +/- 2.94e-80]",
       "ranges": [
         {
           "lo": 1,
@@ -499,9 +524,10 @@
       "W2": "[0.0008550111934369036362904367 +/- 4.16e-29]",
       "beta_signedW_cross": "[4.864787979886109145371309e-7 +/- 4.18e-32]",
       "signedW_offdiag": "[-0.0008534290772108777804389041 +/- 2.98e-29]",
-      "recombination_error": "[+/- 8.75e-54]",
-      "direct_identity_max_error_ball": "[+/- 3.04e-55]",
-      "existing_probe_identity_max_error_ball": "[+/- 3.04e-55]",
+      "recombination_error": "[+/- 3.49e-56]",
+      "recombination_abs_error_upper_bound": "[3.487760569829713471514159e-56 +/- 3.70e-81]",
+      "direct_identity_abs_error_upper_bound": "[3.209426513893946519094876e-55 +/- 4.54e-80]",
+      "existing_probe_identity_abs_error_upper_bound": "[3.209613110156250315408886e-55 +/- 2.94e-80]",
       "ranges": [
         {
           "lo": 1,
@@ -550,8 +576,9 @@
       "beta_signedW_cross": "[2.082376454406672336526542e-6 +/- 3.34e-31]",
       "signedW_offdiag": "[-0.0008236265392962919762292080 +/- 2.06e-30]",
       "recombination_error": "[+/- 8.89e-56]",
-      "direct_identity_max_error_ball": "[6.418843352943828238446003e-55 +/- 2.68e-80]",
-      "existing_probe_identity_max_error_ball": "[6.418835397936993550717005e-55 +/- 4.16e-80]",
+      "recombination_abs_error_upper_bound": "[8.881603827820438656176491e-56 +/- 2.38e-81]",
+      "direct_identity_abs_error_upper_bound": "[6.418843352943828238446003e-55 +/- 2.68e-80]",
+      "existing_probe_identity_abs_error_upper_bound": "[6.418835397936993550717005e-55 +/- 4.16e-80]",
       "ranges": [
         {
           "lo": 1,
@@ -600,8 +627,9 @@
       "beta_signedW_cross": "[1.718963332241960653820794e-6 +/- 1.41e-31]",
       "signedW_offdiag": "[-0.0007648730468583382598237835 +/- 2.54e-29]",
       "recombination_error": "[+/- 7.70e-56]",
-      "direct_identity_max_error_ball": "[6.418843352943828238446003e-55 +/- 2.68e-80]",
-      "existing_probe_identity_max_error_ball": "[6.418835397936993550717005e-55 +/- 4.16e-80]",
+      "recombination_abs_error_upper_bound": "[7.693067625475400124334338e-56 +/- 1.13e-81]",
+      "direct_identity_abs_error_upper_bound": "[6.418843352943828238446003e-55 +/- 2.68e-80]",
+      "existing_probe_identity_abs_error_upper_bound": "[6.418835397936993550717005e-55 +/- 4.16e-80]",
       "ranges": [
         {
           "lo": 1,

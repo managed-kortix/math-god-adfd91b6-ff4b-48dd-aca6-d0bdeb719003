@@ -14,10 +14,16 @@ import argparse
 from fractions import Fraction
 import json
 from pathlib import Path
+import sys
 
 from flint import arb, ctx
 
 from certify_complete_gram import RestrictedGram, mobius_sieve
+from cycle45_runtime import (
+    ENVIRONMENT_MANIFEST_PATH,
+    require_exact_runtime,
+    sha256_file,
+)
 from cycle43_divisor_admission_multiprobe import CompensatedBlock
 from cycle44_boundary_envelope_scan import set_fixed_theta
 
@@ -25,6 +31,12 @@ THETA_NUMERATOR = 2
 THETA_DENOMINATOR = 5
 DEFAULT_STARTS = (32, 64, 128, 256, 512, 1024)
 DEFAULT_INTERVALS = ("1,2", "1,3/2")
+SCRIPT_PATH = Path(__file__).resolve()
+# Identity enclosures must be much narrower than the working precision.  This
+# explicit ceiling rejects vacuous finite intervals that merely happen to
+# contain zero.  At 192 bits the ceiling is about 1.3e-29; observed errors are
+# below 1e-54.
+IDENTITY_ERROR_EXPONENT_DIVISOR = 2
 
 
 def arb_sum(values):
@@ -32,7 +44,65 @@ def arb_sum(values):
 
 
 def interval_text(value, digits=25):
+    require_finite(value, "serialized Arb value")
     return value.str(digits)
+
+
+def require_finite(value, label):
+    if not isinstance(value, arb) or not value.is_finite():
+        raise RuntimeError(("nonfinite Arb value", label, value))
+    return value
+
+
+def identity_error_ceiling(bits):
+    return arb(2) ** (-(bits // IDENTITY_ERROR_EXPONENT_DIVISOR))
+
+
+def certify_zero_error(value, label, bits):
+    require_finite(value, label)
+    if not value.contains(0):
+        raise RuntimeError(("identity interval excludes zero", label, value))
+    upper = abs(value).upper()
+    require_finite(upper, f"{label} absolute upper bound")
+    ceiling = identity_error_ceiling(bits)
+    if not upper <= ceiling:
+        raise RuntimeError(("identity interval too wide", label, value,
+                            "ceiling", ceiling))
+    return upper
+
+
+def require_positive(value, label):
+    require_finite(value, label)
+    if not value > 0:
+        raise RuntimeError(("nonpositive or unresolved Arb value", label,
+                            value))
+    return value
+
+
+def certify_error_upper_bound(value, label, bits):
+    require_finite(value, label)
+    if not value >= 0:
+        raise RuntimeError(("negative or unresolved absolute error bound",
+                            label, value))
+    ceiling = identity_error_ceiling(bits)
+    if not value <= ceiling:
+        raise RuntimeError(("absolute error bound too large", label, value,
+                            "ceiling", ceiling))
+    return value
+
+
+def runtime_metadata():
+    observed = require_exact_runtime()
+    return {
+        **observed,
+        "python_implementation": sys.implementation.name,
+        "generator": SCRIPT_PATH.name,
+        "generator_sha256": sha256_file(SCRIPT_PATH),
+        "environment_manifest": ENVIRONMENT_MANIFEST_PATH.name,
+        "environment_manifest_sha256": sha256_file(
+            ENVIRONMENT_MANIFEST_PATH
+        ),
+    }
 
 
 def parse_fraction(text):
@@ -87,8 +157,9 @@ class DispersionData:
             self.w[n] = 1 - ratio
             self.A[n] = 1 + ratio - 2 * self.theta
             self.eta[n] = self.tau / self.A[n]
-            if not self.A[n] > 0:
-                raise RuntimeError(f"unresolved/nonpositive A at n={n}")
+            require_positive(self.A[n], f"A[{n}]")
+            require_finite(self.w[n], f"w[{n}]")
+            require_finite(self.eta[n], f"eta[{n}]")
         self.squarefree = [d for d in range(1, self.stop) if self.mu[d]]
         self._W = {}
         self._beta = {}
@@ -158,16 +229,19 @@ def verify_all_rows(data, bits):
         hat = data.hat_c(q)
         direct_error = hat - data.direct_hat_c(q)
         existing_error = hat - data.mu[q] * block.correlation(q)
-        if not direct_error.contains(0):
-            raise RuntimeError(("direct identity failed", data.start, q,
-                                direct_error))
-        if not existing_error.contains(0):
-            raise RuntimeError(("existing probe identity failed", data.start,
-                                q, existing_error))
-        if abs(direct_error).upper() > max_direct:
-            max_direct = abs(direct_error).upper()
-        if abs(existing_error).upper() > max_existing:
-            max_existing = abs(existing_error).upper()
+        direct_upper = certify_zero_error(
+            direct_error, f"direct identity a={data.start}, q={q}", bits
+        )
+        existing_upper = certify_zero_error(
+            existing_error,
+            f"existing-probe identity a={data.start}, q={q}", bits,
+        )
+        if direct_upper > max_direct:
+            max_direct = direct_upper
+        if existing_upper > max_existing:
+            max_existing = existing_upper
+    require_finite(max_direct, "maximum direct identity error")
+    require_finite(max_existing, "maximum existing-probe identity error")
     return max_direct, max_existing
 
 
@@ -175,7 +249,16 @@ def census_row(data, interval, identity_errors):
     start = data.start
     L = data.logs[start]
     rows = squarefree_rows(data, interval)
+    if not rows:
+        raise RuntimeError(("empty squarefree row set", start, interval))
     direct_error, existing_error = identity_errors
+    direct_error = certify_error_upper_bound(
+        direct_error, "direct identity absolute error bound", ctx.prec
+    )
+    existing_error = certify_error_upper_bound(
+        existing_error, "existing-probe identity absolute error bound",
+        ctx.prec,
+    )
 
     hats = {q: data.hat_c(q) for q in rows}
     beta = {q: data.beta(q) for q in rows}
@@ -195,10 +278,18 @@ def census_row(data, interval, identity_errors):
     off_diagonal = arb_sum(
         signed_W[q] ** 2 - W2_by_q[q] for q in rows
     )
+    for label, value in (
+        ("D", D), ("beta2", beta2), ("W2", W2), ("Delta", Delta),
+        ("beta cross", beta_cross), ("off diagonal", off_diagonal),
+    ):
+        require_finite(value, f"{label}, a={start}, I={interval}")
+    require_positive(Delta, f"Delta, a={start}, I={interval}")
     recombination_error = D - (Delta + beta_cross + off_diagonal)
-    if not recombination_error.contains(0):
-        raise RuntimeError(("dispersion decomposition failed", start,
-                            interval, recombination_error))
+    recombination_upper = certify_zero_error(
+        recombination_error,
+        f"dispersion decomposition a={start}, I={interval}",
+        ctx.prec,
+    )
 
     cuts = (1, start // 2, start, 3 * start // 2, 2 * start)
     ranges = []
@@ -236,13 +327,19 @@ def census_row(data, interval, identity_errors):
         "beta_signedW_cross": interval_text(beta_cross),
         "signedW_offdiag": interval_text(off_diagonal),
         "recombination_error": interval_text(recombination_error),
-        "direct_identity_max_error_ball": interval_text(direct_error),
-        "existing_probe_identity_max_error_ball": interval_text(existing_error),
+        "recombination_abs_error_upper_bound": interval_text(
+            recombination_upper
+        ),
+        "direct_identity_abs_error_upper_bound": interval_text(direct_error),
+        "existing_probe_identity_abs_error_upper_bound": interval_text(
+            existing_error
+        ),
         "ranges": ranges,
     }
 
 
 def run(starts=DEFAULT_STARTS, intervals=DEFAULT_INTERVALS, bits=192):
+    require_exact_runtime()
     parsed = [parse_interval(item) if isinstance(item, str) else item
               for item in intervals]
     rows = []
@@ -260,10 +357,19 @@ def run(starts=DEFAULT_STARTS, intervals=DEFAULT_INTERVALS, bits=192):
         ),
         "anchor_commit": "4306d7ce",
         "arb_precision_bits": bits,
+        "runtime": runtime_metadata(),
+        "environment_manifest": ENVIRONMENT_MANIFEST_PATH.name,
+        "identity_error_policy": {
+            "must_be_finite": True,
+            "must_contain_zero": True,
+            "absolute_upper_bound_at_most": interval_text(
+                identity_error_ceiling(bits)
+            ),
+        },
         "theta": "2/5",
         "starts": list(starts),
         "intervals": [interval_json(interval) for interval in parsed],
-        "row_rule": "squarefree q with q/a in the closed declared interval",
+        "row_rule": "squarefree q with q/a in the closed census interval",
         "normalization": {
             "W": "<rho_q,rho_d> H(q,d), unsigned in q and d",
             "beta": "-g_q H0(q)",
@@ -275,7 +381,10 @@ def run(starts=DEFAULT_STARTS, intervals=DEFAULT_INTERVALS, bits=192):
             "Delta": ("||M_a||_F^2 = sum_{q in I}(beta(q)^2 + "
                       "sum_d W(q,d)^2)"),
         },
-        "verdict_policy": "outward Arb intervals; failed identities abort",
+        "verdict_policy": (
+            "finite outward Arb intervals; nonfinite, empty, nonpositive-"
+            "denominator, or wide/failed identity checks abort"
+        ),
         "rows": rows,
     }
 

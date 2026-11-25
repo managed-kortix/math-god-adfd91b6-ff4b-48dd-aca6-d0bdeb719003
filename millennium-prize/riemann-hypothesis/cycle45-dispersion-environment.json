@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "purpose": "Exact runtime manifest for the certified finite Cycle 45 dispersion census",
+  "python": {
+    "implementation": "CPython",
+    "version": "3.12.13"
+  },
+  "python_packages": {
+    "python-flint": "0.9.0"
+  },
+  "native_libraries": {
+    "FLINT": "3.6.0"
+  },
+  "orchestrator_used": {
+    "uv": "0.11.30"
+  },
+  "exact_run_prefix": [
+    "uv",
+    "run",
+    "--python",
+    "3.12.13",
+    "--with",
+    "python-flint==0.9.0",
+    "python"
+  ],
+  "scope": "The generator rejects any different Python, python-flint, or FLINT version. The uv version records the reproducing launcher; it is not part of the interval-arithmetic trusted runtime once the exact Python and wheel are active."
+}

@@ -16,10 +16,13 @@ on the dyadic blocks \([a,2a)\), for
 a\in\{32,64,128,256,512,1024\}.
 \]
 
-The two row intervals were declared before the computation:
-\(I=[1,2]\) and the interior interval \(I=[1,3/2]\). All reported values are
-outward 192-bit Arb enclosures. An identity interval that does not contain zero
-causes the driver to abort.
+The two row intervals used in this census are
+\(I=[1,2]\) and the interior interval \(I=[1,3/2]\). They are not claimed
+to have been preregistered. All interval-valued numerical results in the
+JSON artifact are outward 192-bit Arb enclosures. The final driver rejects a
+nonfinite value, an empty row set, a denominator not certified positive, or any identity interval that
+either excludes zero or exceeds the explicit \(2^{-96}\) absolute-error
+ceiling.
 
 The census finds strong finite Möbius cancellation. The unsigned diagonal
 comparison \(\Delta_a(I)\) is increasingly dominated by \(W^2\), while the
@@ -67,7 +70,7 @@ correlation is
    \mu(d)W_a(q,d).
 \]
 
-For the predeclared squarefree row set
+For the census squarefree row set
 
 \[
 S_a(I)=\{q:\mu(q)^2=1,\ q/a\in I\},
@@ -110,7 +113,12 @@ D=\beta^2+W^2+2\beta\!\sum_d\mu(d)W_d
 ## Certified census
 
 Here `offdiag` denotes the last signed \(d\ne e\) term in the displayed
-decomposition and \(L=\log a\). Each entry is midpoint `±` Arb radius.
+decomposition and \(L=\log a\). The table midpoints are rounded readable
+approximations. The appended `±` numbers are the radii of the underlying
+full-precision Arb values, but after midpoint rounding the displayed pairs must
+not be read as enclosures. The
+actual certified enclosures, with sufficient midpoint digits, are in
+`cycle45-dispersion-census-results.json`.
 
 ### \(I=[1,2]\)
 
@@ -135,7 +143,8 @@ decomposition and \(L=\log a\). Each entry is midpoint `±` Arb radius.
 | 1024 | 313 | 4.55442628982e-06 ± 7.96e-32 | 0.000767708509816 ± 6.44e-30 | -0.000764873046858 ± 2.54e-29 | 0.0411209163568 ± 3.35e-27 | 0.00151673623018 ± 4.45e-28 | 0.0368847867352 ± 2.02e-27 |
 
 The full JSON also records \(\beta^2\), \(W^2\), the beta-signed-\(W\)
-cross term, four divisor-range decompositions, and all identity error balls.
+cross term, four divisor-range decompositions, the checked recombination
+intervals, and absolute upper bounds for all identity errors.
 For example, on \([1,2]\), \(\beta^2/\Delta\) decreases from
 \(0.0263687\ldots\) at \(a=32\) to \(0.00178397\ldots\) at \(a=1024\),
 while `offdiag/Delta` reaches \(-0.9957259742\ldots\).
@@ -145,7 +154,8 @@ while `offdiag/Delta` reaches \(-0.9957259742\ldots\).
 From this directory, reproduce the complete 192-bit census with:
 
 ```bash
-uv run --with python-flint python cycle45_dispersion_census.py \
+uv run --python 3.12.13 --with python-flint==0.9.0 python \
+  cycle45_dispersion_census.py \
   --starts 32 64 128 256 512 1024 \
   --intervals 1,2 1,3/2 --bits 192 \
   --json cycle45-dispersion-census-results.json
@@ -154,22 +164,24 @@ uv run --with python-flint python cycle45_dispersion_census.py \
 Run the independent selected-scale reconstruction at 256 bits with:
 
 ```bash
-uv run --with python-flint python \
+uv run --python 3.12.13 --with python-flint==0.9.0 python \
   cycle45_independent_dispersion_verifier.py --starts 32 128 --bits 256
 ```
 
-It does not import the production Cycle 45 driver or `CompensatedBlock`. It
-rebuilds \(w,A,\eta,H,H^0,W,\beta,\widehat c\) and the direct \(X\)
-contraction. It reproduces the full-interval rows:
+It does not import the production Cycle 45 driver or `CompensatedBlock`; both
+programs import only the neutral `cycle45_runtime.py` contract. It rebuilds
+\(w,A,\eta,H,H^0,W,\beta,\widehat c\) and the direct \(X\) contraction.
+It reproduces the full-interval rows:
 
 | \(a\) | \(L^3D\) | \(L^2\Delta\) | \(LD/\Delta\) |
 |---:|---:|---:|---:|
 | 32 | 0.013753831402791398266897174366789 ± 4.68e-34 | 0.023860082946675736591024236602093 ± 1.48e-34 | 0.57643686459638340207277646505898 ± 3.54e-33 |
 | 128 | 0.0042704693701754239677975231331584 ± 3.63e-35 | 0.030177442462558831428744150731403 ± 3.21e-34 | 0.14151197125050598765082326708699 ± 3.51e-33 |
 
-The verifier still shares `RestrictedGram` and `mobius_sieve`, so it is an
-independent contraction/normalization check, not a second derivation of every
-restricted Vasyunin entry.
+Apart from the neutral runtime contract, the verifier shares only
+`RestrictedGram` and `mobius_sieve`, so it is an independent
+contraction/normalization check, not a second derivation of every restricted
+Vasyunin entry.
 
 Run the exact-rational coefficient/sign audit with:
 
@@ -181,6 +193,25 @@ This isolates Möbius placement from transcendental evaluation and verifies the
 signed-row identity exactly for arbitrary rational stand-ins at
 \(a=4,8,16\).
 
+The exact runtime contract is in `cycle45-dispersion-environment.json`: CPython
+3.12.13, python-flint 0.9.0, and FLINT 3.6.0. The generator fails on a runtime
+mismatch and embeds SHA-256 hashes of itself and the environment manifest in
+the JSON. A quick selected-scale artifact replay is:
+
+```bash
+uv run --python 3.12.13 --with python-flint==0.9.0 python \
+  validate_cycle45_dispersion_artifact.py \
+  --starts 32 --intervals 1,2 1,3/2 --bits 192 --mode overlap
+```
+
+The canonical full validator defaults to byte equality and reruns all six
+scales. It is intentionally expensive:
+
+```bash
+uv run --python 3.12.13 --with python-flint==0.9.0 python \
+  validate_cycle45_dispersion_artifact.py
+```
+
 Artifacts:
 
 - `cycle45_dispersion_census.py` — fail-closed production census;
@@ -188,8 +219,12 @@ Artifacts:
 - `cycle45_independent_dispersion_verifier.py` — independent selected-scale
   reconstruction;
 - `cycle45_exact_rational_sign_audit.py` — exact-rational normalization audit;
-- `test_cycle45_dispersion_census.py` — interval, identity, regression, and
-  sign-audit tests.
+- `test_cycle45_dispersion_census.py` — interval, identity, regression,
+  fail-closed, artifact, and sign-audit tests;
+- `cycle45-dispersion-environment.json` — exact certified runtime manifest;
+- `cycle45_runtime.py` — neutral shared runtime-contract checker;
+- `validate_cycle45_dispersion_artifact.py` — byte-equality or selected-scale
+  interval-containment replay validator.
 
 ## Finite-only interpretation
 
