@@ -24,61 +24,94 @@ Primary route references: Báez-Duarte, arXiv:math/0202141 and
 arXiv:math/0205003; Burnol, arXiv:math/0103058; Bettin--Conrey--Farmer,
 arXiv:1211.5191.
 
-## Current sharpened bottleneck
+## Current Cycle 45 gate: physical Möbius anti-cancellation
 
-The latest projection gate is `cycle-44-boundary-envelope-no-go.md`.  At fixed
-`theta=2/5`, complete restricted-Gram certificates show that the entire
-current-admission span fails at dyadic starts `128,256,512`; adding every
-squarefree old label in a window of width `ceil(a/log a)` still fails at
-`256,512`.  The least passing affine-free historical widths are exactly
-`19,53,361` at those starts.  This kills those finite local architectures, not
-an eventual theorem.  The next moving-probe analysis must retain the full
-leading Gram kernel: the Brownian triangular-support factor is Hadamard-
-multiplied by the spatial Vasyunin scaling kernel.  Equal diagonal-mass bins are
-therefore only trace balancing, not correlation-preserving compression.
+Fix a nondegenerate compact interval `I` with \(I\Subset(0,2)\), and put
 
-The exact reduced-rational Fourier representation exposes the needed signed
-Möbius cancellation but creates a dense weighted sine kernel. Global low rank,
-common-period bounds, and Farey-neighbor-only near fields have been falsified.
-Coefficient-aware hierarchical error propagation and a phase-extracted
-separated-block theorem are now proved: geometrically admissible far blocks
-have explicit factorial-over-power/Taylor radii and rank independent of the
-cutoff after phase extraction, while overlapping cusp blocks must remain dense.
+\[
+ \mathcal D_a=\{1\le d<2a:\mu(d)^2=1\},\qquad
+ S_a(I)=\{q\in\mathcal D_a:q/a\in I\}.
+\]
 
-The active next step is an outward-rounded hierarchy implementation preserving
-the direct two-channel endpoint cancellation. A finite implementation survives
-dense, Farey-cluster, rational-grid, and exact multiplicity audits, but
-fixed-order absolute radii grow rapidly with mode count. The next refinement
-extracts the `min(omega,nu)` cusp exactly and approximates the remaining Gram
-kernel by an orthogonal projection whose PSD residual is charged only to
-`d-u/alpha`. This is now certified for piecewise constants and shows quadratic
-mesh convergence, but hostile carriers impose a time-frequency cell cost. The
-weighted Legendre and signed shadow shells now certify the finite oscillatory
-piece efficiently. Completing the constant and linear terms, however, reverses
-its sign, and direct sawtooth integration proves the untruncated `N=4 -> 8`
-tail is positive. Oscillatory-only sign is therefore abandoned. The active
-refinement is a scalable inequality for the complete endpoint functional,
-including constants and the retained interval. Direct unit-cell certificates
-are sparse, but explicit negative cells rule out local positivity. The weighted
-H cell now has an exact positive-D-minus-positive-U packet split, and an
-all-cell divisor formula preserves adjacent-scale correlations. Fixed windows
-and local pairings remain falsified; the viable search is to sum signed divisor
-impulses across the scale index and only then apply the exact positive-
-coefficient Abel average. The exact initial Chebyshev reserve also cancels at
-leading order against slope terms. The exact first-block kernel is a positive max kernel, not
-a gcd kernel, and controlling it alone is square-root-cancellation strength.
-The finite Perron and exact continuum low-eigenmode representations are now
-derived. Routine contour shifting is blocked by reciprocal-zeta poles, and a
-fixed number of low moments is decisively insufficient. Exact harmonic
-completion cancels the explicit degree-one von Mangoldt channel before
-squaring, but leaves a two-scale difference of dense floor Gram forms; degree
-two has an explicit generalized-von-Mangoldt residual. The active route now
-targets cancellation between these two completed scale transforms, together
-with a cumulative-sum bound for their high-mode residual. The exact common-
-source kernel and fixed signed-square decomposition are indefinite. A minimal
-rational `N=2` source certificate rules out generic Loewner order, contraction,
-and martingale orthogonality. Any favorable inequality must use the actual
-Mobius coefficients. The ultimate positive target remains
-`liminf P_N=0`, where `P_N` is the restricted `(0,1)` energy. Any off-critical
-zero gives an explicit uniform positive floor for every `P_N`, so that target
-implies RH. It is not known to follow from RH for this exact logarithmic taper.
+For \(q\in S_a(I)\), define the rectangular unsigned matrix and its normal
+trace by
+
+\[
+ (M_a)_{q0}=\beta_a(q),\qquad
+ (M_a)_{qd}=W_a(q,d)\quad(d\in\mathcal D_a),\qquad
+ \Delta_a(I)=\|M_a\|_F^2.
+\]
+
+The accepted dossier `moving-gram-kernel-audit-2026-11-25.md` establishes the
+following bulk sign-stripped geometry. It proves the locally uniform bulk kernel
+
+\[
+ a\log(a)W_a(q,r)\longrightarrow
+ K_\theta(q/a,r/a),
+ \qquad K_\theta(u,v)=
+ \frac{\log(2/\max(1,u,v))}{2(1-\theta)}J(u,v),
+\]
+
+the squarefree-measure bulk trace, the normal-diagonal normalization
+`log(a)^2 Delta_a(I) -> A_(theta,I)>0`, and an explicit continuum lower
+spectral tail. None of these statements controls the selected Möbius vector.
+
+The exact remaining quantity is
+
+\[
+ D_a(I)=\|M_ax_a\|_2^2,\qquad
+ x_a=(1,(\mu(d))_{d\in\mathcal D_a}),
+\]
+
+and the next theorem sought is
+
+\[
+ \liminf_{a\to\infty}
+ \log(a)\frac{D_a(I)}{\Delta_a(I)}>0.
+\]
+
+Equivalently, with
+
+\[
+ A_{de}^{(a,I)}=\sum_{q\in S_a(I)}W_a(q,d)W_a(q,e),\qquad
+ r_d^{(a,I)}=\sum_{q\in S_a(I)}\beta_a(q)W_a(q,d),
+\]
+
+one must prove, for some `kappa>0` and all sufficiently large `a`,
+
+\[
+ 2\sum_{d\in\mathcal D_a}\mu(d)r_d^{(a,I)}
+ +\sum_{\substack{d,e\in\mathcal D_a\\d\ne e}}
+  \mu(d)\mu(e)A_{de}^{(a,I)}
+ \ge-\Delta_a(I)+\frac{\kappa}{\log^3a}.
+\]
+
+Generic positivity, positive entries, continuum spectral noncompression, and
+normal-diagonal mass alone do not imply this estimate. Literal self-pairs are
+`o(log^-3 a)`, while the canonical gcd factorization merely leaves an
+uncontrolled four-factor Möbius sign. Every fixed finite old family, and only
+the explicit endpoint layers
+
+\[
+ d\le a^{1/2-\varepsilon},\qquad
+ 2a-a^{3/4-\varepsilon}\le d<2a
+ \quad(0<\varepsilon<1/2),
+\]
+
+are removed at `o(log^-3/2 a)` in norm; no `o(log^-3 a)` energy removal follows
+without an independent upper bound. The estimate above remains open. If
+proved, it gives only a trace-based moving-projection lower bound of order
+`log^-2 a`; Burnol's cited result is a budget lower bound, not the upper bound
+needed to close the completed square. No RH consequence is presently proved.
+
+## Earlier route context through Cycle 44
+
+The pre-Cycle-45 projection gate was
+`cycle-44-boundary-envelope-no-go.md`. At fixed `theta=2/5`, complete
+restricted-Gram certificates show that the entire current-admission span fails
+at dyadic starts `128,256,512`; adding every squarefree old label in a window
+of width `ceil(a/log a)` still fails at `256,512`. The least passing
+affine-free historical widths are exactly `19,53,361` there. This kills those
+finite local architectures, not an eventual theorem. The Cycle 45 kernel
+analysis supersedes the former instruction to derive the moving kernel and
+leaves the signed arithmetic inequality above.

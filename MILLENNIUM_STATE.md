@@ -14,9 +14,9 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   propagation and a phase-extracted analytic separated-block theorem are
   proved and an outward-rounded block verifier passes hostile finite tests; the
   full finite cluster-tree implementation now passes dense and two-channel
-  audits, but fixed-order absolute radii grow rapidly; the current sublemma is
-  a certified PSD cusp/projection bound now replaces entrywise near-field
-  radii by a residual depending only on the endpoint cancellation vector; the
+  audits, but fixed-order absolute radii grow rapidly; a certified PSD
+  cusp/projection bound then replaced entrywise near-field radii by a residual
+  depending only on the endpoint cancellation vector; the
   weighted Legendre/shadow-shell projection is certified, but completion of
   the constant modes and a direct untruncated sawtooth certificate prove the
   `N=4 -> 8` tail is positive and full dyadic decrements are independently
@@ -25,8 +25,8 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   while finite audits falsify every fixed local-window/pairing strategy; the
   the apparent initial Chebyshev reserve is proved to cancel at leading order;
   drift-free cells remove artificial Abel drift but absolute tail bounds remain
-  enormous, so the current sublemma is a correlation identity for the truncated
-  Möbius endpoint transform weighted by `1/[k(k+1)]`; its positive max kernel
+  enormous; this led to a correlation identity for the truncated Möbius
+  endpoint transform weighted by `1/[k(k+1)]`; its positive max kernel
   is exact but useful bounds are square-root-cancellation strength, so the
   cancellation-preserving finite Perron and exact continuum low-mode
   representations of the complete tracking difference are now derived;
@@ -52,8 +52,8 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
    the invariant correlation is now exactly centered into slope defects,
    linear Chebyshev errors, and two quadratic Chebyshev channels; parity leaves
    three odd-Mertens blocks rather than one, while pair-average and jump prime
-   diagonals reinforce to order `1/log N`, so the current sublemma is a
-   cancellation theorem for the centered cumulative-square difference; an
+   diagonals reinforce to order `1/log N`; this led to a cancellation target
+   for the centered cumulative-square difference; an
    endpoint-safe Abel formula now reduces the full decrement to four boundary
    squares and sparse Lambda-increment/cumulative packets; summing these over
    dyadic scales cancels every intermediate boundary and increment packet but
@@ -72,22 +72,54 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   fixed fractional dissipation force zero liminf; the critical residual is now
   rewritten as an exact killed-Hardy quadrature for the effective second
   coefficient, and abstract scalar countermodels show bounded second-scale
-  control alone is insufficient, so the current sublemma is a one-sided
-  Möbius--Vasyunin Hardy estimate (or a fixed subcritical chained-block
-  inequality) after global low rank and Farey-neighbor-only splits were
+  control alone is insufficient; this led to the one-sided Möbius--Vasyunin
+  Hardy checkpoint (or a fixed subcritical chained-block inequality) after
+  global low rank and Farey-neighbor-only splits were
   falsified but blockwise geometric low rank was numerically validated; exact
   192/256-bit multiprobe censuses show one or two old columns repair the tested
   finite hard blocks, yet a proved asymptotic no-go now shows every prescribed
   fixed finite affine/old-divisor family captures only `O(log^-3 a)` against an
-  unconditional `Omega(log^-2 a)` Burnol budget; a fixed-strength
-  boundary-envelope scan then proves that the full current-admission span fails
-  at dyadic starts `128,256,512`, that width `ceil(a/log a)` fails at `256,512`,
-  and that the exact least historical widths are `19,53,361` there, so the
-  active projection search must first understand the full moving
-  Gram/correlation kernel before any low-rank cohort compression
-- **parallel scouts:** one bounded route each for the other five problems;
-  scouts return exact candidate lemmas, falsifications, or literature conflicts
-- **cycle:** 44
+  unconditional `Omega(log^-2 a)` Burnol budget; the Cycle 44
+  boundary-envelope scan proves that the full current-admission span fails at
+  dyadic starts `128,256,512`, that width `ceil(a/log a)` fails at `256,512`,
+  and that the exact least historical widths are `19,53,361` there; Cycle 45
+  now proves, for squarefree moving labels on compact bulk sets, the locally
+  uniform sign-stripped limit `a log(a) W_a(q,r) -> K_theta(u,v)`, where
+  `K_theta(u,v)=d(u,v)J(u,v)/[2(1-theta)]` is the Brownian-support Hadamard
+  Vasyunin kernel, together with the squarefree-measure bulk trace and the
+  normal-matrix normalization `log(a)^2 Delta_a(I) -> A_(theta,I)>0`; on
+  `[1,2]` the continuum operator has an explicit `k^-2` lower spectral tail;
+  exact countermodels show that generic positivity, positive entries, continuum
+  spectral noncompression, and normal-diagonal mass alone do not imply a lower
+  bound for the selected Möbius vector; literal self-pairs are
+  `o(log^-3 a)`, while the canonical gcd factorization merely leaves an
+  uncontrolled four-factor Möbius sign; every fixed finite old family, and the
+  explicit left and right layers of Section 10, are `o(log^-3/2 a)` only in
+  norm, so no `o(log^-3 a)` energy removal follows without an independent
+  upper bound; the physical dispersion is exactly
+  `D_a(I)=||M_a x_a||_2^2`, and the surviving open checkpoint is
+  `liminf log(a) D_a(I)/Delta_a(I)>0`, equivalently
+  `D_a(I) >> log^-3 a`; no moving projection limit, completed-square budget,
+  or RH result is proved
+- **parallel scouts:** a read-only bounded re-audit completed on 2026-11-25
+  and established no new dossier checkpoint. It rechecked five prior, special,
+  or abstract statements: (i) for the standard period-normalized ordinary
+  `p`-stabilized modular-symbol measure of `433a1` at `p=7`,
+  `M_2 = 5 mod 7`; (ii) at the cohomology-class level, generic algebraicity of
+  a marked class is equivalent, after finite generically dominant base change,
+  to the existence of a dominating relative Chow parameter space carrying that
+  class; (iii) one `z`-independent diagonal-mode ansatz has an exact signed
+  first pressure variation, without the viscous comparison; (iv) under coherent
+  call-node evaluation traces, direct-call DAG composition with subpolynomial
+  coordinate overlap has a same-exponent ceiling and does not yield
+  all-exponents amplification; and (v) for self-adjoint resolvents on a common
+  identified vacuum complement, strong-resolvent convergence plus collective
+  compactness, equivalently uniform tightness of every bounded-energy
+  projection relative to a fixed finite-rank exhaustion, is a sufficient
+  abstract spectral-edge transfer criterion. This criterion is not verified
+  for a Yang--Mills cutoff family, and strong-resolvent convergence alone is
+  insufficient. These are not new Cycle 45 or Clay results.
+- **cycle:** 45
 - **announcements:** none
 
 ## immutable target list
@@ -106,13 +138,18 @@ waiting process.
 
 ## next exact steps
 
-1. Attack the physical killed-Hardy inequality
-   `Delta_a >= sum_(n>=a) h_n x_n Delta_n/x_a^2`, retaining the equality-zero
-   recurrence if the bound is non-strict.  The fixed-finite-old-probe theorem and
-   the finite boundary-envelope gate are now negative.  Derive the exact moving
-   Gram/correlation limit, including the Brownian support factor Hadamard the
-   spatial Vasyunin kernel, before testing any predeclared cohort compression;
-   diagonal trace balancing alone is not a projection theorem.
+1. Attack the exact Cycle 45 arithmetic checkpoint on a fixed nondegenerate
+   compact interval `I` inside `(0,2)`: with
+   `D_a(I)=||M_a x_a||_2^2` and `Delta_a(I)=||M_a||_F^2`, prove
+   `liminf_(a->infinity) log(a) D_a(I)/Delta_a(I)>0`.  Equivalently, prove the
+   weighted two-point Möbius packet inequality (11.3) of
+   `millennium-prize/riemann-hypothesis/moving-gram-kernel-audit-2026-11-25.md`.
+   Retain the affine column and every
+   off-diagonal sign. The middle-column reduction is only an
+   `o(log^-3/2 a)` norm statement and must not be squared without a separate
+   upper bound. Even success gives only a trace-based moving-projection lower
+   bound of order `log^-2 a`; require constants and an appropriate
+   `N_theta(a,2a)=O(log^-2 a)` upper bound before claiming a physical budget.
 2. Treat `kappa/log a` only as a finite diagnostic: its post-loss effective mass
    is provably summable under polynomial stopping.  Search instead for an
    explicit fixed subcritical chained-block coefficient (the certified dyadic
@@ -122,14 +159,49 @@ waiting process.
    affine/endpoint remainder: its exact discrete zero block is positive and
    cannot be separated termwise, while the continuous negative anti-diagonal
    belongs to a different incomplete Mellin representation.
-4. Keep bounded scouts live: BSD exact modular-symbol moment certification;
-   Hodge component-dominance obstruction; Navier--Stokes diagonal-mode signed
-   integral; P-vs-NP all-exponents amplification obstruction; Yang--Mills
-   cutoff-uniform spectral-edge control.
+4. Continue the bounded scouts only at their remaining gates: BSD exact lower
+   cyclotomic moments and the leading-term transfer; Hodge a noncircular
+   generic-cycle seed; Navier--Stokes comparison of the signed diagonal-mode
+   pressure variation with the viscous term; P versus NP a direct-sum theorem
+   surviving heavy overlap or genuine nesting; Yang--Mills a cutoff-uniform
+   spectral-edge theorem not assumed through the merely sufficient finite-rank
+   tightness criterion. Do not promote the completed bounded checkpoints to
+   Millennium claims.
 5. Rotate only at a proved checkpoint, decisive falsification, or documented
    strategic review.
 
 ## last ticks
+
+- 2026-11-25: Cycle 45 accepted the moving Gram kernel audit. After squarefree
+  sign stripping, `a log(a) W_a(q,r)` converges locally uniformly in the bulk
+  to the Brownian-support Hadamard Vasyunin kernel `K_theta`; the squarefree
+  bulk trace and normal diagonal satisfy their exact normalizations, and the
+  continuum operator on `[1,2]` has an explicit lower spectral tail. The
+  physical moving mean square is nevertheless
+  `D_a(I)=||M_a(1,(mu(d))_d)||_2^2`. Exact countermodels show that generic
+  positivity, positive entries, continuum spectral noncompression, and
+  normal-diagonal mass alone do not imply a lower bound for this selected sign
+  vector. Literal self-pairs are `o(log^-3 a)`, while the canonical gcd
+  factorization merely leaves an uncontrolled four-factor Möbius sign. Every
+  fixed finite old family, and the explicit left and right layers of Section
+  10, are `o(log^-3/2 a)` only in norm; no `o(log^-3 a)` energy removal follows
+  without an independent upper bound. The open gate is the Möbius retention
+  estimate `liminf log(a)D_a(I)/Delta_a(I)>0`. Burnol supplies only
+  the cited lower bound for the negative budget, not the upper bound needed
+  for budget closure. No moving projection theorem, completed-square budget,
+  or RH result is claimed.
+
+- 2026-11-25: A read-only bounded re-audit established no new dossier
+  checkpoint. It rechecked five prior, special, or abstract statements: the
+  period-normalized ordinary `p`-stabilized `433a1` moment
+  `M_2 = 5 mod 7`; the cohomology-class-level generic-seed equivalence after
+  finite generically dominant base change; one exact signed pressure variation
+  without a viscous comparison; the coherent-trace, direct-call,
+  subpolynomial-overlap composition ceiling; and collective compactness as a
+  sufficient abstract spectral-edge transfer criterion under strong-resolvent
+  convergence on a common identified vacuum complement. The last criterion is
+  not verified for a Yang--Mills cutoff family, and strong-resolvent convergence
+  alone is insufficient. These are not new Cycle 45 or Clay results.
 
 - 2026-11-21: Cycle 44 certified the fixed-`theta=2/5` affine-free boundary
   envelope on dyadic starts `32,64,128,256,512`.  The full current span fails at

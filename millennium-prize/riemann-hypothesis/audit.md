@@ -13,3 +13,23 @@
 6. Existing optimal-rate work is conditional. A proof must identify a new
    unconditional cancellation mechanism and be checked against the cited
    literature.
+7. The signed finite-verifier Gram entries already contain the Möbius signs.
+   Multiplying a signed divisor entry by another `mu(d)` is a double-signing
+   error. De-signing is asserted only on squarefree labels; `diag(mu)` is not
+   an orthogonal conjugation on all integer labels.
+8. A locally uniform entrywise moving-kernel limit may not be inserted into a
+   growing Möbius row sum without a separate discrepancy theorem. Endpoint
+   uniformity and uniformity down to fixed old divisors are not part of the
+   kernel theorem.
+9. Do not conflate the rectangular normal diagonal
+   `Delta_a(I)=||M_a||_F^2`, the literal self-pair sum
+   `sum_q W_a(q,q)^2`, and the moving-Gram trace. They have different
+   normalizations; literal self-pairs are `o(log^-3 a)`.
+10. The continuum spectral statement acts on `L^2([1,2],du)`. A squarefree
+    mesh carries limiting measure `(6/pi^2)du`, and no finite-mesh spectral
+    transfer or unnormalized finite-Gram noncompression has been proved.
+11. Positivity, positive entries, spectral tails, and normal-diagonal mass do
+    not lower-bound `||M_a x_a||` for the fixed Möbius vector. The open target
+    is `D_a(I) >> log^-3 a`. That target is sufficient only for the stated
+    trace-based projection lower bound; it is neither necessary for every
+    projection argument nor sufficient by itself for the physical budget.

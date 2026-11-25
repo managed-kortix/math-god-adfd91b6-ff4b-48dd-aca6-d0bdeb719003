@@ -4213,3 +4213,95 @@ the equality-boundary recurrence appended if only non-strict positivity is
 proved.  Details and a hostile re-audit are in
 `cycle-43-critical-hardy-quadrature-and-cell-no-go.md`.  No RH result is
 claimed.
+
+## Cycle 45: moving Gram kernel and Möbius anti-cancellation gate
+
+Put `L=log a`, `C=2(1-theta)`, fix a nondegenerate compact interval
+\(I\Subset(0,2)\), and define
+
+\[
+ \mathcal D_a=\{1\le d<2a:\mu(d)^2=1\},\qquad
+ S_a(I)=\{q\in\mathcal D_a:q/a\in I\}.
+\]
+
+For \(q\in S_a(I)\), let
+
+\[
+ (M_a)_{q0}=\beta_a(q),\qquad
+ (M_a)_{qd}=W_a(q,d)\quad(d\in\mathcal D_a),
+ \qquad
+ x_a=(1,(\mu(d))_{d\in\mathcal D_a}).
+\]
+
+Also put
+
+\[
+ d(u,v)=\log\frac2{\max(1,u,v)},\qquad
+ J(u,v)=\int_0^\infty
+ \left\{\frac yu\right\}\left\{\frac yv\right\}\frac{dy}{y^2}.
+\]
+
+For squarefree moving labels in compact subsets of `(0,2)^2`, the accepted
+audit proves the locally uniform sign-stripped limit
+
+\[
+ aL\,W_a(q,r)\longrightarrow
+ K_\theta(q/a,r/a),\qquad
+ K_\theta(u,v)=\frac1C d(u,v)J(u,v).
+\]
+
+For a bulk interval `I`, squarefree density gives the exact trace
+normalization and, for the rectangular matrix with affine and squarefree
+divisor columns,
+
+\[
+ L^2\Delta_a(I)=L^2\|M_a\|_F^2
+ \longrightarrow
+ \left(\frac6{\pi^2}\right)^2
+ \int_I\int_0^2K_\theta(u,v)^2\,dv\,du>0.
+\]
+
+The continuum operator on `L^2([1,2],du)` also satisfies
+
+\[
+ \lambda_k(T_\theta)\ge
+ \frac{\log^2 2}{2C\pi^2(k-\tfrac12)^2}.
+\]
+
+This spectral bound is for \(T_\theta\) on \(L^2([1,2],du)\). A squarefree
+mesh has limiting measure \((6/\pi^2)\,du\); no finite-mesh spectral transfer is
+proved. Exact positive-entry, scale-matched spectral, augmented-Gram, and
+Brownian sign countermodels show that these geometric facts do not control the
+physical Möbius vector.
+
+For every squarefree row,
+
+\[
+ \widehat c_a(q)
+ =\beta_a(q)+\sum_{d\in\mathcal D_a}\mu(d)W_a(q,d),
+\]
+
+and therefore
+
+\[
+ D_a(I)=\sum_{q\in S_a(I)}|\widehat c_a(q)|^2
+       =\|M_ax_a\|_2^2,\qquad
+ x_a=(1,(\mu(d))_{d\in\mathcal D_a}).
+\]
+
+Since `Delta_a(I) asymp L^-2`, the trace-route checkpoint is exactly
+
+\[
+ D_a(I)\gg L^{-3}
+ \quad\Longleftrightarrow\quad
+ \frac{D_a(I)}{\Delta_a(I)}\gg\frac1L.
+\]
+
+Fixed finite old columns and sufficiently thin left and right endpoint layers
+can be removed at `o(L^-3/2)` in norm, but that estimate cannot be squared
+without an independent norm upper bound. The surviving task is the weighted
+two-point Möbius anti-cancellation inequality (11.3), with the full ratio,
+support, gcd, and Vasyunin weights retained. Even that estimate would give
+only a trace-based moving-projection lower bound; the physical budget still
+needs constants and an upper bound of the required order. No RH result is
+claimed. See `moving-gram-kernel-audit-2026-11-25.md`.
