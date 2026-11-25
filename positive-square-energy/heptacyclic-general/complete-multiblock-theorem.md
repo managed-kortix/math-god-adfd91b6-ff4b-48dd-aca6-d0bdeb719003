@@ -1,4 +1,4 @@
-# Heptacyclic multiblock program: fail-closed reduction with a bridge blocker
+# Heptacyclic multiblock program: fail-closed reduction with authenticated physical-hull overlays
 
 ## Current status and scope
 
@@ -16,18 +16,34 @@ incidence, arbitrary bridge connectors, repeated or nested attachment cuts,
 and arbitrary finite rooted-tree attachments.  The partition `(7)` is outside
 this multiblock program.
 
-**Status: open.**  The physical `R31-S` packet is closed by
-`r31-s-physical-shared-triangle-closure.md` and its full-parent adjacency gate.
-The universal two-positive-block hull–`K2` theorem now also closes every
-actual-hull-bridge graph whose only two positive blocks have ranks `(4,3)` or
-`(5,2)`; see `universal-hull-k2-theorem.md`.  The old `D3` obstruction was a
-synthetic topology and is not used.  The remaining global reduction still
-cannot use the invalid generic sentence that every positive-rank bridge side
-has nonnegative credit: a positive rank-one side may be `C5`, with
-`sigma(C5)=2-sqrt(5)<0`.  All bridge incidences outside the registered
-`R31-S` and universal `(4,3)/(5,2)` slices remain open with no authenticated
-finite census, so this note makes no all-multiblock or all-heptacyclic
-conclusion.
+**Status: open.**  The physical `R31-S` packet and universal exactly-two-
+positive-block `(4,3)/(5,2)` hull--`K2` slice remain closed.  Two later
+physical-hull theorems now close additional nontrivial-hull rows:
+`PHYSICAL-UNIT-STAR-DNN` closes every hostile reduced unit-star whose center
+component has rank `c<=4`, and the `c=5` row unless both arm cycles are `C5`;
+`R61-PHYSICAL-SINGLE-BLOCK` closes the `c=6` one-arm row when the rank-six
+center has exactly one positive cyclic block.  Both imported theorems allow
+their stated physical bridge chains and finite tree payloads.
+
+Within the nontrivial-positive-hull domain, the resulting open multiblock rows
+are `c=5` with arm pair `(C5,C5)` and an arbitrary bridge-free rank-five center
+having at least two positive-rank cyclic blocks, and `c=6` with a multiblock
+center.  These are outer row types, not a finite graph, center-profile, or port
+census.  The first cannot be closed by the same universal all-center DNN
+threshold: the allowed multiblock center `K4 vee C3 vee C3`, whose positive-
+block profile is `(3,1,1)`, has exact DNN excess five, while that route requires
+at most `4sqrt(5)-4`.  This is a certificate-route obstruction, not a graph
+counterexample.
+
+The separate one-vertex-positive-hull multiblock lane remains **OPEN,
+UNAUTHENTICATED**.  Its unique rank-seven bridge-free component may still
+carry actual bridges to rank-zero components.  The nineteen-key equality
+below authenticates only a bridge-free packet pass after a registered
+packet-specific bridge dispatch; no theorem and verifier currently transport
+all such physical bridge forests through all nineteen owners.  The generic
+phrase “arbitrary finite rooted-tree attachments” is not that missing global
+dispatch.  Partition `(7)` remains outside the multiblock target.  Thus this
+note makes no all-multiblock or all-heptacyclic conclusion.
 
 ## Block split and ownership contract
 
@@ -82,40 +98,53 @@ The nested induced-piece theorem closes
 
 `R21, R221, R31-K, R321, R322, R41, R421, R511-K5e, R511-K71`.
 
-The later exact packets close `R511-K22` and all three `R61` keys.  In
-`R31-S`, the historical balanced/`C4`/`D3` labels are superseded by physical
-adjacency reconstruction.  The ordered hull-bridge, connector-fibre, and
-two-shared-cut-cactus dispatch closes that packet.  The machine ledger records
-an empty bridge-free packet residual, a separate closed universal hull–`K2`
-owner slice for exactly two positive blocks of ranks
-`(4,3)` or `(5,2)`, and an `OPEN`, `UNAUTHENTICATED` residual complement for
-all actual-hull-bridge incidences not owned by that theorem or the physical
-`R31-S` dispatch.  It deliberately records no finite global residual or census
-for that complement.
+The later exact packets close `R511-K22` and all three bridge-free `R61`
+keys.  In `R31-S`, the historical balanced/`C4`/`D3` labels are superseded by
+physical adjacency reconstruction.  The ordered hull-bridge,
+connector-fibre, and two-shared-cut-cactus dispatch closes that packet.
+
+The machine ledger records an empty bridge-free packet residual.  It records
+four separate physical overlays without assigning them packet keys: the
+physical `R31-S` dispatch, the universal exactly-two-positive `(4,3)/(5,2)`
+hull--`K2` slice, `PHYSICAL-UNIT-STAR-DNN`, and
+`R61-PHYSICAL-SINGLE-BLOCK`.  In the nontrivial-positive-hull domain, the last
+two reduce the unit-star complement to `c=5` with arms `(C5,C5)` and an
+arbitrary multiblock rank-five center, and `c=6` with a multiblock center.  The
+ledger separately retains the one-positive-hull
+multiblock lane as `OPEN`, census `UNAUTHENTICATED`: empty bridge-free packet
+residual does not authenticate unregistered physical bridge-forest transport.
 
 ## Why the global master is still open
 
-The physical `R31-S` closure reconstructs the full parent graph before making
-any debit.  If a hull bridge occurs, it is oriented away from the rank-three
-block; the away side is a strict-positive triangular cactus of rank `q`, while
-the root side has rank `7-q in {3,4,5,6}`.  If a connector-interior complete
-fibre contains `q` triangles, it is strict positive and its complement has rank
-`6-q in {2,3,4,5}`.  Only after both dispatches are excluded are the two exact
-tree charges and the rank-sum-five triangular split used.
+The quotient-component rank `c` and the partition of seven into positive
+**block** ranks are different axes.  A physical unit-star center is one
+bridge-free component but may contain several positive blocks.  Therefore the
+unit-star and physical `R61` theorems are overlays on the fourteen block-rank
+partitions; they are not new packet keys and do not change the nineteen-key
+bridge-free equality.
 
-That argument is specific to `R31-S`.  Independently, if there are exactly
-two positive blocks of ranks `(4,3)` or `(5,2)`, any physical `K2` on their
-block–cut-tree path splits the graph into connected induced sides of those
-exact ranks.  The completed lower-rank theorems and induced superadditivity
-therefore close that entire universal slice (strictly for `(5,2)`).
+For a nontrivial positive hull, the weighted-tree theorem gives a balanced
+`2|5` or `3|4` dispatch or a reduced unit-star.  The authenticated physical
+owners then leave exactly the two outer unit-star rows stated above, subject to any later
+narrower authenticated c5/c6 owner.  This is
+an exact residual only inside that nontrivial-hull domain.
 
-The previous master sentence nevertheless treated *every* actual hull bridge
-as two nonnegative positive-rank sides.  This is false when one side has rank
-one: for example `C5` has negative credit.  The remaining packet proofs were
-developed downstream of that sentence and have not all been audited with an
-oriented strict-positive rank-one side or another exact debit.  Promoting the
-master now would therefore overclaim beyond the registered `R31-S` and
-universal two-positive hull–`K2` owners.
+A one-vertex positive hull has no positive-hull edge, so it lies outside that
+reduction.  Although every off-core all-bridge component has rank zero, the
+physical graph can still contain arbitrarily many bridges and attachment
+ports.  HEAD's packet notes expressly require packet-specific bridge dispatch
+before the bridge-free pass, and the available owners have heterogeneous
+contracts: for example, physical `R31-S` proves its own bridge dispatch,
+`R511-K22` states only a bridge-free row, `R61` expressly excludes a physical
+bridge between its positive sides, and the two-debit theorem begins only after
+all actual bridges have been cut.  No present theorem verifies the missing
+all-owner transport.  Consequently this lane cannot be called closed merely
+from intended rooted-tree scope.
+
+Thus the global blocker is a disjoint union of (i) two authenticated outer row
+types for nontrivial positive hulls and (ii) an unauthenticated one-positive-
+hull multiblock bridge-forest lane with no accepted finite census.  Promoting
+the master before all three obligations are closed would overclaim.
 
 ## Fail-closed audit
 
@@ -127,9 +156,9 @@ python3 -O research/heptacyclic-multiblock-master-verifier.py
 ```
 
 Both invocations authenticate the exact fourteen-partition ledger, run every
-closed packet and finite prerequisite (including the physical `R31-S` gate and
-the universal two-positive hull–`K2` theorem gate) in normal and optimized
-mode, reject hostile scope/ownership mutations, and exit with status `1`.  The
-output names the remaining actual-hull-bridge complement as the blocker.  The
-nonzero exit is intentional; a global `COMPLETE` receipt would currently
+closed packet and finite prerequisite, and also run the physical unit-star and
+physical `R61` theorem gates in normal and optimized mode.  They reject hostile
+scope/ownership mutations and exit with status `1`.  The output names the two
+nontrivial-hull rows and the separate one-positive-hull unauthenticated lane.
+The nonzero exit is intentional; a global `COMPLETE` receipt would currently
 overclaim.

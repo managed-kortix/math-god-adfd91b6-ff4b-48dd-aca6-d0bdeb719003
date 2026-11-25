@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import ast
 import importlib.util
 import json
 import subprocess
@@ -113,6 +114,9 @@ class PhysicalUnitStarDNNTests(unittest.TestCase):
         receipt = v.strict_json_bytes(normal.stdout, "test receipt")
         self.assertEqual(receipt["theorem"], "PHYSICAL-UNIT-STAR-DNN")
         self.assertTrue(receipt["strict"])
+        self.assertEqual(
+            receipt["instance_checker"],
+            "dependency-free iterative Tarjan derivation; adjacency supplied at call time")
 
     def test_exact_symbolic_certificates(self):
         ledger = v.audit_symbolic_ledger()
@@ -129,6 +133,58 @@ class PhysicalUnitStarDNNTests(unittest.TestCase):
             self.assertEqual(receipt["unit_leaf_count"], 7 - center_rank)
             self.assertEqual(receipt["certificate_status"], "CLOSED")
             self.assertEqual(sum(receipt["edge_ledger"]), receipt["edges"])
+
+    def test_exact_7036_vertex_iterative_tarjan_regression(self):
+        graph = materialize_unit_star(
+            0, [5] * 7, chain_lengths=[1000] * 7, payload=False)
+        self.assertEqual(len(graph), 7036)
+        receipt = v.check_instance(graph)
+        self.assertEqual(receipt["vertices"], 7036)
+        self.assertEqual(receipt["center_rank"], 0)
+        self.assertEqual(receipt["unit_leaf_count"], 7)
+        self.assertEqual(receipt["cycle_lengths"], [5] * 7)
+        self.assertEqual(receipt["certificate_status"], "CLOSED")
+
+    def test_tarjan_call_graph_is_nonrecursive(self):
+        """AST proof: tarjan_bridges has no direct or indirect recursion."""
+        tree = ast.parse(VERIFIER_PATH.read_text(encoding="utf-8"))
+        functions = {node.name: node for node in tree.body
+                     if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))}
+        self.assertIn("tarjan_bridges", functions)
+
+        tarjan = functions["tarjan_bridges"]
+        nested = [node for node in ast.walk(tarjan)
+                  if node is not tarjan and
+                  isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda))]
+        self.assertFalse(nested, "tarjan_bridges contains a nested callable")
+
+        call_graph = {name: set() for name in functions}
+        for name, node in functions.items():
+            for called in ast.walk(node):
+                if isinstance(called, ast.Call) and isinstance(called.func, ast.Name):
+                    if called.func.id in functions:
+                        call_graph[name].add(called.func.id)
+
+        color = {}
+        path = []
+
+        def visit(name):
+            state = color.get(name, 0)
+            self.assertNotEqual(
+                state, 1,
+                "recursive call cycle reachable from tarjan_bridges: " +
+                " -> ".join(path + [name]))
+            if state == 2:
+                return
+            color[name] = 1
+            path.append(name)
+            for called in sorted(call_graph[name]):
+                visit(called)
+            path.pop()
+            color[name] = 2
+
+        visit("tarjan_bridges")
+        self.assertNotIn("tarjan_bridges", call_graph["tarjan_bridges"])
 
     def test_c5_long_arm_and_residual_are_distinguished(self):
         long_arm = v.check_instance(materialize_unit_star(5, [5, 9], shared_port=True))

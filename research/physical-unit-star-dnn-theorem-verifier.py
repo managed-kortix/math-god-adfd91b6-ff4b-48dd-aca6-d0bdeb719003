@@ -22,10 +22,10 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 MANIFEST = HERE / "fixtures" / "physical-unit-star-dnn-theorem-manifest.json"
-MANIFEST_SHA256 = "40ac7795de6a4e636bacf128bbcf9d41ef567db18ff14cb83be6951fbb103366"
+MANIFEST_SHA256 = "577ba7fa46737e58a89050b9da7bb1b87e29f7bd273e0c767390165230965c98"
 THEOREM_SOURCE = (ROOT / "positive-square-energy" / "heptacyclic-general" /
                   "physical-unit-star-dnn-theorem.md")
-THEOREM_SOURCE_SHA256 = "83ee6eb77987f712f29a32e7a4f396492608f7af8ab5eabb3030c8ed726a051e"
+THEOREM_SOURCE_SHA256 = "4b01acc39533fe53391157851a06f5c7b07013f2532f449725c120f931ca814e"
 DNN_SOURCE = ROOT / "sharp-cactus-dnn" / "paper.tex"
 DNN_SOURCE_SHA256 = "79dcffc6eb49d35951d6e8b7778de7f6de838239a467d99f4747bca3f57c0cbb"
 STRUCTURAL_SOURCE = (ROOT / "positive-square-energy" / "heptacyclic-general" /
@@ -154,7 +154,7 @@ def validate_manifest(manifest):
         "exactly_checked": [
             "canonical manifest identity, theorem identity, and dependency digests",
             "symbolic coefficient ledger", "exact integer radical certificates",
-            "dependency-free finite-instance Tarjan structure and edge ledger",
+            "dependency-free iterative finite-instance Tarjan structure and edge ledger",
             "hostile mutation rejection",
         ],
         "imported_not_reproved": [
@@ -253,28 +253,41 @@ def connected_vertices(graph, allowed=None, start=None):
 
 
 def tarjan_bridges(graph):
+    """Iterative low-link DFS; no Python call-stack depth bounds a bridge chain."""
     require(connected_vertices(graph) == set(graph), "graph is disconnected")
-    timer = 0
-    discovery = {}
-    low = {}
+    timer = 1
+    start = min(graph)
+    discovery = {start: timer}
+    low = {start: timer}
     bridges = set()
-
-    def visit(vertex, parent):
-        nonlocal timer
-        timer += 1
-        discovery[vertex] = low[vertex] = timer
-        for neighbour in sorted(graph[vertex]):
+    # Mutable frames are [vertex, parent, sorted_neighbours, next_index].  A
+    # child is finalized only when its frame pops, exactly when its low-link is
+    # complete; then its parent low-link and bridge status can be updated.
+    frames = [[start, None, tuple(sorted(graph[start])), 0]]
+    while frames:
+        vertex, parent, neighbours, next_index = frames[-1]
+        if next_index < len(neighbours):
+            neighbour = neighbours[next_index]
+            frames[-1][3] += 1
             if neighbour == parent:
+                # The graph is simple, so the unique parent edge is the only
+                # undirected traversal edge that must be skipped.
                 continue
             if neighbour not in discovery:
-                visit(neighbour, vertex)
-                low[vertex] = min(low[vertex], low[neighbour])
-                if low[neighbour] > discovery[vertex]:
-                    bridges.add(tuple(sorted((vertex, neighbour))))
+                timer += 1
+                discovery[neighbour] = low[neighbour] = timer
+                frames.append([neighbour, vertex,
+                               tuple(sorted(graph[neighbour])), 0])
             else:
                 low[vertex] = min(low[vertex], discovery[neighbour])
+            continue
 
-    visit(min(graph), None)
+        frames.pop()
+        if parent is not None:
+            low[parent] = min(low[parent], low[vertex])
+            if low[vertex] > discovery[parent]:
+                bridges.add(tuple(sorted((parent, vertex))))
+
     require(len(discovery) == len(graph), "Tarjan traversal missed a vertex")
     return bridges
 
@@ -485,7 +498,8 @@ def audit():
         "residual": "c=5 with (q_1,q_2)=(5,5)",
         "strict": True,
         "symbolic_ledger": ledger,
-        "instance_checker": "dependency-free Tarjan derivation; adjacency supplied at call time",
+        "instance_checker": ("dependency-free iterative Tarjan derivation; "
+                             "adjacency supplied at call time"),
         "authenticated_source_count": 3,
         "hostile_mutations_rejected": list(rejected),
         "nonclaim": "c=6, one-component rank seven, non-unit-stars, and all-heptacyclic closure remain open",

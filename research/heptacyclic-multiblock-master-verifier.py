@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Fail-closed audit of the rank-seven multiblock reduction.
 
-The physical R31-S packet and the universal exactly-two-positive (4,3)/(5,2)
-hull-K2 slice have passing adjacency/Tarjan gates.  This master still exits
-nonzero: the upstream generic hull-bridge reduction is false for rank-one
-sides, and the residual bridge complement lacks a uniform repair.  A zero
-exit must never be mistaken for a theorem receipt.
+The bridge-free packet registry is empty only after registered bridge
+dispatch.  For a nontrivial positive hull, imported physical unit-star and
+R61 single-block owners leave two typed outer rows.  The one-positive-hull
+multiblock physical-bridge forest remains open and unauthenticated.  This
+master therefore exits nonzero; a zero exit must never be mistaken for a
+theorem receipt.
 """
 
 from __future__ import annotations
@@ -20,12 +21,24 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "research/fixtures/heptacyclic-multiblock-owner-ledger.json"
-LEDGER_SHA256 = "a039385c0faf95f164e4a47959862bf11637b7ee7c84d5146f551cd220d72738"
+LEDGER_SHA256 = "548977e22a31e5bbcb9ed9ac0424c5fa9720e8db157dab2ca82550de74a5bcb1"
 SOURCES = {
     "theorem": (ROOT / "positive-square-energy/heptacyclic-general/complete-multiblock-theorem.md",
-                "540a267b5b4c6196a96ab8b2abf5a6569fa30a14bea735ba08c4b2574e3f0987"),
+                "bef80fb78a5b085dc5959b15ac0efc6e0c05093d4af9f722d2007f6b21118d75"),
     "debit-ledger": (ROOT / "positive-square-energy/heptacyclic-general/rank-seven-multiblock-debit-ledger.md",
                      "f45d60cbeefdf523e5aab053af708a388687f05b64a3d569bd1ddda885396ac2"),
+    "physical-hull-owner-overlay": (ROOT / "positive-square-energy/heptacyclic-general/rank-seven-physical-hull-owner-overlay.md",
+                                    "b0fe17dcd2f520caf912f66cc53747cc7b5e2b6ac772a1b087f9bbff9065e89c"),
+    "physical-hull-reduction": (ROOT / "positive-square-energy/heptacyclic-general/physical-hull-bridge-reduction/theorem-note.md",
+                                "e09bdcfd99f85b4660678b1dbc70538bea6de0624b500ede8eae38eae9e639de"),
+    "physical-unit-star": (ROOT / "positive-square-energy/heptacyclic-general/physical-unit-star-dnn-theorem.md",
+                           "4b01acc39533fe53391157851a06f5c7b07013f2532f449725c120f931ca814e"),
+    "physical-unit-star-manifest": (ROOT / "research/fixtures/physical-unit-star-dnn-theorem-manifest.json",
+                                    "577ba7fa46737e58a89050b9da7bb1b87e29f7bd273e0c767390165230965c98"),
+    "r61-physical-single-block": (ROOT / "positive-square-energy/heptacyclic-general/r61-physical-single-block-theorem.md",
+                                  "b649c2c4622d7b4474faebd7f0cd0f9217f3b4dc449fe6beaed536fc7738bb6e"),
+    "r61-physical-manifest": (ROOT / "research/fixtures/r61-physical-single-block-theorem-manifest.json",
+                              "b43dc1e7a450aac5af66b1fd6a7c23ff6bf2a5ddbcc9bd4a2b8b9c2333f709fe"),
     "universal-hull-k2": (ROOT / "positive-square-energy/heptacyclic-general/universal-hull-k2-theorem.md",
                           "c469a4991df034b040f6aee49f1e81b8513a18e59f86edf3c38ee4c318b0e9a5"),
     "two-debit": (ROOT / "positive-square-energy/heptacyclic-general/two-debit-induced-piece-theorem.md",
@@ -51,6 +64,12 @@ CHILDREN = {
     "universal-hull-k2": ("universal-hull-k2-verifier.py",
         "d35b9ce0d466f9ad535cfc6c116c6803656465f505215ba14e44914f18682fe1",
         "5f91e157c4fa1f0c941d526499743c159d807d193691a2080a261e0594e8964a"),
+    "physical-unit-star": ("physical-unit-star-dnn-theorem-verifier.py",
+        "359bcbb3bad8a6fe1cb61cb036ee74494be0af530896e812755790211a74e323",
+        "a61fe6244f77c7c99fe8029e525f0f352c44cf87df1aa48f8f6935fe122681e6"),
+    "r61-physical-single-block": ("r61-physical-single-block-theorem-verifier.py",
+        "1fbd042e0019277fae927c06959047afd40be59eecbfe42454c17441255f0e51",
+        "46d17cc6f689eb872a8f8f8949f2255a131fc3a31ba5a4431909a6543ba3d94f"),
     "rank-seven-two-debit": ("rank-seven-two-debit-induced-piece-verifier.py",
         "f37e31be0d7888d43a7d8f752642fde04a71f1e1abc5317e94da7e0d7436a501",
         "0ac8b98c0abf5487577a65fabe386434f52d9bc05706bff146102a23f5ecace2"),
@@ -143,10 +162,13 @@ def load_ledger():
 
 
 def check_sources():
-    require(set(SOURCES) == {"theorem", "debit-ledger", "universal-hull-k2",
-            "two-debit", "nested", "r31-frontier", "r31-physical", "r31-c4",
-            "r31-d3-open", "r511-k22", "r61", "r61-k223"},
-            "source registry changed")
+    require(set(SOURCES) == {"theorem", "debit-ledger", "physical-hull-owner-overlay",
+            "physical-hull-reduction",
+            "physical-unit-star", "physical-unit-star-manifest",
+            "r61-physical-single-block", "r61-physical-manifest",
+            "universal-hull-k2", "two-debit", "nested", "r31-frontier",
+            "r31-physical", "r31-c4", "r31-d3-open", "r511-k22", "r61",
+            "r61-k223"}, "source registry changed")
     for name, (path, expected) in SOURCES.items():
         require(path.is_file(), f"missing source: {name}")
         require(digest(path) == expected, f"source digest changed: {name}")
@@ -155,13 +177,14 @@ def check_sources():
 def audit(payload):
     check_sources()
     require(integer_partitions(7) == PARTITIONS, "partition generation changed")
-    require(payload["schema"] == "heptacyclic-multiblock-owner-ledger-v3", "schema changed")
+    require(payload["schema"] == "heptacyclic-multiblock-owner-ledger-v4", "schema changed")
     require(payload["scope"] == {
         "block_predicate": "at-least-two-positive-rank-cyclic-blocks",
         "graph": "finite-simple-connected",
         "includes": ["arbitrary-legal-subdivisions", "arbitrary-block-cut-incidence",
                      "repeated-or-nested-cuts", "arbitrary-finite-rooted-trees"],
-        "excludes": ["remaining-unoriented-cyclic-hull-bridge-incidences"],
+        "excludes": ["open-nontrivial-positive-hull-rows",
+                     "one-positive-hull-multiblock-physical-bridge-forest"],
         "rank": 7,
     }, "registered theorem scope changed")
     require(payload["excluded_partitions"] == [[7]], "single-block exclusion changed")
@@ -189,28 +212,91 @@ def audit(payload):
     require("final_residual" not in payload and
             "unoriented_bridge_cases" not in payload,
             "obsolete global bridge residual was reintroduced")
-    require(payload["hull_bridge_owner_slices"] == {
-        "universal-hull-k2": {
-            "exactly_two_positive_blocks": True,
-            "partitions": [[4, 3], [5, 2]],
-            "requires": "physical-K2-on-positive-block-path",
-            "conclusion_by_partition": {
-                "4+3": "sigma>=0",
-                "5+2": "sigma>0",
-            },
+    require("hull_bridge_owner_slices" not in payload and
+            "remaining_unoriented_bridge_cases" not in payload,
+            "obsolete generic bridge registry was reintroduced")
+
+    overlay = payload["physical_hull_owner_overlay"]
+    require(set(overlay) == {"axis", "domain", "finite_census_claim",
+            "open_rows", "owners", "route_obstruction"},
+            "physical hull overlay fields changed")
+    require(overlay["axis"] ==
+            "all-global-bridge quotient; restricted here to nontrivial positive hull",
+            "physical hull overlay axis changed")
+    require(overlay["domain"] == {
+        "positive_hull": "at-least-two-positive-weight-quotient-vertices",
+        "one_positive_hull_excluded": True,
+    }, "physical hull overlay domain changed")
+    require(overlay["finite_census_claim"] is False,
+            "outer rows were laundered into a finite census")
+    owners_by_name = {owner["owner"]: owner for owner in overlay["owners"]}
+    require(len(owners_by_name) == 3 and set(owners_by_name) == {
+            "universal-hull-k2", "PHYSICAL-UNIT-STAR-DNN",
+            "R61-PHYSICAL-SINGLE-BLOCK"}, "physical hull owner set changed")
+    require(owners_by_name["universal-hull-k2"] == {
+        "owner": "universal-hull-k2",
+        "scope": {"exactly_two_positive_blocks": True,
+                  "partitions": [[4, 3], [5, 2]],
+                  "requires": "physical-K2-on-positive-block-path"},
+        "conclusion_by_partition": {"4+3": "sigma>=0", "5+2": "sigma>0"},
+    }, "universal hull-K2 owner changed")
+    require(owners_by_name["PHYSICAL-UNIT-STAR-DNN"] == {
+        "owner": "PHYSICAL-UNIT-STAR-DNN", "conclusion": "sigma>0",
+        "scope": {
+            "reduced_positive_hull": "hostile-unit-leaf-star",
+            "center_component": "arbitrary-connected-bridge-free-rank-c",
+            "closed_center_ranks": [0, 1, 2, 3, 4],
+            "closed_c5_condition": "max(q_1,q_2)>=9",
+            "ports": "arbitrary-repeated-or-coincident",
+            "restored_zero_rank_material":
+                "arbitrary-physical-bridge-chains-branching-and-finite-tree-payloads",
         },
-    }, "universal hull-K2 owner slice changed")
-    require(payload["remaining_unoriented_bridge_cases"] == {
-        "status": "OPEN",
+    }, "physical unit-star owner scope changed")
+    require(owners_by_name["R61-PHYSICAL-SINGLE-BLOCK"] == {
+        "owner": "R61-PHYSICAL-SINGLE-BLOCK", "conclusion": "sigma>=0",
+        "scope": {
+            "reduced_positive_hull": "one hostile unit arm at center rank 6",
+            "center_component": "exactly-one-positive-rank-cyclic-block",
+            "separator": "one-actual-bridge",
+            "ports": "arbitrary-vertices-on-both-sides",
+            "tree_attachments": "arbitrary-finite-rooted-trees",
+        },
+    }, "physical R61 owner scope changed")
+    require(overlay["open_rows"] == [
+        {"center_rank": 5,
+         "center_component": "arbitrary-bridge-free-rank-five-center",
+         "center_positive_rank_cyclic_block_count": "at-least-two",
+         "hostile_arm_cycles": [5, 5], "status": "OPEN_ROW_SPECIFIC_PROOF"},
+        {"center_rank": 6, "center_block_count": "at-least-two-positive",
+         "hostile_arms": 1, "status": "OPEN_ROW_SPECIFIC_PROOF"},
+    ], "exact nontrivial-hull open rows changed")
+    require(overlay["route_obstruction"] == {
+        "row": "c=5,(C5,C5)",
+        "universal_center_excess_required": "4sqrt(5)-4",
+        "multiblock_center": "K4 vee C3 vee C3",
+        "example_center_positive_block_profile": [3, 1, 1],
+        "exact_center_excess": 5,
+        "meaning": "universal-all-center-DNN-threshold-fails-not-graph-counterexample",
+    }, "c=5 route obstruction changed")
+
+    require(payload["one_positive_hull_multiblock_lane"] == {
+        "axis": "number of positive all-global-bridge quotient components",
+        "condition": ("unique rank-seven bridge-free component has at least "
+                      "two positive-rank cyclic blocks"),
+        "physical_hull_reduction_status":
+            "OUTSIDE_NONTRIVIAL_HULL_HYPOTHESIS",
+        "actual_bridge_forest": "MAY_BE_PRESENT",
+        "bridge_free_packet_residual_relevance":
+            "CONDITIONAL_ON_REGISTERED_PACKET_SPECIFIC_BRIDGE_DISPATCH",
+        "all_19_owner_transport_theorem": "ABSENT",
         "census": "UNAUTHENTICATED",
-        "scope": ("actual-cyclic-hull-bridge incidences not authenticated by "
-                  "registered R31-S or universal-hull-k2 owners"),
         "forbid_finite_residual": True,
-    }, "remaining bridge blocker semantics changed")
-    require(type(payload["remaining_unoriented_bridge_cases"]) is dict and
-            payload["remaining_unoriented_bridge_cases"]["census"] ==
+        "status": "OPEN",
+    }, "one-positive-hull open lane changed")
+    require(type(payload["one_positive_hull_multiblock_lane"]) is dict and
+            payload["one_positive_hull_multiblock_lane"]["census"] ==
             "UNAUTHENTICATED",
-            "remaining bridge lane was laundered into a finite residual")
+            "one-positive-hull lane was laundered into a finite residual")
     require(payload["owner_rules"] == {
         "boundary_cut": "upstream-only",
         "nested_demands": "one-complete-first-boundary-territory",
@@ -220,10 +306,11 @@ def audit(payload):
 
     owners = payload["verifier_owners"]
     require(set(owners) == set(CHILDREN) - {
-        "r31-s-parent-gate", "universal-hull-k2"
-    }, "child scope registry changed")
-    require("universal-hull-k2" not in owners,
-            "universal hull slice was laundered into packet-key ownership")
+        "r31-s-parent-gate", "universal-hull-k2", "physical-unit-star",
+        "r61-physical-single-block"}, "child scope registry changed")
+    require(not ({"universal-hull-k2", "physical-unit-star",
+                  "r61-physical-single-block"} & set(owners)),
+            "physical overlay was laundered into packet-key ownership")
     primary = [key for keys in owners.values() for key in keys if ":" not in key]
     require(set(primary) == set(PACKET_KEYS),
             "bridge-free packet verifier ownership is not exhaustive")
@@ -277,6 +364,10 @@ def expect_rejection(payload, mutation):
 
 
 def hostile_tests(payload):
+    def overlay_owner(value, name):
+        return next(owner for owner in value["physical_hull_owner_overlay"]["owners"]
+                    if owner["owner"] == name)
+
     mutations = (
         lambda value: value["rows"].pop(),
         lambda value: value["rows"].append({"partition": [7], "direct_owner": "packet",
@@ -293,23 +384,43 @@ def hostile_tests(payload):
         lambda value: value["verifier_owners"].update(**{"r31-s-d3": ["R31-S"]}),
         lambda value: value["bridge_free_packet_residual"].append("R31-S"),
         lambda value: value.update(final_residual=["R31-S"]),
-        lambda value: value["hull_bridge_owner_slices"]["universal-hull-k2"][
+        lambda value: value["physical_hull_owner_overlay"]["domain"].update(
+            one_positive_hull_excluded=False),
+        lambda value: value["physical_hull_owner_overlay"].update(
+            finite_census_claim=True),
+        lambda value: overlay_owner(value, "universal-hull-k2")["scope"][
             "partitions"].pop(),
-        lambda value: value["hull_bridge_owner_slices"]["universal-hull-k2"][
-            "partitions"].append([6, 1]),
-        lambda value: value["hull_bridge_owner_slices"]["universal-hull-k2"].update(
-            exactly_two_positive_blocks=False),
-        lambda value: value["hull_bridge_owner_slices"]["universal-hull-k2"].update(
-            requires="any-K2-anywhere"),
-        lambda value: value["hull_bridge_owner_slices"]["universal-hull-k2"][
-            "conclusion_by_partition"].update(**{"4+3": "sigma>0"}),
-        lambda value: value["verifier_owners"].update(
-            **{"universal-hull-k2": ["R43", "R52-K22", "R52-K71"]}),
-        lambda value: value["remaining_unoriented_bridge_cases"].update(
+        lambda value: overlay_owner(value, "PHYSICAL-UNIT-STAR-DNN")["scope"].update(
+            reduced_positive_hull="arbitrary-nontrivial-positive-hull"),
+        lambda value: overlay_owner(value, "PHYSICAL-UNIT-STAR-DNN")["scope"][
+            "closed_center_ranks"].append(5),
+        lambda value: overlay_owner(value, "PHYSICAL-UNIT-STAR-DNN")["scope"].update(
+            closed_c5_condition="all hostile arms"),
+        lambda value: overlay_owner(value, "R61-PHYSICAL-SINGLE-BLOCK")["scope"].update(
+            center_component="arbitrary-rank-six-center"),
+        lambda value: value["physical_hull_owner_overlay"]["open_rows"].pop(),
+        lambda value: value["physical_hull_owner_overlay"]["open_rows"][0].update(
+            center_positive_rank_cyclic_block_count=2),
+        lambda value: value["physical_hull_owner_overlay"]["open_rows"][0].update(
+            center_positive_block_profile=[1, 1]),
+        lambda value: value["physical_hull_owner_overlay"]["open_rows"][0].update(
             status="CLOSED"),
-        lambda value: value["remaining_unoriented_bridge_cases"].update(census=[]),
-        lambda value: value["remaining_unoriented_bridge_cases"].update(
-            scope=["R21", "R221"]),
+        lambda value: value["physical_hull_owner_overlay"]["route_obstruction"].update(
+            meaning="graph-counterexample"),
+        lambda value: value["one_positive_hull_multiblock_lane"].update(status="CLOSED"),
+        lambda value: value["one_positive_hull_multiblock_lane"].update(
+            bridge_free_packet_residual_relevance="OWNED_BY_19_PACKET_KEYS"),
+        lambda value: value["one_positive_hull_multiblock_lane"].update(census=[]),
+        lambda value: value["one_positive_hull_multiblock_lane"].update(
+            all_19_owner_transport_theorem="PRESENT"),
+        lambda value: value["one_positive_hull_multiblock_lane"].update(
+            actual_bridge_forest="ABSENT"),
+        lambda value: value["one_positive_hull_multiblock_lane"].pop(
+            "actual_bridge_forest"),
+        lambda value: value["one_positive_hull_multiblock_lane"].update(
+            finite_residual=[]),
+        lambda value: value["verifier_owners"].update(
+            **{"physical-unit-star": ["R511-K22"]}),
         lambda value: value["owner_rules"].update(boundary_cut="both-sides"),
     )
     for mutation in mutations:
@@ -323,21 +434,18 @@ def main():
     outputs = run_children()
     rejected = hostile_tests(payload)
     output = (
-        "heptacyclic multiblock master audit: exact reduction passed\n"
-        "partition scope: 14 non-(7) partitions; excluded single-block partition: (7)\n"
-        f"bridge-free owner ledger: {len(PACKET_KEYS)} packet keys; packet residual: empty\n"
-        "universal two-positive hull-K2 slice: CLOSED for (4,3) and (5,2)\n"
-        "remaining actual-hull-bridge lane: OPEN; census: UNAUTHENTICATED\n"
+        "heptacyclic multiblock master audit: typed fail-closed reduction passed\n"
+        "partition scope: 14 non-(7) positive-block partitions; partition (7) excluded\n"
+        f"bridge-free owner ledger: {len(PACKET_KEYS)} packet keys; packet residual: empty after registered bridge dispatch\n"
+        "nontrivial physical hull overlay: unit-star DNN and R61 single-block owners authenticated\n"
+        "open nontrivial-hull rows: c=5 arbitrary multiblock rank-five center with (C5,C5); c=6 multiblock center\n"
+        "one-positive-hull multiblock bridge forest: OPEN; census: UNAUTHENTICATED\n"
         f"closed/prerequisite verifiers: {len(outputs)}; "
         f"executions: {2 * len(outputs)} normal/-O\n"
         f"hostile mutations rejected: {rejected}\n"
-        "R31-S full-parent combinatorial gate: PASSED; analytic adjacency gate: PASSED; "
-        "synthetic D3 implication not used\n"
-        "blocked implication: outside registered owners, generic positive-rank hull-bridge "
-        "sides are not both automatically nonnegative (rank-one C5 is negative); "
-        "no finite bridge residual accepted\n"
+        "pinned physical-hull structural source: e09bdcfd99f85b4660678b1dbc70538bea6de0624b500ede8eae38eae9e639de\n"
         "conclusion: NOT ESTABLISHED for all connected rank-seven multiblock graphs\n"
-        "status: OPEN; FAIL CLOSED PENDING REMAINING HULL-BRIDGE REPAIR"
+        "status: OPEN; FAIL CLOSED PENDING TWO NONTRIVIAL-HULL ROWS AND ONE-POSITIVE-HULL BRIDGE-FOREST TRANSPORT"
     )
     if "--optimized-master-child" not in sys.argv and not sys.flags.optimize:
         child = subprocess.run([sys.executable, "-O", __file__, "--optimized-master-child"],

@@ -239,8 +239,10 @@ python3 -m unittest research/test_physical_unit_star_dnn_theorem_verifier.py
 
 The verifier checks canonical scope, the theorem-source identity and imported
 source locks, the exact symbolic ledger, the radical inequalities, and hostile
-scope mutations.  It also contains a dependency-free Tarjan instance checker.
-Given a finite simple adjacency list, that checker strictly rejects noncanonical
+scope mutations.  It also contains a dependency-free iterative Tarjan instance
+checker.  Explicit DFS frames remove any Python recursion-depth restriction on
+finite physical bridge chains.  Given a finite simple adjacency list, that
+checker strictly rejects noncanonical
 vertex-key aliases and Boolean endpoints, independently finds all global
 bridges, forms the component quotient, reduces its positive hull, authenticates
 the literal unit-star structure and hostile leaf cycles, and emits the edge
