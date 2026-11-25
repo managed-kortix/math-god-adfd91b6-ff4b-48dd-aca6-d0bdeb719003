@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fail-closed verifier for the rank-seven two-debit induced-piece theorem."""
+"""Fail-closed verifier for the rank-seven two-debit packet template."""
 
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ FIXTURE_SHA256 = "08f347f8c3c04dfbd641ca1922b09fbee5c5c58c28332d8fbb4b9b61ea7c62
 SOURCES = {
     "theorem": (
         ROOT / "positive-square-energy/heptacyclic-general/two-debit-induced-piece-theorem.md",
-        "29304b8c920c6efd43d05ce0e8f2c21f44e2656ded0c3ce69ea79b5271454213",
+        "160955a74a6237a16de9a0b783662ad897d3e8c4b53278acbd68f54793c47872",
     ),
     "k22": (
         ROOT / "pentacyclic/research/order5-kernel-family-theorem.json",
@@ -253,12 +253,13 @@ def main():
     payload = load_json(FIXTURE)
     owner_cases, owner_vertices = audit(payload)
     rejected = hostile_tests(payload)
-    output = ("rank-seven two-debit induced-piece verifier: exact audit passed\n"
-              "closed keys: R331-S, R331-K, R43, R52-K22, R52-K71\n"
+    output = ("rank-seven two-debit packet-template verifier: exact audit passed\n"
+              "scope: registered bridge-free/post-dispatch packets only; no full-physical closure claim\n"
+              "packet rows: R331-S, R331-K, R43, R52-K22, R52-K71\n"
               "structural targets: K22=4 K71=9\n"
               f"owner channels: {owner_cases}; synthetic vertices audited: {owner_vertices}\n"
               f"hostile mutations rejected: {rejected}\n"
-              "status: five residual owner families CLOSED")
+              "status: five typed packet rows discharged conditionally")
     if "--optimized-child" not in sys.argv and not sys.flags.optimize:
         child = subprocess.run([sys.executable, "-O", __file__, "--optimized-child"],
                                check=True, capture_output=True, text=True)

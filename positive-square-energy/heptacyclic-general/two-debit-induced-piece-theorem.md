@@ -1,34 +1,38 @@
-# Two-debit induced-piece theorem
+# Two-debit induced-piece packet template
 
-## The theorem
+## Exact scope and corrected credit rule
 
 Write
 
 `sigma(H)=s^+(H)-|V(H)|`.
 
 Let `A` be an induced connected attachment-uniform packet with
-`sigma(A)>2`. Root the cyclic block-cut incidence tree at `A`. Suppose that,
-after all actual bridges have been cut, at most two cyclic demands remain
+`sigma(A)>2`. This note concerns only a registered **bridge-free or
+post-dispatch packet** after every actual bridge excluded by the packet
+manifest has been handled separately. Root that packet's cyclic block-cut
+incidence tree at `A`. Suppose at most two registered cyclic demands remain
 outside `A`. At each first boundary keep the boundary cut upstream and take
 the complete downstream side as one induced territory. Nested demands stay in
 the same first-boundary territory unless a later opening is explicitly made.
-Then
 
-`sigma(G)>0`.                                                   (1)
+For such a packet, the arithmetic conclusion `sigma>0` follows only after each
+complete territory has an authenticated credit of at least `-1` and the owner
+classes form an induced, disjoint, exhaustive partition of the packet. A
+positive downstream territory is nonnegative when its connected rank lies in
+`{2,3,4,5,6}`, or when a separately cited typed rank-one theorem applies. An
+arbitrary rank-one territory is **not** nonnegative: for example,
+`sigma(C5)=2-sqrt(5)<0`. Without exact rank-one typing, only the universal
+floor `sigma>=-1` may be used. A nonempty tree has credit exactly `-1`.
+Consequently, once those packet-specific hypotheses have been verified,
+induced square-energy superadditivity gives
 
-Indeed, every complete downstream territory is connected. If it has positive
-cyclic rank, its rank is at most six in the applications below, so the complete
-lower-rank theorem gives nonnegative credit. If opening its boundary destroys
-all cycles, it is a nonempty tree and has credit `-1`. Thus each of the at most
-two territories has credit at least `-1`, and induced square-energy
-superadditivity gives
+`sigma(packet)>2-1-1=0`.                                    (1)
 
-`sigma(G)>2-1-1=0`.
-
-This is an induced-piece theorem, not a sum of unspecified theorem margins.
-The strictness comes only from the displayed anchor. Every shared cut occurs
-only upstream; every connector remnant, rooted branch, and deeper descendant
-follows its unique first-boundary territory.
+This is a conditional packet template, not a theorem about the original
+physical graph before bridge dispatch. The strictness comes only from the
+displayed anchor. Every shared cut in the packet occurs only upstream; every
+connector remnant, rooted branch, and deeper descendant represented by the
+packet manifest must follow its unique first-boundary territory.
 
 Two refinements will be used without changing (1).
 
@@ -38,19 +42,24 @@ Two refinements will be used without changing (1).
    complete owner class together. It then has positive rank and nonnegative
    credit, so it replaces rather than supplements the structural tree debit.
 
-## R331
+## R331 packet rows
 
-For `R331-S`, retain the actual `K4` block as `A`. The structural rank-three
-block `S3` and the cycle `Q` are the two demands. For `R331-K`, retain either
-actual `K4`; the other `K4` and `Q` are the two demands. Separate arms produce
-two first-boundary territories. If the demands are nested, their complete
-first-boundary side is one positive-rank territory. Repeated cuts remain only
-in `A`. In every case (1) applies.
+For the registered **bridge-free/post-dispatch** `R331-S` packet, retain the
+actual `K4` block as `A`. The structural rank-three block `S3` and the cycle
+`Q` are the two demands. For the corresponding registered `R331-K` packet,
+retain either actual `K4`; the other `K4` and `Q` are the two demands. Separate
+arms produce two first-boundary territories. If the demands are nested, their
+complete first-boundary side is one territory whose exact rank must be typed.
+Repeated cuts remain only in `A`. Subject to those manifest checks, (1) applies
+to the post-dispatch packet.
 
-This closes both physical `R331` subkeys. No debit or margin is imported from
-the structural proof of `S3`; only its actual complete induced side is used.
-When the second demand is an actual `K4`, opening it directly exposes the
-actual `K3` refinement above.
+This closes only the registered bridge-free/post-dispatch R331 packet; no
+full-physical closure is asserted here. In particular, the complete physical
+`R331-K` inventory is handled independently by
+`r331-k-adjacency-ownership-note.md`, whose dedicated owner proof types the
+rank-one side as a literal triangle-with-trees. No debit or margin is imported
+from the structural proof of `S3`. When the second demand is an actual `K4`,
+opening it directly exposes the actual `K3` refinement above.
 
 ## R43
 
@@ -95,19 +104,20 @@ The K22 and K71 statements apply only to the canonical/frontier structural
 targets recorded by their theorem fixtures. They do not promote either family
 to a DNN owner and do not lengthen an edge of the retained actual `K4`.
 
-## Exact owner contract
+## Exact packet contract
 
-The five closed keys are
+The five registered post-dispatch packet keys are
 
 `R331-S, R331-K, R43, R52-K22, R52-K71`.
 
 For each key the persisted ledger records the anchor, strict credit threshold,
-physical complementary owner, external demands, legal owner channels, and
-worst territory debits. The verifier also regenerates the four K22 and nine
-K71 structural targets from the original theorem fixtures. It checks disjoint
+packet complementary owner, external demands, legal owner channels, and worst
+territory debits. The verifier also regenerates the four K22 and nine K71
+structural targets from the original theorem fixtures. It checks disjoint
 exhaustive synthetic owner territories for separate, repeated-cut, nested, and
 opened-owner routes, and rejects a duplicated cut, omitted descendant, changed
-debit, widened physical scope, or missing family.
+debit, widened packet scope, or missing family. It does not reconstruct or
+own every component removed by an actual-bridge dispatch.
 
 Run
 
@@ -116,5 +126,7 @@ python3 research/rank-seven-two-debit-induced-piece-verifier.py
 python3 -O research/rank-seven-two-debit-induced-piece-verifier.py
 ```
 
-This theorem removes five owner-registry keys. It makes no claim about the ten
-other residual packet types or the single-block rank-seven lane.
+This template discharges five registered bridge-free/post-dispatch packet
+rows, subject to their typed manifests. It makes no claim about their omitted
+actual-bridge complements, the ten other residual packet types, the complete
+multiblock problem, or the single-block rank-seven lane.
