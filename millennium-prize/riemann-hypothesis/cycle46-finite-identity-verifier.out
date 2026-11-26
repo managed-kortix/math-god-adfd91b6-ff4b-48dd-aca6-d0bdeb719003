@@ -1,0 +1,42 @@
+RH CYCLE 46 FINITE FAIL-CLOSED VERIFIER: PASS
+scope=finite identities and counterexamples only; no asymptotic/RH claim
+source=millennium-prize/riemann-hypothesis/cycle46_finite_identity_verifier.py
+source_sha256=e16c6fb2fc47df75097a12b4edf8c25713e26091d2575f3b87f58705542d91bd
+runtime=CPython-3.12.13 python-flint-0.9.0 FLINT-3.6.0
+arb_precision_bits=256 identity_ceiling=[2.93873587706e-39 +/- 4.29e-51]
+bound_inputs_sha256=PASS count=6
+input_sha256 millennium-prize/riemann-hypothesis/cycle45_dispersion_census.py 9f24a6630a8804996590732d8a6f6389557a296eacb7daedc5fc56cb38152ade
+input_sha256 millennium-prize/riemann-hypothesis/certify_complete_gram.py 9b87a6e35cbb7adf5041442410e74346aa79c2a29d495df1a9ee93c17b35c9b8
+input_sha256 millennium-prize/riemann-hypothesis/cycle45_runtime.py 78840c42dec562ff177a7b54ca4e223f9d9d3d300c6029f2909a9d7467d6ec31
+input_sha256 millennium-prize/riemann-hypothesis/cycle43_divisor_admission_multiprobe.py ba3453913affeaa9c99aea24c10d67cee6dfbd8635f67ff86dfa2975e18811c3
+input_sha256 millennium-prize/riemann-hypothesis/cycle44_boundary_envelope_scan.py d94ecc10c941668d0f5e335527ffe5c9524a6ab0a8df748425e5f67d445cac5b
+input_sha256 millennium-prize/riemann-hypothesis/cycle45-dispersion-environment.json a88cfbecae577f3cfb206769458113494b5bb2b4b783fdd4e46b71542434456b
+exact_fixed_P=PASS grouping_cases=504 adjoining_column_cases=5381 adjoining_polynomial_cases=504
+exact_first_period=PASS convolution_cases=160 formal_abel_cases=120 coprime_abel_cases=600
+grouped_diagonals a=64 I=[1,3/2] rows=21
+Delta_P=2  [0.0004915417361726970319139637097073533373331 +/- 3.49e-44]
+Delta_P=6  [0.0004887517173623030171600341041881708432743 +/- 3.65e-44]
+Delta_P=10 [0.0005069480456057754382915997890928778967797 +/- 2.91e-44]
+Delta_2-Delta_6 [2.790018810394014753929605519182494058802e-6 +/- 3.59e-46]
+Delta_10-Delta_2 [1.540630943307840637763607938552455944666e-5 +/- 3.87e-45]
+monotonicity_directions=PASS 2->6 decreases; 2->10 increases
+actual_grouping_all_abs_errors_sum_upper_bound=[1.81005691697e-73 +/- 2.26e-85]
+actual_increment_2_to_6_abs_error_upper=[8.33980674207e-77 +/- 3.20e-89]
+actual_increment_2_to_10_abs_error_upper=[7.89597150929e-77 +/- 8.65e-90]
+first_period_counterexample a=512 q=742 factorization=2*7*53
+C_q [729.4005732744579732803504878987078155553 +/- 4.36e-39]
+E_q [-11.59942672554202671964951210129218444470 +/- 4.35e-39]
+P_chebyshev [-0.0001068459459733075455812705951102115928571 +/- 1.70e-44]
+P_mertens [8.485475025815056865817223689571140487753e-5 +/- 6.76e-46]
+P [-2.199119571515697692309835821450018797955e-5 +/- 2.34e-45]
+T [2.234934454319936729245673451436771988353e-5 +/- 3.51e-45]
+hat_c [3.581488280423903693583762998675319039742e-7 +/- 3.34e-47]
+P^2 [4.836126889823385817022136411348885973940e-10 +/- 1.08e-50]
+T^2 [4.994932015106353354684809564818694400593e-10 +/- 1.55e-50]
+2PT [-9.829776199099457794644844215057826316716e-10 +/- 3.90e-50]
+hat_c^2 [1.282705830281377062101761109754057816348e-13 +/- 2.49e-53]
+hat_c^2/P^2 [0.0002652341138898903391726931533258036639508 +/- 3.67e-44]
+hat_c^2/(P^2+T^2) [0.0001304748392503446537307563209094367303311 +/- 5.24e-45]
+counterexample_status=CONFIRMED; no numerical correction
+first_tail_all_abs_identity_errors_sum_upper_bound=[4.77385873751e-71 +/- 1.60e-83]
+ALL_DECLARED_CHECKS_PASS

@@ -89,8 +89,20 @@ one must prove, for some `kappa>0` and all sufficiently large `a`,
 Generic positivity, positive entries, continuum spectral noncompression, and
 normal-diagonal mass alone do not imply this estimate. Literal self-pairs are
 `o(log^-3 a)`, while the canonical gcd factorization merely leaves an
-uncontrolled four-factor Möbius sign. Every fixed finite old family, and only
-the explicit endpoint layers
+uncontrolled four-factor Möbius sign. Cycle 46 proves exact finite-prime
+inclusion-exclusion grouping and a grouped continuum normalizer, but the
+physical vector is unchanged, a certified finite grouped diagonal is
+nonmonotone under adjoining primes, and an extreme primorial moves all
+unresolved cancellation into one column. It also isolates the initial
+non-wrapped interval of every temporal row as an exact
+Chebyshev/reciprocal-Möbius expression. For a certified physical row at
+`a=512,q=742`, only `0.0265234%` of the initial-block energy remains, with
+ratio `hat_c(q)^2/P(q)^2=0.0002652341...`. Therefore no universal finite
+pointwise rule can retain a grouped diagonal, initial-block square, or
+initial-plus-tail diagonal without its signed cross term. See
+`cycle-46-finite-prime-grouping-and-initial-block-audit.md`.
+
+Every fixed finite old family, and only the explicit endpoint layers
 
 \[
  d\le a^{1/2-\varepsilon},\qquad
@@ -99,10 +111,18 @@ the explicit endpoint layers
 \]
 
 are removed at `o(log^-3/2 a)` in norm; no `o(log^-3 a)` energy removal follows
-without an independent upper bound. The estimate above remains open. If
-proved, it gives only a trace-based moving-projection lower bound of order
-`log^-2 a`; Burnol's cited result is a budget lower bound, not the upper bound
-needed to close the completed square. No RH consequence is presently proved.
+without an independent upper bound. The estimate above remains open. A second
+exact sufficient formulation now retains the complete initial/tail cross term:
+on one fixed interval prove `||P_a||^2 >> log(a)^-3` and
+`<P_a,T_a> >= -(1-epsilon)||P_a||^2` for fixed `epsilon>0`, where the tail is
+the complete gcd-grouped finite-Abel expression from Cycle 46. The certified
+row rules out universal finite pointwise and sign-blind diagonal lower bounds;
+it does not refute an eventual asymptotic vector cross-term theorem.
+
+If the original packet estimate is proved, it gives only a trace-based
+moving-projection lower bound of order `log^-2 a`; Burnol's cited result is a
+budget lower bound, not the upper bound needed to close the completed square.
+No RH consequence is presently proved.
 
 ## Earlier route context through Cycle 44
 

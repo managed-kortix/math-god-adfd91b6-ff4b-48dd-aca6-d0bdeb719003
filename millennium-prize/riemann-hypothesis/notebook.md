@@ -4361,3 +4361,94 @@ liminf_(a->infinity) log(a) D_a(I) / Delta_a(I) > 0.
 See `cycle-45-correlation-dispersion-census-audit.md` and the committed JSON,
 validator, exact runtime manifest, tests, independent verifier, and rational
 sign audit named there.
+
+## Cycle 46: finite-prime grouping and initial non-wrapped block
+
+For any finite squarefree `P`, the physical divisor sum admits the exact
+inclusion-exclusion regrouping
+
+\[
+ \sum_{d\in\mathcal D_a}\mu(d)W_{\bullet d}
+ =\sum_{\substack{r<2a\\\mu(r)^2=1\\(r,P)=1}}
+   \mu(r)B_{P,r},
+ \qquad
+ B_{P,r}=\sum_{\substack{s\mid P\\sr<2a}}\mu(s)W_{\bullet,sr}.
+\]
+
+For fixed `P`, the grouped normal diagonal has the exact normalization
+
+\[
+ (\log a)^2\Delta_{P,a}(I)\to
+ A_{P,\theta,I}
+ =\frac6{\pi^2}\rho_P
+  \int_I\int_0^2 F_{P,\theta}(u,v)^2\,dv\,du>0,
+\]
+
+where
+
+\[
+ \rho_P=\frac6{\pi^2}\prod_{p\mid P}\frac p{p+1},
+ \qquad
+ F_{P,\theta}(u,v)=\sum_{s\mid P}\mu(s)\overline K_\theta(u,sv).
+\]
+
+The row and rough-column densities are different: the product density is
+`(6/pi^2) rho_P`, not `rho_P^2`.  The zero-extended kernel handles every
+support threshold `sv=2`; near `v=0`, one prime cancels the logarithmic
+singularity to a nonzero constant, while at least two primes cancel its
+constant term as well.  For growing `P`, an explicit quantitative tracking
+theorem holds in conservative ranges including `P<=log(a)^(1-eta)` and a
+primorial range
+
+\[
+ z\le\left(\frac1{2\log2}-\eta\right)
+ \log\log a\,\log\log\log a.
+\]
+
+The finite grouped diagonal is not monotone under adjoining primes: at
+`theta=2/5`, `a=64`, and `I=[1,3/2]`, the certified values satisfy
+`Delta_(6,64)<Delta_(2,64)<Delta_(10,64)`.  This finite ordering does not
+assert nonmonotonicity of the continuum constants.  At the extreme primorial,
+grouping absorbs the entire physical Mobius contraction into one column and
+becomes tautological.  Thus finite-prime grouping changes coordinates and
+normalization but supplies no selected-vector coercivity.
+
+Independently, every physical squarefree row has the exact temporal
+contraction
+
+\[
+ \widehat c_a(q)=
+ \sum_{n=\max(a,q)}^{2a-1}w_nA_nb_q(n)
+ \langle\rho_q,Z_n\rangle,
+\]
+
+with `U_n` retaining its affine `chi` term.  The initial non-wrapped interval
+`1<=t<q` is explicit:
+
+\[
+ \int_1^q\rho_q(t)Z_n(t)\frac{dt}{t^2}
+ =\frac{q-1}{q}s_n+
+  \frac1{q\log n}\sum_{m<q}\Lambda(m)\log\frac qm.
+\]
+
+The remaining tail has an exact squarefree gcd decomposition and finite
+summation-by-parts form in the coprime Mertens paths.  It retains the affine
+term, the restricted correction `-s_n/q`, every divisor sign, and the full
+Vasyunin kernel.  Source support orthogonality does not remove the row-space
+cross term.  At `a=512,q=742`, a 256-bit certificate finds that the tail
+cancels the initial block so strongly in energy that
+
+\[
+ \widehat c_a(q)^2/P_a(q)^2=0.0002652341\ldots.
+\]
+
+Hence none of the initial-block square, its Chebyshev square, or the
+initial-plus-tail diagonal gives a universal finite pointwise lower bound.  A
+safe sufficient theorem must retain the cross term, for example
+`||P_a||^2 >> log(a)^-3` together with
+`<P_a,T_a> >= -(1-epsilon)||P_a||^2`; neither premise is proved.
+
+The exact formulas, growing-`P` qualifications, counterexamples, literature
+boundary, and fail-closed verifier are in
+`cycle-46-finite-prime-grouping-and-initial-block-audit.md`.  No moving
+projection theorem, budget closure, or RH result is claimed.

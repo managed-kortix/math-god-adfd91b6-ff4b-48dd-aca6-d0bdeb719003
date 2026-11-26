@@ -23,7 +23,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   certified through `N=16`; cellwise positivity is explicitly false, so the
   exact Abel identities reduce grouped cells to cumulative signed primitives,
   while finite audits falsify every fixed local-window/pairing strategy; the
-  the apparent initial Chebyshev reserve is proved to cancel at leading order;
+  apparent initial Chebyshev reserve is proved to cancel at leading order;
   drift-free cells remove artificial Abel drift but absolute tail bounds remain
   enormous; this led to a correlation identity for the truncated Möbius
   endpoint transform weighted by `1/[k(k+1)]`; its positive max kernel
@@ -49,7 +49,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
    coefficient comparison is gauge-dependent, while the invariant pair-average
    recurrence leaves an unsigned mixed correlation and an affine prime jump of
    asymptotic size `1/(2 log(2N))`; finite shell decrements change sign, so the
-   the invariant correlation is now exactly centered into slope defects,
+   invariant correlation is now exactly centered into slope defects,
    linear Chebyshev errors, and two quadratic Chebyshev channels; parity leaves
    three odd-Mertens blocks rather than one, while pair-average and jump prime
    diagonals reinforce to order `1/log N`; this led to a cancellation target
@@ -103,8 +103,20 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   `0.0411209...` on `[1,3/2]` at `a=1024`, but is nonmonotone and finite only;
   the surviving open checkpoint is
   `liminf log(a) D_a(I)/Delta_a(I)>0`, equivalently
-  `D_a(I) >> log^-3 a`; no moving projection limit, completed-square budget,
-  or RH result is proved
+  `D_a(I) >> log^-3 a`; Cycle 46 now gives exact finite-prime
+  inclusion--exclusion grouping without changing the physical vector. For
+  every fixed squarefree `P`, `log(a)^2 Delta_(P,a)(I) ->
+  A_(P,theta,I)>0`; for growing `P=P(a)`, only the explicit quantitative
+  tracking theorem and its stated ranges are justified, and the retention
+  target must carry `A_(P,theta,I)`. The extreme primorial grouping is
+  tautological. The exact temporal split isolates an explicit initial
+  non-wrapped block and its complete signed tail. The 256-bit row
+  `a=512,q=742` has `hat_c_a(q)^2/P_a(q)^2=0.0002652341...`, ruling out
+  universal finite separate-square, Chebyshev-square, and sign-blind diagonal
+  lower bounds but not an asymptotic signed-cross-term estimate. The finite
+  ordering `Delta_(6,64)<Delta_(2,64)<Delta_(10,64)` proves only finite
+  nonmonotonicity. The surviving checkpoint remains the same; no moving
+  projection limit, completed-square budget, or RH result is proved
 - **parallel scouts:** a read-only bounded re-audit completed on 2026-11-25
   and established no new dossier checkpoint. It rechecked five prior, special,
   or abstract statements: (i) for the standard period-normalized ordinary
@@ -122,8 +134,8 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   projection relative to a fixed finite-rank exhaustion, is a sufficient
   abstract spectral-edge transfer criterion. This criterion is not verified
   for a Yang--Mills cutoff family, and strong-resolvent convergence alone is
-  insufficient. These are not new Cycle 45 or Clay results.
-- **cycle:** 45
+  insufficient. These are not new Cycle 46 or Clay results.
+- **cycle:** 46
 - **announcements:** none
 
 ## immutable target list
@@ -142,28 +154,39 @@ waiting process.
 
 ## next exact steps
 
-1. Attack the exact Cycle 45 arithmetic checkpoint on a fixed nondegenerate
-   compact interval `I` inside `(0,2)`: with
-   `D_a(I)=||M_a x_a||_2^2` and `Delta_a(I)=||M_a||_F^2`, prove
-   `liminf_(a->infinity) log(a) D_a(I)/Delta_a(I)>0`.  Equivalently, prove the
-   weighted two-point Möbius packet inequality (11.3) of
-   `millennium-prize/riemann-hypothesis/moving-gram-kernel-audit-2026-11-25.md`.
-   Retain the affine column and every
-   off-diagonal sign. The middle-column reduction is only an
-   `o(log^-3/2 a)` norm statement and must not be squared without a separate
-   upper bound. Even success gives only a trace-based moving-projection lower
-   bound of order `log^-2 a`; require constants and an appropriate
+1. Attack the surviving arithmetic checkpoint on one fixed nondegenerate
+   compact interval `I` inside `(0,2)`. Either prove the weighted two-point
+   Möbius packet inequality (11.3) of
+   `millennium-prize/riemann-hypothesis/moving-gram-kernel-audit-2026-11-25.md`,
+   or prove the target-scale vector bounds
+   `||P_a||^2 >= c_0 log(a)^-3` and
+   `<P_a,T_a> >= -(1-epsilon)||P_a||^2` for fixed
+   `c_0,epsilon>0`. In the second route retain the complete tail
+   (6.1)--(6.2), the affine column, exact gcd restriction, every endpoint and
+   Möbius sign, and the full Vasyunin kernel. A universal finite pointwise row
+   bound or separate normal, initial, tail, or Chebyshev diagonal does not
+   suffice. The middle-column reduction is only an `o(log^-3/2 a)` norm
+   statement and must not be squared without a separate upper bound. Even
+   success gives only a trace-based moving-projection lower bound of order
+   `log^-2 a`; require constants and an appropriate
    `N_theta(a,2a)=O(log^-2 a)` upper bound before claiming a physical budget.
-2. Treat `kappa/log a` only as a finite diagnostic: its post-loss effective mass
+2. If finite-prime grouping is used, keep the `P` regime explicit. For fixed
+   `P`, use `Delta_(P,a)` only as an equivalent normalization of the still-open
+   checkpoint. For growing `P=P(a)`, use the quantitative estimate (4.4),
+   verify conditions (4.5) and, for a relative asymptotic, (4.6), and retain
+   `A_(P,theta,I)` in the target. Treat the `a=64` ordering and the
+   `a=512,q=742` row only as finite diagnostics and finite falsifiers; infer no
+   eventual monotonicity, liminf, coercivity, or RH consequence from them.
+3. Treat `kappa/log a` only as a finite diagnostic: its post-loss effective mass
    is provably summable under polynomial stopping.  Search instead for an
    explicit fixed subcritical chained-block coefficient (the certified dyadic
    data currently support `4/5`) or another factor whose effective mass
    diverges, while labeling any such physical theorem RH-sufficient.
-3. Use the completed finite-zero folding only with one common cutoff and signed
+4. Use the completed finite-zero folding only with one common cutoff and signed
    affine/endpoint remainder: its exact discrete zero block is positive and
    cannot be separated termwise, while the continuous negative anti-diagonal
    belongs to a different incomplete Mellin representation.
-4. Continue the bounded scouts only at their remaining gates: BSD exact lower
+5. Continue the bounded scouts only at their remaining gates: BSD exact lower
    cyclotomic moments and the leading-term transfer; Hodge a noncircular
    generic-cycle seed; Navier--Stokes comparison of the signed diagonal-mode
    pressure variation with the viscous term; P versus NP a direct-sum theorem
@@ -171,10 +194,27 @@ waiting process.
    spectral-edge theorem not assumed through the merely sufficient finite-rank
    tightness criterion. Do not promote the completed bounded checkpoints to
    Millennium claims.
-5. Rotate only at a proved checkpoint, decisive falsification, or documented
+6. Rotate only at a proved checkpoint, decisive falsification, or documented
    strategic review.
 
 ## last ticks
+
+- 2026-11-26: Cycle 46 derived exact finite-prime inclusion--exclusion grouping
+  of the moving Möbius--Vasyunin columns, a quantitative growing-`P` tracking
+  theorem with explicit absolute and relative ranges, and an exact temporal
+  contraction with gcd-grouped finite Abel summation and an explicit initial
+  non-wrapped Chebyshev/reciprocal-Möbius block. For fixed squarefree `P`,
+  `log(a)^2 Delta_(P,a)(I) -> A_(P,theta,I)>0`; at extreme primorial size the
+  grouping is tautological. The accompanying fail-closed 256-bit verifier binds
+  its local source closure before import, reproduces byte for byte in the
+  pinned runtime, checks the declared exact finite identities, certifies
+  `Delta_(6,64)<Delta_(2,64)<Delta_(10,64)`, and finds at
+  `a=512,q=742` that
+  `hat_c_a(q)^2/P_a(q)^2=0.0002652341138898903...`. These are finite
+  diagnostics and counterexamples to universal separate-diagonal lower bounds,
+  not asymptotic estimates. The surviving checkpoint remains
+  `liminf log(a)D_a(I)/Delta_a(I)>0`; no moving-projection theorem,
+  completed-square budget, or RH result is proved.
 
 - 2026-11-25: Cycle 45 completed and independently re-audited a fail-closed
   fixed-strength correlation-dispersion census at 192-bit Arb precision for
@@ -218,7 +258,7 @@ waiting process.
   sufficient abstract spectral-edge transfer criterion under strong-resolvent
   convergence on a common identified vacuum complement. The last criterion is
   not verified for a Yang--Mills cutoff family, and strong-resolvent convergence
-  alone is insufficient. These are not new Cycle 45 or Clay results.
+  alone is insufficient. These are not new Cycle 46 or Clay results.
 
 - 2026-11-21: Cycle 44 certified the fixed-`theta=2/5` affine-free boundary
   envelope on dyadic starts `32,64,128,256,512`.  The full current span fails at

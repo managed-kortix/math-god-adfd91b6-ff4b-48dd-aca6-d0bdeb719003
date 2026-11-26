@@ -41,3 +41,18 @@
     divisor columns, and the outer relation
     `hat_c(q)=mu(q) CompensatedBlock.correlation(q)`; adding another `mu(d)` to
     the already signed legacy Gram rows recreates the double-signing error.
+13. Finite-prime grouping preserves the physical vector but changes the normal
+    diagonal. The product mesh density is `(6/pi^2) rho_P`; the certified
+    finite grouped diagonal is not monotone under adjoining primes, but this
+    does not by itself assert nonmonotonicity of the continuum constants.
+    Fixed-`P` asymptotics may not be inserted for arbitrary `P=P(a)`. At
+    extreme primorial size the grouping is tautological because all
+    cancellation sits in one grouped column.
+14. The initial non-wrapped interval and its tail are source-orthogonal before
+    applying the common row functional, but their scalar row contractions are
+    not orthogonal. A physical certified row has a large negative cross term.
+    Never retain the initial square, tail square, Chebyshev square, or their
+    diagonal sum as a lower bound without controlling every cross term.
+15. In the gcd-grouped temporal formula, `U_n` includes the affine `chi`, the
+    row is squarefree, the coprime condition is `(r,q)=1`, and the restricted
+    correction is `-s_n/q`. Dropping any of these changes the identity.
