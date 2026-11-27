@@ -1,0 +1,21 @@
+certificate=cycle50-compatible-floor-gauge-obstruction
+canonical_command=rm -f /tmp/cycle50-floor-gauge-obstruction.out && env -u PYTHONPYCACHEPREFIX PYTHONDONTWRITEBYTECODE=1 LC_ALL=C uv run --isolated --no-project --python 3.12.13 --with python-flint==0.9.0 python -I -B millennium-prize/riemann-hypothesis/cycle50_floor_gauge_obstruction.py > /tmp/cycle50-floor-gauge-obstruction.out && cmp /tmp/cycle50-floor-gauge-obstruction.out millennium-prize/riemann-hypothesis/cycle50-floor-gauge-obstruction.out
+precision_bits=192
+runtime=CPython-3.12.13 python-flint-0.9.0 FLINT-3.6.0
+script_sha256=7a5ffa3d37c5335fe7e48563abc862a150586ace511a3df837d7ce709daa46ba
+closure_sha256=a36fb52a5fcd50a3bfff0f18fd4980a12a7d30dca08e445eabda16cfa5e9a4e5
+theta=2/5
+gauge=single compatible floor gauge
+restricted_gram=full Vasyunin minus exact 1/(qd)
+domains=physical squarefree rows x squarefree columns 1<=d<=2a-1
+scale=3 rows=3 columns=4 max_identity_residual=[6.28909973856116350108589656819459429877679590577e-57 +/- 3.97e-105]
+scale=8 rows=10,11 columns=11 max_identity_residual=[1.47580765490457506170619182967416475432402173629e-56 +/- 2.04e-104]
+obstruction_scale=3 row=3 columns=3,5
+b_3=[0.0258580625152147043477497190515758161552304373663 +/- 2.40e-50]
+c_3=[0.0353739945149817850602171067220783233422476112030 +/- 1.85e-50]
+b_5=[0.00326584000774741903855686738157835684914929501925 +/- 2.22e-51]
+c_5=[0.00429892488072645463337652407439345819276867413104 +/- 1.36e-51]
+wedge=[-4.36393820682869110953254005638062463770295529100e-6 +/- 2.35e-54]
+principal_determinant=[-4.76098916825480300610247341488696904258380824323e-12 +/- 4.88e-60]
+scope=finite exact identities and interval-certified obstruction only
+result=PASS
