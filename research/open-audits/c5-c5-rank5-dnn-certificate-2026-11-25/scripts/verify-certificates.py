@@ -19,11 +19,13 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 ATLAS = ROOT / "sources" / "networkx-3.7-atlas.dat.gz"
+NETWORKX_LICENSE = ROOT / "THIRD-PARTY-NETWORKX-3.7-LICENSE.txt"
 ENUM = ROOT / "data" / "atlas-rank5-enumeration.json"
 CERT = ROOT / "data" / "atlas-rank5-rational-gram-certificates.json"
 WITNESS = ROOT / "data" / "n8-multiblock-route-witness.json"
 MANIFEST = ROOT / "SHA256SUMS"
 EXPECTED_ATLAS_SHA256 = "73fc416df0164923607751cb759f4ae81deb5f6550bf25be59c86de3b747e41d"
+EXPECTED_NETWORKX_LICENSE_SHA256 = "6025f323ea29dc2f0ee0abd9523bf910186f55b0e148e6ebf646c55566278e2e"
 
 
 def require(condition: bool, message: str) -> None:
@@ -151,6 +153,9 @@ def verify_manifest():
         require(path.is_file() and not path.is_symlink(), f"manifest member is not a regular file: {name}")
         require(path.stat().st_size > 0, f"manifest member is empty: {name}")
         require(sha256(path) == expected[name], f"manifest hash mismatch: {name}")
+    require(NETWORKX_LICENSE.name in seen, "NetworkX redistribution license missing from manifest")
+    require(sha256(NETWORKX_LICENSE) == EXPECTED_NETWORKX_LICENSE_SHA256,
+            "NetworkX 3.7 redistribution license SHA-256 mismatch")
     return len(seen)
 
 
@@ -992,6 +997,7 @@ def report():
     lines = [
         "PASS exact rank-5 / (C5,C5) DNN candidate-evidence bundle",
         f"strict source lock: {manifest_count} artifacts; SHA256SUMS excluded from itself",
+        "NetworkX 3.7 BSD-3-Clause redistribution license: pinned and verified",
         "conditional on standard Graph Atlas exhaustiveness through n=7: 1253 source graphs",
         "connected beta=5 in pinned source: 153",
         "certified bridge-free cores: 102 = 95 single-positive-block + 7 multiblock",
