@@ -39,8 +39,12 @@ Two refinements will be used without changing (1).
 1. Boundary-opening an actual `K4` at any one of its vertices leaves an actual
    `K3`, with its rooted branches, and hence a positive triangular territory.
 2. If a structural opening territory owns an external cyclic block, keep the
-   complete owner class together. It then has positive rank and nonnegative
-   credit, so it replaces rather than supplements the structural tree debit.
+   complete owner class together. Ownership alone does **not** make its credit
+   nonnegative. Use nonnegative credit only after reconstructing connected rank
+   in `{2,3,4,5,6}` or invoking a separately cited typed rank-one theorem;
+   otherwise charge the universal floor `-1`. The complete class replaces,
+   rather than supplements, the structural tree debit only with that
+   packet-specific typed charge.
 
 ## R331 packet rows
 
@@ -72,14 +76,16 @@ exact residual sieve.
 There are exactly two owner channels in the bridge-free hull.
 
 - If the shared cut lies in `R`, keep the external `K4` with the complete owner
-  class. This territory has positive rank and nonnegative credit, while `F`
-  has credit greater than two.
+  class. The opened `S4` complement is a tree, so this connected territory has
+  rank exactly three and therefore nonnegative credit by the completed
+  tricyclic theorem, while `F` has credit greater than two.
 - If the shared cut lies in `F`, then `R` is a nonempty tree of credit `-1`.
   Boundary-open the external actual `K4`; its other three vertices induce the
   actual `K3`, so that downstream territory is positive.
 
-Thus the worst exact ledger is `>2-1+0>0`. This closes every physical `R43`
-row without charging the coarse `S4` DNN debit.
+Thus the worst exact ledger is `>2-1+0>0`. This closes only the registered
+bridge-free/post-dispatch `R43` packet row, without charging the coarse `S4`
+DNN debit. It does not own omitted actual-bridge complements.
 
 ## R52
 
@@ -96,8 +102,9 @@ worst ledger is `>2-1-1>0`.
 For `R52-K71`, the same six retained unit edges induce the actual attached
 `K4`. The complementary owner territory `U` is the favorable unicyclic packet
 from the exact K71 opening and has positive credit. If `U` owns the theta,
-their complete class has positive rank and nonnegative credit. Otherwise the
-theta first-boundary side costs at most one unit, and the ledger is
+their complete class is connected of rank exactly three and hence has
+nonnegative credit by the completed tricyclic theorem. Otherwise the theta
+first-boundary side costs at most one unit, and the ledger is
 `>2+0-1>0`.
 
 The K22 and K71 statements apply only to the canonical/frontier structural

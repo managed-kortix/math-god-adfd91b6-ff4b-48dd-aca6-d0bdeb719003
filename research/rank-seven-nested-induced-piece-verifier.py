@@ -27,7 +27,7 @@ SOURCES = {
     ),
     "two-debit": (
         ROOT / "positive-square-energy/heptacyclic-general/two-debit-induced-piece-theorem.md",
-        "160955a74a6237a16de9a0b783662ad897d3e8c4b53278acbd68f54793c47872",
+        "5c663bf627633c7ef6b35e12f1900a5b3868e22259b161f8f0e4cb2f7f796550",
     ),
     "k5e-sieve": (
         ROOT / "pentacyclic/research/all-odd-k5e-territory-sieve.py",

@@ -18,7 +18,11 @@ FIXTURE_SHA256 = "08f347f8c3c04dfbd641ca1922b09fbee5c5c58c28332d8fbb4b9b61ea7c62
 SOURCES = {
     "theorem": (
         ROOT / "positive-square-energy/heptacyclic-general/two-debit-induced-piece-theorem.md",
-        "160955a74a6237a16de9a0b783662ad897d3e8c4b53278acbd68f54793c47872",
+        "5c663bf627633c7ef6b35e12f1900a5b3868e22259b161f8f0e4cb2f7f796550",
+    ),
+    "tricyclic": (
+        ROOT / "all-tricyclic-graphs/paper.tex",
+        "4abf3ffa1e09148c060969f4055d878334af9b7358d0764ac42f5e0ffb236b02",
     ),
     "k22": (
         ROOT / "pentacyclic/research/order5-kernel-family-theorem.json",
@@ -67,7 +71,8 @@ def load_json(path):
 def check_sources(sources=None):
     if sources is None:
         sources = SOURCES
-    require(set(sources) == {"theorem", "k22", "k71"}, "source key set changed")
+    require(set(sources) == {"theorem", "tricyclic", "k22", "k71"},
+            "source key set changed")
     for name, (path, expected) in sources.items():
         require(path.is_file(), f"missing source: {name}")
         require(digest(path) == expected, f"source digest changed: {name}")
