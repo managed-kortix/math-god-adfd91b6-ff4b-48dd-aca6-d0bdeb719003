@@ -106,30 +106,37 @@ This bundle proves the following sharply separated statements.
 - `scripts/construct-certificates.py`: deterministic numerical scout followed
   by exact rational stereographic construction. Floats in this script are not
   trusted for a conclusion.
-- `scripts/verify-certificates.py`: dependency-free exact verifier. It rejects
-  duplicate JSON keys and scalar type laundering, verifies the strict source
-  lock, parses the pinned Atlas source directly, and uses only integers and
-  `Fraction`. PSD is certified by checking each stored matrix equals `UU^T`
+- `scripts/verify-certificates.py`: dependency-free exact verifier. Its
+  external `python3 -I -S -B` invocation is the import trust boundary, and an
+  early `sys`-only guard rejects nonisolated execution before shadowable
+  imports. It rejects duplicate JSON keys, unknown top-level evidence fields,
+  and scalar type laundering; independently pins this note and the README;
+  verifies the strict source lock; parses the pinned Atlas source directly;
+  and uses only integers and `Fraction`. PSD is certified by checking each
+  stored matrix equals `UU^T`
   over the rationals, with exact unit diagonal. It also executes the exact K4
   and C3 lower witnesses and one-vertex-sum/block-additivity arithmetic.
-- `scripts/test-hostile-mutations.py`: fail-closed 20-mutation suite for
-  duplicate keys, scalar types, unknown shadow fields, lock closure, license
-  deletion/mutation, conditional Atlas wording, local witnesses, and
-  block/route arithmetic.
+- `scripts/test-hostile-mutations.py`: fail-closed 25-mutation suite, each run
+  through the verifier in both normal and `-O` isolated modes with identical
+  return code/stdout/stderr required, for duplicate keys, scalar types, nested
+  and top-level unknown fields, lock closure, license deletion/mutation,
+  coherently relocked claim-prose changes, conditional Atlas wording, local
+  witnesses, and block/route arithmetic.
 - `SHA256SUMS`: closed source lock over every bundled artifact except itself.
   Self-inclusion is rejected to avoid a circular hash requirement.
 - `output/verify.normal.txt` and `output/verify.optimized.txt`: byte-identical
-  successful outputs under normal Python and `python3 -O`.
+  successful outputs under `python3 -I -S -B` and `python3 -I -S -B -O`.
 
 ## Reproduction
 
-Exact verification needs only Python 3:
+Exact verification needs only Python 3. The flags shown are mandatory:
 
 ```bash
-python3 scripts/verify-certificates.py
-python3 -O scripts/verify-certificates.py
+python3 -I -S -B scripts/verify-certificates.py
+python3 -I -S -B -O scripts/verify-certificates.py
 cmp output/verify.normal.txt output/verify.optimized.txt
-python3 scripts/test-hostile-mutations.py
+python3 -I -S -B scripts/test-hostile-mutations.py
+python3 -I -S -B -O scripts/test-hostile-mutations.py
 ```
 
 To regenerate the rational certificates from the pinned Atlas source:
@@ -137,7 +144,7 @@ To regenerate the rational certificates from the pinned Atlas source:
 ```bash
 uv run --with networkx==3.7 --with numpy==2.5.4 --with scipy==1.18.1 \
   python scripts/construct-certificates.py
-python3 scripts/verify-certificates.py
+python3 -I -S -B scripts/verify-certificates.py
 ```
 
 The constructor's optimizer only locates candidate unit vectors. The verifier

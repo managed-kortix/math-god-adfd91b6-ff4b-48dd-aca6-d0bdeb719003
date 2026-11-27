@@ -1,11 +1,20 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S python3 -I -S -B
 """Dependency-free exact verifier for the rank-5 / (C5,C5) DNN bundle.
 
 No float conversion, numerical eigensolver, optimizer, assert statement, or
-third-party package is used.  Run both normally and with python3 -O; output
-must be byte-identical.
+third-party package is used. Invoke externally with ``python3 -I -S -B`` and
+with ``python3 -I -S -B -O``; output must be byte-identical. Those interpreter
+flags are the trust boundary. This guard runs before any shadowable import.
 """
 from __future__ import annotations
+
+import sys
+
+if not (sys.flags.isolated == 1 and sys.flags.no_site == 1 and
+        sys.flags.dont_write_bytecode == 1 and sys.flags.ignore_environment == 1 and
+        sys.flags.safe_path):
+    sys.stderr.write("FAIL: verifier requires external python3 -I -S -B invocation\n")
+    raise SystemExit(2)
 
 import gzip
 import hashlib
@@ -26,6 +35,8 @@ WITNESS = ROOT / "data" / "n8-multiblock-route-witness.json"
 MANIFEST = ROOT / "SHA256SUMS"
 EXPECTED_ATLAS_SHA256 = "73fc416df0164923607751cb759f4ae81deb5f6550bf25be59c86de3b747e41d"
 EXPECTED_NETWORKX_LICENSE_SHA256 = "6025f323ea29dc2f0ee0abd9523bf910186f55b0e148e6ebf646c55566278e2e"
+EXPECTED_README_SHA256 = "01c23729438b1fb0a724a152f20819adae4de043a9be7cecf7507d6e3bae9ece"
+EXPECTED_CANDIDATE_NOTE_SHA256 = "c78f4b19bbea5f1bde52ce7c225a5a0f084149392e56a97d7051fad62cbf322c"
 
 
 def require(condition: bool, message: str) -> None:
@@ -156,6 +167,10 @@ def verify_manifest():
     require(NETWORKX_LICENSE.name in seen, "NetworkX redistribution license missing from manifest")
     require(sha256(NETWORKX_LICENSE) == EXPECTED_NETWORKX_LICENSE_SHA256,
             "NetworkX 3.7 redistribution license SHA-256 mismatch")
+    require(sha256(ROOT / "README.md") == EXPECTED_README_SHA256,
+            "README claim-boundary SHA-256 mismatch")
+    require(sha256(ROOT / "CANDIDATE-NOTE.md") == EXPECTED_CANDIDATE_NOTE_SHA256,
+            "CANDIDATE-NOTE claim-boundary SHA-256 mismatch")
     return len(seen)
 
 
@@ -373,6 +388,11 @@ def verify_atlas_and_enumeration():
     require([index for index, _, _ in atlas] == list(range(1253)), "Atlas indices are not 0..1252")
 
     enum = load(ENUM)
+    require(isinstance(enum, dict), "enumeration document must be a JSON object")
+    require(set(enum) == {
+        "counts", "filter", "records", "schema",
+        "selected_graph6_source_enumeration", "source",
+    }, "enumeration top-level fields changed")
     require(string(enum.get("schema"), "enumeration.schema") ==
             "graph-atlas-rank5-enumeration-v1", "enumeration schema mismatch")
     require(string(enum.get("filter"), "enumeration.filter") ==
@@ -502,6 +522,10 @@ def verify_atlas_and_enumeration():
 
 def verify_certificates(selected_by_index):
     cert = load(CERT)
+    require(isinstance(cert, dict), "certificates document must be a JSON object")
+    require(set(cert) == {
+        "arithmetic", "claim", "counts", "logic", "records", "schema",
+    }, "certificates top-level fields changed")
     require(string(cert.get("schema"), "certificates.schema") ==
             "rank5-c5-c5-rational-elliptope-certificates-v1",
             "certificate schema mismatch")
@@ -805,6 +829,12 @@ def verify_one_vertex_sum_additivity(blocks, center_n, center_edges):
 
 def verify_n8_witness():
     data = load(WITNESS)
+    require(isinstance(data, dict), "witness document must be a JSON object")
+    require(set(data) == {
+        "center", "center_threshold_test", "claim_boundary",
+        "local_exact_kappa_certificates", "port_invariance",
+        "repeated_port_representative", "schema",
+    }, "witness top-level fields changed")
     require(string(data.get("schema"), "witness.schema") ==
             "rank5-c5-c5-n8-route-witness-v1", "witness schema mismatch")
     require(string(data.get("claim_boundary"), "witness.claim_boundary") ==
@@ -1016,7 +1046,8 @@ def main():
     output = report()
     if sys.flags.optimize == 0 and "--optimized-child" not in sys.argv:
         child = subprocess.run(
-            [sys.executable, "-O", str(Path(__file__).resolve()), "--optimized-child"],
+            [sys.executable, "-I", "-S", "-B", "-O", str(Path(__file__).resolve()),
+             "--optimized-child"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             check=False,

@@ -1,13 +1,20 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S python3 -I -S -B
 """Hostile fail-closed mutation tests for the exact certificate verifier."""
 from __future__ import annotations
+
+import sys
+
+if not (sys.flags.isolated == 1 and sys.flags.no_site == 1 and
+        sys.flags.dont_write_bytecode == 1 and sys.flags.ignore_environment == 1 and
+        sys.flags.safe_path):
+    sys.stderr.write("FAIL hostile suite: requires external python3 -I -S -B invocation\n")
+    raise SystemExit(2)
 
 import hashlib
 import json
 import os
 import shutil
 import subprocess
-import sys
 import tempfile
 from pathlib import Path
 
@@ -62,11 +69,14 @@ def dump(path: Path, value) -> None:
     path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
-def run(root: Path):
+def run(root: Path, optimized: bool):
     env = os.environ.copy()
-    env["PYTHONDONTWRITEBYTECODE"] = "1"
+    command = [sys.executable, "-I", "-S", "-B"]
+    if optimized:
+        command.append("-O")
+    command.append(str(VERIFIER))
     return subprocess.run(
-        [sys.executable, str(VERIFIER)],
+        command,
         cwd=root,
         env=env,
         stdout=subprocess.PIPE,
@@ -159,6 +169,40 @@ def mutate_unknown_field(root: Path) -> None:
                 lambda value: value["records"][0].__setitem__("attacker_shadow", 5))
 
 
+def mutate_enum_top_level_field(root: Path) -> None:
+    mutate_json(root, "data/atlas-rank5-enumeration.json",
+                lambda value: value.__setitem__("attacker_shadow", 5))
+
+
+def mutate_cert_top_level_field(root: Path) -> None:
+    mutate_json(root, "data/atlas-rank5-rational-gram-certificates.json",
+                lambda value: value.__setitem__("attacker_shadow", 5))
+
+
+def mutate_witness_top_level_field(root: Path) -> None:
+    mutate_json(root, "data/n8-multiblock-route-witness.json",
+                lambda value: value.__setitem__("attacker_shadow", 5))
+
+
+def mutate_readme_scope(root: Path) -> None:
+    path = root / "README.md"
+    original = path.read_bytes()
+    changed = original.replace(
+        b"It is not a\ngraph counterexample", b"It is a\ngraph counterexample", 1)
+    require(changed != original, "README scope mutation target missing")
+    path.write_bytes(changed)
+    rewrite_manifest(root)
+
+
+def mutate_candidate_note_scope(root: Path) -> None:
+    path = root / "CANDIDATE-NOTE.md"
+    original = path.read_bytes()
+    changed = original.replace(b"no lane-closure claim", b"lane-closure claim   ", 1)
+    require(changed != original, "CANDIDATE-NOTE scope mutation target missing")
+    path.write_bytes(changed)
+    rewrite_manifest(root)
+
+
 def mutate_atlas_exhaustiveness_wording(root: Path) -> None:
     mutate_json(root, "data/atlas-rank5-enumeration.json",
                 lambda value: value["source"].__setitem__(
@@ -215,6 +259,15 @@ CASES = (
     ("fraction-bool-laundering", mutate_fraction_bool, "must be a JSON string"),
     ("fraction-noncanonical", mutate_fraction_noncanonical, "not reduced canonical rational text"),
     ("unknown-shadow-field", mutate_unknown_field, "fields changed"),
+    ("enumeration-top-level-shadow", mutate_enum_top_level_field,
+     "enumeration top-level fields changed"),
+    ("certificates-top-level-shadow", mutate_cert_top_level_field,
+     "certificates top-level fields changed"),
+    ("witness-top-level-shadow", mutate_witness_top_level_field,
+     "witness top-level fields changed"),
+    ("readme-scope-prose", mutate_readme_scope, "README claim-boundary SHA-256 mismatch"),
+    ("candidate-note-scope-prose", mutate_candidate_note_scope,
+     "CANDIDATE-NOTE claim-boundary SHA-256 mismatch"),
     ("atlas-conditional-wording", mutate_atlas_exhaustiveness_wording,
      "exhaustiveness must remain explicitly conditional"),
     ("k4-lower-witness", mutate_k4_lower_witness, "K4 lower-witness description changed"),
@@ -230,21 +283,35 @@ def copy_fixture(destination: Path) -> None:
     shutil.copytree(ROOT, destination, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
 
 
+def require_mode_identity(normal, optimized, label: str) -> None:
+    require(normal.returncode == optimized.returncode,
+            f"{label}: normal/-O return codes differ")
+    require(normal.stdout == optimized.stdout,
+            f"{label}: normal/-O stdout differs")
+    require(normal.stderr == optimized.stderr,
+            f"{label}: normal/-O stderr differs")
+
+
 def main() -> None:
-    baseline = run(ROOT)
+    baseline = run(ROOT, False)
+    baseline_optimized = run(ROOT, True)
+    require_mode_identity(baseline, baseline_optimized, "baseline")
     require(baseline.returncode == 0, "baseline verifier failed: " + baseline.stderr)
+    require(baseline.stderr == "", "baseline verifier wrote to stderr")
     for name, mutator, expected_error in CASES:
         with tempfile.TemporaryDirectory(prefix="c5-c5-hostile-") as temporary:
             fixture = Path(temporary) / "bundle"
             copy_fixture(fixture)
             mutator(fixture)
-            result = run(fixture)
+            result = run(fixture, False)
+            result_optimized = run(fixture, True)
+            require_mode_identity(result, result_optimized, name)
             require(result.returncode != 0, f"{name}: hostile mutation was accepted")
             require(expected_error in result.stderr,
                     f"{name}: wrong failure; wanted {expected_error!r}; got {result.stderr!r}")
             require("PASS exact" not in result.stdout, f"{name}: failure emitted PASS")
-            print(f"PASS hostile mutation rejected: {name}")
-    print(f"PASS hostile suite: {len(CASES)} mutations rejected fail-closed")
+            print(f"PASS hostile mutation rejected in normal/-O modes: {name}")
+    print(f"PASS hostile suite: {len(CASES)} mutations rejected fail-closed in normal/-O modes")
 
 
 if __name__ == "__main__":

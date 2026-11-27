@@ -3,18 +3,26 @@
 This is a read-only research handoff integrated as candidate computational
 evidence. Start with `CANDIDATE-NOTE.md`.
 
-Run:
+Run only in Python isolated, no-site, no-bytecode mode:
 
 ```bash
-python3 scripts/verify-certificates.py
-python3 -O scripts/verify-certificates.py
+python3 -I -S -B scripts/verify-certificates.py
+python3 -I -S -B -O scripts/verify-certificates.py
 cmp output/verify.normal.txt output/verify.optimized.txt
-python3 scripts/test-hostile-mutations.py
+python3 -I -S -B scripts/test-hostile-mutations.py
+python3 -I -S -B -O scripts/test-hostile-mutations.py
 ```
 
+The external `-I -S -B` invocation is the import trust boundary. The verifier
+and hostile suite reject a nonisolated invocation before any shadowable import.
+The hostile suite itself executes every verifier mutation in both normal and
+`-O` modes and requires identical return code, stdout, and stderr per mutation.
 `SHA256SUMS` is a strict closed lock over every bundled file except itself; the
 verifier rejects missing, extra, duplicate, unsafe, changed, or self-referential
-members. The Atlas-through-order-seven conclusion is conditional on the
+members. The verifier also independently pins the exact SHA-256 of this README
+and `CANDIDATE-NOTE.md`, so coherent manifest relocking cannot alter their
+claim-boundary prose. Those prose digests live only in the verifier, avoiding a
+digest cycle. The Atlas-through-order-seven conclusion is conditional on the
 standard Graph Atlas source being exhaustive through order seven.
 
 ## Vendored source provenance and license
