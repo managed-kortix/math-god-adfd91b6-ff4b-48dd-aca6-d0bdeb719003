@@ -1,0 +1,27 @@
+certificate=cycle50-compatible-delta-gauge-obstruction
+canonical_command=rm -f /tmp/cycle50-delta-gauge-obstruction.out && env -u PYTHONPYCACHEPREFIX PYTHONDONTWRITEBYTECODE=1 LC_ALL=C uv run --isolated --no-project --python 3.12.13 --with python-flint==0.9.0 python -I -B millennium-prize/riemann-hypothesis/cycle50_delta_gauge_obstruction.py > /tmp/cycle50-delta-gauge-obstruction.out && cmp /tmp/cycle50-delta-gauge-obstruction.out millennium-prize/riemann-hypothesis/cycle50-delta-gauge-obstruction.out
+precision_bits=256
+runtime=CPython-3.12.13 python-flint-0.9.0 FLINT-3.6.0
+script_sha256=3f584e0c16821d960ed6ca767bf3c6cb1fffcf86ac2388931bf8681b18498be5
+closure_sha256=1d6b2fa1fd2a028e07f3c434840226f9c314bd736efe61f716c9a4358119ce3a
+parameters=theta=2/5 a=3 q=3 M=5 current_columns=3,5
+gauge=compatible delta gauge W_B and W_C^delta
+restricted_gram=full Vasyunin minus exact 1/(qd)
+selected_columns=d=1,...,5 with d=1 affine packet retained
+direct_gram_brackets=PASS cells=100000 pairs=5 tail_bound=1/100001
+finite_identities=PASS cumulative_floor_cells=12 integrated_prefix_collapses=3 delta_tail_columns=5 original_selected_contractions=3
+d1_affine_packet=[-0.03046623170026934612170609209727771443779393224803454572184646625 +/- 4.40e-66]
+d1_W_B=[-0.04729903509179569200016525413082571882323512287056565193285550052 +/- 3.28e-66]
+d1_W_C_delta=[-0.04498469108289022918435508815114978621369565874222452429760056452 +/- 1.63e-66]
+W_B_d3=[0.04785796445561831868595306028222903599783610018417676539546926583 +/- 2.07e-66]
+W_C_delta_d3=[0.06584022621525113118192319881935603778004154345101608711977791201 +/- 2.14e-66]
+W_B_d5=[0.007372156589521812266269549747474561268044937874278431850811441816 +/- 3.35e-67]
+W_C_delta_d5=[0.009464412186358339258486337044502766622631615186492201403661984623 +/- 2.23e-67]
+wedge=[-3.243695554031213765374108674164725682092187938476254663594431918e-5 +/- 5.92e-70]
+principal_determinant=[-2.630390211810465704984041301337685155720932701470393747017638997e-10 +/- 2.47e-74]
+selected_B=[-0.1157234048388746563551307679035370211788059020234550314679361269 +/- 4.26e-65]
+selected_C_delta=[-0.1510854832008640760529549184194541897266900734808889160570558394 +/- 1.80e-65]
+selected_H_delta=[-0.03536207836198941969782415051591716854788417145743388458911971252 +/- 4.59e-66]
+physical_selected_contraction=[0.01748412653773058942253656178792173545596356287486204613777261110 +/- 1.56e-66]
+scope=finite exact identities and interval-certified signs only; no asymptotic or RH implication
+result=PASS
