@@ -1,0 +1,10 @@
+certificate=physical-prefix-kernel-complete-monotonicity-failure
+canonical_command=rm -f /tmp/cycle50-kernel-shape-counterexample.out && env -u PYTHONPYCACHEPREFIX PYTHONDONTWRITEBYTECODE=1 LC_ALL=C uv run --isolated --no-project --python 3.12.13 python -I -B millennium-prize/riemann-hypothesis/cycle50_kernel_shape_counterexample.py > /tmp/cycle50-kernel-shape-counterexample.out && cmp /tmp/cycle50-kernel-shape-counterexample.out millennium-prize/riemann-hypothesis/cycle50-kernel-shape-counterexample.out
+runtime=CPython-3.12.13 exact_stdlib_fraction
+script_sha256=d7239ce4dde9348b591f22cbb72ba79e6d3c70244a9ca7838675deddfca957c1
+parameters=theta=2/5 a=4 q=5 n=6 difference=D^3_at_m=2
+log_enclosure=atanh_series exact_fraction terms=200
+D3K_interval=[-0.008804097414090616079618426963744036,-0.008804097414090616079618426963744035]
+certified=-1/100<D3K<-1/125<0
+scope=finite physical counterexample only; no prefix-norm or RH consequence
+status=PASS

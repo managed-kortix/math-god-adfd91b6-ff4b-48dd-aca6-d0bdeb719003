@@ -4747,3 +4747,99 @@ scope boundary are in
 `cycle-49-leading-prefix-annihilation-and-coefficient-kernel.md`.  The
 second-order prefix residual and the complete prefix-tail correlation remain
 open; no physical lower bound or RH result is claimed.
+
+## Cycle 50: one-source collapse and mixed-retention no-go
+
+Cycle 50 collapses the affine prefix packet exactly, but only on its finite
+support.  On every cell `[k,k+1)`, `1<=k<=n`,
+
+\[
+ \sum_{d\le n}\mu(d)\lfloor t/d\rfloor
+ =\sum_{j\le k}\sum_{d\mid j}\mu(d)=1,
+\]
+
+so `1+sum_(d<=n) mu(d) rho_d(t)=m_n t` almost everywhere on
+`[1,n+1)` and nowhere beyond is asserted.  Pairing with `rho_q` gives
+
+\[
+ P_{q,n}(0)+\sum_{d\le n}\mu(d)P_{q,n}(d)
+ =m_n\mathfrak a_{q,n},
+\]
+
+with `P_(q,n)(0)` distinct from
+`mathfrak a_(q,n)=n/q-log((n+1)/q)`.  Therefore
+
+\[
+ B_a(q)=\sum_{d=1}^{2a-1}\mu(d)W_B(q,d)
+\]
+
+in a pure-Mobius collapsed gauge.  Convolving once with von Mangoldt further
+gives the one-source identity
+
+\[
+ \mathcal R_{q,n}=-\sum_{m\le n}\mu(m)\mathscr K_{q,n}(m),
+\]
+
+where the affine correction is positive inside `mathscr K` and the outer sum
+has a leading minus.  Its factorial form retains the endpoint `m=n`, where
+`mathscr K_(q,n)(n)>0`.
+
+For current labels, locally uniformly on compact subsets of `[1,2)^2`,
+
+\[
+ a\log(a)W_B(q,d)\to K_B(u,v)
+ =\int_{\max(u,v)}^2
+ \left[J_{\le s}(u,v)-\frac{C-1}{C}\frac{A(u,s)}v\right]\frac{ds}{s}.
+\]
+
+The symmetrized kernel has an exact Brownian-support factorization.  On a
+common square label domain its fiber is bounded below by the two-dimensional
+matrix
+
+\[
+ \begin{pmatrix}
+ 2&-(C+1)/(2C)\\
+ -(C+1)/(2C)&1/C
+ \end{pmatrix},
+\]
+
+whose determinant is `[8C-(C+1)^2]/(4C^2)`.  It is strictly positive in the
+physical range `1<C<2`.  This proves strict finite-set positivity below label
+2, weighted-L2 injectivity when there is no atom at 2, compactness, and
+noncoercivity only in infinite dimension.
+
+This square PSD theorem does not govern physical retention.  The compatible
+full delta gauge has current kernel
+
+\[
+ K_C^\delta(u,v)=\frac1C\log\frac2{\max(u,v)}J_\infty(u,v),
+\]
+
+and the retention normal matrix is the mixed cross product
+`(W_B)^T W_C^delta`, with a difference-of-Grams factorization.  A standalone
+256-bit Arb certificate at `theta=2/5,a=3,q=3`, using current columns `d=3,5`,
+certifies its symmetrized principal determinant
+
+\[
+ -2.630390211810465704984041301337685\ldots\times10^{-10}<0.
+\]
+
+The selected physical contraction at that scale is nevertheless positive.
+An independent compatible floor gauge gives another negative minor and
+reconstructs all prefix/tail/full identities at `a=3,8`; its individual current
+columns have no finite `a log a` limit because the redistributed affine packet
+is larger by one logarithm.
+
+Finally, an exact rational certificate in the physical cell
+`a=4,q=5,n=6,theta=2/5` proves
+
+\[
+ D^3\mathscr K(2)=-0.008804097414090616\ldots<0,
+\]
+
+so complete monotonicity in the one-source index is false.  The surviving
+checkpoint is the weighted-Mobius noncompression estimate for the full
+one-source sum together with a separate mixed-retention estimate.  No prefix
+norm lower bound, retention theorem, completed-square budget, or RH result is
+proved.  Full details and replay commands are in
+`cycle-50-one-source-prefix-kernel-and-retention-obstruction.md`.

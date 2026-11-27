@@ -222,6 +222,45 @@ selected-Mobius quadratic-form theorem, not a consequence of sign-stripped
 operator spectrum or normal diagonal mass.  See
 `cycle-49-leading-prefix-annihilation-and-coefficient-kernel.md`.
 
+Cycle 50 sharpens that frontier by eliminating the separate affine prefix
+coordinate.  The finite cumulative-floor identity gives an exact pure-Mobius
+collapsed gauge
+
+\[
+ B_a(q)=\sum_{d=1}^{2a-1}\mu(d)W_B(q,d),
+\]
+
+and a second convolution gives the one-source formula
+
+\[
+ B_a(q)=-\sum_{m=1}^{2a-1}\mu(m)V_a(q,m).
+\]
+
+The current-label limit of `a log(a) W_B` is explicit.  Its symmetric part is
+strictly positive on common square label domains below `2` throughout the
+physical parameter range.  This is useful structure, but it does not select
+the Mobius phase and is compact rather than coercive in infinite dimension.
+Moreover, exact arithmetic closes two tempting routes:
+
+- a physical rational certificate at `a=4,q=5,n=6` disproves complete
+  monotonicity of the one-source kernel;
+- a compatible 256-bit delta-gauge certificate at `a=3` proves that the
+  symmetrized prefix/full cross-kernel has a negative current-column principal
+  minor.
+
+Thus prefix square PSD cannot imply physical retention.  The honest next
+lemma is the weighted-Mobius noncompression estimate
+
+\[
+ \sum_{q\in\mathcal Q_a}
+ \left|\sum_m\mu(m)V_a(q,m)\right|^2\gg(\log a)^{-3},
+\]
+
+plus a separate selected estimate for the mixed delta-gauge cross form.  Any
+dual row-test construction must supply an arithmetic phase; Cauchy alone is
+tautological.  See
+`cycle-50-one-source-prefix-kernel-and-retention-obstruction.md`.
+
 If the original packet estimate is proved, it gives only a trace-based
 moving-projection lower bound of order `log^-2 a`; Burnol's cited result is a
 budget lower bound, not the upper bound needed to close the completed square.

@@ -118,3 +118,31 @@
     Chebyshev-error/reciprocal-Mobius packet.  PNT-sized one-point upper bounds,
     fixed-shift correlation theorems, generic PSD, or a local continuum kernel
     do not prove its every-scale `L^2` lower bound or its prefix-tail retention.
+30. The Cycle 50 collapse `1+sum_(d<=n)mu(d)rho_d(t)=m_nt` is prefix-only:
+    it holds almost everywhere on `[1,n+1)` by the cumulative identity
+    `sum_(d<=k)mu(d)floor(k/d)=sum_(j<=k)sum_(d|j)mu(d)=1`.  Never replace the
+    last expression by `sum_(d|k)mu(d)=1`, and never extend the collapse into a
+    full Vasyunin integral.
+31. In the one-source identity, the affine term is plus inside
+    `mathscr K_(q,n)(m)`, the outer Mobius sum has a leading minus, and the
+    endpoint `m=n` is nonzero.  The affine integrals `P_(q,n)(0)` and
+    `mathfrak a_(q,n)` are different quantities.
+32. The collapsed current kernel `K_B` is nonsymmetric.  Only its symmetric
+    part on one common square label domain has a PSD order.  The correct fiber
+    measure is `ds/s^2`; the collapse correction has a positive cross term;
+    label `2` is a zero row; and compact injectivity implies noncoercivity only
+    when the underlying `L^2` space is infinite-dimensional.
+33. The physical retention matrix is the mixed cross product
+    `(W_B)^T W_C^delta`, not the square prefix kernel.  It has a Krein
+    difference-of-Grams factorization, and a 256-bit compatible certificate at
+    `a=3` gives a strictly negative current-column principal minor.  Prefix PSD
+    therefore cannot be transferred to retention.
+34. Individual compatible floor-gauge columns have no finite `a log a`
+    current-label limit: their redistributed affine prefix contains a leading
+    `log(a)/u` term.  The selected Mobius sum may cancel it, but that does not
+    justify columnwise convergence.  Use the compatible delta gauge for the
+    entrywise full limit.
+35. Complete monotonicity of the one-source kernel is false in the physical
+    cell `a=4,q=5,n=6,theta=2/5`; a rigorous rational certificate has
+    `D^3 mathscr K(2)<0`.  Ordinary monotonicity remains unproved and would not
+    by itself provide a Mobius anti-cancellation lower bound.

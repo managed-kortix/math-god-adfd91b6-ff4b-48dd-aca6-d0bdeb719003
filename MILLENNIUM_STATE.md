@@ -146,8 +146,20 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   Chebyshev-error/reciprocal-Mobius residual, and an augmented common-source
   coefficient factorization makes its norm and prefix-tail retention selected
   moving Möbius quadratic forms; positive diagonals, PSD, trace, and continuum
-  spectrum do not control them. The preferred stronger checkpoint remains
-  `mathcal Q_a^cp>>log(a)^-3`, with `Q_a^(2)` as fallback. Neither is proved.
+  spectrum do not control them. Cycle 50 now collapses the affine prefix packet
+  exactly into a pure-Möbius gauge and then into one Möbius--von Mangoldt source.
+  Its moving collapsed-prefix kernel has an explicit locally uniform limit whose
+  symmetric part is strictly positive on common square domains throughout the
+  physical parameter range. This positivity does not control the selected
+  Möbius phase or retention: the compatible prefix/full form is a mixed
+  rectangular Krein kernel, and a fail-closed 256-bit Arb certificate at `a=3`
+  proves a negative current-column principal minor. A separate exact-rational
+  physical certificate at `a=4,q=5,n=6` disproves complete monotonicity of the
+  one-source kernel. The surviving norm checkpoint is therefore a weighted
+  Möbius noncompression theorem for the full one-source sum, while retention
+  requires a separate mixed-cross estimate. The preferred stronger checkpoint
+  remains `mathcal Q_a^cp>>log(a)^-3`, with `Q_a^(2)` as fallback. Neither is
+  proved.
   The surviving physical checkpoint is unchanged; no moving-projection limit,
   completed-square budget, or RH result is proved
 - **parallel scouts:** a read-only bounded re-audit completed on 2026-11-25
@@ -168,7 +180,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   abstract spectral-edge transfer criterion. This criterion is not verified
   for a Yang--Mills cutoff family, and strong-resolvent convergence alone is
   insufficient. These are not new Cycle 46 or Clay results.
-- **cycle:** 49
+- **cycle:** 50
 - **announcements:** none
 
 ## immutable target list
@@ -200,9 +212,16 @@ waiting process.
    After Cycle 49, attack `B_a` only through the combined exact residual
    `mathcal R_(q,n)=E_(n+1)/q+j_(q,n)+a_(q,n)(1+ell_n-eta_n log(n)m_n)`;
    the separately positive packet is known to cancel its signed partner at
-   leading order and cannot be used as a lower bound. Equivalently, seek a
-   selected-vector estimate for the exact common-source coefficient kernels,
-   retaining all affine and off-diagonal terms. A sufficient split is
+   leading order and cannot be used as a lower bound. Cycle 50 gives the exact
+   equivalent one-source form
+   `B_a(q)=-sum_(m<=2a-1) mu(m)V_a(q,m)`; the norm target is now the explicit
+   weighted-Mobius noncompression estimate for this complete sum. Do not use
+   complete monotonicity, which is finitely false, or infer retention from the
+   positive symmetric collapsed-prefix kernel. Retention uses the compatible
+   mixed delta-gauge form `(W_B)^T W_C^delta`, which is interval-certified
+   indefinite already at `a=3`. Equivalently, seek a selected-vector estimate
+   for the exact common-source coefficient kernels, retaining all affine and
+   off-diagonal terms. A sufficient split is
    `||B_a||^2 >= c_0 log(a)^-3` and
    `|1+<B_a,H_a>/||B_a||^2|>=epsilon`, with resulting constant
    `epsilon^2 c_0`. If that line cancels, retain the exact orthogonal contrast
@@ -245,6 +264,27 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-11-27: Cycle 50 proved the finite prefix-only collapse into a pure
+  Möbius gauge, the exact one-source Möbius--von Mangoldt and factorial
+  identities with all signs and endpoints retained, and a locally uniform
+  current-label limit for the collapsed-prefix coefficient kernel. The
+  symmetric limit is strictly positive on common square label domains for the
+  full physical range, injective for finite measures without an atom at label
+  `2`, compact, and noncoercive only in infinite dimension. This auxiliary PSD
+  theorem does not transfer to physical retention. The compatible full delta
+  gauge makes retention a mixed rectangular Krein form; a standalone 256-bit
+  Arb certificate at `theta=2/5,a=3` certifies the current-column determinant
+  `-2.6303902118104657...e-10<0` while the selected physical contraction remains
+  positive. An independent compatible floor-gauge certificate reconstructs
+  prefix, tail, and full identities at `a=3,8` and gives another negative minor,
+  but its individual current columns have no finite `a log a` limit. A
+  standalone exact-rational certificate at `a=4,q=5,n=6` proves
+  `D^3 mathscr K(2)=-0.008804097414...<0`, so complete monotonicity is false.
+  The remaining prefix checkpoint is a weighted-Mobius noncompression theorem
+  for the full one-source sum, and retention remains a separate selected mixed
+  estimate. No norm lower bound, moving-projection theorem, completed-square
+  budget, or RH result is proved.
 
 - 2026-11-27: Cycle 49 proved the exact split `B_a=P_a^++S_a^mu`, strict
   positivity of every temporal coefficient and of `P_a^+`, and the uniform
