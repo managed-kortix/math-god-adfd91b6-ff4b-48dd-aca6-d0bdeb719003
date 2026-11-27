@@ -123,12 +123,22 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   PNT yields only an additive upper expansion, not every-scale energy. On the
   fixed interval `[1,3/2]`, the complete prefix gives a canonical
   `hat_c_a=Y_a+V_a+H_a` decomposition and rank-safe two-generator projection
-  `Q_a^(2)<=D_a`; six outward-Arb rows capture `0.99745...` to `0.99994...` of
-  the finite physical energy, while `log(a)^3 Q_a^(2)` is nonmonotone. A
+  `Q_a^(2)<=D_a`; at `theta=2/5`, six outward-Arb rows capture `0.99745...`
+  to `0.99994...` of the finite physical energy, while
+  `log(a)^3 Q_a^(2)` is nonmonotone. A
   fixed-local exact zero isolator is impossible by Cartwright zero density,
-  but growing and approximate whole-packet methods remain open. The surviving
-  checkpoint is unchanged; no moving-projection limit, completed-square
-  budget, or RH result is proved
+  but growing and approximate whole-packet methods remain open. Cycle 48 now
+  canonically recombines the prefix as `B_a=Y_a+V_a`, so
+  `hat_c=B_a+H_a`, and gives the intrinsic line projection
+  `mathcal Q_a^cp=|<B_a,hat_c>|^2/||B_a||^2<=Q_a^(2)`. Orthogonalizing the
+  internal contrast gives an exact two-channel formula, while endpoint-safe
+  Abel summation expresses `B_a` as finite Chebyshev and reciprocal-Mobius
+  packets with the negative telescoping `h_(2a)` endpoint. This exposes the
+  old trace and Euclidean correlation pair as sufficient but coordinate
+  dependent. The preferred stronger checkpoint is now
+  `mathcal Q_a^cp>>log(a)^-3`, with `Q_a^(2)` as fallback. Neither is proved.
+  The surviving physical checkpoint is unchanged; no moving-projection limit,
+  completed-square budget, or RH result is proved
 - **parallel scouts:** a read-only bounded re-audit completed on 2026-11-25
   and established no new dossier checkpoint. It rechecked five prior, special,
   or abstract statements: (i) for the standard period-normalized ordinary
@@ -147,7 +157,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   abstract spectral-edge transfer criterion. This criterion is not verified
   for a Yang--Mills cutoff family, and strong-resolvent convergence alone is
   insufficient. These are not new Cycle 46 or Clay results.
-- **cycle:** 47
+- **cycle:** 48
 - **announcements:** none
 
 ## immutable target list
@@ -171,19 +181,25 @@ waiting process.
    Möbius packet inequality (11.3) of
    `millennium-prize/riemann-hypothesis/moving-gram-kernel-audit-2026-11-25.md`,
    or prove one of the stronger intrinsic projection bounds
-   `mathcal Q_a(I) >> log(a)^-3` or, on `I0=[1,3/2]`,
-   `Q_a^(2) >> log(a)^-3`. For the first route this may be split into
-   `||P_a||^2 >= c_0 log(a)^-3` and `|gamma_a|>=epsilon`, with the resulting
-   constant `epsilon^2`; for the two-generator route the canonical sufficient
-   pair is `tr(G_a) << log(a)^-3` and `||z_a||^2 >> log(a)^-6`. Retain the
-   complete tail, affine column, exact gcd restriction, every endpoint and
-   Möbius sign, and the full Vasyunin kernel. A universal finite pointwise row
-   bound or separate normal, initial, tail, endpoint, or Chebyshev diagonal
-   does not suffice. Do not infer an asymptotic from the six finite capture
-   ratios or from PNT's additive endpoint expansion. Even success gives only a
-   trace-based moving-projection lower bound of order `log^-2 a`; require
-   constants and an appropriate `N_theta(a,2a)=O(log^-2 a)` upper bound before
-   claiming a physical budget.
+   `mathcal Q_a(I) >> log(a)^-3`, or, on `I0=[1,3/2]`, the Cycle 48 canonical
+   complete-prefix bound `mathcal Q_a^cp >> log(a)^-3`. Here
+   `B_a=Y_a+V_a` is the actual complete prefix,
+   `hat_c=B_a+H_a`, and
+   `mathcal Q_a^cp=|<B_a,hat_c>|^2/||B_a||^2`, with value zero when `B_a=0`.
+   A sufficient split is `||B_a||^2 >= c_0 log(a)^-3` and
+   `|1+<B_a,H_a>/||B_a||^2|>=epsilon`, with resulting constant
+   `epsilon^2 c_0`. If that line cancels, retain the exact orthogonal contrast
+   channel, which together with it is `Q_a^(2)`. The old pair
+   `tr(G_a)<<log(a)^-3`, `||z_a||^2>>log(a)^-6` remains sufficient but is
+   coordinate-dependent and noncanonical. Retain the complete tail, affine
+   column, exact gcd restriction, every endpoint and Möbius sign, and the full
+   Vasyunin kernel. A universal finite pointwise row bound or separate normal,
+   initial, tail, endpoint, prime, or Chebyshev diagonal does not suffice. Do
+   not infer an asymptotic from the six finite capture ratios or from PNT's
+   additive endpoint expansion. Even success gives only a trace-based
+   moving-projection lower bound of order `log^-2 a`; require constants and an
+   appropriate `N_theta(a,2a)=O(log^-2 a)` upper bound before claiming a
+   physical budget.
 2. If finite-prime grouping is used, keep the `P` regime explicit. For fixed
    `P`, use `Delta_(P,a)` only as an equivalent normalization of the still-open
    checkpoint. For growing `P=P(a)`, use the quantitative estimate (4.4),
@@ -213,6 +229,25 @@ waiting process.
 
 ## last ticks
 
+- 2026-11-27: Cycle 48 canonically recombined the Cycle 47 generators as the
+  actual complete-prefix vector `B_a=Y_a+V_a`, so exactly
+  `hat_c=B_a+H_a`. Orthogonalizing the remaining contrast gives the rank-safe
+  identity `Q_a^(2)=Phi(<B_a,hat_c>,||B_a||^2)
+  +Phi(<R_a,H_a>,||R_a||^2)`, where `Phi(x,d)=|x|^2/d` for `d>0` and zero
+  for `d=0`; the first term is `Q_a^cp<=D_a`. It derived endpoint-safe temporal
+  Abel formulas for `Y_a`, `V_a`, and `B_a`, including the negative
+  telescoping `h_(2a)` endpoint and the exact positive-prime packet paired
+  with its signed reciprocal-Mobius term. The old trace and Euclidean
+  correlation criteria are sufficient but generator-coordinate dependent;
+  abstract countermodels and finite postprocessing show that full rank, high
+  capture, or separate prefix/tail norms do not control the selected vector.
+  At `theta=2/5`, the six reconstructed complete-prefix line captures are
+  finite and nonmonotone, about `0.958` to `0.999`, and imply no asymptotic
+  statement.
+  The preferred stronger checkpoint is now `Q_a^cp>>log(a)^-3`, with the
+  two-channel `Q_a^(2)` as fallback. Neither is proved; the original Mobius
+  retention gate, physical budget upper bound, and RH all remain open.
+
 - 2026-11-27: Cycle 47 derived the intrinsic initial/tail projection
   `mathcal Q_a(I)=0` for `P_a=0` and otherwise
   `mathcal Q_a(I)=|<P_a,hat_c_a>|^2/||P_a||^2`, correcting the retained
@@ -227,7 +262,7 @@ waiting process.
   zero, without excluding moving or approximate whole-packet tests. Two
   fail-closed 192-bit Arb certificates pass all declared finite checks and
   reproduce their stored outputs byte for byte. The initial/tail census has
-  twelve rows; the complete-prefix census has 613 rows,
+  twelve rows; at `theta=2/5`, the complete-prefix census has 613 rows,
   54 cell/Abel checks, and six positive determinants. Its finite capture ratios
   lie between `0.99745...` and `0.99994...`, while `log(a)^3 Q_a^(2)` is
   nonmonotone. Hostile independent replay accepted both corrected artifacts.

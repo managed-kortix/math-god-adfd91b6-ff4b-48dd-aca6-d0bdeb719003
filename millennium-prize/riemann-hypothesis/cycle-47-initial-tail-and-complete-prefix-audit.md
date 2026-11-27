@@ -24,6 +24,7 @@ scope audit, and reproducible finite certificates.
 Throughout, fix
 
 \[
+ a\in\mathbb Z,\qquad a\ge2,\qquad
  0<\theta<\frac12,\qquad C=2(1-\theta),\qquad \tau=1-2\theta=C-1,
 \]
 
@@ -691,8 +692,9 @@ closure  5880034899a532b7ee0ef742fd2964081fad48c4241ade78657582b2e7f6c635
 output   d15e404fd584b62a778156eea00e66d2cbb1b7eb7770028228dff6be2f6001ef
 ```
 
-and certifies six 192-bit summaries on \(I_0=[1,3/2]\), containing 613
-physical rows.  It checks 54 direct-cell and Abel evaluations of
+and, at \(\theta=2/5\), certifies six 192-bit summaries on
+\(I_0=[1,3/2]\), containing 613 physical rows.  It checks 54 direct-cell and
+Abel evaluations of
 \(\mathcal B_{q,n}\), every-row (4.8), temporal versus coefficient-index
 contractions, six positive determinants before inversion, and six Cycle 45
 values of \(D_a\).  Its reciprocal-cell predicates are also fail closed.

@@ -132,12 +132,55 @@ when `P_a` is nonzero, and zero otherwise.  Then
 give the lower bound with constant `epsilon^2`, not `epsilon`.  On the fixed
 interval `I0=[1,3/2]`, the exact complete-prefix identity further decomposes
 `hat_c=Y_a+V_a+H_a`; projection onto `span(Y_a,V_a)` gives a rank-safe
-quantity `Q_a^(2)<=D_a(I0)`.  Proving either
-`mathcal Q_a(I)>>log(a)^-3` or `Q_a^(2)>>log(a)^-3` would suffice, but neither
-is established.  Six finite two-generator censuses capture more than `99.7%`
-of `D_a` at the tested dyadic starts, yet their `log(a)^3 Q_a^(2)` values are
-nonmonotone and imply no asymptotic estimate or eventual rank statement.  See
-`cycle-47-initial-tail-and-complete-prefix-audit.md`.
+quantity `Q_a^(2)<=D_a(I0)`.
+
+Cycle 48 replaces the coordinate-dependent split of the complete prefix by the
+canonical vector
+
+\[
+ B_a=Y_a+V_a=\sum_{n=q}^{2a-1}\alpha_{q,n}\mathcal B_{q,n},
+ \qquad \widehat{\mathbf c}_a=B_a+H_a.
+\]
+
+Its intrinsic one-generator projection is
+
+\[
+ \mathcal Q_a^{\rm cp}
+ =\frac{|\langle B_a,\widehat{\mathbf c}_a\rangle|^2}{\|B_a\|^2}
+ \le Q_a^{(2)}\le D_a(I_0),
+\]
+
+with value zero when `B_a=0`.  Orthogonalizing the remaining contrast gives an
+exact two-channel formula for `Q_a^(2)`, while temporal Abel summation gives
+endpoint-safe finite formulas for `B_a` in the Chebyshev and reciprocal-Mobius
+packets.  The coordinate rewrite isolates the following stronger, still-open
+sufficient target for the physical checkpoint:
+
+\[
+ \mathcal Q_a^{\rm cp}\gg(\log a)^{-3}.
+\]
+
+One sufficient, but not necessary, way to prove it is to find fixed
+\(c_0,\varepsilon>0\) such that, for every sufficiently large \(a\),
+
+\[
+ \|B_a\|^2\ge c_0(\log a)^{-3},
+ \qquad
+ \left|1+\frac{\langle B_a,H_a\rangle}{\|B_a\|^2}\right|
+ \ge\varepsilon.
+\]
+
+These inequalities would give
+\(\mathcal Q_a^{\rm cp}\ge\varepsilon^2c_0(\log a)^{-3}\).
+Neither the projection target nor either factor estimate is established.  At
+\(\theta=2/5\), the six finite two-generator censuses capture more than
+`99.7%` of `D_a`, and the reconstructed complete-prefix line captures between
+about `95.8%` and `99.9%`, but both statements are finite only.  The scaled
+projection values, generator angles, mixed signs, and coefficients are
+nonmonotone and imply no asymptotic estimate, eventual rank, or interscale
+theorem.  See
+`cycle-47-initial-tail-and-complete-prefix-audit.md` and
+`cycle-48-canonical-complete-prefix-and-abel-audit.md`.
 
 If the original packet estimate is proved, it gives only a trace-based
 moving-projection lower bound of order `log^-2 a`; Burnol's cited result is a
