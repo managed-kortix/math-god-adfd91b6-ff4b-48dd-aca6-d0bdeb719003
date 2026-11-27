@@ -30,7 +30,7 @@ decide any of these targets.
 Fix
 
 \[
- a\ge2,\qquad 0<\theta<\frac12,\qquad
+ a\in\mathbb Z,\quad a\ge2,\qquad 0<\theta<\frac12,\qquad
  C=2(1-\theta),\qquad \tau=C-1,
 \]
 
