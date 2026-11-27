@@ -894,9 +894,10 @@ three-energy separation in (6.1).  Fixed-shift Chowla estimates, one-point PNT
 upper bounds, the positive packet (2.2), generic operator positivity, and the
 sign-stripped continuum spectrum do not imply either statement.
 
-A fail-closed 192-bit finite certificate checks every physical row at
-\(a=218,301\), verifies (1.4), both Abel identities, and all declared positive
-temporal cells.  At \((a,q)=(218,327)\), it certifies
+At \(\theta=2/5\), a fail-closed 192-bit finite certificate checks every
+physical row at \(a=218,301\), verifies (1.4), both Abel identities, and all
+31,847 declared temporal cells against the certified bound
+\(\alpha_{q,n}>10^{-6}\).  At \((a,q)=(218,327)\), it certifies
 
 \[
  B_a(q)<0<H_a(q),\qquad \widehat c_a(q)>0,
