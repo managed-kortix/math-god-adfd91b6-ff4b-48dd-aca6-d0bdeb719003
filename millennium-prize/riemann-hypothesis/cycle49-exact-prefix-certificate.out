@@ -1,0 +1,51 @@
+RH CYCLE 49 EXACT FINITE PREFIX CERTIFICATE: PASS
+scope=160 finite physical rows at a=218,301 on closed I0=[1,3/2]; asymptotics untested; no RH inference
+source=millennium-prize/riemann-hypothesis/cycle49_exact_prefix_certificate.py
+source_sha256=4c06a780b89193689b3ad95bf952a707b9e52a92c87f8dded27e8c1b182956e5
+captured_closure_manifest_sha256=9f52dd36ad5b1a6c93d43c808cc8024ed28d6c6d0ca05678850c3a2e1666e455
+source_capture=certificate and all local inputs are read and SHA-256-bound before first third-party import
+runtime=CPython-3.12.13 python-flint-0.9.0 FLINT-3.6.0
+trusted_runtime_boundary=versions are pinned; interpreter/wheel/native-library binaries, OS, hardware, and uv launcher are not binary-attested
+arb_precision_bits=192 identity_error_ceiling=[1.26217744835361889e-29 +/- 1.35e-47]
+canonical_command=rm -f /tmp/cycle49-exact-prefix-certificate.out && env -u PYTHONPYCACHEPREFIX PYTHONDONTWRITEBYTECODE=1 LC_ALL=C uv run --isolated --no-project --python 3.12.13 --with python-flint==0.9.0 python -I -B millennium-prize/riemann-hypothesis/cycle49_exact_prefix_certificate.py > /tmp/cycle49-exact-prefix-certificate.out && cmp /tmp/cycle49-exact-prefix-certificate.out millennium-prize/riemann-hypothesis/cycle49-exact-prefix-certificate.out
+parameters=theta=2/5 scales=218,301 temporal_endpoint=M=2a-1 I0=[1,3/2]
+row_rule=squarefree q with a<=q<2a and 2q<=3a; both I0 endpoints closed
+definitions=aterm(q,n)=n/q-log((n+1)/q); s_n=ell_n/L_n-eta_n*m_n; ppacket(q,n)=C[n+1]/q-sum_{k=q}^n psi(k)/(k(k+1))
+split=B=sum_n alpha*(aterm*R+(C[n+1]-n)/(qL_n)+j/L_n)=Pplus+Smu; Pplus=sum_n alpha*ppacket/L_n; Smu=sum_n alpha*aterm*s_n
+abel_checks=Pplus and Smu each checked against independent finite suffix-summation formulas including -u(q,M)h_(2a)
+physical_terms=affine -eta_n*chi retained; restricted Gram correction -1/(qd) retained; every Mobius sign retained
+bound_inputs_sha256=PASS count=1
+input_sha256 millennium-prize/riemann-hypothesis/cycle47_complete_prefix_census.py 49f128e0e411f03e6d646ddbee5e4b2a13a4da2bc11bc5e6705e356404625928
+arithmetic_identity_error_sum_upper lambda_convolution=[2.31305526264168710e-54 +/- 3.09e-72]
+arithmetic_identity_error_sum_upper psi_direct=[3.30265225068854418e-51 +/- 8.32e-70]
+arithmetic_identity_error_sum_upper C_direct=[1.06018665112773124e-49 +/- 3.51e-67]
+arithmetic_identity_error_sum_upper h_difference=[5.47154076725763755e-53 +/- 9.61e-72]
+finite_row_checks=PASS rows_a218=67 rows_a301=93 alpha_positive_cells=31847 alpha_uniform_floor=1/1000000 B_split_rows=160 Pplus_Abel_rows=160 Smu_Abel_rows=160
+identity_error_sums_upper alpha_definition=[3.50735139171466720e-53 +/- 3.24e-71] B_split=[1.18787435301961159e-53 +/- 7.46e-72] Pplus_Abel=[1.03823454058444932e-53 +/- 4.26e-71] Smu_Abel=[1.91383332806702472e-53 +/- 4.16e-71]
+counterexample a=218 q=327 alpha_certified_gt=1/1000000
+  B [-5.27819898090004597635960939462029962653636997373e-5 +/- 2.99e-53]
+  Pplus [0.00778761313849841430607574687054892567408001621554 +/- 2.29e-51]
+  Smu [-0.00784039512830741476583934296449512867034537991527 +/- 4.99e-51]
+  Pplus_abel [0.00778761313849841430607574687054892567408001621554 +/- 2.29e-51]
+  Smu_abel [-0.00784039512830741476583934296449512867034537991527 +/- 4.99e-51]
+  H [5.38346223769557724209891931359588891858711128926e-5 +/- 2.68e-54]
+  hat [1.05263256795531265739309918975589292050741315533e-6 +/- 2.51e-54]
+  B_times_hat [-5.55600414744392966120660786803692743050846359263e-11 +/- 3.63e-59]
+  B_times_H [-2.84149848967186768756795323861313812484570565860e-9 +/- 2.44e-57]
+  physical_hat_path_error_upper [1.25548263346239484e-55 +/- 3.07e-73]
+counterexample_signs=PASS B<0 H>0 hat>0 B*hat<0 B*H<0
+aggregate a=301 I0=[1,3/2] rows=93 p_definition=||B||^2 BH_definition=<B,H> gamma=(p+BH)/p Qcp=(p+BH)^2/p
+  p [7.10523809552302445904393305282208524650025861406e-6 +/- 3.54e-54]
+  BH [-7.23735938504519259972417148087648328689540177963e-8 +/- 2.77e-56]
+  gamma [0.989814050862552491921837671308355037444574153078 +/- 2.62e-49]
+  D [7.07938720457846598204258198477787274250897615554e-6 +/- 1.84e-54]
+  Qcp [6.96122810156797559412001493198552613067378424531e-6 +/- 4.83e-54]
+  H2 [1.18896296756345374993132361573317161746625577078e-7 +/- 1.72e-56]
+  physical_hat_path_error_sum_upper [2.46175311257996718e-53 +/- 2.65e-71]
+  aggregate_energy_error_upper [6.78736404530653491e-57 +/- 1.26e-75]
+  aggregate_projection_error_upper [1.49140682736556597e-56 +/- 4.39e-74]
+  aggregate_dot_error_upper [4.28496873299673405e-57 +/- 4.33e-75]
+aggregate_signs=PASS p>0 BH<0 gamma>0 D>0 Qcp>0
+finite_only_disclaimer=Asymptotics are untested. No untested scale, eventual sign, asymptotic lower bound, positive liminf, moving-projection theorem, completed-square budget, or Riemann-hypothesis conclusion is certified.
+ASYMPTOTICS_UNTESTED
+ALL_DECLARED_CHECKS_PASS
