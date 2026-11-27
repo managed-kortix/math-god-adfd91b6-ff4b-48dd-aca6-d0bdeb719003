@@ -99,3 +99,22 @@
     branches: if `B_a=0`, take `R_a=Y_a`; every quotient whose denominator is
     zero is defined as zero.  In particular `B_a=0` with `Y_a=-V_a!=0` is a
     rank-one, not rank-zero, case.
+26. In Cycle 49 the exact split `B_a=P_a^++S_a^mu` has
+    `alpha_(q,n)>0` and `P_a^+(q)>0` throughout the permitted finite range,
+    but positivity is strategically deceptive: uniformly on the physical
+    interval, `log(a)^2 P_a^+ -> F` and `log(a)^2 S_a^mu -> -F`.  Never use
+    the positive packet as a prefix lower bound without first combining its
+    signed partner.
+27. The leading-annihilation theorem uses quantitative reciprocal-Mobius
+    decay in addition to the PNT.  In particular, justify uniformly
+    `log(n)m_n=o(1)` and `ell_n=-1+o(1)`; do not infer them from a formal value
+    of `1/zeta` at one without a tail estimate.
+28. The common-source coefficient kernels are row-space Gram kernels.  Their
+    positive normal diagonal is not a lower bound on the selected affine/Mobius
+    vector, and the delta pairing of equal physical rows must not be confused
+    with the spatial `H` inner product.  Retain the affine label, `d<=n`
+    activation, final complete cell, and restricted `-1/(qd)` correction.
+29. The exact residual after leading cancellation is a joint
+    Chebyshev-error/reciprocal-Mobius packet.  PNT-sized one-point upper bounds,
+    fixed-shift correlation theorems, generic PSD, or a local continuum kernel
+    do not prove its every-scale `L^2` lower bound or its prefix-tail retention.

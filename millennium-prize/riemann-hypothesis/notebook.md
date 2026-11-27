@@ -4678,3 +4678,72 @@ identities, hostile no-go ledger, and finite boundary are in
 `cycle-48-canonical-complete-prefix-and-abel-audit.md`.  The original moving
 Mobius retention checkpoint and the later budget upper-bound obstruction both
 remain open.  No RH result is claimed.
+
+## Cycle 49: leading complete-prefix annihilation
+
+Cycle 49 separates the exact complete-prefix cell into a strictly positive
+prime/Chebyshev packet and its signed reciprocal-Mobius partner.  For
+
+\[
+ \mathfrak p_{q,n}=\frac{C_{n+1}}q
+ -\sum_{k=q}^{n}\frac{\psi(k)}{k(k+1)},
+ \qquad
+ \mathfrak a_{q,n}=\frac nq-\log\frac{n+1}{q},
+\]
+
+define
+
+\[
+ P_a^+(q)=\sum_{n=q}^{2a-1}
+ \frac{\alpha_{q,n}}{\log n}\mathfrak p_{q,n},
+ \qquad
+ S_a^\mu(q)=\sum_{n=q}^{2a-1}
+ \alpha_{q,n}\mathfrak a_{q,n}s_n.
+\]
+
+Then exactly `B_a=P_a^++S_a^mu`.  Every temporal weight
+`alpha_(q,n)` and every `mathfrak p_(q,n)` is positive in the full permitted
+finite range.  Nevertheless, the standard quantitative PNT and its
+reciprocal-Mobius consequences give, uniformly for physical rows
+`q/a in [1,3/2]`,
+
+\[
+ (\log a)^2P_a^+(q)\longrightarrow F(q/a),
+ \qquad
+ (\log a)^2S_a^\mu(q)\longrightarrow-F(q/a),
+\]
+
+where
+
+\[
+ F(u)=\frac{2-u}{u}-\frac12\log^2\frac2u>0.
+\]
+
+Thus the two packet norms are each asymptotic to a positive constant times
+`a/log(a)^4`, but their leading terms annihilate row by row.  This proves that
+estimating the positive packet before combining it with the signed partner is
+a dead route.  It does not disprove `||B_a||^2>>log(a)^-3`: the target sits in
+the lower-order residual
+
+\[
+ \mathcal R_{q,n}=\frac{E_{n+1}}q+\mathfrak j_{q,n}
+ +\mathfrak a_{q,n}(1+\ell_n-\eta_n(\log n)m_n),
+\]
+
+with
+
+\[
+ B_a(q)=\sum_{n=q}^{2a-1}
+ \frac{\alpha_{q,n}}{\log n}\mathcal R_{q,n}.
+\]
+
+An exact augmented coefficient factorization writes `B_a=W_a^B x` and
+`H_a=W_a^H x`, with `x=(1,mu(d))`, literal prefix/tail fractional-part Gram
+entries, the affine column, and the restricted correction all retained.  It
+turns both the prefix norm and retention numerator into selected moving
+Möbius quadratic forms.  Positive diagonals, trace mass, PSD, and the continuum
+spectral tail do not bound those selected forms.  The exact identities and
+scope boundary are in
+`cycle-49-leading-prefix-annihilation-and-coefficient-kernel.md`.  The
+second-order prefix residual and the complete prefix-tail correlation remain
+open; no physical lower bound or RH result is claimed.

@@ -135,7 +135,18 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   Abel summation expresses `B_a` as finite Chebyshev and reciprocal-Mobius
   packets with the negative telescoping `h_(2a)` endpoint. This exposes the
   old trace and Euclidean correlation pair as sufficient but coordinate
-  dependent. The preferred stronger checkpoint is now
+  dependent. Cycle 49 now proves that the exact split
+  `B_a=P_a^++S_a^mu` has a strictly positive first packet at every permitted
+  finite scale, but the two partners annihilate at leading order:
+  `log(a)^2 P_a^+(q)->F(q/a)` and
+  `log(a)^2 S_a^mu(q)->-F(q/a)` uniformly on `[1,3/2]`, with
+  `F(u)=(2-u)/u-(1/2)log(2/u)^2>0`. Thus the separate positive-packet route is
+  decisively closed even though each partner has squared norm asymptotic
+  `c_+ a/log(a)^4`. The exact surviving prefix is the weighted
+  Chebyshev-error/reciprocal-Mobius residual, and an augmented common-source
+  coefficient factorization makes its norm and prefix-tail retention selected
+  moving Möbius quadratic forms; positive diagonals, PSD, trace, and continuum
+  spectrum do not control them. The preferred stronger checkpoint remains
   `mathcal Q_a^cp>>log(a)^-3`, with `Q_a^(2)` as fallback. Neither is proved.
   The surviving physical checkpoint is unchanged; no moving-projection limit,
   completed-square budget, or RH result is proved
@@ -157,7 +168,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   abstract spectral-edge transfer criterion. This criterion is not verified
   for a Yang--Mills cutoff family, and strong-resolvent convergence alone is
   insufficient. These are not new Cycle 46 or Clay results.
-- **cycle:** 48
+- **cycle:** 49
 - **announcements:** none
 
 ## immutable target list
@@ -186,7 +197,13 @@ waiting process.
    `B_a=Y_a+V_a` is the actual complete prefix,
    `hat_c=B_a+H_a`, and
    `mathcal Q_a^cp=|<B_a,hat_c>|^2/||B_a||^2`, with value zero when `B_a=0`.
-   A sufficient split is `||B_a||^2 >= c_0 log(a)^-3` and
+   After Cycle 49, attack `B_a` only through the combined exact residual
+   `mathcal R_(q,n)=E_(n+1)/q+j_(q,n)+a_(q,n)(1+ell_n-eta_n log(n)m_n)`;
+   the separately positive packet is known to cancel its signed partner at
+   leading order and cannot be used as a lower bound. Equivalently, seek a
+   selected-vector estimate for the exact common-source coefficient kernels,
+   retaining all affine and off-diagonal terms. A sufficient split is
+   `||B_a||^2 >= c_0 log(a)^-3` and
    `|1+<B_a,H_a>/||B_a||^2|>=epsilon`, with resulting constant
    `epsilon^2 c_0`. If that line cancels, retain the exact orthogonal contrast
    channel, which together with it is `Q_a^(2)`. The old pair
@@ -228,6 +245,21 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-11-27: Cycle 49 proved the exact split `B_a=P_a^++S_a^mu`, strict
+  positivity of every temporal coefficient and of `P_a^+`, and the uniform
+  leading annihilation `log(a)^2P_a^+(q)->F(q/a)` and
+  `log(a)^2S_a^mu(q)->-F(q/a)` on `[1,3/2]`, where
+  `F(u)=(2-u)/u-(1/2)log(2/u)^2>0`. Consequently each partner has squared norm
+  asymptotic `c_+a/log(a)^4`, but this supplies no lower bound for their
+  difference; the separate positive-packet route is closed. The prefix is
+  exactly a weighted joint Chebyshev-error/reciprocal-Mobius residual. An exact
+  affine-augmented prefix/tail coefficient factorization rewrites its norm and
+  retention as selected moving Möbius quadratic forms, for which positive
+  diagonals, PSD, trace mass, and local continuum spectrum are insufficient.
+  This is a partial structural theorem and route no-go. The second-order
+  residual lower bound, signed prefix-tail retention, physical budget upper
+  bound, and RH all remain open.
 
 - 2026-11-27: Cycle 48 canonically recombined the Cycle 47 generators as the
   actual complete-prefix vector `B_a=Y_a+V_a`, so exactly

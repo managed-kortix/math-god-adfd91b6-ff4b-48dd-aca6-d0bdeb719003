@@ -182,6 +182,46 @@ theorem.  See
 `cycle-47-initial-tail-and-complete-prefix-audit.md` and
 `cycle-48-canonical-complete-prefix-and-abel-audit.md`.
 
+Cycle 49 proves a sharper no-go inside this route.  The exact prefix splits as
+
+\[
+ B_a=P_a^++S_a^\mu,
+\]
+
+where `P_a^+` is strictly row-positive at every permitted finite scale.  Yet,
+uniformly for `q/a in [1,3/2]`,
+
+\[
+ (\log a)^2P_a^+(q)\to F(q/a),\qquad
+ (\log a)^2S_a^\mu(q)\to-F(q/a),
+\]
+
+with
+
+\[
+ F(u)=\frac{2-u}{u}-\frac12\log^2\frac2u>0.
+\]
+
+Hence the positive packet and signed reciprocal-Mobius partner annihilate at
+leading order.  A separate lower bound for the positive packet, even with its
+sharp norm asymptotic `asymp a/log(a)^4`, cannot prove the prefix target.  The
+surviving exact row residual is
+
+\[
+ B_a(q)=\sum_{n=q}^{2a-1}\frac{\alpha_{q,n}}{\log n}
+ \left[
+ \frac{E_{n+1}}q+\mathfrak j_{q,n}
+ +\mathfrak a_{q,n}(1+\ell_n-\eta_n(\log n)m_n)
+ \right].
+\]
+
+The next lemma must control the square of this complete correlated residual
+before absolute values, and must separately retain its signed correlation with
+`H_a`.  The exact coefficient-kernel rewrite shows that this is a moving
+selected-Mobius quadratic-form theorem, not a consequence of sign-stripped
+operator spectrum or normal diagonal mass.  See
+`cycle-49-leading-prefix-annihilation-and-coefficient-kernel.md`.
+
 If the original packet estimate is proved, it gives only a trace-based
 moving-projection lower bound of order `log^-2 a`; Burnol's cited result is a
 budget lower bound, not the upper bound needed to close the completed square.
