@@ -113,6 +113,17 @@ def extra_unlocked_file(root: Path) -> None:
     (root / "UNLOCKED").write_text("attacker\n", encoding="ascii")
 
 
+def delete_networkx_license(root: Path) -> None:
+    (root / "THIRD-PARTY-NETWORKX-3.7-LICENSE.txt").unlink()
+    rewrite_manifest(root)
+
+
+def mutate_networkx_license(root: Path) -> None:
+    path = root / "THIRD-PARTY-NETWORKX-3.7-LICENSE.txt"
+    path.write_bytes(path.read_bytes().replace(b"3-clause BSD", b"altered BSD", 1))
+    rewrite_manifest(root)
+
+
 def mutate_enum_n_bool(root: Path) -> None:
     mutate_json(root, "data/atlas-rank5-enumeration.json",
                 lambda value: value["records"][0].__setitem__("n", True))
@@ -193,6 +204,10 @@ CASES = (
     ("manifest-self-member", manifest_self_member, "must not circularly include itself"),
     ("manifest-traversal", manifest_traversal, "unsafe or noncanonical manifest path"),
     ("manifest-unlocked-file", extra_unlocked_file, "coverage mismatch"),
+    ("networkx-license-deletion", delete_networkx_license,
+     "NetworkX redistribution license missing from manifest"),
+    ("networkx-license-mutation", mutate_networkx_license,
+     "NetworkX 3.7 redistribution license SHA-256 mismatch"),
     ("integer-bool-laundering", mutate_enum_n_bool, "must be a JSON integer"),
     ("integer-string-laundering", mutate_enum_n_string, "must be a JSON integer"),
     ("boolean-int-laundering", mutate_enum_selected_int, "must be a JSON boolean"),

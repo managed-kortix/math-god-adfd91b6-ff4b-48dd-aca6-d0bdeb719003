@@ -1,5 +1,6 @@
 PASS exact rank-5 / (C5,C5) DNN candidate-evidence bundle
-strict source lock: 12 artifacts; SHA256SUMS excluded from itself
+strict source lock: 13 artifacts; SHA256SUMS excluded from itself
+NetworkX 3.7 BSD-3-Clause redistribution license: pinned and verified
 conditional on standard Graph Atlas exhaustiveness through n=7: 1253 source graphs
 connected beta=5 in pinned source: 153
 certified bridge-free cores: 102 = 95 single-positive-block + 7 multiblock

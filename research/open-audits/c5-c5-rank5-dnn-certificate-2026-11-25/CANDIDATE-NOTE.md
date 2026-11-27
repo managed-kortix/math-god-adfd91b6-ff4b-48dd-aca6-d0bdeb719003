@@ -71,10 +71,30 @@ This bundle proves the following sharply separated statements.
    multiblock arguments may absorb the two external pentagon debits. No claim
    of `s+(G)-|V(G)|<0` is made.
 
+## Source provenance and redistribution notice
+
+- `sources/networkx-3.7-atlas.dat.gz` is byte-identical to
+  `networkx/generators/atlas.dat.gz` in the pinned PyPI wheel
+  `networkx-3.7-py3-none-any.whl`. The wheel SHA-256 is
+  `e3fd2c13a7814cee3746340d8d7f8598a67f16a58bf47fb7f8793fab6efca1b0`;
+  both the wheel member and vendored file have SHA-256
+  `73fc416df0164923607751cb759f4ae81deb5f6550bf25be59c86de3b747e41d`.
+- `THIRD-PARTY-NETWORKX-3.7-LICENSE.txt` is byte-identical to the wheel member
+  `networkx-3.7.dist-info/licenses/LICENSE.txt`, SHA-256
+  `6025f323ea29dc2f0ee0abd9523bf910186f55b0e148e6ebf646c55566278e2e`.
+  It is the NetworkX 3.7 BSD-3-Clause notice for the redistributed NetworkX
+  package bytes, including the vendored member.
+- NetworkX identifies the graph collection as Read-Wilson Graph Atlas data.
+  That is provenance, separate from the NetworkX package license statement;
+  this bundle makes no additional claim about rights in the underlying graph
+  compilation.
+
 ## Exact artifacts
 
-- `sources/networkx-3.7-atlas.dat.gz`: pinned Atlas source copied from the
-  NetworkX 3.7 distribution.
+- `sources/networkx-3.7-atlas.dat.gz`: pinned Atlas source copied byte-for-byte
+  from the NetworkX 3.7 wheel identified above.
+- `THIRD-PARTY-NETWORKX-3.7-LICENSE.txt`: pinned NetworkX 3.7 BSD-3-Clause
+  redistribution notice identified above.
 - `data/atlas-rank5-enumeration.json`: all 153 connected rank-five Atlas
   graphs, their graph6 strings, edges, bridges, articulation data, and block
   scopes; 102 bridge-free cores are selected.
@@ -92,9 +112,10 @@ This bundle proves the following sharply separated statements.
   `Fraction`. PSD is certified by checking each stored matrix equals `UU^T`
   over the rationals, with exact unit diagonal. It also executes the exact K4
   and C3 lower witnesses and one-vertex-sum/block-additivity arithmetic.
-- `scripts/test-hostile-mutations.py`: fail-closed 18-mutation suite for
-  duplicate keys, scalar types, unknown shadow fields, lock closure,
-  conditional Atlas wording, local witnesses, and block/route arithmetic.
+- `scripts/test-hostile-mutations.py`: fail-closed 20-mutation suite for
+  duplicate keys, scalar types, unknown shadow fields, lock closure, license
+  deletion/mutation, conditional Atlas wording, local witnesses, and
+  block/route arithmetic.
 - `SHA256SUMS`: closed source lock over every bundled artifact except itself.
   Self-inclusion is rejected to avoid a circular hash requirement.
 - `output/verify.normal.txt` and `output/verify.optimized.txt`: byte-identical
