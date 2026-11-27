@@ -1,0 +1,12 @@
+PASS exact rank-5 / (C5,C5) DNN candidate-evidence bundle
+strict source lock: 12 artifacts; SHA256SUMS excluded from itself
+conditional on standard Graph Atlas exhaustiveness through n=7: 1253 source graphs
+connected beta=5 in pinned source: 153
+certified bridge-free cores: 102 = 95 single-positive-block + 7 multiblock
+largest stored single-block rational excess: Dn{ (Atlas 51)
+largest stored multiblock rational excess: FmpbG (Atlas 814)
+all 102 exact tests: (edge_cost-m+4)^2 < 80
+n=8 witness: GXgrBC = K4 vee C3 vee C3, exact excess 5
+exact K4/C3 lower witnesses and one-vertex-sum arithmetic: PASS
+exact route gap after two C5 bridge arms: 9-4*sqrt(5) > 0
+scope: universal all-center DNN threshold refuted; no graph-theorem closure

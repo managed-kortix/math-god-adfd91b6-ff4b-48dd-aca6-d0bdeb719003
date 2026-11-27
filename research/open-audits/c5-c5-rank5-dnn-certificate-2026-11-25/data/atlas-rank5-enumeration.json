@@ -1,0 +1,10737 @@
+{
+  "counts": {
+    "bridge_bearing_rank5": 51,
+    "bridge_free_rank5": 102,
+    "connected_rank5": 153,
+    "selected_multiblock": 7,
+    "selected_single_positive_rank_block": 95
+  },
+  "filter": "simple connected beta=5; certificates select bridge-free cores",
+  "records": [
+    {
+      "articulation_vertices": [],
+      "atlas_index": 51,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Dn{",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "graph6": "Dn{",
+      "m": 9,
+      "n": 5,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        4
+      ],
+      "atlas_index": 177,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          4,
+          5
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "En{G",
+      "m": 10,
+      "n": 6,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        0
+      ],
+      "atlas_index": 178,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          0,
+          5
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "graph6": "En}?",
+      "m": 10,
+      "n": 6,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 179,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "E_~w",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "E_~w",
+      "m": 10,
+      "n": 6,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 180,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "EjtW",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "EjtW",
+      "m": 10,
+      "n": 6,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 181,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "E^mG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "E^mG",
+      "m": 10,
+      "n": 6,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 182,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "E^Mg",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "E^Mg",
+      "m": 10,
+      "n": 6,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 183,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "EjvG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "EjvG",
+      "m": 10,
+      "n": 6,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 184,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Elfo",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "graph6": "Elfo",
+      "m": 10,
+      "n": 6,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 185,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Exv_",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "graph6": "Exv_",
+      "m": 10,
+      "n": 6,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 186,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "ErXw",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "ErXw",
+      "m": 10,
+      "n": 6,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 187,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Ehfw",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "Ehfw",
+      "m": 10,
+      "n": 6,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 188,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "EzNG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "EzNG",
+      "m": 10,
+      "n": 6,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 189,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "E^NG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "E^NG",
+      "m": 10,
+      "n": 6,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 190,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "EyUw",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "EyUw",
+      "m": 10,
+      "n": 6,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        4
+      ],
+      "atlas_index": 740,
+      "block_rank_profile": [
+        5,
+        0,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "Fn{GO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        3,
+        4
+      ],
+      "atlas_index": 741,
+      "block_rank_profile": [
+        5,
+        0,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "Fn{OO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        2,
+        4
+      ],
+      "atlas_index": 742,
+      "block_rank_profile": [
+        5,
+        0,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          2,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "Fn{_O",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        2
+      ],
+      "atlas_index": 743,
+      "block_rank_profile": [
+        5,
+        0,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "graph6": "Fn{`?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        0,
+        2
+      ],
+      "atlas_index": 744,
+      "block_rank_profile": [
+        5,
+        0,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          0,
+          6
+        ],
+        [
+          2,
+          5
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "graph6": "Fn{c?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        4
+      ],
+      "atlas_index": 746,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          4,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "F_~wO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        1
+      ],
+      "atlas_index": 747,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FjtY?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        4
+      ],
+      "atlas_index": 748,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          4,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FjtWO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        1
+      ],
+      "atlas_index": 749,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "F_~y?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        2
+      ],
+      "atlas_index": 750,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          2,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "F^mH?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        5
+      ],
+      "atlas_index": 751,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          5,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FjtWG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        2
+      ],
+      "atlas_index": 752,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          2,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "F^Mh?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        1
+      ],
+      "atlas_index": 753,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FjvI?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        3
+      ],
+      "atlas_index": 754,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          3,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "F^Mg_",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        4
+      ],
+      "atlas_index": 755,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          4,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FjvGO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        4
+      ],
+      "atlas_index": 756,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          0,
+          4
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "F@`zw",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        0
+      ],
+      "atlas_index": 757,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          0,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "graph6": "Flfs?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        0
+      ],
+      "atlas_index": 758,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          0,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "F^Mk?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        1
+      ],
+      "atlas_index": 759,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "graph6": "Fxva?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        5
+      ],
+      "atlas_index": 760,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          5,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FjvGG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        0
+      ],
+      "atlas_index": 761,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          0,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "Fjt[?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        2
+      ],
+      "atlas_index": 762,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          2,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FrXx?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        3
+      ],
+      "atlas_index": 763,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          3,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FjvG_",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        2
+      ],
+      "atlas_index": 764,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          2,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "graph6": "Fxv`?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        5
+      ],
+      "atlas_index": 765,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          5,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "F^MgG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        5
+      ],
+      "atlas_index": 766,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          5,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FlfoG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        5
+      ],
+      "atlas_index": 767,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          5,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FrXwG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        4,
+        5
+      ],
+      "atlas_index": 768,
+      "block_rank_profile": [
+        5,
+        0,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Fn{GG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        1
+      ],
+      "atlas_index": 769,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "graph6": "Flfq?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        4
+      ],
+      "atlas_index": 770,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          4,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "Fxv_O",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        5
+      ],
+      "atlas_index": 771,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          5,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Fxv_G",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        4
+      ],
+      "atlas_index": 772,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          4,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FrXwO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        1
+      ],
+      "atlas_index": 773,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "F^mI?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        2,
+        6
+      ],
+      "atlas_index": 774,
+      "block_rank_profile": [
+        5,
+        0,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          2,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Fn{@G",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        5
+      ],
+      "atlas_index": 775,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          5,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FhfwG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        1
+      ],
+      "atlas_index": 776,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FzNI?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        1
+      ],
+      "atlas_index": 777,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "Fhfy?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        2
+      ],
+      "atlas_index": 778,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          2,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FjvH?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        1
+      ],
+      "atlas_index": 779,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "F^Mi?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        6
+      ],
+      "atlas_index": 780,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          0,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "F?\\vg",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        1
+      ],
+      "atlas_index": 781,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FyUy?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        5
+      ],
+      "atlas_index": 782,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          5,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FzNGG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        3
+      ],
+      "atlas_index": 783,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          3,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FzNG_",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        4
+      ],
+      "atlas_index": 784,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          4,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FlfoO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        3
+      ],
+      "atlas_index": 785,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          3,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ]
+      ],
+      "graph6": "Fxv__",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        1
+      ],
+      "atlas_index": 786,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          1,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "F^NI?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        2
+      ],
+      "atlas_index": 787,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          2,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FyUx?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        0
+      ],
+      "atlas_index": 788,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          0,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FrX{?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        6
+      ],
+      "atlas_index": 789,
+      "block_rank_profile": [
+        5,
+        0
+      ],
+      "bridge_free_core_graph6": null,
+      "bridges": [
+        [
+          0,
+          6
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "F?\\~_",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": false,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 790,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "F?B~w",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "F?B~w",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 791,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FzTb?",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "graph6": "FzTb?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 792,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FjtQO",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FjtQO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 793,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FF[Kw",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FF[Kw",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 794,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FxMhO",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FxMhO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 795,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "F|eK_",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "F|eK_",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        2
+      ],
+      "atlas_index": 796,
+      "block_rank_profile": [
+        4,
+        1
+      ],
+      "bridge_free_core_graph6": "Fz[`G",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Fz[`G",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 2,
+      "positive_rank_profile": [
+        4,
+        1
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": false
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 797,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FXYwg",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FXYwg",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 798,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FhmhO",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FhmhO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 799,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Fxef?",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "graph6": "Fxef?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 800,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "F@FnW",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "F@FnW",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 801,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "F?F~o",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "F?F~o",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 802,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FGM]w",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FGM]w",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 803,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FxkkG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FxkkG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 804,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FxkKW",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FxkKW",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 805,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Fp\\j?",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "Fp\\j?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 806,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FhNhO",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FhNhO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 807,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FxeLO",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FxeLO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 808,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FjsYG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FjsYG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        2
+      ],
+      "atlas_index": 809,
+      "block_rank_profile": [
+        4,
+        1
+      ],
+      "bridge_free_core_graph6": "FN{`G",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FN{`G",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 2,
+      "positive_rank_profile": [
+        4,
+        1
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": false
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 810,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "F@U}o",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "F@U}o",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 811,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Fhxgg",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Fhxgg",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 812,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FF|b?",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "graph6": "FF|b?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 813,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "F`ENw",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "F`ENw",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        1
+      ],
+      "atlas_index": 814,
+      "block_rank_profile": [
+        3,
+        2
+      ],
+      "bridge_free_core_graph6": "FmpbG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FmpbG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 2,
+      "positive_rank_profile": [
+        3,
+        2
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": false
+    },
+    {
+      "articulation_vertices": [
+        4
+      ],
+      "atlas_index": 815,
+      "block_rank_profile": [
+        4,
+        1
+      ],
+      "bridge_free_core_graph6": "Fl{GW",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Fl{GW",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 2,
+      "positive_rank_profile": [
+        4,
+        1
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": false
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 816,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Fxecg",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Fxecg",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 817,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FxeKo",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FxeKo",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 818,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FxecW",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FxecW",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 819,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FleL_",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FleL_",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 820,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FhA{w",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FhA{w",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 821,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FzKWg",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FzKWg",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 822,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Ff[sO",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "Ff[sO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 823,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FrD{_",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FrD{_",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 824,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FVrEG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FVrEG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 825,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Fh]Ho",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "Fh]Ho",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 826,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FhFWw",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FhFWw",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 827,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Fhhwg",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Fhhwg",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 828,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Fl|?W",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Fl|?W",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        2
+      ],
+      "atlas_index": 829,
+      "block_rank_profile": [
+        4,
+        1
+      ],
+      "bridge_free_core_graph6": "Fnw`G",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Fnw`G",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 2,
+      "positive_rank_profile": [
+        4,
+        1
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": false
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 830,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FcBzo",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FcBzo",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 831,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FxT`o",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FxT`o",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 832,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FxJ_w",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FxJ_w",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 833,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FhtOw",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FhtOw",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 834,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FheTg",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FheTg",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 835,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FhFIw",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FhFIw",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 836,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FhNJG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FhNJG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 837,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FlkqO",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FlkqO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 838,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FhFJW",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FhFJW",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 839,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FKL\\W",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FKL\\W",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 840,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FpNDW",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FpNDW",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 841,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Fhctg",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Fhctg",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 842,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FFx]?",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FFx]?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 843,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FBUlW",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FBUlW",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 844,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "F}?^O",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "F}?^O",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 845,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Fxqgg",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Fxqgg",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 846,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FpTz?",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FpTz?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 847,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "F?]~_",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "F?]~_",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 848,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FxeHo",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FxeHo",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 849,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "F}oXO",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "F}oXO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 850,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Fhff?",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "graph6": "Fhff?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        2
+      ],
+      "atlas_index": 851,
+      "block_rank_profile": [
+        4,
+        1
+      ],
+      "bridge_free_core_graph6": "Fm{`G",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Fm{`G",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 2,
+      "positive_rank_profile": [
+        4,
+        1
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": false
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 852,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FheyG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FheyG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 853,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Fhqwg",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Fhqwg",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 854,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FllGW",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FllGW",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 855,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Fhbwo",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "Fhbwo",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [
+        1
+      ],
+      "atlas_index": 856,
+      "block_rank_profile": [
+        3,
+        2
+      ],
+      "bridge_free_core_graph6": "FMtbG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FMtbG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 2,
+      "positive_rank_profile": [
+        3,
+        2
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": false
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 857,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FNohg",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FNohg",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 858,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Flg[g",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Flg[g",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 859,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FsW|_",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FsW|_",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 860,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Fhe}?",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "Fhe}?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 861,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FKhZg",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FKhZg",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 862,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FhuoW",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FhuoW",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 863,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "F`~PG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "F`~PG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 864,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FMshg",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FMshg",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 865,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FfxcG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FfxcG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 866,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FDpjg",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FDpjg",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 867,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FllIG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FllIG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 868,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Fhqhg",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Fhqhg",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 869,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FlkYG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FlkYG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 870,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FhsZG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "FhsZG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 871,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FhNHo",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FhNHo",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 872,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FlUj?",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FlUj?",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 873,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FK`zo",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FK`zo",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 874,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FlhWo",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FlhWo",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 875,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FBjN_",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "graph6": "FBjN_",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 876,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "FLNMO",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "graph6": "FLNMO",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 877,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "Frq_w",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "Frq_w",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    },
+    {
+      "articulation_vertices": [],
+      "atlas_index": 878,
+      "block_rank_profile": [
+        5
+      ],
+      "bridge_free_core_graph6": "F{cZG",
+      "bridges": [],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "graph6": "F{cZG",
+      "m": 11,
+      "n": 7,
+      "positive_rank_block_count": 1,
+      "positive_rank_profile": [
+        5
+      ],
+      "selected_bridge_free_core": true,
+      "single_positive_rank_block": true
+    }
+  ],
+  "schema": "graph-atlas-rank5-enumeration-v1",
+  "selected_graph6_source_enumeration": [
+    {
+      "atlas_index": 51,
+      "graph6": "Dn{",
+      "ordinal": 0
+    },
+    {
+      "atlas_index": 179,
+      "graph6": "E_~w",
+      "ordinal": 1
+    },
+    {
+      "atlas_index": 180,
+      "graph6": "EjtW",
+      "ordinal": 2
+    },
+    {
+      "atlas_index": 181,
+      "graph6": "E^mG",
+      "ordinal": 3
+    },
+    {
+      "atlas_index": 182,
+      "graph6": "E^Mg",
+      "ordinal": 4
+    },
+    {
+      "atlas_index": 183,
+      "graph6": "EjvG",
+      "ordinal": 5
+    },
+    {
+      "atlas_index": 184,
+      "graph6": "Elfo",
+      "ordinal": 6
+    },
+    {
+      "atlas_index": 185,
+      "graph6": "Exv_",
+      "ordinal": 7
+    },
+    {
+      "atlas_index": 186,
+      "graph6": "ErXw",
+      "ordinal": 8
+    },
+    {
+      "atlas_index": 187,
+      "graph6": "Ehfw",
+      "ordinal": 9
+    },
+    {
+      "atlas_index": 188,
+      "graph6": "EzNG",
+      "ordinal": 10
+    },
+    {
+      "atlas_index": 189,
+      "graph6": "E^NG",
+      "ordinal": 11
+    },
+    {
+      "atlas_index": 190,
+      "graph6": "EyUw",
+      "ordinal": 12
+    },
+    {
+      "atlas_index": 790,
+      "graph6": "F?B~w",
+      "ordinal": 13
+    },
+    {
+      "atlas_index": 791,
+      "graph6": "FzTb?",
+      "ordinal": 14
+    },
+    {
+      "atlas_index": 792,
+      "graph6": "FjtQO",
+      "ordinal": 15
+    },
+    {
+      "atlas_index": 793,
+      "graph6": "FF[Kw",
+      "ordinal": 16
+    },
+    {
+      "atlas_index": 794,
+      "graph6": "FxMhO",
+      "ordinal": 17
+    },
+    {
+      "atlas_index": 795,
+      "graph6": "F|eK_",
+      "ordinal": 18
+    },
+    {
+      "atlas_index": 796,
+      "graph6": "Fz[`G",
+      "ordinal": 19
+    },
+    {
+      "atlas_index": 797,
+      "graph6": "FXYwg",
+      "ordinal": 20
+    },
+    {
+      "atlas_index": 798,
+      "graph6": "FhmhO",
+      "ordinal": 21
+    },
+    {
+      "atlas_index": 799,
+      "graph6": "Fxef?",
+      "ordinal": 22
+    },
+    {
+      "atlas_index": 800,
+      "graph6": "F@FnW",
+      "ordinal": 23
+    },
+    {
+      "atlas_index": 801,
+      "graph6": "F?F~o",
+      "ordinal": 24
+    },
+    {
+      "atlas_index": 802,
+      "graph6": "FGM]w",
+      "ordinal": 25
+    },
+    {
+      "atlas_index": 803,
+      "graph6": "FxkkG",
+      "ordinal": 26
+    },
+    {
+      "atlas_index": 804,
+      "graph6": "FxkKW",
+      "ordinal": 27
+    },
+    {
+      "atlas_index": 805,
+      "graph6": "Fp\\j?",
+      "ordinal": 28
+    },
+    {
+      "atlas_index": 806,
+      "graph6": "FhNhO",
+      "ordinal": 29
+    },
+    {
+      "atlas_index": 807,
+      "graph6": "FxeLO",
+      "ordinal": 30
+    },
+    {
+      "atlas_index": 808,
+      "graph6": "FjsYG",
+      "ordinal": 31
+    },
+    {
+      "atlas_index": 809,
+      "graph6": "FN{`G",
+      "ordinal": 32
+    },
+    {
+      "atlas_index": 810,
+      "graph6": "F@U}o",
+      "ordinal": 33
+    },
+    {
+      "atlas_index": 811,
+      "graph6": "Fhxgg",
+      "ordinal": 34
+    },
+    {
+      "atlas_index": 812,
+      "graph6": "FF|b?",
+      "ordinal": 35
+    },
+    {
+      "atlas_index": 813,
+      "graph6": "F`ENw",
+      "ordinal": 36
+    },
+    {
+      "atlas_index": 814,
+      "graph6": "FmpbG",
+      "ordinal": 37
+    },
+    {
+      "atlas_index": 815,
+      "graph6": "Fl{GW",
+      "ordinal": 38
+    },
+    {
+      "atlas_index": 816,
+      "graph6": "Fxecg",
+      "ordinal": 39
+    },
+    {
+      "atlas_index": 817,
+      "graph6": "FxeKo",
+      "ordinal": 40
+    },
+    {
+      "atlas_index": 818,
+      "graph6": "FxecW",
+      "ordinal": 41
+    },
+    {
+      "atlas_index": 819,
+      "graph6": "FleL_",
+      "ordinal": 42
+    },
+    {
+      "atlas_index": 820,
+      "graph6": "FhA{w",
+      "ordinal": 43
+    },
+    {
+      "atlas_index": 821,
+      "graph6": "FzKWg",
+      "ordinal": 44
+    },
+    {
+      "atlas_index": 822,
+      "graph6": "Ff[sO",
+      "ordinal": 45
+    },
+    {
+      "atlas_index": 823,
+      "graph6": "FrD{_",
+      "ordinal": 46
+    },
+    {
+      "atlas_index": 824,
+      "graph6": "FVrEG",
+      "ordinal": 47
+    },
+    {
+      "atlas_index": 825,
+      "graph6": "Fh]Ho",
+      "ordinal": 48
+    },
+    {
+      "atlas_index": 826,
+      "graph6": "FhFWw",
+      "ordinal": 49
+    },
+    {
+      "atlas_index": 827,
+      "graph6": "Fhhwg",
+      "ordinal": 50
+    },
+    {
+      "atlas_index": 828,
+      "graph6": "Fl|?W",
+      "ordinal": 51
+    },
+    {
+      "atlas_index": 829,
+      "graph6": "Fnw`G",
+      "ordinal": 52
+    },
+    {
+      "atlas_index": 830,
+      "graph6": "FcBzo",
+      "ordinal": 53
+    },
+    {
+      "atlas_index": 831,
+      "graph6": "FxT`o",
+      "ordinal": 54
+    },
+    {
+      "atlas_index": 832,
+      "graph6": "FxJ_w",
+      "ordinal": 55
+    },
+    {
+      "atlas_index": 833,
+      "graph6": "FhtOw",
+      "ordinal": 56
+    },
+    {
+      "atlas_index": 834,
+      "graph6": "FheTg",
+      "ordinal": 57
+    },
+    {
+      "atlas_index": 835,
+      "graph6": "FhFIw",
+      "ordinal": 58
+    },
+    {
+      "atlas_index": 836,
+      "graph6": "FhNJG",
+      "ordinal": 59
+    },
+    {
+      "atlas_index": 837,
+      "graph6": "FlkqO",
+      "ordinal": 60
+    },
+    {
+      "atlas_index": 838,
+      "graph6": "FhFJW",
+      "ordinal": 61
+    },
+    {
+      "atlas_index": 839,
+      "graph6": "FKL\\W",
+      "ordinal": 62
+    },
+    {
+      "atlas_index": 840,
+      "graph6": "FpNDW",
+      "ordinal": 63
+    },
+    {
+      "atlas_index": 841,
+      "graph6": "Fhctg",
+      "ordinal": 64
+    },
+    {
+      "atlas_index": 842,
+      "graph6": "FFx]?",
+      "ordinal": 65
+    },
+    {
+      "atlas_index": 843,
+      "graph6": "FBUlW",
+      "ordinal": 66
+    },
+    {
+      "atlas_index": 844,
+      "graph6": "F}?^O",
+      "ordinal": 67
+    },
+    {
+      "atlas_index": 845,
+      "graph6": "Fxqgg",
+      "ordinal": 68
+    },
+    {
+      "atlas_index": 846,
+      "graph6": "FpTz?",
+      "ordinal": 69
+    },
+    {
+      "atlas_index": 847,
+      "graph6": "F?]~_",
+      "ordinal": 70
+    },
+    {
+      "atlas_index": 848,
+      "graph6": "FxeHo",
+      "ordinal": 71
+    },
+    {
+      "atlas_index": 849,
+      "graph6": "F}oXO",
+      "ordinal": 72
+    },
+    {
+      "atlas_index": 850,
+      "graph6": "Fhff?",
+      "ordinal": 73
+    },
+    {
+      "atlas_index": 851,
+      "graph6": "Fm{`G",
+      "ordinal": 74
+    },
+    {
+      "atlas_index": 852,
+      "graph6": "FheyG",
+      "ordinal": 75
+    },
+    {
+      "atlas_index": 853,
+      "graph6": "Fhqwg",
+      "ordinal": 76
+    },
+    {
+      "atlas_index": 854,
+      "graph6": "FllGW",
+      "ordinal": 77
+    },
+    {
+      "atlas_index": 855,
+      "graph6": "Fhbwo",
+      "ordinal": 78
+    },
+    {
+      "atlas_index": 856,
+      "graph6": "FMtbG",
+      "ordinal": 79
+    },
+    {
+      "atlas_index": 857,
+      "graph6": "FNohg",
+      "ordinal": 80
+    },
+    {
+      "atlas_index": 858,
+      "graph6": "Flg[g",
+      "ordinal": 81
+    },
+    {
+      "atlas_index": 859,
+      "graph6": "FsW|_",
+      "ordinal": 82
+    },
+    {
+      "atlas_index": 860,
+      "graph6": "Fhe}?",
+      "ordinal": 83
+    },
+    {
+      "atlas_index": 861,
+      "graph6": "FKhZg",
+      "ordinal": 84
+    },
+    {
+      "atlas_index": 862,
+      "graph6": "FhuoW",
+      "ordinal": 85
+    },
+    {
+      "atlas_index": 863,
+      "graph6": "F`~PG",
+      "ordinal": 86
+    },
+    {
+      "atlas_index": 864,
+      "graph6": "FMshg",
+      "ordinal": 87
+    },
+    {
+      "atlas_index": 865,
+      "graph6": "FfxcG",
+      "ordinal": 88
+    },
+    {
+      "atlas_index": 866,
+      "graph6": "FDpjg",
+      "ordinal": 89
+    },
+    {
+      "atlas_index": 867,
+      "graph6": "FllIG",
+      "ordinal": 90
+    },
+    {
+      "atlas_index": 868,
+      "graph6": "Fhqhg",
+      "ordinal": 91
+    },
+    {
+      "atlas_index": 869,
+      "graph6": "FlkYG",
+      "ordinal": 92
+    },
+    {
+      "atlas_index": 870,
+      "graph6": "FhsZG",
+      "ordinal": 93
+    },
+    {
+      "atlas_index": 871,
+      "graph6": "FhNHo",
+      "ordinal": 94
+    },
+    {
+      "atlas_index": 872,
+      "graph6": "FlUj?",
+      "ordinal": 95
+    },
+    {
+      "atlas_index": 873,
+      "graph6": "FK`zo",
+      "ordinal": 96
+    },
+    {
+      "atlas_index": 874,
+      "graph6": "FlhWo",
+      "ordinal": 97
+    },
+    {
+      "atlas_index": 875,
+      "graph6": "FBjN_",
+      "ordinal": 98
+    },
+    {
+      "atlas_index": 876,
+      "graph6": "FLNMO",
+      "ordinal": 99
+    },
+    {
+      "atlas_index": 877,
+      "graph6": "Frq_w",
+      "ordinal": 100
+    },
+    {
+      "atlas_index": 878,
+      "graph6": "F{cZG",
+      "ordinal": 101
+    }
+  ],
+  "source": {
+    "exhaustiveness_assumption": "standard Graph Atlas exhaustiveness through order 7",
+    "graph_count": 1253,
+    "maximum_order": 7,
+    "name": "NetworkX 3.7 atlas.dat.gz (Read-Wilson Graph Atlas data)",
+    "relative_path": "../sources/networkx-3.7-atlas.dat.gz",
+    "sha256": "73fc416df0164923607751cb759f4ae81deb5f6550bf25be59c86de3b747e41d"
+  }
+}
