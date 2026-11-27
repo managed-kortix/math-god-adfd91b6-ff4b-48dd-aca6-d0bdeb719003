@@ -56,3 +56,21 @@
 15. In the gcd-grouped temporal formula, `U_n` includes the affine `chi`, the
     row is squarefree, the coprime condition is `(r,q)=1`, and the restricted
     correction is `-s_n/q`. Dropping any of these changes the identity.
+16. For the Cycle 47 one-generator projection, the intrinsic retention factor
+    is `|gamma_a|`, and the resulting constant is `epsilon^2`. The older
+    one-sided cross-term condition is sufficient but stronger than necessary.
+    Define the quotient as zero when `P_a=0`.
+17. The endpoint Möbius-packet expansion is additive, not relative. A PNT
+    upper bound, a formal reciprocal-zeta expansion, or a positive logarithmic
+    mean does not prove every-scale energy or the target liminf.
+18. The Cycle 47 complete-prefix construction has two canonical generators,
+    not automatically rank two. Use the Moore--Penrose or variational formula
+    unless `det G_a>0` is outward-certified. Trace control and full rank do not
+    lower-bound the selected physical vector without a correlation bound.
+19. The six complete-prefix rows are finite diagnostics. Their near-total
+    projection capture and positive determinants prove no eventual rank,
+    asymptotic lower bound, all-dyadic statement, or interscale theorem.
+20. A bounded fixed local dual cannot exactly isolate one simple critical zero
+    from all other simple critical-line modes, but this does not rule out
+    growing or approximate tests, finite cutoffs, ordinary projections, or
+    whole-packet inequalities.

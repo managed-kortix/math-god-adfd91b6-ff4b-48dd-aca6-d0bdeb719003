@@ -1,7 +1,7 @@
 RH CYCLE 47 FINITE INITIAL/TAIL VECTOR CENSUS: PASS
 scope=12 finite outward-Arb rows only; no convergence, asymptotic lower bound, moving-projection theorem, or RH claim
 source=millennium-prize/riemann-hypothesis/cycle47_initial_tail_vector_census.py
-source_sha256=89d6a52368813364d651e2c814608d3d731b6879b7179211834431e385c12bc2
+source_sha256=26c3f1a33bf68d1fe2d759e607f28246661fa1ac934af93bb11a6bd24072e7aa
 runtime=CPython-3.12.13 python-flint-0.9.0 FLINT-3.6.0
 canonical_command=rm -f /tmp/cycle47-replay.out && env -u PYTHONPYCACHEPREFIX PYTHONDONTWRITEBYTECODE=1 uv run --isolated --no-project --python 3.12.13 --with python-flint==0.9.0 python -I -B millennium-prize/riemann-hypothesis/cycle47_initial_tail_vector_census.py > /tmp/cycle47-replay.out && cmp /tmp/cycle47-replay.out millennium-prize/riemann-hypothesis/cycle47-initial-tail-vector-census.out
 theta=2/5 arb_precision_bits=192 identity_ceiling=[1.26217744835362e-29 +/- 1.12e-44]

@@ -4452,3 +4452,114 @@ The exact formulas, growing-`P` qualifications, counterexamples, literature
 boundary, and fail-closed verifier are in
 `cycle-46-finite-prime-grouping-and-initial-block-audit.md`.  No moving
 projection theorem, budget closure, or RH result is claimed.
+
+## Cycle 47: intrinsic retention and complete-prefix geometry
+
+Cycle 47 corrected and strengthened the Cycle 46 initial/tail attack without
+proving the moving Möbius retention estimate.  For the exact row-vector split
+
+\[
+ \widehat{\mathbf c}_a=P_a+T_a,
+\]
+
+the intrinsic one-generator projection is
+
+\[
+ \mathcal Q_a(I)=
+ \frac{|\langle P_a,\widehat{\mathbf c}_a\rangle|^2}{\|P_a\|^2}
+ =\gamma_a^2\|P_a\|^2,
+ \qquad
+ \gamma_a=1+\frac{\langle P_a,T_a\rangle}{\|P_a\|^2},
+\]
+
+with `mathcal Q_a=0` if `P_a=0`.  Orthogonal projection gives
+`D_a(I)>=mathcal Q_a(I)`.  Hence target-scale initial energy and
+`|gamma_a|>=epsilon` imply `D_a(I)>=epsilon^2 c_0 log(a)^-3`; the factor is
+`epsilon^2`, and the earlier one-sided cross-term condition is unnecessarily
+strong.
+
+The endpoint reciprocal-Möbius packet
+
+\[
+ \mathfrak h_n=1+\ell_n-(\log n)m_n
+\]
+
+satisfies the exact difference and tail identities
+
+\[
+ \mathfrak h_n-\mathfrak h_{n+1}
+ =\log(1+1/n)m_n,
+ \qquad
+ \mathfrak h_n=\sum_{j\ge n}\log(1+1/j)m_j.
+\]
+
+This yields an exact three-packet formula for `P_a(q)` and an unconditional
+additive PNT expansion whose leading term is
+
+\[
+ \frac{q-1}{q}\,
+ \frac{\mathfrak h_{\max(a,q)}-\mathfrak h_{2a}}
+      {2(1-\theta)\log a}.
+\]
+
+The formula is not a relative asymptotic: the endpoint difference may cancel,
+and no lower bound or every-scale vector estimate follows from PNT decay.
+
+On the fixed closed interval `I0=[1,3/2]`, the complete prefix
+
+\[
+ \mathcal B_{q,n}=
+ \int_1^{n+1}\rho_q(t)Z_n(t)\,dt/t^2
+\]
+
+has the endpoint-safe exact formula
+
+\[
+ \mathcal B_{q,n}=
+ \left(\frac nq-\log\frac{n+1}{q}\right)R_n
+ +\frac{E_{n+1}}{q\log n}
+ +\frac1{\log n}\left(
+ \log\frac{n+1}{q}-\sum_{k=q}^{n}\frac{\psi(k)}{k(k+1)}
+ \right).
+\]
+
+It produces canonical vectors `Y_a,V_a,H_a` with
+`hat_c=Y_a+V_a+H_a`.  The rank-safe two-generator projection
+
+\[
+ Q_a^{(2)}=z_a^T\mathsf G_a^+z_a
+ =\|\operatorname{Proj}_{\operatorname{span}(Y_a,V_a)}
+   \widehat{\mathbf c}_a\|^2
+ \le D_a(I_0)
+\]
+
+is exact in ranks zero, one, and two.  The ordinary inverse is allowed only
+after certifying a positive determinant.  Generic full rank and trace control
+are not coercive; the missing selected-vector correlation contains the hard
+arithmetic.
+
+Two fail-closed 192-bit Arb certificates pass all declared finite checks and
+reproduce their stored outputs byte for byte.  The initial/tail census has
+twelve rows at six dyadic starts and two intervals.  The
+complete-prefix census has 613 physical rows on `I0`, 54 direct-cell/Abel
+checks, and certifies actual rank two at the six tested starts.  Its capture
+ratios `Q_a^(2)/D_a` lie between `0.99745...` and `0.99994...`, while
+`log(a)^3 Q_a^(2)` is nonmonotone.  These are finite diagnostics only.
+
+A hostile audit also proved a narrow no-go: no bounded fixed local functional
+on one fixed log interval can exactly isolate one simple critical zero while
+annihilating all other simple critical-line modes.  It does not exclude
+scale-dependent, growing, approximate, finite-cutoff, or whole-packet methods.
+
+The complete theorem, correction ledger, exact hashes, trusted-runtime
+boundary, and open-gate statement are in
+`cycle-47-initial-tail-and-complete-prefix-audit.md`.  The surviving checkpoint
+is unchanged:
+
+\[
+ D_a(I)\gg(\log a)^{-3}
+\]
+
+for every sufficiently large integer `a` on one fixed nondegenerate
+\(I\Subset(0,2)\).  Even this would not by itself close the completed-square
+budget.  No RH result is claimed.

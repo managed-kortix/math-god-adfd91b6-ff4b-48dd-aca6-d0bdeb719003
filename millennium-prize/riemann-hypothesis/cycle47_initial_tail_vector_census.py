@@ -309,10 +309,10 @@ def direct_gram_spot_checks() -> tuple[dict[str, object], ...]:
         value = require_arb(gram.entry(a, b),
                             f"cotangent Gram entry {(a, b)}")
         upper = prefix + tail
-        require(prefix.lower() <= value.lower(),
+        require(prefix.upper() <= value.lower(),
                 "direct-cell lower Gram bracket failed", a, b,
                 prefix, value)
-        require(value.upper() <= upper.upper(),
+        require(value.upper() <= upper.lower(),
                 "direct-cell upper Gram bracket failed", a, b,
                 prefix, value, upper)
         results.append({

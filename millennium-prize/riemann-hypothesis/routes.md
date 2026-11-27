@@ -111,13 +111,33 @@ Every fixed finite old family, and only the explicit endpoint layers
 \]
 
 are removed at `o(log^-3/2 a)` in norm; no `o(log^-3 a)` energy removal follows
-without an independent upper bound. The estimate above remains open. A second
-exact sufficient formulation now retains the complete initial/tail cross term:
-on one fixed interval prove `||P_a||^2 >> log(a)^-3` and
-`<P_a,T_a> >= -(1-epsilon)||P_a||^2` for fixed `epsilon>0`, where the tail is
-the complete gcd-grouped finite-Abel expression from Cycle 46. The certified
-row rules out universal finite pointwise and sign-blind diagonal lower bounds;
-it does not refute an eventual asymptotic vector cross-term theorem.
+without an independent upper bound. The estimate above remains open.
+
+Cycle 47 gives two stronger sufficient projection checkpoints.  With the exact
+Cycle 46 split `hat_c=P_a+T_a`, define
+
+\[
+ \mathcal Q_a(I)=
+ \frac{|\langle P_a,\widehat{\mathbf c}_a\rangle|^2}{\|P_a\|^2}
+\]
+
+when `P_a` is nonzero, and zero otherwise.  Then
+`D_a(I)>=mathcal Q_a(I)`.  Thus `||P_a||^2>>log(a)^-3` and
+
+\[
+ \left|1+\frac{\langle P_a,T_a\rangle}{\|P_a\|^2}\right|
+ \ge\varepsilon
+\]
+
+give the lower bound with constant `epsilon^2`, not `epsilon`.  On the fixed
+interval `I0=[1,3/2]`, the exact complete-prefix identity further decomposes
+`hat_c=Y_a+V_a+H_a`; projection onto `span(Y_a,V_a)` gives a rank-safe
+quantity `Q_a^(2)<=D_a(I0)`.  Proving either
+`mathcal Q_a(I)>>log(a)^-3` or `Q_a^(2)>>log(a)^-3` would suffice, but neither
+is established.  Six finite two-generator censuses capture more than `99.7%`
+of `D_a` at the tested dyadic starts, yet their `log(a)^3 Q_a^(2)` values are
+nonmonotone and imply no asymptotic estimate or eventual rank statement.  See
+`cycle-47-initial-tail-and-complete-prefix-audit.md`.
 
 If the original packet estimate is proved, it gives only a trace-based
 moving-projection lower bound of order `log^-2 a`; Burnol's cited result is a

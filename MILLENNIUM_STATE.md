@@ -115,8 +115,20 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   universal finite separate-square, Chebyshev-square, and sign-blind diagonal
   lower bounds but not an asymptotic signed-cross-term estimate. The finite
   ordering `Delta_(6,64)<Delta_(2,64)<Delta_(10,64)` proves only finite
-  nonmonotonicity. The surviving checkpoint remains the same; no moving
-  projection limit, completed-square budget, or RH result is proved
+  nonmonotonicity. Cycle 47 now makes the initial/tail retention intrinsic:
+  `mathcal Q_a(I)=0` if `P_a=0`, while otherwise
+  `mathcal Q_a(I)=|<P_a,hat_c_a>|^2/||P_a||^2<=D_a`; target-scale initial
+  energy and `|gamma_a|>=epsilon` then give an `epsilon^2` constant. Its exact endpoint packet
+  `mathfrak h_n=1+ell_n-log(n)m_n` has a finite-difference/tail identity, but
+  PNT yields only an additive upper expansion, not every-scale energy. On the
+  fixed interval `[1,3/2]`, the complete prefix gives a canonical
+  `hat_c_a=Y_a+V_a+H_a` decomposition and rank-safe two-generator projection
+  `Q_a^(2)<=D_a`; six outward-Arb rows capture `0.99745...` to `0.99994...` of
+  the finite physical energy, while `log(a)^3 Q_a^(2)` is nonmonotone. A
+  fixed-local exact zero isolator is impossible by Cartwright zero density,
+  but growing and approximate whole-packet methods remain open. The surviving
+  checkpoint is unchanged; no moving-projection limit, completed-square
+  budget, or RH result is proved
 - **parallel scouts:** a read-only bounded re-audit completed on 2026-11-25
   and established no new dossier checkpoint. It rechecked five prior, special,
   or abstract statements: (i) for the standard period-normalized ordinary
@@ -135,7 +147,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   abstract spectral-edge transfer criterion. This criterion is not verified
   for a Yang--Mills cutoff family, and strong-resolvent convergence alone is
   insufficient. These are not new Cycle 46 or Clay results.
-- **cycle:** 46
+- **cycle:** 47
 - **announcements:** none
 
 ## immutable target list
@@ -158,18 +170,20 @@ waiting process.
    compact interval `I` inside `(0,2)`. Either prove the weighted two-point
    Möbius packet inequality (11.3) of
    `millennium-prize/riemann-hypothesis/moving-gram-kernel-audit-2026-11-25.md`,
-   or prove the target-scale vector bounds
-   `||P_a||^2 >= c_0 log(a)^-3` and
-   `<P_a,T_a> >= -(1-epsilon)||P_a||^2` for fixed
-   `c_0,epsilon>0`. In the second route retain the complete tail
-   (6.1)--(6.2), the affine column, exact gcd restriction, every endpoint and
+   or prove one of the stronger intrinsic projection bounds
+   `mathcal Q_a(I) >> log(a)^-3` or, on `I0=[1,3/2]`,
+   `Q_a^(2) >> log(a)^-3`. For the first route this may be split into
+   `||P_a||^2 >= c_0 log(a)^-3` and `|gamma_a|>=epsilon`, with the resulting
+   constant `epsilon^2`; for the two-generator route the canonical sufficient
+   pair is `tr(G_a) << log(a)^-3` and `||z_a||^2 >> log(a)^-6`. Retain the
+   complete tail, affine column, exact gcd restriction, every endpoint and
    Möbius sign, and the full Vasyunin kernel. A universal finite pointwise row
-   bound or separate normal, initial, tail, or Chebyshev diagonal does not
-   suffice. The middle-column reduction is only an `o(log^-3/2 a)` norm
-   statement and must not be squared without a separate upper bound. Even
-   success gives only a trace-based moving-projection lower bound of order
-   `log^-2 a`; require constants and an appropriate
-   `N_theta(a,2a)=O(log^-2 a)` upper bound before claiming a physical budget.
+   bound or separate normal, initial, tail, endpoint, or Chebyshev diagonal
+   does not suffice. Do not infer an asymptotic from the six finite capture
+   ratios or from PNT's additive endpoint expansion. Even success gives only a
+   trace-based moving-projection lower bound of order `log^-2 a`; require
+   constants and an appropriate `N_theta(a,2a)=O(log^-2 a)` upper bound before
+   claiming a physical budget.
 2. If finite-prime grouping is used, keep the `P` regime explicit. For fixed
    `P`, use `Delta_(P,a)` only as an equivalent normalization of the still-open
    checkpoint. For growing `P=P(a)`, use the quantitative estimate (4.4),
@@ -198,6 +212,28 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-11-27: Cycle 47 derived the intrinsic initial/tail projection
+  `mathcal Q_a(I)=0` for `P_a=0` and otherwise
+  `mathcal Q_a(I)=|<P_a,hat_c_a>|^2/||P_a||^2`, correcting the retained
+  constant to `epsilon^2` and replacing the unnecessary one-sided cross-term
+  condition by `|gamma_a|>=epsilon`. It proved the exact endpoint Möbius packet
+  difference and tail identities and an unconditional additive PNT expansion;
+  the expansion is not relative and proves no lower bound. On the fixed
+  interval `[1,3/2]`, an exact complete-prefix formula gives
+  `hat_c_a=Y_a+V_a+H_a` and the rank-safe projection
+  `Q_a^(2)=z_a^T G_a^+ z_a<=D_a`. A narrow Cartwright argument rules out a
+  bounded fixed local functional that exactly isolates one simple critical
+  zero, without excluding moving or approximate whole-packet tests. Two
+  fail-closed 192-bit Arb certificates pass all declared finite checks and
+  reproduce their stored outputs byte for byte. The initial/tail census has
+  twelve rows; the complete-prefix census has 613 rows,
+  54 cell/Abel checks, and six positive determinants. Its finite capture ratios
+  lie between `0.99745...` and `0.99994...`, while `log(a)^3 Q_a^(2)` is
+  nonmonotone. Hostile independent replay accepted both corrected artifacts.
+  These are exact identities, no-go scope, and finite diagnostics only. The
+  checkpoint `D_a(I)>>log(a)^-3` remains open; no moving-projection theorem,
+  completed-square budget, or RH result is proved.
 
 - 2026-11-26: Cycle 46 derived exact finite-prime inclusion--exclusion grouping
   of the moving Möbius--Vasyunin columns, a quantitative growing-`P` tracking
