@@ -31,6 +31,10 @@ sys.dont_write_bytecode = True
 RH_DIR = Path(__file__).resolve().parent
 WORKSPACE = RH_DIR.parent.parent
 SCRIPT_PATH = Path(__file__).resolve()
+# Capture the certificate source near startup.  Later checks bind the printed
+# source hash to these same bytes rather than to an uncoupled final reread.
+_SCRIPT_BYTES = SCRIPT_PATH.read_bytes()
+_SCRIPT_SHA256 = hashlib.sha256(_SCRIPT_BYTES).hexdigest()
 
 BITS = 192
 STARTS = (32, 64, 128, 256, 512, 1024)
@@ -42,6 +46,8 @@ THETA = Fraction(2, 5)
 MAX_N = 2 * max(STARTS)
 IDENTITY_EXPONENT = BITS // 2
 DIGITS = 40
+DIRECT_GRAM_CELLS = 100_000
+DIRECT_GRAM_PAIRS = ((39, 26), (227, 229), (2017, 2039))
 
 LOCAL_MODULES = (
     "certify_complete_gram",
@@ -187,6 +193,7 @@ _BOUND_MODULES = {name: _exec_bound_module(name) for name in LOCAL_MODULES}
 DispersionData = _BOUND_MODULES["cycle45_dispersion_census"].DispersionData
 arb_sum = _BOUND_MODULES["cycle45_dispersion_census"].arb_sum
 mobius_sieve = _BOUND_MODULES["certify_complete_gram"].mobius_sieve
+RestrictedGram = _BOUND_MODULES["certify_complete_gram"].RestrictedGram
 require_exact_runtime = _BOUND_MODULES["cycle45_runtime"].require_exact_runtime
 
 
@@ -195,6 +202,10 @@ def verify_runtime_and_inputs() -> None:
     require(not (script_mode & (stat.S_IWGRP | stat.S_IWOTH)),
             "certificate source permissions changed", SCRIPT_PATH,
             oct(script_mode))
+    require(SCRIPT_PATH.read_bytes() == _SCRIPT_BYTES,
+            "certificate source bytes changed after startup", SCRIPT_PATH)
+    require(sha256_bytes(_SCRIPT_BYTES) == _SCRIPT_SHA256,
+            "captured certificate source hash mismatch", SCRIPT_PATH)
     # Re-read after execution of captured bytes.  An in-process mutation cannot
     # silently change either the declared input or the later artifact replay.
     for path, expected in EXPECTED_SHA256.items():
@@ -266,6 +277,51 @@ def arb_fraction(value: Fraction) -> arb:
 
 def add_error(total: arb, value: arb, label: str) -> arb:
     return total + certify_zero(value, label)
+
+
+def direct_gram_spot_checks() -> tuple[dict[str, object], ...]:
+    """Bracket selected off-diagonal Gram entries by reciprocal cells.
+
+    This is independent of the imported cotangent formula but intentionally
+    uses the same trusted Arb backend.  On [k,k+1], the fractional parts are
+    affine, so the cell integral is evaluated exactly using rationals and one
+    logarithm.  The nonnegative omitted tail is at most 1/(K+1).
+    """
+    K = DIRECT_GRAM_CELLS
+    prefixes = [arb(0) for _ in DIRECT_GRAM_PAIRS]
+    # Cells k=1,...,K cover [1,K+1], hence the tail begins at K+1.
+    for k in range(1, K + 1):
+        log_ratio = (arb(k + 1) / k).log()
+        reciprocal_gap = arb(1) / k - arb(1) / (k + 1)
+        for index, (a, b) in enumerate(DIRECT_GRAM_PAIRS):
+            floor_a = k // a
+            floor_b = k // b
+            prefixes[index] += (
+                arb(1) / (a * b)
+                - (arb(floor_a) / b + arb(floor_b) / a) * log_ratio
+                + arb(floor_a * floor_b) * reciprocal_gap
+            )
+
+    tail = arb(1) / (K + 1)
+    gram = RestrictedGram()
+    results = []
+    for (a, b), prefix in zip(DIRECT_GRAM_PAIRS, prefixes, strict=True):
+        value = require_arb(gram.entry(a, b),
+                            f"cotangent Gram entry {(a, b)}")
+        upper = prefix + tail
+        require(prefix.lower() <= value.lower(),
+                "direct-cell lower Gram bracket failed", a, b,
+                prefix, value)
+        require(value.upper() <= upper.upper(),
+                "direct-cell upper Gram bracket failed", a, b,
+                prefix, value, upper)
+        results.append({
+            "pair": (a, b),
+            "prefix": prefix,
+            "value": value,
+            "tail": tail,
+        })
+    return tuple(results)
 
 
 # ---------------------------------------------------------------------------
@@ -691,6 +747,7 @@ def main() -> None:
     verify_runtime_and_inputs()
     ctx.prec = BITS
     exact_mu_table, prime_bases = exact_arithmetic_tables()
+    direct_gram_rows = direct_gram_spot_checks()
     references = load_cycle45_reference()
 
     all_results = []
@@ -710,16 +767,20 @@ def main() -> None:
     print("RH CYCLE 47 FINITE INITIAL/TAIL VECTOR CENSUS: PASS")
     print("scope=12 finite outward-Arb rows only; no convergence, asymptotic lower bound, moving-projection theorem, or RH claim")
     print(f"source={SCRIPT_PATH.relative_to(WORKSPACE)}")
-    print(f"source_sha256={sha256_file(SCRIPT_PATH)}")
+    print(f"source_sha256={_SCRIPT_SHA256}")
     print("runtime=CPython-3.12.13 python-flint-0.9.0 FLINT-3.6.0")
-    print("canonical_command=env -u PYTHONPYCACHEPREFIX PYTHONDONTWRITEBYTECODE=1 uv run --isolated --no-project --python 3.12.13 --with python-flint==0.9.0 python -I -B millennium-prize/riemann-hypothesis/cycle47_initial_tail_vector_census.py > millennium-prize/riemann-hypothesis/cycle47-initial-tail-vector-census.out")
+    print("canonical_command=rm -f /tmp/cycle47-replay.out && env -u PYTHONPYCACHEPREFIX PYTHONDONTWRITEBYTECODE=1 uv run --isolated --no-project --python 3.12.13 --with python-flint==0.9.0 python -I -B millennium-prize/riemann-hypothesis/cycle47_initial_tail_vector_census.py > /tmp/cycle47-replay.out && cmp /tmp/cycle47-replay.out millennium-prize/riemann-hypothesis/cycle47-initial-tail-vector-census.out")
     print(f"theta=2/5 arb_precision_bits={BITS} identity_ceiling={interval(identity_ceiling(), 15)}")
-    print("row_rule=squarefree q with q/a in the named closed interval")
-    print("normalization=hat_c(q)=mu(q)c_q=beta(q)+sum_d(mu(d)W(q,d)); W has no hidden Mobius sign")
-    print("definitions=P(q)=sum_n(alpha(q,n)F(q,n)); T(q)=sum_n(alpha(q,n)(K(q,n)-F(q,n))); c=P+T=hat_c")
+    print("row_rule=squarefree q with a<=q<2a and q/a in the named closed interval")
+    print("normalization=hat_c(q)=mu(q)c(q)=beta(q)+sum_d(mu(d)W(q,d)); W has no hidden Mobius sign")
+    print("definitions=P(q)=sum_n(alpha(q,n)F(q,n)); T(q)=sum_n(alpha(q,n)(K(q,n)-F(q,n))); hat_c=P+T and signed c(q)=mu(q)hat_c(q)")
     print("Q_definition=|<P,P+T>|^2/||P||^2=(||P||^2+<P,T>)^2/||P||^2")
     print("path_checks=PASS P:suffix,direct-temporal-F,psi+Mobius-split; hat_c:temporal-prefix-K,coefficient-index-beta+sum(mu*W); T:direct-K-minus-F,hat_c-minus-P")
     print(f"exact_arithmetic=PASS Mobius_and_Lambda_prime_power_range=1..{MAX_N}")
+    print(f"offdiagonal_direct_cell_gram=PASS pairs={len(direct_gram_rows)} cells={DIRECT_GRAM_CELLS} tail_bound=1/{DIRECT_GRAM_CELLS + 1} scope=independent_formula_shared_Arb_backend")
+    for row in direct_gram_rows:
+        a, b = row["pair"]
+        print(f"direct_gram pair=({a},{b}) prefix={interval(row['prefix'], 20)} cotangent={interval(row['value'], 20)} tail={interval(row['tail'], 15)}")
     print(f"bound_inputs_sha256=PASS count={len(EXPECTED_SHA256)}")
     for path, expected in EXPECTED_SHA256.items():
         print(f"input_sha256 {path.relative_to(WORKSPACE)} {expected}")

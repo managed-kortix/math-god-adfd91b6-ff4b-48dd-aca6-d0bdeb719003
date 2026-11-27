@@ -1,16 +1,20 @@
 RH CYCLE 47 FINITE INITIAL/TAIL VECTOR CENSUS: PASS
 scope=12 finite outward-Arb rows only; no convergence, asymptotic lower bound, moving-projection theorem, or RH claim
 source=millennium-prize/riemann-hypothesis/cycle47_initial_tail_vector_census.py
-source_sha256=1ca5c0190a48aa0939c8ae274ba0340e924ab79ac89f92eb27b9f7fbf9ae2e19
+source_sha256=89d6a52368813364d651e2c814608d3d731b6879b7179211834431e385c12bc2
 runtime=CPython-3.12.13 python-flint-0.9.0 FLINT-3.6.0
-canonical_command=env -u PYTHONPYCACHEPREFIX PYTHONDONTWRITEBYTECODE=1 uv run --isolated --no-project --python 3.12.13 --with python-flint==0.9.0 python -I -B millennium-prize/riemann-hypothesis/cycle47_initial_tail_vector_census.py > millennium-prize/riemann-hypothesis/cycle47-initial-tail-vector-census.out
+canonical_command=rm -f /tmp/cycle47-replay.out && env -u PYTHONPYCACHEPREFIX PYTHONDONTWRITEBYTECODE=1 uv run --isolated --no-project --python 3.12.13 --with python-flint==0.9.0 python -I -B millennium-prize/riemann-hypothesis/cycle47_initial_tail_vector_census.py > /tmp/cycle47-replay.out && cmp /tmp/cycle47-replay.out millennium-prize/riemann-hypothesis/cycle47-initial-tail-vector-census.out
 theta=2/5 arb_precision_bits=192 identity_ceiling=[1.26217744835362e-29 +/- 1.12e-44]
-row_rule=squarefree q with q/a in the named closed interval
-normalization=hat_c(q)=mu(q)c_q=beta(q)+sum_d(mu(d)W(q,d)); W has no hidden Mobius sign
-definitions=P(q)=sum_n(alpha(q,n)F(q,n)); T(q)=sum_n(alpha(q,n)(K(q,n)-F(q,n))); c=P+T=hat_c
+row_rule=squarefree q with a<=q<2a and q/a in the named closed interval
+normalization=hat_c(q)=mu(q)c(q)=beta(q)+sum_d(mu(d)W(q,d)); W has no hidden Mobius sign
+definitions=P(q)=sum_n(alpha(q,n)F(q,n)); T(q)=sum_n(alpha(q,n)(K(q,n)-F(q,n))); hat_c=P+T and signed c(q)=mu(q)hat_c(q)
 Q_definition=|<P,P+T>|^2/||P||^2=(||P||^2+<P,T>)^2/||P||^2
 path_checks=PASS P:suffix,direct-temporal-F,psi+Mobius-split; hat_c:temporal-prefix-K,coefficient-index-beta+sum(mu*W); T:direct-K-minus-F,hat_c-minus-P
 exact_arithmetic=PASS Mobius_and_Lambda_prime_power_range=1..2048
+offdiagonal_direct_cell_gram=PASS pairs=3 cells=100000 tail_bound=1/100001 scope=independent_formula_shared_Arb_backend
+direct_gram pair=(39,26) prefix=[0.032942207161935887603 +/- 1.58e-22] cotangent=[0.032944845881453027370 +/- 3.48e-22] tail=[9.99990000099999e-6 +/- 2e-24]
+direct_gram pair=(227,229) prefix=[0.0054213000807977614615 +/- 2.64e-23] cotangent=[0.0054238210776643017590 +/- 1.21e-24] tail=[9.99990000099999e-6 +/- 2e-24]
+direct_gram pair=(2017,2039) prefix=[0.00060750455858408886053 +/- 4.10e-24] cotangent=[0.00060997165465885242480 +/- 3.36e-24] tail=[9.99990000099999e-6 +/- 2e-24]
 bound_inputs_sha256=PASS count=7
 input_sha256 millennium-prize/riemann-hypothesis/cycle45_dispersion_census.py 9f24a6630a8804996590732d8a6f6389557a296eacb7daedc5fc56cb38152ade
 input_sha256 millennium-prize/riemann-hypothesis/certify_complete_gram.py 9b87a6e35cbb7adf5041442410e74346aa79c2a29d495df1a9ee93c17b35c9b8
