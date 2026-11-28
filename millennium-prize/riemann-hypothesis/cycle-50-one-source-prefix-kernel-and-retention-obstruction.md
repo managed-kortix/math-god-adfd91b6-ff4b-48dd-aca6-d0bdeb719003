@@ -44,7 +44,7 @@ signed Möbius sum.
 Fix
 
 \[
- a\ge2,\qquad 0<\theta<\frac12,\qquad
+ a\in\mathbb Z,\quad a\ge2,\qquad 0<\theta<\frac12,\qquad
  C=2(1-\theta),\qquad \tau=C-1,
 \]
 
@@ -263,9 +263,9 @@ Thus
 
 \[
  \boxed{
- B_a(q)=-\sum_{m=1}^{M}\mu(m)V_a(q,m),
+ B_a(q)=-\sum_{m=1}^{M}\mu(m)\mathscr V_a(q,m),
  \qquad
- V_a(q,m)=\sum_{n=\max(q,m)}^{M}
+ \mathscr V_a(q,m)=\sum_{n=\max(q,m)}^{M}
  \frac{\alpha_{q,n}}{L_n}\mathscr K_{q,n}(m).}
  \tag{2.5}
 \]
@@ -277,10 +277,10 @@ Put
 
 \[
  A_N^{\Lambda}=\sum_{r\le N}\frac{\Lambda(r)}r,
- \qquad A_0^{\Lambda}=0.
+ \qquad A_0^{\Lambda}=0,
 \]
 
-For \(1\le t<n+1\),
+and use the convention \(0!=1\).  For \(1\le t<n+1\),
 
 \[
  \sum_{r\le\lfloor n/m\rfloor}\Lambda(r)
@@ -312,7 +312,8 @@ gives the exact factorial representation
  \tag{2.8}
 \]
 
-Two finite convolution closures are
+Two finite convolution closures, valid for every integer \(k\ge1\) and every
+integer \(n\ge1\), respectively, are
 
 \[
  \boxed{
@@ -445,8 +446,8 @@ For \(s\ge R\), define
 
 ### Theorem 4.1 (locally uniform entrywise limit)
 
-For every compact \(E\Subset[1,2)^2\), uniformly over integer labels
-\((q/a,d/a)\in E\),
+For every compact \(E\Subset[1,2)^2\), uniformly over integers
+\(a\le q,d\le M\) such that \(u=q/a\), \(v=d/a\), and \((u,v)\in E\),
 
 \[
  \boxed{
@@ -841,9 +842,10 @@ These are entrywise statements, not limits after summing against the growing
 vector \((\mu(d))\).
 
 There is, however, a rigorous current-current limit for each fixed moving
-normal-matrix entry.  If \(d/a\to v\in[1,2)\) and \(e/a\to w\in[1,2)\),
-with \(v,w\) in fixed compact subsets, then squarefree-row equidistribution
-and the locally uniform entrywise limits give
+normal-matrix entry.  Let \(d=d(a)\) and \(e=e(a)\) be integer labels satisfying
+\(a\le d,e\le M\) at every scale.  If \(d/a\to v\in[1,2)\) and
+\(e/a\to w\in[1,2)\), with \(v,w\) in fixed compact subsets, then
+squarefree-row equidistribution and the locally uniform entrywise limits give
 
 \[
  \boxed{
@@ -877,7 +879,7 @@ the growing selected Möbius sum.
 
 ### The finite mixed/Krein form
 
-Let \(b_q\) and \(c_q\) denote row vectors of \(W_B\) and
+Let \(\mathbf b_q\) and \(\mathbf c_q\) denote row vectors of \(W_B\) and
 \(W_C^\delta\).  Exactly,
 
 \[
@@ -894,17 +896,19 @@ Moreover,
  \boxed{
  \begin{aligned}
  \operatorname{sym}(N_a)
- &=\sum_{q\in\mathcal Q_a}\frac{b_q\otimes c_q+c_q\otimes b_q}{2}\\
+ &=\sum_{q\in\mathcal Q_a}
+ \frac{\mathbf b_q\otimes\mathbf c_q+\mathbf c_q\otimes\mathbf b_q}{2}\\
  &=\frac14\sum_{q\in\mathcal Q_a}
- \bigl[(b_q+c_q)\otimes(b_q+c_q)
-      -(b_q-c_q)\otimes(b_q-c_q)\bigr].
+ \bigl[(\mathbf b_q+\mathbf c_q)\otimes(\mathbf b_q+\mathbf c_q)
+      -(\mathbf b_q-\mathbf c_q)\otimes(\mathbf b_q-\mathbf c_q)\bigr].
  \end{aligned}}
  \tag{6.12}
 \]
 
 This is a Krein, or difference-of-Grams, factorization.  A one-row fiber is
-PSD only when one row vector vanishes or when \(c_q=\kappa b_q\) for some
-\(\kappa\ge0\).  Prefix square-kernel positivity contains no information about
+PSD only when one row vector vanishes or when
+\(\mathbf c_q=\kappa\mathbf b_q\) for some \(\kappa\ge0\).  Prefix
+square-kernel positivity contains no information about
 that relative alignment.
 
 ## 7. Finite certified obstructions
@@ -965,7 +969,13 @@ There is another finite-exact redistribution, using
  \sum_{d\le n}\mu(d)\left\lfloor\frac nd\right\rfloor=1
 \]
 
-simultaneously in the prefix, tail, and full contractions.  In that gauge,
+simultaneously in the prefix, tail, and full contractions.  Define
+
+\[
+ b_d(n)=\frac{\log d}{L_n}-\eta_n.
+\]
+
+In that gauge,
 
 \[
  W_B^F(q,d)=\sum_n\alpha_{q,n}
@@ -1049,17 +1059,20 @@ The following statements are false or unsupported and must not be used.
 
 ## 9. Surviving arithmetic frontier
 
-The one-source identity (2.5) rewrites the prefix checkpoint exactly as
+By the one-source identity (2.5), the still-open prefix checkpoint is the
+fully quantified assertion
 
 \[
  \boxed{
+ \exists c>0\ \exists a_0\in\mathbb Z_{\ge2}\ \forall a\in\mathbb Z,
+ \quad a\ge a_0\Longrightarrow
  \sum_{q\in\mathcal Q_a}
- \left|\sum_{m=1}^{M}\mu(m)V_a(q,m)\right|^2
- \gg(\log a)^{-3}.}
+ \left|\sum_{m=1}^{M}\mu(m)\mathscr V_a(q,m)\right|^2
+ \ge\frac{c}{(\log a)^3}.}
  \tag{9.1}
 \]
 
-This is a moving weighted-Möbius noncompression theorem.  The square-kernel
+This would be a moving weighted-Möbius noncompression theorem.  The square-kernel
 PSD result does not choose the Möbius phase, and the complete-monotonicity
 route is false.
 
@@ -1070,7 +1083,7 @@ lower bound
  \|B_a\|_2^2\ge
  \frac{\left|\sum_m\mu(m)\Phi_{a,y}(m)\right|^2}{\|y\|_2^2},
  \qquad
- \Phi_{a,y}(m)=\sum_qy_qV_a(q,m).
+ \Phi_{a,y}(m)=\sum_qy_q\mathscr V_a(q,m).
  \tag{9.2}
 \]
 

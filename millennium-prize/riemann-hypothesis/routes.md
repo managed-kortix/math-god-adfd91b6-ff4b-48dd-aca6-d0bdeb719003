@@ -233,7 +233,7 @@ collapsed gauge
 and a second convolution gives the one-source formula
 
 \[
- B_a(q)=-\sum_{m=1}^{2a-1}\mu(m)V_a(q,m).
+ B_a(q)=-\sum_{m=1}^{2a-1}\mu(m)\mathscr V_a(q,m).
 \]
 
 The current-label limit of `a log(a) W_B` is explicit.  Its symmetric part is
@@ -253,7 +253,7 @@ lemma is the weighted-Mobius noncompression estimate
 
 \[
  \sum_{q\in\mathcal Q_a}
- \left|\sum_m\mu(m)V_a(q,m)\right|^2\gg(\log a)^{-3},
+ \left|\sum_m\mu(m)\mathscr V_a(q,m)\right|^2\gg(\log a)^{-3},
 \]
 
 plus a separate selected estimate for the mixed delta-gauge cross form.  Any

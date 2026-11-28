@@ -214,7 +214,7 @@ waiting process.
    the separately positive packet is known to cancel its signed partner at
    leading order and cannot be used as a lower bound. Cycle 50 gives the exact
    equivalent one-source form
-   `B_a(q)=-sum_(m<=2a-1) mu(m)V_a(q,m)`; the norm target is now the explicit
+   `B_a(q)=-sum_(m<=2a-1) mu(m) \mathscr V_a(q,m)`; the norm target is now the explicit
    weighted-Mobius noncompression estimate for this complete sum. Do not use
    complete monotonicity, which is finitely false, or infer retention from the
    positive symmetric collapsed-prefix kernel. Retention uses the compatible
