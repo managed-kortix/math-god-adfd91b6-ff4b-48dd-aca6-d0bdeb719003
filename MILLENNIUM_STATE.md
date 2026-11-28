@@ -241,8 +241,11 @@ waiting process.
    column, exact gcd restriction, every endpoint and Möbius sign, and the full
    Vasyunin kernel. A universal finite pointwise row bound or separate normal,
    initial, tail, endpoint, prime, or Chebyshev diagonal does not suffice. Do
-   not infer an asymptotic from the six finite capture ratios or from PNT's
-   additive endpoint expansion. Even success gives only a trace-based
+   not infer an asymptotic from the six finite projection ratios, the seven
+   smooth-span captures, or PNT's additive endpoint expansion. The smooth
+   three-function basis is nearly dependent on `[1,3/2]` and has no known
+   arithmetic closure; use it only after deriving exact normal equations and a
+   rigorous arithmetic remainder. Even success gives only a trace-based
    moving-projection lower bound of order `log^-2 a`; require constants and an
    appropriate `N_theta(a,2a)=O(log^-2 a)` upper bound before claiming a
    physical budget.
