@@ -160,6 +160,21 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   requires a separate mixed-cross estimate. The preferred stronger checkpoint
   remains `mathcal Q_a^cp>>log(a)^-3`, with `Q_a^(2)` as fallback. Neither is
   proved.
+  Cycle 52 now gives an exact cancellation-preserving suffix normal form and a
+  rank-safe three-moment sieve: for the ordered basis `(1,q/a,log(q/a))`,
+  `||B_a||^2 >= ||m_a||^2/(4a)`.  The continuum Gram is explicitly positive,
+  but no arithmetic moment lower bound follows.  A 256-bit Arb determinant at
+  `a=11` refutes a universal exact three-function closure, while 256-bit Arb
+  captures `0.769089...` and `0.425849...` at `a=8192,16384` rigorously refute
+  universal high finite capture without making an asymptotic claim.  Exact
+  one-source dual transforms reduce nonnegative smooth tests to signed
+  block-Mertens averages plus the old von-Mangoldt block; one-point inputs give
+  no every-scale lower bound.  For the signed arithmetic test, the self-
+  diagonal is too small and a full weighted two-point Mobius estimate is the
+  missing input for that specific test.  Exact first/second/third differences
+  and a four-point smooth-mode annihilator retain dense signed arithmetic
+  packets, so those architectures do not close the bound.  Prefix norm and
+  signed prefix/full retention remain separate.
   The surviving physical checkpoint is unchanged; no moving-projection limit,
   completed-square budget, or RH result is proved
 - **parallel scouts:** a read-only bounded re-audit completed on 2026-11-25
@@ -180,7 +195,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   abstract spectral-edge transfer criterion. This criterion is not verified
   for a Yang--Mills cutoff family, and strong-resolvent convergence alone is
   insufficient. These are not new Cycle 46 or Clay results.
-- **cycle:** 51
+- **cycle:** 52
 - **announcements:** none
 
 ## immutable target list
@@ -241,14 +256,21 @@ waiting process.
    column, exact gcd restriction, every endpoint and Möbius sign, and the full
    Vasyunin kernel. A universal finite pointwise row bound or separate normal,
    initial, tail, endpoint, prime, or Chebyshev diagonal does not suffice. Do
-   not infer an asymptotic from the six finite projection ratios, the seven
-   smooth-span captures, or PNT's additive endpoint expansion. The smooth
-   three-function basis is nearly dependent on `[1,3/2]` and has no known
-   arithmetic closure; use it only after deriving exact normal equations and a
-   rigorous arithmetic remainder. Even success gives only a trace-based
-   moving-projection lower bound of order `log^-2 a`; require constants and an
-   appropriate `N_theta(a,2a)=O(log^-2 a)` upper bound before claiming a
-   physical budget.
+   not infer an asymptotic from the six finite projection ratios, any
+   smooth-span capture table, or PNT's additive endpoint expansion. Cycle 52
+   supplies exact normal equations and the rank-safe implication
+   `||B_a||^2>=||m_a||^2/(4a)`, so a precise sufficient smooth-moment target is
+   `||m_a||^2>>a/log(a)^3`; it is unproved. The certified `a=11` nonclosure
+   determinant and captures `0.769089...`, `0.425849...` at `a=8192,16384`
+   refute only universal exact closure and universal `>=96%` finite capture.
+   For an arbitrary chosen row test `y`, the dual sufficient condition is
+   `|sum_m mu(m)Gamma_y(m)|>>||y||_2 log(a)^(-3/2)`. The weighted off-diagonal
+   two-point estimate in Cycle 52 is sufficient only for the specific test
+   `y_q=mu(q)f(q/a)`, not necessary for every dual proof. Even a prefix-norm
+   success leaves signed prefix/full retention independent. A later successful
+   physical packet estimate would give only a trace-based moving-projection
+   lower bound of order `log^-2 a`; require constants and an appropriate
+   `N_theta(a,2a)=O(log^-2 a)` upper bound before claiming a physical budget.
 2. If finite-prime grouping is used, keep the `P` regime explicit. For fixed
    `P`, use `Delta_(P,a)` only as an equivalent normalization of the still-open
    checkpoint. For growing `P=P(a)`, use the quantitative estimate (4.4),

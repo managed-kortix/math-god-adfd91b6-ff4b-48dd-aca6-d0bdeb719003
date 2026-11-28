@@ -162,9 +162,43 @@
     be inserted into the unnormalized growing signed Mobius sum. Standard PNT
     upper bounds for both source blocks are far above the target energy after
     summing the rows and yield no anti-cancellation.
-40. Cycle 51 source geometry, the `a=2048` prefix row, and the smooth
-    `span{1,q/a,log(q/a)}` captures are binary64 finite screens. The three
-    sampled columns are nearly dependent on `[1,3/2]`, and no arithmetic
-    three-moment closure is known. These screens prove no asymptotic low rank,
-    eventual conditioning, remainder bound, projection lower bound, or RH
-    consequence.
+40. Cycle 51 source geometry, the `a=2048` prefix row, and the first seven
+    smooth `span{1,q/a,log(q/a)}` captures are binary64 finite screens.  The
+    columns are nearly dependent on `[1,3/2]`; high finite capture proves no
+    asymptotic low rank, eventual conditioning, remainder bound, projection
+    lower bound, or RH consequence.
+41. Cycle 52 gives only a rank-safe moment sieve:
+    `||B_a||^2 >= ||m_a||^2/(4a)` for the ordered moments against
+    `(1,q/a,log(q/a))`.  The tautological orthogonal decomposition is not a
+    low-rank theorem, and its continuum Gram positivity supplies no arithmetic
+    moment lower bound.  If `G_a=0`, use `m_a=0`; do not divide by a zero
+    largest eigenvalue.
+42. The Cycle 52 `a=11` determinant is a rigorous Arb interval sign
+    certificate, not an elementary closed-form exact value.  It refutes a
+    universal exact three-function identity only.  It does not refute eventual
+    exact closure, asymptotic rank-three approximation, or a vanishing relative
+    remainder.
+43. The certified captures `0.769089...` and `0.425849...` at
+    `a=8192,16384` are finite counterexamples to universal `>=96%` capture.
+    They do not prove asymptotic noncapture, failure of a liminf, a prefix norm
+    bound, canonical retention, or RH.  Later binary64 recovery is nonmonotone
+    and supplies no contrary theorem either.
+44. A smooth row dual has a positive decreasing current-source transform, but
+    Abel summation leaves signed block-Mertens values and the old block may
+    cancel it.  One-point PNT, Mertens, reciprocal-Mobius, or omega inputs do
+    not provide the needed every-scale lower bound.  For
+    `y_q=mu(q)f(q/a)`, the self-diagonal is `o(log^-3 a)` after dual
+    normalization; success of that particular test requires a weighted
+    off-diagonal two-point Mobius estimate for the full moving kernel.
+45. Prefix norm and canonical retention remain separate.  In the three-mode
+    decomposition the modal and remainder contributions to `<B_a,C_a>` are
+    signed and may cancel.  Neither high capture, an absolute norm lower bound,
+    nor exact closure implies `Q_a^cp` without an independent relative signed
+    retention estimate.
+46. Cycle 52 finite differencing does not localize the arithmetic source.
+    First, second, and third ordinary differences retain the dense interior and
+    moving-boundary packets; `Delta^3 log(q)` is nonzero.  The exact four-point
+    annihilator of `(1,q/a,log(q/a))` still leaves `log(q)^2`, reciprocal, and
+    cumulative Chebyshev channels.  Poincare transfers a proved differenced
+    lower bound but does not supply one.  The no-go concerns these specific
+    architectures only, not every longer variable-coefficient test.

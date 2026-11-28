@@ -293,6 +293,71 @@ and use a nearly dependent sampled basis, so they are only a prompt to derive
 exact normal equations and a rigorous remainder, not asymptotic evidence.  See
 `cycle-51-old-current-source-split-and-volterra-audit.md`.
 
+
+Cycle 52 turns the smooth three-function observation into an exact, limited
+moment sieve and then rigorously breaks the finite extrapolation.  The canonical
+prefix has the suffix normal form
+
+\[
+ B_a(q)=\sum_{n=q}^{2a-1}(p_n\log q+r_n)
+ \left((\log q)T_n+\frac{A_n^\star}{q}
+ +\Pi_{q-1}+D_n^\star\right),
+\]
+
+with every moving endpoint and arithmetic packet retained.  For the ordered
+sampled basis \(F_a=(1,q/a,\log(q/a))\), put
+\(G_a=F_a^TF_a\) and \(m_a=F_a^TB_a\).  Exact orthogonal projection and the
+finite trace bound give, in every rank,
+
+\[
+ \|B_a\|_2^2
+ =m_a^TG_a^+m_a+\|R_a^{(3)}\|_2^2
+ \ge\frac{\|m_a\|_2^2}{4a}.
+\]
+
+Hence
+
+\[
+ \|m_a\|_2^2\gg a(\log a)^{-3}
+\]
+
+is a precise sufficient moment target for the prefix norm.  It is not proved,
+and it does not imply signed prefix/full retention.
+
+The finite algebra does not close on the three functions: it contains moving
+suffixes, quadratic logarithms, reciprocal terms, and the arithmetic prefix
+\(\Pi_{q-1}\).  A 256-bit Arb determinant at \(a=11\) certifies that the
+actual \(B_{11}\) is outside the span on the exact four physical rows.  Separate
+256-bit Arb certificates at \(a=8192,16384\) give captures
+\(0.7690892386\ldots\) and \(0.4258499601\ldots\), refuting universal high
+finite capture but proving no asymptotic noncapture.
+
+Exact first, second, and third row differences retain the full interior
+source and moving lower-boundary cells.  A variable-coefficient four-point
+functional annihilates \(1,q/a,\log(q/a)\) exactly, but still leaves
+quadratic-logarithmic, reciprocal, and cumulative-Chebyshev channels.  The
+associated Poincare inequality is valid but cannot generate a lower bound for
+this signed residue.  Thus these specific finite-difference architectures do
+not improve the arithmetic checkpoint.
+
+For any row test \(y\), the exact one-source dual transform is
+
+\[
+ \langle y,B_a\rangle=-\sum_{m\le2a-1}\mu(m)\Gamma_y(m),
+ \qquad
+ \Gamma_y(m)=\sum_{q\in\mathcal Q_a}y_q\mathscr V_a(q,m).
+\]
+
+Nonnegative smooth tests make the current transform positive and decreasing,
+but finite Abel summation leaves signed block-Mertens values and an old-source
+block containing every nontrivial von Mangoldt term.  One-point PNT and Mertens
+upper estimates therefore do not yield an every-scale lower bound.  For the
+arithmetic test \(y_q=\mu(q)f(q/a)\), the positive self-diagonal contributes
+only \(O(1/[a\log^2a])=o(\log^{-3}a)\) after dual normalization; success would
+require a pointwise-in-scale weighted off-diagonal Mobius two-point
+noncancellation theorem for the full moving one-source kernel.  See
+`cycle-52-three-mode-moment-sieve-and-finite-obstruction.md`.
+
 If the original packet estimate is proved, it gives only a trace-based
 moving-projection lower bound of order `log^-2 a`; Burnol's cited result is a
 budget lower bound, not the upper bound needed to close the completed square.

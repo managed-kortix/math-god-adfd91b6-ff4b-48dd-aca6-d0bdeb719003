@@ -4937,3 +4937,108 @@ remainder bound; the tautological finite projection is not such a result.  No
 norm lower bound, retention theorem, or RH result follows.
 Full formulas, endpoint conditions, no-go examples, hashes, and replay commands
 are in `cycle-51-old-current-source-split-and-volterra-audit.md`.
+
+
+## Cycle 52: exact three-mode moment sieve and finite obstruction
+
+Cycle 52 audited the Cycle 51 smooth-span suggestion against the actual
+canonical complete-prefix vector.  With
+
+\[
+ T_n=\ell_n-\eta_nL_nm_n,
+ \quad p_n={w_nA_n\over L_n^2},
+ \quad r_n=-{w_n\tau\over L_n},
+\]
+
+\[
+ A_n^\star=\mathscr C_{n+1}+nT_n,
+ \qquad D_n^\star=-\Pi_n-L_{n+1}T_n,
+\]
+
+the exact cancellation-preserving normal form is
+
+\[
+ B_a(q)=\sum_{n=q}^{2a-1}(p_n\log q+r_n)
+ \left((\log q)T_n+{A_n^\star\over q}
+ +\Pi_{q-1}+D_n^\star\right).
+\]
+
+It retains the moving lower endpoint, terminal `n=2a-1` cell, every
+Chebyshev prefix, and every reciprocal-Mobius sign.  The corresponding suffix
+expansion contains `(log q)^2`, `(log q)/q`, `1/q`, `Pi_(q-1)`, and moving
+arithmetic suffixes; the existing convolution algebra therefore does not close
+on `span{1,q/a,log(q/a)}`.
+
+For the ordered sampled basis `F=(1,q/a,log(q/a))`, put
+`G=F^T F` and `m=F^T B`.  The exact rank-safe decomposition is
+
+\[
+ \|B_a\|_2^2=m_a^TG_a^+m_a+\|R_a^{(3)}\|_2^2.
+\]
+
+Since every positive eigenvalue of `G_a` is less than `4a`,
+
+\[
+ \|B_a\|_2^2\ge {\|m_a\|_2^2\over4a}.
+\]
+
+Thus the precise new moment checkpoint is
+
+\[
+ \|m_a\|_2^2\gg a(\log a)^{-3}.
+\]
+
+The continuum Gram is positive definite, with exact determinant
+
+\[
+ -{456h^2-360h+71\over1536}>0,
+ \qquad h=\log(3/2),
+\]
+
+but this supplies only nondegeneracy and natural scaling, not an arithmetic
+lower bound.
+
+Two fail-closed Arb certificates decisively demote the finite heuristic.  At
+`theta=2/5,a=11`, the determinant with columns
+`(1,q/11,log(q/11),B_11(q))` on exact rows `{11,13,14,15}` is certified in
+
+\[
+ [4.86281800877624871977\times10^{-6}
+ \mathbin{+/-}1.38\times10^{-67}]>0,
+\]
+
+so no universal exact three-function identity exists.  At `a=8192` and
+`16384`, the same smooth span captures respectively
+
+\[
+ 0.7690892386384062745\ldots,
+ \qquad 0.4258499600572534571\ldots
+\]
+
+of the actual prefix energy, with 256-bit outward intervals, certified Gram
+SPD, and direct residual cross-checks.  These are finite counterexamples to a
+universal `>=96%` finite-capture claim.  They do not refute eventual capture,
+asymptotic rank-three approximation, or any liminf theorem.
+
+Exact differencing does not repair the missing arithmetic lower bound.  The
+endpoint-complete first, second, and third row differences retain their full
+interior sums and moving lower-boundary cells.  Even the variable-coefficient
+four-point functional that annihilates `1,q/a,log(q/a)` exactly leaves
+quadratic-logarithmic, reciprocal, and cumulative-Chebyshev channels.  The
+valid Poincare inequality can transfer a lower bound for the full differenced
+vector, but supplies no such bound.  This closes only those specific
+finite-difference architectures, not every longer annihilator.
+
+Finally, moment size and even exact closure would not imply canonical
+retention.  Exactly,
+
+\[
+ \langle B_a,C_a\rangle
+ =m_a^TG_a^+d_a+\langle R_a^{(3)},C_a\rangle,
+ \qquad d_a=F_a^TC_a,
+\]
+
+and the two signed terms may cancel.  A prefix norm lower bound and a relative
+signed retention estimate remain logically separate requirements.  Full
+proofs, scope, intervals, hashes, and replay commands are in
+`cycle-52-three-mode-moment-sieve-and-finite-obstruction.md`.
