@@ -638,9 +638,13 @@ cycle51-source-split-diagnostic.out
 ```
 
 The script and output SHA-256 hashes are respectively
-`f82fae6cbaeeecfbfb55efc546f70ecf61bac5244f844cc6c5991fed25288597`
+`d59d9072e17b6ff227fbb7388ed4d91207aabc4fd1254178ee9e9b724359c5ed`
 and
 `e386ce06e732cdd1c9e483af6e29b1a061f6790e0285eaa7ab550c07cdf332ab`.
+The script hash differs from the original broad diagnostic because the hostile
+audit corrected its comment to say explicitly that the broad implementation
+uses the exact residual formula (2.4), rather than independently contracting
+the old source.  The executable statements and stored output are unchanged.
 The output omits elapsed wall times so that it reproduces byte for byte.
 It is reproduced by
 
