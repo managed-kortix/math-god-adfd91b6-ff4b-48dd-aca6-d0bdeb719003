@@ -4931,10 +4931,12 @@ screen through \(a=1024\) shows highly nonmonotone source angles and norm
 ratios, while a separate \(a=2048\) row and a smooth three-function projection
 are finite hypothesis-selection data only.  There is no known arithmetic
 three-moment closure, and the sampled basis is nearly dependent on
-\([1,3/2]\).  The legitimate next experiment is to derive exact normal
-equations against \(1,q/a,\log(q/a)\) and prove an arithmetic orthogonal
-remainder bound; the tautological finite projection is not such a result.  No
-norm lower bound, retention theorem, or RH result follows.
+\([1,3/2]\). Cycle 52 completed that finite experiment by deriving the exact
+normal equations and an explicit orthogonal remainder. What remains open is an
+arithmetic lower bound for the three-moment vector, the orthogonal remainder,
+or their total energy, together with an independent signed-retention estimate.
+The Cycle 51 screen itself remains non-asymptotic evidence only. No norm lower
+bound, retention theorem, or RH result follows.
 Full formulas, endpoint conditions, no-go examples, hashes, and replay commands
 are in `cycle-51-old-current-source-split-and-volterra-audit.md`.
 
@@ -4998,27 +5000,54 @@ The continuum Gram is positive definite, with exact determinant
 but this supplies only nondegeneracy and natural scaling, not an arithmetic
 lower bound.
 
-Two fail-closed Arb certificates decisively demote the finite heuristic.  At
-`theta=2/5,a=11`, the determinant with columns
+Two fail-closed Arb certificates decisively demote the finite heuristic at
+fixed `theta=2/5` (`C=6/5`). At `a=11`, the determinant with columns
 `(1,q/11,log(q/11),B_11(q))` on exact rows `{11,13,14,15}` is certified in
 
 \[
  [4.86281800877624871977\times10^{-6}
- \mathbin{+/-}1.38\times10^{-67}]>0,
+ \mathbin{+/-}1.38\times10^{-67}]>0.
 \]
 
-so no universal exact three-function identity exists.  At `a=8192` and
-`16384`, the same smooth span captures respectively
+This refutes an exact three-function identity asserted at every finite scale
+for that fixed setup; it does not refute eventual exact closure. At the same
+fixed parameter, the exact smooth span captures
 
 \[
- 0.7690892386384062745\ldots,
- \qquad 0.4258499600572534571\ldots
+ 0.7690892386384062745\ldots,\qquad
+ 0.4258499600572534571\ldots
 \]
 
-of the actual prefix energy, with 256-bit outward intervals, certified Gram
-SPD, and direct residual cross-checks.  These are finite counterexamples to a
-universal `>=96%` finite-capture claim.  They do not refute eventual capture,
-asymptotic rank-three approximation, or any liminf theorem.
+at `a=8192,16384`, with 256-bit outward intervals, certified Gram SPD, and
+direct residual cross-checks. These are finite counterexamples to a universal
+`>=96%` capture claim for the exact canonical vector, row sets, and basis.
+They do not refute eventual capture, a positive liminf, asymptotic rank-three
+approximation, or any other asymptotic noncapture statement.
+
+For every explicitly specified row test \(y\), Cycle 52 also gives the exact
+one-source dual identity
+
+\[
+ \langle y,B_a\rangle
+ =-\sum_{m=1}^{2a-1}\mu(m)\Gamma_y(m),\qquad
+ \Gamma_y(m)=\sum_{q\in\mathcal Q_a}y_q\mathscr V_a(q,m).
+\]
+
+For a nonzero nonnegative test, the current transform is positive and
+nonincreasing, but finite Abel summation leaves signed block-Mertens values and
+the old-source block containing every nontrivial von Mangoldt term. The
+non-arithmetic surrogate
+\(\psi(k)=k,\ m_n=0,\ 1+\ell_n=0\) obeys the one-point upper envelopes used
+here while giving
+\(\|B_a\|_2^2\ll1/[a(\log a)^2]\). It proves only that those upper envelopes
+alone cannot force the target.
+
+For the specific signed test \(y_q=\mu(q)f(q/a)\), with nonzero sampled
+\(f\), the kernel diagonal is positive although its \(f\)-weighted sum need
+not be. Its normalized squared size is \(o((\log a)^{-3})\). Equation (6.9)
+of the Cycle 52 note, with a scale-uniform constant, is a sufficient
+off-diagonal two-point input for this test only;
+it is not a condition on arbitrary dual tests.
 
 Exact differencing does not repair the missing arithmetic lower bound.  The
 endpoint-complete first, second, and third row differences retain their full

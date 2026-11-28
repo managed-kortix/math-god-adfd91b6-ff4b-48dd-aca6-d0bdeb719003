@@ -163,18 +163,29 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   Cycle 52 now gives an exact cancellation-preserving suffix normal form and a
   rank-safe three-moment sieve: for the ordered basis `(1,q/a,log(q/a))`,
   `||B_a||^2 >= ||m_a||^2/(4a)`.  The continuum Gram is explicitly positive,
-  but no arithmetic moment lower bound follows.  A 256-bit Arb determinant at
-  `a=11` refutes a universal exact three-function closure, while 256-bit Arb
-  captures `0.769089...` and `0.425849...` at `a=8192,16384` rigorously refute
-  universal high finite capture without making an asymptotic claim.  Exact
-  one-source dual transforms reduce nonnegative smooth tests to signed
-  block-Mertens averages plus the old von-Mangoldt block; one-point inputs give
-  no every-scale lower bound.  For the signed arithmetic test, the self-
-  diagonal is too small and a full weighted two-point Mobius estimate is the
-  missing input for that specific test.  Exact first/second/third differences
-  and a four-point smooth-mode annihilator retain dense signed arithmetic
-  packets, so those architectures do not close the bound.  Prefix norm and
-  signed prefix/full retention remain separate.
+  but no arithmetic moment lower bound follows.  At fixed `theta=2/5`
+  (`C=6/5`), a 256-bit Arb determinant at `a=11` refutes an exact
+  three-function identity asserted at every finite scale for that fixed setup.
+  At the same fixed parameter, 256-bit Arb captures `0.769089...` and
+  `0.425849...` at `a=8192,16384` refute a universal `>=96%` finite-capture
+  claim for the exact canonical vector, row sets, and basis. The first
+  certificate does not rule out eventual exact closure; the latter
+  certificates do not rule out eventual capture, a positive liminf, or
+  asymptotic rank-three approximation. Every explicitly specified row test has
+  an exact one-source dual transform. For a nonzero nonnegative test, the
+  current transform is positive and nonincreasing, but finite Abel summation
+  leaves signed block-Mertens values and an old-source block containing every
+  nontrivial von Mangoldt term. A non-arithmetic surrogate proves only that the
+  one-point upper-envelope package used here cannot by itself force an
+  every-scale lower bound. For the specific signed test
+  `y_q=mu(q)f(q/a)`, with nonzero sampled `f`, the diagonal kernel is positive
+  but the weighted diagonal sum need not be; its normalized squared size is
+  `o(log(a)^-3)`. Cycle 52 equation
+  (6.9) is a sufficient weighted off-diagonal two-point input for that test
+  only, not a universal requirement on every dual proof. Exact
+  first/second/third differences and a four-point smooth-mode annihilator
+  retain dense signed arithmetic packets, so those architectures do not close
+  the bound. Prefix norm and signed prefix/full retention remain separate.
   The surviving physical checkpoint is unchanged; no moving-projection limit,
   completed-square budget, or RH result is proved
 - **parallel scouts:** a read-only bounded re-audit completed on 2026-11-25
@@ -215,8 +226,8 @@ waiting process.
 ## next exact steps
 
 1. Attack the surviving arithmetic checkpoint on one fixed nondegenerate
-   compact interval `I` inside `(0,2)`. Either prove the weighted two-point
-   Möbius packet inequality (11.3) of
+   compact interval `I` inside `(0,2)`. Either prove the original Cycle 45
+   physical-dispersion packet inequality (11.3) of
    `millennium-prize/riemann-hypothesis/moving-gram-kernel-audit-2026-11-25.md`,
    or prove one of the stronger intrinsic projection bounds
    `mathcal Q_a(I) >> log(a)^-3`, or, on `I0=[1,3/2]`, the Cycle 48 canonical
@@ -258,15 +269,22 @@ waiting process.
    initial, tail, endpoint, prime, or Chebyshev diagonal does not suffice. Do
    not infer an asymptotic from the six finite projection ratios, any
    smooth-span capture table, or PNT's additive endpoint expansion. Cycle 52
-   supplies exact normal equations and the rank-safe implication
-   `||B_a||^2>=||m_a||^2/(4a)`, so a precise sufficient smooth-moment target is
-   `||m_a||^2>>a/log(a)^3`; it is unproved. The certified `a=11` nonclosure
-   determinant and captures `0.769089...`, `0.425849...` at `a=8192,16384`
-   refute only universal exact closure and universal `>=96%` finite capture.
-   For an arbitrary chosen row test `y`, the dual sufficient condition is
-   `|sum_m mu(m)Gamma_y(m)|>>||y||_2 log(a)^(-3/2)`. The weighted off-diagonal
-   two-point estimate in Cycle 52 is sufficient only for the specific test
-   `y_q=mu(q)f(q/a)`, not necessary for every dual proof. Even a prefix-norm
+   supplies the exact rank-safe decomposition and implication
+   `||B_a||^2>=||m_a||^2/(4a)`. Thus either
+   `||m_a||^2>>a/log(a)^3` or
+   `||R_a^(3)||^2>>log(a)^-3` is a sufficient prefix-norm target; neither is
+   proved. At fixed `theta=2/5`, the certified `a=11` determinant refutes only
+   an exact identity asserted at every finite scale, while the captures
+   `0.769089...`, `0.425849...` at `a=8192,16384` refute only a universal
+   `>=96%` finite-capture claim for the exact canonical vector, row sets, and
+   basis. Neither result is an asymptotic no-go. For an explicitly prescribed
+   nonzero row-test family `y=y^(a)`, a sufficient dual condition, with a
+   constant uniform in `a`, is
+   `|sum_(m=1)^(2a-1) mu(m)Gamma_y(m)| >> ||y||_2 log(a)^(-3/2)`;
+   an existential choice of `y` alone is tautological. Cycle 52 equation (6.9)
+   is a sufficient off-diagonal estimate only for the specific nonzero sampled
+   test `y_q=mu(q)f(q/a)`. It is distinct from Cycle 45 equation (11.3) and is
+   not necessary for every possible dual proof. Even a prefix-norm
    success leaves signed prefix/full retention independent. A later successful
    physical packet estimate would give only a trace-based moving-projection
    lower bound of order `log^-2 a`; require constants and an appropriate
@@ -299,6 +317,30 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-11-28: Cycle 52 derived an exact cancellation-preserving suffix normal
+  form for the canonical complete prefix and the rank-safe decomposition
+  `||B_a||^2=m_a^T G_a^+ m_a+||R_a^(3)||^2`, hence
+  `||B_a||^2>=||m_a||^2/(4a)`. The sufficient targets
+  `||m_a||^2>>a/log(a)^3` and `||R_a^(3)||^2>>log(a)^-3` remain unproved;
+  continuum Gram positivity supplies no arithmetic lower bound. At fixed
+  `theta=2/5`, a 256-bit Arb determinant at `a=11` refutes an exact
+  three-function identity asserted at every finite scale, and 256-bit Arb
+  captures `0.769089...`, `0.425849...` at `a=8192,16384` refute only a
+  universal `>=96%` finite-capture claim. These are finite results and do not
+  rule out eventual closure, eventual capture, a positive liminf, or
+  asymptotic rank-three approximation. Every explicit row test has an exact
+  one-source dual transform; for nonzero nonnegative tests the current
+  transform is positive and nonincreasing, but signed block-Mertens values and
+  the old von-Mangoldt block remain. A non-arithmetic surrogate proves only
+  that the one-point upper-envelope package cannot force the target. For
+  `y_q=mu(q)f(q/a)` with nonzero sampled `f`, the normalized squared diagonal
+  contribution is too small and equation (6.9) is a sufficient test-specific
+  off-diagonal input. Exact first, second, and
+  third differences and the four-point smooth-mode annihilator retain dense
+  arithmetic packets; this no-go concerns those architectures only. Prefix
+  norm and signed prefix/full retention remain independent. No
+  moving-projection theorem, completed-square budget, or RH result is proved.
 
 - 2026-11-28: Cycle 51 split the exact convolutional one-source prefix at
   `m=a`. Every active current triple satisfies `a<=m<=n<=2a-1<2m`, so the

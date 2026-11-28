@@ -173,23 +173,33 @@
     low-rank theorem, and its continuum Gram positivity supplies no arithmetic
     moment lower bound.  If `G_a=0`, use `m_a=0`; do not divide by a zero
     largest eigenvalue.
-42. The Cycle 52 `a=11` determinant is a rigorous Arb interval sign
-    certificate, not an elementary closed-form exact value.  It refutes a
-    universal exact three-function identity only.  It does not refute eventual
-    exact closure, asymptotic rank-three approximation, or a vanishing relative
-    remainder.
-43. The certified captures `0.769089...` and `0.425849...` at
-    `a=8192,16384` are finite counterexamples to universal `>=96%` capture.
-    They do not prove asymptotic noncapture, failure of a liminf, a prefix norm
-    bound, canonical retention, or RH.  Later binary64 recovery is nonmonotone
-    and supplies no contrary theorem either.
-44. A smooth row dual has a positive decreasing current-source transform, but
-    Abel summation leaves signed block-Mertens values and the old block may
-    cancel it.  One-point PNT, Mertens, reciprocal-Mobius, or omega inputs do
-    not provide the needed every-scale lower bound.  For
-    `y_q=mu(q)f(q/a)`, the self-diagonal is `o(log^-3 a)` after dual
-    normalization; success of that particular test requires a weighted
-    off-diagonal two-point Mobius estimate for the full moving kernel.
+42. At fixed `theta=2/5`, the Cycle 52 `a=11` determinant is a rigorous Arb
+    interval sign certificate, not an elementary closed-form exact value. It
+    refutes an exact three-function identity asserted at every finite scale
+    for that fixed setup only. It does not refute eventual exact closure,
+    asymptotic rank-three approximation, or a vanishing relative remainder.
+43. At the same fixed `theta=2/5`, the certified captures `0.769089...` and
+    `0.425849...` at `a=8192,16384` concern the exact canonical vector,
+    squarefree row sets, and ordered basis. They are finite counterexamples to
+    a universal `>=96%` finite-capture claim only. They do not prove
+    asymptotic noncapture, failure of a positive liminf, a prefix-norm bound,
+    canonical retention, or RH. Later binary64 recovery is nonmonotone and
+    supplies no contrary theorem.
+44. The general row-dual condition (6.5) is a complementary sufficient route,
+    not an equivalent reformulation of the three-mode moment criterion for an
+    arbitrary test. It is useful only for an explicitly prescribed nonzero
+    family with a constant uniform in `a`; existentially choosing `y` from the
+    unknown vector is tautological. For a
+    nonzero nonnegative test, the current-source transform is positive and
+    nonincreasing, but Abel summation leaves signed block-Mertens values and
+    the old block may cancel it. The non-arithmetic surrogate in Cycle 52
+    proves only that the one-point upper-envelope package cannot by itself
+    force the lower bound. For `y_q=mu(q)f(q/a)` with nonzero sampled `f`,
+    the kernel diagonal is positive although the weighted diagonal sum need
+    not be, and its normalized squared size is `o(log^-3 a)`. Equation (6.9) is a
+    sufficient weighted off-diagonal estimate for that particular test only;
+    it is not Cycle 45 equation (11.3) and is not necessary for every possible
+    dual proof.
 45. Prefix norm and canonical retention remain separate.  In the three-mode
     decomposition the modal and remainder contributions to `<B_a,C_a>` are
     signed and may cancel.  Neither high capture, an absolute norm lower bound,

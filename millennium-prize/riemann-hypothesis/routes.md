@@ -287,11 +287,12 @@ target
 is scale-invariant and sufficient, with zero columns omitted.  The current
 source columns have an explicit Volterra limit, but it cannot be passed through
 the growing signed Möbius contraction.  Binary64 screens show nonmonotone,
-phase-changing source geometry.  Their high captures by
-\(\operatorname{span}\{1,q/a,\log(q/a)\}\) have no present arithmetic closure
-and use a nearly dependent sampled basis, so they are only a prompt to derive
-exact normal equations and a rigorous remainder, not asymptotic evidence.  See
-`cycle-51-old-current-source-split-and-volterra-audit.md`.
+phase-changing source geometry. Their high captures by
+\(\operatorname{span}\{1,q/a,\log(q/a)\}\) use a nearly dependent sampled
+basis and supplied only the finite prompt for Cycle 52 below. Cycle 52 derived
+the exact normal equations and explicit orthogonal remainder, but no
+arithmetic lower bound. The Cycle 51 screens remain non-asymptotic evidence
+only. See `cycle-51-old-current-source-split-and-volterra-audit.md`.
 
 
 Cycle 52 turns the smooth three-function observation into an exact, limited
@@ -326,11 +327,20 @@ and it does not imply signed prefix/full retention.
 
 The finite algebra does not close on the three functions: it contains moving
 suffixes, quadratic logarithms, reciprocal terms, and the arithmetic prefix
-\(\Pi_{q-1}\).  A 256-bit Arb determinant at \(a=11\) certifies that the
-actual \(B_{11}\) is outside the span on the exact four physical rows.  Separate
-256-bit Arb certificates at \(a=8192,16384\) give captures
-\(0.7690892386\ldots\) and \(0.4258499601\ldots\), refuting universal high
-finite capture but proving no asymptotic noncapture.
+\(\Pi_{q-1}\). At fixed \(\theta=2/5\), a 256-bit Arb determinant at \(a=11\)
+certifies that the actual \(B_{11}\) is outside the span on the exact four
+physical rows. This refutes an exact identity asserted at every finite scale
+for that fixed setup, but not eventual exact closure. At the same fixed
+parameter, separate 256-bit Arb certificates at \(a=8192,16384\) give captures
+
+\[
+ 0.7690892386384062745\ldots,
+ \qquad 0.4258499600572534571\ldots
+\]
+
+for the exact canonical vector, row sets, and basis. These refute only a
+universal `>=96%` finite-capture claim. They prove no asymptotic noncapture,
+failure of a positive liminf, or failure of eventual rank-three approximation.
 
 Exact first, second, and third row differences retain the full interior
 source and moving lower-boundary cells.  A variable-coefficient four-point
@@ -340,7 +350,8 @@ associated Poincare inequality is valid but cannot generate a lower bound for
 this signed residue.  Thus these specific finite-difference architectures do
 not improve the arithmetic checkpoint.
 
-For any row test \(y\), the exact one-source dual transform is
+For every explicitly specified row test \(y\), the exact one-source dual
+transform is
 
 \[
  \langle y,B_a\rangle=-\sum_{m\le2a-1}\mu(m)\Gamma_y(m),
@@ -348,15 +359,22 @@ For any row test \(y\), the exact one-source dual transform is
  \Gamma_y(m)=\sum_{q\in\mathcal Q_a}y_q\mathscr V_a(q,m).
 \]
 
-Nonnegative smooth tests make the current transform positive and decreasing,
-but finite Abel summation leaves signed block-Mertens values and an old-source
-block containing every nontrivial von Mangoldt term.  One-point PNT and Mertens
-upper estimates therefore do not yield an every-scale lower bound.  For the
-arithmetic test \(y_q=\mu(q)f(q/a)\), the positive self-diagonal contributes
-only \(O(1/[a\log^2a])=o(\log^{-3}a)\) after dual normalization; success would
-require a pointwise-in-scale weighted off-diagonal Mobius two-point
-noncancellation theorem for the full moving one-source kernel.  See
-`cycle-52-three-mode-moment-sieve-and-finite-obstruction.md`.
+For a nonzero nonnegative test, the current transform is positive and
+nonincreasing, but finite Abel summation leaves signed block-Mertens values and
+an old-source block containing every nontrivial von Mangoldt term. One-point
+PNT and Mertens upper estimates therefore do not yield an every-scale lower
+bound. More sharply, the non-arithmetic surrogate recorded in Cycle 52 shows
+only that the one-point upper-envelope package itself cannot entail the target.
+
+For the specific arithmetic test \(y_q=\mu(q)f(q/a)\), with nonzero sampled
+\(f\), the diagonal kernel is positive although its weighted sum need not be;
+its normalized squared contribution is
+\(O(1/[a\log^2a])=o(\log^{-3}a)\). Cycle 52 equation (6.9), with a constant
+uniform in the scale, is a sufficient pointwise-in-scale off-diagonal estimate
+for this test only; (6.8) and the reverse triangle inequality require no
+favorable diagonal sign. It is neither the Cycle 45 inequality (11.3) nor a
+necessary condition on arbitrary dual tests.
+See `cycle-52-three-mode-moment-sieve-and-finite-obstruction.md`.
 
 If the original packet estimate is proved, it gives only a trace-based
 moving-projection lower bound of order `log^-2 a`; Burnol's cited result is a

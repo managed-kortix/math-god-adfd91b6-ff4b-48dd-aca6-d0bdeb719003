@@ -15,7 +15,7 @@ against the actual Cycle 49 canonical complete-prefix vector \(B_a\) on
                  \ a\le q\le\lfloor3a/2\rfloor\}.
 \]
 
-It proves five structural facts.
+It proves six structural facts.
 
 1. The complete prefix has an exact cancellation-preserving suffix normal
    form.  This form retains every Chebyshev term, reciprocal-Mobius term,
@@ -24,17 +24,29 @@ It proves five structural facts.
    rank-safe moment decomposition.  In particular, a lower bound of size
    \(a(\log a)^{-3}\) for the squared three-moment vector would prove the
    desired prefix norm scale.
-3. The existing finite algebra does not close on the three functions.  A
-   standalone 256-bit Arb certificate at \(a=11\) rigorously refutes a
-   universal exact three-function identity on every finite physical row set.
-4. Standalone 256-bit Arb certificates at \(a=8192,16384\) show that this
-   span captures only \(76.9089\ldots\%\) and \(42.5849\ldots\%\) of the
-   prefix energy.  These are finite counterexamples to universal high finite
-   capture.  They are not an asymptotic no-go.
+3. The displayed finite algebra does not itself furnish a universal
+   three-function closure. At fixed \(\theta=2/5\), a standalone 256-bit Arb
+   certificate at \(a=11\) refutes an exact identity asserted at every finite
+   scale for that fixed setup. It does not refute eventual exact closure.
+4. At the same fixed \(\theta=2/5\), standalone 256-bit Arb certificates at
+   \(a=8192,16384\) show that the exact canonical vector, squarefree row sets,
+   and basis capture \(76.9089\ldots\%\) and \(42.5849\ldots\%\) of the
+   prefix energy. These are finite counterexamples to a universal
+   \(96\%\)-or-better finite-capture claim. They do not refute eventual
+   capture, a positive liminf, or asymptotic rank-three approximation.
 5. Exact first, second, and third row differences, and an exact four-point
    annihilator of the three sampled modes, all retain dense moving arithmetic
    interior and boundary packets.  They do not create a sparse sign-controlled
    source.
+6. Every row test has an exact one-source dual transform. For a nonzero
+   nonnegative test the current transform is positive and nonincreasing, but
+   finite Abel summation leaves signed block-Mertens values and the old
+   von-Mangoldt block. A non-arithmetic surrogate shows that the one-point
+   upper-envelope package alone cannot force the target. For the specific
+   signed test \(y_q=\mu(q)f(q/a)\), with nonzero sampled \(f\), the
+   normalized squared diagonal contribution is negligible and equation (6.9)
+   is a sufficient test-specific two-point input, not a
+   universal requirement on arbitrary dual proofs.
 
 The moment criterion concerns \(\|B_a\|_2\).  It does not control the signed
 prefix/full correlation and therefore does not prove the canonical retention
@@ -535,6 +547,10 @@ uses an Arb matrix solve.  The row-list hashes are
 \end{array}
 \]
 
+All certificates in this section use the fixed parameter
+\(\theta=2/5\), equivalently \(C=6/5\), and the exact canonical vector,
+squarefree row sets, and ordered basis stated above.
+
 The certified intervals are
 
 \[
@@ -589,7 +605,7 @@ env LC_ALL=C PYTHONDONTWRITEBYTECODE=1 \
   cycle52_a11_nonclosure_certificate.py
 ```
 
-The committed SHA-256 hashes are
+The audited artifact SHA-256 hashes are
 
 ```text
 cb245e4cc9c5f14a3a3741a7738346bdb01ee709cde7bec957059c23bf6a9c32  cycle52_a11_nonclosure_certificate.py
@@ -600,9 +616,13 @@ a2664f3314bdef90b245dc7a1d417a6aead4a536269b8e82861e6d2bd5b51306  cycle52-smooth
 
 ## 6. Exact dual transforms and the one-point blocker
 
-The moment criterion has an equivalent row-dual formulation which exposes the
-remaining arithmetic input.  Let \(y=(y_q)\) be any real test supported on
-\(\mathcal Q_a\).  With the Cycle 50 one-source column \(\mathscr V_a\), set
+The one-source identity gives a complementary sufficient row-dual route to the
+prefix-norm target. It is not equivalent to the three-moment criterion for an
+arbitrary \(y\); such an equivalence would require restricting and normalizing
+\(y\) in the sampled three-mode span. Let \(y=(y_q)\) be any real test
+supported on \(\mathcal Q_a\). For a non-tautological proof route, \(y\) must
+be prescribed independently of the desired lower bound. With the Cycle 50
+one-source column \(\mathscr V_a\), set
 
 \[
  \Gamma_y(m)=\sum_{q\in\mathcal Q_a}y_q\mathscr V_a(q,m).
@@ -645,7 +665,8 @@ For the current block \(a\le m\le M\), every active \(n\) satisfies
  \tag{6.3}
 \]
 
-If \(y_q\ge0\), then \(\Gamma_y^U(m)>0\) and it is nonincreasing.  With
+If \(y_q\ge0\) for every \(q\) and \(y\not\equiv0\), then
+\(\Gamma_y^U(m)>0\) and it is nonincreasing in \(m\).  With
 
 \[
  A_a(t)=\sum_{a\le m\le t}\mu(m)=M(t)-M(a-1),
@@ -663,20 +684,30 @@ finite Abel summation is
  \tag{6.4}
 \]
 
-All coefficients multiplying the block-Mertens values are nonnegative.  This
-is an exact transformed identity, not a lower bound: the block-Mertens values
-have both signs, and the old block \(m<a\), which contains all nontrivial
+All coefficients multiplying the block-Mertens values are nonnegative. The
+block-Mertens values have no uniformly favorable sign; as \(a,t\) vary they
+can be positive or negative. Thus (6.4) is an exact transformed identity, not
+a lower bound. Moreover, the old block \(m<a\), which contains all nontrivial
 von Mangoldt terms, can cancel the current block.
 
-Cauchy gives the target whenever
+For a prescribed family of nonzero row tests \(y^{(a)}\), Cauchy gives the
+target if there are constants \(c>0\) and \(a_0\), independent of \(a\), such
+that for every \(a\ge a_0\),
 
 \[
- \left|\sum_m\mu(m)\Gamma_y(m)\right|
- \gg \|y\|_2(\log a)^{-3/2}.
+ \left|\sum_{m=1}^{2a-1}\mu(m)\Gamma_{y^{(a)}}(m)\right|
+ \ge c\|y^{(a)}\|_2(\log a)^{-3/2}.
  \tag{6.5}
 \]
 
-For bounded nonzero smooth tests, \(\|y\|_2\asymp\sqrt a\).  Standard
+Indeed, (6.2) and Cauchy then give
+\(\|B_a\|_2^2\ge c^2(\log a)^{-3}\). The uniformity and nonzero-test
+conditions are part of (6.5).
+
+For a fixed bounded smooth function \(g\not\equiv0\) on \([1,3/2]\), sampled
+as \(y_q=g(q/a)\), squarefree equidistribution gives
+\(\|y\|_2\asymp_g\sqrt a\). No such scaling is asserted for an arbitrary
+bounded or \(a\)-dependent test. Standard
 one-point bounds for \(M(x)\), \(\psi(x)-x\), \(m_x\), and \(1+\ell_x\)
 are upper bounds and do not imply the every-scale lower bound (6.5).  Known
 omega results are subsequential and also do not control old/current
@@ -689,8 +720,9 @@ positivity of (6.3).  Sparse differences give
 \(B_a(q)-B_a(q')\), but no unconditional local-oscillation theorem supplies
 the required every-scale size.
 
-A natural arithmetic test makes the two-point obstruction explicit.  For a
-bounded function \(f\), take
+A natural arithmetic test makes the two-point obstruction explicit. For a
+bounded function \(f\) whose sampled vector on \(\mathcal Q_a\) is nonzero,
+take
 
 \[
  y_q=\mu(q)f(q/a),\qquad q\in\mathcal Q_a.
@@ -706,7 +738,9 @@ Then
  \tag{6.6}
 \]
 
-The positive self-diagonal is too small.  Since \(M<2q\),
+The kernel self-diagonal is positive, although its \(f\)-weighted sum need not
+be; in either case its normalized squared contribution is too small. Since
+\(M<2q\),
 
 \[
  \mathscr V_a(q,q)
@@ -727,8 +761,8 @@ including both \(n=q\) and \(n=M\).  Uniformly it is
  \tag{6.8}
 \]
 
-Thus this particular arithmetic dual test requires an every-scale weighted
-two-point noncancellation estimate of the form
+Thus a sufficient missing input for this particular arithmetic dual test is
+an every-scale weighted two-point noncancellation estimate of the form
 
 \[
  \boxed{
@@ -738,12 +772,15 @@ two-point noncancellation estimate of the form
  \tag{6.9}
 \]
 
-with enough signed control to prevent cancellation with the negligible
-diagonal.  Formula (6.9) is a sufficient missing estimate for this test, not a
-logically necessary condition for every possible dual proof.  Its weight has
-moving ratio support, the full old/current source range, and pointwise-in-\(a\)
-quantifiers.  Fixed-shift or logarithmically averaged Chowla estimates do not
-imply it.
+with a constant independent of \(a\). Since (6.8) makes the normalized
+diagonal \(o((\log a)^{-3/2})\), the reverse triangle inequality shows that
+(6.9) already suffices; no favorable diagonal sign is required. Formula (6.9)
+is not a logically necessary condition for every possible dual proof. Its
+weight has moving ratio support, the full old/current source range, and
+pointwise-in-\(a\) quantifiers. It is distinct from the Cycle 45
+physical-dispersion packet inequality (11.3), and neither statement is known
+to imply the other. Fixed-shift or logarithmically averaged Chowla estimates
+do not imply it.
 
 There is also a sharp limitation on the current input package.  In (1.1), the
 surrogate one-point data
@@ -976,11 +1013,15 @@ The three-mode moment sieve addresses only the first requirement.
 
 ## 9. Surviving checkpoint
 
-The finite smooth-span heuristic has been demoted.  The exact useful target is
-now the selected arithmetic moment estimate (3.2), the orthogonal remainder
-estimate (3.3), or another proof of their total energy scale, together with the
-separate signed retention estimate (8.4).  Formula (2.3) states the moment
-problem without hiding any arithmetic packet.
+The finite smooth-span heuristic has been demoted. The exact useful
+prefix-norm routes are the selected arithmetic moment estimate (3.2), the
+orthogonal remainder estimate (3.3), another proof of their total energy
+scale, or an explicitly prescribed row-dual lower bound of the form (6.5).
+Equation (6.9) is only a sufficient input for its specific signed arithmetic
+test. To upgrade any prefix-norm route to the canonical-retention bound, one
+still needs the separate signed retention estimate (8.4). Formula (2.3) states
+the three-moment problem without hiding
+any arithmetic packet.
 
 The canonical stronger target remains
 
