@@ -180,7 +180,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   abstract spectral-edge transfer criterion. This criterion is not verified
   for a Yang--Mills cutoff family, and strong-resolvent convergence alone is
   insufficient. These are not new Cycle 46 or Clay results.
-- **cycle:** 50
+- **cycle:** 51
 - **announcements:** none
 
 ## immutable target list
@@ -219,9 +219,19 @@ waiting process.
    complete monotonicity, which is finitely false, or infer retention from the
    positive symmetric collapsed-prefix kernel. Retention uses the compatible
    mixed delta-gauge form `(W_B)^T W_C^delta`, which is interval-certified
-   indefinite already at `a=3`. Equivalently, seek a selected-vector estimate
-   for the exact common-source coefficient kernels, retaining all affine and
-   off-diagonal terms. A sufficient split is
+   indefinite already at `a=3`. Cycle 51 also gives the exact convolutional
+   old/current split `B_a=O_a+U_a`, with
+   `U_a(q)=-sum_(n=q)^(2a-1) alpha_(q,n) eta_n mathfrak_a_(q,n)`
+   `*(m_n-m_(a-1))`. Projection onto `span{O_a,U_a}` equals `Q_a^cp` plus one
+   orthogonal tail-retention channel. A sufficient fallback is the normalized
+   selected-moment sum
+   `|<O_a,C_a>|^2/||O_a||^2+|<U_a,C_a>|^2/||U_a||^2 >> log(a)^-3`, with zero
+   columns omitted. The raw `det(G)/tr(G)^2` is nonintrinsic and unnecessary.
+   Current convolutional source columns have an explicit entrywise Volterra
+   limit, but it cannot be passed through the growing signed Mobius sum; do not
+   compare it to the incompatible direct collapsed-column gauge. Equivalently,
+   seek a selected-vector estimate for the exact common-source coefficient
+   kernels, retaining all affine and off-diagonal terms. A sufficient split is
    `||B_a||^2 >= c_0 log(a)^-3` and
    `|1+<B_a,H_a>/||B_a||^2|>=epsilon`, with resulting constant
    `epsilon^2 c_0`. If that line cancels, retain the exact orthogonal contrast
@@ -264,6 +274,24 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-11-28: Cycle 51 split the exact convolutional one-source prefix at
+  `m=a`. Every active current triple satisfies `a<=m<=n<=2a-1<2m`, so the
+  von Mangoldt part vanishes and the current block is exactly
+  `U_a(q)=-sum alpha eta mathfrak_a (m_n-m_(a-1))`; subtracting it gives an
+  exact old-source residual. The rank-safe source-plane projection is the
+  canonical complete-prefix line energy plus one orthogonal tail-retention
+  channel. The former raw determinant target was rejected as a rescaling-
+  dependent mixture of angle and norm balance, and replaced by a normalized
+  selected-moment sufficient condition. Current convolutional columns have an
+  explicit locally uniform Volterra limit and adjoint, but this is entrywise
+  only and cannot enter the growing signed Mobius contraction. Quantitative PNT
+  upper bounds remain far above the target energy after row summation. Two
+  replayable binary64 diagnostics check the finite identities, including a
+  direct old-source reconstruction through `a=128`; a separate non-rigorous
+  screen through `a=2048` suggests a smooth three-moment experiment but proves
+  no asymptotic low rank. Neither a prefix norm bound, retention theorem,
+  completed-square budget, nor RH is proved.
 
 - 2026-11-27: Cycle 50 proved the finite prefix-only collapse into a pure
   Möbius gauge, the exact one-source Möbius--von Mangoldt and factorial
