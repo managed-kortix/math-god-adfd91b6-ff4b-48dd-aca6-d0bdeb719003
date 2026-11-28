@@ -261,6 +261,36 @@ dual row-test construction must supply an arithmetic phase; Cauchy alone is
 tautological.  See
 `cycle-50-one-source-prefix-kernel-and-retention-obstruction.md`.
 
+
+
+Cycle 51 splits the convolutional one-source representation at \(m=a\).  The
+current channel collapses exactly because every active quotient is one:
+
+\[
+ U_a(q)=-\sum_{n=q}^{2a-1}
+ \alpha_{q,n}\eta_n\mathfrak a_{q,n}(m_n-m_{a-1}).
+\]
+
+Projection onto \(\operatorname{span}\{O_a,U_a\}\) equals the canonical
+prefix-line projection plus one orthogonal tail-retention channel.  This gives
+a valid fallback target, but the raw ratio
+\(\det G/(\operatorname{tr}G)^2\) is neither intrinsic angular separation nor
+needed in a sufficient lower-bound criterion.  The normalized selected-moment
+target
+
+\[
+ \frac{|\langle O_a,C_a\rangle|^2}{\|O_a\|^2}
+ +\frac{|\langle U_a,C_a\rangle|^2}{\|U_a\|^2}
+ \gg(\log a)^{-3}
+\]
+
+is scale-invariant and sufficient, with zero columns omitted.  The current
+source columns have an explicit Volterra limit, but it cannot be passed through
+the growing signed Möbius contraction.  Binary64 screens show nonmonotone,
+phase-changing source geometry and suggest an exact smooth three-moment
+experiment; they provide no asymptotic evidence.  See
+`cycle-51-old-current-source-split-and-volterra-audit.md`.
+
 If the original packet estimate is proved, it gives only a trace-based
 moving-projection lower bound of order `log^-2 a`; Burnol's cited result is a
 budget lower bound, not the upper bound needed to close the completed square.

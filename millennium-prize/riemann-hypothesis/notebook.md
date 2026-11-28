@@ -4843,3 +4843,94 @@ one-source sum together with a separate mixed-retention estimate.  No prefix
 norm lower bound, retention theorem, completed-square budget, or RH result is
 proved.  Full details and replay commands are in
 `cycle-50-one-source-prefix-kernel-and-retention-obstruction.md`.
+
+
+## Cycle 51: old/current source split and normalized Volterra checkpoint
+
+Cycle 51 splits the exact Cycle 50 convolutional source at the moving cutoff
+\(m=a\):
+
+\[
+ O_a(q)=-\sum_{m<a}\mu(m)\mathscr V_a(q,m),\qquad
+ U_a(q)=-\sum_{a\le m\le2a-1}\mu(m)\mathscr V_a(q,m),
+ \qquad B_a=O_a+U_a.
+\]
+
+For every active current triple
+\(a\le m\le n\le2a-1<2m\), one has
+\(\lfloor n/m\rfloor=1\) and \(\Lambda(1)=0\).  Hence the current source
+kernel collapses exactly to its affine reciprocal term and
+
+\[
+ U_a(q)=-\sum_{n=q}^{2a-1}
+ \alpha_{q,n}\eta_n\mathfrak a_{q,n}(m_n-m_{a-1}).
+\]
+
+All nontrivial von Mangoldt terms lie in the old channel.  Subtracting from
+the Cycle 49 residual gives
+
+\[
+ O_a(q)=\sum_{n=q}^{2a-1}\frac{\alpha_{q,n}}{L_n}
+ \left[\frac{E_{n+1}}q+\mathfrak j_{q,n}
+ +\mathfrak a_{q,n}(1+\ell_n-\eta_nL_nm_{a-1})\right].
+\]
+
+The source-plane projection is rank-safely
+
+\[
+ \mathcal Q_a^{\rm src}
+ =\mathcal Q_a^{\rm cp}
+ +\Phi(\langle R_a,H_a\rangle,\|R_a\|^2),
+\]
+
+where \(R_a\) is the component of \(U_a\) orthogonal to \(B_a\).  Thus it is
+a valid fallback below \(D_a\), but it need not control the canonical line in
+reverse.  A well-conditioned source Gram also does not force retention.
+Moreover,
+
+\[
+ \frac{\det G}{(\operatorname{tr}G)^2}
+ =\frac{r^2(1-\rho^2)}{(1+r^2)^2}
+\]
+
+conflates angle and norm balance and changes under separate column rescaling.
+It is redundant for the proposed sufficient lower bound, since
+
+\[
+ \mathcal Q_a^{\rm src}\ge\frac{\|z_a\|^2}{\operatorname{tr}G_a}.
+\]
+
+After normalizing the nonzero columns, the scale-invariant sufficient target is
+
+\[
+ \frac{|\langle O_a,C_a\rangle|^2}{\|O_a\|^2}
+ +\frac{|\langle U_a,C_a\rangle|^2}{\|U_a\|^2}
+ \gg(\log a)^{-3}.
+\]
+
+For current convolutional source labels, locally uniformly on compact subsets
+of \([1,2)^2\),
+
+\[
+ a\log(a)\mathscr V_a(q,m)\to
+ H_{\rm cur}(u,v)
+ =\frac{C-1}{Cv}\int_{\max(u,v)}^2
+ \left(\frac su-\log\frac su\right)\frac{ds}{s}.
+\]
+
+This is a source-gauge Volterra kernel, not the direct collapsed-column kernel
+\(K_B\).  Comparing the two as if they shared a source gauge is invalid.  The
+entrywise limit still cannot be inserted into the growing signed Möbius sum.
+Standard zero-free-region PNT and reciprocal-zeta bounds give only rowwise
+upper bounds; after summing \(O(a)\) rows their envelope remains much larger
+than \((\log a)^{-3}\).
+
+Two replayable binary64 diagnostics independently check the current collapse
+and, through \(a=128\), directly reconstruct the old source block.  A wider
+screen through \(a=1024\) shows highly nonmonotone source angles and norm
+ratios, while a separate \(a=2048\) row and a smooth three-function projection
+are finite hypothesis-selection data only.  The suggested next experiment is
+an exact decomposition against \(1,q/a,\log(q/a)\) with a proved orthogonal
+remainder bound.  No norm lower bound, retention theorem, or RH result follows.
+Full formulas, endpoint conditions, no-go examples, hashes, and replay commands
+are in `cycle-51-old-current-source-split-and-volterra-audit.md`.

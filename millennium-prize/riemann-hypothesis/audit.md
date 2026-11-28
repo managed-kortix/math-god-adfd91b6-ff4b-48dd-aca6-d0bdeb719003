@@ -146,3 +146,23 @@
     cell `a=4,q=5,n=6,theta=2/5`; a rigorous rational certificate has
     `D^3 mathscr K(2)<0`.  Ordinary monotonicity remains unproved and would not
     by itself provide a Mobius anti-cancellation lower bound.
+36. In the Cycle 51 old/current split, the current collapse requires the full
+    active range `a<=m<=n<=2a-1<2m`. The endpoints `m=a`, `m=n`, and
+    `n=2a-1` remain; there is no `n=2a` term. For nonphysical `q<a`, the
+    reordered temporal sum starts at `n=a`.
+37. The direct collapsed `d`-column gauge and convolutional one-source
+    `m`-column gauge are different. Do not compare their entrywise kernels,
+    Hilbert--Schmidt angles, or source labels. Only selected vectors after the
+    complete Mobius contraction are gauge-compatible.
+38. The raw source ratio `det(G)/tr(G)^2` mixes angular separation with column
+    norm balance and changes under independent column rescaling. It is
+    redundant for the normalized-moment lower bound. A source Gram, even an
+    identity Gram, does not imply retention without selected correlations.
+39. The current Volterra limit is entrywise and Riemann-normalized. It may not
+    be inserted into the unnormalized growing signed Mobius sum. Standard PNT
+    upper bounds for both source blocks are far above the target energy after
+    summing the rows and yield no anti-cancellation.
+40. Cycle 51 source geometry, the `a=2048` prefix row, and the smooth
+    `span{1,q/a,log(q/a)}` captures are binary64 finite screens. They prove no
+    asymptotic low rank, eventual conditioning, remainder bound, projection
+    lower bound, or RH consequence.
