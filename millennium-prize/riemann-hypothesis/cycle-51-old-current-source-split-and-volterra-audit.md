@@ -761,10 +761,16 @@ captured respectively approximately
 \]
 
 of \(\|B_a\|_2^2\).  Single tested arithmetic feature vectors were much more
-unstable.  This suggests an exact three-moment decomposition as a finite next
-experiment, but the capture is nonmonotone, binary64, and only seven scales.
-It proves no low-rank asymptotic, no small orthogonal remainder, and no
-retention theorem.  A run at \(a=4096\) timed out and produced no result.
+unstable.  This suggests testing an exact projection identity and arithmetic
+remainder against these three row functions as a finite next experiment.  There is at
+present no arithmetic three-moment closure: every finite vector has a
+tautological orthogonal projection decomposition, and smooth dependence on
+\(q/a\) does not select this particular span or control its remainder.  The
+sampled basis is also numerically ill-conditioned because \(\log u\) is nearly
+affine on \([1,3/2]\); its design condition number ranges from about \(391\) to
+\(418\) over these seven scales.  Thus the nonmonotone binary64 captures prove
+no low-rank asymptotic, no small orthogonal remainder, and no retention
+theorem.  A run at \(a=4096\) timed out and produced no result.
 
 ## 8. Surviving checkpoint
 

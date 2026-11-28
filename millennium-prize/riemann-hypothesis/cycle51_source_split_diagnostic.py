@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only floating diagnostic for the Cycle-50 source split.
+"""Read-only floating diagnostic for the Cycle-51 source split.
 
 This is NOT an interval certificate.  It uses IEEE-754 binary64 and a
 cotangent Vasyunin evaluator.  It writes nothing and makes no asymptotic claim.

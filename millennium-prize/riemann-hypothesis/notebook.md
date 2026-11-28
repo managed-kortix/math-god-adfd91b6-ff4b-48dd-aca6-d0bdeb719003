@@ -4929,8 +4929,11 @@ Two replayable binary64 diagnostics independently check the current collapse
 and, through \(a=128\), directly reconstruct the old source block.  A wider
 screen through \(a=1024\) shows highly nonmonotone source angles and norm
 ratios, while a separate \(a=2048\) row and a smooth three-function projection
-are finite hypothesis-selection data only.  The suggested next experiment is
-an exact decomposition against \(1,q/a,\log(q/a)\) with a proved orthogonal
-remainder bound.  No norm lower bound, retention theorem, or RH result follows.
+are finite hypothesis-selection data only.  There is no known arithmetic
+three-moment closure, and the sampled basis is nearly dependent on
+\([1,3/2]\).  The legitimate next experiment is to derive exact normal
+equations against \(1,q/a,\log(q/a)\) and prove an arithmetic orthogonal
+remainder bound; the tautological finite projection is not such a result.  No
+norm lower bound, retention theorem, or RH result follows.
 Full formulas, endpoint conditions, no-go examples, hashes, and replay commands
 are in `cycle-51-old-current-source-split-and-volterra-audit.md`.

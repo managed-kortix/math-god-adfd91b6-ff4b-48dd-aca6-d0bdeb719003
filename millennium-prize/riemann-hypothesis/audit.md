@@ -163,6 +163,8 @@
     upper bounds for both source blocks are far above the target energy after
     summing the rows and yield no anti-cancellation.
 40. Cycle 51 source geometry, the `a=2048` prefix row, and the smooth
-    `span{1,q/a,log(q/a)}` captures are binary64 finite screens. They prove no
-    asymptotic low rank, eventual conditioning, remainder bound, projection
-    lower bound, or RH consequence.
+    `span{1,q/a,log(q/a)}` captures are binary64 finite screens. The three
+    sampled columns are nearly dependent on `[1,3/2]`, and no arithmetic
+    three-moment closure is known. These screens prove no asymptotic low rank,
+    eventual conditioning, remainder bound, projection lower bound, or RH
+    consequence.

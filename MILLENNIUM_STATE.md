@@ -289,8 +289,10 @@ waiting process.
   upper bounds remain far above the target energy after row summation. Two
   replayable binary64 diagnostics check the finite identities, including a
   direct old-source reconstruction through `a=128`; a separate non-rigorous
-  screen through `a=2048` suggests a smooth three-moment experiment but proves
-  no asymptotic low rank. Neither a prefix norm bound, retention theorem,
+  screen through `a=2048` gives high but nonmonotone capture by a nearly
+  dependent smooth three-function basis. There is no known arithmetic
+  three-moment closure, and the screen proves no asymptotic low rank. Neither a
+  prefix norm bound, retention theorem,
   completed-square budget, nor RH is proved.
 
 - 2026-11-27: Cycle 50 proved the finite prefix-only collapse into a pure

@@ -287,8 +287,10 @@ target
 is scale-invariant and sufficient, with zero columns omitted.  The current
 source columns have an explicit Volterra limit, but it cannot be passed through
 the growing signed Möbius contraction.  Binary64 screens show nonmonotone,
-phase-changing source geometry and suggest an exact smooth three-moment
-experiment; they provide no asymptotic evidence.  See
+phase-changing source geometry.  Their high captures by
+\(\operatorname{span}\{1,q/a,\log(q/a)\}\) have no present arithmetic closure
+and use a nearly dependent sampled basis, so they are only a prompt to derive
+exact normal equations and a rigorous remainder, not asymptotic evidence.  See
 `cycle-51-old-current-source-split-and-volterra-audit.md`.
 
 If the original packet estimate is proved, it gives only a trace-based
