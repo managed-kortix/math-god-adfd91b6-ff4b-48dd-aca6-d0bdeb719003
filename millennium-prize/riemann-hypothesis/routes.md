@@ -392,3 +392,49 @@ affine-free historical widths are exactly `19,53,361` there. This kills those
 finite local architectures, not an eventual theorem. The Cycle 45 kernel
 analysis supersedes the former instruction to derive the moving kernel and
 leaves the signed arithmetic inequality above.
+
+## Cycle 53 route update
+
+The exact convolutional current matrix has full row rank for every finite
+physical scale when `0<theta<1/2`, but this closes only exact annihilation of
+the full current transform vector.  It supplies neither uniform conditioning
+nor a lower bound for its Mobius scalar contraction.  For nonzero nonnegative
+row tests the current transform is strictly positive and strictly decreasing;
+an exact reciprocal-tail surrogate with the actual Mobius signs still has
+zero contraction.  Do not use positivity, strict monotonicity, adjoint
+injectivity, or Perron--Frobenius theory as a substitute for quantitative
+selected noncancellation.
+
+The prescribed-test prefix checkpoint remains
+
+\[
+ \left|\sum_{m=1}^{2a-1}\mu(m)\Gamma_{y^{(a)}}(m)\right|
+ \gg \|y^{(a)}\|_2(\log a)^{-3/2}
+\]
+
+with one nonzero family chosen independently of `B_a` and a scale-uniform
+constant.  A finite Perron test screen exhibited near-total old/current
+cancellation at `a=4056`, so that family is not preferred.  The constant and
+Gram--Schmidt channels, or a genuinely arithmetic moving test, remain open.
+
+Treat retention separately.  Rowwise tail contraction and generic
+coefficient-space operator domination are finitely false.  Total-tail norm
+contraction is sufficient but unnecessarily strong.  The exact sign-free
+relative-retention gate is
+
+\[
+ |\langle B_a,B_a+H_a\rangle|
+ \ge\varepsilon\|B_a\|^2.
+\]
+
+A convenient sufficient one-sided checkpoint is
+
+\[
+ \langle B_a,H_a\rangle\ge-(1-\varepsilon)\|B_a\|^2
+\]
+
+for one fixed `epsilon>0` and all sufficiently large `a`, with every temporal,
+affine, old/current, and Mobius cross term retained.  This stronger checkpoint
+plus a prefix norm lower bound gives the canonical complete-prefix projection
+estimate. Neither input is proved. See
+`cycle-53-current-adjoint-and-retention-audit.md`.

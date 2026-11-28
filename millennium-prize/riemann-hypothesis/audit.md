@@ -212,3 +212,37 @@
     cumulative Chebyshev channels.  Poincare transfers a proved differenced
     lower bound but does not supply one.  The no-go concerns these specific
     architectures only, not every longer variable-coefficient test.
+47. Cycle 53's full-row-rank theorem applies only to the convolutional current
+    matrix `mathscr V_a(q,m)` with every column `a<=m<=2a-1`, and only for
+    `0<theta<1/2`. It does not transfer to the direct collapsed `W_B` gauge,
+    prove injectivity of the wide matrix, provide a least-singular-value bound,
+    or prevent cancellation after Mobius contraction or against the old block.
+48. For a nonzero nonnegative row test, the current transform is strictly
+    positive and strictly decreasing, but only on `a<=m<=2a-1`; no monotonicity
+    is asserted on old sources or for signed tests. An exact rational
+    reciprocal-tail packet with actual Mobius signs has zero contraction, so
+    positivity, strict decrease, and tail shape alone cannot yield a lower
+    bound. The packet is an abstract shape counterexample, not a physical row-
+    test realization.
+49. The fixed-`theta=2/5`, `a=10` Arb determinant is a finite minimal
+    nonclosure certificate. Minimal means that smaller physical row sets have
+    at most three points and therefore cannot falsify a three-function sampled
+    closure. It does not refute eventual closure, asymptotic approximation,
+    positive capture liminf, the moment lower bound, retention, or RH.
+50. Orthogonality of temporal prefix and tail sources holds before the common
+    analysis operator. It does not imply `<B_a,H_a>=0` or a Pythagorean output
+    identity. The physical `a=218,q=327` row refutes universal pointwise tail
+    contraction only. The compatible-column countermodel uses nonphysical
+    coefficients and refutes generic operator domination only. Neither
+    counterexample refutes an aggregate eventual inequality for the physical
+    Mobius vector.
+51. The Mobius-modulated Perron test data, including the near-zero at `a=4056`,
+    are binary64/long-double finite diagnostics, not interval certificates or
+    asymptotic counterexamples. Perron optimization precedes both Mobius sign
+    insertions and the old block, so it supplies no arithmetic phase control.
+52. The exact sign-free relative-retention gate is
+    `|<B_a,B_a+H_a>| >= epsilon||B_a||^2`. The one-sided inequality
+    `<B_a,H_a> >= -(1-epsilon)||B_a||^2` is a convenient sufficient condition,
+    not an equivalent target. Total-tail contraction is stronger still. A
+    prefix norm estimate and a retention estimate remain separate and both are
+    open.

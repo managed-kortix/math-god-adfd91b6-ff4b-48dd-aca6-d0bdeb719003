@@ -1,0 +1,43 @@
+certificate=cycle52-a10-cell-nonclosure
+canonical_command=rm -f /tmp/cycle52-a10-cell-nonclosure-certificate.out && env -u PYTHONPYCACHEPREFIX PYTHONDONTWRITEBYTECODE=1 LC_ALL=C uv run --isolated --no-project --python 3.12.13 --with python-flint==0.9.0 python -I -B millennium-prize/riemann-hypothesis/cycle52_a10_cell_nonclosure_certificate.py > /tmp/cycle52-a10-cell-nonclosure-certificate.out && cmp /tmp/cycle52-a10-cell-nonclosure-certificate.out millennium-prize/riemann-hypothesis/cycle52-a10-cell-nonclosure-certificate.out
+scope=finite theta=2/5 a=10 certificate only; no asymptotic or RH inference
+runtime=CPython-3.12.13 python-flint-0.9.0 FLINT-3.6.0 Arb_bits=256
+source=millennium-prize/riemann-hypothesis/cycle52_a10_cell_nonclosure_certificate.py
+source_sha256=5251454b1f736df3acbffa97db922da8e67de3cba016d17238bd4dd7c86ab4a1
+closure_sha256=8a2777389ba05cc4e63a305b12871804311863897f8bd167550069fd282f37c4
+trusted_runtime_boundary=versions pinned; interpreter/wheel/native-library binaries, OS, hardware, and uv launcher not binary-attested
+identity_error_ceiling=2^-170
+parameters=theta=2/5 C=6/5 tau=1/5 a=10 M=19
+rows=[10,11,13,14,15]
+minor_rows=[10,11,14,15]
+columns=[1,q/10,log(q/10),B_10(q)]
+B_cell_path=literal sum of direct fractional-part integrals over every [k,k+1], 1<=k<=n
+B_cell[10]=[-0.031468175063338024354831888573293889070680934989388790783778947066 +/- 2.37e-67]
+B_residual[10]=[-0.031468175063338024354831888573293889070680934989388790783778947066 +/- 2.37e-67]
+cell_minus_residual[10]=[-1.0795210693868055781732939828500499463895000455545351731279629338e-77 +/- 2.43e-76]
+B_cell[11]=[-0.027925155128368261562141362711265712125514487912731666612859521285 +/- 2.08e-67]
+B_residual[11]=[-0.027925155128368261562141362711265712125514487912731666612859521285 +/- 2.08e-67]
+cell_minus_residual[11]=[-8.3662882877477432308430283670878870845186253530476475917417127367e-78 +/- 2.17e-76]
+B_cell[13]=[-0.017680186109223113848624644896331276417017923376333701915596921989 +/- 1.94e-67]
+B_residual[13]=[-0.017680186109223113848624644896331276417017923376333701915596921989 +/- 1.94e-67]
+cell_minus_residual[13]=[-4.8578448122406251017798229228252247587527502049954082790758332020e-78 +/- 1.56e-76]
+B_cell[14]=[-0.011952196652044792840626913210992619548108322326582145693923465509 +/- 4.69e-67]
+B_residual[14]=[-0.011952196652044792840626913210992619548108322326582145693923465509 +/- 4.69e-67]
+cell_minus_residual[14]=[-3.6433836091804688263348671921189185690645626537465562093068749015e-78 +/- 1.21e-76]
+B_cell[15]=[-0.0086624509862084030587700911120666254776553108390889463522861167926 +/- 1.46e-68]
+B_residual[15]=[-0.0086624509862084030587700911120666254776553108390889463522861167926 +/- 1.46e-68]
+cell_minus_residual[15]=[-3.1036230744870660372482202006938935958698126309692886227428934346e-78 +/- 9.25e-77]
+det_cell=[1.5197573366214305638022462131155847370578536699179450070895374840e-5 +/- 4.49e-70]
+det_residual=[1.5197573366214305638022462131155847370578536699179450070895374840e-5 +/- 4.49e-70]
+det_cell_minus_residual=[-6.0723060153007813772247786535315309484409377562442603488447915025e-79 +/- 1.16e-75]
+certified_minor_sign=positive
+reciprocal_tail_input=8:1,9:1,10:1,11:1,12:1,13:5767/2037,14:1,15:1
+reciprocal_tail_packet=8:10013/8148,9:17989/18333,10:7976/10185,11:1265/2037,12:5939/12222,13:757/2037,14:1/7,15:1/15
+reciprocal_tail_differences=8:18161/73332,9:18161/91665,10:1651/10185,11:1651/12222,12:1397/12222,13:466/2037,14:8/105
+packet_properties=exact_rational positive strictly_decreasing
+packet_mobius_contraction=0
+packet_abel_other_terms=5767/30030
+packet_abel_exceptional_term=-5767/30030
+packet_scope=abstract current-tail surrogate; no physical row-test realization claimed
+conclusion=B_10_not_in_span{1,q/10,log(q/10)}_on_declared_five_rows
+result=PASS

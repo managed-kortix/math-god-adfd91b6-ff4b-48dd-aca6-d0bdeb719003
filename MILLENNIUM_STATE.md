@@ -186,8 +186,29 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   first/second/third differences and a four-point smooth-mode annihilator
   retain dense signed arithmetic packets, so those architectures do not close
   the bound. Prefix norm and signed prefix/full retention remain separate.
-  The surviving physical checkpoint is unchanged; no moving-projection limit,
-  completed-square budget, or RH result is proved
+  Cycle 53 now proves that the exact convolutional current one-source matrix,
+  with every column `a<=m<=2a-1`, has full row rank for `0<theta<1/2`, and
+  that every nonzero nonnegative row test has a strictly positive, strictly
+  decreasing current transform. This is qualitative finite rank only: an
+  exact rational reciprocal-tail packet with the actual Mobius signs has zero
+  contraction, so tail shape and adjoint injectivity do not give quantitative
+  noncompression. A new fail-closed 256-bit Arb certificate proves that
+  `a=10` is the first scale capable of three-mode nonclosure at `theta=2/5`
+  and certifies a positive four-row minor there by independent residual and
+  literal fractional-part-cell paths. The temporal prefix and tail sources
+  are orthogonal before the common analysis operator, but all output cross
+  terms remain in the exact formula and source orthogonality forces none of
+  them to vanish; individual terms may still vanish or cancel arithmetically.
+  Certified finite data rule out rowwise tail contraction, and compatible
+  physical columns with nonphysical coefficients rule out generic operator
+  domination. A convenient sufficient one-sided retention checkpoint is
+  `<B_a,H_a>>=-(1-epsilon)||B_a||^2`; it is stronger than the exact sign-free
+  relative-retention gate but weaker than total-tail contraction. A bounded
+  nonrigorous Perron-test screen found near-total
+  old/current cancellation at `a=4056`, so that test is not promoted. The
+  surviving physical checkpoint is unchanged; no prefix lower bound,
+  retention theorem, moving-projection limit, completed-square budget, or RH
+  result is proved
 - **parallel scouts:** a read-only bounded re-audit completed on 2026-11-25
   and established no new dossier checkpoint. It rechecked five prior, special,
   or abstract statements: (i) for the standard period-normalized ordinary
@@ -206,7 +227,7 @@ state belongs only to the Millennium Prize lane; the main lane owns `STATE.md`.
   abstract spectral-edge transfer criterion. This criterion is not verified
   for a Yang--Mills cutoff family, and strong-resolvent convergence alone is
   insufficient. These are not new Cycle 46 or Clay results.
-- **cycle:** 52
+- **cycle:** 53
 - **announcements:** none
 
 ## immutable target list
@@ -281,11 +302,22 @@ waiting process.
    nonzero row-test family `y=y^(a)`, a sufficient dual condition, with a
    constant uniform in `a`, is
    `|sum_(m=1)^(2a-1) mu(m)Gamma_y(m)| >> ||y||_2 log(a)^(-3/2)`;
-   an existential choice of `y` alone is tautological. Cycle 52 equation (6.9)
-   is a sufficient off-diagonal estimate only for the specific nonzero sampled
-   test `y_q=mu(q)f(q/a)`. It is distinct from Cycle 45 equation (11.3) and is
-   not necessary for every possible dual proof. Even a prefix-norm
-   success leaves signed prefix/full retention independent. A later successful
+   an existential choice of `y` alone is tautological. Cycle 53 proves only
+   that the full current transform vector cannot vanish for a nonzero test; it
+   supplies no singular-value bound and no lower bound after Mobius
+   contraction. Positivity, strict decrease, and reciprocal-tail shape are
+   insufficient by an exact rational surrogate. The Mobius-modulated current
+   Perron vector is not preferred: a finite nonrigorous screen gives a
+   normalized contraction about `4.6862e-7` at `a=4056` from old/current
+   cancellation. Cycle 52 equation (6.9) is a sufficient off-diagonal estimate
+   only for the specific nonzero sampled test `y_q=mu(q)f(q/a)`. It is distinct
+   from Cycle 45 equation (11.3) and is not necessary for every possible dual
+   proof. Even a prefix-norm success leaves signed prefix/full retention
+   independent. A sufficient direct one-sided target is
+   `<B_a,H_a>>=-(1-epsilon)||B_a||^2`; the exact relative-retention gate is
+   `|<B_a,B_a+H_a>|>=epsilon||B_a||^2`. Rowwise contraction and generic
+   coefficient-space operator domination are finitely false, while total-tail
+   norm contraction is unnecessarily strong. A later successful
    physical packet estimate would give only a trace-based moving-projection
    lower bound of order `log^-2 a`; require constants and an appropriate
    `N_theta(a,2a)=O(log^-2 a)` upper bound before claiming a physical budget.
@@ -317,6 +349,28 @@ waiting process.
    strategic review.
 
 ## last ticks
+
+- 2026-11-28: Cycle 53 proved that the exact convolutional current matrix
+  `(mathscr V_a(q,m))_(q in Q_a,a<=m<=2a-1)` has full row rank for every
+  finite physical scale when `0<theta<1/2`; equivalently, its adjoint is
+  injective on row tests. For every nonzero nonnegative test the current
+  transform is strictly positive and strictly decreasing. An exact rational
+  reciprocal-tail packet on `m=8,...,15` nevertheless has zero contraction
+  against the actual Mobius signs, so these qualitative properties do not
+  prove noncompression. At fixed `theta=2/5`, a standalone fail-closed 256-bit
+  Arb certificate proves that `a=10` is the first scale capable of
+  three-function nonclosure and certifies determinant
+  `1.5197573366...e-5>0` by both a cancellation-preserving residual and literal
+  fractional-part cell integrals; this is finite only. The exact temporal
+  support split explains source orthogonality, but all analyzed prefix-tail
+  cross terms remain in the exact formula; individual terms may still vanish
+  or cancel arithmetically. Existing certificates refute universal rowwise
+  tail contraction and generic coefficient-blind operator domination, without
+  refuting the aggregate physical Mobius inequality. A bounded binary64/
+  long-double Perron-test screen found a normalized near-zero
+  `4.6861872e-7` at `a=4056`; it is heuristic only and demotes that test.
+  Prefix norm and signed retention remain independent and unproved. No
+  moving-projection theorem, completed-square budget, or RH result is proved.
 
 - 2026-11-28: Cycle 52 derived an exact cancellation-preserving suffix normal
   form for the canonical complete prefix and the rank-safe decomposition

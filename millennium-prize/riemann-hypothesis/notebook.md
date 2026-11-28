@@ -5071,3 +5071,85 @@ and the two signed terms may cancel.  A prefix norm lower bound and a relative
 signed retention estimate remain logically separate requirements.  Full
 proofs, scope, intervals, hashes, and replay commands are in
 `cycle-52-three-mode-moment-sieve-and-finite-obstruction.md`.
+
+## Cycle 53: current-adjoint injectivity and retention audit
+
+Cycle 53 sharpened the Cycle 52 current-dual algebra without proving the
+missing lower bound.  For the exact convolutional current matrix
+
+\[
+ \mathsf V_a^{\rm cur}
+ =\bigl(\mathscr V_a(q,m)\bigr)_{q\in\mathcal Q_a,\ a\le m\le2a-1},
+\]
+
+the current collapse factors it as `T R`, where `R` is lower triangular
+(rows indexed by `n`, columns by `m`) with positive diagonal `1/m`, and the
+minor of `T` on temporal columns `n=q` is
+triangular with strictly positive diagonal
+
+\[
+ \alpha_{q,q}\eta_q\left(1-\log(1+1/q)\right).
+\]
+
+Thus, for every finite physical scale and `0<theta<1/2`, the matrix has full
+row rank and its adjoint is injective.  This theorem is qualitative: it gives
+no least-singular-value bound and no lower bound after contraction with the
+current Mobius vector or cancellation against the old block.
+
+For every nonzero nonnegative row test, the current transform now has the
+strict form
+
+\[
+ \Gamma_y(m)=\frac1m\sum_{n=m}^{2a-1}c_y(n),
+ \qquad
+ \Gamma_y(a)>\cdots>\Gamma_y(2a-1)>0.
+\]
+
+An exact rational packet on `m=8,...,15` with positive temporal masses and
+this strictly decreasing reciprocal-tail form nevertheless has zero pairing
+with the actual Mobius signs.  Hence positivity, monotonicity, and tail shape
+alone cannot prove the target.
+
+At fixed `theta=2/5`, a new fail-closed 256-bit Arb certificate proves that
+`a=10` is the first scale capable of refuting exact closure on
+`span{1,q/a,log(q/a)}`, and it already fails there.  On rows
+`{10,11,14,15}`, the certified augmented determinant is
+
+\[
+ [1.5197573366214305638022462131155847370578536699179450
+ \times10^{-5}\mathbin{+/-}4.49\times10^{-70}]>0.
+\]
+
+The certificate independently reconstructs every `B_10(q)` from the exact
+cancellation-preserving residual and from literal fractional-part integrals on
+every unit cell.  It also checks the rational monotone-tail zero exactly.
+These are finite statements only.
+
+The temporal source split was repackaged under one common analysis operator:
+`B=A p`, `H=A t`, with `p` and `t` orthogonal before analysis.  The normal
+operator does not preserve this support split, so all equal-time and
+cross-time terms remain in the exact formula for `<B,H>` and none is forced
+to vanish by source orthogonality; individual terms may still vanish or
+cancel arithmetically.  The existing Cycle 49 certificate at
+`a=218,q=327` gives `|H(q)|>|B(q)|`, ruling out universal rowwise contraction.
+Cycle 50 compatible columns rule out coefficient-blind operator domination
+using a nonphysical coefficient vector.  Neither result refutes an aggregate
+eventual theorem for the physical Mobius vector.
+
+A convenient sufficient one-sided retention checkpoint is the selected mixed
+inequality
+
+\[
+ \langle B_a,H_a\rangle\ge-(1-\varepsilon)\|B_a\|^2,
+\]
+
+It is stronger than the exact sign-free relative-retention gate but weaker
+than total-tail norm contraction.  A bounded binary64/long-double screen of the
+Mobius-modulated dominant current singular vector found normalized old/current
+cancellation down to about `4.6861872e-7` at `a=4056`.  This is nonrigorous
+finite evidence only, but it demotes the Perron test rather than promoting it.
+
+Full proofs, scope fences, hashes, and replay commands are in
+`cycle-53-current-adjoint-and-retention-audit.md`.  No prefix lower bound,
+retention theorem, moving-projection theorem, completed-square budget, or RH
+result is proved.
